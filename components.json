@@ -1,0 +1,390 @@
+{
+  "$schema": "컴포넌트 목록 — sync.mjs 가 CSS(.ds-*)·Figma(노드 ID·변형 수) 양쪽과 대조한다. 새 컴포넌트를 만들면 여기 먼저 추가.",
+  "figmaFile": "1VCEsFU3xMWuXIntIrZz9i",
+  "components": [
+    {
+      "no": "01",
+      "name": "Action Button",
+      "classes": [ ".ds-btn" ],
+      "figma": [
+        { "id": "24:354", "type": "COMPONENT_SET", "variants": 168 }
+      ],
+      "props": "variant `brandSolid·brandOutline·neutralSolid·neutralWeak·neutralOutline·criticalSolid·ghost` · size `xsmall·small·medium·large` · layout `iconOnly` · width `fill`"
+    },
+    {
+      "no": "02",
+      "name": "Text Link",
+      "classes": [ ".ds-link" ],
+      "figma": [],
+      "props": "`--ds-link-color(-hover)`"
+    },
+    {
+      "no": "03",
+      "name": "Field Label",
+      "classes": [ ".ds-field" ],
+      "figma": [
+        { "id": "109:1367", "type": "COMPONENT_SET", "variants": 2 }
+      ],
+      "props": "label-weight `bold`"
+    },
+    {
+      "no": "04",
+      "name": "Text Field Input",
+      "classes": [ ".ds-input" ],
+      "figma": [
+        { "id": "108:1325", "type": "COMPONENT_SET", "variants": 40 }
+      ],
+      "props": "variant `outline·underline` · size"
+    },
+    {
+      "no": "05",
+      "name": "Text Field Textarea",
+      "classes": [ ".ds-textarea" ],
+      "figma": [
+        { "id": "114:1496", "type": "COMPONENT_SET", "variants": 40 }
+      ],
+      "props": "variant · size"
+    },
+    {
+      "no": "06",
+      "name": "Field Button",
+      "classes": [ ".ds-fieldbutton" ],
+      "figma": [
+        { "id": "1408:2667", "type": "COMPONENT_SET", "variants": 16 }
+      ],
+      "props": "size `large·medium` · 상태 enabled/disabled/readOnly/invalid"
+    },
+    {
+      "no": "07",
+      "name": "Prefix Select",
+      "classes": [ ".ds-prefixselect" ],
+      "figma": [
+        { "id": "2096:852", "type": "COMPONENT_SET", "variants": 2 }
+      ],
+      "props": "입력 앞 선택(통신사·국가번호)"
+    },
+    {
+      "no": "08",
+      "name": "Select Trigger",
+      "classes": [ ".ds-select" ],
+      "figma": [
+        { "id": "119:1605", "type": "COMPONENT_SET", "variants": 20 }
+      ],
+      "props": "size"
+    },
+    {
+      "no": "09",
+      "name": "Select Content · Item",
+      "classes": [ ".ds-select-content", ".ds-select-item" ],
+      "figma": [
+        { "part": "Content", "id": "125:1717", "type": "COMPONENT_SET", "variants": 2 },
+        { "part": "Item", "id": "124:1769", "type": "COMPONENT_SET", "variants": 12 }
+      ]
+    },
+    {
+      "no": "10",
+      "name": "Checkbox",
+      "classes": [ ".ds-checkbox" ],
+      "figma": [
+        { "id": "61:995", "type": "COMPONENT_SET", "variants": 40 }
+      ],
+      "props": "variant `square·ghost` · tone · size"
+    },
+    {
+      "no": "11",
+      "name": "Radio Group",
+      "classes": [ ".ds-radio-group", ".ds-radio" ],
+      "figma": [
+        { "id": "1224:2164", "type": "COMPONENT_SET", "variants": 16 }
+      ],
+      "props": "tone · size"
+    },
+    {
+      "no": "12",
+      "name": "Switch",
+      "classes": [ ".ds-switch" ],
+      "figma": [
+        { "id": "93:1271", "type": "COMPONENT_SET", "variants": 24 }
+      ],
+      "props": "size `16·24·32` · tone"
+    },
+    {
+      "no": "13",
+      "name": "Quantity Picker",
+      "classes": [ ".ds-quantity" ],
+      "figma": [
+        { "id": "1184:2146", "type": "COMPONENT_SET", "variants": 18 }
+      ],
+      "props": "size · layout `fill`"
+    },
+    {
+      "no": "14",
+      "name": "Code Input",
+      "classes": [ ".ds-code-input" ],
+      "figma": [],
+      "props": "인증번호 6칸"
+    },
+    {
+      "no": "15",
+      "name": "Chip",
+      "classes": [ ".ds-chip", ".ds-chip-group" ],
+      "figma": [
+        { "id": "69:964", "type": "COMPONENT_SET", "variants": 54 }
+      ],
+      "props": "variant `solid·outlineStrong·outlineWeak` · size · layout `iconOnly`"
+    },
+    {
+      "no": "16",
+      "name": "Chip Tabs",
+      "classes": [ ".ds-chiptabs" ],
+      "figma": [
+        { "id": "1407:2596", "type": "COMPONENT_SET", "variants": 4 },
+        { "part": "Trigger", "id": "1407:2522", "type": "COMPONENT_SET", "variants": 16 }
+      ],
+      "props": "variant `neutralSolid·neutralOutline` · size `medium·large`"
+    },
+    {
+      "no": "17",
+      "name": "Tabs",
+      "classes": [ ".ds-tabs" ],
+      "figma": [
+        { "id": "95:1313", "type": "COMPONENT_SET", "variants": 4 },
+        { "part": "Tab Trigger", "id": "95:1272", "type": "COMPONENT_SET", "variants": 12 }
+      ],
+      "props": "layout `fill·hug` · size"
+    },
+    {
+      "no": "18",
+      "name": "Segmented Control",
+      "classes": [ ".ds-segmented" ],
+      "figma": [
+        { "id": "1239:2152", "type": "COMPONENT_SET", "variants": 4 }
+      ],
+      "props": "layout · size"
+    },
+    {
+      "no": "19",
+      "name": "Toggle Button",
+      "classes": [ ".ds-toggle" ],
+      "figma": [
+        { "id": "1244:2164", "type": "COMPONENT_SET", "variants": 6 }
+      ],
+      "props": "size"
+    },
+    {
+      "no": "20",
+      "name": "Badge",
+      "classes": [ ".ds-badge" ],
+      "figma": [
+        { "id": "17:87", "type": "COMPONENT_SET", "variants": 36 }
+      ],
+      "props": "variant `weak·solid·outline` · tone `neutral·brand·informative·positive·warning·critical` · size"
+    },
+    {
+      "no": "21",
+      "name": "Tag Group",
+      "classes": [ ".ds-tag-group" ],
+      "figma": [
+        { "id": "1240:2176", "type": "COMPONENT_SET", "variants": 4 }
+      ],
+      "props": "작성자 · 날짜 · 조회수"
+    },
+    {
+      "no": "22",
+      "name": "Avatar",
+      "classes": [ ".ds-avatar" ],
+      "figma": [
+        { "id": "40:614", "type": "COMPONENT_SET", "variants": 30 }
+      ],
+      "props": "size `20·24·36·42·48·56·64·80·96·108`"
+    },
+    {
+      "no": "23",
+      "name": "Callout",
+      "classes": [ ".ds-callout" ],
+      "figma": [
+        { "id": "1241:2177", "type": "COMPONENT_SET", "variants": 5 }
+      ],
+      "props": "tone `neutral·informative·positive·warning·critical` (magic 은 CSS 만)"
+    },
+    {
+      "no": "24",
+      "name": "Snackbar",
+      "classes": [ ".ds-snackbar" ],
+      "figma": [
+        { "id": "92:1107", "type": "COMPONENT_SET", "variants": 3 }
+      ],
+      "props": "variant `default·positive·critical`"
+    },
+    {
+      "no": "25",
+      "name": "Help Bubble",
+      "classes": [ ".ds-helpbubble" ],
+      "figma": [
+        { "id": "75:1233", "type": "COMPONENT_SET", "variants": 12 }
+      ],
+      "props": "`--ds-hb-arrow-offset`"
+    },
+    {
+      "no": "26",
+      "name": "Menu · Menu Item",
+      "classes": [ ".ds-menu", ".ds-menu-item" ],
+      "figma": [
+        { "part": "Menu", "id": "1246:2183", "type": "COMPONENT" },
+        { "part": "Item", "id": "1246:2182", "type": "COMPONENT_SET", "variants": 6 }
+      ],
+      "props": "tone `critical`"
+    },
+    {
+      "no": "27",
+      "name": "Dialog",
+      "classes": [ ".ds-dialog" ],
+      "figma": [
+        { "id": "1493:939", "type": "COMPONENT_SET", "variants": 8 },
+        { "part": "Body Slot", "id": "1528:835", "type": "COMPONENT" }
+      ],
+      "props": "size(480/800) · `--ds-dialog-width`"
+    },
+    {
+      "no": "28",
+      "name": "Alert Dialog",
+      "classes": [ ".ds-alertdialog" ],
+      "figma": [
+        { "id": "30:540", "type": "COMPONENT_SET", "variants": 5 }
+      ],
+      "props": "272 폭 · action `pair·critical·nonpreferred`"
+    },
+    {
+      "no": "29",
+      "name": "Bottom Sheet",
+      "classes": [ ".ds-bottomsheet" ],
+      "figma": [
+        { "id": "59:674", "type": "COMPONENT_SET", "variants": 8 }
+      ],
+      "props": "header-align `center`"
+    },
+    {
+      "no": "30",
+      "name": "Accordion",
+      "classes": [ ".ds-accordion" ],
+      "figma": [
+        { "id": "282:1996", "type": "COMPONENT_SET", "variants": 12 }
+      ],
+      "props": "variant `separated` · size"
+    },
+    {
+      "no": "31",
+      "name": "Skeleton",
+      "classes": [ ".ds-skeleton" ],
+      "figma": [
+        { "id": "1242:2158", "type": "COMPONENT_SET", "variants": 3 }
+      ],
+      "props": "shape `rect·circle·text`"
+    },
+    {
+      "no": "32",
+      "name": "Slider",
+      "classes": [ ".ds-slider" ],
+      "figma": [
+        { "id": "1243:2168", "type": "COMPONENT_SET", "variants": 4 }
+      ],
+      "props": "tone"
+    },
+    {
+      "no": "33",
+      "name": "Progress",
+      "classes": [ ".ds-progress" ],
+      "figma": [
+        { "id": "2163:982", "type": "COMPONENT_SET", "variants": 4 }
+      ],
+      "props": "size · tone"
+    },
+    {
+      "no": "34",
+      "name": "Progress Circle",
+      "classes": [ ".ds-progress-circle" ],
+      "figma": [
+        { "id": "1405:2502", "type": "COMPONENT_SET", "variants": 18 }
+      ],
+      "props": "tone `neutral·brand·staticWhite` · size · type `determinate·indeterminate`"
+    },
+    {
+      "no": "35",
+      "name": "Floating Action Button",
+      "classes": [ ".ds-fab" ],
+      "figma": [
+        { "id": "1406:2468", "type": "COMPONENT_SET", "variants": 4 }
+      ],
+      "props": "layout `iconOnly`(extended=false)"
+    },
+    {
+      "no": "36",
+      "name": "Date Picker · Date Cell",
+      "classes": [ ".ds-datepicker", ".ds-date-cell" ],
+      "figma": [
+        { "part": "Date Picker", "id": "1324:2310", "type": "COMPONENT_SET", "variants": 2 },
+        { "part": "Date Cell", "id": "1322:2183", "type": "COMPONENT_SET", "variants": 7 }
+      ],
+      "props": "cell state `today·selected·range-start·range-middle·range-end`"
+    },
+    {
+      "no": "37",
+      "name": "Bottom Navigation",
+      "classes": [ ".ds-bottomnav" ],
+      "figma": [
+        { "id": "1348:2383", "type": "COMPONENT_SET", "variants": 3 },
+        { "part": "Item", "id": "1347:2416", "type": "COMPONENT_SET", "variants": 12 }
+      ],
+      "props": "뱃지 `__badge--dot/--count` (bg/critical-solid)"
+    },
+    {
+      "no": "38",
+      "name": "Side Navigation",
+      "classes": [ ".ds-sidenav" ],
+      "figma": [
+        { "id": "1371:2610", "type": "COMPONENT_SET", "variants": 4 },
+        { "part": "Item", "id": "1370:2392", "type": "COMPONENT_SET", "variants": 8 }
+      ],
+      "props": "expanded 240 / collapsed 56"
+    },
+    {
+      "no": "39",
+      "name": "Card",
+      "classes": [ ".ds-card" ],
+      "figma": [
+        { "id": "2164:1063", "type": "COMPONENT_SET", "variants": 4 }
+      ],
+      "props": "variant `elevated` · size"
+    },
+    {
+      "no": "40",
+      "name": "Empty",
+      "classes": [ ".ds-empty" ],
+      "figma": [
+        { "id": "2164:1092", "type": "COMPONENT_SET", "variants": 2 }
+      ],
+      "props": "size"
+    },
+    {
+      "no": "41",
+      "name": "Pagination",
+      "classes": [ ".ds-pagination" ],
+      "figma": [
+        { "id": "2163:1067", "type": "COMPONENT_SET", "variants": 2 },
+        { "part": "Item", "id": "2163:1028", "type": "COMPONENT_SET", "variants": 16 }
+      ],
+      "props": "type `first·prev·next·last·ellipsis·simple`"
+    },
+    {
+      "no": "42",
+      "name": "Table",
+      "classes": [ ".ds-table", ".ds-table-wrap" ],
+      "figma": [
+        { "id": "2164:1271", "type": "COMPONENT_SET", "variants": 2 },
+        { "part": "Row", "id": "2164:1178", "type": "COMPONENT_SET", "variants": 8 },
+        { "part": "Cell", "id": "2164:1105", "type": "COMPONENT_SET", "variants": 6 }
+      ],
+      "props": "density `compact` · align"
+    }
+  ]
+}

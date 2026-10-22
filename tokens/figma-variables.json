@@ -1,0 +1,3154 @@
+{
+  "$meta": {
+    "file": "1VCEsFU3xMWuXIntIrZz9i",
+    "dumped": "2026-10-20",
+    "schemaVersion": 2,
+    "collections": {
+      "YBM DS": {
+        "modes": [
+          "Light",
+          "Dark"
+        ],
+        "count": 246
+      },
+      "Typography": {
+        "modes": [
+          "100%",
+          "130%",
+          "150%"
+        ],
+        "count": 73
+      },
+      "Shape": {
+        "modes": [
+          "Default",
+          "Soft",
+          "Sharp"
+        ],
+        "count": 9
+      },
+      "Elevation": {
+        "modes": [
+          "Default"
+        ],
+        "count": 30
+      }
+    },
+    "note": "Figma 변수 이름, 타입, 모드별 값 및 별칭 스냅샷. build.py가 이 파일을 읽으며 덮어쓰지 않는다."
+  },
+  "collections": {
+    "YBM DS": {
+      "modes": [
+        "Light",
+        "Dark"
+      ],
+      "variables": {
+        "palette/gray-00": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#ffffff",
+            "Dark": "#000000"
+          }
+        },
+        "palette/gray-200": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#f3f4f5",
+            "Dark": "#1d2025"
+          }
+        },
+        "palette/gray-300": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#eeeff1",
+            "Dark": "#2b2e35"
+          }
+        },
+        "palette/gray-500": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#d1d3d8",
+            "Dark": "#5b606a"
+          }
+        },
+        "palette/gray-800": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#555d6d",
+            "Dark": "#dcdee3"
+          }
+        },
+        "palette/gray-900": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#2a3038",
+            "Dark": "#e9eaec"
+          }
+        },
+        "palette/gray-1000": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#1a1c20",
+            "Dark": "#f3f4f5"
+          }
+        },
+        "palette/static-white": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#ffffff",
+            "Dark": "#ffffff"
+          }
+        },
+        "palette/static-black-alpha-100": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#00000007",
+            "Dark": "#00000007"
+          }
+        },
+        "palette/static-black-alpha-300": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#00000010",
+            "Dark": "#00000010"
+          }
+        },
+        "palette/gray-400": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#dcdee3",
+            "Dark": "#393d46"
+          }
+        },
+        "palette/gray-100": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#f7f8f9",
+            "Dark": "#16171b"
+          }
+        },
+        "palette/gray-600": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#b0b3ba",
+            "Dark": "#868b94"
+          }
+        },
+        "palette/gray-700": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#868b94",
+            "Dark": "#b0b3ba"
+          }
+        },
+        "palette/static-black-alpha-900": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#000000d0",
+            "Dark": "#000000d0"
+          }
+        },
+        "palette/static-white-alpha-100": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#ffffff17",
+            "Dark": "#ffffff17"
+          }
+        },
+        "palette/static-white-alpha-300": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#ffffff2e",
+            "Dark": "#ffffff2e"
+          }
+        },
+        "palette/static-black-alpha-500": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#0000002c",
+            "Dark": "#0000002c"
+          }
+        },
+        "palette/static-black-alpha-700": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#00000074",
+            "Dark": "#00000074"
+          }
+        },
+        "palette/static-black-alpha-200": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#0000000c",
+            "Dark": "#0000000c"
+          }
+        },
+        "palette/static-black-alpha-800": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#000000a2",
+            "Dark": "#000000a2"
+          }
+        },
+        "palette/static-white-alpha-50": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#ffffff0d",
+            "Dark": "#ffffff0d"
+          }
+        },
+        "palette/static-white-alpha-200": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#ffffff20",
+            "Dark": "#ffffff20"
+          }
+        },
+        "palette/static-white-alpha-800": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#ffffffde",
+            "Dark": "#ffffffde"
+          }
+        },
+        "palette/static-black": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#000000",
+            "Dark": "#000000"
+          }
+        },
+        "palette/static-black-alpha-400": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#00000021",
+            "Dark": "#00000021"
+          }
+        },
+        "palette/static-black-alpha-600": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#0000004c",
+            "Dark": "#0000004c"
+          }
+        },
+        "palette/static-black-alpha-1000": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#000000e3",
+            "Dark": "#000000e3"
+          }
+        },
+        "palette/static-white-alpha-400": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#ffffff3d",
+            "Dark": "#ffffff3d"
+          }
+        },
+        "palette/static-white-alpha-500": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#ffffff60",
+            "Dark": "#ffffff60"
+          }
+        },
+        "palette/static-white-alpha-600": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#ffffff8b",
+            "Dark": "#ffffff8b"
+          }
+        },
+        "palette/static-white-alpha-700": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#ffffffb3",
+            "Dark": "#ffffffb3"
+          }
+        },
+        "palette/static-white-alpha-900": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#ffffffea",
+            "Dark": "#ffffffea"
+          }
+        },
+        "palette/static-white-alpha-1000": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#fffffff4",
+            "Dark": "#fffffff4"
+          }
+        },
+        "palette/blue-100": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#eff6ff",
+            "Dark": "#202742"
+          }
+        },
+        "palette/blue-200": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#e2edfc",
+            "Dark": "#1e3352"
+          }
+        },
+        "palette/blue-300": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#cbdffa",
+            "Dark": "#1a4275"
+          }
+        },
+        "palette/blue-400": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#aacefd",
+            "Dark": "#0f559e"
+          }
+        },
+        "palette/blue-500": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#85b8fd",
+            "Dark": "#1964d8"
+          }
+        },
+        "palette/blue-600": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#5e98fe",
+            "Dark": "#1e82eb"
+          }
+        },
+        "palette/blue-700": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#217cf9",
+            "Dark": "#41a2f9"
+          }
+        },
+        "palette/blue-800": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#135fcd",
+            "Dark": "#83bcf9"
+          }
+        },
+        "palette/blue-900": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#0b4596",
+            "Dark": "#b9d7fb"
+          }
+        },
+        "palette/blue-1000": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#032451",
+            "Dark": "#dcebfd"
+          }
+        },
+        "palette/red-100": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#fdf0f0",
+            "Dark": "#322323"
+          }
+        },
+        "palette/red-200": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#fde7e7",
+            "Dark": "#4f2624"
+          }
+        },
+        "palette/red-300": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#fed4d2",
+            "Dark": "#742826"
+          }
+        },
+        "palette/red-400": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#feb7b3",
+            "Dark": "#a12621"
+          }
+        },
+        "palette/red-500": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#fe928d",
+            "Dark": "#ca2319"
+          }
+        },
+        "palette/red-600": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#fc6a66",
+            "Dark": "#f73526"
+          }
+        },
+        "palette/red-700": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#fa342c",
+            "Dark": "#ff6e60"
+          }
+        },
+        "palette/red-800": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#ca1d13",
+            "Dark": "#ffa299"
+          }
+        },
+        "palette/red-900": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#921708",
+            "Dark": "#f8c5c3"
+          }
+        },
+        "palette/red-1000": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#4a1209",
+            "Dark": "#fbe0de"
+          }
+        },
+        "palette/green-100": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#edfaf6",
+            "Dark": "#202926"
+          }
+        },
+        "palette/green-200": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#d9f6e9",
+            "Dark": "#20362e"
+          }
+        },
+        "palette/green-300": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#b9e9d2",
+            "Dark": "#20493b"
+          }
+        },
+        "palette/green-400": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#7ddcb3",
+            "Dark": "#19604c"
+          }
+        },
+        "palette/green-500": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#42c593",
+            "Dark": "#117956"
+          }
+        },
+        "palette/green-600": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#10ab7d",
+            "Dark": "#1b946d"
+          }
+        },
+        "palette/green-700": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#079171",
+            "Dark": "#22b27f"
+          }
+        },
+        "palette/green-800": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#00745f",
+            "Dark": "#35ce9a"
+          }
+        },
+        "palette/green-900": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#075445",
+            "Dark": "#93e5c0"
+          }
+        },
+        "palette/green-1000": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#0a2b24",
+            "Dark": "#c2efdb"
+          }
+        },
+        "palette/yellow-100": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#fff7de",
+            "Dark": "#411e03"
+          }
+        },
+        "palette/yellow-200": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#fdefb9",
+            "Dark": "#512906"
+          }
+        },
+        "palette/yellow-300": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#fbdc65",
+            "Dark": "#633408"
+          }
+        },
+        "palette/yellow-400": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#fdc700",
+            "Dark": "#7f4505"
+          }
+        },
+        "palette/yellow-500": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#f0b100",
+            "Dark": "#9d5800"
+          }
+        },
+        "palette/yellow-600": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#d08700",
+            "Dark": "#b97000"
+          }
+        },
+        "palette/yellow-700": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#a65f00",
+            "Dark": "#d38b00"
+          }
+        },
+        "palette/yellow-800": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#894b00",
+            "Dark": "#ebaa00"
+          }
+        },
+        "palette/yellow-900": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#733e0a",
+            "Dark": "#fccf3a"
+          }
+        },
+        "palette/yellow-1000": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#432004",
+            "Dark": "#fce89a"
+          }
+        },
+        "palette/brand-100": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#dbeafe",
+            "Dark": "#172554"
+          }
+        },
+        "palette/brand-200": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#bfdbfe",
+            "Dark": "#1e3a8a"
+          }
+        },
+        "palette/brand-300": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#93c5fd",
+            "Dark": "#1e40af"
+          }
+        },
+        "palette/brand-400": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#60a5fa",
+            "Dark": "#1d4ed8"
+          }
+        },
+        "palette/brand-500": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#3b82f6",
+            "Dark": "#2563eb"
+          }
+        },
+        "palette/brand-600": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#2563eb",
+            "Dark": "#3b82f6"
+          }
+        },
+        "palette/brand-700": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#1d4ed8",
+            "Dark": "#60a5fa"
+          }
+        },
+        "palette/brand-800": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#1e40af",
+            "Dark": "#93c5fd"
+          }
+        },
+        "palette/brand-900": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#1e3a8a",
+            "Dark": "#bfdbfe"
+          }
+        },
+        "palette/orange-100": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#fff2ec",
+            "Dark": "#31241f"
+          },
+          "description": "light #fff2ec / dark #31241f"
+        },
+        "palette/orange-200": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#ffe8db",
+            "Dark": "#4b291c"
+          },
+          "description": "light #ffe8db / dark #4b291c"
+        },
+        "palette/orange-300": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#ffd5c0",
+            "Dark": "#6b311c"
+          },
+          "description": "light #ffd5c0 / dark #6b311c"
+        },
+        "palette/orange-400": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#ffb999",
+            "Dark": "#923600"
+          },
+          "description": "light #ffb999 / dark #923600"
+        },
+        "palette/orange-500": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#ff9364",
+            "Dark": "#bd4201"
+          },
+          "description": "light #ff9364 / dark #bd4201"
+        },
+        "palette/orange-600": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#ff6600",
+            "Dark": "#e65200"
+          },
+          "description": "light #ff6600 / dark #e65200"
+        },
+        "palette/orange-700": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#e14d00",
+            "Dark": "#ff6600"
+          },
+          "description": "light #e14d00 / dark #ff6600"
+        },
+        "palette/orange-800": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#b93901",
+            "Dark": "#ff9e65"
+          },
+          "description": "light #b93901 / dark #ff9e65"
+        },
+        "palette/orange-900": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#862b00",
+            "Dark": "#eecebc"
+          },
+          "description": "light #862b00 / dark #eecebc"
+        },
+        "palette/orange-1000": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#471601",
+            "Dark": "#f9ece4"
+          }
+        },
+        "palette/purple-100": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#f5f3fe",
+            "Dark": "#201a2e"
+          }
+        },
+        "palette/purple-200": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#efeafe",
+            "Dark": "#2b2140"
+          }
+        },
+        "palette/purple-300": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#e1d8ff",
+            "Dark": "#392a57"
+          }
+        },
+        "palette/purple-400": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#d0c0ff",
+            "Dark": "#493571"
+          }
+        },
+        "palette/purple-500": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#b8a1ff",
+            "Dark": "#5e4593"
+          }
+        },
+        "palette/purple-600": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#9f84fb",
+            "Dark": "#7659bd"
+          }
+        },
+        "palette/purple-700": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#8969ea",
+            "Dark": "#9179e0"
+          }
+        },
+        "palette/purple-800": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#6d50cb",
+            "Dark": "#b4a1f5"
+          }
+        },
+        "palette/purple-900": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#50379b",
+            "Dark": "#d3c7fb"
+          }
+        },
+        "palette/purple-1000": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#29175d",
+            "Dark": "#ece7fe"
+          }
+        },
+        "bg/brand-solid": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/brand-600"
+            },
+            "Dark": {
+              "alias": "palette/brand-600"
+            }
+          }
+        },
+        "bg/brand-solid-pressed": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/brand-700"
+            },
+            "Dark": {
+              "alias": "palette/brand-700"
+            }
+          }
+        },
+        "bg/neutral-inverted": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/gray-900"
+            },
+            "Dark": {
+              "alias": "palette/gray-1000"
+            }
+          },
+          "description": "⚠ Deprecated — bg/neutral-solid 를 쓸 것. 하위 호환용으로 같은 값 유지, 다음 메이저에서 제거."
+        },
+        "bg/neutral-inverted-pressed": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/gray-800"
+            },
+            "Dark": {
+              "alias": "palette/gray-800"
+            }
+          },
+          "description": "⚠ Deprecated — bg/neutral-solid-pressed 를 쓸 것."
+        },
+        "bg/neutral": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/gray-200"
+            },
+            "Dark": {
+              "alias": "palette/gray-300"
+            }
+          }
+        },
+        "bg/neutral-weak-pressed": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/gray-300"
+            },
+            "Dark": {
+              "alias": "palette/gray-400"
+            }
+          }
+        },
+        "bg/critical-solid": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/red-700"
+            },
+            "Dark": {
+              "alias": "palette/red-600"
+            }
+          }
+        },
+        "bg/critical-solid-pressed": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/red-800"
+            },
+            "Dark": {
+              "alias": "palette/red-700"
+            }
+          }
+        },
+        "bg/disabled": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/gray-200"
+            },
+            "Dark": {
+              "alias": "palette/gray-300"
+            }
+          }
+        },
+        "bg/transparent-pressed": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/static-black-alpha-200"
+            },
+            "Dark": {
+              "alias": "palette/static-white-alpha-200"
+            }
+          }
+        },
+        "fg/neutral": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/gray-1000"
+            },
+            "Dark": {
+              "alias": "palette/gray-1000"
+            }
+          }
+        },
+        "fg/neutral-inverted": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/gray-00"
+            },
+            "Dark": {
+              "alias": "palette/gray-100"
+            }
+          },
+          "description": "⚠ Deprecated — fg/on-neutral-solid(또는 해당 톤의 fg/on-*-solid)를 쓸 것."
+        },
+        "fg/brand": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/brand-600"
+            },
+            "Dark": {
+              "alias": "palette/brand-600"
+            }
+          }
+        },
+        "fg/disabled": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/gray-500"
+            },
+            "Dark": {
+              "alias": "palette/gray-500"
+            }
+          }
+        },
+        "stroke/neutral-muted": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/static-black-alpha-300"
+            },
+            "Dark": {
+              "alias": "palette/static-white-alpha-100"
+            }
+          }
+        },
+        "bg/transparent": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#00000000",
+            "Dark": "#00000000"
+          }
+        },
+        "stroke/neutral-weak": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/gray-400"
+            },
+            "Dark": {
+              "alias": "palette/gray-400"
+            }
+          }
+        },
+        "stroke/neutral-contrast": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/gray-1000"
+            },
+            "Dark": {
+              "alias": "palette/gray-1000"
+            }
+          }
+        },
+        "stroke/brand-solid": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/brand-700"
+            },
+            "Dark": {
+              "alias": "palette/brand-700"
+            }
+          }
+        },
+        "stroke/brand-weak": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/brand-300"
+            },
+            "Dark": {
+              "alias": "palette/brand-300"
+            }
+          }
+        },
+        "bg/brand-weak": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/brand-100"
+            },
+            "Dark": {
+              "alias": "palette/brand-100"
+            }
+          }
+        },
+        "bg/informative-weak": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/blue-100"
+            },
+            "Dark": {
+              "alias": "palette/blue-100"
+            }
+          }
+        },
+        "bg/informative-solid": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/blue-700"
+            },
+            "Dark": {
+              "alias": "palette/blue-600"
+            }
+          }
+        },
+        "bg/positive-weak": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/green-100"
+            },
+            "Dark": {
+              "alias": "palette/green-100"
+            }
+          }
+        },
+        "bg/positive-solid": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/green-700"
+            },
+            "Dark": {
+              "alias": "palette/green-500"
+            }
+          }
+        },
+        "bg/warning-weak": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/orange-100"
+            },
+            "Dark": {
+              "alias": "palette/orange-100"
+            }
+          }
+        },
+        "bg/warning-solid": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/orange-700"
+            },
+            "Dark": {
+              "alias": "palette/orange-600"
+            }
+          }
+        },
+        "bg/critical-weak": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/red-100"
+            },
+            "Dark": {
+              "alias": "palette/red-100"
+            }
+          }
+        },
+        "fg/neutral-muted": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/gray-800"
+            },
+            "Dark": {
+              "alias": "palette/gray-800"
+            }
+          }
+        },
+        "fg/brand-contrast": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/brand-700"
+            },
+            "Dark": {
+              "alias": "palette/brand-700"
+            }
+          }
+        },
+        "fg/informative": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/blue-700"
+            },
+            "Dark": {
+              "alias": "palette/blue-700"
+            }
+          }
+        },
+        "fg/informative-contrast": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/blue-900"
+            },
+            "Dark": {
+              "alias": "palette/blue-900"
+            }
+          }
+        },
+        "fg/positive": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/green-700"
+            },
+            "Dark": {
+              "alias": "palette/green-700"
+            }
+          }
+        },
+        "fg/positive-contrast": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/green-900"
+            },
+            "Dark": {
+              "alias": "palette/green-900"
+            }
+          }
+        },
+        "fg/warning": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/orange-700"
+            },
+            "Dark": {
+              "alias": "palette/orange-700"
+            }
+          }
+        },
+        "fg/warning-contrast": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/orange-900"
+            },
+            "Dark": {
+              "alias": "palette/orange-900"
+            }
+          }
+        },
+        "fg/critical": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/red-700"
+            },
+            "Dark": {
+              "alias": "palette/red-700"
+            }
+          }
+        },
+        "fg/critical-contrast": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/red-900"
+            },
+            "Dark": {
+              "alias": "palette/red-900"
+            }
+          }
+        },
+        "stroke/informative-weak": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/blue-300"
+            },
+            "Dark": {
+              "alias": "palette/blue-300"
+            }
+          }
+        },
+        "stroke/positive-weak": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/green-300"
+            },
+            "Dark": {
+              "alias": "palette/green-300"
+            }
+          }
+        },
+        "stroke/warning-weak": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/orange-300"
+            },
+            "Dark": {
+              "alias": "palette/orange-300"
+            }
+          }
+        },
+        "stroke/critical-weak": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/red-300"
+            },
+            "Dark": {
+              "alias": "palette/red-300"
+            }
+          }
+        },
+        "stroke/focus-ring": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/blue-600"
+            },
+            "Dark": {
+              "alias": "palette/blue-600"
+            }
+          }
+        },
+        "fg/neutral-subtle": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/gray-700"
+            },
+            "Dark": {
+              "alias": "palette/gray-700"
+            }
+          }
+        },
+        "bg/overlay": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/static-black-alpha-700"
+            },
+            "Dark": {
+              "alias": "palette/static-black-alpha-700"
+            }
+          }
+        },
+        "bg/layer-default": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/gray-00"
+            },
+            "Dark": {
+              "alias": "palette/gray-100"
+            }
+          }
+        },
+        "bg/layer-floating": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/gray-00"
+            },
+            "Dark": {
+              "alias": "palette/gray-200"
+            }
+          }
+        },
+        "stroke/neutral-subtle": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/static-black-alpha-200"
+            },
+            "Dark": {
+              "alias": "palette/static-white-alpha-50"
+            }
+          }
+        },
+        "fg/placeholder": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/gray-600"
+            },
+            "Dark": {
+              "alias": "palette/gray-600"
+            }
+          }
+        },
+        "bg/neutral-weak-alpha": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/static-black-alpha-200"
+            },
+            "Dark": {
+              "alias": "palette/static-white-alpha-200"
+            }
+          }
+        },
+        "bg/neutral-weak-alpha-pressed": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/static-black-alpha-300"
+            },
+            "Dark": {
+              "alias": "palette/static-white-alpha-300"
+            }
+          }
+        },
+        "stroke/critical-solid": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/red-700"
+            },
+            "Dark": {
+              "alias": "palette/red-700"
+            }
+          }
+        },
+        "stroke/informative-solid": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/blue-700"
+            },
+            "Dark": {
+              "alias": "palette/blue-700"
+            }
+          }
+        },
+        "stroke/neutral-solid": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/gray-800"
+            },
+            "Dark": {
+              "alias": "palette/gray-800"
+            }
+          }
+        },
+        "stroke/positive-solid": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/green-700"
+            },
+            "Dark": {
+              "alias": "palette/green-700"
+            }
+          }
+        },
+        "stroke/warning-solid": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/orange-700"
+            },
+            "Dark": {
+              "alias": "palette/orange-700"
+            }
+          }
+        },
+        "bg/brand-weak-pressed": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/brand-200"
+            },
+            "Dark": {
+              "alias": "palette/brand-200"
+            }
+          },
+          "description": "Pressed state of bg/brand-weak"
+        },
+        "bg/critical-weak-pressed": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/red-200"
+            },
+            "Dark": {
+              "alias": "palette/red-200"
+            }
+          },
+          "description": "Pressed state of bg/critical-weak"
+        },
+        "bg/informative-solid-pressed": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/blue-800"
+            },
+            "Dark": {
+              "alias": "palette/blue-700"
+            }
+          },
+          "description": "Pressed state of bg/informative-solid"
+        },
+        "bg/informative-weak-pressed": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/blue-200"
+            },
+            "Dark": {
+              "alias": "palette/blue-200"
+            }
+          },
+          "description": "Pressed state of bg/informative-weak"
+        },
+        "bg/positive-solid-pressed": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/green-800"
+            },
+            "Dark": {
+              "alias": "palette/green-600"
+            }
+          },
+          "description": "Pressed state of bg/positive-solid"
+        },
+        "bg/positive-weak-pressed": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/green-200"
+            },
+            "Dark": {
+              "alias": "palette/green-200"
+            }
+          },
+          "description": "Pressed state of bg/positive-weak"
+        },
+        "bg/warning-solid-pressed": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/orange-800"
+            },
+            "Dark": {
+              "alias": "palette/orange-700"
+            }
+          },
+          "description": "Pressed state of bg/warning-solid"
+        },
+        "bg/warning-weak-pressed": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/orange-200"
+            },
+            "Dark": {
+              "alias": "palette/orange-200"
+            }
+          },
+          "description": "Pressed state of bg/warning-weak"
+        },
+        "bg/canvas": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/gray-100"
+            },
+            "Dark": {
+              "alias": "palette/gray-00"
+            }
+          },
+          "description": "Page/canvas surface → palette/gray-100"
+        },
+        "bg/magic-solid": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/purple-700"
+            },
+            "Dark": {
+              "alias": "palette/purple-600"
+            }
+          }
+        },
+        "bg/magic-solid-pressed": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/purple-800"
+            },
+            "Dark": {
+              "alias": "palette/purple-700"
+            }
+          }
+        },
+        "bg/magic-weak": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/purple-100"
+            },
+            "Dark": {
+              "alias": "palette/purple-100"
+            }
+          }
+        },
+        "bg/magic-weak-pressed": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/purple-200"
+            },
+            "Dark": {
+              "alias": "palette/purple-200"
+            }
+          }
+        },
+        "fg/magic": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/purple-700"
+            },
+            "Dark": {
+              "alias": "palette/purple-700"
+            }
+          }
+        },
+        "fg/magic-contrast": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/purple-900"
+            },
+            "Dark": {
+              "alias": "palette/purple-900"
+            }
+          }
+        },
+        "stroke/magic-solid": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/purple-700"
+            },
+            "Dark": {
+              "alias": "palette/purple-700"
+            }
+          }
+        },
+        "stroke/magic-weak": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/purple-300"
+            },
+            "Dark": {
+              "alias": "palette/purple-300"
+            }
+          }
+        },
+        "chart/series-1": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/brand-600"
+            },
+            "Dark": {
+              "alias": "palette/brand-600"
+            }
+          },
+          "description": "차트 계열 색. 계열 순서대로 series-1부터 고정 배정하고 순환시키지 않는다. 상태색(critical/positive/warning)과 혼용 금지."
+        },
+        "chart/series-2": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/orange-700"
+            },
+            "Dark": {
+              "alias": "palette/orange-600"
+            }
+          },
+          "description": "차트 계열 색. 계열 순서대로 series-1부터 고정 배정하고 순환시키지 않는다. 상태색(critical/positive/warning)과 혼용 금지."
+        },
+        "chart/series-3": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/green-700"
+            },
+            "Dark": {
+              "alias": "palette/green-600"
+            }
+          },
+          "description": "차트 계열 색. 계열 순서대로 series-1부터 고정 배정하고 순환시키지 않는다. 상태색(critical/positive/warning)과 혼용 금지."
+        },
+        "chart/series-4": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/purple-700"
+            },
+            "Dark": {
+              "alias": "palette/purple-700"
+            }
+          },
+          "description": "차트 계열 색. 계열 순서대로 series-1부터 고정 배정하고 순환시키지 않는다. 상태색(critical/positive/warning)과 혼용 금지."
+        },
+        "chart/series-5": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/yellow-700"
+            },
+            "Dark": {
+              "alias": "palette/yellow-600"
+            }
+          },
+          "description": "차트 계열 색. 계열 순서대로 series-1부터 고정 배정하고 순환시키지 않는다. 상태색(critical/positive/warning)과 혼용 금지."
+        },
+        "stroke/neutral": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/gray-500"
+            },
+            "Dark": {
+              "alias": "palette/gray-500"
+            }
+          },
+          "description": "기본 테두리. neutral-weak(gray-400)보다 한 단계 진한 gray-500. 입력 필드·카드 등 경계가 분명히 보여야 하는 곳에 쓴다. 더 옅은 구분선은 neutral-weak, 오버레이 위 경계는 neutral-muted/subtle."
+        },
+        "dimension/x1": {
+          "type": "FLOAT",
+          "values": {
+            "Light": 4,
+            "Dark": 4
+          }
+        },
+        "dimension/x1_5": {
+          "type": "FLOAT",
+          "values": {
+            "Light": 6,
+            "Dark": 6
+          }
+        },
+        "dimension/x2": {
+          "type": "FLOAT",
+          "values": {
+            "Light": 8,
+            "Dark": 8
+          }
+        },
+        "dimension/x2_5": {
+          "type": "FLOAT",
+          "values": {
+            "Light": 10,
+            "Dark": 10
+          }
+        },
+        "dimension/x3_5": {
+          "type": "FLOAT",
+          "values": {
+            "Light": 14,
+            "Dark": 14
+          }
+        },
+        "dimension/x4": {
+          "type": "FLOAT",
+          "values": {
+            "Light": 16,
+            "Dark": 16
+          }
+        },
+        "dimension/x5": {
+          "type": "FLOAT",
+          "values": {
+            "Light": 20,
+            "Dark": 20
+          }
+        },
+        "dimension/x8": {
+          "type": "FLOAT",
+          "values": {
+            "Light": 32,
+            "Dark": 32
+          }
+        },
+        "dimension/x9": {
+          "type": "FLOAT",
+          "values": {
+            "Light": 36,
+            "Dark": 36
+          }
+        },
+        "dimension/x10": {
+          "type": "FLOAT",
+          "values": {
+            "Light": 40,
+            "Dark": 40
+          }
+        },
+        "dimension/x13": {
+          "type": "FLOAT",
+          "values": {
+            "Light": 52,
+            "Dark": 52
+          }
+        },
+        "dimension/x3": {
+          "type": "FLOAT",
+          "values": {
+            "Light": 12,
+            "Dark": 12
+          }
+        },
+        "dimension/x7": {
+          "type": "FLOAT",
+          "values": {
+            "Light": 28,
+            "Dark": 28
+          }
+        },
+        "dimension/x0_5": {
+          "type": "FLOAT",
+          "values": {
+            "Light": 2,
+            "Dark": 2
+          }
+        },
+        "dimension/x6": {
+          "type": "FLOAT",
+          "values": {
+            "Light": 24,
+            "Dark": 24
+          }
+        },
+        "spacing/x-global-gutter": {
+          "type": "FLOAT",
+          "values": {
+            "Light": {
+              "alias": "dimension/x4"
+            },
+            "Dark": {
+              "alias": "dimension/x4"
+            }
+          }
+        },
+        "dimension/x12": {
+          "type": "FLOAT",
+          "values": {
+            "Light": 48,
+            "Dark": 48
+          }
+        },
+        "dimension/x4_5": {
+          "type": "FLOAT",
+          "values": {
+            "Light": 18,
+            "Dark": 18
+          }
+        },
+        "dimension/x0": {
+          "type": "FLOAT",
+          "values": {
+            "Light": 0,
+            "Dark": 0
+          }
+        },
+        "dimension/x11": {
+          "type": "FLOAT",
+          "values": {
+            "Light": 44,
+            "Dark": 44
+          }
+        },
+        "dimension/x14": {
+          "type": "FLOAT",
+          "values": {
+            "Light": 56,
+            "Dark": 56
+          }
+        },
+        "dimension/x15": {
+          "type": "FLOAT",
+          "values": {
+            "Light": 60,
+            "Dark": 60
+          }
+        },
+        "dimension/x16": {
+          "type": "FLOAT",
+          "values": {
+            "Light": 64,
+            "Dark": 64
+          }
+        },
+        "dimension/x18": {
+          "type": "FLOAT",
+          "values": {
+            "Light": 72,
+            "Dark": 72
+          }
+        },
+        "dimension/x20": {
+          "type": "FLOAT",
+          "values": {
+            "Light": 80,
+            "Dark": 80
+          }
+        },
+        "dimension/x24": {
+          "type": "FLOAT",
+          "values": {
+            "Light": 96,
+            "Dark": 96
+          }
+        },
+        "dimension/x32": {
+          "type": "FLOAT",
+          "values": {
+            "Light": 128,
+            "Dark": 128
+          }
+        },
+        "radius/r0": {
+          "type": "FLOAT",
+          "values": {
+            "Light": 0,
+            "Dark": 0
+          }
+        },
+        "radius/r0_5": {
+          "type": "FLOAT",
+          "values": {
+            "Light": 2,
+            "Dark": 2
+          }
+        },
+        "elevation/1-key": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#0000000f",
+            "Dark": "#0000003d"
+          },
+          "description": "레벨1 raised — 접촉 그림자(가까운 층). CSS: var(--ybm-color-elevation-1-key) 다크 모드는 어두운 표면에서 그림자가 보이도록 알파를 3배 안팎으로 올린 별도 값(자동 반전 아님)."
+        },
+        "elevation/1-ambient": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#00000014",
+            "Dark": "#00000052"
+          },
+          "description": "레벨1 raised — 확산 그림자(넓은 층). 다크 모드는 어두운 표면에서 그림자가 보이도록 알파를 3배 안팎으로 올린 별도 값(자동 반전 아님)."
+        },
+        "elevation/2-key": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#0000000f",
+            "Dark": "#00000047"
+          },
+          "description": "레벨2 overlay — 접촉 그림자. 다크 모드는 어두운 표면에서 그림자가 보이도록 알파를 3배 안팎으로 올린 별도 값(자동 반전 아님)."
+        },
+        "elevation/2-ambient": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#00000014",
+            "Dark": "#0000005c"
+          },
+          "description": "레벨2 overlay — 확산 그림자. 다크 모드는 어두운 표면에서 그림자가 보이도록 알파를 3배 안팎으로 올린 별도 값(자동 반전 아님)."
+        },
+        "elevation/4-key": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#00000014",
+            "Dark": "#00000052"
+          },
+          "description": "레벨3 floating — 접촉 그림자. 다크 모드는 어두운 표면에서 그림자가 보이도록 알파를 3배 안팎으로 올린 별도 값(자동 반전 아님)."
+        },
+        "elevation/4-ambient": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#0000001a",
+            "Dark": "#00000066"
+          },
+          "description": "레벨3 floating — 확산 그림자. 다크 모드는 어두운 표면에서 그림자가 보이도록 알파를 3배 안팎으로 올린 별도 값(자동 반전 아님)."
+        },
+        "elevation/5-key": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#00000014",
+            "Dark": "#0000005c"
+          },
+          "description": "레벨4 modal — 접촉 그림자. 다크 모드는 어두운 표면에서 그림자가 보이도록 알파를 3배 안팎으로 올린 별도 값(자동 반전 아님)."
+        },
+        "elevation/5-ambient": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#00000024",
+            "Dark": "#0000007a"
+          },
+          "description": "레벨4 modal — 확산 그림자. 다크 모드는 어두운 표면에서 그림자가 보이도록 알파를 3배 안팎으로 올린 별도 값(자동 반전 아님)."
+        },
+        "radius/r1": {
+          "type": "FLOAT",
+          "values": {
+            "Light": 4,
+            "Dark": 4
+          }
+        },
+        "radius/r1_5": {
+          "type": "FLOAT",
+          "values": {
+            "Light": 6,
+            "Dark": 6
+          }
+        },
+        "radius/r2": {
+          "type": "FLOAT",
+          "values": {
+            "Light": 8,
+            "Dark": 8
+          }
+        },
+        "radius/r2_5": {
+          "type": "FLOAT",
+          "values": {
+            "Light": 10,
+            "Dark": 10
+          }
+        },
+        "radius/r3": {
+          "type": "FLOAT",
+          "values": {
+            "Light": 12,
+            "Dark": 12
+          }
+        },
+        "radius/r3_5": {
+          "type": "FLOAT",
+          "values": {
+            "Light": 14,
+            "Dark": 14
+          }
+        },
+        "radius/r4": {
+          "type": "FLOAT",
+          "values": {
+            "Light": 16,
+            "Dark": 16
+          }
+        },
+        "radius/r5": {
+          "type": "FLOAT",
+          "values": {
+            "Light": 20,
+            "Dark": 20
+          }
+        },
+        "radius/r6": {
+          "type": "FLOAT",
+          "values": {
+            "Light": 24,
+            "Dark": 24
+          }
+        },
+        "radius/r8": {
+          "type": "FLOAT",
+          "values": {
+            "Light": 32,
+            "Dark": 32
+          }
+        },
+        "radius/full": {
+          "type": "FLOAT",
+          "values": {
+            "Light": 9999,
+            "Dark": 9999
+          }
+        },
+        "logo/ybm-blue": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#0055a7",
+            "Dark": "#0055a7"
+          },
+          "description": "YBM 로고 블루 (브랜드 고정색, 모드 무관)"
+        },
+        "logo/ybm-red": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#e83743",
+            "Dark": "#e83743"
+          },
+          "description": "YBM 로고 레드 (브랜드 고정색, 모드 무관)"
+        },
+        "logo/ybm-gray": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#7d7d7d",
+            "Dark": "#7d7d7d"
+          },
+          "description": "YBM 로고 텍스트 그레이 (브랜드 고정색, 모드 무관)"
+        },
+        "elevation/3-key": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#0000000f",
+            "Dark": "#0000004d"
+          },
+          "description": "elevation 3(panel) 접촉 그림자 색. 떠 있는 패널·펼침 메뉴. Light 6% / Dark 30%."
+        },
+        "elevation/3-ambient": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#0000001a",
+            "Dark": "#00000061"
+          },
+          "description": "elevation 3(panel) 확산 그림자 색. 떠 있는 패널·펼침 메뉴. Light 10% / Dark 38%."
+        },
+        "bg/neutral-solid": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/gray-900"
+            },
+            "Dark": {
+              "alias": "palette/gray-1000"
+            }
+          },
+          "description": "Neutral Solid 배경. 강조 칩 선택·neutralSolid 버튼·체크/라디오/스위치 neutral 톤. 위 전경은 fg/on-neutral-solid. (bg/neutral-inverted 대체)"
+        },
+        "bg/neutral-solid-pressed": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/gray-800"
+            },
+            "Dark": {
+              "alias": "palette/gray-800"
+            }
+          },
+          "description": "bg/neutral-solid 의 눌린 상태."
+        },
+        "bg/neutral-muted": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/gray-100"
+            },
+            "Dark": {
+              "alias": "palette/gray-200"
+            }
+          },
+          "description": "옅은 회색 채움. 2026-10-20 에 같은 값이던 bg/neutral-weak 를 흡수했다."
+        },
+        "bg/neutral-subtle": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/gray-00"
+            },
+            "Dark": {
+              "alias": "palette/gray-100"
+            }
+          },
+          "description": "표면과 같은 색. 회색 표면 위에서 주변과 구분되는 영역."
+        },
+        "fg/on-brand-solid": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/static-white"
+            },
+            "Dark": {
+              "alias": "palette/static-white"
+            }
+          },
+          "description": "bg/brand-solid 위 전경."
+        },
+        "fg/on-critical-solid": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/static-white"
+            },
+            "Dark": {
+              "alias": "palette/static-white"
+            }
+          },
+          "description": "bg/critical-solid 위 전경."
+        },
+        "fg/on-informative-solid": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/static-white"
+            },
+            "Dark": {
+              "alias": "palette/static-white"
+            }
+          },
+          "description": "bg/informative-solid 위 전경."
+        },
+        "fg/on-positive-solid": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/static-white"
+            },
+            "Dark": {
+              "alias": "palette/static-white"
+            }
+          },
+          "description": "bg/positive-solid 위 전경."
+        },
+        "fg/on-warning-solid": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/static-white"
+            },
+            "Dark": {
+              "alias": "palette/static-white"
+            }
+          },
+          "description": "bg/warning-solid 위 전경. warning 배경이 orange 계열이라 static-white."
+        },
+        "fg/on-magic-solid": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/static-white"
+            },
+            "Dark": {
+              "alias": "palette/static-white"
+            }
+          },
+          "description": "bg/magic-solid 위 전경(magic 톤)."
+        },
+        "fg/on-neutral-solid": {
+          "type": "COLOR",
+          "values": {
+            "Light": {
+              "alias": "palette/gray-00"
+            },
+            "Dark": {
+              "alias": "palette/gray-100"
+            }
+          },
+          "description": "bg/neutral-solid 위 전경. (fg/neutral-inverted 대체)"
+        }
+      }
+    },
+    "Typography": {
+      "modes": [
+        "100%",
+        "130%",
+        "150%"
+      ],
+      "variables": {
+        "fontSize/t01": {
+          "type": "FLOAT",
+          "values": {
+            "100%": 11,
+            "130%": 14,
+            "150%": 17
+          }
+        },
+        "lineHeight/t01": {
+          "type": "FLOAT",
+          "values": {
+            "100%": 17,
+            "130%": 21,
+            "150%": 25
+          }
+        },
+        "fontSize/t01-static": {
+          "type": "FLOAT",
+          "values": {
+            "100%": 11,
+            "130%": 11,
+            "150%": 11
+          }
+        },
+        "lineHeight/t01-static": {
+          "type": "FLOAT",
+          "values": {
+            "100%": 17,
+            "130%": 17,
+            "150%": 17
+          }
+        },
+        "fontSize/t02": {
+          "type": "FLOAT",
+          "values": {
+            "100%": 12,
+            "130%": 16,
+            "150%": 18
+          }
+        },
+        "lineHeight/t02": {
+          "type": "FLOAT",
+          "values": {
+            "100%": 18,
+            "130%": 23,
+            "150%": 26
+          }
+        },
+        "fontSize/t02-static": {
+          "type": "FLOAT",
+          "values": {
+            "100%": 12,
+            "130%": 12,
+            "150%": 12
+          }
+        },
+        "lineHeight/t02-static": {
+          "type": "FLOAT",
+          "values": {
+            "100%": 18,
+            "130%": 18,
+            "150%": 18
+          }
+        },
+        "fontSize/t03": {
+          "type": "FLOAT",
+          "values": {
+            "100%": 13,
+            "130%": 17,
+            "150%": 20
+          }
+        },
+        "lineHeight/t03": {
+          "type": "FLOAT",
+          "values": {
+            "100%": 20,
+            "130%": 26,
+            "150%": 30
+          }
+        },
+        "fontSize/t03-static": {
+          "type": "FLOAT",
+          "values": {
+            "100%": 13,
+            "130%": 13,
+            "150%": 13
+          }
+        },
+        "lineHeight/t03-static": {
+          "type": "FLOAT",
+          "values": {
+            "100%": 20,
+            "130%": 20,
+            "150%": 20
+          }
+        },
+        "fontSize/t04": {
+          "type": "FLOAT",
+          "values": {
+            "100%": 14,
+            "130%": 18,
+            "150%": 21
+          }
+        },
+        "lineHeight/t04": {
+          "type": "FLOAT",
+          "values": {
+            "100%": 21,
+            "130%": 26,
+            "150%": 31
+          }
+        },
+        "fontSize/t04-static": {
+          "type": "FLOAT",
+          "values": {
+            "100%": 14,
+            "130%": 14,
+            "150%": 14
+          }
+        },
+        "lineHeight/t04-static": {
+          "type": "FLOAT",
+          "values": {
+            "100%": 21,
+            "130%": 21,
+            "150%": 21
+          }
+        },
+        "fontSize/t05": {
+          "type": "FLOAT",
+          "values": {
+            "100%": 16,
+            "130%": 21,
+            "150%": 24
+          }
+        },
+        "lineHeight/t05": {
+          "type": "FLOAT",
+          "values": {
+            "100%": 24,
+            "130%": 31,
+            "150%": 35
+          }
+        },
+        "fontSize/t05-static": {
+          "type": "FLOAT",
+          "values": {
+            "100%": 16,
+            "130%": 16,
+            "150%": 16
+          }
+        },
+        "lineHeight/t05-static": {
+          "type": "FLOAT",
+          "values": {
+            "100%": 24,
+            "130%": 24,
+            "150%": 24
+          }
+        },
+        "fontSize/t06": {
+          "type": "FLOAT",
+          "values": {
+            "100%": 18,
+            "130%": 23,
+            "150%": 27
+          }
+        },
+        "lineHeight/t06": {
+          "type": "FLOAT",
+          "values": {
+            "100%": 28,
+            "130%": 33,
+            "150%": 38
+          }
+        },
+        "fontSize/t06-static": {
+          "type": "FLOAT",
+          "values": {
+            "100%": 18,
+            "130%": 18,
+            "150%": 18
+          }
+        },
+        "lineHeight/t06-static": {
+          "type": "FLOAT",
+          "values": {
+            "100%": 28,
+            "130%": 28,
+            "150%": 28
+          }
+        },
+        "fontSize/t07": {
+          "type": "FLOAT",
+          "values": {
+            "100%": 20,
+            "130%": 26,
+            "150%": 30
+          }
+        },
+        "lineHeight/t07": {
+          "type": "FLOAT",
+          "values": {
+            "100%": 29,
+            "130%": 37,
+            "150%": 43
+          }
+        },
+        "fontSize/t07-static": {
+          "type": "FLOAT",
+          "values": {
+            "100%": 20,
+            "130%": 20,
+            "150%": 20
+          }
+        },
+        "lineHeight/t07-static": {
+          "type": "FLOAT",
+          "values": {
+            "100%": 29,
+            "130%": 29,
+            "150%": 29
+          }
+        },
+        "fontSize/t08": {
+          "type": "FLOAT",
+          "values": {
+            "100%": 22,
+            "130%": 29,
+            "150%": 33
+          }
+        },
+        "lineHeight/t08": {
+          "type": "FLOAT",
+          "values": {
+            "100%": 32,
+            "130%": 42,
+            "150%": 47
+          }
+        },
+        "fontSize/t08-static": {
+          "type": "FLOAT",
+          "values": {
+            "100%": 22,
+            "130%": 22,
+            "150%": 22
+          }
+        },
+        "lineHeight/t08-static": {
+          "type": "FLOAT",
+          "values": {
+            "100%": 32,
+            "130%": 32,
+            "150%": 32
+          }
+        },
+        "fontSize/t09": {
+          "type": "FLOAT",
+          "values": {
+            "100%": 24,
+            "130%": 31,
+            "150%": 36
+          }
+        },
+        "lineHeight/t09": {
+          "type": "FLOAT",
+          "values": {
+            "100%": 34,
+            "130%": 43,
+            "150%": 50
+          }
+        },
+        "fontSize/t09-static": {
+          "type": "FLOAT",
+          "values": {
+            "100%": 24,
+            "130%": 24,
+            "150%": 24
+          }
+        },
+        "lineHeight/t09-static": {
+          "type": "FLOAT",
+          "values": {
+            "100%": 34,
+            "130%": 34,
+            "150%": 34
+          }
+        },
+        "fontSize/t10": {
+          "type": "FLOAT",
+          "values": {
+            "100%": 26,
+            "130%": 34,
+            "150%": 39
+          }
+        },
+        "lineHeight/t10": {
+          "type": "FLOAT",
+          "values": {
+            "100%": 37,
+            "130%": 48,
+            "150%": 55
+          }
+        },
+        "fontSize/t10-static": {
+          "type": "FLOAT",
+          "values": {
+            "100%": 26,
+            "130%": 26,
+            "150%": 26
+          }
+        },
+        "lineHeight/t10-static": {
+          "type": "FLOAT",
+          "values": {
+            "100%": 37,
+            "130%": 37,
+            "150%": 37
+          }
+        },
+        "fontFamily/base": {
+          "type": "STRING",
+          "values": {
+            "100%": "Pretendard",
+            "130%": "Pretendard",
+            "150%": "Pretendard"
+          }
+        },
+        "fontStyle/regular": {
+          "type": "STRING",
+          "values": {
+            "100%": "Regular",
+            "130%": "Regular",
+            "150%": "Regular"
+          }
+        },
+        "fontStyle/medium": {
+          "type": "STRING",
+          "values": {
+            "100%": "Medium",
+            "130%": "Medium",
+            "150%": "Medium"
+          }
+        },
+        "fontStyle/bold": {
+          "type": "STRING",
+          "values": {
+            "100%": "Bold",
+            "130%": "Bold",
+            "150%": "Bold"
+          }
+        },
+        "fontSize/t11": {
+          "type": "FLOAT",
+          "values": {
+            "100%": 28,
+            "130%": 36,
+            "150%": 42
+          }
+        },
+        "fontSize/t11-static": {
+          "type": "FLOAT",
+          "values": {
+            "100%": 28,
+            "130%": 28,
+            "150%": 28
+          }
+        },
+        "lineHeight/t11": {
+          "type": "FLOAT",
+          "values": {
+            "100%": 40,
+            "130%": 51,
+            "150%": 59
+          }
+        },
+        "lineHeight/t11-static": {
+          "type": "FLOAT",
+          "values": {
+            "100%": 40,
+            "130%": 40,
+            "150%": 40
+          }
+        },
+        "fontSize/t12": {
+          "type": "FLOAT",
+          "values": {
+            "100%": 32,
+            "130%": 42,
+            "150%": 48
+          }
+        },
+        "fontSize/t12-static": {
+          "type": "FLOAT",
+          "values": {
+            "100%": 32,
+            "130%": 32,
+            "150%": 32
+          }
+        },
+        "lineHeight/t12": {
+          "type": "FLOAT",
+          "values": {
+            "100%": 44,
+            "130%": 57,
+            "150%": 65
+          }
+        },
+        "lineHeight/t12-static": {
+          "type": "FLOAT",
+          "values": {
+            "100%": 44,
+            "130%": 44,
+            "150%": 44
+          }
+        },
+        "fontSize/t13": {
+          "type": "FLOAT",
+          "values": {
+            "100%": 40,
+            "130%": 52,
+            "150%": 60
+          }
+        },
+        "fontSize/t13-static": {
+          "type": "FLOAT",
+          "values": {
+            "100%": 40,
+            "130%": 40,
+            "150%": 40
+          }
+        },
+        "lineHeight/t13": {
+          "type": "FLOAT",
+          "values": {
+            "100%": 54,
+            "130%": 70,
+            "150%": 80
+          }
+        },
+        "lineHeight/t13-static": {
+          "type": "FLOAT",
+          "values": {
+            "100%": 54,
+            "130%": 54,
+            "150%": 54
+          }
+        },
+        "fontSize/t14": {
+          "type": "FLOAT",
+          "values": {
+            "100%": 48,
+            "130%": 62,
+            "150%": 72
+          }
+        },
+        "fontSize/t14-static": {
+          "type": "FLOAT",
+          "values": {
+            "100%": 48,
+            "130%": 48,
+            "150%": 48
+          }
+        },
+        "lineHeight/t14": {
+          "type": "FLOAT",
+          "values": {
+            "100%": 62,
+            "130%": 80,
+            "150%": 92
+          }
+        },
+        "lineHeight/t14-static": {
+          "type": "FLOAT",
+          "values": {
+            "100%": 62,
+            "130%": 62,
+            "150%": 62
+          }
+        },
+        "fontStyle/semibold": {
+          "type": "STRING",
+          "values": {
+            "100%": "SemiBold",
+            "130%": "SemiBold",
+            "150%": "SemiBold"
+          }
+        },
+        "fontSize/t15": {
+          "type": "FLOAT",
+          "values": {
+            "100%": 56,
+            "130%": 73,
+            "150%": 84
+          }
+        },
+        "fontSize/t15-static": {
+          "type": "FLOAT",
+          "values": {
+            "100%": 56,
+            "130%": 56,
+            "150%": 56
+          }
+        },
+        "lineHeight/t15": {
+          "type": "FLOAT",
+          "values": {
+            "100%": 75,
+            "130%": 97,
+            "150%": 112
+          }
+        },
+        "lineHeight/t15-static": {
+          "type": "FLOAT",
+          "values": {
+            "100%": 75,
+            "130%": 75,
+            "150%": 75
+          }
+        },
+        "fontSize/t16": {
+          "type": "FLOAT",
+          "values": {
+            "100%": 64,
+            "130%": 83,
+            "150%": 96
+          }
+        },
+        "fontSize/t16-static": {
+          "type": "FLOAT",
+          "values": {
+            "100%": 64,
+            "130%": 64,
+            "150%": 64
+          }
+        },
+        "lineHeight/t16": {
+          "type": "FLOAT",
+          "values": {
+            "100%": 85,
+            "130%": 110,
+            "150%": 127
+          }
+        },
+        "lineHeight/t16-static": {
+          "type": "FLOAT",
+          "values": {
+            "100%": 85,
+            "130%": 85,
+            "150%": 85
+          }
+        },
+        "fontSize/t17": {
+          "type": "FLOAT",
+          "values": {
+            "100%": 72,
+            "130%": 94,
+            "150%": 108
+          }
+        },
+        "fontSize/t17-static": {
+          "type": "FLOAT",
+          "values": {
+            "100%": 72,
+            "130%": 72,
+            "150%": 72
+          }
+        },
+        "lineHeight/t17": {
+          "type": "FLOAT",
+          "values": {
+            "100%": 96,
+            "130%": 125,
+            "150%": 143
+          }
+        },
+        "lineHeight/t17-static": {
+          "type": "FLOAT",
+          "values": {
+            "100%": 96,
+            "130%": 96,
+            "150%": 96
+          }
+        }
+      }
+    },
+    "Shape": {
+      "modes": [
+        "Default",
+        "Soft",
+        "Sharp"
+      ],
+      "variables": {
+        "shape/2xs": {
+          "type": "FLOAT",
+          "values": {
+            "Default": {
+              "alias": "radius/r1"
+            },
+            "Soft": {
+              "alias": "radius/r2"
+            },
+            "Sharp": {
+              "alias": "radius/r0"
+            }
+          },
+          "description": "최소 컨트롤(Badge medium). Default 4 / Soft 8 / Sharp 0."
+        },
+        "shape/xs": {
+          "type": "FLOAT",
+          "values": {
+            "Default": {
+              "alias": "radius/r1_5"
+            },
+            "Soft": {
+              "alias": "radius/r2_5"
+            },
+            "Sharp": {
+              "alias": "radius/r0"
+            }
+          },
+          "description": "극소 컨트롤(Checkbox·Badge large·Segmented small 아이템). Default 6 / Soft 10 / Sharp 0."
+        },
+        "shape/sm": {
+          "type": "FLOAT",
+          "values": {
+            "Default": {
+              "alias": "radius/r2"
+            },
+            "Soft": {
+              "alias": "radius/r3"
+            },
+            "Sharp": {
+              "alias": "radius/r0"
+            }
+          },
+          "description": "Default / Soft(동글) / Sharp(각진) 모드로 값이 바뀐다. 컴포넌트는 radius/* 원시값 대신 이 토큰을 쓴다."
+        },
+        "shape/md": {
+          "type": "FLOAT",
+          "values": {
+            "Default": {
+              "alias": "radius/r2_5"
+            },
+            "Soft": {
+              "alias": "radius/r3_5"
+            },
+            "Sharp": {
+              "alias": "radius/r0_5"
+            }
+          },
+          "description": "Default / Soft(동글) / Sharp(각진) 모드로 값이 바뀐다. 컴포넌트는 radius/* 원시값 대신 이 토큰을 쓴다."
+        },
+        "shape/lg": {
+          "type": "FLOAT",
+          "values": {
+            "Default": {
+              "alias": "radius/r3"
+            },
+            "Soft": {
+              "alias": "radius/r4"
+            },
+            "Sharp": {
+              "alias": "radius/r0_5"
+            }
+          },
+          "description": "Default / Soft(동글) / Sharp(각진) 모드로 값이 바뀐다. 컴포넌트는 radius/* 원시값 대신 이 토큰을 쓴다."
+        },
+        "shape/xl": {
+          "type": "FLOAT",
+          "values": {
+            "Default": {
+              "alias": "radius/r4"
+            },
+            "Soft": {
+              "alias": "radius/r5"
+            },
+            "Sharp": {
+              "alias": "radius/r1"
+            }
+          },
+          "description": "Default / Soft(동글) / Sharp(각진) 모드로 값이 바뀐다. 컴포넌트는 radius/* 원시값 대신 이 토큰을 쓴다."
+        },
+        "shape/2xl": {
+          "type": "FLOAT",
+          "values": {
+            "Default": {
+              "alias": "radius/r5"
+            },
+            "Soft": {
+              "alias": "radius/r6"
+            },
+            "Sharp": {
+              "alias": "radius/r1"
+            }
+          },
+          "description": "Default / Soft(동글) / Sharp(각진) 모드로 값이 바뀐다. 컴포넌트는 radius/* 원시값 대신 이 토큰을 쓴다."
+        },
+        "shape/3xl": {
+          "type": "FLOAT",
+          "values": {
+            "Default": {
+              "alias": "radius/r6"
+            },
+            "Soft": {
+              "alias": "radius/r8"
+            },
+            "Sharp": {
+              "alias": "radius/r1_5"
+            }
+          },
+          "description": "Default / Soft(동글) / Sharp(각진) 모드로 값이 바뀐다. 컴포넌트는 radius/* 원시값 대신 이 토큰을 쓴다."
+        },
+        "shape/pill": {
+          "type": "FLOAT",
+          "values": {
+            "Default": {
+              "alias": "radius/full"
+            },
+            "Soft": {
+              "alias": "radius/full"
+            },
+            "Sharp": {
+              "alias": "radius/full"
+            }
+          },
+          "description": "Default / Soft(동글) / Sharp(각진) 모드로 값이 바뀐다. 컴포넌트는 radius/* 원시값 대신 이 토큰을 쓴다."
+        }
+      }
+    },
+    "Elevation": {
+      "modes": [
+        "Default"
+      ],
+      "variables": {
+        "elevation/1/key/y": {
+          "type": "FLOAT",
+          "values": {
+            "Default": 1
+          },
+          "description": "레벨1 key 층의 y. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ybm-elevation-1) 를 쓸 것."
+        },
+        "elevation/1/key/blur": {
+          "type": "FLOAT",
+          "values": {
+            "Default": 2
+          },
+          "description": "레벨1 key 층의 blur. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ybm-elevation-1) 를 쓸 것."
+        },
+        "elevation/1/key/spread": {
+          "type": "FLOAT",
+          "values": {
+            "Default": -1
+          },
+          "description": "레벨1 key 층의 spread. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ybm-elevation-1) 를 쓸 것."
+        },
+        "elevation/1/ambient/y": {
+          "type": "FLOAT",
+          "values": {
+            "Default": 1
+          },
+          "description": "레벨1 ambient 층의 y. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ybm-elevation-1) 를 쓸 것."
+        },
+        "elevation/1/ambient/blur": {
+          "type": "FLOAT",
+          "values": {
+            "Default": 3
+          },
+          "description": "레벨1 ambient 층의 blur. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ybm-elevation-1) 를 쓸 것."
+        },
+        "elevation/1/ambient/spread": {
+          "type": "FLOAT",
+          "values": {
+            "Default": 0
+          },
+          "description": "레벨1 ambient 층의 spread. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ybm-elevation-1) 를 쓸 것."
+        },
+        "elevation/2/key/y": {
+          "type": "FLOAT",
+          "values": {
+            "Default": 2
+          },
+          "description": "레벨2 key 층의 y. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ybm-elevation-2) 를 쓸 것."
+        },
+        "elevation/2/key/blur": {
+          "type": "FLOAT",
+          "values": {
+            "Default": 4
+          },
+          "description": "레벨2 key 층의 blur. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ybm-elevation-2) 를 쓸 것."
+        },
+        "elevation/2/key/spread": {
+          "type": "FLOAT",
+          "values": {
+            "Default": -2
+          },
+          "description": "레벨2 key 층의 spread. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ybm-elevation-2) 를 쓸 것."
+        },
+        "elevation/2/ambient/y": {
+          "type": "FLOAT",
+          "values": {
+            "Default": 4
+          },
+          "description": "레벨2 ambient 층의 y. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ybm-elevation-2) 를 쓸 것."
+        },
+        "elevation/2/ambient/blur": {
+          "type": "FLOAT",
+          "values": {
+            "Default": 10
+          },
+          "description": "레벨2 ambient 층의 blur. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ybm-elevation-2) 를 쓸 것."
+        },
+        "elevation/2/ambient/spread": {
+          "type": "FLOAT",
+          "values": {
+            "Default": -1
+          },
+          "description": "레벨2 ambient 층의 spread. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ybm-elevation-2) 를 쓸 것."
+        },
+        "elevation/4/key/y": {
+          "type": "FLOAT",
+          "values": {
+            "Default": 4
+          },
+          "description": "레벨3 key 층의 y. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ybm-elevation-3) 를 쓸 것."
+        },
+        "elevation/4/key/blur": {
+          "type": "FLOAT",
+          "values": {
+            "Default": 6
+          },
+          "description": "레벨3 key 층의 blur. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ybm-elevation-3) 를 쓸 것."
+        },
+        "elevation/4/key/spread": {
+          "type": "FLOAT",
+          "values": {
+            "Default": -4
+          },
+          "description": "레벨3 key 층의 spread. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ybm-elevation-3) 를 쓸 것."
+        },
+        "elevation/4/ambient/y": {
+          "type": "FLOAT",
+          "values": {
+            "Default": 10
+          },
+          "description": "레벨3 ambient 층의 y. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ybm-elevation-3) 를 쓸 것."
+        },
+        "elevation/4/ambient/blur": {
+          "type": "FLOAT",
+          "values": {
+            "Default": 18
+          },
+          "description": "레벨3 ambient 층의 blur. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ybm-elevation-3) 를 쓸 것."
+        },
+        "elevation/4/ambient/spread": {
+          "type": "FLOAT",
+          "values": {
+            "Default": -3
+          },
+          "description": "레벨3 ambient 층의 spread. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ybm-elevation-3) 를 쓸 것."
+        },
+        "elevation/5/key/y": {
+          "type": "FLOAT",
+          "values": {
+            "Default": 8
+          },
+          "description": "레벨4 key 층의 y. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ybm-elevation-4) 를 쓸 것."
+        },
+        "elevation/5/key/blur": {
+          "type": "FLOAT",
+          "values": {
+            "Default": 10
+          },
+          "description": "레벨4 key 층의 blur. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ybm-elevation-4) 를 쓸 것."
+        },
+        "elevation/5/key/spread": {
+          "type": "FLOAT",
+          "values": {
+            "Default": -6
+          },
+          "description": "레벨4 key 층의 spread. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ybm-elevation-4) 를 쓸 것."
+        },
+        "elevation/5/ambient/y": {
+          "type": "FLOAT",
+          "values": {
+            "Default": 20
+          },
+          "description": "레벨4 ambient 층의 y. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ybm-elevation-4) 를 쓸 것."
+        },
+        "elevation/5/ambient/blur": {
+          "type": "FLOAT",
+          "values": {
+            "Default": 32
+          },
+          "description": "레벨4 ambient 층의 blur. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ybm-elevation-4) 를 쓸 것."
+        },
+        "elevation/5/ambient/spread": {
+          "type": "FLOAT",
+          "values": {
+            "Default": -5
+          },
+          "description": "레벨4 ambient 층의 spread. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ybm-elevation-4) 를 쓸 것."
+        },
+        "elevation/3/key/y": {
+          "type": "FLOAT",
+          "values": {
+            "Default": 2
+          },
+          "description": "elevation 3(panel) 기하값. 합성 토큰 --ybm-elevation-3 으로만 노출된다."
+        },
+        "elevation/3/key/blur": {
+          "type": "FLOAT",
+          "values": {
+            "Default": 4
+          },
+          "description": "elevation 3(panel) 기하값. 합성 토큰 --ybm-elevation-3 으로만 노출된다."
+        },
+        "elevation/3/key/spread": {
+          "type": "FLOAT",
+          "values": {
+            "Default": -2
+          },
+          "description": "elevation 3(panel) 기하값. 합성 토큰 --ybm-elevation-3 으로만 노출된다."
+        },
+        "elevation/3/ambient/y": {
+          "type": "FLOAT",
+          "values": {
+            "Default": 10
+          },
+          "description": "elevation 3(panel) 기하값. 합성 토큰 --ybm-elevation-3 으로만 노출된다."
+        },
+        "elevation/3/ambient/blur": {
+          "type": "FLOAT",
+          "values": {
+            "Default": 8
+          },
+          "description": "elevation 3(panel) 기하값. 합성 토큰 --ybm-elevation-3 으로만 노출된다."
+        },
+        "elevation/3/ambient/spread": {
+          "type": "FLOAT",
+          "values": {
+            "Default": 0
+          },
+          "description": "elevation 3(panel) 기하값. 합성 토큰 --ybm-elevation-3 으로만 노출된다."
+        }
+      }
+    }
+  },
+  "cssOnly": {
+    "fontFamilyCss": "\"Pretendard\", -apple-system, BlinkMacSystemFont, \"Apple SD Gothic Neo\", \"Malgun Gothic\", sans-serif",
+    "motion": {
+      "duration-fast": "120ms",
+      "duration-normal": "200ms",
+      "duration-slow": "320ms",
+      "easing-standard": "cubic-bezier(0.2, 0, 0, 1)",
+      "easing-emphasized": "cubic-bezier(0.3, 0, 0, 1)"
+    },
+    "zIndex": {
+      "base": 0,
+      "sticky": 100,
+      "overlay": 1000,
+      "dialog": 1100,
+      "toast": 1200,
+      "tooltip": 1300
+    }
+  }
+}
