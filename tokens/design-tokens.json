@@ -3,7 +3,7 @@
     "name": "YBM Design System",
     "generated": "2026-10-21",
     "source": "Figma 1VCEsFU3xMWuXIntIrZz9i / YBM DS + Typography + Shape + Elevation",
-    "note": "build.py 가 생성한다. 직접 수정하지 말 것."
+    "note": "tokens/build.mjs 가 생성한다. 직접 수정하지 말 것."
   },
   "color": {
     "palette": {

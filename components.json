@@ -385,6 +385,61 @@
         { "part": "Cell", "id": "2164:1105", "type": "COMPONENT_SET", "variants": 6 }
       ],
       "props": "density `compact` · align"
+    },
+    {
+      "no": "43",
+      "name": "Divider",
+      "classes": [ ".ds-divider" ],
+      "figma": [
+        { "id": "2347:1152", "type": "COMPONENT_SET", "variants": 4 }
+      ],
+      "props": "weight thick · orientation vertical · inset · label"
+    },
+    {
+      "no": "44",
+      "name": "Tooltip",
+      "classes": [ ".ds-tooltip", ".ds-tooltip-anchor" ],
+      "figma": [
+        { "id": "2348:1145", "type": "COMPONENT" }
+      ],
+      "props": "placement top·bottom·left·right · hover/focus 전용"
+    },
+    {
+      "no": "45",
+      "name": "List · List Item",
+      "classes": [ ".ds-list", ".ds-list-item" ],
+      "figma": [
+        { "part": "Item", "id": "2350:1207", "type": "COMPONENT_SET", "variants": 4 }
+      ],
+      "props": "variant inset · divider · size small · prefix/suffix/chevron"
+    },
+    {
+      "no": "46",
+      "name": "Breadcrumbs",
+      "classes": [ ".ds-breadcrumbs" ],
+      "figma": [
+        { "id": "2348:1149", "type": "COMPONENT" }
+      ],
+      "props": "현재 항목 aria-current=page"
+    },
+    {
+      "no": "47",
+      "name": "Stepper",
+      "classes": [ ".ds-stepper" ],
+      "figma": [
+        { "id": "2351:1211", "type": "COMPONENT" },
+        { "part": "Step", "id": "2351:1210", "type": "COMPONENT_SET", "variants": 6 }
+      ],
+      "props": "state complete·current·upcoming · orientation vertical"
+    },
+    {
+      "no": "48",
+      "name": "Banner",
+      "classes": [ ".ds-banner" ],
+      "figma": [
+        { "id": "2349:1217", "type": "COMPONENT_SET", "variants": 10 }
+      ],
+      "props": "tone neutral·informative·positive·warning·critical · variant solid"
     }
   ]
 }

@@ -16,6 +16,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { execFileSync, spawnSync } from 'node:child_process';
+import https from 'node:https';
 import { fileURLToPath } from 'node:url';
 import { build, today } from './tokens/build.mjs';
 
@@ -38,6 +39,7 @@ const read = (p) => fs.readFileSync(path.join(DS, p), 'utf8');
 // ── git ──────────────────────────────────────────────────────────────────
 function git(gargs, opts = {}) {
   const r = spawnSync('git', gargs, { cwd: DS, encoding: 'utf8', ...opts });
+  if (r.error && r.error.code === 'ETIMEDOUT') return { ok: false, out: '', err: 'timeout' };
   if (r.error) die('git 을 찾을 수 없어요. Git for Windows 또는 GitHub Desktop 을 설치해 주세요.');
   if (r.status !== 0 && !opts.allowFail) throw new Error((r.stderr || r.stdout || '').trim() || `git ${gargs.join(' ')} 실패`);
   return { ok: r.status === 0, out: (r.stdout || '').trim(), err: (r.stderr || '').trim() };
@@ -155,9 +157,16 @@ function writeBuild(date = today()) {
   }
 }
 
-async function siteUp() {
-  try { const r = await fetch(CFG.pagesUrl + 'ybm-ds/ybm-ds.css', { method: 'HEAD' }); return r.ok; } catch { return false; }
+// 단발 HTTPS 상태 조회 (연결 유지 없음 — Windows 에서 fetch 후 종료할 때 나는 오류를 피한다)
+function httpStatus(url, method = 'HEAD') {
+  return new Promise((resolve) => {
+    const req = https.request(url, { method, agent: false, timeout: 15000, headers: { 'user-agent': 'ybm-ds-sync' } }, (res) => { res.resume(); resolve(res.statusCode); });
+    req.on('timeout', () => { req.destroy(); resolve(0); });
+    req.on('error', () => resolve(0));
+    req.end();
+  });
 }
+async function siteUp() { return (await httpStatus(CFG.pagesUrl + 'ybm-ds/ybm-ds.css')) === 200; }
 
 async function deploy(message) {
   const { errors } = verify();
@@ -178,7 +187,16 @@ async function deploy(message) {
     || !git(['rev-parse', '--verify', `origin/${CFG.branch}`], { allowFail: true }).ok;
   if (ahead) {
     say('  GitHub 에 올리는 중...');
-    const p = git(['push', '-q', '-u', 'origin', CFG.branch], { allowFail: true });
+    // 사람이 보는 창(동기화.bat)이면 GitHub 로그인 창을 허용하고, 자동 실행이면 창 없이 바로 실패시킨다
+    const interactive = process.stdout.isTTY && !process.env.CI;
+    const env = interactive ? process.env : { ...process.env, GIT_TERMINAL_PROMPT: '0', GCM_INTERACTIVE: 'never' };
+    // 저장소가 없으면 push 가 로그인 단계에서 멈추므로 먼저 확인한다 (조회는 로그인 없이 바로 답한다)
+    const slug = (CFG.repoUrl.match(/github\.com[:/](.+?)(?:\.git)?$/) || [])[1];
+    let missing = false;
+    missing = (await httpStatus(`https://api.github.com/repos/${slug}`, 'GET')) === 404;
+    if (missing) die(`GitHub 저장소가 아직 없어요.\n    https://github.com/new 에서 이름 "${CFG.repoUrl.split('/').pop()}" · Public · README 없이 만든 뒤 다시 실행하세요.\n    그다음 저장소 Settings → Pages → Branch "${CFG.branch}" / root → Save`);
+    const p = git(['push', '-q', '-u', 'origin', CFG.branch], { allowFail: true, env, timeout: interactive ? 0 : 60000 });
+    if (p.err === 'timeout') die('push 가 1분 안에 끝나지 않았어요 — 저장소가 있는지, GitHub 로그인이 돼 있는지 확인한 뒤 동기화.bat 으로 다시 올려 주세요.');
     if (!p.ok) {
       if (/not found|does not exist/i.test(p.err)) die(`GitHub 저장소가 아직 없어요.\n    https://github.com/new 에서 이름 "${CFG.repoUrl.split('/').pop()}" · Public · README 없이 만든 뒤 다시 실행하세요.\n    그다음 저장소 Settings → Pages → Branch "${CFG.branch}" / root → Save`);
       die('push 실패 — ' + p.err);

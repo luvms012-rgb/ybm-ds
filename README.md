@@ -1,9 +1,12 @@
 # YBM Design System
 
-YBM 서비스 공용 디자인 시스템. Figma 변수·컴포넌트가 정본이고, 이 폴더(`ds/`)는 그걸 코드로 옮긴 배포 패키지와 토큰 파이프라인이다.
+YBM 서비스 공용 디자인 시스템. Figma 변수·컴포넌트가 정본이고, 이 폴더(`ds/`)는 그걸 코드로 옮긴 배포 패키지와 동기화 도구다.
+이 폴더 하나가 GitHub 저장소 하나다(가이드 사이트와 분리된 단독 저장소).
 
-- 최종 갱신: 2026-10-21
+- 최종 갱신: 2026-10-22
 - Figma 파일: `1VCEsFU3xMWuXIntIrZz9i` — <https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/>
+- GitHub 저장소: <https://github.com/luvms012-rgb/ybm-ds>
+- 배포 주소(Pages): <https://luvms012-rgb.github.io/ybm-ds/> — 첫 화면이 컴포넌트 미리보기
 - 로컬 폴더: `C:\Users\luvms\Desktop\works\ds`
 
 ---
@@ -11,44 +14,54 @@ YBM 서비스 공용 디자인 시스템. Figma 변수·컴포넌트가 정본�
 ## 1. 폴더 구조
 
 ```
-ds/
+ds/                          ← 저장소 루트 = Pages 사이트 루트
 ├─ README.md                 ← 이 문서 (DS 전체 안내)
-├─ ybm-ds/                   ← 배포 패키지. 서비스는 이 폴더를 그대로 가져다 쓴다
+├─ index.html                컴포넌트 미리보기 (48종 · Light/Dark · Shape 전환 · ?only=43-48 로 골라 보기)
+├─ components.json           컴포넌트 목록 — CSS 클래스 · Figma 노드 ID · 변형 수 (sync 가 양쪽과 대조)
+├─ sync.mjs                  ◆ 통합 동기화 (Figma ↔ 로컬 ↔ GitHub ↔ 가이드 사이트)
+├─ 동기화.bat                 더블클릭 = node sync.mjs deploy (검증 → 커밋 → GitHub 반영)
+├─ deploy.config.json        저장소 · Pages 주소 · 브랜치
+├─ ybm-ds/                   ← 배포 패키지. 서비스는 이 폴더를 가리킨다
 │  ├─ ybm-ds.css             진입 파일 (이것 하나만 link) — 아래 5개를 cascade layer 로 import
-│  ├─ tokens.css             토큰 (⚠ build.py 생성물 — 손으로 고치지 않음)
+│  ├─ tokens.css             토큰 (⚠ 생성물 — 손으로 고치지 않음)
 │  ├─ base.css               리셋 · Pretendard @font-face · 포커스 링 · reduced-motion · .ds-sr-only
 │  ├─ icons.css              Lucide 아이콘 (data URI + mask) .ds-icon
-│  ├─ components.css         컴포넌트 42종 .ds-*
+│  ├─ components.css         컴포넌트 48종 .ds-*
 │  ├─ utilities.css          .ds-t01~t17 · .ds-fw-* · .ds-fg-* · .u-*
 │  ├─ ybm-ds.js              공통 인터랙션 (의존성 없음)
 │  └─ fonts/                 Pretendard woff2 (Thin~Black 9종, CSS 는 400/500/600/700 사용)
-└─ tokens/                   ← 토큰 소스와 파생물
-   ├─ figma-variables.json   Figma 변수 전집 스냅샷 = source of truth
-   ├─ figma-variables.backup-YYYY-MM-DD.json   apply 시 자동 백업
-   ├─ build.py               스냅샷 → tokens.css + 파생 3종 생성
-   ├─ figma-sync.mjs         Figma ↔ 스냅샷 비교·병합 도우미
-   ├─ .figma-check.js        figma-sync check 가 만드는 use_figma 실행용 스크립트
-   ├─ design-tokens.json     (생성물) 중첩 JSON
-   ├─ tokens.js              (생성물) JS 객체
-   └─ tailwind.preset.js     (생성물) Tailwind preset — 값은 전부 CSS 변수 참조
+├─ tokens/                   ← 토큰 소스와 파생물
+│  ├─ figma-variables.json   Figma 변수 전집 스냅샷 = source of truth
+│  ├─ build.mjs              스냅샷 → tokens.css + 파생 3종 생성 (Node — Python 불필요)
+│  ├─ figma-sync.mjs         Figma ↔ 스냅샷 비교·병합 (sync.mjs 가 호출)
+│  ├─ design-tokens.json     (생성물) 중첩 JSON
+│  ├─ tokens.js              (생성물) JS 객체
+│  └─ tailwind.preset.js     (생성물) Tailwind preset — 값은 전부 CSS 변수 참조
+└─ .claude/skills/ds-sync/   Claude 용 동기화 절차 ("ds 동기화" 라고 요청하면 이 순서대로 실행)
 ```
+
+git 에 올리지 않는 것(`.gitignore`): `tokens/.figma-check.js` · `tokens/.figma-result.json` · `tokens/figma-variables.backup-*.json`
 
 ### 손으로 관리하는 파일 vs 생성물
 
 | 구분 | 파일 |
 |---|---|
-| 직접 편집 | `base.css` `icons.css` `components.css` `utilities.css` `ybm-ds.css` `ybm-ds.js` `build.py` `figma-sync.mjs` |
+| 직접 편집 | `base.css` `icons.css` `components.css` `utilities.css` `ybm-ds.css` `ybm-ds.js` `index.html` `components.json` `sync.mjs` `tokens/build.mjs` `tokens/figma-sync.mjs` |
 | 생성물 (편집 금지) | `ybm-ds/tokens.css` `tokens/design-tokens.json` `tokens/tokens.js` `tokens/tailwind.preset.js` `tokens/.figma-check.js` |
-| 스냅샷 (figma-sync 로만 갱신) | `tokens/figma-variables.json` |
+| 스냅샷 (sync 로만 갱신) | `tokens/figma-variables.json` |
 
 ---
 
 ## 2. 사용법
 
 ```html
-<link rel="stylesheet" href="…/ybm-ds/ybm-ds.css">                 <!-- 공통 DS -->
-<link rel="stylesheet" href="…/services/{서비스}/{서비스}.css">       <!-- 서비스 전용 -->
-<script src="…/ybm-ds/ybm-ds.js" defer></script>
+<!-- 배포 주소에서 바로 (가이드 사이트·외부 시안) -->
+<link rel="stylesheet" href="https://luvms012-rgb.github.io/ybm-ds/ybm-ds/ybm-ds.css">
+<script src="https://luvms012-rgb.github.io/ybm-ds/ybm-ds/ybm-ds.js" defer></script>
+
+<!-- 로컬 작업(works 폴더 안) — 상대경로. 가이드 배포 때 위 주소로 자동 치환된다 -->
+<link rel="stylesheet" href="../../../../ds/ybm-ds/ybm-ds.css">
+<link rel="stylesheet" href="…/{서비스}.css">       <!-- 서비스 전용은 DS 다음에 -->
 
 <html data-theme="dark" data-shape="soft">  <!-- 둘 다 선택. 독립 조합 가능 -->
 ```
@@ -73,24 +86,39 @@ DS 전체가 `@layer ybm.tokens, ybm.base, ybm.icons, ybm.components, ybm.utilit
 
 ---
 
-## 3. 토큰 파이프라인
+## 3. 동기화 — Figma ↔ 로컬 ↔ GitHub ↔ 가이드 사이트
 
 ```
-Figma 변수 ──(figma-sync check → use_figma → apply)──▶ tokens/figma-variables.json
-                                                          │
-                                         python tokens/build.py [날짜]
-                                                          ▼
-                     ybm-ds/tokens.css · design-tokens.json · tokens.js · tailwind.preset.js
+ Figma 변수·컴포넌트
+   │  ① node sync.mjs figma → tokens/.figma-check.js
+   │     Claude 가 use_figma 로 실행(읽기 전용) → 결과를 tokens/.figma-result.json 에 저장
+   ▼
+ ② node sync.mjs pull
+   ├─ 변수 변경 → figma-variables.json 병합(백업) → build.mjs 로 생성물 4종 재작성
+   ├─ 컴포넌트 대조 → components.json 과 다른 노드·변형 수·목록에 없는 세트 보고
+   ├─ 검증(아래) → 실패하면 멈춤
+   ├─ git commit → push → GitHub Pages(1~2분 뒤 반영)
+   └─ 가이드 사이트 재배포(project/_publish/publish.ps1) — 가이드는 DS 를 Pages 주소로 참조
 ```
 
-1. `node tokens/figma-sync.mjs check` → `tokens/.figma-check.js` 생성
-2. 그 내용을 Figma MCP `use_figma`(fileKey `1VCEsFU3xMWuXIntIrZz9i`, 읽기 전용)로 실행 → `{ same, added, removed, changed, collections, inSync }` 반환
-3. 변경이 있으면 결과 JSON 을 파일로 저장 후 `node tokens/figma-sync.mjs apply <결과.json>` (기존 스냅샷은 `.backup-날짜.json` 으로 백업)
-4. `python tokens/build.py` → 생성물 4종 재작성
-   - `python tokens/build.py <날짜> <출력폴더>` 로 다른 곳에 빌드해 diff 검증 가능
-   - 스냅샷이 불완전하면(개수 불일치·모드 누락·별칭 미해결) 빌드가 즉시 실패한다
+| 하고 싶은 일 | 명령 |
+|---|---|
+| 전부(Figma → 로컬 → GitHub → 가이드) | Claude 에게 **"ds 동기화"** — ①② 를 이어서 실행한다 |
+| 로컬에서 고친 CSS 를 올리기 | `동기화.bat` 더블클릭 또는 `node sync.mjs deploy "메시지"` |
+| 상태만 보기 | `node sync.mjs` (검증 · 커밋 안 된 변경 · 스냅샷 날짜 · 사이트 응답) |
+| 토큰만 다시 빌드 | `node sync.mjs build` (또는 `node tokens/build.mjs <날짜> <폴더>` 로 다른 곳에 빌드해 diff) |
+| 옵션 | `--no-push` 커밋까지만 · `--ds-only` 가이드 재배포 생략 |
 
-비교 기준: 변수 이름 · 타입 · 모드별 값(색 hex, 숫자, 별칭 이름) · description.
+**검증 항목** (`node sync.mjs verify`, deploy·pull 이 매번 실행)
+1. 생성물 4종 = 스냅샷으로 다시 빌드한 결과 (tokens.css 를 손으로 고쳤거나 빌드를 빠뜨리면 실패)
+2. `ybm-ds.css` 가 import 하는 파일 · `base.css` 의 폰트 파일이 실제로 있는지
+3. `components.json` 의 클래스가 `components.css` 에 모두 있는지 (+ 목록에 없는 루트 클래스 경고)
+
+**변수 비교 기준**: 이름 · 타입 · 모드별 값(색 hex, 숫자, 별칭 이름) · description. 스냅샷이 불완전하면(개수 불일치·모드 누락·별칭 미해결) 빌드가 즉시 실패한다.
+**컴포넌트 비교 기준**: `components.json` 의 노드 ID 존재 · 타입 · 변형 수, Components 페이지에서 목록에 없는 COMPONENT_SET.
+
+> 처음 한 번: GitHub 에서 저장소 `ybm-ds`(Public, README 없이) 생성 → Settings → Pages → Branch `main` / root.
+> push 인증은 PC 의 Git Credential Manager(가이드 배포와 같은 GitHub 로그인)를 그대로 쓴다.
 
 ---
 
@@ -99,7 +127,7 @@ Figma 변수 ──(figma-sync check → use_figma → apply)──▶ tokens/fi
 | 페이지 | ID | 내용 |
 |---|---|---|
 | Foundations | `2274:1143` | 섹션 Color `2288:63` · Typography `2288:64` · Elevation `2288:65` · Radius `2288:66` · Spacing `2288:67` |
-| Components | `0:1` | 컴포넌트마다 섹션 1개 (34개 섹션) |
+| Components | `0:1` | 컴포넌트마다 섹션 1개 (40개 섹션 · 2026-10-22 Banner·Breadcrumbs·Divider·List·Stepper·Tooltip 추가) |
 | Icons | `271:2027` | Lucide Icons 프레임 `1167:2` |
 
 ### 변수 컬렉션
@@ -268,8 +296,14 @@ CSS 는 Figma 프로퍼티 이름을 그대로 `data-*` 속성으로 쓴다: `<b
 | 40 | Empty | `.ds-empty` | `2164:1092` · 2 | size |
 | 41 | Pagination | `.ds-pagination` | `2163:1067` · 2 / Item `2163:1028` · 16 | type `first·prev·next·last·ellipsis·simple` |
 | 42 | Table | `.ds-table` `.ds-table-wrap` | `2164:1271` · 2 / Row `2164:1178` · 8 / Cell `2164:1105` · 6 | density `compact` · align |
+| 43 | Divider | `.ds-divider` | `2347:1152` · 4 | type `thin·thick·vertical·label` (CSS data-weight / data-orientation / data-label) · inset |
+| 44 | Tooltip | `.ds-tooltip` `.ds-tooltip-anchor` | `2348:1145`(COMPONENT) | placement `top·bottom·left·right`(CSS 만) · hover/focus 때만 표시 |
+| 45 | List · List Item | `.ds-list` `.ds-list-item` | Item `2350:1207` · 4 | size `medium·small` · state · prefix/description/suffix/chevron/divider · list variant `inset` |
+| 46 | Breadcrumbs | `.ds-breadcrumbs` | `2348:1149`(COMPONENT) | 현재 항목 `aria-current="page"` |
+| 47 | Stepper | `.ds-stepper` (`__step/indicator/label`) | `2351:1211`(COMPONENT) / Step `2351:1210` · 6 | state `complete·current·upcoming` · orientation `vertical` |
+| 48 | Banner | `.ds-banner` (`__inner/message/title/action/close`) | `2349:1217` · 10 | variant `weak·solid` · tone 5 |
 
-Divider 는 Figma 컴포넌트 없이 CSS 만 있다.
+목록의 기계용 사본이 `components.json` 이다. 컴포넌트를 추가·변경하면 이 표와 `components.json` 을 함께 고친다(sync 가 Figma·CSS 와 대조).
 
 ### 6.2 사용 지침 (Do / Don't)
 - **Action Button** — 강조(High emphasis)는 화면당 1개, 3개 이상 나란히 금지.
@@ -287,7 +321,11 @@ Divider 는 Figma 컴포넌트 없이 CSS 만 있다.
 - **Bottom Navigation** — 탭 3~5개, 라벨 한글 5자/영문 10자, 아이콘은 Solid, 뱃지 3개 이상 동시 노출 금지, count 1~99 (100↑ `99+`, 0 숨김).
 - **Side Navigation** — 하위 메뉴가 있는 항목은 클릭 시 이동 없이 펼침만, 하위가 활성이면 부모는 펼친 상태 유지. 반응형 lg=펼침 / md=접힘 / sm=Drawer.
 - **Divider** — 마지막 섹션 하단에 두지 않는다.
-- **List Item** — 상호작용 요소 4개 미만.
+- **List Item** — 상호작용 요소 4개 미만. 행 전체가 링크이면 안에 다른 버튼을 넣지 않는다.
+- **Tooltip vs Help Bubble** — Tooltip 은 아이콘 버튼 이름 같은 짧은 라벨(hover/focus 전용, 터치에서는 안 보임). 닫기·여러 줄 설명은 Help Bubble.
+- **Banner vs Callout** — Banner 는 페이지 전체 공지(화면 맨 위, 한 번에 1개, 전체 폭). Callout 은 본문 안 안내.
+- **Breadcrumbs** — 웹에서 2단계 이상 깊이일 때만. 마지막(현재) 항목은 링크가 아니다. 모바일 앱은 뒤로 가기 헤더.
+- **Stepper** — 단계 3~5개, 라벨은 짧은 명사형. 더 많으면 "2 / 6" 처럼 글자로.
 - 닫기 버튼(Dialog·Bottom Sheet): 40×40 투명 + 24px `Lucide/x`, 색 `fg/neutral`.
 
 ---
@@ -342,10 +380,10 @@ Divider 는 Figma 컴포넌트 없이 CSS 만 있다.
 ### 공통
 1. 새 UI 는 **기존 컴포넌트를 재사용**한다. 중복 제작 금지.
 2. 컴포넌트는 **시맨틱 토큰만** 참조한다. 반경은 `shape/*`.
-3. 새 컴포넌트를 추가하면 `components.css`(`.ds-*` + `--ds-*` 변수) · 이 문서 §6 · Figma `description` 을 함께 갱신한다.
-4. 토큰을 바꿀 때는 **Figma 변수 → figma-sync → build.py** 순서. `tokens.css` 를 손으로 고치지 않는다.
-5. CSS 수정 후에는 미리보기 HTML 을 브라우저로 렌더해 Figma 스크린샷과 나란히 비교한다.
-6. **양방향 동기화** — `ds` 폴더를 고치면 같은 작업 안에서 Figma 도 고치고, Figma 를 고치면 `ds` 도 고친다. 작업 시작 전 `figma-sync check` 로 이미 어긋난 곳이 없는지 확인한다.
+3. 새 컴포넌트를 추가하면 `components.css`(`.ds-*` + `--ds-*` 변수) · `components.json` · `index.html`(미리보기 섹션) · 이 문서 §6 · Figma `description` 을 함께 갱신한다.
+4. 토큰을 바꿀 때는 **Figma 변수 → `node sync.mjs figma` → use_figma → `node sync.mjs pull`** 순서. `tokens.css` 를 손으로 고치지 않는다.
+5. CSS 수정 후에는 `index.html?only=번호` 를 브라우저로 렌더해 Figma 스크린샷과 나란히 비교한다.
+6. **양방향 동기화** — `ds` 폴더를 고치면 같은 작업 안에서 Figma 도 고치고, Figma 를 고치면 `ds` 도 고친다. 작업 시작 전 `node sync.mjs figma` 점검으로 이미 어긋난 곳이 없는지 확인하고, 끝나면 `node sync.mjs deploy` 로 GitHub 까지 올린다.
 
 ### Figma
 1. 정식 COMPONENT_SET, 변형 이름은 `축=값`(소문자 시작 camelCase 값). 프로퍼티는 TEXT / BOOLEAN / INSTANCE_SWAP.
@@ -371,8 +409,10 @@ Divider 는 Figma 컴포넌트 없이 CSS 만 있다.
 ---
 
 ## 11. 미구현 / 남은 항목
-- Figma 컴포넌트 없음: Divider(CSS 만), Text Link · Code Input(CSS 전용)
-- 미구현 컴포넌트: Time Picker, Attachment Field, Side Panel, Pull To Refresh, Content Placeholder, Result Section, Scroll Fog, Menu Sheet, List / List Item, Aspect Ratio, Image Frame, Page Banner
+- Figma 컴포넌트 없음: Text Link · Code Input(CSS 전용)
+- 미구현 컴포넌트: Time Picker, Attachment Field(File Input), Side Panel/Drawer, Popover, Pull To Refresh, Result Section, Scroll Fog, Menu Sheet, Aspect Ratio, Image Frame, Avatar Group, Spinner·Status Dot, Number Input, Typeahead·Multi Select
+- AI·학습 서비스용 묶음(채팅 말풍선·입력창·Markdown·Code Block·출처 표시) — magic 시맨틱을 쓸 첫 컴포넌트 후보
+- 서비스별 brand 색 교체 층(`data-brand`) · motion 토큰의 Figma 변수화
 - Callout magic tone · pressed 변형(Figma), magic 시맨틱을 쓰는 컴포넌트 없음
 - 시맨틱 텍스트 스타일(화면 제목·본문·주석 등 역할 이름) 미구현
 
@@ -381,6 +421,7 @@ Divider 는 Figma 컴포넌트 없이 CSS 만 있다.
 ## 12. 변경 이력 (주요)
 | 날짜 | 내용 |
 |---|---|
+| 2026-10-22 | ds 를 단독 GitHub 저장소(ybm-ds) + Pages 로 분리, 가이드 사이트에서 DS 사본 제거(DS 주소 참조). 통합 동기화 `sync.mjs`·`동기화.bat`·`components.json`(Figma 노드 대조) 도입. `build.py` → `build.mjs`(출력 동일, Python 불필요). 컴포넌트 6종 추가(Divider·Tooltip·List·Breadcrumbs·Stepper·Banner — CSS·Figma 동시). 미리보기 `index.html` |
 | 2026-10-21 | 폴더 재구성(`ds/` 루트 = `ybm-ds/` + `tokens/`). 명칭 **YBM Family → YBM** 일괄 변경 — Figma 컬렉션 `YBM Family DS` → `YBM DS`, 코드·주석·생성물 전부 |
 | 2026-10-20 | 외부 레퍼런스 DS 관련 문구 전면 제거. figma-sync 파이프라인 도입 |
 | 2026-10-02 | components.css 전 컴포넌트를 Figma 변형별 실측과 재정합. 로컬 스타일은 텍스트만 허용 |

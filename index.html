@@ -1,0 +1,533 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>YBM DS 컴포넌트</title>
+<link rel="stylesheet" href="ybm-ds/ybm-ds.css">
+<script src="ybm-ds/ybm-ds.js" defer></script>
+<style>
+  /* 미리보기 페이지 전용 배치 — DS 레이어 밖 */
+  body { background: var(--ybm-color-bg-canvas); }
+  .pv-top { position: sticky; top: 0; z-index: var(--ybm-z-sticky); display: flex; flex-wrap: wrap; align-items: center; gap: var(--ybm-space-x3); padding: var(--ybm-space-x3) var(--ybm-space-x5); background: var(--ybm-color-bg-layer-default); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-weak); }
+  .pv-top h1 { margin-right: auto; font-size: var(--ybm-font-size-t06); line-height: var(--ybm-line-height-t06); font-weight: var(--ybm-font-weight-bold); }
+  .pv-wrap { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: var(--ybm-space-x8); max-width: 1280px; margin: 0 auto; padding: var(--ybm-space-x6) var(--ybm-space-x5) var(--ybm-space-x24); }
+  .pv-nav { position: sticky; top: 76px; align-self: start; max-height: calc(100vh - 96px); overflow-y: auto; font-size: var(--ybm-font-size-t03); line-height: var(--ybm-line-height-t03); }
+  .pv-nav a { display: block; padding: var(--ybm-space-x1) var(--ybm-space-x2); border-radius: var(--ybm-shape-xs); color: var(--ybm-color-fg-neutral-muted); text-decoration: none; }
+  .pv-nav a:hover { background: var(--ybm-color-bg-neutral-weak-alpha); color: var(--ybm-color-fg-neutral); }
+  .pv-nav b { color: var(--ybm-color-fg-neutral-subtle); font-weight: var(--ybm-font-weight-regular); font-variant-numeric: tabular-nums; margin-right: var(--ybm-space-x1); }
+  .pv-sec { scroll-margin-top: 84px; padding-block: var(--ybm-space-x8); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-subtle); }
+  .pv-sec > header { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--ybm-space-x2) var(--ybm-space-x3); margin-bottom: var(--ybm-space-x5); }
+  .pv-sec h2 { font-size: var(--ybm-font-size-t07); line-height: var(--ybm-line-height-t07); font-weight: var(--ybm-font-weight-bold); }
+  .pv-sec h2 small { margin-right: var(--ybm-space-x2); color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t05); font-weight: var(--ybm-font-weight-medium); }
+  .pv-meta { display: flex; flex-wrap: wrap; gap: var(--ybm-space-x2); color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t03); }
+  .pv-meta code { padding: 0 var(--ybm-space-x1); border-radius: var(--ybm-shape-2xs); background: var(--ybm-color-bg-neutral-muted); color: var(--ybm-color-fg-neutral-muted); font-family: ui-monospace, Consolas, monospace; font-size: 12px; }
+  .pv-stage { display: flex; flex-wrap: wrap; align-items: center; gap: var(--ybm-space-x3); padding: var(--ybm-space-x6); border-radius: var(--ybm-shape-lg); background: var(--ybm-color-bg-layer-default); box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-neutral-weak); }
+  .pv-stage + .pv-stage { margin-top: var(--ybm-space-x3); }
+  .pv-col { flex-direction: column; align-items: stretch; }
+  .pv-w { width: 100%; max-width: 360px; }
+  .pv-wide { width: 100%; }
+  @media (max-width: 860px) { .pv-wrap { grid-template-columns: 1fr; } .pv-nav { display: none; } }
+</style>
+</head>
+<body>
+
+<header class="pv-top">
+  <h1>YBM DS</h1>
+  <div class="ds-segmented" role="group" aria-label="모드" data-pv="theme">
+    <button type="button" class="ds-segmented__item" aria-pressed="true" value="">Light</button>
+    <button type="button" class="ds-segmented__item" aria-pressed="false" value="dark">Dark</button>
+  </div>
+  <div class="ds-segmented" role="group" aria-label="모양" data-pv="shape">
+    <button type="button" class="ds-segmented__item" aria-pressed="true" value="">기본</button>
+    <button type="button" class="ds-segmented__item" aria-pressed="false" value="soft">Soft</button>
+    <button type="button" class="ds-segmented__item" aria-pressed="false" value="sharp">Sharp</button>
+  </div>
+  <a class="ds-btn" data-variant="neutralOutline" data-size="small" href="https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/" target="_blank" rel="noopener">Figma</a>
+  <a class="ds-btn" data-variant="neutralOutline" data-size="small" href="https://github.com/luvms012-rgb/ybm-ds" target="_blank" rel="noopener">GitHub</a>
+</header>
+
+<div class="pv-wrap">
+<nav class="pv-nav" aria-label="컴포넌트" id="pv-nav"></nav>
+<main>
+
+<div class="ds-callout" data-tone="informative">
+  <i class="ds-icon ds-icon--info-solid" aria-hidden="true"></i>
+  <p class="ds-callout__content">서비스에서는 <code>&lt;link rel="stylesheet" href="https://luvms012-rgb.github.io/ybm-ds/ybm-ds/ybm-ds.css"&gt;</code> 한 줄로 불러와요. 이 페이지가 Figma 와 나란히 비교하는 기준 화면이에요.</p>
+</div>
+
+<section class="pv-sec" id="c-01" data-no="01"><header><h2><small>01</small>Action Button</h2></header>
+  <div class="pv-stage">
+    <button class="ds-btn" data-variant="brandSolid">brandSolid</button>
+    <button class="ds-btn" data-variant="neutralSolid">neutralSolid</button>
+    <button class="ds-btn" data-variant="neutralWeak">neutralWeak</button>
+    <button class="ds-btn" data-variant="criticalSolid">criticalSolid</button>
+    <button class="ds-btn" data-variant="brandOutline">brandOutline</button>
+    <button class="ds-btn" data-variant="neutralOutline">neutralOutline</button>
+    <button class="ds-btn" data-variant="ghost">ghost</button>
+    <button class="ds-btn" disabled>disabled</button>
+  </div>
+  <div class="pv-stage">
+    <button class="ds-btn" data-variant="neutralSolid" data-size="xsmall">xsmall</button>
+    <button class="ds-btn" data-variant="neutralSolid" data-size="small">small</button>
+    <button class="ds-btn" data-variant="neutralSolid" data-size="medium"><i class="ds-icon ds-icon--plus" aria-hidden="true"></i>medium</button>
+    <button class="ds-btn" data-variant="neutralSolid" data-size="large">large<i class="ds-icon ds-icon--arrow-right" aria-hidden="true"></i></button>
+    <button class="ds-btn" data-variant="neutralWeak" data-layout="iconOnly" aria-label="검색"><i class="ds-icon ds-icon--search" aria-hidden="true"></i></button>
+  </div>
+</section>
+
+<section class="pv-sec" id="c-02" data-no="02"><header><h2><small>02</small>Text Link</h2></header>
+  <div class="pv-stage"><a class="ds-link" href="#">아이디 찾기</a><a class="ds-link" href="#">비밀번호 재설정</a></div>
+</section>
+
+<section class="pv-sec" id="c-03" data-no="03"><header><h2><small>03</small>Field Label</h2></header>
+  <div class="pv-stage pv-col">
+    <div class="ds-field pv-w">
+      <div class="ds-field__header"><label class="ds-field__label" for="pv-name">이름<span class="ds-field__required" aria-hidden="true">*</span></label></div>
+      <div class="ds-input" data-variant="outline"><input class="ds-input__control" id="pv-name" placeholder="이름을 입력해 주세요"></div>
+      <div class="ds-field__footer"><p class="ds-field__help">실명으로 입력해 주세요</p></div>
+    </div>
+    <div class="ds-field pv-w">
+      <div class="ds-field__header"><label class="ds-field__label" for="pv-mail">이메일</label></div>
+      <div class="ds-input" data-variant="outline"><input class="ds-input__control" id="pv-mail" value="ybm@" aria-invalid="true"></div>
+      <div class="ds-field__footer"><p class="ds-field__error">이메일 형식이 올바르지 않아요</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="pv-sec" id="c-04" data-no="04"><header><h2><small>04</small>Text Field Input</h2></header>
+  <div class="pv-stage pv-col">
+    <div class="ds-input pv-w"><input class="ds-input__control" placeholder="underline · large"></div>
+    <div class="ds-input pv-w" data-variant="outline" data-size="medium"><i class="ds-icon ds-icon--search ds-input__icon" aria-hidden="true"></i><input class="ds-input__control" placeholder="outline · medium"></div>
+    <div class="ds-input pv-w" data-variant="outline"><input class="ds-input__control" value="비활성" disabled></div>
+  </div>
+</section>
+
+<section class="pv-sec" id="c-05" data-no="05"><header><h2><small>05</small>Text Field Textarea</h2></header>
+  <div class="pv-stage"><textarea class="ds-textarea pv-w" rows="3" placeholder="문의 내용을 입력해 주세요"></textarea></div>
+</section>
+
+<section class="pv-sec" id="c-06" data-no="06"><header><h2><small>06</small>Field Button</h2></header>
+  <div class="pv-stage pv-col">
+    <button type="button" class="ds-fieldbutton pv-w" data-size="large"><span class="ds-fieldbutton__value" data-placeholder="시험일을 선택해 주세요"></span><i class="ds-icon ds-icon--chevron-down" aria-hidden="true"></i></button>
+    <button type="button" class="ds-fieldbutton pv-w" data-size="medium"><span class="ds-fieldbutton__value">2026.10.25 (토)</span><i class="ds-icon ds-icon--calendar" aria-hidden="true"></i></button>
+  </div>
+</section>
+
+<section class="pv-sec" id="c-07" data-no="07"><header><h2><small>07</small>Prefix Select</h2></header>
+  <div class="pv-stage"><button type="button" class="ds-prefixselect">통신사</button><button type="button" class="ds-prefixselect" data-size="medium">+82</button></div>
+</section>
+
+<section class="pv-sec" id="c-08" data-no="08"><header><h2><small>08</small>Select Trigger</h2></header>
+  <div class="pv-stage pv-col">
+    <button type="button" class="ds-select pv-w" aria-haspopup="listbox" aria-expanded="false"><span class="ds-select__value" data-placeholder="지역을 선택해 주세요"></span></button>
+    <button type="button" class="ds-select pv-w" aria-haspopup="listbox" aria-expanded="true" data-size="medium"><span class="ds-select__value">서울특별시</span></button>
+  </div>
+</section>
+
+<section class="pv-sec" id="c-09" data-no="09"><header><h2><small>09</small>Select Content · Item</h2></header>
+  <div class="pv-stage">
+    <div class="ds-select-content pv-w" role="listbox">
+      <ul class="ds-select-list">
+        <li><button class="ds-select-item" role="option" aria-selected="true"><span class="ds-select-item__body"><span class="ds-select-item__label">서울특별시</span></span></button></li>
+        <li><button class="ds-select-item" role="option" aria-selected="false"><span class="ds-select-item__body"><span class="ds-select-item__label">부산광역시</span></span></button></li>
+        <li><button class="ds-select-item" role="option" aria-selected="false" disabled><span class="ds-select-item__body"><span class="ds-select-item__label">제주(접수 마감)</span></span></button></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="pv-sec" id="c-10" data-no="10"><header><h2><small>10</small>Checkbox</h2></header>
+  <div class="pv-stage">
+    <label class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control" checked><span class="ds-checkbox__label">brand</span></label>
+    <label class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control" checked><span class="ds-checkbox__label">neutral</span></label>
+    <label class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control" data-indeterminate><span class="ds-checkbox__label">일부 선택</span></label>
+    <label class="ds-checkbox" data-variant="ghost"><input type="checkbox" class="ds-checkbox__control" checked><span class="ds-checkbox__label">ghost</span></label>
+    <label class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control" disabled><span class="ds-checkbox__label">disabled</span></label>
+  </div>
+</section>
+
+<section class="pv-sec" id="c-11" data-no="11"><header><h2><small>11</small>Radio Group</h2></header>
+  <div class="pv-stage">
+    <div class="ds-radio-group" role="radiogroup" aria-label="수령 방법">
+      <label class="ds-radio"><input type="radio" class="ds-radio__control" name="pv-r" checked><span>온라인</span></label>
+      <label class="ds-radio"><input type="radio" class="ds-radio__control" name="pv-r"><span>방문 수령</span></label>
+      <label class="ds-radio"><input type="radio" class="ds-radio__control" name="pv-r" disabled><span>우편</span></label>
+    </div>
+  </div>
+</section>
+
+<section class="pv-sec" id="c-12" data-no="12"><header><h2><small>12</small>Switch</h2></header>
+  <div class="pv-stage">
+    <label class="ds-switch" data-size="16"><span class="ds-switch__label">16</span><input type="checkbox" role="switch" class="ds-switch__control" checked></label>
+    <label class="ds-switch"><span class="ds-switch__label">알림 받기</span><input type="checkbox" role="switch" class="ds-switch__control" checked></label>
+    <label class="ds-switch" data-size="32"><span class="ds-switch__label">32</span><input type="checkbox" role="switch" class="ds-switch__control"></label>
+  </div>
+</section>
+
+<section class="pv-sec" id="c-13" data-no="13"><header><h2><small>13</small>Quantity Picker</h2></header>
+  <div class="pv-stage">
+    <div class="ds-quantity"><button type="button" class="ds-quantity__btn" aria-label="수량 줄이기"><i class="ds-icon ds-icon--minus" aria-hidden="true"></i></button><input class="ds-quantity__value" inputmode="numeric" value="1" aria-label="수량"><button type="button" class="ds-quantity__btn" aria-label="수량 늘리기"><i class="ds-icon ds-icon--plus" aria-hidden="true"></i></button></div>
+  </div>
+</section>
+
+<section class="pv-sec" id="c-14" data-no="14"><header><h2><small>14</small>Code Input</h2></header>
+  <div class="pv-stage">
+    <div class="ds-code-input">
+      <input class="ds-code-input__control" inputmode="numeric" autocomplete="one-time-code" maxlength="6" aria-label="인증번호">
+      <span class="ds-code-input__cell" data-state="filled">3</span><span class="ds-code-input__cell" data-state="filled">8</span><span class="ds-code-input__cell" data-state="active"></span><span class="ds-code-input__cell"></span><span class="ds-code-input__cell"></span><span class="ds-code-input__cell"></span>
+    </div>
+  </div>
+</section>
+
+<section class="pv-sec" id="c-15" data-no="15"><header><h2><small>15</small>Chip</h2></header>
+  <div class="pv-stage">
+    <button type="button" class="ds-chip" aria-pressed="true">전체</button>
+    <button type="button" class="ds-chip" aria-pressed="false">토익</button>
+    <button type="button" class="ds-chip" data-variant="outlineStrong" aria-pressed="false">outlineStrong</button>
+    <button type="button" class="ds-chip" data-variant="outlineWeak" aria-pressed="false">@naver.com<i class="ds-icon ds-icon--chevron-down" aria-hidden="true"></i></button>
+    <button type="button" class="ds-chip" disabled>disabled</button>
+  </div>
+</section>
+
+<section class="pv-sec" id="c-16" data-no="16"><header><h2><small>16</small>Chip Tabs</h2></header>
+  <div class="pv-stage pv-col">
+    <div class="ds-chiptabs" role="tablist"><button class="ds-chiptabs__trigger" role="tab" aria-selected="true">전체</button><button class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-notification>공지</button><button class="ds-chiptabs__trigger" role="tab" aria-selected="false">이벤트</button></div>
+    <div class="ds-chiptabs" role="tablist" data-variant="neutralOutline"><button class="ds-chiptabs__trigger" role="tab" aria-selected="true">전체</button><button class="ds-chiptabs__trigger" role="tab" aria-selected="false">공지</button><button class="ds-chiptabs__trigger" role="tab" aria-selected="false">이벤트</button></div>
+  </div>
+</section>
+
+<section class="pv-sec" id="c-17" data-no="17"><header><h2><small>17</small>Tabs</h2></header>
+  <div class="pv-stage pv-col">
+    <div class="ds-tabs" role="tablist"><button class="ds-tabs__trigger" role="tab" aria-selected="true">접수 내역</button><button class="ds-tabs__trigger" role="tab" aria-selected="false">성적 조회</button><button class="ds-tabs__trigger" role="tab" aria-selected="false" disabled>환불</button></div>
+    <div class="ds-tabs" role="tablist" data-layout="hug" data-size="medium"><button class="ds-tabs__trigger" role="tab" aria-selected="true">hug</button><button class="ds-tabs__trigger" role="tab" aria-selected="false">medium</button></div>
+  </div>
+</section>
+
+<section class="pv-sec" id="c-18" data-no="18"><header><h2><small>18</small>Segmented Control</h2></header>
+  <div class="pv-stage"><div class="ds-segmented" role="group" aria-label="보기 방식"><button type="button" class="ds-segmented__item" aria-pressed="true">목록</button><button type="button" class="ds-segmented__item" aria-pressed="false">달력</button></div></div>
+</section>
+
+<section class="pv-sec" id="c-19" data-no="19"><header><h2><small>19</small>Toggle Button</h2></header>
+  <div class="pv-stage"><button type="button" class="ds-toggle" aria-pressed="true">마감 임박</button><button type="button" class="ds-toggle" aria-pressed="false">주말 시험</button><button type="button" class="ds-toggle" aria-pressed="false" data-size="medium">medium</button></div>
+</section>
+
+<section class="pv-sec" id="c-20" data-no="20"><header><h2><small>20</small>Badge</h2></header>
+  <div class="pv-stage">
+    <span class="ds-badge">neutral</span><span class="ds-badge" data-tone="brand">brand</span><span class="ds-badge" data-tone="informative">informative</span><span class="ds-badge" data-tone="positive">positive</span><span class="ds-badge" data-tone="warning">warning</span><span class="ds-badge" data-tone="critical">critical</span>
+  </div>
+  <div class="pv-stage">
+    <span class="ds-badge" data-variant="solid" data-tone="brand">NEW</span><span class="ds-badge" data-variant="solid" data-tone="critical">마감</span><span class="ds-badge" data-variant="outline">outline</span><span class="ds-badge" data-size="large"><span class="ds-badge__label">large</span></span>
+  </div>
+</section>
+
+<section class="pv-sec" id="c-21" data-no="21"><header><h2><small>21</small>Tag Group</h2></header>
+  <div class="pv-stage pv-col"><span class="ds-tag-group"><span>운영팀</span><span>2026.10.22</span><span>조회 128</span></span><span class="ds-tag-group" data-size="t4" data-tone="neutral"><span>t4</span><span>neutral</span></span></div>
+</section>
+
+<section class="pv-sec" id="c-22" data-no="22"><header><h2><small>22</small>Avatar</h2></header>
+  <div class="pv-stage"><span class="ds-avatar" data-size="24"></span><span class="ds-avatar" data-size="36"></span><span class="ds-avatar" data-size="48"><span class="ds-avatar__badge"></span></span><span class="ds-avatar" data-size="64"></span></div>
+</section>
+
+<section class="pv-sec" id="c-23" data-no="23"><header><h2><small>23</small>Callout</h2></header>
+  <div class="pv-stage pv-col">
+    <div class="ds-callout"><i class="ds-icon ds-icon--info-solid" aria-hidden="true"></i><p class="ds-callout__content"><strong class="ds-callout__title">안내</strong>  신분증을 꼭 지참해 주세요.</p></div>
+    <div class="ds-callout" data-tone="informative"><i class="ds-icon ds-icon--info-solid" aria-hidden="true"></i><p class="ds-callout__content">접수 기간은 10월 31일까지예요.  <a class="ds-callout__link" href="#">자세히</a></p></div>
+    <div class="ds-callout" data-tone="positive"><i class="ds-icon ds-icon--circle-check-solid" aria-hidden="true"></i><p class="ds-callout__content">결제가 완료됐어요.</p></div>
+    <div class="ds-callout" data-tone="warning"><i class="ds-icon ds-icon--triangle-alert-solid" aria-hidden="true"></i><p class="ds-callout__content">잔여 좌석이 얼마 남지 않았어요.</p><button class="ds-callout__suffix" aria-label="닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button></div>
+    <div class="ds-callout" data-tone="critical"><i class="ds-icon ds-icon--circle-alert-solid" aria-hidden="true"></i><p class="ds-callout__content">결제에 실패했어요. 다시 시도해 주세요.</p></div>
+  </div>
+</section>
+
+<section class="pv-sec" id="c-24" data-no="24"><header><h2><small>24</small>Snackbar</h2></header>
+  <div class="pv-stage">
+    <button class="ds-btn" data-variant="neutralWeak" onclick="YBM.snackbar('저장했어요', { variant: 'positive' })">positive 띄우기</button>
+    <button class="ds-btn" data-variant="neutralWeak" onclick="YBM.snackbar('네트워크 연결을 확인해 주세요', { variant: 'critical', action: '다시 시도' })">critical 띄우기</button>
+    <button class="ds-btn" data-variant="neutralWeak" onclick="YBM.snackbar('링크를 복사했어요')">default 띄우기</button>
+  </div>
+</section>
+
+<section class="pv-sec" id="c-25" data-no="25"><header><h2><small>25</small>Help Bubble</h2></header>
+  <div class="pv-stage">
+    <div class="ds-helpbubble" role="tooltip"><div class="ds-helpbubble__body"><strong class="ds-helpbubble__title">여기서 성적을 확인해요</strong><p class="ds-helpbubble__desc">발표일 오전 10시부터 볼 수 있어요.</p></div><button class="ds-helpbubble__close" aria-label="닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button></div>
+    <div class="ds-helpbubble" role="tooltip" data-placement="bottom-start"><div class="ds-helpbubble__body"><strong class="ds-helpbubble__title">bottom-start</strong></div></div>
+  </div>
+</section>
+
+<section class="pv-sec" id="c-26" data-no="26"><header><h2><small>26</small>Menu · Menu Item</h2></header>
+  <div class="pv-stage">
+    <div class="ds-menu" role="menu">
+      <button class="ds-menu-item" role="menuitem"><i class="ds-icon ds-icon--external-link" aria-hidden="true"></i>공유하기</button>
+      <button class="ds-menu-item" role="menuitem"><i class="ds-icon ds-icon--file-text" aria-hidden="true"></i>수정하기</button>
+      <div class="ds-menu__divider" role="separator"></div>
+      <button class="ds-menu-item" role="menuitem" data-tone="critical">삭제하기</button>
+    </div>
+  </div>
+</section>
+
+<section class="pv-sec" id="c-27" data-no="27"><header><h2><small>27</small>Dialog</h2></header>
+  <div class="pv-stage"><button class="ds-btn" data-variant="neutralWeak" data-ds-open="pv-dlg">Dialog 열기</button></div>
+  <dialog class="ds-dialog" id="pv-dlg" aria-labelledby="pv-dlg-t">
+    <div class="ds-dialog__header"><h2 class="ds-dialog__title" id="pv-dlg-t">시험 장소 안내</h2><p class="ds-dialog__desc">입실 시간을 꼭 지켜 주세요.</p><button class="ds-dialog__close" data-ds-close aria-label="닫기"></button></div>
+    <div class="ds-dialog__body">서울 종로구 YBM 시험센터 3층 · 오전 9시 20분까지 입실</div>
+    <div class="ds-dialog__footer"><button class="ds-btn" data-variant="neutralSolid" data-size="large" data-ds-close>확인</button></div>
+  </dialog>
+</section>
+
+<section class="pv-sec" id="c-28" data-no="28"><header><h2><small>28</small>Alert Dialog</h2></header>
+  <div class="pv-stage"><button class="ds-btn" data-variant="criticalSolid" data-ds-open="pv-alert">접수 취소</button></div>
+  <dialog class="ds-dialog ds-alertdialog" id="pv-alert" role="alertdialog" aria-labelledby="pv-a-t" aria-describedby="pv-a-d">
+    <div class="ds-alertdialog__header"><h2 id="pv-a-t" class="ds-alertdialog__title">접수를 취소할까요?</h2><p id="pv-a-d" class="ds-alertdialog__desc">취소하면 되돌릴 수 없어요.</p></div>
+    <div class="ds-alertdialog__footer" data-action="critical"><button class="ds-btn" data-variant="neutralWeak" data-ds-close>닫기</button><button class="ds-btn" data-variant="criticalSolid" data-ds-close>취소하기</button></div>
+  </dialog>
+</section>
+
+<section class="pv-sec" id="c-29" data-no="29"><header><h2><small>29</small>Bottom Sheet</h2></header>
+  <div class="pv-stage"><button class="ds-btn" data-variant="neutralWeak" data-ds-open="pv-bs">Bottom Sheet 열기</button></div>
+  <dialog class="ds-bottomsheet" id="pv-bs" aria-labelledby="pv-bs-t" data-handle>
+    <div class="ds-bottomsheet__header"><h2 class="ds-bottomsheet__title" id="pv-bs-t">정렬</h2><button class="ds-bottomsheet__close" data-ds-close aria-label="닫기"></button></div>
+    <div class="ds-bottomsheet__body"><div class="ds-radio-group" role="radiogroup"><label class="ds-radio"><input type="radio" class="ds-radio__control" name="pv-bsr" checked><span>최신순</span></label><label class="ds-radio"><input type="radio" class="ds-radio__control" name="pv-bsr"><span>인기순</span></label></div></div>
+    <div class="ds-bottomsheet__footer"><button class="ds-btn" data-variant="neutralSolid" data-size="large" data-ds-close>적용</button></div>
+  </dialog>
+</section>
+
+<section class="pv-sec" id="c-30" data-no="30"><header><h2><small>30</small>Accordion</h2></header>
+  <div class="pv-stage pv-col">
+    <details class="ds-accordion" open><summary class="ds-accordion__trigger"><span class="ds-accordion__body"><span class="ds-accordion__title">시험 당일 준비물은 무엇인가요?</span></span></summary><div class="ds-accordion__content">신분증과 수험표를 지참해 주세요.</div></details>
+    <details class="ds-accordion"><summary class="ds-accordion__trigger"><span class="ds-accordion__body"><span class="ds-accordion__title">환불은 언제까지 가능한가요?</span><span class="ds-accordion__desc">접수 · 환불</span></span></summary><div class="ds-accordion__content">시험일 4일 전까지 가능해요.</div></details>
+  </div>
+</section>
+
+<section class="pv-sec" id="c-31" data-no="31"><header><h2><small>31</small>Skeleton</h2></header>
+  <div class="pv-stage"><span class="ds-skeleton" data-shape="circle" style="--ds-skeleton-size:48px"></span><span class="ds-skeleton" style="width:220px;height:16px"></span><span class="ds-skeleton" data-shape="text" data-lines="3" style="width:240px"></span></div>
+</section>
+
+<section class="pv-sec" id="c-32" data-no="32"><header><h2><small>32</small>Slider</h2></header>
+  <div class="pv-stage pv-col"><input type="range" class="ds-slider pv-w" min="0" max="100" value="45" aria-label="neutral"><input type="range" class="ds-slider pv-w" min="0" max="100" value="70" data-tone="brand" aria-label="brand"></div>
+</section>
+
+<section class="pv-sec" id="c-33" data-no="33"><header><h2><small>33</small>Progress</h2></header>
+  <div class="pv-stage pv-col">
+    <div class="ds-progress pv-w" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" aria-label="진행률" style="--ds-progress-value: 40%"></div>
+    <div class="ds-progress pv-w" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" aria-label="진행률" style="--ds-progress-value: 75%" data-tone="neutral" data-size="small"></div>
+  </div>
+</section>
+
+<section class="pv-sec" id="c-34" data-no="34"><header><h2><small>34</small>Progress Circle</h2></header>
+  <div class="pv-stage">
+    <span class="ds-progress-circle" role="progressbar" aria-label="불러오는 중" data-type="indeterminate"><svg viewBox="0 0 40 40" aria-hidden="true"><circle class="ds-progress-circle__track" pathLength="100"/><circle class="ds-progress-circle__range" pathLength="100"/></svg></span>
+    <span class="ds-progress-circle" data-size="40" data-tone="brand" role="progressbar" aria-valuenow="40" aria-label="40%" style="--ds-progress-value: 40"><svg viewBox="0 0 40 40" aria-hidden="true"><circle class="ds-progress-circle__track" pathLength="100"/><circle class="ds-progress-circle__range" pathLength="100"/></svg></span>
+    <span class="ds-progress-circle" data-size="56" data-tone="brand" role="progressbar" aria-valuenow="75" aria-label="75%" style="--ds-progress-value: 75"><svg viewBox="0 0 40 40" aria-hidden="true"><circle class="ds-progress-circle__track" pathLength="100"/><circle class="ds-progress-circle__range" pathLength="100"/></svg></span>
+  </div>
+</section>
+
+<section class="pv-sec" id="c-35" data-no="35"><header><h2><small>35</small>Floating Action Button</h2></header>
+  <div class="pv-stage"><button class="ds-fab" style="position:static"><i class="ds-icon ds-icon--plus" aria-hidden="true"></i>글쓰기</button><button class="ds-fab" data-layout="iconOnly" aria-label="글쓰기" style="position:static"><i class="ds-icon ds-icon--plus" aria-hidden="true"></i></button></div>
+</section>
+
+<section class="pv-sec" id="c-36" data-no="36"><header><h2><small>36</small>Date Picker · Date Cell</h2></header>
+  <div class="pv-stage">
+    <div class="ds-datepicker">
+      <div class="ds-datepicker__header"><button class="ds-datepicker__nav" aria-label="이전 달"><i class="ds-icon ds-icon--chevron-left ds-icon--lg" aria-hidden="true"></i></button><strong class="ds-datepicker__title">2026년 10월</strong><button class="ds-datepicker__nav" aria-label="다음 달"><i class="ds-icon ds-icon--chevron-right ds-icon--lg" aria-hidden="true"></i></button></div>
+      <div class="ds-datepicker__weekdays"><span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span></div>
+      <div class="ds-datepicker__grid" role="grid" id="pv-cal"></div>
+    </div>
+  </div>
+</section>
+
+<section class="pv-sec" id="c-37" data-no="37"><header><h2><small>37</small>Bottom Navigation</h2></header>
+  <div class="pv-stage">
+    <nav class="ds-bottomnav pv-w" aria-label="주요 메뉴" style="position:static">
+      <a class="ds-bottomnav__item" href="#" aria-current="page"><span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--house-solid ds-icon--lg" aria-hidden="true"></i></span><span class="ds-bottomnav__label">홈</span></a>
+      <a class="ds-bottomnav__item" href="#"><span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--calendar ds-icon--lg" aria-hidden="true"></i><span class="ds-bottomnav__badge--dot"></span></span><span class="ds-bottomnav__label">일정</span></a>
+      <a class="ds-bottomnav__item" href="#"><span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--file-text ds-icon--lg" aria-hidden="true"></i></span><span class="ds-bottomnav__label">성적</span></a>
+      <a class="ds-bottomnav__item" href="#"><span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--menu ds-icon--lg" aria-hidden="true"></i></span><span class="ds-bottomnav__label">전체</span></a>
+    </nav>
+  </div>
+</section>
+
+<section class="pv-sec" id="c-38" data-no="38"><header><h2><small>38</small>Side Navigation</h2></header>
+  <div class="pv-stage" style="align-items:stretch;height:360px">
+    <nav class="ds-sidenav" aria-label="메뉴">
+      <div class="ds-sidenav__header"><button class="ds-sidenav__trigger" aria-label="메뉴 접기" onclick="this.closest('.ds-sidenav').toggleAttribute('data-collapsed')"><i class="ds-icon ds-icon--panel-left" aria-hidden="true"></i></button></div>
+      <div class="ds-sidenav__content"><div class="ds-sidenav__group">
+        <div class="ds-sidenav__group-label">시험</div>
+        <a class="ds-sidenav__item" href="#" aria-current="page"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--house-solid" aria-hidden="true"></i></span><span class="ds-sidenav__label">홈</span></a>
+        <a class="ds-sidenav__item" href="#"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--calendar" aria-hidden="true"></i></span><span class="ds-sidenav__label">접수 일정</span></a>
+        <a class="ds-sidenav__item" href="#"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--file-text" aria-hidden="true"></i></span><span class="ds-sidenav__label">성적 조회</span><i class="ds-icon ds-icon--chevron-down ds-icon--sm ds-sidenav__suffix" aria-hidden="true"></i></a>
+      </div></div>
+    </nav>
+  </div>
+</section>
+
+<section class="pv-sec" id="c-39" data-no="39"><header><h2><small>39</small>Card</h2></header>
+  <div class="pv-stage" style="align-items:flex-start">
+    <article class="ds-card pv-w"><header class="ds-card__header"><h3 class="ds-card__title">TOEIC 정기시험</h3><p class="ds-card__desc">2026.11.08 (일) · 서울</p></header><div class="ds-card__content">접수 마감까지 3일 남았어요.</div><footer class="ds-card__footer"><button class="ds-btn" data-variant="neutralWeak" data-width="fill">자세히 보기</button></footer></article>
+    <article class="ds-card pv-w" data-variant="elevated" data-size="small"><header class="ds-card__header"><h3 class="ds-card__title">elevated · small</h3><p class="ds-card__desc">elevation raised</p></header></article>
+  </div>
+</section>
+
+<section class="pv-sec" id="c-40" data-no="40"><header><h2><small>40</small>Empty</h2></header>
+  <div class="pv-stage" style="justify-content:center">
+    <div class="ds-empty"><span class="ds-empty__media"><i class="ds-icon ds-icon--inbox" aria-hidden="true"></i></span><p class="ds-empty__title">아직 접수 내역이 없어요</p><p class="ds-empty__desc">원하는 시험을 찾아 접수해 보세요.</p><div class="ds-empty__actions"><button class="ds-btn" data-variant="neutralWeak">시험 일정 보기</button></div></div>
+  </div>
+</section>
+
+<section class="pv-sec" id="c-41" data-no="41"><header><h2><small>41</small>Pagination</h2></header>
+  <div class="pv-stage pv-col">
+    <nav class="ds-pagination" aria-label="페이지"><a class="ds-pagination__item" data-type="first" aria-label="첫 페이지" aria-disabled="true"></a><a class="ds-pagination__item" data-type="prev" aria-label="이전 페이지" aria-disabled="true"></a><a class="ds-pagination__item" href="#" aria-current="page">1</a><a class="ds-pagination__item" href="#">2</a><a class="ds-pagination__item" href="#">3</a><span class="ds-pagination__item" data-type="ellipsis" aria-hidden="true"></span><a class="ds-pagination__item" href="#">10</a><a class="ds-pagination__item" data-type="next" href="#" aria-label="다음 페이지"></a><a class="ds-pagination__item" data-type="last" href="#" aria-label="마지막 페이지"></a></nav>
+    <nav class="ds-pagination" data-type="simple" aria-label="페이지"><a class="ds-pagination__item" data-type="prev" href="#" aria-label="이전 페이지"></a><span class="ds-pagination__indicator"><b>3</b> / 10</span><a class="ds-pagination__item" data-type="next" href="#" aria-label="다음 페이지"></a></nav>
+  </div>
+</section>
+
+<section class="pv-sec" id="c-42" data-no="42"><header><h2><small>42</small>Table</h2></header>
+  <div class="pv-stage">
+    <div class="ds-table-wrap">
+      <table class="ds-table">
+        <thead><tr><th scope="col" data-align="center" style="width:72px">번호</th><th scope="col">제목</th><th scope="col" data-align="center" style="width:120px">등록일</th></tr></thead>
+        <tbody>
+          <tr data-interactive><td data-align="center">12</td><td>11월 정기시험 고사장 안내</td><td data-align="center">2026.10.22</td></tr>
+          <tr data-interactive aria-selected="true"><td data-align="center">11</td><td>추가 접수 일정 공지</td><td data-align="center">2026.10.18</td></tr>
+          <tr data-interactive><td data-align="center">10</td><td>성적표 발급 방법 변경 안내</td><td data-align="center">2026.10.10</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="pv-sec" id="c-43" data-no="43"><header><h2><small>43</small>Divider</h2></header>
+  <div class="pv-stage pv-col">
+    <hr class="ds-divider">
+    <hr class="ds-divider" data-weight="thick">
+    <div class="ds-divider" role="separator" data-label><span>또는</span></div>
+    <div class="u-flex" style="align-items:center;gap:var(--ybm-space-x2);color:var(--ybm-color-fg-neutral-subtle);font-size:var(--ybm-font-size-t03)"><span>이용약관</span><span class="ds-divider" role="separator" aria-orientation="vertical" data-orientation="vertical" style="--ds-divider-length:12px"></span><span>개인정보처리방침</span></div>
+  </div>
+</section>
+
+<section class="pv-sec" id="c-44" data-no="44"><header><h2><small>44</small>Tooltip</h2></header>
+  <div class="pv-stage" style="padding-block:var(--ybm-space-x12)">
+    <span class="ds-tooltip-anchor"><button class="ds-btn" data-variant="neutralWeak" data-layout="iconOnly" aria-label="링크 복사" aria-describedby="pv-tip1"><i class="ds-icon ds-icon--external-link" aria-hidden="true"></i></button><span class="ds-tooltip" role="tooltip" id="pv-tip1">링크 복사</span></span>
+    <span class="ds-tooltip-anchor"><button class="ds-btn" data-variant="neutralWeak" aria-describedby="pv-tip2">bottom</button><span class="ds-tooltip" role="tooltip" id="pv-tip2" data-placement="bottom">아래에 표시</span></span>
+    <span class="ds-tooltip-anchor"><button class="ds-btn" data-variant="neutralWeak" aria-describedby="pv-tip3">항상 표시</button><span class="ds-tooltip" role="tooltip" id="pv-tip3" data-placement="right" data-state="open">data-state="open"</span></span>
+  </div>
+</section>
+
+<section class="pv-sec" id="c-45" data-no="45"><header><h2><small>45</small>List · List Item</h2></header>
+  <div class="pv-stage" style="align-items:flex-start">
+    <ul class="ds-list pv-w" data-variant="inset" data-divider>
+      <li><a class="ds-list-item" href="#"><span class="ds-list-item__prefix"><i class="ds-icon ds-icon--id-card" aria-hidden="true"></i></span><span class="ds-list-item__content"><span class="ds-list-item__title">내 정보</span><span class="ds-list-item__desc">이름 · 연락처 · 이메일</span></span><i class="ds-icon ds-icon--chevron-right ds-list-item__chevron" aria-hidden="true"></i></a></li>
+      <li><a class="ds-list-item" href="#"><span class="ds-list-item__prefix"><i class="ds-icon ds-icon--credit-card" aria-hidden="true"></i></span><span class="ds-list-item__content"><span class="ds-list-item__title">결제 수단</span></span><span class="ds-list-item__suffix">카드 2개</span><i class="ds-icon ds-icon--chevron-right ds-list-item__chevron" aria-hidden="true"></i></a></li>
+      <li><label class="ds-list-item"><span class="ds-list-item__prefix"><i class="ds-icon ds-icon--message-circle" aria-hidden="true"></i></span><span class="ds-list-item__content"><span class="ds-list-item__title">알림 받기</span></span><span class="ds-list-item__suffix"><span class="ds-switch"><input type="checkbox" role="switch" class="ds-switch__control" checked aria-label="알림 받기"></span></span></label></li>
+      <li><a class="ds-list-item" href="#" aria-disabled="true"><span class="ds-list-item__prefix"><i class="ds-icon ds-icon--globe" aria-hidden="true"></i></span><span class="ds-list-item__content"><span class="ds-list-item__title">언어 설정</span><span class="ds-list-item__desc">준비 중</span></span></a></li>
+    </ul>
+    <ul class="ds-list pv-w">
+      <li><a class="ds-list-item" href="#" data-size="small"><span class="ds-list-item__content"><span class="ds-list-item__title">공지사항</span></span><i class="ds-icon ds-icon--chevron-right ds-list-item__chevron" aria-hidden="true"></i></a></li>
+      <li><a class="ds-list-item" href="#" data-size="small"><span class="ds-list-item__content"><span class="ds-list-item__title">자주 묻는 질문</span></span><span class="ds-list-item__suffix"><span class="ds-badge" data-tone="brand">NEW</span></span><i class="ds-icon ds-icon--chevron-right ds-list-item__chevron" aria-hidden="true"></i></a></li>
+      <li><a class="ds-list-item" href="#" data-size="small"><span class="ds-list-item__content"><span class="ds-list-item__title">1:1 문의</span></span><i class="ds-icon ds-icon--chevron-right ds-list-item__chevron" aria-hidden="true"></i></a></li>
+    </ul>
+  </div>
+</section>
+
+<section class="pv-sec" id="c-46" data-no="46"><header><h2><small>46</small>Breadcrumbs</h2></header>
+  <div class="pv-stage">
+    <nav class="ds-breadcrumbs" aria-label="현재 위치"><ol><li><a href="#">홈</a></li><li><a href="#">고객센터</a></li><li><span aria-current="page">공지사항</span></li></ol></nav>
+  </div>
+</section>
+
+<section class="pv-sec" id="c-47" data-no="47"><header><h2><small>47</small>Stepper</h2></header>
+  <div class="pv-stage pv-col">
+    <ol class="ds-stepper pv-wide" aria-label="가입 단계" style="max-width:560px">
+      <li class="ds-stepper__step" data-state="complete"><span class="ds-stepper__indicator"></span><span class="ds-stepper__label">약관 동의</span></li>
+      <li class="ds-stepper__step" data-state="current" aria-current="step"><span class="ds-stepper__indicator"></span><span class="ds-stepper__label">본인 인증</span></li>
+      <li class="ds-stepper__step"><span class="ds-stepper__indicator"></span><span class="ds-stepper__label">정보 입력</span></li>
+      <li class="ds-stepper__step"><span class="ds-stepper__indicator"></span><span class="ds-stepper__label">가입 완료</span></li>
+    </ol>
+    <ol class="ds-stepper" aria-label="신청 단계" data-orientation="vertical" style="margin-top:var(--ybm-space-x6)">
+      <li class="ds-stepper__step" data-state="complete"><span class="ds-stepper__indicator"></span><span class="ds-stepper__label">시험 선택</span></li>
+      <li class="ds-stepper__step" data-state="current" aria-current="step"><span class="ds-stepper__indicator"></span><span class="ds-stepper__label">고사장 선택</span></li>
+      <li class="ds-stepper__step"><span class="ds-stepper__indicator"></span><span class="ds-stepper__label">결제</span></li>
+    </ol>
+  </div>
+</section>
+
+<section class="pv-sec" id="c-48" data-no="48"><header><h2><small>48</small>Banner</h2></header>
+  <div class="pv-stage pv-col" style="padding:0;gap:0;overflow:hidden">
+    <div class="ds-banner" role="status"><div class="ds-banner__inner"><i class="ds-icon ds-icon--info-solid" aria-hidden="true"></i><p class="ds-banner__message"><strong class="ds-banner__title">안내</strong>  개인정보처리방침이 11월 1일부터 바뀌어요.</p><a class="ds-banner__action" href="#">자세히</a><button type="button" class="ds-banner__close" aria-label="공지 닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button></div></div>
+    <div class="ds-banner" role="status" data-tone="informative"><div class="ds-banner__inner"><i class="ds-icon ds-icon--info-solid" aria-hidden="true"></i><p class="ds-banner__message">11월 정기시험 추가 접수가 시작됐어요.</p><a class="ds-banner__action" href="#">접수하기</a></div></div>
+    <div class="ds-banner" role="status" data-tone="warning"><div class="ds-banner__inner"><i class="ds-icon ds-icon--triangle-alert-solid" aria-hidden="true"></i><p class="ds-banner__message"><strong class="ds-banner__title">점검 안내</strong>  10월 25일(토) 02:00~06:00 서비스를 점검해요.</p></div></div>
+    <div class="ds-banner" role="alert" data-tone="critical"><div class="ds-banner__inner"><i class="ds-icon ds-icon--circle-alert-solid" aria-hidden="true"></i><p class="ds-banner__message">일부 결제 수단에 장애가 있어요. 복구 중이에요.</p></div></div>
+    <div class="ds-banner" role="status" data-variant="solid" data-tone="informative"><div class="ds-banner__inner"><i class="ds-icon ds-icon--info-solid" aria-hidden="true"></i><p class="ds-banner__message">solid · informative</p><button type="button" class="ds-banner__close" aria-label="공지 닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button></div></div>
+    <div class="ds-banner" role="status" data-variant="solid"><div class="ds-banner__inner"><i class="ds-icon ds-icon--info-solid" aria-hidden="true"></i><p class="ds-banner__message">solid · neutral</p></div></div>
+  </div>
+</section>
+
+</main>
+</div>
+
+<script>
+  // 미리보기 전용 — 테마 전환 · 목차 · 달력 칸 · components.json 의 클래스/Figma 링크 표시
+  (function () {
+    var root = document.documentElement;
+    try { var saved = JSON.parse(localStorage.getItem('pv') || '{}'); } catch (e) { saved = {}; }
+    function apply(kind, value) {
+      var attr = kind === 'theme' ? 'data-theme' : 'data-shape';
+      if (value) root.setAttribute(attr, value); else root.removeAttribute(attr);
+      document.querySelectorAll('[data-pv="' + kind + '"] .ds-segmented__item').forEach(function (b) { b.setAttribute('aria-pressed', String(b.value === value)); });
+      saved[kind] = value;
+      try { localStorage.setItem('pv', JSON.stringify(saved)); } catch (e) {}
+    }
+    document.querySelectorAll('[data-pv]').forEach(function (g) {
+      g.addEventListener('click', function (e) { var b = e.target.closest('.ds-segmented__item'); if (b) apply(g.getAttribute('data-pv'), b.value); });
+    });
+    var qs = new URLSearchParams(location.search);
+    if (qs.has('theme')) saved.theme = qs.get('theme');
+    if (qs.has('shape')) saved.shape = qs.get('shape');
+    if (saved.theme) apply('theme', saved.theme);
+    if (saved.shape) apply('shape', saved.shape);
+
+    // ?only=43-48 또는 ?only=01,23 → 그 컴포넌트만 보기
+    var only = new URLSearchParams(location.search).get('only');
+    if (only) {
+      var keep = {};
+      only.split(',').forEach(function (p) { var r = p.split('-'); for (var n = +r[0]; n <= +(r[1] || r[0]); n++) keep[String(n).padStart(2, '0')] = 1; });
+      document.querySelectorAll('.pv-sec').forEach(function (s) { if (!keep[s.dataset.no]) s.remove(); });
+      document.querySelector('main > .ds-callout').remove();
+    }
+
+    var nav = document.getElementById('pv-nav');
+    document.querySelectorAll('.pv-sec').forEach(function (s) {
+      var a = document.createElement('a');
+      a.href = '#' + s.id;
+      a.innerHTML = '<b>' + s.dataset.no + '</b>' + s.querySelector('h2').lastChild.textContent;
+      nav.appendChild(a);
+    });
+
+    var cal = document.getElementById('pv-cal');
+    for (var i = 0; cal && i < 35; i++) {
+      var d = i - 3, b = document.createElement('button');
+      b.className = 'ds-date-cell';
+      b.textContent = d >= 1 && d <= 31 ? d : (d < 1 ? 30 + d : d - 31);
+      if (d < 1 || d > 31) b.disabled = true;
+      if (d === 22) b.setAttribute('data-state', 'today');
+      if (d === 25) b.setAttribute('data-state', 'range-start');
+      if (d === 26 || d === 27) b.setAttribute('data-state', 'range-middle');
+      if (d === 28) b.setAttribute('data-state', 'range-end');
+      cal.appendChild(b);
+    }
+
+    fetch('components.json').then(function (r) { return r.json(); }).then(function (j) {
+      j.components.forEach(function (c) {
+        var sec = document.getElementById('c-' + c.no); if (!sec) return;
+        var meta = document.createElement('div'); meta.className = 'pv-meta';
+        meta.innerHTML = c.classes.map(function (x) { return '<code>' + x + '</code>'; }).join('')
+          + (c.figma.length ? c.figma.map(function (f) {
+              return '<a class="ds-link" target="_blank" rel="noopener" href="https://www.figma.com/design/' + j.figmaFile + '/?node-id=' + f.id.replace(':', '-') + '">Figma' + (f.part ? ' · ' + f.part : '') + '</a>';
+            }).join('') : '<span>Figma 없음 (CSS 전용)</span>');
+        sec.querySelector('header').appendChild(meta);
+      });
+    }).catch(function () {});
+  })();
+</script>
+</body>
+</html>

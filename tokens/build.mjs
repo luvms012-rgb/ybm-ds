@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// YBM DS — 토큰 빌드 스크립트 (build.py 의 Node 판, 출력이 바이트 단위로 같다)
+// YBM DS — 토큰 빌드 스크립트 (2026-10-22 build.py 를 Node 로 옮김 — 같은 입력이면 같은 출력)
 // 입력: tokens/figma-variables.json (Figma 변수 전집 스냅샷 = source of truth)
 // 출력: ybm-ds/tokens.css · tokens/design-tokens.json · tokens/tokens.js · tokens/tailwind.preset.js
 //
@@ -321,7 +321,7 @@ export function build(date, sourcePath = path.join(HERE, 'tokens', 'figma-variab
     const d = M([
       ['$meta', M([['name', 'YBM Design System'], ['generated', date],
         ['source', 'Figma 1VCEsFU3xMWuXIntIrZz9i / YBM DS + Typography + Shape + Elevation'],
-        ['note', 'build.py 가 생성한다. 직접 수정하지 말 것.']])],
+        ['note', 'tokens/build.mjs 가 생성한다. 직접 수정하지 말 것.']])],
       ['color', color], ['dimension', dimension],
       ['radius', M(RADIUS.map(([n, v]) => [n, `${int(v)}px`]))], ['shape', shape],
       ['typography', M([['fontFamily', FONT_STACK], ['fontWeight', M(WEIGHTS)], ['scale', scale(TYPE)],
