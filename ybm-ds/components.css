@@ -195,7 +195,9 @@
 }
 .ds-field__header > .ds-field__label { display: inline-flex; align-items: center; }
 .ds-field__indicator { margin-inline-start: calc(4px - var(--ybm-space-x2_5)); color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); }
-.ds-field__required { align-self: flex-start; width: 4px; height: 4px; margin-top: 4px; margin-inline-start: calc(4px - var(--ybm-space-x2_5)); border-radius: var(--ybm-shape-pill); background: var(--ybm-color-fg-critical); }
+.ds-field__required { align-self: flex-start; width: 4px; height: 4px; margin-top: 4px; margin-inline-start: calc(4px - var(--ybm-space-x2_5)); border-radius: var(--ybm-shape-pill); background: var(--ybm-color-fg-critical); font-size: 0; overflow: hidden; }
+/* label 안에 넣은 경우에도 글자와 겹치지 않게 */
+.ds-field__label > .ds-field__required { margin-inline-start: 4px; }
 .ds-field__footer { display: flex; gap: var(--ybm-space-x2); padding-inline: var(--ybm-space-x0_5); }
 .ds-field__footer > :is(.ds-field__help, .ds-field__error) { flex: 1 1 auto; }
 .ds-field__help, .ds-field__error, .ds-field__count { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); }
@@ -1361,8 +1363,15 @@ button.ds-input__prefix:hover { color: var(--ybm-color-fg-neutral); }
   user-select: none;
 }
 .ds-avatar::after { content: ""; position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-neutral-subtle); pointer-events: none; }
+/* 이미지·이니셜이 없으면 기본 실루엣 */
+.ds-avatar:is(:empty, :has(> .ds-avatar__badge:only-child))::before {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; background: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='9.5' r='4.5'/%3E%3Cpath d='M2.5 25c0-5.2 4.3-9 9.5-9s9.5 3.8 9.5 9z'/%3E%3C/svg%3E") center / 100% no-repeat;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='9.5' r='4.5'/%3E%3Cpath d='M2.5 25c0-5.2 4.3-9 9.5-9s9.5 3.8 9.5 9z'/%3E%3C/svg%3E") center / 100% no-repeat;
+}
 .ds-avatar img { width: 100%; height: 100%; border-radius: inherit; object-fit: cover; }
-.ds-avatar__badge { position: absolute; right: 0; bottom: 0; width: var(--ds-avatar-badge); height: var(--ds-avatar-badge); border-radius: var(--ybm-shape-pill); background: var(--ybm-color-bg-layer-default); overflow: hidden; }
+/* badge 는 아바타 테두리(::after) 위에 */
+.ds-avatar__badge { position: absolute; z-index: 1; right: 0; bottom: 0; box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-neutral-subtle); width: var(--ds-avatar-badge); height: var(--ds-avatar-badge); border-radius: var(--ybm-shape-pill); background: var(--ybm-color-bg-layer-default); overflow: hidden; }
 .ds-avatar__badge > img { width: 100%; height: 100%; object-fit: cover; }
 .ds-avatar[data-size="20"]  { --ds-avatar-size: 20px; }
 .ds-avatar[data-size="24"]  { --ds-avatar-size: 24px;  --ds-avatar-badge: 10px; }
