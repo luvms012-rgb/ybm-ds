@@ -267,7 +267,6 @@ CSS 는 Figma 프로퍼티 이름을 그대로 `data-*` 속성으로 쓴다: `<b
 | 11 | Radio Group | `.ds-radio-group` `.ds-radio` | `1224:2164` · 16 | tone · size |
 | 12 | Switch | `.ds-switch` | `93:1271` · 24 | size `16·24·32` · tone |
 | 13 | Quantity Picker | `.ds-quantity` | `1184:2146` · 18 | size · layout `fill` |
-| 14 | Code Input | `.ds-code-input` | — (CSS 전용) | 인증번호 6칸 |
 | 15 | Chip | `.ds-chip` `.ds-chip-group` | `69:964` · 54 | variant `solid·outlineStrong·outlineWeak` · size · layout `iconOnly` |
 | 16 | Chip Tabs | `.ds-chiptabs` (`__trigger`) | `1407:2596` · 4 / Trigger `1407:2522` · 16 | variant `neutralSolid·neutralOutline` · size `medium·large` |
 | 17 | Tabs | `.ds-tabs` (`__trigger`) | `95:1313` · 4 / Tab Trigger `95:1272` · 12 | layout `fill·hug` · size |
@@ -275,7 +274,7 @@ CSS 는 Figma 프로퍼티 이름을 그대로 `data-*` 속성으로 쓴다: `<b
 | 19 | Toggle Button | `.ds-toggle` | `1244:2164` · 6 | size |
 | 20 | Badge | `.ds-badge` | `17:87` · 36 | variant `weak·solid·outline` · tone `neutral·brand·informative·positive·warning·critical` · size |
 | 21 | Tag Group | `.ds-tag-group` | `1240:2176` · 4 | 작성자 · 날짜 · 조회수 |
-| 22 | Avatar | `.ds-avatar` | `40:614` · 30 | size `20·24·36·42·48·56·64·80·96·108` |
+| 22 | Avatar | `.ds-avatar` (`__initials` `__status` `__badge`) `.ds-avatar-group` (`__overflow`) | `40:614` · 50 / Status `2357:1206` · 3 / Group `2359:1781` · 21 / Group Overflow `2359:1213` · 7 | size `20·24·36·42·48·56·64·80·96·108` · shape `circle·rounded·square` · status tone `positive·neutral·critical` · group size `20~64` × shape · `+N` |
 | 23 | Callout | `.ds-callout` | `1241:2177` · 5 | tone `neutral·informative·positive·warning·critical` (magic 은 CSS 만) |
 | 24 | Snackbar | `.ds-snackbar` | `92:1107` · 3 | variant `default·positive·critical` |
 | 25 | Help Bubble | `.ds-helpbubble` | `75:1233` · 12 | `--ds-hb-arrow-offset` |
@@ -409,8 +408,8 @@ CSS 는 Figma 프로퍼티 이름을 그대로 `data-*` 속성으로 쓴다: `<b
 ---
 
 ## 11. 미구현 / 남은 항목
-- Figma 컴포넌트 없음: Text Link · Code Input(CSS 전용)
-- 미구현 컴포넌트: Time Picker, Attachment Field(File Input), Side Panel/Drawer, Popover, Pull To Refresh, Result Section, Scroll Fog, Menu Sheet, Aspect Ratio, Image Frame, Avatar Group, Spinner·Status Dot, Number Input, Typeahead·Multi Select
+- Figma 컴포넌트 없음: Text Link
+- 미구현 컴포넌트: Time Picker, Attachment Field(File Input), Side Panel/Drawer, Popover, Pull To Refresh, Result Section, Scroll Fog, Menu Sheet, Aspect Ratio, Image Frame, Spinner·Status Dot, Number Input, Typeahead·Multi Select
 - AI·학습 서비스용 묶음(채팅 말풍선·입력창·Markdown·Code Block·출처 표시) — magic 시맨틱을 쓸 첫 컴포넌트 후보
 - 서비스별 brand 색 교체 층(`data-brand`) · motion 토큰의 Figma 변수화
 - Callout magic tone · pressed 변형(Figma), magic 시맨틱을 쓰는 컴포넌트 없음

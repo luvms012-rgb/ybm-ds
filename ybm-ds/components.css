@@ -30,7 +30,6 @@
      11 Radio Group          .ds-radio
      12 Switch               .ds-switch
      13 Quantity Picker      .ds-quantity
-     14 Code Input           .ds-code-input      (CSS 전용)
      15 Chip                 .ds-chip
      16 Chip Tabs            .ds-chiptabs
      17 Tabs                 .ds-tabs
@@ -38,7 +37,7 @@
      19 Toggle Button        .ds-toggle
      20 Badge                .ds-badge
      21 Tag Group            .ds-tag-group
-     22 Avatar               .ds-avatar
+     22 Avatar               .ds-avatar · .ds-avatar-group
      23 Callout              .ds-callout
      24 Snackbar             .ds-snackbar
      25 Help Bubble          .ds-helpbubble
@@ -939,51 +938,6 @@ button.ds-input__prefix:hover { color: var(--ybm-color-fg-neutral); }
 
 
 /* --------------------------------------------------------------------------
-   14 Code Input — 인증번호 6칸 (Figma 컴포넌트 없음 · CSS 전용)
-   실제 입력은 투명한 <input> 하나가 받고, 칸(__cell)은 보여주기만 한다 → 붙여넣기·자동완성 그대로 동작
-     <div class="ds-code-input">
-       <input class="ds-code-input__control" inputmode="numeric" autocomplete="one-time-code" maxlength="6">
-       <span class="ds-code-input__cell"></span> ×6
-     </div>
-   셀 state(data-state): empty · focused · filled · invalid(컨테이너 aria-invalid) · disabled
-   -------------------------------------------------------------------------- */
-.ds-code-input { position: relative; display: flex; justify-content: center; gap: var(--ybm-space-x1_5); }
-.ds-code-input__control {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  opacity: 0;
-  color: transparent;
-  caret-color: transparent;
-  border: 0;
-  font-size: 16px;
-  cursor: text;
-}
-.ds-code-input__cell {
-  display: grid;
-  place-items: center;
-  flex: 0 1 55px;
-  min-width: 0;
-  height: 56px;
-  border-radius: var(--ybm-shape-md);
-  background: var(--ybm-color-bg-layer-default);
-  box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-neutral-weak);
-  color: var(--ybm-color-fg-brand);
-  font-size: var(--ybm-font-size-t08);
-  line-height: var(--ybm-line-height-t08);
-  font-weight: var(--ybm-font-weight-semibold);
-  font-variant-numeric: tabular-nums;
-  pointer-events: none;
-  transition: background-color var(--ybm-duration-fast) var(--ybm-easing-standard), box-shadow var(--ybm-duration-fast) var(--ybm-easing-standard);
-}
-.ds-code-input__cell[data-state="focused"] { box-shadow: inset 0 0 0 2px var(--ybm-color-stroke-focus-ring); }
-.ds-code-input__cell[data-state="filled"]  { background: var(--ybm-color-bg-brand-weak); box-shadow: none; }
-.ds-code-input[aria-invalid="true"] .ds-code-input__cell[data-state="filled"] { background: var(--ybm-color-bg-critical-weak); color: var(--ybm-color-fg-critical); }
-.ds-code-input:has(:disabled) .ds-code-input__cell { background: var(--ybm-color-bg-disabled); color: var(--ybm-color-fg-disabled); box-shadow: none; }
-.ds-code-input__control:focus-visible { outline: none; }
-
-
-/* --------------------------------------------------------------------------
    15 Chip — 선택·필터용 칩
    variant: solid(기본) · outlineStrong · outlineWeak   size: medium(기본 36) · small 32 · large 40
    layout : 기본 withText / data-layout="iconOnly"      state: aria-pressed="true"(checked) · disabled
@@ -1338,41 +1292,67 @@ button.ds-input__prefix:hover { color: var(--ybm-color-fg-neutral); }
 
 
 /* --------------------------------------------------------------------------
-   22 Avatar — 원형 프로필
-   size: 20 · 24 · 36(기본) · 42 · 48 · 56 · 64 · 80 · 96 · 108
-     <span class="ds-avatar" data-size="48"><img src="…" alt="">[<span class="ds-avatar__badge"></span>]</span>
+   22 Avatar — 사람·팀 프로필
+   size : 20 · 24 · 36(기본) · 42 · 48 · 56 · 64 · 80 · 96 · 108
+   shape: circle(기본) · rounded(크기의 1/4, 곡률 노브 따름) · square
+   내용 우선순위: 사진 > 이니셜 > 기본 실루엣(사진·이니셜이 없으면 자동)
+
+     사진   <span class="ds-avatar" data-size="48"><img src="…" alt="김민수"></span>
+     이니셜 <span class="ds-avatar" role="img" aria-label="김민수"><span class="ds-avatar__initials" aria-hidden="true">김</span></span>
+     기본   <span class="ds-avatar" role="img" aria-label="김민수"></span>
+     상태   … <span class="ds-avatar__status" data-tone="positive"></span></span>   ← 아바타 aria-label 에 "김민수, 온라인" 처럼 합쳐 적는다
+     배지   … <span class="ds-avatar__badge"><img src="…" alt=""></span></span>   ← 소속·서비스 로고 등 작은 이미지
+     링크   <a class="ds-avatar" href="…" aria-label="김민수 프로필">…</a>  /  <button type="button" class="ds-avatar" aria-label="…">
+
+   ※ 이니셜은 반드시 .ds-avatar__initials 로 감싼다(맨 글자만 넣으면 실루엣과 겹친다).
+   ※ 사진 로드 실패 시 이니셜로 바꾸는 처리는 개발 영역.
+
+   상태 점(.ds-avatar__status) — 색 + 모양을 함께 써서 색만으로 구분하지 않는다 (WCAG 1.4.1)
+     positive(기본) 온라인   = 초록 꽉 찬 점
+     neutral        자리 비움 = 회색 링
+     critical       방해 금지 = 빨강 점 + 흰 가로줄
+     지름 = 아바타의 26% (최소 8px) · 배경색 링 · circle 은 4시 방향, rounded/square 는 우하단 모서리
+
    Figma: 원 · 이미지 없을 때 palette/gray-500 · 1px ring stroke/neutral-subtle(INSIDE)
+          shape rounded·square 는 badgeMask=none 에만 · status 속성(Avatar Status 인스턴스) · Avatar Group·Group Overflow 세트
           badge 지름 = 24→10 · 36→14 · 42→16 · 48→18 · 56→20 · 64→22 · 80→28 · 96→32 · 108→36 (우하단)
    -------------------------------------------------------------------------- */
 .ds-avatar {
   --ds-avatar-size: 36px;
   --ds-avatar-badge: 14px;
+  --ds-avatar-radius: var(--ybm-shape-pill);
   --ds-avatar-bg: var(--ybm-color-palette-gray-500);
   position: relative;
   display: inline-grid;
   place-items: center;
   flex: none;
+  box-sizing: border-box;
   width: var(--ds-avatar-size);
   height: var(--ds-avatar-size);
-  border-radius: var(--ybm-shape-pill);
+  padding: 0;
+  border: 0;
+  border-radius: var(--ds-avatar-radius);
   background: var(--ds-avatar-bg);
   color: var(--ybm-color-palette-static-white-alpha-800);
+  font: inherit;
   font-size: calc(var(--ds-avatar-size) * 0.42);
   line-height: 1;
   font-weight: var(--ybm-font-weight-semibold);
+  text-decoration: none;
   user-select: none;
 }
 .ds-avatar::after { content: ""; position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-neutral-subtle); pointer-events: none; }
-/* 이미지·이니셜이 없으면 기본 실루엣 */
-.ds-avatar:is(:empty, :has(> .ds-avatar__badge:only-child))::before {
+.ds-avatar img { width: 100%; height: 100%; border-radius: inherit; object-fit: cover; }
+.ds-avatar__initials { white-space: nowrap; }
+
+/* 기본 실루엣 — 사진·이니셜이 없을 때 */
+.ds-avatar:not(:has(> img, > .ds-avatar__initials))::before {
   content: ""; position: absolute; inset: 0; border-radius: inherit; background: currentColor;
   -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='9.5' r='4.5'/%3E%3Cpath d='M2.5 25c0-5.2 4.3-9 9.5-9s9.5 3.8 9.5 9z'/%3E%3C/svg%3E") center / 100% no-repeat;
           mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='9.5' r='4.5'/%3E%3Cpath d='M2.5 25c0-5.2 4.3-9 9.5-9s9.5 3.8 9.5 9z'/%3E%3C/svg%3E") center / 100% no-repeat;
 }
-.ds-avatar img { width: 100%; height: 100%; border-radius: inherit; object-fit: cover; }
-/* badge 는 아바타 테두리(::after) 위에 */
-.ds-avatar__badge { position: absolute; z-index: 1; right: 0; bottom: 0; box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-neutral-subtle); width: var(--ds-avatar-badge); height: var(--ds-avatar-badge); border-radius: var(--ybm-shape-pill); background: var(--ybm-color-bg-layer-default); overflow: hidden; }
-.ds-avatar__badge > img { width: 100%; height: 100%; object-fit: cover; }
+
+/* 크기 */
 .ds-avatar[data-size="20"]  { --ds-avatar-size: 20px; }
 .ds-avatar[data-size="24"]  { --ds-avatar-size: 24px;  --ds-avatar-badge: 10px; }
 .ds-avatar[data-size="42"]  { --ds-avatar-size: 42px;  --ds-avatar-badge: 16px; }
@@ -1382,6 +1362,126 @@ button.ds-input__prefix:hover { color: var(--ybm-color-fg-neutral); }
 .ds-avatar[data-size="80"]  { --ds-avatar-size: 80px;  --ds-avatar-badge: 28px; }
 .ds-avatar[data-size="96"]  { --ds-avatar-size: 96px;  --ds-avatar-badge: 32px; }
 .ds-avatar[data-size="108"] { --ds-avatar-size: 108px; --ds-avatar-badge: 36px; }
+
+/* 모양 — rounded 는 곡률 노브(--ybm-shape-scale)를 따라 테마 [data-shape="square"] 에서 각진다 */
+.ds-avatar[data-shape="rounded"] { --ds-avatar-radius: calc(var(--ds-avatar-size) * 0.25 * var(--ybm-shape-scale)); }
+.ds-avatar[data-shape="square"]  { --ds-avatar-radius: 0; }
+
+/* 링크·버튼 아바타 — 눌림 표시는 위에 얇게 덮고, 포커스 링은 base.css 공통 outline */
+:is(a, button).ds-avatar { cursor: pointer; }
+:is(a, button).ds-avatar:hover::after,
+:is(a, button).ds-avatar:active::after { background: var(--ybm-color-bg-neutral-weak-alpha); }
+
+/* 배지 — 아바타 테두리(::after) 위에 */
+.ds-avatar__badge { position: absolute; z-index: 1; right: 0; bottom: 0; width: var(--ds-avatar-badge); height: var(--ds-avatar-badge); border-radius: var(--ybm-shape-pill); background: var(--ybm-color-bg-layer-default); box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-neutral-subtle); overflow: hidden; }
+.ds-avatar__badge > img { width: 100%; height: 100%; object-fit: cover; }
+
+/* 상태 점 */
+.ds-avatar__status {
+  --ds-avatar-status-size: max(8px, calc(var(--ds-avatar-size) * 0.26));
+  --ds-avatar-status-ring: clamp(1.5px, calc(var(--ds-avatar-size) * 0.04), 4px);
+  --ds-avatar-status-color: var(--ybm-color-bg-positive-solid);
+  position: absolute;
+  z-index: 1;
+  /* circle: 4시 방향 (cos30°·sin30°) */
+  left: calc(var(--ds-avatar-size) * 0.933);
+  top: calc(var(--ds-avatar-size) * 0.75);
+  translate: -50% -50%;
+  display: grid;
+  place-items: center;
+  box-sizing: border-box;
+  width: var(--ds-avatar-status-size);
+  height: var(--ds-avatar-status-size);
+  border-radius: var(--ybm-shape-pill);
+  background: var(--ds-avatar-status-color);
+  box-shadow: 0 0 0 var(--ds-avatar-status-ring) var(--ybm-color-bg-layer-default);
+}
+.ds-avatar:is([data-shape="rounded"], [data-shape="square"]) > .ds-avatar__status {
+  left: calc(100% - var(--ds-avatar-status-size) * 0.2);
+  top: calc(100% - var(--ds-avatar-status-size) * 0.2);
+}
+.ds-avatar__status[data-tone="neutral"] {
+  --ds-avatar-status-color: var(--ybm-color-fg-neutral-subtle);
+  background: var(--ybm-color-bg-layer-default);
+  box-shadow: 0 0 0 var(--ds-avatar-status-ring) var(--ybm-color-bg-layer-default),
+              inset 0 0 0 max(1.5px, calc(var(--ds-avatar-status-size) * 0.2)) var(--ds-avatar-status-color);
+}
+.ds-avatar__status[data-tone="critical"] { --ds-avatar-status-color: var(--ybm-color-bg-critical-solid); }
+.ds-avatar__status[data-tone="critical"]::before {
+  content: "";
+  width: 50%;
+  height: max(1.5px, calc(var(--ds-avatar-status-size) * 0.16));
+  border-radius: var(--ybm-shape-pill);
+  background: var(--ybm-color-palette-static-white);
+}
+
+
+/* --------------------------------------------------------------------------
+   22-1 Avatar Group — 겹쳐 쌓은 아바타 + "+N"
+     <div class="ds-avatar-group" data-size="36" [data-shape="rounded"] role="group" aria-label="참여자 8명">
+       <span class="ds-avatar">…</span> × 3~5
+       <span class="ds-avatar-group__overflow" role="img" aria-label="외 5명">+5</span>
+       또는 <button type="button" class="ds-avatar-group__overflow" aria-label="참여자 5명 더 보기">+5</button>
+     </div>
+   - 크기·모양은 그룹에만 준다 (자식 아바타의 data-size 는 무시된다)
+   - 보여줄 개수는 직접 잘라서 넣는다(보통 3~5). +N 은 숫자가 길어지면 알약 모양으로 늘어난다
+   - 겹침 = 크기의 25% · 아바타 사이 배경색 링 · 뒤에 온 아바타가 위로 겹친다
+   -------------------------------------------------------------------------- */
+.ds-avatar-group {
+  --ds-avatar-group-size: 36px;
+  --ds-avatar-group-radius: var(--ybm-shape-pill);
+  --ds-avatar-group-ring: max(1.5px, calc(var(--ds-avatar-group-size) * 0.05));
+  display: inline-flex;
+  align-items: center;
+  isolation: isolate;
+}
+.ds-avatar-group > :is(.ds-avatar, .ds-avatar-group__overflow):nth-child(n) {
+  --ds-avatar-size: var(--ds-avatar-group-size);
+  --ds-avatar-badge: calc(var(--ds-avatar-group-size) * 0.36);
+  --ds-avatar-radius: var(--ds-avatar-group-radius);
+  box-shadow: 0 0 0 var(--ds-avatar-group-ring) var(--ybm-color-bg-layer-default);
+}
+.ds-avatar-group > * + * { margin-inline-start: calc(var(--ds-avatar-group-size) * -0.25); }
+.ds-avatar-group > :focus-visible { z-index: 1; }
+.ds-avatar-group[data-size="20"]  { --ds-avatar-group-size: 20px; }
+.ds-avatar-group[data-size="24"]  { --ds-avatar-group-size: 24px; }
+.ds-avatar-group[data-size="42"]  { --ds-avatar-group-size: 42px; }
+.ds-avatar-group[data-size="48"]  { --ds-avatar-group-size: 48px; }
+.ds-avatar-group[data-size="56"]  { --ds-avatar-group-size: 56px; }
+.ds-avatar-group[data-size="64"]  { --ds-avatar-group-size: 64px; }
+.ds-avatar-group[data-shape="rounded"] { --ds-avatar-group-radius: calc(var(--ds-avatar-group-size) * 0.25 * var(--ybm-shape-scale)); }
+.ds-avatar-group[data-shape="square"]  { --ds-avatar-group-radius: 0; }
+/* rounded·square 그룹 안의 상태 점은 모서리 위치로 */
+.ds-avatar-group:is([data-shape="rounded"], [data-shape="square"]) .ds-avatar__status {
+  left: calc(100% - var(--ds-avatar-status-size) * 0.2);
+  top: calc(100% - var(--ds-avatar-status-size) * 0.2);
+}
+
+.ds-avatar-group__overflow {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  box-sizing: border-box;
+  min-width: var(--ds-avatar-size, 36px);
+  height: var(--ds-avatar-size, 36px);
+  padding: 0 calc(var(--ds-avatar-size, 36px) * 0.18);
+  border: 0;
+  border-radius: var(--ds-avatar-radius, var(--ybm-shape-pill));
+  background: var(--ybm-color-bg-neutral-muted);
+  color: var(--ybm-color-fg-neutral-muted);
+  font: inherit;
+  font-size: max(10px, calc(var(--ds-avatar-size, 36px) * 0.36));
+  line-height: 1;
+  font-weight: var(--ybm-font-weight-semibold);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.ds-avatar-group__overflow::after { content: ""; position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-neutral-subtle); pointer-events: none; }
+button.ds-avatar-group__overflow { cursor: pointer; }
+button.ds-avatar-group__overflow:hover::after,
+button.ds-avatar-group__overflow:active::after { background: var(--ybm-color-bg-neutral-weak-alpha); }
 
 
 /* --------------------------------------------------------------------------

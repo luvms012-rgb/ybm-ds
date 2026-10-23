@@ -118,13 +118,6 @@
       "props": "size · layout `fill`"
     },
     {
-      "no": "14",
-      "name": "Code Input",
-      "classes": [ ".ds-code-input" ],
-      "figma": [],
-      "props": "인증번호 6칸"
-    },
-    {
       "no": "15",
       "name": "Chip",
       "classes": [ ".ds-chip", ".ds-chip-group" ],
@@ -192,11 +185,14 @@
     {
       "no": "22",
       "name": "Avatar",
-      "classes": [ ".ds-avatar" ],
+      "classes": [ ".ds-avatar", ".ds-avatar-group" ],
       "figma": [
-        { "id": "40:614", "type": "COMPONENT_SET", "variants": 30 }
+        { "id": "40:614", "type": "COMPONENT_SET", "variants": 50 },
+        { "part": "Status", "id": "2357:1206", "type": "COMPONENT_SET", "variants": 3 },
+        { "part": "Group", "id": "2359:1781", "type": "COMPONENT_SET", "variants": 21 },
+        { "part": "Group Overflow", "id": "2359:1213", "type": "COMPONENT_SET", "variants": 7 }
       ],
-      "props": "size `20·24·36·42·48·56·64·80·96·108`"
+      "props": "size `20·24·36·42·48·56·64·80·96·108` · shape `circle·rounded·square` · status tone `positive·neutral·critical` · group size `20~64` × shape · `+N`"
     },
     {
       "no": "23",
