@@ -1,6 +1,6 @@
 # ybm-ds — 작업 기준 (집 PC · 회사 PC 공용)
 
-집과 회사 두 PC 에서 같은 저장소로 작업한다. 이 파일은 저장소에 같이 올라가므로 어느 PC 에서든 Claude 가 먼저 읽는다.
+집(**Mac**)과 회사(**Windows**) 두 PC 에서 같은 저장소로 작업한다. 이 파일은 저장소에 같이 올라가므로 어느 PC 에서든 Claude 가 먼저 읽는다.
 PC 마다 따로 쌓이는 Claude 메모리는 서로 보이지 않는다 — 두 PC 가 함께 알아야 할 것은 여기에 적는다.
 
 - 최종 갱신: 2026-10-26 (회사 PC)
@@ -32,9 +32,15 @@ git clone https://github.com/luvms012-rgb/ybm-ds.git
 ```
 
 - Node.js 가 있어야 한다(`node sync.mjs` 로 확인). 패키지 설치는 필요 없다.
-- push 는 그 PC 의 Git 로그인(Git Credential Manager · GitHub Desktop)을 쓴다. Claude 가 인증 정보를 직접 다루지 않는다.
+- push 는 그 PC 의 Git 로그인을 쓴다(Mac: GitHub Desktop 또는 키체인, Windows: Git Credential Manager). Claude 가 인증 정보를 직접 다루지 않는다.
 - Figma 읽기·쓰기는 Claude 의 Figma 커넥터로 한다(PC 마다 한 번 연결).
-- 폴더 위치는 PC 마다 달라도 된다. README 의 로컬 경로는 회사 PC 기준.
+- 폴더 위치는 PC 마다 달라도 된다. README 의 로컬 경로(`C:\Users\...`)는 회사 PC 기준.
+
+### Mac 에서 다른 점
+
+- `동기화.bat` 은 Windows 전용 → Mac 에서는 `node sync.mjs deploy "메시지"` 를 터미널에서 실행한다. 나머지 `node sync.mjs ...` 명령은 똑같다.
+- 가이드 사이트 재배포(`project/_publish/publish.ps1`)는 Windows 에서만 돈다. Mac 에서 deploy 하면 ybm-ds 만 올라가고 가이드 사이트는 회사 PC 에서 다시 배포해야 한다.
+- `.gitattributes` 가 `* -text`(줄바꿈 변환 없음)다. 파일의 줄바꿈을 바꾸지 않는다 — 현재 CRLF 는 `동기화.bat` 하나뿐이고 나머지는 LF.
 
 ## 3. 진행 상황
 
