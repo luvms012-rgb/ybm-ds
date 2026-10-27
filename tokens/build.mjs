@@ -111,16 +111,14 @@ export function build(date, sourcePath = path.join(HERE, 'tokens', 'figma-variab
     return after(t);
   };
   const SHAPE = sortBy(Object.keys(shapeVars).filter((n) => n.startsWith('shape/') && n !== 'shape/pill'), (n) => shapeOrder[after(n)] ?? 99)
-    .map((n) => [after(n), shapeTarget(n, 'Default'), shapeTarget(n, 'Soft'), shapeTarget(n, 'Sharp')]);
-  const SHAPE_PILL = M(['Default', 'Soft', 'Sharp'].map((m) => [m.toLowerCase(), shapeTarget('shape/pill', m)]));
+    .map((n) => [after(n), shapeTarget(n, 'Default')]);
+  const SHAPE_PILL = shapeTarget('shape/pill', 'Default');
 
   const ty = vars('Typography');
   const tyModes = FIGMA.Typography.modes;
   const typeNames = sortBy(Object.keys(ty).filter((n) => n.startsWith('fontSize/t') && !n.endsWith('-static')).map(after), (n) => parseInt(n.slice(1), 10));
   const row = (name, mode, label = name) => [label, int(ty['fontSize/' + name].values[mode]), int(ty['lineHeight/' + name].values[mode])];
-  const TYPE = typeNames.map((n) => row(n, '100%'));
-  const TYPE_MODES = tyModes.map((m) => [m, typeNames.map((n) => row(n, m))]);
-  const TYPE_STATIC_MODES = tyModes.map((m) => [m, typeNames.map((n) => row(n + '-static', m, n))]);
+  const TYPE = typeNames.map((n) => row(n, tyModes[0]));
   const WEIGHT_VALUES = { regular: 400, medium: 500, semibold: 600, bold: 700 };
   const WEIGHTS = ['regular', 'medium', 'semibold', 'bold'].filter((n) => 'fontStyle/' + n in ty).map((n) => [n, WEIGHT_VALUES[n]]);
   const FONT_STACK = SOURCE.cssOnly.fontFamilyCss;
@@ -151,8 +149,8 @@ export function build(date, sourcePath = path.join(HERE, 'tokens', 'figma-variab
    --------------------------------------------------------------------------
    ⚠ 이 파일은 tokens/build.mjs 가 figma-variables.json 에서 생성한다. 직접 고치지 말 것.
    생성: ${date} · Figma file 1VCEsFU3xMWuXIntIrZz9i
-          컬렉션 「YBM DS」 Light/Dark · Typography 100/130/150%
-          · Shape Default/Soft/Sharp · Elevation
+          컬렉션 「YBM DS」 Light/Dark · Typography · Shape · Elevation
+          (모드는 Light/Dark 하나뿐 — 2026-10-27 글자 배율·모양 테마 모드 삭제)
 
    3계층 구조
      1) PALETTE   --ybm-color-palette-*        원시값. 컴포넌트·서비스에서 직접 쓰지 않는다.
@@ -221,9 +219,8 @@ export function build(date, sourcePath = path.join(HERE, 'tokens', 'figma-variab
     o.push('}\n');
 
     o.push(`/* --------------------------------------------------------------------------
-   5. SHAPE 테마 — 기본 / 동글(soft) / 각진(sharp) + 곡률 노브
-   radius 만 바꾼다. 색·간격·타이포는 테마와 무관. data-theme 과 독립 조합 가능:
-   <html data-theme="dark" data-shape="soft">
+   5. SHAPE — 컴포넌트 모서리 곡률(시맨틱) + 곡률 노브
+   테마 모드는 없다. --ybm-shape-scale 을 영역에 덮어쓰면 그 안의 곡률만 줄이거나(0~1) 없앨 수 있다.
 
    ⚠ shape 계산을 :root 에 두면 안 된다 — 커스텀 프로퍼티는 "선언된 요소"에서 값이 확정되고
    자식은 그 결과를 상속하므로, :root 에 calc 를 두면 하위에서 --ybm-shape-scale 을 덮어써도
@@ -232,24 +229,15 @@ export function build(date, sourcePath = path.join(HERE, 'tokens', 'figma-variab
     o.push(':root {');
     o.push('  --ybm-shape-scale: 1;              /* 곡률 노브 — 0 이면 완전 각짐 */');
     for (const [n, dflt] of SHAPE) o.push(`  ${P}shape-base-${n}: var(${P}radius-${dflt});`);
-    o.push(`  ${P}shape-pill: var(${P}radius-${SHAPE_PILL.get('default')});   /* pill 은 테마·노브와 무관하게 항상 원형 */`);
+    o.push(`  ${P}shape-pill: var(${P}radius-${SHAPE_PILL});   /* pill 은 노브와 무관하게 항상 원형 */`);
     o.push('}\n');
     o.push('*, ::before, ::after {');
     for (const [n] of SHAPE) o.push(`  ${P}shape-${n}: calc(var(${P}shape-base-${n}) * var(${P}shape-scale));`);
     o.push('}\n');
-    for (const [mode, idx, desc] of [['soft', 2, '동글한 스타일 — 한 단계씩 위로. 친근하고 부드러운 톤.'],
-      ['sharp', 3, '각진 스타일 — 컨트롤은 0, 서피스만 최소 곡률. 단정한 톤.']]) {
-      o.push(`/* ${desc} */`);
-      o.push(`[data-shape="${mode}"] {`);
-      for (const r of SHAPE) o.push(`  ${P}shape-base-${r[0]}: var(${P}radius-${r[idx]});`);
-      o.push('}\n');
-    }
-    o.push('/* 완전 각짐 — 노브만으로도 같은 결과. pill 요소는 여전히 원형으로 남는다. */');
-    o.push(`[data-shape="square"] { ${P}shape-scale: 0; }\n`);
 
     o.push(`/* --------------------------------------------------------------------------
-   6. TYPOGRAPHY — Figma Typography 컬렉션 100% 모드 (t01~t17)
-   CSS 에는 130%/150% 모드가 없으므로 *-static 은 100% 와 같은 값을 쓴다.
+   6. TYPOGRAPHY — Figma Typography 컬렉션 (t01~t17, 모드 하나)
+   *-static 은 같은 값이다. 브라우저·시스템 글자 확대와 무관하게 고정해 두고 싶은 자리에 쓰는 이름.
    lineHeight 는 2026-09-29 에 전 단계 +2 로 조정했다.
    -------------------------------------------------------------------------- */`);
     o.push(':root {');
@@ -292,7 +280,7 @@ export function build(date, sourcePath = path.join(HERE, 'tokens', 'figma-variab
     t.set(`${P}space-x-global-gutter`, `var(${P}space-${GUTTER_REF})`);
     for (const [n, v] of RADIUS) t.set(`${P}radius-${n}`, `${int(v)}px`);
     for (const [n, dflt] of SHAPE) t.set(`${P}shape-${n}`, `var(${P}radius-${dflt})`);
-    t.set(`${P}shape-pill`, `var(${P}radius-${SHAPE_PILL.get('default')})`);
+    t.set(`${P}shape-pill`, `var(${P}radius-${SHAPE_PILL})`);
     t.set(`${P}font-family-base`, FONT_STACK);
     for (const [n, v] of WEIGHTS) t.set(`${P}font-weight-${n}`, v);
     for (const [tt, fs, lh] of TYPE) { t.set(`${P}font-size-${tt}`, `${fs}px`); t.set(`${P}line-height-${tt}`, `${lh}px`); }
@@ -316,7 +304,7 @@ export function build(date, sourcePath = path.join(HERE, 'tokens', 'figma-variab
     const elevation = M(ELEV_LEVELS.map((l) => [String(l), M([['key', xyz(geo(l)[0])], ['ambient', xyz(geo(l)[1])]])]));
     elevation.set('roles', M(ELEV_ROLE.map(([n, l]) => [n, l])));
     elevation.set('ring', M(Object.entries(ELEV_RING).map(([n, c]) => [n, M([['width', 1], ['inset', true], ['color', c]])])));
-    const shape = M(SHAPE.map(([n, d, s, h]) => [n, M([['default', d], ['soft', s], ['sharp', h]])]));
+    const shape = M(SHAPE.map(([n, d]) => [n, d]));
     shape.set('pill', SHAPE_PILL);
     const d = M([
       ['$meta', M([['name', 'YBM Design System'], ['generated', date],
@@ -324,9 +312,7 @@ export function build(date, sourcePath = path.join(HERE, 'tokens', 'figma-variab
         ['note', 'tokens/build.mjs 가 생성한다. 직접 수정하지 말 것.']])],
       ['color', color], ['dimension', dimension],
       ['radius', M(RADIUS.map(([n, v]) => [n, `${int(v)}px`]))], ['shape', shape],
-      ['typography', M([['fontFamily', FONT_STACK], ['fontWeight', M(WEIGHTS)], ['scale', scale(TYPE)],
-        ['scaleModes', M(TYPE_MODES.map(([m, rows]) => [m, scale(rows)]))],
-        ['staticScaleModes', M(TYPE_STATIC_MODES.map(([m, rows]) => [m, scale(rows)]))]])],
+      ['typography', M([['fontFamily', FONT_STACK], ['fontWeight', M(WEIGHTS)], ['scale', scale(TYPE)]])],
       ['elevation', elevation], ['motion', M(MOTION)], ['zIndex', M(ZINDEX)],
     ]);
     return dumps(d) + '\n';

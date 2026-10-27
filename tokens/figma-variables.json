@@ -1,7 +1,7 @@
 {
   "$meta": {
     "file": "1VCEsFU3xMWuXIntIrZz9i",
-    "dumped": "2026-10-20",
+    "dumped": "2026-10-27",
     "schemaVersion": 2,
     "collections": {
       "YBM DS": {
@@ -13,17 +13,13 @@
       },
       "Typography": {
         "modes": [
-          "100%",
-          "130%",
-          "150%"
+          "100%"
         ],
         "count": 73
       },
       "Shape": {
         "modes": [
-          "Default",
-          "Soft",
-          "Sharp"
+          "Default"
         ],
         "count": 9
       },
@@ -2180,602 +2176,452 @@
     },
     "Typography": {
       "modes": [
-        "100%",
-        "130%",
-        "150%"
+        "100%"
       ],
       "variables": {
         "fontSize/t01": {
           "type": "FLOAT",
           "values": {
-            "100%": 11,
-            "130%": 14,
-            "150%": 17
+            "100%": 11
           }
         },
         "lineHeight/t01": {
           "type": "FLOAT",
           "values": {
-            "100%": 17,
-            "130%": 21,
-            "150%": 25
+            "100%": 17
           }
         },
         "fontSize/t01-static": {
           "type": "FLOAT",
           "values": {
-            "100%": 11,
-            "130%": 11,
-            "150%": 11
+            "100%": 11
           }
         },
         "lineHeight/t01-static": {
           "type": "FLOAT",
           "values": {
-            "100%": 17,
-            "130%": 17,
-            "150%": 17
+            "100%": 17
           }
         },
         "fontSize/t02": {
           "type": "FLOAT",
           "values": {
-            "100%": 12,
-            "130%": 16,
-            "150%": 18
+            "100%": 12
           }
         },
         "lineHeight/t02": {
           "type": "FLOAT",
           "values": {
-            "100%": 18,
-            "130%": 23,
-            "150%": 26
+            "100%": 18
           }
         },
         "fontSize/t02-static": {
           "type": "FLOAT",
           "values": {
-            "100%": 12,
-            "130%": 12,
-            "150%": 12
+            "100%": 12
           }
         },
         "lineHeight/t02-static": {
           "type": "FLOAT",
           "values": {
-            "100%": 18,
-            "130%": 18,
-            "150%": 18
+            "100%": 18
           }
         },
         "fontSize/t03": {
           "type": "FLOAT",
           "values": {
-            "100%": 13,
-            "130%": 17,
-            "150%": 20
+            "100%": 13
           }
         },
         "lineHeight/t03": {
           "type": "FLOAT",
           "values": {
-            "100%": 20,
-            "130%": 26,
-            "150%": 30
+            "100%": 20
           }
         },
         "fontSize/t03-static": {
           "type": "FLOAT",
           "values": {
-            "100%": 13,
-            "130%": 13,
-            "150%": 13
+            "100%": 13
           }
         },
         "lineHeight/t03-static": {
           "type": "FLOAT",
           "values": {
-            "100%": 20,
-            "130%": 20,
-            "150%": 20
+            "100%": 20
           }
         },
         "fontSize/t04": {
           "type": "FLOAT",
           "values": {
-            "100%": 14,
-            "130%": 18,
-            "150%": 21
+            "100%": 14
           }
         },
         "lineHeight/t04": {
           "type": "FLOAT",
           "values": {
-            "100%": 21,
-            "130%": 26,
-            "150%": 31
+            "100%": 21
           }
         },
         "fontSize/t04-static": {
           "type": "FLOAT",
           "values": {
-            "100%": 14,
-            "130%": 14,
-            "150%": 14
+            "100%": 14
           }
         },
         "lineHeight/t04-static": {
           "type": "FLOAT",
           "values": {
-            "100%": 21,
-            "130%": 21,
-            "150%": 21
+            "100%": 21
           }
         },
         "fontSize/t05": {
           "type": "FLOAT",
           "values": {
-            "100%": 16,
-            "130%": 21,
-            "150%": 24
+            "100%": 16
           }
         },
         "lineHeight/t05": {
           "type": "FLOAT",
           "values": {
-            "100%": 24,
-            "130%": 31,
-            "150%": 35
+            "100%": 24
           }
         },
         "fontSize/t05-static": {
           "type": "FLOAT",
           "values": {
-            "100%": 16,
-            "130%": 16,
-            "150%": 16
+            "100%": 16
           }
         },
         "lineHeight/t05-static": {
           "type": "FLOAT",
           "values": {
-            "100%": 24,
-            "130%": 24,
-            "150%": 24
+            "100%": 24
           }
         },
         "fontSize/t06": {
           "type": "FLOAT",
           "values": {
-            "100%": 18,
-            "130%": 23,
-            "150%": 27
+            "100%": 18
           }
         },
         "lineHeight/t06": {
           "type": "FLOAT",
           "values": {
-            "100%": 28,
-            "130%": 33,
-            "150%": 38
+            "100%": 28
           }
         },
         "fontSize/t06-static": {
           "type": "FLOAT",
           "values": {
-            "100%": 18,
-            "130%": 18,
-            "150%": 18
+            "100%": 18
           }
         },
         "lineHeight/t06-static": {
           "type": "FLOAT",
           "values": {
-            "100%": 28,
-            "130%": 28,
-            "150%": 28
+            "100%": 28
           }
         },
         "fontSize/t07": {
           "type": "FLOAT",
           "values": {
-            "100%": 20,
-            "130%": 26,
-            "150%": 30
+            "100%": 20
           }
         },
         "lineHeight/t07": {
           "type": "FLOAT",
           "values": {
-            "100%": 29,
-            "130%": 37,
-            "150%": 43
+            "100%": 29
           }
         },
         "fontSize/t07-static": {
           "type": "FLOAT",
           "values": {
-            "100%": 20,
-            "130%": 20,
-            "150%": 20
+            "100%": 20
           }
         },
         "lineHeight/t07-static": {
           "type": "FLOAT",
           "values": {
-            "100%": 29,
-            "130%": 29,
-            "150%": 29
+            "100%": 29
           }
         },
         "fontSize/t08": {
           "type": "FLOAT",
           "values": {
-            "100%": 22,
-            "130%": 29,
-            "150%": 33
+            "100%": 22
           }
         },
         "lineHeight/t08": {
           "type": "FLOAT",
           "values": {
-            "100%": 32,
-            "130%": 42,
-            "150%": 47
+            "100%": 32
           }
         },
         "fontSize/t08-static": {
           "type": "FLOAT",
           "values": {
-            "100%": 22,
-            "130%": 22,
-            "150%": 22
+            "100%": 22
           }
         },
         "lineHeight/t08-static": {
           "type": "FLOAT",
           "values": {
-            "100%": 32,
-            "130%": 32,
-            "150%": 32
+            "100%": 32
           }
         },
         "fontSize/t09": {
           "type": "FLOAT",
           "values": {
-            "100%": 24,
-            "130%": 31,
-            "150%": 36
+            "100%": 24
           }
         },
         "lineHeight/t09": {
           "type": "FLOAT",
           "values": {
-            "100%": 34,
-            "130%": 43,
-            "150%": 50
+            "100%": 34
           }
         },
         "fontSize/t09-static": {
           "type": "FLOAT",
           "values": {
-            "100%": 24,
-            "130%": 24,
-            "150%": 24
+            "100%": 24
           }
         },
         "lineHeight/t09-static": {
           "type": "FLOAT",
           "values": {
-            "100%": 34,
-            "130%": 34,
-            "150%": 34
+            "100%": 34
           }
         },
         "fontSize/t10": {
           "type": "FLOAT",
           "values": {
-            "100%": 26,
-            "130%": 34,
-            "150%": 39
+            "100%": 26
           }
         },
         "lineHeight/t10": {
           "type": "FLOAT",
           "values": {
-            "100%": 37,
-            "130%": 48,
-            "150%": 55
+            "100%": 37
           }
         },
         "fontSize/t10-static": {
           "type": "FLOAT",
           "values": {
-            "100%": 26,
-            "130%": 26,
-            "150%": 26
+            "100%": 26
           }
         },
         "lineHeight/t10-static": {
           "type": "FLOAT",
           "values": {
-            "100%": 37,
-            "130%": 37,
-            "150%": 37
+            "100%": 37
           }
         },
         "fontFamily/base": {
           "type": "STRING",
           "values": {
-            "100%": "Pretendard",
-            "130%": "Pretendard",
-            "150%": "Pretendard"
+            "100%": "Pretendard"
           }
         },
         "fontStyle/regular": {
           "type": "STRING",
           "values": {
-            "100%": "Regular",
-            "130%": "Regular",
-            "150%": "Regular"
+            "100%": "Regular"
           }
         },
         "fontStyle/medium": {
           "type": "STRING",
           "values": {
-            "100%": "Medium",
-            "130%": "Medium",
-            "150%": "Medium"
+            "100%": "Medium"
           }
         },
         "fontStyle/bold": {
           "type": "STRING",
           "values": {
-            "100%": "Bold",
-            "130%": "Bold",
-            "150%": "Bold"
+            "100%": "Bold"
           }
         },
         "fontSize/t11": {
           "type": "FLOAT",
           "values": {
-            "100%": 28,
-            "130%": 36,
-            "150%": 42
+            "100%": 28
           }
         },
         "fontSize/t11-static": {
           "type": "FLOAT",
           "values": {
-            "100%": 28,
-            "130%": 28,
-            "150%": 28
+            "100%": 28
           }
         },
         "lineHeight/t11": {
           "type": "FLOAT",
           "values": {
-            "100%": 40,
-            "130%": 51,
-            "150%": 59
+            "100%": 40
           }
         },
         "lineHeight/t11-static": {
           "type": "FLOAT",
           "values": {
-            "100%": 40,
-            "130%": 40,
-            "150%": 40
+            "100%": 40
           }
         },
         "fontSize/t12": {
           "type": "FLOAT",
           "values": {
-            "100%": 32,
-            "130%": 42,
-            "150%": 48
+            "100%": 32
           }
         },
         "fontSize/t12-static": {
           "type": "FLOAT",
           "values": {
-            "100%": 32,
-            "130%": 32,
-            "150%": 32
+            "100%": 32
           }
         },
         "lineHeight/t12": {
           "type": "FLOAT",
           "values": {
-            "100%": 44,
-            "130%": 57,
-            "150%": 65
+            "100%": 44
           }
         },
         "lineHeight/t12-static": {
           "type": "FLOAT",
           "values": {
-            "100%": 44,
-            "130%": 44,
-            "150%": 44
+            "100%": 44
           }
         },
         "fontSize/t13": {
           "type": "FLOAT",
           "values": {
-            "100%": 40,
-            "130%": 52,
-            "150%": 60
+            "100%": 40
           }
         },
         "fontSize/t13-static": {
           "type": "FLOAT",
           "values": {
-            "100%": 40,
-            "130%": 40,
-            "150%": 40
+            "100%": 40
           }
         },
         "lineHeight/t13": {
           "type": "FLOAT",
           "values": {
-            "100%": 54,
-            "130%": 70,
-            "150%": 80
+            "100%": 54
           }
         },
         "lineHeight/t13-static": {
           "type": "FLOAT",
           "values": {
-            "100%": 54,
-            "130%": 54,
-            "150%": 54
+            "100%": 54
           }
         },
         "fontSize/t14": {
           "type": "FLOAT",
           "values": {
-            "100%": 48,
-            "130%": 62,
-            "150%": 72
+            "100%": 48
           }
         },
         "fontSize/t14-static": {
           "type": "FLOAT",
           "values": {
-            "100%": 48,
-            "130%": 48,
-            "150%": 48
+            "100%": 48
           }
         },
         "lineHeight/t14": {
           "type": "FLOAT",
           "values": {
-            "100%": 62,
-            "130%": 80,
-            "150%": 92
+            "100%": 62
           }
         },
         "lineHeight/t14-static": {
           "type": "FLOAT",
           "values": {
-            "100%": 62,
-            "130%": 62,
-            "150%": 62
+            "100%": 62
           }
         },
         "fontStyle/semibold": {
           "type": "STRING",
           "values": {
-            "100%": "SemiBold",
-            "130%": "SemiBold",
-            "150%": "SemiBold"
+            "100%": "SemiBold"
           }
         },
         "fontSize/t15": {
           "type": "FLOAT",
           "values": {
-            "100%": 56,
-            "130%": 73,
-            "150%": 84
+            "100%": 56
           }
         },
         "fontSize/t15-static": {
           "type": "FLOAT",
           "values": {
-            "100%": 56,
-            "130%": 56,
-            "150%": 56
+            "100%": 56
           }
         },
         "lineHeight/t15": {
           "type": "FLOAT",
           "values": {
-            "100%": 75,
-            "130%": 97,
-            "150%": 112
+            "100%": 75
           }
         },
         "lineHeight/t15-static": {
           "type": "FLOAT",
           "values": {
-            "100%": 75,
-            "130%": 75,
-            "150%": 75
+            "100%": 75
           }
         },
         "fontSize/t16": {
           "type": "FLOAT",
           "values": {
-            "100%": 64,
-            "130%": 83,
-            "150%": 96
+            "100%": 64
           }
         },
         "fontSize/t16-static": {
           "type": "FLOAT",
           "values": {
-            "100%": 64,
-            "130%": 64,
-            "150%": 64
+            "100%": 64
           }
         },
         "lineHeight/t16": {
           "type": "FLOAT",
           "values": {
-            "100%": 85,
-            "130%": 110,
-            "150%": 127
+            "100%": 85
           }
         },
         "lineHeight/t16-static": {
           "type": "FLOAT",
           "values": {
-            "100%": 85,
-            "130%": 85,
-            "150%": 85
+            "100%": 85
           }
         },
         "fontSize/t17": {
           "type": "FLOAT",
           "values": {
-            "100%": 72,
-            "130%": 94,
-            "150%": 108
+            "100%": 72
           }
         },
         "fontSize/t17-static": {
           "type": "FLOAT",
           "values": {
-            "100%": 72,
-            "130%": 72,
-            "150%": 72
+            "100%": 72
           }
         },
         "lineHeight/t17": {
           "type": "FLOAT",
           "values": {
-            "100%": 96,
-            "130%": 125,
-            "150%": 143
+            "100%": 96
           }
         },
         "lineHeight/t17-static": {
           "type": "FLOAT",
           "values": {
-            "100%": 96,
-            "130%": 96,
-            "150%": 96
+            "100%": 96
           }
         }
       }
     },
     "Shape": {
       "modes": [
-        "Default",
-        "Soft",
-        "Sharp"
+        "Default"
       ],
       "variables": {
         "shape/2xs": {
@@ -2783,135 +2629,81 @@
           "values": {
             "Default": {
               "alias": "radius/r1"
-            },
-            "Soft": {
-              "alias": "radius/r2"
-            },
-            "Sharp": {
-              "alias": "radius/r0"
             }
           },
-          "description": "최소 컨트롤(Badge medium). Default 4 / Soft 8 / Sharp 0."
+          "description": "최소 컨트롤(Badge medium). 4px."
         },
         "shape/xs": {
           "type": "FLOAT",
           "values": {
             "Default": {
               "alias": "radius/r1_5"
-            },
-            "Soft": {
-              "alias": "radius/r2_5"
-            },
-            "Sharp": {
-              "alias": "radius/r0"
             }
           },
-          "description": "극소 컨트롤(Checkbox·Badge large·Segmented small 아이템). Default 6 / Soft 10 / Sharp 0."
+          "description": "극소 컨트롤(Checkbox·Badge large·Segmented small 아이템). 6px."
         },
         "shape/sm": {
           "type": "FLOAT",
           "values": {
             "Default": {
               "alias": "radius/r2"
-            },
-            "Soft": {
-              "alias": "radius/r3"
-            },
-            "Sharp": {
-              "alias": "radius/r0"
             }
           },
-          "description": "Default / Soft(동글) / Sharp(각진) 모드로 값이 바뀐다. 컴포넌트는 radius/* 원시값 대신 이 토큰을 쓴다."
+          "description": "컴포넌트 모서리 곡률. 컴포넌트는 radius/* 원시값 대신 이 토큰을 쓴다."
         },
         "shape/md": {
           "type": "FLOAT",
           "values": {
             "Default": {
               "alias": "radius/r2_5"
-            },
-            "Soft": {
-              "alias": "radius/r3_5"
-            },
-            "Sharp": {
-              "alias": "radius/r0_5"
             }
           },
-          "description": "Default / Soft(동글) / Sharp(각진) 모드로 값이 바뀐다. 컴포넌트는 radius/* 원시값 대신 이 토큰을 쓴다."
+          "description": "컴포넌트 모서리 곡률. 컴포넌트는 radius/* 원시값 대신 이 토큰을 쓴다."
         },
         "shape/lg": {
           "type": "FLOAT",
           "values": {
             "Default": {
               "alias": "radius/r3"
-            },
-            "Soft": {
-              "alias": "radius/r4"
-            },
-            "Sharp": {
-              "alias": "radius/r0_5"
             }
           },
-          "description": "Default / Soft(동글) / Sharp(각진) 모드로 값이 바뀐다. 컴포넌트는 radius/* 원시값 대신 이 토큰을 쓴다."
+          "description": "컴포넌트 모서리 곡률. 컴포넌트는 radius/* 원시값 대신 이 토큰을 쓴다."
         },
         "shape/xl": {
           "type": "FLOAT",
           "values": {
             "Default": {
               "alias": "radius/r4"
-            },
-            "Soft": {
-              "alias": "radius/r5"
-            },
-            "Sharp": {
-              "alias": "radius/r1"
             }
           },
-          "description": "Default / Soft(동글) / Sharp(각진) 모드로 값이 바뀐다. 컴포넌트는 radius/* 원시값 대신 이 토큰을 쓴다."
+          "description": "컴포넌트 모서리 곡률. 컴포넌트는 radius/* 원시값 대신 이 토큰을 쓴다."
         },
         "shape/2xl": {
           "type": "FLOAT",
           "values": {
             "Default": {
               "alias": "radius/r5"
-            },
-            "Soft": {
-              "alias": "radius/r6"
-            },
-            "Sharp": {
-              "alias": "radius/r1"
             }
           },
-          "description": "Default / Soft(동글) / Sharp(각진) 모드로 값이 바뀐다. 컴포넌트는 radius/* 원시값 대신 이 토큰을 쓴다."
+          "description": "컴포넌트 모서리 곡률. 컴포넌트는 radius/* 원시값 대신 이 토큰을 쓴다."
         },
         "shape/3xl": {
           "type": "FLOAT",
           "values": {
             "Default": {
               "alias": "radius/r6"
-            },
-            "Soft": {
-              "alias": "radius/r8"
-            },
-            "Sharp": {
-              "alias": "radius/r1_5"
             }
           },
-          "description": "Default / Soft(동글) / Sharp(각진) 모드로 값이 바뀐다. 컴포넌트는 radius/* 원시값 대신 이 토큰을 쓴다."
+          "description": "컴포넌트 모서리 곡률. 컴포넌트는 radius/* 원시값 대신 이 토큰을 쓴다."
         },
         "shape/pill": {
           "type": "FLOAT",
           "values": {
             "Default": {
               "alias": "radius/full"
-            },
-            "Soft": {
-              "alias": "radius/full"
-            },
-            "Sharp": {
-              "alias": "radius/full"
             }
           },
-          "description": "Default / Soft(동글) / Sharp(각진) 모드로 값이 바뀐다. 컴포넌트는 radius/* 원시값 대신 이 토큰을 쓴다."
+          "description": "항상 완전한 원형(9999px). 컴포넌트 모서리 곡률. 컴포넌트는 radius/* 원시값 대신 이 토큰을 쓴다."
         }
       }
     },

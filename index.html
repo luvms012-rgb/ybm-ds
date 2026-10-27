@@ -39,11 +39,6 @@
     <button type="button" class="ds-segmented__item" aria-pressed="true" value="">Light</button>
     <button type="button" class="ds-segmented__item" aria-pressed="false" value="dark">Dark</button>
   </div>
-  <div class="ds-segmented" role="group" aria-label="모양" data-pv="shape">
-    <button type="button" class="ds-segmented__item" aria-pressed="true" value="">기본</button>
-    <button type="button" class="ds-segmented__item" aria-pressed="false" value="soft">Soft</button>
-    <button type="button" class="ds-segmented__item" aria-pressed="false" value="sharp">Sharp</button>
-  </div>
   <a class="ds-btn" data-variant="neutralOutline" data-size="small" href="https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/" target="_blank" rel="noopener">Figma</a>
   <a class="ds-btn" data-variant="neutralOutline" data-size="small" href="https://github.com/luvms012-rgb/ybm-ds" target="_blank" rel="noopener">GitHub</a>
 </header>
@@ -493,7 +488,7 @@
     var root = document.documentElement;
     try { var saved = JSON.parse(localStorage.getItem('pv') || '{}'); } catch (e) { saved = {}; }
     function apply(kind, value) {
-      var attr = kind === 'theme' ? 'data-theme' : 'data-shape';
+      var attr = 'data-' + kind;
       if (value) root.setAttribute(attr, value); else root.removeAttribute(attr);
       document.querySelectorAll('[data-pv="' + kind + '"] .ds-segmented__item').forEach(function (b) { b.setAttribute('aria-pressed', String(b.value === value)); });
       saved[kind] = value;
@@ -504,9 +499,7 @@
     });
     var qs = new URLSearchParams(location.search);
     if (qs.has('theme')) saved.theme = qs.get('theme');
-    if (qs.has('shape')) saved.shape = qs.get('shape');
     if (saved.theme) apply('theme', saved.theme);
-    if (saved.shape) apply('shape', saved.shape);
 
     // ?only=43-48 또는 ?only=01,23 → 그 컴포넌트만 보기
     var only = new URLSearchParams(location.search).get('only');

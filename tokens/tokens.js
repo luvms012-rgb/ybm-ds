@@ -1,5 +1,5 @@
 // YBM Design System — tokens.js
-// ⚠ tokens/build.mjs 가 생성한다. 직접 고치지 말 것. 생성: 2026-10-21
+// ⚠ tokens/build.mjs 가 생성한다. 직접 고치지 말 것. 생성: 2026-10-27
 // CSS 변수명 → Light 모드 값. 다크 값은 design-tokens.json 을 참고.
 
 export const tokens = {

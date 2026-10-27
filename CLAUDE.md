@@ -14,7 +14,7 @@ PC 마다 따로 쌓이는 Claude 메모리는 서로 보이지 않는다 — �
 | 배포 (Pages) | <https://luvms012-rgb.github.io/ybm-ds/> |
 | 사이트 저장소 | <https://github.com/luvms012-rgb/ybm-ds-site> — 용도·이 저장소와의 관계는 아직 정하지 않음, 작업 전 사용자에게 확인 |
 
-Foundations 페이지 섹션(위→아래): Color `2288:63` · Typography `2288:64` · Spacing `2288:67` · Radius `2288:66` · Elevation `2288:65`.
+Foundations 페이지 문서 프레임(왼쪽→오른쪽): Color `2486:2` · Typography `2486:13` · Spacing `2486:24` · Radius `2486:35` · Elevation `2486:46`.
 
 ## 2. 두 PC 싱크 규칙
 
@@ -45,7 +45,9 @@ git clone https://github.com/luvms012-rgb/ybm-ds.git
 ## 3. 진행 상황
 
 - **확정** — 문서 사이트 상단 메뉴(IA): **Docs · Foundations · Components · Templates**. Foundations 는 Docs 하위가 아니라 독립 메뉴이고, 원본은 위 Foundations 페이지.
-- **예정 (보류)** — Figma 구성을 레퍼런스 라이브러리 기준으로 개편. 사용자가 요청할 때만 시작.
+- **끝냄 (2026-10-27)** — Figma 페이지 구성을 레퍼런스 라이브러리 형식으로 개편(README §4). 디자인 시스템(변수·텍스트 스타일·컴포넌트)은 그대로이고, 컴포넌트 40종을 카테고리 페이지 10개로 옮겨 문서 프레임(헤더 + 마스터 컴포넌트)에 담았다. 우리에게 없는 것(Templates · Chat 페이지, 문서 본문의 사용 예시 블록)은 비워 둠.
+- **끝냄 (2026-10-27)** — 변수 모드 정리: Typography 130%·150%, Shape Soft·Sharp 삭제 → 모드는 색의 Light / Dark 만. 코드 토큰(`tokens/figma-variables.json` → `tokens.css` 등)·미리보기·README 반영. Figma 페이지 개편 때 새로 만든 컴포넌트 10종은 아직 CSS·`components.json` 미등록.
+- **정리 후보 (미정)** — 값이 같은 변수: `bg/neutral-inverted(-pressed)` = `bg/neutral-solid(-pressed)`, `bg/neutral-subtle` = `bg/layer-default` = `fg/neutral-inverted` = `fg/on-neutral-solid`. 빈칸: `bg/neutral-weak`(현재 `bg/neutral` 이 대신), `palette/brand-1000`. 텍스트 스타일 `Scale/*` 와 `Static/*` 는 이제 값이 같다.
 - **회사 PC 에만 있음** — 로컬 브랜치 `backup/2026-10-26-local`(push 안 함): 10-23~24 작업분(구조 정리 · cssOnly 버그 수정 · `components/index.html` 컴포넌트 메인 · 이전 CLAUDE.md 초안). 꺼내 쓸지는 사용자가 정한다.
 
 ## 4. 작업 규칙

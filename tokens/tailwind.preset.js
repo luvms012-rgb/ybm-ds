@@ -1,5 +1,5 @@
 // YBM Design System — Tailwind preset
-// ⚠ tokens/build.mjs 가 생성한다. 직접 고치지 말 것. 생성: 2026-10-21
+// ⚠ tokens/build.mjs 가 생성한다. 직접 고치지 말 것. 생성: 2026-10-27
 // 모든 값이 CSS 변수를 가리키므로 ybm-ds.css 를 함께 로드해야 동작한다.
 // tailwind.config.js → module.exports = { presets: [require('./tokens/tailwind.preset.js')], … }
 

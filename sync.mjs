@@ -122,8 +122,10 @@ const components = await (async () => {
     }
     res.ok++;
   }
-  const page = figma.root.children.find((p) => p.name === 'Components');
-  if (page) {
+  // 컴포넌트는 카테고리 페이지(Action ~ Table & List)에 나뉘어 있다 — 문서·구분선 페이지만 빼고 전부 본다
+  const NON_COMPONENT = new Set(['About', 'Foundations', 'Icons', 'Templates']);
+  for (const page of figma.root.children) {
+    if (NON_COMPONENT.has(page.name) || /^-+$/.test(page.name)) continue;
     await page.loadAsync();
     for (const s of page.findAllWithCriteria({ types: ['COMPONENT_SET'] }))
       if (!known.has(s.id)) res.unlisted.push(s.name + ' ' + s.id + ' · ' + s.children.length);

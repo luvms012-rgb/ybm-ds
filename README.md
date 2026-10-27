@@ -63,7 +63,7 @@ git 에 올리지 않는 것(`.gitignore`): `tokens/.figma-check.js` · `tokens/
 <link rel="stylesheet" href="../../../../ds/ybm-ds/ybm-ds.css">
 <link rel="stylesheet" href="…/{서비스}.css">       <!-- 서비스 전용은 DS 다음에 -->
 
-<html data-theme="dark" data-shape="soft">  <!-- 둘 다 선택. 독립 조합 가능 -->
+<html data-theme="dark">  <!-- 다크 모드(선택). 모드는 Light/Dark 두 가지뿐 -->
 ```
 
 ### Cascade Layers
@@ -124,19 +124,41 @@ DS 전체가 `@layer ybm.tokens, ybm.base, ybm.icons, ybm.components, ybm.utilit
 
 ## 4. Figma 파일 구조
 
+2026-10-27 페이지 구성을 레퍼런스 라이브러리 형식으로 바꿨다. 컴포넌트는 카테고리 페이지에 나뉘고, 컴포넌트마다 문서 프레임 1개(문서 헤더 + 본문)에 담긴다. 본문은 위쪽 "Examples"(속성별 예시 블록 — 마스터 컴포넌트의 인스턴스로만 구성, 문서당 최대 6개) + 아래쪽 "마스터 컴포넌트" 순서다. 컴포넌트 노드 ID 는 그대로다.
+
 | 페이지 | ID | 내용 |
 |---|---|---|
-| Foundations | `2274:1143` | 섹션 Color `2288:63` · Typography `2288:64` · Elevation `2288:65` · Radius `2288:66` · Spacing `2288:67` |
-| Components | `0:1` | 컴포넌트마다 섹션 1개 (40개 섹션 · 2026-10-22 Banner·Breadcrumbs·Divider·List·Stepper·Tooltip 추가) |
-| Icons | `271:2027` | Lucide Icons 프레임 `1167:2` |
+| About | `2479:3` | 표지(YBMNET 로고 — 색은 logo/* 변수) · 이 파일에 대하여 · 링크 |
+| Foundations | `2274:1143` | 문서 프레임 Color `2486:2` · Typography `2486:13` · Spacing `2486:24` · Radius `2486:35` · Elevation `2486:46` (본문 내용 프레임은 예전 그대로) |
+| Icons | `271:2027` | Lucide Icons 프레임 |
+| ----- | | 구분선 |
+| Templates | `2479:5` | 비어 있음 (화면 템플릿 준비 중) |
+| --- | | 구분선 |
+| Action | `2479:7` | Action Button · Chip · Floating Action Button · Menu · Segmented Control · Toggle Button · **Text Link** `2493:324` |
+| Chat | `2479:8` | 문서 1개에 **Chat Message Bubble** `2499:6` · **Chat Message Metadata** `2499:18` · **Chat System Message** `2499:25` · **Chat Send Button** `2499:35` · **Chat Composer** `2499:54` |
+| Container | `2479:9` | Accordion · Card · **Select Box** `2495:260` |
+| Content | `2479:10` | Avatar · Empty · Tag Group |
+| Data Input | `2479:11` | Checkbox · Date Picker · Field Button · Quantity Picker · Radio Group · Select · Slider · Switch · Text Field · **Time Picker** `2497:979` |
+| Feedback & Status | `2479:12` | Badge · Banner · Callout · Progress · Skeleton |
+| Layout | `2479:13` | Divider |
+| Navigation | `2479:14` | Bottom Navigation · Breadcrumbs · Chip Tabs · Pagination · Side Navigation · Stepper · Tabs · **Table Pagination** `2498:1299` |
+| Overlay | `2479:15` | Bottom Sheet · Dialog · Help Bubble · Snackbar · Tooltip · **Popover** `2494:473` |
+| Table & List | `2479:16` | List · Table |
+| --- | | 구분선 |
+
+**굵게** 표시한 10종은 2026-10-27 Figma 에 새로 만든 것(seed 기준)이다. 아직 CSS·`components.json`·§6.1 표에는 없어서 `sync.mjs` 점검에 "목록에 없는 세트"로 나온다 — 코드 쪽을 만들 때 함께 등록한다.
+
+새 컴포넌트는 맞는 카테고리 페이지에 문서 프레임을 하나 더 만들어 넣는다. `sync.mjs` 의 미등록 점검은 About·Foundations·Icons·Templates·구분선을 뺀 모든 페이지를 본다.
 
 ### 변수 컬렉션
 | 컬렉션 | 모드 | 변수 수 |
 |---|---|---|
 | **YBM DS** (`VariableCollectionId:3:2`) | Light / Dark | 246 |
-| Typography | 100% / 130% / 150% | 73 |
-| Shape | Default / Soft / Sharp | 9 |
-| Elevation | Default | 30 |
+| Typography | 100% (하나) | 73 |
+| Shape | Default (하나) | 9 |
+| Elevation | Default (하나) | 30 |
+
+- 2026-10-27 Typography 130%·150%, Shape Soft·Sharp 모드를 지웠다. 모드는 색의 Light / Dark 만 남는다(레퍼런스 라이브러리 기본 구성과 같음). 지우기 전 값은 Figma 버전 기록과 git 이력의 `tokens/figma-variables.json` 에 있다.
 
 - Figma 변수 이름에는 `color/` 접두사가 없다 (`bg/canvas`, `fg/neutral` …).
 - 모든 변수의 Web code syntax = `var(--ybm-…)` → Dev Mode 복사본이 그대로 CSS 에서 동작.
@@ -196,20 +218,19 @@ Figma 의 `dimension/x*` 변수 scopes = `WIDTH_HEIGHT` + `GAP`.
 
 **컴포넌트는 `--ybm-shape-*` 만 쓴다** (원시 radius 직접 참조 금지).
 
-| shape | 기본 | soft (`data-shape="soft"`) | sharp (`data-shape="sharp"`) |
-|---|---|---|---|
-| 2xs | r1 4 | r2 8 | r0 0 |
-| xs | r1_5 6 | r2_5 10 | r0 0 |
-| sm | r2 8 | r3 12 | r0 0 |
-| md | r2_5 10 | r3_5 14 | r0_5 2 |
-| lg | r3 12 | r4 16 | r0_5 2 |
-| xl | r4 16 | r5 20 | r1 4 |
-| 2xl | r5 20 | r6 24 | r1 4 |
-| 3xl | r6 24 | r8 32 | r1_5 6 |
-| pill | full | full | full |
+| shape | 값 |
+|---|---|
+| 2xs | r1 4 |
+| xs | r1_5 6 |
+| sm | r2 8 |
+| md | r2_5 10 |
+| lg | r3 12 |
+| xl | r4 16 |
+| 2xl | r5 20 |
+| 3xl | r6 24 |
+| pill | full |
 
-- 곡률 노브 `--ybm-shape-scale`(기본 1, 0 이면 완전 각짐). 영역 단위로 덮어써도 동작하도록 shape 계산은 `:root` 가 아니라 `*, ::before, ::after` 에서 한다.
-- `data-shape="square"` = 노브 0. pill 은 항상 원형.
+- 모양 테마(soft·sharp·square)는 2026-10-27 에 없앴다. 곡률 노브 `--ybm-shape-scale`(기본 1, 0 이면 완전 각짐)만 남는다 — 영역에 덮어쓰면 그 안만 바뀌도록 shape 계산은 `:root` 가 아니라 `*, ::before, ::after` 에서 한다. pill 은 항상 원형.
 
 ### 5.7 Typography
 폰트: **Pretendard** (`"Pretendard", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif`)
@@ -224,8 +245,8 @@ Figma 의 `dimension/x*` 변수 scopes = `WIDTH_HEIGHT` + `GAP`.
 | t05 | 16 / 24 | t11 | 28 / 40 | t17 | 72 / 96 |
 | t06 | 18 / 28 | t12 | 32 / 44 | | |
 
-- Figma Typography 컬렉션은 100% / 130% / 150% 모드(시스템 글자 확대 대응). `*-static` 변수는 확대에 반응하지 않는 곳(내비게이션 라벨 등)용 — `Static/*` 텍스트 스타일.
-- CSS 는 100% 모드 값만 쓴다(`*-static` 도 같은 값).
+- Figma Typography 컬렉션은 모드 하나(100%). 130%·150% 확대 모드는 2026-10-27 에 지웠다.
+- `*-static` 변수·`Static/*` 텍스트 스타일은 `Scale/*` 와 값이 같다. 글자 확대와 무관하게 고정해 두고 싶은 자리(내비게이션 라벨 등)를 표시하는 이름으로만 남아 있다.
 - 컴포넌트 라벨은 fontSize 변수 직접 바인딩이 아니라 **텍스트 스타일 적용**.
 - `body` 기본 = t05, `word-break: keep-all`.
 
@@ -420,6 +441,7 @@ CSS 는 Figma 프로퍼티 이름을 그대로 `data-*` 속성으로 쓴다: `<b
 ## 12. 변경 이력 (주요)
 | 날짜 | 내용 |
 |---|---|
+| 2026-10-27 | Figma 페이지를 레퍼런스 라이브러리 형식(카테고리 페이지 + 문서 프레임)으로 개편, 새 컴포넌트 10종(Figma 만). 모드 정리 — Typography 130%·150%, Shape Soft·Sharp 삭제, CSS 의 `data-shape` 테마(soft·sharp·square) 제거. 남은 모드는 Light / Dark |
 | 2026-10-22 | ds 를 단독 GitHub 저장소(ybm-ds) + Pages 로 분리, 가이드 사이트에서 DS 사본 제거(DS 주소 참조). 통합 동기화 `sync.mjs`·`동기화.bat`·`components.json`(Figma 노드 대조) 도입. `build.py` → `build.mjs`(출력 동일, Python 불필요). 컴포넌트 6종 추가(Divider·Tooltip·List·Breadcrumbs·Stepper·Banner — CSS·Figma 동시). 미리보기 `index.html` |
 | 2026-10-21 | 폴더 재구성(`ds/` 루트 = `ybm-ds/` + `tokens/`). 명칭 **YBM Family → YBM** 일괄 변경 — Figma 컬렉션 `YBM Family DS` → `YBM DS`, 코드·주석·생성물 전부 |
 | 2026-10-20 | 외부 레퍼런스 DS 관련 문구 전면 제거. figma-sync 파이프라인 도입 |

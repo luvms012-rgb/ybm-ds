@@ -2,9 +2,9 @@
    YBM Design System — TOKENS
    --------------------------------------------------------------------------
    ⚠ 이 파일은 tokens/build.mjs 가 figma-variables.json 에서 생성한다. 직접 고치지 말 것.
-   생성: 2026-10-21 · Figma file 1VCEsFU3xMWuXIntIrZz9i
-          컬렉션 「YBM DS」 Light/Dark · Typography 100/130/150%
-          · Shape Default/Soft/Sharp · Elevation
+   생성: 2026-10-27 · Figma file 1VCEsFU3xMWuXIntIrZz9i
+          컬렉션 「YBM DS」 Light/Dark · Typography · Shape · Elevation
+          (모드는 Light/Dark 하나뿐 — 2026-10-27 글자 배율·모양 테마 모드 삭제)
 
    3계층 구조
      1) PALETTE   --ybm-color-palette-*        원시값. 컴포넌트·서비스에서 직접 쓰지 않는다.
@@ -409,9 +409,8 @@
 }
 
 /* --------------------------------------------------------------------------
-   5. SHAPE 테마 — 기본 / 동글(soft) / 각진(sharp) + 곡률 노브
-   radius 만 바꾼다. 색·간격·타이포는 테마와 무관. data-theme 과 독립 조합 가능:
-   <html data-theme="dark" data-shape="soft">
+   5. SHAPE — 컴포넌트 모서리 곡률(시맨틱) + 곡률 노브
+   테마 모드는 없다. --ybm-shape-scale 을 영역에 덮어쓰면 그 안의 곡률만 줄이거나(0~1) 없앨 수 있다.
 
    ⚠ shape 계산을 :root 에 두면 안 된다 — 커스텀 프로퍼티는 "선언된 요소"에서 값이 확정되고
    자식은 그 결과를 상속하므로, :root 에 calc 를 두면 하위에서 --ybm-shape-scale 을 덮어써도
@@ -427,7 +426,7 @@
   --ybm-shape-base-xl: var(--ybm-radius-r4);
   --ybm-shape-base-2xl: var(--ybm-radius-r5);
   --ybm-shape-base-3xl: var(--ybm-radius-r6);
-  --ybm-shape-pill: var(--ybm-radius-full);   /* pill 은 테마·노브와 무관하게 항상 원형 */
+  --ybm-shape-pill: var(--ybm-radius-full);   /* pill 은 노브와 무관하게 항상 원형 */
 }
 
 *, ::before, ::after {
@@ -441,36 +440,9 @@
   --ybm-shape-3xl: calc(var(--ybm-shape-base-3xl) * var(--ybm-shape-scale));
 }
 
-/* 동글한 스타일 — 한 단계씩 위로. 친근하고 부드러운 톤. */
-[data-shape="soft"] {
-  --ybm-shape-base-2xs: var(--ybm-radius-r2);
-  --ybm-shape-base-xs: var(--ybm-radius-r2_5);
-  --ybm-shape-base-sm: var(--ybm-radius-r3);
-  --ybm-shape-base-md: var(--ybm-radius-r3_5);
-  --ybm-shape-base-lg: var(--ybm-radius-r4);
-  --ybm-shape-base-xl: var(--ybm-radius-r5);
-  --ybm-shape-base-2xl: var(--ybm-radius-r6);
-  --ybm-shape-base-3xl: var(--ybm-radius-r8);
-}
-
-/* 각진 스타일 — 컨트롤은 0, 서피스만 최소 곡률. 단정한 톤. */
-[data-shape="sharp"] {
-  --ybm-shape-base-2xs: var(--ybm-radius-r0);
-  --ybm-shape-base-xs: var(--ybm-radius-r0);
-  --ybm-shape-base-sm: var(--ybm-radius-r0);
-  --ybm-shape-base-md: var(--ybm-radius-r0_5);
-  --ybm-shape-base-lg: var(--ybm-radius-r0_5);
-  --ybm-shape-base-xl: var(--ybm-radius-r1);
-  --ybm-shape-base-2xl: var(--ybm-radius-r1);
-  --ybm-shape-base-3xl: var(--ybm-radius-r1_5);
-}
-
-/* 완전 각짐 — 노브만으로도 같은 결과. pill 요소는 여전히 원형으로 남는다. */
-[data-shape="square"] { --ybm-shape-scale: 0; }
-
 /* --------------------------------------------------------------------------
-   6. TYPOGRAPHY — Figma Typography 컬렉션 100% 모드 (t01~t17)
-   CSS 에는 130%/150% 모드가 없으므로 *-static 은 100% 와 같은 값을 쓴다.
+   6. TYPOGRAPHY — Figma Typography 컬렉션 (t01~t17, 모드 하나)
+   *-static 은 같은 값이다. 브라우저·시스템 글자 확대와 무관하게 고정해 두고 싶은 자리에 쓰는 이름.
    lineHeight 는 2026-09-29 에 전 단계 +2 로 조정했다.
    -------------------------------------------------------------------------- */
 :root {

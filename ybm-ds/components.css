@@ -1363,7 +1363,7 @@ button.ds-input__prefix:hover { color: var(--ybm-color-fg-neutral); }
 .ds-avatar[data-size="96"]  { --ds-avatar-size: 96px;  --ds-avatar-badge: 32px; }
 .ds-avatar[data-size="108"] { --ds-avatar-size: 108px; --ds-avatar-badge: 36px; }
 
-/* 모양 — rounded 는 곡률 노브(--ybm-shape-scale)를 따라 테마 [data-shape="square"] 에서 각진다 */
+/* 모양 — rounded 는 곡률 노브(--ybm-shape-scale)를 따른다 (노브가 0 인 영역에서는 각진다) */
 .ds-avatar[data-shape="rounded"] { --ds-avatar-radius: calc(var(--ds-avatar-size) * 0.25 * var(--ybm-shape-scale)); }
 .ds-avatar[data-shape="square"]  { --ds-avatar-radius: 0; }
 
