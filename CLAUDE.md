@@ -3,7 +3,7 @@
 집(**Mac**)과 회사(**Windows**) 두 PC 에서 같은 저장소로 작업한다. 이 파일은 저장소에 같이 올라가므로 어느 PC 에서든 Claude 가 먼저 읽는다.
 PC 마다 따로 쌓이는 Claude 메모리는 서로 보이지 않는다 — 두 PC 가 함께 알아야 할 것은 여기에 적는다.
 
-- 최종 갱신: 2026-10-26 (회사 PC)
+- 최종 갱신: 2026-10-27 (회사 PC)
 
 ## 1. 기준 주소
 
@@ -47,7 +47,7 @@ git clone https://github.com/luvms012-rgb/ybm-ds.git
 - **확정** — 문서 사이트 상단 메뉴(IA): **Docs · Foundations · Components · Templates**. Foundations 는 Docs 하위가 아니라 독립 메뉴이고, 원본은 위 Foundations 페이지.
 - **끝냄 (2026-10-27)** — Figma 페이지 구성을 레퍼런스 라이브러리 형식으로 개편(README §4). 디자인 시스템(변수·텍스트 스타일·컴포넌트)은 그대로이고, 컴포넌트 40종을 카테고리 페이지 10개로 옮겨 문서 프레임(헤더 + 마스터 컴포넌트)에 담았다. 우리에게 없는 것(Templates · Chat 페이지, 문서 본문의 사용 예시 블록)은 비워 둠.
 - **끝냄 (2026-10-27)** — 변수 모드 정리: Typography 130%·150%, Shape Soft·Sharp 삭제 → 모드는 색의 Light / Dark 만. 코드 토큰(`tokens/figma-variables.json` → `tokens.css` 등)·미리보기·README 반영. Figma 페이지 개편 때 새로 만든 컴포넌트 10종은 아직 CSS·`components.json` 미등록.
-- **끝냄 (2026-10-27)** — 로컬 폴더 `works/ds` → `works/ybm-ds`(집 Mac 과 같은 이름), 배포 패키지 `ybm-ds/` → `dist/`(공개 주소 `…/ybm-ds/dist/ybm-ds.css`, 가이드 사이트 경로·`dsUrl` 함께 변경). 아이콘 선 굵기 1.6(Figma·CSS), 2px 테두리 → 1px, 원본이 끊겼던 인스턴스 1,061개 다시 연결, `palette/brand-1000` 추가와 브랜드 색 바꾸는 방법(README §5.3), Icons 페이지 문서 프레임화.
+- **끝냄 (2026-10-27)** — 로컬 폴더 `works/ds` → `works/ybm-ds`(집 Mac 과 같은 이름), 배포 패키지 `ybm-ds/` → `dist/`(공개 주소 `…/ybm-ds/dist/ybm-ds.css`, 가이드 사이트 경로·`dsUrl` 함께 변경). 아이콘 선 굵기 크기 비례(크기 ÷ 12, Figma·CSS), 2px 테두리 → 1px, 원본이 끊겼던 인스턴스 1,061개 다시 연결, `palette/brand-1000` 추가와 브랜드 색 바꾸는 방법(README §5.3), Icons 페이지 문서 프레임화.
 - **정리 후보 (미정)** — 값이 같은 변수: `bg/neutral-inverted(-pressed)` = `bg/neutral-solid(-pressed)`, `bg/neutral-subtle` = `bg/layer-default` = `fg/neutral-inverted` = `fg/on-neutral-solid`. 빈칸: `bg/neutral-weak`(현재 `bg/neutral` 이 대신). 텍스트 스타일 `Scale/*` 와 `Static/*` 는 이제 값이 같다. Icons 페이지 옆 "미사용 벡터 (확인 후 삭제)" 13개.
 - **회사 PC 에만 있음** — 로컬 브랜치 `backup/2026-10-26-local`(push 안 함): 10-23~24 작업분(구조 정리 · cssOnly 버그 수정 · `components/index.html` 컴포넌트 메인 · 이전 CLAUDE.md 초안). 꺼내 쓸지는 사용자가 정한다.
 

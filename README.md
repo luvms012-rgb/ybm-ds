@@ -363,7 +363,7 @@ CSS 는 Figma 프로퍼티 이름을 그대로 `data-*` 속성으로 쓴다: `<b
 ### Figma
 - Icons 페이지 `271:2027` → 문서 프레임 `Icon` `2517:2` 안 "전체 아이콘" 에 라이브러리 프레임 `2416:2`
 - `Lucide/<name>` COMPONENT_SET(Outline + Solid) 1228개 + Outline 만 있는 FRAME 466개(선으로만 된 아이콘이라 Solid 불가)
-- Outline 선 굵기는 **1.6** (24px 기준, 2026-10-27 에 2 → 1.6). 인스턴스에서 선 굵기를 따로 덮어쓰지 않는다.
+- Outline 선 굵기는 **크기에 비례**한다 — 원본(24px)은 2, 인스턴스는 크기 ÷ 12 (12px 1 · 16px 1.33 · 20px 1.67 · 24px 2). 인스턴스 크기를 바꿀 때는 비율 크기 조절(K)로 바꾸거나 선 굵기를 크기 ÷ 12 로 맞춘다. (2026-10-27)
 - 컴포넌트에는 **반드시 이 페이지 컴포넌트의 인스턴스**를 쓴다. 벡터 직접 그리기·복제·외부 아이콘셋·detach 금지.
 - 색은 인스턴스 내부 `Vector` 의 fill/stroke 를 `fg/*` 로 오버라이드. Solid 의 루트 COMPONENT 에는 fill 을 넣지 않는다(사각형으로 렌더됨).
 - 자주 쓰는 ID: `x` `277:3557` · `chevron-right` `277:2216` · `chevron-down` `277:2212` · `plus` `277:3041` · `calendar` `277:2152` · `panel-left` `277:2980` · `house`(Solid) `1365:8053`
@@ -375,7 +375,7 @@ CSS 는 Figma 프로퍼티 이름을 그대로 `data-*` 속성으로 쓴다: `<b
 - SVG 를 data URI 로 넣고 `mask` 로 그린다 → `file://` 에서도 보이고, 색은 부모 `color` 를 따른다.
 - 크기: 기본 20 · `.ds-icon--sm` 16 · `.ds-icon--lg` 24 · 또는 `--ds-icon-size`
 - `:root` 의 `--ds-icon-{이름}` 을 다른 컴포넌트 CSS 에서 mask 로 재사용 가능
-- 추가: lucide.dev 에서 path 를 복사해 같은 형식으로 한 줄 추가 — `stroke-width` 는 2 가 아니라 **1.6** 으로 바꿔 넣는다(Figma 와 같게)
+- 추가: lucide.dev 에서 path 를 복사해 같은 형식으로 한 줄 추가 — `stroke-width` 는 Lucide 원본 그대로 **2**(viewBox 24 기준). 아이콘 크기에 따라 자동으로 비례해 Figma 규칙과 같아진다(20px → 1.67)
 
 현재 수록(51): x · chevron-down/up/left/right · chevrons-left/right · check · circle-alert · circle-check · circle-x · info · triangle-alert · eye · eye-off · external-link · monitor · smartphone · rotate-ccw · menu · minus · plus · search · ellipsis · inbox · calendar · panel-left · file-text · house · id-card · credit-card · globe · arrow-right · arrow-up · paperclip · thumbs-up · thumbs-down · headset · corner-down-right · image · sparkles · message-circle(2026-10-21 가이드 코멘트) · Solid: house / info / circle-check / circle-alert / triangle-alert
 
