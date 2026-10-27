@@ -146,7 +146,7 @@ DS 전체가 `@layer ybm.tokens, ybm.base, ybm.icons, ybm.components, ybm.utilit
 | Table & List | `2479:16` | List · Table |
 | --- | | 구분선 |
 
-**굵게** 표시한 10종은 2026-10-27 Figma 에 새로 만든 것(seed 기준)이다. 아직 CSS·`components.json`·§6.1 표에는 없어서 `sync.mjs` 점검에 "목록에 없는 세트"로 나온다 — 코드 쪽을 만들 때 함께 등록한다.
+**굵게** 표시한 10종은 2026-10-27 Figma 에 새로 만든 것이다. 아직 CSS·`components.json`·§6.1 표에는 없어서 `sync.mjs` 점검에 "목록에 없는 세트"로 나온다 — 코드 쪽을 만들 때 함께 등록한다.
 
 새 컴포넌트는 맞는 카테고리 페이지에 문서 프레임을 하나 더 만들어 넣는다. `sync.mjs` 의 미등록 점검은 About·Foundations·Icons·Templates·구분선을 뺀 모든 페이지를 본다.
 
@@ -357,6 +357,7 @@ CSS 는 Figma 프로퍼티 이름을 그대로 `data-*` 속성으로 쓴다: `<b
 ### Figma
 - Icons 페이지 `271:2027` → 프레임 `Lucide Icons` `1167:2`
 - `Lucide/<name>` COMPONENT_SET(Outline + Solid) 1228개 + Outline 만 있는 FRAME 466개(선으로만 된 아이콘이라 Solid 불가)
+- Outline 선 굵기는 **1.4** (24px 기준, 2026-10-27 에 2 → 1.4). 인스턴스에서 선 굵기를 따로 덮어쓰지 않는다.
 - 컴포넌트에는 **반드시 이 페이지 컴포넌트의 인스턴스**를 쓴다. 벡터 직접 그리기·복제·외부 아이콘셋·detach 금지.
 - 색은 인스턴스 내부 `Vector` 의 fill/stroke 를 `fg/*` 로 오버라이드. Solid 의 루트 COMPONENT 에는 fill 을 넣지 않는다(사각형으로 렌더됨).
 - 자주 쓰는 ID: `x` `277:3557` · `chevron-right` `277:2216` · `chevron-down` `277:2212` · `plus` `277:3041` · `calendar` `277:2152` · `panel-left` `277:2980` · `house`(Solid) `1365:8053`
@@ -368,7 +369,7 @@ CSS 는 Figma 프로퍼티 이름을 그대로 `data-*` 속성으로 쓴다: `<b
 - SVG 를 data URI 로 넣고 `mask` 로 그린다 → `file://` 에서도 보이고, 색은 부모 `color` 를 따른다.
 - 크기: 기본 20 · `.ds-icon--sm` 16 · `.ds-icon--lg` 24 · 또는 `--ds-icon-size`
 - `:root` 의 `--ds-icon-{이름}` 을 다른 컴포넌트 CSS 에서 mask 로 재사용 가능
-- 추가: lucide.dev 에서 path 를 복사해 같은 형식으로 한 줄 추가
+- 추가: lucide.dev 에서 path 를 복사해 같은 형식으로 한 줄 추가 — `stroke-width` 는 2 가 아니라 **1.4** 로 바꿔 넣는다(Figma 와 같게)
 
 현재 수록(51): x · chevron-down/up/left/right · chevrons-left/right · check · circle-alert · circle-check · circle-x · info · triangle-alert · eye · eye-off · external-link · monitor · smartphone · rotate-ccw · menu · minus · plus · search · ellipsis · inbox · calendar · panel-left · file-text · house · id-card · credit-card · globe · arrow-right · arrow-up · paperclip · thumbs-up · thumbs-down · headset · corner-down-right · image · sparkles · message-circle(2026-10-21 가이드 코멘트) · Solid: house / info / circle-check / circle-alert / triangle-alert
 
