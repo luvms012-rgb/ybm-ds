@@ -364,6 +364,7 @@ CSS 는 Figma 프로퍼티 이름을 그대로 `data-*` 속성으로 쓴다: `<b
 - Icons 페이지 `271:2027` → 문서 프레임 `Icon` `2517:2` 안 "전체 아이콘" 에 라이브러리 프레임 `2416:2`
 - `Lucide/<name>` COMPONENT_SET(Outline + Solid) 1228개 + Outline 만 있는 FRAME 466개(선으로만 된 아이콘이라 Solid 불가)
 - Outline 선 굵기는 **크기에 비례**한다 - 원본(24px)은 2, 인스턴스는 크기 ÷ 12 (12px 1, 16px 1.33, 20px 1.67, 24px 2). 인스턴스 크기를 바꿀 때는 비율 크기 조절(K)로 바꾸거나 선 굵기를 크기 ÷ 12 로 맞춘다. (2026-10-27)
+- 예외: 컨트롤 표시(체크박스의 체크와 가로선)는 아이콘 세트를 쓰지 않고 전용 부품 `Checkbox Mark`(Data Input 페이지 Checkbox 문서, 12/14/18px)를 쓴다. 선 굵기는 24 기준 2.75 비율(12px 1.375, 14px 1.6, 18px 2.06)로 굵게 유지하고, CSS `--ds-checkbox-mark` 와 같다.
 - 컴포넌트에는 **반드시 이 페이지 컴포넌트의 인스턴스**를 쓴다. 벡터 직접 그리기/복제/외부 아이콘셋/detach 금지.
 - 색은 인스턴스 내부 `Vector` 의 fill/stroke 를 `fg/*` 로 오버라이드. Solid 의 루트 COMPONENT 에는 fill 을 넣지 않는다(사각형으로 렌더됨).
 - 자주 쓰는 ID: `x` `277:3557`, `chevron-right` `277:2216`, `chevron-down` `277:2212`, `plus` `277:3041`, `calendar` `277:2152`, `panel-left` `277:2980`, `house`(Solid) `1365:8053`
