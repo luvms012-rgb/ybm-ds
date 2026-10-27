@@ -225,7 +225,7 @@
      outline  medium: h40 · px14 · gap8  · shape/sm · t04 · icon 16
      underline large : py8 · min-h44 · gap10 · t06 · icon 24 · 하단 1px
      underline medium: py6 · min-h36 · gap8  · t05 · icon 20
-     focused 2px stroke/neutral-contrast · invalid 2px stroke/critical-solid
+     focused 1px stroke/neutral-contrast · invalid 1px stroke/critical-solid
      disabled (outline) bg/disabled · 글자 fg/disabled / readOnly (outline) bg/disabled
    -------------------------------------------------------------------------- */
 .ds-input {
@@ -266,7 +266,7 @@
   content: "";
   position: absolute;
   inset: auto 0 0 0;
-  height: 2px;
+  height: 1px;
   background: var(--ds-input-line-active);
   opacity: 0;
   pointer-events: none;
@@ -303,7 +303,7 @@
   height: auto;
   border-radius: inherit;
   background: none;
-  box-shadow: inset 0 0 0 2px var(--ds-input-line-active);
+  box-shadow: inset 0 0 0 1px var(--ds-input-line-active);
   transition: opacity var(--ds-input-line-fade), box-shadow var(--ds-input-line-fade);
 }
 .ds-input[data-variant="outline"]:has(.ds-input__control:is(:disabled, [readonly])) { --ds-input-bg: var(--ybm-color-bg-disabled); }
@@ -371,7 +371,7 @@ button.ds-input__prefix:hover { color: var(--ybm-color-fg-neutral); }
    Figma outline large : px16 · py14 · min-h94 · shape/lg · t05
          outline medium: px14 · py12 · min-h82 · shape/sm · t04
          underline large : py8+14 · min-h110 · t06 · 하단 1px / underline medium: py6+12 · min-h94 · t05
-   focused 2px stroke/neutral-contrast · invalid 2px stroke/critical-solid · disabled·readOnly bg/disabled
+   focused 1px stroke/neutral-contrast · invalid 1px stroke/critical-solid · disabled·readOnly bg/disabled
    -------------------------------------------------------------------------- */
 .ds-textarea {
   --ds-textarea-padding: var(--ybm-space-x3_5) var(--ybm-space-x4);
@@ -420,8 +420,8 @@ button.ds-input__prefix:hover { color: var(--ybm-color-fg-neutral); }
   --ds-textarea-line-height: var(--ybm-line-height-t05);
 }
 .ds-textarea::placeholder { color: var(--ybm-color-fg-placeholder); opacity: 1; }
-.ds-textarea:focus { --ds-textarea-line: var(--ybm-color-stroke-neutral-contrast); --ds-textarea-line-width: 2px; }
-.ds-textarea[aria-invalid="true"] { --ds-textarea-line: var(--ybm-color-stroke-critical-solid); --ds-textarea-line-width: 2px; }
+.ds-textarea:focus { --ds-textarea-line: var(--ybm-color-stroke-neutral-contrast); --ds-textarea-line-width: 1px; }
+.ds-textarea[aria-invalid="true"] { --ds-textarea-line: var(--ybm-color-stroke-critical-solid); --ds-textarea-line-width: 1px; }
 .ds-textarea:disabled { color: var(--ybm-color-fg-disabled); }
 .ds-textarea:disabled::placeholder { color: var(--ybm-color-fg-disabled); }
 .ds-textarea:not([data-variant="underline"]):is(:disabled, [readonly]) { background: var(--ybm-color-bg-disabled); }
@@ -437,7 +437,7 @@ button.ds-input__prefix:hover { color: var(--ybm-color-fg-neutral); }
        <i class="ds-icon ds-icon--chevron-down" aria-hidden="true"></i>
      </button>
    Figma large : h52 · px16 · gap10 · shape/lg · t05 · icon 20 / medium: h40 · px14 · gap8 · shape/sm · t04 · icon 16
-          1px stroke/neutral-weak · invalid 2px stroke/critical-solid · disabled·readOnly bg/disabled
+          1px stroke/neutral-weak · invalid 1px stroke/critical-solid · disabled·readOnly bg/disabled
           affix·아이콘 fg/neutral-subtle · placeholder fg/placeholder · 값 fg/neutral
    readOnly: aria-readonly="true" (폼 제출이 필요하면 disabled 대신 readOnly — DS §6.4)
    -------------------------------------------------------------------------- */
@@ -479,7 +479,7 @@ button.ds-input__prefix:hover { color: var(--ybm-color-fg-neutral); }
 .ds-fieldbutton__value { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .ds-fieldbutton__value:empty::before { content: attr(data-placeholder); color: var(--ybm-color-fg-placeholder); }
 .ds-fieldbutton__affix { flex: none; color: var(--ybm-color-fg-neutral-subtle); }
-.ds-fieldbutton[aria-invalid="true"] { --ds-fb-line: var(--ybm-color-stroke-critical-solid); --ds-fb-line-width: 2px; }
+.ds-fieldbutton[aria-invalid="true"] { --ds-fb-line: var(--ybm-color-stroke-critical-solid); --ds-fb-line-width: 1px; }
 .ds-fieldbutton:is(:disabled, [aria-readonly="true"]) { --ds-fb-bg: var(--ybm-color-bg-disabled); }
 .ds-fieldbutton[aria-readonly="true"] { cursor: default; }
 .ds-fieldbutton:disabled { color: var(--ybm-color-fg-disabled); cursor: not-allowed; }
@@ -520,7 +520,7 @@ button.ds-input__prefix:hover { color: var(--ybm-color-fg-neutral); }
        <span class="ds-select__value" data-placeholder="선택해 주세요"></span>
      </button>
    Figma large: h52 · px16 · gap10 · shape/lg · t05 · chevron 20 / medium: h40 · px14 · gap8 · shape/sm · t04 · chevron 16
-          chevron fg/neutral(열림 = chevron-up) · invalid 2px critical · disabled·readOnly bg/disabled
+          chevron fg/neutral(열림 = chevron-up) · invalid 1px critical · disabled·readOnly bg/disabled
    -------------------------------------------------------------------------- */
 .ds-select {
   --ds-select-height: 52px;
@@ -569,7 +569,7 @@ button.ds-input__prefix:hover { color: var(--ybm-color-fg-neutral); }
           mask: var(--ds-icon-chevron-down) center / contain no-repeat;
 }
 .ds-select[aria-expanded="true"]::after { -webkit-mask-image: var(--ds-icon-chevron-up); mask-image: var(--ds-icon-chevron-up); }
-.ds-select[aria-invalid="true"] { --ds-select-line: var(--ybm-color-stroke-critical-solid); --ds-select-line-width: 2px; }
+.ds-select[aria-invalid="true"] { --ds-select-line: var(--ybm-color-stroke-critical-solid); --ds-select-line-width: 1px; }
 .ds-select:is(:disabled, [aria-readonly="true"]) { --ds-select-bg: var(--ybm-color-bg-disabled); }
 .ds-select:disabled { color: var(--ybm-color-fg-disabled); cursor: not-allowed; }
 .ds-select:disabled .ds-select__value:empty::before { color: var(--ybm-color-fg-disabled); }
@@ -883,7 +883,7 @@ button.ds-input__prefix:hover { color: var(--ybm-color-fg-neutral); }
      </div>
    Figma: bg/layer-default · 1px stroke/neutral-weak · small/medium shape/sm · large shape/lg
           버튼 정사각(36/40/52) · 아이콘 16/18/22 fg/neutral · 값 min-w40 px8 · t05 Medium(large t06)
-          disabled 아이콘·값 fg/disabled · invalid 2px stroke/critical-solid
+          disabled 아이콘·값 fg/disabled · invalid 1px stroke/critical-solid
    -------------------------------------------------------------------------- */
 .ds-quantity {
   --ds-qty-size: 40px;
@@ -932,7 +932,7 @@ button.ds-input__prefix:hover { color: var(--ybm-color-fg-neutral); }
   outline: 0;
 }
 .ds-quantity[data-layout="fill"] .ds-quantity__value { width: auto; }
-.ds-quantity:has([aria-invalid="true"]) { --ds-qty-line: var(--ybm-color-stroke-critical-solid); --ds-qty-line-width: 2px; }
+.ds-quantity:has([aria-invalid="true"]) { --ds-qty-line: var(--ybm-color-stroke-critical-solid); --ds-qty-line-width: 1px; }
 .ds-quantity:has(.ds-quantity__value:disabled) { color: var(--ybm-color-fg-disabled); }
 .ds-quantity:has(.ds-quantity__value:disabled) .ds-quantity__btn { color: var(--ybm-color-fg-disabled); pointer-events: none; }
 
@@ -1948,7 +1948,7 @@ html:has(:is(.ds-dialog, .ds-bottomsheet)[open]) { overflow: hidden; }
      <input type="range" class="ds-slider" min="0" max="100" value="45" [data-tone="brand"]>
    채움 길이는 --ds-slider-value(0~100%) — ybm-ds.js 가 input 마다 자동으로 갱신한다.
    Figma: 높이 20 · 트랙 4 pill palette/gray-200 · 채움 bg/neutral-solid(brand bg/brand-solid)
-          썸 20 static-white + 2px 테두리(채움 색) + elevation raised
+          썸 20 static-white + 1px 테두리(채움 색) + elevation raised
           disabled opacity .7 · 채움 bg/disabled · 썸 테두리 stroke/neutral-weak
    -------------------------------------------------------------------------- */
 .ds-slider {
@@ -1967,8 +1967,8 @@ html:has(:is(.ds-dialog, .ds-bottomsheet)[open]) { overflow: hidden; }
 .ds-slider::-webkit-slider-runnable-track { height: 4px; border-radius: var(--ybm-shape-pill); background: linear-gradient(var(--ds-slider-active), var(--ds-slider-active)) 0 0 / var(--ds-slider-value) 100% no-repeat, var(--ybm-color-palette-gray-200); }
 .ds-slider::-moz-range-track { height: 4px; border-radius: var(--ybm-shape-pill); background: var(--ybm-color-palette-gray-200); }
 .ds-slider::-moz-range-progress { height: 4px; border-radius: var(--ybm-shape-pill); background: var(--ds-slider-active); }
-.ds-slider::-webkit-slider-thumb { appearance: none; width: 20px; height: 20px; margin-top: -8px; border-radius: var(--ybm-shape-pill); background: var(--ybm-color-palette-static-white); box-shadow: inset 0 0 0 2px var(--ds-slider-thumb-line), var(--ybm-elevation-raised); }
-.ds-slider::-moz-range-thumb { width: 20px; height: 20px; border: 0; border-radius: var(--ybm-shape-pill); background: var(--ybm-color-palette-static-white); box-shadow: inset 0 0 0 2px var(--ds-slider-thumb-line), var(--ybm-elevation-raised); }
+.ds-slider::-webkit-slider-thumb { appearance: none; width: 20px; height: 20px; margin-top: -8px; border-radius: var(--ybm-shape-pill); background: var(--ybm-color-palette-static-white); box-shadow: inset 0 0 0 1px var(--ds-slider-thumb-line), var(--ybm-elevation-raised); }
+.ds-slider::-moz-range-thumb { width: 20px; height: 20px; border: 0; border-radius: var(--ybm-shape-pill); background: var(--ybm-color-palette-static-white); box-shadow: inset 0 0 0 1px var(--ds-slider-thumb-line), var(--ybm-elevation-raised); }
 .ds-slider:disabled { --ds-slider-active: var(--ybm-color-bg-disabled); --ds-slider-thumb-line: var(--ybm-color-stroke-neutral-weak); opacity: 0.7; cursor: not-allowed; }
 
 
@@ -2626,7 +2626,7 @@ a.ds-card:active, button.ds-card:active { background: linear-gradient(var(--ybm-
      </ol>
    Figma: indicator 24 원형 · 숫자 t02 Bold(자동 번호) · 연결선 2px · 라벨 t03(horizontal 아래 가운데 / vertical 오른쪽)
      complete bg/brand-solid + check 14 fg/on-brand-solid · 연결선 stroke/brand-solid
-     current 2px stroke/brand-solid + 숫자 fg/brand · 라벨 Bold fg/neutral
+     current 1px stroke/brand-solid + 숫자 fg/brand · 라벨 Bold fg/neutral
      upcoming bg/neutral-muted + 숫자 fg/neutral-subtle · 라벨 fg/neutral-subtle · 연결선 stroke/neutral-weak
    단계는 3~5개. 라벨은 짧은 명사형(한글 6자 안팎). 단계가 더 많으면 "2 / 6" 처럼 글자로 보여 준다.
    -------------------------------------------------------------------------- */
@@ -2673,7 +2673,7 @@ a.ds-card:active, button.ds-card:active { background: linear-gradient(var(--ybm-
   font-variant-numeric: tabular-nums;
 }
 .ds-stepper__indicator:empty::before { content: counter(ds-step); }
-.ds-stepper__step[data-state="current"] .ds-stepper__indicator { background: var(--ybm-color-bg-layer-default); box-shadow: inset 0 0 0 2px var(--ybm-color-stroke-brand-solid); color: var(--ybm-color-fg-brand); }
+.ds-stepper__step[data-state="current"] .ds-stepper__indicator { background: var(--ybm-color-bg-layer-default); box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-brand-solid); color: var(--ybm-color-fg-brand); }
 .ds-stepper__step[data-state="complete"] .ds-stepper__indicator { background: var(--ybm-color-bg-brand-solid); color: var(--ybm-color-fg-on-brand-solid); }
 .ds-stepper__step[data-state="complete"] .ds-stepper__indicator:empty::before {
   content: "";
