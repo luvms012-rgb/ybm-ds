@@ -7,7 +7,7 @@
      · Snackbar — YBM.snackbar("문구", { variant: "positive"|"critical", action: "확인", onAction, duration })
      · Slider — <input class="ds-slider"> 채움 길이(--ds-slider-value) 동기화
      · Checkbox — data-indeterminate 속성 → input.indeterminate
-   사용: <script src="…/ybm-ds/ybm-ds.js" defer></script>
+   사용: <script src="…/ybm-ds/dist/ybm-ds.js" defer></script>
    ========================================================================== */
 (function () {
   "use strict";

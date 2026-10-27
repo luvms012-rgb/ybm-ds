@@ -1,7 +1,7 @@
 /* ==========================================================================
    YBM Design System — 진입 파일 (서비스는 이 파일 하나만 link 한다)
    --------------------------------------------------------------------------
-   <link rel="stylesheet" href="…/ybm-ds/ybm-ds.css">   ← 공통 DS
+   <link rel="stylesheet" href="…/ybm-ds/dist/ybm-ds.css">   ← 공통 DS
    <link rel="stylesheet" href="…/services/{서비스}/{서비스}.css">  ← 서비스 전용
 
    ▣ Cascade Layers

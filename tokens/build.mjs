@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // YBM DS — 토큰 빌드 스크립트 (2026-10-22 build.py 를 Node 로 옮김 — 같은 입력이면 같은 출력)
 // 입력: tokens/figma-variables.json (Figma 변수 전집 스냅샷 = source of truth)
-// 출력: ybm-ds/tokens.css · tokens/design-tokens.json · tokens/tokens.js · tokens/tailwind.preset.js
+// 출력: dist/tokens.css · tokens/design-tokens.json · tokens/tokens.js · tokens/tailwind.preset.js
 //
 //   node tokens/build.mjs                 오늘 날짜로 ds/ 에 생성
 //   node tokens/build.mjs <날짜> <폴더>    다른 폴더에 생성 (검증용)
@@ -355,7 +355,7 @@ export function build(date, sourcePath = path.join(HERE, 'tokens', 'figma-variab
   }
 
   return {
-    'ybm-ds/tokens.css': css(),
+    'dist/tokens.css': css(),
     'tokens/design-tokens.json': nestedJson(),
     'tokens/tokens.js': tokensJs(),
     'tokens/tailwind.preset.js': tailwindPreset(),

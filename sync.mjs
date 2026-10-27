@@ -61,7 +61,7 @@ function identityArgs() {
 function verify({ quiet = false } = {}) {
   const errors = [], warns = [];
   // 1) 생성물 = 스냅샷 빌드 결과 (손으로 고쳤거나 빌드를 빠뜨렸는지)
-  const stamp = (read('ybm-ds/tokens.css').match(/생성: (\d{4}-\d{2}-\d{2})/) || [])[1] || today();
+  const stamp = (read('dist/tokens.css').match(/생성: (\d{4}-\d{2}-\d{2})/) || [])[1] || today();
   let built;
   try { built = build(stamp); } catch (e) { errors.push('토큰 스냅샷 오류 — ' + e.message); }
   if (built) for (const [p, text] of Object.entries(built)) {
@@ -69,13 +69,13 @@ function verify({ quiet = false } = {}) {
     else if (read(p) !== text) errors.push(`생성물이 스냅샷과 다름: ${p} — 손으로 고치지 말고 Figma 변수 → node sync.mjs pull`);
   }
   // 2) 진입 파일의 @import 대상
-  for (const m of read('ybm-ds/ybm-ds.css').matchAll(/@import url\("([^"]+)"\)/g))
-    if (!fs.existsSync(path.join(DS, 'ybm-ds', m[1]))) errors.push(`ybm-ds.css 가 없는 파일을 import: ${m[1]}`);
+  for (const m of read('dist/ybm-ds.css').matchAll(/@import url\("([^"]+)"\)/g))
+    if (!fs.existsSync(path.join(DS, 'dist', m[1]))) errors.push(`ybm-ds.css 가 없는 파일을 import: ${m[1]}`);
   // 3) 폰트
-  for (const m of read('ybm-ds/base.css').matchAll(/url\("?([^")]+\.woff2)"?\)/g))
-    if (!fs.existsSync(path.join(DS, 'ybm-ds', m[1]))) errors.push(`폰트 파일 없음: ${m[1]}`);
+  for (const m of read('dist/base.css').matchAll(/url\("?([^")]+\.woff2)"?\)/g))
+    if (!fs.existsSync(path.join(DS, 'dist', m[1]))) errors.push(`폰트 파일 없음: ${m[1]}`);
   // 4) components.json ↔ components.css
-  const css = read('ybm-ds/components.css');
+  const css = read('dist/components.css');
   const manifest = JSON.parse(read('components.json'));
   const listed = new Set();
   for (const comp of manifest.components) for (const cls of comp.classes) {
@@ -168,7 +168,7 @@ function httpStatus(url, method = 'HEAD') {
     req.end();
   });
 }
-async function siteUp() { return (await httpStatus(CFG.pagesUrl + 'ybm-ds/ybm-ds.css')) === 200; }
+async function siteUp() { return (await httpStatus(CFG.pagesUrl + 'dist/ybm-ds.css')) === 200; }
 
 async function deploy(message) {
   const { errors } = verify();

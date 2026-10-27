@@ -1,27 +1,27 @@
 # YBM Design System
 
-YBM 서비스 공용 디자인 시스템. Figma 변수·컴포넌트가 정본이고, 이 폴더(`ds/`)는 그걸 코드로 옮긴 배포 패키지와 동기화 도구다.
+YBM 서비스 공용 디자인 시스템. Figma 변수·컴포넌트가 정본이고, 이 폴더(`ybm-ds/`)는 그걸 코드로 옮긴 배포 패키지와 동기화 도구다.
 이 폴더 하나가 GitHub 저장소 하나다(가이드 사이트와 분리된 단독 저장소).
 
-- 최종 갱신: 2026-10-22
+- 최종 갱신: 2026-10-27
 - Figma 파일: `1VCEsFU3xMWuXIntIrZz9i` — <https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/>
 - GitHub 저장소: <https://github.com/luvms012-rgb/ybm-ds>
 - 배포 주소(Pages): <https://luvms012-rgb.github.io/ybm-ds/> — 첫 화면이 컴포넌트 미리보기
-- 로컬 폴더: `C:\Users\luvms\Desktop\works\ds`
+- 로컬 폴더: 회사 `C:\Users\luvms\Desktop\works\ybm-ds` · 집 Mac `~/Works/ybm-ds` (저장소 이름과 같다)
 
 ---
 
 ## 1. 폴더 구조
 
 ```
-ds/                          ← 저장소 루트 = Pages 사이트 루트
+ybm-ds/                      ← 저장소 루트 = Pages 사이트 루트
 ├─ README.md                 ← 이 문서 (DS 전체 안내)
-├─ index.html                컴포넌트 미리보기 (48종 · Light/Dark · Shape 전환 · ?only=43-48 로 골라 보기)
+├─ index.html                컴포넌트 미리보기 (48종 · Light/Dark · ?only=43-48 로 골라 보기)
 ├─ components.json           컴포넌트 목록 — CSS 클래스 · Figma 노드 ID · 변형 수 (sync 가 양쪽과 대조)
 ├─ sync.mjs                  ◆ 통합 동기화 (Figma ↔ 로컬 ↔ GitHub ↔ 가이드 사이트)
 ├─ 동기화.bat                 더블클릭 = node sync.mjs deploy (검증 → 커밋 → GitHub 반영)
 ├─ deploy.config.json        저장소 · Pages 주소 · 브랜치
-├─ ybm-ds/                   ← 배포 패키지. 서비스는 이 폴더를 가리킨다
+├─ dist/                     ← 배포 패키지(2026-10-27 ybm-ds/ → dist/). 서비스는 이 폴더를 가리킨다
 │  ├─ ybm-ds.css             진입 파일 (이것 하나만 link) — 아래 5개를 cascade layer 로 import
 │  ├─ tokens.css             토큰 (⚠ 생성물 — 손으로 고치지 않음)
 │  ├─ base.css               리셋 · Pretendard @font-face · 포커스 링 · reduced-motion · .ds-sr-only
@@ -47,7 +47,7 @@ git 에 올리지 않는 것(`.gitignore`): `tokens/.figma-check.js` · `tokens/
 | 구분 | 파일 |
 |---|---|
 | 직접 편집 | `base.css` `icons.css` `components.css` `utilities.css` `ybm-ds.css` `ybm-ds.js` `index.html` `components.json` `sync.mjs` `tokens/build.mjs` `tokens/figma-sync.mjs` |
-| 생성물 (편집 금지) | `ybm-ds/tokens.css` `tokens/design-tokens.json` `tokens/tokens.js` `tokens/tailwind.preset.js` `tokens/.figma-check.js` |
+| 생성물 (편집 금지) | `dist/tokens.css` `tokens/design-tokens.json` `tokens/tokens.js` `tokens/tailwind.preset.js` `tokens/.figma-check.js` |
 | 스냅샷 (sync 로만 갱신) | `tokens/figma-variables.json` |
 
 ---
@@ -56,11 +56,11 @@ git 에 올리지 않는 것(`.gitignore`): `tokens/.figma-check.js` · `tokens/
 
 ```html
 <!-- 배포 주소에서 바로 (가이드 사이트·외부 시안) -->
-<link rel="stylesheet" href="https://luvms012-rgb.github.io/ybm-ds/ybm-ds/ybm-ds.css">
-<script src="https://luvms012-rgb.github.io/ybm-ds/ybm-ds/ybm-ds.js" defer></script>
+<link rel="stylesheet" href="https://luvms012-rgb.github.io/ybm-ds/dist/ybm-ds.css">
+<script src="https://luvms012-rgb.github.io/ybm-ds/dist/ybm-ds.js" defer></script>
 
 <!-- 로컬 작업(works 폴더 안) — 상대경로. 가이드 배포 때 위 주소로 자동 치환된다 -->
-<link rel="stylesheet" href="../../../../ds/ybm-ds/ybm-ds.css">
+<link rel="stylesheet" href="../../../../ybm-ds/dist/ybm-ds.css">
 <link rel="stylesheet" href="…/{서비스}.css">       <!-- 서비스 전용은 DS 다음에 -->
 
 <html data-theme="dark">  <!-- 다크 모드(선택). 모드는 Light/Dark 두 가지뿐 -->
@@ -357,7 +357,7 @@ CSS 는 Figma 프로퍼티 이름을 그대로 `data-*` 속성으로 쓴다: `<b
 ### Figma
 - Icons 페이지 `271:2027` → 프레임 `Lucide Icons` `1167:2`
 - `Lucide/<name>` COMPONENT_SET(Outline + Solid) 1228개 + Outline 만 있는 FRAME 466개(선으로만 된 아이콘이라 Solid 불가)
-- Outline 선 굵기는 **1.4** (24px 기준, 2026-10-27 에 2 → 1.4). 인스턴스에서 선 굵기를 따로 덮어쓰지 않는다.
+- Outline 선 굵기는 **1.6** (24px 기준, 2026-10-27 에 2 → 1.6). 인스턴스에서 선 굵기를 따로 덮어쓰지 않는다.
 - 컴포넌트에는 **반드시 이 페이지 컴포넌트의 인스턴스**를 쓴다. 벡터 직접 그리기·복제·외부 아이콘셋·detach 금지.
 - 색은 인스턴스 내부 `Vector` 의 fill/stroke 를 `fg/*` 로 오버라이드. Solid 의 루트 COMPONENT 에는 fill 을 넣지 않는다(사각형으로 렌더됨).
 - 자주 쓰는 ID: `x` `277:3557` · `chevron-right` `277:2216` · `chevron-down` `277:2212` · `plus` `277:3041` · `calendar` `277:2152` · `panel-left` `277:2980` · `house`(Solid) `1365:8053`
@@ -369,7 +369,7 @@ CSS 는 Figma 프로퍼티 이름을 그대로 `data-*` 속성으로 쓴다: `<b
 - SVG 를 data URI 로 넣고 `mask` 로 그린다 → `file://` 에서도 보이고, 색은 부모 `color` 를 따른다.
 - 크기: 기본 20 · `.ds-icon--sm` 16 · `.ds-icon--lg` 24 · 또는 `--ds-icon-size`
 - `:root` 의 `--ds-icon-{이름}` 을 다른 컴포넌트 CSS 에서 mask 로 재사용 가능
-- 추가: lucide.dev 에서 path 를 복사해 같은 형식으로 한 줄 추가 — `stroke-width` 는 2 가 아니라 **1.4** 로 바꿔 넣는다(Figma 와 같게)
+- 추가: lucide.dev 에서 path 를 복사해 같은 형식으로 한 줄 추가 — `stroke-width` 는 2 가 아니라 **1.6** 으로 바꿔 넣는다(Figma 와 같게)
 
 현재 수록(51): x · chevron-down/up/left/right · chevrons-left/right · check · circle-alert · circle-check · circle-x · info · triangle-alert · eye · eye-off · external-link · monitor · smartphone · rotate-ccw · menu · minus · plus · search · ellipsis · inbox · calendar · panel-left · file-text · house · id-card · credit-card · globe · arrow-right · arrow-up · paperclip · thumbs-up · thumbs-down · headset · corner-down-right · image · sparkles · message-circle(2026-10-21 가이드 코멘트) · Solid: house / info / circle-check / circle-alert / triangle-alert
 

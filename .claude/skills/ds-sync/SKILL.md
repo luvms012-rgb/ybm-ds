@@ -5,7 +5,7 @@ description: YBM DS 를 Figma ↔ 로컬(ds/) ↔ GitHub(ybm-ds 저장소·Pages
 
 # YBM DS 동기화
 
-Figma 파일 `1VCEsFU3xMWuXIntIrZz9i`(디자인 시스템)과 `works/ds` 를 맞추고 GitHub 까지 올린다. 모든 명령은 `works/ds` 에서 실행한다.
+Figma 파일 `1VCEsFU3xMWuXIntIrZz9i`(디자인 시스템)과 `works/ybm-ds` 를 맞추고 GitHub 까지 올린다. 모든 명령은 `works/ybm-ds` 에서 실행한다.
 
 ## 순서
 
@@ -34,6 +34,6 @@ Figma 파일 `1VCEsFU3xMWuXIntIrZz9i`(디자인 시스템)과 `works/ds` 를 맞
 | push 인증 실패 | 사용자에게 GitHub Desktop 이나 `배포하기.bat` 로 한 번 로그인해 달라고 한다 |
 
 ## 하지 말 것
-- `ybm-ds/tokens.css` 와 `tokens/` 생성물을 손으로 고치지 않는다.
+- `dist/tokens.css` 와 `tokens/` 생성물을 손으로 고치지 않는다.
 - Figma 점검 스크립트를 변수 쓰기용으로 바꾸지 않는다(이 절차의 Figma 단계는 읽기 전용).
 - 문서·코드에 외부 레퍼런스 DS 의 이름·링크·비교 문구를 넣지 않는다.

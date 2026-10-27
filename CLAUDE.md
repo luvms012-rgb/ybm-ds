@@ -55,4 +55,4 @@ git clone https://github.com/luvms012-rgb/ybm-ds.git
 - 사용법·동기화·토큰·컴포넌트 상세는 `README.md`, Figma 동기화 절차는 `.claude/skills/ds-sync/SKILL.md`.
 - 커밋·배포는 사용자가 요청할 때만.
 - 문서·코드에 외부 레퍼런스 DS 의 이름·링크·비교 문구를 넣지 않는다.
-- `ybm-ds/tokens.css` 와 `tokens/` 생성물은 손으로 고치지 않는다.
+- `dist/tokens.css` 와 `tokens/` 생성물은 손으로 고치지 않는다.

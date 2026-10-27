@@ -3,7 +3,7 @@
    리셋 · 폰트 · 접근성 기본값. 여기에는 "모든 서비스에서 똑같아야 하는 것"만 둔다.
    ========================================================================== */
 
-/* Pretendard — ybm-ds/fonts (woff2, 원본은 리소스/fonts) */
+/* Pretendard — dist/fonts (woff2, 원본은 리소스/fonts) */
 @font-face { font-family: "Pretendard"; font-weight: 400; font-display: swap; src: url("fonts/Pretendard-Regular.woff2") format("woff2"); }
 @font-face { font-family: "Pretendard"; font-weight: 500; font-display: swap; src: url("fonts/Pretendard-Medium.woff2") format("woff2"); }
 @font-face { font-family: "Pretendard"; font-weight: 600; font-display: swap; src: url("fonts/Pretendard-SemiBold.woff2") format("woff2"); }
