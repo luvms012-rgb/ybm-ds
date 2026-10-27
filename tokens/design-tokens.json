@@ -89,6 +89,10 @@
         "900": {
           "light": "#1e3a8a",
           "dark": "#bfdbfe"
+        },
+        "1000": {
+          "light": "#172554",
+          "dark": "#dbeafe"
         }
       },
       "blue": {

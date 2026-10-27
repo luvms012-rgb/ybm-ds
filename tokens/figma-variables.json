@@ -9,7 +9,7 @@
           "Light",
           "Dark"
         ],
-        "count": 246
+        "count": 247
       },
       "Typography": {
         "modes": [
@@ -618,6 +618,13 @@
           "values": {
             "Light": "#1e3a8a",
             "Dark": "#bfdbfe"
+          }
+        },
+        "palette/brand-1000": {
+          "type": "COLOR",
+          "values": {
+            "Light": "#172554",
+            "Dark": "#dbeafe"
           }
         },
         "palette/orange-100": {

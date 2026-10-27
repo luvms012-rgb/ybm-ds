@@ -5,3 +5,6 @@ tokens/.figma-variables-result.json
 tokens/figma-variables.backup-*.json
 Thumbs.db
 .DS_Store
+
+# Figma 점검 임시 파일 (로컬 전용)
+.cache/

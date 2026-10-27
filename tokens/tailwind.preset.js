@@ -29,7 +29,8 @@ module.exports = {
           "600": "var(--ybm-color-palette-brand-600)",
           "700": "var(--ybm-color-palette-brand-700)",
           "800": "var(--ybm-color-palette-brand-800)",
-          "900": "var(--ybm-color-palette-brand-900)"
+          "900": "var(--ybm-color-palette-brand-900)",
+          "1000": "var(--ybm-color-palette-brand-1000)"
         },
         "blue": {
           "100": "var(--ybm-color-palette-blue-100)",

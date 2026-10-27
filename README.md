@@ -130,7 +130,7 @@ DS 전체가 `@layer ybm.tokens, ybm.base, ybm.icons, ybm.components, ybm.utilit
 |---|---|---|
 | About | `2479:3` | 표지(YBMNET 로고 — 색은 logo/* 변수) · 이 파일에 대하여 · 링크 |
 | Foundations | `2274:1143` | 문서 프레임 Color `2486:2` · Typography `2486:13` · Spacing `2486:24` · Radius `2486:35` · Elevation `2486:46` (본문 내용 프레임은 예전 그대로) |
-| Icons | `271:2027` | Lucide Icons 프레임 |
+| Icons | `271:2027` | 문서 프레임 `Icon` `2517:2` — 머리말 · 예시(크기·색·선형/채움·상태) · 안내 · 전체 아이콘(라이브러리 프레임 `2416:2`) |
 | ----- | | 구분선 |
 | Templates | `2479:5` | 비어 있음 (화면 템플릿 준비 중) |
 | --- | | 구분선 |
@@ -183,9 +183,15 @@ COMPONENT --ds-{컴포넌트}-*                 components.css 의 각 컴포넌
 ### 5.2 네이밍 규약 (`--ybm-` 접두사, zero-pad)
 `--ybm-color-*` · `--ybm-space-x*` · `--ybm-radius-r*` · `--ybm-shape-*` · `--ybm-font-size-t0N` · `--ybm-line-height-t0N` · `--ybm-font-weight-*` · `--ybm-font-family-base` · `--ybm-elevation-*` · `--ybm-duration-*` · `--ybm-easing-*` · `--ybm-z-*`
 
-### 5.3 팔레트 (103)
-gray `00·100~1000` · brand `100~900`(**실제 색은 파랑**, `#dbeafe`~) · blue · red · green · yellow · orange · purple `100~1000` · `static-white`/`static-black` + 각 alpha `50~1000`.
-다크 모드는 **팔레트 flip**(명도 반전, gray-00=검정). `static-*` 만 모드 무관.
+### 5.3 팔레트 (104)
+gray `00·100~1000` · brand · blue · red · green · yellow · orange · purple `100~1000` · `static-white`/`static-black` + 각 alpha `50~1000`.
+다크 모드는 **팔레트 flip**(명도 반전, gray-00=검정). `static-*` 만 모드 무관. (brand-1000 은 2026-10-27 추가)
+
+#### 브랜드 색 바꾸기 — `palette/brand-100~1000` 한 곳만 고친다
+- 브랜드 역할 색(`bg/brand-*` · `fg/brand*` · `stroke/brand-*` · `chart/series-1`)과 컴포넌트는 모두 `palette/brand-*` 를 거친다. Figma·CSS 어디에도 브랜드 색 값을 직접 넣은 곳이 없다(2026-10-27 점검).
+- 바꾸는 순서: Figma 변수 `palette/brand-100~1000` 의 Light 값을 새 브랜드 단계로 바꾸고, Dark 값은 같은 단계를 뒤집어 넣는다(Dark 100 = Light 1000 … Dark 1000 = Light 100) → `node sync.mjs figma` → 점검 결과 반영(`pull`) → 버튼·칩·탭·차트 등 전부 따라 바뀐다.
+- 기준 단계: `brand-600` = 주 버튼·링크(`bg/brand-solid`, `fg/brand`), `brand-700` = 눌림·진한 글자, `brand-100~200` = 옅은 배경, `brand-300` = 옅은 선.
+- 바뀌지 않는 것(의도): 포커스 링 `stroke/focus-ring` 과 안내색 `informative-*` 은 blue 팔레트를 쓴다 — 브랜드가 바뀌어도 접근성 표시는 그대로 둔다. 로고 색 `logo/*` 도 고정.
 
 로고 고정색(모드 무관): `logo-ybm-blue #0055a7` · `logo-ybm-red #e83743` · `logo-ybm-gray #7d7d7d`
 
@@ -355,7 +361,7 @@ CSS 는 Figma 프로퍼티 이름을 그대로 `data-*` 속성으로 쓴다: `<b
 **UI 아이콘은 Lucide 만 사용한다.**
 
 ### Figma
-- Icons 페이지 `271:2027` → 프레임 `Lucide Icons` `1167:2`
+- Icons 페이지 `271:2027` → 문서 프레임 `Icon` `2517:2` 안 "전체 아이콘" 에 라이브러리 프레임 `2416:2`
 - `Lucide/<name>` COMPONENT_SET(Outline + Solid) 1228개 + Outline 만 있는 FRAME 466개(선으로만 된 아이콘이라 Solid 불가)
 - Outline 선 굵기는 **1.6** (24px 기준, 2026-10-27 에 2 → 1.6). 인스턴스에서 선 굵기를 따로 덮어쓰지 않는다.
 - 컴포넌트에는 **반드시 이 페이지 컴포넌트의 인스턴스**를 쓴다. 벡터 직접 그리기·복제·외부 아이콘셋·detach 금지.

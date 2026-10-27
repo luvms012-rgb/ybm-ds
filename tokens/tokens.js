@@ -23,6 +23,7 @@ export const tokens = {
   "--ybm-color-palette-brand-700": "#1d4ed8",
   "--ybm-color-palette-brand-800": "#1e40af",
   "--ybm-color-palette-brand-900": "#1e3a8a",
+  "--ybm-color-palette-brand-1000": "#172554",
   "--ybm-color-palette-blue-100": "#eff6ff",
   "--ybm-color-palette-blue-200": "#e2edfc",
   "--ybm-color-palette-blue-300": "#cbdffa",
