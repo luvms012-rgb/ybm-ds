@@ -18,7 +18,7 @@
 
    목차
      01 Action Button        .ds-btn
-     02 Text Link            .ds-link            (CSS 전용)
+     02 Text Link            .ds-link
      03 Field Label          .ds-field
      04 Text Field Input     .ds-input
      05 Text Field Textarea  .ds-textarea
@@ -64,6 +64,11 @@
      46 Breadcrumbs          .ds-breadcrumbs
      47 Stepper              .ds-stepper
      48 Banner               .ds-banner
+     49 Select Box           .ds-selectbox / .ds-selectbox-group
+     50 Time Picker          .ds-timepicker
+     51 Table Pagination     .ds-tablepagination
+     52 Popover              .ds-popover / .ds-popover-anchor
+     53 Chat                 .ds-chat-bubble / .ds-chat-meta / .ds-chat-system / .ds-chat-send / .ds-chat-composer
    ========================================================================== */
 
 
@@ -142,7 +147,7 @@
 
 
 /* --------------------------------------------------------------------------
-   02 Text Link — CTA 위/아래 보조 링크 (Figma 컴포넌트 없음 · CSS 전용)
+   02 Text Link — CTA 위/아래 보조 링크 (Figma Text Link 2493:324, state enabled/hover)
    -------------------------------------------------------------------------- */
 .ds-link {
   --ds-link-color: var(--ybm-color-fg-neutral-subtle);
@@ -2744,3 +2749,395 @@ a.ds-card:active, button.ds-card:active { background: linear-gradient(var(--ybm-
 .ds-banner[data-variant="solid"][data-tone="positive"]    { --ds-banner-bg: var(--ybm-color-bg-positive-solid);    --ds-banner-fg: var(--ybm-color-fg-on-positive-solid); }
 .ds-banner[data-variant="solid"][data-tone="warning"]     { --ds-banner-bg: var(--ybm-color-bg-warning-solid);     --ds-banner-fg: var(--ybm-color-fg-on-warning-solid); }
 .ds-banner[data-variant="solid"][data-tone="critical"]    { --ds-banner-bg: var(--ybm-color-bg-critical-solid);    --ds-banner-fg: var(--ybm-color-fg-on-critical-solid); }
+
+
+/* --------------------------------------------------------------------------
+   49 Select Box - 테두리 상자 안에서 고르는 선택지 (하나: radio / 여러 개: check) (2026-10-28 추가)
+   layout: horizontal(기본) / vertical(여러 열로 놓을 때)
+     <div class="ds-selectbox-group" [style="--ds-selectbox-columns: 2"]>
+       <label class="ds-selectbox" [data-layout="vertical"]>
+         [<i class="ds-icon ds-icon--…" aria-hidden="true"></i>]
+         <span class="ds-selectbox__texts">
+           <span class="ds-selectbox__label">라벨</span>
+           [<span class="ds-selectbox__desc">설명</span>]
+         </span>
+         <span class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control"></span>
+         또는 <span class="ds-radio" data-tone="neutral" data-size="medium"><input type="radio" class="ds-radio__control" name="g"></span>
+       </label>
+     </div>
+   표시는 Checkbox(square/neutral/medium), Radio(neutral/medium) 를 그대로 쓴다.
+   Figma: padding x4 x5 / gap x3 / shape/lg / bg/layer-default / 1px stroke/neutral-weak
+     선택 1px stroke/neutral-contrast(색만 진해짐) / disabled bg/disabled + 글자 fg/disabled
+     label t05 Medium fg/neutral / desc t04 fg/neutral-subtle / 글 사이 2 / 앞 아이콘 24
+   -------------------------------------------------------------------------- */
+.ds-selectbox-group {
+  --ds-selectbox-columns: 1;
+  display: grid;
+  grid-template-columns: repeat(var(--ds-selectbox-columns), minmax(0, 1fr));
+  gap: var(--ybm-space-x3);
+}
+.ds-selectbox {
+  --ds-selectbox-line: var(--ybm-color-stroke-neutral-weak);
+  --ds-selectbox-bg: var(--ybm-color-bg-layer-default);
+  display: flex;
+  align-items: center;
+  gap: var(--ybm-space-x3);
+  padding: var(--ybm-space-x4) var(--ybm-space-x5);
+  border-radius: var(--ybm-shape-lg);
+  background: var(--ds-selectbox-bg);
+  box-shadow: inset 0 0 0 1px var(--ds-selectbox-line);
+  color: var(--ybm-color-fg-neutral);
+  cursor: pointer;
+  user-select: none;
+  transition: box-shadow var(--ybm-duration-fast) var(--ybm-easing-standard);
+}
+.ds-selectbox > .ds-icon { --ds-icon-size: 24px; }
+.ds-selectbox__texts { display: flex; flex-direction: column; gap: 2px; flex: 1 1 auto; min-width: 0; }
+.ds-selectbox__label { font-size: var(--ybm-font-size-t05); line-height: var(--ybm-line-height-t05); font-weight: var(--ybm-font-weight-medium); }
+.ds-selectbox__desc { color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); }
+.ds-selectbox > :is(.ds-checkbox, .ds-radio) { flex: none; align-self: flex-start; }
+.ds-selectbox:has(:checked) { --ds-selectbox-line: var(--ybm-color-stroke-neutral-contrast); }
+.ds-selectbox:has(:focus-visible) { outline: 2px solid var(--ybm-color-stroke-focus-ring); outline-offset: 2px; }
+.ds-selectbox :focus-visible { outline: none; }
+.ds-selectbox:has(:disabled) { --ds-selectbox-bg: var(--ybm-color-bg-disabled); color: var(--ybm-color-fg-disabled); cursor: not-allowed; }
+.ds-selectbox:has(:disabled) .ds-selectbox__desc { color: var(--ybm-color-fg-disabled); }
+/* vertical - 위 줄(앞 아이콘, 표시) + 아래 글 */
+.ds-selectbox[data-layout="vertical"] { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: start; }
+.ds-selectbox[data-layout="vertical"] > .ds-icon { grid-area: 1 / 1; }
+.ds-selectbox[data-layout="vertical"] > :is(.ds-checkbox, .ds-radio) { grid-area: 1 / 2; }
+.ds-selectbox[data-layout="vertical"]:not(:has(> .ds-icon)) > :is(.ds-checkbox, .ds-radio) { grid-area: 1 / 1; }
+.ds-selectbox[data-layout="vertical"] > .ds-selectbox__texts { grid-area: 2 / 1 / 3 / -1; }
+
+
+/* --------------------------------------------------------------------------
+   50 Time Picker - 휠을 굴려 오전/오후, 시, 분을 고르는 시간 선택기 (2026-10-28 추가)
+     <div class="ds-timepicker" role="group" aria-label="시간" [aria-disabled="true"]>
+       <div class="ds-timepicker__column" role="listbox" aria-label="오전/오후" tabindex="0">
+         <div class="ds-timepicker__option" role="option">오전</div>
+         <div class="ds-timepicker__option" role="option" aria-selected="true">오후</div>
+       </div>
+       <div class="ds-timepicker__column" role="listbox" aria-label="시" tabindex="0">… 1 ~ 12</div>
+       <div class="ds-timepicker__column" role="listbox" aria-label="분" tabindex="0">… 00, 05 ~ 55</div>
+     </div>
+   ybm-ds.js 가 가운데 온 항목에 aria-selected 를 붙이고 열에서 change 이벤트(detail.value)를 보낸다.
+   처음 값은 aria-selected="true" 로 표시해 두면 그 위치로 맞춰 준다. 분 간격은 넣는 항목으로 정한다(기본 5분).
+   Figma: 폭 320(채움) / 높이 220 = 항목 5줄 × x11 / 좌우 x4 / 열 간격 x2
+     가운데 띠 bg/neutral-weak-alpha shape/md
+     가운데 t07 SemiBold fg/neutral / 바로 위아래 t06 fg/neutral-muted / 그 밖 t05 fg/neutral-subtle / disabled 모두 fg/disabled
+   모바일 입력 필드에서는 Field Button + Bottom Sheet 안에 넣어 쓴다.
+   -------------------------------------------------------------------------- */
+.ds-timepicker {
+  --ds-tp-item: var(--ybm-space-x11);
+  position: relative;
+  display: flex;
+  gap: var(--ybm-space-x2);
+  width: 100%;
+  height: calc(var(--ds-tp-item) * 5);
+  padding-inline: var(--ybm-space-x4);
+}
+.ds-timepicker::before {
+  content: "";
+  position: absolute;
+  inset: calc(var(--ds-tp-item) * 2) 0 auto;
+  height: var(--ds-tp-item);
+  border-radius: var(--ybm-shape-md);
+  background: var(--ybm-color-bg-neutral-weak-alpha);
+  pointer-events: none;
+}
+.ds-timepicker__column {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+  overflow-y: auto;
+  padding-block: calc(var(--ds-tp-item) * 2);
+  scroll-snap-type: y mandatory;
+  scrollbar-width: none;
+  overscroll-behavior: contain;
+}
+.ds-timepicker__column::-webkit-scrollbar { display: none; }
+.ds-timepicker__column:focus-visible { outline-offset: -2px; border-radius: var(--ybm-shape-md); }
+.ds-timepicker__option {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--ds-tp-item);
+  scroll-snap-align: center;
+  color: var(--ybm-color-fg-neutral-subtle);
+  font-size: var(--ybm-font-size-t05);
+  line-height: var(--ybm-line-height-t05);
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+  user-select: none;
+}
+.ds-timepicker__option[data-near] { color: var(--ybm-color-fg-neutral-muted); font-size: var(--ybm-font-size-t06); line-height: var(--ybm-line-height-t06); }
+.ds-timepicker__option[aria-selected="true"] { color: var(--ybm-color-fg-neutral); font-size: var(--ybm-font-size-t07); line-height: var(--ybm-line-height-t07); font-weight: var(--ybm-font-weight-semibold); }
+.ds-timepicker[aria-disabled="true"] .ds-timepicker__column { overflow: hidden; pointer-events: none; }
+.ds-timepicker[aria-disabled="true"] .ds-timepicker__option { color: var(--ybm-color-fg-disabled); }
+
+
+/* --------------------------------------------------------------------------
+   51 Table Pagination - 데이터 표 아래에서 페이지와 페이지당 행 수를 함께 조절하는 막대 (2026-10-28 추가)
+   state: default / unknownTotal(전체 개수를 모를 때) / empty(데이터 없음)
+     <div class="ds-tablepagination">
+       <label class="ds-tablepagination__size">
+         <span class="ds-tablepagination__label">페이지당 행 수</span>
+         <span class="ds-tablepagination__select"><select><option>10개</option><option>25개</option><option>50개</option></select></span>
+       </label>
+       <div class="ds-tablepagination__range">
+         <span class="ds-tablepagination__position">
+           <span class="ds-tablepagination__select"><select aria-label="표시 범위"><option>1-10</option>…</select></span>
+           (unknownTotal 은 select 대신 <span class="ds-tablepagination__current">11-20</span>)
+           [<span class="ds-tablepagination__total">/ 총 237개</span>]
+         </span>
+         <nav class="ds-pagination" aria-label="표 페이지">
+           <a class="ds-pagination__item" data-type="prev" href="#" aria-label="이전 페이지"></a>
+           <a class="ds-pagination__item" data-type="next" href="#" aria-label="다음 페이지"></a>
+         </nav>
+       </div>
+     </div>
+   empty: 범위 select 에 disabled, 이동 버튼에 aria-disabled="true"
+   Figma: 최소 폭 640 / padding x2 x4 / 양 끝 정렬 / 한 줄 고정(좁으면 표와 같은 가로 스크롤 영역에 둔다)
+     label, total t04 fg/neutral-subtle / select h36 padding 0 8 0 12 gap x1 shape/sm bg/layer-default 1px stroke/neutral-weak
+     값 t04 Medium fg/neutral / chevron 16 / disabled bg/disabled fg/disabled / 이동 버튼은 Pagination Item(prev, next)
+   일반 목록의 페이지 이동은 Pagination 을 쓴다.
+   -------------------------------------------------------------------------- */
+.ds-tablepagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--ybm-space-x4);
+  min-width: 640px;
+  padding: var(--ybm-space-x2) var(--ybm-space-x4);
+  color: var(--ybm-color-fg-neutral-subtle);
+  font-size: var(--ybm-font-size-t04);
+  line-height: var(--ybm-line-height-t04);
+  white-space: nowrap;
+}
+.ds-tablepagination__size { display: flex; align-items: center; gap: var(--ybm-space-x2); }
+.ds-tablepagination__range { display: flex; align-items: center; gap: var(--ybm-space-x3); }
+.ds-tablepagination__position { display: flex; align-items: center; gap: var(--ybm-space-x1_5); font-variant-numeric: tabular-nums; }
+.ds-tablepagination__current { color: var(--ybm-color-fg-neutral); font-weight: var(--ybm-font-weight-medium); }
+.ds-tablepagination__select {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  height: 36px;
+  border-radius: var(--ybm-shape-sm);
+  background: var(--ybm-color-bg-layer-default);
+  box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-neutral-weak);
+  color: var(--ybm-color-fg-neutral);
+}
+.ds-tablepagination__select > select {
+  appearance: none;
+  height: 100%;
+  padding: 0 calc(var(--ybm-space-x2) + 16px + var(--ybm-space-x1)) 0 var(--ybm-space-x3);
+  border: 0;
+  border-radius: inherit;
+  background: none;
+  color: inherit;
+  font: inherit;
+  font-weight: var(--ybm-font-weight-medium);
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+}
+.ds-tablepagination__select::after {
+  content: "";
+  position: absolute;
+  right: var(--ybm-space-x2);
+  width: 16px;
+  height: 16px;
+  background: currentColor;
+  -webkit-mask: var(--ds-icon-chevron-down) center / contain no-repeat;
+          mask: var(--ds-icon-chevron-down) center / contain no-repeat;
+  pointer-events: none;
+}
+.ds-tablepagination__select:has(select:focus-visible) { outline: 2px solid var(--ybm-color-stroke-focus-ring); outline-offset: 2px; }
+.ds-tablepagination__select > select:focus-visible { outline: none; }
+.ds-tablepagination__select:has(select:disabled) { background: var(--ybm-color-bg-disabled); color: var(--ybm-color-fg-disabled); }
+.ds-tablepagination__select > select:disabled { cursor: not-allowed; }
+
+
+/* --------------------------------------------------------------------------
+   52 Popover - 트리거에 붙어 뜨는 작은 창. 머리말, 본문, 버튼으로 부가 정보나 동작을 준다 (2026-10-28 추가)
+   actions: single / pair / none(footer 없음)   placement: bottom-start(기본) / bottom-end / top-start / top-end
+     <span class="ds-popover-anchor">
+       <button class="ds-btn" data-variant="neutralOutline" data-ds-popover="pop-1" aria-expanded="false" aria-controls="pop-1">열기</button>
+       <div class="ds-popover" id="pop-1" role="dialog" aria-labelledby="pop-1-t" hidden [data-placement="bottom-end"]>
+         <div class="ds-popover__header">
+           <div class="ds-popover__texts"><strong class="ds-popover__title" id="pop-1-t">제목</strong>[<p class="ds-popover__desc">설명</p>]</div>
+           [<button type="button" class="ds-popover__close" data-ds-close aria-label="닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button>]
+         </div>
+         <div class="ds-popover__body">본문</div>
+         [<div class="ds-popover__footer"><button class="ds-btn" data-variant="neutralWeak" data-size="small">취소</button><button class="ds-btn" data-variant="neutralSolid" data-size="small">확인</button></div>]
+       </div>
+     </span>
+   ybm-ds.js: data-ds-popover 로 열고 닫기, 바깥 클릭과 Esc 로 닫기, 안의 data-ds-close 로 닫기.
+   Figma: 폭 320 / padding x5 / gap x4 / shape/xl / bg/layer-floating / 1px stroke/neutral-muted / elevation 2
+     title t05 Bold fg/neutral / desc t04 fg/neutral-subtle / 글 사이 x1 / 머리말 gap x3 / 닫기 Lucide/x 20 fg/neutral
+     body t04 fg/neutral / footer 오른쪽 정렬 gap x2, Action Button small
+   닫기 버튼을 숨기면 본문이나 버튼 영역에 닫는 동작을 꼭 둔다.
+   고르는 법: 짧은 설명은 Tooltip, Help Bubble / 제목과 버튼이 있는 작은 작업 창은 Popover / 화면을 막아야 하면 Dialog
+   -------------------------------------------------------------------------- */
+.ds-popover-anchor { position: relative; display: inline-flex; }
+.ds-popover {
+  --ds-popover-width: 320px;
+  --ds-popover-gap: var(--ybm-space-x2);
+  display: flex;
+  flex-direction: column;
+  gap: var(--ybm-space-x4);
+  width: min(var(--ds-popover-width), calc(100vw - var(--ybm-space-x4) * 2));
+  padding: var(--ybm-space-x5);
+  border-radius: var(--ybm-shape-xl);
+  background: var(--ybm-color-bg-layer-floating);
+  box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-neutral-muted), var(--ybm-elevation-2);
+  color: var(--ybm-color-fg-neutral);
+  font-size: var(--ybm-font-size-t04);
+  line-height: var(--ybm-line-height-t04);
+  text-align: start;
+}
+.ds-popover[hidden] { display: none; }
+/* 앵커 안에서는 트리거 옆에 뜬다 (앵커 밖에 두면 흐름 안에 그대로 놓인다) */
+.ds-popover-anchor > .ds-popover { position: absolute; z-index: var(--ybm-z-overlay); top: calc(100% + var(--ds-popover-gap)); left: 0; }
+.ds-popover-anchor > .ds-popover[data-placement$="-end"] { left: auto; right: 0; }
+.ds-popover-anchor > .ds-popover[data-placement^="top"] { top: auto; bottom: calc(100% + var(--ds-popover-gap)); }
+.ds-popover__header { display: flex; align-items: flex-start; gap: var(--ybm-space-x3); }
+.ds-popover__texts { display: flex; flex-direction: column; gap: var(--ybm-space-x1); flex: 1 1 auto; min-width: 0; }
+.ds-popover__title { font-size: var(--ybm-font-size-t05); line-height: var(--ybm-line-height-t05); font-weight: var(--ybm-font-weight-bold); }
+.ds-popover__desc { color: var(--ybm-color-fg-neutral-subtle); }
+.ds-popover__close { position: relative; display: grid; place-items: center; flex: none; width: 20px; height: 20px; color: var(--ybm-color-fg-neutral); }
+.ds-popover__close::after { content: ""; position: absolute; inset: -10px; }
+.ds-popover__footer { display: flex; justify-content: flex-end; gap: var(--ybm-space-x2); }
+
+
+/* --------------------------------------------------------------------------
+   53 Chat - 대화 화면 부품 5종 (2026-10-28 추가)
+   ▸ Message Bubble  sender: assistant(기본) / user
+       <div class="ds-chat-bubble" [data-sender="user"]>안녕하세요! 무엇을 도와드릴까요?</div>
+     Figma: padding x2_5 x3_5 / t05 / 최대 폭 288(글 260) / 모서리 shape/xl, 말꼬리 쪽만 shape/2xs
+            assistant bg/neutral-weak-alpha fg/neutral (왼쪽 위 꼬리) / user bg/brand-solid fg/on-brand-solid (오른쪽 아래 꼬리)
+   ▸ Message Metadata  status: sending / sent / read / error
+       <span class="ds-chat-meta" data-status="read"><b class="ds-chat-meta__status">읽음</b><time>오후 3:24</time></span>
+     Figma: gap x1 / t02 fg/neutral-subtle / 상태 Medium, read fg/brand, error fg/critical
+   ▸ System Message  variant: default / divider
+       <p class="ds-chat-system" [data-variant="divider"]>오늘</p>
+     Figma: t03 fg/neutral-muted / default pill padding x1 x3 bg/neutral-weak-alpha / divider 양옆 1px stroke/neutral-weak, gap x3
+   ▸ Send Button  state: send / stop / disabled
+       <button type="button" class="ds-chat-send" aria-label="보내기" [data-state="stop"] [disabled]></button>
+     Figma: 36 원 / 아이콘 20 / send bg/brand-solid + arrow-up fg/on-brand-solid
+            stop bg/neutral-solid + square fg/on-neutral-solid / disabled bg/disabled + fg/disabled
+   ▸ Composer  state: empty / typing (비어 있으면 보내기 비활성 - ybm-ds.js 가 맞춰 준다)
+       <form class="ds-chat-composer">
+         <button type="button" class="ds-chat-composer__attach" aria-label="첨부"><i class="ds-icon ds-icon--plus" aria-hidden="true"></i></button>
+         <div class="ds-chat-composer__field">
+           <textarea class="ds-chat-composer__input" rows="1" placeholder="메시지를 입력하세요" aria-label="메시지"></textarea>
+           <button type="submit" class="ds-chat-send" aria-label="보내기" disabled></button>
+         </div>
+       </form>
+     Figma: 위 1px stroke/neutral-muted / padding x2 x3 / gap x2 / bg/layer-default
+            첨부 36 + plus 22 fg/neutral-muted / 입력 칸 min-h x11 padding 0 x1 0 x4 gap x2 shape/3xl bg/neutral-weak-alpha
+            글 t05 fg/neutral, placeholder fg/placeholder / 화면 아래 고정, 여러 줄은 5줄까지 늘어난다
+   -------------------------------------------------------------------------- */
+.ds-chat-bubble {
+  --ds-chat-bubble-max: 288px;
+  width: fit-content;
+  max-width: min(var(--ds-chat-bubble-max), 100%);
+  padding: var(--ybm-space-x2_5) var(--ybm-space-x3_5);
+  border-radius: var(--ybm-shape-2xs) var(--ybm-shape-xl) var(--ybm-shape-xl) var(--ybm-shape-xl);
+  background: var(--ybm-color-bg-neutral-weak-alpha);
+  color: var(--ybm-color-fg-neutral);
+  font-size: var(--ybm-font-size-t05);
+  line-height: var(--ybm-line-height-t05);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.ds-chat-bubble[data-sender="user"] {
+  margin-left: auto;
+  border-radius: var(--ybm-shape-xl) var(--ybm-shape-xl) var(--ybm-shape-2xs) var(--ybm-shape-xl);
+  background: var(--ybm-color-bg-brand-solid);
+  color: var(--ybm-color-fg-on-brand-solid);
+}
+
+.ds-chat-meta { display: inline-flex; align-items: center; gap: var(--ybm-space-x1); color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); white-space: nowrap; }
+.ds-chat-meta__status { font-weight: var(--ybm-font-weight-medium); }
+.ds-chat-meta[data-status="read"] .ds-chat-meta__status { color: var(--ybm-color-fg-brand); }
+.ds-chat-meta[data-status="error"] .ds-chat-meta__status { color: var(--ybm-color-fg-critical); }
+
+.ds-chat-system {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ybm-space-x3);
+  width: fit-content;
+  margin-inline: auto;
+  padding: var(--ybm-space-x1) var(--ybm-space-x3);
+  border-radius: var(--ybm-shape-pill);
+  background: var(--ybm-color-bg-neutral-weak-alpha);
+  color: var(--ybm-color-fg-neutral-muted);
+  font-size: var(--ybm-font-size-t03);
+  line-height: var(--ybm-line-height-t03);
+  text-align: center;
+}
+.ds-chat-system[data-variant="divider"] { width: 100%; padding: 0; border-radius: 0; background: none; }
+.ds-chat-system[data-variant="divider"]::before,
+.ds-chat-system[data-variant="divider"]::after { content: ""; flex: 1 1 0; height: 1px; background: var(--ybm-color-stroke-neutral-weak); }
+
+.ds-chat-send {
+  --ds-chat-send-bg: var(--ybm-color-bg-brand-solid);
+  --ds-chat-send-fg: var(--ybm-color-fg-on-brand-solid);
+  --ds-chat-send-icon: var(--ds-icon-arrow-up);
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--ybm-shape-pill);
+  background: var(--ds-chat-send-bg);
+  transition: background-color var(--ybm-duration-fast) var(--ybm-easing-standard);
+}
+.ds-chat-send::before { content: ""; width: 20px; height: 20px; background: var(--ds-chat-send-fg); -webkit-mask: var(--ds-chat-send-icon) center / contain no-repeat; mask: var(--ds-chat-send-icon) center / contain no-repeat; }
+.ds-chat-send:active:not(:disabled) { --ds-chat-send-bg: var(--ybm-color-bg-brand-solid-pressed); }
+.ds-chat-send[data-state="stop"] { --ds-chat-send-bg: var(--ybm-color-bg-neutral-solid); --ds-chat-send-fg: var(--ybm-color-fg-on-neutral-solid); --ds-chat-send-icon: var(--ds-icon-square); }
+.ds-chat-send[data-state="stop"]:active { --ds-chat-send-bg: var(--ybm-color-bg-neutral-solid-pressed); }
+.ds-chat-send:disabled { --ds-chat-send-bg: var(--ybm-color-bg-disabled); --ds-chat-send-fg: var(--ybm-color-fg-disabled); cursor: not-allowed; }
+
+.ds-chat-composer {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--ybm-space-x2);
+  padding: var(--ybm-space-x2) var(--ybm-space-x3);
+  padding-bottom: max(var(--ybm-space-x2), env(safe-area-inset-bottom, 0px));
+  background: var(--ybm-color-bg-layer-default);
+  box-shadow: inset 0 1px 0 var(--ybm-color-stroke-neutral-muted);
+}
+.ds-chat-composer__attach { display: grid; place-items: center; flex: none; width: 36px; height: 36px; margin-block: var(--ybm-space-x1); border-radius: var(--ybm-shape-pill); color: var(--ybm-color-fg-neutral-muted); }
+.ds-chat-composer__attach > .ds-icon { --ds-icon-size: 22px; }
+.ds-chat-composer__attach:active { background: var(--ybm-color-bg-transparent-pressed); }
+.ds-chat-composer__field {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--ybm-space-x2);
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: var(--ybm-space-x11);
+  padding: var(--ybm-space-x1) var(--ybm-space-x1) var(--ybm-space-x1) var(--ybm-space-x4);
+  border-radius: var(--ybm-shape-3xl);
+  background: var(--ybm-color-bg-neutral-weak-alpha);
+}
+.ds-chat-composer__field:has(:focus-visible) { outline: 2px solid var(--ybm-color-stroke-focus-ring); outline-offset: 2px; }
+.ds-chat-composer__input {
+  flex: 1 1 auto;
+  min-width: 0;
+  max-height: calc(var(--ybm-line-height-t05) * 5);
+  margin-block: 6px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--ybm-color-fg-neutral);
+  font: inherit;
+  font-size: var(--ybm-font-size-t05);
+  line-height: var(--ybm-line-height-t05);
+  resize: none;
+  field-sizing: content;
+}
+.ds-chat-composer__input:focus-visible { outline: none; }
+.ds-chat-composer__input::placeholder { color: var(--ybm-color-fg-placeholder); }

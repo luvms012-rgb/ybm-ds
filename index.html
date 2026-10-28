@@ -471,7 +471,7 @@
 <section class="pv-sec" id="c-48" data-no="48"><header><h2><small>48</small>Banner</h2></header>
   <div class="pv-stage pv-col" style="padding:0;gap:0;overflow:hidden">
     <div class="ds-banner" role="status"><div class="ds-banner__inner"><i class="ds-icon ds-icon--info-solid" aria-hidden="true"></i><p class="ds-banner__message"><strong class="ds-banner__title">안내</strong>  개인정보처리방침이 11월 1일부터 바뀌어요.</p><a class="ds-banner__action" href="#">자세히</a><button type="button" class="ds-banner__close" aria-label="공지 닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button></div></div>
-    <div class="ds-banner" role="status" data-tone="informative"><div class="ds-banner__inner"><i class="ds-icon ds-icon--info-solid" aria-hidden="true"></i><p class="ds-banner__message">11월 정기시험 추가 접수가 시작됐어요.</p><a class="ds-banner__action" href="#">접수하기</a></div></div>
+    <div class="ds-banner" role="status" data-tone="informative"><div class="ds-banner__inner"><i class="ds-icon ds-icon--info-solid" aria-hidden="true"></i><p class="ds-banner__message">알림 설정 화면이 더 간단해졌어요.</p><a class="ds-banner__action" href="#">살펴보기</a></div></div>
     <div class="ds-banner" role="status" data-tone="warning"><div class="ds-banner__inner"><i class="ds-icon ds-icon--triangle-alert-solid" aria-hidden="true"></i><p class="ds-banner__message"><strong class="ds-banner__title">점검 안내</strong>  10월 25일(토) 02:00~06:00 서비스를 점검해요.</p></div></div>
     <div class="ds-banner" role="alert" data-tone="critical"><div class="ds-banner__inner"><i class="ds-icon ds-icon--circle-alert-solid" aria-hidden="true"></i><p class="ds-banner__message">일부 결제 수단에 장애가 있어요. 복구 중이에요.</p></div></div>
     <div class="ds-banner" role="status" data-variant="solid" data-tone="informative"><div class="ds-banner__inner"><i class="ds-icon ds-icon--info-solid" aria-hidden="true"></i><p class="ds-banner__message">solid · informative</p><button type="button" class="ds-banner__close" aria-label="공지 닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button></div></div>
@@ -479,9 +479,119 @@
   </div>
 </section>
 
+<section class="pv-sec" id="c-49" data-no="49"><header><h2><small>49</small>Select Box</h2></header>
+  <div class="pv-stage pv-col">
+    <div class="ds-selectbox-group pv-w" role="radiogroup" aria-label="요금제">
+      <label class="ds-selectbox"><span class="ds-selectbox__texts"><span class="ds-selectbox__label">기본</span><span class="ds-selectbox__desc">혼자 쓰기 좋은 구성이에요</span></span><span class="ds-radio" data-tone="neutral" data-size="medium"><input type="radio" class="ds-radio__control" name="pv-sb" checked></span></label>
+      <label class="ds-selectbox"><span class="ds-selectbox__texts"><span class="ds-selectbox__label">팀</span><span class="ds-selectbox__desc">여러 명이 함께 쓸 수 있어요</span></span><span class="ds-radio" data-tone="neutral" data-size="medium"><input type="radio" class="ds-radio__control" name="pv-sb"></span></label>
+      <label class="ds-selectbox"><span class="ds-selectbox__texts"><span class="ds-selectbox__label">기업</span><span class="ds-selectbox__desc">지금은 고를 수 없어요</span></span><span class="ds-radio" data-tone="neutral" data-size="medium"><input type="radio" class="ds-radio__control" name="pv-sb" disabled></span></label>
+    </div>
+  </div>
+  <div class="pv-stage pv-col">
+    <div class="ds-selectbox-group pv-w" style="--ds-selectbox-columns: 2" aria-label="관심 분야">
+      <label class="ds-selectbox" data-layout="vertical"><span class="ds-selectbox__texts"><span class="ds-selectbox__label">읽기</span><span class="ds-selectbox__desc">글을 빠르게 이해해요</span></span><span class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control" checked></span></label>
+      <label class="ds-selectbox" data-layout="vertical"><i class="ds-icon ds-icon--message-circle" aria-hidden="true"></i><span class="ds-selectbox__texts"><span class="ds-selectbox__label">말하기</span><span class="ds-selectbox__desc">자연스럽게 대화해요</span></span><span class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control"></span></label>
+    </div>
+  </div>
+</section>
+
+<section class="pv-sec" id="c-50" data-no="50"><header><h2><small>50</small>Time Picker</h2></header>
+  <div class="pv-stage">
+    <div class="ds-timepicker pv-w" role="group" aria-label="시간" id="pv-tp">
+      <div class="ds-timepicker__column" role="listbox" aria-label="오전/오후" tabindex="0"><div class="ds-timepicker__option" role="option" aria-selected="true">오전</div><div class="ds-timepicker__option" role="option">오후</div></div>
+      <div class="ds-timepicker__column" role="listbox" aria-label="시" tabindex="0" data-pv-fill="1-12" data-pv-sel="10"></div>
+      <div class="ds-timepicker__column" role="listbox" aria-label="분" tabindex="0" data-pv-fill="0-55-5" data-pv-sel="30"></div>
+    </div>
+    <div class="ds-timepicker pv-w" role="group" aria-label="시간" aria-disabled="true">
+      <div class="ds-timepicker__column" role="listbox" aria-label="오전/오후"><div class="ds-timepicker__option" role="option" aria-selected="true">오전</div><div class="ds-timepicker__option" role="option">오후</div></div>
+      <div class="ds-timepicker__column" role="listbox" aria-label="시" data-pv-fill="1-12" data-pv-sel="10"></div>
+      <div class="ds-timepicker__column" role="listbox" aria-label="분" data-pv-fill="0-55-5" data-pv-sel="30"></div>
+    </div>
+  </div>
+  <p class="pv-meta" id="pv-tp-out">선택: 오전 10:30</p>
+</section>
+
+<section class="pv-sec" id="c-51" data-no="51"><header><h2><small>51</small>Table Pagination</h2></header>
+  <div class="pv-stage pv-col" style="overflow-x:auto">
+    <div class="ds-tablepagination">
+      <label class="ds-tablepagination__size"><span class="ds-tablepagination__label">페이지당 행 수</span><span class="ds-tablepagination__select"><select><option>10개</option><option>25개</option><option>50개</option></select></span></label>
+      <div class="ds-tablepagination__range">
+        <span class="ds-tablepagination__position"><span class="ds-tablepagination__select"><select aria-label="표시 범위"><option>1-10</option><option selected>11-20</option><option>21-30</option></select></span><span class="ds-tablepagination__total">/ 총 237개</span></span>
+        <nav class="ds-pagination" aria-label="표 페이지"><a class="ds-pagination__item" data-type="prev" href="#" aria-label="이전 페이지"></a><a class="ds-pagination__item" data-type="next" href="#" aria-label="다음 페이지"></a></nav>
+      </div>
+    </div>
+    <div class="ds-tablepagination">
+      <label class="ds-tablepagination__size"><span class="ds-tablepagination__label">페이지당 행 수</span><span class="ds-tablepagination__select"><select><option>10개</option><option>25개</option></select></span></label>
+      <div class="ds-tablepagination__range">
+        <span class="ds-tablepagination__position"><span class="ds-tablepagination__current">11-20</span></span>
+        <nav class="ds-pagination" aria-label="표 페이지"><a class="ds-pagination__item" data-type="prev" href="#" aria-label="이전 페이지"></a><a class="ds-pagination__item" data-type="next" href="#" aria-label="다음 페이지"></a></nav>
+      </div>
+    </div>
+    <div class="ds-tablepagination">
+      <label class="ds-tablepagination__size"><span class="ds-tablepagination__label">페이지당 행 수</span><span class="ds-tablepagination__select"><select><option>10개</option></select></span></label>
+      <div class="ds-tablepagination__range">
+        <span class="ds-tablepagination__position"><span class="ds-tablepagination__select"><select aria-label="표시 범위" disabled><option>0-0</option></select></span><span class="ds-tablepagination__total">/ 총 0개</span></span>
+        <nav class="ds-pagination" aria-label="표 페이지"><a class="ds-pagination__item" data-type="prev" aria-disabled="true" aria-label="이전 페이지"></a><a class="ds-pagination__item" data-type="next" aria-disabled="true" aria-label="다음 페이지"></a></nav>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pv-sec" id="c-52" data-no="52"><header><h2><small>52</small>Popover</h2></header>
+  <div class="pv-stage" style="min-height:300px;align-items:flex-start">
+    <span class="ds-popover-anchor">
+      <button type="button" class="ds-btn" data-variant="neutralOutline" data-size="small" data-ds-popover="pv-pop" aria-expanded="false" aria-controls="pv-pop">공유 설정</button>
+      <div class="ds-popover" id="pv-pop" role="dialog" aria-labelledby="pv-pop-t" hidden>
+        <div class="ds-popover__header"><div class="ds-popover__texts"><strong class="ds-popover__title" id="pv-pop-t">링크 공유</strong><p class="ds-popover__desc">링크가 있는 사람만 볼 수 있어요</p></div><button type="button" class="ds-popover__close" data-ds-close aria-label="닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button></div>
+        <div class="ds-popover__body">공유를 끄면 이미 보낸 링크도 더 이상 열리지 않아요.</div>
+        <div class="ds-popover__footer"><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="small" data-ds-close>취소</button><button type="button" class="ds-btn" data-variant="neutralSolid" data-size="small" data-ds-close>공유 끄기</button></div>
+      </div>
+    </span>
+    <div class="ds-popover" role="dialog" aria-label="예시">
+      <div class="ds-popover__header"><div class="ds-popover__texts"><strong class="ds-popover__title">제목</strong><p class="ds-popover__desc">설명을 작성할 수 있어요</p></div><button type="button" class="ds-popover__close" aria-label="닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button></div>
+      <div class="ds-popover__body">팝오버 본문에는 사용자가 확인할 내용이나 추가 동작을 둘 수 있습니다.</div>
+      <div class="ds-popover__footer"><button type="button" class="ds-btn" data-variant="neutralSolid" data-size="small">확인</button></div>
+    </div>
+  </div>
+</section>
+
+<section class="pv-sec" id="c-53" data-no="53"><header><h2><small>53</small>Chat</h2></header>
+  <div class="pv-stage pv-col" style="padding:0;gap:0;overflow:hidden">
+    <div class="pv-col" style="display:flex;gap:var(--ybm-space-x3);padding:var(--ybm-space-x5) var(--ybm-space-x4)">
+      <p class="ds-chat-system">오늘</p>
+      <div class="ds-chat-bubble">안녕하세요! 무엇을 도와드릴까요?</div>
+      <div style="display:flex;align-items:flex-end;justify-content:flex-end;gap:var(--ybm-space-x1_5)"><span class="ds-chat-meta" data-status="read"><b class="ds-chat-meta__status">읽음</b><time>오후 3:24</time></span><div class="ds-chat-bubble" data-sender="user" style="margin-left:0">이번 주 일정 정리해 줘</div></div>
+      <p class="ds-chat-system" data-variant="divider">대화가 종료되었어요</p>
+      <div style="display:flex;gap:var(--ybm-space-x4)"><span class="ds-chat-meta" data-status="sending"><b class="ds-chat-meta__status">전송 중</b><time>오후 3:24</time></span><span class="ds-chat-meta" data-status="sent"><time>오후 3:24</time></span><span class="ds-chat-meta" data-status="error"><b class="ds-chat-meta__status">전송 실패</b><time>오후 3:24</time></span></div>
+      <div style="display:flex;gap:var(--ybm-space-x3)"><button type="button" class="ds-chat-send" aria-label="보내기"></button><button type="button" class="ds-chat-send" data-state="stop" aria-label="답변 멈추기"></button><button type="button" class="ds-chat-send" aria-label="보내기" disabled></button></div>
+    </div>
+    <form class="ds-chat-composer" onsubmit="return false">
+      <button type="button" class="ds-chat-composer__attach" aria-label="첨부"><i class="ds-icon ds-icon--plus" aria-hidden="true"></i></button>
+      <div class="ds-chat-composer__field"><textarea class="ds-chat-composer__input" rows="1" placeholder="메시지를 입력하세요" aria-label="메시지"></textarea><button type="submit" class="ds-chat-send" aria-label="보내기" disabled></button></div>
+    </form>
+  </div>
+</section>
+
 </main>
 </div>
 
+<script>
+  // 미리보기 전용 - Time Picker 항목 채우기, 고른 값 표시
+  document.querySelectorAll('[data-pv-fill]').forEach(function (col) {
+    var r = col.getAttribute('data-pv-fill').split('-').map(Number), step = r[2] || 1, sel = col.getAttribute('data-pv-sel');
+    for (var n = r[0]; n <= r[1]; n += step) {
+      var v = r[1] > 12 ? String(n).padStart(2, '0') : String(n), o = document.createElement('div');
+      o.className = 'ds-timepicker__option'; o.setAttribute('role', 'option'); o.textContent = v;
+      if (String(n) === sel) o.setAttribute('aria-selected', 'true');
+      col.appendChild(o);
+    }
+  });
+  var pvTp = document.getElementById('pv-tp');
+  if (pvTp) pvTp.addEventListener('change', function () {
+    var v = [].map.call(pvTp.querySelectorAll('.ds-timepicker__option[aria-selected="true"]'), function (o) { return o.textContent; });
+    document.getElementById('pv-tp-out').textContent = '선택: ' + v[0] + ' ' + v[1] + ':' + v[2];
+  });
+</script>
 <script>
   // 미리보기 전용 — 테마 전환 · 목차 · 달력 칸 · components.json 의 클래스/Figma 링크 표시
   (function () {

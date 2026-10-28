@@ -15,8 +15,10 @@
       "no": "02",
       "name": "Text Link",
       "classes": [ ".ds-link" ],
-      "figma": [],
-      "props": "`--ds-link-color(-hover)`"
+      "figma": [
+        { "id": "2493:324", "type": "COMPONENT_SET", "variants": 2 }
+      ],
+      "props": "`--ds-link-color(-hover)` / Figma state `enabled/hover`"
     },
     {
       "no": "03",
@@ -86,7 +88,8 @@
       "name": "Checkbox",
       "classes": [ ".ds-checkbox" ],
       "figma": [
-        { "id": "61:995", "type": "COMPONENT_SET", "variants": 40 }
+        { "id": "61:995", "type": "COMPONENT_SET", "variants": 40 },
+        { "part": "Mark", "id": "2525:995", "type": "COMPONENT_SET", "variants": 6 }
       ],
       "props": "variant `square·ghost` · tone · size"
     },
@@ -151,7 +154,8 @@
       "name": "Segmented Control",
       "classes": [ ".ds-segmented" ],
       "figma": [
-        { "id": "1239:2152", "type": "COMPONENT_SET", "variants": 4 }
+        { "id": "1239:2152", "type": "COMPONENT_SET", "variants": 4 },
+        { "part": "Item", "id": "1239:2123", "type": "COMPONENT_SET", "variants": 6 }
       ],
       "props": "layout · size"
     },
@@ -178,7 +182,8 @@
       "name": "Tag Group",
       "classes": [ ".ds-tag-group" ],
       "figma": [
-        { "id": "1240:2176", "type": "COMPONENT_SET", "variants": 4 }
+        { "id": "1240:2176", "type": "COMPONENT_SET", "variants": 4 },
+        { "part": "Item", "id": "1240:2135", "type": "COMPONENT_SET", "variants": 4 }
       ],
       "props": "작성자 · 날짜 · 조회수"
     },
@@ -436,6 +441,55 @@
         { "id": "2349:1217", "type": "COMPONENT_SET", "variants": 10 }
       ],
       "props": "tone neutral·informative·positive·warning·critical · variant solid"
+    },
+    {
+      "no": "49",
+      "name": "Select Box",
+      "classes": [ ".ds-selectbox", ".ds-selectbox-group" ],
+      "figma": [
+        { "id": "2495:260", "type": "COMPONENT_SET", "variants": 12 }
+      ],
+      "props": "type `check/radio`, state `unchecked/checked/disabled`, layout `horizontal/vertical`"
+    },
+    {
+      "no": "50",
+      "name": "Time Picker",
+      "classes": [ ".ds-timepicker" ],
+      "figma": [
+        { "id": "2497:979", "type": "COMPONENT_SET", "variants": 2 }
+      ],
+      "props": "state `enabled/disabled`, 12시간제, 분 간격 5"
+    },
+    {
+      "no": "51",
+      "name": "Table Pagination",
+      "classes": [ ".ds-tablepagination" ],
+      "figma": [
+        { "id": "2498:1299", "type": "COMPONENT_SET", "variants": 3 }
+      ],
+      "props": "state `default/unknownTotal/empty`, 최소 폭 640"
+    },
+    {
+      "no": "52",
+      "name": "Popover",
+      "classes": [ ".ds-popover", ".ds-popover-anchor" ],
+      "figma": [
+        { "id": "2494:473", "type": "COMPONENT_SET", "variants": 3 }
+      ],
+      "props": "actions `single/pair/none`, 폭 320"
+    },
+    {
+      "no": "53",
+      "name": "Chat",
+      "classes": [ ".ds-chat-bubble", ".ds-chat-meta", ".ds-chat-system", ".ds-chat-send", ".ds-chat-composer" ],
+      "figma": [
+        { "part": "Message Bubble", "id": "2499:6", "type": "COMPONENT_SET", "variants": 2 },
+        { "part": "Message Metadata", "id": "2499:18", "type": "COMPONENT_SET", "variants": 4 },
+        { "part": "System Message", "id": "2499:25", "type": "COMPONENT_SET", "variants": 2 },
+        { "part": "Send Button", "id": "2499:35", "type": "COMPONENT_SET", "variants": 3 },
+        { "part": "Composer", "id": "2499:54", "type": "COMPONENT_SET", "variants": 2 }
+      ],
+      "props": "sender `assistant/user`, status `sending/sent/read/error`, 보내기 `send/stop/disabled`"
     }
   ]
 }

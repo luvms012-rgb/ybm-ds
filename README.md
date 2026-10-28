@@ -146,14 +146,14 @@ DS 전체가 `@layer ybm.tokens, ybm.base, ybm.icons, ybm.components, ybm.utilit
 | Table & List | `2479:16` | List, Table |
 | --- | | 구분선 |
 
-**굵게** 표시한 10종은 2026-10-27 Figma 에 새로 만든 것이다. 아직 CSS/`components.json`/§6.1 표에는 없어서 `sync.mjs` 점검에 "목록에 없는 세트"로 나온다 - 코드 쪽을 만들 때 함께 등록한다.
+**굵게** 표시한 10종은 2026-10-27 Figma 에 새로 만든 것이다. 2026-10-28 CSS 를 만들고 `components.json` 과 §6.1 표에 등록했다(49~53번, Text Link 는 02번에 Figma ID 추가).
 
 새 컴포넌트는 맞는 카테고리 페이지에 문서 프레임을 하나 더 만들어 넣는다. `sync.mjs` 의 미등록 점검은 About/Foundations/Icons/Templates/구분선을 뺀 모든 페이지를 본다.
 
 ### 변수 컬렉션
 | 컬렉션 | 모드 | 변수 수 |
 |---|---|---|
-| **YBM DS** (`VariableCollectionId:3:2`) | Light / Dark | 246 |
+| **YBM DS** (`VariableCollectionId:3:2`) | Light / Dark | 247 |
 | Typography | 100% (하나) | 73 |
 | Shape | Default (하나) | 9 |
 | Elevation | Default (하나) | 30 |
@@ -282,7 +282,7 @@ CSS 는 Figma 프로퍼티 이름을 그대로 `data-*` 속성으로 쓴다: `<b
 | # | 컴포넌트 | CSS | Figma COMPONENT_SET (ID, 변형 수) | 주요 속성 / 컴포넌트 변수 |
 |---|---|---|---|---|
 | 01 | Action Button | `.ds-btn` | `24:354`, 168 | variant `brandSolid/brandOutline/neutralSolid/neutralWeak/neutralOutline/criticalSolid/ghost`, size `xsmall/small/medium/large`, layout `iconOnly`, width `fill` |
-| 02 | Text Link | `.ds-link` | - (CSS 전용) | `--ds-link-color(-hover)` |
+| 02 | Text Link | `.ds-link` | `2493:324`, 2 | `--ds-link-color(-hover)`, Figma state `enabled/hover` |
 | 03 | Field Label | `.ds-field` (`__header/label/indicator/required/footer/help/error/count`) | `109:1367`, 2 | label-weight `bold` |
 | 04 | Text Field Input | `.ds-input` (`__control/prefix/suffix/icon/clear`) | `108:1325`, 40 | variant `outline/underline`, size |
 | 05 | Text Field Textarea | `.ds-textarea` | `114:1496`, 40 | variant, size |
@@ -290,17 +290,17 @@ CSS 는 Figma 프로퍼티 이름을 그대로 `data-*` 속성으로 쓴다: `<b
 | 07 | Prefix Select | `.ds-prefixselect` | `2096:852`, 2 | 입력 앞 선택(통신사/국가번호) |
 | 08 | Select Trigger | `.ds-select` | `119:1605`, 20 | size |
 | 09 | Select Content, Item | `.ds-select-content` `.ds-select-item` | `125:1717`, 2 / `124:1769`, 12 | |
-| 10 | Checkbox | `.ds-checkbox` | `61:995`, 40 | variant `square/ghost`, tone, size |
+| 10 | Checkbox | `.ds-checkbox` | `61:995`, 40 / Mark `2525:995`, 6 | variant `square/ghost`, tone, size |
 | 11 | Radio Group | `.ds-radio-group` `.ds-radio` | `1224:2164`, 16 | tone, size |
 | 12 | Switch | `.ds-switch` | `93:1271`, 24 | size `16/24/32`, tone |
 | 13 | Quantity Picker | `.ds-quantity` | `1184:2146`, 18 | size, layout `fill` |
 | 15 | Chip | `.ds-chip` `.ds-chip-group` | `69:964`, 54 | variant `solid/outlineStrong/outlineWeak`, size, layout `iconOnly` |
 | 16 | Chip Tabs | `.ds-chiptabs` (`__trigger`) | `1407:2596`, 4 / Trigger `1407:2522`, 16 | variant `neutralSolid/neutralOutline`, size `medium/large` |
 | 17 | Tabs | `.ds-tabs` (`__trigger`) | `95:1313`, 4 / Tab Trigger `95:1272`, 12 | layout `fill/hug`, size |
-| 18 | Segmented Control | `.ds-segmented` | `1239:2152`, 4 | layout, size |
+| 18 | Segmented Control | `.ds-segmented` | `1239:2152`, 4 / Item `1239:2123`, 6 | layout, size |
 | 19 | Toggle Button | `.ds-toggle` | `1244:2164`, 6 | size |
 | 20 | Badge | `.ds-badge` | `17:87`, 36 | variant `weak/solid/outline`, tone `neutral/brand/informative/positive/warning/critical`, size |
-| 21 | Tag Group | `.ds-tag-group` | `1240:2176`, 4 | 작성자, 날짜, 조회수 |
+| 21 | Tag Group | `.ds-tag-group` | `1240:2176`, 4 / Item `1240:2135`, 4 | 작성자, 날짜, 조회수 |
 | 22 | Avatar | `.ds-avatar` (`__initials` `__status` `__badge`) `.ds-avatar-group` (`__overflow`) | `40:614`, 50 / Status `2357:1206`, 3 / Group `2359:1781`, 21 / Group Overflow `2359:1213`, 7 | size `20/24/36/42/48/56/64/80/96/108`, shape `circle/rounded/square`, status tone `positive/neutral/critical`, group size `20~64` × shape, `+N` |
 | 23 | Callout | `.ds-callout` | `1241:2177`, 5 | tone `neutral/informative/positive/warning/critical` (magic 은 CSS 만) |
 | 24 | Snackbar | `.ds-snackbar` | `92:1107`, 3 | variant `default/positive/critical` |
@@ -328,6 +328,11 @@ CSS 는 Figma 프로퍼티 이름을 그대로 `data-*` 속성으로 쓴다: `<b
 | 46 | Breadcrumbs | `.ds-breadcrumbs` | `2348:1149`(COMPONENT) | 현재 항목 `aria-current="page"` |
 | 47 | Stepper | `.ds-stepper` (`__step/indicator/label`) | `2351:1211`(COMPONENT) / Step `2351:1210`, 6 | state `complete/current/upcoming`, orientation `vertical` |
 | 48 | Banner | `.ds-banner` (`__inner/message/title/action/close`) | `2349:1217`, 10 | variant `weak/solid`, tone 5 |
+| 49 | Select Box | `.ds-selectbox` `.ds-selectbox-group` | `2495:260`, 12 | type `check/radio`, state, layout `horizontal/vertical` |
+| 50 | Time Picker | `.ds-timepicker` (`__column/option`) | `2497:979`, 2 | state `enabled/disabled`, 12시간제, 분 간격 5 |
+| 51 | Table Pagination | `.ds-tablepagination` (`__size/label/select/range/position/current/total`) | `2498:1299`, 3 | state `default/unknownTotal/empty`, 최소 폭 640 |
+| 52 | Popover | `.ds-popover` (`__header/texts/title/desc/close/body/footer`) `.ds-popover-anchor` | `2494:473`, 3 | actions `single/pair/none`, 폭 320 |
+| 53 | Chat | `.ds-chat-bubble` `.ds-chat-meta` `.ds-chat-system` `.ds-chat-send` `.ds-chat-composer` | Message Bubble `2499:6`, 2 / Message Metadata `2499:18`, 4 / System Message `2499:25`, 2 / Send Button `2499:35`, 3 / Composer `2499:54`, 2 | sender `assistant/user`, status, 보내기 `send/stop/disabled` |
 
 목록의 기계용 사본이 `components.json` 이다. 컴포넌트를 추가/변경하면 이 표와 `components.json` 을 함께 고친다(sync 가 Figma/CSS 와 대조).
 
@@ -352,6 +357,11 @@ CSS 는 Figma 프로퍼티 이름을 그대로 `data-*` 속성으로 쓴다: `<b
 - **Banner vs Callout** - Banner 는 페이지 전체 공지(화면 맨 위, 한 번에 1개, 전체 폭). Callout 은 본문 안 안내.
 - **Breadcrumbs** - 웹에서 2단계 이상 깊이일 때만. 마지막(현재) 항목은 링크가 아니다. 모바일 앱은 뒤로 가기 헤더.
 - **Stepper** - 단계 3~5개, 라벨은 짧은 명사형. 더 많으면 "2 / 6" 처럼 글자로.
+- **Select Box** - 설명이 필요한 선택지 2~6개에만. 짧은 선택지는 Radio Group, Checkbox 를 쓴다. 한 묶음 안에서 check 와 radio 를 섞지 않는다.
+- **Time Picker** - 시간 고르기가 화면의 주된 일이면 바로 두고, 입력 필드에서는 Field Button + Bottom Sheet 안에 넣는다.
+- **Table Pagination** - 데이터 표 아래 전용. 일반 목록은 Pagination. 페이지당 행 수 선택지는 3~4개.
+- **Popover vs Dialog** - Popover 는 트리거 옆에 뜨는 작은 작업 창(제목, 버튼 포함), 바깥을 누르면 닫힌다. 화면을 막아야 하는 확인은 Dialog.
+- **Chat** - 상대 말풍선은 왼쪽, 내 말풍선은 오른쪽. 입력이 비면 보내기 비활성, 답변을 만드는 중에는 멈춤(stop)으로 바꾼다.
 - 닫기 버튼(Dialog/Bottom Sheet): 40×40 투명 + 24px `Lucide/x`, 색 `fg/neutral`.
 
 ---
@@ -437,8 +447,7 @@ CSS 는 Figma 프로퍼티 이름을 그대로 `data-*` 속성으로 쓴다: `<b
 ---
 
 ## 11. 미구현 / 남은 항목
-- Figma 컴포넌트 없음: Text Link
-- 미구현 컴포넌트: Time Picker, Attachment Field(File Input), Side Panel/Drawer, Popover, Pull To Refresh, Result Section, Scroll Fog, Menu Sheet, Aspect Ratio, Image Frame, Spinner/Status Dot, Number Input, Typeahead/Multi Select
+- 미구현 컴포넌트: Attachment Field(File Input), Side Panel/Drawer, Pull To Refresh, Result Section, Scroll Fog, Menu Sheet, Aspect Ratio, Image Frame, Spinner/Status Dot, Number Input, Typeahead/Multi Select
 - AI/학습 서비스용 묶음(채팅 말풍선/입력창/Markdown/Code Block/출처 표시) - magic 시맨틱을 쓸 첫 컴포넌트 후보
 - 서비스별 brand 색 교체 층(`data-brand`), motion 토큰의 Figma 변수화
 - Callout magic tone, pressed 변형(Figma), magic 시맨틱을 쓰는 컴포넌트 없음
