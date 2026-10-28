@@ -138,15 +138,17 @@ DS 전체가 `@layer ybm.tokens, ybm.base, ybm.icons, ybm.components, ybm.utilit
 | Chat | `2479:8` | 문서 1개에 **Chat Message Bubble** `2499:6`, **Chat Message Metadata** `2499:18`, **Chat System Message** `2499:25`, **Chat Send Button** `2499:35`, **Chat Composer** `2499:54` |
 | Container | `2479:9` | Accordion, Card, **Select Box** `2495:260` |
 | Content | `2479:10` | Avatar, Empty, Tag Group |
-| Data Input | `2479:11` | Checkbox, Date Picker, Field Button, Quantity Picker, Radio Group, Select, Slider, Switch, Text Field, **Time Picker** `2497:979` |
+| Data Input | `2479:11` | Checkbox, Date Picker, Field Button, Quantity Picker, Radio Group, Select, Slider, Switch, Text Field, **Time Picker** `2497:979`, **File Attach** `2552:1066`, **Search Field** `2552:1037` |
 | Feedback & Status | `2479:12` | Badge, Banner, Callout, Progress, Skeleton |
 | Layout | `2479:13` | Divider |
-| Navigation | `2479:14` | Bottom Navigation, Breadcrumbs, Chip Tabs, Pagination, Side Navigation, Stepper, Tabs, **Table Pagination** `2498:1299` |
+| Navigation | `2479:14` | Bottom Navigation, Breadcrumbs, Chip Tabs, Pagination, Side Navigation, Stepper, Tabs, **Table Pagination** `2498:1299`, **Top App Bar** `2549:1399`, **Top Navigation** `2549:1411` |
 | Overlay | `2479:15` | Bottom Sheet, Dialog, Help Bubble, Snackbar, Tooltip, **Popover** `2494:473` |
 | Table & List | `2479:16` | List, Table |
 | --- | | 구분선 |
 
 **굵게** 표시한 10종은 2026-10-27 Figma 에 새로 만든 것이다. 2026-10-28 CSS 를 만들고 `components.json` 과 §6.1 표에 등록했다(49~53번, Text Link 는 02번에 Figma ID 추가).
+
+Top App Bar, Top Navigation, Search Field, File Attach 는 2026-10-29 Figma 와 CSS 를 함께 만들었다(54~57번).
 
 새 컴포넌트는 맞는 카테고리 페이지에 문서 프레임을 하나 더 만들어 넣는다. `sync.mjs` 의 미등록 점검은 About/Foundations/Icons/Templates/구분선을 뺀 모든 페이지를 본다.
 
@@ -333,6 +335,10 @@ CSS 는 Figma 프로퍼티 이름을 그대로 `data-*` 속성으로 쓴다: `<b
 | 51 | Table Pagination | `.ds-tablepagination` (`__size/label/select/range/position/current/total`) | `2498:1299`, 3 | state `default/unknownTotal/empty`, 최소 폭 640 |
 | 52 | Popover | `.ds-popover` (`__header/texts/title/desc/close/body/footer`) `.ds-popover-anchor` | `2494:473`, 3 | actions `single/pair/none`, 폭 320 |
 | 53 | Chat | `.ds-chat-bubble` `.ds-chat-meta` `.ds-chat-system` `.ds-chat-send` `.ds-chat-composer` | Message Bubble `2499:6`, 2 / Message Metadata `2499:18`, 4 / System Message `2499:25`, 2 / Send Button `2499:35`, 3 / Composer `2499:54`, 2 | sender `assistant/user`, status, 보내기 `send/stop/disabled` |
+| 54 | Top App Bar | `.ds-appbar` (`__leading/title/trailing/button`) | `2549:1399`, 4 / Button `2549:1322`, 3 | titleAlign `center/left`, tone `layer/transparent`, divider, 높이 56 |
+| 55 | Top Navigation | `.ds-topnav` (`__logo/menu/item/actions`) | `2549:1411` / Item `2549:1410`, 4 | divider, 높이 64, 아이콘 버튼은 `.ds-appbar__button` |
+| 56 | Search Field | `.ds-search` (`__input/clear`) | `2552:1037`, 12 | size `large/medium`, 값이 있으면 지우기 |
+| 57 | File Attach | `.ds-fileattach` (`__input/icon/title/desc`) `.ds-filelist` `.ds-fileitem` (`__icon/texts/name/meta/remove`) | `2552:1066`, 4 / Item `2552:1099`, 3 | dragOver 는 ybm-ds.js, 진행 막대는 Progress small |
 
 목록의 기계용 사본이 `components.json` 이다. 컴포넌트를 추가/변경하면 이 표와 `components.json` 을 함께 고친다(sync 가 Figma/CSS 와 대조).
 
@@ -361,6 +367,10 @@ CSS 는 Figma 프로퍼티 이름을 그대로 `data-*` 속성으로 쓴다: `<b
 - **Time Picker** - 시간 고르기가 화면의 주된 일이면 바로 두고, 입력 필드에서는 Field Button + Bottom Sheet 안에 넣는다.
 - **Table Pagination** - 데이터 표 아래 전용. 일반 목록은 Pagination. 페이지당 행 수 선택지는 3~4개.
 - **Popover vs Dialog** - Popover 는 트리거 옆에 뜨는 작은 작업 창(제목, 버튼 포함), 바깥을 누르면 닫힌다. 화면을 막아야 하는 확인은 Dialog.
+- **Top App Bar** - 모바일 화면마다 1개. 제목 위치(center/left)는 서비스 안에서 하나로 통일하고, 오른쪽 버튼은 2개까지 둔다. 아이콘 버튼에는 aria-label 을 꼭 단다.
+- **Top Navigation** - PC 전용. 메뉴는 7개까지, 지금 화면이 속한 메뉴에 `aria-current="page"`. 화면이 좁아지면 Top App Bar 와 메뉴 버튼으로 바꾼다.
+- **Search Field vs Text Field** - 검색어 입력에만 Search Field 를 쓰고, 이름이나 주소 같은 일반 입력은 Text Field 를 쓴다. `type="search"` 와 aria-label 을 단다.
+- **File Attach** - 설명에 올릴 수 있는 크기와 개수를 적는다. 고른 파일은 칸 아래 File Attach Item 으로 쌓고, 조건에 맞지 않으면 칸에 aria-invalid 를 달고 설명을 오류 문구로 바꾼다.
 - **Chat** - 상대 말풍선은 왼쪽, 내 말풍선은 오른쪽. 입력이 비면 보내기 비활성, 답변을 만드는 중에는 멈춤(stop)으로 바꾼다.
 - 닫기 버튼(Dialog/Bottom Sheet): 40×40 투명 + 24px `Lucide/x`, 색 `fg/neutral`.
 
@@ -447,7 +457,7 @@ CSS 는 Figma 프로퍼티 이름을 그대로 `data-*` 속성으로 쓴다: `<b
 ---
 
 ## 11. 미구현 / 남은 항목
-- 미구현 컴포넌트: Attachment Field(File Input), Side Panel/Drawer, Pull To Refresh, Result Section, Scroll Fog, Menu Sheet, Aspect Ratio, Image Frame, Spinner/Status Dot, Number Input, Typeahead/Multi Select
+- 미구현 컴포넌트(다음 차례): Side Panel/Drawer, Pull To Refresh, Result Section, Scroll Fog, Menu Sheet, Aspect Ratio, Image Frame, Spinner/Status Dot, Number Input, Typeahead/Multi Select
 - AI/학습 서비스용 묶음(채팅 말풍선/입력창/Markdown/Code Block/출처 표시) - magic 시맨틱을 쓸 첫 컴포넌트 후보
 - 서비스별 brand 색 교체 층(`data-brand`), motion 토큰의 Figma 변수화
 - Callout magic tone, pressed 변형(Figma), magic 시맨틱을 쓰는 컴포넌트 없음
@@ -458,6 +468,8 @@ CSS 는 Figma 프로퍼티 이름을 그대로 `data-*` 속성으로 쓴다: `<b
 ## 12. 변경 이력 (주요)
 | 날짜 | 내용 |
 |---|---|
+| 2026-10-29 | 54 Top App Bar(+ Button), 55 Top Navigation(+ Item), 56 Search Field, 57 File Attach(+ Item) 를 Figma 와 CSS 에 함께 추가. 아이콘 `upload` 추가 |
+| 2026-10-28 | Figma 에만 있던 10종 CSS 완성과 등록(49~53), Popover/Time Picker/Chat 입력창 동작 |
 | 2026-10-27 | Figma 페이지를 레퍼런스 라이브러리 형식(카테고리 페이지 + 문서 프레임)으로 개편, 새 컴포넌트 10종(Figma 만). 모드 정리 - Typography 130%/150%, Shape Soft/Sharp 삭제, CSS 의 `data-shape` 테마(soft/sharp/square) 제거. 남은 모드는 Light / Dark |
 | 2026-10-22 | ds 를 단독 GitHub 저장소(ybm-ds) + Pages 로 분리, 가이드 사이트에서 DS 사본 제거(DS 주소 참조). 통합 동기화 `sync.mjs`/`동기화.bat`/`components.json`(Figma 노드 대조) 도입. `build.py` → `build.mjs`(출력 동일, Python 불필요). 컴포넌트 6종 추가(Divider/Tooltip/List/Breadcrumbs/Stepper/Banner - CSS/Figma 동시). 미리보기 `index.html` |
 | 2026-10-21 | 폴더 재구성(`ds/` 루트 = `ybm-ds/` + `tokens/`). 명칭 **YBM Family → YBM** 일괄 변경 - Figma 컬렉션 `YBM Family DS` → `YBM DS`, 코드/주석/생성물 전부 |

@@ -3,7 +3,7 @@
 집(**Mac**)과 회사(**Windows**) 두 PC 에서 같은 저장소로 작업한다. 이 파일은 저장소에 같이 올라가므로 어느 PC 에서든 Claude 가 먼저 읽는다.
 PC 마다 따로 쌓이는 Claude 메모리는 서로 보이지 않는다 - 두 PC 가 함께 알아야 할 것은 여기에 적는다.
 
-- 최종 갱신: 2026-10-27 (회사 PC)
+- 최종 갱신: 2026-10-29 (회사 PC)
 
 ## 1. 기준 주소
 
@@ -49,8 +49,9 @@ git clone https://github.com/luvms012-rgb/ybm-ds.git
 - **끝냄 (2026-10-27)** - 변수 모드 정리: Typography 130%/150%, Shape Soft/Sharp 삭제 → 모드는 색의 Light / Dark 만. 코드 토큰(`tokens/figma-variables.json` → `tokens.css` 등)/미리보기/README 반영. Figma 페이지 개편 때 새로 만든 컴포넌트 10종은 10-28 CSS 와 함께 등록.
 - **끝냄 (2026-10-27)** - 로컬 폴더 `works/ds` → `works/ybm-ds`(집 Mac 과 같은 이름), 배포 패키지 `ybm-ds/` → `dist/`(공개 주소 `…/ybm-ds/dist/ybm-ds.css`, 가이드 사이트 경로/`dsUrl` 함께 변경). 아이콘 선 굵기 크기 비례(크기 ÷ 12, Figma/CSS), 2px 테두리 → 1px, 원본이 끊겼던 인스턴스 1,061개 다시 연결, `palette/brand-1000` 추가와 브랜드 색 바꾸는 방법(README §5.3), Icons 페이지 문서 프레임화.
 - **끝냄 (2026-10-28)** - Figma 에만 있던 10종 CSS 완성 + 등록: 49 Select Box, 50 Time Picker, 51 Table Pagination, 52 Popover, 53 Chat(5종), Text Link 는 02번에 Figma ID. 하위 부품 3개(Segmented Control Item, Tag Group Item, Checkbox Mark)도 등록 → Figma 대조 74개 일치, 미등록 0. `ybm-ds.js` 에 Popover 열고 닫기, Time Picker 휠, Chat 입력창 동작 추가. 아이콘 `square` 추가. 예시 문구에서 특정 서비스 내용을 뺌.
+- **끝냄 (2026-10-29)** - 새 부품 4종을 Figma 와 CSS 에 함께 만듦: 54 Top App Bar(+ Button, Navigation 페이지), 55 Top Navigation(+ Item), 56 Search Field, 57 File Attach(+ Item, Data Input 페이지). 아이콘 `upload` 추가, `ybm-ds.js` 에 검색 지우기와 파일 끌어 놓기 표시. Search Field 는 변형마다 글자가 달라 글자 속성을 두지 않았다(하나의 TEXT 속성은 모든 변형에 같은 글자를 강제함).
 - **원칙** - 이 DS 는 완전 범용이다. 특정 서비스나 사이트를 근거로 부품을 정하거나 예시 문구에 넣지 않는다.
-- **다음 할 일 (추천 순서)** - 새 부품: 상단 앱바(모바일)와 PC 상단 메뉴, 검색 필드, 파일 첨부, 메뉴 시트, 결과 화면, 타이머, 로딩 Spinner, Drawer, Carousel/이미지 틀, Markdown/코드 블록/출처 인용, Multi Select, Checkbox 그룹, 당겨서 새로 고침, 스크롤 끝 흐림. 파운데이션: 브랜드 교체 층, 반응형 기준점, 모션 Figma 변수화, 역할 이름 글자 스타일, 그라데이션, 일러스트.
+- **다음 할 일 (추천 순서)** - 새 부품: 메뉴 시트, 결과 화면, 타이머, 로딩 Spinner, Drawer, Carousel/이미지 틀, Markdown/코드 블록/출처 인용, Multi Select, Checkbox 그룹, 당겨서 새로 고침, 스크롤 끝 흐림. 파운데이션: 브랜드 교체 층, 반응형 기준점, 모션 Figma 변수화, 역할 이름 글자 스타일, 그라데이션, 일러스트.
 - **끝냄 (2026-10-27)** - 체크박스 체크와 가로선을 아이콘 세트에서 분리해 전용 부품 `Checkbox Mark`(굵기 고정, CSS 와 같음). 채움형(Solid) 아이콘 원본 그림을 크기에 맞춰 늘고 줄도록 고쳐 Banner, 하단 탭 아이콘 정렬 해결. Figma 문서 설명 문구를 쉬운 한 문장으로 전부 다시 씀.
 - **다음 할 일 (보류, 요청할 때만)** - Templates 페이지(`2479:5`) 모바일 375 템플릿 10종: 1 로그인 / 2 서비스 홈 / 3 검색 결과, 목록 / 4 상세 화면 / 5 신청서 작성 / 6 마이페이지, 설정 / 7 고객센터 FAQ / 8 고객센터 채팅 상담 / 9 고객센터 만족도 설문 / 10 빈 화면, 오류. DS 에 없는 상단 앱바, 점수형 문항은 템플릿 안에서 먼저 조합.
 - **정리 후보 (미정)** - 값이 같은 변수: `bg/neutral-inverted(-pressed)` = `bg/neutral-solid(-pressed)`, `bg/neutral-subtle` = `bg/layer-default` = `fg/neutral-inverted` = `fg/on-neutral-solid`. 빈칸: `bg/neutral-weak`(현재 `bg/neutral` 이 대신). 텍스트 스타일 `Scale/*` 와 `Static/*` 는 이제 값이 같다. Icons 페이지 옆 "미사용 벡터 (확인 후 삭제)" 13개.

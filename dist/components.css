@@ -69,6 +69,10 @@
      51 Table Pagination     .ds-tablepagination
      52 Popover              .ds-popover / .ds-popover-anchor
      53 Chat                 .ds-chat-bubble / .ds-chat-meta / .ds-chat-system / .ds-chat-send / .ds-chat-composer
+     54 Top App Bar          .ds-appbar
+     55 Top Navigation       .ds-topnav
+     56 Search Field         .ds-search
+     57 File Attach          .ds-fileattach / .ds-filelist / .ds-fileitem
    ========================================================================== */
 
 
@@ -3141,3 +3145,286 @@ a.ds-card:active, button.ds-card:active { background: linear-gradient(var(--ybm-
 }
 .ds-chat-composer__input:focus-visible { outline: none; }
 .ds-chat-composer__input::placeholder { color: var(--ybm-color-fg-placeholder); }
+
+
+/* --------------------------------------------------------------------------
+   54 Top App Bar - 모바일 화면 맨 위에서 제목과 이동 버튼을 보여 주는 막대 (2026-10-29 추가)
+   titleAlign: 기본 center / data-title-align="left"      tone: 기본 layer / data-tone="transparent"
+   divider: data-divider (내용이 막대 아래로 스크롤될 때)
+     <header class="ds-appbar" [data-title-align="left"] [data-tone="transparent"] [data-divider]>
+       <div class="ds-appbar__leading">
+         <button type="button" class="ds-appbar__button" aria-label="뒤로"><i class="ds-icon ds-icon--chevron-left" aria-hidden="true"></i></button>
+       </div>
+       <h1 class="ds-appbar__title">제목</h1>
+       <div class="ds-appbar__trailing">
+         <button type="button" class="ds-appbar__button" aria-label="검색"><i class="ds-icon ds-icon--search" aria-hidden="true"></i></button>
+       </div>
+     </header>
+   Figma: 높이 x14 / 좌우 padding x2 / 위 safe area / bg/layer-default (transparent 는 배경 없음)
+     center 양옆 칸 폭 x20 고정, 제목 가운데 / left 양옆 칸은 내용 폭, 제목 왼쪽
+     제목 칸 padding x2 / Static t06 SemiBold fg/neutral / 한 줄 말줄임
+     Top App Bar Button 40 shape/sm, 아이콘 24 fg/neutral / pressed bg/neutral-weak-alpha / disabled fg/disabled
+     divider 아래 1px stroke/neutral-muted
+   -------------------------------------------------------------------------- */
+.ds-appbar {
+  --ds-appbar-height: var(--ybm-space-x14);
+  --ds-appbar-side: var(--ybm-space-x20);
+  display: grid;
+  grid-template-columns: var(--ds-appbar-side) minmax(0, 1fr) var(--ds-appbar-side);
+  align-items: center;
+  min-height: calc(var(--ds-appbar-height) + env(safe-area-inset-top, 0px));
+  padding: env(safe-area-inset-top, 0px) var(--ybm-space-x2) 0;
+  background: var(--ybm-color-bg-layer-default);
+}
+.ds-appbar[data-title-align="left"] { grid-template-columns: auto minmax(0, 1fr) auto; }
+.ds-appbar[data-tone="transparent"] { background: transparent; }
+.ds-appbar[data-divider] { box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); }
+.ds-appbar__leading, .ds-appbar__trailing { display: flex; align-items: center; min-width: 0; }
+.ds-appbar__leading { grid-column: 1; }
+.ds-appbar__trailing { grid-column: 3; justify-content: flex-end; }
+.ds-appbar__title {
+  grid-column: 2;
+  margin: 0;
+  padding-inline: var(--ybm-space-x2);
+  overflow: hidden;
+  color: var(--ybm-color-fg-neutral);
+  font-size: var(--ybm-font-size-t06-static);
+  line-height: var(--ybm-line-height-t06-static);
+  font-weight: var(--ybm-font-weight-semibold);
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.ds-appbar[data-title-align="left"] .ds-appbar__title { text-align: start; }
+.ds-appbar__button {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: var(--ybm-space-x10);
+  height: var(--ybm-space-x10);
+  border-radius: var(--ybm-shape-sm);
+  color: var(--ybm-color-fg-neutral);
+}
+.ds-appbar__button > .ds-icon { --ds-icon-size: 24px; }
+.ds-appbar__button:active:not(:disabled) { background: var(--ybm-color-bg-neutral-weak-alpha); }
+.ds-appbar__button:is(:disabled, [aria-disabled="true"]) { color: var(--ybm-color-fg-disabled); pointer-events: none; }
+
+
+/* --------------------------------------------------------------------------
+   55 Top Navigation - PC 화면 맨 위에서 서비스 전체 메뉴를 보여 주는 막대 (2026-10-29 추가)
+   divider: 기본 켬 / data-divider="false"      아이콘 버튼은 Top App Bar 의 .ds-appbar__button 을 같이 쓴다
+     <header class="ds-topnav" [data-divider="false"]>
+       <a class="ds-topnav__logo" href="/"><img src="logo.svg" alt="서비스 이름"></a>
+       <nav class="ds-topnav__menu" aria-label="주요 메뉴">
+         <a class="ds-topnav__item" href="#" aria-current="page">홈</a>
+         <a class="ds-topnav__item" href="#">소개</a>
+       </nav>
+       <div class="ds-topnav__actions">
+         <button type="button" class="ds-appbar__button" aria-label="검색"><i class="ds-icon ds-icon--search" aria-hidden="true"></i></button>
+         <a class="ds-btn" data-variant="neutralWeak" data-size="small" href="#">로그인</a>
+       </div>
+     </header>
+   Figma: 높이 x16 / 좌우 padding x8 / gap x10 / bg/layer-default / 아래 1px stroke/neutral-muted
+     로고 칸 높이 28 / Top Navigation Item padding x3, Static t05 SemiBold fg/neutral-muted, hover/선택 fg/neutral
+     선택 표시 글자 폭 2px bg/neutral-solid 바닥 / 오른쪽 버튼 gap x2
+   -------------------------------------------------------------------------- */
+.ds-topnav {
+  --ds-topnav-height: var(--ybm-space-x16);
+  display: flex;
+  align-items: center;
+  gap: var(--ybm-space-x10);
+  height: var(--ds-topnav-height);
+  padding-inline: var(--ybm-space-x8);
+  background: var(--ybm-color-bg-layer-default);
+  box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted);
+}
+.ds-topnav[data-divider="false"] { box-shadow: none; }
+.ds-topnav__logo { display: flex; align-items: center; flex: none; height: 28px; color: inherit; text-decoration: none; }
+.ds-topnav__logo > :is(img, svg) { width: auto; height: 100%; }
+.ds-topnav__menu { display: flex; flex: 1 1 auto; align-self: stretch; min-width: 0; }
+.ds-topnav__item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding-inline: var(--ybm-space-x3);
+  color: var(--ybm-color-fg-neutral-muted);
+  font-size: var(--ybm-font-size-t05-static);
+  line-height: var(--ybm-line-height-t05-static);
+  font-weight: var(--ybm-font-weight-semibold);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.ds-topnav__item:is(:hover, [aria-current="page"]) { color: var(--ybm-color-fg-neutral); }
+.ds-topnav__item[aria-current="page"]::after {
+  content: "";
+  position: absolute;
+  inset-inline: var(--ybm-space-x3);
+  bottom: 0;
+  height: 2px;
+  background: var(--ybm-color-bg-neutral-solid);
+}
+.ds-topnav__item:focus-visible { outline-offset: -2px; }
+.ds-topnav__actions { display: flex; flex: none; align-items: center; gap: var(--ybm-space-x2); }
+
+
+/* --------------------------------------------------------------------------
+   56 Search Field - 검색어를 넣는 둥근 입력 칸 (2026-10-29 추가)
+   size: large(기본) / data-size="medium"      값이 있으면 지우기 버튼이 보이고, 누르면 ybm-ds.js 가 값을 비운다
+     <div class="ds-search" [data-size="medium"]>
+       <i class="ds-icon ds-icon--search" aria-hidden="true"></i>
+       <input type="search" class="ds-search__input" placeholder="검색어를 입력하세요" aria-label="검색">
+       <button type="button" class="ds-search__clear" aria-label="지우기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button>
+     </div>
+   Figma: large 높이 x12, 좌우 padding x4, t05, 아이콘 20 / medium 높이 x10, 좌우 padding x3_5, t04, 아이콘 16 / gap x2
+     bg/neutral-weak-alpha, shape/pill / focused 1px stroke/neutral-contrast / disabled bg/disabled, fg/disabled
+     아이콘과 지우기 fg/neutral-subtle / 값 fg/neutral / placeholder fg/placeholder
+   -------------------------------------------------------------------------- */
+.ds-search {
+  --ds-search-height: var(--ybm-space-x12);
+  --ds-search-padding-x: var(--ybm-space-x4);
+  --ds-search-icon: 20px;
+  --ds-search-font-size: var(--ybm-font-size-t05);
+  --ds-search-line-height: var(--ybm-line-height-t05);
+  display: flex;
+  align-items: center;
+  gap: var(--ybm-space-x2);
+  height: var(--ds-search-height);
+  padding-inline: var(--ds-search-padding-x);
+  border-radius: var(--ybm-shape-pill);
+  background: var(--ybm-color-bg-neutral-weak-alpha);
+  color: var(--ybm-color-fg-neutral-subtle);
+}
+.ds-search[data-size="medium"] {
+  --ds-search-height: var(--ybm-space-x10);
+  --ds-search-padding-x: var(--ybm-space-x3_5);
+  --ds-search-icon: 16px;
+  --ds-search-font-size: var(--ybm-font-size-t04);
+  --ds-search-line-height: var(--ybm-line-height-t04);
+}
+.ds-search > .ds-icon, .ds-search__clear > .ds-icon { --ds-icon-size: var(--ds-search-icon); }
+.ds-search:focus-within { box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-neutral-contrast); }
+.ds-search__input {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--ybm-color-fg-neutral);
+  font-size: var(--ds-search-font-size);
+  line-height: var(--ds-search-line-height);
+  -webkit-appearance: none;
+          appearance: none;
+}
+.ds-search__input:focus-visible { outline: none; }
+.ds-search__input::placeholder { color: var(--ybm-color-fg-placeholder); }
+.ds-search__input::-webkit-search-cancel-button,
+.ds-search__input::-webkit-search-decoration { -webkit-appearance: none; appearance: none; }
+/* 지우기 - 아이콘 크기는 size 를 따름, 터치 영역 40 */
+.ds-search__clear { position: relative; display: grid; place-items: center; flex: none; color: inherit; }
+.ds-search__clear::after { content: ""; position: absolute; inset: calc((var(--ds-search-icon) - 40px) / 2); }
+.ds-search__input:placeholder-shown ~ .ds-search__clear { display: none; }
+.ds-search:has(.ds-search__input:disabled) { background: var(--ybm-color-bg-disabled); color: var(--ybm-color-fg-disabled); }
+.ds-search__input:disabled { color: var(--ybm-color-fg-disabled); }
+.ds-search:has(.ds-search__input:disabled) .ds-search__clear { pointer-events: none; }
+
+
+/* --------------------------------------------------------------------------
+   57 File Attach - 파일을 끌어 놓거나 눌러서 고르는 칸과, 고른 파일을 보여 주는 줄 (2026-10-29 추가)
+   ▸ File Attach  state: 기본 / data-state="dragover"(파일을 끌고 오면 ybm-ds.js 가 붙인다) / aria-invalid / input disabled
+       <label class="ds-fileattach" [aria-invalid="true"]>
+         <input type="file" class="ds-fileattach__input" multiple>
+         <span class="ds-fileattach__icon"><i class="ds-icon ds-icon--upload" aria-hidden="true"></i></span>
+         <span class="ds-fileattach__title">파일을 끌어 놓거나 눌러서 고르세요</span>
+         <span class="ds-fileattach__desc">10MB 이하 파일을 5개까지 올릴 수 있어요</span>
+       </label>
+     Figma: padding x6 x4 / gap x2 / shape/lg / 1px 점선 stroke/neutral-weak / bg/layer-default
+       아이콘 칸 x10 원 bg/neutral-weak-alpha, upload 20 fg/neutral-subtle / 제목 t04 SemiBold fg/neutral / 설명 t03 fg/neutral-subtle, 제목과 x0_5
+       dragOver bg/brand-weak, stroke/brand-solid, 아이콘 fg/brand / invalid stroke/critical-solid, 설명 fg/critical / disabled bg/disabled, fg/disabled
+   ▸ File Attach Item  state: done(기본) / data-state="uploading" / data-state="error"
+       <ul class="ds-filelist">
+         <li class="ds-fileitem" [data-state="uploading"]>
+           <span class="ds-fileitem__icon"><i class="ds-icon ds-icon--file-text" aria-hidden="true"></i></span>
+           <span class="ds-fileitem__texts">
+             <span class="ds-fileitem__name">보고서_최종.pdf</span>
+             <span class="ds-fileitem__meta">올리는 중 45%</span>
+             [<span class="ds-progress" data-size="small" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="--ds-progress-value: 45%"></span>]
+           </span>
+           <button type="button" class="ds-fileitem__remove" aria-label="보고서_최종.pdf 빼기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button>
+         </li>
+       </ul>
+     Figma: padding x3 / gap x3 / shape/md / 1px stroke/neutral-weak (error stroke/critical-solid) / bg/layer-default
+       아이콘 칸 x10 shape/sm bg/neutral-weak-alpha, file-text 20 fg/neutral-subtle / 이름 t04 Medium 한 줄 / 정보 t02 fg/neutral-subtle (error fg/critical)
+       진행 막대 Progress small / 빼기 버튼 x8 shape/sm, x 20 fg/neutral-subtle / 줄 사이 x2
+   -------------------------------------------------------------------------- */
+.ds-fileattach {
+  --ds-fileattach-line: var(--ybm-color-stroke-neutral-weak);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--ybm-space-x2);
+  padding: calc(var(--ybm-space-x6) - 1px) calc(var(--ybm-space-x4) - 1px);   /* 테두리 1px 를 빼 Figma 안쪽 선과 같은 크기 */
+  border: 1px dashed var(--ds-fileattach-line);
+  border-radius: var(--ybm-shape-lg);
+  background: var(--ybm-color-bg-layer-default);
+  text-align: center;
+  cursor: pointer;
+}
+/* 입력을 칸 전체에 투명하게 덮어 누르기와 끌어 놓기를 브라우저 기본 동작으로 받는다 */
+.ds-fileattach__input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: inherit; }
+.ds-fileattach:has(.ds-fileattach__input:focus-visible) { outline: 2px solid var(--ybm-color-stroke-focus-ring); outline-offset: 2px; }
+.ds-fileattach__icon {
+  display: grid;
+  place-items: center;
+  width: var(--ybm-space-x10);
+  height: var(--ybm-space-x10);
+  border-radius: var(--ybm-shape-pill);
+  background: var(--ybm-color-bg-neutral-weak-alpha);
+  color: var(--ybm-color-fg-neutral-subtle);
+}
+.ds-fileattach__title { color: var(--ybm-color-fg-neutral); font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); font-weight: var(--ybm-font-weight-semibold); }
+.ds-fileattach__desc { margin-top: calc(var(--ybm-space-x0_5) - var(--ybm-space-x2)); color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t03); line-height: var(--ybm-line-height-t03); }
+.ds-fileattach[data-state="dragover"] { --ds-fileattach-line: var(--ybm-color-stroke-brand-solid); background: var(--ybm-color-bg-brand-weak); }
+.ds-fileattach[data-state="dragover"] .ds-fileattach__icon { color: var(--ybm-color-fg-brand); }
+.ds-fileattach:is([aria-invalid="true"], :has([aria-invalid="true"])) { --ds-fileattach-line: var(--ybm-color-stroke-critical-solid); }
+.ds-fileattach:is([aria-invalid="true"], :has([aria-invalid="true"])) .ds-fileattach__desc { color: var(--ybm-color-fg-critical); }
+.ds-fileattach:has(.ds-fileattach__input:disabled) { background: var(--ybm-color-bg-disabled); cursor: default; }
+.ds-fileattach:has(.ds-fileattach__input:disabled) :is(.ds-fileattach__title, .ds-fileattach__desc, .ds-fileattach__icon) { color: var(--ybm-color-fg-disabled); }
+.ds-fileattach:has(.ds-fileattach__input:disabled) .ds-fileattach__icon { background: none; }
+
+.ds-filelist { display: flex; flex-direction: column; gap: var(--ybm-space-x2); margin: 0; padding: 0; list-style: none; }
+.ds-fileitem {
+  display: flex;
+  align-items: center;
+  gap: var(--ybm-space-x3);
+  padding: var(--ybm-space-x3);
+  border-radius: var(--ybm-shape-md);
+  background: var(--ybm-color-bg-layer-default);
+  box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-neutral-weak);
+}
+.ds-fileitem__icon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: var(--ybm-space-x10);
+  height: var(--ybm-space-x10);
+  border-radius: var(--ybm-shape-sm);
+  background: var(--ybm-color-bg-neutral-weak-alpha);
+  color: var(--ybm-color-fg-neutral-subtle);
+}
+.ds-fileitem__texts { display: flex; flex: 1 1 auto; flex-direction: column; gap: var(--ybm-space-x0_5); min-width: 0; }
+.ds-fileitem__name { overflow: hidden; color: var(--ybm-color-fg-neutral); font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); font-weight: var(--ybm-font-weight-medium); text-overflow: ellipsis; white-space: nowrap; }
+.ds-fileitem__meta { color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); }
+.ds-fileitem[data-state="error"] { box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-critical-solid); }
+.ds-fileitem[data-state="error"] .ds-fileitem__meta { color: var(--ybm-color-fg-critical); }
+.ds-fileitem__remove {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: var(--ybm-space-x8);
+  height: var(--ybm-space-x8);
+  border-radius: var(--ybm-shape-sm);
+  color: var(--ybm-color-fg-neutral-subtle);
+}
+.ds-fileitem__remove:active { background: var(--ybm-color-bg-neutral-weak-alpha); }

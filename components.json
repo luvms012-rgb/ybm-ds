@@ -490,6 +490,45 @@
         { "part": "Composer", "id": "2499:54", "type": "COMPONENT_SET", "variants": 2 }
       ],
       "props": "sender `assistant/user`, status `sending/sent/read/error`, 보내기 `send/stop/disabled`"
+    },
+    {
+      "no": "54",
+      "name": "Top App Bar",
+      "classes": [ ".ds-appbar" ],
+      "figma": [
+        { "id": "2549:1399", "type": "COMPONENT_SET", "variants": 4 },
+        { "part": "Button", "id": "2549:1322", "type": "COMPONENT_SET", "variants": 3 }
+      ],
+      "props": "titleAlign `center/left`, tone `layer/transparent`, divider, safe area"
+    },
+    {
+      "no": "55",
+      "name": "Top Navigation",
+      "classes": [ ".ds-topnav" ],
+      "figma": [
+        { "id": "2549:1411", "type": "COMPONENT" },
+        { "part": "Item", "id": "2549:1410", "type": "COMPONENT_SET", "variants": 4 }
+      ],
+      "props": "divider, search, action / Item selected, state `enabled/hover`"
+    },
+    {
+      "no": "56",
+      "name": "Search Field",
+      "classes": [ ".ds-search" ],
+      "figma": [
+        { "id": "2552:1037", "type": "COMPONENT_SET", "variants": 12 }
+      ],
+      "props": "size `large/medium`, state `enabled/focused/disabled`, content `placeholder/value`"
+    },
+    {
+      "no": "57",
+      "name": "File Attach",
+      "classes": [ ".ds-fileattach", ".ds-filelist", ".ds-fileitem" ],
+      "figma": [
+        { "id": "2552:1066", "type": "COMPONENT_SET", "variants": 4 },
+        { "part": "Item", "id": "2552:1099", "type": "COMPONENT_SET", "variants": 3 }
+      ],
+      "props": "state `enabled/dragOver/invalid/disabled` / Item state `done/uploading/error`"
     }
   ]
 }

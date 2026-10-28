@@ -144,3 +144,9 @@
   --ds-icon-square: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Crect width=%2218%22 height=%2218%22 x=%223%22 y=%223%22 rx=%222%22/%3E%3C/svg%3E");
 }
 .ds-icon--square { --ds-icon: var(--ds-icon-square); }
+
+/* 2026-10-29 추가 - File Attach 칸 아이콘. Lucide upload (Figma Lucide/upload Outline 과 같은 경로) */
+:root {
+  --ds-icon-upload: url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22black%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22%3E%3Cpath d=%22M12 3v12%22/%3E%3Cpath d=%22m17 8-5-5-5 5%22/%3E%3Cpath d=%22M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4%22/%3E%3C/svg%3E");
+}
+.ds-icon--upload { --ds-icon: var(--ds-icon-upload); }
