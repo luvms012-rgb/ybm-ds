@@ -531,6 +531,44 @@
         { "part": "Item", "id": "2558:1384", "type": "COMPONENT_SET", "variants": 4 }
       ],
       "props": "Dropzone state `enabled/dragOver/disabled` / Trigger state / Item type `file/image`, state `enabled/readonly`, badge"
+    },
+    {
+      "no": "58",
+      "name": "Menu Sheet",
+      "classes": [ ".ds-menusheet" ],
+      "figma": [
+        { "id": "2563:1501", "type": "COMPONENT" },
+        { "part": "Item", "id": "2563:1495", "type": "COMPONENT_SET", "variants": 8 },
+        { "part": "Close Button", "id": "2563:1500", "type": "COMPONENT_SET", "variants": 2 }
+      ],
+      "props": "header, description, footer / Item tone `neutral/critical`, labelAlign `left/center`"
+    },
+    {
+      "no": "59",
+      "name": "Result Section",
+      "classes": [ ".ds-result" ],
+      "figma": [
+        { "id": "2562:741", "type": "COMPONENT_SET", "variants": 2 }
+      ],
+      "props": "size `large/medium`, asset, description, primary/secondary action"
+    },
+    {
+      "no": "60",
+      "name": "Timer",
+      "classes": [ ".ds-timer" ],
+      "figma": [
+        { "id": "2563:889", "type": "COMPONENT_SET", "variants": 2 }
+      ],
+      "props": "format `clock/elapsed`, data-start / data-end"
+    },
+    {
+      "no": "61",
+      "name": "Status Dot",
+      "classes": [ ".ds-statusdot" ],
+      "figma": [
+        { "id": "2562:747", "type": "COMPONENT_SET", "variants": 5 }
+      ],
+      "props": "tone `positive/warning/critical/brand/neutral`, data-pulse"
     }
   ]
 }

@@ -19,8 +19,8 @@
   .pv-nav b { color: var(--ybm-color-fg-neutral-subtle); font-weight: var(--ybm-font-weight-regular); font-variant-numeric: tabular-nums; margin-right: var(--ybm-space-x1); }
   .pv-sec { scroll-margin-top: 84px; padding-block: var(--ybm-space-x8); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-subtle); }
   .pv-sec > header { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--ybm-space-x2) var(--ybm-space-x3); margin-bottom: var(--ybm-space-x5); }
-  .pv-sec h2 { font-size: var(--ybm-font-size-t07); line-height: var(--ybm-line-height-t07); font-weight: var(--ybm-font-weight-bold); }
-  .pv-sec h2 small { margin-right: var(--ybm-space-x2); color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t05); font-weight: var(--ybm-font-weight-medium); }
+  .pv-sec > header h2 { font-size: var(--ybm-font-size-t07); line-height: var(--ybm-line-height-t07); font-weight: var(--ybm-font-weight-bold); }
+  .pv-sec > header h2 small { margin-right: var(--ybm-space-x2); color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t05); font-weight: var(--ybm-font-weight-medium); }
   .pv-meta { display: flex; flex-wrap: wrap; gap: var(--ybm-space-x2); color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t03); }
   .pv-meta code { padding: 0 var(--ybm-space-x1); border-radius: var(--ybm-shape-2xs); background: var(--ybm-color-bg-neutral-muted); color: var(--ybm-color-fg-neutral-muted); font-family: ui-monospace, Consolas, monospace; font-size: 12px; }
   .pv-stage { display: flex; flex-wrap: wrap; align-items: center; gap: var(--ybm-space-x3); padding: var(--ybm-space-x6); border-radius: var(--ybm-shape-lg); background: var(--ybm-color-bg-layer-default); box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-neutral-weak); }
@@ -681,6 +681,66 @@
       <input type="file" class="ds-fileattach__input" disabled>
       <span class="ds-fileattach__label">지금은 파일을 올릴 수 없어요</span>
     </label>
+  </div>
+</section>
+
+<section class="pv-sec" id="c-58" data-no="58"><header><h2><small>58</small>Menu Sheet</h2></header>
+  <div class="pv-stage">
+    <button type="button" class="ds-btn" data-variant="neutralOutline" data-size="small" data-ds-open="pv-ms">메뉴 시트 열기</button>
+    <dialog class="ds-menusheet" id="pv-ms" aria-labelledby="pv-ms-t">
+      <div class="ds-menusheet__header"><h2 class="ds-menusheet__title" id="pv-ms-t">제목</h2><p class="ds-menusheet__desc">설명을 적어 주세요</p></div>
+      <div class="ds-menusheet__list">
+        <div class="ds-menusheet__group" role="group">
+          <button type="button" class="ds-menusheet__item" data-ds-close><i class="ds-icon ds-icon--share" aria-hidden="true"></i><span class="ds-menusheet__content"><span class="ds-menusheet__label">공유하기</span></span></button>
+          <button type="button" class="ds-menusheet__item" data-ds-close><i class="ds-icon ds-icon--link" aria-hidden="true"></i><span class="ds-menusheet__content"><span class="ds-menusheet__label">링크 복사</span><span class="ds-menusheet__item-desc">누구나 볼 수 있는 링크예요</span></span></button>
+        </div>
+        <div class="ds-menusheet__group" role="group">
+          <button type="button" class="ds-menusheet__item" data-tone="critical" data-ds-close><i class="ds-icon ds-icon--trash" aria-hidden="true"></i><span class="ds-menusheet__content"><span class="ds-menusheet__label">삭제하기</span></span></button>
+        </div>
+      </div>
+      <div class="ds-menusheet__footer"><button type="button" class="ds-menusheet__close" data-ds-close>닫기</button></div>
+    </dialog>
+  </div>
+</section>
+
+<section class="pv-sec" id="c-59" data-no="59"><header><h2><small>59</small>Result Section</h2></header>
+  <div class="pv-stage" style="align-items:stretch;flex-wrap:wrap">
+    <div class="pv-w" style="display:flex;width:320px;min-height:360px;box-shadow:inset 0 0 0 1px var(--ybm-color-stroke-neutral-muted)">
+      <section class="ds-result">
+        <div class="ds-result__asset" style="color:var(--ybm-color-fg-positive)"><i class="ds-icon ds-icon--circle-check-solid" aria-hidden="true"></i></div>
+        <div class="ds-result__texts"><h2 class="ds-result__title">신청을 마쳤어요</h2><p class="ds-result__desc">처리 결과는 알림으로 알려 드릴게요</p></div>
+        <div class="ds-result__actions"><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="medium">확인</button><button type="button" class="ds-btn" data-variant="ghost" data-size="small">신청 내역 보기</button></div>
+      </section>
+    </div>
+    <div class="pv-w" style="display:flex;width:320px;min-height:360px;box-shadow:inset 0 0 0 1px var(--ybm-color-stroke-neutral-muted)">
+      <section class="ds-result" data-size="medium">
+        <div class="ds-result__asset" style="color:var(--ybm-color-fg-critical)"><i class="ds-icon ds-icon--circle-alert-solid" aria-hidden="true"></i></div>
+        <div class="ds-result__texts"><h2 class="ds-result__title">다시 시도해 주세요</h2><p class="ds-result__desc">요청을 처리하지 못했어요</p></div>
+        <div class="ds-result__actions"><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="medium">다시 시도</button></div>
+      </section>
+    </div>
+  </div>
+</section>
+
+<section class="pv-sec" id="c-60" data-no="60"><header><h2><small>60</small>Timer</h2></header>
+  <div class="pv-stage" style="gap:var(--ybm-space-x8)">
+    <span>남은 시간 <time class="ds-timer" id="pv-timer-end" style="font-size:var(--ybm-font-size-t07);line-height:var(--ybm-line-height-t07);font-weight:var(--ybm-font-weight-bold);color:var(--ybm-color-fg-neutral)">0:00</time></span>
+    <span>흐른 시간 <time class="ds-timer" id="pv-timer-start" data-format="elapsed">0초</time></span>
+  </div>
+  <script>
+    // 미리보기 전용 - 지금부터 25분 남은 시간, 3분 전부터 흐른 시간
+    document.getElementById('pv-timer-end').setAttribute('data-end', String(Date.now() + 25 * 60000));
+    document.getElementById('pv-timer-start').setAttribute('data-start', String(Date.now() - 3 * 60000));
+  </script>
+</section>
+
+<section class="pv-sec" id="c-61" data-no="61"><header><h2><small>61</small>Status Dot</h2></header>
+  <div class="pv-stage" style="gap:var(--ybm-space-x6)">
+    <span style="display:inline-flex;align-items:center;gap:var(--ybm-space-x1_5)"><span class="ds-statusdot" data-tone="positive"></span>연결됨</span>
+    <span style="display:inline-flex;align-items:center;gap:var(--ybm-space-x1_5)"><span class="ds-statusdot" data-tone="warning"></span>지연</span>
+    <span style="display:inline-flex;align-items:center;gap:var(--ybm-space-x1_5)"><span class="ds-statusdot" data-tone="critical"></span>끊김</span>
+    <span style="display:inline-flex;align-items:center;gap:var(--ybm-space-x1_5)"><span class="ds-statusdot" data-tone="brand" data-pulse></span>진행 중</span>
+    <span style="display:inline-flex;align-items:center;gap:var(--ybm-space-x1_5)"><span class="ds-statusdot"></span>대기</span>
   </div>
 </section>
 

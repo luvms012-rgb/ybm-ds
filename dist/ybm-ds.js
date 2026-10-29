@@ -11,6 +11,8 @@
      · Time Picker — 가운데 온 항목에 aria-selected, 멈추면 열에서 change(detail.value), 항목 누름과 화살표 키로 이동
      · Chat Composer — 입력이 비면 보내기 비활성, field-sizing 이 없는 브라우저에서 높이 맞춤
      · Search Suggestion — 입력 칸(role=combobox, aria-controls)에서 위아래 화살표로 줄 고르기, Enter 로 그 줄 누르기
+     · Menu Sheet — Dialog 와 같이 열고 닫기, 바깥(dim) 클릭 닫기
+     · Timer — data-start(흐른 시간) / data-end(남은 시간)로 1초마다 글자를 바꾸고, 남은 시간이 0 이면 ds-timer-end 이벤트
      · File Attach — 파일을 끌어 놓는 칸 위로 끌고 오면 data-state="dragover", 벗어나거나 놓으면 뺀다
    사용: <script src="…/ybm-ds/dist/ybm-ds.js" defer></script>
    ========================================================================== */
@@ -129,6 +131,32 @@
     if (e.target.classList && e.target.classList.contains("ds-chat-composer__input")) syncComposer(e.target);
   });
 
+  /* ---- Timer: data-start 부터 흐른 시간 / data-end 까지 남은 시간 ------------ */
+  function toTime(v) { var n = Number(v); return isNaN(n) ? Date.parse(v) : n; }
+  function pad(n) { return (n < 10 ? "0" : "") + n; }
+  function formatTime(sec, format) {
+    var h = Math.floor(sec / 3600), m = Math.floor((sec % 3600) / 60), s = sec % 60;
+    if (format === "elapsed") return h ? h + "시간 " + pad(m) + "분" : m ? m + "분 " + pad(s) + "초" : s + "초";
+    return h ? h + ":" + pad(m) + ":" + pad(s) : m + ":" + pad(s);
+  }
+  function tickTimers() {
+    var now = Date.now();
+    document.querySelectorAll(".ds-timer").forEach(function (el) {
+      var end = el.getAttribute("data-end"), start = el.getAttribute("data-start");
+      if (end == null && start == null) return;
+      var ms = end != null ? toTime(end) - now : now - toTime(start);
+      var sec = Math.max(0, end != null ? Math.ceil(ms / 1000) : Math.floor(ms / 1000));
+      if (isNaN(sec)) return;
+      el.textContent = formatTime(sec, el.getAttribute("data-format"));
+      el.setAttribute("datetime", "PT" + sec + "S");
+      if (end != null && sec === 0 && !el.hasAttribute("data-ended")) {
+        el.setAttribute("data-ended", "");
+        el.dispatchEvent(new CustomEvent("ds-timer-end", { bubbles: true }));
+      }
+    });
+  }
+  setInterval(tickTimers, 1000);
+
   /* ---- 초기화: 페이지에 이미 있는 요소 ------------------------------------- */
   function init(root) {
     (root || document).querySelectorAll(".ds-slider").forEach(syncSlider);
@@ -139,6 +167,7 @@
       syncWheel(col, false);
     });
     (root || document).querySelectorAll(".ds-chat-composer__input").forEach(syncComposer);
+    tickTimers();
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", function () { init(); });
   else init();
@@ -184,7 +213,7 @@
 
     // dialog 바깥(backdrop) 클릭 = dialog 요소 자신이 target
     // 단, Alert(role="alertdialog")는 버튼으로만 닫는다
-    if (t.tagName === "DIALOG" && (t.classList.contains("ds-dialog") || t.classList.contains("ds-bottomsheet")) && t.getAttribute("role") !== "alertdialog") closeDialog(t);
+    if (t.tagName === "DIALOG" && (t.classList.contains("ds-dialog") || t.classList.contains("ds-bottomsheet") || t.classList.contains("ds-menusheet")) && t.getAttribute("role") !== "alertdialog") closeDialog(t);
   });
 
   // Search Suggestion: 입력 칸에서 위아래 화살표로 줄을 고르고 Enter 로 누른다

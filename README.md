@@ -137,18 +137,18 @@ DS 전체가 `@layer ybm.tokens, ybm.base, ybm.icons, ybm.components, ybm.utilit
 | Action | `2479:7` | Action Button, Chip, Floating Action Button, Menu, Segmented Control, Toggle Button, **Text Link** `2493:324` |
 | Chat | `2479:8` | 문서 1개에 **Chat Message Bubble** `2499:6`, **Chat Message Metadata** `2499:18`, **Chat System Message** `2499:25`, **Chat Send Button** `2499:35`, **Chat Composer** `2499:54` |
 | Container | `2479:9` | Accordion, Card, **Select Box** `2495:260` |
-| Content | `2479:10` | Avatar, Empty, Tag Group |
+| Content | `2479:10` | Avatar, Empty, Tag Group, **Timer** `2563:889` |
 | Data Input | `2479:11` | Checkbox, Date Picker, Field Button, Quantity Picker, Radio Group, Select, Slider, Switch, Text Field, **Time Picker** `2497:979`, **Search Suggestion** `2558:1321`, **File Attach** (Dropzone `2558:1328`, Trigger `2558:1347`, Item `2558:1384`) |
-| Feedback & Status | `2479:12` | Badge, Banner, Callout, Progress, Skeleton |
+| Feedback & Status | `2479:12` | Badge, Banner, Callout, Progress, Skeleton, **Result Section** `2562:741`, **Status Dot** `2562:747` |
 | Layout | `2479:13` | Divider |
 | Navigation | `2479:14` | Bottom Navigation, Breadcrumbs, Chip Tabs, Pagination, Side Navigation, Stepper, Tabs, **Table Pagination** `2498:1299`, **Top App Bar** `2557:1638`, **Top Navigation** `2557:1648` |
-| Overlay | `2479:15` | Bottom Sheet, Dialog, Help Bubble, Snackbar, Tooltip, **Popover** `2494:473` |
+| Overlay | `2479:15` | Bottom Sheet, Dialog, Help Bubble, Snackbar, Tooltip, **Popover** `2494:473`, **Menu Sheet** `2563:1501` |
 | Table & List | `2479:16` | List, Table |
 | --- | | 구분선 |
 
 **굵게** 표시한 10종은 2026-10-27 Figma 에 새로 만든 것이다. 2026-10-28 CSS 를 만들고 `components.json` 과 §6.1 표에 등록했다(49~53번, Text Link 는 02번에 Figma ID 추가).
 
-Top App Bar, Top Navigation, Search Suggestion, File Attach 는 2026-10-29 Figma 와 CSS 를 함께 만들었다(54~57번). 모양과 여백은 레퍼런스 가이드의 같은 부품 규격을 따른다.
+Top App Bar 부터 Status Dot 까지(54~61번)는 2026-10-29 Figma 와 CSS 를 함께 만들었다. 모양과 여백은 레퍼런스 가이드의 같은 부품 규격을 따른다.
 
 새 컴포넌트는 맞는 카테고리 페이지에 문서 프레임을 하나 더 만들어 넣는다. `sync.mjs` 의 미등록 점검은 About/Foundations/Icons/Templates/구분선을 뺀 모든 페이지를 본다.
 
@@ -339,6 +339,10 @@ CSS 는 Figma 프로퍼티 이름을 그대로 `data-*` 속성으로 쓴다: `<b
 | 55 | Top Navigation | `.ds-topnav` (`__left/heading/menu/item/end`) | `2557:1648` / Item `2557:1647`, 4 | 선택은 채운 배경 + SemiBold, 오른쪽 끝 버튼은 Action Button xsmall |
 | 56 | Search Suggestion | `.ds-search-anchor` `.ds-search-suggest` (`__heading/list/item/content/label/desc/empty`) | `2558:1321`, 3 / Item `2558:1268`, 2 | 입력 칸은 Text Field + search 아이콘, 화살표 키는 ybm-ds.js |
 | 57 | File Attach | `.ds-fileattach` (`__dropzone/input/label/items/trigger/count`) `.ds-fileitem` (`__thumbnail/texts/name/size/image/badge/remove`) | Dropzone `2558:1328`, 3 / Trigger `2558:1347`, 3 / Item `2558:1384`, 4 | dragOver 는 ybm-ds.js, Item file 160×80 / image 80×80 |
+| 58 | Menu Sheet | `.ds-menusheet` (`__header/title/desc/list/group/item/content/label/item-desc/footer/close`) | `2563:1501` / Item `2563:1495`, 8 / Close Button `2563:1500`, 2 | 네이티브 `<dialog>`, Item tone `neutral/critical`, labelAlign `left/center` |
+| 59 | Result Section | `.ds-result` (`__asset/texts/title/desc/actions`) | `2562:741`, 2 | size `large/medium`, 그림 40 |
+| 60 | Timer | `.ds-timer` | `2563:889`, 2 | format `clock/elapsed`, 시간 갱신은 ybm-ds.js |
+| 61 | Status Dot | `.ds-statusdot` | `2562:747`, 5 | tone 5, 8px, data-pulse |
 
 목록의 기계용 사본이 `components.json` 이다. 컴포넌트를 추가/변경하면 이 표와 `components.json` 을 함께 고친다(sync 가 Figma/CSS 와 대조).
 
@@ -371,6 +375,11 @@ CSS 는 Figma 프로퍼티 이름을 그대로 `data-*` 속성으로 쓴다: `<b
 - **Top Navigation** - PC 전용. 메뉴는 7개까지, 지금 화면이 속한 메뉴에 `aria-current="page"`. 화면이 좁아지면 Top App Bar 와 메뉴 버튼으로 바꾼다.
 - **Search Suggestion** - 검색 입력 칸은 Text Field outline 에 search 아이콘과 지우기 버튼을 붙여 쓰고, `type="search"` 와 `role="combobox"` 를 단다. 입력 전에는 최근 검색어, 입력 중에는 추천어, 없으면 empty 문구를 보여 준다.
 - **File Attach** - 끌어 놓는 칸은 PC 처럼 끌어 놓기가 되는 곳에서만 두고, 모바일은 Trigger 와 Item 줄만 쓴다. Trigger 에는 지금 개수와 최대 개수를 적고, 다 차면 disabled 로 바꾼다.
+- **Menu Sheet vs Bottom Sheet** - 동작 몇 개 중 하나를 고를 때는 Menu Sheet, 입력이나 긴 내용은 Bottom Sheet. 되돌릴 수 없는 동작은 critical 로 따로 묶는다.
+- **Result Section** - 신청 완료, 오류, 빈 결과처럼 화면의 주된 내용이 결과일 때 쓴다. 버튼은 다음 할 일 하나를 위에 두고, 보조 동작은 아래 ghost 로 둔다. 목록이 비었을 때의 짧은 안내는 Empty.
+- **Timer** - 숫자 폭이 고정되어 값이 바뀌어도 흔들리지 않는다. 크기와 색은 자리에 맞춰 바꾸고, 시간이 다 되면 `ds-timer-end` 이벤트로 다음 동작을 잇는다.
+- **Status Dot** - 색만으로 뜻을 전하지 않도록 글자와 함께 쓴다. 사람 사진 위 상태는 Avatar 의 Status 를 쓴다.
+- **로딩 표시** - 따로 Spinner 를 두지 않고 Progress Circle 의 indeterminate 를 쓴다.
 - **Chat** - 상대 말풍선은 왼쪽, 내 말풍선은 오른쪽. 입력이 비면 보내기 비활성, 답변을 만드는 중에는 멈춤(stop)으로 바꾼다.
 - 닫기 버튼(Dialog/Bottom Sheet): 40×40 투명 + 24px `Lucide/x`, 색 `fg/neutral`.
 
@@ -457,7 +466,7 @@ CSS 는 Figma 프로퍼티 이름을 그대로 `data-*` 속성으로 쓴다: `<b
 ---
 
 ## 11. 미구현 / 남은 항목
-- 미구현 컴포넌트(다음 차례): Side Panel/Drawer, Pull To Refresh, Result Section, Scroll Fog, Menu Sheet, Aspect Ratio, Image Frame, Spinner/Status Dot, Number Input, Typeahead/Multi Select
+- 미구현 컴포넌트(다음 차례): Side Panel/Drawer, Pull To Refresh, Scroll Fog, Aspect Ratio, Image Frame, Number Input, Typeahead/Multi Select
 - AI/학습 서비스용 묶음(채팅 말풍선/입력창/Markdown/Code Block/출처 표시) - magic 시맨틱을 쓸 첫 컴포넌트 후보
 - 서비스별 brand 색 교체 층(`data-brand`), motion 토큰의 Figma 변수화
 - Callout magic tone, pressed 변형(Figma), magic 시맨틱을 쓰는 컴포넌트 없음
@@ -469,6 +478,7 @@ CSS 는 Figma 프로퍼티 이름을 그대로 `data-*` 속성으로 쓴다: `<b
 | 날짜 | 내용 |
 |---|---|
 | 2026-10-29 | 54 Top App Bar(+ Button), 55 Top Navigation(+ Item), 56 Search Suggestion(+ Item), 57 File Attach(Dropzone/Trigger/Item) 를 Figma 와 CSS 에 함께 추가(레퍼런스 가이드 규격 기준). 아이콘 `upload`, `clock` 추가 |
+| 2026-10-29 | 58 Menu Sheet(+ Item, Close Button), 59 Result Section, 60 Timer, 61 Status Dot 추가. 로딩 표시는 Progress Circle indeterminate 로 대신(Spinner 없음). 아이콘 `share`, `link`, `trash` 추가 |
 | 2026-10-28 | Figma 에만 있던 10종 CSS 완성과 등록(49~53), Popover/Time Picker/Chat 입력창 동작 |
 | 2026-10-27 | Figma 페이지를 레퍼런스 라이브러리 형식(카테고리 페이지 + 문서 프레임)으로 개편, 새 컴포넌트 10종(Figma 만). 모드 정리 - Typography 130%/150%, Shape Soft/Sharp 삭제, CSS 의 `data-shape` 테마(soft/sharp/square) 제거. 남은 모드는 Light / Dark |
 | 2026-10-22 | ds 를 단독 GitHub 저장소(ybm-ds) + Pages 로 분리, 가이드 사이트에서 DS 사본 제거(DS 주소 참조). 통합 동기화 `sync.mjs`/`동기화.bat`/`components.json`(Figma 노드 대조) 도입. `build.py` → `build.mjs`(출력 동일, Python 불필요). 컴포넌트 6종 추가(Divider/Tooltip/List/Breadcrumbs/Stepper/Banner - CSS/Figma 동시). 미리보기 `index.html` |
