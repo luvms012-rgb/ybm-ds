@@ -71,8 +71,8 @@
      53 Chat                 .ds-chat-bubble / .ds-chat-meta / .ds-chat-system / .ds-chat-send / .ds-chat-composer
      54 Top App Bar          .ds-appbar
      55 Top Navigation       .ds-topnav
-     56 Search Field         .ds-search
-     57 File Attach          .ds-fileattach / .ds-filelist / .ds-fileitem
+     56 Search Suggestion    .ds-search-anchor / .ds-search-suggest
+     57 File Attach          .ds-fileattach / .ds-fileitem
    ========================================================================== */
 
 
@@ -3147,284 +3147,342 @@ a.ds-card:active, button.ds-card:active { background: linear-gradient(var(--ybm-
 .ds-chat-composer__input::placeholder { color: var(--ybm-color-fg-placeholder); }
 
 
+
 /* --------------------------------------------------------------------------
    54 Top App Bar - 모바일 화면 맨 위에서 제목과 이동 버튼을 보여 주는 막대 (2026-10-29 추가)
-   titleAlign: 기본 center / data-title-align="left"      tone: 기본 layer / data-tone="transparent"
-   divider: data-divider (내용이 막대 아래로 스크롤될 때)
-     <header class="ds-appbar" [data-title-align="left"] [data-tone="transparent"] [data-divider]>
-       <div class="ds-appbar__leading">
+   theme(Figma) = data-platform: 기본 ios(제목 가운데) / "android"(제목 왼쪽)
+   tone: 기본 layer / data-tone="transparent"(사진 같은 배경 위, 글자와 아이콘 흰색) + data-gradient(가독성용 위쪽 그라데이션)
+   titleLayout: 부제목을 넣으면 withSubtitle 모양이 된다
+     <header class="ds-appbar" [data-platform="android"] [data-tone="transparent" data-gradient]>
+       <div class="ds-appbar__left">
          <button type="button" class="ds-appbar__button" aria-label="뒤로"><i class="ds-icon ds-icon--chevron-left" aria-hidden="true"></i></button>
        </div>
-       <h1 class="ds-appbar__title">제목</h1>
-       <div class="ds-appbar__trailing">
+       <div class="ds-appbar__main">
+         <h1 class="ds-appbar__title">제목</h1>
+         [<p class="ds-appbar__subtitle">부제목</p>]
+       </div>
+       <div class="ds-appbar__right">
          <button type="button" class="ds-appbar__button" aria-label="검색"><i class="ds-icon ds-icon--search" aria-hidden="true"></i></button>
        </div>
      </header>
-   Figma: 높이 x14 / 좌우 padding x2 / 위 safe area / bg/layer-default (transparent 는 배경 없음)
-     center 양옆 칸 폭 x20 고정, 제목 가운데 / left 양옆 칸은 내용 폭, 제목 왼쪽
-     제목 칸 padding x2 / Static t06 SemiBold fg/neutral / 한 줄 말줄임
-     Top App Bar Button 40 shape/sm, 아이콘 24 fg/neutral / pressed bg/neutral-weak-alpha / disabled fg/disabled
-     divider 아래 1px stroke/neutral-muted
+   Figma: 높이 x14 / 좌우 padding x1_5 / bg/layer-default
+     ios 양옆 칸 버튼 2개 폭, 제목과 양옆 최소 간격 x2 / android 제목 칸 왼쪽 padding x1_5
+     제목 Static t06 Bold fg/neutral (부제목이 있으면 t05 Bold) / 부제목 Static t02 fg/neutral-muted
+     transparent 글자와 아이콘 palette/static-white, 그라데이션 검정 35% → 0, 아래로 x5 더 내려옴
+     Top App Bar Button 44 shape/sm, 아이콘 24 / pressed bg/transparent-pressed / disabled fg/disabled
    -------------------------------------------------------------------------- */
 .ds-appbar {
   --ds-appbar-height: var(--ybm-space-x14);
-  --ds-appbar-side: var(--ybm-space-x20);
+  --ds-appbar-side: calc(var(--ybm-space-x11) * 2);
+  position: relative;
+  isolation: isolate;
   display: grid;
-  grid-template-columns: var(--ds-appbar-side) minmax(0, 1fr) var(--ds-appbar-side);
+  grid-template-columns: minmax(var(--ds-appbar-side), 1fr) minmax(0, auto) minmax(var(--ds-appbar-side), 1fr);
+  column-gap: var(--ybm-space-x2);
   align-items: center;
   min-height: calc(var(--ds-appbar-height) + env(safe-area-inset-top, 0px));
-  padding: env(safe-area-inset-top, 0px) var(--ybm-space-x2) 0;
+  padding: env(safe-area-inset-top, 0px) var(--ybm-space-x1_5) 0;
   background: var(--ybm-color-bg-layer-default);
-}
-.ds-appbar[data-title-align="left"] { grid-template-columns: auto minmax(0, 1fr) auto; }
-.ds-appbar[data-tone="transparent"] { background: transparent; }
-.ds-appbar[data-divider] { box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); }
-.ds-appbar__leading, .ds-appbar__trailing { display: flex; align-items: center; min-width: 0; }
-.ds-appbar__leading { grid-column: 1; }
-.ds-appbar__trailing { grid-column: 3; justify-content: flex-end; }
-.ds-appbar__title {
-  grid-column: 2;
-  margin: 0;
-  padding-inline: var(--ybm-space-x2);
-  overflow: hidden;
   color: var(--ybm-color-fg-neutral);
-  font-size: var(--ybm-font-size-t06-static);
-  line-height: var(--ybm-line-height-t06-static);
-  font-weight: var(--ybm-font-weight-semibold);
-  text-align: center;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
-.ds-appbar[data-title-align="left"] .ds-appbar__title { text-align: start; }
+.ds-appbar[data-platform="android"] { grid-template-columns: auto minmax(0, 1fr) auto; column-gap: 0; }
+.ds-appbar__left, .ds-appbar__right { display: flex; align-items: center; min-width: 0; }
+.ds-appbar__left { grid-column: 1; }
+.ds-appbar__right { grid-column: 3; justify-content: flex-end; }
+.ds-appbar__main { grid-column: 2; display: flex; flex-direction: column; align-items: center; min-width: 0; text-align: center; }
+.ds-appbar[data-platform="android"] .ds-appbar__main { align-items: flex-start; padding-inline-start: var(--ybm-space-x1_5); text-align: start; }
+.ds-appbar__title,
+.ds-appbar__subtitle { max-width: 100%; margin: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ds-appbar__title { font-size: var(--ybm-font-size-t06-static); line-height: var(--ybm-line-height-t06-static); font-weight: var(--ybm-font-weight-bold); }
+.ds-appbar__main:has(.ds-appbar__subtitle) .ds-appbar__title { font-size: var(--ybm-font-size-t05-static); line-height: var(--ybm-line-height-t05-static); }
+.ds-appbar__subtitle { color: var(--ybm-color-fg-neutral-muted); font-size: var(--ybm-font-size-t02-static); line-height: var(--ybm-line-height-t02-static); }
+.ds-appbar[data-tone="transparent"] { background: transparent; color: var(--ybm-color-palette-static-white); }
+.ds-appbar[data-tone="transparent"] .ds-appbar__subtitle { color: inherit; }
+.ds-appbar[data-tone="transparent"][data-gradient]::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0 0 calc(var(--ybm-space-x5) * -1);
+  background: linear-gradient(rgb(0 0 0 / 0.35), rgb(0 0 0 / 0));
+  pointer-events: none;
+}
 .ds-appbar__button {
   display: grid;
   place-items: center;
   flex: none;
-  width: var(--ybm-space-x10);
-  height: var(--ybm-space-x10);
+  width: var(--ybm-space-x11);
+  height: var(--ybm-space-x11);
   border-radius: var(--ybm-shape-sm);
-  color: var(--ybm-color-fg-neutral);
+  color: inherit;
+  transition: background-color var(--ybm-duration-fast) var(--ybm-easing-standard);
 }
 .ds-appbar__button > .ds-icon { --ds-icon-size: 24px; }
-.ds-appbar__button:active:not(:disabled) { background: var(--ybm-color-bg-neutral-weak-alpha); }
+.ds-appbar__button:active:not(:disabled) { background: var(--ybm-color-bg-transparent-pressed); }
 .ds-appbar__button:is(:disabled, [aria-disabled="true"]) { color: var(--ybm-color-fg-disabled); pointer-events: none; }
 
 
 /* --------------------------------------------------------------------------
    55 Top Navigation - PC 화면 맨 위에서 서비스 전체 메뉴를 보여 주는 막대 (2026-10-29 추가)
-   divider: 기본 켬 / data-divider="false"      아이콘 버튼은 Top App Bar 의 .ds-appbar__button 을 같이 쓴다
-     <header class="ds-topnav" [data-divider="false"]>
-       <a class="ds-topnav__logo" href="/"><img src="logo.svg" alt="서비스 이름"></a>
-       <nav class="ds-topnav__menu" aria-label="주요 메뉴">
-         <a class="ds-topnav__item" href="#" aria-current="page">홈</a>
-         <a class="ds-topnav__item" href="#">소개</a>
-       </nav>
-       <div class="ds-topnav__actions">
-         <button type="button" class="ds-appbar__button" aria-label="검색"><i class="ds-icon ds-icon--search" aria-hidden="true"></i></button>
-         <a class="ds-btn" data-variant="neutralWeak" data-size="small" href="#">로그인</a>
+     <header class="ds-topnav">
+       <div class="ds-topnav__left">
+         <a class="ds-topnav__heading" href="/"><img src="logo.svg" alt="서비스 이름"></a>
+         <nav class="ds-topnav__menu" aria-label="주요 메뉴">
+           <a class="ds-topnav__item" href="#" aria-current="page">홈</a>
+           <a class="ds-topnav__item" href="#">소개</a>
+         </nav>
+       </div>
+       <div class="ds-topnav__end">
+         <button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="검색"><i class="ds-icon ds-icon--search" aria-hidden="true"></i></button>
+         <a class="ds-btn" data-variant="neutralWeak" data-size="xsmall" href="#">로그인</a>
        </div>
      </header>
-   Figma: 높이 x16 / 좌우 padding x8 / gap x10 / bg/layer-default / 아래 1px stroke/neutral-muted
-     로고 칸 높이 28 / Top Navigation Item padding x3, Static t05 SemiBold fg/neutral-muted, hover/선택 fg/neutral
-     선택 표시 글자 폭 2px bg/neutral-solid 바닥 / 오른쪽 버튼 gap x2
+   Figma: padding x2 / bg/layer-default / 왼쪽 묶음 gap x4 / 메뉴 사이 x1 / 오른쪽 끝 버튼 사이 x1
+     로고 칸 높이 x8, 좌우 padding x2, 로고 높이 28
+     Top Navigation Item 높이 x8, 좌우 padding x3, shape/sm, t04 Medium fg/neutral-muted
+     hover bg/transparent-pressed / 선택 bg/neutral-weak-alpha, t04 SemiBold fg/neutral
    -------------------------------------------------------------------------- */
 .ds-topnav {
-  --ds-topnav-height: var(--ybm-space-x16);
   display: flex;
   align-items: center;
-  gap: var(--ybm-space-x10);
-  height: var(--ds-topnav-height);
-  padding-inline: var(--ybm-space-x8);
+  padding: var(--ybm-space-x2);
   background: var(--ybm-color-bg-layer-default);
-  box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted);
 }
-.ds-topnav[data-divider="false"] { box-shadow: none; }
-.ds-topnav__logo { display: flex; align-items: center; flex: none; height: 28px; color: inherit; text-decoration: none; }
-.ds-topnav__logo > :is(img, svg) { width: auto; height: 100%; }
-.ds-topnav__menu { display: flex; flex: 1 1 auto; align-self: stretch; min-width: 0; }
-.ds-topnav__item {
-  position: relative;
+.ds-topnav__left { display: flex; flex: 1 1 0%; align-items: center; gap: var(--ybm-space-x4); min-width: 0; }
+.ds-topnav__heading {
   display: flex;
+  flex: none;
   align-items: center;
+  gap: var(--ybm-space-x2);
+  min-height: var(--ybm-space-x8);
+  padding-inline: var(--ybm-space-x2);
+  color: var(--ybm-color-fg-neutral);
+  text-decoration: none;
+}
+.ds-topnav__heading > :is(img, svg) { width: auto; height: 28px; }
+.ds-topnav__menu { display: flex; align-items: center; gap: var(--ybm-space-x1); min-width: 0; }
+.ds-topnav__item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ybm-space-x2);
+  height: var(--ybm-space-x8);
   padding-inline: var(--ybm-space-x3);
+  border-radius: var(--ybm-shape-sm);
   color: var(--ybm-color-fg-neutral-muted);
-  font-size: var(--ybm-font-size-t05-static);
-  line-height: var(--ybm-line-height-t05-static);
-  font-weight: var(--ybm-font-weight-semibold);
+  font-size: var(--ybm-font-size-t04);
+  line-height: var(--ybm-line-height-t04);
+  font-weight: var(--ybm-font-weight-medium);
   text-decoration: none;
   white-space: nowrap;
+  transition: background-color var(--ybm-duration-fast) var(--ybm-easing-standard), color var(--ybm-duration-fast) var(--ybm-easing-standard);
 }
-.ds-topnav__item:is(:hover, [aria-current="page"]) { color: var(--ybm-color-fg-neutral); }
-.ds-topnav__item[aria-current="page"]::after {
-  content: "";
-  position: absolute;
-  inset-inline: var(--ybm-space-x3);
-  bottom: 0;
-  height: 2px;
-  background: var(--ybm-color-bg-neutral-solid);
-}
-.ds-topnav__item:focus-visible { outline-offset: -2px; }
-.ds-topnav__actions { display: flex; flex: none; align-items: center; gap: var(--ybm-space-x2); }
+.ds-topnav__item:hover { background: var(--ybm-color-bg-transparent-pressed); }
+.ds-topnav__item[aria-current="page"] { background: var(--ybm-color-bg-neutral-weak-alpha); color: var(--ybm-color-fg-neutral); font-weight: var(--ybm-font-weight-semibold); }
+.ds-topnav__end { display: flex; flex: none; align-items: center; gap: var(--ybm-space-x1); margin-inline-start: auto; }
 
 
 /* --------------------------------------------------------------------------
-   56 Search Field - 검색어를 넣는 둥근 입력 칸 (2026-10-29 추가)
-   size: large(기본) / data-size="medium"      값이 있으면 지우기 버튼이 보이고, 누르면 ybm-ds.js 가 값을 비운다
-     <div class="ds-search" [data-size="medium"]>
-       <i class="ds-icon ds-icon--search" aria-hidden="true"></i>
-       <input type="search" class="ds-search__input" placeholder="검색어를 입력하세요" aria-label="검색">
-       <button type="button" class="ds-search__clear" aria-label="지우기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button>
+   56 Search Suggestion - 검색 입력 칸 아래에 뜨는 추천어 목록 (2026-10-29 추가)
+   검색 입력 칸은 Text Field(04) outline 에 search 아이콘과 지우기 버튼을 붙여 쓴다.
+   입력 전 최근 검색어(머리말 + clock), 입력 중 추천어(search), 찾은 것이 없으면 empty 문구.
+   열고 닫기와 목록 채우기는 서비스가 한다. ybm-ds.js 는 입력 칸의 위아래 화살표로 줄 고르기와 Enter 만 맡는다.
+     <div class="ds-search-anchor">
+       <div class="ds-input" data-variant="outline" data-size="medium">
+         <i class="ds-icon ds-icon--search ds-input__icon" aria-hidden="true"></i>
+         <input class="ds-input__control" type="search" role="combobox" aria-controls="sg" aria-expanded="true" aria-autocomplete="list" placeholder="검색어를 입력하세요">
+         <button type="button" class="ds-input__clear" aria-label="지우기"></button>
+       </div>
+       <div class="ds-search-suggest" id="sg">
+         [<div class="ds-search-suggest__heading" id="sg-h">최근 검색어</div>]
+         <ul class="ds-search-suggest__list" role="listbox" aria-labelledby="sg-h">
+           <li role="none"><a class="ds-search-suggest__item" role="option" id="sg-1" href="#">
+             <i class="ds-icon ds-icon--clock" aria-hidden="true"></i>
+             <span class="ds-search-suggest__content"><span class="ds-search-suggest__label">회의록</span>[<span class="ds-search-suggest__desc">보조 설명</span>]</span>
+           </a></li>
+         </ul>
+         [<p class="ds-search-suggest__empty">검색 결과가 없어요</p>]
+       </div>
      </div>
-   Figma: large 높이 x12, 좌우 padding x4, t05, 아이콘 20 / medium 높이 x10, 좌우 padding x3_5, t04, 아이콘 16 / gap x2
-     bg/neutral-weak-alpha, shape/pill / focused 1px stroke/neutral-contrast / disabled bg/disabled, fg/disabled
-     아이콘과 지우기 fg/neutral-subtle / 값 fg/neutral / placeholder fg/placeholder
+   Figma: padding x1 / shape/lg / bg/layer-floating / elevation overlay / 최대 높이 300 / 입력 칸과 같은 폭
+     머리말 padding x2 x2 x1, t02 fg/neutral-muted / empty padding x3, t02 fg/neutral-muted, 가운데
+     Search Suggestion Item padding x2, gap x2, shape/sm, 아이콘 16 fg/neutral-subtle, 글자 t04 fg/neutral, 설명 t02 fg/neutral-muted
+     highlighted bg/transparent-pressed
    -------------------------------------------------------------------------- */
-.ds-search {
-  --ds-search-height: var(--ybm-space-x12);
-  --ds-search-padding-x: var(--ybm-space-x4);
-  --ds-search-icon: 20px;
-  --ds-search-font-size: var(--ybm-font-size-t05);
-  --ds-search-line-height: var(--ybm-line-height-t05);
+.ds-search-anchor { position: relative; }
+.ds-search-suggest {
+  display: flex;
+  flex-direction: column;
+  max-height: 300px;
+  padding: var(--ybm-space-x1);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border-radius: var(--ybm-shape-lg);
+  background: var(--ybm-color-bg-layer-floating);
+  box-shadow: var(--ybm-elevation-overlay);
+}
+.ds-search-anchor > .ds-search-suggest { position: absolute; z-index: var(--ybm-z-overlay); top: calc(100% + var(--ybm-space-x1)); inset-inline: 0; }
+.ds-search-suggest[hidden] { display: none; }
+.ds-search-suggest__heading { padding: var(--ybm-space-x2) var(--ybm-space-x2) var(--ybm-space-x1); color: var(--ybm-color-fg-neutral-muted); font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); user-select: none; }
+.ds-search-suggest__list { display: flex; flex-direction: column; margin: 0; padding: 0; list-style: none; }
+.ds-search-suggest__item {
   display: flex;
   align-items: center;
   gap: var(--ybm-space-x2);
-  height: var(--ds-search-height);
-  padding-inline: var(--ds-search-padding-x);
-  border-radius: var(--ybm-shape-pill);
-  background: var(--ybm-color-bg-neutral-weak-alpha);
-  color: var(--ybm-color-fg-neutral-subtle);
-}
-.ds-search[data-size="medium"] {
-  --ds-search-height: var(--ybm-space-x10);
-  --ds-search-padding-x: var(--ybm-space-x3_5);
-  --ds-search-icon: 16px;
-  --ds-search-font-size: var(--ybm-font-size-t04);
-  --ds-search-line-height: var(--ybm-line-height-t04);
-}
-.ds-search > .ds-icon, .ds-search__clear > .ds-icon { --ds-icon-size: var(--ds-search-icon); }
-.ds-search:focus-within { box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-neutral-contrast); }
-.ds-search__input {
-  flex: 1 1 auto;
-  min-width: 0;
-  height: 100%;
-  padding: 0;
-  border: 0;
-  background: none;
+  width: 100%;
+  padding: var(--ybm-space-x2);
+  border-radius: var(--ybm-shape-sm);
   color: var(--ybm-color-fg-neutral);
-  font-size: var(--ds-search-font-size);
-  line-height: var(--ds-search-line-height);
-  -webkit-appearance: none;
-          appearance: none;
+  font-size: var(--ybm-font-size-t04);
+  line-height: var(--ybm-line-height-t04);
+  text-align: start;
+  text-decoration: none;
+  cursor: pointer;
 }
-.ds-search__input:focus-visible { outline: none; }
-.ds-search__input::placeholder { color: var(--ybm-color-fg-placeholder); }
-.ds-search__input::-webkit-search-cancel-button,
-.ds-search__input::-webkit-search-decoration { -webkit-appearance: none; appearance: none; }
-/* 지우기 - 아이콘 크기는 size 를 따름, 터치 영역 40 */
-.ds-search__clear { position: relative; display: grid; place-items: center; flex: none; color: inherit; }
-.ds-search__clear::after { content: ""; position: absolute; inset: calc((var(--ds-search-icon) - 40px) / 2); }
-.ds-search__input:placeholder-shown ~ .ds-search__clear { display: none; }
-.ds-search:has(.ds-search__input:disabled) { background: var(--ybm-color-bg-disabled); color: var(--ybm-color-fg-disabled); }
-.ds-search__input:disabled { color: var(--ybm-color-fg-disabled); }
-.ds-search:has(.ds-search__input:disabled) .ds-search__clear { pointer-events: none; }
+.ds-search-suggest__item > .ds-icon { --ds-icon-size: 16px; color: var(--ybm-color-fg-neutral-subtle); }
+.ds-search-suggest__item:is(:hover, :focus-visible, [data-highlighted]) { background: var(--ybm-color-bg-transparent-pressed); outline: none; }
+.ds-search-suggest__content { display: flex; flex: 1 1 auto; flex-direction: column; min-width: 0; }
+.ds-search-suggest__label,
+.ds-search-suggest__desc { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ds-search-suggest__desc { color: var(--ybm-color-fg-neutral-muted); font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); }
+.ds-search-suggest__empty { margin: 0; padding: var(--ybm-space-x3); color: var(--ybm-color-fg-neutral-muted); font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); text-align: center; }
 
 
 /* --------------------------------------------------------------------------
-   57 File Attach - 파일을 끌어 놓거나 눌러서 고르는 칸과, 고른 파일을 보여 주는 줄 (2026-10-29 추가)
-   ▸ File Attach  state: 기본 / data-state="dragover"(파일을 끌고 오면 ybm-ds.js 가 붙인다) / aria-invalid / input disabled
-       <label class="ds-fileattach" [aria-invalid="true"]>
+   57 File Attach - 파일을 끌어 놓거나 골라서 첨부하는 부품 (2026-10-29 추가)
+   끌어 놓는 칸(Dropzone) 아래에 고르기 버튼(Trigger)과 파일(Item)을 한 줄로 놓는다. 넘치면 옆으로 넘긴다.
+   Dropzone 은 파일을 끌고 오면 ybm-ds.js 가 data-state="dragover" 를 붙인다(점선 → 실선).
+     <div class="ds-fileattach">
+       <label class="ds-fileattach__dropzone">
          <input type="file" class="ds-fileattach__input" multiple>
-         <span class="ds-fileattach__icon"><i class="ds-icon ds-icon--upload" aria-hidden="true"></i></span>
-         <span class="ds-fileattach__title">파일을 끌어 놓거나 눌러서 고르세요</span>
-         <span class="ds-fileattach__desc">10MB 이하 파일을 5개까지 올릴 수 있어요</span>
+         <span class="ds-fileattach__label">파일을 끌어 놓거나 눌러서 추가하세요</span>
        </label>
-     Figma: padding x6 x4 / gap x2 / shape/lg / 1px 점선 stroke/neutral-weak / bg/layer-default
-       아이콘 칸 x10 원 bg/neutral-weak-alpha, upload 20 fg/neutral-subtle / 제목 t04 SemiBold fg/neutral / 설명 t03 fg/neutral-subtle, 제목과 x0_5
-       dragOver bg/brand-weak, stroke/brand-solid, 아이콘 fg/brand / invalid stroke/critical-solid, 설명 fg/critical / disabled bg/disabled, fg/disabled
-   ▸ File Attach Item  state: done(기본) / data-state="uploading" / data-state="error"
-       <ul class="ds-filelist">
-         <li class="ds-fileitem" [data-state="uploading"]>
-           <span class="ds-fileitem__icon"><i class="ds-icon ds-icon--file-text" aria-hidden="true"></i></span>
-           <span class="ds-fileitem__texts">
-             <span class="ds-fileitem__name">보고서_최종.pdf</span>
-             <span class="ds-fileitem__meta">올리는 중 45%</span>
-             [<span class="ds-progress" data-size="small" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="--ds-progress-value: 45%"></span>]
-           </span>
-           <button type="button" class="ds-fileitem__remove" aria-label="보고서_최종.pdf 빼기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button>
-         </li>
-       </ul>
-     Figma: padding x3 / gap x3 / shape/md / 1px stroke/neutral-weak (error stroke/critical-solid) / bg/layer-default
-       아이콘 칸 x10 shape/sm bg/neutral-weak-alpha, file-text 20 fg/neutral-subtle / 이름 t04 Medium 한 줄 / 정보 t02 fg/neutral-subtle (error fg/critical)
-       진행 막대 Progress small / 빼기 버튼 x8 shape/sm, x 20 fg/neutral-subtle / 줄 사이 x2
+       <div class="ds-fileattach__items">
+         <label class="ds-fileattach__trigger">
+           <input type="file" class="ds-fileattach__input" multiple aria-label="파일 추가">
+           <i class="ds-icon ds-icon--plus" aria-hidden="true"></i>
+           <span class="ds-fileattach__count"><b>2</b>/10</span>
+         </label>
+         <div class="ds-fileitem" [data-type="image"] [data-readonly]>
+           <span class="ds-fileitem__thumbnail"><i class="ds-icon ds-icon--file-text" aria-hidden="true"></i></span>
+           <span class="ds-fileitem__texts"><span class="ds-fileitem__name">보고서.pdf</span><span class="ds-fileitem__size">2.4MB</span></span>
+           (image 는 <img class="ds-fileitem__image" src="…" alt="…"> [<span class="ds-fileitem__badge">대표</span>])
+           <button type="button" class="ds-fileitem__remove" aria-label="보고서.pdf 빼기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button>
+         </div>
+       </div>
+     </div>
+   Figma: 전체 gap x2 / 줄 gap x2
+     Dropzone 높이 120, gap x2, 좌우 padding x4, shape/lg, 1px 점선 palette/gray-500 / dragOver 실선 stroke/neutral-solid / 글자 t04 Medium fg/neutral-subtle
+     Trigger x20 정사각, gap x1, shape/lg, 1px stroke/neutral-weak, plus 24 fg/neutral-subtle, 개수 t02 (지금 fg/neutral, 최대 fg/neutral-subtle) / pressed bg/transparent-pressed
+     Item file 160 × x20, 좌우 padding x4, gap x2_5, shape/lg, 1px stroke/neutral-weak / 썸네일 x12 shape/sm bg/neutral, 아이콘 24
+       이름 t02 Medium 두 줄 / 크기 t01 fg/neutral-subtle / readonly 글자와 아이콘 fg/disabled
+     Item image x20 정사각, 1px stroke/neutral-subtle / 대표 표시 높이 x6, 좌우 x1, shape/lg, bg/overlay, t02 Medium 흰색 / readonly 투명도 0.5
+     지우기 버튼 x5 원, 위 오른쪽 x1 안쪽, bg/layer-default, 1px stroke/neutral-weak, x 10 fg/neutral / readonly 에서는 숨김
    -------------------------------------------------------------------------- */
-.ds-fileattach {
-  --ds-fileattach-line: var(--ybm-color-stroke-neutral-weak);
+.ds-fileattach { display: flex; flex-direction: column; gap: var(--ybm-space-x2); }
+.ds-fileattach__input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: inherit; }
+.ds-fileattach__dropzone {
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: var(--ybm-space-x2);
-  padding: calc(var(--ybm-space-x6) - 1px) calc(var(--ybm-space-x4) - 1px);   /* 테두리 1px 를 빼 Figma 안쪽 선과 같은 크기 */
-  border: 1px dashed var(--ds-fileattach-line);
+  height: 120px;
+  padding-inline: calc(var(--ybm-space-x4) - 1px);   /* 테두리 1px 를 빼 Figma 안쪽 선과 같은 크기 */
+  border: 1px dashed var(--ybm-color-palette-gray-500);
   border-radius: var(--ybm-shape-lg);
-  background: var(--ybm-color-bg-layer-default);
   text-align: center;
   cursor: pointer;
 }
-/* 입력을 칸 전체에 투명하게 덮어 누르기와 끌어 놓기를 브라우저 기본 동작으로 받는다 */
-.ds-fileattach__input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: inherit; }
-.ds-fileattach:has(.ds-fileattach__input:focus-visible) { outline: 2px solid var(--ybm-color-stroke-focus-ring); outline-offset: 2px; }
-.ds-fileattach__icon {
-  display: grid;
-  place-items: center;
-  width: var(--ybm-space-x10);
-  height: var(--ybm-space-x10);
-  border-radius: var(--ybm-shape-pill);
-  background: var(--ybm-color-bg-neutral-weak-alpha);
-  color: var(--ybm-color-fg-neutral-subtle);
-}
-.ds-fileattach__title { color: var(--ybm-color-fg-neutral); font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); font-weight: var(--ybm-font-weight-semibold); }
-.ds-fileattach__desc { margin-top: calc(var(--ybm-space-x0_5) - var(--ybm-space-x2)); color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t03); line-height: var(--ybm-line-height-t03); }
-.ds-fileattach[data-state="dragover"] { --ds-fileattach-line: var(--ybm-color-stroke-brand-solid); background: var(--ybm-color-bg-brand-weak); }
-.ds-fileattach[data-state="dragover"] .ds-fileattach__icon { color: var(--ybm-color-fg-brand); }
-.ds-fileattach:is([aria-invalid="true"], :has([aria-invalid="true"])) { --ds-fileattach-line: var(--ybm-color-stroke-critical-solid); }
-.ds-fileattach:is([aria-invalid="true"], :has([aria-invalid="true"])) .ds-fileattach__desc { color: var(--ybm-color-fg-critical); }
-.ds-fileattach:has(.ds-fileattach__input:disabled) { background: var(--ybm-color-bg-disabled); cursor: default; }
-.ds-fileattach:has(.ds-fileattach__input:disabled) :is(.ds-fileattach__title, .ds-fileattach__desc, .ds-fileattach__icon) { color: var(--ybm-color-fg-disabled); }
-.ds-fileattach:has(.ds-fileattach__input:disabled) .ds-fileattach__icon { background: none; }
-
-.ds-filelist { display: flex; flex-direction: column; gap: var(--ybm-space-x2); margin: 0; padding: 0; list-style: none; }
-.ds-fileitem {
+.ds-fileattach__dropzone[data-state="dragover"] { border-style: solid; border-color: var(--ybm-color-stroke-neutral-solid); }
+.ds-fileattach__label { color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); font-weight: var(--ybm-font-weight-medium); }
+.ds-fileattach__dropzone:has(:disabled) { cursor: default; }
+.ds-fileattach__dropzone:has(:disabled) .ds-fileattach__label { color: var(--ybm-color-fg-disabled); }
+:is(.ds-fileattach__dropzone, .ds-fileattach__trigger):has(.ds-fileattach__input:focus-visible) { outline: 2px solid var(--ybm-color-stroke-focus-ring); outline-offset: 2px; }
+.ds-fileattach__items { display: flex; gap: var(--ybm-space-x2); overflow-x: auto; }
+.ds-fileattach__trigger {
+  position: relative;
   display: flex;
+  flex: none;
+  flex-direction: column;
   align-items: center;
-  gap: var(--ybm-space-x3);
-  padding: var(--ybm-space-x3);
-  border-radius: var(--ybm-shape-md);
-  background: var(--ybm-color-bg-layer-default);
+  justify-content: center;
+  gap: var(--ybm-space-x1);
+  width: var(--ybm-space-x20);
+  height: var(--ybm-space-x20);
+  border-radius: var(--ybm-shape-lg);
+  box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-neutral-weak);
+  color: var(--ybm-color-fg-neutral-subtle);
+  cursor: pointer;
+}
+.ds-fileattach__trigger > .ds-icon { --ds-icon-size: 24px; }
+.ds-fileattach__trigger:active { background: var(--ybm-color-bg-transparent-pressed); }
+.ds-fileattach__count { font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); }
+.ds-fileattach__count b { color: var(--ybm-color-fg-neutral); font-weight: var(--ybm-font-weight-regular); }
+.ds-fileattach__trigger:has(:disabled) { color: var(--ybm-color-fg-disabled); cursor: default; pointer-events: none; }
+.ds-fileattach__trigger:has(:disabled) .ds-fileattach__count b { color: inherit; }
+
+.ds-fileitem {
+  position: relative;
+  display: flex;
+  flex: none;
+  align-items: center;
+  gap: var(--ybm-space-x2_5);
+  width: 160px;
+  height: var(--ybm-space-x20);
+  padding-inline: var(--ybm-space-x4);
+  border-radius: var(--ybm-shape-lg);
   box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-neutral-weak);
 }
-.ds-fileitem__icon {
-  display: grid;
-  place-items: center;
-  flex: none;
-  width: var(--ybm-space-x10);
-  height: var(--ybm-space-x10);
-  border-radius: var(--ybm-shape-sm);
-  background: var(--ybm-color-bg-neutral-weak-alpha);
-  color: var(--ybm-color-fg-neutral-subtle);
+.ds-fileitem__thumbnail { display: grid; place-items: center; flex: none; width: var(--ybm-space-x12); height: var(--ybm-space-x12); border-radius: var(--ybm-shape-sm); background: var(--ybm-color-bg-neutral); color: var(--ybm-color-fg-neutral-subtle); }
+.ds-fileitem__thumbnail > .ds-icon { --ds-icon-size: 24px; }
+.ds-fileitem__texts { display: flex; flex-direction: column; min-width: 0; }
+.ds-fileitem__name {
+  display: -webkit-box;
+  overflow: hidden;
+  color: var(--ybm-color-fg-neutral);
+  font-size: var(--ybm-font-size-t02);
+  line-height: var(--ybm-line-height-t02);
+  font-weight: var(--ybm-font-weight-medium);
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
-.ds-fileitem__texts { display: flex; flex: 1 1 auto; flex-direction: column; gap: var(--ybm-space-x0_5); min-width: 0; }
-.ds-fileitem__name { overflow: hidden; color: var(--ybm-color-fg-neutral); font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); font-weight: var(--ybm-font-weight-medium); text-overflow: ellipsis; white-space: nowrap; }
-.ds-fileitem__meta { color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); }
-.ds-fileitem[data-state="error"] { box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-critical-solid); }
-.ds-fileitem[data-state="error"] .ds-fileitem__meta { color: var(--ybm-color-fg-critical); }
+.ds-fileitem__size { color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t01); line-height: var(--ybm-line-height-t01); }
+.ds-fileitem[data-readonly] :is(.ds-fileitem__thumbnail, .ds-fileitem__name, .ds-fileitem__size) { color: var(--ybm-color-fg-disabled); }
+.ds-fileitem[data-type="image"] { width: var(--ybm-space-x20); padding: 0; background: var(--ybm-color-bg-neutral); box-shadow: none; }
+.ds-fileitem[data-type="image"]::after { content: ""; position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-neutral-subtle); pointer-events: none; }
+.ds-fileitem[data-type="image"][data-readonly] { opacity: 0.5; }
+.ds-fileitem__image { position: absolute; inset: 0; width: 100%; height: 100%; border-radius: inherit; object-fit: cover; }
+.ds-fileitem__badge {
+  position: absolute;
+  z-index: 1;
+  bottom: var(--ybm-space-x1);
+  left: var(--ybm-space-x1);
+  display: flex;
+  align-items: center;
+  height: var(--ybm-space-x6);
+  padding-inline: var(--ybm-space-x1);
+  border-radius: var(--ybm-shape-lg);
+  background: var(--ybm-color-bg-overlay);
+  color: var(--ybm-color-palette-static-white);
+  font-size: var(--ybm-font-size-t02);
+  line-height: var(--ybm-line-height-t02);
+  font-weight: var(--ybm-font-weight-medium);
+}
 .ds-fileitem__remove {
+  position: absolute;
+  z-index: 1;
+  top: var(--ybm-space-x1);
+  right: var(--ybm-space-x1);
   display: grid;
   place-items: center;
-  flex: none;
-  width: var(--ybm-space-x8);
-  height: var(--ybm-space-x8);
-  border-radius: var(--ybm-shape-sm);
-  color: var(--ybm-color-fg-neutral-subtle);
+  width: var(--ybm-space-x5);
+  height: var(--ybm-space-x5);
+  border-radius: var(--ybm-shape-pill);
+  background: var(--ybm-color-bg-layer-default);
+  box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-neutral-weak);
+  color: var(--ybm-color-fg-neutral);
 }
-.ds-fileitem__remove:active { background: var(--ybm-color-bg-neutral-weak-alpha); }
+.ds-fileitem__remove > .ds-icon { --ds-icon-size: 10px; }
+.ds-fileitem__remove::after { content: ""; position: absolute; inset: calc((var(--ybm-space-x5) - 40px) / 2); }
+.ds-fileitem[data-readonly] .ds-fileitem__remove { display: none; }

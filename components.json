@@ -496,39 +496,41 @@
       "name": "Top App Bar",
       "classes": [ ".ds-appbar" ],
       "figma": [
-        { "id": "2549:1399", "type": "COMPONENT_SET", "variants": 4 },
-        { "part": "Button", "id": "2549:1322", "type": "COMPONENT_SET", "variants": 3 }
+        { "id": "2557:1638", "type": "COMPONENT_SET", "variants": 8 },
+        { "part": "Button", "id": "2557:1501", "type": "COMPONENT_SET", "variants": 6 }
       ],
-      "props": "titleAlign `center/left`, tone `layer/transparent`, divider, safe area"
+      "props": "theme `ios/android`(CSS data-platform), tone `layer/transparent` + gradient, titleLayout `titleOnly/withSubtitle`"
     },
     {
       "no": "55",
       "name": "Top Navigation",
       "classes": [ ".ds-topnav" ],
       "figma": [
-        { "id": "2549:1411", "type": "COMPONENT" },
-        { "part": "Item", "id": "2549:1410", "type": "COMPONENT_SET", "variants": 4 }
+        { "id": "2557:1648", "type": "COMPONENT" },
+        { "part": "Item", "id": "2557:1647", "type": "COMPONENT_SET", "variants": 4 }
       ],
-      "props": "divider, search, action / Item selected, state `enabled/hover`"
+      "props": "search, action / Item selected, state `enabled/hover`"
     },
     {
       "no": "56",
-      "name": "Search Field",
-      "classes": [ ".ds-search" ],
+      "name": "Search Suggestion",
+      "classes": [ ".ds-search-anchor", ".ds-search-suggest" ],
       "figma": [
-        { "id": "2552:1037", "type": "COMPONENT_SET", "variants": 12 }
+        { "id": "2558:1321", "type": "COMPONENT_SET", "variants": 3 },
+        { "part": "Item", "id": "2558:1268", "type": "COMPONENT_SET", "variants": 2 }
       ],
-      "props": "size `large/medium`, state `enabled/focused/disabled`, content `placeholder/value`"
+      "props": "content `suggestion/recent/empty` / Item state `enabled/highlighted`, description"
     },
     {
       "no": "57",
       "name": "File Attach",
-      "classes": [ ".ds-fileattach", ".ds-filelist", ".ds-fileitem" ],
+      "classes": [ ".ds-fileattach", ".ds-fileitem" ],
       "figma": [
-        { "id": "2552:1066", "type": "COMPONENT_SET", "variants": 4 },
-        { "part": "Item", "id": "2552:1099", "type": "COMPONENT_SET", "variants": 3 }
+        { "part": "Dropzone", "id": "2558:1328", "type": "COMPONENT_SET", "variants": 3 },
+        { "part": "Trigger", "id": "2558:1347", "type": "COMPONENT_SET", "variants": 3 },
+        { "part": "Item", "id": "2558:1384", "type": "COMPONENT_SET", "variants": 4 }
       ],
-      "props": "state `enabled/dragOver/invalid/disabled` / Item state `done/uploading/error`"
+      "props": "Dropzone state `enabled/dragOver/disabled` / Trigger state / Item type `file/image`, state `enabled/readonly`, badge"
     }
   ]
 }

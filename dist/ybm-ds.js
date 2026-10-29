@@ -10,8 +10,8 @@
      · Popover — data-ds-popover="id" 로 열고 닫기, 바깥 클릭과 Esc, 안의 data-ds-close 로 닫기
      · Time Picker — 가운데 온 항목에 aria-selected, 멈추면 열에서 change(detail.value), 항목 누름과 화살표 키로 이동
      · Chat Composer — 입력이 비면 보내기 비활성, field-sizing 이 없는 브라우저에서 높이 맞춤
-     · Search Field — 지우기 버튼으로 값 비우기 (Text Field clear 와 같은 처리)
-     · File Attach — 파일을 칸 위로 끌고 오면 data-state="dragover", 벗어나거나 놓으면 뺀다
+     · Search Suggestion — 입력 칸(role=combobox, aria-controls)에서 위아래 화살표로 줄 고르기, Enter 로 그 줄 누르기
+     · File Attach — 파일을 끌어 놓는 칸 위로 끌고 오면 data-state="dragover", 벗어나거나 놓으면 뺀다
    사용: <script src="…/ybm-ds/dist/ybm-ds.js" defer></script>
    ========================================================================== */
 (function () {
@@ -148,9 +148,9 @@
     var t = e.target;
 
     // clear 버튼 → 값 비우고 input 이벤트 발생(화면 검증 로직이 그대로 반응)
-    var clear = t.closest(".ds-input__clear, .ds-search__clear");
+    var clear = t.closest(".ds-input__clear");
     if (clear) {
-      var control = clear.closest(".ds-input, .ds-search").querySelector(".ds-input__control, .ds-search__input");
+      var control = clear.closest(".ds-input").querySelector(".ds-input__control");
       control.value = "";
       control.dispatchEvent(new Event("input", { bubbles: true }));
       control.focus();
@@ -187,8 +187,31 @@
     if (t.tagName === "DIALOG" && (t.classList.contains("ds-dialog") || t.classList.contains("ds-bottomsheet")) && t.getAttribute("role") !== "alertdialog") closeDialog(t);
   });
 
-  // Esc = 열린 Popover 닫기 / Time Picker 열에서 위아래 화살표 = 한 칸씩
+  // Search Suggestion: 입력 칸에서 위아래 화살표로 줄을 고르고 Enter 로 누른다
+  function moveSuggestion(input, e) {
+    var panel = document.getElementById(input.getAttribute("aria-controls"));
+    if (!panel || panel.hidden || !panel.classList.contains("ds-search-suggest")) return false;
+    var items = [].slice.call(panel.querySelectorAll(".ds-search-suggest__item"));
+    var cur = panel.querySelector(".ds-search-suggest__item[data-highlighted]");
+    if (e.key === "Enter") {
+      if (!cur) return false;
+      e.preventDefault(); cur.click(); return true;
+    }
+    if (!items.length) return false;
+    e.preventDefault();
+    var i = items.indexOf(cur) + (e.key === "ArrowDown" ? 1 : -1);
+    if (i < 0) i = items.length - 1; else if (i >= items.length) i = 0;
+    items.forEach(function (it) { it.removeAttribute("data-highlighted"); it.removeAttribute("aria-selected"); });
+    items[i].setAttribute("data-highlighted", ""); items[i].setAttribute("aria-selected", "true");
+    if (items[i].id) input.setAttribute("aria-activedescendant", items[i].id);
+    items[i].scrollIntoView({ block: "nearest" });
+    return true;
+  }
+
+  // Esc = 열린 Popover 닫기 / Time Picker 열에서 위아래 화살표 = 한 칸씩 / 추천어 입력 칸에서 줄 고르기
   document.addEventListener("keydown", function (e) {
+    if (e.target.getAttribute && e.target.getAttribute("role") === "combobox" && e.target.getAttribute("aria-controls")
+      && (e.key === "ArrowDown" || e.key === "ArrowUp" || e.key === "Enter") && moveSuggestion(e.target, e)) return;
     if (e.key === "Escape") {
       var open = document.querySelector(".ds-popover[id]:not([hidden])");
       if (open) { setPopover(open, false); var back = document.querySelector('[data-ds-popover="' + open.id + '"]'); if (back) back.focus(); }
@@ -205,12 +228,12 @@
 
   // clear 버튼을 누르는 순간 input 포커스가 빠지지 않게 (버튼이 사라지는 깜빡임 방지)
   document.addEventListener("mousedown", function (e) {
-    if (e.target.closest(".ds-input__clear, .ds-search__clear")) e.preventDefault();
+    if (e.target.closest(".ds-input__clear")) e.preventDefault();
   });
 
-  // File Attach: 파일을 칸 위로 끌고 오면 표시 (놓기는 칸을 덮은 input 이 기본 동작으로 받는다)
+  // File Attach: 파일을 끌어 놓는 칸 위로 끌고 오면 표시 (놓기는 칸을 덮은 input 이 기본 동작으로 받는다)
   function dropZone(e) {
-    var zone = e.target.closest && e.target.closest(".ds-fileattach");
+    var zone = e.target.closest && e.target.closest(".ds-fileattach__dropzone");
     return zone && !zone.querySelector(".ds-fileattach__input:disabled") ? zone : null;
   }
   document.addEventListener("dragenter", function (e) {
