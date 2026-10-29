@@ -744,6 +744,139 @@
   </div>
 </section>
 
+<section class="pv-sec" id="c-62" data-no="62"><header><h2><small>62</small>Checkbox Group</h2></header>
+  <div class="pv-stage">
+    <fieldset class="ds-checkbox-group">
+      <label class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control" checked><span class="ds-checkbox__label">이메일</span></label>
+      <label class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control"><span class="ds-checkbox__label">문자 메시지</span></label>
+      <label class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control" checked><span class="ds-checkbox__label">앱 알림</span></label>
+    </fieldset>
+  </div>
+</section>
+
+<section class="pv-sec" id="c-63" data-no="63"><header><h2><small>63</small>Scroll Fog</h2></header>
+  <div class="pv-stage" style="align-items:flex-start;gap:var(--ybm-space-x8);flex-wrap:wrap">
+    <div class="ds-scrollfog" style="width:240px;height:180px;padding-block:20px">
+      <p>스크롤 되는 내용 1</p><p>스크롤 되는 내용 2</p><p>스크롤 되는 내용 3</p><p>스크롤 되는 내용 4</p><p>스크롤 되는 내용 5</p><p>스크롤 되는 내용 6</p><p>스크롤 되는 내용 7</p><p>스크롤 되는 내용 8</p><p>스크롤 되는 내용 9</p>
+    </div>
+    <div class="ds-scrollfog" data-direction="horizontal" style="display:flex;gap:var(--ybm-space-x2);width:300px;padding-inline:20px">
+      <span class="ds-badge" data-size="large">전체</span><span class="ds-badge" data-size="large">디자인</span><span class="ds-badge" data-size="large">개발</span><span class="ds-badge" data-size="large">기획</span><span class="ds-badge" data-size="large">마케팅</span><span class="ds-badge" data-size="large">영업</span><span class="ds-badge" data-size="large">운영</span>
+    </div>
+  </div>
+</section>
+
+<section class="pv-sec" id="c-64" data-no="64"><header><h2><small>64</small>Pull To Refresh</h2></header>
+  <div class="pv-stage">
+    <div class="ds-ptr pv-w" id="pv-ptr" style="width:343px;height:240px;box-shadow:inset 0 0 0 1px var(--ybm-color-stroke-neutral-muted);border-radius:var(--ybm-shape-md)">
+      <div class="ds-ptr__indicator">
+        <span class="ds-progress-circle" role="progressbar" aria-label="새로 고침" style="--ds-progress-value: 0"><svg viewBox="0 0 24 24" aria-hidden="true"><circle class="ds-progress-circle__track" pathLength="100"/><circle class="ds-progress-circle__range" pathLength="100"/></svg></span>
+      </div>
+      <div class="ds-ptr__content" style="height:100%;overflow:auto;padding:var(--ybm-space-x4)">
+        <p>휴대폰에서 이 칸을 아래로 당겨 보세요.</p>
+        <p id="pv-ptr-out" style="color:var(--ybm-color-fg-neutral-muted)">아직 새로 고치지 않았어요</p>
+      </div>
+    </div>
+  </div>
+  <script>
+    // 미리보기 전용 - 새로 고침 흉내
+    document.getElementById('pv-ptr').addEventListener('ds-refresh', function (e) {
+      setTimeout(function () { YBM.endRefresh(e.currentTarget || document.getElementById('pv-ptr')); document.getElementById('pv-ptr-out').textContent = '방금 새로 고쳤어요'; }, 1200);
+    });
+  </script>
+</section>
+
+<section class="pv-sec" id="c-65" data-no="65"><header><h2><small>65</small>Side Panel</h2></header>
+  <div class="pv-stage">
+    <button type="button" class="ds-btn" data-variant="neutralOutline" data-size="small" data-ds-open="pv-sp">옆 패널 열기</button>
+    <dialog class="ds-sidepanel" id="pv-sp" data-size="small" aria-labelledby="pv-sp-t">
+      <div class="ds-sidepanel__header">
+        <div class="ds-sidepanel__texts"><h2 class="ds-sidepanel__title" id="pv-sp-t">필터</h2><p class="ds-sidepanel__desc">원하는 조건을 고르세요</p></div>
+        <button type="button" class="ds-sidepanel__close" data-ds-close aria-label="닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button>
+      </div>
+      <div class="ds-sidepanel__body">
+        <p style="height:900px">본문이 길면 이 영역만 스크롤되고, 스크롤되면 위에 선이 생깁니다.</p>
+      </div>
+      <div class="ds-sidepanel__footer"><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="medium" data-ds-close>취소</button><button type="button" class="ds-btn" data-variant="neutralSolid" data-size="medium" data-ds-close>적용</button></div>
+    </dialog>
+  </div>
+</section>
+
+<section class="pv-sec" id="c-66" data-no="66"><header><h2><small>66</small>Image Frame</h2></header>
+  <div class="pv-stage" style="gap:var(--ybm-space-x4);flex-wrap:wrap;align-items:flex-start">
+    <div class="ds-imageframe" style="width:160px"><span class="pv-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div>
+    <div class="ds-imageframe" data-ratio="4:3" data-stroke style="width:200px"><span class="pv-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span><div class="ds-imageframe__floater" data-position="bottom-end"><span class="ds-imageframe__indicator">1/5</span></div></div>
+    <div class="ds-imageframe" data-ratio="16:9" style="width:240px"><span class="pv-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div>
+  </div>
+  <style>.pv-ph { display: grid; place-items: center; height: 100%; color: var(--ybm-color-fg-neutral-subtle); }</style>
+</section>
+
+<section class="pv-sec" id="c-67" data-no="67"><header><h2><small>67</small>Carousel</h2></header>
+  <div class="pv-stage">
+    <div class="ds-carousel pv-w" role="region" aria-roledescription="carousel" aria-label="추천" style="width:343px">
+      <div class="ds-carousel__scroller">
+        <div class="ds-carousel__item"><div class="ds-imageframe" data-ratio="4:3" style="width:240px"><span class="pv-ph">1</span></div></div>
+        <div class="ds-carousel__item"><div class="ds-imageframe" data-ratio="4:3" style="width:240px"><span class="pv-ph">2</span></div></div>
+        <div class="ds-carousel__item"><div class="ds-imageframe" data-ratio="4:3" style="width:240px"><span class="pv-ph">3</span></div></div>
+        <div class="ds-carousel__item"><div class="ds-imageframe" data-ratio="4:3" style="width:240px"><span class="pv-ph">4</span></div></div>
+      </div>
+      <button type="button" class="ds-carousel__button" data-direction="previous" aria-label="이전"><i class="ds-icon ds-icon--chevron-left ds-icon--sm" aria-hidden="true"></i></button>
+      <button type="button" class="ds-carousel__button" data-direction="next" aria-label="다음"><i class="ds-icon ds-icon--chevron-right ds-icon--sm" aria-hidden="true"></i></button>
+    </div>
+  </div>
+</section>
+
+<section class="pv-sec" id="c-68" data-no="68"><header><h2><small>68</small>Markdown</h2></header>
+  <div class="pv-stage pv-col">
+    <div class="ds-markdown pv-w">
+      <h2>제목 2</h2>
+      <p>본문 문단은 14 크기로 쓰고, 문단 사이는 12 를 띄웁니다. <code>inline code</code> 와 <a href="#">링크</a> 를 함께 쓸 수 있어요.<a class="ds-citation" data-type="number" href="#" aria-label="출처 1">1</a></p>
+      <h3>제목 3</h3>
+      <ul><li>목록 항목 하나</li><li>목록 항목 둘</li></ul>
+      <blockquote>인용문은 왼쪽 선으로 구분합니다.</blockquote>
+      <figure class="ds-codeblock">
+        <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">javascript</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
+        <pre class="ds-codeblock__code"><code>const total = items
+  .filter((item) =&gt; item.checked)
+  .length;</code></pre>
+      </figure>
+      <p>출처: <a class="ds-citation" href="#"><span class="ds-citation__icon"><i class="ds-icon ds-icon--globe" aria-hidden="true"></i></span><span class="ds-citation__label">출처 이름</span></a><a class="ds-citation" href="#"><span class="ds-citation__label">아주 긴 출처 이름은 말줄임으로 끝납니다</span></a></p>
+    </div>
+  </div>
+</section>
+
+<section class="pv-sec" id="c-69" data-no="69"><header><h2><small>69</small>Code Block</h2></header>
+  <div class="pv-stage pv-col">
+    <figure class="ds-codeblock pv-w"><pre class="ds-codeblock__code"><code>npm install ybm-ds</code></pre></figure>
+  </div>
+</section>
+
+<section class="pv-sec" id="c-70" data-no="70"><header><h2><small>70</small>Citation</h2></header>
+  <div class="pv-stage" style="gap:var(--ybm-space-x4)">
+    <span>번호<a class="ds-citation" data-type="number" href="#">1</a></span>
+    <a class="ds-citation" href="#"><span class="ds-citation__label">출처 이름</span></a>
+    <a class="ds-citation" href="#"><span class="ds-citation__icon"><i class="ds-icon ds-icon--globe" aria-hidden="true"></i></span><span class="ds-citation__label">출처 이름</span></a>
+  </div>
+</section>
+
+<section class="pv-sec" id="c-71" data-no="71"><header><h2><small>71</small>Multi Select</h2></header>
+  <div class="pv-stage" style="align-items:flex-start;min-height:300px">
+    <div class="ds-multiselect pv-w" style="width:320px">
+      <button type="button" class="ds-multiselect__trigger" data-ds-popover="pv-msel" aria-haspopup="listbox" aria-expanded="false">
+        <span class="ds-multiselect__values" data-placeholder="선택하세요"></span>
+        <i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i>
+      </button>
+      <div class="ds-multiselect__panel" id="pv-msel" role="listbox" aria-multiselectable="true" hidden>
+        <div class="ds-multiselect__heading">관심 분야</div>
+        <label class="ds-multiselect__option"><span class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control" checked></span><span class="ds-multiselect__label">디자인</span></label>
+        <label class="ds-multiselect__option"><span class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control" checked></span><span class="ds-multiselect__label">개발</span></label>
+        <label class="ds-multiselect__option"><span class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control"></span><span class="ds-multiselect__label">기획</span></label>
+        <label class="ds-multiselect__option"><span class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control" checked></span><span class="ds-multiselect__label">마케팅</span></label>
+        <label class="ds-multiselect__option"><span class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control" disabled></span><span class="ds-multiselect__label">영업</span></label>
+      </div>
+    </div>
+  </div>
+</section>
+
 </main>
 </div>
 

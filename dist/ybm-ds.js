@@ -13,6 +13,11 @@
      · Search Suggestion — 입력 칸(role=combobox, aria-controls)에서 위아래 화살표로 줄 고르기, Enter 로 그 줄 누르기
      · Menu Sheet — Dialog 와 같이 열고 닫기, 바깥(dim) 클릭 닫기
      · Timer — data-start(흐른 시간) / data-end(남은 시간)로 1초마다 글자를 바꾸고, 남은 시간이 0 이면 ds-timer-end 이벤트
+     · Side Panel — Dialog 와 같이 열고 닫기, 본문이 스크롤되면 data-scrolled
+     · Pull To Refresh — 터치로 당긴 거리 표시, 넘겨 놓으면 ds-refresh 이벤트, YBM.endRefresh(요소) 로 되돌리기
+     · Carousel — 처음/끝이면 data-at-start / data-at-end, 버튼으로 한 화면씩 넘기기
+     · Code Block — data-ds-copy 버튼으로 코드 복사
+     · Multi Select — Popover 와 같이 열고 닫기, 고른 값을 칸에 Badge 로 채우기
      · File Attach — 파일을 끌어 놓는 칸 위로 끌고 오면 data-state="dragover", 벗어나거나 놓으면 뺀다
    사용: <script src="…/ybm-ds/dist/ybm-ds.js" defer></script>
    ========================================================================== */
@@ -89,7 +94,7 @@
     document.querySelectorAll('[data-ds-popover="' + pop.id + '"]').forEach(function (b) { b.setAttribute("aria-expanded", String(open)); });
   }
   function closePopovers(except) {
-    document.querySelectorAll(".ds-popover[id]:not([hidden])").forEach(function (p) { if (p !== except) setPopover(p, false); });
+    document.querySelectorAll(".ds-popover[id]:not([hidden]), .ds-multiselect__panel[id]:not([hidden])").forEach(function (p) { if (p !== except) setPopover(p, false); });
   }
 
   /* ---- Time Picker: 가운데 온 항목 = 선택값 ---------------------------------- */
@@ -157,6 +162,78 @@
   }
   setInterval(tickTimers, 1000);
 
+  /* ---- Carousel 끝 표시 / Side Panel 본문 스크롤 표시 --------------------- */
+  function syncCarousel(car) {
+    var sc = car.querySelector(".ds-carousel__scroller");
+    if (!sc) return;
+    var max = sc.scrollWidth - sc.clientWidth;
+    car.toggleAttribute("data-at-start", sc.scrollLeft <= 1);
+    car.toggleAttribute("data-at-end", sc.scrollLeft >= max - 1);
+  }
+  document.addEventListener("scroll", function (e) {
+    var el = e.target;
+    if (!el.classList) return;
+    if (el.classList.contains("ds-carousel__scroller")) syncCarousel(el.parentElement);
+    else if (el.classList.contains("ds-sidepanel__body")) el.toggleAttribute("data-scrolled", el.scrollTop > 0);
+  }, true);
+
+  /* ---- Multi Select: 고른 값을 칸에 Badge 로 ------------------------------- */
+  function syncMultiSelect(panel) {
+    var trigger = document.querySelector('[data-ds-popover="' + panel.id + '"]');
+    var box = trigger && trigger.querySelector(".ds-multiselect__values");
+    if (!box) return;
+    var labels = [];
+    panel.querySelectorAll(".ds-multiselect__option").forEach(function (o) {
+      var c = o.querySelector("input");
+      if (c && c.checked) labels.push(o.querySelector(".ds-multiselect__label").textContent);
+    });
+    var max = parseInt(box.getAttribute("data-max"), 10) || 2;
+    box.textContent = "";
+    labels.slice(0, max).forEach(function (l) { var b = document.createElement("span"); b.className = "ds-badge"; b.textContent = l; box.appendChild(b); });
+    if (labels.length > max) { var m = document.createElement("span"); m.className = "ds-multiselect__overflow"; m.textContent = "+" + (labels.length - max); box.appendChild(m); }
+  }
+  document.addEventListener("change", function (e) {
+    var panel = e.target.closest && e.target.closest(".ds-multiselect__panel[id]");
+    if (panel) syncMultiSelect(panel);
+  });
+
+  /* ---- Pull To Refresh: 맨 위에서 아래로 당기기 ---------------------------- */
+  var pull = null;
+  function ptrParts(el) { return { ind: el.querySelector(".ds-ptr__indicator"), circle: el.querySelector(".ds-ptr__indicator .ds-progress-circle") }; }
+  document.addEventListener("touchstart", function (e) {
+    var el = e.target.closest && e.target.closest(".ds-ptr");
+    if (!el || el.hasAttribute("data-disabled") || el.getAttribute("data-state") === "refreshing") return;
+    var content = el.querySelector(".ds-ptr__content");
+    if ((content && content.scrollTop > 0) || window.scrollY > 0) return;
+    pull = { el: el, y: e.touches[0].clientY, d: 0 };
+  }, { passive: true });
+  document.addEventListener("touchmove", function (e) {
+    if (!pull) return;
+    var p = ptrParts(pull.el), size = p.ind.offsetHeight || 88;
+    pull.d = Math.max(0, Math.min(size * 1.5, (e.touches[0].clientY - pull.y) * 0.5));
+    pull.el.setAttribute("data-dragging", "");
+    pull.el.style.setProperty("--ds-ptr-displacement", pull.d + "px");
+    if (p.circle) p.circle.style.setProperty("--ds-progress-value", Math.min(100, Math.round((pull.d / size) * 100)));
+  }, { passive: true });
+  document.addEventListener("touchend", function () {
+    if (!pull) return;
+    var el = pull.el, p = ptrParts(el), size = p.ind.offsetHeight || 88;
+    el.removeAttribute("data-dragging");
+    if (pull.d >= size) {
+      el.setAttribute("data-state", "refreshing");
+      el.style.setProperty("--ds-ptr-displacement", size + "px");
+      if (p.circle) p.circle.setAttribute("data-type", "indeterminate");
+      el.dispatchEvent(new CustomEvent("ds-refresh", { bubbles: true }));
+    } else el.style.setProperty("--ds-ptr-displacement", "0px");
+    pull = null;
+  });
+  function endRefresh(el) {
+    var p = ptrParts(el);
+    el.removeAttribute("data-state");
+    el.style.setProperty("--ds-ptr-displacement", "0px");
+    if (p.circle) { p.circle.removeAttribute("data-type"); p.circle.style.setProperty("--ds-progress-value", 0); }
+  }
+
   /* ---- 초기화: 페이지에 이미 있는 요소 ------------------------------------- */
   function init(root) {
     (root || document).querySelectorAll(".ds-slider").forEach(syncSlider);
@@ -168,6 +245,8 @@
     });
     (root || document).querySelectorAll(".ds-chat-composer__input").forEach(syncComposer);
     tickTimers();
+    (root || document).querySelectorAll(".ds-carousel").forEach(syncCarousel);
+    (root || document).querySelectorAll(".ds-multiselect__panel[id]").forEach(syncMultiSelect);
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", function () { init(); });
   else init();
@@ -194,7 +273,26 @@
       return;
     }
     // 열린 Popover 바깥을 누르면 닫는다
-    if (!t.closest(".ds-popover")) closePopovers();
+    if (!t.closest(".ds-popover, .ds-multiselect__panel")) closePopovers();
+
+    // Carousel 버튼 → 한 화면의 80% 만큼 넘긴다
+    var carBtn = t.closest(".ds-carousel__button");
+    if (carBtn) {
+      var sc = carBtn.closest(".ds-carousel").querySelector(".ds-carousel__scroller");
+      sc.scrollBy({ left: (carBtn.getAttribute("data-direction") === "previous" ? -1 : 1) * sc.clientWidth * 0.8, behavior: "smooth" });
+      return;
+    }
+
+    // Code Block 복사 버튼 → 코드를 복사하고 2초 동안 data-copied
+    var copyBtn = t.closest("[data-ds-copy]");
+    if (copyBtn) {
+      var code = copyBtn.closest(".ds-codeblock").querySelector(".ds-codeblock__code");
+      if (code && navigator.clipboard) navigator.clipboard.writeText(code.textContent).then(function () {
+        copyBtn.setAttribute("data-copied", "");
+        setTimeout(function () { copyBtn.removeAttribute("data-copied"); }, 2000);
+      });
+      return;
+    }
 
     // Time Picker 항목을 누르면 그 값으로 굴린다
     var wheelOpt = t.closest(".ds-timepicker__option");
@@ -213,7 +311,7 @@
 
     // dialog 바깥(backdrop) 클릭 = dialog 요소 자신이 target
     // 단, Alert(role="alertdialog")는 버튼으로만 닫는다
-    if (t.tagName === "DIALOG" && (t.classList.contains("ds-dialog") || t.classList.contains("ds-bottomsheet") || t.classList.contains("ds-menusheet")) && t.getAttribute("role") !== "alertdialog") closeDialog(t);
+    if (t.tagName === "DIALOG" && (t.classList.contains("ds-dialog") || t.classList.contains("ds-bottomsheet") || t.classList.contains("ds-menusheet") || t.classList.contains("ds-sidepanel")) && t.getAttribute("role") !== "alertdialog") closeDialog(t);
   });
 
   // Search Suggestion: 입력 칸에서 위아래 화살표로 줄을 고르고 Enter 로 누른다
@@ -242,7 +340,7 @@
     if (e.target.getAttribute && e.target.getAttribute("role") === "combobox" && e.target.getAttribute("aria-controls")
       && (e.key === "ArrowDown" || e.key === "ArrowUp" || e.key === "Enter") && moveSuggestion(e.target, e)) return;
     if (e.key === "Escape") {
-      var open = document.querySelector(".ds-popover[id]:not([hidden])");
+      var open = document.querySelector(".ds-popover[id]:not([hidden]), .ds-multiselect__panel[id]:not([hidden])");
       if (open) { setPopover(open, false); var back = document.querySelector('[data-ds-popover="' + open.id + '"]'); if (back) back.focus(); }
       return;
     }
@@ -278,5 +376,5 @@
     if (zone) zone.removeAttribute("data-state");
   });
 
-  window.YBM = { openDialog: openDialog, closeDialog: closeDialog, snackbar: snackbar, init: init };
+  window.YBM = { openDialog: openDialog, closeDialog: closeDialog, snackbar: snackbar, endRefresh: endRefresh, init: init };
 })();

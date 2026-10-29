@@ -135,20 +135,20 @@ DS 전체가 `@layer ybm.tokens, ybm.base, ybm.icons, ybm.components, ybm.utilit
 | Templates | `2479:5` | 비어 있음 (화면 템플릿 준비 중) |
 | --- | | 구분선 |
 | Action | `2479:7` | Action Button, Chip, Floating Action Button, Menu, Segmented Control, Toggle Button, **Text Link** `2493:324` |
-| Chat | `2479:8` | 문서 1개에 **Chat Message Bubble** `2499:6`, **Chat Message Metadata** `2499:18`, **Chat System Message** `2499:25`, **Chat Send Button** `2499:35`, **Chat Composer** `2499:54` |
+| Chat | `2479:8` | 문서 1개에 **Chat Message Bubble** `2499:6`, **Chat Message Metadata** `2499:18`, **Chat System Message** `2499:25`, **Chat Send Button** `2499:35`, **Chat Composer** `2499:54`. 문서 따로 **Markdown** `2568:66`, **Code Block** `2568:57`, **Citation** `2568:65` |
 | Container | `2479:9` | Accordion, Card, **Select Box** `2495:260` |
-| Content | `2479:10` | Avatar, Empty, Tag Group, **Timer** `2563:889` |
-| Data Input | `2479:11` | Checkbox, Date Picker, Field Button, Quantity Picker, Radio Group, Select, Slider, Switch, Text Field, **Time Picker** `2497:979`, **Search Suggestion** `2558:1321`, **File Attach** (Dropzone `2558:1328`, Trigger `2558:1347`, Item `2558:1384`) |
+| Content | `2479:10` | Avatar, Empty, Tag Group, **Timer** `2563:889`, **Image Frame** `2567:1928`, **Carousel** `2567:1936` |
+| Data Input | `2479:11` | Checkbox, Date Picker, Field Button, Quantity Picker, Radio Group, Select, Slider, Switch, Text Field, **Time Picker** `2497:979`, **Search Suggestion** `2558:1321`, **File Attach** (Dropzone `2558:1328`, Trigger `2558:1347`, Item `2558:1384`), **Checkbox Group** `2566:1167`, **Multi Select** `2566:1252` |
 | Feedback & Status | `2479:12` | Badge, Banner, Callout, Progress, Skeleton, **Result Section** `2562:741`, **Status Dot** `2562:747` |
-| Layout | `2479:13` | Divider |
+| Layout | `2479:13` | Divider, **Scroll Fog** `2567:33`, **Pull To Refresh** `2567:54` |
 | Navigation | `2479:14` | Bottom Navigation, Breadcrumbs, Chip Tabs, Pagination, Side Navigation, Stepper, Tabs, **Table Pagination** `2498:1299`, **Top App Bar** `2557:1638`, **Top Navigation** `2557:1648` |
-| Overlay | `2479:15` | Bottom Sheet, Dialog, Help Bubble, Snackbar, Tooltip, **Popover** `2494:473`, **Menu Sheet** `2563:1501` |
+| Overlay | `2479:15` | Bottom Sheet, Dialog, Help Bubble, Snackbar, Tooltip, **Popover** `2494:473`, **Menu Sheet** `2563:1501`, **Side Panel** `2567:862` |
 | Table & List | `2479:16` | List, Table |
 | --- | | 구분선 |
 
 **굵게** 표시한 10종은 2026-10-27 Figma 에 새로 만든 것이다. 2026-10-28 CSS 를 만들고 `components.json` 과 §6.1 표에 등록했다(49~53번, Text Link 는 02번에 Figma ID 추가).
 
-Top App Bar 부터 Status Dot 까지(54~61번)는 2026-10-29 Figma 와 CSS 를 함께 만들었다. 모양과 여백은 레퍼런스 가이드의 같은 부품 규격을 따른다.
+Top App Bar 부터 Multi Select 까지(54~71번)는 2026-10-29 Figma 와 CSS 를 함께 만들었다. 모양과 여백은 레퍼런스 가이드의 같은 부품 규격을 따른다.
 
 새 컴포넌트는 맞는 카테고리 페이지에 문서 프레임을 하나 더 만들어 넣는다. `sync.mjs` 의 미등록 점검은 About/Foundations/Icons/Templates/구분선을 뺀 모든 페이지를 본다.
 
@@ -343,6 +343,16 @@ CSS 는 Figma 프로퍼티 이름을 그대로 `data-*` 속성으로 쓴다: `<b
 | 59 | Result Section | `.ds-result` (`__asset/texts/title/desc/actions`) | `2562:741`, 2 | size `large/medium`, 그림 40 |
 | 60 | Timer | `.ds-timer` | `2563:889`, 2 | format `clock/elapsed`, 시간 갱신은 ybm-ds.js |
 | 61 | Status Dot | `.ds-statusdot` | `2562:747`, 5 | tone 5, 8px, data-pulse |
+| 62 | Checkbox Group | `.ds-checkbox-group` | `2566:1167` | 세로 간격 x1, 묶음 이름은 Field Label |
+| 63 | Scroll Fog | `.ds-scrollfog` | `2567:33`, 2 | mask 로 끝 20 흐림, 흐린 쪽에 여백 20 이상 |
+| 64 | Pull To Refresh | `.ds-ptr` (`__indicator/content`) | `2567:54`, 2 | 위 88 영역 Progress Circle 24, ds-refresh 이벤트, YBM.endRefresh |
+| 65 | Side Panel | `.ds-sidepanel` (`__header/texts/title/desc/close/body/footer`) | `2567:862`, 3 / Close Button `2567:782`, 2 | 네이티브 `<dialog>`, 폭 480/720/960, 왼쪽은 data-direction |
+| 66 | Image Frame | `.ds-imageframe` (`__floater/indicator`) | `2567:1928`, 3 | ratio `1:1/4:3/16:9`, stroke |
+| 67 | Carousel | `.ds-carousel` (`__scroller/item/button`) | `2567:1936` / Button `2567:1935`, 2 | 넘김 위치 맞춤, 끝 흐림, 버튼은 ybm-ds.js |
+| 68 | Markdown | `.ds-markdown` | `2568:66` | 변환된 HTML 을 감싸면 크기와 간격이 맞춰짐 |
+| 69 | Code Block | `.ds-codeblock` (`__header/language/copy/code`) | `2568:57`, 2 | 고정 폭 글꼴, data-ds-copy 복사 |
+| 70 | Citation | `.ds-citation` (`__icon/label`) | `2568:65`, 2 | type `number/label` |
+| 71 | Multi Select | `.ds-multiselect` (`__trigger/values/overflow/panel/heading/option/label`) | Trigger `2566:1252`, 6 / Option `2566:1295`, 6 / Panel `2566:1296` | data-ds-popover 로 열기, 고른 값 Badge 와 +N |
 
 목록의 기계용 사본이 `components.json` 이다. 컴포넌트를 추가/변경하면 이 표와 `components.json` 을 함께 고친다(sync 가 Figma/CSS 와 대조).
 
@@ -380,6 +390,13 @@ CSS 는 Figma 프로퍼티 이름을 그대로 `data-*` 속성으로 쓴다: `<b
 - **Timer** - 숫자 폭이 고정되어 값이 바뀌어도 흔들리지 않는다. 크기와 색은 자리에 맞춰 바꾸고, 시간이 다 되면 `ds-timer-end` 이벤트로 다음 동작을 잇는다.
 - **Status Dot** - 색만으로 뜻을 전하지 않도록 글자와 함께 쓴다. 사람 사진 위 상태는 Avatar 의 Status 를 쓴다.
 - **로딩 표시** - 따로 Spinner 를 두지 않고 Progress Circle 의 indeterminate 를 쓴다.
+- **Checkbox Group** - 관련된 체크박스만 묶고, 묶음 이름과 오류 문구는 Field Label 로 단다.
+- **Scroll Fog** - 흐려지는 쪽에 20 이상 여백을 둔다. 화면 전체 세로 스크롤은 위 20, 아래 80.
+- **Pull To Refresh** - 최신 내용을 다시 불러오는 목록 화면에만. 글자를 골라야 하는 영역에서는 data-disabled 로 끈다.
+- **Side Panel vs Bottom Sheet** - PC 에서 화면 옆에 보조 내용이나 필터를 둘 때 Side Panel, 화면이 좁으면 Bottom Sheet 로 바꾼다.
+- **Image Frame / Carousel** - 사진은 Image Frame 비율 안에 채워 넣고, 여러 장을 넘길 때 Carousel 항목으로 넣는다. 터치 화면에서는 넘기기 버튼 없이 손가락으로 넘긴다.
+- **Markdown / Code Block / Citation** - AI 답변처럼 서식 있는 글은 Markdown 으로 감싸고, 코드는 Code Block, 근거는 번호나 출처 칩(Citation)으로 단다.
+- **Multi Select vs Select** - 여러 개를 고를 때만 Multi Select. 고른 값이 많으면 2개까지 보여 주고 나머지는 +N.
 - **Chat** - 상대 말풍선은 왼쪽, 내 말풍선은 오른쪽. 입력이 비면 보내기 비활성, 답변을 만드는 중에는 멈춤(stop)으로 바꾼다.
 - 닫기 버튼(Dialog/Bottom Sheet): 40×40 투명 + 24px `Lucide/x`, 색 `fg/neutral`.
 
@@ -466,7 +483,7 @@ CSS 는 Figma 프로퍼티 이름을 그대로 `data-*` 속성으로 쓴다: `<b
 ---
 
 ## 11. 미구현 / 남은 항목
-- 미구현 컴포넌트(다음 차례): Side Panel/Drawer, Pull To Refresh, Scroll Fog, Aspect Ratio, Image Frame, Number Input, Typeahead/Multi Select
+- 미구현 컴포넌트(다음 차례): Aspect Ratio, Number Input
 - AI/학습 서비스용 묶음(채팅 말풍선/입력창/Markdown/Code Block/출처 표시) - magic 시맨틱을 쓸 첫 컴포넌트 후보
 - 서비스별 brand 색 교체 층(`data-brand`), motion 토큰의 Figma 변수화
 - Callout magic tone, pressed 변형(Figma), magic 시맨틱을 쓰는 컴포넌트 없음
@@ -479,6 +496,7 @@ CSS 는 Figma 프로퍼티 이름을 그대로 `data-*` 속성으로 쓴다: `<b
 |---|---|
 | 2026-10-29 | 54 Top App Bar(+ Button), 55 Top Navigation(+ Item), 56 Search Suggestion(+ Item), 57 File Attach(Dropzone/Trigger/Item) 를 Figma 와 CSS 에 함께 추가(레퍼런스 가이드 규격 기준). 아이콘 `upload`, `clock` 추가 |
 | 2026-10-29 | 58 Menu Sheet(+ Item, Close Button), 59 Result Section, 60 Timer, 61 Status Dot 추가. 로딩 표시는 Progress Circle indeterminate 로 대신(Spinner 없음). 아이콘 `share`, `link`, `trash` 추가 |
+| 2026-10-29 | 62 Checkbox Group, 63 Scroll Fog, 64 Pull To Refresh, 65 Side Panel, 66 Image Frame, 67 Carousel, 68 Markdown, 69 Code Block, 70 Citation, 71 Multi Select 추가(레퍼런스 가이드 규격 기준). 아이콘 `copy` 추가 |
 | 2026-10-28 | Figma 에만 있던 10종 CSS 완성과 등록(49~53), Popover/Time Picker/Chat 입력창 동작 |
 | 2026-10-27 | Figma 페이지를 레퍼런스 라이브러리 형식(카테고리 페이지 + 문서 프레임)으로 개편, 새 컴포넌트 10종(Figma 만). 모드 정리 - Typography 130%/150%, Shape Soft/Sharp 삭제, CSS 의 `data-shape` 테마(soft/sharp/square) 제거. 남은 모드는 Light / Dark |
 | 2026-10-22 | ds 를 단독 GitHub 저장소(ybm-ds) + Pages 로 분리, 가이드 사이트에서 DS 사본 제거(DS 주소 참조). 통합 동기화 `sync.mjs`/`동기화.bat`/`components.json`(Figma 노드 대조) 도입. `build.py` → `build.mjs`(출력 동일, Python 불필요). 컴포넌트 6종 추가(Divider/Tooltip/List/Breadcrumbs/Stepper/Banner - CSS/Figma 동시). 미리보기 `index.html` |

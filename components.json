@@ -569,6 +569,100 @@
         { "id": "2562:747", "type": "COMPONENT_SET", "variants": 5 }
       ],
       "props": "tone `positive/warning/critical/brand/neutral`, data-pulse"
+    },
+    {
+      "no": "62",
+      "name": "Checkbox Group",
+      "classes": [ ".ds-checkbox-group" ],
+      "figma": [
+        { "id": "2566:1167", "type": "COMPONENT" }
+      ],
+      "props": "세로 간격 x1, 묶음 이름은 Field Label"
+    },
+    {
+      "no": "63",
+      "name": "Scroll Fog",
+      "classes": [ ".ds-scrollfog" ],
+      "figma": [
+        { "id": "2567:33", "type": "COMPONENT_SET", "variants": 2 }
+      ],
+      "props": "direction `vertical/horizontal`, 끝 20"
+    },
+    {
+      "no": "64",
+      "name": "Pull To Refresh",
+      "classes": [ ".ds-ptr" ],
+      "figma": [
+        { "id": "2567:54", "type": "COMPONENT_SET", "variants": 2 }
+      ],
+      "props": "state `pulling/refreshing`, Progress Circle 24"
+    },
+    {
+      "no": "65",
+      "name": "Side Panel",
+      "classes": [ ".ds-sidepanel" ],
+      "figma": [
+        { "id": "2567:862", "type": "COMPONENT_SET", "variants": 3 },
+        { "part": "Close Button", "id": "2567:782", "type": "COMPONENT_SET", "variants": 2 }
+      ],
+      "props": "size `small/medium/large`, direction `right/left`"
+    },
+    {
+      "no": "66",
+      "name": "Image Frame",
+      "classes": [ ".ds-imageframe" ],
+      "figma": [
+        { "id": "2567:1928", "type": "COMPONENT_SET", "variants": 3 }
+      ],
+      "props": "ratio `1:1/4:3/16:9`, stroke, indicator"
+    },
+    {
+      "no": "67",
+      "name": "Carousel",
+      "classes": [ ".ds-carousel" ],
+      "figma": [
+        { "id": "2567:1936", "type": "COMPONENT" },
+        { "part": "Button", "id": "2567:1935", "type": "COMPONENT_SET", "variants": 2 }
+      ],
+      "props": "항목 사이 x2, 끝 흐림 x1, 버튼 32"
+    },
+    {
+      "no": "68",
+      "name": "Markdown",
+      "classes": [ ".ds-markdown" ],
+      "figma": [
+        { "id": "2568:66", "type": "COMPONENT" }
+      ],
+      "props": "본문 t04, 제목과 블록 간격"
+    },
+    {
+      "no": "69",
+      "name": "Code Block",
+      "classes": [ ".ds-codeblock" ],
+      "figma": [
+        { "id": "2568:57", "type": "COMPONENT_SET", "variants": 2 }
+      ],
+      "props": "header `true/false`, 복사 버튼"
+    },
+    {
+      "no": "70",
+      "name": "Citation",
+      "classes": [ ".ds-citation" ],
+      "figma": [
+        { "id": "2568:65", "type": "COMPONENT_SET", "variants": 2 }
+      ],
+      "props": "type `number/label`, icon"
+    },
+    {
+      "no": "71",
+      "name": "Multi Select",
+      "classes": [ ".ds-multiselect" ],
+      "figma": [
+        { "part": "Trigger", "id": "2566:1252", "type": "COMPONENT_SET", "variants": 6 },
+        { "part": "Option", "id": "2566:1295", "type": "COMPONENT_SET", "variants": 6 },
+        { "part": "Panel", "id": "2566:1296", "type": "COMPONENT" }
+      ],
+      "props": "Trigger content `placeholder/selected`, state `enabled/open/disabled`"
     }
   ]
 }
