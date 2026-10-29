@@ -54,7 +54,8 @@ git clone https://github.com/luvms012-rgb/ybm-ds.git
 - **원칙** - 이 DS 는 완전 범용이다. 특정 서비스나 사이트를 근거로 부품을 정하거나 예시 문구에 넣지 않는다.
 - **끝냄 (2026-10-29)** - 58 Menu Sheet(Overlay), 59 Result Section, 61 Status Dot(Feedback & Status), 60 Timer(Content) 를 Figma 와 CSS 에 함께 만듦. Spinner 는 Progress Circle indeterminate 와 겹쳐 만들지 않음.
 - **끝냄 (2026-10-29)** - 62 Checkbox Group, 71 Multi Select(Data Input), 63 Scroll Fog, 64 Pull To Refresh(Layout), 65 Side Panel(Overlay), 66 Image Frame, 67 Carousel(Content), 68 Markdown, 69 Code Block, 70 Citation(Chat) 을 Figma 와 CSS 에 함께 만듦.
-- **다음 할 일 (추천 순서)** - 새 부품 목록은 모두 끝. 파운데이션: 브랜드 교체 층, 반응형 기준점, 모션 Figma 변수화, 역할 이름 글자 스타일, 그라데이션, 일러스트.
+- **끝냄 (2026-10-29)** - 파운데이션 검토 후 필요한 것만: 반응형 기준점(sm 480 / md 768 / lg 1280 / xl 1440, CSS 전용 토큰 + .u-hide-from-* / .u-show-from-*), 모션 값을 레퍼런스 가이드 값으로 맞춤(+ easing-enter / exit). sync pull 이 cssOnly 를 지우던 문제 수정.
+- **보류 (필요해지면)** - 모션 Figma 변수화(Figma 동작에 연결 안 됨), 역할 이름 글자 스타일(같은 값 두 벌이 됨, 필요하면 README 대응표만), 그라데이션(스크롤 끝 흐림 하나뿐), 브랜드 교체 층(두 번째 브랜드가 생길 때), 일러스트(그림 자체가 필요).
 - **끝냄 (2026-10-27)** - 체크박스 체크와 가로선을 아이콘 세트에서 분리해 전용 부품 `Checkbox Mark`(굵기 고정, CSS 와 같음). 채움형(Solid) 아이콘 원본 그림을 크기에 맞춰 늘고 줄도록 고쳐 Banner, 하단 탭 아이콘 정렬 해결. Figma 문서 설명 문구를 쉬운 한 문장으로 전부 다시 씀.
 - **다음 할 일 (보류, 요청할 때만)** - Templates 페이지(`2479:5`) 모바일 375 템플릿 10종: 1 로그인 / 2 서비스 홈 / 3 검색 결과, 목록 / 4 상세 화면 / 5 신청서 작성 / 6 마이페이지, 설정 / 7 고객센터 FAQ / 8 고객센터 채팅 상담 / 9 고객센터 만족도 설문 / 10 빈 화면, 오류. DS 에 없는 상단 앱바, 점수형 문항은 템플릿 안에서 먼저 조합.
 - **정리 후보 (미정)** - 값이 같은 변수: `bg/neutral-inverted(-pressed)` = `bg/neutral-solid(-pressed)`, `bg/neutral-subtle` = `bg/layer-default` = `fg/neutral-inverted` = `fg/on-neutral-solid`. 빈칸: `bg/neutral-weak`(현재 `bg/neutral` 이 대신). 텍스트 스타일 `Scale/*` 와 `Static/*` 는 이제 값이 같다. Icons 페이지 옆 "미사용 벡터 (확인 후 삭제)" 13개.

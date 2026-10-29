@@ -136,6 +136,7 @@ export function build(date, sourcePath = path.join(HERE, 'tokens', 'figma-variab
   const ELEV_RING = { overlay: 'stroke-neutral-muted' };
   const MOTION = Object.entries(SOURCE.cssOnly.motion);
   const ZINDEX = Object.entries(SOURCE.cssOnly.zIndex);
+  const BREAKPOINT = Object.entries(SOURCE.cssOnly.breakpoint || {});
   const elevExpr = (lvl) => { const [[ky, kb, ks], [ay, ab, as]] = geo(lvl);
     return `0 ${ky}px ${kb}px ${ks}px var(${P}color-elevation-${lvl}-key), 0 ${ay}px ${ab}px ${as}px var(${P}color-elevation-${lvl}-ambient)`; };
   const ring = (n) => (ELEV_RING[n] ? `inset 0 0 0 1px var(${P}color-${ELEV_RING[n]}), ` : '');
@@ -251,7 +252,7 @@ export function build(date, sourcePath = path.join(HERE, 'tokens', 'figma-variab
     o.push('}\n');
 
     o.push(`/* --------------------------------------------------------------------------
-   7. SYSTEM — elevation · motion · z-index  (Figma 에 없고 CSS 에만 있는 층)
+   7. SYSTEM — elevation · motion · z-index · breakpoint  (Figma 에 없고 CSS 에만 있는 층)
    -------------------------------------------------------------------------- */`);
     o.push(':root {');
     o.push('  /* 2겹 구조(key + ambient). 기하값은 여기 한 번만, 색은 테마 블록에서 바뀐다.\n'
@@ -265,6 +266,8 @@ export function build(date, sourcePath = path.join(HERE, 'tokens', 'figma-variab
     for (const [n, v] of MOTION) o.push(`  ${P}${n}: ${v};`);
     o.push('\n  /* Z-index */');
     for (const [n, v] of ZINDEX) o.push(`  ${P}z-${n}: ${int(v)};`);
+    o.push('\n  /* Breakpoint — @media 안에서는 변수를 쓸 수 없어 값 확인과 JS 용. 미디어 쿼리에는 같은 숫자를 직접 쓴다 */');
+    for (const [n, v] of BREAKPOINT) o.push(`  ${P}breakpoint-${n}: ${int(v)}px;`);
     o.push('}');
     return o.join('\n') + '\n';
   }
@@ -288,6 +291,7 @@ export function build(date, sourcePath = path.join(HERE, 'tokens', 'figma-variab
     for (const [n, l] of ELEV_ROLE) t.set(`${P}elevation-${n}`, `${ring(n)}var(${P}elevation-${l})`);
     for (const [n, v] of MOTION) t.set(`${P}${n}`, v);
     for (const [n, v] of ZINDEX) t.set(`${P}z-${n}`, v);
+    for (const [n, v] of BREAKPOINT) t.set(`${P}breakpoint-${n}`, `${int(v)}px`);
     return t;
   }
 
@@ -313,7 +317,7 @@ export function build(date, sourcePath = path.join(HERE, 'tokens', 'figma-variab
       ['color', color], ['dimension', dimension],
       ['radius', M(RADIUS.map(([n, v]) => [n, `${int(v)}px`]))], ['shape', shape],
       ['typography', M([['fontFamily', FONT_STACK], ['fontWeight', M(WEIGHTS)], ['scale', scale(TYPE)]])],
-      ['elevation', elevation], ['motion', M(MOTION)], ['zIndex', M(ZINDEX)],
+      ['elevation', elevation], ['motion', M(MOTION)], ['zIndex', M(ZINDEX)], ['breakpoint', M(BREAKPOINT.map(([n, v]) => [n, `${int(v)}px`]))],
     ]);
     return dumps(d) + '\n';
   }
@@ -346,7 +350,7 @@ export function build(date, sourcePath = path.join(HERE, 'tokens', 'figma-variab
       ['transitionDuration', M(MOTION.filter(([n]) => n.startsWith('duration')).map(([n]) => [n.replace('duration-', ''), ref(P + n)]))],
       ['transitionTimingFunction', M(MOTION.filter(([n]) => n.startsWith('easing')).map(([n]) => [n.replace('easing-', ''), ref(P + n)]))],
       ['zIndex', M(ZINDEX.map(([n]) => [n, ref(`${P}z-${n}`)]))],
-    ])]])], ['darkMode', ['selector', '[data-theme="dark"]']]]);
+    ])], ['screens', M(BREAKPOINT.map(([n, v]) => [n, `${int(v)}px`]))]])], ['darkMode', ['selector', '[data-theme="dark"]']]]);
     return '// YBM Design System — Tailwind preset\n'
       + `// ⚠ tokens/build.mjs 가 생성한다. 직접 고치지 말 것. 생성: ${date}\n`
       + '// 모든 값이 CSS 변수를 가리키므로 ybm-ds.css 를 함께 로드해야 동작한다.\n'

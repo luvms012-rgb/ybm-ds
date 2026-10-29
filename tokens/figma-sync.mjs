@@ -92,7 +92,8 @@ return res;
   const res = JSON.parse(fs.readFileSync(process.argv[3], 'utf8'));
   if (res.inSync) { console.log('변경 없음 — 스냅샷 그대로'); process.exit(0); }
   const log = [];
-  const next = { $meta: { ...snap.$meta, collections: {} }, collections: {} };
+  // cssOnly(모션·z-index·기준점)는 Figma 에 없고 손으로 관리하는 묶음이라 그대로 넘긴다
+  const next = { $meta: { ...snap.$meta, collections: {} }, collections: {}, cssOnly: snap.cssOnly };
   for (const [cname, info] of Object.entries(res.collections)) {
     const old = snap.collections[cname]?.variables || {};
     const vars = {};

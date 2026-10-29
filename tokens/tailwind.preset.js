@@ -1,5 +1,5 @@
 // YBM Design System — Tailwind preset
-// ⚠ tokens/build.mjs 가 생성한다. 직접 고치지 말 것. 생성: 2026-10-27
+// ⚠ tokens/build.mjs 가 생성한다. 직접 고치지 말 것. 생성: 2026-10-29
 // 모든 값이 CSS 변수를 가리키므로 ybm-ds.css 를 함께 로드해야 동작한다.
 // tailwind.config.js → module.exports = { presets: [require('./tokens/tailwind.preset.js')], … }
 
@@ -419,7 +419,9 @@ module.exports = {
       },
       "transitionTimingFunction": {
         "standard": "var(--ybm-easing-standard)",
-        "emphasized": "var(--ybm-easing-emphasized)"
+        "emphasized": "var(--ybm-easing-emphasized)",
+        "enter": "var(--ybm-easing-enter)",
+        "exit": "var(--ybm-easing-exit)"
       },
       "zIndex": {
         "base": "var(--ybm-z-base)",
@@ -429,6 +431,12 @@ module.exports = {
         "toast": "var(--ybm-z-toast)",
         "tooltip": "var(--ybm-z-tooltip)"
       }
+    },
+    "screens": {
+      "sm": "480px",
+      "md": "768px",
+      "lg": "1280px",
+      "xl": "1440px"
     }
   },
   "darkMode": [

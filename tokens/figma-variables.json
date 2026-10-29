@@ -2935,11 +2935,19 @@
   "cssOnly": {
     "fontFamilyCss": "\"Pretendard\", -apple-system, BlinkMacSystemFont, \"Apple SD Gothic Neo\", \"Malgun Gothic\", sans-serif",
     "motion": {
-      "duration-fast": "120ms",
+      "duration-fast": "150ms",
       "duration-normal": "200ms",
-      "duration-slow": "320ms",
-      "easing-standard": "cubic-bezier(0.2, 0, 0, 1)",
-      "easing-emphasized": "cubic-bezier(0.3, 0, 0, 1)"
+      "duration-slow": "300ms",
+      "easing-standard": "cubic-bezier(0.35, 0, 0.35, 1)",
+      "easing-emphasized": "cubic-bezier(0.03, 0.4, 0.1, 1)",
+      "easing-enter": "cubic-bezier(0, 0, 0.15, 1)",
+      "easing-exit": "cubic-bezier(0.35, 0, 1, 1)"
+    },
+    "breakpoint": {
+      "sm": 480,
+      "md": 768,
+      "lg": 1280,
+      "xl": 1440
     },
     "zIndex": {
       "base": 0,

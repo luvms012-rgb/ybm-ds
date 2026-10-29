@@ -48,7 +48,7 @@ git 에 올리지 않는 것(`.gitignore`): `tokens/.figma-check.js`, `tokens/.f
 |---|---|
 | 직접 편집 | `base.css` `icons.css` `components.css` `utilities.css` `ybm-ds.css` `ybm-ds.js` `index.html` `components.json` `sync.mjs` `tokens/build.mjs` `tokens/figma-sync.mjs` |
 | 생성물 (편집 금지) | `dist/tokens.css` `tokens/design-tokens.json` `tokens/tokens.js` `tokens/tailwind.preset.js` `tokens/.figma-check.js` |
-| 스냅샷 (sync 로만 갱신) | `tokens/figma-variables.json` |
+| 스냅샷 (sync 로만 갱신) | `tokens/figma-variables.json` - 단 `cssOnly` 묶음(글꼴 목록, 모션, z-index, 기준점)은 손으로 고친다 |
 
 ---
 
@@ -270,7 +270,9 @@ Figma 의 `dimension/x*` 변수 scopes = `WIDTH_HEIGHT` + `GAP`.
 | 5 | `0 8 10 -6` + `0 20 32 -5` | `--ybm-elevation-modal` - dialog, alert dialog, bottom sheet |
 
 ### 5.9 CSS 전용 시스템 토큰
-- Motion: `duration-fast 120ms`, `normal 200ms`, `slow 320ms`, `easing-standard cubic-bezier(.2,0,0,1)`, `easing-emphasized cubic-bezier(.3,0,0,1)`
+- Motion (2026-10-29 레퍼런스 가이드 값으로 맞춤): `duration-fast 150ms`(색 바뀜, 누름), `normal 200ms`, `slow 300ms`(시트, 패널 들어오기), `easing-standard cubic-bezier(.35,0,.35,1)`, `easing-emphasized cubic-bezier(.03,.4,.1,1)`(크게 들어오기), `easing-enter cubic-bezier(0,0,.15,1)`, `easing-exit cubic-bezier(.35,0,1,1)`
+- Breakpoint: `sm 480`, `md 768`, `lg 1280`, `xl 1440` - 작은 화면부터 쌓는다. `@media` 안에서는 변수를 못 쓰므로 숫자를 직접 쓰고, 숨김/보임은 유틸리티 `.u-hide-from-*` `.u-show-from-*`. 화면이 바뀌는 부품: Top Navigation ↔ Top App Bar, Side Panel ↔ Bottom Sheet 는 md(768) 기준, Side Navigation 은 lg 펼침 / md 접힘 / md 미만 Drawer
+- 모션과 기준점은 Figma 변수로 만들지 않는다(Figma 화면 동작에 연결되지 않음). 원본은 `tokens/figma-variables.json` 의 `cssOnly` 묶음이고 손으로 고친 뒤 `node sync.mjs build`
 - Z-index: `base 0`, `sticky 100`, `overlay 1000`, `dialog 1100`, `toast 1200`, `tooltip 1300`
 
 ---
@@ -370,7 +372,7 @@ CSS 는 Figma 프로퍼티 이름을 그대로 `data-*` 속성으로 쓴다: `<b
 - **Menu vs Select** - 동작 실행은 Menu, 값 고르기는 Select.
 - **Callout** - prefix 아이콘은 Solid 형. 전체 클릭형(actionable)에는 링크 텍스트 금지. 제목/본문/링크는 한 줄 인라인(띄어쓰기 두 칸으로 구분).
 - **Bottom Navigation** - 탭 3~5개, 라벨 한글 5자/영문 10자, 아이콘은 Solid, 뱃지 3개 이상 동시 노출 금지, count 1~99 (100↑ `99+`, 0 숨김).
-- **Side Navigation** - 하위 메뉴가 있는 항목은 클릭 시 이동 없이 펼침만, 하위가 활성이면 부모는 펼친 상태 유지. 반응형 lg=펼침 / md=접힘 / sm=Drawer.
+- **Side Navigation** - 하위 메뉴가 있는 항목은 클릭 시 이동 없이 펼침만, 하위가 활성이면 부모는 펼친 상태 유지. 반응형 lg(1280) 이상 펼침 / md(768) 이상 접힘 / 그보다 좁으면 Drawer.
 - **Divider** - 마지막 섹션 하단에 두지 않는다.
 - **List Item** - 상호작용 요소 4개 미만. 행 전체가 링크이면 안에 다른 버튼을 넣지 않는다.
 - **Tooltip vs Help Bubble** - Tooltip 은 아이콘 버튼 이름 같은 짧은 라벨(hover/focus 전용, 터치에서는 안 보임). 닫기/여러 줄 설명은 Help Bubble.
@@ -497,6 +499,7 @@ CSS 는 Figma 프로퍼티 이름을 그대로 `data-*` 속성으로 쓴다: `<b
 | 2026-10-29 | 54 Top App Bar(+ Button), 55 Top Navigation(+ Item), 56 Search Suggestion(+ Item), 57 File Attach(Dropzone/Trigger/Item) 를 Figma 와 CSS 에 함께 추가(레퍼런스 가이드 규격 기준). 아이콘 `upload`, `clock` 추가 |
 | 2026-10-29 | 58 Menu Sheet(+ Item, Close Button), 59 Result Section, 60 Timer, 61 Status Dot 추가. 로딩 표시는 Progress Circle indeterminate 로 대신(Spinner 없음). 아이콘 `share`, `link`, `trash` 추가 |
 | 2026-10-29 | 62 Checkbox Group, 63 Scroll Fog, 64 Pull To Refresh, 65 Side Panel, 66 Image Frame, 67 Carousel, 68 Markdown, 69 Code Block, 70 Citation, 71 Multi Select 추가(레퍼런스 가이드 규격 기준). 아이콘 `copy` 추가 |
+| 2026-10-29 | 반응형 기준점(sm 480 / md 768 / lg 1280 / xl 1440)과 숨김/보임 유틸리티 추가, 모션 값을 레퍼런스 가이드 값으로 맞추고 easing-enter / exit 추가, sync pull 이 cssOnly 를 지우던 문제 수정 |
 | 2026-10-28 | Figma 에만 있던 10종 CSS 완성과 등록(49~53), Popover/Time Picker/Chat 입력창 동작 |
 | 2026-10-27 | Figma 페이지를 레퍼런스 라이브러리 형식(카테고리 페이지 + 문서 프레임)으로 개편, 새 컴포넌트 10종(Figma 만). 모드 정리 - Typography 130%/150%, Shape Soft/Sharp 삭제, CSS 의 `data-shape` 테마(soft/sharp/square) 제거. 남은 모드는 Light / Dark |
 | 2026-10-22 | ds 를 단독 GitHub 저장소(ybm-ds) + Pages 로 분리, 가이드 사이트에서 DS 사본 제거(DS 주소 참조). 통합 동기화 `sync.mjs`/`동기화.bat`/`components.json`(Figma 노드 대조) 도입. `build.py` → `build.mjs`(출력 동일, Python 불필요). 컴포넌트 6종 추가(Divider/Tooltip/List/Breadcrumbs/Stepper/Banner - CSS/Figma 동시). 미리보기 `index.html` |

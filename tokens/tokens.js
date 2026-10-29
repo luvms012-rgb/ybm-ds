@@ -1,5 +1,5 @@
 // YBM Design System — tokens.js
-// ⚠ tokens/build.mjs 가 생성한다. 직접 고치지 말 것. 생성: 2026-10-27
+// ⚠ tokens/build.mjs 가 생성한다. 직접 고치지 말 것. 생성: 2026-10-29
 // CSS 변수명 → Light 모드 값. 다크 값은 design-tokens.json 을 참고.
 
 export const tokens = {
@@ -308,17 +308,23 @@ export const tokens = {
   "--ybm-elevation-panel": "var(--ybm-elevation-3)",
   "--ybm-elevation-floating": "var(--ybm-elevation-4)",
   "--ybm-elevation-modal": "var(--ybm-elevation-5)",
-  "--ybm-duration-fast": "120ms",
+  "--ybm-duration-fast": "150ms",
   "--ybm-duration-normal": "200ms",
-  "--ybm-duration-slow": "320ms",
-  "--ybm-easing-standard": "cubic-bezier(0.2, 0, 0, 1)",
-  "--ybm-easing-emphasized": "cubic-bezier(0.3, 0, 0, 1)",
+  "--ybm-duration-slow": "300ms",
+  "--ybm-easing-standard": "cubic-bezier(0.35, 0, 0.35, 1)",
+  "--ybm-easing-emphasized": "cubic-bezier(0.03, 0.4, 0.1, 1)",
+  "--ybm-easing-enter": "cubic-bezier(0, 0, 0.15, 1)",
+  "--ybm-easing-exit": "cubic-bezier(0.35, 0, 1, 1)",
   "--ybm-z-base": 0,
   "--ybm-z-sticky": 100,
   "--ybm-z-overlay": 1000,
   "--ybm-z-dialog": 1100,
   "--ybm-z-toast": 1200,
   "--ybm-z-tooltip": 1300,
+  "--ybm-breakpoint-sm": "480px",
+  "--ybm-breakpoint-md": "768px",
+  "--ybm-breakpoint-lg": "1280px",
+  "--ybm-breakpoint-xl": "1440px",
 };
 
 /** CSS 변수 참조 문자열을 돌려준다. ex) cssVar('--ybm-color-bg-canvas') */
