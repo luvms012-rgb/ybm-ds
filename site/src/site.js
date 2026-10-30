@@ -15,10 +15,18 @@
     frames().forEach(themeFrame);
   }
 
-  // 세그먼트 한 묶음 안에서 하나만 눌림
+  // 세그먼트 / 칩 탭 한 묶음 안에서 하나만 고름
   function press(btn) {
+    var tabs = btn.closest(".ds-chiptabs");
+    if (tabs) { tabs.querySelectorAll(".ds-chiptabs__trigger").forEach(function (b) { b.setAttribute("aria-selected", String(b === btn)); }); return; }
     btn.closest(".ds-segmented").querySelectorAll(".ds-segmented__item").forEach(function (b) { b.setAttribute("aria-pressed", String(b === btn)); });
   }
+  // 제목 줄 Figma 메뉴
+  function figmaMenu(btn, open) {
+    var menu = btn.parentElement.querySelector(".site-figma__menu");
+    btn.setAttribute("aria-expanded", String(open)); menu.hidden = !open;
+  }
+  function closeFigma() { document.querySelectorAll("[data-site-figma][aria-expanded='true']").forEach(function (b) { figmaMenu(b, false); }); }
 
   document.addEventListener("click", function (e) {
     var t = e.target;
@@ -26,6 +34,16 @@
 
     if (t.closest("[data-site-menu]")) { document.body.toggleAttribute("data-side-open"); var open = document.body.hasAttribute("data-side-open"); document.querySelectorAll("[data-site-menu]").forEach(function (b) { b.setAttribute("aria-expanded", String(open)); }); return; }
     if (t.closest("[data-site-close]")) { document.body.removeAttribute("data-side-open"); return; }
+
+    var fb = t.closest("[data-site-figma]");
+    if (fb) { var was = fb.getAttribute("aria-expanded") === "true"; closeFigma(); figmaMenu(fb, !was); return; }
+    var cl = t.closest("[data-site-copy-link]");
+    if (cl) {
+      closeFigma();
+      if (navigator.clipboard) navigator.clipboard.writeText(cl.getAttribute("data-site-copy-link")).then(function () { if (window.YBM) YBM.snackbar("Figma 링크를 복사했어요"); });
+      return;
+    }
+    if (!t.closest(".site-figma__menu")) closeFigma();
 
     // 예시: 미리보기 / 코드
     var view = t.closest("[data-site-view]");
@@ -79,7 +97,7 @@
     }
   });
 
-  document.addEventListener("keydown", function (e) { if (e.key === "Escape") document.body.removeAttribute("data-side-open"); });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") { document.body.removeAttribute("data-side-open"); closeFigma(); } });
 
   // 템플릿 원본 코드 불러오기 (http 로 열었을 때만)
   function loadSource(box) {
@@ -166,14 +184,21 @@
   window.addEventListener("resize", fitThumbs);
 
   // 컴포넌트 썸네일: 작은 부품은 실제 크기, 상자보다 크면 들어가게 줄인다(최소 0.5배, 그래도 크면 가운데만 보임)
+  // 컴포넌트 첫 그림(data-site-fit-max="2")은 상자에 맞게 최대 2배까지 키운다
   function fitTiles() {
     document.querySelectorAll(".site-tile__inner > .pv-stage").forEach(function (st) {
       var box = st.parentElement, cs = getComputedStyle(box);
       var aw = box.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
       var ah = box.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
       if (!aw || !ah) return;
+      var max = parseFloat(box.parentElement.getAttribute("data-site-fit-max")) || 1;
       var kids = [].slice.call(st.children), s;
       kids.forEach(function (k) { if ("siteHid" in k.dataset) { k.style.display = k.dataset.siteHid; delete k.dataset.siteHid; } });
+      if (max > 1) {
+        st.style.transform = ""; st.style.width = "max-content";
+        s = Math.min(max, aw / st.offsetWidth, ah / st.offsetHeight);
+        if (s >= 1) { st.style.transform = s > 1 ? "scale(" + s + ")" : ""; return; }
+      }
       for (;;) {
         st.style.transform = ""; st.style.width = aw + "px";
         s = Math.min(1, aw / st.scrollWidth, ah / st.scrollHeight);

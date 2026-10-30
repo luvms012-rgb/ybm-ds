@@ -33,15 +33,14 @@
 <aside class="site-side" id="site-side" aria-label="페이지 목록">
   <div class="site-side__top"><b>메뉴</b><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" data-site-close aria-label="메뉴 닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button></div>
   <div class="site-side__mobile"><nav class="site-nav" aria-label="주요 메뉴"><a class="site-nav__item" href="../index.html" aria-current="page">Get Started</a><a class="site-nav__item" href="../components/index.html">Components</a><a class="site-nav__item" href="../templates/index.html">Templates</a></nav><div class="site-nav__sep"></div></div>
-  <nav class="site-nav" aria-label="Get Started 메뉴"><a class="site-nav__item" href="../index.html">시작하기</a>
-<details class="site-nav__group" open><summary>가이드<i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i></summary><a class="site-nav__item" href="../get-started/usage.html" aria-current="page">사용 규칙</a><a class="site-nav__item" href="../get-started/scripts.html">스크립트</a></details>
-<details class="site-nav__group" open><summary>파운데이션<i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i></summary><a class="site-nav__item" href="../get-started/color.html">색</a><a class="site-nav__item" href="../get-started/typography.html">글자</a><a class="site-nav__item" href="../get-started/spacing.html">간격</a><a class="site-nav__item" href="../get-started/shape.html">모서리</a><a class="site-nav__item" href="../get-started/elevation.html">그림자</a><a class="site-nav__item" href="../get-started/motion.html">움직임</a><a class="site-nav__item" href="../get-started/icons.html">아이콘</a></details></nav>
+  <nav class="site-nav" aria-label="Get Started 메뉴"><a class="site-nav__item" href="../index.html">Overview</a>
+<div class="site-nav__group" role="group" aria-label="Guide"><p class="site-nav__label">Guide</p><a class="site-nav__item" href="../get-started/usage.html" aria-current="page">Usage</a><a class="site-nav__item" href="../get-started/scripts.html">Scripts</a></div>
+<div class="site-nav__group" role="group" aria-label="Foundations"><p class="site-nav__label">Foundations</p><a class="site-nav__item" href="../get-started/color.html">Color</a><a class="site-nav__item" href="../get-started/typography.html">Typography</a><a class="site-nav__item" href="../get-started/spacing.html">Spacing</a><a class="site-nav__item" href="../get-started/shape.html">Radius</a><a class="site-nav__item" href="../get-started/elevation.html">Elevation</a><a class="site-nav__item" href="../get-started/motion.html">Motion</a><a class="site-nav__item" href="../get-started/icons.html">Iconography</a></div></nav>
 </aside>
 <div class="site-scrim" data-site-close></div>
 <main class="site-main" id="main">
-<div class="site-main__row">
 <article class="site-doc">
-<header><h1 class="site-h1">사용 규칙</h1><p class="site-lead">DS 를 불러오는 순서와 모양을 바꾸는 방법, 화면 모드와 반응형 기준을 정리했습니다.</p><div class="site-toc-select"><select aria-label="이 페이지 목차" data-site-toc><option value="order">불러오는 순서</option><option value="custom">모양 바꾸기</option><option value="state">상태는 HTML 속성으로</option><option value="theme">화면 모드</option><option value="breakpoint">반응형 기준점</option><option value="korean">한글 줄바꿈</option><option value="icon">아이콘</option></select><i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i></div>
+<header class="site-head"><div class="site-head__top"><span class="site-head__crumb">Guide</span></div><h1 class="site-h1">사용 규칙</h1><p class="site-lead">DS 를 불러오는 순서와 모양을 바꾸는 방법, 화면 모드와 반응형 기준을 정리했습니다.</p><div class="site-toc-select"><select aria-label="이 페이지 목차" data-site-toc><option value="order">불러오는 순서</option><option value="custom">모양 바꾸기</option><option value="state">상태는 HTML 속성으로</option><option value="theme">화면 모드</option><option value="breakpoint">반응형 기준점</option><option value="korean">한글 줄바꿈</option><option value="icon">아이콘</option></select><i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i></div>
 </header>
 
 <h2 id="order">불러오는 순서<a class="site-anchor" href="#order" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
@@ -104,10 +103,17 @@
 
 <h2 id="icon">아이콘<a class="site-anchor" href="#icon" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
 <p>UI 아이콘은 Lucide 한 가지만 씁니다. 색은 부모 글자색을 따르고, 크기는 기본 20, <code>ds-icon--sm</code> 16, <code>ds-icon--lg</code> 24 입니다. 목록은 <a class="ds-link" href="../get-started/icons.html">아이콘</a> 에 있어요.</p>
+<nav class="site-pager" aria-label="이전, 다음 문서"><a href="../index.html" data-dir="prev"><span class="site-pager__label"><i class="ds-icon ds-icon--chevron-left ds-icon--sm" aria-hidden="true"></i>이전 문서</span><b>시작하기</b></a><a href="../get-started/scripts.html" data-dir="next"><span class="site-pager__label">다음 문서<i class="ds-icon ds-icon--chevron-right ds-icon--sm" aria-hidden="true"></i></span><b>스크립트</b></a></nav>
+<footer class="site-footer">
+  <div class="site-footer__brand"><img src="../assets/logo-ybmnet.svg" alt="YBM NET" width="81" height="24"><p class="site-footer__copy">© 2026 YBM NET. All rights reserved.</p></div>
+  <nav class="site-footer__nav" aria-label="사이트 메뉴">
+    <div><p class="site-footer__title">Menu</p><a href="../index.html">Get Started</a><a href="../components/index.html">Components</a><a href="../templates/index.html">Templates</a></div>
+    <div><p class="site-footer__title">More</p><a href="https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=2274-1143" target="_blank" rel="noopener">Figma</a><a href="https://github.com/luvms012-rgb/ybm-ds" target="_blank" rel="noopener">GitHub</a></div>
+  </nav>
+</footer>
 </article>
-<aside class="site-toc" aria-label="이 페이지 목차"><nav><span class="site-toc__indicator" aria-hidden="true"></span><a href="#order">불러오는 순서</a><a href="#custom">모양 바꾸기</a><a href="#state">상태는 HTML 속성으로</a><a href="#theme">화면 모드</a><a href="#breakpoint">반응형 기준점</a><a href="#korean">한글 줄바꿈</a><a href="#icon">아이콘</a></nav></aside>
-</div>
 </main>
+<aside class="site-toc" aria-label="이 페이지 목차"><p class="site-toc__title">목차</p><nav><span class="site-toc__indicator" aria-hidden="true"></span><a href="#order">불러오는 순서</a><a href="#custom">모양 바꾸기</a><a href="#state">상태는 HTML 속성으로</a><a href="#theme">화면 모드</a><a href="#breakpoint">반응형 기준점</a><a href="#korean">한글 줄바꿈</a><a href="#icon">아이콘</a></nav></aside>
 </div>
 </body>
 </html>
