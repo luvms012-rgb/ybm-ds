@@ -161,7 +161,8 @@ const GS = [['가이드', [['get-started/usage.html', '사용 규칙'], ['get-st
 
 function sideNav(section, file, root) {
   const item = (href, label) => `<a class="site-nav__item" href="${root}${href}"${href === file ? ' aria-current="page"' : ''}>${esc(label)}</a>`;
-  const group = (label, items, open) => `<details class="site-nav__group"${open ? ' open' : ''}><summary>${esc(label)}<i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i></summary>${items.join('')}</details>`;
+  // 레퍼런스 B 왼쪽 메뉴처럼 접지 않는 묶음: 작은 묶음 이름 + 항목
+  const group = (label, items) => `<div class="site-nav__group" role="group" aria-label="${esc(label)}"><p class="site-nav__label">${esc(label)}</p>${items.join('')}</div>`;
   const parts = [];
   if (section === 'get-started') {
     parts.push(item('index.html', '시작하기'));
@@ -200,7 +201,7 @@ function page({ file, title, section, body, wide = false, desc = '' }) {
   });
   const hasToc = !wide && heads.length > 1;
   const tocSelect = hasToc ? `<div class="site-toc-select"><select aria-label="이 페이지 목차" data-site-toc>${heads.map(([id, t]) => `<option value="${id}">${esc(t)}</option>`).join('')}</select><i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i></div>` : '';
-  body = body.replace('</header>', `</header>\n${tocSelect}`);
+  body = body.replace('</header>', `${tocSelect}\n</header>`);
   const html = `<!doctype html>
 <html lang="ko">
 <head>
@@ -234,11 +235,13 @@ ${desc ? `<meta name="description" content="${esc(desc)}">\n` : ''}<!-- 생성�
 ${sideNav(section, file, root)}
 <div class="site-scrim" data-site-close></div>
 <main class="site-main" id="main">
+<div class="site-main__row">
 <article class="site-doc">
 ${body}
 </article>
+${hasToc ? `<aside class="site-toc" aria-label="이 페이지 목차"><nav><span class="site-toc__indicator" aria-hidden="true"></span>${heads.map(([id, t]) => `<a href="#${id}">${esc(t)}</a>`).join('')}</nav></aside>` : ''}
+</div>
 </main>
-${hasToc ? `<aside class="site-toc" aria-label="이 페이지 목차"><nav>${heads.map(([id, t]) => `<a href="#${id}">${esc(t)}</a>`).join('')}</nav></aside>` : ''}
 </div>
 </body>
 </html>
@@ -269,7 +272,7 @@ const prompts = [
 - 부품은 ${PUBLIC}/components.json 에 있는 것만 쓰고, 마크업은 ${RAW}/dist/components.css 머리 주석 그대로 써.
 - 비슷한 화면이 ${SITE_URL}templates/index.html 에 있으면 그 템플릿을 출발점으로 써.
 - 모바일 먼저 만들고, 768px 이상과 1280px 이상에서 배치를 바꿔 줘.
-- 글자는 한국어. 큰 제목 500 굵기와 자간 -0.025em, 섹션 제목 500, 본문 16px 줄 높이 28px, 본문 word-break: keep-all.
+- 글자는 한국어. 제목 500 굵기, 본문 16px 줄 높이 28px, 자간은 주지 않고, 본문 word-break: keep-all.
 - 배치용 CSS 에는 --ybm-* 토큰만 쓰고 hex 색은 쓰지 마.`],
   ['규칙 점검하기', '이미 만든 화면이 DS 규칙을 지키는지 확인하고 고칩니다.',
     `이 화면이 YBM DS 규칙을 지키는지 점검하고 고쳐 줘.
@@ -384,7 +387,7 @@ const colorTables = Object.entries(colorGroups).map(([k, label]) => {
 }).join('\n');
 const typeRows = tokRe(/--ybm-font-size-(t\d\d): (\d+)px/g).map((m) => {
   const lh = (tokensCss.match(new RegExp(`--ybm-line-height-${m[1]}: (\\d+)px`)) || [])[1];
-  return [`<code>${m[1]}</code>`, `${m[2]} / ${lh}`, `<span class="site-sample" style="font-size: var(--ybm-font-size-${m[1]}); line-height: var(--ybm-line-height-${m[1]}); font-weight: var(--ybm-font-weight-bold); letter-spacing: ${+m[2] >= 32 ? '-0.025em' : '0'}">가나다 Aa 123</span>`];
+  return [`<code>${m[1]}</code>`, `${m[2]} / ${lh}`, `<span class="site-sample" style="font-size: var(--ybm-font-size-${m[1]}); line-height: var(--ybm-line-height-${m[1]}); font-weight: var(--ybm-font-weight-bold); letter-spacing: 0">가나다 Aa 123</span>`];
 });
 const spaceRows = tokRe(/--ybm-space-(x[0-9_]+): (\d+)px/g).map((m) => [`<code>--ybm-space-${m[1]}</code>`, `${m[2]}px`, `<span class="site-bar" style="width: var(--ybm-space-${m[1]})"></span>`]);
 const shapeRows = tokRe(/--ybm-shape-([a-z0-9]+): ([^;]+);/g).map((m) => [`<code>--ybm-shape-${m[1]}</code>`, esc(m[2]), `<span class="site-shape" style="border-radius: var(--ybm-shape-${m[1]})"></span>`]);
@@ -399,7 +402,7 @@ write({
 ${colorTables}
 <h2 id="type">글자</h2>
 <p>글꼴은 Pretendard 입니다. 크기는 <code>--ybm-font-size-t01</code> ~ <code>t17</code>, 줄 높이는 같은 번호의 <code>--ybm-line-height-*</code> 를 짝으로 씁니다. 굵기는 regular 400, medium 500, semibold 600, bold 700 입니다.</p>
-<p>한글 위계: 페이지 제목 40/48 medium(500) 자간 -1px, 리드 16/24 light(300), 섹션 제목 24/32 medium, 소제목 16/22 medium, 본문 16/28 regular, 보조 글 14 regular 입니다. 큰 제목에만 자간을 줄이고 나머지는 그대로 둡니다.</p>
+<p>한글 위계: 페이지 제목 40/48 medium(500), 리드 16/24 light(300), 섹션 제목 24/32 medium, 소제목 16/22 medium, 본문 16/28 regular, 보조 글 14 regular 입니다. 자간은 주지 않습니다.</p>
 ${table(['이름', '크기 / 줄 높이 (px)', '보기'], typeRows)}
 <h2 id="space">간격</h2>
 <p>4px 단위를 기본으로 하고, 작은 간격은 2px 단위도 씁니다. 화면 좌우 여백은 <code>--ybm-space-x-global-gutter</code> 입니다.</p>

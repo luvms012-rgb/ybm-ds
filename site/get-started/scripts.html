@@ -34,14 +34,15 @@
   <div class="site-side__top"><b>메뉴</b><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" data-site-close aria-label="메뉴 닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button></div>
   <div class="site-side__mobile"><nav class="site-nav" aria-label="주요 메뉴"><a class="site-nav__item" href="../index.html" aria-current="page">Get Started</a><a class="site-nav__item" href="../components/index.html">Components</a><a class="site-nav__item" href="../templates/index.html">Templates</a></nav><div class="site-nav__sep"></div></div>
   <nav class="site-nav" aria-label="Get Started 메뉴"><a class="site-nav__item" href="../index.html">시작하기</a>
-<details class="site-nav__group" open><summary>가이드<i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i></summary><a class="site-nav__item" href="../get-started/usage.html">사용 규칙</a><a class="site-nav__item" href="../get-started/scripts.html" aria-current="page">스크립트</a></details>
-<details class="site-nav__group" open><summary>파운데이션<i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i></summary><a class="site-nav__item" href="../get-started/tokens.html">토큰</a><a class="site-nav__item" href="../get-started/icons.html">아이콘</a></details></nav>
+<div class="site-nav__group" role="group" aria-label="가이드"><p class="site-nav__label">가이드</p><a class="site-nav__item" href="../get-started/usage.html">사용 규칙</a><a class="site-nav__item" href="../get-started/scripts.html" aria-current="page">스크립트</a></div>
+<div class="site-nav__group" role="group" aria-label="파운데이션"><p class="site-nav__label">파운데이션</p><a class="site-nav__item" href="../get-started/tokens.html">토큰</a><a class="site-nav__item" href="../get-started/icons.html">아이콘</a></div></nav>
 </aside>
 <div class="site-scrim" data-site-close></div>
 <main class="site-main" id="main">
+<div class="site-main__row">
 <article class="site-doc">
-<header><h1 class="site-h1">스크립트</h1><p class="site-lead"><code>ybm-ds.js</code> 는 CSS 만으로 안 되는 동작만 맡습니다. 불러오기만 하면 HTML 속성을 보고 알아서 동작해요.</p></header>
-<div class="site-toc-select"><select aria-label="이 페이지 목차" data-site-toc><option value="features">하는 일</option><option value="api">직접 부르는 기능</option></select><i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i></div>
+<header><h1 class="site-h1">스크립트</h1><p class="site-lead"><code>ybm-ds.js</code> 는 CSS 만으로 안 되는 동작만 맡습니다. 불러오기만 하면 HTML 속성을 보고 알아서 동작해요.</p><div class="site-toc-select"><select aria-label="이 페이지 목차" data-site-toc><option value="features">하는 일</option><option value="api">직접 부르는 기능</option></select><i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i></div>
+</header>
 <h2 id="features">하는 일<a class="site-anchor" href="#features" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
 <div class="ds-table-wrap"><table class="ds-table" data-density="compact">
 <thead><tr><th scope="col">부품</th><th scope="col">하는 일</th></tr></thead>
@@ -56,6 +57,7 @@
 <tr><td><b>Search Suggestion</b></td><td>입력 칸(role=combobox, aria-controls)에서 위아래 화살표로 줄 고르기, Enter 로 그 줄 누르기</td></tr>
 <tr><td><b>Menu Sheet</b></td><td>Dialog 와 같이 열고 닫기, 바깥(dim) 클릭 닫기</td></tr>
 <tr><td><b>Timer</b></td><td>data-start(흐른 시간) / data-end(남은 시간)로 1초마다 글자를 바꾸고, 남은 시간이 0 이면 ds-timer-end 이벤트</td></tr>
+<tr><td><b>Segmented Control</b></td><td>누르면 하나만 aria-pressed, change 이벤트. 선택 배경이 고른 항목으로 미끄러져 이동(위치는 --ds-seg-x / --ds-seg-w)</td></tr>
 <tr><td><b>Side Panel</b></td><td>Dialog 와 같이 열고 닫기, 본문이 스크롤되면 data-scrolled</td></tr>
 <tr><td><b>Pull To Refresh</b></td><td>터치로 당긴 거리 표시, 넘겨 놓으면 ds-refresh 이벤트, YBM.endRefresh(요소) 로 되돌리기</td></tr>
 <tr><td><b>Carousel</b></td><td>처음/끝이면 data-at-start / data-at-end, 버튼으로 한 화면씩 넘기기</td></tr>
@@ -79,8 +81,9 @@
 &lt;/script&gt;</code></pre>
 </figure>
 </article>
+<aside class="site-toc" aria-label="이 페이지 목차"><nav><span class="site-toc__indicator" aria-hidden="true"></span><a href="#features">하는 일</a><a href="#api">직접 부르는 기능</a></nav></aside>
+</div>
 </main>
-<aside class="site-toc" aria-label="이 페이지 목차"><nav><a href="#features">하는 일</a><a href="#api">직접 부르는 기능</a></nav></aside>
 </div>
 </body>
 </html>

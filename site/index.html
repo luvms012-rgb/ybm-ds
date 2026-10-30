@@ -35,17 +35,18 @@
   <div class="site-side__top"><b>메뉴</b><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" data-site-close aria-label="메뉴 닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button></div>
   <div class="site-side__mobile"><nav class="site-nav" aria-label="주요 메뉴"><a class="site-nav__item" href="index.html" aria-current="page">Get Started</a><a class="site-nav__item" href="components/index.html">Components</a><a class="site-nav__item" href="templates/index.html">Templates</a></nav><div class="site-nav__sep"></div></div>
   <nav class="site-nav" aria-label="Get Started 메뉴"><a class="site-nav__item" href="index.html" aria-current="page">시작하기</a>
-<details class="site-nav__group" open><summary>가이드<i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i></summary><a class="site-nav__item" href="get-started/usage.html">사용 규칙</a><a class="site-nav__item" href="get-started/scripts.html">스크립트</a></details>
-<details class="site-nav__group" open><summary>파운데이션<i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i></summary><a class="site-nav__item" href="get-started/tokens.html">토큰</a><a class="site-nav__item" href="get-started/icons.html">아이콘</a></details></nav>
+<div class="site-nav__group" role="group" aria-label="가이드"><p class="site-nav__label">가이드</p><a class="site-nav__item" href="get-started/usage.html">사용 규칙</a><a class="site-nav__item" href="get-started/scripts.html">스크립트</a></div>
+<div class="site-nav__group" role="group" aria-label="파운데이션"><p class="site-nav__label">파운데이션</p><a class="site-nav__item" href="get-started/tokens.html">토큰</a><a class="site-nav__item" href="get-started/icons.html">아이콘</a></div></nav>
 </aside>
 <div class="site-scrim" data-site-close></div>
 <main class="site-main" id="main">
+<div class="site-main__row">
 <article class="site-doc">
 <header>
   <h1 class="site-h1">시작하기</h1>
   <p class="site-lead">YBM DS 를 프로젝트에 넣고 바로 화면을 만들어 보세요.</p>
-</header>
 <div class="site-toc-select"><select aria-label="이 페이지 목차" data-site-toc><option value="ai">AI 로 빠르게 시작하기</option><option value="install">설치</option><option value="first">첫 컴포넌트 넣기</option><option value="theme">다크 모드</option><option value="custom">모양 바꾸기</option><option value="other">다른 설치 방법</option><option value="next">다음으로</option></select><i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i></div>
+</header>
 
 <h2 id="ai">AI 로 빠르게 시작하기<a class="site-anchor" href="#ai" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
 <p>아래 내용을 AI 코딩 도구(ChatGPT, Claude, Cursor 등)에 붙여 넣으면 설치부터 규칙까지 알아서 맞춰요.</p>
@@ -69,7 +70,7 @@
 - 부품은 https://luvms012-rgb.github.io/ybm-ds/components.json 에 있는 것만 쓰고, 마크업은 https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/components.css 머리 주석 그대로 써.
 - 비슷한 화면이 https://luvms012-rgb.github.io/ybm-ds/site/templates/index.html 에 있으면 그 템플릿을 출발점으로 써.
 - 모바일 먼저 만들고, 768px 이상과 1280px 이상에서 배치를 바꿔 줘.
-- 글자는 한국어. 큰 제목 500 굵기와 자간 -0.025em, 섹션 제목 500, 본문 16px 줄 높이 28px, 본문 word-break: keep-all.
+- 글자는 한국어. 제목 500 굵기, 본문 16px 줄 높이 28px, 자간은 주지 않고, 본문 word-break: keep-all.
 - 배치용 CSS 에는 --ybm-* 토큰만 쓰고 hex 색은 쓰지 마.</code></pre>
 </figure>
 <p>이미 만든 화면이 있다면 DS 규칙을 지키는지 점검하게 할 수 있어요.</p>
@@ -156,8 +157,9 @@ module.exports = { presets: [require('./tailwind.preset.js')] };</code></pre>
   <a class="site-card" href="templates/index.html"><div class="site-card__body"><p class="site-card__title">템플릿</p><p class="site-card__desc">자주 쓰는 화면을 통째로 복사해 출발점으로 씁니다.</p></div></a>
 </div>
 </article>
+<aside class="site-toc" aria-label="이 페이지 목차"><nav><span class="site-toc__indicator" aria-hidden="true"></span><a href="#ai">AI 로 빠르게 시작하기</a><a href="#install">설치</a><a href="#first">첫 컴포넌트 넣기</a><a href="#theme">다크 모드</a><a href="#custom">모양 바꾸기</a><a href="#other">다른 설치 방법</a><a href="#next">다음으로</a></nav></aside>
+</div>
 </main>
-<aside class="site-toc" aria-label="이 페이지 목차"><nav><a href="#ai">AI 로 빠르게 시작하기</a><a href="#install">설치</a><a href="#first">첫 컴포넌트 넣기</a><a href="#theme">다크 모드</a><a href="#custom">모양 바꾸기</a><a href="#other">다른 설치 방법</a><a href="#next">다음으로</a></nav></aside>
 </div>
 </body>
 </html>

@@ -1136,6 +1136,7 @@ button.ds-input__prefix:hover { color: var(--ybm-color-fg-neutral); }
      <div class="ds-segmented" role="group" aria-label="보기 방식" [data-size="medium"] [data-layout="fill"]>
        <button type="button" class="ds-segmented__item" aria-pressed="true">목록</button>
      </div>
+   모션: 선택 배경이 고른 항목으로 미끄러져 이동한다(필수, ybm-ds.js). 누르면 aria-pressed 가 바뀌고 change 이벤트가 난다.
    Figma small : 트랙 bg/neutral · padding 2 · shape/sm / item py6 px12 · shape/xs · t03 Bold fg/neutral-subtle
          medium: 트랙 shape/lg / item py8 px16 · shape/sm · t04 Bold
          selected bg/layer-default + elevation raised + fg/neutral · disabled fg/disabled
@@ -1175,28 +1176,28 @@ button.ds-input__prefix:hover { color: var(--ybm-color-fg-neutral); }
 }
 .ds-segmented__item[aria-pressed="true"] { background: var(--ybm-color-bg-layer-default); color: var(--ybm-color-fg-neutral); box-shadow: var(--ybm-elevation-raised); }
 .ds-segmented__item:disabled { color: var(--ybm-color-fg-disabled); cursor: not-allowed; }
-/* 모션 — fill 에서는 선택 배경이 선택한 항목으로 미끄러져 이동한다(항목 2~4개). aria-pressed 만 바꾸면 된다. */
-.ds-segmented[data-layout="fill"] { --ds-seg-count: 2; --ds-seg-index: 0; position: relative; isolation: isolate; }
-.ds-segmented[data-layout="fill"]:has(> .ds-segmented__item:nth-child(3):last-child) { --ds-seg-count: 3; }
-.ds-segmented[data-layout="fill"]:has(> .ds-segmented__item:nth-child(4):last-child) { --ds-seg-count: 4; }
-.ds-segmented[data-layout="fill"]:has(> .ds-segmented__item:nth-child(2)[aria-pressed="true"]) { --ds-seg-index: 1; }
-.ds-segmented[data-layout="fill"]:has(> .ds-segmented__item:nth-child(3)[aria-pressed="true"]) { --ds-seg-index: 2; }
-.ds-segmented[data-layout="fill"]:has(> .ds-segmented__item:nth-child(4)[aria-pressed="true"]) { --ds-seg-index: 3; }
-.ds-segmented[data-layout="fill"]::before {
+/* 모션 (필수) — 선택 배경(indicator)이 고른 항목으로 미끄러져 이동한다. hug, fill 모두.
+   ybm-ds.js 가 고른 항목 위치를 --ds-seg-x / --ds-seg-w 에 넣고 data-ds-ready 를 붙인다. 항목을 누르면 aria-pressed 도 바꾼다.
+   스크립트가 없으면 고른 항목 자체에 배경이 그려진다(움직임 없음).
+   레퍼런스 값: 200ms, standard easing / 동작 줄이기 설정이면 움직이지 않는다 */
+.ds-segmented { position: relative; isolation: isolate; }
+.ds-segmented::before {
   content: "";
   position: absolute;
   z-index: -1;
   inset-block: var(--ybm-space-x0_5);
-  inset-inline-start: var(--ybm-space-x0_5);
-  width: calc((100% - var(--ybm-space-x0_5) * 2) / var(--ds-seg-count));
+  left: 0;
+  width: var(--ds-seg-w, 0px);
   border-radius: var(--ds-seg-item-radius);
   background: var(--ybm-color-bg-layer-default);
   box-shadow: var(--ybm-elevation-raised);
-  translate: calc(var(--ds-seg-index) * 100%) 0;
-  transition: translate var(--ybm-duration-normal) var(--ybm-easing-emphasized);
+  translate: var(--ds-seg-x, 0px) 0;
+  opacity: 0;
+  pointer-events: none;
 }
-.ds-segmented[data-layout="fill"]:not(:has(> [aria-pressed="true"]))::before { opacity: 0; }
-.ds-segmented[data-layout="fill"] > .ds-segmented__item[aria-pressed="true"] { background: transparent; box-shadow: none; }
+.ds-segmented[data-ds-ready]::before { opacity: 1; transition: translate var(--ybm-duration-normal) var(--ybm-easing-standard), width var(--ybm-duration-normal) var(--ybm-easing-standard); }
+.ds-segmented[data-ds-ready] > .ds-segmented__item[aria-pressed="true"] { background: transparent; box-shadow: none; }
+@media (prefers-reduced-motion: reduce) { .ds-segmented[data-ds-ready]::before { transition: none; } }
 
 
 /* --------------------------------------------------------------------------

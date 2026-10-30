@@ -118,12 +118,18 @@
   function spy() {
     var links = [].slice.call(document.querySelectorAll(".site-toc a"));
     if (!links.length || !("IntersectionObserver" in window)) return;
-    links[0].setAttribute("aria-current", "true");  // 처음에는 첫 항목
+    var bar = document.querySelector(".site-toc__indicator");
+    function mark(a) {
+      links.forEach(function (l) { l.removeAttribute("aria-current"); });
+      a.setAttribute("aria-current", "true");
+      if (bar) { bar.style.translate = "0 " + a.offsetTop + "px"; bar.style.height = a.offsetHeight + "px"; }
+    }
+    mark(links[0]);  // 처음에는 첫 항목
     var map = {};
     links.forEach(function (a) { map[a.getAttribute("href").slice(1)] = a; });
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {
-        if (en.isIntersecting) { links.forEach(function (a) { a.removeAttribute("aria-current"); }); var a = map[en.target.id]; if (a) a.setAttribute("aria-current", "true"); }
+        if (en.isIntersecting) { var a = map[en.target.id]; if (a) mark(a); }
       });
     }, { rootMargin: "-80px 0px -70% 0px" });
     Object.keys(map).forEach(function (id) { var h = document.getElementById(id); if (h) io.observe(h); });

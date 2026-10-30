@@ -13,6 +13,7 @@
      · Search Suggestion — 입력 칸(role=combobox, aria-controls)에서 위아래 화살표로 줄 고르기, Enter 로 그 줄 누르기
      · Menu Sheet — Dialog 와 같이 열고 닫기, 바깥(dim) 클릭 닫기
      · Timer — data-start(흐른 시간) / data-end(남은 시간)로 1초마다 글자를 바꾸고, 남은 시간이 0 이면 ds-timer-end 이벤트
+     · Segmented Control — 누르면 하나만 aria-pressed, change 이벤트. 선택 배경이 고른 항목으로 미끄러져 이동(위치는 --ds-seg-x / --ds-seg-w)
      · Side Panel — Dialog 와 같이 열고 닫기, 본문이 스크롤되면 data-scrolled
      · Pull To Refresh — 터치로 당긴 거리 표시, 넘겨 놓으면 ds-refresh 이벤트, YBM.endRefresh(요소) 로 되돌리기
      · Carousel — 처음/끝이면 data-at-start / data-at-end, 버튼으로 한 화면씩 넘기기
@@ -234,6 +235,35 @@
     if (p.circle) { p.circle.removeAttribute("data-type"); p.circle.style.setProperty("--ds-progress-value", 0); }
   }
 
+  /* ---- Segmented Control: 하나만 누름 + 선택 배경 미끄러짐 ------------------- */
+  function syncSegmented(seg) {
+    var cur = seg.querySelector(".ds-segmented__item[aria-pressed='true']");
+    if (!cur || !cur.offsetWidth) { seg.removeAttribute("data-ds-ready"); return; }
+    seg.style.setProperty("--ds-seg-x", cur.offsetLeft + "px");
+    seg.style.setProperty("--ds-seg-w", cur.offsetWidth + "px");
+    // 처음 위치를 잡은 다음 프레임부터 움직임을 켠다(처음 그릴 때 미끄러지지 않게)
+    if (!seg.hasAttribute("data-ds-ready")) { var ready = function () { seg.setAttribute("data-ds-ready", ""); }; requestAnimationFrame(ready); setTimeout(ready, 60); }
+  }
+  var segObserver = "ResizeObserver" in window ? new ResizeObserver(function (list) { list.forEach(function (e) { syncSegmented(e.target); }); }) : null;
+  function watchSegmented(seg) {
+    if (seg.__dsSeg) return;
+    seg.__dsSeg = true;
+    syncSegmented(seg);
+    if (segObserver) segObserver.observe(seg);
+  }
+  document.addEventListener("click", function (e) {
+    var item = e.target.closest && e.target.closest(".ds-segmented__item");
+    if (!item || item.disabled) return;
+    var seg = item.closest(".ds-segmented");
+    if (item.getAttribute("aria-pressed") === "true") return;
+    seg.querySelectorAll(".ds-segmented__item").forEach(function (b) { b.setAttribute("aria-pressed", String(b === item)); });
+    seg.dispatchEvent(new CustomEvent("change", { bubbles: true, detail: { value: item.value || item.textContent.trim() } }));
+  });
+  // aria-pressed 를 코드로 바꿔도 따라 움직인다
+  if ("MutationObserver" in window) new MutationObserver(function (list) {
+    list.forEach(function (m) { var seg = m.target.closest && m.target.closest(".ds-segmented"); if (seg) syncSegmented(seg); });
+  }).observe(document.documentElement, { subtree: true, attributes: true, attributeFilter: ["aria-pressed"] });
+
   /* ---- 초기화: 페이지에 이미 있는 요소 ------------------------------------- */
   function init(root) {
     (root || document).querySelectorAll(".ds-slider").forEach(syncSlider);
@@ -245,6 +275,7 @@
     });
     (root || document).querySelectorAll(".ds-chat-composer__input").forEach(syncComposer);
     tickTimers();
+    (root || document).querySelectorAll(".ds-segmented").forEach(watchSegmented);
     (root || document).querySelectorAll(".ds-carousel").forEach(syncCarousel);
     (root || document).querySelectorAll(".ds-multiselect__panel[id]").forEach(syncMultiSelect);
   }

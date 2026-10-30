@@ -301,7 +301,7 @@ CSS 는 Figma 프로퍼티 이름을 그대로 `data-*` 속성으로 쓴다: `<b
 | 15 | Chip | `.ds-chip` `.ds-chip-group` | `69:964`, 54 | variant `solid/outlineStrong/outlineWeak`, size, layout `iconOnly` |
 | 16 | Chip Tabs | `.ds-chiptabs` (`__trigger`) | `1407:2596`, 4 / Trigger `1407:2522`, 16 | variant `neutralSolid/neutralOutline`, size `medium/large` |
 | 17 | Tabs | `.ds-tabs` (`__trigger`) | `95:1313`, 4 / Tab Trigger `95:1272`, 12 | layout `fill/hug`, size |
-| 18 | Segmented Control | `.ds-segmented` | `1239:2152`, 4 / Item `1239:2123`, 6 | layout, size |
+| 18 | Segmented Control | `.ds-segmented` | `1239:2152`, 4 / Item `1239:2123`, 6 | layout, size, 선택 배경이 미끄러져 이동(필수 모션, ybm-ds.js) |
 | 19 | Toggle Button | `.ds-toggle` | `1244:2164`, 6 | size |
 | 20 | Badge | `.ds-badge` | `17:87`, 36 | variant `weak/solid/outline`, tone `neutral/brand/informative/positive/warning/critical`, size |
 | 21 | Tag Group | `.ds-tag-group` | `1240:2176`, 4 / Item `1240:2135`, 4 | 작성자, 날짜, 조회수 |
@@ -361,7 +361,7 @@ CSS 는 Figma 프로퍼티 이름을 그대로 `data-*` 속성으로 쓴다: `<b
 ### 6.2 사용 지침 (Do / Don't)
 - **Action Button** - 강조(High emphasis)는 화면당 1개, 3개 이상 나란히 금지.
 - **Badge** - 클릭 불가, 표시 전용.
-- **Segmented Control** - 항목 2~4개, 화면당 1개.
+- **Segmented Control** - 항목 2~4개, 화면당 1개. 고르면 선택 배경이 미끄러져 이동하는 모션은 빼지 않는다.
 - **Switch** - 즉시 반영되는 설정에만. 저장 버튼이 따로 있으면 Checkbox.
 - **Snackbar** - 4초, 동시 1개.
 - **Chip Tabs** - 콘텐츠 카테고리 전환용. 주요 내비게이션은 Tabs. variant 혼용 금지.
@@ -501,6 +501,7 @@ CSS 는 Figma 프로퍼티 이름을 그대로 `data-*` 속성으로 쓴다: `<b
 | 2026-10-29 | 62 Checkbox Group, 63 Scroll Fog, 64 Pull To Refresh, 65 Side Panel, 66 Image Frame, 67 Carousel, 68 Markdown, 69 Code Block, 70 Citation, 71 Multi Select 추가(레퍼런스 가이드 규격 기준). 아이콘 `copy` 추가 |
 | 2026-10-29 | 반응형 기준점(sm 480 / md 768 / lg 1280 / xl 1440)과 숨김/보임 유틸리티 추가, 모션 값을 레퍼런스 가이드 값으로 맞추고 easing-enter / exit 추가, sync pull 이 cssOnly 를 지우던 문제 수정 |
 | 2026-10-30 | 문서 사이트(site/) 첫 버전: Get Started / Components 70종 / Templates 9종, 생성기 `node site/build.mjs`. Code Block 에 data-wrap 추가 |
+| 2026-10-30 | Segmented Control 선택 배경 미끄러짐 모션을 hug, fill 모두에 적용(ybm-ds.js 가 위치 계산, 누르면 aria-pressed 와 change 이벤트) |
 | 2026-10-28 | Figma 에만 있던 10종 CSS 완성과 등록(49~53), Popover/Time Picker/Chat 입력창 동작 |
 | 2026-10-27 | Figma 페이지를 레퍼런스 라이브러리 형식(카테고리 페이지 + 문서 프레임)으로 개편, 새 컴포넌트 10종(Figma 만). 모드 정리 - Typography 130%/150%, Shape Soft/Sharp 삭제, CSS 의 `data-shape` 테마(soft/sharp/square) 제거. 남은 모드는 Light / Dark |
 | 2026-10-22 | ds 를 단독 GitHub 저장소(ybm-ds) + Pages 로 분리, 가이드 사이트에서 DS 사본 제거(DS 주소 참조). 통합 동기화 `sync.mjs`/`동기화.bat`/`components.json`(Figma 노드 대조) 도입. `build.py` → `build.mjs`(출력 동일, Python 불필요). 컴포넌트 6종 추가(Divider/Tooltip/List/Breadcrumbs/Stepper/Banner - CSS/Figma 동시). 미리보기 `index.html` |

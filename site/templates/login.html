@@ -35,21 +35,22 @@
   <div class="site-side__top"><b>메뉴</b><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" data-site-close aria-label="메뉴 닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button></div>
   <div class="site-side__mobile"><nav class="site-nav" aria-label="주요 메뉴"><a class="site-nav__item" href="../index.html">Get Started</a><a class="site-nav__item" href="../components/index.html">Components</a><a class="site-nav__item" href="../templates/index.html" aria-current="page">Templates</a></nav><div class="site-nav__sep"></div></div>
   <nav class="site-nav" aria-label="Templates 메뉴"><a class="site-nav__item" href="../templates/index.html">전체 보기</a>
-<details class="site-nav__group" open><summary>업무<i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i></summary><a class="site-nav__item" href="../templates/dashboard.html">대시보드</a><a class="site-nav__item" href="../templates/table.html">데이터 목록</a><a class="site-nav__item" href="../templates/tools.html">작업 도구</a></details>
-<details class="site-nav__group" open><summary>입력<i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i></summary><a class="site-nav__item" href="../templates/form.html">신청서 작성</a><a class="site-nav__item" href="../templates/settings.html">설정</a><a class="site-nav__item" href="../templates/login.html" aria-current="page">로그인</a></details>
-<details class="site-nav__group" open><summary>콘텐츠<i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i></summary><a class="site-nav__item" href="../templates/content.html">글 상세</a><a class="site-nav__item" href="../templates/gallery.html">갤러리</a></details>
-<details class="site-nav__group" open><summary>AI<i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i></summary><a class="site-nav__item" href="../templates/ai-chat.html">AI 채팅</a></details></nav>
+<div class="site-nav__group" role="group" aria-label="업무"><p class="site-nav__label">업무</p><a class="site-nav__item" href="../templates/dashboard.html">대시보드</a><a class="site-nav__item" href="../templates/table.html">데이터 목록</a><a class="site-nav__item" href="../templates/tools.html">작업 도구</a></div>
+<div class="site-nav__group" role="group" aria-label="입력"><p class="site-nav__label">입력</p><a class="site-nav__item" href="../templates/form.html">신청서 작성</a><a class="site-nav__item" href="../templates/settings.html">설정</a><a class="site-nav__item" href="../templates/login.html" aria-current="page">로그인</a></div>
+<div class="site-nav__group" role="group" aria-label="콘텐츠"><p class="site-nav__label">콘텐츠</p><a class="site-nav__item" href="../templates/content.html">글 상세</a><a class="site-nav__item" href="../templates/gallery.html">갤러리</a></div>
+<div class="site-nav__group" role="group" aria-label="AI"><p class="site-nav__label">AI</p><a class="site-nav__item" href="../templates/ai-chat.html">AI 채팅</a></div></nav>
 </aside>
 <div class="site-scrim" data-site-close></div>
 <main class="site-main" id="main">
+<div class="site-main__row">
 <article class="site-doc">
 <header>
   <p class="site-eyebrow"><a href="index.html">Templates</a> / 입력</p>
   <h1 class="site-h1">로그인</h1>
   <p class="site-lead">이메일과 비밀번호나 간편 로그인으로 들어가는 화면입니다.</p>
   <div class="site-meta"><a class="ds-btn" data-variant="neutralSolid" data-size="small" target="_blank" rel="noopener" href="pages/login.html"><i class="ds-icon ds-icon--external-link ds-icon--sm" aria-hidden="true"></i>새 창으로 보기</a></div>
-</header>
 
+</header>
 <div class="site-frame">
   <div class="site-frame__bar">
     <div class="ds-segmented" role="group" aria-label="보기 방식"><button type="button" class="ds-segmented__item" aria-pressed="true" data-site-view="preview">미리보기</button><button type="button" class="ds-segmented__item" aria-pressed="false" data-site-view="code">코드</button></div>
@@ -64,8 +65,9 @@
 <h2 id="responsive">화면 폭에 따라<a class="site-anchor" href="#responsive" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><p>모바일은 닫기 버튼만 있는 앱 바 아래로 화면 전체를 쓰고, PC 는 앱 바 없이 회색 배경 가운데 400px 카드로 보여요.</p>
 <h2 id="components">쓴 컴포넌트<a class="site-anchor" href="#components" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><div class="site-links"><a class="ds-chip" data-size="small" href="../components/action-button.html">Action Button</a><a class="ds-chip" data-size="small" href="../components/text-link.html">Text Link</a><a class="ds-chip" data-size="small" href="../components/field-label.html">Field Label</a><a class="ds-chip" data-size="small" href="../components/text-field-input.html">Text Field Input</a><a class="ds-chip" data-size="small" href="../components/checkbox.html">Checkbox</a><a class="ds-chip" data-size="small" href="../components/divider.html">Divider</a><a class="ds-chip" data-size="small" href="../components/top-app-bar.html">Top App Bar</a></div>
 </article>
-</main>
 
+</div>
+</main>
 </div>
 </body>
 </html>

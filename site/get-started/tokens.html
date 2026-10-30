@@ -34,14 +34,15 @@
   <div class="site-side__top"><b>메뉴</b><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" data-site-close aria-label="메뉴 닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button></div>
   <div class="site-side__mobile"><nav class="site-nav" aria-label="주요 메뉴"><a class="site-nav__item" href="../index.html" aria-current="page">Get Started</a><a class="site-nav__item" href="../components/index.html">Components</a><a class="site-nav__item" href="../templates/index.html">Templates</a></nav><div class="site-nav__sep"></div></div>
   <nav class="site-nav" aria-label="Get Started 메뉴"><a class="site-nav__item" href="../index.html">시작하기</a>
-<details class="site-nav__group" open><summary>가이드<i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i></summary><a class="site-nav__item" href="../get-started/usage.html">사용 규칙</a><a class="site-nav__item" href="../get-started/scripts.html">스크립트</a></details>
-<details class="site-nav__group" open><summary>파운데이션<i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i></summary><a class="site-nav__item" href="../get-started/tokens.html" aria-current="page">토큰</a><a class="site-nav__item" href="../get-started/icons.html">아이콘</a></details></nav>
+<div class="site-nav__group" role="group" aria-label="가이드"><p class="site-nav__label">가이드</p><a class="site-nav__item" href="../get-started/usage.html">사용 규칙</a><a class="site-nav__item" href="../get-started/scripts.html">스크립트</a></div>
+<div class="site-nav__group" role="group" aria-label="파운데이션"><p class="site-nav__label">파운데이션</p><a class="site-nav__item" href="../get-started/tokens.html" aria-current="page">토큰</a><a class="site-nav__item" href="../get-started/icons.html">아이콘</a></div></nav>
 </aside>
 <div class="site-scrim" data-site-close></div>
 <main class="site-main" id="main">
+<div class="site-main__row">
 <article class="site-doc">
-<header><h1 class="site-h1">토큰</h1><p class="site-lead">색, 글자, 간격, 모서리, 그림자, 움직임 값입니다. 화면에서는 값 대신 CSS 변수 이름을 씁니다. 위쪽의 라이트/다크를 바꾸면 색이 함께 바뀝니다.</p></header>
-<div class="site-toc-select"><select aria-label="이 페이지 목차" data-site-toc><option value="color">색</option><option value="type">글자</option><option value="space">간격</option><option value="shape">모서리</option><option value="elevation">그림자</option><option value="motion">움직임</option><option value="z">쌓는 순서</option></select><i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i></div>
+<header><h1 class="site-h1">토큰</h1><p class="site-lead">색, 글자, 간격, 모서리, 그림자, 움직임 값입니다. 화면에서는 값 대신 CSS 변수 이름을 씁니다. 위쪽의 라이트/다크를 바꾸면 색이 함께 바뀝니다.</p><div class="site-toc-select"><select aria-label="이 페이지 목차" data-site-toc><option value="color">색</option><option value="type">글자</option><option value="space">간격</option><option value="shape">모서리</option><option value="elevation">그림자</option><option value="motion">움직임</option><option value="z">쌓는 순서</option></select><i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i></div>
+</header>
 <h2 id="color">색<a class="site-anchor" href="#color" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
 <p>화면에는 시맨틱 색(<code>bg</code>, <code>fg</code>, <code>stroke</code>)만 씁니다. 팔레트(<code>--ybm-color-palette-*</code>)는 시맨틱 색을 만드는 원료라 화면에 직접 쓰지 않아요.</p>
 <h3>배경 (bg)</h3><div class="ds-table-wrap"><table class="ds-table" data-density="compact">
@@ -137,7 +138,7 @@
 <tr><td><span class="site-swatch" style="background: var(--ybm-color-bg-layer-default); box-shadow: inset 0 0 0 2px var(--ybm-color-stroke-warning-weak)"></span></td><td><code>--ybm-color-stroke-warning-weak</code></td></tr></tbody></table></div>
 <h2 id="type">글자<a class="site-anchor" href="#type" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
 <p>글꼴은 Pretendard 입니다. 크기는 <code>--ybm-font-size-t01</code> ~ <code>t17</code>, 줄 높이는 같은 번호의 <code>--ybm-line-height-*</code> 를 짝으로 씁니다. 굵기는 regular 400, medium 500, semibold 600, bold 700 입니다.</p>
-<p>한글 위계: 페이지 제목 40/48 medium(500) 자간 -1px, 리드 16/24 light(300), 섹션 제목 24/32 medium, 소제목 16/22 medium, 본문 16/28 regular, 보조 글 14 regular 입니다. 큰 제목에만 자간을 줄이고 나머지는 그대로 둡니다.</p>
+<p>한글 위계: 페이지 제목 40/48 medium(500), 리드 16/24 light(300), 섹션 제목 24/32 medium, 소제목 16/22 medium, 본문 16/28 regular, 보조 글 14 regular 입니다. 자간은 주지 않습니다.</p>
 <div class="ds-table-wrap"><table class="ds-table" data-density="compact">
 <thead><tr><th scope="col">이름</th><th scope="col">크기 / 줄 높이 (px)</th><th scope="col">보기</th></tr></thead>
 <tbody></tbody></table></div>
@@ -164,8 +165,9 @@
 <thead><tr><th scope="col">CSS 변수</th><th scope="col">값</th></tr></thead>
 <tbody></tbody></table></div>
 </article>
+<aside class="site-toc" aria-label="이 페이지 목차"><nav><span class="site-toc__indicator" aria-hidden="true"></span><a href="#color">색</a><a href="#type">글자</a><a href="#space">간격</a><a href="#shape">모서리</a><a href="#elevation">그림자</a><a href="#motion">움직임</a><a href="#z">쌓는 순서</a></nav></aside>
+</div>
 </main>
-<aside class="site-toc" aria-label="이 페이지 목차"><nav><a href="#color">색</a><a href="#type">글자</a><a href="#space">간격</a><a href="#shape">모서리</a><a href="#elevation">그림자</a><a href="#motion">움직임</a><a href="#z">쌓는 순서</a></nav></aside>
 </div>
 </body>
 </html>
