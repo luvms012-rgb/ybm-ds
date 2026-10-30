@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>프로젝트 상세 - YBM DS 템플릿</title>
+<link rel="stylesheet" href="../../../dist/ybm-ds.css">
+<script src="../../../dist/ybm-ds.js" defer></script>
+<style>
+  body { word-break: keep-all; overflow-wrap: break-word; }
+  .tp-h1 { font-size: var(--ybm-font-size-t09); line-height: var(--ybm-line-height-t09); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-h2 { font-size: var(--ybm-font-size-t07); line-height: var(--ybm-line-height-t07); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-h3 { font-size: var(--ybm-font-size-t05); line-height: 22px; font-weight: var(--ybm-font-weight-medium); }
+  .tp-body { font-size: var(--ybm-font-size-t05); line-height: 28px; }
+  .tp-sub { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
+  .tp-caption { font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); color: var(--ybm-color-fg-neutral-subtle); }
+  .tp-num { font-variant-numeric: tabular-nums; }
+  .tp-ph { display: grid; place-items: center; height: 100%; color: var(--ybm-color-fg-neutral-subtle); }
+  .tp-logo { display: grid; place-items: center; width: 88px; height: 28px; border-radius: var(--ybm-shape-xs); background: var(--ybm-color-bg-neutral); color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t03-static); line-height: var(--ybm-line-height-t03-static); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-bar { position: sticky; top: 0; z-index: var(--ybm-z-sticky); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); }
+  @media (min-width: 768px) { .tp-h1 { font-size: var(--ybm-font-size-t11); line-height: var(--ybm-line-height-t11); } }
+
+  /* 대표 사진: 화면 폭 전체, 768 이상 최대 1200 */
+  .tp-hero { max-width: 1200px; margin-inline: auto; }
+  @media (min-width: 768px) { .tp-hero { padding: var(--ybm-space-x6) var(--ybm-space-x8) 0; } .tp-hero .ds-imageframe { border-radius: var(--ybm-shape-xl); } }
+
+  /* 글 칸 720 가운데 + 1024 이상 오른쪽에 떠 있는 반응 막대 */
+  .tp-wrap { position: relative; max-width: 720px; margin-inline: auto; padding: var(--ybm-space-x6) var(--ybm-space-x-global-gutter) calc(var(--ybm-space-x20) + env(safe-area-inset-bottom, 0px)); }
+  @media (min-width: 768px) { .tp-wrap { padding: var(--ybm-space-x10) var(--ybm-space-x6) var(--ybm-space-x20); } }
+  .tp-rail { display: none; }
+  @media (min-width: 1024px) { .tp-rail { display: flex; flex-direction: column; gap: var(--ybm-space-x2); position: sticky; top: 50%; float: right; margin-right: calc(-56px - var(--ybm-space-x10)); translate: 0 -50%; } }
+  .tp-rail .ds-toggle { flex-direction: column; gap: 2px; width: 56px; height: 56px; padding: 0; }
+  .tp-rail-count { font-size: var(--ybm-font-size-t01); line-height: var(--ybm-line-height-t01); }
+
+  .tp-head { display: flex; flex-direction: column; gap: var(--ybm-space-x4); }
+  .tp-chips { display: flex; flex-wrap: wrap; gap: var(--ybm-space-x2); }
+  .tp-author { display: flex; align-items: center; gap: var(--ybm-space-x3); padding-block: var(--ybm-space-x4); border-block: 1px solid var(--ybm-color-stroke-neutral-muted); }
+  .tp-author .ds-avatar { flex: none; }
+  .tp-author-texts { display: flex; flex: 1 1 auto; flex-direction: column; min-width: 0; }
+  .tp-author-name { font-size: var(--ybm-font-size-t05); line-height: var(--ybm-line-height-t05); font-weight: var(--ybm-font-weight-semibold); }
+
+  /* 본문 리듬 */
+  .tp-article { display: flex; flex-direction: column; gap: var(--ybm-space-x5); margin-top: var(--ybm-space-x8); }
+  .tp-article h2 { margin-top: var(--ybm-space-x6); }
+  .tp-article .ds-imageframe { border-radius: var(--ybm-shape-lg); }
+  .tp-figure { display: flex; flex-direction: column; gap: var(--ybm-space-x2); }
+  .tp-two { display: grid; grid-template-columns: 1fr 1fr; gap: var(--ybm-space-x3); }
+  .tp-toc { display: flex; flex-wrap: wrap; gap: var(--ybm-space-x2); }
+
+  /* 쓴 제품 Carousel */
+  .tp-bleed { margin-inline: calc(var(--ybm-space-x-global-gutter) * -1); }
+  .tp-bleed > .ds-carousel { --ds-carousel-padding: var(--ybm-space-x-global-gutter); }
+  @media (min-width: 768px) { .tp-bleed { margin-inline: 0; } .tp-bleed > .ds-carousel { --ds-carousel-padding: 0px; } }
+  .tp-product { display: flex; flex-direction: column; gap: var(--ybm-space-x2); width: 140px; color: inherit; text-decoration: none; }
+  .tp-product-name { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; font-size: var(--ybm-font-size-t03); line-height: var(--ybm-line-height-t03); }
+  .tp-product-price { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); font-weight: var(--ybm-font-weight-semibold); }
+
+  /* 모바일 반응 줄, 댓글, 다른 글 */
+  .tp-reactions { display: flex; gap: var(--ybm-space-x2); padding-block: var(--ybm-space-x6); border-block: 1px solid var(--ybm-color-stroke-neutral-muted); }
+  @media (min-width: 768px) { .tp-reactions { display: none; } }  /* 템플릿 스타일은 DS 레이어 밖이라 u-hide-from-md 보다 세서 직접 숨긴다 */
+  .tp-comments { display: flex; flex-direction: column; gap: var(--ybm-space-x4); margin-top: var(--ybm-space-x8); }
+  .tp-comment-form { display: flex; flex-direction: column; gap: var(--ybm-space-x2); align-items: flex-end; }
+  .tp-comment-form .ds-textarea { width: 100%; }
+  .tp-comment { display: flex; gap: var(--ybm-space-x3); }
+  .tp-comment .ds-avatar { flex: none; }
+  .tp-comment-body { display: flex; flex-direction: column; gap: var(--ybm-space-x1); }
+  .tp-related { display: grid; grid-template-columns: 1fr; gap: var(--ybm-space-x4); margin-top: var(--ybm-space-x4); }
+  @media (min-width: 560px) { .tp-related { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  .tp-card { display: flex; flex-direction: column; gap: var(--ybm-space-x2); color: inherit; text-decoration: none; }
+  .tp-card-title { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); font-weight: var(--ybm-font-weight-medium); }
+</style>
+</head>
+<body>
+
+<header class="ds-appbar u-hide-from-md tp-bar" data-platform="android">
+  <div class="ds-appbar__left"><button type="button" class="ds-appbar__button" aria-label="뒤로"><i class="ds-icon ds-icon--chevron-left" aria-hidden="true"></i></button></div>
+  <div class="ds-appbar__main"></div>
+  <div class="ds-appbar__right">
+    <button type="button" class="ds-appbar__button" aria-label="공유"><i class="ds-icon ds-icon--share" aria-hidden="true"></i></button>
+    <button type="button" class="ds-appbar__button" aria-label="더보기"><i class="ds-icon ds-icon--ellipsis" aria-hidden="true"></i></button>
+  </div>
+</header>
+
+<header class="ds-topnav u-show-from-md tp-bar">
+  <div class="ds-topnav__left">
+    <a class="ds-topnav__heading" href="#" aria-label="서비스 이름 홈"><span class="tp-logo">로고</span></a>
+    <nav class="ds-topnav__menu" aria-label="주요 메뉴">
+      <a class="ds-topnav__item" href="#">홈</a>
+      <a class="ds-topnav__item" href="#" aria-current="page">프로젝트</a>
+      <a class="ds-topnav__item" href="#">스토어</a>
+      <a class="ds-topnav__item" href="#">전문가</a>
+    </nav>
+  </div>
+  <div class="ds-topnav__end">
+    <button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="검색"><i class="ds-icon ds-icon--search" aria-hidden="true"></i></button>
+    <a class="ds-btn" data-variant="neutralSolid" data-size="xsmall" href="#">글쓰기</a>
+  </div>
+</header>
+
+<div class="tp-hero">
+  <div class="ds-imageframe" data-ratio="16:9"><span class="tp-ph"><i class="ds-icon ds-icon--image ds-icon--lg" aria-hidden="true"></i></span><div class="ds-imageframe__floater" data-position="bottom-end"><span class="ds-imageframe__indicator tp-num">1/24</span></div></div>
+</div>
+
+<main class="tp-wrap">
+
+  <!-- 1024 이상: 오른쪽에 떠 있는 반응 막대 -->
+  <div class="tp-rail" aria-label="반응">
+    <button type="button" class="ds-toggle" aria-pressed="false" aria-label="좋아요 342"><i class="ds-icon ds-icon--thumbs-up" aria-hidden="true"></i><span class="tp-rail-count tp-num">342</span></button>
+    <button type="button" class="ds-toggle" aria-pressed="true" aria-label="저장 1,208"><i class="ds-icon ds-icon--inbox" aria-hidden="true"></i><span class="tp-rail-count tp-num">1,208</span></button>
+    <button type="button" class="ds-toggle" aria-pressed="false" aria-label="댓글 18"><i class="ds-icon ds-icon--message-circle" aria-hidden="true"></i><span class="tp-rail-count tp-num">18</span></button>
+    <button type="button" class="ds-toggle" aria-pressed="false" aria-label="공유"><i class="ds-icon ds-icon--share" aria-hidden="true"></i><span class="tp-rail-count">공유</span></button>
+  </div>
+
+  <header class="tp-head">
+    <div class="tp-chips">
+      <a class="ds-chip" data-variant="outlineWeak" data-size="small" href="#">원룸</a><a class="ds-chip" data-variant="outlineWeak" data-size="small" href="#">10평대</a><a class="ds-chip" data-variant="outlineWeak" data-size="small" href="#">따뜻한 분위기</a><a class="ds-chip" data-variant="outlineWeak" data-size="small" href="#">셀프 시공</a>
+    </div>
+    <h1 class="tp-h1">작은 원룸을 밝고 넓어 보이게 바꾼 이야기</h1>
+    <span class="ds-tag-group"><span>2026.10.24</span><span>조회 12,480</span></span>
+  </header>
+
+  <div class="tp-author">
+    <span class="ds-avatar" data-size="48" role="img" aria-label="이서연"><span class="ds-avatar__initials" aria-hidden="true">이</span></span>
+    <div class="tp-author-texts"><span class="tp-author-name">이서연</span><span class="tp-sub">팔로워 2,340 · 프로젝트 6</span></div>
+    <button type="button" class="ds-btn" data-variant="brandOutline" data-size="small">팔로우</button>
+  </div>
+
+  <article class="tp-article">
+    <nav class="tp-toc" aria-label="이 글의 순서">
+      <a class="ds-chip" data-size="small" href="#before" aria-pressed="false">전과 후</a><a class="ds-chip" data-size="small" href="#living" aria-pressed="false">거실 겸 침실</a><a class="ds-chip" data-size="small" href="#kitchen" aria-pressed="false">주방</a><a class="ds-chip" data-size="small" href="#storage" aria-pressed="false">수납</a><a class="ds-chip" data-size="small" href="#products" aria-pressed="false">쓴 제품</a>
+    </nav>
+    <p class="tp-body">8평 원룸에서 3년째 살고 있어요. 벽지와 바닥은 그대로 두고 가구 배치와 조명만 바꿨는데, 들어오는 분마다 넓어졌다고 말해 줘요. 큰 공사 없이 바꾼 과정을 정리했습니다.</p>
+
+    <h2 class="tp-h2" id="before">전과 후</h2>
+    <div class="tp-two">
+      <figure class="tp-figure"><div class="ds-imageframe" data-ratio="4:3"><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span><div class="ds-imageframe__floater" data-position="top-start"><span class="ds-badge" data-variant="solid">Before</span></div></div><figcaption class="tp-caption">침대가 가운데를 막고 있던 때</figcaption></figure>
+      <figure class="tp-figure"><div class="ds-imageframe" data-ratio="4:3"><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span><div class="ds-imageframe__floater" data-position="top-start"><span class="ds-badge" data-variant="solid" data-tone="brand">After</span></div></div><figcaption class="tp-caption">침대를 창가로 붙이고 가운데를 비웠어요</figcaption></figure>
+    </div>
+
+    <h2 class="tp-h2" id="living">거실 겸 침실</h2>
+    <p class="tp-body">가장 먼저 한 일은 침대를 창가 벽에 붙이는 것이었어요. 가운데가 비니 동선이 생기고, 낮에는 소파처럼 기대앉을 수 있게 긴 쿠션을 올렸습니다. 천장 조명은 끄고 스탠드 두 개로만 생활해요.</p>
+    <figure class="tp-figure"><div class="ds-imageframe" data-ratio="4:3"><span class="tp-ph"><i class="ds-icon ds-icon--image ds-icon--lg" aria-hidden="true"></i></span></div><figcaption class="tp-caption">저녁에는 스탠드 하나만 켜도 충분해요</figcaption></figure>
+    <div class="ds-callout" data-tone="informative"><i class="ds-icon ds-icon--info-solid" aria-hidden="true"></i><div class="ds-callout__body"><p class="ds-callout__title">조명 고르는 기준</p><p class="ds-callout__desc">전구색(2700K)으로 통일하면 가구 색이 달라도 한 공간처럼 보여요.</p></div></div>
+
+    <h2 class="tp-h2" id="kitchen">주방</h2>
+    <p class="tp-body">싱크대 상부장을 비우고 자주 쓰는 그릇만 선반에 올렸어요. 나머지는 하부장으로 옮기고, 조리대 위에는 아무것도 두지 않는 규칙을 지키고 있어요.</p>
+    <figure class="tp-figure"><div class="ds-imageframe" data-ratio="4:3"><span class="tp-ph"><i class="ds-icon ds-icon--image ds-icon--lg" aria-hidden="true"></i></span></div></figure>
+
+    <h2 class="tp-h2" id="storage">수납</h2>
+    <p class="tp-body">옷은 계절별로 나눠 침대 아래 서랍에 넣고, 지금 입는 옷만 행거에 걸어요. 행거 아래 바구니 두 개가 세탁물과 가방 자리예요.</p>
+    <div class="tp-two">
+      <figure class="tp-figure"><div class="ds-imageframe" data-ratio="4:3"><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div></figure>
+      <figure class="tp-figure"><div class="ds-imageframe" data-ratio="4:3"><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div></figure>
+    </div>
+
+    <h2 class="tp-h2" id="products">이 글에 나온 제품</h2>
+    <div class="tp-bleed">
+      <div class="ds-carousel" role="region" aria-roledescription="carousel" aria-label="이 글에 나온 제품">
+        <div class="ds-carousel__scroller">
+          <div class="ds-carousel__item"><a class="tp-product" href="#"><div class="ds-imageframe" data-stroke><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div><span class="tp-product-name">원목 플로어 스탠드</span><span class="tp-product-price tp-num">89,000원</span></a></div>
+          <div class="ds-carousel__item"><a class="tp-product" href="#"><div class="ds-imageframe" data-stroke><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div><span class="tp-product-name">침대 아래 수납 서랍 2개 세트</span><span class="tp-product-price tp-num">54,000원</span></a></div>
+          <div class="ds-carousel__item"><a class="tp-product" href="#"><div class="ds-imageframe" data-stroke><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div><span class="tp-product-name">긴 등받이 쿠션</span><span class="tp-product-price tp-num">32,000원</span></a></div>
+          <div class="ds-carousel__item"><a class="tp-product" href="#"><div class="ds-imageframe" data-stroke><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div><span class="tp-product-name">벽 선반 60cm</span><span class="tp-product-price tp-num">18,000원</span></a></div>
+          <div class="ds-carousel__item"><a class="tp-product" href="#"><div class="ds-imageframe" data-stroke><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div><span class="tp-product-name">라탄 바구니 대</span><span class="tp-product-price tp-num">15,000원</span></a></div>
+        </div>
+        <button type="button" class="ds-carousel__button" data-direction="previous" aria-label="이전"><i class="ds-icon ds-icon--chevron-left ds-icon--sm" aria-hidden="true"></i></button>
+        <button type="button" class="ds-carousel__button" data-direction="next" aria-label="다음"><i class="ds-icon ds-icon--chevron-right ds-icon--sm" aria-hidden="true"></i></button>
+      </div>
+    </div>
+
+    <p class="tp-body">끝까지 읽어 주셔서 고마워요. 작은 집도 배치만 바꾸면 많이 달라진다는 걸 느꼈어요. 궁금한 점은 댓글로 남겨 주세요.</p>
+  </article>
+
+  <!-- 모바일 반응 줄 -->
+  <div class="tp-reactions u-hide-from-md">
+    <button type="button" class="ds-toggle" aria-pressed="false"><i class="ds-icon ds-icon--thumbs-up" aria-hidden="true"></i>342</button>
+    <button type="button" class="ds-toggle" aria-pressed="true"><i class="ds-icon ds-icon--inbox" aria-hidden="true"></i>저장</button>
+    <button type="button" class="ds-toggle" aria-pressed="false"><i class="ds-icon ds-icon--share" aria-hidden="true"></i>공유</button>
+  </div>
+
+  <section class="tp-comments" aria-labelledby="comments-title">
+    <h2 class="tp-h3" id="comments-title">댓글 <span class="tp-sub tp-num">18</span></h2>
+    <form class="tp-comment-form">
+      <textarea class="ds-textarea" rows="2" placeholder="따뜻한 댓글을 남겨 주세요" aria-label="댓글"></textarea>
+      <button type="button" class="ds-btn" data-variant="neutralSolid" data-size="small">등록</button>
+    </form>
+    <div class="tp-comment"><span class="ds-avatar" data-size="36" role="img" aria-label="김민수"><span class="ds-avatar__initials" aria-hidden="true">김</span></span><div class="tp-comment-body"><p class="tp-sub"><b>김민수</b> · 2시간 전</p><p class="tp-body">침대를 창가로 붙이는 건 생각도 못 했어요. 저도 이번 주말에 해 봐야겠어요.</p></div></div>
+    <div class="tp-comment"><span class="ds-avatar" data-size="36" role="img" aria-label="박지훈"><span class="ds-avatar__initials" aria-hidden="true">박</span></span><div class="tp-comment-body"><p class="tp-sub"><b>박지훈</b> · 5시간 전</p><p class="tp-body">스탠드 두 개로만 생활하신다니, 전기세도 아끼고 분위기도 좋겠어요.</p></div></div>
+    <button type="button" class="ds-btn" data-variant="ghost" data-size="small">댓글 16개 더보기</button>
+  </section>
+
+  <section aria-labelledby="related-title">
+    <h2 class="tp-h3" id="related-title" style="margin-top: var(--ybm-space-x10)">다른 프로젝트 둘러보기</h2>
+    <div class="tp-related">
+      <a class="tp-card" href="#"><div class="ds-imageframe" data-ratio="4:3" data-stroke><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div><span class="tp-card-title">창고 같던 베란다를 작은 서재로</span><span class="tp-caption">정하늘 · 조회 8,120</span></a>
+      <a class="tp-card" href="#"><div class="ds-imageframe" data-ratio="4:3" data-stroke><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div><span class="tp-card-title">세 식구 20평 아파트, 거실을 놀이방처럼</span><span class="tp-caption">최유나 · 조회 15,300</span></a>
+      <a class="tp-card" href="#"><div class="ds-imageframe" data-ratio="4:3" data-stroke><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div><span class="tp-card-title">10만원으로 바꾼 현관</span><span class="tp-caption">홍길동 · 조회 4,870</span></a>
+    </div>
+  </section>
+</main>
+
+</body>
+</html>

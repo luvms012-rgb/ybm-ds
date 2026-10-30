@@ -10,6 +10,19 @@
   }
   // 처음에는 기기의 라이트 / 다크 설정을 따르고, 버튼으로 고르면 그 선택("dark" 또는 "light")을 기억해 우선한다
   var osDark = window.matchMedia ? matchMedia("(prefers-color-scheme: dark)") : null;
+  var NAV_KEY = "ybm-site-nav-closed";
+  function navShut() { try { return JSON.parse(localStorage.getItem(NAV_KEY)) || []; } catch (e) { return []; } }
+  function restoreNav() {
+    var shut = navShut();
+    document.querySelectorAll("[data-site-group]").forEach(function (g) {
+      if (shut.indexOf(g.getAttribute("data-site-group")) < 0 || g.querySelector('[aria-current="page"]')) return;
+      var b = g.querySelector(".site-nav__toggle");
+      var panel = g.querySelector(".site-nav__panel");
+      panel.style.transition = "none";  // 처음 그릴 때는 움직이지 않고 바로 접힌 채로
+      b.setAttribute("aria-expanded", "false");
+      requestAnimationFrame(function () { panel.style.transition = ""; });
+    });
+  }
   function savedTheme() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
   function setTheme(t, remember) {
     if (t === "dark") root.dataset.theme = "dark"; else delete root.dataset.theme;
@@ -28,6 +41,18 @@
   document.addEventListener("click", function (e) {
     var t = e.target;
     if (t.closest("[data-site-theme-toggle]")) { setTheme(root.dataset.theme === "dark" ? "light" : "dark", true); return; }
+
+    // 왼쪽 메뉴 접는 묶음: 접은 묶음 이름을 기억한다 (지금 페이지가 들어 있는 묶음은 늘 펼친다)
+    var tg = t.closest(".site-nav__toggle");
+    if (tg) {
+      var open = tg.getAttribute("aria-expanded") !== "true";
+      tg.setAttribute("aria-expanded", String(open));
+      var name = tg.closest("[data-site-group]").getAttribute("data-site-group");
+      var shut = navShut().filter(function (n) { return n !== name; });
+      if (!open) shut.push(name);
+      try { localStorage.setItem(NAV_KEY, JSON.stringify(shut)); } catch (err) {}
+      return;
+    }
 
     if (t.closest("[data-site-menu]")) { document.body.toggleAttribute("data-side-open"); var open = document.body.hasAttribute("data-side-open"); document.querySelectorAll("[data-site-menu]").forEach(function (b) { b.setAttribute("aria-expanded", String(open)); }); return; }
     if (t.closest("[data-site-close]")) { document.body.removeAttribute("data-side-open"); return; }
@@ -250,6 +275,7 @@
 
   document.addEventListener("DOMContentLoaded", function () {
     setTheme(root.dataset.theme === "dark" ? "dark" : "light");
+    restoreNav();
     // 버튼으로 고른 적이 없으면 기기 설정이 바뀔 때(밤에 자동 다크 등) 같이 바뀐다
     if (osDark && osDark.addEventListener) osDark.addEventListener("change", function (e) { if (!savedTheme()) setTheme(e.matches ? "dark" : "light"); });
     frames().forEach(function (f) { f.addEventListener("load", function () { themeFrame(f); }); themeFrame(f); });

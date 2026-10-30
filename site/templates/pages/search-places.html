@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>가게 검색 결과 - YBM DS 템플릿</title>
+<link rel="stylesheet" href="../../../dist/ybm-ds.css">
+<script src="../../../dist/ybm-ds.js" defer></script>
+<style>
+  body { word-break: keep-all; overflow-wrap: break-word; }
+  .tp-h1 { font-size: var(--ybm-font-size-t07); line-height: var(--ybm-line-height-t07); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-h3 { font-size: var(--ybm-font-size-t05); line-height: 22px; font-weight: var(--ybm-font-weight-medium); }
+  .tp-sub { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
+  .tp-caption { font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); color: var(--ybm-color-fg-neutral-subtle); }
+  .tp-num { font-variant-numeric: tabular-nums; }
+  .tp-ph { display: grid; place-items: center; height: 100%; color: var(--ybm-color-fg-neutral-subtle); }
+  .tp-logo { display: grid; place-items: center; width: 88px; height: 28px; border-radius: var(--ybm-shape-xs); background: var(--ybm-color-bg-neutral); color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t03-static); line-height: var(--ybm-line-height-t03-static); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-bar { position: sticky; top: 0; z-index: var(--ybm-z-sticky); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); }
+  .tp-appbar-search { flex: 1 1 auto; min-width: 0; }
+  .tp-topnav-search { flex: 1 1 auto; max-width: 480px; margin-inline: var(--ybm-space-x6); }
+  .tp-scope { position: sticky; top: var(--ds-appbar-height, 56px); z-index: calc(var(--ybm-z-sticky) - 1); background: var(--ybm-color-bg-layer-default); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); }
+  .tp-scope-inner { max-width: 1200px; margin-inline: auto; padding-inline: var(--ybm-space-x-global-gutter); }
+  @media (min-width: 768px) { .tp-scope { top: 64px; } .tp-scope-inner { padding-inline: var(--ybm-space-x8); } }
+
+  .tp-page { max-width: 1200px; margin-inline: auto; padding: var(--ybm-space-x4) var(--ybm-space-x-global-gutter) calc(var(--ybm-space-x14) + var(--ybm-space-x10) + env(safe-area-inset-bottom, 0px)); }
+  @media (min-width: 768px) { .tp-page { padding: var(--ybm-space-x6) var(--ybm-space-x8) var(--ybm-space-x20); } }
+  @media (min-width: 1024px) { .tp-page { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: var(--ybm-space-x10); align-items: start; } }
+
+  .tp-result-head { display: flex; flex-direction: column; gap: var(--ybm-space-x3); }
+  .tp-filters { display: flex; align-items: center; gap: var(--ybm-space-x2); overflow-x: auto; margin-inline: calc(var(--ybm-space-x-global-gutter) * -1); padding-inline: var(--ybm-space-x-global-gutter); scrollbar-width: none; }
+  .tp-filters::-webkit-scrollbar { display: none; }
+  .tp-filters > * { flex: none; }
+  @media (min-width: 768px) { .tp-filters { margin-inline: 0; padding-inline: 0; overflow: visible; flex-wrap: wrap; } }
+
+  /* 가게 카드 목록: 한 열, 카드 안에 사진 띠 */
+  .tp-list { display: flex; flex-direction: column; gap: var(--ybm-space-x4); margin-top: var(--ybm-space-x5); }
+  .tp-place { color: inherit; text-decoration: none; }
+  .tp-place-head { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--ybm-space-x3); }
+  .tp-place-name { display: flex; align-items: center; gap: var(--ybm-space-x2); font-size: var(--ybm-font-size-t06); line-height: var(--ybm-line-height-t06); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-rating { display: inline-flex; flex: none; align-items: center; gap: var(--ybm-space-x1); font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); font-weight: var(--ybm-font-weight-medium); }
+  .tp-rating .ds-icon { color: var(--ybm-color-fg-warning); }
+  .tp-photos { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--ybm-space-x1_5); margin-top: var(--ybm-space-x3); }
+  .tp-photos > :nth-child(4) { display: none; }
+  @media (min-width: 768px) { .tp-photos > :nth-child(4) { display: block; } }
+  .tp-place-desc { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; margin-top: var(--ybm-space-x3); font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
+  .tp-review { display: flex; align-items: flex-start; gap: var(--ybm-space-x2); margin-top: var(--ybm-space-x3); padding: var(--ybm-space-x3); border-radius: var(--ybm-shape-md); background: var(--ybm-color-bg-neutral); font-size: var(--ybm-font-size-t03); line-height: var(--ybm-line-height-t03); }
+  .tp-review .ds-icon { flex: none; color: var(--ybm-color-fg-neutral-subtle); }
+
+  /* 오른쪽: 지도, 인기 검색어 */
+  .tp-aside { display: none; }
+  @media (min-width: 1024px) { .tp-aside { display: flex; flex-direction: column; gap: var(--ybm-space-x4); position: sticky; top: 120px; } }
+  .tp-map { position: relative; }
+  .tp-map-btn { position: absolute; left: 50%; bottom: var(--ybm-space-x4); translate: -50% 0; }
+  .tp-keywords { display: flex; flex-wrap: wrap; gap: var(--ybm-space-x2); }
+
+  .tp-more { margin-top: var(--ybm-space-x6); }
+  .tp-pager { display: none; }
+  @media (min-width: 768px) { .tp-more { display: none; } .tp-pager { display: flex; justify-content: center; margin-top: var(--ybm-space-x10); } }
+
+  /* 모바일: 지도 보기 FAB */
+  .tp-fab { position: fixed; left: 50%; bottom: calc(var(--ybm-space-x14) + var(--ybm-space-x4) + env(safe-area-inset-bottom, 0px)); z-index: var(--ybm-z-sticky); translate: -50% 0; }
+  .tp-bottomnav { position: fixed; inset-inline: 0; bottom: 0; z-index: var(--ybm-z-sticky); }
+</style>
+</head>
+<body>
+
+<header class="ds-appbar u-hide-from-md tp-bar" data-platform="android">
+  <div class="ds-appbar__left"><button type="button" class="ds-appbar__button" aria-label="뒤로"><i class="ds-icon ds-icon--chevron-left" aria-hidden="true"></i></button></div>
+  <div class="ds-appbar__main">
+    <div class="ds-input tp-appbar-search" data-variant="outline" data-size="medium"><i class="ds-icon ds-icon--search ds-input__icon" aria-hidden="true"></i><input class="ds-input__control" type="search" value="빵집" aria-label="검색어"><button type="button" class="ds-input__clear" aria-label="지우기"></button></div>
+  </div>
+  <div class="ds-appbar__right"></div>
+</header>
+
+<header class="ds-topnav u-show-from-md tp-bar">
+  <div class="ds-topnav__left">
+    <a class="ds-topnav__heading" href="#" aria-label="서비스 이름 홈"><span class="tp-logo">로고</span></a>
+    <div class="ds-input tp-topnav-search" data-variant="outline" data-size="medium"><i class="ds-icon ds-icon--search ds-input__icon" aria-hidden="true"></i><input class="ds-input__control" type="search" value="빵집" aria-label="검색어"><button type="button" class="ds-input__clear" aria-label="지우기"></button></div>
+  </div>
+  <div class="ds-topnav__end">
+    <a class="ds-btn" data-variant="ghost" data-size="xsmall" href="#">내 가게 등록</a>
+    <a class="ds-btn" data-variant="neutralWeak" data-size="xsmall" href="#">로그인</a>
+  </div>
+</header>
+
+<div class="tp-scope">
+  <div class="tp-scope-inner">
+    <div class="ds-tabs" role="tablist" data-layout="hug" data-size="medium" aria-label="검색 범위">
+      <button type="button" class="ds-tabs__trigger" role="tab" aria-selected="false">전체</button>
+      <button type="button" class="ds-tabs__trigger" role="tab" aria-selected="false">물품</button>
+      <button type="button" class="ds-tabs__trigger" role="tab" aria-selected="true">가게</button>
+      <button type="button" class="ds-tabs__trigger" role="tab" aria-selected="false">글</button>
+      <button type="button" class="ds-tabs__trigger" role="tab" aria-selected="false">모임</button>
+    </div>
+  </div>
+</div>
+
+<main class="tp-page">
+  <section aria-labelledby="result-title">
+    <div class="tp-result-head">
+      <h1 class="tp-h1" id="result-title">‘빵집’ 가게 검색 결과 <span class="tp-sub tp-num">24곳</span></h1>
+      <div class="tp-filters">
+        <button type="button" class="ds-chip" data-variant="outlineWeak" aria-pressed="false">하늘동<i class="ds-icon ds-icon--chevron-down" aria-hidden="true"></i></button>
+        <button type="button" class="ds-chip" data-variant="outlineWeak" aria-pressed="false">가까운순<i class="ds-icon ds-icon--chevron-down" aria-hidden="true"></i></button>
+        <button type="button" class="ds-chip" aria-pressed="true">지금 영업중</button>
+        <button type="button" class="ds-chip" aria-pressed="false">예약 가능</button>
+        <button type="button" class="ds-chip" aria-pressed="false">후기 많은 곳</button>
+      </div>
+    </div>
+
+    <ul class="tp-list" role="list">
+      <li>
+        <a class="ds-card tp-place" href="#">
+          <div class="ds-card__content">
+            <div class="tp-place-head">
+              <div>
+                <p class="tp-place-name">하늘 베이커리 <span class="ds-badge">빵집</span></p>
+                <span class="ds-tag-group"><span>하늘동</span><span>도보 5분</span><span>단골 128</span></span>
+              </div>
+              <span class="tp-rating"><i class="ds-icon ds-icon--sparkles ds-icon--sm" aria-hidden="true"></i>4.8 <span class="tp-sub tp-num">(후기 56)</span></span>
+            </div>
+            <div class="tp-photos" aria-hidden="true">
+              <div class="ds-imageframe" data-stroke><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div>
+              <div class="ds-imageframe" data-stroke><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div>
+              <div class="ds-imageframe" data-stroke><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div>
+              <div class="ds-imageframe" data-stroke><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span><div class="ds-imageframe__floater" data-position="bottom-end"><span class="ds-imageframe__indicator">+12</span></div></div>
+            </div>
+            <p class="tp-place-desc">매일 아침 7시에 굽는 식빵과 크루아상이 있어요. 당일 생산 당일 판매를 지켜요. 주차는 건물 뒤편에 가능합니다.</p>
+            <p class="tp-review"><i class="ds-icon ds-icon--message-circle ds-icon--sm" aria-hidden="true"></i>“소금빵이 정말 바삭해요. 오후 3시 전에 가야 남아 있어요.”</p>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a class="ds-card tp-place" href="#">
+          <div class="ds-card__content">
+            <div class="tp-place-head">
+              <div>
+                <p class="tp-place-name">모퉁이 제과점 <span class="ds-badge">빵집</span> <span class="ds-badge" data-tone="positive">예약 가능</span></p>
+                <span class="ds-tag-group"><span>별빛동</span><span>도보 12분</span><span>단골 64</span></span>
+              </div>
+              <span class="tp-rating"><i class="ds-icon ds-icon--sparkles ds-icon--sm" aria-hidden="true"></i>4.6 <span class="tp-sub tp-num">(후기 31)</span></span>
+            </div>
+            <div class="tp-photos" aria-hidden="true">
+              <div class="ds-imageframe" data-stroke><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div>
+              <div class="ds-imageframe" data-stroke><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div>
+              <div class="ds-imageframe" data-stroke><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div>
+              <div class="ds-imageframe" data-stroke><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div>
+            </div>
+            <p class="tp-place-desc">케이크 주문 제작을 받아요. 3일 전까지 예약하면 원하는 문구를 넣어 드립니다.</p>
+            <p class="tp-review"><i class="ds-icon ds-icon--message-circle ds-icon--sm" aria-hidden="true"></i>“아이 생일 케이크를 맡겼는데 그림까지 예쁘게 그려 주셨어요.”</p>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a class="ds-card tp-place" href="#">
+          <div class="ds-card__content">
+            <div class="tp-place-head">
+              <div>
+                <p class="tp-place-name">아침 식빵 공방 <span class="ds-badge">빵집</span></p>
+                <span class="ds-tag-group"><span>강변동</span><span>차로 8분</span><span>단골 212</span></span>
+              </div>
+              <span class="tp-rating"><i class="ds-icon ds-icon--sparkles ds-icon--sm" aria-hidden="true"></i>4.9 <span class="tp-sub tp-num">(후기 143)</span></span>
+            </div>
+            <div class="tp-photos" aria-hidden="true">
+              <div class="ds-imageframe" data-stroke><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div>
+              <div class="ds-imageframe" data-stroke><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div>
+              <div class="ds-imageframe" data-stroke><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div>
+              <div class="ds-imageframe" data-stroke><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span><div class="ds-imageframe__floater" data-position="bottom-end"><span class="ds-imageframe__indicator">+30</span></div></div>
+            </div>
+            <p class="tp-place-desc">식빵 한 가지만 굽는 작은 공방이에요. 우유 식빵, 통밀 식빵, 옥수수 식빵 세 종류가 있어요.</p>
+            <p class="tp-review"><i class="ds-icon ds-icon--message-circle ds-icon--sm" aria-hidden="true"></i>“통밀 식빵이 담백해서 매주 사러 가요.”</p>
+          </div>
+        </a>
+      </li>
+    </ul>
+
+    <div class="tp-more"><button type="button" class="ds-btn" data-variant="neutralWeak" data-width="fill">더보기</button></div>
+    <div class="tp-pager">
+      <nav class="ds-pagination" aria-label="페이지">
+        <a class="ds-pagination__item" data-type="prev" aria-label="이전 페이지" aria-disabled="true"></a>
+        <a class="ds-pagination__item" href="#" aria-current="page">1</a>
+        <a class="ds-pagination__item" href="#">2</a>
+        <a class="ds-pagination__item" href="#">3</a>
+        <a class="ds-pagination__item" data-type="next" href="#" aria-label="다음 페이지"></a>
+      </nav>
+    </div>
+  </section>
+
+  <aside class="tp-aside" aria-label="지도와 검색 도움">
+    <!-- 지도 자리. 실제 서비스는 지도 라이브러리를 넣어요 -->
+    <div class="ds-imageframe tp-map" data-ratio="4:3" data-stroke>
+      <span class="tp-ph"><i class="ds-icon ds-icon--globe ds-icon--lg" aria-hidden="true"></i></span>
+      <a class="ds-btn tp-map-btn" data-variant="neutralSolid" data-size="small" href="#">지도에서 24곳 보기</a>
+    </div>
+    <article class="ds-card">
+      <header class="ds-card__header"><h2 class="ds-card__title">인기 검색어</h2></header>
+      <div class="ds-card__content">
+        <div class="tp-keywords">
+          <a class="ds-chip" data-variant="outlineWeak" data-size="small" href="#">카페</a><a class="ds-chip" data-variant="outlineWeak" data-size="small" href="#">미용실</a><a class="ds-chip" data-variant="outlineWeak" data-size="small" href="#">세탁소</a><a class="ds-chip" data-variant="outlineWeak" data-size="small" href="#">동물병원</a><a class="ds-chip" data-variant="outlineWeak" data-size="small" href="#">필라테스</a><a class="ds-chip" data-variant="outlineWeak" data-size="small" href="#">치과</a><a class="ds-chip" data-variant="outlineWeak" data-size="small" href="#">꽃집</a><a class="ds-chip" data-variant="outlineWeak" data-size="small" href="#">학원</a>
+        </div>
+      </div>
+    </article>
+  </aside>
+</main>
+
+<a class="ds-fab u-hide-from-md tp-fab" href="#"><i class="ds-icon ds-icon--globe" aria-hidden="true"></i>지도 보기</a>
+
+<nav class="ds-bottomnav u-hide-from-md tp-bottomnav" aria-label="주요 메뉴">
+  <a class="ds-bottomnav__item" href="#"><span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--house ds-icon--lg" aria-hidden="true"></i></span><span class="ds-bottomnav__label">홈</span></a>
+  <a class="ds-bottomnav__item" href="#" aria-current="page"><span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--search ds-icon--lg" aria-hidden="true"></i></span><span class="ds-bottomnav__label">검색</span></a>
+  <a class="ds-bottomnav__item" href="#"><span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--message-circle ds-icon--lg" aria-hidden="true"></i></span><span class="ds-bottomnav__label">채팅</span></a>
+  <a class="ds-bottomnav__item" href="#"><span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--id-card ds-icon--lg" aria-hidden="true"></i></span><span class="ds-bottomnav__label">나의 정보</span></a>
+</nav>
+
+</body>
+</html>

@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>글 검색 결과 - YBM DS 템플릿</title>
+<link rel="stylesheet" href="../../../dist/ybm-ds.css">
+<script src="../../../dist/ybm-ds.js" defer></script>
+<style>
+  body { word-break: keep-all; overflow-wrap: break-word; }
+  .tp-h1 { font-size: var(--ybm-font-size-t07); line-height: var(--ybm-line-height-t07); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-sub { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
+  .tp-num { font-variant-numeric: tabular-nums; }
+  .tp-ph { display: grid; place-items: center; height: 100%; color: var(--ybm-color-fg-neutral-subtle); }
+  .tp-logo { display: grid; place-items: center; width: 88px; height: 28px; border-radius: var(--ybm-shape-xs); background: var(--ybm-color-bg-neutral); color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t03-static); line-height: var(--ybm-line-height-t03-static); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-bar { position: sticky; top: 0; z-index: var(--ybm-z-sticky); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); }
+  .tp-appbar-search { flex: 1 1 auto; min-width: 0; }
+  .tp-topnav-search { flex: 1 1 auto; max-width: 480px; margin-inline: var(--ybm-space-x6); }
+  .tp-scope { position: sticky; top: var(--ds-appbar-height, 56px); z-index: calc(var(--ybm-z-sticky) - 1); background: var(--ybm-color-bg-layer-default); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); }
+  .tp-scope-inner { max-width: 1200px; margin-inline: auto; padding-inline: var(--ybm-space-x-global-gutter); }
+  @media (min-width: 768px) { .tp-scope { top: 64px; } .tp-scope-inner { padding-inline: var(--ybm-space-x8); } }
+
+  .tp-page { max-width: 1200px; margin-inline: auto; padding: var(--ybm-space-x4) var(--ybm-space-x-global-gutter) calc(var(--ybm-space-x14) + var(--ybm-space-x10) + env(safe-area-inset-bottom, 0px)); }
+  @media (min-width: 768px) { .tp-page { padding: var(--ybm-space-x6) var(--ybm-space-x8) var(--ybm-space-x20); } }
+  @media (min-width: 1024px) { .tp-page { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: var(--ybm-space-x10); align-items: start; } }
+
+  .tp-result-head { display: flex; flex-direction: column; gap: var(--ybm-space-x3); }
+  .tp-filters { display: flex; align-items: center; gap: var(--ybm-space-x2); overflow-x: auto; margin-inline: calc(var(--ybm-space-x-global-gutter) * -1); padding-inline: var(--ybm-space-x-global-gutter); scrollbar-width: none; }
+  .tp-filters::-webkit-scrollbar { display: none; }
+  .tp-filters > * { flex: none; }
+  @media (min-width: 768px) { .tp-filters { margin-inline: 0; padding-inline: 0; overflow: visible; flex-wrap: wrap; } }
+
+  /* 글 목록: 글자 위주, 사진이 있으면 오른쪽 작은 썸네일 */
+  .tp-posts { margin-top: var(--ybm-space-x2); }
+  .tp-post { display: flex; gap: var(--ybm-space-x4); padding-block: var(--ybm-space-x5); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); color: inherit; text-decoration: none; }
+  .tp-post:last-child { box-shadow: none; }
+  .tp-post-body { display: flex; flex: 1 1 auto; flex-direction: column; gap: var(--ybm-space-x1_5); min-width: 0; }
+  .tp-post-title { font-size: var(--ybm-font-size-t05); line-height: var(--ybm-line-height-t05); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-post-text { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
+  .tp-post-foot { display: flex; align-items: center; justify-content: space-between; gap: var(--ybm-space-x3); margin-top: var(--ybm-space-x1); }
+  .tp-counts { display: inline-flex; align-items: center; gap: var(--ybm-space-x3); color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); }
+  .tp-counts > span { display: inline-flex; align-items: center; gap: var(--ybm-space-x1); }
+  .tp-post-thumb { flex: none; width: 88px; }
+  @media (min-width: 768px) { .tp-post-thumb { width: 120px; } }
+
+  .tp-aside { display: none; }
+  @media (min-width: 1024px) { .tp-aside { display: flex; flex-direction: column; gap: var(--ybm-space-x4); position: sticky; top: 120px; } }
+  .tp-keywords { display: flex; flex-wrap: wrap; gap: var(--ybm-space-x2); }
+  .tp-rank { color: var(--ybm-color-fg-brand); font-weight: var(--ybm-font-weight-semibold); }
+
+  .tp-more { margin-top: var(--ybm-space-x6); }
+  .tp-pager { display: none; }
+  @media (min-width: 768px) { .tp-more { display: none; } .tp-pager { display: flex; justify-content: center; margin-top: var(--ybm-space-x10); } }
+  .tp-fab { position: fixed; right: var(--ybm-space-x-global-gutter); bottom: calc(var(--ybm-space-x14) + var(--ybm-space-x4) + env(safe-area-inset-bottom, 0px)); z-index: var(--ybm-z-sticky); }
+  .tp-bottomnav { position: fixed; inset-inline: 0; bottom: 0; z-index: var(--ybm-z-sticky); }
+</style>
+</head>
+<body>
+
+<header class="ds-appbar u-hide-from-md tp-bar" data-platform="android">
+  <div class="ds-appbar__left"><button type="button" class="ds-appbar__button" aria-label="뒤로"><i class="ds-icon ds-icon--chevron-left" aria-hidden="true"></i></button></div>
+  <div class="ds-appbar__main">
+    <div class="ds-input tp-appbar-search" data-variant="outline" data-size="medium"><i class="ds-icon ds-icon--search ds-input__icon" aria-hidden="true"></i><input class="ds-input__control" type="search" value="주차" aria-label="검색어"><button type="button" class="ds-input__clear" aria-label="지우기"></button></div>
+  </div>
+  <div class="ds-appbar__right"></div>
+</header>
+
+<header class="ds-topnav u-show-from-md tp-bar">
+  <div class="ds-topnav__left">
+    <a class="ds-topnav__heading" href="#" aria-label="서비스 이름 홈"><span class="tp-logo">로고</span></a>
+    <div class="ds-input tp-topnav-search" data-variant="outline" data-size="medium"><i class="ds-icon ds-icon--search ds-input__icon" aria-hidden="true"></i><input class="ds-input__control" type="search" value="주차" aria-label="검색어"><button type="button" class="ds-input__clear" aria-label="지우기"></button></div>
+  </div>
+  <div class="ds-topnav__end">
+    <a class="ds-btn" data-variant="ghost" data-size="xsmall" href="#">글쓰기</a>
+    <a class="ds-btn" data-variant="neutralWeak" data-size="xsmall" href="#">로그인</a>
+  </div>
+</header>
+
+<div class="tp-scope">
+  <div class="tp-scope-inner">
+    <div class="ds-tabs" role="tablist" data-layout="hug" data-size="medium" aria-label="검색 범위">
+      <button type="button" class="ds-tabs__trigger" role="tab" aria-selected="false">전체</button>
+      <button type="button" class="ds-tabs__trigger" role="tab" aria-selected="false">물품</button>
+      <button type="button" class="ds-tabs__trigger" role="tab" aria-selected="false">가게</button>
+      <button type="button" class="ds-tabs__trigger" role="tab" aria-selected="true">글</button>
+      <button type="button" class="ds-tabs__trigger" role="tab" aria-selected="false">모임</button>
+    </div>
+  </div>
+</div>
+
+<main class="tp-page">
+  <section aria-labelledby="result-title">
+    <div class="tp-result-head">
+      <h1 class="tp-h1" id="result-title">‘주차’ 글 검색 결과 <span class="tp-sub tp-num">312건</span></h1>
+      <div class="tp-filters">
+        <button type="button" class="ds-chip" data-variant="outlineWeak" aria-pressed="false">하늘동<i class="ds-icon ds-icon--chevron-down" aria-hidden="true"></i></button>
+        <button type="button" class="ds-chip" data-variant="outlineWeak" aria-pressed="false">최신순<i class="ds-icon ds-icon--chevron-down" aria-hidden="true"></i></button>
+        <button type="button" class="ds-chip" aria-pressed="true">전체</button>
+        <button type="button" class="ds-chip" aria-pressed="false">질문</button>
+        <button type="button" class="ds-chip" aria-pressed="false">정보 공유</button>
+        <button type="button" class="ds-chip" aria-pressed="false">같이해요</button>
+        <button type="button" class="ds-chip" aria-pressed="false">분실·실종</button>
+      </div>
+    </div>
+
+    <div class="tp-posts">
+      <a class="tp-post" href="#">
+        <div class="tp-post-body">
+          <span class="ds-badge">질문</span>
+          <p class="tp-post-title">하늘역 근처에 하루 종일 세워 둘 만한 주차장 있을까요?</p>
+          <p class="tp-post-text">내일 서울 가는데 역 주변 공영주차장이 늘 꽉 차 있더라고요. 조금 걸어도 괜찮으니 자리 여유 있는 곳 아시면 알려 주세요.</p>
+          <div class="tp-post-foot"><span class="ds-tag-group"><span>하늘동</span><span>12분 전</span></span><span class="tp-counts"><span><i class="ds-icon ds-icon--thumbs-up ds-icon--sm" aria-hidden="true"></i>4</span><span><i class="ds-icon ds-icon--message-circle ds-icon--sm" aria-hidden="true"></i>7</span></span></div>
+        </div>
+      </a>
+      <a class="tp-post" href="#">
+        <div class="tp-post-body">
+          <span class="ds-badge" data-tone="informative">정보 공유</span>
+          <p class="tp-post-title">강변공원 주차장 11월부터 유료로 바뀐대요</p>
+          <p class="tp-post-text">안내문 붙은 거 보고 공유해요. 처음 30분은 무료이고 이후 10분마다 300원이라고 합니다. 주말에 산책 가시는 분들 참고하세요.</p>
+          <div class="tp-post-foot"><span class="ds-tag-group"><span>강변동</span><span>1시간 전</span></span><span class="tp-counts"><span><i class="ds-icon ds-icon--thumbs-up ds-icon--sm" aria-hidden="true"></i>23</span><span><i class="ds-icon ds-icon--message-circle ds-icon--sm" aria-hidden="true"></i>15</span></span></div>
+        </div>
+        <div class="ds-imageframe tp-post-thumb" data-stroke aria-hidden="true"><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div>
+      </a>
+      <a class="tp-post" href="#">
+        <div class="tp-post-body">
+          <span class="ds-badge">질문</span>
+          <p class="tp-post-title">아파트 방문차 주차 등록은 어디서 하나요?</p>
+          <p class="tp-post-text">이사 온 지 얼마 안 되어서요. 부모님이 오시는데 관리사무소에 가야 하는지 앱으로 되는지 궁금합니다.</p>
+          <div class="tp-post-foot"><span class="ds-tag-group"><span>별빛동</span><span>3시간 전</span></span><span class="tp-counts"><span><i class="ds-icon ds-icon--thumbs-up ds-icon--sm" aria-hidden="true"></i>1</span><span><i class="ds-icon ds-icon--message-circle ds-icon--sm" aria-hidden="true"></i>3</span></span></div>
+        </div>
+      </a>
+      <a class="tp-post" href="#">
+        <div class="tp-post-body">
+          <span class="ds-badge" data-tone="warning">같이해요</span>
+          <p class="tp-post-title">주말 아침 하늘산 등산 같이 가실 분, 주차는 제가 할게요</p>
+          <p class="tp-post-text">토요일 7시에 출발해서 점심 전에 내려옵니다. 차 한 대로 같이 움직이면 주차 걱정이 없어요. 두 분 더 모셔요.</p>
+          <div class="tp-post-foot"><span class="ds-tag-group"><span>하늘동</span><span>5시간 전</span></span><span class="tp-counts"><span><i class="ds-icon ds-icon--thumbs-up ds-icon--sm" aria-hidden="true"></i>9</span><span><i class="ds-icon ds-icon--message-circle ds-icon--sm" aria-hidden="true"></i>12</span></span></div>
+        </div>
+        <div class="ds-imageframe tp-post-thumb" data-stroke aria-hidden="true"><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div>
+      </a>
+      <a class="tp-post" href="#">
+        <div class="tp-post-body">
+          <span class="ds-badge" data-tone="critical">분실·실종</span>
+          <p class="tp-post-title">중앙시장 주차장에서 차 키를 잃어버렸어요</p>
+          <p class="tp-post-text">어제 저녁 6시쯤 2층 주차장 B구역 근처입니다. 검은색 가죽 키홀더에 열쇠 두 개가 달려 있어요. 보신 분 연락 부탁드려요.</p>
+          <div class="tp-post-foot"><span class="ds-tag-group"><span>중앙동</span><span>어제</span></span><span class="tp-counts"><span><i class="ds-icon ds-icon--thumbs-up ds-icon--sm" aria-hidden="true"></i>2</span><span><i class="ds-icon ds-icon--message-circle ds-icon--sm" aria-hidden="true"></i>5</span></span></div>
+        </div>
+      </a>
+    </div>
+
+    <div class="tp-more"><button type="button" class="ds-btn" data-variant="neutralWeak" data-width="fill">더보기</button></div>
+    <div class="tp-pager">
+      <nav class="ds-pagination" aria-label="페이지">
+        <a class="ds-pagination__item" data-type="prev" aria-label="이전 페이지" aria-disabled="true"></a>
+        <a class="ds-pagination__item" href="#" aria-current="page">1</a>
+        <a class="ds-pagination__item" href="#">2</a>
+        <a class="ds-pagination__item" href="#">3</a>
+        <a class="ds-pagination__item" href="#">4</a>
+        <span class="ds-pagination__item" data-type="ellipsis" aria-hidden="true"></span>
+        <a class="ds-pagination__item" href="#">32</a>
+        <a class="ds-pagination__item" data-type="next" href="#" aria-label="다음 페이지"></a>
+      </nav>
+    </div>
+  </section>
+
+  <aside class="tp-aside" aria-label="검색 도움">
+    <article class="ds-card">
+      <header class="ds-card__header"><h2 class="ds-card__title">인기 검색어</h2></header>
+      <div class="ds-card__content">
+        <div class="tp-keywords">
+          <a class="ds-chip" data-variant="outlineWeak" data-size="small" href="#">주차</a><a class="ds-chip" data-variant="outlineWeak" data-size="small" href="#">맛집</a><a class="ds-chip" data-variant="outlineWeak" data-size="small" href="#">병원</a><a class="ds-chip" data-variant="outlineWeak" data-size="small" href="#">분실</a><a class="ds-chip" data-variant="outlineWeak" data-size="small" href="#">학원</a><a class="ds-chip" data-variant="outlineWeak" data-size="small" href="#">공사</a><a class="ds-chip" data-variant="outlineWeak" data-size="small" href="#">버스</a><a class="ds-chip" data-variant="outlineWeak" data-size="small" href="#">강아지</a>
+        </div>
+      </div>
+    </article>
+    <article class="ds-card">
+      <header class="ds-card__header"><h2 class="ds-card__title">지금 많이 보는 글</h2></header>
+      <ul class="ds-list">
+        <li><a class="ds-list-item" href="#" data-size="small"><span class="ds-list-item__prefix tp-rank tp-num">1</span><span class="ds-list-item__content"><span class="ds-list-item__title">하늘동 가을 축제 일정 나왔어요</span></span></a></li>
+        <li><a class="ds-list-item" href="#" data-size="small"><span class="ds-list-item__prefix tp-rank tp-num">2</span><span class="ds-list-item__content"><span class="ds-list-item__title">강변 산책로 공사 언제 끝나나요</span></span></a></li>
+        <li><a class="ds-list-item" href="#" data-size="small"><span class="ds-list-item__prefix tp-rank tp-num">3</span><span class="ds-list-item__content"><span class="ds-list-item__title">동네 책방에서 독서 모임 시작해요</span></span></a></li>
+        <li><a class="ds-list-item" href="#" data-size="small"><span class="ds-list-item__prefix tp-rank tp-num">4</span><span class="ds-list-item__content"><span class="ds-list-item__title">길고양이 급식소 봉사자 모집</span></span></a></li>
+      </ul>
+    </article>
+  </aside>
+</main>
+
+<a class="ds-fab u-hide-from-md tp-fab" href="#"><i class="ds-icon ds-icon--plus" aria-hidden="true"></i>글쓰기</a>
+
+<nav class="ds-bottomnav u-hide-from-md tp-bottomnav" aria-label="주요 메뉴">
+  <a class="ds-bottomnav__item" href="#"><span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--house ds-icon--lg" aria-hidden="true"></i></span><span class="ds-bottomnav__label">홈</span></a>
+  <a class="ds-bottomnav__item" href="#" aria-current="page"><span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--search ds-icon--lg" aria-hidden="true"></i></span><span class="ds-bottomnav__label">검색</span></a>
+  <a class="ds-bottomnav__item" href="#"><span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--message-circle ds-icon--lg" aria-hidden="true"></i></span><span class="ds-bottomnav__label">채팅</span></a>
+  <a class="ds-bottomnav__item" href="#"><span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--id-card ds-icon--lg" aria-hidden="true"></i></span><span class="ds-bottomnav__label">나의 정보</span></a>
+</nav>
+
+</body>
+</html>

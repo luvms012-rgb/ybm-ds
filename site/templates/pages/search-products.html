@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>물품 검색 결과 - YBM DS 템플릿</title>
+<link rel="stylesheet" href="../../../dist/ybm-ds.css">
+<script src="../../../dist/ybm-ds.js" defer></script>
+<style>
+  /* 템플릿 배치 전용. 값은 모두 --ybm-* 토큰 */
+  body { word-break: keep-all; overflow-wrap: break-word; }
+  .tp-h1 { font-size: var(--ybm-font-size-t07); line-height: var(--ybm-line-height-t07); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-h3 { font-size: var(--ybm-font-size-t05); line-height: 22px; font-weight: var(--ybm-font-weight-medium); }
+  .tp-sub { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
+  .tp-caption { font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); color: var(--ybm-color-fg-neutral-subtle); }
+  .tp-num { font-variant-numeric: tabular-nums; }
+  .tp-ph { display: grid; place-items: center; height: 100%; color: var(--ybm-color-fg-neutral-subtle); }
+  .tp-logo { display: grid; place-items: center; width: 88px; height: 28px; border-radius: var(--ybm-shape-xs); background: var(--ybm-color-bg-neutral); color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t03-static); line-height: var(--ybm-line-height-t03-static); font-weight: var(--ybm-font-weight-semibold); }
+
+  /* 맨 위 막대 */
+  .tp-bar { position: sticky; top: 0; z-index: var(--ybm-z-sticky); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); }
+  .tp-appbar-search { flex: 1 1 auto; min-width: 0; }
+  .tp-topnav-search { flex: 1 1 auto; max-width: 480px; margin-inline: var(--ybm-space-x6); }
+
+  /* 검색 분류 탭: 막대 바로 아래에 붙어 함께 고정 */
+  .tp-scope { position: sticky; top: var(--ds-appbar-height, 56px); z-index: calc(var(--ybm-z-sticky) - 1); background: var(--ybm-color-bg-layer-default); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); }
+  .tp-scope-inner { max-width: 1200px; margin-inline: auto; padding-inline: var(--ybm-space-x-global-gutter); }
+  @media (min-width: 768px) { .tp-scope { top: 64px; } .tp-scope-inner { padding-inline: var(--ybm-space-x8); } }
+
+  /* 화면 틀 */
+  .tp-page { max-width: 1200px; margin-inline: auto; padding: var(--ybm-space-x4) var(--ybm-space-x-global-gutter) calc(var(--ybm-space-x14) + var(--ybm-space-x10) + env(safe-area-inset-bottom, 0px)); }
+  @media (min-width: 768px) { .tp-page { padding: var(--ybm-space-x6) var(--ybm-space-x8) var(--ybm-space-x20); } }
+  @media (min-width: 1024px) { .tp-page { display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: var(--ybm-space-x10); align-items: start; } }
+
+  /* 결과 머리: 제목 + 필터 칩 줄 */
+  .tp-result-head { display: flex; flex-direction: column; gap: var(--ybm-space-x3); }
+  .tp-filters { display: flex; align-items: center; gap: var(--ybm-space-x2); overflow-x: auto; margin-inline: calc(var(--ybm-space-x-global-gutter) * -1); padding-inline: var(--ybm-space-x-global-gutter); scrollbar-width: none; }
+  .tp-filters::-webkit-scrollbar { display: none; }
+  .tp-filters > * { flex: none; }
+  .tp-filters-end { margin-left: auto; }
+  @media (min-width: 768px) { .tp-filters { margin-inline: 0; padding-inline: 0; overflow: visible; flex-wrap: wrap; } }
+
+  /* 물품 카드 그리드: 2열, 768 이상 3열, 1280 이상 4열 */
+  .tp-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--ybm-space-x6) var(--ybm-space-x3); margin-top: var(--ybm-space-x5); }
+  @media (min-width: 768px) { .tp-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--ybm-space-x8) var(--ybm-space-x4); } }
+  @media (min-width: 1280px) { .tp-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+  .tp-item { display: flex; flex-direction: column; gap: var(--ybm-space-x2); color: inherit; text-decoration: none; }
+  .tp-item-title { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); }
+  .tp-item-price { font-size: var(--ybm-font-size-t05); line-height: var(--ybm-line-height-t05); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-item-texts { display: flex; flex-direction: column; gap: var(--ybm-space-x0_5); }
+  .tp-item-foot { display: flex; align-items: center; gap: var(--ybm-space-x2); }
+
+  /* 오른쪽 보조 칸 (1024 이상): 인기 검색어, 최근 검색어 */
+  .tp-aside { display: none; }
+  @media (min-width: 1024px) { .tp-aside { display: flex; flex-direction: column; gap: var(--ybm-space-x4); position: sticky; top: 120px; } }
+  .tp-keywords { display: flex; flex-wrap: wrap; gap: var(--ybm-space-x2); }
+
+  /* 더보기 (모바일) / Pagination (768 이상) */
+  .tp-more { margin-top: var(--ybm-space-x6); }
+  .tp-pager { display: none; }
+  @media (min-width: 768px) { .tp-more { display: none; } .tp-pager { display: flex; justify-content: center; margin-top: var(--ybm-space-x10); } }
+
+  /* 필터 패널 안 */
+  .tp-filter-group { display: flex; flex-direction: column; gap: var(--ybm-space-x3); }
+  .tp-filter-group + .tp-filter-group { margin-top: var(--ybm-space-x8); }
+  .tp-range { display: flex; align-items: center; justify-content: space-between; }
+
+  .tp-bottomnav { position: fixed; inset-inline: 0; bottom: 0; z-index: var(--ybm-z-sticky); }
+</style>
+</head>
+<body>
+
+<!-- 모바일 Top App Bar: 뒤로 + 검색창 -->
+<header class="ds-appbar u-hide-from-md tp-bar" data-platform="android">
+  <div class="ds-appbar__left"><button type="button" class="ds-appbar__button" aria-label="뒤로"><i class="ds-icon ds-icon--chevron-left" aria-hidden="true"></i></button></div>
+  <div class="ds-appbar__main">
+    <div class="ds-input tp-appbar-search" data-variant="outline" data-size="medium"><i class="ds-icon ds-icon--search ds-input__icon" aria-hidden="true"></i><input class="ds-input__control" type="search" value="접이식 책상" aria-label="검색어"><button type="button" class="ds-input__clear" aria-label="지우기"></button></div>
+  </div>
+  <div class="ds-appbar__right"><button type="button" class="ds-appbar__button" aria-label="알림"><i class="ds-icon ds-icon--message-circle" aria-hidden="true"></i></button></div>
+</header>
+
+<!-- PC Top Navigation: 로고, 검색창, 메뉴 -->
+<header class="ds-topnav u-show-from-md tp-bar">
+  <div class="ds-topnav__left">
+    <a class="ds-topnav__heading" href="#" aria-label="서비스 이름 홈"><span class="tp-logo">로고</span></a>
+    <div class="ds-input tp-topnav-search" data-variant="outline" data-size="medium"><i class="ds-icon ds-icon--search ds-input__icon" aria-hidden="true"></i><input class="ds-input__control" type="search" value="접이식 책상" aria-label="검색어"><button type="button" class="ds-input__clear" aria-label="지우기"></button></div>
+  </div>
+  <div class="ds-topnav__end">
+    <a class="ds-btn" data-variant="ghost" data-size="xsmall" href="#">글쓰기</a>
+    <a class="ds-btn" data-variant="neutralWeak" data-size="xsmall" href="#">로그인</a>
+  </div>
+</header>
+
+<!-- 검색 범위 탭 -->
+<div class="tp-scope">
+  <div class="tp-scope-inner">
+    <div class="ds-tabs" role="tablist" data-layout="hug" data-size="medium" aria-label="검색 범위">
+      <button type="button" class="ds-tabs__trigger" role="tab" aria-selected="false">전체</button>
+      <button type="button" class="ds-tabs__trigger" role="tab" aria-selected="true">물품</button>
+      <button type="button" class="ds-tabs__trigger" role="tab" aria-selected="false">가게</button>
+      <button type="button" class="ds-tabs__trigger" role="tab" aria-selected="false">글</button>
+      <button type="button" class="ds-tabs__trigger" role="tab" aria-selected="false">모임</button>
+    </div>
+  </div>
+</div>
+
+<main class="tp-page">
+  <section aria-labelledby="result-title">
+    <div class="tp-result-head">
+      <h1 class="tp-h1" id="result-title">‘접이식 책상’ 물품 검색 결과 <span class="tp-sub tp-num">128건</span></h1>
+      <!-- 필터 칩 줄: 필터 패널 열기, 지역, 정렬, 지도 -->
+      <div class="tp-filters">
+        <button type="button" class="ds-chip" data-variant="outlineStrong" aria-pressed="false" data-ds-open="filter-panel"><i class="ds-icon ds-icon--menu" aria-hidden="true"></i>필터</button>
+        <button type="button" class="ds-chip" data-variant="outlineWeak" aria-pressed="false">하늘동 외 3곳<i class="ds-icon ds-icon--chevron-down" aria-hidden="true"></i></button>
+        <button type="button" class="ds-chip" data-variant="outlineWeak" aria-pressed="false">정확도순<i class="ds-icon ds-icon--chevron-down" aria-hidden="true"></i></button>
+        <button type="button" class="ds-chip" aria-pressed="false">거래 가능만</button>
+        <a class="ds-btn tp-filters-end" data-variant="ghost" data-size="xsmall" href="#"><i class="ds-icon ds-icon--globe" aria-hidden="true"></i>지도에서 보기</a>
+      </div>
+    </div>
+
+    <!-- 물품 카드. 빈 자리 대신 <img src="…" alt="…"> 를 넣어요 -->
+    <ul class="tp-grid" role="list">
+      <li><a class="tp-item" href="#"><div class="ds-imageframe" data-stroke><span class="tp-ph"><i class="ds-icon ds-icon--image ds-icon--lg" aria-hidden="true"></i></span></div><span class="tp-item-texts"><span class="tp-item-title">접이식 원목 책상 (1200 사이즈, 거의 새것)</span><span class="tp-item-price tp-num">45,000원</span><span class="tp-item-foot"><span class="ds-tag-group"><span>하늘동</span><span>8분 전</span></span></span></span></a></li>
+      <li><a class="tp-item" href="#"><div class="ds-imageframe" data-stroke><span class="tp-ph"><i class="ds-icon ds-icon--image ds-icon--lg" aria-hidden="true"></i></span><div class="ds-imageframe__floater" data-position="top-start"><span class="ds-badge" data-variant="solid" data-tone="brand">예약중</span></div></div><span class="tp-item-texts"><span class="tp-item-title">높이 조절 되는 접이식 테이블</span><span class="tp-item-price tp-num">30,000원</span><span class="tp-item-foot"><span class="ds-tag-group"><span>별빛동</span><span>25분 전</span></span></span></span></a></li>
+      <li><a class="tp-item" href="#"><div class="ds-imageframe" data-stroke><span class="tp-ph"><i class="ds-icon ds-icon--image ds-icon--lg" aria-hidden="true"></i></span></div><span class="tp-item-texts"><span class="tp-item-title">캠핑용 접이식 책상 + 의자 세트</span><span class="tp-item-price tp-num">60,000원</span><span class="tp-item-foot"><span class="ds-tag-group"><span>하늘동</span><span>1시간 전</span></span></span></span></a></li>
+      <li><a class="tp-item" href="#"><div class="ds-imageframe" data-stroke><span class="tp-ph"><i class="ds-icon ds-icon--image ds-icon--lg" aria-hidden="true"></i></span><div class="ds-imageframe__floater" data-position="bottom-end"><span class="ds-imageframe__indicator tp-num">1/4</span></div></div><span class="tp-item-texts"><span class="tp-item-title">아이 공부용 접이식 책상, 스티커 자국 있어요</span><span class="tp-item-price tp-num">15,000원</span><span class="tp-item-foot"><span class="ds-tag-group"><span>강변동</span><span>2시간 전</span></span></span></span></a></li>
+      <li><a class="tp-item" href="#"><div class="ds-imageframe" data-stroke><span class="tp-ph"><i class="ds-icon ds-icon--image ds-icon--lg" aria-hidden="true"></i></span></div><span class="tp-item-texts"><span class="tp-item-title">화이트 접이식 좌식 책상</span><span class="tp-item-price tp-num">12,000원</span><span class="tp-item-foot"><span class="ds-tag-group"><span>하늘동</span><span>3시간 전</span></span></span></span></a></li>
+      <li><a class="tp-item" href="#"><div class="ds-imageframe" data-stroke><span class="tp-ph"><i class="ds-icon ds-icon--image ds-icon--lg" aria-hidden="true"></i></span><div class="ds-imageframe__floater" data-position="top-start"><span class="ds-badge" data-variant="solid">거래완료</span></div></div><span class="tp-item-texts"><span class="tp-item-title">스탠딩 겸용 접이식 책상</span><span class="tp-item-price tp-num">80,000원</span><span class="tp-item-foot"><span class="ds-tag-group"><span>별빛동</span><span>어제</span></span></span></span></a></li>
+      <li><a class="tp-item" href="#"><div class="ds-imageframe" data-stroke><span class="tp-ph"><i class="ds-icon ds-icon--image ds-icon--lg" aria-hidden="true"></i></span></div><span class="tp-item-texts"><span class="tp-item-title">노트북 올려 쓰기 좋은 미니 테이블</span><span class="tp-item-price tp-num">8,000원</span><span class="tp-item-foot"><span class="ds-tag-group"><span>강변동</span><span>어제</span></span></span></span></a></li>
+      <li><a class="tp-item" href="#"><div class="ds-imageframe" data-stroke><span class="tp-ph"><i class="ds-icon ds-icon--image ds-icon--lg" aria-hidden="true"></i></span></div><span class="tp-item-texts"><span class="tp-item-title">접이식 책상 2개 일괄 (사무실 정리)</span><span class="tp-item-price tp-num">70,000원</span><span class="tp-item-foot"><span class="ds-tag-group"><span>하늘동</span><span>2일 전</span></span></span></span></a></li>
+    </ul>
+
+    <div class="tp-more"><button type="button" class="ds-btn" data-variant="neutralWeak" data-width="fill">더보기</button></div>
+    <div class="tp-pager">
+      <nav class="ds-pagination" aria-label="페이지">
+        <a class="ds-pagination__item" data-type="prev" aria-label="이전 페이지" aria-disabled="true"></a>
+        <a class="ds-pagination__item" href="#" aria-current="page">1</a>
+        <a class="ds-pagination__item" href="#">2</a>
+        <a class="ds-pagination__item" href="#">3</a>
+        <a class="ds-pagination__item" href="#">4</a>
+        <span class="ds-pagination__item" data-type="ellipsis" aria-hidden="true"></span>
+        <a class="ds-pagination__item" href="#">16</a>
+        <a class="ds-pagination__item" data-type="next" href="#" aria-label="다음 페이지"></a>
+      </nav>
+    </div>
+  </section>
+
+  <!-- 오른쪽 보조 칸 -->
+  <aside class="tp-aside" aria-label="검색 도움">
+    <article class="ds-card">
+      <header class="ds-card__header"><h2 class="ds-card__title">인기 검색어</h2></header>
+      <div class="ds-card__content">
+        <div class="tp-keywords">
+          <a class="ds-chip" data-variant="outlineWeak" data-size="small" href="#">책상</a><a class="ds-chip" data-variant="outlineWeak" data-size="small" href="#">의자</a><a class="ds-chip" data-variant="outlineWeak" data-size="small" href="#">모니터</a><a class="ds-chip" data-variant="outlineWeak" data-size="small" href="#">자전거</a><a class="ds-chip" data-variant="outlineWeak" data-size="small" href="#">유모차</a><a class="ds-chip" data-variant="outlineWeak" data-size="small" href="#">에어컨</a><a class="ds-chip" data-variant="outlineWeak" data-size="small" href="#">노트북</a><a class="ds-chip" data-variant="outlineWeak" data-size="small" href="#">냉장고</a><a class="ds-chip" data-variant="outlineWeak" data-size="small" href="#">책장</a><a class="ds-chip" data-variant="outlineWeak" data-size="small" href="#">식탁</a>
+        </div>
+      </div>
+    </article>
+    <article class="ds-card">
+      <header class="ds-card__header"><h2 class="ds-card__title">최근 검색어</h2></header>
+      <ul class="ds-list">
+        <li><a class="ds-list-item" href="#" data-size="small"><span class="ds-list-item__prefix"><i class="ds-icon ds-icon--clock" aria-hidden="true"></i></span><span class="ds-list-item__content"><span class="ds-list-item__title">사무용 의자</span></span></a></li>
+        <li><a class="ds-list-item" href="#" data-size="small"><span class="ds-list-item__prefix"><i class="ds-icon ds-icon--clock" aria-hidden="true"></i></span><span class="ds-list-item__content"><span class="ds-list-item__title">모니터 암</span></span></a></li>
+        <li><a class="ds-list-item" href="#" data-size="small"><span class="ds-list-item__prefix"><i class="ds-icon ds-icon--clock" aria-hidden="true"></i></span><span class="ds-list-item__content"><span class="ds-list-item__title">스탠드 조명</span></span></a></li>
+      </ul>
+    </article>
+  </aside>
+</main>
+
+<!-- 필터 Side Panel -->
+<dialog class="ds-sidepanel" id="filter-panel" data-size="small" aria-labelledby="filter-title">
+  <div class="ds-sidepanel__header">
+    <div class="ds-sidepanel__texts"><h2 class="ds-sidepanel__title" id="filter-title">필터</h2><p class="ds-sidepanel__desc">원하는 조건을 고르세요</p></div>
+    <button type="button" class="ds-sidepanel__close" data-ds-close aria-label="닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button>
+  </div>
+  <div class="ds-sidepanel__body">
+    <div class="tp-filter-group">
+      <p class="tp-h3">거래 방식</p>
+      <div class="ds-selectbox-group" role="radiogroup" aria-label="거래 방식">
+        <label class="ds-selectbox"><span class="ds-selectbox__texts"><span class="ds-selectbox__label">전체</span></span><span class="ds-radio" data-tone="neutral" data-size="medium"><input type="radio" class="ds-radio__control" name="trade" checked></span></label>
+        <label class="ds-selectbox"><span class="ds-selectbox__texts"><span class="ds-selectbox__label">직거래</span><span class="ds-selectbox__desc">만나서 주고받아요</span></span><span class="ds-radio" data-tone="neutral" data-size="medium"><input type="radio" class="ds-radio__control" name="trade"></span></label>
+        <label class="ds-selectbox"><span class="ds-selectbox__texts"><span class="ds-selectbox__label">택배</span><span class="ds-selectbox__desc">배송으로 받아요</span></span><span class="ds-radio" data-tone="neutral" data-size="medium"><input type="radio" class="ds-radio__control" name="trade"></span></label>
+      </div>
+    </div>
+    <div class="tp-filter-group">
+      <p class="tp-h3">가격</p>
+      <div class="tp-range"><span class="tp-sub tp-num">0원</span><span class="tp-sub tp-num">10만원 이상</span></div>
+      <input type="range" class="ds-slider" min="0" max="100" value="60" data-tone="brand" aria-label="최대 가격">
+    </div>
+    <div class="tp-filter-group">
+      <p class="tp-h3">상태</p>
+      <fieldset class="ds-checkbox-group">
+        <label class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control" checked><span class="ds-checkbox__label">판매중</span></label>
+        <label class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control"><span class="ds-checkbox__label">예약중</span></label>
+        <label class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control"><span class="ds-checkbox__label">거래완료 포함</span></label>
+      </fieldset>
+    </div>
+  </div>
+  <div class="ds-sidepanel__footer"><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="medium" data-ds-close>초기화</button><button type="button" class="ds-btn" data-variant="neutralSolid" data-size="medium" data-ds-close>적용하기</button></div>
+</dialog>
+
+<!-- 모바일 Bottom Navigation -->
+<nav class="ds-bottomnav u-hide-from-md tp-bottomnav" aria-label="주요 메뉴">
+  <a class="ds-bottomnav__item" href="#"><span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--house ds-icon--lg" aria-hidden="true"></i></span><span class="ds-bottomnav__label">홈</span></a>
+  <a class="ds-bottomnav__item" href="#" aria-current="page"><span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--search ds-icon--lg" aria-hidden="true"></i></span><span class="ds-bottomnav__label">검색</span></a>
+  <a class="ds-bottomnav__item" href="#"><span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--message-circle ds-icon--lg" aria-hidden="true"></i><span class="ds-bottomnav__badge--count">3</span></span><span class="ds-bottomnav__label">채팅</span></a>
+  <a class="ds-bottomnav__item" href="#"><span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--id-card ds-icon--lg" aria-hidden="true"></i></span><span class="ds-bottomnav__label">나의 정보</span></a>
+</nav>
+
+</body>
+</html>

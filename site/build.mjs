@@ -6,9 +6,12 @@
 //   손으로 쓰는 것(생성 안 함): site/templates/pages/*.html (템플릿 원본), site/src/*
 import fs from 'node:fs';
 import path from 'node:path';
+import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 
 const SITE = path.dirname(fileURLToPath(import.meta.url));
+// 사이트 CSS / JS 주소에 붙이는 버전 - 내용이 바뀌면 값이 바뀌어 브라우저가 예전 파일을 쓰지 않는다
+const ASSET_V = crypto.createHash('sha1').update(['src/site.css', 'src/site.js', 'build.mjs'].map((f) => fs.readFileSync(path.join(SITE, f))).join('')).digest('hex').slice(0, 8);
 const DS = path.resolve(SITE, '..');
 const read = (p) => fs.readFileSync(path.join(DS, p), 'utf8');
 const readJson = (p) => JSON.parse(read(p));
@@ -172,8 +175,11 @@ const gsPager = (file) => { const i = GS_ORDER.findIndex(([f]) => f === file); c
 
 function sideNav(section, file, root) {
   const item = (href, label) => `<a class="site-nav__item" href="${root}${href}"${href === file ? ' aria-current="page"' : ''}>${esc(label)}</a>`;
-  // 레퍼런스 B 왼쪽 메뉴: 접지 않는 묶음 - 작은 묶음 이름 + 항목
-  const group = (label, items) => `<div class="site-nav__group" role="group" aria-label="${esc(label)}"><p class="site-nav__label">${esc(label)}</p>${items.join('')}</div>`;
+  // 레퍼런스 A 왼쪽 메뉴: 접는 묶음(아코디언) - 묶음 이름 버튼 + 오른쪽 꺾쇠, 안쪽 항목은 32 들여쓰기
+  const group = (label, items) => {
+    const id = 'site-nav-' + label.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+    return `<div class="site-nav__group" data-site-group="${esc(label)}"><button type="button" class="site-nav__toggle" aria-expanded="true" aria-controls="${id}">${esc(label)}<i class="ds-icon ds-icon--chevron-up site-nav__chevron" aria-hidden="true"></i></button><div class="site-nav__panel" id="${id}" role="group" aria-label="${esc(label)}"><div class="site-nav__children">${items.join('')}</div></div></div>`;
+  };
   const parts = [];
   if (section === 'get-started') {
     parts.push(item('index.html', 'Overview'));
@@ -237,9 +243,9 @@ ${desc ? `<meta name="description" content="${esc(desc)}">\n` : ''}<!-- 생성�
 <script>try { var t = localStorage.getItem("ybm-site-theme"); if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.dataset.theme = "dark"; } catch (e) {}</script>
 <link rel="icon" href="${root}assets/logo-ybmnet.svg" type="image/svg+xml">
 <link rel="stylesheet" href="${root}../dist/ybm-ds.css">
-<link rel="stylesheet" href="${root}assets/site.css">
+<link rel="stylesheet" href="${root}assets/site.css?v=${ASSET_V}">
 <script src="${root}../dist/ybm-ds.js" defer></script>
-<script src="${root}assets/site.js" defer></script>
+<script src="${root}assets/site.js?v=${ASSET_V}" defer></script>
 </head>
 <body class="site">
 <a class="site-skip" href="#main">본문 바로가기</a>

@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>쇼핑 홈 - YBM DS 템플릿</title>
+<link rel="stylesheet" href="../../../dist/ybm-ds.css">
+<script src="../../../dist/ybm-ds.js" defer></script>
+<style>
+  body { word-break: keep-all; overflow-wrap: break-word; }
+  .tp-h2 { font-size: var(--ybm-font-size-t07); line-height: var(--ybm-line-height-t07); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-sub { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
+  .tp-caption { font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); color: var(--ybm-color-fg-neutral-subtle); }
+  .tp-num { font-variant-numeric: tabular-nums; }
+  .tp-ph { display: grid; place-items: center; height: 100%; color: var(--ybm-color-fg-neutral-subtle); }
+  .tp-logo { display: grid; place-items: center; width: 88px; height: 28px; border-radius: var(--ybm-shape-xs); background: var(--ybm-color-bg-neutral); color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t03-static); line-height: var(--ybm-line-height-t03-static); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-bar { position: sticky; top: 0; z-index: var(--ybm-z-sticky); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); }
+  .tp-topnav-search { flex: 1 1 auto; max-width: 400px; margin-inline: var(--ybm-space-x6); }
+
+  /* 상단 분류 탭: 막대 아래에 함께 고정 */
+  .tp-cats { position: sticky; top: var(--ds-appbar-height, 56px); z-index: calc(var(--ybm-z-sticky) - 1); background: var(--ybm-color-bg-layer-default); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); }
+  .tp-cats-inner { max-width: 1200px; margin-inline: auto; padding-inline: var(--ybm-space-x-global-gutter); overflow-x: auto; scrollbar-width: none; }
+  .tp-cats-inner::-webkit-scrollbar { display: none; }
+  @media (min-width: 768px) { .tp-cats { top: 64px; } .tp-cats-inner { padding-inline: var(--ybm-space-x8); } }
+
+  .tp-page { display: flex; flex-direction: column; gap: var(--ybm-space-x10); max-width: 1200px; margin-inline: auto; padding: var(--ybm-space-x4) var(--ybm-space-x-global-gutter) calc(var(--ybm-space-x14) + var(--ybm-space-x10) + env(safe-area-inset-bottom, 0px)); }
+  @media (min-width: 768px) { .tp-page { gap: var(--ybm-space-x14); padding: var(--ybm-space-x6) var(--ybm-space-x8) var(--ybm-space-x20); } }
+  .tp-section-head { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--ybm-space-x2); margin-bottom: var(--ybm-space-x4); }
+  .tp-section-head p { margin-top: var(--ybm-space-x1); }
+
+  /* 큰 배너 Carousel: 모바일 한 장씩, 768 이상 두 장 보임 */
+  .tp-bleed { margin-inline: calc(var(--ybm-space-x-global-gutter) * -1); }
+  .tp-bleed > .ds-carousel { --ds-carousel-padding: var(--ybm-space-x-global-gutter); }
+  @media (min-width: 768px) { .tp-bleed { margin-inline: 0; } .tp-bleed > .ds-carousel { --ds-carousel-padding: 0px; } }
+  .tp-banner { position: relative; display: block; width: calc(100vw - var(--ybm-space-x-global-gutter) * 2); color: inherit; text-decoration: none; }
+  @media (min-width: 768px) { .tp-banner { width: 560px; } }
+  .tp-banner .ds-imageframe { border-radius: var(--ybm-shape-xl); }
+  .tp-banner-text { position: absolute; left: var(--ybm-space-x5); bottom: var(--ybm-space-x5); display: flex; flex-direction: column; gap: var(--ybm-space-x1); }
+  .tp-banner-title { font-size: var(--ybm-font-size-t07); line-height: var(--ybm-line-height-t07); font-weight: var(--ybm-font-weight-semibold); }
+  @media (min-width: 768px) { .tp-banner-title { font-size: var(--ybm-font-size-t09); line-height: var(--ybm-line-height-t09); } }
+
+  /* 빠른 분류: 둥근 그림 + 이름, 모바일 2줄 */
+  .tp-quick { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: var(--ybm-space-x4) var(--ybm-space-x2); }
+  @media (min-width: 768px) { .tp-quick { grid-template-columns: repeat(10, minmax(0, 1fr)); } }
+  .tp-quick a { display: flex; flex-direction: column; align-items: center; gap: var(--ybm-space-x2); color: inherit; font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); text-decoration: none; text-align: center; }
+  .tp-quick .ds-imageframe { width: 56px; border-radius: var(--ybm-shape-pill); }
+
+  /* 브랜드 그리드: 2열, 768 이상 3열, 1280 이상 4열 */
+  .tp-brands { display: grid; grid-template-columns: 1fr; gap: var(--ybm-space-x3); }
+  @media (min-width: 560px) { .tp-brands { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--ybm-space-x4); } }
+  @media (min-width: 1024px) { .tp-brands { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  @media (min-width: 1280px) { .tp-brands { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+  .tp-brand { color: inherit; text-decoration: none; }
+  .tp-brand-body { display: flex; align-items: center; gap: var(--ybm-space-x3); }
+  .tp-brand-texts { display: flex; flex: 1 1 auto; flex-direction: column; min-width: 0; }
+  .tp-brand-name { overflow: hidden; font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); font-weight: var(--ybm-font-weight-semibold); text-overflow: ellipsis; white-space: nowrap; }
+  .tp-brand-photos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--ybm-space-x1); margin-top: var(--ybm-space-x3); }
+
+  /* 상품 선반 Carousel */
+  .tp-product { display: flex; flex-direction: column; gap: var(--ybm-space-x2); width: 156px; color: inherit; text-decoration: none; }
+  @media (min-width: 768px) { .tp-product { width: 200px; } }
+  .tp-product-texts { display: flex; flex-direction: column; gap: var(--ybm-space-x0_5); }
+  .tp-product-brand { font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-product-name { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; font-size: var(--ybm-font-size-t03); line-height: var(--ybm-line-height-t03); color: var(--ybm-color-fg-neutral-muted); }
+  .tp-product-price { display: flex; align-items: baseline; gap: var(--ybm-space-x1_5); font-size: var(--ybm-font-size-t05); line-height: var(--ybm-line-height-t05); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-off { color: var(--ybm-color-fg-critical); }
+  .tp-was { color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t02); font-weight: var(--ybm-font-weight-regular); text-decoration: line-through; }
+
+  /* 순위 목록: 2열, 768 이상 3열 */
+  .tp-rank-list { display: grid; grid-template-columns: 1fr; gap: var(--ybm-space-x1); }
+  @media (min-width: 768px) { .tp-rank-list { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--ybm-space-x8); } }
+  .tp-rank { color: var(--ybm-color-fg-brand); font-weight: var(--ybm-font-weight-semibold); }
+
+  .tp-footer { padding-top: var(--ybm-space-x8); border-top: 1px solid var(--ybm-color-stroke-neutral-muted); }
+  .tp-footer-links { display: flex; flex-wrap: wrap; gap: var(--ybm-space-x2) var(--ybm-space-x4); margin-bottom: var(--ybm-space-x3); }
+  .tp-footer-links a { color: var(--ybm-color-fg-neutral-muted); font-size: var(--ybm-font-size-t03); text-decoration: none; }
+  .tp-bottomnav { position: fixed; inset-inline: 0; bottom: 0; z-index: var(--ybm-z-sticky); }
+</style>
+</head>
+<body>
+
+<!-- 모바일: 로고, 검색, 장바구니 -->
+<header class="ds-appbar u-hide-from-md tp-bar" data-platform="android">
+  <div class="ds-appbar__left"><a class="tp-logo" href="#" aria-label="서비스 이름 홈">로고</a></div>
+  <div class="ds-appbar__main"></div>
+  <div class="ds-appbar__right">
+    <button type="button" class="ds-appbar__button" aria-label="검색"><i class="ds-icon ds-icon--search" aria-hidden="true"></i></button>
+    <button type="button" class="ds-appbar__button" aria-label="알림"><i class="ds-icon ds-icon--message-circle" aria-hidden="true"></i></button>
+    <button type="button" class="ds-appbar__button" aria-label="장바구니 2개"><i class="ds-icon ds-icon--credit-card" aria-hidden="true"></i></button>
+  </div>
+</header>
+
+<header class="ds-topnav u-show-from-md tp-bar">
+  <div class="ds-topnav__left">
+    <a class="ds-topnav__heading" href="#" aria-label="서비스 이름 홈"><span class="tp-logo">로고</span></a>
+    <nav class="ds-topnav__menu" aria-label="주요 메뉴">
+      <a class="ds-topnav__item" href="#" aria-current="page">홈</a>
+      <a class="ds-topnav__item" href="#">뷰티</a>
+      <a class="ds-topnav__item" href="#">스포츠</a>
+      <a class="ds-topnav__item" href="#">아울렛</a>
+      <a class="ds-topnav__item" href="#">키즈</a>
+    </nav>
+  </div>
+  <div class="ds-input tp-topnav-search" data-variant="outline" data-size="medium"><i class="ds-icon ds-icon--search ds-input__icon" aria-hidden="true"></i><input class="ds-input__control" type="search" placeholder="상품, 브랜드 검색" aria-label="검색"></div>
+  <div class="ds-topnav__end">
+    <button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="좋아요"><i class="ds-icon ds-icon--thumbs-up" aria-hidden="true"></i></button>
+    <button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="장바구니 2개"><i class="ds-icon ds-icon--credit-card" aria-hidden="true"></i></button>
+    <a class="ds-btn" data-variant="neutralWeak" data-size="xsmall" href="#">로그인</a>
+  </div>
+</header>
+
+<!-- 분류 탭 -->
+<div class="tp-cats">
+  <div class="tp-cats-inner">
+    <div class="ds-tabs" role="tablist" data-layout="hug" data-size="medium" aria-label="분류">
+      <button type="button" class="ds-tabs__trigger" role="tab" aria-selected="true">추천</button>
+      <button type="button" class="ds-tabs__trigger" role="tab" aria-selected="false">순위</button>
+      <button type="button" class="ds-tabs__trigger" role="tab" aria-selected="false">세일</button>
+      <button type="button" class="ds-tabs__trigger" role="tab" aria-selected="false">브랜드</button>
+      <button type="button" class="ds-tabs__trigger" role="tab" aria-selected="false">신상품</button>
+      <button type="button" class="ds-tabs__trigger" role="tab" aria-selected="false">발매</button>
+      <button type="button" class="ds-tabs__trigger" role="tab" aria-selected="false">매거진</button>
+    </div>
+  </div>
+</div>
+
+<main class="tp-page">
+
+  <!-- 큰 배너 -->
+  <section aria-label="기획전">
+    <div class="tp-bleed">
+      <div class="ds-carousel" role="region" aria-roledescription="carousel" aria-label="기획전">
+        <div class="ds-carousel__scroller">
+          <div class="ds-carousel__item"><a class="tp-banner" href="#"><div class="ds-imageframe" data-ratio="16:9"><span class="tp-ph"><i class="ds-icon ds-icon--image ds-icon--lg" aria-hidden="true"></i></span></div><span class="tp-banner-text"><span class="ds-badge" data-variant="solid" data-tone="critical">최대 60%</span><span class="tp-banner-title">가을 아우터 기획전</span><span class="tp-sub">10.24 - 11.3</span></span></a></div>
+          <div class="ds-carousel__item"><a class="tp-banner" href="#"><div class="ds-imageframe" data-ratio="16:9"><span class="tp-ph"><i class="ds-icon ds-icon--image ds-icon--lg" aria-hidden="true"></i></span></div><span class="tp-banner-text"><span class="ds-badge" data-variant="solid" data-tone="brand">신규 입점</span><span class="tp-banner-title">이번 주 새로 들어온 브랜드 12</span><span class="tp-sub">첫 구매 쿠폰 증정</span></span></a></div>
+          <div class="ds-carousel__item"><a class="tp-banner" href="#"><div class="ds-imageframe" data-ratio="16:9"><span class="tp-ph"><i class="ds-icon ds-icon--image ds-icon--lg" aria-hidden="true"></i></span></div><span class="tp-banner-text"><span class="ds-badge" data-variant="solid">오늘만</span><span class="tp-banner-title">타임 세일 18시 시작</span><span class="tp-sub">선착순 500명</span></span></a></div>
+        </div>
+        <button type="button" class="ds-carousel__button" data-direction="previous" aria-label="이전"><i class="ds-icon ds-icon--chevron-left ds-icon--sm" aria-hidden="true"></i></button>
+        <button type="button" class="ds-carousel__button" data-direction="next" aria-label="다음"><i class="ds-icon ds-icon--chevron-right ds-icon--sm" aria-hidden="true"></i></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 빠른 분류 -->
+  <nav class="tp-quick" aria-label="빠른 분류">
+    <a href="#"><span class="ds-imageframe"><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></span>아우터</a>
+    <a href="#"><span class="ds-imageframe"><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></span>상의</a>
+    <a href="#"><span class="ds-imageframe"><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></span>바지</a>
+    <a href="#"><span class="ds-imageframe"><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></span>신발</a>
+    <a href="#"><span class="ds-imageframe"><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></span>가방</a>
+    <a href="#"><span class="ds-imageframe"><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></span>모자</a>
+    <a href="#"><span class="ds-imageframe"><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></span>시계</a>
+    <a href="#"><span class="ds-imageframe"><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></span>뷰티</a>
+    <a href="#"><span class="ds-imageframe"><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></span>스포츠</a>
+    <a href="#"><span class="ds-imageframe"><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></span>세일</a>
+  </nav>
+
+  <!-- 주목할 브랜드 -->
+  <section aria-labelledby="brands-title">
+    <div class="tp-section-head"><div><h2 class="tp-h2" id="brands-title">지금 주목할 브랜드</h2><p class="tp-sub">이번 주 많이 찾은 순서예요</p></div><a class="ds-btn" data-variant="ghost" data-size="xsmall" href="#">전체 보기<i class="ds-icon ds-icon--chevron-right" aria-hidden="true"></i></a></div>
+    <div class="tp-brands">
+      <a class="ds-card tp-brand" href="#"><div class="ds-card__content"><div class="tp-brand-body"><span class="ds-avatar" data-size="42" data-shape="rounded" role="img" aria-label="브랜드"><span class="ds-avatar__initials" aria-hidden="true">A</span></span><div class="tp-brand-texts"><span class="tp-brand-name">에이 스튜디오</span><span class="tp-caption">좋아요 12.4만</span></div><span class="ds-badge" data-tone="critical">~40%</span></div><div class="tp-brand-photos" aria-hidden="true"><span class="ds-imageframe" data-stroke><span class="tp-ph"><i class="ds-icon ds-icon--image ds-icon--sm" aria-hidden="true"></i></span></span><span class="ds-imageframe" data-stroke><span class="tp-ph"><i class="ds-icon ds-icon--image ds-icon--sm" aria-hidden="true"></i></span></span><span class="ds-imageframe" data-stroke><span class="tp-ph"><i class="ds-icon ds-icon--image ds-icon--sm" aria-hidden="true"></i></span></span></div></div></a>
+      <a class="ds-card tp-brand" href="#"><div class="ds-card__content"><div class="tp-brand-body"><span class="ds-avatar" data-size="42" data-shape="rounded" role="img" aria-label="브랜드"><span class="ds-avatar__initials" aria-hidden="true">B</span></span><div class="tp-brand-texts"><span class="tp-brand-name">비 컬렉션</span><span class="tp-caption">좋아요 8.1만</span></div><span class="ds-badge" data-tone="brand">신규</span></div><div class="tp-brand-photos" aria-hidden="true"><span class="ds-imageframe" data-stroke><span class="tp-ph"><i class="ds-icon ds-icon--image ds-icon--sm" aria-hidden="true"></i></span></span><span class="ds-imageframe" data-stroke><span class="tp-ph"><i class="ds-icon ds-icon--image ds-icon--sm" aria-hidden="true"></i></span></span><span class="ds-imageframe" data-stroke><span class="tp-ph"><i class="ds-icon ds-icon--image ds-icon--sm" aria-hidden="true"></i></span></span></div></div></a>
+      <a class="ds-card tp-brand" href="#"><div class="ds-card__content"><div class="tp-brand-body"><span class="ds-avatar" data-size="42" data-shape="rounded" role="img" aria-label="브랜드"><span class="ds-avatar__initials" aria-hidden="true">C</span></span><div class="tp-brand-texts"><span class="tp-brand-name">씨 웨어</span><span class="tp-caption">좋아요 5.6만</span></div><span class="ds-badge" data-tone="critical">~25%</span></div><div class="tp-brand-photos" aria-hidden="true"><span class="ds-imageframe" data-stroke><span class="tp-ph"><i class="ds-icon ds-icon--image ds-icon--sm" aria-hidden="true"></i></span></span><span class="ds-imageframe" data-stroke><span class="tp-ph"><i class="ds-icon ds-icon--image ds-icon--sm" aria-hidden="true"></i></span></span><span class="ds-imageframe" data-stroke><span class="tp-ph"><i class="ds-icon ds-icon--image ds-icon--sm" aria-hidden="true"></i></span></span></div></div></a>
+      <a class="ds-card tp-brand" href="#"><div class="ds-card__content"><div class="tp-brand-body"><span class="ds-avatar" data-size="42" data-shape="rounded" role="img" aria-label="브랜드"><span class="ds-avatar__initials" aria-hidden="true">D</span></span><div class="tp-brand-texts"><span class="tp-brand-name">디 라벨</span><span class="tp-caption">좋아요 3.2만</span></div></div><div class="tp-brand-photos" aria-hidden="true"><span class="ds-imageframe" data-stroke><span class="tp-ph"><i class="ds-icon ds-icon--image ds-icon--sm" aria-hidden="true"></i></span></span><span class="ds-imageframe" data-stroke><span class="tp-ph"><i class="ds-icon ds-icon--image ds-icon--sm" aria-hidden="true"></i></span></span><span class="ds-imageframe" data-stroke><span class="tp-ph"><i class="ds-icon ds-icon--image ds-icon--sm" aria-hidden="true"></i></span></span></div></div></a>
+    </div>
+  </section>
+
+  <!-- 상품 선반 1 -->
+  <section aria-labelledby="shelf1-title">
+    <div class="tp-section-head"><div><h2 class="tp-h2" id="shelf1-title">요즘 많이 사는 아우터</h2><p class="tp-sub">최근 7일 판매 기준</p></div><a class="ds-btn" data-variant="ghost" data-size="xsmall" href="#">더보기<i class="ds-icon ds-icon--chevron-right" aria-hidden="true"></i></a></div>
+    <div class="tp-bleed">
+      <div class="ds-carousel" role="region" aria-roledescription="carousel" aria-label="요즘 많이 사는 아우터">
+        <div class="ds-carousel__scroller">
+          <div class="ds-carousel__item"><a class="tp-product" href="#"><div class="ds-imageframe" data-ratio="4:3" data-stroke><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span><div class="ds-imageframe__floater" data-position="top-start"><span class="ds-badge" data-variant="solid" data-tone="critical">세일</span></div></div><span class="tp-product-texts"><span class="tp-product-brand">에이 스튜디오</span><span class="tp-product-name">오버핏 울 블렌드 코트</span><span class="tp-product-price"><span class="tp-off">30%</span><span class="tp-num">139,000원</span><span class="tp-was tp-num">199,000원</span></span></span></a></div>
+          <div class="ds-carousel__item"><a class="tp-product" href="#"><div class="ds-imageframe" data-ratio="4:3" data-stroke><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div><span class="tp-product-texts"><span class="tp-product-brand">비 컬렉션</span><span class="tp-product-name">경량 패딩 자켓</span><span class="tp-product-price"><span class="tp-num">89,000원</span></span></span></a></div>
+          <div class="ds-carousel__item"><a class="tp-product" href="#"><div class="ds-imageframe" data-ratio="4:3" data-stroke><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span><div class="ds-imageframe__floater" data-position="top-start"><span class="ds-badge" data-variant="solid" data-tone="brand">NEW</span></div></div><span class="tp-product-texts"><span class="tp-product-brand">씨 웨어</span><span class="tp-product-name">코듀로이 트러커 자켓</span><span class="tp-product-price"><span class="tp-num">76,000원</span></span></span></a></div>
+          <div class="ds-carousel__item"><a class="tp-product" href="#"><div class="ds-imageframe" data-ratio="4:3" data-stroke><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div><span class="tp-product-texts"><span class="tp-product-brand">디 라벨</span><span class="tp-product-name">후드 집업 베이직</span><span class="tp-product-price"><span class="tp-off">15%</span><span class="tp-num">49,000원</span><span class="tp-was tp-num">58,000원</span></span></span></a></div>
+          <div class="ds-carousel__item"><a class="tp-product" href="#"><div class="ds-imageframe" data-ratio="4:3" data-stroke><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div><span class="tp-product-texts"><span class="tp-product-brand">에이 스튜디오</span><span class="tp-product-name">바람막이 자켓</span><span class="tp-product-price"><span class="tp-num">65,000원</span></span></span></a></div>
+          <div class="ds-carousel__item"><a class="tp-product" href="#"><div class="ds-imageframe" data-ratio="4:3" data-stroke><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div><span class="tp-product-texts"><span class="tp-product-brand">비 컬렉션</span><span class="tp-product-name">양털 플리스 자켓</span><span class="tp-product-price"><span class="tp-num">54,000원</span></span></span></a></div>
+        </div>
+        <button type="button" class="ds-carousel__button" data-direction="previous" aria-label="이전"><i class="ds-icon ds-icon--chevron-left ds-icon--sm" aria-hidden="true"></i></button>
+        <button type="button" class="ds-carousel__button" data-direction="next" aria-label="다음"><i class="ds-icon ds-icon--chevron-right ds-icon--sm" aria-hidden="true"></i></button>
+      </div>
+    </div>
+  </section>
+
+  <div class="ds-banner" role="status" data-variant="solid" data-tone="informative"><div class="ds-banner__inner"><i class="ds-icon ds-icon--info-solid" aria-hidden="true"></i><p class="ds-banner__message"><strong class="ds-banner__title">회원 혜택</strong>  오늘 가입하면 첫 주문 5,000원 할인 쿠폰을 드려요.</p><a class="ds-banner__action" href="#">가입하기</a></div></div>
+
+  <!-- 실시간 순위 -->
+  <section aria-labelledby="rank-title">
+    <div class="tp-section-head"><div><h2 class="tp-h2" id="rank-title">실시간 검색 순위</h2><p class="tp-sub">10분 전 기준</p></div></div>
+    <ul class="ds-list tp-rank-list">
+      <li><a class="ds-list-item" href="#" data-size="small"><span class="ds-list-item__prefix tp-rank tp-num">1</span><span class="ds-list-item__content"><span class="ds-list-item__title">울 코트</span></span><span class="ds-list-item__suffix"><span class="ds-badge" data-tone="critical">↑3</span></span></a></li>
+      <li><a class="ds-list-item" href="#" data-size="small"><span class="ds-list-item__prefix tp-rank tp-num">2</span><span class="ds-list-item__content"><span class="ds-list-item__title">경량 패딩</span></span><span class="ds-list-item__suffix"><span class="ds-badge">-</span></span></a></li>
+      <li><a class="ds-list-item" href="#" data-size="small"><span class="ds-list-item__prefix tp-rank tp-num">3</span><span class="ds-list-item__content"><span class="ds-list-item__title">니트 베스트</span></span><span class="ds-list-item__suffix"><span class="ds-badge" data-tone="brand">NEW</span></span></a></li>
+      <li><a class="ds-list-item" href="#" data-size="small"><span class="ds-list-item__prefix tp-rank tp-num">4</span><span class="ds-list-item__content"><span class="ds-list-item__title">와이드 데님</span></span><span class="ds-list-item__suffix"><span class="ds-badge" data-tone="informative">↓1</span></span></a></li>
+      <li><a class="ds-list-item" href="#" data-size="small"><span class="ds-list-item__prefix tp-rank tp-num">5</span><span class="ds-list-item__content"><span class="ds-list-item__title">첼시 부츠</span></span><span class="ds-list-item__suffix"><span class="ds-badge" data-tone="critical">↑5</span></span></a></li>
+      <li><a class="ds-list-item" href="#" data-size="small"><span class="ds-list-item__prefix tp-rank tp-num">6</span><span class="ds-list-item__content"><span class="ds-list-item__title">머플러</span></span><span class="ds-list-item__suffix"><span class="ds-badge">-</span></span></a></li>
+    </ul>
+  </section>
+
+  <!-- 상품 선반 2 -->
+  <section aria-labelledby="shelf2-title">
+    <div class="tp-section-head"><div><h2 class="tp-h2" id="shelf2-title">새로 나온 신발</h2><p class="tp-sub">이번 주 발매</p></div><a class="ds-btn" data-variant="ghost" data-size="xsmall" href="#">더보기<i class="ds-icon ds-icon--chevron-right" aria-hidden="true"></i></a></div>
+    <div class="tp-bleed">
+      <div class="ds-carousel" role="region" aria-roledescription="carousel" aria-label="새로 나온 신발">
+        <div class="ds-carousel__scroller">
+          <div class="ds-carousel__item"><a class="tp-product" href="#"><div class="ds-imageframe" data-ratio="4:3" data-stroke><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div><span class="tp-product-texts"><span class="tp-product-brand">씨 웨어</span><span class="tp-product-name">클래식 스니커즈 화이트</span><span class="tp-product-price"><span class="tp-num">99,000원</span></span></span></a></div>
+          <div class="ds-carousel__item"><a class="tp-product" href="#"><div class="ds-imageframe" data-ratio="4:3" data-stroke><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div><span class="tp-product-texts"><span class="tp-product-brand">디 라벨</span><span class="tp-product-name">첼시 부츠 블랙</span><span class="tp-product-price"><span class="tp-num">158,000원</span></span></span></a></div>
+          <div class="ds-carousel__item"><a class="tp-product" href="#"><div class="ds-imageframe" data-ratio="4:3" data-stroke><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div><span class="tp-product-texts"><span class="tp-product-brand">에이 스튜디오</span><span class="tp-product-name">러닝화 라이트</span><span class="tp-product-price"><span class="tp-num">129,000원</span></span></span></a></div>
+          <div class="ds-carousel__item"><a class="tp-product" href="#"><div class="ds-imageframe" data-ratio="4:3" data-stroke><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div><span class="tp-product-texts"><span class="tp-product-brand">비 컬렉션</span><span class="tp-product-name">스웨이드 로퍼</span><span class="tp-product-price"><span class="tp-num">112,000원</span></span></span></a></div>
+          <div class="ds-carousel__item"><a class="tp-product" href="#"><div class="ds-imageframe" data-ratio="4:3" data-stroke><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div><span class="tp-product-texts"><span class="tp-product-brand">씨 웨어</span><span class="tp-product-name">슬립온 그레이</span><span class="tp-product-price"><span class="tp-num">69,000원</span></span></span></a></div>
+        </div>
+        <button type="button" class="ds-carousel__button" data-direction="previous" aria-label="이전"><i class="ds-icon ds-icon--chevron-left ds-icon--sm" aria-hidden="true"></i></button>
+        <button type="button" class="ds-carousel__button" data-direction="next" aria-label="다음"><i class="ds-icon ds-icon--chevron-right ds-icon--sm" aria-hidden="true"></i></button>
+      </div>
+    </div>
+  </section>
+
+  <footer class="tp-footer">
+    <div class="tp-footer-links"><a href="#">회사 소개</a><a href="#">이용약관</a><a href="#">개인정보처리방침</a><a href="#">고객센터</a><a href="#">입점 문의</a></div>
+    <p class="tp-caption">© 2026 서비스 이름. 상호, 대표, 사업자등록번호, 주소 같은 정보를 여기에 적어요.</p>
+  </footer>
+</main>
+
+<nav class="ds-bottomnav u-hide-from-md tp-bottomnav" aria-label="주요 메뉴">
+  <a class="ds-bottomnav__item" href="#" aria-current="page"><span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--house ds-icon--lg" aria-hidden="true"></i></span><span class="ds-bottomnav__label">홈</span></a>
+  <a class="ds-bottomnav__item" href="#"><span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--menu ds-icon--lg" aria-hidden="true"></i></span><span class="ds-bottomnav__label">카테고리</span></a>
+  <a class="ds-bottomnav__item" href="#"><span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--search ds-icon--lg" aria-hidden="true"></i></span><span class="ds-bottomnav__label">검색</span></a>
+  <a class="ds-bottomnav__item" href="#"><span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--thumbs-up ds-icon--lg" aria-hidden="true"></i></span><span class="ds-bottomnav__label">좋아요</span></a>
+  <a class="ds-bottomnav__item" href="#"><span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--id-card ds-icon--lg" aria-hidden="true"></i></span><span class="ds-bottomnav__label">마이</span></a>
+</nav>
+
+</body>
+</html>

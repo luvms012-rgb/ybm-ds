@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>모임 검색 결과 - YBM DS 템플릿</title>
+<link rel="stylesheet" href="../../../dist/ybm-ds.css">
+<script src="../../../dist/ybm-ds.js" defer></script>
+<style>
+  body { word-break: keep-all; overflow-wrap: break-word; }
+  .tp-h1 { font-size: var(--ybm-font-size-t07); line-height: var(--ybm-line-height-t07); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-sub { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
+  .tp-num { font-variant-numeric: tabular-nums; }
+  .tp-ph { display: grid; place-items: center; height: 100%; color: var(--ybm-color-fg-neutral-subtle); }
+  .tp-logo { display: grid; place-items: center; width: 88px; height: 28px; border-radius: var(--ybm-shape-xs); background: var(--ybm-color-bg-neutral); color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t03-static); line-height: var(--ybm-line-height-t03-static); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-bar { position: sticky; top: 0; z-index: var(--ybm-z-sticky); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); }
+  .tp-appbar-search { flex: 1 1 auto; min-width: 0; }
+  .tp-topnav-search { flex: 1 1 auto; max-width: 480px; margin-inline: var(--ybm-space-x6); }
+  .tp-scope { position: sticky; top: var(--ds-appbar-height, 56px); z-index: calc(var(--ybm-z-sticky) - 1); background: var(--ybm-color-bg-layer-default); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); }
+  .tp-scope-inner { max-width: 1200px; margin-inline: auto; padding-inline: var(--ybm-space-x-global-gutter); }
+  @media (min-width: 768px) { .tp-scope { top: 64px; } .tp-scope-inner { padding-inline: var(--ybm-space-x8); } }
+
+  .tp-page { max-width: 1200px; margin-inline: auto; padding: var(--ybm-space-x4) var(--ybm-space-x-global-gutter) calc(var(--ybm-space-x14) + var(--ybm-space-x10) + env(safe-area-inset-bottom, 0px)); }
+  @media (min-width: 768px) { .tp-page { padding: var(--ybm-space-x6) var(--ybm-space-x8) var(--ybm-space-x20); } }
+  @media (min-width: 1024px) { .tp-page { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: var(--ybm-space-x10); align-items: start; } }
+
+  .tp-result-head { display: flex; flex-direction: column; gap: var(--ybm-space-x3); }
+  .tp-filters { display: flex; align-items: center; gap: var(--ybm-space-x2); overflow-x: auto; margin-inline: calc(var(--ybm-space-x-global-gutter) * -1); padding-inline: var(--ybm-space-x-global-gutter); scrollbar-width: none; }
+  .tp-filters::-webkit-scrollbar { display: none; }
+  .tp-filters > * { flex: none; }
+  @media (min-width: 768px) { .tp-filters { margin-inline: 0; padding-inline: 0; overflow: visible; flex-wrap: wrap; } }
+
+  /* 모임 목록: 네모 썸네일 + 이름, 소개 한 줄, 지역 · 멤버 수 · 분류 */
+  .tp-groups { margin-top: var(--ybm-space-x2); }
+  .tp-group { display: flex; align-items: flex-start; gap: var(--ybm-space-x4); padding-block: var(--ybm-space-x4); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); color: inherit; text-decoration: none; }
+  .tp-group:last-child { box-shadow: none; }
+  .tp-group-thumb { flex: none; width: 64px; }
+  @media (min-width: 768px) { .tp-group-thumb { width: 80px; } }
+  .tp-group-body { display: flex; flex: 1 1 auto; flex-direction: column; gap: var(--ybm-space-x1); min-width: 0; }
+  .tp-group-name { display: flex; align-items: center; gap: var(--ybm-space-x2); font-size: var(--ybm-font-size-t05); line-height: var(--ybm-line-height-t05); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-group-desc { display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
+  .tp-group-foot { display: flex; align-items: center; justify-content: space-between; gap: var(--ybm-space-x3); margin-top: var(--ybm-space-x1); }
+  .tp-group-foot .ds-avatar-group { flex: none; }
+
+  .tp-aside { display: none; }
+  @media (min-width: 1024px) { .tp-aside { display: flex; flex-direction: column; gap: var(--ybm-space-x4); position: sticky; top: 120px; } }
+  .tp-keywords { display: flex; flex-wrap: wrap; gap: var(--ybm-space-x2); }
+
+  .tp-more { margin-top: var(--ybm-space-x6); }
+  .tp-pager { display: none; }
+  @media (min-width: 768px) { .tp-more { display: none; } .tp-pager { display: flex; justify-content: center; margin-top: var(--ybm-space-x10); } }
+  .tp-fab { position: fixed; right: var(--ybm-space-x-global-gutter); bottom: calc(var(--ybm-space-x14) + var(--ybm-space-x4) + env(safe-area-inset-bottom, 0px)); z-index: var(--ybm-z-sticky); }
+  .tp-bottomnav { position: fixed; inset-inline: 0; bottom: 0; z-index: var(--ybm-z-sticky); }
+</style>
+</head>
+<body>
+
+<header class="ds-appbar u-hide-from-md tp-bar" data-platform="android">
+  <div class="ds-appbar__left"><button type="button" class="ds-appbar__button" aria-label="뒤로"><i class="ds-icon ds-icon--chevron-left" aria-hidden="true"></i></button></div>
+  <div class="ds-appbar__main">
+    <div class="ds-input tp-appbar-search" data-variant="outline" data-size="medium"><i class="ds-icon ds-icon--search ds-input__icon" aria-hidden="true"></i><input class="ds-input__control" type="search" value="러닝" aria-label="검색어"><button type="button" class="ds-input__clear" aria-label="지우기"></button></div>
+  </div>
+  <div class="ds-appbar__right"></div>
+</header>
+
+<header class="ds-topnav u-show-from-md tp-bar">
+  <div class="ds-topnav__left">
+    <a class="ds-topnav__heading" href="#" aria-label="서비스 이름 홈"><span class="tp-logo">로고</span></a>
+    <div class="ds-input tp-topnav-search" data-variant="outline" data-size="medium"><i class="ds-icon ds-icon--search ds-input__icon" aria-hidden="true"></i><input class="ds-input__control" type="search" value="러닝" aria-label="검색어"><button type="button" class="ds-input__clear" aria-label="지우기"></button></div>
+  </div>
+  <div class="ds-topnav__end">
+    <a class="ds-btn" data-variant="ghost" data-size="xsmall" href="#">모임 만들기</a>
+    <a class="ds-btn" data-variant="neutralWeak" data-size="xsmall" href="#">로그인</a>
+  </div>
+</header>
+
+<div class="tp-scope">
+  <div class="tp-scope-inner">
+    <div class="ds-tabs" role="tablist" data-layout="hug" data-size="medium" aria-label="검색 범위">
+      <button type="button" class="ds-tabs__trigger" role="tab" aria-selected="false">전체</button>
+      <button type="button" class="ds-tabs__trigger" role="tab" aria-selected="false">물품</button>
+      <button type="button" class="ds-tabs__trigger" role="tab" aria-selected="false">가게</button>
+      <button type="button" class="ds-tabs__trigger" role="tab" aria-selected="false">글</button>
+      <button type="button" class="ds-tabs__trigger" role="tab" aria-selected="true">모임</button>
+    </div>
+  </div>
+</div>
+
+<main class="tp-page">
+  <section aria-labelledby="result-title">
+    <div class="tp-result-head">
+      <h1 class="tp-h1" id="result-title">‘러닝’ 모임 검색 결과 <span class="tp-sub tp-num">18개</span></h1>
+      <div class="tp-filters">
+        <button type="button" class="ds-chip" data-variant="outlineStrong" aria-pressed="false"><i class="ds-icon ds-icon--menu" aria-hidden="true"></i>필터</button>
+        <button type="button" class="ds-chip" data-variant="outlineWeak" aria-pressed="false">하늘동 근처<i class="ds-icon ds-icon--chevron-down" aria-hidden="true"></i></button>
+        <button type="button" class="ds-chip" data-variant="outlineWeak" aria-pressed="false">운동<i class="ds-icon ds-icon--chevron-down" aria-hidden="true"></i></button>
+        <button type="button" class="ds-chip" aria-pressed="true">모집중만</button>
+        <button type="button" class="ds-chip" aria-pressed="false">이번 주 일정 있음</button>
+      </div>
+    </div>
+
+    <div class="tp-groups">
+      <a class="tp-group" href="#">
+        <div class="ds-imageframe tp-group-thumb" data-stroke aria-hidden="true"><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div>
+        <div class="tp-group-body">
+          <p class="tp-group-name">새벽 러닝 클럽 <span class="ds-badge" data-tone="brand">모집중</span></p>
+          <p class="tp-group-desc">평일 아침 6시, 강변 산책로 5km를 함께 달려요. 초보도 환영합니다.</p>
+          <div class="tp-group-foot"><span class="ds-tag-group"><span>하늘동</span><span>멤버 256</span><span>운동</span></span><div class="ds-avatar-group" data-size="24" role="group" aria-label="멤버 일부"><span class="ds-avatar" data-size="24" role="img" aria-label="멤버"><span class="ds-avatar__initials" aria-hidden="true">김</span></span><span class="ds-avatar" data-size="24" role="img" aria-label="멤버"><span class="ds-avatar__initials" aria-hidden="true">이</span></span><span class="ds-avatar" data-size="24" role="img" aria-label="멤버"><span class="ds-avatar__initials" aria-hidden="true">박</span></span><span class="ds-avatar-group__overflow" role="img" aria-label="그 외 253명">+99</span></div></div>
+        </div>
+      </a>
+      <a class="tp-group" href="#">
+        <div class="ds-imageframe tp-group-thumb" data-stroke aria-hidden="true"><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div>
+        <div class="tp-group-body">
+          <p class="tp-group-name">주말 천천히 달리기</p>
+          <p class="tp-group-desc">기록보다 꾸준함. 토요일 오전에 모여 걷다 뛰다 하며 한 시간 보내요.</p>
+          <div class="tp-group-foot"><span class="ds-tag-group"><span>별빛동</span><span>멤버 48</span><span>운동</span></span></div>
+        </div>
+      </a>
+      <a class="tp-group" href="#">
+        <div class="ds-imageframe tp-group-thumb" data-stroke aria-hidden="true"><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div>
+        <div class="tp-group-body">
+          <p class="tp-group-name">하프 마라톤 준비반 <span class="ds-badge" data-tone="brand">모집중</span></p>
+          <p class="tp-group-desc">내년 봄 대회를 목표로 12주 훈련 계획을 같이 따라가요. 주 3회 모임.</p>
+          <div class="tp-group-foot"><span class="ds-tag-group"><span>강변동</span><span>멤버 32</span><span>운동</span></span><div class="ds-avatar-group" data-size="24" role="group" aria-label="멤버 일부"><span class="ds-avatar" data-size="24" role="img" aria-label="멤버"><span class="ds-avatar__initials" aria-hidden="true">최</span></span><span class="ds-avatar" data-size="24" role="img" aria-label="멤버"><span class="ds-avatar__initials" aria-hidden="true">정</span></span><span class="ds-avatar-group__overflow" role="img" aria-label="그 외 30명">+30</span></div></div>
+        </div>
+      </a>
+      <a class="tp-group" href="#">
+        <div class="ds-imageframe tp-group-thumb" data-stroke aria-hidden="true"><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div>
+        <div class="tp-group-body">
+          <p class="tp-group-name">러닝 후 브런치</p>
+          <p class="tp-group-desc">가볍게 3km 뛰고 근처 카페에서 수다 떠는 모임이에요. 한 달에 두 번.</p>
+          <div class="tp-group-foot"><span class="ds-tag-group"><span>하늘동</span><span>멤버 120</span><span>친목</span></span></div>
+        </div>
+      </a>
+      <a class="tp-group" href="#">
+        <div class="ds-imageframe tp-group-thumb" data-stroke aria-hidden="true"><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div>
+        <div class="tp-group-body">
+          <p class="tp-group-name">반려견과 함께 달리기 <span class="ds-badge">마감</span></p>
+          <p class="tp-group-desc">강아지와 같이 뛸 수 있는 코스를 찾아 다녀요. 소형견, 대형견 모두 좋아요.</p>
+          <div class="tp-group-foot"><span class="ds-tag-group"><span>중앙동</span><span>멤버 20</span><span>반려동물</span></span></div>
+        </div>
+      </a>
+    </div>
+
+    <div class="tp-more"><button type="button" class="ds-btn" data-variant="neutralWeak" data-width="fill">더보기</button></div>
+    <div class="tp-pager">
+      <nav class="ds-pagination" aria-label="페이지">
+        <a class="ds-pagination__item" data-type="prev" aria-label="이전 페이지" aria-disabled="true"></a>
+        <a class="ds-pagination__item" href="#" aria-current="page">1</a>
+        <a class="ds-pagination__item" href="#">2</a>
+        <a class="ds-pagination__item" data-type="next" href="#" aria-label="다음 페이지"></a>
+      </nav>
+    </div>
+  </section>
+
+  <aside class="tp-aside" aria-label="검색 도움">
+    <article class="ds-card">
+      <header class="ds-card__header"><h2 class="ds-card__title">인기 검색어</h2></header>
+      <div class="ds-card__content">
+        <div class="tp-keywords">
+          <a class="ds-chip" data-variant="outlineWeak" data-size="small" href="#">러닝</a><a class="ds-chip" data-variant="outlineWeak" data-size="small" href="#">독서</a><a class="ds-chip" data-variant="outlineWeak" data-size="small" href="#">등산</a><a class="ds-chip" data-variant="outlineWeak" data-size="small" href="#">배드민턴</a><a class="ds-chip" data-variant="outlineWeak" data-size="small" href="#">영어 회화</a><a class="ds-chip" data-variant="outlineWeak" data-size="small" href="#">사진</a><a class="ds-chip" data-variant="outlineWeak" data-size="small" href="#">보드게임</a><a class="ds-chip" data-variant="outlineWeak" data-size="small" href="#">요리</a>
+        </div>
+      </div>
+    </article>
+    <article class="ds-card">
+      <header class="ds-card__header"><h2 class="ds-card__title">새로 생긴 모임</h2><p class="ds-card__desc">이번 주에 만들어졌어요</p></header>
+      <ul class="ds-list">
+        <li><a class="ds-list-item" href="#" data-size="small"><span class="ds-list-item__prefix"><span class="ds-avatar" data-size="24" data-shape="rounded" role="img" aria-label="모임"><span class="ds-avatar__initials" aria-hidden="true">사</span></span></span><span class="ds-list-item__content"><span class="ds-list-item__title">사진 산책</span><span class="ds-list-item__desc">멤버 6</span></span><i class="ds-icon ds-icon--chevron-right ds-list-item__chevron" aria-hidden="true"></i></a></li>
+        <li><a class="ds-list-item" href="#" data-size="small"><span class="ds-list-item__prefix"><span class="ds-avatar" data-size="24" data-shape="rounded" role="img" aria-label="모임"><span class="ds-avatar__initials" aria-hidden="true">보</span></span></span><span class="ds-list-item__content"><span class="ds-list-item__title">보드게임 금요일</span><span class="ds-list-item__desc">멤버 11</span></span><i class="ds-icon ds-icon--chevron-right ds-list-item__chevron" aria-hidden="true"></i></a></li>
+        <li><a class="ds-list-item" href="#" data-size="small"><span class="ds-list-item__prefix"><span class="ds-avatar" data-size="24" data-shape="rounded" role="img" aria-label="모임"><span class="ds-avatar__initials" aria-hidden="true">영</span></span></span><span class="ds-list-item__content"><span class="ds-list-item__title">영어 뉴스 읽기</span><span class="ds-list-item__desc">멤버 9</span></span><i class="ds-icon ds-icon--chevron-right ds-list-item__chevron" aria-hidden="true"></i></a></li>
+      </ul>
+    </article>
+  </aside>
+</main>
+
+<a class="ds-fab u-hide-from-md tp-fab" href="#"><i class="ds-icon ds-icon--plus" aria-hidden="true"></i>모임 만들기</a>
+
+<nav class="ds-bottomnav u-hide-from-md tp-bottomnav" aria-label="주요 메뉴">
+  <a class="ds-bottomnav__item" href="#"><span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--house ds-icon--lg" aria-hidden="true"></i></span><span class="ds-bottomnav__label">홈</span></a>
+  <a class="ds-bottomnav__item" href="#" aria-current="page"><span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--search ds-icon--lg" aria-hidden="true"></i></span><span class="ds-bottomnav__label">검색</span></a>
+  <a class="ds-bottomnav__item" href="#"><span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--message-circle ds-icon--lg" aria-hidden="true"></i></span><span class="ds-bottomnav__label">채팅</span></a>
+  <a class="ds-bottomnav__item" href="#"><span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--id-card ds-icon--lg" aria-hidden="true"></i></span><span class="ds-bottomnav__label">나의 정보</span></a>
+</nav>
+
+</body>
+</html>

@@ -108,3 +108,42 @@ import '@ybm/ds/dist/ybm-ds.js';
 | 템플릿 썸네일 이미지 | 지금은 실제 화면을 줄여 띄운다. 템플릿이 많아지면 캡처 이미지로 바꿔 빠르게 | |
 | 배포 자동화 | 지금은 `node site/build.mjs` 후 deploy. 저장소에 올리면 GitHub 가 알아서 만들게 할 수 있다 | |
 | 영어 | 지금은 한국어만. 해외 사용자가 있으면 검토 | |
+
+---
+
+## 6. 템플릿을 만들며 발견한 것 (2026-10-30 집)
+
+### 6-1. DS 에 없어서 임시로 대신한 것 ★
+| 필요한 것 | 지금 대신한 방법 | 제안 |
+|---|---|---|
+| 평점(Rating) | 반짝임 아이콘 + 숫자(4.8) + 후기 수 글자 | `Rating` 부품: 별 5개 채움 비율, 크기 small/medium, 읽기 전용과 입력. 가게 목록, 상품 카드, 후기에 모두 필요 |
+| 아이콘 5개 | 좋아요 = thumbs-up, 저장 = inbox, 장바구니 = credit-card, 지도 = globe, 별 = sparkles | Lucide 에서 `heart`, `bookmark`, `shopping-cart`, `map-pin`, `star`(채움 포함) 추가. 아이콘 페이지에서 바로 복사해 icons.css 에 넣으면 된다 |
+| 별점 입력 | 없음 | Rating 입력형으로 해결 |
+
+### 6-2. 국내 이커머스 메인 4곳 검토 결과
+공통으로 있는 요소를 우리 Commerce Home 과 비교했다. 사이트 이름은 적지 않는다.
+
+| 요소 | 4곳 공통 여부 | 우리 Commerce Home | 제안 |
+|---|---|---|---|
+| 상단 카테고리 서랍(햄버거) + 검색창 | 4/4 | 검색창만 | 카테고리 서랍을 Menu Sheet 또는 Side Panel 로 추가 |
+| 큰 배너 캐러셀 | 4/4 | 있음 | 유지 |
+| 빠른 분류(둥근 아이콘 줄) | 3/4 | 있음 | 유지 |
+| 상품 카드: 할인율 + 가격 + 원가 | 4/4 | 있음 | 유지 |
+| 상품 카드: 평점 + 후기 수 | 4/4 | 없음 | Rating 부품 뒤에 추가 |
+| 상품 카드: 배송 배지(당일, 새벽, 무료) | 3/4 | 없음 | Badge 로 추가, 문구는 범용(빠른 배송, 무료 배송) |
+| 상품 카드: 담기 버튼 | 3/4 | 없음 | 카드 오른쪽 아래 iconOnly 버튼, 아이콘은 shopping-cart 추가 뒤 |
+| 타임세일(남은 시간) | 3/4 | 없음 | DS Timer 부품으로 섹션 추가 |
+| 랭킹 탭(분류별) | 4/4 | 검색어 순위만 | Chip Tabs 로 분류 고르는 상품 랭킹 선반으로 바꿈 |
+| 첫 구매 쿠폰 모달 | 2/4 | 없음 | Dialog 예시로 추가(열기 버튼만) |
+| 섹션 제목 + 전체 보기 | 4/4 | 있음 | 유지 |
+| 왼쪽 카테고리 사이드 메뉴(PC) | 2/4 | 없음 | 선택. 넓은 화면에서 Side Navigation |
+
+### 6-3. 새 템플릿 후보 (이커머스 흐름을 끝까지)
+| 순위 | 템플릿 | 내용 | 부품 |
+|---|---|---|---|
+| 1 | Product List | 분류 상세 목록. 왼쪽 필터(가격, 브랜드, 배송), 위 정렬 칩, 3~4열 카드, 더보기 | Checkbox Group, Slider, Chip, Pagination |
+| 2 | Product Detail | 사진 캐러셀, 옵션 선택, 수량, 구매/담기 고정 막대, 상세 탭(정보, 후기, 문의) | Carousel, Select, Quantity Picker, Tabs, Rating |
+| 3 | Cart | 담은 상품 목록, 선택 삭제, 수량, 합계, 주문 버튼 | Checkbox, Quantity Picker, Table 또는 List |
+| 4 | Checkout | 배송지, 결제 수단, 쿠폰, 최종 금액 (이미 예정) | Select Box, Radio, Text Field |
+| 5 | Order Complete | 주문 번호, 배송 예정일, 다음 행동 | Result Section |
+| 6 | Event Page | 기획전 한 페이지. 큰 그림 + 상품 묶음 여러 개 | Image Frame, Carousel |

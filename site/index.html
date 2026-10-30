@@ -9,9 +9,9 @@
 <script>try { var t = localStorage.getItem("ybm-site-theme"); if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.dataset.theme = "dark"; } catch (e) {}</script>
 <link rel="icon" href="assets/logo-ybmnet.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../dist/ybm-ds.css">
-<link rel="stylesheet" href="assets/site.css">
+<link rel="stylesheet" href="assets/site.css?v=3d0b173e">
 <script src="../dist/ybm-ds.js" defer></script>
-<script src="assets/site.js" defer></script>
+<script src="assets/site.js?v=3d0b173e" defer></script>
 </head>
 <body class="site">
 <a class="site-skip" href="#main">본문 바로가기</a>
@@ -35,8 +35,8 @@
   <div class="site-side__top"><b>Menu</b><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" data-site-close aria-label="메뉴 닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button></div>
   <div class="site-side__mobile"><nav class="site-nav" aria-label="주요 메뉴"><a class="site-nav__item" href="index.html" aria-current="page">Get Started</a><a class="site-nav__item" href="components/index.html">Components</a><a class="site-nav__item" href="templates/index.html">Templates</a></nav><div class="site-nav__sep"></div></div>
   <nav class="site-nav" aria-label="Get Started 메뉴"><a class="site-nav__item" href="index.html" aria-current="page">Overview</a>
-<div class="site-nav__group" role="group" aria-label="Guide"><p class="site-nav__label">Guide</p><a class="site-nav__item" href="get-started/scripts.html">Scripts</a><a class="site-nav__item" href="get-started/usage.html">Usage</a></div>
-<div class="site-nav__group" role="group" aria-label="Foundations"><p class="site-nav__label">Foundations</p><a class="site-nav__item" href="foundations/color.html">Color</a><a class="site-nav__item" href="foundations/elevation.html">Elevation</a><a class="site-nav__item" href="foundations/icons.html">Iconography</a><a class="site-nav__item" href="foundations/motion.html">Motion</a><a class="site-nav__item" href="foundations/shape.html">Radius</a><a class="site-nav__item" href="foundations/spacing.html">Spacing</a><a class="site-nav__item" href="foundations/typography.html">Typography</a></div></nav>
+<div class="site-nav__group" data-site-group="Guide"><button type="button" class="site-nav__toggle" aria-expanded="true" aria-controls="site-nav-guide">Guide<i class="ds-icon ds-icon--chevron-up site-nav__chevron" aria-hidden="true"></i></button><div class="site-nav__panel" id="site-nav-guide" role="group" aria-label="Guide"><div class="site-nav__children"><a class="site-nav__item" href="get-started/scripts.html">Scripts</a><a class="site-nav__item" href="get-started/usage.html">Usage</a></div></div></div>
+<div class="site-nav__group" data-site-group="Foundations"><button type="button" class="site-nav__toggle" aria-expanded="true" aria-controls="site-nav-foundations">Foundations<i class="ds-icon ds-icon--chevron-up site-nav__chevron" aria-hidden="true"></i></button><div class="site-nav__panel" id="site-nav-foundations" role="group" aria-label="Foundations"><div class="site-nav__children"><a class="site-nav__item" href="foundations/color.html">Color</a><a class="site-nav__item" href="foundations/elevation.html">Elevation</a><a class="site-nav__item" href="foundations/icons.html">Iconography</a><a class="site-nav__item" href="foundations/motion.html">Motion</a><a class="site-nav__item" href="foundations/shape.html">Radius</a><a class="site-nav__item" href="foundations/spacing.html">Spacing</a><a class="site-nav__item" href="foundations/typography.html">Typography</a></div></div></div></nav>
 </aside>
 <div class="site-scrim" data-site-close></div>
 <main class="site-main" id="main">
