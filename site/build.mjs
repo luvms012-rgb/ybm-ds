@@ -167,8 +167,8 @@ const FOUND = az([['color', 'Color'], ['typography', 'Typography'], ['spacing', 
 const foundPager = (slug) => { const i = FOUND.findIndex(([s]) => s === slug); const p = FOUND[i - 1], n = FOUND[i + 1]; return [p && { href: p[0] + '.html', label: p[1] }, n && { href: n[0] + '.html', label: n[1] }]; };
 const GS = [['Guide', az([['get-started/usage.html', 'Usage'], ['get-started/scripts.html', 'Scripts']])]];
 // 시작하기 문서 순서 (이전 / 다음 문서) - 왼쪽 메뉴 순서 그대로, 이름은 페이지 제목
-const GS_TITLE = { 'get-started/usage.html': '사용 규칙', 'get-started/scripts.html': '스크립트' };
-const GS_ORDER = [['index.html', '시작하기'], ...GS.flatMap(([, list]) => list.map(([h]) => [h, GS_TITLE[h]]))];
+const GS_TITLE = { 'get-started/usage.html': 'Usage', 'get-started/scripts.html': 'Scripts' };
+const GS_ORDER = [['index.html', 'Get Started'], ...GS.flatMap(([, list]) => list.map(([h]) => [h, GS_TITLE[h]]))];
 const gsPager = (file) => { const i = GS_ORDER.findIndex(([f]) => f === file); const p = GS_ORDER[i - 1], n = GS_ORDER[i + 1]; return [p && { href: '{root}' + p[0], label: p[1] }, n && { href: '{root}' + n[0], label: n[1] }]; };
 
 function sideNav(section, file, root) {
@@ -182,19 +182,19 @@ function sideNav(section, file, root) {
   }
   if (section === 'foundations') {
     parts.push(item('foundations/index.html', 'Overview'));
-    parts.push(group('Foundations', FOUND.map(([s, l]) => item(`foundations/${s}.html`, l))));
+    parts.push(...FOUND.map(([s, l]) => item(`foundations/${s}.html`, l)));
   }
   if (section === 'components') {
     parts.push(item('components/index.html', 'Overview'));
-    parts.push(group('Components', compsAZ.map((c) => item(`components/${c.slug}.html`, c.name.split(' · ')[0]))));
+    parts.push(...compsAZ.map((c) => item(`components/${c.slug}.html`, c.name.split(' · ')[0])));
   }
   if (section === 'templates') {
     parts.push(item('templates/index.html', 'Overview'));
-    parts.push(group('Templates', templates.map((t) => item(`templates/${t.slug}.html`, t.en))));
+    parts.push(...templates.map((t) => item(`templates/${t.slug}.html`, t.en)));
   }
   const mobile = `<div class="site-side__mobile"><nav class="site-nav" aria-label="주요 메뉴">${NAV.map(([k, l, h]) => `<a class="site-nav__item" href="${root}${h}"${k === section ? ' aria-current="page"' : ''}>${l}</a>`).join('')}</nav><div class="site-nav__sep"></div></div>`;
-  // 컴포넌트 메뉴 맨 위 찾기 칸 (레퍼런스 A: 높이 32, 모서리 12) - 메뉴 항목과 목록 카드를 함께 거른다
-  const search = section === 'components' ? `<div class="ds-input site-side__search" data-variant="outline" data-size="medium"><i class="ds-icon ds-icon--search ds-input__icon" aria-hidden="true"></i><input class="ds-input__control" type="search" placeholder="컴포넌트 찾기" aria-label="컴포넌트 찾기" data-site-search></div>` : '';
+  // 컴포넌트 메뉴 맨 위 찾기 칸 (높이 32, 모서리 12, 1px 테두리) - 메뉴 항목과 목록 카드를 함께 거른다
+  const search = section === 'components' ? `<div class="site-side__searchbar"><div class="ds-input site-side__search" data-variant="outline" data-size="medium"><i class="ds-icon ds-icon--search ds-input__icon" aria-hidden="true"></i><input class="ds-input__control" type="search" placeholder="컴포넌트 찾기" aria-label="컴포넌트 찾기" data-site-search></div></div>` : '';
   return `<aside class="site-side" id="site-side" aria-label="페이지 목록">
   <div class="site-side__top"><b>메뉴</b><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" data-site-close aria-label="메뉴 닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button></div>
   ${mobile}${search}
@@ -313,9 +313,9 @@ const prompts = [
 고친 곳은 목록으로 알려 줘.`],
 ];
 write({
-  file: 'index.html', section: 'get-started', title: '시작하기', desc: 'YBM DS 를 AI 와 함께 바로 시작하는 방법', pager: gsPager('index.html'),
+  file: 'index.html', section: 'get-started', title: 'Get Started', desc: 'YBM DS 를 AI 와 함께 바로 시작하는 방법', pager: gsPager('index.html'),
   body: `<header>
-  <h1 class="site-h1">시작하기</h1>
+  <h1 class="site-h1">Get Started</h1>
   <p class="site-lead">YBM DS 를 프로젝트에 넣고 바로 화면을 만들어 보세요.</p>
 </header>
 
@@ -357,17 +357,17 @@ ${codeblock(`// tailwind.config.js - ybm-ds/tokens/tailwind.preset.js 를 프로
 
 <h2 id="next">다음으로</h2>
 <div class="site-grid">
-  <a class="site-card" href="get-started/usage.html"><div class="site-card__body"><p class="site-card__title">사용 규칙</p><p class="site-card__desc">불러오는 순서, 커스텀, 다크 모드, 반응형 기준점을 알아봅니다.</p></div></a>
-  <a class="site-card" href="components/index.html"><div class="site-card__body"><p class="site-card__title">컴포넌트 ${comps.length}종</p><p class="site-card__desc">부품마다 미리보기, 사용법, 속성, 사용 지침을 봅니다.</p></div></a>
-  <a class="site-card" href="templates/index.html"><div class="site-card__body"><p class="site-card__title">템플릿</p><p class="site-card__desc">자주 쓰는 화면을 통째로 복사해 출발점으로 씁니다.</p></div></a>
+  <a class="site-card" href="get-started/usage.html"><div class="site-card__body"><p class="site-card__title">Usage</p><p class="site-card__desc">불러오는 순서, 커스텀, 다크 모드, 반응형 기준점을 알아봅니다.</p></div></a>
+  <a class="site-card" href="components/index.html"><div class="site-card__body"><p class="site-card__title">Components</p><p class="site-card__desc">부품마다 미리보기, 사용법, 속성, 사용 지침을 봅니다.</p></div></a>
+  <a class="site-card" href="templates/index.html"><div class="site-card__body"><p class="site-card__title">Templates</p><p class="site-card__desc">자주 쓰는 화면을 통째로 복사해 출발점으로 씁니다.</p></div></a>
 </div>`.replaceAll('href="components/', 'href="{root}components/').replaceAll('href="templates/', 'href="{root}templates/').replaceAll('href="get-started/', 'href="{root}get-started/'),
 });
 
 // 사용 규칙
 const bpRows = [['sm', '480px', '큰 휴대폰'], ['md', '768px', '태블릿, PC 부품으로 바뀌는 기준'], ['lg', '1280px', '넓은 PC, 3단 배치'], ['xl', '1440px', '아주 넓은 화면']];
 write({
-  file: 'get-started/usage.html', section: 'get-started', title: '사용 규칙', pager: gsPager('get-started/usage.html'),
-  body: `<header><h1 class="site-h1">사용 규칙</h1><p class="site-lead">DS 를 불러오는 순서와 모양을 바꾸는 방법, 화면 모드와 반응형 기준을 정리했습니다.</p></header>
+  file: 'get-started/usage.html', section: 'get-started', title: 'Usage', pager: gsPager('get-started/usage.html'),
+  body: `<header><h1 class="site-h1">Usage</h1><p class="site-lead">DS 를 불러오는 순서와 모양을 바꾸는 방법, 화면 모드와 반응형 기준을 정리했습니다.</p></header>
 
 <h2 id="order">불러오는 순서</h2>
 <p>DS 를 먼저, 서비스 CSS 를 그다음에 불러옵니다. DS 전체가 CSS 레이어 안에 들어 있어서 레이어 밖에 쓴 서비스 CSS 는 선택자 길이와 상관없이 항상 DS 를 이깁니다. 그래서 <code>!important</code> 나 긴 선택자로 다툴 필요가 없어요.</p>
@@ -437,7 +437,7 @@ const fvBox = (slug, cover = false) => `<div class="site-tile__thumb${cover ? ' 
 const foundName = Object.fromEntries(FOUND);
 write({
   file: 'foundations/index.html', section: 'foundations', title: 'Foundations', layout: 'wide',
-  body: `<header><h1 class="site-h1">파운데이션</h1><p class="site-lead">색, 글자, 간격처럼 모든 화면의 바탕이 되는 값입니다. 화면에서는 값 대신 토큰 이름을 씁니다.</p></header>
+  body: `<header><h1 class="site-h1">Foundations</h1><p class="site-lead">색, 글자, 간격처럼 모든 화면의 바탕이 되는 값입니다. 화면에서는 값 대신 토큰 이름을 씁니다.</p></header>
 <div class="site-tiles">${FOUND.map(([s, l]) => `<a class="site-tile" href="${s}.html">${fvBox(s)}<p class="site-tile__name">${esc(l)}</p></a>`).join('\n')}</div>`,
 });
 const foundPages = {
@@ -506,6 +506,7 @@ write({
   file: 'foundations/icons.html', section: 'foundations', title: 'Iconography', pager: foundPager('icons'),
   body: `<header><h1 class="site-h1">Iconography</h1><p class="site-lead">UI 아이콘은 Lucide 한 가지만 씁니다. Lucide 전체 ${lucideCount.toLocaleString()}개 가운데 CSS 로 바로 쓸 수 있는 것은 ${iconNames.length}개이고, 나머지는 필요할 때 <code>icons.css</code> 에 한 줄 넣어 씁니다.</p></header>
 ${fvBox('icons', true)}
+<div class="site-icon-search"><div class="ds-input" data-variant="outline" data-size="medium"><i class="ds-icon ds-icon--search ds-input__icon" aria-hidden="true"></i><input class="ds-input__control" type="search" placeholder="아이콘 찾기 (예: arrow, user, calendar)" aria-label="아이콘 찾기" data-site-lucide-search></div><span class="site-lucide-count" data-site-lucide-count></span></div>
 <h2 id="use">쓰는 법</h2>
 ${example(`<div class="pv-stage"><i class="ds-icon ds-icon--search ds-icon--sm" aria-hidden="true"></i><i class="ds-icon ds-icon--search" aria-hidden="true"></i><i class="ds-icon ds-icon--search ds-icon--lg" aria-hidden="true"></i><span style="color: var(--ybm-color-fg-brand)"><i class="ds-icon ds-icon--circle-check-solid ds-icon--lg" aria-hidden="true"></i></span></div>`, `<i class="ds-icon ds-icon--search ds-icon--sm" aria-hidden="true"></i>  <!-- 16 -->\n<i class="ds-icon ds-icon--search" aria-hidden="true"></i>              <!-- 20 기본 -->\n<i class="ds-icon ds-icon--search ds-icon--lg" aria-hidden="true"></i>  <!-- 24 -->\n<span style="color: var(--ybm-color-fg-brand)"><i class="ds-icon ds-icon--circle-check-solid" aria-hidden="true"></i></span>  <!-- 색은 부모 글자색 -->`)}
 <ul class="site-list site-note">
@@ -518,8 +519,7 @@ ${example(`<div class="pv-stage"><i class="ds-icon ds-icon--search ds-icon--sm" 
 <p>누르면 클래스 이름이 복사됩니다.</p>
 <div class="site-icons">${iconNames.map((n) => `<button type="button" class="site-icon" data-site-copy="ds-icon--${n}" title="ds-icon--${n} 복사"><i class="ds-icon ds-icon--${n} ds-icon--lg" aria-hidden="true"></i><span>${n}</span></button>`).join('')}</div>
 <h2 id="lucide">Lucide 전체 아이콘</h2>
-<p>Lucide ${esc(lucide.version)} 의 아이콘 ${lucideCount.toLocaleString()}개입니다. CSS 표시가 붙은 것은 누르면 클래스 이름이, 나머지는 <code>icons.css</code> 에 넣을 줄이 복사됩니다. 영어 이름이나 뜻으로 찾을 수 있어요.</p>
-<div class="site-lucide-bar"><div class="ds-input" data-variant="outline" data-size="medium"><i class="ds-icon ds-icon--search ds-input__icon" aria-hidden="true"></i><input class="ds-input__control" type="search" placeholder="예: arrow, user, calendar" aria-label="Lucide 아이콘 찾기" data-site-lucide-search></div><span class="site-lucide-count" data-site-lucide-count></span></div>
+<p>Lucide ${esc(lucide.version)} 의 아이콘 ${lucideCount.toLocaleString()}개입니다. CSS 표시가 붙은 것은 누르면 클래스 이름이, 나머지는 <code>icons.css</code> 에 넣을 줄이 복사됩니다. 위 찾기 칸에 영어 이름이나 뜻을 넣으면 두 목록이 함께 걸러집니다.</p>
 <div class="site-icons" id="site-lucide" data-site-ds-icons="${esc(iconNames.join(' '))}"></div>
 <p class="site-note">아이콘 그림은 Lucide(ISC 라이선스)입니다. <a class="ds-link" href="{root}assets/lucide-LICENSE.txt">라이선스 전문</a></p>
 <script src="{root}assets/lucide-icons.js" defer></script>`,
@@ -528,8 +528,8 @@ ${example(`<div class="pv-stage"><i class="ds-icon ds-icon--search ds-icon--sm" 
 // 스크립트
 const jsRows = [...dsJs.slice(0, dsJs.indexOf('*/')).matchAll(/^\s*· (.+?) — (.+)$/gm)].map((m) => [`<b>${esc(m[1])}</b>`, inline(prose(m[2]))]);
 write({
-  file: 'get-started/scripts.html', section: 'get-started', title: '스크립트', pager: gsPager('get-started/scripts.html'),
-  body: `<header><h1 class="site-h1">스크립트</h1><p class="site-lead"><code>ybm-ds.js</code> 는 CSS 만으로 안 되는 동작만 맡습니다. 불러오기만 하면 HTML 속성을 보고 알아서 동작해요.</p></header>
+  file: 'get-started/scripts.html', section: 'get-started', title: 'Scripts', pager: gsPager('get-started/scripts.html'),
+  body: `<header><h1 class="site-h1">Scripts</h1><p class="site-lead"><code>ybm-ds.js</code> 는 CSS 만으로 안 되는 동작만 맡습니다. 불러오기만 하면 HTML 속성을 보고 알아서 동작해요.</p></header>
 <h2 id="features">하는 일</h2>
 ${table(['부품', '하는 일'], jsRows)}
 <h2 id="api">직접 부르는 기능</h2>
@@ -564,7 +564,7 @@ const coverThumb = (c) => cardThumb(c).replace('class="site-tile__thumb"', 'clas
 const hero = (title, lead) => `<header class="site-hero"><h1 class="site-h1">${esc(title)}</h1><p class="site-lead">${esc(lead)}</p></header>`;
 write({
   file: 'components/index.html', section: 'components', title: 'Components', layout: 'wide',
-  body: `<header><h1 class="site-h1">컴포넌트</h1><p class="site-lead">화면을 만드는 부품 ${comps.length}종입니다. 모두 Figma 와 CSS 가 같은 이름, 같은 값으로 짝을 이룹니다.</p></header>
+  body: `<header><h1 class="site-h1">Components</h1><p class="site-lead">화면을 만드는 부품 ${comps.length}종입니다. 모두 Figma 와 CSS 가 같은 이름, 같은 값으로 짝을 이룹니다.</p></header>
 <div class="site-tiles">${compsAZ.map((c) => `<a class="site-tile" href="${c.slug}.html" data-site-item="${esc((c.name + ' ' + c.desc).toLowerCase())}">${cardThumb(c)}<p class="site-tile__name">${esc(c.name.split(' · ')[0])}</p></a>`).join('\n')}</div>
 <div class="ds-empty site-empty-result" hidden><span class="ds-empty__media"><i class="ds-icon ds-icon--search" aria-hidden="true"></i></span><p class="ds-empty__title">찾는 컴포넌트가 없어요</p><p class="ds-empty__desc">다른 이름으로 찾아보세요.</p></div>`,
 });
@@ -622,7 +622,7 @@ ${sections.join('\n')}`,
 const tplGroups = [...new Set(templates.map((t) => t.group))];
 write({
   file: 'templates/index.html', section: 'templates', title: 'Templates', layout: 'full',
-  body: `${hero('템플릿', '자주 쓰는 화면을 DS 부품으로 미리 조립해 두었습니다. 통째로 복사해 출발점으로 쓰고, 모두 모바일부터 PC 까지 맞춰집니다.')}
+  body: `${hero('Templates', '자주 쓰는 화면을 DS 부품으로 미리 조립해 두었습니다. 통째로 복사해 출발점으로 쓰고, 모두 모바일부터 PC 까지 맞춰집니다.')}
 <div class="site-toolbar site-toolbar--center">
   <div class="ds-chiptabs" role="tablist" aria-label="분류">
     <button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-filter="">전체</button>
@@ -640,10 +640,10 @@ templates.forEach((t) => {
   const classes = new Set((src.match(/class="[^"]*"/g) || []).join(' ').match(/\bds-[a-z0-9_-]+/g) || []);
   const used = comps.filter((c) => c.classes.some((k) => classes.has(k.slice(1))));
   write({
-    file: `templates/${t.slug}.html`, section: 'templates', title: t.name, desc: t.desc, layout: 'wide',
+    file: `templates/${t.slug}.html`, section: 'templates', title: t.en, desc: t.desc, layout: 'wide',
     body: `<header>
   <p class="site-eyebrow"><a href="index.html">Templates</a> / ${esc(t.group)}</p>
-  <h1 class="site-h1">${esc(t.name)}</h1>
+  <h1 class="site-h1">${esc(t.en)}</h1>
   <p class="site-lead">${esc(t.desc)}</p>
   <div class="site-meta">${btn(`pages/${t.slug}.html`, '새 창으로 보기', 'neutralSolid', 'small', 'external-link').replace('href="pages', 'target="_blank" rel="noopener" href="pages')}</div>
 </header>
