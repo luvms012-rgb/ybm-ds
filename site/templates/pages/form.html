@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>신청서 작성 - YBM DS 템플릿</title>
+<link rel="stylesheet" href="../../../dist/ybm-ds.css">
+<script src="../../../dist/ybm-ds.js" defer></script>
+<style>
+  /* 템플릿 배치 전용. 값은 모두 --ybm-* 토큰 */
+  body { word-break: keep-all; overflow-wrap: break-word; }
+  .tp-h1 { font-size: var(--ybm-font-size-t10); line-height: var(--ybm-line-height-t10); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; }
+  .tp-h2 { font-size: var(--ybm-font-size-t07); line-height: var(--ybm-line-height-t07); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; }
+  .tp-h3 { font-size: var(--ybm-font-size-t05); line-height: var(--ybm-line-height-t05); font-weight: var(--ybm-font-weight-semibold); letter-spacing: -0.01em; }
+  .tp-body { font-size: var(--ybm-font-size-t05); line-height: 1.6; letter-spacing: -0.01em; }
+  .tp-sub { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
+  .tp-caption { font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); color: var(--ybm-color-fg-neutral-subtle); }
+  @media (min-width: 768px) { .tp-h1 { font-size: var(--ybm-font-size-t12); line-height: var(--ybm-line-height-t12); } .tp-h2 { font-size: var(--ybm-font-size-t09); line-height: var(--ybm-line-height-t09); } }
+
+  /* 상단 막대 */
+  .tp-appbar { position: sticky; top: 0; z-index: var(--ybm-z-sticky); }
+  .tp-topbar { position: sticky; top: 0; z-index: var(--ybm-z-sticky); padding-inline: var(--ybm-space-x4); background: var(--ybm-color-bg-layer-default); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); }
+  .tp-topbar > .ds-topnav { max-width: 1200px; margin-inline: auto; }
+  .tp-logo { font-size: var(--ybm-font-size-t06); line-height: var(--ybm-line-height-t06); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.01em; }
+
+  /* 본문 */
+  .tp-main { padding: var(--ybm-space-x6) var(--ybm-space-x-global-gutter) calc(var(--ybm-space-x24) + env(safe-area-inset-bottom, 0px)); }
+  .tp-sheet { display: flex; flex-direction: column; gap: var(--ybm-space-x8); }
+  .tp-head { display: flex; flex-direction: column; gap: var(--ybm-space-x2); }
+  .tp-section { display: flex; flex-direction: column; gap: var(--ybm-space-x6); }
+  .tp-choices { --ds-selectbox-columns: 1; }
+  .tp-agree { display: flex; align-items: center; justify-content: space-between; gap: var(--ybm-space-x3); }
+  .tp-agree > .ds-link { flex: none; }
+
+  /* 하단 버튼: 모바일은 화면 아래 고정 */
+  .tp-actions { position: fixed; right: 0; bottom: 0; left: 0; z-index: var(--ybm-z-sticky); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: var(--ybm-space-x2); padding: var(--ybm-space-x3) var(--ybm-space-x-global-gutter) calc(var(--ybm-space-x3) + env(safe-area-inset-bottom, 0px)); background: var(--ybm-color-bg-layer-default); box-shadow: inset 0 1px 0 var(--ybm-color-stroke-neutral-muted); }
+
+  @media (min-width: 768px) {
+    body { background: var(--ybm-color-bg-canvas); }
+    .tp-main { padding: var(--ybm-space-x10) var(--ybm-space-x6) var(--ybm-space-x20); }
+    .tp-sheet { max-width: 640px; margin-inline: auto; padding: var(--ybm-space-x10); border-radius: var(--ybm-shape-2xl); background: var(--ybm-color-bg-layer-default); box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-neutral-weak); }
+    .tp-choices { --ds-selectbox-columns: 2; }
+    .tp-actions { position: static; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); padding: 0; background: none; box-shadow: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- 모바일 상단: Top App Bar -->
+<header class="ds-appbar tp-appbar u-hide-from-md">
+  <div class="ds-appbar__left">
+    <button type="button" class="ds-appbar__button" aria-label="뒤로"><i class="ds-icon ds-icon--chevron-left" aria-hidden="true"></i></button>
+  </div>
+  <div class="ds-appbar__main">
+    <p class="ds-appbar__title">신청서 작성</p>
+  </div>
+  <div class="ds-appbar__right"></div>
+</header>
+
+<!-- PC 상단: Top Navigation -->
+<div class="tp-topbar u-show-from-md">
+  <header class="ds-topnav">
+    <div class="ds-topnav__left">
+      <a class="ds-topnav__heading tp-logo" href="#">서비스 이름</a>
+      <nav class="ds-topnav__menu" aria-label="주요 메뉴">
+        <a class="ds-topnav__item" href="#">홈</a>
+        <a class="ds-topnav__item" href="#" aria-current="page">신청하기</a>
+        <a class="ds-topnav__item" href="#">신청 내역</a>
+        <a class="ds-topnav__item" href="#">고객센터</a>
+      </nav>
+    </div>
+    <div class="ds-topnav__end">
+      <a class="ds-btn" data-variant="neutralWeak" data-size="xsmall" href="#">마이페이지</a>
+    </div>
+  </header>
+</div>
+
+<!-- 본문 -->
+<main class="tp-main">
+  <form class="tp-sheet" action="#" method="post" novalidate>
+
+    <!-- 진행 단계 -->
+    <ol class="ds-stepper" aria-label="신청 단계">
+      <li class="ds-stepper__step" data-state="complete"><span class="ds-stepper__indicator"></span><span class="ds-stepper__label">약관 동의</span></li>
+      <li class="ds-stepper__step" data-state="current" aria-current="step"><span class="ds-stepper__indicator"></span><span class="ds-stepper__label">정보 입력</span></li>
+      <li class="ds-stepper__step"><span class="ds-stepper__indicator"></span><span class="ds-stepper__label">내용 확인</span></li>
+      <li class="ds-stepper__step"><span class="ds-stepper__indicator"></span><span class="ds-stepper__label">신청 완료</span></li>
+    </ol>
+
+    <!-- 제목 -->
+    <div class="tp-head">
+      <h1 class="tp-h2">신청 정보를 입력해 주세요</h1>
+      <p class="tp-sub">빨간 점이 있는 항목은 꼭 입력해야 해요.</p>
+    </div>
+
+    <!-- 기본 정보 -->
+    <section class="tp-section" aria-labelledby="sec-basic">
+      <h2 class="tp-h3" id="sec-basic">기본 정보</h2>
+
+      <div class="ds-field">
+        <div class="ds-field__header">
+          <label class="ds-field__label" for="f-name">이름</label>
+          <span class="ds-field__required" aria-hidden="true"></span>
+        </div>
+        <div class="ds-input" data-variant="outline">
+          <input class="ds-input__control" id="f-name" name="name" autocomplete="name" placeholder="이름을 입력해 주세요" required>
+          <button type="button" class="ds-input__clear" aria-label="이름 지우기"></button>
+        </div>
+      </div>
+
+      <div class="ds-field">
+        <div class="ds-field__header">
+          <label class="ds-field__label" for="f-phone">연락처</label>
+          <span class="ds-field__required" aria-hidden="true"></span>
+        </div>
+        <div class="ds-input" data-variant="outline">
+          <button type="button" class="ds-prefixselect" data-size="medium" aria-label="국가 번호 선택, 지금 +82">+82</button>
+          <input class="ds-input__control" id="f-phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel-national" placeholder="010-0000-0000" aria-describedby="f-phone-help" required>
+        </div>
+        <div class="ds-field__footer">
+          <p class="ds-field__help" id="f-phone-help">숫자만 입력해 주세요</p>
+        </div>
+      </div>
+
+      <!-- 오류 문구 예시 -->
+      <div class="ds-field">
+        <div class="ds-field__header">
+          <label class="ds-field__label" for="f-email">이메일</label>
+          <span class="ds-field__required" aria-hidden="true"></span>
+        </div>
+        <div class="ds-input" data-variant="outline">
+          <input class="ds-input__control" id="f-email" name="email" type="email" autocomplete="email" value="hong@" aria-invalid="true" aria-describedby="f-email-error" required>
+          <button type="button" class="ds-input__clear" aria-label="이메일 지우기"></button>
+        </div>
+        <div class="ds-field__footer">
+          <p class="ds-field__help">신청 결과를 이 주소로 보내 드려요</p>
+          <p class="ds-field__error" id="f-email-error">이메일 형식이 올바르지 않아요</p>
+        </div>
+      </div>
+    </section>
+
+    <hr class="ds-divider">
+
+    <!-- 신청 내용 -->
+    <section class="tp-section" aria-labelledby="sec-detail">
+      <h2 class="tp-h3" id="sec-detail">신청 내용</h2>
+
+      <div class="ds-field">
+        <div class="ds-field__header">
+          <label class="ds-field__label" for="f-date">희망 일정</label>
+          <span class="ds-field__required" aria-hidden="true"></span>
+        </div>
+        <button type="button" class="ds-fieldbutton" id="f-date" data-size="large" aria-haspopup="dialog" aria-describedby="f-date-help">
+          <i class="ds-icon ds-icon--calendar" aria-hidden="true"></i>
+          <span class="ds-fieldbutton__value" data-placeholder="날짜를 선택해 주세요"></span>
+          <i class="ds-icon ds-icon--chevron-down" aria-hidden="true"></i>
+        </button>
+        <div class="ds-field__footer">
+          <p class="ds-field__help" id="f-date-help">오늘부터 30일 안에서 고를 수 있어요</p>
+        </div>
+      </div>
+
+      <div class="ds-field">
+        <div class="ds-field__header">
+          <span class="ds-field__label" id="f-type-label">신청 유형</span>
+          <span class="ds-field__required" aria-hidden="true"></span>
+        </div>
+        <div class="ds-selectbox-group tp-choices" role="radiogroup" aria-labelledby="f-type-label">
+          <label class="ds-selectbox">
+            <span class="ds-selectbox__texts"><span class="ds-selectbox__label">개인</span><span class="ds-selectbox__desc">혼자 신청해요</span></span>
+            <span class="ds-radio" data-tone="neutral" data-size="medium"><input type="radio" class="ds-radio__control" name="type" value="personal" checked></span>
+          </label>
+          <label class="ds-selectbox">
+            <span class="ds-selectbox__texts"><span class="ds-selectbox__label">단체</span><span class="ds-selectbox__desc">여러 명이 함께 신청해요</span></span>
+            <span class="ds-radio" data-tone="neutral" data-size="medium"><input type="radio" class="ds-radio__control" name="type" value="group"></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="ds-field">
+        <div class="ds-field__header">
+          <span class="ds-field__label" id="f-interest-label">관심 분야</span>
+          <span class="ds-field__indicator">선택</span>
+        </div>
+        <fieldset class="ds-checkbox-group" aria-labelledby="f-interest-label" aria-describedby="f-interest-help">
+          <label class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control" name="interest" value="education" checked><span class="ds-checkbox__label">교육 프로그램</span></label>
+          <label class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control" name="interest" value="consulting"><span class="ds-checkbox__label">상담</span></label>
+          <label class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control" name="interest" value="event"><span class="ds-checkbox__label">행사, 모임</span></label>
+          <label class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control" name="interest" value="material"><span class="ds-checkbox__label">자료 요청</span></label>
+        </fieldset>
+        <div class="ds-field__footer">
+          <p class="ds-field__help" id="f-interest-help">여러 개를 고를 수 있어요</p>
+        </div>
+      </div>
+
+      <div class="ds-field">
+        <div class="ds-field__header">
+          <label class="ds-field__label" for="f-message">요청 내용</label>
+          <span class="ds-field__indicator">선택</span>
+        </div>
+        <textarea class="ds-textarea" id="f-message" name="message" rows="5" maxlength="500" placeholder="궁금한 점이나 요청할 내용을 적어 주세요" aria-describedby="f-message-help"></textarea>
+        <div class="ds-field__footer">
+          <p class="ds-field__help" id="f-message-help">주민등록번호 같은 개인 정보는 적지 말아 주세요</p>
+          <span class="ds-field__count">0/500</span>
+        </div>
+      </div>
+
+      <div class="ds-field">
+        <div class="ds-field__header">
+          <label class="ds-field__label" for="f-file">파일 첨부</label>
+          <span class="ds-field__indicator">선택</span>
+        </div>
+        <div class="ds-fileattach">
+          <label class="ds-fileattach__dropzone">
+            <input type="file" class="ds-fileattach__input" id="f-file" name="files" multiple accept=".pdf,.jpg,.png" aria-describedby="f-file-help">
+            <span class="ds-fileattach__label">파일을 끌어 놓거나 눌러서 추가하세요</span>
+          </label>
+          <div class="ds-fileattach__items">
+            <label class="ds-fileattach__trigger">
+              <input type="file" class="ds-fileattach__input" multiple accept=".pdf,.jpg,.png" aria-label="파일 추가">
+              <i class="ds-icon ds-icon--plus" aria-hidden="true"></i>
+              <span class="ds-fileattach__count"><b>1</b>/5</span>
+            </label>
+            <div class="ds-fileitem">
+              <span class="ds-fileitem__thumbnail"><i class="ds-icon ds-icon--file-text" aria-hidden="true"></i></span>
+              <span class="ds-fileitem__texts"><span class="ds-fileitem__name">참고자료.pdf</span><span class="ds-fileitem__size">1.2MB</span></span>
+              <button type="button" class="ds-fileitem__remove" aria-label="참고자료.pdf 빼기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button>
+            </div>
+          </div>
+        </div>
+        <div class="ds-field__footer">
+          <p class="ds-field__help" id="f-file-help">PDF, JPG, PNG 파일을 5개까지 올릴 수 있어요</p>
+        </div>
+      </div>
+    </section>
+
+    <hr class="ds-divider">
+
+    <!-- 약관 동의 -->
+    <div class="tp-agree">
+      <label class="ds-checkbox" data-size="large">
+        <input type="checkbox" class="ds-checkbox__control" name="agree" required>
+        <span class="ds-checkbox__label">(필수) 개인정보 수집, 이용에 동의해요</span>
+      </label>
+      <a class="ds-link" href="#">내용 보기</a>
+    </div>
+
+    <!-- 하단 버튼 -->
+    <div class="tp-actions">
+      <button type="button" class="ds-btn" data-variant="neutralWeak" data-size="large" data-width="fill">이전</button>
+      <button type="submit" class="ds-btn" data-size="large" data-width="fill">다음</button>
+    </div>
+
+  </form>
+</main>
+
+</body>
+</html>

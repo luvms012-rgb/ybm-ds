@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>데이터 목록 - YBM DS 템플릿</title>
+<link rel="stylesheet" href="../../../dist/ybm-ds.css">
+<script src="../../../dist/ybm-ds.js" defer></script>
+<style>
+  /* 템플릿 배치 전용. 값은 모두 --ybm-* 토큰 */
+
+  /* 한글 글자 규칙 (사이트 공통) */
+  body { word-break: keep-all; overflow-wrap: break-word; }
+  .tp-h1 { font-size: var(--ybm-font-size-t10); line-height: var(--ybm-line-height-t10); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; }
+  .tp-h2 { font-size: var(--ybm-font-size-t07); line-height: var(--ybm-line-height-t07); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; }
+  .tp-h3 { font-size: var(--ybm-font-size-t05); line-height: var(--ybm-line-height-t05); font-weight: var(--ybm-font-weight-semibold); letter-spacing: -0.01em; }
+  .tp-body { font-size: var(--ybm-font-size-t05); line-height: 1.6; letter-spacing: -0.01em; }
+  .tp-sub { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
+  .tp-caption { font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); color: var(--ybm-color-fg-neutral-subtle); }
+  @media (min-width: 768px) { .tp-h1 { font-size: var(--ybm-font-size-t12); line-height: var(--ybm-line-height-t12); } .tp-h2 { font-size: var(--ybm-font-size-t09); line-height: var(--ybm-line-height-t09); } }
+
+  /* 화면 틀: 모바일은 위 Top App Bar, PC 는 위 Top Navigation */
+  .tp-topnav { position: sticky; top: 0; z-index: var(--ybm-z-sticky); border-bottom: 1px solid var(--ybm-color-stroke-neutral-muted); }
+  .tp-appbar { position: sticky; top: 0; z-index: var(--ybm-z-sticky); }
+  .tp-logo { display: grid; place-items: center; width: 88px; height: 28px; border-radius: var(--ybm-shape-xs); background: var(--ybm-color-bg-neutral); color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t03-static); line-height: var(--ybm-line-height-t03-static); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-main { padding: var(--ybm-space-x2) 0 var(--ybm-space-x10); }
+  .tp-container { display: flex; flex-direction: column; gap: var(--ybm-space-x3); max-width: 1200px; margin-inline: auto; }
+
+  /* 머리말: 제목 + 총 건수 + 버튼 */
+  .tp-pagehead { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: var(--ybm-space-x4); }
+  .tp-title { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--ybm-space-x3); }
+  .tp-count { color: var(--ybm-color-fg-neutral-muted); font-size: var(--ybm-font-size-t05); line-height: var(--ybm-line-height-t05); font-weight: var(--ybm-font-weight-medium); letter-spacing: -0.01em; font-variant-numeric: tabular-nums; }
+  .tp-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--ybm-space-x2); }
+
+  /* 필터 줄 (PC) */
+  .tp-toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: var(--ybm-space-x2); }
+  .tp-search { flex: 1 1 240px; max-width: 320px; }
+  .tp-filter { flex: none; width: 160px; }
+  .tp-toolbar__end { display: flex; align-items: center; gap: var(--ybm-space-x2); margin-inline-start: auto; }
+  .tp-selected { color: var(--ybm-color-fg-neutral-muted); font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); font-weight: var(--ybm-font-weight-medium); font-variant-numeric: tabular-nums; }
+
+  /* 표: 둥근 상자 안, 좁으면 표와 Table Pagination 이 함께 가로 스크롤 */
+  .tp-tablebox { overflow: hidden; border: 1px solid var(--ybm-color-stroke-neutral-weak); border-radius: var(--ybm-shape-xl); background: var(--ybm-color-bg-layer-default); }
+  .tp-table { min-width: 880px; font-variant-numeric: tabular-nums; }
+  .tp-col-check { width: 56px; }
+  .tp-col-no { width: 80px; }
+  .tp-col-owner { width: 160px; }
+  .tp-col-status { width: 112px; }
+  .tp-col-date { width: 120px; }
+  .tp-col-more { width: 80px; }
+  .tp-person { display: inline-flex; align-items: center; gap: var(--ybm-space-x2); max-width: 100%; vertical-align: middle; }
+
+  /* 모바일: 가로로 넘기는 필터 Chip, 아래 Pagination */
+  .tp-chiprow { display: flex; gap: var(--ybm-space-x2); overflow-x: auto; padding-inline: var(--ybm-space-x-global-gutter); scrollbar-width: none; }
+  .tp-chiprow::-webkit-scrollbar { display: none; }
+  .tp-pager { padding: var(--ybm-space-x4) var(--ybm-space-x-global-gutter) 0; }
+
+  @media (min-width: 768px) {
+    .tp-main { padding: var(--ybm-space-x10) var(--ybm-space-x8) var(--ybm-space-x16); }
+    .tp-container { gap: var(--ybm-space-x5); }
+    .tp-status { padding-inline: 0; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- 위 내비게이션 (PC) -->
+  <div class="tp-topnav u-show-from-md">
+    <header class="ds-topnav">
+      <div class="ds-topnav__left">
+        <a class="ds-topnav__heading" href="#" aria-label="서비스 홈"><span class="tp-logo" aria-hidden="true">로고</span></a>
+        <nav class="ds-topnav__menu" aria-label="주요 메뉴">
+          <a class="ds-topnav__item" href="dashboard.html">대시보드</a>
+          <a class="ds-topnav__item" href="#" aria-current="page">프로젝트</a>
+          <a class="ds-topnav__item" href="#">일정</a>
+          <a class="ds-topnav__item" href="#">보고서</a>
+        </nav>
+      </div>
+      <div class="ds-topnav__end">
+        <button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="검색"><i class="ds-icon ds-icon--search" aria-hidden="true"></i></button>
+        <a class="ds-avatar" href="settings.html" aria-label="홍길동, 내 설정"><span class="ds-avatar__initials" aria-hidden="true">홍</span></a>
+      </div>
+    </header>
+  </div>
+
+  <!-- 위 막대 (모바일) -->
+  <div class="tp-appbar u-hide-from-md">
+    <header class="ds-appbar" data-platform="android">
+      <div class="ds-appbar__left"></div>
+      <div class="ds-appbar__main">
+        <h1 class="ds-appbar__title">프로젝트</h1>
+        <p class="ds-appbar__subtitle">총 128건</p>
+      </div>
+      <div class="ds-appbar__right">
+        <button type="button" class="ds-appbar__button" aria-label="검색"><i class="ds-icon ds-icon--search" aria-hidden="true"></i></button>
+        <button type="button" class="ds-appbar__button" aria-label="프로젝트 추가"><i class="ds-icon ds-icon--plus" aria-hidden="true"></i></button>
+      </div>
+    </header>
+  </div>
+
+  <main class="tp-main">
+    <div class="tp-container">
+
+      <!-- 머리말 (PC) -->
+      <div class="u-show-from-md">
+        <header class="tp-pagehead">
+          <div class="tp-title">
+            <h1 class="tp-h1">프로젝트</h1>
+            <span class="tp-count">총 128건</span>
+          </div>
+          <div class="tp-actions">
+            <button type="button" class="ds-btn" data-variant="neutralOutline"><i class="ds-icon ds-icon--upload" aria-hidden="true"></i>내보내기</button>
+            <a class="ds-btn" href="#"><i class="ds-icon ds-icon--plus" aria-hidden="true"></i>프로젝트 추가</a>
+          </div>
+        </header>
+      </div>
+
+      <!-- 상태 구분 (PC, 모바일 같이) -->
+      <div class="ds-chiptabs tp-status" role="tablist" aria-label="상태">
+        <button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true">전체 128</button>
+        <button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false">진행 중 42</button>
+        <button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-notification>검토 대기 18</button>
+        <button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false">완료 61</button>
+        <button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false">보류 7</button>
+      </div>
+
+      <!-- 필터 줄 (PC) -->
+      <div class="u-show-from-md">
+        <div class="tp-toolbar">
+          <div class="ds-input tp-search" data-variant="outline" data-size="medium">
+            <i class="ds-icon ds-icon--search ds-input__icon" aria-hidden="true"></i>
+            <input class="ds-input__control" type="search" placeholder="프로젝트 이름으로 찾기" aria-label="프로젝트 찾기">
+            <button type="button" class="ds-input__clear" aria-label="지우기"></button>
+          </div>
+          <button type="button" class="ds-select tp-filter" data-size="medium" aria-haspopup="listbox" aria-expanded="false" aria-label="담당자">
+            <span class="ds-select__value">담당자 전체</span>
+          </button>
+          <button type="button" class="ds-select tp-filter" data-size="medium" aria-haspopup="listbox" aria-expanded="false" aria-label="정렬">
+            <span class="ds-select__value">최근 등록 순</span>
+          </button>
+          <button type="button" class="ds-btn" data-variant="ghost" data-size="small"><i class="ds-icon ds-icon--rotate-ccw" aria-hidden="true"></i>초기화</button>
+          <div class="tp-toolbar__end">
+            <span class="tp-selected">2건 선택</span>
+            <button type="button" class="ds-btn" data-variant="neutralOutline" data-size="small">상태 바꾸기</button>
+            <button type="button" class="ds-btn" data-variant="neutralOutline" data-size="small"><i class="ds-icon ds-icon--trash" aria-hidden="true"></i>삭제</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 필터 Chip (모바일) -->
+      <div class="u-hide-from-md">
+        <div class="tp-chiprow" role="group" aria-label="필터">
+          <button type="button" class="ds-chip" data-variant="outlineStrong" data-size="small" aria-pressed="true">내 프로젝트</button>
+          <button type="button" class="ds-chip" data-variant="outlineStrong" data-size="small" aria-pressed="false">담당자<i class="ds-icon ds-icon--chevron-down" aria-hidden="true"></i></button>
+          <button type="button" class="ds-chip" data-variant="outlineStrong" data-size="small" aria-pressed="false">마감일<i class="ds-icon ds-icon--chevron-down" aria-hidden="true"></i></button>
+          <button type="button" class="ds-chip" data-variant="outlineStrong" data-size="small" aria-pressed="false">최근 등록 순<i class="ds-icon ds-icon--chevron-down" aria-hidden="true"></i></button>
+        </div>
+      </div>
+
+      <!-- 표 + Table Pagination (PC) -->
+      <div class="u-show-from-md">
+        <div class="tp-tablebox">
+          <div class="ds-table-wrap">
+            <table class="ds-table tp-table">
+              <thead>
+                <tr>
+                  <th scope="col" class="tp-col-check" data-align="center"><label class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control" aria-label="이 페이지 모두 선택" data-indeterminate></label></th>
+                  <th scope="col" class="tp-col-no" data-align="center">번호</th>
+                  <th scope="col">프로젝트 이름</th>
+                  <th scope="col" class="tp-col-owner">담당자</th>
+                  <th scope="col" class="tp-col-status" data-align="center">상태</th>
+                  <th scope="col" class="tp-col-date" data-align="center">마감일</th>
+                  <th scope="col" class="tp-col-more" data-align="center">더보기</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr aria-selected="true">
+                  <td data-align="center"><label class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control" aria-label="신규 회원 안내 메일 개편 선택" checked></label></td>
+                  <td data-align="center">128</td>
+                  <td>신규 회원 안내 메일 개편</td>
+                  <td><span class="tp-person"><span class="ds-avatar" data-size="24" role="img" aria-label="김민지"><span class="ds-avatar__initials" aria-hidden="true">김</span></span>김민지</span></td>
+                  <td data-align="center"><span class="ds-badge" data-tone="informative">진행 중</span></td>
+                  <td data-align="center">2026.11.04</td>
+                  <td data-align="center"><button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="신규 회원 안내 메일 개편 더보기"><i class="ds-icon ds-icon--ellipsis" aria-hidden="true"></i></button></td>
+                </tr>
+                <tr aria-selected="true">
+                  <td data-align="center"><label class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control" aria-label="결제 화면 문구 정리 선택" checked></label></td>
+                  <td data-align="center">127</td>
+                  <td>결제 화면 문구 정리</td>
+                  <td><span class="tp-person"><span class="ds-avatar" data-size="24" role="img" aria-label="이서준"><span class="ds-avatar__initials" aria-hidden="true">이</span></span>이서준</span></td>
+                  <td data-align="center"><span class="ds-badge" data-tone="warning">검토 대기</span></td>
+                  <td data-align="center">2026.11.02</td>
+                  <td data-align="center"><button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="결제 화면 문구 정리 더보기"><i class="ds-icon ds-icon--ellipsis" aria-hidden="true"></i></button></td>
+                </tr>
+                <tr>
+                  <td data-align="center"><label class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control" aria-label="자주 묻는 질문 정리 선택"></label></td>
+                  <td data-align="center">126</td>
+                  <td>자주 묻는 질문 정리</td>
+                  <td><span class="tp-person"><span class="ds-avatar" data-size="24" role="img" aria-label="박지우"><span class="ds-avatar__initials" aria-hidden="true">박</span></span>박지우</span></td>
+                  <td data-align="center"><span class="ds-badge" data-tone="informative">진행 중</span></td>
+                  <td data-align="center">2026.11.08</td>
+                  <td data-align="center"><button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="자주 묻는 질문 정리 더보기"><i class="ds-icon ds-icon--ellipsis" aria-hidden="true"></i></button></td>
+                </tr>
+                <tr>
+                  <td data-align="center"><label class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control" aria-label="알림 설정 화면 개선 선택"></label></td>
+                  <td data-align="center">125</td>
+                  <td>알림 설정 화면 개선</td>
+                  <td><span class="tp-person"><span class="ds-avatar" data-size="24" role="img" aria-label="최유나"><span class="ds-avatar__initials" aria-hidden="true">최</span></span>최유나</span></td>
+                  <td data-align="center"><span class="ds-badge" data-tone="positive">완료</span></td>
+                  <td data-align="center">2026.10.28</td>
+                  <td data-align="center"><button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="알림 설정 화면 개선 더보기"><i class="ds-icon ds-icon--ellipsis" aria-hidden="true"></i></button></td>
+                </tr>
+                <tr>
+                  <td data-align="center"><label class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control" aria-label="상품 사진 규격 정리 선택"></label></td>
+                  <td data-align="center">124</td>
+                  <td>상품 사진 규격 정리</td>
+                  <td><span class="tp-person"><span class="ds-avatar" data-size="24" role="img" aria-label="정하늘"><span class="ds-avatar__initials" aria-hidden="true">정</span></span>정하늘</span></td>
+                  <td data-align="center"><span class="ds-badge">보류</span></td>
+                  <td data-align="center">2026.11.15</td>
+                  <td data-align="center"><button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="상품 사진 규격 정리 더보기"><i class="ds-icon ds-icon--ellipsis" aria-hidden="true"></i></button></td>
+                </tr>
+                <tr>
+                  <td data-align="center"><label class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control" aria-label="회원 등급 기준 바꾸기 선택"></label></td>
+                  <td data-align="center">123</td>
+                  <td>회원 등급 기준 바꾸기</td>
+                  <td><span class="tp-person"><span class="ds-avatar" data-size="24" role="img" aria-label="홍길동"><span class="ds-avatar__initials" aria-hidden="true">홍</span></span>홍길동</span></td>
+                  <td data-align="center"><span class="ds-badge" data-tone="positive">완료</span></td>
+                  <td data-align="center">2026.10.25</td>
+                  <td data-align="center"><button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="회원 등급 기준 바꾸기 더보기"><i class="ds-icon ds-icon--ellipsis" aria-hidden="true"></i></button></td>
+                </tr>
+                <tr>
+                  <td data-align="center"><label class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control" aria-label="이벤트 참여 화면 만들기 선택"></label></td>
+                  <td data-align="center">122</td>
+                  <td>이벤트 참여 화면 만들기</td>
+                  <td><span class="tp-person"><span class="ds-avatar" data-size="24" role="img" aria-label="한지민"><span class="ds-avatar__initials" aria-hidden="true">한</span></span>한지민</span></td>
+                  <td data-align="center"><span class="ds-badge" data-tone="informative">진행 중</span></td>
+                  <td data-align="center">2026.11.10</td>
+                  <td data-align="center"><button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="이벤트 참여 화면 만들기 더보기"><i class="ds-icon ds-icon--ellipsis" aria-hidden="true"></i></button></td>
+                </tr>
+                <tr>
+                  <td data-align="center"><label class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control" aria-label="주문 내역 내려받기 선택"></label></td>
+                  <td data-align="center">121</td>
+                  <td>주문 내역 내려받기</td>
+                  <td><span class="tp-person"><span class="ds-avatar" data-size="24" role="img" aria-label="오세라"><span class="ds-avatar__initials" aria-hidden="true">오</span></span>오세라</span></td>
+                  <td data-align="center"><span class="ds-badge" data-tone="warning">검토 대기</span></td>
+                  <td data-align="center">2026.11.06</td>
+                  <td data-align="center"><button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="주문 내역 내려받기 더보기"><i class="ds-icon ds-icon--ellipsis" aria-hidden="true"></i></button></td>
+                </tr>
+                <tr>
+                  <td data-align="center"><label class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control" aria-label="접근성 점검 결과 반영 선택"></label></td>
+                  <td data-align="center">120</td>
+                  <td>접근성 점검 결과 반영</td>
+                  <td><span class="tp-person"><span class="ds-avatar" data-size="24" role="img" aria-label="김민지"><span class="ds-avatar__initials" aria-hidden="true">김</span></span>김민지</span></td>
+                  <td data-align="center"><span class="ds-badge" data-tone="positive">완료</span></td>
+                  <td data-align="center">2026.10.22</td>
+                  <td data-align="center"><button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="접근성 점검 결과 반영 더보기"><i class="ds-icon ds-icon--ellipsis" aria-hidden="true"></i></button></td>
+                </tr>
+                <tr>
+                  <td data-align="center"><label class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control" aria-label="공지사항 게시판 정리 선택"></label></td>
+                  <td data-align="center">119</td>
+                  <td>공지사항 게시판 정리</td>
+                  <td><span class="tp-person"><span class="ds-avatar" data-size="24" role="img" aria-label="이서준"><span class="ds-avatar__initials" aria-hidden="true">이</span></span>이서준</span></td>
+                  <td data-align="center"><span class="ds-badge" data-tone="positive">완료</span></td>
+                  <td data-align="center">2026.10.20</td>
+                  <td data-align="center"><button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="공지사항 게시판 정리 더보기"><i class="ds-icon ds-icon--ellipsis" aria-hidden="true"></i></button></td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="ds-tablepagination">
+              <label class="ds-tablepagination__size">
+                <span>페이지당 행 수</span>
+                <span class="ds-tablepagination__select"><select><option selected>10개</option><option>25개</option><option>50개</option></select></span>
+              </label>
+              <div class="ds-tablepagination__range">
+                <span class="ds-tablepagination__position">
+                  <span class="ds-tablepagination__select"><select aria-label="표시 범위"><option selected>1-10</option><option>11-20</option><option>21-30</option><option>31-40</option><option>41-50</option></select></span>
+                  <span>/ 총 128개</span>
+                </span>
+                <nav class="ds-pagination" aria-label="표 페이지">
+                  <a class="ds-pagination__item" data-type="prev" aria-label="이전 페이지" aria-disabled="true"></a>
+                  <a class="ds-pagination__item" data-type="next" href="#" aria-label="다음 페이지"></a>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 같은 데이터를 목록으로 (모바일) -->
+      <div class="u-hide-from-md">
+        <ul class="ds-list" data-divider>
+          <li>
+            <a class="ds-list-item" href="#">
+              <span class="ds-list-item__prefix"><span class="ds-avatar" role="img" aria-label="김민지"><span class="ds-avatar__initials" aria-hidden="true">김</span></span></span>
+              <span class="ds-list-item__content">
+                <span class="ds-list-item__title">신규 회원 안내 메일 개편</span>
+                <span class="ds-list-item__desc"><span class="ds-tag-group"><span>김민지</span><span>2026.11.04 마감</span></span></span>
+              </span>
+              <span class="ds-list-item__suffix"><span class="ds-badge" data-tone="informative">진행 중</span></span>
+            </a>
+          </li>
+          <li>
+            <a class="ds-list-item" href="#">
+              <span class="ds-list-item__prefix"><span class="ds-avatar" role="img" aria-label="이서준"><span class="ds-avatar__initials" aria-hidden="true">이</span></span></span>
+              <span class="ds-list-item__content">
+                <span class="ds-list-item__title">결제 화면 문구 정리</span>
+                <span class="ds-list-item__desc"><span class="ds-tag-group"><span>이서준</span><span>2026.11.02 마감</span></span></span>
+              </span>
+              <span class="ds-list-item__suffix"><span class="ds-badge" data-tone="warning">검토 대기</span></span>
+            </a>
+          </li>
+          <li>
+            <a class="ds-list-item" href="#">
+              <span class="ds-list-item__prefix"><span class="ds-avatar" role="img" aria-label="박지우"><span class="ds-avatar__initials" aria-hidden="true">박</span></span></span>
+              <span class="ds-list-item__content">
+                <span class="ds-list-item__title">자주 묻는 질문 정리</span>
+                <span class="ds-list-item__desc"><span class="ds-tag-group"><span>박지우</span><span>2026.11.08 마감</span></span></span>
+              </span>
+              <span class="ds-list-item__suffix"><span class="ds-badge" data-tone="informative">진행 중</span></span>
+            </a>
+          </li>
+          <li>
+            <a class="ds-list-item" href="#">
+              <span class="ds-list-item__prefix"><span class="ds-avatar" role="img" aria-label="최유나"><span class="ds-avatar__initials" aria-hidden="true">최</span></span></span>
+              <span class="ds-list-item__content">
+                <span class="ds-list-item__title">알림 설정 화면 개선</span>
+                <span class="ds-list-item__desc"><span class="ds-tag-group"><span>최유나</span><span>2026.10.28 마감</span></span></span>
+              </span>
+              <span class="ds-list-item__suffix"><span class="ds-badge" data-tone="positive">완료</span></span>
+            </a>
+          </li>
+          <li>
+            <a class="ds-list-item" href="#">
+              <span class="ds-list-item__prefix"><span class="ds-avatar" role="img" aria-label="정하늘"><span class="ds-avatar__initials" aria-hidden="true">정</span></span></span>
+              <span class="ds-list-item__content">
+                <span class="ds-list-item__title">상품 사진 규격 정리</span>
+                <span class="ds-list-item__desc"><span class="ds-tag-group"><span>정하늘</span><span>2026.11.15 마감</span></span></span>
+              </span>
+              <span class="ds-list-item__suffix"><span class="ds-badge">보류</span></span>
+            </a>
+          </li>
+          <li>
+            <a class="ds-list-item" href="#">
+              <span class="ds-list-item__prefix"><span class="ds-avatar" role="img" aria-label="홍길동"><span class="ds-avatar__initials" aria-hidden="true">홍</span></span></span>
+              <span class="ds-list-item__content">
+                <span class="ds-list-item__title">회원 등급 기준 바꾸기</span>
+                <span class="ds-list-item__desc"><span class="ds-tag-group"><span>홍길동</span><span>2026.10.25 마감</span></span></span>
+              </span>
+              <span class="ds-list-item__suffix"><span class="ds-badge" data-tone="positive">완료</span></span>
+            </a>
+          </li>
+          <li>
+            <a class="ds-list-item" href="#">
+              <span class="ds-list-item__prefix"><span class="ds-avatar" role="img" aria-label="한지민"><span class="ds-avatar__initials" aria-hidden="true">한</span></span></span>
+              <span class="ds-list-item__content">
+                <span class="ds-list-item__title">이벤트 참여 화면 만들기</span>
+                <span class="ds-list-item__desc"><span class="ds-tag-group"><span>한지민</span><span>2026.11.10 마감</span></span></span>
+              </span>
+              <span class="ds-list-item__suffix"><span class="ds-badge" data-tone="informative">진행 중</span></span>
+            </a>
+          </li>
+          <li>
+            <a class="ds-list-item" href="#">
+              <span class="ds-list-item__prefix"><span class="ds-avatar" role="img" aria-label="오세라"><span class="ds-avatar__initials" aria-hidden="true">오</span></span></span>
+              <span class="ds-list-item__content">
+                <span class="ds-list-item__title">주문 내역 내려받기</span>
+                <span class="ds-list-item__desc"><span class="ds-tag-group"><span>오세라</span><span>2026.11.06 마감</span></span></span>
+              </span>
+              <span class="ds-list-item__suffix"><span class="ds-badge" data-tone="warning">검토 대기</span></span>
+            </a>
+          </li>
+          <li>
+            <a class="ds-list-item" href="#">
+              <span class="ds-list-item__prefix"><span class="ds-avatar" role="img" aria-label="김민지"><span class="ds-avatar__initials" aria-hidden="true">김</span></span></span>
+              <span class="ds-list-item__content">
+                <span class="ds-list-item__title">접근성 점검 결과 반영</span>
+                <span class="ds-list-item__desc"><span class="ds-tag-group"><span>김민지</span><span>2026.10.22 마감</span></span></span>
+              </span>
+              <span class="ds-list-item__suffix"><span class="ds-badge" data-tone="positive">완료</span></span>
+            </a>
+          </li>
+          <li>
+            <a class="ds-list-item" href="#">
+              <span class="ds-list-item__prefix"><span class="ds-avatar" role="img" aria-label="이서준"><span class="ds-avatar__initials" aria-hidden="true">이</span></span></span>
+              <span class="ds-list-item__content">
+                <span class="ds-list-item__title">공지사항 게시판 정리</span>
+                <span class="ds-list-item__desc"><span class="ds-tag-group"><span>이서준</span><span>2026.10.20 마감</span></span></span>
+              </span>
+              <span class="ds-list-item__suffix"><span class="ds-badge" data-tone="positive">완료</span></span>
+            </a>
+          </li>
+        </ul>
+
+        <!-- 페이지 이동 (모바일) -->
+        <div class="tp-pager">
+          <nav class="ds-pagination" data-type="simple" aria-label="페이지">
+            <a class="ds-pagination__item" data-type="prev" aria-label="이전 페이지" aria-disabled="true"></a>
+            <span class="ds-pagination__indicator"><b>1</b> / 13</span>
+            <a class="ds-pagination__item" data-type="next" href="#" aria-label="다음 페이지"></a>
+          </nav>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Templates - YBM DS</title>
+<!-- 생성물: node site/build.mjs 가 만든다. 직접 고치지 말고 site/build.mjs 나 site/src 를 고친다 -->
+<script>try { var t = localStorage.getItem("ybm-site-theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}</script>
+<link rel="icon" href="../assets/logo-mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../dist/ybm-ds.css">
+<link rel="stylesheet" href="../assets/site.css">
+<script src="../../dist/ybm-ds.js" defer></script>
+<script src="../assets/site.js" defer></script>
+</head>
+<body class="site">
+<a class="site-skip" href="#main">본문 바로가기</a>
+<header class="site-top">
+  <a class="site-logo" href="../index.html" aria-label="YBM DS 처음으로"><img src="../assets/logo-mark.svg" alt="" width="40" height="22"><span>Design System</span></a>
+  <nav class="ds-topnav__menu" aria-label="주요 메뉴">
+    <a class="ds-topnav__item" href="../index.html">Get Started</a>
+    <a class="ds-topnav__item" href="../components/index.html">Components</a>
+    <a class="ds-topnav__item" href="../templates/index.html" aria-current="page">Templates</a>
+  </nav>
+  <div class="site-top__end">
+    <button type="button" class="ds-btn site-theme-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" aria-label="화면 모드 바꾸기" data-site-theme-toggle><i class="ds-icon site-i--moon" aria-hidden="true"></i><i class="ds-icon site-i--sun" aria-hidden="true"></i></button>
+    <a class="ds-btn site-only-wide" data-variant="ghost" data-size="small" data-layout="iconOnly" href="https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=2274-1143" target="_blank" rel="noopener" aria-label="Figma 파일"><i class="ds-icon site-i--figma" aria-hidden="true"></i></a>
+    <a class="ds-btn site-only-wide" data-variant="ghost" data-size="small" data-layout="iconOnly" href="https://github.com/luvms012-rgb/ybm-ds" target="_blank" rel="noopener" aria-label="GitHub 저장소"><i class="ds-icon site-i--github" aria-hidden="true"></i></a>
+    <a class="ds-btn site-cta" data-variant="neutralSolid" data-size="xsmall" href="../index.html#ai">시작하기</a>
+    <button type="button" class="ds-btn site-menu-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" aria-label="메뉴 열기" data-site-menu aria-controls="site-side" aria-expanded="false"><i class="ds-icon ds-icon--menu" aria-hidden="true"></i></button>
+  </div>
+</header>
+<div class="site-body site-body--wide">
+<aside class="site-side" id="site-side" aria-label="페이지 목록">
+  <div class="site-side__top"><b>메뉴</b><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" data-site-close aria-label="메뉴 닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button></div>
+  <div class="site-side__mobile"><nav class="site-nav" aria-label="주요 메뉴"><a class="site-nav__item" href="../index.html">Get Started</a><a class="site-nav__item" href="../components/index.html">Components</a><a class="site-nav__item" href="../templates/index.html" aria-current="page">Templates</a></nav><div class="site-nav__sep"></div></div>
+  <nav class="site-nav" aria-label="Templates 메뉴"><a class="site-nav__item" href="../templates/index.html" aria-current="page">전체 보기</a>
+<details class="site-nav__group" open><summary>업무<i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i></summary><a class="site-nav__item" href="../templates/dashboard.html">대시보드</a><a class="site-nav__item" href="../templates/table.html">데이터 목록</a><a class="site-nav__item" href="../templates/tools.html">작업 도구</a></details>
+<details class="site-nav__group" open><summary>입력<i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i></summary><a class="site-nav__item" href="../templates/form.html">신청서 작성</a><a class="site-nav__item" href="../templates/settings.html">설정</a><a class="site-nav__item" href="../templates/login.html">로그인</a></details>
+<details class="site-nav__group" open><summary>콘텐츠<i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i></summary><a class="site-nav__item" href="../templates/content.html">글 상세</a><a class="site-nav__item" href="../templates/gallery.html">갤러리</a></details>
+<details class="site-nav__group" open><summary>AI<i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i></summary><a class="site-nav__item" href="../templates/ai-chat.html">AI 채팅</a></details></nav>
+</aside>
+<div class="site-scrim" data-site-close></div>
+<main class="site-main" id="main">
+<article class="site-doc">
+<header><p class="site-eyebrow">Templates</p><h1 class="site-h1">템플릿</h1><p class="site-lead">자주 쓰는 화면을 DS 부품으로 미리 조립해 두었습니다. 통째로 복사해 출발점으로 쓰고, 모두 모바일부터 PC 까지 맞춰집니다.</p></header>
+
+<div class="site-toolbar">
+  <div class="ds-chiptabs" role="tablist" aria-label="분류">
+    <button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-filter="">전체</button>
+    <button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-filter="업무">업무</button>
+    <button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-filter="입력">입력</button>
+    <button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-filter="콘텐츠">콘텐츠</button>
+    <button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-filter="AI">AI</button>
+  </div>
+</div>
+<div class="site-grid site-tpl-grid">
+<a class="site-card" href="dashboard.html" data-site-item="대시보드 dashboard 핵심 숫자, 목표 달성률, 최근 활동, 공지를 한 화면에서 보는 운영 대시보드입니다." data-site-cat="업무"><div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/dashboard.html" title="대시보드 미리보기" tabindex="-1" data-site-frame></iframe></div><div class="site-card__body"><p class="site-card__title">대시보드 <span class="site-card__no">Dashboard</span></p><p class="site-card__desc">핵심 숫자, 목표 달성률, 최근 활동, 공지를 한 화면에서 보는 운영 대시보드입니다.</p></div></a>
+<a class="site-card" href="table.html" data-site-item="데이터 목록 table 검색하고 걸러서 많은 데이터를 표로 관리하는 화면입니다." data-site-cat="업무"><div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/table.html" title="데이터 목록 미리보기" tabindex="-1" data-site-frame></iframe></div><div class="site-card__body"><p class="site-card__title">데이터 목록 <span class="site-card__no">Table</span></p><p class="site-card__desc">검색하고 걸러서 많은 데이터를 표로 관리하는 화면입니다.</p></div></a>
+<a class="site-card" href="form.html" data-site-item="신청서 작성 form 신청서의 2단계에서 이름, 연락처, 일정, 유형 같은 정보를 입력하는 화면입니다." data-site-cat="입력"><div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/form.html" title="신청서 작성 미리보기" tabindex="-1" data-site-frame></iframe></div><div class="site-card__body"><p class="site-card__title">신청서 작성 <span class="site-card__no">Form</span></p><p class="site-card__desc">신청서의 2단계에서 이름, 연락처, 일정, 유형 같은 정보를 입력하는 화면입니다.</p></div></a>
+<a class="site-card" href="settings.html" data-site-item="설정 settings 프로필, 알림, 언어, 화면 모드 같은 설정을 바꾸는 화면입니다." data-site-cat="입력"><div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/settings.html" title="설정 미리보기" tabindex="-1" data-site-frame></iframe></div><div class="site-card__body"><p class="site-card__title">설정 <span class="site-card__no">Settings</span></p><p class="site-card__desc">프로필, 알림, 언어, 화면 모드 같은 설정을 바꾸는 화면입니다.</p></div></a>
+<a class="site-card" href="login.html" data-site-item="로그인 login 이메일과 비밀번호나 간편 로그인으로 들어가는 화면입니다." data-site-cat="입력"><div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/login.html" title="로그인 미리보기" tabindex="-1" data-site-frame></iframe></div><div class="site-card__body"><p class="site-card__title">로그인 <span class="site-card__no">Login</span></p><p class="site-card__desc">이메일과 비밀번호나 간편 로그인으로 들어가는 화면입니다.</p></div></a>
+<a class="site-card" href="tools.html" data-site-item="작업 도구 tools 파일을 올리고 형식과 옵션을 골라 바꾼 뒤 결과를 내려받는 화면입니다." data-site-cat="업무"><div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/tools.html" title="작업 도구 미리보기" tabindex="-1" data-site-frame></iframe></div><div class="site-card__body"><p class="site-card__title">작업 도구 <span class="site-card__no">Tools</span></p><p class="site-card__desc">파일을 올리고 형식과 옵션을 골라 바꾼 뒤 결과를 내려받는 화면입니다.</p></div></a>
+<a class="site-card" href="content.html" data-site-item="글 상세 content 글 한 편을 끝까지 읽고 공유하거나 저장하는 화면입니다." data-site-cat="콘텐츠"><div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/content.html" title="글 상세 미리보기" tabindex="-1" data-site-frame></iframe></div><div class="site-card__body"><p class="site-card__title">글 상세 <span class="site-card__no">Content</span></p><p class="site-card__desc">글 한 편을 끝까지 읽고 공유하거나 저장하는 화면입니다.</p></div></a>
+<a class="site-card" href="gallery.html" data-site-item="갤러리 gallery 분류별로 사진을 모아 보고 새 사진을 올리는 화면입니다." data-site-cat="콘텐츠"><div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/gallery.html" title="갤러리 미리보기" tabindex="-1" data-site-frame></iframe></div><div class="site-card__body"><p class="site-card__title">갤러리 <span class="site-card__no">Gallery</span></p><p class="site-card__desc">분류별로 사진을 모아 보고 새 사진을 올리는 화면입니다.</p></div></a>
+<a class="site-card" href="ai-chat.html" data-site-item="ai 채팅 ai chat ai 와 묻고 답하며 지난 대화를 다시 여는 화면입니다." data-site-cat="AI"><div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/ai-chat.html" title="AI 채팅 미리보기" tabindex="-1" data-site-frame></iframe></div><div class="site-card__body"><p class="site-card__title">AI 채팅 <span class="site-card__no">AI Chat</span></p><p class="site-card__desc">AI 와 묻고 답하며 지난 대화를 다시 여는 화면입니다.</p></div></a>
+</div>
+<div class="ds-empty site-empty-result" hidden><span class="ds-empty__media"><i class="ds-icon ds-icon--search" aria-hidden="true"></i></span><p class="ds-empty__title">해당하는 템플릿이 없어요</p></div>
+</article>
+</main>
+
+</div>
+</body>
+</html>

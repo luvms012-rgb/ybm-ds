@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>로그인 - YBM DS 템플릿</title>
+<link rel="stylesheet" href="../../../dist/ybm-ds.css">
+<script src="../../../dist/ybm-ds.js" defer></script>
+<style>
+  /* 템플릿 배치 전용. 값은 모두 --ybm-* 토큰 */
+  body { word-break: keep-all; overflow-wrap: break-word; }
+  .tp-h1 { font-size: var(--ybm-font-size-t10); line-height: var(--ybm-line-height-t10); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; }
+  .tp-h2 { font-size: var(--ybm-font-size-t07); line-height: var(--ybm-line-height-t07); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; }
+  .tp-h3 { font-size: var(--ybm-font-size-t05); line-height: var(--ybm-line-height-t05); font-weight: var(--ybm-font-weight-semibold); letter-spacing: -0.01em; }
+  .tp-body { font-size: var(--ybm-font-size-t05); line-height: 1.6; letter-spacing: -0.01em; }
+  .tp-sub { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
+  .tp-caption { font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); color: var(--ybm-color-fg-neutral-subtle); }
+  @media (min-width: 768px) { .tp-h1 { font-size: var(--ybm-font-size-t12); line-height: var(--ybm-line-height-t12); } .tp-h2 { font-size: var(--ybm-font-size-t09); line-height: var(--ybm-line-height-t09); } }
+
+  /* 본문: 모바일은 화면 전체 */
+  .tp-main { display: flex; flex-direction: column; padding: var(--ybm-space-x4) var(--ybm-space-x-global-gutter) var(--ybm-space-x10); }
+  .tp-card { display: flex; flex-direction: column; gap: var(--ybm-space-x8); width: 100%; }
+  .tp-head { display: flex; flex-direction: column; align-items: center; gap: var(--ybm-space-x2); text-align: center; }
+  .tp-logo { margin-bottom: var(--ybm-space-x4); color: var(--ybm-color-fg-brand); font-size: var(--ybm-font-size-t08); line-height: var(--ybm-line-height-t08); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; text-decoration: none; }
+  .tp-group { display: flex; flex-direction: column; gap: var(--ybm-space-x5); }
+  .tp-form { display: flex; flex-direction: column; gap: var(--ybm-space-x4); }
+  .tp-form > .ds-btn { margin-top: var(--ybm-space-x2); }
+  .tp-pw-toggle { position: relative; }
+  .tp-pw-toggle::after { content: ""; position: absolute; inset: calc(var(--ybm-space-x2_5) * -1); }
+  .tp-links { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: var(--ybm-space-x3); }
+  .tp-links > .ds-divider { --ds-divider-length: var(--ybm-space-x3); }
+  .tp-social { display: flex; flex-direction: column; gap: var(--ybm-space-x2); }
+  .tp-note { text-align: center; }
+
+  /* PC: 가운데 카드 */
+  @media (min-width: 768px) {
+    body { background: var(--ybm-color-bg-canvas); }
+    .tp-main { min-height: 100vh; min-height: 100dvh; align-items: center; justify-content: center; padding: var(--ybm-space-x16) var(--ybm-space-x6); }
+    .tp-card { max-width: 400px; padding: var(--ybm-space-x10) var(--ybm-space-x8); border-radius: var(--ybm-shape-2xl); background: var(--ybm-color-bg-layer-default); box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-neutral-weak); }
+  }
+</style>
+</head>
+<body>
+
+<!-- 모바일 상단: Top App Bar -->
+<header class="ds-appbar u-hide-from-md">
+  <div class="ds-appbar__left">
+    <button type="button" class="ds-appbar__button" aria-label="닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button>
+  </div>
+  <div class="ds-appbar__main"></div>
+  <div class="ds-appbar__right"></div>
+</header>
+
+<!-- 본문 -->
+<main class="tp-main">
+  <div class="tp-card">
+
+    <!-- 로고와 제목 -->
+    <div class="tp-head">
+      <a class="tp-logo" href="#" aria-label="서비스 이름 홈으로">서비스 이름</a>
+      <h1 class="tp-h2">로그인</h1>
+      <p class="tp-sub">가입할 때 쓴 이메일과 비밀번호를 입력해 주세요.</p>
+    </div>
+
+    <!-- 로그인 입력 -->
+    <div class="tp-group">
+      <form class="tp-form" action="#" method="post">
+        <div class="ds-field">
+          <div class="ds-field__header">
+            <label class="ds-field__label" for="l-id">이메일</label>
+          </div>
+          <div class="ds-input" data-variant="outline">
+            <input class="ds-input__control" id="l-id" name="username" type="email" autocomplete="username" placeholder="name@example.com" required>
+            <button type="button" class="ds-input__clear" aria-label="이메일 지우기"></button>
+          </div>
+        </div>
+
+        <div class="ds-field">
+          <div class="ds-field__header">
+            <label class="ds-field__label" for="l-pw">비밀번호</label>
+          </div>
+          <div class="ds-input" data-variant="outline">
+            <input class="ds-input__control" id="l-pw" name="password" type="password" autocomplete="current-password" placeholder="비밀번호를 입력해 주세요" required>
+            <button type="button" class="ds-input__suffix tp-pw-toggle" aria-label="비밀번호 보기" aria-pressed="false" aria-controls="l-pw"><i class="ds-icon ds-icon--eye ds-input__icon" aria-hidden="true"></i></button>
+          </div>
+        </div>
+
+        <label class="ds-checkbox">
+          <input type="checkbox" class="ds-checkbox__control" name="remember">
+          <span class="ds-checkbox__label">로그인 상태 유지</span>
+        </label>
+
+        <button type="submit" class="ds-btn" data-size="large" data-width="fill">로그인</button>
+      </form>
+
+      <!-- 찾기와 가입 -->
+      <nav class="tp-links" aria-label="계정 도움">
+        <a class="ds-link" href="#">아이디 찾기</a>
+        <span class="ds-divider" data-orientation="vertical" aria-hidden="true"></span>
+        <a class="ds-link" href="#">비밀번호 찾기</a>
+        <span class="ds-divider" data-orientation="vertical" aria-hidden="true"></span>
+        <a class="ds-link" href="#">회원가입</a>
+      </nav>
+    </div>
+
+    <!-- 간편 로그인 -->
+    <div class="tp-group">
+      <div class="ds-divider" role="separator" data-label><span>또는</span></div>
+      <div class="tp-social">
+        <button type="button" class="ds-btn" data-variant="neutralOutline" data-size="large" data-width="fill">간편 로그인 1</button>
+        <button type="button" class="ds-btn" data-variant="neutralOutline" data-size="large" data-width="fill">간편 로그인 2</button>
+        <button type="button" class="ds-btn" data-variant="neutralOutline" data-size="large" data-width="fill">간편 로그인 3</button>
+      </div>
+    </div>
+
+    <!-- 하단 안내 -->
+    <p class="tp-caption tp-note">여럿이 함께 쓰는 기기에서는 로그인 상태 유지를 끄고, 다 쓴 뒤에는 꼭 로그아웃해 주세요.</p>
+
+  </div>
+</main>
+
+<script>
+  /* 비밀번호 보기: 입력 칸 type 과 눈 아이콘만 바꾼다 */
+  document.querySelectorAll(".tp-pw-toggle").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var input = document.getElementById(btn.getAttribute("aria-controls"));
+      var show = input.type === "password";
+      input.type = show ? "text" : "password";
+      btn.setAttribute("aria-pressed", String(show));
+      btn.querySelector(".ds-icon").className = "ds-icon ds-input__icon ds-icon--" + (show ? "eye-off" : "eye");
+    });
+  });
+</script>
+
+</body>
+</html>

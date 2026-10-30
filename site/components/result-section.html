@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Result Section - YBM DS</title>
+<meta name="description" content="사용자 행동의 결과를 아이콘, 제목, 설명, 버튼으로 알려 주는 묶음">
+<!-- 생성물: node site/build.mjs 가 만든다. 직접 고치지 말고 site/build.mjs 나 site/src 를 고친다 -->
+<script>try { var t = localStorage.getItem("ybm-site-theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}</script>
+<link rel="icon" href="../assets/logo-mark.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../dist/ybm-ds.css">
+<link rel="stylesheet" href="../assets/site.css">
+<script src="../../dist/ybm-ds.js" defer></script>
+<script src="../assets/site.js" defer></script>
+</head>
+<body class="site">
+<a class="site-skip" href="#main">본문 바로가기</a>
+<header class="site-top">
+  <a class="site-logo" href="../index.html" aria-label="YBM DS 처음으로"><img src="../assets/logo-mark.svg" alt="" width="40" height="22"><span>Design System</span></a>
+  <nav class="ds-topnav__menu" aria-label="주요 메뉴">
+    <a class="ds-topnav__item" href="../index.html">Get Started</a>
+    <a class="ds-topnav__item" href="../components/index.html" aria-current="page">Components</a>
+    <a class="ds-topnav__item" href="../templates/index.html">Templates</a>
+  </nav>
+  <div class="site-top__end">
+    <button type="button" class="ds-btn site-theme-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" aria-label="화면 모드 바꾸기" data-site-theme-toggle><i class="ds-icon site-i--moon" aria-hidden="true"></i><i class="ds-icon site-i--sun" aria-hidden="true"></i></button>
+    <a class="ds-btn site-only-wide" data-variant="ghost" data-size="small" data-layout="iconOnly" href="https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=2274-1143" target="_blank" rel="noopener" aria-label="Figma 파일"><i class="ds-icon site-i--figma" aria-hidden="true"></i></a>
+    <a class="ds-btn site-only-wide" data-variant="ghost" data-size="small" data-layout="iconOnly" href="https://github.com/luvms012-rgb/ybm-ds" target="_blank" rel="noopener" aria-label="GitHub 저장소"><i class="ds-icon site-i--github" aria-hidden="true"></i></a>
+    <a class="ds-btn site-cta" data-variant="neutralSolid" data-size="xsmall" href="../index.html#ai">시작하기</a>
+    <button type="button" class="ds-btn site-menu-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" aria-label="메뉴 열기" data-site-menu aria-controls="site-side" aria-expanded="false"><i class="ds-icon ds-icon--menu" aria-hidden="true"></i></button>
+  </div>
+</header>
+<div class="site-body">
+<aside class="site-side" id="site-side" aria-label="페이지 목록">
+  <div class="site-side__top"><b>메뉴</b><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" data-site-close aria-label="메뉴 닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button></div>
+  <div class="site-side__mobile"><nav class="site-nav" aria-label="주요 메뉴"><a class="site-nav__item" href="../index.html">Get Started</a><a class="site-nav__item" href="../components/index.html" aria-current="page">Components</a><a class="site-nav__item" href="../templates/index.html">Templates</a></nav><div class="site-nav__sep"></div></div>
+  <nav class="site-nav" aria-label="Components 메뉴"><a class="site-nav__item" href="../components/index.html">전체 보기</a>
+<details class="site-nav__group"><summary>동작<i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i></summary><a class="site-nav__item" href="../components/action-button.html">Action Button</a><a class="site-nav__item" href="../components/text-link.html">Text Link</a><a class="site-nav__item" href="../components/chip.html">Chip</a><a class="site-nav__item" href="../components/segmented-control.html">Segmented Control</a><a class="site-nav__item" href="../components/toggle-button.html">Toggle Button</a><a class="site-nav__item" href="../components/menu-menu-item.html">Menu</a><a class="site-nav__item" href="../components/floating-action-button.html">Floating Action Button</a></details>
+<details class="site-nav__group"><summary>입력<i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i></summary><a class="site-nav__item" href="../components/field-label.html">Field Label</a><a class="site-nav__item" href="../components/text-field-input.html">Text Field Input</a><a class="site-nav__item" href="../components/text-field-textarea.html">Text Field Textarea</a><a class="site-nav__item" href="../components/field-button.html">Field Button</a><a class="site-nav__item" href="../components/prefix-select.html">Prefix Select</a><a class="site-nav__item" href="../components/select-trigger.html">Select Trigger</a><a class="site-nav__item" href="../components/select-content-item.html">Select Content</a><a class="site-nav__item" href="../components/checkbox.html">Checkbox</a><a class="site-nav__item" href="../components/radio-group.html">Radio Group</a><a class="site-nav__item" href="../components/switch.html">Switch</a><a class="site-nav__item" href="../components/quantity-picker.html">Quantity Picker</a><a class="site-nav__item" href="../components/slider.html">Slider</a><a class="site-nav__item" href="../components/date-picker-date-cell.html">Date Picker</a><a class="site-nav__item" href="../components/time-picker.html">Time Picker</a><a class="site-nav__item" href="../components/search-suggestion.html">Search Suggestion</a><a class="site-nav__item" href="../components/file-attach.html">File Attach</a><a class="site-nav__item" href="../components/checkbox-group.html">Checkbox Group</a><a class="site-nav__item" href="../components/multi-select.html">Multi Select</a></details>
+<details class="site-nav__group"><summary>이동<i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i></summary><a class="site-nav__item" href="../components/chip-tabs.html">Chip Tabs</a><a class="site-nav__item" href="../components/tabs.html">Tabs</a><a class="site-nav__item" href="../components/bottom-navigation.html">Bottom Navigation</a><a class="site-nav__item" href="../components/side-navigation.html">Side Navigation</a><a class="site-nav__item" href="../components/pagination.html">Pagination</a><a class="site-nav__item" href="../components/breadcrumbs.html">Breadcrumbs</a><a class="site-nav__item" href="../components/stepper.html">Stepper</a><a class="site-nav__item" href="../components/table-pagination.html">Table Pagination</a><a class="site-nav__item" href="../components/top-app-bar.html">Top App Bar</a><a class="site-nav__item" href="../components/top-navigation.html">Top Navigation</a></details>
+<details class="site-nav__group"><summary>묶음<i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i></summary><a class="site-nav__item" href="../components/accordion.html">Accordion</a><a class="site-nav__item" href="../components/card.html">Card</a><a class="site-nav__item" href="../components/select-box.html">Select Box</a></details>
+<details class="site-nav__group"><summary>콘텐츠<i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i></summary><a class="site-nav__item" href="../components/tag-group.html">Tag Group</a><a class="site-nav__item" href="../components/avatar.html">Avatar</a><a class="site-nav__item" href="../components/empty.html">Empty</a><a class="site-nav__item" href="../components/timer.html">Timer</a><a class="site-nav__item" href="../components/image-frame.html">Image Frame</a><a class="site-nav__item" href="../components/carousel.html">Carousel</a></details>
+<details class="site-nav__group"><summary>표와 목록<i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i></summary><a class="site-nav__item" href="../components/table.html">Table</a><a class="site-nav__item" href="../components/list-list-item.html">List</a></details>
+<details class="site-nav__group" open><summary>피드백과 상태<i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i></summary><a class="site-nav__item" href="../components/badge.html">Badge</a><a class="site-nav__item" href="../components/callout.html">Callout</a><a class="site-nav__item" href="../components/skeleton.html">Skeleton</a><a class="site-nav__item" href="../components/progress.html">Progress</a><a class="site-nav__item" href="../components/progress-circle.html">Progress Circle</a><a class="site-nav__item" href="../components/banner.html">Banner</a><a class="site-nav__item" href="../components/result-section.html" aria-current="page">Result Section</a><a class="site-nav__item" href="../components/status-dot.html">Status Dot</a></details>
+<details class="site-nav__group"><summary>떠 있는 창<i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i></summary><a class="site-nav__item" href="../components/snackbar.html">Snackbar</a><a class="site-nav__item" href="../components/help-bubble.html">Help Bubble</a><a class="site-nav__item" href="../components/dialog.html">Dialog</a><a class="site-nav__item" href="../components/alert-dialog.html">Alert Dialog</a><a class="site-nav__item" href="../components/bottom-sheet.html">Bottom Sheet</a><a class="site-nav__item" href="../components/tooltip.html">Tooltip</a><a class="site-nav__item" href="../components/popover.html">Popover</a><a class="site-nav__item" href="../components/menu-sheet.html">Menu Sheet</a><a class="site-nav__item" href="../components/side-panel.html">Side Panel</a></details>
+<details class="site-nav__group"><summary>배치<i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i></summary><a class="site-nav__item" href="../components/divider.html">Divider</a><a class="site-nav__item" href="../components/scroll-fog.html">Scroll Fog</a><a class="site-nav__item" href="../components/pull-to-refresh.html">Pull To Refresh</a></details>
+<details class="site-nav__group"><summary>대화<i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i></summary><a class="site-nav__item" href="../components/chat.html">Chat</a><a class="site-nav__item" href="../components/markdown.html">Markdown</a><a class="site-nav__item" href="../components/code-block.html">Code Block</a><a class="site-nav__item" href="../components/citation.html">Citation</a></details></nav>
+</aside>
+<div class="site-scrim" data-site-close></div>
+<main class="site-main" id="main">
+<article class="site-doc">
+<header>
+  <p class="site-eyebrow"><a href="index.html">Components</a> / 피드백과 상태</p>
+  <h1 class="site-h1">Result Section</h1>
+  <p class="site-lead">사용자 행동의 결과를 아이콘, 제목, 설명, 버튼으로 알려 주는 묶음</p>
+  <div class="site-meta"><span class="ds-badge" data-size="large">59</span> <span class="ds-badge" data-size="large" data-variant="outline">.ds-result</span> <a class="ds-btn" data-variant="neutralOutline" data-size="xsmall" href="https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=2562-741" target="_blank" rel="noopener"><i class="ds-icon ds-icon--external-link ds-icon--sm" aria-hidden="true"></i>Figma</a></div>
+</header>
+<div class="site-toc-select"><select aria-label="이 페이지 목차" data-site-toc><option value="preview">미리보기</option><option value="usage">사용법</option><option value="props">속성</option><option value="vars">바꿀 수 있는 변수</option><option value="guide">사용 지침</option><option value="spec">디자인 값</option></select><i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i></div>
+<h2 id="preview">미리보기<a class="site-anchor" href="#preview" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><div class="site-example">
+  <div class="site-example__bar"><span class="site-example__label">예시</span>
+    <div class="ds-segmented" role="group" aria-label="보기 방식"><button type="button" class="ds-segmented__item" aria-pressed="true" data-site-view="preview">미리보기</button><button type="button" class="ds-segmented__item" aria-pressed="false" data-site-view="code">코드</button></div></div>
+  <div class="site-example__preview"><div class="pv-stage" style="align-items:stretch;flex-wrap:wrap">
+    <div class="pv-w" style="display:flex;width:320px;min-height:360px;box-shadow:inset 0 0 0 1px var(--ybm-color-stroke-neutral-muted)">
+      <section class="ds-result">
+        <div class="ds-result__asset" style="color:var(--ybm-color-fg-positive)"><i class="ds-icon ds-icon--circle-check-solid" aria-hidden="true"></i></div>
+        <div class="ds-result__texts"><h2 class="ds-result__title">신청을 마쳤어요</h2><p class="ds-result__desc">처리 결과는 알림으로 알려 드릴게요</p></div>
+        <div class="ds-result__actions"><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="medium">확인</button><button type="button" class="ds-btn" data-variant="ghost" data-size="small">신청 내역 보기</button></div>
+      </section>
+    </div>
+    <div class="pv-w" style="display:flex;width:320px;min-height:360px;box-shadow:inset 0 0 0 1px var(--ybm-color-stroke-neutral-muted)">
+      <section class="ds-result" data-size="medium">
+        <div class="ds-result__asset" style="color:var(--ybm-color-fg-critical)"><i class="ds-icon ds-icon--circle-alert-solid" aria-hidden="true"></i></div>
+        <div class="ds-result__texts"><h2 class="ds-result__title">다시 시도해 주세요</h2><p class="ds-result__desc">요청을 처리하지 못했어요</p></div>
+        <div class="ds-result__actions"><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="medium">다시 시도</button></div>
+      </section>
+    </div>
+  </div></div>
+  <div class="site-example__code" hidden><figure class="ds-codeblock">
+  <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">html</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
+  <pre class="ds-codeblock__code"><code>&lt;div style=&quot;display:flex;width:320px;min-height:360px;box-shadow:inset 0 0 0 1px var(--ybm-color-stroke-neutral-muted)&quot;&gt;
+  &lt;section class=&quot;ds-result&quot;&gt;
+    &lt;div class=&quot;ds-result__asset&quot; style=&quot;color:var(--ybm-color-fg-positive)&quot;&gt;&lt;i class=&quot;ds-icon ds-icon--circle-check-solid&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/div&gt;
+    &lt;div class=&quot;ds-result__texts&quot;&gt;&lt;h2 class=&quot;ds-result__title&quot;&gt;신청을 마쳤어요&lt;/h2&gt;&lt;p class=&quot;ds-result__desc&quot;&gt;처리 결과는 알림으로 알려 드릴게요&lt;/p&gt;&lt;/div&gt;
+    &lt;div class=&quot;ds-result__actions&quot;&gt;&lt;button type=&quot;button&quot; class=&quot;ds-btn&quot; data-variant=&quot;neutralWeak&quot; data-size=&quot;medium&quot;&gt;확인&lt;/button&gt;&lt;button type=&quot;button&quot; class=&quot;ds-btn&quot; data-variant=&quot;ghost&quot; data-size=&quot;small&quot;&gt;신청 내역 보기&lt;/button&gt;&lt;/div&gt;
+  &lt;/section&gt;
+&lt;/div&gt;
+&lt;div style=&quot;display:flex;width:320px;min-height:360px;box-shadow:inset 0 0 0 1px var(--ybm-color-stroke-neutral-muted)&quot;&gt;
+  &lt;section class=&quot;ds-result&quot; data-size=&quot;medium&quot;&gt;
+    &lt;div class=&quot;ds-result__asset&quot; style=&quot;color:var(--ybm-color-fg-critical)&quot;&gt;&lt;i class=&quot;ds-icon ds-icon--circle-alert-solid&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/div&gt;
+    &lt;div class=&quot;ds-result__texts&quot;&gt;&lt;h2 class=&quot;ds-result__title&quot;&gt;다시 시도해 주세요&lt;/h2&gt;&lt;p class=&quot;ds-result__desc&quot;&gt;요청을 처리하지 못했어요&lt;/p&gt;&lt;/div&gt;
+    &lt;div class=&quot;ds-result__actions&quot;&gt;&lt;button type=&quot;button&quot; class=&quot;ds-btn&quot; data-variant=&quot;neutralWeak&quot; data-size=&quot;medium&quot;&gt;다시 시도&lt;/button&gt;&lt;/div&gt;
+  &lt;/section&gt;
+&lt;/div&gt;</code></pre>
+</figure></div>
+</div>
+<h2 id="usage">사용법<a class="site-anchor" href="#usage" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><p>아래 구조를 그대로 쓰고, 대괄호 <code>[ ]</code> 안은 필요할 때만 넣습니다.</p><figure class="ds-codeblock">
+  <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">html</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
+  <pre class="ds-codeblock__code"><code>&lt;section class=&quot;ds-result&quot; [data-size=&quot;medium&quot;]&gt;
+  [&lt;div class=&quot;ds-result__asset&quot;&gt;&lt;i class=&quot;ds-icon ds-icon--circle-check-solid&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/div&gt;]
+  &lt;div class=&quot;ds-result__texts&quot;&gt;
+    &lt;h2 class=&quot;ds-result__title&quot;&gt;신청을 마쳤어요&lt;/h2&gt;
+    [&lt;p class=&quot;ds-result__desc&quot;&gt;처리 결과는 알림으로 알려 드릴게요&lt;/p&gt;]
+  &lt;/div&gt;
+  &lt;div class=&quot;ds-result__actions&quot;&gt;
+    &lt;button type=&quot;button&quot; class=&quot;ds-btn&quot; data-variant=&quot;neutralWeak&quot; data-size=&quot;medium&quot;&gt;확인&lt;/button&gt;
+    [&lt;button type=&quot;button&quot; class=&quot;ds-btn&quot; data-variant=&quot;ghost&quot; data-size=&quot;small&quot;&gt;신청 내역 보기&lt;/button&gt;]
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+</figure>
+<h2 id="props">속성<a class="site-anchor" href="#props" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><p>Figma 속성 이름을 그대로 <code>data-*</code> 속성으로 씁니다.</p><div class="ds-table-wrap"><table class="ds-table" data-density="compact">
+<thead><tr><th scope="col">속성</th><th scope="col">값</th></tr></thead>
+<tbody><tr><td><code>size</code></td><td><span class="ds-badge">large</span> <span class="ds-badge">medium</span></td></tr>
+<tr><td>켜고 끄는 속성</td><td><code>asset</code> <code>description</code></td></tr></tbody></table></div><p class="site-note">그 밖에: primary/secondary action</p>
+<h2 id="vars">바꿀 수 있는 변수<a class="site-anchor" href="#vars" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><p>서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.</p><div class="ds-table-wrap"><table class="ds-table" data-density="compact">
+<thead><tr><th scope="col">변수</th><th scope="col">기본값</th></tr></thead>
+<tbody><tr><td><code>--ds-result-gap</code></td><td><code>var(--ybm-space-x3)</code></td></tr>
+<tr><td><code>--ds-result-text-bottom</code></td><td><code>var(--ybm-space-x7)</code></td></tr></tbody></table></div>
+<h2 id="guide">사용 지침<a class="site-anchor" href="#guide" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><ul class="site-dos"><li>신청 완료, 오류, 빈 결과처럼 화면의 주된 내용이 결과일 때 쓴다. 버튼은 다음 할 일 하나를 위에 두고, 보조 동작은 아래 ghost 로 둔다. 목록이 비었을 때의 짧은 안내는 Empty.</li></ul>
+<h2 id="spec">디자인 값<a class="site-anchor" href="#spec" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><p>Figma 와 CSS 가 함께 따르는 크기, 여백, 색입니다.</p><pre class="site-spec">size: 기본 large(화면 전체) / data-size=&quot;medium&quot;(화면 일부)
+위쪽 그림은 40 아이콘(완료 fg/positive, 오류 fg/critical)이나 Progress Circle 40 으로 바꿔 쓴다.
+Figma: 가운데 정렬, padding x4 x12 / 그림 아래 x4, 아이콘 40
+  large 글자 사이 x3, 아래 x7, 제목 t08 Bold, 설명 t05 fg/neutral-muted / medium 글자 사이 x2, 아래 x6, 제목 t05 Bold, 설명 t04
+  버튼 사이 x5, 위 Action Button neutralWeak medium, 아래 ghost small</pre>
+<nav class="site-pager" aria-label="이전, 다음 컴포넌트"><a href="menu-sheet.html" data-dir="prev"><small>이전</small><b>Menu Sheet</b></a><a href="timer.html" data-dir="next"><small>다음</small><b>Timer</b></a></nav>
+</article>
+</main>
+<aside class="site-toc" aria-label="이 페이지 목차"><nav><a href="#preview">미리보기</a><a href="#usage">사용법</a><a href="#props">속성</a><a href="#vars">바꿀 수 있는 변수</a><a href="#guide">사용 지침</a><a href="#spec">디자인 값</a></nav></aside>
+</div>
+</body>
+</html>

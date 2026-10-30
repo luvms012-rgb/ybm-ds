@@ -352,7 +352,7 @@ CSS 는 Figma 프로퍼티 이름을 그대로 `data-*` 속성으로 쓴다: `<b
 | 66 | Image Frame | `.ds-imageframe` (`__floater/indicator`) | `2567:1928`, 3 | ratio `1:1/4:3/16:9`, stroke |
 | 67 | Carousel | `.ds-carousel` (`__scroller/item/button`) | `2567:1936` / Button `2567:1935`, 2 | 넘김 위치 맞춤, 끝 흐림, 버튼은 ybm-ds.js |
 | 68 | Markdown | `.ds-markdown` | `2568:66` | 변환된 HTML 을 감싸면 크기와 간격이 맞춰짐 |
-| 69 | Code Block | `.ds-codeblock` (`__header/language/copy/code`) | `2568:57`, 2 | 고정 폭 글꼴, data-ds-copy 복사 |
+| 69 | Code Block | `.ds-codeblock` (`__header/language/copy/code`) | `2568:57`, 2 | 고정 폭 글꼴, data-ds-copy 복사, data-wrap 긴 줄 줄바꿈 |
 | 70 | Citation | `.ds-citation` (`__icon/label`) | `2568:65`, 2 | type `number/label` |
 | 71 | Multi Select | `.ds-multiselect` (`__trigger/values/overflow/panel/heading/option/label`) | Trigger `2566:1252`, 6 / Option `2566:1295`, 6 / Panel `2566:1296` | data-ds-popover 로 열기, 고른 값 Badge 와 +N |
 
@@ -500,6 +500,7 @@ CSS 는 Figma 프로퍼티 이름을 그대로 `data-*` 속성으로 쓴다: `<b
 | 2026-10-29 | 58 Menu Sheet(+ Item, Close Button), 59 Result Section, 60 Timer, 61 Status Dot 추가. 로딩 표시는 Progress Circle indeterminate 로 대신(Spinner 없음). 아이콘 `share`, `link`, `trash` 추가 |
 | 2026-10-29 | 62 Checkbox Group, 63 Scroll Fog, 64 Pull To Refresh, 65 Side Panel, 66 Image Frame, 67 Carousel, 68 Markdown, 69 Code Block, 70 Citation, 71 Multi Select 추가(레퍼런스 가이드 규격 기준). 아이콘 `copy` 추가 |
 | 2026-10-29 | 반응형 기준점(sm 480 / md 768 / lg 1280 / xl 1440)과 숨김/보임 유틸리티 추가, 모션 값을 레퍼런스 가이드 값으로 맞추고 easing-enter / exit 추가, sync pull 이 cssOnly 를 지우던 문제 수정 |
+| 2026-10-30 | 문서 사이트(site/) 첫 버전: Get Started / Components 70종 / Templates 9종, 생성기 `node site/build.mjs`. Code Block 에 data-wrap 추가 |
 | 2026-10-28 | Figma 에만 있던 10종 CSS 완성과 등록(49~53), Popover/Time Picker/Chat 입력창 동작 |
 | 2026-10-27 | Figma 페이지를 레퍼런스 라이브러리 형식(카테고리 페이지 + 문서 프레임)으로 개편, 새 컴포넌트 10종(Figma 만). 모드 정리 - Typography 130%/150%, Shape Soft/Sharp 삭제, CSS 의 `data-shape` 테마(soft/sharp/square) 제거. 남은 모드는 Light / Dark |
 | 2026-10-22 | ds 를 단독 GitHub 저장소(ybm-ds) + Pages 로 분리, 가이드 사이트에서 DS 사본 제거(DS 주소 참조). 통합 동기화 `sync.mjs`/`동기화.bat`/`components.json`(Figma 노드 대조) 도입. `build.py` → `build.mjs`(출력 동일, Python 불필요). 컴포넌트 6종 추가(Divider/Tooltip/List/Breadcrumbs/Stepper/Banner - CSS/Figma 동시). 미리보기 `index.html` |

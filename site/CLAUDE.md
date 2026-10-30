@@ -2,17 +2,24 @@
 
 YBM 디자인 시스템 공식 문서 사이트를 준비하는 폴더다. 2026-10-30 별도 저장소(ybm-ds-site)에서 ybm-ds 안 `site/` 로 합쳤다. DS 를 사이트로 보여 주는 것이라 한 저장소로 관리한다.
 
-## 현재 상태
-- **구상 단계, 코드 없음.** 사용자가 "만들어줘"라고 하기 전까지 사이트 코드를 만들지 않는다.
-- 먼저 읽을 문서
-  - [PLAN.md](PLAN.md): 구상 전체 (구조, 데이터 흐름, 화면 설계, 단계, 정해야 할 것)
-  - REFERENCE-ANALYSIS.md: 레퍼런스 A, B 분석. 외부 이름이 들어 있어 **로컬 전용**(git 제외). 없으면 사용자에게 받거나 예전 ybm-ds-site 저장소에서 꺼낸다
+## 현재 상태 (2026-10-30 첫 버전)
+- 사이트 주소: <https://luvms012-rgb.github.io/ybm-ds/site/> (로컬 미리보기는 works/.claude/launch.json 의 ds-preview → http://localhost:5179/site/)
+- **만들기: `node site/build.mjs`** - 바로 위 폴더(DS)의 components.json, dist/components.css 머리 주석과 --ds-* 변수, tokens.css, icons.css, ybm-ds.js 머리 주석, 루트 index.html 예시, README 6.2 지침을 읽어 페이지를 만든다. DS 를 고치면 다시 실행만 하면 된다.
+- 손으로 쓰는 것: `site/build.mjs`(시작하기, 사용 규칙 문장 포함), `site/src/`(site.css, site.js, logo-mark.svg, figma-notes.json, templates.json), `site/templates/pages/*.html`(템플릿 원본)
+- 생성물(직접 고치지 않음): `site/index.html`, `site/get-started/`, `site/components/`, `site/templates/*.html`, `site/assets/`
+- `site/src/figma-notes.json`: Figma 컴포넌트 설명에서 옮긴 페이지 분류, 한 줄 설명, Do/Don't. Figma 설명을 고치면 같이 고친다.
+- 부족한 정책/가이드 제안: [PROPOSAL.md](PROPOSAL.md) - 사용자가 검토 후 고른 것만 추가한다.
+- 먼저 읽을 문서: [PLAN.md](PLAN.md)(처음 구상, IA 는 아래가 최신), REFERENCE-ANALYSIS.md(레퍼런스 A, B 분석, **로컬 전용** git 제외)
 
 ## 사용자가 확정한 것
-- IA는 **Docs · Foundations · Components · Templates** 네 가지 (Themes·Playground 메뉴 없음). Foundations는 2026-10-26에 Docs 하위에서 상단 메뉴로 분리했다.
-- 화면 구성은 레퍼런스 A 를 아주 가깝게 따르고, 컴포넌트 문서 깊이는 레퍼런스 B 를 따른다. 두 레퍼런스의 이름과 주소는 저장소에 적지 않는다(로컬 분석 문서와 Claude 메모리에만).
-- Getting Started는 **Quick Start with AI**(AI 도구에 붙여넣는 프롬프트 + 복사 버튼)로 시작한다.
-- 만드는 방식은 정적 HTML + GitHub Pages. 빌드 스크립트가 ybm-ds의 `components.json`과 토큰을 읽어 페이지를 생성한다.
+- **IA 는 Get Started, Components, Templates 세 가지** (2026-10-30). 사이트 메인은 따로 없고 Get Started 가 첫 화면이다. 토큰과 아이콘은 Get Started 안 "파운데이션" 묶음.
+- **배치는 레퍼런스 A 의 문서 화면과 같게** (2026-10-30): 상단 48(로고 / 가운데 메뉴 / 오른쪽 아이콘 버튼과 시작하기 버튼), 왼쪽 메뉴 245(접는 묶음), 본문 최대 752, 1280 이상 오른쪽 목차(좁으면 제목 아래 목차 고르기), 제목 링크 아이콘, 안내문은 라벨과 코드 칸. 컴포넌트 문서 깊이는 레퍼런스 B.
+- Quick Start with AI 컨셉. 설치 1순위는 CSS 두 줄, 2순위(개발자)는 버전 고정 CDN, 파일 내려받기, Tailwind 설정. npm 은 제안(PROPOSAL.md).
+- 사이트와 템플릿은 **ybm-ds 에 정의된 것만** 쓴다. 없는 것은 PROPOSAL.md 로 제안한다.
+- 한글, Pretendard. 한글 글자 위계는 국내 주요 서비스를 측정해 정했다: 20px 이상 자간 -0.02em, 15~19px -0.01em, 14px 이하 0, 제목 700 / 소제목 600 / 본문 400 / 라벨 500, 긴 글 줄 높이 1.7~1.75, word-break keep-all.
+- 템플릿은 모두 반응형(모바일 먼저, 768 / 1280). 앞으로 계속 추가한다(`site/src/templates.json` 한 줄 + `site/templates/pages/<slug>.html`).
+- 로고: YBM 심볼(로고 모음 Figma 파일 `NvAvZxDAnYf3nOVkBZ3pyU` 노드 `130:1642` 에서 잘라 `src/logo-mark.svg`) + "Design System".
+- 두 레퍼런스의 이름과 주소는 저장소에 적지 않는다(로컬 분석 문서와 Claude 메모리에만).
 
 ## 데이터 원본
 - 같은 저장소의 바로 위 폴더(`..`)가 DS 정본이다: `components.json`, `dist/`, `tokens/`. 사이트는 읽기만 한다.

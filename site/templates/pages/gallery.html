@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>사진 갤러리 - YBM DS 템플릿</title>
+<link rel="stylesheet" href="../../../dist/ybm-ds.css">
+<script src="../../../dist/ybm-ds.js" defer></script>
+<style>
+  /* 템플릿 배치 전용. 값은 모두 --ybm-* 토큰 */
+  body { word-break: keep-all; overflow-wrap: break-word; }
+  .tp-h1 { font-size: var(--ybm-font-size-t10); line-height: var(--ybm-line-height-t10); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; }
+  .tp-h2 { font-size: var(--ybm-font-size-t07); line-height: var(--ybm-line-height-t07); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; }
+  .tp-h3 { font-size: var(--ybm-font-size-t05); line-height: var(--ybm-line-height-t05); font-weight: var(--ybm-font-weight-semibold); letter-spacing: -0.01em; }
+  .tp-body { font-size: var(--ybm-font-size-t05); line-height: 1.6; letter-spacing: -0.01em; }
+  .tp-sub { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
+  .tp-caption { font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); color: var(--ybm-color-fg-neutral-subtle); }
+  @media (min-width: 768px) { .tp-h1 { font-size: var(--ybm-font-size-t12); line-height: var(--ybm-line-height-t12); } .tp-h2 { font-size: var(--ybm-font-size-t09); line-height: var(--ybm-line-height-t09); } }
+
+  .tp-num { font-variant-numeric: tabular-nums; }
+
+  /* 맨 위 막대: 스크롤해도 위에 붙어 있게 */
+  .tp-bar { position: sticky; top: 0; z-index: var(--ybm-z-sticky); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); }
+  .tp-logo { display: grid; place-items: center; width: 88px; height: 28px; border-radius: var(--ybm-shape-xs); background: var(--ybm-color-bg-neutral); color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t03-static); line-height: var(--ybm-line-height-t03-static); font-weight: var(--ybm-font-weight-semibold); }
+
+  /* 화면 틀: 모바일은 하단 탭과 FAB 에 가리지 않게 아래 여백을 넉넉히 */
+  .tp-page { max-width: 1200px; margin-inline: auto; padding: var(--ybm-space-x3) var(--ybm-space-x-global-gutter) calc(var(--ybm-space-x14) + var(--ybm-space-x20) + env(safe-area-inset-bottom, 0px)); }
+  @media (min-width: 768px) { .tp-page { padding: var(--ybm-space-x8) var(--ybm-space-x8) var(--ybm-space-x20); } }
+
+  /* 화면 머리말 (PC) */
+  .tp-pagehead { display: none; }
+  @media (min-width: 768px) { .tp-pagehead { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--ybm-space-x4); margin-bottom: var(--ybm-space-x6); } }
+  .tp-pagehead-text { display: flex; flex-direction: column; gap: var(--ybm-space-x1); }
+
+  /* 분류 Chip Tabs: 칩 안쪽 여백만큼 바깥으로 빼서 본문 왼쪽 선과 맞춘다 */
+  .tp-chips { margin-inline: calc(var(--ybm-space-x4) * -1); }
+
+  /* 묶음 */
+  .tp-section { margin-top: var(--ybm-space-x8); }
+  .tp-section-head { display: flex; align-items: center; justify-content: space-between; gap: var(--ybm-space-x2); margin-bottom: var(--ybm-space-x3); }
+  .tp-count { color: var(--ybm-color-fg-neutral-subtle); font-weight: var(--ybm-font-weight-medium); }
+
+  /* 추천 묶음 Carousel: 모바일은 화면 끝까지 */
+  .tp-bleed { margin-inline: calc(var(--ybm-space-x-global-gutter) * -1); }
+  .tp-bleed > .ds-carousel { --ds-carousel-padding: var(--ybm-space-x-global-gutter); }
+  @media (min-width: 768px) { .tp-bleed { margin-inline: 0; } .tp-bleed > .ds-carousel { --ds-carousel-padding: 0px; } }
+  .tp-feature { display: flex; flex-direction: column; gap: var(--ybm-space-x2); width: 280px; color: inherit; text-decoration: none; }
+  @media (min-width: 768px) { .tp-feature { width: 360px; } }
+  .tp-feature-title { font-size: var(--ybm-font-size-t05); line-height: var(--ybm-line-height-t05); font-weight: var(--ybm-font-weight-semibold); letter-spacing: -0.01em; }
+  .tp-feature-text { display: flex; flex-direction: column; gap: var(--ybm-space-x0_5); }
+
+  /* 정렬, 보기 방식 */
+  .tp-toolbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ybm-space-x3) var(--ybm-space-x2); margin-bottom: var(--ybm-space-x4); }
+  .tp-toolbar-end { display: flex; flex: 1 1 100%; align-items: center; justify-content: space-between; gap: var(--ybm-space-x2); }
+  .tp-sort { width: 112px; }
+  @media (min-width: 768px) { .tp-toolbar-end { flex: none; } }
+
+  /* 사진 그리드: 비율이 섞여도 빈틈 없이 쌓이게 열 방식 (2열, 768 이상 3열, 1280 이상 4열) */
+  .tp-grid { column-count: 2; column-gap: var(--ybm-space-x3); }
+  .tp-grid > li { break-inside: avoid; margin-bottom: var(--ybm-space-x5); }
+  @media (min-width: 768px) { .tp-grid { column-count: 3; column-gap: var(--ybm-space-x4); } .tp-grid > li { margin-bottom: var(--ybm-space-x6); } }
+  @media (min-width: 1280px) { .tp-grid { column-count: 4; column-gap: var(--ybm-space-x5); } }
+  .tp-photo { display: block; color: inherit; text-decoration: none; }
+  .tp-photo-cap { display: flex; flex-direction: column; gap: var(--ybm-space-x1); margin-top: var(--ybm-space-x2); }
+  .tp-photo-title { overflow: hidden; font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); font-weight: var(--ybm-font-weight-medium); text-overflow: ellipsis; white-space: nowrap; }
+  .tp-photo-by { display: flex; align-items: center; gap: var(--ybm-space-x1_5); }
+  .tp-ph { display: grid; place-items: center; height: 100%; color: var(--ybm-color-fg-neutral-subtle); }
+
+  /* 더보기 (모바일) / Pagination (PC) */
+  .tp-more { margin-top: var(--ybm-space-x4); }
+  .tp-pager { display: none; }
+  @media (min-width: 768px) { .tp-more { display: none; } .tp-pager { display: flex; justify-content: center; margin-top: var(--ybm-space-x8); } }
+
+  /* 모바일 하단 고정: Bottom Navigation 과 FAB */
+  .tp-bottomnav { position: fixed; inset-inline: 0; bottom: 0; z-index: var(--ybm-z-sticky); }
+  .tp-fab { position: fixed; right: var(--ybm-space-x-global-gutter); bottom: calc(var(--ybm-space-x14) + var(--ybm-space-x4) + env(safe-area-inset-bottom, 0px)); z-index: var(--ybm-z-sticky); }
+</style>
+</head>
+<body>
+
+<!-- 모바일 Top App Bar -->
+<header class="ds-appbar u-hide-from-md tp-bar" data-platform="android">
+  <div class="ds-appbar__left"></div>
+  <div class="ds-appbar__main">
+    <h1 class="ds-appbar__title">갤러리</h1>
+  </div>
+  <div class="ds-appbar__right">
+    <button type="button" class="ds-appbar__button" aria-label="검색"><i class="ds-icon ds-icon--search" aria-hidden="true"></i></button>
+    <button type="button" class="ds-appbar__button" aria-label="더보기"><i class="ds-icon ds-icon--ellipsis" aria-hidden="true"></i></button>
+  </div>
+</header>
+
+<!-- PC Top Navigation -->
+<header class="ds-topnav u-show-from-md tp-bar">
+  <div class="ds-topnav__left">
+    <a class="ds-topnav__heading" href="#" aria-label="서비스 이름 홈"><span class="tp-logo">로고</span></a>
+    <nav class="ds-topnav__menu" aria-label="주요 메뉴">
+      <a class="ds-topnav__item" href="#">홈</a>
+      <a class="ds-topnav__item" href="#" aria-current="page">갤러리</a>
+      <a class="ds-topnav__item" href="#">소식</a>
+      <a class="ds-topnav__item" href="#">모임</a>
+      <a class="ds-topnav__item" href="#">고객지원</a>
+    </nav>
+  </div>
+  <div class="ds-topnav__end">
+    <button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="검색"><i class="ds-icon ds-icon--search" aria-hidden="true"></i></button>
+    <a class="ds-btn" data-variant="neutralWeak" data-size="xsmall" href="#">로그인</a>
+  </div>
+</header>
+
+<main class="tp-page">
+
+  <!-- 화면 머리말 (PC) -->
+  <div class="tp-pagehead">
+    <div class="tp-pagehead-text">
+      <h1 class="tp-h1">갤러리</h1>
+      <p class="tp-sub">함께 나누고 싶은 순간을 사진으로 모아 보세요.</p>
+    </div>
+    <button type="button" class="ds-btn"><i class="ds-icon ds-icon--plus" aria-hidden="true"></i>사진 올리기</button>
+  </div>
+
+  <!-- 분류 Chip Tabs -->
+  <div class="ds-chiptabs tp-chips" role="tablist" aria-label="분류">
+    <button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true">전체</button>
+    <button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false">풍경</button>
+    <button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false">여행</button>
+    <button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false">음식</button>
+    <button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false">동물</button>
+    <button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false">일상</button>
+    <button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false">건축</button>
+    <button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false">사람</button>
+  </div>
+
+  <!-- 추천 묶음 Carousel -->
+  <section class="tp-section" aria-labelledby="featured-title">
+    <div class="tp-section-head">
+      <h2 class="tp-h3" id="featured-title">이번 주 추천</h2>
+      <a class="ds-btn" data-variant="ghost" data-size="xsmall" href="#">전체 보기<i class="ds-icon ds-icon--chevron-right" aria-hidden="true"></i></a>
+    </div>
+    <div class="tp-bleed">
+      <div class="ds-carousel" role="region" aria-roledescription="carousel" aria-label="이번 주 추천">
+        <div class="ds-carousel__scroller">
+          <div class="ds-carousel__item">
+            <a class="tp-feature" href="#">
+              <div class="ds-imageframe" data-ratio="16:9">
+                <span class="tp-ph"><i class="ds-icon ds-icon--image ds-icon--lg" aria-hidden="true"></i></span>
+                <div class="ds-imageframe__floater" data-position="bottom-end"><span class="ds-imageframe__indicator tp-num">사진 12장</span></div>
+              </div>
+              <span class="tp-feature-text">
+                <span class="tp-feature-title">가을 숲길을 걸으며</span>
+                <span class="tp-caption">홍길동 외 8명</span>
+              </span>
+            </a>
+          </div>
+          <div class="ds-carousel__item">
+            <a class="tp-feature" href="#">
+              <div class="ds-imageframe" data-ratio="16:9">
+                <span class="tp-ph"><i class="ds-icon ds-icon--image ds-icon--lg" aria-hidden="true"></i></span>
+                <div class="ds-imageframe__floater" data-position="bottom-end"><span class="ds-imageframe__indicator tp-num">사진 9장</span></div>
+              </div>
+              <span class="tp-feature-text">
+                <span class="tp-feature-title">바다가 보이는 작은 마을</span>
+                <span class="tp-caption">김민수 외 5명</span>
+              </span>
+            </a>
+          </div>
+          <div class="ds-carousel__item">
+            <a class="tp-feature" href="#">
+              <div class="ds-imageframe" data-ratio="16:9">
+                <span class="tp-ph"><i class="ds-icon ds-icon--image ds-icon--lg" aria-hidden="true"></i></span>
+                <div class="ds-imageframe__floater" data-position="bottom-end"><span class="ds-imageframe__indicator tp-num">사진 15장</span></div>
+              </div>
+              <span class="tp-feature-text">
+                <span class="tp-feature-title">주말 아침 시장 풍경</span>
+                <span class="tp-caption">이서연 외 11명</span>
+              </span>
+            </a>
+          </div>
+          <div class="ds-carousel__item">
+            <a class="tp-feature" href="#">
+              <div class="ds-imageframe" data-ratio="16:9">
+                <span class="tp-ph"><i class="ds-icon ds-icon--image ds-icon--lg" aria-hidden="true"></i></span>
+                <div class="ds-imageframe__floater" data-position="bottom-end"><span class="ds-imageframe__indicator tp-num">사진 7장</span></div>
+              </div>
+              <span class="tp-feature-text">
+                <span class="tp-feature-title">우리 동네 고양이들</span>
+                <span class="tp-caption">박지훈 외 3명</span>
+              </span>
+            </a>
+          </div>
+          <div class="ds-carousel__item">
+            <a class="tp-feature" href="#">
+              <div class="ds-imageframe" data-ratio="16:9">
+                <span class="tp-ph"><i class="ds-icon ds-icon--image ds-icon--lg" aria-hidden="true"></i></span>
+                <div class="ds-imageframe__floater" data-position="bottom-end"><span class="ds-imageframe__indicator tp-num">사진 10장</span></div>
+              </div>
+              <span class="tp-feature-text">
+                <span class="tp-feature-title">빛이 예쁜 오래된 건물</span>
+                <span class="tp-caption">최유나 외 6명</span>
+              </span>
+            </a>
+          </div>
+        </div>
+        <button type="button" class="ds-carousel__button" data-direction="previous" aria-label="이전"><i class="ds-icon ds-icon--chevron-left ds-icon--sm" aria-hidden="true"></i></button>
+        <button type="button" class="ds-carousel__button" data-direction="next" aria-label="다음"><i class="ds-icon ds-icon--chevron-right ds-icon--sm" aria-hidden="true"></i></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 모든 사진 -->
+  <section class="tp-section" aria-labelledby="all-title">
+
+    <!-- 정렬 Select, 보기 방식 Segmented Control -->
+    <div class="tp-toolbar">
+      <h2 class="tp-h3" id="all-title">모든 사진 <span class="tp-count tp-num">248</span></h2>
+      <div class="tp-toolbar-end">
+        <div class="tp-sort">
+          <button type="button" class="ds-select" data-size="medium" aria-haspopup="listbox" aria-expanded="false" aria-label="정렬"><span class="ds-select__value">최신순</span></button>
+        </div>
+        <div class="ds-segmented" role="group" aria-label="보기 방식">
+          <button type="button" class="ds-segmented__item" aria-pressed="true">격자</button>
+          <button type="button" class="ds-segmented__item" aria-pressed="false">목록</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 사진 그리드 (1:1 과 4:3 섞음). 빈 자리 대신 <img src="…" alt="…"> 를 넣어요 -->
+    <ul class="tp-grid">
+      <li>
+        <a class="tp-photo" href="#">
+          <figure>
+            <div class="ds-imageframe" data-ratio="4:3" data-stroke>
+              <span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span>
+              <div class="ds-imageframe__floater" data-position="top-end"><span class="ds-imageframe__indicator tp-num">1/4</span></div>
+            </div>
+            <figcaption class="tp-photo-cap">
+              <span class="tp-photo-title">노을이 지는 바닷가</span>
+              <span class="tp-photo-by tp-caption"><span class="ds-avatar" data-size="20" aria-hidden="true"><span class="ds-avatar__initials">김</span></span>김민수</span>
+            </figcaption>
+          </figure>
+        </a>
+      </li>
+      <li>
+        <a class="tp-photo" href="#">
+          <figure>
+            <div class="ds-imageframe" data-stroke><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div>
+            <figcaption class="tp-photo-cap">
+              <span class="tp-photo-title">창가에서 낮잠 자는 고양이</span>
+              <span class="tp-photo-by tp-caption"><span class="ds-avatar" data-size="20" aria-hidden="true"><span class="ds-avatar__initials">이</span></span>이서연</span>
+            </figcaption>
+          </figure>
+        </a>
+      </li>
+      <li>
+        <a class="tp-photo" href="#">
+          <figure>
+            <div class="ds-imageframe" data-stroke><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div>
+            <figcaption class="tp-photo-cap">
+              <span class="tp-photo-title">갓 구운 빵과 커피</span>
+              <span class="tp-photo-by tp-caption"><span class="ds-avatar" data-size="20" aria-hidden="true"><span class="ds-avatar__initials">박</span></span>박지훈</span>
+            </figcaption>
+          </figure>
+        </a>
+      </li>
+      <li>
+        <a class="tp-photo" href="#">
+          <figure>
+            <div class="ds-imageframe" data-ratio="4:3" data-stroke><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div>
+            <figcaption class="tp-photo-cap">
+              <span class="tp-photo-title">안개 낀 아침 호수</span>
+              <span class="tp-photo-by tp-caption"><span class="ds-avatar" data-size="20" aria-hidden="true"><span class="ds-avatar__initials">홍</span></span>홍길동</span>
+            </figcaption>
+          </figure>
+        </a>
+      </li>
+      <li>
+        <a class="tp-photo" href="#">
+          <figure>
+            <div class="ds-imageframe" data-stroke><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div>
+            <figcaption class="tp-photo-cap">
+              <span class="tp-photo-title">골목길의 오래된 문</span>
+              <span class="tp-photo-by tp-caption"><span class="ds-avatar" data-size="20" aria-hidden="true"><span class="ds-avatar__initials">최</span></span>최유나</span>
+            </figcaption>
+          </figure>
+        </a>
+      </li>
+      <li>
+        <a class="tp-photo" href="#">
+          <figure>
+            <div class="ds-imageframe" data-ratio="4:3" data-stroke>
+              <span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span>
+              <div class="ds-imageframe__floater" data-position="top-end"><span class="ds-imageframe__indicator tp-num">1/3</span></div>
+            </div>
+            <figcaption class="tp-photo-cap">
+              <span class="tp-photo-title">산 정상에서 본 구름</span>
+              <span class="tp-photo-by tp-caption"><span class="ds-avatar" data-size="20" aria-hidden="true"><span class="ds-avatar__initials">정</span></span>정하늘</span>
+            </figcaption>
+          </figure>
+        </a>
+      </li>
+      <li>
+        <a class="tp-photo" href="#">
+          <figure>
+            <div class="ds-imageframe" data-ratio="4:3" data-stroke><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div>
+            <figcaption class="tp-photo-cap">
+              <span class="tp-photo-title">비 오는 날의 거리</span>
+              <span class="tp-photo-by tp-caption"><span class="ds-avatar" data-size="20" aria-hidden="true"><span class="ds-avatar__initials">김</span></span>김민수</span>
+            </figcaption>
+          </figure>
+        </a>
+      </li>
+      <li>
+        <a class="tp-photo" href="#">
+          <figure>
+            <div class="ds-imageframe" data-stroke><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div>
+            <figcaption class="tp-photo-cap">
+              <span class="tp-photo-title">공원에서 뛰노는 강아지</span>
+              <span class="tp-photo-by tp-caption"><span class="ds-avatar" data-size="20" aria-hidden="true"><span class="ds-avatar__initials">이</span></span>이서연</span>
+            </figcaption>
+          </figure>
+        </a>
+      </li>
+      <li>
+        <a class="tp-photo" href="#">
+          <figure>
+            <div class="ds-imageframe" data-stroke><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div>
+            <figcaption class="tp-photo-cap">
+              <span class="tp-photo-title">손으로 빚은 그릇</span>
+              <span class="tp-photo-by tp-caption"><span class="ds-avatar" data-size="20" aria-hidden="true"><span class="ds-avatar__initials">박</span></span>박지훈</span>
+            </figcaption>
+          </figure>
+        </a>
+      </li>
+      <li>
+        <a class="tp-photo" href="#">
+          <figure>
+            <div class="ds-imageframe" data-ratio="4:3" data-stroke><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div>
+            <figcaption class="tp-photo-cap">
+              <span class="tp-photo-title">밤하늘의 별 사진</span>
+              <span class="tp-photo-by tp-caption"><span class="ds-avatar" data-size="20" aria-hidden="true"><span class="ds-avatar__initials">홍</span></span>홍길동</span>
+            </figcaption>
+          </figure>
+        </a>
+      </li>
+      <li>
+        <a class="tp-photo" href="#">
+          <figure>
+            <div class="ds-imageframe" data-stroke><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div>
+            <figcaption class="tp-photo-cap">
+              <span class="tp-photo-title">계절 과일 한 바구니</span>
+              <span class="tp-photo-by tp-caption"><span class="ds-avatar" data-size="20" aria-hidden="true"><span class="ds-avatar__initials">최</span></span>최유나</span>
+            </figcaption>
+          </figure>
+        </a>
+      </li>
+      <li>
+        <a class="tp-photo" href="#">
+          <figure>
+            <div class="ds-imageframe" data-ratio="4:3" data-stroke><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div>
+            <figcaption class="tp-photo-cap">
+              <span class="tp-photo-title">기차 창밖으로 본 들판</span>
+              <span class="tp-photo-by tp-caption"><span class="ds-avatar" data-size="20" aria-hidden="true"><span class="ds-avatar__initials">정</span></span>정하늘</span>
+            </figcaption>
+          </figure>
+        </a>
+      </li>
+    </ul>
+
+    <!-- 더보기 (모바일) -->
+    <div class="tp-more">
+      <button type="button" class="ds-btn" data-variant="neutralWeak" data-width="fill">사진 더보기</button>
+    </div>
+
+    <!-- Pagination (PC) -->
+    <div class="tp-pager">
+      <nav class="ds-pagination" aria-label="페이지">
+        <a class="ds-pagination__item" data-type="first" aria-label="첫 페이지" aria-disabled="true"></a>
+        <a class="ds-pagination__item" data-type="prev" aria-label="이전 페이지" aria-disabled="true"></a>
+        <a class="ds-pagination__item" href="#" aria-current="page">1</a>
+        <a class="ds-pagination__item" href="#">2</a>
+        <a class="ds-pagination__item" href="#">3</a>
+        <span class="ds-pagination__item" data-type="ellipsis" aria-hidden="true"></span>
+        <a class="ds-pagination__item" href="#">21</a>
+        <a class="ds-pagination__item" data-type="next" href="#" aria-label="다음 페이지"></a>
+        <a class="ds-pagination__item" data-type="last" href="#" aria-label="마지막 페이지"></a>
+      </nav>
+    </div>
+  </section>
+</main>
+
+<!-- 사진 올리기 FAB (모바일) -->
+<button type="button" class="ds-fab u-hide-from-md tp-fab"><i class="ds-icon ds-icon--plus" aria-hidden="true"></i>사진 올리기</button>
+
+<!-- 모바일 Bottom Navigation -->
+<nav class="ds-bottomnav u-hide-from-md tp-bottomnav" aria-label="주요 메뉴">
+  <a class="ds-bottomnav__item" href="#">
+    <span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--house ds-icon--lg" aria-hidden="true"></i></span>
+    <span class="ds-bottomnav__label">홈</span>
+  </a>
+  <a class="ds-bottomnav__item" href="#" aria-current="page">
+    <span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--image ds-icon--lg" aria-hidden="true"></i></span>
+    <span class="ds-bottomnav__label">갤러리</span>
+  </a>
+  <a class="ds-bottomnav__item" href="#">
+    <span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--message-circle ds-icon--lg" aria-hidden="true"></i><span class="ds-bottomnav__badge--dot"></span></span>
+    <span class="ds-bottomnav__label">소식</span>
+  </a>
+  <a class="ds-bottomnav__item" href="#">
+    <span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--menu ds-icon--lg" aria-hidden="true"></i></span>
+    <span class="ds-bottomnav__label">전체</span>
+  </a>
+</nav>
+
+</body>
+</html>

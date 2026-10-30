@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI 채팅 - YBM DS 템플릿</title>
+<link rel="stylesheet" href="../../../dist/ybm-ds.css">
+<script src="../../../dist/ybm-ds.js" defer></script>
+<style>
+  /* 템플릿 배치 전용. 값은 모두 --ybm-* 토큰 */
+  body { word-break: keep-all; overflow-wrap: break-word; }
+  .tp-h1 { font-size: var(--ybm-font-size-t10); line-height: var(--ybm-line-height-t10); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; }
+  .tp-h2 { font-size: var(--ybm-font-size-t07); line-height: var(--ybm-line-height-t07); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; }
+  .tp-h3 { font-size: var(--ybm-font-size-t05); line-height: var(--ybm-line-height-t05); font-weight: var(--ybm-font-weight-semibold); letter-spacing: -0.01em; }
+  .tp-body { font-size: var(--ybm-font-size-t05); line-height: 1.6; letter-spacing: -0.01em; }
+  .tp-sub { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
+  .tp-caption { font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); color: var(--ybm-color-fg-neutral-subtle); }
+  @media (min-width: 768px) { .tp-h1 { font-size: var(--ybm-font-size-t12); line-height: var(--ybm-line-height-t12); } .tp-h2 { font-size: var(--ybm-font-size-t09); line-height: var(--ybm-line-height-t09); } }
+
+  .tp-num { font-variant-numeric: tabular-nums; }
+  .tp-logo { display: grid; place-items: center; width: 88px; height: 28px; border-radius: var(--ybm-shape-xs); background: var(--ybm-color-bg-neutral); color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t03-static); line-height: var(--ybm-line-height-t03-static); font-weight: var(--ybm-font-weight-semibold); }
+
+  /* 화면 틀: 화면 높이에 맞추고 대화만 스크롤 (입력창은 늘 아래) */
+  .tp-app { display: flex; height: 100vh; height: 100dvh; }
+  .tp-chat { display: flex; flex: 1 1 0; flex-direction: column; min-width: 0; height: 100%; background: var(--ybm-color-bg-layer-default); }
+
+  /* PC 왼쪽 대화 목록 (Side Navigation) */
+  .tp-side { flex: none; }
+  .tp-side-brand { margin-inline-end: auto; padding-inline: var(--ybm-space-x2); }
+  .tp-newchat { margin-bottom: var(--ybm-space-x2); }
+  .tp-side-user { display: flex; align-items: center; gap: var(--ybm-space-x3); padding: var(--ybm-space-x2); }
+  .tp-side-user-text { display: flex; flex-direction: column; min-width: 0; }
+  .tp-side-user-name { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); font-weight: var(--ybm-font-weight-medium); }
+
+  /* 대화 머리 */
+  .tp-appbar { flex: none; box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); }
+  .tp-chat-head { display: none; }
+  @media (min-width: 768px) { .tp-chat-head { display: flex; flex: none; align-items: center; justify-content: space-between; gap: var(--ybm-space-x2); min-height: var(--ybm-space-x16); padding: var(--ybm-space-x2) var(--ybm-space-x4) var(--ybm-space-x2) var(--ybm-space-x6); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); } }
+  .tp-chat-title { overflow: hidden; font-size: var(--ybm-font-size-t05); line-height: var(--ybm-line-height-t05); font-weight: var(--ybm-font-weight-semibold); letter-spacing: -0.01em; text-overflow: ellipsis; white-space: nowrap; }
+  .tp-chat-tools { display: flex; flex: none; gap: var(--ybm-space-x1); }
+
+  /* 대화 영역 */
+  .tp-thread { flex: 1 1 auto; min-height: 0; overflow-y: auto; }
+  .tp-thread-inner { display: flex; flex-direction: column; gap: var(--ybm-space-x6); max-width: 760px; margin-inline: auto; padding: var(--ybm-space-x5) var(--ybm-space-x-global-gutter) var(--ybm-space-x8); }
+  @media (min-width: 768px) { .tp-thread-inner { padding: var(--ybm-space-x8) var(--ybm-space-x6) var(--ybm-space-x10); } }
+
+  /* 내 말풍선: 오른쪽, 시간은 말풍선 왼쪽 아래 */
+  .tp-msg-user { display: flex; align-items: flex-end; justify-content: flex-end; gap: var(--ybm-space-x1_5); }
+  .tp-msg-user > .ds-chat-bubble { margin-left: 0; }
+
+  /* AI 답변: 왼쪽, 글 폭 전체 */
+  .tp-msg-ai { display: flex; flex-direction: column; gap: var(--ybm-space-x3); }
+  .tp-msg-ai-head { display: flex; align-items: center; gap: var(--ybm-space-x2); font-size: var(--ybm-font-size-t03); line-height: var(--ybm-line-height-t03); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-sources { display: flex; flex-wrap: wrap; align-items: center; gap: var(--ybm-space-x1); }
+  .tp-msg-foot { display: flex; align-items: center; gap: var(--ybm-space-x1); }
+  .tp-msg-foot > .ds-chat-meta { margin-inline-end: var(--ybm-space-x1); }
+
+  /* 아래 고정: 추천 질문 + Chat Composer */
+  .tp-dock { flex: none; }
+  .tp-dock-inner { max-width: 760px; margin-inline: auto; }
+  .tp-suggest { display: flex; gap: var(--ybm-space-x2); padding: var(--ybm-space-x2) var(--ybm-space-x5); scrollbar-width: none; }
+  .tp-suggest::-webkit-scrollbar { display: none; }
+  .tp-suggest > .ds-chip { flex: none; }
+  .tp-notice { padding: 0 var(--ybm-space-x4) var(--ybm-space-x3); text-align: center; }
+
+  /* 모바일 대화 목록 (Bottom Sheet) */
+  .tp-group-label { padding-block: var(--ybm-space-x3) var(--ybm-space-x1); color: var(--ybm-color-fg-neutral-muted); font-size: var(--ybm-font-size-t03); line-height: var(--ybm-line-height-t03); font-weight: var(--ybm-font-weight-bold); }
+  .tp-sheet-list { margin-inline: calc(var(--ybm-space-x4) * -1); }
+</style>
+</head>
+<body>
+<div class="tp-app">
+
+  <!-- PC 대화 목록 (Side Navigation) -->
+  <nav class="ds-sidenav u-show-from-md tp-side" aria-label="대화 목록">
+    <div class="ds-sidenav__header">
+      <a class="tp-side-brand" href="#" aria-label="서비스 이름 홈"><span class="tp-logo">로고</span></a>
+    </div>
+    <div class="ds-sidenav__content">
+      <button type="button" class="ds-btn tp-newchat" data-variant="neutralWeak" data-width="fill"><i class="ds-icon ds-icon--plus" aria-hidden="true"></i>새 대화</button>
+      <div class="ds-sidenav__group">
+        <div class="ds-sidenav__group-label">오늘</div>
+        <a class="ds-sidenav__item" href="#" aria-current="page"><span class="ds-sidenav__label">배열에서 중복 값 없애기</span></a>
+        <a class="ds-sidenav__item" href="#"><span class="ds-sidenav__label">회의록 요약 부탁</span></a>
+        <a class="ds-sidenav__item" href="#"><span class="ds-sidenav__label">주말 여행 일정 짜기</span></a>
+      </div>
+      <div class="ds-sidenav__group">
+        <div class="ds-sidenav__group-label">지난 7일</div>
+        <a class="ds-sidenav__item" href="#"><span class="ds-sidenav__label">이메일 문장 다듬기</span></a>
+        <a class="ds-sidenav__item" href="#"><span class="ds-sidenav__label">발표 자료 목차 정리</span></a>
+        <a class="ds-sidenav__item" href="#"><span class="ds-sidenav__label">간단한 저녁 메뉴 추천</span></a>
+        <a class="ds-sidenav__item" href="#"><span class="ds-sidenav__label">표 데이터 정렬하는 방법</span></a>
+      </div>
+    </div>
+    <div class="ds-sidenav__footer">
+      <div class="tp-side-user">
+        <span class="ds-avatar" role="img" aria-label="홍길동"><span class="ds-avatar__initials" aria-hidden="true">홍</span></span>
+        <span class="tp-side-user-text">
+          <span class="tp-side-user-name">홍길동</span>
+          <span class="tp-caption">무료 이용 중</span>
+        </span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 대화 화면 -->
+  <main class="tp-chat">
+
+    <!-- 모바일 Top App Bar -->
+    <header class="ds-appbar u-hide-from-md tp-appbar">
+      <div class="ds-appbar__left">
+        <button type="button" class="ds-appbar__button" aria-label="대화 목록" data-ds-open="history-sheet"><i class="ds-icon ds-icon--menu" aria-hidden="true"></i></button>
+      </div>
+      <div class="ds-appbar__main">
+        <h1 class="ds-appbar__title">AI 도우미</h1>
+      </div>
+      <div class="ds-appbar__right">
+        <button type="button" class="ds-appbar__button" aria-label="새 대화"><i class="ds-icon ds-icon--plus" aria-hidden="true"></i></button>
+      </div>
+    </header>
+
+    <!-- PC 대화 머리 -->
+    <header class="tp-chat-head">
+      <h2 class="tp-chat-title">배열에서 중복 값 없애기</h2>
+      <div class="tp-chat-tools">
+        <button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" aria-label="대화 공유"><i class="ds-icon ds-icon--share" aria-hidden="true"></i></button>
+        <button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" aria-label="더보기"><i class="ds-icon ds-icon--ellipsis" aria-hidden="true"></i></button>
+      </div>
+    </header>
+
+    <!-- 대화 -->
+    <div class="tp-thread">
+      <div class="tp-thread-inner">
+
+        <!-- 시스템 메시지 -->
+        <p class="ds-chat-system">오늘</p>
+
+        <!-- 내 말풍선 -->
+        <div class="tp-msg-user">
+          <span class="ds-chat-meta" data-status="sent"><time datetime="15:24">오후 3:24</time></span>
+          <div class="ds-chat-bubble" data-sender="user">자바스크립트 배열에서 중복된 값을 없애는 방법을 알려 줘.</div>
+        </div>
+
+        <!-- AI 답변 -->
+        <article class="tp-msg-ai" aria-label="AI 답변">
+          <div class="tp-msg-ai-head">
+            <span class="ds-avatar" data-size="24" aria-hidden="true"><span class="ds-avatar__initials">AI</span></span>
+            AI 도우미
+          </div>
+          <div class="ds-markdown">
+            <h3>배열에서 중복 값을 없애는 방법</h3>
+            <p>가장 간단한 방법은 <code>Set</code> 을 쓰는 거예요. <code>Set</code> 은 같은 값을 한 번만 담기 때문에, 배열을 넣었다가 다시 배열로 바꾸면 중복이 사라져요.<a class="ds-citation" data-type="number" href="#ref-1" aria-label="출처 1">1</a></p>
+            <figure class="ds-codeblock">
+              <figcaption class="ds-codeblock__header">
+                <span class="ds-codeblock__language">javascript</span>
+                <button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button>
+              </figcaption>
+              <pre class="ds-codeblock__code"><code>const numbers = [1, 2, 2, 3, 3, 3];
+const unique = [...new Set(numbers)];
+
+console.log(unique); // [1, 2, 3]</code></pre>
+            </figure>
+            <h4>상황별로 고르는 법</h4>
+            <ul>
+              <li><strong>숫자나 글자만 담긴 배열</strong>: <code>Set</code> 이 가장 짧고 빨라요.</li>
+              <li><strong>조건을 직접 정하고 싶을 때</strong>: <code>filter</code> 와 <code>indexOf</code> 를 함께 써요.<a class="ds-citation" data-type="number" href="#ref-2" aria-label="출처 2">2</a></li>
+              <li><strong>객체가 담긴 배열</strong>: 기준이 되는 값(예: id)으로 비교해야 해요.</li>
+            </ul>
+            <p>객체 배열을 다루는 방법도 알려 드릴까요?</p>
+          </div>
+          <div class="tp-sources">
+            <span class="tp-caption">출처</span>
+            <a class="ds-citation" id="ref-1" href="#"><span class="ds-citation__icon"><i class="ds-icon ds-icon--globe" aria-hidden="true"></i></span><span class="ds-citation__label">개발 문서</span></a>
+            <a class="ds-citation" id="ref-2" href="#"><span class="ds-citation__icon"><i class="ds-icon ds-icon--globe" aria-hidden="true"></i></span><span class="ds-citation__label">기술 블로그</span></a>
+          </div>
+          <div class="tp-msg-foot">
+            <span class="ds-chat-meta"><time datetime="15:25">오후 3:25</time></span>
+            <button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="답변 복사"><i class="ds-icon ds-icon--copy" aria-hidden="true"></i></button>
+            <button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="좋아요"><i class="ds-icon ds-icon--thumbs-up" aria-hidden="true"></i></button>
+            <button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="아쉬워요"><i class="ds-icon ds-icon--thumbs-down" aria-hidden="true"></i></button>
+            <button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="다시 답변 받기"><i class="ds-icon ds-icon--rotate-ccw" aria-hidden="true"></i></button>
+          </div>
+        </article>
+
+        <!-- 내 말풍선 -->
+        <div class="tp-msg-user">
+          <span class="ds-chat-meta" data-status="sent"><time datetime="15:26">오후 3:26</time></span>
+          <div class="ds-chat-bubble" data-sender="user">응, 객체 배열일 때도 알려 줘.</div>
+        </div>
+
+        <!-- AI 답변 -->
+        <article class="tp-msg-ai" aria-label="AI 답변">
+          <div class="tp-msg-ai-head">
+            <span class="ds-avatar" data-size="24" aria-hidden="true"><span class="ds-avatar__initials">AI</span></span>
+            AI 도우미
+          </div>
+          <div class="ds-markdown">
+            <p>객체는 생김새가 같아도 서로 다른 값으로 보기 때문에, 기준이 되는 값을 정해 비교해야 해요. <code>Map</code> 에 기준 값을 열쇠로 넣으면 마지막 하나만 남아요.</p>
+            <figure class="ds-codeblock">
+              <figcaption class="ds-codeblock__header">
+                <span class="ds-codeblock__language">javascript</span>
+                <button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button>
+              </figcaption>
+              <pre class="ds-codeblock__code"><code>const users = [
+  { id: 1, name: "홍길동" },
+  { id: 2, name: "김민수" },
+  { id: 1, name: "홍길동" },
+];
+const unique = [...new Map(users.map((u) =&gt; [u.id, u])).values()];</code></pre>
+            </figure>
+            <ol>
+              <li>기준이 될 값을 고르세요. 보통은 겹치지 않는 번호를 써요.</li>
+              <li>그 값을 열쇠로 <code>Map</code> 에 담아요.</li>
+              <li><code>values()</code> 로 다시 꺼내 배열로 바꿔요.</li>
+            </ol>
+          </div>
+          <div class="tp-msg-foot">
+            <span class="ds-chat-meta"><time datetime="15:26">오후 3:26</time></span>
+            <button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="답변 복사"><i class="ds-icon ds-icon--copy" aria-hidden="true"></i></button>
+            <button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="좋아요"><i class="ds-icon ds-icon--thumbs-up" aria-hidden="true"></i></button>
+            <button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="아쉬워요"><i class="ds-icon ds-icon--thumbs-down" aria-hidden="true"></i></button>
+            <button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="다시 답변 받기"><i class="ds-icon ds-icon--rotate-ccw" aria-hidden="true"></i></button>
+          </div>
+        </article>
+      </div>
+    </div>
+
+    <!-- 아래 고정: 추천 질문 + 입력창 -->
+    <div class="tp-dock">
+      <div class="tp-dock-inner">
+
+        <!-- 추천 질문 Chip -->
+        <div class="ds-scrollfog tp-suggest" data-direction="horizontal" role="group" aria-label="추천 질문">
+          <button type="button" class="ds-chip" data-variant="outlineWeak" data-size="small">두 방법의 속도를 비교해 줘</button>
+          <button type="button" class="ds-chip" data-variant="outlineWeak" data-size="small">타입스크립트로 바꿔 줘</button>
+          <button type="button" class="ds-chip" data-variant="outlineWeak" data-size="small">예제를 더 보여 줘</button>
+          <button type="button" class="ds-chip" data-variant="outlineWeak" data-size="small">처음 쓰는 사람에게 설명해 줘</button>
+        </div>
+
+        <!-- Chat Composer -->
+        <form class="ds-chat-composer" onsubmit="return false">
+          <button type="button" class="ds-chat-composer__attach" aria-label="첨부"><i class="ds-icon ds-icon--plus" aria-hidden="true"></i></button>
+          <div class="ds-chat-composer__field">
+            <textarea class="ds-chat-composer__input" rows="1" placeholder="메시지를 입력하세요" aria-label="메시지"></textarea>
+            <button type="submit" class="ds-chat-send" aria-label="보내기" disabled></button>
+          </div>
+        </form>
+
+        <p class="tp-notice tp-caption u-show-from-md">AI 답변은 틀릴 수 있어요. 중요한 내용은 꼭 한 번 더 확인하세요.</p>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- 모바일 대화 목록 (Bottom Sheet) -->
+<dialog class="ds-bottomsheet" id="history-sheet" aria-labelledby="history-sheet-title" data-handle>
+  <div class="ds-bottomsheet__header">
+    <h2 class="ds-bottomsheet__title" id="history-sheet-title">대화 목록</h2>
+    <button type="button" class="ds-bottomsheet__close" data-ds-close aria-label="닫기"></button>
+  </div>
+  <div class="ds-bottomsheet__body">
+    <p class="tp-group-label">오늘</p>
+    <ul class="ds-list tp-sheet-list">
+      <li><a class="ds-list-item" data-size="small" href="#" aria-current="page"><span class="ds-list-item__content"><span class="ds-list-item__title">배열에서 중복 값 없애기</span></span><span class="ds-list-item__suffix"><span class="ds-badge" data-tone="brand">지금 대화</span></span></a></li>
+      <li><a class="ds-list-item" data-size="small" href="#"><span class="ds-list-item__content"><span class="ds-list-item__title">회의록 요약 부탁</span></span></a></li>
+      <li><a class="ds-list-item" data-size="small" href="#"><span class="ds-list-item__content"><span class="ds-list-item__title">주말 여행 일정 짜기</span></span></a></li>
+    </ul>
+    <p class="tp-group-label">지난 7일</p>
+    <ul class="ds-list tp-sheet-list">
+      <li><a class="ds-list-item" data-size="small" href="#"><span class="ds-list-item__content"><span class="ds-list-item__title">이메일 문장 다듬기</span></span></a></li>
+      <li><a class="ds-list-item" data-size="small" href="#"><span class="ds-list-item__content"><span class="ds-list-item__title">발표 자료 목차 정리</span></span></a></li>
+      <li><a class="ds-list-item" data-size="small" href="#"><span class="ds-list-item__content"><span class="ds-list-item__title">간단한 저녁 메뉴 추천</span></span></a></li>
+    </ul>
+  </div>
+  <div class="ds-bottomsheet__footer">
+    <button type="button" class="ds-btn" data-variant="neutralSolid" data-size="large" data-ds-close><i class="ds-icon ds-icon--plus" aria-hidden="true"></i>새 대화</button>
+  </div>
+</dialog>
+
+</body>
+</html>

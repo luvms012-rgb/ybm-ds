@@ -3904,6 +3904,7 @@ a.ds-card:active, button.ds-card:active { background: linear-gradient(var(--ybm-
 /* --------------------------------------------------------------------------
    69 Code Block - 코드를 고정 폭 글꼴로 보여 주는 칸 (2026-10-29 추가)
    header 에는 언어 이름과 복사 버튼. 복사 버튼(data-ds-copy)은 ybm-ds.js 가 코드를 복사하고 잠시 data-copied 를 붙인다.
+   data-wrap: 긴 줄을 가로로 넘기지 않고 줄바꿈한다(2026-10-30 추가).
      <figure class="ds-codeblock">
        [<figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">javascript</span>
          <button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>]
@@ -3937,6 +3938,8 @@ a.ds-card:active, button.ds-card:active { background: linear-gradient(var(--ybm-
   tab-size: 2;
 }
 .ds-codeblock__code > code { font: inherit; }
+/* 긴 줄 줄바꿈 (AI 안내문처럼 글이 긴 코드) - <figure class="ds-codeblock" data-wrap> */
+.ds-codeblock[data-wrap] .ds-codeblock__code { white-space: pre-wrap; word-break: break-all; }
 
 
 /* --------------------------------------------------------------------------

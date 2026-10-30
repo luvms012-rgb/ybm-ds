@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>설정 - YBM DS 템플릿</title>
+<link rel="stylesheet" href="../../../dist/ybm-ds.css">
+<script src="../../../dist/ybm-ds.js" defer></script>
+<style>
+  /* 템플릿 배치 전용. 값은 모두 --ybm-* 토큰 */
+
+  /* 한글 글자 규칙 (사이트 공통) */
+  body { word-break: keep-all; overflow-wrap: break-word; }
+  .tp-h1 { font-size: var(--ybm-font-size-t10); line-height: var(--ybm-line-height-t10); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; }
+  .tp-h2 { font-size: var(--ybm-font-size-t07); line-height: var(--ybm-line-height-t07); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; }
+  .tp-h3 { font-size: var(--ybm-font-size-t05); line-height: var(--ybm-line-height-t05); font-weight: var(--ybm-font-weight-semibold); letter-spacing: -0.01em; }
+  .tp-body { font-size: var(--ybm-font-size-t05); line-height: 1.6; letter-spacing: -0.01em; }
+  .tp-sub { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
+  .tp-caption { font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); color: var(--ybm-color-fg-neutral-subtle); }
+  @media (min-width: 768px) { .tp-h1 { font-size: var(--ybm-font-size-t12); line-height: var(--ybm-line-height-t12); } .tp-h2 { font-size: var(--ybm-font-size-t09); line-height: var(--ybm-line-height-t09); } }
+
+  /* 화면 틀: 모바일은 위 Top App Bar + 묶음별 List, PC 는 위 Top Navigation + 왼쪽 설정 메뉴 */
+  .tp-page { background: var(--ybm-color-bg-canvas); }
+  .tp-appbar { position: sticky; top: 0; z-index: var(--ybm-z-sticky); }
+  .tp-topnav { border-bottom: 1px solid var(--ybm-color-stroke-neutral-muted); }
+  .tp-logo { display: grid; place-items: center; width: 88px; height: 28px; border-radius: var(--ybm-shape-xs); background: var(--ybm-color-bg-neutral); color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t03-static); line-height: var(--ybm-line-height-t03-static); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-side { position: sticky; top: 0; height: 100vh; }
+  .tp-content { min-width: 0; padding: var(--ybm-space-x4) var(--ybm-space-x-global-gutter) var(--ybm-space-x16); }
+  .tp-container { display: flex; flex-direction: column; gap: var(--ybm-space-x8); max-width: 720px; margin-inline: auto; }
+
+  /* 머리말, 묶음 */
+  .tp-pagehead { display: flex; flex-direction: column; gap: var(--ybm-space-x1); }
+  .tp-section { display: flex; flex-direction: column; gap: var(--ybm-space-x3); scroll-margin-top: var(--ybm-space-x6); }
+
+  /* 프로필 (PC) */
+  .tp-profile { display: flex; flex-wrap: wrap; align-items: center; gap: var(--ybm-space-x5); }
+  .tp-profile__side { display: flex; flex-direction: column; align-items: flex-start; gap: var(--ybm-space-x2); }
+  .tp-profile__buttons { display: flex; flex-wrap: wrap; gap: var(--ybm-space-x2); }
+  .tp-form-end { display: flex; justify-content: flex-end; gap: var(--ybm-space-x2); }
+
+  /* List 한 줄 안의 Select, Segmented Control */
+  .tp-select { width: 140px; }
+  .tp-row-stack { flex-direction: column; align-items: stretch; gap: var(--ybm-space-x3); }
+  .tp-mode { width: 100%; }
+
+  /* 계정 삭제 */
+  .tp-danger { display: flex; flex-direction: column; align-items: flex-start; gap: var(--ybm-space-x4); }
+
+  @media (min-width: 768px) {
+    .tp-page { background: var(--ybm-color-bg-layer-default); }
+    .tp-layout { display: grid; grid-template-columns: auto minmax(0, 1fr); }
+    .tp-content { padding: var(--ybm-space-x10) var(--ybm-space-x8) var(--ybm-space-x16); }
+    .tp-container { gap: var(--ybm-space-x12); }
+    .tp-row-stack { flex-direction: row; align-items: center; }
+    .tp-mode { width: 240px; }
+    .tp-danger { flex-direction: row; align-items: center; justify-content: space-between; }
+  }
+</style>
+</head>
+<body class="tp-page">
+
+  <!-- 위 내비게이션 (PC) -->
+  <div class="tp-topnav u-show-from-md">
+    <header class="ds-topnav">
+      <div class="ds-topnav__left">
+        <a class="ds-topnav__heading" href="#" aria-label="서비스 홈"><span class="tp-logo" aria-hidden="true">로고</span></a>
+        <nav class="ds-topnav__menu" aria-label="주요 메뉴">
+          <a class="ds-topnav__item" href="dashboard.html">대시보드</a>
+          <a class="ds-topnav__item" href="table.html">프로젝트</a>
+          <a class="ds-topnav__item" href="#">일정</a>
+          <a class="ds-topnav__item" href="#">보고서</a>
+        </nav>
+      </div>
+      <div class="ds-topnav__end">
+        <button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="검색"><i class="ds-icon ds-icon--search" aria-hidden="true"></i></button>
+        <a class="ds-avatar" href="#" aria-label="홍길동, 내 설정" aria-current="page"><span class="ds-avatar__initials" aria-hidden="true">홍</span></a>
+      </div>
+    </header>
+  </div>
+
+  <!-- 위 막대 (모바일) -->
+  <div class="tp-appbar u-hide-from-md">
+    <header class="ds-appbar">
+      <div class="ds-appbar__left">
+        <button type="button" class="ds-appbar__button" aria-label="뒤로"><i class="ds-icon ds-icon--chevron-left" aria-hidden="true"></i></button>
+      </div>
+      <div class="ds-appbar__main">
+        <h1 class="ds-appbar__title">설정</h1>
+      </div>
+      <div class="ds-appbar__right"></div>
+    </header>
+  </div>
+
+  <div class="tp-layout">
+
+    <!-- 왼쪽 설정 메뉴 (PC) -->
+    <div class="tp-side u-show-from-md">
+      <nav class="ds-sidenav" aria-label="설정 메뉴">
+        <div class="ds-sidenav__content">
+          <div class="ds-sidenav__group">
+            <div class="ds-sidenav__group-label">설정</div>
+            <a class="ds-sidenav__item" href="#profile" aria-current="page">
+              <span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--id-card" aria-hidden="true"></i></span>
+              <span class="ds-sidenav__label">프로필</span>
+            </a>
+            <a class="ds-sidenav__item" href="#notify">
+              <span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--inbox" aria-hidden="true"></i></span>
+              <span class="ds-sidenav__label">알림</span>
+            </a>
+            <a class="ds-sidenav__item" href="#display">
+              <span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--globe" aria-hidden="true"></i></span>
+              <span class="ds-sidenav__label">화면과 언어</span>
+            </a>
+            <a class="ds-sidenav__item" href="#account">
+              <span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--eye-off" aria-hidden="true"></i></span>
+              <span class="ds-sidenav__label">계정과 보안</span>
+            </a>
+          </div>
+          <div class="ds-sidenav__group">
+            <div class="ds-sidenav__group-label">도움</div>
+            <a class="ds-sidenav__item" href="#">
+              <span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--headset" aria-hidden="true"></i></span>
+              <span class="ds-sidenav__label">고객센터</span>
+            </a>
+            <a class="ds-sidenav__item" href="#">
+              <span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--info" aria-hidden="true"></i></span>
+              <span class="ds-sidenav__label">서비스 정보</span>
+            </a>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <main class="tp-content">
+      <div class="tp-container">
+
+        <!-- 머리말 (PC) -->
+        <div class="u-show-from-md">
+          <header class="tp-pagehead">
+            <h1 class="tp-h1">설정</h1>
+            <p class="tp-sub">내 정보와 알림, 화면을 원하는 대로 바꿀 수 있어요.</p>
+          </header>
+        </div>
+
+        <!-- 프로필 -->
+        <section class="tp-section" id="profile" aria-labelledby="profile-title">
+          <h2 class="tp-h3" id="profile-title">프로필</h2>
+
+          <!-- 모바일: 한 줄 요약, 누르면 프로필 수정 화면으로 -->
+          <div class="u-hide-from-md">
+            <ul class="ds-list" data-variant="inset">
+              <li>
+                <a class="ds-list-item" href="#">
+                  <span class="ds-list-item__prefix"><span class="ds-avatar" data-size="48" role="img" aria-label="홍길동"><span class="ds-avatar__initials" aria-hidden="true">홍</span></span></span>
+                  <span class="ds-list-item__content">
+                    <span class="ds-list-item__title">홍길동</span>
+                    <span class="ds-list-item__desc">사진과 이름을 바꿀 수 있어요</span>
+                  </span>
+                  <i class="ds-icon ds-icon--chevron-right ds-list-item__chevron" aria-hidden="true"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- PC: 사진과 이름을 이 화면에서 바로 바꾸기 -->
+          <div class="u-show-from-md">
+            <div class="ds-card">
+              <div class="tp-profile">
+                <span class="ds-avatar" data-size="80" role="img" aria-label="홍길동"><span class="ds-avatar__initials" aria-hidden="true">홍</span></span>
+                <div class="tp-profile__side">
+                  <div class="tp-profile__buttons">
+                    <button type="button" class="ds-btn" data-variant="neutralOutline" data-size="small"><i class="ds-icon ds-icon--upload" aria-hidden="true"></i>사진 바꾸기</button>
+                    <button type="button" class="ds-btn" data-variant="ghost" data-size="small">사진 지우기</button>
+                  </div>
+                  <p class="tp-caption">사진은 5MB 까지 올릴 수 있어요.</p>
+                </div>
+              </div>
+              <div class="ds-field">
+                <div class="ds-field__header">
+                  <label class="ds-field__label" for="profile-name">이름</label>
+                </div>
+                <div class="ds-input" data-variant="outline" data-size="medium">
+                  <input class="ds-input__control" id="profile-name" value="홍길동" maxlength="20" aria-describedby="profile-name-help">
+                  <button type="button" class="ds-input__clear" aria-label="지우기"></button>
+                </div>
+                <div class="ds-field__footer">
+                  <p class="ds-field__help" id="profile-name-help">다른 사람에게 보이는 이름이에요.</p>
+                  <span class="ds-field__count">3/20</span>
+                </div>
+              </div>
+              <div class="tp-form-end">
+                <button type="button" class="ds-btn" data-variant="neutralSolid">저장하기</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 알림 -->
+        <section class="tp-section" id="notify" aria-labelledby="notify-title">
+          <h2 class="tp-h3" id="notify-title">알림</h2>
+          <ul class="ds-list" data-variant="inset" data-divider>
+            <li>
+              <label class="ds-list-item">
+                <span class="ds-list-item__content">
+                  <span class="ds-list-item__title">서비스 공지</span>
+                  <span class="ds-list-item__desc">점검, 정책 변경처럼 꼭 알아야 할 소식이에요.</span>
+                </span>
+                <span class="ds-list-item__suffix"><span class="ds-switch"><input type="checkbox" role="switch" class="ds-switch__control" checked></span></span>
+              </label>
+            </li>
+            <li>
+              <label class="ds-list-item">
+                <span class="ds-list-item__content">
+                  <span class="ds-list-item__title">활동 알림</span>
+                  <span class="ds-list-item__desc">내 프로젝트에 댓글이나 상태 변경이 생기면 알려 드려요.</span>
+                </span>
+                <span class="ds-list-item__suffix"><span class="ds-switch"><input type="checkbox" role="switch" class="ds-switch__control" checked></span></span>
+              </label>
+            </li>
+            <li>
+              <label class="ds-list-item">
+                <span class="ds-list-item__content">
+                  <span class="ds-list-item__title">이메일 소식</span>
+                  <span class="ds-list-item__desc">새 기능과 이벤트 소식을 이메일로 받아요.</span>
+                </span>
+                <span class="ds-list-item__suffix"><span class="ds-switch"><input type="checkbox" role="switch" class="ds-switch__control"></span></span>
+              </label>
+            </li>
+            <li>
+              <label class="ds-list-item">
+                <span class="ds-list-item__content">
+                  <span class="ds-list-item__title">밤에도 알림 받기</span>
+                  <span class="ds-list-item__desc">오후 9시부터 오전 8시까지도 알림을 보내 드려요.</span>
+                </span>
+                <span class="ds-list-item__suffix"><span class="ds-switch"><input type="checkbox" role="switch" class="ds-switch__control"></span></span>
+              </label>
+            </li>
+          </ul>
+        </section>
+
+        <!-- 화면과 언어 -->
+        <section class="tp-section" id="display" aria-labelledby="display-title">
+          <h2 class="tp-h3" id="display-title">화면과 언어</h2>
+          <ul class="ds-list" data-variant="inset" data-divider>
+            <li>
+              <div class="ds-list-item">
+                <span class="ds-list-item__content">
+                  <span class="ds-list-item__title" id="lang-label">언어</span>
+                </span>
+                <span class="ds-list-item__suffix">
+                  <button type="button" class="ds-select tp-select" data-size="medium" aria-haspopup="listbox" aria-expanded="false" aria-labelledby="lang-label lang-value">
+                    <span class="ds-select__value" id="lang-value">한국어</span>
+                  </button>
+                </span>
+              </div>
+            </li>
+            <li>
+              <div class="ds-list-item tp-row-stack">
+                <span class="ds-list-item__content">
+                  <span class="ds-list-item__title" id="mode-label">화면 모드</span>
+                  <span class="ds-list-item__desc">시스템을 고르면 기기 설정을 따라가요.</span>
+                </span>
+                <span class="ds-list-item__suffix">
+                  <span class="ds-segmented tp-mode" role="group" aria-labelledby="mode-label" data-layout="fill">
+                    <button type="button" class="ds-segmented__item" aria-pressed="false">라이트</button>
+                    <button type="button" class="ds-segmented__item" aria-pressed="false">다크</button>
+                    <button type="button" class="ds-segmented__item" aria-pressed="true">시스템</button>
+                  </span>
+                </span>
+              </div>
+            </li>
+          </ul>
+        </section>
+
+        <!-- 계정과 보안 -->
+        <section class="tp-section" id="account" aria-labelledby="account-title">
+          <h2 class="tp-h3" id="account-title">계정과 보안</h2>
+          <ul class="ds-list" data-variant="inset" data-divider>
+            <li>
+              <div class="ds-list-item">
+                <span class="ds-list-item__content">
+                  <span class="ds-list-item__title">이메일</span>
+                </span>
+                <span class="ds-list-item__suffix">hong@example.com</span>
+              </div>
+            </li>
+            <li>
+              <a class="ds-list-item" href="#">
+                <span class="ds-list-item__content">
+                  <span class="ds-list-item__title">비밀번호 바꾸기</span>
+                  <span class="ds-list-item__desc">마지막으로 바꾼 날 2026.08.12</span>
+                </span>
+                <i class="ds-icon ds-icon--chevron-right ds-list-item__chevron" aria-hidden="true"></i>
+              </a>
+            </li>
+            <li>
+              <button type="button" class="ds-list-item">
+                <span class="ds-list-item__content">
+                  <span class="ds-list-item__title">로그아웃</span>
+                </span>
+              </button>
+            </li>
+          </ul>
+          <div class="ds-card">
+            <div class="tp-danger">
+              <div class="ds-card__header">
+                <h3 class="ds-card__title">계정 삭제</h3>
+                <p class="ds-card__desc">계정을 지우면 프로젝트와 기록이 모두 사라지고 되돌릴 수 없어요.</p>
+              </div>
+              <button type="button" class="ds-btn" data-variant="neutralOutline" data-ds-open="delete-account">계정 삭제</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- 도움 (모바일, PC 는 왼쪽 메뉴에 있음) -->
+        <div class="u-hide-from-md">
+          <section class="tp-section" aria-labelledby="help-title">
+            <h2 class="tp-h3" id="help-title">도움</h2>
+            <ul class="ds-list" data-variant="inset" data-divider>
+              <li>
+                <a class="ds-list-item" href="#">
+                  <span class="ds-list-item__content"><span class="ds-list-item__title">고객센터</span></span>
+                  <i class="ds-icon ds-icon--chevron-right ds-list-item__chevron" aria-hidden="true"></i>
+                </a>
+              </li>
+              <li>
+                <a class="ds-list-item" href="#">
+                  <span class="ds-list-item__content"><span class="ds-list-item__title">서비스 정보</span></span>
+                  <span class="ds-list-item__suffix">3.2.0</span>
+                  <i class="ds-icon ds-icon--chevron-right ds-list-item__chevron" aria-hidden="true"></i>
+                </a>
+              </li>
+            </ul>
+          </section>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- 계정 삭제 확인 (Alert Dialog) -->
+  <dialog class="ds-dialog ds-alertdialog" id="delete-account" role="alertdialog" aria-labelledby="delete-account-title" aria-describedby="delete-account-desc">
+    <div class="ds-alertdialog__header">
+      <h2 class="ds-alertdialog__title" id="delete-account-title">계정을 삭제할까요?</h2>
+      <p class="ds-alertdialog__desc" id="delete-account-desc">프로젝트와 기록이 모두 지워지고 되돌릴 수 없어요.</p>
+    </div>
+    <div class="ds-alertdialog__footer" data-action="critical">
+      <button type="button" class="ds-btn" data-variant="neutralWeak" data-ds-close>취소</button>
+      <button type="button" class="ds-btn" data-variant="criticalSolid" data-ds-close>삭제하기</button>
+    </div>
+  </dialog>
+</body>
+</html>

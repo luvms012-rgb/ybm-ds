@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>대시보드 - YBM DS 템플릿</title>
+<link rel="stylesheet" href="../../../dist/ybm-ds.css">
+<script src="../../../dist/ybm-ds.js" defer></script>
+<style>
+  /* 템플릿 배치 전용. 값은 모두 --ybm-* 토큰 */
+
+  /* 한글 글자 규칙 (사이트 공통) */
+  body { word-break: keep-all; overflow-wrap: break-word; }
+  .tp-h1 { font-size: var(--ybm-font-size-t10); line-height: var(--ybm-line-height-t10); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; }
+  .tp-h2 { font-size: var(--ybm-font-size-t07); line-height: var(--ybm-line-height-t07); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; }
+  .tp-h3 { font-size: var(--ybm-font-size-t05); line-height: var(--ybm-line-height-t05); font-weight: var(--ybm-font-weight-semibold); letter-spacing: -0.01em; }
+  .tp-body { font-size: var(--ybm-font-size-t05); line-height: 1.6; letter-spacing: -0.01em; }
+  .tp-sub { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
+  .tp-caption { font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); color: var(--ybm-color-fg-neutral-subtle); }
+  @media (min-width: 768px) { .tp-h1 { font-size: var(--ybm-font-size-t12); line-height: var(--ybm-line-height-t12); } .tp-h2 { font-size: var(--ybm-font-size-t09); line-height: var(--ybm-line-height-t09); } }
+
+  /* 화면 틀: 모바일은 위 Top App Bar + 아래 Bottom Navigation, PC 는 왼쪽 Side Navigation */
+  .tp-shell { min-height: 100vh; }
+  .tp-shell__nav { position: sticky; top: 0; height: 100vh; }
+  .tp-shell__body { min-width: 0; }
+  .tp-appbar { position: sticky; top: 0; z-index: var(--ybm-z-sticky); }
+  .tp-bottomnav { position: fixed; right: 0; bottom: 0; left: 0; z-index: var(--ybm-z-sticky); }
+  .tp-main { padding: var(--ybm-space-x2) var(--ybm-space-x-global-gutter) calc(var(--ybm-space-x24) + env(safe-area-inset-bottom, 0px)); }
+  .tp-container { display: flex; flex-direction: column; gap: var(--ybm-space-x8); max-width: 1200px; margin-inline: auto; }
+
+  /* Side Navigation 머리말의 로고 자리, 아래쪽 내 정보 */
+  .tp-logo { display: grid; place-items: center; width: 88px; height: 28px; margin-inline: var(--ybm-space-x2) auto; border-radius: var(--ybm-shape-xs); background: var(--ybm-color-bg-neutral); color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t03-static); line-height: var(--ybm-line-height-t03-static); font-weight: var(--ybm-font-weight-semibold); text-decoration: none; }
+  .tp-navuser { --ds-list-item-px: var(--ybm-space-x2); border-radius: var(--ybm-shape-sm); }
+
+  /* 머리말: 제목 + 기간 + 버튼 */
+  .tp-pagehead { display: flex; flex-direction: column; gap: var(--ybm-space-x3); }
+  .tp-pagehead__text { display: flex; flex-direction: column; gap: var(--ybm-space-x1); }
+  .tp-pagehead__actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--ybm-space-x2); }
+  .tp-period { flex: 1 1 auto; }
+
+  /* 핵심 숫자 카드 */
+  .tp-stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--ybm-space-x3); }
+  .tp-stat { display: flex; flex-direction: column; gap: var(--ybm-space-x2); }
+  .tp-stat__value { display: flex; align-items: baseline; gap: var(--ybm-space-x0_5); }
+  .tp-stat__num { font-size: var(--ybm-font-size-t09); line-height: var(--ybm-line-height-t09); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+  .tp-stat__unit { color: var(--ybm-color-fg-neutral-muted); font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); font-weight: var(--ybm-font-weight-medium); }
+  .tp-stat__delta { display: flex; flex-wrap: wrap; align-items: center; gap: var(--ybm-space-x1_5); }
+
+  /* 영역 묶음: 제목 줄 + 내용 */
+  .tp-grid { display: grid; gap: var(--ybm-space-x8); }
+  .tp-section { display: flex; flex-direction: column; gap: var(--ybm-space-x3); min-width: 0; }
+  .tp-section__head { display: flex; align-items: center; justify-content: space-between; gap: var(--ybm-space-x2); min-height: var(--ybm-space-x8); }
+  .tp-more { margin-inline-end: calc(var(--ybm-space-x3_5) * -1); }
+  .tp-fill { flex: 1 1 auto; }
+
+  /* 목표 달성률 */
+  .tp-goals { display: flex; flex-direction: column; gap: var(--ybm-space-x5); }
+  .tp-goal { display: flex; flex-direction: column; gap: var(--ybm-space-x2); }
+  .tp-goal__head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--ybm-space-x2); }
+  .tp-goal__label { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); font-weight: var(--ybm-font-weight-medium); }
+  .tp-goal__value { font-size: var(--ybm-font-size-t05); line-height: var(--ybm-line-height-t05); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.01em; font-variant-numeric: tabular-nums; }
+
+  /* 최근 활동 표: 둥근 상자 안, 좁으면 가로 스크롤 */
+  .tp-tablebox { overflow: hidden; border: 1px solid var(--ybm-color-stroke-neutral-weak); border-radius: var(--ybm-shape-xl); background: var(--ybm-color-bg-layer-default); }
+  .tp-tablebox tbody tr:last-child { box-shadow: none; }
+  .tp-table { min-width: 640px; font-variant-numeric: tabular-nums; }
+  .tp-col-time { width: 88px; }
+  .tp-col-name { width: 120px; }
+  .tp-col-status { width: 112px; }
+  .tp-col-owner { width: 112px; }
+
+  @media (min-width: 768px) {
+    .tp-shell { display: grid; grid-template-columns: auto minmax(0, 1fr); }
+    .tp-main { padding: var(--ybm-space-x10) var(--ybm-space-x8) var(--ybm-space-x16); }
+    .tp-container { gap: var(--ybm-space-x10); }
+    .tp-pagehead { flex-direction: row; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: var(--ybm-space-x4); }
+    .tp-period { flex: none; width: 216px; }
+    .tp-stats { gap: var(--ybm-space-x4); }
+    .tp-stat__num { font-size: var(--ybm-font-size-t11); line-height: var(--ybm-line-height-t11); }
+  }
+  @media (min-width: 1280px) {
+    .tp-stats { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .tp-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--ybm-space-x6); }
+  }
+</style>
+</head>
+<body>
+  <div class="tp-shell">
+
+    <!-- 왼쪽 메뉴 (PC) -->
+    <div class="tp-shell__nav u-show-from-md">
+      <nav class="ds-sidenav" aria-label="주요 메뉴">
+        <div class="ds-sidenav__header">
+          <a class="tp-logo" href="#" aria-label="서비스 홈">로고</a>
+        </div>
+        <div class="ds-sidenav__content">
+          <div class="ds-sidenav__group">
+            <a class="ds-sidenav__item" href="#" aria-current="page">
+              <span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--house-solid" aria-hidden="true"></i></span>
+              <span class="ds-sidenav__label">대시보드</span>
+            </a>
+            <a class="ds-sidenav__item" href="#">
+              <span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--id-card" aria-hidden="true"></i></span>
+              <span class="ds-sidenav__label">회원 관리</span>
+            </a>
+            <a class="ds-sidenav__item" href="#">
+              <span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--file-text" aria-hidden="true"></i></span>
+              <span class="ds-sidenav__label">콘텐츠</span>
+            </a>
+            <a class="ds-sidenav__item" href="#">
+              <span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--calendar" aria-hidden="true"></i></span>
+              <span class="ds-sidenav__label">일정</span>
+            </a>
+            <a class="ds-sidenav__item" href="#" aria-label="문의, 새 문의 3건">
+              <span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--message-circle" aria-hidden="true"></i></span>
+              <span class="ds-sidenav__label">문의</span>
+              <span class="ds-badge" data-variant="solid" data-tone="critical" aria-hidden="true">3</span>
+            </a>
+            <a class="ds-sidenav__item" href="#">
+              <span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--credit-card" aria-hidden="true"></i></span>
+              <span class="ds-sidenav__label">결제</span>
+            </a>
+          </div>
+        </div>
+        <div class="ds-sidenav__footer">
+          <a class="ds-list-item tp-navuser" href="settings.html" data-size="small">
+            <span class="ds-list-item__prefix"><span class="ds-avatar" role="img" aria-label="홍길동"><span class="ds-avatar__initials" aria-hidden="true">홍</span></span></span>
+            <span class="ds-list-item__content">
+              <span class="ds-list-item__title">홍길동</span>
+              <span class="ds-list-item__desc">운영 관리자</span>
+            </span>
+          </a>
+        </div>
+      </nav>
+    </div>
+
+    <div class="tp-shell__body">
+
+      <!-- 위 막대 (모바일) -->
+      <div class="tp-appbar u-hide-from-md">
+        <header class="ds-appbar" data-platform="android">
+          <div class="ds-appbar__left"></div>
+          <div class="ds-appbar__main">
+            <h1 class="ds-appbar__title">운영 현황</h1>
+          </div>
+          <div class="ds-appbar__right">
+            <button type="button" class="ds-appbar__button" aria-label="검색"><i class="ds-icon ds-icon--search" aria-hidden="true"></i></button>
+            <button type="button" class="ds-appbar__button" aria-label="알림함"><i class="ds-icon ds-icon--inbox" aria-hidden="true"></i></button>
+          </div>
+        </header>
+      </div>
+
+      <main class="tp-main">
+        <div class="tp-container">
+
+          <!-- 머리말 -->
+          <header class="tp-pagehead">
+            <div class="tp-pagehead__text">
+              <h1 class="tp-h1 u-show-from-md">운영 현황</h1>
+              <p class="tp-sub">10월 30일 오전 9시 기준이에요.</p>
+            </div>
+            <div class="tp-pagehead__actions">
+              <div class="ds-segmented tp-period" role="group" aria-label="기간" data-size="medium" data-layout="fill">
+                <button type="button" class="ds-segmented__item" aria-pressed="false">오늘</button>
+                <button type="button" class="ds-segmented__item" aria-pressed="true">7일</button>
+                <button type="button" class="ds-segmented__item" aria-pressed="false">30일</button>
+              </div>
+              <button type="button" class="ds-btn u-show-from-md" data-variant="neutralOutline"><i class="ds-icon ds-icon--upload" aria-hidden="true"></i>내보내기</button>
+              <a class="ds-btn u-show-from-md" href="#"><i class="ds-icon ds-icon--plus" aria-hidden="true"></i>공지 쓰기</a>
+            </div>
+          </header>
+
+          <!-- 핵심 숫자 -->
+          <section class="tp-stats" aria-label="핵심 지표">
+            <article class="ds-card" data-size="small">
+              <header class="ds-card__header"><h2 class="ds-card__title">방문자</h2></header>
+              <div class="ds-card__content tp-stat">
+                <p class="tp-stat__value"><span class="tp-stat__num">12,480</span><span class="tp-stat__unit">명</span></p>
+                <p class="tp-stat__delta"><span class="ds-badge" data-size="large" data-tone="positive">+8.2%</span><span class="tp-caption">지난 7일보다</span></p>
+              </div>
+            </article>
+            <article class="ds-card" data-size="small">
+              <header class="ds-card__header"><h2 class="ds-card__title">신규 가입</h2></header>
+              <div class="ds-card__content tp-stat">
+                <p class="tp-stat__value"><span class="tp-stat__num">1,236</span><span class="tp-stat__unit">명</span></p>
+                <p class="tp-stat__delta"><span class="ds-badge" data-size="large" data-tone="positive">+3.1%</span><span class="tp-caption">지난 7일보다</span></p>
+              </div>
+            </article>
+            <article class="ds-card" data-size="small">
+              <header class="ds-card__header"><h2 class="ds-card__title">결제 금액</h2></header>
+              <div class="ds-card__content tp-stat">
+                <p class="tp-stat__value"><span class="tp-stat__num">3,420</span><span class="tp-stat__unit">만 원</span></p>
+                <p class="tp-stat__delta"><span class="ds-badge" data-size="large" data-tone="critical">-2.4%</span><span class="tp-caption">지난 7일보다</span></p>
+              </div>
+            </article>
+            <article class="ds-card" data-size="small">
+              <header class="ds-card__header"><h2 class="ds-card__title">새 문의</h2></header>
+              <div class="ds-card__content tp-stat">
+                <p class="tp-stat__value"><span class="tp-stat__num">87</span><span class="tp-stat__unit">건</span></p>
+                <p class="tp-stat__delta"><span class="ds-badge" data-size="large">0.0%</span><span class="tp-caption">지난 7일과 같아요</span></p>
+              </div>
+            </article>
+          </section>
+
+          <div class="tp-grid">
+
+            <!-- 목표 달성률 -->
+            <section class="tp-section" aria-labelledby="goal-title">
+              <div class="tp-section__head">
+                <h2 class="tp-h3" id="goal-title">이번 달 목표 달성률</h2>
+                <a class="ds-btn tp-more" data-variant="ghost" data-size="xsmall" href="#">목표 바꾸기</a>
+              </div>
+              <div class="ds-card tp-fill">
+                <ul class="tp-goals">
+                  <li class="tp-goal">
+                    <div class="tp-goal__head"><span class="tp-goal__label" id="goal-1">신규 가입</span><span class="tp-goal__value">72%</span></div>
+                    <div class="ds-progress" role="progressbar" aria-labelledby="goal-1" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100" style="--ds-progress-value: 72%"></div>
+                    <p class="tp-caption">목표 5,000명 중 3,600명</p>
+                  </li>
+                  <li class="tp-goal">
+                    <div class="tp-goal__head"><span class="tp-goal__label" id="goal-2">강의 완료</span><span class="tp-goal__value">58%</span></div>
+                    <div class="ds-progress" role="progressbar" aria-labelledby="goal-2" aria-valuenow="58" aria-valuemin="0" aria-valuemax="100" style="--ds-progress-value: 58%"></div>
+                    <p class="tp-caption">목표 2,400건 중 1,392건</p>
+                  </li>
+                  <li class="tp-goal">
+                    <div class="tp-goal__head"><span class="tp-goal__label" id="goal-3">문의 답변</span><span class="tp-goal__value">91%</span></div>
+                    <div class="ds-progress" role="progressbar" aria-labelledby="goal-3" aria-valuenow="91" aria-valuemin="0" aria-valuemax="100" style="--ds-progress-value: 91%"></div>
+                    <p class="tp-caption">받은 문의 420건 중 382건</p>
+                  </li>
+                  <li class="tp-goal">
+                    <div class="tp-goal__head"><span class="tp-goal__label" id="goal-4">만족도 응답</span><span class="tp-goal__value">34%</span></div>
+                    <div class="ds-progress" role="progressbar" aria-labelledby="goal-4" aria-valuenow="34" aria-valuemin="0" aria-valuemax="100" style="--ds-progress-value: 34%"></div>
+                    <p class="tp-caption">목표 1,000건 중 340건</p>
+                  </li>
+                </ul>
+              </div>
+            </section>
+
+            <!-- 공지 목록 -->
+            <section class="tp-section" aria-labelledby="notice-title">
+              <div class="tp-section__head">
+                <h2 class="tp-h3" id="notice-title">공지</h2>
+                <a class="ds-btn tp-more" data-variant="ghost" data-size="xsmall" href="#">전체 보기<i class="ds-icon ds-icon--chevron-right" aria-hidden="true"></i></a>
+              </div>
+              <ul class="ds-list tp-fill" data-variant="inset" data-divider>
+                <li>
+                  <a class="ds-list-item" href="#">
+                    <span class="ds-list-item__content">
+                      <span class="ds-list-item__title">11월 정기 점검 일정 안내</span>
+                      <span class="ds-list-item__desc">2026.10.29</span>
+                    </span>
+                    <span class="ds-list-item__suffix"><span class="ds-badge" data-tone="brand">새 글</span></span>
+                    <i class="ds-icon ds-icon--chevron-right ds-list-item__chevron" aria-hidden="true"></i>
+                  </a>
+                </li>
+                <li>
+                  <a class="ds-list-item" href="#">
+                    <span class="ds-list-item__content">
+                      <span class="ds-list-item__title">개인정보 처리방침 개정 안내</span>
+                      <span class="ds-list-item__desc">2026.10.24</span>
+                    </span>
+                    <i class="ds-icon ds-icon--chevron-right ds-list-item__chevron" aria-hidden="true"></i>
+                  </a>
+                </li>
+                <li>
+                  <a class="ds-list-item" href="#">
+                    <span class="ds-list-item__content">
+                      <span class="ds-list-item__title">운영 안내서 3.2 버전을 공유해요</span>
+                      <span class="ds-list-item__desc">2026.10.20</span>
+                    </span>
+                    <i class="ds-icon ds-icon--chevron-right ds-list-item__chevron" aria-hidden="true"></i>
+                  </a>
+                </li>
+                <li>
+                  <a class="ds-list-item" href="#">
+                    <span class="ds-list-item__content">
+                      <span class="ds-list-item__title">문의 답변 기준이 바뀌었어요</span>
+                      <span class="ds-list-item__desc">2026.10.14</span>
+                    </span>
+                    <i class="ds-icon ds-icon--chevron-right ds-list-item__chevron" aria-hidden="true"></i>
+                  </a>
+                </li>
+                <li>
+                  <a class="ds-list-item" href="#">
+                    <span class="ds-list-item__content">
+                      <span class="ds-list-item__title">연휴 기간 고객센터 운영 시간</span>
+                      <span class="ds-list-item__desc">2026.10.02</span>
+                    </span>
+                    <i class="ds-icon ds-icon--chevron-right ds-list-item__chevron" aria-hidden="true"></i>
+                  </a>
+                </li>
+              </ul>
+            </section>
+
+          </div>
+
+          <!-- 최근 활동 표 -->
+          <section class="tp-section" aria-labelledby="activity-title">
+            <div class="tp-section__head">
+              <h2 class="tp-h3" id="activity-title">최근 활동</h2>
+              <a class="ds-btn tp-more" data-variant="ghost" data-size="xsmall" href="#">전체 보기<i class="ds-icon ds-icon--chevron-right" aria-hidden="true"></i></a>
+            </div>
+            <div class="tp-tablebox">
+              <div class="ds-table-wrap">
+                <table class="ds-table tp-table">
+                  <thead>
+                    <tr>
+                      <th scope="col" class="tp-col-time" data-align="center">시간</th>
+                      <th scope="col" class="tp-col-name">회원</th>
+                      <th scope="col">활동</th>
+                      <th scope="col" class="tp-col-status" data-align="center">상태</th>
+                      <th scope="col" class="tp-col-owner">담당</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr data-interactive>
+                      <td data-align="center">09:42</td>
+                      <td>김민지</td>
+                      <td>정기 결제</td>
+                      <td data-align="center"><span class="ds-badge" data-tone="positive">완료</span></td>
+                      <td>이서준</td>
+                    </tr>
+                    <tr data-interactive>
+                      <td data-align="center">09:18</td>
+                      <td>박지우</td>
+                      <td>1:1 문의 접수</td>
+                      <td data-align="center"><span class="ds-badge" data-tone="informative">처리 중</span></td>
+                      <td>최유나</td>
+                    </tr>
+                    <tr data-interactive>
+                      <td data-align="center">08:55</td>
+                      <td>정하늘</td>
+                      <td>환불 요청</td>
+                      <td data-align="center"><span class="ds-badge" data-tone="warning">확인 필요</span></td>
+                      <td>이서준</td>
+                    </tr>
+                    <tr data-interactive>
+                      <td data-align="center">08:31</td>
+                      <td>홍길동</td>
+                      <td>강의 수강 신청</td>
+                      <td data-align="center"><span class="ds-badge">대기</span></td>
+                      <td>최유나</td>
+                    </tr>
+                    <tr data-interactive>
+                      <td data-align="center">08:07</td>
+                      <td>한지민</td>
+                      <td>카드 결제</td>
+                      <td data-align="center"><span class="ds-badge" data-tone="critical">실패</span></td>
+                      <td>이서준</td>
+                    </tr>
+                    <tr data-interactive>
+                      <td data-align="center">07:46</td>
+                      <td>오세라</td>
+                      <td>회원 정보 변경</td>
+                      <td data-align="center"><span class="ds-badge" data-tone="positive">완료</span></td>
+                      <td>최유나</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+
+        </div>
+      </main>
+
+      <!-- 아래 내비게이션 (모바일) -->
+      <div class="tp-bottomnav u-hide-from-md">
+        <nav class="ds-bottomnav" aria-label="주요 메뉴">
+          <a class="ds-bottomnav__item" href="#" aria-current="page">
+            <span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--house-solid ds-icon--lg" aria-hidden="true"></i></span>
+            <span class="ds-bottomnav__label">홈</span>
+          </a>
+          <a class="ds-bottomnav__item" href="#">
+            <span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--id-card ds-icon--lg" aria-hidden="true"></i></span>
+            <span class="ds-bottomnav__label">회원</span>
+          </a>
+          <a class="ds-bottomnav__item" href="#">
+            <span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--calendar ds-icon--lg" aria-hidden="true"></i></span>
+            <span class="ds-bottomnav__label">일정</span>
+          </a>
+          <a class="ds-bottomnav__item" href="#" aria-label="문의, 새 문의 있음">
+            <span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--message-circle ds-icon--lg" aria-hidden="true"></i><span class="ds-bottomnav__badge--dot"></span></span>
+            <span class="ds-bottomnav__label">문의</span>
+          </a>
+          <a class="ds-bottomnav__item" href="#">
+            <span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--menu ds-icon--lg" aria-hidden="true"></i></span>
+            <span class="ds-bottomnav__label">전체</span>
+          </a>
+        </nav>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>
