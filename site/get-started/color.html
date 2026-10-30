@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>색 - YBM DS</title>
+<meta name="description" content="배경, 글자와 아이콘, 테두리에 쓰는 시맨틱 색입니다. 값은 라이트 / 다크 순서예요.">
+<!-- 생성물: node site/build.mjs 가 만든다. 직접 고치지 말고 site/build.mjs 나 site/src 를 고친다 -->
+<script>try { var t = localStorage.getItem("ybm-site-theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}</script>
+<link rel="icon" href="../assets/logo-ybmnet.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../dist/ybm-ds.css">
+<link rel="stylesheet" href="../assets/site.css">
+<script src="../../dist/ybm-ds.js" defer></script>
+<script src="../assets/site.js" defer></script>
+</head>
+<body class="site">
+<a class="site-skip" href="#main">본문 바로가기</a>
+<header class="site-top">
+  <a class="site-logo" href="../index.html"><img src="../assets/logo-ybmnet.svg" alt="YBM NET" width="81" height="24"></a>
+  <nav class="site-topnav" aria-label="주요 메뉴">
+    <a class="site-topnav__item" href="../index.html" aria-current="page">Get Started</a>
+    <a class="site-topnav__item" href="../components/index.html">Components</a>
+    <a class="site-topnav__item" href="../templates/index.html">Templates</a>
+  </nav>
+  <div class="site-top__end">
+    <button type="button" class="ds-btn site-theme-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="화면 모드 바꾸기" data-site-theme-toggle><i class="ds-icon site-i--moon" aria-hidden="true"></i><i class="ds-icon site-i--sun" aria-hidden="true"></i></button>
+    <a class="ds-btn site-only-wide" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" href="https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=2274-1143" target="_blank" rel="noopener" aria-label="Figma 파일"><i class="ds-icon site-i--figma" aria-hidden="true"></i></a>
+    <a class="ds-btn site-only-wide" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" href="https://github.com/luvms012-rgb/ybm-ds" target="_blank" rel="noopener" aria-label="GitHub 저장소"><i class="ds-icon site-i--github" aria-hidden="true"></i></a>
+    <a class="ds-btn site-cta" data-variant="neutralSolid" data-size="xsmall" href="../index.html#ai">시작하기</a>
+    <button type="button" class="ds-btn site-menu-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="메뉴 열기" data-site-menu aria-controls="site-side" aria-expanded="false"><i class="ds-icon ds-icon--menu" aria-hidden="true"></i></button>
+  </div>
+</header>
+<div class="site-body site-body--doc">
+<aside class="site-side" id="site-side" aria-label="페이지 목록">
+  <div class="site-side__top"><b>메뉴</b><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" data-site-close aria-label="메뉴 닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button></div>
+  <div class="site-side__mobile"><nav class="site-nav" aria-label="주요 메뉴"><a class="site-nav__item" href="../index.html" aria-current="page">Get Started</a><a class="site-nav__item" href="../components/index.html">Components</a><a class="site-nav__item" href="../templates/index.html">Templates</a></nav><div class="site-nav__sep"></div></div>
+  <nav class="site-nav" aria-label="Get Started 메뉴"><a class="site-nav__item" href="../index.html">시작하기</a>
+<details class="site-nav__group" open><summary>가이드<i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i></summary><a class="site-nav__item" href="../get-started/usage.html">사용 규칙</a><a class="site-nav__item" href="../get-started/scripts.html">스크립트</a></details>
+<details class="site-nav__group" open><summary>파운데이션<i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i></summary><a class="site-nav__item" href="../get-started/color.html" aria-current="page">색</a><a class="site-nav__item" href="../get-started/typography.html">글자</a><a class="site-nav__item" href="../get-started/spacing.html">간격</a><a class="site-nav__item" href="../get-started/shape.html">모서리</a><a class="site-nav__item" href="../get-started/elevation.html">그림자</a><a class="site-nav__item" href="../get-started/motion.html">움직임</a><a class="site-nav__item" href="../get-started/icons.html">아이콘</a></details></nav>
+</aside>
+<div class="site-scrim" data-site-close></div>
+<main class="site-main" id="main">
+<div class="site-main__row">
+<article class="site-doc">
+<header><h1 class="site-h1">색</h1><p class="site-lead">배경, 글자와 아이콘, 테두리에 쓰는 시맨틱 색입니다. 값은 라이트 / 다크 순서예요.</p><div class="site-toc-select"><select aria-label="이 페이지 목차" data-site-toc><option value="overview">개요</option><option value="bg">배경</option><option value="fg">글자와 아이콘</option><option value="stroke">테두리</option></select><i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i></div>
+</header>
+<h2 id="overview">개요<a class="site-anchor" href="#overview" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
+<p>화면에는 시맨틱 색(<code>bg</code>, <code>fg</code>, <code>stroke</code>)만 씁니다. 팔레트(<code>--ybm-color-palette-*</code>)는 시맨틱 색을 만드는 원료라 화면에 직접 쓰지 않아요. 색을 토큰으로만 쓰면 <code>data-theme="dark"</code> 하나로 다크 모드가 맞춰집니다.</p>
+<h2 id="bg">배경<a class="site-anchor" href="#bg" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
+<div class="ds-table-wrap"><table class="ds-table" data-density="compact">
+<thead><tr><th scope="col">토큰</th><th scope="col">값</th></tr></thead>
+<tbody><tr><td><code>--ybm-color-bg-brand-solid</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #2563eb"></span><span class="site-swatch" style="background: #3b82f6"></span></span><code>#2563eb / #3b82f6</code></td></tr>
+<tr><td><code>--ybm-color-bg-brand-solid-pressed</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #1d4ed8"></span><span class="site-swatch" style="background: #60a5fa"></span></span><code>#1d4ed8 / #60a5fa</code></td></tr>
+<tr><td><code>--ybm-color-bg-brand-weak</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #dbeafe"></span><span class="site-swatch" style="background: #172554"></span></span><code>#dbeafe / #172554</code></td></tr>
+<tr><td><code>--ybm-color-bg-brand-weak-pressed</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #bfdbfe"></span><span class="site-swatch" style="background: #1e3a8a"></span></span><code>#bfdbfe / #1e3a8a</code></td></tr>
+<tr><td><code>--ybm-color-bg-canvas</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #f7f8f9"></span><span class="site-swatch" style="background: #000000"></span></span><code>#f7f8f9 / #000000</code></td></tr>
+<tr><td><code>--ybm-color-bg-critical-solid</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #fa342c"></span><span class="site-swatch" style="background: #f73526"></span></span><code>#fa342c / #f73526</code></td></tr>
+<tr><td><code>--ybm-color-bg-critical-solid-pressed</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #ca1d13"></span><span class="site-swatch" style="background: #ff6e60"></span></span><code>#ca1d13 / #ff6e60</code></td></tr>
+<tr><td><code>--ybm-color-bg-critical-weak</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #fdf0f0"></span><span class="site-swatch" style="background: #322323"></span></span><code>#fdf0f0 / #322323</code></td></tr>
+<tr><td><code>--ybm-color-bg-critical-weak-pressed</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #fde7e7"></span><span class="site-swatch" style="background: #4f2624"></span></span><code>#fde7e7 / #4f2624</code></td></tr>
+<tr><td><code>--ybm-color-bg-disabled</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #f3f4f5"></span><span class="site-swatch" style="background: #2b2e35"></span></span><code>#f3f4f5 / #2b2e35</code></td></tr>
+<tr><td><code>--ybm-color-bg-informative-solid</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #217cf9"></span><span class="site-swatch" style="background: #1e82eb"></span></span><code>#217cf9 / #1e82eb</code></td></tr>
+<tr><td><code>--ybm-color-bg-informative-solid-pressed</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #135fcd"></span><span class="site-swatch" style="background: #41a2f9"></span></span><code>#135fcd / #41a2f9</code></td></tr>
+<tr><td><code>--ybm-color-bg-informative-weak</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #eff6ff"></span><span class="site-swatch" style="background: #202742"></span></span><code>#eff6ff / #202742</code></td></tr>
+<tr><td><code>--ybm-color-bg-informative-weak-pressed</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #e2edfc"></span><span class="site-swatch" style="background: #1e3352"></span></span><code>#e2edfc / #1e3352</code></td></tr>
+<tr><td><code>--ybm-color-bg-layer-default</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #ffffff"></span><span class="site-swatch" style="background: #16171b"></span></span><code>#ffffff / #16171b</code></td></tr>
+<tr><td><code>--ybm-color-bg-layer-floating</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #ffffff"></span><span class="site-swatch" style="background: #1d2025"></span></span><code>#ffffff / #1d2025</code></td></tr>
+<tr><td><code>--ybm-color-bg-magic-solid</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #8969ea"></span><span class="site-swatch" style="background: #7659bd"></span></span><code>#8969ea / #7659bd</code></td></tr>
+<tr><td><code>--ybm-color-bg-magic-solid-pressed</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #6d50cb"></span><span class="site-swatch" style="background: #9179e0"></span></span><code>#6d50cb / #9179e0</code></td></tr>
+<tr><td><code>--ybm-color-bg-magic-weak</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #f5f3fe"></span><span class="site-swatch" style="background: #201a2e"></span></span><code>#f5f3fe / #201a2e</code></td></tr>
+<tr><td><code>--ybm-color-bg-magic-weak-pressed</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #efeafe"></span><span class="site-swatch" style="background: #2b2140"></span></span><code>#efeafe / #2b2140</code></td></tr>
+<tr><td><code>--ybm-color-bg-neutral</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #f3f4f5"></span><span class="site-swatch" style="background: #2b2e35"></span></span><code>#f3f4f5 / #2b2e35</code></td></tr>
+<tr><td><code>--ybm-color-bg-neutral-inverted</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #2a3038"></span><span class="site-swatch" style="background: #f3f4f5"></span></span><code>#2a3038 / #f3f4f5</code></td></tr>
+<tr><td><code>--ybm-color-bg-neutral-inverted-pressed</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #555d6d"></span><span class="site-swatch" style="background: #dcdee3"></span></span><code>#555d6d / #dcdee3</code></td></tr>
+<tr><td><code>--ybm-color-bg-neutral-muted</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #f7f8f9"></span><span class="site-swatch" style="background: #1d2025"></span></span><code>#f7f8f9 / #1d2025</code></td></tr>
+<tr><td><code>--ybm-color-bg-neutral-solid</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #2a3038"></span><span class="site-swatch" style="background: #f3f4f5"></span></span><code>#2a3038 / #f3f4f5</code></td></tr>
+<tr><td><code>--ybm-color-bg-neutral-solid-pressed</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #555d6d"></span><span class="site-swatch" style="background: #dcdee3"></span></span><code>#555d6d / #dcdee3</code></td></tr>
+<tr><td><code>--ybm-color-bg-neutral-subtle</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #ffffff"></span><span class="site-swatch" style="background: #16171b"></span></span><code>#ffffff / #16171b</code></td></tr>
+<tr><td><code>--ybm-color-bg-neutral-weak-alpha</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #0000000c"></span><span class="site-swatch" style="background: #ffffff20"></span></span><code>#0000000c / #ffffff20</code></td></tr>
+<tr><td><code>--ybm-color-bg-neutral-weak-alpha-pressed</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #00000010"></span><span class="site-swatch" style="background: #ffffff2e"></span></span><code>#00000010 / #ffffff2e</code></td></tr>
+<tr><td><code>--ybm-color-bg-neutral-weak-pressed</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #eeeff1"></span><span class="site-swatch" style="background: #393d46"></span></span><code>#eeeff1 / #393d46</code></td></tr>
+<tr><td><code>--ybm-color-bg-overlay</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #00000074"></span><span class="site-swatch" style="background: #00000074"></span></span><code>#00000074 / #00000074</code></td></tr>
+<tr><td><code>--ybm-color-bg-positive-solid</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #079171"></span><span class="site-swatch" style="background: #117956"></span></span><code>#079171 / #117956</code></td></tr>
+<tr><td><code>--ybm-color-bg-positive-solid-pressed</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #00745f"></span><span class="site-swatch" style="background: #1b946d"></span></span><code>#00745f / #1b946d</code></td></tr>
+<tr><td><code>--ybm-color-bg-positive-weak</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #edfaf6"></span><span class="site-swatch" style="background: #202926"></span></span><code>#edfaf6 / #202926</code></td></tr>
+<tr><td><code>--ybm-color-bg-positive-weak-pressed</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #d9f6e9"></span><span class="site-swatch" style="background: #20362e"></span></span><code>#d9f6e9 / #20362e</code></td></tr>
+<tr><td><code>--ybm-color-bg-transparent</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: transparent"></span><span class="site-swatch" style="background: transparent"></span></span><code>transparent / transparent</code></td></tr>
+<tr><td><code>--ybm-color-bg-transparent-pressed</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #0000000c"></span><span class="site-swatch" style="background: #ffffff20"></span></span><code>#0000000c / #ffffff20</code></td></tr>
+<tr><td><code>--ybm-color-bg-warning-solid</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #e14d00"></span><span class="site-swatch" style="background: #e65200"></span></span><code>#e14d00 / #e65200</code></td></tr>
+<tr><td><code>--ybm-color-bg-warning-solid-pressed</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #b93901"></span><span class="site-swatch" style="background: #ff6600"></span></span><code>#b93901 / #ff6600</code></td></tr>
+<tr><td><code>--ybm-color-bg-warning-weak</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #fff2ec"></span><span class="site-swatch" style="background: #31241f"></span></span><code>#fff2ec / #31241f</code></td></tr>
+<tr><td><code>--ybm-color-bg-warning-weak-pressed</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #ffe8db"></span><span class="site-swatch" style="background: #4b291c"></span></span><code>#ffe8db / #4b291c</code></td></tr></tbody></table></div>
+<h2 id="fg">글자와 아이콘<a class="site-anchor" href="#fg" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
+<div class="ds-table-wrap"><table class="ds-table" data-density="compact">
+<thead><tr><th scope="col">토큰</th><th scope="col">값</th></tr></thead>
+<tbody><tr><td><code>--ybm-color-fg-brand</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #2563eb"></span><span class="site-swatch" style="background: #3b82f6"></span></span><code>#2563eb / #3b82f6</code></td></tr>
+<tr><td><code>--ybm-color-fg-brand-contrast</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #1d4ed8"></span><span class="site-swatch" style="background: #60a5fa"></span></span><code>#1d4ed8 / #60a5fa</code></td></tr>
+<tr><td><code>--ybm-color-fg-critical</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #fa342c"></span><span class="site-swatch" style="background: #ff6e60"></span></span><code>#fa342c / #ff6e60</code></td></tr>
+<tr><td><code>--ybm-color-fg-critical-contrast</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #921708"></span><span class="site-swatch" style="background: #f8c5c3"></span></span><code>#921708 / #f8c5c3</code></td></tr>
+<tr><td><code>--ybm-color-fg-disabled</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #d1d3d8"></span><span class="site-swatch" style="background: #5b606a"></span></span><code>#d1d3d8 / #5b606a</code></td></tr>
+<tr><td><code>--ybm-color-fg-informative</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #217cf9"></span><span class="site-swatch" style="background: #41a2f9"></span></span><code>#217cf9 / #41a2f9</code></td></tr>
+<tr><td><code>--ybm-color-fg-informative-contrast</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #0b4596"></span><span class="site-swatch" style="background: #b9d7fb"></span></span><code>#0b4596 / #b9d7fb</code></td></tr>
+<tr><td><code>--ybm-color-fg-magic</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #8969ea"></span><span class="site-swatch" style="background: #9179e0"></span></span><code>#8969ea / #9179e0</code></td></tr>
+<tr><td><code>--ybm-color-fg-magic-contrast</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #50379b"></span><span class="site-swatch" style="background: #d3c7fb"></span></span><code>#50379b / #d3c7fb</code></td></tr>
+<tr><td><code>--ybm-color-fg-neutral</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #1a1c20"></span><span class="site-swatch" style="background: #f3f4f5"></span></span><code>#1a1c20 / #f3f4f5</code></td></tr>
+<tr><td><code>--ybm-color-fg-neutral-inverted</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #ffffff"></span><span class="site-swatch" style="background: #16171b"></span></span><code>#ffffff / #16171b</code></td></tr>
+<tr><td><code>--ybm-color-fg-neutral-muted</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #555d6d"></span><span class="site-swatch" style="background: #dcdee3"></span></span><code>#555d6d / #dcdee3</code></td></tr>
+<tr><td><code>--ybm-color-fg-neutral-subtle</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #868b94"></span><span class="site-swatch" style="background: #b0b3ba"></span></span><code>#868b94 / #b0b3ba</code></td></tr>
+<tr><td><code>--ybm-color-fg-on-brand-solid</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #ffffff"></span><span class="site-swatch" style="background: #ffffff"></span></span><code>#ffffff / #ffffff</code></td></tr>
+<tr><td><code>--ybm-color-fg-on-critical-solid</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #ffffff"></span><span class="site-swatch" style="background: #ffffff"></span></span><code>#ffffff / #ffffff</code></td></tr>
+<tr><td><code>--ybm-color-fg-on-informative-solid</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #ffffff"></span><span class="site-swatch" style="background: #ffffff"></span></span><code>#ffffff / #ffffff</code></td></tr>
+<tr><td><code>--ybm-color-fg-on-magic-solid</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #ffffff"></span><span class="site-swatch" style="background: #ffffff"></span></span><code>#ffffff / #ffffff</code></td></tr>
+<tr><td><code>--ybm-color-fg-on-neutral-solid</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #ffffff"></span><span class="site-swatch" style="background: #16171b"></span></span><code>#ffffff / #16171b</code></td></tr>
+<tr><td><code>--ybm-color-fg-on-positive-solid</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #ffffff"></span><span class="site-swatch" style="background: #ffffff"></span></span><code>#ffffff / #ffffff</code></td></tr>
+<tr><td><code>--ybm-color-fg-on-warning-solid</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #ffffff"></span><span class="site-swatch" style="background: #ffffff"></span></span><code>#ffffff / #ffffff</code></td></tr>
+<tr><td><code>--ybm-color-fg-placeholder</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #b0b3ba"></span><span class="site-swatch" style="background: #868b94"></span></span><code>#b0b3ba / #868b94</code></td></tr>
+<tr><td><code>--ybm-color-fg-positive</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #079171"></span><span class="site-swatch" style="background: #22b27f"></span></span><code>#079171 / #22b27f</code></td></tr>
+<tr><td><code>--ybm-color-fg-positive-contrast</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #075445"></span><span class="site-swatch" style="background: #93e5c0"></span></span><code>#075445 / #93e5c0</code></td></tr>
+<tr><td><code>--ybm-color-fg-warning</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #e14d00"></span><span class="site-swatch" style="background: #ff6600"></span></span><code>#e14d00 / #ff6600</code></td></tr>
+<tr><td><code>--ybm-color-fg-warning-contrast</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #862b00"></span><span class="site-swatch" style="background: #eecebc"></span></span><code>#862b00 / #eecebc</code></td></tr></tbody></table></div>
+<h2 id="stroke">테두리<a class="site-anchor" href="#stroke" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
+<div class="ds-table-wrap"><table class="ds-table" data-density="compact">
+<thead><tr><th scope="col">토큰</th><th scope="col">값</th></tr></thead>
+<tbody><tr><td><code>--ybm-color-stroke-brand-solid</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #1d4ed8"></span><span class="site-swatch" style="background: #60a5fa"></span></span><code>#1d4ed8 / #60a5fa</code></td></tr>
+<tr><td><code>--ybm-color-stroke-brand-weak</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #93c5fd"></span><span class="site-swatch" style="background: #1e40af"></span></span><code>#93c5fd / #1e40af</code></td></tr>
+<tr><td><code>--ybm-color-stroke-critical-solid</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #fa342c"></span><span class="site-swatch" style="background: #ff6e60"></span></span><code>#fa342c / #ff6e60</code></td></tr>
+<tr><td><code>--ybm-color-stroke-critical-weak</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #fed4d2"></span><span class="site-swatch" style="background: #742826"></span></span><code>#fed4d2 / #742826</code></td></tr>
+<tr><td><code>--ybm-color-stroke-focus-ring</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #5e98fe"></span><span class="site-swatch" style="background: #1e82eb"></span></span><code>#5e98fe / #1e82eb</code></td></tr>
+<tr><td><code>--ybm-color-stroke-informative-solid</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #217cf9"></span><span class="site-swatch" style="background: #41a2f9"></span></span><code>#217cf9 / #41a2f9</code></td></tr>
+<tr><td><code>--ybm-color-stroke-informative-weak</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #cbdffa"></span><span class="site-swatch" style="background: #1a4275"></span></span><code>#cbdffa / #1a4275</code></td></tr>
+<tr><td><code>--ybm-color-stroke-magic-solid</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #8969ea"></span><span class="site-swatch" style="background: #9179e0"></span></span><code>#8969ea / #9179e0</code></td></tr>
+<tr><td><code>--ybm-color-stroke-magic-weak</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #e1d8ff"></span><span class="site-swatch" style="background: #392a57"></span></span><code>#e1d8ff / #392a57</code></td></tr>
+<tr><td><code>--ybm-color-stroke-neutral</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #d1d3d8"></span><span class="site-swatch" style="background: #5b606a"></span></span><code>#d1d3d8 / #5b606a</code></td></tr>
+<tr><td><code>--ybm-color-stroke-neutral-contrast</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #1a1c20"></span><span class="site-swatch" style="background: #f3f4f5"></span></span><code>#1a1c20 / #f3f4f5</code></td></tr>
+<tr><td><code>--ybm-color-stroke-neutral-muted</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #00000010"></span><span class="site-swatch" style="background: #ffffff17"></span></span><code>#00000010 / #ffffff17</code></td></tr>
+<tr><td><code>--ybm-color-stroke-neutral-solid</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #555d6d"></span><span class="site-swatch" style="background: #dcdee3"></span></span><code>#555d6d / #dcdee3</code></td></tr>
+<tr><td><code>--ybm-color-stroke-neutral-subtle</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #0000000c"></span><span class="site-swatch" style="background: #ffffff0d"></span></span><code>#0000000c / #ffffff0d</code></td></tr>
+<tr><td><code>--ybm-color-stroke-neutral-weak</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #dcdee3"></span><span class="site-swatch" style="background: #393d46"></span></span><code>#dcdee3 / #393d46</code></td></tr>
+<tr><td><code>--ybm-color-stroke-positive-solid</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #079171"></span><span class="site-swatch" style="background: #22b27f"></span></span><code>#079171 / #22b27f</code></td></tr>
+<tr><td><code>--ybm-color-stroke-positive-weak</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #b9e9d2"></span><span class="site-swatch" style="background: #20493b"></span></span><code>#b9e9d2 / #20493b</code></td></tr>
+<tr><td><code>--ybm-color-stroke-warning-solid</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #e14d00"></span><span class="site-swatch" style="background: #ff6600"></span></span><code>#e14d00 / #ff6600</code></td></tr>
+<tr><td><code>--ybm-color-stroke-warning-weak</code></td><td><span class="site-swatches"><span class="site-swatch" style="background: #ffd5c0"></span><span class="site-swatch" style="background: #6b311c"></span></span><code>#ffd5c0 / #6b311c</code></td></tr></tbody></table></div>
+</article>
+<aside class="site-toc" aria-label="이 페이지 목차"><nav><span class="site-toc__indicator" aria-hidden="true"></span><a href="#overview">개요</a><a href="#bg">배경</a><a href="#fg">글자와 아이콘</a><a href="#stroke">테두리</a></nav></aside>
+</div>
+</main>
+</div>
+</body>
+</html>

@@ -157,12 +157,14 @@ const btn = (href, label, variant = 'neutralWeak', size = 'small', icon = '') =>
   `<a class="ds-btn" data-variant="${variant}" data-size="${size}" href="${href}"${/^https?:/.test(href) ? ' target="_blank" rel="noopener"' : ''}>${icon ? `<i class="ds-icon ds-icon--${icon} ds-icon--sm" aria-hidden="true"></i>` : ''}${esc(label)}</a>`;
 
 const NAV = [['get-started', 'Get Started', 'index.html'], ['components', 'Components', 'components/index.html'], ['templates', 'Templates', 'templates/index.html']];
-const GS = [['가이드', [['get-started/usage.html', '사용 규칙'], ['get-started/scripts.html', '스크립트']]], ['파운데이션', [['get-started/tokens.html', '토큰'], ['get-started/icons.html', '아이콘']]]];
+// 파운데이션은 레퍼런스 A 처럼 항목마다 한 페이지
+const FOUND = [['color', '색'], ['typography', '글자'], ['spacing', '간격'], ['shape', '모서리'], ['elevation', '그림자'], ['motion', '움직임'], ['icons', '아이콘']];
+const GS = [['가이드', [['get-started/usage.html', '사용 규칙'], ['get-started/scripts.html', '스크립트']]], ['파운데이션', FOUND.map(([s, l]) => [`get-started/${s}.html`, l])]];
 
 function sideNav(section, file, root) {
   const item = (href, label) => `<a class="site-nav__item" href="${root}${href}"${href === file ? ' aria-current="page"' : ''}>${esc(label)}</a>`;
-  // 레퍼런스 B 왼쪽 메뉴처럼 접지 않는 묶음: 작은 묶음 이름 + 항목
-  const group = (label, items) => `<div class="site-nav__group" role="group" aria-label="${esc(label)}"><p class="site-nav__label">${esc(label)}</p>${items.join('')}</div>`;
+  // 레퍼런스 A 왼쪽 메뉴: 접고 펴는 묶음(처음엔 모두 펼침) + 들여쓴 항목
+  const group = (label, items) => `<details class="site-nav__group" open><summary>${esc(label)}<i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i></summary>${items.join('')}</details>`;
   const parts = [];
   if (section === 'get-started') {
     parts.push(item('index.html', '시작하기'));
@@ -180,17 +182,21 @@ function sideNav(section, file, root) {
     for (const g of [...new Set(templates.map((t) => t.group))]) parts.push(group(g, templates.filter((t) => t.group === g).map((t) => item(`templates/${t.slug}.html`, t.name)), true));
   }
   const mobile = `<div class="site-side__mobile"><nav class="site-nav" aria-label="주요 메뉴">${NAV.map(([k, l, h]) => `<a class="site-nav__item" href="${root}${h}"${k === section ? ' aria-current="page"' : ''}>${l}</a>`).join('')}</nav><div class="site-nav__sep"></div></div>`;
+  // 컴포넌트 메뉴 맨 위 찾기 칸 (레퍼런스 A: 높이 32, 모서리 12) - 메뉴 항목과 목록 카드를 함께 거른다
+  const search = section === 'components' ? `<div class="ds-input site-side__search" data-variant="outline" data-size="medium"><i class="ds-icon ds-icon--search ds-input__icon" aria-hidden="true"></i><input class="ds-input__control" type="search" placeholder="컴포넌트 찾기" aria-label="컴포넌트 찾기" data-site-search></div>` : '';
   return `<aside class="site-side" id="site-side" aria-label="페이지 목록">
   <div class="site-side__top"><b>메뉴</b><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" data-site-close aria-label="메뉴 닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button></div>
-  ${mobile}
-  <nav class="site-nav" aria-label="${esc(NAV.find((n) => n[0] === section)[1])} 메뉴">${parts.join('\n')}</nav>
+  ${mobile}${search}
+  <nav class="site-nav" aria-label="${esc(NAV.find((n) => n[0] === section)[1])} 메뉴"${search ? ' data-site-navfilter' : ''}>${parts.join('\n')}</nav>
 </aside>`;
 }
 
 const iconBtn = (attrs, label, inner) => `<button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="${esc(label)}" ${attrs}>${inner}</button>`;
 const iconLink = (href, label, icon, extra = '') => `<a class="ds-btn${extra}" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" href="${href}" target="_blank" rel="noopener" aria-label="${esc(label)}"><i class="ds-icon ${icon}" aria-hidden="true"></i></a>`;
 
-function page({ file, title, section, body, wide = false, desc = '' }) {
+// layout - doc: 본문 752 + 목차 (문서) / component: 912 가운데, 목차 없음 (컴포넌트 상세)
+//          wide: 메뉴 옆 전체 폭 (목록) / full: PC 에서 왼쪽 메뉴 없이 전체 폭 (템플릿 목록)
+function page({ file, title, section, body, layout = 'doc', desc = '' }) {
   const depth = file.split('/').length - 1;
   const root = '../'.repeat(depth);
   // h2 에 제목 링크를 달고 목차를 만든다
@@ -199,7 +205,7 @@ function page({ file, title, section, body, wide = false, desc = '' }) {
     heads.push([id, inner.replace(/<[^>]+>/g, '')]);
     return `<h2 id="${id}">${inner}<a class="site-anchor" href="#${id}" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>`;
   });
-  const hasToc = !wide && heads.length > 1;
+  const hasToc = layout === 'doc' && heads.length > 1;
   const tocSelect = hasToc ? `<div class="site-toc-select"><select aria-label="이 페이지 목차" data-site-toc>${heads.map(([id, t]) => `<option value="${id}">${esc(t)}</option>`).join('')}</select><i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i></div>` : '';
   body = body.replace('</header>', `${tocSelect}\n</header>`);
   const html = `<!doctype html>
@@ -231,7 +237,7 @@ ${desc ? `<meta name="description" content="${esc(desc)}">\n` : ''}<!-- 생성�
     ${iconBtn('data-site-menu aria-controls="site-side" aria-expanded="false"', '메뉴 열기', '<i class="ds-icon ds-icon--menu" aria-hidden="true"></i>').replace('class="ds-btn"', 'class="ds-btn site-menu-btn"')}
   </div>
 </header>
-<div class="site-body${wide ? ' site-body--wide' : ''}">
+<div class="site-body site-body--${layout}">
 ${sideNav(section, file, root)}
 <div class="site-scrim" data-site-close></div>
 <main class="site-main" id="main">
@@ -377,46 +383,81 @@ ${codeblock(`@media (min-width: 768px) { /* 태블릿, PC */ }\n@media (min-widt
 <p>UI 아이콘은 Lucide 한 가지만 씁니다. 색은 부모 글자색을 따르고, 크기는 기본 20, <code>ds-icon--sm</code> 16, <code>ds-icon--lg</code> 24 입니다. 목록은 <a class="ds-link" href="{root}get-started/icons.html">아이콘</a> 에 있어요.</p>`,
 });
 
-// 토큰
-const tokRe = (re) => [...tokensCss.slice(0, tokensCss.indexOf(':root[data-theme="dark"]')).matchAll(re)];
-const colorGroups = { bg: '배경 (bg)', fg: '글자와 아이콘 (fg)', stroke: '테두리 (stroke)' };
-const colorTables = Object.entries(colorGroups).map(([k, label]) => {
-  const rows = tokRe(new RegExp(`(--ybm-color-${k}-[a-z0-9-]+)\\s*:`, 'g')).map((m) => m[1]);
-  const uniq = [...new Set(rows)];
-  return `<h3>${label}</h3>${table(['미리보기', 'CSS 변수'], uniq.map((v) => [k === 'fg' ? `<b style="color: var(${v}); font-size: var(--ybm-font-size-t07)">가</b>` : `<span class="site-swatch" style="${k === 'stroke' ? `background: var(--ybm-color-bg-layer-default); box-shadow: inset 0 0 0 2px var(${v})` : `background: var(${v})`}"></span>`, `<code>${v}</code>`]))}`;
-}).join('\n');
-const typeRows = tokRe(/--ybm-font-size-(t\d\d): (\d+)px/g).map((m) => {
-  const lh = (tokensCss.match(new RegExp(`--ybm-line-height-${m[1]}: (\\d+)px`)) || [])[1];
-  return [`<code>${m[1]}</code>`, `${m[2]} / ${lh}`, `<span class="site-sample" style="font-size: var(--ybm-font-size-${m[1]}); line-height: var(--ybm-line-height-${m[1]}); font-weight: var(--ybm-font-weight-bold); letter-spacing: 0">가나다 Aa 123</span>`];
-});
-const spaceRows = tokRe(/--ybm-space-(x[0-9_]+): (\d+)px/g).map((m) => [`<code>--ybm-space-${m[1]}</code>`, `${m[2]}px`, `<span class="site-bar" style="width: var(--ybm-space-${m[1]})"></span>`]);
-const shapeRows = tokRe(/--ybm-shape-([a-z0-9]+): ([^;]+);/g).map((m) => [`<code>--ybm-shape-${m[1]}</code>`, esc(m[2]), `<span class="site-shape" style="border-radius: var(--ybm-shape-${m[1]})"></span>`]);
-const elevRows = tokRe(/--ybm-elevation-(raised|overlay|panel|floating|modal):\s+[^;]+;\s*\/\* ([^*]+) \*\//g).map((m) => [`<code>--ybm-elevation-${m[1]}</code>`, prose(m[2]), `<span class="site-shadow" style="box-shadow: var(--ybm-elevation-${m[1]})"></span>`]);
-const motionRows = tokRe(/--ybm-(duration|easing)-([a-z]+): ([^;]+);/g).map((m) => [`<code>--ybm-${m[1]}-${m[2]}</code>`, `<code>${esc(m[3])}</code>`]);
-const zRows = tokRe(/--ybm-z-([a-z]+): (\d+);/g).map((m) => [`<code>--ybm-z-${m[1]}</code>`, m[2]]);
-write({
-  file: 'get-started/tokens.html', section: 'get-started', title: '토큰',
-  body: `<header><h1 class="site-h1">토큰</h1><p class="site-lead">색, 글자, 간격, 모서리, 그림자, 움직임 값입니다. 화면에서는 값 대신 CSS 변수 이름을 씁니다. 위쪽의 라이트/다크를 바꾸면 색이 함께 바뀝니다.</p></header>
-<h2 id="color">색</h2>
-<p>화면에는 시맨틱 색(<code>bg</code>, <code>fg</code>, <code>stroke</code>)만 씁니다. 팔레트(<code>--ybm-color-palette-*</code>)는 시맨틱 색을 만드는 원료라 화면에 직접 쓰지 않아요.</p>
-${colorTables}
-<h2 id="type">글자</h2>
+// 파운데이션 - tokens.css 에서 값을 읽는다. 다크 블록은 따로 읽어 색의 다크 값으로 쓴다
+const darkAt = tokensCss.indexOf(':root[data-theme="dark"]');
+const darkEnd = tokensCss.indexOf('}', darkAt) + 1;
+const lightCss = tokensCss.slice(0, darkAt) + tokensCss.slice(darkEnd);
+const varMap = (css) => Object.fromEntries([...css.matchAll(/(--ybm-[a-z0-9_-]+)\s*:\s*([^;]+);/g)].map((m) => [m[1], m[2].trim()]));
+const LIGHT = varMap(lightCss);
+const DARK = { ...LIGHT, ...varMap(tokensCss.slice(darkAt, darkEnd)) };
+const resolve = (map, v, n = 0) => { const m = String(v).match(/^var\((--[a-z0-9_-]+)\)$/); return m && n < 12 ? resolve(map, map[m[1]], n + 1) : v; };
+const tokRe = (re) => [...lightCss.matchAll(re)];
+
+// 색: 레퍼런스 A 처럼 토큰 / 값(라이트, 다크 견본 + 값)
+const colorGroups = [['bg', '배경'], ['fg', '글자와 아이콘'], ['stroke', '테두리']];
+const colorTable = (k) => {
+  const names = [...new Set(tokRe(new RegExp(`(--ybm-color-${k}-[a-z0-9-]+)\\s*:`, 'g')).map((m) => m[1]))];
+  return table(['토큰', '값'], names.map((v) => {
+    const l = resolve(LIGHT, `var(${v})`), d = resolve(DARK, `var(${v})`);
+    return [`<code>${v}</code>`, `<span class="site-swatches"><span class="site-swatch" style="background: ${esc(l)}"></span><span class="site-swatch" style="background: ${esc(d)}"></span></span><code>${esc(l)} / ${esc(d)}</code>`];
+  }));
+};
+const foundPages = {
+  color: {
+    title: '색', lead: '배경, 글자와 아이콘, 테두리에 쓰는 시맨틱 색입니다. 값은 라이트 / 다크 순서예요.',
+    body: `<h2 id="overview">개요</h2>
+<p>화면에는 시맨틱 색(<code>bg</code>, <code>fg</code>, <code>stroke</code>)만 씁니다. 팔레트(<code>--ybm-color-palette-*</code>)는 시맨틱 색을 만드는 원료라 화면에 직접 쓰지 않아요. 색을 토큰으로만 쓰면 <code>data-theme="dark"</code> 하나로 다크 모드가 맞춰집니다.</p>
+${colorGroups.map(([k, label]) => `<h2 id="${k}">${label}</h2>\n${colorTable(k)}`).join('\n')}`,
+  },
+  typography: {
+    title: '글자', lead: '글꼴, 굵기, 크기와 줄 높이 토큰입니다.',
+    body: `<h2 id="overview">개요</h2>
 <p>글꼴은 Pretendard 입니다. 크기는 <code>--ybm-font-size-t01</code> ~ <code>t17</code>, 줄 높이는 같은 번호의 <code>--ybm-line-height-*</code> 를 짝으로 씁니다. 굵기는 regular 400, medium 500, semibold 600, bold 700 입니다.</p>
 <p>한글 위계: 페이지 제목 40/48 medium(500), 리드 16/24 light(300), 섹션 제목 24/32 medium, 소제목 16/22 medium, 본문 16/28 regular, 보조 글 14 regular 입니다. 자간은 주지 않습니다.</p>
-${table(['이름', '크기 / 줄 높이 (px)', '보기'], typeRows)}
-<h2 id="space">간격</h2>
+<h2 id="size">크기</h2>
+${table(['토큰', '크기 / 줄 높이 (px)', '보기'], tokRe(/--ybm-font-size-(t\d\d): (\d+)px/g).map((m) => [`<code>${m[1]}</code>`, `${m[2]} / ${(LIGHT[`--ybm-line-height-${m[1]}`] || '').replace('px', '')}`, `<span class="site-sample" style="font-size: var(--ybm-font-size-${m[1]}); line-height: var(--ybm-line-height-${m[1]}); font-weight: var(--ybm-font-weight-bold)">가나다 Aa 123</span>`]))}
+<h2 id="weight">굵기</h2>
+${table(['토큰', '값', '보기'], tokRe(/--ybm-font-weight-([a-z]+): (\d+);/g).map((m) => [`<code>--ybm-font-weight-${m[1]}</code>`, m[2], `<span class="site-sample" style="font-size: var(--ybm-font-size-t06); font-weight: var(--ybm-font-weight-${m[1]})">가나다 Aa 123</span>`]))}`,
+  },
+  spacing: {
+    title: '간격', lead: '여백과 간격에 쓰는 토큰입니다.',
+    body: `<h2 id="overview">개요</h2>
 <p>4px 단위를 기본으로 하고, 작은 간격은 2px 단위도 씁니다. 화면 좌우 여백은 <code>--ybm-space-x-global-gutter</code> 입니다.</p>
-${table(['CSS 변수', '값', '보기'], spaceRows)}
-<h2 id="shape">모서리</h2>
-${table(['CSS 변수', '값', '보기'], shapeRows)}
-<h2 id="elevation">그림자</h2>
+<h2 id="tokens">토큰</h2>
+${table(['토큰', '값', '보기'], tokRe(/--ybm-space-(x[0-9_]+): (\d+)px/g).map((m) => [`<code>--ybm-space-${m[1]}</code>`, `${m[2]}px`, `<span class="site-bar" style="width: var(--ybm-space-${m[1]})"></span>`]))}`,
+  },
+  shape: {
+    title: '모서리', lead: '부품 모서리 곡률 토큰입니다.',
+    body: `<h2 id="overview">개요</h2>
+<p>모서리는 쓰임 이름으로 씁니다. 어떤 영역에 <code>--ybm-shape-scale</code> 을 0 과 1 사이 값으로 덮어쓰면 그 안의 모서리만 덜 둥글게 바꿀 수 있어요.</p>
+<h2 id="tokens">토큰</h2>
+${table(['토큰', '값', '보기'], [...new Set(tokRe(/--ybm-shape-base-([a-z0-9]+):/g).map((m) => m[1]))].concat('pill').map((n) => {
+  const px = n === 'pill' ? resolve(LIGHT, LIGHT['--ybm-shape-pill']) : resolve(LIGHT, LIGHT[`--ybm-shape-base-${n}`]);
+  return [`<code>--ybm-shape-${n}</code>`, esc(px), `<span class="site-shape" style="border-radius: var(--ybm-shape-${n})"></span>`];
+}))}`,
+  },
+  elevation: {
+    title: '그림자', lead: '떠 있는 높이를 나타내는 그림자와 쌓는 순서입니다.',
+    body: `<h2 id="shadow">그림자</h2>
 <p>숫자 대신 쓰임 이름으로 씁니다.</p>
-${table(['CSS 변수', '쓰임', '보기'], elevRows)}
-<h2 id="motion">움직임</h2>
-${table(['CSS 변수', '값'], motionRows)}
+${table(['토큰', '쓰임', '보기'], tokRe(/--ybm-elevation-(raised|overlay|panel|floating|modal):\s+[^;]+;\s*\/\* ([^*]+) \*\//g).map((m) => [`<code>--ybm-elevation-${m[1]}</code>`, prose(m[2]), `<span class="site-shadow" style="box-shadow: var(--ybm-elevation-${m[1]})"></span>`]))}
 <h2 id="z">쌓는 순서</h2>
-${table(['CSS 변수', '값'], zRows)}`,
-});
+${table(['토큰', '값'], tokRe(/--ybm-z-([a-z]+): (\d+);/g).map((m) => [`<code>--ybm-z-${m[1]}</code>`, m[2]]))}`,
+  },
+  motion: {
+    title: '움직임', lead: '움직임의 길이와 속도 곡선입니다.',
+    body: `<h2 id="duration">길이</h2>
+${table(['토큰', '값'], tokRe(/--ybm-duration-([a-z]+): ([^;]+);/g).map((m) => [`<code>--ybm-duration-${m[1]}</code>`, `<code>${esc(m[2])}</code>`]))}
+<h2 id="easing">속도 곡선</h2>
+${table(['토큰', '값'], tokRe(/--ybm-easing-([a-z]+): ([^;]+);/g).map((m) => [`<code>--ybm-easing-${m[1]}</code>`, `<code>${esc(m[2])}</code>`]))}`,
+  },
+};
+for (const [slug, p] of Object.entries(foundPages)) {
+  write({
+    file: `get-started/${slug}.html`, section: 'get-started', title: p.title, desc: p.lead,
+    body: `<header><h1 class="site-h1">${esc(p.title)}</h1><p class="site-lead">${esc(p.lead)}</p></header>\n${p.body}`,
+  });
+}
 
 // 아이콘
 const iconNames = [...new Set([...iconsCss.matchAll(/\.ds-icon--([a-z0-9-]+)\s*\{\s*--ds-icon:/g)].map((m) => m[1]))].sort();
@@ -452,23 +493,18 @@ const cardThumb = (c) => {
   const first = stages(c.example)[0] || '';
   // 카드 전체가 링크라 안쪽 링크는 span 으로 바꾼다(링크 안 링크는 HTML 이 깨진다)
   const safe = first.replace(/ id="[^"]*"/g, '').replace(/<script[\s\S]*?<\/script>/g, '').replace(/<a\b/g, '<span').replace(/<\/a>/g, '</span>');
-  return `<div class="site-card__thumb" aria-hidden="true"><div class="site-card__thumb-inner" inert><div class="pv-stage">${safe}</div></div></div>`;
+  return `<div class="site-tile__thumb" aria-hidden="true"><div class="site-tile__inner" inert><div class="pv-stage">${safe}</div></div></div>`;
 };
+// 목록 머리: 레퍼런스 A 목록 화면처럼 가운데 제목과 설명 (설치, 커뮤니티 같은 버튼은 넣지 않는다), line 이면 아래 구분선
+const hero = (title, lead, line = false) => `<header class="site-hero${line ? ' site-hero--line' : ''}"><h1 class="site-h1">${esc(title)}</h1><p class="site-lead">${esc(lead)}</p></header>`;
 write({
-  file: 'components/index.html', section: 'components', title: 'Components', wide: true,
-  body: `<header><p class="site-eyebrow">Components</p><h1 class="site-h1">컴포넌트</h1><p class="site-lead">화면을 만드는 부품 ${comps.length}종입니다. 모두 Figma 와 CSS 가 같은 이름, 같은 값으로 짝을 이룹니다.</p></header>
-<div class="site-toolbar">
-  <div class="ds-input" data-variant="outline" data-size="medium"><i class="ds-icon ds-icon--search ds-input__icon" aria-hidden="true"></i><input class="ds-input__control" type="search" placeholder="이름이나 설명으로 찾기" aria-label="컴포넌트 찾기" data-site-search><button type="button" class="ds-input__clear" aria-label="지우기"></button></div>
-  <div class="ds-chiptabs" role="tablist" aria-label="분류">
-    <button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-filter="">전체</button>
-    ${CATS.map(([k, l]) => `<button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-filter="${k}">${l}</button>`).join('\n    ')}
-  </div>
-</div>
+  file: 'components/index.html', section: 'components', title: 'Components', layout: 'wide',
+  body: `${hero('컴포넌트', `화면을 만드는 부품 ${comps.length}종입니다. 모두 Figma 와 CSS 가 같은 이름, 같은 값으로 짝을 이룹니다.`, true)}
 ${CATS.map(([cat, label]) => {
   const list = comps.filter((c) => c.cat === cat);
   if (!list.length) return '';
   return `<section class="site-group"><h2 class="site-group__title" id="cat-${slugify(cat)}">${label}<small>${list.length}</small></h2>
-<div class="site-grid">${list.map((c) => `<a class="site-card" href="${c.slug}.html" data-site-item="${esc((c.name + ' ' + c.desc).toLowerCase())}" data-site-cat="${esc(cat)}">${cardThumb(c)}<div class="site-card__body"><p class="site-card__title"><span class="site-card__no">${c.no}</span>${esc(c.name.split(' · ')[0])}</p><p class="site-card__desc">${esc(c.desc)}</p></div></a>`).join('\n')}</div></section>`;
+<div class="site-tiles">${list.map((c) => `<a class="site-tile" href="${c.slug}.html" data-site-item="${esc((c.name + ' ' + c.desc).toLowerCase())}" data-site-cat="${esc(cat)}">${cardThumb(c)}<p class="site-tile__name">${esc(c.name.split(' · ')[0])}</p><p class="site-tile__desc">${esc(c.desc)}</p></a>`).join('\n')}</div></section>`;
 }).join('\n')}
 <div class="ds-empty site-empty-result" hidden><span class="ds-empty__media"><i class="ds-icon ds-icon--search" aria-hidden="true"></i></span><p class="ds-empty__title">찾는 컴포넌트가 없어요</p><p class="ds-empty__desc">다른 이름으로 찾아보세요.</p></div>`,
 });
@@ -511,7 +547,7 @@ comps.forEach((c, i) => {
   if (c.dos.length) sections.push(`<h2 id="guide">사용 지침</h2><ul class="site-dos">${c.dos.map((d) => `<li>${inline(d)}</li>`).join('')}</ul>`);
   if (c.spec) sections.push(`<h2 id="spec">디자인 값</h2><p>Figma 와 CSS 가 함께 따르는 크기, 여백, 색입니다.</p><pre class="site-spec">${esc(c.spec)}</pre>`);
   write({
-    file: `components/${c.slug}.html`, section: 'components', title: c.name.split(' · ')[0], desc: c.desc,
+    file: `components/${c.slug}.html`, section: 'components', title: c.name.split(' · ')[0], desc: c.desc, layout: 'component',
     body: `<header>
   <p class="site-eyebrow"><a href="index.html">Components</a> / ${esc(catLabel[c.cat])}</p>
   <h1 class="site-h1">${esc(c.name)}</h1>
@@ -526,9 +562,9 @@ ${sections.join('\n')}
 /* ---------------------------------------------------------------- Templates */
 const tplGroups = [...new Set(templates.map((t) => t.group))];
 write({
-  file: 'templates/index.html', section: 'templates', title: 'Templates', wide: true,
-  body: `<header><p class="site-eyebrow">Templates</p><h1 class="site-h1">템플릿</h1><p class="site-lead">자주 쓰는 화면을 DS 부품으로 미리 조립해 두었습니다. 통째로 복사해 출발점으로 쓰고, 모두 모바일부터 PC 까지 맞춰집니다.</p></header>
-<div class="site-toolbar">
+  file: 'templates/index.html', section: 'templates', title: 'Templates', layout: 'full',
+  body: `${hero('템플릿', '자주 쓰는 화면을 DS 부품으로 미리 조립해 두었습니다. 통째로 복사해 출발점으로 쓰고, 모두 모바일부터 PC 까지 맞춰집니다.')}
+<div class="site-toolbar site-toolbar--center">
   <div class="ds-chiptabs" role="tablist" aria-label="분류">
     <button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-filter="">전체</button>
     ${tplGroups.map((g) => `<button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-filter="${esc(g)}">${esc(g)}</button>`).join('\n    ')}
@@ -545,7 +581,7 @@ templates.forEach((t) => {
   const classes = new Set((src.match(/class="[^"]*"/g) || []).join(' ').match(/\bds-[a-z0-9_-]+/g) || []);
   const used = comps.filter((c) => c.classes.some((k) => classes.has(k.slice(1))));
   write({
-    file: `templates/${t.slug}.html`, section: 'templates', title: t.name, desc: t.desc, wide: true,
+    file: `templates/${t.slug}.html`, section: 'templates', title: t.name, desc: t.desc, layout: 'wide',
     body: `<header>
   <p class="site-eyebrow"><a href="index.html">Templates</a> / ${esc(t.group)}</p>
   <h1 class="site-h1">${esc(t.name)}</h1>

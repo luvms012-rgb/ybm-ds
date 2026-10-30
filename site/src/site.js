@@ -97,8 +97,20 @@
     document.querySelectorAll(".site-group").forEach(function (g) { g.hidden = !g.querySelector("[data-site-item]:not([hidden])"); });
     var empty = document.querySelector(".site-empty-result");
     if (empty) empty.hidden = shown > 0;
+    // 왼쪽 메뉴 찾기 칸: 메뉴 항목도 함께 거른다
+    var nav = document.querySelector("[data-site-navfilter]");
+    if (nav) {
+      nav.querySelectorAll(".site-nav__item").forEach(function (a) { a.hidden = !!q && a.textContent.toLowerCase().indexOf(q) < 0; });
+      nav.querySelectorAll(".site-nav__group").forEach(function (g) { g.hidden = !g.querySelector(".site-nav__item:not([hidden])"); if (q) g.open = true; });
+    }
   }
   document.addEventListener("input", function (e) { if (e.target.matches("[data-site-search]")) filter(); });
+  // 찾기 칸에서 Enter: 걸러진 메뉴의 첫 컴포넌트로
+  document.addEventListener("keydown", function (e) {
+    if (e.key !== "Enter" || !e.target.matches("[data-site-search]") || !e.target.value.trim()) return;
+    var first = document.querySelector("[data-site-navfilter] .site-nav__group .site-nav__item:not([hidden])");
+    if (first) location.href = first.href;
+  });
   // 좁은 화면 목차 고르기
   document.addEventListener("change", function (e) {
     if (!e.target.matches("[data-site-toc]")) return;
@@ -140,5 +152,9 @@
     frames().forEach(function (f) { f.addEventListener("load", function () { themeFrame(f); }); themeFrame(f); });
     fitThumbs();
     spy();
+    // 왼쪽 메뉴: 지금 페이지 항목이 안 보이면 보이는 곳까지 내린다
+    var side = document.querySelector(".site-side");
+    var cur = side && side.querySelector(".site-nav:not(.site-side__mobile .site-nav) [aria-current='page']");
+    if (cur && cur.offsetTop + cur.offsetHeight > side.clientHeight) side.scrollTop = cur.offsetTop - side.clientHeight / 3;
   });
 })();

@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>글자 - YBM DS</title>
+<meta name="description" content="글꼴, 굵기, 크기와 줄 높이 토큰입니다.">
+<!-- 생성물: node site/build.mjs 가 만든다. 직접 고치지 말고 site/build.mjs 나 site/src 를 고친다 -->
+<script>try { var t = localStorage.getItem("ybm-site-theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}</script>
+<link rel="icon" href="../assets/logo-ybmnet.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../../dist/ybm-ds.css">
+<link rel="stylesheet" href="../assets/site.css">
+<script src="../../dist/ybm-ds.js" defer></script>
+<script src="../assets/site.js" defer></script>
+</head>
+<body class="site">
+<a class="site-skip" href="#main">본문 바로가기</a>
+<header class="site-top">
+  <a class="site-logo" href="../index.html"><img src="../assets/logo-ybmnet.svg" alt="YBM NET" width="81" height="24"></a>
+  <nav class="site-topnav" aria-label="주요 메뉴">
+    <a class="site-topnav__item" href="../index.html" aria-current="page">Get Started</a>
+    <a class="site-topnav__item" href="../components/index.html">Components</a>
+    <a class="site-topnav__item" href="../templates/index.html">Templates</a>
+  </nav>
+  <div class="site-top__end">
+    <button type="button" class="ds-btn site-theme-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="화면 모드 바꾸기" data-site-theme-toggle><i class="ds-icon site-i--moon" aria-hidden="true"></i><i class="ds-icon site-i--sun" aria-hidden="true"></i></button>
+    <a class="ds-btn site-only-wide" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" href="https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=2274-1143" target="_blank" rel="noopener" aria-label="Figma 파일"><i class="ds-icon site-i--figma" aria-hidden="true"></i></a>
+    <a class="ds-btn site-only-wide" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" href="https://github.com/luvms012-rgb/ybm-ds" target="_blank" rel="noopener" aria-label="GitHub 저장소"><i class="ds-icon site-i--github" aria-hidden="true"></i></a>
+    <a class="ds-btn site-cta" data-variant="neutralSolid" data-size="xsmall" href="../index.html#ai">시작하기</a>
+    <button type="button" class="ds-btn site-menu-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="메뉴 열기" data-site-menu aria-controls="site-side" aria-expanded="false"><i class="ds-icon ds-icon--menu" aria-hidden="true"></i></button>
+  </div>
+</header>
+<div class="site-body site-body--doc">
+<aside class="site-side" id="site-side" aria-label="페이지 목록">
+  <div class="site-side__top"><b>메뉴</b><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" data-site-close aria-label="메뉴 닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button></div>
+  <div class="site-side__mobile"><nav class="site-nav" aria-label="주요 메뉴"><a class="site-nav__item" href="../index.html" aria-current="page">Get Started</a><a class="site-nav__item" href="../components/index.html">Components</a><a class="site-nav__item" href="../templates/index.html">Templates</a></nav><div class="site-nav__sep"></div></div>
+  <nav class="site-nav" aria-label="Get Started 메뉴"><a class="site-nav__item" href="../index.html">시작하기</a>
+<details class="site-nav__group" open><summary>가이드<i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i></summary><a class="site-nav__item" href="../get-started/usage.html">사용 규칙</a><a class="site-nav__item" href="../get-started/scripts.html">스크립트</a></details>
+<details class="site-nav__group" open><summary>파운데이션<i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i></summary><a class="site-nav__item" href="../get-started/color.html">색</a><a class="site-nav__item" href="../get-started/typography.html" aria-current="page">글자</a><a class="site-nav__item" href="../get-started/spacing.html">간격</a><a class="site-nav__item" href="../get-started/shape.html">모서리</a><a class="site-nav__item" href="../get-started/elevation.html">그림자</a><a class="site-nav__item" href="../get-started/motion.html">움직임</a><a class="site-nav__item" href="../get-started/icons.html">아이콘</a></details></nav>
+</aside>
+<div class="site-scrim" data-site-close></div>
+<main class="site-main" id="main">
+<div class="site-main__row">
+<article class="site-doc">
+<header><h1 class="site-h1">글자</h1><p class="site-lead">글꼴, 굵기, 크기와 줄 높이 토큰입니다.</p><div class="site-toc-select"><select aria-label="이 페이지 목차" data-site-toc><option value="overview">개요</option><option value="size">크기</option><option value="weight">굵기</option></select><i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i></div>
+</header>
+<h2 id="overview">개요<a class="site-anchor" href="#overview" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
+<p>글꼴은 Pretendard 입니다. 크기는 <code>--ybm-font-size-t01</code> ~ <code>t17</code>, 줄 높이는 같은 번호의 <code>--ybm-line-height-*</code> 를 짝으로 씁니다. 굵기는 regular 400, medium 500, semibold 600, bold 700 입니다.</p>
+<p>한글 위계: 페이지 제목 40/48 medium(500), 리드 16/24 light(300), 섹션 제목 24/32 medium, 소제목 16/22 medium, 본문 16/28 regular, 보조 글 14 regular 입니다. 자간은 주지 않습니다.</p>
+<h2 id="size">크기<a class="site-anchor" href="#size" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
+<div class="ds-table-wrap"><table class="ds-table" data-density="compact">
+<thead><tr><th scope="col">토큰</th><th scope="col">크기 / 줄 높이 (px)</th><th scope="col">보기</th></tr></thead>
+<tbody><tr><td><code>t01</code></td><td>11 / 17</td><td><span class="site-sample" style="font-size: var(--ybm-font-size-t01); line-height: var(--ybm-line-height-t01); font-weight: var(--ybm-font-weight-bold)">가나다 Aa 123</span></td></tr>
+<tr><td><code>t02</code></td><td>12 / 18</td><td><span class="site-sample" style="font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); font-weight: var(--ybm-font-weight-bold)">가나다 Aa 123</span></td></tr>
+<tr><td><code>t03</code></td><td>13 / 20</td><td><span class="site-sample" style="font-size: var(--ybm-font-size-t03); line-height: var(--ybm-line-height-t03); font-weight: var(--ybm-font-weight-bold)">가나다 Aa 123</span></td></tr>
+<tr><td><code>t04</code></td><td>14 / 21</td><td><span class="site-sample" style="font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); font-weight: var(--ybm-font-weight-bold)">가나다 Aa 123</span></td></tr>
+<tr><td><code>t05</code></td><td>16 / 24</td><td><span class="site-sample" style="font-size: var(--ybm-font-size-t05); line-height: var(--ybm-line-height-t05); font-weight: var(--ybm-font-weight-bold)">가나다 Aa 123</span></td></tr>
+<tr><td><code>t06</code></td><td>18 / 28</td><td><span class="site-sample" style="font-size: var(--ybm-font-size-t06); line-height: var(--ybm-line-height-t06); font-weight: var(--ybm-font-weight-bold)">가나다 Aa 123</span></td></tr>
+<tr><td><code>t07</code></td><td>20 / 29</td><td><span class="site-sample" style="font-size: var(--ybm-font-size-t07); line-height: var(--ybm-line-height-t07); font-weight: var(--ybm-font-weight-bold)">가나다 Aa 123</span></td></tr>
+<tr><td><code>t08</code></td><td>22 / 32</td><td><span class="site-sample" style="font-size: var(--ybm-font-size-t08); line-height: var(--ybm-line-height-t08); font-weight: var(--ybm-font-weight-bold)">가나다 Aa 123</span></td></tr>
+<tr><td><code>t09</code></td><td>24 / 34</td><td><span class="site-sample" style="font-size: var(--ybm-font-size-t09); line-height: var(--ybm-line-height-t09); font-weight: var(--ybm-font-weight-bold)">가나다 Aa 123</span></td></tr>
+<tr><td><code>t10</code></td><td>26 / 37</td><td><span class="site-sample" style="font-size: var(--ybm-font-size-t10); line-height: var(--ybm-line-height-t10); font-weight: var(--ybm-font-weight-bold)">가나다 Aa 123</span></td></tr>
+<tr><td><code>t11</code></td><td>28 / 40</td><td><span class="site-sample" style="font-size: var(--ybm-font-size-t11); line-height: var(--ybm-line-height-t11); font-weight: var(--ybm-font-weight-bold)">가나다 Aa 123</span></td></tr>
+<tr><td><code>t12</code></td><td>32 / 44</td><td><span class="site-sample" style="font-size: var(--ybm-font-size-t12); line-height: var(--ybm-line-height-t12); font-weight: var(--ybm-font-weight-bold)">가나다 Aa 123</span></td></tr>
+<tr><td><code>t13</code></td><td>40 / 54</td><td><span class="site-sample" style="font-size: var(--ybm-font-size-t13); line-height: var(--ybm-line-height-t13); font-weight: var(--ybm-font-weight-bold)">가나다 Aa 123</span></td></tr>
+<tr><td><code>t14</code></td><td>48 / 62</td><td><span class="site-sample" style="font-size: var(--ybm-font-size-t14); line-height: var(--ybm-line-height-t14); font-weight: var(--ybm-font-weight-bold)">가나다 Aa 123</span></td></tr>
+<tr><td><code>t15</code></td><td>56 / 75</td><td><span class="site-sample" style="font-size: var(--ybm-font-size-t15); line-height: var(--ybm-line-height-t15); font-weight: var(--ybm-font-weight-bold)">가나다 Aa 123</span></td></tr>
+<tr><td><code>t16</code></td><td>64 / 85</td><td><span class="site-sample" style="font-size: var(--ybm-font-size-t16); line-height: var(--ybm-line-height-t16); font-weight: var(--ybm-font-weight-bold)">가나다 Aa 123</span></td></tr>
+<tr><td><code>t17</code></td><td>72 / 96</td><td><span class="site-sample" style="font-size: var(--ybm-font-size-t17); line-height: var(--ybm-line-height-t17); font-weight: var(--ybm-font-weight-bold)">가나다 Aa 123</span></td></tr></tbody></table></div>
+<h2 id="weight">굵기<a class="site-anchor" href="#weight" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
+<div class="ds-table-wrap"><table class="ds-table" data-density="compact">
+<thead><tr><th scope="col">토큰</th><th scope="col">값</th><th scope="col">보기</th></tr></thead>
+<tbody><tr><td><code>--ybm-font-weight-regular</code></td><td>400</td><td><span class="site-sample" style="font-size: var(--ybm-font-size-t06); font-weight: var(--ybm-font-weight-regular)">가나다 Aa 123</span></td></tr>
+<tr><td><code>--ybm-font-weight-medium</code></td><td>500</td><td><span class="site-sample" style="font-size: var(--ybm-font-size-t06); font-weight: var(--ybm-font-weight-medium)">가나다 Aa 123</span></td></tr>
+<tr><td><code>--ybm-font-weight-semibold</code></td><td>600</td><td><span class="site-sample" style="font-size: var(--ybm-font-size-t06); font-weight: var(--ybm-font-weight-semibold)">가나다 Aa 123</span></td></tr>
+<tr><td><code>--ybm-font-weight-bold</code></td><td>700</td><td><span class="site-sample" style="font-size: var(--ybm-font-size-t06); font-weight: var(--ybm-font-weight-bold)">가나다 Aa 123</span></td></tr></tbody></table></div>
+</article>
+<aside class="site-toc" aria-label="이 페이지 목차"><nav><span class="site-toc__indicator" aria-hidden="true"></span><a href="#overview">개요</a><a href="#size">크기</a><a href="#weight">굵기</a></nav></aside>
+</div>
+</main>
+</div>
+</body>
+</html>
