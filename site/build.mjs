@@ -130,6 +130,8 @@ const comps = registry.map((c) => {
     vars: [...vars],
   };
 });
+// 왼쪽 메뉴와 이전 / 다음 문서는 이름 ABC 순
+const compsAZ = [...comps].sort((a, b) => a.name.localeCompare(b.name, 'en'));
 const missing = comps.filter((c) => !c.desc || !c.example).map((c) => c.no + (c.desc ? '' : ' 설명') + (c.example ? '' : ' 예시'));
 if (missing.length) console.log('  ! 비어 있는 것:', missing.join(', '));
 
@@ -155,22 +157,17 @@ const table = (head, rows) => `<div class="ds-table-wrap"><table class="ds-table
 const btn = (href, label, variant = 'neutralWeak', size = 'small', icon = '') =>
   `<a class="ds-btn" data-variant="${variant}" data-size="${size}" href="${href}"${/^https?:/.test(href) ? ' target="_blank" rel="noopener"' : ''}>${icon ? `<i class="ds-icon ds-icon--${icon} ds-icon--sm" aria-hidden="true"></i>` : ''}${esc(label)}</a>`;
 
-// 제목 줄 오른쪽 Figma 메뉴 - 레퍼런스 B 의 LLMS.txt 자리. list: [{ label, id }] (id 는 Figma 노드)
-const figmaMenu = (list) => {
-  if (!list || !list.length) return '';
-  const url = (id) => FIGMA + id.replace(':', '-');
-  const items = list.map((f) => `<a class="ds-menu-item" role="menuitem" href="${url(f.id)}" target="_blank" rel="noopener">${esc(f.label ? f.label + ' 열기' : 'Figma 에서 열기')}<i class="ds-icon ds-icon--external-link" aria-hidden="true"></i></a>`).join('');
-  return `<div class="site-figma"><button type="button" class="ds-btn site-figma__btn" data-variant="neutralWeak" data-size="small" aria-haspopup="menu" aria-expanded="false" data-site-figma>Figma<i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i></button><div class="ds-menu site-figma__menu" role="menu" hidden>${items}<button type="button" class="ds-menu-item" role="menuitem" data-site-copy-link="${url(list[0].id)}">링크 복사<i class="ds-icon ds-icon--link" aria-hidden="true"></i></button></div></div>`;
-};
-const FIGMA_FILE = [{ label: '', id: '2274:1143' }];
 
 const NAV = [['get-started', 'Get Started', 'index.html'], ['components', 'Components', 'components/index.html'], ['templates', 'Templates', 'templates/index.html']];
 // 파운데이션은 레퍼런스 A 처럼 항목마다 한 페이지
 // 왼쪽 메뉴는 영문 (레퍼런스 B)
 const FOUND = [['color', 'Color'], ['typography', 'Typography'], ['spacing', 'Spacing'], ['shape', 'Radius'], ['elevation', 'Elevation'], ['motion', 'Motion'], ['icons', 'Iconography']];
-const GS = [['Guide', [['get-started/usage.html', 'Usage'], ['get-started/scripts.html', 'Scripts']]], ['Foundations', FOUND.map(([s, l]) => [`get-started/${s}.html`, l])]];
-// 시작하기 문서 순서 (이전 / 다음 문서)
-const GS_ORDER = [['index.html', '시작하기'], ['get-started/usage.html', '사용 규칙'], ['get-started/scripts.html', '스크립트'], ['get-started/color.html', '색'], ['get-started/typography.html', '글자'], ['get-started/spacing.html', '간격'], ['get-started/shape.html', '모서리'], ['get-started/elevation.html', '그림자'], ['get-started/motion.html', '움직임'], ['get-started/icons.html', '아이콘']];
+// 묶음은 두고 묶음 안은 ABC 순
+const az = (list) => [...list].sort((a, b) => a[1].localeCompare(b[1], 'en'));
+const GS = [['Guide', az([['get-started/usage.html', 'Usage'], ['get-started/scripts.html', 'Scripts']])], ['Foundations', az(FOUND.map(([s, l]) => [`get-started/${s}.html`, l]))]];
+// 시작하기 문서 순서 (이전 / 다음 문서) - 왼쪽 메뉴 순서 그대로, 이름은 페이지 제목
+const GS_TITLE = { 'get-started/usage.html': '사용 규칙', 'get-started/scripts.html': '스크립트', 'get-started/color.html': '색', 'get-started/typography.html': '글자', 'get-started/spacing.html': '간격', 'get-started/shape.html': '모서리', 'get-started/elevation.html': '그림자', 'get-started/motion.html': '움직임', 'get-started/icons.html': '아이콘' };
+const GS_ORDER = [['index.html', '시작하기'], ...GS.flatMap(([, list]) => list.map(([h]) => [h, GS_TITLE[h]]))];
 const gsPager = (file) => { const i = GS_ORDER.findIndex(([f]) => f === file); const p = GS_ORDER[i - 1], n = GS_ORDER[i + 1]; return [p && { href: '{root}' + p[0], label: p[1] }, n && { href: '{root}' + n[0], label: n[1] }]; };
 
 function sideNav(section, file, root) {
@@ -184,10 +181,7 @@ function sideNav(section, file, root) {
   }
   if (section === 'components') {
     parts.push(item('components/index.html', 'Overview'));
-    for (const [cat] of CATS) {
-      const list = comps.filter((c) => c.cat === cat);
-      if (list.length) parts.push(group(cat, list.map((c) => item(`components/${c.slug}.html`, c.name.split(' · ')[0]))));
-    }
+    parts.push(group('Components', compsAZ.map((c) => item(`components/${c.slug}.html`, c.name.split(' · ')[0]))));
   }
   if (section === 'templates') {
     parts.push(item('templates/index.html', 'Overview'));
@@ -208,11 +202,11 @@ const iconLink = (href, label, icon, extra = '') => `<a class="ds-btn${extra}" d
 
 // layout - doc: 본문 752 + 목차 (문서, 컴포넌트 목록과 상세도 같은 폭) / wide: 메뉴 옆 전체 폭 (템플릿 상세)
 //          full: PC 에서 왼쪽 메뉴 없이 전체 폭 (템플릿 목록)
-function page({ file, title, section, body, layout = 'doc', desc = '', crumb = '', figma = [], pager = [] }) {
+function page({ file, title, section, body, layout = 'doc', desc = '', crumb = '', pager = [] }) {
   const depth = file.split('/').length - 1;
   const root = '../'.repeat(depth);
-  // 제목 구성 (레퍼런스 B): 위 줄에 경로와 오른쪽 Figma 메뉴, 아래로 큰 제목과 설명
-  body = body.replace(/<header>(\s*<p class="site-eyebrow">[\s\S]*?<\/p>)?/, () => `<header class="site-head"><div class="site-head__top"><span class="site-head__crumb">${esc(crumb || NAV.find((n) => n[0] === section)[1])}</span>${figmaMenu(figma)}</div>`);
+  // 제목 구성 (레퍼런스 B): 위 줄에 경로, 아래로 큰 제목과 설명
+  body = body.replace(/<header>(\s*<p class="site-eyebrow">[\s\S]*?<\/p>)?/, () => `<header class="site-head"><div class="site-head__top"><span class="site-head__crumb">${esc(crumb || NAV.find((n) => n[0] === section)[1])}</span></div>`);
   // 이전 / 다음 문서 (레퍼런스 B)
   const [prev, next] = pager;
   const pagerHtml = prev || next ? `<nav class="site-pager" aria-label="이전, 다음 문서">${prev ? `<a href="${prev.href}" data-dir="prev"><span class="site-pager__label"><i class="ds-icon ds-icon--chevron-left ds-icon--sm" aria-hidden="true"></i>이전 문서</span><b>${esc(prev.label)}</b></a>` : '<span></span>'}${next ? `<a href="${next.href}" data-dir="next"><span class="site-pager__label">다음 문서<i class="ds-icon ds-icon--chevron-right ds-icon--sm" aria-hidden="true"></i></span><b>${esc(next.label)}</b></a>` : ''}</nav>` : '';
@@ -314,7 +308,7 @@ const prompts = [
 고친 곳은 목록으로 알려 줘.`],
 ];
 write({
-  file: 'index.html', section: 'get-started', title: '시작하기', desc: 'YBM DS 를 AI 와 함께 바로 시작하는 방법', figma: FIGMA_FILE, pager: gsPager('index.html'),
+  file: 'index.html', section: 'get-started', title: '시작하기', desc: 'YBM DS 를 AI 와 함께 바로 시작하는 방법', pager: gsPager('index.html'),
   body: `<header>
   <h1 class="site-h1">시작하기</h1>
   <p class="site-lead">YBM DS 를 프로젝트에 넣고 바로 화면을 만들어 보세요.</p>
@@ -429,13 +423,13 @@ const colorTable = (k) => {
 };
 const foundPages = {
   color: {
-    figma: '2486:2', title: '색', lead: '배경, 글자와 아이콘, 테두리에 쓰는 시맨틱 색입니다. 값은 라이트 / 다크 순서예요.',
+    title: '색', lead: '배경, 글자와 아이콘, 테두리에 쓰는 시맨틱 색입니다. 값은 라이트 / 다크 순서예요.',
     body: `<h2 id="overview">개요</h2>
 <p>화면에는 시맨틱 색(<code>bg</code>, <code>fg</code>, <code>stroke</code>)만 씁니다. 팔레트(<code>--ybm-color-palette-*</code>)는 시맨틱 색을 만드는 원료라 화면에 직접 쓰지 않아요. 색을 토큰으로만 쓰면 <code>data-theme="dark"</code> 하나로 다크 모드가 맞춰집니다.</p>
 ${colorGroups.map(([k, label]) => `<h2 id="${k}">${label}</h2>\n${colorTable(k)}`).join('\n')}`,
   },
   typography: {
-    figma: '2486:13', title: '글자', lead: '글꼴, 굵기, 크기와 줄 높이 토큰입니다.',
+    title: '글자', lead: '글꼴, 굵기, 크기와 줄 높이 토큰입니다.',
     body: `<h2 id="overview">개요</h2>
 <p>글꼴은 Pretendard 입니다. 크기는 <code>--ybm-font-size-t01</code> ~ <code>t17</code>, 줄 높이는 같은 번호의 <code>--ybm-line-height-*</code> 를 짝으로 씁니다. 굵기는 regular 400, medium 500, semibold 600, bold 700 입니다.</p>
 <p>한글 위계: 페이지 제목 40/48 medium(500), 리드 16/24 light(300), 섹션 제목 24/32 medium, 소제목 16/22 medium, 본문 16/28 regular, 보조 글 14 regular 입니다. 자간은 주지 않습니다.</p>
@@ -445,14 +439,14 @@ ${table(['토큰', '크기 / 줄 높이 (px)', '보기'], tokRe(/--ybm-font-size
 ${table(['토큰', '값', '보기'], tokRe(/--ybm-font-weight-([a-z]+): (\d+);/g).map((m) => [`<code>--ybm-font-weight-${m[1]}</code>`, m[2], `<span class="site-sample" style="font-size: var(--ybm-font-size-t06); font-weight: var(--ybm-font-weight-${m[1]})">가나다 Aa 123</span>`]))}`,
   },
   spacing: {
-    figma: '2486:24', title: '간격', lead: '여백과 간격에 쓰는 토큰입니다.',
+    title: '간격', lead: '여백과 간격에 쓰는 토큰입니다.',
     body: `<h2 id="overview">개요</h2>
 <p>4px 단위를 기본으로 하고, 작은 간격은 2px 단위도 씁니다. 화면 좌우 여백은 <code>--ybm-space-x-global-gutter</code> 입니다.</p>
 <h2 id="tokens">토큰</h2>
 ${table(['토큰', '값', '보기'], tokRe(/--ybm-space-(x[0-9_]+): (\d+)px/g).map((m) => [`<code>--ybm-space-${m[1]}</code>`, `${m[2]}px`, `<span class="site-bar" style="width: var(--ybm-space-${m[1]})"></span>`]))}`,
   },
   shape: {
-    figma: '2486:35', title: '모서리', lead: '부품 모서리 곡률 토큰입니다.',
+    title: '모서리', lead: '부품 모서리 곡률 토큰입니다.',
     body: `<h2 id="overview">개요</h2>
 <p>모서리는 쓰임 이름으로 씁니다. 어떤 영역에 <code>--ybm-shape-scale</code> 을 0 과 1 사이 값으로 덮어쓰면 그 안의 모서리만 덜 둥글게 바꿀 수 있어요.</p>
 <h2 id="tokens">토큰</h2>
@@ -462,7 +456,7 @@ ${table(['토큰', '값', '보기'], [...new Set(tokRe(/--ybm-shape-base-([a-z0-
 }))}`,
   },
   elevation: {
-    figma: '2486:46', title: '그림자', lead: '떠 있는 높이를 나타내는 그림자와 쌓는 순서입니다.',
+    title: '그림자', lead: '떠 있는 높이를 나타내는 그림자와 쌓는 순서입니다.',
     body: `<h2 id="shadow">그림자</h2>
 <p>숫자 대신 쓰임 이름으로 씁니다.</p>
 ${table(['토큰', '쓰임', '보기'], tokRe(/--ybm-elevation-(raised|overlay|panel|floating|modal):\s+[^;]+;\s*\/\* ([^*]+) \*\//g).map((m) => [`<code>--ybm-elevation-${m[1]}</code>`, prose(m[2]), `<span class="site-shadow" style="box-shadow: var(--ybm-elevation-${m[1]})"></span>`]))}
@@ -479,7 +473,7 @@ ${table(['토큰', '값'], tokRe(/--ybm-easing-([a-z]+): ([^;]+);/g).map((m) => 
 };
 for (const [slug, p] of Object.entries(foundPages)) {
   write({
-    file: `get-started/${slug}.html`, section: 'get-started', title: p.title, desc: p.lead, crumb: 'Foundations', figma: p.figma ? [{ label: '', id: p.figma }] : [], pager: gsPager(`get-started/${slug}.html`),
+    file: `get-started/${slug}.html`, section: 'get-started', title: p.title, desc: p.lead, crumb: 'Foundations', pager: gsPager(`get-started/${slug}.html`),
     body: `<header><h1 class="site-h1">${esc(p.title)}</h1><p class="site-lead">${esc(p.lead)}</p></header>\n${p.body}`,
   });
 }
@@ -490,7 +484,7 @@ const iconNames = [...new Set([...iconsCss.matchAll(/\.ds-icon--([a-z0-9-]+)\s*\
 const lucide = JSON.parse(fs.readFileSync(path.join(SITE, 'src/lucide-icons.json'), 'utf8'));
 const lucideCount = Object.keys(lucide.icons).length;
 write({
-  file: 'get-started/icons.html', section: 'get-started', title: '아이콘', crumb: 'Foundations', figma: [{ label: '', id: '2517:2' }], pager: gsPager('get-started/icons.html'),
+  file: 'get-started/icons.html', section: 'get-started', title: '아이콘', crumb: 'Foundations', pager: gsPager('get-started/icons.html'),
   body: `<header><h1 class="site-h1">아이콘</h1><p class="site-lead">UI 아이콘은 Lucide 한 가지만 씁니다. Lucide 전체 ${lucideCount.toLocaleString()}개 가운데 CSS 로 바로 쓸 수 있는 것은 ${iconNames.length}개이고, 나머지는 필요할 때 <code>icons.css</code> 에 한 줄 넣어 씁니다.</p></header>
 <h2 id="use">쓰는 법</h2>
 ${example(`<div class="pv-stage"><i class="ds-icon ds-icon--search ds-icon--sm" aria-hidden="true"></i><i class="ds-icon ds-icon--search" aria-hidden="true"></i><i class="ds-icon ds-icon--search ds-icon--lg" aria-hidden="true"></i><span style="color: var(--ybm-color-fg-brand)"><i class="ds-icon ds-icon--circle-check-solid ds-icon--lg" aria-hidden="true"></i></span></div>`, `<i class="ds-icon ds-icon--search ds-icon--sm" aria-hidden="true"></i>  <!-- 16 -->\n<i class="ds-icon ds-icon--search" aria-hidden="true"></i>              <!-- 20 기본 -->\n<i class="ds-icon ds-icon--search ds-icon--lg" aria-hidden="true"></i>  <!-- 24 -->\n<span style="color: var(--ybm-color-fg-brand)"><i class="ds-icon ds-icon--circle-check-solid" aria-hidden="true"></i></span>  <!-- 색은 부모 글자색 -->`)}
@@ -549,14 +543,9 @@ const coverThumb = (c) => cardThumb(c).replace('class="site-tile__thumb"', 'clas
 // 템플릿 목록 머리: 레퍼런스 A 목록 화면처럼 가운데 제목과 설명
 const hero = (title, lead) => `<header class="site-hero"><h1 class="site-h1">${esc(title)}</h1><p class="site-lead">${esc(lead)}</p></header>`;
 write({
-  file: 'components/index.html', section: 'components', title: 'Components', layout: 'wide', figma: FIGMA_FILE,
+  file: 'components/index.html', section: 'components', title: 'Components', layout: 'wide',
   body: `<header><h1 class="site-h1">컴포넌트</h1><p class="site-lead">화면을 만드는 부품 ${comps.length}종입니다. 모두 Figma 와 CSS 가 같은 이름, 같은 값으로 짝을 이룹니다.</p></header>
-${CATS.map(([cat, label]) => {
-  const list = comps.filter((c) => c.cat === cat);
-  if (!list.length) return '';
-  return `<section class="site-group"><h2 class="site-group__title" id="cat-${slugify(cat)}">${label}<small>${list.length}</small></h2>
-<div class="site-tiles">${list.map((c) => `<a class="site-tile" href="${c.slug}.html" data-site-item="${esc((c.name + ' ' + c.desc).toLowerCase())}" data-site-cat="${esc(cat)}">${cardThumb(c)}<p class="site-tile__name">${esc(c.name.split(' · ')[0])}</p><p class="site-tile__desc">${esc(c.desc)}</p></a>`).join('\n')}</div></section>`;
-}).join('\n')}
+<div class="site-tiles">${compsAZ.map((c) => `<a class="site-tile" href="${c.slug}.html" data-site-item="${esc((c.name + ' ' + c.desc).toLowerCase())}">${cardThumb(c)}<p class="site-tile__name">${esc(c.name.split(' · ')[0])}</p></a>`).join('\n')}</div>
 <div class="ds-empty site-empty-result" hidden><span class="ds-empty__media"><i class="ds-icon ds-icon--search" aria-hidden="true"></i></span><p class="ds-empty__title">찾는 컴포넌트가 없어요</p><p class="ds-empty__desc">다른 이름으로 찾아보세요.</p></div>`,
 });
 
@@ -586,8 +575,9 @@ function propsTable(c) {
   if (flags.length) rows.push(['켜고 끄는 속성', flags.join(' ')]);
   return { rows, rest: notes.join(', ') };
 }
-comps.forEach((c, i) => {
-  const prev = comps[i - 1], next = comps[i + 1];
+comps.forEach((c) => {
+  const i = compsAZ.indexOf(c);
+  const prev = compsAZ[i - 1], next = compsAZ[i + 1];
   const { rows, rest } = propsTable(c);
   const sections = [];
   sections.push(`<h2 id="preview">미리보기</h2>${c.example ? example(c.example, codeOf(c.example) || c.markup) : '<p>아직 예시가 없어요.</p>'}`);
@@ -598,12 +588,10 @@ comps.forEach((c, i) => {
   if (c.spec) sections.push(`<h2 id="spec">디자인 값</h2><p>Figma 와 CSS 가 함께 따르는 크기, 여백, 색입니다.</p><pre class="site-spec">${esc(c.spec)}</pre>`);
   write({
     file: `components/${c.slug}.html`, section: 'components', title: c.name.split(' · ')[0], desc: c.desc,
-    figma: c.figma.map((f) => ({ label: f.part || '', id: f.id })),
     pager: [prev && { href: `${prev.slug}.html`, label: prev.name.split(' · ')[0] }, next && { href: `${next.slug}.html`, label: next.name.split(' · ')[0] }],
     body: `<header>
   <h1 class="site-h1">${esc(c.name)}</h1>
   <p class="site-lead">${esc(c.desc)}</p>
-  <div class="site-ready"><span><i class="ds-icon ds-icon--circle-check-solid" aria-hidden="true"></i>Figma</span><a href="#usage"><i class="ds-icon ds-icon--circle-check-solid" aria-hidden="true"></i>CSS<i class="ds-icon ds-icon--arrow-right ds-icon--sm" aria-hidden="true"></i></a></div>
 </header>
 ${coverThumb(c)}
 ${sections.join('\n')}`,

@@ -21,12 +21,6 @@
     if (tabs) { tabs.querySelectorAll(".ds-chiptabs__trigger").forEach(function (b) { b.setAttribute("aria-selected", String(b === btn)); }); return; }
     btn.closest(".ds-segmented").querySelectorAll(".ds-segmented__item").forEach(function (b) { b.setAttribute("aria-pressed", String(b === btn)); });
   }
-  // 제목 줄 Figma 메뉴
-  function figmaMenu(btn, open) {
-    var menu = btn.parentElement.querySelector(".site-figma__menu");
-    btn.setAttribute("aria-expanded", String(open)); menu.hidden = !open;
-  }
-  function closeFigma() { document.querySelectorAll("[data-site-figma][aria-expanded='true']").forEach(function (b) { figmaMenu(b, false); }); }
 
   document.addEventListener("click", function (e) {
     var t = e.target;
@@ -35,15 +29,6 @@
     if (t.closest("[data-site-menu]")) { document.body.toggleAttribute("data-side-open"); var open = document.body.hasAttribute("data-side-open"); document.querySelectorAll("[data-site-menu]").forEach(function (b) { b.setAttribute("aria-expanded", String(open)); }); return; }
     if (t.closest("[data-site-close]")) { document.body.removeAttribute("data-side-open"); return; }
 
-    var fb = t.closest("[data-site-figma]");
-    if (fb) { var was = fb.getAttribute("aria-expanded") === "true"; closeFigma(); figmaMenu(fb, !was); return; }
-    var cl = t.closest("[data-site-copy-link]");
-    if (cl) {
-      closeFigma();
-      if (navigator.clipboard) navigator.clipboard.writeText(cl.getAttribute("data-site-copy-link")).then(function () { if (window.YBM) YBM.snackbar("Figma 링크를 복사했어요"); });
-      return;
-    }
-    if (!t.closest(".site-figma__menu")) closeFigma();
 
     // 예시: 미리보기 / 코드
     var view = t.closest("[data-site-view]");
@@ -97,7 +82,7 @@
     }
   });
 
-  document.addEventListener("keydown", function (e) { if (e.key === "Escape") { document.body.removeAttribute("data-side-open"); closeFigma(); } });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") { document.body.removeAttribute("data-side-open"); } });
 
   // 템플릿 원본 코드 불러오기 (http 로 열었을 때만)
   function loadSource(box) {

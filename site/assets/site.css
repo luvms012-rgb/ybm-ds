@@ -37,7 +37,9 @@ body.site { background: var(--ybm-color-bg-layer-default); color: var(--ybm-colo
 .site-top {
   position: sticky; top: 0; z-index: var(--ybm-z-sticky);
   display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
-  height: var(--site-top); padding: var(--ybm-space-x2);
+  height: var(--site-top);
+  /* 로고와 오른쪽 버튼도 본문과 같은 최대 1552 칸 안에 (레퍼런스 B: 칸 왼쪽 16 에 로고, 오른쪽 16 안쪽에 마지막 버튼) */
+  padding: var(--ybm-space-x2) max(var(--ybm-space-x4), calc((100% - var(--site-max)) / 2 + var(--ybm-space-x4))) var(--ybm-space-x2) max(var(--ybm-space-x2), calc((100% - var(--site-max)) / 2 + var(--ybm-space-x2)));
   background: color-mix(in srgb, var(--ybm-color-bg-layer-default) 80%, transparent);
   -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
 }
@@ -125,22 +127,10 @@ body[data-side-open] .site-scrim { opacity: 1; pointer-events: auto; }
 .site-toc a[aria-current="true"] { overflow: visible; color: var(--ybm-color-fg-neutral); font-weight: var(--ybm-font-weight-semibold); }
 .site-toc__indicator { position: absolute; left: 0; top: 0; width: 2px; height: 0; border-radius: var(--ybm-shape-pill); background: var(--ybm-color-fg-neutral); transition: translate var(--ybm-duration-normal) var(--ybm-easing-standard), height var(--ybm-duration-normal) var(--ybm-easing-standard); }
 @media (prefers-reduced-motion: reduce) { .site-toc__indicator { transition: none; } }
-/* 제목 구성 (레퍼런스 B): 위 줄 경로 14 muted + 오른쪽 Figma 메뉴, 큰 제목, 설명, 확인 표시 줄. 아래 구분선 없음 */
+/* 제목 구성 (레퍼런스 B): 위 줄 경로 14 muted, 큰 제목, 설명. 아래 구분선 없음 */
 .site-doc > header { padding-bottom: 0; border-bottom: 0; }
 .site-head__top { display: flex; align-items: center; justify-content: space-between; gap: var(--ybm-space-x2); min-height: 36px; margin-bottom: var(--ybm-space-x2); }
 .site-head__crumb { color: var(--ybm-color-fg-neutral-muted); font-size: var(--ybm-font-size-t04); line-height: 19px; }
-.site-figma { position: relative; }
-.site-figma__btn { --ds-btn-font-weight: var(--ybm-font-weight-medium); --ds-btn-gap: var(--ybm-space-x1_5); }
-.site-figma__btn > .ds-icon { transition: rotate var(--ybm-duration-fast) var(--ybm-easing-standard); }
-.site-figma__btn[aria-expanded="true"] > .ds-icon { rotate: 180deg; }
-.site-figma__menu { position: absolute; right: 0; top: calc(100% + var(--ybm-space-x2)); z-index: var(--ybm-z-overlay); min-width: 200px; }
-.site-figma__menu[hidden] { display: none; }
-.site-figma__menu .ds-menu-item { justify-content: space-between; text-decoration: none; }
-.site-ready { display: flex; flex-wrap: wrap; align-items: center; gap: var(--ybm-space-x2) var(--ybm-space-x4); margin-top: var(--ybm-space-x4); }
-.site-ready > * { display: inline-flex; align-items: center; gap: var(--ybm-space-x1); color: var(--ybm-color-fg-neutral); font-size: var(--ybm-font-size-t05); line-height: 24px; font-weight: var(--ybm-font-weight-medium); text-decoration: none; }
-.site-ready a:hover { text-decoration: underline; }
-.site-ready .ds-icon--circle-check-solid { color: var(--ybm-color-fg-positive); }
-.site-ready .ds-icon--arrow-right { color: var(--ybm-color-fg-neutral-subtle); }
 /* 컴포넌트 첫 그림 (레퍼런스 B): 900 x 473 회색 상자, 모서리 16, 부품은 상자에 맞게 키운다 */
 .site-doc > .site-cover { margin-top: 28px; aspect-ratio: 3200 / 1680; border-radius: var(--ybm-shape-xl); }
 .site-cover .site-tile__inner { padding: var(--ybm-space-x12); }
@@ -243,9 +233,9 @@ body[data-side-open] .site-scrim { opacity: 1; pointer-events: auto; }
 .site-toolbar--center .ds-chiptabs { justify-content: center; }
 .site-group { margin-top: var(--ybm-space-x14); }
 .site-doc > header + .site-group { margin-top: var(--ybm-space-x10); }
+.site-doc > header + .site-tiles { margin-top: var(--ybm-space-x12); }  /* 컴포넌트 목록: 분류 없이 ABC 순 한 목록 */
 .site-group[hidden] { display: none; }
 .site-doc .site-group__title { display: flex; align-items: baseline; gap: var(--ybm-space-x2); margin: 0; font-size: var(--ybm-font-size-t07); line-height: var(--ybm-line-height-t07);  font-weight: var(--ybm-font-weight-medium); letter-spacing: 0; }
-.site-group__title small { color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t04); font-weight: var(--ybm-font-weight-medium); letter-spacing: 0; }
 .site-grid { display: grid; grid-template-columns: 1fr; gap: var(--ybm-space-x4); margin-top: var(--ybm-space-x4); }
 @media (min-width: 560px) { .site-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (min-width: 1280px) { .site-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
@@ -267,7 +257,6 @@ body[data-side-open] .site-scrim { opacity: 1; pointer-events: auto; }
 .site-tile__inner { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: var(--ybm-space-x6); pointer-events: none; }
 .site-tile__inner .pv-stage { flex: none; width: 100%; padding: 0; background: none; box-shadow: none; justify-content: center; transform-origin: center; }  /* 크기 맞춤은 site.js */
 .site-doc .site-tile__name { margin-top: var(--ybm-space-x4); font-size: var(--ybm-font-size-t07); line-height: 30px; font-weight: var(--ybm-font-weight-medium); }
-.site-doc .site-tile__desc { margin-top: 0; color: var(--ybm-color-fg-neutral-muted); font-size: var(--ybm-font-size-t04); line-height: 20px; }
 .site-empty-result[hidden] { display: none; }
 
 .site-tpl-grid { grid-template-columns: 1fr; gap: var(--ybm-space-x6); margin-top: var(--ybm-space-x10); }
