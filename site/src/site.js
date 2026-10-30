@@ -118,6 +118,7 @@
   function spy() {
     var links = [].slice.call(document.querySelectorAll(".site-toc a"));
     if (!links.length || !("IntersectionObserver" in window)) return;
+    links[0].setAttribute("aria-current", "true");  // 처음에는 첫 항목
     var map = {};
     links.forEach(function (a) { map[a.getAttribute("href").slice(1)] = a; });
     var io = new IntersectionObserver(function (entries) {
