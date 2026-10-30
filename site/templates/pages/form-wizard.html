@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>단계별 신청 - YBM DS 템플릿</title>
+<link rel="stylesheet" href="../../../dist/ybm-ds.css">
+<script src="../../../dist/ybm-ds.js" defer></script>
+<style>
+  body { word-break: keep-all; overflow-wrap: break-word; }
+  .tp-h1 { font-size: var(--ybm-font-size-t08); line-height: var(--ybm-line-height-t08); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-h3 { font-size: var(--ybm-font-size-t05); line-height: 22px; font-weight: var(--ybm-font-weight-medium); }
+  .tp-sub { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
+  .tp-caption { font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); color: var(--ybm-color-fg-neutral-subtle); }
+  .tp-num { font-variant-numeric: tabular-nums; }
+  .tp-logo { display: grid; place-items: center; width: 88px; height: 28px; border-radius: var(--ybm-shape-xs); background: var(--ybm-color-bg-neutral); color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t03-static); line-height: var(--ybm-line-height-t03-static); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-bar { position: sticky; top: 0; z-index: var(--ybm-z-sticky); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); }
+
+  /* 화면 틀: 768 이상 가운데 960, 1024 이상 왼쪽 폼 + 오른쪽 요약 */
+  .tp-page { max-width: 960px; margin-inline: auto; padding: var(--ybm-space-x4) var(--ybm-space-x-global-gutter) calc(var(--ybm-space-x24) + env(safe-area-inset-bottom, 0px)); }
+  @media (min-width: 768px) { .tp-page { padding: var(--ybm-space-x10) var(--ybm-space-x8) var(--ybm-space-x20); } }
+  .tp-grid { display: flex; flex-direction: column; gap: var(--ybm-space-x8); margin-top: var(--ybm-space-x8); }
+  @media (min-width: 1024px) { .tp-grid { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: var(--ybm-space-x12); align-items: start; } }
+
+  /* 단계: 모바일은 진행 막대 + 글자, 768 이상은 Stepper */
+  .tp-progress { display: flex; flex-direction: column; gap: var(--ybm-space-x2); }
+  .tp-progress-text { display: flex; justify-content: space-between; }
+  .tp-stepper { display: none; }
+  @media (min-width: 768px) { .tp-progress { display: none; } .tp-stepper { display: flex; } }
+
+  .tp-form { display: flex; flex-direction: column; gap: var(--ybm-space-x8); }
+  .tp-fieldset { display: flex; flex-direction: column; gap: var(--ybm-space-x4); margin: 0; padding: 0; border: 0; }
+  .tp-fieldset > legend { margin-bottom: var(--ybm-space-x1); font-size: var(--ybm-font-size-t06); line-height: var(--ybm-line-height-t06); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-row { display: grid; grid-template-columns: 1fr; gap: var(--ybm-space-x4); }
+  @media (min-width: 560px) { .tp-row { grid-template-columns: 1fr 1fr; } }
+  .tp-phone { display: flex; gap: var(--ybm-space-x2); }
+  .tp-phone > .ds-input { flex: 1 1 auto; }
+
+  /* 요약 카드 (1024 이상 오른쪽에 붙음) */
+  .tp-summary { position: sticky; top: 88px; }
+  .tp-summary dl { display: grid; grid-template-columns: 72px 1fr; gap: var(--ybm-space-x2) var(--ybm-space-x3); margin: 0; font-size: var(--ybm-font-size-t03); line-height: var(--ybm-line-height-t03); }
+  .tp-summary dt { color: var(--ybm-color-fg-neutral-muted); }
+  .tp-summary dd { margin: 0; }
+
+  /* 아래 버튼: 모바일 고정, 768 이상 폼 끝에 */
+  .tp-actions { position: fixed; inset-inline: 0; bottom: 0; z-index: var(--ybm-z-sticky); display: flex; gap: var(--ybm-space-x2); padding: var(--ybm-space-x3) var(--ybm-space-x-global-gutter) calc(var(--ybm-space-x3) + env(safe-area-inset-bottom, 0px)); background: var(--ybm-color-bg-layer-default); box-shadow: inset 0 1px 0 var(--ybm-color-stroke-neutral-muted); }
+  .tp-actions > .ds-btn:last-child { flex: 1 1 auto; }
+  @media (min-width: 768px) { .tp-actions { position: static; justify-content: space-between; padding: var(--ybm-space-x6) 0 0; box-shadow: none; } .tp-actions > .ds-btn:last-child { flex: none; } }
+</style>
+</head>
+<body>
+
+<header class="ds-appbar u-hide-from-md tp-bar" data-platform="android">
+  <div class="ds-appbar__left"><button type="button" class="ds-appbar__button" aria-label="뒤로"><i class="ds-icon ds-icon--chevron-left" aria-hidden="true"></i></button></div>
+  <div class="ds-appbar__main"><h1 class="ds-appbar__title">프로그램 신청</h1></div>
+  <div class="ds-appbar__right"><button type="button" class="ds-appbar__button" aria-label="닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button></div>
+</header>
+
+<header class="ds-topnav u-show-from-md tp-bar">
+  <div class="ds-topnav__left">
+    <a class="ds-topnav__heading" href="#" aria-label="서비스 이름 홈"><span class="tp-logo">로고</span></a>
+    <nav class="ds-topnav__menu" aria-label="주요 메뉴">
+      <a class="ds-topnav__item" href="#">홈</a>
+      <a class="ds-topnav__item" href="#" aria-current="page">신청</a>
+      <a class="ds-topnav__item" href="#">내 신청</a>
+      <a class="ds-topnav__item" href="#">고객지원</a>
+    </nav>
+  </div>
+  <div class="ds-topnav__end"><a class="ds-btn" data-variant="ghost" data-size="xsmall" href="#">임시 저장</a><a class="ds-btn" data-variant="neutralWeak" data-size="xsmall" href="#">나가기</a></div>
+</header>
+
+<main class="tp-page">
+  <div class="u-show-from-md"><h1 class="tp-h1">프로그램 신청</h1><p class="tp-sub" style="margin-top: var(--ybm-space-x2)">4단계 가운데 2단계예요. 입력한 내용은 자동으로 저장돼요.</p></div>
+
+  <div class="tp-grid">
+    <div>
+      <!-- 모바일 진행 표시 -->
+      <div class="tp-progress" role="group" aria-label="진행 단계">
+        <div class="tp-progress-text"><span class="tp-h3">2. 신청자 정보</span><span class="tp-sub tp-num">2 / 4</span></div>
+        <div class="ds-progress" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" aria-label="진행률" style="--ds-progress-value: 50%"></div>
+      </div>
+      <!-- 768 이상 Stepper -->
+      <ol class="ds-stepper tp-stepper" aria-label="신청 단계">
+        <li class="ds-stepper__step" data-state="complete"><span class="ds-stepper__indicator"></span><span class="ds-stepper__label">프로그램 선택</span></li>
+        <li class="ds-stepper__step" data-state="current" aria-current="step"><span class="ds-stepper__indicator"></span><span class="ds-stepper__label">신청자 정보</span></li>
+        <li class="ds-stepper__step"><span class="ds-stepper__indicator"></span><span class="ds-stepper__label">일정과 옵션</span></li>
+        <li class="ds-stepper__step"><span class="ds-stepper__indicator"></span><span class="ds-stepper__label">확인과 결제</span></li>
+      </ol>
+
+      <form class="tp-form" action="#" method="post" style="margin-top: var(--ybm-space-x8)">
+        <fieldset class="tp-fieldset">
+          <legend>신청자 정보</legend>
+          <div class="tp-row">
+            <div class="ds-field">
+              <div class="ds-field__header"><label class="ds-field__label" for="w-name">이름</label><span class="ds-field__required" aria-hidden="true"></span></div>
+              <div class="ds-input" data-variant="outline"><input class="ds-input__control" id="w-name" value="김민수" required></div>
+            </div>
+            <div class="ds-field">
+              <div class="ds-field__header"><label class="ds-field__label" for="w-birth">생년월일</label><span class="ds-field__required" aria-hidden="true"></span></div>
+              <div class="ds-input" data-variant="outline"><input class="ds-input__control" id="w-birth" inputmode="numeric" placeholder="YYYYMMDD" required></div>
+            </div>
+          </div>
+          <div class="ds-field">
+            <div class="ds-field__header"><label class="ds-field__label" for="w-phone">휴대폰</label><span class="ds-field__required" aria-hidden="true"></span></div>
+            <div class="tp-phone"><button type="button" class="ds-prefixselect">+82</button><div class="ds-input" data-variant="outline"><input class="ds-input__control" id="w-phone" type="tel" inputmode="tel" placeholder="010-0000-0000" required></div></div>
+            <div class="ds-field__footer"><p class="ds-field__help">신청 결과를 문자로 알려 드려요.</p></div>
+          </div>
+          <div class="ds-field">
+            <div class="ds-field__header"><label class="ds-field__label" for="w-mail">이메일</label></div>
+            <div class="ds-input" data-variant="outline"><input class="ds-input__control" id="w-mail" type="email" value="minsu@" aria-invalid="true"></div>
+            <div class="ds-field__footer"><p class="ds-field__error">이메일 형식이 올바르지 않아요</p></div>
+          </div>
+        </fieldset>
+
+        <fieldset class="tp-fieldset">
+          <legend>신청 유형</legend>
+          <div class="ds-selectbox-group" role="radiogroup" aria-label="신청 유형" style="--ds-selectbox-columns: 2">
+            <label class="ds-selectbox" data-layout="vertical"><span class="ds-selectbox__texts"><span class="ds-selectbox__label">개인</span><span class="ds-selectbox__desc">본인만 신청해요</span></span><span class="ds-radio" data-tone="neutral" data-size="medium"><input type="radio" class="ds-radio__control" name="type" checked></span></label>
+            <label class="ds-selectbox" data-layout="vertical"><span class="ds-selectbox__texts"><span class="ds-selectbox__label">단체</span><span class="ds-selectbox__desc">5명 이상 함께 신청해요</span></span><span class="ds-radio" data-tone="neutral" data-size="medium"><input type="radio" class="ds-radio__control" name="type"></span></label>
+          </div>
+        </fieldset>
+
+        <fieldset class="tp-fieldset">
+          <legend>추가 정보</legend>
+          <div class="ds-field">
+            <div class="ds-field__header"><label class="ds-field__label" for="w-region">지역</label></div>
+            <button type="button" class="ds-select" id="w-region" aria-haspopup="listbox" aria-expanded="false"><span class="ds-select__value" data-placeholder="지역을 선택해 주세요"></span></button>
+          </div>
+          <div class="ds-field">
+            <div class="ds-field__header"><label class="ds-field__label" for="w-memo">요청 사항</label></div>
+            <textarea class="ds-textarea" id="w-memo" rows="3" placeholder="담당자에게 미리 알릴 내용이 있으면 적어 주세요"></textarea>
+          </div>
+          <fieldset class="ds-checkbox-group">
+            <label class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control" checked><span class="ds-checkbox__label">신청 안내 메일 받기</span></label>
+            <label class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control"><span class="ds-checkbox__label">다음 프로그램 소식 받기 (선택)</span></label>
+          </fieldset>
+        </fieldset>
+
+        <div class="tp-actions">
+          <button type="button" class="ds-btn" data-variant="neutralWeak" data-size="large"><i class="ds-icon ds-icon--chevron-left" aria-hidden="true"></i>이전</button>
+          <button type="submit" class="ds-btn" data-variant="brandSolid" data-size="large">다음 단계<i class="ds-icon ds-icon--chevron-right" aria-hidden="true"></i></button>
+        </div>
+      </form>
+    </div>
+
+    <!-- 요약 (1024 이상) -->
+    <aside class="tp-summary u-show-from-md" aria-label="지금까지 입력한 내용">
+      <article class="ds-card">
+        <header class="ds-card__header"><h2 class="ds-card__title">신청 요약</h2><p class="ds-card__desc">1단계에서 고른 내용이에요</p></header>
+        <div class="ds-card__content">
+          <dl>
+            <dt>프로그램</dt><dd>주말 집중 과정</dd>
+            <dt>기간</dt><dd>11.8 - 11.29 (토 4회)</dd>
+            <dt>장소</dt><dd>중앙 교육장 3층</dd>
+            <dt>비용</dt><dd class="tp-num">120,000원</dd>
+          </dl>
+        </div>
+        <footer class="ds-card__footer"><a class="ds-btn" data-variant="ghost" data-size="small" href="#">1단계로 돌아가 바꾸기</a></footer>
+      </article>
+      <div class="ds-callout" data-tone="informative" style="margin-top: var(--ybm-space-x4)"><i class="ds-icon ds-icon--info-solid" aria-hidden="true"></i><div class="ds-callout__body"><p class="ds-callout__desc">입력한 내용은 자동 저장돼요. 나갔다가 와도 이어서 할 수 있어요.</p></div></div>
+    </aside>
+  </div>
+</main>
+
+</body>
+</html>

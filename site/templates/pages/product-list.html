@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>상품 목록 - YBM DS 템플릿</title>
+<link rel="stylesheet" href="../../../dist/ybm-ds.css">
+<script src="../../../dist/ybm-ds.js" defer></script>
+<style>
+  body { word-break: keep-all; overflow-wrap: break-word; }
+  .tp-h1 { font-size: var(--ybm-font-size-t08); line-height: var(--ybm-line-height-t08); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-h3 { font-size: var(--ybm-font-size-t05); line-height: 22px; font-weight: var(--ybm-font-weight-medium); }
+  .tp-sub { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
+  .tp-caption { font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); color: var(--ybm-color-fg-neutral-subtle); }
+  .tp-num { font-variant-numeric: tabular-nums; }
+  .tp-ph { display: grid; place-items: center; height: 100%; color: var(--ybm-color-fg-neutral-subtle); }
+  .tp-logo { display: grid; place-items: center; width: 88px; height: 28px; border-radius: var(--ybm-shape-xs); background: var(--ybm-color-bg-neutral); color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t03-static); line-height: var(--ybm-line-height-t03-static); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-bar { position: sticky; top: 0; z-index: var(--ybm-z-sticky); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); }
+  .tp-topnav-search { flex: 1 1 auto; max-width: 400px; margin-inline: var(--ybm-space-x6); }
+
+  .tp-page { max-width: 1200px; margin-inline: auto; padding: var(--ybm-space-x4) var(--ybm-space-x-global-gutter) calc(var(--ybm-space-x14) + var(--ybm-space-x10) + env(safe-area-inset-bottom, 0px)); }
+  @media (min-width: 768px) { .tp-page { padding: var(--ybm-space-x8) var(--ybm-space-x8) var(--ybm-space-x20); } }
+  .tp-crumbs { display: none; }
+  @media (min-width: 768px) { .tp-crumbs { display: block; margin-bottom: var(--ybm-space-x4); } }
+  .tp-head { display: flex; flex-direction: column; gap: var(--ybm-space-x3); }
+
+  /* 분류 칩 줄 + 정렬 */
+  .tp-toolbar { display: flex; align-items: center; justify-content: space-between; gap: var(--ybm-space-x3); margin-top: var(--ybm-space-x4); }
+  .tp-chips { display: flex; gap: var(--ybm-space-x2); overflow-x: auto; margin-inline: calc(var(--ybm-space-x-global-gutter) * -1); padding-inline: var(--ybm-space-x-global-gutter); scrollbar-width: none; }
+  .tp-chips::-webkit-scrollbar { display: none; }
+  .tp-chips > * { flex: none; }
+  @media (min-width: 768px) { .tp-chips { margin-inline: 0; padding-inline: 0; flex-wrap: wrap; overflow: visible; } }
+
+  /* 1024 이상: 왼쪽 필터 240 + 오른쪽 목록 */
+  .tp-body { margin-top: var(--ybm-space-x5); }
+  @media (min-width: 1024px) { .tp-body { display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: var(--ybm-space-x10); align-items: start; } }
+  .tp-filters { display: none; }
+  @media (min-width: 1024px) { .tp-filters { display: flex; flex-direction: column; gap: var(--ybm-space-x6); position: sticky; top: 88px; } }
+  .tp-filter { display: flex; flex-direction: column; gap: var(--ybm-space-x3); padding-bottom: var(--ybm-space-x6); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); }
+  .tp-filter:last-child { box-shadow: none; }
+  .tp-filter-head { display: flex; align-items: center; justify-content: space-between; }
+  .tp-range { display: flex; justify-content: space-between; }
+  .tp-applied { display: flex; flex-wrap: wrap; gap: var(--ybm-space-x2); }
+
+  .tp-list-head { display: flex; align-items: center; justify-content: space-between; gap: var(--ybm-space-x3); margin-bottom: var(--ybm-space-x4); }
+  .tp-sort { display: flex; align-items: center; gap: var(--ybm-space-x2); }
+  .tp-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--ybm-space-x6) var(--ybm-space-x3); }
+  @media (min-width: 768px) { .tp-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--ybm-space-x8) var(--ybm-space-x4); } }
+  @media (min-width: 1280px) { .tp-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+  .tp-product { position: relative; display: flex; flex-direction: column; gap: var(--ybm-space-x2); color: inherit; text-decoration: none; }
+  .tp-product-texts { display: flex; flex-direction: column; gap: var(--ybm-space-x0_5); }
+  .tp-product-brand { font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-product-name { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; font-size: var(--ybm-font-size-t03); line-height: var(--ybm-line-height-t03); color: var(--ybm-color-fg-neutral-muted); }
+  .tp-product-price { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--ybm-space-x1_5); font-size: var(--ybm-font-size-t05); line-height: var(--ybm-line-height-t05); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-off { color: var(--ybm-color-fg-critical); }
+  .tp-was { color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t02); font-weight: var(--ybm-font-weight-regular); text-decoration: line-through; }
+  .tp-product-meta { display: flex; flex-wrap: wrap; align-items: center; gap: var(--ybm-space-x1_5); }
+  .tp-product-cart { position: absolute; right: var(--ybm-space-x2); top: calc(var(--ybm-space-x2) + 0px); }
+  .tp-product .ds-imageframe { position: relative; }
+  .tp-cart-btn { position: absolute; right: var(--ybm-space-x2); bottom: var(--ybm-space-x2); --ds-btn-radius: var(--ybm-shape-pill); }
+
+  .tp-more { margin-top: var(--ybm-space-x6); }
+  .tp-pager { display: none; }
+  @media (min-width: 768px) { .tp-more { display: none; } .tp-pager { display: flex; justify-content: center; margin-top: var(--ybm-space-x10); } }
+  .tp-bottomnav { position: fixed; inset-inline: 0; bottom: 0; z-index: var(--ybm-z-sticky); }
+</style>
+</head>
+<body>
+
+<header class="ds-appbar u-hide-from-md tp-bar" data-platform="android">
+  <div class="ds-appbar__left"><button type="button" class="ds-appbar__button" aria-label="뒤로"><i class="ds-icon ds-icon--chevron-left" aria-hidden="true"></i></button></div>
+  <div class="ds-appbar__main"><h1 class="ds-appbar__title">아우터</h1></div>
+  <div class="ds-appbar__right">
+    <button type="button" class="ds-appbar__button" aria-label="검색"><i class="ds-icon ds-icon--search" aria-hidden="true"></i></button>
+    <button type="button" class="ds-appbar__button" aria-label="장바구니 2개"><i class="ds-icon ds-icon--shopping-cart" aria-hidden="true"></i></button>
+  </div>
+</header>
+
+<header class="ds-topnav u-show-from-md tp-bar">
+  <div class="ds-topnav__left">
+    <a class="ds-topnav__heading" href="#" aria-label="서비스 이름 홈"><span class="tp-logo">로고</span></a>
+    <nav class="ds-topnav__menu" aria-label="주요 메뉴">
+      <a class="ds-topnav__item" href="#">홈</a>
+      <a class="ds-topnav__item" href="#" aria-current="page">의류</a>
+      <a class="ds-topnav__item" href="#">뷰티</a>
+      <a class="ds-topnav__item" href="#">스포츠</a>
+      <a class="ds-topnav__item" href="#">아울렛</a>
+    </nav>
+  </div>
+  <div class="ds-input tp-topnav-search" data-variant="outline" data-size="medium"><i class="ds-icon ds-icon--search ds-input__icon" aria-hidden="true"></i><input class="ds-input__control" type="search" placeholder="상품, 브랜드 검색" aria-label="검색"></div>
+  <div class="ds-topnav__end">
+    <button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="좋아요"><i class="ds-icon ds-icon--heart" aria-hidden="true"></i></button>
+    <button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="장바구니 2개"><i class="ds-icon ds-icon--shopping-cart" aria-hidden="true"></i></button>
+    <a class="ds-btn" data-variant="neutralWeak" data-size="xsmall" href="#">로그인</a>
+  </div>
+</header>
+
+<main class="tp-page">
+  <nav class="ds-breadcrumbs tp-crumbs" aria-label="현재 위치"><ol><li><a href="#">홈</a></li><li><a href="#">의류</a></li><li><span aria-current="page">아우터</span></li></ol></nav>
+  <div class="tp-head">
+    <h1 class="tp-h1 u-show-from-md">아우터 <span class="tp-sub tp-num">1,284개</span></h1>
+    <div class="tp-chips" role="group" aria-label="하위 분류">
+      <button type="button" class="ds-chip" aria-pressed="true">전체</button><button type="button" class="ds-chip" aria-pressed="false">코트</button><button type="button" class="ds-chip" aria-pressed="false">패딩</button><button type="button" class="ds-chip" aria-pressed="false">자켓</button><button type="button" class="ds-chip" aria-pressed="false">점퍼</button><button type="button" class="ds-chip" aria-pressed="false">가디건</button><button type="button" class="ds-chip" aria-pressed="false">베스트</button>
+    </div>
+  </div>
+
+  <div class="tp-body">
+    <!-- 왼쪽 필터 (1024 이상) -->
+    <aside class="tp-filters" aria-label="필터">
+      <div class="tp-filter">
+        <div class="tp-filter-head"><p class="tp-h3">적용한 필터</p><button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall">모두 지우기</button></div>
+        <div class="tp-applied"><button type="button" class="ds-chip" data-variant="outlineStrong" data-size="small" aria-pressed="true">무료 배송<i class="ds-icon ds-icon--x" aria-hidden="true"></i></button><button type="button" class="ds-chip" data-variant="outlineStrong" data-size="small" aria-pressed="true">5~15만원<i class="ds-icon ds-icon--x" aria-hidden="true"></i></button></div>
+      </div>
+      <div class="tp-filter">
+        <p class="tp-h3">가격</p>
+        <div class="tp-range"><span class="tp-sub tp-num">5만원</span><span class="tp-sub tp-num">15만원</span></div>
+        <input type="range" class="ds-slider" min="0" max="100" value="55" data-tone="brand" aria-label="최대 가격">
+      </div>
+      <div class="tp-filter">
+        <p class="tp-h3">배송</p>
+        <fieldset class="ds-checkbox-group">
+          <label class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control" checked><span class="ds-checkbox__label">무료 배송</span></label>
+          <label class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control"><span class="ds-checkbox__label">내일 도착</span></label>
+        </fieldset>
+      </div>
+      <div class="tp-filter">
+        <p class="tp-h3">브랜드</p>
+        <div class="ds-input" data-variant="outline" data-size="medium"><i class="ds-icon ds-icon--search ds-input__icon" aria-hidden="true"></i><input class="ds-input__control" placeholder="브랜드 찾기" aria-label="브랜드 찾기"></div>
+        <fieldset class="ds-checkbox-group">
+          <label class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control"><span class="ds-checkbox__label">에이 스튜디오 <span class="tp-caption tp-num">(312)</span></span></label>
+          <label class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control"><span class="ds-checkbox__label">비 컬렉션 <span class="tp-caption tp-num">(188)</span></span></label>
+          <label class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control"><span class="ds-checkbox__label">씨 웨어 <span class="tp-caption tp-num">(96)</span></span></label>
+          <label class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control"><span class="ds-checkbox__label">디 라벨 <span class="tp-caption tp-num">(54)</span></span></label>
+        </fieldset>
+        <button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall">브랜드 더보기</button>
+      </div>
+      <div class="tp-filter">
+        <p class="tp-h3">평점</p>
+        <div class="ds-radio-group" role="radiogroup" aria-label="평점">
+          <label class="ds-radio" data-tone="neutral"><input type="radio" class="ds-radio__control" name="rate" checked><span>전체</span></label>
+          <label class="ds-radio" data-tone="neutral"><input type="radio" class="ds-radio__control" name="rate"><span>4점 이상</span></label>
+          <label class="ds-radio" data-tone="neutral"><input type="radio" class="ds-radio__control" name="rate"><span>4.5점 이상</span></label>
+        </div>
+      </div>
+    </aside>
+
+    <!-- 목록 -->
+    <section aria-labelledby="list-title">
+      <div class="tp-list-head">
+        <p class="tp-sub" id="list-title"><span class="tp-num">1,284</span>개 상품</p>
+        <div class="tp-sort">
+          <button type="button" class="ds-chip" data-variant="outlineStrong" aria-pressed="false" data-ds-open="filter-panel"><i class="ds-icon ds-icon--menu" aria-hidden="true"></i>필터 <span class="ds-badge" data-variant="solid" data-tone="brand">2</span></button>
+          <button type="button" class="ds-chip" data-variant="outlineWeak" aria-pressed="false">인기순<i class="ds-icon ds-icon--chevron-down" aria-hidden="true"></i></button>
+        </div>
+      </div>
+
+      <ul class="tp-grid" role="list">
+        <li><a class="tp-product" href="#"><div class="ds-imageframe" data-ratio="4:3" data-stroke><span class="tp-ph"><i class="ds-icon ds-icon--image ds-icon--lg" aria-hidden="true"></i></span><div class="ds-imageframe__floater" data-position="top-start"><span class="ds-badge" data-variant="solid" data-tone="critical">세일</span></div><button type="button" class="ds-btn tp-cart-btn" data-variant="neutralSolid" data-size="small" data-layout="iconOnly" aria-label="장바구니에 담기"><i class="ds-icon ds-icon--shopping-cart" aria-hidden="true"></i></button></div><span class="tp-product-texts"><span class="tp-product-brand">에이 스튜디오</span><span class="tp-product-name">오버핏 울 블렌드 코트</span><span class="tp-product-price"><span class="tp-off">30%</span><span class="tp-num">139,000원</span><span class="tp-was tp-num">199,000원</span></span><span class="tp-product-meta"><span class="ds-rating" data-size="small" style="--ds-rating-value: 4.7" role="img" aria-label="5점 만점에 4.7점, 후기 312개"><span class="ds-rating__stars"></span><span class="ds-rating__value">4.7</span><span class="ds-rating__count">(312)</span></span><span class="ds-badge" data-tone="positive">내일 도착</span></span></span></a></li>
+        <li><a class="tp-product" href="#"><div class="ds-imageframe" data-ratio="4:3" data-stroke><span class="tp-ph"><i class="ds-icon ds-icon--image ds-icon--lg" aria-hidden="true"></i></span><button type="button" class="ds-btn tp-cart-btn" data-variant="neutralSolid" data-size="small" data-layout="iconOnly" aria-label="장바구니에 담기"><i class="ds-icon ds-icon--shopping-cart" aria-hidden="true"></i></button></div><span class="tp-product-texts"><span class="tp-product-brand">비 컬렉션</span><span class="tp-product-name">경량 패딩 자켓</span><span class="tp-product-price"><span class="tp-num">89,000원</span></span><span class="tp-product-meta"><span class="ds-rating" data-size="small" style="--ds-rating-value: 4.5" role="img" aria-label="5점 만점에 4.5점, 후기 128개"><span class="ds-rating__stars"></span><span class="ds-rating__value">4.5</span><span class="ds-rating__count">(128)</span></span><span class="ds-badge">무료 배송</span></span></span></a></li>
+        <li><a class="tp-product" href="#"><div class="ds-imageframe" data-ratio="4:3" data-stroke><span class="tp-ph"><i class="ds-icon ds-icon--image ds-icon--lg" aria-hidden="true"></i></span><div class="ds-imageframe__floater" data-position="top-start"><span class="ds-badge" data-variant="solid" data-tone="brand">NEW</span></div><button type="button" class="ds-btn tp-cart-btn" data-variant="neutralSolid" data-size="small" data-layout="iconOnly" aria-label="장바구니에 담기"><i class="ds-icon ds-icon--shopping-cart" aria-hidden="true"></i></button></div><span class="tp-product-texts"><span class="tp-product-brand">씨 웨어</span><span class="tp-product-name">코듀로이 트러커 자켓</span><span class="tp-product-price"><span class="tp-num">76,000원</span></span><span class="tp-product-meta"><span class="ds-rating" data-size="small" style="--ds-rating-value: 0" role="img" aria-label="아직 후기 없음"><span class="ds-rating__stars"></span><span class="ds-rating__count">첫 후기를 남겨 보세요</span></span></span></span></a></li>
+        <li><a class="tp-product" href="#"><div class="ds-imageframe" data-ratio="4:3" data-stroke><span class="tp-ph"><i class="ds-icon ds-icon--image ds-icon--lg" aria-hidden="true"></i></span><button type="button" class="ds-btn tp-cart-btn" data-variant="neutralSolid" data-size="small" data-layout="iconOnly" aria-label="장바구니에 담기"><i class="ds-icon ds-icon--shopping-cart" aria-hidden="true"></i></button></div><span class="tp-product-texts"><span class="tp-product-brand">디 라벨</span><span class="tp-product-name">후드 집업 베이직</span><span class="tp-product-price"><span class="tp-off">15%</span><span class="tp-num">49,000원</span><span class="tp-was tp-num">58,000원</span></span><span class="tp-product-meta"><span class="ds-rating" data-size="small" style="--ds-rating-value: 4.2" role="img" aria-label="5점 만점에 4.2점, 후기 1,042개"><span class="ds-rating__stars"></span><span class="ds-rating__value">4.2</span><span class="ds-rating__count">(1,042)</span></span><span class="ds-badge" data-tone="positive">내일 도착</span></span></span></a></li>
+        <li><a class="tp-product" href="#"><div class="ds-imageframe" data-ratio="4:3" data-stroke><span class="tp-ph"><i class="ds-icon ds-icon--image ds-icon--lg" aria-hidden="true"></i></span><button type="button" class="ds-btn tp-cart-btn" data-variant="neutralSolid" data-size="small" data-layout="iconOnly" aria-label="장바구니에 담기"><i class="ds-icon ds-icon--shopping-cart" aria-hidden="true"></i></button></div><span class="tp-product-texts"><span class="tp-product-brand">에이 스튜디오</span><span class="tp-product-name">바람막이 자켓</span><span class="tp-product-price"><span class="tp-num">65,000원</span></span><span class="tp-product-meta"><span class="ds-rating" data-size="small" style="--ds-rating-value: 4.8" role="img" aria-label="5점 만점에 4.8점, 후기 76개"><span class="ds-rating__stars"></span><span class="ds-rating__value">4.8</span><span class="ds-rating__count">(76)</span></span><span class="ds-badge">무료 배송</span></span></span></a></li>
+        <li><a class="tp-product" href="#"><div class="ds-imageframe" data-ratio="4:3" data-stroke><span class="tp-ph"><i class="ds-icon ds-icon--image ds-icon--lg" aria-hidden="true"></i></span><div class="ds-imageframe__floater" data-position="top-start"><span class="ds-badge" data-variant="solid">품절 임박</span></div><button type="button" class="ds-btn tp-cart-btn" data-variant="neutralSolid" data-size="small" data-layout="iconOnly" aria-label="장바구니에 담기"><i class="ds-icon ds-icon--shopping-cart" aria-hidden="true"></i></button></div><span class="tp-product-texts"><span class="tp-product-brand">비 컬렉션</span><span class="tp-product-name">양털 플리스 자켓</span><span class="tp-product-price"><span class="tp-num">54,000원</span></span><span class="tp-product-meta"><span class="ds-rating" data-size="small" style="--ds-rating-value: 4.6" role="img" aria-label="5점 만점에 4.6점, 후기 219개"><span class="ds-rating__stars"></span><span class="ds-rating__value">4.6</span><span class="ds-rating__count">(219)</span></span><span class="ds-badge" data-tone="positive">내일 도착</span></span></span></a></li>
+        <li><a class="tp-product" href="#"><div class="ds-imageframe" data-ratio="4:3" data-stroke><span class="tp-ph"><i class="ds-icon ds-icon--image ds-icon--lg" aria-hidden="true"></i></span><button type="button" class="ds-btn tp-cart-btn" data-variant="neutralSolid" data-size="small" data-layout="iconOnly" aria-label="장바구니에 담기"><i class="ds-icon ds-icon--shopping-cart" aria-hidden="true"></i></button></div><span class="tp-product-texts"><span class="tp-product-brand">씨 웨어</span><span class="tp-product-name">싱글 브레스트 울 코트</span><span class="tp-product-price"><span class="tp-num">159,000원</span></span><span class="tp-product-meta"><span class="ds-rating" data-size="small" style="--ds-rating-value: 4.9" role="img" aria-label="5점 만점에 4.9점, 후기 44개"><span class="ds-rating__stars"></span><span class="ds-rating__value">4.9</span><span class="ds-rating__count">(44)</span></span></span></span></a></li>
+        <li><a class="tp-product" href="#"><div class="ds-imageframe" data-ratio="4:3" data-stroke><span class="tp-ph"><i class="ds-icon ds-icon--image ds-icon--lg" aria-hidden="true"></i></span><button type="button" class="ds-btn tp-cart-btn" data-variant="neutralSolid" data-size="small" data-layout="iconOnly" aria-label="장바구니에 담기"><i class="ds-icon ds-icon--shopping-cart" aria-hidden="true"></i></button></div><span class="tp-product-texts"><span class="tp-product-brand">디 라벨</span><span class="tp-product-name">니트 가디건</span><span class="tp-product-price"><span class="tp-off">20%</span><span class="tp-num">39,000원</span><span class="tp-was tp-num">49,000원</span></span><span class="tp-product-meta"><span class="ds-rating" data-size="small" style="--ds-rating-value: 4.3" role="img" aria-label="5점 만점에 4.3점, 후기 530개"><span class="ds-rating__stars"></span><span class="ds-rating__value">4.3</span><span class="ds-rating__count">(530)</span></span><span class="ds-badge">무료 배송</span></span></span></a></li>
+      </ul>
+
+      <div class="tp-more"><button type="button" class="ds-btn" data-variant="neutralWeak" data-width="fill">상품 더보기</button></div>
+      <div class="tp-pager">
+        <nav class="ds-pagination" aria-label="페이지">
+          <a class="ds-pagination__item" data-type="prev" aria-label="이전 페이지" aria-disabled="true"></a>
+          <a class="ds-pagination__item" href="#" aria-current="page">1</a>
+          <a class="ds-pagination__item" href="#">2</a>
+          <a class="ds-pagination__item" href="#">3</a>
+          <a class="ds-pagination__item" href="#">4</a>
+          <span class="ds-pagination__item" data-type="ellipsis" aria-hidden="true"></span>
+          <a class="ds-pagination__item" href="#">54</a>
+          <a class="ds-pagination__item" data-type="next" href="#" aria-label="다음 페이지"></a>
+        </nav>
+      </div>
+    </section>
+  </div>
+</main>
+
+<!-- 모바일, 태블릿 필터 패널 -->
+<dialog class="ds-sidepanel" id="filter-panel" data-size="small" aria-labelledby="filter-title">
+  <div class="ds-sidepanel__header">
+    <div class="ds-sidepanel__texts"><h2 class="ds-sidepanel__title" id="filter-title">필터</h2><p class="ds-sidepanel__desc">1,284개 가운데 고르기</p></div>
+    <button type="button" class="ds-sidepanel__close" data-ds-close aria-label="닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button>
+  </div>
+  <div class="ds-sidepanel__body">
+    <div class="tp-filter"><p class="tp-h3">가격</p><div class="tp-range"><span class="tp-sub tp-num">5만원</span><span class="tp-sub tp-num">15만원</span></div><input type="range" class="ds-slider" min="0" max="100" value="55" data-tone="brand" aria-label="최대 가격"></div>
+    <div class="tp-filter" style="margin-top: var(--ybm-space-x6)"><p class="tp-h3">배송</p><fieldset class="ds-checkbox-group"><label class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control" checked><span class="ds-checkbox__label">무료 배송</span></label><label class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control"><span class="ds-checkbox__label">내일 도착</span></label></fieldset></div>
+    <div class="tp-filter" style="margin-top: var(--ybm-space-x6)"><p class="tp-h3">평점</p><div class="ds-radio-group" role="radiogroup" aria-label="평점"><label class="ds-radio" data-tone="neutral"><input type="radio" class="ds-radio__control" name="rate-m" checked><span>전체</span></label><label class="ds-radio" data-tone="neutral"><input type="radio" class="ds-radio__control" name="rate-m"><span>4점 이상</span></label><label class="ds-radio" data-tone="neutral"><input type="radio" class="ds-radio__control" name="rate-m"><span>4.5점 이상</span></label></div></div>
+  </div>
+  <div class="ds-sidepanel__footer"><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="medium" data-ds-close>초기화</button><button type="button" class="ds-btn" data-variant="neutralSolid" data-size="medium" data-ds-close">1,284개 보기</button></div>
+</dialog>
+
+<nav class="ds-bottomnav u-hide-from-md tp-bottomnav" aria-label="주요 메뉴">
+  <a class="ds-bottomnav__item" href="#"><span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--house ds-icon--lg" aria-hidden="true"></i></span><span class="ds-bottomnav__label">홈</span></a>
+  <a class="ds-bottomnav__item" href="#" aria-current="page"><span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--menu ds-icon--lg" aria-hidden="true"></i></span><span class="ds-bottomnav__label">카테고리</span></a>
+  <a class="ds-bottomnav__item" href="#"><span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--search ds-icon--lg" aria-hidden="true"></i></span><span class="ds-bottomnav__label">검색</span></a>
+  <a class="ds-bottomnav__item" href="#"><span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--heart ds-icon--lg" aria-hidden="true"></i></span><span class="ds-bottomnav__label">좋아요</span></a>
+  <a class="ds-bottomnav__item" href="#"><span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--id-card ds-icon--lg" aria-hidden="true"></i></span><span class="ds-bottomnav__label">마이</span></a>
+</nav>
+
+</body>
+</html>

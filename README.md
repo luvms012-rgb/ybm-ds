@@ -139,7 +139,7 @@ DS 전체가 `@layer ybm.tokens, ybm.base, ybm.icons, ybm.components, ybm.utilit
 | Container | `2479:9` | Accordion, Card, **Select Box** `2495:260` |
 | Content | `2479:10` | Avatar, Empty, Tag Group, **Timer** `2563:889`, **Image Frame** `2567:1928`, **Carousel** `2567:1936` |
 | Data Input | `2479:11` | Checkbox, Date Picker, Field Button, Quantity Picker, Radio Group, Select, Slider, Switch, Text Field, **Time Picker** `2497:979`, **Search Suggestion** `2558:1321`, **File Attach** (Dropzone `2558:1328`, Trigger `2558:1347`, Item `2558:1384`), **Checkbox Group** `2566:1167`, **Multi Select** `2566:1252` |
-| Feedback & Status | `2479:12` | Badge, Banner, Callout, Progress, Skeleton, **Result Section** `2562:741`, **Status Dot** `2562:747` |
+| Feedback & Status | `2479:12` | Badge, Banner, Callout, Progress, Skeleton, **Result Section** `2562:741`, **Status Dot** `2562:747`, **Rating** `2579:318` (문서 `2579:319`, 2026-10-30) |
 | Layout | `2479:13` | Divider, **Scroll Fog** `2567:33`, **Pull To Refresh** `2567:54` |
 | Navigation | `2479:14` | Bottom Navigation, Breadcrumbs, Chip Tabs, Pagination, Side Navigation, Stepper, Tabs, **Table Pagination** `2498:1299`, **Top App Bar** `2557:1638`, **Top Navigation** `2557:1648` |
 | Overlay | `2479:15` | Bottom Sheet, Dialog, Help Bubble, Snackbar, Tooltip, **Popover** `2494:473`, **Menu Sheet** `2563:1501`, **Side Panel** `2567:862` |
@@ -355,6 +355,7 @@ CSS 는 Figma 프로퍼티 이름을 그대로 `data-*` 속성으로 쓴다: `<b
 | 69 | Code Block | `.ds-codeblock` (`__header/language/copy/code`) | `2568:57`, 2 | 고정 폭 글꼴, data-ds-copy 복사, data-wrap 긴 줄 줄바꿈 |
 | 70 | Citation | `.ds-citation` (`__icon/label`) | `2568:65`, 2 | type `number/label` |
 | 71 | Multi Select | `.ds-multiselect` (`__trigger/values/overflow/panel/heading/option/label`) | Trigger `2566:1252`, 6 / Option `2566:1295`, 6 / Panel `2566:1296` | data-ds-popover 로 열기, 고른 값 Badge 와 +N |
+| 72 | Rating | `.ds-rating` (`__stars/value/count`, 입력형 `__option/control/star`) | `2579:318`, 6 | size `small/medium/large`, `--ds-rating-value` 0~5, `data-input` |
 
 목록의 기계용 사본이 `components.json` 이다. 컴포넌트를 추가/변경하면 이 표와 `components.json` 을 함께 고친다(sync 가 Figma/CSS 와 대조).
 

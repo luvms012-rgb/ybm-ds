@@ -5,664 +5,1277 @@
     {
       "no": "01",
       "name": "Action Button",
-      "classes": [ ".ds-btn" ],
+      "classes": [
+        ".ds-btn"
+      ],
       "figma": [
-        { "id": "24:354", "type": "COMPONENT_SET", "variants": 168 }
+        {
+          "id": "24:354",
+          "type": "COMPONENT_SET",
+          "variants": 168
+        }
       ],
       "props": "variant `brandSolid·brandOutline·neutralSolid·neutralWeak·neutralOutline·criticalSolid·ghost` · size `xsmall·small·medium·large` · layout `iconOnly` · width `fill`"
     },
     {
       "no": "02",
       "name": "Text Link",
-      "classes": [ ".ds-link" ],
+      "classes": [
+        ".ds-link"
+      ],
       "figma": [
-        { "id": "2493:324", "type": "COMPONENT_SET", "variants": 2 }
+        {
+          "id": "2493:324",
+          "type": "COMPONENT_SET",
+          "variants": 2
+        }
       ],
       "props": "`--ds-link-color(-hover)` / Figma state `enabled/hover`"
     },
     {
       "no": "03",
       "name": "Field Label",
-      "classes": [ ".ds-field" ],
+      "classes": [
+        ".ds-field"
+      ],
       "figma": [
-        { "id": "109:1367", "type": "COMPONENT_SET", "variants": 2 }
+        {
+          "id": "109:1367",
+          "type": "COMPONENT_SET",
+          "variants": 2
+        }
       ],
       "props": "label-weight `bold`"
     },
     {
       "no": "04",
       "name": "Text Field Input",
-      "classes": [ ".ds-input" ],
+      "classes": [
+        ".ds-input"
+      ],
       "figma": [
-        { "id": "108:1325", "type": "COMPONENT_SET", "variants": 40 }
+        {
+          "id": "108:1325",
+          "type": "COMPONENT_SET",
+          "variants": 40
+        }
       ],
       "props": "variant `outline·underline` · size"
     },
     {
       "no": "05",
       "name": "Text Field Textarea",
-      "classes": [ ".ds-textarea" ],
+      "classes": [
+        ".ds-textarea"
+      ],
       "figma": [
-        { "id": "114:1496", "type": "COMPONENT_SET", "variants": 40 }
+        {
+          "id": "114:1496",
+          "type": "COMPONENT_SET",
+          "variants": 40
+        }
       ],
       "props": "variant · size"
     },
     {
       "no": "06",
       "name": "Field Button",
-      "classes": [ ".ds-fieldbutton" ],
+      "classes": [
+        ".ds-fieldbutton"
+      ],
       "figma": [
-        { "id": "1408:2667", "type": "COMPONENT_SET", "variants": 16 }
+        {
+          "id": "1408:2667",
+          "type": "COMPONENT_SET",
+          "variants": 16
+        }
       ],
       "props": "size `large·medium` · 상태 enabled/disabled/readOnly/invalid"
     },
     {
       "no": "07",
       "name": "Prefix Select",
-      "classes": [ ".ds-prefixselect" ],
+      "classes": [
+        ".ds-prefixselect"
+      ],
       "figma": [
-        { "id": "2096:852", "type": "COMPONENT_SET", "variants": 2 }
+        {
+          "id": "2096:852",
+          "type": "COMPONENT_SET",
+          "variants": 2
+        }
       ],
       "props": "입력 앞 선택(통신사·국가번호)"
     },
     {
       "no": "08",
       "name": "Select Trigger",
-      "classes": [ ".ds-select" ],
+      "classes": [
+        ".ds-select"
+      ],
       "figma": [
-        { "id": "119:1605", "type": "COMPONENT_SET", "variants": 20 }
+        {
+          "id": "119:1605",
+          "type": "COMPONENT_SET",
+          "variants": 20
+        }
       ],
       "props": "size"
     },
     {
       "no": "09",
       "name": "Select Content · Item",
-      "classes": [ ".ds-select-content", ".ds-select-item" ],
+      "classes": [
+        ".ds-select-content",
+        ".ds-select-item"
+      ],
       "figma": [
-        { "part": "Content", "id": "125:1717", "type": "COMPONENT_SET", "variants": 2 },
-        { "part": "Item", "id": "124:1769", "type": "COMPONENT_SET", "variants": 12 }
+        {
+          "part": "Content",
+          "id": "125:1717",
+          "type": "COMPONENT_SET",
+          "variants": 2
+        },
+        {
+          "part": "Item",
+          "id": "124:1769",
+          "type": "COMPONENT_SET",
+          "variants": 12
+        }
       ]
     },
     {
       "no": "10",
       "name": "Checkbox",
-      "classes": [ ".ds-checkbox" ],
+      "classes": [
+        ".ds-checkbox"
+      ],
       "figma": [
-        { "id": "61:995", "type": "COMPONENT_SET", "variants": 40 },
-        { "part": "Mark", "id": "2525:995", "type": "COMPONENT_SET", "variants": 6 }
+        {
+          "id": "61:995",
+          "type": "COMPONENT_SET",
+          "variants": 40
+        },
+        {
+          "part": "Mark",
+          "id": "2525:995",
+          "type": "COMPONENT_SET",
+          "variants": 6
+        }
       ],
       "props": "variant `square·ghost` · tone · size"
     },
     {
       "no": "11",
       "name": "Radio Group",
-      "classes": [ ".ds-radio-group", ".ds-radio" ],
+      "classes": [
+        ".ds-radio-group",
+        ".ds-radio"
+      ],
       "figma": [
-        { "id": "1224:2164", "type": "COMPONENT_SET", "variants": 16 }
+        {
+          "id": "1224:2164",
+          "type": "COMPONENT_SET",
+          "variants": 16
+        }
       ],
       "props": "tone · size"
     },
     {
       "no": "12",
       "name": "Switch",
-      "classes": [ ".ds-switch" ],
+      "classes": [
+        ".ds-switch"
+      ],
       "figma": [
-        { "id": "93:1271", "type": "COMPONENT_SET", "variants": 24 }
+        {
+          "id": "93:1271",
+          "type": "COMPONENT_SET",
+          "variants": 24
+        }
       ],
       "props": "size `16·24·32` · tone"
     },
     {
       "no": "13",
       "name": "Quantity Picker",
-      "classes": [ ".ds-quantity" ],
+      "classes": [
+        ".ds-quantity"
+      ],
       "figma": [
-        { "id": "1184:2146", "type": "COMPONENT_SET", "variants": 18 }
+        {
+          "id": "1184:2146",
+          "type": "COMPONENT_SET",
+          "variants": 18
+        }
       ],
       "props": "size · layout `fill`"
     },
     {
       "no": "15",
       "name": "Chip",
-      "classes": [ ".ds-chip", ".ds-chip-group" ],
+      "classes": [
+        ".ds-chip",
+        ".ds-chip-group"
+      ],
       "figma": [
-        { "id": "69:964", "type": "COMPONENT_SET", "variants": 54 }
+        {
+          "id": "69:964",
+          "type": "COMPONENT_SET",
+          "variants": 54
+        }
       ],
       "props": "variant `solid·outlineStrong·outlineWeak` · size · layout `iconOnly`"
     },
     {
       "no": "16",
       "name": "Chip Tabs",
-      "classes": [ ".ds-chiptabs" ],
+      "classes": [
+        ".ds-chiptabs"
+      ],
       "figma": [
-        { "id": "1407:2596", "type": "COMPONENT_SET", "variants": 4 },
-        { "part": "Trigger", "id": "1407:2522", "type": "COMPONENT_SET", "variants": 16 }
+        {
+          "id": "1407:2596",
+          "type": "COMPONENT_SET",
+          "variants": 4
+        },
+        {
+          "part": "Trigger",
+          "id": "1407:2522",
+          "type": "COMPONENT_SET",
+          "variants": 16
+        }
       ],
       "props": "variant `neutralSolid·neutralOutline` · size `medium·large`"
     },
     {
       "no": "17",
       "name": "Tabs",
-      "classes": [ ".ds-tabs" ],
+      "classes": [
+        ".ds-tabs"
+      ],
       "figma": [
-        { "id": "95:1313", "type": "COMPONENT_SET", "variants": 4 },
-        { "part": "Tab Trigger", "id": "95:1272", "type": "COMPONENT_SET", "variants": 12 }
+        {
+          "id": "95:1313",
+          "type": "COMPONENT_SET",
+          "variants": 4
+        },
+        {
+          "part": "Tab Trigger",
+          "id": "95:1272",
+          "type": "COMPONENT_SET",
+          "variants": 12
+        }
       ],
       "props": "layout `fill·hug` · size"
     },
     {
       "no": "18",
       "name": "Segmented Control",
-      "classes": [ ".ds-segmented" ],
+      "classes": [
+        ".ds-segmented"
+      ],
       "figma": [
-        { "id": "1239:2152", "type": "COMPONENT_SET", "variants": 4 },
-        { "part": "Item", "id": "1239:2123", "type": "COMPONENT_SET", "variants": 6 }
+        {
+          "id": "1239:2152",
+          "type": "COMPONENT_SET",
+          "variants": 4
+        },
+        {
+          "part": "Item",
+          "id": "1239:2123",
+          "type": "COMPONENT_SET",
+          "variants": 6
+        }
       ],
       "props": "layout · size"
     },
     {
       "no": "19",
       "name": "Toggle Button",
-      "classes": [ ".ds-toggle" ],
+      "classes": [
+        ".ds-toggle"
+      ],
       "figma": [
-        { "id": "1244:2164", "type": "COMPONENT_SET", "variants": 6 }
+        {
+          "id": "1244:2164",
+          "type": "COMPONENT_SET",
+          "variants": 6
+        }
       ],
       "props": "size"
     },
     {
       "no": "20",
       "name": "Badge",
-      "classes": [ ".ds-badge" ],
+      "classes": [
+        ".ds-badge"
+      ],
       "figma": [
-        { "id": "17:87", "type": "COMPONENT_SET", "variants": 36 }
+        {
+          "id": "17:87",
+          "type": "COMPONENT_SET",
+          "variants": 36
+        }
       ],
       "props": "variant `weak·solid·outline` · tone `neutral·brand·informative·positive·warning·critical` · size"
     },
     {
       "no": "21",
       "name": "Tag Group",
-      "classes": [ ".ds-tag-group" ],
+      "classes": [
+        ".ds-tag-group"
+      ],
       "figma": [
-        { "id": "1240:2176", "type": "COMPONENT_SET", "variants": 4 },
-        { "part": "Item", "id": "1240:2135", "type": "COMPONENT_SET", "variants": 4 }
+        {
+          "id": "1240:2176",
+          "type": "COMPONENT_SET",
+          "variants": 4
+        },
+        {
+          "part": "Item",
+          "id": "1240:2135",
+          "type": "COMPONENT_SET",
+          "variants": 4
+        }
       ],
       "props": "작성자 · 날짜 · 조회수"
     },
     {
       "no": "22",
       "name": "Avatar",
-      "classes": [ ".ds-avatar", ".ds-avatar-group" ],
+      "classes": [
+        ".ds-avatar",
+        ".ds-avatar-group"
+      ],
       "figma": [
-        { "id": "40:614", "type": "COMPONENT_SET", "variants": 50 },
-        { "part": "Status", "id": "2357:1206", "type": "COMPONENT_SET", "variants": 3 },
-        { "part": "Group", "id": "2359:1781", "type": "COMPONENT_SET", "variants": 21 },
-        { "part": "Group Overflow", "id": "2359:1213", "type": "COMPONENT_SET", "variants": 7 }
+        {
+          "id": "40:614",
+          "type": "COMPONENT_SET",
+          "variants": 50
+        },
+        {
+          "part": "Status",
+          "id": "2357:1206",
+          "type": "COMPONENT_SET",
+          "variants": 3
+        },
+        {
+          "part": "Group",
+          "id": "2359:1781",
+          "type": "COMPONENT_SET",
+          "variants": 21
+        },
+        {
+          "part": "Group Overflow",
+          "id": "2359:1213",
+          "type": "COMPONENT_SET",
+          "variants": 7
+        }
       ],
       "props": "size `20·24·36·42·48·56·64·80·96·108` · shape `circle·rounded·square` · status tone `positive·neutral·critical` · group size `20~64` × shape · `+N`"
     },
     {
       "no": "23",
       "name": "Callout",
-      "classes": [ ".ds-callout" ],
+      "classes": [
+        ".ds-callout"
+      ],
       "figma": [
-        { "id": "1241:2177", "type": "COMPONENT_SET", "variants": 5 }
+        {
+          "id": "1241:2177",
+          "type": "COMPONENT_SET",
+          "variants": 5
+        }
       ],
       "props": "tone `neutral·informative·positive·warning·critical` (magic 은 CSS 만)"
     },
     {
       "no": "24",
       "name": "Snackbar",
-      "classes": [ ".ds-snackbar" ],
+      "classes": [
+        ".ds-snackbar"
+      ],
       "figma": [
-        { "id": "92:1107", "type": "COMPONENT_SET", "variants": 3 }
+        {
+          "id": "92:1107",
+          "type": "COMPONENT_SET",
+          "variants": 3
+        }
       ],
       "props": "variant `default·positive·critical`"
     },
     {
       "no": "25",
       "name": "Help Bubble",
-      "classes": [ ".ds-helpbubble" ],
+      "classes": [
+        ".ds-helpbubble"
+      ],
       "figma": [
-        { "id": "75:1233", "type": "COMPONENT_SET", "variants": 12 }
+        {
+          "id": "75:1233",
+          "type": "COMPONENT_SET",
+          "variants": 12
+        }
       ],
       "props": "`--ds-hb-arrow-offset`"
     },
     {
       "no": "26",
       "name": "Menu · Menu Item",
-      "classes": [ ".ds-menu", ".ds-menu-item" ],
+      "classes": [
+        ".ds-menu",
+        ".ds-menu-item"
+      ],
       "figma": [
-        { "part": "Menu", "id": "1246:2183", "type": "COMPONENT" },
-        { "part": "Item", "id": "1246:2182", "type": "COMPONENT_SET", "variants": 6 }
+        {
+          "part": "Menu",
+          "id": "1246:2183",
+          "type": "COMPONENT"
+        },
+        {
+          "part": "Item",
+          "id": "1246:2182",
+          "type": "COMPONENT_SET",
+          "variants": 6
+        }
       ],
       "props": "tone `critical`"
     },
     {
       "no": "27",
       "name": "Dialog",
-      "classes": [ ".ds-dialog" ],
+      "classes": [
+        ".ds-dialog"
+      ],
       "figma": [
-        { "id": "1493:939", "type": "COMPONENT_SET", "variants": 8 },
-        { "part": "Body Slot", "id": "1528:835", "type": "COMPONENT" }
+        {
+          "id": "1493:939",
+          "type": "COMPONENT_SET",
+          "variants": 8
+        },
+        {
+          "part": "Body Slot",
+          "id": "1528:835",
+          "type": "COMPONENT"
+        }
       ],
       "props": "size(480/800) · `--ds-dialog-width`"
     },
     {
       "no": "28",
       "name": "Alert Dialog",
-      "classes": [ ".ds-alertdialog" ],
+      "classes": [
+        ".ds-alertdialog"
+      ],
       "figma": [
-        { "id": "30:540", "type": "COMPONENT_SET", "variants": 5 }
+        {
+          "id": "30:540",
+          "type": "COMPONENT_SET",
+          "variants": 5
+        }
       ],
       "props": "272 폭 · action `pair·critical·nonpreferred`"
     },
     {
       "no": "29",
       "name": "Bottom Sheet",
-      "classes": [ ".ds-bottomsheet" ],
+      "classes": [
+        ".ds-bottomsheet"
+      ],
       "figma": [
-        { "id": "59:674", "type": "COMPONENT_SET", "variants": 8 }
+        {
+          "id": "59:674",
+          "type": "COMPONENT_SET",
+          "variants": 8
+        }
       ],
       "props": "header-align `center`"
     },
     {
       "no": "30",
       "name": "Accordion",
-      "classes": [ ".ds-accordion" ],
+      "classes": [
+        ".ds-accordion"
+      ],
       "figma": [
-        { "id": "282:1996", "type": "COMPONENT_SET", "variants": 12 }
+        {
+          "id": "282:1996",
+          "type": "COMPONENT_SET",
+          "variants": 12
+        }
       ],
       "props": "variant `separated` · size"
     },
     {
       "no": "31",
       "name": "Skeleton",
-      "classes": [ ".ds-skeleton" ],
+      "classes": [
+        ".ds-skeleton"
+      ],
       "figma": [
-        { "id": "1242:2158", "type": "COMPONENT_SET", "variants": 3 }
+        {
+          "id": "1242:2158",
+          "type": "COMPONENT_SET",
+          "variants": 3
+        }
       ],
       "props": "shape `rect·circle·text`"
     },
     {
       "no": "32",
       "name": "Slider",
-      "classes": [ ".ds-slider" ],
+      "classes": [
+        ".ds-slider"
+      ],
       "figma": [
-        { "id": "1243:2168", "type": "COMPONENT_SET", "variants": 4 }
+        {
+          "id": "1243:2168",
+          "type": "COMPONENT_SET",
+          "variants": 4
+        }
       ],
       "props": "tone"
     },
     {
       "no": "33",
       "name": "Progress",
-      "classes": [ ".ds-progress" ],
+      "classes": [
+        ".ds-progress"
+      ],
       "figma": [
-        { "id": "2163:982", "type": "COMPONENT_SET", "variants": 4 }
+        {
+          "id": "2163:982",
+          "type": "COMPONENT_SET",
+          "variants": 4
+        }
       ],
       "props": "size · tone"
     },
     {
       "no": "34",
       "name": "Progress Circle",
-      "classes": [ ".ds-progress-circle" ],
+      "classes": [
+        ".ds-progress-circle"
+      ],
       "figma": [
-        { "id": "1405:2502", "type": "COMPONENT_SET", "variants": 18 }
+        {
+          "id": "1405:2502",
+          "type": "COMPONENT_SET",
+          "variants": 18
+        }
       ],
       "props": "tone `neutral·brand·staticWhite` · size · type `determinate·indeterminate`"
     },
     {
       "no": "35",
       "name": "Floating Action Button",
-      "classes": [ ".ds-fab" ],
+      "classes": [
+        ".ds-fab"
+      ],
       "figma": [
-        { "id": "1406:2468", "type": "COMPONENT_SET", "variants": 4 }
+        {
+          "id": "1406:2468",
+          "type": "COMPONENT_SET",
+          "variants": 4
+        }
       ],
       "props": "layout `iconOnly`(extended=false)"
     },
     {
       "no": "36",
       "name": "Date Picker · Date Cell",
-      "classes": [ ".ds-datepicker", ".ds-date-cell" ],
+      "classes": [
+        ".ds-datepicker",
+        ".ds-date-cell"
+      ],
       "figma": [
-        { "part": "Date Picker", "id": "1324:2310", "type": "COMPONENT_SET", "variants": 2 },
-        { "part": "Date Cell", "id": "1322:2183", "type": "COMPONENT_SET", "variants": 7 }
+        {
+          "part": "Date Picker",
+          "id": "1324:2310",
+          "type": "COMPONENT_SET",
+          "variants": 2
+        },
+        {
+          "part": "Date Cell",
+          "id": "1322:2183",
+          "type": "COMPONENT_SET",
+          "variants": 7
+        }
       ],
       "props": "cell state `today·selected·range-start·range-middle·range-end`"
     },
     {
       "no": "37",
       "name": "Bottom Navigation",
-      "classes": [ ".ds-bottomnav" ],
+      "classes": [
+        ".ds-bottomnav"
+      ],
       "figma": [
-        { "id": "1348:2383", "type": "COMPONENT_SET", "variants": 3 },
-        { "part": "Item", "id": "1347:2416", "type": "COMPONENT_SET", "variants": 12 }
+        {
+          "id": "1348:2383",
+          "type": "COMPONENT_SET",
+          "variants": 3
+        },
+        {
+          "part": "Item",
+          "id": "1347:2416",
+          "type": "COMPONENT_SET",
+          "variants": 12
+        }
       ],
       "props": "뱃지 `__badge--dot/--count` (bg/critical-solid)"
     },
     {
       "no": "38",
       "name": "Side Navigation",
-      "classes": [ ".ds-sidenav" ],
+      "classes": [
+        ".ds-sidenav"
+      ],
       "figma": [
-        { "id": "1371:2610", "type": "COMPONENT_SET", "variants": 4 },
-        { "part": "Item", "id": "1370:2392", "type": "COMPONENT_SET", "variants": 8 }
+        {
+          "id": "1371:2610",
+          "type": "COMPONENT_SET",
+          "variants": 4
+        },
+        {
+          "part": "Item",
+          "id": "1370:2392",
+          "type": "COMPONENT_SET",
+          "variants": 8
+        }
       ],
       "props": "expanded 240 / collapsed 56"
     },
     {
       "no": "39",
       "name": "Card",
-      "classes": [ ".ds-card" ],
+      "classes": [
+        ".ds-card"
+      ],
       "figma": [
-        { "id": "2164:1063", "type": "COMPONENT_SET", "variants": 4 }
+        {
+          "id": "2164:1063",
+          "type": "COMPONENT_SET",
+          "variants": 4
+        }
       ],
       "props": "variant `elevated` · size"
     },
     {
       "no": "40",
       "name": "Empty",
-      "classes": [ ".ds-empty" ],
+      "classes": [
+        ".ds-empty"
+      ],
       "figma": [
-        { "id": "2164:1092", "type": "COMPONENT_SET", "variants": 2 }
+        {
+          "id": "2164:1092",
+          "type": "COMPONENT_SET",
+          "variants": 2
+        }
       ],
       "props": "size"
     },
     {
       "no": "41",
       "name": "Pagination",
-      "classes": [ ".ds-pagination" ],
+      "classes": [
+        ".ds-pagination"
+      ],
       "figma": [
-        { "id": "2163:1067", "type": "COMPONENT_SET", "variants": 2 },
-        { "part": "Item", "id": "2163:1028", "type": "COMPONENT_SET", "variants": 16 }
+        {
+          "id": "2163:1067",
+          "type": "COMPONENT_SET",
+          "variants": 2
+        },
+        {
+          "part": "Item",
+          "id": "2163:1028",
+          "type": "COMPONENT_SET",
+          "variants": 16
+        }
       ],
       "props": "type `first·prev·next·last·ellipsis·simple`"
     },
     {
       "no": "42",
       "name": "Table",
-      "classes": [ ".ds-table", ".ds-table-wrap" ],
+      "classes": [
+        ".ds-table",
+        ".ds-table-wrap"
+      ],
       "figma": [
-        { "id": "2164:1271", "type": "COMPONENT_SET", "variants": 2 },
-        { "part": "Row", "id": "2164:1178", "type": "COMPONENT_SET", "variants": 8 },
-        { "part": "Cell", "id": "2164:1105", "type": "COMPONENT_SET", "variants": 6 }
+        {
+          "id": "2164:1271",
+          "type": "COMPONENT_SET",
+          "variants": 2
+        },
+        {
+          "part": "Row",
+          "id": "2164:1178",
+          "type": "COMPONENT_SET",
+          "variants": 8
+        },
+        {
+          "part": "Cell",
+          "id": "2164:1105",
+          "type": "COMPONENT_SET",
+          "variants": 6
+        }
       ],
       "props": "density `compact` · align"
     },
     {
       "no": "43",
       "name": "Divider",
-      "classes": [ ".ds-divider" ],
+      "classes": [
+        ".ds-divider"
+      ],
       "figma": [
-        { "id": "2347:1152", "type": "COMPONENT_SET", "variants": 4 }
+        {
+          "id": "2347:1152",
+          "type": "COMPONENT_SET",
+          "variants": 4
+        }
       ],
       "props": "weight thick · orientation vertical · inset · label"
     },
     {
       "no": "44",
       "name": "Tooltip",
-      "classes": [ ".ds-tooltip", ".ds-tooltip-anchor" ],
+      "classes": [
+        ".ds-tooltip",
+        ".ds-tooltip-anchor"
+      ],
       "figma": [
-        { "id": "2348:1145", "type": "COMPONENT" }
+        {
+          "id": "2348:1145",
+          "type": "COMPONENT"
+        }
       ],
       "props": "placement top·bottom·left·right · hover/focus 전용"
     },
     {
       "no": "45",
       "name": "List · List Item",
-      "classes": [ ".ds-list", ".ds-list-item" ],
+      "classes": [
+        ".ds-list",
+        ".ds-list-item"
+      ],
       "figma": [
-        { "part": "Item", "id": "2350:1207", "type": "COMPONENT_SET", "variants": 4 }
+        {
+          "part": "Item",
+          "id": "2350:1207",
+          "type": "COMPONENT_SET",
+          "variants": 4
+        }
       ],
       "props": "variant inset · divider · size small · prefix/suffix/chevron"
     },
     {
       "no": "46",
       "name": "Breadcrumbs",
-      "classes": [ ".ds-breadcrumbs" ],
+      "classes": [
+        ".ds-breadcrumbs"
+      ],
       "figma": [
-        { "id": "2348:1149", "type": "COMPONENT" }
+        {
+          "id": "2348:1149",
+          "type": "COMPONENT"
+        }
       ],
       "props": "현재 항목 aria-current=page"
     },
     {
       "no": "47",
       "name": "Stepper",
-      "classes": [ ".ds-stepper" ],
+      "classes": [
+        ".ds-stepper"
+      ],
       "figma": [
-        { "id": "2351:1211", "type": "COMPONENT" },
-        { "part": "Step", "id": "2351:1210", "type": "COMPONENT_SET", "variants": 6 }
+        {
+          "id": "2351:1211",
+          "type": "COMPONENT"
+        },
+        {
+          "part": "Step",
+          "id": "2351:1210",
+          "type": "COMPONENT_SET",
+          "variants": 6
+        }
       ],
       "props": "state complete·current·upcoming · orientation vertical"
     },
     {
       "no": "48",
       "name": "Banner",
-      "classes": [ ".ds-banner" ],
+      "classes": [
+        ".ds-banner"
+      ],
       "figma": [
-        { "id": "2349:1217", "type": "COMPONENT_SET", "variants": 10 }
+        {
+          "id": "2349:1217",
+          "type": "COMPONENT_SET",
+          "variants": 10
+        }
       ],
       "props": "tone neutral·informative·positive·warning·critical · variant solid"
     },
     {
       "no": "49",
       "name": "Select Box",
-      "classes": [ ".ds-selectbox", ".ds-selectbox-group" ],
+      "classes": [
+        ".ds-selectbox",
+        ".ds-selectbox-group"
+      ],
       "figma": [
-        { "id": "2495:260", "type": "COMPONENT_SET", "variants": 12 }
+        {
+          "id": "2495:260",
+          "type": "COMPONENT_SET",
+          "variants": 12
+        }
       ],
       "props": "type `check/radio`, state `unchecked/checked/disabled`, layout `horizontal/vertical`"
     },
     {
       "no": "50",
       "name": "Time Picker",
-      "classes": [ ".ds-timepicker" ],
+      "classes": [
+        ".ds-timepicker"
+      ],
       "figma": [
-        { "id": "2497:979", "type": "COMPONENT_SET", "variants": 2 }
+        {
+          "id": "2497:979",
+          "type": "COMPONENT_SET",
+          "variants": 2
+        }
       ],
       "props": "state `enabled/disabled`, 12시간제, 분 간격 5"
     },
     {
       "no": "51",
       "name": "Table Pagination",
-      "classes": [ ".ds-tablepagination" ],
+      "classes": [
+        ".ds-tablepagination"
+      ],
       "figma": [
-        { "id": "2498:1299", "type": "COMPONENT_SET", "variants": 3 }
+        {
+          "id": "2498:1299",
+          "type": "COMPONENT_SET",
+          "variants": 3
+        }
       ],
       "props": "state `default/unknownTotal/empty`, 최소 폭 640"
     },
     {
       "no": "52",
       "name": "Popover",
-      "classes": [ ".ds-popover", ".ds-popover-anchor" ],
+      "classes": [
+        ".ds-popover",
+        ".ds-popover-anchor"
+      ],
       "figma": [
-        { "id": "2494:473", "type": "COMPONENT_SET", "variants": 3 }
+        {
+          "id": "2494:473",
+          "type": "COMPONENT_SET",
+          "variants": 3
+        }
       ],
       "props": "actions `single/pair/none`, 폭 320"
     },
     {
       "no": "53",
       "name": "Chat",
-      "classes": [ ".ds-chat-bubble", ".ds-chat-meta", ".ds-chat-system", ".ds-chat-send", ".ds-chat-composer" ],
+      "classes": [
+        ".ds-chat-bubble",
+        ".ds-chat-meta",
+        ".ds-chat-system",
+        ".ds-chat-send",
+        ".ds-chat-composer"
+      ],
       "figma": [
-        { "part": "Message Bubble", "id": "2499:6", "type": "COMPONENT_SET", "variants": 2 },
-        { "part": "Message Metadata", "id": "2499:18", "type": "COMPONENT_SET", "variants": 4 },
-        { "part": "System Message", "id": "2499:25", "type": "COMPONENT_SET", "variants": 2 },
-        { "part": "Send Button", "id": "2499:35", "type": "COMPONENT_SET", "variants": 3 },
-        { "part": "Composer", "id": "2499:54", "type": "COMPONENT_SET", "variants": 2 }
+        {
+          "part": "Message Bubble",
+          "id": "2499:6",
+          "type": "COMPONENT_SET",
+          "variants": 2
+        },
+        {
+          "part": "Message Metadata",
+          "id": "2499:18",
+          "type": "COMPONENT_SET",
+          "variants": 4
+        },
+        {
+          "part": "System Message",
+          "id": "2499:25",
+          "type": "COMPONENT_SET",
+          "variants": 2
+        },
+        {
+          "part": "Send Button",
+          "id": "2499:35",
+          "type": "COMPONENT_SET",
+          "variants": 3
+        },
+        {
+          "part": "Composer",
+          "id": "2499:54",
+          "type": "COMPONENT_SET",
+          "variants": 2
+        }
       ],
       "props": "sender `assistant/user`, status `sending/sent/read/error`, 보내기 `send/stop/disabled`"
     },
     {
       "no": "54",
       "name": "Top App Bar",
-      "classes": [ ".ds-appbar" ],
+      "classes": [
+        ".ds-appbar"
+      ],
       "figma": [
-        { "id": "2557:1638", "type": "COMPONENT_SET", "variants": 8 },
-        { "part": "Button", "id": "2557:1501", "type": "COMPONENT_SET", "variants": 6 }
+        {
+          "id": "2557:1638",
+          "type": "COMPONENT_SET",
+          "variants": 8
+        },
+        {
+          "part": "Button",
+          "id": "2557:1501",
+          "type": "COMPONENT_SET",
+          "variants": 6
+        }
       ],
       "props": "theme `ios/android`(CSS data-platform), tone `layer/transparent` + gradient, titleLayout `titleOnly/withSubtitle`"
     },
     {
       "no": "55",
       "name": "Top Navigation",
-      "classes": [ ".ds-topnav" ],
+      "classes": [
+        ".ds-topnav"
+      ],
       "figma": [
-        { "id": "2557:1648", "type": "COMPONENT" },
-        { "part": "Item", "id": "2557:1647", "type": "COMPONENT_SET", "variants": 4 }
+        {
+          "id": "2557:1648",
+          "type": "COMPONENT"
+        },
+        {
+          "part": "Item",
+          "id": "2557:1647",
+          "type": "COMPONENT_SET",
+          "variants": 4
+        }
       ],
       "props": "search, action / Item selected, state `enabled/hover`"
     },
     {
       "no": "56",
       "name": "Search Suggestion",
-      "classes": [ ".ds-search-anchor", ".ds-search-suggest" ],
+      "classes": [
+        ".ds-search-anchor",
+        ".ds-search-suggest"
+      ],
       "figma": [
-        { "id": "2558:1321", "type": "COMPONENT_SET", "variants": 3 },
-        { "part": "Item", "id": "2558:1268", "type": "COMPONENT_SET", "variants": 2 }
+        {
+          "id": "2558:1321",
+          "type": "COMPONENT_SET",
+          "variants": 3
+        },
+        {
+          "part": "Item",
+          "id": "2558:1268",
+          "type": "COMPONENT_SET",
+          "variants": 2
+        }
       ],
       "props": "content `suggestion/recent/empty` / Item state `enabled/highlighted`, description"
     },
     {
       "no": "57",
       "name": "File Attach",
-      "classes": [ ".ds-fileattach", ".ds-fileitem" ],
+      "classes": [
+        ".ds-fileattach",
+        ".ds-fileitem"
+      ],
       "figma": [
-        { "part": "Dropzone", "id": "2558:1328", "type": "COMPONENT_SET", "variants": 3 },
-        { "part": "Trigger", "id": "2558:1347", "type": "COMPONENT_SET", "variants": 3 },
-        { "part": "Item", "id": "2558:1384", "type": "COMPONENT_SET", "variants": 4 }
+        {
+          "part": "Dropzone",
+          "id": "2558:1328",
+          "type": "COMPONENT_SET",
+          "variants": 3
+        },
+        {
+          "part": "Trigger",
+          "id": "2558:1347",
+          "type": "COMPONENT_SET",
+          "variants": 3
+        },
+        {
+          "part": "Item",
+          "id": "2558:1384",
+          "type": "COMPONENT_SET",
+          "variants": 4
+        }
       ],
       "props": "Dropzone state `enabled/dragOver/disabled` / Trigger state / Item type `file/image`, state `enabled/readonly`, badge"
     },
     {
       "no": "58",
       "name": "Menu Sheet",
-      "classes": [ ".ds-menusheet" ],
+      "classes": [
+        ".ds-menusheet"
+      ],
       "figma": [
-        { "id": "2563:1501", "type": "COMPONENT" },
-        { "part": "Item", "id": "2563:1495", "type": "COMPONENT_SET", "variants": 8 },
-        { "part": "Close Button", "id": "2563:1500", "type": "COMPONENT_SET", "variants": 2 }
+        {
+          "id": "2563:1501",
+          "type": "COMPONENT"
+        },
+        {
+          "part": "Item",
+          "id": "2563:1495",
+          "type": "COMPONENT_SET",
+          "variants": 8
+        },
+        {
+          "part": "Close Button",
+          "id": "2563:1500",
+          "type": "COMPONENT_SET",
+          "variants": 2
+        }
       ],
       "props": "header, description, footer / Item tone `neutral/critical`, labelAlign `left/center`"
     },
     {
       "no": "59",
       "name": "Result Section",
-      "classes": [ ".ds-result" ],
+      "classes": [
+        ".ds-result"
+      ],
       "figma": [
-        { "id": "2562:741", "type": "COMPONENT_SET", "variants": 2 }
+        {
+          "id": "2562:741",
+          "type": "COMPONENT_SET",
+          "variants": 2
+        }
       ],
       "props": "size `large/medium`, asset, description, primary/secondary action"
     },
     {
       "no": "60",
       "name": "Timer",
-      "classes": [ ".ds-timer" ],
+      "classes": [
+        ".ds-timer"
+      ],
       "figma": [
-        { "id": "2563:889", "type": "COMPONENT_SET", "variants": 2 }
+        {
+          "id": "2563:889",
+          "type": "COMPONENT_SET",
+          "variants": 2
+        }
       ],
       "props": "format `clock/elapsed`, data-start / data-end"
     },
     {
       "no": "61",
       "name": "Status Dot",
-      "classes": [ ".ds-statusdot" ],
+      "classes": [
+        ".ds-statusdot"
+      ],
       "figma": [
-        { "id": "2562:747", "type": "COMPONENT_SET", "variants": 5 }
+        {
+          "id": "2562:747",
+          "type": "COMPONENT_SET",
+          "variants": 5
+        }
       ],
       "props": "tone `positive/warning/critical/brand/neutral`, data-pulse"
     },
     {
       "no": "62",
       "name": "Checkbox Group",
-      "classes": [ ".ds-checkbox-group" ],
+      "classes": [
+        ".ds-checkbox-group"
+      ],
       "figma": [
-        { "id": "2566:1167", "type": "COMPONENT" }
+        {
+          "id": "2566:1167",
+          "type": "COMPONENT"
+        }
       ],
       "props": "세로 간격 x1, 묶음 이름은 Field Label"
     },
     {
       "no": "63",
       "name": "Scroll Fog",
-      "classes": [ ".ds-scrollfog" ],
+      "classes": [
+        ".ds-scrollfog"
+      ],
       "figma": [
-        { "id": "2567:33", "type": "COMPONENT_SET", "variants": 2 }
+        {
+          "id": "2567:33",
+          "type": "COMPONENT_SET",
+          "variants": 2
+        }
       ],
       "props": "direction `vertical/horizontal`, 끝 20"
     },
     {
       "no": "64",
       "name": "Pull To Refresh",
-      "classes": [ ".ds-ptr" ],
+      "classes": [
+        ".ds-ptr"
+      ],
       "figma": [
-        { "id": "2567:54", "type": "COMPONENT_SET", "variants": 2 }
+        {
+          "id": "2567:54",
+          "type": "COMPONENT_SET",
+          "variants": 2
+        }
       ],
       "props": "state `pulling/refreshing`, Progress Circle 24"
     },
     {
       "no": "65",
       "name": "Side Panel",
-      "classes": [ ".ds-sidepanel" ],
+      "classes": [
+        ".ds-sidepanel"
+      ],
       "figma": [
-        { "id": "2567:862", "type": "COMPONENT_SET", "variants": 3 },
-        { "part": "Close Button", "id": "2567:782", "type": "COMPONENT_SET", "variants": 2 }
+        {
+          "id": "2567:862",
+          "type": "COMPONENT_SET",
+          "variants": 3
+        },
+        {
+          "part": "Close Button",
+          "id": "2567:782",
+          "type": "COMPONENT_SET",
+          "variants": 2
+        }
       ],
       "props": "size `small/medium/large`, direction `right/left`"
     },
     {
       "no": "66",
       "name": "Image Frame",
-      "classes": [ ".ds-imageframe" ],
+      "classes": [
+        ".ds-imageframe"
+      ],
       "figma": [
-        { "id": "2567:1928", "type": "COMPONENT_SET", "variants": 3 }
+        {
+          "id": "2567:1928",
+          "type": "COMPONENT_SET",
+          "variants": 3
+        }
       ],
       "props": "ratio `1:1/4:3/16:9`, stroke, indicator"
     },
     {
       "no": "67",
       "name": "Carousel",
-      "classes": [ ".ds-carousel" ],
+      "classes": [
+        ".ds-carousel"
+      ],
       "figma": [
-        { "id": "2567:1936", "type": "COMPONENT" },
-        { "part": "Button", "id": "2567:1935", "type": "COMPONENT_SET", "variants": 2 }
+        {
+          "id": "2567:1936",
+          "type": "COMPONENT"
+        },
+        {
+          "part": "Button",
+          "id": "2567:1935",
+          "type": "COMPONENT_SET",
+          "variants": 2
+        }
       ],
       "props": "항목 사이 x2, 끝 흐림 x1, 버튼 32"
     },
     {
       "no": "68",
       "name": "Markdown",
-      "classes": [ ".ds-markdown" ],
+      "classes": [
+        ".ds-markdown"
+      ],
       "figma": [
-        { "id": "2568:66", "type": "COMPONENT" }
+        {
+          "id": "2568:66",
+          "type": "COMPONENT"
+        }
       ],
       "props": "본문 t04, 제목과 블록 간격"
     },
     {
       "no": "69",
       "name": "Code Block",
-      "classes": [ ".ds-codeblock" ],
+      "classes": [
+        ".ds-codeblock"
+      ],
       "figma": [
-        { "id": "2568:57", "type": "COMPONENT_SET", "variants": 2 }
+        {
+          "id": "2568:57",
+          "type": "COMPONENT_SET",
+          "variants": 2
+        }
       ],
       "props": "header `true/false`, 복사 버튼"
     },
     {
       "no": "70",
       "name": "Citation",
-      "classes": [ ".ds-citation" ],
+      "classes": [
+        ".ds-citation"
+      ],
       "figma": [
-        { "id": "2568:65", "type": "COMPONENT_SET", "variants": 2 }
+        {
+          "id": "2568:65",
+          "type": "COMPONENT_SET",
+          "variants": 2
+        }
       ],
       "props": "type `number/label`, icon"
     },
     {
       "no": "71",
       "name": "Multi Select",
-      "classes": [ ".ds-multiselect" ],
+      "classes": [
+        ".ds-multiselect"
+      ],
       "figma": [
-        { "part": "Trigger", "id": "2566:1252", "type": "COMPONENT_SET", "variants": 6 },
-        { "part": "Option", "id": "2566:1295", "type": "COMPONENT_SET", "variants": 6 },
-        { "part": "Panel", "id": "2566:1296", "type": "COMPONENT" }
+        {
+          "part": "Trigger",
+          "id": "2566:1252",
+          "type": "COMPONENT_SET",
+          "variants": 6
+        },
+        {
+          "part": "Option",
+          "id": "2566:1295",
+          "type": "COMPONENT_SET",
+          "variants": 6
+        },
+        {
+          "part": "Panel",
+          "id": "2566:1296",
+          "type": "COMPONENT"
+        }
       ],
       "props": "Trigger content `placeholder/selected`, state `enabled/open/disabled`"
+    },
+    {
+      "no": "72",
+      "name": "Rating",
+      "classes": [
+        ".ds-rating"
+      ],
+      "figma": [
+        {
+          "id": "2579:318",
+          "type": "COMPONENT_SET",
+          "variants": 6
+        }
+      ],
+      "props": "size `small·medium·large` · value `--ds-rating-value` 0~5 · input (radio 5개)"
     }
   ]
 }

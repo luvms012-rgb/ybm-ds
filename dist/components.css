@@ -87,6 +87,7 @@
      69 Code Block           .ds-codeblock
      70 Citation             .ds-citation
      71 Multi Select         .ds-multiselect
+     72 Rating               .ds-rating
    ========================================================================== */
 
 
@@ -4059,3 +4060,52 @@ a.ds-citation[data-type="number"]:hover { background: var(--ybm-color-bg-brand-w
 .ds-multiselect__option:has(:disabled) { color: var(--ybm-color-fg-disabled); cursor: default; }
 .ds-multiselect__option .ds-checkbox { min-height: 0; }
 .ds-multiselect__label { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* --------------------------------------------------------------------------
+   72 Rating - 별 다섯 개로 평점을 보여 주거나 고르는 부품 (2026-10-30 추가)
+   보기:  <span class="ds-rating" style="--ds-rating-value: 4.5" role="img" aria-label="5점 만점에 4.5점"><span class="ds-rating__stars"></span><span class="ds-rating__value">4.5</span><span class="ds-rating__count">(312)</span></span>
+   입력:  <fieldset class="ds-rating" data-input aria-label="별점"> 안에 <label class="ds-rating__option"><input type="radio" class="ds-rating__control" name="r" value="1"><span class="ds-rating__star"></span></label> 5개
+   size: small 12 / medium 16 (기본) / large 20  ·  값: --ds-rating-value 0~5 (소수 가능)  ·  색: --ds-rating-fill, --ds-rating-empty
+   -------------------------------------------------------------------------- */
+.ds-rating {
+  --ds-rating-size: 16px;
+  --ds-rating-gap: 2px;
+  --ds-rating-value: 0;
+  --ds-rating-fill: var(--ybm-color-fg-warning);
+  --ds-rating-empty: var(--ybm-color-stroke-neutral-muted);
+  display: inline-flex; align-items: center; gap: var(--ybm-space-x1);
+  margin: 0; padding: 0; border: 0; min-width: 0;
+  color: var(--ybm-color-fg-neutral); font-size: var(--ybm-font-size-t03); line-height: var(--ybm-line-height-t03);
+}
+.ds-rating[data-size="small"] { --ds-rating-size: 12px; --ds-rating-gap: 1px; font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); }
+.ds-rating[data-size="large"] { --ds-rating-size: 20px; --ds-rating-gap: 3px; font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); }
+.ds-rating__stars {
+  position: relative; display: block; flex: none;
+  width: calc(var(--ds-rating-size) * 5 + var(--ds-rating-gap) * 4); height: var(--ds-rating-size);
+  background: var(--ds-rating-empty);
+  -webkit-mask: var(--ds-icon-star-solid) 0 0 / var(--ds-rating-size) var(--ds-rating-size) space;
+          mask: var(--ds-icon-star-solid) 0 0 / var(--ds-rating-size) var(--ds-rating-size) space;
+}
+.ds-rating__stars::before {
+  content: ""; position: absolute; inset: 0; background: var(--ds-rating-fill);
+  clip-path: inset(0 calc(100% - var(--ds-rating-value) / 5 * 100%) 0 0);
+}
+.ds-rating__value { font-weight: var(--ybm-font-weight-semibold); font-variant-numeric: tabular-nums; }
+.ds-rating__count { color: var(--ybm-color-fg-neutral-muted); font-variant-numeric: tabular-nums; }
+/* 입력형: 라디오 5개. 고른 별까지 채우고, 올리면 그 별까지 미리 채운다 */
+.ds-rating[data-input] { gap: var(--ds-rating-gap); }
+.ds-rating__option { position: relative; display: block; width: var(--ds-rating-size); height: var(--ds-rating-size); cursor: pointer; }
+.ds-rating__control { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+.ds-rating__star {
+  display: block; width: 100%; height: 100%; background: var(--ds-rating-empty);
+  -webkit-mask: var(--ds-icon-star-solid) center / contain no-repeat; mask: var(--ds-icon-star-solid) center / contain no-repeat;
+  transition: background-color var(--ybm-duration-fast) var(--ybm-easing-standard), scale var(--ybm-duration-fast) var(--ybm-easing-standard);
+}
+.ds-rating__option:has(:checked) .ds-rating__star,
+.ds-rating__option:has(~ .ds-rating__option :checked) .ds-rating__star { background: var(--ds-rating-fill); }
+.ds-rating[data-input]:hover .ds-rating__option .ds-rating__star { background: var(--ds-rating-empty); }
+.ds-rating[data-input] .ds-rating__option:hover .ds-rating__star,
+.ds-rating[data-input] .ds-rating__option:has(~ .ds-rating__option:hover) .ds-rating__star { background: var(--ds-rating-fill); }
+.ds-rating__option:hover .ds-rating__star { scale: 1.1; }
+.ds-rating__option:has(:focus-visible) .ds-rating__star { outline: 2px solid var(--ybm-color-stroke-focus-ring); outline-offset: 2px; border-radius: var(--ybm-shape-2xs); }
+.ds-rating[data-input]:is(:disabled, [aria-disabled="true"]) { opacity: .4; pointer-events: none; }

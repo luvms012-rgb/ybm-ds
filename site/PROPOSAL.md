@@ -113,14 +113,14 @@ import '@ybm/ds/dist/ybm-ds.js';
 
 ## 6. 템플릿을 만들며 발견한 것 (2026-10-30 집)
 
-### 6-1. DS 에 없어서 임시로 대신한 것 ★
+### 6-1. DS 에 없어서 임시로 대신한 것 ★ → 2026-10-30 밤에 둘 다 추가함 (72 Rating, 아이콘 heart/bookmark/shopping-cart/map-pin/star + -solid). 아래 표는 기록용.
 | 필요한 것 | 지금 대신한 방법 | 제안 |
 |---|---|---|
 | 평점(Rating) | 반짝임 아이콘 + 숫자(4.8) + 후기 수 글자 | `Rating` 부품: 별 5개 채움 비율, 크기 small/medium, 읽기 전용과 입력. 가게 목록, 상품 카드, 후기에 모두 필요 |
 | 아이콘 5개 | 좋아요 = thumbs-up, 저장 = inbox, 장바구니 = credit-card, 지도 = globe, 별 = sparkles | Lucide 에서 `heart`, `bookmark`, `shopping-cart`, `map-pin`, `star`(채움 포함) 추가. 아이콘 페이지에서 바로 복사해 icons.css 에 넣으면 된다 |
 | 별점 입력 | 없음 | Rating 입력형으로 해결 |
 
-### 6-2. 국내 이커머스 메인 4곳 검토 결과
+### 6-2. 국내 이커머스 메인 4곳 검토 결과 → 2026-10-30 밤에 Commerce Home 에 모두 반영함(카테고리 서랍, 평점, 배송 배지, 담기, 타임 세일 Timer, 분류별 랭킹 탭, 쿠폰 Dialog). 왼쪽 카테고리 사이드 메뉴(PC)만 안 함.
 공통으로 있는 요소를 우리 Commerce Home 과 비교했다. 사이트 이름은 적지 않는다.
 
 | 요소 | 4곳 공통 여부 | 우리 Commerce Home | 제안 |
@@ -138,7 +138,7 @@ import '@ybm/ds/dist/ybm-ds.js';
 | 섹션 제목 + 전체 보기 | 4/4 | 있음 | 유지 |
 | 왼쪽 카테고리 사이드 메뉴(PC) | 2/4 | 없음 | 선택. 넓은 화면에서 Side Navigation |
 
-### 6-3. 새 템플릿 후보 (이커머스 흐름을 끝까지)
+### 6-3. 새 템플릿 후보 (이커머스 흐름을 끝까지) → 1~5 는 2026-10-30 밤에 만듦(Product List, Product Detail, Cart, Checkout, Order Complete). 6 Event Page 만 남음.
 | 순위 | 템플릿 | 내용 | 부품 |
 |---|---|---|---|
 | 1 | Product List | 분류 상세 목록. 왼쪽 필터(가격, 브랜드, 배송), 위 정렬 칩, 3~4열 카드, 더보기 | Checkbox Group, Slider, Chip, Pagination |

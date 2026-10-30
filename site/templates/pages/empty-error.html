@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>빈 화면과 오류 - YBM DS 템플릿</title>
+<link rel="stylesheet" href="../../../dist/ybm-ds.css">
+<script src="../../../dist/ybm-ds.js" defer></script>
+<style>
+  body { word-break: keep-all; overflow-wrap: break-word; }
+  .tp-h3 { font-size: var(--ybm-font-size-t05); line-height: 22px; font-weight: var(--ybm-font-weight-medium); }
+  .tp-sub { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
+  .tp-caption { font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); color: var(--ybm-color-fg-neutral-subtle); }
+  .tp-logo { display: grid; place-items: center; width: 88px; height: 28px; border-radius: var(--ybm-shape-xs); background: var(--ybm-color-bg-neutral); color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t03-static); line-height: var(--ybm-line-height-t03-static); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-bar { position: sticky; top: 0; z-index: var(--ybm-z-sticky); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); }
+
+  /* 화면 틀: 메인 상태(404)를 화면 가운데 크게, 그 아래 다른 상태 예시 */
+  .tp-page { max-width: 1200px; margin-inline: auto; padding: 0 var(--ybm-space-x-global-gutter) calc(var(--ybm-space-x14) + var(--ybm-space-x10) + env(safe-area-inset-bottom, 0px)); }
+  @media (min-width: 768px) { .tp-page { padding: 0 var(--ybm-space-x8) var(--ybm-space-x20); } }
+  .tp-main { display: flex; align-items: center; justify-content: center; min-height: calc(100vh - 56px - var(--ybm-space-x14)); min-height: calc(100dvh - 56px - var(--ybm-space-x14)); }
+  @media (min-width: 768px) { .tp-main { min-height: calc(100vh - 64px); min-height: calc(100dvh - 64px); } }
+  .tp-main .ds-result { max-width: 480px; }
+  .tp-code { color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t04); font-weight: var(--ybm-font-weight-semibold); letter-spacing: 0; }
+
+  /* 다른 상태 예시: 1열, 768 이상 2열, 1280 이상 3열 */
+  .tp-states { margin-top: var(--ybm-space-x10); }
+  .tp-states-head { display: flex; flex-direction: column; gap: var(--ybm-space-x1); margin-bottom: var(--ybm-space-x4); }
+  .tp-grid { display: grid; grid-template-columns: 1fr; gap: var(--ybm-space-x4); }
+  @media (min-width: 768px) { .tp-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (min-width: 1280px) { .tp-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  .tp-state { display: flex; flex-direction: column; min-height: 320px; overflow: hidden; border-radius: var(--ybm-shape-xl); box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-neutral-weak); }
+  .tp-state-bar { display: flex; align-items: center; justify-content: space-between; gap: var(--ybm-space-x2); padding: var(--ybm-space-x3) var(--ybm-space-x4); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); }
+  .tp-state-body { display: flex; flex: 1 1 auto; flex-direction: column; align-items: center; justify-content: center; padding: var(--ybm-space-x6); }
+  .tp-state-body .ds-empty { max-width: 320px; }
+  .tp-skeleton { display: flex; flex-direction: column; gap: var(--ybm-space-x3); width: 100%; }
+  .tp-skeleton-row { display: flex; align-items: center; gap: var(--ybm-space-x3); }
+  .tp-skeleton-texts { display: flex; flex: 1 1 auto; flex-direction: column; gap: var(--ybm-space-x2); }
+  .tp-bottomnav { position: fixed; inset-inline: 0; bottom: 0; z-index: var(--ybm-z-sticky); }
+</style>
+</head>
+<body>
+
+<header class="ds-appbar u-hide-from-md tp-bar" data-platform="android">
+  <div class="ds-appbar__left"><button type="button" class="ds-appbar__button" aria-label="뒤로"><i class="ds-icon ds-icon--chevron-left" aria-hidden="true"></i></button></div>
+  <div class="ds-appbar__main"><h1 class="ds-appbar__title">페이지를 찾을 수 없어요</h1></div>
+  <div class="ds-appbar__right"></div>
+</header>
+
+<header class="ds-topnav u-show-from-md tp-bar">
+  <div class="ds-topnav__left">
+    <a class="ds-topnav__heading" href="#" aria-label="서비스 이름 홈"><span class="tp-logo">로고</span></a>
+    <nav class="ds-topnav__menu" aria-label="주요 메뉴">
+      <a class="ds-topnav__item" href="#">홈</a>
+      <a class="ds-topnav__item" href="#">서비스</a>
+      <a class="ds-topnav__item" href="#">소식</a>
+      <a class="ds-topnav__item" href="#">고객지원</a>
+    </nav>
+  </div>
+  <div class="ds-topnav__end"><a class="ds-btn" data-variant="neutralWeak" data-size="xsmall" href="#">로그인</a></div>
+</header>
+
+<main class="tp-page">
+
+  <!-- 메인 상태: 404 -->
+  <div class="tp-main">
+    <section class="ds-result" data-size="large">
+      <div class="ds-result__asset" style="color: var(--ybm-color-fg-neutral-subtle)"><i class="ds-icon ds-icon--circle-alert" aria-hidden="true"></i></div>
+      <div class="ds-result__texts"><p class="tp-code">404</p><h2 class="ds-result__title">페이지를 찾을 수 없어요</h2><p class="ds-result__desc">주소가 바뀌었거나 지워진 페이지예요. 주소를 다시 확인하거나 홈으로 돌아가 주세요.</p></div>
+      <div class="ds-result__actions"><a class="ds-btn" data-variant="neutralSolid" data-size="medium" href="#">홈으로 가기</a><button type="button" class="ds-btn" data-variant="ghost" data-size="small">이전 페이지로</button></div>
+    </section>
+  </div>
+
+  <!-- 다른 상태 예시 -->
+  <section class="tp-states" aria-labelledby="states-title">
+    <div class="tp-states-head"><h2 class="tp-h3" id="states-title">다른 상태들</h2><p class="tp-sub">같은 자리에 상황에 맞는 상태를 보여 줘요. 각 칸은 실제 화면의 내용 영역이라고 생각하면 돼요.</p></div>
+    <div class="tp-grid">
+
+      <!-- 빈 목록 -->
+      <article class="tp-state" aria-label="빈 목록">
+        <div class="tp-state-bar"><span class="tp-h3">내 신청 내역</span><span class="ds-badge">빈 목록</span></div>
+        <div class="tp-state-body">
+          <div class="ds-empty"><span class="ds-empty__media"><i class="ds-icon ds-icon--inbox" aria-hidden="true"></i></span><p class="ds-empty__title">아직 신청한 내역이 없어요</p><p class="ds-empty__desc">관심 있는 프로그램을 찾아 신청해 보세요.</p><div class="ds-empty__actions"><button type="button" class="ds-btn" data-variant="neutralWeak">프로그램 보기</button></div></div>
+        </div>
+      </article>
+
+      <!-- 검색 결과 없음 -->
+      <article class="tp-state" aria-label="검색 결과 없음">
+        <div class="tp-state-bar"><span class="tp-h3">‘접이식 챡상’ 검색</span><span class="ds-badge">결과 없음</span></div>
+        <div class="tp-state-body">
+          <div class="ds-empty"><span class="ds-empty__media"><i class="ds-icon ds-icon--search" aria-hidden="true"></i></span><p class="ds-empty__title">검색 결과가 없어요</p><p class="ds-empty__desc">맞춤법을 확인하거나 더 짧은 단어로 찾아보세요. 혹시 ‘접이식 책상’을 찾으셨나요?</p><div class="ds-empty__actions"><button type="button" class="ds-btn" data-variant="neutralWeak">‘접이식 책상’으로 검색</button></div></div>
+        </div>
+      </article>
+
+      <!-- 불러오기 실패 -->
+      <article class="tp-state" aria-label="불러오기 실패">
+        <div class="tp-state-bar"><span class="tp-h3">최근 주문</span><span class="ds-badge" data-tone="critical">오류</span></div>
+        <div class="tp-state-body">
+          <div class="ds-empty"><span class="ds-empty__media" style="color: var(--ybm-color-fg-critical)"><i class="ds-icon ds-icon--circle-alert" aria-hidden="true"></i></span><p class="ds-empty__title">내용을 불러오지 못했어요</p><p class="ds-empty__desc">네트워크가 불안정하거나 서버가 응답하지 않아요. 잠시 뒤 다시 시도해 주세요.</p><div class="ds-empty__actions"><button type="button" class="ds-btn" data-variant="neutralSolid"><i class="ds-icon ds-icon--rotate-ccw" aria-hidden="true"></i>다시 시도</button></div></div>
+        </div>
+      </article>
+
+      <!-- 권한 없음 -->
+      <article class="tp-state" aria-label="권한 없음">
+        <div class="tp-state-bar"><span class="tp-h3">팀 설정</span><span class="ds-badge" data-tone="warning">권한 없음</span></div>
+        <div class="tp-state-body">
+          <div class="ds-empty"><span class="ds-empty__media"><i class="ds-icon ds-icon--eye-off" aria-hidden="true"></i></span><p class="ds-empty__title">볼 수 있는 권한이 없어요</p><p class="ds-empty__desc">이 화면은 팀 관리자만 열 수 있어요. 필요하면 관리자에게 요청하세요.</p><div class="ds-empty__actions"><button type="button" class="ds-btn" data-variant="neutralWeak">권한 요청하기</button></div></div>
+        </div>
+      </article>
+
+      <!-- 점검 중 -->
+      <article class="tp-state" aria-label="점검 중">
+        <div class="tp-state-bar"><span class="tp-h3">결제</span><span class="ds-badge" data-tone="informative">점검 중</span></div>
+        <div class="ds-banner" role="status" data-tone="warning"><div class="ds-banner__inner"><i class="ds-icon ds-icon--triangle-alert-solid" aria-hidden="true"></i><p class="ds-banner__message">10월 31일(토) 02:00~06:00 결제 시스템을 점검해요.</p></div></div>
+        <div class="tp-state-body">
+          <div class="ds-empty"><span class="ds-empty__media"><i class="ds-icon ds-icon--clock" aria-hidden="true"></i></span><p class="ds-empty__title">지금은 점검 중이에요</p><p class="ds-empty__desc">06:00에 다시 열려요. 장바구니에 담은 상품은 그대로 남아 있어요.</p></div>
+        </div>
+      </article>
+
+      <!-- 불러오는 중 -->
+      <article class="tp-state" aria-label="불러오는 중">
+        <div class="tp-state-bar"><span class="tp-h3">알림</span><span class="ds-badge">불러오는 중</span></div>
+        <div class="tp-state-body" style="justify-content: flex-start">
+          <div class="tp-skeleton" aria-hidden="true">
+            <div class="tp-skeleton-row"><span class="ds-skeleton" data-shape="circle" style="width:40px;height:40px"></span><div class="tp-skeleton-texts"><span class="ds-skeleton" data-shape="text" style="width:70%"></span><span class="ds-skeleton" data-shape="text" style="width:40%"></span></div></div>
+            <div class="tp-skeleton-row"><span class="ds-skeleton" data-shape="circle" style="width:40px;height:40px"></span><div class="tp-skeleton-texts"><span class="ds-skeleton" data-shape="text" style="width:60%"></span><span class="ds-skeleton" data-shape="text" style="width:35%"></span></div></div>
+            <div class="tp-skeleton-row"><span class="ds-skeleton" data-shape="circle" style="width:40px;height:40px"></span><div class="tp-skeleton-texts"><span class="ds-skeleton" data-shape="text" style="width:80%"></span><span class="ds-skeleton" data-shape="text" style="width:30%"></span></div></div>
+            <span class="ds-skeleton" data-shape="rect" style="width:100%;height:96px"></span>
+          </div>
+          <p class="tp-caption" style="margin-top: var(--ybm-space-x4)">내용이 올 자리를 같은 모양으로 먼저 보여 줘요.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+</main>
+
+<nav class="ds-bottomnav u-hide-from-md tp-bottomnav" aria-label="주요 메뉴">
+  <a class="ds-bottomnav__item" href="#"><span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--house ds-icon--lg" aria-hidden="true"></i></span><span class="ds-bottomnav__label">홈</span></a>
+  <a class="ds-bottomnav__item" href="#"><span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--search ds-icon--lg" aria-hidden="true"></i></span><span class="ds-bottomnav__label">검색</span></a>
+  <a class="ds-bottomnav__item" href="#"><span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--message-circle ds-icon--lg" aria-hidden="true"></i></span><span class="ds-bottomnav__label">알림</span></a>
+  <a class="ds-bottomnav__item" href="#"><span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--id-card ds-icon--lg" aria-hidden="true"></i></span><span class="ds-bottomnav__label">나의 정보</span></a>
+</nav>
+
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>로그인 (소개 나란히) - YBM DS 템플릿</title>
+<link rel="stylesheet" href="../../../dist/ybm-ds.css">
+<script src="../../../dist/ybm-ds.js" defer></script>
+<style>
+  body { word-break: keep-all; overflow-wrap: break-word; }
+  .tp-h1 { font-size: var(--ybm-font-size-t09); line-height: var(--ybm-line-height-t09); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-h2 { font-size: var(--ybm-font-size-t07); line-height: var(--ybm-line-height-t07); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-body { font-size: var(--ybm-font-size-t05); line-height: 28px; }
+  .tp-sub { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
+  .tp-caption { font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); color: var(--ybm-color-fg-neutral-subtle); }
+  .tp-ph { display: grid; place-items: center; height: 100%; color: var(--ybm-color-fg-neutral-subtle); }
+  .tp-logo { color: var(--ybm-color-fg-brand); font-size: var(--ybm-font-size-t07); line-height: var(--ybm-line-height-t07); font-weight: var(--ybm-font-weight-bold); text-decoration: none; }
+  @media (min-width: 1024px) { .tp-h1 { font-size: var(--ybm-font-size-t12); line-height: var(--ybm-line-height-t12); } }
+
+  /* 화면 틀: 모바일은 폼만, 1024 이상은 왼쪽 소개 칸 + 오른쪽 폼 반반 */
+  .tp-shell { display: flex; flex-direction: column; min-height: 100vh; min-height: 100dvh; }
+  @media (min-width: 1024px) { .tp-shell { flex-direction: row; } }
+
+  .tp-intro { display: none; }
+  @media (min-width: 1024px) {
+    .tp-intro { display: flex; flex: 1 1 50%; flex-direction: column; justify-content: space-between; gap: var(--ybm-space-x12); padding: var(--ybm-space-x12) var(--ybm-space-x16); background: var(--ybm-color-bg-brand-weak); }
+  }
+  .tp-intro-body { display: flex; flex-direction: column; gap: var(--ybm-space-x8); max-width: 520px; }
+  .tp-points { display: flex; flex-direction: column; gap: var(--ybm-space-x4); margin: 0; padding: 0; list-style: none; }
+  .tp-points li { display: flex; align-items: flex-start; gap: var(--ybm-space-x3); }
+  .tp-points .ds-icon { flex: none; margin-top: 4px; color: var(--ybm-color-fg-brand); }
+  .tp-points b { display: block; font-size: var(--ybm-font-size-t05); line-height: var(--ybm-line-height-t05); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-intro-art { max-width: 520px; border-radius: var(--ybm-shape-2xl); }
+  .tp-quote { display: flex; flex-direction: column; gap: var(--ybm-space-x3); max-width: 520px; }
+  .tp-quote-by { display: flex; align-items: center; gap: var(--ybm-space-x2); }
+
+  .tp-pane { display: flex; flex: 1 1 50%; flex-direction: column; align-items: center; justify-content: center; padding: var(--ybm-space-x6) var(--ybm-space-x-global-gutter) var(--ybm-space-x10); }
+  @media (min-width: 1024px) { .tp-pane { padding: var(--ybm-space-x16) var(--ybm-space-x12); } }
+  .tp-card { display: flex; flex-direction: column; gap: var(--ybm-space-x8); width: 100%; max-width: 400px; }
+  .tp-head { display: flex; flex-direction: column; gap: var(--ybm-space-x2); }
+  .tp-head .tp-logo { margin-bottom: var(--ybm-space-x6); }
+  @media (min-width: 1024px) { .tp-head .tp-logo { display: none; } }
+  .tp-form { display: flex; flex-direction: column; gap: var(--ybm-space-x4); }
+  .tp-form-row { display: flex; align-items: center; justify-content: space-between; gap: var(--ybm-space-x3); }
+  .tp-form > .ds-btn { margin-top: var(--ybm-space-x2); }
+  .tp-social { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--ybm-space-x2); }
+  .tp-signup { text-align: center; }
+  .tp-foot { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--ybm-space-x2) var(--ybm-space-x4); margin-top: auto; padding-top: var(--ybm-space-x10); }
+  .tp-foot a { color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t02); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<div class="tp-shell">
+
+  <!-- 왼쪽: 서비스 소개 (1024 이상) -->
+  <aside class="tp-intro" aria-label="서비스 소개">
+    <a class="tp-logo" href="#" aria-label="서비스 이름 홈으로">서비스 이름</a>
+    <div class="tp-intro-body">
+      <h2 class="tp-h1">팀의 일을 한곳에서 정리하세요</h2>
+      <ul class="tp-points">
+        <li><i class="ds-icon ds-icon--circle-check" aria-hidden="true"></i><span><b>할 일과 문서를 함께</b><span class="tp-sub">회의록 옆에 바로 할 일을 만들고 담당자를 정해요.</span></span></li>
+        <li><i class="ds-icon ds-icon--circle-check" aria-hidden="true"></i><span><b>어디서나 같은 화면</b><span class="tp-sub">PC와 휴대폰에서 이어서 작업할 수 있어요.</span></span></li>
+        <li><i class="ds-icon ds-icon--circle-check" aria-hidden="true"></i><span><b>안전한 보관</b><span class="tp-sub">모든 자료는 암호화되어 저장돼요.</span></span></li>
+      </ul>
+      <div class="ds-imageframe tp-intro-art" data-ratio="16:9"><span class="tp-ph"><i class="ds-icon ds-icon--image ds-icon--lg" aria-hidden="true"></i></span></div>
+    </div>
+    <figure class="tp-quote">
+      <blockquote class="tp-body">“흩어져 있던 메모와 일정을 한곳에 모으니 회의가 절반으로 줄었어요.”</blockquote>
+      <figcaption class="tp-quote-by"><span class="ds-avatar" data-size="36" role="img" aria-label="김민수"><span class="ds-avatar__initials" aria-hidden="true">김</span></span><span class="tp-sub">김민수 · 작은 디자인 스튜디오 대표</span></figcaption>
+    </figure>
+  </aside>
+
+  <!-- 오른쪽: 로그인 -->
+  <main class="tp-pane">
+    <div class="tp-card">
+      <div class="tp-head">
+        <a class="tp-logo" href="#" aria-label="서비스 이름 홈으로">서비스 이름</a>
+        <h1 class="tp-h2">다시 만나서 반가워요</h1>
+        <p class="tp-sub">가입할 때 쓴 이메일로 로그인해 주세요.</p>
+      </div>
+
+      <form class="tp-form" action="#" method="post">
+        <div class="ds-field">
+          <div class="ds-field__header"><label class="ds-field__label" for="l-id">이메일</label></div>
+          <div class="ds-input" data-variant="outline"><input class="ds-input__control" id="l-id" name="username" type="email" autocomplete="username" placeholder="name@example.com" required><button type="button" class="ds-input__clear" aria-label="이메일 지우기"></button></div>
+        </div>
+        <div class="ds-field">
+          <div class="ds-field__header"><label class="ds-field__label" for="l-pw">비밀번호</label><a class="ds-link" href="#" style="margin-left:auto;font-size:var(--ybm-font-size-t03)">비밀번호를 잊으셨나요?</a></div>
+          <div class="ds-input" data-variant="outline"><input class="ds-input__control" id="l-pw" name="password" type="password" autocomplete="current-password" placeholder="비밀번호" required><button type="button" class="ds-input__suffix tp-pw-toggle" aria-label="비밀번호 보기" aria-pressed="false" aria-controls="l-pw"><i class="ds-icon ds-icon--eye ds-input__icon" aria-hidden="true"></i></button></div>
+        </div>
+        <div class="tp-form-row">
+          <label class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control" name="remember" checked><span class="ds-checkbox__label">로그인 상태 유지</span></label>
+        </div>
+        <button type="submit" class="ds-btn" data-variant="brandSolid" data-size="large" data-width="fill">로그인</button>
+      </form>
+
+      <div>
+        <div class="ds-divider" role="separator" data-label><span>또는 간편 로그인</span></div>
+        <div class="tp-social" style="margin-top: var(--ybm-space-x5)">
+          <button type="button" class="ds-btn" data-variant="neutralOutline" data-size="large" aria-label="간편 로그인 1">A</button>
+          <button type="button" class="ds-btn" data-variant="neutralOutline" data-size="large" aria-label="간편 로그인 2">B</button>
+          <button type="button" class="ds-btn" data-variant="neutralOutline" data-size="large" aria-label="간편 로그인 3">C</button>
+        </div>
+      </div>
+
+      <p class="tp-sub tp-signup">아직 계정이 없으신가요? <a class="ds-link" href="#">회원가입</a></p>
+    </div>
+
+    <nav class="tp-foot" aria-label="약관">
+      <a href="#">이용약관</a><a href="#">개인정보처리방침</a><a href="#">고객센터</a><a href="#">한국어</a>
+    </nav>
+  </main>
+</div>
+
+<script>
+  document.querySelectorAll(".tp-pw-toggle").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var input = document.getElementById(btn.getAttribute("aria-controls"));
+      var show = input.type === "password";
+      input.type = show ? "text" : "password";
+      btn.setAttribute("aria-pressed", String(show));
+      btn.querySelector(".ds-icon").className = "ds-icon ds-input__icon ds-icon--" + (show ? "eye-off" : "eye");
+    });
+  });
+</script>
+</body>
+</html>

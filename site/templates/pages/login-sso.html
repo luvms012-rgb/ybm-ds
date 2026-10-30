@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>로그인 (회사 계정) - YBM DS 템플릿</title>
+<link rel="stylesheet" href="../../../dist/ybm-ds.css">
+<script src="../../../dist/ybm-ds.js" defer></script>
+<style>
+  body { word-break: keep-all; overflow-wrap: break-word; }
+  .tp-h2 { font-size: var(--ybm-font-size-t07); line-height: var(--ybm-line-height-t07); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-sub { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
+  .tp-caption { font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); color: var(--ybm-color-fg-neutral-subtle); }
+  .tp-logo { color: var(--ybm-color-fg-brand); font-size: var(--ybm-font-size-t07); line-height: var(--ybm-line-height-t07); font-weight: var(--ybm-font-weight-bold); text-decoration: none; }
+
+  .tp-main { display: flex; flex-direction: column; padding: var(--ybm-space-x4) var(--ybm-space-x-global-gutter) var(--ybm-space-x10); }
+  .tp-card { display: flex; flex-direction: column; gap: var(--ybm-space-x8); width: 100%; }
+  @media (min-width: 768px) {
+    body { background: var(--ybm-color-bg-neutral); }
+    .tp-main { min-height: 100vh; min-height: 100dvh; align-items: center; justify-content: center; padding: var(--ybm-space-x16) var(--ybm-space-x6); }
+    .tp-card { max-width: 440px; padding: var(--ybm-space-x10) var(--ybm-space-x8); border-radius: var(--ybm-shape-2xl); background: var(--ybm-color-bg-layer-default); box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-neutral-weak); }
+  }
+  .tp-head { display: flex; flex-direction: column; align-items: center; gap: var(--ybm-space-x2); text-align: center; }
+  .tp-head .tp-logo { margin-bottom: var(--ybm-space-x4); }
+  .tp-org { display: flex; align-items: center; gap: var(--ybm-space-x3); padding: var(--ybm-space-x3) var(--ybm-space-x4); border-radius: var(--ybm-shape-lg); background: var(--ybm-color-bg-neutral); }
+  .tp-org-texts { display: flex; flex: 1 1 auto; flex-direction: column; min-width: 0; }
+  .tp-org-name { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-group { display: flex; flex-direction: column; gap: var(--ybm-space-x4); }
+  .tp-form { display: flex; flex-direction: column; gap: var(--ybm-space-x4); }
+  .tp-inline { display: flex; gap: var(--ybm-space-x2); }
+  .tp-inline > .ds-input { flex: 1 1 auto; }
+  .tp-inline > .ds-btn { flex: none; }
+  .tp-trust { display: flex; align-items: center; justify-content: space-between; gap: var(--ybm-space-x3); }
+  .tp-help { display: flex; flex-direction: column; gap: var(--ybm-space-x2); text-align: center; }
+  .tp-foot { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--ybm-space-x2) var(--ybm-space-x4); margin-top: var(--ybm-space-x8); }
+  .tp-foot a { color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t02); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<header class="ds-appbar u-hide-from-md">
+  <div class="ds-appbar__left"></div>
+  <div class="ds-appbar__main"></div>
+  <div class="ds-appbar__right"><a class="ds-btn" data-variant="ghost" data-size="small" href="#">도움말</a></div>
+</header>
+
+<main class="tp-main">
+  <div class="tp-card">
+    <div class="tp-head">
+      <a class="tp-logo" href="#" aria-label="서비스 이름 홈으로">서비스 이름</a>
+      <h1 class="tp-h2">회사 계정으로 로그인</h1>
+      <p class="tp-sub">회사에서 쓰는 계정 하나로 들어와요. 비밀번호를 따로 만들지 않아도 돼요.</p>
+    </div>
+
+    <div class="tp-org">
+      <span class="ds-avatar" data-size="42" data-shape="rounded" role="img" aria-label="회사"><span class="ds-avatar__initials" aria-hidden="true">회</span></span>
+      <div class="tp-org-texts"><span class="tp-org-name">회사 이름</span><span class="tp-caption">company.example.com</span></div>
+      <a class="ds-link" href="#" style="font-size:var(--ybm-font-size-t03)">다른 회사</a>
+    </div>
+
+    <div class="tp-group">
+      <button type="button" class="ds-btn" data-variant="brandSolid" data-size="large" data-width="fill"><i class="ds-icon ds-icon--id-card" aria-hidden="true"></i>회사 계정으로 계속하기</button>
+      <p class="tp-caption" style="text-align:center">누르면 회사 로그인 화면으로 이동했다가 다시 돌아와요.</p>
+    </div>
+
+    <div class="ds-divider" role="separator" data-label><span>또는 이메일로 받은 링크로</span></div>
+
+    <form class="tp-form" action="#" method="post">
+      <div class="ds-field">
+        <div class="ds-field__header"><label class="ds-field__label" for="s-mail">회사 이메일</label></div>
+        <div class="tp-inline">
+          <div class="ds-input" data-variant="outline"><input class="ds-input__control" id="s-mail" type="email" autocomplete="email" placeholder="name@company.example.com"></div>
+          <button type="button" class="ds-btn" data-variant="neutralWeak" data-size="large">링크 받기</button>
+        </div>
+        <div class="ds-field__footer"><p class="ds-field__help">메일 안 링크를 누르면 바로 로그인돼요. 링크는 10분 동안 유효해요.</p></div>
+      </div>
+      <div class="tp-trust">
+        <div><p class="tp-sub" style="color:var(--ybm-color-fg-neutral)">이 기기 기억하기</p><p class="tp-caption">30일 동안 다시 묻지 않아요. 공용 기기에서는 끄세요.</p></div>
+        <label class="ds-switch"><input type="checkbox" role="switch" class="ds-switch__control" aria-label="이 기기 기억하기"></label>
+      </div>
+    </form>
+
+    <div class="ds-callout" data-tone="neutral"><i class="ds-icon ds-icon--info-solid" aria-hidden="true"></i><div class="ds-callout__body"><p class="ds-callout__title">로그인이 안 되나요?</p><p class="ds-callout__desc">계정이 잠겼거나 회사 계정이 없으면 관리자에게 초대를 요청하세요.</p></div></div>
+
+    <div class="tp-help">
+      <a class="ds-link" href="#">관리자에게 초대 요청하기</a>
+      <nav class="tp-foot" aria-label="약관"><a href="#">이용약관</a><a href="#">개인정보처리방침</a><a href="#">보안 정책</a></nav>
+    </div>
+  </div>
+</main>
+
+</body>
+</html>
