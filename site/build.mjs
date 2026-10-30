@@ -158,15 +158,16 @@ const btn = (href, label, variant = 'neutralWeak', size = 'small', icon = '') =>
   `<a class="ds-btn" data-variant="${variant}" data-size="${size}" href="${href}"${/^https?:/.test(href) ? ' target="_blank" rel="noopener"' : ''}>${icon ? `<i class="ds-icon ds-icon--${icon} ds-icon--sm" aria-hidden="true"></i>` : ''}${esc(label)}</a>`;
 
 
-const NAV = [['get-started', 'Get Started', 'index.html'], ['components', 'Components', 'components/index.html'], ['templates', 'Templates', 'templates/index.html']];
-// 파운데이션은 레퍼런스 A 처럼 항목마다 한 페이지
-// 왼쪽 메뉴는 영문 (레퍼런스 B)
-const FOUND = [['color', 'Color'], ['typography', 'Typography'], ['spacing', 'Spacing'], ['shape', 'Radius'], ['elevation', 'Elevation'], ['motion', 'Motion'], ['icons', 'Iconography']];
-// 묶음은 두고 묶음 안은 ABC 순
+// 상단 메뉴 (레퍼런스 B 처럼 Foundations 는 따로)
+const NAV = [['get-started', 'Get Started', 'index.html'], ['foundations', 'Foundations', 'foundations/index.html'], ['components', 'Components', 'components/index.html'], ['templates', 'Templates', 'templates/index.html']];
+// 왼쪽 메뉴는 영문, 묶음은 두고 묶음 안은 ABC 순 (레퍼런스 B)
 const az = (list) => [...list].sort((a, b) => a[1].localeCompare(b[1], 'en'));
-const GS = [['Guide', az([['get-started/usage.html', 'Usage'], ['get-started/scripts.html', 'Scripts']])], ['Foundations', az(FOUND.map(([s, l]) => [`get-started/${s}.html`, l]))]];
+// 파운데이션: 항목마다 한 페이지 (슬러그, 영문 이름)
+const FOUND = az([['color', 'Color'], ['typography', 'Typography'], ['spacing', 'Spacing'], ['shape', 'Radius'], ['elevation', 'Elevation'], ['motion', 'Motion'], ['icons', 'Iconography']]);
+const foundPager = (slug) => { const i = FOUND.findIndex(([s]) => s === slug); const p = FOUND[i - 1], n = FOUND[i + 1]; return [p && { href: p[0] + '.html', label: p[1] }, n && { href: n[0] + '.html', label: n[1] }]; };
+const GS = [['Guide', az([['get-started/usage.html', 'Usage'], ['get-started/scripts.html', 'Scripts']])]];
 // 시작하기 문서 순서 (이전 / 다음 문서) - 왼쪽 메뉴 순서 그대로, 이름은 페이지 제목
-const GS_TITLE = { 'get-started/usage.html': '사용 규칙', 'get-started/scripts.html': '스크립트', 'get-started/color.html': '색', 'get-started/typography.html': '글자', 'get-started/spacing.html': '간격', 'get-started/shape.html': '모서리', 'get-started/elevation.html': '그림자', 'get-started/motion.html': '움직임', 'get-started/icons.html': '아이콘' };
+const GS_TITLE = { 'get-started/usage.html': '사용 규칙', 'get-started/scripts.html': '스크립트' };
 const GS_ORDER = [['index.html', '시작하기'], ...GS.flatMap(([, list]) => list.map(([h]) => [h, GS_TITLE[h]]))];
 const gsPager = (file) => { const i = GS_ORDER.findIndex(([f]) => f === file); const p = GS_ORDER[i - 1], n = GS_ORDER[i + 1]; return [p && { href: '{root}' + p[0], label: p[1] }, n && { href: '{root}' + n[0], label: n[1] }]; };
 
@@ -178,6 +179,10 @@ function sideNav(section, file, root) {
   if (section === 'get-started') {
     parts.push(item('index.html', 'Overview'));
     for (const [label, list] of GS) parts.push(group(label, list.map(([h, l]) => item(h, l)), true));
+  }
+  if (section === 'foundations') {
+    parts.push(item('foundations/index.html', 'Overview'));
+    parts.push(group('Foundations', FOUND.map(([s, l]) => item(`foundations/${s}.html`, l))));
   }
   if (section === 'components') {
     parts.push(item('components/index.html', 'Overview'));
@@ -202,11 +207,11 @@ const iconLink = (href, label, icon, extra = '') => `<a class="ds-btn${extra}" d
 
 // layout - doc: 본문 752 + 목차 (문서, 컴포넌트 목록과 상세도 같은 폭) / wide: 메뉴 옆 전체 폭 (템플릿 상세)
 //          full: PC 에서 왼쪽 메뉴 없이 전체 폭 (템플릿 목록)
-function page({ file, title, section, body, layout = 'doc', desc = '', crumb = '', pager = [] }) {
+function page({ file, title, section, body, layout = 'doc', desc = '', pager = [] }) {
   const depth = file.split('/').length - 1;
   const root = '../'.repeat(depth);
-  // 제목 구성 (레퍼런스 B): 위 줄에 경로, 아래로 큰 제목과 설명
-  body = body.replace(/<header>(\s*<p class="site-eyebrow">[\s\S]*?<\/p>)?/, () => `<header class="site-head"><div class="site-head__top"><span class="site-head__crumb">${esc(crumb || NAV.find((n) => n[0] === section)[1])}</span></div>`);
+  // 제목 구성 (레퍼런스 B): 큰 제목과 설명 (위 경로 글자는 쓰지 않는다)
+  body = body.replace(/<header>(\s*<p class="site-eyebrow">[\s\S]*?<\/p>)?/, '<header class="site-head">');
   // 이전 / 다음 문서 (레퍼런스 B)
   const [prev, next] = pager;
   const pagerHtml = prev || next ? `<nav class="site-pager" aria-label="이전, 다음 문서">${prev ? `<a href="${prev.href}" data-dir="prev"><span class="site-pager__label"><i class="ds-icon ds-icon--chevron-left ds-icon--sm" aria-hidden="true"></i>이전 문서</span><b>${esc(prev.label)}</b></a>` : '<span></span>'}${next ? `<a href="${next.href}" data-dir="next"><span class="site-pager__label">다음 문서<i class="ds-icon ds-icon--chevron-right ds-icon--sm" aria-hidden="true"></i></span><b>${esc(next.label)}</b></a>` : ''}</nav>` : '';
@@ -316,13 +321,10 @@ write({
 
 <h2 id="ai">AI 로 빠르게 시작하기</h2>
 <p>아래 내용을 AI 코딩 도구(ChatGPT, Claude, Cursor 등)에 붙여 넣으면 설치부터 규칙까지 알아서 맞춰요.</p>
-<span class="site-label">${esc(prompts[0][0])}</span>
 ${codeblock(prompts[0][2], 'text', ' data-wrap')}
 <p>그다음 만들고 싶은 화면을 말로 설명하세요. 대괄호 안만 내 상황에 맞게 바꾸면 됩니다. 비슷한 화면이 <a class="ds-link" href="templates/index.html">템플릿</a> 에 있으면 그 화면에서 출발해요.</p>
-<span class="site-label">${esc(prompts[1][0])}</span>
 ${codeblock(prompts[1][2], 'text', ' data-wrap')}
 <p>이미 만든 화면이 있다면 DS 규칙을 지키는지 점검하게 할 수 있어요.</p>
-<span class="site-label">${esc(prompts[2][0])}</span>
 ${codeblock(prompts[2][2], 'text', ' data-wrap')}
 
 <h2 id="install">설치</h2>
@@ -364,7 +366,7 @@ ${codeblock(`// tailwind.config.js - ybm-ds/tokens/tailwind.preset.js 를 프로
 // 사용 규칙
 const bpRows = [['sm', '480px', '큰 휴대폰'], ['md', '768px', '태블릿, PC 부품으로 바뀌는 기준'], ['lg', '1280px', '넓은 PC, 3단 배치'], ['xl', '1440px', '아주 넓은 화면']];
 write({
-  file: 'get-started/usage.html', section: 'get-started', title: '사용 규칙', crumb: 'Guide', pager: gsPager('get-started/usage.html'),
+  file: 'get-started/usage.html', section: 'get-started', title: '사용 규칙', pager: gsPager('get-started/usage.html'),
   body: `<header><h1 class="site-h1">사용 규칙</h1><p class="site-lead">DS 를 불러오는 순서와 모양을 바꾸는 방법, 화면 모드와 반응형 기준을 정리했습니다.</p></header>
 
 <h2 id="order">불러오는 순서</h2>
@@ -399,7 +401,7 @@ ${codeblock(`@media (min-width: 768px) { /* 태블릿, PC */ }\n@media (min-widt
 <p>본문에는 <code>word-break: keep-all</code> 과 <code>overflow-wrap: break-word</code> 를 함께 씁니다. 넣지 않으면 한글이 음절 단위로 끊겨 어절 중간에서 줄이 바뀝니다.</p>
 
 <h2 id="icon">아이콘</h2>
-<p>UI 아이콘은 Lucide 한 가지만 씁니다. 색은 부모 글자색을 따르고, 크기는 기본 20, <code>ds-icon--sm</code> 16, <code>ds-icon--lg</code> 24 입니다. 목록은 <a class="ds-link" href="{root}get-started/icons.html">아이콘</a> 에 있어요.</p>`,
+<p>UI 아이콘은 Lucide 한 가지만 씁니다. 색은 부모 글자색을 따르고, 크기는 기본 20, <code>ds-icon--sm</code> 16, <code>ds-icon--lg</code> 24 입니다. 목록은 <a class="ds-link" href="{root}foundations/icons.html">아이콘</a> 에 있어요.</p>`,
 });
 
 // 파운데이션 - tokens.css 에서 값을 읽는다. 다크 블록은 따로 읽어 색의 다크 값으로 쓴다
@@ -421,6 +423,23 @@ const colorTable = (k) => {
     return [`<code>${v}</code>`, `<span class="site-swatches"><span class="site-swatch" style="background: ${esc(l)}"></span><span class="site-swatch" style="background: ${esc(d)}"></span></span><code>${esc(l)} / ${esc(d)}</code>`];
   }));
 };
+// 파운데이션 그림 - 목록 카드와 각 페이지 큰 그림에 같이 쓴다 (DS 토큰으로 그린다)
+const FV = {
+  color: ['brand', 'positive', 'warning', 'neutral'].map((t, i) => `<span class="site-fv-swatch${i % 2 ? ' site-fv-swatch--pill' : ''}" style="background: var(--ybm-color-bg-${t}-solid)"></span>`).join(''),
+  typography: '<span class="site-fv-type">Aa 가</span>',
+  spacing: '<span class="site-fv-space"><span style="width: var(--ybm-space-x6)"></span><span style="width: var(--ybm-space-x12)"></span><span style="width: var(--ybm-space-x20)"></span></span>',
+  shape: ['2xs', 'xl', 'pill'].map((r) => `<span class="site-fv-shape" style="border-radius: var(--ybm-shape-${r})"></span>`).join(''),
+  elevation: ['raised', 'panel', 'modal'].map((e) => `<span class="site-fv-card" style="box-shadow: var(--ybm-elevation-${e})"></span>`).join(''),
+  motion: '<svg class="site-fv-curve" viewBox="0 0 120 80"><path d="M8 72 C44 72 44 8 112 8"/><circle cx="8" cy="72" r="5"/><circle cx="112" cy="8" r="5"/></svg>',
+  icons: `<span class="site-fv-icons">${['search', 'calendar', 'copy', 'link'].map((n) => `<i class="ds-icon ds-icon--${n}"></i>`).join('')}</span>`,
+};
+const fvBox = (slug, cover = false) => `<div class="site-tile__thumb${cover ? ' site-cover' : ''}" aria-hidden="true"${cover ? ' data-site-fit-max="2"' : ''}><div class="site-tile__inner"><div class="pv-stage">${FV[slug]}</div></div></div>`;
+const foundName = Object.fromEntries(FOUND);
+write({
+  file: 'foundations/index.html', section: 'foundations', title: 'Foundations', layout: 'wide',
+  body: `<header><h1 class="site-h1">파운데이션</h1><p class="site-lead">색, 글자, 간격처럼 모든 화면의 바탕이 되는 값입니다. 화면에서는 값 대신 토큰 이름을 씁니다.</p></header>
+<div class="site-tiles">${FOUND.map(([s, l]) => `<a class="site-tile" href="${s}.html">${fvBox(s)}<p class="site-tile__name">${esc(l)}</p></a>`).join('\n')}</div>`,
+});
 const foundPages = {
   color: {
     title: '색', lead: '배경, 글자와 아이콘, 테두리에 쓰는 시맨틱 색입니다. 값은 라이트 / 다크 순서예요.',
@@ -473,8 +492,8 @@ ${table(['토큰', '값'], tokRe(/--ybm-easing-([a-z]+): ([^;]+);/g).map((m) => 
 };
 for (const [slug, p] of Object.entries(foundPages)) {
   write({
-    file: `get-started/${slug}.html`, section: 'get-started', title: p.title, desc: p.lead, crumb: 'Foundations', pager: gsPager(`get-started/${slug}.html`),
-    body: `<header><h1 class="site-h1">${esc(p.title)}</h1><p class="site-lead">${esc(p.lead)}</p></header>\n${p.body}`,
+    file: `foundations/${slug}.html`, section: 'foundations', title: foundName[slug], desc: p.lead, pager: foundPager(slug),
+    body: `<header><h1 class="site-h1">${esc(foundName[slug])}</h1><p class="site-lead">${esc(p.lead)}</p></header>\n${fvBox(slug, true)}\n${p.body}`,
   });
 }
 
@@ -484,8 +503,9 @@ const iconNames = [...new Set([...iconsCss.matchAll(/\.ds-icon--([a-z0-9-]+)\s*\
 const lucide = JSON.parse(fs.readFileSync(path.join(SITE, 'src/lucide-icons.json'), 'utf8'));
 const lucideCount = Object.keys(lucide.icons).length;
 write({
-  file: 'get-started/icons.html', section: 'get-started', title: '아이콘', crumb: 'Foundations', pager: gsPager('get-started/icons.html'),
-  body: `<header><h1 class="site-h1">아이콘</h1><p class="site-lead">UI 아이콘은 Lucide 한 가지만 씁니다. Lucide 전체 ${lucideCount.toLocaleString()}개 가운데 CSS 로 바로 쓸 수 있는 것은 ${iconNames.length}개이고, 나머지는 필요할 때 <code>icons.css</code> 에 한 줄 넣어 씁니다.</p></header>
+  file: 'foundations/icons.html', section: 'foundations', title: 'Iconography', pager: foundPager('icons'),
+  body: `<header><h1 class="site-h1">Iconography</h1><p class="site-lead">UI 아이콘은 Lucide 한 가지만 씁니다. Lucide 전체 ${lucideCount.toLocaleString()}개 가운데 CSS 로 바로 쓸 수 있는 것은 ${iconNames.length}개이고, 나머지는 필요할 때 <code>icons.css</code> 에 한 줄 넣어 씁니다.</p></header>
+${fvBox('icons', true)}
 <h2 id="use">쓰는 법</h2>
 ${example(`<div class="pv-stage"><i class="ds-icon ds-icon--search ds-icon--sm" aria-hidden="true"></i><i class="ds-icon ds-icon--search" aria-hidden="true"></i><i class="ds-icon ds-icon--search ds-icon--lg" aria-hidden="true"></i><span style="color: var(--ybm-color-fg-brand)"><i class="ds-icon ds-icon--circle-check-solid ds-icon--lg" aria-hidden="true"></i></span></div>`, `<i class="ds-icon ds-icon--search ds-icon--sm" aria-hidden="true"></i>  <!-- 16 -->\n<i class="ds-icon ds-icon--search" aria-hidden="true"></i>              <!-- 20 기본 -->\n<i class="ds-icon ds-icon--search ds-icon--lg" aria-hidden="true"></i>  <!-- 24 -->\n<span style="color: var(--ybm-color-fg-brand)"><i class="ds-icon ds-icon--circle-check-solid" aria-hidden="true"></i></span>  <!-- 색은 부모 글자색 -->`)}
 <ul class="site-list site-note">
@@ -508,7 +528,7 @@ ${example(`<div class="pv-stage"><i class="ds-icon ds-icon--search ds-icon--sm" 
 // 스크립트
 const jsRows = [...dsJs.slice(0, dsJs.indexOf('*/')).matchAll(/^\s*· (.+?) — (.+)$/gm)].map((m) => [`<b>${esc(m[1])}</b>`, inline(prose(m[2]))]);
 write({
-  file: 'get-started/scripts.html', section: 'get-started', title: '스크립트', crumb: 'Guide', pager: gsPager('get-started/scripts.html'),
+  file: 'get-started/scripts.html', section: 'get-started', title: '스크립트', pager: gsPager('get-started/scripts.html'),
   body: `<header><h1 class="site-h1">스크립트</h1><p class="site-lead"><code>ybm-ds.js</code> 는 CSS 만으로 안 되는 동작만 맡습니다. 불러오기만 하면 HTML 속성을 보고 알아서 동작해요.</p></header>
 <h2 id="features">하는 일</h2>
 ${table(['부품', '하는 일'], jsRows)}

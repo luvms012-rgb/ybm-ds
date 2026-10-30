@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>글자 - YBM DS</title>
+<title>Typography - YBM DS</title>
 <meta name="description" content="글꼴, 굵기, 크기와 줄 높이 토큰입니다.">
 <!-- 생성물: node site/build.mjs 가 만든다. 직접 고치지 말고 site/build.mjs 나 site/src 를 고친다 -->
 <script>try { var t = localStorage.getItem("ybm-site-theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}</script>
@@ -18,7 +18,8 @@
 <header class="site-top">
   <a class="site-logo" href="../index.html"><img src="../assets/logo-ybmnet.svg" alt="YBM NET" width="81" height="24"></a>
   <nav class="site-topnav" aria-label="주요 메뉴">
-    <a class="site-topnav__item" href="../index.html" aria-current="page">Get Started</a>
+    <a class="site-topnav__item" href="../index.html">Get Started</a>
+    <a class="site-topnav__item" href="../foundations/index.html" aria-current="page">Foundations</a>
     <a class="site-topnav__item" href="../components/index.html">Components</a>
     <a class="site-topnav__item" href="../templates/index.html">Templates</a>
   </nav>
@@ -33,16 +34,16 @@
 <div class="site-body site-body--doc">
 <aside class="site-side" id="site-side" aria-label="페이지 목록">
   <div class="site-side__top"><b>메뉴</b><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" data-site-close aria-label="메뉴 닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button></div>
-  <div class="site-side__mobile"><nav class="site-nav" aria-label="주요 메뉴"><a class="site-nav__item" href="../index.html" aria-current="page">Get Started</a><a class="site-nav__item" href="../components/index.html">Components</a><a class="site-nav__item" href="../templates/index.html">Templates</a></nav><div class="site-nav__sep"></div></div>
-  <nav class="site-nav" aria-label="Get Started 메뉴"><a class="site-nav__item" href="../index.html">Overview</a>
-<div class="site-nav__group" role="group" aria-label="Guide"><p class="site-nav__label">Guide</p><a class="site-nav__item" href="../get-started/scripts.html">Scripts</a><a class="site-nav__item" href="../get-started/usage.html">Usage</a></div>
-<div class="site-nav__group" role="group" aria-label="Foundations"><p class="site-nav__label">Foundations</p><a class="site-nav__item" href="../get-started/color.html">Color</a><a class="site-nav__item" href="../get-started/elevation.html">Elevation</a><a class="site-nav__item" href="../get-started/icons.html">Iconography</a><a class="site-nav__item" href="../get-started/motion.html">Motion</a><a class="site-nav__item" href="../get-started/shape.html">Radius</a><a class="site-nav__item" href="../get-started/spacing.html">Spacing</a><a class="site-nav__item" href="../get-started/typography.html" aria-current="page">Typography</a></div></nav>
+  <div class="site-side__mobile"><nav class="site-nav" aria-label="주요 메뉴"><a class="site-nav__item" href="../index.html">Get Started</a><a class="site-nav__item" href="../foundations/index.html" aria-current="page">Foundations</a><a class="site-nav__item" href="../components/index.html">Components</a><a class="site-nav__item" href="../templates/index.html">Templates</a></nav><div class="site-nav__sep"></div></div>
+  <nav class="site-nav" aria-label="Foundations 메뉴"><a class="site-nav__item" href="../foundations/index.html">Overview</a>
+<div class="site-nav__group" role="group" aria-label="Foundations"><p class="site-nav__label">Foundations</p><a class="site-nav__item" href="../foundations/color.html">Color</a><a class="site-nav__item" href="../foundations/elevation.html">Elevation</a><a class="site-nav__item" href="../foundations/icons.html">Iconography</a><a class="site-nav__item" href="../foundations/motion.html">Motion</a><a class="site-nav__item" href="../foundations/shape.html">Radius</a><a class="site-nav__item" href="../foundations/spacing.html">Spacing</a><a class="site-nav__item" href="../foundations/typography.html" aria-current="page">Typography</a></div></nav>
 </aside>
 <div class="site-scrim" data-site-close></div>
 <main class="site-main" id="main">
 <article class="site-doc">
-<header class="site-head"><div class="site-head__top"><span class="site-head__crumb">Foundations</span></div><h1 class="site-h1">글자</h1><p class="site-lead">글꼴, 굵기, 크기와 줄 높이 토큰입니다.</p><div class="site-toc-select"><select aria-label="이 페이지 목차" data-site-toc><option value="overview">개요</option><option value="size">크기</option><option value="weight">굵기</option></select><i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i></div>
+<header class="site-head"><h1 class="site-h1">Typography</h1><p class="site-lead">글꼴, 굵기, 크기와 줄 높이 토큰입니다.</p><div class="site-toc-select"><select aria-label="이 페이지 목차" data-site-toc><option value="overview">개요</option><option value="size">크기</option><option value="weight">굵기</option></select><i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i></div>
 </header>
+<div class="site-tile__thumb site-cover" aria-hidden="true" data-site-fit-max="2"><div class="site-tile__inner"><div class="pv-stage"><span class="site-fv-type">Aa 가</span></div></div></div>
 <h2 id="overview">개요<a class="site-anchor" href="#overview" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
 <p>글꼴은 Pretendard 입니다. 크기는 <code>--ybm-font-size-t01</code> ~ <code>t17</code>, 줄 높이는 같은 번호의 <code>--ybm-line-height-*</code> 를 짝으로 씁니다. 굵기는 regular 400, medium 500, semibold 600, bold 700 입니다.</p>
 <p>한글 위계: 페이지 제목 40/48 medium(500), 리드 16/24 light(300), 섹션 제목 24/32 medium, 소제목 16/22 medium, 본문 16/28 regular, 보조 글 14 regular 입니다. 자간은 주지 않습니다.</p>
@@ -73,11 +74,11 @@
 <tr><td><code>--ybm-font-weight-medium</code></td><td>500</td><td><span class="site-sample" style="font-size: var(--ybm-font-size-t06); font-weight: var(--ybm-font-weight-medium)">가나다 Aa 123</span></td></tr>
 <tr><td><code>--ybm-font-weight-semibold</code></td><td>600</td><td><span class="site-sample" style="font-size: var(--ybm-font-size-t06); font-weight: var(--ybm-font-weight-semibold)">가나다 Aa 123</span></td></tr>
 <tr><td><code>--ybm-font-weight-bold</code></td><td>700</td><td><span class="site-sample" style="font-size: var(--ybm-font-size-t06); font-weight: var(--ybm-font-weight-bold)">가나다 Aa 123</span></td></tr></tbody></table></div>
-<nav class="site-pager" aria-label="이전, 다음 문서"><a href="../get-started/spacing.html" data-dir="prev"><span class="site-pager__label"><i class="ds-icon ds-icon--chevron-left ds-icon--sm" aria-hidden="true"></i>이전 문서</span><b>간격</b></a></nav>
+<nav class="site-pager" aria-label="이전, 다음 문서"><a href="spacing.html" data-dir="prev"><span class="site-pager__label"><i class="ds-icon ds-icon--chevron-left ds-icon--sm" aria-hidden="true"></i>이전 문서</span><b>Spacing</b></a></nav>
 <footer class="site-footer">
   <div class="site-footer__brand"><img src="../assets/logo-ybmnet.svg" alt="YBM NET" width="81" height="24"><p class="site-footer__copy">© 2026 YBM NET. All rights reserved.</p></div>
   <nav class="site-footer__nav" aria-label="사이트 메뉴">
-    <div><p class="site-footer__title">Menu</p><a href="../index.html">Get Started</a><a href="../components/index.html">Components</a><a href="../templates/index.html">Templates</a></div>
+    <div><p class="site-footer__title">Menu</p><a href="../index.html">Get Started</a><a href="../foundations/index.html">Foundations</a><a href="../components/index.html">Components</a><a href="../templates/index.html">Templates</a></div>
     <div><p class="site-footer__title">More</p><a href="https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=2274-1143" target="_blank" rel="noopener">Figma</a><a href="https://github.com/luvms012-rgb/ybm-ds" target="_blank" rel="noopener">GitHub</a></div>
   </nav>
 </footer>
