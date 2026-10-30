@@ -44,7 +44,8 @@ git clone https://github.com/luvms012-rgb/ybm-ds.git
 
 ## 3. 진행 상황
 
-- **확정** - 문서 사이트 상단 메뉴(IA): **Docs, Foundations, Components, Templates**. Foundations 는 Docs 하위가 아니라 독립 메뉴이고, 원본은 위 Foundations 페이지.
+- **확정 (2026-10-30 집에서 바꿈)** - 문서 사이트 상단 메뉴(IA): **Get Started, Components, Templates** 세 가지. Foundations 는 Get Started 왼쪽 메뉴의 한 묶음이고(사용자 "통합"), 원본은 위 Foundations 페이지.
+- **끝냄 (2026-10-30 집)** - 사이트 Foundations 를 Get Started 왼쪽 메뉴로 합침(주소는 그대로, 허브 페이지는 Color 로 넘김). 다크 모드는 처음에 기기 설정을 따르고 버튼 선택이 우선하도록 바꿈(site.js, 머리 스크립트). 레퍼런스 1순위를 A 로 정하고 배치 크기, 상단 막대, 왼쪽 메뉴, 목차, 글자 크기와 굵기를 A 실측값으로 바꿈. 제목, 목차, 버튼 이름은 영어로, 목차 위 "목차" 제목 삭제, 목차 누르면 막대가 미끄러지며 부드럽게 스크롤. 자세한 것은 site/CLAUDE.md.
 - **끝냄 (2026-10-27)** - Figma 페이지 구성을 레퍼런스 라이브러리 형식으로 개편(README §4). 디자인 시스템(변수/텍스트 스타일/컴포넌트)은 그대로이고, 컴포넌트 40종을 카테고리 페이지 10개로 옮겨 문서 프레임(헤더 + 마스터 컴포넌트)에 담았다. 우리에게 없는 것(Templates, Chat 페이지, 문서 본문의 사용 예시 블록)은 비워 둠.
 - **끝냄 (2026-10-27)** - 변수 모드 정리: Typography 130%/150%, Shape Soft/Sharp 삭제 → 모드는 색의 Light / Dark 만. 코드 토큰(`tokens/figma-variables.json` → `tokens.css` 등)/미리보기/README 반영. Figma 페이지 개편 때 새로 만든 컴포넌트 10종은 10-28 CSS 와 함께 등록.
 - **끝냄 (2026-10-27)** - 로컬 폴더 `works/ds` → `works/ybm-ds`(집 Mac 과 같은 이름), 배포 패키지 `ybm-ds/` → `dist/`(공개 주소 `…/ybm-ds/dist/ybm-ds.css`, 가이드 사이트 경로/`dsUrl` 함께 변경). 아이콘 선 굵기 크기 비례(크기 ÷ 12, Figma/CSS), 2px 테두리 → 1px, 원본이 끊겼던 인스턴스 1,061개 다시 연결, `palette/brand-1000` 추가와 브랜드 색 바꾸는 방법(README §5.3), Icons 페이지 문서 프레임화.

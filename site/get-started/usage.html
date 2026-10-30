@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Usage - YBM DS</title>
 <!-- 생성물: node site/build.mjs 가 만든다. 직접 고치지 말고 site/build.mjs 나 site/src 를 고친다 -->
-<script>try { var t = localStorage.getItem("ybm-site-theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}</script>
+<script>try { var t = localStorage.getItem("ybm-site-theme"); if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.dataset.theme = "dark"; } catch (e) {}</script>
 <link rel="icon" href="../assets/logo-ybmnet.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../dist/ybm-ds.css">
 <link rel="stylesheet" href="../assets/site.css">
@@ -18,7 +18,6 @@
   <a class="site-logo" href="../index.html"><img src="../assets/logo-ybmnet.svg" alt="YBM NET" width="81" height="24"></a>
   <nav class="site-topnav" aria-label="주요 메뉴">
     <a class="site-topnav__item" href="../index.html" aria-current="page">Get Started</a>
-    <a class="site-topnav__item" href="../foundations/index.html">Foundations</a>
     <a class="site-topnav__item" href="../components/index.html">Components</a>
     <a class="site-topnav__item" href="../templates/index.html">Templates</a>
   </nav>
@@ -26,31 +25,32 @@
     <button type="button" class="ds-btn site-theme-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="화면 모드 바꾸기" data-site-theme-toggle><i class="ds-icon site-i--moon" aria-hidden="true"></i><i class="ds-icon site-i--sun" aria-hidden="true"></i></button>
     <a class="ds-btn site-only-wide" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" href="https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=2274-1143" target="_blank" rel="noopener" aria-label="Figma 파일"><i class="ds-icon site-i--figma" aria-hidden="true"></i></a>
     <a class="ds-btn site-only-wide" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" href="https://github.com/luvms012-rgb/ybm-ds" target="_blank" rel="noopener" aria-label="GitHub 저장소"><i class="ds-icon site-i--github" aria-hidden="true"></i></a>
-    <a class="ds-btn site-cta" data-variant="neutralSolid" data-size="xsmall" href="../index.html#ai">시작하기</a>
+    <a class="ds-btn site-cta" data-variant="neutralSolid" data-size="xsmall" href="../index.html#ai">Get started</a>
     <button type="button" class="ds-btn site-menu-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="메뉴 열기" data-site-menu aria-controls="site-side" aria-expanded="false"><i class="ds-icon ds-icon--menu" aria-hidden="true"></i></button>
   </div>
 </header>
 <div class="site-body site-body--doc">
 <aside class="site-side" id="site-side" aria-label="페이지 목록">
-  <div class="site-side__top"><b>메뉴</b><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" data-site-close aria-label="메뉴 닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button></div>
-  <div class="site-side__mobile"><nav class="site-nav" aria-label="주요 메뉴"><a class="site-nav__item" href="../index.html" aria-current="page">Get Started</a><a class="site-nav__item" href="../foundations/index.html">Foundations</a><a class="site-nav__item" href="../components/index.html">Components</a><a class="site-nav__item" href="../templates/index.html">Templates</a></nav><div class="site-nav__sep"></div></div>
+  <div class="site-side__top"><b>Menu</b><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" data-site-close aria-label="메뉴 닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button></div>
+  <div class="site-side__mobile"><nav class="site-nav" aria-label="주요 메뉴"><a class="site-nav__item" href="../index.html" aria-current="page">Get Started</a><a class="site-nav__item" href="../components/index.html">Components</a><a class="site-nav__item" href="../templates/index.html">Templates</a></nav><div class="site-nav__sep"></div></div>
   <nav class="site-nav" aria-label="Get Started 메뉴"><a class="site-nav__item" href="../index.html">Overview</a>
-<div class="site-nav__group" role="group" aria-label="Guide"><p class="site-nav__label">Guide</p><a class="site-nav__item" href="../get-started/scripts.html">Scripts</a><a class="site-nav__item" href="../get-started/usage.html" aria-current="page">Usage</a></div></nav>
+<div class="site-nav__group" role="group" aria-label="Guide"><p class="site-nav__label">Guide</p><a class="site-nav__item" href="../get-started/scripts.html">Scripts</a><a class="site-nav__item" href="../get-started/usage.html" aria-current="page">Usage</a></div>
+<div class="site-nav__group" role="group" aria-label="Foundations"><p class="site-nav__label">Foundations</p><a class="site-nav__item" href="../foundations/color.html">Color</a><a class="site-nav__item" href="../foundations/elevation.html">Elevation</a><a class="site-nav__item" href="../foundations/icons.html">Iconography</a><a class="site-nav__item" href="../foundations/motion.html">Motion</a><a class="site-nav__item" href="../foundations/shape.html">Radius</a><a class="site-nav__item" href="../foundations/spacing.html">Spacing</a><a class="site-nav__item" href="../foundations/typography.html">Typography</a></div></nav>
 </aside>
 <div class="site-scrim" data-site-close></div>
 <main class="site-main" id="main">
 <article class="site-doc">
-<header class="site-head"><h1 class="site-h1">Usage</h1><p class="site-lead">DS 를 불러오는 순서와 모양을 바꾸는 방법, 화면 모드와 반응형 기준을 정리했습니다.</p><div class="site-toc-select"><select aria-label="이 페이지 목차" data-site-toc><option value="order">불러오는 순서</option><option value="custom">모양 바꾸기</option><option value="state">상태는 HTML 속성으로</option><option value="theme">화면 모드</option><option value="breakpoint">반응형 기준점</option><option value="korean">한글 줄바꿈</option><option value="icon">아이콘</option></select><i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i></div>
+<header class="site-head"><h1 class="site-h1">Usage</h1><p class="site-lead">DS 를 불러오는 순서와 모양을 바꾸는 방법, 화면 모드와 반응형 기준을 정리했습니다.</p><div class="site-toc-select"><select aria-label="이 페이지 목차" data-site-toc><option value="order">Load Order</option><option value="custom">Customization</option><option value="state">States</option><option value="theme">Theme</option><option value="breakpoint">Breakpoints</option><option value="korean">Korean Line Breaks</option><option value="icon">Icons</option></select><i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i></div>
 </header>
 
-<h2 id="order">불러오는 순서<a class="site-anchor" href="#order" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
+<h2 id="order">Load Order<a class="site-anchor" href="#order" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
 <p>DS 를 먼저, 서비스 CSS 를 그다음에 불러옵니다. DS 전체가 CSS 레이어 안에 들어 있어서 레이어 밖에 쓴 서비스 CSS 는 선택자 길이와 상관없이 항상 DS 를 이깁니다. 그래서 <code>!important</code> 나 긴 선택자로 다툴 필요가 없어요.</p>
 <figure class="ds-codeblock">
   <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">css</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
   <pre class="ds-codeblock__code"><code>@layer ybm.tokens, ybm.base, ybm.icons, ybm.components, ybm.utilities;</code></pre>
 </figure>
 
-<h2 id="custom">모양 바꾸기<a class="site-anchor" href="#custom" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
+<h2 id="custom">Customization<a class="site-anchor" href="#custom" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
 <ul class="site-list">
   <li>서비스는 <b>컴포넌트 변수(<code>--ds-*</code>)만 바꿔서</b> 모양을 조정합니다. 새 <code>ds-</code> 클래스를 만들거나 <code>!important</code> 를 쓰지 않습니다.</li>
   <li>각 컴포넌트에서 바꿀 수 있는 변수는 컴포넌트 페이지의 "바꿀 수 있는 변수" 표에 있어요.</li>
@@ -62,7 +62,7 @@
 .my-banner { --ds-banner-bg: var(--ybm-color-bg-brand-weak); }</code></pre>
 </figure>
 
-<h2 id="state">상태는 HTML 속성으로<a class="site-anchor" href="#state" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
+<h2 id="state">States<a class="site-anchor" href="#state" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
 <p>CSS 는 Figma 속성 이름을 그대로 <code>data-*</code> 속성으로 씁니다. 상태는 가능한 한 HTML 기본 속성으로 표현해서 접근성이 함께 맞춰지게 했어요.</p>
 <div class="ds-table-wrap"><table class="ds-table" data-density="compact">
 <thead><tr><th scope="col">상태</th><th scope="col">쓰는 속성</th></tr></thead>
@@ -73,10 +73,10 @@
 <tr><td>오류</td><td><code>aria-invalid="true"</code></td></tr>
 <tr><td>누름</td><td><code>:active</code> (마우스는 <code>:hover</code> 도)</td></tr></tbody></table></div>
 
-<h2 id="theme">화면 모드<a class="site-anchor" href="#theme" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
+<h2 id="theme">Theme<a class="site-anchor" href="#theme" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
 <p>모드는 라이트와 다크 두 가지입니다. <code>&lt;html data-theme="dark"&gt;</code> 를 붙이면 시맨틱 색이 모두 어두운 화면용으로 바뀝니다. 색을 토큰으로만 썼다면 따로 고칠 것이 없어요.</p>
 
-<h2 id="breakpoint">반응형 기준점<a class="site-anchor" href="#breakpoint" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
+<h2 id="breakpoint">Breakpoints<a class="site-anchor" href="#breakpoint" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
 <p>작은 화면부터 쌓아 올리는 방식입니다. <code>@media</code> 안에서는 CSS 변수를 쓸 수 없어서 숫자를 직접 씁니다.</p>
 <div class="ds-table-wrap"><table class="ds-table" data-density="compact">
 <thead><tr><th scope="col">이름</th><th scope="col">폭</th><th scope="col">쓰임</th></tr></thead>
@@ -98,22 +98,22 @@
   <li>Side Navigation 은 1280 이상 펼침, 768 이상 접힘, 그보다 좁으면 서랍 메뉴입니다.</li>
 </ul>
 
-<h2 id="korean">한글 줄바꿈<a class="site-anchor" href="#korean" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
+<h2 id="korean">Korean Line Breaks<a class="site-anchor" href="#korean" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
 <p>본문에는 <code>word-break: keep-all</code> 과 <code>overflow-wrap: break-word</code> 를 함께 씁니다. 넣지 않으면 한글이 음절 단위로 끊겨 어절 중간에서 줄이 바뀝니다.</p>
 
-<h2 id="icon">아이콘<a class="site-anchor" href="#icon" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
+<h2 id="icon">Icons<a class="site-anchor" href="#icon" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
 <p>UI 아이콘은 Lucide 한 가지만 씁니다. 색은 부모 글자색을 따르고, 크기는 기본 20, <code>ds-icon--sm</code> 16, <code>ds-icon--lg</code> 24 입니다. 목록은 <a class="ds-link" href="../foundations/icons.html">아이콘</a> 에 있어요.</p>
-<nav class="site-pager" aria-label="이전, 다음 문서"><a href="../get-started/scripts.html" data-dir="prev"><span class="site-pager__label"><i class="ds-icon ds-icon--chevron-left ds-icon--sm" aria-hidden="true"></i>이전 문서</span><b>Scripts</b></a></nav>
+<nav class="site-pager" aria-label="이전, 다음 문서"><a href="../get-started/scripts.html" data-dir="prev"><span class="site-pager__label"><i class="ds-icon ds-icon--chevron-left ds-icon--sm" aria-hidden="true"></i>Previous</span><b>Scripts</b></a><a href="../foundations/color.html" data-dir="next"><span class="site-pager__label">Next<i class="ds-icon ds-icon--chevron-right ds-icon--sm" aria-hidden="true"></i></span><b>Color</b></a></nav>
 <footer class="site-footer">
   <div class="site-footer__brand"><img src="../assets/logo-ybmnet.svg" alt="YBM NET" width="81" height="24"><p class="site-footer__copy">© 2026 YBM NET. All rights reserved.</p></div>
   <nav class="site-footer__nav" aria-label="사이트 메뉴">
-    <div><p class="site-footer__title">Menu</p><a href="../index.html">Get Started</a><a href="../foundations/index.html">Foundations</a><a href="../components/index.html">Components</a><a href="../templates/index.html">Templates</a></div>
+    <div><p class="site-footer__title">Menu</p><a href="../index.html">Get Started</a><a href="../components/index.html">Components</a><a href="../templates/index.html">Templates</a></div>
     <div><p class="site-footer__title">More</p><a href="https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=2274-1143" target="_blank" rel="noopener">Figma</a><a href="https://github.com/luvms012-rgb/ybm-ds" target="_blank" rel="noopener">GitHub</a></div>
   </nav>
 </footer>
 </article>
 </main>
-<aside class="site-toc" aria-label="이 페이지 목차"><p class="site-toc__title">목차</p><nav><span class="site-toc__indicator" aria-hidden="true"></span><a href="#order">불러오는 순서</a><a href="#custom">모양 바꾸기</a><a href="#state">상태는 HTML 속성으로</a><a href="#theme">화면 모드</a><a href="#breakpoint">반응형 기준점</a><a href="#korean">한글 줄바꿈</a><a href="#icon">아이콘</a></nav></aside>
+<aside class="site-toc" aria-label="이 페이지 목차"><nav><span class="site-toc__indicator" aria-hidden="true"></span><a href="#order">Load Order</a><a href="#custom">Customization</a><a href="#state">States</a><a href="#theme">Theme</a><a href="#breakpoint">Breakpoints</a><a href="#korean">Korean Line Breaks</a><a href="#icon">Icons</a></nav></aside>
 </div>
 </body>
 </html>

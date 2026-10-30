@@ -6,7 +6,7 @@
 <title>Spacing - YBM DS</title>
 <meta name="description" content="여백과 간격에 쓰는 토큰입니다.">
 <!-- 생성물: node site/build.mjs 가 만든다. 직접 고치지 말고 site/build.mjs 나 site/src 를 고친다 -->
-<script>try { var t = localStorage.getItem("ybm-site-theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}</script>
+<script>try { var t = localStorage.getItem("ybm-site-theme"); if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.dataset.theme = "dark"; } catch (e) {}</script>
 <link rel="icon" href="../assets/logo-ybmnet.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../dist/ybm-ds.css">
 <link rel="stylesheet" href="../assets/site.css">
@@ -18,8 +18,7 @@
 <header class="site-top">
   <a class="site-logo" href="../index.html"><img src="../assets/logo-ybmnet.svg" alt="YBM NET" width="81" height="24"></a>
   <nav class="site-topnav" aria-label="주요 메뉴">
-    <a class="site-topnav__item" href="../index.html">Get Started</a>
-    <a class="site-topnav__item" href="../foundations/index.html" aria-current="page">Foundations</a>
+    <a class="site-topnav__item" href="../index.html" aria-current="page">Get Started</a>
     <a class="site-topnav__item" href="../components/index.html">Components</a>
     <a class="site-topnav__item" href="../templates/index.html">Templates</a>
   </nav>
@@ -27,32 +26,27 @@
     <button type="button" class="ds-btn site-theme-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="화면 모드 바꾸기" data-site-theme-toggle><i class="ds-icon site-i--moon" aria-hidden="true"></i><i class="ds-icon site-i--sun" aria-hidden="true"></i></button>
     <a class="ds-btn site-only-wide" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" href="https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=2274-1143" target="_blank" rel="noopener" aria-label="Figma 파일"><i class="ds-icon site-i--figma" aria-hidden="true"></i></a>
     <a class="ds-btn site-only-wide" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" href="https://github.com/luvms012-rgb/ybm-ds" target="_blank" rel="noopener" aria-label="GitHub 저장소"><i class="ds-icon site-i--github" aria-hidden="true"></i></a>
-    <a class="ds-btn site-cta" data-variant="neutralSolid" data-size="xsmall" href="../index.html#ai">시작하기</a>
+    <a class="ds-btn site-cta" data-variant="neutralSolid" data-size="xsmall" href="../index.html#ai">Get started</a>
     <button type="button" class="ds-btn site-menu-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="메뉴 열기" data-site-menu aria-controls="site-side" aria-expanded="false"><i class="ds-icon ds-icon--menu" aria-hidden="true"></i></button>
   </div>
 </header>
 <div class="site-body site-body--doc">
 <aside class="site-side" id="site-side" aria-label="페이지 목록">
-  <div class="site-side__top"><b>메뉴</b><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" data-site-close aria-label="메뉴 닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button></div>
-  <div class="site-side__mobile"><nav class="site-nav" aria-label="주요 메뉴"><a class="site-nav__item" href="../index.html">Get Started</a><a class="site-nav__item" href="../foundations/index.html" aria-current="page">Foundations</a><a class="site-nav__item" href="../components/index.html">Components</a><a class="site-nav__item" href="../templates/index.html">Templates</a></nav><div class="site-nav__sep"></div></div>
-  <nav class="site-nav" aria-label="Foundations 메뉴"><a class="site-nav__item" href="../foundations/index.html">Overview</a>
-<a class="site-nav__item" href="../foundations/color.html">Color</a>
-<a class="site-nav__item" href="../foundations/elevation.html">Elevation</a>
-<a class="site-nav__item" href="../foundations/icons.html">Iconography</a>
-<a class="site-nav__item" href="../foundations/motion.html">Motion</a>
-<a class="site-nav__item" href="../foundations/shape.html">Radius</a>
-<a class="site-nav__item" href="../foundations/spacing.html" aria-current="page">Spacing</a>
-<a class="site-nav__item" href="../foundations/typography.html">Typography</a></nav>
+  <div class="site-side__top"><b>Menu</b><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" data-site-close aria-label="메뉴 닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button></div>
+  <div class="site-side__mobile"><nav class="site-nav" aria-label="주요 메뉴"><a class="site-nav__item" href="../index.html" aria-current="page">Get Started</a><a class="site-nav__item" href="../components/index.html">Components</a><a class="site-nav__item" href="../templates/index.html">Templates</a></nav><div class="site-nav__sep"></div></div>
+  <nav class="site-nav" aria-label="Get Started 메뉴"><a class="site-nav__item" href="../index.html">Overview</a>
+<div class="site-nav__group" role="group" aria-label="Guide"><p class="site-nav__label">Guide</p><a class="site-nav__item" href="../get-started/scripts.html">Scripts</a><a class="site-nav__item" href="../get-started/usage.html">Usage</a></div>
+<div class="site-nav__group" role="group" aria-label="Foundations"><p class="site-nav__label">Foundations</p><a class="site-nav__item" href="../foundations/color.html">Color</a><a class="site-nav__item" href="../foundations/elevation.html">Elevation</a><a class="site-nav__item" href="../foundations/icons.html">Iconography</a><a class="site-nav__item" href="../foundations/motion.html">Motion</a><a class="site-nav__item" href="../foundations/shape.html">Radius</a><a class="site-nav__item" href="../foundations/spacing.html" aria-current="page">Spacing</a><a class="site-nav__item" href="../foundations/typography.html">Typography</a></div></nav>
 </aside>
 <div class="site-scrim" data-site-close></div>
 <main class="site-main" id="main">
 <article class="site-doc">
-<header class="site-head"><h1 class="site-h1">Spacing</h1><p class="site-lead">여백과 간격에 쓰는 토큰입니다.</p><div class="site-toc-select"><select aria-label="이 페이지 목차" data-site-toc><option value="overview">개요</option><option value="tokens">토큰</option></select><i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i></div>
+<header class="site-head"><h1 class="site-h1">Spacing</h1><p class="site-lead">여백과 간격에 쓰는 토큰입니다.</p><div class="site-toc-select"><select aria-label="이 페이지 목차" data-site-toc><option value="overview">Overview</option><option value="tokens">Tokens</option></select><i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i></div>
 </header>
 <div class="site-tile__thumb site-cover" aria-hidden="true" data-site-fit-max="2"><div class="site-tile__inner"><div class="pv-stage"><span class="site-fv-space"><span style="width: var(--ybm-space-x6)"></span><span style="width: var(--ybm-space-x12)"></span><span style="width: var(--ybm-space-x20)"></span></span></div></div></div>
-<h2 id="overview">개요<a class="site-anchor" href="#overview" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
+<h2 id="overview">Overview<a class="site-anchor" href="#overview" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
 <p>4px 단위를 기본으로 하고, 작은 간격은 2px 단위도 씁니다. 화면 좌우 여백은 <code>--ybm-space-x-global-gutter</code> 입니다.</p>
-<h2 id="tokens">토큰<a class="site-anchor" href="#tokens" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
+<h2 id="tokens">Tokens<a class="site-anchor" href="#tokens" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
 <div class="ds-table-wrap"><table class="ds-table" data-density="compact">
 <thead><tr><th scope="col">토큰</th><th scope="col">값</th><th scope="col">보기</th></tr></thead>
 <tbody><tr><td><code>--ybm-space-x0</code></td><td>0px</td><td><span class="site-bar" style="width: var(--ybm-space-x0)"></span></td></tr>
@@ -81,17 +75,17 @@
 <tr><td><code>--ybm-space-x20</code></td><td>80px</td><td><span class="site-bar" style="width: var(--ybm-space-x20)"></span></td></tr>
 <tr><td><code>--ybm-space-x24</code></td><td>96px</td><td><span class="site-bar" style="width: var(--ybm-space-x24)"></span></td></tr>
 <tr><td><code>--ybm-space-x32</code></td><td>128px</td><td><span class="site-bar" style="width: var(--ybm-space-x32)"></span></td></tr></tbody></table></div>
-<nav class="site-pager" aria-label="이전, 다음 문서"><a href="shape.html" data-dir="prev"><span class="site-pager__label"><i class="ds-icon ds-icon--chevron-left ds-icon--sm" aria-hidden="true"></i>이전 문서</span><b>Radius</b></a><a href="typography.html" data-dir="next"><span class="site-pager__label">다음 문서<i class="ds-icon ds-icon--chevron-right ds-icon--sm" aria-hidden="true"></i></span><b>Typography</b></a></nav>
+<nav class="site-pager" aria-label="이전, 다음 문서"><a href="../foundations/shape.html" data-dir="prev"><span class="site-pager__label"><i class="ds-icon ds-icon--chevron-left ds-icon--sm" aria-hidden="true"></i>Previous</span><b>Radius</b></a><a href="../foundations/typography.html" data-dir="next"><span class="site-pager__label">Next<i class="ds-icon ds-icon--chevron-right ds-icon--sm" aria-hidden="true"></i></span><b>Typography</b></a></nav>
 <footer class="site-footer">
   <div class="site-footer__brand"><img src="../assets/logo-ybmnet.svg" alt="YBM NET" width="81" height="24"><p class="site-footer__copy">© 2026 YBM NET. All rights reserved.</p></div>
   <nav class="site-footer__nav" aria-label="사이트 메뉴">
-    <div><p class="site-footer__title">Menu</p><a href="../index.html">Get Started</a><a href="../foundations/index.html">Foundations</a><a href="../components/index.html">Components</a><a href="../templates/index.html">Templates</a></div>
+    <div><p class="site-footer__title">Menu</p><a href="../index.html">Get Started</a><a href="../components/index.html">Components</a><a href="../templates/index.html">Templates</a></div>
     <div><p class="site-footer__title">More</p><a href="https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=2274-1143" target="_blank" rel="noopener">Figma</a><a href="https://github.com/luvms012-rgb/ybm-ds" target="_blank" rel="noopener">GitHub</a></div>
   </nav>
 </footer>
 </article>
 </main>
-<aside class="site-toc" aria-label="이 페이지 목차"><p class="site-toc__title">목차</p><nav><span class="site-toc__indicator" aria-hidden="true"></span><a href="#overview">개요</a><a href="#tokens">토큰</a></nav></aside>
+<aside class="site-toc" aria-label="이 페이지 목차"><nav><span class="site-toc__indicator" aria-hidden="true"></span><a href="#overview">Overview</a><a href="#tokens">Tokens</a></nav></aside>
 </div>
 </body>
 </html>

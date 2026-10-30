@@ -2,7 +2,7 @@
 // 바로 위 폴더(DS 정본)를 읽기만 하고 site/ 아래에 정적 HTML 을 만든다. 패키지 설치 필요 없음.
 //   읽는 것: components.json, dist/components.css(머리 주석, --ds-* 변수), dist/tokens.css, dist/icons.css,
 //            dist/ybm-ds.js(머리 주석), index.html(컴포넌트 예시), README.md(6.2 사용 지침), site/src/*
-//   만드는 것: site/index.html, site/get-started/*.html, site/components/*.html, site/templates/*.html, site/assets/*
+//   만드는 것: site/index.html, site/get-started/*.html, site/foundations/*.html, site/components/*.html, site/templates/*.html, site/assets/*
 //   손으로 쓰는 것(생성 안 함): site/templates/pages/*.html (템플릿 원본), site/src/*
 import fs from 'node:fs';
 import path from 'node:path';
@@ -146,7 +146,7 @@ function codeblock(code, lang = 'html', extra = '') {
 }
 function example(previewHtml, code) {
   return `<div class="site-example">
-  <div class="site-example__bar"><div class="ds-chiptabs" role="tablist" aria-label="보기 방식"><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-view="preview">미리보기</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-view="code">코드</button></div></div>
+  <div class="site-example__bar"><div class="ds-chiptabs" role="tablist" aria-label="보기 방식"><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-view="preview">Preview</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-view="code">Code</button></div></div>
   <div class="site-example__preview">${previewHtml}</div>
   <div class="site-example__code" hidden>${codeblock(code)}</div>
 </div>`;
@@ -158,17 +158,16 @@ const btn = (href, label, variant = 'neutralWeak', size = 'small', icon = '') =>
   `<a class="ds-btn" data-variant="${variant}" data-size="${size}" href="${href}"${/^https?:/.test(href) ? ' target="_blank" rel="noopener"' : ''}>${icon ? `<i class="ds-icon ds-icon--${icon} ds-icon--sm" aria-hidden="true"></i>` : ''}${esc(label)}</a>`;
 
 
-// 상단 메뉴 (레퍼런스 B 처럼 Foundations 는 따로)
-const NAV = [['get-started', 'Get Started', 'index.html'], ['foundations', 'Foundations', 'foundations/index.html'], ['components', 'Components', 'components/index.html'], ['templates', 'Templates', 'templates/index.html']];
+// 상단 메뉴 셋 (2026-10-30 사용자 "통합": Foundations 는 Get Started 왼쪽 메뉴의 한 묶음)
+const NAV = [['get-started', 'Get Started', 'index.html'], ['components', 'Components', 'components/index.html'], ['templates', 'Templates', 'templates/index.html']];
 // 왼쪽 메뉴는 영문, 묶음은 두고 묶음 안은 ABC 순 (레퍼런스 B)
 const az = (list) => [...list].sort((a, b) => a[1].localeCompare(b[1], 'en'));
 // 파운데이션: 항목마다 한 페이지 (슬러그, 영문 이름)
 const FOUND = az([['color', 'Color'], ['typography', 'Typography'], ['spacing', 'Spacing'], ['shape', 'Radius'], ['elevation', 'Elevation'], ['motion', 'Motion'], ['icons', 'Iconography']]);
-const foundPager = (slug) => { const i = FOUND.findIndex(([s]) => s === slug); const p = FOUND[i - 1], n = FOUND[i + 1]; return [p && { href: p[0] + '.html', label: p[1] }, n && { href: n[0] + '.html', label: n[1] }]; };
-const GS = [['Guide', az([['get-started/usage.html', 'Usage'], ['get-started/scripts.html', 'Scripts']])]];
+// Get Started 왼쪽 메뉴 묶음: Guide, Foundations (묶음 안은 ABC 순)
+const GS = [['Guide', az([['get-started/usage.html', 'Usage'], ['get-started/scripts.html', 'Scripts']])], ['Foundations', FOUND.map(([s, l]) => [`foundations/${s}.html`, l])]];
 // 시작하기 문서 순서 (이전 / 다음 문서) - 왼쪽 메뉴 순서 그대로, 이름은 페이지 제목
-const GS_TITLE = { 'get-started/usage.html': 'Usage', 'get-started/scripts.html': 'Scripts' };
-const GS_ORDER = [['index.html', 'Get Started'], ...GS.flatMap(([, list]) => list.map(([h]) => [h, GS_TITLE[h]]))];
+const GS_ORDER = [['index.html', 'Get Started'], ...GS.flatMap(([, list]) => list)];
 const gsPager = (file) => { const i = GS_ORDER.findIndex(([f]) => f === file); const p = GS_ORDER[i - 1], n = GS_ORDER[i + 1]; return [p && { href: '{root}' + p[0], label: p[1] }, n && { href: '{root}' + n[0], label: n[1] }]; };
 
 function sideNav(section, file, root) {
@@ -180,10 +179,6 @@ function sideNav(section, file, root) {
     parts.push(item('index.html', 'Overview'));
     for (const [label, list] of GS) parts.push(group(label, list.map(([h, l]) => item(h, l)), true));
   }
-  if (section === 'foundations') {
-    parts.push(item('foundations/index.html', 'Overview'));
-    parts.push(...FOUND.map(([s, l]) => item(`foundations/${s}.html`, l)));
-  }
   if (section === 'components') {
     parts.push(item('components/index.html', 'Overview'));
     parts.push(...compsAZ.map((c) => item(`components/${c.slug}.html`, c.name.split(' · ')[0])));
@@ -194,9 +189,9 @@ function sideNav(section, file, root) {
   }
   const mobile = `<div class="site-side__mobile"><nav class="site-nav" aria-label="주요 메뉴">${NAV.map(([k, l, h]) => `<a class="site-nav__item" href="${root}${h}"${k === section ? ' aria-current="page"' : ''}>${l}</a>`).join('')}</nav><div class="site-nav__sep"></div></div>`;
   // 컴포넌트 메뉴 맨 위 찾기 칸 (높이 32, 모서리 12, 1px 테두리) - 메뉴 항목과 목록 카드를 함께 거른다
-  const search = section === 'components' ? `<div class="site-side__searchbar"><div class="ds-input site-side__search" data-variant="outline" data-size="medium"><i class="ds-icon ds-icon--search ds-input__icon" aria-hidden="true"></i><input class="ds-input__control" type="search" placeholder="컴포넌트 찾기" aria-label="컴포넌트 찾기" data-site-search></div></div>` : '';
+  const search = section === 'components' ? `<div class="site-side__searchbar"><div class="ds-input site-side__search" data-variant="outline" data-size="medium"><i class="ds-icon ds-icon--search ds-input__icon" aria-hidden="true"></i><input class="ds-input__control" type="search" placeholder="Search components" aria-label="컴포넌트 찾기" data-site-search></div></div>` : '';
   return `<aside class="site-side" id="site-side" aria-label="페이지 목록">
-  <div class="site-side__top"><b>메뉴</b><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" data-site-close aria-label="메뉴 닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button></div>
+  <div class="site-side__top"><b>Menu</b><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" data-site-close aria-label="메뉴 닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button></div>
   ${mobile}${search}
   <nav class="site-nav" aria-label="${esc(NAV.find((n) => n[0] === section)[1])} 메뉴"${search ? ' data-site-navfilter' : ''}>${parts.join('\n')}</nav>
 </aside>`;
@@ -214,7 +209,7 @@ function page({ file, title, section, body, layout = 'doc', desc = '', pager = [
   body = body.replace(/<header>(\s*<p class="site-eyebrow">[\s\S]*?<\/p>)?/, '<header class="site-head">');
   // 이전 / 다음 문서 (레퍼런스 B)
   const [prev, next] = pager;
-  const pagerHtml = prev || next ? `<nav class="site-pager" aria-label="이전, 다음 문서">${prev ? `<a href="${prev.href}" data-dir="prev"><span class="site-pager__label"><i class="ds-icon ds-icon--chevron-left ds-icon--sm" aria-hidden="true"></i>이전 문서</span><b>${esc(prev.label)}</b></a>` : '<span></span>'}${next ? `<a href="${next.href}" data-dir="next"><span class="site-pager__label">다음 문서<i class="ds-icon ds-icon--chevron-right ds-icon--sm" aria-hidden="true"></i></span><b>${esc(next.label)}</b></a>` : ''}</nav>` : '';
+  const pagerHtml = prev || next ? `<nav class="site-pager" aria-label="이전, 다음 문서">${prev ? `<a href="${prev.href}" data-dir="prev"><span class="site-pager__label"><i class="ds-icon ds-icon--chevron-left ds-icon--sm" aria-hidden="true"></i>Previous</span><b>${esc(prev.label)}</b></a>` : '<span></span>'}${next ? `<a href="${next.href}" data-dir="next"><span class="site-pager__label">Next<i class="ds-icon ds-icon--chevron-right ds-icon--sm" aria-hidden="true"></i></span><b>${esc(next.label)}</b></a>` : ''}</nav>` : '';
   // 푸터 (레퍼런스 B): 왼쪽 로고와 저작권, 오른쪽 메뉴 두 묶음
   const footer = `<footer class="site-footer">
   <div class="site-footer__brand"><img src="${root}assets/logo-ybmnet.svg" alt="YBM NET" width="81" height="24"><p class="site-footer__copy">© 2026 YBM NET. All rights reserved.</p></div>
@@ -239,7 +234,7 @@ function page({ file, title, section, body, layout = 'doc', desc = '', pager = [
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(title)} - YBM DS</title>
 ${desc ? `<meta name="description" content="${esc(desc)}">\n` : ''}<!-- 생성물: node site/build.mjs 가 만든다. 직접 고치지 말고 site/build.mjs 나 site/src 를 고친다 -->
-<script>try { var t = localStorage.getItem("ybm-site-theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}</script>
+<script>try { var t = localStorage.getItem("ybm-site-theme"); if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.dataset.theme = "dark"; } catch (e) {}</script>
 <link rel="icon" href="${root}assets/logo-ybmnet.svg" type="image/svg+xml">
 <link rel="stylesheet" href="${root}../dist/ybm-ds.css">
 <link rel="stylesheet" href="${root}assets/site.css">
@@ -257,7 +252,7 @@ ${desc ? `<meta name="description" content="${esc(desc)}">\n` : ''}<!-- 생성�
     ${iconBtn('data-site-theme-toggle', '화면 모드 바꾸기', '<i class="ds-icon site-i--moon" aria-hidden="true"></i><i class="ds-icon site-i--sun" aria-hidden="true"></i>').replace('class="ds-btn"', 'class="ds-btn site-theme-btn"')}
     ${iconLink(FIGMA + '2274-1143', 'Figma 파일', 'site-i--figma', ' site-only-wide')}
     ${iconLink(GITHUB, 'GitHub 저장소', 'site-i--github', ' site-only-wide')}
-    <a class="ds-btn site-cta" data-variant="neutralSolid" data-size="xsmall" href="${root}index.html#ai">시작하기</a>
+    <a class="ds-btn site-cta" data-variant="neutralSolid" data-size="xsmall" href="${root}index.html#ai">Get started</a>
     ${iconBtn('data-site-menu aria-controls="site-side" aria-expanded="false"', '메뉴 열기', '<i class="ds-icon ds-icon--menu" aria-hidden="true"></i>').replace('class="ds-btn"', 'class="ds-btn site-menu-btn"')}
   </div>
 </header>
@@ -271,7 +266,7 @@ ${pagerHtml}
 ${footer}
 </article>
 </main>
-${layout === 'doc' ? `<aside class="site-toc" aria-label="이 페이지 목차">${hasToc ? `<p class="site-toc__title">목차</p><nav><span class="site-toc__indicator" aria-hidden="true"></span>${heads.map(([id, t]) => `<a href="#${id}">${esc(t)}</a>`).join('')}</nav>` : ''}</aside>` : ''}
+${layout === 'doc' ? `<aside class="site-toc" aria-label="이 페이지 목차">${hasToc ? `<nav><span class="site-toc__indicator" aria-hidden="true"></span>${heads.map(([id, t]) => `<a href="#${id}">${esc(t)}</a>`).join('')}</nav>` : ''}</aside>` : ''}
 </div>
 </body>
 </html>
@@ -319,7 +314,7 @@ write({
   <p class="site-lead">YBM DS 를 프로젝트에 넣고 바로 화면을 만들어 보세요.</p>
 </header>
 
-<h2 id="ai">AI 로 빠르게 시작하기</h2>
+<h2 id="ai">Quick Start with AI</h2>
 <p>아래 내용을 AI 코딩 도구(ChatGPT, Claude, Cursor 등)에 붙여 넣으면 설치부터 규칙까지 알아서 맞춰요.</p>
 ${codeblock(prompts[0][2], 'text', ' data-wrap')}
 <p>그다음 만들고 싶은 화면을 말로 설명하세요. 대괄호 안만 내 상황에 맞게 바꾸면 됩니다. 비슷한 화면이 <a class="ds-link" href="templates/index.html">템플릿</a> 에 있으면 그 화면에서 출발해요.</p>
@@ -327,37 +322,38 @@ ${codeblock(prompts[1][2], 'text', ' data-wrap')}
 <p>이미 만든 화면이 있다면 DS 규칙을 지키는지 점검하게 할 수 있어요.</p>
 ${codeblock(prompts[2][2], 'text', ' data-wrap')}
 
-<h2 id="install">설치</h2>
+<h2 id="install">Install</h2>
 <p>가장 쉽고 권장하는 방법은 CSS 로 바로 쓰는 것입니다. 빌드 도구나 설치 과정 없이 <code>&lt;head&gt;</code> 에 두 줄만 넣으면 글꼴(Pretendard), 토큰, 아이콘, 컴포넌트가 한 번에 들어와요.</p>
 ${codeblock(CSS_LINK)}
 
-<h2 id="first">첫 컴포넌트 넣기</h2>
+<h2 id="first">Add Your First Component</h2>
 <p>정해진 클래스와 속성만 붙이면 됩니다. 각 컴포넌트의 구조와 속성은 <a class="ds-link" href="components/index.html">Components</a> 에 있어요.</p>
 ${example(`<div class="pv-stage"><button class="ds-btn" data-variant="brandSolid" data-size="large">시작하기</button><button class="ds-btn" data-variant="neutralWeak" data-size="large">나중에</button></div>`, `<button class="ds-btn" data-variant="brandSolid" data-size="large">시작하기</button>\n<button class="ds-btn" data-variant="neutralWeak" data-size="large">나중에</button>`)}
 
-<h2 id="theme">다크 모드</h2>
+<h2 id="theme">Dark Mode</h2>
 <p>html 요소에 속성 하나만 붙이면 모든 색이 어두운 화면용으로 바뀝니다. 오른쪽 위 달 모양 버튼으로 이 사이트에서도 바로 볼 수 있어요.</p>
 ${codeblock('<html lang="ko" data-theme="dark">')}
 
-<h2 id="custom">모양 바꾸기</h2>
+<h2 id="custom">Customization</h2>
 <p>서비스 CSS 는 DS 다음에 불러오고, 새 클래스를 만들지 말고 컴포넌트 변수(<code>--ds-*</code>)만 덮어씁니다. 자세한 내용은 <a class="ds-link" href="get-started/usage.html">사용 규칙</a> 에 있어요.</p>
 ${codeblock(`<link rel="stylesheet" href="${PUBLIC}/dist/ybm-ds.css">\n<link rel="stylesheet" href="my-service.css">  <!-- 서비스 CSS 는 항상 DS 다음 -->\n\n/* my-service.css */\n.my-dialog { --ds-dialog-width: 360px; }`)}
 
-<h2 id="other">다른 설치 방법</h2>
+<h2 id="other">Other Install Options</h2>
 <p>개발자가 버전을 고정하거나 파일을 직접 가지고 있어야 할 때 씁니다.</p>
-<h3>버전 고정 주소</h3>
+<h3>Pinned Version</h3>
 <p>위 주소는 늘 최신 버전을 줍니다. 배포 후 바뀌지 않게 하려면 공개 CDN 주소에 커밋 번호를 넣어 고정하세요.</p>
 ${codeblock(`<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/luvms012-rgb/ybm-ds@[커밋 번호]/dist/ybm-ds.css">\n<script src="https://cdn.jsdelivr.net/gh/luvms012-rgb/ybm-ds@[커밋 번호]/dist/ybm-ds.js" defer></script>`)}
-<h3>파일 내려받기</h3>
+<h3>Download Files</h3>
 <p>저장소를 내려받아 <code>dist</code> 폴더를 프로젝트에 넣고 상대 경로로 불러옵니다. 인터넷이 막힌 환경이나 사내 서버에 둘 때 씁니다.</p>
 ${codeblock(`git clone ${GITHUB}.git\n# ybm-ds/dist 폴더를 프로젝트로 복사한 뒤\n<link rel="stylesheet" href="./dist/ybm-ds.css">\n<script src="./dist/ybm-ds.js" defer></script>`, 'shell')}
-<h3>Tailwind CSS 와 함께</h3>
+<h3>With Tailwind CSS</h3>
 <p>Tailwind 를 쓰는 프로젝트는 토큰을 Tailwind 이름으로 바로 쓸 수 있는 설정 파일이 있어요. 값은 모두 DS 의 CSS 변수를 가리키므로 <code>ybm-ds.css</code> 도 함께 불러와야 합니다.</p>
 ${codeblock(`// tailwind.config.js - ybm-ds/tokens/tailwind.preset.js 를 프로젝트에 복사한 뒤\nmodule.exports = { presets: [require('./tailwind.preset.js')] };`, 'javascript')}
 
-<h2 id="next">다음으로</h2>
+<h2 id="next">Next Steps</h2>
 <div class="site-grid">
   <a class="site-card" href="get-started/usage.html"><div class="site-card__body"><p class="site-card__title">Usage</p><p class="site-card__desc">불러오는 순서, 커스텀, 다크 모드, 반응형 기준점을 알아봅니다.</p></div></a>
+  <a class="site-card" href="{root}foundations/${FOUND[0][0]}.html"><div class="site-card__body"><p class="site-card__title">Foundations</p><p class="site-card__desc">색, 글자, 간격처럼 모든 화면의 바탕이 되는 토큰을 봅니다.</p></div></a>
   <a class="site-card" href="components/index.html"><div class="site-card__body"><p class="site-card__title">Components</p><p class="site-card__desc">부품마다 미리보기, 사용법, 속성, 사용 지침을 봅니다.</p></div></a>
   <a class="site-card" href="templates/index.html"><div class="site-card__body"><p class="site-card__title">Templates</p><p class="site-card__desc">자주 쓰는 화면을 통째로 복사해 출발점으로 씁니다.</p></div></a>
 </div>`.replaceAll('href="components/', 'href="{root}components/').replaceAll('href="templates/', 'href="{root}templates/').replaceAll('href="get-started/', 'href="{root}get-started/'),
@@ -369,11 +365,11 @@ write({
   file: 'get-started/usage.html', section: 'get-started', title: 'Usage', pager: gsPager('get-started/usage.html'),
   body: `<header><h1 class="site-h1">Usage</h1><p class="site-lead">DS 를 불러오는 순서와 모양을 바꾸는 방법, 화면 모드와 반응형 기준을 정리했습니다.</p></header>
 
-<h2 id="order">불러오는 순서</h2>
+<h2 id="order">Load Order</h2>
 <p>DS 를 먼저, 서비스 CSS 를 그다음에 불러옵니다. DS 전체가 CSS 레이어 안에 들어 있어서 레이어 밖에 쓴 서비스 CSS 는 선택자 길이와 상관없이 항상 DS 를 이깁니다. 그래서 <code>!important</code> 나 긴 선택자로 다툴 필요가 없어요.</p>
 ${codeblock('@layer ybm.tokens, ybm.base, ybm.icons, ybm.components, ybm.utilities;', 'css')}
 
-<h2 id="custom">모양 바꾸기</h2>
+<h2 id="custom">Customization</h2>
 <ul class="site-list">
   <li>서비스는 <b>컴포넌트 변수(<code>--ds-*</code>)만 바꿔서</b> 모양을 조정합니다. 새 <code>ds-</code> 클래스를 만들거나 <code>!important</code> 를 쓰지 않습니다.</li>
   <li>각 컴포넌트에서 바꿀 수 있는 변수는 컴포넌트 페이지의 "바꿀 수 있는 변수" 표에 있어요.</li>
@@ -381,14 +377,14 @@ ${codeblock('@layer ybm.tokens, ybm.base, ybm.icons, ybm.components, ybm.utiliti
 </ul>
 ${codeblock('.my-dialog { --ds-dialog-width: 360px; }\n.my-banner { --ds-banner-bg: var(--ybm-color-bg-brand-weak); }', 'css')}
 
-<h2 id="state">상태는 HTML 속성으로</h2>
+<h2 id="state">States</h2>
 <p>CSS 는 Figma 속성 이름을 그대로 <code>data-*</code> 속성으로 씁니다. 상태는 가능한 한 HTML 기본 속성으로 표현해서 접근성이 함께 맞춰지게 했어요.</p>
 ${table(['상태', '쓰는 속성'], [['꺼짐', '<code>disabled</code>'], ['선택', '<code>:checked</code>, <code>aria-selected</code>, <code>aria-pressed</code>'], ['지금 위치', '<code>aria-current="page"</code>'], ['펼침', '<code>aria-expanded</code>'], ['오류', '<code>aria-invalid="true"</code>'], ['누름', '<code>:active</code> (마우스는 <code>:hover</code> 도)']])}
 
-<h2 id="theme">화면 모드</h2>
+<h2 id="theme">Theme</h2>
 <p>모드는 라이트와 다크 두 가지입니다. <code>&lt;html data-theme="dark"&gt;</code> 를 붙이면 시맨틱 색이 모두 어두운 화면용으로 바뀝니다. 색을 토큰으로만 썼다면 따로 고칠 것이 없어요.</p>
 
-<h2 id="breakpoint">반응형 기준점</h2>
+<h2 id="breakpoint">Breakpoints</h2>
 <p>작은 화면부터 쌓아 올리는 방식입니다. <code>@media</code> 안에서는 CSS 변수를 쓸 수 없어서 숫자를 직접 씁니다.</p>
 ${table(['이름', '폭', '쓰임'], bpRows.map(([n, w, u]) => [`<code>${n}</code>`, w, u]))}
 ${codeblock(`@media (min-width: 768px) { /* 태블릿, PC */ }\n@media (min-width: 1280px) { /* 넓은 PC */ }\n\n<!-- 유틸리티: 768 이상에서 숨김(모바일 전용) / 768 이상에서만 보임(PC 전용) -->\n<div class="u-hide-from-md">…</div>\n<div class="u-show-from-md">…</div>`, 'css')}
@@ -397,10 +393,10 @@ ${codeblock(`@media (min-width: 768px) { /* 태블릿, PC */ }\n@media (min-widt
   <li>Side Navigation 은 1280 이상 펼침, 768 이상 접힘, 그보다 좁으면 서랍 메뉴입니다.</li>
 </ul>
 
-<h2 id="korean">한글 줄바꿈</h2>
+<h2 id="korean">Korean Line Breaks</h2>
 <p>본문에는 <code>word-break: keep-all</code> 과 <code>overflow-wrap: break-word</code> 를 함께 씁니다. 넣지 않으면 한글이 음절 단위로 끊겨 어절 중간에서 줄이 바뀝니다.</p>
 
-<h2 id="icon">아이콘</h2>
+<h2 id="icon">Icons</h2>
 <p>UI 아이콘은 Lucide 한 가지만 씁니다. 색은 부모 글자색을 따르고, 크기는 기본 20, <code>ds-icon--sm</code> 16, <code>ds-icon--lg</code> 24 입니다. 목록은 <a class="ds-link" href="{root}foundations/icons.html">아이콘</a> 에 있어요.</p>`,
 });
 
@@ -415,7 +411,7 @@ const resolve = (map, v, n = 0) => { const m = String(v).match(/^var\((--[a-z0-9
 const tokRe = (re) => [...lightCss.matchAll(re)];
 
 // 색: 레퍼런스 A 처럼 토큰 / 값(라이트, 다크 견본 + 값)
-const colorGroups = [['bg', '배경'], ['fg', '글자와 아이콘'], ['stroke', '테두리']];
+const colorGroups = [['bg', 'Background'], ['fg', 'Foreground'], ['stroke', 'Stroke']];
 const colorTable = (k) => {
   const names = [...new Set(tokRe(new RegExp(`(--ybm-color-${k}-[a-z0-9-]+)\\s*:`, 'g')).map((m) => m[1]))];
   return table(['토큰', '값'], names.map((v) => {
@@ -435,40 +431,38 @@ const FV = {
 };
 const fvBox = (slug, cover = false) => `<div class="site-tile__thumb${cover ? ' site-cover' : ''}" aria-hidden="true"${cover ? ' data-site-fit-max="2"' : ''}><div class="site-tile__inner"><div class="pv-stage">${FV[slug]}</div></div></div>`;
 const foundName = Object.fromEntries(FOUND);
-write({
-  file: 'foundations/index.html', section: 'foundations', title: 'Foundations', layout: 'wide',
-  body: `<header><h1 class="site-h1">Foundations</h1><p class="site-lead">색, 글자, 간격처럼 모든 화면의 바탕이 되는 값입니다. 화면에서는 값 대신 토큰 이름을 씁니다.</p></header>
-<div class="site-tiles">${FOUND.map(([s, l]) => `<a class="site-tile" href="${s}.html">${fvBox(s)}<p class="site-tile__name">${esc(l)}</p></a>`).join('\n')}</div>`,
-});
+// 예전 Foundations 허브 주소는 첫 항목으로 넘긴다 (공유된 링크가 깨지지 않게)
+fs.mkdirSync(path.join(SITE, 'foundations'), { recursive: true });
+fs.writeFileSync(path.join(SITE, 'foundations/index.html'), `<!doctype html>\n<html lang="ko"><head><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=${FOUND[0][0]}.html"><title>Foundations - YBM DS</title></head><body><a href="${FOUND[0][0]}.html">${esc(FOUND[0][1])}</a></body></html>\n`);
 const foundPages = {
   color: {
     title: '색', lead: '배경, 글자와 아이콘, 테두리에 쓰는 시맨틱 색입니다. 값은 라이트 / 다크 순서예요.',
-    body: `<h2 id="overview">개요</h2>
+    body: `<h2 id="overview">Overview</h2>
 <p>화면에는 시맨틱 색(<code>bg</code>, <code>fg</code>, <code>stroke</code>)만 씁니다. 팔레트(<code>--ybm-color-palette-*</code>)는 시맨틱 색을 만드는 원료라 화면에 직접 쓰지 않아요. 색을 토큰으로만 쓰면 <code>data-theme="dark"</code> 하나로 다크 모드가 맞춰집니다.</p>
 ${colorGroups.map(([k, label]) => `<h2 id="${k}">${label}</h2>\n${colorTable(k)}`).join('\n')}`,
   },
   typography: {
     title: '글자', lead: '글꼴, 굵기, 크기와 줄 높이 토큰입니다.',
-    body: `<h2 id="overview">개요</h2>
+    body: `<h2 id="overview">Overview</h2>
 <p>글꼴은 Pretendard 입니다. 크기는 <code>--ybm-font-size-t01</code> ~ <code>t17</code>, 줄 높이는 같은 번호의 <code>--ybm-line-height-*</code> 를 짝으로 씁니다. 굵기는 regular 400, medium 500, semibold 600, bold 700 입니다.</p>
 <p>한글 위계: 페이지 제목 40/48 medium(500), 리드 16/24 light(300), 섹션 제목 24/32 medium, 소제목 16/22 medium, 본문 16/28 regular, 보조 글 14 regular 입니다. 자간은 주지 않습니다.</p>
-<h2 id="size">크기</h2>
+<h2 id="size">Size</h2>
 ${table(['토큰', '크기 / 줄 높이 (px)', '보기'], tokRe(/--ybm-font-size-(t\d\d): (\d+)px/g).map((m) => [`<code>${m[1]}</code>`, `${m[2]} / ${(LIGHT[`--ybm-line-height-${m[1]}`] || '').replace('px', '')}`, `<span class="site-sample" style="font-size: var(--ybm-font-size-${m[1]}); line-height: var(--ybm-line-height-${m[1]}); font-weight: var(--ybm-font-weight-bold)">가나다 Aa 123</span>`]))}
-<h2 id="weight">굵기</h2>
+<h2 id="weight">Weight</h2>
 ${table(['토큰', '값', '보기'], tokRe(/--ybm-font-weight-([a-z]+): (\d+);/g).map((m) => [`<code>--ybm-font-weight-${m[1]}</code>`, m[2], `<span class="site-sample" style="font-size: var(--ybm-font-size-t06); font-weight: var(--ybm-font-weight-${m[1]})">가나다 Aa 123</span>`]))}`,
   },
   spacing: {
     title: '간격', lead: '여백과 간격에 쓰는 토큰입니다.',
-    body: `<h2 id="overview">개요</h2>
+    body: `<h2 id="overview">Overview</h2>
 <p>4px 단위를 기본으로 하고, 작은 간격은 2px 단위도 씁니다. 화면 좌우 여백은 <code>--ybm-space-x-global-gutter</code> 입니다.</p>
-<h2 id="tokens">토큰</h2>
+<h2 id="tokens">Tokens</h2>
 ${table(['토큰', '값', '보기'], tokRe(/--ybm-space-(x[0-9_]+): (\d+)px/g).map((m) => [`<code>--ybm-space-${m[1]}</code>`, `${m[2]}px`, `<span class="site-bar" style="width: var(--ybm-space-${m[1]})"></span>`]))}`,
   },
   shape: {
     title: '모서리', lead: '부품 모서리 곡률 토큰입니다.',
-    body: `<h2 id="overview">개요</h2>
+    body: `<h2 id="overview">Overview</h2>
 <p>모서리는 쓰임 이름으로 씁니다. 어떤 영역에 <code>--ybm-shape-scale</code> 을 0 과 1 사이 값으로 덮어쓰면 그 안의 모서리만 덜 둥글게 바꿀 수 있어요.</p>
-<h2 id="tokens">토큰</h2>
+<h2 id="tokens">Tokens</h2>
 ${table(['토큰', '값', '보기'], [...new Set(tokRe(/--ybm-shape-base-([a-z0-9]+):/g).map((m) => m[1]))].concat('pill').map((n) => {
   const px = n === 'pill' ? resolve(LIGHT, LIGHT['--ybm-shape-pill']) : resolve(LIGHT, LIGHT[`--ybm-shape-base-${n}`]);
   return [`<code>--ybm-shape-${n}</code>`, esc(px), `<span class="site-shape" style="border-radius: var(--ybm-shape-${n})"></span>`];
@@ -476,23 +470,23 @@ ${table(['토큰', '값', '보기'], [...new Set(tokRe(/--ybm-shape-base-([a-z0-
   },
   elevation: {
     title: '그림자', lead: '떠 있는 높이를 나타내는 그림자와 쌓는 순서입니다.',
-    body: `<h2 id="shadow">그림자</h2>
+    body: `<h2 id="shadow">Shadow</h2>
 <p>숫자 대신 쓰임 이름으로 씁니다.</p>
 ${table(['토큰', '쓰임', '보기'], tokRe(/--ybm-elevation-(raised|overlay|panel|floating|modal):\s+[^;]+;\s*\/\* ([^*]+) \*\//g).map((m) => [`<code>--ybm-elevation-${m[1]}</code>`, prose(m[2]), `<span class="site-shadow" style="box-shadow: var(--ybm-elevation-${m[1]})"></span>`]))}
-<h2 id="z">쌓는 순서</h2>
+<h2 id="z">Z-index</h2>
 ${table(['토큰', '값'], tokRe(/--ybm-z-([a-z]+): (\d+);/g).map((m) => [`<code>--ybm-z-${m[1]}</code>`, m[2]]))}`,
   },
   motion: {
     title: '움직임', lead: '움직임의 길이와 속도 곡선입니다.',
-    body: `<h2 id="duration">길이</h2>
+    body: `<h2 id="duration">Duration</h2>
 ${table(['토큰', '값'], tokRe(/--ybm-duration-([a-z]+): ([^;]+);/g).map((m) => [`<code>--ybm-duration-${m[1]}</code>`, `<code>${esc(m[2])}</code>`]))}
-<h2 id="easing">속도 곡선</h2>
+<h2 id="easing">Easing</h2>
 ${table(['토큰', '값'], tokRe(/--ybm-easing-([a-z]+): ([^;]+);/g).map((m) => [`<code>--ybm-easing-${m[1]}</code>`, `<code>${esc(m[2])}</code>`]))}`,
   },
 };
 for (const [slug, p] of Object.entries(foundPages)) {
   write({
-    file: `foundations/${slug}.html`, section: 'foundations', title: foundName[slug], desc: p.lead, pager: foundPager(slug),
+    file: `foundations/${slug}.html`, section: 'get-started', title: foundName[slug], desc: p.lead, pager: gsPager(`foundations/${slug}.html`),
     body: `<header><h1 class="site-h1">${esc(foundName[slug])}</h1><p class="site-lead">${esc(p.lead)}</p></header>\n${fvBox(slug, true)}\n${p.body}`,
   });
 }
@@ -503,11 +497,11 @@ const iconNames = [...new Set([...iconsCss.matchAll(/\.ds-icon--([a-z0-9-]+)\s*\
 const lucide = JSON.parse(fs.readFileSync(path.join(SITE, 'src/lucide-icons.json'), 'utf8'));
 const lucideCount = Object.keys(lucide.icons).length;
 write({
-  file: 'foundations/icons.html', section: 'foundations', title: 'Iconography', pager: foundPager('icons'),
+  file: 'foundations/icons.html', section: 'get-started', title: 'Iconography', pager: gsPager('foundations/icons.html'),
   body: `<header><h1 class="site-h1">Iconography</h1><p class="site-lead">UI 아이콘은 Lucide 한 가지만 씁니다. Lucide 전체 ${lucideCount.toLocaleString()}개 가운데 CSS 로 바로 쓸 수 있는 것은 ${iconNames.length}개이고, 나머지는 필요할 때 <code>icons.css</code> 에 한 줄 넣어 씁니다.</p></header>
 ${fvBox('icons', true)}
-<div class="site-icon-search"><div class="ds-input" data-variant="outline" data-size="medium"><i class="ds-icon ds-icon--search ds-input__icon" aria-hidden="true"></i><input class="ds-input__control" type="search" placeholder="아이콘 찾기 (예: arrow, user, calendar)" aria-label="아이콘 찾기" data-site-lucide-search></div><span class="site-lucide-count" data-site-lucide-count></span></div>
-<h2 id="use">쓰는 법</h2>
+<div class="site-icon-search"><div class="ds-input" data-variant="outline" data-size="medium"><i class="ds-icon ds-icon--search ds-input__icon" aria-hidden="true"></i><input class="ds-input__control" type="search" placeholder="Search icons (arrow, user, calendar)" aria-label="아이콘 찾기" data-site-lucide-search></div><span class="site-lucide-count" data-site-lucide-count></span></div>
+<h2 id="use">Usage</h2>
 ${example(`<div class="pv-stage"><i class="ds-icon ds-icon--search ds-icon--sm" aria-hidden="true"></i><i class="ds-icon ds-icon--search" aria-hidden="true"></i><i class="ds-icon ds-icon--search ds-icon--lg" aria-hidden="true"></i><span style="color: var(--ybm-color-fg-brand)"><i class="ds-icon ds-icon--circle-check-solid ds-icon--lg" aria-hidden="true"></i></span></div>`, `<i class="ds-icon ds-icon--search ds-icon--sm" aria-hidden="true"></i>  <!-- 16 -->\n<i class="ds-icon ds-icon--search" aria-hidden="true"></i>              <!-- 20 기본 -->\n<i class="ds-icon ds-icon--search ds-icon--lg" aria-hidden="true"></i>  <!-- 24 -->\n<span style="color: var(--ybm-color-fg-brand)"><i class="ds-icon ds-icon--circle-check-solid" aria-hidden="true"></i></span>  <!-- 색은 부모 글자색 -->`)}
 <ul class="site-list site-note">
   <li>색은 부모 글자색을 따릅니다. 크기는 <code>--ds-icon-size</code> 로도 바꿀 수 있어요.</li>
@@ -515,10 +509,10 @@ ${example(`<div class="pv-stage"><i class="ds-icon ds-icon--search ds-icon--sm" 
   <li>뜻이 있는 아이콘만 쓰는 버튼에는 <code>aria-label</code> 을 꼭 답니다. 꾸밈용 아이콘은 <code>aria-hidden="true"</code>.</li>
   <li>필요한 아이콘이 없으면 Lucide 원본 그대로 <code>icons.css</code> 에 한 줄 추가합니다.</li>
 </ul>
-<h2 id="css">CSS 로 바로 쓰는 아이콘</h2>
+<h2 id="css">CSS Icons</h2>
 <p>누르면 클래스 이름이 복사됩니다.</p>
 <div class="site-icons">${iconNames.map((n) => `<button type="button" class="site-icon" data-site-copy="ds-icon--${n}" title="ds-icon--${n} 복사"><i class="ds-icon ds-icon--${n} ds-icon--lg" aria-hidden="true"></i><span>${n}</span></button>`).join('')}</div>
-<h2 id="lucide">Lucide 전체 아이콘</h2>
+<h2 id="lucide">All Lucide Icons</h2>
 <p>Lucide ${esc(lucide.version)} 의 아이콘 ${lucideCount.toLocaleString()}개입니다. CSS 표시가 붙은 것은 누르면 클래스 이름이, 나머지는 <code>icons.css</code> 에 넣을 줄이 복사됩니다. 위 찾기 칸에 영어 이름이나 뜻을 넣으면 두 목록이 함께 걸러집니다.</p>
 <div class="site-icons" id="site-lucide" data-site-ds-icons="${esc(iconNames.join(' '))}"></div>
 <p class="site-note">아이콘 그림은 Lucide(ISC 라이선스)입니다. <a class="ds-link" href="{root}assets/lucide-LICENSE.txt">라이선스 전문</a></p>
@@ -530,9 +524,9 @@ const jsRows = [...dsJs.slice(0, dsJs.indexOf('*/')).matchAll(/^\s*· (.+?) — 
 write({
   file: 'get-started/scripts.html', section: 'get-started', title: 'Scripts', pager: gsPager('get-started/scripts.html'),
   body: `<header><h1 class="site-h1">Scripts</h1><p class="site-lead"><code>ybm-ds.js</code> 는 CSS 만으로 안 되는 동작만 맡습니다. 불러오기만 하면 HTML 속성을 보고 알아서 동작해요.</p></header>
-<h2 id="features">하는 일</h2>
+<h2 id="features">Features</h2>
 ${table(['부품', '하는 일'], jsRows)}
-<h2 id="api">직접 부르는 기능</h2>
+<h2 id="api">API</h2>
 ${table(['기능', '쓰는 법'], [['창 열기, 닫기', '<code>YBM.openDialog(요소)</code>, <code>YBM.closeDialog(요소)</code>'], ['알림 띄우기', '<code>YBM.snackbar("저장했어요", { variant: "positive" })</code>'], ['새로 고침 끝내기', '<code>YBM.endRefresh(요소)</code>'], ['나중에 넣은 HTML 연결', '<code>YBM.init(요소)</code>']])}
 ${codeblock(`<button class="ds-btn" data-ds-open="confirm">열기</button>\n<dialog class="ds-dialog" id="confirm">… <button class="ds-btn" data-ds-close>닫기</button></dialog>\n\n<script>\n  YBM.snackbar("저장했어요", { variant: "positive", action: "확인" });\n</script>`)}`,
 });
@@ -600,12 +594,12 @@ comps.forEach((c) => {
   const prev = compsAZ[i - 1], next = compsAZ[i + 1];
   const { rows, rest } = propsTable(c);
   const sections = [];
-  sections.push(`<h2 id="preview">미리보기</h2>${c.example ? example(c.example, codeOf(c.example) || c.markup) : '<p>아직 예시가 없어요.</p>'}`);
-  if (c.markup) sections.push(`<h2 id="usage">사용법</h2><p>아래 구조를 그대로 쓰고, 대괄호 <code>[ ]</code> 안은 필요할 때만 넣습니다.</p>${codeblock(c.markup)}`);
-  if (rows.length || rest) sections.push(`<h2 id="props">속성</h2><p>Figma 속성 이름을 그대로 <code>data-*</code> 속성으로 씁니다.</p>${rows.length ? table(['속성', '값'], rows) : ''}${rest ? `<p class="site-note">그 밖에: ${rest}</p>` : ''}`);
-  if (c.vars.length) sections.push(`<h2 id="vars">바꿀 수 있는 변수</h2><p>서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.</p>${table(['변수', '기본값'], c.vars.map(([n, v]) => [`<code>${esc(n)}</code>`, `<code>${esc(v)}</code>`]))}`);
-  if (c.dos.length) sections.push(`<h2 id="guide">사용 지침</h2><ul class="site-dos">${c.dos.map((d) => `<li>${inline(d)}</li>`).join('')}</ul>`);
-  if (c.spec) sections.push(`<h2 id="spec">디자인 값</h2><p>Figma 와 CSS 가 함께 따르는 크기, 여백, 색입니다.</p><pre class="site-spec">${esc(c.spec)}</pre>`);
+  sections.push(`<h2 id="preview">Preview</h2>${c.example ? example(c.example, codeOf(c.example) || c.markup) : '<p>아직 예시가 없어요.</p>'}`);
+  if (c.markup) sections.push(`<h2 id="usage">Usage</h2><p>아래 구조를 그대로 쓰고, 대괄호 <code>[ ]</code> 안은 필요할 때만 넣습니다.</p>${codeblock(c.markup)}`);
+  if (rows.length || rest) sections.push(`<h2 id="props">Properties</h2><p>Figma 속성 이름을 그대로 <code>data-*</code> 속성으로 씁니다.</p>${rows.length ? table(['속성', '값'], rows) : ''}${rest ? `<p class="site-note">그 밖에: ${rest}</p>` : ''}`);
+  if (c.vars.length) sections.push(`<h2 id="vars">CSS Variables</h2><p>서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.</p>${table(['변수', '기본값'], c.vars.map(([n, v]) => [`<code>${esc(n)}</code>`, `<code>${esc(v)}</code>`]))}`);
+  if (c.dos.length) sections.push(`<h2 id="guide">Guidelines</h2><ul class="site-dos">${c.dos.map((d) => `<li>${inline(d)}</li>`).join('')}</ul>`);
+  if (c.spec) sections.push(`<h2 id="spec">Specification</h2><p>Figma 와 CSS 가 함께 따르는 크기, 여백, 색입니다.</p><pre class="site-spec">${esc(c.spec)}</pre>`);
   write({
     file: `components/${c.slug}.html`, section: 'components', title: c.name.split(' · ')[0], desc: c.desc,
     pager: [prev && { href: `${prev.slug}.html`, label: prev.name.split(' · ')[0] }, next && { href: `${next.slug}.html`, label: next.name.split(' · ')[0] }],
@@ -649,14 +643,14 @@ templates.forEach((t) => {
 </header>
 <div class="site-frame">
   <div class="site-frame__bar">
-    <div class="ds-segmented" role="group" aria-label="보기 방식"><button type="button" class="ds-segmented__item" aria-pressed="true" data-site-view="preview">미리보기</button><button type="button" class="ds-segmented__item" aria-pressed="false" data-site-view="code">코드</button></div>
-    <div class="ds-segmented" role="group" aria-label="화면 폭"><button type="button" class="ds-segmented__item" aria-pressed="true" data-site-device="desktop">PC</button><button type="button" class="ds-segmented__item" aria-pressed="false" data-site-device="tablet">태블릿</button><button type="button" class="ds-segmented__item" aria-pressed="false" data-site-device="mobile">모바일</button></div>
+    <div class="ds-segmented" role="group" aria-label="보기 방식"><button type="button" class="ds-segmented__item" aria-pressed="true" data-site-view="preview">Preview</button><button type="button" class="ds-segmented__item" aria-pressed="false" data-site-view="code">Code</button></div>
+    <div class="ds-segmented" role="group" aria-label="화면 폭"><button type="button" class="ds-segmented__item" aria-pressed="true" data-site-device="desktop">Desktop</button><button type="button" class="ds-segmented__item" aria-pressed="false" data-site-device="tablet">Tablet</button><button type="button" class="ds-segmented__item" aria-pressed="false" data-site-device="mobile">Mobile</button></div>
   </div>
   <div class="site-frame__stage" data-device="desktop"><iframe src="pages/${t.slug}.html" title="${esc(t.name)} 템플릿" data-site-frame></iframe></div>
   <div class="site-frame__code" hidden>${codeblock('불러오는 중…').replace('<figure class="ds-codeblock"', `<figure class="ds-codeblock" data-site-src="pages/${t.slug}.html"`)}</div>
 </div>
-${t.note ? `<h2 id="responsive">화면 폭에 따라</h2><p>${esc(t.note)}</p>` : ''}
-${used.length ? `<h2 id="components">쓴 컴포넌트</h2><div class="site-links">${used.map((c) => `<a class="ds-chip" data-size="small" href="../components/${c.slug}.html">${esc(c.name.split(' · ')[0])}</a>`).join('')}</div>` : ''}`,
+${t.note ? `<h2 id="responsive">Responsive</h2><p>${esc(t.note)}</p>` : ''}
+${used.length ? `<h2 id="components">Components Used</h2><div class="site-links">${used.map((c) => `<a class="ds-chip" data-size="small" href="../components/${c.slug}.html">${esc(c.name.split(' · ')[0])}</a>`).join('')}</div>` : ''}`,
   });
 });
 

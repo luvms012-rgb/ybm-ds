@@ -8,9 +8,12 @@
   function themeFrame(f) {
     try { var d = f.contentDocument; if (!d) return; if (root.dataset.theme) d.documentElement.dataset.theme = root.dataset.theme; else delete d.documentElement.dataset.theme; } catch (e) {}
   }
-  function setTheme(t) {
-    if (t) root.dataset.theme = t; else delete root.dataset.theme;
-    try { if (t) localStorage.setItem(KEY, t); else localStorage.removeItem(KEY); } catch (e) {}
+  // 처음에는 기기의 라이트 / 다크 설정을 따르고, 버튼으로 고르면 그 선택("dark" 또는 "light")을 기억해 우선한다
+  var osDark = window.matchMedia ? matchMedia("(prefers-color-scheme: dark)") : null;
+  function savedTheme() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
+  function setTheme(t, remember) {
+    if (t === "dark") root.dataset.theme = "dark"; else delete root.dataset.theme;
+    if (remember) { try { localStorage.setItem(KEY, t === "dark" ? "dark" : "light"); } catch (e) {} }
     document.querySelectorAll("[data-site-theme-toggle]").forEach(function (b) { b.setAttribute("aria-pressed", String(t === "dark")); b.setAttribute("aria-label", t === "dark" ? "밝은 화면으로 바꾸기" : "어두운 화면으로 바꾸기"); });
     frames().forEach(themeFrame);
   }
@@ -24,7 +27,7 @@
 
   document.addEventListener("click", function (e) {
     var t = e.target;
-    if (t.closest("[data-site-theme-toggle]")) { setTheme(root.dataset.theme === "dark" ? "" : "dark"); return; }
+    if (t.closest("[data-site-theme-toggle]")) { setTheme(root.dataset.theme === "dark" ? "light" : "dark", true); return; }
 
     if (t.closest("[data-site-menu]")) { document.body.toggleAttribute("data-side-open"); var open = document.body.hasAttribute("data-side-open"); document.querySelectorAll("[data-site-menu]").forEach(function (b) { b.setAttribute("aria-expanded", String(open)); }); return; }
     if (t.closest("[data-site-close]")) { document.body.removeAttribute("data-side-open"); return; }
@@ -220,7 +223,24 @@
     mark(links[0]);  // 처음에는 첫 항목
     var map = {};
     links.forEach(function (a) { map[a.getAttribute("href").slice(1)] = a; });
+    // 목차를 누르면 막대가 누른 항목으로 바로 미끄러지고 본문은 부드럽게 스크롤한다.
+    // 스크롤하는 동안에는 지나가는 제목이 막대를 끌고 다니지 않게 잠근다
+    var lockUntil = 0;
+    var reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+    links.forEach(function (a) {
+      a.addEventListener("click", function (e) {
+        var h = document.getElementById(a.getAttribute("href").slice(1));
+        if (!h) return;
+        e.preventDefault();
+        mark(a);
+        lockUntil = Date.now() + 1200;
+        h.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+        history.replaceState(null, "", "#" + h.id);
+      });
+    });
+    window.addEventListener("scrollend", function () { lockUntil = 0; });
     var io = new IntersectionObserver(function (entries) {
+      if (Date.now() < lockUntil) return;
       entries.forEach(function (en) {
         if (en.isIntersecting) { var a = map[en.target.id]; if (a) mark(a); }
       });
@@ -229,7 +249,9 @@
   }
 
   document.addEventListener("DOMContentLoaded", function () {
-    setTheme(root.dataset.theme || "");
+    setTheme(root.dataset.theme === "dark" ? "dark" : "light");
+    // 버튼으로 고른 적이 없으면 기기 설정이 바뀔 때(밤에 자동 다크 등) 같이 바뀐다
+    if (osDark && osDark.addEventListener) osDark.addEventListener("change", function (e) { if (!savedTheme()) setTheme(e.matches ? "dark" : "light"); });
     frames().forEach(function (f) { f.addEventListener("load", function () { themeFrame(f); }); themeFrame(f); });
     fitThumbs();
     fitTiles();
