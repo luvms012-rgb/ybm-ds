@@ -2,8 +2,8 @@
    YBM DS 문서 사이트 - 사이트 틀 전용 스타일 (DS 레이어 밖)
    배치는 레퍼런스 문서 사이트를 실측해 그대로 따른다 (1440 기준):
      상단 48 / 왼쪽 메뉴 260(항목 32, 간격 2, 현재 항목 채움) / 본문 752(x 335) / 오른쪽 목차 232(x 1143, 세로선 + 지금 위치 막대)
-     배치 4 가지(body 의 site-body--*): doc 문서 752 + 목차 / component 컴포넌트 상세 912 가운데 /
-       wide 목록, 메뉴 옆 전체 폭 / full 템플릿 목록, PC 에서 왼쪽 메뉴 없음
+     배치 3 가지(body 의 site-body--*): doc 문서 752 + 목차(시작하기, 파운데이션, 컴포넌트 목록과 상세) /
+       wide 템플릿 상세, 메뉴 옆 전체 폭 / full 템플릿 목록, PC 에서 왼쪽 메뉴 없음
      본문 리듬: 블록 사이 16, 제목(h2) 위 40, 머리말 아래 첫 제목 56, 라벨과 코드 칸 사이 4
    값은 모두 --ybm-* 토큰. 부품은 DS 클래스 그대로 쓰고, 바꿀 때는 --ds-* 변수만 쓴다.
    한글 글자 위계는 레퍼런스 B 시작 화면 실측 그대로(자간은 모두 0):
@@ -72,7 +72,6 @@ body[data-side-open] .site-scrim { opacity: 1; pointer-events: auto; }
 .site-side__top { display: flex; align-items: center; justify-content: space-between; padding: 0 0 var(--ybm-space-x2) var(--ybm-space-x2); }
 .site-main { min-width: 0; padding: var(--ybm-space-x12) var(--ybm-space-x-global-gutter) var(--ybm-space-x24); }
 .site-doc { max-width: var(--site-doc); }
-.site-body--component .site-doc { max-width: 912px; margin-inline: auto; }
 .site-body--wide .site-doc, .site-body--full .site-doc { max-width: none; }
 .site-toc { display: none; }
 /* PC: 왼쪽 메뉴는 화면 왼쪽에 고정, 본문 752 칸은 화면 전체의 가운데(레퍼런스 실측).
@@ -83,8 +82,8 @@ body[data-side-open] .site-scrim { opacity: 1; pointer-events: auto; }
   .site-side__top, .site-side__mobile { display: none; }
   .site-scrim { display: none; }
   .site-main { padding: 72px var(--ybm-space-x6) var(--ybm-space-x24) max(284px, calc(50% - 377.5px)); }
-  /* 컴포넌트 상세는 메뉴 오른쪽 영역의 가운데, 목록은 메뉴 오른쪽 전체 폭(좌우 24), 템플릿 목록은 메뉴 없이 좌우 24 */
-  .site-body--component .site-main, .site-body--wide .site-main { padding-left: calc(var(--site-side) + var(--ybm-space-x6)); padding-right: var(--ybm-space-x6); }
+  /* 템플릿 상세는 메뉴 오른쪽 전체 폭(좌우 24), 템플릿 목록은 메뉴 없이 좌우 24 */
+  .site-body--wide .site-main { padding-left: calc(var(--site-side) + var(--ybm-space-x6)); padding-right: var(--ybm-space-x6); }
   .site-body--full .site-side { display: none; }
   .site-body--full .site-main { padding-inline: var(--ybm-space-x6); }
 }
@@ -204,10 +203,12 @@ body[data-side-open] .site-scrim { opacity: 1; pointer-events: auto; }
 .site-pager b { font-size: var(--ybm-font-size-t05); font-weight: var(--ybm-font-weight-medium); }
 
 /* ---- 목록 화면(컴포넌트, 템플릿) ---- */
-/* 머리 - 레퍼런스 A 목록 화면: 가운데 정렬, 제목 아래 8, 컴포넌트 목록은 40 아래 구분선, 다음 묶음은 40 아래 */
+/* 머리 - 레퍼런스 A 목록 화면: 가운데 정렬, 제목 아래 8, 버튼 위 16, 컴포넌트 목록은 40 아래 구분선, 다음 묶음은 40 아래 */
 .site-doc > .site-hero { display: flex; flex-direction: column; align-items: center; padding-bottom: 0; border-bottom: 0; text-align: center; }
 .site-doc > .site-hero--line { padding-bottom: var(--ybm-space-x10); border-bottom: 1px solid var(--site-box-line); }
 .site-doc .site-hero .site-lead { margin-top: var(--ybm-space-x2); }
+.site-hero__actions { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--ybm-space-x3); margin-top: var(--ybm-space-x4); }
+.site-pill { --ds-btn-radius: var(--ybm-shape-pill); --ds-btn-padding-x: var(--ybm-space-x3); }
 .site-toolbar { display: flex; flex-direction: column; gap: var(--ybm-space-x3); margin-top: var(--ybm-space-x8); }
 @media (min-width: 768px) { .site-toolbar { flex-direction: row; align-items: center; } .site-toolbar .ds-input { width: 320px; flex: none; } }
 .site-toolbar .ds-chiptabs { padding-inline: 0; overflow-x: auto; }
@@ -228,18 +229,17 @@ body[data-side-open] .site-scrim { opacity: 1; pointer-events: auto; }
 .site-doc .site-card__title { display: flex; align-items: center; gap: var(--ybm-space-x2); font-size: var(--ybm-font-size-t05); line-height: var(--ybm-line-height-t05); font-weight: var(--ybm-font-weight-medium); }
 .site-card__no { color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t03); font-weight: var(--ybm-font-weight-medium); font-variant-numeric: tabular-nums; letter-spacing: 0; }
 .site-doc .site-card__desc { margin-top: 0; color: var(--ybm-color-fg-neutral-muted); font-size: var(--ybm-font-size-t04); line-height: 19px; letter-spacing: 0; }
-.site-tiles { display: grid; grid-template-columns: 1fr; gap: var(--ybm-space-x4) var(--ybm-space-x3); margin-top: var(--ybm-space-x4); }
+/* 컴포넌트 칸 - 썸네일은 레퍼런스 B: 16:9 회색 상자(모서리 8) 가운데에 부품을 실제 크기로, 아래에 이름과 설명. 본문 752 에 2열 */
+.site-tiles { display: grid; grid-template-columns: 1fr; gap: var(--ybm-space-x8) var(--ybm-space-x4); margin-top: var(--ybm-space-x4); }
 @media (min-width: 560px) { .site-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (min-width: 1280px) { .site-tiles { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 .site-tile { display: flex; flex-direction: column; gap: var(--ybm-space-x1); color: var(--ybm-color-fg-neutral); text-decoration: none; }
 .site-tile[hidden] { display: none; }
-.site-tile__thumb { position: relative; height: 228px; overflow: hidden; border-radius: var(--site-box-radius); background: var(--ybm-color-bg-neutral); transition: background-color var(--ybm-duration-fast) var(--ybm-easing-standard); }
+.site-tile__thumb { position: relative; aspect-ratio: 16 / 9; overflow: hidden; border-radius: var(--ybm-shape-sm); background: var(--ybm-color-bg-neutral); transition: background-color var(--ybm-duration-fast) var(--ybm-easing-standard); }
 .site-tile:hover .site-tile__thumb { background: var(--ybm-color-bg-neutral-weak-pressed); }
-.site-tile__inner { position: absolute; left: 50%; top: 50%; width: 520px; transform: translate(-50%, -50%) scale(0.62); transform-origin: center; pointer-events: none; }
-.site-tile__inner .pv-stage { padding: 0; background: none; box-shadow: none; justify-content: center; }
-.site-tile__inner .pv-stage + .pv-stage { display: none; }
-.site-doc .site-tile__name { margin-top: var(--ybm-space-x1); font-size: var(--ybm-font-size-t04); line-height: 20px; font-weight: var(--ybm-font-weight-medium); }
-.site-doc .site-tile__desc { margin-top: 0; color: var(--ybm-color-fg-neutral-muted); font-size: var(--ybm-font-size-t02); line-height: 18px; }
+.site-tile__inner { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: var(--ybm-space-x6); pointer-events: none; }
+.site-tile__inner .pv-stage { flex: none; width: 100%; padding: 0; background: none; box-shadow: none; justify-content: center; transform-origin: center; }  /* 크기 맞춤은 site.js */
+.site-doc .site-tile__name { margin-top: var(--ybm-space-x3); font-size: var(--ybm-font-size-t05); line-height: 24px; font-weight: var(--ybm-font-weight-medium); }
+.site-doc .site-tile__desc { margin-top: 0; color: var(--ybm-color-fg-neutral-muted); font-size: var(--ybm-font-size-t04); line-height: 20px; }
 .site-empty-result[hidden] { display: none; }
 
 .site-tpl-grid { grid-template-columns: 1fr; gap: var(--ybm-space-x6); margin-top: var(--ybm-space-x10); }
@@ -269,6 +269,14 @@ body[data-side-open] .site-scrim { opacity: 1; pointer-events: auto; }
 .site-icon:hover { background: var(--ybm-color-bg-transparent-pressed); }
 .site-icon span { color: var(--ybm-color-fg-neutral-subtle); font-family: var(--site-mono); font-size: var(--ybm-font-size-t01); text-align: center; word-break: break-all; }
 .site-sample { white-space: nowrap; }
+/* Lucide 전체 목록: 찾기 칸 + 개수, 아이콘은 site.js 가 그린다 */
+.site-lucide-bar { display: flex; flex-wrap: wrap; align-items: center; gap: var(--ybm-space-x3); }
+.site-lucide-bar .ds-input { flex: 1 1 280px; max-width: 360px; }
+.site-lucide-count { color: var(--ybm-color-fg-neutral-muted); font-size: var(--ybm-font-size-t04); }
+.site-icon { position: relative; }
+.site-icon[hidden] { display: none; }
+.site-icon > svg { display: block; width: 24px; height: 24px; }
+.site-icon__css { position: absolute; top: var(--ybm-space-x1_5); right: var(--ybm-space-x1_5); }
 
 /* AI 안내문처럼 글이 긴 코드 칸은 한글이 읽기 쉽게 본문 글꼴 (DS 변수 --ds-font-mono 만 바꾼다) */
 .site-doc .ds-codeblock[data-wrap] { --ds-font-mono: var(--ybm-font-family-base); }

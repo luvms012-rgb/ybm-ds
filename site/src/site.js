@@ -64,6 +64,14 @@
       return;
     }
 
+    // Lucide 전체 목록: CSS 에 있으면 클래스 이름, 없으면 icons.css 에 넣을 줄을 복사
+    var lu = t.closest("[data-site-lucide]");
+    if (lu && navigator.clipboard) {
+      var nm = lu.getAttribute("data-site-lucide"), inCss = !!lu.querySelector(".site-icon__css");
+      navigator.clipboard.writeText(inCss ? "ds-icon--" + nm : lucideCss(nm)).then(function () { if (window.YBM) YBM.snackbar(inCss ? "복사했어요: ds-icon--" + nm : "icons.css 에 넣을 줄을 복사했어요: " + nm); });
+      return;
+    }
+
     // 아이콘 이름 복사
     var icon = t.closest("[data-site-copy]");
     if (icon && navigator.clipboard) {
@@ -104,7 +112,38 @@
       nav.querySelectorAll(".site-nav__group").forEach(function (g) { g.hidden = !g.querySelector(".site-nav__item:not([hidden])"); if (q) g.open = true; });
     }
   }
-  document.addEventListener("input", function (e) { if (e.target.matches("[data-site-search]")) filter(); });
+  document.addEventListener("input", function (e) { if (e.target.matches("[data-site-search]")) filter(); if (e.target.matches("[data-site-lucide-search]")) lucideFilter(); });
+
+  // Lucide 전체 아이콘 (아이콘 페이지): 자료는 assets/lucide-icons.js 의 window.LUCIDE
+  function lucideCss(name) {
+    var svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + window.LUCIDE.icons[name] + "</svg>";
+    var uri = svg.replace(/</g, "%3C").replace(/>/g, "%3E").replace(/"/g, "%22").replace(/#/g, "%23");
+    return "/* Lucide " + name + " */\n:root {\n  --ds-icon-" + name + ': url("data:image/svg+xml,' + uri + '");\n}\n.ds-icon--' + name + " { --ds-icon: var(--ds-icon-" + name + "); }";
+  }
+  function lucideGrid() {
+    var grid = document.getElementById("site-lucide");
+    if (!grid || !window.LUCIDE) return;
+    var ds = {}, html = "", L = window.LUCIDE;
+    (grid.getAttribute("data-site-ds-icons") || "").split(" ").forEach(function (n) { ds[n] = true; });
+    Object.keys(L.icons).forEach(function (n) {
+      html += '<button type="button" class="site-icon" data-site-lucide="' + n + '" title="' + n + (ds[n] ? " 클래스 복사" : " icons.css 줄 복사") + '">'
+        + (ds[n] ? '<b class="ds-badge site-icon__css" data-tone="brand">CSS</b>' : "")
+        + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + L.icons[n] + "</svg><span>" + n + "</span></button>";
+    });
+    grid.innerHTML = html;
+    lucideFilter();
+  }
+  function lucideFilter() {
+    var input = document.querySelector("[data-site-lucide-search]");
+    var q = input ? input.value.trim().toLowerCase() : "", tags = (window.LUCIDE && window.LUCIDE.tags) || {}, n = 0;
+    document.querySelectorAll("#site-lucide .site-icon").forEach(function (b) {
+      var name = b.getAttribute("data-site-lucide");
+      var ok = !q || name.indexOf(q) >= 0 || (tags[name] || "").indexOf(q) >= 0;
+      b.hidden = !ok; if (ok) n++;
+    });
+    var c = document.querySelector("[data-site-lucide-count]");
+    if (c) c.textContent = n.toLocaleString() + "개";
+  }
   // 찾기 칸에서 Enter: 걸러진 메뉴의 첫 컴포넌트로
   document.addEventListener("keydown", function (e) {
     if (e.key !== "Enter" || !e.target.matches("[data-site-search]") || !e.target.value.trim()) return;
@@ -125,6 +164,32 @@
     });
   }
   window.addEventListener("resize", fitThumbs);
+
+  // 컴포넌트 썸네일: 작은 부품은 실제 크기, 상자보다 크면 들어가게 줄인다(최소 0.5배, 그래도 크면 가운데만 보임)
+  function fitTiles() {
+    document.querySelectorAll(".site-tile__inner > .pv-stage").forEach(function (st) {
+      var box = st.parentElement, cs = getComputedStyle(box);
+      var aw = box.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+      var ah = box.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
+      if (!aw || !ah) return;
+      var kids = [].slice.call(st.children), s;
+      kids.forEach(function (k) { if ("siteHid" in k.dataset) { k.style.display = k.dataset.siteHid; delete k.dataset.siteHid; } });
+      for (;;) {
+        st.style.transform = ""; st.style.width = aw + "px";
+        s = Math.min(1, aw / st.scrollWidth, ah / st.scrollHeight);
+        if (s < 1) { st.style.width = aw / s + "px"; s = Math.min(1, aw / st.scrollWidth, ah / st.scrollHeight); }
+        // 너무 많이 줄여야 하면 뒤 부품부터 하나씩 뺀다
+        var shown = kids.filter(function (k) { return !("siteHid" in k.dataset); });
+        if (s >= 0.6 || shown.length < 2) break;
+        var last = shown[shown.length - 1]; last.dataset.siteHid = last.style.display; last.style.display = "none";
+      }
+      s = Math.max(s, 0.5);
+      st.style.width = aw / s + "px";
+      st.style.transform = s < 1 ? "scale(" + s + ")" : "";
+    });
+  }
+  window.addEventListener("resize", fitTiles);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitTiles);
 
   // 목차: 지금 읽는 제목 표시
   function spy() {
@@ -151,6 +216,8 @@
     setTheme(root.dataset.theme || "");
     frames().forEach(function (f) { f.addEventListener("load", function () { themeFrame(f); }); themeFrame(f); });
     fitThumbs();
+    fitTiles();
+    lucideGrid();
     spy();
     // 왼쪽 메뉴: 지금 페이지 항목이 안 보이면 보이는 곳까지 내린다
     var side = document.querySelector(".site-side");

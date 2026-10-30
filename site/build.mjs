@@ -194,8 +194,8 @@ function sideNav(section, file, root) {
 const iconBtn = (attrs, label, inner) => `<button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="${esc(label)}" ${attrs}>${inner}</button>`;
 const iconLink = (href, label, icon, extra = '') => `<a class="ds-btn${extra}" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" href="${href}" target="_blank" rel="noopener" aria-label="${esc(label)}"><i class="ds-icon ${icon}" aria-hidden="true"></i></a>`;
 
-// layout - doc: 본문 752 + 목차 (문서) / component: 912 가운데, 목차 없음 (컴포넌트 상세)
-//          wide: 메뉴 옆 전체 폭 (목록) / full: PC 에서 왼쪽 메뉴 없이 전체 폭 (템플릿 목록)
+// layout - doc: 본문 752 + 목차 (문서, 컴포넌트 목록과 상세도 같은 폭) / wide: 메뉴 옆 전체 폭 (템플릿 상세)
+//          full: PC 에서 왼쪽 메뉴 없이 전체 폭 (템플릿 목록)
 function page({ file, title, section, body, layout = 'doc', desc = '' }) {
   const depth = file.split('/').length - 1;
   const root = '../'.repeat(depth);
@@ -461,19 +461,29 @@ for (const [slug, p] of Object.entries(foundPages)) {
 
 // 아이콘
 const iconNames = [...new Set([...iconsCss.matchAll(/\.ds-icon--([a-z0-9-]+)\s*\{\s*--ds-icon:/g)].map((m) => m[1]))].sort();
+// Lucide 전체 목록 - site/src/lucide-icons.json (site/lucide-update.mjs 로 만든다). 화면에는 site.js 가 그린다
+const lucide = JSON.parse(fs.readFileSync(path.join(SITE, 'src/lucide-icons.json'), 'utf8'));
+const lucideCount = Object.keys(lucide.icons).length;
 write({
   file: 'get-started/icons.html', section: 'get-started', title: '아이콘',
-  body: `<header><h1 class="site-h1">아이콘</h1><p class="site-lead">UI 아이콘은 Lucide 한 가지만 씁니다. 지금 CSS 로 바로 쓸 수 있는 아이콘은 ${iconNames.length}개이고, 누르면 클래스 이름이 복사됩니다.</p></header>
+  body: `<header><h1 class="site-h1">아이콘</h1><p class="site-lead">UI 아이콘은 Lucide 한 가지만 씁니다. Lucide 전체 ${lucideCount.toLocaleString()}개 가운데 CSS 로 바로 쓸 수 있는 것은 ${iconNames.length}개이고, 나머지는 필요할 때 <code>icons.css</code> 에 한 줄 넣어 씁니다.</p></header>
 <h2 id="use">쓰는 법</h2>
-${example(`<div class="pv-stage"><i class="ds-icon ds-icon--search ds-icon--sm" aria-hidden="true"></i><i class="ds-icon ds-icon--search" aria-hidden="true"></i><i class="ds-icon ds-icon--search ds-icon--lg" aria-hidden="true"></i><span style="color: var(--ybm-color-fg-brand)"><i class="ds-icon ds-icon--heart-solid ds-icon--lg" aria-hidden="true"></i></span></div>`, `<i class="ds-icon ds-icon--search ds-icon--sm" aria-hidden="true"></i>  <!-- 16 -->\n<i class="ds-icon ds-icon--search" aria-hidden="true"></i>              <!-- 20 기본 -->\n<i class="ds-icon ds-icon--search ds-icon--lg" aria-hidden="true"></i>  <!-- 24 -->\n<span style="color: var(--ybm-color-fg-brand)"><i class="ds-icon ds-icon--heart-solid" aria-hidden="true"></i></span>  <!-- 색은 부모 글자색 -->`)}
+${example(`<div class="pv-stage"><i class="ds-icon ds-icon--search ds-icon--sm" aria-hidden="true"></i><i class="ds-icon ds-icon--search" aria-hidden="true"></i><i class="ds-icon ds-icon--search ds-icon--lg" aria-hidden="true"></i><span style="color: var(--ybm-color-fg-brand)"><i class="ds-icon ds-icon--circle-check-solid ds-icon--lg" aria-hidden="true"></i></span></div>`, `<i class="ds-icon ds-icon--search ds-icon--sm" aria-hidden="true"></i>  <!-- 16 -->\n<i class="ds-icon ds-icon--search" aria-hidden="true"></i>              <!-- 20 기본 -->\n<i class="ds-icon ds-icon--search ds-icon--lg" aria-hidden="true"></i>  <!-- 24 -->\n<span style="color: var(--ybm-color-fg-brand)"><i class="ds-icon ds-icon--circle-check-solid" aria-hidden="true"></i></span>  <!-- 색은 부모 글자색 -->`)}
 <ul class="site-list site-note">
   <li>색은 부모 글자색을 따릅니다. 크기는 <code>--ds-icon-size</code> 로도 바꿀 수 있어요.</li>
   <li>이름 끝에 <code>-solid</code> 가 붙은 것은 채움 모양입니다.</li>
   <li>뜻이 있는 아이콘만 쓰는 버튼에는 <code>aria-label</code> 을 꼭 답니다. 꾸밈용 아이콘은 <code>aria-hidden="true"</code>.</li>
   <li>필요한 아이콘이 없으면 Lucide 원본 그대로 <code>icons.css</code> 에 한 줄 추가합니다.</li>
 </ul>
-<h2 id="all">전체 아이콘</h2>
-<div class="site-icons">${iconNames.map((n) => `<button type="button" class="site-icon" data-site-copy="ds-icon--${n}" title="ds-icon--${n} 복사"><i class="ds-icon ds-icon--${n} ds-icon--lg" aria-hidden="true"></i><span>${n}</span></button>`).join('')}</div>`,
+<h2 id="css">CSS 로 바로 쓰는 아이콘</h2>
+<p>누르면 클래스 이름이 복사됩니다.</p>
+<div class="site-icons">${iconNames.map((n) => `<button type="button" class="site-icon" data-site-copy="ds-icon--${n}" title="ds-icon--${n} 복사"><i class="ds-icon ds-icon--${n} ds-icon--lg" aria-hidden="true"></i><span>${n}</span></button>`).join('')}</div>
+<h2 id="lucide">Lucide 전체 아이콘</h2>
+<p>Lucide ${esc(lucide.version)} 의 아이콘 ${lucideCount.toLocaleString()}개입니다. CSS 표시가 붙은 것은 누르면 클래스 이름이, 나머지는 <code>icons.css</code> 에 넣을 줄이 복사됩니다. 영어 이름이나 뜻으로 찾을 수 있어요.</p>
+<div class="site-lucide-bar"><div class="ds-input" data-variant="outline" data-size="medium"><i class="ds-icon ds-icon--search ds-input__icon" aria-hidden="true"></i><input class="ds-input__control" type="search" placeholder="예: arrow, user, calendar" aria-label="Lucide 아이콘 찾기" data-site-lucide-search></div><span class="site-lucide-count" data-site-lucide-count></span></div>
+<div class="site-icons" id="site-lucide" data-site-ds-icons="${esc(iconNames.join(' '))}"></div>
+<p class="site-note">아이콘 그림은 Lucide(ISC 라이선스)입니다. <a class="ds-link" href="{root}assets/lucide-LICENSE.txt">라이선스 전문</a></p>
+<script src="{root}assets/lucide-icons.js" defer></script>`,
 });
 
 // 스크립트
@@ -489,17 +499,32 @@ ${codeblock(`<button class="ds-btn" data-ds-open="confirm">열기</button>\n<dia
 });
 
 /* ---------------------------------------------------------------- Components */
+// 맨 바깥 요소를 앞에서부터 n 개 꺼낸다 (글자만 있는 조각과 주석은 건너뛴다)
+const VOID = new Set(['input', 'img', 'br', 'hr', 'meta', 'link', 'source', 'col', 'area', 'wbr']);
+function topElements(html, n) {
+  const out = [];
+  const re = /<(\/?)([a-zA-Z][\w-]*)\b(?:[^>"']|"[^"]*"|'[^']*')*?(\/?)>/g;
+  let m, depth = 0, start = 0;
+  while ((m = re.exec(html)) && out.length < n) {
+    const tag = m[2].toLowerCase();
+    if (m[1]) { if (--depth === 0) out.push(html.slice(start, re.lastIndex)); continue; }
+    if (depth === 0) start = m.index;
+    if (VOID.has(tag) || m[3]) { if (depth === 0) out.push(html.slice(start, re.lastIndex)); } else depth++;
+  }
+  return out;
+}
+// 썸네일 - 레퍼런스 B 처럼 회색 16:9 상자 가운데에 첫 예시의 앞 부품 몇 개를 실제 크기로
 const cardThumb = (c) => {
   const first = stages(c.example)[0] || '';
   // 카드 전체가 링크라 안쪽 링크는 span 으로 바꾼다(링크 안 링크는 HTML 이 깨진다)
-  const safe = first.replace(/ id="[^"]*"/g, '').replace(/<script[\s\S]*?<\/script>/g, '').replace(/<a\b/g, '<span').replace(/<\/a>/g, '</span>');
+  const safe = topElements(first, 2).join('').replace(/ id="[^"]*"/g, '').replace(/<script[\s\S]*?<\/script>/g, '').replace(/<a\b/g, '<span').replace(/<\/a>/g, '</span>');
   return `<div class="site-tile__thumb" aria-hidden="true"><div class="site-tile__inner" inert><div class="pv-stage">${safe}</div></div></div>`;
 };
-// 목록 머리: 레퍼런스 A 목록 화면처럼 가운데 제목과 설명 (설치, 커뮤니티 같은 버튼은 넣지 않는다), line 이면 아래 구분선
-const hero = (title, lead, line = false) => `<header class="site-hero${line ? ' site-hero--line' : ''}"><h1 class="site-h1">${esc(title)}</h1><p class="site-lead">${esc(lead)}</p></header>`;
+// 목록 머리: 레퍼런스 A 목록 화면처럼 가운데 제목, 설명, 버튼 (설치, 커뮤니티 버튼은 넣지 않고 Figma 만), line 이면 아래 구분선
+const hero = (title, lead, line = false, actions = '') => `<header class="site-hero${line ? ' site-hero--line' : ''}"><h1 class="site-h1">${esc(title)}</h1><p class="site-lead">${esc(lead)}</p>${actions}</header>`;
 write({
-  file: 'components/index.html', section: 'components', title: 'Components', layout: 'wide',
-  body: `${hero('컴포넌트', `화면을 만드는 부품 ${comps.length}종입니다. 모두 Figma 와 CSS 가 같은 이름, 같은 값으로 짝을 이룹니다.`, true)}
+  file: 'components/index.html', section: 'components', title: 'Components',
+  body: `${hero('컴포넌트', `화면을 만드는 부품 ${comps.length}종입니다. 모두 Figma 와 CSS 가 같은 이름, 같은 값으로 짝을 이룹니다.`, true, `<div class="site-hero__actions"><a class="ds-btn site-pill" data-variant="neutralWeak" data-size="small" href="${FIGMA}2274-1143" target="_blank" rel="noopener">Figma 보기</a></div>`)}
 ${CATS.map(([cat, label]) => {
   const list = comps.filter((c) => c.cat === cat);
   if (!list.length) return '';
@@ -547,7 +572,7 @@ comps.forEach((c, i) => {
   if (c.dos.length) sections.push(`<h2 id="guide">사용 지침</h2><ul class="site-dos">${c.dos.map((d) => `<li>${inline(d)}</li>`).join('')}</ul>`);
   if (c.spec) sections.push(`<h2 id="spec">디자인 값</h2><p>Figma 와 CSS 가 함께 따르는 크기, 여백, 색입니다.</p><pre class="site-spec">${esc(c.spec)}</pre>`);
   write({
-    file: `components/${c.slug}.html`, section: 'components', title: c.name.split(' · ')[0], desc: c.desc, layout: 'component',
+    file: `components/${c.slug}.html`, section: 'components', title: c.name.split(' · ')[0], desc: c.desc,
     body: `<header>
   <p class="site-eyebrow"><a href="index.html">Components</a> / ${esc(catLabel[c.cat])}</p>
   <h1 class="site-h1">${esc(c.name)}</h1>
@@ -605,6 +630,8 @@ ${used.length ? `<h2 id="components">쓴 컴포넌트</h2><div class="site-links
 fs.mkdirSync(path.join(SITE, 'assets'), { recursive: true });
 fs.copyFileSync(path.join(SITE, 'src/site.js'), path.join(SITE, 'assets/site.js'));
 fs.copyFileSync(path.join(SITE, 'src/logo-ybmnet.svg'), path.join(SITE, 'assets/logo-ybmnet.svg'));
+fs.writeFileSync(path.join(SITE, 'assets/lucide-icons.js'), `/* Lucide ${lucide.version} (ISC) - 생성물: site/src/lucide-icons.json */\nwindow.LUCIDE = ${JSON.stringify(lucide)};\n`);
+fs.copyFileSync(path.join(SITE, 'src/lucide-LICENSE.txt'), path.join(SITE, 'assets/lucide-LICENSE.txt'));
 // 사이트 전용 아이콘(DS 아이콘 세트에 없는 화면 모드, 저장소 링크용). Lucide 원본 경로를 DS 와 같은 방식(mask)으로 쓴다
 const SITE_ICONS = {
   moon: '<path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>',
