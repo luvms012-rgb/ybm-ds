@@ -18,7 +18,7 @@ YBM 디자인 시스템 공식 문서 사이트를 준비하는 폴더다. 2026-
 - 사이트와 템플릿은 **ybm-ds 에 정의된 것만** 쓴다. 없는 것은 PROPOSAL.md 로 제안한다.
 - 한글, Pretendard. 한글 글자 위계는 국내 주요 서비스를 측정해 정했다: 20px 이상 자간 -0.02em, 15~19px -0.01em, 14px 이하 0, 제목 700 / 소제목 600 / 본문 400 / 라벨 500, 긴 글 줄 높이 1.7~1.75, word-break keep-all.
 - 템플릿은 모두 반응형(모바일 먼저, 768 / 1280). 앞으로 계속 추가한다(`site/src/templates.json` 한 줄 + `site/templates/pages/<slug>.html`).
-- 로고: YBM 심볼(로고 모음 Figma 파일 `NvAvZxDAnYf3nOVkBZ3pyU` 노드 `130:1642` 에서 잘라 `src/logo-mark.svg`) + "Design System".
+- 로고: **YBM NET 공식 로고만** 쓴다(2026-10-30 사용자 지시). 로고 모음 Figma 파일 `NvAvZxDAnYf3nOVkBZ3pyU` 노드 `130:1642` 를 그대로 내보낸 `src/logo-ybmnet.svg`. 잘라 쓰거나 "Design System" 같은 글자를 붙이지 않는다.
 - 두 레퍼런스의 이름과 주소는 저장소에 적지 않는다(로컬 분석 문서와 Claude 메모리에만).
 
 ## 데이터 원본

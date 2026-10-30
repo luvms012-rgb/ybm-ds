@@ -26,8 +26,7 @@ body.site { background: var(--ybm-color-bg-layer-default); color: var(--ybm-colo
   -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
 }
 .site-logo { display: inline-flex; align-items: center; gap: var(--ybm-space-x2); justify-self: start; padding: var(--ybm-space-x1) var(--ybm-space-x2); border-radius: var(--ybm-shape-lg); color: var(--ybm-color-fg-neutral); text-decoration: none; }
-.site-logo img { display: block; width: auto; height: 22px; }
-.site-logo span { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); font-weight: var(--ybm-font-weight-bold); }
+.site-logo img { display: block; width: auto; height: 24px; }  /* YBM NET 공식 로고 그대로 - 색, 비율을 바꾸지 않는다 */
 .site-top .ds-topnav__menu { display: none; }
 .site-top__end { display: flex; align-items: center; justify-content: flex-end; gap: var(--ybm-space-x1); }
 .site-top__end .ds-btn[data-layout="iconOnly"] { --ds-btn-radius: var(--ybm-shape-pill); }

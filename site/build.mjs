@@ -209,7 +209,7 @@ function page({ file, title, section, body, wide = false, desc = '' }) {
 <title>${esc(title)} - YBM DS</title>
 ${desc ? `<meta name="description" content="${esc(desc)}">\n` : ''}<!-- 생성물: node site/build.mjs 가 만든다. 직접 고치지 말고 site/build.mjs 나 site/src 를 고친다 -->
 <script>try { var t = localStorage.getItem("ybm-site-theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}</script>
-<link rel="icon" href="${root}assets/logo-mark.svg" type="image/svg+xml">
+<link rel="icon" href="${root}assets/logo-ybmnet.svg" type="image/svg+xml">
 <link rel="stylesheet" href="${root}../dist/ybm-ds.css">
 <link rel="stylesheet" href="${root}assets/site.css">
 <script src="${root}../dist/ybm-ds.js" defer></script>
@@ -218,7 +218,7 @@ ${desc ? `<meta name="description" content="${esc(desc)}">\n` : ''}<!-- 생성�
 <body class="site">
 <a class="site-skip" href="#main">본문 바로가기</a>
 <header class="site-top">
-  <a class="site-logo" href="${root}index.html" aria-label="YBM DS 처음으로"><img src="${root}assets/logo-mark.svg" alt="" width="40" height="22"><span>Design System</span></a>
+  <a class="site-logo" href="${root}index.html"><img src="${root}assets/logo-ybmnet.svg" alt="YBM NET" width="81" height="24"></a>
   <nav class="ds-topnav__menu" aria-label="주요 메뉴">
     ${NAV.map(([k, l, h]) => `<a class="ds-topnav__item" href="${root}${h}"${k === section ? ' aria-current="page"' : ''}>${l}</a>`).join('\n    ')}
   </nav>
@@ -565,7 +565,7 @@ ${used.length ? `<h2 id="components">쓴 컴포넌트</h2><div class="site-links
 /* ---------------------------------------------------------------- 자산 */
 fs.mkdirSync(path.join(SITE, 'assets'), { recursive: true });
 fs.copyFileSync(path.join(SITE, 'src/site.js'), path.join(SITE, 'assets/site.js'));
-fs.copyFileSync(path.join(SITE, 'src/logo-mark.svg'), path.join(SITE, 'assets/logo-mark.svg'));
+fs.copyFileSync(path.join(SITE, 'src/logo-ybmnet.svg'), path.join(SITE, 'assets/logo-ybmnet.svg'));
 // 사이트 전용 아이콘(DS 아이콘 세트에 없는 화면 모드, 저장소 링크용). Lucide 원본 경로를 DS 와 같은 방식(mask)으로 쓴다
 const SITE_ICONS = {
   moon: '<path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>',
