@@ -56,6 +56,8 @@ body.site { background: var(--ybm-color-bg-layer-default); color: var(--ybm-colo
   .site-topnav { display: flex; }
   .site-only-wide { display: inline-flex; }
 }
+/* 다크 모드 로고: 공식 로고를 흰색 단색으로 (2026-10-31 사용자 결정) */
+:root[data-theme="dark"] img[src$="logo-ybmnet.svg"] { filter: brightness(0) invert(1); }
 .site-theme-btn .site-i--sun { display: none; }
 :root[data-theme="dark"] .site-theme-btn .site-i--sun { display: inline-block; }
 :root[data-theme="dark"] .site-theme-btn .site-i--moon { display: none; }
@@ -74,7 +76,8 @@ body[data-side-open] .site-scrim { opacity: 1; pointer-events: auto; }
 .site-side__top { display: flex; align-items: center; justify-content: space-between; padding: 0 0 var(--ybm-space-x2) var(--ybm-space-x2); }
 .site-main { min-width: 0; padding: var(--ybm-space-x6) var(--ybm-space-x4) var(--ybm-space-x24); }
 .site-doc { max-width: calc(var(--site-col) - 2 * var(--ybm-space-x6)); }
-.site-body--wide .site-doc, .site-body--full .site-doc { max-width: none; }
+.site-body--wide .site-doc { max-width: 1152px; margin-inline: auto; }  /* 레퍼런스 A 컴포넌트 목록: 1152 가운데 (1920 실측) */
+.site-body--full .site-doc { max-width: none; }
 .site-toc { display: none; }
 /* 768 이상: 왼쪽 메뉴 260 을 화면 왼쪽에 붙이고, 글 칸(최대 800, 안쪽 24)은 메뉴 바로 옆에서 시작 */
 @media (min-width: 768px) {
@@ -138,7 +141,9 @@ body[data-side-open] .site-scrim { opacity: 1; pointer-events: auto; }
 /* 제목 구성 (레퍼런스 B): 위 줄 경로 14 muted, 큰 제목, 설명. 아래 구분선 없음 */
 .site-doc > header { padding-bottom: 0; border-bottom: 0; }
 /* 컴포넌트 첫 그림 (레퍼런스 B): 900 x 473 회색 상자, 모서리 16, 부품은 상자에 맞게 키운다 */
-.site-doc > .site-cover { margin-top: 28px; aspect-ratio: 3200 / 1680; border-radius: var(--ybm-shape-xl); }
+.site-doc > .site-cover { margin-top: 28px; aspect-ratio: 16 / 9; border-radius: var(--ybm-shape-xl); }  /* 레퍼런스 A 컴포넌트 첫 그림 912×513 */
+/* 컴포넌트 상세는 본문이 더 넓다 (레퍼런스 A: 문서 752, 컴포넌트 912) */
+.site-body--comp { --site-col: 960px; }
 .site-cover .site-tile__inner { padding: var(--ybm-space-x12); }
 .site-toc-select { position: relative; margin-top: var(--ybm-space-x6); }
 .site-toc-select select { width: 100%; height: 36px; padding: 0 var(--ybm-space-x10) 0 var(--ybm-space-x3); border: 0; border-radius: var(--ybm-shape-lg); background: var(--ybm-color-bg-layer-default); box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-neutral-weak); color: var(--ybm-color-fg-neutral); font-size: var(--ybm-font-size-t04); -webkit-appearance: none; appearance: none; cursor: pointer; }
@@ -293,19 +298,6 @@ body[data-side-open] .site-scrim { opacity: 1; pointer-events: auto; }
 .site-icon:hover { background: var(--ybm-color-bg-transparent-pressed); }
 .site-icon span { color: var(--ybm-color-fg-neutral-subtle); font-family: var(--site-mono); font-size: var(--ybm-font-size-t01); text-align: center; word-break: break-all; }
 .site-sample { white-space: nowrap; }
-/* 파운데이션 그림 (목록 카드, 각 페이지 큰 그림) */
-.site-fv-swatch { width: 48px; height: 64px; border-radius: var(--ybm-shape-lg); }
-.site-fv-swatch--pill { border-radius: var(--ybm-shape-pill); }
-.site-fv-type { color: var(--ybm-color-fg-neutral); font-size: 56px; line-height: 1; font-weight: var(--ybm-font-weight-bold); white-space: nowrap; }
-.site-fv-space { display: flex; flex-direction: column; gap: var(--ybm-space-x2); }
-.site-fv-space > span { height: 12px; border-radius: var(--ybm-shape-2xs); background: var(--ybm-color-bg-brand-solid); }
-.site-fv-shape { width: 56px; height: 56px; background: var(--ybm-color-bg-brand-solid); }
-.site-fv-card { width: 56px; height: 72px; border-radius: var(--ybm-shape-md); background: var(--ybm-color-bg-layer-floating); }
-.site-fv-curve { width: 120px; height: 80px; overflow: visible; }
-.site-fv-curve path { fill: none; stroke: var(--ybm-color-fg-brand); stroke-width: 4; stroke-linecap: round; }
-.site-fv-curve circle { fill: var(--ybm-color-fg-neutral); }
-.site-fv-icons { display: flex; gap: var(--ybm-space-x4); color: var(--ybm-color-fg-neutral); }
-.site-fv-icons .ds-icon { --ds-icon-size: 32px; }
 /* Lucide 전체 목록: 찾기 칸 + 개수, 아이콘은 site.js 가 그린다 */
 .site-doc > .site-icon-search { position: sticky; top: var(--site-top); z-index: 2; display: flex; flex-wrap: wrap; align-items: center; gap: var(--ybm-space-x3); margin-top: var(--ybm-space-x6); padding-block: var(--ybm-space-x3); background: var(--ybm-color-bg-layer-default); }
 .site-icon-search .ds-input { flex: 1 1 280px; max-width: 480px; }
@@ -314,6 +306,12 @@ body[data-side-open] .site-scrim { opacity: 1; pointer-events: auto; }
 .site-icon[hidden] { display: none; }
 .site-icon > svg { display: block; width: 24px; height: 24px; }
 .site-icon__css { position: absolute; top: var(--ybm-space-x1_5); right: var(--ybm-space-x1_5); }
+/* 아이콘 표: 이름을 누르면 클래스 복사 */
+.site-icon-name { display: inline-flex; align-items: center; gap: var(--ybm-space-x3); color: var(--ybm-color-fg-neutral); font: inherit; cursor: pointer; }
+.site-icon-name code { white-space: nowrap; }
+.site-icon-name:hover code { text-decoration: underline; }
+/* Best Practices 표의 Do / Don't */
+.site-doc .ds-table .site-practice { vertical-align: middle; white-space: nowrap; }
 
 /* AI 안내문처럼 글이 긴 코드 칸은 한글이 읽기 쉽게 본문 글꼴 (DS 변수 --ds-font-mono 만 바꾼다) */
 .site-doc .ds-codeblock[data-wrap] { --ds-font-mono: var(--ybm-font-family-base); }

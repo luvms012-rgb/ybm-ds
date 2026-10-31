@@ -16,7 +16,7 @@ YBM 디자인 시스템 공식 문서 사이트를 준비하는 폴더다. 2026-
 - **용어는 되도록 영어** (2026-10-30 저녁 집): 제목(h2, h3), 목차, 버튼, 탭, 찾기 칸 안내 글은 영어. 설명 문장과 본문은 한국어. 오른쪽 목차 위 "목차" 제목은 없앰.
 - **왼쪽 메뉴 묶음은 접는 아코디언** (2026-10-30 저녁 집, 레퍼런스 A 실측): 묶음 이름은 항목과 같은 32 버튼(14/20 400) + 오른쪽 14 꺾쇠(위 = 펼침), 안쪽 항목 글자 들여쓰기 32, 안쪽 항목 사이 간격 0, 묶음 위아래 8. 항목은 진한 글자 400, 지금 페이지 500 + 옅은 회색 채움. 접은 묶음은 localStorage `ybm-site-nav-closed` 에 기억하고, 지금 페이지가 든 묶음은 늘 펼친다.
 - **사이트 CSS / JS 주소에 버전**(`?v=` + 내용 해시 8자리)을 붙인다. 고친 뒤 브라우저나 GitHub Pages 캐시 때문에 예전 모양이 보이는 문제를 막는다.
-- **로고 다크 모드 (검토만, 미정)**: 공식 로고의 "NET" 남색 `#004EA2` 가 다크 배경에서 대비 약 2.2:1 로 거의 안 보이고 회색 "YBM" 이 더 밝아 보여 위계가 뒤집힌다. 로고는 손대지 않는 규칙이라 공식 다크용(반전) 로고 파일이 필요하다. 로고 모음 Figma 파일은 지금 계정으로 읽을 권한이 없다.
+- **로고 다크 모드 (2026-10-31 결정)**: 다크 모드에서는 공식 로고를 CSS filter 로 흰색 단색으로 보여 준다(`img[src$="logo-ybmnet.svg"]`). 로고 파일 자체는 손대지 않는다. 공식 다크용 로고 파일이 생기면 그걸로 바꾼다.
 - **목차를 누르면** 막대가 누른 항목으로 바로 미끄러지고 본문은 부드럽게 스크롤한다(스크롤하는 동안 지나가는 제목은 막대를 움직이지 않음, 움직임 줄이기 설정이면 바로 이동).
 - **IA 는 Get Started, Components, Templates 세 가지** (2026-10-30 저녁 집에서 사용자 "통합": 네 가지였던 것을 레퍼런스 A 처럼 Foundations 를 Get Started 왼쪽 메뉴의 묶음으로 넣음). 사이트 메인은 따로 없고 Get Started 가 첫 화면이다. Get Started 왼쪽 메뉴는 Overview + Guide(Scripts, Usage) + Foundations(Color, Elevation, Iconography, Motion, Radius, Spacing, Typography). 파일 주소 `foundations/<slug>.html` 은 그대로이고, 예전 허브 `foundations/index.html` 은 Color 로 넘어가는 빈 페이지만 남겼다.
 - **다크 모드는 기기 설정을 따른다** (2026-10-30 집, 사용자 "밤에는 자동으로 다크모드"): 처음 들어오면 OS 의 라이트 / 다크 설정(prefers-color-scheme)대로 보이고, 기기 설정이 바뀌면 같이 바뀐다. 상단 버튼으로 고르면 그 선택(`localStorage` ybm-site-theme = dark 또는 light)이 우선한다.
@@ -30,7 +30,7 @@ YBM 디자인 시스템 공식 문서 사이트를 준비하는 폴더다. 2026-
 - **페이지 배치 3 가지** (`page({ layout })`): doc 글 900 + 목차 - 시작하기, 파운데이션, 컴포넌트 상세 / wide 메뉴 옆 넓은 폭 - 컴포넌트 목록(레퍼런스 B 목록처럼 분류 제목, 개수 없이 ABC 순 3열, 1440 에서 칸 358), 템플릿 상세 / full 템플릿 목록은 PC 에서 왼쪽 메뉴 없이 가운데 머리 + 가운데 필터 + 3열(레퍼런스 A, 그대로 둠).
 - **컴포넌트 목록 썸네일은 레퍼런스 B**: 16:9 `bg-neutral` 상자(모서리 8) 가운데에 첫 예시의 앞 부품 2개를 실제 크기로, 상자보다 크면 site.js 가 줄이고(최소 0.5배) 많이 줄여야 하면 뒤 부품을 뺀다. 아래 이름 20/30 500 만(설명은 사용자가 뺌).
 - **아이콘 페이지**(foundations/icons.html): 큰 그림 아래 찾기 칸 하나(스크롤해도 위에 붙음)가 CSS 로 바로 쓰는 아이콘(dist/icons.css)과 Lucide 전체 목록(CSS 표시)을 함께 거른다. 전체 목록은 `site/src/lucide-icons.json`(Lucide 1.64.0, 1,999개, ISC) 을 site.js 가 그린다. CSS 에 없는 아이콘은 누르면 icons.css 에 넣을 줄이 복사된다. 갱신: lucide-static 의 icon-nodes.json, tags.json, LICENSE 를 받아 `node site/lucide-update.mjs <폴더> <버전>`.
-- **Foundations** (2026-10-30, 레퍼런스 B 의 Foundations 화면과 우리 컴포넌트 목록 기준. 같은 날 저녁 상단 메뉴에서 빠져 Get Started 왼쪽 메뉴 묶음이 됨, 3열 카드 허브는 없앰): 항목마다 한 페이지 `foundations/<slug>.html`(Color, Elevation, Iconography, Motion, Radius, Spacing, Typography - 메뉴와 이전/다음은 ABC 순), 제목은 영문, 설명 아래 큰 회색 그림. 그림은 build.mjs 의 FV 에서 DS 토큰으로 그린다. 표 값은 build.mjs 가 tokens.css 에서 읽는다(다크 블록은 따로). 본문 내용은 레퍼런스 B 처럼 더 채울 수 있다(사용자 검토).
+- **Foundations** (2026-10-30, 레퍼런스 B 의 Foundations 화면과 우리 컴포넌트 목록 기준. 같은 날 저녁 상단 메뉴에서 빠져 Get Started 왼쪽 메뉴 묶음이 됨, 3열 카드 허브는 없앰): 항목마다 한 페이지 `foundations/<slug>.html`(Color, Elevation, Iconography, Motion, Radius, Spacing, Typography - 메뉴와 이전/다음은 ABC 순), 제목은 영문. 설명 아래 큰 그림은 2026-10-31 사용자 지시로 없앰(build.mjs 의 FV 삭제). 표 값은 build.mjs 가 tokens.css 에서 읽는다(다크 블록은 따로). 본문 내용은 레퍼런스 B 처럼 더 채울 수 있다(사용자 검토).
 - Quick Start with AI 컨셉. 설치 1순위는 CSS 두 줄, 2순위(개발자)는 버전 고정 CDN, 파일 내려받기, Tailwind 설정. npm 은 제안(PROPOSAL.md).
 - 사이트와 템플릿은 **ybm-ds 에 정의된 것만** 쓴다. 없는 것은 PROPOSAL.md 로 제안한다.
 - 한글, Pretendard. **한글 위계는 레퍼런스 B 그대로** (2026-10-30 사용자 지시, 실측): 페이지 제목은 위 "제목 구성" 값(32 / 48 / 60), 리드 16/24 300(Pretendard Light, DS 폰트 폴더 파일을 사이트 CSS 에서 선언), 섹션 제목 24/32 500, 소제목 16/22 500, 본문 16/28 400, 보조 14/19. 자간은 사이트 전체 0(2026-10-30 사용자 지시). 템플릿 9종의 tp-h1~tp-body 도 같은 기준. word-break keep-all.
@@ -54,6 +54,10 @@ YBM 디자인 시스템 공식 문서 사이트를 준비하는 폴더다. 2026-
 - **레퍼런스 파일**: 레퍼런스 A 의 Figma 라이브러리 (주소는 로컬 분석 문서와 Claude 메모리)
   - ybm-ds Figma 구성을 이 화면 기준으로 바꿀 예정. **보류 중** — 사용자가 요청할 때만 시작한다.
 - **Figma / Code 버튼**(2026-10-31): 컴포넌트와 Foundations 페이지 머리말 아래에 그 부품의 Figma 문서 프레임과 GitHub CSS 줄 범위로 가는 버튼 2개. 주소는 `tokens/links.mjs` 의 계획을 쓰고(Figma 문서 프레임의 "문서 / 코드" 링크와 같은 원본), 문서 프레임 ID 는 `components.json` 의 `doc` / `figmaDocs` 에서 온다. 줄 번호는 빌드마다 다시 계산된다. Motion 은 Figma 문서가 없어 Code 만.
+- **쉬움이 먼저** (2026-10-31 사용자: "ybm-ds 는 전체적으로 쉬웠으면"): 글은 짧고 쉬운 말, 한 문단에 한 가지. 페이지는 보자마자 복사해서 쓸 수 있게(Usage 코드가 위, 설명은 한두 줄). 선택지와 규칙은 적게. 새 페이지나 글을 쓸 때 이 기준으로 먼저 본다.
+- **Foundations 페이지 구성** (2026-10-31, 레퍼런스 A 의 Color 페이지): Overview(짧은 설명 + 바로 쓰는 예시) → 토큰/항목 표 → 쓰는 법 코드 → Best Practices(Do / Don't 표, `practices()`). Iconography 를 이 구성으로 먼저 만들었다: Overview, Icons(쓰임별 표 5묶음, 이름 누르면 클래스 복사), Size and Color, Add an Icon(Lucide 전체 찾기), Best Practices. 아이콘 쓰임 글은 build.mjs 의 ICON_GROUPS 에 있고, icons.css 에 아이콘을 넣으면 빌드가 빠진 것을 알려 준다. 나머지 Foundations 페이지도 같은 구성으로 채울 수 있다.
+- **컴포넌트 상세 배치** (2026-10-31, 레퍼런스 A 의 Button 페이지 실측): 본문 폭 912(문서 페이지 752 보다 넓음, `.site-body--comp`), 첫 그림 16:9, 순서는 Usage → Properties → CSS Variables → Best Practices(Do / Don't 표. "않/금지/마세요" 가 든 문장이 Don't) → Examples(Preview / Code) → Specification.
+- **넓은 배치 폭** (2026-10-31): 컴포넌트 목록과 템플릿 상세(`site-body--wide`)는 본문을 1152 로 제한하고 가운데 둔다(레퍼런스 A 컴포넌트 목록 1920 실측). 큰 화면에서 카드가 끝없이 늘어나던 문제를 고침.
 
 ## 진행 기록
 - 2026-10-26 (회사): ybm-ds `main`을 GitHub(`d4f83b6`)에 맞췄다. 회사 PC에만 있던 커밋 전 작업(10-23 폴더 구조 정리, figma-sync `cssOnly` 수정, `components/index.html` 컴포넌트 메인 시안, 작업 메모)은 **회사 PC 로컬 브랜치 `backup/2026-10-26-local`** 에만 있다(GitHub에 없음). 필요하면 회사 PC에서 꺼낸다.

@@ -209,6 +209,8 @@ function sideNav(section, file, root) {
 }
 
 const iconBtn = (attrs, label, inner) => `<button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="${esc(label)}" ${attrs}>${inner}</button>`;
+// Best Practices 표 - [할 것(true) / 하지 말 것(false), 문장]
+const practices = (items) => table(['Guidance', 'Practices'], items.map(([ok, text]) => [`<b class="ds-badge site-practice" data-tone="${ok ? 'positive' : 'critical'}">${ok ? 'Do' : 'Don\'t'}</b>`, inline(text)]));
 const metaLink = (href, label, icon) => `<a class="ds-btn" data-variant="neutralWeak" data-size="xsmall" href="${href}" target="_blank" rel="noopener"><i class="ds-icon ${icon} ds-icon--sm" aria-hidden="true"></i>${label}</a>`;
 const metaLinks = (l) => l ? `<div class="site-meta">${l.figma ? metaLink(l.figma, 'Figma', 'site-i--figma') : ''}${metaLink(l.code, 'Code', 'site-i--github')}</div>` : '';
 const iconLink = (href, label, icon, extra = '') => `<a class="ds-btn${extra}" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" href="${href}" target="_blank" rel="noopener" aria-label="${esc(label)}"><i class="ds-icon ${icon}" aria-hidden="true"></i></a>`;
@@ -269,7 +271,7 @@ ${desc ? `<meta name="description" content="${esc(desc)}">\n` : ''}<!-- 생성�
     ${iconBtn('data-site-menu aria-controls="site-side" aria-expanded="false"', '메뉴 열기', '<i class="ds-icon ds-icon--menu" aria-hidden="true"></i>').replace('class="ds-btn"', 'class="ds-btn site-menu-btn"')}
   </div>
 </header>
-<div class="site-body site-body--${layout}">
+<div class="site-body site-body--${layout}${layout === 'doc' && section === 'components' && !/index\.html$/.test(file) ? ' site-body--comp' : ''}">
 ${sideNav(section, file, root)}
 <div class="site-scrim" data-site-close></div>
 <main class="site-main" id="main">
@@ -432,17 +434,6 @@ const colorTable = (k) => {
     return [`<code>${v}</code>`, `<span class="site-swatches"><span class="site-swatch" style="background: ${esc(l)}"></span><span class="site-swatch" style="background: ${esc(d)}"></span></span><code>${esc(l)} / ${esc(d)}</code>`];
   }));
 };
-// 파운데이션 그림 - 목록 카드와 각 페이지 큰 그림에 같이 쓴다 (DS 토큰으로 그린다)
-const FV = {
-  color: ['brand', 'positive', 'warning', 'neutral'].map((t, i) => `<span class="site-fv-swatch${i % 2 ? ' site-fv-swatch--pill' : ''}" style="background: var(--ybm-color-bg-${t}-solid)"></span>`).join(''),
-  typography: '<span class="site-fv-type">Aa 가</span>',
-  spacing: '<span class="site-fv-space"><span style="width: var(--ybm-space-x6)"></span><span style="width: var(--ybm-space-x12)"></span><span style="width: var(--ybm-space-x20)"></span></span>',
-  shape: ['2xs', 'xl', 'pill'].map((r) => `<span class="site-fv-shape" style="border-radius: var(--ybm-shape-${r})"></span>`).join(''),
-  elevation: ['raised', 'panel', 'modal'].map((e) => `<span class="site-fv-card" style="box-shadow: var(--ybm-elevation-${e})"></span>`).join(''),
-  motion: '<svg class="site-fv-curve" viewBox="0 0 120 80"><path d="M8 72 C44 72 44 8 112 8"/><circle cx="8" cy="72" r="5"/><circle cx="112" cy="8" r="5"/></svg>',
-  icons: `<span class="site-fv-icons">${['search', 'calendar', 'copy', 'link'].map((n) => `<i class="ds-icon ds-icon--${n}"></i>`).join('')}</span>`,
-};
-const fvBox = (slug, cover = false) => `<div class="site-tile__thumb${cover ? ' site-cover' : ''}" aria-hidden="true"${cover ? ' data-site-fit-max="2"' : ''}><div class="site-tile__inner"><div class="pv-stage">${FV[slug]}</div></div></div>`;
 const foundName = Object.fromEntries(FOUND);
 // 예전 Foundations 허브 주소는 첫 항목으로 넘긴다 (공유된 링크가 깨지지 않게)
 fs.mkdirSync(path.join(SITE, 'foundations'), { recursive: true });
@@ -500,7 +491,7 @@ ${table(['토큰', '값'], tokRe(/--ybm-easing-([a-z]+): ([^;]+);/g).map((m) => 
 for (const [slug, p] of Object.entries(foundPages)) {
   write({
     file: `foundations/${slug}.html`, section: 'get-started', title: foundName[slug], desc: p.lead, pager: gsPager(`foundations/${slug}.html`),
-    body: `<header><h1 class="site-h1">${esc(foundName[slug])}</h1><p class="site-lead">${esc(p.lead)}</p>${metaLinks(linkBySlug[slug])}</header>\n${fvBox(slug, true)}\n${p.body}`,
+    body: `<header><h1 class="site-h1">${esc(foundName[slug])}</h1><p class="site-lead">${esc(p.lead)}</p>${metaLinks(linkBySlug[slug])}</header>\n${p.body}`,
   });
 }
 
@@ -509,25 +500,54 @@ const iconNames = [...new Set([...iconsCss.matchAll(/\.ds-icon--([a-z0-9-]+)\s*\
 // Lucide 전체 목록 - site/src/lucide-icons.json (site/lucide-update.mjs 로 만든다). 화면에는 site.js 가 그린다
 const lucide = JSON.parse(fs.readFileSync(path.join(SITE, 'src/lucide-icons.json'), 'utf8'));
 const lucideCount = Object.keys(lucide.icons).length;
+// 아이콘 쓰임 (아이콘 페이지 표). icons.css 에 아이콘을 넣으면 여기에도 한 줄 - 빠지면 빌드가 알려 주고 Others 에 넣는다
+const ICON_GROUPS = [
+  ['Navigation', { 'chevron-down': '펼치기, 드롭다운 열기', 'chevron-up': '접기', 'chevron-left': '뒤로, 이전', 'chevron-right': '다음, 목록 행의 이동 표시', 'chevrons-left': '맨 처음으로', 'chevrons-right': '맨 끝으로', 'arrow-right': '다음 단계, 바로 가기', 'arrow-up': '맨 위로, 보내기', 'corner-down-right': '답글, 하위 항목', menu: '메뉴 열기', 'panel-left': '왼쪽 메뉴 열고 닫기', house: '홈', 'house-solid': '홈 (선택됨)', 'external-link': '새 창으로 열기' }],
+  ['Action', { x: '닫기, 지우기', check: '선택됨, 확인', plus: '추가, 수량 늘리기', minus: '빼기, 수량 줄이기', search: '찾기', copy: '복사', share: '공유', link: '링크 복사, 제목 링크', trash: '삭제', upload: '올리기', paperclip: '파일 첨부', 'rotate-ccw': '새로 고침, 되돌리기', ellipsis: '더 보기 메뉴', eye: '비밀번호 보이기', 'eye-off': '비밀번호 숨기기', image: '사진 자리, 사진 올리기', square: '멈춤 (AI 답변 생성 중단)' }],
+  ['Status', { 'circle-check': '성공, 완료', 'circle-check-solid': '성공, 완료 (채움, Callout 과 Snackbar)', 'circle-alert': '오류, 주의', 'circle-alert-solid': '오류, 주의 (채움)', 'triangle-alert': '경고', 'triangle-alert-solid': '경고 (채움)', info: '안내', 'info-solid': '안내 (채움)', 'circle-x': '실패, 입력 지우기', inbox: '비어 있음 (Empty)', sparkles: 'AI 기능, 새 기능' }],
+  ['Object', { calendar: '날짜 고르기', clock: '시간 고르기, 시각', 'file-text': '문서, 파일', 'id-card': '계정, 신분 정보', 'credit-card': '결제, 카드', globe: '언어, 지역', monitor: 'PC 화면 보기', smartphone: '모바일 화면 보기', headset: '고객센터', 'message-circle': '댓글, 대화', 'map-pin': '위치, 주소', 'shopping-cart': '장바구니' }],
+  ['Reaction', { heart: '좋아요, 찜', 'heart-solid': '좋아요, 찜 (선택됨)', bookmark: '저장, 북마크', 'bookmark-solid': '저장, 북마크 (선택됨)', star: '평점, 즐겨찾기', 'star-solid': '평점, 즐겨찾기 (채움)', 'thumbs-up': '도움이 됐어요', 'thumbs-down': '도움이 안 됐어요' }],
+];
+{
+  const listed = new Set(ICON_GROUPS.flatMap(([, m]) => Object.keys(m)));
+  const extra = iconNames.filter((n) => !listed.has(n));
+  const gone = [...listed].filter((n) => !iconNames.includes(n));
+  if (extra.length) { console.log('  ! 아이콘 쓰임이 없는 아이콘(build.mjs ICON_GROUPS 에 적기):', extra.join(', ')); ICON_GROUPS.push(['Others', Object.fromEntries(extra.map((n) => [n, '']))]); }
+  if (gone.length) console.log('  ! icons.css 에 없는 아이콘이 ICON_GROUPS 에 있음:', gone.join(', '));
+}
+const iconRow = (n, usage) => [`<button type="button" class="site-icon-name" data-site-copy="ds-icon--${n}" title="클래스 이름 복사"><i class="ds-icon ds-icon--${n}" aria-hidden="true"></i><code>${n}</code></button>`, esc(usage)];
 write({
   file: 'foundations/icons.html', section: 'get-started', title: 'Iconography', pager: gsPager('foundations/icons.html'),
-  body: `<header><h1 class="site-h1">Iconography</h1><p class="site-lead">UI 아이콘은 Lucide 한 가지만 씁니다. Lucide 전체 ${lucideCount.toLocaleString()}개 가운데 CSS 로 바로 쓸 수 있는 것은 ${iconNames.length}개이고, 나머지는 필요할 때 <code>icons.css</code> 에 한 줄 넣어 씁니다.</p>${metaLinks(linkBySlug.icons)}</header>
-${fvBox('icons', true)}
-<div class="site-icon-search"><div class="ds-input" data-variant="outline" data-size="medium"><i class="ds-icon ds-icon--search ds-input__icon" aria-hidden="true"></i><input class="ds-input__control" type="search" placeholder="Search icons (arrow, user, calendar)" aria-label="아이콘 찾기" data-site-lucide-search></div><span class="site-lucide-count" data-site-lucide-count></span></div>
-<h2 id="use">Usage</h2>
-${example(`<div class="pv-stage"><i class="ds-icon ds-icon--search ds-icon--sm" aria-hidden="true"></i><i class="ds-icon ds-icon--search" aria-hidden="true"></i><i class="ds-icon ds-icon--search ds-icon--lg" aria-hidden="true"></i><span style="color: var(--ybm-color-fg-brand)"><i class="ds-icon ds-icon--circle-check-solid ds-icon--lg" aria-hidden="true"></i></span></div>`, `<i class="ds-icon ds-icon--search ds-icon--sm" aria-hidden="true"></i>  <!-- 16 -->\n<i class="ds-icon ds-icon--search" aria-hidden="true"></i>              <!-- 20 기본 -->\n<i class="ds-icon ds-icon--search ds-icon--lg" aria-hidden="true"></i>  <!-- 24 -->\n<span style="color: var(--ybm-color-fg-brand)"><i class="ds-icon ds-icon--circle-check-solid" aria-hidden="true"></i></span>  <!-- 색은 부모 글자색 -->`)}
+  body: `<header><h1 class="site-h1">Iconography</h1><p class="site-lead">화면에 쓰는 작은 그림입니다. 클래스 하나만 붙이면 되고, 색과 크기는 글자를 따라갑니다.</p>${metaLinks(linkBySlug.icons)}</header>
+<h2 id="overview">Overview</h2>
+<p>아이콘은 Lucide 한 가지만 씁니다. 지금 바로 쓸 수 있는 아이콘은 ${iconNames.length}개예요. 더 필요하면 아래 <a class="ds-link" href="#add">Add an Icon</a> 에서 찾아 넣습니다.</p>
+${example(`<div class="pv-stage"><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="medium"><i class="ds-icon ds-icon--search ds-icon--sm" aria-hidden="true"></i>찾기</button><button type="button" class="ds-btn" data-variant="ghost" data-size="medium" data-layout="iconOnly" aria-label="닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button><span class="ds-badge" data-tone="positive"><i class="ds-icon ds-icon--circle-check-solid ds-icon--sm" aria-hidden="true"></i>완료</span></div>`, `<!-- 글자 옆: 꾸밈용이라 aria-hidden -->\n<button class="ds-btn" data-variant="neutralWeak" data-size="medium">\n  <i class="ds-icon ds-icon--search ds-icon--sm" aria-hidden="true"></i>찾기\n</button>\n\n<!-- 아이콘만 있는 버튼: 뜻을 aria-label 로 -->\n<button class="ds-btn" data-variant="ghost" data-size="medium" data-layout="iconOnly" aria-label="닫기">\n  <i class="ds-icon ds-icon--x" aria-hidden="true"></i>\n</button>`)}
 <ul class="site-list site-note">
-  <li>색은 부모 글자색을 따릅니다. 크기는 <code>--ds-icon-size</code> 로도 바꿀 수 있어요.</li>
-  <li>이름 끝에 <code>-solid</code> 가 붙은 것은 채움 모양입니다.</li>
-  <li>뜻이 있는 아이콘만 쓰는 버튼에는 <code>aria-label</code> 을 꼭 답니다. 꾸밈용 아이콘은 <code>aria-hidden="true"</code>.</li>
-  <li>필요한 아이콘이 없으면 Lucide 원본 그대로 <code>icons.css</code> 에 한 줄 추가합니다.</li>
+  <li>색은 따로 정하지 않습니다. 둘러싼 글자색을 그대로 따라가요.</li>
+  <li>크기는 기본 20 이고, <code>ds-icon--sm</code> 16, <code>ds-icon--lg</code> 24 두 가지가 더 있어요.</li>
+  <li>아이콘만 있는 버튼에는 <code>aria-label</code> 로 뜻을 적습니다. 글자 옆의 꾸밈용 아이콘은 <code>aria-hidden="true"</code>.</li>
 </ul>
-<h2 id="css">CSS Icons</h2>
-<p>누르면 클래스 이름이 복사됩니다.</p>
-<div class="site-icons">${iconNames.map((n) => `<button type="button" class="site-icon" data-site-copy="ds-icon--${n}" title="ds-icon--${n} 복사"><i class="ds-icon ds-icon--${n} ds-icon--lg" aria-hidden="true"></i><span>${n}</span></button>`).join('')}</div>
-<h2 id="lucide">All Lucide Icons</h2>
-<p>Lucide ${esc(lucide.version)} 의 아이콘 ${lucideCount.toLocaleString()}개입니다. CSS 표시가 붙은 것은 누르면 클래스 이름이, 나머지는 <code>icons.css</code> 에 넣을 줄이 복사됩니다. 위 찾기 칸에 영어 이름이나 뜻을 넣으면 두 목록이 함께 걸러집니다.</p>
+<h2 id="icons">Icons</h2>
+<p>이름을 누르면 클래스가 복사됩니다. 이름 끝에 <code>-solid</code> 가 붙은 것은 채움 모양이에요.</p>
+${ICON_GROUPS.map(([g, m]) => `<h3 id="icons-${g.toLowerCase()}">${g}</h3>\n${table(['Name', 'Usage'], Object.entries(m).filter(([n]) => iconNames.includes(n)).map(([n, u]) => iconRow(n, u)))}`).join('\n')}
+<h2 id="size">Size and Color</h2>
+<p>크기는 셋 중 하나를 고릅니다. 그 밖의 크기가 꼭 필요하면 <code>--ds-icon-size</code> 변수로 바꿉니다. 색은 부모의 글자색을 바꾸면 따라옵니다.</p>
+${example(`<div class="pv-stage"><i class="ds-icon ds-icon--search ds-icon--sm" aria-hidden="true"></i><i class="ds-icon ds-icon--search" aria-hidden="true"></i><i class="ds-icon ds-icon--search ds-icon--lg" aria-hidden="true"></i><span style="color: var(--ybm-color-fg-brand)"><i class="ds-icon ds-icon--circle-check-solid ds-icon--lg" aria-hidden="true"></i></span><span style="color: var(--ybm-color-fg-critical)"><i class="ds-icon ds-icon--triangle-alert-solid ds-icon--lg" aria-hidden="true"></i></span></div>`, `<i class="ds-icon ds-icon--search ds-icon--sm" aria-hidden="true"></i>  <!-- 16 -->\n<i class="ds-icon ds-icon--search" aria-hidden="true"></i>              <!-- 20 기본 -->\n<i class="ds-icon ds-icon--search ds-icon--lg" aria-hidden="true"></i>  <!-- 24 -->\n\n<!-- 색은 부모 글자색 -->\n<span style="color: var(--ybm-color-fg-brand)"><i class="ds-icon ds-icon--circle-check-solid" aria-hidden="true"></i></span>\n<span style="color: var(--ybm-color-fg-critical)"><i class="ds-icon ds-icon--triangle-alert-solid" aria-hidden="true"></i></span>`)}
+<h2 id="add">Add an Icon</h2>
+<p>여기 없는 아이콘은 Lucide ${lucideCount.toLocaleString()}개에서 찾습니다. 아이콘을 누르면 <code>icons.css</code> 에 붙여 넣을 줄이 복사되고, 붙여 넣으면 바로 쓸 수 있어요. 이미 들어 있는 것은 CSS 표시가 붙어 있고 누르면 클래스가 복사됩니다.</p>
+${codeblock(`/* Lucide heart - 복사된 줄을 dist/icons.css 끝에 붙인다 */\n:root { --ds-icon-heart: url("data:image/svg+xml,…"); }\n.ds-icon--heart { --ds-icon: var(--ds-icon-heart); }\n\n<!-- 그다음부터 -->\n<i class="ds-icon ds-icon--heart" aria-hidden="true"></i>`)}
+<div class="site-icon-search"><div class="ds-input" data-variant="outline" data-size="medium"><i class="ds-icon ds-icon--search ds-input__icon" aria-hidden="true"></i><input class="ds-input__control" type="search" placeholder="Search icons (arrow, user, calendar)" aria-label="아이콘 찾기" data-site-lucide-search></div><span class="site-lucide-count" data-site-lucide-count></span></div>
 <div class="site-icons" id="site-lucide" data-site-ds-icons="${esc(iconNames.join(' '))}"></div>
+<h2 id="practices">Best Practices</h2>
+${practices([
+  [true, '같은 뜻에는 늘 같은 아이콘을 씁니다. 닫기는 x, 더 보기는 ellipsis.'],
+  [true, '아이콘만 있는 버튼에는 aria-label 을 붙입니다.'],
+  [true, '색은 글자색을 따라가게 둡니다. 상태 색이 필요하면 부모 글자색을 바꿉니다.'],
+  [true, '크기는 16, 20, 24 셋 중에서 고릅니다.'],
+  [false, '이모지나 다른 아이콘 세트를 섞지 않습니다.'],
+  [false, '아이콘 그림을 손으로 고치지 않습니다. Lucide 원본 그대로 씁니다.'],
+  [false, '아이콘 하나로 긴 뜻을 대신하지 않습니다. 뜻이 분명하지 않으면 글자를 같이 씁니다.'],
+])}
 <p class="site-note">아이콘 그림은 Lucide(ISC 라이선스)입니다. <a class="ds-link" href="{root}assets/lucide-LICENSE.txt">라이선스 전문</a></p>
 <script src="{root}assets/lucide-icons.js" defer></script>`,
 });
@@ -607,11 +627,11 @@ comps.forEach((c) => {
   const prev = compsAZ[i - 1], next = compsAZ[i + 1];
   const { rows, rest } = propsTable(c);
   const sections = [];
-  sections.push(`<h2 id="preview">Preview</h2>${c.example ? example(c.example, codeOf(c.example) || c.markup) : '<p>아직 예시가 없어요.</p>'}`);
-  if (c.markup) sections.push(`<h2 id="usage">Usage</h2><p>아래 구조를 그대로 쓰고, 대괄호 <code>[ ]</code> 안은 필요할 때만 넣습니다.</p>${codeblock(c.markup)}`);
+  sections.push(`<h2 id="usage">Usage</h2>${c.markup ? `<p>아래 구조를 그대로 복사해 쓰세요. 대괄호 <code>[ ]</code> 안은 필요할 때만 넣습니다.</p>${codeblock(c.markup)}` : '<p>아직 구조 설명이 없어요. 아래 Examples 의 코드를 복사해 쓰세요.</p>'}`);
   if (rows.length || rest) sections.push(`<h2 id="props">Properties</h2><p>Figma 속성 이름을 그대로 <code>data-*</code> 속성으로 씁니다.</p>${rows.length ? table(['속성', '값'], rows) : ''}${rest ? `<p class="site-note">그 밖에: ${rest}</p>` : ''}`);
   if (c.vars.length) sections.push(`<h2 id="vars">CSS Variables</h2><p>서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.</p>${table(['변수', '기본값'], c.vars.map(([n, v]) => [`<code>${esc(n)}</code>`, `<code>${esc(v)}</code>`]))}`);
-  if (c.dos.length) sections.push(`<h2 id="guide">Guidelines</h2><ul class="site-dos">${c.dos.map((d) => `<li>${inline(d)}</li>`).join('')}</ul>`);
+  if (c.dos.length) sections.push(`<h2 id="guide">Best Practices</h2>${practices(c.dos.map((d) => [!/않|금지|마세요|안 된다|말 것/.test(d), d]))}`);
+  sections.push(`<h2 id="examples">Examples</h2>${c.example ? example(c.example, codeOf(c.example) || c.markup) : '<p>아직 예시가 없어요.</p>'}`);
   if (c.spec) sections.push(`<h2 id="spec">Specification</h2><p>Figma 와 CSS 가 함께 따르는 크기, 여백, 색입니다.</p><pre class="site-spec">${esc(c.spec)}</pre>`);
   write({
     file: `components/${c.slug}.html`, section: 'components', title: c.name.split(' · ')[0], desc: c.desc,

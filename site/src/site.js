@@ -172,14 +172,8 @@
       var ok = !q || name.indexOf(q) >= 0 || (tags[name] || "").indexOf(q) >= 0;
       b.hidden = !ok; if (ok) n++;
     });
-    // CSS 로 바로 쓰는 아이콘도 같은 찾기 칸으로 거른다
-    var m = 0;
-    document.querySelectorAll(".site-icons:not(#site-lucide) .site-icon").forEach(function (b) {
-      var ok = !q || b.getAttribute("data-site-copy").indexOf(q) >= 0;
-      b.hidden = !ok; if (ok) m++;
-    });
     var c = document.querySelector("[data-site-lucide-count]");
-    if (c) c.textContent = "CSS " + m + "개, Lucide " + n.toLocaleString() + "개";
+    if (c) c.textContent = n.toLocaleString() + "개";
   }
   // 찾기 칸에서 Enter: 걸러진 메뉴의 첫 컴포넌트로
   document.addEventListener("keydown", function (e) {

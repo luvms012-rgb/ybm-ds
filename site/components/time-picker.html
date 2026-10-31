@@ -9,9 +9,9 @@
 <script>try { var t = localStorage.getItem("ybm-site-theme"); if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.dataset.theme = "dark"; } catch (e) {}</script>
 <link rel="icon" href="../assets/logo-ybmnet.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../dist/ybm-ds.css">
-<link rel="stylesheet" href="../assets/site.css?v=217a07b1">
+<link rel="stylesheet" href="../assets/site.css?v=8dfd1b81">
 <script src="../../dist/ybm-ds.js" defer></script>
-<script src="../assets/site.js?v=217a07b1" defer></script>
+<script src="../assets/site.js?v=8dfd1b81" defer></script>
 </head>
 <body class="site">
 <a class="site-skip" href="#main">본문 바로가기</a>
@@ -30,7 +30,7 @@
     <button type="button" class="ds-btn site-menu-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="메뉴 열기" data-site-menu aria-controls="site-side" aria-expanded="false"><i class="ds-icon ds-icon--menu" aria-hidden="true"></i></button>
   </div>
 </header>
-<div class="site-body site-body--doc">
+<div class="site-body site-body--doc site-body--comp">
 <aside class="site-side" id="site-side" aria-label="페이지 목록">
   <div class="site-side__top"><b>Menu</b><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" data-site-close aria-label="메뉴 닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button></div>
   <div class="site-side__mobile"><nav class="site-nav" aria-label="주요 메뉴"><a class="site-nav__item" href="../index.html">Get Started</a><a class="site-nav__item" href="../components/index.html" aria-current="page">Components</a><a class="site-nav__item" href="../templates/index.html">Templates</a></nav><div class="site-nav__sep"></div></div><div class="site-side__searchbar"><div class="ds-input site-side__search" data-variant="outline" data-size="medium"><i class="ds-icon ds-icon--search ds-input__icon" aria-hidden="true"></i><input class="ds-input__control" type="search" placeholder="Search components" aria-label="컴포넌트 찾기" data-site-search></div></div>
@@ -114,7 +114,7 @@
   <h1 class="site-h1">Time Picker</h1>
   <p class="site-lead">휠을 굴려 오전/오후, 시, 분을 고르는 시간 선택기입니다.</p>
   <div class="site-meta"><a class="ds-btn" data-variant="neutralWeak" data-size="xsmall" href="https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=2497-980" target="_blank" rel="noopener"><i class="ds-icon site-i--figma ds-icon--sm" aria-hidden="true"></i>Figma</a><a class="ds-btn" data-variant="neutralWeak" data-size="xsmall" href="https://github.com/luvms012-rgb/ybm-ds/blob/main/dist/components.css#L2832-L2897" target="_blank" rel="noopener"><i class="ds-icon site-i--github ds-icon--sm" aria-hidden="true"></i>Code</a></div>
-<div class="site-toc-select"><select aria-label="이 페이지 목차" data-site-toc><option value="preview">Preview</option><option value="usage">Usage</option><option value="props">Properties</option><option value="guide">Guidelines</option><option value="spec">Specification</option></select><i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i></div>
+<div class="site-toc-select"><select aria-label="이 페이지 목차" data-site-toc><option value="usage">Usage</option><option value="props">Properties</option><option value="guide">Best Practices</option><option value="examples">Examples</option><option value="spec">Specification</option></select><i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i></div>
 </header>
 <div class="site-tile__thumb site-cover" data-site-fit-max="2" aria-hidden="true"><div class="site-tile__inner" inert><div class="pv-stage"><div class="ds-timepicker pv-w" role="group" aria-label="시간">
       <div class="ds-timepicker__column" role="listbox" aria-label="오전/오후" tabindex="0"><div class="ds-timepicker__option" role="option" aria-selected="true">오전</div><div class="ds-timepicker__option" role="option">오후</div></div>
@@ -125,7 +125,24 @@
       <div class="ds-timepicker__column" role="listbox" aria-label="시" data-pv-fill="1-12" data-pv-sel="10"></div>
       <div class="ds-timepicker__column" role="listbox" aria-label="분" data-pv-fill="0-55-5" data-pv-sel="30"></div>
     </div></div></div></div>
-<h2 id="preview">Preview<a class="site-anchor" href="#preview" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><div class="site-example">
+<h2 id="usage">Usage<a class="site-anchor" href="#usage" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><p>아래 구조를 그대로 복사해 쓰세요. 대괄호 <code>[ ]</code> 안은 필요할 때만 넣습니다.</p><figure class="ds-codeblock">
+  <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">html</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
+  <pre class="ds-codeblock__code"><code>&lt;div class=&quot;ds-timepicker&quot; role=&quot;group&quot; aria-label=&quot;시간&quot; [aria-disabled=&quot;true&quot;]&gt;
+  &lt;div class=&quot;ds-timepicker__column&quot; role=&quot;listbox&quot; aria-label=&quot;오전/오후&quot; tabindex=&quot;0&quot;&gt;
+    &lt;div class=&quot;ds-timepicker__option&quot; role=&quot;option&quot;&gt;오전&lt;/div&gt;
+    &lt;div class=&quot;ds-timepicker__option&quot; role=&quot;option&quot; aria-selected=&quot;true&quot;&gt;오후&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;ds-timepicker__column&quot; role=&quot;listbox&quot; aria-label=&quot;시&quot; tabindex=&quot;0&quot;&gt;… 1 ~ 12&lt;/div&gt;
+  &lt;div class=&quot;ds-timepicker__column&quot; role=&quot;listbox&quot; aria-label=&quot;분&quot; tabindex=&quot;0&quot;&gt;… 00, 05 ~ 55&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+</figure>
+<h2 id="props">Properties<a class="site-anchor" href="#props" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><p>Figma 속성 이름을 그대로 <code>data-*</code> 속성으로 씁니다.</p><div class="ds-table-wrap"><table class="ds-table" data-density="compact">
+<thead><tr><th scope="col">속성</th><th scope="col">값</th></tr></thead>
+<tbody><tr><td><code>state</code></td><td><span class="ds-badge">enabled</span> <span class="ds-badge">disabled</span></td></tr></tbody></table></div><p class="site-note">그 밖에: 12시간제, 분 간격 5</p>
+<h2 id="guide">Best Practices<a class="site-anchor" href="#guide" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><div class="ds-table-wrap"><table class="ds-table" data-density="compact">
+<thead><tr><th scope="col">Guidance</th><th scope="col">Practices</th></tr></thead>
+<tbody><tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>시간 고르기가 화면의 주된 일이면 바로 두고, 입력 필드에서는 Field Button + Bottom Sheet 안에 넣는다.</td></tr></tbody></table></div>
+<h2 id="examples">Examples<a class="site-anchor" href="#examples" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><div class="site-example">
   <div class="site-example__bar"><div class="ds-chiptabs" role="tablist" aria-label="보기 방식"><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-view="preview">Preview</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-view="code">Code</button></div></div>
   <div class="site-example__preview"><div class="pv-stage">
     <div class="ds-timepicker pv-w" role="group" aria-label="시간" id="pv-tp">
@@ -154,21 +171,6 @@
 &lt;/div&gt;</code></pre>
 </figure></div>
 </div>
-<h2 id="usage">Usage<a class="site-anchor" href="#usage" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><p>아래 구조를 그대로 쓰고, 대괄호 <code>[ ]</code> 안은 필요할 때만 넣습니다.</p><figure class="ds-codeblock">
-  <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">html</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
-  <pre class="ds-codeblock__code"><code>&lt;div class=&quot;ds-timepicker&quot; role=&quot;group&quot; aria-label=&quot;시간&quot; [aria-disabled=&quot;true&quot;]&gt;
-  &lt;div class=&quot;ds-timepicker__column&quot; role=&quot;listbox&quot; aria-label=&quot;오전/오후&quot; tabindex=&quot;0&quot;&gt;
-    &lt;div class=&quot;ds-timepicker__option&quot; role=&quot;option&quot;&gt;오전&lt;/div&gt;
-    &lt;div class=&quot;ds-timepicker__option&quot; role=&quot;option&quot; aria-selected=&quot;true&quot;&gt;오후&lt;/div&gt;
-  &lt;/div&gt;
-  &lt;div class=&quot;ds-timepicker__column&quot; role=&quot;listbox&quot; aria-label=&quot;시&quot; tabindex=&quot;0&quot;&gt;… 1 ~ 12&lt;/div&gt;
-  &lt;div class=&quot;ds-timepicker__column&quot; role=&quot;listbox&quot; aria-label=&quot;분&quot; tabindex=&quot;0&quot;&gt;… 00, 05 ~ 55&lt;/div&gt;
-&lt;/div&gt;</code></pre>
-</figure>
-<h2 id="props">Properties<a class="site-anchor" href="#props" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><p>Figma 속성 이름을 그대로 <code>data-*</code> 속성으로 씁니다.</p><div class="ds-table-wrap"><table class="ds-table" data-density="compact">
-<thead><tr><th scope="col">속성</th><th scope="col">값</th></tr></thead>
-<tbody><tr><td><code>state</code></td><td><span class="ds-badge">enabled</span> <span class="ds-badge">disabled</span></td></tr></tbody></table></div><p class="site-note">그 밖에: 12시간제, 분 간격 5</p>
-<h2 id="guide">Guidelines<a class="site-anchor" href="#guide" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><ul class="site-dos"><li>시간 고르기가 화면의 주된 일이면 바로 두고, 입력 필드에서는 Field Button + Bottom Sheet 안에 넣는다.</li></ul>
 <h2 id="spec">Specification<a class="site-anchor" href="#spec" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><p>Figma 와 CSS 가 함께 따르는 크기, 여백, 색입니다.</p><pre class="site-spec">ybm-ds.js 가 가운데 온 항목에 aria-selected 를 붙이고 열에서 change 이벤트(detail.value)를 보낸다.
 처음 값은 aria-selected=&quot;true&quot; 로 표시해 두면 그 위치로 맞춰 준다. 분 간격은 넣는 항목으로 정한다(기본 5분).
 Figma: 폭 320(채움) / 높이 220 = 항목 5줄 × x11 / 좌우 x4 / 열 간격 x2
@@ -185,7 +187,7 @@ Figma: 폭 320(채움) / 높이 220 = 항목 5줄 × x11 / 좌우 x4 / 열 간�
 </footer>
 </article>
 </main>
-<aside class="site-toc" aria-label="이 페이지 목차"><nav><span class="site-toc__indicator" aria-hidden="true"></span><a href="#preview">Preview</a><a href="#usage">Usage</a><a href="#props">Properties</a><a href="#guide">Guidelines</a><a href="#spec">Specification</a></nav></aside>
+<aside class="site-toc" aria-label="이 페이지 목차"><nav><span class="site-toc__indicator" aria-hidden="true"></span><a href="#usage">Usage</a><a href="#props">Properties</a><a href="#guide">Best Practices</a><a href="#examples">Examples</a><a href="#spec">Specification</a></nav></aside>
 </div>
 </body>
 </html>
