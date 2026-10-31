@@ -147,3 +147,69 @@ import '@ybm/ds/dist/ybm-ds.js';
 | 4 | Checkout | 배송지, 결제 수단, 쿠폰, 최종 금액 (이미 예정) | Select Box, Radio, Text Field |
 | 5 | Order Complete | 주문 번호, 배송 예정일, 다음 행동 | Result Section |
 | 6 | Event Page | 기획전 한 페이지. 큰 그림 + 상품 묶음 여러 개 | Image Frame, Carousel |
+
+## 7. 템플릿 추가와 고도화 검토 (2026-10-31 집, 사용자 요청)
+
+사내 UI Patterns 모음(웹 26,712장, 분류 59개, 큰 묶음 7개)을 기준으로 우리 템플릿 26종을 대조했다. 사용자가 짚어 준 서비스 3곳(금융 조회형, 보험 다이렉트형, 소상공인 관리자형)의 화면 구성도 함께 봤다. 템플릿은 범용이므로 서비스 이름이 아니라 화면 유형으로 적는다. 자세한 출처는 로컬 REFERENCE-ANALYSIS.md 에만 있다.
+
+### 7-1. 지금 있는 것과 빈 곳
+
+| UI Patterns 묶음 | 우리가 있는 것 | 비어 있는 것 (모음 안 장수) |
+|---|---|---|
+| 진입 | Dashboard, Login 3종 | **랜딩페이지 2,190**, 회원가입과 약관동의 1,845, 인증하기 204, 온보딩 199 |
+| 탐색 | Search 4종, Product List, Product Detail, Commerce Home | **북마크·위시리스트 581**, 전체메뉴 468, 비교하기 48(보험·요금제에서는 핵심) |
+| 프로모션 | 없음 | 멤버십·요금제 213, 혜택 205, 쿠폰 157, 기획전 (6-3 의 Event Page) |
+| 활동 | AI Chat, Group Detail, Case Study | **글쓰기 583**, 리뷰 331 과 리뷰쓰기 177, 커뮤니티 글 목록과 상세 502, 1:1 채팅 292 |
+| 거래 | Checkout, Cart, Order Complete, Form, Form Wizard | **조회하기(견적·계산) 464**, 취소·환불 197 |
+| 관리 | Settings, Table | **내역 859**, 문의하기 671, 공지사항 441, 마이페이지 320, 고객센터·FAQ 303, 알림 129, 통계·리포트 545 |
+| AI·도구 | AI Chat | AI 요약(브리핑) 카드, 챗봇 띄우기 버튼 |
+
+장수가 많은 곳은 어느 서비스에나 있는 화면이라는 뜻이다. 우리 템플릿은 이커머스와 검색은 두터운데, **회원가입부터 마이페이지·내역·고객센터까지 "서비스 운영의 기본 화면"이 비어 있다.**
+
+### 7-2. 새 템플릿 후보 (권장 순서)
+
+| 순위 | 템플릿 (en) | 묶음 | 내용 | 쓰는 부품 |
+|---|---|---|---|---|
+| 1 | Landing Page | Entry | 큰 제목과 버튼 2개, 특징 3열, 화면 그림, 요금 미리보기, FAQ, 마지막 CTA. 모음에서 두 번째로 많은 화면 | Action Button, Card, Accordion, Image Frame, Badge |
+| 2 | Sign Up | Entry | 약관 전체 동의(접기), 이메일·비밀번호, 휴대폰 인증번호 6자리 + 남은 시간, 완료 | Checkbox Group, Text Field, Timer, Result Section |
+| 3 | My Page | Manage | 프로필 요약, 포인트·쿠폰 숫자, 최근 주문, 메뉴 목록(내역, 설정, 고객센터), 로그아웃 | Avatar, List, Badge, Card |
+| 4 | History | Manage | 기간 칩(1주, 1개월, 3개월, 직접), 주문·결제·포인트 탭, 날짜별 묶음 목록, 상세 열기 | Chip Tabs, Tabs, List, Date Picker, Pagination |
+| 5 | Help Center | Manage | 검색, 자주 묻는 질문 분류 칩과 아코디언, 1:1 문의 폼(파일 첨부), 전화 상담 예약 | Search Suggestion, Accordion, Text Field, File Attach, Select Box |
+| 6 | Notice | Manage | 공지 목록(고정 공지 배지, 날짜), 상세(제목, 날짜, 본문, 이전·다음), 페이지 막대 | List, Badge, Markdown, Pagination |
+| 7 | Pricing | Promotion | 요금제 3~4열 비교 표. 추천 열 강조, 월·연 전환, 항목별 체크, 아래 FAQ | Segmented Control, Table, Badge, Accordion |
+| 8 | Quote | Transaction | 조건을 고르면(나이, 기간, 금액 슬라이더) 결과 카드가 바로 바뀌는 견적·계산 화면. PC 는 오른쪽 고정 요약 | Slider, Select Box, Radio Group, Card, Callout |
+| 9 | Wishlist | Explore | 찜한 상품 묶음(폴더), 묶음 추가 사이드 패널, 전체 선택 삭제, 빈 상태 | Side Panel, Checkbox, Card, Empty |
+| 10 | Write | Activity | 글 제목, 본문 편집(굵게·목록·링크 도구 막대), 사진 첨부, 태그, 임시 저장과 발행 | Text Field, Textarea, File Attach, Chip, Snackbar |
+| 11 | Review Write | Activity | 별점 고르기, 사진 첨부, 글, 선택 항목 평가, 작성 완료 | Rating(input), File Attach, Textarea, Result Section |
+| 12 | Notifications | Manage | 읽음·안 읽음, 종류별 탭, 날짜 묶음, 모두 읽음, 알림 설정 바로 가기 | Tabs, List, Status Dot, Switch |
+| 13 | Report | Manage | 기간 선택, 핵심 숫자 4개와 전주 대비, 추이 그래프, 분류별 표, 내려받기 | Date Picker, Card, Table, Progress (그래프 부품은 7-3) |
+| 14 | Onboarding | Entry | 소개 3~4장 넘기기, 건너뛰기, 마지막 장 시작 버튼 | Carousel, Action Button |
+| 15 | Cancel & Refund | Transaction | 취소 사유 고르기, 환불 금액 안내, 되돌릴 수 없음 확인, 완료 | Radio Group, Callout, Alert Dialog, Result Section |
+| 16 | Event Page | Promotion | 6-3 의 6번 그대로 | Image Frame, Carousel |
+
+1~6 만 만들어도 "가입 → 둘러보기 → 주문 → 마이페이지 → 내역 → 고객센터"가 템플릿으로 이어진다. 관리자형(소상공인 관리자) 화면은 Dashboard, Table, Form Wizard, Report, Settings 조합으로 대부분 만들 수 있어 따로 두지 않았다.
+
+### 7-3. 기존 템플릿 고도화
+
+| 템플릿 | 지금 | 고도화 |
+|---|---|---|
+| Templates 목록 | 영어 분류 11개(만든 순서대로 생긴 것) | UI Patterns 의 큰 묶음 7개로 다시 묶기: Entry, Explore, Promotion, Activity, Transaction, Manage, AI & Tools. 사내에서 이미 쓰는 분류라 찾기 쉽다 |
+| Dashboard | 숫자 카드, 표, 활동 | 기간 선택과 전주 대비 화살표, 추이 그래프 자리(7-4 의 Chart) |
+| Table | 검색, 필터, 표 | 선택 행 수와 일괄 동작 막대, 열 보이기·숨기기, 정렬 아이콘 |
+| Login | 로그인 | 회원가입·비밀번호 찾기 링크(Sign Up 과 연결), 소셜 로그인은 Login SSO 로 |
+| Search Places | 목록 | PC 오른쪽 지도 자리(Image Frame 으로 자리만), 거리순 정렬 |
+| AI Chat | 대화 | AI 요약 카드(출처 Citation), 추천 질문 칩, 답변 중 멈춤 버튼(square 아이콘) |
+| Product Detail | 상세 | 비교하기 담기(Compare 바), 최근 본 상품 줄 |
+| Form Wizard | 3단계 | 임시 저장 안내 Snackbar, 단계별 요약(마지막 확인 단계) |
+
+### 7-4. 템플릿을 만들려면 DS 에 필요한 것
+
+| 필요 | 쓰는 곳 | 메모 |
+|---|---|---|
+| **Chart** (막대, 선, 도넛) | Dashboard, Report, Quote | 토큰 `--ybm-color-chart-*` 는 있으나 부품이 없다. CSS 만으로 막대·도넛은 가능, 선 그래프는 SVG. 우선 막대와 도넛만 |
+| **Code Input** (인증번호 6자리) | Sign Up | 칸 6개, 자동 다음 칸. Text Field 의 변형으로 |
+| **Date Range** (기간) | History, Report | Date Picker 2개 조합 + 빠른 선택 칩. 부품보다 템플릿 패턴으로 충분할 수 있음 |
+| **Toolbar** (편집 도구 막대) | Write | Toggle Button 묶음으로 가능. 부품 추가는 보류 |
+| **Compare Bar** (아래 고정 비교 담기) | Product Detail, Pricing | 템플릿 패턴으로 |
+
+권장안: 7-2 의 1~6 을 먼저 만들고, 그 전에 7-4 의 Chart(막대·도넛)와 Code Input 을 DS 에 넣는다. 7-3 의 목록 묶음 7개는 템플릿을 늘리기 전에 바꾸는 편이 손이 덜 든다. 사용자가 고르면 진행한다.
