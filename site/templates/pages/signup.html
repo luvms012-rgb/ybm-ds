@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>회원가입 - YBM DS 템플릿</title>
+<link rel="stylesheet" href="../../../dist/ybm-ds.css">
+<script src="../../../dist/ybm-ds.js" defer></script>
+<style>
+  /* 템플릿 배치 전용. 값은 모두 --ybm-* 토큰 */
+  body { word-break: keep-all; overflow-wrap: break-word; }
+  .tp-h2 { font-size: var(--ybm-font-size-t07); line-height: var(--ybm-line-height-t07); font-weight: var(--ybm-font-weight-medium); }
+  .tp-h3 { font-size: var(--ybm-font-size-t05); line-height: 22px; font-weight: var(--ybm-font-weight-medium); }
+  .tp-sub { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
+  .tp-caption { font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); color: var(--ybm-color-fg-neutral-subtle); }
+  @media (min-width: 768px) { .tp-h2 { font-size: var(--ybm-font-size-t09); line-height: var(--ybm-line-height-t09); } }
+
+  .tp-main { display: flex; flex-direction: column; padding: var(--ybm-space-x4) var(--ybm-space-x-global-gutter) calc(var(--ybm-space-x24) + env(safe-area-inset-bottom, 0px)); }
+  .tp-card { display: flex; flex-direction: column; gap: var(--ybm-space-x8); width: 100%; }
+  .tp-head { display: flex; flex-direction: column; gap: var(--ybm-space-x2); }
+  .tp-group { display: flex; flex-direction: column; gap: var(--ybm-space-x4); }
+  .tp-form { display: flex; flex-direction: column; gap: var(--ybm-space-x4); }
+  .tp-pw-toggle { position: relative; }
+  .tp-pw-toggle::after { content: ""; position: absolute; inset: calc(var(--ybm-space-x2_5) * -1); }
+
+  /* 약관: 전체 동의 한 줄 + 항목들(들여쓰기) */
+  .tp-terms { display: flex; flex-direction: column; border: 1px solid var(--ybm-color-stroke-neutral-weak); border-radius: var(--ybm-shape-lg); }
+  .tp-terms__all { padding: var(--ybm-space-x3) var(--ybm-space-x4); border-bottom: 1px solid var(--ybm-color-stroke-neutral-weak); }
+  .tp-terms__all .ds-checkbox__label { font-weight: var(--ybm-font-weight-semibold); }
+  .tp-terms__items { padding: var(--ybm-space-x2) var(--ybm-space-x4); }
+  .tp-term { display: flex; align-items: center; gap: var(--ybm-space-x2); }
+  .tp-term .ds-checkbox { flex: 1 1 auto; min-width: 0; }
+
+  /* 휴대폰 번호 + 인증 버튼, 인증번호 + 남은 시간 */
+  .tp-inline { display: flex; align-items: flex-end; gap: var(--ybm-space-x2); }
+  .tp-inline > .ds-field { flex: 1 1 auto; min-width: 0; }
+  .tp-inline > .ds-btn { flex: none; height: 52px; }
+  .tp-code { display: none; }
+  .tp-code[data-open] { display: flex; }
+  .tp-code .ds-timer { color: var(--ybm-color-fg-critical); font-size: var(--ybm-font-size-t04); }
+
+  /* 가입 버튼: 모바일은 아래 고정, PC 는 카드 안 */
+  .tp-submit { position: fixed; inset: auto 0 0 0; z-index: var(--ybm-z-sticky); padding: var(--ybm-space-x3) var(--ybm-space-x-global-gutter) calc(var(--ybm-space-x3) + env(safe-area-inset-bottom, 0px)); background: var(--ybm-color-bg-layer-default); box-shadow: inset 0 1px 0 var(--ybm-color-stroke-neutral-muted); }
+
+  @media (min-width: 768px) {
+    body { background: var(--ybm-color-bg-canvas); }
+    .tp-main { min-height: 100vh; min-height: 100dvh; align-items: center; justify-content: center; padding: var(--ybm-space-x16) var(--ybm-space-x6); }
+    .tp-card { max-width: 480px; padding: var(--ybm-space-x10) var(--ybm-space-x8); border-radius: var(--ybm-shape-2xl); background: var(--ybm-color-bg-layer-default); box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-neutral-weak); }
+    .tp-submit { position: static; padding: 0; background: none; box-shadow: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- 모바일 상단 -->
+<header class="ds-appbar u-hide-from-md">
+  <div class="ds-appbar__left"><button type="button" class="ds-appbar__button" aria-label="뒤로"><i class="ds-icon ds-icon--chevron-left" aria-hidden="true"></i></button></div>
+  <div class="ds-appbar__main"><h1 class="ds-appbar__title">회원가입</h1></div>
+  <div class="ds-appbar__right"></div>
+</header>
+
+<main class="tp-main">
+  <form class="tp-card" action="#" method="post" novalidate>
+
+    <div class="tp-head">
+      <h1 class="tp-h2 u-show-from-md">회원가입</h1>
+      <p class="tp-sub">1분이면 끝나요. 이메일과 휴대폰 번호만 준비해 주세요.</p>
+    </div>
+
+    <!-- 1. 약관 동의 -->
+    <section class="tp-group" aria-labelledby="terms-title">
+      <h2 class="tp-h3" id="terms-title">약관 동의</h2>
+      <div class="tp-terms">
+        <div class="tp-terms__all">
+          <label class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control" id="agree-all"><span class="ds-checkbox__label">모두 동의합니다</span></label>
+        </div>
+        <fieldset class="ds-checkbox-group tp-terms__items" id="agree-items" aria-label="약관 항목">
+          <div class="tp-term">
+            <label class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control" name="t1" required><span class="ds-checkbox__label">[필수] 이용약관</span></label>
+            <a class="ds-btn" data-variant="ghost" data-size="xsmall" href="#">보기</a>
+          </div>
+          <div class="tp-term">
+            <label class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control" name="t2" required><span class="ds-checkbox__label">[필수] 개인정보 수집과 이용</span></label>
+            <a class="ds-btn" data-variant="ghost" data-size="xsmall" href="#">보기</a>
+          </div>
+          <div class="tp-term">
+            <label class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control" name="t3" required><span class="ds-checkbox__label">[필수] 만 14세 이상입니다</span></label>
+          </div>
+          <div class="tp-term">
+            <label class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control" name="t4"><span class="ds-checkbox__label">[선택] 혜택과 소식 받기</span></label>
+            <a class="ds-btn" data-variant="ghost" data-size="xsmall" href="#">보기</a>
+          </div>
+        </fieldset>
+      </div>
+    </section>
+
+    <!-- 2. 계정 정보 -->
+    <section class="tp-group" aria-labelledby="account-title">
+      <h2 class="tp-h3" id="account-title">계정 정보</h2>
+      <div class="tp-form">
+        <div class="ds-field">
+          <div class="ds-field__header"><label class="ds-field__label" for="s-email">이메일</label></div>
+          <div class="ds-input" data-variant="outline">
+            <input class="ds-input__control" id="s-email" name="email" type="email" autocomplete="email" placeholder="name@example.com" required>
+            <button type="button" class="ds-input__clear" aria-label="이메일 지우기"></button>
+          </div>
+          <div class="ds-field__footer"><p class="ds-field__help">로그인할 때 쓰는 이메일이에요.</p></div>
+        </div>
+        <div class="ds-field">
+          <div class="ds-field__header"><label class="ds-field__label" for="s-pw">비밀번호</label></div>
+          <div class="ds-input" data-variant="outline">
+            <input class="ds-input__control" id="s-pw" name="password" type="password" autocomplete="new-password" placeholder="8자 이상, 영문과 숫자 포함" required minlength="8">
+            <button type="button" class="ds-input__suffix tp-pw-toggle" aria-label="비밀번호 보기" aria-pressed="false" aria-controls="s-pw"><i class="ds-icon ds-icon--eye ds-input__icon" aria-hidden="true"></i></button>
+          </div>
+        </div>
+        <div class="ds-field">
+          <div class="ds-field__header"><label class="ds-field__label" for="s-name">이름</label></div>
+          <div class="ds-input" data-variant="outline">
+            <input class="ds-input__control" id="s-name" name="name" type="text" autocomplete="name" placeholder="실명을 입력해 주세요" required>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. 휴대폰 인증 -->
+    <section class="tp-group" aria-labelledby="phone-title">
+      <h2 class="tp-h3" id="phone-title">휴대폰 인증</h2>
+      <div class="tp-form">
+        <div class="tp-inline">
+          <div class="ds-field">
+            <div class="ds-field__header"><label class="ds-field__label" for="s-phone">휴대폰 번호</label></div>
+            <div class="ds-input" data-variant="outline">
+              <input class="ds-input__control" id="s-phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel-national" placeholder="숫자만 입력" required>
+            </div>
+          </div>
+          <button type="button" class="ds-btn" data-variant="neutralOutline" data-size="large" id="send-code">인증번호 받기</button>
+        </div>
+        <div class="tp-inline tp-code" id="code-row">
+          <div class="ds-field">
+            <div class="ds-field__header"><label class="ds-field__label" for="s-code">인증번호</label></div>
+            <div class="ds-input" data-variant="outline">
+              <input class="ds-input__control" id="s-code" name="code" type="text" inputmode="numeric" maxlength="6" placeholder="6자리" autocomplete="one-time-code">
+              <span class="ds-input__suffix"><time class="ds-timer" id="code-timer">3:00</time></span>
+            </div>
+            <div class="ds-field__footer"><p class="ds-field__help">문자로 보낸 6자리 숫자를 입력해 주세요. <button type="button" class="ds-link" id="resend-code">다시 받기</button></p></div>
+          </div>
+          <button type="button" class="ds-btn" data-variant="neutralSolid" data-size="large">확인</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 가입 버튼 -->
+    <div class="tp-submit">
+      <button type="submit" class="ds-btn" data-variant="brandSolid" data-size="large" data-width="fill">가입하기</button>
+    </div>
+    <p class="tp-caption">이미 계정이 있나요? <a class="ds-link" href="login.html">로그인</a></p>
+
+  </form>
+</main>
+
+<script>
+  /* 전체 동의 ↔ 항목 동의 */
+  var all = document.getElementById("agree-all"), items = document.querySelectorAll("#agree-items input");
+  all.addEventListener("change", function () { items.forEach(function (i) { i.checked = all.checked; }); });
+  items.forEach(function (i) { i.addEventListener("change", function () { all.checked = Array.prototype.every.call(items, function (x) { return x.checked; }); }); });
+  /* 비밀번호 보기 */
+  document.querySelectorAll(".tp-pw-toggle").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var input = document.getElementById(btn.getAttribute("aria-controls")), show = input.type === "password";
+      input.type = show ? "text" : "password"; btn.setAttribute("aria-pressed", String(show));
+      btn.querySelector(".ds-icon").className = "ds-icon ds-input__icon ds-icon--" + (show ? "eye-off" : "eye");
+    });
+  });
+  /* 인증번호 받기: 입력 칸을 열고 3분 남은 시간(Timer)을 시작한다 */
+  function startCode() {
+    var row = document.getElementById("code-row"), t = document.getElementById("code-timer");
+    row.setAttribute("data-open", ""); t.setAttribute("data-end", new Date(Date.now() + 3 * 60 * 1000).toISOString());
+    document.getElementById("s-code").focus();
+    document.getElementById("send-code").textContent = "다시 받기";
+  }
+  document.getElementById("send-code").addEventListener("click", startCode);
+  document.getElementById("resend-code").addEventListener("click", startCode);
+</script>
+
+</body>
+</html>

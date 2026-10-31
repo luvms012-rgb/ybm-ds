@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>랜딩 페이지 - YBM DS 템플릿</title>
+<link rel="stylesheet" href="../../../dist/ybm-ds.css">
+<script src="../../../dist/ybm-ds.js" defer></script>
+<style>
+  /* 템플릿 배치 전용. 값은 모두 --ybm-* 토큰 */
+  body { word-break: keep-all; overflow-wrap: break-word; }
+  .tp-h1 { font-size: var(--ybm-font-size-t12); line-height: var(--ybm-line-height-t12); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; }
+  .tp-h2 { font-size: var(--ybm-font-size-t08); line-height: var(--ybm-line-height-t08); font-weight: var(--ybm-font-weight-bold); }
+  .tp-h3 { font-size: var(--ybm-font-size-t05); line-height: 22px; font-weight: var(--ybm-font-weight-semibold); }
+  .tp-lead { font-size: var(--ybm-font-size-t06); line-height: var(--ybm-line-height-t06); color: var(--ybm-color-fg-neutral-muted); }
+  .tp-body { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
+  .tp-caption { font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); color: var(--ybm-color-fg-neutral-subtle); }
+  .tp-num { font-variant-numeric: tabular-nums; }
+  .tp-ph { display: grid; place-items: center; height: 100%; color: var(--ybm-color-fg-neutral-subtle); }
+  .tp-logo { display: grid; place-items: center; width: 88px; height: 28px; border-radius: var(--ybm-shape-xs); background: var(--ybm-color-bg-neutral); color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t03-static); line-height: var(--ybm-line-height-t03-static); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-bar { position: sticky; top: 0; z-index: var(--ybm-z-sticky); background: var(--ybm-color-bg-layer-default); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); }
+  @media (min-width: 768px) { .tp-h1 { font-size: var(--ybm-font-size-t15); line-height: var(--ybm-line-height-t15); } .tp-h2 { font-size: var(--ybm-font-size-t10); line-height: var(--ybm-line-height-t10); } }
+
+  /* 구역: 가운데 1120, 구역 사이 간격 */
+  .tp-section { padding: var(--ybm-space-x14) var(--ybm-space-x-global-gutter); }
+  .tp-inner { max-width: 1120px; margin-inline: auto; }
+  .tp-section--alt { background: var(--ybm-color-bg-canvas); }
+  .tp-sechead { display: flex; flex-direction: column; gap: var(--ybm-space-x3); margin-bottom: var(--ybm-space-x8); text-align: center; }
+  @media (min-width: 768px) { .tp-section { padding-block: var(--ybm-space-x24); } .tp-sechead { margin-bottom: var(--ybm-space-x12); } }
+
+  /* 첫 화면 */
+  .tp-hero { display: flex; flex-direction: column; align-items: center; gap: var(--ybm-space-x6); text-align: center; }
+  .tp-hero__texts { display: flex; flex-direction: column; align-items: center; gap: var(--ybm-space-x4); max-width: 720px; }
+  .tp-hero__actions { display: flex; flex-direction: column; gap: var(--ybm-space-x2); width: 100%; max-width: 360px; }
+  .tp-hero__shot { width: 100%; max-width: 960px; margin-top: var(--ybm-space-x4); box-shadow: var(--ybm-elevation-raised); }
+  @media (min-width: 768px) { .tp-hero__actions { flex-direction: row; justify-content: center; width: auto; max-width: none; } }
+
+  /* 특징 3열, 쓰는 순서 3열, 요금제 3열 */
+  .tp-grid { display: grid; grid-template-columns: 1fr; gap: var(--ybm-space-x4); }
+  @media (min-width: 768px) { .tp-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--ybm-space-x6); } }
+  .tp-feature-icon { display: grid; place-items: center; width: 48px; height: 48px; border-radius: var(--ybm-shape-md); background: var(--ybm-color-bg-brand-weak); color: var(--ybm-color-fg-brand); }
+  .tp-step { display: flex; flex-direction: column; gap: var(--ybm-space-x3); }
+  .tp-step__no { display: grid; place-items: center; width: 32px; height: 32px; border-radius: var(--ybm-shape-pill); background: var(--ybm-color-bg-neutral-solid); color: var(--ybm-color-fg-on-neutral-solid); font-size: var(--ybm-font-size-t03); font-weight: var(--ybm-font-weight-bold); }
+  .tp-plan { position: relative; }
+  .tp-plan--pick { box-shadow: inset 0 0 0 2px var(--ybm-color-stroke-brand-solid); }
+  .tp-plan__badge { position: absolute; top: calc(var(--ybm-space-x3) * -1); left: var(--ybm-space-x5); }
+  .tp-price { display: flex; align-items: baseline; gap: var(--ybm-space-x1); }
+  .tp-price b { font-size: var(--ybm-font-size-t10); line-height: var(--ybm-line-height-t10); font-weight: var(--ybm-font-weight-bold); }
+  .tp-checks { display: flex; flex-direction: column; gap: var(--ybm-space-x2); margin: 0; padding: 0; list-style: none; font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); }
+  .tp-checks li { display: flex; align-items: center; gap: var(--ybm-space-x2); }
+  .tp-checks .ds-icon { color: var(--ybm-color-fg-positive); }
+
+  /* 질문, 마지막 권유, 바닥 */
+  .tp-faq { max-width: 720px; margin-inline: auto; display: flex; flex-direction: column; gap: var(--ybm-space-x3); }
+  .tp-cta { display: flex; flex-direction: column; align-items: center; gap: var(--ybm-space-x6); padding: var(--ybm-space-x12) var(--ybm-space-x6); border-radius: var(--ybm-shape-2xl); background: var(--ybm-color-bg-neutral-solid); color: var(--ybm-color-fg-on-neutral-solid); text-align: center; }
+  .tp-cta .tp-lead { color: inherit; opacity: .8; }
+  .tp-footer { padding: var(--ybm-space-x10) var(--ybm-space-x-global-gutter) calc(var(--ybm-space-x10) + env(safe-area-inset-bottom, 0px)); border-top: 1px solid var(--ybm-color-stroke-neutral-muted); }
+  .tp-footer__row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ybm-space-x4); }
+  .tp-footer__links { display: flex; flex-wrap: wrap; gap: var(--ybm-space-x4); }
+</style>
+</head>
+<body>
+
+<!-- 모바일 상단 -->
+<header class="ds-appbar u-hide-from-md tp-bar">
+  <div class="ds-appbar__left"><a class="ds-appbar__button" href="#" aria-label="서비스 이름 홈"><span class="tp-logo">로고</span></a></div>
+  <div class="ds-appbar__main"></div>
+  <div class="ds-appbar__right"><a class="ds-btn" data-variant="neutralSolid" data-size="xsmall" href="signup.html">시작하기</a><button type="button" class="ds-appbar__button" aria-label="메뉴 열기"><i class="ds-icon ds-icon--menu" aria-hidden="true"></i></button></div>
+</header>
+
+<!-- PC 상단 -->
+<header class="ds-topnav u-show-from-md tp-bar">
+  <div class="ds-topnav__left">
+    <a class="ds-topnav__heading" href="#" aria-label="서비스 이름 홈"><span class="tp-logo">로고</span></a>
+    <nav class="ds-topnav__menu" aria-label="주요 메뉴">
+      <a class="ds-topnav__item" href="#features">기능</a>
+      <a class="ds-topnav__item" href="#pricing">요금제</a>
+      <a class="ds-topnav__item" href="#faq">자주 묻는 질문</a>
+      <a class="ds-topnav__item" href="help-center.html">고객센터</a>
+    </nav>
+  </div>
+  <div class="ds-topnav__end">
+    <a class="ds-btn" data-variant="ghost" data-size="small" href="login.html">로그인</a>
+    <a class="ds-btn" data-variant="neutralSolid" data-size="small" href="signup.html">무료로 시작하기</a>
+  </div>
+</header>
+
+<main>
+  <!-- 첫 화면 -->
+  <section class="tp-section">
+    <div class="tp-inner tp-hero">
+      <span class="ds-badge" data-size="large" data-tone="brand"><i class="ds-icon ds-icon--sparkles ds-badge__prefix" aria-hidden="true"></i><span class="ds-badge__label">새 기능: AI 요약</span></span>
+      <div class="tp-hero__texts">
+        <h1 class="tp-h1">팀의 일을 한곳에서, 더 쉽게</h1>
+        <p class="tp-lead">할 일, 문서, 대화를 한 화면에 모았어요. 따로 설치할 것 없이 오늘 바로 시작할 수 있어요.</p>
+      </div>
+      <div class="tp-hero__actions">
+        <a class="ds-btn" data-variant="brandSolid" data-size="large" href="signup.html">무료로 시작하기</a>
+        <a class="ds-btn" data-variant="neutralOutline" data-size="large" href="#"><i class="ds-icon ds-icon--external-link" aria-hidden="true"></i>소개 영상 보기</a>
+      </div>
+      <p class="tp-caption">신용카드 없이 시작할 수 있어요. 14일 동안 모든 기능을 써 볼 수 있습니다.</p>
+      <div class="ds-imageframe tp-hero__shot" data-ratio="16:9" data-stroke aria-hidden="true"><span class="tp-ph"><i class="ds-icon ds-icon--image ds-icon--lg" aria-hidden="true"></i></span></div>
+    </div>
+  </section>
+
+  <!-- 특징 -->
+  <section class="tp-section tp-section--alt" id="features" aria-labelledby="features-title">
+    <div class="tp-inner">
+      <div class="tp-sechead">
+        <h2 class="tp-h2" id="features-title">이런 점이 다릅니다</h2>
+        <p class="tp-lead">복잡한 설정 없이, 꼭 필요한 것만 담았어요.</p>
+      </div>
+      <div class="tp-grid">
+        <article class="ds-card">
+          <span class="tp-feature-icon"><i class="ds-icon ds-icon--sparkles ds-icon--lg" aria-hidden="true"></i></span>
+          <header class="ds-card__header"><h3 class="ds-card__title">AI 가 요약해요</h3><p class="ds-card__desc">긴 대화와 문서를 세 줄로 줄여 줍니다. 놓친 내용은 다시 물어보면 돼요.</p></header>
+        </article>
+        <article class="ds-card">
+          <span class="tp-feature-icon"><i class="ds-icon ds-icon--calendar ds-icon--lg" aria-hidden="true"></i></span>
+          <header class="ds-card__header"><h3 class="ds-card__title">일정이 저절로 맞춰져요</h3><p class="ds-card__desc">할 일에 날짜만 넣으면 팀 일정표에 바로 보여요. 겹치면 미리 알려 드려요.</p></header>
+        </article>
+        <article class="ds-card">
+          <span class="tp-feature-icon"><i class="ds-icon ds-icon--share ds-icon--lg" aria-hidden="true"></i></span>
+          <header class="ds-card__header"><h3 class="ds-card__title">링크 하나로 공유</h3><p class="ds-card__desc">문서와 보고서를 링크로 보내고, 누가 봤는지 확인할 수 있어요.</p></header>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 쓰는 순서 -->
+  <section class="tp-section" aria-labelledby="how-title">
+    <div class="tp-inner">
+      <div class="tp-sechead">
+        <h2 class="tp-h2" id="how-title">3분이면 시작해요</h2>
+      </div>
+      <div class="tp-grid">
+        <div class="tp-step"><span class="tp-step__no" aria-hidden="true">1</span><h3 class="tp-h3">이메일로 가입</h3><p class="tp-body">이메일과 비밀번호만 있으면 돼요. 간편 로그인도 됩니다.</p></div>
+        <div class="tp-step"><span class="tp-step__no" aria-hidden="true">2</span><h3 class="tp-h3">팀원 초대</h3><p class="tp-body">링크를 보내면 팀원이 바로 들어와요. 권한은 나중에 바꿀 수 있어요.</p></div>
+        <div class="tp-step"><span class="tp-step__no" aria-hidden="true">3</span><h3 class="tp-h3">첫 프로젝트 만들기</h3><p class="tp-body">템플릿을 고르면 할 일과 문서 틀이 함께 만들어져요.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 요금제 -->
+  <section class="tp-section tp-section--alt" id="pricing" aria-labelledby="pricing-title">
+    <div class="tp-inner">
+      <div class="tp-sechead">
+        <h2 class="tp-h2" id="pricing-title">요금제</h2>
+        <p class="tp-lead">팀 크기에 맞게 고르세요. 언제든 바꿀 수 있어요.</p>
+      </div>
+      <div class="tp-grid">
+        <article class="ds-card tp-plan">
+          <header class="ds-card__header"><h3 class="ds-card__title">무료</h3><p class="ds-card__desc">혼자 또는 작은 팀이 가볍게 시작할 때</p></header>
+          <p class="tp-price tp-num"><b>0원</b><span class="tp-body">/ 월</span></p>
+          <ul class="tp-checks">
+            <li><i class="ds-icon ds-icon--check ds-icon--sm" aria-hidden="true"></i>팀원 3명까지</li>
+            <li><i class="ds-icon ds-icon--check ds-icon--sm" aria-hidden="true"></i>프로젝트 2개</li>
+            <li><i class="ds-icon ds-icon--check ds-icon--sm" aria-hidden="true"></i>저장 공간 1GB</li>
+          </ul>
+          <footer class="ds-card__footer"><a class="ds-btn" data-variant="neutralWeak" data-width="fill" href="signup.html">무료로 시작</a></footer>
+        </article>
+        <article class="ds-card tp-plan tp-plan--pick">
+          <span class="ds-badge tp-plan__badge" data-variant="solid" data-tone="brand">가장 많이 골라요</span>
+          <header class="ds-card__header"><h3 class="ds-card__title">프로</h3><p class="ds-card__desc">성장하는 팀에 필요한 것을 모두</p></header>
+          <p class="tp-price tp-num"><b>9,900원</b><span class="tp-body">/ 사람 / 월</span></p>
+          <ul class="tp-checks">
+            <li><i class="ds-icon ds-icon--check ds-icon--sm" aria-hidden="true"></i>팀원 수 제한 없음</li>
+            <li><i class="ds-icon ds-icon--check ds-icon--sm" aria-hidden="true"></i>프로젝트 제한 없음</li>
+            <li><i class="ds-icon ds-icon--check ds-icon--sm" aria-hidden="true"></i>AI 요약과 검색</li>
+            <li><i class="ds-icon ds-icon--check ds-icon--sm" aria-hidden="true"></i>저장 공간 100GB</li>
+          </ul>
+          <footer class="ds-card__footer"><a class="ds-btn" data-variant="brandSolid" data-width="fill" href="signup.html">14일 무료 체험</a></footer>
+        </article>
+        <article class="ds-card tp-plan">
+          <header class="ds-card__header"><h3 class="ds-card__title">기업</h3><p class="ds-card__desc">보안과 관리가 중요한 조직</p></header>
+          <p class="tp-price"><b>문의</b></p>
+          <ul class="tp-checks">
+            <li><i class="ds-icon ds-icon--check ds-icon--sm" aria-hidden="true"></i>프로의 모든 기능</li>
+            <li><i class="ds-icon ds-icon--check ds-icon--sm" aria-hidden="true"></i>사내 계정 연동(SSO)</li>
+            <li><i class="ds-icon ds-icon--check ds-icon--sm" aria-hidden="true"></i>전담 담당자</li>
+          </ul>
+          <footer class="ds-card__footer"><a class="ds-btn" data-variant="neutralWeak" data-width="fill" href="help-center.html">상담 신청</a></footer>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 자주 묻는 질문 -->
+  <section class="tp-section" id="faq" aria-labelledby="faq-title">
+    <div class="tp-inner">
+      <div class="tp-sechead"><h2 class="tp-h2" id="faq-title">자주 묻는 질문</h2></div>
+      <div class="tp-faq">
+        <details class="ds-accordion" data-variant="separated" open>
+          <summary class="ds-accordion__trigger"><span class="ds-accordion__body"><span class="ds-accordion__title">무료 체험이 끝나면 어떻게 되나요?</span></span></summary>
+          <div class="ds-accordion__content">자동으로 결제되지 않아요. 체험이 끝나면 무료 요금제로 바뀌고, 만든 자료는 그대로 남아 있어요.</div>
+        </details>
+        <details class="ds-accordion" data-variant="separated">
+          <summary class="ds-accordion__trigger"><span class="ds-accordion__body"><span class="ds-accordion__title">쓰던 도구의 자료를 옮길 수 있나요?</span></span></summary>
+          <div class="ds-accordion__content">CSV 와 마크다운 파일을 올리면 할 일과 문서로 바뀝니다. 설정의 가져오기에서 할 수 있어요.</div>
+        </details>
+        <details class="ds-accordion" data-variant="separated">
+          <summary class="ds-accordion__trigger"><span class="ds-accordion__body"><span class="ds-accordion__title">요금제는 언제든 바꿀 수 있나요?</span></span></summary>
+          <div class="ds-accordion__content">네. 올리면 바로 적용되고, 내리면 다음 결제일부터 적용돼요. 남은 금액은 다음 달 요금에서 빼 드려요.</div>
+        </details>
+        <details class="ds-accordion" data-variant="separated">
+          <summary class="ds-accordion__trigger"><span class="ds-accordion__body"><span class="ds-accordion__title">자료는 안전하게 보관되나요?</span></span></summary>
+          <div class="ds-accordion__content">모든 자료는 암호화해서 저장하고, 매일 백업합니다. 탈퇴하면 30일 뒤 완전히 지워져요.</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- 마지막 권유 -->
+  <section class="tp-section">
+    <div class="tp-inner">
+      <div class="tp-cta">
+        <h2 class="tp-h2">오늘 바로 시작해 보세요</h2>
+        <p class="tp-lead">가입에 1분, 첫 프로젝트까지 3분이면 충분해요.</p>
+        <a class="ds-btn" data-variant="brandSolid" data-size="large" href="signup.html">무료로 시작하기</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="tp-footer">
+  <div class="tp-inner tp-footer__row">
+    <span class="tp-logo" aria-label="서비스 이름">로고</span>
+    <nav class="tp-footer__links tp-caption" aria-label="바닥 메뉴"><a class="ds-link" href="#">이용약관</a><a class="ds-link" href="#">개인정보 처리방침</a><a class="ds-link" href="notice.html">공지사항</a><a class="ds-link" href="help-center.html">고객센터</a></nav>
+    <span class="tp-caption">© 2026 서비스 이름</span>
+  </div>
+</footer>
+
+</body>
+</html>

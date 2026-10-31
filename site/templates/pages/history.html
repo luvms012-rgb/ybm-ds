@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>주문 내역 - YBM DS 템플릿</title>
+<link rel="stylesheet" href="../../../dist/ybm-ds.css">
+<script src="../../../dist/ybm-ds.js" defer></script>
+<style>
+  /* 템플릿 배치 전용. 값은 모두 --ybm-* 토큰 */
+  body { word-break: keep-all; overflow-wrap: break-word; }
+  .tp-h1 { font-size: var(--ybm-font-size-t10); line-height: var(--ybm-line-height-t10); font-weight: var(--ybm-font-weight-medium); }
+  .tp-h3 { font-size: var(--ybm-font-size-t05); line-height: 22px; font-weight: var(--ybm-font-weight-medium); }
+  .tp-sub { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
+  .tp-caption { font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); color: var(--ybm-color-fg-neutral-subtle); }
+  .tp-num { font-variant-numeric: tabular-nums; }
+  .tp-ph { display: grid; place-items: center; height: 100%; color: var(--ybm-color-fg-neutral-subtle); }
+  .tp-logo { display: grid; place-items: center; width: 88px; height: 28px; border-radius: var(--ybm-shape-xs); background: var(--ybm-color-bg-neutral); color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t03-static); line-height: var(--ybm-line-height-t03-static); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-bar { position: sticky; top: 0; z-index: var(--ybm-z-sticky); background: var(--ybm-color-bg-layer-default); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); }
+
+  .tp-page { background: var(--ybm-color-bg-canvas); }
+  .tp-side { position: sticky; top: 0; height: 100vh; }
+  .tp-content { min-width: 0; padding: 0 0 calc(var(--ybm-space-x16) + env(safe-area-inset-bottom, 0px)); }
+  .tp-container { display: flex; flex-direction: column; gap: var(--ybm-space-x4); max-width: 800px; margin-inline: auto; }
+
+  /* 탭은 위에 붙고, 기간 칩은 그 아래 */
+  .tp-tabs { position: sticky; top: 56px; z-index: var(--ybm-z-sticky); background: var(--ybm-color-bg-layer-default); }
+  .tp-filters { display: flex; flex-direction: column; gap: var(--ybm-space-x3); padding: var(--ybm-space-x3) var(--ybm-space-x-global-gutter) 0; }
+  .tp-filters__row { display: flex; align-items: center; justify-content: space-between; gap: var(--ybm-space-x2); }
+  .tp-count { color: var(--ybm-color-fg-neutral-muted); font-size: var(--ybm-font-size-t03); }
+
+  /* 날짜 묶음과 주문 한 건 */
+  .tp-day { display: flex; flex-direction: column; gap: var(--ybm-space-x2); }
+  .tp-day__head { display: flex; align-items: center; justify-content: space-between; padding: var(--ybm-space-x2) var(--ybm-space-x-global-gutter) 0; }
+  .tp-order { display: flex; flex-direction: column; gap: var(--ybm-space-x3); padding: var(--ybm-space-x4) var(--ybm-space-x-global-gutter); background: var(--ybm-color-bg-layer-default); }
+  .tp-order__head { display: flex; align-items: center; justify-content: space-between; gap: var(--ybm-space-x2); }
+  .tp-order__row { display: flex; gap: var(--ybm-space-x3); }
+  .tp-order__thumb { flex: none; width: 72px; }
+  .tp-order__texts { display: flex; flex: 1 1 auto; flex-direction: column; gap: var(--ybm-space-x0_5); min-width: 0; }
+  .tp-order__name { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); }
+  .tp-order__price { font-size: var(--ybm-font-size-t05); line-height: var(--ybm-line-height-t05); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-order__actions { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--ybm-space-x2); }
+  .tp-order__actions > .ds-btn:only-child { grid-column: 1 / -1; }
+  .tp-more { padding: var(--ybm-space-x2) var(--ybm-space-x-global-gutter) 0; }
+  .tp-pager { display: none; justify-content: center; padding-top: var(--ybm-space-x4); }
+
+  @media (min-width: 768px) {
+    .tp-page { background: var(--ybm-color-bg-layer-default); }
+    .tp-layout { display: grid; grid-template-columns: auto minmax(0, 1fr); }
+    .tp-content { padding: var(--ybm-space-x10) var(--ybm-space-x8) var(--ybm-space-x16); }
+    .tp-container { gap: var(--ybm-space-x6); }
+    .tp-tabs { position: static; }
+    .tp-filters { padding-inline: 0; flex-direction: row; align-items: center; justify-content: space-between; }
+    .tp-day__head { padding-inline: 0; }
+    .tp-order { padding: var(--ybm-space-x5); border-radius: var(--ybm-shape-xl); box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-neutral-weak); }
+    .tp-order__actions { display: flex; }
+    .tp-more { display: none; }
+    .tp-pager { display: flex; }
+  }
+</style>
+</head>
+<body class="tp-page">
+
+<!-- PC 상단 -->
+<header class="ds-topnav u-show-from-md tp-bar">
+  <div class="ds-topnav__left">
+    <a class="ds-topnav__heading" href="#" aria-label="서비스 이름 홈"><span class="tp-logo">로고</span></a>
+    <nav class="ds-topnav__menu" aria-label="주요 메뉴">
+      <a class="ds-topnav__item" href="commerce-home.html">홈</a>
+      <a class="ds-topnav__item" href="product-list.html">카테고리</a>
+      <a class="ds-topnav__item" href="#">기획전</a>
+      <a class="ds-topnav__item" href="mypage.html" aria-current="page">마이페이지</a>
+    </nav>
+  </div>
+  <div class="ds-topnav__end">
+    <a class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" href="cart.html" aria-label="장바구니"><i class="ds-icon ds-icon--shopping-cart" aria-hidden="true"></i></a>
+    <a class="ds-avatar" href="mypage.html" aria-label="김민수, 마이페이지"><span class="ds-avatar__initials" aria-hidden="true">김</span></a>
+  </div>
+</header>
+
+<!-- 모바일 상단 -->
+<header class="ds-appbar u-hide-from-md tp-bar">
+  <div class="ds-appbar__left"><a class="ds-appbar__button" href="mypage.html" aria-label="뒤로"><i class="ds-icon ds-icon--chevron-left" aria-hidden="true"></i></a></div>
+  <div class="ds-appbar__main"><h1 class="ds-appbar__title">주문 내역</h1></div>
+  <div class="ds-appbar__right"><a class="ds-appbar__button" href="search-products.html" aria-label="주문 검색"><i class="ds-icon ds-icon--search" aria-hidden="true"></i></a></div>
+</header>
+
+<div class="tp-layout">
+
+  <!-- PC 왼쪽 메뉴 -->
+  <div class="tp-side u-show-from-md">
+    <nav class="ds-sidenav" aria-label="마이페이지 메뉴">
+      <div class="ds-sidenav__content">
+        <div class="ds-sidenav__group">
+          <div class="ds-sidenav__group-label">쇼핑</div>
+          <a class="ds-sidenav__item" href="mypage.html"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--house" aria-hidden="true"></i></span><span class="ds-sidenav__label">마이페이지 홈</span></a>
+          <a class="ds-sidenav__item" href="#" aria-current="page"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--file-text" aria-hidden="true"></i></span><span class="ds-sidenav__label">주문 내역</span></a>
+          <a class="ds-sidenav__item" href="#"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--heart" aria-hidden="true"></i></span><span class="ds-sidenav__label">찜한 상품</span></a>
+          <a class="ds-sidenav__item" href="#"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--star" aria-hidden="true"></i></span><span class="ds-sidenav__label">내 후기</span></a>
+        </div>
+        <div class="ds-sidenav__group">
+          <div class="ds-sidenav__group-label">계정</div>
+          <a class="ds-sidenav__item" href="settings.html"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--id-card" aria-hidden="true"></i></span><span class="ds-sidenav__label">설정</span></a>
+          <a class="ds-sidenav__item" href="help-center.html"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--headset" aria-hidden="true"></i></span><span class="ds-sidenav__label">고객센터</span></a>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <main class="tp-content">
+    <div class="tp-container">
+
+      <header class="u-show-from-md"><h1 class="tp-h1">주문 내역</h1></header>
+
+      <!-- 종류 탭 -->
+      <div class="tp-tabs">
+        <div class="ds-tabs" role="tablist" aria-label="내역 종류">
+          <button type="button" class="ds-tabs__trigger" role="tab" aria-selected="true">주문</button>
+          <button type="button" class="ds-tabs__trigger" role="tab" aria-selected="false">결제</button>
+          <button type="button" class="ds-tabs__trigger" role="tab" aria-selected="false">포인트</button>
+        </div>
+      </div>
+
+      <!-- 기간 -->
+      <div class="tp-filters">
+        <div class="ds-chiptabs" role="tablist" aria-label="기간" data-variant="neutralOutline">
+          <button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false">1주일</button>
+          <button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true">1개월</button>
+          <button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false">3개월</button>
+          <button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false">6개월</button>
+          <button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false"><i class="ds-icon ds-icon--calendar ds-icon--sm" aria-hidden="true"></i>직접 설정</button>
+        </div>
+        <div class="tp-filters__row">
+          <span class="tp-count tp-num">2026.10.01 ~ 10.31 · 주문 4건</span>
+          <button type="button" class="ds-select" data-size="medium" aria-haspopup="listbox" aria-expanded="false" aria-label="상태"><span class="ds-select__value">전체 상태</span></button>
+        </div>
+      </div>
+
+      <!-- 10월 30일 -->
+      <section class="tp-day" aria-labelledby="d1">
+        <div class="tp-day__head"><h2 class="tp-h3 tp-num" id="d1">2026.10.30</h2></div>
+        <article class="tp-order">
+          <div class="tp-order__head">
+            <span class="ds-badge" data-tone="informative" data-size="large">배송 중</span>
+            <a class="ds-btn" data-variant="ghost" data-size="xsmall" href="order-complete.html">주문 상세<i class="ds-icon ds-icon--chevron-right" aria-hidden="true"></i></a>
+          </div>
+          <div class="tp-order__row">
+            <div class="ds-imageframe tp-order__thumb" data-stroke aria-hidden="true"><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div>
+            <div class="tp-order__texts"><span class="tp-caption">에이 스튜디오</span><span class="tp-order__name">오버핏 울 블렌드 코트</span><span class="tp-caption">차콜 / L · 1개</span><span class="tp-order__price tp-num">139,000원</span></div>
+          </div>
+          <div class="tp-order__row">
+            <div class="ds-imageframe tp-order__thumb" data-stroke aria-hidden="true"><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div>
+            <div class="tp-order__texts"><span class="tp-caption">디 라벨</span><span class="tp-order__name">후드 집업 베이직</span><span class="tp-caption">그레이 / M · 2개</span><span class="tp-order__price tp-num">98,000원</span></div>
+          </div>
+          <div class="tp-order__actions">
+            <button type="button" class="ds-btn" data-variant="neutralOutline" data-size="medium">배송 조회</button>
+            <button type="button" class="ds-btn" data-variant="neutralOutline" data-size="medium">주문 취소</button>
+          </div>
+        </article>
+      </section>
+
+      <!-- 10월 21일 -->
+      <section class="tp-day" aria-labelledby="d2">
+        <div class="tp-day__head"><h2 class="tp-h3 tp-num" id="d2">2026.10.21</h2></div>
+        <article class="tp-order">
+          <div class="tp-order__head">
+            <span class="ds-badge" data-tone="positive" data-size="large">배송 완료</span>
+            <a class="ds-btn" data-variant="ghost" data-size="xsmall" href="#">주문 상세<i class="ds-icon ds-icon--chevron-right" aria-hidden="true"></i></a>
+          </div>
+          <div class="tp-order__row">
+            <div class="ds-imageframe tp-order__thumb" data-stroke aria-hidden="true"><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div>
+            <div class="tp-order__texts"><span class="tp-caption">런 랩</span><span class="tp-order__name">데일리 러닝화</span><span class="tp-caption">화이트 / 270 · 1개</span><span class="tp-order__price tp-num">89,000원</span></div>
+          </div>
+          <div class="tp-order__actions">
+            <button type="button" class="ds-btn" data-variant="brandOutline" data-size="medium"><i class="ds-icon ds-icon--star" aria-hidden="true"></i>후기 쓰기</button>
+            <button type="button" class="ds-btn" data-variant="neutralOutline" data-size="medium">교환·반품</button>
+            <button type="button" class="ds-btn" data-variant="neutralOutline" data-size="medium">재구매</button>
+          </div>
+        </article>
+        <article class="tp-order">
+          <div class="tp-order__head">
+            <span class="ds-badge" data-tone="neutral" data-size="large">취소 완료</span>
+            <a class="ds-btn" data-variant="ghost" data-size="xsmall" href="#">주문 상세<i class="ds-icon ds-icon--chevron-right" aria-hidden="true"></i></a>
+          </div>
+          <div class="tp-order__row">
+            <div class="ds-imageframe tp-order__thumb" data-stroke aria-hidden="true"><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div>
+            <div class="tp-order__texts"><span class="tp-caption">홈 앤 리빙</span><span class="tp-order__name">리넨 식탁보 4인용</span><span class="tp-caption">베이지 · 1개</span><span class="tp-order__price tp-num">32,000원</span></div>
+          </div>
+          <div class="tp-order__actions">
+            <button type="button" class="ds-btn" data-variant="neutralOutline" data-size="medium">재구매</button>
+          </div>
+        </article>
+      </section>
+
+      <!-- 10월 8일 -->
+      <section class="tp-day" aria-labelledby="d3">
+        <div class="tp-day__head"><h2 class="tp-h3 tp-num" id="d3">2026.10.08</h2></div>
+        <article class="tp-order">
+          <div class="tp-order__head">
+            <span class="ds-badge" data-tone="positive" data-size="large">배송 완료</span>
+            <a class="ds-btn" data-variant="ghost" data-size="xsmall" href="#">주문 상세<i class="ds-icon ds-icon--chevron-right" aria-hidden="true"></i></a>
+          </div>
+          <div class="tp-order__row">
+            <div class="ds-imageframe tp-order__thumb" data-stroke aria-hidden="true"><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div>
+            <div class="tp-order__texts"><span class="tp-caption">그린 테이블</span><span class="tp-order__name">유기농 원두 1kg</span><span class="tp-caption">중배전 · 2개</span><span class="tp-order__price tp-num">58,000원</span></div>
+          </div>
+          <div class="tp-order__actions">
+            <button type="button" class="ds-btn" data-variant="neutralOutline" data-size="medium">후기 보기</button>
+            <button type="button" class="ds-btn" data-variant="neutralOutline" data-size="medium">재구매</button>
+          </div>
+        </article>
+      </section>
+
+      <!-- 모바일: 더 보기 / PC: 페이지 -->
+      <div class="tp-more"><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="large" data-width="fill">이전 주문 더 보기</button></div>
+      <nav class="ds-pagination tp-pager" data-type="simple" aria-label="페이지">
+        <a class="ds-pagination__item" data-type="prev" aria-label="이전 페이지" aria-disabled="true"></a>
+        <span class="ds-pagination__indicator"><b>1</b> / 3</span>
+        <a class="ds-pagination__item" data-type="next" href="#" aria-label="다음 페이지"></a>
+      </nav>
+
+    </div>
+  </main>
+</div>
+
+</body>
+</html>

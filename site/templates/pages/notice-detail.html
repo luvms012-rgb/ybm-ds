@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>공지 상세 - YBM DS 템플릿</title>
+<link rel="stylesheet" href="../../../dist/ybm-ds.css">
+<script src="../../../dist/ybm-ds.js" defer></script>
+<style>
+  /* 템플릿 배치 전용. 값은 모두 --ybm-* 토큰 */
+  body { word-break: keep-all; overflow-wrap: break-word; }
+  .tp-h1 { font-size: var(--ybm-font-size-t08); line-height: var(--ybm-line-height-t08); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-h3 { font-size: var(--ybm-font-size-t05); line-height: 22px; font-weight: var(--ybm-font-weight-medium); }
+  .tp-caption { font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); color: var(--ybm-color-fg-neutral-subtle); }
+  .tp-num { font-variant-numeric: tabular-nums; }
+  .tp-logo { display: grid; place-items: center; width: 88px; height: 28px; border-radius: var(--ybm-shape-xs); background: var(--ybm-color-bg-neutral); color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t03-static); line-height: var(--ybm-line-height-t03-static); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-bar { position: sticky; top: 0; z-index: var(--ybm-z-sticky); background: var(--ybm-color-bg-layer-default); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); }
+  @media (min-width: 768px) { .tp-h1 { font-size: var(--ybm-font-size-t10); line-height: var(--ybm-line-height-t10); } }
+
+  .tp-main { display: flex; flex-direction: column; gap: var(--ybm-space-x6); max-width: 800px; margin-inline: auto; padding: var(--ybm-space-x5) var(--ybm-space-x-global-gutter) calc(var(--ybm-space-x16) + env(safe-area-inset-bottom, 0px)); }
+  .tp-head { display: flex; flex-direction: column; gap: var(--ybm-space-x3); padding-bottom: var(--ybm-space-x5); border-bottom: 1px solid var(--ybm-color-stroke-neutral-muted); }
+  .tp-meta { display: flex; flex-wrap: wrap; align-items: center; gap: var(--ybm-space-x2); }
+  .tp-files { display: flex; flex-wrap: wrap; gap: var(--ybm-space-x2); }
+  .tp-nav { display: flex; flex-direction: column; gap: var(--ybm-space-x3); }
+  .tp-nav__label { flex: none; width: 56px; color: var(--ybm-color-fg-neutral-muted); }
+  .tp-actions { display: flex; justify-content: center; }
+  @media (min-width: 768px) { .tp-main { padding: var(--ybm-space-x10) var(--ybm-space-x6) var(--ybm-space-x16); } }
+</style>
+</head>
+<body>
+
+<!-- 모바일 상단 -->
+<header class="ds-appbar u-hide-from-md tp-bar">
+  <div class="ds-appbar__left"><a class="ds-appbar__button" href="notice.html" aria-label="뒤로"><i class="ds-icon ds-icon--chevron-left" aria-hidden="true"></i></a></div>
+  <div class="ds-appbar__main"><h1 class="ds-appbar__title">공지사항</h1></div>
+  <div class="ds-appbar__right"><button type="button" class="ds-appbar__button" aria-label="공유"><i class="ds-icon ds-icon--share" aria-hidden="true"></i></button></div>
+</header>
+
+<!-- PC 상단 -->
+<header class="ds-topnav u-show-from-md tp-bar">
+  <div class="ds-topnav__left">
+    <a class="ds-topnav__heading" href="#" aria-label="서비스 이름 홈"><span class="tp-logo">로고</span></a>
+    <nav class="ds-topnav__menu" aria-label="주요 메뉴">
+      <a class="ds-topnav__item" href="notice.html" aria-current="page">공지사항</a>
+      <a class="ds-topnav__item" href="help-center.html">고객센터</a>
+    </nav>
+  </div>
+  <div class="ds-topnav__end"><a class="ds-avatar" href="mypage.html" aria-label="김민수, 마이페이지"><span class="ds-avatar__initials" aria-hidden="true">김</span></a></div>
+</header>
+
+<main class="tp-main">
+  <article>
+    <header class="tp-head">
+      <nav class="ds-breadcrumbs u-show-from-md" aria-label="현재 위치"><ol><li><a href="#">홈</a></li><li><a href="help-center.html">고객센터</a></li><li><a href="notice.html">공지사항</a></li><li><span aria-current="page">점검 안내</span></li></ol></nav>
+      <div class="tp-meta"><span class="ds-badge" data-variant="solid" data-tone="critical">중요</span><span class="ds-badge" data-tone="neutral">점검</span></div>
+      <h1 class="tp-h1">11월 4일 새벽 2시~4시 서비스 점검 안내</h1>
+      <p class="tp-caption"><span class="tp-num">2026.10.31</span> · 조회 <span class="tp-num">1,284</span></p>
+    </header>
+
+    <div class="ds-markdown">
+      <p>안녕하세요. 더 안정적인 서비스를 위해 아래와 같이 점검을 진행합니다. 점검 중에는 서비스를 쓸 수 없으니 미리 확인해 주세요.</p>
+      <h2>점검 일정</h2>
+      <ul>
+        <li>일시: 2026년 11월 4일(수) 새벽 2시 ~ 4시 (2시간)</li>
+        <li>대상: 웹과 앱 전체</li>
+        <li>내용: 서버 교체와 데이터베이스 업그레이드</li>
+      </ul>
+      <h2>점검 중 안 되는 것</h2>
+      <table>
+        <thead><tr><th>기능</th><th>점검 중</th><th>점검 뒤</th></tr></thead>
+        <tbody>
+          <tr><td>로그인, 주문, 결제</td><td>안 됨</td><td>바로 됨</td></tr>
+          <tr><td>상품 보기</td><td>안 됨</td><td>바로 됨</td></tr>
+          <tr><td>알림 받기</td><td>늦게 옴</td><td>밀린 알림이 한 번에 옴</td></tr>
+        </tbody>
+      </table>
+      <h2>참고해 주세요</h2>
+      <p>점검 시작 전에 결제를 마치지 못한 주문은 자동으로 취소돼요. 점검이 일찍 끝나면 바로 열고, 늦어지면 이 공지로 다시 알려 드립니다.</p>
+      <blockquote>장바구니와 작성 중인 글은 그대로 남아 있어요.</blockquote>
+      <p>불편을 드려 죄송합니다. 더 좋은 서비스로 보답하겠습니다.</p>
+    </div>
+
+    <!-- 첨부 -->
+    <section aria-labelledby="files-title">
+      <h2 class="tp-h3" id="files-title" style="margin-bottom: var(--ybm-space-x3)">첨부 파일</h2>
+      <div class="tp-files">
+        <div class="ds-fileitem" data-readonly>
+          <span class="ds-fileitem__thumbnail"><i class="ds-icon ds-icon--file-text" aria-hidden="true"></i></span>
+          <span class="ds-fileitem__texts"><span class="ds-fileitem__name">점검 안내문.pdf</span><span class="ds-fileitem__size">420KB</span></span>
+        </div>
+      </div>
+    </section>
+  </article>
+
+  <!-- 이전, 다음 글 -->
+  <nav class="tp-nav" aria-label="이전 글, 다음 글">
+    <ul class="ds-list" data-variant="inset" data-divider>
+      <li><a class="ds-list-item" href="#"><span class="ds-list-item__prefix tp-nav__label">이전 글</span><span class="ds-list-item__content"><span class="ds-list-item__title">AI 요약 기능을 모든 요금제에서 쓸 수 있어요</span></span><i class="ds-icon ds-icon--chevron-right ds-list-item__chevron" aria-hidden="true"></i></a></li>
+      <li><a class="ds-list-item" href="#"><span class="ds-list-item__prefix tp-nav__label">다음 글</span><span class="ds-list-item__content"><span class="ds-list-item__title">개인정보 처리방침이 12월 1일부터 바뀝니다</span></span><i class="ds-icon ds-icon--chevron-right ds-list-item__chevron" aria-hidden="true"></i></a></li>
+    </ul>
+  </nav>
+
+  <div class="tp-actions"><a class="ds-btn" data-variant="neutralWeak" data-size="large" href="notice.html">목록으로</a></div>
+</main>
+
+</body>
+</html>

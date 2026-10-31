@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>마이페이지 - YBM DS 템플릿</title>
+<link rel="stylesheet" href="../../../dist/ybm-ds.css">
+<script src="../../../dist/ybm-ds.js" defer></script>
+<style>
+  /* 템플릿 배치 전용. 값은 모두 --ybm-* 토큰 */
+  body { word-break: keep-all; overflow-wrap: break-word; }
+  .tp-h1 { font-size: var(--ybm-font-size-t10); line-height: var(--ybm-line-height-t10); font-weight: var(--ybm-font-weight-medium); }
+  .tp-h3 { font-size: var(--ybm-font-size-t05); line-height: 22px; font-weight: var(--ybm-font-weight-medium); }
+  .tp-sub { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
+  .tp-caption { font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); color: var(--ybm-color-fg-neutral-subtle); }
+  .tp-num { font-variant-numeric: tabular-nums; }
+  .tp-ph { display: grid; place-items: center; height: 100%; color: var(--ybm-color-fg-neutral-subtle); }
+  .tp-logo { display: grid; place-items: center; width: 88px; height: 28px; border-radius: var(--ybm-shape-xs); background: var(--ybm-color-bg-neutral); color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t03-static); line-height: var(--ybm-line-height-t03-static); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-bar { position: sticky; top: 0; z-index: var(--ybm-z-sticky); background: var(--ybm-color-bg-layer-default); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); }
+
+  .tp-page { background: var(--ybm-color-bg-canvas); }
+  .tp-layout { display: block; }
+  .tp-side { position: sticky; top: 0; height: 100vh; }
+  .tp-content { min-width: 0; padding: var(--ybm-space-x4) var(--ybm-space-x-global-gutter) calc(var(--ybm-space-x20) + env(safe-area-inset-bottom, 0px)); }
+  .tp-container { display: flex; flex-direction: column; gap: var(--ybm-space-x6); max-width: 880px; margin-inline: auto; }
+  .tp-section { display: flex; flex-direction: column; gap: var(--ybm-space-x3); }
+  .tp-sechead { display: flex; align-items: center; justify-content: space-between; gap: var(--ybm-space-x2); }
+
+  /* 프로필 카드와 숫자 3칸 */
+  .tp-profile { display: flex; align-items: center; gap: var(--ybm-space-x4); }
+  .tp-profile__texts { display: flex; flex: 1 1 auto; flex-direction: column; gap: var(--ybm-space-x1); min-width: 0; }
+  .tp-profile__name { display: flex; align-items: center; gap: var(--ybm-space-x2); font-size: var(--ybm-font-size-t06); line-height: var(--ybm-line-height-t06); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-stats { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--ybm-color-stroke-neutral-weak); }
+  .tp-stat { display: flex; flex-direction: column; align-items: center; gap: var(--ybm-space-x1); padding: var(--ybm-space-x4) var(--ybm-space-x2); color: inherit; text-decoration: none; }
+  .tp-stat + .tp-stat { border-left: 1px solid var(--ybm-color-stroke-neutral-weak); }
+  .tp-stat b { font-size: var(--ybm-font-size-t07); line-height: var(--ybm-line-height-t07); font-weight: var(--ybm-font-weight-bold); }
+
+  /* 최근 주문 */
+  .tp-order { display: flex; align-items: center; gap: var(--ybm-space-x3); }
+  .tp-order__thumb { flex: none; width: 56px; }
+  .tp-order__texts { display: flex; flex: 1 1 auto; flex-direction: column; align-items: flex-start; gap: var(--ybm-space-x0_5); min-width: 0; }
+  .tp-order__name { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+  @media (min-width: 768px) {
+    .tp-page { background: var(--ybm-color-bg-layer-default); }
+    .tp-layout { display: grid; grid-template-columns: auto minmax(0, 1fr); }
+    .tp-content { padding: var(--ybm-space-x10) var(--ybm-space-x8) var(--ybm-space-x16); }
+    .tp-container { gap: var(--ybm-space-x8); }
+    .tp-top { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: var(--ybm-space-x4); }
+    .tp-stats { border-top: 0; }
+    .tp-menus { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--ybm-space-x4); }
+  }
+</style>
+</head>
+<body class="tp-page">
+
+<!-- PC 상단 -->
+<header class="ds-topnav u-show-from-md tp-bar">
+  <div class="ds-topnav__left">
+    <a class="ds-topnav__heading" href="#" aria-label="서비스 이름 홈"><span class="tp-logo">로고</span></a>
+    <nav class="ds-topnav__menu" aria-label="주요 메뉴">
+      <a class="ds-topnav__item" href="commerce-home.html">홈</a>
+      <a class="ds-topnav__item" href="product-list.html">카테고리</a>
+      <a class="ds-topnav__item" href="#">기획전</a>
+      <a class="ds-topnav__item" href="#" aria-current="page">마이페이지</a>
+    </nav>
+  </div>
+  <div class="ds-topnav__end">
+    <a class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" href="search-products.html" aria-label="검색"><i class="ds-icon ds-icon--search" aria-hidden="true"></i></a>
+    <a class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" href="cart.html" aria-label="장바구니"><i class="ds-icon ds-icon--shopping-cart" aria-hidden="true"></i></a>
+    <a class="ds-avatar" href="#" aria-label="김민수, 마이페이지" aria-current="page"><span class="ds-avatar__initials" aria-hidden="true">김</span></a>
+  </div>
+</header>
+
+<!-- 모바일 상단 -->
+<header class="ds-appbar u-hide-from-md tp-bar">
+  <div class="ds-appbar__left"></div>
+  <div class="ds-appbar__main"><h1 class="ds-appbar__title">마이페이지</h1></div>
+  <div class="ds-appbar__right">
+    <a class="ds-appbar__button" href="#" aria-label="알림"><i class="ds-icon ds-icon--inbox" aria-hidden="true"></i></a>
+    <a class="ds-appbar__button" href="settings.html" aria-label="설정"><i class="ds-icon ds-icon--menu" aria-hidden="true"></i></a>
+  </div>
+</header>
+
+<div class="tp-layout">
+
+  <!-- PC 왼쪽 메뉴 -->
+  <div class="tp-side u-show-from-md">
+    <nav class="ds-sidenav" aria-label="마이페이지 메뉴">
+      <div class="ds-sidenav__content">
+        <div class="ds-sidenav__group">
+          <div class="ds-sidenav__group-label">쇼핑</div>
+          <a class="ds-sidenav__item" href="#" aria-current="page"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--house" aria-hidden="true"></i></span><span class="ds-sidenav__label">마이페이지 홈</span></a>
+          <a class="ds-sidenav__item" href="history.html"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--file-text" aria-hidden="true"></i></span><span class="ds-sidenav__label">주문 내역</span></a>
+          <a class="ds-sidenav__item" href="#"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--heart" aria-hidden="true"></i></span><span class="ds-sidenav__label">찜한 상품</span></a>
+          <a class="ds-sidenav__item" href="#"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--star" aria-hidden="true"></i></span><span class="ds-sidenav__label">내 후기</span></a>
+        </div>
+        <div class="ds-sidenav__group">
+          <div class="ds-sidenav__group-label">혜택</div>
+          <a class="ds-sidenav__item" href="#"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--credit-card" aria-hidden="true"></i></span><span class="ds-sidenav__label">쿠폰</span></a>
+          <a class="ds-sidenav__item" href="#"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--sparkles" aria-hidden="true"></i></span><span class="ds-sidenav__label">포인트</span></a>
+        </div>
+        <div class="ds-sidenav__group">
+          <div class="ds-sidenav__group-label">계정</div>
+          <a class="ds-sidenav__item" href="settings.html"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--id-card" aria-hidden="true"></i></span><span class="ds-sidenav__label">설정</span></a>
+          <a class="ds-sidenav__item" href="help-center.html"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--headset" aria-hidden="true"></i></span><span class="ds-sidenav__label">고객센터</span></a>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <main class="tp-content">
+    <div class="tp-container">
+
+      <!-- 프로필 + 숫자 -->
+      <div class="tp-top">
+        <article class="ds-card">
+          <div class="tp-profile">
+            <span class="ds-avatar" data-size="64" role="img" aria-label="김민수"><span class="ds-avatar__initials" aria-hidden="true">김</span></span>
+            <div class="tp-profile__texts">
+              <p class="tp-profile__name">김민수 <span class="ds-badge" data-tone="brand">골드</span></p>
+              <p class="tp-sub">다음 등급까지 <b class="tp-num">38,000원</b> 남았어요</p>
+            </div>
+            <a class="ds-btn" data-variant="neutralOutline" data-size="small" href="settings.html">프로필 수정</a>
+          </div>
+          <div class="ds-progress" role="progressbar" aria-label="다음 등급까지" aria-valuenow="62" aria-valuemin="0" aria-valuemax="100" style="--ds-progress-value: 62%"></div>
+        </article>
+        <article class="ds-card" data-size="small">
+          <div class="tp-stats">
+            <a class="tp-stat" href="#"><b class="tp-num">12,300</b><span class="tp-caption">포인트</span></a>
+            <a class="tp-stat" href="#"><b class="tp-num">3</b><span class="tp-caption">쿠폰</span></a>
+            <a class="tp-stat" href="#"><b class="tp-num">8</b><span class="tp-caption">작성한 후기</span></a>
+          </div>
+        </article>
+      </div>
+
+      <!-- 최근 주문 -->
+      <section class="tp-section" aria-labelledby="orders-title">
+        <div class="tp-sechead">
+          <h2 class="tp-h3" id="orders-title">최근 주문</h2>
+          <a class="ds-btn" data-variant="ghost" data-size="xsmall" href="history.html">전체 보기<i class="ds-icon ds-icon--chevron-right" aria-hidden="true"></i></a>
+        </div>
+        <ul class="ds-list" data-variant="inset" data-divider>
+          <li>
+            <a class="ds-list-item" href="order-complete.html">
+              <span class="ds-list-item__content">
+                <span class="tp-order">
+                  <span class="ds-imageframe tp-order__thumb" data-stroke aria-hidden="true"><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></span>
+                  <span class="tp-order__texts">
+                    <span class="tp-caption tp-num">2026.10.30 · 20261030-048213</span>
+                    <span class="tp-order__name">오버핏 울 블렌드 코트 외 1개</span>
+                    <span class="ds-badge" data-tone="informative">배송 중</span>
+                  </span>
+                </span>
+              </span>
+              <i class="ds-icon ds-icon--chevron-right ds-list-item__chevron" aria-hidden="true"></i>
+            </a>
+          </li>
+          <li>
+            <a class="ds-list-item" href="#">
+              <span class="ds-list-item__content">
+                <span class="tp-order">
+                  <span class="ds-imageframe tp-order__thumb" data-stroke aria-hidden="true"><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></span>
+                  <span class="tp-order__texts">
+                    <span class="tp-caption tp-num">2026.10.21 · 20261021-031177</span>
+                    <span class="tp-order__name">데일리 러닝화 270</span>
+                    <span class="ds-badge" data-tone="positive">배송 완료</span>
+                  </span>
+                </span>
+              </span>
+              <i class="ds-icon ds-icon--chevron-right ds-list-item__chevron" aria-hidden="true"></i>
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <!-- 메뉴 -->
+      <div class="tp-menus">
+        <section class="tp-section" aria-labelledby="menu1-title">
+          <h2 class="tp-h3" id="menu1-title">쇼핑</h2>
+          <ul class="ds-list" data-variant="inset" data-divider>
+            <li><a class="ds-list-item" href="history.html"><span class="ds-list-item__prefix"><i class="ds-icon ds-icon--file-text" aria-hidden="true"></i></span><span class="ds-list-item__content"><span class="ds-list-item__title">주문 내역</span></span><i class="ds-icon ds-icon--chevron-right ds-list-item__chevron" aria-hidden="true"></i></a></li>
+            <li><a class="ds-list-item" href="#"><span class="ds-list-item__prefix"><i class="ds-icon ds-icon--heart" aria-hidden="true"></i></span><span class="ds-list-item__content"><span class="ds-list-item__title">찜한 상품</span></span><span class="ds-list-item__suffix tp-num">24</span><i class="ds-icon ds-icon--chevron-right ds-list-item__chevron" aria-hidden="true"></i></a></li>
+            <li><a class="ds-list-item" href="#"><span class="ds-list-item__prefix"><i class="ds-icon ds-icon--star" aria-hidden="true"></i></span><span class="ds-list-item__content"><span class="ds-list-item__title">내 후기</span><span class="ds-list-item__desc">쓸 수 있는 후기 2개</span></span><i class="ds-icon ds-icon--chevron-right ds-list-item__chevron" aria-hidden="true"></i></a></li>
+            <li><a class="ds-list-item" href="#"><span class="ds-list-item__prefix"><i class="ds-icon ds-icon--map-pin" aria-hidden="true"></i></span><span class="ds-list-item__content"><span class="ds-list-item__title">배송지 관리</span></span><i class="ds-icon ds-icon--chevron-right ds-list-item__chevron" aria-hidden="true"></i></a></li>
+          </ul>
+        </section>
+        <section class="tp-section" aria-labelledby="menu2-title">
+          <h2 class="tp-h3" id="menu2-title">도움과 설정</h2>
+          <ul class="ds-list" data-variant="inset" data-divider>
+            <li><a class="ds-list-item" href="notice.html"><span class="ds-list-item__prefix"><i class="ds-icon ds-icon--info" aria-hidden="true"></i></span><span class="ds-list-item__content"><span class="ds-list-item__title">공지사항</span></span><span class="ds-list-item__suffix"><span class="ds-badge" data-variant="solid" data-tone="critical">N</span></span><i class="ds-icon ds-icon--chevron-right ds-list-item__chevron" aria-hidden="true"></i></a></li>
+            <li><a class="ds-list-item" href="help-center.html"><span class="ds-list-item__prefix"><i class="ds-icon ds-icon--headset" aria-hidden="true"></i></span><span class="ds-list-item__content"><span class="ds-list-item__title">고객센터</span></span><i class="ds-icon ds-icon--chevron-right ds-list-item__chevron" aria-hidden="true"></i></a></li>
+            <li><a class="ds-list-item" href="settings.html"><span class="ds-list-item__prefix"><i class="ds-icon ds-icon--id-card" aria-hidden="true"></i></span><span class="ds-list-item__content"><span class="ds-list-item__title">설정</span></span><i class="ds-icon ds-icon--chevron-right ds-list-item__chevron" aria-hidden="true"></i></a></li>
+            <li><button type="button" class="ds-list-item"><span class="ds-list-item__content"><span class="ds-list-item__title">로그아웃</span></span></button></li>
+          </ul>
+        </section>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<!-- 모바일 아래 탭 -->
+<nav class="ds-bottomnav u-hide-from-md" aria-label="주요 메뉴">
+  <a class="ds-bottomnav__item" href="commerce-home.html"><span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--house ds-icon--lg" aria-hidden="true"></i></span><span class="ds-bottomnav__label">홈</span></a>
+  <a class="ds-bottomnav__item" href="search-products.html"><span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--search ds-icon--lg" aria-hidden="true"></i></span><span class="ds-bottomnav__label">검색</span></a>
+  <a class="ds-bottomnav__item" href="#"><span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--heart ds-icon--lg" aria-hidden="true"></i></span><span class="ds-bottomnav__label">찜</span></a>
+  <a class="ds-bottomnav__item" href="#" aria-current="page"><span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--id-card ds-icon--lg" aria-hidden="true"></i></span><span class="ds-bottomnav__label">마이</span></a>
+</nav>
+
+</body>
+</html>

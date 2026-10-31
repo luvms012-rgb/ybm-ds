@@ -58,6 +58,7 @@ YBM 디자인 시스템 공식 문서 사이트를 준비하는 폴더다. 2026-
 - **Foundations 페이지 구성** (2026-10-31, 레퍼런스 A 의 Color 페이지): Overview(짧은 설명 + 바로 쓰는 예시) → 토큰/항목 표 → 쓰는 법 코드 → Best Practices(Do / Don't 표, `practices()`). Iconography 를 이 구성으로 먼저 만들었다: Overview, Icons(쓰임별 표 5묶음, 이름 누르면 클래스 복사), Size and Color, Add an Icon(Lucide 전체 찾기), Best Practices. 아이콘 쓰임 글은 build.mjs 의 ICON_GROUPS 에 있고, icons.css 에 아이콘을 넣으면 빌드가 빠진 것을 알려 준다. 나머지 Foundations 페이지도 같은 구성으로 채울 수 있다.
 - **컴포넌트 상세 배치** (2026-10-31, 레퍼런스 A 의 Button 페이지 실측): 본문 폭 912(문서 페이지 752 보다 넓음, `.site-body--comp`), 첫 그림 16:9, 순서는 Usage → Properties → CSS Variables → Best Practices(Do / Don't 표. "않/금지/마세요" 가 든 문장이 Don't) → Examples(Preview / Code) → Specification.
 - **넓은 배치 폭** (2026-10-31): 컴포넌트 목록과 템플릿 상세(`site-body--wide`)는 본문을 1152 로 제한하고 가운데 둔다(레퍼런스 A 컴포넌트 목록 1920 실측). 큰 화면에서 카드가 끝없이 늘어나던 문제를 고침.
+- **템플릿 33종** (2026-10-31): PROPOSAL 7-2 의 1~6 을 추가해 분류 13개(Entry, Manage 추가). 서비스 운영 기본 화면(가입 → 마이페이지 → 내역 → 고객센터 → 공지)이 이어진다. 나머지 후보(7~16)와 분류 7개 재편은 PROPOSAL 7 절.
 
 ## 진행 기록
 - 2026-10-26 (회사): ybm-ds `main`을 GitHub(`d4f83b6`)에 맞췄다. 회사 PC에만 있던 커밋 전 작업(10-23 폴더 구조 정리, figma-sync `cssOnly` 수정, `components/index.html` 컴포넌트 메인 시안, 작업 메모)은 **회사 PC 로컬 브랜치 `backup/2026-10-26-local`** 에만 있다(GitHub에 없음). 필요하면 회사 PC에서 꺼낸다.

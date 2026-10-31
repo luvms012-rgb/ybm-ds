@@ -166,7 +166,7 @@ import '@ybm/ds/dist/ybm-ds.js';
 
 장수가 많은 곳은 어느 서비스에나 있는 화면이라는 뜻이다. 우리 템플릿은 이커머스와 검색은 두터운데, **회원가입부터 마이페이지·내역·고객센터까지 "서비스 운영의 기본 화면"이 비어 있다.**
 
-### 7-2. 새 템플릿 후보 (권장 순서)
+### 7-2. 새 템플릿 후보 (권장 순서) → 1~6 은 2026-10-31 집에서 만듦(Landing Page, Sign Up, My Page, History, Help Center, Notice + Notice Detail). 템플릿 33종. Code Input 부품 없이 Sign Up 은 Text Field + Timer 로 했다.
 
 | 순위 | 템플릿 (en) | 묶음 | 내용 | 쓰는 부품 |
 |---|---|---|---|---|

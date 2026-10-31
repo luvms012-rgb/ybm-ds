@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>고객센터 - YBM DS 템플릿</title>
+<link rel="stylesheet" href="../../../dist/ybm-ds.css">
+<script src="../../../dist/ybm-ds.js" defer></script>
+<style>
+  /* 템플릿 배치 전용. 값은 모두 --ybm-* 토큰 */
+  body { word-break: keep-all; overflow-wrap: break-word; }
+  .tp-h1 { font-size: var(--ybm-font-size-t09); line-height: var(--ybm-line-height-t09); font-weight: var(--ybm-font-weight-bold); }
+  .tp-h2 { font-size: var(--ybm-font-size-t06); line-height: var(--ybm-line-height-t06); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-sub { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
+  .tp-caption { font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); color: var(--ybm-color-fg-neutral-subtle); }
+  .tp-logo { display: grid; place-items: center; width: 88px; height: 28px; border-radius: var(--ybm-shape-xs); background: var(--ybm-color-bg-neutral); color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t03-static); line-height: var(--ybm-line-height-t03-static); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-bar { position: sticky; top: 0; z-index: var(--ybm-z-sticky); background: var(--ybm-color-bg-layer-default); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); }
+  @media (min-width: 768px) { .tp-h1 { font-size: var(--ybm-font-size-t12); line-height: var(--ybm-line-height-t12); } }
+
+  /* 위 찾기 띠 */
+  .tp-hero { padding: var(--ybm-space-x8) var(--ybm-space-x-global-gutter); background: var(--ybm-color-bg-canvas); }
+  .tp-hero__inner { display: flex; flex-direction: column; gap: var(--ybm-space-x5); max-width: 640px; margin-inline: auto; text-align: center; }
+  .tp-hero .ds-search-anchor { text-align: left; }
+  @media (min-width: 768px) { .tp-hero { padding-block: var(--ybm-space-x16); } }
+
+  .tp-main { display: flex; flex-direction: column; gap: var(--ybm-space-x10); max-width: 800px; margin-inline: auto; padding: var(--ybm-space-x8) var(--ybm-space-x-global-gutter) calc(var(--ybm-space-x16) + env(safe-area-inset-bottom, 0px)); }
+  .tp-section { display: flex; flex-direction: column; gap: var(--ybm-space-x4); scroll-margin-top: 72px; }
+  .tp-sechead { display: flex; align-items: center; justify-content: space-between; gap: var(--ybm-space-x2); }
+
+  /* 질문 목록 */
+  .tp-faq { border: 1px solid var(--ybm-color-stroke-neutral-weak); border-radius: var(--ybm-shape-lg); overflow: hidden; }
+  .tp-faq .ds-accordion:last-child { border-bottom: 0; }
+
+  /* 문의 방법 3개 */
+  .tp-ways { display: grid; grid-template-columns: 1fr; gap: var(--ybm-space-x3); }
+  .tp-way__icon { display: grid; place-items: center; width: 44px; height: 44px; border-radius: var(--ybm-shape-md); background: var(--ybm-color-bg-neutral); color: var(--ybm-color-fg-neutral); }
+  @media (min-width: 768px) { .tp-ways { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+
+  /* 1:1 문의 폼 */
+  .tp-form { display: flex; flex-direction: column; gap: var(--ybm-space-x5); }
+  .tp-form-end { display: flex; flex-direction: column; gap: var(--ybm-space-x2); }
+  @media (min-width: 768px) { .tp-form-end { flex-direction: row; justify-content: flex-end; } }
+</style>
+</head>
+<body>
+
+<!-- 모바일 상단 -->
+<header class="ds-appbar u-hide-from-md tp-bar">
+  <div class="ds-appbar__left"><a class="ds-appbar__button" href="mypage.html" aria-label="뒤로"><i class="ds-icon ds-icon--chevron-left" aria-hidden="true"></i></a></div>
+  <div class="ds-appbar__main"><h1 class="ds-appbar__title">고객센터</h1></div>
+  <div class="ds-appbar__right"></div>
+</header>
+
+<!-- PC 상단 -->
+<header class="ds-topnav u-show-from-md tp-bar">
+  <div class="ds-topnav__left">
+    <a class="ds-topnav__heading" href="#" aria-label="서비스 이름 홈"><span class="tp-logo">로고</span></a>
+    <nav class="ds-topnav__menu" aria-label="주요 메뉴">
+      <a class="ds-topnav__item" href="notice.html">공지사항</a>
+      <a class="ds-topnav__item" href="#" aria-current="page">고객센터</a>
+    </nav>
+  </div>
+  <div class="ds-topnav__end"><a class="ds-avatar" href="mypage.html" aria-label="김민수, 마이페이지"><span class="ds-avatar__initials" aria-hidden="true">김</span></a></div>
+</header>
+
+<!-- 찾기 -->
+<section class="tp-hero" aria-labelledby="hero-title">
+  <div class="tp-hero__inner">
+    <div>
+      <h1 class="tp-h1 u-show-from-md" id="hero-title">무엇을 도와드릴까요?</h1>
+      <h2 class="tp-h2 u-hide-from-md">무엇을 도와드릴까요?</h2>
+      <p class="tp-sub">궁금한 것을 적어 보세요. 가장 가까운 답을 먼저 보여 드려요.</p>
+    </div>
+    <div class="ds-search-anchor">
+      <div class="ds-input" data-variant="outline" data-size="large">
+        <i class="ds-icon ds-icon--search ds-input__icon" aria-hidden="true"></i>
+        <input class="ds-input__control" type="search" role="combobox" aria-controls="help-sg" aria-expanded="false" aria-autocomplete="list" placeholder="예: 환불은 언제 되나요" aria-label="도움말 찾기">
+        <button type="button" class="ds-input__clear" aria-label="지우기"></button>
+      </div>
+      <div class="ds-search-suggest" id="help-sg" hidden>
+        <div class="ds-search-suggest__heading" id="help-sg-h">많이 찾는 질문</div>
+        <ul class="ds-search-suggest__list" role="listbox" aria-labelledby="help-sg-h">
+          <li role="none"><a class="ds-search-suggest__item" role="option" href="#faq"><i class="ds-icon ds-icon--search" aria-hidden="true"></i><span class="ds-search-suggest__content"><span class="ds-search-suggest__label">환불은 언제 되나요</span></span></a></li>
+          <li role="none"><a class="ds-search-suggest__item" role="option" href="#faq"><i class="ds-icon ds-icon--search" aria-hidden="true"></i><span class="ds-search-suggest__content"><span class="ds-search-suggest__label">배송지를 바꾸고 싶어요</span></span></a></li>
+          <li role="none"><a class="ds-search-suggest__item" role="option" href="#faq"><i class="ds-icon ds-icon--search" aria-hidden="true"></i><span class="ds-search-suggest__content"><span class="ds-search-suggest__label">비밀번호를 잊었어요</span></span></a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<main class="tp-main">
+
+  <!-- 자주 묻는 질문 -->
+  <section class="tp-section" id="faq" aria-labelledby="faq-title">
+    <div class="tp-sechead"><h2 class="tp-h2" id="faq-title">자주 묻는 질문</h2></div>
+    <div class="ds-chiptabs" role="tablist" aria-label="질문 분류">
+      <button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true">전체</button>
+      <button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false">주문·배송</button>
+      <button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false">결제·환불</button>
+      <button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false">회원·계정</button>
+      <button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false">상품</button>
+    </div>
+    <div class="tp-faq">
+      <details class="ds-accordion" open>
+        <summary class="ds-accordion__trigger"><span class="ds-accordion__body"><span class="ds-accordion__title">환불은 언제 되나요?</span><span class="ds-accordion__desc">결제·환불</span></span></summary>
+        <div class="ds-accordion__content">취소나 반품이 접수되면 카드 결제는 3~5일, 계좌 이체는 1~2일 안에 돌려드려요. 카드사 사정에 따라 하루 이틀 더 걸릴 수 있어요.</div>
+      </details>
+      <details class="ds-accordion">
+        <summary class="ds-accordion__trigger"><span class="ds-accordion__body"><span class="ds-accordion__title">배송지를 바꾸고 싶어요</span><span class="ds-accordion__desc">주문·배송</span></span></summary>
+        <div class="ds-accordion__content">상품 준비 전이면 주문 상세에서 바로 바꿀 수 있어요. 이미 출발했다면 1:1 문의로 알려 주세요.</div>
+      </details>
+      <details class="ds-accordion">
+        <summary class="ds-accordion__trigger"><span class="ds-accordion__body"><span class="ds-accordion__title">비밀번호를 잊었어요</span><span class="ds-accordion__desc">회원·계정</span></span></summary>
+        <div class="ds-accordion__content">로그인 화면의 비밀번호 찾기를 누르고 가입한 이메일을 입력하면 새 비밀번호를 만드는 링크를 보내 드려요.</div>
+      </details>
+      <details class="ds-accordion">
+        <summary class="ds-accordion__trigger"><span class="ds-accordion__body"><span class="ds-accordion__title">교환은 어떻게 하나요?</span><span class="ds-accordion__desc">주문·배송</span></span></summary>
+        <div class="ds-accordion__content">배송 완료 뒤 7일 안에 주문 내역에서 교환·반품을 눌러 신청해요. 상품에 문제가 있으면 왕복 배송비는 저희가 부담해요.</div>
+      </details>
+      <details class="ds-accordion">
+        <summary class="ds-accordion__trigger"><span class="ds-accordion__body"><span class="ds-accordion__title">현금영수증을 받고 싶어요</span><span class="ds-accordion__desc">결제·환불</span></span></summary>
+        <div class="ds-accordion__content">결제할 때 현금영수증 발급을 선택하거나, 결제가 끝난 뒤 주문 상세에서 신청할 수 있어요.</div>
+      </details>
+      <details class="ds-accordion">
+        <summary class="ds-accordion__trigger"><span class="ds-accordion__body"><span class="ds-accordion__title">탈퇴하면 포인트는 어떻게 되나요?</span><span class="ds-accordion__desc">회원·계정</span></span></summary>
+        <div class="ds-accordion__content">남은 포인트와 쿠폰은 탈퇴와 함께 사라지고 되돌릴 수 없어요. 탈퇴 전에 먼저 써 주세요.</div>
+      </details>
+    </div>
+    <div><a class="ds-btn" data-variant="neutralWeak" data-size="medium" data-width="fill" href="#">질문 더 보기</a></div>
+  </section>
+
+  <!-- 다른 문의 방법 -->
+  <section class="tp-section" aria-labelledby="ways-title">
+    <div class="tp-sechead"><h2 class="tp-h2" id="ways-title">해결되지 않았나요?</h2></div>
+    <div class="tp-ways">
+      <a class="ds-card" data-size="small" href="#inquiry">
+        <span class="tp-way__icon"><i class="ds-icon ds-icon--message-circle ds-icon--lg" aria-hidden="true"></i></span>
+        <header class="ds-card__header"><h3 class="ds-card__title">1:1 문의</h3><p class="ds-card__desc">글로 남기면 평일 하루 안에 답해 드려요.</p></header>
+      </a>
+      <a class="ds-card" data-size="small" href="#">
+        <span class="tp-way__icon"><i class="ds-icon ds-icon--headset ds-icon--lg" aria-hidden="true"></i></span>
+        <header class="ds-card__header"><h3 class="ds-card__title">전화 상담</h3><p class="ds-card__desc">평일 9시~18시. 원하는 시간에 전화를 예약할 수 있어요.</p></header>
+      </a>
+      <a class="ds-card" data-size="small" href="ai-chat.html">
+        <span class="tp-way__icon"><i class="ds-icon ds-icon--sparkles ds-icon--lg" aria-hidden="true"></i></span>
+        <header class="ds-card__header"><h3 class="ds-card__title">AI 상담</h3><p class="ds-card__desc">24시간 바로 답해요. 간단한 질문에 좋아요.</p></header>
+      </a>
+    </div>
+  </section>
+
+  <!-- 1:1 문의 -->
+  <section class="tp-section" id="inquiry" aria-labelledby="inquiry-title">
+    <div class="tp-sechead"><h2 class="tp-h2" id="inquiry-title">1:1 문의</h2></div>
+    <form class="tp-form" action="#" method="post">
+      <fieldset class="ds-field">
+        <legend class="ds-field__label">문의 종류</legend>
+        <div class="ds-selectbox-group" style="--ds-selectbox-columns: 2">
+          <label class="ds-selectbox"><span class="ds-selectbox__texts"><span class="ds-selectbox__label">주문·배송</span></span><span class="ds-radio" data-tone="neutral" data-size="medium"><input type="radio" class="ds-radio__control" name="kind" checked></span></label>
+          <label class="ds-selectbox"><span class="ds-selectbox__texts"><span class="ds-selectbox__label">결제·환불</span></span><span class="ds-radio" data-tone="neutral" data-size="medium"><input type="radio" class="ds-radio__control" name="kind"></span></label>
+          <label class="ds-selectbox"><span class="ds-selectbox__texts"><span class="ds-selectbox__label">회원·계정</span></span><span class="ds-radio" data-tone="neutral" data-size="medium"><input type="radio" class="ds-radio__control" name="kind"></span></label>
+          <label class="ds-selectbox"><span class="ds-selectbox__texts"><span class="ds-selectbox__label">그 밖의 문의</span></span><span class="ds-radio" data-tone="neutral" data-size="medium"><input type="radio" class="ds-radio__control" name="kind"></span></label>
+        </div>
+      </fieldset>
+      <div class="ds-field">
+        <div class="ds-field__header"><label class="ds-field__label" for="q-title">제목</label></div>
+        <div class="ds-input" data-variant="outline"><input class="ds-input__control" id="q-title" placeholder="한 줄로 요약해 주세요" maxlength="60"></div>
+      </div>
+      <div class="ds-field">
+        <div class="ds-field__header"><label class="ds-field__label" for="q-body">내용</label></div>
+        <textarea class="ds-textarea" id="q-body" rows="6" placeholder="언제, 어떤 화면에서, 무엇이 안 됐는지 적어 주시면 더 빨리 도와드릴 수 있어요." maxlength="1000"></textarea>
+        <div class="ds-field__footer"><p class="ds-field__help">주문 번호가 있으면 함께 적어 주세요.</p><span class="ds-field__count">0/1000</span></div>
+      </div>
+      <div class="ds-field">
+        <div class="ds-field__header"><span class="ds-field__label">사진이나 파일</span><span class="ds-field__optional">선택</span></div>
+        <div class="ds-fileattach">
+          <label class="ds-fileattach__dropzone"><input type="file" class="ds-fileattach__input" multiple><span class="ds-fileattach__label">파일을 끌어 놓거나 눌러서 추가하세요</span></label>
+          <div class="ds-fileattach__items">
+            <label class="ds-fileattach__trigger"><input type="file" class="ds-fileattach__input" multiple aria-label="파일 추가"><i class="ds-icon ds-icon--plus" aria-hidden="true"></i><span class="ds-fileattach__count"><b>0</b>/5</span></label>
+          </div>
+        </div>
+      </div>
+      <div class="ds-field">
+        <div class="ds-field__header"><label class="ds-field__label" for="q-email">답변 받을 이메일</label></div>
+        <div class="ds-input" data-variant="outline"><input class="ds-input__control" id="q-email" type="email" value="minsu@example.com"></div>
+      </div>
+      <label class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control" checked><span class="ds-checkbox__label">답변이 오면 알림으로도 알려 주세요</span></label>
+      <div class="tp-form-end">
+        <button type="reset" class="ds-btn" data-variant="neutralWeak" data-size="large">다시 쓰기</button>
+        <button type="submit" class="ds-btn" data-variant="brandSolid" data-size="large">문의 보내기</button>
+      </div>
+    </form>
+  </section>
+
+</main>
+
+<script>
+  /* 찾기 칸에 글자가 있으면 추천 목록을 연다 */
+  var box = document.querySelector(".tp-hero .ds-input__control"), sg = document.getElementById("help-sg");
+  function toggle() { var open = box.value.trim().length > 0; sg.hidden = !open; box.setAttribute("aria-expanded", String(open)); }
+  box.addEventListener("input", toggle); box.addEventListener("focus", toggle);
+  document.addEventListener("click", function (e) { if (!e.target.closest(".ds-search-anchor")) { sg.hidden = true; box.setAttribute("aria-expanded", "false"); } });
+</script>
+
+</body>
+</html>
