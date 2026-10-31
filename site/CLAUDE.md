@@ -59,6 +59,10 @@ YBM 디자인 시스템 공식 문서 사이트를 준비하는 폴더다. 2026-
 - **컴포넌트 상세 배치** (2026-10-31, 레퍼런스 A 의 Button 페이지 실측): 본문 폭 912(문서 페이지 752 보다 넓음, `.site-body--comp`), 첫 그림 16:9, 순서는 Usage → Properties → CSS Variables → Best Practices(Do / Don't 표. "않/금지/마세요" 가 든 문장이 Don't) → Examples(Preview / Code) → Specification.
 - **넓은 배치 폭** (2026-10-31): 컴포넌트 목록과 템플릿 상세(`site-body--wide`)는 본문을 1152 로 제한하고 가운데 둔다(레퍼런스 A 컴포넌트 목록 1920 실측). 큰 화면에서 카드가 끝없이 늘어나던 문제를 고침.
 - **템플릿 33종** (2026-10-31): PROPOSAL 7-2 의 1~6 을 추가해 분류 13개(Entry, Manage 추가). 서비스 운영 기본 화면(가입 → 마이페이지 → 내역 → 고객센터 → 공지)이 이어진다. 나머지 후보(7~16)와 분류 7개 재편은 PROPOSAL 7 절.
+- **미리보기와 사이트 글자 규칙** (2026-10-31): 사이트 CSS 는 cascade layer 밖이라 DS 부품보다 세다. 본문용 h2, h3, p, li, code 규칙은 `:not(.pv-stage *, .site-tile__inner *, .site-example__preview *)` 로 미리보기 안을 빼야 한다. 빼지 않으면 부품 제목에 큰 여백이 생긴다.
+- **Best Practices 표** (2026-10-31): Do 를 먼저, Don't 를 나중에. README 6.2 는 문장마다 한 줄, Figma 메모(figma-notes.json dos)는 항목마다 한 줄. 첫 문장이 "~않습니다, ~마세요" 로 끝나면 Don't. 같은 규칙이 겹치면(앞 7글자) 자세한 쪽만 남긴다. 문장은 합니다체, "금지, 권장" 같은 딱딱한 말은 풀어 쓴다.
+- **Figma 와 이어지기** (2026-10-31): 사이트의 Figma 버튼은 Get Started(`2608:2`), Foundations, 컴포넌트, 템플릿(`templates.json` 의 `figma.pc`) 프레임으로 간다. Figma 문서 프레임 본문은 `node sync.mjs docs` 로 사이트와 같은 설명과 Best Practices 를 다시 채울 수 있다(같은 이름의 노드를 지우고 다시 만든다).
+- **템플릿을 Figma 로** (2026-10-31): `node site/figma-capture.mjs [slug]` 가 이 Mac 의 Chrome 을 화면 없이 띄워 템플릿을 PC 1440 / 모바일 375 로 열고 SVG 로 저장한다(tokens/.figma-capture, 커밋 안 함). 여러 개를 한 번에 돌리면 가끔 멈추므로 한 개씩 돌리는 것이 안전하다. 올리기는 upload_assets(SVG 는 글자 레이어와 벡터로 들어온다), 정리는 use_figma: 글자 이름 t-굵기-번호 로 굵기를 바로잡고, fx-… 이름의 도형에 그림자 효과, 색은 YBM DS Light 값이 같은 bg/fg/stroke 변수에 연결. 템플릿을 고치면 그 화면만 다시 캡처해 바꾼다.
 
 ## 진행 기록
 - 2026-10-26 (회사): ybm-ds `main`을 GitHub(`d4f83b6`)에 맞췄다. 회사 PC에만 있던 커밋 전 작업(10-23 폴더 구조 정리, figma-sync `cssOnly` 수정, `components/index.html` 컴포넌트 메인 시안, 작업 메모)은 **회사 PC 로컬 브랜치 `backup/2026-10-26-local`** 에만 있다(GitHub에 없음). 필요하면 회사 PC에서 꺼낸다.

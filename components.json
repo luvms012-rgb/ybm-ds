@@ -2,12 +2,14 @@
   "$schema": "컴포넌트 목록 — sync.mjs 가 CSS(.ds-*)·Figma(노드 ID·변형 수) 양쪽과 대조한다. 새 컴포넌트를 만들면 여기 먼저 추가. doc = 그 컴포넌트가 든 Figma 문서 프레임 ID(사이트와 sync.mjs links 가 쓴다).",
   "figmaFile": "1VCEsFU3xMWuXIntIrZz9i",
   "figmaDocs": {
+    "get-started": "2608:2",
     "color": "2486:2",
     "typography": "2486:13",
     "spacing": "2486:24",
     "shape": "2486:35",
     "elevation": "2486:46",
-    "icons": "2517:2"
+    "icons": "2517:2",
+    "motion": "2609:8"
   },
   "components": [
     {

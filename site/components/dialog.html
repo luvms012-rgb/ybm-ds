@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Dialog - YBM DS</title>
-<meta name="description" content="작업, 정보 조회, 폼 입력을 위한 PC 중심의 창입니다. 즉시 확인이 필요한 메시지는 Alert Dialog 를 씁니다.">
-<!-- 생성물: node site/build.mjs 가 만든다. 직접 고치지 말고 site/build.mjs 나 site/src 를 고친다 -->
+<meta name="description" content="작업, 정보 조회, 폼 입력을 위한 PC 중심의 창입니다. 즉시 확인이 필요한 메시지는 Alert Dialog를 씁니다.">
+<!-- 생성물: node site/build.mjs가 만든다. 직접 고치지 말고 site/build.mjs나 site/src를 고친다 -->
 <script>try { var t = localStorage.getItem("ybm-site-theme"); if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.dataset.theme = "dark"; } catch (e) {}</script>
 <link rel="icon" href="../assets/logo-ybmnet.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../dist/ybm-ds.css">
-<link rel="stylesheet" href="../assets/site.css?v=8dfd1b81">
+<link rel="stylesheet" href="../assets/site.css?v=dbd51039">
 <script src="../../dist/ybm-ds.js" defer></script>
-<script src="../assets/site.js?v=8dfd1b81" defer></script>
+<script src="../assets/site.js?v=dbd51039" defer></script>
 </head>
 <body class="site">
 <a class="site-skip" href="#main">본문 바로가기</a>
@@ -24,7 +24,7 @@
   </nav>
   <div class="site-top__end">
     <button type="button" class="ds-btn site-theme-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="화면 모드 바꾸기" data-site-theme-toggle><i class="ds-icon site-i--moon" aria-hidden="true"></i><i class="ds-icon site-i--sun" aria-hidden="true"></i></button>
-    <a class="ds-btn site-only-wide" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" href="https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=2274-1143" target="_blank" rel="noopener" aria-label="Figma 파일"><i class="ds-icon site-i--figma" aria-hidden="true"></i></a>
+    <a class="ds-btn site-only-wide" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" href="https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=2608-2" target="_blank" rel="noopener" aria-label="Figma 파일"><i class="ds-icon site-i--figma" aria-hidden="true"></i></a>
     <a class="ds-btn site-only-wide" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" href="https://github.com/luvms012-rgb/ybm-ds" target="_blank" rel="noopener" aria-label="GitHub 저장소"><i class="ds-icon site-i--github" aria-hidden="true"></i></a>
     <a class="ds-btn site-cta" data-variant="neutralSolid" data-size="xsmall" href="../index.html#ai">Get started</a>
     <button type="button" class="ds-btn site-menu-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="메뉴 열기" data-site-menu aria-controls="site-side" aria-expanded="false"><i class="ds-icon ds-icon--menu" aria-hidden="true"></i></button>
@@ -112,7 +112,7 @@
 <article class="site-doc">
 <header class="site-head">
   <h1 class="site-h1">Dialog</h1>
-  <p class="site-lead">작업, 정보 조회, 폼 입력을 위한 PC 중심의 창입니다. 즉시 확인이 필요한 메시지는 Alert Dialog 를 씁니다.</p>
+  <p class="site-lead">작업, 정보 조회, 폼 입력을 위한 PC 중심의 창입니다. 즉시 확인이 필요한 메시지는 Alert Dialog를 씁니다.</p>
   <div class="site-meta"><a class="ds-btn" data-variant="neutralWeak" data-size="xsmall" href="https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=2481-2072" target="_blank" rel="noopener"><i class="ds-icon site-i--figma ds-icon--sm" aria-hidden="true"></i>Figma</a><a class="ds-btn" data-variant="neutralWeak" data-size="xsmall" href="https://github.com/luvms012-rgb/ybm-ds/blob/main/dist/components.css#L1694-L1775" target="_blank" rel="noopener"><i class="ds-icon site-i--github ds-icon--sm" aria-hidden="true"></i>Code</a></div>
 <div class="site-toc-select"><select aria-label="이 페이지 목차" data-site-toc><option value="usage">Usage</option><option value="props">Properties</option><option value="vars">CSS Variables</option><option value="guide">Best Practices</option><option value="examples">Examples</option><option value="spec">Specification</option></select><i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i></div>
 </header>
@@ -137,10 +137,11 @@
 <tr><td><code>--ds-dialog-max-height</code></td><td><code>80vh</code></td></tr></tbody></table></div>
 <h2 id="guide">Best Practices<a class="site-anchor" href="#guide" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><div class="ds-table-wrap"><table class="ds-table" data-density="compact">
 <thead><tr><th scope="col">Guidance</th><th scope="col">Practices</th></tr></thead>
-<tbody><tr><td><b class="ds-badge site-practice" data-tone="critical">Don't</b></td><td>헤더 닫기와 푸터 취소를 동시에 두지 않는다. 푸터 CTA 는 Action Button large(52).</td></tr>
-<tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>Popover 는 트리거 옆에 뜨는 작은 작업 창(제목, 버튼 포함), 바깥을 누르면 닫힌다. 화면을 막아야 하는 확인은 Dialog.</td></tr>
-<tr><td><b class="ds-badge site-practice" data-tone="critical">Don't</b></td><td>헤더 닫기 버튼과 푸터 취소 버튼을 동시에 두지 않습니다. 정보 조회는 헤더 닫기, 주요 동작이 있는 폼과 설정은 푸터 취소입니다.</td></tr>
-<tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>768px 미만에서는 Bottom Sheet 로 바꿉니다. 머리말, 본문, 버튼 구조는 그대로 유지됩니다.</td></tr></tbody></table></div>
+<tbody><tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>아래쪽 주요 버튼은 Action Button large(52)를 씁니다.</td></tr>
+<tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>Popover는 버튼 옆에 뜨는 작은 창이고, 바깥을 누르면 닫힙니다.</td></tr>
+<tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>화면을 막고 확인받아야 할 때는 Dialog를 씁니다.</td></tr>
+<tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>화면 폭이 768보다 좁으면 Bottom Sheet로 바꿉니다. 머리말, 본문, 버튼 구조는 그대로 둡니다.</td></tr>
+<tr><td><b class="ds-badge site-practice" data-tone="critical">Don't</b></td><td>위쪽 닫기 버튼과 아래쪽 취소 버튼을 함께 두지 않습니다. 정보만 보여 줄 때는 위쪽 닫기, 폼이나 설정처럼 주요 동작이 있으면 아래쪽 취소를 둡니다.</td></tr></tbody></table></div>
 <h2 id="examples">Examples<a class="site-anchor" href="#examples" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><div class="site-example">
   <div class="site-example__bar"><div class="ds-chiptabs" role="tablist" aria-label="보기 방식"><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-view="preview">Preview</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-view="code">Code</button></div></div>
   <div class="site-example__preview"><div class="pv-stage"><button class="ds-btn" data-variant="neutralWeak" data-ds-open="pv-dlg">Dialog 열기</button></div>
@@ -154,7 +155,7 @@
   <pre class="ds-codeblock__code"><code>&lt;button class=&quot;ds-btn&quot; data-variant=&quot;neutralWeak&quot; data-ds-open=&quot;pv-dlg&quot;&gt;Dialog 열기&lt;/button&gt;</code></pre>
 </figure></div>
 </div>
-<h2 id="spec">Specification<a class="site-anchor" href="#spec" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><p>Figma 와 CSS 가 함께 따르는 크기, 여백, 색입니다.</p><pre class="site-spec">Figma: 폭 480(large 800) / shape/2xl / bg/layer-floating / 그림자 없음(2026-10-01 결정)
+<h2 id="spec">Specification<a class="site-anchor" href="#spec" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><p>Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.</p><pre class="site-spec">Figma: 폭 480(large 800) / shape/2xl / bg/layer-floating / 그림자 없음(2026-10-01 결정)
   header 24/20/16/20 / gap x4 / title t07 SemiBold fg/neutral / desc t05 fg/neutral-muted
   body 12/20/16/20 / min-h64 / footer 24/20 / Action Button large 폭 채움
   닫기 40×40 / 위 18 / 오른쪽 10 / Lucide/x 24 fg/neutral</pre>
@@ -163,7 +164,7 @@
   <div class="site-footer__brand"><img src="../assets/logo-ybmnet.svg" alt="YBM NET" width="81" height="24"><p class="site-footer__copy">© 2026 YBM NET. All rights reserved.</p></div>
   <nav class="site-footer__nav" aria-label="사이트 메뉴">
     <div><p class="site-footer__title">Menu</p><a href="../index.html">Get Started</a><a href="../components/index.html">Components</a><a href="../templates/index.html">Templates</a></div>
-    <div><p class="site-footer__title">More</p><a href="https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=2274-1143" target="_blank" rel="noopener">Figma</a><a href="https://github.com/luvms012-rgb/ybm-ds" target="_blank" rel="noopener">GitHub</a></div>
+    <div><p class="site-footer__title">More</p><a href="https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=2608-2" target="_blank" rel="noopener">Figma</a><a href="https://github.com/luvms012-rgb/ybm-ds" target="_blank" rel="noopener">GitHub</a></div>
   </nav>
 </footer>
 </article>

@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Tag Group - YBM DS</title>
-<meta name="description" content="여러 단편 정보를 한 줄로 줄여 보여 주는 태그 묶음입니다.">
-<!-- 생성물: node site/build.mjs 가 만든다. 직접 고치지 말고 site/build.mjs 나 site/src 를 고친다 -->
+<meta name="description" content="작성자, 날짜처럼 짧은 정보를 한 줄로 모아 보여 주는 태그 묶음입니다.">
+<!-- 생성물: node site/build.mjs가 만든다. 직접 고치지 말고 site/build.mjs나 site/src를 고친다 -->
 <script>try { var t = localStorage.getItem("ybm-site-theme"); if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.dataset.theme = "dark"; } catch (e) {}</script>
 <link rel="icon" href="../assets/logo-ybmnet.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../dist/ybm-ds.css">
-<link rel="stylesheet" href="../assets/site.css?v=8dfd1b81">
+<link rel="stylesheet" href="../assets/site.css?v=dbd51039">
 <script src="../../dist/ybm-ds.js" defer></script>
-<script src="../assets/site.js?v=8dfd1b81" defer></script>
+<script src="../assets/site.js?v=dbd51039" defer></script>
 </head>
 <body class="site">
 <a class="site-skip" href="#main">본문 바로가기</a>
@@ -24,7 +24,7 @@
   </nav>
   <div class="site-top__end">
     <button type="button" class="ds-btn site-theme-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="화면 모드 바꾸기" data-site-theme-toggle><i class="ds-icon site-i--moon" aria-hidden="true"></i><i class="ds-icon site-i--sun" aria-hidden="true"></i></button>
-    <a class="ds-btn site-only-wide" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" href="https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=2274-1143" target="_blank" rel="noopener" aria-label="Figma 파일"><i class="ds-icon site-i--figma" aria-hidden="true"></i></a>
+    <a class="ds-btn site-only-wide" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" href="https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=2608-2" target="_blank" rel="noopener" aria-label="Figma 파일"><i class="ds-icon site-i--figma" aria-hidden="true"></i></a>
     <a class="ds-btn site-only-wide" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" href="https://github.com/luvms012-rgb/ybm-ds" target="_blank" rel="noopener" aria-label="GitHub 저장소"><i class="ds-icon site-i--github" aria-hidden="true"></i></a>
     <a class="ds-btn site-cta" data-variant="neutralSolid" data-size="xsmall" href="../index.html#ai">Get started</a>
     <button type="button" class="ds-btn site-menu-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="메뉴 열기" data-site-menu aria-controls="site-side" aria-expanded="false"><i class="ds-icon ds-icon--menu" aria-hidden="true"></i></button>
@@ -112,7 +112,7 @@
 <article class="site-doc">
 <header class="site-head">
   <h1 class="site-h1">Tag Group</h1>
-  <p class="site-lead">여러 단편 정보를 한 줄로 줄여 보여 주는 태그 묶음입니다.</p>
+  <p class="site-lead">작성자, 날짜처럼 짧은 정보를 한 줄로 모아 보여 주는 태그 묶음입니다.</p>
   <div class="site-meta"><a class="ds-btn" data-variant="neutralWeak" data-size="xsmall" href="https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=2481-1773" target="_blank" rel="noopener"><i class="ds-icon site-i--figma ds-icon--sm" aria-hidden="true"></i>Figma</a><a class="ds-btn" data-variant="neutralWeak" data-size="xsmall" href="https://github.com/luvms012-rgb/ybm-ds/blob/main/dist/components.css#L1300-L1319" target="_blank" rel="noopener"><i class="ds-icon site-i--github ds-icon--sm" aria-hidden="true"></i>Code</a></div>
 <div class="site-toc-select"><select aria-label="이 페이지 목차" data-site-toc><option value="usage">Usage</option><option value="props">Properties</option><option value="guide">Best Practices</option><option value="examples">Examples</option><option value="spec">Specification</option></select><i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i></div>
 </header>
@@ -124,10 +124,10 @@
 <h2 id="props">Properties<a class="site-anchor" href="#props" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><p>Figma 속성 이름을 그대로 <code>data-*</code> 속성으로 씁니다.</p><p class="site-note">그 밖에: 작성자, 날짜, 조회수</p>
 <h2 id="guide">Best Practices<a class="site-anchor" href="#guide" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><div class="ds-table-wrap"><table class="ds-table" data-density="compact">
 <thead><tr><th scope="col">Guidance</th><th scope="col">Practices</th></tr></thead>
-<tbody><tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>태그마다 tone 은 다르게 줄 수 있지만 size 는 모두 같아야 합니다.</td></tr>
-<tr><td><b class="ds-badge site-practice" data-tone="critical">Don't</b></td><td>텍스트는 조사와 접속어를 빼고 6~10자 이내로, 줄바꿈되지 않게 씁니다.</td></tr>
-<tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>기본은 한 줄 요약입니다. 말줄임이 이해를 방해할 때만 줄바꿈을 허용합니다.</td></tr>
-<tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>공간이 부족하면 태그별 우선순위를 정해 낮은 것부터 말줄임합니다.</td></tr></tbody></table></div>
+<tbody><tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>태그마다 tone은 다르게 줄 수 있지만 size는 모두 같아야 합니다.</td></tr>
+<tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>글자는 조사와 접속어를 빼고 6~10자 안으로, 한 줄에 들어가게 씁니다.</td></tr>
+<tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>기본은 한 줄입니다. 말줄임 때문에 뜻이 흐려질 때만 줄을 바꿉니다.</td></tr>
+<tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>자리가 모자라면 덜 중요한 태그부터 말줄임합니다.</td></tr></tbody></table></div>
 <h2 id="examples">Examples<a class="site-anchor" href="#examples" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><div class="site-example">
   <div class="site-example__bar"><div class="ds-chiptabs" role="tablist" aria-label="보기 방식"><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-view="preview">Preview</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-view="code">Code</button></div></div>
   <div class="site-example__preview"><div class="pv-stage pv-col"><span class="ds-tag-group"><span>운영팀</span><span>2026.10.22</span><span>조회 128</span></span><span class="ds-tag-group" data-size="t4" data-tone="neutral"><span>t4</span><span>neutral</span></span></div></div>
@@ -136,14 +136,14 @@
   <pre class="ds-codeblock__code"><code>&lt;span class=&quot;ds-tag-group&quot;&gt;&lt;span&gt;운영팀&lt;/span&gt;&lt;span&gt;2026.10.22&lt;/span&gt;&lt;span&gt;조회 128&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;ds-tag-group&quot; data-size=&quot;t4&quot; data-tone=&quot;neutral&quot;&gt;&lt;span&gt;t4&lt;/span&gt;&lt;span&gt;neutral&lt;/span&gt;&lt;/span&gt;</code></pre>
 </figure></div>
 </div>
-<h2 id="spec">Specification<a class="site-anchor" href="#spec" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><p>Figma 와 CSS 가 함께 따르는 크기, 여백, 색입니다.</p><pre class="site-spec">size: t3(기본 13/20) / t4(14/21)   tone: neutralSubtle(기본) / neutral
+<h2 id="spec">Specification<a class="site-anchor" href="#spec" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><p>Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.</p><pre class="site-spec">size: t3(기본 13/20) / t4(14/21)   tone: neutralSubtle(기본) / neutral
 Figma: 항목 사이 &quot;/&quot; 구분 / gap x1 / neutral fg/neutral-muted / neutralSubtle fg/neutral-subtle</pre>
 <nav class="site-pager" aria-label="이전, 다음 문서"><a href="tabs.html" data-dir="prev"><span class="site-pager__label"><i class="ds-icon ds-icon--chevron-left ds-icon--sm" aria-hidden="true"></i>Previous</span><b>Tabs</b></a><a href="text-field-input.html" data-dir="next"><span class="site-pager__label">Next<i class="ds-icon ds-icon--chevron-right ds-icon--sm" aria-hidden="true"></i></span><b>Text Field Input</b></a></nav>
 <footer class="site-footer">
   <div class="site-footer__brand"><img src="../assets/logo-ybmnet.svg" alt="YBM NET" width="81" height="24"><p class="site-footer__copy">© 2026 YBM NET. All rights reserved.</p></div>
   <nav class="site-footer__nav" aria-label="사이트 메뉴">
     <div><p class="site-footer__title">Menu</p><a href="../index.html">Get Started</a><a href="../components/index.html">Components</a><a href="../templates/index.html">Templates</a></div>
-    <div><p class="site-footer__title">More</p><a href="https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=2274-1143" target="_blank" rel="noopener">Figma</a><a href="https://github.com/luvms012-rgb/ybm-ds" target="_blank" rel="noopener">GitHub</a></div>
+    <div><p class="site-footer__title">More</p><a href="https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=2608-2" target="_blank" rel="noopener">Figma</a><a href="https://github.com/luvms012-rgb/ybm-ds" target="_blank" rel="noopener">GitHub</a></div>
   </nav>
 </footer>
 </article>

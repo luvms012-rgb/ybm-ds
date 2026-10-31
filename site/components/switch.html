@@ -5,13 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Switch - YBM DS</title>
 <meta name="description" content="누르는 즉시 반영되는 켜고 끄기 컨트롤입니다.">
-<!-- 생성물: node site/build.mjs 가 만든다. 직접 고치지 말고 site/build.mjs 나 site/src 를 고친다 -->
+<!-- 생성물: node site/build.mjs가 만든다. 직접 고치지 말고 site/build.mjs나 site/src를 고친다 -->
 <script>try { var t = localStorage.getItem("ybm-site-theme"); if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.dataset.theme = "dark"; } catch (e) {}</script>
 <link rel="icon" href="../assets/logo-ybmnet.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../dist/ybm-ds.css">
-<link rel="stylesheet" href="../assets/site.css?v=8dfd1b81">
+<link rel="stylesheet" href="../assets/site.css?v=dbd51039">
 <script src="../../dist/ybm-ds.js" defer></script>
-<script src="../assets/site.js?v=8dfd1b81" defer></script>
+<script src="../assets/site.js?v=dbd51039" defer></script>
 </head>
 <body class="site">
 <a class="site-skip" href="#main">본문 바로가기</a>
@@ -24,7 +24,7 @@
   </nav>
   <div class="site-top__end">
     <button type="button" class="ds-btn site-theme-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="화면 모드 바꾸기" data-site-theme-toggle><i class="ds-icon site-i--moon" aria-hidden="true"></i><i class="ds-icon site-i--sun" aria-hidden="true"></i></button>
-    <a class="ds-btn site-only-wide" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" href="https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=2274-1143" target="_blank" rel="noopener" aria-label="Figma 파일"><i class="ds-icon site-i--figma" aria-hidden="true"></i></a>
+    <a class="ds-btn site-only-wide" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" href="https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=2608-2" target="_blank" rel="noopener" aria-label="Figma 파일"><i class="ds-icon site-i--figma" aria-hidden="true"></i></a>
     <a class="ds-btn site-only-wide" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" href="https://github.com/luvms012-rgb/ybm-ds" target="_blank" rel="noopener" aria-label="GitHub 저장소"><i class="ds-icon site-i--github" aria-hidden="true"></i></a>
     <a class="ds-btn site-cta" data-variant="neutralSolid" data-size="xsmall" href="../index.html#ai">Get started</a>
     <button type="button" class="ds-btn site-menu-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="메뉴 열기" data-site-menu aria-controls="site-side" aria-expanded="false"><i class="ds-icon ds-icon--menu" aria-hidden="true"></i></button>
@@ -139,7 +139,8 @@
 <tr><td><code>--ds-switch-t</code></td><td><code>var(--ds-switch-thumb)</code></td></tr></tbody></table></div>
 <h2 id="guide">Best Practices<a class="site-anchor" href="#guide" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><div class="ds-table-wrap"><table class="ds-table" data-density="compact">
 <thead><tr><th scope="col">Guidance</th><th scope="col">Practices</th></tr></thead>
-<tbody><tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>즉시 반영되는 설정에만. 저장 버튼이 따로 있으면 Checkbox.</td></tr></tbody></table></div>
+<tbody><tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>누르는 즉시 반영되는 설정에만 씁니다.</td></tr>
+<tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>저장 버튼이 따로 있으면 Checkbox를 씁니다.</td></tr></tbody></table></div>
 <h2 id="examples">Examples<a class="site-anchor" href="#examples" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><div class="site-example">
   <div class="site-example__bar"><div class="ds-chiptabs" role="tablist" aria-label="보기 방식"><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-view="preview">Preview</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-view="code">Code</button></div></div>
   <div class="site-example__preview"><div class="pv-stage">
@@ -154,7 +155,7 @@
 &lt;label class=&quot;ds-switch&quot; data-size=&quot;32&quot;&gt;&lt;span class=&quot;ds-switch__label&quot;&gt;32&lt;/span&gt;&lt;input type=&quot;checkbox&quot; role=&quot;switch&quot; class=&quot;ds-switch__control&quot;&gt;&lt;/label&gt;</code></pre>
 </figure></div>
 </div>
-<h2 id="spec">Specification<a class="site-anchor" href="#spec" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><p>Figma 와 CSS 가 함께 따르는 크기, 여백, 색입니다.</p><pre class="site-spec">size: 24(기본) / 16 / 32   tone: brand(기본) / neutral
+<h2 id="spec">Specification<a class="site-anchor" href="#spec" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><p>Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.</p><pre class="site-spec">size: 24(기본) / 16 / 32   tone: brand(기본) / neutral
 Figma 16: 트랙 26×16 / 썸 10(켜짐 12) / gap x1_5 / label t03 Medium
        24: 트랙 38×24 / 썸 16(켜짐 20) / gap x2   / label t04 Medium
        32: 트랙 52×32 / 썸 21(켜짐 26) / gap x2_5 / label t05 Medium
@@ -166,7 +167,7 @@ Figma 16: 트랙 26×16 / 썸 10(켜짐 12) / gap x1_5 / label t03 Medium
   <div class="site-footer__brand"><img src="../assets/logo-ybmnet.svg" alt="YBM NET" width="81" height="24"><p class="site-footer__copy">© 2026 YBM NET. All rights reserved.</p></div>
   <nav class="site-footer__nav" aria-label="사이트 메뉴">
     <div><p class="site-footer__title">Menu</p><a href="../index.html">Get Started</a><a href="../components/index.html">Components</a><a href="../templates/index.html">Templates</a></div>
-    <div><p class="site-footer__title">More</p><a href="https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=2274-1143" target="_blank" rel="noopener">Figma</a><a href="https://github.com/luvms012-rgb/ybm-ds" target="_blank" rel="noopener">GitHub</a></div>
+    <div><p class="site-footer__title">More</p><a href="https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=2608-2" target="_blank" rel="noopener">Figma</a><a href="https://github.com/luvms012-rgb/ybm-ds" target="_blank" rel="noopener">GitHub</a></div>
   </nav>
 </footer>
 </article>

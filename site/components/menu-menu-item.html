@@ -5,13 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Menu - YBM DS</title>
 <meta name="description" content="동작을 실행하는 항목들을 담는 떠 있는 메뉴입니다.">
-<!-- 생성물: node site/build.mjs 가 만든다. 직접 고치지 말고 site/build.mjs 나 site/src 를 고친다 -->
+<!-- 생성물: node site/build.mjs가 만든다. 직접 고치지 말고 site/build.mjs나 site/src를 고친다 -->
 <script>try { var t = localStorage.getItem("ybm-site-theme"); if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.dataset.theme = "dark"; } catch (e) {}</script>
 <link rel="icon" href="../assets/logo-ybmnet.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../dist/ybm-ds.css">
-<link rel="stylesheet" href="../assets/site.css?v=8dfd1b81">
+<link rel="stylesheet" href="../assets/site.css?v=dbd51039">
 <script src="../../dist/ybm-ds.js" defer></script>
-<script src="../assets/site.js?v=8dfd1b81" defer></script>
+<script src="../assets/site.js?v=dbd51039" defer></script>
 </head>
 <body class="site">
 <a class="site-skip" href="#main">본문 바로가기</a>
@@ -24,7 +24,7 @@
   </nav>
   <div class="site-top__end">
     <button type="button" class="ds-btn site-theme-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="화면 모드 바꾸기" data-site-theme-toggle><i class="ds-icon site-i--moon" aria-hidden="true"></i><i class="ds-icon site-i--sun" aria-hidden="true"></i></button>
-    <a class="ds-btn site-only-wide" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" href="https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=2274-1143" target="_blank" rel="noopener" aria-label="Figma 파일"><i class="ds-icon site-i--figma" aria-hidden="true"></i></a>
+    <a class="ds-btn site-only-wide" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" href="https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=2608-2" target="_blank" rel="noopener" aria-label="Figma 파일"><i class="ds-icon site-i--figma" aria-hidden="true"></i></a>
     <a class="ds-btn site-only-wide" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" href="https://github.com/luvms012-rgb/ybm-ds" target="_blank" rel="noopener" aria-label="GitHub 저장소"><i class="ds-icon site-i--github" aria-hidden="true"></i></a>
     <a class="ds-btn site-cta" data-variant="neutralSolid" data-size="xsmall" href="../index.html#ai">Get started</a>
     <button type="button" class="ds-btn site-menu-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="메뉴 열기" data-site-menu aria-controls="site-side" aria-expanded="false"><i class="ds-icon ds-icon--menu" aria-hidden="true"></i></button>
@@ -138,13 +138,13 @@
 <tbody><tr><td><code>--ds-menu-item-fg</code></td><td><code>var(--ybm-color-fg-neutral)</code></td></tr></tbody></table></div>
 <h2 id="guide">Best Practices<a class="site-anchor" href="#guide" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><div class="ds-table-wrap"><table class="ds-table" data-density="compact">
 <thead><tr><th scope="col">Guidance</th><th scope="col">Practices</th></tr></thead>
-<tbody><tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>동작 실행은 Menu, 값 고르기는 Select.</td></tr>
-<tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>값을 고르는 자리가 아닙니다. 폼에 제출할 값 고르기는 Select, 동작 실행이 Menu 입니다.</td></tr>
-<tr><td><b class="ds-badge site-practice" data-tone="critical">Don't</b></td><td>아이콘은 전체 항목에 쓰거나 전부 쓰지 않습니다. 일부 항목에만 넣지 마세요.</td></tr>
-<tr><td><b class="ds-badge site-practice" data-tone="critical">Don't</b></td><td>라벨 없이 아이콘만 두지 않습니다.</td></tr>
-<tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>삭제, 차단 같은 되돌릴 수 없는 항목은 critical tone 으로 두고 목록 끝에 divider 로 분리합니다.</td></tr>
-<tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>라벨은 2~6자 동사형으로 쓰고, 한 메뉴 안에서 어조와 형식을 통일합니다.</td></tr>
-<tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>설명은 필요한 항목에만 1줄 이내로 답니다.</td></tr></tbody></table></div>
+<tbody><tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>동작을 실행할 때는 Menu, 값을 고를 때는 Select를 씁니다.</td></tr>
+<tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>삭제, 차단처럼 되돌릴 수 없는 항목은 critical로 두고, 목록 끝에 구분선(Divider)으로 따로 묶습니다.</td></tr>
+<tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>라벨은 2~6자 동사로 쓰고, 한 메뉴 안에서 말투를 맞춥니다.</td></tr>
+<tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>설명은 꼭 필요한 항목에만 한 줄로 붙입니다.</td></tr>
+<tr><td><b class="ds-badge site-practice" data-tone="critical">Don't</b></td><td>값을 고르는 데는 쓰지 않습니다. 폼에 넣을 값은 Select로 고르고, Menu는 동작을 실행할 때 씁니다.</td></tr>
+<tr><td><b class="ds-badge site-practice" data-tone="critical">Don't</b></td><td>아이콘을 일부 항목에만 넣지 마세요. 모든 항목에 넣거나 모두 빼세요.</td></tr>
+<tr><td><b class="ds-badge site-practice" data-tone="critical">Don't</b></td><td>라벨 없이 아이콘만 두지 않습니다.</td></tr></tbody></table></div>
 <h2 id="examples">Examples<a class="site-anchor" href="#examples" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><div class="site-example">
   <div class="site-example__bar"><div class="ds-chiptabs" role="tablist" aria-label="보기 방식"><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-view="preview">Preview</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-view="code">Code</button></div></div>
   <div class="site-example__preview"><div class="pv-stage">
@@ -165,7 +165,7 @@
 &lt;/div&gt;</code></pre>
 </figure></div>
 </div>
-<h2 id="spec">Specification<a class="site-anchor" href="#spec" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><p>Figma 와 CSS 가 함께 따르는 크기, 여백, 색입니다.</p><pre class="site-spec">Figma Menu: 폭 220 / padding x1 / shape/2xl / bg/layer-floating / elevation overlay(+헤어라인)
+<h2 id="spec">Specification<a class="site-anchor" href="#spec" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><p>Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.</p><pre class="site-spec">Figma Menu: 폭 220 / padding x1 / shape/2xl / bg/layer-floating / elevation overlay(+헤어라인)
            divider 1px stroke/neutral-subtle / 위아래 4
 Figma Item: py10 px12 / gap x2 / shape/sm / 아이콘 18 / t04 fg/neutral
            pressed bg/neutral-weak-alpha / disabled fg/disabled / critical fg/critical</pre>
@@ -174,7 +174,7 @@ Figma Item: py10 px12 / gap x2 / shape/sm / 아이콘 18 / t04 fg/neutral
   <div class="site-footer__brand"><img src="../assets/logo-ybmnet.svg" alt="YBM NET" width="81" height="24"><p class="site-footer__copy">© 2026 YBM NET. All rights reserved.</p></div>
   <nav class="site-footer__nav" aria-label="사이트 메뉴">
     <div><p class="site-footer__title">Menu</p><a href="../index.html">Get Started</a><a href="../components/index.html">Components</a><a href="../templates/index.html">Templates</a></div>
-    <div><p class="site-footer__title">More</p><a href="https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=2274-1143" target="_blank" rel="noopener">Figma</a><a href="https://github.com/luvms012-rgb/ybm-ds" target="_blank" rel="noopener">GitHub</a></div>
+    <div><p class="site-footer__title">More</p><a href="https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=2608-2" target="_blank" rel="noopener">Figma</a><a href="https://github.com/luvms012-rgb/ybm-ds" target="_blank" rel="noopener">GitHub</a></div>
   </nav>
 </footer>
 </article>

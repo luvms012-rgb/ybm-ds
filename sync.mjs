@@ -5,6 +5,7 @@
 //   node sync.mjs figma            Figma 점검 스크립트 생성 → tokens/.figma-check.js
 //                                  (Claude 가 use_figma 로 실행하고 결과를 tokens/.figma-result.json 에 저장)
 //   node sync.mjs links           Figma 문서 프레임의 문서 / 코드 링크를 고치는 스크립트 생성 → tokens/.figma-links.js
+//   node sync.mjs docs            Figma 문서 프레임 본문을 사이트와 같은 순서로 채우는 스크립트 생성 → tokens/.figma-docs.js
 //   node sync.mjs pull [결과.json]  Figma 결과 반영 → 토큰 빌드 → 검증 → GitHub 배포 → 가이드 재배포
 //   node sync.mjs build            토큰만 다시 빌드 (오늘 날짜)
 //   node sync.mjs verify           검증만
@@ -125,7 +126,7 @@ const components = await (async () => {
     res.ok++;
   }
   // 컴포넌트는 카테고리 페이지(Action ~ Table & List)에 나뉘어 있다 — 문서·구분선 페이지만 빼고 전부 본다
-  const NON_COMPONENT = new Set(['About', 'Foundations', 'Icons', 'Templates']);
+  const NON_COMPONENT = new Set(['Get Started', 'About', 'Foundations', 'Iconography', 'Icons', 'Templates']);
   for (const page of figma.root.children) {
     if (NON_COMPONENT.has(page.name) || /^-+$/.test(page.name)) continue;
     await page.loadAsync();
@@ -151,7 +152,9 @@ function plan() { try { return linkPlan(DS); } catch (e) { die(e.message); } }
 // apply = false 면 확인만, true 면 다른 링크를 고친다. 결과 = { ok, changed, wrong, missing, docMismatch }
 function linksJs(apply) {
   const p = plan();
-  const small = { entries: p.entries.map(({ no, ids, doc, slug, start, end }) => ({ no, ids, doc, slug, start, end })), fixed: p.fixed.filter((f) => f.frame).map(({ frame, doc, code }) => ({ frame, doc, code })), about: p.about, site: p.site, src: p.src };
+  const tpl = JSON.parse(read('site/src/templates.json'));
+  const templates = tpl.templates.filter((t) => t.figma).map((t) => ({ slug: t.slug, ids: [t.figma.pc, t.figma.mobile] }));
+  const small = { templates, extra: [tpl.figmaHeader, ...Object.values(JSON.parse(read('components.json')).figmaDocs || {})].filter(Boolean), entries: p.entries.map(({ no, ids, doc, slug, start, end }) => ({ no, ids, doc, slug, start, end })), fixed: p.fixed.filter((f) => f.frame).map(({ frame, doc, code }) => ({ frame, doc, code })), about: p.about, site: p.site, src: p.src };
   return `const PLAN = ${JSON.stringify(small)};
 const APPLY = ${apply};
 const res = { ok: 0, changed: [], wrong: [], missing: [], docMismatch: [] };
@@ -200,6 +203,8 @@ for (const a of PLAN.about) {
   if (!node) { res.missing.push('About 링크 ' + a.url); continue; }
   await setLink(node, a.url, 'About / ' + a.url, true);
 }
+for (const t of PLAN.templates || []) for (const id of t.ids) if (!(await figma.getNodeByIdAsync(id))) res.missing.push('템플릿 화면 ' + t.slug + ' ' + id);
+for (const id of PLAN.extra || []) if (!(await figma.getNodeByIdAsync(id))) res.missing.push('문서 프레임 ' + id);
 res.inSync = !res.wrong.length && !res.missing.length && !res.docMismatch.length;
 return res;`;
 }
@@ -217,6 +222,24 @@ function reportLinks(links) {
   for (const m of links.missing) say(c.r('  ✖ 찾지 못함: ' + m));
   for (const m of links.docMismatch || []) say(c.r('  ✖ 문서 프레임 ID 다름(components.json 의 doc 을 고친다): ' + m));
   say(c.d('    → node sync.mjs links 로 만든 스크립트를 use_figma 로 실행하면 다시 걸린다'));
+}
+
+
+// ── Figma 문서 프레임 본문 (사이트와 같은 순서) ──────────────────────────
+// 머리말 설명은 사이트 설명으로, 본문은 Best Practices(Do / Don't 표) → Examples → Master Components 순서로 맞춘다.
+// 자료는 node site/build.mjs 가 쓰는 tokens/.figma-docs.json. 같은 이름의 노드를 지우고 다시 만들어서 몇 번 실행해도 결과가 같다.
+function docsScript() {
+  const f = path.join(DS, 'tokens', '.figma-docs.json');
+  if (!fs.existsSync(f)) die('tokens/.figma-docs.json 이 없어요. 먼저 node site/build.mjs');
+  const d = JSON.parse(fs.readFileSync(f, 'utf8'));
+  const p = plan();
+  const FOUND_FRAMES = Object.fromEntries(p.fixed.filter((x) => x.frame).map((x) => [x.frame, x.slug]));
+  const DATA = { comps: d.components, found: d.foundations, icons: d.icons, foundFrames: FOUND_FRAMES };
+  const file = path.join(DS, 'tokens', '.figma-docs.js');
+  fs.writeFileSync(file, `// 자동 생성 - node sync.mjs docs (${today()}) · fileKey ${JSON.parse(read('components.json')).figmaFile} · 문서 프레임을 사이트와 같은 순서로
+const DATA = ${JSON.stringify(DATA)};
+${fs.readFileSync(path.join(DS, 'tokens', 'figma-docs.template.js'), 'utf8')}`, 'utf8');
+  return file;
 }
 
 function reportComponents(comp) {
@@ -324,6 +347,10 @@ if (cmd === 'status') {
   const f = linksScript();
   say(c.g(`  ✔ ${rel(f)} 생성 (${(fs.statSync(f).size / 1024).toFixed(1)}KB)`));
   say('    다음: 이 파일 내용을 use_figma(fileKey 1VCEsFU3xMWuXIntIrZz9i)로 실행 → 결과의 changed 가 고친 링크');
+} else if (cmd === 'docs') {
+  const f = docsScript();
+  say(c.g(`  ✔ ${rel(f)} 생성 (${(fs.statSync(f).size / 1024).toFixed(1)}KB)`));
+  say('    다음: 이 파일 내용을 use_figma(fileKey 1VCEsFU3xMWuXIntIrZz9i)로 실행');
 } else if (cmd === 'pull') {
   const file = path.resolve(arg || RESULT_DEFAULT);
   if (!fs.existsSync(file)) die(`결과 파일이 없어요: ${file}\n    먼저 node sync.mjs figma → use_figma 실행 → 결과 저장`);

@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Usage - YBM DS</title>
-<!-- 생성물: node site/build.mjs 가 만든다. 직접 고치지 말고 site/build.mjs 나 site/src 를 고친다 -->
+<!-- 생성물: node site/build.mjs가 만든다. 직접 고치지 말고 site/build.mjs나 site/src를 고친다 -->
 <script>try { var t = localStorage.getItem("ybm-site-theme"); if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.dataset.theme = "dark"; } catch (e) {}</script>
 <link rel="icon" href="../assets/logo-ybmnet.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../dist/ybm-ds.css">
-<link rel="stylesheet" href="../assets/site.css?v=8dfd1b81">
+<link rel="stylesheet" href="../assets/site.css?v=dbd51039">
 <script src="../../dist/ybm-ds.js" defer></script>
-<script src="../assets/site.js?v=8dfd1b81" defer></script>
+<script src="../assets/site.js?v=dbd51039" defer></script>
 </head>
 <body class="site">
 <a class="site-skip" href="#main">본문 바로가기</a>
@@ -23,7 +23,7 @@
   </nav>
   <div class="site-top__end">
     <button type="button" class="ds-btn site-theme-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="화면 모드 바꾸기" data-site-theme-toggle><i class="ds-icon site-i--moon" aria-hidden="true"></i><i class="ds-icon site-i--sun" aria-hidden="true"></i></button>
-    <a class="ds-btn site-only-wide" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" href="https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=2274-1143" target="_blank" rel="noopener" aria-label="Figma 파일"><i class="ds-icon site-i--figma" aria-hidden="true"></i></a>
+    <a class="ds-btn site-only-wide" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" href="https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=2608-2" target="_blank" rel="noopener" aria-label="Figma 파일"><i class="ds-icon site-i--figma" aria-hidden="true"></i></a>
     <a class="ds-btn site-only-wide" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" href="https://github.com/luvms012-rgb/ybm-ds" target="_blank" rel="noopener" aria-label="GitHub 저장소"><i class="ds-icon site-i--github" aria-hidden="true"></i></a>
     <a class="ds-btn site-cta" data-variant="neutralSolid" data-size="xsmall" href="../index.html#ai">Get started</a>
     <button type="button" class="ds-btn site-menu-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="메뉴 열기" data-site-menu aria-controls="site-side" aria-expanded="false"><i class="ds-icon ds-icon--menu" aria-hidden="true"></i></button>
@@ -40,11 +40,11 @@
 <div class="site-scrim" data-site-close></div>
 <main class="site-main" id="main">
 <article class="site-doc">
-<header class="site-head"><h1 class="site-h1">Usage</h1><p class="site-lead">DS 를 불러오는 순서와 모양을 바꾸는 방법, 화면 모드와 반응형 기준을 정리했습니다.</p><div class="site-toc-select"><select aria-label="이 페이지 목차" data-site-toc><option value="order">Load Order</option><option value="custom">Customization</option><option value="state">States</option><option value="theme">Theme</option><option value="breakpoint">Breakpoints</option><option value="korean">Korean Line Breaks</option><option value="icon">Icons</option></select><i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i></div>
+<header class="site-head"><h1 class="site-h1">Usage</h1><p class="site-lead">DS를 불러오는 순서와 모양을 바꾸는 방법, 화면 모드와 반응형 기준을 정리했습니다.</p><div class="site-toc-select"><select aria-label="이 페이지 목차" data-site-toc><option value="order">Load Order</option><option value="custom">Customization</option><option value="state">States</option><option value="theme">Theme</option><option value="breakpoint">Breakpoints</option><option value="korean">Korean Line Breaks</option><option value="icon">Icons</option></select><i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i></div>
 </header>
 
 <h2 id="order">Load Order<a class="site-anchor" href="#order" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
-<p>DS 를 먼저, 서비스 CSS 를 그다음에 불러옵니다. DS 전체가 CSS 레이어 안에 들어 있어서 레이어 밖에 쓴 서비스 CSS 는 선택자 길이와 상관없이 항상 DS 를 이깁니다. 그래서 <code>!important</code> 나 긴 선택자로 다툴 필요가 없어요.</p>
+<p>DS를 먼저, 서비스 CSS를 그다음에 불러옵니다. DS 전체가 CSS 레이어 안에 들어 있어서 레이어 밖에 쓴 서비스 CSS는 선택자 길이와 상관없이 항상 DS를 이깁니다. 그래서 <code>!important</code>나 긴 선택자로 다툴 필요가 없어요.</p>
 <figure class="ds-codeblock">
   <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">css</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
   <pre class="ds-codeblock__code"><code>@layer ybm.tokens, ybm.base, ybm.icons, ybm.components, ybm.utilities;</code></pre>
@@ -52,7 +52,7 @@
 
 <h2 id="custom">Customization<a class="site-anchor" href="#custom" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
 <ul class="site-list">
-  <li>서비스는 <b>컴포넌트 변수(<code>--ds-*</code>)만 바꿔서</b> 모양을 조정합니다. 새 <code>ds-</code> 클래스를 만들거나 <code>!important</code> 를 쓰지 않습니다.</li>
+  <li>서비스는 <b>컴포넌트 변수(<code>--ds-*</code>)만 바꿔서</b> 모양을 조정합니다. 새 <code>ds-</code> 클래스를 만들거나 <code>!important</code>를 쓰지 않습니다.</li>
   <li>각 컴포넌트에서 바꿀 수 있는 변수는 컴포넌트 페이지의 "바꿀 수 있는 변수" 표에 있어요.</li>
   <li>팔레트는 YBM 전체가 함께 쓰고, 서비스는 시맨틱(<code>bg</code>, <code>fg</code>, <code>stroke</code>) 색과 컴포넌트 변수만 덮어씁니다.</li>
 </ul>
@@ -63,7 +63,7 @@
 </figure>
 
 <h2 id="state">States<a class="site-anchor" href="#state" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
-<p>CSS 는 Figma 속성 이름을 그대로 <code>data-*</code> 속성으로 씁니다. 상태는 가능한 한 HTML 기본 속성으로 표현해서 접근성이 함께 맞춰지게 했어요.</p>
+<p>CSS는 Figma 속성 이름을 그대로 <code>data-*</code> 속성으로 씁니다. 상태는 가능한 한 HTML 기본 속성으로 표현해서 접근성이 함께 맞춰지게 했어요.</p>
 <div class="ds-table-wrap"><table class="ds-table" data-density="compact">
 <thead><tr><th scope="col">상태</th><th scope="col">쓰는 속성</th></tr></thead>
 <tbody><tr><td>꺼짐</td><td><code>disabled</code></td></tr>
@@ -71,10 +71,10 @@
 <tr><td>지금 위치</td><td><code>aria-current="page"</code></td></tr>
 <tr><td>펼침</td><td><code>aria-expanded</code></td></tr>
 <tr><td>오류</td><td><code>aria-invalid="true"</code></td></tr>
-<tr><td>누름</td><td><code>:active</code> (마우스는 <code>:hover</code> 도)</td></tr></tbody></table></div>
+<tr><td>누름</td><td><code>:active</code> (마우스는 <code>:hover</code>도)</td></tr></tbody></table></div>
 
 <h2 id="theme">Theme<a class="site-anchor" href="#theme" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
-<p>모드는 라이트와 다크 두 가지입니다. <code>&lt;html data-theme="dark"&gt;</code> 를 붙이면 시맨틱 색이 모두 어두운 화면용으로 바뀝니다. 색을 토큰으로만 썼다면 따로 고칠 것이 없어요.</p>
+<p>모드는 라이트와 다크 두 가지입니다. <code>&lt;html data-theme="dark"&gt;</code>를 붙이면 시맨틱 색이 모두 어두운 화면용으로 바뀝니다. 색을 토큰으로만 썼다면 따로 고칠 것이 없어요.</p>
 
 <h2 id="breakpoint">Breakpoints<a class="site-anchor" href="#breakpoint" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
 <p>작은 화면부터 쌓아 올리는 방식입니다. <code>@media</code> 안에서는 CSS 변수를 쓸 수 없어서 숫자를 직접 씁니다.</p>
@@ -94,21 +94,21 @@
 &lt;div class=&quot;u-show-from-md&quot;&gt;…&lt;/div&gt;</code></pre>
 </figure>
 <ul class="site-list">
-  <li>Top Navigation ↔ Top App Bar, Side Panel ↔ Bottom Sheet, Dialog ↔ Bottom Sheet 는 768 을 기준으로 바꿉니다.</li>
-  <li>Side Navigation 은 1280 이상 펼침, 768 이상 접힘, 그보다 좁으면 서랍 메뉴입니다.</li>
+  <li>Top Navigation ↔ Top App Bar, Side Panel ↔ Bottom Sheet, Dialog ↔ Bottom Sheet는 768을 기준으로 바꿉니다.</li>
+  <li>Side Navigation은 1280 이상 펼침, 768 이상 접힘, 그보다 좁으면 서랍 메뉴입니다.</li>
 </ul>
 
 <h2 id="korean">Korean Line Breaks<a class="site-anchor" href="#korean" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
-<p>본문에는 <code>word-break: keep-all</code> 과 <code>overflow-wrap: break-word</code> 를 함께 씁니다. 넣지 않으면 한글이 음절 단위로 끊겨 어절 중간에서 줄이 바뀝니다.</p>
+<p>본문에는 <code>word-break: keep-all</code>과 <code>overflow-wrap: break-word</code>를 함께 씁니다. 넣지 않으면 한글이 음절 단위로 끊겨 어절 중간에서 줄이 바뀝니다.</p>
 
 <h2 id="icon">Icons<a class="site-anchor" href="#icon" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
-<p>UI 아이콘은 Lucide 한 가지만 씁니다. 색은 부모 글자색을 따르고, 크기는 기본 20, <code>ds-icon--sm</code> 16, <code>ds-icon--lg</code> 24 입니다. 목록은 <a class="ds-link" href="../foundations/icons.html">아이콘</a> 에 있어요.</p>
+<p>UI 아이콘은 Lucide 한 가지만 씁니다. 색은 부모 글자색을 따르고, 크기는 기본 20, <code>ds-icon--sm</code> 16, <code>ds-icon--lg</code> 24 입니다. 목록은 <a class="ds-link" href="../foundations/icons.html">아이콘</a>에 있어요.</p>
 <nav class="site-pager" aria-label="이전, 다음 문서"><a href="../get-started/scripts.html" data-dir="prev"><span class="site-pager__label"><i class="ds-icon ds-icon--chevron-left ds-icon--sm" aria-hidden="true"></i>Previous</span><b>Scripts</b></a><a href="../foundations/color.html" data-dir="next"><span class="site-pager__label">Next<i class="ds-icon ds-icon--chevron-right ds-icon--sm" aria-hidden="true"></i></span><b>Color</b></a></nav>
 <footer class="site-footer">
   <div class="site-footer__brand"><img src="../assets/logo-ybmnet.svg" alt="YBM NET" width="81" height="24"><p class="site-footer__copy">© 2026 YBM NET. All rights reserved.</p></div>
   <nav class="site-footer__nav" aria-label="사이트 메뉴">
     <div><p class="site-footer__title">Menu</p><a href="../index.html">Get Started</a><a href="../components/index.html">Components</a><a href="../templates/index.html">Templates</a></div>
-    <div><p class="site-footer__title">More</p><a href="https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=2274-1143" target="_blank" rel="noopener">Figma</a><a href="https://github.com/luvms012-rgb/ybm-ds" target="_blank" rel="noopener">GitHub</a></div>
+    <div><p class="site-footer__title">More</p><a href="https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=2608-2" target="_blank" rel="noopener">Figma</a><a href="https://github.com/luvms012-rgb/ybm-ds" target="_blank" rel="noopener">GitHub</a></div>
   </nav>
 </footer>
 </article>

@@ -130,11 +130,11 @@ DS 전체가 `@layer ybm.tokens, ybm.base, ybm.icons, ybm.components, ybm.utilit
 
 | 페이지 | ID | 내용 |
 |---|---|---|
-| About | `2479:3` | 표지(YBMNET 로고 - 색은 logo/* 변수), 이 파일에 대하여, 링크(문서 사이트, GitHub 저장소, 배포 사이트) |
-| Foundations | `2274:1143` | 문서 프레임 Color `2486:2`, Typography `2486:13`, Spacing `2486:24`, Radius `2486:35`, Elevation `2486:46` (본문 내용 프레임은 예전 그대로) |
-| Icons | `271:2027` | 문서 프레임 `Icon` `2517:2` - 머리말, 예시(크기/색/선형/채움/상태), 안내, 전체 아이콘(라이브러리 프레임 `2416:2`) |
+| Get Started | `2479:3` | 사이트 첫 화면과 같은 문서 프레임 `2608:2`(Quick Start with AI, Install, Add Your First Component, Dark Mode, Customization, Pages in This File), 표지(YBMNET 로고 - 색은 logo/* 변수), 링크(문서 사이트, GitHub 저장소, 배포 사이트). 2026-10-31 About 에서 이름을 바꿈 |
+| Foundations | `2274:1143` | 문서 프레임을 사이트 메뉴 순서로: Color `2486:2`, Elevation `2486:46`, Motion `2609:8`(2026-10-31 추가, Duration / Easing 표), Radius `2486:35`, Spacing `2486:24`, Typography `2486:13` |
+| Iconography | `271:2027` | 문서 프레임 `Icon` `2517:2` - 머리말, 예시(크기/색/선형/채움/상태), 안내, 전체 아이콘(라이브러리 프레임 `2416:2`) |
 | ----- | | 구분선 |
-| Templates | `2479:5` | 비어 있음 (화면 템플릿 준비 중) |
+| Templates | `2479:5` | 사이트 Templates 와 같은 구성: 머리말 `2606:2` + 분류 13개 섹션. 템플릿마다 제목, 설명, PC 1440 / Mobile 375 화면. 화면 ID 는 `site/src/templates.json` 의 `figma`. 2026-10-31 `node site/figma-capture.mjs` 로 캡처해 올림(글자 레이어, 색은 DS 변수에 연결) |
 | --- | | 구분선 |
 | Action | `2479:7` | Action Button, Chip, Floating Action Button, Menu, Segmented Control, Toggle Button, **Text Link** `2493:324` |
 | Chat | `2479:8` | 문서 1개에 **Chat Message Bubble** `2499:6`, **Chat Message Metadata** `2499:18`, **Chat System Message** `2499:25`, **Chat Send Button** `2499:35`, **Chat Composer** `2499:54`. 문서 따로 **Markdown** `2568:66`, **Code Block** `2568:57`, **Citation** `2568:65` |
@@ -364,47 +364,46 @@ CSS 는 Figma 프로퍼티 이름을 그대로 `data-*` 속성으로 쓴다: `<b
 목록의 기계용 사본이 `components.json` 이다. 컴포넌트를 추가/변경하면 이 표와 `components.json` 을 함께 고친다(sync 가 Figma/CSS 와 대조).
 
 ### 6.2 사용 지침 (Do / Don't)
-- **Action Button** - 강조(High emphasis)는 화면당 1개, 3개 이상 나란히 금지.
-- **Badge** - 클릭 불가, 표시 전용.
-- **Segmented Control** - 항목 2~4개, 화면당 1개. 고르면 선택 배경이 미끄러져 이동하는 모션은 빼지 않는다.
-- **Switch** - 즉시 반영되는 설정에만. 저장 버튼이 따로 있으면 Checkbox.
-- **Snackbar** - 4초, 동시 1개.
-- **Chip Tabs** - 콘텐츠 카테고리 전환용. 주요 내비게이션은 Tabs. variant 혼용 금지.
-- **FAB** - 화면당 1개, 라벨 권장. disabled 상태 없음.
-- **Field Button** - 폼 제출이 필요하면 disabled 대신 readOnly.
-- **Dialog** - 헤더 닫기와 푸터 취소를 동시에 두지 않는다. 푸터 CTA 는 Action Button large(52).
-- **Alert Dialog** - 되돌릴 수 없는 작업 확인용, 버튼으로만 닫힘.
-- **Menu vs Select** - 동작 실행은 Menu, 값 고르기는 Select.
-- **Callout** - prefix 아이콘은 Solid 형. 전체 클릭형(actionable)에는 링크 텍스트 금지. 제목/본문/링크는 한 줄 인라인(띄어쓰기 두 칸으로 구분).
-- **Bottom Navigation** - 탭 3~5개, 라벨 한글 5자/영문 10자, 아이콘은 Solid, 뱃지 3개 이상 동시 노출 금지, count 1~99 (100↑ `99+`, 0 숨김).
-- **Side Navigation** - 하위 메뉴가 있는 항목은 클릭 시 이동 없이 펼침만, 하위가 활성이면 부모는 펼친 상태 유지. 반응형 lg(1280) 이상 펼침 / md(768) 이상 접힘 / 그보다 좁으면 Drawer.
-- **Divider** - 마지막 섹션 하단에 두지 않는다.
-- **List Item** - 상호작용 요소 4개 미만. 행 전체가 링크이면 안에 다른 버튼을 넣지 않는다.
-- **Tooltip vs Help Bubble** - Tooltip 은 아이콘 버튼 이름 같은 짧은 라벨(hover/focus 전용, 터치에서는 안 보임). 닫기/여러 줄 설명은 Help Bubble.
-- **Banner vs Callout** - Banner 는 페이지 전체 공지(화면 맨 위, 한 번에 1개, 전체 폭). Callout 은 본문 안 안내.
-- **Breadcrumbs** - 웹에서 2단계 이상 깊이일 때만. 마지막(현재) 항목은 링크가 아니다. 모바일 앱은 뒤로 가기 헤더.
-- **Stepper** - 단계 3~5개, 라벨은 짧은 명사형. 더 많으면 "2 / 6" 처럼 글자로.
-- **Select Box** - 설명이 필요한 선택지 2~6개에만. 짧은 선택지는 Radio Group, Checkbox 를 쓴다. 한 묶음 안에서 check 와 radio 를 섞지 않는다.
-- **Time Picker** - 시간 고르기가 화면의 주된 일이면 바로 두고, 입력 필드에서는 Field Button + Bottom Sheet 안에 넣는다.
-- **Table Pagination** - 데이터 표 아래 전용. 일반 목록은 Pagination. 페이지당 행 수 선택지는 3~4개.
-- **Popover vs Dialog** - Popover 는 트리거 옆에 뜨는 작은 작업 창(제목, 버튼 포함), 바깥을 누르면 닫힌다. 화면을 막아야 하는 확인은 Dialog.
-- **Top App Bar** - 모바일 화면마다 1개. theme(ios 제목 가운데 / android 제목 왼쪽)는 서비스 안에서 하나로 맞춘다. 왼쪽은 뒤로 또는 닫기, 오른쪽은 아이콘 버튼 2개까지. transparent 는 사진 위에서만 쓰고 gradient 를 켠다.
-- **Top Navigation** - PC 전용. 메뉴는 7개까지, 지금 화면이 속한 메뉴에 `aria-current="page"`. 화면이 좁아지면 Top App Bar 와 메뉴 버튼으로 바꾼다.
-- **Search Suggestion** - 검색 입력 칸은 Text Field outline 에 search 아이콘과 지우기 버튼을 붙여 쓰고, `type="search"` 와 `role="combobox"` 를 단다. 입력 전에는 최근 검색어, 입력 중에는 추천어, 없으면 empty 문구를 보여 준다.
-- **File Attach** - 끌어 놓는 칸은 PC 처럼 끌어 놓기가 되는 곳에서만 두고, 모바일은 Trigger 와 Item 줄만 쓴다. Trigger 에는 지금 개수와 최대 개수를 적고, 다 차면 disabled 로 바꾼다.
-- **Menu Sheet vs Bottom Sheet** - 동작 몇 개 중 하나를 고를 때는 Menu Sheet, 입력이나 긴 내용은 Bottom Sheet. 되돌릴 수 없는 동작은 critical 로 따로 묶는다.
-- **Result Section** - 신청 완료, 오류, 빈 결과처럼 화면의 주된 내용이 결과일 때 쓴다. 버튼은 다음 할 일 하나를 위에 두고, 보조 동작은 아래 ghost 로 둔다. 목록이 비었을 때의 짧은 안내는 Empty.
-- **Timer** - 숫자 폭이 고정되어 값이 바뀌어도 흔들리지 않는다. 크기와 색은 자리에 맞춰 바꾸고, 시간이 다 되면 `ds-timer-end` 이벤트로 다음 동작을 잇는다.
-- **Status Dot** - 색만으로 뜻을 전하지 않도록 글자와 함께 쓴다. 사람 사진 위 상태는 Avatar 의 Status 를 쓴다.
-- **로딩 표시** - 따로 Spinner 를 두지 않고 Progress Circle 의 indeterminate 를 쓴다.
-- **Checkbox Group** - 관련된 체크박스만 묶고, 묶음 이름과 오류 문구는 Field Label 로 단다.
-- **Scroll Fog** - 흐려지는 쪽에 20 이상 여백을 둔다. 화면 전체 세로 스크롤은 위 20, 아래 80.
-- **Pull To Refresh** - 최신 내용을 다시 불러오는 목록 화면에만. 글자를 골라야 하는 영역에서는 data-disabled 로 끈다.
-- **Side Panel vs Bottom Sheet** - PC 에서 화면 옆에 보조 내용이나 필터를 둘 때 Side Panel, 화면이 좁으면 Bottom Sheet 로 바꾼다.
-- **Image Frame / Carousel** - 사진은 Image Frame 비율 안에 채워 넣고, 여러 장을 넘길 때 Carousel 항목으로 넣는다. 터치 화면에서는 넘기기 버튼 없이 손가락으로 넘긴다.
-- **Markdown / Code Block / Citation** - AI 답변처럼 서식 있는 글은 Markdown 으로 감싸고, 코드는 Code Block, 근거는 번호나 출처 칩(Citation)으로 단다.
-- **Multi Select vs Select** - 여러 개를 고를 때만 Multi Select. 고른 값이 많으면 2개까지 보여 주고 나머지는 +N.
-- **Chat** - 상대 말풍선은 왼쪽, 내 말풍선은 오른쪽. 입력이 비면 보내기 비활성, 답변을 만드는 중에는 멈춤(stop)으로 바꾼다.
+- **Action Button** - 강조 버튼(High emphasis)은 한 화면에 하나만 둡니다. 버튼을 세 개 넘게 나란히 두지 않습니다.
+- **Badge** - 누를 수 없는 표시용 라벨로만 씁니다.
+- **Segmented Control** - 항목은 2~4개로 하고, 한 화면에 하나만 둡니다. 고르면 선택 배경이 미끄러지듯 옮겨 가는 움직임을 그대로 둡니다.
+- **Switch** - 누르는 즉시 반영되는 설정에만 씁니다. 저장 버튼이 따로 있으면 Checkbox를 씁니다.
+- **Snackbar** - 4초 동안 보이고, 한 번에 하나만 띄웁니다.
+- **Chip Tabs** - 콘텐츠 분류를 바꿀 때 씁니다. 화면의 주요 메뉴는 Tabs로 만듭니다. 한 줄 안에서 variant를 섞지 않습니다.
+- **FAB** - 한 화면에 하나만 두고, 되도록 라벨을 붙입니다. disabled 상태로 두지 않습니다. 쓸 수 없으면 버튼을 숨깁니다.
+- **Dialog** - 위쪽 닫기 버튼과 아래쪽 취소 버튼을 함께 두지 않습니다. 아래쪽 주요 버튼은 Action Button large(52)를 씁니다.
+- **Alert Dialog** - 되돌릴 수 없는 작업을 확인받을 때 씁니다. 바깥을 눌러도 닫히지 않고 버튼으로만 닫힙니다.
+- **Menu vs Select** - 동작을 실행할 때는 Menu, 값을 고를 때는 Select를 씁니다.
+- **Callout** - 앞 아이콘은 채움(Solid) 모양을 씁니다. 전체를 누르는 Callout에는 링크 글자를 따로 넣지 않습니다. 제목, 본문, 링크는 한 줄로 이어 쓰고 띄어쓰기 두 칸으로 나눕니다.
+- **Bottom Navigation** - 탭은 3~5개, 라벨은 한글 5자(영문 10자) 안으로 씁니다. 아이콘은 채움(Solid) 모양을 씁니다. 숫자 배지를 세 개 넘게 한꺼번에 띄우지 않습니다. 배지 숫자는 1~99까지 쓰고, 100 이상은 `99+`로, 0이면 숨깁니다.
+- **Side Navigation** - 하위 메뉴가 있는 항목은 눌러도 이동하지 않고 펼치기만 합니다. 화면 폭이 1280 이상이면 펼치고, 768 이상이면 접고, 그보다 좁으면 서랍(Drawer)으로 바꿉니다.
+- **Divider** - 마지막 묶음 아래에는 구분선을 두지 않습니다.
+- **List Item** - 한 줄 안에 누를 수 있는 요소는 3개까지만 둡니다. 줄 전체가 링크이면 안에 다른 버튼을 넣지 않습니다.
+- **Tooltip vs Help Bubble** - Tooltip은 아이콘 버튼 이름 같은 짧은 라벨에만 씁니다. Tooltip은 마우스를 올리거나 포커스할 때만 보이고, 터치 화면에서는 안 보입니다. 닫기 버튼이 필요하거나 설명이 여러 줄이면 Help Bubble을 씁니다.
+- **Banner vs Callout** - Banner는 화면 맨 위에 전체 폭으로 한 번에 하나만 띄우는 공지입니다. 본문 안의 안내는 Callout을 씁니다.
+- **Breadcrumbs** - 웹 화면에서 깊이가 2단계 이상일 때만 씁니다. 마지막 항목(지금 화면)은 링크로 만들지 않습니다. 모바일 앱에서는 뒤로 가기 버튼이 있는 머리말을 씁니다.
+- **Stepper** - 단계는 3~5개로 하고, 라벨은 짧은 명사로 씁니다. 단계가 더 많으면 "2 / 6"처럼 글자로 보여 줍니다.
+- **Select Box** - 설명이 필요한 선택지가 2~6개일 때 씁니다. 짧은 선택지는 Radio Group이나 Checkbox를 씁니다. 한 묶음 안에서 check와 radio를 섞지 않습니다.
+- **Time Picker** - 시간 고르기가 화면의 주된 일이면 화면에 바로 둡니다. 입력 칸에서 고를 때는 Field Button을 누르면 열리는 Bottom Sheet 안에 넣습니다.
+- **Table Pagination** - 데이터 표 아래에서만 씁니다. 일반 목록에는 Pagination을 씁니다. 페이지당 줄 수는 3~4가지 중에서 고르게 합니다.
+- **Popover vs Dialog** - Popover는 버튼 옆에 뜨는 작은 창이고, 바깥을 누르면 닫힙니다. 화면을 막고 확인받아야 할 때는 Dialog를 씁니다.
+- **Top App Bar** - 모바일 화면마다 하나씩 둡니다. 제목 위치(ios 가운데, android 왼쪽)는 한 서비스 안에서 하나로 맞춥니다. 왼쪽에는 뒤로 또는 닫기 버튼을, 오른쪽에는 아이콘 버튼을 2개까지 둡니다. transparent는 사진 위에서만 쓰고 gradient를 켭니다.
+- **Top Navigation** - PC 화면에서만 씁니다. 메뉴는 7개까지 두고, 지금 화면이 속한 메뉴에 `aria-current="page"`를 붙입니다. 화면이 좁아지면 Top App Bar와 메뉴 버튼으로 바꿉니다.
+- **Search Suggestion** - 검색 칸은 Text Field outline에 search 아이콘과 지우기 버튼을 붙여 만들고, `type="search"`와 `role="combobox"`를 붙입니다. 입력 전에는 최근 검색어, 입력 중에는 추천어, 결과가 없으면 안내 문구를 보여 줍니다.
+- **File Attach** - 끌어 놓는 칸은 끌어 놓기가 되는 PC 화면에서만 둡니다. 모바일에서는 추가 버튼(Trigger)과 파일 줄만 씁니다. 추가 버튼에는 지금 개수와 최대 개수를 적고, 다 차면 disabled로 바꿉니다.
+- **Menu Sheet vs Bottom Sheet** - 몇 가지 동작 중 하나를 고를 때는 Menu Sheet, 입력이나 긴 내용은 Bottom Sheet를 씁니다. 되돌릴 수 없는 동작은 critical로 따로 묶습니다.
+- **Result Section** - 신청 완료, 오류, 빈 결과처럼 결과가 화면의 주인공일 때 씁니다. 다음에 할 일 버튼 하나를 위에 두고, 보조 동작은 아래에 ghost 버튼으로 둡니다. 목록이 비었다는 짧은 안내는 Empty를 씁니다.
+- **Timer** - 숫자 폭이 고정돼 있어 값이 바뀌어도 글자가 제자리에 있습니다. 크기와 색은 놓이는 자리에 맞춰 바꿉니다. 시간이 다 되면 `ds-timer-end` 이벤트를 받아 다음 동작으로 이어 갑니다.
+- **Status Dot** - 색만으로 뜻을 전하지 않도록 글자와 함께 씁니다. 프로필 사진 위의 상태는 Avatar의 Status를 씁니다.
+- **로딩 표시** - 로딩은 Progress Circle의 indeterminate로 보여 줍니다. Spinner 부품은 따로 없습니다.
+- **Checkbox Group** - 서로 관련된 체크박스만 묶습니다. 묶음 이름과 오류 문구는 Field Label로 붙입니다.
+- **Scroll Fog** - 흐려지는 쪽에 20 이상 여백을 둡니다. 화면 전체 세로 스크롤에는 위 20, 아래 80을 둡니다.
+- **Pull To Refresh** - 최신 내용을 다시 불러오는 목록 화면에만 씁니다. 글자를 골라야 하는 영역에서는 data-disabled로 끕니다.
+- **Side Panel vs Bottom Sheet** - PC 화면 옆에 보조 내용이나 필터를 둘 때 Side Panel을 씁니다. 화면이 좁으면 Bottom Sheet로 바꿉니다.
+- **Image Frame / Carousel** - 사진은 Image Frame의 비율 안에 꽉 채워 넣습니다. 여러 장을 넘겨 볼 때는 Carousel 항목으로 넣습니다. 터치 화면에서는 넘기기 버튼 없이 손가락으로 넘깁니다.
+- **Markdown / Code Block / Citation** - AI 답변처럼 서식 있는 글은 Markdown으로 감쌉니다. 코드는 Code Block으로, 근거는 번호나 출처 칩(Citation)으로 붙입니다.
+- **Multi Select vs Select** - 여러 개를 고를 때만 Multi Select를 씁니다. 고른 값이 많으면 2개까지 보여 주고 나머지는 +N으로 줄입니다.
+- **Chat** - 상대 말풍선은 왼쪽, 내 말풍선은 오른쪽에 둡니다. 입력 칸이 비어 있으면 보내기 버튼을 끄고, 답변을 만드는 중에는 멈춤(stop) 버튼으로 바꿉니다.
 - 닫기 버튼(Dialog/Bottom Sheet): 40×40 투명 + 24px `Lucide/x`, 색 `fg/neutral`.
 
 ---
@@ -460,7 +459,7 @@ CSS 는 Figma 프로퍼티 이름을 그대로 `data-*` 속성으로 쓴다: `<b
 
 ### 공통
 1. 새 UI 는 **기존 컴포넌트를 재사용**한다. 중복 제작 금지.
-2. 컴포넌트는 **시맨틱 토큰만** 참조한다. 반경은 `shape/*`.
+2. 컴포넌트는 **시맨틱 토큰만** 참조한다. 반경은 `shape/*`. 떠 있는 목록 안 항목처럼 상자 안에 상자가 있으면 안쪽 곡률은 "바깥 곡률 - 안쪽 여백"으로 맞춘다(Menu 20 - 4 = 16, Select 20 - 8 = 12, Search Suggestion 12 - 4 = 8).
 3. 새 컴포넌트를 추가하면 `components.css`(`.ds-*` + `--ds-*` 변수), `components.json`(`figma` 노드와 `doc` 문서 프레임 ID), `index.html`(미리보기 섹션), 이 문서 §6, Figma `description` 을 함께 갱신한다.
 4. 토큰을 바꿀 때는 **Figma 변수 → `node sync.mjs figma` → use_figma → `node sync.mjs pull`** 순서. `tokens.css` 를 손으로 고치지 않는다.
 5. CSS 수정 후에는 `index.html?only=번호` 를 브라우저로 렌더해 Figma 스크린샷과 나란히 비교한다.
