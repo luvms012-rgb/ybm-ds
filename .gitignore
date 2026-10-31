@@ -1,5 +1,6 @@
 # 생성되는 점검 스크립트 · Figma 결과 · 백업 (로컬에서만)
 tokens/.figma-check.js
+tokens/.figma-links.js
 tokens/.figma-result.json
 tokens/.figma-variables-result.json
 tokens/figma-variables.backup-*.json

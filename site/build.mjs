@@ -8,6 +8,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
+import { linkPlan } from '../tokens/links.mjs';
 
 const SITE = path.dirname(fileURLToPath(import.meta.url));
 // 사이트 CSS / JS 주소에 붙이는 버전 - 내용이 바뀌면 값이 바뀌어 브라우저가 예전 파일을 쓰지 않는다
@@ -20,6 +21,10 @@ const GITHUB = 'https://github.com/luvms012-rgb/ybm-ds';
 const RAW = 'https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main';
 const FIGMA = 'https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=';
 const SITE_URL = PUBLIC + '/site/';
+// 페이지 머리말의 Figma / Code 버튼 주소 - Figma 문서 프레임의 "문서 / 코드" 링크와 같은 계획(tokens/links.mjs)
+const LINKS = linkPlan(DS);
+const linkByNo = Object.fromEntries(LINKS.entries.map((e) => [e.no, e]));
+const linkBySlug = Object.fromEntries(LINKS.fixed.map((f) => [f.slug, f]));
 
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 // 사이트 문장 규칙: 가운뎃점과 긴 줄표를 쉼표와 - 로
@@ -204,6 +209,8 @@ function sideNav(section, file, root) {
 }
 
 const iconBtn = (attrs, label, inner) => `<button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="${esc(label)}" ${attrs}>${inner}</button>`;
+const metaLink = (href, label, icon) => `<a class="ds-btn" data-variant="neutralWeak" data-size="xsmall" href="${href}" target="_blank" rel="noopener"><i class="ds-icon ${icon} ds-icon--sm" aria-hidden="true"></i>${label}</a>`;
+const metaLinks = (l) => l ? `<div class="site-meta">${l.figma ? metaLink(l.figma, 'Figma', 'site-i--figma') : ''}${metaLink(l.code, 'Code', 'site-i--github')}</div>` : '';
 const iconLink = (href, label, icon, extra = '') => `<a class="ds-btn${extra}" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" href="${href}" target="_blank" rel="noopener" aria-label="${esc(label)}"><i class="ds-icon ${icon}" aria-hidden="true"></i></a>`;
 
 // layout - doc: 본문 752 + 목차 (문서, 컴포넌트 목록과 상세도 같은 폭) / wide: 메뉴 옆 전체 폭 (템플릿 상세)
@@ -493,7 +500,7 @@ ${table(['토큰', '값'], tokRe(/--ybm-easing-([a-z]+): ([^;]+);/g).map((m) => 
 for (const [slug, p] of Object.entries(foundPages)) {
   write({
     file: `foundations/${slug}.html`, section: 'get-started', title: foundName[slug], desc: p.lead, pager: gsPager(`foundations/${slug}.html`),
-    body: `<header><h1 class="site-h1">${esc(foundName[slug])}</h1><p class="site-lead">${esc(p.lead)}</p></header>\n${fvBox(slug, true)}\n${p.body}`,
+    body: `<header><h1 class="site-h1">${esc(foundName[slug])}</h1><p class="site-lead">${esc(p.lead)}</p>${metaLinks(linkBySlug[slug])}</header>\n${fvBox(slug, true)}\n${p.body}`,
   });
 }
 
@@ -504,7 +511,7 @@ const lucide = JSON.parse(fs.readFileSync(path.join(SITE, 'src/lucide-icons.json
 const lucideCount = Object.keys(lucide.icons).length;
 write({
   file: 'foundations/icons.html', section: 'get-started', title: 'Iconography', pager: gsPager('foundations/icons.html'),
-  body: `<header><h1 class="site-h1">Iconography</h1><p class="site-lead">UI 아이콘은 Lucide 한 가지만 씁니다. Lucide 전체 ${lucideCount.toLocaleString()}개 가운데 CSS 로 바로 쓸 수 있는 것은 ${iconNames.length}개이고, 나머지는 필요할 때 <code>icons.css</code> 에 한 줄 넣어 씁니다.</p></header>
+  body: `<header><h1 class="site-h1">Iconography</h1><p class="site-lead">UI 아이콘은 Lucide 한 가지만 씁니다. Lucide 전체 ${lucideCount.toLocaleString()}개 가운데 CSS 로 바로 쓸 수 있는 것은 ${iconNames.length}개이고, 나머지는 필요할 때 <code>icons.css</code> 에 한 줄 넣어 씁니다.</p>${metaLinks(linkBySlug.icons)}</header>
 ${fvBox('icons', true)}
 <div class="site-icon-search"><div class="ds-input" data-variant="outline" data-size="medium"><i class="ds-icon ds-icon--search ds-input__icon" aria-hidden="true"></i><input class="ds-input__control" type="search" placeholder="Search icons (arrow, user, calendar)" aria-label="아이콘 찾기" data-site-lucide-search></div><span class="site-lucide-count" data-site-lucide-count></span></div>
 <h2 id="use">Usage</h2>
@@ -612,6 +619,7 @@ comps.forEach((c) => {
     body: `<header>
   <h1 class="site-h1">${esc(c.name)}</h1>
   <p class="site-lead">${esc(c.desc)}</p>
+  ${metaLinks(linkByNo[c.no])}
 </header>
 ${coverThumb(c)}
 ${sections.join('\n')}`,

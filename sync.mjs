@@ -4,6 +4,7 @@
 //   node sync.mjs                  상태 보기 (검증 + git + 배포 주소)
 //   node sync.mjs figma            Figma 점검 스크립트 생성 → tokens/.figma-check.js
 //                                  (Claude 가 use_figma 로 실행하고 결과를 tokens/.figma-result.json 에 저장)
+//   node sync.mjs links           Figma 문서 프레임의 문서 / 코드 링크를 고치는 스크립트 생성 → tokens/.figma-links.js
 //   node sync.mjs pull [결과.json]  Figma 결과 반영 → 토큰 빌드 → 검증 → GitHub 배포 → 가이드 재배포
 //   node sync.mjs build            토큰만 다시 빌드 (오늘 날짜)
 //   node sync.mjs verify           검증만
@@ -19,6 +20,7 @@ import { execFileSync, spawnSync } from 'node:child_process';
 import https from 'node:https';
 import { fileURLToPath } from 'node:url';
 import { build, today } from './tokens/build.mjs';
+import { linkPlan } from './tokens/links.mjs';
 
 const DS = path.dirname(fileURLToPath(import.meta.url));
 const WORKS = path.dirname(DS);
@@ -133,10 +135,88 @@ const components = await (async () => {
   res.inSync = !res.missing.length && !res.typeMismatch.length && !res.variantMismatch.length && !res.unlisted.length;
   return res;
 })();
-return { variables, components };
+const links = await (async () => {
+${linksJs(false)}
+})();
+return { variables, components, links };
 `;
   fs.writeFileSync(file, script, 'utf8');
   return file;
+}
+
+// ── Figma 문서 프레임 링크 (문서 · 코드) ─────────────────────────────────
+// 문서 프레임 머리말의 "문서" 는 문서 사이트의 그 페이지, "코드" 는 GitHub 의 그 부품 CSS 구간(줄 범위)으로 건다. 계획은 tokens/links.mjs (사이트와 공용).
+// 줄 번호는 CSS 를 고칠 때마다 밀리므로 손으로 고치지 않는다 - node sync.mjs figma 가 어긋남을 알려 주고, node sync.mjs links 로 다시 건다.
+function plan() { try { return linkPlan(DS); } catch (e) { die(e.message); } }
+// apply = false 면 확인만, true 면 다른 링크를 고친다. 결과 = { ok, changed, wrong, missing, docMismatch }
+function linksJs(apply) {
+  const p = plan();
+  const small = { entries: p.entries.map(({ no, ids, doc, slug, start, end }) => ({ no, ids, doc, slug, start, end })), fixed: p.fixed.filter((f) => f.frame).map(({ frame, doc, code }) => ({ frame, doc, code })), about: p.about, site: p.site, src: p.src };
+  return `const PLAN = ${JSON.stringify(small)};
+const APPLY = ${apply};
+const res = { ok: 0, changed: [], wrong: [], missing: [], docMismatch: [] };
+for (const p of figma.root.children) if (!/^-+$/.test(p.name)) await p.loadAsync();
+const slug = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+const top = (n) => { while (n.parent && n.parent.type !== 'PAGE') n = n.parent; return n; };
+const targets = [];
+for (const f of PLAN.fixed) { const n = await figma.getNodeByIdAsync(f.frame); if (n) targets.push({ frame: n, doc: f.doc, code: f.code }); else res.missing.push('문서 프레임 ' + f.frame); }
+const groups = new Map();
+for (const e of PLAN.entries) {
+  let n = null; for (const id of e.ids) if ((n = await figma.getNodeByIdAsync(id))) break;
+  if (!n) { res.missing.push(e.no + ' 컴포넌트 노드'); continue; }
+  const f = top(n); if (!groups.has(f.id)) groups.set(f.id, { frame: f, list: [] }); groups.get(f.id).list.push(e);
+  if (e.doc !== f.id) res.docMismatch.push(e.no + ' ' + e.slug + ': components.json doc ' + (e.doc || '없음') + ' / Figma ' + f.id + ' ' + f.name);
+}
+for (const { frame, list } of groups.values()) {
+  // 프레임 하나에 부품이 여럿이면 프레임 이름과 같은 것 → 이름으로 시작하는 것 → 번호 순 첫째를 문서 페이지로
+  list.sort((a, b) => a.start - b.start);
+  const s = slug(frame.name);
+  const main = list.find((e) => e.slug === s) || list.find((e) => e.slug.startsWith(s + '-')) || list[0];
+  const joined = list.every((e, i) => !i || e.start === list[i - 1].end + 1);
+  const [a, b] = joined ? [list[0].start, list[list.length - 1].end] : [main.start, main.end];
+  targets.push({ frame, doc: PLAN.site + 'components/' + main.slug + '.html', code: PLAN.src + '#L' + a + '-L' + b });
+}
+const linkOf = (t) => { const s = t.getStyledTextSegments(['hyperlink']).find((x) => x.hyperlink); return s ? s.hyperlink.value : null; };
+const fonts = async (t) => { for (const s of t.getStyledTextSegments(['fontName'])) await figma.loadFontAsync(s.fontName); };
+const setLink = async (t, url, label, setText) => {
+  const cur = linkOf(t);
+  if (cur === url && (!setText || t.characters === url)) { res.ok++; return; }
+  if (!APPLY) { res.wrong.push({ at: label, now: cur, want: url }); return; }
+  await fonts(t);
+  if (setText) t.characters = url;
+  t.hyperlink = { type: 'URL', value: url };
+  res.changed.push(label);
+};
+for (const t of targets) {
+  for (const [name, url] of [['Documentation', t.doc], ['Code', t.code]]) {
+    const node = t.frame.findOne((n) => n.type === 'TEXT' && n.name === name);
+    if (!node) { res.missing.push(t.frame.name + ' ' + t.frame.id + ' / ' + name); continue; }
+    await setLink(node, url, t.frame.name + ' / ' + (name === 'Code' ? '코드' : '문서'), false);
+  }
+}
+for (const a of PLAN.about) {
+  let node = a.node === 'ABOUT_SITE' ? null : await figma.getNodeByIdAsync(a.node);
+  if (a.node === 'ABOUT_SITE') { const box = (await figma.getNodeByIdAsync('2482:837')); const row = box && box.findChild((n) => n.name === '문서 사이트'); node = row && row.findOne((n) => n.type === 'TEXT' && n.name === 'URL'); }
+  if (!node) { res.missing.push('About 링크 ' + a.url); continue; }
+  await setLink(node, a.url, 'About / ' + a.url, true);
+}
+res.inSync = !res.wrong.length && !res.missing.length && !res.docMismatch.length;
+return res;`;
+}
+function linksScript() {
+  const file = path.join(DS, 'tokens', '.figma-links.js');
+  fs.writeFileSync(file, `// 자동 생성 — node sync.mjs links (${today()}) · fileKey ${JSON.parse(read('components.json')).figmaFile} · 문서 프레임의 문서 / 코드 링크를 고친다\n${linksJs(true)}\n`, 'utf8');
+  return file;
+}
+function reportLinks(links) {
+  if (!links) return;
+  say(c.b('  Figma 문서 프레임 링크 (문서 · 코드)'));
+  if (links.inSync) { say(c.g(`  ✔ ${links.ok}개 링크 일치`)); return; }
+  for (const w of links.wrong.slice(0, 12)) say(c.y(`  ! ${w.at}  지금 ${w.now || '없음'}`));
+  if (links.wrong.length > 12) say(c.y(`  ! 그 밖에 ${links.wrong.length - 12}개`));
+  for (const m of links.missing) say(c.r('  ✖ 찾지 못함: ' + m));
+  for (const m of links.docMismatch || []) say(c.r('  ✖ 문서 프레임 ID 다름(components.json 의 doc 을 고친다): ' + m));
+  say(c.d('    → node sync.mjs links 로 만든 스크립트를 use_figma 로 실행하면 다시 걸린다'));
 }
 
 function reportComponents(comp) {
@@ -240,6 +320,10 @@ if (cmd === 'status') {
   say(c.g(`  ✔ ${rel(f)} 생성 (${(fs.statSync(f).size / 1024).toFixed(1)}KB)`));
   say('    다음: 이 파일 내용을 use_figma(fileKey 1VCEsFU3xMWuXIntIrZz9i)로 실행 →');
   say(`          결과 JSON 을 ${rel(RESULT_DEFAULT)} 에 저장 → node sync.mjs pull`);
+} else if (cmd === 'links') {
+  const f = linksScript();
+  say(c.g(`  ✔ ${rel(f)} 생성 (${(fs.statSync(f).size / 1024).toFixed(1)}KB)`));
+  say('    다음: 이 파일 내용을 use_figma(fileKey 1VCEsFU3xMWuXIntIrZz9i)로 실행 → 결과의 changed 가 고친 링크');
 } else if (cmd === 'pull') {
   const file = path.resolve(arg || RESULT_DEFAULT);
   if (!fs.existsSync(file)) die(`결과 파일이 없어요: ${file}\n    먼저 node sync.mjs figma → use_figma 실행 → 결과 저장`);
@@ -255,6 +339,7 @@ if (cmd === 'status') {
     writeBuild();
   }
   reportComponents(result.components);
+  reportLinks(result.links);
   await deploy(variables.inSync ? undefined : `tokens: Figma 변수 동기화 (${today()})`);
 } else if (cmd === 'build') {
   writeBuild();

@@ -208,6 +208,9 @@ body[data-side-open] .site-scrim { opacity: 1; pointer-events: auto; }
 .site-dos li::before { content: ""; position: absolute; left: var(--ybm-space-x4); top: calc(var(--ybm-space-x3) + 4px); width: 16px; height: 16px; background: var(--ybm-color-fg-positive); -webkit-mask: var(--ds-icon-check) center / contain no-repeat; mask: var(--ds-icon-check) center / contain no-repeat; }
 .site-links { display: flex; flex-wrap: wrap; gap: var(--ybm-space-x2); margin-top: var(--ybm-space-x4); }
 .site-links .ds-chip { text-decoration: none; }
+/* 머리말 아래 Figma / Code 버튼 (컴포넌트, Foundations) */
+.site-meta { display: flex; flex-wrap: wrap; gap: var(--ybm-space-x2); margin-top: var(--ybm-space-x4); }
+.site-meta .ds-btn { text-decoration: none; }
 /* 이전 / 다음 문서 (레퍼런스 B): 2열 간격 24, 위 64, 회색 채움 모서리 12, 안쪽 14 20, 작은 글 14 + 이름 16 500 */
 .site-doc > .site-pager { display: grid; grid-template-columns: 1fr 1fr; gap: var(--ybm-space-x6); margin-top: var(--ybm-space-x16); }
 .site-pager a { display: flex; flex-direction: column; justify-content: center; gap: var(--ybm-space-x2); min-width: 0; min-height: 52px; padding: 14px var(--ybm-space-x5); border-radius: var(--ybm-shape-lg); background: var(--ybm-color-bg-neutral-weak-alpha); color: var(--ybm-color-fg-neutral); text-decoration: none; transition: background-color var(--ybm-duration-fast) var(--ybm-easing-standard); }

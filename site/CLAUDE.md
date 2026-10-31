@@ -53,6 +53,7 @@ YBM 디자인 시스템 공식 문서 사이트를 준비하는 폴더다. 2026-
   - 노드 `2274:1143` = Foundations 페이지. 섹션: Color `2288:63` · Typography `2288:64` · Spacing `2288:67` · Radius `2288:66` · Elevation `2288:65`. 사이트 Foundations 메뉴의 원본이다.
 - **레퍼런스 파일**: 레퍼런스 A 의 Figma 라이브러리 (주소는 로컬 분석 문서와 Claude 메모리)
   - ybm-ds Figma 구성을 이 화면 기준으로 바꿀 예정. **보류 중** — 사용자가 요청할 때만 시작한다.
+- **Figma / Code 버튼**(2026-10-31): 컴포넌트와 Foundations 페이지 머리말 아래에 그 부품의 Figma 문서 프레임과 GitHub CSS 줄 범위로 가는 버튼 2개. 주소는 `tokens/links.mjs` 의 계획을 쓰고(Figma 문서 프레임의 "문서 / 코드" 링크와 같은 원본), 문서 프레임 ID 는 `components.json` 의 `doc` / `figmaDocs` 에서 온다. 줄 번호는 빌드마다 다시 계산된다. Motion 은 Figma 문서가 없어 Code 만.
 
 ## 진행 기록
 - 2026-10-26 (회사): ybm-ds `main`을 GitHub(`d4f83b6`)에 맞췄다. 회사 PC에만 있던 커밋 전 작업(10-23 폴더 구조 정리, figma-sync `cssOnly` 수정, `components/index.html` 컴포넌트 메인 시안, 작업 메모)은 **회사 PC 로컬 브랜치 `backup/2026-10-26-local`** 에만 있다(GitHub에 없음). 필요하면 회사 PC에서 꺼낸다.

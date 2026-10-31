@@ -1,6 +1,14 @@
 {
-  "$schema": "컴포넌트 목록 — sync.mjs 가 CSS(.ds-*)·Figma(노드 ID·변형 수) 양쪽과 대조한다. 새 컴포넌트를 만들면 여기 먼저 추가.",
+  "$schema": "컴포넌트 목록 — sync.mjs 가 CSS(.ds-*)·Figma(노드 ID·변형 수) 양쪽과 대조한다. 새 컴포넌트를 만들면 여기 먼저 추가. doc = 그 컴포넌트가 든 Figma 문서 프레임 ID(사이트와 sync.mjs links 가 쓴다).",
   "figmaFile": "1VCEsFU3xMWuXIntIrZz9i",
+  "figmaDocs": {
+    "color": "2486:2",
+    "typography": "2486:13",
+    "spacing": "2486:24",
+    "shape": "2486:35",
+    "elevation": "2486:46",
+    "icons": "2517:2"
+  },
   "components": [
     {
       "no": "01",
@@ -15,6 +23,7 @@
           "variants": 168
         }
       ],
+      "doc": "2481:2",
       "props": "variant `brandSolid·brandOutline·neutralSolid·neutralWeak·neutralOutline·criticalSolid·ghost` · size `xsmall·small·medium·large` · layout `iconOnly` · width `fill`"
     },
     {
@@ -30,6 +39,7 @@
           "variants": 2
         }
       ],
+      "doc": "2493:325",
       "props": "`--ds-link-color(-hover)` / Figma state `enabled/hover`"
     },
     {
@@ -45,6 +55,7 @@
           "variants": 2
         }
       ],
+      "doc": "2481:1890",
       "props": "label-weight `bold`"
     },
     {
@@ -60,6 +71,7 @@
           "variants": 40
         }
       ],
+      "doc": "2481:1890",
       "props": "variant `outline·underline` · size"
     },
     {
@@ -75,6 +87,7 @@
           "variants": 40
         }
       ],
+      "doc": "2481:1890",
       "props": "variant · size"
     },
     {
@@ -90,6 +103,7 @@
           "variants": 16
         }
       ],
+      "doc": "2481:1812",
       "props": "size `large·medium` · 상태 enabled/disabled/readOnly/invalid"
     },
     {
@@ -105,6 +119,7 @@
           "variants": 2
         }
       ],
+      "doc": "2481:1890",
       "props": "입력 앞 선택(통신사·국가번호)"
     },
     {
@@ -120,6 +135,7 @@
           "variants": 20
         }
       ],
+      "doc": "2481:1851",
       "props": "size"
     },
     {
@@ -142,7 +158,8 @@
           "type": "COMPONENT_SET",
           "variants": 12
         }
-      ]
+      ],
+      "doc": "2481:1851"
     },
     {
       "no": "10",
@@ -163,6 +180,7 @@
           "variants": 6
         }
       ],
+      "doc": "2481:1786",
       "props": "variant `square·ghost` · tone · size"
     },
     {
@@ -179,6 +197,7 @@
           "variants": 16
         }
       ],
+      "doc": "2481:1838",
       "props": "tone · size"
     },
     {
@@ -194,6 +213,7 @@
           "variants": 24
         }
       ],
+      "doc": "2481:1877",
       "props": "size `16·24·32` · tone"
     },
     {
@@ -209,6 +229,7 @@
           "variants": 18
         }
       ],
+      "doc": "2481:1825",
       "props": "size · layout `fill`"
     },
     {
@@ -225,6 +246,7 @@
           "variants": 54
         }
       ],
+      "doc": "2481:15",
       "props": "variant `solid·outlineStrong·outlineWeak` · size · layout `iconOnly`"
     },
     {
@@ -246,6 +268,7 @@
           "variants": 16
         }
       ],
+      "doc": "2481:1994",
       "props": "variant `neutralSolid·neutralOutline` · size `medium·large`"
     },
     {
@@ -267,6 +290,7 @@
           "variants": 12
         }
       ],
+      "doc": "2481:2046",
       "props": "layout `fill·hug` · size"
     },
     {
@@ -288,6 +312,7 @@
           "variants": 6
         }
       ],
+      "doc": "2481:54",
       "props": "layout · size"
     },
     {
@@ -303,6 +328,7 @@
           "variants": 6
         }
       ],
+      "doc": "2481:67",
       "props": "size"
     },
     {
@@ -318,6 +344,7 @@
           "variants": 36
         }
       ],
+      "doc": "2481:1903",
       "props": "variant `weak·solid·outline` · tone `neutral·brand·informative·positive·warning·critical` · size"
     },
     {
@@ -339,6 +366,7 @@
           "variants": 4
         }
       ],
+      "doc": "2481:1773",
       "props": "작성자 · 날짜 · 조회수"
     },
     {
@@ -373,6 +401,7 @@
           "variants": 7
         }
       ],
+      "doc": "2481:1747",
       "props": "size `20·24·36·42·48·56·64·80·96·108` · shape `circle·rounded·square` · status tone `positive·neutral·critical` · group size `20~64` × shape · `+N`"
     },
     {
@@ -388,6 +417,7 @@
           "variants": 5
         }
       ],
+      "doc": "2481:1929",
       "props": "tone `neutral·informative·positive·warning·critical` (magic 은 CSS 만)"
     },
     {
@@ -403,6 +433,7 @@
           "variants": 3
         }
       ],
+      "doc": "2481:2098",
       "props": "variant `default·positive·critical`"
     },
     {
@@ -418,6 +449,7 @@
           "variants": 12
         }
       ],
+      "doc": "2481:2085",
       "props": "`--ds-hb-arrow-offset`"
     },
     {
@@ -440,6 +472,7 @@
           "variants": 6
         }
       ],
+      "doc": "2481:41",
       "props": "tone `critical`"
     },
     {
@@ -460,6 +493,7 @@
           "type": "COMPONENT"
         }
       ],
+      "doc": "2481:2072",
       "props": "size(480/800) · `--ds-dialog-width`"
     },
     {
@@ -475,6 +509,7 @@
           "variants": 5
         }
       ],
+      "doc": "2481:2072",
       "props": "272 폭 · action `pair·critical·nonpreferred`"
     },
     {
@@ -490,6 +525,7 @@
           "variants": 8
         }
       ],
+      "doc": "2481:2059",
       "props": "header-align `center`"
     },
     {
@@ -505,6 +541,7 @@
           "variants": 12
         }
       ],
+      "doc": "2481:1721",
       "props": "variant `separated` · size"
     },
     {
@@ -520,6 +557,7 @@
           "variants": 3
         }
       ],
+      "doc": "2481:1955",
       "props": "shape `rect·circle·text`"
     },
     {
@@ -535,6 +573,7 @@
           "variants": 4
         }
       ],
+      "doc": "2481:1864",
       "props": "tone"
     },
     {
@@ -550,6 +589,7 @@
           "variants": 4
         }
       ],
+      "doc": "2481:1942",
       "props": "size · tone"
     },
     {
@@ -565,6 +605,7 @@
           "variants": 18
         }
       ],
+      "doc": "2481:1942",
       "props": "tone `neutral·brand·staticWhite` · size · type `determinate·indeterminate`"
     },
     {
@@ -580,6 +621,7 @@
           "variants": 4
         }
       ],
+      "doc": "2481:28",
       "props": "layout `iconOnly`(extended=false)"
     },
     {
@@ -603,6 +645,7 @@
           "variants": 7
         }
       ],
+      "doc": "2481:1799",
       "props": "cell state `today·selected·range-start·range-middle·range-end`"
     },
     {
@@ -624,6 +667,7 @@
           "variants": 12
         }
       ],
+      "doc": "2481:1968",
       "props": "뱃지 `__badge--dot/--count` (bg/critical-solid)"
     },
     {
@@ -645,6 +689,7 @@
           "variants": 8
         }
       ],
+      "doc": "2481:2020",
       "props": "expanded 240 / collapsed 56"
     },
     {
@@ -660,6 +705,7 @@
           "variants": 4
         }
       ],
+      "doc": "2481:1734",
       "props": "variant `elevated` · size"
     },
     {
@@ -675,6 +721,7 @@
           "variants": 2
         }
       ],
+      "doc": "2481:1760",
       "props": "size"
     },
     {
@@ -696,6 +743,7 @@
           "variants": 16
         }
       ],
+      "doc": "2481:2007",
       "props": "type `first·prev·next·last·ellipsis·simple`"
     },
     {
@@ -724,6 +772,7 @@
           "variants": 6
         }
       ],
+      "doc": "2481:2137",
       "props": "density `compact` · align"
     },
     {
@@ -739,6 +788,7 @@
           "variants": 4
         }
       ],
+      "doc": "2480:15",
       "props": "weight thick · orientation vertical · inset · label"
     },
     {
@@ -754,6 +804,7 @@
           "type": "COMPONENT"
         }
       ],
+      "doc": "2481:2111",
       "props": "placement top·bottom·left·right · hover/focus 전용"
     },
     {
@@ -771,6 +822,7 @@
           "variants": 4
         }
       ],
+      "doc": "2481:2124",
       "props": "variant inset · divider · size small · prefix/suffix/chevron"
     },
     {
@@ -785,6 +837,7 @@
           "type": "COMPONENT"
         }
       ],
+      "doc": "2481:1981",
       "props": "현재 항목 aria-current=page"
     },
     {
@@ -805,6 +858,7 @@
           "variants": 6
         }
       ],
+      "doc": "2481:2033",
       "props": "state complete·current·upcoming · orientation vertical"
     },
     {
@@ -820,6 +874,7 @@
           "variants": 10
         }
       ],
+      "doc": "2481:1916",
       "props": "tone neutral·informative·positive·warning·critical · variant solid"
     },
     {
@@ -836,6 +891,7 @@
           "variants": 12
         }
       ],
+      "doc": "2495:261",
       "props": "type `check/radio`, state `unchecked/checked/disabled`, layout `horizontal/vertical`"
     },
     {
@@ -851,6 +907,7 @@
           "variants": 2
         }
       ],
+      "doc": "2497:980",
       "props": "state `enabled/disabled`, 12시간제, 분 간격 5"
     },
     {
@@ -866,6 +923,7 @@
           "variants": 3
         }
       ],
+      "doc": "2498:1300",
       "props": "state `default/unknownTotal/empty`, 최소 폭 640"
     },
     {
@@ -882,6 +940,7 @@
           "variants": 3
         }
       ],
+      "doc": "2494:474",
       "props": "actions `single/pair/none`, 폭 320"
     },
     {
@@ -926,6 +985,7 @@
           "variants": 2
         }
       ],
+      "doc": "2499:55",
       "props": "sender `assistant/user`, status `sending/sent/read/error`, 보내기 `send/stop/disabled`"
     },
     {
@@ -947,6 +1007,7 @@
           "variants": 6
         }
       ],
+      "doc": "2557:1678",
       "props": "theme `ios/android`(CSS data-platform), tone `layer/transparent` + gradient, titleLayout `titleOnly/withSubtitle`"
     },
     {
@@ -967,6 +1028,7 @@
           "variants": 4
         }
       ],
+      "doc": "2557:2397",
       "props": "search, action / Item selected, state `enabled/hover`"
     },
     {
@@ -989,6 +1051,7 @@
           "variants": 2
         }
       ],
+      "doc": "2559:1023",
       "props": "content `suggestion/recent/empty` / Item state `enabled/highlighted`, description"
     },
     {
@@ -1018,6 +1081,7 @@
           "variants": 4
         }
       ],
+      "doc": "2559:1453",
       "props": "Dropzone state `enabled/dragOver/disabled` / Trigger state / Item type `file/image`, state `enabled/readonly`, badge"
     },
     {
@@ -1044,6 +1108,7 @@
           "variants": 2
         }
       ],
+      "doc": "2563:1533",
       "props": "header, description, footer / Item tone `neutral/critical`, labelAlign `left/center`"
     },
     {
@@ -1059,6 +1124,7 @@
           "variants": 2
         }
       ],
+      "doc": "2562:748",
       "props": "size `large/medium`, asset, description, primary/secondary action"
     },
     {
@@ -1074,6 +1140,7 @@
           "variants": 2
         }
       ],
+      "doc": "2563:890",
       "props": "format `clock/elapsed`, data-start / data-end"
     },
     {
@@ -1089,6 +1156,7 @@
           "variants": 5
         }
       ],
+      "doc": "2562:987",
       "props": "tone `positive/warning/critical/brand/neutral`, data-pulse"
     },
     {
@@ -1103,6 +1171,7 @@
           "type": "COMPONENT"
         }
       ],
+      "doc": "2566:1339",
       "props": "세로 간격 x1, 묶음 이름은 Field Label"
     },
     {
@@ -1118,6 +1187,7 @@
           "variants": 2
         }
       ],
+      "doc": "2567:55",
       "props": "direction `vertical/horizontal`, 끝 20"
     },
     {
@@ -1133,6 +1203,7 @@
           "variants": 2
         }
       ],
+      "doc": "2567:143",
       "props": "state `pulling/refreshing`, Progress Circle 24"
     },
     {
@@ -1154,6 +1225,7 @@
           "variants": 2
         }
       ],
+      "doc": "2567:863",
       "props": "size `small/medium/large`, direction `right/left`"
     },
     {
@@ -1169,6 +1241,7 @@
           "variants": 3
         }
       ],
+      "doc": "2567:1956",
       "props": "ratio `1:1/4:3/16:9`, stroke, indicator"
     },
     {
@@ -1189,6 +1262,7 @@
           "variants": 2
         }
       ],
+      "doc": "2567:2117",
       "props": "항목 사이 x2, 끝 흐림 x1, 버튼 32"
     },
     {
@@ -1203,6 +1277,7 @@
           "type": "COMPONENT"
         }
       ],
+      "doc": "2568:77",
       "props": "본문 t04, 제목과 블록 간격"
     },
     {
@@ -1218,6 +1293,7 @@
           "variants": 2
         }
       ],
+      "doc": "2568:219",
       "props": "header `true/false`, 복사 버튼"
     },
     {
@@ -1233,6 +1309,7 @@
           "variants": 2
         }
       ],
+      "doc": "2568:365",
       "props": "type `number/label`, icon"
     },
     {
@@ -1260,6 +1337,7 @@
           "type": "COMPONENT"
         }
       ],
+      "doc": "2566:1489",
       "props": "Trigger content `placeholder/selected`, state `enabled/open/disabled`"
     },
     {
@@ -1275,6 +1353,7 @@
           "variants": 6
         }
       ],
+      "doc": "2579:319",
       "props": "size `small·medium·large` · value `--ds-rating-value` 0~5 · input (radio 5개)"
     }
   ]

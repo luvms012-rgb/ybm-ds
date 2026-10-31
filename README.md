@@ -96,6 +96,7 @@ DS 전체가 `@layer ybm.tokens, ybm.base, ybm.icons, ybm.components, ybm.utilit
  ② node sync.mjs pull
    ├─ 변수 변경 → figma-variables.json 병합(백업) → build.mjs 로 생성물 4종 재작성
    ├─ 컴포넌트 대조 → components.json 과 다른 노드/변형 수/목록에 없는 세트 보고
+   ├─ 문서 프레임 링크 대조 → 문서 / 코드 링크가 어긋나면 보고 (고치기는 node sync.mjs links)
    ├─ 검증(아래) → 실패하면 멈춤
    ├─ git commit → push → GitHub Pages(1~2분 뒤 반영)
    └─ 가이드 사이트 재배포(project/_publish/publish.ps1) - 가이드는 DS 를 Pages 주소로 참조
@@ -106,6 +107,7 @@ DS 전체가 `@layer ybm.tokens, ybm.base, ybm.icons, ybm.components, ybm.utilit
 | 전부(Figma → 로컬 → GitHub → 가이드) | Claude 에게 **"ds 동기화"** - ①② 를 이어서 실행한다 |
 | 로컬에서 고친 CSS 를 올리기 | `동기화.bat` 더블클릭 또는 `node sync.mjs deploy "메시지"` |
 | 상태만 보기 | `node sync.mjs` (검증, 커밋 안 된 변경, 스냅샷 날짜, 사이트 응답) |
+| Figma 문서 프레임의 문서 / 코드 링크 다시 걸기 | `node sync.mjs links` → 만든 `tokens/.figma-links.js` 를 Claude 가 use_figma 로 실행 |
 | 토큰만 다시 빌드 | `node sync.mjs build` (또는 `node tokens/build.mjs <날짜> <폴더>` 로 다른 곳에 빌드해 diff) |
 | 옵션 | `--no-push` 커밋까지만, `--ds-only` 가이드 재배포 생략 |
 
@@ -128,7 +130,7 @@ DS 전체가 `@layer ybm.tokens, ybm.base, ybm.icons, ybm.components, ybm.utilit
 
 | 페이지 | ID | 내용 |
 |---|---|---|
-| About | `2479:3` | 표지(YBMNET 로고 - 색은 logo/* 변수), 이 파일에 대하여, 링크 |
+| About | `2479:3` | 표지(YBMNET 로고 - 색은 logo/* 변수), 이 파일에 대하여, 링크(문서 사이트, GitHub 저장소, 배포 사이트) |
 | Foundations | `2274:1143` | 문서 프레임 Color `2486:2`, Typography `2486:13`, Spacing `2486:24`, Radius `2486:35`, Elevation `2486:46` (본문 내용 프레임은 예전 그대로) |
 | Icons | `271:2027` | 문서 프레임 `Icon` `2517:2` - 머리말, 예시(크기/색/선형/채움/상태), 안내, 전체 아이콘(라이브러리 프레임 `2416:2`) |
 | ----- | | 구분선 |
@@ -151,6 +153,8 @@ DS 전체가 `@layer ybm.tokens, ybm.base, ybm.icons, ybm.components, ybm.utilit
 Top App Bar 부터 Multi Select 까지(54~71번)는 2026-10-29 Figma 와 CSS 를 함께 만들었다. 모양과 여백은 레퍼런스 가이드의 같은 부품 규격을 따른다.
 
 새 컴포넌트는 맞는 카테고리 페이지에 문서 프레임을 하나 더 만들어 넣는다. `sync.mjs` 의 미등록 점검은 About/Foundations/Icons/Templates/구분선을 뺀 모든 페이지를 본다.
+
+**문서 프레임 링크** - 문서 헤더의 "문서" 는 문서 사이트의 그 페이지(`site/components/{이름}.html`, Foundations 와 Icons 는 `site/foundations/…`), "코드" 는 GitHub 의 그 부품 CSS 구간(`dist/components.css#L시작-L끝`, Foundations 는 `dist/tokens.css` 의 해당 구획)으로 건다. 한 문서에 부품이 여럿이면 문서 제목과 같은 이름의 부품 페이지로 가고, 코드는 이어진 구획을 한 범위로 묶는다. 줄 번호는 CSS 를 고치면 밀리므로 손으로 고치지 않는다. `node sync.mjs figma` 점검이 어긋남을 알려 주고, `node sync.mjs links` 로 다시 건다. 새 문서 프레임을 만들 때 머리말의 Documentation / Code 글자 이름을 그대로 두고, `components.json` 의 그 컴포넌트에 `doc`(문서 프레임 ID)을 적는다(Foundations 와 Icons 는 `figmaDocs`). 문서 사이트의 컴포넌트 / Foundations 페이지 머리말에 있는 **Figma / Code 버튼**도 같은 계획(`tokens/links.mjs`)으로 만들어지므로 양쪽이 서로를 가리킨다.
 
 ### 변수 컬렉션
 | 컬렉션 | 모드 | 변수 수 |
@@ -457,7 +461,7 @@ CSS 는 Figma 프로퍼티 이름을 그대로 `data-*` 속성으로 쓴다: `<b
 ### 공통
 1. 새 UI 는 **기존 컴포넌트를 재사용**한다. 중복 제작 금지.
 2. 컴포넌트는 **시맨틱 토큰만** 참조한다. 반경은 `shape/*`.
-3. 새 컴포넌트를 추가하면 `components.css`(`.ds-*` + `--ds-*` 변수), `components.json`, `index.html`(미리보기 섹션), 이 문서 §6, Figma `description` 을 함께 갱신한다.
+3. 새 컴포넌트를 추가하면 `components.css`(`.ds-*` + `--ds-*` 변수), `components.json`(`figma` 노드와 `doc` 문서 프레임 ID), `index.html`(미리보기 섹션), 이 문서 §6, Figma `description` 을 함께 갱신한다.
 4. 토큰을 바꿀 때는 **Figma 변수 → `node sync.mjs figma` → use_figma → `node sync.mjs pull`** 순서. `tokens.css` 를 손으로 고치지 않는다.
 5. CSS 수정 후에는 `index.html?only=번호` 를 브라우저로 렌더해 Figma 스크린샷과 나란히 비교한다.
 6. **양방향 동기화** - `ds` 폴더를 고치면 같은 작업 안에서 Figma 도 고치고, Figma 를 고치면 `ds` 도 고친다. 작업 시작 전 `node sync.mjs figma` 점검으로 이미 어긋난 곳이 없는지 확인하고, 끝나면 `node sync.mjs deploy` 로 GitHub 까지 올린다.
