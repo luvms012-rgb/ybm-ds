@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>강좌 찾기 - YBM DS 템플릿</title>
+<link rel="stylesheet" href="../../../dist/ybm-ds.css">
+<script src="../../../dist/ybm-ds.js" defer></script>
+<style>
+  /* 템플릿 배치 전용. 값은 모두 --ybm-* 토큰 */
+  body { word-break: keep-all; overflow-wrap: break-word; }
+  .tp-h1 { font-size: var(--ybm-font-size-t10); line-height: var(--ybm-line-height-t10); font-weight: var(--ybm-font-weight-bold); }
+  .tp-h2 { font-size: var(--ybm-font-size-t07); line-height: var(--ybm-line-height-t07); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-h3 { font-size: var(--ybm-font-size-t05); line-height: 22px; font-weight: var(--ybm-font-weight-semibold); }
+  .tp-sub { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
+  .tp-caption { font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); color: var(--ybm-color-fg-neutral-subtle); }
+  .tp-num { font-variant-numeric: tabular-nums; }
+  .tp-ph { display: grid; place-items: center; height: 100%; color: var(--ybm-color-fg-neutral-subtle); }
+  .tp-logo { display: grid; place-items: center; width: 88px; height: 28px; border-radius: var(--ybm-shape-xs); background: var(--ybm-color-bg-neutral); color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t03-static); line-height: var(--ybm-line-height-t03-static); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-bar { position: sticky; top: 0; z-index: var(--ybm-z-sticky); background: var(--ybm-color-bg-layer-default); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); }
+  .tp-page { background: var(--ybm-color-bg-canvas); }
+  .tp-main { display: flex; flex-direction: column; gap: var(--ybm-space-x4); max-width: 1120px; margin-inline: auto; padding: var(--ybm-space-x4) var(--ybm-space-x-global-gutter) calc(var(--ybm-space-x20) + env(safe-area-inset-bottom, 0px)); }
+  .tp-box { display: flex; flex-direction: column; gap: var(--ybm-space-x4); padding: var(--ybm-space-x5) var(--ybm-space-x4); border-radius: var(--ybm-shape-xl); background: var(--ybm-color-bg-layer-default); box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-neutral-weak); }
+  .tp-boxhead { display: flex; align-items: center; justify-content: space-between; gap: var(--ybm-space-x2); }
+  .tp-row { display: flex; align-items: center; gap: var(--ybm-space-x3); }
+  .tp-between { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ybm-space-x3); }
+  .tp-stack { display: flex; flex-direction: column; gap: var(--ybm-space-x1); min-width: 0; }
+  .tp-grid { display: grid; grid-template-columns: 1fr; gap: var(--ybm-space-x3); }
+  .tp-kpis { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--ybm-space-x3); }
+  .tp-kpi b { display: block; font-size: var(--ybm-font-size-t09); line-height: var(--ybm-line-height-t09); font-weight: var(--ybm-font-weight-bold); }
+  .tp-bars { display: flex; flex-direction: column; gap: var(--ybm-space-x3); }
+  .tp-barrow { display: grid; grid-template-columns: 88px 1fr 56px; align-items: center; gap: var(--ybm-space-x3); font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); }
+  .tp-barrow .tp-num { text-align: right; }
+  .tp-cta { position: fixed; inset: auto 0 0 0; z-index: var(--ybm-z-sticky); display: flex; gap: var(--ybm-space-x2); padding: var(--ybm-space-x3) var(--ybm-space-x-global-gutter) calc(var(--ybm-space-x3) + env(safe-area-inset-bottom, 0px)); background: var(--ybm-color-bg-layer-default); box-shadow: inset 0 1px 0 var(--ybm-color-stroke-neutral-muted); }
+  .tp-cta > .ds-btn { flex: 1 1 auto; }
+  .tp-side { position: sticky; top: 0; height: 100vh; }
+  .tp-layout { display: block; }
+  @media (min-width: 768px) {
+    .tp-h1 { font-size: var(--ybm-font-size-t12); line-height: var(--ybm-line-height-t12); }
+    .tp-main { gap: var(--ybm-space-x6); padding: var(--ybm-space-x10) var(--ybm-space-x8) var(--ybm-space-x16); }
+    .tp-box { padding: var(--ybm-space-x6); }
+    .tp-kpis { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .tp-cta { position: static; padding: 0; background: none; box-shadow: none; justify-content: flex-end; }
+    .tp-cta > .ds-btn { flex: none; }
+    .tp-layout { display: grid; grid-template-columns: auto minmax(0, 1fr); }
+  }
+  .tp-filters { display: none; }
+  .tp-cards { display: grid; grid-template-columns: 1fr; gap: var(--ybm-space-x4); }
+  .tp-course { display: flex; flex-direction: column; gap: var(--ybm-space-x3); color: inherit; text-decoration: none; }
+  .tp-course__body { display: flex; flex-direction: column; gap: var(--ybm-space-x1); }
+  .tp-course__title { font-size: var(--ybm-font-size-t05); line-height: var(--ybm-line-height-t05); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-course__price { display: flex; align-items: baseline; gap: var(--ybm-space-x2); }
+  .tp-course__price b { font-size: var(--ybm-font-size-t06); font-weight: var(--ybm-font-weight-bold); }
+  .tp-course__price s { color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t03); }
+  .tp-toolbar { display: flex; align-items: center; justify-content: space-between; gap: var(--ybm-space-x2); }
+  @media (min-width: 768px) { .tp-two { display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: var(--ybm-space-x8); align-items: start; } .tp-filters { display: flex; flex-direction: column; gap: var(--ybm-space-x6); position: sticky; top: 72px; } .tp-cards { grid-template-columns: repeat(2, 1fr); } .tp-mobile-filter { display: none; } }
+  @media (min-width: 1280px) { .tp-cards { grid-template-columns: repeat(3, 1fr); } }
+</style>
+</head>
+<body class="tp-page">
+<header class="ds-appbar u-hide-from-md tp-bar">
+  <div class="ds-appbar__left"><span class="tp-logo" aria-label="서비스 이름">로고</span></div>
+  <div class="ds-appbar__main"><h1 class="ds-appbar__title">강좌 찾기</h1></div>
+  <div class="ds-appbar__right"><button type="button" class="ds-appbar__button" aria-label="검색"><i class="ds-icon ds-icon--search" aria-hidden="true"></i></button></div>
+</header>
+<header class="ds-topnav u-show-from-md tp-bar">
+  <div class="ds-topnav__left">
+    <a class="ds-topnav__heading" href="#" aria-label="서비스 이름 홈"><span class="tp-logo">로고</span></a>
+    <nav class="ds-topnav__menu" aria-label="주요 메뉴"><a class="ds-topnav__item" href="course-catalog.html" aria-current="page">강좌</a><a class="ds-topnav__item" href="my-learning.html">내 학습</a><a class="ds-topnav__item" href="level-test.html">레벨 테스트</a><a class="ds-topnav__item" href="exam-home.html">시험 접수</a><a class="ds-topnav__item" href="help-center.html">고객센터</a></nav>
+  </div>
+  <div class="ds-topnav__end"><a class="ds-avatar" href="my-learning.html" aria-label="김민수, 내 학습"><span class="ds-avatar__initials" aria-hidden="true">김</span></a></div>
+</header>
+
+<main class="tp-main">
+  <header class="tp-stack u-show-from-md"><h1 class="tp-h1">강좌 찾기</h1><p class="tp-sub">목표 점수와 남은 기간에 맞는 강좌를 골라 보세요. 레벨 테스트를 보면 딱 맞는 강좌를 추천해 드려요.</p></header>
+  <div class="ds-chiptabs tp-mobile-filter" role="tablist" aria-label="빠른 필터"><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true">전체</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false">TOEIC 700+</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false">TOEIC 900+</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false">OPIc IH</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false">라이브</button></div>
+  <div class="tp-two">
+    <aside class="tp-filters" aria-label="필터">
+      <div class="tp-stack" style="gap: var(--ybm-space-x3)"><h2 class="tp-h3">목표</h2><fieldset class="ds-checkbox-group" aria-label="목표"><label class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control"><span class="ds-checkbox__label">TOEIC 700점</span></label><label class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control"><span class="ds-checkbox__label">TOEIC 800점</span></label><label class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control" checked><span class="ds-checkbox__label">TOEIC 900점</span></label><label class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control"><span class="ds-checkbox__label">OPIc IM</span></label><label class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control"><span class="ds-checkbox__label">OPIc IH 이상</span></label><label class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control"><span class="ds-checkbox__label">TOEIC Speaking</span></label></fieldset></div>
+      <div class="tp-stack" style="gap: var(--ybm-space-x3)"><h2 class="tp-h3">수업 방식</h2><fieldset class="ds-checkbox-group" aria-label="수업 방식"><label class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control"><span class="ds-checkbox__label">동영상 강의</span></label><label class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control"><span class="ds-checkbox__label">실시간 라이브</span></label><label class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control"><span class="ds-checkbox__label">1:1 코칭</span></label><label class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control"><span class="ds-checkbox__label">스터디 모임</span></label></fieldset></div>
+      <div class="tp-stack" style="gap: var(--ybm-space-x3)"><h2 class="tp-h3">기간</h2><div class="ds-radio-group" role="radiogroup" data-size="medium"><label class="ds-radio"><input type="radio" class="ds-radio__control" name="len" checked><span>전체</span></label><label class="ds-radio"><input type="radio" class="ds-radio__control" name="len"><span>4주 안에</span></label><label class="ds-radio"><input type="radio" class="ds-radio__control" name="len"><span>8주 안에</span></label><label class="ds-radio"><input type="radio" class="ds-radio__control" name="len"><span>12주 이상</span></label></div></div>
+      <div class="tp-stack" style="gap: var(--ybm-space-x3)"><h2 class="tp-h3">가격</h2><input type="range" class="ds-slider" min="0" max="300000" step="10000" value="200000" aria-label="최대 가격"><span class="tp-caption">20만 원까지</span></div>
+      <button type="button" class="ds-btn" data-variant="ghost" data-size="small" >필터 초기화</button>
+    </aside>
+    <section aria-labelledby="list-title">
+      <div class="tp-toolbar" style="margin-bottom: var(--ybm-space-x4)"><h2 class="tp-h3" id="list-title">강좌 <span class="tp-sub tp-num">128개</span></h2><div class="tp-row"><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="small" class="ds-btn tp-mobile-filter"><i class="ds-icon ds-icon--menu" aria-hidden="true"></i>필터</button><button type="button" class="ds-select" data-size="medium" aria-haspopup="listbox" aria-expanded="false" aria-label="정렬"><span class="ds-select__value">인기순</span></button></div></div>
+      <div class="tp-cards">
+        <a class="tp-course" href="course-detail.html"><div class="ds-imageframe " data-ratio="16:9" data-stroke aria-hidden="true"><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div><div class="tp-course__body"><span class="ds-badge" data-tone="brand" data-variant="solid">베스트</span><span class="tp-course__title">TOEIC 900+ 완성반 (8주)</span><span class="tp-caption">김강사 · 수강생 2,140명</span><span class="ds-rating" style="--ds-rating-value: 4.9" aria-label="평점 4.9"><span class="ds-rating__stars" aria-hidden="true"></span><span class="ds-rating__value tp-num">4.9</span></span><span class="tp-course__price"><span style="color: var(--ybm-color-fg-critical); font-weight: var(--ybm-font-weight-semibold)">21%</span><b class="tp-num">189,000원</b><s class="tp-num">240,000원</s></span></div></a><a class="tp-course" href="course-detail.html"><div class="ds-imageframe " data-ratio="16:9" data-stroke aria-hidden="true"><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div><div class="tp-course__body"><span class="ds-badge" data-tone="informative" data-variant="solid">라이브</span><span class="tp-course__title">TOEIC 750 보장 라이브 (6주)</span><span class="tp-caption">이강사 · 수강생 980명</span><span class="ds-rating" style="--ds-rating-value: 4.8" aria-label="평점 4.8"><span class="ds-rating__stars" aria-hidden="true"></span><span class="ds-rating__value tp-num">4.8</span></span><span class="tp-course__price"><b class="tp-num">159,000원</b></span></div></a><a class="tp-course" href="course-detail.html"><div class="ds-imageframe " data-ratio="16:9" data-stroke aria-hidden="true"><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div><div class="tp-course__body"><span class="tp-course__title">OPIc IH 2주 완성</span><span class="tp-caption">박강사 · 수강생 1,320명</span><span class="ds-rating" style="--ds-rating-value: 4.7" aria-label="평점 4.7"><span class="ds-rating__stars" aria-hidden="true"></span><span class="ds-rating__value tp-num">4.7</span></span><span class="tp-course__price"><span style="color: var(--ybm-color-fg-critical); font-weight: var(--ybm-font-weight-semibold)">23%</span><b class="tp-num">99,000원</b><s class="tp-num">129,000원</s></span></div></a><a class="tp-course" href="course-detail.html"><div class="ds-imageframe " data-ratio="16:9" data-stroke aria-hidden="true"><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div><div class="tp-course__body"><span class="tp-course__title">TOEIC 듣기 집중 2주</span><span class="tp-caption">최강사 · 수강생 760명</span><span class="ds-rating" style="--ds-rating-value: 4.6" aria-label="평점 4.6"><span class="ds-rating__stars" aria-hidden="true"></span><span class="ds-rating__value tp-num">4.6</span></span><span class="tp-course__price"><b class="tp-num">59,000원</b></span></div></a><a class="tp-course" href="course-detail.html"><div class="ds-imageframe " data-ratio="16:9" data-stroke aria-hidden="true"><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div><div class="tp-course__body"><span class="ds-badge" data-tone="positive" data-variant="solid">1:1 코칭</span><span class="tp-course__title">비즈니스 영어 말하기 12주</span><span class="tp-caption">정강사 · 수강생 410명</span><span class="ds-rating" style="--ds-rating-value: 4.9" aria-label="평점 4.9"><span class="ds-rating__stars" aria-hidden="true"></span><span class="ds-rating__value tp-num">4.9</span></span><span class="tp-course__price"><b class="tp-num">240,000원</b></span></div></a><a class="tp-course" href="course-detail.html"><div class="ds-imageframe " data-ratio="16:9" data-stroke aria-hidden="true"><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div><div class="tp-course__body"><span class="ds-badge" data-tone="neutral">입문</span><span class="tp-course__title">TOEIC 기초 문법 4주</span><span class="tp-caption">한강사 · 수강생 2,860명</span><span class="ds-rating" style="--ds-rating-value: 4.5" aria-label="평점 4.5"><span class="ds-rating__stars" aria-hidden="true"></span><span class="ds-rating__value tp-num">4.5</span></span><span class="tp-course__price"><span style="color: var(--ybm-color-fg-critical); font-weight: var(--ybm-font-weight-semibold)">34%</span><b class="tp-num">39,000원</b><s class="tp-num">59,000원</s></span></div></a>
+      </div>
+      <nav class="ds-pagination" aria-label="페이지" style="justify-content: center; margin-top: var(--ybm-space-x8)"><a class="ds-pagination__item" data-type="prev" aria-label="이전 페이지" aria-disabled="true"></a><a class="ds-pagination__item" href="#" aria-current="page">1</a><a class="ds-pagination__item" href="#">2</a><a class="ds-pagination__item" href="#">3</a><span class="ds-pagination__item" data-type="ellipsis" aria-hidden="true"></span><a class="ds-pagination__item" href="#">22</a><a class="ds-pagination__item" data-type="next" href="#" aria-label="다음 페이지"></a></nav>
+    </section>
+  </div>
+</main>
+<nav class="ds-bottomnav u-hide-from-md" aria-label="주요 메뉴"><a class="ds-bottomnav__item" href="my-learning.html"><span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--house ds-icon--lg" aria-hidden="true"></i></span><span class="ds-bottomnav__label">홈</span></a><a class="ds-bottomnav__item" href="course-catalog.html" aria-current="page"><span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--search ds-icon--lg" aria-hidden="true"></i></span><span class="ds-bottomnav__label">강좌</span></a><a class="ds-bottomnav__item" href="my-learning.html"><span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--file-text ds-icon--lg" aria-hidden="true"></i></span><span class="ds-bottomnav__label">내 학습</span></a><a class="ds-bottomnav__item" href="mypage.html"><span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--id-card ds-icon--lg" aria-hidden="true"></i></span><span class="ds-bottomnav__label">마이</span></a></nav>
+
+</body>
+</html>

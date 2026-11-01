@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>시험 일정 선택 - YBM DS 템플릿</title>
+<link rel="stylesheet" href="../../../dist/ybm-ds.css">
+<script src="../../../dist/ybm-ds.js" defer></script>
+<style>
+  /* 템플릿 배치 전용. 값은 모두 --ybm-* 토큰 */
+  body { word-break: keep-all; overflow-wrap: break-word; }
+  .tp-h1 { font-size: var(--ybm-font-size-t10); line-height: var(--ybm-line-height-t10); font-weight: var(--ybm-font-weight-bold); }
+  .tp-h2 { font-size: var(--ybm-font-size-t07); line-height: var(--ybm-line-height-t07); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-h3 { font-size: var(--ybm-font-size-t05); line-height: 22px; font-weight: var(--ybm-font-weight-semibold); }
+  .tp-sub { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
+  .tp-caption { font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); color: var(--ybm-color-fg-neutral-subtle); }
+  .tp-num { font-variant-numeric: tabular-nums; }
+  .tp-ph { display: grid; place-items: center; height: 100%; color: var(--ybm-color-fg-neutral-subtle); }
+  .tp-logo { display: grid; place-items: center; width: 88px; height: 28px; border-radius: var(--ybm-shape-xs); background: var(--ybm-color-bg-neutral); color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t03-static); line-height: var(--ybm-line-height-t03-static); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-bar { position: sticky; top: 0; z-index: var(--ybm-z-sticky); background: var(--ybm-color-bg-layer-default); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); }
+  .tp-page { background: var(--ybm-color-bg-canvas); }
+  .tp-main { display: flex; flex-direction: column; gap: var(--ybm-space-x4); max-width: 1120px; margin-inline: auto; padding: var(--ybm-space-x4) var(--ybm-space-x-global-gutter) calc(var(--ybm-space-x20) + env(safe-area-inset-bottom, 0px)); }
+  .tp-box { display: flex; flex-direction: column; gap: var(--ybm-space-x4); padding: var(--ybm-space-x5) var(--ybm-space-x4); border-radius: var(--ybm-shape-xl); background: var(--ybm-color-bg-layer-default); box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-neutral-weak); }
+  .tp-boxhead { display: flex; align-items: center; justify-content: space-between; gap: var(--ybm-space-x2); }
+  .tp-row { display: flex; align-items: center; gap: var(--ybm-space-x3); }
+  .tp-between { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ybm-space-x3); }
+  .tp-stack { display: flex; flex-direction: column; gap: var(--ybm-space-x1); min-width: 0; }
+  .tp-grid { display: grid; grid-template-columns: 1fr; gap: var(--ybm-space-x3); }
+  .tp-kpis { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--ybm-space-x3); }
+  .tp-kpi b { display: block; font-size: var(--ybm-font-size-t09); line-height: var(--ybm-line-height-t09); font-weight: var(--ybm-font-weight-bold); }
+  .tp-bars { display: flex; flex-direction: column; gap: var(--ybm-space-x3); }
+  .tp-barrow { display: grid; grid-template-columns: 88px 1fr 56px; align-items: center; gap: var(--ybm-space-x3); font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); }
+  .tp-barrow .tp-num { text-align: right; }
+  .tp-cta { position: fixed; inset: auto 0 0 0; z-index: var(--ybm-z-sticky); display: flex; gap: var(--ybm-space-x2); padding: var(--ybm-space-x3) var(--ybm-space-x-global-gutter) calc(var(--ybm-space-x3) + env(safe-area-inset-bottom, 0px)); background: var(--ybm-color-bg-layer-default); box-shadow: inset 0 1px 0 var(--ybm-color-stroke-neutral-muted); }
+  .tp-cta > .ds-btn { flex: 1 1 auto; }
+  .tp-side { position: sticky; top: 0; height: 100vh; }
+  .tp-layout { display: block; }
+  @media (min-width: 768px) {
+    .tp-h1 { font-size: var(--ybm-font-size-t12); line-height: var(--ybm-line-height-t12); }
+    .tp-main { gap: var(--ybm-space-x6); padding: var(--ybm-space-x10) var(--ybm-space-x8) var(--ybm-space-x16); }
+    .tp-box { padding: var(--ybm-space-x6); }
+    .tp-kpis { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .tp-cta { position: static; padding: 0; background: none; box-shadow: none; justify-content: flex-end; }
+    .tp-cta > .ds-btn { flex: none; }
+    .tp-layout { display: grid; grid-template-columns: auto minmax(0, 1fr); }
+  }
+  .tp-main { max-width: 960px; }
+  .tp-steps { padding: var(--ybm-space-x2) 0; }
+  .tp-rounds .ds-selectbox__label { display: flex; flex-wrap: wrap; align-items: center; gap: var(--ybm-space-x2); }
+  .tp-centers { display: flex; flex-direction: column; gap: var(--ybm-space-x2); }
+  .tp-center { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: var(--ybm-space-x3); padding: var(--ybm-space-x3) var(--ybm-space-x4); border-radius: var(--ybm-shape-lg); box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-neutral-weak); }
+  .tp-center[data-selected] { box-shadow: inset 0 0 0 2px var(--ybm-color-stroke-neutral-contrast); }
+  .tp-center__seats { display: flex; flex-direction: column; gap: var(--ybm-space-x1); width: 96px; }
+  .tp-summary { display: flex; flex-direction: column; gap: var(--ybm-space-x3); }
+  .tp-summary dl { display: grid; grid-template-columns: 72px 1fr; gap: var(--ybm-space-x1) var(--ybm-space-x3); margin: 0; font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); }
+  .tp-summary dt { color: var(--ybm-color-fg-neutral-muted); } .tp-summary dd { margin: 0; }
+  .tp-summary__total { display: flex; justify-content: space-between; padding-top: var(--ybm-space-x3); border-top: 1px solid var(--ybm-color-stroke-neutral-muted); font-size: var(--ybm-font-size-t06); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-map { display: none; }
+  @media (min-width: 768px) { .tp-main { max-width: 1120px; } .tp-two { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: var(--ybm-space-x6); align-items: start; } .tp-sticky { position: sticky; top: 72px; } .tp-map { display: block; } }
+</style>
+</head>
+<body class="tp-page">
+<header class="ds-appbar u-hide-from-md tp-bar">
+  <div class="ds-appbar__left"><button type="button" class="ds-appbar__button" aria-label="뒤로"><i class="ds-icon ds-icon--chevron-left" aria-hidden="true"></i></button></div>
+  <div class="ds-appbar__main"><h1 class="ds-appbar__title">시험 접수</h1></div>
+  <div class="ds-appbar__right"></div>
+</header>
+<header class="ds-topnav u-show-from-md tp-bar">
+  <div class="ds-topnav__left">
+    <a class="ds-topnav__heading" href="#" aria-label="서비스 이름 홈"><span class="tp-logo">로고</span></a>
+    <nav class="ds-topnav__menu" aria-label="주요 메뉴"><a class="ds-topnav__item" href="exam-schedule.html" aria-current="page">시험 접수</a><a class="ds-topnav__item" href="my-exams.html">접수 확인</a><a class="ds-topnav__item" href="exam-score.html">성적 확인</a><a class="ds-topnav__item" href="#">고사장 안내</a><a class="ds-topnav__item" href="help-center.html">고객센터</a></nav>
+  </div>
+  <div class="ds-topnav__end"><a class="ds-avatar" href="my-exams.html" aria-label="김민수, 내 정보"><span class="ds-avatar__initials" aria-hidden="true">김</span></a></div>
+</header>
+
+<main class="tp-main">
+  <header class="u-show-from-md"><h1 class="tp-h1">시험 접수</h1></header>
+  <div class="tp-steps"><ol class="ds-stepper" aria-label="접수 단계"><li class="ds-stepper__step" data-state="current" aria-current="step"><span class="ds-stepper__indicator"></span><span class="ds-stepper__label">시험 선택</span></li><li class="ds-stepper__step"><span class="ds-stepper__indicator"></span><span class="ds-stepper__label">고사장</span></li><li class="ds-stepper__step"><span class="ds-stepper__indicator"></span><span class="ds-stepper__label">응시자 정보</span></li><li class="ds-stepper__step"><span class="ds-stepper__indicator"></span><span class="ds-stepper__label">결제</span></li></ol></div>
+  <div class="tp-two">
+    <div class="tp-stack" style="gap: var(--ybm-space-x6)">
+      <section class="tp-box" aria-labelledby="kind-title">
+        <h2 class="tp-h3" id="kind-title">어떤 시험인가요?</h2>
+        <div class="ds-segmented" role="group" aria-label="시험 종류" data-layout="fill"><button type="button" class="ds-segmented__item" aria-pressed="true">TOEIC</button><button type="button" class="ds-segmented__item" aria-pressed="false">TOEIC Speaking</button><button type="button" class="ds-segmented__item" aria-pressed="false">OPIc</button></div>
+      </section>
+      <section class="tp-box" aria-labelledby="round-title">
+        <div class="tp-boxhead"><h2 class="tp-h3" id="round-title">회차 선택</h2><div class="ds-chiptabs" role="tablist" aria-label="달" data-variant="neutralOutline"><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true">11월</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false">12월</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false">1월</button></div></div>
+        <div class="tp-rounds"><div class="ds-selectbox-group" style="--ds-selectbox-columns: 1"><label class="ds-selectbox"><span class="ds-selectbox__texts"><span class="ds-selectbox__label">제512회 · 11월 23일(일) <span class="ds-badge" data-tone="positive">접수 중</span></span><span class="ds-selectbox__desc">접수 11.03 ~ 11.10 · 성적 발표 12.05 · 서울 고사장 38곳 남음</span></span><span class="ds-radio" data-tone="neutral" data-size="medium"><input type="radio" class="ds-radio__control" name="round" checked></span></label><label class="ds-selectbox"><span class="ds-selectbox__texts"><span class="ds-selectbox__label">제512회 추가 접수 · 11월 23일(일) <span class="ds-badge" data-tone="warning">11.11 ~ 11.12</span></span><span class="ds-selectbox__desc">응시료 56,900원 · 남은 고사장만 선택할 수 있어요</span></span><span class="ds-radio" data-tone="neutral" data-size="medium"><input type="radio" class="ds-radio__control" name="round"></span></label><label class="ds-selectbox"><span class="ds-selectbox__texts"><span class="ds-selectbox__label">제513회 · 12월 7일(일) <span class="ds-badge" data-tone="informative">접수 예정</span></span><span class="ds-selectbox__desc">접수 11.17 ~ 11.24 · 성적 발표 12.19</span></span><span class="ds-radio" data-tone="neutral" data-size="medium"><input type="radio" class="ds-radio__control" name="round"></span></label></div></div>
+      </section>
+      <section class="tp-box" aria-labelledby="center-title">
+        <div class="tp-boxhead"><h2 class="tp-h3" id="center-title">고사장 선택</h2><span class="tp-caption">잔여석은 10분마다 갱신돼요</span></div>
+        <div class="ds-chiptabs" role="tablist" aria-label="지역"><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true">서울</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false">경기</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false">인천</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false">부산</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false">대구</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false">대전</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false">광주</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false">그 밖</button></div>
+        <div class="ds-input" data-variant="outline" data-size="medium"><i class="ds-icon ds-icon--search" aria-hidden="true"></i><input class="ds-input__control" type="search" placeholder="고사장 이름이나 지하철역으로 찾기" aria-label="고사장 찾기"><button type="button" class="ds-input__clear" aria-label="지우기"></button></div>
+        <div class="tp-centers">
+          <label class="tp-center" data-selected><span class="ds-radio" data-tone="neutral" data-size="medium"><input type="radio" class="ds-radio__control" name="center" checked></span><span class="tp-stack"><span class="tp-h3">강남 제1고사장</span><span class="tp-caption">서울 강남구 테헤란로 152 · 2호선 역삼역 3번 출구 도보 4분</span></span><span class="tp-center__seats"><span class="ds-badge" data-tone="positive">남음 12</span><div class="ds-progress" role="progressbar" aria-valuenow="86" aria-valuemin="0" aria-valuemax="100" style="--ds-progress-value: 86%" data-tone="neutral" data-size="small"></div></span></label><label class="tp-center"><span class="ds-radio" data-tone="neutral" data-size="medium"><input type="radio" class="ds-radio__control" name="center"></span><span class="tp-stack"><span class="tp-h3">서초 제2고사장</span><span class="tp-caption">서울 서초구 서초대로 301 · 2호선 교대역 9번 출구 도보 6분</span></span><span class="tp-center__seats"><span class="ds-badge" data-tone="positive">남음 48</span><div class="ds-progress" role="progressbar" aria-valuenow="62" aria-valuemin="0" aria-valuemax="100" style="--ds-progress-value: 62%" data-tone="neutral" data-size="small"></div></span></label><label class="tp-center"><span class="ds-radio" data-tone="neutral" data-size="medium"><input type="radio" class="ds-radio__control" name="center"></span><span class="tp-stack"><span class="tp-h3">종로 제1고사장</span><span class="tp-caption">서울 종로구 종로 51 · 1호선 종각역 6번 출구 도보 3분</span></span><span class="tp-center__seats"><span class="ds-badge" data-tone="warning">남음 3</span><div class="ds-progress" role="progressbar" aria-valuenow="97" aria-valuemin="0" aria-valuemax="100" style="--ds-progress-value: 97%" data-size="small"></div></span></label><label class="tp-center"><span class="ds-radio" data-tone="neutral" data-size="medium"><input type="radio" class="ds-radio__control" name="center" disabled></span><span class="tp-stack"><span class="tp-h3">마포 제3고사장</span><span class="tp-caption">서울 마포구 양화로 160 · 2호선 홍대입구역 1번 출구 도보 5분</span></span><span class="tp-center__seats"><span class="ds-badge" data-tone="neutral">마감</span><div class="ds-progress" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="--ds-progress-value: 100%" data-tone="neutral" data-size="small"></div></span></label>
+        </div>
+        <button type="button" class="ds-btn" data-variant="neutralWeak" data-size="medium" data-width="fill" >고사장 더 보기</button>
+      </section>
+    </div>
+    <aside class="tp-stack tp-sticky" style="gap: var(--ybm-space-x4)">
+      <div class="tp-map"><div class="ds-imageframe " data-ratio="4:3" data-stroke aria-hidden="true"><span class="tp-ph"><i class="ds-icon ds-icon--map-pin ds-icon--lg" aria-hidden="true"></i> <i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div></div>
+      <section class="tp-box tp-summary" aria-labelledby="sum-title">
+        <h2 class="tp-h3" id="sum-title">선택한 내용</h2>
+        <dl><dt>시험</dt><dd>TOEIC 제512회</dd><dt>시험일</dt><dd class="tp-num">2026.11.23 (일) 09:20 입실</dd><dt>고사장</dt><dd>강남 제1고사장</dd><dt>접수 유형</dt><dd>정기 접수</dd></dl>
+        <div class="tp-summary__total"><span>응시료</span><span class="tp-num">52,500원</span></div>
+        <div class="ds-callout" data-tone="neutral"><i class="ds-icon ds-icon--info-solid" aria-hidden="true"></i><p class="ds-callout__content">시험일 기준 9일 전까지 취소하면 전액 환불돼요.</p></div>
+        <div class="tp-cta"><a class="ds-btn" data-variant="brandSolid" data-size="large" data-width="fill" href="exam-applicant.html" >다음: 응시자 정보</a></div>
+      </section>
+    </aside>
+  </div>
+</main>
+</body>
+</html>

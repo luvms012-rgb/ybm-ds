@@ -148,6 +148,19 @@ import '@ybm/ds/dist/ybm-ds.js';
 | 5 | Order Complete | 주문 번호, 배송 예정일, 다음 행동 | Result Section |
 | 6 | Event Page | 기획전 한 페이지. 큰 그림 + 상품 묶음 여러 개 | Image Frame, Carousel |
 
+## 8. 시험과 학습 템플릿 (2026-11-01 집, 사용자 요청)
+
+YBM 의 두 얼굴(시험 접수 대행, 온라인 교육)에 맞춰 템플릿 14종을 더했다. 외부 시험 사이트의 화면을 그대로 베끼지 않고, 그 흐름(회차 → 고사장 → 응시자 정보와 사진 → 결제 → 수험표 → 성적)을 우리 DS 부품으로 더 쉽게 다시 짰다. 시험 이름(TOEIC, OPIc)은 YBM 이 직접 운영하는 서비스라 그대로 썼고, 회사와 사람 이름은 가상이다.
+
+| 분류 | 템플릿 | 핵심 |
+|---|---|---|
+| Exam | Exam Home, Exam Schedule, Applicant Info, Admission Ticket, Score Report, My Exams | 마감 Timer, 회차와 고사장 선택 상자(잔여석 Progress), 사진 규격 안내, 수험표(QR 자리), 성적 분석 막대 |
+| Exam B2B | Group Registration, Exam Admin Dashboard | 명단 파일 올리기와 오류 줄 바로 고치기, 응시자 표의 선택 동작 막대 |
+| Learning | Course Catalog, Course Detail, Classroom, My Learning, Level Test | 필터와 카드, 커리큘럼 아코디언과 신청 상자, 영상과 목차, 목표 대비 진도, 문항 번호판 |
+| Learning B2B | Learning Admin | 과정별 수료율, 교육 전후 시험 점수 비교, 임직원 배정 표와 Dialog |
+
+생성기는 로컬 스크래치에 두고 결과 HTML 만 저장소에 넣었다. 다음 후보: 성적표 PDF 미리 보기, 고사장 지도 상세, 라이브 수업 화면, 수료증.
+
 ## 7. 템플릿 추가와 고도화 검토 (2026-10-31 집, 사용자 요청)
 
 사내 UI Patterns 모음(웹 26,712장, 분류 59개, 큰 묶음 7개)을 기준으로 우리 템플릿 26종을 대조했다. 사용자가 짚어 준 서비스 3곳(금융 조회형, 보험 다이렉트형, 소상공인 관리자형)의 화면 구성도 함께 봤다. 템플릿은 범용이므로 서비스 이름이 아니라 화면 유형으로 적는다. 자세한 출처는 로컬 REFERENCE-ANALYSIS.md 에만 있다.

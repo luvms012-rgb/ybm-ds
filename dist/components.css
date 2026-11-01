@@ -1005,7 +1005,7 @@ button.ds-input__prefix:hover { color: var(--ybm-color-fg-neutral); }
 .ds-chip[data-layout="iconOnly"] { width: var(--ds-chip-height); min-width: var(--ds-chip-height); padding: 0; }
 .ds-chip[data-variant="outlineStrong"] { --ds-chip-bg: var(--ybm-color-bg-layer-default); --ds-chip-line: var(--ybm-color-stroke-neutral-weak); }
 .ds-chip[data-variant="outlineWeak"]   { --ds-chip-bg: var(--ybm-color-bg-layer-default); --ds-chip-line: var(--ybm-color-stroke-neutral-muted); }
-.ds-chip[aria-pressed="true"] { --ds-chip-bg: var(--ybm-color-bg-neutral-solid); --ds-chip-fg: var(--ybm-color-fg-on-neutral-solid); font-weight: var(--ybm-font-weight-semibold); }
+.ds-chip[aria-pressed="true"] { --ds-chip-bg: var(--ybm-color-bg-neutral-solid); --ds-chip-fg: var(--ybm-color-fg-on-neutral-solid); --ds-chip-line: var(--ybm-color-bg-neutral-solid); font-weight: var(--ybm-font-weight-semibold); } /* 선택되면 선도 같은 색: 고리처럼 안 보이게 */
 .ds-chip[data-variant="outlineWeak"][aria-pressed="true"] { --ds-chip-bg: var(--ybm-color-bg-neutral); --ds-chip-fg: var(--ybm-color-fg-neutral); --ds-chip-line: var(--ybm-color-stroke-neutral-contrast); font-weight: var(--ybm-font-weight-medium); }
 .ds-chip:disabled { opacity: 0.5; cursor: not-allowed; }
 /* 호버 — 마우스 환경에서만, Figma 의 pressed 색을 쓴다 (DS 공통 규칙) */

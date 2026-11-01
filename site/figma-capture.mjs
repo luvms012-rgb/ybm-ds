@@ -73,8 +73,8 @@ function serialize() {
     const vb = (svg.match(/viewBox="([^"]+)"/) || [, '0 0 24 24'])[1].split(/\s+/).map(Number);
     const root = (svg.match(/<svg([^>]*)>/) || [, ''])[1];
     const inner = svg.replace(/^[\s\S]*?<svg[^>]*>/, '').replace(/<\/svg>\s*$/, '');
-    const attrs = ['fill', 'stroke', 'stroke-width', 'stroke-linecap', 'stroke-linejoin'].map((k) => { const v = (root.match(new RegExp(`\\s${k}="([^"]+)"`)) || [])[1]; return v ? `${k}="${v}"` : ''; }).join(' ');
-    const recolor = (s) => s.replace(/"(black|#000|#000000)"/g, `"${color.hex}"`);
+    const attrs = ['fill', 'stroke', 'stroke-width', 'stroke-linecap', 'stroke-linejoin'].map((k) => { const v = (root.match(new RegExp(`\\s${k}=["']([^"']+)["']`)) || [])[1]; return v ? `${k}="${v}"` : ''; }).join(' ');
+    const recolor = (s) => s.replace(/(["'])(black|#000|#000000)\1/g, `"${color.hex}"`);
     const size = Math.min(w, h);
     const rep = /repeat|space/.test(cs.webkitMaskRepeat || cs.maskRepeat || '') && w > h * 1.5;
     const sz = px((cs.webkitMaskSize || cs.maskSize || '').split(' ')[0]) || size;
@@ -173,10 +173,11 @@ function serialize() {
             if (!p.content || p.content === 'none' || p.display === 'none') continue;
             const m = (p.transform.match(/matrix\(([^)]+)\)/) || [, '1,0,0,1,0,0'])[1].split(',').map(Number);
             if (m[0] === 0) continue;
-            const pw = px(p.width) * m[0], ph2 = px(p.height) * m[3];
+            const insetV = (v) => px(v); const pw0 = p.width === 'auto' ? w - insetV(p.left) - insetV(p.right) : px(p.width), ph0 = p.height === 'auto' ? h - insetV(p.top) - insetV(p.bottom) : px(p.height); const pw = pw0 * m[0], ph2 = ph0 * m[3];
             if (!pw || !ph2) continue;
-            const pxl = p.position === 'absolute' && p.left !== 'auto' ? x + px(p.left) + m[4] : x + (w - pw) / 2 + m[4];
-            const pyt = p.position === 'absolute' && p.top !== 'auto' ? y + px(p.top) + m[5] : y + (h - ph2) / 2 + m[5];
+            const tr = (p.translate && p.translate !== 'none' ? p.translate : '0px 0px').split(/\s+/); const tv = (v, base) => v.endsWith('%') ? parseFloat(v) / 100 * base : px(v); const tx = tv(tr[0] || '0px', pw), ty = tv(tr[1] || '0px', ph2);
+            const pxl = (p.position === 'absolute' && p.left !== 'auto' ? x + px(p.left) : x + (w - pw) / 2) + m[4] + tx;
+            const pyt = (p.position === 'absolute' && p.top !== 'auto' ? y + px(p.top) : y + (h - ph2) / 2) + m[5] + ty;
             const pc = col(p.backgroundColor);
             if (/url\(/.test(p.webkitMaskImage || p.maskImage || '')) { if (pc) self += iconSvg(p, pxl, pyt, pw, ph2, pc); }
             else if (pc) self += `${rr(pxl, pyt, pw, ph2, radii(p).map((v) => v * m[0]))} id="mark" ${paint(pc)}/>`;
@@ -184,7 +185,9 @@ function serialize() {
         }
       }
     }
+    const closed = el.tagName === 'DETAILS' && !el.open;
     for (const ch of el.childNodes) {
+      if (closed && !(ch.nodeType === 1 && ch.tagName === 'SUMMARY')) continue;
       if (ch.nodeType === 3) { if (ch.textContent.trim()) kids += textLines(ch, cs); }
       else if (ch.nodeType === 1) {
         if (ch.tagName === 'svg' || ch.tagName === 'SVG') { const b = ch.getBoundingClientRect(); const vb = ch.viewBox && ch.viewBox.baseVal; const c = col(getComputedStyle(ch).color); kids += `<svg x="${n2(b.left + scrollX)}" y="${n2(b.top + scrollY)}" width="${n2(b.width)}" height="${n2(b.height)}"${vb && vb.width ? ` viewBox="${vb.x} ${vb.y} ${vb.width} ${vb.height}"` : ''}>${ch.innerHTML.replace(/currentColor/g, c ? c.hex : '#000')}</svg>`; }

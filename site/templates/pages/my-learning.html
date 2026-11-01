@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>내 학습 - YBM DS 템플릿</title>
+<link rel="stylesheet" href="../../../dist/ybm-ds.css">
+<script src="../../../dist/ybm-ds.js" defer></script>
+<style>
+  /* 템플릿 배치 전용. 값은 모두 --ybm-* 토큰 */
+  body { word-break: keep-all; overflow-wrap: break-word; }
+  .tp-h1 { font-size: var(--ybm-font-size-t10); line-height: var(--ybm-line-height-t10); font-weight: var(--ybm-font-weight-bold); }
+  .tp-h2 { font-size: var(--ybm-font-size-t07); line-height: var(--ybm-line-height-t07); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-h3 { font-size: var(--ybm-font-size-t05); line-height: 22px; font-weight: var(--ybm-font-weight-semibold); }
+  .tp-sub { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
+  .tp-caption { font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); color: var(--ybm-color-fg-neutral-subtle); }
+  .tp-num { font-variant-numeric: tabular-nums; }
+  .tp-ph { display: grid; place-items: center; height: 100%; color: var(--ybm-color-fg-neutral-subtle); }
+  .tp-logo { display: grid; place-items: center; width: 88px; height: 28px; border-radius: var(--ybm-shape-xs); background: var(--ybm-color-bg-neutral); color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t03-static); line-height: var(--ybm-line-height-t03-static); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-bar { position: sticky; top: 0; z-index: var(--ybm-z-sticky); background: var(--ybm-color-bg-layer-default); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); }
+  .tp-page { background: var(--ybm-color-bg-canvas); }
+  .tp-main { display: flex; flex-direction: column; gap: var(--ybm-space-x4); max-width: 1120px; margin-inline: auto; padding: var(--ybm-space-x4) var(--ybm-space-x-global-gutter) calc(var(--ybm-space-x20) + env(safe-area-inset-bottom, 0px)); }
+  .tp-box { display: flex; flex-direction: column; gap: var(--ybm-space-x4); padding: var(--ybm-space-x5) var(--ybm-space-x4); border-radius: var(--ybm-shape-xl); background: var(--ybm-color-bg-layer-default); box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-neutral-weak); }
+  .tp-boxhead { display: flex; align-items: center; justify-content: space-between; gap: var(--ybm-space-x2); }
+  .tp-row { display: flex; align-items: center; gap: var(--ybm-space-x3); }
+  .tp-between { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ybm-space-x3); }
+  .tp-stack { display: flex; flex-direction: column; gap: var(--ybm-space-x1); min-width: 0; }
+  .tp-grid { display: grid; grid-template-columns: 1fr; gap: var(--ybm-space-x3); }
+  .tp-kpis { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--ybm-space-x3); }
+  .tp-kpi b { display: block; font-size: var(--ybm-font-size-t09); line-height: var(--ybm-line-height-t09); font-weight: var(--ybm-font-weight-bold); }
+  .tp-bars { display: flex; flex-direction: column; gap: var(--ybm-space-x3); }
+  .tp-barrow { display: grid; grid-template-columns: 88px 1fr 56px; align-items: center; gap: var(--ybm-space-x3); font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); }
+  .tp-barrow .tp-num { text-align: right; }
+  .tp-cta { position: fixed; inset: auto 0 0 0; z-index: var(--ybm-z-sticky); display: flex; gap: var(--ybm-space-x2); padding: var(--ybm-space-x3) var(--ybm-space-x-global-gutter) calc(var(--ybm-space-x3) + env(safe-area-inset-bottom, 0px)); background: var(--ybm-color-bg-layer-default); box-shadow: inset 0 1px 0 var(--ybm-color-stroke-neutral-muted); }
+  .tp-cta > .ds-btn { flex: 1 1 auto; }
+  .tp-side { position: sticky; top: 0; height: 100vh; }
+  .tp-layout { display: block; }
+  @media (min-width: 768px) {
+    .tp-h1 { font-size: var(--ybm-font-size-t12); line-height: var(--ybm-line-height-t12); }
+    .tp-main { gap: var(--ybm-space-x6); padding: var(--ybm-space-x10) var(--ybm-space-x8) var(--ybm-space-x16); }
+    .tp-box { padding: var(--ybm-space-x6); }
+    .tp-kpis { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .tp-cta { position: static; padding: 0; background: none; box-shadow: none; justify-content: flex-end; }
+    .tp-cta > .ds-btn { flex: none; }
+    .tp-layout { display: grid; grid-template-columns: auto minmax(0, 1fr); }
+  }
+  .tp-main { max-width: 1120px; }
+  .tp-goal { display: grid; grid-template-columns: 1fr; gap: var(--ybm-space-x4); }
+  .tp-goal__num b { font-size: var(--ybm-font-size-t10); line-height: var(--ybm-line-height-t10); font-weight: var(--ybm-font-weight-bold); }
+  .tp-streak { display: flex; gap: var(--ybm-space-x2); }
+  .tp-day { display: flex; flex: 1; flex-direction: column; align-items: center; gap: var(--ybm-space-x1); font-size: var(--ybm-font-size-t02); color: var(--ybm-color-fg-neutral-muted); }
+  .tp-day span:first-child { display: grid; place-items: center; width: 32px; height: 32px; border-radius: var(--ybm-shape-pill); background: var(--ybm-color-bg-neutral); }
+  .tp-day[data-done] span:first-child { background: var(--ybm-color-bg-brand-solid); color: var(--ybm-color-fg-on-brand-solid); }
+  .tp-day[data-today] span:first-child { box-shadow: inset 0 0 0 2px var(--ybm-color-stroke-brand-solid); }
+  .tp-course { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: var(--ybm-space-x3); align-items: center; }
+  @media (min-width: 768px) { .tp-goal { grid-template-columns: 1.2fr 1fr 1fr; } .tp-two { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: var(--ybm-space-x4); align-items: start; } .tp-course { grid-template-columns: 160px minmax(0, 1fr) auto; } }
+</style>
+</head>
+<body class="tp-page">
+<header class="ds-appbar u-hide-from-md tp-bar">
+  <div class="ds-appbar__left"><span class="tp-logo" aria-label="서비스 이름">로고</span></div>
+  <div class="ds-appbar__main"><h1 class="ds-appbar__title">내 학습</h1></div>
+  <div class="ds-appbar__right"><a class="ds-appbar__button" href="#" aria-label="알림"><i class="ds-icon ds-icon--inbox" aria-hidden="true"></i></a></div>
+</header>
+<header class="ds-topnav u-show-from-md tp-bar">
+  <div class="ds-topnav__left">
+    <a class="ds-topnav__heading" href="#" aria-label="서비스 이름 홈"><span class="tp-logo">로고</span></a>
+    <nav class="ds-topnav__menu" aria-label="주요 메뉴"><a class="ds-topnav__item" href="course-catalog.html">강좌</a><a class="ds-topnav__item" href="my-learning.html" aria-current="page">내 학습</a><a class="ds-topnav__item" href="level-test.html">레벨 테스트</a><a class="ds-topnav__item" href="exam-home.html">시험 접수</a><a class="ds-topnav__item" href="help-center.html">고객센터</a></nav>
+  </div>
+  <div class="ds-topnav__end"><a class="ds-avatar" href="mypage.html" aria-label="김민수, 마이페이지"><span class="ds-avatar__initials" aria-hidden="true">김</span></a></div>
+</header>
+
+<main class="tp-main">
+  <header class="tp-between"><div class="tp-stack"><h1 class="tp-h1">민수 님, 오늘도 이어 볼까요?</h1><p class="tp-sub">이번 주 4일 학습 · 지난주보다 1시간 더 했어요.</p></div><a class="ds-btn" data-variant="neutralWeak" data-size="medium" href="level-test.html" ><i class="ds-icon ds-icon--sparkles" aria-hidden="true"></i>레벨 테스트 다시 보기</a></header>
+  <div class="tp-goal">
+    <section class="tp-box" aria-labelledby="cont-title">
+      <div class="tp-boxhead"><h2 class="tp-h3" id="cont-title">이어 보기</h2><span class="ds-badge" data-tone="informative">3주차</span></div>
+      <div class="tp-course"><div class="ds-imageframe " data-ratio="16:9" data-stroke aria-hidden="true"><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div><div class="tp-stack"><span class="tp-h3">14. 접속부사 고르기</span><span class="tp-caption">TOEIC 900+ 완성반 · 12:04 / 31:20</span><div class="ds-progress" role="progressbar" aria-valuenow="38" aria-valuemin="0" aria-valuemax="100" style="--ds-progress-value: 38%" data-size="small"></div></div><a class="ds-btn" data-variant="brandSolid" data-size="medium" href="classroom.html" ><i class="ds-icon ds-icon--arrow-right" aria-hidden="true"></i>이어 보기</a></div>
+    </section>
+    <section class="tp-box" aria-labelledby="goal-title">
+      <h2 class="tp-h3" id="goal-title">목표</h2>
+      <div class="tp-between"><div class="tp-goal__num tp-stack"><span class="tp-caption">목표 점수</span><b class="tp-num">900</b></div><div class="tp-goal__num tp-stack" style="text-align: right"><span class="tp-caption">최근 모의고사</span><b class="tp-num" style="color: var(--ybm-color-fg-brand)">845</b></div></div>
+      <div class="ds-progress" role="progressbar" aria-valuenow="84" aria-valuemin="0" aria-valuemax="100" style="--ds-progress-value: 84%"></div>
+      <p class="tp-caption">제512회 시험까지 <b>D-22</b> · 목표까지 55점 남았어요</p>
+    </section>
+    <section class="tp-box" aria-labelledby="week-title">
+      <h2 class="tp-h3" id="week-title">이번 주 학습</h2>
+      <div class="tp-streak"><div class="tp-day" data-done><span><i class="ds-icon ds-icon--check ds-icon--sm" aria-hidden="true"></i></span><span>월</span></div><div class="tp-day" data-done><span><i class="ds-icon ds-icon--check ds-icon--sm" aria-hidden="true"></i></span><span>화</span></div><div class="tp-day"><span></span><span>수</span></div><div class="tp-day" data-done><span><i class="ds-icon ds-icon--check ds-icon--sm" aria-hidden="true"></i></span><span>목</span></div><div class="tp-day" data-done><span><i class="ds-icon ds-icon--check ds-icon--sm" aria-hidden="true"></i></span><span>금</span></div><div class="tp-day" data-today><span></span><span>토</span></div><div class="tp-day"><span></span><span>일</span></div></div>
+      <p class="tp-caption">4일 연속 학습 중 · 이번 주 3시간 20분</p>
+    </section>
+  </div>
+  <div class="tp-two">
+    <section class="tp-box" aria-labelledby="my-title">
+      <div class="tp-boxhead"><h2 class="tp-h3" id="my-title">수강 중인 강좌</h2><button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall" >전체 보기</button></div>
+      <div class="tp-course"><div class="ds-imageframe " data-ratio="16:9" data-stroke aria-hidden="true"><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div><div class="tp-stack"><span class="tp-h3">TOEIC 900+ 완성반</span><span class="tp-caption">8주 과정 · 36일 남음 · 진도 42%</span><div class="ds-progress" role="progressbar" aria-valuenow="42" aria-valuemin="0" aria-valuemax="100" style="--ds-progress-value: 42%" data-size="small"></div></div><a class="ds-btn" data-variant="neutralWeak" data-size="small" href="classroom.html" >이어 보기</a></div><div class="tp-course"><div class="ds-imageframe " data-ratio="16:9" data-stroke aria-hidden="true"><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div><div class="tp-stack"><span class="tp-h3">TOEIC 듣기 집중 2주</span><span class="tp-caption">2주 과정 · 5일 남음 · 진도 80%</span><div class="ds-progress" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="--ds-progress-value: 80%" data-size="small"></div></div><a class="ds-btn" data-variant="neutralWeak" data-size="small" href="classroom.html" >이어 보기</a></div><div class="tp-course"><div class="ds-imageframe " data-ratio="16:9" data-stroke aria-hidden="true"><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div><div class="tp-stack"><span class="tp-h3">비즈니스 영어 말하기 12주</span><span class="tp-caption">12주 과정 · 시작 전 · 진도 0%</span><div class="ds-progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="--ds-progress-value: 0%" data-tone="neutral" data-size="small"></div></div><a class="ds-btn" data-variant="neutralWeak" data-size="small" href="classroom.html" >시작하기</a></div>
+    </section>
+    <aside class="tp-stack" style="gap: var(--ybm-space-x4)">
+      <section class="tp-box" aria-labelledby="up-title">
+        <h2 class="tp-h3" id="up-title">다가오는 일정</h2>
+        <ul class="ds-list" data-divider>
+          <li><div class="ds-list-item"><span class="ds-list-item__prefix"><i class="ds-icon ds-icon--calendar" aria-hidden="true"></i></span><span class="ds-list-item__content"><span class="ds-list-item__title">라이브 질의응답 · 파트 7</span><span class="ds-list-item__desc">11.04 (화) 20:00 · 김강사</span></span><span class="ds-list-item__suffix"><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="xsmall" >알림</button></span></div></li>
+          <li><div class="ds-list-item"><span class="ds-list-item__prefix"><i class="ds-icon ds-icon--file-text" aria-hidden="true"></i></span><span class="ds-list-item__content"><span class="ds-list-item__title">실전 모의고사 3회</span><span class="ds-list-item__desc">11.08 (토)까지 · 120분</span></span></div></li>
+          <li><div class="ds-list-item"><span class="ds-list-item__prefix"><i class="ds-icon ds-icon--star" aria-hidden="true"></i></span><span class="ds-list-item__content"><span class="ds-list-item__title">TOEIC 제512회 시험</span><span class="ds-list-item__desc">11.23 (일) 09:20 · 강남 제1고사장</span></span><span class="ds-list-item__suffix"><a class="ds-btn" data-variant="neutralWeak" data-size="xsmall" href="exam-ticket.html" >수험표</a></span></div></li>
+        </ul>
+      </section>
+      <div class="ds-callout" data-tone="informative"><i class="ds-icon ds-icon--sparkles" aria-hidden="true"></i><p class="ds-callout__content"><strong class="ds-callout__title">추천</strong>  최근 모의고사에서 파트 7 정답률이 71%예요. 속독 특강 2강을 추천해요.  <a class="ds-callout__link" href="course-catalog.html">보러 가기</a></p></div>
+    </aside>
+  </div>
+</main>
+<nav class="ds-bottomnav u-hide-from-md" aria-label="주요 메뉴"><a class="ds-bottomnav__item" href="my-learning.html"><span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--house ds-icon--lg" aria-hidden="true"></i></span><span class="ds-bottomnav__label">홈</span></a><a class="ds-bottomnav__item" href="course-catalog.html"><span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--search ds-icon--lg" aria-hidden="true"></i></span><span class="ds-bottomnav__label">강좌</span></a><a class="ds-bottomnav__item" href="my-learning.html" aria-current="page"><span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--file-text ds-icon--lg" aria-hidden="true"></i></span><span class="ds-bottomnav__label">내 학습</span></a><a class="ds-bottomnav__item" href="mypage.html"><span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--id-card ds-icon--lg" aria-hidden="true"></i></span><span class="ds-bottomnav__label">마이</span></a></nav>
+
+</body>
+</html>
