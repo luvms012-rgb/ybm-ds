@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>설정 대화상자 - YBM DS 템플릿</title>
+<link rel="stylesheet" href="../../../dist/ybm-ds.css">
+<script src="../../../dist/ybm-ds.js" defer></script>
+<style>
+  /* 템플릿 배치 전용. 값은 모두 --ybm-* 토큰 */
+  body { word-break: keep-all; overflow-wrap: break-word; }
+  .tp-app { display: flex; flex-direction: column; min-height: 100vh; background: var(--ybm-color-bg-layer-default); }
+  .tp-head { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: var(--ybm-space-x4); padding: var(--ybm-space-x5) var(--ybm-space-x4); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); }
+  .tp-head__texts { display: flex; flex-direction: column; gap: var(--ybm-space-x1); min-width: 0; }
+  .tp-head__tools { display: flex; flex-wrap: wrap; align-items: flex-end; gap: var(--ybm-space-x2); }
+  .tp-h1 { font-size: var(--ybm-font-size-t09); line-height: var(--ybm-line-height-t09); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; }
+  .tp-h2 { font-size: var(--ybm-font-size-t07); line-height: var(--ybm-line-height-t07); font-weight: var(--ybm-font-weight-semibold); letter-spacing: -0.02em; }
+  .tp-h3 { font-size: var(--ybm-font-size-t05); line-height: var(--ybm-line-height-t05); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-h4 { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-sub { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
+  .tp-caption { font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); color: var(--ybm-color-fg-neutral-subtle); }
+  .tp-num { font-variant-numeric: tabular-nums; }
+  .tp-body { display: flex; flex: 1 1 auto; flex-direction: column; min-height: 0; }
+  .tp-content { display: flex; flex: 1 1 auto; flex-direction: column; gap: var(--ybm-space-x8); min-width: 0; padding: var(--ybm-space-x5) var(--ybm-space-x4) var(--ybm-space-x10); }
+  .tp-panel { display: flex; flex-direction: column; gap: var(--ybm-space-x6); padding: var(--ybm-space-x5) var(--ybm-space-x4); box-shadow: inset 0 1px 0 var(--ybm-color-stroke-neutral-muted); }
+  .tp-sec { display: flex; flex-direction: column; gap: var(--ybm-space-x3); min-width: 0; }
+  .tp-sec-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ybm-space-x2) var(--ybm-space-x3); }
+  .tp-sec-head__texts { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--ybm-space-x1) var(--ybm-space-x3); }
+  .tp-row { display: flex; align-items: center; gap: var(--ybm-space-x2); min-width: 0; }
+  .tp-between { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ybm-space-x2); }
+  .tp-stack { display: flex; flex-direction: column; gap: var(--ybm-space-x1); min-width: 0; }
+  .tp-g2, .tp-g3, .tp-g4, .tp-g5, .tp-g6 { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ybm-space-x3); }
+  .tp-card { min-width: 0; }
+  .tp-card.ds-card { gap: var(--ybm-space-x3); }
+  .tp-span2 { grid-column: auto; }
+  .tp-kpi__label { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
+  .tp-kpi__value { font-size: var(--ybm-font-size-t09); line-height: var(--ybm-line-height-t09); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+  .tp-delta { display: inline-flex; align-items: center; gap: 2px; font-size: var(--ybm-font-size-t03); line-height: var(--ybm-line-height-t03); font-weight: var(--ybm-font-weight-medium); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .tp-delta .ds-icon { --ds-icon-size: 14px; }
+  .tp-delta[data-tone="up"] { color: var(--ybm-color-fg-positive); }
+  .tp-delta[data-tone="down"] { color: var(--ybm-color-fg-critical); }
+  .tp-delta[data-tone="flat"] { color: var(--ybm-color-fg-neutral-muted); }
+  .tp-chart { display: block; width: 100%; height: auto; overflow: visible; }
+  .tp-chart text { fill: var(--ybm-color-fg-neutral-subtle); font-size: 11px; font-family: inherit; }
+  .tp-chart .tp-grid-line { stroke: var(--ybm-color-stroke-neutral-muted); stroke-width: 1; }
+  .tp-legend { display: flex; flex-wrap: wrap; gap: var(--ybm-space-x1) var(--ybm-space-x4); font-size: var(--ybm-font-size-t03); line-height: var(--ybm-line-height-t03); color: var(--ybm-color-fg-neutral-muted); }
+  .tp-legend__item { display: inline-flex; align-items: center; gap: var(--ybm-space-x1_5); }
+  .tp-swatch { flex: none; width: 10px; height: 10px; border-radius: 3px; background: var(--c, var(--ybm-color-chart-series-1)); }
+  .tp-split { display: flex; height: 12px; overflow: hidden; border-radius: var(--ybm-shape-pill); background: var(--ybm-color-bg-neutral); }
+  .tp-split > span { height: 100%; background: var(--c); }
+  .tp-split > span + span { box-shadow: inset 2px 0 0 var(--ybm-color-bg-layer-default); }
+  .tp-ph { display: grid; place-items: center; width: 100%; height: 100%; color: var(--ybm-color-fg-neutral-subtle); background: var(--ybm-color-bg-neutral); }
+  .tp-logo { display: inline-grid; place-items: center; width: 88px; height: 28px; border-radius: var(--ybm-shape-xs); background: var(--ybm-color-bg-neutral); color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t03-static); line-height: var(--ybm-line-height-t03-static); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-bar { position: sticky; top: 0; z-index: var(--ybm-z-sticky); background: var(--ybm-color-bg-layer-default); }
+  .tp-track { display: flex; flex-direction: column; gap: var(--ybm-space-x1); min-width: 120px; }
+  .tp-hide-sm { display: none; }
+  .tp-scroll-x { overflow-x: auto; }
+  .tp-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .tp-kbd { display: inline-grid; place-items: center; min-width: 20px; height: 20px; padding: 0 4px; border-radius: var(--ybm-shape-2xs); box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-neutral-muted); color: var(--ybm-color-fg-neutral-muted); font-size: var(--ybm-font-size-t01); font-family: inherit; }
+  @media (min-width: 768px) {
+    .tp-head { padding: var(--ybm-space-x6); }
+    .tp-content { padding: var(--ybm-space-x6) var(--ybm-space-x6) var(--ybm-space-x12); }
+    .tp-panel { padding: var(--ybm-space-x6); }
+    .tp-g2, .tp-g4, .tp-g6 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .tp-g3, .tp-g5 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .tp-hide-sm { display: revert; }
+  }
+  @media (min-width: 1024px) {
+    .tp-body--panel { flex-direction: row; }
+    .tp-body--panel > .tp-panel { flex: none; width: 400px; box-shadow: inset 1px 0 0 var(--ybm-color-stroke-neutral-muted); }
+    .tp-g3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .tp-g4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .tp-g5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+    .tp-g6 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .tp-span2 { grid-column: span 2; }
+    .tp-span3 { grid-column: span 3; }
+  }
+  @media (min-width: 1280px) { .tp-g6 { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
+
+  .tp-snav { display: flex; flex-direction: column; gap: var(--ybm-space-x1); }
+  .tp-snav__group { font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); color: var(--ybm-color-fg-neutral-subtle); padding: var(--ybm-space-x3) var(--ybm-space-x2) var(--ybm-space-x1); }
+  .tp-snav__item { display: flex; align-items: center; gap: var(--ybm-space-x2); width: 100%; min-height: 36px; padding: 0 var(--ybm-space-x2); border: 0; border-radius: var(--ybm-shape-sm); background: none; color: var(--ybm-color-fg-neutral-muted); font: inherit; font-size: var(--ybm-font-size-t04); text-align: left; text-decoration: none; cursor: pointer; }
+  .tp-snav__item:hover { background: var(--ybm-color-bg-transparent-pressed); }
+  .tp-snav__item[aria-current="page"] { background: var(--ybm-color-bg-neutral); color: var(--ybm-color-fg-neutral); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-srow { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ybm-space-x3); padding-block: var(--ybm-space-x4); }
+  .tp-srow + .tp-srow { box-shadow: inset 0 1px 0 var(--ybm-color-stroke-neutral-muted); }
+  @media (min-width: 768px) { .tp-srow { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; } }
+  .tp-srow__label { display: flex; gap: var(--ybm-space-x3); align-items: flex-start; }
+  .tp-srow__label > .ds-icon { margin-top: 2px; color: var(--ybm-color-fg-neutral-muted); }
+
+  .tp-under { opacity: .5; pointer-events: none; }
+  .tp-modal { position: fixed; inset: 0; z-index: var(--ybm-z-dialog); display: grid; place-items: center; padding: var(--ybm-space-x4); background: var(--ybm-color-bg-overlay); }
+  .tp-sdlg { position: relative; display: grid; grid-template-columns: minmax(0, 1fr); width: min(960px, 100%); height: min(680px, calc(100vh - var(--ybm-space-x8))); overflow: hidden; border-radius: var(--ybm-shape-2xl); background: var(--ybm-color-bg-layer-floating); box-shadow: 0 16px 48px rgb(0 0 0 / .24); }
+  @media (min-width: 768px) { .tp-sdlg { grid-template-columns: 240px minmax(0, 1fr); } }
+  .tp-sdlg__side { display: none; flex-direction: column; gap: var(--ybm-space-x3); padding: var(--ybm-space-x5) var(--ybm-space-x3); overflow: auto; background: var(--ybm-color-bg-neutral-subtle); box-shadow: inset -1px 0 0 var(--ybm-color-stroke-neutral-muted); }
+  @media (min-width: 768px) { .tp-sdlg__side { display: flex; } }
+  .tp-sdlg__main { display: flex; flex-direction: column; gap: var(--ybm-space-x5); padding: var(--ybm-space-x6); overflow: auto; }
+  .tp-sdlg__close { position: absolute; top: var(--ybm-space-x3); right: var(--ybm-space-x3); }
+</style>
+</head>
+<body>
+<div class="tp-app">
+<div class="tp-under" aria-hidden="true"><header class="tp-head">
+  <div class="tp-head__texts"><h1 class="tp-h1">홈</h1><p class="tp-sub">오늘 할 일 4개</p></div>
+  
+</header><main class="tp-content"><div class="tp-g3"><section class="ds-card tp-card" data-size="small"><span class="tp-h4">오늘 수업</span><span class="tp-sub">내용 자리</span></section><section class="ds-card tp-card" data-size="small"><span class="tp-h4">과제</span><span class="tp-sub">내용 자리</span></section><section class="ds-card tp-card" data-size="small"><span class="tp-h4">공지</span><span class="tp-sub">내용 자리</span></section></div></main></div>
+<div class="tp-modal"><div class="tp-sdlg" role="dialog" aria-modal="true" aria-labelledby="sd-t">
+  <aside class="tp-sdlg__side"><h2 class="tp-h4" style="padding-inline: var(--ybm-space-x2)">설정</h2><div class="ds-input" data-variant="outline" data-size="small"><i class="ds-icon ds-icon--search ds-input__icon" aria-hidden="true"></i><input class="ds-input__control" id="sq" type="search" placeholder="설정 찾기" aria-label="설정 찾기"></div><nav class="tp-snav" aria-label="설정 메뉴"><span class="tp-snav__group">계정</span><a class="tp-snav__item" href="#" aria-current="page"><i class="ds-icon ds-icon--user ds-icon--sm" aria-hidden="true"></i>프로필</a><a class="tp-snav__item" href="#"><i class="ds-icon ds-icon--lock ds-icon--sm" aria-hidden="true"></i>로그인과 보안</a><a class="tp-snav__item" href="#"><i class="ds-icon ds-icon--link-2 ds-icon--sm" aria-hidden="true"></i>연결된 계정</a><span class="tp-snav__group">환경</span><a class="tp-snav__item" href="#"><i class="ds-icon ds-icon--sun ds-icon--sm" aria-hidden="true"></i>화면</a><a class="tp-snav__item" href="#"><i class="ds-icon ds-icon--globe ds-icon--sm" aria-hidden="true"></i>언어와 지역</a><a class="tp-snav__item" href="#"><i class="ds-icon ds-icon--eye ds-icon--sm" aria-hidden="true"></i>접근성</a><span class="tp-snav__group">알림</span><a class="tp-snav__item" href="#"><i class="ds-icon ds-icon--mail ds-icon--sm" aria-hidden="true"></i>이메일</a><a class="tp-snav__item" href="#"><i class="ds-icon ds-icon--bell ds-icon--sm" aria-hidden="true"></i>앱 푸시</a><span class="tp-snav__group">워크스페이스</span><a class="tp-snav__item" href="#"><i class="ds-icon ds-icon--users ds-icon--sm" aria-hidden="true"></i>멤버</a><a class="tp-snav__item" href="#"><i class="ds-icon ds-icon--credit-card ds-icon--sm" aria-hidden="true"></i>결제</a></nav></aside>
+  <div class="tp-sdlg__main">
+    <span class="tp-sdlg__close"><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" aria-label="닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button></span>
+    <div class="tp-stack"><h2 class="tp-h2" id="sd-t">프로필</h2><p class="tp-sub">워크스페이스의 다른 사람에게 보이는 내 모습이에요.</p></div>
+    <span class="tp-caption">기본 정보</span>
+    <section class="ds-card tp-card" data-size="small"><div><div class="tp-srow"><div class="tp-srow__label"><i class="ds-icon ds-icon--user ds-icon--sm" aria-hidden="true"></i><span class="tp-stack"><span class="tp-h4">표시 이름</span><span class="tp-sub">글, 댓글, 멘션에 보여요.</span></span></div><div><div class="ds-input" data-variant="outline" data-size="medium"><input class="ds-input__control" id="d-name" value="김서윤" aria-label="표시 이름"></div></div></div><div class="tp-srow"><div class="tp-srow__label"><i class="ds-icon ds-icon--id-card ds-icon--sm" aria-hidden="true"></i><span class="tp-stack"><span class="tp-h4">직함</span><span class="tp-sub">프로필 카드에 이름과 함께 보여요.</span></span></div><div><div class="ds-input" data-variant="outline" data-size="medium"><input class="ds-input__control" id="d-job" value="교육 운영 매니저" aria-label="직함"></div></div></div><div class="tp-srow"><div class="tp-srow__label"><i class="ds-icon ds-icon--at-sign ds-icon--sm" aria-hidden="true"></i><span class="tp-stack"><span class="tp-h4">아이디</span><span class="tp-sub">멘션할 때 쓰는 이름이에요.</span></span></div><div><div class="ds-input" data-variant="outline" data-size="medium"><input class="ds-input__control" id="d-id" value="seoyun" aria-label="아이디"></div></div></div><div class="tp-srow"><div class="tp-srow__label"><i class="ds-icon ds-icon--image ds-icon--sm" aria-hidden="true"></i><span class="tp-stack"><span class="tp-h4">프로필 사진</span><span class="tp-sub">정사각형 사진이 가장 잘 보여요.</span></span></div><div><div class="tp-row"><span class="ds-avatar" data-size="48" role="img" aria-label="김서윤"><span class="ds-avatar__initials" aria-hidden="true">김</span></span><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="small">사진 바꾸기</button><button type="button" class="ds-btn" data-variant="ghost" data-size="small">지우기</button></div></div></div></div></section>
+    <span class="tp-caption">표시</span>
+    <section class="ds-card tp-card" data-size="small"><div><div class="tp-srow"><div class="tp-srow__label"><i class="ds-icon ds-icon--clock ds-icon--sm" aria-hidden="true"></i><span class="tp-stack"><span class="tp-h4">시간대</span><span class="tp-sub">알림과 일정이 이 시간에 맞춰 보여요.</span></span></div><div><button type="button" class="ds-select" data-size="medium" id="d-tz" aria-haspopup="listbox" aria-expanded="false"><span class="ds-select__value">서울 (GMT+9)</span></button></div></div><div class="tp-srow"><div class="tp-srow__label"><i class="ds-icon ds-icon--eye ds-icon--sm" aria-hidden="true"></i><span class="tp-stack"><span class="tp-h4">온라인 상태 보이기</span><span class="tp-sub">다른 사람이 내가 접속 중인지 볼 수 있어요.</span></span></div><div><label class="ds-switch"><input type="checkbox" role="switch" class="ds-switch__control" aria-label="온라인 상태 보이기" checked></label></div></div></div></section>
+  </div>
+</div></div>
+</div>
+</body>
+</html>

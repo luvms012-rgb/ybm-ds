@@ -176,6 +176,54 @@
       "group": "Form",
       "desc": "단계를 왼쪽 세로 막대에 고정하고, 오른쪽 패널의 도움말이 지금 고른 칸을 따라 바뀌는 여러 단계 폼입니다. 칸이 많은 긴 입력에 맞아요.",
       "rebuilt": true
+    },
+    {
+      "slug": "settings-dialog",
+      "name": "설정 대화상자",
+      "en": "Settings Dialog",
+      "group": "Settings",
+      "desc": "보던 화면을 떠나지 않고 대화상자 안에서 바꾸는 설정입니다. 왼쪽에 찾기와 묶음 메뉴, 오른쪽에 묶인 항목과 바로 반영되는 입력이 있어요.",
+      "rebuilt": true
+    },
+    {
+      "slug": "settings",
+      "name": "설정 폼",
+      "en": "Settings Form",
+      "group": "Settings",
+      "desc": "설정을 한 장의 긴 폼으로 이어 붙인 가장 단순한 모양입니다. 묶음 사이를 오가는 메뉴 없이 아래로 내리면 모든 설정에 닿아요.",
+      "rebuilt": true
+    },
+    {
+      "slug": "settings-sidebar",
+      "name": "설정 패널",
+      "en": "Settings Panels",
+      "group": "Settings",
+      "desc": "왼쪽에 늘 보이는 메뉴로 옆 칸을 바꾸는 설정입니다. 따로 폼을 열지 않고 줄마다 그 자리에서 고쳐요.",
+      "rebuilt": true
+    },
+    {
+      "slug": "login-card",
+      "name": "로그인 카드",
+      "en": "Login Card",
+      "group": "Login",
+      "desc": "가운데 떠 있는 카드 안에 로그인 칸을 두고, 구분선 아래에 다른 서비스로 로그인 버튼, 맨 아래 가입과 약관 링크를 둔 화면입니다.",
+      "rebuilt": true
+    },
+    {
+      "slug": "login-split",
+      "name": "로그인 (반으로 나눈)",
+      "en": "Login Split",
+      "group": "Login",
+      "desc": "카드를 반으로 나눠 한쪽에 로그인 폼, 다른 쪽에 꽉 찬 사진을 둔 화면입니다. 칸은 카드형과 같고 사진으로 브랜드 느낌을 더해요.",
+      "rebuilt": true
+    },
+    {
+      "slug": "login-sso",
+      "name": "로그인 (SSO)",
+      "en": "Login SSO",
+      "group": "Login",
+      "desc": "입력한 이메일 도메인으로 회사 로그인을 찾아 넘겨 주고, 안 되면 비밀번호로 들어가는 두 단계 로그인입니다.",
+      "rebuilt": true
     }
   ],
   "figmaHeader": "2606:2"
