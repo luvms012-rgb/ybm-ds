@@ -168,23 +168,23 @@ body[data-side-open] .site-scrim { opacity: 1; pointer-events: auto; }
 .site-doc :is(p, li):not(.pv-stage *, .site-tile__inner *, .site-example__preview *, .site-tpl *) { font-size: 17px; line-height: 28px; letter-spacing: 0; }
 .site-doc ul.site-list { display: flex; flex-direction: column; gap: var(--ybm-space-x2); padding-left: var(--ybm-space-x5); list-style: disc; }
 .site-doc code:not(pre code, .pv-stage *, .site-tile__inner *, .site-example__preview *) { padding: 2px 0; border-radius: var(--ybm-shape-2xs); background: var(--ybm-color-bg-neutral-weak-alpha); font-family: var(--site-mono); font-size: 14px; font-weight: var(--ybm-font-weight-regular); letter-spacing: 0; }
-/* 코드 상자 (레퍼런스 B): 흰 바탕, 1px 옅은 테두리, 모서리 12, 위 줄은 언어 이름 칩 + 복사, 아래 구분선. 코드 13/22 */
-.site-doc .ds-codeblock { position: relative; border: 1px solid var(--site-box-line); border-radius: var(--site-box-radius); background: var(--ybm-color-bg-layer-default); box-shadow: none; }
-/* 언어 이름 줄은 쓰지 않는다 (칩 모양은 미리보기 / 코드 고르는 곳에만). 복사 버튼만 코드 칸 오른쪽 위에 */
-.site-doc .ds-codeblock__header { position: absolute; top: var(--ybm-space-x2); right: var(--ybm-space-x2); z-index: 1; padding: 0; background: none; box-shadow: none; }
-.site-doc .ds-codeblock__language { display: none; }
-.site-doc .ds-codeblock__copy { width: 32px; height: 32px; border-radius: var(--ybm-shape-sm); background: var(--ybm-color-bg-layer-default); color: var(--ybm-color-fg-neutral-muted); }
-.site-doc .ds-codeblock__code { padding: var(--ybm-space-x4) var(--ybm-space-x12) var(--ybm-space-x4) var(--ybm-space-x4); font-size: var(--ybm-font-size-t04); line-height: 20px; }
-.site-doc .ds-codeblock[data-wrap] .ds-codeblock__code { font-size: var(--ybm-font-size-t04); line-height: 26px; }
-/* 표 (레퍼런스 B): 1px 옅은 테두리, 모서리 8, 머리 14 500, 칸 안쪽 10 16 / 12 16, 줄 사이 선 */
-.site-doc .ds-table-wrap { border: 1px solid var(--site-box-line); border-radius: var(--ybm-shape-sm); background: var(--ybm-color-bg-layer-default); }
+/* 코드 상자와 표는 한눈에 구분되게 (레퍼런스 A 실측)
+   코드: 회색 바탕(bg-neutral), 1px 옅은 테두리, 모서리 12, 머리 줄 44 은 한 겹 더 진한 회색에 언어 이름 12 500 muted + 복사 28 원형, 코드 14/20 안쪽 12 16
+   표: 흰 바탕, 1px 옅은 테두리, 모서리 16, 머리 14 600 muted, 칸 안쪽 12 16, 줄 사이 선, 본문 16 */
+.site-doc .ds-codeblock { overflow: hidden; border: 1px solid var(--site-box-line); border-radius: var(--ybm-shape-lg); background: var(--ybm-color-bg-neutral); box-shadow: none; }
+.site-doc .ds-codeblock__header { display: flex; align-items: center; justify-content: space-between; min-height: 44px; padding: var(--ybm-space-x2) var(--ybm-space-x4); background: var(--ybm-color-bg-neutral-weak-alpha); box-shadow: none; }
+.site-doc .ds-codeblock__language { display: block; color: var(--ybm-color-fg-neutral-muted); font-family: var(--site-mono); font-size: var(--ybm-font-size-t02); line-height: 20px; font-weight: var(--ybm-font-weight-medium); }
+.site-doc .ds-codeblock__copy { width: 28px; height: 28px; border-radius: var(--ybm-shape-pill); color: var(--ybm-color-fg-neutral-muted); }
+.site-doc .ds-codeblock__copy:hover { background: var(--ybm-color-bg-neutral-weak-alpha); }
+.site-doc .ds-codeblock__code { padding: var(--ybm-space-x3) var(--ybm-space-x4); font-size: var(--ybm-font-size-t04); line-height: 20px; }
+.site-doc .ds-codeblock[data-wrap] .ds-codeblock__code { line-height: 26px; }
+.site-doc .ds-table-wrap { border: 1px solid var(--site-box-line); border-radius: var(--ybm-shape-xl); background: var(--ybm-color-bg-layer-default); }
 .site-doc .ds-table { --ds-table-head-h: auto; --ds-table-row-h: auto; }
 .site-doc .ds-table thead tr { background: transparent; }
 .site-doc .ds-table tr { box-shadow: inset 0 -1px 0 var(--site-box-line); }
 .site-doc .ds-table tbody tr:last-child { box-shadow: none; }
-.site-doc .ds-table :is(th, td) { font-size: var(--ybm-font-size-t04); line-height: 20px; }
-.site-doc .ds-table th { padding: 10px var(--ybm-space-x4); color: var(--ybm-color-fg-neutral); font-weight: var(--ybm-font-weight-semibold); }
-.site-doc .ds-table td { padding: var(--ybm-space-x3) var(--ybm-space-x4); white-space: normal; }
+.site-doc .ds-table th { padding: var(--ybm-space-x3) var(--ybm-space-x4); color: var(--ybm-color-fg-neutral-muted); font-size: var(--ybm-font-size-t04); line-height: 21px; font-weight: var(--ybm-font-weight-semibold); }
+.site-doc .ds-table td { padding: var(--ybm-space-x3) var(--ybm-space-x4); font-size: var(--ybm-font-size-t05); line-height: 25px; white-space: normal; }
 .site-doc .ds-table td code, .site-doc .ds-table th code { white-space: nowrap; }
 @media (max-width: 767px) { .site-doc .ds-table td code { white-space: normal; word-break: break-all; } }  /* 좁은 화면에서 긴 토큰 이름이 잘리지 않게 */
 

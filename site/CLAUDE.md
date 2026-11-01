@@ -43,6 +43,8 @@ YBM 디자인 시스템 공식 문서 사이트를 준비하는 폴더다. 2026-
 - 로고: **YBM NET 공식 로고만** 쓴다(2026-10-30 사용자 지시). 로고 모음 Figma 파일 `NvAvZxDAnYf3nOVkBZ3pyU` 노드 `130:1642` 를 그대로 내보낸 `src/logo-ybmnet.svg`. 잘라 쓰거나 "Design System" 같은 글자를 붙이지 않는다.
 - 두 레퍼런스의 이름과 주소는 저장소에 적지 않는다(로컬 분석 문서와 Claude 메모리에만).
 
+- **코드 상자와 표는 구분되게** (2026-11-02 회사, 사용자 "코드와 테이블을 구분지으라", 레퍼런스 A 실측): 코드는 회색 바탕 + 진한 회색 머리 줄 44(언어 이름 12 + 복사 28 원형) + 모서리 12, 표는 흰 바탕 + 모서리 16 + 머리 14 600 muted + 줄 사이 선.
+
 ## 데이터 원본
 - 같은 저장소의 바로 위 폴더(`..`)가 DS 정본이다: `components.json`, `dist/`, `tokens/`. 사이트는 읽기만 한다.
 - 저장소: <https://github.com/luvms012-rgb/ybm-ds> (집 Mac `~/Works/ybm-ds`, 회사 윈도우 `C:\Users\luvms\Desktop\works\ybm-ds`)
