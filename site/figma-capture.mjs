@@ -117,6 +117,24 @@ function serialize() {
     }).filter((s) => s.c);
   };
 
+  // 그래프처럼 안에 그린 SVG: CSS 변수(var(--…))나 클래스로 준 색을 실제 색값으로 바꿔 적는다
+  const svgInner = (root) => {
+    const cl = root.cloneNode(true);
+    const src = [...root.querySelectorAll('*')], dst = [...cl.querySelectorAll('*')];
+    src.forEach((e, i) => {
+      const d = dst[i], cs = getComputedStyle(e);
+      for (const k of ['fill', 'stroke']) {
+        const v = cs[k];
+        if (!v || v === 'none') { if (e.getAttribute(k) || k === 'fill') d.setAttribute(k, 'none'); continue; }
+        const c = col(v); if (c) { d.setAttribute(k, c.hex); if (c.a < 1) d.setAttribute(k + '-opacity', c.a); } else if (/^url/.test(v)) {} else d.setAttribute(k, 'none');
+      }
+      for (const [k, a] of [['fillOpacity', 'fill-opacity'], ['strokeOpacity', 'stroke-opacity']]) if (cs[k] && cs[k] !== '1' && !d.getAttribute(a)) d.setAttribute(a, cs[k]);
+      if (e.tagName === 'text' || e.tagName === 'tspan') { d.setAttribute('font-family', 'Pretendard'); d.setAttribute('font-size', px(cs.fontSize)); d.setAttribute('font-weight', Math.round(px(cs.fontWeight) / 100) * 100 || 400); }
+      d.removeAttribute('style'); d.removeAttribute('class');
+    });
+    return cl.innerHTML;
+  };
+
   function draw(el) {
     const cs = getComputedStyle(el);
     if (cs.display === 'none' || cs.visibility === 'hidden' || px(cs.opacity) === 0) return '';
@@ -190,7 +208,7 @@ function serialize() {
       if (closed && !(ch.nodeType === 1 && ch.tagName === 'SUMMARY')) continue;
       if (ch.nodeType === 3) { if (ch.textContent.trim()) kids += textLines(ch, cs); }
       else if (ch.nodeType === 1) {
-        if (ch.tagName === 'svg' || ch.tagName === 'SVG') { const b = ch.getBoundingClientRect(); const vb = ch.viewBox && ch.viewBox.baseVal; const c = col(getComputedStyle(ch).color); kids += `<svg x="${n2(b.left + scrollX)}" y="${n2(b.top + scrollY)}" width="${n2(b.width)}" height="${n2(b.height)}"${vb && vb.width ? ` viewBox="${vb.x} ${vb.y} ${vb.width} ${vb.height}"` : ''}>${ch.innerHTML.replace(/currentColor/g, c ? c.hex : '#000')}</svg>`; }
+        if (ch.tagName === 'svg' || ch.tagName === 'SVG') { const b = ch.getBoundingClientRect(); const vb = ch.viewBox && ch.viewBox.baseVal; const c = col(getComputedStyle(ch).color); const par = ch.getAttribute('preserveAspectRatio'); kids += `<svg x="${n2(b.left + scrollX)}" y="${n2(b.top + scrollY)}" width="${n2(b.width)}" height="${n2(b.height)}"${vb && vb.width ? ` viewBox="${vb.x} ${vb.y} ${vb.width} ${vb.height}"` : ''}${par ? ` preserveAspectRatio="${par}"` : ''}>${svgInner(ch).replace(/currentColor/g, c ? c.hex : '#000')}</svg>`; }
         else kids += draw(ch);
       }
     }
