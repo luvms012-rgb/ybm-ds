@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>접히는 표 묶음 - YBM DS 템플릿</title>
+<link rel="stylesheet" href="../../../dist/ybm-ds.css">
+<script src="../../../dist/ybm-ds.js" defer></script>
+<style>
+  /* 템플릿 배치 전용. 값은 모두 --ybm-* 토큰 */
+  body { word-break: keep-all; overflow-wrap: break-word; }
+  .tp-app { display: flex; flex-direction: column; min-height: 100vh; background: var(--ybm-color-bg-layer-default); }
+  .tp-head { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: var(--ybm-space-x4); padding: var(--ybm-space-x5) var(--ybm-space-x4); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); }
+  .tp-head__texts { display: flex; flex-direction: column; gap: var(--ybm-space-x1); min-width: 0; }
+  .tp-head__tools { display: flex; flex-wrap: wrap; align-items: flex-end; gap: var(--ybm-space-x2); }
+  .tp-h1 { font-size: var(--ybm-font-size-t09); line-height: var(--ybm-line-height-t09); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; }
+  .tp-h2 { font-size: var(--ybm-font-size-t07); line-height: var(--ybm-line-height-t07); font-weight: var(--ybm-font-weight-semibold); letter-spacing: -0.02em; }
+  .tp-h3 { font-size: var(--ybm-font-size-t05); line-height: var(--ybm-line-height-t05); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-h4 { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-sub { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
+  .tp-caption { font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); color: var(--ybm-color-fg-neutral-subtle); }
+  .tp-num { font-variant-numeric: tabular-nums; }
+  .tp-body { display: flex; flex: 1 1 auto; flex-direction: column; min-height: 0; }
+  .tp-content { display: flex; flex: 1 1 auto; flex-direction: column; gap: var(--ybm-space-x8); min-width: 0; padding: var(--ybm-space-x5) var(--ybm-space-x4) var(--ybm-space-x10); }
+  .tp-panel { display: flex; flex-direction: column; gap: var(--ybm-space-x6); padding: var(--ybm-space-x5) var(--ybm-space-x4); box-shadow: inset 0 1px 0 var(--ybm-color-stroke-neutral-muted); }
+  .tp-sec { display: flex; flex-direction: column; gap: var(--ybm-space-x3); min-width: 0; }
+  .tp-sec-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ybm-space-x2) var(--ybm-space-x3); }
+  .tp-sec-head__texts { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--ybm-space-x1) var(--ybm-space-x3); }
+  .tp-row { display: flex; align-items: center; gap: var(--ybm-space-x2); min-width: 0; }
+  .tp-between { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ybm-space-x2); }
+  .tp-stack { display: flex; flex-direction: column; gap: var(--ybm-space-x1); min-width: 0; }
+  .tp-g2, .tp-g3, .tp-g4, .tp-g5, .tp-g6 { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ybm-space-x3); }
+  .tp-card { min-width: 0; }
+  .tp-card.ds-card { gap: var(--ybm-space-x3); }
+  .tp-span2 { grid-column: auto; }
+  .tp-kpi__label { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
+  .tp-kpi__value { font-size: var(--ybm-font-size-t09); line-height: var(--ybm-line-height-t09); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+  .tp-delta { display: inline-flex; align-items: center; gap: 2px; font-size: var(--ybm-font-size-t03); line-height: var(--ybm-line-height-t03); font-weight: var(--ybm-font-weight-medium); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .tp-delta .ds-icon { --ds-icon-size: 14px; }
+  .tp-delta[data-tone="up"] { color: var(--ybm-color-fg-positive); }
+  .tp-delta[data-tone="down"] { color: var(--ybm-color-fg-critical); }
+  .tp-delta[data-tone="flat"] { color: var(--ybm-color-fg-neutral-muted); }
+  .tp-chart { display: block; width: 100%; height: auto; overflow: visible; }
+  .tp-chart text { fill: var(--ybm-color-fg-neutral-subtle); font-size: 11px; font-family: inherit; }
+  .tp-chart .tp-grid-line { stroke: var(--ybm-color-stroke-neutral-muted); stroke-width: 1; }
+  .tp-legend { display: flex; flex-wrap: wrap; gap: var(--ybm-space-x1) var(--ybm-space-x4); font-size: var(--ybm-font-size-t03); line-height: var(--ybm-line-height-t03); color: var(--ybm-color-fg-neutral-muted); }
+  .tp-legend__item { display: inline-flex; align-items: center; gap: var(--ybm-space-x1_5); }
+  .tp-swatch { flex: none; width: 10px; height: 10px; border-radius: 3px; background: var(--c, var(--ybm-color-chart-series-1)); }
+  .tp-split { display: flex; height: 12px; overflow: hidden; border-radius: var(--ybm-shape-pill); background: var(--ybm-color-bg-neutral); }
+  .tp-split > span { height: 100%; background: var(--c); }
+  .tp-split > span + span { box-shadow: inset 2px 0 0 var(--ybm-color-bg-layer-default); }
+  .tp-ph { display: grid; place-items: center; width: 100%; height: 100%; color: var(--ybm-color-fg-neutral-subtle); background: var(--ybm-color-bg-neutral); }
+  .tp-logo { display: inline-grid; place-items: center; width: 88px; height: 28px; border-radius: var(--ybm-shape-xs); background: var(--ybm-color-bg-neutral); color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t03-static); line-height: var(--ybm-line-height-t03-static); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-bar { position: sticky; top: 0; z-index: var(--ybm-z-sticky); background: var(--ybm-color-bg-layer-default); }
+  .tp-track { display: flex; flex-direction: column; gap: var(--ybm-space-x1); min-width: 120px; }
+  .tp-hide-sm { display: none; }
+  .tp-scroll-x { overflow-x: auto; }
+  .tp-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .tp-kbd { display: inline-grid; place-items: center; min-width: 20px; height: 20px; padding: 0 4px; border-radius: var(--ybm-shape-2xs); box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-neutral-muted); color: var(--ybm-color-fg-neutral-muted); font-size: var(--ybm-font-size-t01); font-family: inherit; }
+  @media (min-width: 768px) {
+    .tp-head { padding: var(--ybm-space-x6); }
+    .tp-content { padding: var(--ybm-space-x6) var(--ybm-space-x6) var(--ybm-space-x12); }
+    .tp-panel { padding: var(--ybm-space-x6); }
+    .tp-g2, .tp-g4, .tp-g6 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .tp-g3, .tp-g5 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .tp-hide-sm { display: revert; }
+  }
+  @media (min-width: 1024px) {
+    .tp-body--panel { flex-direction: row; }
+    .tp-body--panel > .tp-panel { flex: none; width: 400px; box-shadow: inset 1px 0 0 var(--ybm-color-stroke-neutral-muted); }
+    .tp-g3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .tp-g4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .tp-g5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+    .tp-g6 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .tp-span2 { grid-column: span 2; }
+    .tp-span3 { grid-column: span 3; }
+  }
+  @media (min-width: 1280px) { .tp-g6 { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
+
+  .tp-grouprow > td { padding-block: var(--ybm-space-x2); background: var(--ybm-color-bg-neutral-subtle); }
+  .tp-grouprow__in { display: flex; align-items: center; gap: var(--ybm-space-x2); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-caret { display: inline-grid; place-items: center; width: 24px; height: 24px; border: 0; border-radius: var(--ybm-shape-xs); background: none; color: var(--ybm-color-fg-neutral-muted); cursor: pointer; }
+  .tp-caret:hover { background: var(--ybm-color-bg-transparent-pressed); }
+  .tp-cell2 { display: flex; flex-direction: column; min-width: 0; }
+  .tp-cell2 > :last-child { color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t03); line-height: var(--ybm-line-height-t03); }
+  .tp-full-table { margin-inline: calc(var(--ybm-space-x4) * -1); }
+  @media (min-width: 768px) { .tp-full-table { margin-inline: calc(var(--ybm-space-x6) * -1); } }
+
+  .tp-coll { border-radius: inherit; }
+  .tp-coll > summary { display: flex; align-items: center; gap: var(--ybm-space-x3); padding: var(--ybm-space-x1) 0 var(--ybm-space-x3); list-style: none; cursor: pointer; }
+  .tp-coll > summary::-webkit-details-marker { display: none; }
+  .tp-coll > summary .ds-icon { transition: transform var(--ybm-duration-fast) var(--ybm-easing-standard); }
+  .tp-coll:not([open]) > summary { padding-bottom: var(--ybm-space-x1); }
+  .tp-coll:not([open]) > summary .ds-icon { transform: rotate(-90deg); }
+  .tp-coll__total { margin-left: auto; font-weight: var(--ybm-font-weight-semibold); font-variant-numeric: tabular-nums; }
+</style>
+</head>
+<body>
+<div class="tp-app">
+<header class="tp-head">
+  <div class="tp-head__texts"><h1 class="tp-h1">연결된 계좌</h1><p class="tp-sub">13개 계좌의 순자산 7억 6,840만원</p></div>
+  <div class="tp-head__tools"><button type="button" class="ds-btn" data-variant="neutralSolid" data-size="small"><i class="ds-icon ds-icon--plus" aria-hidden="true"></i>계좌 연결</button><div class="ds-segmented" role="group" aria-label="기간" data-size="small"><button type="button" class="ds-segmented__item" aria-pressed="false">1개월</button><button type="button" class="ds-segmented__item" aria-pressed="false">3개월</button><button type="button" class="ds-segmented__item" aria-pressed="true">6개월</button><button type="button" class="ds-segmented__item" aria-pressed="false">1년</button><button type="button" class="ds-segmented__item" aria-pressed="false">전체</button></div></div>
+</header>
+<main class="tp-content" style="gap: var(--ybm-space-x3)">
+  <section class="ds-card tp-card" data-size="small"><details class="tp-coll" open><summary><i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i><h2 class="tp-h3">예금·적금</h2><span class="ds-badge" data-tone="neutral">4개</span><span class="tp-coll__total">1억 2,480만원</span></summary><div class="ds-table-wrap"><table class="ds-table" data-density="compact"><thead><tr><th scope="col"></th><th scope="col">계좌</th><th scope="col">은행</th><th scope="col" data-align="end">잔액</th><th scope="col" data-align="end">금리</th><th scope="col">최근 거래</th></tr></thead><tbody><tr><td style="width:40px"><button type="button" class="tp-caret" aria-expanded="false" aria-label="생활비 통장 자세히"><i class="ds-icon ds-icon--chevron-right ds-icon--sm" aria-hidden="true"></i></button></td><td><span class="tp-cell2"><span>생활비 통장</span><span>··· 4821</span></span></td><td>가 은행 ··· 4821</td><td data-align="end">8,240,000원</td><td data-align="end">0.1%</td><td>오늘</td></tr><tr><td style="width:40px"><button type="button" class="tp-caret" aria-expanded="false" aria-label="비상금 통장 자세히"><i class="ds-icon ds-icon--chevron-right ds-icon--sm" aria-hidden="true"></i></button></td><td><span class="tp-cell2"><span>비상금 통장</span><span>··· 1093</span></span></td><td>나 은행 ··· 1093</td><td data-align="end">21,560,000원</td><td data-align="end">2.8%</td><td>어제</td></tr><tr><td style="width:40px"><button type="button" class="tp-caret" aria-expanded="false" aria-label="청약 저축 자세히"><i class="ds-icon ds-icon--chevron-right ds-icon--sm" aria-hidden="true"></i></button></td><td><span class="tp-cell2"><span>청약 저축</span><span>··· 7730</span></span></td><td>가 은행 ··· 7730</td><td data-align="end">18,000,000원</td><td data-align="end">2.3%</td><td>10.25</td></tr><tr><td style="width:40px"><button type="button" class="tp-caret" aria-expanded="false" aria-label="정기 예금 자세히"><i class="ds-icon ds-icon--chevron-right ds-icon--sm" aria-hidden="true"></i></button></td><td><span class="tp-cell2"><span>정기 예금</span><span>··· 5512</span></span></td><td>다 은행 ··· 5512</td><td data-align="end">77,000,000원</td><td data-align="end">3.4%</td><td>10.02</td></tr></tbody></table></div></details></section><section class="ds-card tp-card" data-size="small"><details class="tp-coll" open><summary><i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i><h2 class="tp-h3">투자</h2><span class="ds-badge" data-tone="neutral">3개</span><span class="tp-coll__total">4억 6,120만원</span></summary><div class="ds-table-wrap"><table class="ds-table" data-density="compact"><thead><tr><th scope="col"></th><th scope="col">계좌</th><th scope="col">증권사</th><th scope="col" data-align="end">평가액</th><th scope="col" data-align="end">수익률</th><th scope="col">최근 거래</th></tr></thead><tbody><tr><td style="width:40px"><button type="button" class="tp-caret" aria-expanded="false" aria-label="국내 주식 자세히"><i class="ds-icon ds-icon--chevron-right ds-icon--sm" aria-hidden="true"></i></button></td><td><span class="tp-cell2"><span>국내 주식</span><span>··· 2209</span></span></td><td>라 증권 ··· 2209</td><td data-align="end">184,200,000원</td><td data-align="end"><span class="ds-badge" data-tone="positive">+12.4%</span></td><td>오늘</td></tr><tr><td style="width:40px"><button type="button" class="tp-caret" aria-expanded="false" aria-label="해외 주식 자세히"><i class="ds-icon ds-icon--chevron-right ds-icon--sm" aria-hidden="true"></i></button></td><td><span class="tp-cell2"><span>해외 주식</span><span>··· 2210</span></span></td><td>라 증권 ··· 2210</td><td data-align="end">231,600,000원</td><td data-align="end"><span class="ds-badge" data-tone="positive">+18.9%</span></td><td>어제</td></tr><tr><td style="width:40px"><button type="button" class="tp-caret" aria-expanded="false" aria-label="연금 저축 자세히"><i class="ds-icon ds-icon--chevron-right ds-icon--sm" aria-hidden="true"></i></button></td><td><span class="tp-cell2"><span>연금 저축</span><span>··· 8814</span></span></td><td>마 증권 ··· 8814</td><td data-align="end">45,400,000원</td><td data-align="end"><span class="ds-badge" data-tone="critical">-1.2%</span></td><td>10.29</td></tr></tbody></table></div></details></section><section class="ds-card tp-card" data-size="small"><details class="tp-coll" open><summary><i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i><h2 class="tp-h3">연금</h2><span class="ds-badge" data-tone="neutral">2개</span><span class="tp-coll__total">2억 1,840만원</span></summary><div class="ds-table-wrap"><table class="ds-table" data-density="compact"><thead><tr><th scope="col"></th><th scope="col">계좌</th><th scope="col">운용사</th><th scope="col" data-align="end">적립금</th><th scope="col" data-align="end">올해 납입</th><th scope="col">최근 거래</th></tr></thead><tbody><tr><td style="width:40px"><button type="button" class="tp-caret" aria-expanded="false" aria-label="퇴직 연금 DC 자세히"><i class="ds-icon ds-icon--chevron-right ds-icon--sm" aria-hidden="true"></i></button></td><td><span class="tp-cell2"><span>퇴직 연금 DC</span><span>··· 0042</span></span></td><td>바 생명 ··· 0042</td><td data-align="end">162,400,000원</td><td data-align="end">7,200,000원</td><td>10.25</td></tr><tr><td style="width:40px"><button type="button" class="tp-caret" aria-expanded="false" aria-label="개인 IRP 자세히"><i class="ds-icon ds-icon--chevron-right ds-icon--sm" aria-hidden="true"></i></button></td><td><span class="tp-cell2"><span>개인 IRP</span><span>··· 3301</span></span></td><td>라 증권 ··· 3301</td><td data-align="end">56,000,000원</td><td data-align="end">9,000,000원</td><td>10.10</td></tr></tbody></table></div></details></section><section class="ds-card tp-card" data-size="small"><details class="tp-coll"><summary><i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i><h2 class="tp-h3">카드</h2><span class="ds-badge" data-tone="neutral">2개</span><span class="tp-coll__total">-312만원</span></summary><div class="ds-table-wrap"><table class="ds-table" data-density="compact"><thead><tr><th scope="col"></th><th scope="col">카드</th><th scope="col">카드사</th><th scope="col" data-align="end">이번 달 사용</th><th scope="col" data-align="end">결제일</th><th scope="col">최근 거래</th></tr></thead><tbody><tr><td style="width:40px"><button type="button" class="tp-caret" aria-expanded="false" aria-label="생활 카드 자세히"><i class="ds-icon ds-icon--chevron-right ds-icon--sm" aria-hidden="true"></i></button></td><td><span class="tp-cell2"><span>생활 카드</span><span>··· 9921</span></span></td><td>가 카드 ··· 9921</td><td data-align="end">1,840,000원</td><td data-align="end">15일</td><td>오늘</td></tr><tr><td style="width:40px"><button type="button" class="tp-caret" aria-expanded="false" aria-label="출장 카드 자세히"><i class="ds-icon ds-icon--chevron-right ds-icon--sm" aria-hidden="true"></i></button></td><td><span class="tp-cell2"><span>출장 카드</span><span>··· 4410</span></span></td><td>사 카드 ··· 4410</td><td data-align="end">1,280,000원</td><td data-align="end">25일</td><td>10.30</td></tr></tbody></table></div></details></section><section class="ds-card tp-card" data-size="small"><details class="tp-coll"><summary><i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i><h2 class="tp-h3">대출</h2><span class="ds-badge" data-tone="neutral">2개</span><span class="tp-coll__total">-1억 3,600만원</span></summary><div class="ds-table-wrap"><table class="ds-table" data-density="compact"><thead><tr><th scope="col"></th><th scope="col">대출</th><th scope="col">은행</th><th scope="col" data-align="end">남은 원금</th><th scope="col" data-align="end">금리</th><th scope="col">다음 상환</th></tr></thead><tbody><tr><td style="width:40px"><button type="button" class="tp-caret" aria-expanded="false" aria-label="주택 담보 대출 자세히"><i class="ds-icon ds-icon--chevron-right ds-icon--sm" aria-hidden="true"></i></button></td><td><span class="tp-cell2"><span>주택 담보 대출</span><span>··· 6620</span></span></td><td>가 은행 ··· 6620</td><td data-align="end">128,000,000원</td><td data-align="end">3.9%</td><td>11.15</td></tr><tr><td style="width:40px"><button type="button" class="tp-caret" aria-expanded="false" aria-label="신용 대출 자세히"><i class="ds-icon ds-icon--chevron-right ds-icon--sm" aria-hidden="true"></i></button></td><td><span class="tp-cell2"><span>신용 대출</span><span>··· 2281</span></span></td><td>나 은행 ··· 2281</td><td data-align="end">8,000,000원</td><td data-align="end">5.2%</td><td>11.20</td></tr></tbody></table></div></details></section>
+</main>
+</div>
+</body>
+</html>

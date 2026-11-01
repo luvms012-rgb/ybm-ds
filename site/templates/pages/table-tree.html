@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>트리 표 - YBM DS 템플릿</title>
+<link rel="stylesheet" href="../../../dist/ybm-ds.css">
+<script src="../../../dist/ybm-ds.js" defer></script>
+<style>
+  /* 템플릿 배치 전용. 값은 모두 --ybm-* 토큰 */
+  body { word-break: keep-all; overflow-wrap: break-word; }
+  .tp-app { display: flex; flex-direction: column; min-height: 100vh; background: var(--ybm-color-bg-layer-default); }
+  .tp-head { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: var(--ybm-space-x4); padding: var(--ybm-space-x5) var(--ybm-space-x4); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); }
+  .tp-head__texts { display: flex; flex-direction: column; gap: var(--ybm-space-x1); min-width: 0; }
+  .tp-head__tools { display: flex; flex-wrap: wrap; align-items: flex-end; gap: var(--ybm-space-x2); }
+  .tp-h1 { font-size: var(--ybm-font-size-t09); line-height: var(--ybm-line-height-t09); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; }
+  .tp-h2 { font-size: var(--ybm-font-size-t07); line-height: var(--ybm-line-height-t07); font-weight: var(--ybm-font-weight-semibold); letter-spacing: -0.02em; }
+  .tp-h3 { font-size: var(--ybm-font-size-t05); line-height: var(--ybm-line-height-t05); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-h4 { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-sub { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
+  .tp-caption { font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); color: var(--ybm-color-fg-neutral-subtle); }
+  .tp-num { font-variant-numeric: tabular-nums; }
+  .tp-body { display: flex; flex: 1 1 auto; flex-direction: column; min-height: 0; }
+  .tp-content { display: flex; flex: 1 1 auto; flex-direction: column; gap: var(--ybm-space-x8); min-width: 0; padding: var(--ybm-space-x5) var(--ybm-space-x4) var(--ybm-space-x10); }
+  .tp-panel { display: flex; flex-direction: column; gap: var(--ybm-space-x6); padding: var(--ybm-space-x5) var(--ybm-space-x4); box-shadow: inset 0 1px 0 var(--ybm-color-stroke-neutral-muted); }
+  .tp-sec { display: flex; flex-direction: column; gap: var(--ybm-space-x3); min-width: 0; }
+  .tp-sec-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ybm-space-x2) var(--ybm-space-x3); }
+  .tp-sec-head__texts { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--ybm-space-x1) var(--ybm-space-x3); }
+  .tp-row { display: flex; align-items: center; gap: var(--ybm-space-x2); min-width: 0; }
+  .tp-between { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ybm-space-x2); }
+  .tp-stack { display: flex; flex-direction: column; gap: var(--ybm-space-x1); min-width: 0; }
+  .tp-g2, .tp-g3, .tp-g4, .tp-g5, .tp-g6 { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ybm-space-x3); }
+  .tp-card { min-width: 0; }
+  .tp-card.ds-card { gap: var(--ybm-space-x3); }
+  .tp-span2 { grid-column: auto; }
+  .tp-kpi__label { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
+  .tp-kpi__value { font-size: var(--ybm-font-size-t09); line-height: var(--ybm-line-height-t09); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+  .tp-delta { display: inline-flex; align-items: center; gap: 2px; font-size: var(--ybm-font-size-t03); line-height: var(--ybm-line-height-t03); font-weight: var(--ybm-font-weight-medium); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .tp-delta .ds-icon { --ds-icon-size: 14px; }
+  .tp-delta[data-tone="up"] { color: var(--ybm-color-fg-positive); }
+  .tp-delta[data-tone="down"] { color: var(--ybm-color-fg-critical); }
+  .tp-delta[data-tone="flat"] { color: var(--ybm-color-fg-neutral-muted); }
+  .tp-chart { display: block; width: 100%; height: auto; overflow: visible; }
+  .tp-chart text { fill: var(--ybm-color-fg-neutral-subtle); font-size: 11px; font-family: inherit; }
+  .tp-chart .tp-grid-line { stroke: var(--ybm-color-stroke-neutral-muted); stroke-width: 1; }
+  .tp-legend { display: flex; flex-wrap: wrap; gap: var(--ybm-space-x1) var(--ybm-space-x4); font-size: var(--ybm-font-size-t03); line-height: var(--ybm-line-height-t03); color: var(--ybm-color-fg-neutral-muted); }
+  .tp-legend__item { display: inline-flex; align-items: center; gap: var(--ybm-space-x1_5); }
+  .tp-swatch { flex: none; width: 10px; height: 10px; border-radius: 3px; background: var(--c, var(--ybm-color-chart-series-1)); }
+  .tp-split { display: flex; height: 12px; overflow: hidden; border-radius: var(--ybm-shape-pill); background: var(--ybm-color-bg-neutral); }
+  .tp-split > span { height: 100%; background: var(--c); }
+  .tp-split > span + span { box-shadow: inset 2px 0 0 var(--ybm-color-bg-layer-default); }
+  .tp-ph { display: grid; place-items: center; width: 100%; height: 100%; color: var(--ybm-color-fg-neutral-subtle); background: var(--ybm-color-bg-neutral); }
+  .tp-logo { display: inline-grid; place-items: center; width: 88px; height: 28px; border-radius: var(--ybm-shape-xs); background: var(--ybm-color-bg-neutral); color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t03-static); line-height: var(--ybm-line-height-t03-static); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-bar { position: sticky; top: 0; z-index: var(--ybm-z-sticky); background: var(--ybm-color-bg-layer-default); }
+  .tp-track { display: flex; flex-direction: column; gap: var(--ybm-space-x1); min-width: 120px; }
+  .tp-hide-sm { display: none; }
+  .tp-scroll-x { overflow-x: auto; }
+  .tp-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .tp-kbd { display: inline-grid; place-items: center; min-width: 20px; height: 20px; padding: 0 4px; border-radius: var(--ybm-shape-2xs); box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-neutral-muted); color: var(--ybm-color-fg-neutral-muted); font-size: var(--ybm-font-size-t01); font-family: inherit; }
+  @media (min-width: 768px) {
+    .tp-head { padding: var(--ybm-space-x6); }
+    .tp-content { padding: var(--ybm-space-x6) var(--ybm-space-x6) var(--ybm-space-x12); }
+    .tp-panel { padding: var(--ybm-space-x6); }
+    .tp-g2, .tp-g4, .tp-g6 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .tp-g3, .tp-g5 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .tp-hide-sm { display: revert; }
+  }
+  @media (min-width: 1024px) {
+    .tp-body--panel { flex-direction: row; }
+    .tp-body--panel > .tp-panel { flex: none; width: 400px; box-shadow: inset 1px 0 0 var(--ybm-color-stroke-neutral-muted); }
+    .tp-g3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .tp-g4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .tp-g5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+    .tp-g6 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .tp-span2 { grid-column: span 2; }
+    .tp-span3 { grid-column: span 3; }
+  }
+  @media (min-width: 1280px) { .tp-g6 { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
+
+  .tp-grouprow > td { padding-block: var(--ybm-space-x2); background: var(--ybm-color-bg-neutral-subtle); }
+  .tp-grouprow__in { display: flex; align-items: center; gap: var(--ybm-space-x2); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-caret { display: inline-grid; place-items: center; width: 24px; height: 24px; border: 0; border-radius: var(--ybm-shape-xs); background: none; color: var(--ybm-color-fg-neutral-muted); cursor: pointer; }
+  .tp-caret:hover { background: var(--ybm-color-bg-transparent-pressed); }
+  .tp-cell2 { display: flex; flex-direction: column; min-width: 0; }
+  .tp-cell2 > :last-child { color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t03); line-height: var(--ybm-line-height-t03); }
+  .tp-full-table { margin-inline: calc(var(--ybm-space-x4) * -1); }
+  @media (min-width: 768px) { .tp-full-table { margin-inline: calc(var(--ybm-space-x6) * -1); } }
+
+  .tp-tree-name { display: flex; align-items: center; gap: var(--ybm-space-x1); padding-left: calc(var(--d) * 20px); }
+  .tp-tree-name .tp-caret { width: 20px; height: 20px; }
+  .tp-tree-name .tp-spacer { width: 20px; }
+  .tp-tree-name .ds-icon { color: var(--ybm-color-fg-neutral-subtle); }
+  .tp-toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: var(--ybm-space-x2); }
+  .tp-toolbar .tp-grow { flex: 1 1 200px; display: flex; justify-content: flex-end; gap: var(--ybm-space-x2); flex-wrap: wrap; }
+  .tp-about dl { display: grid; grid-template-columns: auto 1fr; gap: var(--ybm-space-x2) var(--ybm-space-x4); margin: 0; }
+  .tp-about dt { color: var(--ybm-color-fg-neutral-muted); }
+  .tp-about dd { margin: 0; }
+  .tp-md h3 { margin: 0 0 var(--ybm-space-x2); }
+  .tp-md h4 { margin: var(--ybm-space-x5) 0 var(--ybm-space-x2); }
+</style>
+</head>
+<body>
+<div class="tp-app">
+<header class="tp-head" style="align-items: center">
+  <div class="tp-row" style="flex-wrap: wrap"><h1 class="tp-h1">canvas-editor</h1><nav class="ds-breadcrumbs" aria-label="현재 위치"><ol><li><span aria-current="page">canvas-editor</span></li></ol></nav><span class="ds-badge" data-tone="neutral">공개</span></div>
+  <div class="tp-row"><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="small"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>지켜보기</button><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="small"><i class="ds-icon ds-icon--git-branch" aria-hidden="true"></i>포크 12</button><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="small"><i class="ds-icon ds-icon--star" aria-hidden="true"></i>별 248</button><button type="button" class="ds-btn" data-variant="neutralSolid" data-size="small"><i class="ds-icon ds-icon--code" aria-hidden="true"></i>코드<i class="ds-icon ds-icon--chevron-down" aria-hidden="true"></i></button></div>
+</header>
+<div class="tp-body tp-body--panel">
+<main class="tp-content" style="gap: var(--ybm-space-x4)">
+  <div class="tp-toolbar"><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="small"><i class="ds-icon ds-icon--git-branch" aria-hidden="true"></i>main<i class="ds-icon ds-icon--chevron-down" aria-hidden="true"></i></button><button type="button" class="ds-btn" data-variant="ghost" data-size="small"><i class="ds-icon ds-icon--git-pull-request" aria-hidden="true"></i>브랜치 8</button><button type="button" class="ds-btn" data-variant="ghost" data-size="small"><i class="ds-icon ds-icon--tag" aria-hidden="true"></i>태그 14</button><div class="tp-grow"><div style="width: min(100%, 240px)"><div class="ds-input" data-variant="outline" data-size="small"><i class="ds-icon ds-icon--search ds-input__icon" aria-hidden="true"></i><input class="ds-input__control" id="goto" type="search" placeholder="파일로 이동" aria-label="파일로 이동"></div></div><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="small">파일 추가<i class="ds-icon ds-icon--chevron-down" aria-hidden="true"></i></button><button type="button" class="ds-btn" data-variant="ghost" data-size="small"><i class="ds-icon ds-icon--rotate-ccw" aria-hidden="true"></i>기록 1,284</button></div></div>
+  <section class="ds-card tp-card" data-size="small" style="padding: 0; overflow: hidden"><div class="ds-table-wrap"><table class="ds-table" data-density="compact"><thead><tr><th scope="col"><span class="tp-row"><button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="모든 행 펼치기"><i class="ds-icon ds-icon--chevrons-up-down" aria-hidden="true"></i></button>이름</span></th><th scope="col">마지막 변경</th><th scope="col" data-align="end">시간</th></tr></thead><tbody><tr><td><span class="tp-tree-name" style="--d:0"><button type="button" class="tp-caret" aria-expanded="true" aria-label=".github 접기"><i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i></button><i class="ds-icon ds-icon--folder-open ds-icon--sm" aria-hidden="true"></i><a class="ds-link" href="#">.github</a></span></td><td class="tp-sub">ci: 패키지 캐시를 실행 사이에 재사용 (#412)</td><td data-align="end"><span class="tp-num">3시간 전</span></td></tr><tr><td><span class="tp-tree-name" style="--d:1"><button type="button" class="tp-caret" aria-expanded="true" aria-label="workflows 접기"><i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i></button><i class="ds-icon ds-icon--folder-open ds-icon--sm" aria-hidden="true"></i><a class="ds-link" href="#">workflows</a></span></td><td class="tp-sub">ci: 패키지 캐시를 실행 사이에 재사용 (#412)</td><td data-align="end"><span class="tp-num">3시간 전</span></td></tr><tr><td><span class="tp-tree-name" style="--d:2"><span class="tp-spacer"></span><i class="ds-icon ds-icon--file ds-icon--sm" aria-hidden="true"></i><a class="ds-link" href="#">ci.yml</a></span></td><td class="tp-sub">ci: 패키지 캐시를 실행 사이에 재사용 (#412)</td><td data-align="end"><span class="tp-num">3시간 전</span></td></tr><tr><td><span class="tp-tree-name" style="--d:2"><span class="tp-spacer"></span><i class="ds-icon ds-icon--file ds-icon--sm" aria-hidden="true"></i><a class="ds-link" href="#">release.yml</a></span></td><td class="tp-sub">chore: 배포 이름 규칙 바꿈</td><td data-align="end"><span class="tp-num">2주 전</span></td></tr><tr><td><span class="tp-tree-name" style="--d:0"><button type="button" class="tp-caret" aria-expanded="false" aria-label="docs 펼치기"><i class="ds-icon ds-icon--chevron-right ds-icon--sm" aria-hidden="true"></i></button><i class="ds-icon ds-icon--folder ds-icon--sm" aria-hidden="true"></i><a class="ds-link" href="#">docs</a></span></td><td class="tp-sub">docs: 도형 묶기 예제 추가</td><td data-align="end"><span class="tp-num">어제</span></td></tr><tr><td><span class="tp-tree-name" style="--d:0"><button type="button" class="tp-caret" aria-expanded="true" aria-label="src 접기"><i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i></button><i class="ds-icon ds-icon--folder-open ds-icon--sm" aria-hidden="true"></i><a class="ds-link" href="#">src</a></span></td><td class="tp-sub">feat: 선택 상자 크기 조절 손잡이</td><td data-align="end"><span class="tp-num">5시간 전</span></td></tr><tr><td><span class="tp-tree-name" style="--d:1"><button type="button" class="tp-caret" aria-expanded="false" aria-label="shapes 펼치기"><i class="ds-icon ds-icon--chevron-right ds-icon--sm" aria-hidden="true"></i></button><i class="ds-icon ds-icon--folder ds-icon--sm" aria-hidden="true"></i><a class="ds-link" href="#">shapes</a></span></td><td class="tp-sub">feat: 둥근 사각형 지원</td><td data-align="end"><span class="tp-num">2일 전</span></td></tr><tr><td><span class="tp-tree-name" style="--d:1"><span class="tp-spacer"></span><i class="ds-icon ds-icon--file ds-icon--sm" aria-hidden="true"></i><a class="ds-link" href="#">canvas.ts</a></span></td><td class="tp-sub">feat: 선택 상자 크기 조절 손잡이</td><td data-align="end"><span class="tp-num">5시간 전</span></td></tr><tr><td><span class="tp-tree-name" style="--d:1"><span class="tp-spacer"></span><i class="ds-icon ds-icon--file ds-icon--sm" aria-hidden="true"></i><a class="ds-link" href="#">index.ts</a></span></td><td class="tp-sub">refactor: 내보내기 정리</td><td data-align="end"><span class="tp-num">1주 전</span></td></tr><tr><td><span class="tp-tree-name" style="--d:0"><button type="button" class="tp-caret" aria-expanded="false" aria-label="tests 펼치기"><i class="ds-icon ds-icon--chevron-right ds-icon--sm" aria-hidden="true"></i></button><i class="ds-icon ds-icon--folder ds-icon--sm" aria-hidden="true"></i><a class="ds-link" href="#">tests</a></span></td><td class="tp-sub">test: 확대 축소 경계 값</td><td data-align="end"><span class="tp-num">3일 전</span></td></tr><tr><td><span class="tp-tree-name" style="--d:0"><span class="tp-spacer"></span><i class="ds-icon ds-icon--file ds-icon--sm" aria-hidden="true"></i><a class="ds-link" href="#">.gitignore</a></span></td><td class="tp-sub">chore: 처음 만듦</td><td data-align="end"><span class="tp-num">8개월 전</span></td></tr><tr><td><span class="tp-tree-name" style="--d:0"><span class="tp-spacer"></span><i class="ds-icon ds-icon--file ds-icon--sm" aria-hidden="true"></i><a class="ds-link" href="#">LICENSE</a></span></td><td class="tp-sub">chore: 처음 만듦</td><td data-align="end"><span class="tp-num">8개월 전</span></td></tr><tr><td><span class="tp-tree-name" style="--d:0"><span class="tp-spacer"></span><i class="ds-icon ds-icon--file ds-icon--sm" aria-hidden="true"></i><a class="ds-link" href="#">package.json</a></span></td><td class="tp-sub">chore: 버전 1.4.0</td><td data-align="end"><span class="tp-num">4일 전</span></td></tr><tr><td><span class="tp-tree-name" style="--d:0"><span class="tp-spacer"></span><i class="ds-icon ds-icon--file ds-icon--sm" aria-hidden="true"></i><a class="ds-link" href="#">README.md</a></span></td><td class="tp-sub">docs: 설치 방법 정리</td><td data-align="end"><span class="tp-num">어제</span></td></tr></tbody></table></div></section>
+  <section class="ds-card tp-card" data-size="small"><div class="ds-tabs" role="tablist" aria-label="문서"><button type="button" class="ds-tabs__trigger" role="tab" aria-selected="true">README</button><button type="button" class="ds-tabs__trigger" role="tab" aria-selected="false">라이선스</button><button type="button" class="ds-tabs__trigger" role="tab" aria-selected="false">기여 안내</button></div><div class="ds-markdown tp-md"><h3>canvas-editor</h3><p>웹 페이지에 넣어 쓰는 작은 벡터 캔버스예요. 도형을 그리고, 묶고, 크기를 바꾸고, 이미지로 내보낼 수 있어요.</p><h4>설치</h4><figure class="ds-codeblock"><figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">bash</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption><pre class="ds-codeblock__code"><code>npm install canvas-editor</code></pre></figure><h4>사용</h4><figure class="ds-codeblock"><figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">ts</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption><pre class="ds-codeblock__code"><code>import { Canvas } from 'canvas-editor';
+
+const canvas = new Canvas('#stage', { width: 800, height: 600 });
+canvas.add({ type: 'rect', x: 40, y: 40, w: 120, h: 80 });</code></pre></figure></div></section>
+</main>
+<aside class="tp-panel tp-about" aria-labelledby="s-about">
+  <h2 class="tp-h3" id="s-about">정보</h2>
+  <p class="tp-sub">웹 페이지에 넣어 쓰는 작은 벡터 캔버스. 도형 그리기, 묶기, 내보내기.</p>
+  <div class="tp-row" style="flex-wrap: wrap"><span class="ds-badge" data-tone="brand">canvas</span><span class="ds-badge" data-tone="brand">vector</span><span class="ds-badge" data-tone="brand">editor</span><span class="ds-badge" data-tone="brand">typescript</span></div>
+  <dl><dt>별</dt><dd class="tp-num">248</dd><dt>지켜보는 사람</dt><dd class="tp-num">19</dd><dt>포크</dt><dd class="tp-num">12</dd><dt>최근 릴리스</dt><dd>v1.4.0 · 4일 전</dd><dt>라이선스</dt><dd>MIT</dd></dl>
+  <hr class="ds-divider">
+  <h3 class="tp-h4">기여한 사람 8명</h3><div class="ds-avatar-group" data-size="24" role="group" aria-label="참여자"><span class="ds-avatar" data-size="24" role="img" aria-label="김서윤"><span class="ds-avatar__initials" aria-hidden="true">김</span></span><span class="ds-avatar" data-size="24" role="img" aria-label="이준호"><span class="ds-avatar__initials" aria-hidden="true">이</span></span><span class="ds-avatar" data-size="24" role="img" aria-label="박하린"><span class="ds-avatar__initials" aria-hidden="true">박</span></span><span class="ds-avatar" data-size="24" role="img" aria-label="최민준"><span class="ds-avatar__initials" aria-hidden="true">최</span></span><span class="ds-avatar" data-size="24" role="img" aria-label="정다은"><span class="ds-avatar__initials" aria-hidden="true">정</span></span><span class="ds-avatar-group__overflow" role="img" aria-label="그 외 3명">+3</span></div>
+</aside>
+</div>
+</div>
+</body>
+</html>

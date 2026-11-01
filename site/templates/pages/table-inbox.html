@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>받은함 표 - YBM DS 템플릿</title>
+<link rel="stylesheet" href="../../../dist/ybm-ds.css">
+<script src="../../../dist/ybm-ds.js" defer></script>
+<style>
+  /* 템플릿 배치 전용. 값은 모두 --ybm-* 토큰 */
+  body { word-break: keep-all; overflow-wrap: break-word; }
+  .tp-app { display: flex; flex-direction: column; min-height: 100vh; background: var(--ybm-color-bg-layer-default); }
+  .tp-head { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: var(--ybm-space-x4); padding: var(--ybm-space-x5) var(--ybm-space-x4); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); }
+  .tp-head__texts { display: flex; flex-direction: column; gap: var(--ybm-space-x1); min-width: 0; }
+  .tp-head__tools { display: flex; flex-wrap: wrap; align-items: flex-end; gap: var(--ybm-space-x2); }
+  .tp-h1 { font-size: var(--ybm-font-size-t09); line-height: var(--ybm-line-height-t09); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; }
+  .tp-h2 { font-size: var(--ybm-font-size-t07); line-height: var(--ybm-line-height-t07); font-weight: var(--ybm-font-weight-semibold); letter-spacing: -0.02em; }
+  .tp-h3 { font-size: var(--ybm-font-size-t05); line-height: var(--ybm-line-height-t05); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-h4 { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-sub { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
+  .tp-caption { font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); color: var(--ybm-color-fg-neutral-subtle); }
+  .tp-num { font-variant-numeric: tabular-nums; }
+  .tp-body { display: flex; flex: 1 1 auto; flex-direction: column; min-height: 0; }
+  .tp-content { display: flex; flex: 1 1 auto; flex-direction: column; gap: var(--ybm-space-x8); min-width: 0; padding: var(--ybm-space-x5) var(--ybm-space-x4) var(--ybm-space-x10); }
+  .tp-panel { display: flex; flex-direction: column; gap: var(--ybm-space-x6); padding: var(--ybm-space-x5) var(--ybm-space-x4); box-shadow: inset 0 1px 0 var(--ybm-color-stroke-neutral-muted); }
+  .tp-sec { display: flex; flex-direction: column; gap: var(--ybm-space-x3); min-width: 0; }
+  .tp-sec-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ybm-space-x2) var(--ybm-space-x3); }
+  .tp-sec-head__texts { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--ybm-space-x1) var(--ybm-space-x3); }
+  .tp-row { display: flex; align-items: center; gap: var(--ybm-space-x2); min-width: 0; }
+  .tp-between { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ybm-space-x2); }
+  .tp-stack { display: flex; flex-direction: column; gap: var(--ybm-space-x1); min-width: 0; }
+  .tp-g2, .tp-g3, .tp-g4, .tp-g5, .tp-g6 { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ybm-space-x3); }
+  .tp-card { min-width: 0; }
+  .tp-card.ds-card { gap: var(--ybm-space-x3); }
+  .tp-span2 { grid-column: auto; }
+  .tp-kpi__label { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
+  .tp-kpi__value { font-size: var(--ybm-font-size-t09); line-height: var(--ybm-line-height-t09); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+  .tp-delta { display: inline-flex; align-items: center; gap: 2px; font-size: var(--ybm-font-size-t03); line-height: var(--ybm-line-height-t03); font-weight: var(--ybm-font-weight-medium); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .tp-delta .ds-icon { --ds-icon-size: 14px; }
+  .tp-delta[data-tone="up"] { color: var(--ybm-color-fg-positive); }
+  .tp-delta[data-tone="down"] { color: var(--ybm-color-fg-critical); }
+  .tp-delta[data-tone="flat"] { color: var(--ybm-color-fg-neutral-muted); }
+  .tp-chart { display: block; width: 100%; height: auto; overflow: visible; }
+  .tp-chart text { fill: var(--ybm-color-fg-neutral-subtle); font-size: 11px; font-family: inherit; }
+  .tp-chart .tp-grid-line { stroke: var(--ybm-color-stroke-neutral-muted); stroke-width: 1; }
+  .tp-legend { display: flex; flex-wrap: wrap; gap: var(--ybm-space-x1) var(--ybm-space-x4); font-size: var(--ybm-font-size-t03); line-height: var(--ybm-line-height-t03); color: var(--ybm-color-fg-neutral-muted); }
+  .tp-legend__item { display: inline-flex; align-items: center; gap: var(--ybm-space-x1_5); }
+  .tp-swatch { flex: none; width: 10px; height: 10px; border-radius: 3px; background: var(--c, var(--ybm-color-chart-series-1)); }
+  .tp-split { display: flex; height: 12px; overflow: hidden; border-radius: var(--ybm-shape-pill); background: var(--ybm-color-bg-neutral); }
+  .tp-split > span { height: 100%; background: var(--c); }
+  .tp-split > span + span { box-shadow: inset 2px 0 0 var(--ybm-color-bg-layer-default); }
+  .tp-ph { display: grid; place-items: center; width: 100%; height: 100%; color: var(--ybm-color-fg-neutral-subtle); background: var(--ybm-color-bg-neutral); }
+  .tp-logo { display: inline-grid; place-items: center; width: 88px; height: 28px; border-radius: var(--ybm-shape-xs); background: var(--ybm-color-bg-neutral); color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t03-static); line-height: var(--ybm-line-height-t03-static); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-bar { position: sticky; top: 0; z-index: var(--ybm-z-sticky); background: var(--ybm-color-bg-layer-default); }
+  .tp-track { display: flex; flex-direction: column; gap: var(--ybm-space-x1); min-width: 120px; }
+  .tp-hide-sm { display: none; }
+  .tp-scroll-x { overflow-x: auto; }
+  .tp-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .tp-kbd { display: inline-grid; place-items: center; min-width: 20px; height: 20px; padding: 0 4px; border-radius: var(--ybm-shape-2xs); box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-neutral-muted); color: var(--ybm-color-fg-neutral-muted); font-size: var(--ybm-font-size-t01); font-family: inherit; }
+  @media (min-width: 768px) {
+    .tp-head { padding: var(--ybm-space-x6); }
+    .tp-content { padding: var(--ybm-space-x6) var(--ybm-space-x6) var(--ybm-space-x12); }
+    .tp-panel { padding: var(--ybm-space-x6); }
+    .tp-g2, .tp-g4, .tp-g6 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .tp-g3, .tp-g5 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .tp-hide-sm { display: revert; }
+  }
+  @media (min-width: 1024px) {
+    .tp-body--panel { flex-direction: row; }
+    .tp-body--panel > .tp-panel { flex: none; width: 400px; box-shadow: inset 1px 0 0 var(--ybm-color-stroke-neutral-muted); }
+    .tp-g3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .tp-g4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .tp-g5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+    .tp-g6 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .tp-span2 { grid-column: span 2; }
+    .tp-span3 { grid-column: span 3; }
+  }
+  @media (min-width: 1280px) { .tp-g6 { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
+
+  .tp-grouprow > td { padding-block: var(--ybm-space-x2); background: var(--ybm-color-bg-neutral-subtle); }
+  .tp-grouprow__in { display: flex; align-items: center; gap: var(--ybm-space-x2); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-caret { display: inline-grid; place-items: center; width: 24px; height: 24px; border: 0; border-radius: var(--ybm-shape-xs); background: none; color: var(--ybm-color-fg-neutral-muted); cursor: pointer; }
+  .tp-caret:hover { background: var(--ybm-color-bg-transparent-pressed); }
+  .tp-cell2 { display: flex; flex-direction: column; min-width: 0; }
+  .tp-cell2 > :last-child { color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t03); line-height: var(--ybm-line-height-t03); }
+  .tp-full-table { margin-inline: calc(var(--ybm-space-x4) * -1); }
+  @media (min-width: 768px) { .tp-full-table { margin-inline: calc(var(--ybm-space-x6) * -1); } }
+
+  .tp-inbox { display: grid; flex: 1 1 auto; grid-template-columns: minmax(0, 1fr); min-height: 0; }
+  @media (min-width: 1024px) { .tp-inbox { grid-template-columns: minmax(0, 1fr) 8px minmax(0, 1.1fr); } }
+  .tp-inbox__list .ds-table tr[aria-selected="true"] td { background: var(--ybm-color-bg-brand-weak); }
+  .tp-unread { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--ybm-color-bg-brand-solid); }
+  .tp-inbox__row { display: flex; flex-direction: column; }
+  .tp-inbox__row b { font-weight: var(--ybm-font-weight-semibold); }
+  .tp-handle { display: none; place-items: center; cursor: col-resize; box-shadow: inset 1px 0 0 var(--ybm-color-stroke-neutral-muted); }
+  .tp-handle::after { content: ""; width: 4px; height: 32px; border-radius: 2px; background: var(--ybm-color-stroke-neutral-weak); }
+  @media (min-width: 1024px) { .tp-handle { display: grid; } }
+  .tp-read { display: flex; flex-direction: column; gap: var(--ybm-space-x4); padding: var(--ybm-space-x5) var(--ybm-space-x4); box-shadow: inset 0 1px 0 var(--ybm-color-stroke-neutral-muted); }
+  @media (min-width: 1024px) { .tp-read { padding: var(--ybm-space-x6); box-shadow: none; } }
+  .tp-msg { display: flex; flex-direction: column; gap: var(--ybm-space-x2); }
+</style>
+</head>
+<body>
+<div class="tp-app" style="height: 100vh">
+<header class="tp-head" style="flex-direction: column; align-items: stretch; padding-bottom: 0">
+  <div class="tp-between"><div class="tp-head__texts"><h1 class="tp-h1">받은함</h1><p class="tp-sub">대화 9개 중 3개 읽지 않음</p></div><div class="tp-row"><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="small"><i class="ds-icon ds-icon--funnel" aria-hidden="true"></i>필터</button><button type="button" class="ds-btn" data-variant="neutralSolid" data-size="small"><i class="ds-icon ds-icon--square-pen" aria-hidden="true"></i>새 메시지</button></div></div>
+  <div class="ds-tabs" role="tablist" aria-label="받은함 탭"><button type="button" class="ds-tabs__trigger" role="tab" aria-selected="true">전체</button><button type="button" class="ds-tabs__trigger" role="tab" aria-selected="false">읽지 않음</button><button type="button" class="ds-tabs__trigger" role="tab" aria-selected="false">별표</button><button type="button" class="ds-tabs__trigger" role="tab" aria-selected="false">보관함</button></div>
+</header>
+<div class="tp-inbox">
+  <div class="tp-inbox__list" style="overflow:auto"><div class="ds-table-wrap"><table class="ds-table" data-density="compact"><thead><tr><th scope="col"><span class="tp-sr">상태</span></th><th scope="col">대화</th><th scope="col" data-align="end">받은 시간</th></tr></thead><tbody><tr data-interactive aria-selected="true"><td style="width:28px"><span class="tp-unread" role="img" aria-label="읽지 않음"></span></td><td><span class="tp-inbox__row"><b>김서윤</b><b>결제 페이지가 일부 해외 카드에서 오류가 나요</b></span></td><td data-align="end"><span class="tp-row" style="justify-content:flex-end"><i class="ds-icon ds-icon--paperclip ds-icon--sm" aria-hidden="true"></i><span class="tp-num">오전 9:52</span></span></td></tr><tr data-interactive><td style="width:28px"><span class="tp-unread" role="img" aria-label="읽지 않음"></span></td><td><span class="tp-inbox__row"><b>이준호</b><b>11월 단체 수강 견적 다시 부탁드려요</b></span></td><td data-align="end"><span class="tp-row" style="justify-content:flex-end"><span class="tp-num">오전 9:10</span></span></td></tr><tr data-interactive><td style="width:28px"><span class="tp-unread" role="img" aria-label="읽지 않음"></span></td><td><span class="tp-inbox__row"><b>박하린</b><b>강의 영상 자막 싱크가 맞지 않아요</b></span></td><td data-align="end"><span class="tp-row" style="justify-content:flex-end"><i class="ds-icon ds-icon--paperclip ds-icon--sm" aria-hidden="true"></i><span class="tp-num">오전 8:47</span></span></td></tr><tr data-interactive><td style="width:28px"></td><td><span class="tp-inbox__row"><span>최민준</span><span class="tp-sub">모의고사 점수 반영 문의</span></span></td><td data-align="end"><span class="tp-row" style="justify-content:flex-end"><span class="tp-num">어제</span></span></td></tr><tr data-interactive><td style="width:28px"></td><td><span class="tp-inbox__row"><span>정다은</span><span class="tp-sub">세금 계산서 발행 요청</span></span></td><td data-align="end"><span class="tp-row" style="justify-content:flex-end"><i class="ds-icon ds-icon--paperclip ds-icon--sm" aria-hidden="true"></i><span class="tp-num">어제</span></span></td></tr><tr data-interactive><td style="width:28px"></td><td><span class="tp-inbox__row"><span>한지우</span><span class="tp-sub">앱에서 로그인이 자꾸 풀려요</span></span></td><td data-align="end"><span class="tp-row" style="justify-content:flex-end"><span class="tp-num">10.30</span></span></td></tr><tr data-interactive><td style="width:28px"></td><td><span class="tp-inbox__row"><span>오세린</span><span class="tp-sub">수강 기간 연장 가능한가요?</span></span></td><td data-align="end"><span class="tp-row" style="justify-content:flex-end"><span class="tp-num">10.29</span></span></td></tr><tr data-interactive><td style="width:28px"></td><td><span class="tp-inbox__row"><span>윤도현</span><span class="tp-sub">기업 관리자 권한 추가</span></span></td><td data-align="end"><span class="tp-row" style="justify-content:flex-end"><i class="ds-icon ds-icon--paperclip ds-icon--sm" aria-hidden="true"></i><span class="tp-num">10.28</span></span></td></tr><tr data-interactive><td style="width:28px"></td><td><span class="tp-inbox__row"><span>서지민</span><span class="tp-sub">교재 배송 주소 변경</span></span></td><td data-align="end"><span class="tp-row" style="justify-content:flex-end"><span class="tp-num">10.27</span></span></td></tr></tbody></table></div></div>
+  <div class="tp-handle" role="separator" aria-label="대화 창 크기 조절" aria-orientation="vertical"></div>
+  <aside class="tp-read" aria-label="대화">
+    <div class="tp-between"><h2 class="tp-h3">결제 페이지가 일부 해외 카드에서 오류가 나요</h2><div class="tp-row"><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" aria-label="보관"><i class="ds-icon ds-icon--archive" aria-hidden="true"></i></button><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" aria-label="폴더로 옮기기"><i class="ds-icon ds-icon--folder-input" aria-hidden="true"></i></button><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" aria-label="삭제"><i class="ds-icon ds-icon--trash" aria-hidden="true"></i></button><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" aria-label="대화 닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button></div></div>
+    <div class="tp-row" style="flex-wrap: wrap"><span class="ds-badge" data-tone="critical">긴급</span><span class="ds-badge" data-tone="brand">결제</span><span class="ds-badge" data-tone="neutral">해외 카드</span><span class="ds-badge" data-tone="warning">답변 대기</span></div>
+    <div><details class="ds-accordion"><summary class="ds-accordion__trigger"><span class="ds-accordion__body"><span class="ds-accordion__title"><span class="tp-row"><span class="ds-avatar" data-size="24" role="img" aria-label="김서윤"><span class="ds-avatar__initials" aria-hidden="true">김</span></span><b>김서윤</b><span class="tp-caption">오전 9:21</span></span></span></span></summary><div class="ds-accordion__content"><p class="tp-sub">안녕하세요, 해외 발급 카드로 결제하면 마지막 단계에서 "결제를 완료하지 못했어요"가 떠요. 국내 카드는 괜찮아요.</p></div></details><details class="ds-accordion"><summary class="ds-accordion__trigger"><span class="ds-accordion__body"><span class="ds-accordion__title"><span class="tp-row"><span class="ds-avatar" data-size="24" role="img" aria-label="상담원 이민지"><span class="ds-avatar__initials" aria-hidden="true">상</span></span><b>상담원 이민지</b><span class="tp-caption">오전 9:30</span></span></span></span></summary><div class="ds-accordion__content"><p class="tp-sub">불편을 드려 죄송해요. 결제 대행사에 확인을 요청했어요. 사용하신 카드 종류를 알려 주실 수 있을까요?</p></div></details><details class="ds-accordion"><summary class="ds-accordion__trigger"><span class="ds-accordion__body"><span class="ds-accordion__title"><span class="tp-row"><span class="ds-avatar" data-size="24" role="img" aria-label="김서윤"><span class="ds-avatar__initials" aria-hidden="true">김</span></span><b>김서윤</b><span class="tp-caption">오전 9:44</span></span></span></span></summary><div class="ds-accordion__content"><p class="tp-sub">해외 발급 비자 카드예요. 두 장 모두 같은 오류가 났어요.</p></div></details><details class="ds-accordion" open><summary class="ds-accordion__trigger"><span class="ds-accordion__body"><span class="ds-accordion__title"><span class="tp-row"><span class="ds-avatar" data-size="24" role="img" aria-label="상담원 이민지"><span class="ds-avatar__initials" aria-hidden="true">상</span></span><b>상담원 이민지</b><span class="tp-caption">오전 9:52</span></span></span></span></summary><div class="ds-accordion__content"><p class="tp-sub">확인했어요. 해외 카드 3D 인증 단계에서 오류가 나는 것으로 보여요. 오늘 오후까지 고친 뒤 다시 안내드릴게요.</p></div></details></div>
+    <div class="tp-row"><button type="button" class="ds-btn" data-variant="neutralSolid" data-size="small"><i class="ds-icon ds-icon--corner-down-right" aria-hidden="true"></i>답장</button><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="small"><i class="ds-icon ds-icon--arrow-right" aria-hidden="true"></i>전달</button></div>
+  </aside>
+</div>
+</div>
+</body>
+</html>

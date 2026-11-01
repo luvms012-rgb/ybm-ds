@@ -40,7 +40,14 @@
 <a class="site-nav__item" href="../templates/dashboard-cohort-funnel.html">Funnel &amp; Cohort Dashboard</a>
 <a class="site-nav__item" href="../templates/dashboard-composition.html">Portfolio Dashboard</a>
 <a class="site-nav__item" href="../templates/dashboard-progress.html">Project Status Dashboard</a>
-<a class="site-nav__item" href="../templates/dashboard-alert-rail.html">Service Monitoring Dashboard</a></nav>
+<a class="site-nav__item" href="../templates/dashboard-alert-rail.html">Service Monitoring Dashboard</a>
+<a class="site-nav__item" href="../templates/table-collapsible.html">Collapsible Table</a>
+<a class="site-nav__item" href="../templates/table-comparison.html">Comparison Table</a>
+<a class="site-nav__item" href="../templates/table-filter.html">Filterable Table</a>
+<a class="site-nav__item" href="../templates/table-grouped.html">Grouped Table</a>
+<a class="site-nav__item" href="../templates/table-inbox.html">Inbox Table</a>
+<a class="site-nav__item" href="../templates/table-page.html">Searchable Table</a>
+<a class="site-nav__item" href="../templates/table-tree.html">Tree Table</a></nav>
 </aside>
 <div class="site-scrim" data-site-close></div>
 <main class="site-main" id="main">
@@ -51,6 +58,7 @@
   <div class="ds-chiptabs" role="tablist" aria-label="분류">
     <button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-filter="">전체</button>
     <button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-filter="Dashboard">Dashboard</button>
+    <button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-filter="Table">Table</button>
   </div>
 </div>
 <div class="site-tpl-grid">
@@ -101,6 +109,55 @@
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="dashboard-alert-rail.html">Service Monitoring Dashboard</a></h3><p class="site-tpl__desc">늘 켜 두는 상태 화면입니다. 상태 색이 있는 타일과 시간 그래프, 서비스별 90일 가동 막대, 오른쪽에 따로 스크롤되는 알림 패널이 있어요.</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="dashboard-alert-rail.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>Preview</a></div>
+  </div>
+</article>
+<article class="site-tpl" data-site-item="접히는 표 묶음 collapsible table table 열이 서로 다른 표 여러 개를 접히는 카드에 하나씩 담은 화면입니다. 묶음마다 칸이 달라 표 하나로 합치면 빈칸이 많아질 때 써요." data-site-cat="Table">
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/table-collapsible.html" title="접히는 표 묶음 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl__scrim">
+    <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="table-collapsible.html">Collapsible Table</a></h3><p class="site-tpl__desc">열이 서로 다른 표 여러 개를 접히는 카드에 하나씩 담은 화면입니다. 묶음마다 칸이 달라 표 하나로 합치면 빈칸이 많아질 때 써요.</p></div>
+    <div class="site-tpl__actions"><a class="site-tpl__btn" href="table-collapsible.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>Preview</a></div>
+  </div>
+</article>
+<article class="site-tpl" data-site-item="비교 표 comparison table table 비교할 대상을 열에, 기준을 묶음 행에 두고 왼쪽 이름 열을 고정한 표입니다. 열마다 대상을 바꿔 고를 수 있고 가장 좋은 값을 강조해요." data-site-cat="Table">
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/table-comparison.html" title="비교 표 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl__scrim">
+    <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="table-comparison.html">Comparison Table</a></h3><p class="site-tpl__desc">비교할 대상을 열에, 기준을 묶음 행에 두고 왼쪽 이름 열을 고정한 표입니다. 열마다 대상을 바꿔 고를 수 있고 가장 좋은 값을 강조해요.</p></div>
+    <div class="site-tpl__actions"><a class="site-tpl__btn" href="table-comparison.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>Preview</a></div>
+  </div>
+</article>
+<article class="site-tpl" data-site-item="필터 표 filterable table table 걸러 보기를 중심에 둔 표입니다. 검색과 여러 필터, 고급 검색, 필터 묶음을 저장하는 보기, 지점별로 묶은 행이 있어요." data-site-cat="Table">
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/table-filter.html" title="필터 표 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl__scrim">
+    <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="table-filter.html">Filterable Table</a></h3><p class="site-tpl__desc">걸러 보기를 중심에 둔 표입니다. 검색과 여러 필터, 고급 검색, 필터 묶음을 저장하는 보기, 지점별로 묶은 행이 있어요.</p></div>
+    <div class="site-tpl__actions"><a class="site-tpl__btn" href="table-filter.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>Preview</a></div>
+  </div>
+</article>
+<article class="site-tpl" data-site-item="묶음 표 grouped table table 행을 상태별로 접히는 묶음에 나누고 묶음마다 개수를 붙인 표입니다. 긴 목록을 몇 덩어리로 줄여 읽을 수 있어요." data-site-cat="Table">
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/table-grouped.html" title="묶음 표 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl__scrim">
+    <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="table-grouped.html">Grouped Table</a></h3><p class="site-tpl__desc">행을 상태별로 접히는 묶음에 나누고 묶음마다 개수를 붙인 표입니다. 긴 목록을 몇 덩어리로 줄여 읽을 수 있어요.</p></div>
+    <div class="site-tpl__actions"><a class="site-tpl__btn" href="table-grouped.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>Preview</a></div>
+  </div>
+</article>
+<article class="site-tpl" data-site-item="받은함 표 inbox table table 왼쪽 표가 오른쪽 읽기 창의 목차가 되는 두 칸 받은함입니다. 가운데 손잡이로 크기를 바꾸고, 좁아지면 위아래로 쌓여요." data-site-cat="Table">
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/table-inbox.html" title="받은함 표 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl__scrim">
+    <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="table-inbox.html">Inbox Table</a></h3><p class="site-tpl__desc">왼쪽 표가 오른쪽 읽기 창의 목차가 되는 두 칸 받은함입니다. 가운데 손잡이로 크기를 바꾸고, 좁아지면 위아래로 쌓여요.</p></div>
+    <div class="site-tpl__actions"><a class="site-tpl__btn" href="table-inbox.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>Preview</a></div>
+  </div>
+</article>
+<article class="site-tpl" data-site-item="검색 표 searchable table table 청구서 같은 한 건의 정보 아래에 같은 모양의 행을 두고, 검색칸·방식 전환·열별 필터 세 가지로 동시에 좁히는 표입니다." data-site-cat="Table">
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/table-page.html" title="검색 표 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl__scrim">
+    <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="table-page.html">Searchable Table</a></h3><p class="site-tpl__desc">청구서 같은 한 건의 정보 아래에 같은 모양의 행을 두고, 검색칸·방식 전환·열별 필터 세 가지로 동시에 좁히는 표입니다.</p></div>
+    <div class="site-tpl__actions"><a class="site-tpl__btn" href="table-page.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>Preview</a></div>
+  </div>
+</article>
+<article class="site-tpl" data-site-item="트리 표 tree table table 부모 행이 자식 행을 품는 계층 표입니다. 코드 저장소처럼 폴더를 펼쳐 내려가고, 옆 패널에 저장소 정보를 둡니다." data-site-cat="Table">
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/table-tree.html" title="트리 표 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl__scrim">
+    <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="table-tree.html">Tree Table</a></h3><p class="site-tpl__desc">부모 행이 자식 행을 품는 계층 표입니다. 코드 저장소처럼 폴더를 펼쳐 내려가고, 옆 패널에 저장소 정보를 둡니다.</p></div>
+    <div class="site-tpl__actions"><a class="site-tpl__btn" href="table-tree.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>Preview</a></div>
   </div>
 </article>
 </div>
