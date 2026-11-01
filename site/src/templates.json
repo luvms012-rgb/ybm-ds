@@ -320,6 +320,94 @@
       "group": "Content",
       "desc": "할 일 한 건을 두 칸에 보여 주는 상세입니다. 제목과 상태 고르기, 설명, 진행 막대가 있는 하위 할 일, 첨부 파일, 댓글이 이어져요.",
       "rebuilt": true
+    },
+    {
+      "slug": "ai-chat",
+      "name": "AI 대화",
+      "en": "AI Chat Conversation",
+      "group": "AI Chat",
+      "desc": "글, 코드, 접히는 도구 사용 기록이 섞인 대화를 주고받고, 옆에 크기를 바꿀 수 있는 결과물 패널을 둔 AI 대화 화면입니다.",
+      "rebuilt": true
+    },
+    {
+      "slug": "ai-chat-landing",
+      "name": "AI 첫 화면",
+      "en": "AI Chat Landing",
+      "group": "AI Chat",
+      "desc": "아직 대화가 없을 때 보여 주는 첫 화면입니다. 지난 기록 대신 가운데 입력창 하나와 분류 버튼으로 시작을 돕고, 첨부 파일 개수는 접혀 있어요.",
+      "rebuilt": true
+    },
+    {
+      "slug": "centered-hero",
+      "name": "가운데 히어로",
+      "en": "Centered Hero",
+      "group": "Gallery",
+      "desc": "큰 제목, 짧은 설명, 버튼 두 개를 가운데 쌓고 그 아래 넓은 사진 한 장을 깐 대칭 첫 화면입니다. 양옆에 다른 것을 두지 않아요.",
+      "rebuilt": true
+    },
+    {
+      "slug": "classic-gallery",
+      "name": "바둑판 갤러리",
+      "en": "Classic Gallery",
+      "group": "Gallery",
+      "desc": "가운데 소개 아래에 같은 비율 사진을 바둑판처럼 늘어놓고, 탭으로 그 자리에서 거르는 갤러리입니다. 높이가 다른 벽돌형과 달리 줄이 고르게 맞아요.",
+      "rebuilt": true
+    },
+    {
+      "slug": "gallery-hero",
+      "name": "사진 묶음 히어로",
+      "en": "Gallery Hero",
+      "group": "Gallery",
+      "desc": "가운데 제목과 버튼 아래에 넓은 사진 한 장 대신 여러 사진을 모아 깐 첫 화면입니다. 사진이 한 장면이 아니라 여러 장면으로 읽혀요.",
+      "rebuilt": true
+    },
+    {
+      "slug": "mixed-gallery",
+      "name": "벽돌형 갤러리",
+      "en": "Mixed Gallery",
+      "group": "Gallery",
+      "desc": "높이가 다른 사진을 자르지 않고 빈틈없이 쌓는 벽돌형 갤러리입니다. 사진마다 짧은 설명이 붙고, 줄이 고르지 않아 자연스러워요.",
+      "rebuilt": true
+    },
+    {
+      "slug": "product-gallery",
+      "name": "상품 갤러리",
+      "en": "Product Gallery",
+      "group": "Gallery",
+      "desc": "사진, 이름, 한 줄 설명, 가격이 있는 같은 모양 카드를 늘어놓은 상품 갤러리입니다. 거르기나 상세 화면 없이 훑어보고 고르기만 해요.",
+      "rebuilt": true
+    },
+    {
+      "slug": "side-gallery",
+      "name": "옆 갤러리",
+      "en": "Side Gallery",
+      "group": "Gallery",
+      "desc": "한쪽에 제목·설명·링크를 두고 반대쪽에 사진 묶음을 붙인 비대칭 구역입니다. 일부러 균형을 깨서 가운데 정렬 히어로와 다르게 보여요.",
+      "rebuilt": true
+    },
+    {
+      "slug": "shell-nav",
+      "name": "앱 틀 (위 메뉴 + 옆 트리)",
+      "en": "Shell Nav",
+      "group": "Shell",
+      "desc": "두 방향 내비게이션을 함께 쓰는 앱 틀입니다. 위에 명령 찾기가 있는 메뉴 막대, 옆에 크기를 바꾸는 계층 레일을 두고 본문은 비워 둬요.",
+      "rebuilt": true
+    },
+    {
+      "slug": "shell-side-nav",
+      "name": "앱 틀 (옆 메뉴)",
+      "en": "Side Nav",
+      "group": "Shell",
+      "desc": "접고 크기를 바꿀 수 있는 왼쪽 레일 하나로 묶음 기록과 찾기를 담은 앱 틀입니다. 세로 내비게이션만 있고 위 막대는 없어요.",
+      "rebuilt": true
+    },
+    {
+      "slug": "shell-top-nav",
+      "name": "앱 틀 (위 메뉴)",
+      "en": "Top Nav",
+      "group": "Shell",
+      "desc": "가로 내비게이션만 있는 앱 틀입니다. 가운데 막대의 항목을 누르면 전체 폭 메가 메뉴가 열리고, 아래 본문은 화면 폭을 모두 써요.",
+      "rebuilt": true
     }
   ],
   "figmaHeader": "2606:2"

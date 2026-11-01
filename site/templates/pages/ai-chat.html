@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI 대화 - YBM DS 템플릿</title>
+<link rel="stylesheet" href="../../../dist/ybm-ds.css">
+<script src="../../../dist/ybm-ds.js" defer></script>
+<style>
+  /* 템플릿 배치 전용. 값은 모두 --ybm-* 토큰 */
+  body { word-break: keep-all; overflow-wrap: break-word; }
+  .tp-app { display: flex; flex-direction: column; min-height: 100vh; background: var(--ybm-color-bg-layer-default); }
+  .tp-head { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: var(--ybm-space-x4); padding: var(--ybm-space-x5) var(--ybm-space-x4); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); }
+  .tp-head__texts { display: flex; flex-direction: column; gap: var(--ybm-space-x1); min-width: 0; }
+  .tp-head__tools { display: flex; flex-wrap: wrap; align-items: flex-end; gap: var(--ybm-space-x2); }
+  .tp-head > .tp-row, .tp-head .tp-between > .tp-row { flex-wrap: wrap; }
+  .ds-tablepagination { flex-wrap: wrap; row-gap: var(--ybm-space-x2); }
+  .tp-h1 { font-size: var(--ybm-font-size-t09); line-height: var(--ybm-line-height-t09); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; }
+  .tp-h2 { font-size: var(--ybm-font-size-t07); line-height: var(--ybm-line-height-t07); font-weight: var(--ybm-font-weight-semibold); letter-spacing: -0.02em; }
+  .tp-h3 { font-size: var(--ybm-font-size-t05); line-height: var(--ybm-line-height-t05); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-h4 { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-sub { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
+  .tp-caption { font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); color: var(--ybm-color-fg-neutral-subtle); }
+  .tp-num { font-variant-numeric: tabular-nums; }
+  .tp-body { display: flex; flex: 1 1 auto; flex-direction: column; min-height: 0; }
+  .tp-content { display: flex; flex: 1 1 auto; flex-direction: column; gap: var(--ybm-space-x8); min-width: 0; padding: var(--ybm-space-x5) var(--ybm-space-x4) var(--ybm-space-x10); }
+  .tp-panel { display: flex; flex-direction: column; gap: var(--ybm-space-x6); padding: var(--ybm-space-x5) var(--ybm-space-x4); box-shadow: inset 0 1px 0 var(--ybm-color-stroke-neutral-muted); }
+  .tp-sec { display: flex; flex-direction: column; gap: var(--ybm-space-x3); min-width: 0; }
+  .tp-sec-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ybm-space-x2) var(--ybm-space-x3); }
+  .tp-sec-head__texts { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--ybm-space-x1) var(--ybm-space-x3); }
+  .tp-row { display: flex; align-items: center; gap: var(--ybm-space-x2); min-width: 0; }
+  .tp-between { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ybm-space-x2); }
+  .tp-stack { display: flex; flex-direction: column; gap: var(--ybm-space-x1); min-width: 0; }
+  .tp-g2, .tp-g3, .tp-g4, .tp-g5, .tp-g6 { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ybm-space-x3); }
+  .tp-card { min-width: 0; }
+  .tp-card.ds-card { gap: var(--ybm-space-x3); }
+  .tp-span2 { grid-column: auto; }
+  .tp-kpi__label { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
+  .tp-kpi__value { font-size: var(--ybm-font-size-t09); line-height: var(--ybm-line-height-t09); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+  .tp-delta { display: inline-flex; align-items: center; gap: 2px; font-size: var(--ybm-font-size-t03); line-height: var(--ybm-line-height-t03); font-weight: var(--ybm-font-weight-medium); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .tp-delta .ds-icon { --ds-icon-size: 14px; }
+  .tp-delta[data-tone="up"] { color: var(--ybm-color-fg-positive); }
+  .tp-delta[data-tone="down"] { color: var(--ybm-color-fg-critical); }
+  .tp-delta[data-tone="flat"] { color: var(--ybm-color-fg-neutral-muted); }
+  .tp-chart { display: block; width: 100%; height: auto; overflow: visible; }
+  .tp-chart text { fill: var(--ybm-color-fg-neutral-subtle); font-size: 11px; font-family: inherit; }
+  .tp-chart .tp-grid-line { stroke: var(--ybm-color-stroke-neutral-muted); stroke-width: 1; }
+  .tp-legend { display: flex; flex-wrap: wrap; gap: var(--ybm-space-x1) var(--ybm-space-x4); font-size: var(--ybm-font-size-t03); line-height: var(--ybm-line-height-t03); color: var(--ybm-color-fg-neutral-muted); }
+  .tp-legend__item { display: inline-flex; align-items: center; gap: var(--ybm-space-x1_5); }
+  .tp-swatch { flex: none; width: 10px; height: 10px; border-radius: 3px; background: var(--c, var(--ybm-color-chart-series-1)); }
+  .tp-split { display: flex; height: 12px; overflow: hidden; border-radius: var(--ybm-shape-pill); background: var(--ybm-color-bg-neutral); }
+  .tp-split > span { height: 100%; background: var(--c); }
+  .tp-split > span + span { box-shadow: inset 2px 0 0 var(--ybm-color-bg-layer-default); }
+  .tp-ph { display: grid; place-items: center; width: 100%; height: 100%; color: var(--ybm-color-fg-neutral-subtle); background: var(--ybm-color-bg-neutral); }
+  .tp-logo { display: inline-grid; place-items: center; width: 88px; height: 28px; border-radius: var(--ybm-shape-xs); background: var(--ybm-color-bg-neutral); color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t03-static); line-height: var(--ybm-line-height-t03-static); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-bar { position: sticky; top: 0; z-index: var(--ybm-z-sticky); background: var(--ybm-color-bg-layer-default); }
+  .tp-track { display: flex; flex-direction: column; gap: var(--ybm-space-x1); min-width: 120px; }
+  .tp-hide-sm { display: none; }
+  .tp-scroll-x { overflow-x: auto; }
+  .tp-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .tp-kbd { display: inline-grid; place-items: center; min-width: 20px; height: 20px; padding: 0 4px; border-radius: var(--ybm-shape-2xs); box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-neutral-muted); color: var(--ybm-color-fg-neutral-muted); font-size: var(--ybm-font-size-t01); font-family: inherit; }
+  @media (min-width: 768px) {
+    .tp-head { padding: var(--ybm-space-x6); }
+    .tp-content { padding: var(--ybm-space-x6) var(--ybm-space-x6) var(--ybm-space-x12); }
+    .tp-panel { padding: var(--ybm-space-x6); }
+    .tp-g2, .tp-g4, .tp-g6 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .tp-g3, .tp-g5 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .tp-hide-sm { display: revert; }
+  }
+  @media (min-width: 1024px) {
+    .tp-body--panel { flex-direction: row; }
+    .tp-body--panel > .tp-panel { flex: none; width: 400px; box-shadow: inset 1px 0 0 var(--ybm-color-stroke-neutral-muted); }
+    .tp-g3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .tp-g4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .tp-g5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+    .tp-g6 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .tp-span2 { grid-column: span 2; }
+    .tp-span3 { grid-column: span 3; }
+  }
+  @media (min-width: 1280px) { .tp-g6 { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
+
+  .tp-chat { display: flex; flex-direction: column; height: 100vh; overflow: hidden; background: var(--ybm-color-bg-layer-default); }
+  .tp-chat__body { display: flex; flex: 1 1 auto; min-height: 0; }
+  .tp-chat__main { display: flex; flex: 1 1 auto; flex-direction: column; min-width: 0; }
+  .tp-log { flex: 1 1 auto; overflow: auto; display: flex; flex-direction: column; gap: var(--ybm-space-x5); padding: var(--ybm-space-x6) var(--ybm-space-x4); }
+  .tp-log > * { width: min(100%, 720px); margin-inline: auto; }
+  .tp-msg-user { display: flex; flex-direction: column; align-items: flex-end; gap: var(--ybm-space-x1_5); }
+  .tp-msg-ai { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--ybm-space-x3); }
+  .tp-msg-ai__body { display: flex; flex-direction: column; gap: var(--ybm-space-x3); min-width: 0; }
+  .tp-tools { border-radius: var(--ybm-shape-lg); box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-neutral-muted); }
+  .tp-tools > summary { display: flex; align-items: center; gap: var(--ybm-space-x2); padding: var(--ybm-space-x2) var(--ybm-space-x3); list-style: none; cursor: pointer; font-size: var(--ybm-font-size-t03); color: var(--ybm-color-fg-neutral-muted); }
+  .tp-tools > summary::-webkit-details-marker { display: none; }
+  .tp-tools ul { list-style: none; margin: 0; padding: 0 var(--ybm-space-x3) var(--ybm-space-x2); display: flex; flex-direction: column; gap: var(--ybm-space-x1); font-size: var(--ybm-font-size-t03); }
+  .tp-tools li { display: flex; align-items: center; gap: var(--ybm-space-x2); color: var(--ybm-color-fg-neutral-muted); }
+  .tp-tools li .ds-icon { color: var(--ybm-color-fg-positive); }
+  .tp-tools code { color: var(--ybm-color-fg-neutral); }
+  .tp-composer-wrap { padding: var(--ybm-space-x3) var(--ybm-space-x4) var(--ybm-space-x4); }
+  .tp-composer-wrap > * { width: min(100%, 720px); margin-inline: auto; }
+  .tp-composer { display: flex; flex-direction: column; gap: var(--ybm-space-x2); padding: var(--ybm-space-x3); border-radius: var(--ybm-shape-2xl); background: var(--ybm-color-bg-layer-floating); box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-neutral-muted), 0 4px 16px rgb(0 0 0 / .06); }
+  .tp-composer textarea { width: 100%; min-height: 48px; padding: var(--ybm-space-x1) var(--ybm-space-x1); border: 0; background: none; color: inherit; font: inherit; font-size: var(--ybm-font-size-t05); resize: none; outline: none; }
+  .tp-composer textarea::placeholder { color: var(--ybm-color-fg-placeholder); }
+  .tp-composer__bar { display: flex; align-items: center; gap: var(--ybm-space-x1); }
+  .tp-composer__bar .tp-grow { flex: 1 1 auto; }
+  .tp-send { display: inline-grid; place-items: center; width: 36px; height: 36px; border: 0; border-radius: 50%; background: var(--ybm-color-bg-neutral-solid); color: var(--ybm-color-fg-on-neutral-solid); cursor: pointer; }
+  .tp-files-row { display: flex; flex-wrap: wrap; gap: var(--ybm-space-x1_5); }
+  .tp-file-token { display: inline-flex; align-items: center; gap: var(--ybm-space-x1); height: 28px; padding: 0 var(--ybm-space-x1) 0 var(--ybm-space-x2); border-radius: var(--ybm-shape-sm); background: var(--ybm-color-bg-neutral); font-size: var(--ybm-font-size-t03); }
+
+  .tp-artifact { display: none; flex: none; width: min(46%, 600px); flex-direction: column; box-shadow: inset 1px 0 0 var(--ybm-color-stroke-neutral-muted); }
+  @media (min-width: 1024px) { .tp-artifact { display: flex; } }
+  .tp-artifact__bar { display: flex; align-items: center; justify-content: space-between; gap: var(--ybm-space-x2); padding: var(--ybm-space-x3) var(--ybm-space-x4); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); }
+  .tp-artifact__doc { flex: 1 1 auto; overflow: auto; padding: var(--ybm-space-x6); }
+  .tp-chat-head { display: flex; align-items: center; justify-content: space-between; gap: var(--ybm-space-x2); padding: var(--ybm-space-x3) var(--ybm-space-x4); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); }
+</style>
+</head>
+<body>
+<div class="tp-chat">
+<header class="tp-chat-head"><span class="tp-row"><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" aria-label="대화 목록"><i class="ds-icon ds-icon--panel-left" aria-hidden="true"></i></button><span class="tp-h4">로그인 유지 기능 점검</span></span><span class="tp-row"><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" aria-label="공유"><i class="ds-icon ds-icon--share" aria-hidden="true"></i></button><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" aria-label="더 보기"><i class="ds-icon ds-icon--ellipsis" aria-hidden="true"></i></button></span></header>
+<div class="tp-chat__body">
+  <div class="tp-chat__main">
+    <div class="tp-log" role="log" aria-label="대화">
+      <p class="ds-chat-system" data-variant="divider">오늘</p>
+      <div class="tp-msg-user"><div class="tp-files-row"><span class="tp-file-token"><i class="ds-icon ds-icon--file-code ds-icon--sm" aria-hidden="true"></i>auth-service.ts</span><span class="tp-file-token"><i class="ds-icon ds-icon--file-code ds-icon--sm" aria-hidden="true"></i>middleware.ts</span></div><div class="ds-chat-bubble" data-sender="user">이 두 파일을 봐 줄래요? 토큰 새로 받기가 가끔 실패하는 것 같아요.</div><span class="ds-chat-meta" data-status="read"><time>오전 10:15</time></span></div>
+      <div class="tp-msg-ai"><span class="ds-avatar" data-size="24" role="img" aria-label="AI"><span class="ds-avatar__initials" aria-hidden="true">A</span></span><div class="tp-msg-ai__body"><p>두 파일을 읽어 볼게요. 토큰이 만료되는 순간 요청이 동시에 여러 개 오면 새로 받기를 겹쳐서 하는 것 같아요.</p>
+        <details class="tp-tools"><summary><i class="ds-icon ds-icon--wand-sparkles ds-icon--sm" aria-hidden="true"></i>도구 3번 사용 <i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i></summary><ul><li><i class="ds-icon ds-icon--circle-check ds-icon--sm" aria-hidden="true"></i>읽음 <code>auth-service.ts</code></li><li><i class="ds-icon ds-icon--circle-check ds-icon--sm" aria-hidden="true"></i>읽음 <code>middleware.ts</code></li><li><i class="ds-icon ds-icon--circle-check ds-icon--sm" aria-hidden="true"></i>찾음 <code>refreshToken</code> 6곳</li></ul></details>
+        <div class="ds-markdown"><h3>원인</h3><p>만료 직전 요청 3개가 동시에 <code>refreshToken()</code>을 불러서, 먼저 끝난 요청이 토큰을 바꾸면 나머지 둘은 이미 쓴 토큰으로 다시 요청해 실패해요.</p><h3>고치는 법</h3><p>새로 받는 중이면 같은 약속(Promise)을 함께 기다리게 하면 돼요.</p></div>
+        <figure class="ds-codeblock"><figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">ts</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption><pre class="ds-codeblock__code"><code>let pending: Promise&lt;string&gt; | null = null;
+
+export function refreshToken() {
+  pending ??= fetchNewToken().finally(() =&gt; { pending = null; });
+  return pending;
+}</code></pre></figure>
+        <div class="tp-row"><button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="복사"><i class="ds-icon ds-icon--copy" aria-hidden="true"></i></button><button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="좋아요"><i class="ds-icon ds-icon--thumbs-up" aria-hidden="true"></i></button><button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="별로예요"><i class="ds-icon ds-icon--thumbs-down" aria-hidden="true"></i></button><button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="다시 답하기"><i class="ds-icon ds-icon--rotate-ccw" aria-hidden="true"></i></button></div></div></div>
+      <div class="tp-msg-user"><div class="ds-chat-bubble" data-sender="user">좋아요. 배포 계획도 문서로 정리해 줘요.</div><span class="ds-chat-meta" data-status="read"><time>오전 10:21</time></span></div>
+      <div class="tp-msg-ai"><span class="ds-avatar" data-size="24" role="img" aria-label="AI"><span class="ds-avatar__initials" aria-hidden="true">A</span></span><div class="tp-msg-ai__body"><p>오른쪽에 설계와 배포 문서를 만들었어요. 문제, 고치는 법, 테스트, 단계별 배포 순서로 정리했어요.</p></div></div>
+    </div>
+    <div class="tp-composer-wrap"><form class="tp-composer" onsubmit="return false"><textarea rows="2" placeholder="이어서 물어보세요" aria-label="메시지 입력"></textarea><div class="tp-composer__bar"><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" aria-label="파일 첨부"><i class="ds-icon ds-icon--plus" aria-hidden="true"></i></button><button type="button" class="ds-btn" data-variant="ghost" data-size="small"><i class="ds-icon ds-icon--paperclip" aria-hidden="true"></i>참고 자료</button><button type="button" class="ds-btn" data-variant="ghost" data-size="small"><i class="ds-icon ds-icon--sliders-horizontal" aria-hidden="true"></i>도구</button><span class="tp-grow"></span><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" aria-label="말로 입력"><i class="ds-icon ds-icon--mic" aria-hidden="true"></i></button><button type="submit" class="tp-send" aria-label="보내기"><i class="ds-icon ds-icon--arrow-up" aria-hidden="true"></i></button></div></form></div>
+  </div>
+  <aside class="tp-artifact" aria-label="결과물">
+    <div class="tp-artifact__bar"><span class="tp-row"><i class="ds-icon ds-icon--file-text ds-icon--sm" aria-hidden="true"></i><span class="tp-h4">토큰 새로 받기 설계와 배포</span><span class="ds-badge" data-tone="neutral">v2</span></span><span class="tp-row"><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" aria-label="복사"><i class="ds-icon ds-icon--copy" aria-hidden="true"></i></button><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" aria-label="내려받기"><i class="ds-icon ds-icon--download" aria-hidden="true"></i></button><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" aria-label="닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button></span></div>
+    <div class="tp-artifact__doc ds-markdown"><h2>토큰 새로 받기 설계와 배포</h2><h3>개요</h3><p>짧은 접속 토큰과 긴 새로 받기 토큰을 함께 써요. 접속 토큰이 끝나기 전에 조용히 새로 받아 사용자가 로그아웃되지 않게 해요.</p><h3>문제</h3><ol><li>요청 여러 개가 동시에 만료를 만나요.</li><li>각자 새로 받기를 불러요.</li><li>마지막 하나만 성공하고 나머지는 401이 나요.</li></ol><h3>고치는 법</h3><p>새로 받는 중인 약속을 하나만 두고 모두 그것을 기다려요.</p><h3>테스트</h3><table><thead><tr><th>상황</th><th>기대</th></tr></thead><tbody><tr><td>동시 요청 3개</td><td>새로 받기 1번</td></tr><tr><td>새로 받기 실패</td><td>로그인 화면으로</td></tr></tbody></table><h3>배포와 지켜보기</h3><p>사용자 5%부터 켜고 24시간 동안 실패율이 그대로면 100%로 넓혀요.</p></div>
+  </aside>
+</div>
+</div>
+</body>
+</html>
