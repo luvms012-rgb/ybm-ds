@@ -207,7 +207,7 @@ function sideNav(section, file, root) {
   }
   if (section === 'templates') {
     parts.push(item('templates/index.html', 'Overview'));
-    parts.push(...templates.map((t) => item(`templates/${t.slug}.html`, t.en)));
+    parts.push(...templates.map((t) => item(`templates/${t.slug}.html`, t.name)));
   }
   const mobile = `<div class="site-side__mobile"><nav class="site-nav" aria-label="주요 메뉴">${NAV.map(([k, l, h]) => `<a class="site-nav__item" href="${root}${h}"${k === section ? ' aria-current="page"' : ''}>${l}</a>`).join('')}</nav><div class="site-nav__sep"></div></div>`;
   // 컴포넌트 메뉴 맨 위 찾기 칸 (높이 32, 모서리 12, 1px 테두리) - 메뉴 항목과 목록 카드를 함께 거른다
@@ -597,7 +597,10 @@ function topElements(html, n) {
   return out;
 }
 // 썸네일 - 레퍼런스 B처럼 회색 16:9 상자 가운데에 첫 예시의 앞 부품 몇 개를 실제 크기로
+// 컴포넌트 대표 그림: site/src/covers.html 에 컴포넌트마다 손으로 쓴 장면(한국어, 실제 쓰임). 없으면 첫 예시에서 꺼낸다
+const COVERS = Object.fromEntries([...fs.readFileSync(path.join(SITE, 'src/covers.html'), 'utf8').matchAll(/<template data-slug="([^"]+)">([\s\S]*?)<\/template>/g)].map((m) => [m[1], m[2]]));
 const cardThumb = (c) => {
+  if (COVERS[c.slug]) return `<div class="site-tile__thumb" aria-hidden="true"><div class="site-tile__inner" inert><div class="pv-stage">${COVERS[c.slug].replace(/<a\b/g, '<span').replace(/<\/a>/g, '</span>')}</div></div></div>`;
   const first = stages(c.example)[0] || '';
   // 카드 전체가 링크라 안쪽 링크는 span으로 바꾼다(링크 안 링크는 HTML이 깨진다)
   const safe = topElements(first, 2).join('').replace(/ id="[^"]*"/g, '').replace(/<script[\s\S]*?<\/script>/g, '').replace(/<a\b/g, '<span').replace(/<\/a>/g, '</span>');
@@ -679,7 +682,7 @@ write({
 ${templates.map((t) => `<article class="site-tpl" data-site-item="${esc((t.name + ' ' + t.en + ' ' + t.group + ' ' + t.desc).toLowerCase())}" data-site-cat="${esc(t.group)}">
   <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/${t.slug}.html" title="${esc(t.name)} 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
   <div class="site-tpl__scrim">
-    <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="${t.slug}.html">${esc(t.en)}</a></h3><p class="site-tpl__desc">${esc(t.desc)}</p></div>
+    <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="${t.slug}.html">${esc(t.name)}</a></h3><p class="site-tpl__desc">${esc(t.desc)}</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="${t.slug}.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>Preview</a>${t.figma ? `<a class="site-tpl__btn" href="${LINKS.figmaUrl(t.figma.pc)}" target="_blank" rel="noopener"><i class="ds-icon site-i--figma" aria-hidden="true"></i>Open in Figma</a>` : ''}</div>
   </div>
 </article>`).join('\n')}
@@ -694,10 +697,10 @@ templates.forEach((t) => {
   const classes = new Set((src.match(/class="[^"]*"/g) || []).join(' ').match(/\bds-[a-z0-9_-]+/g) || []);
   const used = comps.filter((c) => c.classes.some((k) => classes.has(k.slice(1))));
   write({
-    file: `templates/${t.slug}.html`, section: 'templates', title: t.en, desc: t.desc, layout: 'wide',
+    file: `templates/${t.slug}.html`, section: 'templates', title: t.name, desc: t.desc, layout: 'wide',
     body: `<header>
   <p class="site-eyebrow"><a href="index.html">Templates</a> / ${esc(t.group)}</p>
-  <h1 class="site-h1">${esc(t.en)}</h1>
+  <h1 class="site-h1">${esc(t.name)}</h1>
   <p class="site-lead">${esc(t.desc)}</p>
   <div class="site-meta">${btn(`pages/${t.slug}.html`, '새 창으로 보기', 'neutralSolid', 'small', 'external-link').replace('href="pages', 'target="_blank" rel="noopener" href="pages')}${t.figma ? metaLink(LINKS.figmaUrl(t.figma.pc), 'Figma', 'site-i--figma') : ''}${metaLink(`${GITHUB}/blob/main/site/templates/pages/${t.slug}.html`, 'Code', 'site-i--github')}</div>
 </header>

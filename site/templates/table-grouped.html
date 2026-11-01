@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Grouped Table - YBM DS</title>
+<title>그룹 목록 - YBM DS</title>
 <meta name="description" content="행을 상태별로 접히는 묶음에 나누고 묶음마다 개수를 붙인 표입니다. 긴 목록을 몇 덩어리로 줄여 읽을 수 있어요.">
 <!-- 생성물: node site/build.mjs가 만든다. 직접 고치지 말고 site/build.mjs나 site/src를 고친다 -->
 <script>try { var t = localStorage.getItem("ybm-site-theme"); if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.dataset.theme = "dark"; } catch (e) {}</script>
 <link rel="icon" href="../assets/logo-ybmnet.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../dist/ybm-ds.css">
-<link rel="stylesheet" href="../assets/site.css?v=47b9f601">
+<link rel="stylesheet" href="../assets/site.css?v=19450ca3">
 <script src="../../dist/ybm-ds.js" defer></script>
-<script src="../assets/site.js?v=47b9f601" defer></script>
+<script src="../assets/site.js?v=19450ca3" defer></script>
 </head>
 <body class="site">
 <a class="site-skip" href="#main">본문 바로가기</a>
@@ -35,63 +35,63 @@
   <div class="site-side__top"><b>Menu</b><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" data-site-close aria-label="메뉴 닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button></div>
   <div class="site-side__mobile"><nav class="site-nav" aria-label="주요 메뉴"><a class="site-nav__item" href="../index.html">Get Started</a><a class="site-nav__item" href="../components/index.html">Components</a><a class="site-nav__item" href="../templates/index.html" aria-current="page">Templates</a></nav><div class="site-nav__sep"></div></div>
   <nav class="site-nav" aria-label="Templates 메뉴"><a class="site-nav__item" href="../templates/index.html">Overview</a>
-<a class="site-nav__item" href="../templates/dashboard.html">Analytics Dashboard</a>
-<a class="site-nav__item" href="../templates/dashboard-comparison.html">Data Dashboard</a>
-<a class="site-nav__item" href="../templates/dashboard-scorecard.html">Executive Summary Dashboard</a>
-<a class="site-nav__item" href="../templates/dashboard-cohort-funnel.html">Funnel &amp; Cohort Dashboard</a>
-<a class="site-nav__item" href="../templates/dashboard-composition.html">Portfolio Dashboard</a>
-<a class="site-nav__item" href="../templates/dashboard-progress.html">Project Status Dashboard</a>
-<a class="site-nav__item" href="../templates/dashboard-alert-rail.html">Service Monitoring Dashboard</a>
-<a class="site-nav__item" href="../templates/table-collapsible.html">Collapsible Table</a>
-<a class="site-nav__item" href="../templates/table-comparison.html">Comparison Table</a>
-<a class="site-nav__item" href="../templates/table-filter.html">Filterable Table</a>
-<a class="site-nav__item" href="../templates/table-grouped.html" aria-current="page">Grouped Table</a>
-<a class="site-nav__item" href="../templates/table-inbox.html">Inbox Table</a>
-<a class="site-nav__item" href="../templates/table-page.html">Searchable Table</a>
-<a class="site-nav__item" href="../templates/table-tree.html">Tree Table</a>
-<a class="site-nav__item" href="../templates/payment-form.html">Checkout Form</a>
-<a class="site-nav__item" href="../templates/checkout-wizard.html">Checkout Wizard</a>
-<a class="site-nav__item" href="../templates/contact-form.html">Contact Form</a>
-<a class="site-nav__item" href="../templates/form-wizard-dialog.html">Dialog Wizard</a>
-<a class="site-nav__item" href="../templates/form-wizard.html">Form Wizard</a>
-<a class="site-nav__item" href="../templates/form-wizard-inline.html">Inline Wizard</a>
-<a class="site-nav__item" href="../templates/form-two-column.html">Two-column Form</a>
-<a class="site-nav__item" href="../templates/form-wizard-vertical.html">Vertical Wizard</a>
-<a class="site-nav__item" href="../templates/settings-dialog.html">Settings Dialog</a>
-<a class="site-nav__item" href="../templates/settings.html">Settings Form</a>
-<a class="site-nav__item" href="../templates/settings-sidebar.html">Settings Panels</a>
-<a class="site-nav__item" href="../templates/login-card.html">Login Card</a>
-<a class="site-nav__item" href="../templates/login-split.html">Login Split</a>
-<a class="site-nav__item" href="../templates/login-sso.html">Login SSO</a>
-<a class="site-nav__item" href="../templates/canvas-editor.html">Canvas Editor</a>
-<a class="site-nav__item" href="../templates/file-explorer.html">File Explorer</a>
-<a class="site-nav__item" href="../templates/ide.html">IDE</a>
-<a class="site-nav__item" href="../templates/kanban-board.html">Kanban Board</a>
-<a class="site-nav__item" href="../templates/editor.html">Page Editor</a>
-<a class="site-nav__item" href="../templates/library.html">Card Grid</a>
-<a class="site-nav__item" href="../templates/documentation.html">Documentation Catalog</a>
-<a class="site-nav__item" href="../templates/documentation-design.html">Documentation Design</a>
-<a class="site-nav__item" href="../templates/documentation-technical.html">Documentation Technical</a>
-<a class="site-nav__item" href="../templates/detail-page.html">Order Detail</a>
-<a class="site-nav__item" href="../templates/product-detail.html">Product Detail</a>
-<a class="site-nav__item" href="../templates/work-item-detail.html">Work Item Detail</a>
-<a class="site-nav__item" href="../templates/ai-chat.html">AI Chat Conversation</a>
-<a class="site-nav__item" href="../templates/ai-chat-landing.html">AI Chat Landing</a>
-<a class="site-nav__item" href="../templates/centered-hero.html">Centered Hero</a>
-<a class="site-nav__item" href="../templates/classic-gallery.html">Classic Gallery</a>
-<a class="site-nav__item" href="../templates/gallery-hero.html">Gallery Hero</a>
-<a class="site-nav__item" href="../templates/mixed-gallery.html">Mixed Gallery</a>
-<a class="site-nav__item" href="../templates/product-gallery.html">Product Gallery</a>
-<a class="site-nav__item" href="../templates/side-gallery.html">Side Gallery</a>
-<a class="site-nav__item" href="../templates/shell-nav.html">Shell Nav</a>
-<a class="site-nav__item" href="../templates/shell-side-nav.html">Side Nav</a>
-<a class="site-nav__item" href="../templates/shell-top-nav.html">Top Nav</a></nav>
+<a class="site-nav__item" href="../templates/dashboard.html">분석 대시보드</a>
+<a class="site-nav__item" href="../templates/dashboard-comparison.html">데이터 비교 대시보드</a>
+<a class="site-nav__item" href="../templates/dashboard-scorecard.html">주간 리포트</a>
+<a class="site-nav__item" href="../templates/dashboard-cohort-funnel.html">퍼널 분석 대시보드</a>
+<a class="site-nav__item" href="../templates/dashboard-composition.html">자산 현황</a>
+<a class="site-nav__item" href="../templates/dashboard-progress.html">프로젝트 현황</a>
+<a class="site-nav__item" href="../templates/dashboard-alert-rail.html">서비스 모니터링</a>
+<a class="site-nav__item" href="../templates/table-collapsible.html">접고 펴는 표</a>
+<a class="site-nav__item" href="../templates/table-comparison.html">비교표</a>
+<a class="site-nav__item" href="../templates/table-filter.html">필터 목록</a>
+<a class="site-nav__item" href="../templates/table-grouped.html" aria-current="page">그룹 목록</a>
+<a class="site-nav__item" href="../templates/table-inbox.html">받은 편지함</a>
+<a class="site-nav__item" href="../templates/table-page.html">검색 목록</a>
+<a class="site-nav__item" href="../templates/table-tree.html">계층형 목록</a>
+<a class="site-nav__item" href="../templates/payment-form.html">결제 정보 입력</a>
+<a class="site-nav__item" href="../templates/checkout-wizard.html">단계별 결제</a>
+<a class="site-nav__item" href="../templates/contact-form.html">문의하기</a>
+<a class="site-nav__item" href="../templates/form-wizard-dialog.html">팝업 단계 입력</a>
+<a class="site-nav__item" href="../templates/form-wizard.html">단계별 입력</a>
+<a class="site-nav__item" href="../templates/form-wizard-inline.html">펼침형 단계 입력</a>
+<a class="site-nav__item" href="../templates/form-two-column.html">2단 입력</a>
+<a class="site-nav__item" href="../templates/form-wizard-vertical.html">세로 단계 입력</a>
+<a class="site-nav__item" href="../templates/settings-dialog.html">설정 팝업</a>
+<a class="site-nav__item" href="../templates/settings.html">설정</a>
+<a class="site-nav__item" href="../templates/settings-sidebar.html">메뉴형 설정</a>
+<a class="site-nav__item" href="../templates/login-card.html">로그인</a>
+<a class="site-nav__item" href="../templates/login-split.html">분할형 로그인</a>
+<a class="site-nav__item" href="../templates/login-sso.html">간편 로그인</a>
+<a class="site-nav__item" href="../templates/canvas-editor.html">캔버스 편집기</a>
+<a class="site-nav__item" href="../templates/file-explorer.html">파일 탐색기</a>
+<a class="site-nav__item" href="../templates/ide.html">코드 편집기</a>
+<a class="site-nav__item" href="../templates/kanban-board.html">칸반 보드</a>
+<a class="site-nav__item" href="../templates/editor.html">페이지 편집기</a>
+<a class="site-nav__item" href="../templates/library.html">카드 목록</a>
+<a class="site-nav__item" href="../templates/documentation.html">문서 목록</a>
+<a class="site-nav__item" href="../templates/documentation-design.html">디자인 문서</a>
+<a class="site-nav__item" href="../templates/documentation-technical.html">기술 문서</a>
+<a class="site-nav__item" href="../templates/detail-page.html">주문 상세</a>
+<a class="site-nav__item" href="../templates/product-detail.html">상품 상세</a>
+<a class="site-nav__item" href="../templates/work-item-detail.html">업무 상세</a>
+<a class="site-nav__item" href="../templates/ai-chat.html">AI 대화</a>
+<a class="site-nav__item" href="../templates/ai-chat-landing.html">AI 시작 화면</a>
+<a class="site-nav__item" href="../templates/centered-hero.html">랜딩 페이지</a>
+<a class="site-nav__item" href="../templates/classic-gallery.html">사진 갤러리</a>
+<a class="site-nav__item" href="../templates/gallery-hero.html">대표 사진 갤러리</a>
+<a class="site-nav__item" href="../templates/mixed-gallery.html">벽돌형 갤러리</a>
+<a class="site-nav__item" href="../templates/product-gallery.html">상품 갤러리</a>
+<a class="site-nav__item" href="../templates/side-gallery.html">목록형 갤러리</a>
+<a class="site-nav__item" href="../templates/shell-nav.html">상단과 트리 메뉴 화면</a>
+<a class="site-nav__item" href="../templates/shell-side-nav.html">사이드 메뉴 화면</a>
+<a class="site-nav__item" href="../templates/shell-top-nav.html">상단 메뉴 화면</a></nav>
 </aside>
 <div class="site-scrim" data-site-close></div>
 <main class="site-main" id="main">
 <article class="site-doc">
 <header class="site-head">
-  <h1 class="site-h1">Grouped Table</h1>
+  <h1 class="site-h1">그룹 목록</h1>
   <p class="site-lead">행을 상태별로 접히는 묶음에 나누고 묶음마다 개수를 붙인 표입니다. 긴 목록을 몇 덩어리로 줄여 읽을 수 있어요.</p>
   <div class="site-meta"><a class="ds-btn" data-variant="neutralSolid" data-size="small" target="_blank" rel="noopener" href="pages/table-grouped.html"><i class="ds-icon ds-icon--external-link ds-icon--sm" aria-hidden="true"></i>새 창으로 보기</a><a class="ds-btn" data-variant="neutralWeak" data-size="xsmall" href="https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=2629-29960" target="_blank" rel="noopener"><i class="ds-icon site-i--figma ds-icon--sm" aria-hidden="true"></i>Figma</a><a class="ds-btn" data-variant="neutralWeak" data-size="xsmall" href="https://github.com/luvms012-rgb/ybm-ds/blob/main/site/templates/pages/table-grouped.html" target="_blank" rel="noopener"><i class="ds-icon site-i--github ds-icon--sm" aria-hidden="true"></i>Code</a></div>
 
@@ -101,7 +101,7 @@
     <div class="ds-segmented" role="group" aria-label="보기 방식"><button type="button" class="ds-segmented__item" aria-pressed="true" data-site-view="preview">Preview</button><button type="button" class="ds-segmented__item" aria-pressed="false" data-site-view="code">Code</button></div>
     <div class="ds-segmented" role="group" aria-label="화면 폭"><button type="button" class="ds-segmented__item" aria-pressed="true" data-site-device="desktop">Desktop</button><button type="button" class="ds-segmented__item" aria-pressed="false" data-site-device="tablet">Tablet</button><button type="button" class="ds-segmented__item" aria-pressed="false" data-site-device="mobile">Mobile</button></div>
   </div>
-  <div class="site-frame__stage" data-device="desktop"><iframe src="pages/table-grouped.html" title="묶음 표 템플릿" data-site-frame></iframe></div>
+  <div class="site-frame__stage" data-device="desktop"><iframe src="pages/table-grouped.html" title="그룹 목록 템플릿" data-site-frame></iframe></div>
   <div class="site-frame__code" hidden><figure class="ds-codeblock" data-site-src="pages/table-grouped.html">
   <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">html</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
   <pre class="ds-codeblock__code"><code>불러오는 중…</code></pre>
