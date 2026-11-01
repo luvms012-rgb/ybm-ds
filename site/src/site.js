@@ -191,7 +191,7 @@
   // 템플릿 썸네일 크기 맞춤
   function fitThumbs() {
     document.querySelectorAll(".site-tpl-thumb").forEach(function (box) {
-      var f = box.querySelector("iframe"); if (f) f.style.transform = "scale(" + box.clientWidth / 1280 + ")";
+      var f = box.querySelector("iframe"); if (f) f.style.transform = "scale(" + box.clientWidth / 1440 + ")";
     });
   }
   window.addEventListener("resize", fitThumbs);
