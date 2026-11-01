@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>기술 문서 - YBM DS 템플릿</title>
+<link rel="stylesheet" href="../../../dist/ybm-ds.css">
+<script src="../../../dist/ybm-ds.js" defer></script>
+<style>
+  /* 템플릿 배치 전용. 값은 모두 --ybm-* 토큰 */
+  body { word-break: keep-all; overflow-wrap: break-word; }
+  .tp-app { display: flex; flex-direction: column; min-height: 100vh; background: var(--ybm-color-bg-layer-default); }
+  .tp-head { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: var(--ybm-space-x4); padding: var(--ybm-space-x5) var(--ybm-space-x4); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); }
+  .tp-head__texts { display: flex; flex-direction: column; gap: var(--ybm-space-x1); min-width: 0; }
+  .tp-head__tools { display: flex; flex-wrap: wrap; align-items: flex-end; gap: var(--ybm-space-x2); }
+  .tp-h1 { font-size: var(--ybm-font-size-t09); line-height: var(--ybm-line-height-t09); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; }
+  .tp-h2 { font-size: var(--ybm-font-size-t07); line-height: var(--ybm-line-height-t07); font-weight: var(--ybm-font-weight-semibold); letter-spacing: -0.02em; }
+  .tp-h3 { font-size: var(--ybm-font-size-t05); line-height: var(--ybm-line-height-t05); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-h4 { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-sub { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
+  .tp-caption { font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); color: var(--ybm-color-fg-neutral-subtle); }
+  .tp-num { font-variant-numeric: tabular-nums; }
+  .tp-body { display: flex; flex: 1 1 auto; flex-direction: column; min-height: 0; }
+  .tp-content { display: flex; flex: 1 1 auto; flex-direction: column; gap: var(--ybm-space-x8); min-width: 0; padding: var(--ybm-space-x5) var(--ybm-space-x4) var(--ybm-space-x10); }
+  .tp-panel { display: flex; flex-direction: column; gap: var(--ybm-space-x6); padding: var(--ybm-space-x5) var(--ybm-space-x4); box-shadow: inset 0 1px 0 var(--ybm-color-stroke-neutral-muted); }
+  .tp-sec { display: flex; flex-direction: column; gap: var(--ybm-space-x3); min-width: 0; }
+  .tp-sec-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ybm-space-x2) var(--ybm-space-x3); }
+  .tp-sec-head__texts { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--ybm-space-x1) var(--ybm-space-x3); }
+  .tp-row { display: flex; align-items: center; gap: var(--ybm-space-x2); min-width: 0; }
+  .tp-between { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ybm-space-x2); }
+  .tp-stack { display: flex; flex-direction: column; gap: var(--ybm-space-x1); min-width: 0; }
+  .tp-g2, .tp-g3, .tp-g4, .tp-g5, .tp-g6 { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ybm-space-x3); }
+  .tp-card { min-width: 0; }
+  .tp-card.ds-card { gap: var(--ybm-space-x3); }
+  .tp-span2 { grid-column: auto; }
+  .tp-kpi__label { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
+  .tp-kpi__value { font-size: var(--ybm-font-size-t09); line-height: var(--ybm-line-height-t09); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+  .tp-delta { display: inline-flex; align-items: center; gap: 2px; font-size: var(--ybm-font-size-t03); line-height: var(--ybm-line-height-t03); font-weight: var(--ybm-font-weight-medium); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .tp-delta .ds-icon { --ds-icon-size: 14px; }
+  .tp-delta[data-tone="up"] { color: var(--ybm-color-fg-positive); }
+  .tp-delta[data-tone="down"] { color: var(--ybm-color-fg-critical); }
+  .tp-delta[data-tone="flat"] { color: var(--ybm-color-fg-neutral-muted); }
+  .tp-chart { display: block; width: 100%; height: auto; overflow: visible; }
+  .tp-chart text { fill: var(--ybm-color-fg-neutral-subtle); font-size: 11px; font-family: inherit; }
+  .tp-chart .tp-grid-line { stroke: var(--ybm-color-stroke-neutral-muted); stroke-width: 1; }
+  .tp-legend { display: flex; flex-wrap: wrap; gap: var(--ybm-space-x1) var(--ybm-space-x4); font-size: var(--ybm-font-size-t03); line-height: var(--ybm-line-height-t03); color: var(--ybm-color-fg-neutral-muted); }
+  .tp-legend__item { display: inline-flex; align-items: center; gap: var(--ybm-space-x1_5); }
+  .tp-swatch { flex: none; width: 10px; height: 10px; border-radius: 3px; background: var(--c, var(--ybm-color-chart-series-1)); }
+  .tp-split { display: flex; height: 12px; overflow: hidden; border-radius: var(--ybm-shape-pill); background: var(--ybm-color-bg-neutral); }
+  .tp-split > span { height: 100%; background: var(--c); }
+  .tp-split > span + span { box-shadow: inset 2px 0 0 var(--ybm-color-bg-layer-default); }
+  .tp-ph { display: grid; place-items: center; width: 100%; height: 100%; color: var(--ybm-color-fg-neutral-subtle); background: var(--ybm-color-bg-neutral); }
+  .tp-logo { display: inline-grid; place-items: center; width: 88px; height: 28px; border-radius: var(--ybm-shape-xs); background: var(--ybm-color-bg-neutral); color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t03-static); line-height: var(--ybm-line-height-t03-static); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-bar { position: sticky; top: 0; z-index: var(--ybm-z-sticky); background: var(--ybm-color-bg-layer-default); }
+  .tp-track { display: flex; flex-direction: column; gap: var(--ybm-space-x1); min-width: 120px; }
+  .tp-hide-sm { display: none; }
+  .tp-scroll-x { overflow-x: auto; }
+  .tp-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .tp-kbd { display: inline-grid; place-items: center; min-width: 20px; height: 20px; padding: 0 4px; border-radius: var(--ybm-shape-2xs); box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-neutral-muted); color: var(--ybm-color-fg-neutral-muted); font-size: var(--ybm-font-size-t01); font-family: inherit; }
+  @media (min-width: 768px) {
+    .tp-head { padding: var(--ybm-space-x6); }
+    .tp-content { padding: var(--ybm-space-x6) var(--ybm-space-x6) var(--ybm-space-x12); }
+    .tp-panel { padding: var(--ybm-space-x6); }
+    .tp-g2, .tp-g4, .tp-g6 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .tp-g3, .tp-g5 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .tp-hide-sm { display: revert; }
+  }
+  @media (min-width: 1024px) {
+    .tp-body--panel { flex-direction: row; }
+    .tp-body--panel > .tp-panel { flex: none; width: 400px; box-shadow: inset 1px 0 0 var(--ybm-color-stroke-neutral-muted); }
+    .tp-g3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .tp-g4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .tp-g5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+    .tp-g6 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .tp-span2 { grid-column: span 2; }
+    .tp-span3 { grid-column: span 3; }
+  }
+  @media (min-width: 1280px) { .tp-g6 { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
+
+  .tp-doc { display: flex; flex-direction: column; gap: var(--ybm-space-x8); width: min(100%, 880px); margin-inline: auto; }
+  .tp-doc-title { font-size: var(--ybm-font-size-t12); line-height: var(--ybm-line-height-t12); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; }
+  .tp-doc p { font-size: var(--ybm-font-size-t05); line-height: 28px; }
+  .tp-demo { display: grid; place-items: center; min-height: 180px; padding: var(--ybm-space-x6); border-radius: var(--ybm-shape-lg); background: var(--ybm-color-bg-neutral-subtle); }
+  .tp-demo__row { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--ybm-space-x3); }
+
+  .tp-steps-doc { display: flex; flex-direction: column; gap: var(--ybm-space-x6); }
+  .tp-stepdoc { display: grid; grid-template-columns: 32px minmax(0, 1fr); gap: var(--ybm-space-x4); }
+  .tp-stepdoc__n { display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%; background: var(--ybm-color-bg-neutral); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-stepdoc__b { display: flex; flex-direction: column; gap: var(--ybm-space-x3); min-width: 0; }
+  .tp-ai { display: flex; flex-direction: column; gap: var(--ybm-space-x2); }
+  .tp-ai > .tp-between .ds-icon { color: var(--ybm-color-fg-magic); }
+</style>
+</head>
+<body>
+<div class="tp-app"><main class="tp-content"><article class="tp-doc">
+  <header class="tp-stack" style="gap: var(--ybm-space-x2)"><h1 class="tp-doc-title">YBM DS 시작하기</h1><span class="tp-caption">2026년 10월 30일에 고침</span></header>
+  <section class="ds-card tp-card" data-size="small"><div class="tp-ai"><div class="tp-between"><span class="tp-row"><i class="ds-icon ds-icon--sparkles" aria-hidden="true"></i><span class="tp-h4">AI에게 맡기기</span></span><div class="tp-row"><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="xsmall"><i class="ds-icon ds-icon--copy" aria-hidden="true"></i>복사</button><button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="더 보기"><i class="ds-icon ds-icon--ellipsis" aria-hidden="true"></i></button></div></div><p class="tp-sub">"내 프로젝트에 YBM DS를 붙여 줘. 필요한 파일을 불러오고 첫 화면을 DS 부품으로 바꿔 줘."</p></div></section>
+  <section class="tp-sec"><h2 class="tp-h2">준비물</h2><ul class="ds-list"><li><a class="ds-list-item" data-size="small" href="#"><span class="ds-list-item__prefix"><i class="ds-icon ds-icon--check ds-icon--sm" aria-hidden="true"></i></span><span class="ds-list-item__content"><span class="ds-list-item__title">Node.js 18 이상</span></span></a></li><li><a class="ds-list-item" data-size="small" href="#"><span class="ds-list-item__prefix"><i class="ds-icon ds-icon--check ds-icon--sm" aria-hidden="true"></i></span><span class="ds-list-item__content"><span class="ds-list-item__title">패키지 관리자 (npm, pnpm, yarn 가운데 하나)</span></span></a></li><li><a class="ds-list-item" data-size="small" href="#"><span class="ds-list-item__prefix"><i class="ds-icon ds-icon--check ds-icon--sm" aria-hidden="true"></i></span><span class="ds-list-item__content"><span class="ds-list-item__title">HTML 파일 하나</span></span></a></li><li><a class="ds-list-item" data-size="small" href="#"><span class="ds-list-item__prefix"><i class="ds-icon ds-icon--check ds-icon--sm" aria-hidden="true"></i></span><span class="ds-list-item__content"><span class="ds-list-item__title">인터넷 연결</span></span></a></li></ul></section>
+  <hr class="ds-divider">
+  <section class="tp-sec"><h2 class="tp-h2">설치하기</h2><p>아래 순서대로 하면 5분 안에 첫 화면을 볼 수 있어요.</p>
+  <div class="tp-steps-doc"><div class="tp-stepdoc"><span class="tp-stepdoc__n">1</span><div class="tp-stepdoc__b"><h3 class="tp-h3">핵심 패키지 설치</h3><p class="tp-sub">모든 프로젝트는 핵심 패키지를 설치하는 데서 시작해요.</p><figure class="ds-codeblock"><figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">bash</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption><pre class="ds-codeblock__code"><code>npm install @ybm/ds</code></pre></figure></div></div><div class="tp-stepdoc"><span class="tp-stepdoc__n">2</span><div class="tp-stepdoc__b"><h3 class="tp-h3">미리 만든 스타일 불러오기</h3><p class="tp-sub">빌드 설정 없이 CSS 파일 하나만 불러오면 돼요.</p><figure class="ds-codeblock"><figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">html</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption><pre class="ds-codeblock__code"><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;https://luvms012-rgb.github.io/ybm-ds/dist/ybm-ds.css&quot;&gt;</code></pre></figure></div></div><div class="tp-stepdoc"><span class="tp-stepdoc__n">3</span><div class="tp-stepdoc__b"><h3 class="tp-h3">첫 부품 넣기</h3><p class="tp-sub">클래스 이름만 붙이면 DS 모양이 돼요.</p><figure class="ds-codeblock"><figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">html</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption><pre class="ds-codeblock__code"><code>&lt;button class=&quot;ds-btn&quot; data-variant=&quot;brandSolid&quot;&gt;시작하기&lt;/button&gt;</code></pre></figure></div></div><div class="tp-stepdoc"><span class="tp-stepdoc__n">4</span><div class="tp-stepdoc__b"><h3 class="tp-h3">동작 붙이기</h3><p class="tp-sub">대화상자, 탭 같은 동작이 필요하면 스크립트를 함께 불러와요.</p><figure class="ds-codeblock"><figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">html</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption><pre class="ds-codeblock__code"><code>&lt;script src=&quot;https://luvms012-rgb.github.io/ybm-ds/dist/ybm-ds.js&quot; defer&gt;&lt;/script&gt;</code></pre></figure></div></div></div></section>
+  <hr class="ds-divider">
+  <section class="tp-sec"><h2 class="tp-h2">다음으로</h2><div class="tp-g2"><a class="ds-card tp-card" data-size="small" href="#" style="text-decoration:none;color:inherit"><span class="tp-row"><i class="ds-icon ds-icon--book-open" aria-hidden="true"></i><span class="tp-stack"><span class="tp-h4">부품 둘러보기</span><span class="tp-sub">71개 부품의 쓰는 법과 예시</span></span></span></a><a class="ds-card tp-card" data-size="small" href="#" style="text-decoration:none;color:inherit"><span class="tp-row"><i class="ds-icon ds-icon--layout-grid" aria-hidden="true"></i><span class="tp-stack"><span class="tp-h4">템플릿에서 시작하기</span><span class="tp-sub">자주 쓰는 화면을 통째로 복사</span></span></span></a></div></section>
+</article></main></div>
+</body>
+</html>

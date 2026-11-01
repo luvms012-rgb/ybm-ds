@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>카드 그리드 - YBM DS 템플릿</title>
+<link rel="stylesheet" href="../../../dist/ybm-ds.css">
+<script src="../../../dist/ybm-ds.js" defer></script>
+<style>
+  /* 템플릿 배치 전용. 값은 모두 --ybm-* 토큰 */
+  body { word-break: keep-all; overflow-wrap: break-word; }
+  .tp-app { display: flex; flex-direction: column; min-height: 100vh; background: var(--ybm-color-bg-layer-default); }
+  .tp-head { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: var(--ybm-space-x4); padding: var(--ybm-space-x5) var(--ybm-space-x4); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); }
+  .tp-head__texts { display: flex; flex-direction: column; gap: var(--ybm-space-x1); min-width: 0; }
+  .tp-head__tools { display: flex; flex-wrap: wrap; align-items: flex-end; gap: var(--ybm-space-x2); }
+  .tp-h1 { font-size: var(--ybm-font-size-t09); line-height: var(--ybm-line-height-t09); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; }
+  .tp-h2 { font-size: var(--ybm-font-size-t07); line-height: var(--ybm-line-height-t07); font-weight: var(--ybm-font-weight-semibold); letter-spacing: -0.02em; }
+  .tp-h3 { font-size: var(--ybm-font-size-t05); line-height: var(--ybm-line-height-t05); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-h4 { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-sub { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
+  .tp-caption { font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); color: var(--ybm-color-fg-neutral-subtle); }
+  .tp-num { font-variant-numeric: tabular-nums; }
+  .tp-body { display: flex; flex: 1 1 auto; flex-direction: column; min-height: 0; }
+  .tp-content { display: flex; flex: 1 1 auto; flex-direction: column; gap: var(--ybm-space-x8); min-width: 0; padding: var(--ybm-space-x5) var(--ybm-space-x4) var(--ybm-space-x10); }
+  .tp-panel { display: flex; flex-direction: column; gap: var(--ybm-space-x6); padding: var(--ybm-space-x5) var(--ybm-space-x4); box-shadow: inset 0 1px 0 var(--ybm-color-stroke-neutral-muted); }
+  .tp-sec { display: flex; flex-direction: column; gap: var(--ybm-space-x3); min-width: 0; }
+  .tp-sec-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ybm-space-x2) var(--ybm-space-x3); }
+  .tp-sec-head__texts { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--ybm-space-x1) var(--ybm-space-x3); }
+  .tp-row { display: flex; align-items: center; gap: var(--ybm-space-x2); min-width: 0; }
+  .tp-between { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ybm-space-x2); }
+  .tp-stack { display: flex; flex-direction: column; gap: var(--ybm-space-x1); min-width: 0; }
+  .tp-g2, .tp-g3, .tp-g4, .tp-g5, .tp-g6 { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ybm-space-x3); }
+  .tp-card { min-width: 0; }
+  .tp-card.ds-card { gap: var(--ybm-space-x3); }
+  .tp-span2 { grid-column: auto; }
+  .tp-kpi__label { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
+  .tp-kpi__value { font-size: var(--ybm-font-size-t09); line-height: var(--ybm-line-height-t09); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+  .tp-delta { display: inline-flex; align-items: center; gap: 2px; font-size: var(--ybm-font-size-t03); line-height: var(--ybm-line-height-t03); font-weight: var(--ybm-font-weight-medium); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .tp-delta .ds-icon { --ds-icon-size: 14px; }
+  .tp-delta[data-tone="up"] { color: var(--ybm-color-fg-positive); }
+  .tp-delta[data-tone="down"] { color: var(--ybm-color-fg-critical); }
+  .tp-delta[data-tone="flat"] { color: var(--ybm-color-fg-neutral-muted); }
+  .tp-chart { display: block; width: 100%; height: auto; overflow: visible; }
+  .tp-chart text { fill: var(--ybm-color-fg-neutral-subtle); font-size: 11px; font-family: inherit; }
+  .tp-chart .tp-grid-line { stroke: var(--ybm-color-stroke-neutral-muted); stroke-width: 1; }
+  .tp-legend { display: flex; flex-wrap: wrap; gap: var(--ybm-space-x1) var(--ybm-space-x4); font-size: var(--ybm-font-size-t03); line-height: var(--ybm-line-height-t03); color: var(--ybm-color-fg-neutral-muted); }
+  .tp-legend__item { display: inline-flex; align-items: center; gap: var(--ybm-space-x1_5); }
+  .tp-swatch { flex: none; width: 10px; height: 10px; border-radius: 3px; background: var(--c, var(--ybm-color-chart-series-1)); }
+  .tp-split { display: flex; height: 12px; overflow: hidden; border-radius: var(--ybm-shape-pill); background: var(--ybm-color-bg-neutral); }
+  .tp-split > span { height: 100%; background: var(--c); }
+  .tp-split > span + span { box-shadow: inset 2px 0 0 var(--ybm-color-bg-layer-default); }
+  .tp-ph { display: grid; place-items: center; width: 100%; height: 100%; color: var(--ybm-color-fg-neutral-subtle); background: var(--ybm-color-bg-neutral); }
+  .tp-logo { display: inline-grid; place-items: center; width: 88px; height: 28px; border-radius: var(--ybm-shape-xs); background: var(--ybm-color-bg-neutral); color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t03-static); line-height: var(--ybm-line-height-t03-static); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-bar { position: sticky; top: 0; z-index: var(--ybm-z-sticky); background: var(--ybm-color-bg-layer-default); }
+  .tp-track { display: flex; flex-direction: column; gap: var(--ybm-space-x1); min-width: 120px; }
+  .tp-hide-sm { display: none; }
+  .tp-scroll-x { overflow-x: auto; }
+  .tp-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .tp-kbd { display: inline-grid; place-items: center; min-width: 20px; height: 20px; padding: 0 4px; border-radius: var(--ybm-shape-2xs); box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-neutral-muted); color: var(--ybm-color-fg-neutral-muted); font-size: var(--ybm-font-size-t01); font-family: inherit; }
+  @media (min-width: 768px) {
+    .tp-head { padding: var(--ybm-space-x6); }
+    .tp-content { padding: var(--ybm-space-x6) var(--ybm-space-x6) var(--ybm-space-x12); }
+    .tp-panel { padding: var(--ybm-space-x6); }
+    .tp-g2, .tp-g4, .tp-g6 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .tp-g3, .tp-g5 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .tp-hide-sm { display: revert; }
+  }
+  @media (min-width: 1024px) {
+    .tp-body--panel { flex-direction: row; }
+    .tp-body--panel > .tp-panel { flex: none; width: 400px; box-shadow: inset 1px 0 0 var(--ybm-color-stroke-neutral-muted); }
+    .tp-g3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .tp-g4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .tp-g5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+    .tp-g6 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .tp-span2 { grid-column: span 2; }
+    .tp-span3 { grid-column: span 3; }
+  }
+  @media (min-width: 1280px) { .tp-g6 { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
+
+  .tp-libbar { display: flex; flex-wrap: wrap; align-items: flex-end; gap: var(--ybm-space-x3); }
+  .tp-libbar .tp-q { flex: 1 1 280px; max-width: 360px; }
+  .tp-libbar .ds-chiptabs { padding-inline: 0; flex: 1 1 auto; }
+  .tp-tile .ds-imageframe { border-radius: var(--ybm-shape-md); }
+</style>
+</head>
+<body>
+<div class="tp-app">
+<header class="tp-head">
+  <div class="tp-head__texts"><h1 class="tp-h1">라이브러리</h1></div>
+  
+</header>
+<main class="tp-content">
+  <div class="tp-libbar"><div class="tp-q"><div class="ds-field"><div class="ds-field__header"><label class="ds-field__label" for="lq">찾기</label></div><div class="ds-input" data-variant="outline" data-size="medium"><i class="ds-icon ds-icon--search ds-input__icon" aria-hidden="true"></i><input class="ds-input__control" id="lq" type="search" placeholder="찾기…" aria-label="찾기…"></div></div></div><div class="ds-chiptabs" role="tablist" aria-label="분류로 거르기"><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true">전체</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false">레이아웃</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false">폼</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false">내비게이션</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false">피드백</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false">데이터</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false">미디어</button></div><button type="button" class="ds-btn" data-variant="ghost" data-size="small">최근 순<i class="ds-icon ds-icon--chevron-down" aria-hidden="true"></i></button></div>
+  <hr class="ds-divider"><section class="tp-sec" aria-labelledby="g-레이아웃"><div class="tp-sec-head"><div class="tp-sec-head__texts"><h2 class="tp-h2" id="g-레이아웃">레이아웃</h2><span class="tp-sub">7개</span></div></div><div class="tp-g4"><article class="ds-card tp-card tp-tile" data-size="small"><div class="ds-imageframe" data-ratio="16:9" aria-hidden="true"><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div><div class="tp-stack"><h3 class="tp-h4">Card</h3><p class="tp-sub">안쪽 여백, 테두리, 그림자를 고를 수 있는 담는 상자</p></div></article><article class="ds-card tp-card tp-tile" data-size="small"><div class="ds-imageframe" data-ratio="16:9" aria-hidden="true"><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div><div class="tp-stack"><h3 class="tp-h4">Divider</h3><p class="tp-sub">내용 사이를 가로나 세로로 나누는 선</p></div></article><article class="ds-card tp-card tp-tile" data-size="small"><div class="ds-imageframe" data-ratio="16:9" aria-hidden="true"><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div><div class="tp-stack"><h3 class="tp-h4">Image Frame</h3><p class="tp-sub">정해진 비율로 사진을 자르는 틀</p></div></article><article class="ds-card tp-card tp-tile" data-size="small"><div class="ds-imageframe" data-ratio="16:9" aria-hidden="true"><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div><div class="tp-stack"><h3 class="tp-h4">Side Panel</h3><p class="tp-sub">화면 옆에서 밀려 나오는 패널</p></div></article><article class="ds-card tp-card tp-tile" data-size="small"><div class="ds-imageframe" data-ratio="16:9" aria-hidden="true"><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div><div class="tp-stack"><h3 class="tp-h4">Bottom Sheet</h3><p class="tp-sub">모바일 아래에서 올라오는 시트</p></div></article><article class="ds-card tp-card tp-tile" data-size="small"><div class="ds-imageframe" data-ratio="16:9" aria-hidden="true"><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div><div class="tp-stack"><h3 class="tp-h4">Scroll Fog</h3><p class="tp-sub">스크롤 끝을 흐리게 알려 주는 그늘</p></div></article><article class="ds-card tp-card tp-tile" data-size="small"><div class="ds-imageframe" data-ratio="16:9" aria-hidden="true"><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div><div class="tp-stack"><h3 class="tp-h4">Carousel</h3><p class="tp-sub">옆으로 넘겨 보는 카드 줄</p></div></article></div></section><hr class="ds-divider"><section class="tp-sec" aria-labelledby="g-폼"><div class="tp-sec-head"><div class="tp-sec-head__texts"><h2 class="tp-h2" id="g-폼">폼</h2><span class="tp-sub">7개</span></div></div><div class="tp-g4"><article class="ds-card tp-card tp-tile" data-size="small"><div class="ds-imageframe" data-ratio="16:9" aria-hidden="true"><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div><div class="tp-stack"><h3 class="tp-h4">Checkbox</h3><p class="tp-sub">여러 개를 고르는 상자, 일부 선택 상태 포함</p></div></article><article class="ds-card tp-card tp-tile" data-size="small"><div class="ds-imageframe" data-ratio="16:9" aria-hidden="true"><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div><div class="tp-stack"><h3 class="tp-h4">Radio Group</h3><p class="tp-sub">하나만 고르는 동그라미 묶음</p></div></article><article class="ds-card tp-card tp-tile" data-size="small"><div class="ds-imageframe" data-ratio="16:9" aria-hidden="true"><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div><div class="tp-stack"><h3 class="tp-h4">Switch</h3><p class="tp-sub">켜고 끄는 스위치</p></div></article><article class="ds-card tp-card tp-tile" data-size="small"><div class="ds-imageframe" data-ratio="16:9" aria-hidden="true"><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div><div class="tp-stack"><h3 class="tp-h4">Text Field</h3><p class="tp-sub">한 줄 입력칸</p></div></article><article class="ds-card tp-card tp-tile" data-size="small"><div class="ds-imageframe" data-ratio="16:9" aria-hidden="true"><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div><div class="tp-stack"><h3 class="tp-h4">Select</h3><p class="tp-sub">목록에서 하나 고르기</p></div></article><article class="ds-card tp-card tp-tile" data-size="small"><div class="ds-imageframe" data-ratio="16:9" aria-hidden="true"><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div><div class="tp-stack"><h3 class="tp-h4">Date Picker</h3><p class="tp-sub">달력에서 날짜 고르기</p></div></article><article class="ds-card tp-card tp-tile" data-size="small"><div class="ds-imageframe" data-ratio="16:9" aria-hidden="true"><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div><div class="tp-stack"><h3 class="tp-h4">File Attach</h3><p class="tp-sub">파일 끌어 놓기와 목록</p></div></article></div></section><hr class="ds-divider"><section class="tp-sec" aria-labelledby="g-내비게이션"><div class="tp-sec-head"><div class="tp-sec-head__texts"><h2 class="tp-h2" id="g-내비게이션">내비게이션</h2><span class="tp-sub">7개</span></div></div><div class="tp-g4"><article class="ds-card tp-card tp-tile" data-size="small"><div class="ds-imageframe" data-ratio="16:9" aria-hidden="true"><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div><div class="tp-stack"><h3 class="tp-h4">Breadcrumbs</h3><p class="tp-sub">지금 위치를 보여 주는 경로</p></div></article><article class="ds-card tp-card tp-tile" data-size="small"><div class="ds-imageframe" data-ratio="16:9" aria-hidden="true"><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div><div class="tp-stack"><h3 class="tp-h4">Tabs</h3><p class="tp-sub">같은 화면 안에서 내용 바꾸기</p></div></article><article class="ds-card tp-card tp-tile" data-size="small"><div class="ds-imageframe" data-ratio="16:9" aria-hidden="true"><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div><div class="tp-stack"><h3 class="tp-h4">Pagination</h3><p class="tp-sub">여러 쪽으로 나눈 목록 넘기기</p></div></article><article class="ds-card tp-card tp-tile" data-size="small"><div class="ds-imageframe" data-ratio="16:9" aria-hidden="true"><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div><div class="tp-stack"><h3 class="tp-h4">Side Navigation</h3><p class="tp-sub">왼쪽 세로 메뉴</p></div></article><article class="ds-card tp-card tp-tile" data-size="small"><div class="ds-imageframe" data-ratio="16:9" aria-hidden="true"><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div><div class="tp-stack"><h3 class="tp-h4">Top App Bar</h3><p class="tp-sub">모바일 맨 위 막대</p></div></article><article class="ds-card tp-card tp-tile" data-size="small"><div class="ds-imageframe" data-ratio="16:9" aria-hidden="true"><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div><div class="tp-stack"><h3 class="tp-h4">Bottom Navigation</h3><p class="tp-sub">모바일 아래 탭</p></div></article><article class="ds-card tp-card tp-tile" data-size="small"><div class="ds-imageframe" data-ratio="16:9" aria-hidden="true"><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div><div class="tp-stack"><h3 class="tp-h4">Stepper</h3><p class="tp-sub">단계 진행 표시</p></div></article></div></section><hr class="ds-divider"><section class="tp-sec" aria-labelledby="g-피드백"><div class="tp-sec-head"><div class="tp-sec-head__texts"><h2 class="tp-h2" id="g-피드백">피드백</h2><span class="tp-sub">7개</span></div></div><div class="tp-g4"><article class="ds-card tp-card tp-tile" data-size="small"><div class="ds-imageframe" data-ratio="16:9" aria-hidden="true"><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div><div class="tp-stack"><h3 class="tp-h4">Badge</h3><p class="tp-sub">상태나 개수를 짧게 알리는 표</p></div></article><article class="ds-card tp-card tp-tile" data-size="small"><div class="ds-imageframe" data-ratio="16:9" aria-hidden="true"><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div><div class="tp-stack"><h3 class="tp-h4">Callout</h3><p class="tp-sub">눈에 띄게 알리는 안내 상자</p></div></article><article class="ds-card tp-card tp-tile" data-size="small"><div class="ds-imageframe" data-ratio="16:9" aria-hidden="true"><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div><div class="tp-stack"><h3 class="tp-h4">Snackbar</h3><p class="tp-sub">잠깐 떴다 사라지는 알림</p></div></article><article class="ds-card tp-card tp-tile" data-size="small"><div class="ds-imageframe" data-ratio="16:9" aria-hidden="true"><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div><div class="tp-stack"><h3 class="tp-h4">Progress</h3><p class="tp-sub">얼마나 진행됐는지 막대로</p></div></article><article class="ds-card tp-card tp-tile" data-size="small"><div class="ds-imageframe" data-ratio="16:9" aria-hidden="true"><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div><div class="tp-stack"><h3 class="tp-h4">Skeleton</h3><p class="tp-sub">불러오는 동안의 자리</p></div></article><article class="ds-card tp-card tp-tile" data-size="small"><div class="ds-imageframe" data-ratio="16:9" aria-hidden="true"><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div><div class="tp-stack"><h3 class="tp-h4">Empty</h3><p class="tp-sub">내용이 없을 때의 안내</p></div></article><article class="ds-card tp-card tp-tile" data-size="small"><div class="ds-imageframe" data-ratio="16:9" aria-hidden="true"><span class="tp-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div><div class="tp-stack"><h3 class="tp-h4">Help Bubble</h3><p class="tp-sub">처음 쓰는 사람을 위한 말풍선</p></div></article></div></section>
+</main>
+</div>
+</body>
+</html>

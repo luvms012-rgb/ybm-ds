@@ -264,6 +264,62 @@
       "group": "Tools",
       "desc": "왼쪽에 블록 모음, 가운데 실제 화면, 오른쪽에 고른 것에 맞게 바뀌는 속성 패널을 둔 세 칸 편집기입니다. 끌어다 놓아 화면을 만들어요.",
       "rebuilt": true
+    },
+    {
+      "slug": "library",
+      "name": "카드 그리드",
+      "en": "Card Grid",
+      "group": "Content",
+      "desc": "찾고 훑어보는 카드 그리드입니다. 분류 탭으로 그 자리에서 좁히고, 주제별로 같은 모양 카드를 묶어 보여 줘요. 결과가 없으면 빈 화면을 보여 줘요.",
+      "rebuilt": true
+    },
+    {
+      "slug": "documentation",
+      "name": "문서 목록",
+      "en": "Documentation Catalog",
+      "group": "Content",
+      "desc": "길 찾기만 하는 문서 첫 화면입니다. 위쪽 안내 띠 아래에 분류 카드를 늘어놓아 각 묶음으로 들어가고, 화면 자체에는 본문이 없어요.",
+      "rebuilt": true
+    },
+    {
+      "slug": "documentation-design",
+      "name": "디자인 문서",
+      "en": "Documentation Design",
+      "group": "Content",
+      "desc": "글 사이사이에 실제로 움직이는 예시를 끼운 참고 문서입니다. 미리 보기, 속성 표, Do와 Don't 비교, 복사할 수 있는 코드가 이어져요.",
+      "rebuilt": true
+    },
+    {
+      "slug": "documentation-technical",
+      "name": "기술 문서",
+      "en": "Documentation Technical",
+      "group": "Content",
+      "desc": "번호 매긴 단계마다 코드를 붙인 따라 하기 문서입니다. 준비물과 다음 갈 곳은 따로 카드로 두어, 처음부터 끝까지 한 줄로 따라가게 해요.",
+      "rebuilt": true
+    },
+    {
+      "slug": "detail-page",
+      "name": "주문 상세",
+      "en": "Order Detail",
+      "group": "Content",
+      "desc": "한 건의 기록을 두 칸에 보여 주는 상세입니다. 상태와 동작이 있는 머리글, 반복되는 상품 줄, 합계, 시간 순 활동, 옆 정보 패널로 이어져요.",
+      "rebuilt": true
+    },
+    {
+      "slug": "product-detail",
+      "name": "상품 상세",
+      "en": "Product Detail",
+      "group": "Content",
+      "desc": "사진 모음과 고르는 칸을 나란히 둔 상품 한 개의 상세입니다. 옵션, 수량, 담기와 구매 버튼, 접히는 정보 묶음이 있어요.",
+      "rebuilt": true
+    },
+    {
+      "slug": "work-item-detail",
+      "name": "할 일 상세",
+      "en": "Work Item Detail",
+      "group": "Content",
+      "desc": "할 일 한 건을 두 칸에 보여 주는 상세입니다. 제목과 상태 고르기, 설명, 진행 막대가 있는 하위 할 일, 첨부 파일, 댓글이 이어져요.",
+      "rebuilt": true
     }
   ],
   "figmaHeader": "2606:2"
