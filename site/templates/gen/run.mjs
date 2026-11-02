@@ -9,8 +9,8 @@ import { page } from './kit.mjs';
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const PAGES = path.join(HERE, '..', 'pages');
 const JSON_PATH = path.join(HERE, '..', '..', 'src', 'templates.json');
-const GROUPS = ['Dashboard', 'Table', 'Form', 'Settings', 'Login', 'Tools', 'Content', 'AI Chat', 'Gallery', 'Shell'];
-const MODS = ['dashboard', 'table', 'form', 'settings', 'login', 'tools', 'content', 'aichat', 'gallery', 'shell'];
+const GROUPS = ['Dashboard', 'Table', 'Form', 'Settings', 'Login', 'Tools', 'Content', 'AI Chat', 'Gallery', 'Shell', 'Exam', 'Exam B2B', 'Learning B2B'];
+const MODS = ['dashboard', 'table', 'form', 'settings', 'login', 'tools', 'content', 'aichat', 'gallery', 'shell', 'exam', 'learning'];
 
 const all = [];
 for (const m of MODS) {
@@ -23,7 +23,9 @@ all.sort((a, b) => GROUPS.indexOf(a.group) - GROUPS.indexOf(b.group) || a.en.loc
 
 const old = JSON.parse(fs.readFileSync(JSON_PATH, 'utf8'));
 const keepFigma = Object.fromEntries((old.templates || []).filter((t) => t.figma && t.rebuilt).map((t) => [t.slug, t.figma]));
-for (const t of all) fs.writeFileSync(path.join(PAGES, t.slug + '.html'), page({ title: t.name, css: t.css || '', body: t.body, bodyClass: t.bodyClass || '' }));
+// 카드가 있는 화면은 회색 바탕 + 흰 카드(tp-canvas). 템플릿에서 canvas: false / true 로 바꿀 수 있다.
+const canvasOf = (t) => (t.canvas ?? /tp-card/.test(t.body)) ? 'tp-canvas' : '';
+for (const t of all) fs.writeFileSync(path.join(PAGES, t.slug + '.html'), page({ title: t.name, css: t.css || '', body: t.body, bodyClass: [t.bodyClass, canvasOf(t)].filter(Boolean).join(' ') }));
 const slugs = new Set(all.map((t) => t.slug));
 let removed = 0;
 for (const f of fs.readdirSync(PAGES)) if (f.endsWith('.html') && !slugs.has(f.slice(0, -5))) { fs.unlinkSync(path.join(PAGES, f)); removed++; }

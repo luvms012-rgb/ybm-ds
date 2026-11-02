@@ -11,7 +11,7 @@ const TABLE_CSS = `
   .tp-cell2 { display: flex; flex-direction: column; min-width: 0; }
   .tp-cell2 > :last-child { color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t03); line-height: var(--ybm-line-height-t03); }
   .tp-full-table { margin-inline: calc(var(--ybm-space-x4) * -1); }
-  @media (min-width: 768px) { .tp-full-table { margin-inline: calc(var(--ybm-space-x6) * -1); } }
+  @media (min-width: 768px) { .tp-full-table { margin-inline: calc(var(--ybm-space-x10) * -1); } }
 `;
 const grow = (cols, label, count, extra = '') => `<tr class="tp-grouprow"><td colspan="${cols}"><span class="tp-grouprow__in"><button type="button" class="tp-caret" aria-expanded="true" aria-label="${esc(label)} 접기">${icon('chevron-down', 'sm')}</button>${label}${count !== '' ? badge(String(count)) : ''}${extra}</span></td></tr>`;
 const trs = (rows) => rows.map((r) => `<tr>${r.map((c) => `<td${c && c.startsWith && c.startsWith('@end') ? ' data-align="end"' : ''}>${c && c.startsWith && c.startsWith('@end') ? c.slice(4) : c}</td>`).join('')}</tr>`).join('');

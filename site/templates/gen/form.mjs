@@ -59,7 +59,7 @@ const payment = () => {
     </aside>
   </div>
 </main></div>`;
-  return { slug: 'payment-form', en: 'Checkout Form', name: '결제 폼', group: 'Form', desc: '긴 결제 폼 옆에 주문 요약을 고정해 두는 화면입니다. 입력이 바뀌면 요약이 다시 계산되고, 마지막에 합계를 확인하고 결제합니다.', css, body };
+  return { slug: 'payment-form', canvas: false, en: 'Checkout Form', name: '결제 폼', group: 'Form', desc: '긴 결제 폼 옆에 주문 요약을 고정해 두는 화면입니다. 입력이 바뀌면 요약이 다시 계산되고, 마지막에 합계를 확인하고 결제합니다.', css, body };
 };
 
 /* 2. 결제 단계 (장바구니 → 결제) -------------------------------- */
@@ -87,7 +87,7 @@ const checkoutWizard = () => {
     <aside class="tp-cw__aside">${summary(cart.map(([n, d, q, p]) => [n, d.split(' · ')[0] + ' · ' + q + '개', p]), [['상품 금액', '63,500원'], ['배송비', '3,000원'], ['할인', '-6,350원']], '60,150원')}</aside>
   </div>
 </main></div>`;
-  return { slug: 'checkout-wizard', en: 'Checkout Wizard', name: '결제 단계', group: 'Form', desc: '장바구니, 배송, 결제, 확인을 단계로 나눈 결제 화면입니다. 답이 바뀔 때마다 오른쪽 요약이 다시 계산되고, 좁은 화면에서는 요약이 아래로 내려갑니다.', css, body };
+  return { slug: 'checkout-wizard', canvas: false, en: 'Checkout Wizard', name: '결제 단계', group: 'Form', desc: '장바구니, 배송, 결제, 확인을 단계로 나눈 결제 화면입니다. 답이 바뀔 때마다 오른쪽 요약이 다시 계산되고, 좁은 화면에서는 요약이 아래로 내려갑니다.', css, body };
 };
 
 /* 3. 문의 폼 ----------------------------------------------------- */
@@ -116,7 +116,7 @@ const contact = () => {
     <p class="tp-caption" style="text-align:center">보내면 ${link('개인정보 처리방침')}에 동의한 것으로 봐요.</p>
   </form>
 </div></main></div>`;
-  return { slug: 'contact-form', en: 'Contact Form', name: '문의 폼', group: 'Form', desc: '글칸, 알약 버튼, 고르기, 긴 글을 섞은 한 줄 폼입니다. 단계도 갈림도 요약도 없이 맨 아래 전체 폭 보내기 버튼 하나로 끝납니다.', css, body };
+  return { slug: 'contact-form', canvas: false, en: 'Contact Form', name: '문의 폼', group: 'Form', desc: '글칸, 알약 버튼, 고르기, 긴 글을 섞은 한 줄 폼입니다. 단계도 갈림도 요약도 없이 맨 아래 전체 폭 보내기 버튼 하나로 끝납니다.', css, body };
 };
 
 /* 4. 대화상자 단계 폼 ------------------------------------------ */

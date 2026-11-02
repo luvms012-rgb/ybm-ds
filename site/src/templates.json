@@ -612,6 +612,94 @@
         "pc": "2629:25413",
         "mobile": "2629:25335"
       }
+    },
+    {
+      "slug": "exam-apply",
+      "name": "시험 신청",
+      "en": "Exam Application",
+      "group": "Exam",
+      "desc": "시험, 언어, 날짜와 시간, 고사장, 동의, 응시자 정보, 결제를 한 화면에 단계별로 놓은 신청 화면입니다. 오른쪽 요약이 고른 내용과 결제 금액을 따라갑니다.",
+      "rebuilt": true
+    },
+    {
+      "slug": "exam-my",
+      "name": "내 시험",
+      "en": "My Exams",
+      "group": "Exam",
+      "desc": "다음 시험까지 남은 날, 수험표와 고사장 바꾸기, 최근 점수와 목표, 접수 내역과 혜택을 한 화면에 모은 응시자 대시보드입니다.",
+      "rebuilt": true
+    },
+    {
+      "slug": "exam-score",
+      "name": "성적표",
+      "en": "Score Report",
+      "group": "Exam",
+      "desc": "총점과 순위, 유효 기간을 먼저 보여 주고 영역별 점수, 점수 분포, 문항 유형별 정답률로 이어지는 성적 화면입니다.",
+      "rebuilt": true
+    },
+    {
+      "slug": "exam-group-roster",
+      "name": "응시자 관리",
+      "en": "Candidate Roster",
+      "group": "Exam B2B",
+      "desc": "단체로 접수한 응시자를 찾고 거르는 표 화면입니다. 위 숫자로 수험표를 보낸 현황을 먼저 보고, 표에서 골라 한 번에 보냅니다.",
+      "rebuilt": true
+    },
+    {
+      "slug": "exam-group-apply",
+      "name": "단체 접수",
+      "en": "Group Application",
+      "group": "Exam B2B",
+      "desc": "기관 담당자가 응시자 명단 파일을 올려 한 번에 접수하는 화면입니다. 올린 명단을 바로 검사해 고칠 줄을 표시하고, 오른쪽에서 인원과 금액을 확인합니다.",
+      "rebuilt": true
+    },
+    {
+      "slug": "exam-group-dashboard",
+      "name": "단체 성적 대시보드",
+      "en": "Group Score Dashboard",
+      "group": "Exam B2B",
+      "desc": "기관이 단체 응시 결과를 보는 대시보드입니다. 응시율, 평균, 목표 달성을 먼저 보여 주고 점수 분포, 학과별 비교, 회차별 추이, 다시 응시할 학생으로 이어집니다.",
+      "rebuilt": true
+    },
+    {
+      "slug": "learning-catalog",
+      "name": "과정 찾기",
+      "en": "Course Catalog",
+      "group": "Learning B2B",
+      "desc": "찾기 칸과 분류 칩, 수준과 시간 고르기로 과정을 거르는 목록입니다. 표지, 이름, 학습 시간, 평점을 카드 없이 사진과 글로만 보여 줍니다.",
+      "rebuilt": true
+    },
+    {
+      "slug": "learning-admin",
+      "name": "과정 운영",
+      "en": "Course Operations",
+      "group": "Learning B2B",
+      "desc": "교육 담당자가 과정 차수와 이수율을 표로 보고, 고른 과정의 대상 부서와 알림을 오른쪽에서 바로 바꾸는 화면입니다.",
+      "rebuilt": true
+    },
+    {
+      "slug": "learning-player",
+      "name": "강의 보기",
+      "en": "Course Player",
+      "group": "Learning B2B",
+      "desc": "영상 아래에 AI 튜터의 핵심 요약, 퀴즈, 질문을 두고 오른쪽에 커리큘럼을 고정한 강의 화면입니다. 들은 강의와 지금 강의를 아이콘으로 구분합니다.",
+      "rebuilt": true
+    },
+    {
+      "slug": "learning-dashboard",
+      "name": "학습 현황 대시보드",
+      "en": "Learning Dashboard",
+      "group": "Learning B2B",
+      "desc": "교육 담당자가 전체 학습을 보는 대시보드입니다. 필수 교육 이수율과 학습 시간을 먼저 보여 주고, 부서별 이수율, 마감 임박 미이수자, 인기 과정, AI 튜터 이용으로 이어집니다.",
+      "rebuilt": true
+    },
+    {
+      "slug": "learning-home",
+      "name": "학습 홈",
+      "en": "Learning Home",
+      "group": "Learning B2B",
+      "desc": "임직원이 들어오면 먼저 보는 학습 홈입니다. 이번 주 학습량, 이어 보기, 마감이 다가오는 필수 교육, AI 어드바이저, AI 추천 과정, 사내 지식을 차례로 보여 줍니다.",
+      "rebuilt": true
     }
   ],
   "figmaHeader": "2606:2"

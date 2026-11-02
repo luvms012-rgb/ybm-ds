@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>응시자 관리 - YBM DS 템플릿</title>
+<link rel="stylesheet" href="../../../dist/ybm-ds.css">
+<script src="../../../dist/ybm-ds.js" defer></script>
+<style>
+  /* 템플릿 배치 전용. 값은 모두 --ybm-* 토큰 */
+  body { word-break: keep-all; overflow-wrap: break-word; }
+  .tp-app { display: flex; flex-direction: column; min-height: 100vh; background: var(--ybm-color-bg-layer-default); }
+  .tp-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: var(--ybm-space-x4); padding: var(--ybm-space-x6) var(--ybm-space-x4) var(--ybm-space-x2); }
+  .tp-head__texts { display: flex; flex-direction: column; gap: var(--ybm-space-x2); min-width: 0; }
+  .tp-head .tp-sub { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); }
+  .tp-head__tools { display: flex; flex-wrap: wrap; align-items: flex-end; gap: var(--ybm-space-x2); }
+  .tp-head > .tp-row, .tp-head .tp-between > .tp-row { flex-wrap: wrap; }
+  .ds-tablepagination { flex-wrap: wrap; row-gap: var(--ybm-space-x2); min-width: 0; }
+  .tp-between > .tp-row { flex-wrap: wrap; }
+  .tp-h1 { font-size: var(--ybm-font-size-t09); line-height: var(--ybm-line-height-t09); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; }
+  .tp-h2 { font-size: var(--ybm-font-size-t07); line-height: var(--ybm-line-height-t07); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; }
+  .tp-h3 { font-size: var(--ybm-font-size-t05); line-height: var(--ybm-line-height-t05); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-h4 { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-sub { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
+  .tp-caption { font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); color: var(--ybm-color-fg-neutral-subtle); }
+  .tp-num { font-variant-numeric: tabular-nums; }
+  .tp-body { display: flex; flex: 1 1 auto; flex-direction: column; min-height: 0; }
+  .tp-content { display: flex; flex: 1 1 auto; flex-direction: column; gap: var(--ybm-space-x8); min-width: 0; padding: var(--ybm-space-x6) var(--ybm-space-x4) var(--ybm-space-x12); }
+  .tp-panel { display: flex; flex-direction: column; gap: var(--ybm-space-x6); padding: var(--ybm-space-x6) var(--ybm-space-x4); box-shadow: inset 0 1px 0 var(--ybm-color-stroke-neutral-muted); }
+  .tp-sec { display: flex; flex-direction: column; gap: var(--ybm-space-x4); min-width: 0; }
+  .tp-sec-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ybm-space-x2) var(--ybm-space-x3); }
+  .tp-sec-head__texts { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--ybm-space-x1) var(--ybm-space-x3); }
+  .tp-row { display: flex; align-items: center; gap: var(--ybm-space-x2); min-width: 0; }
+  /* 줄 안에 놓인 고르기 칸은 글자만큼만 */
+  :is(.tp-row, .tp-between, .tp-head__tools, .tp-sec-head) > .ds-select { width: auto; min-width: 140px; }
+  .tp-between { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ybm-space-x2); }
+  .tp-stack { display: flex; flex-direction: column; gap: var(--ybm-space-x1); min-width: 0; }
+  .tp-stack > .ds-badge { align-self: flex-start; }
+  .tp-g2, .tp-g3, .tp-g4, .tp-g5, .tp-g6 { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ybm-space-x3); }
+  .tp-card { min-width: 0; }
+  /* 흰 바탕 화면의 카드는 선 없는 연회색 상자 */
+  .tp-card.ds-card { gap: var(--ybm-space-x4); padding: var(--ybm-space-x5); border-radius: var(--ybm-shape-2xl); box-shadow: none; background: var(--ybm-color-bg-neutral-muted); }
+  /* 회색 바탕 화면(tp-canvas): 흰 면을 선 없이 바탕색 차이로 나눈다 */
+  body.tp-canvas, .tp-canvas .tp-app, .tp-canvas .tp-bar { background: var(--ybm-color-bg-canvas); }
+  .tp-canvas .tp-card.ds-card { box-shadow: none; background: var(--ybm-color-bg-layer-default); }
+  .tp-canvas .tp-content > .ds-divider, .tp-canvas .tp-content > .tp-sec + .ds-divider { display: none; }
+  .tp-canvas .tp-panel { background: var(--ybm-color-bg-layer-default); box-shadow: none; }
+  .tp-canvas .tp-g2, .tp-canvas .tp-g3, .tp-canvas .tp-g4, .tp-canvas .tp-g5, .tp-canvas .tp-g6 { gap: var(--ybm-space-x4); }
+  .tp-canvas .tp-content { gap: var(--ybm-space-x6); }
+  .tp-span2 { grid-column: auto; }
+  .tp-kpi__label { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
+  .tp-kpi__value { font-size: var(--ybm-font-size-t09); line-height: var(--ybm-line-height-t09); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+  .tp-delta { display: inline-flex; align-items: center; gap: 2px; font-size: var(--ybm-font-size-t03); line-height: var(--ybm-line-height-t03); font-weight: var(--ybm-font-weight-medium); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .tp-delta .ds-icon { --ds-icon-size: 14px; }
+  .tp-delta[data-tone="up"] { color: var(--ybm-color-fg-positive); }
+  .tp-delta[data-tone="down"] { color: var(--ybm-color-fg-critical); }
+  .tp-delta[data-tone="flat"] { color: var(--ybm-color-fg-neutral-muted); }
+  .tp-chart { display: block; width: 100%; height: auto; overflow: visible; }
+  .tp-chart text { fill: var(--ybm-color-fg-neutral-subtle); font-size: 11px; font-family: inherit; }
+  .tp-chart .tp-grid-line { stroke: var(--ybm-color-stroke-neutral-muted); stroke-width: 1; }
+  .tp-legend { display: flex; flex-wrap: wrap; gap: var(--ybm-space-x1) var(--ybm-space-x4); font-size: var(--ybm-font-size-t03); line-height: var(--ybm-line-height-t03); color: var(--ybm-color-fg-neutral-muted); }
+  .tp-legend__item { display: inline-flex; align-items: center; gap: var(--ybm-space-x1_5); }
+  .tp-swatch { flex: none; width: 10px; height: 10px; border-radius: 3px; background: var(--c, var(--ybm-color-chart-series-1)); }
+  .tp-split { display: flex; height: 12px; overflow: hidden; border-radius: var(--ybm-shape-pill); background: var(--ybm-color-bg-neutral); }
+  .tp-split > span { height: 100%; background: var(--c); }
+  .tp-split > span + span { box-shadow: inset 2px 0 0 var(--ybm-color-bg-layer-default); }
+  .tp-ph { display: grid; place-items: center; width: 100%; height: 100%; color: var(--ybm-color-fg-neutral-subtle); background: var(--ybm-color-bg-neutral); }
+  .tp-logo { display: inline-grid; place-items: center; width: 88px; height: 28px; border-radius: var(--ybm-shape-xs); background: var(--ybm-color-bg-neutral); color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t03-static); line-height: var(--ybm-line-height-t03-static); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-bar { position: sticky; top: 0; z-index: var(--ybm-z-sticky); background: var(--ybm-color-bg-layer-default); }
+  .tp-track { display: flex; flex-direction: column; gap: var(--ybm-space-x1); min-width: 120px; }
+  .tp-hide-sm { display: none; }
+  .tp-scroll-x { overflow-x: auto; }
+  .tp-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .tp-kbd { display: inline-grid; place-items: center; min-width: 20px; height: 20px; padding: 0 4px; border-radius: var(--ybm-shape-2xs); box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-neutral-muted); color: var(--ybm-color-fg-neutral-muted); font-size: var(--ybm-font-size-t01); font-family: inherit; }
+  @media (min-width: 768px) {
+    .tp-head { padding: var(--ybm-space-x10) var(--ybm-space-x10) var(--ybm-space-x2); }
+    .tp-h1 { font-size: var(--ybm-font-size-t11); line-height: var(--ybm-line-height-t11); }
+    .tp-head .tp-sub { font-size: var(--ybm-font-size-t05); line-height: var(--ybm-line-height-t05); }
+    .tp-content { padding: var(--ybm-space-x8) var(--ybm-space-x10) var(--ybm-space-x16); gap: var(--ybm-space-x12); }
+    .tp-canvas .tp-content { gap: var(--ybm-space-x8); }
+    .tp-panel { padding: var(--ybm-space-x8) var(--ybm-space-x6); }
+    .tp-card.ds-card { padding: var(--ybm-space-x6); }
+    .tp-g2, .tp-g4, .tp-g6 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .tp-g3, .tp-g5 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .tp-hide-sm { display: revert; }
+  }
+  @media (min-width: 1024px) {
+    .tp-body--panel { flex-direction: row; }
+    .tp-body--panel > .tp-panel { flex: none; width: 400px; box-shadow: inset 1px 0 0 var(--ybm-color-stroke-neutral-muted); }
+    .tp-canvas .tp-body--panel > .tp-panel { box-shadow: none; }
+    .tp-g3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .tp-g4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .tp-g5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+    .tp-g6 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .tp-span2 { grid-column: span 2; }
+    .tp-span3 { grid-column: span 3; }
+  }
+  @media (min-width: 1280px) { .tp-g6 { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
+
+  /* 위 메뉴 화면 */
+  .tp-topbar { position: sticky; top: 0; z-index: var(--ybm-z-sticky); background: var(--ybm-color-bg-layer-default); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); }
+  .tp-topbar > .ds-topnav { width: min(100%, 1200px); margin-inline: auto; }
+  .tp-topbar .ds-topnav__menu { display: none; }
+  @media (min-width: 768px) { .tp-topbar .ds-topnav__menu { display: flex; } }
+  .tp-wrap { width: min(100%, 1200px); margin-inline: auto; }
+  .tp-topbar ~ .tp-head, .tp-topbar ~ .tp-content { box-sizing: border-box; width: min(100%, 1280px); margin-inline: auto; }
+  /* 옆 메뉴 화면 */
+  .tp-app.tp-frame { flex-direction: row; min-height: 100vh; }
+  .tp-frame .ds-sidenav__header { justify-content: flex-start; }
+  .tp-frame > .ds-sidenav { display: none; }
+  .tp-frame__main { display: flex; flex: 1 1 auto; flex-direction: column; min-width: 0; }
+  .tp-mbar { display: flex; align-items: center; justify-content: space-between; gap: var(--ybm-space-x2); padding: var(--ybm-space-x2) var(--ybm-space-x4); background: var(--ybm-color-bg-layer-default); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); }
+  @media (min-width: 1024px) {
+    .tp-frame > .ds-sidenav { display: flex; position: sticky; top: 0; flex: none; height: 100vh; background: var(--ybm-color-bg-layer-default); box-shadow: inset -1px 0 0 var(--ybm-color-stroke-neutral-muted); }
+    .tp-mbar { display: none; }
+  }
+  .tp-org { display: flex; align-items: center; gap: var(--ybm-space-x2); padding: var(--ybm-space-x2) var(--ybm-space-x2) var(--ybm-space-x1); }
+  .tp-org__mark { display: grid; place-items: center; flex: none; width: 32px; height: 32px; border-radius: var(--ybm-shape-sm); background: var(--ybm-color-bg-neutral-solid); color: var(--ybm-color-fg-neutral-inverted); font-size: var(--ybm-font-size-t03-static); font-weight: var(--ybm-font-weight-bold); }
+  /* 고르기 상자 칸 수: 모바일은 1칸(4칸은 2칸), 768 부터 지정한 칸 */
+  .tp-sb2, .tp-sb3 { --ds-selectbox-columns: 1; } .tp-sb4 { --ds-selectbox-columns: 2; }
+  @media (min-width: 768px) { .tp-sb2 { --ds-selectbox-columns: 2; } .tp-sb3 { --ds-selectbox-columns: 3; } .tp-sb4 { --ds-selectbox-columns: 4; } }
+  /* 옆으로 미는 표는 눌리지 않게 */
+  .tp-scroll-x .ds-table { min-width: 760px; }
+  /* 공통 조각 */
+  .tp-big { font-size: var(--ybm-font-size-t11); line-height: var(--ybm-line-height-t11); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+  .tp-mid { font-size: var(--ybm-font-size-t07); line-height: var(--ybm-line-height-t07); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+  .tp-rows { display: flex; flex-direction: column; }
+  .tp-rows > * { padding-block: var(--ybm-space-x3); }
+  .tp-rows > * + * { box-shadow: inset 0 1px 0 var(--ybm-color-stroke-neutral-muted); }
+  .tp-kv { display: flex; justify-content: space-between; gap: var(--ybm-space-x3); font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); }
+  .tp-kv > :first-child { color: var(--ybm-color-fg-neutral-muted); flex: none; }
+  .tp-kv > :last-child { text-align: end; }
+  .tp-stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--ybm-space-x4); }
+  .tp-stats > * { display: flex; flex-direction: column; gap: var(--ybm-space-x1); min-width: 0; }
+  @media (min-width: 768px) { .tp-stats { grid-template-columns: repeat(var(--n, 4), minmax(0, 1fr)); } .tp-stats > * + * { padding-inline-start: var(--ybm-space-x4); box-shadow: inset 1px 0 0 var(--ybm-color-stroke-neutral-muted); } }
+  .tp-thumb-sm { flex: none; width: 96px; }
+  .tp-thumb-sm .ds-imageframe, .tp-course .ds-imageframe { border-radius: var(--ybm-shape-lg); }
+  .tp-aside-sticky { display: flex; flex-direction: column; gap: var(--ybm-space-x3); }
+  @media (min-width: 1024px) { .tp-aside-sticky { position: sticky; top: calc(var(--ybm-space-x16) + var(--ybm-space-x4)); } }
+
+  .tp-cal { width: 100%; padding: 0; box-shadow: none; background: none; }
+  .tp-slots { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--ybm-space-x2); }
+  .tp-slots .ds-chip { justify-content: center; }
+  .tp-map { position: relative; overflow: hidden; border-radius: var(--ybm-shape-lg); background: var(--ybm-color-bg-neutral); min-height: 200px; display: grid; place-items: center; color: var(--ybm-color-fg-neutral-subtle); }
+</style>
+</head>
+<body class="tp-canvas">
+<div class="tp-app tp-frame"><nav class="ds-sidenav" aria-label="관리 메뉴">
+  <div class="ds-sidenav__header"><div class="tp-org"><span class="tp-org__mark" aria-hidden="true">한</span><span class="tp-stack"><span class="tp-h4">한빛대학교</span><span class="tp-caption">기관 관리</span></span></div></div>
+  <div class="ds-sidenav__content"><div class="ds-sidenav__group"><a class="ds-sidenav__item" href="#"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--house" aria-hidden="true"></i></span><span class="ds-sidenav__label">홈</span></a><a class="ds-sidenav__item" href="#"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--square-pen" aria-hidden="true"></i></span><span class="ds-sidenav__label">단체 접수</span></a><a class="ds-sidenav__item" href="#" aria-current="page"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--users" aria-hidden="true"></i></span><span class="ds-sidenav__label">응시자 관리</span></a><a class="ds-sidenav__item" href="#"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--chart-column" aria-hidden="true"></i></span><span class="ds-sidenav__label">성적 리포트</span></a></div><div class="ds-sidenav__group"><div class="ds-sidenav__group-label">운영</div><a class="ds-sidenav__item" href="#"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--receipt" aria-hidden="true"></i></span><span class="ds-sidenav__label">정산</span></a><a class="ds-sidenav__item" href="#"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--mail" aria-hidden="true"></i></span><span class="ds-sidenav__label">공지 보내기</span></a></div></div>
+  <div class="ds-sidenav__footer"><a class="ds-sidenav__item" href="#"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--settings" aria-hidden="true"></i></span><span class="ds-sidenav__label">설정</span></a></div>
+</nav><div class="tp-frame__main"><div class="tp-mbar"><span class="tp-h4">응시자 관리</span><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" aria-label="메뉴 열기"><i class="ds-icon ds-icon--menu" aria-hidden="true"></i></button></div><header class="tp-head">
+  <div class="tp-head__texts"><h1 class="tp-h1">응시자 관리</h1><p class="tp-sub">12월 6일 (토) 영어 읽기 듣기 시험 · 단체 접수 124명</p></div>
+  <div class="tp-head__tools"><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="small"><i class="ds-icon ds-icon--download" aria-hidden="true"></i>명단 내려받기</button><button type="button" class="ds-btn" data-variant="brandSolid" data-size="small"><i class="ds-icon ds-icon--mail" aria-hidden="true"></i>수험표 보내기</button></div>
+</header>
+<main class="tp-content">
+  <section class="ds-card tp-card" data-size="small"><div class="tp-stats"><div><span class="tp-sub">접수</span><span class="tp-mid"><span class="tp-num">124명</span></span></div><div><span class="tp-sub">수험표 보냄</span><span class="tp-mid"><span class="tp-num">118명</span></span></div><div><span class="tp-sub">수험표 안 보냄</span><span class="tp-mid"><span class="tp-num">6명</span></span></div><div><span class="tp-sub">취소</span><span class="tp-mid"><span class="tp-num">2명</span></span></div></div></section>
+  <section class="ds-card tp-card" data-size="small"><div class="tp-between"><div class="tp-row" style="flex-wrap:wrap"><div class="ds-input" data-variant="outline" data-size="medium"><i class="ds-icon ds-icon--search ds-input__icon" aria-hidden="true"></i><input class="ds-input__control" id="ro-q" type="search" placeholder="이름, 학번 찾기" aria-label="이름, 학번 찾기"></div><button type="button" class="ds-select" data-size="medium" id="ro-dep" aria-haspopup="listbox" aria-expanded="false" aria-label="학과"><span class="ds-select__value">학과 전체</span></button><button type="button" class="ds-select" data-size="medium" id="ro-st" aria-haspopup="listbox" aria-expanded="false" aria-label="상태"><span class="ds-select__value">상태 전체</span></button></div><div class="ds-chiptabs" role="tablist" aria-label="빠른 거르기"><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true">전체</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false">안 보냄 6</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false">취소 2</button></div></div>
+    <div class="tp-scroll-x"><div class="ds-table-wrap"><table class="ds-table" data-density="compact"><thead><tr><th scope="col"><label class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control" aria-label="모두 고르기"></label></th><th scope="col">이름</th><th scope="col">학번</th><th scope="col">학과</th><th scope="col">좌석</th><th scope="col">수험표</th><th scope="col">상태</th><th scope="col"></th></tr></thead><tbody><tr data-interactive><td><label class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control" aria-label="김민준 고르기"></label></td><td><div class="tp-row"><span class="ds-avatar" data-size="28" role="img" aria-label="김민준"><span class="ds-avatar__initials" aria-hidden="true">김</span></span><span>김민준</span></div></td><td><span class="tp-num">20231042</span></td><td>경영학과</td><td><span class="tp-num">A-012</span></td><td><span class="tp-row"><span class="ds-statusdot" data-tone="positive" aria-hidden="true"></span>보냄</span></td><td><span class="ds-badge" data-tone="informative">접수 완료</span></td><td><button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="더 보기"><i class="ds-icon ds-icon--ellipsis" aria-hidden="true"></i></button></td></tr><tr data-interactive><td><label class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control" aria-label="이서연 고르기"></label></td><td><div class="tp-row"><span class="ds-avatar" data-size="28" role="img" aria-label="이서연"><span class="ds-avatar__initials" aria-hidden="true">이</span></span><span>이서연</span></div></td><td><span class="tp-num">20231107</span></td><td>경영학과</td><td><span class="tp-num">A-013</span></td><td><span class="tp-row"><span class="ds-statusdot" data-tone="positive" aria-hidden="true"></span>보냄</span></td><td><span class="ds-badge" data-tone="informative">접수 완료</span></td><td><button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="더 보기"><i class="ds-icon ds-icon--ellipsis" aria-hidden="true"></i></button></td></tr><tr data-interactive><td><label class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control" aria-label="박지후 고르기"></label></td><td><div class="tp-row"><span class="ds-avatar" data-size="28" role="img" aria-label="박지후"><span class="ds-avatar__initials" aria-hidden="true">박</span></span><span>박지후</span></div></td><td><span class="tp-num">20220388</span></td><td>국제통상학과</td><td><span class="tp-num">A-021</span></td><td><span class="tp-row"><span class="ds-statusdot" data-tone="warning" aria-hidden="true"></span>안 보냄</span></td><td><span class="ds-badge" data-tone="informative">접수 완료</span></td><td><button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="더 보기"><i class="ds-icon ds-icon--ellipsis" aria-hidden="true"></i></button></td></tr><tr data-interactive><td><label class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control" aria-label="최하은 고르기"></label></td><td><div class="tp-row"><span class="ds-avatar" data-size="28" role="img" aria-label="최하은"><span class="ds-avatar__initials" aria-hidden="true">최</span></span><span>최하은</span></div></td><td><span class="tp-num">20240215</span></td><td>영어영문학과</td><td><span class="tp-num">B-004</span></td><td><span class="tp-row"><span class="ds-statusdot" data-tone="positive" aria-hidden="true"></span>보냄</span></td><td><span class="ds-badge" data-tone="informative">접수 완료</span></td><td><button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="더 보기"><i class="ds-icon ds-icon--ellipsis" aria-hidden="true"></i></button></td></tr><tr data-interactive><td><label class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control" aria-label="정민재 고르기"></label></td><td><div class="tp-row"><span class="ds-avatar" data-size="28" role="img" aria-label="정민재"><span class="ds-avatar__initials" aria-hidden="true">정</span></span><span>정민재</span></div></td><td><span class="tp-num">20230877</span></td><td>컴퓨터공학과</td><td><span class="tp-num">B-011</span></td><td><span class="tp-row"><span class="ds-statusdot" data-tone="positive" aria-hidden="true"></span>보냄</span></td><td><span class="ds-badge" data-tone="informative">접수 완료</span></td><td><button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="더 보기"><i class="ds-icon ds-icon--ellipsis" aria-hidden="true"></i></button></td></tr><tr data-interactive><td><label class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control" aria-label="한지아 고르기"></label></td><td><div class="tp-row"><span class="ds-avatar" data-size="28" role="img" aria-label="한지아"><span class="ds-avatar__initials" aria-hidden="true">한</span></span><span>한지아</span></div></td><td><span class="tp-num">20230561</span></td><td>컴퓨터공학과</td><td><span class="tp-num">B-012</span></td><td><span class="tp-row"><span class="ds-statusdot" data-tone="warning" aria-hidden="true"></span>안 보냄</span></td><td><span class="ds-badge" data-tone="informative">접수 완료</span></td><td><button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="더 보기"><i class="ds-icon ds-icon--ellipsis" aria-hidden="true"></i></button></td></tr><tr data-interactive><td><label class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control" aria-label="오도윤 고르기"></label></td><td><div class="tp-row"><span class="ds-avatar" data-size="28" role="img" aria-label="오도윤"><span class="ds-avatar__initials" aria-hidden="true">오</span></span><span>오도윤</span></div></td><td><span class="tp-num">20221190</span></td><td>경제학과</td><td><span class="tp-num">-</span></td><td><span class="tp-row"><span class="ds-statusdot" data-tone="warning" aria-hidden="true"></span>안 보냄</span></td><td><span class="ds-badge" data-tone="">취소</span></td><td><button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="더 보기"><i class="ds-icon ds-icon--ellipsis" aria-hidden="true"></i></button></td></tr><tr data-interactive><td><label class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control" aria-label="윤채원 고르기"></label></td><td><div class="tp-row"><span class="ds-avatar" data-size="28" role="img" aria-label="윤채원"><span class="ds-avatar__initials" aria-hidden="true">윤</span></span><span>윤채원</span></div></td><td><span class="tp-num">20240033</span></td><td>경제학과</td><td><span class="tp-num">C-002</span></td><td><span class="tp-row"><span class="ds-statusdot" data-tone="positive" aria-hidden="true"></span>보냄</span></td><td><span class="ds-badge" data-tone="informative">접수 완료</span></td><td><button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="더 보기"><i class="ds-icon ds-icon--ellipsis" aria-hidden="true"></i></button></td></tr></tbody></table></div></div><div class="ds-tablepagination"><label class="ds-tablepagination__size"><span class="ds-tablepagination__label">페이지당 행 수</span><span class="ds-tablepagination__select"><select><option selected>8개</option><option>25개</option><option>50개</option></select></span></label><div class="ds-tablepagination__range"><span class="ds-tablepagination__position"><span class="ds-tablepagination__current">1-8</span><span class="ds-tablepagination__total">/ 총 124개</span></span><nav class="ds-pagination" aria-label="표 페이지"><a class="ds-pagination__item" data-type="prev" aria-disabled="true" aria-label="이전 페이지"></a><a class="ds-pagination__item" data-type="next" href="#" aria-label="다음 페이지"></a></nav></div></div></section>
+</main></div></div>
+</body>
+</html>

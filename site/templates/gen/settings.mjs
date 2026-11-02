@@ -105,7 +105,7 @@ const panels = () => {
   </main>
 </div>
 </div>`;
-  return { slug: 'settings-sidebar', en: 'Settings Panels', name: '설정 패널', group: 'Settings', desc: '왼쪽에 늘 보이는 메뉴로 옆 칸을 바꾸는 설정입니다. 따로 폼을 열지 않고 줄마다 그 자리에서 고칩니다.', css, body };
+  return { slug: 'settings-sidebar', canvas: false, en: 'Settings Panels', name: '설정 패널', group: 'Settings', desc: '왼쪽에 늘 보이는 메뉴로 옆 칸을 바꾸는 설정입니다. 따로 폼을 열지 않고 줄마다 그 자리에서 고칩니다.', css, body };
 };
 
 export const templates = [dialog, form, panels].map((f) => f());

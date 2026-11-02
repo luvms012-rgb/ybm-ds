@@ -126,7 +126,7 @@ const orderDetail = () => {
   </aside>
 </div>
 </div>`;
-  return { slug: 'detail-page', en: 'Order Detail', name: '주문 상세', group: 'Content', desc: '한 건의 기록을 두 칸에 보여 주는 상세입니다. 상태와 동작이 있는 머리글, 반복되는 상품 줄, 합계, 시간 순 활동, 옆 정보 패널로 이어집니다.', css, body };
+  return { slug: 'detail-page', canvas: false, en: 'Order Detail', name: '주문 상세', group: 'Content', desc: '한 건의 기록을 두 칸에 보여 주는 상세입니다. 상태와 동작이 있는 머리글, 반복되는 상품 줄, 합계, 시간 순 활동, 옆 정보 패널로 이어집니다.', css, body };
 };
 
 /* 6. 상품 상세 -------------------------------------------------- */

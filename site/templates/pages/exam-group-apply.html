@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>단체 접수 - YBM DS 템플릿</title>
+<link rel="stylesheet" href="../../../dist/ybm-ds.css">
+<script src="../../../dist/ybm-ds.js" defer></script>
+<style>
+  /* 템플릿 배치 전용. 값은 모두 --ybm-* 토큰 */
+  body { word-break: keep-all; overflow-wrap: break-word; }
+  .tp-app { display: flex; flex-direction: column; min-height: 100vh; background: var(--ybm-color-bg-layer-default); }
+  .tp-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: var(--ybm-space-x4); padding: var(--ybm-space-x6) var(--ybm-space-x4) var(--ybm-space-x2); }
+  .tp-head__texts { display: flex; flex-direction: column; gap: var(--ybm-space-x2); min-width: 0; }
+  .tp-head .tp-sub { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); }
+  .tp-head__tools { display: flex; flex-wrap: wrap; align-items: flex-end; gap: var(--ybm-space-x2); }
+  .tp-head > .tp-row, .tp-head .tp-between > .tp-row { flex-wrap: wrap; }
+  .ds-tablepagination { flex-wrap: wrap; row-gap: var(--ybm-space-x2); min-width: 0; }
+  .tp-between > .tp-row { flex-wrap: wrap; }
+  .tp-h1 { font-size: var(--ybm-font-size-t09); line-height: var(--ybm-line-height-t09); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; }
+  .tp-h2 { font-size: var(--ybm-font-size-t07); line-height: var(--ybm-line-height-t07); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; }
+  .tp-h3 { font-size: var(--ybm-font-size-t05); line-height: var(--ybm-line-height-t05); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-h4 { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-sub { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
+  .tp-caption { font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); color: var(--ybm-color-fg-neutral-subtle); }
+  .tp-num { font-variant-numeric: tabular-nums; }
+  .tp-body { display: flex; flex: 1 1 auto; flex-direction: column; min-height: 0; }
+  .tp-content { display: flex; flex: 1 1 auto; flex-direction: column; gap: var(--ybm-space-x8); min-width: 0; padding: var(--ybm-space-x6) var(--ybm-space-x4) var(--ybm-space-x12); }
+  .tp-panel { display: flex; flex-direction: column; gap: var(--ybm-space-x6); padding: var(--ybm-space-x6) var(--ybm-space-x4); box-shadow: inset 0 1px 0 var(--ybm-color-stroke-neutral-muted); }
+  .tp-sec { display: flex; flex-direction: column; gap: var(--ybm-space-x4); min-width: 0; }
+  .tp-sec-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ybm-space-x2) var(--ybm-space-x3); }
+  .tp-sec-head__texts { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--ybm-space-x1) var(--ybm-space-x3); }
+  .tp-row { display: flex; align-items: center; gap: var(--ybm-space-x2); min-width: 0; }
+  /* 줄 안에 놓인 고르기 칸은 글자만큼만 */
+  :is(.tp-row, .tp-between, .tp-head__tools, .tp-sec-head) > .ds-select { width: auto; min-width: 140px; }
+  .tp-between { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ybm-space-x2); }
+  .tp-stack { display: flex; flex-direction: column; gap: var(--ybm-space-x1); min-width: 0; }
+  .tp-stack > .ds-badge { align-self: flex-start; }
+  .tp-g2, .tp-g3, .tp-g4, .tp-g5, .tp-g6 { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ybm-space-x3); }
+  .tp-card { min-width: 0; }
+  /* 흰 바탕 화면의 카드는 선 없는 연회색 상자 */
+  .tp-card.ds-card { gap: var(--ybm-space-x4); padding: var(--ybm-space-x5); border-radius: var(--ybm-shape-2xl); box-shadow: none; background: var(--ybm-color-bg-neutral-muted); }
+  /* 회색 바탕 화면(tp-canvas): 흰 면을 선 없이 바탕색 차이로 나눈다 */
+  body.tp-canvas, .tp-canvas .tp-app, .tp-canvas .tp-bar { background: var(--ybm-color-bg-canvas); }
+  .tp-canvas .tp-card.ds-card { box-shadow: none; background: var(--ybm-color-bg-layer-default); }
+  .tp-canvas .tp-content > .ds-divider, .tp-canvas .tp-content > .tp-sec + .ds-divider { display: none; }
+  .tp-canvas .tp-panel { background: var(--ybm-color-bg-layer-default); box-shadow: none; }
+  .tp-canvas .tp-g2, .tp-canvas .tp-g3, .tp-canvas .tp-g4, .tp-canvas .tp-g5, .tp-canvas .tp-g6 { gap: var(--ybm-space-x4); }
+  .tp-canvas .tp-content { gap: var(--ybm-space-x6); }
+  .tp-span2 { grid-column: auto; }
+  .tp-kpi__label { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
+  .tp-kpi__value { font-size: var(--ybm-font-size-t09); line-height: var(--ybm-line-height-t09); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+  .tp-delta { display: inline-flex; align-items: center; gap: 2px; font-size: var(--ybm-font-size-t03); line-height: var(--ybm-line-height-t03); font-weight: var(--ybm-font-weight-medium); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .tp-delta .ds-icon { --ds-icon-size: 14px; }
+  .tp-delta[data-tone="up"] { color: var(--ybm-color-fg-positive); }
+  .tp-delta[data-tone="down"] { color: var(--ybm-color-fg-critical); }
+  .tp-delta[data-tone="flat"] { color: var(--ybm-color-fg-neutral-muted); }
+  .tp-chart { display: block; width: 100%; height: auto; overflow: visible; }
+  .tp-chart text { fill: var(--ybm-color-fg-neutral-subtle); font-size: 11px; font-family: inherit; }
+  .tp-chart .tp-grid-line { stroke: var(--ybm-color-stroke-neutral-muted); stroke-width: 1; }
+  .tp-legend { display: flex; flex-wrap: wrap; gap: var(--ybm-space-x1) var(--ybm-space-x4); font-size: var(--ybm-font-size-t03); line-height: var(--ybm-line-height-t03); color: var(--ybm-color-fg-neutral-muted); }
+  .tp-legend__item { display: inline-flex; align-items: center; gap: var(--ybm-space-x1_5); }
+  .tp-swatch { flex: none; width: 10px; height: 10px; border-radius: 3px; background: var(--c, var(--ybm-color-chart-series-1)); }
+  .tp-split { display: flex; height: 12px; overflow: hidden; border-radius: var(--ybm-shape-pill); background: var(--ybm-color-bg-neutral); }
+  .tp-split > span { height: 100%; background: var(--c); }
+  .tp-split > span + span { box-shadow: inset 2px 0 0 var(--ybm-color-bg-layer-default); }
+  .tp-ph { display: grid; place-items: center; width: 100%; height: 100%; color: var(--ybm-color-fg-neutral-subtle); background: var(--ybm-color-bg-neutral); }
+  .tp-logo { display: inline-grid; place-items: center; width: 88px; height: 28px; border-radius: var(--ybm-shape-xs); background: var(--ybm-color-bg-neutral); color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t03-static); line-height: var(--ybm-line-height-t03-static); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-bar { position: sticky; top: 0; z-index: var(--ybm-z-sticky); background: var(--ybm-color-bg-layer-default); }
+  .tp-track { display: flex; flex-direction: column; gap: var(--ybm-space-x1); min-width: 120px; }
+  .tp-hide-sm { display: none; }
+  .tp-scroll-x { overflow-x: auto; }
+  .tp-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .tp-kbd { display: inline-grid; place-items: center; min-width: 20px; height: 20px; padding: 0 4px; border-radius: var(--ybm-shape-2xs); box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-neutral-muted); color: var(--ybm-color-fg-neutral-muted); font-size: var(--ybm-font-size-t01); font-family: inherit; }
+  @media (min-width: 768px) {
+    .tp-head { padding: var(--ybm-space-x10) var(--ybm-space-x10) var(--ybm-space-x2); }
+    .tp-h1 { font-size: var(--ybm-font-size-t11); line-height: var(--ybm-line-height-t11); }
+    .tp-head .tp-sub { font-size: var(--ybm-font-size-t05); line-height: var(--ybm-line-height-t05); }
+    .tp-content { padding: var(--ybm-space-x8) var(--ybm-space-x10) var(--ybm-space-x16); gap: var(--ybm-space-x12); }
+    .tp-canvas .tp-content { gap: var(--ybm-space-x8); }
+    .tp-panel { padding: var(--ybm-space-x8) var(--ybm-space-x6); }
+    .tp-card.ds-card { padding: var(--ybm-space-x6); }
+    .tp-g2, .tp-g4, .tp-g6 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .tp-g3, .tp-g5 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .tp-hide-sm { display: revert; }
+  }
+  @media (min-width: 1024px) {
+    .tp-body--panel { flex-direction: row; }
+    .tp-body--panel > .tp-panel { flex: none; width: 400px; box-shadow: inset 1px 0 0 var(--ybm-color-stroke-neutral-muted); }
+    .tp-canvas .tp-body--panel > .tp-panel { box-shadow: none; }
+    .tp-g3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .tp-g4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .tp-g5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+    .tp-g6 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .tp-span2 { grid-column: span 2; }
+    .tp-span3 { grid-column: span 3; }
+  }
+  @media (min-width: 1280px) { .tp-g6 { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
+
+  /* 위 메뉴 화면 */
+  .tp-topbar { position: sticky; top: 0; z-index: var(--ybm-z-sticky); background: var(--ybm-color-bg-layer-default); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); }
+  .tp-topbar > .ds-topnav { width: min(100%, 1200px); margin-inline: auto; }
+  .tp-topbar .ds-topnav__menu { display: none; }
+  @media (min-width: 768px) { .tp-topbar .ds-topnav__menu { display: flex; } }
+  .tp-wrap { width: min(100%, 1200px); margin-inline: auto; }
+  .tp-topbar ~ .tp-head, .tp-topbar ~ .tp-content { box-sizing: border-box; width: min(100%, 1280px); margin-inline: auto; }
+  /* 옆 메뉴 화면 */
+  .tp-app.tp-frame { flex-direction: row; min-height: 100vh; }
+  .tp-frame .ds-sidenav__header { justify-content: flex-start; }
+  .tp-frame > .ds-sidenav { display: none; }
+  .tp-frame__main { display: flex; flex: 1 1 auto; flex-direction: column; min-width: 0; }
+  .tp-mbar { display: flex; align-items: center; justify-content: space-between; gap: var(--ybm-space-x2); padding: var(--ybm-space-x2) var(--ybm-space-x4); background: var(--ybm-color-bg-layer-default); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); }
+  @media (min-width: 1024px) {
+    .tp-frame > .ds-sidenav { display: flex; position: sticky; top: 0; flex: none; height: 100vh; background: var(--ybm-color-bg-layer-default); box-shadow: inset -1px 0 0 var(--ybm-color-stroke-neutral-muted); }
+    .tp-mbar { display: none; }
+  }
+  .tp-org { display: flex; align-items: center; gap: var(--ybm-space-x2); padding: var(--ybm-space-x2) var(--ybm-space-x2) var(--ybm-space-x1); }
+  .tp-org__mark { display: grid; place-items: center; flex: none; width: 32px; height: 32px; border-radius: var(--ybm-shape-sm); background: var(--ybm-color-bg-neutral-solid); color: var(--ybm-color-fg-neutral-inverted); font-size: var(--ybm-font-size-t03-static); font-weight: var(--ybm-font-weight-bold); }
+  /* 고르기 상자 칸 수: 모바일은 1칸(4칸은 2칸), 768 부터 지정한 칸 */
+  .tp-sb2, .tp-sb3 { --ds-selectbox-columns: 1; } .tp-sb4 { --ds-selectbox-columns: 2; }
+  @media (min-width: 768px) { .tp-sb2 { --ds-selectbox-columns: 2; } .tp-sb3 { --ds-selectbox-columns: 3; } .tp-sb4 { --ds-selectbox-columns: 4; } }
+  /* 옆으로 미는 표는 눌리지 않게 */
+  .tp-scroll-x .ds-table { min-width: 760px; }
+  /* 공통 조각 */
+  .tp-big { font-size: var(--ybm-font-size-t11); line-height: var(--ybm-line-height-t11); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+  .tp-mid { font-size: var(--ybm-font-size-t07); line-height: var(--ybm-line-height-t07); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+  .tp-rows { display: flex; flex-direction: column; }
+  .tp-rows > * { padding-block: var(--ybm-space-x3); }
+  .tp-rows > * + * { box-shadow: inset 0 1px 0 var(--ybm-color-stroke-neutral-muted); }
+  .tp-kv { display: flex; justify-content: space-between; gap: var(--ybm-space-x3); font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); }
+  .tp-kv > :first-child { color: var(--ybm-color-fg-neutral-muted); flex: none; }
+  .tp-kv > :last-child { text-align: end; }
+  .tp-stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--ybm-space-x4); }
+  .tp-stats > * { display: flex; flex-direction: column; gap: var(--ybm-space-x1); min-width: 0; }
+  @media (min-width: 768px) { .tp-stats { grid-template-columns: repeat(var(--n, 4), minmax(0, 1fr)); } .tp-stats > * + * { padding-inline-start: var(--ybm-space-x4); box-shadow: inset 1px 0 0 var(--ybm-color-stroke-neutral-muted); } }
+  .tp-thumb-sm { flex: none; width: 96px; }
+  .tp-thumb-sm .ds-imageframe, .tp-course .ds-imageframe { border-radius: var(--ybm-shape-lg); }
+  .tp-aside-sticky { display: flex; flex-direction: column; gap: var(--ybm-space-x3); }
+  @media (min-width: 1024px) { .tp-aside-sticky { position: sticky; top: calc(var(--ybm-space-x16) + var(--ybm-space-x4)); } }
+
+  .tp-cal { width: 100%; padding: 0; box-shadow: none; background: none; }
+  .tp-slots { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--ybm-space-x2); }
+  .tp-slots .ds-chip { justify-content: center; }
+  .tp-map { position: relative; overflow: hidden; border-radius: var(--ybm-shape-lg); background: var(--ybm-color-bg-neutral); min-height: 200px; display: grid; place-items: center; color: var(--ybm-color-fg-neutral-subtle); }
+
+  .tp-ga { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ybm-space-x6); }
+  @media (min-width: 1280px) { .tp-ga { grid-template-columns: minmax(0, 1fr) 320px; align-items: start; } }
+  .tp-err td { background: var(--ybm-color-bg-critical-weak); }
+  .tp-err-msg { color: var(--ybm-color-fg-critical); }
+</style>
+</head>
+<body class="tp-canvas">
+<div class="tp-app tp-frame"><nav class="ds-sidenav" aria-label="관리 메뉴">
+  <div class="ds-sidenav__header"><div class="tp-org"><span class="tp-org__mark" aria-hidden="true">한</span><span class="tp-stack"><span class="tp-h4">한빛대학교</span><span class="tp-caption">기관 관리</span></span></div></div>
+  <div class="ds-sidenav__content"><div class="ds-sidenav__group"><a class="ds-sidenav__item" href="#"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--house" aria-hidden="true"></i></span><span class="ds-sidenav__label">홈</span></a><a class="ds-sidenav__item" href="#" aria-current="page"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--square-pen" aria-hidden="true"></i></span><span class="ds-sidenav__label">단체 접수</span></a><a class="ds-sidenav__item" href="#"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--users" aria-hidden="true"></i></span><span class="ds-sidenav__label">응시자 관리</span></a><a class="ds-sidenav__item" href="#"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--chart-column" aria-hidden="true"></i></span><span class="ds-sidenav__label">성적 리포트</span></a></div><div class="ds-sidenav__group"><div class="ds-sidenav__group-label">운영</div><a class="ds-sidenav__item" href="#"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--receipt" aria-hidden="true"></i></span><span class="ds-sidenav__label">정산</span></a><a class="ds-sidenav__item" href="#"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--mail" aria-hidden="true"></i></span><span class="ds-sidenav__label">공지 보내기</span></a></div></div>
+  <div class="ds-sidenav__footer"><a class="ds-sidenav__item" href="#"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--settings" aria-hidden="true"></i></span><span class="ds-sidenav__label">설정</span></a></div>
+</nav><div class="tp-frame__main"><div class="tp-mbar"><span class="tp-h4">단체 접수</span><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" aria-label="메뉴 열기"><i class="ds-icon ds-icon--menu" aria-hidden="true"></i></button></div><header class="tp-head">
+  <div class="tp-head__texts"><h1 class="tp-h1">단체 접수</h1><p class="tp-sub">응시자 명단을 올리면 한 번에 접수해요.</p></div>
+  <div class="tp-head__tools"><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="small"><i class="ds-icon ds-icon--save" aria-hidden="true"></i>임시 저장</button></div>
+</header>
+<main class="tp-content">
+  <section class="ds-card tp-card" data-size="small"><ol class="ds-stepper" aria-label="접수 단계"><li class="ds-stepper__step" data-state="complete"><span class="ds-stepper__indicator"></span><span class="ds-stepper__label">시험 고르기</span></li><li class="ds-stepper__step" data-state="current" aria-current="step"><span class="ds-stepper__indicator"></span><span class="ds-stepper__label">명단 올리기</span></li><li class="ds-stepper__step"><span class="ds-stepper__indicator"></span><span class="ds-stepper__label">확인</span></li><li class="ds-stepper__step"><span class="ds-stepper__indicator"></span><span class="ds-stepper__label">결제</span></li></ol></section>
+  <div class="tp-ga">
+    <div class="tp-stack" style="gap: var(--ybm-space-x4)">
+      <section class="ds-card tp-card" data-size="small"><div class="tp-between"><div class="tp-stack"><span class="tp-caption">고른 시험</span><span class="tp-h3">영어 읽기 듣기 시험</span><span class="ds-tag-group" data-size="t4"><span>12월 6일 (토) 09:30</span><span>한빛대학교 단독 고사장</span><span>정원 150명</span></span></div><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="xsmall">바꾸기</button></div></section>
+      <section class="ds-card tp-card" data-size="small"><div class="tp-between"><div class="tp-stack"><span class="tp-h3">응시자 명단</span><span class="tp-sub">양식에 맞춰 이름, 학번, 학과, 이메일을 적어 올려 주세요.</span></div><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="small"><i class="ds-icon ds-icon--download" aria-hidden="true"></i>양식 받기</button></div>
+        <div class="ds-fileattach"><label class="ds-fileattach__dropzone"><input type="file" class="ds-fileattach__input" accept=".xlsx,.csv"><span class="ds-fileattach__label">엑셀 파일을 끌어 놓거나 눌러서 올리세요</span></label>
+          <div class="ds-fileattach__items"><div class="ds-fileitem"><span class="ds-fileitem__thumbnail"><i class="ds-icon ds-icon--file-text" aria-hidden="true"></i></span><span class="ds-fileitem__name">2학기_응시자.xlsx</span></div></div></div>
+        <div class="tp-between"><div class="tp-row" style="flex-wrap:wrap"><button type="button" class="ds-chip" data-variant="outlineWeak" data-size="small" aria-pressed="true">전체 128</button><button type="button" class="ds-chip" data-variant="outlineWeak" data-size="small">정상 124</button><button type="button" class="ds-chip" data-variant="outlineWeak" data-size="small">확인 필요 4</button></div><span class="tp-caption">빨간 줄을 눌러 바로 고칠 수 있어요</span></div>
+        <div class="tp-scroll-x"><div class="ds-table-wrap"><table class="ds-table" data-density="compact"><thead><tr><th scope="col">번호</th><th scope="col">이름</th><th scope="col">학번</th><th scope="col">학과</th><th scope="col">이메일</th><th scope="col">확인</th></tr></thead><tbody><tr><td>1</td><td>김민준</td><td>20231042</td><td>경영학과</td><td>minjun@hanbit.ac.kr</td><td><span class="ds-badge" data-tone="positive">정상</span></td></tr><tr><td>2</td><td>이서연</td><td>20231107</td><td>경영학과</td><td>seoyeon@hanbit.ac.kr</td><td><span class="ds-badge" data-tone="positive">정상</span></td></tr><tr class="tp-err"><td>3</td><td>박지후</td><td>20220388</td><td>국제통상학과</td><td><span class="tp-err-msg">jihu@hanbit</span></td><td><span class="ds-badge" data-tone="critical">이메일 확인</span></td></tr><tr><td>4</td><td>최하은</td><td>20240215</td><td>영어영문학과</td><td>haeun@hanbit.ac.kr</td><td><span class="ds-badge" data-tone="positive">정상</span></td></tr><tr class="tp-err"><td>5</td><td>정민재</td><td></td><td>컴퓨터공학과</td><td>minjae@hanbit.ac.kr</td><td><span class="ds-badge" data-tone="critical">학번 없음</span></td></tr><tr><td>6</td><td>한지아</td><td>20230561</td><td>컴퓨터공학과</td><td>jia@hanbit.ac.kr</td><td><span class="ds-badge" data-tone="positive">정상</span></td></tr></tbody></table></div></div></section>
+    </div>
+    <aside class="tp-aside-sticky">
+      <section class="ds-card tp-card" data-size="small"><span class="tp-h3">접수 요약</span><div class="tp-stack" style="gap: var(--ybm-space-x2)"><div class="tp-kv"><span>접수 인원</span><span class="tp-num">124명</span></div><div class="tp-kv"><span>1인 응시료</span><span class="tp-num">46,800원</span></div><div class="tp-kv"><span>단체 할인 10%</span><span class="tp-num">-580,320원</span></div></div><hr class="ds-divider"><div class="tp-total tp-between" style="align-items:baseline"><span class="tp-h4">합계</span><span class="tp-mid"><span class="tp-num">5,222,880원</span></span></div><div class="ds-field"><div class="ds-field__header"><label class="ds-field__label" for="ga-bill">결제 방법</label></div><button type="button" class="ds-select" data-size="medium" id="ga-bill" aria-haspopup="listbox" aria-expanded="false"><span class="ds-select__value">세금계산서 발행</span></button></div></section>
+      <button type="button" class="ds-btn" data-variant="brandSolid" data-size="large" data-width="fill">다음: 확인하기<i class="ds-icon ds-icon--arrow-right" aria-hidden="true"></i></button>
+      <p class="tp-caption" style="text-align:center">확인이 필요한 4명은 빼고 접수해요</p>
+    </aside>
+  </div>
+</main></div></div>
+</body>
+</html>

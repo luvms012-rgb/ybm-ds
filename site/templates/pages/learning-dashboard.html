@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>학습 현황 대시보드 - YBM DS 템플릿</title>
+<link rel="stylesheet" href="../../../dist/ybm-ds.css">
+<script src="../../../dist/ybm-ds.js" defer></script>
+<style>
+  /* 템플릿 배치 전용. 값은 모두 --ybm-* 토큰 */
+  body { word-break: keep-all; overflow-wrap: break-word; }
+  .tp-app { display: flex; flex-direction: column; min-height: 100vh; background: var(--ybm-color-bg-layer-default); }
+  .tp-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: var(--ybm-space-x4); padding: var(--ybm-space-x6) var(--ybm-space-x4) var(--ybm-space-x2); }
+  .tp-head__texts { display: flex; flex-direction: column; gap: var(--ybm-space-x2); min-width: 0; }
+  .tp-head .tp-sub { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); }
+  .tp-head__tools { display: flex; flex-wrap: wrap; align-items: flex-end; gap: var(--ybm-space-x2); }
+  .tp-head > .tp-row, .tp-head .tp-between > .tp-row { flex-wrap: wrap; }
+  .ds-tablepagination { flex-wrap: wrap; row-gap: var(--ybm-space-x2); min-width: 0; }
+  .tp-between > .tp-row { flex-wrap: wrap; }
+  .tp-h1 { font-size: var(--ybm-font-size-t09); line-height: var(--ybm-line-height-t09); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; }
+  .tp-h2 { font-size: var(--ybm-font-size-t07); line-height: var(--ybm-line-height-t07); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; }
+  .tp-h3 { font-size: var(--ybm-font-size-t05); line-height: var(--ybm-line-height-t05); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-h4 { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-sub { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
+  .tp-caption { font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); color: var(--ybm-color-fg-neutral-subtle); }
+  .tp-num { font-variant-numeric: tabular-nums; }
+  .tp-body { display: flex; flex: 1 1 auto; flex-direction: column; min-height: 0; }
+  .tp-content { display: flex; flex: 1 1 auto; flex-direction: column; gap: var(--ybm-space-x8); min-width: 0; padding: var(--ybm-space-x6) var(--ybm-space-x4) var(--ybm-space-x12); }
+  .tp-panel { display: flex; flex-direction: column; gap: var(--ybm-space-x6); padding: var(--ybm-space-x6) var(--ybm-space-x4); box-shadow: inset 0 1px 0 var(--ybm-color-stroke-neutral-muted); }
+  .tp-sec { display: flex; flex-direction: column; gap: var(--ybm-space-x4); min-width: 0; }
+  .tp-sec-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ybm-space-x2) var(--ybm-space-x3); }
+  .tp-sec-head__texts { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--ybm-space-x1) var(--ybm-space-x3); }
+  .tp-row { display: flex; align-items: center; gap: var(--ybm-space-x2); min-width: 0; }
+  /* 줄 안에 놓인 고르기 칸은 글자만큼만 */
+  :is(.tp-row, .tp-between, .tp-head__tools, .tp-sec-head) > .ds-select { width: auto; min-width: 140px; }
+  .tp-between { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ybm-space-x2); }
+  .tp-stack { display: flex; flex-direction: column; gap: var(--ybm-space-x1); min-width: 0; }
+  .tp-stack > .ds-badge { align-self: flex-start; }
+  .tp-g2, .tp-g3, .tp-g4, .tp-g5, .tp-g6 { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ybm-space-x3); }
+  .tp-card { min-width: 0; }
+  /* 흰 바탕 화면의 카드는 선 없는 연회색 상자 */
+  .tp-card.ds-card { gap: var(--ybm-space-x4); padding: var(--ybm-space-x5); border-radius: var(--ybm-shape-2xl); box-shadow: none; background: var(--ybm-color-bg-neutral-muted); }
+  /* 회색 바탕 화면(tp-canvas): 흰 면을 선 없이 바탕색 차이로 나눈다 */
+  body.tp-canvas, .tp-canvas .tp-app, .tp-canvas .tp-bar { background: var(--ybm-color-bg-canvas); }
+  .tp-canvas .tp-card.ds-card { box-shadow: none; background: var(--ybm-color-bg-layer-default); }
+  .tp-canvas .tp-content > .ds-divider, .tp-canvas .tp-content > .tp-sec + .ds-divider { display: none; }
+  .tp-canvas .tp-panel { background: var(--ybm-color-bg-layer-default); box-shadow: none; }
+  .tp-canvas .tp-g2, .tp-canvas .tp-g3, .tp-canvas .tp-g4, .tp-canvas .tp-g5, .tp-canvas .tp-g6 { gap: var(--ybm-space-x4); }
+  .tp-canvas .tp-content { gap: var(--ybm-space-x6); }
+  .tp-span2 { grid-column: auto; }
+  .tp-kpi__label { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
+  .tp-kpi__value { font-size: var(--ybm-font-size-t09); line-height: var(--ybm-line-height-t09); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+  .tp-delta { display: inline-flex; align-items: center; gap: 2px; font-size: var(--ybm-font-size-t03); line-height: var(--ybm-line-height-t03); font-weight: var(--ybm-font-weight-medium); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .tp-delta .ds-icon { --ds-icon-size: 14px; }
+  .tp-delta[data-tone="up"] { color: var(--ybm-color-fg-positive); }
+  .tp-delta[data-tone="down"] { color: var(--ybm-color-fg-critical); }
+  .tp-delta[data-tone="flat"] { color: var(--ybm-color-fg-neutral-muted); }
+  .tp-chart { display: block; width: 100%; height: auto; overflow: visible; }
+  .tp-chart text { fill: var(--ybm-color-fg-neutral-subtle); font-size: 11px; font-family: inherit; }
+  .tp-chart .tp-grid-line { stroke: var(--ybm-color-stroke-neutral-muted); stroke-width: 1; }
+  .tp-legend { display: flex; flex-wrap: wrap; gap: var(--ybm-space-x1) var(--ybm-space-x4); font-size: var(--ybm-font-size-t03); line-height: var(--ybm-line-height-t03); color: var(--ybm-color-fg-neutral-muted); }
+  .tp-legend__item { display: inline-flex; align-items: center; gap: var(--ybm-space-x1_5); }
+  .tp-swatch { flex: none; width: 10px; height: 10px; border-radius: 3px; background: var(--c, var(--ybm-color-chart-series-1)); }
+  .tp-split { display: flex; height: 12px; overflow: hidden; border-radius: var(--ybm-shape-pill); background: var(--ybm-color-bg-neutral); }
+  .tp-split > span { height: 100%; background: var(--c); }
+  .tp-split > span + span { box-shadow: inset 2px 0 0 var(--ybm-color-bg-layer-default); }
+  .tp-ph { display: grid; place-items: center; width: 100%; height: 100%; color: var(--ybm-color-fg-neutral-subtle); background: var(--ybm-color-bg-neutral); }
+  .tp-logo { display: inline-grid; place-items: center; width: 88px; height: 28px; border-radius: var(--ybm-shape-xs); background: var(--ybm-color-bg-neutral); color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t03-static); line-height: var(--ybm-line-height-t03-static); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-bar { position: sticky; top: 0; z-index: var(--ybm-z-sticky); background: var(--ybm-color-bg-layer-default); }
+  .tp-track { display: flex; flex-direction: column; gap: var(--ybm-space-x1); min-width: 120px; }
+  .tp-hide-sm { display: none; }
+  .tp-scroll-x { overflow-x: auto; }
+  .tp-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .tp-kbd { display: inline-grid; place-items: center; min-width: 20px; height: 20px; padding: 0 4px; border-radius: var(--ybm-shape-2xs); box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-neutral-muted); color: var(--ybm-color-fg-neutral-muted); font-size: var(--ybm-font-size-t01); font-family: inherit; }
+  @media (min-width: 768px) {
+    .tp-head { padding: var(--ybm-space-x10) var(--ybm-space-x10) var(--ybm-space-x2); }
+    .tp-h1 { font-size: var(--ybm-font-size-t11); line-height: var(--ybm-line-height-t11); }
+    .tp-head .tp-sub { font-size: var(--ybm-font-size-t05); line-height: var(--ybm-line-height-t05); }
+    .tp-content { padding: var(--ybm-space-x8) var(--ybm-space-x10) var(--ybm-space-x16); gap: var(--ybm-space-x12); }
+    .tp-canvas .tp-content { gap: var(--ybm-space-x8); }
+    .tp-panel { padding: var(--ybm-space-x8) var(--ybm-space-x6); }
+    .tp-card.ds-card { padding: var(--ybm-space-x6); }
+    .tp-g2, .tp-g4, .tp-g6 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .tp-g3, .tp-g5 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .tp-hide-sm { display: revert; }
+  }
+  @media (min-width: 1024px) {
+    .tp-body--panel { flex-direction: row; }
+    .tp-body--panel > .tp-panel { flex: none; width: 400px; box-shadow: inset 1px 0 0 var(--ybm-color-stroke-neutral-muted); }
+    .tp-canvas .tp-body--panel > .tp-panel { box-shadow: none; }
+    .tp-g3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .tp-g4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .tp-g5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+    .tp-g6 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .tp-span2 { grid-column: span 2; }
+    .tp-span3 { grid-column: span 3; }
+  }
+  @media (min-width: 1280px) { .tp-g6 { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
+
+  /* 위 메뉴 화면 */
+  .tp-topbar { position: sticky; top: 0; z-index: var(--ybm-z-sticky); background: var(--ybm-color-bg-layer-default); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); }
+  .tp-topbar > .ds-topnav { width: min(100%, 1200px); margin-inline: auto; }
+  .tp-topbar .ds-topnav__menu { display: none; }
+  @media (min-width: 768px) { .tp-topbar .ds-topnav__menu { display: flex; } }
+  .tp-wrap { width: min(100%, 1200px); margin-inline: auto; }
+  .tp-topbar ~ .tp-head, .tp-topbar ~ .tp-content { box-sizing: border-box; width: min(100%, 1280px); margin-inline: auto; }
+  /* 옆 메뉴 화면 */
+  .tp-app.tp-frame { flex-direction: row; min-height: 100vh; }
+  .tp-frame .ds-sidenav__header { justify-content: flex-start; }
+  .tp-frame > .ds-sidenav { display: none; }
+  .tp-frame__main { display: flex; flex: 1 1 auto; flex-direction: column; min-width: 0; }
+  .tp-mbar { display: flex; align-items: center; justify-content: space-between; gap: var(--ybm-space-x2); padding: var(--ybm-space-x2) var(--ybm-space-x4); background: var(--ybm-color-bg-layer-default); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); }
+  @media (min-width: 1024px) {
+    .tp-frame > .ds-sidenav { display: flex; position: sticky; top: 0; flex: none; height: 100vh; background: var(--ybm-color-bg-layer-default); box-shadow: inset -1px 0 0 var(--ybm-color-stroke-neutral-muted); }
+    .tp-mbar { display: none; }
+  }
+  .tp-org { display: flex; align-items: center; gap: var(--ybm-space-x2); padding: var(--ybm-space-x2) var(--ybm-space-x2) var(--ybm-space-x1); }
+  .tp-org__mark { display: grid; place-items: center; flex: none; width: 32px; height: 32px; border-radius: var(--ybm-shape-sm); background: var(--ybm-color-bg-neutral-solid); color: var(--ybm-color-fg-neutral-inverted); font-size: var(--ybm-font-size-t03-static); font-weight: var(--ybm-font-weight-bold); }
+  /* 고르기 상자 칸 수: 모바일은 1칸(4칸은 2칸), 768 부터 지정한 칸 */
+  .tp-sb2, .tp-sb3 { --ds-selectbox-columns: 1; } .tp-sb4 { --ds-selectbox-columns: 2; }
+  @media (min-width: 768px) { .tp-sb2 { --ds-selectbox-columns: 2; } .tp-sb3 { --ds-selectbox-columns: 3; } .tp-sb4 { --ds-selectbox-columns: 4; } }
+  /* 옆으로 미는 표는 눌리지 않게 */
+  .tp-scroll-x .ds-table { min-width: 760px; }
+  /* 공통 조각 */
+  .tp-big { font-size: var(--ybm-font-size-t11); line-height: var(--ybm-line-height-t11); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+  .tp-mid { font-size: var(--ybm-font-size-t07); line-height: var(--ybm-line-height-t07); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+  .tp-rows { display: flex; flex-direction: column; }
+  .tp-rows > * { padding-block: var(--ybm-space-x3); }
+  .tp-rows > * + * { box-shadow: inset 0 1px 0 var(--ybm-color-stroke-neutral-muted); }
+  .tp-kv { display: flex; justify-content: space-between; gap: var(--ybm-space-x3); font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); }
+  .tp-kv > :first-child { color: var(--ybm-color-fg-neutral-muted); flex: none; }
+  .tp-kv > :last-child { text-align: end; }
+  .tp-stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--ybm-space-x4); }
+  .tp-stats > * { display: flex; flex-direction: column; gap: var(--ybm-space-x1); min-width: 0; }
+  @media (min-width: 768px) { .tp-stats { grid-template-columns: repeat(var(--n, 4), minmax(0, 1fr)); } .tp-stats > * + * { padding-inline-start: var(--ybm-space-x4); box-shadow: inset 1px 0 0 var(--ybm-color-stroke-neutral-muted); } }
+  .tp-thumb-sm { flex: none; width: 96px; }
+  .tp-thumb-sm .ds-imageframe, .tp-course .ds-imageframe { border-radius: var(--ybm-shape-lg); }
+  .tp-aside-sticky { display: flex; flex-direction: column; gap: var(--ybm-space-x3); }
+  @media (min-width: 1024px) { .tp-aside-sticky { position: sticky; top: calc(var(--ybm-space-x16) + var(--ybm-space-x4)); } }
+
+  .tp-course { display: flex; flex-direction: column; gap: var(--ybm-space-x3); min-width: 0; color: inherit; text-decoration: none; }
+  .tp-course__title { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; font-size: var(--ybm-font-size-t05); line-height: var(--ybm-line-height-t05); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-course__meta { display: flex; flex-wrap: wrap; align-items: center; gap: var(--ybm-space-x1) var(--ybm-space-x2); }
+  .tp-star { display: inline-flex; align-items: center; gap: 2px; font-size: var(--ybm-font-size-t03); line-height: var(--ybm-line-height-t03); font-variant-numeric: tabular-nums; }
+  .tp-star .ds-icon { --ds-icon-size: 14px; color: var(--ybm-color-fg-warning); }
+  .tp-cover { position: relative; }
+  .tp-ask { display: flex; align-items: center; gap: var(--ybm-space-x2); }
+  .tp-ask > .ds-input { flex: 1 1 auto; }
+  .tp-cover > .ds-badge { position: absolute; top: var(--ybm-space-x2); left: var(--ybm-space-x2); }
+
+  .tp-due { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--ybm-space-x3); align-items: center; }
+</style>
+</head>
+<body class="tp-canvas">
+<div class="tp-app tp-frame"><nav class="ds-sidenav" aria-label="관리 메뉴">
+  <div class="ds-sidenav__header"><div class="tp-org"><span class="tp-org__mark" aria-hidden="true">한</span><span class="tp-stack"><span class="tp-h4">한빛전자</span><span class="tp-caption">기관 관리</span></span></div></div>
+  <div class="ds-sidenav__content"><div class="ds-sidenav__group"><a class="ds-sidenav__item" href="#"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--house" aria-hidden="true"></i></span><span class="ds-sidenav__label">홈</span></a><a class="ds-sidenav__item" href="#"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--book-open" aria-hidden="true"></i></span><span class="ds-sidenav__label">과정 운영</span></a><a class="ds-sidenav__item" href="#"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--users" aria-hidden="true"></i></span><span class="ds-sidenav__label">학습자</span></a><a class="ds-sidenav__item" href="#"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--shield-check" aria-hidden="true"></i></span><span class="ds-sidenav__label">필수 교육</span></a><a class="ds-sidenav__item" href="#" aria-current="page"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--chart-column" aria-hidden="true"></i></span><span class="ds-sidenav__label">학습 현황</span></a></div><div class="ds-sidenav__group"><div class="ds-sidenav__group-label">지식</div><a class="ds-sidenav__item" href="#"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--lightbulb" aria-hidden="true"></i></span><span class="ds-sidenav__label">사내 지식</span></a><a class="ds-sidenav__item" href="#"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--sparkles" aria-hidden="true"></i></span><span class="ds-sidenav__label">AI 튜터 설정</span></a></div></div>
+  <div class="ds-sidenav__footer"><a class="ds-sidenav__item" href="#"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--settings" aria-hidden="true"></i></span><span class="ds-sidenav__label">설정</span></a></div>
+</nav><div class="tp-frame__main"><div class="tp-mbar"><span class="tp-h4">학습 현황</span><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" aria-label="메뉴 열기"><i class="ds-icon ds-icon--menu" aria-hidden="true"></i></button></div><header class="tp-head">
+  <div class="tp-head__texts"><h1 class="tp-h1">학습 현황</h1><p class="tp-sub">2026년 11월 · 전체 임직원 1,240명</p></div>
+  <div class="tp-head__tools"><div class="ds-segmented" role="group" aria-label="기간" data-size="small"><button type="button" class="ds-segmented__item" aria-pressed="true">이번 달</button><button type="button" class="ds-segmented__item" aria-pressed="false">분기</button><button type="button" class="ds-segmented__item" aria-pressed="false">올해</button></div><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="small"><i class="ds-icon ds-icon--download" aria-hidden="true"></i>리포트 받기</button></div>
+</header>
+<main class="tp-content">
+  <div class="tp-g4"><section class="ds-card tp-card" data-size="small"><div class="tp-stack"><span class="tp-kpi__label">필수 교육 이수율</span><div class="tp-row" style="align-items: baseline; flex-wrap: wrap"><span class="tp-kpi__value">82%</span><span class="tp-delta" data-tone="up"><i class="ds-icon ds-icon--arrow-up ds-icon--sm" aria-hidden="true"></i>+6%p</span></div><span class="tp-caption">지난달보다</span></div></section><section class="ds-card tp-card" data-size="small"><div class="tp-stack"><span class="tp-kpi__label">1인 평균 학습</span><div class="tp-row" style="align-items: baseline; flex-wrap: wrap"><span class="tp-kpi__value">6.2시간</span><span class="tp-delta" data-tone="up"><i class="ds-icon ds-icon--arrow-up ds-icon--sm" aria-hidden="true"></i>+0.8</span></div><span class="tp-caption">이번 달</span></div></section><section class="ds-card tp-card" data-size="small"><div class="tp-stack"><span class="tp-kpi__label">학습한 사람</span><div class="tp-row" style="align-items: baseline; flex-wrap: wrap"><span class="tp-kpi__value">1,018명</span></div><span class="tp-caption">전체의 82%</span></div></section><section class="ds-card tp-card" data-size="small"><div class="tp-stack"><span class="tp-kpi__label">만족도</span><div class="tp-row" style="align-items: baseline; flex-wrap: wrap"><span class="tp-kpi__value">4.6</span></div><span class="tp-caption">5점 만점, 응답 2,140건</span></div></section></div>
+  <div class="tp-g3">
+    <section class="ds-card tp-card tp-span2" data-size="small"><div class="tp-between"><span class="tp-h3">월별 학습 시간</span><div class="tp-legend"><span class="tp-legend__item"><span class="tp-swatch" style="--c:var(--ybm-color-chart-series-1)"></span>자율 학습</span><span class="tp-legend__item"><span class="tp-swatch" style="--c:var(--ybm-color-chart-series-2)"></span>필수 교육</span></div></div><svg class="tp-chart" viewBox="0 0 640 220" role="img" aria-label="월별 학습 시간"><line class="tp-grid-line" x1="40" x2="632" y1="196.0" y2="196.0"/><text x="34" y="200.0" text-anchor="end">0</text><line class="tp-grid-line" x1="40" x2="632" y1="149.0" y2="149.0"/><text x="34" y="153.0" text-anchor="end">1k</text><line class="tp-grid-line" x1="40" x2="632" y1="102.0" y2="102.0"/><text x="34" y="106.0" text-anchor="end">2k</text><line class="tp-grid-line" x1="40" x2="632" y1="55.0" y2="55.0"/><text x="34" y="59.0" text-anchor="end">3k</text><line class="tp-grid-line" x1="40" x2="632" y1="8.0" y2="8.0"/><text x="34" y="12.0" text-anchor="end">4k</text><text x="40.0" y="214" text-anchor="start">6월</text><text x="158.4" y="214" text-anchor="middle">7월</text><text x="276.8" y="214" text-anchor="middle">8월</text><text x="395.2" y="214" text-anchor="middle">9월</text><text x="513.6" y="214" text-anchor="middle">10월</text><text x="632.0" y="214" text-anchor="end">11월</text><polyline points="40.0,97.3 158.4,84.1 276.8,88.4 395.2,72.9 513.6,63.9 632.0,52.7" fill="none" stroke="var(--ybm-color-chart-series-1)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><polyline points="40.0,157.5 158.4,160.3 276.8,137.7 395.2,163.6 513.6,162.2 632.0,126.4" fill="none" stroke="var(--ybm-color-chart-series-2)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/></svg></section>
+    <section class="ds-card tp-card" data-size="small"><span class="tp-h3">분야별 비중</span><div style="display:grid;place-items:center"><svg class="tp-chart tp-donut" viewBox="0 0 160 160" style="max-width:160px" role="img" aria-label="분야별 학습 시간 비중"><circle cx="80" cy="80" r="71" fill="none" stroke="var(--ybm-color-bg-neutral)" stroke-width="18"/><circle cx="80" cy="80" r="71" fill="none" stroke="var(--ybm-color-chart-series-1)" stroke-width="18" stroke-dasharray="167.5 278.6" stroke-dashoffset="0.0" transform="rotate(-90 80 80)"/><circle cx="80" cy="80" r="71" fill="none" stroke="var(--ybm-color-chart-series-2)" stroke-width="18" stroke-dasharray="105.1 341.0" stroke-dashoffset="-169.5" transform="rotate(-90 80 80)"/><circle cx="80" cy="80" r="71" fill="none" stroke="var(--ybm-color-chart-series-3)" stroke-width="18" stroke-dasharray="60.5 385.7" stroke-dashoffset="-276.6" transform="rotate(-90 80 80)"/><circle cx="80" cy="80" r="71" fill="none" stroke="var(--ybm-color-chart-series-4)" stroke-width="18" stroke-dasharray="51.5 394.6" stroke-dashoffset="-339.0" transform="rotate(-90 80 80)"/><circle cx="80" cy="80" r="71" fill="none" stroke="var(--ybm-color-chart-series-5)" stroke-width="18" stroke-dasharray="51.5 394.6" stroke-dashoffset="-392.6" transform="rotate(-90 80 80)"/><text x="50%" y="80" text-anchor="middle" style="font-size:22px;font-weight:700;fill:var(--ybm-color-fg-neutral)">3,050</text><text x="50%" y="100" text-anchor="middle">시간</text></svg></div><div class="tp-legend"><span class="tp-legend__item"><span class="tp-swatch" style="--c:var(--ybm-color-chart-series-1)"></span>직무 <span class="tp-num">38%</span></span><span class="tp-legend__item"><span class="tp-swatch" style="--c:var(--ybm-color-chart-series-2)"></span>AI·디지털 <span class="tp-num">24%</span></span><span class="tp-legend__item"><span class="tp-swatch" style="--c:var(--ybm-color-chart-series-3)"></span>리더십 <span class="tp-num">14%</span></span><span class="tp-legend__item"><span class="tp-swatch" style="--c:var(--ybm-color-chart-series-4)"></span>외국어 <span class="tp-num">12%</span></span><span class="tp-legend__item"><span class="tp-swatch" style="--c:var(--ybm-color-chart-series-5)"></span>법정 필수 <span class="tp-num">12%</span></span></div></section>
+  </div>
+  <div class="tp-g2">
+    <section class="ds-card tp-card" data-size="small"><div class="tp-between"><span class="tp-h3">부서별 필수 교육 이수율</span><button type="button" class="ds-select" data-size="medium" id="ld-must" aria-haspopup="listbox" aria-expanded="false" aria-label="필수 교육"><span class="ds-select__value">개인정보 보호 교육</span></button></div><div class="tp-stack" style="gap: var(--ybm-space-x4)"><div class="tp-track"><div class="tp-between"><span class="tp-sub">영업본부</span><span class="tp-num tp-sub">94%</span></div><div class="ds-progress" role="progressbar" aria-valuenow="94" aria-valuemin="0" aria-valuemax="100" aria-label="영업본부" style="--ds-progress-value: 94%" data-size="small"></div></div><div class="tp-track"><div class="tp-between"><span class="tp-sub">연구소</span><span class="tp-num tp-sub">88%</span></div><div class="ds-progress" role="progressbar" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100" aria-label="연구소" style="--ds-progress-value: 88%" data-size="small"></div></div><div class="tp-track"><div class="tp-between"><span class="tp-sub">경영지원</span><span class="tp-num tp-sub">81%</span></div><div class="ds-progress" role="progressbar" aria-valuenow="81" aria-valuemin="0" aria-valuemax="100" aria-label="경영지원" style="--ds-progress-value: 81%" data-size="small"></div></div><div class="tp-track"><div class="tp-between"><span class="tp-sub">생산본부</span><span class="tp-num tp-sub">72%</span></div><div class="ds-progress" role="progressbar" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100" aria-label="생산본부" style="--ds-progress-value: 72%" data-size="small"></div></div><div class="tp-track"><div class="tp-between"><span class="tp-sub">고객경험팀</span><span class="tp-num tp-sub">63%</span></div><div class="ds-progress" role="progressbar" aria-valuenow="63" aria-valuemin="0" aria-valuemax="100" aria-label="고객경험팀" style="--ds-progress-value: 63%" data-size="small"></div></div></div></section>
+    <section class="ds-card tp-card" data-size="small"><div class="tp-between"><span class="tp-h3">마감이 다가오는 미이수자</span><span class="ds-badge" data-tone="critical">224명</span></div><p class="tp-sub">개인정보 보호 교육 마감까지 5일 남았어요.</p><div class="tp-rows"><div class="tp-due"><div class="tp-row"><span class="ds-avatar" data-size="28" role="img" aria-label="오도윤"><span class="ds-avatar__initials" aria-hidden="true">오</span></span><div class="tp-stack"><span>오도윤</span><span class="tp-caption">생산본부</span></div></div><span class="tp-caption tp-num">진도 20%</span></div><div class="tp-due"><div class="tp-row"><span class="ds-avatar" data-size="28" role="img" aria-label="윤채원"><span class="ds-avatar__initials" aria-hidden="true">윤</span></span><div class="tp-stack"><span>윤채원</span><span class="tp-caption">고객경험팀</span></div></div><span class="tp-caption tp-num">진도 0%</span></div><div class="tp-due"><div class="tp-row"><span class="ds-avatar" data-size="28" role="img" aria-label="한지아"><span class="ds-avatar__initials" aria-hidden="true">한</span></span><div class="tp-stack"><span>한지아</span><span class="tp-caption">생산본부</span></div></div><span class="tp-caption tp-num">진도 35%</span></div><div class="tp-due"><div class="tp-row"><span class="ds-avatar" data-size="28" role="img" aria-label="정민재"><span class="ds-avatar__initials" aria-hidden="true">정</span></span><div class="tp-stack"><span>정민재</span><span class="tp-caption">경영지원</span></div></div><span class="tp-caption tp-num">진도 10%</span></div></div><button type="button" class="ds-btn" data-variant="neutralSolid" data-size="small" data-width="fill"><i class="ds-icon ds-icon--bell" aria-hidden="true"></i>독려 알림 보내기</button></section>
+  </div>
+  <div class="tp-g3">
+    <section class="ds-card tp-card tp-span2" data-size="small"><div class="tp-between"><span class="tp-h3">많이 들은 과정</span><a class="ds-link" href="#">모두 보기</a></div><div class="ds-table-wrap"><table class="ds-table" data-density="compact"><thead><tr><th scope="col">과정</th><th scope="col">분야</th><th scope="col" data-align="right">수강</th><th scope="col" data-align="right">만족도</th></tr></thead><tbody><tr><td>처음 만나는 생성형 AI 업무 활용</td><td><span class="ds-badge" data-tone="neutral">AI·디지털</span></td><td data-align="right"><span class="tp-num">1,082명</span></td><td data-align="right"><span class="tp-star"><i class="ds-icon ds-icon--star-solid" aria-hidden="true"></i>4.8</span></td></tr><tr><td>개인정보 보호 교육</td><td><span class="ds-badge" data-tone="neutral">법정 필수</span></td><td data-align="right"><span class="tp-num">1,240명</span></td><td data-align="right"><span class="tp-star"><i class="ds-icon ds-icon--star-solid" aria-hidden="true"></i>4.2</span></td></tr><tr><td>엑셀 함수와 피벗 한 번에</td><td><span class="ds-badge" data-tone="neutral">직무</span></td><td data-align="right"><span class="tp-num">764명</span></td><td data-align="right"><span class="tp-star"><i class="ds-icon ds-icon--star-solid" aria-hidden="true"></i>4.7</span></td></tr><tr><td>팀장의 1:1 대화법</td><td><span class="ds-badge" data-tone="neutral">리더십</span></td><td data-align="right"><span class="tp-num">418명</span></td><td data-align="right"><span class="tp-star"><i class="ds-icon ds-icon--star-solid" aria-hidden="true"></i>4.9</span></td></tr><tr><td>비즈니스 영어 이메일 바로 쓰기</td><td><span class="ds-badge" data-tone="neutral">외국어</span></td><td data-align="right"><span class="tp-num">355명</span></td><td data-align="right"><span class="tp-star"><i class="ds-icon ds-icon--star-solid" aria-hidden="true"></i>4.6</span></td></tr></tbody></table></div></section>
+    <section class="ds-card tp-card" data-size="small"><span class="tp-row tp-h3"><i class="ds-icon ds-icon--sparkles" aria-hidden="true"></i>AI 튜터 이용</span><div class="tp-stack" style="gap: var(--ybm-space-x4)"><div class="tp-kv"><span>질문</span><span class="tp-num">4,812건</span></div><div class="tp-kv"><span>요약 보기</span><span class="tp-num">9,306회</span></div><div class="tp-kv"><span>퀴즈 풀이</span><span class="tp-num">6,127회</span></div><div class="tp-kv"><span>답변 만족</span><span class="tp-num">91%</span></div></div><div class="ds-callout" data-tone="informative"><i class="ds-icon ds-icon--lightbulb" aria-hidden="true"></i><div class="ds-callout__body"><p class="ds-callout__desc">퀴즈를 푼 학습자의 이수율이 18%p 높아요.</p></div></div></section>
+  </div>
+</main></div></div>
+</body>
+</html>
