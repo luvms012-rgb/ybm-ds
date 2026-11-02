@@ -101,7 +101,7 @@ const contact = () => {
   const reasons = [['rocket', '빠르게 움직여요', '군더더기 없이 바로 일을 시작해요.'], ['users', '한 팀처럼 일해요', '담당자 한 명이 처음부터 끝까지 함께해요.'], ['shield-check', '결과로 말해요', '약속한 일정과 품질을 지켜요.']];
   const goals = ['단체 수강', '시험 접수 대행', '사내 어학 교육', '레벨 테스트', '교재 납품', '맞춤 강좌 제작', '학습 플랫폼 도입', '제휴', '기타'];
   const body = `<div class="tp-app"><main class="tp-content"><div class="tp-contact">
-  <div class="tp-stack" style="gap: var(--ybm-space-x3); text-align: center; align-items: center"><span class="tp-hero-t">함께 일해요</span><span class="tp-sub" style="max-width: 520px">어떤 일을 준비하고 계신지 조금만 알려 주세요. 담당자가 하루 안에 연락드릴게요.</span></div>
+  <div class="tp-stack" style="gap: var(--ybm-space-x3); text-align: center; align-items: center"><span class="tp-hero-t">도입 문의</span><span class="tp-sub" style="max-width: 520px">준비 중인 일을 간단히 알려 주면 담당자가 하루 안에 연락해 드려요.</span></div>
   <div class="tp-g3">${reasons.map(([ic, t, d]) => card(`<div class="tp-why">${icon(ic, 'lg')}<span class="tp-h4">${t}</span><span class="tp-sub">${d}</span></div>`)).join('')}</div>
   <form class="tp-form" onsubmit="return false">
     <div class="tp-pair">${req('c-name', '이름', inp('c-name', '이름'))}${req('c-mail', '이메일', inp('c-mail', 'you@company.com', 'type="email"'))}</div>
@@ -155,9 +155,6 @@ const wizard = () => {
   .tp-wz { display: flex; flex-direction: column; gap: var(--ybm-space-x6); width: min(100%, 640px); margin-inline: auto; }
   .tp-wz-head { display: flex; flex-direction: column; gap: var(--ybm-space-x5); padding: var(--ybm-space-x5) var(--ybm-space-x4); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); }
   @media (min-width: 768px) { .tp-wz-head { padding: var(--ybm-space-x6); } }
-  .tp-prefix { display: flex; align-items: center; gap: 0; }
-  .tp-prefix > span { padding: 0 var(--ybm-space-x3); height: 48px; display: grid; place-items: center; border-radius: var(--ybm-shape-md) 0 0 var(--ybm-shape-md); background: var(--ybm-color-bg-neutral); color: var(--ybm-color-fg-neutral-muted); font-size: var(--ybm-font-size-t04); white-space: nowrap; }
-  .tp-prefix .ds-input { flex: 1 1 auto; border-top-left-radius: 0; border-bottom-left-radius: 0; }
 `;
   const body = `<div class="tp-app" style="min-height: 100vh">
 <header class="tp-wz-head"><div class="tp-between"><h1 class="tp-h1">워크스페이스 만들기</h1>${btn('나가기', { variant: 'ghost', ic: 'x' })}</div>${stepper(['워크스페이스', '팀원 초대', '요금제', '확인'], 0, '워크스페이스 만들기 단계')}</header>
@@ -165,7 +162,7 @@ const wizard = () => {
   <div class="tp-stack"><h2 class="tp-h2">워크스페이스 정보</h2><p class="tp-sub">이름을 정하고 데이터를 둘 지역을 고르세요. 지역은 나중에 바꿀 수 없어요.</p></div>
   <div class="tp-form">
     ${req('w-name', '워크스페이스 이름', inp('w-name', '가나다 학원'))}
-    ${req('w-url', '워크스페이스 주소', `<div class="tp-prefix"><span>ybm.app/</span>${inp('w-url', 'ganada')}</div>`, '영문 소문자, 숫자, 하이픈만 쓸 수 있어요.')}
+    ${req('w-url', '워크스페이스 주소', inp('w-url', 'ganada').replace('<input', '<span class="ds-input__prefix">ybm.app/</span><input'), '영문 소문자, 숫자, 하이픈만 쓸 수 있어요.')}
     ${field('w-region', '데이터 지역', sel('w-region', '대한민국 (서울)'), { help: '강좌, 파일, 기록이 저장되는 곳이에요.' })}
     <fieldset class="ds-field" style="border:0;padding:0;margin:0"><legend class="ds-field__label">누가 들어올 수 있나요</legend>${[['초대한 사람만', '관리자가 초대해야 들어올 수 있어요.', 1], ['회사 이메일이 있는 사람', '@ganada.kr 이메일이면 바로 들어와요.', 0], ['링크가 있는 사람', '초대 링크를 아는 사람은 누구나 들어와요.', 0]].map(([t, d, c]) => opt(t, d, !!c, 'radio', 'join')).join('')}</fieldset>
   </div>
@@ -210,7 +207,7 @@ const twoColumn = () => {
 `;
   const topics = ['단체 수강', '시험 접수', '사내 교육', '맞춤 강좌', '학습 플랫폼', '제휴', '취재', '기타'];
   const body = `<div class="tp-app"><main class="tp-content"><div class="tp-tc">
-  <div class="tp-tc__top"><div class="tp-stack" style="gap: var(--ybm-space-x3)"><h1 class="tp-hero-t">함께 일해요</h1><p class="tp-sub">어떤 일을 하고 계신지 알려 주시면 맞는 방법을 같이 찾아 드릴게요.</p></div>${thumb('16:9', '', K.photo('work', 2, 1200))}</div>
+  <div class="tp-tc__top"><div class="tp-stack" style="gap: var(--ybm-space-x3)"><h1 class="tp-hero-t">무엇을 도와드릴까요?</h1><p class="tp-sub">하고 있는 일과 궁금한 점을 남겨 주면 1영업일 안에 답해 드려요.</p></div>${thumb('16:9', '', K.photo('work', 2, 1200))}</div>
   <div class="tp-g2" style="align-items:start">
     ${card(`<h2 class="tp-h3">내 정보</h2><div class="tp-form">${req('t-name', '이름', inp('t-name', '이름'))}<div class="tp-pair">${req('t-mail', '이메일', inp('t-mail', '이메일', 'type="email"'))}${field('t-com', '회사', inp('t-com', '회사 이름'))}</div><div class="tp-pair">${field('t-job', '직함', inp('t-job', '직함'))}${field('t-tel', '연락처', inp('t-tel', '전화번호', 'type="tel"'))}</div></div>`, { size: '' })}
     ${card(`<h2 class="tp-h3">문의 내용</h2><div class="tp-form"><fieldset class="tp-stack" style="border:0;padding:0;margin:0;gap:var(--ybm-space-x2)"><legend class="ds-field__label" style="margin-bottom:var(--ybm-space-x2)">무엇에 관한 문의인가요?</legend><div class="tp-chips">${topics.map((t, i) => chip(t, { on: i === 0 })).join('')}</div></fieldset>${field('t-budget', '예산 범위', sel('t-budget', '1,000만원 미만'))}${req('t-msg', '자세한 내용', textarea('t-msg', 'rows="5" placeholder="일정, 인원, 바라는 결과를 적어 주세요"'))}${btn('보내기', { variant: 'brandSolid', size: 'large', fill: true })}</div>`, { size: '' })}

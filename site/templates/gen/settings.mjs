@@ -100,7 +100,7 @@ const panels = () => {
   <aside class="tp-sp__side"><h2 class="tp-h2">계정 설정</h2>${nav([['', items]], '개인 정보')}${divider()}${nav([['', [['로그아웃', 'log-out']]]], '')}</aside>
   <main class="tp-sp__main">
     <h1 class="tp-h1">개인 정보</h1>
-    <div>${info.map(([k, v, e]) => `<div class="tp-info"><div class="tp-stack"><span class="tp-h4">${k}</span><span class="tp-info__v">${v}</span></div>${e ? link('고치기') : ''}</div>`).join('')}</div>
+    <div>${info.map(([k, v, e]) => `<div class="tp-info"><div class="tp-stack"><span class="tp-h4">${k}</span><span class="tp-info__v">${v}</span></div>${e ? btn('수정', { variant: 'neutralWeak', size: 'xsmall' }) : ''}</div>`).join('')}</div>
     ${card(`<div class="tp-row" style="align-items:flex-start">${icon('info', 'sm')}<div class="tp-stack"><span class="tp-h4">왜 어떤 정보는 여기 안 보이나요?</span><span class="tp-sub">본인 확인을 위해 일부 정보는 가려서 보여 드려요. 가린 정보는 고치기를 누른 뒤 본인 인증을 하면 볼 수 있어요.</span></div></div>`)}
   </main>
 </div>

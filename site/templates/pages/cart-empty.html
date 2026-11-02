@@ -25,6 +25,8 @@
   .tp-sub { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
   .tp-caption { font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); color: var(--ybm-color-fg-neutral-subtle); }
   .tp-num { font-variant-numeric: tabular-nums; }
+  /* 텍스트 링크는 보조 동작이라 본문(14)보다 한 단계 작게 */
+  .ds-link { font-size: var(--ybm-font-size-t03); line-height: var(--ybm-line-height-t03); }
   /* 표 (커뮤니티 게시판 기준, 토스증권 / 네이버 증권 / 당근 비즈니스 표와 같은 결):
      위 진한 선 하나, 머리줄은 바탕 없이 작은 muted 글자, 행 56 / 촘촘 48, 행 사이 옅은 선, 숫자 고정폭, 올리면 옅은 바탕 */
   .ds-table { --ds-table-head-h: 44px; --ds-table-row-h: 56px; font-variant-numeric: tabular-nums; }
@@ -202,8 +204,12 @@
   /* 전체 고르기 줄 */
   .tp-selbar { display: flex; align-items: center; justify-content: space-between; gap: var(--ybm-space-x3); }
   /* 무료 배송까지 남은 금액 */
-  .tp-freeship { display: flex; flex-direction: column; gap: var(--ybm-space-x2); padding: var(--ybm-space-x4); border-radius: var(--ybm-shape-lg); background: var(--ybm-color-bg-neutral-weak-alpha); font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); }
-  .tp-freeship b { font-weight: var(--ybm-font-weight-semibold); }
+  /* 무료 배송까지 남은 금액: 상자 없이 금액만 강조, 얇은 막대와 양 끝 금액 (쇼핑몰 장바구니 공통) */
+  .tp-freeship { display: flex; flex-direction: column; gap: var(--ybm-space-x2); font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
+  .tp-freeship__msg { display: flex; align-items: center; gap: var(--ybm-space-x1_5); }
+  .tp-freeship__msg .ds-icon { --ds-icon-size: 16px; color: var(--ybm-color-fg-brand); }
+  .tp-freeship b { font-weight: var(--ybm-font-weight-bold); color: var(--ybm-color-fg-brand); }
+  .tp-freeship__ends { display: flex; justify-content: space-between; font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); color: var(--ybm-color-fg-neutral-subtle); font-variant-numeric: tabular-nums; }
   /* 배송 묶음과 상품 줄 */
   .tp-grp.ds-card { gap: 0; }
   .tp-grp__head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ybm-space-x2); padding-bottom: var(--ybm-space-x3); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); }
@@ -259,7 +265,9 @@
   .tp-rec { display: flex; flex-direction: column; gap: var(--ybm-space-x2); min-width: 0; }
   .tp-rec .ds-imageframe { border-radius: var(--ybm-shape-lg); }
   .tp-rec__name { display: -webkit-box; overflow: hidden; -webkit-line-clamp: 2; -webkit-box-orient: vertical; font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral); text-decoration: none; }
-  .tp-rec .ds-btn { margin-top: var(--ybm-space-x1); }
+  /* 할인 없는 상품도 가격 줄 높이를 같게, 담기 버튼은 카드 맨 아래 한 줄로 */
+  .tp-rec .tp-price { min-height: 46px; justify-content: flex-end; }
+  .tp-rec .ds-btn { margin-top: auto; }
 
   .tp-cart-empty { padding-block: var(--ybm-space-x12); border-radius: var(--ybm-shape-xl); background: var(--ybm-color-bg-neutral-weak-alpha); }
 </style>

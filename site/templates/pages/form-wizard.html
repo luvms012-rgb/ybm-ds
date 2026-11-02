@@ -25,6 +25,8 @@
   .tp-sub { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
   .tp-caption { font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); color: var(--ybm-color-fg-neutral-subtle); }
   .tp-num { font-variant-numeric: tabular-nums; }
+  /* 텍스트 링크는 보조 동작이라 본문(14)보다 한 단계 작게 */
+  .ds-link { font-size: var(--ybm-font-size-t03); line-height: var(--ybm-line-height-t03); }
   /* 표 (커뮤니티 게시판 기준, 토스증권 / 네이버 증권 / 당근 비즈니스 표와 같은 결):
      위 진한 선 하나, 머리줄은 바탕 없이 작은 muted 글자, 행 56 / 촘촘 48, 행 사이 옅은 선, 숫자 고정폭, 올리면 옅은 바탕 */
   .ds-table { --ds-table-head-h: 44px; --ds-table-row-h: 56px; font-variant-numeric: tabular-nums; }
@@ -158,9 +160,6 @@
   .tp-wz { display: flex; flex-direction: column; gap: var(--ybm-space-x6); width: min(100%, 640px); margin-inline: auto; }
   .tp-wz-head { display: flex; flex-direction: column; gap: var(--ybm-space-x5); padding: var(--ybm-space-x5) var(--ybm-space-x4); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); }
   @media (min-width: 768px) { .tp-wz-head { padding: var(--ybm-space-x6); } }
-  .tp-prefix { display: flex; align-items: center; gap: 0; }
-  .tp-prefix > span { padding: 0 var(--ybm-space-x3); height: 48px; display: grid; place-items: center; border-radius: var(--ybm-shape-md) 0 0 var(--ybm-shape-md); background: var(--ybm-color-bg-neutral); color: var(--ybm-color-fg-neutral-muted); font-size: var(--ybm-font-size-t04); white-space: nowrap; }
-  .tp-prefix .ds-input { flex: 1 1 auto; border-top-left-radius: 0; border-bottom-left-radius: 0; }
 </style>
 </head>
 <body>
@@ -170,7 +169,7 @@
   <div class="tp-stack"><h2 class="tp-h2">워크스페이스 정보</h2><p class="tp-sub">이름을 정하고 데이터를 둘 지역을 고르세요. 지역은 나중에 바꿀 수 없어요.</p></div>
   <div class="tp-form">
     <div class="ds-field"><div class="ds-field__header"><label class="ds-field__label" for="w-name">워크스페이스 이름 <span class="ds-field__required" aria-hidden="true">*</span></label></div><div class="ds-input" data-variant="outline" data-size="medium"><input class="ds-input__control" id="w-name" placeholder="가나다 학원" ></div></div>
-    <div class="ds-field"><div class="ds-field__header"><label class="ds-field__label" for="w-url">워크스페이스 주소 <span class="ds-field__required" aria-hidden="true">*</span></label></div><div class="tp-prefix"><span>ybm.app/</span><div class="ds-input" data-variant="outline" data-size="medium"><input class="ds-input__control" id="w-url" placeholder="ganada" ></div></div><div class="ds-field__footer"><p class="ds-field__help">영문 소문자, 숫자, 하이픈만 쓸 수 있어요.</p></div></div>
+    <div class="ds-field"><div class="ds-field__header"><label class="ds-field__label" for="w-url">워크스페이스 주소 <span class="ds-field__required" aria-hidden="true">*</span></label></div><div class="ds-input" data-variant="outline" data-size="medium"><span class="ds-input__prefix">ybm.app/</span><input class="ds-input__control" id="w-url" placeholder="ganada" ></div><div class="ds-field__footer"><p class="ds-field__help">영문 소문자, 숫자, 하이픈만 쓸 수 있어요.</p></div></div>
     <div class="ds-field"><div class="ds-field__header"><label class="ds-field__label" for="w-region">데이터 지역</label></div><button type="button" class="ds-select" data-size="medium" id="w-region" aria-haspopup="listbox" aria-expanded="false"><span class="ds-select__value">대한민국 (서울)</span></button><div class="ds-field__footer"><p class="ds-field__help">강좌, 파일, 기록이 저장되는 곳이에요.</p></div></div>
     <fieldset class="ds-field" style="border:0;padding:0;margin:0"><legend class="ds-field__label">누가 들어올 수 있나요</legend><label class="tp-optrow"><span class="ds-radio" data-size="medium"><input type="radio" class="ds-radio__control" name="join" checked aria-label="초대한 사람만"></span><span class="tp-stack"><span>초대한 사람만</span><span class="tp-sub">관리자가 초대해야 들어올 수 있어요.</span></span></label><label class="tp-optrow"><span class="ds-radio" data-size="medium"><input type="radio" class="ds-radio__control" name="join" aria-label="회사 이메일이 있는 사람"></span><span class="tp-stack"><span>회사 이메일이 있는 사람</span><span class="tp-sub">@ganada.kr 이메일이면 바로 들어와요.</span></span></label><label class="tp-optrow"><span class="ds-radio" data-size="medium"><input type="radio" class="ds-radio__control" name="join" aria-label="링크가 있는 사람"></span><span class="tp-stack"><span>링크가 있는 사람</span><span class="tp-sub">초대 링크를 아는 사람은 누구나 들어와요.</span></span></label></fieldset>
   </div>
