@@ -8,9 +8,9 @@
 <script>try { var t = localStorage.getItem("ybm-site-theme"); if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.dataset.theme = "dark"; } catch (e) {}</script>
 <link rel="icon" href="../assets/logo-ybmnet.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../dist/ybm-ds.css">
-<link rel="stylesheet" href="../assets/site.css?v=7c480006">
+<link rel="stylesheet" href="../assets/site.css?v=79810189">
 <script src="../../dist/ybm-ds.js" defer></script>
-<script src="../assets/site.js?v=7c480006" defer></script>
+<script src="../assets/site.js?v=79810189" defer></script>
 </head>
 <body class="site">
 <a class="site-skip" href="#main">본문 바로가기</a>
@@ -88,6 +88,11 @@
 <a class="site-nav__item" href="../templates/pricing-plans.html">요금제 비교</a>
 <a class="site-nav__item" href="../templates/subscription-checkout.html">구독 결제</a>
 <a class="site-nav__item" href="../templates/subscription-settings.html">내 구독</a>
+<a class="site-nav__item" href="../templates/mypage-profile.html">내 정보</a>
+<a class="site-nav__item" href="../templates/mypage-home.html">마이페이지 홈</a>
+<a class="site-nav__item" href="../templates/mypage-orders.html">주문 내역</a>
+<a class="site-nav__item" href="../templates/cart.html">장바구니</a>
+<a class="site-nav__item" href="../templates/cart-empty.html">빈 장바구니</a>
 <a class="site-nav__item" href="../templates/exam-apply.html">시험 신청</a>
 <a class="site-nav__item" href="../templates/exam-my.html">내 시험</a>
 <a class="site-nav__item" href="../templates/exam-score.html">성적표</a>
@@ -120,6 +125,8 @@
     <button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-filter="Shell">앱 틀</button>
     <button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-filter="Community">커뮤니티</button>
     <button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-filter="Pricing">요금제</button>
+    <button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-filter="My Page">마이페이지</button>
+    <button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-filter="Commerce">쇼핑</button>
     <button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-filter="Exam">시험 접수</button>
     <button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-filter="Exam B2B">단체 시험</button>
     <button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-filter="Learning B2B">기업 러닝</button>
@@ -502,6 +509,41 @@
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="subscription-settings.html">내 구독</a></h3><p class="site-tpl__desc">지금 쓰는 요금제와 다음 결제일, 사용량, 결제 수단, 결제 내역을 한 화면에서 관리합니다. 요금제 바꾸기와 해지는 같은 화면에서 시작합니다.</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="subscription-settings.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
+  </div>
+</article>
+<article class="site-tpl" data-site-item="내 정보 my info my page 로그인 정보, 개인 정보, 배송지, 알림을 묶음별 설정 행으로 보여 주는 화면입니다. 행마다 지금 값과 바꾸기 버튼을 오른쪽에 둡니다." data-site-cat="My Page">
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/mypage-profile.html" title="내 정보 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl__scrim">
+    <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="mypage-profile.html">내 정보</a></h3><p class="site-tpl__desc">로그인 정보, 개인 정보, 배송지, 알림을 묶음별 설정 행으로 보여 주는 화면입니다. 행마다 지금 값과 바꾸기 버튼을 오른쪽에 둡니다.</p></div>
+    <div class="site-tpl__actions"><a class="site-tpl__btn" href="mypage-profile.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
+  </div>
+</article>
+<article class="site-tpl" data-site-item="마이페이지 홈 my page home my page 마이페이지의 첫 화면입니다. 프로필과 포인트, 쿠폰 같은 혜택 숫자, 단계별 주문 개수, 최근 주문, 찜한 상품을 한 화면에 모아 보여 줍니다." data-site-cat="My Page">
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/mypage-home.html" title="마이페이지 홈 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl__scrim">
+    <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="mypage-home.html">마이페이지 홈</a></h3><p class="site-tpl__desc">마이페이지의 첫 화면입니다. 프로필과 포인트, 쿠폰 같은 혜택 숫자, 단계별 주문 개수, 최근 주문, 찜한 상품을 한 화면에 모아 보여 줍니다.</p></div>
+    <div class="site-tpl__actions"><a class="site-tpl__btn" href="mypage-home.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
+  </div>
+</article>
+<article class="site-tpl" data-site-item="주문 내역 order history my page 주문을 날짜별로 묶어 보여 주는 내역 화면입니다. 상태 칩과 기간으로 거르고, 상품마다 배송 상태와 다음에 할 일 버튼을 붙입니다." data-site-cat="My Page">
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/mypage-orders.html" title="주문 내역 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl__scrim">
+    <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="mypage-orders.html">주문 내역</a></h3><p class="site-tpl__desc">주문을 날짜별로 묶어 보여 주는 내역 화면입니다. 상태 칩과 기간으로 거르고, 상품마다 배송 상태와 다음에 할 일 버튼을 붙입니다.</p></div>
+    <div class="site-tpl__actions"><a class="site-tpl__btn" href="mypage-orders.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
+  </div>
+</article>
+<article class="site-tpl" data-site-item="장바구니 cart commerce 담은 상품을 배송 묶음별로 보고 수량과 옵션을 바꾸는 장바구니입니다. 무료 배송까지 남은 금액, 품절 표시, 오른쪽 결제 예정 금액과 주문 버튼, 함께 사면 좋은 상품을 보여 줍니다." data-site-cat="Commerce">
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/cart.html" title="장바구니 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl__scrim">
+    <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="cart.html">장바구니</a></h3><p class="site-tpl__desc">담은 상품을 배송 묶음별로 보고 수량과 옵션을 바꾸는 장바구니입니다. 무료 배송까지 남은 금액, 품절 표시, 오른쪽 결제 예정 금액과 주문 버튼, 함께 사면 좋은 상품을 보여 줍니다.</p></div>
+    <div class="site-tpl__actions"><a class="site-tpl__btn" href="cart.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
+  </div>
+</article>
+<article class="site-tpl" data-site-item="빈 장바구니 empty cart commerce 담은 상품이 없을 때의 장바구니입니다. 빈 상태 안내와 쇼핑으로 돌아가는 버튼, 보관 기간 안내, 최근 본 상품과 비슷한 추천 상품을 보여 줍니다." data-site-cat="Commerce">
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/cart-empty.html" title="빈 장바구니 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl__scrim">
+    <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="cart-empty.html">빈 장바구니</a></h3><p class="site-tpl__desc">담은 상품이 없을 때의 장바구니입니다. 빈 상태 안내와 쇼핑으로 돌아가는 버튼, 보관 기간 안내, 최근 본 상품과 비슷한 추천 상품을 보여 줍니다.</p></div>
+    <div class="site-tpl__actions"><a class="site-tpl__btn" href="cart-empty.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
   </div>
 </article>
 <article class="site-tpl" data-site-item="시험 신청 exam application exam 시험 종류, 언어, 날짜와 시간, 고사장, 동의, 응시자 정보, 결제를 한 화면에서 차례로 고르는 시험 신청 화면입니다. 오른쪽 요약에 고른 내용과 결제 금액이 바로 반영됩니다." data-site-cat="Exam">

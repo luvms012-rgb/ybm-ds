@@ -618,6 +618,46 @@
       "rebuilt": true
     },
     {
+      "slug": "mypage-profile",
+      "name": "내 정보",
+      "en": "My Info",
+      "group": "My Page",
+      "desc": "로그인 정보, 개인 정보, 배송지, 알림을 묶음별 설정 행으로 보여 주는 화면입니다. 행마다 지금 값과 바꾸기 버튼을 오른쪽에 둡니다.",
+      "rebuilt": true
+    },
+    {
+      "slug": "mypage-home",
+      "name": "마이페이지 홈",
+      "en": "My Page Home",
+      "group": "My Page",
+      "desc": "마이페이지의 첫 화면입니다. 프로필과 포인트, 쿠폰 같은 혜택 숫자, 단계별 주문 개수, 최근 주문, 찜한 상품을 한 화면에 모아 보여 줍니다.",
+      "rebuilt": true
+    },
+    {
+      "slug": "mypage-orders",
+      "name": "주문 내역",
+      "en": "Order History",
+      "group": "My Page",
+      "desc": "주문을 날짜별로 묶어 보여 주는 내역 화면입니다. 상태 칩과 기간으로 거르고, 상품마다 배송 상태와 다음에 할 일 버튼을 붙입니다.",
+      "rebuilt": true
+    },
+    {
+      "slug": "cart",
+      "name": "장바구니",
+      "en": "Cart",
+      "group": "Commerce",
+      "desc": "담은 상품을 배송 묶음별로 보고 수량과 옵션을 바꾸는 장바구니입니다. 무료 배송까지 남은 금액, 품절 표시, 오른쪽 결제 예정 금액과 주문 버튼, 함께 사면 좋은 상품을 보여 줍니다.",
+      "rebuilt": true
+    },
+    {
+      "slug": "cart-empty",
+      "name": "빈 장바구니",
+      "en": "Empty Cart",
+      "group": "Commerce",
+      "desc": "담은 상품이 없을 때의 장바구니입니다. 빈 상태 안내와 쇼핑으로 돌아가는 버튼, 보관 기간 안내, 최근 본 상품과 비슷한 추천 상품을 보여 줍니다.",
+      "rebuilt": true
+    },
+    {
       "slug": "exam-apply",
       "name": "시험 신청",
       "en": "Exam Application",
