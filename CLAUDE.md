@@ -45,8 +45,9 @@ git clone https://github.com/luvms012-rgb/ybm-ds.git
 ## 3. 진행 상황
 
 - **이어서 할 것 (2026-11-02 회사 세션 끝, 다음 세션은 여기부터)**
-  1. **Figma 최종 검토** - 사용자: "피그마는 최종본을 가장 마지막에 검토". 집에서 시킨 Figma 작업이 끝난 뒤에만 한다. 그때 맞출 것: ① Dialog 제목 Bold(CSS 는 11-02 SemiBold → Bold) ② 컴포넌트 설명 71개(`site/src/figma-notes.json` lead 를 새로 씀, `node sync.mjs docs` 로 문서 프레임에 반영) ③ Avatar 묶음 고리 색 변수(CSS 전용, Figma 는 그대로 둬도 됨) ④ DS 예시 문구(시험 → 주문, 배송) 가 Figma 문서 Examples 에도 있으면 같이.
+  1. **Figma 최종 검토** - 사용자: "피그마는 최종본을 가장 마지막에 검토". 집에서 시킨 Figma 작업이 끝난 뒤에만 한다. 그때 맞출 것: ① Dialog 제목 Bold(CSS 는 11-02 SemiBold → Bold) ② 컴포넌트 설명 71개(`site/src/figma-notes.json` lead 를 새로 씀, `node sync.mjs docs` 로 문서 프레임에 반영) ③ Avatar 묶음 고리 색 변수(CSS 전용, Figma 는 그대로 둬도 됨) ④ DS 예시 문구(시험 → 주문, 배송) 가 Figma 문서 Examples 에도 있으면 같이. ⑤ Table 부품을 11-03 CSS 개편대로(머리줄 바탕 없음, 위 진한 선, 행 56/48, 두 줄 칸, 묶음 행).
   2. **템플릿 문구 일반화 (사용자 답 대기)** - 생성기 `site/templates/gen/` 의 content.mjs, dashboard.mjs, form.mjs, tools.mjs 에 "토익 실전반", "시험 접수 대행", "시험 직전 단기 강좌" 같은 문구가 남아 있다. 사용자가 바꾸라고 하면 일반 문구로 바꾸고 `node site/templates/gen/run.mjs` → `node site/build.mjs`.
+- **끝냄, 배포함 (2026-11-03 회사, 오전)** - DS 42 Table 개편(위 진한 선, 머리줄 바탕 없음, 행 56/48, 칸 border 선, 체크박스 칸, `.ds-table__stack` 두 줄 칸, `tr.ds-table__group` 묶음 행, data-align end). 템플릿 kit 의 표 덮어쓰기 지움. 템플릿 DS 점검으로 펼치기 버튼, AI 보내기/입력칸을 DS 로. Figma Table 은 최종 검토 때(아래 1번 목록에 더함).
 - **끝냄, 배포함 (2026-11-03 회사, 아침)** - 앱 틀 분류 3종 삭제(67종), 장바구니 무료 배송 안내를 상자 없이 금액 강조 + 얇은 막대 + 양 끝 금액으로, 추천 상품 담기 버튼 한 줄 정렬, 개인 정보 "고치기" 링크를 "수정" 버튼으로, 템플릿 텍스트 링크 13 으로 한 단계 작게, 워크스페이스 주소 칸은 DS ds-input__prefix, 갤러리 6종과 문의 폼 히어로 문구를 화면마다 짧은 한국어로.
 - **끝냄, 배포함 (2026-11-03 회사, 새벽)** - 마이페이지 3종(mypage.mjs), 장바구니 2종(commerce.mjs, 쇼핑 분류) 추가로 70종. Figma 화면은 없다.
 - **끝냄, 배포함 (2026-11-02 회사, 밤)** - 템플릿 표 공통 규칙(토스/네이버 증권/당근 비즈니스 결, kit.mjs), 필터 표/묶음 표 다시 짬, 퍼널·코호트 대시보드와 비교 표 삭제(65종), 나 이름 와이비엠, 할 일 상세 단순화, 템플릿 목록 설명 17/28. DS Table 자체를 바꿀지는 사용자 결정 대기(site/CLAUDE.md "템플릿 표 공통 규칙").

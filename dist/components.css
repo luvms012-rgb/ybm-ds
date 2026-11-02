@@ -2416,42 +2416,67 @@ a.ds-card:active, button.ds-card:active { background: linear-gradient(var(--ybm-
    density: default(기본) · compact
      <div class="ds-table-wrap">            ← 열이 넘치면 가로 스크롤
        <table class="ds-table" [data-density="compact"]>
-         <thead><tr><th scope="col" data-align="center">번호</th><th scope="col">제목</th>…</tr></thead>
-         <tbody><tr [aria-selected="true"] [data-interactive]><td data-align="center">10</td><td>…</td></tr></tbody>
+         <thead><tr><th scope="col">선택</th><th scope="col">제목</th><th scope="col" data-align="end">금액</th></tr></thead>
+         <tbody>
+           <tr class="ds-table__group"><td colspan="3">묶음 이름</td></tr>        ← 묶음 행(선택)
+           <tr [aria-selected="true"] [data-interactive]>
+             <td><label class="ds-checkbox">…</label></td>                         ← 체크박스만 든 칸은 폭 52 고정
+             <td><span class="ds-table__stack"><span>제목</span><span>보조 글</span></span></td>  ← 두 줄 칸
+             <td data-align="end">10,000원</td>
+           </tr>
+         </tbody>
        </table>
      </div>
-   Figma: 행 하단 1px stroke/neutral-weak · header bg/neutral-muted · 높이 header 44 / body 52 (compact 36 / 40)
-     칸 좌우 x4 · 한 줄 말줄임 · header t04 Medium fg/neutral-muted · body t04 fg/neutral
-     hover(data-interactive 행만) bg/neutral-weak-alpha · selected bg/brand-weak
-     정렬: 글 left(기본) · 숫자 right · 짧은 고정 길이 값(번호·날짜·상태) center → data-align
+   2026-11-03 개편(템플릿 표 기준과 같게): 위 진한 선 하나 + 머리줄 바탕 없음 + 행 사이 옅은 선
+   Figma: 표 위 1px stroke/neutral-solid · 칸 아래 1px stroke/neutral-muted · header 바탕 없음
+     높이 header 44 / body 56 (compact 44 / 48) · 칸 좌우 x3, 양 끝 칸 x4 · 한 줄 말줄임
+     header t03 Regular fg/neutral-subtle · body t04 fg/neutral · 두 줄 칸 아래 줄 t02 fg/neutral-subtle
+     묶음 행 44 bg/neutral-weak-alpha + SemiBold · hover(data-interactive 행만) bg/neutral-weak-alpha · selected bg/brand-weak
+     정렬: 글 start(기본) · 숫자 end · 짧은 고정 길이 값(번호·날짜·상태) center → data-align (right 는 end 와 같음)
+     선은 칸 border 로 그린다(행 그림자는 칸에 바탕을 넣으면 가려지고, 표 양 끝에 세로 선이 생긴다)
    -------------------------------------------------------------------------- */
 .ds-table-wrap { width: 100%; overflow-x: auto; }
 .ds-table {
   --ds-table-head-h: 44px;
-  --ds-table-row-h: 52px;
+  --ds-table-row-h: 56px;
+  --ds-table-line: var(--ybm-color-stroke-neutral-muted);
   width: 100%;
   table-layout: fixed;              /* 고정 폭 열은 <th style="width:…"> 또는 <col>, 나머지 열이 남은 폭을 나눈다 */
   border-collapse: collapse;
+  border-top: 1px solid var(--ybm-color-stroke-neutral-solid);
   color: var(--ybm-color-fg-neutral);
   font-size: var(--ybm-font-size-t04);
   line-height: var(--ybm-line-height-t04);
+  font-variant-numeric: tabular-nums;
 }
-.ds-table[data-density="compact"] { --ds-table-head-h: 36px; --ds-table-row-h: 40px; }
+.ds-table[data-density="compact"] { --ds-table-head-h: 44px; --ds-table-row-h: 48px; }
 .ds-table :is(th, td) {
-  padding: 0 var(--ybm-space-x4);
+  padding: var(--ybm-space-x2) var(--ybm-space-x3);
   overflow: hidden;
+  border-bottom: 1px solid var(--ds-table-line);
   text-align: start;
   text-overflow: ellipsis;
   white-space: nowrap;
   vertical-align: middle;
 }
-.ds-table thead tr { height: var(--ds-table-head-h); background: var(--ybm-color-bg-neutral-muted); }
-.ds-table thead th { color: var(--ybm-color-fg-neutral-muted); font-weight: var(--ybm-font-weight-medium); }
+.ds-table :is(th, td):first-child { padding-inline-start: var(--ybm-space-x4); }
+.ds-table :is(th, td):last-child { padding-inline-end: var(--ybm-space-x4); }
+.ds-table thead tr { height: var(--ds-table-head-h); }
+.ds-table thead th { color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t03); line-height: var(--ybm-line-height-t03); font-weight: var(--ybm-font-weight-regular); }
 .ds-table tbody tr { height: var(--ds-table-row-h); }
-.ds-table tr { box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-weak); }
 .ds-table td { font-weight: var(--ybm-font-weight-regular); }
 .ds-table [data-align="center"] { text-align: center; }
-.ds-table [data-align="right"] { text-align: end; }
+.ds-table :is([data-align="right"], [data-align="end"]) { text-align: end; }
+/* 체크박스만 든 칸 */
+.ds-table :is(th, td):has(> .ds-checkbox:only-child) { width: 52px; padding-inline: var(--ybm-space-x4) var(--ybm-space-x2); overflow: visible; }
+.ds-table .ds-checkbox { vertical-align: middle; }
+/* 두 줄 칸 */
+.ds-table__stack { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.ds-table__stack > * { overflow: hidden; text-overflow: ellipsis; }
+.ds-table__stack > :last-child:not(:first-child) { color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); }
+/* 묶음 행 */
+.ds-table tr.ds-table__group { height: 44px; background: var(--ybm-color-bg-neutral-weak-alpha); }
+.ds-table tr.ds-table__group > td { font-weight: var(--ybm-font-weight-semibold); }
 .ds-table tbody tr[data-interactive] { cursor: pointer; }
 .ds-table tbody tr[data-interactive]:active { background: var(--ybm-color-bg-neutral-weak-alpha); }
 @media (hover: hover) { .ds-table tbody tr[data-interactive]:hover { background: var(--ybm-color-bg-neutral-weak-alpha); } }

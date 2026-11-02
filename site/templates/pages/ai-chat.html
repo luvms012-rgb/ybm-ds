@@ -27,30 +27,7 @@
   .tp-num { font-variant-numeric: tabular-nums; }
   /* 텍스트 링크는 보조 동작이라 본문(14)보다 한 단계 작게 */
   .ds-link { font-size: var(--ybm-font-size-t03); line-height: var(--ybm-line-height-t03); }
-  /* 표 (커뮤니티 게시판 기준, 토스증권 / 네이버 증권 / 당근 비즈니스 표와 같은 결):
-     위 진한 선 하나, 머리줄은 바탕 없이 작은 muted 글자, 행 56 / 촘촘 48, 행 사이 옅은 선, 숫자 고정폭, 올리면 옅은 바탕 */
-  .ds-table { --ds-table-head-h: 44px; --ds-table-row-h: 56px; font-variant-numeric: tabular-nums; }
-  .ds-table[data-density="compact"] { --ds-table-head-h: 44px; --ds-table-row-h: 48px; }
-  /* 선은 그림자 대신 테두리로 (줄에 그림자를 그리면 표 양 끝에 세로 선이 생긴다) */
-  .ds-table tr, .ds-table thead tr { background: none; box-shadow: none; }
-  .ds-table { border-top: 1px solid var(--ybm-color-stroke-neutral-solid); }
-  .ds-table :is(th, td) { border-bottom: 1px solid var(--ybm-color-stroke-neutral-muted); }
-  .ds-table thead th { font-size: var(--ybm-font-size-t03); line-height: var(--ybm-line-height-t03); font-weight: var(--ybm-font-weight-regular); color: var(--ybm-color-fg-neutral-subtle); }
-  .ds-table :is(th, td) { padding: var(--ybm-space-x2) var(--ybm-space-x3); }
-  .ds-table :is(th, td):first-child { padding-inline-start: var(--ybm-space-x4); }
-  .ds-table :is(th, td):last-child { padding-inline-end: var(--ybm-space-x4); }
-  @media (hover: hover) { .ds-table tbody tr:not(.tp-grouprow):hover { background: var(--ybm-color-bg-neutral-weak-alpha); } }
-  /* 체크박스만 든 칸: 잘리지 않게 폭 고정 */
-  .ds-table :is(th, td):has(> .ds-checkbox:only-child) { width: 52px; padding-inline: var(--ybm-space-x4) var(--ybm-space-x2); overflow: visible; }
-  .ds-table .ds-checkbox { vertical-align: middle; }
-  .ds-table [data-align="end"] { text-align: end; }
-  /* 두 줄 칸: 위 본문, 아래 작은 subtle */
-  .tp-cell2 { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
-  .tp-cell2 > :first-child { overflow: hidden; text-overflow: ellipsis; color: var(--ybm-color-fg-neutral); }
-  .tp-cell2 > :last-child:not(:first-child) { color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); }
-  /* 묶음 행: 옅은 바탕 + 굵은 이름 (바탕은 tr 에, 선이 덮이지 않게) */
-  .ds-table .tp-grouprow { height: 44px; background: var(--ybm-color-bg-neutral-weak-alpha); }
-  .ds-table .tp-grouprow > td { padding-block: var(--ybm-space-x2); font-weight: var(--ybm-font-weight-semibold); color: var(--ybm-color-fg-neutral); }
+  /* 표는 DS Table 그대로 쓴다 (2026-11-03 DS 개편). 아래는 표 위, 아래 줄만 */
   /* 표 위 한 줄: 왼쪽 개수, 오른쪽 고르기 칸과 찾기 (커뮤니티 게시판 btools) */
   .tp-ttools { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ybm-space-x3); }
   .tp-ttools__end { display: flex; flex-wrap: wrap; align-items: center; gap: var(--ybm-space-x2); }
@@ -159,11 +136,9 @@
   .tp-composer-wrap { padding: var(--ybm-space-x3) var(--ybm-space-x4) var(--ybm-space-x4); }
   .tp-composer-wrap > * { width: min(100%, 720px); margin-inline: auto; }
   .tp-composer { display: flex; flex-direction: column; gap: var(--ybm-space-x2); padding: var(--ybm-space-x3); border-radius: var(--ybm-shape-2xl); background: var(--ybm-color-bg-layer-floating); box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-neutral-muted), 0 4px 16px rgb(0 0 0 / .06); }
-  .tp-composer textarea { width: 100%; min-height: 48px; padding: var(--ybm-space-x1) var(--ybm-space-x1); border: 0; background: none; color: inherit; font: inherit; font-size: var(--ybm-font-size-t05); resize: none; outline: none; }
-  .tp-composer textarea::placeholder { color: var(--ybm-color-fg-placeholder); }
+  .tp-composer .ds-textarea { --ds-textarea-line-width: 0px; --ds-textarea-min-height: 48px; --ds-textarea-padding: var(--ybm-space-x1); resize: none; background: none; }
   .tp-composer__bar { display: flex; align-items: center; gap: var(--ybm-space-x1); }
   .tp-composer__bar .tp-grow { flex: 1 1 auto; }
-  .tp-send { display: inline-grid; place-items: center; width: 36px; height: 36px; border: 0; border-radius: 50%; background: var(--ybm-color-bg-neutral-solid); color: var(--ybm-color-fg-on-neutral-solid); cursor: pointer; }
   .tp-files-row { display: flex; flex-wrap: wrap; gap: var(--ybm-space-x1_5); }
   .tp-file-token { display: inline-flex; align-items: center; gap: var(--ybm-space-x1); height: 28px; padding: 0 var(--ybm-space-x1) 0 var(--ybm-space-x2); border-radius: var(--ybm-shape-sm); background: var(--ybm-color-bg-neutral); font-size: var(--ybm-font-size-t03); }
 
@@ -195,7 +170,7 @@ export function refreshToken() {
       <div class="tp-msg-user"><div class="ds-chat-bubble" data-sender="user">좋아요. 배포 계획도 문서로 정리해 줘요.</div><span class="ds-chat-meta" data-status="read"><time>오전 10:21</time></span></div>
       <div class="tp-msg-ai"><span class="ds-avatar" data-size="24" role="img" aria-label="AI"><span class="ds-avatar__initials" aria-hidden="true">A</span></span><div class="tp-msg-ai__body"><p>오른쪽에 설계와 배포 문서를 만들었어요. 문제, 고치는 법, 테스트, 단계별 배포 순서로 정리했어요.</p></div></div>
     </div>
-    <div class="tp-composer-wrap"><form class="tp-composer" onsubmit="return false"><textarea rows="2" placeholder="이어서 물어보세요" aria-label="메시지 입력"></textarea><div class="tp-composer__bar"><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" aria-label="파일 첨부"><i class="ds-icon ds-icon--plus" aria-hidden="true"></i></button><button type="button" class="ds-btn" data-variant="ghost" data-size="small"><i class="ds-icon ds-icon--paperclip" aria-hidden="true"></i>참고 자료</button><button type="button" class="ds-btn" data-variant="ghost" data-size="small"><i class="ds-icon ds-icon--sliders-horizontal" aria-hidden="true"></i>도구</button><span class="tp-grow"></span><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" aria-label="말로 입력"><i class="ds-icon ds-icon--mic" aria-hidden="true"></i></button><button type="submit" class="tp-send" aria-label="보내기"><i class="ds-icon ds-icon--arrow-up" aria-hidden="true"></i></button></div></form></div>
+    <div class="tp-composer-wrap"><form class="tp-composer" onsubmit="return false"><textarea class="ds-textarea" rows="2" placeholder="이어서 물어보세요" aria-label="메시지 입력"></textarea><div class="tp-composer__bar"><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" aria-label="파일 첨부"><i class="ds-icon ds-icon--plus" aria-hidden="true"></i></button><button type="button" class="ds-btn" data-variant="ghost" data-size="small"><i class="ds-icon ds-icon--paperclip" aria-hidden="true"></i>참고 자료</button><button type="button" class="ds-btn" data-variant="ghost" data-size="small"><i class="ds-icon ds-icon--sliders-horizontal" aria-hidden="true"></i>도구</button><span class="tp-grow"></span><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" aria-label="말로 입력"><i class="ds-icon ds-icon--mic" aria-hidden="true"></i></button><button type="submit" class="ds-chat-send" aria-label="보내기"></button></div></form></div>
   </div>
   <aside class="tp-artifact" aria-label="결과물">
     <div class="tp-artifact__bar"><span class="tp-row"><i class="ds-icon ds-icon--file-text ds-icon--sm" aria-hidden="true"></i><span class="tp-h4">토큰 새로 받기 설계와 배포</span><span class="ds-badge" data-tone="neutral">v2</span></span><span class="tp-row"><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" aria-label="복사"><i class="ds-icon ds-icon--copy" aria-hidden="true"></i></button><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" aria-label="내려받기"><i class="ds-icon ds-icon--download" aria-hidden="true"></i></button><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" aria-label="닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button></span></div>

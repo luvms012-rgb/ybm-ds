@@ -27,30 +27,7 @@
   .tp-num { font-variant-numeric: tabular-nums; }
   /* 텍스트 링크는 보조 동작이라 본문(14)보다 한 단계 작게 */
   .ds-link { font-size: var(--ybm-font-size-t03); line-height: var(--ybm-line-height-t03); }
-  /* 표 (커뮤니티 게시판 기준, 토스증권 / 네이버 증권 / 당근 비즈니스 표와 같은 결):
-     위 진한 선 하나, 머리줄은 바탕 없이 작은 muted 글자, 행 56 / 촘촘 48, 행 사이 옅은 선, 숫자 고정폭, 올리면 옅은 바탕 */
-  .ds-table { --ds-table-head-h: 44px; --ds-table-row-h: 56px; font-variant-numeric: tabular-nums; }
-  .ds-table[data-density="compact"] { --ds-table-head-h: 44px; --ds-table-row-h: 48px; }
-  /* 선은 그림자 대신 테두리로 (줄에 그림자를 그리면 표 양 끝에 세로 선이 생긴다) */
-  .ds-table tr, .ds-table thead tr { background: none; box-shadow: none; }
-  .ds-table { border-top: 1px solid var(--ybm-color-stroke-neutral-solid); }
-  .ds-table :is(th, td) { border-bottom: 1px solid var(--ybm-color-stroke-neutral-muted); }
-  .ds-table thead th { font-size: var(--ybm-font-size-t03); line-height: var(--ybm-line-height-t03); font-weight: var(--ybm-font-weight-regular); color: var(--ybm-color-fg-neutral-subtle); }
-  .ds-table :is(th, td) { padding: var(--ybm-space-x2) var(--ybm-space-x3); }
-  .ds-table :is(th, td):first-child { padding-inline-start: var(--ybm-space-x4); }
-  .ds-table :is(th, td):last-child { padding-inline-end: var(--ybm-space-x4); }
-  @media (hover: hover) { .ds-table tbody tr:not(.tp-grouprow):hover { background: var(--ybm-color-bg-neutral-weak-alpha); } }
-  /* 체크박스만 든 칸: 잘리지 않게 폭 고정 */
-  .ds-table :is(th, td):has(> .ds-checkbox:only-child) { width: 52px; padding-inline: var(--ybm-space-x4) var(--ybm-space-x2); overflow: visible; }
-  .ds-table .ds-checkbox { vertical-align: middle; }
-  .ds-table [data-align="end"] { text-align: end; }
-  /* 두 줄 칸: 위 본문, 아래 작은 subtle */
-  .tp-cell2 { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
-  .tp-cell2 > :first-child { overflow: hidden; text-overflow: ellipsis; color: var(--ybm-color-fg-neutral); }
-  .tp-cell2 > :last-child:not(:first-child) { color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); }
-  /* 묶음 행: 옅은 바탕 + 굵은 이름 (바탕은 tr 에, 선이 덮이지 않게) */
-  .ds-table .tp-grouprow { height: 44px; background: var(--ybm-color-bg-neutral-weak-alpha); }
-  .ds-table .tp-grouprow > td { padding-block: var(--ybm-space-x2); font-weight: var(--ybm-font-weight-semibold); color: var(--ybm-color-fg-neutral); }
+  /* 표는 DS Table 그대로 쓴다 (2026-11-03 DS 개편). 아래는 표 위, 아래 줄만 */
   /* 표 위 한 줄: 왼쪽 개수, 오른쪽 고르기 칸과 찾기 (커뮤니티 게시판 btools) */
   .tp-ttools { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ybm-space-x3); }
   .tp-ttools__end { display: flex; flex-wrap: wrap; align-items: center; gap: var(--ybm-space-x2); }
@@ -142,8 +119,6 @@
   @media (min-width: 1280px) { .tp-g6 { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
 
   .tp-grouprow__in { display: flex; align-items: center; gap: var(--ybm-space-x2); font-weight: var(--ybm-font-weight-semibold); }
-  .tp-caret { display: inline-grid; place-items: center; width: 24px; height: 24px; border: 0; border-radius: var(--ybm-shape-xs); background: none; color: var(--ybm-color-fg-neutral-muted); cursor: pointer; }
-  .tp-caret:hover { background: var(--ybm-color-bg-transparent-pressed); }
   .tp-tpage { gap: var(--ybm-space-x5); padding-top: var(--ybm-space-x6); }
   .tp-tpage__head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: var(--ybm-space-x3) var(--ybm-space-x4); }
 

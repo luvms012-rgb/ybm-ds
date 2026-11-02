@@ -20,15 +20,13 @@ const CHAT_CSS = `
   .tp-composer-wrap { padding: var(--ybm-space-x3) var(--ybm-space-x4) var(--ybm-space-x4); }
   .tp-composer-wrap > * { width: min(100%, 720px); margin-inline: auto; }
   .tp-composer { display: flex; flex-direction: column; gap: var(--ybm-space-x2); padding: var(--ybm-space-x3); border-radius: var(--ybm-shape-2xl); background: var(--ybm-color-bg-layer-floating); box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-neutral-muted), 0 4px 16px rgb(0 0 0 / .06); }
-  .tp-composer textarea { width: 100%; min-height: 48px; padding: var(--ybm-space-x1) var(--ybm-space-x1); border: 0; background: none; color: inherit; font: inherit; font-size: var(--ybm-font-size-t05); resize: none; outline: none; }
-  .tp-composer textarea::placeholder { color: var(--ybm-color-fg-placeholder); }
+  .tp-composer .ds-textarea { --ds-textarea-line-width: 0px; --ds-textarea-min-height: 48px; --ds-textarea-padding: var(--ybm-space-x1); resize: none; background: none; }
   .tp-composer__bar { display: flex; align-items: center; gap: var(--ybm-space-x1); }
   .tp-composer__bar .tp-grow { flex: 1 1 auto; }
-  .tp-send { display: inline-grid; place-items: center; width: 36px; height: 36px; border: 0; border-radius: 50%; background: var(--ybm-color-bg-neutral-solid); color: var(--ybm-color-fg-on-neutral-solid); cursor: pointer; }
   .tp-files-row { display: flex; flex-wrap: wrap; gap: var(--ybm-space-x1_5); }
   .tp-file-token { display: inline-flex; align-items: center; gap: var(--ybm-space-x1); height: 28px; padding: 0 var(--ybm-space-x1) 0 var(--ybm-space-x2); border-radius: var(--ybm-shape-sm); background: var(--ybm-color-bg-neutral); font-size: var(--ybm-font-size-t03); }
 `;
-const composer = (ph = '무엇이든 물어보세요', files = []) => `<form class="tp-composer" onsubmit="return false">${files.length ? `<div class="tp-files-row">${files.map((f) => `<span class="tp-file-token">${icon('file-text', 'sm')}${f}${iconBtn('x', f + ' 빼기', { size: 'xsmall' })}</span>`).join('')}</div>` : ''}<textarea rows="2" placeholder="${esc(ph)}" aria-label="메시지 입력"></textarea><div class="tp-composer__bar">${iconBtn('plus', '파일 첨부')}${btn('참고 자료', { variant: 'ghost', ic: 'paperclip', size: 'small' })}${btn('도구', { variant: 'ghost', ic: 'sliders-horizontal', size: 'small' })}<span class="tp-grow"></span>${iconBtn('mic', '말로 입력')}<button type="submit" class="tp-send" aria-label="보내기">${icon('arrow-up')}</button></div></form>`;
+const composer = (ph = '무엇이든 물어보세요', files = []) => `<form class="tp-composer" onsubmit="return false">${files.length ? `<div class="tp-files-row">${files.map((f) => `<span class="tp-file-token">${icon('file-text', 'sm')}${f}${iconBtn('x', f + ' 빼기', { size: 'xsmall' })}</span>`).join('')}</div>` : ''}<textarea class="ds-textarea" rows="2" placeholder="${esc(ph)}" aria-label="메시지 입력"></textarea><div class="tp-composer__bar">${iconBtn('plus', '파일 첨부')}${btn('참고 자료', { variant: 'ghost', ic: 'paperclip', size: 'small' })}${btn('도구', { variant: 'ghost', ic: 'sliders-horizontal', size: 'small' })}<span class="tp-grow"></span>${iconBtn('mic', '말로 입력')}<button type="submit" class="ds-chat-send" aria-label="보내기"></button></div></form>`;
 
 /* 1. AI 대화 (오른쪽 결과물 패널) ------------------------------ */
 const conversation = () => {
