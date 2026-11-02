@@ -49,7 +49,7 @@ const home = () => {
       ${card(`<div class="tp-rows">${must('개인정보 보호 교육', 'D-5', 40)}${must('직장 내 괴롭힘 예방 교육', 'D-12', 0)}${must('산업 안전 보건 교육', '', 100, true)}</div>`)}
     </section>
     <section class="tp-sec">${secHead('AI 어드바이저에게 물어보기')}
-      ${card(`<div class="tp-row" style="align-items:flex-start; gap: var(--ybm-space-x3)">${icon('sparkles', 'lg')}<p class="tp-sub" style="flex:1">팀장이 되었다면 어떤 과정부터 들으면 좋을지, 이번 달 필수 교육은 무엇인지 물어보세요.</p></div><div class="tp-row" style="flex-wrap:wrap">${['신임 팀장 추천 과정', '남은 필수 교육', '엑셀 함수 빨리 배우기'].map((t) => chip(t)).join('')}</div><div class="tp-ask">${input('lh-ask', 'placeholder="궁금한 것을 적어 보세요" aria-label="AI 어드바이저에게 질문"')}${iconBtn('arrow-up', '보내기', { variant: 'neutralSolid' })}</div>`)}
+      ${card(`<div class="tp-row" style="align-items:flex-start; gap: var(--ybm-space-x3)">${icon('sparkles', 'lg')}<p class="tp-sub" style="flex:1">팀장이 되었다면 어떤 과정부터 들으면 좋을지, 이번 달 필수 교육은 무엇인지 물어보세요.</p></div><div class="tp-row" style="flex-wrap:wrap">${['신임 팀장 추천 과정', '남은 필수 교육', '엑셀 함수 빨리 배우기'].map((t) => chip(t)).join('')}</div><div class="tp-ask">${K.even(`${input('lh-ask', 'placeholder="궁금한 것을 적어 보세요" aria-label="AI 어드바이저에게 질문"')}${iconBtn('arrow-up', '보내기', { variant: 'neutralSolid' })}`)}</div>`)}
     </section>
   </div>
   <section class="tp-sec">${secHead('서윤 님을 위한 추천', { sub: '직무와 지난 학습을 보고 AI가 골랐어요', tools: link('더 보기') })}
@@ -119,7 +119,7 @@ const player = () => {
         <ul><li>표보다 그래프가 나은 때는 바뀌는 흐름이나 비교를 보여 줄 때예요.</li><li>그래프 하나에는 말하고 싶은 메시지 하나만 담아요.</li><li>강조할 값만 진한 색, 나머지는 회색으로 두면 눈이 바로 가요.</li></ul>
         <div class="tp-row" style="flex-wrap:wrap">${btn('퀴즈 3문제 풀기', { variant: 'neutralSolid', ic: 'list-checks' })}${btn('요약 노트에 담기', { ic: 'save' })}</div>
       </div>
-      <div class="tp-stack" style="gap: var(--ybm-space-x3)"><span class="tp-h3">튜터에게 질문하기</span><div class="tp-ask">${input('pl-ask', 'placeholder="이 강의에서 궁금한 것을 물어보세요" aria-label="튜터에게 질문"')}${iconBtn('arrow-up', '보내기', { variant: 'neutralSolid' })}</div><div class="tp-row" style="flex-wrap:wrap">${['막대와 선 그래프는 언제 써요?', '예시 보고서 보여 줘'].map((t) => chip(t)).join('')}</div></div>
+      <div class="tp-stack" style="gap: var(--ybm-space-x3)"><span class="tp-h3">튜터에게 질문하기</span><div class="tp-ask">${K.even(`${input('pl-ask', 'placeholder="이 강의에서 궁금한 것을 물어보세요" aria-label="튜터에게 질문"')}${iconBtn('arrow-up', '보내기', { variant: 'neutralSolid' })}`)}</div><div class="tp-row" style="flex-wrap:wrap">${['막대와 선 그래프는 언제 써요?', '예시 보고서 보여 줘'].map((t) => chip(t)).join('')}</div></div>
     </main>
     <aside class="tp-curr" aria-label="커리큘럼">
       <div class="tp-between" style="padding-inline: var(--ybm-space-x3)"><span class="tp-h3">커리큘럼</span><span class="tp-caption">${T('3 / 12강')}</span></div>

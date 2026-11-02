@@ -35,6 +35,8 @@
   .tp-row { display: flex; align-items: center; gap: var(--ybm-space-x2); min-width: 0; }
   /* 줄 안에 놓인 고르기 칸은 글자만큼만 */
   :is(.tp-row, .tp-between, .tp-head__tools, .tp-sec-head) > .ds-select { width: auto; min-width: 140px; }
+  /* 도구 줄의 medium 세그먼트는 버튼, 고르기 칸과 같은 40 높이로 */
+  :is(.tp-row, .tp-head__tools, .tp-tool__bar) > .ds-segmented[data-size="medium"] { box-sizing: border-box; height: 40px; }
   .tp-between { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ybm-space-x2); }
   .tp-stack { display: flex; flex-direction: column; gap: var(--ybm-space-x1); min-width: 0; }
   .tp-stack > .ds-badge { align-self: flex-start; }
@@ -118,7 +120,7 @@
 <div class="tp-app">
 <header class="tp-head">
   <div class="tp-head__texts"><h1 class="tp-h1">퍼널과 코호트 분석</h1><p class="tp-sub">방문 128,400명 · 전체 전환 4.9%</p></div>
-  <div class="tp-head__tools"><div class="ds-segmented" role="group" aria-label="퍼널 기간" data-size="small"><button type="button" class="ds-segmented__item" aria-pressed="false">7일</button><button type="button" class="ds-segmented__item" aria-pressed="true">30일</button><button type="button" class="ds-segmented__item" aria-pressed="false">90일</button></div><button type="button" class="ds-select" data-size="medium" id="f-seg" aria-haspopup="listbox" aria-expanded="false" aria-label="사용자 묶음"><span class="ds-select__value">모든 플랫폼</span></button><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="small"><i class="ds-icon ds-icon--upload" aria-hidden="true"></i>내보내기</button></div>
+  <div class="tp-head__tools"><div class="ds-segmented" role="group" aria-label="퍼널 기간" data-size="medium"><button type="button" class="ds-segmented__item" aria-pressed="false">7일</button><button type="button" class="ds-segmented__item" aria-pressed="true">30일</button><button type="button" class="ds-segmented__item" aria-pressed="false">90일</button></div><button type="button" class="ds-select" data-size="medium" id="f-seg" aria-haspopup="listbox" aria-expanded="false" aria-label="사용자 묶음"><span class="ds-select__value">모든 플랫폼</span></button><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="medium"><i class="ds-icon ds-icon--upload" aria-hidden="true"></i>내보내기</button></div>
 </header>
 <main class="tp-content">
   <section class="tp-sec" aria-label="단계 전환율">

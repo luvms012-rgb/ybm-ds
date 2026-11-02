@@ -31,6 +31,8 @@ export const BASE_CSS = `  /* 템플릿 배치 전용. 값은 모두 --ybm-* 토
   .tp-row { display: flex; align-items: center; gap: var(--ybm-space-x2); min-width: 0; }
   /* 줄 안에 놓인 고르기 칸은 글자만큼만 */
   :is(.tp-row, .tp-between, .tp-head__tools, .tp-sec-head) > .ds-select { width: auto; min-width: 140px; }
+  /* 도구 줄의 medium 세그먼트는 버튼, 고르기 칸과 같은 40 높이로 */
+  :is(.tp-row, .tp-head__tools, .tp-tool__bar) > .ds-segmented[data-size="medium"] { box-sizing: border-box; height: 40px; }
   .tp-between { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ybm-space-x2); }
   .tp-stack { display: flex; flex-direction: column; gap: var(--ybm-space-x1); min-width: 0; }
   .tp-stack > .ds-badge { align-self: flex-start; }
@@ -136,9 +138,13 @@ export const avatar = (name, size = 24) => `<span class="ds-avatar" data-size="$
 export const avatars = (names, size = 24, more = 0) => `<div class="ds-avatar-group" data-size="${size}" role="group" aria-label="참여자">${names.map((n) => avatar(n, size)).join('')}${more ? `<span class="ds-avatar-group__overflow" role="img" aria-label="그 외 ${more}명">+${more}</span>` : ''}</div>`;
 export const link = (t, href = '#') => `<a class="ds-link" href="${href}">${t}</a>`;
 export const divider = () => `<hr class="ds-divider">`;
-export const select = (value, { id = '', aria = '', size = 'medium' } = {}) => `<button type="button" class="ds-select" data-size="${size}"${id ? ` id="${id}"` : ''} aria-haspopup="listbox" aria-expanded="false"${aria ? ` aria-label="${esc(aria)}"` : ''}><span class="ds-select__value">${value}</span></button>`;
+// 고르기 칸과 입력칸은 large 52 / medium 40 두 가지뿐이라 small 은 medium 으로 받는다
+const field40 = (size) => (size === 'small' ? 'medium' : size);
+// 한 줄에 고르기 칸이나 입력칸(40)이 있으면 같은 줄의 small 버튼(36)과 세그먼트도 medium(40)으로 높이를 맞춘다
+export const even = (h, force = false) => (force || /class="ds-(select|input)"/.test(h) ? h.replace(/(class="ds-(?:btn|segmented)"[^>]*? data-size=")small"/g, '$1medium"') : h);
+export const select = (value, { id = '', aria = '', size = 'medium' } = {}) => `<button type="button" class="ds-select" data-size="${field40(size)}"${id ? ` id="${id}"` : ''} aria-haspopup="listbox" aria-expanded="false"${aria ? ` aria-label="${esc(aria)}"` : ''}><span class="ds-select__value">${value}</span></button>`;
 export const selField = (label, value, id) => `<div class="ds-field tp-selfield"><div class="ds-field__header"><label class="ds-field__label" for="${id}">${label}</label></div>${select(value, { id })}</div>`;
-export const input = (id, attrs = '', { size = 'medium', ic = '' } = {}) => `<div class="ds-input" data-variant="outline" data-size="${size}">${ic ? `<i class="ds-icon ds-icon--${ic} ds-input__icon" aria-hidden="true"></i>` : ''}<input class="ds-input__control" id="${id}" ${attrs}></div>`;
+export const input = (id, attrs = '', { size = 'medium', ic = '' } = {}) => `<div class="ds-input" data-variant="outline" data-size="${field40(size)}">${ic ? `<i class="ds-icon ds-icon--${ic} ds-input__icon" aria-hidden="true"></i>` : ''}<input class="ds-input__control" id="${id}" ${attrs}></div>`;
 export const search = (id, ph, size = 'medium') => input(id, `type="search" placeholder="${esc(ph)}" aria-label="${esc(ph)}"`, { size, ic: 'search' });
 export const field = (id, label, control, { help = '', required = false } = {}) => `<div class="ds-field"><div class="ds-field__header"><label class="ds-field__label" for="${id}">${label}${required ? ' <span class="ds-field__required" aria-hidden="true">*</span>' : ''}</label></div>${control}${help ? `<div class="ds-field__footer"><p class="ds-field__help">${help}</p></div>` : ''}</div>`;
 export const textarea = (id, attrs = '') => `<textarea class="ds-textarea" id="${id}" ${attrs}></textarea>`;
@@ -185,9 +191,9 @@ export const logo = (label = '서비스 이름 홈') => `<a class="tp-brand" hre
 /* ------------------------------------------------------------ 머리글과 KPI */
 export const head = (title, { sub = '', tools = '', eyebrow = '', level = 1 } = {}) => `<header class="tp-head">
   <div class="tp-head__texts">${eyebrow}<h${level} class="tp-h1">${title}</h${level}>${sub ? `<p class="tp-sub">${sub}</p>` : ''}</div>
-  ${tools ? `<div class="tp-head__tools">${tools}</div>` : ''}
+  ${tools ? `<div class="tp-head__tools">${even(tools)}</div>` : ''}
 </header>`;
-export const secHead = (title, { sub = '', tools = '', level = 2, cls = 'tp-h2', id = '' } = {}) => `<div class="tp-sec-head"><div class="tp-sec-head__texts"><h${level} class="${cls}"${id ? ` id="${id}"` : ''}>${title}</h${level}>${sub ? `<span class="tp-sub">${sub}</span>` : ''}</div>${tools ? `<div class="tp-row">${tools}</div>` : ''}</div>`;
+export const secHead = (title, { sub = '', tools = '', level = 2, cls = 'tp-h2', id = '' } = {}) => `<div class="tp-sec-head"><div class="tp-sec-head__texts"><h${level} class="${cls}"${id ? ` id="${id}"` : ''}>${title}</h${level}>${sub ? `<span class="tp-sub">${sub}</span>` : ''}</div>${tools ? `<div class="tp-row">${even(tools)}</div>` : ''}</div>`;
 export const delta = (v, tone = v.startsWith('-') ? 'down' : v.startsWith('+') ? 'up' : 'flat') => `<span class="tp-delta" data-tone="${tone}">${tone === 'flat' ? '' : `<i class="ds-icon ds-icon--arrow-up ds-icon--sm" aria-hidden="true"${tone === 'down' ? ' style="transform: rotate(180deg)"' : ''}></i>`}${v}</span>`;
 export const kpi = (label, value, { d = '', note = '', chart = '', lead = '' } = {}) => card(`<div class="tp-stack">${lead ? `<div class="tp-row">${lead}<span class="tp-kpi__label">${label}</span></div>` : `<span class="tp-kpi__label">${label}</span>`}<div class="tp-row" style="align-items: baseline; flex-wrap: wrap"><span class="tp-kpi__value">${value}</span>${d ? delta(d) : ''}</div>${note ? `<span class="tp-caption">${note}</span>` : ''}</div>${chart}`);
 

@@ -132,7 +132,7 @@ const groupApply = () => {
   const css = CSS + `
   .tp-ga { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ybm-space-x6); }
   @media (min-width: 1280px) { .tp-ga { grid-template-columns: minmax(0, 1fr) 320px; align-items: start; } }
-  .tp-err td { background: var(--ybm-color-bg-critical-weak); }
+  .tp-err { background: var(--ybm-color-bg-critical-weak); }
   .tp-err-msg { color: var(--ybm-color-fg-critical); }
 `;
   const rows = [['1', '김민준', '20231042', '경영학과', 'minjun@hanbit.ac.kr', badge('정상', 'positive')], ['2', '이서연', '20231107', '경영학과', 'seoyeon@hanbit.ac.kr', badge('정상', 'positive')], ['3', '박지후', '20220388', '국제통상학과', '<span class="tp-err-msg">jihu@hanbit</span>', badge('이메일 확인', 'critical')], ['4', '최하은', '20240215', '영어영문학과', 'haeun@hanbit.ac.kr', badge('정상', 'positive')], ['5', '정민재', '', '컴퓨터공학과', 'minjae@hanbit.ac.kr', badge('학번 없음', 'critical')], ['6', '한지아', '20230561', '컴퓨터공학과', 'jia@hanbit.ac.kr', badge('정상', 'positive')]];

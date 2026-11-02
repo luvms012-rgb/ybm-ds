@@ -4,7 +4,8 @@ const T = (s) => `<span class="tp-num">${s}</span>`;
 const won = (n) => n.toLocaleString() + '원';
 
 const TABLE_CSS = `
-  .tp-grouprow > td { padding-block: var(--ybm-space-x2); background: var(--ybm-color-bg-neutral-subtle); }
+  .tp-grouprow { background: var(--ybm-color-bg-neutral-subtle); }
+  .tp-grouprow > td { padding-block: var(--ybm-space-x2); }
   .tp-grouprow__in { display: flex; align-items: center; gap: var(--ybm-space-x2); font-weight: var(--ybm-font-weight-semibold); }
   .tp-caret { display: inline-grid; place-items: center; width: 24px; height: 24px; border: 0; border-radius: var(--ybm-shape-xs); background: none; color: var(--ybm-color-fg-neutral-muted); cursor: pointer; }
   .tp-caret:hover { background: var(--ybm-color-bg-transparent-pressed); }
@@ -152,7 +153,6 @@ const inbox = () => {
   const css = TABLE_CSS + `
   .tp-inbox { display: grid; flex: 1 1 auto; grid-template-columns: minmax(0, 1fr); min-height: 0; }
   @media (min-width: 1024px) { .tp-inbox { grid-template-columns: minmax(0, 1fr) 8px minmax(0, 1.1fr); } }
-  .tp-inbox__list .ds-table tr[aria-selected="true"] td { background: var(--ybm-color-bg-brand-weak); }
   .tp-unread { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--ybm-color-bg-brand-solid); }
   .tp-inbox__row { display: flex; flex-direction: column; }
   .tp-inbox__row b { font-weight: var(--ybm-font-weight-semibold); }
@@ -237,7 +237,7 @@ const tree = () => {
 </header>
 <div class="tp-body tp-body--panel">
 <main class="tp-content" style="gap: var(--ybm-space-x4)">
-  <div class="tp-toolbar">${btn('main', { ic: 'git-branch', icEnd: 'chevron-down' })}${btn('브랜치 8', { variant: 'ghost', ic: 'git-pull-request' })}${btn('태그 14', { variant: 'ghost', ic: 'tag' })}<div class="tp-grow"><div style="width: min(100%, 240px)">${input('goto', 'type="search" placeholder="파일로 이동" aria-label="파일로 이동"', { size: 'small', ic: 'search' })}</div>${btn('파일 추가', { icEnd: 'chevron-down' })}${btn('기록 1,284', { variant: 'ghost', ic: 'rotate-ccw' })}</div></div>
+  <div class="tp-toolbar">${K.even(`${btn('main', { ic: 'git-branch', icEnd: 'chevron-down' })}${btn('브랜치 8', { variant: 'ghost', ic: 'git-pull-request' })}${btn('태그 14', { variant: 'ghost', ic: 'tag' })}<div class="tp-grow"><div style="width: min(100%, 240px)">${input('goto', 'type="search" placeholder="파일로 이동" aria-label="파일로 이동"', { size: 'small', ic: 'search' })}</div>${btn('파일 추가', { icEnd: 'chevron-down' })}${btn('기록 1,284', { variant: 'ghost', ic: 'rotate-ccw' })}</div>`)}</div>
   ${card(`<div class="ds-table-wrap"><table class="ds-table" data-density="compact">${thead([`<span class="tp-row">${iconBtn('chevrons-up-down', '모든 행 펼치기', { size: 'xsmall' })}이름</span>`, '마지막 변경', ['시간', 'end']])}<tbody>${rows.map(([d, k, n, m, t, open]) => `<tr><td><span class="tp-tree-name" style="--d:${d}">${k === 'f' ? `<button type="button" class="tp-caret" aria-expanded="${!!open}" aria-label="${n} ${open ? '접기' : '펼치기'}">${icon(open ? 'chevron-down' : 'chevron-right', 'sm')}</button>${icon(open ? 'folder-open' : 'folder', 'sm')}` : `<span class="tp-spacer"></span>${icon('file', 'sm')}`}${link(n)}</span></td><td class="tp-sub">${m}</td><td data-align="end">${T(t)}</td></tr>`).join('')}</tbody></table></div>`, { attrs: 'style="padding: 0; overflow: hidden"' })}
   ${card(`${tabs(['README', '라이선스', '기여 안내'], 0, '문서')}<div class="ds-markdown tp-md"><h3>canvas-editor</h3><p>웹 페이지에 넣어 쓰는 작은 벡터 캔버스예요. 도형을 그리고, 묶고, 크기를 바꾸고, 이미지로 내보낼 수 있어요.</p><h4>설치</h4>${codeblock('bash', 'npm install canvas-editor')}<h4>사용</h4>${codeblock('ts', "import { Canvas } from 'canvas-editor';\n\nconst canvas = new Canvas('#stage', { width: 800, height: 600 });\ncanvas.add({ type: 'rect', x: 40, y: 40, w: 120, h: 80 });")}</div>`)}
 </main>

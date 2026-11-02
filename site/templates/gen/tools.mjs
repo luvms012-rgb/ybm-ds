@@ -57,7 +57,7 @@ const canvas = () => {
     <div class="tp-insp"><span class="tp-label">위치와 크기</span><div class="tp-insp__grid">${mini('X', '27')}${mini('Y', '64')}${mini('W', '286')}${mini('H', '214')}</div></div>
     <div class="tp-insp"><span class="tp-label">모양</span><div class="tp-insp__grid">${mini('R', '0')}${mini('%', '100')}</div></div>
     <div class="tp-insp"><span class="tp-label">필터</span>${[['밝기', 52], ['대비', 64], ['채도', 40]].map(([l, v]) => `<label class="tp-stack"><span class="tp-between"><span class="tp-sub">${l}</span>${T(v)}</span><input type="range" class="ds-slider" value="${v}" aria-label="${l}"></label>`).join('')}</div>
-    <div class="tp-insp" style="box-shadow:none"><span class="tp-label">내보내기</span><div class="tp-row">${select('PNG', { size: 'small', aria: '파일 형식' })}${btn('내보내기', { ic: 'download' })}</div></div>
+    <div class="tp-insp" style="box-shadow:none"><span class="tp-label">내보내기</span><div class="tp-row">${K.even(select('PNG', { size: 'small', aria: '파일 형식' }) + btn('내보내기', { ic: 'download' }))}</div></div>
   </aside>
 </div>
 </div>`;
@@ -86,7 +86,7 @@ const explorer = () => {
   const col = (items) => `<div class="tp-col"><ul role="listbox">${items.map(([ic, n, st, more]) => `<li role="option"${st === 's' ? ' aria-selected="true"' : st === 'p' ? ' data-path="true"' : ''}>${icon(ic)}<span class="tp-grow">${n}</span>${more ? icon('chevron-right', 'sm') : ''}</li>`).join('')}</ul></div>`;
   const side = [['house', '홈'], ['monitor', '데스크톱'], ['file-text', '문서', 1], ['download', '다운로드'], ['image', '사진'], ['cloud', '클라우드 드라이브']];
   const body = `<div class="tp-tool">
-<header class="tp-tool__bar" role="toolbar" aria-label="파일 탐색기">${iconBtn('chevron-left', '뒤로')}${iconBtn('chevron-right', '앞으로')}<span class="tp-h4" style="margin-inline: var(--ybm-space-x2)">2026 강의 자료</span><span class="tp-spacer"></span>${segmented([icon('layout-grid', 'sm'), icon('list', 'sm'), icon('columns-3', 'sm'), icon('image', 'sm')], 2, '보기 방식')}${iconBtn('layers', '묶기')}${iconBtn('share', '공유')}${iconBtn('tag', '태그')}${iconBtn('ellipsis', '더 보기')}<div style="width: 200px">${search('fq', '찾기', 'small')}</div></header>
+<header class="tp-tool__bar" role="toolbar" aria-label="파일 탐색기">${K.even(`${iconBtn('chevron-left', '뒤로')}${iconBtn('chevron-right', '앞으로')}<span class="tp-h4" style="margin-inline: var(--ybm-space-x2)">2026 강의 자료</span><span class="tp-spacer"></span>${segmented([icon('layout-grid', 'sm'), icon('list', 'sm'), icon('columns-3', 'sm'), icon('image', 'sm')], 2, '보기 방식')}${iconBtn('layers', '묶기')}${iconBtn('share', '공유')}${iconBtn('tag', '태그')}${iconBtn('ellipsis', '더 보기')}<div style="width: 200px">${search('fq', '찾기', 'small')}</div>`)}</header>
 <div class="tp-tool__body">
   <aside class="tp-pane tp-pane--left tp-sidebar" style="width: 200px" aria-label="즐겨찾기"><span class="tp-label">즐겨찾기</span>${tree(side.map(([ic, n, s]) => [0, ic, n, s]))}<span class="tp-label">태그</span>${tree([[0, 'circle', '중요'], [0, 'circle', '검토 필요'], [0, 'circle', '공유됨']])}</aside>
   <main class="tp-pane tp-pane--main">
@@ -131,7 +131,7 @@ export function Counter({ start = 0 }) {
   .tp-code span[data-hl] { background: var(--ybm-color-bg-brand-weak); }
   .tp-term { flex: none; height: 200px; display: flex; flex-direction: column; box-shadow: inset 0 1px 0 var(--ybm-color-stroke-neutral-muted); }
   .tp-term pre { flex: 1 1 auto; margin: 0; padding: var(--ybm-space-x3) var(--ybm-space-x4); overflow: auto; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; line-height: 18px; color: var(--ybm-color-fg-neutral-muted); }
-  .tp-term .ds-tabs { padding-inline: var(--ybm-space-x2); }
+  .tp-term .ds-tabs { padding-inline: var(--ybm-space-x2); background: none; }
   .tp-handle-h { height: 6px; cursor: row-resize; display: grid; place-items: center; }
   .tp-handle-h::after { content: ""; width: 32px; height: 4px; border-radius: 2px; background: var(--ybm-color-stroke-neutral-weak); }
   .tp-status { display: flex; gap: var(--ybm-space-x4); padding: var(--ybm-space-x1) var(--ybm-space-x3); background: var(--ybm-color-bg-brand-solid); color: var(--ybm-color-fg-on-brand-solid); font-size: var(--ybm-font-size-t02); }
@@ -173,7 +173,7 @@ const kanban = () => {
   .tp-kcard[data-dragging] { transform: rotate(2deg); box-shadow: 0 8px 24px rgb(0 0 0 / .16); }
 `;
   const body = `<div class="tp-tool">
-<header class="tp-tool__bar" role="toolbar" aria-label="보드 동작"><h1 class="tp-h3">스프린트 보드</h1>${badge('8')}<span style="width: 160px">${select('스프린트 24', { size: 'small', aria: '스프린트' })}</span><span class="tp-spacer"></span>${iconBtn('arrow-up-down', '정렬')}${iconBtn('funnel', '거르기')}${iconBtn('users', '담당자')}${iconBtn('settings', '보드 설정')}${btn('할 일 추가', { variant: 'neutralSolid', ic: 'plus' })}</header>
+<header class="tp-tool__bar" role="toolbar" aria-label="보드 동작">${K.even(`<h1 class="tp-h3">스프린트 보드</h1>${badge('8')}<span style="width: 160px">${select('스프린트 24', { size: 'small', aria: '스프린트' })}</span><span class="tp-spacer"></span>${iconBtn('arrow-up-down', '정렬')}${iconBtn('funnel', '거르기')}${iconBtn('users', '담당자')}${iconBtn('settings', '보드 설정')}${btn('할 일 추가', { variant: 'neutralSolid', ic: 'plus' })}`)}</header>
 <main class="tp-board">${cols.map(([tone, t, ...cards]) => `<section class="tp-lane" aria-label="${t}"><div class="tp-lane__head"><span class="tp-row">${dot(tone, t + ' 상태')}<h2 class="tp-h4">${t}</h2></span><span class="tp-row"><span class="tp-caption tp-num">${cards.length}</span>${iconBtn('plus', t + '에 추가', { size: 'xsmall' })}</span></div><div class="tp-lane__body">${cards.map(([[c, p], h, d, m, who], i) => card(`<div class="tp-between"><span class="tp-row">${badge(c)}${badge(p, p === '높음' ? 'critical' : p === '보통' ? 'warning' : 'neutral')}</span>${iconBtn('ellipsis', '할 일 동작', { size: 'xsmall' })}</div><div class="tp-stack"><h3 class="tp-h4">${h}</h3><p class="tp-sub">${d}</p></div><div class="tp-between"><span class="tp-caption">${m}</span>${avatars(who, 20)}</div>`, { cls: 'tp-kcard', tag: 'article', attrs: tone === 'informative' && i === 1 ? 'data-dragging' : '' })).join('')}</div></section>`).join('')}</main>
 </div>`;
   return { slug: 'kanban-board', en: 'Kanban Board', name: '칸반 보드', group: 'Tools', desc: '상태별 열에 카드를 늘어놓은 칸반 보드입니다. 카드를 다른 열로 끌어다 놓으면 상태가 바뀌고, 카드 높이는 내용에 따라 달라집니다.', css, body };
@@ -196,7 +196,7 @@ const pageEditor = () => {
   .tp-picked { outline: 2px solid var(--ybm-color-stroke-brand-solid); outline-offset: 4px; border-radius: var(--ybm-shape-sm); }
 `;
   const body = `<div class="tp-tool">
-<header class="tp-tool__bar"><h1 class="tp-h4">페이지 편집기</h1><span class="tp-spacer"></span>${segmented([icon('monitor', 'sm'), icon('panel-right', 'sm'), icon('smartphone', 'sm')], 0, '화면 크기')}${iconBtn('undo-2', '되돌리기')}${iconBtn('redo-2', '다시 하기')}${btn('미리 보기', { ic: 'eye' })}${btn('게시', { variant: 'brandSolid' })}</header>
+<header class="tp-tool__bar"><h1 class="tp-h4">페이지 편집기</h1><span class="tp-spacer"></span>${K.even(`${segmented([icon('monitor', 'sm'), icon('panel-right', 'sm'), icon('smartphone', 'sm')], 0, '화면 크기')}${iconBtn('undo-2', '되돌리기')}${iconBtn('redo-2', '다시 하기')}${btn('미리 보기', { ic: 'eye' })}${btn('게시', { variant: 'brandSolid' })}`, true)}</header>
 <div class="tp-tool__body">
   <aside class="tp-pane tp-pane--left" aria-label="블록과 레이어">${tabs(['블록', '설정'], 0, '왼쪽 패널')}<span class="tp-label">블록 넣기</span><ul class="tp-blocks">${blocks.map(([ic, t]) => `<li draggable="true">${icon(ic, 'sm')}${t}</li>`).join('')}</ul><span class="tp-label">레이어</span><div>${layers.map((t, i) => `<div class="tp-layer"${i === 2 ? ' aria-selected="true"' : ''}>${icon('grip-vertical', 'sm')}<span class="tp-grow">${t}</span>${iconBtn('arrow-up', t + ' 위로', { size: 'xsmall' })}${iconBtn('arrow-down', t + ' 아래로', { size: 'xsmall' })}</div>`).join('')}</div></aside>
   <main class="tp-pane tp-pane--main"><div class="tp-canvas"><div class="tp-page">

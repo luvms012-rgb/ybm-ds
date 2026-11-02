@@ -14,30 +14,6 @@
       }
     },
     {
-      "slug": "dashboard-comparison",
-      "name": "데이터 대시보드",
-      "en": "Data Dashboard",
-      "group": "Dashboard",
-      "desc": "기간, 기기, 이용자 조건을 골라 지표를 비교하는 대시보드입니다. 지표마다 작은 추이 그래프와 전일, 전주, 전월, 전년 대비 변화를 함께 보여 줍니다.",
-      "rebuilt": true,
-      "figma": {
-        "pc": "2629:7705",
-        "mobile": "2629:6681"
-      }
-    },
-    {
-      "slug": "dashboard-scorecard",
-      "name": "주간 리포트 대시보드",
-      "en": "Executive Summary Dashboard",
-      "group": "Dashboard",
-      "desc": "한 주의 성과를 보고서처럼 읽는 대시보드입니다. 핵심 지표, 목표 달성률, 추이 그래프 옆에 무엇이 왜 바뀌었는지 요약을 함께 둡니다.",
-      "rebuilt": true,
-      "figma": {
-        "pc": "2629:13125",
-        "mobile": "2629:12663"
-      }
-    },
-    {
       "slug": "dashboard-cohort-funnel",
       "name": "퍼널·코호트 대시보드",
       "en": "Funnel & Cohort Dashboard",
@@ -47,18 +23,6 @@
       "figma": {
         "pc": "2629:5694",
         "mobile": "2629:4707"
-      }
-    },
-    {
-      "slug": "dashboard-composition",
-      "name": "자산 대시보드",
-      "en": "Portfolio Dashboard",
-      "group": "Dashboard",
-      "desc": "자산이 시간에 따라 어떻게 바뀌었는지 보는 대시보드입니다. 총액과 수익률 지표, 1년 동안의 총 평가액 그래프와 자산 구성, 보유 종목, 시장 지수를 차례로 보여 줍니다.",
-      "rebuilt": true,
-      "figma": {
-        "pc": "2629:9430",
-        "mobile": "2629:8729"
       }
     },
     {
@@ -612,6 +576,70 @@
         "pc": "2629:25413",
         "mobile": "2629:25335"
       }
+    },
+    {
+      "slug": "community-board",
+      "name": "게시판 목록",
+      "en": "Board List",
+      "group": "Community",
+      "desc": "카페형 게시판의 글 목록입니다. 말머리로 거르고, 공지를 위에 고정하고, 제목 옆에 댓글 수와 사진 여부를, 오른쪽에 글쓴이와 조회, 좋아요를 보여 줍니다.",
+      "rebuilt": true
+    },
+    {
+      "slug": "community-home",
+      "name": "커뮤니티 홈",
+      "en": "Community Home",
+      "group": "Community",
+      "desc": "게시판형 커뮤니티의 첫 화면입니다. 왼쪽에 내 정보와 게시판 메뉴, 가운데에 지금 뜨는 글과 새 글 피드, 오른쪽에 실시간 인기글과 활발한 멤버를 보여 줍니다.",
+      "rebuilt": true
+    },
+    {
+      "slug": "community-post",
+      "name": "게시글 상세",
+      "en": "Post Detail",
+      "group": "Community",
+      "desc": "게시글 하나를 읽는 화면입니다. 말머리와 제목, 글쓴이, 본문과 투표, 좋아요와 스크랩, 댓글과 답글, 이전 글과 다음 글을 차례로 보여 줍니다.",
+      "rebuilt": true
+    },
+    {
+      "slug": "community-write",
+      "name": "글쓰기",
+      "en": "Write Post",
+      "group": "Community",
+      "desc": "커뮤니티에 새 글을 쓰는 화면입니다. 게시판과 말머리를 고르고, 제목과 본문을 쓰고, 사진을 붙이고, 댓글 허용과 익명 여부를 정한 뒤 아래 막대에서 등록합니다.",
+      "rebuilt": true
+    },
+    {
+      "slug": "subscription-cancel",
+      "name": "구독 해지",
+      "en": "Cancel Subscription",
+      "group": "Pricing",
+      "desc": "구독을 해지하기 전에 잃게 되는 혜택과 유의 사항을 보여 주는 화면입니다. 해지 까닭을 묻고 할인 제안을 함께 보여 준 뒤 유지와 해지 가운데 고르게 합니다.",
+      "rebuilt": true
+    },
+    {
+      "slug": "pricing-plans",
+      "name": "요금제 비교",
+      "en": "Pricing Plans",
+      "group": "Pricing",
+      "desc": "요금제를 나란히 놓고 비교해 고르는 화면입니다. 월 결제와 연 결제를 바꿔 보면 가격이 바뀌고, 아래 표로 기능 차이를 한눈에 봅니다.",
+      "rebuilt": true
+    },
+    {
+      "slug": "subscription-checkout",
+      "name": "구독 결제",
+      "en": "Subscription Checkout",
+      "group": "Pricing",
+      "desc": "고른 요금제를 결제하는 화면입니다. 결제 주기, 결제 수단, 할인 코드, 약관 동의를 한 화면에서 받고 오른쪽 요약에 오늘 결제할 금액과 다음 결제일을 보여 줍니다.",
+      "rebuilt": true
+    },
+    {
+      "slug": "subscription-settings",
+      "name": "내 구독",
+      "en": "Subscription Settings",
+      "group": "Pricing",
+      "desc": "지금 쓰는 요금제와 다음 결제일, 사용량, 결제 수단, 결제 내역을 한 화면에서 관리합니다. 요금제 바꾸기와 해지는 같은 화면에서 시작합니다.",
+      "rebuilt": true
     },
     {
       "slug": "exam-apply",

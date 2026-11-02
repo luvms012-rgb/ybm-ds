@@ -8,9 +8,9 @@
 <script>try { var t = localStorage.getItem("ybm-site-theme"); if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.dataset.theme = "dark"; } catch (e) {}</script>
 <link rel="icon" href="../assets/logo-ybmnet.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../dist/ybm-ds.css">
-<link rel="stylesheet" href="../assets/site.css?v=c3594efc">
+<link rel="stylesheet" href="../assets/site.css?v=1438b33a">
 <script src="../../dist/ybm-ds.js" defer></script>
-<script src="../assets/site.js?v=c3594efc" defer></script>
+<script src="../assets/site.js?v=1438b33a" defer></script>
 </head>
 <body class="site">
 <a class="site-skip" href="#main">본문 바로가기</a>
@@ -35,10 +35,7 @@
   <div class="site-side__mobile"><nav class="site-nav" aria-label="주요 메뉴"><a class="site-nav__item" href="../index.html">Get Started</a><a class="site-nav__item" href="../components/index.html">Components</a><a class="site-nav__item" href="../templates/index.html" aria-current="page">Templates</a></nav><div class="site-nav__sep"></div></div>
   <nav class="site-nav" aria-label="Templates 메뉴"><a class="site-nav__item" href="../templates/index.html" aria-current="page">Overview</a>
 <a class="site-nav__item" href="../templates/dashboard.html">분석 대시보드</a>
-<a class="site-nav__item" href="../templates/dashboard-comparison.html">데이터 대시보드</a>
-<a class="site-nav__item" href="../templates/dashboard-scorecard.html">주간 리포트 대시보드</a>
 <a class="site-nav__item" href="../templates/dashboard-cohort-funnel.html">퍼널·코호트 대시보드</a>
-<a class="site-nav__item" href="../templates/dashboard-composition.html">자산 대시보드</a>
 <a class="site-nav__item" href="../templates/dashboard-progress.html">프로젝트 현황 대시보드</a>
 <a class="site-nav__item" href="../templates/dashboard-alert-rail.html">서비스 모니터링 대시보드</a>
 <a class="site-nav__item" href="../templates/table-collapsible.html">접히는 표 묶음</a>
@@ -85,6 +82,14 @@
 <a class="site-nav__item" href="../templates/shell-nav.html">앱 틀 (위 메뉴 + 옆 트리)</a>
 <a class="site-nav__item" href="../templates/shell-side-nav.html">앱 틀 (옆 메뉴)</a>
 <a class="site-nav__item" href="../templates/shell-top-nav.html">앱 틀 (위 메뉴)</a>
+<a class="site-nav__item" href="../templates/community-board.html">게시판 목록</a>
+<a class="site-nav__item" href="../templates/community-home.html">커뮤니티 홈</a>
+<a class="site-nav__item" href="../templates/community-post.html">게시글 상세</a>
+<a class="site-nav__item" href="../templates/community-write.html">글쓰기</a>
+<a class="site-nav__item" href="../templates/subscription-cancel.html">구독 해지</a>
+<a class="site-nav__item" href="../templates/pricing-plans.html">요금제 비교</a>
+<a class="site-nav__item" href="../templates/subscription-checkout.html">구독 결제</a>
+<a class="site-nav__item" href="../templates/subscription-settings.html">내 구독</a>
 <a class="site-nav__item" href="../templates/exam-apply.html">시험 신청</a>
 <a class="site-nav__item" href="../templates/exam-my.html">내 시험</a>
 <a class="site-nav__item" href="../templates/exam-score.html">성적표</a>
@@ -115,6 +120,8 @@
     <button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-filter="AI Chat">AI 채팅</button>
     <button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-filter="Gallery">갤러리</button>
     <button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-filter="Shell">앱 틀</button>
+    <button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-filter="Community">커뮤니티</button>
+    <button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-filter="Pricing">요금제</button>
     <button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-filter="Exam">시험 접수</button>
     <button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-filter="Exam B2B">단체 시험</button>
     <button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-filter="Learning B2B">기업 러닝</button>
@@ -128,32 +135,11 @@
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="dashboard.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a><a class="site-tpl__btn" href="https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=2629-10846" target="_blank" rel="noopener"><i class="ds-icon site-i--figma" aria-hidden="true"></i>Figma에서 열기</a></div>
   </div>
 </article>
-<article class="site-tpl" data-site-item="데이터 대시보드 data dashboard dashboard 기간, 기기, 이용자 조건을 골라 지표를 비교하는 대시보드입니다. 지표마다 작은 추이 그래프와 전일, 전주, 전월, 전년 대비 변화를 함께 보여 줍니다." data-site-cat="Dashboard">
-  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/dashboard-comparison.html" title="데이터 대시보드 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
-  <div class="site-tpl__scrim">
-    <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="dashboard-comparison.html">데이터 대시보드</a></h3><p class="site-tpl__desc">기간, 기기, 이용자 조건을 골라 지표를 비교하는 대시보드입니다. 지표마다 작은 추이 그래프와 전일, 전주, 전월, 전년 대비 변화를 함께 보여 줍니다.</p></div>
-    <div class="site-tpl__actions"><a class="site-tpl__btn" href="dashboard-comparison.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a><a class="site-tpl__btn" href="https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=2629-7705" target="_blank" rel="noopener"><i class="ds-icon site-i--figma" aria-hidden="true"></i>Figma에서 열기</a></div>
-  </div>
-</article>
-<article class="site-tpl" data-site-item="주간 리포트 대시보드 executive summary dashboard dashboard 한 주의 성과를 보고서처럼 읽는 대시보드입니다. 핵심 지표, 목표 달성률, 추이 그래프 옆에 무엇이 왜 바뀌었는지 요약을 함께 둡니다." data-site-cat="Dashboard">
-  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/dashboard-scorecard.html" title="주간 리포트 대시보드 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
-  <div class="site-tpl__scrim">
-    <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="dashboard-scorecard.html">주간 리포트 대시보드</a></h3><p class="site-tpl__desc">한 주의 성과를 보고서처럼 읽는 대시보드입니다. 핵심 지표, 목표 달성률, 추이 그래프 옆에 무엇이 왜 바뀌었는지 요약을 함께 둡니다.</p></div>
-    <div class="site-tpl__actions"><a class="site-tpl__btn" href="dashboard-scorecard.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a><a class="site-tpl__btn" href="https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=2629-13125" target="_blank" rel="noopener"><i class="ds-icon site-i--figma" aria-hidden="true"></i>Figma에서 열기</a></div>
-  </div>
-</article>
 <article class="site-tpl" data-site-item="퍼널·코호트 대시보드 funnel &amp; cohort dashboard dashboard 단계마다 얼마나 이탈하는지 보는 퍼널과, 가입 시기별로 얼마나 남아 있는지 보는 코호트 표를 함께 둔 분석 대시보드입니다." data-site-cat="Dashboard">
   <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/dashboard-cohort-funnel.html" title="퍼널·코호트 대시보드 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="dashboard-cohort-funnel.html">퍼널·코호트 대시보드</a></h3><p class="site-tpl__desc">단계마다 얼마나 이탈하는지 보는 퍼널과, 가입 시기별로 얼마나 남아 있는지 보는 코호트 표를 함께 둔 분석 대시보드입니다.</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="dashboard-cohort-funnel.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a><a class="site-tpl__btn" href="https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=2629-5694" target="_blank" rel="noopener"><i class="ds-icon site-i--figma" aria-hidden="true"></i>Figma에서 열기</a></div>
-  </div>
-</article>
-<article class="site-tpl" data-site-item="자산 대시보드 portfolio dashboard dashboard 자산이 시간에 따라 어떻게 바뀌었는지 보는 대시보드입니다. 총액과 수익률 지표, 1년 동안의 총 평가액 그래프와 자산 구성, 보유 종목, 시장 지수를 차례로 보여 줍니다." data-site-cat="Dashboard">
-  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/dashboard-composition.html" title="자산 대시보드 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
-  <div class="site-tpl__scrim">
-    <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="dashboard-composition.html">자산 대시보드</a></h3><p class="site-tpl__desc">자산이 시간에 따라 어떻게 바뀌었는지 보는 대시보드입니다. 총액과 수익률 지표, 1년 동안의 총 평가액 그래프와 자산 구성, 보유 종목, 시장 지수를 차례로 보여 줍니다.</p></div>
-    <div class="site-tpl__actions"><a class="site-tpl__btn" href="dashboard-composition.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a><a class="site-tpl__btn" href="https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=2629-9430" target="_blank" rel="noopener"><i class="ds-icon site-i--figma" aria-hidden="true"></i>Figma에서 열기</a></div>
   </div>
 </article>
 <article class="site-tpl" data-site-item="프로젝트 현황 대시보드 project status dashboard dashboard 일정 막대와 오늘 표시선, 완료율 도넛, 담당자별 진행 표로 프로젝트가 어디까지 왔는지 보여 주는 대시보드입니다." data-site-cat="Dashboard">
@@ -476,6 +462,62 @@
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="shell-top-nav.html">앱 틀 (위 메뉴)</a></h3><p class="site-tpl__desc">위쪽 메뉴만 있는 앱 기본 틀입니다. 메뉴를 누르면 전체 폭 메뉴가 열리고, 본문은 화면 폭을 모두 씁니다.</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="shell-top-nav.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a><a class="site-tpl__btn" href="https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=2629-25413" target="_blank" rel="noopener"><i class="ds-icon site-i--figma" aria-hidden="true"></i>Figma에서 열기</a></div>
+  </div>
+</article>
+<article class="site-tpl" data-site-item="게시판 목록 board list community 카페형 게시판의 글 목록입니다. 말머리로 거르고, 공지를 위에 고정하고, 제목 옆에 댓글 수와 사진 여부를, 오른쪽에 글쓴이와 조회, 좋아요를 보여 줍니다." data-site-cat="Community">
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/community-board.html" title="게시판 목록 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl__scrim">
+    <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="community-board.html">게시판 목록</a></h3><p class="site-tpl__desc">카페형 게시판의 글 목록입니다. 말머리로 거르고, 공지를 위에 고정하고, 제목 옆에 댓글 수와 사진 여부를, 오른쪽에 글쓴이와 조회, 좋아요를 보여 줍니다.</p></div>
+    <div class="site-tpl__actions"><a class="site-tpl__btn" href="community-board.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
+  </div>
+</article>
+<article class="site-tpl" data-site-item="커뮤니티 홈 community home community 게시판형 커뮤니티의 첫 화면입니다. 왼쪽에 내 정보와 게시판 메뉴, 가운데에 지금 뜨는 글과 새 글 피드, 오른쪽에 실시간 인기글과 활발한 멤버를 보여 줍니다." data-site-cat="Community">
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/community-home.html" title="커뮤니티 홈 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl__scrim">
+    <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="community-home.html">커뮤니티 홈</a></h3><p class="site-tpl__desc">게시판형 커뮤니티의 첫 화면입니다. 왼쪽에 내 정보와 게시판 메뉴, 가운데에 지금 뜨는 글과 새 글 피드, 오른쪽에 실시간 인기글과 활발한 멤버를 보여 줍니다.</p></div>
+    <div class="site-tpl__actions"><a class="site-tpl__btn" href="community-home.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
+  </div>
+</article>
+<article class="site-tpl" data-site-item="게시글 상세 post detail community 게시글 하나를 읽는 화면입니다. 말머리와 제목, 글쓴이, 본문과 투표, 좋아요와 스크랩, 댓글과 답글, 이전 글과 다음 글을 차례로 보여 줍니다." data-site-cat="Community">
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/community-post.html" title="게시글 상세 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl__scrim">
+    <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="community-post.html">게시글 상세</a></h3><p class="site-tpl__desc">게시글 하나를 읽는 화면입니다. 말머리와 제목, 글쓴이, 본문과 투표, 좋아요와 스크랩, 댓글과 답글, 이전 글과 다음 글을 차례로 보여 줍니다.</p></div>
+    <div class="site-tpl__actions"><a class="site-tpl__btn" href="community-post.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
+  </div>
+</article>
+<article class="site-tpl" data-site-item="글쓰기 write post community 커뮤니티에 새 글을 쓰는 화면입니다. 게시판과 말머리를 고르고, 제목과 본문을 쓰고, 사진을 붙이고, 댓글 허용과 익명 여부를 정한 뒤 아래 막대에서 등록합니다." data-site-cat="Community">
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/community-write.html" title="글쓰기 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl__scrim">
+    <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="community-write.html">글쓰기</a></h3><p class="site-tpl__desc">커뮤니티에 새 글을 쓰는 화면입니다. 게시판과 말머리를 고르고, 제목과 본문을 쓰고, 사진을 붙이고, 댓글 허용과 익명 여부를 정한 뒤 아래 막대에서 등록합니다.</p></div>
+    <div class="site-tpl__actions"><a class="site-tpl__btn" href="community-write.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
+  </div>
+</article>
+<article class="site-tpl" data-site-item="구독 해지 cancel subscription pricing 구독을 해지하기 전에 잃게 되는 혜택과 유의 사항을 보여 주는 화면입니다. 해지 까닭을 묻고 할인 제안을 함께 보여 준 뒤 유지와 해지 가운데 고르게 합니다." data-site-cat="Pricing">
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/subscription-cancel.html" title="구독 해지 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl__scrim">
+    <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="subscription-cancel.html">구독 해지</a></h3><p class="site-tpl__desc">구독을 해지하기 전에 잃게 되는 혜택과 유의 사항을 보여 주는 화면입니다. 해지 까닭을 묻고 할인 제안을 함께 보여 준 뒤 유지와 해지 가운데 고르게 합니다.</p></div>
+    <div class="site-tpl__actions"><a class="site-tpl__btn" href="subscription-cancel.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
+  </div>
+</article>
+<article class="site-tpl" data-site-item="요금제 비교 pricing plans pricing 요금제를 나란히 놓고 비교해 고르는 화면입니다. 월 결제와 연 결제를 바꿔 보면 가격이 바뀌고, 아래 표로 기능 차이를 한눈에 봅니다." data-site-cat="Pricing">
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/pricing-plans.html" title="요금제 비교 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl__scrim">
+    <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="pricing-plans.html">요금제 비교</a></h3><p class="site-tpl__desc">요금제를 나란히 놓고 비교해 고르는 화면입니다. 월 결제와 연 결제를 바꿔 보면 가격이 바뀌고, 아래 표로 기능 차이를 한눈에 봅니다.</p></div>
+    <div class="site-tpl__actions"><a class="site-tpl__btn" href="pricing-plans.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
+  </div>
+</article>
+<article class="site-tpl" data-site-item="구독 결제 subscription checkout pricing 고른 요금제를 결제하는 화면입니다. 결제 주기, 결제 수단, 할인 코드, 약관 동의를 한 화면에서 받고 오른쪽 요약에 오늘 결제할 금액과 다음 결제일을 보여 줍니다." data-site-cat="Pricing">
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/subscription-checkout.html" title="구독 결제 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl__scrim">
+    <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="subscription-checkout.html">구독 결제</a></h3><p class="site-tpl__desc">고른 요금제를 결제하는 화면입니다. 결제 주기, 결제 수단, 할인 코드, 약관 동의를 한 화면에서 받고 오른쪽 요약에 오늘 결제할 금액과 다음 결제일을 보여 줍니다.</p></div>
+    <div class="site-tpl__actions"><a class="site-tpl__btn" href="subscription-checkout.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
+  </div>
+</article>
+<article class="site-tpl" data-site-item="내 구독 subscription settings pricing 지금 쓰는 요금제와 다음 결제일, 사용량, 결제 수단, 결제 내역을 한 화면에서 관리합니다. 요금제 바꾸기와 해지는 같은 화면에서 시작합니다." data-site-cat="Pricing">
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/subscription-settings.html" title="내 구독 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl__scrim">
+    <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="subscription-settings.html">내 구독</a></h3><p class="site-tpl__desc">지금 쓰는 요금제와 다음 결제일, 사용량, 결제 수단, 결제 내역을 한 화면에서 관리합니다. 요금제 바꾸기와 해지는 같은 화면에서 시작합니다.</p></div>
+    <div class="site-tpl__actions"><a class="site-tpl__btn" href="subscription-settings.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
   </div>
 </article>
 <article class="site-tpl" data-site-item="시험 신청 exam application exam 시험 종류, 언어, 날짜와 시간, 고사장, 동의, 응시자 정보, 결제를 한 화면에서 차례로 고르는 시험 신청 화면입니다. 오른쪽 요약에 고른 내용과 결제 금액이 바로 반영됩니다." data-site-cat="Exam">

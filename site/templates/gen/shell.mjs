@@ -39,7 +39,7 @@ const shellNav = () => {
   const tr = [[0, 'f', 'src', 1], [1, 'f', 'pages', 1], [2, 'file-code', '홈.tsx'], [2, 'file-code', '강좌.tsx', 0, 1], [2, 'file-code', '설정.tsx'], [1, 'f', 'components', 0], [1, 'f', 'styles', 0], [0, 'f', 'public', 0], [0, 'file', 'package.json'], [0, 'file-text', 'README.md']];
   const body = `<div class="tp-shell">
 <a class="tp-sr" href="#main">본문으로 건너뛰기</a>
-<header role="banner"><nav class="tp-menubar" aria-label="메뉴 막대">${K.logo()}${['파일', '편집', '보기', '실행', '도움말'].map((t) => btn(t, { variant: 'ghost' })).join('')}<div class="tp-q">${search('cmd', '파일과 명령 찾기…  ⌘K', 'small')}</div>${iconBtn('play', '프로젝트 실행', { variant: 'neutralWeak' })}${avatar('김서윤', 24)}</nav></header>
+<header role="banner"><nav class="tp-menubar" aria-label="메뉴 막대">${K.even(`${K.logo()}${['파일', '편집', '보기', '실행', '도움말'].map((t) => btn(t, { variant: 'ghost' })).join('')}<div class="tp-q">${search('cmd', '파일과 명령 찾기…  ⌘K', 'small')}</div>${iconBtn('play', '프로젝트 실행', { variant: 'neutralWeak' })}${avatar('김서윤', 24)}`)}</nav></header>
 <div class="tp-shell__row">
   <aside class="tp-rail" aria-label="옆 메뉴"><ul class="tp-tree2" role="tree">${tr.map(([d, k, n, o, s]) => `<li role="treeitem"><span style="--d:${d}"${s ? ' aria-selected="true"' : ''}>${k === 'f' ? icon(o ? 'chevron-down' : 'chevron-right', 'sm') + icon(o ? 'folder-open' : 'folder', 'sm') : '<span style="width:16px"></span>' + icon(k, 'sm')}${n}</span></li>`).join('')}</ul></aside>
   <div class="tp-resize" role="separator" aria-label="옆 메뉴 크기 조절"></div>

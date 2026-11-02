@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>주간 리포트 대시보드 - YBM DS</title>
-<meta name="description" content="한 주의 성과를 보고서처럼 읽는 대시보드입니다. 핵심 지표, 목표 달성률, 추이 그래프 옆에 무엇이 왜 바뀌었는지 요약을 함께 둡니다.">
+<title>커뮤니티 홈 - YBM DS</title>
+<meta name="description" content="게시판형 커뮤니티의 첫 화면입니다. 왼쪽에 내 정보와 게시판 메뉴, 가운데에 지금 뜨는 글과 새 글 피드, 오른쪽에 실시간 인기글과 활발한 멤버를 보여 줍니다.">
 <!-- 생성물: node site/build.mjs가 만든다. 직접 고치지 말고 site/build.mjs나 site/src를 고친다 -->
 <script>try { var t = localStorage.getItem("ybm-site-theme"); if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.dataset.theme = "dark"; } catch (e) {}</script>
 <link rel="icon" href="../assets/logo-ybmnet.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../dist/ybm-ds.css">
-<link rel="stylesheet" href="../assets/site.css?v=c3594efc">
+<link rel="stylesheet" href="../assets/site.css?v=1438b33a">
 <script src="../../dist/ybm-ds.js" defer></script>
-<script src="../assets/site.js?v=c3594efc" defer></script>
+<script src="../assets/site.js?v=1438b33a" defer></script>
 </head>
 <body class="site">
 <a class="site-skip" href="#main">본문 바로가기</a>
@@ -36,10 +36,7 @@
   <div class="site-side__mobile"><nav class="site-nav" aria-label="주요 메뉴"><a class="site-nav__item" href="../index.html">Get Started</a><a class="site-nav__item" href="../components/index.html">Components</a><a class="site-nav__item" href="../templates/index.html" aria-current="page">Templates</a></nav><div class="site-nav__sep"></div></div>
   <nav class="site-nav" aria-label="Templates 메뉴"><a class="site-nav__item" href="../templates/index.html">Overview</a>
 <a class="site-nav__item" href="../templates/dashboard.html">분석 대시보드</a>
-<a class="site-nav__item" href="../templates/dashboard-comparison.html">데이터 대시보드</a>
-<a class="site-nav__item" href="../templates/dashboard-scorecard.html" aria-current="page">주간 리포트 대시보드</a>
 <a class="site-nav__item" href="../templates/dashboard-cohort-funnel.html">퍼널·코호트 대시보드</a>
-<a class="site-nav__item" href="../templates/dashboard-composition.html">자산 대시보드</a>
 <a class="site-nav__item" href="../templates/dashboard-progress.html">프로젝트 현황 대시보드</a>
 <a class="site-nav__item" href="../templates/dashboard-alert-rail.html">서비스 모니터링 대시보드</a>
 <a class="site-nav__item" href="../templates/table-collapsible.html">접히는 표 묶음</a>
@@ -86,6 +83,14 @@
 <a class="site-nav__item" href="../templates/shell-nav.html">앱 틀 (위 메뉴 + 옆 트리)</a>
 <a class="site-nav__item" href="../templates/shell-side-nav.html">앱 틀 (옆 메뉴)</a>
 <a class="site-nav__item" href="../templates/shell-top-nav.html">앱 틀 (위 메뉴)</a>
+<a class="site-nav__item" href="../templates/community-board.html">게시판 목록</a>
+<a class="site-nav__item" href="../templates/community-home.html" aria-current="page">커뮤니티 홈</a>
+<a class="site-nav__item" href="../templates/community-post.html">게시글 상세</a>
+<a class="site-nav__item" href="../templates/community-write.html">글쓰기</a>
+<a class="site-nav__item" href="../templates/subscription-cancel.html">구독 해지</a>
+<a class="site-nav__item" href="../templates/pricing-plans.html">요금제 비교</a>
+<a class="site-nav__item" href="../templates/subscription-checkout.html">구독 결제</a>
+<a class="site-nav__item" href="../templates/subscription-settings.html">내 구독</a>
 <a class="site-nav__item" href="../templates/exam-apply.html">시험 신청</a>
 <a class="site-nav__item" href="../templates/exam-my.html">내 시험</a>
 <a class="site-nav__item" href="../templates/exam-score.html">성적표</a>
@@ -102,9 +107,9 @@
 <main class="site-main" id="main">
 <article class="site-doc">
 <header class="site-head">
-  <h1 class="site-h1">주간 리포트 대시보드</h1>
-  <p class="site-lead">한 주의 성과를 보고서처럼 읽는 대시보드입니다. 핵심 지표, 목표 달성률, 추이 그래프 옆에 무엇이 왜 바뀌었는지 요약을 함께 둡니다.</p>
-  <div class="site-meta"><a class="ds-btn" data-variant="neutralSolid" data-size="small" target="_blank" rel="noopener" href="pages/dashboard-scorecard.html"><i class="ds-icon ds-icon--external-link ds-icon--sm" aria-hidden="true"></i>새 창으로 보기</a><a class="ds-btn" data-variant="neutralWeak" data-size="xsmall" href="https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=2629-13125" target="_blank" rel="noopener"><i class="ds-icon site-i--figma ds-icon--sm" aria-hidden="true"></i>Figma</a><a class="ds-btn" data-variant="neutralWeak" data-size="xsmall" href="https://github.com/luvms012-rgb/ybm-ds/blob/main/site/templates/pages/dashboard-scorecard.html" target="_blank" rel="noopener"><i class="ds-icon site-i--github ds-icon--sm" aria-hidden="true"></i>코드</a></div>
+  <h1 class="site-h1">커뮤니티 홈</h1>
+  <p class="site-lead">게시판형 커뮤니티의 첫 화면입니다. 왼쪽에 내 정보와 게시판 메뉴, 가운데에 지금 뜨는 글과 새 글 피드, 오른쪽에 실시간 인기글과 활발한 멤버를 보여 줍니다.</p>
+  <div class="site-meta"><a class="ds-btn" data-variant="neutralSolid" data-size="small" target="_blank" rel="noopener" href="pages/community-home.html"><i class="ds-icon ds-icon--external-link ds-icon--sm" aria-hidden="true"></i>새 창으로 보기</a><a class="ds-btn" data-variant="neutralWeak" data-size="xsmall" href="https://github.com/luvms012-rgb/ybm-ds/blob/main/site/templates/pages/community-home.html" target="_blank" rel="noopener"><i class="ds-icon site-i--github ds-icon--sm" aria-hidden="true"></i>코드</a></div>
 
 </header>
 <div class="site-frame">
@@ -112,14 +117,14 @@
     <div class="ds-segmented" role="group" aria-label="보기 방식"><button type="button" class="ds-segmented__item" aria-pressed="true" data-site-view="preview">미리보기</button><button type="button" class="ds-segmented__item" aria-pressed="false" data-site-view="code">코드</button></div>
     <div class="ds-segmented" role="group" aria-label="화면 폭"><button type="button" class="ds-segmented__item" aria-pressed="true" data-site-device="desktop">PC</button><button type="button" class="ds-segmented__item" aria-pressed="false" data-site-device="tablet">태블릿</button><button type="button" class="ds-segmented__item" aria-pressed="false" data-site-device="mobile">모바일</button></div>
   </div>
-  <div class="site-frame__stage" data-device="desktop"><iframe src="pages/dashboard-scorecard.html" title="주간 리포트 대시보드 템플릿" data-site-frame></iframe></div>
-  <div class="site-frame__code" hidden><figure class="ds-codeblock" data-site-src="pages/dashboard-scorecard.html">
+  <div class="site-frame__stage" data-device="desktop"><iframe src="pages/community-home.html" title="커뮤니티 홈 템플릿" data-site-frame></iframe></div>
+  <div class="site-frame__code" hidden><figure class="ds-codeblock" data-site-src="pages/community-home.html">
   <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">html</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
   <pre class="ds-codeblock__code"><code>불러오는 중…</code></pre>
 </figure></div>
 </div>
 
-<h2 id="components">쓴 컴포넌트<a class="site-anchor" href="#components" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><div class="site-links"><a class="ds-chip" data-size="small" href="../components/action-button.html">Action Button</a><a class="ds-chip" data-size="small" href="../components/segmented-control.html">Segmented Control</a><a class="ds-chip" data-size="small" href="../components/avatar.html">Avatar</a><a class="ds-chip" data-size="small" href="../components/progress.html">Progress</a><a class="ds-chip" data-size="small" href="../components/card.html">Card</a></div>
+<h2 id="components">쓴 컴포넌트<a class="site-anchor" href="#components" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><div class="site-links"><a class="ds-chip" data-size="small" href="../components/action-button.html">Action Button</a><a class="ds-chip" data-size="small" href="../components/text-link.html">Text Link</a><a class="ds-chip" data-size="small" href="../components/chip-tabs.html">Chip Tabs</a><a class="ds-chip" data-size="small" href="../components/segmented-control.html">Segmented Control</a><a class="ds-chip" data-size="small" href="../components/badge.html">Badge</a><a class="ds-chip" data-size="small" href="../components/avatar.html">Avatar</a><a class="ds-chip" data-size="small" href="../components/callout.html">Callout</a><a class="ds-chip" data-size="small" href="../components/side-navigation.html">Side Navigation</a><a class="ds-chip" data-size="small" href="../components/card.html">Card</a><a class="ds-chip" data-size="small" href="../components/top-navigation.html">Top Navigation</a><a class="ds-chip" data-size="small" href="../components/image-frame.html">Image Frame</a></div>
 
 <footer class="site-footer">
   <div class="site-footer__brand"><img src="../assets/logo-ybmnet.svg" alt="YBM NET" width="81" height="24"><p class="site-footer__copy">© 2026 YBM NET. All rights reserved.</p></div>

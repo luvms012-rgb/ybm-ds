@@ -35,6 +35,8 @@
   .tp-row { display: flex; align-items: center; gap: var(--ybm-space-x2); min-width: 0; }
   /* 줄 안에 놓인 고르기 칸은 글자만큼만 */
   :is(.tp-row, .tp-between, .tp-head__tools, .tp-sec-head) > .ds-select { width: auto; min-width: 140px; }
+  /* 도구 줄의 medium 세그먼트는 버튼, 고르기 칸과 같은 40 높이로 */
+  :is(.tp-row, .tp-head__tools, .tp-tool__bar) > .ds-segmented[data-size="medium"] { box-sizing: border-box; height: 40px; }
   .tp-between { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ybm-space-x2); }
   .tp-stack { display: flex; flex-direction: column; gap: var(--ybm-space-x1); min-width: 0; }
   .tp-stack > .ds-badge { align-self: flex-start; }
@@ -109,7 +111,7 @@
 
   /* 위 메뉴 화면 */
   .tp-topbar { position: sticky; top: 0; z-index: var(--ybm-z-sticky); background: var(--ybm-color-bg-layer-default); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); }
-  .tp-topbar > .ds-topnav { width: min(100%, 1200px); margin-inline: auto; }
+  .tp-topbar > .ds-topnav { width: min(100%, 1200px); margin-inline: auto; background: none; }
   .tp-topbar .ds-topnav__menu { display: none; }
   @media (min-width: 768px) { .tp-topbar .ds-topnav__menu { display: flex; } }
   .tp-wrap { width: min(100%, 1200px); margin-inline: auto; }
@@ -193,7 +195,7 @@
         <ul><li>표보다 그래프가 나은 때는 바뀌는 흐름이나 비교를 보여 줄 때예요.</li><li>그래프 하나에는 말하고 싶은 메시지 하나만 담아요.</li><li>강조할 값만 진한 색, 나머지는 회색으로 두면 눈이 바로 가요.</li></ul>
         <div class="tp-row" style="flex-wrap:wrap"><button type="button" class="ds-btn" data-variant="neutralSolid" data-size="small"><i class="ds-icon ds-icon--list-checks" aria-hidden="true"></i>퀴즈 3문제 풀기</button><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="small"><i class="ds-icon ds-icon--save" aria-hidden="true"></i>요약 노트에 담기</button></div>
       </div>
-      <div class="tp-stack" style="gap: var(--ybm-space-x3)"><span class="tp-h3">튜터에게 질문하기</span><div class="tp-ask"><div class="ds-input" data-variant="outline" data-size="medium"><input class="ds-input__control" id="pl-ask" placeholder="이 강의에서 궁금한 것을 물어보세요" aria-label="튜터에게 질문"></div><button type="button" class="ds-btn" data-variant="neutralSolid" data-size="small" data-layout="iconOnly" aria-label="보내기"><i class="ds-icon ds-icon--arrow-up" aria-hidden="true"></i></button></div><div class="tp-row" style="flex-wrap:wrap"><button type="button" class="ds-chip" data-variant="outlineWeak" data-size="small">막대와 선 그래프는 언제 써요?</button><button type="button" class="ds-chip" data-variant="outlineWeak" data-size="small">예시 보고서 보여 줘</button></div></div>
+      <div class="tp-stack" style="gap: var(--ybm-space-x3)"><span class="tp-h3">튜터에게 질문하기</span><div class="tp-ask"><div class="ds-input" data-variant="outline" data-size="medium"><input class="ds-input__control" id="pl-ask" placeholder="이 강의에서 궁금한 것을 물어보세요" aria-label="튜터에게 질문"></div><button type="button" class="ds-btn" data-variant="neutralSolid" data-size="medium" data-layout="iconOnly" aria-label="보내기"><i class="ds-icon ds-icon--arrow-up" aria-hidden="true"></i></button></div><div class="tp-row" style="flex-wrap:wrap"><button type="button" class="ds-chip" data-variant="outlineWeak" data-size="small">막대와 선 그래프는 언제 써요?</button><button type="button" class="ds-chip" data-variant="outlineWeak" data-size="small">예시 보고서 보여 줘</button></div></div>
     </main>
     <aside class="tp-curr" aria-label="커리큘럼">
       <div class="tp-between" style="padding-inline: var(--ybm-space-x3)"><span class="tp-h3">커리큘럼</span><span class="tp-caption"><span class="tp-num">3 / 12강</span></span></div>

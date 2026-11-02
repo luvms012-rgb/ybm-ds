@@ -35,6 +35,8 @@
   .tp-row { display: flex; align-items: center; gap: var(--ybm-space-x2); min-width: 0; }
   /* 줄 안에 놓인 고르기 칸은 글자만큼만 */
   :is(.tp-row, .tp-between, .tp-head__tools, .tp-sec-head) > .ds-select { width: auto; min-width: 140px; }
+  /* 도구 줄의 medium 세그먼트는 버튼, 고르기 칸과 같은 40 높이로 */
+  :is(.tp-row, .tp-head__tools, .tp-tool__bar) > .ds-segmented[data-size="medium"] { box-sizing: border-box; height: 40px; }
   .tp-between { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ybm-space-x2); }
   .tp-stack { display: flex; flex-direction: column; gap: var(--ybm-space-x1); min-width: 0; }
   .tp-stack > .ds-badge { align-self: flex-start; }

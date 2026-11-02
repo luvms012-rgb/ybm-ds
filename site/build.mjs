@@ -665,7 +665,7 @@ ${sections.join('\n')}`,
 /* ---------------------------------------------------------------- Templates */
 const tplGroups = [...new Set(templates.map((t) => t.group))];
 // 분류 칩에 보이는 이름 (값은 templates.json 의 영어 group)
-const TPL_GROUP_KO = { Dashboard: '대시보드', Table: '표', Form: '입력 폼', Settings: '설정', Login: '로그인', Tools: '도구', Content: '콘텐츠', 'AI Chat': 'AI 채팅', Gallery: '갤러리', Shell: '앱 틀', Exam: '시험 접수', 'Exam B2B': '단체 시험', 'Learning B2B': '기업 러닝' };
+const TPL_GROUP_KO = { Dashboard: '대시보드', Table: '표', Form: '입력 폼', Settings: '설정', Login: '로그인', Tools: '도구', Content: '콘텐츠', 'AI Chat': 'AI 채팅', Gallery: '갤러리', Shell: '앱 틀', Community: '커뮤니티', Pricing: '요금제', Exam: '시험 접수', 'Exam B2B': '단체 시험', 'Learning B2B': '기업 러닝' };
 const TPL_FIGMA = JSON.parse(fs.readFileSync(path.join(SITE, 'src/templates.json'), 'utf8')).figmaHeader;
 write({
   file: 'templates/index.html', section: 'templates', title: 'Templates', layout: 'full',

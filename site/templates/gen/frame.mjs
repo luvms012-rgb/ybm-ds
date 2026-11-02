@@ -7,7 +7,7 @@ export const T = (s) => `<span class="tp-num">${s}</span>`;
 export const FRAME_CSS = `
   /* 위 메뉴 화면 */
   .tp-topbar { position: sticky; top: 0; z-index: var(--ybm-z-sticky); background: var(--ybm-color-bg-layer-default); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); }
-  .tp-topbar > .ds-topnav { width: min(100%, 1200px); margin-inline: auto; }
+  .tp-topbar > .ds-topnav { width: min(100%, 1200px); margin-inline: auto; background: none; }
   .tp-topbar .ds-topnav__menu { display: none; }
   @media (min-width: 768px) { .tp-topbar .ds-topnav__menu { display: flex; } }
   .tp-wrap { width: min(100%, 1200px); margin-inline: auto; }

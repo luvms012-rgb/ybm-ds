@@ -35,6 +35,8 @@
   .tp-row { display: flex; align-items: center; gap: var(--ybm-space-x2); min-width: 0; }
   /* 줄 안에 놓인 고르기 칸은 글자만큼만 */
   :is(.tp-row, .tp-between, .tp-head__tools, .tp-sec-head) > .ds-select { width: auto; min-width: 140px; }
+  /* 도구 줄의 medium 세그먼트는 버튼, 고르기 칸과 같은 40 높이로 */
+  :is(.tp-row, .tp-head__tools, .tp-tool__bar) > .ds-segmented[data-size="medium"] { box-sizing: border-box; height: 40px; }
   .tp-between { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ybm-space-x2); }
   .tp-stack { display: flex; flex-direction: column; gap: var(--ybm-space-x1); min-width: 0; }
   .tp-stack > .ds-badge { align-self: flex-start; }
@@ -109,7 +111,7 @@
 
   /* 위 메뉴 화면 */
   .tp-topbar { position: sticky; top: 0; z-index: var(--ybm-z-sticky); background: var(--ybm-color-bg-layer-default); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); }
-  .tp-topbar > .ds-topnav { width: min(100%, 1200px); margin-inline: auto; }
+  .tp-topbar > .ds-topnav { width: min(100%, 1200px); margin-inline: auto; background: none; }
   .tp-topbar .ds-topnav__menu { display: none; }
   @media (min-width: 768px) { .tp-topbar .ds-topnav__menu { display: flex; } }
   .tp-wrap { width: min(100%, 1200px); margin-inline: auto; }
@@ -164,7 +166,7 @@
   <div class="ds-sidenav__footer"><a class="ds-sidenav__item" href="#"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--settings" aria-hidden="true"></i></span><span class="ds-sidenav__label">설정</span></a></div>
 </nav><div class="tp-frame__main"><div class="tp-mbar"><span class="tp-h4">성적 리포트</span><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" aria-label="메뉴 열기"><i class="ds-icon ds-icon--menu" aria-hidden="true"></i></button></div><header class="tp-head">
   <div class="tp-head__texts"><h1 class="tp-h1">응시 현황과 성적</h1><p class="tp-sub">2026년 2학기 · 단체 응시 4회</p></div>
-  <div class="tp-head__tools"><button type="button" class="ds-select" data-size="medium" id="gd-round" aria-haspopup="listbox" aria-expanded="false" aria-label="시험 회차"><span class="ds-select__value">12월 6일 시험</span></button><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="small"><i class="ds-icon ds-icon--download" aria-hidden="true"></i>리포트 받기</button></div>
+  <div class="tp-head__tools"><button type="button" class="ds-select" data-size="medium" id="gd-round" aria-haspopup="listbox" aria-expanded="false" aria-label="시험 회차"><span class="ds-select__value">12월 6일 시험</span></button><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="medium"><i class="ds-icon ds-icon--download" aria-hidden="true"></i>리포트 받기</button></div>
 </header>
 <main class="tp-content">
   <div class="tp-g4"><section class="ds-card tp-card" data-size="small"><div class="tp-stack"><span class="tp-kpi__label">응시 인원</span><div class="tp-row" style="align-items: baseline; flex-wrap: wrap"><span class="tp-kpi__value">118명</span></div><span class="tp-caption">접수 124명 중 95%</span></div></section><section class="ds-card tp-card" data-size="small"><div class="tp-stack"><span class="tp-kpi__label">평균 점수</span><div class="tp-row" style="align-items: baseline; flex-wrap: wrap"><span class="tp-kpi__value">712점</span><span class="tp-delta" data-tone="up"><i class="ds-icon ds-icon--arrow-up ds-icon--sm" aria-hidden="true"></i>+24</span></div><span class="tp-caption">지난 회차보다</span></div></section><section class="ds-card tp-card" data-size="small"><div class="tp-stack"><span class="tp-kpi__label">목표 달성</span><div class="tp-row" style="align-items: baseline; flex-wrap: wrap"><span class="tp-kpi__value">64%</span><span class="tp-delta" data-tone="up"><i class="ds-icon ds-icon--arrow-up ds-icon--sm" aria-hidden="true"></i>+8%p</span></div><span class="tp-caption">목표 700점 이상</span></div></section><section class="ds-card tp-card" data-size="small"><div class="tp-stack"><span class="tp-kpi__label">최고 점수</span><div class="tp-row" style="align-items: baseline; flex-wrap: wrap"><span class="tp-kpi__value">965점</span></div><span class="tp-caption">영어영문학과</span></div></section></div>

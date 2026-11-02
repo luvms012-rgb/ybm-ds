@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>게시글 상세 - YBM DS 템플릿</title>
+<link rel="stylesheet" href="../../../dist/ybm-ds.css">
+<script src="../../../dist/ybm-ds.js" defer></script>
+<style>
+  /* 템플릿 배치 전용. 값은 모두 --ybm-* 토큰
+     배치(여백, 카드, 구분선)는 레퍼런스 A 템플릿, 한글 글자 위계(크기, 굵기, 색 단계, 자간)는 토스를 따른다 */
+  body { word-break: keep-all; overflow-wrap: break-word; }
+  .tp-app { display: flex; flex-direction: column; min-height: 100vh; background: var(--ybm-color-bg-layer-default); }
+  .tp-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: var(--ybm-space-x3) var(--ybm-space-x4); padding: var(--ybm-space-x6) var(--ybm-space-x4) 0; }
+  .tp-head__texts { display: flex; flex-direction: column; gap: var(--ybm-space-x1_5); min-width: 0; }
+  .tp-head__tools { display: flex; flex-wrap: wrap; align-items: center; gap: var(--ybm-space-x2); }
+  .tp-head > .tp-row, .tp-head .tp-between > .tp-row { flex-wrap: wrap; }
+  .ds-tablepagination { flex-wrap: wrap; row-gap: var(--ybm-space-x2); min-width: 0; }
+  .tp-between > .tp-row { flex-wrap: wrap; }
+  /* 글자 위계 (토스): 굵기 두 단계, 제목은 자간 -0.02em, 글자 색은 neutral / muted / subtle 세 단계 */
+  .tp-h1 { font-size: var(--ybm-font-size-t09); line-height: var(--ybm-line-height-t09); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; }
+  .tp-h2 { font-size: var(--ybm-font-size-t06); line-height: var(--ybm-line-height-t06); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; }
+  .tp-h3 { font-size: var(--ybm-font-size-t05); line-height: var(--ybm-line-height-t05); font-weight: var(--ybm-font-weight-semibold); letter-spacing: -0.01em; }
+  .tp-h4 { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-sub { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
+  .tp-caption { font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); color: var(--ybm-color-fg-neutral-subtle); }
+  .tp-num { font-variant-numeric: tabular-nums; }
+  /* 배치 (레퍼런스 A): 흰 바탕, 바깥 여백 16 / 24, 묶음 사이 24 / 32 와 구분선 */
+  .tp-body { display: flex; flex: 1 1 auto; flex-direction: column; min-height: 0; }
+  .tp-content { display: flex; flex: 1 1 auto; flex-direction: column; gap: var(--ybm-space-x6); min-width: 0; padding: var(--ybm-space-x5) var(--ybm-space-x4) var(--ybm-space-x10); }
+  .tp-panel { display: flex; flex-direction: column; gap: var(--ybm-space-x5); padding: var(--ybm-space-x5) var(--ybm-space-x4); box-shadow: inset 0 1px 0 var(--ybm-color-stroke-neutral-muted); }
+  .tp-sec { display: flex; flex-direction: column; gap: var(--ybm-space-x3); min-width: 0; }
+  .tp-sec-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ybm-space-x2) var(--ybm-space-x3); }
+  .tp-sec-head__texts { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--ybm-space-x1) var(--ybm-space-x2); }
+  .tp-row { display: flex; align-items: center; gap: var(--ybm-space-x2); min-width: 0; }
+  /* 줄 안에 놓인 고르기 칸은 글자만큼만 */
+  :is(.tp-row, .tp-between, .tp-head__tools, .tp-sec-head) > .ds-select { width: auto; min-width: 140px; }
+  /* 도구 줄의 medium 세그먼트는 버튼, 고르기 칸과 같은 40 높이로 */
+  :is(.tp-row, .tp-head__tools, .tp-tool__bar) > .ds-segmented[data-size="medium"] { box-sizing: border-box; height: 40px; }
+  .tp-between { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ybm-space-x2); }
+  .tp-stack { display: flex; flex-direction: column; gap: var(--ybm-space-x1); min-width: 0; }
+  .tp-stack > .ds-badge { align-self: flex-start; }
+  .tp-g2, .tp-g3, .tp-g4, .tp-g5, .tp-g6 { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ybm-space-x3); }
+  /* 카드 (레퍼런스 A): 흰 바탕 + 옅은 1px 선, 모서리 12 */
+  .tp-card { min-width: 0; }
+  .tp-card.ds-card { gap: var(--ybm-space-x3); padding: var(--ybm-space-x4); border-radius: var(--ybm-shape-lg); box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-neutral-muted); }
+  .tp-span2 { grid-column: auto; }
+  .tp-kpi__label { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
+  .tp-kpi__value { font-size: var(--ybm-font-size-t08); line-height: var(--ybm-line-height-t08); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+  .tp-delta { display: inline-flex; align-items: center; gap: 2px; font-size: var(--ybm-font-size-t03); line-height: var(--ybm-line-height-t03); font-weight: var(--ybm-font-weight-medium); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .tp-delta .ds-icon { --ds-icon-size: 14px; }
+  .tp-delta[data-tone="up"] { color: var(--ybm-color-fg-positive); }
+  .tp-delta[data-tone="down"] { color: var(--ybm-color-fg-critical); }
+  .tp-delta[data-tone="flat"] { color: var(--ybm-color-fg-neutral-muted); }
+  /* 차트: 얇은 선, 옅은 격자, 마우스를 올리면 세로 안내선과 값 풍선 */
+  .tp-chart { display: block; width: 100%; height: auto; overflow: visible; }
+  .tp-chart text { fill: var(--ybm-color-fg-neutral-subtle); font-size: 11px; font-family: inherit; font-variant-numeric: tabular-nums; }
+  .tp-chart .tp-grid-line { stroke: var(--ybm-color-stroke-neutral-muted); stroke-width: 1; }
+  .tp-chart [data-i] { transition: opacity var(--ybm-duration-fast) var(--ybm-easing-standard); }
+  .tp-chart.is-hover [data-i]:not(.is-on) { opacity: .35; }
+  .tp-chart .tp-guide { stroke: var(--ybm-color-fg-neutral-subtle); stroke-width: 1; stroke-dasharray: 3 3; opacity: 0; pointer-events: none; }
+  .tp-chart .tp-dot { stroke: var(--ybm-color-bg-layer-default); stroke-width: 2; opacity: 0; pointer-events: none; }
+  .tp-chart.is-hover .tp-guide, .tp-chart.is-hover .tp-dot { opacity: 1; }
+  .tp-tip { position: fixed; z-index: var(--ybm-z-tooltip, 60); display: flex; flex-direction: column; gap: 2px; min-width: 96px; padding: var(--ybm-space-x2) var(--ybm-space-x2_5); border-radius: var(--ybm-shape-sm); background: var(--ybm-color-bg-neutral-solid); color: var(--ybm-color-fg-on-neutral-solid); box-shadow: var(--ybm-elevation-overlay); font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); pointer-events: none; opacity: 0; transform: translateY(4px); transition: opacity var(--ybm-duration-fast) var(--ybm-easing-standard), transform var(--ybm-duration-fast) var(--ybm-easing-standard); }
+  .tp-tip.is-on { opacity: 1; transform: none; }
+  .tp-tip__t { font-weight: var(--ybm-font-weight-semibold); opacity: .8; }
+  .tp-tip__t:only-child { opacity: 1; }
+  [data-tip] { transition: filter var(--ybm-duration-fast) var(--ybm-easing-standard); }
+  [data-tip]:hover { filter: brightness(0.9); }
+  .tp-tip__r { display: flex; align-items: center; gap: var(--ybm-space-x1_5); font-variant-numeric: tabular-nums; }
+  .tp-tip__r b { margin-inline-start: auto; padding-inline-start: var(--ybm-space-x3); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-tip__r i { flex: none; width: 8px; height: 8px; border-radius: 2px; background: var(--c); }
+  .tp-legend { display: flex; flex-wrap: wrap; gap: var(--ybm-space-x1) var(--ybm-space-x4); font-size: var(--ybm-font-size-t03); line-height: var(--ybm-line-height-t03); color: var(--ybm-color-fg-neutral-muted); }
+  .tp-legend__item { display: inline-flex; align-items: center; gap: var(--ybm-space-x1_5); }
+  .tp-swatch { flex: none; width: 8px; height: 8px; border-radius: 2px; background: var(--c, var(--ybm-color-chart-series-1)); }
+  .tp-split { display: flex; height: 10px; overflow: hidden; border-radius: var(--ybm-shape-pill); background: var(--ybm-color-bg-neutral); }
+  .tp-split > span { height: 100%; background: var(--c); }
+  .tp-split > span + span { box-shadow: inset 2px 0 0 var(--ybm-color-bg-layer-default); }
+  .tp-ph { display: grid; place-items: center; width: 100%; height: 100%; color: var(--ybm-color-fg-neutral-subtle); background: var(--ybm-color-bg-neutral); }
+  .tp-ph > img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .tp-logo { display: inline-grid; place-items: center; width: 88px; height: 28px; border-radius: var(--ybm-shape-xs); background: var(--ybm-color-bg-neutral); color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t03-static); line-height: var(--ybm-line-height-t03-static); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-bar { position: sticky; top: 0; z-index: var(--ybm-z-sticky); background: var(--ybm-color-bg-layer-default); }
+  .tp-track { display: flex; flex-direction: column; gap: var(--ybm-space-x1); min-width: 120px; }
+  .tp-hide-sm { display: none; }
+  .tp-scroll-x { overflow-x: auto; }
+  .tp-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .tp-kbd { display: inline-grid; place-items: center; min-width: 20px; height: 20px; padding: 0 4px; border-radius: var(--ybm-shape-2xs); box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-neutral-muted); color: var(--ybm-color-fg-neutral-muted); font-size: var(--ybm-font-size-t01); font-family: inherit; }
+  @media (min-width: 768px) {
+    .tp-head { padding: var(--ybm-space-x8) var(--ybm-space-x6) 0; }
+    .tp-h1 { font-size: var(--ybm-font-size-t11); line-height: var(--ybm-line-height-t11); }
+    .tp-h2 { font-size: var(--ybm-font-size-t07); line-height: var(--ybm-line-height-t07); }
+    .tp-content { padding: var(--ybm-space-x6) var(--ybm-space-x6) var(--ybm-space-x12); gap: var(--ybm-space-x8); }
+    .tp-panel { padding: var(--ybm-space-x6); }
+    .tp-card.ds-card { padding: var(--ybm-space-x5); gap: var(--ybm-space-x4); }
+    .tp-g2, .tp-g3, .tp-g4, .tp-g5, .tp-g6 { gap: var(--ybm-space-x4); }
+    .tp-g2, .tp-g4, .tp-g6 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .tp-g3, .tp-g5 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .tp-hide-sm { display: revert; }
+  }
+  @media (min-width: 1024px) {
+    .tp-body--panel { flex-direction: row; }
+    .tp-body--panel > .tp-panel { flex: none; width: 360px; box-shadow: inset 1px 0 0 var(--ybm-color-stroke-neutral-muted); }
+    .tp-g3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .tp-g4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .tp-g5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+    .tp-g6 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .tp-span2 { grid-column: span 2; }
+    .tp-span3 { grid-column: span 3; }
+  }
+  @media (min-width: 1280px) { .tp-g6 { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
+
+  /* 위 메뉴 화면 */
+  .tp-topbar { position: sticky; top: 0; z-index: var(--ybm-z-sticky); background: var(--ybm-color-bg-layer-default); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); }
+  .tp-topbar > .ds-topnav { width: min(100%, 1200px); margin-inline: auto; background: none; }
+  .tp-topbar .ds-topnav__menu { display: none; }
+  @media (min-width: 768px) { .tp-topbar .ds-topnav__menu { display: flex; } }
+  .tp-wrap { width: min(100%, 1200px); margin-inline: auto; }
+  .tp-topbar ~ .tp-head, .tp-topbar ~ .tp-content { box-sizing: border-box; width: min(100%, 1280px); margin-inline: auto; }
+  /* 옆 메뉴 화면 */
+  .tp-app.tp-frame { flex-direction: row; min-height: 100vh; }
+  .tp-frame .ds-sidenav__header { justify-content: flex-start; }
+  .tp-frame > .ds-sidenav { display: none; }
+  .tp-frame__main { display: flex; flex: 1 1 auto; flex-direction: column; min-width: 0; }
+  .tp-mbar { display: flex; align-items: center; justify-content: space-between; gap: var(--ybm-space-x2); padding: var(--ybm-space-x2) var(--ybm-space-x4); background: var(--ybm-color-bg-layer-default); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); }
+  @media (min-width: 1024px) {
+    .tp-frame > .ds-sidenav { display: flex; position: sticky; top: 0; flex: none; height: 100vh; background: var(--ybm-color-bg-layer-default); box-shadow: inset -1px 0 0 var(--ybm-color-stroke-neutral-muted); }
+    .tp-mbar { display: none; }
+  }
+  .tp-org { display: flex; align-items: center; gap: var(--ybm-space-x2); padding: var(--ybm-space-x2) var(--ybm-space-x2) var(--ybm-space-x1); }
+  .tp-org__mark { display: grid; place-items: center; flex: none; width: 32px; height: 32px; border-radius: var(--ybm-shape-sm); background: var(--ybm-color-bg-neutral-solid); color: var(--ybm-color-fg-neutral-inverted); font-size: var(--ybm-font-size-t03-static); font-weight: var(--ybm-font-weight-bold); }
+  /* 고르기 상자 칸 수: 모바일은 1칸(4칸은 2칸), 768 부터 지정한 칸 */
+  .tp-sb2, .tp-sb3 { --ds-selectbox-columns: 1; } .tp-sb4 { --ds-selectbox-columns: 2; }
+  @media (min-width: 768px) { .tp-sb2 { --ds-selectbox-columns: 2; } .tp-sb3 { --ds-selectbox-columns: 3; } .tp-sb4 { --ds-selectbox-columns: 4; } }
+  /* 옆으로 미는 표는 눌리지 않게 */
+  .tp-scroll-x .ds-table { min-width: 760px; }
+  /* 공통 조각 */
+  .tp-big { font-size: var(--ybm-font-size-t11); line-height: var(--ybm-line-height-t11); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+  .tp-mid { font-size: var(--ybm-font-size-t07); line-height: var(--ybm-line-height-t07); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+  .tp-rows { display: flex; flex-direction: column; }
+  .tp-rows > * { padding-block: var(--ybm-space-x3); }
+  .tp-rows > * + * { box-shadow: inset 0 1px 0 var(--ybm-color-stroke-neutral-muted); }
+  .tp-kv { display: flex; justify-content: space-between; gap: var(--ybm-space-x3); font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); }
+  .tp-kv > :first-child { color: var(--ybm-color-fg-neutral-muted); flex: none; }
+  .tp-kv > :last-child { text-align: end; }
+  .tp-stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--ybm-space-x4); }
+  .tp-stats > * { display: flex; flex-direction: column; gap: var(--ybm-space-x1); min-width: 0; }
+  @media (min-width: 768px) { .tp-stats { grid-template-columns: repeat(var(--n, 4), minmax(0, 1fr)); } .tp-stats > * + * { padding-inline-start: var(--ybm-space-x4); box-shadow: inset 1px 0 0 var(--ybm-color-stroke-neutral-muted); } }
+  .tp-thumb-sm { flex: none; width: 96px; }
+  .tp-thumb-sm .ds-imageframe, .tp-course .ds-imageframe { border-radius: var(--ybm-shape-lg); }
+  .tp-aside-sticky { display: flex; flex-direction: column; gap: var(--ybm-space-x3); }
+  @media (min-width: 1024px) { .tp-aside-sticky { position: sticky; top: calc(var(--ybm-space-x16) + var(--ybm-space-x4)); } }
+
+  /* 커뮤니티 배치: 모바일 1열, 1024 부터 게시판 메뉴 220 | 본문, 1280 부터 오른쪽 칸 300 */
+  .tp-cm { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ybm-space-x6); box-sizing: border-box; width: min(100%, 1280px); margin-inline: auto; padding: var(--ybm-space-x5) var(--ybm-space-x4) var(--ybm-space-x12); }
+  .tp-cm__main { display: flex; flex-direction: column; gap: var(--ybm-space-x6); min-width: 0; }
+  .tp-cm__nav, .tp-cm__aside { display: none; }
+  .tp-cm__chips { overflow-x: auto; scrollbar-width: none; }
+  @media (min-width: 768px) { .tp-cm { padding: var(--ybm-space-x8) var(--ybm-space-x6) var(--ybm-space-x16); } }
+  @media (min-width: 1024px) {
+    .tp-cm:not(.tp-cm--one) { grid-template-columns: 220px minmax(0, 1fr); gap: var(--ybm-space-x8); }
+    .tp-cm__nav { display: flex; flex-direction: column; gap: var(--ybm-space-x4); position: sticky; top: calc(var(--ybm-space-x16) + var(--ybm-space-x4)); align-self: start; }
+    .tp-cm__chips { display: none; }
+  }
+  @media (min-width: 1280px) {
+    .tp-cm--aside { grid-template-columns: 220px minmax(0, 1fr) 300px; }
+    .tp-cm__aside { display: flex; flex-direction: column; gap: var(--ybm-space-x6); position: sticky; top: calc(var(--ybm-space-x16) + var(--ybm-space-x4)); align-self: start; }
+  }
+  /* 게시판 메뉴: 옆 메뉴 부품을 칸 폭에 맞춰 쓴다 */
+  .tp-cm__nav .ds-sidenav { width: auto; height: auto; background: none; }
+  .tp-cm__nav .ds-sidenav__content { padding: 0; }
+  .tp-me { display: flex; flex-direction: column; gap: var(--ybm-space-x3); }
+  /* 글 묶음: 줄 사이 선 */
+  .tp-feed { display: flex; flex-direction: column; }
+  .tp-feed > * { padding-block: var(--ybm-space-x5); }
+  .tp-feed > * + * { box-shadow: inset 0 1px 0 var(--ybm-color-stroke-neutral-muted); }
+  .tp-post { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ybm-space-x3); color: inherit; text-decoration: none; }
+  .tp-post--thumb { grid-template-columns: minmax(0, 1fr) 88px; }
+  @media (min-width: 768px) { .tp-post--thumb { grid-template-columns: minmax(0, 1fr) 120px; } }
+  .tp-post__body { display: flex; flex-direction: column; gap: var(--ybm-space-x2); min-width: 0; }
+  .tp-post__thumb .ds-imageframe { border-radius: var(--ybm-shape-lg); }
+  .tp-clamp { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .tp-who { display: flex; flex-wrap: wrap; align-items: center; gap: var(--ybm-space-x1) var(--ybm-space-x2); min-width: 0; }
+  .tp-meta { display: flex; flex-wrap: wrap; align-items: center; gap: var(--ybm-space-x1) var(--ybm-space-x3); font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); color: var(--ybm-color-fg-neutral-subtle); font-variant-numeric: tabular-nums; }
+  .tp-meta > span { display: inline-flex; align-items: center; gap: var(--ybm-space-x1); }
+  .tp-meta .ds-icon { --ds-icon-size: 14px; }
+  .tp-cnt { margin-inline-start: var(--ybm-space-x1); color: var(--ybm-color-fg-brand); font-weight: var(--ybm-font-weight-semibold); font-variant-numeric: tabular-nums; }
+  /* 순위 목록 */
+  .tp-rank { display: flex; flex-direction: column; gap: var(--ybm-space-x3); margin: 0; padding: 0; list-style: none; counter-reset: rank; }
+  .tp-rank > li { display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: var(--ybm-space-x2); counter-increment: rank; }
+  .tp-rank > li::before { content: counter(rank); font-weight: var(--ybm-font-weight-bold); font-variant-numeric: tabular-nums; color: var(--ybm-color-fg-neutral); }
+  .tp-rank a { color: inherit; text-decoration: none; }
+  .tp-hot { display: flex; flex-direction: column; gap: var(--ybm-space-x3); color: inherit; text-decoration: none; }
+  .tp-hot .ds-imageframe { border-radius: var(--ybm-shape-lg); }
+
+  .tp-article { display: flex; flex-direction: column; gap: var(--ybm-space-x5); }
+  .tp-article__text { display: flex; flex-direction: column; gap: var(--ybm-space-x4); font-size: var(--ybm-font-size-t05); line-height: var(--ybm-line-height-t05); }
+  .tp-article__text p { margin: 0; }
+  .tp-article .ds-imageframe { border-radius: var(--ybm-shape-lg); }
+  .tp-acts { display: flex; flex-wrap: wrap; align-items: center; gap: var(--ybm-space-x2); padding-block: var(--ybm-space-x4); box-shadow: inset 0 1px 0 var(--ybm-color-stroke-neutral-muted), inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); }
+  .tp-acts__end { margin-inline-start: auto; display: flex; gap: var(--ybm-space-x1); }
+  .tp-cform { display: flex; flex-direction: column; gap: var(--ybm-space-x2); }
+  .tp-cform .ds-textarea { --ds-textarea-min-height: 88px; }
+  .tp-cmts { display: flex; flex-direction: column; margin: 0; padding: 0; list-style: none; }
+  .tp-cmts > li { padding-block: var(--ybm-space-x4); }
+  .tp-cmts > li + li { box-shadow: inset 0 1px 0 var(--ybm-color-stroke-neutral-muted); }
+  .tp-cmt { display: flex; flex-direction: column; gap: var(--ybm-space-x2); }
+  .tp-cmt p { margin: 0; font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); }
+  .tp-cmt__acts { display: flex; gap: var(--ybm-space-x1); margin-inline-start: calc(-1 * var(--ybm-space-x2)); }
+  .tp-replies { display: flex; flex-direction: column; gap: var(--ybm-space-x4); margin: var(--ybm-space-x4) 0 0; padding: 0 0 0 var(--ybm-space-x8); list-style: none; }
+  .tp-replies > li { position: relative; }
+  .tp-replies > li > .ds-icon { position: absolute; left: calc(-1 * var(--ybm-space-x6)); top: 2px; --ds-icon-size: 16px; color: var(--ybm-color-fg-neutral-subtle); }
+  .tp-adj { display: flex; flex-direction: column; }
+  .tp-adj > a { display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: var(--ybm-space-x3); padding: var(--ybm-space-x3) var(--ybm-space-x1); color: inherit; text-decoration: none; font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); }
+  .tp-adj > a + a { box-shadow: inset 0 1px 0 var(--ybm-color-stroke-neutral-muted); }
+  .tp-adj > a > span:last-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+</style>
+</head>
+<body>
+<div class="tp-app"><div class="tp-topbar"><header class="ds-topnav">
+  <div class="ds-topnav__left"><a class="ds-topnav__heading" href="#" aria-label="서비스 이름 홈"><span class="tp-logo">로고</span></a><nav class="ds-topnav__menu" aria-label="주요 메뉴"><a class="ds-topnav__item" href="#">홈</a><a class="ds-topnav__item" href="#" aria-current="page">게시판</a><a class="ds-topnav__item" href="#">인기글</a><a class="ds-topnav__item" href="#">모임</a></nav></div>
+  <div class="ds-topnav__end"><button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="찾기"><i class="ds-icon ds-icon--search" aria-hidden="true"></i></button><button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="알림"><i class="ds-icon ds-icon--bell" aria-hidden="true"></i></button><span class="ds-avatar" data-size="28" role="img" aria-label="주말산책"><span class="ds-avatar__initials" aria-hidden="true">주</span></span></div>
+</header></div>
+<div class="tp-cm tp-cm--aside">
+  <aside class="tp-cm__nav" aria-label="내 정보와 게시판"><section class="ds-card tp-card" data-size="small"><div class="tp-me"><div class="tp-row"><span class="ds-avatar" data-size="40" role="img" aria-label="주말산책"><span class="ds-avatar__initials" aria-hidden="true">주</span></span><div class="tp-stack"><span class="tp-h4">주말산책</span><span class="tp-caption">글 <span class="tp-num">12</span> · 댓글 <span class="tp-num">48</span></span></div></div><button type="button" class="ds-btn" data-variant="brandSolid" data-size="small" data-width="fill"><i class="ds-icon ds-icon--pencil" aria-hidden="true"></i>글쓰기</button></div></section><nav class="ds-sidenav" aria-label="게시판"><div class="ds-sidenav__content"><div class="ds-sidenav__group"><div class="ds-sidenav__group-label">게시판</div><a class="ds-sidenav__item" href="#"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--list" aria-hidden="true"></i></span><span class="ds-sidenav__label">전체글</span></a><a class="ds-sidenav__item" href="#"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--star-solid" aria-hidden="true"></i></span><span class="ds-sidenav__label">인기글</span></a><a class="ds-sidenav__item" href="#"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--bell" aria-hidden="true"></i></span><span class="ds-sidenav__label">공지사항</span></a><a class="ds-sidenav__item" href="#"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--message-circle" aria-hidden="true"></i></span><span class="ds-sidenav__label">자유게시판</span></a><a class="ds-sidenav__item" href="#" aria-current="page"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--info" aria-hidden="true"></i></span><span class="ds-sidenav__label">질문과 답변</span></a><a class="ds-sidenav__item" href="#"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--bookmark" aria-hidden="true"></i></span><span class="ds-sidenav__label">정보 나눔</span></a><a class="ds-sidenav__item" href="#"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--thumbs-up" aria-hidden="true"></i></span><span class="ds-sidenav__label">후기</span></a><a class="ds-sidenav__item" href="#"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--users" aria-hidden="true"></i></span><span class="ds-sidenav__label">모임 모집</span></a></div></div></nav></aside>
+  <main class="tp-cm__main">
+    <article class="tp-article">
+      <nav class="ds-breadcrumbs" aria-label="현재 위치"><ol><li><a href="#">커뮤니티</a></li><li><span aria-current="page">질문과 답변</span></li></ol></nav>
+      <div class="tp-stack" style="gap: var(--ybm-space-x3)"><span class="ds-badge" data-tone="neutral">질문</span><h1 class="tp-h1">홈카페 처음인데 그라인더부터 사야 할까요?</h1>
+        <div class="tp-between"><div class="tp-who"><span class="ds-avatar" data-size="24" role="img" aria-label="커피한잔"><span class="ds-avatar__initials" aria-hidden="true">커</span></span><span class="tp-h4">커피한잔</span><span class="ds-badge" data-tone="neutral">새싹 멤버</span><span class="tp-caption">1시간 전</span></div><div class="tp-row"><span class="tp-meta"><span>조회 <span class="tp-num">842</span></span></span><button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="글 더 보기"><i class="ds-icon ds-icon--ellipsis-vertical" aria-hidden="true"></i></button></div></div>
+      </div>
+      <div class="tp-article__text">
+        <p>지금까지는 캡슐 머신만 써 봤는데, 원두를 직접 갈아서 내려 보고 싶어졌어요. 예산은 20만 원 정도예요.</p>
+        <p>그라인더를 먼저 사고 드리퍼는 싼 것으로 시작할지, 아니면 둘 다 중간 가격으로 맞출지 고민이에요. 처음 시작할 때 어떻게 하셨는지 궁금해요.</p>
+        <div class="ds-imageframe" data-ratio="16:9" aria-hidden="true"><span class="tp-ph"><img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=960&q=70" alt="" loading="lazy"></span></div>
+      </div>
+      <section class="ds-card tp-card" data-size="small"><div class="tp-between"><span class="tp-h4">투표</span><span class="tp-caption"><span class="tp-num">36</span>명 참여 · 여러 개 고를 수 있어요</span></div><div class="tp-track"><div class="tp-between"><span class="tp-sub">그라인더에 먼저 투자</span><span class="tp-num tp-sub">58%</span></div><div class="ds-progress" role="progressbar" aria-valuenow="58" aria-valuemin="0" aria-valuemax="100" aria-label="그라인더에 먼저 투자" style="--ds-progress-value: 58%" data-size="small"></div></div><div class="tp-track"><div class="tp-between"><span class="tp-sub">둘 다 중간 가격</span><span class="tp-num tp-sub">31%</span></div><div class="ds-progress" role="progressbar" aria-valuenow="31" aria-valuemin="0" aria-valuemax="100" aria-label="둘 다 중간 가격" style="--ds-progress-value: 31%" data-size="small"></div></div><div class="tp-track"><div class="tp-between"><span class="tp-sub">일단 원두를 사서 갈아 달라고 하기</span><span class="tp-num tp-sub">11%</span></div><div class="ds-progress" role="progressbar" aria-valuenow="11" aria-valuemin="0" aria-valuemax="100" aria-label="일단 원두를 사서 갈아 달라고 하기" style="--ds-progress-value: 11%" data-size="small"></div></div></section>
+      <div class="tp-acts"><button type="button" class="ds-btn" data-variant="neutralOutline" data-size="small"><i class="ds-icon ds-icon--thumbs-up" aria-hidden="true"></i>좋아요 36</button><button type="button" class="ds-btn" data-variant="neutralOutline" data-size="small"><i class="ds-icon ds-icon--bookmark" aria-hidden="true"></i>스크랩</button><div class="tp-acts__end"><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" aria-label="공유하기"><i class="ds-icon ds-icon--share" aria-hidden="true"></i></button><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" aria-label="신고하기"><i class="ds-icon ds-icon--flag" aria-hidden="true"></i></button></div></div>
+    </article>
+    <section class="tp-sec" aria-labelledby="c-title"><div class="tp-sec-head"><div class="tp-sec-head__texts"><h2 class="tp-h3" id="c-title">댓글 <span class="tp-num">18</span></h2></div><div class="tp-row"><div class="ds-segmented" role="group" aria-label="댓글 정렬" data-size="small"><button type="button" class="ds-segmented__item" aria-pressed="true">등록순</button><button type="button" class="ds-segmented__item" aria-pressed="false">최신순</button></div></div></div>
+      <div class="tp-cform"><textarea class="ds-textarea" id="c-new" placeholder="따뜻한 댓글을 남겨 주세요" aria-label="댓글 쓰기"></textarea><div class="tp-between"><span class="tp-caption"><span class="tp-num">0</span> / 500</span><button type="button" class="ds-btn" data-variant="neutralSolid" data-size="small">등록</button></div></div>
+      <ul class="tp-cmts">
+        <li><div class="tp-cmt"><div class="tp-between"><div class="tp-who"><span class="ds-avatar" data-size="24" role="img" aria-label="하늘바라기"><span class="ds-avatar__initials" aria-hidden="true">하</span></span><span class="tp-h4">하늘바라기</span><span class="tp-caption">50분 전</span></div><button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="댓글 더 보기"><i class="ds-icon ds-icon--ellipsis" aria-hidden="true"></i></button></div><p>그라인더가 맛을 제일 많이 바꿔요. 드리퍼는 플라스틱도 충분해요.</p><div class="tp-cmt__acts"><button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall"><i class="ds-icon ds-icon--thumbs-up" aria-hidden="true"></i>좋아요 12</button><button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall">답글</button></div></div><ul class="tp-replies"><li><i class="ds-icon ds-icon--corner-down-right" aria-hidden="true"></i><div class="tp-cmt"><div class="tp-between"><div class="tp-who"><span class="ds-avatar" data-size="24" role="img" aria-label="커피한잔"><span class="ds-avatar__initials" aria-hidden="true">커</span></span><span class="tp-h4">커피한잔</span><span class="tp-caption">40분 전</span><span class="ds-badge" data-tone="brand">글쓴이</span></div><button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="답글 더 보기"><i class="ds-icon ds-icon--ellipsis" aria-hidden="true"></i></button></div><p>플라스틱도 괜찮군요. 그럼 그라인더에 더 쓸게요!</p><div class="tp-cmt__acts"><button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall"><i class="ds-icon ds-icon--thumbs-up" aria-hidden="true"></i>좋아요 3</button></div></div></li></ul></li>
+        <li><div class="tp-cmt"><div class="tp-between"><div class="tp-who"><span class="ds-avatar" data-size="24" role="img" aria-label="주말산책"><span class="ds-avatar__initials" aria-hidden="true">주</span></span><span class="tp-h4">주말산책</span><span class="tp-caption">35분 전</span></div><button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="댓글 더 보기"><i class="ds-icon ds-icon--ellipsis" aria-hidden="true"></i></button></div><p>저는 핸드 그라인더로 시작했어요. 아침마다 가는 시간이 은근히 좋아요.</p><div class="tp-cmt__acts"><button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall"><i class="ds-icon ds-icon--thumbs-up" aria-hidden="true"></i>좋아요 8</button><button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall">답글</button></div></div></li>
+        <li><div class="tp-cmt"><div class="tp-between"><div class="tp-who"><span class="ds-avatar" data-size="24" role="img" aria-label="책읽는밤"><span class="ds-avatar__initials" aria-hidden="true">책</span></span><span class="tp-h4">책읽는밤</span><span class="tp-caption">12분 전</span></div><button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="댓글 더 보기"><i class="ds-icon ds-icon--ellipsis" aria-hidden="true"></i></button></div><p>원두는 볶은 날짜를 꼭 보세요. 2주 안쪽이 맛있어요.</p><div class="tp-cmt__acts"><button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall"><i class="ds-icon ds-icon--thumbs-up" aria-hidden="true"></i>좋아요 5</button><button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall">답글</button></div></div></li>
+      </ul>
+      <button type="button" class="ds-btn" data-variant="neutralWeak" data-size="small" data-width="fill">댓글 더 보기<i class="ds-icon ds-icon--chevron-down" aria-hidden="true"></i></button>
+    </section>
+    <nav class="tp-adj" aria-label="이전, 다음 글"><a href="#"><span class="tp-caption">이전 글</span><span>반려식물 잎이 노랗게 변해요, 물을 줄여야 할까요?</span></a><a href="#"><span class="tp-caption">다음 글</span><span>도서관 전자책 무료로 빌리는 법</span></a></nav>
+  </main>
+  <aside class="tp-cm__aside" aria-label="이 게시판 인기글">
+    <section class="ds-card tp-card" data-size="small"><div class="tp-stack" style="gap: var(--ybm-space-x4)"><span class="tp-h3">이 게시판 인기글</span><ol class="tp-rank"><li><a href="#" class="tp-stack"><span class="tp-h4 tp-clamp">처음 가 본 둘레길, 생각보다 쉬웠어요</span><span class="tp-caption">댓글 <span class="tp-num">42</span></span></a></li><li><a href="#" class="tp-stack"><span class="tp-h4 tp-clamp">홈카페 원두 추천해 주세요</span><span class="tp-caption">댓글 <span class="tp-num">31</span></span></a></li><li><a href="#" class="tp-stack"><span class="tp-h4 tp-clamp">이번 주말 비 온대요, 실내 데이트 어디 가요?</span><span class="tp-caption">댓글 <span class="tp-num">28</span></span></a></li><li><a href="#" class="tp-stack"><span class="tp-h4 tp-clamp">반려식물 잎이 노랗게 변해요</span><span class="tp-caption">댓글 <span class="tp-num">19</span></span></a></li><li><a href="#" class="tp-stack"><span class="tp-h4 tp-clamp">책 모임 3월 도서 투표 결과</span><span class="tp-caption">댓글 <span class="tp-num">16</span></span></a></li></ol></div></section>
+    <section class="ds-card tp-card" data-size="small"><div class="tp-stack" style="gap: var(--ybm-space-x3)"><div class="tp-row"><span class="ds-avatar" data-size="40" role="img" aria-label="커피한잔"><span class="ds-avatar__initials" aria-hidden="true">커</span></span><div class="tp-stack"><span class="tp-h4">커피한잔</span><span class="tp-caption">글 <span class="tp-num">8</span> · 댓글 <span class="tp-num">31</span></span></div></div><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="small" data-width="fill">다른 글 보기</button></div></section>
+  </aside>
+</div></div>
+</body>
+</html>
