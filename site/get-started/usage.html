@@ -8,9 +8,9 @@
 <script>try { var t = localStorage.getItem("ybm-site-theme"); if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.dataset.theme = "dark"; } catch (e) {}</script>
 <link rel="icon" href="../assets/logo-ybmnet.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../dist/ybm-ds.css">
-<link rel="stylesheet" href="../assets/site.css?v=c4daaac9">
+<link rel="stylesheet" href="../assets/site.css?v=61a95018">
 <script src="../../dist/ybm-ds.js" defer></script>
-<script src="../assets/site.js?v=c4daaac9" defer></script>
+<script src="../assets/site.js?v=61a95018" defer></script>
 </head>
 <body class="site">
 <a class="site-skip" href="#main">본문 바로가기</a>
@@ -40,25 +40,19 @@
 <div class="site-scrim" data-site-close></div>
 <main class="site-main" id="main">
 <article class="site-doc">
-<header class="site-head"><h1 class="site-h1">Usage</h1><p class="site-lead">DS를 불러오는 순서와 모양을 바꾸는 방법, 화면 모드와 반응형 기준을 정리했습니다.</p><div class="site-toc-select"><button type="button" class="ds-select" data-size="medium" aria-haspopup="listbox" aria-expanded="false" aria-controls="site-toc-list" aria-label="이 페이지 목차" data-site-toc><span class="ds-select__value">불러오는 순서</span></button><div class="ds-select-content site-toc-list" id="site-toc-list" role="listbox" data-size="medium" hidden><ul class="ds-select-list"><li><button type="button" class="ds-select-item" role="option" data-site-toc-go="order" aria-selected="true"><span class="ds-select-item__body"><span class="ds-select-item__label">불러오는 순서</span></span></button></li><li><button type="button" class="ds-select-item" role="option" data-site-toc-go="custom"><span class="ds-select-item__body"><span class="ds-select-item__label">모양 바꾸기</span></span></button></li><li><button type="button" class="ds-select-item" role="option" data-site-toc-go="state"><span class="ds-select-item__body"><span class="ds-select-item__label">상태 나타내기</span></span></button></li><li><button type="button" class="ds-select-item" role="option" data-site-toc-go="theme"><span class="ds-select-item__body"><span class="ds-select-item__label">화면 모드</span></span></button></li><li><button type="button" class="ds-select-item" role="option" data-site-toc-go="breakpoint"><span class="ds-select-item__body"><span class="ds-select-item__label">반응형 기준점</span></span></button></li><li><button type="button" class="ds-select-item" role="option" data-site-toc-go="korean"><span class="ds-select-item__body"><span class="ds-select-item__label">한글 줄바꿈</span></span></button></li><li><button type="button" class="ds-select-item" role="option" data-site-toc-go="icon"><span class="ds-select-item__body"><span class="ds-select-item__label">아이콘</span></span></button></li></ul></div></div>
+<header class="site-head"><h1 class="site-h1">Usage</h1><p class="site-lead">DS를 불러오는 순서, 화면 모드와 반응형 기준을 정리했습니다.</p><div class="site-toc-select"><button type="button" class="ds-select" data-size="medium" aria-haspopup="listbox" aria-expanded="false" aria-controls="site-toc-list" aria-label="이 페이지 목차" data-site-toc><span class="ds-select__value">불러오는 순서</span></button><div class="ds-select-content site-toc-list" id="site-toc-list" role="listbox" data-size="medium" hidden><ul class="ds-select-list"><li><button type="button" class="ds-select-item" role="option" data-site-toc-go="order" aria-selected="true"><span class="ds-select-item__body"><span class="ds-select-item__label">불러오는 순서</span></span></button></li><li><button type="button" class="ds-select-item" role="option" data-site-toc-go="state"><span class="ds-select-item__body"><span class="ds-select-item__label">상태 나타내기</span></span></button></li><li><button type="button" class="ds-select-item" role="option" data-site-toc-go="theme"><span class="ds-select-item__body"><span class="ds-select-item__label">화면 모드</span></span></button></li><li><button type="button" class="ds-select-item" role="option" data-site-toc-go="breakpoint"><span class="ds-select-item__body"><span class="ds-select-item__label">반응형 기준점</span></span></button></li><li><button type="button" class="ds-select-item" role="option" data-site-toc-go="korean"><span class="ds-select-item__body"><span class="ds-select-item__label">한글 줄바꿈</span></span></button></li><li><button type="button" class="ds-select-item" role="option" data-site-toc-go="icon"><span class="ds-select-item__body"><span class="ds-select-item__label">아이콘</span></span></button></li></ul></div></div>
 </header>
 
 <h2 id="order">불러오는 순서<a class="site-anchor" href="#order" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
 <p>DS를 먼저, 서비스 CSS를 그다음에 불러옵니다. DS 전체가 CSS 레이어 안에 들어 있어서 레이어 밖에 쓴 서비스 CSS는 선택자 길이와 상관없이 항상 DS를 이깁니다. 그래서 <code>!important</code>나 긴 선택자로 다툴 필요가 없습니다.</p>
+<p>서비스 CSS에서는 컴포넌트 변수(<code>--ds-*</code>)와 시맨틱 색(<code>bg</code>, <code>fg</code>, <code>stroke</code>)만 덮어씁니다. 새 <code>ds-</code> 클래스를 만들거나 <code>!important</code>를 쓰지 않습니다.</p>
 <figure class="ds-codeblock">
-  <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">css</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
-  <pre class="ds-codeblock__code"><code>@layer ybm.tokens, ybm.base, ybm.icons, ybm.components, ybm.utilities;</code></pre>
-</figure>
+  <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">html</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
+  <pre class="ds-codeblock__code"><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;https://luvms012-rgb.github.io/ybm-ds/dist/ybm-ds.css&quot;&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;my-service.css&quot;&gt;  &lt;!-- 서비스 CSS는 항상 DS 다음 --&gt;
 
-<h2 id="custom">모양 바꾸기<a class="site-anchor" href="#custom" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
-<ul class="site-list">
-  <li>서비스는 <b>컴포넌트 변수(<code>--ds-*</code>)만 바꿔서</b> 모양을 조정합니다. 새 <code>ds-</code> 클래스를 만들거나 <code>!important</code>를 쓰지 않습니다.</li>
-  <li>각 컴포넌트에서 바꿀 수 있는 변수는 컴포넌트 페이지의 "CSS 변수" 표에 있습니다.</li>
-  <li>팔레트는 YBM 전체가 함께 쓰고, 서비스는 시맨틱(<code>bg</code>, <code>fg</code>, <code>stroke</code>) 색과 컴포넌트 변수만 덮어씁니다.</li>
-</ul>
-<figure class="ds-codeblock">
-  <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">css</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
-  <pre class="ds-codeblock__code"><code>.my-dialog { --ds-dialog-width: 360px; }
+/* my-service.css */
+.my-dialog { --ds-dialog-width: 360px; }
 .my-banner { --ds-banner-bg: var(--ybm-color-bg-brand-weak); }</code></pre>
 </figure>
 
@@ -113,7 +107,7 @@
 </footer>
 </article>
 </main>
-<aside class="site-toc" aria-label="이 페이지 목차"><nav><span class="site-toc__indicator" aria-hidden="true"></span><a href="#order">불러오는 순서</a><a href="#custom">모양 바꾸기</a><a href="#state">상태 나타내기</a><a href="#theme">화면 모드</a><a href="#breakpoint">반응형 기준점</a><a href="#korean">한글 줄바꿈</a><a href="#icon">아이콘</a></nav></aside>
+<aside class="site-toc" aria-label="이 페이지 목차"><nav><span class="site-toc__indicator" aria-hidden="true"></span><a href="#order">불러오는 순서</a><a href="#state">상태 나타내기</a><a href="#theme">화면 모드</a><a href="#breakpoint">반응형 기준점</a><a href="#korean">한글 줄바꿈</a><a href="#icon">아이콘</a></nav></aside>
 </div>
 </body>
 </html>

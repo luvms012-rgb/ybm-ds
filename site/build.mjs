@@ -365,10 +365,6 @@ ${example(`<div class="pv-stage"><button class="ds-btn" data-variant="brandSolid
 <p>html 요소에 속성 하나만 붙이면 모든 색이 어두운 화면용으로 바뀝니다. 오른쪽 위 달 모양 버튼으로 이 사이트에서도 바로 볼 수 있습니다.</p>
 ${codeblock('<html lang="ko" data-theme="dark">')}
 
-<h2 id="custom">모양 바꾸기</h2>
-<p>서비스 CSS는 DS 다음에 불러오고, 새 클래스를 만들지 말고 컴포넌트 변수(<code>--ds-*</code>)만 덮어씁니다. 자세한 내용은 <a class="ds-link" href="get-started/usage.html">Usage</a>에 있습니다.</p>
-${codeblock(`<link rel="stylesheet" href="${PUBLIC}/dist/ybm-ds.css">\n<link rel="stylesheet" href="my-service.css">  <!-- 서비스 CSS는 항상 DS 다음 -->\n\n/* my-service.css */\n.my-dialog { --ds-dialog-width: 360px; }`)}
-
 <h2 id="other">다른 설치 방법</h2>
 <p>개발자가 버전을 고정하거나 파일을 직접 가지고 있어야 할 때 씁니다.</p>
 <h3>버전 고정하기</h3>
@@ -383,7 +379,7 @@ ${codeblock(`// tailwind.config.js - ybm-ds/tokens/tailwind.preset.js를 프로�
 
 <h2 id="next">다음 단계</h2>
 <div class="site-grid">
-  <a class="site-card" href="get-started/usage.html"><div class="site-card__body"><p class="site-card__title">Usage</p><p class="site-card__desc">불러오는 순서, 커스텀, 다크 모드, 반응형 기준점을 알아봅니다.</p></div></a>
+  <a class="site-card" href="get-started/usage.html"><div class="site-card__body"><p class="site-card__title">Usage</p><p class="site-card__desc">불러오는 순서, 화면 모드, 반응형 기준점을 알아봅니다.</p></div></a>
   <a class="site-card" href="{root}foundations/${FOUND[0][0]}.html"><div class="site-card__body"><p class="site-card__title">Foundations</p><p class="site-card__desc">색, 글자, 간격처럼 모든 화면의 바탕이 되는 토큰을 봅니다.</p></div></a>
   <a class="site-card" href="components/index.html"><div class="site-card__body"><p class="site-card__title">Components</p><p class="site-card__desc">부품마다 미리보기, 사용법, 속성, 사용 지침을 봅니다.</p></div></a>
   <a class="site-card" href="templates/index.html"><div class="site-card__body"><p class="site-card__title">Templates</p><p class="site-card__desc">자주 쓰는 화면을 통째로 복사해 출발점으로 씁니다.</p></div></a>
@@ -394,19 +390,12 @@ ${codeblock(`// tailwind.config.js - ybm-ds/tokens/tailwind.preset.js를 프로�
 const bpRows = [['sm', '480px', '큰 휴대폰'], ['md', '768px', '태블릿, PC 부품으로 바뀌는 기준'], ['lg', '1280px', '넓은 PC, 3단 배치'], ['xl', '1440px', '아주 넓은 화면']];
 write({
   file: 'get-started/usage.html', section: 'get-started', title: 'Usage', pager: gsPager('get-started/usage.html'),
-  body: `<header><h1 class="site-h1">Usage</h1><p class="site-lead">DS를 불러오는 순서와 모양을 바꾸는 방법, 화면 모드와 반응형 기준을 정리했습니다.</p></header>
+  body: `<header><h1 class="site-h1">Usage</h1><p class="site-lead">DS를 불러오는 순서, 화면 모드와 반응형 기준을 정리했습니다.</p></header>
 
 <h2 id="order">불러오는 순서</h2>
 <p>DS를 먼저, 서비스 CSS를 그다음에 불러옵니다. DS 전체가 CSS 레이어 안에 들어 있어서 레이어 밖에 쓴 서비스 CSS는 선택자 길이와 상관없이 항상 DS를 이깁니다. 그래서 <code>!important</code>나 긴 선택자로 다툴 필요가 없습니다.</p>
-${codeblock('@layer ybm.tokens, ybm.base, ybm.icons, ybm.components, ybm.utilities;', 'css')}
-
-<h2 id="custom">모양 바꾸기</h2>
-<ul class="site-list">
-  <li>서비스는 <b>컴포넌트 변수(<code>--ds-*</code>)만 바꿔서</b> 모양을 조정합니다. 새 <code>ds-</code> 클래스를 만들거나 <code>!important</code>를 쓰지 않습니다.</li>
-  <li>각 컴포넌트에서 바꿀 수 있는 변수는 컴포넌트 페이지의 "CSS 변수" 표에 있습니다.</li>
-  <li>팔레트는 YBM 전체가 함께 쓰고, 서비스는 시맨틱(<code>bg</code>, <code>fg</code>, <code>stroke</code>) 색과 컴포넌트 변수만 덮어씁니다.</li>
-</ul>
-${codeblock('.my-dialog { --ds-dialog-width: 360px; }\n.my-banner { --ds-banner-bg: var(--ybm-color-bg-brand-weak); }', 'css')}
+<p>서비스 CSS에서는 컴포넌트 변수(<code>--ds-*</code>)와 시맨틱 색(<code>bg</code>, <code>fg</code>, <code>stroke</code>)만 덮어씁니다. 새 <code>ds-</code> 클래스를 만들거나 <code>!important</code>를 쓰지 않습니다.</p>
+${codeblock(`<link rel="stylesheet" href="${PUBLIC}/dist/ybm-ds.css">\n<link rel="stylesheet" href="my-service.css">  <!-- 서비스 CSS는 항상 DS 다음 -->\n\n/* my-service.css */\n.my-dialog { --ds-dialog-width: 360px; }\n.my-banner { --ds-banner-bg: var(--ybm-color-bg-brand-weak); }`)}
 
 <h2 id="state">상태 나타내기</h2>
 <p>CSS는 Figma 속성 이름을 그대로 <code>data-*</code> 속성으로 씁니다. 상태는 가능한 한 HTML 기본 속성으로 표현해서 접근성이 함께 맞춰지게 했습니다.</p>
