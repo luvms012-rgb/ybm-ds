@@ -268,8 +268,10 @@ body[data-side-open] .site-scrim { opacity: 1; pointer-events: auto; }
 @media (min-width: 1280px) { .site-tiles { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 .site-tile { display: flex; flex-direction: column; gap: var(--ybm-space-x2); color: var(--ybm-color-fg-neutral); text-decoration: none; }
 .site-tile[hidden] { display: none; }
-.site-tile__thumb { position: relative; aspect-ratio: 16 / 9; overflow: hidden; border-radius: var(--ybm-shape-sm); background: var(--ybm-color-bg-neutral); transition: background-color var(--ybm-duration-fast) var(--ybm-easing-standard); }
-.site-tile:hover .site-tile__thumb { background: var(--ybm-color-bg-neutral-weak-pressed); }
+.site-tile__thumb { --site-thumb-bg: var(--ybm-color-bg-neutral); position: relative; aspect-ratio: 16 / 9; overflow: hidden; border-radius: var(--ybm-shape-sm); background: var(--site-thumb-bg); transition: background-color var(--ybm-duration-fast) var(--ybm-easing-standard); }
+.site-tile:hover .site-tile__thumb { --site-thumb-bg: var(--ybm-color-bg-neutral-weak-pressed); }
+/* 겹친 Avatar 의 경계 고리는 그림 바탕색으로 (흰 고리가 회색 바탕에서 테두리처럼 보이지 않게) */
+.site-tile__inner .ds-avatar-group { --ds-avatar-group-ring-color: var(--site-thumb-bg); }
 .site-tile__inner { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: var(--ybm-space-x6); pointer-events: none; }
 /* 대표 그림 안의 떠 있는 창(대화상자, 시트, 알림, 옆 패널)은 화면에 고정하지 않고 제자리에 그린다 */
 .site-tile__inner :is(.ds-dialog, .ds-bottomsheet, .ds-menusheet, .ds-sidepanel, .ds-snackbar) { position: relative; inset: auto; left: auto; bottom: auto; translate: none; margin: 0; display: flex; animation: none; box-shadow: var(--ybm-elevation-overlay); }

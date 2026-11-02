@@ -8,9 +8,9 @@
 <script>try { var t = localStorage.getItem("ybm-site-theme"); if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.dataset.theme = "dark"; } catch (e) {}</script>
 <link rel="icon" href="../assets/logo-ybmnet.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../dist/ybm-ds.css">
-<link rel="stylesheet" href="../assets/site.css?v=b5726b95">
+<link rel="stylesheet" href="../assets/site.css?v=4c4744f8">
 <script src="../../dist/ybm-ds.js" defer></script>
-<script src="../assets/site.js?v=b5726b95" defer></script>
+<script src="../assets/site.js?v=4c4744f8" defer></script>
 </head>
 <body class="site">
 <a class="site-skip" href="#main">본문 바로가기</a>
@@ -45,7 +45,7 @@
 
 <h2 id="order">불러오는 순서<a class="site-anchor" href="#order" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
 <p>DS를 먼저, 서비스 CSS를 그다음에 불러옵니다. DS 전체가 CSS 레이어 안에 들어 있어서 레이어 밖에 쓴 서비스 CSS는 선택자 길이와 상관없이 항상 DS를 이깁니다. 그래서 <code>!important</code>나 긴 선택자로 다툴 필요가 없습니다.</p>
-<p>서비스 CSS에서는 컴포넌트 변수(<code>--ds-*</code>)와 시맨틱 색(<code>bg</code>, <code>fg</code>, <code>stroke</code>)만 덮어씁니다. 새 <code>ds-</code> 클래스를 만들거나 <code>!important</code>를 쓰지 않습니다.</p>
+<p>서비스 CSS에서는 컴포넌트 변수(<code>--ds-*</code>)와 시맨틱 색(<code>bg</code>, <code>fg</code>, <code>stroke</code>)만 덮어씁니다. 새 <code>ds-</code> 클래스를 만들거나 <code>!important</code>를 쓰지 않습니다. 브랜드 색도 바꿀 수 있습니다(<a class="ds-link" href="../foundations/color.html#brand">Color</a>).</p>
 <figure class="ds-codeblock">
   <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">html</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
   <pre class="ds-codeblock__code"><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;https://luvms012-rgb.github.io/ybm-ds/dist/ybm-ds.css&quot;&gt;

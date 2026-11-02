@@ -4,9 +4,16 @@
   var KEY = "ybm-site-theme";
   var root = document.documentElement;
 
+  // 템플릿 미리보기에도 가이드 모노톤(brand-mono.css)을 넣는다. 주소는 이 스크립트 옆
+  var MONO_CSS = document.currentScript ? document.currentScript.src.replace(/site\.js(\?.*)?$/, "brand-mono.css$1") : "";
+
   function frames() { return [].slice.call(document.querySelectorAll("iframe[data-site-frame]")); }
   function themeFrame(f) {
-    try { var d = f.contentDocument; if (!d) return; if (root.dataset.theme) d.documentElement.dataset.theme = root.dataset.theme; else delete d.documentElement.dataset.theme; } catch (e) {}
+    try {
+      var d = f.contentDocument; if (!d) return;
+      if (root.dataset.theme) d.documentElement.dataset.theme = root.dataset.theme; else delete d.documentElement.dataset.theme;
+      if (MONO_CSS && d.head && !d.getElementById("site-brand-mono")) { var l = d.createElement("link"); l.id = "site-brand-mono"; l.rel = "stylesheet"; l.href = MONO_CSS; d.head.appendChild(l); }
+    } catch (e) {}
   }
   // 처음에는 기기의 라이트 / 다크 설정을 따르고, 버튼으로 고르면 그 선택("dark" 또는 "light")을 기억해 우선한다
   var osDark = window.matchMedia ? matchMedia("(prefers-color-scheme: dark)") : null;

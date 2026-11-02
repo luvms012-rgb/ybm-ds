@@ -12,7 +12,7 @@ import { linkPlan } from '../tokens/links.mjs';
 
 const SITE = path.dirname(fileURLToPath(import.meta.url));
 // 사이트 CSS / JS 주소에 붙이는 버전 - 내용이 바뀌면 값이 바뀌어 브라우저가 예전 파일을 쓰지 않는다
-const ASSET_V = crypto.createHash('sha1').update(['src/site.css', 'src/site.js', 'build.mjs'].map((f) => fs.readFileSync(path.join(SITE, f))).join('')).digest('hex').slice(0, 8);
+const ASSET_V = crypto.createHash('sha1').update(['src/site.css', 'src/site.js', 'src/brand-mono.css', 'build.mjs'].map((f) => fs.readFileSync(path.join(SITE, f))).join('')).digest('hex').slice(0, 8);
 const DS = path.resolve(SITE, '..');
 const read = (p) => fs.readFileSync(path.join(DS, p), 'utf8');
 const readJson = (p) => JSON.parse(read(p));
@@ -394,7 +394,7 @@ write({
 
 <h2 id="order">불러오는 순서</h2>
 <p>DS를 먼저, 서비스 CSS를 그다음에 불러옵니다. DS 전체가 CSS 레이어 안에 들어 있어서 레이어 밖에 쓴 서비스 CSS는 선택자 길이와 상관없이 항상 DS를 이깁니다. 그래서 <code>!important</code>나 긴 선택자로 다툴 필요가 없습니다.</p>
-<p>서비스 CSS에서는 컴포넌트 변수(<code>--ds-*</code>)와 시맨틱 색(<code>bg</code>, <code>fg</code>, <code>stroke</code>)만 덮어씁니다. 새 <code>ds-</code> 클래스를 만들거나 <code>!important</code>를 쓰지 않습니다.</p>
+<p>서비스 CSS에서는 컴포넌트 변수(<code>--ds-*</code>)와 시맨틱 색(<code>bg</code>, <code>fg</code>, <code>stroke</code>)만 덮어씁니다. 새 <code>ds-</code> 클래스를 만들거나 <code>!important</code>를 쓰지 않습니다. 브랜드 색도 바꿀 수 있습니다(<a class="ds-link" href="{root}foundations/color.html#brand">Color</a>).</p>
 ${codeblock(`<link rel="stylesheet" href="${PUBLIC}/dist/ybm-ds.css">\n<link rel="stylesheet" href="my-service.css">  <!-- 서비스 CSS는 항상 DS 다음 -->\n\n/* my-service.css */\n.my-dialog { --ds-dialog-width: 360px; }\n.my-banner { --ds-banner-bg: var(--ybm-color-bg-brand-weak); }`)}
 
 <h2 id="state">상태 나타내기</h2>
@@ -448,6 +448,9 @@ const foundPages = {
     title: '색', lead: '색은 화면의 위계, 상태, 브랜드를 구분해 보여 주도록 돕습니다.',
     body: `<h2 id="overview">개요</h2>
 <p>화면에는 시맨틱 색(<code>bg</code>, <code>fg</code>, <code>stroke</code>)만 씁니다. 팔레트(<code>--ybm-color-palette-*</code>)는 시맨틱 색을 만드는 원료라 화면에 직접 쓰지 않습니다. 색을 토큰으로만 쓰면 <code>data-theme="dark"</code> 하나로 다크 모드가 맞춰집니다. 아래 표의 값은 라이트 / 다크 순서입니다.</p>
+<h2 id="brand">브랜드 색</h2>
+<p>이 가이드는 브랜드 색 대신 모노톤으로 보여 줍니다. 브랜드 색은 서비스마다 바꿀 수 있습니다. 팔레트 <code>--ybm-color-palette-brand-100</code> ~ <code>1000</code>만 덮어쓰면 버튼, 체크박스, 링크처럼 브랜드 색을 쓰는 곳이 모두 따라 바뀝니다.</p>
+${codeblock(`/* my-service.css - DS 다음에 불러온다 */\n:root {\n  --ybm-color-palette-brand-100: #e6f6ee;  /* 옅은 배경 */\n  --ybm-color-palette-brand-600: #12a150;  /* 주 버튼, 링크 */\n  --ybm-color-palette-brand-700: #0d7d3e;  /* 눌림, 진한 글자 */\n  /* 200 ~ 500, 800 ~ 1000 도 같은 색의 단계로 채운다 */\n}\n:root[data-theme="dark"] {\n  /* 다크 모드는 같은 단계를 뒤집어 넣는다 (다크 100 = 라이트 1000) */\n}`, 'css')}
 ${colorGroups.map(([k, label]) => `<h2 id="${k}">${label}</h2>\n${colorTable(k)}`).join('\n')}`,
   },
   typography: {
@@ -715,6 +718,8 @@ ${used.length ? `<h2 id="components">쓴 컴포넌트</h2><div class="site-links
 /* ---------------------------------------------------------------- 자산 */
 fs.mkdirSync(path.join(SITE, 'assets'), { recursive: true });
 fs.copyFileSync(path.join(SITE, 'src/site.js'), path.join(SITE, 'assets/site.js'));
+// 가이드 모노톤: 사이트는 site.css 끝에 붙이고, 템플릿 미리보기 iframe 은 site.js 가 이 파일을 넣는다
+fs.copyFileSync(path.join(SITE, 'src/brand-mono.css'), path.join(SITE, 'assets/brand-mono.css'));
 fs.copyFileSync(path.join(SITE, 'src/logo-ybmnet.svg'), path.join(SITE, 'assets/logo-ybmnet.svg'));
 fs.writeFileSync(path.join(SITE, 'assets/lucide-icons.js'), `/* Lucide ${lucide.version} (ISC) - 생성물: site/src/lucide-icons.json */\nwindow.LUCIDE = ${JSON.stringify(lucide)};\n`);
 fs.copyFileSync(path.join(SITE, 'src/lucide-LICENSE.txt'), path.join(SITE, 'assets/lucide-LICENSE.txt'));
@@ -727,6 +732,7 @@ const SITE_ICONS = {
 };
 const svgUri = (b) => 'url("data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + b + '</svg>') + '")';
 fs.writeFileSync(path.join(SITE, 'assets/site.css'), fs.readFileSync(path.join(SITE, 'src/site.css'), 'utf8')
+  + '\n' + fs.readFileSync(path.join(SITE, 'src/brand-mono.css'), 'utf8')
   + '\n/* 사이트 전용 아이콘 - build.mjs가 붙인다 */\n'
   + Object.entries(SITE_ICONS).map(([n, b]) => `.site-i--${n} { --ds-icon: ${svgUri(b)}; }`).join('\n') + '\n');
 

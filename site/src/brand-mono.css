@@ -1,0 +1,26 @@
+/* 가이드는 브랜드 색 없이 모노톤으로 보여 준다 (2026-11-02 사용자 "가이드에 브랜드 컬러 적용 X").
+   브랜드 역할 색을 같은 자리의 neutral 색으로 바꾼다. 서비스는 palette/brand 를 바꿔 자기 브랜드 색을 쓴다(Color 페이지).
+   site.css 끝에 붙고, 템플릿 미리보기 iframe 에는 site.js 가 assets/brand-mono.css 로 넣는다.
+   body 에 두는 이유: 토큰은 :root 에서 이미 값이 정해지므로 그 아래(body)에서 다시 정해야 라이트 / 다크 모두 따라간다 */
+body {
+  --ybm-color-bg-brand-solid: var(--ybm-color-bg-neutral-solid);
+  --ybm-color-bg-brand-solid-pressed: var(--ybm-color-bg-neutral-solid-pressed);
+  --ybm-color-bg-brand-weak: var(--ybm-color-bg-neutral-weak-alpha);
+  --ybm-color-bg-brand-weak-pressed: var(--ybm-color-bg-neutral-weak-alpha-pressed);
+  --ybm-color-fg-brand: var(--ybm-color-fg-neutral);
+  --ybm-color-fg-brand-contrast: var(--ybm-color-fg-neutral);
+  --ybm-color-fg-on-brand-solid: var(--ybm-color-fg-on-neutral-solid);
+  --ybm-color-stroke-brand-solid: var(--ybm-color-stroke-neutral-solid);
+  --ybm-color-stroke-brand-weak: var(--ybm-color-stroke-neutral-weak);
+  --ybm-color-chart-series-1: var(--ybm-color-bg-neutral-solid);
+  --ybm-color-palette-brand-100: var(--ybm-color-palette-gray-100);
+  --ybm-color-palette-brand-200: var(--ybm-color-palette-gray-200);
+  --ybm-color-palette-brand-300: var(--ybm-color-palette-gray-300);
+  --ybm-color-palette-brand-400: var(--ybm-color-palette-gray-400);
+  --ybm-color-palette-brand-500: var(--ybm-color-palette-gray-500);
+  --ybm-color-palette-brand-600: var(--ybm-color-palette-gray-600);
+  --ybm-color-palette-brand-700: var(--ybm-color-palette-gray-700);
+  --ybm-color-palette-brand-800: var(--ybm-color-palette-gray-800);
+  --ybm-color-palette-brand-900: var(--ybm-color-palette-gray-900);
+  --ybm-color-palette-brand-1000: var(--ybm-color-palette-gray-1000);
+}

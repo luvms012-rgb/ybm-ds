@@ -268,8 +268,10 @@ body[data-side-open] .site-scrim { opacity: 1; pointer-events: auto; }
 @media (min-width: 1280px) { .site-tiles { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 .site-tile { display: flex; flex-direction: column; gap: var(--ybm-space-x2); color: var(--ybm-color-fg-neutral); text-decoration: none; }
 .site-tile[hidden] { display: none; }
-.site-tile__thumb { position: relative; aspect-ratio: 16 / 9; overflow: hidden; border-radius: var(--ybm-shape-sm); background: var(--ybm-color-bg-neutral); transition: background-color var(--ybm-duration-fast) var(--ybm-easing-standard); }
-.site-tile:hover .site-tile__thumb { background: var(--ybm-color-bg-neutral-weak-pressed); }
+.site-tile__thumb { --site-thumb-bg: var(--ybm-color-bg-neutral); position: relative; aspect-ratio: 16 / 9; overflow: hidden; border-radius: var(--ybm-shape-sm); background: var(--site-thumb-bg); transition: background-color var(--ybm-duration-fast) var(--ybm-easing-standard); }
+.site-tile:hover .site-tile__thumb { --site-thumb-bg: var(--ybm-color-bg-neutral-weak-pressed); }
+/* 겹친 Avatar 의 경계 고리는 그림 바탕색으로 (흰 고리가 회색 바탕에서 테두리처럼 보이지 않게) */
+.site-tile__inner .ds-avatar-group { --ds-avatar-group-ring-color: var(--site-thumb-bg); }
 .site-tile__inner { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: var(--ybm-space-x6); pointer-events: none; }
 /* 대표 그림 안의 떠 있는 창(대화상자, 시트, 알림, 옆 패널)은 화면에 고정하지 않고 제자리에 그린다 */
 .site-tile__inner :is(.ds-dialog, .ds-bottomsheet, .ds-menusheet, .ds-sidepanel, .ds-snackbar) { position: relative; inset: auto; left: auto; bottom: auto; translate: none; margin: 0; display: flex; animation: none; box-shadow: var(--ybm-elevation-overlay); }
@@ -349,6 +351,33 @@ body[data-side-open] .site-scrim { opacity: 1; pointer-events: auto; }
 
 /* AI 안내문처럼 글이 긴 코드 칸은 한글이 읽기 쉽게 본문 글꼴 (DS 변수 --ds-font-mono 만 바꾼다) */
 .site-doc .ds-codeblock[data-wrap] { --ds-font-mono: var(--ybm-font-family-base); }
+
+/* 가이드는 브랜드 색 없이 모노톤으로 보여 준다 (2026-11-02 사용자 "가이드에 브랜드 컬러 적용 X").
+   브랜드 역할 색을 같은 자리의 neutral 색으로 바꾼다. 서비스는 palette/brand 를 바꿔 자기 브랜드 색을 쓴다(Color 페이지).
+   site.css 끝에 붙고, 템플릿 미리보기 iframe 에는 site.js 가 assets/brand-mono.css 로 넣는다.
+   body 에 두는 이유: 토큰은 :root 에서 이미 값이 정해지므로 그 아래(body)에서 다시 정해야 라이트 / 다크 모두 따라간다 */
+body {
+  --ybm-color-bg-brand-solid: var(--ybm-color-bg-neutral-solid);
+  --ybm-color-bg-brand-solid-pressed: var(--ybm-color-bg-neutral-solid-pressed);
+  --ybm-color-bg-brand-weak: var(--ybm-color-bg-neutral-weak-alpha);
+  --ybm-color-bg-brand-weak-pressed: var(--ybm-color-bg-neutral-weak-alpha-pressed);
+  --ybm-color-fg-brand: var(--ybm-color-fg-neutral);
+  --ybm-color-fg-brand-contrast: var(--ybm-color-fg-neutral);
+  --ybm-color-fg-on-brand-solid: var(--ybm-color-fg-on-neutral-solid);
+  --ybm-color-stroke-brand-solid: var(--ybm-color-stroke-neutral-solid);
+  --ybm-color-stroke-brand-weak: var(--ybm-color-stroke-neutral-weak);
+  --ybm-color-chart-series-1: var(--ybm-color-bg-neutral-solid);
+  --ybm-color-palette-brand-100: var(--ybm-color-palette-gray-100);
+  --ybm-color-palette-brand-200: var(--ybm-color-palette-gray-200);
+  --ybm-color-palette-brand-300: var(--ybm-color-palette-gray-300);
+  --ybm-color-palette-brand-400: var(--ybm-color-palette-gray-400);
+  --ybm-color-palette-brand-500: var(--ybm-color-palette-gray-500);
+  --ybm-color-palette-brand-600: var(--ybm-color-palette-gray-600);
+  --ybm-color-palette-brand-700: var(--ybm-color-palette-gray-700);
+  --ybm-color-palette-brand-800: var(--ybm-color-palette-gray-800);
+  --ybm-color-palette-brand-900: var(--ybm-color-palette-gray-900);
+  --ybm-color-palette-brand-1000: var(--ybm-color-palette-gray-1000);
+}
 
 /* 사이트 전용 아이콘 - build.mjs가 붙인다 */
 .site-i--moon { --ds-icon: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M12%203a6%206%200%200%200%209%209%209%209%200%201%201-9-9Z%22%2F%3E%3C%2Fsvg%3E"); }
