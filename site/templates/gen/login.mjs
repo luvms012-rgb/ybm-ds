@@ -65,7 +65,7 @@ const loginSplit = () => {
   </div>
   ${legal}
 </div></main>`;
-  return { slug: 'login-split', en: 'Login Split', name: '로그인 (반으로 나눈)', group: 'Login', desc: '카드를 반으로 나눠 한쪽에 로그인 폼, 다른 쪽에 꽉 찬 사진을 둔 화면입니다. 칸은 카드형과 같고 사진으로 브랜드 느낌을 더해요.', css, body };
+  return { slug: 'login-split', en: 'Login Split', name: '로그인 (반으로 나눈)', group: 'Login', desc: '카드를 반으로 나눠 한쪽에 로그인 폼, 다른 쪽에 꽉 찬 사진을 둔 화면입니다. 칸은 카드형과 같고 사진으로 브랜드 느낌을 더합니다.', css, body };
 };
 
 /* 3. 로그인 SSO -------------------------------------------------- */

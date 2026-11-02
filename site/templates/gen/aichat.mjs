@@ -80,7 +80,7 @@ const landing = () => {
   ${composer('무엇이든 물어보세요', ['수업 계획서.pdf', '지난 학기 설문.xlsx', '강의 영상 목록.csv'])}
   <div class="tp-cats" role="group" aria-label="분류">${[['pencil', '글쓰기'], ['code', '코딩'], ['search', '찾아보기'], ['palette', '만들기'], ['book-open', '배우기']].map(([ic, t]) => btn(t, { variant: 'neutralOutline', ic, attrs: 'aria-pressed="false"' })).join('')}</div>
 </div></main>`;
-  return { slug: 'ai-chat-landing', en: 'AI Chat Landing', name: 'AI 첫 화면', group: 'AI Chat', desc: '아직 대화가 없을 때 보여 주는 첫 화면입니다. 지난 기록 대신 가운데 입력창 하나와 분류 버튼으로 시작을 돕고, 첨부 파일 개수는 접혀 있어요.', css, body };
+  return { slug: 'ai-chat-landing', en: 'AI Chat Landing', name: 'AI 첫 화면', group: 'AI Chat', desc: '아직 대화가 없을 때 보여 주는 첫 화면입니다. 지난 기록 대신 가운데 입력창 하나와 분류 버튼으로 시작을 돕고, 첨부 파일 개수는 접혀 있습니다.', css, body };
 };
 
 export const templates = [conversation, landing].map((f) => f());

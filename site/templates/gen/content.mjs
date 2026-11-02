@@ -27,7 +27,7 @@ ${head('라이브러리')}
   ${groups.map(([g, items]) => `${divider()}<section class="tp-sec" aria-labelledby="g-${esc(g)}">${secHead(g, { id: 'g-' + esc(g), sub: items.length + '개' })}<div class="tp-g4">${items.map(([t, d]) => tileCard(t, d)).join('')}</div></section>`).join('')}
 </main>
 </div>`;
-  return { slug: 'library', en: 'Card Grid', name: '카드 그리드', group: 'Content', desc: '찾고 훑어보는 카드 그리드입니다. 분류 탭으로 그 자리에서 좁히고, 주제별로 같은 모양 카드를 묶어 보여 줘요. 결과가 없으면 빈 화면을 보여 줘요.', css, body };
+  return { slug: 'library', en: 'Card Grid', name: '카드 그리드', group: 'Content', desc: '찾고 훑어보는 카드 그리드입니다. 분류 탭으로 그 자리에서 좁히고, 주제별로 같은 모양 카드를 묶어 보여 줍니다. 결과가 없으면 빈 화면을 보여 줍니다.', css, body };
 };
 
 /* 2. 문서 목록 (카탈로그) -------------------------------------- */
@@ -43,7 +43,7 @@ const catalog = () => {
   <div class="tp-cat-hero"><span class="tp-doc-title">YBM DS 둘러보기</span><p class="tp-sub" style="max-width: 560px">화면을 빠르게 만들 수 있도록 부품, 토큰, 템플릿을 한곳에 모았어요. 필요한 묶음을 골라 들어가세요.</p>${btn('시작하기', { variant: 'neutralSolid', icEnd: 'arrow-right' })}</div>
   ${sections.map(([s, items]) => `<section class="tp-sec" aria-labelledby="c-${esc(s)}"><h2 class="tp-h2" id="c-${esc(s)}">${s}</h2><div class="tp-g4">${items.map(([t, d]) => `<a class="ds-card tp-card" data-size="small" href="#"><span class="tp-cat-card"><span class="tp-h4">${t}</span><span class="tp-sub">${d}</span></span></a>`).join('')}</div></section>`).join('')}
 </main></div>`;
-  return { slug: 'documentation', en: 'Documentation Catalog', name: '문서 목록', group: 'Content', desc: '길 찾기만 하는 문서 첫 화면입니다. 위쪽 안내 띠 아래에 분류 카드를 늘어놓아 각 묶음으로 들어가고, 화면 자체에는 본문이 없어요.', css, body };
+  return { slug: 'documentation', en: 'Documentation Catalog', name: '문서 목록', group: 'Content', desc: '길 찾기만 하는 문서 첫 화면입니다. 위쪽 안내 띠 아래에 분류 카드를 늘어놓아 각 묶음으로 들어가고, 화면 자체에는 본문이 없습니다.', css, body };
 };
 
 /* 3. 디자인 문서 ------------------------------------------------ */
@@ -66,7 +66,7 @@ const docDesign = () => {
   <section class="tp-sec"><h2 class="tp-h2">속성</h2>${table(['이름', '값', '기본값'], props.map(([n, v, d]) => [`<code>${n}</code>`, v, `<code>${d}</code>`]))}</section>
   <section class="tp-sec"><h2 class="tp-h2">코드</h2>${codeblock('html', '<button class="ds-btn" data-variant="brandSolid" data-size="medium">저장</button>')}</section>
 </article></main></div>`;
-  return { slug: 'documentation-design', en: 'Documentation Design', name: '디자인 문서', group: 'Content', desc: '글 사이사이에 실제로 움직이는 예시를 끼운 참고 문서입니다. 미리 보기, 속성 표, Do와 Don\'t 비교, 복사할 수 있는 코드가 이어져요.', css, body };
+  return { slug: 'documentation-design', en: 'Documentation Design', name: '디자인 문서', group: 'Content', desc: '글 사이사이에 실제로 움직이는 예시를 끼운 참고 문서입니다. 미리 보기, 속성 표, Do와 Don\'t 비교, 복사할 수 있는 코드가 이어집니다.', css, body };
 };
 
 /* 4. 기술 문서 (단계별) ---------------------------------------- */
@@ -90,7 +90,7 @@ const docTech = () => {
   ${divider()}
   <section class="tp-sec"><h2 class="tp-h2">다음으로</h2><div class="tp-g2">${[['book-open', '부품 둘러보기', '71개 부품의 쓰는 법과 예시'], ['layout-grid', '템플릿에서 시작하기', '자주 쓰는 화면을 통째로 복사']].map(([ic, t, d]) => `<a class="ds-card tp-card" data-size="small" href="#" style="text-decoration:none;color:inherit"><span class="tp-row">${icon(ic)}<span class="tp-stack"><span class="tp-h4">${t}</span><span class="tp-sub">${d}</span></span></span></a>`).join('')}</div></section>
 </article></main></div>`;
-  return { slug: 'documentation-technical', en: 'Documentation Technical', name: '기술 문서', group: 'Content', desc: '번호 매긴 단계마다 코드를 붙인 따라 하기 문서입니다. 준비물과 다음 갈 곳은 따로 카드로 두어, 처음부터 끝까지 한 줄로 따라가게 해요.', css, body };
+  return { slug: 'documentation-technical', en: 'Documentation Technical', name: '기술 문서', group: 'Content', desc: '번호 매긴 단계마다 코드를 붙인 따라 하기 문서입니다. 준비물과 다음 갈 곳은 따로 카드로 두어, 처음부터 끝까지 한 줄로 따라가게 합니다.', css, body };
 };
 
 /* 5. 주문 상세 -------------------------------------------------- */
@@ -126,7 +126,7 @@ const orderDetail = () => {
   </aside>
 </div>
 </div>`;
-  return { slug: 'detail-page', en: 'Order Detail', name: '주문 상세', group: 'Content', desc: '한 건의 기록을 두 칸에 보여 주는 상세입니다. 상태와 동작이 있는 머리글, 반복되는 상품 줄, 합계, 시간 순 활동, 옆 정보 패널로 이어져요.', css, body };
+  return { slug: 'detail-page', en: 'Order Detail', name: '주문 상세', group: 'Content', desc: '한 건의 기록을 두 칸에 보여 주는 상세입니다. 상태와 동작이 있는 머리글, 반복되는 상품 줄, 합계, 시간 순 활동, 옆 정보 패널로 이어집니다.', css, body };
 };
 
 /* 6. 상품 상세 -------------------------------------------------- */
@@ -161,7 +161,7 @@ const productDetail = () => {
     <div>${divider()}${accordion([['상세 정보', '<p class="tp-sub">문제집 2권, 해설집 1권, 음원 QR 카드. 판형 188×257mm, 총 920쪽.</p>', true], ['배송', '<p class="tp-sub">오후 2시 전 주문은 오늘 출발해요. 3만원 이상 무료 배송.</p>'], ['교환과 환불', '<p class="tp-sub">받은 날부터 7일 안에, 포장을 뜯지 않았으면 교환과 환불이 돼요.</p>']])}</div>
   </div>
 </div></main></div>`;
-  return { slug: 'product-detail', en: 'Product Detail', name: '상품 상세', group: 'Content', desc: '사진 모음과 고르는 칸을 나란히 둔 상품 한 개의 상세입니다. 옵션, 수량, 담기와 구매 버튼, 접히는 정보 묶음이 있어요.', css, body };
+  return { slug: 'product-detail', en: 'Product Detail', name: '상품 상세', group: 'Content', desc: '사진 모음과 고르는 칸을 나란히 둔 상품 한 개의 상세입니다. 옵션, 수량, 담기와 구매 버튼, 접히는 정보 묶음이 있습니다.', css, body };
 };
 
 /* 7. 할 일 상세 ------------------------------------------------- */
@@ -196,7 +196,7 @@ const workItem = () => {
   <aside class="tp-panel">${fields.map(([l, v], i) => field('wf' + i, l, select(v, { id: 'wf' + i, size: 'small' }))).join('')}${divider()}<div class="tp-stack"><span class="tp-caption">만든 사람</span><span class="tp-row">${avatar('최민준', 20)}최민준 · 10월 18일</span></div><div class="tp-stack"><span class="tp-caption">지켜보는 사람</span>${avatars(['김서윤', '이준호', '박하린'], 24, 2)}</div></aside>
 </div>
 </div>`;
-  return { slug: 'work-item-detail', en: 'Work Item Detail', name: '할 일 상세', group: 'Content', desc: '할 일 한 건을 두 칸에 보여 주는 상세입니다. 제목과 상태 고르기, 설명, 진행 막대가 있는 하위 할 일, 첨부 파일, 댓글이 이어져요.', css, body };
+  return { slug: 'work-item-detail', en: 'Work Item Detail', name: '할 일 상세', group: 'Content', desc: '할 일 한 건을 두 칸에 보여 주는 상세입니다. 제목과 상태 고르기, 설명, 진행 막대가 있는 하위 할 일, 첨부 파일, 댓글이 이어집니다.', css, body };
 };
 
 export const templates = [library, catalog, docDesign, docTech, orderDetail, productDetail, workItem].map((f) => f());

@@ -46,7 +46,7 @@ const shellNav = () => {
   <main class="tp-shell__main" id="main">${skel()}</main>
 </div>
 </div>`;
-  return { slug: 'shell-nav', en: 'Shell Nav', name: '앱 틀 (위 메뉴 + 옆 트리)', group: 'Shell', desc: '두 방향 내비게이션을 함께 쓰는 앱 틀입니다. 위에 명령 찾기가 있는 메뉴 막대, 옆에 크기를 바꾸는 계층 레일을 두고 본문은 비워 둬요.', css, body };
+  return { slug: 'shell-nav', en: 'Shell Nav', name: '앱 틀 (위 메뉴 + 옆 트리)', group: 'Shell', desc: '두 방향 내비게이션을 함께 쓰는 앱 틀입니다. 위에 명령 찾기가 있는 메뉴 막대, 옆에 크기를 바꾸는 계층 레일을 두고 본문은 비워 둡니다.', css, body };
 };
 
 /* 2. 옆 메뉴만 -------------------------------------------------- */
@@ -76,7 +76,7 @@ const sideNav = () => {
   <main class="tp-shell__main" id="main">${skel()}<div class="tp-block tp-footbox" aria-label="아래 입력 자리"></div></main>
 </div>
 </div>`;
-  return { slug: 'shell-side-nav', en: 'Side Nav', name: '앱 틀 (옆 메뉴)', group: 'Shell', desc: '접고 크기를 바꿀 수 있는 왼쪽 레일 하나로 묶음 기록과 찾기를 담은 앱 틀입니다. 세로 내비게이션만 있고 위 막대는 없어요.', css, body };
+  return { slug: 'shell-side-nav', en: 'Side Nav', name: '앱 틀 (옆 메뉴)', group: 'Shell', desc: '접고 크기를 바꿀 수 있는 왼쪽 레일 하나로 묶음 기록과 찾기를 담은 앱 틀입니다. 세로 내비게이션만 있고 위 막대는 없습니다.', css, body };
 };
 
 /* 3. 위 메뉴만 (메가 메뉴) -------------------------------------- */
@@ -107,7 +107,7 @@ const topNav = () => {
 </header>
 <main class="tp-shell__main" id="main"><div class="tp-skel"><div class="tp-block tp-block--dash" style="height: 280px"></div><div class="tp-g6s">${Array.from({ length: 6 }, () => '<div class="tp-block tp-block--dash" style="height: 200px"></div>').join('')}</div><div class="tp-block tp-block--dash" style="height: 200px"></div></div></main>
 </div>`;
-  return { slug: 'shell-top-nav', en: 'Top Nav', name: '앱 틀 (위 메뉴)', group: 'Shell', desc: '가로 내비게이션만 있는 앱 틀입니다. 가운데 막대의 항목을 누르면 전체 폭 메가 메뉴가 열리고, 아래 본문은 화면 폭을 모두 써요.', css, body };
+  return { slug: 'shell-top-nav', en: 'Top Nav', name: '앱 틀 (위 메뉴)', group: 'Shell', desc: '가로 내비게이션만 있는 앱 틀입니다. 가운데 막대의 항목을 누르면 전체 폭 메가 메뉴가 열리고, 아래 본문은 화면 폭을 모두 씁니다.', css, body };
 };
 
 export const templates = [shellNav, sideNav, topNav].map((f) => f());

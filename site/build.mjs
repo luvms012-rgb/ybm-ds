@@ -165,7 +165,7 @@ function codeblock(code, lang = 'html', extra = '') {
 }
 function example(previewHtml, code) {
   return `<div class="site-example">
-  <div class="site-example__bar"><div class="ds-chiptabs" role="tablist" aria-label="보기 방식"><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-view="preview">Preview</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-view="code">Code</button></div></div>
+  <div class="site-example__bar"><div class="ds-chiptabs" role="tablist" aria-label="보기 방식"><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-view="preview">미리보기</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-view="code">코드</button></div></div>
   <div class="site-example__preview">${previewHtml}</div>
   <div class="site-example__code" hidden>${codeblock(code)}</div>
 </div>`;
@@ -211,9 +211,9 @@ function sideNav(section, file, root) {
   }
   const mobile = `<div class="site-side__mobile"><nav class="site-nav" aria-label="주요 메뉴">${NAV.map(([k, l, h]) => `<a class="site-nav__item" href="${root}${h}"${k === section ? ' aria-current="page"' : ''}>${l}</a>`).join('')}</nav><div class="site-nav__sep"></div></div>`;
   // 컴포넌트 메뉴 맨 위 찾기 칸 (높이 32, 모서리 12, 1px 테두리) - 메뉴 항목과 목록 카드를 함께 거른다
-  const search = section === 'components' ? `<div class="site-side__searchbar"><div class="ds-input site-side__search" data-variant="outline" data-size="medium"><i class="ds-icon ds-icon--search ds-input__icon" aria-hidden="true"></i><input class="ds-input__control" type="search" placeholder="Search components" aria-label="컴포넌트 찾기" data-site-search></div></div>` : '';
+  const search = section === 'components' ? `<div class="site-side__searchbar"><div class="ds-input site-side__search" data-variant="outline" data-size="medium"><i class="ds-icon ds-icon--search ds-input__icon" aria-hidden="true"></i><input class="ds-input__control" type="search" placeholder="컴포넌트 찾기" aria-label="컴포넌트 찾기" data-site-search></div></div>` : '';
   return `<aside class="site-side" id="site-side" aria-label="페이지 목록">
-  <div class="site-side__top"><b>Menu</b><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" data-site-close aria-label="메뉴 닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button></div>
+  <div class="site-side__top"><b>메뉴</b><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" data-site-close aria-label="메뉴 닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button></div>
   ${mobile}${search}
   <nav class="site-nav" aria-label="${esc(NAV.find((n) => n[0] === section)[1])} 메뉴"${search ? ' data-site-navfilter' : ''}>${parts.join('\n')}</nav>
 </aside>`;
@@ -221,9 +221,9 @@ function sideNav(section, file, root) {
 
 const iconBtn = (attrs, label, inner) => `<button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="${esc(label)}" ${attrs}>${inner}</button>`;
 // Best Practices 표 - [할 것(true) / 하지 말 것(false), 문장]
-const practices = (items) => table(['Guidance', 'Practices'], [...items.filter(([ok]) => ok), ...items.filter(([ok]) => !ok)].map(([ok, text]) => [`<b class="ds-badge site-practice" data-tone="${ok ? 'positive' : 'critical'}">${ok ? 'Do' : 'Don\'t'}</b>`, inline(text)]));
+const practices = (items) => table(['구분', '내용'], [...items.filter(([ok]) => ok), ...items.filter(([ok]) => !ok)].map(([ok, text]) => [`<b class="ds-badge site-practice" data-tone="${ok ? 'positive' : 'critical'}">${ok ? 'Do' : 'Don\'t'}</b>`, inline(text)]));
 const metaLink = (href, label, icon) => `<a class="ds-btn" data-variant="neutralWeak" data-size="xsmall" href="${href}" target="_blank" rel="noopener"><i class="ds-icon ${icon} ds-icon--sm" aria-hidden="true"></i>${label}</a>`;
-const metaLinks = (l) => l ? `<div class="site-meta">${l.figma ? metaLink(l.figma, 'Figma', 'site-i--figma') : ''}${metaLink(l.code, 'Code', 'site-i--github')}</div>` : '';
+const metaLinks = (l) => l ? `<div class="site-meta">${l.figma ? metaLink(l.figma, 'Figma', 'site-i--figma') : ''}${metaLink(l.code, '코드', 'site-i--github')}</div>` : '';
 const iconLink = (href, label, icon, extra = '') => `<a class="ds-btn${extra}" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" href="${href}" target="_blank" rel="noopener" aria-label="${esc(label)}"><i class="ds-icon ${icon}" aria-hidden="true"></i></a>`;
 
 // layout - doc: 본문 752 + 목차 (문서, 컴포넌트 목록과 상세도 같은 폭) / wide: 메뉴 옆 전체 폭 (템플릿 상세)
@@ -235,13 +235,13 @@ function page({ file, title, section, body, layout = 'doc', desc = '', pager = [
   body = body.replace(/<header>(\s*<p class="site-eyebrow">[\s\S]*?<\/p>)?/, '<header class="site-head">');
   // 이전 / 다음 문서 (레퍼런스 B)
   const [prev, next] = pager;
-  const pagerHtml = prev || next ? `<nav class="site-pager" aria-label="이전, 다음 문서">${prev ? `<a href="${prev.href}" data-dir="prev"><span class="site-pager__label"><i class="ds-icon ds-icon--chevron-left ds-icon--sm" aria-hidden="true"></i>Previous</span><b>${esc(prev.label)}</b></a>` : '<span></span>'}${next ? `<a href="${next.href}" data-dir="next"><span class="site-pager__label">Next<i class="ds-icon ds-icon--chevron-right ds-icon--sm" aria-hidden="true"></i></span><b>${esc(next.label)}</b></a>` : ''}</nav>` : '';
+  const pagerHtml = prev || next ? `<nav class="site-pager" aria-label="이전, 다음 문서">${prev ? `<a href="${prev.href}" data-dir="prev"><span class="site-pager__label"><i class="ds-icon ds-icon--chevron-left ds-icon--sm" aria-hidden="true"></i>이전</span><b>${esc(prev.label)}</b></a>` : '<span></span>'}${next ? `<a href="${next.href}" data-dir="next"><span class="site-pager__label">다음<i class="ds-icon ds-icon--chevron-right ds-icon--sm" aria-hidden="true"></i></span><b>${esc(next.label)}</b></a>` : ''}</nav>` : '';
   // 푸터 (레퍼런스 B): 왼쪽 로고와 저작권, 오른쪽 메뉴 두 묶음
   const footer = `<footer class="site-footer">
   <div class="site-footer__brand"><img src="${root}assets/logo-ybmnet.svg" alt="YBM NET" width="81" height="24"><p class="site-footer__copy">© 2026 YBM NET. All rights reserved.</p></div>
   <nav class="site-footer__nav" aria-label="사이트 메뉴">
-    <div><p class="site-footer__title">Menu</p>${NAV.map(([, l, h]) => `<a href="${root}${h}">${l}</a>`).join('')}</div>
-    <div><p class="site-footer__title">More</p><a href="${FIGMA}2608-2" target="_blank" rel="noopener">Figma</a><a href="${GITHUB}" target="_blank" rel="noopener">GitHub</a></div>
+    <div><p class="site-footer__title">메뉴</p>${NAV.map(([, l, h]) => `<a href="${root}${h}">${l}</a>`).join('')}</div>
+    <div><p class="site-footer__title">더 보기</p><a href="${FIGMA}2608-2" target="_blank" rel="noopener">Figma</a><a href="${GITHUB}" target="_blank" rel="noopener">GitHub</a></div>
   </nav>
 </footer>`;
   // h2에 제목 링크를 달고 목차를 만든다
@@ -278,7 +278,7 @@ ${desc ? `<meta name="description" content="${esc(desc)}">\n` : ''}<!-- 생성�
     ${iconBtn('data-site-theme-toggle', '화면 모드 바꾸기', '<i class="ds-icon site-i--moon" aria-hidden="true"></i><i class="ds-icon site-i--sun" aria-hidden="true"></i>').replace('class="ds-btn"', 'class="ds-btn site-theme-btn"')}
     ${iconLink(FIGMA + '2608-2', 'Figma 파일', 'site-i--figma', ' site-only-wide')}
     ${iconLink(GITHUB, 'GitHub 저장소', 'site-i--github', ' site-only-wide')}
-    <a class="ds-btn site-cta" data-variant="neutralSolid" data-size="xsmall" href="${root}index.html#ai">Get started</a>
+    <a class="ds-btn site-cta" data-variant="neutralSolid" data-size="xsmall" href="${root}index.html#ai">시작하기</a>
     ${iconBtn('data-site-menu aria-controls="site-side" aria-expanded="false"', '메뉴 열기', '<i class="ds-icon ds-icon--menu" aria-hidden="true"></i>').replace('class="ds-btn"', 'class="ds-btn site-menu-btn"')}
   </div>
 </header>
@@ -341,43 +341,43 @@ write({
   ${metaLinks({ figma: LINKS.figmaUrl('2608:2'), code: GITHUB })}
 </header>
 
-<h2 id="ai">Quick Start with AI</h2>
-<p>아래 내용을 AI 코딩 도구(ChatGPT, Claude, Cursor 등)에 붙여 넣으면 설치부터 규칙까지 알아서 맞춰요.</p>
+<h2 id="ai">AI로 바로 시작하기</h2>
+<p>아래 내용을 AI 코딩 도구(ChatGPT, Claude, Cursor 등)에 붙여 넣으면 설치부터 규칙까지 알아서 맞춥니다.</p>
 ${codeblock(prompts[0][2], 'text', ' data-wrap')}
-<p>그다음 만들고 싶은 화면을 말로 설명하세요. 대괄호 안만 내 상황에 맞게 바꾸면 됩니다. 비슷한 화면이 <a class="ds-link" href="templates/index.html">템플릿</a>에 있으면 그 화면에서 출발해요.</p>
+<p>그다음 만들고 싶은 화면을 말로 설명하세요. 대괄호 안만 내 상황에 맞게 바꾸면 됩니다. 비슷한 화면이 <a class="ds-link" href="templates/index.html">템플릿</a>에 있으면 그 화면에서 출발합니다.</p>
 ${codeblock(prompts[1][2], 'text', ' data-wrap')}
-<p>이미 만든 화면이 있다면 DS 규칙을 지키는지 점검하게 할 수 있어요.</p>
+<p>이미 만든 화면이 있다면 DS 규칙을 지키는지 점검하게 할 수 있습니다.</p>
 ${codeblock(prompts[2][2], 'text', ' data-wrap')}
 
-<h2 id="install">Install</h2>
-<p>가장 쉽고 권장하는 방법은 CSS로 바로 쓰는 것입니다. 빌드 도구나 설치 과정 없이 <code>&lt;head&gt;</code>에 두 줄만 넣으면 글꼴(Pretendard), 토큰, 아이콘, 컴포넌트가 한 번에 들어와요.</p>
+<h2 id="install">설치하기</h2>
+<p>가장 쉬운 방법은 CSS로 바로 쓰는 것입니다. 빌드 도구나 설치 과정 없이 <code>&lt;head&gt;</code>에 두 줄만 넣으면 글꼴(Pretendard), 토큰, 아이콘, 컴포넌트가 한 번에 들어옵니다.</p>
 ${codeblock(CSS_LINK)}
 
-<h2 id="first">Add Your First Component</h2>
-<p>정해진 클래스와 속성만 붙이면 됩니다. 각 컴포넌트의 구조와 속성은 <a class="ds-link" href="components/index.html">Components</a>에 있어요.</p>
+<h2 id="first">첫 컴포넌트 넣기</h2>
+<p>정해진 클래스와 속성만 붙이면 됩니다. 각 컴포넌트의 구조와 속성은 <a class="ds-link" href="components/index.html">Components</a>에 있습니다.</p>
 ${example(`<div class="pv-stage"><button class="ds-btn" data-variant="brandSolid" data-size="large">시작하기</button><button class="ds-btn" data-variant="neutralWeak" data-size="large">나중에</button></div>`, `<button class="ds-btn" data-variant="brandSolid" data-size="large">시작하기</button>\n<button class="ds-btn" data-variant="neutralWeak" data-size="large">나중에</button>`)}
 
-<h2 id="theme">Dark Mode</h2>
-<p>html 요소에 속성 하나만 붙이면 모든 색이 어두운 화면용으로 바뀝니다. 오른쪽 위 달 모양 버튼으로 이 사이트에서도 바로 볼 수 있어요.</p>
+<h2 id="theme">다크 모드 켜기</h2>
+<p>html 요소에 속성 하나만 붙이면 모든 색이 어두운 화면용으로 바뀝니다. 오른쪽 위 달 모양 버튼으로 이 사이트에서도 바로 볼 수 있습니다.</p>
 ${codeblock('<html lang="ko" data-theme="dark">')}
 
-<h2 id="custom">Customization</h2>
-<p>서비스 CSS는 DS 다음에 불러오고, 새 클래스를 만들지 말고 컴포넌트 변수(<code>--ds-*</code>)만 덮어씁니다. 자세한 내용은 <a class="ds-link" href="get-started/usage.html">사용 규칙</a>에 있어요.</p>
+<h2 id="custom">모양 바꾸기</h2>
+<p>서비스 CSS는 DS 다음에 불러오고, 새 클래스를 만들지 말고 컴포넌트 변수(<code>--ds-*</code>)만 덮어씁니다. 자세한 내용은 <a class="ds-link" href="get-started/usage.html">Usage</a>에 있습니다.</p>
 ${codeblock(`<link rel="stylesheet" href="${PUBLIC}/dist/ybm-ds.css">\n<link rel="stylesheet" href="my-service.css">  <!-- 서비스 CSS는 항상 DS 다음 -->\n\n/* my-service.css */\n.my-dialog { --ds-dialog-width: 360px; }`)}
 
-<h2 id="other">Other Install Options</h2>
+<h2 id="other">다른 설치 방법</h2>
 <p>개발자가 버전을 고정하거나 파일을 직접 가지고 있어야 할 때 씁니다.</p>
-<h3>Pinned Version</h3>
+<h3>버전 고정하기</h3>
 <p>위 주소는 늘 최신 버전을 줍니다. 배포 후 바뀌지 않게 하려면 공개 CDN 주소에 커밋 번호를 넣어 고정하세요.</p>
 ${codeblock(`<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/luvms012-rgb/ybm-ds@[커밋 번호]/dist/ybm-ds.css">\n<script src="https://cdn.jsdelivr.net/gh/luvms012-rgb/ybm-ds@[커밋 번호]/dist/ybm-ds.js" defer></script>`)}
-<h3>Download Files</h3>
+<h3>파일 내려받기</h3>
 <p>저장소를 내려받아 <code>dist</code> 폴더를 프로젝트에 넣고 상대 경로로 불러옵니다. 인터넷이 막힌 환경이나 사내 서버에 둘 때 씁니다.</p>
 ${codeblock(`git clone ${GITHUB}.git\n# ybm-ds/dist 폴더를 프로젝트로 복사한 뒤\n<link rel="stylesheet" href="./dist/ybm-ds.css">\n<script src="./dist/ybm-ds.js" defer></script>`, 'shell')}
-<h3>With Tailwind CSS</h3>
-<p>Tailwind를 쓰는 프로젝트는 토큰을 Tailwind 이름으로 바로 쓸 수 있는 설정 파일이 있어요. 값은 모두 DS의 CSS 변수를 가리키므로 <code>ybm-ds.css</code>도 함께 불러와야 합니다.</p>
+<h3>Tailwind CSS와 함께 쓰기</h3>
+<p>Tailwind를 쓰는 프로젝트는 토큰을 Tailwind 이름으로 바로 쓸 수 있는 설정 파일이 있습니다. 값은 모두 DS의 CSS 변수를 가리키므로 <code>ybm-ds.css</code>도 함께 불러와야 합니다.</p>
 ${codeblock(`// tailwind.config.js - ybm-ds/tokens/tailwind.preset.js를 프로젝트에 복사한 뒤\nmodule.exports = { presets: [require('./tailwind.preset.js')] };`, 'javascript')}
 
-<h2 id="next">Next Steps</h2>
+<h2 id="next">다음 단계</h2>
 <div class="site-grid">
   <a class="site-card" href="get-started/usage.html"><div class="site-card__body"><p class="site-card__title">Usage</p><p class="site-card__desc">불러오는 순서, 커스텀, 다크 모드, 반응형 기준점을 알아봅니다.</p></div></a>
   <a class="site-card" href="{root}foundations/${FOUND[0][0]}.html"><div class="site-card__body"><p class="site-card__title">Foundations</p><p class="site-card__desc">색, 글자, 간격처럼 모든 화면의 바탕이 되는 토큰을 봅니다.</p></div></a>
@@ -392,26 +392,26 @@ write({
   file: 'get-started/usage.html', section: 'get-started', title: 'Usage', pager: gsPager('get-started/usage.html'),
   body: `<header><h1 class="site-h1">Usage</h1><p class="site-lead">DS를 불러오는 순서와 모양을 바꾸는 방법, 화면 모드와 반응형 기준을 정리했습니다.</p></header>
 
-<h2 id="order">Load Order</h2>
-<p>DS를 먼저, 서비스 CSS를 그다음에 불러옵니다. DS 전체가 CSS 레이어 안에 들어 있어서 레이어 밖에 쓴 서비스 CSS는 선택자 길이와 상관없이 항상 DS를 이깁니다. 그래서 <code>!important</code>나 긴 선택자로 다툴 필요가 없어요.</p>
+<h2 id="order">불러오는 순서</h2>
+<p>DS를 먼저, 서비스 CSS를 그다음에 불러옵니다. DS 전체가 CSS 레이어 안에 들어 있어서 레이어 밖에 쓴 서비스 CSS는 선택자 길이와 상관없이 항상 DS를 이깁니다. 그래서 <code>!important</code>나 긴 선택자로 다툴 필요가 없습니다.</p>
 ${codeblock('@layer ybm.tokens, ybm.base, ybm.icons, ybm.components, ybm.utilities;', 'css')}
 
-<h2 id="custom">Customization</h2>
+<h2 id="custom">모양 바꾸기</h2>
 <ul class="site-list">
   <li>서비스는 <b>컴포넌트 변수(<code>--ds-*</code>)만 바꿔서</b> 모양을 조정합니다. 새 <code>ds-</code> 클래스를 만들거나 <code>!important</code>를 쓰지 않습니다.</li>
-  <li>각 컴포넌트에서 바꿀 수 있는 변수는 컴포넌트 페이지의 "바꿀 수 있는 변수" 표에 있어요.</li>
+  <li>각 컴포넌트에서 바꿀 수 있는 변수는 컴포넌트 페이지의 "CSS 변수" 표에 있습니다.</li>
   <li>팔레트는 YBM 전체가 함께 쓰고, 서비스는 시맨틱(<code>bg</code>, <code>fg</code>, <code>stroke</code>) 색과 컴포넌트 변수만 덮어씁니다.</li>
 </ul>
 ${codeblock('.my-dialog { --ds-dialog-width: 360px; }\n.my-banner { --ds-banner-bg: var(--ybm-color-bg-brand-weak); }', 'css')}
 
-<h2 id="state">States</h2>
-<p>CSS는 Figma 속성 이름을 그대로 <code>data-*</code> 속성으로 씁니다. 상태는 가능한 한 HTML 기본 속성으로 표현해서 접근성이 함께 맞춰지게 했어요.</p>
+<h2 id="state">상태 나타내기</h2>
+<p>CSS는 Figma 속성 이름을 그대로 <code>data-*</code> 속성으로 씁니다. 상태는 가능한 한 HTML 기본 속성으로 표현해서 접근성이 함께 맞춰지게 했습니다.</p>
 ${table(['상태', '쓰는 속성'], [['꺼짐', '<code>disabled</code>'], ['선택', '<code>:checked</code>, <code>aria-selected</code>, <code>aria-pressed</code>'], ['지금 위치', '<code>aria-current="page"</code>'], ['펼침', '<code>aria-expanded</code>'], ['오류', '<code>aria-invalid="true"</code>'], ['누름', '<code>:active</code> (마우스는 <code>:hover</code>도)']])}
 
-<h2 id="theme">Theme</h2>
-<p>모드는 라이트와 다크 두 가지입니다. <code>&lt;html data-theme="dark"&gt;</code>를 붙이면 시맨틱 색이 모두 어두운 화면용으로 바뀝니다. 색을 토큰으로만 썼다면 따로 고칠 것이 없어요.</p>
+<h2 id="theme">화면 모드</h2>
+<p>모드는 라이트와 다크 두 가지입니다. <code>&lt;html data-theme="dark"&gt;</code>를 붙이면 시맨틱 색이 모두 어두운 화면용으로 바뀝니다. 색을 토큰으로만 썼다면 따로 고칠 것이 없습니다.</p>
 
-<h2 id="breakpoint">Breakpoints</h2>
+<h2 id="breakpoint">반응형 기준점</h2>
 <p>작은 화면부터 쌓아 올리는 방식입니다. <code>@media</code> 안에서는 CSS 변수를 쓸 수 없어서 숫자를 직접 씁니다.</p>
 ${table(['이름', '폭', '쓰임'], bpRows.map(([n, w, u]) => [`<code>${n}</code>`, w, u]))}
 ${codeblock(`@media (min-width: 768px) { /* 태블릿, PC */ }\n@media (min-width: 1280px) { /* 넓은 PC */ }\n\n<!-- 유틸리티: 768 이상에서 숨김(모바일 전용) / 768 이상에서만 보임(PC 전용) -->\n<div class="u-hide-from-md">…</div>\n<div class="u-show-from-md">…</div>`, 'css')}
@@ -420,11 +420,11 @@ ${codeblock(`@media (min-width: 768px) { /* 태블릿, PC */ }\n@media (min-widt
   <li>Side Navigation은 1280 이상 펼침, 768 이상 접힘, 그보다 좁으면 서랍 메뉴입니다.</li>
 </ul>
 
-<h2 id="korean">Korean Line Breaks</h2>
+<h2 id="korean">한글 줄바꿈</h2>
 <p>본문에는 <code>word-break: keep-all</code>과 <code>overflow-wrap: break-word</code>를 함께 씁니다. 넣지 않으면 한글이 음절 단위로 끊겨 어절 중간에서 줄이 바뀝니다.</p>
 
-<h2 id="icon">Icons</h2>
-<p>UI 아이콘은 Lucide 한 가지만 씁니다. 색은 부모 글자색을 따르고, 크기는 기본 20, <code>ds-icon--sm</code> 16, <code>ds-icon--lg</code> 24 입니다. 목록은 <a class="ds-link" href="{root}foundations/icons.html">아이콘</a>에 있어요.</p>`,
+<h2 id="icon">아이콘</h2>
+<p>UI 아이콘은 Lucide 한 가지만 씁니다. 색은 부모 글자색을 따르고, 크기는 기본 20, <code>ds-icon--sm</code> 16, <code>ds-icon--lg</code> 24 입니다. 목록은 <a class="ds-link" href="{root}foundations/icons.html">Iconography</a>에 있습니다.</p>`,
 });
 
 // 파운데이션 - tokens.css에서 값을 읽는다. 다크 블록은 따로 읽어 색의 다크 값으로 쓴다
@@ -438,7 +438,7 @@ const resolve = (map, v, n = 0) => { const m = String(v).match(/^var\((--[a-z0-9
 const tokRe = (re) => [...lightCss.matchAll(re)];
 
 // 색: 레퍼런스 A처럼 토큰 / 값(라이트, 다크 견본 + 값)
-const colorGroups = [['bg', 'Background'], ['fg', 'Foreground'], ['stroke', 'Stroke']];
+const colorGroups = [['bg', '배경'], ['fg', '글자와 아이콘'], ['stroke', '테두리']];
 const colorTable = (k) => {
   const names = [...new Set(tokRe(new RegExp(`(--ybm-color-${k}-[a-z0-9-]+)\\s*:`, 'g')).map((m) => m[1]))];
   return table(['토큰', '값'], names.map((v) => {
@@ -452,33 +452,33 @@ fs.mkdirSync(path.join(SITE, 'foundations'), { recursive: true });
 fs.writeFileSync(path.join(SITE, 'foundations/index.html'), `<!doctype html>\n<html lang="ko"><head><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=${FOUND[0][0]}.html"><title>Foundations - YBM DS</title></head><body><a href="${FOUND[0][0]}.html">${esc(FOUND[0][1])}</a></body></html>\n`);
 const foundPages = {
   color: {
-    title: '색', lead: '배경, 글자와 아이콘, 테두리에 쓰는 시맨틱 색입니다. 값은 라이트 / 다크 순서예요.',
-    body: `<h2 id="overview">Overview</h2>
-<p>화면에는 시맨틱 색(<code>bg</code>, <code>fg</code>, <code>stroke</code>)만 씁니다. 팔레트(<code>--ybm-color-palette-*</code>)는 시맨틱 색을 만드는 원료라 화면에 직접 쓰지 않아요. 색을 토큰으로만 쓰면 <code>data-theme="dark"</code> 하나로 다크 모드가 맞춰집니다.</p>
+    title: '색', lead: '배경, 글자와 아이콘, 테두리에 쓰는 시맨틱 색입니다. 값은 라이트 / 다크 순서입니다.',
+    body: `<h2 id="overview">개요</h2>
+<p>화면에는 시맨틱 색(<code>bg</code>, <code>fg</code>, <code>stroke</code>)만 씁니다. 팔레트(<code>--ybm-color-palette-*</code>)는 시맨틱 색을 만드는 원료라 화면에 직접 쓰지 않습니다. 색을 토큰으로만 쓰면 <code>data-theme="dark"</code> 하나로 다크 모드가 맞춰집니다.</p>
 ${colorGroups.map(([k, label]) => `<h2 id="${k}">${label}</h2>\n${colorTable(k)}`).join('\n')}`,
   },
   typography: {
     title: '글자', lead: '글꼴, 굵기, 크기와 줄 높이 토큰입니다.',
-    body: `<h2 id="overview">Overview</h2>
+    body: `<h2 id="overview">개요</h2>
 <p>글꼴은 Pretendard 입니다. 크기는 <code>--ybm-font-size-t01</code> ~ <code>t17</code>, 줄 높이는 같은 번호의 <code>--ybm-line-height-*</code>를 짝으로 씁니다. 굵기는 regular 400, medium 500, semibold 600, bold 700 입니다.</p>
 <p>한글 위계: 페이지 제목 40/48 medium(500), 리드 16/24 light(300), 섹션 제목 24/32 medium, 소제목 16/22 medium, 본문 16/28 regular, 보조 글 14 regular 입니다. 자간은 주지 않습니다.</p>
-<h2 id="size">Size</h2>
+<h2 id="size">크기</h2>
 ${table(['토큰', '크기 / 줄 높이 (px)', '보기'], tokRe(/--ybm-font-size-(t\d\d): (\d+)px/g).map((m) => [`<code>${m[1]}</code>`, `${m[2]} / ${(LIGHT[`--ybm-line-height-${m[1]}`] || '').replace('px', '')}`, `<span class="site-sample" style="font-size: var(--ybm-font-size-${m[1]}); line-height: var(--ybm-line-height-${m[1]}); font-weight: var(--ybm-font-weight-bold)">가나다 Aa 123</span>`]))}
-<h2 id="weight">Weight</h2>
+<h2 id="weight">굵기</h2>
 ${table(['토큰', '값', '보기'], tokRe(/--ybm-font-weight-([a-z]+): (\d+);/g).map((m) => [`<code>--ybm-font-weight-${m[1]}</code>`, m[2], `<span class="site-sample" style="font-size: var(--ybm-font-size-t06); font-weight: var(--ybm-font-weight-${m[1]})">가나다 Aa 123</span>`]))}`,
   },
   spacing: {
     title: '간격', lead: '여백과 간격에 쓰는 토큰입니다.',
-    body: `<h2 id="overview">Overview</h2>
+    body: `<h2 id="overview">개요</h2>
 <p>4px 단위를 기본으로 하고, 작은 간격은 2px 단위도 씁니다. 화면 좌우 여백은 <code>--ybm-space-x-global-gutter</code> 입니다.</p>
-<h2 id="tokens">Tokens</h2>
+<h2 id="tokens">토큰</h2>
 ${table(['토큰', '값', '보기'], tokRe(/--ybm-space-(x[0-9_]+): (\d+)px/g).map((m) => [`<code>--ybm-space-${m[1]}</code>`, `${m[2]}px`, `<span class="site-bar" style="width: var(--ybm-space-${m[1]})"></span>`]))}`,
   },
   shape: {
     title: '모서리', lead: '부품 모서리 곡률 토큰입니다.',
-    body: `<h2 id="overview">Overview</h2>
-<p>모서리는 쓰임 이름으로 씁니다. 어떤 영역에 <code>--ybm-shape-scale</code>을 0과 1 사이 값으로 덮어쓰면 그 안의 모서리만 덜 둥글게 바꿀 수 있어요.</p>
-<h2 id="tokens">Tokens</h2>
+    body: `<h2 id="overview">개요</h2>
+<p>모서리는 쓰임 이름으로 씁니다. 어떤 영역에 <code>--ybm-shape-scale</code>을 0과 1 사이 값으로 덮어쓰면 그 안의 모서리만 덜 둥글게 바꿀 수 있습니다.</p>
+<h2 id="tokens">토큰</h2>
 ${table(['토큰', '값', '보기'], [...new Set(tokRe(/--ybm-shape-base-([a-z0-9]+):/g).map((m) => m[1]))].concat('pill').map((n) => {
   const px = n === 'pill' ? resolve(LIGHT, LIGHT['--ybm-shape-pill']) : resolve(LIGHT, LIGHT[`--ybm-shape-base-${n}`]);
   return [`<code>--ybm-shape-${n}</code>`, esc(px), `<span class="site-shape" style="border-radius: var(--ybm-shape-${n})"></span>`];
@@ -486,17 +486,17 @@ ${table(['토큰', '값', '보기'], [...new Set(tokRe(/--ybm-shape-base-([a-z0-
   },
   elevation: {
     title: '그림자', lead: '떠 있는 높이를 나타내는 그림자와 쌓는 순서입니다.',
-    body: `<h2 id="shadow">Shadow</h2>
+    body: `<h2 id="shadow">그림자</h2>
 <p>숫자 대신 쓰임 이름으로 씁니다.</p>
 ${table(['토큰', '쓰임', '보기'], tokRe(/--ybm-elevation-(raised|overlay|panel|floating|modal):\s+[^;]+;\s*\/\* ([^*]+) \*\//g).map((m) => [`<code>--ybm-elevation-${m[1]}</code>`, prose(m[2]), `<span class="site-shadow" style="box-shadow: var(--ybm-elevation-${m[1]})"></span>`]))}
-<h2 id="z">Z-index</h2>
+<h2 id="z">쌓는 순서</h2>
 ${table(['토큰', '값'], tokRe(/--ybm-z-([a-z]+): (\d+);/g).map((m) => [`<code>--ybm-z-${m[1]}</code>`, m[2]]))}`,
   },
   motion: {
     title: '움직임', lead: '움직임의 길이와 속도 곡선입니다.',
-    body: `<h2 id="duration">Duration</h2>
+    body: `<h2 id="duration">길이</h2>
 ${table(['토큰', '값'], tokRe(/--ybm-duration-([a-z]+): ([^;]+);/g).map((m) => [`<code>--ybm-duration-${m[1]}</code>`, `<code>${esc(m[2])}</code>`]))}
-<h2 id="easing">Easing</h2>
+<h2 id="easing">속도 곡선</h2>
 ${table(['토큰', '값'], tokRe(/--ybm-easing-([a-z]+): ([^;]+);/g).map((m) => [`<code>--ybm-easing-${m[1]}</code>`, `<code>${esc(m[2])}</code>`]))}`,
   },
 };
@@ -514,7 +514,7 @@ const lucide = JSON.parse(fs.readFileSync(path.join(SITE, 'src/lucide-icons.json
 const lucideCount = Object.keys(lucide.icons).length;
 const ICON_LEAD = '화면에 쓰는 작은 그림입니다. 클래스 하나만 붙이면 되고, 색과 크기는 글자를 따라갑니다.';
 const ICON_PRACTICES = [
-  [true, '같은 뜻에는 늘 같은 아이콘을 씁니다. 닫기는 x, 더 보기는 ellipsis.'],
+  [true, '같은 뜻에는 늘 같은 아이콘을 씁니다. 닫기는 x, 더 보기는 ellipsis 입니다.'],
   [true, '아이콘만 있는 버튼에는 aria-label을 붙입니다.'],
   [true, '색은 글자색을 따라가게 둡니다. 상태 색이 필요하면 부모 글자색을 바꿉니다.'],
   [true, '크기는 16, 20, 24 셋 중에서 고릅니다.'],
@@ -524,46 +524,46 @@ const ICON_PRACTICES = [
 ];
 // 아이콘 쓰임 (아이콘 페이지 표). icons.css에 아이콘을 넣으면 여기에도 한 줄 - 빠지면 빌드가 알려 주고 Others에 넣는다
 const ICON_GROUPS = [
-  ['Navigation', { 'chevron-down': '펼치기, 드롭다운 열기', 'chevron-up': '접기', 'chevron-left': '뒤로, 이전', 'chevron-right': '다음, 목록 행의 이동 표시', 'chevrons-left': '맨 처음으로', 'chevrons-right': '맨 끝으로', 'arrow-right': '다음 단계, 바로 가기', 'arrow-up': '맨 위로, 보내기', 'corner-down-right': '답글, 하위 항목', menu: '메뉴 열기', 'panel-left': '왼쪽 메뉴 열고 닫기', house: '홈', 'house-solid': '홈 (선택됨)', 'external-link': '새 창으로 열기' }],
-  ['Action', { x: '닫기, 지우기', check: '선택됨, 확인', plus: '추가, 수량 늘리기', minus: '빼기, 수량 줄이기', search: '찾기', copy: '복사', share: '공유', link: '링크 복사, 제목 링크', trash: '삭제', upload: '올리기', paperclip: '파일 첨부', 'rotate-ccw': '새로 고침, 되돌리기', ellipsis: '더 보기 메뉴', eye: '비밀번호 보이기', 'eye-off': '비밀번호 숨기기', image: '사진 자리, 사진 올리기', square: '멈춤 (AI 답변 생성 중단)' }],
-  ['Status', { 'circle-check': '성공, 완료', 'circle-check-solid': '성공, 완료 (채움, Callout과 Snackbar)', 'circle-alert': '오류, 주의', 'circle-alert-solid': '오류, 주의 (채움)', 'triangle-alert': '경고', 'triangle-alert-solid': '경고 (채움)', info: '안내', 'info-solid': '안내 (채움)', 'circle-x': '실패, 입력 지우기', inbox: '비어 있음 (Empty)', sparkles: 'AI 기능, 새 기능' }],
-  ['Object', { calendar: '날짜 고르기', clock: '시간 고르기, 시각', 'file-text': '문서, 파일', 'id-card': '계정, 신분 정보', 'credit-card': '결제, 카드', globe: '언어, 지역', monitor: 'PC 화면 보기', smartphone: '모바일 화면 보기', headset: '고객센터', 'message-circle': '댓글, 대화', 'map-pin': '위치, 주소', 'shopping-cart': '장바구니' }],
-  ['App', { folder: '폴더', 'folder-open': '열린 폴더', 'folder-tree': '폴더 구조', 'folder-input': '폴더로 옮기기', file: '파일', 'file-code': '코드 파일', archive: '보관', download: '내려받기', save: '저장', printer: '인쇄', mail: '메일', bell: '알림', settings: '설정', 'log-out': '로그아웃', user: '사람, 내 정보', users: '여러 사람, 팀', lock: '잠금, 보안', 'key-round': '열쇠, SSO 로그인', 'shield-check': '안전, 인증됨', building: '회사, 기업', package: '상품, 꾸러미', truck: '배송', receipt: '영수증, 청구', wallet: '지갑, 자산', tag: '태그, 분류', flag: '깃발, 표시', 'at-sign': '아이디, 멘션', phone: '전화', cloud: '클라우드', database: '데이터베이스', server: '서버', 'globe-lock': '보안 연결', 'link-2': '연결된 계정', 'book-open': '문서, 배우기', lightbulb: '도움말, 팁', rocket: '빠르게, 시작', bug: '버그, 문제', 'wand-sparkles': 'AI 도구 사용', sparkle: '반짝, 새로움' }],
-  ['Editor', { 'layout-grid': '바둑판 보기', list: '목록 보기', 'list-checks': '체크 목록', 'list-filter': '목록 거르기', 'list-music': '재생 목록', 'columns-3': '열 보기', 'grip-vertical': '끌어 옮기기 손잡이', move: '옮기기', 'zoom-in': '확대', 'zoom-out': '축소', type: '글자 도구', layers: '레이어', 'pen-tool': '펜 도구', 'mouse-pointer-2': '선택 도구', hand: '화면 이동 도구', crop: '자르기', scissors: '오려 두기', palette: '색, 만들기', 'square-pen': '새로 쓰기', pencil: '고치기', 'text-align-start': '글 블록', italic: '기울임', 'undo-2': '되돌리기', 'redo-2': '다시 하기', undo: '되돌리기', terminal: '터미널', code: '코드', 'git-branch': '브랜치', 'git-commit-horizontal': '커밋', 'git-pull-request': '풀 리퀘스트', 'panel-right': '오른쪽 패널, 태블릿 보기', 'maximize-2': '크게 보기', play: '실행, 재생', pause: '멈춤', video: '영상', mic: '말로 입력', 'chart-line': '선 그래프', 'chart-column': '막대 그래프', 'chart-pie': '원 그래프', 'calendar-days': '달력 보기' }],
-  ['More', { funnel: '거르기', 'sliders-horizontal': '보기 설정, 고급 검색', 'arrow-down': '아래로', 'arrow-left': '왼쪽, 이전', 'arrow-up-down': '정렬', 'chevrons-up-down': '모두 펼치기', 'ellipsis-vertical': '세로 더 보기', 'refresh-cw': '새로 고침', circle: '빈 동그라미', 'circle-dot': '선택된 동그라미', 'circle-dashed': '예정, 빈 상태', sun: '밝은 화면', moon: '어두운 화면', command: '명령, 단축키' }],
-  ['Reaction', { heart: '좋아요, 찜', 'heart-solid': '좋아요, 찜 (선택됨)', bookmark: '저장, 북마크', 'bookmark-solid': '저장, 북마크 (선택됨)', star: '평점, 즐겨찾기', 'star-solid': '평점, 즐겨찾기 (채움)', 'thumbs-up': '도움이 됐어요', 'thumbs-down': '도움이 안 됐어요' }],
+  ['이동', { 'chevron-down': '펼치기, 드롭다운 열기', 'chevron-up': '접기', 'chevron-left': '뒤로, 이전', 'chevron-right': '다음, 목록 행의 이동 표시', 'chevrons-left': '맨 처음으로', 'chevrons-right': '맨 끝으로', 'arrow-right': '다음 단계, 바로 가기', 'arrow-up': '맨 위로, 보내기', 'corner-down-right': '답글, 하위 항목', menu: '메뉴 열기', 'panel-left': '왼쪽 메뉴 열고 닫기', house: '홈', 'house-solid': '홈 (선택됨)', 'external-link': '새 창으로 열기' }],
+  ['동작', { x: '닫기, 지우기', check: '선택됨, 확인', plus: '추가, 수량 늘리기', minus: '빼기, 수량 줄이기', search: '찾기', copy: '복사', share: '공유', link: '링크 복사, 제목 링크', trash: '삭제', upload: '올리기', paperclip: '파일 첨부', 'rotate-ccw': '새로 고침, 되돌리기', ellipsis: '더 보기 메뉴', eye: '비밀번호 보이기', 'eye-off': '비밀번호 숨기기', image: '사진 자리, 사진 올리기', square: '멈춤 (AI 답변 생성 중단)' }],
+  ['상태', { 'circle-check': '성공, 완료', 'circle-check-solid': '성공, 완료 (채움, Callout과 Snackbar)', 'circle-alert': '오류, 주의', 'circle-alert-solid': '오류, 주의 (채움)', 'triangle-alert': '경고', 'triangle-alert-solid': '경고 (채움)', info: '안내', 'info-solid': '안내 (채움)', 'circle-x': '실패, 입력 지우기', inbox: '비어 있음 (Empty)', sparkles: 'AI 기능, 새 기능' }],
+  ['사물', { calendar: '날짜 고르기', clock: '시간 고르기, 시각', 'file-text': '문서, 파일', 'id-card': '계정, 신분 정보', 'credit-card': '결제, 카드', globe: '언어, 지역', monitor: 'PC 화면 보기', smartphone: '모바일 화면 보기', headset: '고객센터', 'message-circle': '댓글, 대화', 'map-pin': '위치, 주소', 'shopping-cart': '장바구니' }],
+  ['앱', { folder: '폴더', 'folder-open': '열린 폴더', 'folder-tree': '폴더 구조', 'folder-input': '폴더로 옮기기', file: '파일', 'file-code': '코드 파일', archive: '보관', download: '내려받기', save: '저장', printer: '인쇄', mail: '메일', bell: '알림', settings: '설정', 'log-out': '로그아웃', user: '사람, 내 정보', users: '여러 사람, 팀', lock: '잠금, 보안', 'key-round': '열쇠, SSO 로그인', 'shield-check': '안전, 인증됨', building: '회사, 기업', package: '상품, 꾸러미', truck: '배송', receipt: '영수증, 청구', wallet: '지갑, 자산', tag: '태그, 분류', flag: '깃발, 표시', 'at-sign': '아이디, 멘션', phone: '전화', cloud: '클라우드', database: '데이터베이스', server: '서버', 'globe-lock': '보안 연결', 'link-2': '연결된 계정', 'book-open': '문서, 배우기', lightbulb: '도움말, 팁', rocket: '빠르게, 시작', bug: '버그, 문제', 'wand-sparkles': 'AI 도구 사용', sparkle: '반짝, 새로움' }],
+  ['편집', { 'layout-grid': '바둑판 보기', list: '목록 보기', 'list-checks': '체크 목록', 'list-filter': '목록 거르기', 'list-music': '재생 목록', 'columns-3': '열 보기', 'grip-vertical': '끌어 옮기기 손잡이', move: '옮기기', 'zoom-in': '확대', 'zoom-out': '축소', type: '글자 도구', layers: '레이어', 'pen-tool': '펜 도구', 'mouse-pointer-2': '선택 도구', hand: '화면 이동 도구', crop: '자르기', scissors: '오려 두기', palette: '색, 만들기', 'square-pen': '새로 쓰기', pencil: '고치기', 'text-align-start': '글 블록', italic: '기울임', 'undo-2': '되돌리기', 'redo-2': '다시 하기', undo: '되돌리기', terminal: '터미널', code: '코드', 'git-branch': '브랜치', 'git-commit-horizontal': '커밋', 'git-pull-request': '풀 리퀘스트', 'panel-right': '오른쪽 패널, 태블릿 보기', 'maximize-2': '크게 보기', play: '실행, 재생', pause: '멈춤', video: '영상', mic: '말로 입력', 'chart-line': '선 그래프', 'chart-column': '막대 그래프', 'chart-pie': '원 그래프', 'calendar-days': '달력 보기' }],
+  ['그 밖에', { funnel: '거르기', 'sliders-horizontal': '보기 설정, 고급 검색', 'arrow-down': '아래로', 'arrow-left': '왼쪽, 이전', 'arrow-up-down': '정렬', 'chevrons-up-down': '모두 펼치기', 'ellipsis-vertical': '세로 더 보기', 'refresh-cw': '새로 고침', circle: '빈 동그라미', 'circle-dot': '선택된 동그라미', 'circle-dashed': '예정, 빈 상태', sun: '밝은 화면', moon: '어두운 화면', command: '명령, 단축키' }],
+  ['반응', { heart: '좋아요, 찜', 'heart-solid': '좋아요, 찜 (선택됨)', bookmark: '저장, 북마크', 'bookmark-solid': '저장, 북마크 (선택됨)', star: '평점, 즐겨찾기', 'star-solid': '평점, 즐겨찾기 (채움)', 'thumbs-up': '도움이 됐어요', 'thumbs-down': '도움이 안 됐어요' }],
 ];
 {
   const listed = new Set(ICON_GROUPS.flatMap(([, m]) => Object.keys(m)));
   const extra = iconNames.filter((n) => !listed.has(n));
   const gone = [...listed].filter((n) => !iconNames.includes(n));
-  if (extra.length) { console.log('  ! 아이콘 쓰임이 없는 아이콘(build.mjs ICON_GROUPS에 적기):', extra.join(', ')); ICON_GROUPS.push(['Others', Object.fromEntries(extra.map((n) => [n, '']))]); }
+  if (extra.length) { console.log('  ! 아이콘 쓰임이 없는 아이콘(build.mjs ICON_GROUPS에 적기):', extra.join(', ')); ICON_GROUPS.push(['쓰임 미정', Object.fromEntries(extra.map((n) => [n, '']))]); }
   if (gone.length) console.log('  ! icons.css에 없는 아이콘이 ICON_GROUPS에 있음:', gone.join(', '));
 }
 const iconRow = (n, usage) => [`<button type="button" class="site-icon-name" data-site-copy="ds-icon--${n}" title="클래스 이름 복사"><i class="ds-icon ds-icon--${n}" aria-hidden="true"></i><code>${n}</code></button>`, esc(usage)];
 write({
   file: 'foundations/icons.html', section: 'get-started', title: 'Iconography', pager: gsPager('foundations/icons.html'),
   body: `<header><h1 class="site-h1">Iconography</h1><p class="site-lead">${ICON_LEAD}</p>${metaLinks(linkBySlug.icons)}</header>
-<h2 id="overview">Overview</h2>
-<p>아이콘은 Lucide 한 가지만 씁니다. 지금 바로 쓸 수 있는 아이콘은 ${iconNames.length}개예요. 더 필요하면 아래 <a class="ds-link" href="#add">Add an Icon</a>에서 찾아 넣습니다.</p>
+<h2 id="overview">개요</h2>
+<p>아이콘은 Lucide 한 가지만 씁니다. 지금 바로 쓸 수 있는 아이콘은 ${iconNames.length}개입니다. 더 필요하면 아래 <a class="ds-link" href="#add">아이콘 더하기</a>에서 찾아 넣습니다.</p>
 ${example(`<div class="pv-stage"><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="medium"><i class="ds-icon ds-icon--search ds-icon--sm" aria-hidden="true"></i>찾기</button><button type="button" class="ds-btn" data-variant="ghost" data-size="medium" data-layout="iconOnly" aria-label="닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button><span class="ds-badge" data-tone="positive"><i class="ds-icon ds-icon--circle-check-solid ds-icon--sm" aria-hidden="true"></i>완료</span></div>`, `<!-- 글자 옆: 꾸밈용이라 aria-hidden -->\n<button class="ds-btn" data-variant="neutralWeak" data-size="medium">\n  <i class="ds-icon ds-icon--search ds-icon--sm" aria-hidden="true"></i>찾기\n</button>\n\n<!-- 아이콘만 있는 버튼: 뜻을 aria-label로 -->\n<button class="ds-btn" data-variant="ghost" data-size="medium" data-layout="iconOnly" aria-label="닫기">\n  <i class="ds-icon ds-icon--x" aria-hidden="true"></i>\n</button>`)}
 <ul class="site-list site-note">
-  <li>색은 따로 정하지 않습니다. 둘러싼 글자색을 그대로 따라가요.</li>
-  <li>크기는 기본 20 이고, <code>ds-icon--sm</code> 16, <code>ds-icon--lg</code> 24 두 가지가 더 있어요.</li>
-  <li>아이콘만 있는 버튼에는 <code>aria-label</code>로 뜻을 적습니다. 글자 옆의 꾸밈용 아이콘은 <code>aria-hidden="true"</code>.</li>
+  <li>색은 따로 정하지 않습니다. 둘러싼 글자색을 그대로 따라갑니다.</li>
+  <li>크기는 기본 20 이고, <code>ds-icon--sm</code> 16, <code>ds-icon--lg</code> 24 두 가지가 더 있습니다.</li>
+  <li>아이콘만 있는 버튼에는 <code>aria-label</code>로 뜻을 적습니다. 글자 옆의 꾸밈용 아이콘에는 <code>aria-hidden="true"</code>를 붙입니다.</li>
 </ul>
-<h2 id="icons">Icons</h2>
-<p>이름을 누르면 클래스가 복사됩니다. 이름 끝에 <code>-solid</code>가 붙은 것은 채움 모양이에요.</p>
-${ICON_GROUPS.map(([g, m]) => `<h3 id="icons-${g.toLowerCase()}">${g}</h3>\n${table(['Name', 'Usage'], Object.entries(m).filter(([n]) => iconNames.includes(n)).map(([n, u]) => iconRow(n, u)))}`).join('\n')}
-<h2 id="size">Size and Color</h2>
+<h2 id="icons">아이콘 목록</h2>
+<p>이름을 누르면 클래스가 복사됩니다. 이름 끝에 <code>-solid</code>가 붙은 것은 채움 모양입니다.</p>
+${ICON_GROUPS.map(([g, m]) => `<h3 id="icons-${ICON_GROUPS.findIndex(([x]) => x === g) + 1}">${g}</h3>\n${table(['이름', '쓰임'], Object.entries(m).filter(([n]) => iconNames.includes(n)).map(([n, u]) => iconRow(n, u)))}`).join('\n')}
+<h2 id="size">크기와 색</h2>
 <p>크기는 셋 중 하나를 고릅니다. 그 밖의 크기가 꼭 필요하면 <code>--ds-icon-size</code> 변수로 바꿉니다. 색은 부모의 글자색을 바꾸면 따라옵니다.</p>
 ${example(`<div class="pv-stage"><i class="ds-icon ds-icon--search ds-icon--sm" aria-hidden="true"></i><i class="ds-icon ds-icon--search" aria-hidden="true"></i><i class="ds-icon ds-icon--search ds-icon--lg" aria-hidden="true"></i><span style="color: var(--ybm-color-fg-brand)"><i class="ds-icon ds-icon--circle-check-solid ds-icon--lg" aria-hidden="true"></i></span><span style="color: var(--ybm-color-fg-critical)"><i class="ds-icon ds-icon--triangle-alert-solid ds-icon--lg" aria-hidden="true"></i></span></div>`, `<i class="ds-icon ds-icon--search ds-icon--sm" aria-hidden="true"></i>  <!-- 16 -->\n<i class="ds-icon ds-icon--search" aria-hidden="true"></i>              <!-- 20 기본 -->\n<i class="ds-icon ds-icon--search ds-icon--lg" aria-hidden="true"></i>  <!-- 24 -->\n\n<!-- 색은 부모 글자색 -->\n<span style="color: var(--ybm-color-fg-brand)"><i class="ds-icon ds-icon--circle-check-solid" aria-hidden="true"></i></span>\n<span style="color: var(--ybm-color-fg-critical)"><i class="ds-icon ds-icon--triangle-alert-solid" aria-hidden="true"></i></span>`)}
-<h2 id="add">Add an Icon</h2>
-<p>여기 없는 아이콘은 Lucide ${lucideCount.toLocaleString()}개에서 찾습니다. 아이콘을 누르면 <code>icons.css</code>에 붙여 넣을 줄이 복사되고, 붙여 넣으면 바로 쓸 수 있어요. 이미 들어 있는 것은 CSS 표시가 붙어 있고 누르면 클래스가 복사됩니다.</p>
+<h2 id="add">아이콘 더하기</h2>
+<p>여기 없는 아이콘은 Lucide ${lucideCount.toLocaleString()}개에서 찾습니다. 아이콘을 누르면 <code>icons.css</code>에 붙여 넣을 줄이 복사되고, 붙여 넣으면 바로 쓸 수 있습니다. 이미 들어 있는 것은 CSS 표시가 붙어 있고 누르면 클래스가 복사됩니다.</p>
 ${codeblock(`/* Lucide heart - 복사된 줄을 dist/icons.css 끝에 붙인다 */\n:root { --ds-icon-heart: url("data:image/svg+xml,…"); }\n.ds-icon--heart { --ds-icon: var(--ds-icon-heart); }\n\n<!-- 그다음부터 -->\n<i class="ds-icon ds-icon--heart" aria-hidden="true"></i>`)}
-<div class="site-icon-search"><div class="ds-input" data-variant="outline" data-size="medium"><i class="ds-icon ds-icon--search ds-input__icon" aria-hidden="true"></i><input class="ds-input__control" type="search" placeholder="Search icons (arrow, user, calendar)" aria-label="아이콘 찾기" data-site-lucide-search></div><span class="site-lucide-count" data-site-lucide-count></span></div>
+<div class="site-icon-search"><div class="ds-input" data-variant="outline" data-size="medium"><i class="ds-icon ds-icon--search ds-input__icon" aria-hidden="true"></i><input class="ds-input__control" type="search" placeholder="영어 이름으로 찾기 (arrow, user, calendar)" aria-label="아이콘 찾기" data-site-lucide-search></div><span class="site-lucide-count" data-site-lucide-count></span></div>
 <div class="site-icons" id="site-lucide" data-site-ds-icons="${esc(iconNames.join(' '))}"></div>
-<h2 id="practices">Best Practices</h2>
+<h2 id="practices">사용 지침</h2>
 ${practices(ICON_PRACTICES)}
 <p class="site-note">아이콘 그림은 Lucide(ISC 라이선스)입니다. <a class="ds-link" href="{root}assets/lucide-LICENSE.txt">라이선스 전문</a></p>
 <script src="{root}assets/lucide-icons.js" defer></script>`,
@@ -573,10 +573,10 @@ ${practices(ICON_PRACTICES)}
 const jsRows = [...dsJs.slice(0, dsJs.indexOf('*/')).matchAll(/^\s*· (.+?) — (.+)$/gm)].map((m) => [`<b>${esc(m[1])}</b>`, inline(prose(m[2]))]);
 write({
   file: 'get-started/scripts.html', section: 'get-started', title: 'Scripts', pager: gsPager('get-started/scripts.html'),
-  body: `<header><h1 class="site-h1">Scripts</h1><p class="site-lead"><code>ybm-ds.js</code>는 CSS만으로 안 되는 동작만 맡습니다. 불러오기만 하면 HTML 속성을 보고 알아서 동작해요.</p></header>
-<h2 id="features">Features</h2>
+  body: `<header><h1 class="site-h1">Scripts</h1><p class="site-lead"><code>ybm-ds.js</code>는 CSS만으로 안 되는 동작만 맡습니다. 불러오기만 하면 HTML 속성을 보고 알아서 동작합니다.</p></header>
+<h2 id="features">하는 일</h2>
 ${table(['부품', '하는 일'], jsRows)}
-<h2 id="api">API</h2>
+<h2 id="api">직접 부르기</h2>
 ${table(['기능', '쓰는 법'], [['창 열기, 닫기', '<code>YBM.openDialog(요소)</code>, <code>YBM.closeDialog(요소)</code>'], ['알림 띄우기', '<code>YBM.snackbar("저장했어요", { variant: "positive" })</code>'], ['새로 고침 끝내기', '<code>YBM.endRefresh(요소)</code>'], ['나중에 넣은 HTML 연결', '<code>YBM.init(요소)</code>']])}
 ${codeblock(`<button class="ds-btn" data-ds-open="confirm">열기</button>\n<dialog class="ds-dialog" id="confirm">… <button class="ds-btn" data-ds-close>닫기</button></dialog>\n\n<script>\n  YBM.snackbar("저장했어요", { variant: "positive", action: "확인" });\n</script>`)}`,
 });
@@ -647,12 +647,12 @@ comps.forEach((c) => {
   const prev = compsAZ[i - 1], next = compsAZ[i + 1];
   const { rows, rest } = propsTable(c);
   const sections = [];
-  sections.push(`<h2 id="usage">Usage</h2>${c.markup ? `<p>아래 구조를 그대로 복사해 쓰세요. 대괄호 <code>[ ]</code> 안은 필요할 때만 넣습니다.</p>${codeblock(c.markup)}` : '<p>아직 구조 설명이 없어요. 아래 Examples의 코드를 복사해 쓰세요.</p>'}`);
-  if (rows.length || rest) sections.push(`<h2 id="props">Properties</h2><p>Figma 속성 이름을 그대로 <code>data-*</code> 속성으로 씁니다.</p>${rows.length ? table(['속성', '값'], rows) : ''}${rest ? `<p class="site-note">그 밖에: ${rest}</p>` : ''}`);
-  if (c.vars.length) sections.push(`<h2 id="vars">CSS Variables</h2><p>서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.</p>${table(['변수', '기본값'], c.vars.map(([n, v]) => [`<code>${esc(n)}</code>`, `<code>${esc(v)}</code>`]))}`);
-  if (c.dos.length) sections.push(`<h2 id="guide">Best Practices</h2>${practices(c.dos.map((d) => [!isDont(d), d]))}`);
-  sections.push(`<h2 id="examples">Examples</h2>${c.example ? example(c.example, codeOf(c.example) || c.markup) : '<p>아직 예시가 없어요.</p>'}`);
-  if (c.spec) sections.push(`<h2 id="spec">Specification</h2><p>Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.</p><pre class="site-spec">${esc(c.spec)}</pre>`);
+  sections.push(`<h2 id="usage">사용법</h2>${c.markup ? `<p>아래 구조를 그대로 복사해 쓰세요. 대괄호 <code>[ ]</code> 안은 필요할 때만 넣습니다.</p>${codeblock(c.markup)}` : '<p>아직 구조 설명이 없습니다. 아래 예시의 코드를 복사해 쓰세요.</p>'}`);
+  if (rows.length || rest) sections.push(`<h2 id="props">속성</h2><p>Figma 속성 이름을 그대로 <code>data-*</code> 속성으로 씁니다.</p>${rows.length ? table(['속성', '값'], rows) : ''}${rest ? `<p class="site-note">그 밖에: ${rest}</p>` : ''}`);
+  if (c.vars.length) sections.push(`<h2 id="vars">CSS 변수</h2><p>서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.</p>${table(['변수', '기본값'], c.vars.map(([n, v]) => [`<code>${esc(n)}</code>`, `<code>${esc(v)}</code>`]))}`);
+  if (c.dos.length) sections.push(`<h2 id="guide">사용 지침</h2>${practices(c.dos.map((d) => [!isDont(d), d]))}`);
+  sections.push(`<h2 id="examples">예시</h2>${c.example ? example(c.example, codeOf(c.example) || c.markup) : '<p>아직 예시가 없습니다.</p>'}`);
+  if (c.spec) sections.push(`<h2 id="spec">규격</h2><p>Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.</p><pre class="site-spec">${esc(c.spec)}</pre>`);
   write({
     file: `components/${c.slug}.html`, section: 'components', title: c.name.split(' · ')[0], desc: c.desc,
     pager: [prev && { href: `${prev.slug}.html`, label: prev.name.split(' · ')[0] }, next && { href: `${next.slug}.html`, label: next.name.split(' · ')[0] }],
@@ -668,6 +668,8 @@ ${sections.join('\n')}`,
 
 /* ---------------------------------------------------------------- Templates */
 const tplGroups = [...new Set(templates.map((t) => t.group))];
+// 분류 칩에 보이는 이름 (값은 templates.json 의 영어 group)
+const TPL_GROUP_KO = { Dashboard: '대시보드', Table: '표', Form: '입력 폼', Settings: '설정', Login: '로그인', Tools: '도구', Content: '콘텐츠', 'AI Chat': 'AI 채팅', Gallery: '갤러리', Shell: '앱 틀' };
 const TPL_FIGMA = JSON.parse(fs.readFileSync(path.join(SITE, 'src/templates.json'), 'utf8')).figmaHeader;
 write({
   file: 'templates/index.html', section: 'templates', title: 'Templates', layout: 'full',
@@ -675,7 +677,7 @@ write({
 <div class="site-toolbar site-toolbar--center">
   <div class="ds-chiptabs" role="tablist" aria-label="분류">
     <button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-filter="">전체</button>
-    ${tplGroups.map((g) => `<button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-filter="${esc(g)}">${esc(g)}</button>`).join('\n    ')}
+    ${tplGroups.map((g) => `<button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-filter="${esc(g)}">${esc(TPL_GROUP_KO[g] || g)}</button>`).join('\n    ')}
   </div>
 </div>
 <div class="site-tpl-grid">
@@ -683,7 +685,7 @@ ${templates.map((t) => `<article class="site-tpl" data-site-item="${esc((t.name 
   <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/${t.slug}.html" title="${esc(t.name)} 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="${t.slug}.html">${esc(t.name)}</a></h3><p class="site-tpl__desc">${esc(t.desc)}</p></div>
-    <div class="site-tpl__actions"><a class="site-tpl__btn" href="${t.slug}.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>Preview</a>${t.figma ? `<a class="site-tpl__btn" href="${LINKS.figmaUrl(t.figma.pc)}" target="_blank" rel="noopener"><i class="ds-icon site-i--figma" aria-hidden="true"></i>Open in Figma</a>` : ''}</div>
+    <div class="site-tpl__actions"><a class="site-tpl__btn" href="${t.slug}.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a>${t.figma ? `<a class="site-tpl__btn" href="${LINKS.figmaUrl(t.figma.pc)}" target="_blank" rel="noopener"><i class="ds-icon site-i--figma" aria-hidden="true"></i>Figma에서 열기</a>` : ''}</div>
   </div>
 </article>`).join('\n')}
 </div>
@@ -702,18 +704,18 @@ templates.forEach((t) => {
   <p class="site-eyebrow"><a href="index.html">Templates</a> / ${esc(t.group)}</p>
   <h1 class="site-h1">${esc(t.name)}</h1>
   <p class="site-lead">${esc(t.desc)}</p>
-  <div class="site-meta">${btn(`pages/${t.slug}.html`, '새 창으로 보기', 'neutralSolid', 'small', 'external-link').replace('href="pages', 'target="_blank" rel="noopener" href="pages')}${t.figma ? metaLink(LINKS.figmaUrl(t.figma.pc), 'Figma', 'site-i--figma') : ''}${metaLink(`${GITHUB}/blob/main/site/templates/pages/${t.slug}.html`, 'Code', 'site-i--github')}</div>
+  <div class="site-meta">${btn(`pages/${t.slug}.html`, '새 창으로 보기', 'neutralSolid', 'small', 'external-link').replace('href="pages', 'target="_blank" rel="noopener" href="pages')}${t.figma ? metaLink(LINKS.figmaUrl(t.figma.pc), 'Figma', 'site-i--figma') : ''}${metaLink(`${GITHUB}/blob/main/site/templates/pages/${t.slug}.html`, '코드', 'site-i--github')}</div>
 </header>
 <div class="site-frame">
   <div class="site-frame__bar">
-    <div class="ds-segmented" role="group" aria-label="보기 방식"><button type="button" class="ds-segmented__item" aria-pressed="true" data-site-view="preview">Preview</button><button type="button" class="ds-segmented__item" aria-pressed="false" data-site-view="code">Code</button></div>
-    <div class="ds-segmented" role="group" aria-label="화면 폭"><button type="button" class="ds-segmented__item" aria-pressed="true" data-site-device="desktop">Desktop</button><button type="button" class="ds-segmented__item" aria-pressed="false" data-site-device="tablet">Tablet</button><button type="button" class="ds-segmented__item" aria-pressed="false" data-site-device="mobile">Mobile</button></div>
+    <div class="ds-segmented" role="group" aria-label="보기 방식"><button type="button" class="ds-segmented__item" aria-pressed="true" data-site-view="preview">미리보기</button><button type="button" class="ds-segmented__item" aria-pressed="false" data-site-view="code">코드</button></div>
+    <div class="ds-segmented" role="group" aria-label="화면 폭"><button type="button" class="ds-segmented__item" aria-pressed="true" data-site-device="desktop">PC</button><button type="button" class="ds-segmented__item" aria-pressed="false" data-site-device="tablet">태블릿</button><button type="button" class="ds-segmented__item" aria-pressed="false" data-site-device="mobile">모바일</button></div>
   </div>
   <div class="site-frame__stage" data-device="desktop"><iframe src="pages/${t.slug}.html" title="${esc(t.name)} 템플릿" data-site-frame></iframe></div>
   <div class="site-frame__code" hidden>${codeblock('불러오는 중…').replace('<figure class="ds-codeblock"', `<figure class="ds-codeblock" data-site-src="pages/${t.slug}.html"`)}</div>
 </div>
-${t.note ? `<h2 id="responsive">Responsive</h2><p>${esc(t.note)}</p>` : ''}
-${used.length ? `<h2 id="components">Components Used</h2><div class="site-links">${used.map((c) => `<a class="ds-chip" data-size="small" href="../components/${c.slug}.html">${esc(c.name.split(' · ')[0])}</a>`).join('')}</div>` : ''}`,
+${t.note ? `<h2 id="responsive">반응형</h2><p>${esc(t.note)}</p>` : ''}
+${used.length ? `<h2 id="components">쓴 컴포넌트</h2><div class="site-links">${used.map((c) => `<a class="ds-chip" data-size="small" href="../components/${c.slug}.html">${esc(c.name.split(' · ')[0])}</a>`).join('')}</div>` : ''}`,
   });
 });
 

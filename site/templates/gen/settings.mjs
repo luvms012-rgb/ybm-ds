@@ -45,7 +45,7 @@ const dialog = () => {
   </div>
 </div></div>
 </div>`;
-  return { slug: 'settings-dialog', en: 'Settings Dialog', name: '설정 대화상자', group: 'Settings', desc: '보던 화면을 떠나지 않고 대화상자 안에서 바꾸는 설정입니다. 왼쪽에 찾기와 묶음 메뉴, 오른쪽에 묶인 항목과 바로 반영되는 입력이 있어요.', css, body };
+  return { slug: 'settings-dialog', en: 'Settings Dialog', name: '설정 대화상자', group: 'Settings', desc: '보던 화면을 떠나지 않고 대화상자 안에서 바꾸는 설정입니다. 왼쪽에 찾기와 묶음 메뉴, 오른쪽에 묶인 항목과 바로 반영되는 입력이 있습니다.', css, body };
 };
 
 /* 2. 설정 폼 (한 장으로 이어지는) ------------------------------ */
@@ -78,7 +78,7 @@ const form = () => {
   </main>
 </div>
 </div>`;
-  return { slug: 'settings', en: 'Settings Form', name: '설정 폼', group: 'Settings', desc: '설정을 한 장의 긴 폼으로 이어 붙인 가장 단순한 모양입니다. 묶음 사이를 오가는 메뉴 없이 아래로 내리면 모든 설정에 닿아요.', css, body };
+  return { slug: 'settings', en: 'Settings Form', name: '설정 폼', group: 'Settings', desc: '설정을 한 장의 긴 폼으로 이어 붙인 가장 단순한 모양입니다. 묶음 사이를 오가는 메뉴 없이 아래로 내리면 모든 설정에 닿습니다.', css, body };
 };
 
 /* 3. 설정 패널 (왼쪽 메뉴로 바꾸는) ---------------------------- */
@@ -105,7 +105,7 @@ const panels = () => {
   </main>
 </div>
 </div>`;
-  return { slug: 'settings-sidebar', en: 'Settings Panels', name: '설정 패널', group: 'Settings', desc: '왼쪽에 늘 보이는 메뉴로 옆 칸을 바꾸는 설정입니다. 따로 폼을 열지 않고 줄마다 그 자리에서 고쳐요.', css, body };
+  return { slug: 'settings-sidebar', en: 'Settings Panels', name: '설정 패널', group: 'Settings', desc: '왼쪽에 늘 보이는 메뉴로 옆 칸을 바꾸는 설정입니다. 따로 폼을 열지 않고 줄마다 그 자리에서 고칩니다.', css, body };
 };
 
 export const templates = [dialog, form, panels].map((f) => f());

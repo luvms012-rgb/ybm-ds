@@ -75,7 +75,7 @@ ${head('데이터 대시보드', { sub: '사용자 분석 개요 · 전체 사�
   </section>
 </main>
 </div>`;
-  return { slug: 'dashboard-comparison', en: 'Data Dashboard', name: '데이터 대시보드', group: 'Dashboard', desc: '위쪽 필터 막대를 둔 비교 분석 화면입니다. 지표 타일마다 작은 추이 선과 전일·전주·전월·전년 대비 변화를 함께 보여 줘요.', css, body };
+  return { slug: 'dashboard-comparison', en: 'Data Dashboard', name: '데이터 대시보드', group: 'Dashboard', desc: '위쪽 필터 막대를 둔 비교 분석 화면입니다. 지표 타일마다 작은 추이 선과 전일, 전주, 전월, 전년 대비 변화를 함께 보여 줍니다.', css, body };
 };
 
 /* 3. 주간 리포트 (스코어카드 + 오른쪽 요약) ---------------------- */
@@ -170,7 +170,7 @@ const composition = () => {
   ${card(`<h2 class="tp-h3">관심 종목</h2>${table(['종목', ['현재가', 'end'], ['전일 대비', 'end'], ['등락률', 'end'], ['거래량', 'end'], ['', 'end']], trend.map(([n, p, c, r, v]) => [n, T(p), badge(c, c.startsWith('-') ? 'critical' : 'positive'), T(r), T(v), btn('관심', { variant: 'ghost', ic: 'star', size: 'xsmall' })]))}`)}
 </main>
 </div>`;
-  return { slug: 'dashboard-composition', en: 'Portfolio Dashboard', name: '자산 대시보드', group: 'Dashboard', desc: '시간에 따라 값이 어떻게 바뀌는지 보는 화면입니다. 잔액과 변화 타일, 구성 비율이 쌓인 면적 그래프, 많이 가진 항목 목록과 시장 표로 이어져요.', css: '', body };
+  return { slug: 'dashboard-composition', en: 'Portfolio Dashboard', name: '자산 대시보드', group: 'Dashboard', desc: '시간에 따라 값이 어떻게 바뀌는지 보는 화면입니다. 잔액과 변화 타일, 구성 비율이 쌓인 면적 그래프, 많이 가진 항목 목록과 시장 표로 이어집니다.', css: '', body };
 };
 
 /* 6. 프로젝트 현황 ----------------------------------------------- */
@@ -240,7 +240,7 @@ ${head('서비스 상태 모니터', { sub: `<span class="tp-row">${dot('positiv
 </aside>
 </div>
 </div>`;
-  return { slug: 'dashboard-alert-rail', en: 'Service Monitoring Dashboard', name: '서비스 모니터링 대시보드', group: 'Dashboard', desc: '늘 켜 두는 상태 화면입니다. 상태 색이 있는 타일과 시간 그래프, 서비스별 90일 가동 막대, 오른쪽에 따로 스크롤되는 알림 패널이 있어요.', css, body };
+  return { slug: 'dashboard-alert-rail', en: 'Service Monitoring Dashboard', name: '서비스 모니터링 대시보드', group: 'Dashboard', desc: '늘 켜 두는 상태 화면입니다. 상태 색이 있는 타일과 시간 그래프, 서비스별 90일 가동 막대, 오른쪽에 따로 스크롤되는 알림 패널이 있습니다.', css, body };
 };
 
 export const templates = [analytics, comparison, scorecard, funnel, composition, progressDash, monitoring].map((f) => f());
