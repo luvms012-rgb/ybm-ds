@@ -4,7 +4,7 @@ import { T, FRAME_CSS, topbar, sidenav, frame, selectbox, tags, calendar } from 
 const { icon, btn, iconBtn, badge, card, head, secHead, field, input, select, checkbox, divider, chip, chiptabs, tabs, segmented, progress, ring, table, tablePager, stepper, avatar, callout, dot, link, breadcrumbs, lineChart, barChart, donut, legend, meter, kpi, search, C, esc } = K;
 
 const USER_MENU = ['시험 일정', '시험 접수', '성적 확인', '내 시험'];
-const userEnd = `${iconBtn('bell', '알림', { size: 'xsmall' })}${avatar('김서윤', 28)}`;
+const userEnd = `${iconBtn('bell', '알림', { size: 'xsmall' })}${avatar('와이비엠', 28)}`;
 const ORG = '한빛대학교';
 const orgNav = (cur) => sidenav(ORG, [['', [['홈', 'house', cur === 0], ['단체 접수', 'square-pen', cur === 1], ['응시자 관리', 'users', cur === 2], ['성적 리포트', 'chart-column', cur === 3]]], ['운영', [['정산', 'receipt', false], ['공지 보내기', 'mail', false]]]], [['설정', 'settings', false]]);
 const CSS = FRAME_CSS + `
@@ -52,7 +52,7 @@ const apply = () => {
           ${selectbox('venue', [['강남 시험장', '1.3km · 남은 자리 12석'], ['종로 시험장', '6.7km · 남은 자리 3석'], ['신촌 시험장', '9.8km · 남은 자리 20석']], 0)}
         </div>`)}
       ${card(`${stepH(4, '규정 동의')}${checkbox('<b>전체 동의</b>', { checked: false })}${divider()}<div class="tp-stack" style="gap: var(--ybm-space-x3)">${['[필수] 시험 응시 규정', '[필수] 시험 성적 이용 규정', '[필수] 개인정보 수집과 이용', '[선택] 시험 소식과 혜택 받기'].map((t) => `<div class="tp-between">${checkbox(t)}${link('보기')}</div>`).join('')}</div>`)}
-      ${card(`${stepH(5, '응시자 정보 확인')}<div class="tp-ds">${field('ea-name', '이름', input('ea-name', 'value="김서윤" readonly'))}${field('ea-birth', '생년월일', input('ea-birth', 'value="2001.04.12" readonly'))}${field('ea-en1', '영문 성', input('ea-en1', 'value="KIM"'), { required: true, help: '여권과 같은 영문으로 적어 주세요.' })}${field('ea-en2', '영문 이름', input('ea-en2', 'value="SEOYUN"'), { required: true })}${field('ea-phone', '휴대폰', input('ea-phone', 'value="010-1234-5678"'))}${field('ea-mail', '이메일', input('ea-mail', 'value="seoyun@example.com"'))}</div>${checkbox('[필수] 응시자 정보가 맞는지 확인했어요')}`)}
+      ${card(`${stepH(5, '응시자 정보 확인')}<div class="tp-ds">${field('ea-name', '이름', input('ea-name', 'value="와이비엠" readonly'))}${field('ea-birth', '생년월일', input('ea-birth', 'value="2001.04.12" readonly'))}${field('ea-en1', '영문 성', input('ea-en1', 'value="YBM"'), { required: true, help: '여권과 같은 영문으로 적어 주세요.' })}${field('ea-en2', '영문 이름', input('ea-en2', 'value="NET"'), { required: true })}${field('ea-phone', '휴대폰', input('ea-phone', 'value="010-1234-5678"'))}${field('ea-mail', '이메일', input('ea-mail', 'value="ybm@example.com"'))}</div>${checkbox('[필수] 응시자 정보가 맞는지 확인했어요')}`)}
       ${card(`${stepH(6, '할인과 결제 수단')}${field('ea-coupon', '쿠폰', select('쓸 수 있는 쿠폰 1장', { id: 'ea-coupon', size: 'medium' }))}${selectbox('pay', [['카드', '', 'credit-card'], ['계좌 이체', '', 'building'], ['간편 결제', '', 'wallet'], ['휴대폰', '', 'smartphone']], 0, { cols: 4, vertical: true })}`)}
     </div>
     <aside class="tp-aside-sticky">

@@ -43,39 +43,7 @@ const analytics = () => {
   return { slug: 'dashboard', en: 'Analytics Dashboard', name: '분석 대시보드', group: 'Dashboard', desc: '이용자 추이 그래프, 핵심 지표, 이용자 구성, 참여 현황을 한 화면에서 훑어보는 기본 분석 대시보드입니다.', css, body };
 };
 
-/* 2. 퍼널과 코호트 ----------------------------------------------- */
-const funnel = () => {
-  const tiles = [['방문 → 가입', '32.1%', '+1.8%p'], ['가입 → 첫 수강', '41.6%', '+0.9%p'], ['첫 수강 → 결제', '28.4%', '-1.2%p'], ['결제 → 재결제', '52.3%', '+2.4%p'], ['전체 전환', '4.9%', '+0.3%p']];
-  const stages = [['방문', 128400, ''], ['가입', 41216, '-68%'], ['첫 수강', 17146, '-58%'], ['결제', 4869, '-72%'], ['재결제', 2547, '-48%'], ['추천', 812, '-68%']];
-  const conv = [0, 1, 2, 3].map((i) => ({ name: tiles[i][0], data: walk(80 + i, 26, [32, 42, 28, 52][i], 4, { min: 5 }) }));
-  const cohort = ['8.31–9.06', '9.07–9.13', '9.14–9.20', '9.21–9.27', '9.28–10.04', '10.05–10.11', '10.12–10.18', '10.19–10.25'];
-  const ret = (r, w) => Math.max(0, Math.round(100 * Math.pow(0.78 - r * 0.008, w) + (w ? 6 : 0)));
-  const tone = (v) => (v >= 80 ? 'brand' : v >= 56 ? 'informative' : v >= 44 ? 'positive' : v >= 32 ? 'warning' : 'neutral');
-  const css = `
-  .tp-funnel { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--ybm-space-x4); }
-  @media (min-width: 1024px) { .tp-funnel { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
-  .tp-funnel__bar { display: flex; align-items: flex-end; height: 120px; border-radius: var(--ybm-shape-xs); background: var(--ybm-color-bg-neutral); overflow: hidden; }
-  .tp-funnel__bar > span { display: block; width: 100%; background: var(--ybm-color-chart-series-1); }
-  .tp-heat td { text-align: center; }
-`;
-  const body = `<div class="tp-app">
-${head('퍼널과 코호트 분석', { sub: '방문 128,400명 · 전체 전환 4.9%', tools: `${segmented(['7일', '30일', '90일'], 1, '퍼널 기간')}${select('모든 플랫폼', { id: 'f-seg', aria: '사용자 묶음' })}${btn('내보내기', { ic: 'upload' })}` })}
-<main class="tp-content">
-  <section class="tp-sec" aria-label="단계 전환율">
-    <div class="tp-g5">${tiles.map(([l, v, d]) => kpi(l, v, { d: d + ' 지난 기간 대비' })).join('')}</div>
-    ${card(`<div class="tp-stack"><h2 class="tp-h3">전환 퍼널</h2><span class="tp-sub">모든 플랫폼 · 30일</span></div>${divider()}<div class="tp-funnel">${stages.map(([n, v, d], i) => `<div class="tp-stack" style="gap: var(--ybm-space-x2)"><span class="tp-sub">${i ? stages[i - 1][0] + ' → ' + n : n}</span><div class="tp-row"><span class="tp-h3 tp-num">${i ? ((v / stages[i - 1][1]) * 100).toFixed(1) + '%' : v.toLocaleString()}</span>${d ? badge(d, 'critical') : ''}</div><div class="tp-funnel__bar" data-tip="${n}|${v.toLocaleString()}명"><span style="height:${Math.max(4, (v / 128400) * 100)}%"></span></div><span class="tp-caption tp-num">${v.toLocaleString()}명</span></div>`).join('')}</div>`)}
-    ${card(`<div class="tp-stack"><h2 class="tp-h3">시간에 따른 전환율</h2><span class="tp-sub">단계별 전환율 · 최근 26주</span></div>${lineChart(conv, { w: 1100, h: 240, x: ['5월', '6월', '7월', '8월', '9월', '10월'], unit: '%', label: '단계별 전환율 추이' })}${legend(conv.map((s, i) => [s.name, i]))}`)}
-  </section>
-  ${divider()}
-  <section class="tp-sec" aria-labelledby="s-co">${secHead('주간 잔존 코호트', { id: 's-co', sub: '가입 주 × 가입 뒤 지난 주' })}
-    ${card(`${table(['가입 주', ['사용자', 'end'], ...Array.from({ length: 9 }, (_, w) => ['' + w + '주', 'center'])], cohort.map((c, r) => [c, T((4820 - r * 210).toLocaleString()), ...Array.from({ length: 9 }, (_, w) => (w <= 8 - r ? badge(ret(r, w) + '%', tone(ret(r, w))).replace('<span class', `<span data-tip="${c} 가입 · ${w}주 뒤|${ret(r, w)}% 남음" class`) : ''))]), { cls: 'tp-heat' })}<div class="tp-row" style="flex-wrap: wrap"><span class="tp-caption">잔존율</span>${[['32% 미만', 'neutral'], ['32–44%', 'warning'], ['44–56%', 'positive'], ['56–80%', 'informative'], ['80% 이상', 'brand']].map(([t, k]) => badge(t, k)).join('')}</div>`)}
-  </section>
-</main>
-</div>`;
-  return { slug: 'dashboard-cohort-funnel', en: 'Funnel & Cohort Dashboard', name: '퍼널·코호트 대시보드', group: 'Dashboard', desc: '단계마다 얼마나 이탈하는지 보는 퍼널과, 가입 시기별로 얼마나 남아 있는지 보는 코호트 표를 함께 둔 분석 대시보드입니다.', css, body };
-};
-
-/* 3. 프로젝트 현황 ----------------------------------------------- */
+/* 2. 프로젝트 현황 ----------------------------------------------- */
 const progressDash = () => {
   const ms = [['기획 확정', 0, 12, 'positive'], ['디자인 시스템 적용', 8, 34, 'positive'], ['수강 결제 개편', 20, 52, 'warning'], ['학습 기록 API', 30, 58, 'critical'], ['앱 출시 준비', 48, 78, 'informative'], ['QA와 접근성 점검', 60, 84, 'informative'], ['정식 출시', 84, 90, 'neutral']];
   const ws = [['핵심 플랫폼', '개발', '김서준', 82, '4월 21일', ['순항', 'positive']], ['결제', '개발', '이하린', 54, '5월 9일', ['위험', 'warning']], ['학습 기록', '개발', '박도윤', 31, '5월 16일', ['막힘', 'critical']], ['앱', '출시', '최지아', 46, '6월 2일', ['순항', 'positive']], ['디자인', '디자인', '정유나', 90, '4월 4일', ['완료', 'neutral']], ['QA', '검증', '한지호', 18, '6월 13일', ['순항', 'positive']]];
@@ -98,7 +66,7 @@ ${head('새 학습 앱 출시', { sub: `목표 출시일 2026년 6월 30일 · $
   return { slug: 'dashboard-progress', en: 'Project Status Dashboard', name: '프로젝트 현황 대시보드', group: 'Dashboard', desc: '일정 막대와 오늘 표시선, 완료율 도넛, 담당자별 진행 표로 프로젝트가 어디까지 왔는지 보여 주는 대시보드입니다.', css: '', body };
 };
 
-/* 4. 서비스 모니터링 (오른쪽 알림 패널) -------------------------- */
+/* 3. 서비스 모니터링 (오른쪽 알림 패널) -------------------------- */
 const monitoring = () => {
   const tiles = [['positive', '전체 상태', '98.6%', '+0.3%'], ['warning', '오류율', '1.84%', '+0.9%'], ['warning', '응답 시간 p99', '512ms', '+84ms'], ['positive', '가용성', '99.98%', '+0.01%']];
   const lat = ['p50', 'p95', 'p99'].map((name, i) => ({ name, data: walk(140 + i, 60, [60, 180, 380][i], [10, 30, 90][i], { min: 20 }) }));
@@ -145,4 +113,4 @@ ${head('서비스 상태 모니터', { sub: `<span class="tp-row">${dot('positiv
   return { slug: 'dashboard-alert-rail', en: 'Service Monitoring Dashboard', name: '서비스 모니터링 대시보드', group: 'Dashboard', desc: '서비스 상태를 계속 지켜보는 모니터링 화면입니다. 상태 지표, 시간대별 그래프, 서비스별 90일 가동 기록을 보여 주고 오른쪽에 알림 목록을 따로 둡니다.', css, body };
 };
 
-export const templates = [analytics, funnel, progressDash, monitoring].map((f) => f());
+export const templates = [analytics, progressDash, monitoring].map((f) => f());

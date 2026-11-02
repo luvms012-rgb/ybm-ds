@@ -39,7 +39,7 @@ const dialog = () => {
     <span class="tp-sdlg__close">${iconBtn('x', '닫기')}</span>
     <div class="tp-stack"><h2 class="tp-h2" id="sd-t">프로필</h2><p class="tp-sub">워크스페이스의 다른 사람에게 보이는 내 모습이에요.</p></div>
     <span class="tp-caption">기본 정보</span>
-    ${card(`<div>${row('user', '표시 이름', '글, 댓글, 멘션에 보여요.', inp('d-name', '김서윤', 'aria-label="표시 이름"'))}${row('id-card', '직함', '프로필 카드에 이름과 함께 보여요.', inp('d-job', '교육 운영 매니저', 'aria-label="직함"'))}${row('at-sign', '아이디', '멘션할 때 쓰는 이름이에요.', inp('d-id', 'seoyun', 'aria-label="아이디"'))}${row('image', '프로필 사진', '정사각형 사진이 가장 잘 보여요.', `<div class="tp-row">${avatar('김서윤', 48)}${btn('사진 바꾸기')}${btn('지우기', { variant: 'ghost' })}</div>`)}</div>`)}
+    ${card(`<div>${row('user', '표시 이름', '글, 댓글, 멘션에 보여요.', inp('d-name', '와이비엠', 'aria-label="표시 이름"'))}${row('id-card', '직함', '프로필 카드에 이름과 함께 보여요.', inp('d-job', '교육 운영 매니저', 'aria-label="직함"'))}${row('at-sign', '아이디', '멘션할 때 쓰는 이름이에요.', inp('d-id', 'ybm', 'aria-label="아이디"'))}${row('image', '프로필 사진', '정사각형 사진이 가장 잘 보여요.', `<div class="tp-row">${avatar('와이비엠', 48)}${btn('사진 바꾸기')}${btn('지우기', { variant: 'ghost' })}</div>`)}</div>`)}
     <span class="tp-caption">표시</span>
     ${card(`<div>${row('clock', '시간대', '알림과 일정이 이 시간에 맞춰 보여요.', sel('d-tz', '서울 (GMT+9)'))}${row('eye', '온라인 상태 보이기', '다른 사람이 내가 접속 중인지 볼 수 있어요.', sw('온라인 상태 보이기', true))}</div>`)}
   </div>
@@ -70,7 +70,7 @@ const form = () => {
 <div class="tp-sf">
   <aside class="tp-sf__side">${nav([['', items.map((t) => [t])]], '기본 정보')}</aside>
   <main class="tp-content">
-    ${sec('기본 정보', '내 정보와 계정 정보를 보고 바꿀 수 있어요.', `${field('u-id', '아이디', inp('u-id', 'seoyun'))}${field('u-name', '이름', inp('u-name', '김서윤'))}${field('u-mail', '이메일', inp('u-mail', 'seoyun@example.com', 'type="email"'))}${field('u-tel', '휴대폰', inp('u-tel', '010-1234-5678', 'type="tel"'))}${field('u-lang', '언어', sel('u-lang', '한국어'))}`, '저장')}
+    ${sec('기본 정보', '내 정보와 계정 정보를 보고 바꿀 수 있어요.', `${field('u-id', '아이디', inp('u-id', 'ybm'))}${field('u-name', '이름', inp('u-name', '와이비엠'))}${field('u-mail', '이메일', inp('u-mail', 'ybm@example.com', 'type="email"'))}${field('u-tel', '휴대폰', inp('u-tel', '010-1234-5678', 'type="tel"'))}${field('u-lang', '언어', sel('u-lang', '한국어'))}`, '저장')}
     ${K.divider()}
     ${sec('비밀번호 바꾸기', '계정을 안전하게 지키려면 비밀번호를 주기적으로 바꿔 주세요.', `${field('p-cur', '지금 비밀번호', input('p-cur', 'type="password"'))}${field('p-new', '새 비밀번호', input('p-new', 'type="password"'), { help: '8자 이상, 영문과 숫자를 섞어 주세요.' })}${field('p-new2', '새 비밀번호 확인', input('p-new2', 'type="password"'))}`, '비밀번호 바꾸기')}
     ${K.divider()}
@@ -94,7 +94,7 @@ const panels = () => {
   .tp-info__v { color: var(--ybm-color-fg-neutral-muted); font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); }
 `;
   const items = [['개인 정보', 'user'], ['로그인과 보안', 'lock'], ['결제와 환불', 'credit-card'], ['알림', 'bell'], ['개인정보 보호', 'shield-check'], ['학습 설정', 'book-open'], ['언어와 지역', 'globe'], ['연결된 기기', 'smartphone'], ['기업 계정', 'building']];
-  const info = [['실명', '김서윤', 1], ['부르는 이름', '입력하지 않음', 1], ['이메일', 's***n@example.com', 1], ['휴대폰', '010-****-5678', 1], ['본인 인증', badge('인증 완료', 'positive'), 0], ['집 주소', '입력하지 않음', 1], ['우편 받을 주소', '입력하지 않음', 1], ['비상 연락처', '입력함', 1]];
+  const info = [['실명', '와이비엠', 1], ['부르는 이름', '입력하지 않음', 1], ['이메일', 's***n@example.com', 1], ['휴대폰', '010-****-5678', 1], ['본인 인증', badge('인증 완료', 'positive'), 0], ['집 주소', '입력하지 않음', 1], ['우편 받을 주소', '입력하지 않음', 1], ['비상 연락처', '입력함', 1]];
   const body = `<div class="tp-app">
 <div class="tp-sp">
   <aside class="tp-sp__side"><h2 class="tp-h2">계정 설정</h2>${nav([['', items]], '개인 정보')}${divider()}${nav([['', [['로그아웃', 'log-out']]]], '')}</aside>

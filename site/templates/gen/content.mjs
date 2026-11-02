@@ -98,7 +98,7 @@ const docTech = () => {
 /* 5. 주문 상세 -------------------------------------------------- */
 const orderDetail = () => {
   const items = [['TOEIC 실전 모의고사 1000제', '19,000원', 2], ['단어 암기 카드', '12,000원', 1], ['오답 노트', '3,000원', 3], ['형광펜 5색 세트', '4,500원', 1], ['독서대', '28,000원', 1]];
-  const acts = [['주문 접수', '김서윤 님이 주문했어요', '10.31 오후 2:04'], ['결제 완료', '카드 결제 89,500원', '10.31 오후 2:05'], ['메모 추가', '"선물 포장 부탁드려요"', '10.31 오후 2:06'], ['재고 확인 필요', '독서대 재고 1개 남음', '10.31 오후 4:30']];
+  const acts = [['주문 접수', '와이비엠 님이 주문했어요', '10.31 오후 2:04'], ['결제 완료', '카드 결제 89,500원', '10.31 오후 2:05'], ['메모 추가', '"선물 포장 부탁드려요"', '10.31 오후 2:06'], ['재고 확인 필요', '독서대 재고 1개 남음', '10.31 오후 4:30']];
   const css = `
   .tp-od { display: grid; flex: 1 1 auto; grid-template-columns: minmax(0, 1fr); }
   @media (min-width: 1024px) { .tp-od { grid-template-columns: minmax(0, 1fr) 360px; } }
@@ -114,17 +114,17 @@ const orderDetail = () => {
   const sep = '<span class="tp-sep">·</span>';
   const body = `<div class="tp-app">
 <header class="tp-head" style="flex-direction: column; align-items: stretch; padding-bottom: 0">
-  <div class="tp-between" style="align-items:flex-start"><div class="tp-stack" style="gap: var(--ybm-space-x2)">${link(icon('chevron-left', 'sm') + '모든 주문')}<h1 class="tp-h1">#1001</h1><div class="tp-meta-line"><span>상품 5개</span>${sep}<span class="tp-row">${avatar('김서윤', 20)}김서윤</span>${sep}${badge('배송 준비 전', 'warning')}${sep}<span class="tp-row">${icon('calendar', 'sm')}2026.10.31</span>${sep}<span class="tp-row">${icon('triangle-alert', 'sm')}확인 필요</span></div></div><div class="tp-row">${btn('환불')}${btn('배송 처리', { variant: 'neutralSolid' })}</div></div>
+  <div class="tp-between" style="align-items:flex-start"><div class="tp-stack" style="gap: var(--ybm-space-x2)">${link(icon('chevron-left', 'sm') + '모든 주문')}<h1 class="tp-h1">#1001</h1><div class="tp-meta-line"><span>상품 5개</span>${sep}<span class="tp-row">${avatar('와이비엠', 20)}와이비엠</span>${sep}${badge('배송 준비 전', 'warning')}${sep}<span class="tp-row">${icon('calendar', 'sm')}2026.10.31</span>${sep}<span class="tp-row">${icon('triangle-alert', 'sm')}확인 필요</span></div></div><div class="tp-row">${btn('환불')}${btn('배송 처리', { variant: 'neutralSolid' })}</div></div>
   ${tabs(['상품', '결제', '배송', '기록'], 0, '주문 탭')}
 </header>
 <div class="tp-od">
-  <main class="tp-content">
+  <main class="tp-content tp-wi__main">
     <section class="tp-sec">${secHead(`<span class="tp-row">상품 ${badge('배송 준비 전', 'warning')}</span>`, { tools: `${btn('송장 출력', { ic: 'printer' })}${btn('배송 처리', { variant: 'neutralSolid' })}` })}<div>${items.map(([n, p, q]) => `<div class="tp-line">${thumb('1:1', '', K.photo('book', BK++, 240))}<div class="tp-stack"><span>${n}</span><span class="tp-caption tp-num">${p} × ${q}</span></div><span class="tp-num">${(parseInt(p.replace(/\D/g, '')) * q).toLocaleString()}원</span></div>`).join('')}</div></section>
     <section class="tp-sec">${secHead('결제', { tools: badge('결제 완료', 'positive') })}${card(`${[['상품 금액', '89,000원'], ['배송비', '3,000원'], ['할인', '-2,500원']].map(([k, v]) => `<div class="tp-between"><span class="tp-sub">${k}</span>${T(v)}</div>`).join('')}${divider()}<div class="tp-between"><b>합계</b><b class="tp-num">89,500원</b></div>`)}</section>
     <section class="tp-sec">${secHead('활동')}<ol class="tp-tl">${acts.map(([t, d, w]) => `<li><div class="tp-stack"><span class="tp-h4">${t}</span><span class="tp-sub">${d}</span><span class="tp-caption">${w}</span></div></li>`).join('')}</ol></section>
   </main>
   <aside class="tp-panel">
-    ${accordion([['메모', '<p class="tp-sub">이번 분기 세 번째 주문인 단골 고객이에요. 선물 포장을 좋아하세요.</p>', true], ['고객', `<div class="tp-row">${avatar('김서윤', 42)}<div class="tp-stack"><span>김서윤</span><span class="tp-caption">seoyun@example.com · 주문 12번</span></div></div>`, true], ['배송지', '<p class="tp-sub">서울시 종로구 종로 104, 3층<br>010-1234-5678</p>', true], ['태그', `<div class="tp-row">${badge('단골', 'brand')}${badge('선물')}</div>`, false]], 'separated')}
+    ${accordion([['메모', '<p class="tp-sub">이번 분기 세 번째 주문인 단골 고객이에요. 선물 포장을 좋아하세요.</p>', true], ['고객', `<div class="tp-row">${avatar('와이비엠', 42)}<div class="tp-stack"><span>와이비엠</span><span class="tp-caption">ybm@example.com · 주문 12번</span></div></div>`, true], ['배송지', '<p class="tp-sub">서울시 종로구 종로 104, 3층<br>010-1234-5678</p>', true], ['태그', `<div class="tp-row">${badge('단골', 'brand')}${badge('선물')}</div>`, false]], 'separated')}
   </aside>
 </div>
 </div>`;
@@ -168,13 +168,20 @@ const productDetail = () => {
 
 /* 7. 할 일 상세 ------------------------------------------------- */
 const workItem = () => {
-  const subs = [['지금 가입 흐름을 살펴보고 불편한 점 적기', 1, '김서윤 · 10.20'], ['첫 화면에 샘플 강좌 미리 넣기', 1, '이준호 · 10.24'], ['가입 단계 5개를 3개로 줄이기', 0, '박하린 · 11.03까지'], ['첫 수업 안내 메일 다시 쓰기', 0, '정다은 · 11.05까지'], ['7일 뒤 활성화율 측정 대시보드', 0, '한지우 · 11.08까지']];
-  const fields = [['상태', '진행 중'], ['담당', '김서윤'], ['우선순위', '높음'], ['마감', '11월 15일'], ['스프린트', '24']];
+  const subs = [['지금 가입 흐름을 살펴보고 불편한 점 적기', 1, '와이비엠 · 10.20'], ['첫 화면에 샘플 강좌 미리 넣기', 1, '이준호 · 10.24'], ['가입 단계 5개를 3개로 줄이기', 0, '박하린 · 11.03까지'], ['첫 수업 안내 메일 다시 쓰기', 0, '정다은 · 11.05까지'], ['7일 뒤 활성화율 측정 대시보드', 0, '한지우 · 11.08까지']];
+  const fields = [['상태', badge('진행 중', 'brand')], ['담당', `<span class="tp-row">${avatar('와이비엠', 20)}와이비엠</span>`], ['우선순위', `<span class="tp-row">${K.dot('warning')}높음</span>`], ['마감', '11월 15일'], ['스프린트', '24'], ['만든 사람', '최민준 · 10월 18일'], ['지켜보는 사람', avatars(['와이비엠', '이준호', '박하린'], 24, 2)]];
   const css = `
   .tp-wi { display: grid; flex: 1 1 auto; grid-template-columns: minmax(0, 1fr); }
   @media (min-width: 1024px) { .tp-wi { grid-template-columns: minmax(0, 1fr) 320px; } }
   .tp-crumb { display: flex; flex-wrap: wrap; align-items: center; gap: var(--ybm-space-x2); color: var(--ybm-color-fg-neutral-muted); font-size: var(--ybm-font-size-t03); }
-  .tp-crumb .tp-v { width: 1px; height: 12px; background: var(--ybm-color-stroke-neutral-weak); }
+  .tp-crumb a { color: inherit; text-decoration: none; }
+  .tp-wi__main { gap: var(--ybm-space-x10); }
+  /* 오른쪽 속성: 선과 상자 없이 이름 / 값 두 칸 (모바일은 본문 아래) */
+  .tp-wi__side { display: flex; flex-direction: column; gap: var(--ybm-space-x4); padding: var(--ybm-space-x5) var(--ybm-space-x4) var(--ybm-space-x10); }
+  .tp-props { display: grid; grid-template-columns: 96px minmax(0, 1fr); align-items: center; gap: var(--ybm-space-x4) var(--ybm-space-x3); margin: 0; font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); }
+  .tp-props dt { color: var(--ybm-color-fg-neutral-subtle); }
+  .tp-props dd { margin: 0; min-width: 0; }
+  @media (min-width: 1024px) { .tp-wi__side { padding: var(--ybm-space-x5) var(--ybm-space-x6) var(--ybm-space-x10) 0; } }
   .tp-sub-item { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--ybm-space-x3); padding-block: var(--ybm-space-x2_5); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); }
   .tp-files { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: var(--ybm-space-x3); }
   .tp-file { display: flex; align-items: center; gap: var(--ybm-space-x2); padding: var(--ybm-space-x3); border-radius: var(--ybm-shape-md); box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-neutral-muted); font-size: var(--ybm-font-size-t03); }
@@ -182,20 +189,17 @@ const workItem = () => {
 `;
   const body = `<div class="tp-app">
 <header class="tp-head" style="flex-direction: column; align-items: stretch">
-  <div class="tp-crumb">${link('모든 할 일')}<span class="tp-v"></span><span class="tp-num">PLT-247</span><span class="tp-v"></span><span>플랫폼 / 가입 흐름</span></div>
-  <div class="tp-between"><h1 class="tp-h1">워크스페이스 가입 흐름 새로 만들기</h1><div class="tp-row">${iconBtn('eye', '지켜보기', { variant: 'neutralWeak' })}${iconBtn('link', '링크 복사', { variant: 'neutralWeak' })}${iconBtn('share', '공유', { variant: 'neutralWeak' })}${iconBtn('ellipsis', '더 보기', { variant: 'neutralWeak' })}</div></div>
+  <div class="tp-crumb"><a href="#">모든 할 일</a><span>/</span><span class="tp-num">PLT-247</span></div>
+  <div class="tp-between"><h1 class="tp-h1">워크스페이스 가입 흐름 새로 만들기</h1><div class="tp-row">${iconBtn('link', '링크 복사')}${iconBtn('share', '공유')}${iconBtn('ellipsis', '더 보기')}</div></div>
 </header>
 <div class="tp-wi">
   <main class="tp-content">
     <section class="tp-sec"><h2 class="tp-h3">설명</h2><p class="tp-sub">계정을 만든 뒤 첫 수업을 듣기까지 빠져나가는 사람을 줄여요. 단계를 짧게 하고, 새 워크스페이스마다 샘플 강좌를 미리 넣어 바로 시작하게 해요.</p><h3 class="tp-h4">성공 기준</h3>${list(['가입 7일 뒤 활성화율 42% → 55%', '첫 수업까지 걸리는 시간 절반으로', '가입 중 이탈 30% 줄이기'].map((t) => listItem(t, { prefix: icon('check', 'sm'), size: 'small' })))}</section>
-    ${divider()}
     <section class="tp-sec"><div class="tp-between"><span class="tp-row"><h2 class="tp-h3">하위 할 일</h2>${btn('추가', { variant: 'ghost', ic: 'plus', size: 'xsmall' })}</span><span class="tp-row" style="min-width: 200px"><span class="tp-caption tp-num">5개 중 2개 끝</span>${progress(40, { label: '하위 할 일 진행' })}</span></div><div>${subs.map(([t, d, m]) => `<div class="tp-sub-item">${checkbox(t, { checked: !!d })}<span class="tp-caption" style="white-space:nowrap">${m}</span></div>`).join('')}</div></section>
-    ${divider()}
     <section class="tp-sec"><h2 class="tp-h3">첨부 파일</h2><div class="tp-files">${[['file-text', '가입 흐름 분석.pdf'], ['image', '새 화면 시안.png'], ['file', '측정 계획.xlsx']].map(([ic, n]) => `<span class="tp-file">${icon(ic, 'sm')}${n}</span>`).join('')}</div></section>
-    ${divider()}
-    <section class="tp-sec"><h2 class="tp-h3">댓글</h2>${[['이준호', '어제', '샘플 강좌는 토익 입문 1강으로 넣으면 어떨까요? 완강률이 가장 높아요.'], ['김서윤', '2시간 전', '좋아요. 그걸로 갈게요. 디자인 시안은 금요일까지 올릴게요.']].map(([w, t, c]) => `<div class="tp-comment">${avatar(w, 24)}<div class="tp-stack"><span class="tp-row"><b>${w}</b><span class="tp-caption">${t}</span></span><p class="tp-sub">${c}</p></div></div>`).join('')}${K.textarea('cm', 'rows="3" placeholder="댓글을 남기세요" aria-label="댓글"')}<div>${btn('댓글 달기', { variant: 'neutralSolid' })}</div></section>
+    <section class="tp-sec"><h2 class="tp-h3">댓글</h2>${[['이준호', '어제', '샘플 강좌는 토익 입문 1강으로 넣으면 어떨까요? 완강률이 가장 높아요.'], ['와이비엠', '2시간 전', '좋아요. 그걸로 갈게요. 디자인 시안은 금요일까지 올릴게요.']].map(([w, t, c]) => `<div class="tp-comment">${avatar(w, 24)}<div class="tp-stack"><span class="tp-row"><b>${w}</b><span class="tp-caption">${t}</span></span><p class="tp-sub">${c}</p></div></div>`).join('')}${K.textarea('cm', 'rows="3" placeholder="댓글을 남기세요" aria-label="댓글"')}<div>${btn('댓글 달기', { variant: 'neutralSolid' })}</div></section>
   </main>
-  <aside class="tp-panel">${fields.map(([l, v], i) => field('wf' + i, l, select(v, { id: 'wf' + i, size: 'small' }))).join('')}${divider()}<div class="tp-stack"><span class="tp-caption">만든 사람</span><span class="tp-row">${avatar('최민준', 20)}최민준 · 10월 18일</span></div><div class="tp-stack"><span class="tp-caption">지켜보는 사람</span>${avatars(['김서윤', '이준호', '박하린'], 24, 2)}</div></aside>
+  <aside class="tp-wi__side" aria-label="속성"><dl class="tp-props">${fields.map(([l, v]) => `<dt>${l}</dt><dd>${v}</dd>`).join('')}</dl></aside>
 </div>
 </div>`;
   return { slug: 'work-item-detail', en: 'Work Item Detail', name: '할 일 상세', group: 'Content', desc: '할 일 하나를 자세히 보는 화면입니다. 제목과 상태, 설명, 진행 막대가 있는 하위 할 일, 첨부 파일, 댓글을 두 칸에 나눠 보여 줍니다.', css, body };

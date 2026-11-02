@@ -5,7 +5,7 @@ import { T, FRAME_CSS, topbar, sidenav, frame, tags } from './frame.mjs';
 const { icon, btn, iconBtn, badge, card, head, secHead, field, input, select, checkbox, divider, chip, chiptabs, tabs, segmented, progress, table, tablePager, avatar, callout, dot, link, lineChart, barChart, donut, legend, meter, kpi, search, sw, thumb, pagination, C, esc } = K;
 
 const LEARN_MENU = ['홈', '과정 찾기', '내 학습', '지식 공유'];
-const learnEnd = `${btn('AI 어드바이저', { size: 'xsmall', ic: 'sparkles' })}${iconBtn('bell', '알림', { size: 'xsmall' })}${avatar('김서윤', 28)}`;
+const learnEnd = `${btn('AI 어드바이저', { size: 'xsmall', ic: 'sparkles' })}${iconBtn('bell', '알림', { size: 'xsmall' })}${avatar('와이비엠', 28)}`;
 const ORG = '한빛전자';
 const adminNav = (cur) => sidenav(ORG, [['', [['홈', 'house', cur === 0], ['과정 운영', 'book-open', cur === 1], ['학습자', 'users', cur === 2], ['필수 교육', 'shield-check', cur === 3], ['학습 현황', 'chart-column', cur === 4]]], ['지식', [['사내 지식', 'lightbulb', false], ['AI 튜터 설정', 'sparkles', false]]]], [['설정', 'settings', false]]);
 const CSS = FRAME_CSS + `
@@ -38,7 +38,7 @@ const home = () => {
   const body = `<div class="tp-app">${topbar(LEARN_MENU, 0, learnEnd)}
 <main class="tp-content">
   <div class="tp-hello">
-    <div class="tp-stack" style="gap: var(--ybm-space-x2)"><h1 class="tp-h1">서윤 님, 오늘도 10분만 배워 볼까요?</h1><p class="tp-sub">이번 주 목표 3시간 중 2시간 40분을 채웠어요.</p></div>
+    <div class="tp-stack" style="gap: var(--ybm-space-x2)"><h1 class="tp-h1">와이비엠 님, 오늘도 10분만 배워 볼까요?</h1><p class="tp-sub">이번 주 목표 3시간 중 2시간 40분을 채웠어요.</p></div>
     ${card(`<div class="tp-stats" style="--n:3"><div><span class="tp-sub">이번 주 학습</span><span class="tp-mid">${T('2시간 40분')}</span></div><div><span class="tp-sub">연속 학습</span><span class="tp-mid">${T('6일')}</span></div><div><span class="tp-sub">이수한 과정</span><span class="tp-mid">${T('12개')}</span></div></div>`)}
   </div>
   <section class="tp-sec">${secHead('이어서 보기')}
@@ -52,7 +52,7 @@ const home = () => {
       ${card(`<div class="tp-row" style="align-items:flex-start; gap: var(--ybm-space-x3)">${icon('sparkles', 'lg')}<p class="tp-sub" style="flex:1">팀장이 되었다면 어떤 과정부터 들으면 좋을지, 이번 달 필수 교육은 무엇인지 물어보세요.</p></div><div class="tp-row" style="flex-wrap:wrap">${['신임 팀장 추천 과정', '남은 필수 교육', '엑셀 함수 빨리 배우기'].map((t) => chip(t)).join('')}</div><div class="tp-ask">${K.even(`${input('lh-ask', 'placeholder="궁금한 것을 적어 보세요" aria-label="AI 어드바이저에게 질문"')}${iconBtn('arrow-up', '보내기', { variant: 'neutralSolid' })}`)}</div>`)}
     </section>
   </div>
-  <section class="tp-sec">${secHead('서윤 님을 위한 추천', { sub: '직무와 지난 학습을 보고 AI가 골랐어요', tools: link('더 보기') })}
+  <section class="tp-sec">${secHead('와이비엠 님을 위한 추천', { sub: '직무와 지난 학습을 보고 AI가 골랐어요', tools: link('더 보기') })}
     <div class="tp-g4">${course(1, '처음 만나는 생성형 AI 업무 활용', ['3시간', '입문'], { b: badge('신규', 'brand', true) })}${course(2, '설득하는 프레젠테이션 구조 잡기', ['5시간', '중급'], { r: '4.7', n: '862' })}${course(3, '팀장의 1:1 대화법', ['2시간', '중급'], { r: '4.9', n: '2,310' })}${course(4, '비즈니스 영어 이메일 바로 쓰기', ['8시간', '입문'], { r: '4.6', n: '540' })}</div>
   </section>
   <section class="tp-sec">${secHead('사내 지식', { sub: '동료가 나눈 노하우', tools: link('지식 공유하기') })}

@@ -39,7 +39,7 @@ const shellNav = () => {
   const tr = [[0, 'f', 'src', 1], [1, 'f', 'pages', 1], [2, 'file-code', '홈.tsx'], [2, 'file-code', '강좌.tsx', 0, 1], [2, 'file-code', '설정.tsx'], [1, 'f', 'components', 0], [1, 'f', 'styles', 0], [0, 'f', 'public', 0], [0, 'file', 'package.json'], [0, 'file-text', 'README.md']];
   const body = `<div class="tp-shell">
 <a class="tp-sr" href="#main">본문으로 건너뛰기</a>
-<header role="banner"><nav class="tp-menubar" aria-label="메뉴 막대">${K.even(`${K.logo()}${['파일', '편집', '보기', '실행', '도움말'].map((t) => btn(t, { variant: 'ghost' })).join('')}<div class="tp-q">${search('cmd', '파일과 명령 찾기…  ⌘K', 'small')}</div>${iconBtn('play', '프로젝트 실행', { variant: 'neutralWeak' })}${avatar('김서윤', 24)}`)}</nav></header>
+<header role="banner"><nav class="tp-menubar" aria-label="메뉴 막대">${K.even(`${K.logo()}${['파일', '편집', '보기', '실행', '도움말'].map((t) => btn(t, { variant: 'ghost' })).join('')}<div class="tp-q">${search('cmd', '파일과 명령 찾기…  ⌘K', 'small')}</div>${iconBtn('play', '프로젝트 실행', { variant: 'neutralWeak' })}${avatar('와이비엠', 24)}`)}</nav></header>
 <div class="tp-shell__row">
   <aside class="tp-rail" aria-label="옆 메뉴"><ul class="tp-tree2" role="tree">${tr.map(([d, k, n, o, s]) => `<li role="treeitem"><span style="--d:${d}"${s ? ' aria-selected="true"' : ''}>${k === 'f' ? icon(o ? 'chevron-down' : 'chevron-right', 'sm') + icon(o ? 'folder-open' : 'folder', 'sm') : '<span style="width:16px"></span>' + icon(k, 'sm')}${n}</span></li>`).join('')}</ul></aside>
   <div class="tp-resize" role="separator" aria-label="옆 메뉴 크기 조절"></div>
@@ -70,7 +70,7 @@ const sideNav = () => {
     <span class="tp-ngroup">메뉴</span>${nitem('새 대화', 'square-pen', true)}${nitem('찾기', 'search')}${nitem('자료실', 'book-open')}${nitem('즐겨찾기', 'star')}
     ${K.divider()}
     <span class="tp-ngroup">작업 공간</span>${ws.map(([t, items, open]) => `<details class="tp-ws"${open ? ' open' : ''}><summary class="tp-nitem">${icon(open ? 'chevron-down' : 'chevron-right', 'sm')}${icon('folder', 'sm')}<span class="tp-grow">${t}</span></summary>${items.map((x, i) => nitem(x, '', false, i === 0 && open ? dot('positive', '진행 중') : '')).join('')}</details>`).join('')}
-    <div class="tp-rail__foot"><span class="tp-ngroup">계정</span>${nitem('설정', 'settings')}<a class="tp-nitem" href="#">${avatar('김서윤', 20)}<span class="tp-grow">김서윤</span></a>${btn('옆 메뉴 접기', { variant: 'ghost', ic: 'panel-left', size: 'small' })}</div>
+    <div class="tp-rail__foot"><span class="tp-ngroup">계정</span>${nitem('설정', 'settings')}<a class="tp-nitem" href="#">${avatar('와이비엠', 20)}<span class="tp-grow">와이비엠</span></a>${btn('옆 메뉴 접기', { variant: 'ghost', ic: 'panel-left', size: 'small' })}</div>
   </aside>
   <div class="tp-resize" role="separator" aria-label="옆 메뉴 크기 조절"></div>
   <main class="tp-shell__main" id="main">${skel()}<div class="tp-block tp-footbox" aria-label="아래 입력 자리"></div></main>

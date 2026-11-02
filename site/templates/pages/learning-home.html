@@ -25,6 +25,36 @@
   .tp-sub { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
   .tp-caption { font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); color: var(--ybm-color-fg-neutral-subtle); }
   .tp-num { font-variant-numeric: tabular-nums; }
+  /* 표 (커뮤니티 게시판 기준, 토스증권 / 네이버 증권 / 당근 비즈니스 표와 같은 결):
+     위 진한 선 하나, 머리줄은 바탕 없이 작은 muted 글자, 행 56 / 촘촘 48, 행 사이 옅은 선, 숫자 고정폭, 올리면 옅은 바탕 */
+  .ds-table { --ds-table-head-h: 44px; --ds-table-row-h: 56px; font-variant-numeric: tabular-nums; }
+  .ds-table[data-density="compact"] { --ds-table-head-h: 44px; --ds-table-row-h: 48px; }
+  /* 선은 그림자 대신 테두리로 (줄에 그림자를 그리면 표 양 끝에 세로 선이 생긴다) */
+  .ds-table tr, .ds-table thead tr { background: none; box-shadow: none; }
+  .ds-table { border-top: 1px solid var(--ybm-color-stroke-neutral-solid); }
+  .ds-table :is(th, td) { border-bottom: 1px solid var(--ybm-color-stroke-neutral-muted); }
+  .ds-table thead th { font-size: var(--ybm-font-size-t03); line-height: var(--ybm-line-height-t03); font-weight: var(--ybm-font-weight-regular); color: var(--ybm-color-fg-neutral-subtle); }
+  .ds-table :is(th, td) { padding: var(--ybm-space-x2) var(--ybm-space-x3); }
+  .ds-table :is(th, td):first-child { padding-inline-start: var(--ybm-space-x4); }
+  .ds-table :is(th, td):last-child { padding-inline-end: var(--ybm-space-x4); }
+  @media (hover: hover) { .ds-table tbody tr:not(.tp-grouprow):hover { background: var(--ybm-color-bg-neutral-weak-alpha); } }
+  /* 체크박스만 든 칸: 잘리지 않게 폭 고정 */
+  .ds-table :is(th, td):has(> .ds-checkbox:only-child) { width: 52px; padding-inline: var(--ybm-space-x4) var(--ybm-space-x2); overflow: visible; }
+  .ds-table .ds-checkbox { vertical-align: middle; }
+  .ds-table [data-align="end"] { text-align: end; }
+  /* 두 줄 칸: 위 본문, 아래 작은 subtle */
+  .tp-cell2 { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .tp-cell2 > :first-child { overflow: hidden; text-overflow: ellipsis; color: var(--ybm-color-fg-neutral); }
+  .tp-cell2 > :last-child:not(:first-child) { color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); }
+  /* 묶음 행: 옅은 바탕 + 굵은 이름 (바탕은 tr 에, 선이 덮이지 않게) */
+  .ds-table .tp-grouprow { height: 44px; background: var(--ybm-color-bg-neutral-weak-alpha); }
+  .ds-table .tp-grouprow > td { padding-block: var(--ybm-space-x2); font-weight: var(--ybm-font-weight-semibold); color: var(--ybm-color-fg-neutral); }
+  /* 표 위 한 줄: 왼쪽 개수, 오른쪽 고르기 칸과 찾기 (커뮤니티 게시판 btools) */
+  .tp-ttools { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ybm-space-x3); }
+  .tp-ttools__end { display: flex; flex-wrap: wrap; align-items: center; gap: var(--ybm-space-x2); }
+  .tp-ttools__end > .ds-select { min-width: 120px; }
+  .tp-ttools .ds-input { flex: none; width: 240px; max-width: 100%; }
+  .tp-tfoot { display: flex; justify-content: center; padding-top: var(--ybm-space-x2); }
   /* 배치 (레퍼런스 A): 흰 바탕, 바깥 여백 16 / 24, 묶음 사이 24 / 32 와 구분선 */
   .tp-body { display: flex; flex: 1 1 auto; flex-direction: column; min-height: 0; }
   .tp-content { display: flex; flex: 1 1 auto; flex-direction: column; gap: var(--ybm-space-x6); min-width: 0; padding: var(--ybm-space-x5) var(--ybm-space-x4) var(--ybm-space-x10); }
@@ -34,7 +64,7 @@
   .tp-sec-head__texts { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--ybm-space-x1) var(--ybm-space-x2); }
   .tp-row { display: flex; align-items: center; gap: var(--ybm-space-x2); min-width: 0; }
   /* 줄 안에 놓인 고르기 칸은 글자만큼만 */
-  :is(.tp-row, .tp-between, .tp-head__tools, .tp-sec-head) > .ds-select { width: auto; min-width: 140px; }
+  :is(.tp-row, .tp-between, .tp-head__tools, .tp-sec-head, .tp-ttools__end) > .ds-select { width: auto; min-width: 140px; }
   /* 도구 줄의 medium 세그먼트는 버튼, 고르기 칸과 같은 40 높이로 */
   :is(.tp-row, .tp-head__tools, .tp-tool__bar) > .ds-segmented[data-size="medium"] { box-sizing: border-box; height: 40px; }
   .tp-between { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ybm-space-x2); }
@@ -170,11 +200,11 @@
 <body>
 <div class="tp-app"><div class="tp-topbar"><header class="ds-topnav">
   <div class="ds-topnav__left"><a class="ds-topnav__heading" href="#" aria-label="서비스 이름 홈"><span class="tp-logo">로고</span></a><nav class="ds-topnav__menu" aria-label="주요 메뉴"><a class="ds-topnav__item" href="#" aria-current="page">홈</a><a class="ds-topnav__item" href="#">과정 찾기</a><a class="ds-topnav__item" href="#">내 학습</a><a class="ds-topnav__item" href="#">지식 공유</a></nav></div>
-  <div class="ds-topnav__end"><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="xsmall"><i class="ds-icon ds-icon--sparkles" aria-hidden="true"></i>AI 어드바이저</button><button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="알림"><i class="ds-icon ds-icon--bell" aria-hidden="true"></i></button><span class="ds-avatar" data-size="28" role="img" aria-label="김서윤"><span class="ds-avatar__initials" aria-hidden="true">김</span></span></div>
+  <div class="ds-topnav__end"><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="xsmall"><i class="ds-icon ds-icon--sparkles" aria-hidden="true"></i>AI 어드바이저</button><button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="알림"><i class="ds-icon ds-icon--bell" aria-hidden="true"></i></button><span class="ds-avatar" data-size="28" role="img" aria-label="와이비엠"><span class="ds-avatar__initials" aria-hidden="true">와</span></span></div>
 </header></div>
 <main class="tp-content">
   <div class="tp-hello">
-    <div class="tp-stack" style="gap: var(--ybm-space-x2)"><h1 class="tp-h1">서윤 님, 오늘도 10분만 배워 볼까요?</h1><p class="tp-sub">이번 주 목표 3시간 중 2시간 40분을 채웠어요.</p></div>
+    <div class="tp-stack" style="gap: var(--ybm-space-x2)"><h1 class="tp-h1">와이비엠 님, 오늘도 10분만 배워 볼까요?</h1><p class="tp-sub">이번 주 목표 3시간 중 2시간 40분을 채웠어요.</p></div>
     <section class="ds-card tp-card" data-size="small"><div class="tp-stats" style="--n:3"><div><span class="tp-sub">이번 주 학습</span><span class="tp-mid"><span class="tp-num">2시간 40분</span></span></div><div><span class="tp-sub">연속 학습</span><span class="tp-mid"><span class="tp-num">6일</span></span></div><div><span class="tp-sub">이수한 과정</span><span class="tp-mid"><span class="tp-num">12개</span></span></div></div></section>
   </div>
   <section class="tp-sec"><div class="tp-sec-head"><div class="tp-sec-head__texts"><h2 class="tp-h2">이어서 보기</h2></div></div>
@@ -188,7 +218,7 @@
       <section class="ds-card tp-card" data-size="small"><div class="tp-row" style="align-items:flex-start; gap: var(--ybm-space-x3)"><i class="ds-icon ds-icon--sparkles ds-icon--lg" aria-hidden="true"></i><p class="tp-sub" style="flex:1">팀장이 되었다면 어떤 과정부터 들으면 좋을지, 이번 달 필수 교육은 무엇인지 물어보세요.</p></div><div class="tp-row" style="flex-wrap:wrap"><button type="button" class="ds-chip" data-variant="outlineWeak" data-size="small">신임 팀장 추천 과정</button><button type="button" class="ds-chip" data-variant="outlineWeak" data-size="small">남은 필수 교육</button><button type="button" class="ds-chip" data-variant="outlineWeak" data-size="small">엑셀 함수 빨리 배우기</button></div><div class="tp-ask"><div class="ds-input" data-variant="outline" data-size="medium"><input class="ds-input__control" id="lh-ask" placeholder="궁금한 것을 적어 보세요" aria-label="AI 어드바이저에게 질문"></div><button type="button" class="ds-btn" data-variant="neutralSolid" data-size="medium" data-layout="iconOnly" aria-label="보내기"><i class="ds-icon ds-icon--arrow-up" aria-hidden="true"></i></button></div></section>
     </section>
   </div>
-  <section class="tp-sec"><div class="tp-sec-head"><div class="tp-sec-head__texts"><h2 class="tp-h2">서윤 님을 위한 추천</h2><span class="tp-sub">직무와 지난 학습을 보고 AI가 골랐어요</span></div><div class="tp-row"><a class="ds-link" href="#">더 보기</a></div></div>
+  <section class="tp-sec"><div class="tp-sec-head"><div class="tp-sec-head__texts"><h2 class="tp-h2">와이비엠 님을 위한 추천</h2><span class="tp-sub">직무와 지난 학습을 보고 AI가 골랐어요</span></div><div class="tp-row"><a class="ds-link" href="#">더 보기</a></div></div>
     <div class="tp-g4"><a class="tp-course" href="#"><div class="tp-cover"><div class="ds-imageframe" data-ratio="16:9" aria-hidden="true"><span class="tp-ph"><img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=720&q=70" alt="" loading="lazy"></span></div><span class="ds-badge" data-tone="brand" data-variant="solid">신규</span></div><div class="tp-stack" style="gap: var(--ybm-space-x1)"><span class="tp-course__title">처음 만나는 생성형 AI 업무 활용</span><div class="tp-course__meta"><span class="ds-tag-group"><span>3시간</span><span>입문</span></span><span class="tp-star"><i class="ds-icon ds-icon--star-solid" aria-hidden="true"></i>4.8 <span class="tp-caption">(1,204)</span></span></div></div></a><a class="tp-course" href="#"><div class="tp-cover"><div class="ds-imageframe" data-ratio="16:9" aria-hidden="true"><span class="tp-ph"><img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=720&q=70" alt="" loading="lazy"></span></div></div><div class="tp-stack" style="gap: var(--ybm-space-x1)"><span class="tp-course__title">설득하는 프레젠테이션 구조 잡기</span><div class="tp-course__meta"><span class="ds-tag-group"><span>5시간</span><span>중급</span></span><span class="tp-star"><i class="ds-icon ds-icon--star-solid" aria-hidden="true"></i>4.7 <span class="tp-caption">(862)</span></span></div></div></a><a class="tp-course" href="#"><div class="tp-cover"><div class="ds-imageframe" data-ratio="16:9" aria-hidden="true"><span class="tp-ph"><img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=720&q=70" alt="" loading="lazy"></span></div></div><div class="tp-stack" style="gap: var(--ybm-space-x1)"><span class="tp-course__title">팀장의 1:1 대화법</span><div class="tp-course__meta"><span class="ds-tag-group"><span>2시간</span><span>중급</span></span><span class="tp-star"><i class="ds-icon ds-icon--star-solid" aria-hidden="true"></i>4.9 <span class="tp-caption">(2,310)</span></span></div></div></a><a class="tp-course" href="#"><div class="tp-cover"><div class="ds-imageframe" data-ratio="16:9" aria-hidden="true"><span class="tp-ph"><img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=720&q=70" alt="" loading="lazy"></span></div></div><div class="tp-stack" style="gap: var(--ybm-space-x1)"><span class="tp-course__title">비즈니스 영어 이메일 바로 쓰기</span><div class="tp-course__meta"><span class="ds-tag-group"><span>8시간</span><span>입문</span></span><span class="tp-star"><i class="ds-icon ds-icon--star-solid" aria-hidden="true"></i>4.6 <span class="tp-caption">(540)</span></span></div></div></a></div>
   </section>
   <section class="tp-sec"><div class="tp-sec-head"><div class="tp-sec-head__texts"><h2 class="tp-h2">사내 지식</h2><span class="tp-sub">동료가 나눈 노하우</span></div><div class="tp-row"><a class="ds-link" href="#">지식 공유하기</a></div></div>

@@ -76,7 +76,7 @@ const landing = () => {
   .tp-cats { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--ybm-space-x2); }
 `;
   const body = `<main class="tp-land"><div class="tp-land__in">
-  <div class="tp-hi"><span class="tp-row">${icon('sparkles')}<span class="tp-h3">안녕하세요, 서윤 님</span></span><h1>무엇부터 시작할까요?</h1></div>
+  <div class="tp-hi"><span class="tp-row">${icon('sparkles')}<span class="tp-h3">안녕하세요, 와이비엠 님</span></span><h1>무엇부터 시작할까요?</h1></div>
   ${composer('무엇이든 물어보세요', ['수업 계획서.pdf', '지난 학기 설문.xlsx', '강의 영상 목록.csv'])}
   <div class="tp-cats" role="group" aria-label="분류">${[['pencil', '글쓰기'], ['code', '코딩'], ['search', '찾아보기'], ['palette', '만들기'], ['book-open', '배우기']].map(([ic, t]) => btn(t, { variant: 'neutralOutline', ic, attrs: 'aria-pressed="false"' })).join('')}</div>
 </div></main>`;

@@ -310,7 +310,7 @@ body[data-side-open] .site-scrim { opacity: 1; pointer-events: auto; }
   .site-doc .site-tpl__desc { color: var(--ybm-color-fg-neutral-muted); }
   .site-tpl__actions { display: none; }
 }
-.site-doc > .site-hero--tpl .site-lead { margin-top: var(--ybm-space-x2); font-size: 14px; line-height: 20px; }
+.site-doc > .site-hero--tpl .site-lead { margin-top: var(--ybm-space-x4); }  /* 설명은 Components 와 같은 17/28 */
 .site-toolbar--center .ds-chiptabs { --ds-ct-height: 32px; --ds-ct-padding-x: 12px; flex-wrap: wrap; overflow: visible; gap: var(--ybm-space-x1); }
 
 .site-frame { margin-top: var(--ybm-space-x6); overflow: hidden; border: 1px solid var(--site-box-line); border-radius: var(--site-box-radius); background: var(--ybm-color-bg-layer-default); }

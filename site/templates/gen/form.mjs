@@ -242,7 +242,7 @@ const vertical = () => {
     <div class="tp-form">
       ${req('b-title', '책 제목', inp('b-title', '', 'value="한 달 만에 끝내는 비즈니스 영어"'), '서점에 보일 그대로 적어 주세요.')}
       ${field('b-sub', '부제', inp('b-sub', '선택 사항'))}
-      ${req('b-author', '지은이', inp('b-author', '', 'value="김서윤"'))}
+      ${req('b-author', '지은이', inp('b-author', '', 'value="와이비엠"'))}
       ${field('b-narr', '읽은 사람', inp('b-narr', '성우 이름'))}
       <div class="tp-pair">${field('b-ed', '판', inp('b-ed', '2판'))}${field('b-lang', '언어', sel('b-lang', '한국어'))}</div>
       <div class="tp-pair">${field('b-series', '시리즈', inp('b-series', '시리즈 이름'), { help: '없는 시리즈면 새로 만들어요.' })}${field('b-no', '시리즈 순서', `<div class="tp-num-input">${inp('b-no', '1', 'type="number" min="1"')}</div>`, { help: '읽는 순서에서 몇 번째인지 적어요.' })}</div>

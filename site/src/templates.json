@@ -14,18 +14,6 @@
       }
     },
     {
-      "slug": "dashboard-cohort-funnel",
-      "name": "퍼널·코호트 대시보드",
-      "en": "Funnel & Cohort Dashboard",
-      "group": "Dashboard",
-      "desc": "단계마다 얼마나 이탈하는지 보는 퍼널과, 가입 시기별로 얼마나 남아 있는지 보는 코호트 표를 함께 둔 분석 대시보드입니다.",
-      "rebuilt": true,
-      "figma": {
-        "pc": "2629:5694",
-        "mobile": "2629:4707"
-      }
-    },
-    {
       "slug": "dashboard-progress",
       "name": "프로젝트 현황 대시보드",
       "en": "Project Status Dashboard",
@@ -59,18 +47,6 @@
       "figma": {
         "pc": "2629:26372",
         "mobile": "2629:25821"
-      }
-    },
-    {
-      "slug": "table-comparison",
-      "name": "비교 표",
-      "en": "Comparison Table",
-      "group": "Table",
-      "desc": "비교할 대상을 열에, 기준을 묶음별 행에 놓은 비교 표입니다. 열마다 대상을 바꿔 고를 수 있고, 가장 좋은 값은 칸 색으로 표시합니다.",
-      "rebuilt": true,
-      "figma": {
-        "pc": "2629:27388",
-        "mobile": "2629:26923"
       }
     },
     {
