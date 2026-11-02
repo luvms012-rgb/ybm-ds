@@ -3,7 +3,7 @@
 집(**Mac**)과 회사(**Windows**) 두 PC 에서 같은 저장소로 작업한다. 이 파일은 저장소에 같이 올라가므로 어느 PC 에서든 Claude 가 먼저 읽는다.
 PC 마다 따로 쌓이는 Claude 메모리는 서로 보이지 않는다 - 두 PC 가 함께 알아야 할 것은 여기에 적는다.
 
-- 최종 갱신: 2026-10-31 (집 Mac, 새벽)
+- 최종 갱신: 2026-11-02 (회사 Windows, 세션 끝 인계)
 
 ## 1. 기준 주소
 
@@ -43,6 +43,19 @@ git clone https://github.com/luvms012-rgb/ybm-ds.git
 - `.gitattributes` 가 `* -text`(줄바꿈 변환 없음)다. 파일의 줄바꿈을 바꾸지 않는다 - 현재 CRLF 는 `동기화.bat` 하나뿐이고 나머지는 LF.
 
 ## 3. 진행 상황
+
+- **이어서 할 것 (2026-11-02 회사 세션 끝, 다음 세션은 여기부터)**
+  1. **Figma 최종 검토** - 사용자: "피그마는 최종본을 가장 마지막에 검토". 집에서 시킨 Figma 작업이 끝난 뒤에만 한다. 그때 맞출 것: ① Dialog 제목 Bold(CSS 는 11-02 SemiBold → Bold) ② 컴포넌트 설명 71개(`site/src/figma-notes.json` lead 를 새로 씀, `node sync.mjs docs` 로 문서 프레임에 반영) ③ Avatar 묶음 고리 색 변수(CSS 전용, Figma 는 그대로 둬도 됨) ④ DS 예시 문구(시험 → 주문, 배송) 가 Figma 문서 Examples 에도 있으면 같이.
+  2. **템플릿 문구 일반화 (사용자 답 대기)** - 생성기 `site/templates/gen/` 의 content.mjs, dashboard.mjs, form.mjs, tools.mjs 에 "토익 실전반", "시험 접수 대행", "시험 직전 단기 강좌" 같은 문구가 남아 있다. 사용자가 바꾸라고 하면 일반 문구로 바꾸고 `node site/templates/gen/run.mjs` → `node site/build.mjs`.
+- **끝냄 (2026-11-02 회사)** - 모두 배포함. 사이트 규칙은 site/CLAUDE.md "한글 쓰기 규칙" 부터 읽는다.
+  - 한글: 레퍼런스 B 를 검수해 한글 쓰기 규칙 6가지(이름은 영어, 나머지 한국어, 문서 합니다체, 화면 글 해요체, 마침표, 설명은 하는 일로)를 정하고 사이트 제목, 버튼, 표 머리, 분류 칩, 템플릿 설명, 컴포넌트 설명 71개, Foundations 리드를 고침. 제목은 짧게("컴포넌트", "다크 모드", "겹침 순서", "아이콘 더보기"). Usage 의 "모양 바꾸기" 절은 "불러오는 순서" 에 합침.
+  - 화면: 코드 상자와 표 구분(레퍼런스 A), 목차 기본 항목 Regular, 컴포넌트 대표 그림 71개를 한국어 실제 장면으로(`site/src/covers.html`), 템플릿 이름 한국어.
+  - 브라우저 기본 UI 를 DS 로: 찾기 칸 지우기 = `.ds-input__clear`(브라우저 X 는 DS CSS 가 숨김), 좁은 화면 목차 = DS Select. 컴포넌트를 한글로도 찾음(`site/src/search-ko.json`).
+  - 가이드는 브랜드 색 없이 모노톤(`site/src/brand-mono.css`, 템플릿 미리보기 iframe 에도). Color 페이지에 "브랜드 색" 바꾸는 법.
+  - DS 변경: Dialog 제목 Bold, `--ds-avatar-group-ring-color` 추가, DS 예시(index.html) 24곳 시험 문구를 일반 문구로, Avatar 예시 가운데 정렬.
+  - 원칙(사용자 "명심"): 부품은 생김새가 아니라 하는 일로 고른다.
+  - 로컬 확인: works/.claude/launch.json 의 ds-preview → http://localhost:5179/site/ (고친 뒤 예전 모양이면 새로 고침)
+  - 회사 PC 에만 있는 로컬 브랜치 `backup/2026-10-30-company`(push 안 함, 10-30 회사 작업분).
 
 - **확정 (2026-10-30 집에서 바꿈)** - 문서 사이트 상단 메뉴(IA): **Get Started, Components, Templates** 세 가지. Foundations 는 Get Started 왼쪽 메뉴의 한 묶음이고(사용자 "통합"), 원본은 위 Foundations 페이지.
 - **끝냄 (2026-10-30 집)** - 사이트 Foundations 를 Get Started 왼쪽 메뉴로 합침(주소는 그대로, 허브 페이지는 Color 로 넘김). 다크 모드는 처음에 기기 설정을 따르고 버튼 선택이 우선하도록 바꿈(site.js, 머리 스크립트). 레퍼런스 1순위를 A 로 정하고 배치 크기, 상단 막대, 왼쪽 메뉴, 목차, 글자 크기와 굵기를 A 실측값으로 바꿈. 제목, 목차, 버튼 이름은 영어로, 목차 위 "목차" 제목 삭제, 목차 누르면 막대가 미끄러지며 부드럽게 스크롤. 왼쪽 메뉴 묶음을 접는 아코디언으로(들여쓰기 32, 접은 상태 기억). 사이트 CSS / JS 주소에 내용 해시 버전. 자세한 것은 site/CLAUDE.md.
