@@ -3,29 +3,31 @@
 export const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
 /* ------------------------------------------------------------ 공통 CSS */
-export const BASE_CSS = `  /* 템플릿 배치 전용. 값은 모두 --ybm-* 토큰 */
+export const BASE_CSS = `  /* 템플릿 배치 전용. 값은 모두 --ybm-* 토큰
+     배치(여백, 카드, 구분선)는 레퍼런스 A 템플릿, 한글 글자 위계(크기, 굵기, 색 단계, 자간)는 토스를 따른다 */
   body { word-break: keep-all; overflow-wrap: break-word; }
   .tp-app { display: flex; flex-direction: column; min-height: 100vh; background: var(--ybm-color-bg-layer-default); }
-  .tp-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: var(--ybm-space-x4); padding: var(--ybm-space-x6) var(--ybm-space-x4) var(--ybm-space-x2); }
-  .tp-head__texts { display: flex; flex-direction: column; gap: var(--ybm-space-x2); min-width: 0; }
-  .tp-head .tp-sub { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); }
-  .tp-head__tools { display: flex; flex-wrap: wrap; align-items: flex-end; gap: var(--ybm-space-x2); }
+  .tp-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: var(--ybm-space-x3) var(--ybm-space-x4); padding: var(--ybm-space-x6) var(--ybm-space-x4) 0; }
+  .tp-head__texts { display: flex; flex-direction: column; gap: var(--ybm-space-x1_5); min-width: 0; }
+  .tp-head__tools { display: flex; flex-wrap: wrap; align-items: center; gap: var(--ybm-space-x2); }
   .tp-head > .tp-row, .tp-head .tp-between > .tp-row { flex-wrap: wrap; }
   .ds-tablepagination { flex-wrap: wrap; row-gap: var(--ybm-space-x2); min-width: 0; }
   .tp-between > .tp-row { flex-wrap: wrap; }
+  /* 글자 위계 (토스): 굵기 두 단계, 제목은 자간 -0.02em, 글자 색은 neutral / muted / subtle 세 단계 */
   .tp-h1 { font-size: var(--ybm-font-size-t09); line-height: var(--ybm-line-height-t09); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; }
-  .tp-h2 { font-size: var(--ybm-font-size-t07); line-height: var(--ybm-line-height-t07); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; }
-  .tp-h3 { font-size: var(--ybm-font-size-t05); line-height: var(--ybm-line-height-t05); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-h2 { font-size: var(--ybm-font-size-t06); line-height: var(--ybm-line-height-t06); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; }
+  .tp-h3 { font-size: var(--ybm-font-size-t05); line-height: var(--ybm-line-height-t05); font-weight: var(--ybm-font-weight-semibold); letter-spacing: -0.01em; }
   .tp-h4 { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); font-weight: var(--ybm-font-weight-semibold); }
   .tp-sub { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
   .tp-caption { font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); color: var(--ybm-color-fg-neutral-subtle); }
   .tp-num { font-variant-numeric: tabular-nums; }
+  /* 배치 (레퍼런스 A): 흰 바탕, 바깥 여백 16 / 24, 묶음 사이 24 / 32 와 구분선 */
   .tp-body { display: flex; flex: 1 1 auto; flex-direction: column; min-height: 0; }
-  .tp-content { display: flex; flex: 1 1 auto; flex-direction: column; gap: var(--ybm-space-x8); min-width: 0; padding: var(--ybm-space-x6) var(--ybm-space-x4) var(--ybm-space-x12); }
-  .tp-panel { display: flex; flex-direction: column; gap: var(--ybm-space-x6); padding: var(--ybm-space-x6) var(--ybm-space-x4); box-shadow: inset 0 1px 0 var(--ybm-color-stroke-neutral-muted); }
-  .tp-sec { display: flex; flex-direction: column; gap: var(--ybm-space-x4); min-width: 0; }
+  .tp-content { display: flex; flex: 1 1 auto; flex-direction: column; gap: var(--ybm-space-x6); min-width: 0; padding: var(--ybm-space-x5) var(--ybm-space-x4) var(--ybm-space-x10); }
+  .tp-panel { display: flex; flex-direction: column; gap: var(--ybm-space-x5); padding: var(--ybm-space-x5) var(--ybm-space-x4); box-shadow: inset 0 1px 0 var(--ybm-color-stroke-neutral-muted); }
+  .tp-sec { display: flex; flex-direction: column; gap: var(--ybm-space-x3); min-width: 0; }
   .tp-sec-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ybm-space-x2) var(--ybm-space-x3); }
-  .tp-sec-head__texts { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--ybm-space-x1) var(--ybm-space-x3); }
+  .tp-sec-head__texts { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--ybm-space-x1) var(--ybm-space-x2); }
   .tp-row { display: flex; align-items: center; gap: var(--ybm-space-x2); min-width: 0; }
   /* 줄 안에 놓인 고르기 칸은 글자만큼만 */
   :is(.tp-row, .tp-between, .tp-head__tools, .tp-sec-head) > .ds-select { width: auto; min-width: 140px; }
@@ -33,34 +35,43 @@ export const BASE_CSS = `  /* 템플릿 배치 전용. 값은 모두 --ybm-* 토
   .tp-stack { display: flex; flex-direction: column; gap: var(--ybm-space-x1); min-width: 0; }
   .tp-stack > .ds-badge { align-self: flex-start; }
   .tp-g2, .tp-g3, .tp-g4, .tp-g5, .tp-g6 { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ybm-space-x3); }
+  /* 카드 (레퍼런스 A): 흰 바탕 + 옅은 1px 선, 모서리 12 */
   .tp-card { min-width: 0; }
-  /* 흰 바탕 화면의 카드는 선 없는 연회색 상자 */
-  .tp-card.ds-card { gap: var(--ybm-space-x4); padding: var(--ybm-space-x5); border-radius: var(--ybm-shape-2xl); box-shadow: none; background: var(--ybm-color-bg-neutral-muted); }
-  /* 회색 바탕 화면(tp-canvas): 흰 면을 선 없이 바탕색 차이로 나눈다 */
-  body.tp-canvas, .tp-canvas .tp-app, .tp-canvas .tp-bar { background: var(--ybm-color-bg-canvas); }
-  .tp-canvas .tp-card.ds-card { box-shadow: none; background: var(--ybm-color-bg-layer-default); }
-  .tp-canvas .tp-content > .ds-divider, .tp-canvas .tp-content > .tp-sec + .ds-divider { display: none; }
-  .tp-canvas .tp-panel { background: var(--ybm-color-bg-layer-default); box-shadow: none; }
-  .tp-canvas .tp-g2, .tp-canvas .tp-g3, .tp-canvas .tp-g4, .tp-canvas .tp-g5, .tp-canvas .tp-g6 { gap: var(--ybm-space-x4); }
-  .tp-canvas .tp-content { gap: var(--ybm-space-x6); }
+  .tp-card.ds-card { gap: var(--ybm-space-x3); padding: var(--ybm-space-x4); border-radius: var(--ybm-shape-lg); box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-neutral-muted); }
   .tp-span2 { grid-column: auto; }
   .tp-kpi__label { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
-  .tp-kpi__value { font-size: var(--ybm-font-size-t09); line-height: var(--ybm-line-height-t09); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+  .tp-kpi__value { font-size: var(--ybm-font-size-t08); line-height: var(--ybm-line-height-t08); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
   .tp-delta { display: inline-flex; align-items: center; gap: 2px; font-size: var(--ybm-font-size-t03); line-height: var(--ybm-line-height-t03); font-weight: var(--ybm-font-weight-medium); font-variant-numeric: tabular-nums; white-space: nowrap; }
   .tp-delta .ds-icon { --ds-icon-size: 14px; }
   .tp-delta[data-tone="up"] { color: var(--ybm-color-fg-positive); }
   .tp-delta[data-tone="down"] { color: var(--ybm-color-fg-critical); }
   .tp-delta[data-tone="flat"] { color: var(--ybm-color-fg-neutral-muted); }
+  /* 차트: 얇은 선, 옅은 격자, 마우스를 올리면 세로 안내선과 값 풍선 */
   .tp-chart { display: block; width: 100%; height: auto; overflow: visible; }
-  .tp-chart text { fill: var(--ybm-color-fg-neutral-subtle); font-size: 11px; font-family: inherit; }
+  .tp-chart text { fill: var(--ybm-color-fg-neutral-subtle); font-size: 11px; font-family: inherit; font-variant-numeric: tabular-nums; }
   .tp-chart .tp-grid-line { stroke: var(--ybm-color-stroke-neutral-muted); stroke-width: 1; }
+  .tp-chart [data-i] { transition: opacity var(--ybm-duration-fast) var(--ybm-easing-standard); }
+  .tp-chart.is-hover [data-i]:not(.is-on) { opacity: .35; }
+  .tp-chart .tp-guide { stroke: var(--ybm-color-fg-neutral-subtle); stroke-width: 1; stroke-dasharray: 3 3; opacity: 0; pointer-events: none; }
+  .tp-chart .tp-dot { stroke: var(--ybm-color-bg-layer-default); stroke-width: 2; opacity: 0; pointer-events: none; }
+  .tp-chart.is-hover .tp-guide, .tp-chart.is-hover .tp-dot { opacity: 1; }
+  .tp-tip { position: fixed; z-index: var(--ybm-z-tooltip, 60); display: flex; flex-direction: column; gap: 2px; min-width: 96px; padding: var(--ybm-space-x2) var(--ybm-space-x2_5); border-radius: var(--ybm-shape-sm); background: var(--ybm-color-bg-neutral-solid); color: var(--ybm-color-fg-on-neutral-solid); box-shadow: var(--ybm-elevation-overlay); font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); pointer-events: none; opacity: 0; transform: translateY(4px); transition: opacity var(--ybm-duration-fast) var(--ybm-easing-standard), transform var(--ybm-duration-fast) var(--ybm-easing-standard); }
+  .tp-tip.is-on { opacity: 1; transform: none; }
+  .tp-tip__t { font-weight: var(--ybm-font-weight-semibold); opacity: .8; }
+  .tp-tip__t:only-child { opacity: 1; }
+  [data-tip] { transition: filter var(--ybm-duration-fast) var(--ybm-easing-standard); }
+  [data-tip]:hover { filter: brightness(0.9); }
+  .tp-tip__r { display: flex; align-items: center; gap: var(--ybm-space-x1_5); font-variant-numeric: tabular-nums; }
+  .tp-tip__r b { margin-inline-start: auto; padding-inline-start: var(--ybm-space-x3); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-tip__r i { flex: none; width: 8px; height: 8px; border-radius: 2px; background: var(--c); }
   .tp-legend { display: flex; flex-wrap: wrap; gap: var(--ybm-space-x1) var(--ybm-space-x4); font-size: var(--ybm-font-size-t03); line-height: var(--ybm-line-height-t03); color: var(--ybm-color-fg-neutral-muted); }
   .tp-legend__item { display: inline-flex; align-items: center; gap: var(--ybm-space-x1_5); }
-  .tp-swatch { flex: none; width: 10px; height: 10px; border-radius: 3px; background: var(--c, var(--ybm-color-chart-series-1)); }
-  .tp-split { display: flex; height: 12px; overflow: hidden; border-radius: var(--ybm-shape-pill); background: var(--ybm-color-bg-neutral); }
+  .tp-swatch { flex: none; width: 8px; height: 8px; border-radius: 2px; background: var(--c, var(--ybm-color-chart-series-1)); }
+  .tp-split { display: flex; height: 10px; overflow: hidden; border-radius: var(--ybm-shape-pill); background: var(--ybm-color-bg-neutral); }
   .tp-split > span { height: 100%; background: var(--c); }
   .tp-split > span + span { box-shadow: inset 2px 0 0 var(--ybm-color-bg-layer-default); }
   .tp-ph { display: grid; place-items: center; width: 100%; height: 100%; color: var(--ybm-color-fg-neutral-subtle); background: var(--ybm-color-bg-neutral); }
+  .tp-ph > img { display: block; width: 100%; height: 100%; object-fit: cover; }
   .tp-logo { display: inline-grid; place-items: center; width: 88px; height: 28px; border-radius: var(--ybm-shape-xs); background: var(--ybm-color-bg-neutral); color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t03-static); line-height: var(--ybm-line-height-t03-static); font-weight: var(--ybm-font-weight-semibold); }
   .tp-bar { position: sticky; top: 0; z-index: var(--ybm-z-sticky); background: var(--ybm-color-bg-layer-default); }
   .tp-track { display: flex; flex-direction: column; gap: var(--ybm-space-x1); min-width: 120px; }
@@ -69,21 +80,20 @@ export const BASE_CSS = `  /* 템플릿 배치 전용. 값은 모두 --ybm-* 토
   .tp-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
   .tp-kbd { display: inline-grid; place-items: center; min-width: 20px; height: 20px; padding: 0 4px; border-radius: var(--ybm-shape-2xs); box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-neutral-muted); color: var(--ybm-color-fg-neutral-muted); font-size: var(--ybm-font-size-t01); font-family: inherit; }
   @media (min-width: 768px) {
-    .tp-head { padding: var(--ybm-space-x10) var(--ybm-space-x10) var(--ybm-space-x2); }
+    .tp-head { padding: var(--ybm-space-x8) var(--ybm-space-x6) 0; }
     .tp-h1 { font-size: var(--ybm-font-size-t11); line-height: var(--ybm-line-height-t11); }
-    .tp-head .tp-sub { font-size: var(--ybm-font-size-t05); line-height: var(--ybm-line-height-t05); }
-    .tp-content { padding: var(--ybm-space-x8) var(--ybm-space-x10) var(--ybm-space-x16); gap: var(--ybm-space-x12); }
-    .tp-canvas .tp-content { gap: var(--ybm-space-x8); }
-    .tp-panel { padding: var(--ybm-space-x8) var(--ybm-space-x6); }
-    .tp-card.ds-card { padding: var(--ybm-space-x6); }
+    .tp-h2 { font-size: var(--ybm-font-size-t07); line-height: var(--ybm-line-height-t07); }
+    .tp-content { padding: var(--ybm-space-x6) var(--ybm-space-x6) var(--ybm-space-x12); gap: var(--ybm-space-x8); }
+    .tp-panel { padding: var(--ybm-space-x6); }
+    .tp-card.ds-card { padding: var(--ybm-space-x5); gap: var(--ybm-space-x4); }
+    .tp-g2, .tp-g3, .tp-g4, .tp-g5, .tp-g6 { gap: var(--ybm-space-x4); }
     .tp-g2, .tp-g4, .tp-g6 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .tp-g3, .tp-g5 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .tp-hide-sm { display: revert; }
   }
   @media (min-width: 1024px) {
     .tp-body--panel { flex-direction: row; }
-    .tp-body--panel > .tp-panel { flex: none; width: 400px; box-shadow: inset 1px 0 0 var(--ybm-color-stroke-neutral-muted); }
-    .tp-canvas .tp-body--panel > .tp-panel { box-shadow: none; }
+    .tp-body--panel > .tp-panel { flex: none; width: 360px; box-shadow: inset 1px 0 0 var(--ybm-color-stroke-neutral-muted); }
     .tp-g3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     .tp-g4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
     .tp-g5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
@@ -107,7 +117,7 @@ export const page = ({ title, css = '', body, bodyClass = '' }) => `<!doctype ht
 ${BASE_CSS}${css}</style>
 </head>
 <body${bodyClass ? ` class="${bodyClass}"` : ''}>
-${body}
+${body}${/data-tp=|data-tip=/.test(body) ? `\n<script>\n${CHART_JS}\n</script>` : ''}
 </body>
 </html>
 `;
@@ -145,7 +155,20 @@ export const ring = (v, size = 24, tone = '') => `<span class="ds-progress-circl
 export const card = (inner, { cls = '', size = 'small', tag = 'section', attrs = '' } = {}) => `<${tag} class="ds-card tp-card${cls ? ' ' + cls : ''}"${size ? ` data-size="${size}"` : ''}${attrs ? ' ' + attrs : ''}>${inner}</${tag}>`;
 export const callout = (title, desc, tone = 'informative', ic = 'info-solid') => `<div class="ds-callout" data-tone="${tone}">${icon(ic)}<div class="ds-callout__body">${title ? `<p class="ds-callout__title">${title}</p>` : ''}${desc ? `<p class="ds-callout__desc">${desc}</p>` : ''}</div></div>`;
 export const empty = (title, desc, ic = 'inbox', action = '') => `<div class="ds-empty"><span class="ds-empty__media">${icon(ic)}</span><p class="ds-empty__title">${title}</p>${desc ? `<p class="ds-empty__desc">${desc}</p>` : ''}${action ? `<div class="ds-empty__actions">${action}</div>` : ''}</div>`;
-export const thumb = (ratio = '16:9', cls = '') => `<div class="ds-imageframe${cls ? ' ' + cls : ''}" data-ratio="${ratio}" aria-hidden="true"><span class="tp-ph">${icon('image')}</span></div>`;
+// 사진: Unsplash(무료 사용 허락) 사진을 주소로 불러온다. 주제별 목록에서 번호로 고른다.
+export const unsplash = (id, w = 960) => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&q=70`;
+export const PHOTOS = {
+  nature: ['1506905925346-21bda4d32df4', '1501785888041-af3ef285b470', '1470071459604-3b5ec3a7fe05', '1441974231531-c6227db76b6e', '1507525428034-b723cf961d3e', '1469474968028-56623f02e42e', '1500530855697-b586d89ba3ee', '1447752875215-b2761acb3c5d', '1433086966358-54859d0ed716', '1472214103451-9374bd1c798e'],
+  city: ['1477959858617-67f85cf4f1df', '1449824913935-59a10b8d2000', '1480714378408-67cf0d13bc1b', '1514565131-fce0801e5785', '1486406146926-c627a92ad1ab'],
+  food: ['1504674900247-0877df9cc836', '1546069901-ba9599a7e63c', '1512621776951-a57141f2eefd', '1495474472287-4d71bcdd2085', '1509042239860-f550ce710b93'],
+  product: ['1523275335684-37898b6baf30', '1505740420928-5e560c06d30e', '1526170375885-4d8ecf77b99f', '1491553895911-0055eca6402d', '1572635196237-14b3f281503f', '1495474472287-4d71bcdd2085'],
+  book: ['1456513080510-7bf3a84b82f8', '1455390582262-044cdead277a', '1434030216411-0b793f4b4173', '1503676260728-1c00da094a0b', '1512820790803-83ca734da794', '1481627834876-b7833e8f5570', '1513475382585-d06e58bcb0e0'],
+  study: ['1516321318423-f06f85e504b3', '1460925895917-afdab827c52f', '1551288049-bebda4e38f71', '1498050108023-c5249f4df085', '1521737604893-d14cc237f11d', '1557804506-669a67965ba0', '1455390582262-044cdead277a', '1517694712202-14dd9538aa97', '1552664730-d307ca884978', '1522202176988-66273c2fd55f', '1519389950473-47ba0277781c', '1456513080510-7bf3a84b82f8'],
+  work: ['1497366216548-37526070297c', '1497366811353-6870744d04b2', '1531482615713-2afd69097998', '1552664730-d307ca884978', '1521737604893-d14cc237f11d', '1501504905252-473c47e087f8', '1524178232363-1fb2b075b655'],
+};
+PHOTOS.mix = [PHOTOS.nature[1], PHOTOS.work[0], PHOTOS.city[0], PHOTOS.food[1], PHOTOS.nature[4], PHOTOS.work[1], PHOTOS.nature[2], PHOTOS.city[2], PHOTOS.food[3], PHOTOS.nature[7], PHOTOS.city[1], PHOTOS.nature[9]];
+export const photo = (theme, i = 0, w) => unsplash(PHOTOS[theme][((i % PHOTOS[theme].length) + PHOTOS[theme].length) % PHOTOS[theme].length], w);
+export const thumb = (ratio = '16:9', cls = '', src = '') => `<div class="ds-imageframe${cls ? ' ' + cls : ''}" data-ratio="${ratio}" aria-hidden="true"><span class="tp-ph">${src ? `<img src="${src}" alt="" loading="lazy">` : icon('image')}</span></div>`;
 export const breadcrumbs = (items) => `<nav class="ds-breadcrumbs" aria-label="현재 위치"><ol>${items.map((t, i) => `<li>${i === items.length - 1 ? `<span aria-current="page">${t}</span>` : `<a href="#">${t}</a>`}</li>`).join('')}</ol></nav>`;
 export const stepper = (steps, cur, aria = '단계') => `<ol class="ds-stepper" aria-label="${esc(aria)}">${steps.map((s, i) => `<li class="ds-stepper__step"${i < cur ? ' data-state="complete"' : i === cur ? ' data-state="current" aria-current="step"' : ''}><span class="ds-stepper__indicator"></span><span class="ds-stepper__label">${s}</span></li>`).join('')}</ol>`;
 export const pagination = (cur = 1, last = 12) => `<nav class="ds-pagination" aria-label="페이지"><a class="ds-pagination__item" data-type="prev" aria-label="이전 페이지"${cur === 1 ? ' aria-disabled="true"' : ' href="#"'}></a>${[1, 2, 3].map((n) => `<a class="ds-pagination__item" href="#"${n === cur ? ' aria-current="page"' : ''}>${n}</a>`).join('')}<span class="ds-pagination__item" data-type="ellipsis" aria-hidden="true"></span><a class="ds-pagination__item" href="#">${last}</a><a class="ds-pagination__item" data-type="next" href="#" aria-label="다음 페이지"></a></nav>`;
@@ -172,44 +195,123 @@ export const kpi = (label, value, { d = '', note = '', chart = '', lead = '' } =
 export const rnd = (seed) => () => { seed |= 0; seed = (seed + 0x6d2b79f5) | 0; let t = Math.imul(seed ^ (seed >>> 15), 1 | seed); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
 export const walk = (seed, n, start, vol, { min = 0, drift = 0 } = {}) => { const r = rnd(seed); let v = start; return Array.from({ length: n }, () => { v = Math.max(min, v + (r() - 0.5) * vol + drift); return Math.round(v * 10) / 10; }); };
 export const C = (i) => `var(--ybm-color-chart-series-${((i % 5) + 5) % 5 + 1})`;
-const fmt = (n) => (Math.abs(n) >= 1000 ? (n / 1000).toFixed(n % 1000 ? 1 : 0) + 'k' : String(Math.round(n)));
-// 선 그래프: series = [{ name, data, color? , dash? , fill? }]
-export const lineChart = (series, { w = 640, h = 220, x = [], yTicks = 4, area = false, stacked = false, label = '선 그래프', unit = '', today = -1 } = {}) => {
+const fmt = (n) => (Math.abs(n) >= 1000 ? (n / 1000).toFixed(n % 1000 ? 1 : 0) + 'k' : String(+n.toFixed(2)));
+// 차트 공통: 그림은 SVG, 마우스를 올렸을 때 쓰는 값은 data-tp 에 JSON 으로 담는다(CHART_JS 가 읽는다).
+let CID = 0;
+const tpData = (o) => esc(JSON.stringify(o));
+// 선 그래프: series = [{ name, data, color?, dash?, fill? }]
+// area: 한 계열이면 위에서 아래로 옅어지는 면, stacked: 쌓은 면. xs: 점마다 이름(풍선 제목), 없으면 x 눈금에서 가까운 것을 쓴다.
+export const lineChart = (series, { w = 640, h = 220, x = [], xs = [], yTicks = 4, area = false, stacked = false, label = '선 그래프', unit = '', today = -1 } = {}) => {
   const pl = 40, pr = 8, pt = 8, pb = x.length ? 24 : 8, iw = w - pl - pr, ih = h - pt - pb;
   const n = series[0].data.length;
   const sums = stacked ? Array.from({ length: n }, (_, i) => series.reduce((a, s) => a + s.data[i], 0)) : null;
   const all = stacked ? sums : series.flatMap((s) => s.data);
-  let max = Math.max(...all), min = stacked || area ? 0 : Math.min(...all);
+  let max = Math.max(...all), min = stacked ? 0 : Math.min(...all);
   const step = niceStep((max - min) / yTicks); min = Math.floor(min / step) * step; max = Math.ceil(max / step) * step || step;
   const X = (i) => pl + (iw * i) / Math.max(1, n - 1), Y = (v) => pt + ih - ((v - min) / (max - min)) * ih;
-  let g = '';
-  for (let v = min; v <= max + 1e-9; v += step) g += `<line class="tp-grid-line" x1="${pl}" x2="${w - pr}" y1="${Y(v).toFixed(1)}" y2="${Y(v).toFixed(1)}"/><text x="${pl - 6}" y="${(Y(v) + 4).toFixed(1)}" text-anchor="end">${fmt(v)}${unit}</text>`;
+  const id = 'tpg' + ++CID;
+  let g = '', defs = '';
+  for (let v = min; v <= max + 1e-9; v += step) g += `<line class="tp-grid-line" x1="${pl}" x2="${w - pr}" y1="${Y(v).toFixed(1)}" y2="${Y(v).toFixed(1)}"/><text x="${pl - 8}" y="${(Y(v) + 4).toFixed(1)}" text-anchor="end">${fmt(v)}${unit}</text>`;
   x.forEach((t, k) => { const i = Math.round((k * (n - 1)) / Math.max(1, x.length - 1)); g += `<text x="${X(i).toFixed(1)}" y="${h - 6}" text-anchor="${k === 0 ? 'start' : k === x.length - 1 ? 'end' : 'middle'}">${t}</text>`; });
   let paths = '';
   const base = Array(n).fill(0);
+  const tops = [];
   series.forEach((s, si) => {
     const col = s.color || C(si);
     const top = s.data.map((v, i) => (stacked ? base[i] + v : v));
+    tops.push(top.map((v) => +Y(v).toFixed(1)));
     const pts = top.map((v, i) => `${X(i).toFixed(1)},${Y(v).toFixed(1)}`);
-    if (area || stacked) { const bot = stacked ? base.map((v, i) => `${X(i).toFixed(1)},${Y(v).toFixed(1)}`).reverse() : [`${X(n - 1).toFixed(1)},${Y(min).toFixed(1)}`, `${X(0).toFixed(1)},${Y(min).toFixed(1)}`]; paths += `<polygon points="${pts.join(' ')} ${bot.join(' ')}" fill="${col}" fill-opacity="${stacked ? 0.55 : 0.14}"/>`; }
-    paths += `<polyline points="${pts.join(' ')}" fill="none" stroke="${col}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"${s.dash ? ' stroke-dasharray="4 4"' : ''}/>`;
+    if (stacked) {
+      const bot = base.map((v, i) => `${X(i).toFixed(1)},${Y(v).toFixed(1)}`).reverse();
+      paths += `<polygon points="${pts.join(' ')} ${bot.join(' ')}" fill="${col}" fill-opacity="0.22"/>`;
+    } else if (area && si === 0) {
+      defs += `<linearGradient id="${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${col}" stop-opacity="0.22"/><stop offset="1" stop-color="${col}" stop-opacity="0"/></linearGradient>`;
+      paths += `<polygon points="${pts.join(' ')} ${X(n - 1).toFixed(1)},${Y(min).toFixed(1)} ${X(0).toFixed(1)},${Y(min).toFixed(1)}" fill="url(#${id})"/>`;
+    }
+    paths += `<polyline points="${pts.join(' ')}" fill="none" stroke="${col}" stroke-width="1.75" stroke-linejoin="round" stroke-linecap="round"${s.dash ? ' stroke-dasharray="4 4"' : ''}/>`;
     if (stacked) top.forEach((v, i) => (base[i] = v));
   });
   if (today >= 0) paths += `<line x1="${X(today)}" x2="${X(today)}" y1="${pt}" y2="${pt + ih}" stroke="var(--ybm-color-fg-neutral-muted)" stroke-dasharray="4 4"/>`;
-  return `<svg class="tp-chart" viewBox="0 0 ${w} ${h}" role="img" aria-label="${esc(label)}">${g}${paths}</svg>`;
+  const hover = `<line class="tp-guide" x1="0" x2="0" y1="${pt}" y2="${pt + ih}"/>${series.map((s, si) => `<circle class="tp-dot" r="4" cx="0" cy="0" fill="${s.color || C(si)}"/>`).join('')}`;
+  const titles = xs.length === n ? xs : x.length ? Array.from({ length: n }, (_, i) => { const k = Math.round((i * (x.length - 1)) / Math.max(1, n - 1)); return Math.round((k * (n - 1)) / Math.max(1, x.length - 1)) === i ? x[k] : ''; }) : [];
+  const data = { t: 'line', w, h, pl, iw, n, x: titles, u: unit, s: series.map((s, si) => ({ n: s.name || '', c: s.color || C(si), v: s.data, y: tops[si] })) };
+  return `<svg class="tp-chart" viewBox="0 0 ${w} ${h}" role="img" aria-label="${esc(label)}" data-tp="${tpData(data)}">${defs ? `<defs>${defs}</defs>` : ''}${g}${paths}${hover}</svg>`;
 };
 export const niceStep = (raw) => { const p = Math.pow(10, Math.floor(Math.log10(raw || 1))); const f = raw / p; return (f <= 1 ? 1 : f <= 2 ? 2 : f <= 2.5 ? 2.5 : f <= 5 ? 5 : 10) * p; };
-export const spark = (data, color = C(0), { w = 200, h = 40, label = '추이' } = {}) => { const max = Math.max(...data), min = Math.min(...data), n = data.length; const pts = data.map((v, i) => `${((w * i) / (n - 1)).toFixed(1)},${(h - 2 - ((v - min) / (max - min || 1)) * (h - 4)).toFixed(1)}`).join(' '); return `<svg class="tp-chart tp-spark" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" role="img" aria-label="${esc(label)}"><polyline points="${pts}" fill="none" stroke="${color}" stroke-width="1.5" vector-effect="non-scaling-stroke" stroke-linejoin="round"/></svg>`; };
-export const barChart = (groups, { w = 640, h = 220, x = [], label = '막대 그래프', stacked = false, colors = [] } = {}) => {
-  // groups: [[v1, v2, ...], ...] (계열 여러 개면 나란히, stacked 면 쌓기)
+export const spark = (data, color = C(0), { w = 200, h = 40, label = '추이', unit = '' } = {}) => {
+  const max = Math.max(...data), min = Math.min(...data), n = data.length;
+  const ys = data.map((v) => +(h - 2 - ((v - min) / (max - min || 1)) * (h - 4)).toFixed(1));
+  const pts = data.map((v, i) => `${((w * i) / (n - 1)).toFixed(1)},${ys[i]}`).join(' ');
+  const d = { t: 'line', w, h, pl: 0, iw: w, n, x: [], u: unit, s: [{ n: '', c: color, v: data, y: ys }] };
+  return `<svg class="tp-chart tp-spark" viewBox="0 0 ${w} ${h}" preserveAspectRatio="none" role="img" aria-label="${esc(label)}" data-tp="${tpData(d)}"><polyline points="${pts}" fill="none" stroke="${color}" stroke-width="1.5" vector-effect="non-scaling-stroke" stroke-linejoin="round"/><line class="tp-guide" x1="0" x2="0" y1="0" y2="${h}" vector-effect="non-scaling-stroke"/></svg>`;
+};
+// 막대 그래프: groups = [[v1, v2, ...], ...] (계열 여러 개면 나란히, stacked 면 쌓기). names: 계열 이름(풍선에 씀)
+export const barChart = (groups, { w = 640, h = 220, x = [], xs = [], label = '막대 그래프', stacked = false, colors = [], names = [], unit = '' } = {}) => {
   const pl = 40, pr = 8, pt = 8, pb = 24, iw = w - pl - pr, ih = h - pt - pb, n = groups.length, k = groups[0].length;
   const max0 = Math.max(...groups.map((g) => (stacked ? g.reduce((a, b) => a + b, 0) : Math.max(...g)))); const step = niceStep(max0 / 4); const max = Math.ceil(max0 / step) * step;
   const Y = (v) => pt + ih - (v / max) * ih; const bw = iw / n; let s = '';
-  for (let v = 0; v <= max + 1e-9; v += step) s += `<line class="tp-grid-line" x1="${pl}" x2="${w - pr}" y1="${Y(v).toFixed(1)}" y2="${Y(v).toFixed(1)}"/><text x="${pl - 6}" y="${(Y(v) + 4).toFixed(1)}" text-anchor="end">${fmt(v)}</text>`;
-  groups.forEach((g, i) => { let acc = 0; const inner = bw * 0.64, each = stacked ? inner : inner / k; g.forEach((v, j) => { const x0 = pl + bw * i + (bw - inner) / 2 + (stacked ? 0 : each * j); const y0 = stacked ? Y(acc + v) : Y(v); const hh = stacked ? Y(acc) - Y(acc + v) : Y(0) - Y(v); s += `<rect x="${x0.toFixed(1)}" y="${y0.toFixed(1)}" width="${Math.max(1, each - (stacked ? 0 : 2)).toFixed(1)}" height="${Math.max(0, hh).toFixed(1)}" rx="2" fill="${colors[j] || C(j)}"/>`; acc += v; }); if (x[i] !== undefined) s += `<text x="${(pl + bw * i + bw / 2).toFixed(1)}" y="${h - 6}" text-anchor="middle">${x[i]}</text>`; });
-  return `<svg class="tp-chart" viewBox="0 0 ${w} ${h}" role="img" aria-label="${esc(label)}">${s}</svg>`;
+  for (let v = 0; v <= max + 1e-9; v += step) s += `<line class="tp-grid-line" x1="${pl}" x2="${w - pr}" y1="${Y(v).toFixed(1)}" y2="${Y(v).toFixed(1)}"/><text x="${pl - 8}" y="${(Y(v) + 4).toFixed(1)}" text-anchor="end">${fmt(v)}${unit}</text>`;
+  groups.forEach((g, i) => {
+    let acc = 0; const inner = bw * (k > 1 && !stacked ? 0.7 : 0.56), each = stacked ? inner : inner / k;
+    s += `<g data-i="${i}">`;
+    g.forEach((v, j) => { const x0 = pl + bw * i + (bw - inner) / 2 + (stacked ? 0 : each * j); const y0 = stacked ? Y(acc + v) : Y(v); const hh = stacked ? Y(acc) - Y(acc + v) : Y(0) - Y(v); s += `<rect x="${x0.toFixed(1)}" y="${y0.toFixed(1)}" width="${Math.max(1, each - (stacked ? 0 : 3)).toFixed(1)}" height="${Math.max(0, hh).toFixed(1)}" rx="${Math.min(4, each / 4).toFixed(1)}" fill="${colors[j] || C(j)}"/>`; acc += v; });
+    s += '</g>';
+    if (x[i] !== undefined) s += `<text x="${(pl + bw * i + bw / 2).toFixed(1)}" y="${h - 6}" text-anchor="middle">${x[i]}</text>`;
+  });
+  const d = { t: 'bar', w, h, pl, iw, n, x: xs.length ? xs : x, u: unit, s: Array.from({ length: k }, (_, j) => ({ n: names[j] || '', c: colors[j] || C(j), v: groups.map((g) => g[j]) })) };
+  return `<svg class="tp-chart" viewBox="0 0 ${w} ${h}" role="img" aria-label="${esc(label)}" data-tp="${tpData(d)}">${s}</svg>`;
 };
-export const donut = (parts, { size = 160, thick = 18, center = '', sub = '', label = '도넛 그래프' } = {}) => { const r = (size - thick) / 2, c = 2 * Math.PI * r; let off = 0; const tot = parts.reduce((a, p) => a + p[1], 0); const arcs = parts.map(([, v, col], i) => { const len = (v / tot) * c; const s = `<circle cx="${size / 2}" cy="${size / 2}" r="${r}" fill="none" stroke="${col || C(i)}" stroke-width="${thick}" stroke-dasharray="${Math.max(0, len - 2).toFixed(1)} ${(c - len + 2).toFixed(1)}" stroke-dashoffset="${(-off).toFixed(1)}" transform="rotate(-90 ${size / 2} ${size / 2})"/>`; off += len; return s; }).join(''); return `<svg class="tp-chart tp-donut" viewBox="0 0 ${size} ${size}" style="max-width:${size}px" role="img" aria-label="${esc(label)}"><circle cx="${size / 2}" cy="${size / 2}" r="${r}" fill="none" stroke="var(--ybm-color-bg-neutral)" stroke-width="${thick}"/>${arcs}${center ? `<text x="50%" y="${size / 2 + (sub ? 0 : 6)}" text-anchor="middle" style="font-size:22px;font-weight:700;fill:var(--ybm-color-fg-neutral)">${center}</text>` : ''}${sub ? `<text x="50%" y="${size / 2 + 20}" text-anchor="middle">${sub}</text>` : ''}</svg>`; };
+export const donut = (parts, { size = 160, thick = 16, center = '', sub = '', label = '도넛 그래프', unit = '' } = {}) => {
+  const r = (size - thick) / 2, c = 2 * Math.PI * r; let off = 0; const tot = parts.reduce((a, p) => a + p[1], 0);
+  const arcs = parts.map(([, v, col], i) => { const len = (v / tot) * c; const s = `<circle data-i="${i}" cx="${size / 2}" cy="${size / 2}" r="${r}" fill="none" stroke="${col || C(i)}" stroke-width="${thick}" stroke-dasharray="${Math.max(0, len - 2).toFixed(1)} ${(c - len + 2).toFixed(1)}" stroke-dashoffset="${(-off).toFixed(1)}" transform="rotate(-90 ${size / 2} ${size / 2})"/>`; off += len; return s; }).join('');
+  const d = { t: 'pie', u: unit, s: parts.map(([n, v, col], i) => ({ n, c: col || C(i), v, p: Math.round((v / tot) * 1000) / 10 })) };
+  return `<svg class="tp-chart tp-donut" viewBox="0 0 ${size} ${size}" style="max-width:${size}px" role="img" aria-label="${esc(label)}" data-tp="${tpData(d)}"><circle cx="${size / 2}" cy="${size / 2}" r="${r}" fill="none" stroke="var(--ybm-color-bg-neutral)" stroke-width="${thick}"/>${arcs}${center ? `<text x="50%" y="${size / 2 + (sub ? 2 : 7)}" text-anchor="middle" style="font-size:22px;font-weight:700;letter-spacing:-0.02em;fill:var(--ybm-color-fg-neutral)">${center}</text>` : ''}${sub ? `<text x="50%" y="${size / 2 + 20}" text-anchor="middle">${sub}</text>` : ''}</svg>`;
+};
+// 차트 인터랙션: 선과 막대는 가로 위치로 가장 가까운 점, 도넛은 조각. 풍선 하나를 페이지가 같이 쓴다.
+export const CHART_JS = `(function () {
+  var tip = document.createElement('div'); tip.className = 'tp-tip'; tip.setAttribute('role', 'status'); document.body.appendChild(tip);
+  var nf = function (v, u) { return (typeof v === 'number' ? v.toLocaleString('ko-KR') : v) + (u || ''); };
+  var show = function (title, rows, cx, cy) {
+    tip.innerHTML = (title ? '<span class="tp-tip__t">' + title + '</span>' : '') + rows.map(function (r) { return '<span class="tp-tip__r">' + (r.c ? '<i style="--c:' + r.c + '"></i>' : '') + (r.n || '') + '<b>' + r.v + '</b></span>'; }).join('');
+    tip.classList.add('is-on');
+    var tw = tip.offsetWidth, th = tip.offsetHeight, x = cx + 14, y = cy - th - 10;
+    if (x + tw > innerWidth - 8) x = cx - tw - 14; if (y < 8) y = cy + 14;
+    tip.style.left = x + 'px'; tip.style.top = y + 'px';
+  };
+  var hide = function (svg) { tip.classList.remove('is-on'); svg.classList.remove('is-hover'); svg.querySelectorAll('.is-on').forEach(function (e) { e.classList.remove('is-on'); }); };
+  document.querySelectorAll('[data-tip]').forEach(function (el) {
+    el.addEventListener('pointermove', function (e) { var p = el.getAttribute('data-tip').split('|'); show(p[0], p[1] ? [{ n: '', v: p[1] }] : [], e.clientX, e.clientY); });
+    el.addEventListener('pointerleave', function () { tip.classList.remove('is-on'); });
+  });
+  document.querySelectorAll('svg[data-tp]').forEach(function (svg) {
+    var d = JSON.parse(svg.getAttribute('data-tp'));
+    var guide = svg.querySelector('.tp-guide'), dots = svg.querySelectorAll('.tp-dot');
+    svg.addEventListener('pointerleave', function () { hide(svg); });
+    svg.addEventListener('pointermove', function (e) {
+      var rc = svg.getBoundingClientRect();
+      if (d.t === 'pie') {
+        var t = e.target.closest('[data-i]'); if (!t) { hide(svg); return; }
+        var p = d.s[+t.getAttribute('data-i')];
+        svg.classList.add('is-hover'); svg.querySelectorAll('[data-i]').forEach(function (a) { a.classList.toggle('is-on', a === t); });
+        show(p.n, [{ c: p.c, n: '', v: nf(p.v, d.u) + ' · ' + p.p + '%' }], e.clientX, e.clientY); return;
+      }
+      var vx = (e.clientX - rc.left) / rc.width * d.w;
+      var i = d.t === 'bar' ? Math.floor((vx - d.pl) / (d.iw / d.n)) : Math.round((vx - d.pl) / d.iw * (d.n - 1));
+      if (i < 0 || i >= d.n) { hide(svg); return; }
+      svg.classList.add('is-hover');
+      var top = rc.top + rc.height;
+      if (d.t === 'line') {
+        var gx = d.pl + d.iw * i / Math.max(1, d.n - 1);
+        if (guide) { guide.setAttribute('x1', gx); guide.setAttribute('x2', gx); }
+        d.s.forEach(function (s, k) { if (dots[k]) { dots[k].setAttribute('cx', gx); dots[k].setAttribute('cy', s.y[i]); } top = Math.min(top, rc.top + s.y[i] / d.h * rc.height); });
+        show(d.x[i] || '', d.s.map(function (s) { return { c: d.s.length > 1 ? s.c : '', n: s.n, v: nf(s.v[i], d.u) }; }), rc.left + gx / d.w * rc.width, top);
+      } else {
+        svg.querySelectorAll('g[data-i]').forEach(function (g) { g.classList.toggle('is-on', +g.getAttribute('data-i') === i); });
+        show(d.x[i] || '', d.s.map(function (s) { return { c: d.s.length > 1 ? s.c : '', n: s.n, v: nf(s.v[i], d.u) }; }), e.clientX, e.clientY);
+      }
+    });
+  });
+})();`;
 export const legend = (items) => `<div class="tp-legend">${items.map(([t, i, extra]) => `<span class="tp-legend__item"><span class="tp-swatch" style="--c:${typeof i === 'number' ? C(i) : i}"></span>${t}${extra ? ` <span class="tp-num">${extra}</span>` : ''}</span>`).join('')}</div>`;
-export const split = (parts) => `<div class="tp-split" role="img" aria-label="${esc(parts.map(([t, v]) => `${t} ${v}%`).join(', '))}">${parts.map(([, v, c], i) => `<span style="width:${v}%;--c:${c || C(i)}"></span>`).join('')}</div>`;
+export const split = (parts) => `<div class="tp-split" role="img" aria-label="${esc(parts.map(([t, v]) => `${t} ${v}%`).join(', '))}">${parts.map(([t, v, c], i) => `<span style="width:${v}%;--c:${c || C(i)}" data-tip="${esc(t)}|${v}%"></span>`).join('')}</div>`;
 export const meter = (label, v, value) => `<div class="tp-track"><div class="tp-between"><span class="tp-sub">${label}</span><span class="tp-num tp-sub">${value}</span></div>${progress(v, { label })}</div>`;

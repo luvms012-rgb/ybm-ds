@@ -19,10 +19,11 @@ const CSS = FRAME_CSS + `
   .tp-ask > .ds-input { flex: 1 1 auto; }
   .tp-cover > .ds-badge { position: absolute; top: var(--ybm-space-x2); left: var(--ybm-space-x2); }
 `;
-const PH = ['var(--ybm-color-palette-blue-100)', 'var(--ybm-color-palette-green-100)', 'var(--ybm-color-palette-orange-100)', 'var(--ybm-color-palette-purple-100)', 'var(--ybm-color-palette-red-100)', 'var(--ybm-color-palette-gray-200)'];
-const cover = (i, ratio = '16:9', b = '') => `<div class="tp-cover">${thumb(ratio).replace('class="tp-ph"', `class="tp-ph" style="background:${PH[i % PH.length]}"`)}${b}</div>`;
+// 표지 자리: 회색 한 가지(여러 색을 쓰지 않는다)
+const COVER = { '처음 만나는 생성형 AI 업무 활용': 0, '엑셀 함수와 피벗 한 번에': 1, '데이터로 말하는 보고서 쓰기': 2, '개인정보 보호 교육': 3, '팀장의 1:1 대화법': 4, '설득하는 프레젠테이션 구조 잡기': 5, '비즈니스 영어 이메일 바로 쓰기': 6, '파이썬으로 하는 업무 자동화': 7, '직장 내 괴롭힘 예방 교육': 8, '고객의 말을 듣는 인터뷰': 9, '프로젝트 일정과 위험 관리': 10, '일본어 업무 회화 첫걸음': 11 };
+const cover = (i, ratio = '16:9', b = '', title = '') => `<div class="tp-cover">${thumb(ratio, '', K.photo('study', title in COVER ? COVER[title] : i, 720))}${b}</div>`;
 const star = (r, n) => `<span class="tp-star">${icon('star-solid')}${r} <span class="tp-caption">(${n})</span></span>`;
-const course = (i, title, meta, { b = '', r = '4.8', n = '1,204', prog = -1 } = {}) => `<a class="tp-course" href="#">${cover(i, '16:9', b)}<div class="tp-stack" style="gap: var(--ybm-space-x1)"><span class="tp-course__title">${title}</span><div class="tp-course__meta">${tags(meta)}${r ? star(r, n) : ''}</div>${prog >= 0 ? progress(prog, { label: title + ' 진도' }) : ''}</div></a>`;
+const course = (i, title, meta, { b = '', r = '4.8', n = '1,204', prog = -1 } = {}) => `<a class="tp-course" href="#">${cover(i, '16:9', b, title)}<div class="tp-stack" style="gap: var(--ybm-space-x1)"><span class="tp-course__title">${title}</span><div class="tp-course__meta">${tags(meta)}${r ? star(r, n) : ''}</div>${prog >= 0 ? progress(prog, { label: title + ' 진도' }) : ''}</div></a>`;
 
 /* 1. 학습 홈 (학습자) ---------------------------------------------- */
 const home = () => {
@@ -41,7 +42,7 @@ const home = () => {
     ${card(`<div class="tp-stats" style="--n:3"><div><span class="tp-sub">이번 주 학습</span><span class="tp-mid">${T('2시간 40분')}</span></div><div><span class="tp-sub">연속 학습</span><span class="tp-mid">${T('6일')}</span></div><div><span class="tp-sub">이수한 과정</span><span class="tp-mid">${T('12개')}</span></div></div>`)}
   </div>
   <section class="tp-sec">${secHead('이어서 보기')}
-    ${card(`<div class="tp-resume">${cover(0)}<div class="tp-stack" style="gap: var(--ybm-space-x3)">${badge('직무', 'informative')}<span class="tp-mid">데이터로 말하는 보고서 쓰기</span><span class="tp-sub">3강. 숫자를 그림으로 바꾸기 · 12분 남음</span>${meter('진도', 25, '3 / 12강')}<div class="tp-row" style="flex-wrap:wrap">${btn('이어 보기', { variant: 'brandSolid', ic: 'play' })}${btn('AI 요약 보기', { ic: 'sparkles' })}</div></div></div>`)}
+    ${card(`<div class="tp-resume">${cover(2)}<div class="tp-stack" style="gap: var(--ybm-space-x3)">${badge('직무', 'informative')}<span class="tp-mid">데이터로 말하는 보고서 쓰기</span><span class="tp-sub">3강. 숫자를 그림으로 바꾸기 · 12분 남음</span>${meter('진도', 25, '3 / 12강')}<div class="tp-row" style="flex-wrap:wrap">${btn('이어 보기', { variant: 'brandSolid', ic: 'play' })}${btn('AI 요약 보기', { ic: 'sparkles' })}</div></div></div>`)}
   </section>
   <div class="tp-g2">
     <section class="tp-sec">${secHead('꼭 들어야 하는 교육', { sub: '법정 필수', tools: link('모두 보기') })}
@@ -58,7 +59,7 @@ const home = () => {
     ${card(`<div class="tp-rows">${[['신규 입사자 온보딩 체크리스트', '인사팀 · 이서연', 128], ['고객 문의 응답 문장 모음', '고객경험팀 · 박지후', 96], ['분기 보고서 템플릿과 작성 팁', '전략기획팀 · 최하은', 74]].map(([t, w, l]) => `<div class="tp-between"><div class="tp-stack"><span class="tp-h4">${t}</span><span class="tp-caption">${w}</span></div><span class="tp-row tp-caption">${icon('thumbs-up', 'sm')}${T(l)}</span></div>`).join('')}</div>`)}
   </section>
 </main></div>`;
-  return { slug: 'learning-home', canvas: true, en: 'Learning Home', name: '학습 홈', group: 'Learning B2B', desc: '임직원이 들어오면 먼저 보는 학습 홈입니다. 이번 주 학습량, 이어 보기, 마감이 다가오는 필수 교육, AI 어드바이저, AI 추천 과정, 사내 지식을 차례로 보여 줍니다.', css, body };
+  return { slug: 'learning-home', en: 'Learning Home', name: '학습 홈', group: 'Learning B2B', desc: '임직원이 처음 보는 학습 홈입니다. 이번 주 학습량, 이어서 보기, 마감이 다가오는 필수 교육, AI 어드바이저, 추천 과정, 사내 지식을 차례로 보여 줍니다.', css, body };
 };
 
 /* 2. 과정 찾기 ---------------------------------------------------- */
@@ -78,7 +79,7 @@ const catalog = () => {
   <div class="tp-g4c">${items.map(([t, m, b], i) => course(i, t, m, { b: b ? badge(b, tone[b], true) : '', r: (4.5 + (i % 5) / 10).toFixed(1), n: String(320 + i * 137) })).join('')}</div>
   <div style="display:flex;justify-content:center">${pagination(1, 21)}</div>
 </main></div>`;
-  return { slug: 'learning-catalog', canvas: false, en: 'Course Catalog', name: '과정 찾기', group: 'Learning B2B', desc: '찾기 칸과 분류 칩, 수준과 시간 고르기로 과정을 거르는 목록입니다. 표지, 이름, 학습 시간, 평점을 카드 없이 사진과 글로만 보여 줍니다.', css, body };
+  return { slug: 'learning-catalog', en: 'Course Catalog', name: '과정 찾기', group: 'Learning B2B', desc: '듣고 싶은 과정을 찾는 목록입니다. 검색, 분류, 수준, 학습 시간으로 거르고 표지와 이름, 학습 시간, 평점을 보여 줍니다.', css, body };
 };
 
 /* 3. 강의 보기 + AI 튜터 ------------------------------------------- */
@@ -128,7 +129,7 @@ const player = () => {
     </aside>
   </div>
 </div>`;
-  return { slug: 'learning-player', canvas: false, en: 'Course Player', name: '강의 보기', group: 'Learning B2B', desc: '영상 아래에 AI 튜터의 핵심 요약, 퀴즈, 질문을 두고 오른쪽에 커리큘럼을 고정한 강의 화면입니다. 들은 강의와 지금 강의를 아이콘으로 구분합니다.', css, body };
+  return { slug: 'learning-player', en: 'Course Player', name: '강의 보기', group: 'Learning B2B', desc: '강의를 듣는 화면입니다. 영상 아래에 AI 튜터의 요약, 퀴즈, 질문을 두고 오른쪽에 커리큘럼을 고정해 들은 강의와 지금 강의를 구분합니다.', css, body };
 };
 
 /* 4. 과정 운영 (교육 담당자) ---------------------------------------- */
@@ -156,7 +157,7 @@ const admin = () => {
     </aside>
   </div>
 </main>`;
-  return { slug: 'learning-admin', canvas: true, en: 'Course Operations', name: '과정 운영', group: 'Learning B2B', desc: '교육 담당자가 과정 차수와 이수율을 표로 보고, 고른 과정의 대상 부서와 알림을 오른쪽에서 바로 바꾸는 화면입니다.', css, body: frame(adminNav(1), '과정 운영', main) };
+  return { slug: 'learning-admin', en: 'Course Operations', name: '과정 운영', group: 'Learning B2B', desc: '교육 담당자가 과정을 운영하는 화면입니다. 과정별 차수와 이수율을 표로 보고, 고른 과정의 대상 부서와 알림을 오른쪽에서 바로 바꿉니다.', css, body: frame(adminNav(1), '과정 운영', main) };
 };
 
 /* 5. 학습 현황 대시보드 (교육 담당자) -------------------------------- */
@@ -182,7 +183,7 @@ const dash = () => {
     ${card(`<span class="tp-row tp-h3">${icon('sparkles')}AI 튜터 이용</span><div class="tp-stack" style="gap: var(--ybm-space-x4)"><div class="tp-kv"><span>질문</span>${T('4,812건')}</div><div class="tp-kv"><span>요약 보기</span>${T('9,306회')}</div><div class="tp-kv"><span>퀴즈 풀이</span>${T('6,127회')}</div><div class="tp-kv"><span>답변 만족</span>${T('91%')}</div></div>${callout('', '퀴즈를 푼 학습자의 이수율이 18%p 높아요.', 'informative', 'lightbulb')}`)}
   </div>
 </main>`;
-  return { slug: 'learning-dashboard', canvas: true, en: 'Learning Dashboard', name: '학습 현황 대시보드', group: 'Learning B2B', desc: '교육 담당자가 전체 학습을 보는 대시보드입니다. 필수 교육 이수율과 학습 시간을 먼저 보여 주고, 부서별 이수율, 마감 임박 미이수자, 인기 과정, AI 튜터 이용으로 이어집니다.', css, body: frame(adminNav(4), '학습 현황', main) };
+  return { slug: 'learning-dashboard', en: 'Learning Dashboard', name: '학습 현황 대시보드', group: 'Learning B2B', desc: '교육 담당자가 전체 학습 현황을 보는 대시보드입니다. 필수 교육 이수율과 학습 시간을 먼저 보여 주고 부서별 이수율, 마감이 다가오는 미이수자, 인기 과정, AI 튜터 이용으로 이어집니다.', css, body: frame(adminNav(4), '학습 현황', main) };
 };
 
 export const templates = [home, catalog, player, admin, dash].map((f) => f());

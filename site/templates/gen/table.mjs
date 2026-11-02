@@ -41,36 +41,57 @@ ${head('연결된 계좌', { sub: '13개 계좌의 순자산 7억 6,840만원', 
   ${groups.map(([g, n, tot, cols, rows], gi) => card(`<details class="tp-coll"${gi < 3 ? ' open' : ''}><summary>${icon('chevron-down', 'sm')}<h2 class="tp-h3">${g}</h2>${badge(n + '개')}<span class="tp-coll__total">${tot}</span></summary><div class="ds-table-wrap"><table class="ds-table" data-density="compact">${thead(['', ...cols])}<tbody>${rows.map((r) => `<tr><td style="width:40px"><button type="button" class="tp-caret" aria-expanded="false" aria-label="${esc(r[0])} 자세히">${icon('chevron-right', 'sm')}</button></td>${r.map((c, i) => `<td${Array.isArray(cols[i]) ? ` data-align="${cols[i][1]}"` : ''}>${i === 0 ? `<span class="tp-cell2"><span>${c}</span><span>${r[1]}</span></span>`.replace(`<span>${r[1]}</span></span>`, `<span>${r[1].split(' ··· ')[1] ? '··· ' + r[1].split(' ··· ')[1] : ''}</span></span>`) : String(c).replace('@end', '')}</td>`).join('')}</tr>`).join('')}</tbody></table></div></details>`)).join('')}
 </main>
 </div>`;
-  return { slug: 'table-collapsible', en: 'Collapsible Table', name: '접히는 표 묶음', group: 'Table', desc: '열이 서로 다른 표 여러 개를 접히는 카드에 하나씩 담은 화면입니다. 묶음마다 칸이 달라 표 하나로 합치면 빈칸이 많아질 때 씁니다.', css, body };
+  return { slug: 'table-collapsible', en: 'Collapsible Table', name: '접히는 표 묶음', group: 'Table', desc: '열 구성이 다른 표 여러 개를 접고 펼 수 있는 묶음으로 나눠 담은 화면입니다. 표 하나로 합치면 빈칸이 많아질 때 씁니다.', css, body };
 };
 
 /* 2. 비교 표 ----------------------------------------------------- */
 const comparison = () => {
   const plans = ['베이직', '프리미엄', '기업'];
   const groups = [
-    ['개요', [['대상', '개인', '개인', '기업·학교'], ['수강 가능 강좌', '120개', '전체 480개', '전체 480개 + 맞춤'], ['동시 접속 기기', '1대', '3대', '사람마다 2대']]],
-    ['가격', [['월 요금', '19,900원', '39,900원', '문의'], ['연 결제 할인', '10%', '20% ★', '계약에 따라'], ['무료 체험', '7일', '14일 ★', '30일']]],
+    ['개요', [['대상', '개인', '개인', '기업, 학교'], ['들을 수 있는 강좌', '120개', '480개', '480개 + 맞춤 ★'], ['동시 접속 기기', '1대', '3대 ★', '1인 2대']]],
+    ['가격', [['월 요금', '19,900원 ★', '39,900원', '따로 문의'], ['연 결제 할인', '10%', '20% ★', '계약에 따라'], ['무료 체험', '7일', '14일', '30일 ★']]],
     ['학습 기능', [['AI 첨삭', '월 10회', '무제한 ★', '무제한 ★'], ['모의고사', '월 1회', '월 4회', '무제한 ★'], ['오프라인 저장', '—', '가능 ★', '가능 ★'], ['학습 리포트', '기본', '자세히', '관리자 리포트 ★']]],
-    ['지원', [['1:1 문의', '평일', '매일 ★', '전담 매니저 ★'], ['응답 시간', '48시간', '24시간', '4시간 ★']]],
-    ['제한', [['계정 공유', '불가', '불가', '관리자 배정'], ['최소 계약', '없음 ★', '없음 ★', '10명']]],
+    ['지원', [['1:1 문의', '평일', '매일', '전담 매니저 ★'], ['답변 시간', '48시간', '24시간', '4시간 ★']]],
+    ['제한', [['계정 공유', '안 됨', '안 됨', '관리자가 배정 ★'], ['최소 계약', '없음 ★', '없음 ★', '10명']]],
   ];
-  const cell = (v) => (v.endsWith(' ★') ? `<span class="tp-best">${v.slice(0, -2)}</span>` : v === '—' ? `<span class="tp-caption">—</span>` : v);
+  const cell = (v) => (v.endsWith(' ★') ? `<td class="tp-best">${v.slice(0, -2)}</td>` : v === '—' ? `<td><span class="tp-caption">—</span></td>` : `<td>${v}</td>`);
   const css = TABLE_CSS + `
-  .tp-cmp th:first-child, .tp-cmp td:first-child { position: sticky; left: 0; z-index: 1; min-width: 160px; background: var(--ybm-color-bg-layer-default); box-shadow: inset -1px 0 0 var(--ybm-color-stroke-neutral-muted); }
-  .tp-cmp .tp-grouprow td:first-child { background: var(--ybm-color-bg-neutral-subtle); box-shadow: none; }
-  .tp-cmp th:not(:first-child), .tp-cmp td:not(:first-child) { min-width: 200px; }
-  .tp-cmp thead th { vertical-align: bottom; }
-  .tp-cmp td:first-child { color: var(--ybm-color-fg-neutral-muted); }
-  .tp-best { display: inline-flex; align-items: center; gap: var(--ybm-space-x1); font-weight: var(--ybm-font-weight-semibold); color: var(--ybm-color-fg-positive); }
-  .tp-best::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+  .tp-cmp-wrap { overflow-x: auto; border-radius: var(--ybm-shape-lg); box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-neutral-muted); }
+  .tp-cmp { width: 100%; min-width: 760px; border-collapse: separate; border-spacing: 0; font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); }
+  .tp-cmp th, .tp-cmp td { height: 48px; padding: 0 var(--ybm-space-x4); text-align: end; font-variant-numeric: tabular-nums; box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); }
+  .tp-cmp :is(th, td) + :is(th, td) { box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted), inset 1px 0 0 var(--ybm-color-stroke-neutral-muted); }
+  .tp-cmp :is(th, td):first-child { position: sticky; left: 0; z-index: 1; width: 200px; min-width: 160px; text-align: start; color: var(--ybm-color-fg-neutral-muted); background: var(--ybm-color-bg-layer-default); }
+  .tp-cmp thead th { height: 60px; font-weight: var(--ybm-font-weight-medium); }
+  .tp-cmp thead th:not(:first-child) { min-width: 200px; }
+  .tp-cmp thead .ds-select { width: 100%; }
+  .tp-cmp .tp-grp td { height: 44px; padding: 0; text-align: start; background: var(--ybm-color-bg-neutral-muted); }
+  .tp-cmp .tp-grp button { display: flex; align-items: center; gap: var(--ybm-space-x2); width: 100%; height: 44px; padding: 0 var(--ybm-space-x4); color: var(--ybm-color-fg-neutral); font: inherit; font-weight: var(--ybm-font-weight-bold); text-align: start; }
+  .tp-cmp .tp-grp .ds-icon { transition: transform var(--ybm-duration-fast) var(--ybm-easing-standard); }
+  .tp-cmp .tp-grp[aria-expanded="false"] .ds-icon { transform: rotate(-90deg); }
+  .tp-cmp tr[hidden] { display: none; }
+  .tp-cmp td.tp-best { background: var(--ybm-color-bg-brand-weak); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-cmp-wrap:has(+ .tp-cmp-opt #cmp-hl:not(:checked)) td.tp-best, .tp-app:has(#cmp-hl:not(:checked)) td.tp-best { background: none; font-weight: inherit; }
 `;
+  let g = 0;
   const body = `<div class="tp-app">
-${head('요금제 비교', { tools: `<label class="tp-row">${sw('가장 좋은 값 강조', true)}<span class="tp-sub">가장 좋은 값 강조</span></label>${btn('공유', { ic: 'share' })}` })}
+${head('요금제 비교', { sub: '열마다 요금제를 바꿔 고르면 같은 기준으로 나란히 비교해요.', tools: `<label class="tp-row"><span class="ds-switch"><input type="checkbox" role="switch" class="ds-switch__control" id="cmp-hl" checked></span><span class="tp-sub">가장 좋은 값 강조</span></label>${btn('요금제 추가', { ic: 'plus' })}` })}
 <main class="tp-content">
-  ${card(`<div class="ds-table-wrap"><table class="ds-table tp-cmp" data-density="compact"><thead><tr><th scope="col">요금제</th>${plans.map((p, i) => `<th scope="col">${field('cmp' + i, '비교 ' + (i + 1), select(p, { id: 'cmp' + i }))}</th>`).join('')}</tr></thead><tbody>${groups.map(([g, rows]) => grow(4, g, '') + rows.map(([l, ...v]) => `<tr><td>${l}</td>${v.map((x) => `<td>${cell(x)}</td>`).join('')}</tr>`).join('')).join('')}</tbody></table></div>`)}
+  <div class="tp-cmp-wrap"><table class="tp-cmp"><caption class="tp-sr">요금제 비교</caption>
+    <thead><tr><th scope="col">요금제</th>${plans.map((p, i) => `<th scope="col">${select(p, { id: 'cmp' + i, aria: `비교 ${i + 1}` })}</th>`).join('')}</tr></thead>
+    <tbody>${groups.map(([name, rows]) => { g++; return `<tr class="tp-grp" aria-expanded="true"><td colspan="4"><button type="button" aria-expanded="true" data-grp="${g}">${icon('chevron-down', 'sm')}${name}</button></td></tr>` + rows.map(([l, ...v]) => `<tr data-in="${g}"><th scope="row">${l}</th>${v.map(cell).join('')}</tr>`).join(''); }).join('')}</tbody>
+  </table></div>
 </main>
-</div>`;
-  return { slug: 'table-comparison', en: 'Comparison Table', name: '비교 표', group: 'Table', desc: '비교할 대상을 열에, 기준을 묶음 행에 두고 왼쪽 이름 열을 고정한 표입니다. 열마다 대상을 바꿔 고를 수 있고 가장 좋은 값을 강조합니다.', css, body };
+</div>
+<script>
+document.querySelectorAll('.tp-cmp [data-grp]').forEach(function (b) {
+  b.addEventListener('click', function () {
+    var open = b.getAttribute('aria-expanded') !== 'true';
+    b.setAttribute('aria-expanded', open); b.closest('tr').setAttribute('aria-expanded', open);
+    document.querySelectorAll('.tp-cmp [data-in="' + b.dataset.grp + '"]').forEach(function (r) { r.hidden = !open; });
+  });
+});
+</script>`;
+  return { slug: 'table-comparison', en: 'Comparison Table', name: '비교 표', group: 'Table', desc: '비교할 대상을 열에, 기준을 묶음별 행에 놓은 비교 표입니다. 열마다 대상을 바꿔 고를 수 있고, 가장 좋은 값은 칸 색으로 표시합니다.', css, body };
 };
 
 /* 3. 필터 표 ----------------------------------------------------- */
@@ -103,7 +124,7 @@ const filter = () => {
   ${tablePager(55)}
 </main>
 </div>`;
-  return { slug: 'table-filter', en: 'Filterable Table', name: '필터 표', group: 'Table', desc: '걸러 보기를 중심에 둔 표입니다. 검색과 여러 필터, 고급 검색, 필터 묶음을 저장하는 보기, 지점별로 묶은 행이 있습니다.', css, body };
+  return { slug: 'table-filter', en: 'Filterable Table', name: '필터 표', group: 'Table', desc: '검색과 여러 조건으로 원하는 행만 걸러 보는 표입니다. 자주 쓰는 조건은 보기로 저장하고, 행은 지점별로 묶어 보여 줍니다.', css, body };
 };
 
 /* 4. 묶음 표 ----------------------------------------------------- */
@@ -122,7 +143,7 @@ const grouped = () => {
   <div class="ds-table-wrap tp-full-table"><table class="ds-table" data-density="compact">${thead(['<span class="tp-sr">상태</span>', '번호', '제목', '시작', '마감', '담당', '<span class="tp-sr">동작</span>'])}<tbody>${groups.map(([g, tone, rows]) => grow(7, `${dot(tone)}${g}`, rows.length) + rows.map(([id, labels, t, s, d, who]) => `<tr><td style="width:40px">${dot(tone, g)}</td><td><span class="tp-row">${T(id)}${labels.map((l) => badge(l)).join('')}</span></td><td>${t}</td><td>${T(s)}</td><td>${T(d)}</td><td>${avatar(who)}</td><td data-align="end">${iconBtn('ellipsis', t + ' 동작')}</td></tr>`).join('')).join('')}</tbody></table></div>
 </main>
 </div>`;
-  return { slug: 'table-grouped', en: 'Grouped Table', name: '묶음 표', group: 'Table', desc: '행을 상태별로 접히는 묶음에 나누고 묶음마다 개수를 붙인 표입니다. 긴 목록을 몇 덩어리로 줄여 읽을 수 있습니다.', css, body };
+  return { slug: 'table-grouped', en: 'Grouped Table', name: '묶음 표', group: 'Table', desc: '행을 상태별 묶음으로 나누고 묶음마다 개수를 붙인 표입니다. 긴 목록을 몇 덩어리로 나눠 접고 펴며 읽습니다.', css, body };
 };
 
 /* 5. 받은함 표 --------------------------------------------------- */
@@ -159,7 +180,7 @@ const inbox = () => {
   </aside>
 </div>
 </div>`;
-  return { slug: 'table-inbox', en: 'Inbox Table', name: '받은함 표', group: 'Table', desc: '왼쪽 표가 오른쪽 읽기 창의 목차가 되는 두 칸 받은함입니다. 가운데 손잡이로 크기를 바꾸고, 좁아지면 위아래로 쌓입니다.', css, body };
+  return { slug: 'table-inbox', en: 'Inbox Table', name: '받은함 표', group: 'Table', desc: '왼쪽 목록에서 고른 항목을 오른쪽에서 바로 읽는 받은함입니다. 가운데 경계를 끌어 두 칸 크기를 바꾸고, 좁은 화면에서는 위아래로 쌓입니다.', css, body };
 };
 
 /* 6. 검색 표 (청구서) ------------------------------------------- */
@@ -190,7 +211,7 @@ const searchable = () => {
   </div>
 </main>
 </div>`;
-  return { slug: 'table-page', en: 'Searchable Table', name: '검색 표', group: 'Table', desc: '청구서 같은 한 건의 정보 아래에 같은 모양의 행을 두고, 검색칸, 방식 전환, 열별 필터 세 가지로 동시에 좁히는 표입니다.', css, body };
+  return { slug: 'table-page', en: 'Searchable Table', name: '검색 표', group: 'Table', desc: '청구서 한 건의 정보 아래에 항목 표를 둔 화면입니다. 검색, 보기 전환, 열별 필터로 항목을 좁혀 봅니다.', css, body };
 };
 
 /* 7. 트리 표 (저장소) ------------------------------------------- */
@@ -230,7 +251,7 @@ const tree = () => {
 </aside>
 </div>
 </div>`;
-  return { slug: 'table-tree', en: 'Tree Table', name: '트리 표', group: 'Table', desc: '부모 행이 자식 행을 품는 계층 표입니다. 코드 저장소처럼 폴더를 펼쳐 내려가고, 옆 패널에 저장소 정보를 둡니다.', css, body };
+  return { slug: 'table-tree', en: 'Tree Table', name: '트리 표', group: 'Table', desc: '상위 행을 펼치면 하위 행이 나오는 계층 표입니다. 코드 저장소처럼 폴더 구조를 보여 주고, 옆에 저장소 정보를 둡니다.', css, body };
 };
 
 export const templates = [collapsible, comparison, filter, grouped, inbox, searchable, tree].map((f) => f());

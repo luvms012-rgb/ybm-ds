@@ -7,29 +7,31 @@
 <link rel="stylesheet" href="../../../dist/ybm-ds.css">
 <script src="../../../dist/ybm-ds.js" defer></script>
 <style>
-  /* 템플릿 배치 전용. 값은 모두 --ybm-* 토큰 */
+  /* 템플릿 배치 전용. 값은 모두 --ybm-* 토큰
+     배치(여백, 카드, 구분선)는 레퍼런스 A 템플릿, 한글 글자 위계(크기, 굵기, 색 단계, 자간)는 토스를 따른다 */
   body { word-break: keep-all; overflow-wrap: break-word; }
   .tp-app { display: flex; flex-direction: column; min-height: 100vh; background: var(--ybm-color-bg-layer-default); }
-  .tp-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: var(--ybm-space-x4); padding: var(--ybm-space-x6) var(--ybm-space-x4) var(--ybm-space-x2); }
-  .tp-head__texts { display: flex; flex-direction: column; gap: var(--ybm-space-x2); min-width: 0; }
-  .tp-head .tp-sub { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); }
-  .tp-head__tools { display: flex; flex-wrap: wrap; align-items: flex-end; gap: var(--ybm-space-x2); }
+  .tp-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: var(--ybm-space-x3) var(--ybm-space-x4); padding: var(--ybm-space-x6) var(--ybm-space-x4) 0; }
+  .tp-head__texts { display: flex; flex-direction: column; gap: var(--ybm-space-x1_5); min-width: 0; }
+  .tp-head__tools { display: flex; flex-wrap: wrap; align-items: center; gap: var(--ybm-space-x2); }
   .tp-head > .tp-row, .tp-head .tp-between > .tp-row { flex-wrap: wrap; }
   .ds-tablepagination { flex-wrap: wrap; row-gap: var(--ybm-space-x2); min-width: 0; }
   .tp-between > .tp-row { flex-wrap: wrap; }
+  /* 글자 위계 (토스): 굵기 두 단계, 제목은 자간 -0.02em, 글자 색은 neutral / muted / subtle 세 단계 */
   .tp-h1 { font-size: var(--ybm-font-size-t09); line-height: var(--ybm-line-height-t09); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; }
-  .tp-h2 { font-size: var(--ybm-font-size-t07); line-height: var(--ybm-line-height-t07); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; }
-  .tp-h3 { font-size: var(--ybm-font-size-t05); line-height: var(--ybm-line-height-t05); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-h2 { font-size: var(--ybm-font-size-t06); line-height: var(--ybm-line-height-t06); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; }
+  .tp-h3 { font-size: var(--ybm-font-size-t05); line-height: var(--ybm-line-height-t05); font-weight: var(--ybm-font-weight-semibold); letter-spacing: -0.01em; }
   .tp-h4 { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); font-weight: var(--ybm-font-weight-semibold); }
   .tp-sub { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
   .tp-caption { font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); color: var(--ybm-color-fg-neutral-subtle); }
   .tp-num { font-variant-numeric: tabular-nums; }
+  /* 배치 (레퍼런스 A): 흰 바탕, 바깥 여백 16 / 24, 묶음 사이 24 / 32 와 구분선 */
   .tp-body { display: flex; flex: 1 1 auto; flex-direction: column; min-height: 0; }
-  .tp-content { display: flex; flex: 1 1 auto; flex-direction: column; gap: var(--ybm-space-x8); min-width: 0; padding: var(--ybm-space-x6) var(--ybm-space-x4) var(--ybm-space-x12); }
-  .tp-panel { display: flex; flex-direction: column; gap: var(--ybm-space-x6); padding: var(--ybm-space-x6) var(--ybm-space-x4); box-shadow: inset 0 1px 0 var(--ybm-color-stroke-neutral-muted); }
-  .tp-sec { display: flex; flex-direction: column; gap: var(--ybm-space-x4); min-width: 0; }
+  .tp-content { display: flex; flex: 1 1 auto; flex-direction: column; gap: var(--ybm-space-x6); min-width: 0; padding: var(--ybm-space-x5) var(--ybm-space-x4) var(--ybm-space-x10); }
+  .tp-panel { display: flex; flex-direction: column; gap: var(--ybm-space-x5); padding: var(--ybm-space-x5) var(--ybm-space-x4); box-shadow: inset 0 1px 0 var(--ybm-color-stroke-neutral-muted); }
+  .tp-sec { display: flex; flex-direction: column; gap: var(--ybm-space-x3); min-width: 0; }
   .tp-sec-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ybm-space-x2) var(--ybm-space-x3); }
-  .tp-sec-head__texts { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--ybm-space-x1) var(--ybm-space-x3); }
+  .tp-sec-head__texts { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--ybm-space-x1) var(--ybm-space-x2); }
   .tp-row { display: flex; align-items: center; gap: var(--ybm-space-x2); min-width: 0; }
   /* 줄 안에 놓인 고르기 칸은 글자만큼만 */
   :is(.tp-row, .tp-between, .tp-head__tools, .tp-sec-head) > .ds-select { width: auto; min-width: 140px; }
@@ -37,34 +39,43 @@
   .tp-stack { display: flex; flex-direction: column; gap: var(--ybm-space-x1); min-width: 0; }
   .tp-stack > .ds-badge { align-self: flex-start; }
   .tp-g2, .tp-g3, .tp-g4, .tp-g5, .tp-g6 { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ybm-space-x3); }
+  /* 카드 (레퍼런스 A): 흰 바탕 + 옅은 1px 선, 모서리 12 */
   .tp-card { min-width: 0; }
-  /* 흰 바탕 화면의 카드는 선 없는 연회색 상자 */
-  .tp-card.ds-card { gap: var(--ybm-space-x4); padding: var(--ybm-space-x5); border-radius: var(--ybm-shape-2xl); box-shadow: none; background: var(--ybm-color-bg-neutral-muted); }
-  /* 회색 바탕 화면(tp-canvas): 흰 면을 선 없이 바탕색 차이로 나눈다 */
-  body.tp-canvas, .tp-canvas .tp-app, .tp-canvas .tp-bar { background: var(--ybm-color-bg-canvas); }
-  .tp-canvas .tp-card.ds-card { box-shadow: none; background: var(--ybm-color-bg-layer-default); }
-  .tp-canvas .tp-content > .ds-divider, .tp-canvas .tp-content > .tp-sec + .ds-divider { display: none; }
-  .tp-canvas .tp-panel { background: var(--ybm-color-bg-layer-default); box-shadow: none; }
-  .tp-canvas .tp-g2, .tp-canvas .tp-g3, .tp-canvas .tp-g4, .tp-canvas .tp-g5, .tp-canvas .tp-g6 { gap: var(--ybm-space-x4); }
-  .tp-canvas .tp-content { gap: var(--ybm-space-x6); }
+  .tp-card.ds-card { gap: var(--ybm-space-x3); padding: var(--ybm-space-x4); border-radius: var(--ybm-shape-lg); box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-neutral-muted); }
   .tp-span2 { grid-column: auto; }
   .tp-kpi__label { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
-  .tp-kpi__value { font-size: var(--ybm-font-size-t09); line-height: var(--ybm-line-height-t09); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+  .tp-kpi__value { font-size: var(--ybm-font-size-t08); line-height: var(--ybm-line-height-t08); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
   .tp-delta { display: inline-flex; align-items: center; gap: 2px; font-size: var(--ybm-font-size-t03); line-height: var(--ybm-line-height-t03); font-weight: var(--ybm-font-weight-medium); font-variant-numeric: tabular-nums; white-space: nowrap; }
   .tp-delta .ds-icon { --ds-icon-size: 14px; }
   .tp-delta[data-tone="up"] { color: var(--ybm-color-fg-positive); }
   .tp-delta[data-tone="down"] { color: var(--ybm-color-fg-critical); }
   .tp-delta[data-tone="flat"] { color: var(--ybm-color-fg-neutral-muted); }
+  /* 차트: 얇은 선, 옅은 격자, 마우스를 올리면 세로 안내선과 값 풍선 */
   .tp-chart { display: block; width: 100%; height: auto; overflow: visible; }
-  .tp-chart text { fill: var(--ybm-color-fg-neutral-subtle); font-size: 11px; font-family: inherit; }
+  .tp-chart text { fill: var(--ybm-color-fg-neutral-subtle); font-size: 11px; font-family: inherit; font-variant-numeric: tabular-nums; }
   .tp-chart .tp-grid-line { stroke: var(--ybm-color-stroke-neutral-muted); stroke-width: 1; }
+  .tp-chart [data-i] { transition: opacity var(--ybm-duration-fast) var(--ybm-easing-standard); }
+  .tp-chart.is-hover [data-i]:not(.is-on) { opacity: .35; }
+  .tp-chart .tp-guide { stroke: var(--ybm-color-fg-neutral-subtle); stroke-width: 1; stroke-dasharray: 3 3; opacity: 0; pointer-events: none; }
+  .tp-chart .tp-dot { stroke: var(--ybm-color-bg-layer-default); stroke-width: 2; opacity: 0; pointer-events: none; }
+  .tp-chart.is-hover .tp-guide, .tp-chart.is-hover .tp-dot { opacity: 1; }
+  .tp-tip { position: fixed; z-index: var(--ybm-z-tooltip, 60); display: flex; flex-direction: column; gap: 2px; min-width: 96px; padding: var(--ybm-space-x2) var(--ybm-space-x2_5); border-radius: var(--ybm-shape-sm); background: var(--ybm-color-bg-neutral-solid); color: var(--ybm-color-fg-on-neutral-solid); box-shadow: var(--ybm-elevation-overlay); font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); pointer-events: none; opacity: 0; transform: translateY(4px); transition: opacity var(--ybm-duration-fast) var(--ybm-easing-standard), transform var(--ybm-duration-fast) var(--ybm-easing-standard); }
+  .tp-tip.is-on { opacity: 1; transform: none; }
+  .tp-tip__t { font-weight: var(--ybm-font-weight-semibold); opacity: .8; }
+  .tp-tip__t:only-child { opacity: 1; }
+  [data-tip] { transition: filter var(--ybm-duration-fast) var(--ybm-easing-standard); }
+  [data-tip]:hover { filter: brightness(0.9); }
+  .tp-tip__r { display: flex; align-items: center; gap: var(--ybm-space-x1_5); font-variant-numeric: tabular-nums; }
+  .tp-tip__r b { margin-inline-start: auto; padding-inline-start: var(--ybm-space-x3); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-tip__r i { flex: none; width: 8px; height: 8px; border-radius: 2px; background: var(--c); }
   .tp-legend { display: flex; flex-wrap: wrap; gap: var(--ybm-space-x1) var(--ybm-space-x4); font-size: var(--ybm-font-size-t03); line-height: var(--ybm-line-height-t03); color: var(--ybm-color-fg-neutral-muted); }
   .tp-legend__item { display: inline-flex; align-items: center; gap: var(--ybm-space-x1_5); }
-  .tp-swatch { flex: none; width: 10px; height: 10px; border-radius: 3px; background: var(--c, var(--ybm-color-chart-series-1)); }
-  .tp-split { display: flex; height: 12px; overflow: hidden; border-radius: var(--ybm-shape-pill); background: var(--ybm-color-bg-neutral); }
+  .tp-swatch { flex: none; width: 8px; height: 8px; border-radius: 2px; background: var(--c, var(--ybm-color-chart-series-1)); }
+  .tp-split { display: flex; height: 10px; overflow: hidden; border-radius: var(--ybm-shape-pill); background: var(--ybm-color-bg-neutral); }
   .tp-split > span { height: 100%; background: var(--c); }
   .tp-split > span + span { box-shadow: inset 2px 0 0 var(--ybm-color-bg-layer-default); }
   .tp-ph { display: grid; place-items: center; width: 100%; height: 100%; color: var(--ybm-color-fg-neutral-subtle); background: var(--ybm-color-bg-neutral); }
+  .tp-ph > img { display: block; width: 100%; height: 100%; object-fit: cover; }
   .tp-logo { display: inline-grid; place-items: center; width: 88px; height: 28px; border-radius: var(--ybm-shape-xs); background: var(--ybm-color-bg-neutral); color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t03-static); line-height: var(--ybm-line-height-t03-static); font-weight: var(--ybm-font-weight-semibold); }
   .tp-bar { position: sticky; top: 0; z-index: var(--ybm-z-sticky); background: var(--ybm-color-bg-layer-default); }
   .tp-track { display: flex; flex-direction: column; gap: var(--ybm-space-x1); min-width: 120px; }
@@ -73,21 +84,20 @@
   .tp-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
   .tp-kbd { display: inline-grid; place-items: center; min-width: 20px; height: 20px; padding: 0 4px; border-radius: var(--ybm-shape-2xs); box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-neutral-muted); color: var(--ybm-color-fg-neutral-muted); font-size: var(--ybm-font-size-t01); font-family: inherit; }
   @media (min-width: 768px) {
-    .tp-head { padding: var(--ybm-space-x10) var(--ybm-space-x10) var(--ybm-space-x2); }
+    .tp-head { padding: var(--ybm-space-x8) var(--ybm-space-x6) 0; }
     .tp-h1 { font-size: var(--ybm-font-size-t11); line-height: var(--ybm-line-height-t11); }
-    .tp-head .tp-sub { font-size: var(--ybm-font-size-t05); line-height: var(--ybm-line-height-t05); }
-    .tp-content { padding: var(--ybm-space-x8) var(--ybm-space-x10) var(--ybm-space-x16); gap: var(--ybm-space-x12); }
-    .tp-canvas .tp-content { gap: var(--ybm-space-x8); }
-    .tp-panel { padding: var(--ybm-space-x8) var(--ybm-space-x6); }
-    .tp-card.ds-card { padding: var(--ybm-space-x6); }
+    .tp-h2 { font-size: var(--ybm-font-size-t07); line-height: var(--ybm-line-height-t07); }
+    .tp-content { padding: var(--ybm-space-x6) var(--ybm-space-x6) var(--ybm-space-x12); gap: var(--ybm-space-x8); }
+    .tp-panel { padding: var(--ybm-space-x6); }
+    .tp-card.ds-card { padding: var(--ybm-space-x5); gap: var(--ybm-space-x4); }
+    .tp-g2, .tp-g3, .tp-g4, .tp-g5, .tp-g6 { gap: var(--ybm-space-x4); }
     .tp-g2, .tp-g4, .tp-g6 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .tp-g3, .tp-g5 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .tp-hide-sm { display: revert; }
   }
   @media (min-width: 1024px) {
     .tp-body--panel { flex-direction: row; }
-    .tp-body--panel > .tp-panel { flex: none; width: 400px; box-shadow: inset 1px 0 0 var(--ybm-color-stroke-neutral-muted); }
-    .tp-canvas .tp-body--panel > .tp-panel { box-shadow: none; }
+    .tp-body--panel > .tp-panel { flex: none; width: 360px; box-shadow: inset 1px 0 0 var(--ybm-color-stroke-neutral-muted); }
     .tp-g3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     .tp-g4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
     .tp-g5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
@@ -147,7 +157,7 @@
   .tp-rank > :first-child { color: var(--ybm-color-fg-neutral-subtle); font-weight: var(--ybm-font-weight-bold); font-variant-numeric: tabular-nums; }
 </style>
 </head>
-<body class="tp-canvas">
+<body>
 <div class="tp-app tp-frame"><nav class="ds-sidenav" aria-label="관리 메뉴">
   <div class="ds-sidenav__header"><div class="tp-org"><span class="tp-org__mark" aria-hidden="true">한</span><span class="tp-stack"><span class="tp-h4">한빛대학교</span><span class="tp-caption">기관 관리</span></span></div></div>
   <div class="ds-sidenav__content"><div class="ds-sidenav__group"><a class="ds-sidenav__item" href="#"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--house" aria-hidden="true"></i></span><span class="ds-sidenav__label">홈</span></a><a class="ds-sidenav__item" href="#"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--square-pen" aria-hidden="true"></i></span><span class="ds-sidenav__label">단체 접수</span></a><a class="ds-sidenav__item" href="#"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--users" aria-hidden="true"></i></span><span class="ds-sidenav__label">응시자 관리</span></a><a class="ds-sidenav__item" href="#" aria-current="page"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--chart-column" aria-hidden="true"></i></span><span class="ds-sidenav__label">성적 리포트</span></a></div><div class="ds-sidenav__group"><div class="ds-sidenav__group-label">운영</div><a class="ds-sidenav__item" href="#"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--receipt" aria-hidden="true"></i></span><span class="ds-sidenav__label">정산</span></a><a class="ds-sidenav__item" href="#"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--mail" aria-hidden="true"></i></span><span class="ds-sidenav__label">공지 보내기</span></a></div></div>
@@ -159,17 +169,63 @@
 <main class="tp-content">
   <div class="tp-g4"><section class="ds-card tp-card" data-size="small"><div class="tp-stack"><span class="tp-kpi__label">응시 인원</span><div class="tp-row" style="align-items: baseline; flex-wrap: wrap"><span class="tp-kpi__value">118명</span></div><span class="tp-caption">접수 124명 중 95%</span></div></section><section class="ds-card tp-card" data-size="small"><div class="tp-stack"><span class="tp-kpi__label">평균 점수</span><div class="tp-row" style="align-items: baseline; flex-wrap: wrap"><span class="tp-kpi__value">712점</span><span class="tp-delta" data-tone="up"><i class="ds-icon ds-icon--arrow-up ds-icon--sm" aria-hidden="true"></i>+24</span></div><span class="tp-caption">지난 회차보다</span></div></section><section class="ds-card tp-card" data-size="small"><div class="tp-stack"><span class="tp-kpi__label">목표 달성</span><div class="tp-row" style="align-items: baseline; flex-wrap: wrap"><span class="tp-kpi__value">64%</span><span class="tp-delta" data-tone="up"><i class="ds-icon ds-icon--arrow-up ds-icon--sm" aria-hidden="true"></i>+8%p</span></div><span class="tp-caption">목표 700점 이상</span></div></section><section class="ds-card tp-card" data-size="small"><div class="tp-stack"><span class="tp-kpi__label">최고 점수</span><div class="tp-row" style="align-items: baseline; flex-wrap: wrap"><span class="tp-kpi__value">965점</span></div><span class="tp-caption">영어영문학과</span></div></section></div>
   <div class="tp-g3">
-    <section class="ds-card tp-card tp-span2" data-size="small"><div class="tp-between"><span class="tp-h3">점수 분포</span><span class="tp-caption">100점 구간별 인원</span></div><svg class="tp-chart" viewBox="0 0 640 220" role="img" aria-label="점수 구간별 인원"><line class="tp-grid-line" x1="40" x2="632" y1="196.0" y2="196.0"/><text x="34" y="200.0" text-anchor="end">0</text><line class="tp-grid-line" x1="40" x2="632" y1="149.0" y2="149.0"/><text x="34" y="153.0" text-anchor="end">10</text><line class="tp-grid-line" x1="40" x2="632" y1="102.0" y2="102.0"/><text x="34" y="106.0" text-anchor="end">20</text><line class="tp-grid-line" x1="40" x2="632" y1="55.0" y2="55.0"/><text x="34" y="59.0" text-anchor="end">30</text><line class="tp-grid-line" x1="40" x2="632" y1="8.0" y2="8.0"/><text x="34" y="12.0" text-anchor="end">40</text><rect x="53.3" y="186.6" width="45.4" height="9.4" rx="2" fill="var(--ybm-color-chart-series-1)"/><text x="77.0" y="214" text-anchor="middle">300</text><rect x="127.3" y="172.5" width="45.4" height="23.5" rx="2" fill="var(--ybm-color-chart-series-1)"/><text x="151.0" y="214" text-anchor="middle">400</text><rect x="201.3" y="153.7" width="45.4" height="42.3" rx="2" fill="var(--ybm-color-chart-series-1)"/><text x="225.0" y="214" text-anchor="middle">500</text><rect x="275.3" y="111.4" width="45.4" height="84.6" rx="2" fill="var(--ybm-color-chart-series-1)"/><text x="299.0" y="214" text-anchor="middle">600</text><rect x="349.3" y="69.1" width="45.4" height="126.9" rx="2" fill="var(--ybm-color-chart-series-1)"/><text x="373.0" y="214" text-anchor="middle">700</text><rect x="423.3" y="50.3" width="45.4" height="145.7" rx="2" fill="var(--ybm-color-chart-series-1)"/><text x="447.0" y="214" text-anchor="middle">800</text><rect x="497.3" y="116.1" width="45.4" height="79.9" rx="2" fill="var(--ybm-color-chart-series-1)"/><text x="521.0" y="214" text-anchor="middle">900</text><rect x="571.3" y="153.7" width="45.4" height="42.3" rx="2" fill="var(--ybm-color-chart-series-1)"/><text x="595.0" y="214" text-anchor="middle">990</text></svg></section>
-    <section class="ds-card tp-card" data-size="small"><span class="tp-h3">목표 달성</span><div style="display:grid;place-items:center"><svg class="tp-chart tp-donut" viewBox="0 0 160 160" style="max-width:160px" role="img" aria-label="목표 달성 비율"><circle cx="80" cy="80" r="71" fill="none" stroke="var(--ybm-color-bg-neutral)" stroke-width="18"/><circle cx="80" cy="80" r="71" fill="none" stroke="var(--ybm-color-chart-series-1)" stroke-width="18" stroke-dasharray="283.5 162.6" stroke-dashoffset="0.0" transform="rotate(-90 80 80)"/><circle cx="80" cy="80" r="71" fill="none" stroke="var(--ybm-color-bg-neutral)" stroke-width="18" stroke-dasharray="158.6 287.5" stroke-dashoffset="-285.5" transform="rotate(-90 80 80)"/><text x="50%" y="80" text-anchor="middle" style="font-size:22px;font-weight:700;fill:var(--ybm-color-fg-neutral)">64%</text><text x="50%" y="100" text-anchor="middle">76명 달성</text></svg></div><div class="tp-legend"><span class="tp-legend__item"><span class="tp-swatch" style="--c:var(--ybm-color-chart-series-1)"></span>700점 이상 <span class="tp-num">76명</span></span><span class="tp-legend__item"><span class="tp-swatch" style="--c:var(--ybm-color-bg-neutral)"></span>700점 미만 <span class="tp-num">42명</span></span></div></section>
+    <section class="ds-card tp-card tp-span2" data-size="small"><div class="tp-between"><span class="tp-h3">점수 분포</span><span class="tp-caption">100점 구간별 인원</span></div><svg class="tp-chart" viewBox="0 0 640 220" role="img" aria-label="점수 구간별 인원" data-tp="{&quot;t&quot;:&quot;bar&quot;,&quot;w&quot;:640,&quot;h&quot;:220,&quot;pl&quot;:40,&quot;iw&quot;:592,&quot;n&quot;:8,&quot;x&quot;:[&quot;300&quot;,&quot;400&quot;,&quot;500&quot;,&quot;600&quot;,&quot;700&quot;,&quot;800&quot;,&quot;900&quot;,&quot;990&quot;],&quot;u&quot;:&quot;&quot;,&quot;s&quot;:[{&quot;n&quot;:&quot;&quot;,&quot;c&quot;:&quot;var(--ybm-color-chart-series-1)&quot;,&quot;v&quot;:[2,5,9,18,27,31,17,9]}]}"><line class="tp-grid-line" x1="40" x2="632" y1="196.0" y2="196.0"/><text x="32" y="200.0" text-anchor="end">0</text><line class="tp-grid-line" x1="40" x2="632" y1="149.0" y2="149.0"/><text x="32" y="153.0" text-anchor="end">10</text><line class="tp-grid-line" x1="40" x2="632" y1="102.0" y2="102.0"/><text x="32" y="106.0" text-anchor="end">20</text><line class="tp-grid-line" x1="40" x2="632" y1="55.0" y2="55.0"/><text x="32" y="59.0" text-anchor="end">30</text><line class="tp-grid-line" x1="40" x2="632" y1="8.0" y2="8.0"/><text x="32" y="12.0" text-anchor="end">40</text><g data-i="0"><rect x="56.3" y="186.6" width="38.4" height="9.4" rx="4.0" fill="var(--ybm-color-chart-series-1)"/></g><text x="77.0" y="214" text-anchor="middle">300</text><g data-i="1"><rect x="130.3" y="172.5" width="38.4" height="23.5" rx="4.0" fill="var(--ybm-color-chart-series-1)"/></g><text x="151.0" y="214" text-anchor="middle">400</text><g data-i="2"><rect x="204.3" y="153.7" width="38.4" height="42.3" rx="4.0" fill="var(--ybm-color-chart-series-1)"/></g><text x="225.0" y="214" text-anchor="middle">500</text><g data-i="3"><rect x="278.3" y="111.4" width="38.4" height="84.6" rx="4.0" fill="var(--ybm-color-chart-series-1)"/></g><text x="299.0" y="214" text-anchor="middle">600</text><g data-i="4"><rect x="352.3" y="69.1" width="38.4" height="126.9" rx="4.0" fill="var(--ybm-color-chart-series-1)"/></g><text x="373.0" y="214" text-anchor="middle">700</text><g data-i="5"><rect x="426.3" y="50.3" width="38.4" height="145.7" rx="4.0" fill="var(--ybm-color-chart-series-1)"/></g><text x="447.0" y="214" text-anchor="middle">800</text><g data-i="6"><rect x="500.3" y="116.1" width="38.4" height="79.9" rx="4.0" fill="var(--ybm-color-chart-series-1)"/></g><text x="521.0" y="214" text-anchor="middle">900</text><g data-i="7"><rect x="574.3" y="153.7" width="38.4" height="42.3" rx="4.0" fill="var(--ybm-color-chart-series-1)"/></g><text x="595.0" y="214" text-anchor="middle">990</text></svg></section>
+    <section class="ds-card tp-card" data-size="small"><span class="tp-h3">목표 달성</span><div style="display:grid;place-items:center"><svg class="tp-chart tp-donut" viewBox="0 0 160 160" style="max-width:160px" role="img" aria-label="목표 달성 비율" data-tp="{&quot;t&quot;:&quot;pie&quot;,&quot;u&quot;:&quot;&quot;,&quot;s&quot;:[{&quot;n&quot;:&quot;달성&quot;,&quot;c&quot;:&quot;var(--ybm-color-chart-series-1)&quot;,&quot;v&quot;:64,&quot;p&quot;:64},{&quot;n&quot;:&quot;미달&quot;,&quot;c&quot;:&quot;var(--ybm-color-bg-neutral)&quot;,&quot;v&quot;:36,&quot;p&quot;:36}]}"><circle cx="80" cy="80" r="72" fill="none" stroke="var(--ybm-color-bg-neutral)" stroke-width="16"/><circle data-i="0" cx="80" cy="80" r="72" fill="none" stroke="var(--ybm-color-chart-series-1)" stroke-width="16" stroke-dasharray="287.5 164.9" stroke-dashoffset="0.0" transform="rotate(-90 80 80)"/><circle data-i="1" cx="80" cy="80" r="72" fill="none" stroke="var(--ybm-color-bg-neutral)" stroke-width="16" stroke-dasharray="160.9 291.5" stroke-dashoffset="-289.5" transform="rotate(-90 80 80)"/><text x="50%" y="82" text-anchor="middle" style="font-size:22px;font-weight:700;letter-spacing:-0.02em;fill:var(--ybm-color-fg-neutral)">64%</text><text x="50%" y="100" text-anchor="middle">76명 달성</text></svg></div><div class="tp-legend"><span class="tp-legend__item"><span class="tp-swatch" style="--c:var(--ybm-color-chart-series-1)"></span>700점 이상 <span class="tp-num">76명</span></span><span class="tp-legend__item"><span class="tp-swatch" style="--c:var(--ybm-color-bg-neutral)"></span>700점 미만 <span class="tp-num">42명</span></span></div></section>
   </div>
   <div class="tp-g2">
     <section class="ds-card tp-card" data-size="small"><span class="tp-h3">학과별 목표 달성</span><div class="tp-stack" style="gap: var(--ybm-space-x4)"><div class="tp-track"><div class="tp-between"><span class="tp-sub">영어영문학과</span><span class="tp-num tp-sub">86% · 평균 812점</span></div><div class="ds-progress" role="progressbar" aria-valuenow="86" aria-valuemin="0" aria-valuemax="100" aria-label="영어영문학과" style="--ds-progress-value: 86%" data-size="small"></div></div><div class="tp-track"><div class="tp-between"><span class="tp-sub">국제통상학과</span><span class="tp-num tp-sub">78% · 평균 764점</span></div><div class="ds-progress" role="progressbar" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100" aria-label="국제통상학과" style="--ds-progress-value: 78%" data-size="small"></div></div><div class="tp-track"><div class="tp-between"><span class="tp-sub">경영학과</span><span class="tp-num tp-sub">71% · 평균 726점</span></div><div class="ds-progress" role="progressbar" aria-valuenow="71" aria-valuemin="0" aria-valuemax="100" aria-label="경영학과" style="--ds-progress-value: 71%" data-size="small"></div></div><div class="tp-track"><div class="tp-between"><span class="tp-sub">경제학과</span><span class="tp-num tp-sub">64% · 평균 690점</span></div><div class="ds-progress" role="progressbar" aria-valuenow="64" aria-valuemin="0" aria-valuemax="100" aria-label="경제학과" style="--ds-progress-value: 64%" data-size="small"></div></div><div class="tp-track"><div class="tp-between"><span class="tp-sub">컴퓨터공학과</span><span class="tp-num tp-sub">58% · 평균 652점</span></div><div class="ds-progress" role="progressbar" aria-valuenow="58" aria-valuemin="0" aria-valuemax="100" aria-label="컴퓨터공학과" style="--ds-progress-value: 58%" data-size="small"></div></div></div></section>
-    <section class="ds-card tp-card" data-size="small"><div class="tp-between"><span class="tp-h3">회차별 평균</span><div class="tp-legend"><span class="tp-legend__item"><span class="tp-swatch" style="--c:var(--ybm-color-chart-series-1)"></span>우리 기관</span><span class="tp-legend__item"><span class="tp-swatch" style="--c:var(--ybm-color-chart-series-2)"></span>전체 응시자</span></div></div><svg class="tp-chart" viewBox="0 0 640 200" role="img" aria-label="회차별 평균 점수"><line class="tp-grid-line" x1="40" x2="632" y1="176.0" y2="176.0"/><text x="34" y="180.0" text-anchor="end">640</text><line class="tp-grid-line" x1="40" x2="632" y1="134.0" y2="134.0"/><text x="34" y="138.0" text-anchor="end">660</text><line class="tp-grid-line" x1="40" x2="632" y1="92.0" y2="92.0"/><text x="34" y="96.0" text-anchor="end">680</text><line class="tp-grid-line" x1="40" x2="632" y1="50.0" y2="50.0"/><text x="34" y="54.0" text-anchor="end">700</text><line class="tp-grid-line" x1="40" x2="632" y1="8.0" y2="8.0"/><text x="34" y="12.0" text-anchor="end">720</text><text x="40.0" y="194" text-anchor="start">3월</text><text x="237.3" y="194" text-anchor="middle">6월</text><text x="434.7" y="194" text-anchor="middle">9월</text><text x="632.0" y="194" text-anchor="end">12월</text><polyline points="40.0,159.2 237.3,110.9 434.7,75.2 632.0,24.8" fill="none" stroke="var(--ybm-color-chart-series-1)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><polyline points="40.0,144.5 237.3,134.0 434.7,129.8 632.0,117.2" fill="none" stroke="var(--ybm-color-chart-series-2)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="4 4"/></svg></section>
+    <section class="ds-card tp-card" data-size="small"><div class="tp-between"><span class="tp-h3">회차별 평균</span><div class="tp-legend"><span class="tp-legend__item"><span class="tp-swatch" style="--c:var(--ybm-color-chart-series-1)"></span>우리 기관</span><span class="tp-legend__item"><span class="tp-swatch" style="--c:var(--ybm-color-chart-series-2)"></span>전체 응시자</span></div></div><svg class="tp-chart" viewBox="0 0 640 200" role="img" aria-label="회차별 평균 점수" data-tp="{&quot;t&quot;:&quot;line&quot;,&quot;w&quot;:640,&quot;h&quot;:200,&quot;pl&quot;:40,&quot;iw&quot;:592,&quot;n&quot;:4,&quot;x&quot;:[&quot;3월&quot;,&quot;6월&quot;,&quot;9월&quot;,&quot;12월&quot;],&quot;u&quot;:&quot;&quot;,&quot;s&quot;:[{&quot;n&quot;:&quot;우리 기관&quot;,&quot;c&quot;:&quot;var(--ybm-color-chart-series-1)&quot;,&quot;v&quot;:[648,671,688,712],&quot;y&quot;:[159.2,110.9,75.2,24.8]},{&quot;n&quot;:&quot;전체 응시자&quot;,&quot;c&quot;:&quot;var(--ybm-color-chart-series-2)&quot;,&quot;v&quot;:[655,660,662,668],&quot;y&quot;:[144.5,134,129.8,117.2]}]}"><line class="tp-grid-line" x1="40" x2="632" y1="176.0" y2="176.0"/><text x="32" y="180.0" text-anchor="end">640</text><line class="tp-grid-line" x1="40" x2="632" y1="134.0" y2="134.0"/><text x="32" y="138.0" text-anchor="end">660</text><line class="tp-grid-line" x1="40" x2="632" y1="92.0" y2="92.0"/><text x="32" y="96.0" text-anchor="end">680</text><line class="tp-grid-line" x1="40" x2="632" y1="50.0" y2="50.0"/><text x="32" y="54.0" text-anchor="end">700</text><line class="tp-grid-line" x1="40" x2="632" y1="8.0" y2="8.0"/><text x="32" y="12.0" text-anchor="end">720</text><text x="40.0" y="194" text-anchor="start">3월</text><text x="237.3" y="194" text-anchor="middle">6월</text><text x="434.7" y="194" text-anchor="middle">9월</text><text x="632.0" y="194" text-anchor="end">12월</text><polyline points="40.0,159.2 237.3,110.9 434.7,75.2 632.0,24.8" fill="none" stroke="var(--ybm-color-chart-series-1)" stroke-width="1.75" stroke-linejoin="round" stroke-linecap="round"/><polyline points="40.0,144.5 237.3,134.0 434.7,129.8 632.0,117.2" fill="none" stroke="var(--ybm-color-chart-series-2)" stroke-width="1.75" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="4 4"/><line class="tp-guide" x1="0" x2="0" y1="8" y2="176"/><circle class="tp-dot" r="4" cx="0" cy="0" fill="var(--ybm-color-chart-series-1)"/><circle class="tp-dot" r="4" cx="0" cy="0" fill="var(--ybm-color-chart-series-2)"/></svg></section>
   </div>
   <div class="tp-g2">
     <section class="ds-card tp-card" data-size="small"><div class="tp-between"><span class="tp-h3">점수 오른 학생</span><a class="ds-link" href="#">모두 보기</a></div><div class="tp-rows"><div class="tp-rank"><span>1</span><div class="tp-row"><span class="ds-avatar" data-size="28" role="img" aria-label="이서연"><span class="ds-avatar__initials" aria-hidden="true">이</span></span><div class="tp-stack"><span>이서연</span><span class="tp-caption">경영학과</span></div></div><span class="tp-delta" data-tone="up"><i class="ds-icon ds-icon--arrow-up ds-icon--sm" aria-hidden="true"></i>+135점</span></div><div class="tp-rank"><span>2</span><div class="tp-row"><span class="ds-avatar" data-size="28" role="img" aria-label="최하은"><span class="ds-avatar__initials" aria-hidden="true">최</span></span><div class="tp-stack"><span>최하은</span><span class="tp-caption">영어영문학과</span></div></div><span class="tp-delta" data-tone="up"><i class="ds-icon ds-icon--arrow-up ds-icon--sm" aria-hidden="true"></i>+110점</span></div><div class="tp-rank"><span>3</span><div class="tp-row"><span class="ds-avatar" data-size="28" role="img" aria-label="김민준"><span class="ds-avatar__initials" aria-hidden="true">김</span></span><div class="tp-stack"><span>김민준</span><span class="tp-caption">경영학과</span></div></div><span class="tp-delta" data-tone="up"><i class="ds-icon ds-icon--arrow-up ds-icon--sm" aria-hidden="true"></i>+95점</span></div><div class="tp-rank"><span>4</span><div class="tp-row"><span class="ds-avatar" data-size="28" role="img" aria-label="윤채원"><span class="ds-avatar__initials" aria-hidden="true">윤</span></span><div class="tp-stack"><span>윤채원</span><span class="tp-caption">경제학과</span></div></div><span class="tp-delta" data-tone="up"><i class="ds-icon ds-icon--arrow-up ds-icon--sm" aria-hidden="true"></i>+80점</span></div></div></section>
     <section class="ds-card tp-card" data-size="small"><div class="tp-between"><span class="tp-h3">다시 응시가 필요한 학생</span><span class="ds-badge" data-tone="warning">42명</span></div><p class="tp-sub">목표에 못 미친 학생에게 다음 회차 안내와 할인 쿠폰을 보낼 수 있어요.</p><div class="tp-rows"><div class="tp-between"><div class="tp-row"><span class="ds-avatar" data-size="28" role="img" aria-label="박지후"><span class="ds-avatar__initials" aria-hidden="true">박</span></span><div class="tp-stack"><span>박지후</span><span class="tp-caption">국제통상학과</span></div></div><span class="tp-num">612점</span></div><div class="tp-between"><div class="tp-row"><span class="ds-avatar" data-size="28" role="img" aria-label="정민재"><span class="ds-avatar__initials" aria-hidden="true">정</span></span><div class="tp-stack"><span>정민재</span><span class="tp-caption">컴퓨터공학과</span></div></div><span class="tp-num">598점</span></div><div class="tp-between"><div class="tp-row"><span class="ds-avatar" data-size="28" role="img" aria-label="한지아"><span class="ds-avatar__initials" aria-hidden="true">한</span></span><div class="tp-stack"><span>한지아</span><span class="tp-caption">컴퓨터공학과</span></div></div><span class="tp-num">575점</span></div></div><button type="button" class="ds-btn" data-variant="neutralSolid" data-size="small" data-width="fill"><i class="ds-icon ds-icon--mail" aria-hidden="true"></i>안내 보내기</button></section>
   </div>
 </main></div></div>
+<script>
+(function () {
+  var tip = document.createElement('div'); tip.className = 'tp-tip'; tip.setAttribute('role', 'status'); document.body.appendChild(tip);
+  var nf = function (v, u) { return (typeof v === 'number' ? v.toLocaleString('ko-KR') : v) + (u || ''); };
+  var show = function (title, rows, cx, cy) {
+    tip.innerHTML = (title ? '<span class="tp-tip__t">' + title + '</span>' : '') + rows.map(function (r) { return '<span class="tp-tip__r">' + (r.c ? '<i style="--c:' + r.c + '"></i>' : '') + (r.n || '') + '<b>' + r.v + '</b></span>'; }).join('');
+    tip.classList.add('is-on');
+    var tw = tip.offsetWidth, th = tip.offsetHeight, x = cx + 14, y = cy - th - 10;
+    if (x + tw > innerWidth - 8) x = cx - tw - 14; if (y < 8) y = cy + 14;
+    tip.style.left = x + 'px'; tip.style.top = y + 'px';
+  };
+  var hide = function (svg) { tip.classList.remove('is-on'); svg.classList.remove('is-hover'); svg.querySelectorAll('.is-on').forEach(function (e) { e.classList.remove('is-on'); }); };
+  document.querySelectorAll('[data-tip]').forEach(function (el) {
+    el.addEventListener('pointermove', function (e) { var p = el.getAttribute('data-tip').split('|'); show(p[0], p[1] ? [{ n: '', v: p[1] }] : [], e.clientX, e.clientY); });
+    el.addEventListener('pointerleave', function () { tip.classList.remove('is-on'); });
+  });
+  document.querySelectorAll('svg[data-tp]').forEach(function (svg) {
+    var d = JSON.parse(svg.getAttribute('data-tp'));
+    var guide = svg.querySelector('.tp-guide'), dots = svg.querySelectorAll('.tp-dot');
+    svg.addEventListener('pointerleave', function () { hide(svg); });
+    svg.addEventListener('pointermove', function (e) {
+      var rc = svg.getBoundingClientRect();
+      if (d.t === 'pie') {
+        var t = e.target.closest('[data-i]'); if (!t) { hide(svg); return; }
+        var p = d.s[+t.getAttribute('data-i')];
+        svg.classList.add('is-hover'); svg.querySelectorAll('[data-i]').forEach(function (a) { a.classList.toggle('is-on', a === t); });
+        show(p.n, [{ c: p.c, n: '', v: nf(p.v, d.u) + ' · ' + p.p + '%' }], e.clientX, e.clientY); return;
+      }
+      var vx = (e.clientX - rc.left) / rc.width * d.w;
+      var i = d.t === 'bar' ? Math.floor((vx - d.pl) / (d.iw / d.n)) : Math.round((vx - d.pl) / d.iw * (d.n - 1));
+      if (i < 0 || i >= d.n) { hide(svg); return; }
+      svg.classList.add('is-hover');
+      var top = rc.top + rc.height;
+      if (d.t === 'line') {
+        var gx = d.pl + d.iw * i / Math.max(1, d.n - 1);
+        if (guide) { guide.setAttribute('x1', gx); guide.setAttribute('x2', gx); }
+        d.s.forEach(function (s, k) { if (dots[k]) { dots[k].setAttribute('cx', gx); dots[k].setAttribute('cy', s.y[i]); } top = Math.min(top, rc.top + s.y[i] / d.h * rc.height); });
+        show(d.x[i] || '', d.s.map(function (s) { return { c: d.s.length > 1 ? s.c : '', n: s.n, v: nf(s.v[i], d.u) }; }), rc.left + gx / d.w * rc.width, top);
+      } else {
+        svg.querySelectorAll('g[data-i]').forEach(function (g) { g.classList.toggle('is-on', +g.getAttribute('data-i') === i); });
+        show(d.x[i] || '', d.s.map(function (s) { return { c: d.s.length > 1 ? s.c : '', n: s.n, v: nf(s.v[i], d.u) }; }), e.clientX, e.clientY);
+      }
+    });
+  });
+})();
+</script>
 </body>
 </html>

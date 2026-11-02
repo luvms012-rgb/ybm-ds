@@ -312,4 +312,68 @@
     var cur = side && side.querySelector(".site-nav:not(.site-side__mobile .site-nav) [aria-current='page']");
     if (cur && cur.offsetTop + cur.offsetHeight > side.clientHeight) side.scrollTop = cur.offsetTop - side.clientHeight / 3;
   });
+
+  // 템플릿 보기 창: 목록에서 카드를 누르면 화면 100% 가 아닌 정해진 크기의 큰 창에서 템플릿을 보여 준다.
+  // 주소에 ?preview=이름 을 남겨 그대로 공유할 수 있다. 새 탭으로 열기(Ctrl, Cmd, 가운데 버튼)는 상세 페이지로 간다.
+  (function () {
+    var cards = [].slice.call(document.querySelectorAll(".site-tpl"));
+    if (!cards.length) return;
+    var dlg = document.createElement("div");
+    dlg.className = "site-tplv"; dlg.hidden = true;
+    dlg.setAttribute("role", "dialog"); dlg.setAttribute("aria-modal", "true"); dlg.setAttribute("aria-labelledby", "site-tplv-title");
+    dlg.innerHTML = '<div class="site-tplv__scrim" data-tplv-close></div>' +
+      '<div class="site-tplv__box"><header class="site-tplv__head"><div class="site-tplv__texts"><h2 class="site-tplv__title" id="site-tplv-title"></h2><p class="site-tplv__desc"></p></div>' +
+      '<button type="button" class="site-tplv__x" data-tplv-close aria-label="닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button></header>' +
+      '<div class="site-tplv__frame"><iframe title="" data-site-frame></iframe></div>' +
+      '<footer class="site-tplv__foot"><code class="site-tplv__path"></code><span class="site-tplv__acts"></span></footer></div>' +
+      '<button type="button" class="site-tplv__nav" data-tplv-step="-1" aria-label="이전 템플릿"><i class="ds-icon ds-icon--chevron-left" aria-hidden="true"></i></button>' +
+      '<button type="button" class="site-tplv__nav" data-tplv-step="1" aria-label="다음 템플릿"><i class="ds-icon ds-icon--chevron-right" aria-hidden="true"></i></button>';
+    document.body.appendChild(dlg);
+    var frame = dlg.querySelector("iframe"), cur = null, back = null;
+    frame.addEventListener("load", function () { themeFrame(frame); });
+    function slugOf(card) { var a = card.querySelector(".site-tpl__link"); return a ? a.getAttribute("href").replace(/\.html$/, "") : ""; }
+    function shown() { return cards.filter(function (c) { return !c.hidden; }); }
+    function setUrl(slug) { try { var u = new URL(location.href); if (slug) u.searchParams.set("preview", slug); else u.searchParams.delete("preview"); history.replaceState(null, "", u); } catch (e) {} }
+    function open(card) {
+      var slug = slugOf(card); if (!slug) return;
+      if (dlg.hidden) back = document.activeElement;
+      cur = card;
+      dlg.querySelector(".site-tplv__title").textContent = card.querySelector(".site-tpl__title").textContent;
+      dlg.querySelector(".site-tplv__desc").textContent = card.querySelector(".site-tpl__desc").textContent;
+      dlg.querySelector(".site-tplv__path").textContent = "site/templates/pages/" + slug + ".html";
+      var fig = card.querySelector('.site-tpl__actions a[target="_blank"]');
+      dlg.querySelector(".site-tplv__acts").innerHTML =
+        (fig ? '<a class="ds-btn" data-variant="neutralWeak" data-size="small" href="' + fig.getAttribute("href") + '" target="_blank" rel="noopener">Figma에서 열기</a>' : "") +
+        '<a class="ds-btn" data-variant="neutralWeak" data-size="small" href="' + slug + '.html">문서 보기</a>' +
+        '<a class="ds-btn" data-variant="neutralSolid" data-size="small" href="pages/' + slug + '.html" target="_blank" rel="noopener">새 창으로 보기</a>';
+      frame.title = card.querySelector(".site-tpl__title").textContent + " 미리보기";
+      frame.src = "pages/" + slug + ".html";
+      dlg.hidden = false; root.classList.add("site-tplv-open");
+      setUrl(slug);
+      dlg.querySelector(".site-tplv__x").focus();
+    }
+    function close() {
+      if (dlg.hidden) return;
+      dlg.hidden = true; root.classList.remove("site-tplv-open"); frame.src = "about:blank"; cur = null; setUrl("");
+      if (back && back.focus) back.focus();
+    }
+    function step(n) { var list = shown(), i = list.indexOf(cur); if (i < 0) return; open(list[(i + n + list.length) % list.length]); }
+    cards.forEach(function (card) {
+      card.querySelectorAll('.site-tpl__link, .site-tpl__btn:not([target="_blank"])').forEach(function (a) {
+        a.addEventListener("click", function (e) { if (e.ctrlKey || e.metaKey || e.shiftKey || e.button !== 0) return; e.preventDefault(); open(card); });
+      });
+    });
+    dlg.addEventListener("click", function (e) {
+      if (e.target.closest("[data-tplv-close]")) close();
+      var s = e.target.closest("[data-tplv-step]"); if (s) step(+s.getAttribute("data-tplv-step"));
+    });
+    document.addEventListener("keydown", function (e) {
+      if (dlg.hidden) return;
+      if (e.key === "Escape") close();
+      else if (e.key === "ArrowLeft" && !e.target.closest("input, textarea")) step(-1);
+      else if (e.key === "ArrowRight" && !e.target.closest("input, textarea")) step(1);
+    });
+    try { var want = new URL(location.href).searchParams.get("preview"); if (want) { var c = cards.filter(function (x) { return slugOf(x) === want; })[0]; if (c) open(c); } } catch (e) {}
+  })();
+
 })();

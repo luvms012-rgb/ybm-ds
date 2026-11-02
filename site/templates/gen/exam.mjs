@@ -62,7 +62,7 @@ const apply = () => {
     </aside>
   </div>
 </main></div>`;
-  return { slug: 'exam-apply', canvas: true, en: 'Exam Application', name: '시험 신청', group: 'Exam', desc: '시험, 언어, 날짜와 시간, 고사장, 동의, 응시자 정보, 결제를 한 화면에 단계별로 놓은 신청 화면입니다. 오른쪽 요약이 고른 내용과 결제 금액을 따라갑니다.', css, body };
+  return { slug: 'exam-apply', en: 'Exam Application', name: '시험 신청', group: 'Exam', desc: '시험 종류, 언어, 날짜와 시간, 고사장, 동의, 응시자 정보, 결제를 한 화면에서 차례로 고르는 시험 신청 화면입니다. 오른쪽 요약에 고른 내용과 결제 금액이 바로 반영됩니다.', css, body };
 };
 
 /* 2. 내 시험 (개인 대시보드) ---------------------------------------- */
@@ -91,7 +91,7 @@ ${head('내 시험', { sub: '접수한 시험과 성적을 한곳에서 봐요.'
     <div class="tp-g2">${card(`<div class="tp-row" style="align-items:flex-start; gap: var(--ybm-space-x3)">${icon('tag', 'lg')}<div class="tp-stack" style="flex:1"><span class="tp-h4">다시 보면 10% 할인</span><span class="tp-sub">12월 31일까지 같은 시험을 다시 신청하면 써요.</span></div>${btn('쿠폰 받기', { size: 'xsmall' })}</div>`)}${card(`<div class="tp-row" style="align-items:flex-start; gap: var(--ybm-space-x3)">${icon('book-open', 'lg')}<div class="tp-stack" style="flex:1"><span class="tp-h4">말하기 모의 시험 무료</span><span class="tp-sub">시험 전에 실제와 같은 화면으로 연습해 봐요.</span></div>${btn('연습하기', { size: 'xsmall' })}</div>`)}</div>
   </section>
 </main></div>`;
-  return { slug: 'exam-my', canvas: true, en: 'My Exams', name: '내 시험', group: 'Exam', desc: '다음 시험까지 남은 날, 수험표와 고사장 바꾸기, 최근 점수와 목표, 접수 내역과 혜택을 한 화면에 모은 응시자 대시보드입니다.', css, body };
+  return { slug: 'exam-my', en: 'My Exams', name: '내 시험', group: 'Exam', desc: '응시자가 자기 시험을 한눈에 보는 화면입니다. 다음 시험까지 남은 날과 수험표, 최근 점수와 목표, 접수 내역, 혜택을 모아 보여 줍니다.', css, body };
 };
 
 /* 3. 성적표 ------------------------------------------------------- */
@@ -124,7 +124,7 @@ ${head('영어 읽기 듣기 시험 성적', { eyebrow: breadcrumbs(['내 시험
   </section>
   ${callout('다음 목표를 정해 볼까요?', '지금 점수에서 900점까지 55점 남았어요. 맞춤 연습 문제를 추천해 드릴게요.', 'informative', 'lightbulb')}
 </main></div>`;
-  return { slug: 'exam-score', canvas: true, en: 'Score Report', name: '성적표', group: 'Exam', desc: '총점과 순위, 유효 기간을 먼저 보여 주고 영역별 점수, 점수 분포, 문항 유형별 정답률로 이어지는 성적 화면입니다.', css, body };
+  return { slug: 'exam-score', en: 'Score Report', name: '성적표', group: 'Exam', desc: '시험 성적을 확인하는 화면입니다. 총점과 상위 비율, 유효 기간을 먼저 보여 주고 영역별 점수, 점수 분포, 문항 유형별 정답률로 이어집니다.', css, body };
 };
 
 /* 4. 단체 접수 (기관) ---------------------------------------------- */
@@ -156,7 +156,7 @@ const groupApply = () => {
     </aside>
   </div>
 </main>`;
-  return { slug: 'exam-group-apply', canvas: true, en: 'Group Application', name: '단체 접수', group: 'Exam B2B', desc: '기관 담당자가 응시자 명단 파일을 올려 한 번에 접수하는 화면입니다. 올린 명단을 바로 검사해 고칠 줄을 표시하고, 오른쪽에서 인원과 금액을 확인합니다.', css, body: frame(orgNav(1), '단체 접수', main) };
+  return { slug: 'exam-group-apply', en: 'Group Application', name: '단체 접수', group: 'Exam B2B', desc: '기관 담당자가 응시자 명단 파일을 올려 한 번에 접수하는 화면입니다. 올린 명단을 바로 검사해 고칠 행을 표시하고, 오른쪽에서 인원과 금액을 확인합니다.', css, body: frame(orgNav(1), '단체 접수', main) };
 };
 
 /* 5. 응시자 관리 (기관) -------------------------------------------- */
@@ -170,7 +170,7 @@ const roster = () => {
   ${card(`<div class="tp-between"><div class="tp-row" style="flex-wrap:wrap">${search('ro-q', '이름, 학번 찾기')}${select('학과 전체', { id: 'ro-dep', aria: '학과' })}${select('상태 전체', { id: 'ro-st', aria: '상태' })}</div>${chiptabs(['전체', '안 보냄 6', '취소 2'], 0, '빠른 거르기')}</div>
     <div class="tp-scroll-x">${table([[K.checkOnly('모두 고르기')], ['이름'], ['학번'], ['학과'], ['좌석'], ['수험표'], ['상태'], ['']], rows, { interactive: true })}</div>${tablePager(124, 8)}`)}
 </main>`;
-  return { slug: 'exam-group-roster', canvas: true, en: 'Candidate Roster', name: '응시자 관리', group: 'Exam B2B', desc: '단체로 접수한 응시자를 찾고 거르는 표 화면입니다. 위 숫자로 수험표를 보낸 현황을 먼저 보고, 표에서 골라 한 번에 보냅니다.', css, body: frame(orgNav(2), '응시자 관리', main) };
+  return { slug: 'exam-group-roster', en: 'Candidate Roster', name: '응시자 관리', group: 'Exam B2B', desc: '단체로 접수한 응시자를 찾아보고 관리하는 표입니다. 위에서 수험표 발송 현황을 먼저 보고, 표에서 여러 명을 골라 한 번에 보냅니다.', css, body: frame(orgNav(2), '응시자 관리', main) };
 };
 
 /* 6. 단체 성적 대시보드 (기관) ------------------------------------- */
@@ -196,7 +196,7 @@ const groupDash = () => {
     ${card(`<div class="tp-between"><span class="tp-h3">다시 응시가 필요한 학생</span>${badge('42명', 'warning')}</div><p class="tp-sub">목표에 못 미친 학생에게 다음 회차 안내와 할인 쿠폰을 보낼 수 있어요.</p><div class="tp-rows">${[['박지후', '국제통상학과', '612점'], ['정민재', '컴퓨터공학과', '598점'], ['한지아', '컴퓨터공학과', '575점']].map(([n, d, s]) => `<div class="tp-between"><div class="tp-row">${avatar(n, 28)}<div class="tp-stack"><span>${n}</span><span class="tp-caption">${d}</span></div></div>${T(s)}</div>`).join('')}</div>${btn('안내 보내기', { variant: 'neutralSolid', ic: 'mail', fill: true })}`)}
   </div>
 </main>`;
-  return { slug: 'exam-group-dashboard', canvas: true, en: 'Group Score Dashboard', name: '단체 성적 대시보드', group: 'Exam B2B', desc: '기관이 단체 응시 결과를 보는 대시보드입니다. 응시율, 평균, 목표 달성을 먼저 보여 주고 점수 분포, 학과별 비교, 회차별 추이, 다시 응시할 학생으로 이어집니다.', css, body: frame(orgNav(3), '성적 리포트', main) };
+  return { slug: 'exam-group-dashboard', en: 'Group Score Dashboard', name: '단체 성적 대시보드', group: 'Exam B2B', desc: '기관이 단체 응시 결과를 보는 대시보드입니다. 응시율, 평균 점수, 목표 달성률을 먼저 보여 주고 점수 분포, 학과별 비교, 회차별 추이, 재응시가 필요한 학생으로 이어집니다.', css, body: frame(orgNav(3), '성적 리포트', main) };
 };
 
 export const templates = [apply, mine, score, groupApply, roster, groupDash].map((f) => f());

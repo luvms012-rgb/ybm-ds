@@ -49,7 +49,7 @@ const canvas = () => {
 <div class="tp-tool__body">
   <aside class="tp-pane tp-pane--left" aria-label="레이어와 에셋">${segmented(['레이어', '에셋'], 0, '왼쪽 패널')}${tree([[0, 'f', '글자', 0, 1], [1, 'type', '제목'], [1, 'type', '날짜와 장소'], [0, 'f', '이미지', 0, 1], [1, 'image', '메인 사진', 1], [1, 'image', '배경 질감'], [0, 'f', '도형', 0, 0], [0, 'layers', '배경']])}</aside>
   <main class="tp-pane tp-pane--main" style="position: relative">
-    <div class="tp-stage"><div class="tp-artboard" aria-label="포스터 화면"><span class="tp-artboard__t">가을 특강<br>말하기 집중반</span>${thumb('4:3')}<span class="tp-sel">${handles}</span><span class="tp-artboard__s">11월 12일 토요일 오후 2시 · 종로 캠퍼스 5층</span></div>
+    <div class="tp-stage"><div class="tp-artboard" aria-label="포스터 화면"><span class="tp-artboard__t">가을 특강<br>말하기 집중반</span>${thumb('4:3', '', K.photo('nature', 2, 1000))}<span class="tp-sel">${handles}</span><span class="tp-artboard__s">11월 12일 토요일 오후 2시 · 종로 캠퍼스 5층</span></div>
     <div class="tp-zoom" role="toolbar" aria-label="보기 도구">${iconBtn('mouse-pointer-2', '선택')}${iconBtn('hand', '이동')}${iconBtn('type', '글자')}${iconBtn('square', '도형')}<span style="width:1px;height:20px;background:var(--ybm-color-stroke-neutral-muted)"></span>${iconBtn('zoom-out', '축소')}<span class="tp-caption tp-num" style="min-width:40px;text-align:center">100%</span>${iconBtn('zoom-in', '확대')}</div></div>
   </main>
   <aside class="tp-pane tp-pane--right" aria-label="속성">
@@ -61,7 +61,7 @@ const canvas = () => {
   </aside>
 </div>
 </div>`;
-  return { slug: 'canvas-editor', en: 'Canvas Editor', name: '캔버스 편집기', group: 'Tools', desc: '레이어 패널 위에 문서 탭을 두고, 흐린 바탕 위의 고정 크기 화면을 확대, 축소하며, 오른쪽에 위치, 글자, 필터 속성을 두는 편집기입니다.', css, body };
+  return { slug: 'canvas-editor', en: 'Canvas Editor', name: '캔버스 편집기', group: 'Tools', desc: '정해진 크기의 화면을 확대하고 축소하며 디자인하는 편집기입니다. 왼쪽에 레이어, 위에 문서 탭, 오른쪽에 위치와 글자, 필터 속성을 둡니다.', css, body };
 };
 
 /* 2. 파일 탐색기 (열 보기) ------------------------------------- */
@@ -94,13 +94,13 @@ const explorer = () => {
       ${col([['folder', '2025 강의 자료', '', 1], ['folder', '2026 강의 자료', 'p', 1], ['folder', '교재 원고', '', 1], ['folder', '행사', '', 1], ['file-text', '연간 계획.pdf']])}
       ${col([['folder', '토익 실전반', 'p', 1], ['folder', '말하기 집중반', '', 1], ['folder', '기업 출강', '', 1], ['file-text', '강사 명단.xlsx'], ['file-text', '시간표.pdf']])}
       ${col([['folder', '1주차', '', 1], ['folder', '2주차', '', 1], ['file-text', '강의 계획서.docx', 's'], ['file-text', '모의고사 1회.pdf'], ['file-text', '모의고사 2회.pdf'], ['video', '오리엔테이션.mp4'], ['image', '표지.png']])}
-      <section class="tp-preview" aria-label="미리 보기">${thumb('4:3')}<div class="tp-stack"><span class="tp-h4">강의 계획서.docx</span><span class="tp-caption">Word 문서 · 284KB</span></div><dl><dt>만든 날</dt><dd>2026.09.01</dd><dt>고친 날</dt><dd>2026.10.29 오후 3:12</dd><dt>위치</dt><dd>2026 강의 자료 › 토익 실전반</dd><dt>태그</dt><dd>${badge('중요', 'critical')}</dd></dl><div class="tp-row">${btn('열기', { variant: 'neutralSolid' })}${btn('공유', { ic: 'share' })}</div></section>
+      <section class="tp-preview" aria-label="미리 보기">${thumb('4:3', '', K.photo('book', 2, 720))}<div class="tp-stack"><span class="tp-h4">강의 계획서.docx</span><span class="tp-caption">Word 문서 · 284KB</span></div><dl><dt>만든 날</dt><dd>2026.09.01</dd><dt>고친 날</dt><dd>2026.10.29 오후 3:12</dd><dt>위치</dt><dd>2026 강의 자료 › 토익 실전반</dd><dt>태그</dt><dd>${badge('중요', 'critical')}</dd></dl><div class="tp-row">${btn('열기', { variant: 'neutralSolid' })}${btn('공유', { ic: 'share' })}</div></section>
     </div>
   </main>
 </div>
 <footer class="tp-crumbs">${K.breadcrumbs(['문서', '2026 강의 자료', '토익 실전반', '강의 계획서.docx'])}</footer>
 </div>`;
-  return { slug: 'file-explorer', en: 'File Explorer', name: '파일 탐색기', group: 'Tools', desc: '깊은 폴더를 바꿔 끼우지 않고 옆 칸으로 이어 여는 계층 탐색기입니다. 경로 표시, 보기 방식 전환, 미리 보기 칸이 있습니다.', css, body };
+  return { slug: 'file-explorer', en: 'File Explorer', name: '파일 탐색기', group: 'Tools', desc: '폴더를 열 때마다 옆 칸으로 이어 보여 주는 파일 탐색기입니다. 경로 표시, 보기 방식 전환, 미리 보기가 있습니다.', css, body };
 };
 
 /* 3. 코드 편집기 (IDE) ------------------------------------------ */
@@ -158,7 +158,7 @@ export function Counter({ start = 0 }) {
 </div>
 <footer class="tp-status"><span class="tp-row">${icon('git-branch', 'sm')}main</span><span>오류 0 · 경고 2</span><span class="tp-spacer" style="flex:1"></span><span>6줄, 3칸</span><span>UTF-8</span><span>TypeScript React</span></footer>
 </div>`;
-  return { slug: 'ide', en: 'IDE', name: '코드 편집기', group: 'Tools', desc: '크기를 바꾸고 접을 수 있는 여러 칸으로 빽빽하게 짠 작업 공간입니다. 한쪽에 파일 트리, 가운데 탭 문서, 아래 터미널 서랍, 맨 아래 상태 막대가 있습니다.', css, body };
+  return { slug: 'ide', en: 'IDE', name: '코드 편집기', group: 'Tools', desc: '칸마다 크기를 바꾸고 접을 수 있는 코드 편집 화면입니다. 파일 목록, 탭으로 여는 문서, 아래 터미널, 맨 아래 상태 막대로 이뤄집니다.', css, body };
 };
 
 /* 4. 칸반 보드 -------------------------------------------------- */
@@ -176,7 +176,7 @@ const kanban = () => {
 <header class="tp-tool__bar" role="toolbar" aria-label="보드 동작"><h1 class="tp-h3">스프린트 보드</h1>${badge('8')}<span style="width: 160px">${select('스프린트 24', { size: 'small', aria: '스프린트' })}</span><span class="tp-spacer"></span>${iconBtn('arrow-up-down', '정렬')}${iconBtn('funnel', '거르기')}${iconBtn('users', '담당자')}${iconBtn('settings', '보드 설정')}${btn('할 일 추가', { variant: 'neutralSolid', ic: 'plus' })}</header>
 <main class="tp-board">${cols.map(([tone, t, ...cards]) => `<section class="tp-lane" aria-label="${t}"><div class="tp-lane__head"><span class="tp-row">${dot(tone, t + ' 상태')}<h2 class="tp-h4">${t}</h2></span><span class="tp-row"><span class="tp-caption tp-num">${cards.length}</span>${iconBtn('plus', t + '에 추가', { size: 'xsmall' })}</span></div><div class="tp-lane__body">${cards.map(([[c, p], h, d, m, who], i) => card(`<div class="tp-between"><span class="tp-row">${badge(c)}${badge(p, p === '높음' ? 'critical' : p === '보통' ? 'warning' : 'neutral')}</span>${iconBtn('ellipsis', '할 일 동작', { size: 'xsmall' })}</div><div class="tp-stack"><h3 class="tp-h4">${h}</h3><p class="tp-sub">${d}</p></div><div class="tp-between"><span class="tp-caption">${m}</span>${avatars(who, 20)}</div>`, { cls: 'tp-kcard', tag: 'article', attrs: tone === 'informative' && i === 1 ? 'data-dragging' : '' })).join('')}</div></section>`).join('')}</main>
 </div>`;
-  return { slug: 'kanban-board', canvas: false, en: 'Kanban Board', name: '칸반 보드', group: 'Tools', desc: '열 자체가 상태인 가로 칸반입니다. 카드를 다른 열로 끌어다 놓으면 상태가 바뀝니다. 열은 고정이고 카드 높이는 내용에 따라 달라집니다.', css, body };
+  return { slug: 'kanban-board', en: 'Kanban Board', name: '칸반 보드', group: 'Tools', desc: '상태별 열에 카드를 늘어놓은 칸반 보드입니다. 카드를 다른 열로 끌어다 놓으면 상태가 바뀌고, 카드 높이는 내용에 따라 달라집니다.', css, body };
 };
 
 /* 5. 페이지 편집기 --------------------------------------------- */
@@ -207,7 +207,7 @@ const pageEditor = () => {
   <aside class="tp-pane tp-pane--right" aria-label="속성"><div class="tp-between"><span class="tp-h4">최근 결제 표</span>${iconBtn('trash', '블록 지우기', { size: 'xsmall' })}</div>${field('pe-t', '제목', inp('pe-t', '최근 결제', '제목'))}${field('pe-n', '보여 줄 행 수', select('5개', { id: 'pe-n', size: 'small' }))}<label class="tp-between"><span class="tp-sub">전체 보기 버튼</span>${K.sw('전체 보기 버튼', true)}</label><label class="tp-between"><span class="tp-sub">분류 배지</span>${K.sw('분류 배지', true)}</label>${field('pe-pad', '안쪽 여백', segmented(['좁게', '보통', '넓게'], 1, '안쪽 여백'))}</aside>
 </div>
 </div>`;
-  return { slug: 'editor', en: 'Page Editor', name: '페이지 편집기', group: 'Tools', desc: '왼쪽에 블록 모음, 가운데 실제 화면, 오른쪽에 고른 것에 맞게 바뀌는 속성 패널을 둔 세 칸 편집기입니다. 끌어다 놓아 화면을 만듭니다.', css, body };
+  return { slug: 'editor', en: 'Page Editor', name: '페이지 편집기', group: 'Tools', desc: '왼쪽 블록 모음에서 끌어다 놓아 화면을 만드는 페이지 편집기입니다. 가운데에서 결과를 보고, 오른쪽에서 고른 블록의 속성을 바꿉니다.', css, body };
 };
 
 export const templates = [canvas, explorer, ide, kanban, pageEditor].map((f) => f());

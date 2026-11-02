@@ -35,7 +35,7 @@ const loginCard = () => {
   </div>
   ${legal}
 </div></main>`;
-  return { slug: 'login-card', en: 'Login Card', name: '로그인 카드', group: 'Login', desc: '가운데 떠 있는 카드 안에 로그인 칸을 두고, 구분선 아래에 다른 서비스로 로그인 버튼, 맨 아래 가입과 약관 링크를 둔 화면입니다.', css: CSS, body };
+  return { slug: 'login-card', en: 'Login Card', name: '로그인 카드', group: 'Login', desc: '화면 가운데 카드에 로그인 입력란을 두고, 다른 서비스로 로그인하는 버튼과 가입, 약관 링크를 아래에 둔 로그인 화면입니다.', css: CSS, body };
 };
 
 /* 2. 로그인 (반으로 나눈) --------------------------------------- */
@@ -61,11 +61,11 @@ const loginSplit = () => {
       </div>
       <p class="tp-sub">계정이 없으신가요? ${link('가입하기')}</p>
     </div>
-    <div class="tp-split-card__media">${thumb('3:4')}</div>
+    <div class="tp-split-card__media">${thumb('3:4', '', K.photo('work', 1, 1000))}</div>
   </div>
   ${legal}
 </div></main>`;
-  return { slug: 'login-split', en: 'Login Split', name: '로그인 (반으로 나눈)', group: 'Login', desc: '카드를 반으로 나눠 한쪽에 로그인 폼, 다른 쪽에 꽉 찬 사진을 둔 화면입니다. 칸은 카드형과 같고 사진으로 브랜드 느낌을 더합니다.', css, body };
+  return { slug: 'login-split', en: 'Login Split', name: '로그인 (반으로 나눈)', group: 'Login', desc: '카드를 반으로 나눠 한쪽에는 로그인 폼을, 다른 쪽에는 사진을 둔 로그인 화면입니다. 사진으로 브랜드 느낌을 더합니다.', css, body };
 };
 
 /* 3. 로그인 SSO -------------------------------------------------- */
@@ -82,7 +82,7 @@ const loginSso = () => {
     <p class="tp-sub tp-auth__foot">계정이 없으신가요? ${link('사용 요청')}</p>
   </div>
 </div></main>`;
-  return { slug: 'login-sso', en: 'Login SSO', name: '로그인 (SSO)', group: 'Login', desc: '입력한 이메일 도메인으로 회사 로그인을 찾아 넘겨 주고, 안 되면 비밀번호로 들어가는 두 단계 로그인입니다.', css: CSS, body };
+  return { slug: 'login-sso', en: 'Login SSO', name: '로그인 (SSO)', group: 'Login', desc: '이메일을 입력하면 회사 계정 로그인으로 이어 주고, 회사 계정이 없으면 비밀번호로 로그인하는 두 단계 로그인 화면입니다.', css: CSS, body };
 };
 
 export const templates = [loginCard, loginSplit, loginSso].map((f) => f());

@@ -1,5 +1,5 @@
 import * as K from './kit.mjs';
-const { icon, btn, badge, dot, card, head, secHead, kpi, delta, lineChart, spark, barChart, donut, legend, split, table, progress, segmented, selField, avatar, link, divider, walk, C, list, listItem } = K;
+const { icon, btn, badge, dot, card, head, secHead, kpi, delta, lineChart, spark, barChart, donut, legend, split, table, progress, segmented, selField, select, avatar, link, divider, walk, C, list, listItem } = K;
 
 const DAYS = ['10.01', '10.08', '10.15', '10.22', '10.29'];
 const T = (s) => `<span class="tp-num">${s}</span>`;
@@ -40,7 +40,7 @@ const analytics = () => {
   </section>
 </main>
 </div>`;
-  return { slug: 'dashboard', en: 'Analytics Dashboard', name: '분석 대시보드', group: 'Dashboard', desc: '위에서부터 활성 사용자 그래프, 핵심 숫자 타일, 사용자 구성, 참여 표 순서로 넓게 훑어보는 기본 분석 화면입니다.', css, body };
+  return { slug: 'dashboard', en: 'Analytics Dashboard', name: '분석 대시보드', group: 'Dashboard', desc: '이용자 추이 그래프, 핵심 지표, 이용자 구성, 참여 현황을 한 화면에서 훑어보는 기본 분석 대시보드입니다.', css, body };
 };
 
 /* 2. 데이터 대시보드 (비교) --------------------------------------- */
@@ -58,7 +58,7 @@ const comparison = () => {
 `;
   const sec = (ic, t, sub, id) => `<div class="tp-sec-head"><div class="tp-sec-head__texts"><span class="tp-row"><span class="tp-sec-ic">${icon(ic, 'sm')}</span><h2 class="tp-h2" id="${id}">${t}</h2></span><span class="tp-sub">${sub}</span></div></div>`;
   const body = `<div class="tp-app">
-${head('데이터 대시보드', { sub: '사용자 분석 개요 · 전체 사용자 · 모든 기기 · 최근 90일', tools: `${selField('기간', '최근 90일', 'f-range')}${selField('기기', '모든 기기', 'f-dev')}${selField('사용자', '전체 사용자', 'f-seg')}${btn('내보내기', { ic: 'upload' })}` })}
+${head('데이터 대시보드', { sub: '사용자 분석 개요 · 전체 사용자 · 모든 기기 · 최근 90일', tools: `${select('최근 90일', { id: 'f-range', aria: '기간' })}${select('모든 기기', { id: 'f-dev', aria: '기기' })}${select('전체 사용자', { id: 'f-seg', aria: '사용자' })}${btn('내보내기', { ic: 'upload' })}` })}
 <main class="tp-content">
   <section class="tp-sec" aria-labelledby="s-km">${sec('sparkles', '핵심 지표', '전일, 전주, 전월, 전년 대비 변화', 's-km')}
     <div class="tp-g4">${metrics.map(([l, v, ds], i) => card(`<div class="tp-stack"><span class="tp-kpi__label">${l}</span><div class="tp-between"><span class="tp-kpi__value">${v}</span><span style="width:72px">${spark(walk(40 + i, 20, 30, 8, { min: 5 }), C(0), { w: 72, h: 24, label: l })}</span></div></div><div class="tp-metric__grid">${ds.map((d, k) => `<span class="tp-metric__cell">${delta(d)}<span class="tp-caption">${['전일', '전주', '전월', '전년'][k]}</span></span>`).join('')}</div>`)).join('')}</div>
@@ -75,7 +75,7 @@ ${head('데이터 대시보드', { sub: '사용자 분석 개요 · 전체 사�
   </section>
 </main>
 </div>`;
-  return { slug: 'dashboard-comparison', en: 'Data Dashboard', name: '데이터 대시보드', group: 'Dashboard', desc: '위쪽 필터 막대를 둔 비교 분석 화면입니다. 지표 타일마다 작은 추이 선과 전일, 전주, 전월, 전년 대비 변화를 함께 보여 줍니다.', css, body };
+  return { slug: 'dashboard-comparison', en: 'Data Dashboard', name: '데이터 대시보드', group: 'Dashboard', desc: '기간, 기기, 이용자 조건을 골라 지표를 비교하는 대시보드입니다. 지표마다 작은 추이 그래프와 전일, 전주, 전월, 전년 대비 변화를 함께 보여 줍니다.', css, body };
 };
 
 /* 3. 주간 리포트 (스코어카드 + 오른쪽 요약) ---------------------- */
@@ -87,6 +87,9 @@ const scorecard = () => {
   const css = `
   .tp-goal { display: flex; flex-direction: column; gap: var(--ybm-space-x2); }
   .tp-goal + .tp-goal { padding-top: var(--ybm-space-x4); box-shadow: inset 0 1px 0 var(--ybm-color-stroke-neutral-muted); }
+  .tp-whylist { display: flex; flex-direction: column; }
+  .tp-whylist > .tp-why { padding-block: var(--ybm-space-x4); }
+  .tp-whylist > .tp-why + .tp-why { box-shadow: inset 0 1px 0 var(--ybm-color-stroke-neutral-muted); }
   .tp-why { display: flex; gap: var(--ybm-space-x3); }
   .tp-why .ds-icon { margin-top: 2px; }
   .tp-why[data-tone="positive"] > .ds-icon { color: var(--ybm-color-fg-positive); }
@@ -110,11 +113,11 @@ ${head('주간 업무 리포트', { sub: '2026년 10월 26일~11월 1일, 지난
 </main>
 <aside class="tp-panel" aria-labelledby="s-why">
   ${secHead('무엇이 왜 바뀌었나', { id: 's-why', sub: 'AI 요약', cls: 'tp-h3' })}
-  ${why.map(([ic, tone, t, d]) => card(`<div class="tp-why" data-tone="${tone}">${icon(ic)}<div class="tp-stack"><h3 class="tp-h4">${t}</h3><p class="tp-sub">${d}</p></div></div>`)).join('')}
+  <div class="tp-whylist">${why.map(([ic, tone, t, d]) => `<div class="tp-why" data-tone="${tone}">${icon(ic)}<div class="tp-stack"><h3 class="tp-h4">${t}</h3><p class="tp-sub">${d}</p></div></div>`).join('')}</div>
 </aside>
 </div>
 </div>`;
-  return { slug: 'dashboard-scorecard', en: 'Executive Summary Dashboard', name: '주간 리포트 대시보드', group: 'Dashboard', desc: '리포트처럼 읽는 대시보드입니다. 스코어카드, 목표 달성 막대, 추이 그래프 옆에 무엇이 왜 바뀌었는지 글로 정리한 오른쪽 패널을 둡니다.', css, body };
+  return { slug: 'dashboard-scorecard', en: 'Executive Summary Dashboard', name: '주간 리포트 대시보드', group: 'Dashboard', desc: '한 주의 성과를 보고서처럼 읽는 대시보드입니다. 핵심 지표, 목표 달성률, 추이 그래프 옆에 무엇이 왜 바뀌었는지 요약을 함께 둡니다.', css, body };
 };
 
 /* 4. 퍼널과 코호트 ----------------------------------------------- */
@@ -133,26 +136,30 @@ const funnel = () => {
   .tp-heat td { text-align: center; }
 `;
   const body = `<div class="tp-app">
-${head('퍼널과 코호트 분석', { sub: '방문 128,400명 · 전체 전환 4.9%', tools: `${segmented(['7일', '30일', '90일'], 1, '퍼널 기간')}${selField('사용자 묶음', '모든 플랫폼', 'f-seg')}${btn('내보내기', { ic: 'upload' })}` })}
+${head('퍼널과 코호트 분석', { sub: '방문 128,400명 · 전체 전환 4.9%', tools: `${segmented(['7일', '30일', '90일'], 1, '퍼널 기간')}${select('모든 플랫폼', { id: 'f-seg', aria: '사용자 묶음' })}${btn('내보내기', { ic: 'upload' })}` })}
 <main class="tp-content">
   <section class="tp-sec" aria-label="단계 전환율">
     <div class="tp-g5">${tiles.map(([l, v, d]) => kpi(l, v, { d: d + ' 지난 기간 대비' })).join('')}</div>
-    ${card(`<div class="tp-stack"><h2 class="tp-h3">전환 퍼널</h2><span class="tp-sub">모든 플랫폼 · 30일</span></div>${divider()}<div class="tp-funnel">${stages.map(([n, v, d], i) => `<div class="tp-stack" style="gap: var(--ybm-space-x2)"><span class="tp-sub">${i ? stages[i - 1][0] + ' → ' + n : n}</span><div class="tp-row"><span class="tp-h3 tp-num">${i ? ((v / stages[i - 1][1]) * 100).toFixed(1) + '%' : v.toLocaleString()}</span>${d ? badge(d, 'critical') : ''}</div><div class="tp-funnel__bar"><span style="height:${Math.max(4, (v / 128400) * 100)}%"></span></div><span class="tp-caption tp-num">${v.toLocaleString()}명</span></div>`).join('')}</div>`)}
+    ${card(`<div class="tp-stack"><h2 class="tp-h3">전환 퍼널</h2><span class="tp-sub">모든 플랫폼 · 30일</span></div>${divider()}<div class="tp-funnel">${stages.map(([n, v, d], i) => `<div class="tp-stack" style="gap: var(--ybm-space-x2)"><span class="tp-sub">${i ? stages[i - 1][0] + ' → ' + n : n}</span><div class="tp-row"><span class="tp-h3 tp-num">${i ? ((v / stages[i - 1][1]) * 100).toFixed(1) + '%' : v.toLocaleString()}</span>${d ? badge(d, 'critical') : ''}</div><div class="tp-funnel__bar" data-tip="${n}|${v.toLocaleString()}명"><span style="height:${Math.max(4, (v / 128400) * 100)}%"></span></div><span class="tp-caption tp-num">${v.toLocaleString()}명</span></div>`).join('')}</div>`)}
     ${card(`<div class="tp-stack"><h2 class="tp-h3">시간에 따른 전환율</h2><span class="tp-sub">단계별 전환율 · 최근 26주</span></div>${lineChart(conv, { w: 1100, h: 240, x: ['5월', '6월', '7월', '8월', '9월', '10월'], unit: '%', label: '단계별 전환율 추이' })}${legend(conv.map((s, i) => [s.name, i]))}`)}
   </section>
   ${divider()}
   <section class="tp-sec" aria-labelledby="s-co">${secHead('주간 잔존 코호트', { id: 's-co', sub: '가입 주 × 가입 뒤 지난 주' })}
-    ${card(`${table(['가입 주', ['사용자', 'end'], ...Array.from({ length: 9 }, (_, w) => ['' + w + '주', 'center'])], cohort.map((c, r) => [c, T((4820 - r * 210).toLocaleString()), ...Array.from({ length: 9 }, (_, w) => (w <= 8 - r ? badge(ret(r, w) + '%', tone(ret(r, w))) : ''))]), { cls: 'tp-heat' })}<div class="tp-row" style="flex-wrap: wrap"><span class="tp-caption">잔존율</span>${[['32% 미만', 'neutral'], ['32–44%', 'warning'], ['44–56%', 'positive'], ['56–80%', 'informative'], ['80% 이상', 'brand']].map(([t, k]) => badge(t, k)).join('')}</div>`)}
+    ${card(`${table(['가입 주', ['사용자', 'end'], ...Array.from({ length: 9 }, (_, w) => ['' + w + '주', 'center'])], cohort.map((c, r) => [c, T((4820 - r * 210).toLocaleString()), ...Array.from({ length: 9 }, (_, w) => (w <= 8 - r ? badge(ret(r, w) + '%', tone(ret(r, w))).replace('<span class', `<span data-tip="${c} 가입 · ${w}주 뒤|${ret(r, w)}% 남음" class`) : ''))]), { cls: 'tp-heat' })}<div class="tp-row" style="flex-wrap: wrap"><span class="tp-caption">잔존율</span>${[['32% 미만', 'neutral'], ['32–44%', 'warning'], ['44–56%', 'positive'], ['56–80%', 'informative'], ['80% 이상', 'brand']].map(([t, k]) => badge(t, k)).join('')}</div>`)}
   </section>
 </main>
 </div>`;
-  return { slug: 'dashboard-cohort-funnel', en: 'Funnel & Cohort Dashboard', name: '퍼널·코호트 대시보드', group: 'Dashboard', desc: '단계별로 얼마나 빠져나가는지 보는 퍼널과, 가입 주별로 얼마나 남아 있는지 보는 잔존 코호트 표를 한 화면에 둔 분석입니다.', css, body };
+  return { slug: 'dashboard-cohort-funnel', en: 'Funnel & Cohort Dashboard', name: '퍼널·코호트 대시보드', group: 'Dashboard', desc: '단계마다 얼마나 이탈하는지 보는 퍼널과, 가입 시기별로 얼마나 남아 있는지 보는 코호트 표를 함께 둔 분석 대시보드입니다.', css, body };
 };
 
 /* 5. 자산 대시보드 (구성 변화) ----------------------------------- */
 const composition = () => {
   const tiles = [['총 평가액', '2억 9,420만', '+14.8%'], ['연 수익률', '14.8%', '+2.1%'], ['배당 수익률', '2.8%', '+0.2%'], ['보유 종목', '23개', '+4']];
-  const comp = ['국내 주식', '해외 주식', '채권', '현금'].map((name, i) => ({ name, data: walk(90 + i, 24, [60, 50, 40, 20][i], 6, { min: 8, drift: [1.2, 1.4, 0.3, -0.1][i] }) }));
+  // 총 평가액(억 원) 1년, 주마다 한 점
+  const rr = K.rnd(120); let tv = 2.31;
+  const total = Array.from({ length: 53 }, () => { tv += (rr() - 0.5) * 0.06 + 0.012; return +tv.toFixed(2); });
+  const days = Array.from({ length: 53 }, (_, i) => { const t = new Date(2025, 10, 3 + i * 7); return t.getFullYear() + '.' + String(t.getMonth() + 1).padStart(2, '0') + '.' + String(t.getDate()).padStart(2, '0'); });
+  const mix = [['국내 주식', 34], ['해외 주식', 30], ['채권', 24], ['현금', 12]];
   const top = [['삼', '가 전자', '8,720만', '+18.4%'], ['반', '나 반도체', '6,140만', '+22.1%'], ['인', '다 인터넷', '3,980만', '-3.2%'], ['배', '라 배터리', '2,860만', '+6.7%'], ['바', '마 바이오', '1,930만', '-1.4%']];
   const idx = [['코스피', 'KOSPI', '2,861.43', '+0.42%'], ['코스닥', 'KOSDAQ', '842.17', '-0.31%'], ['다우존스', 'DJI', '43,821.67', '+0.42%'], ['나스닥', 'IXIC', '19,204.88', '+0.87%'], ['S&P 500', 'SPX', '5,934.20', '+0.55%'], ['원/달러', 'USD/KRW', '1,372.50', '-0.18%'], ['금', 'GOLD', '2,684.30', '+0.24%'], ['국고채 10년', 'KR10Y', '2.94%', '-0.02%']];
   const trend = [['가 전자', '72,800', '+1.35', '+1.9%', '1,240만'], ['나 반도체', '214,500', '+4.50', '+2.1%', '880만'], ['다 인터넷', '186,200', '-2.10', '-1.1%', '410만'], ['라 배터리', '392,000', '+7.00', '+1.8%', '320만'], ['마 바이오', '74,300', '-0.80', '-1.1%', '290만'], ['바 자동차', '248,500', '+3.50', '+1.4%', '270만']];
@@ -161,7 +168,7 @@ const composition = () => {
   <div class="tp-between"><h1 class="tp-h1">내 자산</h1>${btn('거래 내역', { ic: 'file-text' })}</div>
   <div class="tp-g4">${tiles.map(([l, v, d]) => kpi(l, v, { d })).join('')}</div>
   <div class="tp-g4">
-    ${card(`<div class="tp-between"><h2 class="tp-h3">자산 구성 변화</h2>${link('자세히')}</div>${lineChart(comp, { w: 820, h: 260, stacked: true, x: ['2024.11', '2025.05', '2025.11', '2026.05', '2026.11'], label: '자산 구성 변화' })}${legend(comp.map((s, i) => [s.name, i]))}`, { cls: 'tp-span3' })}
+    ${card(`<div class="tp-between"><h2 class="tp-h3">총 평가액</h2>${segmented(['3개월', '6개월', '1년'], 2, '기간')}</div>${lineChart([{ name: '총 평가액', data: total }], { w: 820, h: 260, area: true, unit: '억', x: ['2025.11', '2026.02', '2026.05', '2026.08', '2026.11'], xs: days, label: '1년 동안의 총 평가액' })}<div class="tp-stack" style="gap: var(--ybm-space-x2)"><span class="tp-h4">자산 구성</span>${split(mix)}${legend(mix.map(([t, v], i) => [t, i, v + '%']))}</div>`, { cls: 'tp-span3' })}
     ${card(`<div class="tp-between"><h2 class="tp-h3">많이 가진 종목</h2>${link('전체 보기')}</div>${list(top.map(([a, n, v, d]) => listItem(n, { size: 'small', prefix: avatar(a), suffix: `<span class="tp-stack" style="align-items:flex-end"><span class="tp-num">${v}</span>${badge(d, d.startsWith('-') ? 'critical' : 'positive')}</span>` })))}`)}
   </div>
   ${divider()}
@@ -170,7 +177,7 @@ const composition = () => {
   ${card(`<h2 class="tp-h3">관심 종목</h2>${table(['종목', ['현재가', 'end'], ['전일 대비', 'end'], ['등락률', 'end'], ['거래량', 'end'], ['', 'end']], trend.map(([n, p, c, r, v]) => [n, T(p), badge(c, c.startsWith('-') ? 'critical' : 'positive'), T(r), T(v), btn('관심', { variant: 'ghost', ic: 'star', size: 'xsmall' })]))}`)}
 </main>
 </div>`;
-  return { slug: 'dashboard-composition', en: 'Portfolio Dashboard', name: '자산 대시보드', group: 'Dashboard', desc: '시간에 따라 값이 어떻게 바뀌는지 보는 화면입니다. 잔액과 변화 타일, 구성 비율이 쌓인 면적 그래프, 많이 가진 항목 목록과 시장 표로 이어집니다.', css: '', body };
+  return { slug: 'dashboard-composition', en: 'Portfolio Dashboard', name: '자산 대시보드', group: 'Dashboard', desc: '자산이 시간에 따라 어떻게 바뀌었는지 보는 대시보드입니다. 총액과 수익률 지표, 1년 동안의 총 평가액 그래프와 자산 구성, 보유 종목, 시장 지수를 차례로 보여 줍니다.', css: '', body };
 };
 
 /* 6. 프로젝트 현황 ----------------------------------------------- */
@@ -178,7 +185,7 @@ const progressDash = () => {
   const ms = [['기획 확정', 0, 12, 'positive'], ['디자인 시스템 적용', 8, 34, 'positive'], ['수강 결제 개편', 20, 52, 'warning'], ['학습 기록 API', 30, 58, 'critical'], ['앱 출시 준비', 48, 78, 'informative'], ['QA와 접근성 점검', 60, 84, 'informative'], ['정식 출시', 84, 90, 'neutral']];
   const ws = [['핵심 플랫폼', '개발', '김서준', 82, '4월 21일', ['순항', 'positive']], ['결제', '개발', '이하린', 54, '5월 9일', ['위험', 'warning']], ['학습 기록', '개발', '박도윤', 31, '5월 16일', ['막힘', 'critical']], ['앱', '출시', '최지아', 46, '6월 2일', ['순항', 'positive']], ['디자인', '디자인', '정유나', 90, '4월 4일', ['완료', 'neutral']], ['QA', '검증', '한지호', 18, '6월 13일', ['순항', 'positive']]];
   const W = 1100, today = 46;
-  const gantt = `<svg class="tp-chart" viewBox="0 0 ${W} ${ms.length * 36 + 30}" role="img" aria-label="마일스톤 일정">${[0, 15, 30, 45, 60, 75, 90].map((d) => `<line class="tp-grid-line" x1="${180 + (d / 90) * (W - 190)}" x2="${180 + (d / 90) * (W - 190)}" y1="0" y2="${ms.length * 36}"/><text x="${180 + (d / 90) * (W - 190)}" y="${ms.length * 36 + 20}" text-anchor="middle">${d}일</text>`).join('')}${ms.map(([n, a, b, t], i) => `<text x="0" y="${i * 36 + 23}" style="fill:var(--ybm-color-fg-neutral);font-size:13px">${n}</text><rect x="${180 + (a / 90) * (W - 190)}" y="${i * 36 + 8}" width="${((b - a) / 90) * (W - 190)}" height="20" rx="4" fill="var(--ybm-color-fg-${t === 'neutral' ? 'neutral-subtle' : t})"/>`).join('')}<line x1="${180 + (today / 90) * (W - 190)}" x2="${180 + (today / 90) * (W - 190)}" y1="0" y2="${ms.length * 36}" stroke="var(--ybm-color-fg-neutral)" stroke-dasharray="4 4"/></svg>`;
+  const gantt = `<svg class="tp-chart" viewBox="0 0 ${W} ${ms.length * 36 + 30}" role="img" aria-label="마일스톤 일정">${[0, 15, 30, 45, 60, 75, 90].map((d) => `<line class="tp-grid-line" x1="${180 + (d / 90) * (W - 190)}" x2="${180 + (d / 90) * (W - 190)}" y1="0" y2="${ms.length * 36}"/><text x="${180 + (d / 90) * (W - 190)}" y="${ms.length * 36 + 20}" text-anchor="middle">${d}일</text>`).join('')}${ms.map(([n, a, b, t], i) => `<text x="0" y="${i * 36 + 23}" style="fill:var(--ybm-color-fg-neutral);font-size:13px">${n}</text><rect x="${180 + (a / 90) * (W - 190)}" y="${i * 36 + 8}" width="${((b - a) / 90) * (W - 190)}" height="20" rx="4" fill="var(--ybm-color-fg-${t === 'neutral' ? 'neutral-subtle' : t})" data-tip="${n}|${a}일 ~ ${b}일"/>`).join('')}<line x1="${180 + (today / 90) * (W - 190)}" x2="${180 + (today / 90) * (W - 190)}" y1="0" y2="${ms.length * 36}" stroke="var(--ybm-color-fg-neutral)" stroke-dasharray="4 4"/></svg>`;
   const body = `<div class="tp-app">
 ${head('새 학습 앱 출시', { sub: `목표 출시일 2026년 6월 30일 · ${badge('막힘 1건', 'critical')}`, tools: `${segmented(['기획', '개발', '검증', '출시'], 1, '진행 단계')}${btn('보고서', { ic: 'file-text' })}` })}
 <main class="tp-content">
@@ -193,7 +200,7 @@ ${head('새 학습 앱 출시', { sub: `목표 출시일 2026년 6월 30일 · $
   ${card(`<div class="tp-between"><h2 class="tp-h3">작업 흐름</h2><span class="tp-sub">8개 중 8개</span></div>${table(['작업 흐름', '담당', '진행', '마감', '상태'], ws.map(([n, s, o, v, d, [st, tn]]) => [`<span class="tp-stack"><span>${n}</span><span class="tp-caption">${s}</span></span>`, `<span class="tp-row">${avatar(o)}${o}</span>`, `<div class="tp-row" style="min-width:140px">${progress(v, { label: n })}<span class="tp-num tp-caption">${v}%</span></div>`, T(d), badge(st, tn)]))}`)}
 </main>
 </div>`;
-  return { slug: 'dashboard-progress', en: 'Project Status Dashboard', name: '프로젝트 현황 대시보드', group: 'Dashboard', desc: '오늘 표시선이 있는 일정 막대, 완료 비율 도넛, 담당자별 진행 표로 프로젝트가 어디까지 왔는지 보는 화면입니다.', css: '', body };
+  return { slug: 'dashboard-progress', en: 'Project Status Dashboard', name: '프로젝트 현황 대시보드', group: 'Dashboard', desc: '일정 막대와 오늘 표시선, 완료율 도넛, 담당자별 진행 표로 프로젝트가 어디까지 왔는지 보여 주는 대시보드입니다.', css: '', body };
 };
 
 /* 7. 서비스 모니터링 (오른쪽 알림 패널) -------------------------- */
@@ -202,7 +209,7 @@ const monitoring = () => {
   const lat = ['p50', 'p95', 'p99'].map((name, i) => ({ name, data: walk(140 + i, 60, [60, 180, 380][i], [10, 30, 90][i], { min: 20 }) }));
   const vol = ['서울', '도쿄', '싱가포르'].map((name, i) => ({ name, data: walk(150 + i, 60, [9000, 7000, 4500][i], 1400, { min: 2000 }) }));
   const svc = [['positive', '인증', '99.72%', 2], ['warning', '결제 API', '99.55%', 10], ['warning', '이미지 CDN', '99.63%', 6], ['positive', '검색', '99.91%', 1], ['critical', '알림', '98.80%', 14]];
-  const strip = (seed, bad) => { const r = K.rnd(seed); return `<div class="tp-uptime" role="img" aria-label="최근 90일 가동 기록, 문제 있던 날 ${bad}일">${Array.from({ length: 90 }, () => { const x = r(); return `<span data-s="${x < bad / 90 ? (x < bad / 360 ? 'down' : 'warn') : 'ok'}"></span>`; }).join('')}</div>`; };
+  const strip = (seed, bad) => { const r = K.rnd(seed); return `<div class="tp-uptime" role="img" aria-label="최근 90일 가동 기록, 문제 있던 날 ${bad}일">${Array.from({ length: 90 }, (_, i) => { const x = r(); const s = x < bad / 90 ? (x < bad / 360 ? 'down' : 'warn') : 'ok'; return `<span data-s="${s}" data-tip="${90 - i}일 전|${{ ok: '정상', warn: '느림', down: '중단' }[s]}"></span>`; }).join('')}</div>`; };
   const alerts = [['critical', '검색 서버 5xx 오류 5% 넘음', '검색 · 서울', '발생', '4분 전'], ['critical', '결제 API p99 500ms 넘음', '결제 · 서울', '발생', '12분 전'], ['critical', '알림 대기열 쌓임', '알림 · 싱가포르', '발생', '31분 전'], ['warning', 'CDN 캐시 적중률 떨어짐', 'CDN · 도쿄', '확인', '1시간 전'], ['warning', '인증 오류율 증가 (개발 환경)', '인증 · 서울', '확인', '2시간 전'], ['positive', '정산 작업 응답 없음', '정산 · 서울', '해결', '3시간 전']];
   const brk = [['critical', '검색', '서울 · 서버 16대 · 4.1k rpm', '1180ms', '5.8%'], ['warning', '결제 API', '서울 · 서버 24대 · 9.2k rpm', '512ms', '2.1%'], ['warning', '이미지 CDN', '도쿄 · 서버 30대 · 14.8k rpm', '402ms', '1.6%'], ['positive', '알림', '싱가포르 · 서버 6대 · 1.2k rpm', '268ms', '0.5%'], ['positive', '인증', '서울 · 서버 12대 · 4.0k rpm', '236ms', '0.4%']];
   const css = `
@@ -217,7 +224,7 @@ const monitoring = () => {
   .tp-alert__end { display: flex; flex-direction: column; align-items: flex-end; gap: var(--ybm-space-x1); }
 `;
   const body = `<div class="tp-app">
-${head('서비스 상태 모니터', { sub: `<span class="tp-row">${dot('positive', '실시간')}11월 1일 오후 6:15 업데이트</span>`, tools: `${segmented(['1시간', '1일', '7일'], 1, '시간 범위')}${selField('환경', '운영', 'f-env')}${selField('지역', '모든 지역', 'f-region')}` })}
+${head('서비스 상태 모니터', { sub: `<span class="tp-row">${dot('positive', '실시간')}11월 1일 오후 6:15 업데이트</span>`, tools: `${segmented(['1시간', '1일', '7일'], 1, '시간 범위')}${select('운영', { id: 'f-env', aria: '환경' })}${select('모든 지역', { id: 'f-region', aria: '지역' })}` })}
 <div class="tp-body tp-body--panel">
 <main class="tp-content">
   <div class="tp-g4">${tiles.map(([t, l, v, d], i) => kpi(l, v, { d, lead: dot(t, l), chart: spark(walk(160 + i, 48, 40, 10, { min: 5 }), `var(--ybm-color-fg-${t})`, { h: 36, label: l + ' 추이' }) })).join('')}</div>
@@ -240,7 +247,7 @@ ${head('서비스 상태 모니터', { sub: `<span class="tp-row">${dot('positiv
 </aside>
 </div>
 </div>`;
-  return { slug: 'dashboard-alert-rail', en: 'Service Monitoring Dashboard', name: '서비스 모니터링 대시보드', group: 'Dashboard', desc: '늘 켜 두는 상태 화면입니다. 상태 색이 있는 타일과 시간 그래프, 서비스별 90일 가동 막대, 오른쪽에 따로 스크롤되는 알림 패널이 있습니다.', css, body };
+  return { slug: 'dashboard-alert-rail', en: 'Service Monitoring Dashboard', name: '서비스 모니터링 대시보드', group: 'Dashboard', desc: '서비스 상태를 계속 지켜보는 모니터링 화면입니다. 상태 지표, 시간대별 그래프, 서비스별 90일 가동 기록을 보여 주고 오른쪽에 알림 목록을 따로 둡니다.', css, body };
 };
 
 export const templates = [analytics, comparison, scorecard, funnel, composition, progressDash, monitoring].map((f) => f());

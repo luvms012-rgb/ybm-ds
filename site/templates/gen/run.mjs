@@ -23,9 +23,7 @@ all.sort((a, b) => GROUPS.indexOf(a.group) - GROUPS.indexOf(b.group) || a.en.loc
 
 const old = JSON.parse(fs.readFileSync(JSON_PATH, 'utf8'));
 const keepFigma = Object.fromEntries((old.templates || []).filter((t) => t.figma && t.rebuilt).map((t) => [t.slug, t.figma]));
-// 카드가 있는 화면은 회색 바탕 + 흰 카드(tp-canvas). 템플릿에서 canvas: false / true 로 바꿀 수 있다.
-const canvasOf = (t) => (t.canvas ?? /tp-card/.test(t.body)) ? 'tp-canvas' : '';
-for (const t of all) fs.writeFileSync(path.join(PAGES, t.slug + '.html'), page({ title: t.name, css: t.css || '', body: t.body, bodyClass: [t.bodyClass, canvasOf(t)].filter(Boolean).join(' ') }));
+for (const t of all) fs.writeFileSync(path.join(PAGES, t.slug + '.html'), page({ title: t.name, css: t.css || '', body: t.body, bodyClass: t.bodyClass || '' }));
 const slugs = new Set(all.map((t) => t.slug));
 let removed = 0;
 for (const f of fs.readdirSync(PAGES)) if (f.endsWith('.html') && !slugs.has(f.slice(0, -5))) { fs.unlinkSync(path.join(PAGES, f)); removed++; }

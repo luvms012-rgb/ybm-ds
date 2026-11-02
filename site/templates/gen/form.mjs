@@ -23,7 +23,7 @@ const FORM_CSS = `
   .tp-item .ds-imageframe { border-radius: var(--ybm-shape-sm); }
 `;
 const opt = (t, d, checked = false, type = 'checkbox', name = 'o') => `<label class="tp-optrow"><span class="ds-${type}" data-size="medium"><input type="${type}" class="ds-${type}__control" name="${name}"${checked ? ' checked' : ''} aria-label="${esc(t)}"></span><span class="tp-stack"><span>${t}</span><span class="tp-sub">${d}</span></span></label>`;
-const summary = (items, lines, total, title = '주문 요약') => card(`<div class="tp-between"><h2 class="tp-h3">${title}</h2>${badge(items.length + '개')}</div>${items.map(([n, d, p]) => `<div class="tp-item">${thumb('1:1')}<div class="tp-stack"><div class="tp-between" style="align-items:flex-start;flex-wrap:nowrap"><span>${n}</span>${T(p)}</div><span class="tp-caption">${d}</span></div></div>`).join('')}${divider()}${lines.map(([k, v]) => `<div class="tp-sum-line"><span>${k}</span>${T(v)}</div>`).join('')}${divider()}<div class="tp-sum-total"><span>합계</span>${T(total)}</div>`);
+const summary = (items, lines, total, title = '주문 요약') => card(`<div class="tp-between"><h2 class="tp-h3">${title}</h2>${badge(items.length + '개')}</div>${items.map(([n, d, p], i) => `<div class="tp-item">${thumb('1:1', '', K.photo('book', i, 240))}<div class="tp-stack"><div class="tp-between" style="align-items:flex-start;flex-wrap:nowrap"><span>${n}</span>${T(p)}</div><span class="tp-caption">${d}</span></div></div>`).join('')}${divider()}${lines.map(([k, v]) => `<div class="tp-sum-line"><span>${k}</span>${T(v)}</div>`).join('')}${divider()}<div class="tp-sum-total"><span>합계</span>${T(total)}</div>`);
 const ITEMS = [['TOEIC 실전 모의고사 1000제', '교재 · 2권 세트', '38,000원'], ['단어 암기 카드', '교구 · 1개', '12,000원'], ['오답 노트 3권', '문구 · 3개', '9,000원']];
 
 /* 1. 결제 폼 (긴 폼 + 고정 요약) -------------------------------- */
@@ -59,7 +59,7 @@ const payment = () => {
     </aside>
   </div>
 </main></div>`;
-  return { slug: 'payment-form', canvas: false, en: 'Checkout Form', name: '결제 폼', group: 'Form', desc: '긴 결제 폼 옆에 주문 요약을 고정해 두는 화면입니다. 입력이 바뀌면 요약이 다시 계산되고, 마지막에 합계를 확인하고 결제합니다.', css, body };
+  return { slug: 'payment-form', en: 'Checkout Form', name: '결제 폼', group: 'Form', desc: '결제 정보를 한 화면에서 입력하는 폼입니다. 오른쪽에 주문 요약을 고정해 두어 입력하면서 합계를 확인하고 바로 결제합니다.', css, body };
 };
 
 /* 2. 결제 단계 (장바구니 → 결제) -------------------------------- */
@@ -80,14 +80,14 @@ const checkoutWizard = () => {
       <div class="tp-row" style="justify-content: space-between; flex-wrap: wrap"><h1 class="tp-h1">결제</h1><span class="tp-row tp-sub">${icon('lock', 'sm')}안전한 결제</span></div>
       ${stepper(['장바구니', '배송', '결제', '확인'], 0, '결제 단계')}
       <h2 class="tp-h2">장바구니 확인</h2>
-      <div>${cart.map(([n, d, q, p]) => `<div class="tp-cart">${thumb('1:1')}<div class="tp-stack" style="gap: var(--ybm-space-x2)"><div class="tp-between"><span class="tp-h4">${n}</span>${T(p)}</div><span class="tp-caption">${d}</span><div class="tp-row">${qty(q)}${btn('빼기', { variant: 'ghost', ic: 'trash', size: 'xsmall' })}</div></div></div>`).join('')}</div>
+      <div>${cart.map(([n, d, q, p], i) => `<div class="tp-cart">${thumb('1:1', '', K.photo('book', i, 240))}<div class="tp-stack" style="gap: var(--ybm-space-x2)"><div class="tp-between"><span class="tp-h4">${n}</span>${T(p)}</div><span class="tp-caption">${d}</span><div class="tp-row">${qty(q)}${btn('빼기', { variant: 'ghost', ic: 'trash', size: 'xsmall' })}</div></div></div>`).join('')}</div>
       <div class="tp-promo">${field('promo', '할인 코드', inp('promo', 'WELCOME10'))}${btn('적용', { size: 'medium' })}</div>
       <div class="tp-between">${btn('쇼핑 계속하기', { variant: 'ghost', ic: 'chevron-left', size: 'medium' })}${btn('배송 정보 입력', { variant: 'brandSolid', size: 'medium', icEnd: 'arrow-right' })}</div>
     </div>
     <aside class="tp-cw__aside">${summary(cart.map(([n, d, q, p]) => [n, d.split(' · ')[0] + ' · ' + q + '개', p]), [['상품 금액', '63,500원'], ['배송비', '3,000원'], ['할인', '-6,350원']], '60,150원')}</aside>
   </div>
 </main></div>`;
-  return { slug: 'checkout-wizard', canvas: false, en: 'Checkout Wizard', name: '결제 단계', group: 'Form', desc: '장바구니, 배송, 결제, 확인을 단계로 나눈 결제 화면입니다. 답이 바뀔 때마다 오른쪽 요약이 다시 계산되고, 좁은 화면에서는 요약이 아래로 내려갑니다.', css, body };
+  return { slug: 'checkout-wizard', en: 'Checkout Wizard', name: '결제 단계', group: 'Form', desc: '장바구니, 배송, 결제, 확인을 단계별로 나눈 결제 화면입니다. 오른쪽 요약은 선택에 따라 다시 계산되고, 좁은 화면에서는 아래로 내려갑니다.', css, body };
 };
 
 /* 3. 문의 폼 ----------------------------------------------------- */
@@ -116,7 +116,7 @@ const contact = () => {
     <p class="tp-caption" style="text-align:center">보내면 ${link('개인정보 처리방침')}에 동의한 것으로 봐요.</p>
   </form>
 </div></main></div>`;
-  return { slug: 'contact-form', canvas: false, en: 'Contact Form', name: '문의 폼', group: 'Form', desc: '글칸, 알약 버튼, 고르기, 긴 글을 섞은 한 줄 폼입니다. 단계도 갈림도 요약도 없이 맨 아래 전체 폭 보내기 버튼 하나로 끝납니다.', css, body };
+  return { slug: 'contact-form', en: 'Contact Form', name: '문의 폼', group: 'Form', desc: '입력란, 선택 칩, 고르기, 긴 글 입력을 한 흐름에 담은 문의 폼입니다. 단계 없이 맨 아래 보내기 버튼 하나로 끝납니다.', css, body };
 };
 
 /* 4. 대화상자 단계 폼 ------------------------------------------ */
@@ -146,7 +146,7 @@ const dialogWizard = () => {
   </div>
 </div>
 </div>`;
-  return { slug: 'form-wizard-dialog', en: 'Dialog Wizard', name: '대화상자 단계 폼', group: 'Form', desc: '아래 화면은 그대로 둔 채 대화상자 안에서 짧은 단계를 밟는 폼입니다. 작은 단계 표시와 아래쪽에 고정된 버튼 줄이 있습니다.', css, body };
+  return { slug: 'form-wizard-dialog', en: 'Dialog Wizard', name: '대화상자 단계 폼', group: 'Form', desc: '보던 화면 위에 대화상자를 띄워 짧은 단계를 진행하는 폼입니다. 위에는 단계 표시, 아래에는 이전과 다음 버튼을 고정합니다.', css, body };
 };
 
 /* 5. 단계 폼 (가로 진행) ---------------------------------------- */
@@ -172,7 +172,7 @@ const wizard = () => {
 </div></main>
 <footer class="tp-footer-bar" style="position: sticky; bottom: 0"><span class="tp-sub tp-num">4단계 중 1단계</span><div class="tp-row">${btn('이전', { size: 'medium', attrs: 'disabled' })}${btn('다음', { variant: 'brandSolid', size: 'medium', icEnd: 'arrow-right' })}</div></footer>
 </div>`;
-  return { slug: 'form-wizard', en: 'Form Wizard', name: '단계 폼', group: 'Form', desc: '한 번에 한 칸씩 넘어가는 여러 단계 폼입니다. 진행 표시를 위쪽 가로로 두어 모든 단계가 전체 폭을 쓰고, 아래 버튼 줄은 고정됩니다.', css, body };
+  return { slug: 'form-wizard', en: 'Form Wizard', name: '단계 폼', group: 'Form', desc: '한 단계에 한 화면씩 넘어가는 단계별 입력 폼입니다. 진행 단계를 위에 가로로 보여 주고 아래 버튼 줄은 고정합니다.', css, body };
 };
 
 /* 6. 펼치는 단계 폼 (아코디언) ---------------------------------- */
@@ -196,7 +196,7 @@ const inlineWizard = () => {
 ${head('지속 통합 설정', { sub: '앞의 두 단계만 답하면 나머지는 알아서 채워져요.' })}
 <main class="tp-content"><div class="tp-iw"><ol class="tp-steps" aria-label="지속 통합 설정 단계">${steps.map(([t, st, res], i) => `<li class="tp-step" data-state="${st}"${st === 'current' ? ' aria-current="step"' : ''}><div class="tp-step__rail"><span class="tp-step__no">${st === 'done' ? icon('check', 'sm') : i + 1}</span></div><div class="tp-step__main"><div class="tp-step__head"><span class="tp-stack"><span class="tp-h4"${st ? '' : ' style="color: var(--ybm-color-fg-neutral-muted)"'}>${t}</span>${res ? `<span class="tp-caption">${res}</span>` : ''}</span>${st === 'done' ? btn('고치기', { variant: 'ghost', size: 'xsmall', ic: 'pencil' }) : ''}</div>${st === 'current' ? cur : ''}</div></li>`).join('')}</ol></div></main>
 </div>`;
-  return { slug: 'form-wizard-inline', en: 'Inline Wizard', name: '펼치는 단계 폼', group: 'Form', desc: '모든 단계를 한 줄로 쌓은 아코디언 단계 폼입니다. 지금 단계만 펼쳐지고, 끝난 단계는 결과와 고치기 버튼만 남긴 한 줄로 접힙니다.', css, body };
+  return { slug: 'form-wizard-inline', en: 'Inline Wizard', name: '펼치는 단계 폼', group: 'Form', desc: '모든 단계를 위에서 아래로 펼쳐 놓은 단계별 폼입니다. 지금 단계만 열리고, 끝난 단계는 입력한 내용과 고치기 버튼만 남습니다.', css, body };
 };
 
 /* 7. 두 칸 폼 --------------------------------------------------- */
@@ -210,7 +210,7 @@ const twoColumn = () => {
 `;
   const topics = ['단체 수강', '시험 접수', '사내 교육', '맞춤 강좌', '학습 플랫폼', '제휴', '취재', '기타'];
   const body = `<div class="tp-app"><main class="tp-content"><div class="tp-tc">
-  <div class="tp-tc__top"><div class="tp-stack" style="gap: var(--ybm-space-x3)"><h1 class="tp-hero-t">함께 일해요</h1><p class="tp-sub">어떤 일을 하고 계신지 알려 주시면 맞는 방법을 같이 찾아 드릴게요.</p></div>${thumb('16:9')}</div>
+  <div class="tp-tc__top"><div class="tp-stack" style="gap: var(--ybm-space-x3)"><h1 class="tp-hero-t">함께 일해요</h1><p class="tp-sub">어떤 일을 하고 계신지 알려 주시면 맞는 방법을 같이 찾아 드릴게요.</p></div>${thumb('16:9', '', K.photo('work', 2, 1200))}</div>
   <div class="tp-g2" style="align-items:start">
     ${card(`<h2 class="tp-h3">내 정보</h2><div class="tp-form">${req('t-name', '이름', inp('t-name', '이름'))}<div class="tp-pair">${req('t-mail', '이메일', inp('t-mail', '이메일', 'type="email"'))}${field('t-com', '회사', inp('t-com', '회사 이름'))}</div><div class="tp-pair">${field('t-job', '직함', inp('t-job', '직함'))}${field('t-tel', '연락처', inp('t-tel', '전화번호', 'type="tel"'))}</div></div>`, { size: '' })}
     ${card(`<h2 class="tp-h3">문의 내용</h2><div class="tp-form"><fieldset class="tp-stack" style="border:0;padding:0;margin:0;gap:var(--ybm-space-x2)"><legend class="ds-field__label" style="margin-bottom:var(--ybm-space-x2)">무엇에 관한 문의인가요?</legend><div class="tp-chips">${topics.map((t, i) => chip(t, { on: i === 0 })).join('')}</div></fieldset>${field('t-budget', '예산 범위', sel('t-budget', '1,000만원 미만'))}${req('t-msg', '자세한 내용', textarea('t-msg', 'rows="5" placeholder="일정, 인원, 바라는 결과를 적어 주세요"'))}${btn('보내기', { variant: 'brandSolid', size: 'large', fill: true })}</div>`, { size: '' })}
@@ -218,7 +218,7 @@ const twoColumn = () => {
   ${divider()}
   <div class="tp-g4">${[['일반 문의', 'hello@company.com'], ['기업 영업', 'sales@company.com'], ['언론', 'press@company.com'], ['고객 지원', 'help@company.com']].map(([t, m]) => `<div class="tp-stack"><span class="tp-h4">${t}</span>${link(m, 'mailto:' + m)}</div>`).join('')}</div>
 </div></main></div>`;
-  return { slug: 'form-two-column', en: 'Two-column Form', name: '두 칸 폼', group: 'Form', desc: '큰 제목 아래를 두 칸으로 나눈 폼입니다. 한쪽에 내 정보, 다른 쪽에 문의 내용을 두고 맨 아래 연락처 줄로 마무리합니다.', css, body };
+  return { slug: 'form-two-column', en: 'Two-column Form', name: '두 칸 폼', group: 'Form', desc: '큰 제목 아래에 입력 영역을 두 칸으로 나눈 문의 폼입니다. 한쪽에는 내 정보를, 다른 쪽에는 문의 내용을 받습니다.', css, body };
 };
 
 /* 8. 세로 단계 폼 (왼쪽 단계 + 오른쪽 도움말) -------------------- */
@@ -258,7 +258,7 @@ const vertical = () => {
   </aside>
 </div>
 </div>`;
-  return { slug: 'form-wizard-vertical', en: 'Vertical Wizard', name: '세로 단계 폼', group: 'Form', desc: '단계를 왼쪽 세로 막대에 고정하고, 오른쪽 패널의 도움말이 지금 고른 칸을 따라 바뀌는 여러 단계 폼입니다. 칸이 많은 긴 입력에 맞습니다.', css, body };
+  return { slug: 'form-wizard-vertical', en: 'Vertical Wizard', name: '세로 단계 폼', group: 'Form', desc: '왼쪽에 단계 목록을 세로로 고정한 단계별 폼입니다. 오른쪽 도움말이 지금 입력하는 칸에 맞춰 바뀌어 입력 항목이 많을 때 알맞습니다.', css, body };
 };
 
 export const templates = [payment, checkoutWizard, contact, dialogWizard, wizard, inlineWizard, twoColumn, vertical].map((f) => f());
