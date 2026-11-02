@@ -139,7 +139,8 @@
     // 왼쪽 메뉴 찾기 칸: 메뉴 항목도 함께 거른다
     var nav = document.querySelector("[data-site-navfilter]");
     if (nav) {
-      nav.querySelectorAll(".site-nav__item").forEach(function (a) { a.hidden = !!q && a.textContent.toLowerCase().indexOf(q) < 0; });
+      // 한글 낱말(data-site-keys)도 함께 본다: "버튼" 으로 찾아도 Action Button 이 나온다
+      nav.querySelectorAll(".site-nav__item").forEach(function (a) { a.hidden = !!q && (a.textContent + " " + (a.getAttribute("data-site-keys") || "")).toLowerCase().indexOf(q) < 0; });
       nav.querySelectorAll(".site-nav__group").forEach(function (g) { g.hidden = !g.querySelector(".site-nav__item:not([hidden])"); if (q) g.open = true; });
     }
   }
@@ -181,12 +182,33 @@
     var first = document.querySelector("[data-site-navfilter] .site-nav__group .site-nav__item:not([hidden])");
     if (first) location.href = first.href;
   });
-  // 좁은 화면 목차 고르기
-  document.addEventListener("change", function (e) {
-    if (!e.target.matches("[data-site-toc]")) return;
-    var h = document.getElementById(e.target.value);
-    if (h) { h.scrollIntoView({ behavior: "smooth" }); history.replaceState(null, "", "#" + e.target.value); }
+  // 좁은 화면 목차 고르기 (DS Select): 트리거로 여닫고, 항목을 누르면 그 제목으로
+  function tocOpen(open) {
+    var btn = document.querySelector("[data-site-toc]"), list = document.getElementById("site-toc-list");
+    if (!btn || !list) return;
+    list.hidden = !open;
+    btn.setAttribute("aria-expanded", String(open));
+  }
+  function tocMark(id) {
+    var btn = document.querySelector("[data-site-toc]");
+    if (!btn) return;
+    document.querySelectorAll("[data-site-toc-go]").forEach(function (o) {
+      if (o.getAttribute("data-site-toc-go") === id) { o.setAttribute("aria-selected", "true"); btn.querySelector(".ds-select__value").textContent = o.textContent; }
+      else o.removeAttribute("aria-selected");
+    });
+  }
+  document.addEventListener("click", function (e) {
+    var go = e.target.closest("[data-site-toc-go]");
+    if (go) {
+      var id = go.getAttribute("data-site-toc-go"), h = document.getElementById(id);
+      tocOpen(false); tocMark(id);
+      if (h) { h.scrollIntoView({ behavior: "smooth" }); history.replaceState(null, "", "#" + id); }
+      return;
+    }
+    if (e.target.closest("[data-site-toc]")) { tocOpen(document.getElementById("site-toc-list").hidden); return; }
+    if (!e.target.closest(".site-toc-list")) tocOpen(false);
   });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") tocOpen(false); });
 
   // 템플릿 썸네일 크기 맞춤
   function fitThumbs() {
@@ -237,6 +259,7 @@
     function mark(a) {
       links.forEach(function (l) { l.removeAttribute("aria-current"); });
       a.setAttribute("aria-current", "true");
+      tocMark(a.getAttribute("href").slice(1));
       if (bar) { bar.style.translate = "0 " + a.offsetTop + "px"; bar.style.height = a.offsetHeight + "px"; }
     }
     mark(links[0]);  // 처음에는 첫 항목

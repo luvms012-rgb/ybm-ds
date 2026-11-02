@@ -146,8 +146,10 @@ body[data-side-open] .site-scrim { opacity: 1; pointer-events: auto; }
 .site-body--comp { --site-col: 960px; }
 .site-cover .site-tile__inner { padding: var(--ybm-space-x12); }
 .site-toc-select { position: relative; margin-top: var(--ybm-space-x6); }
-.site-toc-select select { width: 100%; height: 36px; padding: 0 var(--ybm-space-x10) 0 var(--ybm-space-x3); border: 0; border-radius: var(--ybm-shape-lg); background: var(--ybm-color-bg-layer-default); box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-neutral-weak); color: var(--ybm-color-fg-neutral); font-size: var(--ybm-font-size-t04); -webkit-appearance: none; appearance: none; cursor: pointer; }
-.site-toc-select > .ds-icon { position: absolute; right: var(--ybm-space-x3); top: 10px; color: var(--ybm-color-fg-neutral-subtle); pointer-events: none; }
+/* 좁은 화면 목차: DS Select Trigger(폭 100%) + 아래로 펼치는 Select Content */
+.site-toc-select .ds-select { width: 100%; }
+.site-toc-list { position: absolute; top: calc(100% + var(--ybm-space-x1)); left: 0; right: 0; z-index: 5; max-height: 60vh; overflow-y: auto; }
+.site-toc-list[hidden] { display: none; }
 
 /* ---- 문서 글자와 리듬 (블록 사이 16, 제목 위 40) ---- */
 .site-eyebrow { margin-bottom: var(--ybm-space-x3); color: var(--ybm-color-fg-neutral-muted); font-size: var(--ybm-font-size-t04); line-height: 20px; }

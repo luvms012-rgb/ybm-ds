@@ -386,6 +386,8 @@ button.ds-input__prefix:hover { color: var(--ybm-color-fg-neutral); }
 }
 .ds-input__clear::after { content: ""; position: absolute; inset: calc((var(--ds-input-icon) - 40px) / 2); }
 .ds-input:focus-within:has(.ds-input__control:not(:placeholder-shown)) .ds-input__clear { display: block; }
+/* type="search" 의 브라우저 기본 지우기(X)는 숨기고 위 clear 버튼을 쓴다 */
+.ds-input__control::-webkit-search-cancel-button { -webkit-appearance: none; appearance: none; display: none; }
 
 
 /* --------------------------------------------------------------------------

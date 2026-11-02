@@ -189,8 +189,11 @@ const GS = [['Guide', az([['get-started/usage.html', 'Usage'], ['get-started/scr
 const GS_ORDER = [['index.html', 'Get Started'], ...GS.flatMap(([, list]) => list)];
 const gsPager = (file) => { const i = GS_ORDER.findIndex(([f]) => f === file); const p = GS_ORDER[i - 1], n = GS_ORDER[i + 1]; return [p && { href: '{root}' + p[0], label: p[1] }, n && { href: '{root}' + n[0], label: n[1] }]; };
 
+// 컴포넌트 찾기 칸의 한글 낱말 (site/src/search-ko.json, 키는 영어 이름). 한글로 찾아도 영어 이름 컴포넌트가 나온다
+const SEARCH_KO = JSON.parse(fs.readFileSync(path.join(SITE, 'src/search-ko.json'), 'utf8'));
+const koKeys = (name) => { const k = SEARCH_KO[name]; if (k === undefined) console.log('  ! search-ko.json에 한글 낱말이 없음:', name); return k || ''; };
 function sideNav(section, file, root) {
-  const item = (href, label) => `<a class="site-nav__item" href="${root}${href}"${href === file ? ' aria-current="page"' : ''}>${esc(label)}</a>`;
+  const item = (href, label, keys = '') => `<a class="site-nav__item" href="${root}${href}"${href === file ? ' aria-current="page"' : ''}${keys ? ` data-site-keys="${esc(keys)}"` : ''}>${esc(label)}</a>`;
   // 레퍼런스 A 왼쪽 메뉴: 접는 묶음(아코디언) - 묶음 이름 버튼 + 오른쪽 꺾쇠, 안쪽 항목은 32 들여쓰기
   const group = (label, items) => {
     const id = 'site-nav-' + label.toLowerCase().replace(/[^a-z0-9]+/g, '-');
@@ -203,7 +206,7 @@ function sideNav(section, file, root) {
   }
   if (section === 'components') {
     parts.push(item('components/index.html', 'Overview'));
-    parts.push(...compsAZ.map((c) => item(`components/${c.slug}.html`, c.name.split(' · ')[0])));
+    parts.push(...compsAZ.map((c) => item(`components/${c.slug}.html`, c.name.split(' · ')[0], koKeys(c.name.split(' · ')[0]))));
   }
   if (section === 'templates') {
     parts.push(item('templates/index.html', 'Overview'));
@@ -211,7 +214,7 @@ function sideNav(section, file, root) {
   }
   const mobile = `<div class="site-side__mobile"><nav class="site-nav" aria-label="주요 메뉴">${NAV.map(([k, l, h]) => `<a class="site-nav__item" href="${root}${h}"${k === section ? ' aria-current="page"' : ''}>${l}</a>`).join('')}</nav><div class="site-nav__sep"></div></div>`;
   // 컴포넌트 메뉴 맨 위 찾기 칸 (높이 32, 모서리 12, 1px 테두리) - 메뉴 항목과 목록 카드를 함께 거른다
-  const search = section === 'components' ? `<div class="site-side__searchbar"><div class="ds-input site-side__search" data-variant="outline" data-size="medium"><i class="ds-icon ds-icon--search ds-input__icon" aria-hidden="true"></i><input class="ds-input__control" type="search" placeholder="컴포넌트 찾기" aria-label="컴포넌트 찾기" data-site-search></div></div>` : '';
+  const search = section === 'components' ? `<div class="site-side__searchbar"><div class="ds-input site-side__search" data-variant="outline" data-size="medium"><i class="ds-icon ds-icon--search ds-input__icon" aria-hidden="true"></i><input class="ds-input__control" type="search" placeholder="컴포넌트 찾기" aria-label="컴포넌트 찾기" data-site-search><button type="button" class="ds-input__clear" aria-label="지우기"></button></div></div>` : '';
   return `<aside class="site-side" id="site-side" aria-label="페이지 목록">
   <div class="site-side__top"><b>메뉴</b><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" data-site-close aria-label="메뉴 닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button></div>
   ${mobile}${search}
@@ -251,7 +254,8 @@ function page({ file, title, section, body, layout = 'doc', desc = '', pager = [
     return `<h2 id="${id}">${inner}<a class="site-anchor" href="#${id}" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>`;
   });
   const hasToc = layout === 'doc' && heads.length > 1;
-  const tocSelect = hasToc ? `<div class="site-toc-select"><select aria-label="이 페이지 목차" data-site-toc>${heads.map(([id, t]) => `<option value="${id}">${esc(t)}</option>`).join('')}</select><i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i></div>` : '';
+  // 좁은 화면 목차: 브라우저 기본 select 대신 DS Select Trigger + Select Content (여닫기는 site.js)
+  const tocSelect = hasToc ? `<div class="site-toc-select"><button type="button" class="ds-select" data-size="medium" aria-haspopup="listbox" aria-expanded="false" aria-controls="site-toc-list" aria-label="이 페이지 목차" data-site-toc><span class="ds-select__value">${esc(heads[0][1])}</span></button><div class="ds-select-content site-toc-list" id="site-toc-list" role="listbox" data-size="medium" hidden><ul class="ds-select-list">${heads.map(([id, t], i) => `<li><button type="button" class="ds-select-item" role="option" data-site-toc-go="${id}"${i ? '' : ' aria-selected="true"'}><span class="ds-select-item__body"><span class="ds-select-item__label">${esc(t)}</span></span></button></li>`).join('')}</ul></div></div>` : '';
   body = body.replace('</header>', `${tocSelect}\n</header>`);
   const html = `<!doctype html>
 <html lang="ko">
@@ -561,7 +565,7 @@ ${example(`<div class="pv-stage"><i class="ds-icon ds-icon--search ds-icon--sm" 
 <h2 id="add">아이콘 더보기</h2>
 <p>여기 없는 아이콘은 Lucide ${lucideCount.toLocaleString()}개에서 찾습니다. 아이콘을 누르면 <code>icons.css</code>에 붙여 넣을 줄이 복사되고, 붙여 넣으면 바로 쓸 수 있습니다. 이미 들어 있는 것은 CSS 표시가 붙어 있고 누르면 클래스가 복사됩니다.</p>
 ${codeblock(`/* Lucide heart - 복사된 줄을 dist/icons.css 끝에 붙인다 */\n:root { --ds-icon-heart: url("data:image/svg+xml,…"); }\n.ds-icon--heart { --ds-icon: var(--ds-icon-heart); }\n\n<!-- 그다음부터 -->\n<i class="ds-icon ds-icon--heart" aria-hidden="true"></i>`)}
-<div class="site-icon-search"><div class="ds-input" data-variant="outline" data-size="medium"><i class="ds-icon ds-icon--search ds-input__icon" aria-hidden="true"></i><input class="ds-input__control" type="search" placeholder="영어 이름으로 찾기 (arrow, user, calendar)" aria-label="아이콘 찾기" data-site-lucide-search></div><span class="site-lucide-count" data-site-lucide-count></span></div>
+<div class="site-icon-search"><div class="ds-input" data-variant="outline" data-size="medium"><i class="ds-icon ds-icon--search ds-input__icon" aria-hidden="true"></i><input class="ds-input__control" type="search" placeholder="영어 이름으로 찾기 (arrow, user, calendar)" aria-label="아이콘 찾기" data-site-lucide-search><button type="button" class="ds-input__clear" aria-label="지우기"></button></div><span class="site-lucide-count" data-site-lucide-count></span></div>
 <div class="site-icons" id="site-lucide" data-site-ds-icons="${esc(iconNames.join(' '))}"></div>
 <h2 id="practices">사용 지침</h2>
 ${practices(ICON_PRACTICES)}
@@ -612,7 +616,7 @@ const hero = (title, lead) => `<header class="site-hero"><h1 class="site-h1">${e
 write({
   file: 'components/index.html', section: 'components', title: 'Components', layout: 'wide',
   body: `<header><h1 class="site-h1">Components</h1><p class="site-lead">화면을 만드는 컴포넌트 ${comps.length}종입니다. 모두 Figma와 CSS가 같은 이름, 같은 값으로 짝을 이룹니다.</p></header>
-<div class="site-tiles">${compsAZ.map((c) => `<a class="site-tile" href="${c.slug}.html" data-site-item="${esc((c.name + ' ' + c.desc).toLowerCase())}">${cardThumb(c)}<p class="site-tile__name">${esc(c.name.split(' · ')[0])}</p></a>`).join('\n')}</div>
+<div class="site-tiles">${compsAZ.map((c) => `<a class="site-tile" href="${c.slug}.html" data-site-item="${esc((c.name + ' ' + koKeys(c.name.split(' · ')[0])).toLowerCase())}">${cardThumb(c)}<p class="site-tile__name">${esc(c.name.split(' · ')[0])}</p></a>`).join('\n')}</div>
 <div class="ds-empty site-empty-result" hidden><span class="ds-empty__media"><i class="ds-icon ds-icon--search" aria-hidden="true"></i></span><p class="ds-empty__title">찾는 컴포넌트가 없어요</p><p class="ds-empty__desc">다른 이름으로 찾아보세요.</p></div>`,
 });
 
