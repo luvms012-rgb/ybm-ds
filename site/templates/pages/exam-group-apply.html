@@ -25,8 +25,6 @@
   .tp-sub { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
   .tp-caption { font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); color: var(--ybm-color-fg-neutral-subtle); }
   .tp-num { font-variant-numeric: tabular-nums; }
-  /* 텍스트 링크는 보조 동작이라 본문(14)보다 한 단계 작게 */
-  .ds-link { font-size: var(--ybm-font-size-t03); line-height: var(--ybm-line-height-t03); }
   /* 표는 DS Table 그대로 쓴다 (2026-11-03 DS 개편). 아래는 표 위, 아래 줄만 */
   /* 표 위 한 줄: 왼쪽 개수, 오른쪽 고르기 칸과 찾기 (커뮤니티 게시판 btools) */
   .tp-ttools { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ybm-space-x3); }
@@ -44,15 +42,12 @@
   .tp-row { display: flex; align-items: center; gap: var(--ybm-space-x2); min-width: 0; }
   /* 줄 안에 놓인 고르기 칸은 글자만큼만 */
   :is(.tp-row, .tp-between, .tp-head__tools, .tp-sec-head, .tp-ttools__end) > .ds-select { width: auto; min-width: 140px; }
-  /* 도구 줄의 medium 세그먼트는 버튼, 고르기 칸과 같은 40 높이로 */
-  :is(.tp-row, .tp-head__tools, .tp-tool__bar) > .ds-segmented[data-size="medium"] { box-sizing: border-box; height: 40px; }
   .tp-between { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ybm-space-x2); }
   .tp-stack { display: flex; flex-direction: column; gap: var(--ybm-space-x1); min-width: 0; }
   .tp-stack > .ds-badge { align-self: flex-start; }
   .tp-g2, .tp-g3, .tp-g4, .tp-g5, .tp-g6 { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ybm-space-x3); }
   /* 카드 (레퍼런스 A): 흰 바탕 + 옅은 1px 선, 모서리 12 */
   .tp-card { min-width: 0; }
-  .tp-card.ds-card { gap: var(--ybm-space-x3); padding: var(--ybm-space-x4); border-radius: var(--ybm-shape-lg); box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-neutral-muted); }
   .tp-span2 { grid-column: auto; }
   .tp-kpi__label { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
   .tp-kpi__value { font-size: var(--ybm-font-size-t08); line-height: var(--ybm-line-height-t08); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
@@ -100,7 +95,7 @@
     .tp-h2 { font-size: var(--ybm-font-size-t07); line-height: var(--ybm-line-height-t07); }
     .tp-content { padding: var(--ybm-space-x6) var(--ybm-space-x6) var(--ybm-space-x12); gap: var(--ybm-space-x8); }
     .tp-panel { padding: var(--ybm-space-x6); }
-    .tp-card.ds-card { padding: var(--ybm-space-x5); gap: var(--ybm-space-x4); }
+    .tp-card.ds-card { --ds-card-padding: var(--ybm-space-x5); --ds-card-gap: var(--ybm-space-x4); }
     .tp-g2, .tp-g3, .tp-g4, .tp-g5, .tp-g6 { gap: var(--ybm-space-x4); }
     .tp-g2, .tp-g4, .tp-g6 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .tp-g3, .tp-g5 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -155,7 +150,6 @@
   .tp-stats > * { display: flex; flex-direction: column; gap: var(--ybm-space-x1); min-width: 0; }
   @media (min-width: 768px) { .tp-stats { grid-template-columns: repeat(var(--n, 4), minmax(0, 1fr)); } .tp-stats > * + * { padding-inline-start: var(--ybm-space-x4); box-shadow: inset 1px 0 0 var(--ybm-color-stroke-neutral-muted); } }
   .tp-thumb-sm { flex: none; width: 96px; }
-  .tp-thumb-sm .ds-imageframe, .tp-course .ds-imageframe { border-radius: var(--ybm-shape-lg); }
   .tp-aside-sticky { display: flex; flex-direction: column; gap: var(--ybm-space-x3); }
   @media (min-width: 1024px) { .tp-aside-sticky { position: sticky; top: calc(var(--ybm-space-x16) + var(--ybm-space-x4)); } }
 
@@ -180,18 +174,18 @@
   <div class="tp-head__tools"><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="small"><i class="ds-icon ds-icon--save" aria-hidden="true"></i>임시 저장</button></div>
 </header>
 <main class="tp-content">
-  <section class="ds-card tp-card" data-size="small"><ol class="ds-stepper" aria-label="접수 단계"><li class="ds-stepper__step" data-state="complete"><span class="ds-stepper__indicator"></span><span class="ds-stepper__label">시험 고르기</span></li><li class="ds-stepper__step" data-state="current" aria-current="step"><span class="ds-stepper__indicator"></span><span class="ds-stepper__label">명단 올리기</span></li><li class="ds-stepper__step"><span class="ds-stepper__indicator"></span><span class="ds-stepper__label">확인</span></li><li class="ds-stepper__step"><span class="ds-stepper__indicator"></span><span class="ds-stepper__label">결제</span></li></ol></section>
+  <section class="ds-card tp-card" data-variant="subtle" data-size="small"><ol class="ds-stepper" aria-label="접수 단계"><li class="ds-stepper__step" data-state="complete"><span class="ds-stepper__indicator"></span><span class="ds-stepper__label">시험 고르기</span></li><li class="ds-stepper__step" data-state="current" aria-current="step"><span class="ds-stepper__indicator"></span><span class="ds-stepper__label">명단 올리기</span></li><li class="ds-stepper__step"><span class="ds-stepper__indicator"></span><span class="ds-stepper__label">확인</span></li><li class="ds-stepper__step"><span class="ds-stepper__indicator"></span><span class="ds-stepper__label">결제</span></li></ol></section>
   <div class="tp-ga">
     <div class="tp-stack" style="gap: var(--ybm-space-x4)">
-      <section class="ds-card tp-card" data-size="small"><div class="tp-between"><div class="tp-stack"><span class="tp-caption">고른 시험</span><span class="tp-h3">영어 읽기 듣기 시험</span><span class="ds-tag-group" data-size="t4"><span>12월 6일 (토) 09:30</span><span>한빛대학교 단독 고사장</span><span>정원 150명</span></span></div><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="xsmall">바꾸기</button></div></section>
-      <section class="ds-card tp-card" data-size="small"><div class="tp-between"><div class="tp-stack"><span class="tp-h3">응시자 명단</span><span class="tp-sub">양식에 맞춰 이름, 학번, 학과, 이메일을 적어 올려 주세요.</span></div><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="small"><i class="ds-icon ds-icon--download" aria-hidden="true"></i>양식 받기</button></div>
+      <section class="ds-card tp-card" data-variant="subtle" data-size="small"><div class="tp-between"><div class="tp-stack"><span class="tp-caption">고른 시험</span><span class="tp-h3">영어 읽기 듣기 시험</span><span class="ds-tag-group" data-size="t4"><span>12월 6일 (토) 09:30</span><span>한빛대학교 단독 고사장</span><span>정원 150명</span></span></div><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="xsmall">바꾸기</button></div></section>
+      <section class="ds-card tp-card" data-variant="subtle" data-size="small"><div class="tp-between"><div class="tp-stack"><span class="tp-h3">응시자 명단</span><span class="tp-sub">양식에 맞춰 이름, 학번, 학과, 이메일을 적어 올려 주세요.</span></div><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="small"><i class="ds-icon ds-icon--download" aria-hidden="true"></i>양식 받기</button></div>
         <div class="ds-fileattach"><label class="ds-fileattach__dropzone"><input type="file" class="ds-fileattach__input" accept=".xlsx,.csv"><span class="ds-fileattach__label">엑셀 파일을 끌어 놓거나 눌러서 올리세요</span></label>
           <div class="ds-fileattach__items"><div class="ds-fileitem"><span class="ds-fileitem__thumbnail"><i class="ds-icon ds-icon--file-text" aria-hidden="true"></i></span><span class="ds-fileitem__name">2학기_응시자.xlsx</span></div></div></div>
         <div class="tp-between"><div class="tp-row" style="flex-wrap:wrap"><button type="button" class="ds-chip" data-variant="outlineWeak" data-size="small" aria-pressed="true">전체 128</button><button type="button" class="ds-chip" data-variant="outlineWeak" data-size="small">정상 124</button><button type="button" class="ds-chip" data-variant="outlineWeak" data-size="small">확인 필요 4</button></div><span class="tp-caption">빨간 줄을 눌러 바로 고칠 수 있어요</span></div>
         <div class="tp-scroll-x"><div class="ds-table-wrap"><table class="ds-table" data-density="compact"><thead><tr><th scope="col">번호</th><th scope="col">이름</th><th scope="col">학번</th><th scope="col">학과</th><th scope="col">이메일</th><th scope="col">확인</th></tr></thead><tbody><tr><td>1</td><td>김민준</td><td>20231042</td><td>경영학과</td><td>minjun@hanbit.ac.kr</td><td><span class="ds-badge" data-tone="positive">정상</span></td></tr><tr><td>2</td><td>이서연</td><td>20231107</td><td>경영학과</td><td>seoyeon@hanbit.ac.kr</td><td><span class="ds-badge" data-tone="positive">정상</span></td></tr><tr class="tp-err"><td>3</td><td>박지후</td><td>20220388</td><td>국제통상학과</td><td><span class="tp-err-msg">jihu@hanbit</span></td><td><span class="ds-badge" data-tone="critical">이메일 확인</span></td></tr><tr><td>4</td><td>최하은</td><td>20240215</td><td>영어영문학과</td><td>haeun@hanbit.ac.kr</td><td><span class="ds-badge" data-tone="positive">정상</span></td></tr><tr class="tp-err"><td>5</td><td>정민재</td><td></td><td>컴퓨터공학과</td><td>minjae@hanbit.ac.kr</td><td><span class="ds-badge" data-tone="critical">학번 없음</span></td></tr><tr><td>6</td><td>한지아</td><td>20230561</td><td>컴퓨터공학과</td><td>jia@hanbit.ac.kr</td><td><span class="ds-badge" data-tone="positive">정상</span></td></tr></tbody></table></div></div></section>
     </div>
     <aside class="tp-aside-sticky">
-      <section class="ds-card tp-card" data-size="small"><span class="tp-h3">접수 요약</span><div class="tp-stack" style="gap: var(--ybm-space-x2)"><div class="tp-kv"><span>접수 인원</span><span class="tp-num">124명</span></div><div class="tp-kv"><span>1인 응시료</span><span class="tp-num">46,800원</span></div><div class="tp-kv"><span>단체 할인 10%</span><span class="tp-num">-580,320원</span></div></div><hr class="ds-divider"><div class="tp-total tp-between" style="align-items:baseline"><span class="tp-h4">합계</span><span class="tp-mid"><span class="tp-num">5,222,880원</span></span></div><div class="ds-field"><div class="ds-field__header"><label class="ds-field__label" for="ga-bill">결제 방법</label></div><button type="button" class="ds-select" data-size="medium" id="ga-bill" aria-haspopup="listbox" aria-expanded="false"><span class="ds-select__value">세금계산서 발행</span></button></div></section>
+      <section class="ds-card tp-card" data-variant="subtle" data-size="small"><span class="tp-h3">접수 요약</span><div class="tp-stack" style="gap: var(--ybm-space-x2)"><div class="tp-kv"><span>접수 인원</span><span class="tp-num">124명</span></div><div class="tp-kv"><span>1인 응시료</span><span class="tp-num">46,800원</span></div><div class="tp-kv"><span>단체 할인 10%</span><span class="tp-num">-580,320원</span></div></div><hr class="ds-divider"><div class="tp-total tp-between" style="align-items:baseline"><span class="tp-h4">합계</span><span class="tp-mid"><span class="tp-num">5,222,880원</span></span></div><div class="ds-field"><div class="ds-field__header"><label class="ds-field__label" for="ga-bill">결제 방법</label></div><button type="button" class="ds-select" data-size="medium" id="ga-bill" aria-haspopup="listbox" aria-expanded="false"><span class="ds-select__value">세금계산서 발행</span></button></div></section>
       <button type="button" class="ds-btn" data-variant="brandSolid" data-size="large" data-width="fill">다음: 확인하기<i class="ds-icon ds-icon--arrow-right" aria-hidden="true"></i></button>
       <p class="tp-caption" style="text-align:center">확인이 필요한 4명은 빼고 접수해요</p>
     </aside>

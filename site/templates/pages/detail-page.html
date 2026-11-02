@@ -25,8 +25,6 @@
   .tp-sub { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
   .tp-caption { font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); color: var(--ybm-color-fg-neutral-subtle); }
   .tp-num { font-variant-numeric: tabular-nums; }
-  /* 텍스트 링크는 보조 동작이라 본문(14)보다 한 단계 작게 */
-  .ds-link { font-size: var(--ybm-font-size-t03); line-height: var(--ybm-line-height-t03); }
   /* 표는 DS Table 그대로 쓴다 (2026-11-03 DS 개편). 아래는 표 위, 아래 줄만 */
   /* 표 위 한 줄: 왼쪽 개수, 오른쪽 고르기 칸과 찾기 (커뮤니티 게시판 btools) */
   .tp-ttools { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ybm-space-x3); }
@@ -44,15 +42,12 @@
   .tp-row { display: flex; align-items: center; gap: var(--ybm-space-x2); min-width: 0; }
   /* 줄 안에 놓인 고르기 칸은 글자만큼만 */
   :is(.tp-row, .tp-between, .tp-head__tools, .tp-sec-head, .tp-ttools__end) > .ds-select { width: auto; min-width: 140px; }
-  /* 도구 줄의 medium 세그먼트는 버튼, 고르기 칸과 같은 40 높이로 */
-  :is(.tp-row, .tp-head__tools, .tp-tool__bar) > .ds-segmented[data-size="medium"] { box-sizing: border-box; height: 40px; }
   .tp-between { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ybm-space-x2); }
   .tp-stack { display: flex; flex-direction: column; gap: var(--ybm-space-x1); min-width: 0; }
   .tp-stack > .ds-badge { align-self: flex-start; }
   .tp-g2, .tp-g3, .tp-g4, .tp-g5, .tp-g6 { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ybm-space-x3); }
   /* 카드 (레퍼런스 A): 흰 바탕 + 옅은 1px 선, 모서리 12 */
   .tp-card { min-width: 0; }
-  .tp-card.ds-card { gap: var(--ybm-space-x3); padding: var(--ybm-space-x4); border-radius: var(--ybm-shape-lg); box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-neutral-muted); }
   .tp-span2 { grid-column: auto; }
   .tp-kpi__label { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
   .tp-kpi__value { font-size: var(--ybm-font-size-t08); line-height: var(--ybm-line-height-t08); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
@@ -100,7 +95,7 @@
     .tp-h2 { font-size: var(--ybm-font-size-t07); line-height: var(--ybm-line-height-t07); }
     .tp-content { padding: var(--ybm-space-x6) var(--ybm-space-x6) var(--ybm-space-x12); gap: var(--ybm-space-x8); }
     .tp-panel { padding: var(--ybm-space-x6); }
-    .tp-card.ds-card { padding: var(--ybm-space-x5); gap: var(--ybm-space-x4); }
+    .tp-card.ds-card { --ds-card-padding: var(--ybm-space-x5); --ds-card-gap: var(--ybm-space-x4); }
     .tp-g2, .tp-g3, .tp-g4, .tp-g5, .tp-g6 { gap: var(--ybm-space-x4); }
     .tp-g2, .tp-g4, .tp-g6 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .tp-g3, .tp-g5 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -123,7 +118,6 @@
   .tp-meta-line { display: flex; flex-wrap: wrap; align-items: center; gap: var(--ybm-space-x2); color: var(--ybm-color-fg-neutral-muted); font-size: var(--ybm-font-size-t03); }
   .tp-meta-line .tp-sep { color: var(--ybm-color-stroke-neutral-weak); }
   .tp-line { display: grid; grid-template-columns: 56px minmax(0, 1fr) auto; gap: var(--ybm-space-x3); align-items: center; padding-block: var(--ybm-space-x3); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); }
-  .tp-line .ds-imageframe { border-radius: var(--ybm-shape-sm); }
   .tp-tl { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
   .tp-tl li { position: relative; display: grid; grid-template-columns: 16px minmax(0, 1fr); gap: var(--ybm-space-x3); padding-bottom: var(--ybm-space-x4); }
   .tp-tl li::before { content: ""; width: 10px; height: 10px; margin: 5px 3px 0; border-radius: 50%; background: var(--ybm-color-bg-brand-solid); }
@@ -133,13 +127,13 @@
 <body>
 <div class="tp-app">
 <header class="tp-head" style="flex-direction: column; align-items: stretch; padding-bottom: 0">
-  <div class="tp-between" style="align-items:flex-start"><div class="tp-stack" style="gap: var(--ybm-space-x2)"><a class="ds-link" href="#"><i class="ds-icon ds-icon--chevron-left ds-icon--sm" aria-hidden="true"></i>모든 주문</a><h1 class="tp-h1">#1001</h1><div class="tp-meta-line"><span>상품 5개</span><span class="tp-sep">·</span><span class="tp-row"><span class="ds-avatar" data-size="20" role="img" aria-label="와이비엠"><span class="ds-avatar__initials" aria-hidden="true">와</span></span>와이비엠</span><span class="tp-sep">·</span><span class="ds-badge" data-tone="warning">배송 준비 전</span><span class="tp-sep">·</span><span class="tp-row"><i class="ds-icon ds-icon--calendar ds-icon--sm" aria-hidden="true"></i>2026.10.31</span><span class="tp-sep">·</span><span class="tp-row"><i class="ds-icon ds-icon--triangle-alert ds-icon--sm" aria-hidden="true"></i>확인 필요</span></div></div><div class="tp-row"><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="small">환불</button><button type="button" class="ds-btn" data-variant="neutralSolid" data-size="small">배송 처리</button></div></div>
+  <div class="tp-between" style="align-items:flex-start"><div class="tp-stack" style="gap: var(--ybm-space-x2)"><a class="ds-link" href="#" data-size="small"><i class="ds-icon ds-icon--chevron-left ds-icon--sm" aria-hidden="true"></i>모든 주문</a><h1 class="tp-h1">#1001</h1><div class="tp-meta-line"><span>상품 5개</span><span class="tp-sep">·</span><span class="tp-row"><span class="ds-avatar" data-size="20" role="img" aria-label="와이비엠"><span class="ds-avatar__initials" aria-hidden="true">와</span></span>와이비엠</span><span class="tp-sep">·</span><span class="ds-badge" data-tone="warning">배송 준비 전</span><span class="tp-sep">·</span><span class="tp-row"><i class="ds-icon ds-icon--calendar ds-icon--sm" aria-hidden="true"></i>2026.10.31</span><span class="tp-sep">·</span><span class="tp-row"><i class="ds-icon ds-icon--triangle-alert ds-icon--sm" aria-hidden="true"></i>확인 필요</span></div></div><div class="tp-row"><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="small">환불</button><button type="button" class="ds-btn" data-variant="neutralSolid" data-size="small">배송 처리</button></div></div>
   <div class="ds-tabs" role="tablist" aria-label="주문 탭"><button type="button" class="ds-tabs__trigger" role="tab" aria-selected="true">상품</button><button type="button" class="ds-tabs__trigger" role="tab" aria-selected="false">결제</button><button type="button" class="ds-tabs__trigger" role="tab" aria-selected="false">배송</button><button type="button" class="ds-tabs__trigger" role="tab" aria-selected="false">기록</button></div>
 </header>
 <div class="tp-od">
   <main class="tp-content tp-wi__main">
     <section class="tp-sec"><div class="tp-sec-head"><div class="tp-sec-head__texts"><h2 class="tp-h2"><span class="tp-row">상품 <span class="ds-badge" data-tone="warning">배송 준비 전</span></span></h2></div><div class="tp-row"><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="small"><i class="ds-icon ds-icon--printer" aria-hidden="true"></i>송장 출력</button><button type="button" class="ds-btn" data-variant="neutralSolid" data-size="small">배송 처리</button></div></div><div><div class="tp-line"><div class="ds-imageframe" data-ratio="1:1" aria-hidden="true"><span class="tp-ph"><img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=240&q=70" alt="" loading="lazy"></span></div><div class="tp-stack"><span>TOEIC 실전 모의고사 1000제</span><span class="tp-caption tp-num">19,000원 × 2</span></div><span class="tp-num">38,000원</span></div><div class="tp-line"><div class="ds-imageframe" data-ratio="1:1" aria-hidden="true"><span class="tp-ph"><img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=240&q=70" alt="" loading="lazy"></span></div><div class="tp-stack"><span>단어 암기 카드</span><span class="tp-caption tp-num">12,000원 × 1</span></div><span class="tp-num">12,000원</span></div><div class="tp-line"><div class="ds-imageframe" data-ratio="1:1" aria-hidden="true"><span class="tp-ph"><img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=240&q=70" alt="" loading="lazy"></span></div><div class="tp-stack"><span>오답 노트</span><span class="tp-caption tp-num">3,000원 × 3</span></div><span class="tp-num">9,000원</span></div><div class="tp-line"><div class="ds-imageframe" data-ratio="1:1" aria-hidden="true"><span class="tp-ph"><img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=240&q=70" alt="" loading="lazy"></span></div><div class="tp-stack"><span>형광펜 5색 세트</span><span class="tp-caption tp-num">4,500원 × 1</span></div><span class="tp-num">4,500원</span></div><div class="tp-line"><div class="ds-imageframe" data-ratio="1:1" aria-hidden="true"><span class="tp-ph"><img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=240&q=70" alt="" loading="lazy"></span></div><div class="tp-stack"><span>독서대</span><span class="tp-caption tp-num">28,000원 × 1</span></div><span class="tp-num">28,000원</span></div></div></section>
-    <section class="tp-sec"><div class="tp-sec-head"><div class="tp-sec-head__texts"><h2 class="tp-h2">결제</h2></div><div class="tp-row"><span class="ds-badge" data-tone="positive">결제 완료</span></div></div><section class="ds-card tp-card" data-size="small"><div class="tp-between"><span class="tp-sub">상품 금액</span><span class="tp-num">89,000원</span></div><div class="tp-between"><span class="tp-sub">배송비</span><span class="tp-num">3,000원</span></div><div class="tp-between"><span class="tp-sub">할인</span><span class="tp-num">-2,500원</span></div><hr class="ds-divider"><div class="tp-between"><b>합계</b><b class="tp-num">89,500원</b></div></section></section>
+    <section class="tp-sec"><div class="tp-sec-head"><div class="tp-sec-head__texts"><h2 class="tp-h2">결제</h2></div><div class="tp-row"><span class="ds-badge" data-tone="positive">결제 완료</span></div></div><section class="ds-card tp-card" data-variant="subtle" data-size="small"><div class="tp-between"><span class="tp-sub">상품 금액</span><span class="tp-num">89,000원</span></div><div class="tp-between"><span class="tp-sub">배송비</span><span class="tp-num">3,000원</span></div><div class="tp-between"><span class="tp-sub">할인</span><span class="tp-num">-2,500원</span></div><hr class="ds-divider"><div class="tp-between"><b>합계</b><b class="tp-num">89,500원</b></div></section></section>
     <section class="tp-sec"><div class="tp-sec-head"><div class="tp-sec-head__texts"><h2 class="tp-h2">활동</h2></div></div><ol class="tp-tl"><li><div class="tp-stack"><span class="tp-h4">주문 접수</span><span class="tp-sub">와이비엠 님이 주문했어요</span><span class="tp-caption">10.31 오후 2:04</span></div></li><li><div class="tp-stack"><span class="tp-h4">결제 완료</span><span class="tp-sub">카드 결제 89,500원</span><span class="tp-caption">10.31 오후 2:05</span></div></li><li><div class="tp-stack"><span class="tp-h4">메모 추가</span><span class="tp-sub">"선물 포장 부탁드려요"</span><span class="tp-caption">10.31 오후 2:06</span></div></li><li><div class="tp-stack"><span class="tp-h4">재고 확인 필요</span><span class="tp-sub">독서대 재고 1개 남음</span><span class="tp-caption">10.31 오후 4:30</span></div></li></ol></section>
   </main>
   <aside class="tp-panel">

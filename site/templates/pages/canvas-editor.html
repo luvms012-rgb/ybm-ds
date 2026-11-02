@@ -25,8 +25,6 @@
   .tp-sub { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
   .tp-caption { font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); color: var(--ybm-color-fg-neutral-subtle); }
   .tp-num { font-variant-numeric: tabular-nums; }
-  /* 텍스트 링크는 보조 동작이라 본문(14)보다 한 단계 작게 */
-  .ds-link { font-size: var(--ybm-font-size-t03); line-height: var(--ybm-line-height-t03); }
   /* 표는 DS Table 그대로 쓴다 (2026-11-03 DS 개편). 아래는 표 위, 아래 줄만 */
   /* 표 위 한 줄: 왼쪽 개수, 오른쪽 고르기 칸과 찾기 (커뮤니티 게시판 btools) */
   .tp-ttools { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ybm-space-x3); }
@@ -44,15 +42,12 @@
   .tp-row { display: flex; align-items: center; gap: var(--ybm-space-x2); min-width: 0; }
   /* 줄 안에 놓인 고르기 칸은 글자만큼만 */
   :is(.tp-row, .tp-between, .tp-head__tools, .tp-sec-head, .tp-ttools__end) > .ds-select { width: auto; min-width: 140px; }
-  /* 도구 줄의 medium 세그먼트는 버튼, 고르기 칸과 같은 40 높이로 */
-  :is(.tp-row, .tp-head__tools, .tp-tool__bar) > .ds-segmented[data-size="medium"] { box-sizing: border-box; height: 40px; }
   .tp-between { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ybm-space-x2); }
   .tp-stack { display: flex; flex-direction: column; gap: var(--ybm-space-x1); min-width: 0; }
   .tp-stack > .ds-badge { align-self: flex-start; }
   .tp-g2, .tp-g3, .tp-g4, .tp-g5, .tp-g6 { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ybm-space-x3); }
   /* 카드 (레퍼런스 A): 흰 바탕 + 옅은 1px 선, 모서리 12 */
   .tp-card { min-width: 0; }
-  .tp-card.ds-card { gap: var(--ybm-space-x3); padding: var(--ybm-space-x4); border-radius: var(--ybm-shape-lg); box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-neutral-muted); }
   .tp-span2 { grid-column: auto; }
   .tp-kpi__label { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
   .tp-kpi__value { font-size: var(--ybm-font-size-t08); line-height: var(--ybm-line-height-t08); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
@@ -100,7 +95,7 @@
     .tp-h2 { font-size: var(--ybm-font-size-t07); line-height: var(--ybm-line-height-t07); }
     .tp-content { padding: var(--ybm-space-x6) var(--ybm-space-x6) var(--ybm-space-x12); gap: var(--ybm-space-x8); }
     .tp-panel { padding: var(--ybm-space-x6); }
-    .tp-card.ds-card { padding: var(--ybm-space-x5); gap: var(--ybm-space-x4); }
+    .tp-card.ds-card { --ds-card-padding: var(--ybm-space-x5); --ds-card-gap: var(--ybm-space-x4); }
     .tp-g2, .tp-g3, .tp-g4, .tp-g5, .tp-g6 { gap: var(--ybm-space-x4); }
     .tp-g2, .tp-g4, .tp-g6 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .tp-g3, .tp-g5 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -144,7 +139,7 @@
   .tp-doc-tab[aria-selected="true"] { background: var(--ybm-color-bg-neutral); color: var(--ybm-color-fg-neutral); font-weight: var(--ybm-font-weight-semibold); }
   .tp-stage { position: relative; flex: 1 1 auto; display: grid; place-items: center; min-height: 0; overflow: auto; background: var(--ybm-color-bg-neutral-subtle); background-image: radial-gradient(var(--ybm-color-stroke-neutral-muted) 1px, transparent 1px); background-size: 16px 16px; }
   .tp-artboard { position: relative; width: 340px; aspect-ratio: 3 / 4.4; background: var(--ybm-color-bg-layer-default); box-shadow: 0 8px 32px rgb(0 0 0 / .16); }
-  .tp-artboard .ds-imageframe { position: absolute; inset: 22% 8% 16%; width: auto; height: auto; aspect-ratio: auto; border-radius: 0; }
+  .tp-artboard .ds-imageframe { position: absolute; inset: 22% 8% 16%; width: auto; height: auto; aspect-ratio: auto; }
   .tp-artboard__t { position: absolute; left: 8%; top: 4%; right: 8%; font-size: 26px; line-height: 1.05; font-weight: 800; letter-spacing: -0.03em; }
   .tp-artboard__s { position: absolute; left: 8%; bottom: 6%; right: 8%; font-size: 12px; color: var(--ybm-color-fg-neutral-muted); }
   .tp-sel { position: absolute; inset: 22% 8% 16%; outline: 2px solid var(--ybm-color-stroke-brand-solid); }
@@ -158,7 +153,7 @@
 <div class="tp-tool__body">
   <aside class="tp-pane tp-pane--left" aria-label="레이어와 에셋"><div class="ds-segmented" role="group" aria-label="왼쪽 패널" data-size="small"><button type="button" class="ds-segmented__item" aria-pressed="true">레이어</button><button type="button" class="ds-segmented__item" aria-pressed="false">에셋</button></div><ul class="tp-tree" role="tree"><li role="treeitem" aria-expanded="true"><span style="--d:0"><span class="tp-tw"><i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i></span><i class="ds-icon ds-icon--folder-open ds-icon--sm" aria-hidden="true"></i>글자</span></li><li role="treeitem"><span style="--d:1"><span class="tp-tw"></span><i class="ds-icon ds-icon--type ds-icon--sm" aria-hidden="true"></i>제목</span></li><li role="treeitem"><span style="--d:1"><span class="tp-tw"></span><i class="ds-icon ds-icon--type ds-icon--sm" aria-hidden="true"></i>날짜와 장소</span></li><li role="treeitem" aria-expanded="true"><span style="--d:0"><span class="tp-tw"><i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i></span><i class="ds-icon ds-icon--folder-open ds-icon--sm" aria-hidden="true"></i>이미지</span></li><li role="treeitem"><span style="--d:1" aria-selected="true"><span class="tp-tw"></span><i class="ds-icon ds-icon--image ds-icon--sm" aria-hidden="true"></i>메인 사진</span></li><li role="treeitem"><span style="--d:1"><span class="tp-tw"></span><i class="ds-icon ds-icon--image ds-icon--sm" aria-hidden="true"></i>배경 질감</span></li><li role="treeitem" aria-expanded="false"><span style="--d:0"><span class="tp-tw"><i class="ds-icon ds-icon--chevron-right ds-icon--sm" aria-hidden="true"></i></span><i class="ds-icon ds-icon--folder ds-icon--sm" aria-hidden="true"></i>도형</span></li><li role="treeitem"><span style="--d:0"><span class="tp-tw"></span><i class="ds-icon ds-icon--layers ds-icon--sm" aria-hidden="true"></i>배경</span></li></ul></aside>
   <main class="tp-pane tp-pane--main" style="position: relative">
-    <div class="tp-stage"><div class="tp-artboard" aria-label="포스터 화면"><span class="tp-artboard__t">가을 특강<br>말하기 집중반</span><div class="ds-imageframe" data-ratio="4:3" aria-hidden="true"><span class="tp-ph"><img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1000&q=70" alt="" loading="lazy"></span></div><span class="tp-sel"><i style="left:-5px;top:-5px"></i><i style="right:-5px;top:-5px"></i><i style="left:-5px;bottom:-5px"></i><i style="right:-5px;bottom:-5px"></i></span><span class="tp-artboard__s">11월 12일 토요일 오후 2시 · 종로 캠퍼스 5층</span></div>
+    <div class="tp-stage"><div class="tp-artboard" aria-label="포스터 화면"><span class="tp-artboard__t">가을 특강<br>말하기 집중반</span><div class="ds-imageframe" data-ratio="4:3" data-radius="none" aria-hidden="true"><span class="tp-ph"><img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1000&q=70" alt="" loading="lazy"></span></div><span class="tp-sel"><i style="left:-5px;top:-5px"></i><i style="right:-5px;top:-5px"></i><i style="left:-5px;bottom:-5px"></i><i style="right:-5px;bottom:-5px"></i></span><span class="tp-artboard__s">11월 12일 토요일 오후 2시 · 종로 캠퍼스 5층</span></div>
     <div class="tp-zoom" role="toolbar" aria-label="보기 도구"><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" aria-label="선택"><i class="ds-icon ds-icon--mouse-pointer-2" aria-hidden="true"></i></button><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" aria-label="이동"><i class="ds-icon ds-icon--hand" aria-hidden="true"></i></button><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" aria-label="글자"><i class="ds-icon ds-icon--type" aria-hidden="true"></i></button><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" aria-label="도형"><i class="ds-icon ds-icon--square" aria-hidden="true"></i></button><span style="width:1px;height:20px;background:var(--ybm-color-stroke-neutral-muted)"></span><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" aria-label="축소"><i class="ds-icon ds-icon--zoom-out" aria-hidden="true"></i></button><span class="tp-caption tp-num" style="min-width:40px;text-align:center">100%</span><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" aria-label="확대"><i class="ds-icon ds-icon--zoom-in" aria-hidden="true"></i></button></div></div>
   </main>
   <aside class="tp-pane tp-pane--right" aria-label="속성">

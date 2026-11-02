@@ -21,7 +21,7 @@ const CSS = FRAME_CSS + `
 `;
 // 표지 자리: 회색 한 가지(여러 색을 쓰지 않는다)
 const COVER = { '처음 만나는 생성형 AI 업무 활용': 0, '엑셀 함수와 피벗 한 번에': 1, '데이터로 말하는 보고서 쓰기': 2, '개인정보 보호 교육': 3, '팀장의 1:1 대화법': 4, '설득하는 프레젠테이션 구조 잡기': 5, '비즈니스 영어 이메일 바로 쓰기': 6, '파이썬으로 하는 업무 자동화': 7, '직장 내 괴롭힘 예방 교육': 8, '고객의 말을 듣는 인터뷰': 9, '프로젝트 일정과 위험 관리': 10, '일본어 업무 회화 첫걸음': 11 };
-const cover = (i, ratio = '16:9', b = '', title = '') => `<div class="tp-cover">${thumb(ratio, '', K.photo('study', title in COVER ? COVER[title] : i, 720))}${b}</div>`;
+const cover = (i, ratio = '16:9', b = '', title = '') => `<div class="tp-cover">${thumb(ratio, '', K.photo('study', title in COVER ? COVER[title] : i, 720), 'lg')}${b}</div>`;
 const star = (r, n) => `<span class="tp-star">${icon('star-solid')}${r} <span class="tp-caption">(${n})</span></span>`;
 const course = (i, title, meta, { b = '', r = '4.8', n = '1,204', prog = -1 } = {}) => `<a class="tp-course" href="#">${cover(i, '16:9', b, title)}<div class="tp-stack" style="gap: var(--ybm-space-x1)"><span class="tp-course__title">${title}</span><div class="tp-course__meta">${tags(meta)}${r ? star(r, n) : ''}</div>${prog >= 0 ? progress(prog, { label: title + ' 진도' }) : ''}</div></a>`;
 

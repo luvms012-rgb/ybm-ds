@@ -47,7 +47,6 @@ const CSS = FRAME_CSS + `
   .tp-item:last-child { padding-bottom: 0; }
   .tp-item__chk { grid-area: chk; padding-top: 2px; }
   .tp-item__img { grid-area: img; }
-  .tp-item__img .ds-imageframe { border-radius: var(--ybm-shape-md); }
   .tp-item__info { grid-area: info; display: flex; flex-direction: column; gap: var(--ybm-space-x1); min-width: 0; }
   .tp-item__name { display: -webkit-box; overflow: hidden; -webkit-line-clamp: 2; -webkit-box-orient: vertical; font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral); text-decoration: none; }
   .tp-item__opt { font-size: var(--ybm-font-size-t03); line-height: var(--ybm-line-height-t03); color: var(--ybm-color-fg-neutral-subtle); }
@@ -91,7 +90,6 @@ const CSS = FRAME_CSS + `
   .tp-recs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--ybm-space-x6) var(--ybm-space-x4); }
   @media (min-width: 768px) { .tp-recs { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
   .tp-rec { display: flex; flex-direction: column; gap: var(--ybm-space-x2); min-width: 0; }
-  .tp-rec .ds-imageframe { border-radius: var(--ybm-shape-lg); }
   .tp-rec__name { display: -webkit-box; overflow: hidden; -webkit-line-clamp: 2; -webkit-box-orient: vertical; font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral); text-decoration: none; }
   /* 할인 없는 상품도 가격 줄 높이를 같게, 담기 버튼은 카드 맨 아래 한 줄로 */
   .tp-rec .tp-price { min-height: 46px; justify-content: flex-end; }
@@ -103,12 +101,12 @@ const qty = (n, name, off = false) => `<div class="ds-quantity" data-size="small
 const price = (now, was, n) => `<div class="tp-price">${was ? `<span class="tp-price__was tp-num">${(was * n).toLocaleString('ko-KR')}원</span>` : ''}<span class="tp-price__now">${was ? `<span class="tp-off tp-num">${Math.round((1 - now / was) * 100)}%</span>` : ''}${won(now * n)}</span></div>`;
 const item = ([name, opt, img, now, was, n, soldout]) => `<div class="tp-item"${soldout ? ' data-soldout' : ''}>
   <span class="tp-item__chk">${checkOnly(name + ' 고르기', !soldout)}</span>
-  <a class="tp-item__img" href="#" tabindex="-1">${thumb('1:1', '', K.photo('product', img, 240))}</a>
+  <a class="tp-item__img" href="#" tabindex="-1">${thumb('1:1', '', K.photo('product', img, 240), 'md')}</a>
   <div class="tp-item__info"><a class="tp-item__name" href="#">${name}</a><span class="tp-item__opt">${opt}</span>${soldout ? `<span>${badge('품절', 'critical')}</span>` : btn('옵션 바꾸기', { variant: 'neutralOutline', size: 'xsmall' })}</div>
   <div class="tp-item__ctl">${qty(n, name, soldout)}${price(now, was, n)}</div>
   <span class="tp-item__del">${iconBtn('x', name + ' 빼기', { size: 'xsmall' })}</span>
 </div>`;
-const rec = ([name, img, now, was]) => `<article class="tp-rec"><a href="#" tabindex="-1">${thumb('1:1', '', K.photo('product', img, 480))}</a><a class="tp-rec__name" href="#">${name}</a>${price(now, was, 1).replace('class="tp-price"', 'class="tp-price" style="align-items:flex-start"')}${btn('담기', { variant: 'neutralWeak', ic: 'shopping-cart', fill: true })}</article>`;
+const rec = ([name, img, now, was]) => `<article class="tp-rec"><a href="#" tabindex="-1">${thumb('1:1', '', K.photo('product', img, 480), 'lg')}</a><a class="tp-rec__name" href="#">${name}</a>${price(now, was, 1).replace('class="tp-price"', 'class="tp-price" style="align-items:flex-start"')}${btn('담기', { variant: 'neutralWeak', ic: 'shopping-cart', fill: true })}</article>`;
 const RECS = [['가벼운 러닝화', 3, 79000, 99000], ['즉석 카메라 필름 20장', 2, 24000, 0], ['원두 커피 200g', 5, 16900, 18900], ['가죽 시계줄 20mm', 0, 19800, 0]];
 const NOTES = ['장바구니에 담은 상품은 30일 동안 보관해요.', '쿠폰과 적립금은 주문 결제 단계에서 쓸 수 있어요.', '상품 가격과 할인은 바뀔 수 있어서, 결제할 때의 금액으로 주문돼요.'];
 

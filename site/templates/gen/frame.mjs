@@ -42,7 +42,6 @@ export const FRAME_CSS = `
   .tp-stats > * { display: flex; flex-direction: column; gap: var(--ybm-space-x1); min-width: 0; }
   @media (min-width: 768px) { .tp-stats { grid-template-columns: repeat(var(--n, 4), minmax(0, 1fr)); } .tp-stats > * + * { padding-inline-start: var(--ybm-space-x4); box-shadow: inset 1px 0 0 var(--ybm-color-stroke-neutral-muted); } }
   .tp-thumb-sm { flex: none; width: 96px; }
-  .tp-thumb-sm .ds-imageframe, .tp-course .ds-imageframe { border-radius: var(--ybm-shape-lg); }
   .tp-aside-sticky { display: flex; flex-direction: column; gap: var(--ybm-space-x3); }
   @media (min-width: 1024px) { .tp-aside-sticky { position: sticky; top: calc(var(--ybm-space-x16) + var(--ybm-space-x4)); } }
 `;

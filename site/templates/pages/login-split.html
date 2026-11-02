@@ -25,8 +25,6 @@
   .tp-sub { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
   .tp-caption { font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); color: var(--ybm-color-fg-neutral-subtle); }
   .tp-num { font-variant-numeric: tabular-nums; }
-  /* 텍스트 링크는 보조 동작이라 본문(14)보다 한 단계 작게 */
-  .ds-link { font-size: var(--ybm-font-size-t03); line-height: var(--ybm-line-height-t03); }
   /* 표는 DS Table 그대로 쓴다 (2026-11-03 DS 개편). 아래는 표 위, 아래 줄만 */
   /* 표 위 한 줄: 왼쪽 개수, 오른쪽 고르기 칸과 찾기 (커뮤니티 게시판 btools) */
   .tp-ttools { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ybm-space-x3); }
@@ -44,15 +42,12 @@
   .tp-row { display: flex; align-items: center; gap: var(--ybm-space-x2); min-width: 0; }
   /* 줄 안에 놓인 고르기 칸은 글자만큼만 */
   :is(.tp-row, .tp-between, .tp-head__tools, .tp-sec-head, .tp-ttools__end) > .ds-select { width: auto; min-width: 140px; }
-  /* 도구 줄의 medium 세그먼트는 버튼, 고르기 칸과 같은 40 높이로 */
-  :is(.tp-row, .tp-head__tools, .tp-tool__bar) > .ds-segmented[data-size="medium"] { box-sizing: border-box; height: 40px; }
   .tp-between { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ybm-space-x2); }
   .tp-stack { display: flex; flex-direction: column; gap: var(--ybm-space-x1); min-width: 0; }
   .tp-stack > .ds-badge { align-self: flex-start; }
   .tp-g2, .tp-g3, .tp-g4, .tp-g5, .tp-g6 { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ybm-space-x3); }
   /* 카드 (레퍼런스 A): 흰 바탕 + 옅은 1px 선, 모서리 12 */
   .tp-card { min-width: 0; }
-  .tp-card.ds-card { gap: var(--ybm-space-x3); padding: var(--ybm-space-x4); border-radius: var(--ybm-shape-lg); box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-neutral-muted); }
   .tp-span2 { grid-column: auto; }
   .tp-kpi__label { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
   .tp-kpi__value { font-size: var(--ybm-font-size-t08); line-height: var(--ybm-line-height-t08); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
@@ -100,7 +95,7 @@
     .tp-h2 { font-size: var(--ybm-font-size-t07); line-height: var(--ybm-line-height-t07); }
     .tp-content { padding: var(--ybm-space-x6) var(--ybm-space-x6) var(--ybm-space-x12); gap: var(--ybm-space-x8); }
     .tp-panel { padding: var(--ybm-space-x6); }
-    .tp-card.ds-card { padding: var(--ybm-space-x5); gap: var(--ybm-space-x4); }
+    .tp-card.ds-card { --ds-card-padding: var(--ybm-space-x5); --ds-card-gap: var(--ybm-space-x4); }
     .tp-g2, .tp-g3, .tp-g4, .tp-g5, .tp-g6 { gap: var(--ybm-space-x4); }
     .tp-g2, .tp-g4, .tp-g6 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .tp-g3, .tp-g5 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -135,7 +130,7 @@
   @media (min-width: 768px) { .tp-split-card { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
   .tp-split-card__form { display: flex; flex-direction: column; gap: var(--ybm-space-x6); padding: var(--ybm-space-x8) var(--ybm-space-x6); }
   .tp-split-card__media { display: none; }
-  @media (min-width: 768px) { .tp-split-card__media { display: block; } .tp-split-card__media .ds-imageframe { height: 100%; aspect-ratio: auto; border-radius: 0; } }
+  @media (min-width: 768px) { .tp-split-card__media { display: block; } .tp-split-card__media .ds-imageframe { height: 100%; aspect-ratio: auto; } }
   .tp-split-card__inner { display: flex; flex-direction: column; gap: var(--ybm-space-x5); width: min(100%, 340px); margin: auto; }
 </style>
 </head>
@@ -146,16 +141,16 @@
       <div class="tp-auth__brand" style="align-self:flex-start"><span class="tp-logo">로고</span></div>
       <div class="tp-split-card__inner">
         <div class="tp-auth__title" style="text-align:left"><h1 class="tp-h2">다시 오셨네요</h1><p class="tp-sub">서비스 계정으로 로그인하세요</p></div>
-        <div class="tp-auth__fields"><div class="ds-field"><div class="ds-field__header"><label class="ds-field__label" for="ls-mail">이메일</label></div><div class="ds-input" data-variant="outline" data-size="large"><input class="ds-input__control" id="ls-mail" placeholder="name@company.com" type="email"></div></div><div class="ds-field"><div class="ds-field__header tp-pw-head"><label class="ds-field__label" for="ls-pw">비밀번호</label><a class="ds-link" href="#">비밀번호를 잊으셨나요?</a></div><div class="ds-input" data-variant="outline" data-size="large"><input class="ds-input__control" id="ls-pw" placeholder="비밀번호를 입력하세요" type="password"></div></div></div>
+        <div class="tp-auth__fields"><div class="ds-field"><div class="ds-field__header"><label class="ds-field__label" for="ls-mail">이메일</label></div><div class="ds-input" data-variant="outline" data-size="large"><input class="ds-input__control" id="ls-mail" placeholder="name@company.com" type="email"></div></div><div class="ds-field"><div class="ds-field__header tp-pw-head"><label class="ds-field__label" for="ls-pw">비밀번호</label><a class="ds-link" href="#" data-size="small">비밀번호를 잊으셨나요?</a></div><div class="ds-input" data-variant="outline" data-size="large"><input class="ds-input__control" id="ls-pw" placeholder="비밀번호를 입력하세요" type="password"></div></div></div>
         <button type="button" class="ds-btn" data-variant="brandSolid" data-size="large" data-width="fill">로그인</button>
         <div class="tp-or">또는</div>
         <div class="tp-auth__alt"><button type="button" class="ds-btn" data-variant="neutralOutline" data-size="large" data-width="fill"><i class="ds-icon ds-icon--message-circle" aria-hidden="true"></i>카카오</button><button type="button" class="ds-btn" data-variant="neutralOutline" data-size="large" data-width="fill"><i class="ds-icon ds-icon--globe" aria-hidden="true"></i>네이버</button></div>
       </div>
-      <p class="tp-sub">계정이 없으신가요? <a class="ds-link" href="#">가입하기</a></p>
+      <p class="tp-sub">계정이 없으신가요? <a class="ds-link" href="#" data-size="small">가입하기</a></p>
     </div>
-    <div class="tp-split-card__media"><div class="ds-imageframe" data-ratio="3:4" aria-hidden="true"><span class="tp-ph"><img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1000&q=70" alt="" loading="lazy"></span></div></div>
+    <div class="tp-split-card__media"><div class="ds-imageframe" data-ratio="3:4" data-radius="none" aria-hidden="true"><span class="tp-ph"><img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1000&q=70" alt="" loading="lazy"></span></div></div>
   </div>
-  <p class="tp-caption tp-legal">계속하면 <a class="ds-link" href="#">이용약관</a>과 <a class="ds-link" href="#">개인정보 처리방침</a>에 동의한 것으로 봐요.</p>
+  <p class="tp-caption tp-legal">계속하면 <a class="ds-link" href="#" data-size="small">이용약관</a>과 <a class="ds-link" href="#" data-size="small">개인정보 처리방침</a>에 동의한 것으로 봐요.</p>
 </div></main>
 </body>
 </html>

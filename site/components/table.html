@@ -113,7 +113,7 @@
 <header class="site-head">
   <h1 class="site-h1">Table</h1>
   <p class="site-lead">여러 항목을 같은 기준으로 비교해 보여 주는 표 컴포넌트입니다.</p>
-  <div class="site-meta"><a class="ds-btn" data-variant="neutralWeak" data-size="xsmall" href="https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=2481-2137" target="_blank" rel="noopener"><i class="ds-icon site-i--figma ds-icon--sm" aria-hidden="true"></i>Figma</a><a class="ds-btn" data-variant="neutralWeak" data-size="xsmall" href="https://github.com/luvms012-rgb/ybm-ds/blob/main/dist/components.css#L2414-L2486" target="_blank" rel="noopener"><i class="ds-icon site-i--github ds-icon--sm" aria-hidden="true"></i>코드</a></div>
+  <div class="site-meta"><a class="ds-btn" data-variant="neutralWeak" data-size="xsmall" href="https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=2481-2137" target="_blank" rel="noopener"><i class="ds-icon site-i--figma ds-icon--sm" aria-hidden="true"></i>Figma</a><a class="ds-btn" data-variant="neutralWeak" data-size="xsmall" href="https://github.com/luvms012-rgb/ybm-ds/blob/main/dist/components.css#L2426-L2498" target="_blank" rel="noopener"><i class="ds-icon site-i--github ds-icon--sm" aria-hidden="true"></i>코드</a></div>
 <div class="site-toc-select"><button type="button" class="ds-select" data-size="medium" aria-haspopup="listbox" aria-expanded="false" aria-controls="site-toc-list" aria-label="이 페이지 목차" data-site-toc><span class="ds-select__value">사용법</span></button><div class="ds-select-content site-toc-list" id="site-toc-list" role="listbox" data-size="medium" hidden><ul class="ds-select-list"><li><button type="button" class="ds-select-item" role="option" data-site-toc-go="usage" aria-selected="true"><span class="ds-select-item__body"><span class="ds-select-item__label">사용법</span></span></button></li><li><button type="button" class="ds-select-item" role="option" data-site-toc-go="props"><span class="ds-select-item__body"><span class="ds-select-item__label">속성</span></span></button></li><li><button type="button" class="ds-select-item" role="option" data-site-toc-go="vars"><span class="ds-select-item__body"><span class="ds-select-item__label">CSS 변수</span></span></button></li><li><button type="button" class="ds-select-item" role="option" data-site-toc-go="guide"><span class="ds-select-item__body"><span class="ds-select-item__label">사용 지침</span></span></button></li><li><button type="button" class="ds-select-item" role="option" data-site-toc-go="examples"><span class="ds-select-item__body"><span class="ds-select-item__label">예시</span></span></button></li><li><button type="button" class="ds-select-item" role="option" data-site-toc-go="spec"><span class="ds-select-item__body"><span class="ds-select-item__label">규격</span></span></button></li></ul></div></div>
 </header>
 <div class="site-tile__thumb site-cover" data-site-fit-max="2" aria-hidden="true"><div class="site-tile__inner" inert><div class="pv-stage"><div class="ds-table-wrap" style="width:520px"><table class="ds-table"><thead><tr><th scope="col" data-align="center" style="width:64px">번호</th><th scope="col">제목</th><th scope="col" data-align="center" style="width:112px">등록일</th></tr></thead><tbody><tr><td data-align="center">3</td><td>서비스 이용약관 변경 안내</td><td data-align="center">2026.11.02</td></tr><tr><td data-align="center">2</td><td>연휴 배송 일정 안내</td><td data-align="center">2026.10.20</td></tr><tr><td data-align="center">1</td><td>앱 업데이트 소식</td><td data-align="center">2026.10.08</td></tr></tbody></table></div></div></div></div>
@@ -164,6 +164,20 @@
         </tbody>
       </table>
     </div>
+  </div>
+  <div class="pv-stage">
+    <div class="ds-table-wrap">
+      <table class="ds-table">
+        <thead><tr><th scope="col"><label class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control" aria-label="모든 행 선택"></label></th><th scope="col">주문</th><th scope="col">상태</th><th scope="col" data-align="end">금액</th></tr></thead>
+        <tbody>
+          <tr class="ds-table__group"><td colspan="4">오늘</td></tr>
+          <tr><td><label class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control" aria-label="주문 1042 선택"></label></td><td><span class="ds-table__stack"><span>무선 이어폰 외 1건</span><span>주문 1042</span></span></td><td><span class="ds-badge" data-tone="informative">배송 준비</span></td><td data-align="end">128,000원</td></tr>
+          <tr><td><label class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control" aria-label="주문 1041 선택" checked></label></td><td><span class="ds-table__stack"><span>텀블러 500ml</span><span>주문 1041</span></span></td><td><span class="ds-badge" data-tone="positive">배송 중</span></td><td data-align="end">24,900원</td></tr>
+          <tr class="ds-table__group"><td colspan="4">어제</td></tr>
+          <tr><td><label class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control" aria-label="주문 1038 선택"></label></td><td><span class="ds-table__stack"><span>여행용 파우치 세트</span><span>주문 1038</span></span></td><td><span class="ds-badge">배송 완료</span></td><td data-align="end">39,000원</td></tr>
+        </tbody>
+      </table>
+    </div>
   </div></div>
   <div class="site-example__code" hidden><figure class="ds-codeblock">
   <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">html</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
@@ -174,6 +188,19 @@
       &lt;tr data-interactive&gt;&lt;td data-align=&quot;center&quot;&gt;12&lt;/td&gt;&lt;td&gt;11월 배송 일정 안내&lt;/td&gt;&lt;td data-align=&quot;center&quot;&gt;2026.10.22&lt;/td&gt;&lt;/tr&gt;
       &lt;tr data-interactive aria-selected=&quot;true&quot;&gt;&lt;td data-align=&quot;center&quot;&gt;11&lt;/td&gt;&lt;td&gt;추가 할인 이벤트 공지&lt;/td&gt;&lt;td data-align=&quot;center&quot;&gt;2026.10.18&lt;/td&gt;&lt;/tr&gt;
       &lt;tr data-interactive&gt;&lt;td data-align=&quot;center&quot;&gt;10&lt;/td&gt;&lt;td&gt;영수증 발급 방법 변경 안내&lt;/td&gt;&lt;td data-align=&quot;center&quot;&gt;2026.10.10&lt;/td&gt;&lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;ds-table-wrap&quot;&gt;
+  &lt;table class=&quot;ds-table&quot;&gt;
+    &lt;thead&gt;&lt;tr&gt;&lt;th scope=&quot;col&quot;&gt;&lt;label class=&quot;ds-checkbox&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;ds-checkbox__control&quot; aria-label=&quot;모든 행 선택&quot;&gt;&lt;/label&gt;&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;주문&lt;/th&gt;&lt;th scope=&quot;col&quot;&gt;상태&lt;/th&gt;&lt;th scope=&quot;col&quot; data-align=&quot;end&quot;&gt;금액&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+    &lt;tbody&gt;
+      &lt;tr class=&quot;ds-table__group&quot;&gt;&lt;td colspan=&quot;4&quot;&gt;오늘&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;td&gt;&lt;label class=&quot;ds-checkbox&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;ds-checkbox__control&quot; aria-label=&quot;주문 1042 선택&quot;&gt;&lt;/label&gt;&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;ds-table__stack&quot;&gt;&lt;span&gt;무선 이어폰 외 1건&lt;/span&gt;&lt;span&gt;주문 1042&lt;/span&gt;&lt;/span&gt;&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;ds-badge&quot; data-tone=&quot;informative&quot;&gt;배송 준비&lt;/span&gt;&lt;/td&gt;&lt;td data-align=&quot;end&quot;&gt;128,000원&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;td&gt;&lt;label class=&quot;ds-checkbox&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;ds-checkbox__control&quot; aria-label=&quot;주문 1041 선택&quot; checked&gt;&lt;/label&gt;&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;ds-table__stack&quot;&gt;&lt;span&gt;텀블러 500ml&lt;/span&gt;&lt;span&gt;주문 1041&lt;/span&gt;&lt;/span&gt;&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;ds-badge&quot; data-tone=&quot;positive&quot;&gt;배송 중&lt;/span&gt;&lt;/td&gt;&lt;td data-align=&quot;end&quot;&gt;24,900원&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr class=&quot;ds-table__group&quot;&gt;&lt;td colspan=&quot;4&quot;&gt;어제&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;td&gt;&lt;label class=&quot;ds-checkbox&quot;&gt;&lt;input type=&quot;checkbox&quot; class=&quot;ds-checkbox__control&quot; aria-label=&quot;주문 1038 선택&quot;&gt;&lt;/label&gt;&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;ds-table__stack&quot;&gt;&lt;span&gt;여행용 파우치 세트&lt;/span&gt;&lt;span&gt;주문 1038&lt;/span&gt;&lt;/span&gt;&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;ds-badge&quot;&gt;배송 완료&lt;/span&gt;&lt;/td&gt;&lt;td data-align=&quot;end&quot;&gt;39,000원&lt;/td&gt;&lt;/tr&gt;
     &lt;/tbody&gt;
   &lt;/table&gt;
 &lt;/div&gt;</code></pre>

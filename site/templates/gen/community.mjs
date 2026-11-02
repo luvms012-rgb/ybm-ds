@@ -36,7 +36,6 @@ const CSS = FRAME_CSS + `
   .tp-post--thumb { grid-template-columns: minmax(0, 1fr) 88px; }
   @media (min-width: 768px) { .tp-post--thumb { grid-template-columns: minmax(0, 1fr) 120px; } }
   .tp-post__body { display: flex; flex-direction: column; gap: var(--ybm-space-x2); min-width: 0; }
-  .tp-post__thumb .ds-imageframe { border-radius: var(--ybm-shape-lg); }
   .tp-clamp { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
   .tp-who { display: flex; flex-wrap: wrap; align-items: center; gap: var(--ybm-space-x1) var(--ybm-space-x2); min-width: 0; }
   .tp-meta { display: flex; flex-wrap: wrap; align-items: center; gap: var(--ybm-space-x1) var(--ybm-space-x3); font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); color: var(--ybm-color-fg-neutral-subtle); font-variant-numeric: tabular-nums; }
@@ -49,7 +48,6 @@ const CSS = FRAME_CSS + `
   .tp-rank > li::before { content: counter(rank); font-weight: var(--ybm-font-weight-bold); font-variant-numeric: tabular-nums; color: var(--ybm-color-fg-neutral); }
   .tp-rank a { color: inherit; text-decoration: none; }
   .tp-hot { display: flex; flex-direction: column; gap: var(--ybm-space-x3); color: inherit; text-decoration: none; }
-  .tp-hot .ds-imageframe { border-radius: var(--ybm-shape-lg); }
 `;
 
 const boardNav = (cur) => `<nav class="ds-sidenav" aria-label="게시판"><div class="ds-sidenav__content"><div class="ds-sidenav__group"><div class="ds-sidenav__group-label">게시판</div>${BOARDS.map(([t, ic], i) => `<a class="ds-sidenav__item" href="#"${i === cur ? ' aria-current="page"' : ''}><span class="ds-sidenav__prefix">${icon(ic)}</span><span class="ds-sidenav__label">${t}</span></a>`).join('')}</div></div></nav>`;
@@ -70,8 +68,8 @@ const home = () => {
     ['자유게시판', '퇴근하고 30분 걷기, 한 달 해 본 이야기', '처음엔 귀찮았는데 지금은 안 걸으면 잠이 안 와요. 같이 걸을 분 계세요?', '초록손', '5시간 전', '54', '9', '611', -1],
     ['모임 모집', '토요일 아침 독서 모임 2명 더 모여요', '한 달에 한 권, 카페에서 두 시간 이야기 나눠요. 이번 달 책은 투표로 정해요.', '책읽는밤', '어제', '22', '7', '388', 2],
   ];
-  const post = ([b, t, ex, n, time, like, cmt, view, ph]) => `<a class="tp-post${ph >= 0 ? ' tp-post--thumb' : ''}" href="#"><div class="tp-post__body">${who(n, time, { extra: badge(b) })}<span class="tp-h3">${t}</span><span class="tp-sub tp-clamp">${ex}</span>${meta(like, cmt, view)}</div>${ph >= 0 ? `<div class="tp-post__thumb">${thumb('1:1', '', K.photo('mix', ph, 320))}</div>` : ''}</a>`;
-  const hot = (i, t, n, c) => `<a class="tp-hot" href="#">${thumb('4:3', '', K.photo('nature', i, 480))}<div class="tp-stack"><span class="tp-h4 tp-clamp">${t}</span><span class="tp-caption">${n} · 댓글 ${T(c)}</span></div></a>`;
+  const post = ([b, t, ex, n, time, like, cmt, view, ph]) => `<a class="tp-post${ph >= 0 ? ' tp-post--thumb' : ''}" href="#"><div class="tp-post__body">${who(n, time, { extra: badge(b) })}<span class="tp-h3">${t}</span><span class="tp-sub tp-clamp">${ex}</span>${meta(like, cmt, view)}</div>${ph >= 0 ? `<div class="tp-post__thumb">${thumb('1:1', '', K.photo('mix', ph, 320), 'lg')}</div>` : ''}</a>`;
+  const hot = (i, t, n, c) => `<a class="tp-hot" href="#">${thumb('4:3', '', K.photo('nature', i, 480), 'lg')}<div class="tp-stack"><span class="tp-h4 tp-clamp">${t}</span><span class="tp-caption">${n} · 댓글 ${T(c)}</span></div></a>`;
   const css = CSS;
   const body = `<div class="tp-app">${topbar(MENU, 0, END)}
 <div class="tp-cm tp-cm--aside">
@@ -152,7 +150,6 @@ const post = () => {
   .tp-article { display: flex; flex-direction: column; gap: var(--ybm-space-x5); }
   .tp-article__text { display: flex; flex-direction: column; gap: var(--ybm-space-x4); font-size: var(--ybm-font-size-t05); line-height: var(--ybm-line-height-t05); }
   .tp-article__text p { margin: 0; }
-  .tp-article .ds-imageframe { border-radius: var(--ybm-shape-lg); }
   .tp-acts { display: flex; flex-wrap: wrap; align-items: center; gap: var(--ybm-space-x2); padding-block: var(--ybm-space-x4); box-shadow: inset 0 1px 0 var(--ybm-color-stroke-neutral-muted), inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); }
   .tp-acts__end { margin-inline-start: auto; display: flex; gap: var(--ybm-space-x1); }
   .tp-cform { display: flex; flex-direction: column; gap: var(--ybm-space-x2); }
@@ -184,7 +181,7 @@ const post = () => {
       <div class="tp-article__text">
         <p>지금까지는 캡슐 머신만 써 봤는데, 원두를 직접 갈아서 내려 보고 싶어졌어요. 예산은 20만 원 정도예요.</p>
         <p>그라인더를 먼저 사고 드리퍼는 싼 것으로 시작할지, 아니면 둘 다 중간 가격으로 맞출지 고민이에요. 처음 시작할 때 어떻게 하셨는지 궁금해요.</p>
-        ${thumb('16:9', '', K.photo('food', 3, 960))}
+        ${thumb('16:9', '', K.photo('food', 3, 960), 'lg')}
       </div>
       ${card(`<div class="tp-between"><span class="tp-h4">투표</span><span class="tp-caption">${T('36')}명 참여 · 여러 개 고를 수 있어요</span></div>${meter('그라인더에 먼저 투자', 58, '58%')}${meter('둘 다 중간 가격', 31, '31%')}${meter('일단 원두를 사서 갈아 달라고 하기', 11, '11%')}`)}
       <div class="tp-acts">${btn('좋아요 36', { variant: 'neutralOutline', ic: 'thumbs-up' })}${btn('스크랩', { variant: 'neutralOutline', ic: 'bookmark' })}<div class="tp-acts__end">${iconBtn('share', '공유하기')}${iconBtn('flag', '신고하기')}</div></div>

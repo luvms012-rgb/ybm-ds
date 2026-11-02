@@ -74,6 +74,7 @@
 
 <section class="pv-sec" id="c-02" data-no="02"><header><h2><small>02</small>Text Link</h2></header>
   <div class="pv-stage"><a class="ds-link" href="#">아이디 찾기</a><a class="ds-link" href="#">비밀번호 재설정</a></div>
+  <div class="pv-stage"><a class="ds-link" data-size="small" href="#">비밀번호를 잊으셨나요?</a><a class="ds-link" data-size="small" href="#">전체 보기</a></div>
 </section>
 
 <section class="pv-sec" id="c-03" data-no="03"><header><h2><small>03</small>Field Label</h2></header>
@@ -193,6 +194,7 @@
 
 <section class="pv-sec" id="c-18" data-no="18"><header><h2><small>18</small>Segmented Control</h2></header>
   <div class="pv-stage"><div class="ds-segmented" role="group" aria-label="보기 방식"><button type="button" class="ds-segmented__item" aria-pressed="true">목록</button><button type="button" class="ds-segmented__item" aria-pressed="false">달력</button></div></div>
+  <div class="pv-stage"><div class="ds-segmented" role="group" aria-label="기간" data-size="medium"><button type="button" class="ds-segmented__item" aria-pressed="false">1개월</button><button type="button" class="ds-segmented__item" aria-pressed="true">3개월</button><button type="button" class="ds-segmented__item" aria-pressed="false">1년</button></div><button class="ds-btn" data-variant="neutralWeak"><i class="ds-icon ds-icon--download" aria-hidden="true"></i>내보내기</button></div>
 </section>
 
 <section class="pv-sec" id="c-19" data-no="19"><header><h2><small>19</small>Toggle Button</h2></header>
@@ -383,6 +385,7 @@
     <article class="ds-card pv-w"><header class="ds-card__header"><h3 class="ds-card__title">주말 디자인 워크숍</h3><p class="ds-card__desc">2026.11.08 (일) · 서울</p></header><div class="ds-card__content">신청 마감까지 3일 남았어요.</div><footer class="ds-card__footer"><button class="ds-btn" data-variant="neutralWeak" data-width="fill">자세히 보기</button></footer></article>
     <article class="ds-card pv-w" data-variant="elevated" data-size="small"><header class="ds-card__header"><h3 class="ds-card__title">elevated · small</h3><p class="ds-card__desc">elevation raised</p></header></article>
   </div>
+  <div class="pv-stage"><article class="ds-card pv-w" data-variant="subtle" data-size="small"><header class="ds-card__header"><h3 class="ds-card__title">이번 달 주문</h3><p class="ds-card__desc">지난달보다 12% 늘었어요.</p></header><div class="ds-card__content">1,284건</div></article></div>
 </section>
 
 <section class="pv-sec" id="c-40" data-no="40"><header><h2><small>40</small>Empty</h2></header>
@@ -407,6 +410,20 @@
           <tr data-interactive><td data-align="center">12</td><td>11월 배송 일정 안내</td><td data-align="center">2026.10.22</td></tr>
           <tr data-interactive aria-selected="true"><td data-align="center">11</td><td>추가 할인 이벤트 공지</td><td data-align="center">2026.10.18</td></tr>
           <tr data-interactive><td data-align="center">10</td><td>영수증 발급 방법 변경 안내</td><td data-align="center">2026.10.10</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="pv-stage">
+    <div class="ds-table-wrap">
+      <table class="ds-table">
+        <thead><tr><th scope="col"><label class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control" aria-label="모든 행 선택"></label></th><th scope="col">주문</th><th scope="col">상태</th><th scope="col" data-align="end">금액</th></tr></thead>
+        <tbody>
+          <tr class="ds-table__group"><td colspan="4">오늘</td></tr>
+          <tr><td><label class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control" aria-label="주문 1042 선택"></label></td><td><span class="ds-table__stack"><span>무선 이어폰 외 1건</span><span>주문 1042</span></span></td><td><span class="ds-badge" data-tone="informative">배송 준비</span></td><td data-align="end">128,000원</td></tr>
+          <tr><td><label class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control" aria-label="주문 1041 선택" checked></label></td><td><span class="ds-table__stack"><span>텀블러 500ml</span><span>주문 1041</span></span></td><td><span class="ds-badge" data-tone="positive">배송 중</span></td><td data-align="end">24,900원</td></tr>
+          <tr class="ds-table__group"><td colspan="4">어제</td></tr>
+          <tr><td><label class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control" aria-label="주문 1038 선택"></label></td><td><span class="ds-table__stack"><span>여행용 파우치 세트</span><span>주문 1038</span></span></td><td><span class="ds-badge">배송 완료</span></td><td data-align="end">39,000원</td></tr>
         </tbody>
       </table>
     </div>
@@ -806,6 +823,12 @@
     <div class="ds-imageframe" style="width:160px"><span class="pv-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div>
     <div class="ds-imageframe" data-ratio="4:3" data-stroke style="width:200px"><span class="pv-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span><div class="ds-imageframe__floater" data-position="bottom-end"><span class="ds-imageframe__indicator">1/5</span></div></div>
     <div class="ds-imageframe" data-ratio="16:9" style="width:240px"><span class="pv-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div>
+  </div>
+  <div class="pv-stage" style="gap:var(--ybm-space-x4);flex-wrap:wrap;align-items:flex-start">
+    <div class="ds-imageframe" data-radius="md" style="width:120px"><span class="pv-ph">md</span></div>
+    <div class="ds-imageframe" data-radius="lg" style="width:120px"><span class="pv-ph">lg</span></div>
+    <div class="ds-imageframe" data-radius="xl" style="width:120px"><span class="pv-ph">xl</span></div>
+    <div class="ds-imageframe" data-radius="none" style="width:120px"><span class="pv-ph">none</span></div>
   </div>
   <style>.pv-ph { display: grid; place-items: center; height: 100%; color: var(--ybm-color-fg-neutral-subtle); }</style>
 </section>

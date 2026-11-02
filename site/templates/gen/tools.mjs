@@ -36,7 +36,7 @@ const canvas = () => {
   .tp-doc-tab[aria-selected="true"] { background: var(--ybm-color-bg-neutral); color: var(--ybm-color-fg-neutral); font-weight: var(--ybm-font-weight-semibold); }
   .tp-stage { position: relative; flex: 1 1 auto; display: grid; place-items: center; min-height: 0; overflow: auto; background: var(--ybm-color-bg-neutral-subtle); background-image: radial-gradient(var(--ybm-color-stroke-neutral-muted) 1px, transparent 1px); background-size: 16px 16px; }
   .tp-artboard { position: relative; width: 340px; aspect-ratio: 3 / 4.4; background: var(--ybm-color-bg-layer-default); box-shadow: 0 8px 32px rgb(0 0 0 / .16); }
-  .tp-artboard .ds-imageframe { position: absolute; inset: 22% 8% 16%; width: auto; height: auto; aspect-ratio: auto; border-radius: 0; }
+  .tp-artboard .ds-imageframe { position: absolute; inset: 22% 8% 16%; width: auto; height: auto; aspect-ratio: auto; }
   .tp-artboard__t { position: absolute; left: 8%; top: 4%; right: 8%; font-size: 26px; line-height: 1.05; font-weight: 800; letter-spacing: -0.03em; }
   .tp-artboard__s { position: absolute; left: 8%; bottom: 6%; right: 8%; font-size: 12px; color: var(--ybm-color-fg-neutral-muted); }
   .tp-sel { position: absolute; inset: 22% 8% 16%; outline: 2px solid var(--ybm-color-stroke-brand-solid); }
@@ -49,7 +49,7 @@ const canvas = () => {
 <div class="tp-tool__body">
   <aside class="tp-pane tp-pane--left" aria-label="레이어와 에셋">${segmented(['레이어', '에셋'], 0, '왼쪽 패널')}${tree([[0, 'f', '글자', 0, 1], [1, 'type', '제목'], [1, 'type', '날짜와 장소'], [0, 'f', '이미지', 0, 1], [1, 'image', '메인 사진', 1], [1, 'image', '배경 질감'], [0, 'f', '도형', 0, 0], [0, 'layers', '배경']])}</aside>
   <main class="tp-pane tp-pane--main" style="position: relative">
-    <div class="tp-stage"><div class="tp-artboard" aria-label="포스터 화면"><span class="tp-artboard__t">가을 특강<br>말하기 집중반</span>${thumb('4:3', '', K.photo('nature', 2, 1000))}<span class="tp-sel">${handles}</span><span class="tp-artboard__s">11월 12일 토요일 오후 2시 · 종로 캠퍼스 5층</span></div>
+    <div class="tp-stage"><div class="tp-artboard" aria-label="포스터 화면"><span class="tp-artboard__t">가을 특강<br>말하기 집중반</span>${thumb('4:3', '', K.photo('nature', 2, 1000), 'none')}<span class="tp-sel">${handles}</span><span class="tp-artboard__s">11월 12일 토요일 오후 2시 · 종로 캠퍼스 5층</span></div>
     <div class="tp-zoom" role="toolbar" aria-label="보기 도구">${iconBtn('mouse-pointer-2', '선택')}${iconBtn('hand', '이동')}${iconBtn('type', '글자')}${iconBtn('square', '도형')}<span style="width:1px;height:20px;background:var(--ybm-color-stroke-neutral-muted)"></span>${iconBtn('zoom-out', '축소')}<span class="tp-caption tp-num" style="min-width:40px;text-align:center">100%</span>${iconBtn('zoom-in', '확대')}</div></div>
   </main>
   <aside class="tp-pane tp-pane--right" aria-label="속성">

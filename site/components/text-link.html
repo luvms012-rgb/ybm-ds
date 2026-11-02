@@ -113,54 +113,33 @@
 <header class="site-head">
   <h1 class="site-h1">Text Link</h1>
   <p class="site-lead">문장 안에서 다른 화면이나 외부 페이지로 이동하게 하는 컴포넌트입니다.</p>
-  <div class="site-meta"><a class="ds-btn" data-variant="neutralWeak" data-size="xsmall" href="https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=2493-325" target="_blank" rel="noopener"><i class="ds-icon site-i--figma ds-icon--sm" aria-hidden="true"></i>Figma</a><a class="ds-btn" data-variant="neutralWeak" data-size="xsmall" href="https://github.com/luvms012-rgb/ybm-ds/blob/main/dist/components.css#L168-L184" target="_blank" rel="noopener"><i class="ds-icon site-i--github ds-icon--sm" aria-hidden="true"></i>코드</a></div>
-<div class="site-toc-select"><button type="button" class="ds-select" data-size="medium" aria-haspopup="listbox" aria-expanded="false" aria-controls="site-toc-list" aria-label="이 페이지 목차" data-site-toc><span class="ds-select__value">사용법</span></button><div class="ds-select-content site-toc-list" id="site-toc-list" role="listbox" data-size="medium" hidden><ul class="ds-select-list"><li><button type="button" class="ds-select-item" role="option" data-site-toc-go="usage" aria-selected="true"><span class="ds-select-item__body"><span class="ds-select-item__label">사용법</span></span></button></li><li><button type="button" class="ds-select-item" role="option" data-site-toc-go="props"><span class="ds-select-item__body"><span class="ds-select-item__label">속성</span></span></button></li><li><button type="button" class="ds-select-item" role="option" data-site-toc-go="examples"><span class="ds-select-item__body"><span class="ds-select-item__label">예시</span></span></button></li><li><button type="button" class="ds-select-item" role="option" data-site-toc-go="spec"><span class="ds-select-item__body"><span class="ds-select-item__label">규격</span></span></button></li></ul></div></div>
+  <div class="site-meta"><a class="ds-btn" data-variant="neutralWeak" data-size="xsmall" href="https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=2493-325" target="_blank" rel="noopener"><i class="ds-icon site-i--figma ds-icon--sm" aria-hidden="true"></i>Figma</a><a class="ds-btn" data-variant="neutralWeak" data-size="xsmall" href="https://github.com/luvms012-rgb/ybm-ds/blob/main/dist/components.css#L168-L187" target="_blank" rel="noopener"><i class="ds-icon site-i--github ds-icon--sm" aria-hidden="true"></i>코드</a></div>
+<div class="site-toc-select"><button type="button" class="ds-select" data-size="medium" aria-haspopup="listbox" aria-expanded="false" aria-controls="site-toc-list" aria-label="이 페이지 목차" data-site-toc><span class="ds-select__value">사용법</span></button><div class="ds-select-content site-toc-list" id="site-toc-list" role="listbox" data-size="medium" hidden><ul class="ds-select-list"><li><button type="button" class="ds-select-item" role="option" data-site-toc-go="usage" aria-selected="true"><span class="ds-select-item__body"><span class="ds-select-item__label">사용법</span></span></button></li><li><button type="button" class="ds-select-item" role="option" data-site-toc-go="props"><span class="ds-select-item__body"><span class="ds-select-item__label">속성</span></span></button></li><li><button type="button" class="ds-select-item" role="option" data-site-toc-go="vars"><span class="ds-select-item__body"><span class="ds-select-item__label">CSS 변수</span></span></button></li><li><button type="button" class="ds-select-item" role="option" data-site-toc-go="examples"><span class="ds-select-item__body"><span class="ds-select-item__label">예시</span></span></button></li><li><button type="button" class="ds-select-item" role="option" data-site-toc-go="spec"><span class="ds-select-item__body"><span class="ds-select-item__label">규격</span></span></button></li></ul></div></div>
 </header>
 <div class="site-tile__thumb site-cover" data-site-fit-max="2" aria-hidden="true"><div class="site-tile__inner" inert><div class="pv-stage"><p style="font-size:var(--ybm-font-size-t05);color:var(--ybm-color-fg-neutral-muted)">계정이 없으신가요? <span class="ds-link" href="#">회원가입</span></p></div></div></div>
 <h2 id="usage">사용법<a class="site-anchor" href="#usage" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><p>아래 구조를 그대로 복사해 쓰세요. 대괄호 <code>[ ]</code> 안은 필요할 때만 넣습니다.</p><figure class="ds-codeblock">
   <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">html</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
-  <pre class="ds-codeblock__code"><code>&lt;div class=&quot;ds-field&quot; [data-label-weight=&quot;bold&quot;]&gt;
-  &lt;div class=&quot;ds-field__header&quot;&gt;
-    &lt;label class=&quot;ds-field__label&quot; for=&quot;id&quot;&gt;라벨&lt;/label&gt;
-    [&lt;span class=&quot;ds-field__indicator&quot;&gt;선택&lt;/span&gt;] [&lt;span class=&quot;ds-field__required&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;]
-  &lt;/div&gt;
-  &lt;div class=&quot;ds-input&quot;&gt;…&lt;/div&gt;
-  &lt;div class=&quot;ds-field__footer&quot;&gt;
-    &lt;p class=&quot;ds-field__help&quot;&gt;설명을 써주세요&lt;/p&gt;
-    [&lt;p class=&quot;ds-field__error&quot;&gt;오류 이유&lt;/p&gt;]
-    [&lt;span class=&quot;ds-field__count&quot;&gt;0/8&lt;/span&gt;]
-  &lt;/div&gt;
-&lt;/div&gt;</code></pre>
+  <pre class="ds-codeblock__code"><code>&lt;a class=&quot;ds-link&quot; href=&quot;…&quot; [data-size=&quot;small&quot;]&gt;비밀번호를 잊으셨나요?&lt;/a&gt;</code></pre>
 </figure>
 <h2 id="props">속성<a class="site-anchor" href="#props" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><p>Figma 속성 이름을 그대로 <code>data-*</code> 속성으로 씁니다.</p><div class="ds-table-wrap"><table class="ds-table" data-density="compact">
 <thead><tr><th scope="col">속성</th><th scope="col">값</th></tr></thead>
 <tbody><tr><td><code>Figma state</code></td><td><span class="ds-badge">enabled</span> <span class="ds-badge">hover</span></td></tr></tbody></table></div><p class="site-note">그 밖에: <code>--ds-link-color(-hover)</code></p>
+<h2 id="vars">CSS 변수<a class="site-anchor" href="#vars" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><p>서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.</p><div class="ds-table-wrap"><table class="ds-table" data-density="compact">
+<thead><tr><th scope="col">변수</th><th scope="col">기본값</th></tr></thead>
+<tbody><tr><td><code>--ds-link-color</code></td><td><code>var(--ybm-color-fg-neutral-subtle)</code></td></tr>
+<tr><td><code>--ds-link-color-hover</code></td><td><code>var(--ybm-color-fg-neutral)</code></td></tr></tbody></table></div>
 <h2 id="examples">예시<a class="site-anchor" href="#examples" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><div class="site-example">
   <div class="site-example__bar"><div class="ds-chiptabs" role="tablist" aria-label="보기 방식"><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-view="preview">미리보기</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-view="code">코드</button></div></div>
-  <div class="site-example__preview"><div class="pv-stage"><a class="ds-link" href="#">아이디 찾기</a><a class="ds-link" href="#">비밀번호 재설정</a></div></div>
+  <div class="site-example__preview"><div class="pv-stage"><a class="ds-link" href="#">아이디 찾기</a><a class="ds-link" href="#">비밀번호 재설정</a></div>
+  <div class="pv-stage"><a class="ds-link" data-size="small" href="#">비밀번호를 잊으셨나요?</a><a class="ds-link" data-size="small" href="#">전체 보기</a></div></div>
   <div class="site-example__code" hidden><figure class="ds-codeblock">
   <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">html</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
-  <pre class="ds-codeblock__code"><code>&lt;a class=&quot;ds-link&quot; href=&quot;#&quot;&gt;아이디 찾기&lt;/a&gt;&lt;a class=&quot;ds-link&quot; href=&quot;#&quot;&gt;비밀번호 재설정&lt;/a&gt;</code></pre>
+  <pre class="ds-codeblock__code"><code>&lt;a class=&quot;ds-link&quot; href=&quot;#&quot;&gt;아이디 찾기&lt;/a&gt;&lt;a class=&quot;ds-link&quot; href=&quot;#&quot;&gt;비밀번호 재설정&lt;/a&gt;
+
+&lt;a class=&quot;ds-link&quot; data-size=&quot;small&quot; href=&quot;#&quot;&gt;비밀번호를 잊으셨나요?&lt;/a&gt;&lt;a class=&quot;ds-link&quot; data-size=&quot;small&quot; href=&quot;#&quot;&gt;전체 보기&lt;/a&gt;</code></pre>
 </figure></div>
 </div>
-<h2 id="spec">규격<a class="site-anchor" href="#spec" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><p>Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.</p><pre class="site-spec">-------------------------------------------------------------------------- */
-.ds-link {
-  --ds-link-color: var(--ybm-color-fg-neutral-subtle);
-  --ds-link-color-hover: var(--ybm-color-fg-neutral);
-  display: inline;
-  color: var(--ds-link-color);
-  font-size: var(--ybm-font-size-t05);
-  line-height: var(--ybm-line-height-t05);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  transition: color var(--ybm-duration-fast) var(--ybm-easing-standard);
-}
-.ds-link:hover { color: var(--ds-link-color-hover); }
-/* --------------------------------------------------------------------------
-03 Field Label — 라벨(header) + 입력(control) + 안내/오류(footer)
-Figma: 세로 gap x2 / label t05 Medium(bold 변형 t05 Bold) fg/neutral / indicator t04 fg/neutral-subtle(좌 4)
-       required 점 4×4 fg/critical / footer 좌우 x0_5 / 안내 t04 fg/neutral-subtle / 오류 t04 fg/critical
-오류: 입력 요소에 aria-invalid=&quot;true&quot; → help 대신 error 를 보이고 critical 색.</pre>
+<h2 id="spec">규격<a class="site-anchor" href="#spec" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><p>Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.</p><pre class="site-spec">size: medium(기본, t05) / small(t03, 본문 옆이나 표, 칸 머리처럼 보조 자리) (2026-11-03 추가)</pre>
 <nav class="site-pager" aria-label="이전, 다음 문서"><a href="text-field-textarea.html" data-dir="prev"><span class="site-pager__label"><i class="ds-icon ds-icon--chevron-left ds-icon--sm" aria-hidden="true"></i>이전</span><b>Text Field Textarea</b></a><a href="time-picker.html" data-dir="next"><span class="site-pager__label">다음<i class="ds-icon ds-icon--chevron-right ds-icon--sm" aria-hidden="true"></i></span><b>Time Picker</b></a></nav>
 <footer class="site-footer">
   <div class="site-footer__brand"><img src="../assets/logo-ybmnet.svg" alt="YBM NET" width="81" height="24"><p class="site-footer__copy">© 2026 YBM NET. All rights reserved.</p></div>
@@ -171,7 +150,7 @@ Figma: 세로 gap x2 / label t05 Medium(bold 변형 t05 Bold) fg/neutral / indic
 </footer>
 </article>
 </main>
-<aside class="site-toc" aria-label="이 페이지 목차"><nav><span class="site-toc__indicator" aria-hidden="true"></span><a href="#usage">사용법</a><a href="#props">속성</a><a href="#examples">예시</a><a href="#spec">규격</a></nav></aside>
+<aside class="site-toc" aria-label="이 페이지 목차"><nav><span class="site-toc__indicator" aria-hidden="true"></span><a href="#usage">사용법</a><a href="#props">속성</a><a href="#vars">CSS 변수</a><a href="#examples">예시</a><a href="#spec">규격</a></nav></aside>
 </div>
 </body>
 </html>

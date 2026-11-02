@@ -25,8 +25,6 @@
   .tp-sub { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
   .tp-caption { font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); color: var(--ybm-color-fg-neutral-subtle); }
   .tp-num { font-variant-numeric: tabular-nums; }
-  /* 텍스트 링크는 보조 동작이라 본문(14)보다 한 단계 작게 */
-  .ds-link { font-size: var(--ybm-font-size-t03); line-height: var(--ybm-line-height-t03); }
   /* 표는 DS Table 그대로 쓴다 (2026-11-03 DS 개편). 아래는 표 위, 아래 줄만 */
   /* 표 위 한 줄: 왼쪽 개수, 오른쪽 고르기 칸과 찾기 (커뮤니티 게시판 btools) */
   .tp-ttools { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ybm-space-x3); }
@@ -44,15 +42,12 @@
   .tp-row { display: flex; align-items: center; gap: var(--ybm-space-x2); min-width: 0; }
   /* 줄 안에 놓인 고르기 칸은 글자만큼만 */
   :is(.tp-row, .tp-between, .tp-head__tools, .tp-sec-head, .tp-ttools__end) > .ds-select { width: auto; min-width: 140px; }
-  /* 도구 줄의 medium 세그먼트는 버튼, 고르기 칸과 같은 40 높이로 */
-  :is(.tp-row, .tp-head__tools, .tp-tool__bar) > .ds-segmented[data-size="medium"] { box-sizing: border-box; height: 40px; }
   .tp-between { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ybm-space-x2); }
   .tp-stack { display: flex; flex-direction: column; gap: var(--ybm-space-x1); min-width: 0; }
   .tp-stack > .ds-badge { align-self: flex-start; }
   .tp-g2, .tp-g3, .tp-g4, .tp-g5, .tp-g6 { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ybm-space-x3); }
   /* 카드 (레퍼런스 A): 흰 바탕 + 옅은 1px 선, 모서리 12 */
   .tp-card { min-width: 0; }
-  .tp-card.ds-card { gap: var(--ybm-space-x3); padding: var(--ybm-space-x4); border-radius: var(--ybm-shape-lg); box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-neutral-muted); }
   .tp-span2 { grid-column: auto; }
   .tp-kpi__label { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
   .tp-kpi__value { font-size: var(--ybm-font-size-t08); line-height: var(--ybm-line-height-t08); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
@@ -100,7 +95,7 @@
     .tp-h2 { font-size: var(--ybm-font-size-t07); line-height: var(--ybm-line-height-t07); }
     .tp-content { padding: var(--ybm-space-x6) var(--ybm-space-x6) var(--ybm-space-x12); gap: var(--ybm-space-x8); }
     .tp-panel { padding: var(--ybm-space-x6); }
-    .tp-card.ds-card { padding: var(--ybm-space-x5); gap: var(--ybm-space-x4); }
+    .tp-card.ds-card { --ds-card-padding: var(--ybm-space-x5); --ds-card-gap: var(--ybm-space-x4); }
     .tp-g2, .tp-g3, .tp-g4, .tp-g5, .tp-g6 { gap: var(--ybm-space-x4); }
     .tp-g2, .tp-g4, .tp-g6 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .tp-g3, .tp-g5 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -155,7 +150,6 @@
   .tp-stats > * { display: flex; flex-direction: column; gap: var(--ybm-space-x1); min-width: 0; }
   @media (min-width: 768px) { .tp-stats { grid-template-columns: repeat(var(--n, 4), minmax(0, 1fr)); } .tp-stats > * + * { padding-inline-start: var(--ybm-space-x4); box-shadow: inset 1px 0 0 var(--ybm-color-stroke-neutral-muted); } }
   .tp-thumb-sm { flex: none; width: 96px; }
-  .tp-thumb-sm .ds-imageframe, .tp-course .ds-imageframe { border-radius: var(--ybm-shape-lg); }
   .tp-aside-sticky { display: flex; flex-direction: column; gap: var(--ybm-space-x3); }
   @media (min-width: 1024px) { .tp-aside-sticky { position: sticky; top: calc(var(--ybm-space-x16) + var(--ybm-space-x4)); } }
 
@@ -193,7 +187,7 @@
       <p class="tp-sub">무료로 시작하고 필요할 때 올리세요. 언제든 바꾸거나 해지할 수 있어요.</p>
       <div class="tp-pr-period"><div class="ds-segmented" role="group" aria-label="결제 주기" data-size="medium"><button type="button" class="ds-segmented__item" aria-pressed="true" data-period="m">월 결제</button><button type="button" class="ds-segmented__item" aria-pressed="false" data-period="y">연 결제</button></div><span class="ds-badge" data-tone="positive">연 결제 20% 할인</span></div>
     </header>
-    <div class="tp-plans"><section class="ds-card tp-card tp-plan" data-size="small"><div class="tp-plan__top">
+    <div class="tp-plans"><section class="ds-card tp-card tp-plan" data-variant="subtle" data-size="small"><div class="tp-plan__top">
     <div class="tp-between"><h2 class="tp-h3">무료</h2></div>
     <p class="tp-sub">혼자 가볍게 시작할 때</p>
     <div class="tp-stack"><div class="tp-price"><span class="tp-price__v" data-m>0원</span><span class="tp-price__v" data-y>0원</span><span class="tp-sub">/ 월</span></div>
@@ -201,7 +195,7 @@
   </div>
   <button type="button" class="ds-btn" data-variant="neutralWeak" data-size="medium" data-width="fill" disabled>지금 쓰는 요금제</button>
   <hr class="ds-divider">
-  <ul class="tp-feat"><li><i class="ds-icon ds-icon--check" aria-hidden="true"></i><span>프로젝트 3개</span></li><li><i class="ds-icon ds-icon--check" aria-hidden="true"></i><span>저장 공간 1GB</span></li><li><i class="ds-icon ds-icon--check" aria-hidden="true"></i><span>기본 템플릿</span></li><li data-off><i class="ds-icon ds-icon--minus" aria-hidden="true"></i><span>팀원 초대</span></li><li data-off><i class="ds-icon ds-icon--minus" aria-hidden="true"></i><span>버전 기록</span></li></ul></section><section class="ds-card tp-card tp-plan" data-size="small"><div class="tp-plan__top">
+  <ul class="tp-feat"><li><i class="ds-icon ds-icon--check" aria-hidden="true"></i><span>프로젝트 3개</span></li><li><i class="ds-icon ds-icon--check" aria-hidden="true"></i><span>저장 공간 1GB</span></li><li><i class="ds-icon ds-icon--check" aria-hidden="true"></i><span>기본 템플릿</span></li><li data-off><i class="ds-icon ds-icon--minus" aria-hidden="true"></i><span>팀원 초대</span></li><li data-off><i class="ds-icon ds-icon--minus" aria-hidden="true"></i><span>버전 기록</span></li></ul></section><section class="ds-card tp-card tp-plan" data-variant="subtle" data-size="small"><div class="tp-plan__top">
     <div class="tp-between"><h2 class="tp-h3">베이직</h2></div>
     <p class="tp-sub">혼자 꾸준히 쓸 때</p>
     <div class="tp-stack"><div class="tp-price"><span class="tp-price__v" data-m>5,900원</span><span class="tp-price__v" data-y>4,900원</span><span class="tp-sub">/ 월</span></div>
@@ -209,7 +203,7 @@
   </div>
   <button type="button" class="ds-btn" data-variant="neutralOutline" data-size="medium" data-width="fill">베이직 시작하기</button>
   <hr class="ds-divider">
-  <ul class="tp-feat"><li><i class="ds-icon ds-icon--check" aria-hidden="true"></i><span>프로젝트 20개</span></li><li><i class="ds-icon ds-icon--check" aria-hidden="true"></i><span>저장 공간 10GB</span></li><li><i class="ds-icon ds-icon--check" aria-hidden="true"></i><span>모든 템플릿</span></li><li><i class="ds-icon ds-icon--check" aria-hidden="true"></i><span>팀원 2명까지</span></li><li data-off><i class="ds-icon ds-icon--minus" aria-hidden="true"></i><span>버전 기록</span></li></ul></section><section class="ds-card tp-card tp-plan" data-size="small" data-pick><div class="tp-plan__top">
+  <ul class="tp-feat"><li><i class="ds-icon ds-icon--check" aria-hidden="true"></i><span>프로젝트 20개</span></li><li><i class="ds-icon ds-icon--check" aria-hidden="true"></i><span>저장 공간 10GB</span></li><li><i class="ds-icon ds-icon--check" aria-hidden="true"></i><span>모든 템플릿</span></li><li><i class="ds-icon ds-icon--check" aria-hidden="true"></i><span>팀원 2명까지</span></li><li data-off><i class="ds-icon ds-icon--minus" aria-hidden="true"></i><span>버전 기록</span></li></ul></section><section class="ds-card tp-card tp-plan" data-variant="subtle" data-size="small" data-pick><div class="tp-plan__top">
     <div class="tp-between"><h2 class="tp-h3">프로</h2><span class="ds-badge" data-tone="brand" data-variant="solid">추천</span></div>
     <p class="tp-sub">작은 팀이 함께 쓸 때</p>
     <div class="tp-stack"><div class="tp-price"><span class="tp-price__v" data-m>9,900원</span><span class="tp-price__v" data-y>7,900원</span><span class="tp-sub">/ 월</span></div>
@@ -217,7 +211,7 @@
   </div>
   <button type="button" class="ds-btn" data-variant="brandSolid" data-size="medium" data-width="fill">프로 시작하기</button>
   <hr class="ds-divider">
-  <ul class="tp-feat"><li><i class="ds-icon ds-icon--check" aria-hidden="true"></i><span>프로젝트 무제한</span></li><li><i class="ds-icon ds-icon--check" aria-hidden="true"></i><span>저장 공간 50GB</span></li><li><i class="ds-icon ds-icon--check" aria-hidden="true"></i><span>모든 템플릿</span></li><li><i class="ds-icon ds-icon--check" aria-hidden="true"></i><span>팀원 10명까지</span></li><li><i class="ds-icon ds-icon--check" aria-hidden="true"></i><span>버전 기록 30일</span></li></ul></section><section class="ds-card tp-card tp-plan" data-size="small"><div class="tp-plan__top">
+  <ul class="tp-feat"><li><i class="ds-icon ds-icon--check" aria-hidden="true"></i><span>프로젝트 무제한</span></li><li><i class="ds-icon ds-icon--check" aria-hidden="true"></i><span>저장 공간 50GB</span></li><li><i class="ds-icon ds-icon--check" aria-hidden="true"></i><span>모든 템플릿</span></li><li><i class="ds-icon ds-icon--check" aria-hidden="true"></i><span>팀원 10명까지</span></li><li><i class="ds-icon ds-icon--check" aria-hidden="true"></i><span>버전 기록 30일</span></li></ul></section><section class="ds-card tp-card tp-plan" data-variant="subtle" data-size="small"><div class="tp-plan__top">
     <div class="tp-between"><h2 class="tp-h3">팀</h2></div>
     <p class="tp-sub">여러 팀을 관리할 때</p>
     <div class="tp-stack"><div class="tp-price"><span class="tp-price__v" data-m>19,900원</span><span class="tp-price__v" data-y>15,900원</span><span class="tp-sub">/ 월</span></div>
@@ -232,7 +226,7 @@
     <section class="tp-sec" aria-labelledby="faq"><div class="tp-sec-head"><div class="tp-sec-head__texts"><h2 class="tp-h2" id="faq">자주 묻는 질문</h2></div></div>
       <div><details class="ds-accordion" open><summary class="ds-accordion__trigger"><span class="ds-accordion__body"><span class="ds-accordion__title">무료로 써 보고 바꿀 수 있나요?</span></span></summary><div class="ds-accordion__content">네, 무료 요금제로 먼저 써 보고 필요할 때 언제든 바꿀 수 있어요. 만든 프로젝트는 그대로 남아요.</div></details><details class="ds-accordion"><summary class="ds-accordion__trigger"><span class="ds-accordion__body"><span class="ds-accordion__title">연 결제는 얼마나 저렴한가요?</span></span></summary><div class="ds-accordion__content">연 결제를 고르면 월 결제보다 약 20% 저렴해요. 1년치를 한 번에 결제해요.</div></details><details class="ds-accordion"><summary class="ds-accordion__trigger"><span class="ds-accordion__body"><span class="ds-accordion__title">요금제를 중간에 바꾸면 어떻게 되나요?</span></span></summary><div class="ds-accordion__content">올리면 남은 기간만큼 나눠 계산해 바로 적용해요. 내리면 다음 결제일부터 바뀌어요.</div></details><details class="ds-accordion"><summary class="ds-accordion__trigger"><span class="ds-accordion__body"><span class="ds-accordion__title">해지하면 환불받을 수 있나요?</span></span></summary><div class="ds-accordion__content">결제한 지 7일 안에 쓰지 않았다면 전액 환불해요. 그 뒤에는 남은 기간까지 쓸 수 있고 다음 결제가 멈춰요.</div></details><details class="ds-accordion"><summary class="ds-accordion__trigger"><span class="ds-accordion__body"><span class="ds-accordion__title">세금계산서를 받을 수 있나요?</span></span></summary><div class="ds-accordion__content">팀 요금제는 결제할 때 사업자 정보를 넣으면 매달 세금계산서를 보내 드려요.</div></details></div>
     </section>
-    <section class="ds-card tp-card" data-size="small"><div class="tp-between"><div class="tp-stack"><h2 class="tp-h3">50명이 넘는 팀인가요?</h2><p class="tp-sub">쓰는 인원과 필요한 기능에 맞춰 요금을 따로 안내해 드려요.</p></div><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="medium">도입 문의하기<i class="ds-icon ds-icon--arrow-right" aria-hidden="true"></i></button></div></section>
+    <section class="ds-card tp-card" data-variant="subtle" data-size="small"><div class="tp-between"><div class="tp-stack"><h2 class="tp-h3">50명이 넘는 팀인가요?</h2><p class="tp-sub">쓰는 인원과 필요한 기능에 맞춰 요금을 따로 안내해 드려요.</p></div><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="medium">도입 문의하기<i class="ds-icon ds-icon--arrow-right" aria-hidden="true"></i></button></div></section>
   </div>
 </main></div>
 <script>

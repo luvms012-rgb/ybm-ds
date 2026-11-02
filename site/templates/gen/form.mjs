@@ -20,7 +20,6 @@ const FORM_CSS = `
   .tp-sum-line > :first-child { color: var(--ybm-color-fg-neutral-muted); }
   .tp-sum-total { display: flex; justify-content: space-between; font-size: var(--ybm-font-size-t05); line-height: var(--ybm-line-height-t05); font-weight: var(--ybm-font-weight-bold); }
   .tp-item { display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: var(--ybm-space-x3); align-items: start; }
-  .tp-item .ds-imageframe { border-radius: var(--ybm-shape-sm); }
 `;
 const opt = (t, d, checked = false, type = 'checkbox', name = 'o') => `<label class="tp-optrow"><span class="ds-${type}" data-size="medium"><input type="${type}" class="ds-${type}__control" name="${name}"${checked ? ' checked' : ''} aria-label="${esc(t)}"></span><span class="tp-stack"><span>${t}</span><span class="tp-sub">${d}</span></span></label>`;
 const summary = (items, lines, total, title = '주문 요약') => card(`<div class="tp-between"><h2 class="tp-h3">${title}</h2>${badge(items.length + '개')}</div>${items.map(([n, d, p], i) => `<div class="tp-item">${thumb('1:1', '', K.photo('book', i, 240))}<div class="tp-stack"><div class="tp-between" style="align-items:flex-start;flex-wrap:nowrap"><span>${n}</span>${T(p)}</div><span class="tp-caption">${d}</span></div></div>`).join('')}${divider()}${lines.map(([k, v]) => `<div class="tp-sum-line"><span>${k}</span>${T(v)}</div>`).join('')}${divider()}<div class="tp-sum-total"><span>합계</span>${T(total)}</div>`);
@@ -68,7 +67,6 @@ const checkoutWizard = () => {
   .tp-cw { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ybm-space-x8); width: min(100%, 1120px); margin-inline: auto; }
   @media (min-width: 1024px) { .tp-cw { grid-template-columns: minmax(0, 1fr) 360px; align-items: start; } .tp-cw__aside { position: sticky; top: var(--ybm-space-x6); } }
   .tp-cart { display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: var(--ybm-space-x4); padding-block: var(--ybm-space-x4); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); }
-  .tp-cart .ds-imageframe { border-radius: var(--ybm-shape-md); }
   .tp-promo { display: flex; gap: var(--ybm-space-x2); align-items: flex-end; }
   .tp-promo .ds-field { flex: 1 1 auto; }
 `;
@@ -80,7 +78,7 @@ const checkoutWizard = () => {
       <div class="tp-row" style="justify-content: space-between; flex-wrap: wrap"><h1 class="tp-h1">결제</h1><span class="tp-row tp-sub">${icon('lock', 'sm')}안전한 결제</span></div>
       ${stepper(['장바구니', '배송', '결제', '확인'], 0, '결제 단계')}
       <h2 class="tp-h2">장바구니 확인</h2>
-      <div>${cart.map(([n, d, q, p], i) => `<div class="tp-cart">${thumb('1:1', '', K.photo('book', i, 240))}<div class="tp-stack" style="gap: var(--ybm-space-x2)"><div class="tp-between"><span class="tp-h4">${n}</span>${T(p)}</div><span class="tp-caption">${d}</span><div class="tp-row">${qty(q)}${btn('빼기', { variant: 'ghost', ic: 'trash', size: 'xsmall' })}</div></div></div>`).join('')}</div>
+      <div>${cart.map(([n, d, q, p], i) => `<div class="tp-cart">${thumb('1:1', '', K.photo('book', i, 240), 'md')}<div class="tp-stack" style="gap: var(--ybm-space-x2)"><div class="tp-between"><span class="tp-h4">${n}</span>${T(p)}</div><span class="tp-caption">${d}</span><div class="tp-row">${qty(q)}${btn('빼기', { variant: 'ghost', ic: 'trash', size: 'xsmall' })}</div></div></div>`).join('')}</div>
       <div class="tp-promo">${field('promo', '할인 코드', inp('promo', 'WELCOME10'))}${btn('적용', { size: 'medium' })}</div>
       <div class="tp-between">${btn('쇼핑 계속하기', { variant: 'ghost', ic: 'chevron-left', size: 'medium' })}${btn('배송 정보 입력', { variant: 'brandSolid', size: 'medium', icEnd: 'arrow-right' })}</div>
     </div>
@@ -202,12 +200,11 @@ const twoColumn = () => {
   .tp-tc { display: flex; flex-direction: column; gap: var(--ybm-space-x8); width: min(100%, 1120px); margin-inline: auto; padding-block: var(--ybm-space-x6); }
   .tp-tc__top { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ybm-space-x6); align-items: center; }
   @media (min-width: 1024px) { .tp-tc__top { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
-  .tp-tc__top .ds-imageframe { border-radius: var(--ybm-shape-xl); }
   .tp-hero-t { font-size: var(--ybm-font-size-t12); line-height: var(--ybm-line-height-t12); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; }
 `;
   const topics = ['단체 수강', '시험 접수', '사내 교육', '맞춤 강좌', '학습 플랫폼', '제휴', '취재', '기타'];
   const body = `<div class="tp-app"><main class="tp-content"><div class="tp-tc">
-  <div class="tp-tc__top"><div class="tp-stack" style="gap: var(--ybm-space-x3)"><h1 class="tp-hero-t">무엇을 도와드릴까요?</h1><p class="tp-sub">하고 있는 일과 궁금한 점을 남겨 주면 1영업일 안에 답해 드려요.</p></div>${thumb('16:9', '', K.photo('work', 2, 1200))}</div>
+  <div class="tp-tc__top"><div class="tp-stack" style="gap: var(--ybm-space-x3)"><h1 class="tp-hero-t">무엇을 도와드릴까요?</h1><p class="tp-sub">하고 있는 일과 궁금한 점을 남겨 주면 1영업일 안에 답해 드려요.</p></div>${thumb('16:9', '', K.photo('work', 2, 1200), 'xl')}</div>
   <div class="tp-g2" style="align-items:start">
     ${card(`<h2 class="tp-h3">내 정보</h2><div class="tp-form">${req('t-name', '이름', inp('t-name', '이름'))}<div class="tp-pair">${req('t-mail', '이메일', inp('t-mail', '이메일', 'type="email"'))}${field('t-com', '회사', inp('t-com', '회사 이름'))}</div><div class="tp-pair">${field('t-job', '직함', inp('t-job', '직함'))}${field('t-tel', '연락처', inp('t-tel', '전화번호', 'type="tel"'))}</div></div>`, { size: '' })}
     ${card(`<h2 class="tp-h3">문의 내용</h2><div class="tp-form"><fieldset class="tp-stack" style="border:0;padding:0;margin:0;gap:var(--ybm-space-x2)"><legend class="ds-field__label" style="margin-bottom:var(--ybm-space-x2)">무엇에 관한 문의인가요?</legend><div class="tp-chips">${topics.map((t, i) => chip(t, { on: i === 0 })).join('')}</div></fieldset>${field('t-budget', '예산 범위', sel('t-budget', '1,000만원 미만'))}${req('t-msg', '자세한 내용', textarea('t-msg', 'rows="5" placeholder="일정, 인원, 바라는 결과를 적어 주세요"'))}${btn('보내기', { variant: 'brandSolid', size: 'large', fill: true })}</div>`, { size: '' })}

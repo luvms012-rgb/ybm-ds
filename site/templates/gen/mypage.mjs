@@ -43,7 +43,6 @@ const CSS = FRAME_CSS + `
   @media (min-width: 768px) { .tp-flow__arrow { display: block; position: absolute; left: 0; top: 50%; translate: -50% -50%; --ds-icon-size: 16px; color: var(--ybm-color-fg-neutral-subtle); } }
   /* 주문 상품 한 줄 */
   .tp-oitem { display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: var(--ybm-space-x3) var(--ybm-space-x4); align-items: center; }
-  .tp-oitem .ds-imageframe { border-radius: var(--ybm-shape-md); }
   .tp-oitem__acts { grid-column: 1 / -1; display: flex; gap: var(--ybm-space-x2); }
   .tp-oitem__acts > .ds-btn { flex: 1 1 0; }
   @media (min-width: 768px) {
@@ -61,7 +60,6 @@ const CSS = FRAME_CSS + `
   .tp-wish { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--ybm-space-x4); }
   @media (min-width: 768px) { .tp-wish { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
   .tp-wish a { display: flex; flex-direction: column; gap: var(--ybm-space-x2); color: inherit; text-decoration: none; }
-  .tp-wish .ds-imageframe { border-radius: var(--ybm-shape-lg); }
   /* 설정 행: 왼쪽 이름과 설명, 오른쪽 값과 동작 */
   .tp-setrow { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ybm-space-x2) var(--ybm-space-x4); }
   .tp-setrow__end { display: flex; align-items: center; gap: var(--ybm-space-x3); min-width: 0; }
@@ -86,7 +84,7 @@ const ITEMS = [
   ['book', 1, '처음 시작하는 기록 습관', '1권', '16,800원', '구매 확정', 'muted', ['다시 담기']],
   ['product', 4, '스테인리스 텀블러 500ml', '실버 · 2개', '38,000원', '상품 준비 중', '', ['주문 취소']],
 ];
-const oitem = ([th, i, n, opt, price, st, tone, acts]) => `<div class="tp-oitem">${thumb('1:1', '', K.photo(th, i, 240))}<div class="tp-stack" style="gap: var(--ybm-space-x1)"><span class="tp-ostate"${tone ? ` data-tone="${tone}"` : ''}>${st}</span><span class="tp-h4">${n}</span><span class="tp-caption">${opt}</span><span class="tp-num" style="font-weight: var(--ybm-font-weight-semibold)">${price}</span></div><div class="tp-oitem__acts">${acts.map((a) => btn(a)).join('')}</div></div>`;
+const oitem = ([th, i, n, opt, price, st, tone, acts]) => `<div class="tp-oitem">${thumb('1:1', '', K.photo(th, i, 240), 'md')}<div class="tp-stack" style="gap: var(--ybm-space-x1)"><span class="tp-ostate"${tone ? ` data-tone="${tone}"` : ''}>${st}</span><span class="tp-h4">${n}</span><span class="tp-caption">${opt}</span><span class="tp-num" style="font-weight: var(--ybm-font-weight-semibold)">${price}</span></div><div class="tp-oitem__acts">${acts.map((a) => btn(a)).join('')}</div></div>`;
 
 /* 1. 마이페이지 홈 ------------------------------------------------ */
 const home = () => {
@@ -103,7 +101,7 @@ const home = () => {
       <div class="tp-rows">${ITEMS.slice(0, 3).map(oitem).join('')}</div>
     </section>
     <section class="tp-sec">${secHead('찜한 상품', { sub: '12개', tools: link('전체 보기') })}
-      <div class="tp-wish">${wish.map(([th, i, n, p]) => `<a href="#">${thumb('1:1', '', K.photo(th, i, 400))}<span class="tp-stack" style="gap: 2px"><span class="tp-sub" style="color: var(--ybm-color-fg-neutral)">${n}</span><span class="tp-h4 tp-num">${p}</span></span></a>`).join('')}</div>
+      <div class="tp-wish">${wish.map(([th, i, n, p]) => `<a href="#">${thumb('1:1', '', K.photo(th, i, 400), 'lg')}<span class="tp-stack" style="gap: 2px"><span class="tp-sub" style="color: var(--ybm-color-fg-neutral)">${n}</span><span class="tp-h4 tp-num">${p}</span></span></a>`).join('')}</div>
     </section>`);
   return { slug: 'mypage-home', en: 'My Page Home', name: '마이페이지 홈', group: 'My Page', desc: '마이페이지의 첫 화면입니다. 프로필과 포인트, 쿠폰 같은 혜택 숫자, 단계별 주문 개수, 최근 주문, 찜한 상품을 한 화면에 모아 보여 줍니다.', css: CSS, body };
 };

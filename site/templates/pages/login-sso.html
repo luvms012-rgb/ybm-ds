@@ -25,8 +25,6 @@
   .tp-sub { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
   .tp-caption { font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); color: var(--ybm-color-fg-neutral-subtle); }
   .tp-num { font-variant-numeric: tabular-nums; }
-  /* 텍스트 링크는 보조 동작이라 본문(14)보다 한 단계 작게 */
-  .ds-link { font-size: var(--ybm-font-size-t03); line-height: var(--ybm-line-height-t03); }
   /* 표는 DS Table 그대로 쓴다 (2026-11-03 DS 개편). 아래는 표 위, 아래 줄만 */
   /* 표 위 한 줄: 왼쪽 개수, 오른쪽 고르기 칸과 찾기 (커뮤니티 게시판 btools) */
   .tp-ttools { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ybm-space-x3); }
@@ -44,15 +42,12 @@
   .tp-row { display: flex; align-items: center; gap: var(--ybm-space-x2); min-width: 0; }
   /* 줄 안에 놓인 고르기 칸은 글자만큼만 */
   :is(.tp-row, .tp-between, .tp-head__tools, .tp-sec-head, .tp-ttools__end) > .ds-select { width: auto; min-width: 140px; }
-  /* 도구 줄의 medium 세그먼트는 버튼, 고르기 칸과 같은 40 높이로 */
-  :is(.tp-row, .tp-head__tools, .tp-tool__bar) > .ds-segmented[data-size="medium"] { box-sizing: border-box; height: 40px; }
   .tp-between { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ybm-space-x2); }
   .tp-stack { display: flex; flex-direction: column; gap: var(--ybm-space-x1); min-width: 0; }
   .tp-stack > .ds-badge { align-self: flex-start; }
   .tp-g2, .tp-g3, .tp-g4, .tp-g5, .tp-g6 { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ybm-space-x3); }
   /* 카드 (레퍼런스 A): 흰 바탕 + 옅은 1px 선, 모서리 12 */
   .tp-card { min-width: 0; }
-  .tp-card.ds-card { gap: var(--ybm-space-x3); padding: var(--ybm-space-x4); border-radius: var(--ybm-shape-lg); box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-neutral-muted); }
   .tp-span2 { grid-column: auto; }
   .tp-kpi__label { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
   .tp-kpi__value { font-size: var(--ybm-font-size-t08); line-height: var(--ybm-line-height-t08); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
@@ -100,7 +95,7 @@
     .tp-h2 { font-size: var(--ybm-font-size-t07); line-height: var(--ybm-line-height-t07); }
     .tp-content { padding: var(--ybm-space-x6) var(--ybm-space-x6) var(--ybm-space-x12); gap: var(--ybm-space-x8); }
     .tp-panel { padding: var(--ybm-space-x6); }
-    .tp-card.ds-card { padding: var(--ybm-space-x5); gap: var(--ybm-space-x4); }
+    .tp-card.ds-card { --ds-card-padding: var(--ybm-space-x5); --ds-card-gap: var(--ybm-space-x4); }
     .tp-g2, .tp-g3, .tp-g4, .tp-g5, .tp-g6 { gap: var(--ybm-space-x4); }
     .tp-g2, .tp-g4, .tp-g6 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .tp-g3, .tp-g5 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -138,11 +133,11 @@
   <div class="tp-auth__card">
     <div class="tp-auth__title"><h1 class="tp-h2">다시 오셨네요</h1><p class="tp-sub">회사 이메일을 넣으면 회사 로그인으로 이어져요</p></div>
     <div class="tp-auth__fields"><div class="ds-field"><div class="ds-field__header"><label class="ds-field__label" for="sso-mail">회사 이메일</label></div><div class="ds-input" data-variant="outline" data-size="large"><input class="ds-input__control" id="sso-mail" placeholder="you@company.com" type="email" autocomplete="email"></div><div class="ds-field__footer"><p class="ds-field__help">회사가 등록돼 있으면 회사 로그인 화면으로 바로 넘어가요.</p></div></div><div class="ds-field"><div class="ds-field__header"><label class="ds-field__label" for="sso-pw">비밀번호</label></div><div class="ds-input" data-variant="outline" data-size="large"><input class="ds-input__control" id="sso-pw" placeholder="비밀번호" type="password"></div></div></div>
-    <a class="ds-link" href="#">로그인이 안 되나요?</a>
+    <a class="ds-link" href="#" data-size="small">로그인이 안 되나요?</a>
     <button type="button" class="ds-btn" data-variant="brandSolid" data-size="large" data-width="fill">계속</button>
     <div class="tp-or">또는</div>
     <button type="button" class="ds-btn" data-variant="neutralOutline" data-size="large" data-width="fill"><i class="ds-icon ds-icon--key-round" aria-hidden="true"></i>회사 계정(SSO)으로 로그인</button>
-    <p class="tp-sub tp-auth__foot">계정이 없으신가요? <a class="ds-link" href="#">사용 요청</a></p>
+    <p class="tp-sub tp-auth__foot">계정이 없으신가요? <a class="ds-link" href="#" data-size="small">사용 요청</a></p>
   </div>
 </div></main>
 </body>

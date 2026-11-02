@@ -11,7 +11,7 @@ const DOC_CSS = `
 `;
 let TN = 0;
 let BK = 0;
-const tileCard = (t, d) => `<article class="ds-card tp-card tp-tile" data-size="small">${thumb('16:9', '', K.photo('mix', TN++, 640))}<div class="tp-stack"><h3 class="tp-h4">${t}</h3><p class="tp-sub">${d}</p></div></article>`;
+const tileCard = (t, d) => `<article class="ds-card tp-card tp-tile" data-size="small">${thumb('16:9', '', K.photo('mix', TN++, 640), 'md')}<div class="tp-stack"><h3 class="tp-h4">${t}</h3><p class="tp-sub">${d}</p></div></article>`;
 
 /* 1. 카드 그리드 (라이브러리) ---------------------------------- */
 const library = () => {
@@ -20,7 +20,6 @@ const library = () => {
   .tp-libbar { display: flex; flex-wrap: wrap; align-items: flex-end; gap: var(--ybm-space-x3); }
   .tp-libbar .tp-q { flex: 1 1 280px; max-width: 360px; }
   .tp-libbar .ds-chiptabs { padding-inline: 0; flex: 1 1 auto; }
-  .tp-tile .ds-imageframe { border-radius: var(--ybm-shape-md); }
 `;
   const body = `<div class="tp-app">
 ${head('라이브러리')}
@@ -105,7 +104,6 @@ const orderDetail = () => {
   .tp-meta-line { display: flex; flex-wrap: wrap; align-items: center; gap: var(--ybm-space-x2); color: var(--ybm-color-fg-neutral-muted); font-size: var(--ybm-font-size-t03); }
   .tp-meta-line .tp-sep { color: var(--ybm-color-stroke-neutral-weak); }
   .tp-line { display: grid; grid-template-columns: 56px minmax(0, 1fr) auto; gap: var(--ybm-space-x3); align-items: center; padding-block: var(--ybm-space-x3); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); }
-  .tp-line .ds-imageframe { border-radius: var(--ybm-shape-sm); }
   .tp-tl { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
   .tp-tl li { position: relative; display: grid; grid-template-columns: 16px minmax(0, 1fr); gap: var(--ybm-space-x3); padding-bottom: var(--ybm-space-x4); }
   .tp-tl li::before { content: ""; width: 10px; height: 10px; margin: 5px 3px 0; border-radius: 50%; background: var(--ybm-color-bg-brand-solid); }
@@ -137,9 +135,7 @@ const productDetail = () => {
   .tp-pd { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ybm-space-x8); width: min(100%, 1180px); margin-inline: auto; }
   @media (min-width: 1024px) { .tp-pd { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); } }
   .tp-pd__media { display: flex; flex-direction: column; gap: var(--ybm-space-x3); }
-  .tp-pd__media .ds-imageframe { border-radius: var(--ybm-shape-xl); }
   .tp-thumbs { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: var(--ybm-space-x2); }
-  .tp-thumbs .ds-imageframe { border-radius: var(--ybm-shape-md); }
   .tp-thumbs .ds-imageframe[aria-current="true"] { outline: 2px solid var(--ybm-color-stroke-neutral-contrast); outline-offset: 2px; }
   .tp-pd__info { display: flex; flex-direction: column; gap: var(--ybm-space-x5); }
   .tp-price { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--ybm-space-x2); }
@@ -150,7 +146,7 @@ const productDetail = () => {
   .tp-pd__btns { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--ybm-space-x2); }
 `;
   const body = `<div class="tp-app"><main class="tp-content"><div class="tp-pd">
-  <div class="tp-pd__media">${thumb('1:1', '', K.photo('book', 0, 1200))}<div class="tp-thumbs">${Array.from({ length: 6 }, (_, i) => thumb('1:1', '', K.photo('book', i, 320)).replace('aria-hidden="true"', i === 0 ? 'aria-current="true"' : 'aria-hidden="true"')).join('')}</div></div>
+  <div class="tp-pd__media">${thumb('1:1', '', K.photo('book', 0, 1200), 'xl')}<div class="tp-thumbs">${Array.from({ length: 6 }, (_, i) => thumb('1:1', '', K.photo('book', i, 320), 'md').replace('aria-hidden="true"', i === 0 ? 'aria-current="true"' : 'aria-hidden="true"')).join('')}</div></div>
   <div class="tp-pd__info">
     <div class="tp-stack" style="gap: var(--ybm-space-x2)"><h1 class="tp-h1">TOEIC 실전 모의고사 1000제 세트</h1><span class="ds-rating" data-size="small" style="--ds-rating-value: 4.3" role="img" aria-label="5점 만점에 4.3점, 후기 128개"><span class="ds-rating__stars"></span><span class="ds-rating__value">4.3</span><span class="ds-rating__count">(128)</span></span></div>
     <div class="tp-price"><b class="tp-num">38,000원</b><s class="tp-num">48,000원</s>${badge('할인', 'critical')}</div>

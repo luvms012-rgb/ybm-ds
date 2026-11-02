@@ -45,7 +45,7 @@ const loginSplit = () => {
   @media (min-width: 768px) { .tp-split-card { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
   .tp-split-card__form { display: flex; flex-direction: column; gap: var(--ybm-space-x6); padding: var(--ybm-space-x8) var(--ybm-space-x6); }
   .tp-split-card__media { display: none; }
-  @media (min-width: 768px) { .tp-split-card__media { display: block; } .tp-split-card__media .ds-imageframe { height: 100%; aspect-ratio: auto; border-radius: 0; } }
+  @media (min-width: 768px) { .tp-split-card__media { display: block; } .tp-split-card__media .ds-imageframe { height: 100%; aspect-ratio: auto; } }
   .tp-split-card__inner { display: flex; flex-direction: column; gap: var(--ybm-space-x5); width: min(100%, 340px); margin: auto; }
 `;
   const body = `<main class="tp-auth"><div class="tp-auth__wrap" style="width: min(100%, 960px)">
@@ -61,7 +61,7 @@ const loginSplit = () => {
       </div>
       <p class="tp-sub">계정이 없으신가요? ${link('가입하기')}</p>
     </div>
-    <div class="tp-split-card__media">${thumb('3:4', '', K.photo('work', 1, 1000))}</div>
+    <div class="tp-split-card__media">${thumb('3:4', '', K.photo('work', 1, 1000), 'none')}</div>
   </div>
   ${legal}
 </div></main>`;

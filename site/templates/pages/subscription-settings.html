@@ -25,8 +25,6 @@
   .tp-sub { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
   .tp-caption { font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); color: var(--ybm-color-fg-neutral-subtle); }
   .tp-num { font-variant-numeric: tabular-nums; }
-  /* 텍스트 링크는 보조 동작이라 본문(14)보다 한 단계 작게 */
-  .ds-link { font-size: var(--ybm-font-size-t03); line-height: var(--ybm-line-height-t03); }
   /* 표는 DS Table 그대로 쓴다 (2026-11-03 DS 개편). 아래는 표 위, 아래 줄만 */
   /* 표 위 한 줄: 왼쪽 개수, 오른쪽 고르기 칸과 찾기 (커뮤니티 게시판 btools) */
   .tp-ttools { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ybm-space-x3); }
@@ -44,15 +42,12 @@
   .tp-row { display: flex; align-items: center; gap: var(--ybm-space-x2); min-width: 0; }
   /* 줄 안에 놓인 고르기 칸은 글자만큼만 */
   :is(.tp-row, .tp-between, .tp-head__tools, .tp-sec-head, .tp-ttools__end) > .ds-select { width: auto; min-width: 140px; }
-  /* 도구 줄의 medium 세그먼트는 버튼, 고르기 칸과 같은 40 높이로 */
-  :is(.tp-row, .tp-head__tools, .tp-tool__bar) > .ds-segmented[data-size="medium"] { box-sizing: border-box; height: 40px; }
   .tp-between { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ybm-space-x2); }
   .tp-stack { display: flex; flex-direction: column; gap: var(--ybm-space-x1); min-width: 0; }
   .tp-stack > .ds-badge { align-self: flex-start; }
   .tp-g2, .tp-g3, .tp-g4, .tp-g5, .tp-g6 { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ybm-space-x3); }
   /* 카드 (레퍼런스 A): 흰 바탕 + 옅은 1px 선, 모서리 12 */
   .tp-card { min-width: 0; }
-  .tp-card.ds-card { gap: var(--ybm-space-x3); padding: var(--ybm-space-x4); border-radius: var(--ybm-shape-lg); box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-neutral-muted); }
   .tp-span2 { grid-column: auto; }
   .tp-kpi__label { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
   .tp-kpi__value { font-size: var(--ybm-font-size-t08); line-height: var(--ybm-line-height-t08); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
@@ -100,7 +95,7 @@
     .tp-h2 { font-size: var(--ybm-font-size-t07); line-height: var(--ybm-line-height-t07); }
     .tp-content { padding: var(--ybm-space-x6) var(--ybm-space-x6) var(--ybm-space-x12); gap: var(--ybm-space-x8); }
     .tp-panel { padding: var(--ybm-space-x6); }
-    .tp-card.ds-card { padding: var(--ybm-space-x5); gap: var(--ybm-space-x4); }
+    .tp-card.ds-card { --ds-card-padding: var(--ybm-space-x5); --ds-card-gap: var(--ybm-space-x4); }
     .tp-g2, .tp-g3, .tp-g4, .tp-g5, .tp-g6 { gap: var(--ybm-space-x4); }
     .tp-g2, .tp-g4, .tp-g6 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .tp-g3, .tp-g5 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -155,7 +150,6 @@
   .tp-stats > * { display: flex; flex-direction: column; gap: var(--ybm-space-x1); min-width: 0; }
   @media (min-width: 768px) { .tp-stats { grid-template-columns: repeat(var(--n, 4), minmax(0, 1fr)); } .tp-stats > * + * { padding-inline-start: var(--ybm-space-x4); box-shadow: inset 1px 0 0 var(--ybm-color-stroke-neutral-muted); } }
   .tp-thumb-sm { flex: none; width: 96px; }
-  .tp-thumb-sm .ds-imageframe, .tp-course .ds-imageframe { border-radius: var(--ybm-shape-lg); }
   .tp-aside-sticky { display: flex; flex-direction: column; gap: var(--ybm-space-x3); }
   @media (min-width: 1024px) { .tp-aside-sticky { position: sticky; top: calc(var(--ybm-space-x16) + var(--ybm-space-x4)); } }
 
@@ -184,7 +178,7 @@
 </header>
   <main class="tp-content">
     <div class="tp-manage">
-      <section class="ds-card tp-card" data-size="small"><div class="tp-between"><div class="tp-row"><span class="ds-badge" data-tone="positive">이용 중</span><span class="tp-sub">연 결제</span></div><a class="ds-link" href="#">요금제 비교하기</a></div>
+      <section class="ds-card tp-card" data-variant="subtle" data-size="small"><div class="tp-between"><div class="tp-row"><span class="ds-badge" data-tone="positive">이용 중</span><span class="tp-sub">연 결제</span></div><a class="ds-link" href="#" data-size="small">요금제 비교하기</a></div>
       <div class="tp-stack"><h2 class="tp-h2">프로</h2><div class="tp-price"><span class="tp-mid"><span class="tp-num">7,900원</span></span><span class="tp-sub">/ 월, 1년 94,800원</span></div></div>
       <div class="tp-rows">
         <div class="tp-kv"><span>다음 결제일</span><span class="tp-num">2027.10.09</span></div>
@@ -192,12 +186,12 @@
         <div class="tp-kv"><span>팀원</span><span class="tp-num">4명 / 10명</span></div>
       </div>
       <div class="tp-row" style="flex-wrap: wrap"><button type="button" class="ds-btn" data-variant="neutralSolid" data-size="medium">요금제 바꾸기</button><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="medium">월 결제로 바꾸기</button></div></section>
-      <section class="ds-card tp-card" data-size="small"><h2 class="tp-h3">이번 달 사용량</h2>
+      <section class="ds-card tp-card" data-variant="subtle" data-size="small"><h2 class="tp-h3">이번 달 사용량</h2>
       <div class="tp-track"><div class="tp-between"><span class="tp-sub">프로젝트</span><span class="tp-num tp-sub">8 / 무제한</span></div><div class="ds-progress" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" aria-label="프로젝트" style="--ds-progress-value: 40%" data-size="small"></div></div><div class="tp-track"><div class="tp-between"><span class="tp-sub">저장 공간</span><span class="tp-num tp-sub">12GB / 50GB</span></div><div class="ds-progress" role="progressbar" aria-valuenow="24" aria-valuemin="0" aria-valuemax="100" aria-label="저장 공간" style="--ds-progress-value: 24%" data-size="small"></div></div><div class="tp-track"><div class="tp-between"><span class="tp-sub">팀원</span><span class="tp-num tp-sub">4명 / 10명</span></div><div class="ds-progress" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" aria-label="팀원" style="--ds-progress-value: 40%" data-size="small"></div></div><div class="tp-track"><div class="tp-between"><span class="tp-sub">버전 기록</span><span class="tp-num tp-sub">30일 보관</span></div><div class="ds-progress" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" aria-label="버전 기록" style="--ds-progress-value: 100%" data-size="small"></div></div>
       <p class="tp-caption">사용량은 매일 새벽 4시에 새로 계산해요.</p></section>
     </div>
     <section class="tp-sec" aria-labelledby="pm"><div class="tp-sec-head"><div class="tp-sec-head__texts"><h2 class="tp-h2" id="pm">결제 수단</h2></div></div>
-      <section class="ds-card tp-card" data-size="small"><div class="tp-between"><div class="tp-row" style="gap: var(--ybm-space-x3)"><span class="tp-cardmark"><i class="ds-icon ds-icon--credit-card" aria-hidden="true"></i></span><span class="tp-stack"><span class="tp-h4">신용카드 **** 4821</span><span class="tp-caption">유효 기간 08/29</span></span></div><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="small">바꾸기</button></div></section>
+      <section class="ds-card tp-card" data-variant="subtle" data-size="small"><div class="tp-between"><div class="tp-row" style="gap: var(--ybm-space-x3)"><span class="tp-cardmark"><i class="ds-icon ds-icon--credit-card" aria-hidden="true"></i></span><span class="tp-stack"><span class="tp-h4">신용카드 **** 4821</span><span class="tp-caption">유효 기간 08/29</span></span></div><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="small">바꾸기</button></div></section>
     </section>
     <section class="tp-sec" aria-labelledby="hist"><div class="tp-sec-head"><div class="tp-sec-head__texts"><h2 class="tp-h2" id="hist">결제 내역</h2></div><div class="tp-row"><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="small"><i class="ds-icon ds-icon--download" aria-hidden="true"></i>전체 내려받기</button></div></div>
       <div class="tp-scroll-x"><div class="ds-table-wrap"><table class="ds-table" data-density="compact"><caption class="tp-sr">결제 내역</caption><thead><tr><th scope="col">결제일</th><th scope="col">내용</th><th scope="col" data-align="right">금액</th><th scope="col">상태</th><th scope="col" data-align="center">영수증</th></tr></thead><tbody><tr><td><span class="tp-num">2026.10.09</span></td><td>프로 연 결제</td><td data-align="right"><span class="tp-num">94,800원</span></td><td><span class="ds-badge" data-tone="positive">결제 완료</span></td><td data-align="center"><button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="영수증 내려받기"><i class="ds-icon ds-icon--download" aria-hidden="true"></i></button></td></tr><tr><td><span class="tp-num">2025.10.09</span></td><td>프로 연 결제</td><td data-align="right"><span class="tp-num">94,800원</span></td><td><span class="ds-badge" data-tone="positive">결제 완료</span></td><td data-align="center"><button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="영수증 내려받기"><i class="ds-icon ds-icon--download" aria-hidden="true"></i></button></td></tr><tr><td><span class="tp-num">2025.09.09</span></td><td>베이직 월 결제</td><td data-align="right"><span class="tp-num">5,900원</span></td><td><span class="ds-badge" data-tone="positive">결제 완료</span></td><td data-align="center"><button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="영수증 내려받기"><i class="ds-icon ds-icon--download" aria-hidden="true"></i></button></td></tr><tr><td><span class="tp-num">2025.08.09</span></td><td>베이직 월 결제</td><td data-align="right"><span class="tp-num">5,900원</span></td><td><span class="ds-badge" data-tone="neutral">환불</span></td><td data-align="center"><button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="영수증 내려받기"><i class="ds-icon ds-icon--download" aria-hidden="true"></i></button></td></tr><tr><td><span class="tp-num">2025.07.09</span></td><td>베이직 월 결제</td><td data-align="right"><span class="tp-num">5,900원</span></td><td><span class="ds-badge" data-tone="positive">결제 완료</span></td><td data-align="center"><button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="영수증 내려받기"><i class="ds-icon ds-icon--download" aria-hidden="true"></i></button></td></tr></tbody></table></div></div>

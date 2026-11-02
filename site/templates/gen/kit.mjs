@@ -21,8 +21,6 @@ export const BASE_CSS = `  /* 템플릿 배치 전용. 값은 모두 --ybm-* 토
   .tp-sub { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
   .tp-caption { font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); color: var(--ybm-color-fg-neutral-subtle); }
   .tp-num { font-variant-numeric: tabular-nums; }
-  /* 텍스트 링크는 보조 동작이라 본문(14)보다 한 단계 작게 */
-  .ds-link { font-size: var(--ybm-font-size-t03); line-height: var(--ybm-line-height-t03); }
   /* 표는 DS Table 그대로 쓴다 (2026-11-03 DS 개편). 아래는 표 위, 아래 줄만 */
   /* 표 위 한 줄: 왼쪽 개수, 오른쪽 고르기 칸과 찾기 (커뮤니티 게시판 btools) */
   .tp-ttools { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ybm-space-x3); }
@@ -40,15 +38,12 @@ export const BASE_CSS = `  /* 템플릿 배치 전용. 값은 모두 --ybm-* 토
   .tp-row { display: flex; align-items: center; gap: var(--ybm-space-x2); min-width: 0; }
   /* 줄 안에 놓인 고르기 칸은 글자만큼만 */
   :is(.tp-row, .tp-between, .tp-head__tools, .tp-sec-head, .tp-ttools__end) > .ds-select { width: auto; min-width: 140px; }
-  /* 도구 줄의 medium 세그먼트는 버튼, 고르기 칸과 같은 40 높이로 */
-  :is(.tp-row, .tp-head__tools, .tp-tool__bar) > .ds-segmented[data-size="medium"] { box-sizing: border-box; height: 40px; }
   .tp-between { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ybm-space-x2); }
   .tp-stack { display: flex; flex-direction: column; gap: var(--ybm-space-x1); min-width: 0; }
   .tp-stack > .ds-badge { align-self: flex-start; }
   .tp-g2, .tp-g3, .tp-g4, .tp-g5, .tp-g6 { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ybm-space-x3); }
   /* 카드 (레퍼런스 A): 흰 바탕 + 옅은 1px 선, 모서리 12 */
   .tp-card { min-width: 0; }
-  .tp-card.ds-card { gap: var(--ybm-space-x3); padding: var(--ybm-space-x4); border-radius: var(--ybm-shape-lg); box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-neutral-muted); }
   .tp-span2 { grid-column: auto; }
   .tp-kpi__label { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
   .tp-kpi__value { font-size: var(--ybm-font-size-t08); line-height: var(--ybm-line-height-t08); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
@@ -96,7 +91,7 @@ export const BASE_CSS = `  /* 템플릿 배치 전용. 값은 모두 --ybm-* 토
     .tp-h2 { font-size: var(--ybm-font-size-t07); line-height: var(--ybm-line-height-t07); }
     .tp-content { padding: var(--ybm-space-x6) var(--ybm-space-x6) var(--ybm-space-x12); gap: var(--ybm-space-x8); }
     .tp-panel { padding: var(--ybm-space-x6); }
-    .tp-card.ds-card { padding: var(--ybm-space-x5); gap: var(--ybm-space-x4); }
+    .tp-card.ds-card { --ds-card-padding: var(--ybm-space-x5); --ds-card-gap: var(--ybm-space-x4); }
     .tp-g2, .tp-g3, .tp-g4, .tp-g5, .tp-g6 { gap: var(--ybm-space-x4); }
     .tp-g2, .tp-g4, .tp-g6 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .tp-g3, .tp-g5 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -145,12 +140,12 @@ export const badge = (t, tone = 'neutral', solid = false) => `<span class="ds-ba
 export const dot = (tone, label = '') => `<span class="ds-statusdot" data-tone="${tone}"${label ? ` role="img" aria-label="${esc(label)}"` : ' aria-hidden="true"'}></span>`;
 export const avatar = (name, size = 24) => `<span class="ds-avatar" data-size="${size}" role="img" aria-label="${esc(name)}"><span class="ds-avatar__initials" aria-hidden="true">${esc(name.slice(0, 1))}</span></span>`;
 export const avatars = (names, size = 24, more = 0) => `<div class="ds-avatar-group" data-size="${size}" role="group" aria-label="참여자">${names.map((n) => avatar(n, size)).join('')}${more ? `<span class="ds-avatar-group__overflow" role="img" aria-label="그 외 ${more}명">+${more}</span>` : ''}</div>`;
-export const link = (t, href = '#') => `<a class="ds-link" href="${href}">${t}</a>`;
+export const link = (t, href = '#', size = 'small') => `<a class="ds-link" href="${href}"${size ? ` data-size="${size}"` : ''}>${t}</a>`;
 export const divider = () => `<hr class="ds-divider">`;
 // 고르기 칸과 입력칸은 large 52 / medium 40 두 가지뿐이라 small 은 medium 으로 받는다
 const field40 = (size) => (size === 'small' ? 'medium' : size);
-// 한 줄에 고르기 칸이나 입력칸(40)이 있으면 같은 줄의 small 버튼(36)과 세그먼트도 medium(40)으로 높이를 맞춘다
-export const even = (h, force = false) => (force || /class="ds-(select|input)"/.test(h) ? h.replace(/(class="ds-(?:btn|segmented)"[^>]*? data-size=")small"/g, '$1medium"') : h);
+// 한 줄에 고르기 칸이나 입력칸(40)이 있거나, 세그먼트(32)와 버튼(36)이 함께 있으면 small 버튼과 세그먼트를 medium(40)으로 높이를 맞춘다
+export const even = (h, force = false) => (force || /class="ds-(select|input)"/.test(h) || (/class="ds-segmented"/.test(h) && /class="ds-btn"/.test(h)) ? h.replace(/(class="ds-(?:btn|segmented)"[^>]*? data-size=")small"/g, '$1medium"') : h);
 export const select = (value, { id = '', aria = '', size = 'medium' } = {}) => `<button type="button" class="ds-select" data-size="${field40(size)}"${id ? ` id="${id}"` : ''} aria-haspopup="listbox" aria-expanded="false"${aria ? ` aria-label="${esc(aria)}"` : ''}><span class="ds-select__value">${value}</span></button>`;
 export const selField = (label, value, id) => `<div class="ds-field tp-selfield"><div class="ds-field__header"><label class="ds-field__label" for="${id}">${label}</label></div>${select(value, { id })}</div>`;
 export const input = (id, attrs = '', { size = 'medium', ic = '' } = {}) => `<div class="ds-input" data-variant="outline" data-size="${field40(size)}">${ic ? `<i class="ds-icon ds-icon--${ic} ds-input__icon" aria-hidden="true"></i>` : ''}<input class="ds-input__control" id="${id}" ${attrs}></div>`;
@@ -167,7 +162,7 @@ export const tabs = (items, cur = 0, aria = '탭') => `<div class="ds-tabs" role
 export const chip = (l, { on = false, variant = 'outlineWeak', size = 'small' } = {}) => `<button type="button" class="ds-chip" data-variant="${variant}" data-size="${size}"${on ? ' aria-pressed="true"' : ''}>${l}</button>`;
 export const progress = (v, { tone = '', small = true, label = '' } = {}) => `<div class="ds-progress" role="progressbar" aria-valuenow="${v}" aria-valuemin="0" aria-valuemax="100"${label ? ` aria-label="${esc(label)}"` : ''} style="--ds-progress-value: ${v}%"${tone ? ` data-tone="${tone}"` : ''}${small ? ' data-size="small"' : ''}></div>`;
 export const ring = (v, size = 24, tone = '') => `<span class="ds-progress-circle" data-size="${size}"${tone ? ` data-tone="${tone}"` : ''} role="progressbar" aria-valuenow="${v}" style="--ds-progress-value: ${v}"><svg viewBox="0 0 40 40" aria-hidden="true"><circle class="ds-progress-circle__track" pathLength="100"/><circle class="ds-progress-circle__range" pathLength="100"/></svg></span>`;
-export const card = (inner, { cls = '', size = 'small', tag = 'section', attrs = '' } = {}) => `<${tag} class="ds-card tp-card${cls ? ' ' + cls : ''}"${size ? ` data-size="${size}"` : ''}${attrs ? ' ' + attrs : ''}>${inner}</${tag}>`;
+export const card = (inner, { cls = '', size = 'small', variant = 'subtle', tag = 'section', attrs = '' } = {}) => `<${tag} class="ds-card tp-card${cls ? ' ' + cls : ''}"${variant ? ` data-variant="${variant}"` : ''}${size ? ` data-size="${size}"` : ''}${attrs ? ' ' + attrs : ''}>${inner}</${tag}>`;
 export const callout = (title, desc, tone = 'informative', ic = 'info-solid') => `<div class="ds-callout" data-tone="${tone}">${icon(ic)}<div class="ds-callout__body">${title ? `<p class="ds-callout__title">${title}</p>` : ''}${desc ? `<p class="ds-callout__desc">${desc}</p>` : ''}</div></div>`;
 export const empty = (title, desc, ic = 'inbox', action = '') => `<div class="ds-empty"><span class="ds-empty__media">${icon(ic)}</span><p class="ds-empty__title">${title}</p>${desc ? `<p class="ds-empty__desc">${desc}</p>` : ''}${action ? `<div class="ds-empty__actions">${action}</div>` : ''}</div>`;
 // 사진: Unsplash(무료 사용 허락) 사진을 주소로 불러온다. 주제별 목록에서 번호로 고른다.
@@ -183,7 +178,7 @@ export const PHOTOS = {
 };
 PHOTOS.mix = [PHOTOS.nature[1], PHOTOS.work[0], PHOTOS.city[0], PHOTOS.food[1], PHOTOS.nature[4], PHOTOS.work[1], PHOTOS.nature[2], PHOTOS.city[2], PHOTOS.food[3], PHOTOS.nature[7], PHOTOS.city[1], PHOTOS.nature[9]];
 export const photo = (theme, i = 0, w) => unsplash(PHOTOS[theme][((i % PHOTOS[theme].length) + PHOTOS[theme].length) % PHOTOS[theme].length], w);
-export const thumb = (ratio = '16:9', cls = '', src = '') => `<div class="ds-imageframe${cls ? ' ' + cls : ''}" data-ratio="${ratio}" aria-hidden="true"><span class="tp-ph">${src ? `<img src="${src}" alt="" loading="lazy">` : icon('image')}</span></div>`;
+export const thumb = (ratio = '16:9', cls = '', src = '', radius = '') => `<div class="ds-imageframe${cls ? ' ' + cls : ''}" data-ratio="${ratio}"${radius ? ` data-radius="${radius}"` : ''} aria-hidden="true"><span class="tp-ph">${src ? `<img src="${src}" alt="" loading="lazy">` : icon('image')}</span></div>`;
 export const breadcrumbs = (items) => `<nav class="ds-breadcrumbs" aria-label="현재 위치"><ol>${items.map((t, i) => `<li>${i === items.length - 1 ? `<span aria-current="page">${t}</span>` : `<a href="#">${t}</a>`}</li>`).join('')}</ol></nav>`;
 export const stepper = (steps, cur, aria = '단계') => `<ol class="ds-stepper" aria-label="${esc(aria)}">${steps.map((s, i) => `<li class="ds-stepper__step"${i < cur ? ' data-state="complete"' : i === cur ? ' data-state="current" aria-current="step"' : ''}><span class="ds-stepper__indicator"></span><span class="ds-stepper__label">${s}</span></li>`).join('')}</ol>`;
 export const pagination = (cur = 1, last = 12) => `<nav class="ds-pagination" aria-label="페이지"><a class="ds-pagination__item" data-type="prev" aria-label="이전 페이지"${cur === 1 ? ' aria-disabled="true"' : ' href="#"'}></a>${[1, 2, 3].map((n) => `<a class="ds-pagination__item" href="#"${n === cur ? ' aria-current="page"' : ''}>${n}</a>`).join('')}<span class="ds-pagination__item" data-type="ellipsis" aria-hidden="true"></span><a class="ds-pagination__item" href="#">${last}</a><a class="ds-pagination__item" data-type="next" href="#" aria-label="다음 페이지"></a></nav>`;
