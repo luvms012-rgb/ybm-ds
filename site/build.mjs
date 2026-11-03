@@ -186,7 +186,7 @@ const NAV = [['get-started', 'Get Started', 'index.html'], ['foundations', 'Foun
 // 왼쪽 메뉴는 영문, 묶음은 두고 묶음 안은 ABC 순 (레퍼런스 B)
 const az = (list) => [...list].sort((a, b) => a[1].localeCompare(b[1], 'en'));
 // 파운데이션: 항목마다 한 페이지 (슬러그, 영문 이름)
-const FOUND = az([['color', 'Color'], ['typography', 'Typography'], ['spacing', 'Spacing'], ['shape', 'Radius'], ['elevation', 'Elevation'], ['motion', 'Motion'], ['icons', 'Iconography']]);
+const FOUND = az([['color', 'Color'], ['typography', 'Typography'], ['spacing', 'Spacing'], ['shape', 'Radius'], ['elevation', 'Elevation'], ['motion', 'Motion'], ['icons', 'Iconography'], ['breakpoint', 'Breakpoint']]);
 // Get Started 문서 (왼쪽 메뉴 없음): 첫 화면과 AI & Tools
 const GS_ORDER = [['index.html', 'Get Started'], ['get-started/ai.html', 'AI & Tools']];
 // Foundations 왼쪽 메뉴와 이전 / 다음 순서: Overview 다음 항목 ABC 순. Color 와 Iconography 의 탭 쪽은 첫 탭과 같은 자리
@@ -350,7 +350,7 @@ const prompts = [
 - DS 부품으로 바꿀 수 있는데 직접 만든 버튼, 입력, 표
 고친 곳은 목록으로 알려 줘.`],
 ];
-// 반응형 기준점 (시작하기 반응형 절)
+// 반응형 기준점 (Foundations Breakpoint, 11-04 시작하기에서 옮김)
 const bpRows = [['sm', '480px', '큰 휴대폰'], ['md', '768px', '태블릿, PC 부품으로 바뀌는 기준'], ['lg', '1280px', '넓은 PC, 3단 배치'], ['xl', '1440px', '아주 넓은 화면']];
 // 안내 카드 (레퍼런스 B Get Started): 옅은 회색 칸에 제목과 화살표, 아래 한 줄 설명. out 이면 새 창
 const hubCard = (href, title, desc, out = false) => `<a class="site-hub" href="${href}"${out ? ' target="_blank" rel="noopener"' : ''}><span class="site-hub__title">${esc(title)}<i class="ds-icon ds-icon--${out ? 'external-link' : 'arrow-right'} ds-icon--sm" aria-hidden="true"></i></span><span class="site-hub__desc">${esc(desc)}</span></a>`;
@@ -379,17 +379,23 @@ ${table(['용어', '뜻'], [
 <h2 id="start">바로 써 보기</h2>
 <p>AI 코딩 도구로 만들 때는 <a class="ds-link" href="get-started/ai.html#prompt">AI &amp; Tools</a>의 요청 글을 붙여 넣으면 아래 설치와 규칙을 알아서 맞춥니다.</p>
 <script>if (location.hash === '#ai') location.replace('get-started/ai.html#prompt');</script>
-<h3>1. DS 불러오기</h3>
-<p><code>&lt;head&gt;</code>에 두 줄을 넣으면 글꼴, 토큰, 아이콘, 컴포넌트가 함께 들어옵니다. <code>ybm-ds.js</code>는 창 열기, 알림처럼 CSS만으로 안 되는 동작을 알아서 맡습니다.</p>
+<p><code>&lt;head&gt;</code>에 두 줄을 넣으면 글꼴, 토큰, 아이콘, 컴포넌트가 함께 들어옵니다. 컴포넌트마다 쓰는 법은 <a class="ds-link" href="components/index.html">Components</a>에 있습니다.</p>
 ${codeblock(CSS_LINK)}
-<h3>2. 컴포넌트 붙이기</h3>
-<p>정해진 클래스만 붙이면 됩니다. 쓰는 법은 <a class="ds-link" href="components/index.html">Components</a>에 있습니다.</p>
-${example(`<div class="pv-stage"><button class="ds-btn" data-variant="brandSolid" data-size="large">시작하기</button><button class="ds-btn" data-variant="neutralWeak" data-size="large">나중에</button></div>`, `<button class="ds-btn" data-variant="brandSolid" data-size="large">시작하기</button>\n<button class="ds-btn" data-variant="neutralWeak" data-size="large">나중에</button>`)}
-<p>상태는 HTML 기본 속성으로 나타냅니다.</p>
-${table(['상태', '속성'], [['꺼짐', '<code>disabled</code>'], ['선택', '<code>:checked</code>, <code>aria-selected</code>, <code>aria-pressed</code>'], ['지금 위치', '<code>aria-current="page"</code>'], ['펼침', '<code>aria-expanded</code>'], ['오류', '<code>aria-invalid="true"</code>']])}
-<h3>3. 서비스에 맞게 바꾸기</h3>
-<p>서비스 CSS는 DS 다음에 불러오고, 컴포넌트 변수(<code>--ds-*</code>)와 시맨틱 색만 덮어씁니다. DS가 CSS 레이어 안에 있어 <code>!important</code> 없이도 서비스 CSS가 이깁니다. 브랜드 색은 <a class="ds-link" href="{root}foundations/color.html#code">Color</a>에서 바꿉니다.</p>
-${codeblock(`<link rel="stylesheet" href="${PUBLIC}/dist/ybm-ds.css">\n<link rel="stylesheet" href="my-service.css">  <!-- 서비스 CSS는 항상 DS 다음 -->\n\n/* my-service.css */\n.my-dialog { --ds-dialog-width: 360px; }\n.my-banner { --ds-banner-bg: var(--ybm-color-bg-brand-weak); }`)}
+
+<h2 id="service">다른 서비스에 쓰기</h2>
+<p>YBM IT처럼 다른 서비스에도 DS를 그대로 가져다 씁니다. DS 파일은 고치지 않고, 서비스 CSS 한 장에서 그 서비스의 색과 로고만 바꿉니다.</p>
+<h3>1. 서비스 CSS를 DS 다음에 불러오기</h3>
+<p>DS가 CSS 레이어 안에 있어 뒤에 불러온 서비스 CSS가 <code>!important</code> 없이 이깁니다.</p>
+${codeblock(`<link rel="stylesheet" href="${PUBLIC}/dist/ybm-ds.css">\n<script src="${PUBLIC}/dist/ybm-ds.js" defer></script>\n<link rel="stylesheet" href="ybm-it.css">  <!-- 서비스 CSS는 항상 DS 다음 -->`)}
+<h3>2. 브랜드 색 넣기</h3>
+<p>브랜드 팔레트 10단계만 서비스 색으로 바꾸면 주 버튼, 체크박스, 링크처럼 브랜드 색을 쓰는 곳이 모두 따라 바뀝니다. 자세한 것은 <a class="ds-link" href="{root}foundations/color.html">Color</a>에 있습니다.</p>
+${codeblock(`/* ybm-it.css */\n:root {\n  --ybm-color-palette-brand-100: #e6f6ee;  /* 옅은 배경 */\n  --ybm-color-palette-brand-600: #12a150;  /* 주 버튼, 링크 */\n  --ybm-color-palette-brand-700: #0d7d3e;  /* 눌림 */\n  /* 200 ~ 500, 800 ~ 1000 도 같은 색의 단계로 */\n}\n:root[data-theme="dark"] {\n  /* 다크는 같은 단계를 뒤집어 넣는다 (다크 100 = 라이트 1000) */\n}`, 'css')}
+<h3>3. 로고와 이름 바꾸기</h3>
+<p>머리 메뉴의 로고 그림과 페이지 제목만 서비스 것으로 바꿉니다.</p>
+${codeblock(`<header class="ds-topnav">\n  <a class="ds-topnav__left" href="/"><img src="ybm-it-logo.svg" alt="YBM IT"></a>\n  …\n</header>`)}
+<h3>4. 필요한 곳만 다듬기</h3>
+<p>모양을 더 바꾸고 싶으면 컴포넌트 변수(<code>--ds-*</code>)만 덮어씁니다. 새 <code>ds-</code> 클래스를 만들지 않습니다.</p>
+${codeblock(`/* ybm-it.css */\n.ds-dialog { --ds-dialog-width: 360px; }\n.ds-btn[data-variant="brandSolid"] { --ds-btn-radius: var(--ybm-shape-pill); }`, 'css')}
 
 <h2 id="theme">다크 모드</h2>
 <p><code>html</code>에 속성 하나를 붙이면 모든 색이 어두운 화면용으로 바뀝니다. 색을 토큰으로만 썼다면 따로 고칠 것이 없습니다.</p>
@@ -401,34 +407,11 @@ ${codeblock(`<html lang="ko" data-ds-theme="trust">
 <link rel="stylesheet" href="${PUBLIC}/dist/ybm-ds.css">
 <link rel="stylesheet" href="${PUBLIC}/dist/themes/trust.css">`)}
 
-` : ''}<h2 id="breakpoint">반응형</h2>
-<p>작은 화면부터 만들고 폭이 넓어질 때 배치를 바꿉니다. <code>@media</code> 안에서는 CSS 변수를 쓸 수 없어 숫자를 직접 씁니다.</p>
-${table(['이름', '폭', '쓰임'], bpRows.map(([n, w, u]) => [`<code>${n}</code>`, w, u]))}
-${codeblock(`@media (min-width: 768px) { /* 태블릿, PC */ }\n@media (min-width: 1280px) { /* 넓은 PC */ }\n\n<!-- 768 이상에서 숨김(모바일 전용) / 768 이상에서만 보임(PC 전용) -->\n<div class="u-hide-from-md">…</div>\n<div class="u-show-from-md">…</div>`, 'css')}
-<ul class="site-list">
-  <li>Top Navigation ↔ Top App Bar, Side Panel ↔ Bottom Sheet, Dialog ↔ Bottom Sheet는 768을 기준으로 바꿉니다.</li>
-  <li>Side Navigation은 1280 이상 펼침, 768 이상 접힘, 그보다 좁으면 서랍 메뉴입니다.</li>
-</ul>
-
-<h2 id="script">스크립트 직접 사용</h2>
-<p>대부분은 HTML 속성만으로 동작합니다. 코드에서 직접 열거나 띄울 때만 아래를 씁니다.</p>
-${table(['기능', '사용방법'], [['창 열기, 닫기', '<code>YBM.openDialog(요소)</code>, <code>YBM.closeDialog(요소)</code>'], ['알림 띄우기', '<code>YBM.snackbar("저장했어요", { variant: "positive" })</code>'], ['새로 고침 끝내기', '<code>YBM.endRefresh(요소)</code>'], ['나중에 넣은 HTML 연결', '<code>YBM.init(요소)</code>']])}
-${codeblock(`<button class="ds-btn" data-ds-open="confirm">열기</button>\n<dialog class="ds-dialog" id="confirm">… <button class="ds-btn" data-ds-close>닫기</button></dialog>\n\n<script>\n  YBM.snackbar("저장했어요", { variant: "positive", action: "확인" });\n</script>`)}
-
-<h2 id="other">다른 설치 방법</h2>
-<h3>버전 고정하기</h3>
-<p>위 주소는 늘 최신입니다. 버전을 고정하려면 주소에 커밋 번호를 넣습니다.</p>
-${codeblock(`<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/luvms012-rgb/ybm-ds@[커밋 번호]/dist/ybm-ds.css">\n<script src="https://cdn.jsdelivr.net/gh/luvms012-rgb/ybm-ds@[커밋 번호]/dist/ybm-ds.js" defer></script>`)}
-<h3>파일 내려받기</h3>
-<p><code>dist</code> 폴더를 프로젝트에 넣고 상대 경로로 불러옵니다. 인터넷이 막힌 사내 서버에 씁니다.</p>
-${codeblock(`git clone ${GITHUB}.git\n# ybm-ds/dist 폴더를 프로젝트로 복사한 뒤\n<link rel="stylesheet" href="./dist/ybm-ds.css">\n<script src="./dist/ybm-ds.js" defer></script>`, 'shell')}
-<h3>Tailwind CSS와 함께 쓰기</h3>
-<p>토큰을 Tailwind 이름으로 쓰는 설정 파일입니다. <code>ybm-ds.css</code>도 함께 불러옵니다.</p>
-${codeblock(`// tailwind.config.js - ybm-ds/tokens/tailwind.preset.js를 프로젝트에 복사한 뒤\nmodule.exports = { presets: [require('./tailwind.preset.js')] };`, 'javascript')}`.replaceAll('href="components/', 'href="{root}components/').replaceAll('href="templates/', 'href="{root}templates/').replaceAll('href="get-started/', 'href="{root}get-started/'),
+` : ''}`.replaceAll('href="components/', 'href="{root}components/').replaceAll('href="templates/', 'href="{root}templates/').replaceAll('href="get-started/', 'href="{root}get-started/'),
 });
 
 // 예전 Usage, Scripts 주소는 시작하기의 옮긴 절로 넘긴다 (공유된 링크가 깨지지 않게)
-for (const [f, to, label] of [['usage', 'start', '바로 써 보기'], ['scripts', 'script', '스크립트 직접 사용']]) {
+for (const [f, to, label] of [['usage', 'start', '바로 써 보기'], ['scripts', 'start', '바로 써 보기']]) {
   fs.writeFileSync(path.join(SITE, `get-started/${f}.html`), `<!doctype html>\n<html lang="ko"><head><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=../index.html#${to}"><title>Get Started - YBM DS</title></head><body><a href="../index.html#${to}">${label}</a></body></html>\n`);
   fs.rmSync(path.join(SITE, `get-started/${f}.md`), { force: true });
 }
@@ -523,6 +506,31 @@ ${practices([
   [true, '관련 있는 줄은 좁게 붙이고, 다른 덩어리는 넓게 띄웁니다.'],
   [true, '화면 좌우 여백은 global-gutter 하나로 맞춥니다.'],
   [false, '토큰에 없는 간격(예: 13px)을 만들지 않습니다.'],
+])}`,
+  },
+  breakpoint: {
+    title: '기준점', lead: '기준점은 화면 폭에 따라 배치를 바꾸는 지점입니다.',
+    body: `<h2 id="overview">개요</h2>
+<p>작은 화면부터 만들고 폭이 넓어질 때 배치를 더합니다. <code>@media</code> 안에서는 CSS 변수를 쓸 수 없어 숫자를 직접 씁니다.</p>
+<h2 id="tokens">토큰</h2>
+${table(['토큰', '폭', '쓰임'], bpRows.map(([n, w, u]) => [`<code>--ybm-breakpoint-${n}</code>`, w, u]))}
+<h2 id="components">컴포넌트가 바뀌는 곳</h2>
+<ul class="site-list">
+  <li>Top Navigation ↔ Top App Bar, Side Panel ↔ Bottom Sheet, Dialog ↔ Bottom Sheet는 768을 기준으로 바꿉니다.</li>
+  <li>Side Navigation은 1280 이상 펼침, 768 이상 접힘, 그보다 좁으면 서랍 메뉴입니다.</li>
+</ul>
+<h2 id="code">코드에서 쓰기</h2>
+${codeblock(`@media (min-width: 768px) { /* 태블릿, PC */ }
+@media (min-width: 1280px) { /* 넓은 PC */ }
+
+<!-- 768 이상에서 숨김(모바일 전용) / 768 이상에서만 보임(PC 전용) -->
+<div class="u-hide-from-md">…</div>
+<div class="u-show-from-md">…</div>`, 'css')}
+<h2 id="practices">사용 지침</h2>
+${practices([
+  [true, '모바일 화면을 먼저 만들고 min-width 로 넓은 화면을 더합니다.'],
+  [true, '기준점은 표의 네 값만 씁니다.'],
+  [false, '기기 이름(아이폰, 갤럭시)에 맞춘 폭을 따로 만들지 않습니다.'],
 ])}`,
   },
   shape: {
@@ -1046,7 +1054,7 @@ figmaDocs();
 {
   const byFile = (f) => MD_PAGES.find((p) => p.file === f);
   const gs = GS_ORDER.filter(([f]) => !f.startsWith('foundations/')).map(([f]) => byFile(f)).filter(Boolean);
-  const found = MD_PAGES.filter((p) => p.file.startsWith('foundations/') && p.file !== 'foundations/index.html');
+  const found = MD_PAGES.filter((p) => p.file.startsWith('foundations/'));
   const compPages = MD_PAGES.filter((p) => p.section === 'components');
   const intro = `# YBM DS
 

@@ -16,11 +16,13 @@
 - [Color](https://luvms012-rgb.github.io/ybm-ds/site/foundations/color.md): 색은 정보의 위계와 상태, 브랜드를 구분해 보여 줍니다.
 - [Typography](https://luvms012-rgb.github.io/ybm-ds/site/foundations/typography.md): 타이포그래피는 글을 분명하고 읽기 쉽게 전합니다.
 - [Spacing](https://luvms012-rgb.github.io/ybm-ds/site/foundations/spacing.md): 간격은 요소 사이의 거리로 무엇이 한 묶음인지 보여 줍니다.
+- [Breakpoint](https://luvms012-rgb.github.io/ybm-ds/site/foundations/breakpoint.md): 기준점은 화면 폭에 따라 배치를 바꾸는 지점입니다.
 - [Radius](https://luvms012-rgb.github.io/ybm-ds/site/foundations/shape.md): 모서리는 요소의 둥글기를 정해 화면의 인상을 맞춥니다.
 - [Elevation](https://luvms012-rgb.github.io/ybm-ds/site/foundations/elevation.md): 그림자와 겹침 순서는 요소가 얼마나 떠 있는지, 무엇이 위에 있는지 보여 줍니다.
 - [Motion](https://luvms012-rgb.github.io/ybm-ds/site/foundations/motion.md): 움직임은 화면이 바뀌는 과정을 자연스럽게 이어 줍니다.
 - [Color Roles](https://luvms012-rgb.github.io/ybm-ds/site/foundations/color-roles.md): 역할 색의 규칙과 전체 토큰
 - [Color Palette](https://luvms012-rgb.github.io/ybm-ds/site/foundations/color-palette.md): 팔레트 색의 단계와 전체 토큰
+- [Foundations](https://luvms012-rgb.github.io/ybm-ds/site/foundations/index.md): 색, 글자, 간격처럼 화면의 바탕이 되는 토큰과 원칙
 - [Iconography](https://luvms012-rgb.github.io/ybm-ds/site/foundations/icons.md)
 - [Icon Library](https://luvms012-rgb.github.io/ybm-ds/site/foundations/icons-library.md): 아이콘을 찾아 클래스와 SVG 를 복사합니다
 
