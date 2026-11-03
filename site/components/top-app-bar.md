@@ -71,7 +71,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
   <div class="ds-appbar__main"><h1 class="ds-appbar__title">아주 긴 제목은 한 줄에서 말줄임으로 끝납니다</h1></div>
   <div class="ds-appbar__right"><button type="button" class="ds-appbar__button" aria-label="검색"><i class="ds-icon ds-icon--search" aria-hidden="true"></i></button><button type="button" class="ds-appbar__button" aria-label="메뉴" disabled><i class="ds-icon ds-icon--menu" aria-hidden="true"></i></button></div>
 </header>
-<div style="width:375px;background:var(--ybm-color-palette-gray-700)">
+<div style="width:375px;background:var(--ds-color-palette-gray-700)">
   <header class="ds-appbar" data-tone="transparent" data-gradient>
     <div class="ds-appbar__left"><button type="button" class="ds-appbar__button" aria-label="닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button></div>
     <div class="ds-appbar__main"><h1 class="ds-appbar__title">사진 위 막대</h1></div>
@@ -89,8 +89,8 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 | 변수 | 기본값 |
 | --- | --- |
-| `--ds-appbar-height` | `var(--ybm-space-x14)` |
-| `--ds-appbar-side` | `calc(var(--ybm-space-x11) * 2)` |
+| `--ds-appbar-height` | `var(--ds-space-x14)` |
+| `--ds-appbar-side` | `calc(var(--ds-space-x11) * 2)` |
 
 ### 크기와 여백
 

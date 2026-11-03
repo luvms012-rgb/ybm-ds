@@ -36,7 +36,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 <hr class="ds-divider">
 <hr class="ds-divider" data-weight="thick">
 <div class="ds-divider" role="separator" data-label><span>또는</span></div>
-<div class="u-flex" style="align-items:center;gap:var(--ybm-space-x2);color:var(--ybm-color-fg-neutral-subtle);font-size:var(--ybm-font-size-t03)"><span>이용약관</span><span class="ds-divider" role="separator" aria-orientation="vertical" data-orientation="vertical" style="--ds-divider-length:12px"></span><span>개인정보처리방침</span></div>
+<div class="u-flex" style="align-items:center;gap:var(--ds-space-x2);color:var(--ds-color-fg-neutral-subtle);font-size:var(--ds-font-size-t03)"><span>이용약관</span><span class="ds-divider" role="separator" aria-orientation="vertical" data-orientation="vertical" style="--ds-divider-length:12px"></span><span>개인정보처리방침</span></div>
 ```
 
 ## 규격
@@ -47,7 +47,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 | 변수 | 기본값 |
 | --- | --- |
-| `--ds-divider-color` | `var(--ybm-color-stroke-neutral-weak)` |
+| `--ds-divider-color` | `var(--ds-color-stroke-neutral-weak)` |
 | `--ds-divider-size` | `1px` |
 | `--ds-divider-length` | `16px` |
 

@@ -1,6 +1,6 @@
 # YBM DS
 
-> YBM 서비스를 위한 디자인 시스템입니다. HTML 에 .ds-* 클래스를 붙이고 --ybm-* 토큰으로 색, 간격, 글자를 맞춥니다. 이 파일은 AI 도구가 읽도록 문서 목록을 모은 것입니다.
+> YBM 서비스를 위한 디자인 시스템입니다. HTML 에 .ds-* 클래스를 붙이고 --ds-* 토큰으로 색, 간격, 글자를 맞춥니다. 이 파일은 AI 도구가 읽도록 문서 목록을 모은 것입니다.
 
 - CSS: https://luvms012-rgb.github.io/ybm-ds/dist/ybm-ds.css
 - JS: https://luvms012-rgb.github.io/ybm-ds/dist/ybm-ds.js

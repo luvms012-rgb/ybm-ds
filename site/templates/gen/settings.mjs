@@ -4,16 +4,16 @@ const inp = (id, v, attrs = '') => input(id, `value="${esc(v)}" ${attrs}`);
 const sel = (id, v) => select(v, { id, size: 'medium' });
 
 const CSS = `
-  .tp-snav { display: flex; flex-direction: column; gap: var(--ybm-space-x1); }
-  .tp-snav__group { font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); color: var(--ybm-color-fg-neutral-subtle); padding: var(--ybm-space-x3) var(--ybm-space-x2) var(--ybm-space-x1); }
-  .tp-snav__item { display: flex; align-items: center; gap: var(--ybm-space-x2); width: 100%; min-height: 36px; padding: 0 var(--ybm-space-x2); border: 0; border-radius: var(--ybm-shape-sm); background: none; color: var(--ybm-color-fg-neutral-muted); font: inherit; font-size: var(--ybm-font-size-t04); text-align: left; text-decoration: none; cursor: pointer; }
-  .tp-snav__item:hover { background: var(--ybm-color-bg-transparent-pressed); }
-  .tp-snav__item[aria-current="page"] { background: var(--ybm-color-bg-neutral); color: var(--ybm-color-fg-neutral); font-weight: var(--ybm-font-weight-semibold); }
-  .tp-srow { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ybm-space-x3); padding-block: var(--ybm-space-x4); }
-  .tp-srow + .tp-srow { box-shadow: inset 0 1px 0 var(--ybm-color-stroke-neutral-muted); }
+  .tp-snav { display: flex; flex-direction: column; gap: var(--ds-space-x1); }
+  .tp-snav__group { font-size: var(--ds-font-size-t02); line-height: var(--ds-line-height-t02); color: var(--ds-color-fg-neutral-subtle); padding: var(--ds-space-x3) var(--ds-space-x2) var(--ds-space-x1); }
+  .tp-snav__item { display: flex; align-items: center; gap: var(--ds-space-x2); width: 100%; min-height: 36px; padding: 0 var(--ds-space-x2); border: 0; border-radius: var(--ds-shape-sm); background: none; color: var(--ds-color-fg-neutral-muted); font: inherit; font-size: var(--ds-font-size-t04); text-align: left; text-decoration: none; cursor: pointer; }
+  .tp-snav__item:hover { background: var(--ds-color-bg-transparent-pressed); }
+  .tp-snav__item[aria-current="page"] { background: var(--ds-color-bg-neutral); color: var(--ds-color-fg-neutral); font-weight: var(--ds-font-weight-semibold); }
+  .tp-srow { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ds-space-x3); padding-block: var(--ds-space-x4); }
+  .tp-srow + .tp-srow { box-shadow: inset 0 1px 0 var(--ds-color-stroke-neutral-muted); }
   @media (min-width: 768px) { .tp-srow { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; } }
-  .tp-srow__label { display: flex; gap: var(--ybm-space-x3); align-items: flex-start; }
-  .tp-srow__label > .ds-icon { margin-top: 2px; color: var(--ybm-color-fg-neutral-muted); }
+  .tp-srow__label { display: flex; gap: var(--ds-space-x3); align-items: flex-start; }
+  .tp-srow__label > .ds-icon { margin-top: 2px; color: var(--ds-color-fg-neutral-muted); }
 `;
 const nav = (groups, cur) => `<nav class="tp-snav" aria-label="설정 메뉴">${groups.map(([g, items]) => `${g ? `<span class="tp-snav__group">${g}</span>` : ''}${items.map(([t, ic]) => `<a class="tp-snav__item" href="#"${t === cur ? ' aria-current="page"' : ''}>${ic ? icon(ic, 'sm') : ''}${t}</a>`).join('')}`).join('')}</nav>`;
 const row = (ic, t, d, control) => `<div class="tp-srow"><div class="tp-srow__label">${icon(ic, 'sm')}<span class="tp-stack"><span class="tp-h4">${t}</span><span class="tp-sub">${d}</span></span></div><div>${control}</div></div>`;
@@ -22,19 +22,19 @@ const row = (ic, t, d, control) => `<div class="tp-srow"><div class="tp-srow__la
 const dialog = () => {
   const css = CSS + `
   .tp-under { opacity: .5; pointer-events: none; }
-  .tp-modal { position: fixed; inset: 0; z-index: var(--ybm-z-dialog); display: grid; place-items: center; padding: var(--ybm-space-x4); background: var(--ybm-color-bg-overlay); }
-  .tp-sdlg { position: relative; display: grid; grid-template-columns: minmax(0, 1fr); width: min(960px, 100%); height: min(680px, calc(100vh - var(--ybm-space-x8))); overflow: hidden; border-radius: var(--ybm-shape-2xl); background: var(--ybm-color-bg-layer-floating); box-shadow: 0 16px 48px rgb(0 0 0 / .24); }
+  .tp-modal { position: fixed; inset: 0; z-index: var(--ds-z-dialog); display: grid; place-items: center; padding: var(--ds-space-x4); background: var(--ds-color-bg-overlay); }
+  .tp-sdlg { position: relative; display: grid; grid-template-columns: minmax(0, 1fr); width: min(960px, 100%); height: min(680px, calc(100vh - var(--ds-space-x8))); overflow: hidden; border-radius: var(--ds-shape-2xl); background: var(--ds-color-bg-layer-floating); box-shadow: 0 16px 48px rgb(0 0 0 / .24); }
   @media (min-width: 768px) { .tp-sdlg { grid-template-columns: 240px minmax(0, 1fr); } }
-  .tp-sdlg__side { display: none; flex-direction: column; gap: var(--ybm-space-x3); padding: var(--ybm-space-x5) var(--ybm-space-x3); overflow: auto; background: var(--ybm-color-bg-neutral-subtle); box-shadow: inset -1px 0 0 var(--ybm-color-stroke-neutral-muted); }
+  .tp-sdlg__side { display: none; flex-direction: column; gap: var(--ds-space-x3); padding: var(--ds-space-x5) var(--ds-space-x3); overflow: auto; background: var(--ds-color-bg-neutral-subtle); box-shadow: inset -1px 0 0 var(--ds-color-stroke-neutral-muted); }
   @media (min-width: 768px) { .tp-sdlg__side { display: flex; } }
-  .tp-sdlg__main { display: flex; flex-direction: column; gap: var(--ybm-space-x5); padding: var(--ybm-space-x6); overflow: auto; }
-  .tp-sdlg__close { position: absolute; top: var(--ybm-space-x3); right: var(--ybm-space-x3); }
+  .tp-sdlg__main { display: flex; flex-direction: column; gap: var(--ds-space-x5); padding: var(--ds-space-x6); overflow: auto; }
+  .tp-sdlg__close { position: absolute; top: var(--ds-space-x3); right: var(--ds-space-x3); }
 `;
   const groups = [['계정', [['프로필', 'user'], ['로그인과 보안', 'lock'], ['연결된 계정', 'link-2']]], ['환경', [['화면', 'sun'], ['언어와 지역', 'globe'], ['접근성', 'eye']]], ['알림', [['이메일', 'mail'], ['앱 푸시', 'bell']]], ['워크스페이스', [['멤버', 'users'], ['결제', 'credit-card']]]];
   const body = `<div class="tp-app">
 <div class="tp-under" aria-hidden="true">${K.head('홈', { sub: '오늘 할 일 4개' })}<main class="tp-content"><div class="tp-g3">${['오늘 수업', '과제', '공지'].map((t) => card(`<span class="tp-h4">${t}</span><span class="tp-sub">내용 자리</span>`)).join('')}</div></main></div>
 <div class="tp-modal"><div class="tp-sdlg" role="dialog" aria-modal="true" aria-labelledby="sd-t">
-  <aside class="tp-sdlg__side"><h2 class="tp-h4" style="padding-inline: var(--ybm-space-x2)">설정</h2>${search('sq', '설정 찾기', 'small')}${nav(groups, '프로필')}</aside>
+  <aside class="tp-sdlg__side"><h2 class="tp-h4" style="padding-inline: var(--ds-space-x2)">설정</h2>${search('sq', '설정 찾기', 'small')}${nav(groups, '프로필')}</aside>
   <div class="tp-sdlg__main">
     <span class="tp-sdlg__close">${iconBtn('x', '닫기')}</span>
     <div class="tp-stack"><h2 class="tp-h2" id="sd-t">프로필</h2><p class="tp-sub">워크스페이스의 다른 사람에게 보이는 내 모습이에요.</p></div>
@@ -53,11 +53,11 @@ const form = () => {
   const css = CSS + `
   .tp-sf { display: grid; flex: 1 1 auto; grid-template-columns: minmax(0, 1fr); }
   @media (min-width: 1024px) { .tp-sf { grid-template-columns: 240px minmax(0, 1fr); } }
-  .tp-sf__side { display: none; padding: var(--ybm-space-x6) var(--ybm-space-x4); box-shadow: inset -1px 0 0 var(--ybm-color-stroke-neutral-muted); }
-  @media (min-width: 1024px) { .tp-sf__side { display: block; } .tp-sf__side .tp-snav { position: sticky; top: var(--ybm-space-x6); } }
-  .tp-ssec { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ybm-space-x5); }
-  @media (min-width: 1024px) { .tp-ssec { grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: var(--ybm-space-x10); } }
-  .tp-ssec__fields { display: flex; flex-direction: column; gap: var(--ybm-space-x4); max-width: 560px; }
+  .tp-sf__side { display: none; padding: var(--ds-space-x6) var(--ds-space-x4); box-shadow: inset -1px 0 0 var(--ds-color-stroke-neutral-muted); }
+  @media (min-width: 1024px) { .tp-sf__side { display: block; } .tp-sf__side .tp-snav { position: sticky; top: var(--ds-space-x6); } }
+  .tp-ssec { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ds-space-x5); }
+  @media (min-width: 1024px) { .tp-ssec { grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: var(--ds-space-x10); } }
+  .tp-ssec__fields { display: flex; flex-direction: column; gap: var(--ds-space-x4); max-width: 560px; }
   .tp-ssec__fields > .ds-btn { align-self: flex-start; }
   .tp-cbd { display: flex; flex-direction: column; gap: 2px; }
   .tp-search-w { width: min(100%, 320px); }
@@ -86,12 +86,12 @@ const panels = () => {
   const css = CSS + `
   .tp-sp { display: grid; flex: 1 1 auto; grid-template-columns: minmax(0, 1fr); }
   @media (min-width: 1024px) { .tp-sp { grid-template-columns: 280px minmax(0, 1fr); } }
-  .tp-sp__side { display: flex; flex-direction: column; gap: var(--ybm-space-x3); padding: var(--ybm-space-x5) var(--ybm-space-x4); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); }
-  @media (min-width: 1024px) { .tp-sp__side { padding: var(--ybm-space-x8) var(--ybm-space-x5); box-shadow: inset -1px 0 0 var(--ybm-color-stroke-neutral-muted); } }
-  .tp-sp__main { display: flex; flex-direction: column; gap: var(--ybm-space-x6); width: min(100%, 720px); padding: var(--ybm-space-x6) var(--ybm-space-x4) var(--ybm-space-x12); }
-  @media (min-width: 1024px) { .tp-sp__main { padding: var(--ybm-space-x8) var(--ybm-space-x10); } }
-  .tp-info { display: flex; justify-content: space-between; gap: var(--ybm-space-x4); padding-block: var(--ybm-space-x4); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); }
-  .tp-info__v { color: var(--ybm-color-fg-neutral-muted); font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); }
+  .tp-sp__side { display: flex; flex-direction: column; gap: var(--ds-space-x3); padding: var(--ds-space-x5) var(--ds-space-x4); box-shadow: inset 0 -1px 0 var(--ds-color-stroke-neutral-muted); }
+  @media (min-width: 1024px) { .tp-sp__side { padding: var(--ds-space-x8) var(--ds-space-x5); box-shadow: inset -1px 0 0 var(--ds-color-stroke-neutral-muted); } }
+  .tp-sp__main { display: flex; flex-direction: column; gap: var(--ds-space-x6); width: min(100%, 720px); padding: var(--ds-space-x6) var(--ds-space-x4) var(--ds-space-x12); }
+  @media (min-width: 1024px) { .tp-sp__main { padding: var(--ds-space-x8) var(--ds-space-x10); } }
+  .tp-info { display: flex; justify-content: space-between; gap: var(--ds-space-x4); padding-block: var(--ds-space-x4); box-shadow: inset 0 -1px 0 var(--ds-color-stroke-neutral-muted); }
+  .tp-info__v { color: var(--ds-color-fg-neutral-muted); font-size: var(--ds-font-size-t04); line-height: var(--ds-line-height-t04); }
 `;
   const items = [['개인 정보', 'user'], ['로그인과 보안', 'lock'], ['결제와 환불', 'credit-card'], ['알림', 'bell'], ['개인정보 보호', 'shield-check'], ['학습 설정', 'book-open'], ['언어와 지역', 'globe'], ['연결된 기기', 'smartphone'], ['기업 계정', 'building']];
   const info = [['실명', '와이비엠', 1], ['부르는 이름', '입력하지 않음', 1], ['이메일', 's***n@example.com', 1], ['휴대폰', '010-****-5678', 1], ['본인 인증', badge('인증 완료', 'positive'), 0], ['집 주소', '입력하지 않음', 1], ['우편 받을 주소', '입력하지 않음', 1], ['비상 연락처', '입력함', 1]];

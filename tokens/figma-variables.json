@@ -1872,7 +1872,7 @@
             "Light": "#0000000f",
             "Dark": "#0000003d"
           },
-          "description": "레벨1 raised — 접촉 그림자(가까운 층). CSS: var(--ybm-color-elevation-1-key) 다크 모드는 어두운 표면에서 그림자가 보이도록 알파를 3배 안팎으로 올린 별도 값(자동 반전 아님)."
+          "description": "레벨1 raised — 접촉 그림자(가까운 층). CSS: var(--ds-color-elevation-1-key) 다크 모드는 어두운 표면에서 그림자가 보이도록 알파를 3배 안팎으로 올린 별도 값(자동 반전 아님)."
         },
         "elevation/1-ambient": {
           "type": "COLOR",
@@ -2724,210 +2724,210 @@
           "values": {
             "Default": 1
           },
-          "description": "레벨1 key 층의 y. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ybm-elevation-1) 를 쓸 것."
+          "description": "레벨1 key 층의 y. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ds-elevation-1) 를 쓸 것."
         },
         "elevation/1/key/blur": {
           "type": "FLOAT",
           "values": {
             "Default": 2
           },
-          "description": "레벨1 key 층의 blur. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ybm-elevation-1) 를 쓸 것."
+          "description": "레벨1 key 층의 blur. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ds-elevation-1) 를 쓸 것."
         },
         "elevation/1/key/spread": {
           "type": "FLOAT",
           "values": {
             "Default": -1
           },
-          "description": "레벨1 key 층의 spread. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ybm-elevation-1) 를 쓸 것."
+          "description": "레벨1 key 층의 spread. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ds-elevation-1) 를 쓸 것."
         },
         "elevation/1/ambient/y": {
           "type": "FLOAT",
           "values": {
             "Default": 1
           },
-          "description": "레벨1 ambient 층의 y. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ybm-elevation-1) 를 쓸 것."
+          "description": "레벨1 ambient 층의 y. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ds-elevation-1) 를 쓸 것."
         },
         "elevation/1/ambient/blur": {
           "type": "FLOAT",
           "values": {
             "Default": 3
           },
-          "description": "레벨1 ambient 층의 blur. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ybm-elevation-1) 를 쓸 것."
+          "description": "레벨1 ambient 층의 blur. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ds-elevation-1) 를 쓸 것."
         },
         "elevation/1/ambient/spread": {
           "type": "FLOAT",
           "values": {
             "Default": 0
           },
-          "description": "레벨1 ambient 층의 spread. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ybm-elevation-1) 를 쓸 것."
+          "description": "레벨1 ambient 층의 spread. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ds-elevation-1) 를 쓸 것."
         },
         "elevation/2/key/y": {
           "type": "FLOAT",
           "values": {
             "Default": 2
           },
-          "description": "레벨2 key 층의 y. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ybm-elevation-2) 를 쓸 것."
+          "description": "레벨2 key 층의 y. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ds-elevation-2) 를 쓸 것."
         },
         "elevation/2/key/blur": {
           "type": "FLOAT",
           "values": {
             "Default": 4
           },
-          "description": "레벨2 key 층의 blur. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ybm-elevation-2) 를 쓸 것."
+          "description": "레벨2 key 층의 blur. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ds-elevation-2) 를 쓸 것."
         },
         "elevation/2/key/spread": {
           "type": "FLOAT",
           "values": {
             "Default": -2
           },
-          "description": "레벨2 key 층의 spread. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ybm-elevation-2) 를 쓸 것."
+          "description": "레벨2 key 층의 spread. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ds-elevation-2) 를 쓸 것."
         },
         "elevation/2/ambient/y": {
           "type": "FLOAT",
           "values": {
             "Default": 4
           },
-          "description": "레벨2 ambient 층의 y. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ybm-elevation-2) 를 쓸 것."
+          "description": "레벨2 ambient 층의 y. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ds-elevation-2) 를 쓸 것."
         },
         "elevation/2/ambient/blur": {
           "type": "FLOAT",
           "values": {
             "Default": 10
           },
-          "description": "레벨2 ambient 층의 blur. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ybm-elevation-2) 를 쓸 것."
+          "description": "레벨2 ambient 층의 blur. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ds-elevation-2) 를 쓸 것."
         },
         "elevation/2/ambient/spread": {
           "type": "FLOAT",
           "values": {
             "Default": -1
           },
-          "description": "레벨2 ambient 층의 spread. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ybm-elevation-2) 를 쓸 것."
+          "description": "레벨2 ambient 층의 spread. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ds-elevation-2) 를 쓸 것."
         },
         "elevation/4/key/y": {
           "type": "FLOAT",
           "values": {
             "Default": 4
           },
-          "description": "레벨3 key 층의 y. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ybm-elevation-3) 를 쓸 것."
+          "description": "레벨3 key 층의 y. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ds-elevation-3) 를 쓸 것."
         },
         "elevation/4/key/blur": {
           "type": "FLOAT",
           "values": {
             "Default": 6
           },
-          "description": "레벨3 key 층의 blur. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ybm-elevation-3) 를 쓸 것."
+          "description": "레벨3 key 층의 blur. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ds-elevation-3) 를 쓸 것."
         },
         "elevation/4/key/spread": {
           "type": "FLOAT",
           "values": {
             "Default": -4
           },
-          "description": "레벨3 key 층의 spread. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ybm-elevation-3) 를 쓸 것."
+          "description": "레벨3 key 층의 spread. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ds-elevation-3) 를 쓸 것."
         },
         "elevation/4/ambient/y": {
           "type": "FLOAT",
           "values": {
             "Default": 10
           },
-          "description": "레벨3 ambient 층의 y. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ybm-elevation-3) 를 쓸 것."
+          "description": "레벨3 ambient 층의 y. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ds-elevation-3) 를 쓸 것."
         },
         "elevation/4/ambient/blur": {
           "type": "FLOAT",
           "values": {
             "Default": 18
           },
-          "description": "레벨3 ambient 층의 blur. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ybm-elevation-3) 를 쓸 것."
+          "description": "레벨3 ambient 층의 blur. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ds-elevation-3) 를 쓸 것."
         },
         "elevation/4/ambient/spread": {
           "type": "FLOAT",
           "values": {
             "Default": -3
           },
-          "description": "레벨3 ambient 층의 spread. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ybm-elevation-3) 를 쓸 것."
+          "description": "레벨3 ambient 층의 spread. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ds-elevation-3) 를 쓸 것."
         },
         "elevation/5/key/y": {
           "type": "FLOAT",
           "values": {
             "Default": 8
           },
-          "description": "레벨4 key 층의 y. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ybm-elevation-4) 를 쓸 것."
+          "description": "레벨4 key 층의 y. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ds-elevation-4) 를 쓸 것."
         },
         "elevation/5/key/blur": {
           "type": "FLOAT",
           "values": {
             "Default": 10
           },
-          "description": "레벨4 key 층의 blur. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ybm-elevation-4) 를 쓸 것."
+          "description": "레벨4 key 층의 blur. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ds-elevation-4) 를 쓸 것."
         },
         "elevation/5/key/spread": {
           "type": "FLOAT",
           "values": {
             "Default": -6
           },
-          "description": "레벨4 key 층의 spread. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ybm-elevation-4) 를 쓸 것."
+          "description": "레벨4 key 층의 spread. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ds-elevation-4) 를 쓸 것."
         },
         "elevation/5/ambient/y": {
           "type": "FLOAT",
           "values": {
             "Default": 20
           },
-          "description": "레벨4 ambient 층의 y. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ybm-elevation-4) 를 쓸 것."
+          "description": "레벨4 ambient 층의 y. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ds-elevation-4) 를 쓸 것."
         },
         "elevation/5/ambient/blur": {
           "type": "FLOAT",
           "values": {
             "Default": 32
           },
-          "description": "레벨4 ambient 층의 blur. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ybm-elevation-4) 를 쓸 것."
+          "description": "레벨4 ambient 층의 blur. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ds-elevation-4) 를 쓸 것."
         },
         "elevation/5/ambient/spread": {
           "type": "FLOAT",
           "values": {
             "Default": -5
           },
-          "description": "레벨4 ambient 층의 spread. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ybm-elevation-4) 를 쓸 것."
+          "description": "레벨4 ambient 층의 spread. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ds-elevation-4) 를 쓸 것."
         },
         "elevation/3/key/y": {
           "type": "FLOAT",
           "values": {
             "Default": 2
           },
-          "description": "elevation 3(panel) 기하값. 합성 토큰 --ybm-elevation-3 으로만 노출된다."
+          "description": "elevation 3(panel) 기하값. 합성 토큰 --ds-elevation-3 으로만 노출된다."
         },
         "elevation/3/key/blur": {
           "type": "FLOAT",
           "values": {
             "Default": 4
           },
-          "description": "elevation 3(panel) 기하값. 합성 토큰 --ybm-elevation-3 으로만 노출된다."
+          "description": "elevation 3(panel) 기하값. 합성 토큰 --ds-elevation-3 으로만 노출된다."
         },
         "elevation/3/key/spread": {
           "type": "FLOAT",
           "values": {
             "Default": -2
           },
-          "description": "elevation 3(panel) 기하값. 합성 토큰 --ybm-elevation-3 으로만 노출된다."
+          "description": "elevation 3(panel) 기하값. 합성 토큰 --ds-elevation-3 으로만 노출된다."
         },
         "elevation/3/ambient/y": {
           "type": "FLOAT",
           "values": {
             "Default": 10
           },
-          "description": "elevation 3(panel) 기하값. 합성 토큰 --ybm-elevation-3 으로만 노출된다."
+          "description": "elevation 3(panel) 기하값. 합성 토큰 --ds-elevation-3 으로만 노출된다."
         },
         "elevation/3/ambient/blur": {
           "type": "FLOAT",
           "values": {
             "Default": 8
           },
-          "description": "elevation 3(panel) 기하값. 합성 토큰 --ybm-elevation-3 으로만 노출된다."
+          "description": "elevation 3(panel) 기하값. 합성 토큰 --ds-elevation-3 으로만 노출된다."
         },
         "elevation/3/ambient/spread": {
           "type": "FLOAT",
           "values": {
             "Default": 0
           },
-          "description": "elevation 3(panel) 기하값. 합성 토큰 --ybm-elevation-3 으로만 노출된다."
+          "description": "elevation 3(panel) 기하값. 합성 토큰 --ds-elevation-3 으로만 노출된다."
         }
       }
     }

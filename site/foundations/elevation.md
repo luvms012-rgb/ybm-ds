@@ -12,30 +12,30 @@
 
 | 토큰 | 쓰임 | 보기 |
 | --- | --- | --- |
-| `--ybm-elevation-raised` | thumb, 선택된 세그먼트 |  |
-| `--ybm-elevation-overlay` | menu, select, snackbar, tooltip, date picker |  |
-| `--ybm-elevation-panel` | 떠 있는 패널, 펼침 메뉴 |  |
-| `--ybm-elevation-floating` | FAB |  |
-| `--ybm-elevation-modal` | dialog, alert dialog, bottom sheet |  |
+| `--ds-elevation-raised` | thumb, 선택된 세그먼트 |  |
+| `--ds-elevation-overlay` | menu, select, snackbar, tooltip, date picker |  |
+| `--ds-elevation-panel` | 떠 있는 패널, 펼침 메뉴 |  |
+| `--ds-elevation-floating` | FAB |  |
+| `--ds-elevation-modal` | dialog, alert dialog, bottom sheet |  |
 
 ## 겹침 순서
 
 | 토큰 | 값 |
 | --- | --- |
-| `--ybm-z-base` | 0 |
-| `--ybm-z-sticky` | 100 |
-| `--ybm-z-overlay` | 1000 |
-| `--ybm-z-dialog` | 1100 |
-| `--ybm-z-toast` | 1200 |
-| `--ybm-z-tooltip` | 1300 |
+| `--ds-z-base` | 0 |
+| `--ds-z-sticky` | 100 |
+| `--ds-z-overlay` | 1000 |
+| `--ds-z-dialog` | 1100 |
+| `--ds-z-toast` | 1200 |
+| `--ds-z-tooltip` | 1300 |
 
 ## 코드에서 쓰기
 
 ```css
 .my-menu {
-  background: var(--ybm-color-bg-layer-floating);
-  box-shadow: var(--ybm-elevation-overlay);
-  z-index: var(--ybm-z-overlay);
+  background: var(--ds-color-bg-layer-floating);
+  box-shadow: var(--ds-elevation-overlay);
+  z-index: var(--ds-z-overlay);
 }
 ```
 

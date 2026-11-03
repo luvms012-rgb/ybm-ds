@@ -1,6 +1,6 @@
 # YBM DS
 
-> YBM 서비스를 위한 디자인 시스템입니다. HTML 에 .ds-* 클래스를 붙이고 --ybm-* 토큰으로 색, 간격, 글자를 맞춥니다. 이 파일은 AI 도구가 읽도록 문서 목록을 모은 것입니다.
+> YBM 서비스를 위한 디자인 시스템입니다. HTML 에 .ds-* 클래스를 붙이고 --ds-* 토큰으로 색, 간격, 글자를 맞춥니다. 이 파일은 AI 도구가 읽도록 문서 목록을 모은 것입니다.
 
 - CSS: https://luvms012-rgb.github.io/ybm-ds/dist/ybm-ds.css
 - JS: https://luvms012-rgb.github.io/ybm-ds/dist/ybm-ds.js
@@ -60,9 +60,9 @@ DS가 CSS 레이어 안에 있어 뒤에 불러온 서비스 CSS가 `!important`
 ```css
 /* ybm-it.css */
 :root {
-  --ybm-color-palette-brand-100: #e6f6ee;  /* 옅은 배경 */
-  --ybm-color-palette-brand-600: #12a150;  /* 주 버튼, 링크 */
-  --ybm-color-palette-brand-700: #0d7d3e;  /* 눌림 */
+  --ds-color-palette-brand-100: #e6f6ee;  /* 옅은 배경 */
+  --ds-color-palette-brand-600: #12a150;  /* 주 버튼, 링크 */
+  --ds-color-palette-brand-700: #0d7d3e;  /* 눌림 */
   /* 200 ~ 500, 800 ~ 1000 도 같은 색의 단계로 */
 }
 :root[data-theme="dark"] {
@@ -88,7 +88,7 @@ DS가 CSS 레이어 안에 있어 뒤에 불러온 서비스 CSS가 `!important`
 ```css
 /* ybm-it.css */
 .ds-dialog { --ds-dialog-width: 360px; }
-.ds-btn[data-variant="brandSolid"] { --ds-btn-radius: var(--ybm-shape-pill); }
+.ds-btn[data-variant="brandSolid"] { --ds-btn-radius: var(--ds-shape-pill); }
 ```
 
 ## 다크 모드
@@ -123,7 +123,7 @@ AI 도구와 YBM DS를 함께 쓰는 방법입니다.
    <script src="https://luvms012-rgb.github.io/ybm-ds/dist/ybm-ds.js" defer></script>
 2. 문서는 https://luvms012-rgb.github.io/ybm-ds/site/llms.txt 목차에서 필요한 페이지(.md)를 골라 읽어.
 3. 쓸 수 있는 컴포넌트 목록은 https://luvms012-rgb.github.io/ybm-ds/components.json, 각 컴포넌트의 HTML 구조는 https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/components.css의 컴포넌트별 머리 주석을 따라.
-4. 색, 간격, 글자 크기, 모서리, 그림자는 https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/tokens.css의 --ybm-* 토큰만 써.
+4. 색, 간격, 글자 크기, 모서리, 그림자는 https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/tokens.css의 --ds-* 토큰만 써.
 5. 서비스 CSS는 DS 다음에 불러오고, 바꾸고 싶은 모양은 컴포넌트의 --ds-* 변수만 덮어써.
 6. 새 ds- 클래스를 만들거나 !important를 쓰지 마.
 ```
@@ -138,16 +138,16 @@ YBM DS로 [만들 화면, 예: 회원 목록 관리 화면]을 만들어 줘.
 - 쓰는 컴포넌트는 https://luvms012-rgb.github.io/ybm-ds/site/llms.txt에서 그 문서(.md)를 읽고 사용 지침을 따라.
 - 비슷한 화면이 llms.txt의 Templates 목록에 있으면 그 HTML을 출발점으로 써.
 - 모바일 먼저 만들고, 768px 이상과 1280px 이상에서 배치를 바꿔 줘.
-- 글자는 한국어. 제목은 Bold에 자간 -0.02em, 항목 제목은 SemiBold, 본문은 Regular로 쓰고, 크기는 --ybm-font-size-* 토큰, 본문은 word-break: keep-all.
-- 배치용 CSS에는 --ybm-* 토큰만 쓰고 hex 색은 쓰지 마.
+- 글자는 한국어. 제목은 Bold에 자간 -0.02em, 항목 제목은 SemiBold, 본문은 Regular로 쓰고, 크기는 --ds-font-size-* 토큰, 본문은 word-break: keep-all.
+- 배치용 CSS에는 --ds-* 토큰만 쓰고 hex 색은 쓰지 마.
 ```
 
 ### 규칙 점검하기
 
 ```text
 이 화면이 YBM DS 규칙을 지키는지 점검하고 고쳐 줘.
-- hex, rgb로 색을 직접 쓴 곳 → --ybm-color-* 토큰으로
-- 토큰이 아닌 임의의 간격, 글자 크기 → --ybm-space-*, --ybm-font-size-* 로
+- hex, rgb로 색을 직접 쓴 곳 → --ds-color-* 토큰으로
+- 토큰이 아닌 임의의 간격, 글자 크기 → --ds-space-*, --ds-font-size-* 로
 - https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/components.css에 없는 ds- 클래스, !important
 - DS 부품으로 바꿀 수 있는데 직접 만든 버튼, 입력, 표
 고친 곳은 목록으로 알려 줘.
@@ -170,7 +170,7 @@ YBM DS로 [만들 화면, 예: 회원 목록 관리 화면]을 만들어 줘.
 | --- | --- |
 | [components.json](https://luvms012-rgb.github.io/ybm-ds/components.json) | 쓸 수 있는 컴포넌트와 속성 목록입니다. |
 | [components.css](https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/components.css) | 컴포넌트마다 머리 주석에 HTML 구조가 있습니다. |
-| [tokens.css](https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/tokens.css) | 색, 간격, 글자 크기 같은 `--ybm-*` 토큰입니다. |
+| [tokens.css](https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/tokens.css) | 색, 간격, 글자 크기 같은 `--ds-*` 토큰입니다. |
 | Templates | `llms.txt` 끝에 템플릿마다 HTML 원본 주소가 있어 새 화면의 출발점으로 씁니다. |
 
 ## Figma
@@ -222,22 +222,22 @@ YBM DS 의 색은 역할 색과 팔레트 색 두 층으로 되어 있습니다.
 
 ```css
 .my-card {
-  background: var(--ybm-color-bg-layer-default);
-  color: var(--ybm-color-fg-neutral);
-  border: 1px solid var(--ybm-color-stroke-neutral-muted);
+  background: var(--ds-color-bg-layer-default);
+  color: var(--ds-color-fg-neutral);
+  border: 1px solid var(--ds-color-stroke-neutral-muted);
 }
 ```
 
 ### 브랜드 색 바꾸기
 
-이 가이드는 모노톤으로 보여 줍니다. 팔레트 `--ybm-color-palette-brand-100` ~ `1000`만 덮어쓰면 브랜드 색을 쓰는 곳이 모두 따라 바뀝니다.
+이 가이드는 모노톤으로 보여 줍니다. 팔레트 `--ds-color-palette-brand-100` ~ `1000`만 덮어쓰면 브랜드 색을 쓰는 곳이 모두 따라 바뀝니다.
 
 ```css
 /* my-service.css - DS 다음에 불러온다 */
 :root {
-  --ybm-color-palette-brand-100: #e6f6ee;  /* 옅은 배경 */
-  --ybm-color-palette-brand-600: #12a150;  /* 주 버튼, 링크 */
-  --ybm-color-palette-brand-700: #0d7d3e;  /* 눌림, 진한 글자 */
+  --ds-color-palette-brand-100: #e6f6ee;  /* 옅은 배경 */
+  --ds-color-palette-brand-600: #12a150;  /* 주 버튼, 링크 */
+  --ds-color-palette-brand-700: #0d7d3e;  /* 눌림, 진한 글자 */
   /* 200 ~ 500, 800 ~ 1000 도 같은 색의 단계로 채운다 */
 }
 :root[data-theme="dark"] {
@@ -266,7 +266,7 @@ YBM DS 의 색은 역할 색과 팔레트 색 두 층으로 되어 있습니다.
 
 ## 개요
 
-글꼴은 Pretendard 하나입니다. 크기는 `--ybm-font-size-t01` ~ `t17`, 줄 높이는 같은 번호의 `--ybm-line-height-*`를 짝으로 씁니다.
+글꼴은 Pretendard 하나입니다. 크기는 `--ds-font-size-t01` ~ `t17`, 줄 높이는 같은 번호의 `--ds-line-height-*`를 짝으로 씁니다.
 
 ## 크기
 
@@ -294,10 +294,10 @@ YBM DS 의 색은 역할 색과 팔레트 색 두 층으로 되어 있습니다.
 
 | 토큰 | 값 | 보기 |
 | --- | --- | --- |
-| `--ybm-font-weight-regular` | 400 | 가나다 Aa 123 |
-| `--ybm-font-weight-medium` | 500 | 가나다 Aa 123 |
-| `--ybm-font-weight-semibold` | 600 | 가나다 Aa 123 |
-| `--ybm-font-weight-bold` | 700 | 가나다 Aa 123 |
+| `--ds-font-weight-regular` | 400 | 가나다 Aa 123 |
+| `--ds-font-weight-medium` | 500 | 가나다 Aa 123 |
+| `--ds-font-weight-semibold` | 600 | 가나다 Aa 123 |
+| `--ds-font-weight-bold` | 700 | 가나다 Aa 123 |
 
 ## 코드에서 쓰기
 
@@ -305,13 +305,13 @@ YBM DS 의 색은 역할 색과 팔레트 색 두 층으로 되어 있습니다.
 
 ```css
 .my-title {
-  font-size: var(--ybm-font-size-t09);
-  line-height: var(--ybm-line-height-t09);
-  font-weight: var(--ybm-font-weight-bold);
+  font-size: var(--ds-font-size-t09);
+  line-height: var(--ds-line-height-t09);
+  font-weight: var(--ds-font-weight-bold);
 }
 .my-text {
-  font-size: var(--ybm-font-size-t05);
-  line-height: var(--ybm-line-height-t05);
+  font-size: var(--ds-font-size-t05);
+  line-height: var(--ds-line-height-t05);
   word-break: keep-all;
   overflow-wrap: break-word;
 }
@@ -338,50 +338,50 @@ YBM DS 의 색은 역할 색과 팔레트 색 두 층으로 되어 있습니다.
 
 ## 개요
 
-4px 단위가 기본이고 작은 간격은 2px 단위도 씁니다. 이름의 숫자에 4를 곱하면 값입니다. 화면 좌우 여백은 `--ybm-space-x-global-gutter` 입니다.
+4px 단위가 기본이고 작은 간격은 2px 단위도 씁니다. 이름의 숫자에 4를 곱하면 값입니다. 화면 좌우 여백은 `--ds-space-x-global-gutter` 입니다.
 
 ## 토큰
 
 | 토큰 | 값 | 보기 |
 | --- | --- | --- |
-| `--ybm-space-x0` | 0px |  |
-| `--ybm-space-x0_5` | 2px |  |
-| `--ybm-space-x1` | 4px |  |
-| `--ybm-space-x1_5` | 6px |  |
-| `--ybm-space-x2` | 8px |  |
-| `--ybm-space-x2_5` | 10px |  |
-| `--ybm-space-x3` | 12px |  |
-| `--ybm-space-x3_5` | 14px |  |
-| `--ybm-space-x4` | 16px |  |
-| `--ybm-space-x4_5` | 18px |  |
-| `--ybm-space-x5` | 20px |  |
-| `--ybm-space-x6` | 24px |  |
-| `--ybm-space-x7` | 28px |  |
-| `--ybm-space-x8` | 32px |  |
-| `--ybm-space-x9` | 36px |  |
-| `--ybm-space-x10` | 40px |  |
-| `--ybm-space-x11` | 44px |  |
-| `--ybm-space-x12` | 48px |  |
-| `--ybm-space-x13` | 52px |  |
-| `--ybm-space-x14` | 56px |  |
-| `--ybm-space-x15` | 60px |  |
-| `--ybm-space-x16` | 64px |  |
-| `--ybm-space-x18` | 72px |  |
-| `--ybm-space-x20` | 80px |  |
-| `--ybm-space-x24` | 96px |  |
-| `--ybm-space-x32` | 128px |  |
+| `--ds-space-x0` | 0px |  |
+| `--ds-space-x0_5` | 2px |  |
+| `--ds-space-x1` | 4px |  |
+| `--ds-space-x1_5` | 6px |  |
+| `--ds-space-x2` | 8px |  |
+| `--ds-space-x2_5` | 10px |  |
+| `--ds-space-x3` | 12px |  |
+| `--ds-space-x3_5` | 14px |  |
+| `--ds-space-x4` | 16px |  |
+| `--ds-space-x4_5` | 18px |  |
+| `--ds-space-x5` | 20px |  |
+| `--ds-space-x6` | 24px |  |
+| `--ds-space-x7` | 28px |  |
+| `--ds-space-x8` | 32px |  |
+| `--ds-space-x9` | 36px |  |
+| `--ds-space-x10` | 40px |  |
+| `--ds-space-x11` | 44px |  |
+| `--ds-space-x12` | 48px |  |
+| `--ds-space-x13` | 52px |  |
+| `--ds-space-x14` | 56px |  |
+| `--ds-space-x15` | 60px |  |
+| `--ds-space-x16` | 64px |  |
+| `--ds-space-x18` | 72px |  |
+| `--ds-space-x20` | 80px |  |
+| `--ds-space-x24` | 96px |  |
+| `--ds-space-x32` | 128px |  |
 
 ## 코드에서 쓰기
 
 ```css
 .my-page {
-  padding-inline: var(--ybm-space-x-global-gutter);
+  padding-inline: var(--ds-space-x-global-gutter);
 }
 .my-card {
   display: flex;
   flex-direction: column;
-  gap: var(--ybm-space-x2);
-  padding: var(--ybm-space-x4);
+  gap: var(--ds-space-x2);
+  padding: var(--ds-space-x4);
 }
 ```
 
@@ -410,10 +410,10 @@ YBM DS 의 색은 역할 색과 팔레트 색 두 층으로 되어 있습니다.
 
 | 토큰 | 폭 | 쓰임 |
 | --- | --- | --- |
-| `--ybm-breakpoint-sm` | 480px | 큰 휴대폰 |
-| `--ybm-breakpoint-md` | 768px | 태블릿, PC 부품으로 바뀌는 기준 |
-| `--ybm-breakpoint-lg` | 1280px | 넓은 PC, 3단 배치 |
-| `--ybm-breakpoint-xl` | 1440px | 아주 넓은 화면 |
+| `--ds-breakpoint-sm` | 480px | 큰 휴대폰 |
+| `--ds-breakpoint-md` | 768px | 태블릿, PC 부품으로 바뀌는 기준 |
+| `--ds-breakpoint-lg` | 1280px | 넓은 PC, 3단 배치 |
+| `--ds-breakpoint-xl` | 1440px | 아주 넓은 화면 |
 
 ## 컴포넌트가 바뀌는 곳
 
@@ -456,26 +456,26 @@ YBM DS 의 색은 역할 색과 팔레트 색 두 층으로 되어 있습니다.
 
 | 토큰 | 값 | 보기 |
 | --- | --- | --- |
-| `--ybm-shape-2xs` | 4px |  |
-| `--ybm-shape-xs` | 6px |  |
-| `--ybm-shape-sm` | 8px |  |
-| `--ybm-shape-md` | 10px |  |
-| `--ybm-shape-lg` | 12px |  |
-| `--ybm-shape-xl` | 16px |  |
-| `--ybm-shape-2xl` | 20px |  |
-| `--ybm-shape-3xl` | 24px |  |
-| `--ybm-shape-pill` | 9999px |  |
+| `--ds-shape-2xs` | 4px |  |
+| `--ds-shape-xs` | 6px |  |
+| `--ds-shape-sm` | 8px |  |
+| `--ds-shape-md` | 10px |  |
+| `--ds-shape-lg` | 12px |  |
+| `--ds-shape-xl` | 16px |  |
+| `--ds-shape-2xl` | 20px |  |
+| `--ds-shape-3xl` | 24px |  |
+| `--ds-shape-pill` | 9999px |  |
 
 ## 코드에서 쓰기
 
-어떤 영역에 `--ybm-shape-scale`을 0과 1 사이 값으로 덮어쓰면 그 안의 모서리만 덜 둥글게 바뀝니다.
+어떤 영역에 `--ds-shape-scale`을 0과 1 사이 값으로 덮어쓰면 그 안의 모서리만 덜 둥글게 바뀝니다.
 
 ```css
 .my-card {
-  border-radius: var(--ybm-shape-lg);
+  border-radius: var(--ds-shape-lg);
 }
 .admin-area {
-  --ybm-shape-scale: 0.5;  /* 이 영역 안의 모서리를 절반으로 */
+  --ds-shape-scale: 0.5;  /* 이 영역 안의 모서리를 절반으로 */
 }
 ```
 
@@ -503,30 +503,30 @@ YBM DS 의 색은 역할 색과 팔레트 색 두 층으로 되어 있습니다.
 
 | 토큰 | 쓰임 | 보기 |
 | --- | --- | --- |
-| `--ybm-elevation-raised` | thumb, 선택된 세그먼트 |  |
-| `--ybm-elevation-overlay` | menu, select, snackbar, tooltip, date picker |  |
-| `--ybm-elevation-panel` | 떠 있는 패널, 펼침 메뉴 |  |
-| `--ybm-elevation-floating` | FAB |  |
-| `--ybm-elevation-modal` | dialog, alert dialog, bottom sheet |  |
+| `--ds-elevation-raised` | thumb, 선택된 세그먼트 |  |
+| `--ds-elevation-overlay` | menu, select, snackbar, tooltip, date picker |  |
+| `--ds-elevation-panel` | 떠 있는 패널, 펼침 메뉴 |  |
+| `--ds-elevation-floating` | FAB |  |
+| `--ds-elevation-modal` | dialog, alert dialog, bottom sheet |  |
 
 ## 겹침 순서
 
 | 토큰 | 값 |
 | --- | --- |
-| `--ybm-z-base` | 0 |
-| `--ybm-z-sticky` | 100 |
-| `--ybm-z-overlay` | 1000 |
-| `--ybm-z-dialog` | 1100 |
-| `--ybm-z-toast` | 1200 |
-| `--ybm-z-tooltip` | 1300 |
+| `--ds-z-base` | 0 |
+| `--ds-z-sticky` | 100 |
+| `--ds-z-overlay` | 1000 |
+| `--ds-z-dialog` | 1100 |
+| `--ds-z-toast` | 1200 |
+| `--ds-z-tooltip` | 1300 |
 
 ## 코드에서 쓰기
 
 ```css
 .my-menu {
-  background: var(--ybm-color-bg-layer-floating);
-  box-shadow: var(--ybm-elevation-overlay);
-  z-index: var(--ybm-z-overlay);
+  background: var(--ds-color-bg-layer-floating);
+  box-shadow: var(--ds-elevation-overlay);
+  z-index: var(--ds-z-overlay);
 }
 ```
 
@@ -555,18 +555,18 @@ YBM DS 의 색은 역할 색과 팔레트 색 두 층으로 되어 있습니다.
 
 | 토큰 | 값 |
 | --- | --- |
-| `--ybm-duration-fast` | `150ms` |
-| `--ybm-duration-normal` | `200ms` |
-| `--ybm-duration-slow` | `300ms` |
+| `--ds-duration-fast` | `150ms` |
+| `--ds-duration-normal` | `200ms` |
+| `--ds-duration-slow` | `300ms` |
 
 ## 속도 곡선
 
 | 토큰 | 값 |
 | --- | --- |
-| `--ybm-easing-standard` | `cubic-bezier(0.35, 0, 0.35, 1)` |
-| `--ybm-easing-emphasized` | `cubic-bezier(0.03, 0.4, 0.1, 1)` |
-| `--ybm-easing-enter` | `cubic-bezier(0, 0, 0.15, 1)` |
-| `--ybm-easing-exit` | `cubic-bezier(0.35, 0, 1, 1)` |
+| `--ds-easing-standard` | `cubic-bezier(0.35, 0, 0.35, 1)` |
+| `--ds-easing-emphasized` | `cubic-bezier(0.03, 0.4, 0.1, 1)` |
+| `--ds-easing-enter` | `cubic-bezier(0, 0, 0.15, 1)` |
+| `--ds-easing-exit` | `cubic-bezier(0.35, 0, 1, 1)` |
 
 ## 코드에서 쓰기
 
@@ -574,7 +574,7 @@ YBM DS 의 색은 역할 색과 팔레트 색 두 층으로 되어 있습니다.
 
 ```css
 .my-sheet {
-  transition: transform var(--ybm-duration-slow) var(--ybm-easing-emphasized);
+  transition: transform var(--ds-duration-slow) var(--ds-easing-emphasized);
 }
 @media (prefers-reduced-motion: reduce) {
   .my-sheet { transition: none; }
@@ -598,7 +598,7 @@ YBM DS 의 색은 역할 색과 팔레트 색 두 층으로 되어 있습니다.
 
 색은 정보의 위계와 상태, 브랜드를 구분해 보여 줍니다.
 
-역할 색의 이름은 속성, 역할, 변형, 상태 네 조각으로 이어 붙입니다. `--ybm-color-bg-brand-solid-pressed`는 배경(속성), 브랜드(역할), 진한 면(변형), 눌렀을 때(상태)입니다.
+역할 색의 이름은 속성, 역할, 변형, 상태 네 조각으로 이어 붙입니다. `--ds-color-bg-brand-solid-pressed`는 배경(속성), 브랜드(역할), 진한 면(변형), 눌렀을 때(상태)입니다.
 
 ## 속성
 
@@ -618,103 +618,103 @@ YBM DS 의 색은 역할 색과 팔레트 색 두 층으로 되어 있습니다.
 
 브랜드 색은 브랜드와 이어지는 요소를 바로 알아보게 합니다. 화면에서 가장 중요한 동작 하나를 강조할 때도 씁니다.
 
-`--ybm-color-fg-brand`
+`--ds-color-fg-brand`
 
-`--ybm-color-bg-brand-solid`
+`--ds-color-bg-brand-solid`
 
-`--ybm-color-bg-brand-solid-pressed`
+`--ds-color-bg-brand-solid-pressed`
 
-`--ybm-color-bg-brand-weak`
+`--ds-color-bg-brand-weak`
 
-`--ybm-color-stroke-brand-solid`
+`--ds-color-stroke-brand-solid`
 
 ### Neutral
 
 기본 색은 대부분의 글과 바탕에 쓰는 색입니다. 가장 눈에 띄지는 않지만 늘 잘 보여야 하는 요소에 씁니다.
 
-`--ybm-color-fg-neutral`
+`--ds-color-fg-neutral`
 
-`--ybm-color-fg-neutral-muted`
+`--ds-color-fg-neutral-muted`
 
-`--ybm-color-fg-neutral-subtle`
+`--ds-color-fg-neutral-subtle`
 
-`--ybm-color-fg-on-neutral-solid`
+`--ds-color-fg-on-neutral-solid`
 
-`--ybm-color-bg-neutral-solid`
+`--ds-color-bg-neutral-solid`
 
-`--ybm-color-bg-neutral-weak`
+`--ds-color-bg-neutral-weak`
 
 ### Positive
 
 성공 색은 끝난 일, 확인, 좋은 상태를 알립니다.
 
-`--ybm-color-fg-positive`
+`--ds-color-fg-positive`
 
-`--ybm-color-fg-positive-contrast`
+`--ds-color-fg-positive-contrast`
 
-`--ybm-color-bg-positive-solid`
+`--ds-color-bg-positive-solid`
 
-`--ybm-color-bg-positive-weak`
+`--ds-color-bg-positive-weak`
 
 ### Warning
 
 주의 색은 마감 임박처럼 사용자가 한 번 더 살펴야 할 내용을 알립니다.
 
-`--ybm-color-fg-warning`
+`--ds-color-fg-warning`
 
-`--ybm-color-fg-warning-contrast`
+`--ds-color-fg-warning-contrast`
 
-`--ybm-color-bg-warning-solid`
+`--ds-color-bg-warning-solid`
 
-`--ybm-color-bg-warning-weak`
+`--ds-color-bg-warning-weak`
 
 ### Critical
 
 오류 색은 실패, 삭제처럼 바로 주의를 끌어야 하는 문제를 알립니다.
 
-`--ybm-color-fg-critical`
+`--ds-color-fg-critical`
 
-`--ybm-color-fg-critical-contrast`
+`--ds-color-fg-critical-contrast`
 
-`--ybm-color-bg-critical-solid`
+`--ds-color-bg-critical-solid`
 
-`--ybm-color-bg-critical-weak`
+`--ds-color-bg-critical-weak`
 
 ### Informative
 
 안내 색은 도움말과 상태 설명처럼 알아 두면 좋은 정보를 전합니다.
 
-`--ybm-color-fg-informative`
+`--ds-color-fg-informative`
 
-`--ybm-color-fg-informative-contrast`
+`--ds-color-fg-informative-contrast`
 
-`--ybm-color-bg-informative-solid`
+`--ds-color-bg-informative-solid`
 
-`--ybm-color-bg-informative-weak`
+`--ds-color-bg-informative-weak`
 
 ### Magic
 
 AI 색은 AI 기능과 새 기능을 다른 기능과 구분해 보여 줍니다.
 
-`--ybm-color-fg-magic`
+`--ds-color-fg-magic`
 
-`--ybm-color-bg-magic-solid`
+`--ds-color-bg-magic-solid`
 
-`--ybm-color-bg-magic-weak`
+`--ds-color-bg-magic-weak`
 
-`--ybm-color-stroke-magic-solid`
+`--ds-color-stroke-magic-solid`
 
 ### Layer
 
 면 색은 화면의 깊이와 겹침을 나눕니다. 화면 바탕, 기본 면, 떠 있는 면 순서로 위에 놓입니다.
 
-`--ybm-color-bg-canvas`
+`--ds-color-bg-canvas`
 
-`--ybm-color-bg-layer-default`
+`--ds-color-bg-layer-default`
 
-`--ybm-color-bg-layer-floating`
+`--ds-color-bg-layer-floating`
 
-`--ybm-color-bg-overlay`
+`--ds-color-bg-overlay`
 
 ## 변형
 
@@ -740,101 +740,101 @@ AI 색은 AI 기능과 새 기능을 다른 기능과 구분해 보여 줍니다
 
 | 토큰 | 값 |
 | --- | --- |
-| `--ybm-color-bg-brand-solid` 브랜드 진한 면 배경입니다. | `palette-brand-600` |
-| `--ybm-color-bg-brand-solid-pressed` 브랜드 진한 면 배경, 눌렀을 때입니다. | `palette-brand-700` |
-| `--ybm-color-bg-brand-weak` 브랜드 옅은 면 배경입니다. | `palette-brand-100` |
-| `--ybm-color-bg-brand-weak-pressed` 브랜드 옅은 면 배경, 눌렀을 때입니다. | `palette-brand-200` |
-| `--ybm-color-bg-canvas` 화면 바탕 배경입니다. | `palette-gray-100` |
-| `--ybm-color-bg-critical-solid` 오류 진한 면 배경입니다. | `palette-red-700` |
-| `--ybm-color-bg-critical-solid-pressed` 오류 진한 면 배경, 눌렀을 때입니다. | `palette-red-800` |
-| `--ybm-color-bg-critical-weak` 오류 옅은 면 배경입니다. | `palette-red-100` |
-| `--ybm-color-bg-critical-weak-pressed` 오류 옅은 면 배경, 눌렀을 때입니다. | `palette-red-200` |
-| `--ybm-color-bg-disabled` 꺼짐 배경입니다. | `palette-gray-200` |
-| `--ybm-color-bg-informative-solid` 안내 진한 면 배경입니다. | `palette-blue-700` |
-| `--ybm-color-bg-informative-solid-pressed` 안내 진한 면 배경, 눌렀을 때입니다. | `palette-blue-800` |
-| `--ybm-color-bg-informative-weak` 안내 옅은 면 배경입니다. | `palette-blue-100` |
-| `--ybm-color-bg-informative-weak-pressed` 안내 옅은 면 배경, 눌렀을 때입니다. | `palette-blue-200` |
-| `--ybm-color-bg-layer-default` 면 기본 배경입니다. | `palette-gray-00` |
-| `--ybm-color-bg-layer-floating` 면 떠 있는 면 배경입니다. | `palette-gray-00` |
-| `--ybm-color-bg-magic-solid` AI 진한 면 배경입니다. | `palette-purple-700` |
-| `--ybm-color-bg-magic-solid-pressed` AI 진한 면 배경, 눌렀을 때입니다. | `palette-purple-800` |
-| `--ybm-color-bg-magic-weak` AI 옅은 면 배경입니다. | `palette-purple-100` |
-| `--ybm-color-bg-magic-weak-pressed` AI 옅은 면 배경, 눌렀을 때입니다. | `palette-purple-200` |
-| `--ybm-color-bg-neutral` 기본 배경입니다. | `palette-gray-200` |
-| `--ybm-color-bg-neutral-inverted` 기본 반전 배경입니다. | `palette-gray-900` |
-| `--ybm-color-bg-neutral-inverted-pressed` 기본 반전 배경, 눌렀을 때입니다. | `palette-gray-800` |
-| `--ybm-color-bg-neutral-muted` 기본 한 단계 흐린 배경입니다. | `palette-gray-100` |
-| `--ybm-color-bg-neutral-solid` 기본 진한 면 배경입니다. | `palette-gray-900` |
-| `--ybm-color-bg-neutral-solid-pressed` 기본 진한 면 배경, 눌렀을 때입니다. | `palette-gray-800` |
-| `--ybm-color-bg-neutral-subtle` 기본 두 단계 흐린 배경입니다. | `palette-gray-00` |
-| `--ybm-color-bg-neutral-weak-alpha` 기본 옅은 반투명 면 배경입니다. | `palette-static-black-alpha-200` |
-| `--ybm-color-bg-neutral-weak-alpha-pressed` 기본 옅은 반투명 면 배경, 눌렀을 때입니다. | `palette-static-black-alpha-300` |
-| `--ybm-color-bg-neutral-weak-pressed` 기본 옅은 면 배경, 눌렀을 때입니다. | `palette-gray-300` |
-| `--ybm-color-bg-overlay` 덮개 배경입니다. | `palette-static-black-alpha-700` |
-| `--ybm-color-bg-positive-solid` 성공 진한 면 배경입니다. | `palette-green-700` |
-| `--ybm-color-bg-positive-solid-pressed` 성공 진한 면 배경, 눌렀을 때입니다. | `palette-green-800` |
-| `--ybm-color-bg-positive-weak` 성공 옅은 면 배경입니다. | `palette-green-100` |
-| `--ybm-color-bg-positive-weak-pressed` 성공 옅은 면 배경, 눌렀을 때입니다. | `palette-green-200` |
-| `--ybm-color-bg-transparent` 투명 배경입니다. | `transparent` |
-| `--ybm-color-bg-transparent-pressed` 투명 배경, 눌렀을 때입니다. | `palette-static-black-alpha-200` |
-| `--ybm-color-bg-warning-solid` 주의 진한 면 배경입니다. | `palette-orange-700` |
-| `--ybm-color-bg-warning-solid-pressed` 주의 진한 면 배경, 눌렀을 때입니다. | `palette-orange-800` |
-| `--ybm-color-bg-warning-weak` 주의 옅은 면 배경입니다. | `palette-orange-100` |
-| `--ybm-color-bg-warning-weak-pressed` 주의 옅은 면 배경, 눌렀을 때입니다. | `palette-orange-200` |
+| `--ds-color-bg-brand-solid` 브랜드 진한 면 배경입니다. | `palette-brand-600` |
+| `--ds-color-bg-brand-solid-pressed` 브랜드 진한 면 배경, 눌렀을 때입니다. | `palette-brand-700` |
+| `--ds-color-bg-brand-weak` 브랜드 옅은 면 배경입니다. | `palette-brand-100` |
+| `--ds-color-bg-brand-weak-pressed` 브랜드 옅은 면 배경, 눌렀을 때입니다. | `palette-brand-200` |
+| `--ds-color-bg-canvas` 화면 바탕 배경입니다. | `palette-gray-100` |
+| `--ds-color-bg-critical-solid` 오류 진한 면 배경입니다. | `palette-red-700` |
+| `--ds-color-bg-critical-solid-pressed` 오류 진한 면 배경, 눌렀을 때입니다. | `palette-red-800` |
+| `--ds-color-bg-critical-weak` 오류 옅은 면 배경입니다. | `palette-red-100` |
+| `--ds-color-bg-critical-weak-pressed` 오류 옅은 면 배경, 눌렀을 때입니다. | `palette-red-200` |
+| `--ds-color-bg-disabled` 꺼짐 배경입니다. | `palette-gray-200` |
+| `--ds-color-bg-informative-solid` 안내 진한 면 배경입니다. | `palette-blue-700` |
+| `--ds-color-bg-informative-solid-pressed` 안내 진한 면 배경, 눌렀을 때입니다. | `palette-blue-800` |
+| `--ds-color-bg-informative-weak` 안내 옅은 면 배경입니다. | `palette-blue-100` |
+| `--ds-color-bg-informative-weak-pressed` 안내 옅은 면 배경, 눌렀을 때입니다. | `palette-blue-200` |
+| `--ds-color-bg-layer-default` 면 기본 배경입니다. | `palette-gray-00` |
+| `--ds-color-bg-layer-floating` 면 떠 있는 면 배경입니다. | `palette-gray-00` |
+| `--ds-color-bg-magic-solid` AI 진한 면 배경입니다. | `palette-purple-700` |
+| `--ds-color-bg-magic-solid-pressed` AI 진한 면 배경, 눌렀을 때입니다. | `palette-purple-800` |
+| `--ds-color-bg-magic-weak` AI 옅은 면 배경입니다. | `palette-purple-100` |
+| `--ds-color-bg-magic-weak-pressed` AI 옅은 면 배경, 눌렀을 때입니다. | `palette-purple-200` |
+| `--ds-color-bg-neutral` 기본 배경입니다. | `palette-gray-200` |
+| `--ds-color-bg-neutral-inverted` 기본 반전 배경입니다. | `palette-gray-900` |
+| `--ds-color-bg-neutral-inverted-pressed` 기본 반전 배경, 눌렀을 때입니다. | `palette-gray-800` |
+| `--ds-color-bg-neutral-muted` 기본 한 단계 흐린 배경입니다. | `palette-gray-100` |
+| `--ds-color-bg-neutral-solid` 기본 진한 면 배경입니다. | `palette-gray-900` |
+| `--ds-color-bg-neutral-solid-pressed` 기본 진한 면 배경, 눌렀을 때입니다. | `palette-gray-800` |
+| `--ds-color-bg-neutral-subtle` 기본 두 단계 흐린 배경입니다. | `palette-gray-00` |
+| `--ds-color-bg-neutral-weak-alpha` 기본 옅은 반투명 면 배경입니다. | `palette-static-black-alpha-200` |
+| `--ds-color-bg-neutral-weak-alpha-pressed` 기본 옅은 반투명 면 배경, 눌렀을 때입니다. | `palette-static-black-alpha-300` |
+| `--ds-color-bg-neutral-weak-pressed` 기본 옅은 면 배경, 눌렀을 때입니다. | `palette-gray-300` |
+| `--ds-color-bg-overlay` 덮개 배경입니다. | `palette-static-black-alpha-700` |
+| `--ds-color-bg-positive-solid` 성공 진한 면 배경입니다. | `palette-green-700` |
+| `--ds-color-bg-positive-solid-pressed` 성공 진한 면 배경, 눌렀을 때입니다. | `palette-green-800` |
+| `--ds-color-bg-positive-weak` 성공 옅은 면 배경입니다. | `palette-green-100` |
+| `--ds-color-bg-positive-weak-pressed` 성공 옅은 면 배경, 눌렀을 때입니다. | `palette-green-200` |
+| `--ds-color-bg-transparent` 투명 배경입니다. | `transparent` |
+| `--ds-color-bg-transparent-pressed` 투명 배경, 눌렀을 때입니다. | `palette-static-black-alpha-200` |
+| `--ds-color-bg-warning-solid` 주의 진한 면 배경입니다. | `palette-orange-700` |
+| `--ds-color-bg-warning-solid-pressed` 주의 진한 면 배경, 눌렀을 때입니다. | `palette-orange-800` |
+| `--ds-color-bg-warning-weak` 주의 옅은 면 배경입니다. | `palette-orange-100` |
+| `--ds-color-bg-warning-weak-pressed` 주의 옅은 면 배경, 눌렀을 때입니다. | `palette-orange-200` |
 
 ### 글자와 아이콘
 
 | 토큰 | 값 |
 | --- | --- |
-| `--ybm-color-fg-brand` 브랜드 글자와 아이콘입니다. | `palette-brand-600` |
-| `--ybm-color-fg-brand-contrast` 브랜드 더 진한 글자와 아이콘입니다. | `palette-brand-700` |
-| `--ybm-color-fg-critical` 오류 글자와 아이콘입니다. | `palette-red-700` |
-| `--ybm-color-fg-critical-contrast` 오류 더 진한 글자와 아이콘입니다. | `palette-red-900` |
-| `--ybm-color-fg-disabled` 꺼짐 글자와 아이콘입니다. | `palette-gray-500` |
-| `--ybm-color-fg-informative` 안내 글자와 아이콘입니다. | `palette-blue-700` |
-| `--ybm-color-fg-informative-contrast` 안내 더 진한 글자와 아이콘입니다. | `palette-blue-900` |
-| `--ybm-color-fg-magic` AI 글자와 아이콘입니다. | `palette-purple-700` |
-| `--ybm-color-fg-magic-contrast` AI 더 진한 글자와 아이콘입니다. | `palette-purple-900` |
-| `--ybm-color-fg-neutral` 기본 글자와 아이콘입니다. | `palette-gray-1000` |
-| `--ybm-color-fg-neutral-inverted` 기본 반전 글자와 아이콘입니다. | `palette-gray-00` |
-| `--ybm-color-fg-neutral-muted` 기본 한 단계 흐린 글자와 아이콘입니다. | `palette-gray-800` |
-| `--ybm-color-fg-neutral-subtle` 기본 두 단계 흐린 글자와 아이콘입니다. | `palette-gray-700` |
-| `--ybm-color-fg-on-brand-solid` 브랜드 진한 면 위의 글자와 아이콘입니다. | `palette-static-white` |
-| `--ybm-color-fg-on-critical-solid` 오류 진한 면 위의 글자와 아이콘입니다. | `palette-static-white` |
-| `--ybm-color-fg-on-informative-solid` 안내 진한 면 위의 글자와 아이콘입니다. | `palette-static-white` |
-| `--ybm-color-fg-on-magic-solid` AI 진한 면 위의 글자와 아이콘입니다. | `palette-static-white` |
-| `--ybm-color-fg-on-neutral-solid` 기본 진한 면 위의 글자와 아이콘입니다. | `palette-gray-00` |
-| `--ybm-color-fg-on-positive-solid` 성공 진한 면 위의 글자와 아이콘입니다. | `palette-static-white` |
-| `--ybm-color-fg-on-warning-solid` 주의 진한 면 위의 글자와 아이콘입니다. | `palette-static-white` |
-| `--ybm-color-fg-placeholder` 입력 전 안내 글자 글자와 아이콘입니다. | `palette-gray-600` |
-| `--ybm-color-fg-positive` 성공 글자와 아이콘입니다. | `palette-green-700` |
-| `--ybm-color-fg-positive-contrast` 성공 더 진한 글자와 아이콘입니다. | `palette-green-900` |
-| `--ybm-color-fg-warning` 주의 글자와 아이콘입니다. | `palette-orange-700` |
-| `--ybm-color-fg-warning-contrast` 주의 더 진한 글자와 아이콘입니다. | `palette-orange-900` |
+| `--ds-color-fg-brand` 브랜드 글자와 아이콘입니다. | `palette-brand-600` |
+| `--ds-color-fg-brand-contrast` 브랜드 더 진한 글자와 아이콘입니다. | `palette-brand-700` |
+| `--ds-color-fg-critical` 오류 글자와 아이콘입니다. | `palette-red-700` |
+| `--ds-color-fg-critical-contrast` 오류 더 진한 글자와 아이콘입니다. | `palette-red-900` |
+| `--ds-color-fg-disabled` 꺼짐 글자와 아이콘입니다. | `palette-gray-500` |
+| `--ds-color-fg-informative` 안내 글자와 아이콘입니다. | `palette-blue-700` |
+| `--ds-color-fg-informative-contrast` 안내 더 진한 글자와 아이콘입니다. | `palette-blue-900` |
+| `--ds-color-fg-magic` AI 글자와 아이콘입니다. | `palette-purple-700` |
+| `--ds-color-fg-magic-contrast` AI 더 진한 글자와 아이콘입니다. | `palette-purple-900` |
+| `--ds-color-fg-neutral` 기본 글자와 아이콘입니다. | `palette-gray-1000` |
+| `--ds-color-fg-neutral-inverted` 기본 반전 글자와 아이콘입니다. | `palette-gray-00` |
+| `--ds-color-fg-neutral-muted` 기본 한 단계 흐린 글자와 아이콘입니다. | `palette-gray-800` |
+| `--ds-color-fg-neutral-subtle` 기본 두 단계 흐린 글자와 아이콘입니다. | `palette-gray-700` |
+| `--ds-color-fg-on-brand-solid` 브랜드 진한 면 위의 글자와 아이콘입니다. | `palette-static-white` |
+| `--ds-color-fg-on-critical-solid` 오류 진한 면 위의 글자와 아이콘입니다. | `palette-static-white` |
+| `--ds-color-fg-on-informative-solid` 안내 진한 면 위의 글자와 아이콘입니다. | `palette-static-white` |
+| `--ds-color-fg-on-magic-solid` AI 진한 면 위의 글자와 아이콘입니다. | `palette-static-white` |
+| `--ds-color-fg-on-neutral-solid` 기본 진한 면 위의 글자와 아이콘입니다. | `palette-gray-00` |
+| `--ds-color-fg-on-positive-solid` 성공 진한 면 위의 글자와 아이콘입니다. | `palette-static-white` |
+| `--ds-color-fg-on-warning-solid` 주의 진한 면 위의 글자와 아이콘입니다. | `palette-static-white` |
+| `--ds-color-fg-placeholder` 입력 전 안내 글자 글자와 아이콘입니다. | `palette-gray-600` |
+| `--ds-color-fg-positive` 성공 글자와 아이콘입니다. | `palette-green-700` |
+| `--ds-color-fg-positive-contrast` 성공 더 진한 글자와 아이콘입니다. | `palette-green-900` |
+| `--ds-color-fg-warning` 주의 글자와 아이콘입니다. | `palette-orange-700` |
+| `--ds-color-fg-warning-contrast` 주의 더 진한 글자와 아이콘입니다. | `palette-orange-900` |
 
 ### 테두리
 
 | 토큰 | 값 |
 | --- | --- |
-| `--ybm-color-stroke-brand-solid` 브랜드 진한 면 테두리입니다. | `palette-brand-700` |
-| `--ybm-color-stroke-brand-weak` 브랜드 옅은 면 테두리입니다. | `palette-brand-300` |
-| `--ybm-color-stroke-critical-solid` 오류 진한 면 테두리입니다. | `palette-red-700` |
-| `--ybm-color-stroke-critical-weak` 오류 옅은 면 테두리입니다. | `palette-red-300` |
-| `--ybm-color-stroke-focus-ring` 포커스 고리 테두리입니다. | `palette-blue-600` |
-| `--ybm-color-stroke-informative-solid` 안내 진한 면 테두리입니다. | `palette-blue-700` |
-| `--ybm-color-stroke-informative-weak` 안내 옅은 면 테두리입니다. | `palette-blue-300` |
-| `--ybm-color-stroke-magic-solid` AI 진한 면 테두리입니다. | `palette-purple-700` |
-| `--ybm-color-stroke-magic-weak` AI 옅은 면 테두리입니다. | `palette-purple-300` |
-| `--ybm-color-stroke-neutral` 기본 테두리입니다. | `palette-gray-500` |
-| `--ybm-color-stroke-neutral-contrast` 기본 더 진한 테두리입니다. | `palette-gray-1000` |
-| `--ybm-color-stroke-neutral-muted` 기본 한 단계 흐린 테두리입니다. | `palette-static-black-alpha-300` |
-| `--ybm-color-stroke-neutral-solid` 기본 진한 면 테두리입니다. | `palette-gray-800` |
-| `--ybm-color-stroke-neutral-subtle` 기본 두 단계 흐린 테두리입니다. | `palette-static-black-alpha-200` |
-| `--ybm-color-stroke-neutral-weak` 기본 옅은 면 테두리입니다. | `palette-gray-400` |
-| `--ybm-color-stroke-positive-solid` 성공 진한 면 테두리입니다. | `palette-green-700` |
-| `--ybm-color-stroke-positive-weak` 성공 옅은 면 테두리입니다. | `palette-green-300` |
-| `--ybm-color-stroke-warning-solid` 주의 진한 면 테두리입니다. | `palette-orange-700` |
-| `--ybm-color-stroke-warning-weak` 주의 옅은 면 테두리입니다. | `palette-orange-300` |
+| `--ds-color-stroke-brand-solid` 브랜드 진한 면 테두리입니다. | `palette-brand-700` |
+| `--ds-color-stroke-brand-weak` 브랜드 옅은 면 테두리입니다. | `palette-brand-300` |
+| `--ds-color-stroke-critical-solid` 오류 진한 면 테두리입니다. | `palette-red-700` |
+| `--ds-color-stroke-critical-weak` 오류 옅은 면 테두리입니다. | `palette-red-300` |
+| `--ds-color-stroke-focus-ring` 포커스 고리 테두리입니다. | `palette-blue-600` |
+| `--ds-color-stroke-informative-solid` 안내 진한 면 테두리입니다. | `palette-blue-700` |
+| `--ds-color-stroke-informative-weak` 안내 옅은 면 테두리입니다. | `palette-blue-300` |
+| `--ds-color-stroke-magic-solid` AI 진한 면 테두리입니다. | `palette-purple-700` |
+| `--ds-color-stroke-magic-weak` AI 옅은 면 테두리입니다. | `palette-purple-300` |
+| `--ds-color-stroke-neutral` 기본 테두리입니다. | `palette-gray-500` |
+| `--ds-color-stroke-neutral-contrast` 기본 더 진한 테두리입니다. | `palette-gray-1000` |
+| `--ds-color-stroke-neutral-muted` 기본 한 단계 흐린 테두리입니다. | `palette-static-black-alpha-300` |
+| `--ds-color-stroke-neutral-solid` 기본 진한 면 테두리입니다. | `palette-gray-800` |
+| `--ds-color-stroke-neutral-subtle` 기본 두 단계 흐린 테두리입니다. | `palette-static-black-alpha-200` |
+| `--ds-color-stroke-neutral-weak` 기본 옅은 면 테두리입니다. | `palette-gray-400` |
+| `--ds-color-stroke-positive-solid` 성공 진한 면 테두리입니다. | `palette-green-700` |
+| `--ds-color-stroke-positive-weak` 성공 옅은 면 테두리입니다. | `palette-green-300` |
+| `--ds-color-stroke-warning-solid` 주의 진한 면 테두리입니다. | `palette-orange-700` |
+| `--ds-color-stroke-warning-weak` 주의 옅은 면 테두리입니다. | `palette-orange-300` |
 
 
 ---
@@ -917,110 +917,110 @@ Purple
 
 | 토큰 | 값 |
 | --- | --- |
-| `--ybm-color-palette-gray-00` | `#ffffff / #000000` |
-| `--ybm-color-palette-gray-100` | `#f7f8f9 / #16171b` |
-| `--ybm-color-palette-gray-200` | `#f3f4f5 / #1d2025` |
-| `--ybm-color-palette-gray-300` | `#eeeff1 / #2b2e35` |
-| `--ybm-color-palette-gray-400` | `#dcdee3 / #393d46` |
-| `--ybm-color-palette-gray-500` | `#d1d3d8 / #5b606a` |
-| `--ybm-color-palette-gray-600` | `#b0b3ba / #868b94` |
-| `--ybm-color-palette-gray-700` | `#868b94 / #b0b3ba` |
-| `--ybm-color-palette-gray-800` | `#555d6d / #dcdee3` |
-| `--ybm-color-palette-gray-900` | `#2a3038 / #e9eaec` |
-| `--ybm-color-palette-gray-1000` | `#1a1c20 / #f3f4f5` |
-| `--ybm-color-palette-brand-100` | `#dbeafe / #172554` |
-| `--ybm-color-palette-brand-200` | `#bfdbfe / #1e3a8a` |
-| `--ybm-color-palette-brand-300` | `#93c5fd / #1e40af` |
-| `--ybm-color-palette-brand-400` | `#60a5fa / #1d4ed8` |
-| `--ybm-color-palette-brand-500` | `#3b82f6 / #2563eb` |
-| `--ybm-color-palette-brand-600` | `#2563eb / #3b82f6` |
-| `--ybm-color-palette-brand-700` | `#1d4ed8 / #60a5fa` |
-| `--ybm-color-palette-brand-800` | `#1e40af / #93c5fd` |
-| `--ybm-color-palette-brand-900` | `#1e3a8a / #bfdbfe` |
-| `--ybm-color-palette-brand-1000` | `#172554 / #dbeafe` |
-| `--ybm-color-palette-blue-100` | `#eff6ff / #202742` |
-| `--ybm-color-palette-blue-200` | `#e2edfc / #1e3352` |
-| `--ybm-color-palette-blue-300` | `#cbdffa / #1a4275` |
-| `--ybm-color-palette-blue-400` | `#aacefd / #0f559e` |
-| `--ybm-color-palette-blue-500` | `#85b8fd / #1964d8` |
-| `--ybm-color-palette-blue-600` | `#5e98fe / #1e82eb` |
-| `--ybm-color-palette-blue-700` | `#217cf9 / #41a2f9` |
-| `--ybm-color-palette-blue-800` | `#135fcd / #83bcf9` |
-| `--ybm-color-palette-blue-900` | `#0b4596 / #b9d7fb` |
-| `--ybm-color-palette-blue-1000` | `#032451 / #dcebfd` |
-| `--ybm-color-palette-green-100` | `#edfaf6 / #202926` |
-| `--ybm-color-palette-green-200` | `#d9f6e9 / #20362e` |
-| `--ybm-color-palette-green-300` | `#b9e9d2 / #20493b` |
-| `--ybm-color-palette-green-400` | `#7ddcb3 / #19604c` |
-| `--ybm-color-palette-green-500` | `#42c593 / #117956` |
-| `--ybm-color-palette-green-600` | `#10ab7d / #1b946d` |
-| `--ybm-color-palette-green-700` | `#079171 / #22b27f` |
-| `--ybm-color-palette-green-800` | `#00745f / #35ce9a` |
-| `--ybm-color-palette-green-900` | `#075445 / #93e5c0` |
-| `--ybm-color-palette-green-1000` | `#0a2b24 / #c2efdb` |
-| `--ybm-color-palette-orange-100` | `#fff2ec / #31241f` |
-| `--ybm-color-palette-orange-200` | `#ffe8db / #4b291c` |
-| `--ybm-color-palette-orange-300` | `#ffd5c0 / #6b311c` |
-| `--ybm-color-palette-orange-400` | `#ffb999 / #923600` |
-| `--ybm-color-palette-orange-500` | `#ff9364 / #bd4201` |
-| `--ybm-color-palette-orange-600` | `#ff6600 / #e65200` |
-| `--ybm-color-palette-orange-700` | `#e14d00 / #ff6600` |
-| `--ybm-color-palette-orange-800` | `#b93901 / #ff9e65` |
-| `--ybm-color-palette-orange-900` | `#862b00 / #eecebc` |
-| `--ybm-color-palette-orange-1000` | `#471601 / #f9ece4` |
-| `--ybm-color-palette-yellow-100` | `#fff7de / #411e03` |
-| `--ybm-color-palette-yellow-200` | `#fdefb9 / #512906` |
-| `--ybm-color-palette-yellow-300` | `#fbdc65 / #633408` |
-| `--ybm-color-palette-yellow-400` | `#fdc700 / #7f4505` |
-| `--ybm-color-palette-yellow-500` | `#f0b100 / #9d5800` |
-| `--ybm-color-palette-yellow-600` | `#d08700 / #b97000` |
-| `--ybm-color-palette-yellow-700` | `#a65f00 / #d38b00` |
-| `--ybm-color-palette-yellow-800` | `#894b00 / #ebaa00` |
-| `--ybm-color-palette-yellow-900` | `#733e0a / #fccf3a` |
-| `--ybm-color-palette-yellow-1000` | `#432004 / #fce89a` |
-| `--ybm-color-palette-purple-100` | `#f5f3fe / #201a2e` |
-| `--ybm-color-palette-purple-200` | `#efeafe / #2b2140` |
-| `--ybm-color-palette-purple-300` | `#e1d8ff / #392a57` |
-| `--ybm-color-palette-purple-400` | `#d0c0ff / #493571` |
-| `--ybm-color-palette-purple-500` | `#b8a1ff / #5e4593` |
-| `--ybm-color-palette-purple-600` | `#9f84fb / #7659bd` |
-| `--ybm-color-palette-purple-700` | `#8969ea / #9179e0` |
-| `--ybm-color-palette-purple-800` | `#6d50cb / #b4a1f5` |
-| `--ybm-color-palette-purple-900` | `#50379b / #d3c7fb` |
-| `--ybm-color-palette-purple-1000` | `#29175d / #ece7fe` |
-| `--ybm-color-palette-red-100` | `#fdf0f0 / #322323` |
-| `--ybm-color-palette-red-200` | `#fde7e7 / #4f2624` |
-| `--ybm-color-palette-red-300` | `#fed4d2 / #742826` |
-| `--ybm-color-palette-red-400` | `#feb7b3 / #a12621` |
-| `--ybm-color-palette-red-500` | `#fe928d / #ca2319` |
-| `--ybm-color-palette-red-600` | `#fc6a66 / #f73526` |
-| `--ybm-color-palette-red-700` | `#fa342c / #ff6e60` |
-| `--ybm-color-palette-red-800` | `#ca1d13 / #ffa299` |
-| `--ybm-color-palette-red-900` | `#921708 / #f8c5c3` |
-| `--ybm-color-palette-red-1000` | `#4a1209 / #fbe0de` |
-| `--ybm-color-palette-static-white` | `#ffffff / #ffffff` |
-| `--ybm-color-palette-static-black` | `#000000 / #000000` |
-| `--ybm-color-palette-static-black-alpha-100` | `#00000007 / #00000007` |
-| `--ybm-color-palette-static-black-alpha-200` | `#0000000c / #0000000c` |
-| `--ybm-color-palette-static-black-alpha-300` | `#00000010 / #00000010` |
-| `--ybm-color-palette-static-black-alpha-400` | `#00000021 / #00000021` |
-| `--ybm-color-palette-static-black-alpha-500` | `#0000002c / #0000002c` |
-| `--ybm-color-palette-static-black-alpha-600` | `#0000004c / #0000004c` |
-| `--ybm-color-palette-static-black-alpha-700` | `#00000074 / #00000074` |
-| `--ybm-color-palette-static-black-alpha-800` | `#000000a2 / #000000a2` |
-| `--ybm-color-palette-static-black-alpha-900` | `#000000d0 / #000000d0` |
-| `--ybm-color-palette-static-black-alpha-1000` | `#000000e3 / #000000e3` |
-| `--ybm-color-palette-static-white-alpha-50` | `#ffffff0d / #ffffff0d` |
-| `--ybm-color-palette-static-white-alpha-100` | `#ffffff17 / #ffffff17` |
-| `--ybm-color-palette-static-white-alpha-200` | `#ffffff20 / #ffffff20` |
-| `--ybm-color-palette-static-white-alpha-300` | `#ffffff2e / #ffffff2e` |
-| `--ybm-color-palette-static-white-alpha-400` | `#ffffff3d / #ffffff3d` |
-| `--ybm-color-palette-static-white-alpha-500` | `#ffffff60 / #ffffff60` |
-| `--ybm-color-palette-static-white-alpha-600` | `#ffffff8b / #ffffff8b` |
-| `--ybm-color-palette-static-white-alpha-700` | `#ffffffb3 / #ffffffb3` |
-| `--ybm-color-palette-static-white-alpha-800` | `#ffffffde / #ffffffde` |
-| `--ybm-color-palette-static-white-alpha-900` | `#ffffffea / #ffffffea` |
-| `--ybm-color-palette-static-white-alpha-1000` | `#fffffff4 / #fffffff4` |
+| `--ds-color-palette-gray-00` | `#ffffff / #000000` |
+| `--ds-color-palette-gray-100` | `#f7f8f9 / #16171b` |
+| `--ds-color-palette-gray-200` | `#f3f4f5 / #1d2025` |
+| `--ds-color-palette-gray-300` | `#eeeff1 / #2b2e35` |
+| `--ds-color-palette-gray-400` | `#dcdee3 / #393d46` |
+| `--ds-color-palette-gray-500` | `#d1d3d8 / #5b606a` |
+| `--ds-color-palette-gray-600` | `#b0b3ba / #868b94` |
+| `--ds-color-palette-gray-700` | `#868b94 / #b0b3ba` |
+| `--ds-color-palette-gray-800` | `#555d6d / #dcdee3` |
+| `--ds-color-palette-gray-900` | `#2a3038 / #e9eaec` |
+| `--ds-color-palette-gray-1000` | `#1a1c20 / #f3f4f5` |
+| `--ds-color-palette-brand-100` | `#dbeafe / #172554` |
+| `--ds-color-palette-brand-200` | `#bfdbfe / #1e3a8a` |
+| `--ds-color-palette-brand-300` | `#93c5fd / #1e40af` |
+| `--ds-color-palette-brand-400` | `#60a5fa / #1d4ed8` |
+| `--ds-color-palette-brand-500` | `#3b82f6 / #2563eb` |
+| `--ds-color-palette-brand-600` | `#2563eb / #3b82f6` |
+| `--ds-color-palette-brand-700` | `#1d4ed8 / #60a5fa` |
+| `--ds-color-palette-brand-800` | `#1e40af / #93c5fd` |
+| `--ds-color-palette-brand-900` | `#1e3a8a / #bfdbfe` |
+| `--ds-color-palette-brand-1000` | `#172554 / #dbeafe` |
+| `--ds-color-palette-blue-100` | `#eff6ff / #202742` |
+| `--ds-color-palette-blue-200` | `#e2edfc / #1e3352` |
+| `--ds-color-palette-blue-300` | `#cbdffa / #1a4275` |
+| `--ds-color-palette-blue-400` | `#aacefd / #0f559e` |
+| `--ds-color-palette-blue-500` | `#85b8fd / #1964d8` |
+| `--ds-color-palette-blue-600` | `#5e98fe / #1e82eb` |
+| `--ds-color-palette-blue-700` | `#217cf9 / #41a2f9` |
+| `--ds-color-palette-blue-800` | `#135fcd / #83bcf9` |
+| `--ds-color-palette-blue-900` | `#0b4596 / #b9d7fb` |
+| `--ds-color-palette-blue-1000` | `#032451 / #dcebfd` |
+| `--ds-color-palette-green-100` | `#edfaf6 / #202926` |
+| `--ds-color-palette-green-200` | `#d9f6e9 / #20362e` |
+| `--ds-color-palette-green-300` | `#b9e9d2 / #20493b` |
+| `--ds-color-palette-green-400` | `#7ddcb3 / #19604c` |
+| `--ds-color-palette-green-500` | `#42c593 / #117956` |
+| `--ds-color-palette-green-600` | `#10ab7d / #1b946d` |
+| `--ds-color-palette-green-700` | `#079171 / #22b27f` |
+| `--ds-color-palette-green-800` | `#00745f / #35ce9a` |
+| `--ds-color-palette-green-900` | `#075445 / #93e5c0` |
+| `--ds-color-palette-green-1000` | `#0a2b24 / #c2efdb` |
+| `--ds-color-palette-orange-100` | `#fff2ec / #31241f` |
+| `--ds-color-palette-orange-200` | `#ffe8db / #4b291c` |
+| `--ds-color-palette-orange-300` | `#ffd5c0 / #6b311c` |
+| `--ds-color-palette-orange-400` | `#ffb999 / #923600` |
+| `--ds-color-palette-orange-500` | `#ff9364 / #bd4201` |
+| `--ds-color-palette-orange-600` | `#ff6600 / #e65200` |
+| `--ds-color-palette-orange-700` | `#e14d00 / #ff6600` |
+| `--ds-color-palette-orange-800` | `#b93901 / #ff9e65` |
+| `--ds-color-palette-orange-900` | `#862b00 / #eecebc` |
+| `--ds-color-palette-orange-1000` | `#471601 / #f9ece4` |
+| `--ds-color-palette-yellow-100` | `#fff7de / #411e03` |
+| `--ds-color-palette-yellow-200` | `#fdefb9 / #512906` |
+| `--ds-color-palette-yellow-300` | `#fbdc65 / #633408` |
+| `--ds-color-palette-yellow-400` | `#fdc700 / #7f4505` |
+| `--ds-color-palette-yellow-500` | `#f0b100 / #9d5800` |
+| `--ds-color-palette-yellow-600` | `#d08700 / #b97000` |
+| `--ds-color-palette-yellow-700` | `#a65f00 / #d38b00` |
+| `--ds-color-palette-yellow-800` | `#894b00 / #ebaa00` |
+| `--ds-color-palette-yellow-900` | `#733e0a / #fccf3a` |
+| `--ds-color-palette-yellow-1000` | `#432004 / #fce89a` |
+| `--ds-color-palette-purple-100` | `#f5f3fe / #201a2e` |
+| `--ds-color-palette-purple-200` | `#efeafe / #2b2140` |
+| `--ds-color-palette-purple-300` | `#e1d8ff / #392a57` |
+| `--ds-color-palette-purple-400` | `#d0c0ff / #493571` |
+| `--ds-color-palette-purple-500` | `#b8a1ff / #5e4593` |
+| `--ds-color-palette-purple-600` | `#9f84fb / #7659bd` |
+| `--ds-color-palette-purple-700` | `#8969ea / #9179e0` |
+| `--ds-color-palette-purple-800` | `#6d50cb / #b4a1f5` |
+| `--ds-color-palette-purple-900` | `#50379b / #d3c7fb` |
+| `--ds-color-palette-purple-1000` | `#29175d / #ece7fe` |
+| `--ds-color-palette-red-100` | `#fdf0f0 / #322323` |
+| `--ds-color-palette-red-200` | `#fde7e7 / #4f2624` |
+| `--ds-color-palette-red-300` | `#fed4d2 / #742826` |
+| `--ds-color-palette-red-400` | `#feb7b3 / #a12621` |
+| `--ds-color-palette-red-500` | `#fe928d / #ca2319` |
+| `--ds-color-palette-red-600` | `#fc6a66 / #f73526` |
+| `--ds-color-palette-red-700` | `#fa342c / #ff6e60` |
+| `--ds-color-palette-red-800` | `#ca1d13 / #ffa299` |
+| `--ds-color-palette-red-900` | `#921708 / #f8c5c3` |
+| `--ds-color-palette-red-1000` | `#4a1209 / #fbe0de` |
+| `--ds-color-palette-static-white` | `#ffffff / #ffffff` |
+| `--ds-color-palette-static-black` | `#000000 / #000000` |
+| `--ds-color-palette-static-black-alpha-100` | `#00000007 / #00000007` |
+| `--ds-color-palette-static-black-alpha-200` | `#0000000c / #0000000c` |
+| `--ds-color-palette-static-black-alpha-300` | `#00000010 / #00000010` |
+| `--ds-color-palette-static-black-alpha-400` | `#00000021 / #00000021` |
+| `--ds-color-palette-static-black-alpha-500` | `#0000002c / #0000002c` |
+| `--ds-color-palette-static-black-alpha-600` | `#0000004c / #0000004c` |
+| `--ds-color-palette-static-black-alpha-700` | `#00000074 / #00000074` |
+| `--ds-color-palette-static-black-alpha-800` | `#000000a2 / #000000a2` |
+| `--ds-color-palette-static-black-alpha-900` | `#000000d0 / #000000d0` |
+| `--ds-color-palette-static-black-alpha-1000` | `#000000e3 / #000000e3` |
+| `--ds-color-palette-static-white-alpha-50` | `#ffffff0d / #ffffff0d` |
+| `--ds-color-palette-static-white-alpha-100` | `#ffffff17 / #ffffff17` |
+| `--ds-color-palette-static-white-alpha-200` | `#ffffff20 / #ffffff20` |
+| `--ds-color-palette-static-white-alpha-300` | `#ffffff2e / #ffffff2e` |
+| `--ds-color-palette-static-white-alpha-400` | `#ffffff3d / #ffffff3d` |
+| `--ds-color-palette-static-white-alpha-500` | `#ffffff60 / #ffffff60` |
+| `--ds-color-palette-static-white-alpha-600` | `#ffffff8b / #ffffff8b` |
+| `--ds-color-palette-static-white-alpha-700` | `#ffffffb3 / #ffffffb3` |
+| `--ds-color-palette-static-white-alpha-800` | `#ffffffde / #ffffffde` |
+| `--ds-color-palette-static-white-alpha-900` | `#ffffffea / #ffffffea` |
+| `--ds-color-palette-static-white-alpha-1000` | `#fffffff4 / #fffffff4` |
 
 
 ---
@@ -1097,8 +1097,8 @@ Typography타이포그래피는 글을 분명하고 읽기 쉽게 전합니다.
 <i class="ds-icon ds-icon--search ds-icon--lg" aria-hidden="true"></i>  <!-- 24 -->
 
 <!-- 색은 부모 글자색 -->
-<span style="color: var(--ybm-color-fg-brand)"><i class="ds-icon ds-icon--circle-check-solid" aria-hidden="true"></i></span>
-<span style="color: var(--ybm-color-fg-critical)"><i class="ds-icon ds-icon--triangle-alert-solid" aria-hidden="true"></i></span>
+<span style="color: var(--ds-color-fg-brand)"><i class="ds-icon ds-icon--circle-check-solid" aria-hidden="true"></i></span>
+<span style="color: var(--ds-color-fg-critical)"><i class="ds-icon ds-icon--triangle-alert-solid" aria-hidden="true"></i></span>
 ```
 
 ## 쓰임
@@ -1418,17 +1418,17 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | 변수 | 기본값 |
 | --- | --- |
 | `--ds-btn-height` | `40px` |
-| `--ds-btn-padding-x` | `var(--ybm-space-x4)` |
-| `--ds-btn-radius` | `var(--ybm-shape-sm)` |
-| `--ds-btn-gap` | `var(--ybm-space-x1_5)` |
-| `--ds-btn-font-size` | `var(--ybm-font-size-t04)` |
-| `--ds-btn-line-height` | `var(--ybm-line-height-t04)` |
-| `--ds-btn-font-weight` | `var(--ybm-font-weight-semibold)` |
+| `--ds-btn-padding-x` | `var(--ds-space-x4)` |
+| `--ds-btn-radius` | `var(--ds-shape-sm)` |
+| `--ds-btn-gap` | `var(--ds-space-x1_5)` |
+| `--ds-btn-font-size` | `var(--ds-font-size-t04)` |
+| `--ds-btn-line-height` | `var(--ds-line-height-t04)` |
+| `--ds-btn-font-weight` | `var(--ds-font-weight-semibold)` |
 | `--ds-btn-icon` | `18px` |
 | `--ds-btn-icon-only` | `20px` |
-| `--ds-btn-bg` | `var(--ybm-color-bg-brand-solid)` |
-| `--ds-btn-bg-pressed` | `var(--ybm-color-bg-brand-solid-pressed)` |
-| `--ds-btn-fg` | `var(--ybm-color-fg-on-brand-solid)` |
+| `--ds-btn-bg` | `var(--ds-color-bg-brand-solid)` |
+| `--ds-btn-bg-pressed` | `var(--ds-color-bg-brand-solid-pressed)` |
+| `--ds-btn-fg` | `var(--ds-color-fg-on-brand-solid)` |
 | `--ds-btn-border` | `transparent` |
 
 ### 크기와 여백
@@ -1486,8 +1486,8 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 | 변수 | 기본값 |
 | --- | --- |
-| `--ds-link-color` | `var(--ybm-color-fg-neutral-subtle)` |
-| `--ds-link-color-hover` | `var(--ybm-color-fg-neutral)` |
+| `--ds-link-color` | `var(--ds-color-fg-neutral-subtle)` |
+| `--ds-link-color-hover` | `var(--ds-color-fg-neutral)` |
 
 ### 크기와 여백
 
@@ -1567,8 +1567,8 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 | 변수 | 기본값 |
 | --- | --- |
-| `--ds-field-gap` | `var(--ybm-space-x2)` |
-| `--ds-field-label-weight` | `var(--ybm-font-weight-medium)` |
+| `--ds-field-gap` | `var(--ds-space-x2)` |
+| `--ds-field-label-weight` | `var(--ds-font-weight-medium)` |
 
 ### 크기와 여백
 
@@ -1644,17 +1644,17 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | --- | --- |
 | `--ds-input-height` | `44px` |
 | `--ds-input-padding-x` | `0px` |
-| `--ds-input-padding-y` | `var(--ybm-space-x2)` |
-| `--ds-input-gap` | `var(--ybm-space-x2_5)` |
-| `--ds-input-font-size` | `var(--ybm-font-size-t06)` |
-| `--ds-input-line-height` | `var(--ybm-line-height-t06)` |
+| `--ds-input-padding-y` | `var(--ds-space-x2)` |
+| `--ds-input-gap` | `var(--ds-space-x2_5)` |
+| `--ds-input-font-size` | `var(--ds-font-size-t06)` |
+| `--ds-input-line-height` | `var(--ds-line-height-t06)` |
 | `--ds-input-icon` | `24px` |
-| `--ds-input-color` | `var(--ybm-color-fg-neutral)` |
-| `--ds-input-bg` | `var(--ybm-color-bg-transparent)` |
+| `--ds-input-color` | `var(--ds-color-fg-neutral)` |
+| `--ds-input-bg` | `var(--ds-color-bg-transparent)` |
 | `--ds-input-radius` | `0px` |
-| `--ds-input-line` | `var(--ybm-color-stroke-neutral-weak)` |
-| `--ds-input-line-active` | `var(--ybm-color-stroke-neutral-contrast)` |
-| `--ds-input-line-fade` | `var(--ybm-duration-normal) var(--ybm-easing-standard)` |
+| `--ds-input-line` | `var(--ds-color-stroke-neutral-weak)` |
+| `--ds-input-line-active` | `var(--ds-color-stroke-neutral-contrast)` |
+| `--ds-input-line-fade` | `var(--ds-duration-normal) var(--ds-easing-standard)` |
 
 ### 크기와 여백
 
@@ -1708,12 +1708,12 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 | 변수 | 기본값 |
 | --- | --- |
-| `--ds-textarea-padding` | `var(--ybm-space-x3_5) var(--ybm-space-x4)` |
+| `--ds-textarea-padding` | `var(--ds-space-x3_5) var(--ds-space-x4)` |
 | `--ds-textarea-min-height` | `94px` |
-| `--ds-textarea-radius` | `var(--ybm-shape-lg)` |
-| `--ds-textarea-font-size` | `var(--ybm-font-size-t05)` |
-| `--ds-textarea-line-height` | `var(--ybm-line-height-t05)` |
-| `--ds-textarea-line` | `var(--ybm-color-stroke-neutral-weak)` |
+| `--ds-textarea-radius` | `var(--ds-shape-lg)` |
+| `--ds-textarea-font-size` | `var(--ds-font-size-t05)` |
+| `--ds-textarea-line-height` | `var(--ds-line-height-t05)` |
+| `--ds-textarea-line` | `var(--ds-color-stroke-neutral-weak)` |
 | `--ds-textarea-line-width` | `1px` |
 
 ### 크기와 여백
@@ -1874,15 +1874,15 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | 변수 | 기본값 |
 | --- | --- |
 | `--ds-select-height` | `52px` |
-| `--ds-select-padding-x` | `var(--ybm-space-x4)` |
-| `--ds-select-gap` | `var(--ybm-space-x2_5)` |
-| `--ds-select-radius` | `var(--ybm-shape-lg)` |
-| `--ds-select-font-size` | `var(--ybm-font-size-t05)` |
-| `--ds-select-line-height` | `var(--ybm-line-height-t05)` |
+| `--ds-select-padding-x` | `var(--ds-space-x4)` |
+| `--ds-select-gap` | `var(--ds-space-x2_5)` |
+| `--ds-select-radius` | `var(--ds-shape-lg)` |
+| `--ds-select-font-size` | `var(--ds-font-size-t05)` |
+| `--ds-select-line-height` | `var(--ds-line-height-t05)` |
 | `--ds-select-icon` | `20px` |
-| `--ds-select-line` | `var(--ybm-color-stroke-neutral-weak)` |
+| `--ds-select-line` | `var(--ds-color-stroke-neutral-weak)` |
 | `--ds-select-line-width` | `1px` |
-| `--ds-select-bg` | `var(--ybm-color-bg-transparent)` |
+| `--ds-select-bg` | `var(--ds-color-bg-transparent)` |
 
 ### 크기와 여백
 
@@ -1957,8 +1957,8 @@ Select를 눌렀을 때 펼쳐지는 선택지 목록입니다.
 
 | 변수 | 기본값 |
 | --- | --- |
-| `--ds-select-item-padding` | `var(--ybm-space-x3) var(--ybm-space-x2)` |
-| `--ds-select-item-gap` | `var(--ybm-space-x3)` |
+| `--ds-select-item-padding` | `var(--ds-space-x3) var(--ds-space-x2)` |
+| `--ds-select-item-gap` | `var(--ds-space-x3)` |
 | `--ds-select-item-check` | `20px` |
 
 ### 크기와 여백
@@ -2035,9 +2035,9 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | --- | --- |
 | `--ds-checkbox-size` | `20px` |
 | `--ds-checkbox-icon` | `12px` |
-| `--ds-checkbox-checked-bg` | `var(--ybm-color-bg-brand-solid)` |
-| `--ds-checkbox-checked-fg` | `var(--ybm-color-fg-on-brand-solid)` |
-| `--ds-checkbox-line` | `var(--ybm-color-stroke-neutral-weak)` |
+| `--ds-checkbox-checked-bg` | `var(--ds-color-bg-brand-solid)` |
+| `--ds-checkbox-checked-fg` | `var(--ds-color-fg-on-brand-solid)` |
+| `--ds-checkbox-line` | `var(--ds-color-stroke-neutral-weak)` |
 | `--ds-checkbox-mark` | `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.75' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E")` |
 
 ### 크기와 여백
@@ -2110,8 +2110,8 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | --- | --- |
 | `--ds-radio-size` | `24px` |
 | `--ds-radio-dot` | `10px` |
-| `--ds-radio-checked-bg` | `var(--ybm-color-bg-brand-solid)` |
-| `--ds-radio-checked-fg` | `var(--ybm-color-fg-on-brand-solid)` |
+| `--ds-radio-checked-bg` | `var(--ds-color-bg-brand-solid)` |
+| `--ds-radio-checked-fg` | `var(--ds-color-fg-on-brand-solid)` |
 
 ### 크기와 여백
 
@@ -2185,8 +2185,8 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | `--ds-switch-h` | `24px` |
 | `--ds-switch-thumb` | `16px` |
 | `--ds-switch-thumb-on` | `20px` |
-| `--ds-switch-on` | `var(--ybm-color-bg-brand-solid)` |
-| `--ds-switch-thumb-color` | `var(--ybm-color-palette-static-white)` |
+| `--ds-switch-on` | `var(--ds-color-bg-brand-solid)` |
+| `--ds-switch-thumb-color` | `var(--ds-color-palette-static-white)` |
 | `--ds-switch-t` | `var(--ds-switch-thumb)` |
 
 ### 크기와 여백
@@ -2303,11 +2303,11 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | 변수 | 기본값 |
 | --- | --- |
 | `--ds-chip-height` | `36px` |
-| `--ds-chip-padding-x` | `calc(var(--ybm-space-x2) + var(--ybm-space-x1_5))` |
-| `--ds-chip-min-width` | `var(--ybm-space-x12)` |
+| `--ds-chip-padding-x` | `calc(var(--ds-space-x2) + var(--ds-space-x1_5))` |
+| `--ds-chip-min-width` | `var(--ds-space-x12)` |
 | `--ds-chip-icon` | `16px` |
-| `--ds-chip-bg` | `var(--ybm-color-bg-neutral-weak-alpha)` |
-| `--ds-chip-fg` | `var(--ybm-color-fg-neutral)` |
+| `--ds-chip-bg` | `var(--ds-color-bg-neutral-weak-alpha)` |
+| `--ds-chip-fg` | `var(--ds-color-fg-neutral)` |
 | `--ds-chip-line` | `transparent` |
 
 ### 크기와 여백
@@ -2544,9 +2544,9 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 | 변수 | 기본값 |
 | --- | --- |
-| `--ds-toggle-bg` | `var(--ybm-color-bg-layer-default)` |
-| `--ds-toggle-fg` | `var(--ybm-color-fg-neutral)` |
-| `--ds-toggle-line` | `var(--ybm-color-stroke-neutral-weak)` |
+| `--ds-toggle-bg` | `var(--ds-color-bg-layer-default)` |
+| `--ds-toggle-fg` | `var(--ds-color-fg-neutral)` |
+| `--ds-toggle-line` | `var(--ds-color-stroke-neutral-weak)` |
 
 ### 크기와 여백
 
@@ -2618,8 +2618,8 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 | 변수 | 기본값 |
 | --- | --- |
-| `--ds-badge-bg` | `var(--ybm-color-bg-neutral)` |
-| `--ds-badge-fg` | `var(--ybm-color-fg-neutral-muted)` |
+| `--ds-badge-bg` | `var(--ds-color-bg-neutral)` |
+| `--ds-badge-fg` | `var(--ds-color-fg-neutral-muted)` |
 | `--ds-badge-line` | `transparent` |
 
 ### 크기와 여백
@@ -2765,15 +2765,15 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | --- | --- |
 | `--ds-avatar-size` | `36px` |
 | `--ds-avatar-badge` | `14px` |
-| `--ds-avatar-radius` | `var(--ybm-shape-pill)` |
-| `--ds-avatar-bg` | `var(--ybm-color-palette-gray-500)` |
+| `--ds-avatar-radius` | `var(--ds-shape-pill)` |
+| `--ds-avatar-bg` | `var(--ds-color-palette-gray-500)` |
 | `--ds-avatar-status-size` | `max(8px, calc(var(--ds-avatar-size) * 0.26))` |
 | `--ds-avatar-status-ring` | `clamp(1.5px, calc(var(--ds-avatar-size) * 0.04), 4px)` |
-| `--ds-avatar-status-color` | `var(--ybm-color-bg-positive-solid)` |
+| `--ds-avatar-status-color` | `var(--ds-color-bg-positive-solid)` |
 | `--ds-avatar-group-size` | `36px` |
-| `--ds-avatar-group-radius` | `var(--ybm-shape-pill)` |
+| `--ds-avatar-group-radius` | `var(--ds-shape-pill)` |
 | `--ds-avatar-group-ring` | `max(1.5px, calc(var(--ds-avatar-group-size) * 0.05))` |
-| `--ds-avatar-group-ring-color` | `var(--ybm-color-bg-layer-default)` |
+| `--ds-avatar-group-ring-color` | `var(--ds-color-bg-layer-default)` |
 
 ### 크기와 여백
 
@@ -2859,8 +2859,8 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 | 변수 | 기본값 |
 | --- | --- |
-| `--ds-callout-bg` | `var(--ybm-color-bg-neutral)` |
-| `--ds-callout-fg` | `var(--ybm-color-fg-neutral)` |
+| `--ds-callout-bg` | `var(--ds-color-bg-neutral)` |
+| `--ds-callout-fg` | `var(--ds-color-fg-neutral)` |
 
 ### 크기와 여백
 
@@ -2913,7 +2913,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 `ybm-ds.js`를 불러오면 알아서 동작합니다.
 
-- YBM.snackbar("문구", { variant: "positive"|"critical", action: "확인", onAction, duration })
+- DS.snackbar("문구", { variant: "positive"|"critical", action: "확인", onAction, duration })
 
 ## 사용 지침
 
@@ -2924,9 +2924,9 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 ## 예시
 
 ```html
-<button class="ds-btn" data-variant="neutralWeak" onclick="YBM.snackbar('저장했어요', { variant: 'positive' })">positive 띄우기</button>
-<button class="ds-btn" data-variant="neutralWeak" onclick="YBM.snackbar('네트워크 연결을 확인해 주세요', { variant: 'critical', action: '다시 시도' })">critical 띄우기</button>
-<button class="ds-btn" data-variant="neutralWeak" onclick="YBM.snackbar('링크를 복사했어요')">default 띄우기</button>
+<button class="ds-btn" data-variant="neutralWeak" onclick="DS.snackbar('저장했어요', { variant: 'positive' })">positive 띄우기</button>
+<button class="ds-btn" data-variant="neutralWeak" onclick="DS.snackbar('네트워크 연결을 확인해 주세요', { variant: 'critical', action: '다시 시도' })">critical 띄우기</button>
+<button class="ds-btn" data-variant="neutralWeak" onclick="DS.snackbar('링크를 복사했어요')">default 띄우기</button>
 ```
 
 ## 규격
@@ -3062,7 +3062,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 | 변수 | 기본값 |
 | --- | --- |
-| `--ds-menu-item-fg` | `var(--ybm-color-fg-neutral)` |
+| `--ds-menu-item-fg` | `var(--ds-color-fg-neutral)` |
 
 ### 크기와 여백
 
@@ -3146,7 +3146,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | 변수 | 기본값 |
 | --- | --- |
 | `--ds-dialog-width` | `480px` |
-| `--ds-dialog-radius` | `var(--ybm-shape-2xl)` |
+| `--ds-dialog-radius` | `var(--ds-shape-2xl)` |
 | `--ds-dialog-max-height` | `80vh` |
 
 ### 크기와 여백
@@ -3416,8 +3416,8 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 | 변수 | 기본값 |
 | --- | --- |
-| `--ds-skeleton-color` | `var(--ybm-color-palette-gray-200)` |
-| `--ds-skeleton-radius` | `var(--ybm-shape-sm)` |
+| `--ds-skeleton-color` | `var(--ds-color-palette-gray-200)` |
+| `--ds-skeleton-radius` | `var(--ds-shape-sm)` |
 | `--ds-skeleton-size` | `48px` |
 
 ### 크기와 여백
@@ -3484,8 +3484,8 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | 변수 | 기본값 |
 | --- | --- |
 | `--ds-slider-value` | `50%` |
-| `--ds-slider-active` | `var(--ybm-color-bg-neutral-solid)` |
-| `--ds-slider-thumb-line` | `var(--ybm-color-bg-neutral-solid)` |
+| `--ds-slider-active` | `var(--ds-color-bg-neutral-solid)` |
+| `--ds-slider-thumb-line` | `var(--ds-color-bg-neutral-solid)` |
 
 ### 크기와 여백
 
@@ -3548,8 +3548,8 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | 변수 | 기본값 |
 | --- | --- |
 | `--ds-progress-value` | `0%` |
-| `--ds-progress-track` | `var(--ybm-color-palette-brand-200)` |
-| `--ds-progress-range` | `var(--ybm-color-bg-brand-solid)` |
+| `--ds-progress-track` | `var(--ds-color-palette-brand-200)` |
+| `--ds-progress-range` | `var(--ds-color-bg-brand-solid)` |
 
 ### 크기와 여백
 
@@ -4173,7 +4173,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | --- | --- |
 | `--ds-table-head-h` | `44px` |
 | `--ds-table-row-h` | `56px` |
-| `--ds-table-line` | `var(--ybm-color-stroke-neutral-muted)` |
+| `--ds-table-line` | `var(--ds-color-stroke-neutral-muted)` |
 
 ### 크기와 여백
 
@@ -4230,7 +4230,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 <hr class="ds-divider">
 <hr class="ds-divider" data-weight="thick">
 <div class="ds-divider" role="separator" data-label><span>또는</span></div>
-<div class="u-flex" style="align-items:center;gap:var(--ybm-space-x2);color:var(--ybm-color-fg-neutral-subtle);font-size:var(--ybm-font-size-t03)"><span>이용약관</span><span class="ds-divider" role="separator" aria-orientation="vertical" data-orientation="vertical" style="--ds-divider-length:12px"></span><span>개인정보처리방침</span></div>
+<div class="u-flex" style="align-items:center;gap:var(--ds-space-x2);color:var(--ds-color-fg-neutral-subtle);font-size:var(--ds-font-size-t03)"><span>이용약관</span><span class="ds-divider" role="separator" aria-orientation="vertical" data-orientation="vertical" style="--ds-divider-length:12px"></span><span>개인정보처리방침</span></div>
 ```
 
 ## 규격
@@ -4241,7 +4241,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 | 변수 | 기본값 |
 | --- | --- |
-| `--ds-divider-color` | `var(--ybm-color-stroke-neutral-weak)` |
+| `--ds-divider-color` | `var(--ds-color-stroke-neutral-weak)` |
 | `--ds-divider-size` | `1px` |
 | `--ds-divider-length` | `16px` |
 
@@ -4303,7 +4303,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 | 변수 | 기본값 |
 | --- | --- |
-| `--ds-tooltip-gap` | `var(--ybm-space-x1_5)` |
+| `--ds-tooltip-gap` | `var(--ds-space-x1_5)` |
 
 ### 크기와 여백
 
@@ -4397,8 +4397,8 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | 변수 | 기본값 |
 | --- | --- |
 | `--ds-list-item-min-h` | `56px` |
-| `--ds-list-item-py` | `var(--ybm-space-x3)` |
-| `--ds-list-item-px` | `var(--ybm-space-x4)` |
+| `--ds-list-item-py` | `var(--ds-space-x3)` |
+| `--ds-list-item-px` | `var(--ds-space-x4)` |
 
 ### 크기와 여백
 
@@ -4516,7 +4516,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
   <li class="ds-stepper__step"><span class="ds-stepper__indicator"></span><span class="ds-stepper__label">정보 입력</span></li>
   <li class="ds-stepper__step"><span class="ds-stepper__indicator"></span><span class="ds-stepper__label">가입 완료</span></li>
 </ol>
-<ol class="ds-stepper" aria-label="신청 단계" data-orientation="vertical" style="margin-top:var(--ybm-space-x6)">
+<ol class="ds-stepper" aria-label="신청 단계" data-orientation="vertical" style="margin-top:var(--ds-space-x6)">
   <li class="ds-stepper__step" data-state="complete"><span class="ds-stepper__indicator"></span><span class="ds-stepper__label">상품 선택</span></li>
   <li class="ds-stepper__step" data-state="current" aria-current="step"><span class="ds-stepper__indicator"></span><span class="ds-stepper__label">배송지 입력</span></li>
   <li class="ds-stepper__step"><span class="ds-stepper__indicator"></span><span class="ds-stepper__label">결제</span></li>
@@ -4602,8 +4602,8 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 | 변수 | 기본값 |
 | --- | --- |
-| `--ds-banner-bg` | `var(--ybm-color-bg-neutral)` |
-| `--ds-banner-fg` | `var(--ybm-color-fg-neutral)` |
+| `--ds-banner-bg` | `var(--ds-color-bg-neutral)` |
+| `--ds-banner-fg` | `var(--ds-color-fg-neutral)` |
 | `--ds-banner-max` | `1200px` |
 
 ### 크기와 여백
@@ -4696,8 +4696,8 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | 변수 | 기본값 |
 | --- | --- |
 | `--ds-selectbox-columns` | `1` |
-| `--ds-selectbox-line` | `var(--ybm-color-stroke-neutral-weak)` |
-| `--ds-selectbox-bg` | `var(--ybm-color-bg-layer-default)` |
+| `--ds-selectbox-line` | `var(--ds-color-stroke-neutral-weak)` |
+| `--ds-selectbox-bg` | `var(--ds-color-bg-layer-default)` |
 
 ### 크기와 여백
 
@@ -4983,7 +4983,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | 변수 | 기본값 |
 | --- | --- |
 | `--ds-popover-width` | `320px` |
-| `--ds-popover-gap` | `var(--ybm-space-x2)` |
+| `--ds-popover-gap` | `var(--ds-space-x2)` |
 
 ### 크기와 여백
 
@@ -5054,13 +5054,13 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 ## 예시
 
 ```html
-<div style="display:flex;gap:var(--ybm-space-x3);padding:var(--ybm-space-x5) var(--ybm-space-x4)">
+<div style="display:flex;gap:var(--ds-space-x3);padding:var(--ds-space-x5) var(--ds-space-x4)">
   <p class="ds-chat-system">오늘</p>
   <div class="ds-chat-bubble">안녕하세요! 무엇을 도와드릴까요?</div>
-  <div style="display:flex;align-items:flex-end;justify-content:flex-end;gap:var(--ybm-space-x1_5)"><span class="ds-chat-meta" data-status="read"><b class="ds-chat-meta__status">읽음</b><time>오후 3:24</time></span><div class="ds-chat-bubble" data-sender="user" style="margin-left:0">이번 주 일정 정리해 줘</div></div>
+  <div style="display:flex;align-items:flex-end;justify-content:flex-end;gap:var(--ds-space-x1_5)"><span class="ds-chat-meta" data-status="read"><b class="ds-chat-meta__status">읽음</b><time>오후 3:24</time></span><div class="ds-chat-bubble" data-sender="user" style="margin-left:0">이번 주 일정 정리해 줘</div></div>
   <p class="ds-chat-system" data-variant="divider">대화가 종료되었어요</p>
-  <div style="display:flex;gap:var(--ybm-space-x4)"><span class="ds-chat-meta" data-status="sending"><b class="ds-chat-meta__status">전송 중</b><time>오후 3:24</time></span><span class="ds-chat-meta" data-status="sent"><time>오후 3:24</time></span><span class="ds-chat-meta" data-status="error"><b class="ds-chat-meta__status">전송 실패</b><time>오후 3:24</time></span></div>
-  <div style="display:flex;gap:var(--ybm-space-x3)"><button type="button" class="ds-chat-send" aria-label="보내기"></button><button type="button" class="ds-chat-send" data-state="stop" aria-label="답변 멈추기"></button><button type="button" class="ds-chat-send" aria-label="보내기" disabled></button></div>
+  <div style="display:flex;gap:var(--ds-space-x4)"><span class="ds-chat-meta" data-status="sending"><b class="ds-chat-meta__status">전송 중</b><time>오후 3:24</time></span><span class="ds-chat-meta" data-status="sent"><time>오후 3:24</time></span><span class="ds-chat-meta" data-status="error"><b class="ds-chat-meta__status">전송 실패</b><time>오후 3:24</time></span></div>
+  <div style="display:flex;gap:var(--ds-space-x3)"><button type="button" class="ds-chat-send" aria-label="보내기"></button><button type="button" class="ds-chat-send" data-state="stop" aria-label="답변 멈추기"></button><button type="button" class="ds-chat-send" aria-label="보내기" disabled></button></div>
 </div>
 <form class="ds-chat-composer" onsubmit="return false">
   <button type="button" class="ds-chat-composer__attach" aria-label="첨부"><i class="ds-icon ds-icon--plus" aria-hidden="true"></i></button>
@@ -5077,8 +5077,8 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | 변수 | 기본값 |
 | --- | --- |
 | `--ds-chat-bubble-max` | `288px` |
-| `--ds-chat-send-bg` | `var(--ybm-color-bg-brand-solid)` |
-| `--ds-chat-send-fg` | `var(--ybm-color-fg-on-brand-solid)` |
+| `--ds-chat-send-bg` | `var(--ds-color-bg-brand-solid)` |
+| `--ds-chat-send-fg` | `var(--ds-color-fg-on-brand-solid)` |
 | `--ds-chat-send-icon` | `var(--ds-icon-arrow-up)` |
 
 ### 크기와 여백
@@ -5176,7 +5176,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
   <div class="ds-appbar__main"><h1 class="ds-appbar__title">아주 긴 제목은 한 줄에서 말줄임으로 끝납니다</h1></div>
   <div class="ds-appbar__right"><button type="button" class="ds-appbar__button" aria-label="검색"><i class="ds-icon ds-icon--search" aria-hidden="true"></i></button><button type="button" class="ds-appbar__button" aria-label="메뉴" disabled><i class="ds-icon ds-icon--menu" aria-hidden="true"></i></button></div>
 </header>
-<div style="width:375px;background:var(--ybm-color-palette-gray-700)">
+<div style="width:375px;background:var(--ds-color-palette-gray-700)">
   <header class="ds-appbar" data-tone="transparent" data-gradient>
     <div class="ds-appbar__left"><button type="button" class="ds-appbar__button" aria-label="닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button></div>
     <div class="ds-appbar__main"><h1 class="ds-appbar__title">사진 위 막대</h1></div>
@@ -5194,8 +5194,8 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 | 변수 | 기본값 |
 | --- | --- |
-| `--ds-appbar-height` | `var(--ybm-space-x14)` |
-| `--ds-appbar-side` | `calc(var(--ybm-space-x11) * 2)` |
+| `--ds-appbar-height` | `var(--ds-space-x14)` |
+| `--ds-appbar-side` | `calc(var(--ds-space-x11) * 2)` |
 
 ### 크기와 여백
 
@@ -5273,7 +5273,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 ```html
 <header class="ds-topnav" style="min-width:960px">
   <div class="ds-topnav__left">
-    <a class="ds-topnav__heading" href="#" aria-label="홈으로"><span style="display:grid;place-items:center;width:88px;height:28px;border-radius:var(--ybm-shape-xs);background:var(--ybm-color-bg-neutral);color:var(--ybm-color-fg-neutral-subtle);font-size:var(--ybm-font-size-t03-static);font-weight:var(--ybm-font-weight-semibold)">로고</span></a>
+    <a class="ds-topnav__heading" href="#" aria-label="홈으로"><span style="display:grid;place-items:center;width:88px;height:28px;border-radius:var(--ds-shape-xs);background:var(--ds-color-bg-neutral);color:var(--ds-color-fg-neutral-subtle);font-size:var(--ds-font-size-t03-static);font-weight:var(--ds-font-weight-semibold)">로고</span></a>
     <nav class="ds-topnav__menu" aria-label="주요 메뉴">
       <a class="ds-topnav__item" href="#" aria-current="page">홈</a>
       <a class="ds-topnav__item" href="#">소개</a>
@@ -5702,16 +5702,16 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 ## 예시
 
 ```html
-<div style="display:flex;width:360px;max-width:100%;box-shadow:inset 0 0 0 1px var(--ybm-color-stroke-neutral-muted)">
+<div style="display:flex;width:360px;max-width:100%;box-shadow:inset 0 0 0 1px var(--ds-color-stroke-neutral-muted)">
   <section class="ds-result">
-    <div class="ds-result__asset" style="color:var(--ybm-color-fg-positive)"><i class="ds-icon ds-icon--circle-check-solid" aria-hidden="true"></i></div>
+    <div class="ds-result__asset" style="color:var(--ds-color-fg-positive)"><i class="ds-icon ds-icon--circle-check-solid" aria-hidden="true"></i></div>
     <div class="ds-result__texts"><h2 class="ds-result__title">신청을 마쳤어요</h2><p class="ds-result__desc">처리 결과는 알림으로 알려 드릴게요</p></div>
     <div class="ds-result__actions"><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="medium">확인</button><button type="button" class="ds-btn" data-variant="ghost" data-size="small">신청 내역 보기</button></div>
   </section>
 </div>
-<div style="display:flex;width:360px;max-width:100%;box-shadow:inset 0 0 0 1px var(--ybm-color-stroke-neutral-muted)">
+<div style="display:flex;width:360px;max-width:100%;box-shadow:inset 0 0 0 1px var(--ds-color-stroke-neutral-muted)">
   <section class="ds-result" data-size="medium">
-    <div class="ds-result__asset" style="color:var(--ybm-color-fg-critical)"><i class="ds-icon ds-icon--circle-alert-solid" aria-hidden="true"></i></div>
+    <div class="ds-result__asset" style="color:var(--ds-color-fg-critical)"><i class="ds-icon ds-icon--circle-alert-solid" aria-hidden="true"></i></div>
     <div class="ds-result__texts"><h2 class="ds-result__title">다시 시도해 주세요</h2><p class="ds-result__desc">요청을 처리하지 못했어요</p></div>
     <div class="ds-result__actions"><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="medium">다시 시도</button><button type="button" class="ds-btn" data-variant="ghost" data-size="small">고객센터 문의</button></div>
   </section>
@@ -5726,8 +5726,8 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 | 변수 | 기본값 |
 | --- | --- |
-| `--ds-result-gap` | `var(--ybm-space-x3)` |
-| `--ds-result-text-bottom` | `var(--ybm-space-x7)` |
+| `--ds-result-gap` | `var(--ds-space-x3)` |
+| `--ds-result-text-bottom` | `var(--ds-space-x7)` |
 
 ### 크기와 여백
 
@@ -5782,7 +5782,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 ## 예시
 
 ```html
-<span>남은 시간 <time class="ds-timer" id="pv-timer-end" style="font-size:var(--ybm-font-size-t07);line-height:var(--ybm-line-height-t07);font-weight:var(--ybm-font-weight-bold);color:var(--ybm-color-fg-neutral)">0:00</time></span>
+<span>남은 시간 <time class="ds-timer" id="pv-timer-end" style="font-size:var(--ds-font-size-t07);line-height:var(--ds-line-height-t07);font-weight:var(--ds-font-weight-bold);color:var(--ds-color-fg-neutral)">0:00</time></span>
 <span>흐른 시간 <time class="ds-timer" id="pv-timer-start" data-format="elapsed">0초</time></span>
 ```
 
@@ -5833,11 +5833,11 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 ## 예시
 
 ```html
-<span style="display:inline-flex;align-items:center;gap:var(--ybm-space-x1_5)"><span class="ds-statusdot" data-tone="positive"></span>연결됨</span>
-<span style="display:inline-flex;align-items:center;gap:var(--ybm-space-x1_5)"><span class="ds-statusdot" data-tone="warning"></span>지연</span>
-<span style="display:inline-flex;align-items:center;gap:var(--ybm-space-x1_5)"><span class="ds-statusdot" data-tone="critical"></span>끊김</span>
-<span style="display:inline-flex;align-items:center;gap:var(--ybm-space-x1_5)"><span class="ds-statusdot" data-tone="brand" data-pulse></span>진행 중</span>
-<span style="display:inline-flex;align-items:center;gap:var(--ybm-space-x1_5)"><span class="ds-statusdot"></span>대기</span>
+<span style="display:inline-flex;align-items:center;gap:var(--ds-space-x1_5)"><span class="ds-statusdot" data-tone="positive"></span>연결됨</span>
+<span style="display:inline-flex;align-items:center;gap:var(--ds-space-x1_5)"><span class="ds-statusdot" data-tone="warning"></span>지연</span>
+<span style="display:inline-flex;align-items:center;gap:var(--ds-space-x1_5)"><span class="ds-statusdot" data-tone="critical"></span>끊김</span>
+<span style="display:inline-flex;align-items:center;gap:var(--ds-space-x1_5)"><span class="ds-statusdot" data-tone="brand" data-pulse></span>진행 중</span>
+<span style="display:inline-flex;align-items:center;gap:var(--ds-space-x1_5)"><span class="ds-statusdot"></span>대기</span>
 ```
 
 ## 규격
@@ -5948,7 +5948,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 <div class="ds-scrollfog" style="width:240px;height:180px;padding-block:20px">
   <p>스크롤 되는 내용 1</p><p>스크롤 되는 내용 2</p><p>스크롤 되는 내용 3</p><p>스크롤 되는 내용 4</p><p>스크롤 되는 내용 5</p><p>스크롤 되는 내용 6</p><p>스크롤 되는 내용 7</p><p>스크롤 되는 내용 8</p><p>스크롤 되는 내용 9</p>
 </div>
-<div class="ds-scrollfog" data-direction="horizontal" style="display:flex;gap:var(--ybm-space-x2);width:300px;padding-inline:20px">
+<div class="ds-scrollfog" data-direction="horizontal" style="display:flex;gap:var(--ds-space-x2);width:300px;padding-inline:20px">
   <span class="ds-badge" data-size="large">전체</span><span class="ds-badge" data-size="large">디자인</span><span class="ds-badge" data-size="large">개발</span><span class="ds-badge" data-size="large">기획</span><span class="ds-badge" data-size="large">마케팅</span><span class="ds-badge" data-size="large">영업</span><span class="ds-badge" data-size="large">운영</span>
 </div>
 ```
@@ -6016,7 +6016,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 `ybm-ds.js`를 불러오면 알아서 동작합니다.
 
-- 터치로 당긴 거리 표시, 넘겨 놓으면 ds-refresh 이벤트, YBM.endRefresh(요소) 로 되돌리기
+- 터치로 당긴 거리 표시, 넘겨 놓으면 ds-refresh 이벤트, DS.endRefresh(요소) 로 되돌리기
 
 ## 사용 지침
 
@@ -6028,13 +6028,13 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 ## 예시
 
 ```html
-<div class="ds-ptr" id="pv-ptr" style="width:343px;height:240px;box-shadow:inset 0 0 0 1px var(--ybm-color-stroke-neutral-muted);border-radius:var(--ybm-shape-md)">
+<div class="ds-ptr" id="pv-ptr" style="width:343px;height:240px;box-shadow:inset 0 0 0 1px var(--ds-color-stroke-neutral-muted);border-radius:var(--ds-shape-md)">
   <div class="ds-ptr__indicator">
     <span class="ds-progress-circle" role="progressbar" aria-label="새로 고침" style="--ds-progress-value: 0"><svg viewBox="0 0 24 24" aria-hidden="true"><circle class="ds-progress-circle__track" pathLength="100"/><circle class="ds-progress-circle__range" pathLength="100"/></svg></span>
   </div>
-  <div class="ds-ptr__content" style="height:100%;overflow:auto;padding:var(--ybm-space-x4)">
+  <div class="ds-ptr__content" style="height:100%;overflow:auto;padding:var(--ds-space-x4)">
     <p>휴대폰에서 이 칸을 아래로 당겨 보세요.</p>
-    <p id="pv-ptr-out" style="color:var(--ybm-color-fg-neutral-muted)">아직 새로 고치지 않았어요</p>
+    <p id="pv-ptr-out" style="color:var(--ds-color-fg-neutral-muted)">아직 새로 고치지 않았어요</p>
   </div>
 </div>
 ```
@@ -6047,14 +6047,14 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 | 변수 | 기본값 |
 | --- | --- |
-| `--ds-ptr-size` | `calc(var(--ybm-space-x6) + var(--ybm-space-x8) * 2)` |
+| `--ds-ptr-size` | `calc(var(--ds-space-x6) + var(--ds-space-x8) * 2)` |
 | `--ds-ptr-displacement` | `0px` |
 
 ### 크기와 여백
 
 ```
 ybm-ds.js 가 터치로 당긴 거리를 --ds-ptr-displacement 에 넣고, 88 을 넘겨 놓으면 data-state="refreshing" 과 ds-refresh 이벤트.
-새로 고침이 끝나면 YBM.endRefresh(요소) 로 되돌린다. data-disabled 로 끈다.
+새로 고침이 끝나면 DS.endRefresh(요소) 로 되돌린다. data-disabled 로 끈다.
 Figma: 위쪽 영역 높이 x6 + x8 × 2 / Progress Circle 24 neutral, 당기는 동안 차오르고 새로 고치는 동안 회전
 ```
 
@@ -6218,7 +6218,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | 변수 | 기본값 |
 | --- | --- |
 | `--ds-imageframe-ratio` | `1` |
-| `--ds-imageframe-radius` | `var(--ybm-shape-sm)` |
+| `--ds-imageframe-radius` | `var(--ds-shape-sm)` |
 
 ### 크기와 여백
 
@@ -6303,9 +6303,9 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 | 변수 | 기본값 |
 | --- | --- |
-| `--ds-carousel-gap` | `var(--ybm-space-x2)` |
+| `--ds-carousel-gap` | `var(--ds-space-x2)` |
 | `--ds-carousel-padding` | `0px` |
-| `--ds-carousel-fade` | `var(--ybm-space-x1)` |
+| `--ds-carousel-fade` | `var(--ds-space-x1)` |
 | `--ds-carousel-fade-start` | `var(--ds-carousel-fade)` |
 | `--ds-carousel-fade-end` | `var(--ds-carousel-fade)` |
 
@@ -6643,7 +6643,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
   <label class="ds-rating__option"><input type="radio" class="ds-rating__control" name="pv-rating" value="4" aria-label="4점" checked><span class="ds-rating__star"></span></label>
   <label class="ds-rating__option"><input type="radio" class="ds-rating__control" name="pv-rating" value="5" aria-label="5점"><span class="ds-rating__star"></span></label>
 </fieldset>
-<i class="ds-icon ds-icon--heart" aria-hidden="true"></i><i class="ds-icon ds-icon--heart-solid" aria-hidden="true" style="color:var(--ybm-color-fg-critical)"></i><i class="ds-icon ds-icon--bookmark" aria-hidden="true"></i><i class="ds-icon ds-icon--bookmark-solid" aria-hidden="true"></i><i class="ds-icon ds-icon--shopping-cart" aria-hidden="true"></i><i class="ds-icon ds-icon--map-pin" aria-hidden="true"></i><i class="ds-icon ds-icon--star" aria-hidden="true"></i>
+<i class="ds-icon ds-icon--heart" aria-hidden="true"></i><i class="ds-icon ds-icon--heart-solid" aria-hidden="true" style="color:var(--ds-color-fg-critical)"></i><i class="ds-icon ds-icon--bookmark" aria-hidden="true"></i><i class="ds-icon ds-icon--bookmark-solid" aria-hidden="true"></i><i class="ds-icon ds-icon--shopping-cart" aria-hidden="true"></i><i class="ds-icon ds-icon--map-pin" aria-hidden="true"></i><i class="ds-icon ds-icon--star" aria-hidden="true"></i>
 ```
 
 ## 규격
@@ -6657,8 +6657,8 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | `--ds-rating-size` | `16px` |
 | `--ds-rating-gap` | `2px` |
 | `--ds-rating-value` | `0` |
-| `--ds-rating-fill` | `var(--ybm-color-fg-warning)` |
-| `--ds-rating-empty` | `var(--ybm-color-stroke-neutral-muted)` |
+| `--ds-rating-fill` | `var(--ds-color-fg-warning)` |
+| `--ds-rating-empty` | `var(--ds-color-stroke-neutral-muted)` |
 
 ### 크기와 여백
 

@@ -9,9 +9,9 @@
 <script>try { var t = localStorage.getItem("ybm-site-theme"); if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.dataset.theme = "dark"; } catch (e) {}</script>
 <link rel="icon" href="../assets/logo-ybmnet.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../dist/ybm-ds.css">
-<link rel="stylesheet" href="../assets/site.css?v=ab6a4407">
+<link rel="stylesheet" href="../assets/site.css?v=f656f0f2">
 <script src="../../dist/ybm-ds.js" defer></script>
-<script src="../assets/site.js?v=ab6a4407" defer></script>
+<script src="../assets/site.js?v=f656f0f2" defer></script>
 </head>
 <body class="site">
 <a class="site-skip" href="#main">본문 바로가기</a>
@@ -208,15 +208,15 @@
 <thead><tr><th scope="col">변수</th><th scope="col">기본값</th></tr></thead>
 <tbody><tr><td><code>--ds-avatar-size</code></td><td><code>36px</code></td></tr>
 <tr><td><code>--ds-avatar-badge</code></td><td><code>14px</code></td></tr>
-<tr><td><code>--ds-avatar-radius</code></td><td><code>var(--ybm-shape-pill)</code></td></tr>
-<tr><td><code>--ds-avatar-bg</code></td><td><code>var(--ybm-color-palette-gray-500)</code></td></tr>
+<tr><td><code>--ds-avatar-radius</code></td><td><code>var(--ds-shape-pill)</code></td></tr>
+<tr><td><code>--ds-avatar-bg</code></td><td><code>var(--ds-color-palette-gray-500)</code></td></tr>
 <tr><td><code>--ds-avatar-status-size</code></td><td><code>max(8px, calc(var(--ds-avatar-size) * 0.26))</code></td></tr>
 <tr><td><code>--ds-avatar-status-ring</code></td><td><code>clamp(1.5px, calc(var(--ds-avatar-size) * 0.04), 4px)</code></td></tr>
-<tr><td><code>--ds-avatar-status-color</code></td><td><code>var(--ybm-color-bg-positive-solid)</code></td></tr>
+<tr><td><code>--ds-avatar-status-color</code></td><td><code>var(--ds-color-bg-positive-solid)</code></td></tr>
 <tr><td><code>--ds-avatar-group-size</code></td><td><code>36px</code></td></tr>
-<tr><td><code>--ds-avatar-group-radius</code></td><td><code>var(--ybm-shape-pill)</code></td></tr>
+<tr><td><code>--ds-avatar-group-radius</code></td><td><code>var(--ds-shape-pill)</code></td></tr>
 <tr><td><code>--ds-avatar-group-ring</code></td><td><code>max(1.5px, calc(var(--ds-avatar-group-size) * 0.05))</code></td></tr>
-<tr><td><code>--ds-avatar-group-ring-color</code></td><td><code>var(--ybm-color-bg-layer-default)</code></td></tr></tbody></table></div><h3>크기와 여백</h3><pre class="site-spec">size : 20 / 24 / 36(기본) / 42 / 48 / 56 / 64 / 80 / 96 / 108
+<tr><td><code>--ds-avatar-group-ring-color</code></td><td><code>var(--ds-color-bg-layer-default)</code></td></tr></tbody></table></div><h3>크기와 여백</h3><pre class="site-spec">size : 20 / 24 / 36(기본) / 42 / 48 / 56 / 64 / 80 / 96 / 108
 shape: circle(기본) / rounded(크기의 1/4, 곡률 노브 따름) / square
 내용 우선순위: 사진 &gt; 이니셜 &gt; 기본 실루엣(사진/이니셜이 없으면 자동)
 ※ 이니셜은 반드시 .ds-avatar__initials 로 감싼다(맨 글자만 넣으면 실루엣과 겹친다).

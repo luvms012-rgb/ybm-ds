@@ -46,7 +46,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
   <li class="ds-stepper__step"><span class="ds-stepper__indicator"></span><span class="ds-stepper__label">정보 입력</span></li>
   <li class="ds-stepper__step"><span class="ds-stepper__indicator"></span><span class="ds-stepper__label">가입 완료</span></li>
 </ol>
-<ol class="ds-stepper" aria-label="신청 단계" data-orientation="vertical" style="margin-top:var(--ybm-space-x6)">
+<ol class="ds-stepper" aria-label="신청 단계" data-orientation="vertical" style="margin-top:var(--ds-space-x6)">
   <li class="ds-stepper__step" data-state="complete"><span class="ds-stepper__indicator"></span><span class="ds-stepper__label">상품 선택</span></li>
   <li class="ds-stepper__step" data-state="current" aria-current="step"><span class="ds-stepper__indicator"></span><span class="ds-stepper__label">배송지 입력</span></li>
   <li class="ds-stepper__step"><span class="ds-stepper__indicator"></span><span class="ds-stepper__label">결제</span></li>

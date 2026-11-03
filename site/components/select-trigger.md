@@ -39,15 +39,15 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | 변수 | 기본값 |
 | --- | --- |
 | `--ds-select-height` | `52px` |
-| `--ds-select-padding-x` | `var(--ybm-space-x4)` |
-| `--ds-select-gap` | `var(--ybm-space-x2_5)` |
-| `--ds-select-radius` | `var(--ybm-shape-lg)` |
-| `--ds-select-font-size` | `var(--ybm-font-size-t05)` |
-| `--ds-select-line-height` | `var(--ybm-line-height-t05)` |
+| `--ds-select-padding-x` | `var(--ds-space-x4)` |
+| `--ds-select-gap` | `var(--ds-space-x2_5)` |
+| `--ds-select-radius` | `var(--ds-shape-lg)` |
+| `--ds-select-font-size` | `var(--ds-font-size-t05)` |
+| `--ds-select-line-height` | `var(--ds-line-height-t05)` |
 | `--ds-select-icon` | `20px` |
-| `--ds-select-line` | `var(--ybm-color-stroke-neutral-weak)` |
+| `--ds-select-line` | `var(--ds-color-stroke-neutral-weak)` |
 | `--ds-select-line-width` | `1px` |
-| `--ds-select-bg` | `var(--ybm-color-bg-transparent)` |
+| `--ds-select-bg` | `var(--ds-color-bg-transparent)` |
 
 ### 크기와 여백
 

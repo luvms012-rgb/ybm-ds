@@ -53,8 +53,8 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | --- | --- |
 | `--ds-radio-size` | `24px` |
 | `--ds-radio-dot` | `10px` |
-| `--ds-radio-checked-bg` | `var(--ybm-color-bg-brand-solid)` |
-| `--ds-radio-checked-fg` | `var(--ybm-color-fg-on-brand-solid)` |
+| `--ds-radio-checked-bg` | `var(--ds-color-bg-brand-solid)` |
+| `--ds-radio-checked-fg` | `var(--ds-color-fg-on-brand-solid)` |
 
 ### 크기와 여백
 

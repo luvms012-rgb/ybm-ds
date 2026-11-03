@@ -90,7 +90,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | --- | --- |
 | `--ds-table-head-h` | `44px` |
 | `--ds-table-row-h` | `56px` |
-| `--ds-table-line` | `var(--ybm-color-stroke-neutral-muted)` |
+| `--ds-table-line` | `var(--ds-color-stroke-neutral-muted)` |
 
 ### 크기와 여백
 

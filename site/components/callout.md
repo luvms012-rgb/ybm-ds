@@ -61,8 +61,8 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 | 변수 | 기본값 |
 | --- | --- |
-| `--ds-callout-bg` | `var(--ybm-color-bg-neutral)` |
-| `--ds-callout-fg` | `var(--ybm-color-fg-neutral)` |
+| `--ds-callout-bg` | `var(--ds-color-bg-neutral)` |
+| `--ds-callout-fg` | `var(--ds-color-fg-neutral)` |
 
 ### 크기와 여백
 

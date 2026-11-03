@@ -12,18 +12,18 @@
 
 | 토큰 | 값 |
 | --- | --- |
-| `--ybm-duration-fast` | `150ms` |
-| `--ybm-duration-normal` | `200ms` |
-| `--ybm-duration-slow` | `300ms` |
+| `--ds-duration-fast` | `150ms` |
+| `--ds-duration-normal` | `200ms` |
+| `--ds-duration-slow` | `300ms` |
 
 ## 속도 곡선
 
 | 토큰 | 값 |
 | --- | --- |
-| `--ybm-easing-standard` | `cubic-bezier(0.35, 0, 0.35, 1)` |
-| `--ybm-easing-emphasized` | `cubic-bezier(0.03, 0.4, 0.1, 1)` |
-| `--ybm-easing-enter` | `cubic-bezier(0, 0, 0.15, 1)` |
-| `--ybm-easing-exit` | `cubic-bezier(0.35, 0, 1, 1)` |
+| `--ds-easing-standard` | `cubic-bezier(0.35, 0, 0.35, 1)` |
+| `--ds-easing-emphasized` | `cubic-bezier(0.03, 0.4, 0.1, 1)` |
+| `--ds-easing-enter` | `cubic-bezier(0, 0, 0.15, 1)` |
+| `--ds-easing-exit` | `cubic-bezier(0.35, 0, 1, 1)` |
 
 ## 코드에서 쓰기
 
@@ -31,7 +31,7 @@
 
 ```css
 .my-sheet {
-  transition: transform var(--ybm-duration-slow) var(--ybm-easing-emphasized);
+  transition: transform var(--ds-duration-slow) var(--ds-easing-emphasized);
 }
 @media (prefers-reduced-motion: reduce) {
   .my-sheet { transition: none; }

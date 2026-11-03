@@ -9,9 +9,9 @@
 <script>try { var t = localStorage.getItem("ybm-site-theme"); if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.dataset.theme = "dark"; } catch (e) {}</script>
 <link rel="icon" href="../assets/logo-ybmnet.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../dist/ybm-ds.css">
-<link rel="stylesheet" href="../assets/site.css?v=ab6a4407">
+<link rel="stylesheet" href="../assets/site.css?v=f656f0f2">
 <script src="../../dist/ybm-ds.js" defer></script>
-<script src="../assets/site.js?v=ab6a4407" defer></script>
+<script src="../assets/site.js?v=f656f0f2" defer></script>
 </head>
 <body class="site">
 <a class="site-skip" href="#main">본문 바로가기</a>
@@ -55,7 +55,7 @@
    &lt;script src=&quot;https://luvms012-rgb.github.io/ybm-ds/dist/ybm-ds.js&quot; defer&gt;&lt;/script&gt;
 2. 문서는 https://luvms012-rgb.github.io/ybm-ds/site/llms.txt 목차에서 필요한 페이지(.md)를 골라 읽어.
 3. 쓸 수 있는 컴포넌트 목록은 https://luvms012-rgb.github.io/ybm-ds/components.json, 각 컴포넌트의 HTML 구조는 https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/components.css의 컴포넌트별 머리 주석을 따라.
-4. 색, 간격, 글자 크기, 모서리, 그림자는 https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/tokens.css의 --ybm-* 토큰만 써.
+4. 색, 간격, 글자 크기, 모서리, 그림자는 https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/tokens.css의 --ds-* 토큰만 써.
 5. 서비스 CSS는 DS 다음에 불러오고, 바꾸고 싶은 모양은 컴포넌트의 --ds-* 변수만 덮어써.
 6. 새 ds- 클래스를 만들거나 !important를 쓰지 마.</code></pre>
 </figure>
@@ -68,15 +68,15 @@
 - 쓰는 컴포넌트는 https://luvms012-rgb.github.io/ybm-ds/site/llms.txt에서 그 문서(.md)를 읽고 사용 지침을 따라.
 - 비슷한 화면이 llms.txt의 Templates 목록에 있으면 그 HTML을 출발점으로 써.
 - 모바일 먼저 만들고, 768px 이상과 1280px 이상에서 배치를 바꿔 줘.
-- 글자는 한국어. 제목은 Bold에 자간 -0.02em, 항목 제목은 SemiBold, 본문은 Regular로 쓰고, 크기는 --ybm-font-size-* 토큰, 본문은 word-break: keep-all.
-- 배치용 CSS에는 --ybm-* 토큰만 쓰고 hex 색은 쓰지 마.</code></pre>
+- 글자는 한국어. 제목은 Bold에 자간 -0.02em, 항목 제목은 SemiBold, 본문은 Regular로 쓰고, 크기는 --ds-font-size-* 토큰, 본문은 word-break: keep-all.
+- 배치용 CSS에는 --ds-* 토큰만 쓰고 hex 색은 쓰지 마.</code></pre>
 </figure>
 <h3>규칙 점검하기</h3>
 <figure class="ds-codeblock" data-wrap>
   <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">text</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
   <pre class="ds-codeblock__code"><code>이 화면이 YBM DS 규칙을 지키는지 점검하고 고쳐 줘.
-- hex, rgb로 색을 직접 쓴 곳 → --ybm-color-* 토큰으로
-- 토큰이 아닌 임의의 간격, 글자 크기 → --ybm-space-*, --ybm-font-size-* 로
+- hex, rgb로 색을 직접 쓴 곳 → --ds-color-* 토큰으로
+- 토큰이 아닌 임의의 간격, 글자 크기 → --ds-space-*, --ds-font-size-* 로
 - https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/components.css에 없는 ds- 클래스, !important
 - DS 부품으로 바꿀 수 있는데 직접 만든 버튼, 입력, 표
 고친 곳은 목록으로 알려 줘.</code></pre>
@@ -96,7 +96,7 @@
 <thead><tr><th scope="col">파일</th><th scope="col">내용</th></tr></thead>
 <tbody><tr><td><a class="ds-link" href="https://luvms012-rgb.github.io/ybm-ds/components.json" target="_blank" rel="noopener">components.json</a></td><td>쓸 수 있는 컴포넌트와 속성 목록입니다.</td></tr>
 <tr><td><a class="ds-link" href="https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/components.css" target="_blank" rel="noopener">components.css</a></td><td>컴포넌트마다 머리 주석에 HTML 구조가 있습니다.</td></tr>
-<tr><td><a class="ds-link" href="https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/tokens.css" target="_blank" rel="noopener">tokens.css</a></td><td>색, 간격, 글자 크기 같은 <code>--ybm-*</code> 토큰입니다.</td></tr>
+<tr><td><a class="ds-link" href="https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/tokens.css" target="_blank" rel="noopener">tokens.css</a></td><td>색, 간격, 글자 크기 같은 <code>--ds-*</code> 토큰입니다.</td></tr>
 <tr><td>Templates</td><td><code>llms.txt</code> 끝에 템플릿마다 HTML 원본 주소가 있어 새 화면의 출발점으로 씁니다.</td></tr></tbody></table></div>
 <h2 id="figma">Figma<a class="site-anchor" href="#figma" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
 <p>Figma 변수 이름이 CSS 변수 이름과 같습니다. Dev Mode에서 복사한 코드가 그대로 동작하고, AI에 Figma 화면을 주면 같은 토큰 이름으로 옮깁니다.</p>

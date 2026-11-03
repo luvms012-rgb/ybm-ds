@@ -67,7 +67,7 @@ git 에 올리지 않는 것(`.gitignore`): `tokens/.figma-check.js`, `tokens/.f
 ```
 
 ### Cascade Layers
-DS 전체가 `@layer ybm.tokens, ybm.base, ybm.icons, ybm.components, ybm.utilities` 안에 들어 있다.
+DS 전체가 `@layer ds.tokens, ds.base, ds.icons, ds.components, ds.utilities` 안에 들어 있다.
 레이어 밖에 쓴 서비스 CSS 는 선택자 우선순위와 상관없이 항상 DS 를 이긴다 → `!important`/선택자 길이 경쟁 불필요.
 
 ### 커스텀 규칙
@@ -79,7 +79,7 @@ DS 전체가 `@layer ybm.tokens, ybm.base, ybm.icons, ybm.components, ybm.utilit
 | 기능 | 사용 |
 |---|---|
 | Dialog 열기/닫기 | `data-ds-open="dialogId"` / `data-ds-close` 속성, 바깥(dim) 클릭 닫기. 네이티브 `<dialog>.showModal()` |
-| Snackbar | `YBM.snackbar("문구", { variant: "positive"\|"critical", action: "확인", onAction, duration })` - 기본 4초 |
+| Snackbar | `DS.snackbar("문구", { variant: "positive"\|"critical", action: "확인", onAction, duration })` - 기본 4초 |
 | Slider | `<input type="range" class="ds-slider">` 채움 길이(`--ds-slider-value`) 동기화 |
 | Checkbox | `data-indeterminate` → `input.indeterminate = true` |
 | Text Field clear | 값 지우기 (노출/숨김은 CSS) |
@@ -167,7 +167,7 @@ Top App Bar 부터 Multi Select 까지(54~71번)는 2026-10-29 Figma 와 CSS 를
 - 2026-10-27 Typography 130%/150%, Shape Soft/Sharp 모드를 지웠다. 모드는 색의 Light / Dark 만 남는다(레퍼런스 라이브러리 기본 구성과 같음). 지우기 전 값은 Figma 버전 기록과 git 이력의 `tokens/figma-variables.json` 에 있다.
 
 - Figma 변수 이름에는 `color/` 접두사가 없다 (`bg/canvas`, `fg/neutral` …).
-- 모든 변수의 Web code syntax = `var(--ybm-…)` → Dev Mode 복사본이 그대로 CSS 에서 동작.
+- 모든 변수의 Web code syntax = `var(--ds-…)` → Dev Mode 복사본이 그대로 CSS 에서 동작.
 
 ### 로컬 스타일
 - 텍스트 스타일 **136개**: `Scale|Static / t01~t17 / {1 Regular, 2 Medium, 3 SemiBold, 4 Bold}` (예 `Scale/t06/4 Bold`). Typography 변수에 바인딩돼 있어 변수만 바꾸면 전부 반영.
@@ -179,15 +179,15 @@ Top App Bar 부터 Multi Select 까지(54~71번)는 2026-10-29 Figma 와 CSS 를
 
 ### 5.1 구조 - 3계층
 ```
-PALETTE  --ybm-color-palette-*            원시값. 컴포넌트/서비스에서 직접 쓰지 않음
-SEMANTIC --ybm-color-{bg|fg|stroke|chart}-*  역할. 컴포넌트는 이 층만 참조
+PALETTE  --ds-color-palette-*            원시값. 컴포넌트/서비스에서 직접 쓰지 않음
+SEMANTIC --ds-color-{bg|fg|stroke|chart}-*  역할. 컴포넌트는 이 층만 참조
 COMPONENT --ds-{컴포넌트}-*                 components.css 의 각 컴포넌트가 노출
 ```
 - 시맨틱 이름은 반드시 **역할**(neutral/brand/critical/informative/positive/warning/magic)이다. 색 이름(orange 등)을 시맨틱으로 쓰지 않는다.
 - 예외: Progress Circle 은 팔레트를 직접 참조한다.
 
-### 5.2 네이밍 규약 (`--ybm-` 접두사, zero-pad)
-`--ybm-color-*`, `--ybm-space-x*`, `--ybm-radius-r*`, `--ybm-shape-*`, `--ybm-font-size-t0N`, `--ybm-line-height-t0N`, `--ybm-font-weight-*`, `--ybm-font-family-base`, `--ybm-elevation-*`, `--ybm-duration-*`, `--ybm-easing-*`, `--ybm-z-*`
+### 5.2 네이밍 규약 (`--ds-` 접두사, zero-pad)
+`--ds-color-*`, `--ds-space-x*`, `--ds-radius-r*`, `--ds-shape-*`, `--ds-font-size-t0N`, `--ds-line-height-t0N`, `--ds-font-weight-*`, `--ds-font-family-base`, `--ds-elevation-*`, `--ds-duration-*`, `--ds-easing-*`, `--ds-z-*`
 
 ### 5.3 팔레트 (104)
 gray `00/100~1000`, brand, blue, red, green, yellow, orange, purple `100~1000`, `static-white`/`static-black` + 각 alpha `50~1000`.
@@ -200,7 +200,7 @@ gray `00/100~1000`, brand, blue, red, green, yellow, orange, purple `100~1000`, 
 - 바뀌지 않는 것(의도): 포커스 링 `stroke/focus-ring` 과 안내색 `informative-*` 은 blue 팔레트를 쓴다 - 브랜드가 바뀌어도 접근성 표시는 그대로 둔다. 로고 색 `logo/*` 도 고정.
 
 #### 테마 - `dist/themes/<이름>.css` (2026-11-03 예시 2종: 든든 `trust`, 선명 `vivid`, 같은 날 사이트에서 숨김, 다시 만들 예정)
-- 테마는 브랜드 팔레트, 바탕(`bg/canvas`, `bg/layer-*`), 모서리 노브(`--ybm-shape-scale`) 세 가지만 바꾼다(필요하면 제목 글꼴 `--ybm-font-family-display` 도). 컴포넌트는 고치지 않는다.
+- 테마는 브랜드 팔레트, 바탕(`bg/canvas`, `bg/layer-*`), 모서리 노브(`--ds-shape-scale`) 세 가지만 바꾼다(필요하면 제목 글꼴 `--ds-font-family-display` 도). 컴포넌트는 고치지 않는다.
 - 쓰는 법: DS 다음에 테마 파일을 붙이고 `<html data-ds-theme="trust">`. 토큰이 :root 에서 값이 정해지므로 테마는 html 에만 단다(영역 단위 테마 없음). 다크는 테마 파일 안 `[data-theme="dark"]` 블록이 맡는다.
 - 사이트 Themes 메뉴에서 테마를 입힌 실제 사이트 화면으로 비교해 볼 수 있다(`site/themes/gen.mjs`, 선명 화면은 `site/themes/vivid.mjs`).
 
@@ -236,7 +236,7 @@ Figma 의 `dimension/x*` 변수 scopes = `WIDTH_HEIGHT` + `GAP`.
 ### 5.6 Radius (원시) → Shape (시맨틱)
 원시: `r0 0` `r0_5 2` `r1 4` `r1_5 6` `r2 8` `r2_5 10` `r3 12` `r3_5 14` `r4 16` `r5 20` `r6 24` `r8 32` `full 9999`
 
-**컴포넌트는 `--ybm-shape-*` 만 쓴다** (원시 radius 직접 참조 금지).
+**컴포넌트는 `--ds-shape-*` 만 쓴다** (원시 radius 직접 참조 금지).
 
 | shape | 값 |
 |---|---|
@@ -250,7 +250,7 @@ Figma 의 `dimension/x*` 변수 scopes = `WIDTH_HEIGHT` + `GAP`.
 | 3xl | r6 24 |
 | pill | full |
 
-- 모양 테마(soft/sharp/square)는 2026-10-27 에 없앴다. 곡률 노브 `--ybm-shape-scale`(기본 1, 0 이면 완전 각짐)만 남는다 - 영역에 덮어쓰면 그 안만 바뀌도록 shape 계산은 `:root` 가 아니라 `*, ::before, ::after` 에서 한다. pill 은 항상 원형.
+- 모양 테마(soft/sharp/square)는 2026-10-27 에 없앴다. 곡률 노브 `--ds-shape-scale`(기본 1, 0 이면 완전 각짐)만 남는다 - 영역에 덮어쓰면 그 안만 바뀌도록 shape 계산은 `:root` 가 아니라 `*, ::before, ::after` 에서 한다. pill 은 항상 원형.
 
 ### 5.7 Typography
 폰트: **Pretendard** (`"Pretendard", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif`)
@@ -275,11 +275,11 @@ Figma 의 `dimension/x*` 변수 scopes = `WIDTH_HEIGHT` + `GAP`.
 
 | 단계 | 값 | 역할 별칭 (컴포넌트는 이 이름을 씀) |
 |---|---|---|
-| 1 | `0 1 2 -1` + `0 1 3 0` | `--ybm-elevation-raised` - thumb, 선택된 세그먼트 |
-| 2 | `0 2 4 -2` + `0 4 10 -1` | `--ybm-elevation-overlay` (+1px stroke/neutral-muted inset) - menu, select, snackbar, tooltip, date picker |
-| 3 | `0 2 4 -2` + `0 10 8 0` | `--ybm-elevation-panel` - 떠 있는 패널 |
-| 4 | `0 4 6 -4` + `0 10 18 -3` | `--ybm-elevation-floating` - FAB |
-| 5 | `0 8 10 -6` + `0 20 32 -5` | `--ybm-elevation-modal` - dialog, alert dialog, bottom sheet |
+| 1 | `0 1 2 -1` + `0 1 3 0` | `--ds-elevation-raised` - thumb, 선택된 세그먼트 |
+| 2 | `0 2 4 -2` + `0 4 10 -1` | `--ds-elevation-overlay` (+1px stroke/neutral-muted inset) - menu, select, snackbar, tooltip, date picker |
+| 3 | `0 2 4 -2` + `0 10 8 0` | `--ds-elevation-panel` - 떠 있는 패널 |
+| 4 | `0 4 6 -4` + `0 10 18 -3` | `--ds-elevation-floating` - FAB |
+| 5 | `0 8 10 -6` + `0 20 32 -5` | `--ds-elevation-modal` - dialog, alert dialog, bottom sheet |
 
 ### 5.9 CSS 전용 시스템 토큰
 - Motion (2026-10-29 레퍼런스 가이드 값으로 맞춤): `duration-fast 150ms`(색 바뀜, 누름), `normal 200ms`, `slow 300ms`(시트, 패널 들어오기), `easing-standard cubic-bezier(.35,0,.35,1)`, `easing-emphasized cubic-bezier(.03,.4,.1,1)`(크게 들어오기), `easing-enter cubic-bezier(0,0,.15,1)`, `easing-exit cubic-bezier(.35,0,1,1)`
@@ -359,7 +359,7 @@ CSS 는 Figma 프로퍼티 이름을 그대로 `data-*` 속성으로 쓴다: `<b
 | 61 | Status Dot | `.ds-statusdot` | `2562:747`, 5 | tone 5, 8px, data-pulse |
 | 62 | Checkbox Group | `.ds-checkbox-group` | `2566:1167` | 세로 간격 x1, 묶음 이름은 Field Label |
 | 63 | Scroll Fog | `.ds-scrollfog` | `2567:33`, 2 | mask 로 끝 20 흐림, 흐린 쪽에 여백 20 이상 |
-| 64 | Pull To Refresh | `.ds-ptr` (`__indicator/content`) | `2567:54`, 2 | 위 88 영역 Progress Circle 24, ds-refresh 이벤트, YBM.endRefresh |
+| 64 | Pull To Refresh | `.ds-ptr` (`__indicator/content`) | `2567:54`, 2 | 위 88 영역 Progress Circle 24, ds-refresh 이벤트, DS.endRefresh |
 | 65 | Side Panel | `.ds-sidepanel` (`__header/texts/title/desc/close/body/footer`) | `2567:862`, 3 / Close Button `2567:782`, 2 | 네이티브 `<dialog>`, 폭 480/720/960, 왼쪽은 data-direction |
 | 66 | Image Frame | `.ds-imageframe` (`__floater/indicator`) | `2567:1928`, 3 | ratio `1:1/4:3/16:9`, radius `none/md/lg/xl`(2026-11-03), stroke |
 | 67 | Carousel | `.ds-carousel` (`__scroller/item/button`) | `2567:1936` / Button `2567:1935`, 2 | 넘김 위치 맞춤, 끝 흐림, 버튼은 ybm-ds.js |
@@ -478,7 +478,7 @@ CSS 는 Figma 프로퍼티 이름을 그대로 `data-*` 속성으로 쓴다: `<b
    - 프로퍼티 쌍 관행: `prefix icon`(BOOLEAN) + `prefix`(INSTANCE_SWAP).
    - INSTANCE_SWAP 기본값은 컴포넌트 key 가 아니라 **노드 ID 문자열**.
    - 변형마다 다른 기본값이 필요한 슬롯은 프로퍼티로 만들지 않는다(프로퍼티 기본값은 세트 전역).
-2. 새 변수는 Web code syntax `var(--ybm-…)` 와 scopes 를 반드시 지정한다.
+2. 새 변수는 Web code syntax `var(--ds-…)` 와 scopes 를 반드시 지정한다.
 3. 변수/텍스트 스타일 삭제 전에는 전체 노드의 `boundVariables` / `textStyleId` 를 스캔해 사용처 0건을 확인한다.
 4. 로컬 스타일은 **텍스트 스타일만**. 이펙트/컬러/그리드 스타일 금지.
 5. 대량 작업은 소수 샘플 → 스크린샷 비교 → 승인 후 일괄.
@@ -526,4 +526,4 @@ CSS 는 Figma 프로퍼티 이름을 그대로 `data-*` 속성으로 쓴다: `<b
 | 2026-09-04 | Shape 테마(기본/soft/sharp) + 곡률 노브 |
 | 2026-08-27 | warning 시맨틱 orange 로 통일, 색 이름 시맨틱(orange-*) 삭제 |
 | 2026-08-24 | Spacing 26단계 확장, Progress Circle, FAB, Chip Tabs, Field Button 추가 |
-| 2026-08-19 | `--ybm-` 네이밍 통일, Lucide Solid 445개 자동 생성 |
+| 2026-08-19 | `--ds-` 네이밍 통일, Lucide Solid 445개 자동 생성 |

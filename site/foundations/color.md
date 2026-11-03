@@ -38,22 +38,22 @@ YBM DS 의 색은 역할 색과 팔레트 색 두 층으로 되어 있습니다.
 
 ```css
 .my-card {
-  background: var(--ybm-color-bg-layer-default);
-  color: var(--ybm-color-fg-neutral);
-  border: 1px solid var(--ybm-color-stroke-neutral-muted);
+  background: var(--ds-color-bg-layer-default);
+  color: var(--ds-color-fg-neutral);
+  border: 1px solid var(--ds-color-stroke-neutral-muted);
 }
 ```
 
 ### 브랜드 색 바꾸기
 
-이 가이드는 모노톤으로 보여 줍니다. 팔레트 `--ybm-color-palette-brand-100` ~ `1000`만 덮어쓰면 브랜드 색을 쓰는 곳이 모두 따라 바뀝니다.
+이 가이드는 모노톤으로 보여 줍니다. 팔레트 `--ds-color-palette-brand-100` ~ `1000`만 덮어쓰면 브랜드 색을 쓰는 곳이 모두 따라 바뀝니다.
 
 ```css
 /* my-service.css - DS 다음에 불러온다 */
 :root {
-  --ybm-color-palette-brand-100: #e6f6ee;  /* 옅은 배경 */
-  --ybm-color-palette-brand-600: #12a150;  /* 주 버튼, 링크 */
-  --ybm-color-palette-brand-700: #0d7d3e;  /* 눌림, 진한 글자 */
+  --ds-color-palette-brand-100: #e6f6ee;  /* 옅은 배경 */
+  --ds-color-palette-brand-600: #12a150;  /* 주 버튼, 링크 */
+  --ds-color-palette-brand-700: #0d7d3e;  /* 눌림, 진한 글자 */
   /* 200 ~ 500, 800 ~ 1000 도 같은 색의 단계로 채운다 */
 }
 :root[data-theme="dark"] {

@@ -68,7 +68,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | 변수 | 기본값 |
 | --- | --- |
 | `--ds-dialog-width` | `480px` |
-| `--ds-dialog-radius` | `var(--ybm-shape-2xl)` |
+| `--ds-dialog-radius` | `var(--ds-shape-2xl)` |
 | `--ds-dialog-max-height` | `80vh` |
 
 ### 크기와 여백

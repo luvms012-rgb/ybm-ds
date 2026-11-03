@@ -54,16 +54,16 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 ## 예시
 
 ```html
-<div style="display:flex;width:360px;max-width:100%;box-shadow:inset 0 0 0 1px var(--ybm-color-stroke-neutral-muted)">
+<div style="display:flex;width:360px;max-width:100%;box-shadow:inset 0 0 0 1px var(--ds-color-stroke-neutral-muted)">
   <section class="ds-result">
-    <div class="ds-result__asset" style="color:var(--ybm-color-fg-positive)"><i class="ds-icon ds-icon--circle-check-solid" aria-hidden="true"></i></div>
+    <div class="ds-result__asset" style="color:var(--ds-color-fg-positive)"><i class="ds-icon ds-icon--circle-check-solid" aria-hidden="true"></i></div>
     <div class="ds-result__texts"><h2 class="ds-result__title">신청을 마쳤어요</h2><p class="ds-result__desc">처리 결과는 알림으로 알려 드릴게요</p></div>
     <div class="ds-result__actions"><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="medium">확인</button><button type="button" class="ds-btn" data-variant="ghost" data-size="small">신청 내역 보기</button></div>
   </section>
 </div>
-<div style="display:flex;width:360px;max-width:100%;box-shadow:inset 0 0 0 1px var(--ybm-color-stroke-neutral-muted)">
+<div style="display:flex;width:360px;max-width:100%;box-shadow:inset 0 0 0 1px var(--ds-color-stroke-neutral-muted)">
   <section class="ds-result" data-size="medium">
-    <div class="ds-result__asset" style="color:var(--ybm-color-fg-critical)"><i class="ds-icon ds-icon--circle-alert-solid" aria-hidden="true"></i></div>
+    <div class="ds-result__asset" style="color:var(--ds-color-fg-critical)"><i class="ds-icon ds-icon--circle-alert-solid" aria-hidden="true"></i></div>
     <div class="ds-result__texts"><h2 class="ds-result__title">다시 시도해 주세요</h2><p class="ds-result__desc">요청을 처리하지 못했어요</p></div>
     <div class="ds-result__actions"><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="medium">다시 시도</button><button type="button" class="ds-btn" data-variant="ghost" data-size="small">고객센터 문의</button></div>
   </section>
@@ -78,8 +78,8 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 | 변수 | 기본값 |
 | --- | --- |
-| `--ds-result-gap` | `var(--ybm-space-x3)` |
-| `--ds-result-text-bottom` | `var(--ybm-space-x7)` |
+| `--ds-result-gap` | `var(--ds-space-x3)` |
+| `--ds-result-text-bottom` | `var(--ds-space-x7)` |
 
 ### 크기와 여백
 

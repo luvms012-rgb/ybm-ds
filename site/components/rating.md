@@ -42,7 +42,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
   <label class="ds-rating__option"><input type="radio" class="ds-rating__control" name="pv-rating" value="4" aria-label="4점" checked><span class="ds-rating__star"></span></label>
   <label class="ds-rating__option"><input type="radio" class="ds-rating__control" name="pv-rating" value="5" aria-label="5점"><span class="ds-rating__star"></span></label>
 </fieldset>
-<i class="ds-icon ds-icon--heart" aria-hidden="true"></i><i class="ds-icon ds-icon--heart-solid" aria-hidden="true" style="color:var(--ybm-color-fg-critical)"></i><i class="ds-icon ds-icon--bookmark" aria-hidden="true"></i><i class="ds-icon ds-icon--bookmark-solid" aria-hidden="true"></i><i class="ds-icon ds-icon--shopping-cart" aria-hidden="true"></i><i class="ds-icon ds-icon--map-pin" aria-hidden="true"></i><i class="ds-icon ds-icon--star" aria-hidden="true"></i>
+<i class="ds-icon ds-icon--heart" aria-hidden="true"></i><i class="ds-icon ds-icon--heart-solid" aria-hidden="true" style="color:var(--ds-color-fg-critical)"></i><i class="ds-icon ds-icon--bookmark" aria-hidden="true"></i><i class="ds-icon ds-icon--bookmark-solid" aria-hidden="true"></i><i class="ds-icon ds-icon--shopping-cart" aria-hidden="true"></i><i class="ds-icon ds-icon--map-pin" aria-hidden="true"></i><i class="ds-icon ds-icon--star" aria-hidden="true"></i>
 ```
 
 ## 규격
@@ -56,8 +56,8 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | `--ds-rating-size` | `16px` |
 | `--ds-rating-gap` | `2px` |
 | `--ds-rating-value` | `0` |
-| `--ds-rating-fill` | `var(--ybm-color-fg-warning)` |
-| `--ds-rating-empty` | `var(--ybm-color-stroke-neutral-muted)` |
+| `--ds-rating-fill` | `var(--ds-color-fg-warning)` |
+| `--ds-rating-empty` | `var(--ds-color-stroke-neutral-muted)` |
 
 ### 크기와 여백
 

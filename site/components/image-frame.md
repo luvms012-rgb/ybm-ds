@@ -61,7 +61,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | 변수 | 기본값 |
 | --- | --- |
 | `--ds-imageframe-ratio` | `1` |
-| `--ds-imageframe-radius` | `var(--ybm-shape-sm)` |
+| `--ds-imageframe-radius` | `var(--ds-shape-sm)` |
 
 ### 크기와 여백
 

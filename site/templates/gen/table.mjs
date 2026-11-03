@@ -4,9 +4,9 @@ const T = (s) => `<span class="tp-num">${s}</span>`;
 const won = (n) => n.toLocaleString() + '원';
 
 const TABLE_CSS = `
-  .tp-grouprow__in { display: flex; align-items: center; gap: var(--ybm-space-x2); font-weight: var(--ybm-font-weight-semibold); }
-  .tp-tpage { gap: var(--ybm-space-x5); padding-top: var(--ybm-space-x6); }
-  .tp-tpage__head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: var(--ybm-space-x3) var(--ybm-space-x4); }
+  .tp-grouprow__in { display: flex; align-items: center; gap: var(--ds-space-x2); font-weight: var(--ds-font-weight-semibold); }
+  .tp-tpage { gap: var(--ds-space-x5); padding-top: var(--ds-space-x6); }
+  .tp-tpage__head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: var(--ds-space-x3) var(--ds-space-x4); }
 `;
 const grow = (cols, label, count, extra = '') => `<tr class="ds-table__group"><td colspan="${cols}"><span class="tp-grouprow__in"><button type="button" class="ds-btn tp-caret" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-expanded="true" aria-label="${esc(label)} 접기">${icon('chevron-down', 'sm')}</button>${label}${count !== '' ? badge(String(count)) : ''}${extra}</span></td></tr>`;
 const trs = (rows) => rows.map((r) => `<tr>${r.map((c) => `<td${c && c.startsWith && c.startsWith('@end') ? ' data-align="end"' : ''}>${c && c.startsWith && c.startsWith('@end') ? c.slice(4) : c}</td>`).join('')}</tr>`).join('');
@@ -23,17 +23,17 @@ const collapsible = () => {
   ];
   const css = TABLE_CSS + `
   .tp-coll { border-radius: inherit; }
-  .tp-coll > summary { display: flex; align-items: center; gap: var(--ybm-space-x3); padding: var(--ybm-space-x1) 0 var(--ybm-space-x3); list-style: none; cursor: pointer; }
+  .tp-coll > summary { display: flex; align-items: center; gap: var(--ds-space-x3); padding: var(--ds-space-x1) 0 var(--ds-space-x3); list-style: none; cursor: pointer; }
   .tp-coll > summary::-webkit-details-marker { display: none; }
-  .tp-coll > summary .ds-icon { transition: transform var(--ybm-duration-fast) var(--ybm-easing-standard); }
-  .tp-coll:not([open]) > summary { padding-bottom: var(--ybm-space-x1); }
+  .tp-coll > summary .ds-icon { transition: transform var(--ds-duration-fast) var(--ds-easing-standard); }
+  .tp-coll:not([open]) > summary { padding-bottom: var(--ds-space-x1); }
   .tp-coll:not([open]) > summary .ds-icon { transform: rotate(-90deg); }
   .tp-coll th:first-child { width: 48px; }
-  .tp-coll__total { margin-left: auto; font-weight: var(--ybm-font-weight-semibold); font-variant-numeric: tabular-nums; }
+  .tp-coll__total { margin-left: auto; font-weight: var(--ds-font-weight-semibold); font-variant-numeric: tabular-nums; }
 `;
   const body = `<div class="tp-app">
 ${head('연결된 계좌', { sub: '13개 계좌의 순자산 7억 6,840만원', tools: `${btn('계좌 연결', { variant: 'neutralSolid', ic: 'plus' })}${segmented(['1개월', '3개월', '6개월', '1년', '전체'], 2, '기간')}` })}
-<main class="tp-content" style="gap: var(--ybm-space-x3)">
+<main class="tp-content" style="gap: var(--ds-space-x3)">
   ${groups.map(([g, n, tot, cols, rows], gi) => card(`<details class="tp-coll"${gi < 3 ? ' open' : ''}><summary>${icon('chevron-down', 'sm')}<h2 class="tp-h3">${g}</h2>${badge(n + '개')}<span class="tp-coll__total">${tot}</span></summary><div class="ds-table-wrap"><table class="ds-table" data-density="compact">${thead(['', ...cols])}<tbody>${rows.map((r) => `<tr><td style="width:40px"><button type="button" class="ds-btn tp-caret" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-expanded="false" aria-label="${esc(r[0])} 자세히">${icon('chevron-right', 'sm')}</button></td>${r.map((c, i) => `<td${Array.isArray(cols[i]) ? ` data-align="${cols[i][1]}"` : ''}>${i === 0 ? `<span class="ds-table__stack"><span>${c}</span><span>${r[1]}</span></span>`.replace(`<span>${r[1]}</span></span>`, `<span>${r[1].split(' ··· ')[1] ? '··· ' + r[1].split(' ··· ')[1] : ''}</span></span>`) : (i === 1 ? String(c).split(' ··· ')[0] : String(c).replace('@end', ''))}</td>`).join('')}</tr>`).join('')}</tbody></table></div></details>`)).join('')}
 </main>
 </div>`;
@@ -48,8 +48,8 @@ const filter = () => {
 `;
   const body = `<div class="tp-app">
 <main class="tp-content tp-tpage" aria-label="현장 작업">
-  <header class="tp-tpage__head"><div class="tp-stack" style="gap: var(--ybm-space-x1_5)"><h1 class="tp-h1">현장 작업</h1><p class="tp-sub">지점 3곳의 수리와 점검 작업을 한곳에서 봐요.</p></div><div class="tp-row">${btn('내보내기', { ic: 'download' })}${btn('작업 만들기', { variant: 'neutralSolid', ic: 'plus' })}</div></header>
-  <div class="tp-stack" style="gap: var(--ybm-space-x3)">
+  <header class="tp-tpage__head"><div class="tp-stack" style="gap: var(--ds-space-x1_5)"><h1 class="tp-h1">현장 작업</h1><p class="tp-sub">지점 3곳의 수리와 점검 작업을 한곳에서 봐요.</p></div><div class="tp-row">${btn('내보내기', { ic: 'download' })}${btn('작업 만들기', { variant: 'neutralSolid', ic: 'plus' })}</div></header>
+  <div class="tp-stack" style="gap: var(--ds-space-x3)">
     ${K.chiptabs(['전체 55', '예정 18', '진행 21', '완료 12', '대기 4'], 0, '상태')}
     <div class="tp-ttools"><span class="tp-sub">작업 ${T('55')}개 · ${link('조건 지우기')}</span><div class="tp-ttools__end">${K.even(select('모든 우선순위', { aria: '우선순위' }) + select('모든 담당자', { aria: '담당자' }) + select('지점 3곳', { aria: '지점' }) + select('이번 주', { aria: '기간' }) + search('q', '작업 찾기'))}</div></div>
   </div>
@@ -69,8 +69,8 @@ const grouped = () => {
   const n = groups.reduce((a, g) => a + g[2].length, 0);
   const body = `<div class="tp-app">
 <main class="tp-content tp-tpage" aria-label="모든 이슈">
-  <header class="tp-tpage__head"><div class="tp-stack" style="gap: var(--ybm-space-x1_5)"><h1 class="tp-h1">모든 이슈</h1><p class="tp-sub">이번 분기 이슈를 상태별로 묶어 봐요.</p></div>${btn('새 이슈', { variant: 'neutralSolid', ic: 'plus' })}</header>
-  <div class="tp-stack" style="gap: var(--ybm-space-x3)">
+  <header class="tp-tpage__head"><div class="tp-stack" style="gap: var(--ds-space-x1_5)"><h1 class="tp-h1">모든 이슈</h1><p class="tp-sub">이번 분기 이슈를 상태별로 묶어 봐요.</p></div>${btn('새 이슈', { variant: 'neutralSolid', ic: 'plus' })}</header>
+  <div class="tp-stack" style="gap: var(--ds-space-x3)">
     ${K.chiptabs(['전체 ' + n, ...groups.map(([g, , rows]) => g + ' ' + rows.length)], 0, '상태')}
     <div class="tp-ttools"><span class="tp-sub">이슈 ${T(String(n))}개</span><div class="tp-ttools__end">${K.even(select('모든 담당자', { aria: '담당자' }) + select('마감 빠른 순', { aria: '정렬' }) + search('q', '이슈 찾기'))}</div></div>
   </div>
@@ -86,15 +86,15 @@ const inbox = () => {
   const css = TABLE_CSS + `
   .tp-inbox { display: grid; flex: 1 1 auto; grid-template-columns: minmax(0, 1fr); min-height: 0; }
   @media (min-width: 1024px) { .tp-inbox { grid-template-columns: minmax(0, 1fr) 8px minmax(0, 1.1fr); } }
-  .tp-unread { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--ybm-color-bg-brand-solid); }
+  .tp-unread { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--ds-color-bg-brand-solid); }
   .tp-inbox__row { display: flex; flex-direction: column; }
-  .tp-inbox__row b { font-weight: var(--ybm-font-weight-semibold); }
-  .tp-handle { display: none; place-items: center; cursor: col-resize; box-shadow: inset 1px 0 0 var(--ybm-color-stroke-neutral-muted); }
-  .tp-handle::after { content: ""; width: 4px; height: 32px; border-radius: 2px; background: var(--ybm-color-stroke-neutral-weak); }
+  .tp-inbox__row b { font-weight: var(--ds-font-weight-semibold); }
+  .tp-handle { display: none; place-items: center; cursor: col-resize; box-shadow: inset 1px 0 0 var(--ds-color-stroke-neutral-muted); }
+  .tp-handle::after { content: ""; width: 4px; height: 32px; border-radius: 2px; background: var(--ds-color-stroke-neutral-weak); }
   @media (min-width: 1024px) { .tp-handle { display: grid; } }
-  .tp-read { display: flex; flex-direction: column; gap: var(--ybm-space-x4); padding: var(--ybm-space-x5) var(--ybm-space-x4); box-shadow: inset 0 1px 0 var(--ybm-color-stroke-neutral-muted); }
-  @media (min-width: 1024px) { .tp-read { padding: var(--ybm-space-x6); box-shadow: none; } }
-  .tp-msg { display: flex; flex-direction: column; gap: var(--ybm-space-x2); }
+  .tp-read { display: flex; flex-direction: column; gap: var(--ds-space-x4); padding: var(--ds-space-x5) var(--ds-space-x4); box-shadow: inset 0 1px 0 var(--ds-color-stroke-neutral-muted); }
+  @media (min-width: 1024px) { .tp-read { padding: var(--ds-space-x6); box-shadow: none; } }
+  .tp-msg { display: flex; flex-direction: column; gap: var(--ds-space-x2); }
 `;
   const msgs = [['와이비엠', '오전 9:21', '안녕하세요, 해외 발급 카드로 결제하면 마지막 단계에서 "결제를 완료하지 못했어요"가 떠요. 국내 카드는 괜찮아요.', 0], ['상담원 이민지', '오전 9:30', '불편을 드려 죄송해요. 결제 대행사에 확인을 요청했어요. 사용하신 카드 종류를 알려 주실 수 있을까요?', 0], ['와이비엠', '오전 9:44', '해외 발급 비자 카드예요. 두 장 모두 같은 오류가 났어요.', 0], ['상담원 이민지', '오전 9:52', '확인했어요. 해외 카드 3D 인증 단계에서 오류가 나는 것으로 보여요. 오늘 오후까지 고친 뒤 다시 안내드릴게요.', 1]];
   const body = `<div class="tp-app" style="height: 100vh">
@@ -122,23 +122,23 @@ const searchable = () => {
   const items = [['요구 사항 워크숍', '기획', '시간제', 12, 150000], ['사용자 인터뷰 진행', '리서치', '시간제', 16, 120000], ['정보 구조 설계', '기획', '고정', 1, 2400000], ['디자인 시스템 정리', '디자인', '고정', 1, 4800000], ['주요 화면 시안', '디자인', '시간제', 64, 130000], ['프로토타입 제작', '디자인', '시간제', 24, 130000], ['접근성 점검', '품질', '고정', 1, 1600000], ['프론트엔드 개발', '개발', '시간제', 120, 140000], ['결제 연동', '개발', '시간제', 36, 160000], ['관리자 화면', '개발', '시간제', 48, 140000], ['QA 테스트', '품질', '시간제', 40, 90000], ['배포와 인수인계', '운영', '고정', 1, 1200000]];
   const sub = items.reduce((a, [, , , q, p]) => a + q * p, 0), tax = Math.round(sub * 0.1);
   const css = TABLE_CSS + `
-  .tp-meta { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--ybm-space-x4) var(--ybm-space-x6); margin: 0; }
+  .tp-meta { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--ds-space-x4) var(--ds-space-x6); margin: 0; }
   @media (min-width: 1024px) { .tp-meta { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
-  .tp-meta dt { color: var(--ybm-color-fg-neutral-muted); font-size: var(--ybm-font-size-t03); line-height: var(--ybm-line-height-t03); }
-  .tp-meta dd { margin: 0; font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); font-weight: var(--ybm-font-weight-medium); }
-  .tp-th { display: inline-flex; align-items: center; gap: var(--ybm-space-x1); }
-  .tp-totals { display: flex; flex-direction: column; gap: var(--ybm-space-x2); width: min(100%, 360px); margin-left: auto; }
+  .tp-meta dt { color: var(--ds-color-fg-neutral-muted); font-size: var(--ds-font-size-t03); line-height: var(--ds-line-height-t03); }
+  .tp-meta dd { margin: 0; font-size: var(--ds-font-size-t04); line-height: var(--ds-line-height-t04); font-weight: var(--ds-font-weight-medium); }
+  .tp-th { display: inline-flex; align-items: center; gap: var(--ds-space-x1); }
+  .tp-totals { display: flex; flex-direction: column; gap: var(--ds-space-x2); width: min(100%, 360px); margin-left: auto; }
   .tp-totals hr { margin: 0; }
 `;
   const th = (t, a) => [`<span class="tp-th">${t}${iconBtn('funnel', t + ' 거르기', { size: 'xsmall' })}</span>`, a];
   const body = `<div class="tp-app">
 <main class="tp-content">
-  <div class="tp-stack" style="gap: var(--ybm-space-x5)">
+  <div class="tp-stack" style="gap: var(--ds-space-x5)">
     <div class="tp-between"><h1 class="tp-h1">청구서 INV-2043</h1>${btn('PDF 받기', { ic: 'download' })}</div>
     <dl class="tp-meta">${meta.map(([k, v]) => `<div class="tp-stack"><dt>${k}</dt><dd>${v}</dd></div>`).join('')}</dl>
   </div>
   <div class="tp-between" style="align-items: flex-end">${segmented(['전체', '시간제', '고정'], 0, '청구 방식')}<div style="width: min(100%, 320px)">${field('q', '항목 찾기', search('q', '찾기…'))}</div></div>
-  <div class="tp-stack" style="gap: var(--ybm-space-x4)">
+  <div class="tp-stack" style="gap: var(--ds-space-x4)">
     ${table([th('항목'), th('분류'), th('방식'), [...th('수량', 'end')], [...th('단가', 'end')], ['금액', 'end']], items.map(([n, c, m, q, p]) => [n, c, badge(m, m === '고정' ? 'informative' : 'neutral'), T(q), T(won(p)), T(won(q * p))]))}
     <div class="tp-totals">${divider()}<div class="tp-between"><span class="tp-sub">소계</span>${T(won(sub))}</div><div class="tp-between"><span class="tp-sub">부가세 (10%)</span>${T(won(tax))}</div>${divider()}<div class="tp-between"><b>청구 합계</b><b class="tp-num">${won(sub + tax)}</b></div>${divider()}</div>
   </div>
@@ -151,25 +151,25 @@ const searchable = () => {
 const tree = () => {
   const rows = [[0, 'f', '.github', 'ci: 패키지 캐시를 실행 사이에 재사용 (#412)', '3시간 전', 1], [1, 'f', 'workflows', 'ci: 패키지 캐시를 실행 사이에 재사용 (#412)', '3시간 전', 1], [2, 'd', 'ci.yml', 'ci: 패키지 캐시를 실행 사이에 재사용 (#412)', '3시간 전'], [2, 'd', 'release.yml', 'chore: 배포 이름 규칙 바꿈', '2주 전'], [0, 'f', 'docs', 'docs: 도형 묶기 예제 추가', '어제', 0], [0, 'f', 'src', 'feat: 선택 상자 크기 조절 손잡이', '5시간 전', 1], [1, 'f', 'shapes', 'feat: 둥근 사각형 지원', '2일 전', 0], [1, 'd', 'canvas.ts', 'feat: 선택 상자 크기 조절 손잡이', '5시간 전'], [1, 'd', 'index.ts', 'refactor: 내보내기 정리', '1주 전'], [0, 'f', 'tests', 'test: 확대 축소 경계 값', '3일 전', 0], [0, 'd', '.gitignore', 'chore: 처음 만듦', '8개월 전'], [0, 'd', 'LICENSE', 'chore: 처음 만듦', '8개월 전'], [0, 'd', 'package.json', 'chore: 버전 1.4.0', '4일 전'], [0, 'd', 'README.md', 'docs: 설치 방법 정리', '어제']];
   const css = TABLE_CSS + `
-  .tp-tree-name { display: flex; align-items: center; gap: var(--ybm-space-x1); padding-left: calc(var(--d) * 20px); }
+  .tp-tree-name { display: flex; align-items: center; gap: var(--ds-space-x1); padding-left: calc(var(--d) * 20px); }
   .tp-tree-name .tp-spacer { width: 20px; }
-  .tp-tree-name .ds-icon { color: var(--ybm-color-fg-neutral-subtle); }
-  .tp-tree-name a { color: var(--ybm-color-fg-neutral); text-decoration: none; }
+  .tp-tree-name .ds-icon { color: var(--ds-color-fg-neutral-subtle); }
+  .tp-tree-name a { color: var(--ds-color-fg-neutral); text-decoration: none; }
   .tp-tree-name a:hover { text-decoration: underline; }
   /* 커뮤니티와 같은 틀: 1280 가운데, 위 제목은 전체 폭, 아래는 본문 + 오른쪽 정보 280 */
-  .tp-repo { box-sizing: border-box; display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ybm-space-x6); width: min(100%, 1280px); margin-inline: auto; padding: var(--ybm-space-x6) var(--ybm-space-x4) var(--ybm-space-x10); }
-  .tp-repo__head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ybm-space-x3); }
+  .tp-repo { box-sizing: border-box; display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ds-space-x6); width: min(100%, 1280px); margin-inline: auto; padding: var(--ds-space-x6) var(--ds-space-x4) var(--ds-space-x10); }
+  .tp-repo__head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ds-space-x3); }
   .tp-repo__head > .tp-row { flex-wrap: wrap; }
-  .tp-repo__main { display: flex; flex-direction: column; gap: var(--ybm-space-x4); min-width: 0; }
-  .tp-repo__side { display: flex; flex-direction: column; gap: var(--ybm-space-x4); }
-  @media (min-width: 1024px) { .tp-repo { grid-template-columns: minmax(0, 1fr) 280px; column-gap: var(--ybm-space-x10); padding-inline: var(--ybm-space-x6); } .tp-repo__head { grid-column: 1 / -1; } }
-  .tp-toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: var(--ybm-space-x2); }
-  .tp-toolbar .tp-grow { flex: 1 1 200px; display: flex; justify-content: flex-end; gap: var(--ybm-space-x2); flex-wrap: wrap; }
-  .tp-about dl { display: grid; grid-template-columns: auto 1fr; gap: var(--ybm-space-x2) var(--ybm-space-x4); margin: 0; }
-  .tp-about dt { color: var(--ybm-color-fg-neutral-muted); }
+  .tp-repo__main { display: flex; flex-direction: column; gap: var(--ds-space-x4); min-width: 0; }
+  .tp-repo__side { display: flex; flex-direction: column; gap: var(--ds-space-x4); }
+  @media (min-width: 1024px) { .tp-repo { grid-template-columns: minmax(0, 1fr) 280px; column-gap: var(--ds-space-x10); padding-inline: var(--ds-space-x6); } .tp-repo__head { grid-column: 1 / -1; } }
+  .tp-toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: var(--ds-space-x2); }
+  .tp-toolbar .tp-grow { flex: 1 1 200px; display: flex; justify-content: flex-end; gap: var(--ds-space-x2); flex-wrap: wrap; }
+  .tp-about dl { display: grid; grid-template-columns: auto 1fr; gap: var(--ds-space-x2) var(--ds-space-x4); margin: 0; }
+  .tp-about dt { color: var(--ds-color-fg-neutral-muted); }
   .tp-about dd { margin: 0; }
-  .tp-md h3 { margin: 0 0 var(--ybm-space-x2); }
-  .tp-md h4 { margin: var(--ybm-space-x5) 0 var(--ybm-space-x2); }
+  .tp-md h3 { margin: 0 0 var(--ds-space-x2); }
+  .tp-md h4 { margin: var(--ds-space-x5) 0 var(--ds-space-x2); }
 `;
   const body = `<div class="tp-app">
 <div class="tp-repo">

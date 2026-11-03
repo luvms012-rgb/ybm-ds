@@ -4,7 +4,7 @@
    원칙: 모양은 CSS, 스크립트는 "CSS만으로 안 되는 동작"만.
      · Text Field clear 버튼 — 값 지우기 (노출/숨김은 CSS 가 처리)
      · Dialog — data-ds-open / data-ds-close 속성으로 열고 닫기, 바깥(dim) 클릭 닫기
-     · Snackbar — YBM.snackbar("문구", { variant: "positive"|"critical", action: "확인", onAction, duration })
+     · Snackbar — DS.snackbar("문구", { variant: "positive"|"critical", action: "확인", onAction, duration })
      · Slider — <input class="ds-slider"> 채움 길이(--ds-slider-value) 동기화
      · Checkbox — data-indeterminate 속성 → input.indeterminate
      · Popover — data-ds-popover="id" 로 열고 닫기, 바깥 클릭과 Esc, 안의 data-ds-close 로 닫기
@@ -15,7 +15,7 @@
      · Timer — data-start(흐른 시간) / data-end(남은 시간)로 1초마다 글자를 바꾸고, 남은 시간이 0 이면 ds-timer-end 이벤트
      · Segmented Control — 누르면 하나만 aria-pressed, change 이벤트. 선택 배경이 고른 항목으로 미끄러져 이동(위치는 --ds-seg-x / --ds-seg-w)
      · Side Panel — Dialog 와 같이 열고 닫기, 본문이 스크롤되면 data-scrolled
-     · Pull To Refresh — 터치로 당긴 거리 표시, 넘겨 놓으면 ds-refresh 이벤트, YBM.endRefresh(요소) 로 되돌리기
+     · Pull To Refresh — 터치로 당긴 거리 표시, 넘겨 놓으면 ds-refresh 이벤트, DS.endRefresh(요소) 로 되돌리기
      · Carousel — 처음/끝이면 data-at-start / data-at-end, 버튼으로 한 화면씩 넘기기
      · Code Block — data-ds-copy 버튼으로 코드 복사
      · Multi Select — Popover 와 같이 열고 닫기, 고른 값을 칸에 Badge 로 채우기
@@ -407,5 +407,6 @@
     if (zone) zone.removeAttribute("data-state");
   });
 
-  window.YBM = { openDialog: openDialog, closeDialog: closeDialog, snackbar: snackbar, endRefresh: endRefresh, init: init };
+  window.DS = { openDialog: openDialog, closeDialog: closeDialog, snackbar: snackbar, endRefresh: endRefresh, init: init };
+  window.YBM = window.DS;  // 예전 이름 (2026-11-04 DS 로 바꿈). 이미 YBM.snackbar 를 쓰는 화면이 깨지지 않게 남겨 둔다
 })();

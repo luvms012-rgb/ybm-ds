@@ -44,7 +44,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 | 변수 | 기본값 |
 | --- | --- |
-| `--ds-tooltip-gap` | `var(--ybm-space-x1_5)` |
+| `--ds-tooltip-gap` | `var(--ds-space-x1_5)` |
 
 ### 크기와 여백
 

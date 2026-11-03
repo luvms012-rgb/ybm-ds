@@ -7,103 +7,103 @@
 <link rel="stylesheet" href="../../../dist/ybm-ds.css">
 <script src="../../../dist/ybm-ds.js" defer></script>
 <style>
-  /* 템플릿 배치 전용. 값은 모두 --ybm-* 토큰
+  /* 템플릿 배치 전용. 값은 모두 --ds-* 토큰
      배치(여백, 카드, 구분선)는 레퍼런스 A 템플릿, 한글 글자 위계(크기, 굵기, 색 단계, 자간)는 토스를 따른다 */
   body { word-break: keep-all; overflow-wrap: break-word; }
-  .tp-app { display: flex; flex-direction: column; min-height: 100vh; background: var(--ybm-color-bg-layer-default); }
-  .tp-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: var(--ybm-space-x3) var(--ybm-space-x4); padding: var(--ybm-space-x6) var(--ybm-space-x4) 0; }
-  .tp-head__texts { display: flex; flex-direction: column; gap: var(--ybm-space-x1_5); min-width: 0; }
-  .tp-head__tools { display: flex; flex-wrap: wrap; align-items: center; gap: var(--ybm-space-x2); }
+  .tp-app { display: flex; flex-direction: column; min-height: 100vh; background: var(--ds-color-bg-layer-default); }
+  .tp-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: var(--ds-space-x3) var(--ds-space-x4); padding: var(--ds-space-x6) var(--ds-space-x4) 0; }
+  .tp-head__texts { display: flex; flex-direction: column; gap: var(--ds-space-x1_5); min-width: 0; }
+  .tp-head__tools { display: flex; flex-wrap: wrap; align-items: center; gap: var(--ds-space-x2); }
   .tp-head > .tp-row, .tp-head .tp-between > .tp-row { flex-wrap: wrap; }
-  .ds-tablepagination { flex-wrap: wrap; row-gap: var(--ybm-space-x2); min-width: 0; }
+  .ds-tablepagination { flex-wrap: wrap; row-gap: var(--ds-space-x2); min-width: 0; }
   .tp-between > .tp-row { flex-wrap: wrap; }
   /* 글자 위계 (토스): 굵기 두 단계, 제목은 자간 -0.02em, 글자 색은 neutral / muted / subtle 세 단계 */
-  .tp-h1 { font-size: var(--ybm-font-size-t09); line-height: var(--ybm-line-height-t09); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; }
-  .tp-h2 { font-size: var(--ybm-font-size-t06); line-height: var(--ybm-line-height-t06); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; }
-  .tp-h3 { font-size: var(--ybm-font-size-t05); line-height: var(--ybm-line-height-t05); font-weight: var(--ybm-font-weight-semibold); letter-spacing: -0.01em; }
-  .tp-h4 { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); font-weight: var(--ybm-font-weight-semibold); }
-  .tp-sub { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
-  .tp-caption { font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); color: var(--ybm-color-fg-neutral-subtle); }
+  .tp-h1 { font-size: var(--ds-font-size-t09); line-height: var(--ds-line-height-t09); font-weight: var(--ds-font-weight-bold); letter-spacing: -0.02em; }
+  .tp-h2 { font-size: var(--ds-font-size-t06); line-height: var(--ds-line-height-t06); font-weight: var(--ds-font-weight-bold); letter-spacing: -0.02em; }
+  .tp-h3 { font-size: var(--ds-font-size-t05); line-height: var(--ds-line-height-t05); font-weight: var(--ds-font-weight-semibold); letter-spacing: -0.01em; }
+  .tp-h4 { font-size: var(--ds-font-size-t04); line-height: var(--ds-line-height-t04); font-weight: var(--ds-font-weight-semibold); }
+  .tp-sub { font-size: var(--ds-font-size-t04); line-height: var(--ds-line-height-t04); color: var(--ds-color-fg-neutral-muted); }
+  .tp-caption { font-size: var(--ds-font-size-t02); line-height: var(--ds-line-height-t02); color: var(--ds-color-fg-neutral-subtle); }
   .tp-num { font-variant-numeric: tabular-nums; }
   /* 표는 DS Table 그대로 쓴다 (2026-11-03 DS 개편). 아래는 표 위, 아래 줄만 */
   /* 표 위 한 줄: 왼쪽 개수, 오른쪽 고르기 칸과 찾기 (커뮤니티 게시판 btools) */
-  .tp-ttools { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ybm-space-x3); }
-  .tp-ttools__end { display: flex; flex-wrap: wrap; align-items: center; gap: var(--ybm-space-x2); }
+  .tp-ttools { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ds-space-x3); }
+  .tp-ttools__end { display: flex; flex-wrap: wrap; align-items: center; gap: var(--ds-space-x2); }
   .tp-ttools__end > .ds-select { min-width: 120px; }
   .tp-ttools .ds-input { flex: none; width: 240px; max-width: 100%; }
-  .tp-tfoot { display: flex; justify-content: center; padding-top: var(--ybm-space-x2); }
+  .tp-tfoot { display: flex; justify-content: center; padding-top: var(--ds-space-x2); }
   /* 배치 (레퍼런스 A): 흰 바탕, 바깥 여백 16 / 24, 묶음 사이 24 / 32 와 구분선 */
   .tp-body { display: flex; flex: 1 1 auto; flex-direction: column; min-height: 0; }
-  .tp-content { display: flex; flex: 1 1 auto; flex-direction: column; gap: var(--ybm-space-x6); min-width: 0; padding: var(--ybm-space-x5) var(--ybm-space-x4) var(--ybm-space-x10); }
-  .tp-panel { display: flex; flex-direction: column; gap: var(--ybm-space-x5); padding: var(--ybm-space-x5) var(--ybm-space-x4); box-shadow: inset 0 1px 0 var(--ybm-color-stroke-neutral-muted); }
-  .tp-sec { display: flex; flex-direction: column; gap: var(--ybm-space-x3); min-width: 0; }
-  .tp-sec-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ybm-space-x2) var(--ybm-space-x3); }
-  .tp-sec-head__texts { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--ybm-space-x1) var(--ybm-space-x2); }
-  .tp-row { display: flex; align-items: center; gap: var(--ybm-space-x2); min-width: 0; }
+  .tp-content { display: flex; flex: 1 1 auto; flex-direction: column; gap: var(--ds-space-x6); min-width: 0; padding: var(--ds-space-x5) var(--ds-space-x4) var(--ds-space-x10); }
+  .tp-panel { display: flex; flex-direction: column; gap: var(--ds-space-x5); padding: var(--ds-space-x5) var(--ds-space-x4); box-shadow: inset 0 1px 0 var(--ds-color-stroke-neutral-muted); }
+  .tp-sec { display: flex; flex-direction: column; gap: var(--ds-space-x3); min-width: 0; }
+  .tp-sec-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ds-space-x2) var(--ds-space-x3); }
+  .tp-sec-head__texts { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--ds-space-x1) var(--ds-space-x2); }
+  .tp-row { display: flex; align-items: center; gap: var(--ds-space-x2); min-width: 0; }
   /* 줄 안에 놓인 고르기 칸은 글자만큼만 */
   :is(.tp-row, .tp-between, .tp-head__tools, .tp-sec-head, .tp-ttools__end) > .ds-select { width: auto; min-width: 140px; }
-  .tp-between { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ybm-space-x2); }
-  .tp-stack { display: flex; flex-direction: column; gap: var(--ybm-space-x1); min-width: 0; }
+  .tp-between { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ds-space-x2); }
+  .tp-stack { display: flex; flex-direction: column; gap: var(--ds-space-x1); min-width: 0; }
   .tp-stack > .ds-badge { align-self: flex-start; }
-  .tp-g2, .tp-g3, .tp-g4, .tp-g5, .tp-g6 { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ybm-space-x3); }
+  .tp-g2, .tp-g3, .tp-g4, .tp-g5, .tp-g6 { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ds-space-x3); }
   /* 카드 (레퍼런스 A): 흰 바탕 + 옅은 1px 선, 모서리 12 */
   .tp-card { min-width: 0; }
   .tp-span2 { grid-column: auto; }
-  .tp-kpi__label { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
-  .tp-kpi__value { font-size: var(--ybm-font-size-t08); line-height: var(--ybm-line-height-t08); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
-  .tp-delta { display: inline-flex; align-items: center; gap: 2px; font-size: var(--ybm-font-size-t03); line-height: var(--ybm-line-height-t03); font-weight: var(--ybm-font-weight-medium); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .tp-kpi__label { font-size: var(--ds-font-size-t04); line-height: var(--ds-line-height-t04); color: var(--ds-color-fg-neutral-muted); }
+  .tp-kpi__value { font-size: var(--ds-font-size-t08); line-height: var(--ds-line-height-t08); font-weight: var(--ds-font-weight-bold); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+  .tp-delta { display: inline-flex; align-items: center; gap: 2px; font-size: var(--ds-font-size-t03); line-height: var(--ds-line-height-t03); font-weight: var(--ds-font-weight-medium); font-variant-numeric: tabular-nums; white-space: nowrap; }
   .tp-delta .ds-icon { --ds-icon-size: 14px; }
-  .tp-delta[data-tone="up"] { color: var(--ybm-color-fg-positive); }
-  .tp-delta[data-tone="down"] { color: var(--ybm-color-fg-critical); }
-  .tp-delta[data-tone="flat"] { color: var(--ybm-color-fg-neutral-muted); }
+  .tp-delta[data-tone="up"] { color: var(--ds-color-fg-positive); }
+  .tp-delta[data-tone="down"] { color: var(--ds-color-fg-critical); }
+  .tp-delta[data-tone="flat"] { color: var(--ds-color-fg-neutral-muted); }
   /* 차트: 얇은 선, 옅은 격자, 마우스를 올리면 세로 안내선과 값 풍선 */
   .tp-chart { display: block; width: 100%; height: auto; overflow: visible; }
-  .tp-chart text { fill: var(--ybm-color-fg-neutral-subtle); font-size: 11px; font-family: inherit; font-variant-numeric: tabular-nums; }
-  .tp-chart .tp-grid-line { stroke: var(--ybm-color-stroke-neutral-muted); stroke-width: 1; }
-  .tp-chart [data-i] { transition: opacity var(--ybm-duration-fast) var(--ybm-easing-standard); }
+  .tp-chart text { fill: var(--ds-color-fg-neutral-subtle); font-size: 11px; font-family: inherit; font-variant-numeric: tabular-nums; }
+  .tp-chart .tp-grid-line { stroke: var(--ds-color-stroke-neutral-muted); stroke-width: 1; }
+  .tp-chart [data-i] { transition: opacity var(--ds-duration-fast) var(--ds-easing-standard); }
   .tp-chart.is-hover [data-i]:not(.is-on) { opacity: .35; }
-  .tp-chart .tp-guide { stroke: var(--ybm-color-fg-neutral-subtle); stroke-width: 1; stroke-dasharray: 3 3; opacity: 0; pointer-events: none; }
-  .tp-chart .tp-dot { stroke: var(--ybm-color-bg-layer-default); stroke-width: 2; opacity: 0; pointer-events: none; }
+  .tp-chart .tp-guide { stroke: var(--ds-color-fg-neutral-subtle); stroke-width: 1; stroke-dasharray: 3 3; opacity: 0; pointer-events: none; }
+  .tp-chart .tp-dot { stroke: var(--ds-color-bg-layer-default); stroke-width: 2; opacity: 0; pointer-events: none; }
   .tp-chart.is-hover .tp-guide, .tp-chart.is-hover .tp-dot { opacity: 1; }
-  .tp-tip { position: fixed; z-index: var(--ybm-z-tooltip, 60); display: flex; flex-direction: column; gap: 2px; min-width: 96px; padding: var(--ybm-space-x2) var(--ybm-space-x2_5); border-radius: var(--ybm-shape-sm); background: var(--ybm-color-bg-neutral-solid); color: var(--ybm-color-fg-on-neutral-solid); box-shadow: var(--ybm-elevation-overlay); font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); pointer-events: none; opacity: 0; transform: translateY(4px); transition: opacity var(--ybm-duration-fast) var(--ybm-easing-standard), transform var(--ybm-duration-fast) var(--ybm-easing-standard); }
+  .tp-tip { position: fixed; z-index: var(--ds-z-tooltip, 60); display: flex; flex-direction: column; gap: 2px; min-width: 96px; padding: var(--ds-space-x2) var(--ds-space-x2_5); border-radius: var(--ds-shape-sm); background: var(--ds-color-bg-neutral-solid); color: var(--ds-color-fg-on-neutral-solid); box-shadow: var(--ds-elevation-overlay); font-size: var(--ds-font-size-t02); line-height: var(--ds-line-height-t02); pointer-events: none; opacity: 0; transform: translateY(4px); transition: opacity var(--ds-duration-fast) var(--ds-easing-standard), transform var(--ds-duration-fast) var(--ds-easing-standard); }
   .tp-tip.is-on { opacity: 1; transform: none; }
-  .tp-tip__t { font-weight: var(--ybm-font-weight-semibold); opacity: .8; }
+  .tp-tip__t { font-weight: var(--ds-font-weight-semibold); opacity: .8; }
   .tp-tip__t:only-child { opacity: 1; }
-  [data-tip] { transition: filter var(--ybm-duration-fast) var(--ybm-easing-standard); }
+  [data-tip] { transition: filter var(--ds-duration-fast) var(--ds-easing-standard); }
   [data-tip]:hover { filter: brightness(0.9); }
-  .tp-tip__r { display: flex; align-items: center; gap: var(--ybm-space-x1_5); font-variant-numeric: tabular-nums; }
-  .tp-tip__r b { margin-inline-start: auto; padding-inline-start: var(--ybm-space-x3); font-weight: var(--ybm-font-weight-semibold); }
+  .tp-tip__r { display: flex; align-items: center; gap: var(--ds-space-x1_5); font-variant-numeric: tabular-nums; }
+  .tp-tip__r b { margin-inline-start: auto; padding-inline-start: var(--ds-space-x3); font-weight: var(--ds-font-weight-semibold); }
   .tp-tip__r i { flex: none; width: 8px; height: 8px; border-radius: 2px; background: var(--c); }
-  .tp-legend { display: flex; flex-wrap: wrap; gap: var(--ybm-space-x1) var(--ybm-space-x4); font-size: var(--ybm-font-size-t03); line-height: var(--ybm-line-height-t03); color: var(--ybm-color-fg-neutral-muted); }
-  .tp-legend__item { display: inline-flex; align-items: center; gap: var(--ybm-space-x1_5); }
-  .tp-swatch { flex: none; width: 8px; height: 8px; border-radius: 2px; background: var(--c, var(--ybm-color-chart-series-1)); }
-  .tp-split { display: flex; height: 10px; overflow: hidden; border-radius: var(--ybm-shape-pill); background: var(--ybm-color-bg-neutral); }
+  .tp-legend { display: flex; flex-wrap: wrap; gap: var(--ds-space-x1) var(--ds-space-x4); font-size: var(--ds-font-size-t03); line-height: var(--ds-line-height-t03); color: var(--ds-color-fg-neutral-muted); }
+  .tp-legend__item { display: inline-flex; align-items: center; gap: var(--ds-space-x1_5); }
+  .tp-swatch { flex: none; width: 8px; height: 8px; border-radius: 2px; background: var(--c, var(--ds-color-chart-series-1)); }
+  .tp-split { display: flex; height: 10px; overflow: hidden; border-radius: var(--ds-shape-pill); background: var(--ds-color-bg-neutral); }
   .tp-split > span { height: 100%; background: var(--c); }
-  .tp-split > span + span { box-shadow: inset 2px 0 0 var(--ybm-color-bg-layer-default); }
-  .tp-ph { display: grid; place-items: center; width: 100%; height: 100%; color: var(--ybm-color-fg-neutral-subtle); background: var(--ybm-color-bg-neutral); }
+  .tp-split > span + span { box-shadow: inset 2px 0 0 var(--ds-color-bg-layer-default); }
+  .tp-ph { display: grid; place-items: center; width: 100%; height: 100%; color: var(--ds-color-fg-neutral-subtle); background: var(--ds-color-bg-neutral); }
   .tp-ph > img { display: block; width: 100%; height: 100%; object-fit: cover; }
-  .tp-logo { display: inline-grid; place-items: center; width: 88px; height: 28px; border-radius: var(--ybm-shape-xs); background: var(--ybm-color-bg-neutral); color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t03-static); line-height: var(--ybm-line-height-t03-static); font-weight: var(--ybm-font-weight-semibold); }
-  .tp-bar { position: sticky; top: 0; z-index: var(--ybm-z-sticky); background: var(--ybm-color-bg-layer-default); }
-  .tp-track { display: flex; flex-direction: column; gap: var(--ybm-space-x1); min-width: 120px; }
+  .tp-logo { display: inline-grid; place-items: center; width: 88px; height: 28px; border-radius: var(--ds-shape-xs); background: var(--ds-color-bg-neutral); color: var(--ds-color-fg-neutral-subtle); font-size: var(--ds-font-size-t03-static); line-height: var(--ds-line-height-t03-static); font-weight: var(--ds-font-weight-semibold); }
+  .tp-bar { position: sticky; top: 0; z-index: var(--ds-z-sticky); background: var(--ds-color-bg-layer-default); }
+  .tp-track { display: flex; flex-direction: column; gap: var(--ds-space-x1); min-width: 120px; }
   .tp-hide-sm { display: none; }
   .tp-scroll-x { overflow-x: auto; }
   .tp-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
-  .tp-kbd { display: inline-grid; place-items: center; min-width: 20px; height: 20px; padding: 0 4px; border-radius: var(--ybm-shape-2xs); box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-neutral-muted); color: var(--ybm-color-fg-neutral-muted); font-size: var(--ybm-font-size-t01); font-family: inherit; }
+  .tp-kbd { display: inline-grid; place-items: center; min-width: 20px; height: 20px; padding: 0 4px; border-radius: var(--ds-shape-2xs); box-shadow: inset 0 0 0 1px var(--ds-color-stroke-neutral-muted); color: var(--ds-color-fg-neutral-muted); font-size: var(--ds-font-size-t01); font-family: inherit; }
   @media (min-width: 768px) {
-    .tp-head { padding: var(--ybm-space-x8) var(--ybm-space-x6) 0; }
-    .tp-h1 { font-size: var(--ybm-font-size-t11); line-height: var(--ybm-line-height-t11); }
-    .tp-h2 { font-size: var(--ybm-font-size-t07); line-height: var(--ybm-line-height-t07); }
-    .tp-content { padding: var(--ybm-space-x6) var(--ybm-space-x6) var(--ybm-space-x12); gap: var(--ybm-space-x8); }
-    .tp-panel { padding: var(--ybm-space-x6); }
-    .tp-card.ds-card { --ds-card-padding: var(--ybm-space-x5); --ds-card-gap: var(--ybm-space-x4); }
-    .tp-g2, .tp-g3, .tp-g4, .tp-g5, .tp-g6 { gap: var(--ybm-space-x4); }
+    .tp-head { padding: var(--ds-space-x8) var(--ds-space-x6) 0; }
+    .tp-h1 { font-size: var(--ds-font-size-t11); line-height: var(--ds-line-height-t11); }
+    .tp-h2 { font-size: var(--ds-font-size-t07); line-height: var(--ds-line-height-t07); }
+    .tp-content { padding: var(--ds-space-x6) var(--ds-space-x6) var(--ds-space-x12); gap: var(--ds-space-x8); }
+    .tp-panel { padding: var(--ds-space-x6); }
+    .tp-card.ds-card { --ds-card-padding: var(--ds-space-x5); --ds-card-gap: var(--ds-space-x4); }
+    .tp-g2, .tp-g3, .tp-g4, .tp-g5, .tp-g6 { gap: var(--ds-space-x4); }
     .tp-g2, .tp-g4, .tp-g6 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .tp-g3, .tp-g5 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .tp-hide-sm { display: revert; }
   }
   @media (min-width: 1024px) {
     .tp-body--panel { flex-direction: row; }
-    .tp-body--panel > .tp-panel { flex: none; width: 360px; box-shadow: inset 1px 0 0 var(--ybm-color-stroke-neutral-muted); }
+    .tp-body--panel > .tp-panel { flex: none; width: 360px; box-shadow: inset 1px 0 0 var(--ds-color-stroke-neutral-muted); }
     .tp-g3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     .tp-g4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
     .tp-g5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
@@ -114,7 +114,7 @@
   @media (min-width: 1280px) { .tp-g6 { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
 
   /* 위 메뉴 화면 */
-  .tp-topbar { position: sticky; top: 0; z-index: var(--ybm-z-sticky); background: var(--ybm-color-bg-layer-default); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); }
+  .tp-topbar { position: sticky; top: 0; z-index: var(--ds-z-sticky); background: var(--ds-color-bg-layer-default); box-shadow: inset 0 -1px 0 var(--ds-color-stroke-neutral-muted); }
   .tp-topbar > .ds-topnav { width: min(100%, 1200px); margin-inline: auto; background: none; }
   .tp-topbar .ds-topnav__menu { display: none; }
   @media (min-width: 768px) { .tp-topbar .ds-topnav__menu { display: flex; } }
@@ -125,47 +125,47 @@
   .tp-frame .ds-sidenav__header { justify-content: flex-start; }
   .tp-frame > .ds-sidenav { display: none; }
   .tp-frame__main { display: flex; flex: 1 1 auto; flex-direction: column; min-width: 0; }
-  .tp-mbar { display: flex; align-items: center; justify-content: space-between; gap: var(--ybm-space-x2); padding: var(--ybm-space-x2) var(--ybm-space-x4); background: var(--ybm-color-bg-layer-default); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); }
+  .tp-mbar { display: flex; align-items: center; justify-content: space-between; gap: var(--ds-space-x2); padding: var(--ds-space-x2) var(--ds-space-x4); background: var(--ds-color-bg-layer-default); box-shadow: inset 0 -1px 0 var(--ds-color-stroke-neutral-muted); }
   @media (min-width: 1024px) {
-    .tp-frame > .ds-sidenav { display: flex; position: sticky; top: 0; flex: none; height: 100vh; background: var(--ybm-color-bg-layer-default); box-shadow: inset -1px 0 0 var(--ybm-color-stroke-neutral-muted); }
+    .tp-frame > .ds-sidenav { display: flex; position: sticky; top: 0; flex: none; height: 100vh; background: var(--ds-color-bg-layer-default); box-shadow: inset -1px 0 0 var(--ds-color-stroke-neutral-muted); }
     .tp-mbar { display: none; }
   }
-  .tp-org { display: flex; align-items: center; gap: var(--ybm-space-x2); padding: var(--ybm-space-x2) var(--ybm-space-x2) var(--ybm-space-x1); }
-  .tp-org__mark { display: grid; place-items: center; flex: none; width: 32px; height: 32px; border-radius: var(--ybm-shape-sm); background: var(--ybm-color-bg-neutral-solid); color: var(--ybm-color-fg-neutral-inverted); font-size: var(--ybm-font-size-t03-static); font-weight: var(--ybm-font-weight-bold); }
+  .tp-org { display: flex; align-items: center; gap: var(--ds-space-x2); padding: var(--ds-space-x2) var(--ds-space-x2) var(--ds-space-x1); }
+  .tp-org__mark { display: grid; place-items: center; flex: none; width: 32px; height: 32px; border-radius: var(--ds-shape-sm); background: var(--ds-color-bg-neutral-solid); color: var(--ds-color-fg-neutral-inverted); font-size: var(--ds-font-size-t03-static); font-weight: var(--ds-font-weight-bold); }
   /* 고르기 상자 칸 수: 모바일은 1칸(4칸은 2칸), 768 부터 지정한 칸 */
   .tp-sb2, .tp-sb3 { --ds-selectbox-columns: 1; } .tp-sb4 { --ds-selectbox-columns: 2; }
   @media (min-width: 768px) { .tp-sb2 { --ds-selectbox-columns: 2; } .tp-sb3 { --ds-selectbox-columns: 3; } .tp-sb4 { --ds-selectbox-columns: 4; } }
   /* 옆으로 미는 표는 눌리지 않게 */
   .tp-scroll-x .ds-table { min-width: 760px; }
   /* 공통 조각 */
-  .tp-big { font-size: var(--ybm-font-size-t11); line-height: var(--ybm-line-height-t11); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
-  .tp-mid { font-size: var(--ybm-font-size-t07); line-height: var(--ybm-line-height-t07); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+  .tp-big { font-size: var(--ds-font-size-t11); line-height: var(--ds-line-height-t11); font-weight: var(--ds-font-weight-bold); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+  .tp-mid { font-size: var(--ds-font-size-t07); line-height: var(--ds-line-height-t07); font-weight: var(--ds-font-weight-bold); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
   .tp-rows { display: flex; flex-direction: column; }
-  .tp-rows > * { padding-block: var(--ybm-space-x3); }
-  .tp-rows > * + * { box-shadow: inset 0 1px 0 var(--ybm-color-stroke-neutral-muted); }
-  .tp-kv { display: flex; justify-content: space-between; gap: var(--ybm-space-x3); font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); }
-  .tp-kv > :first-child { color: var(--ybm-color-fg-neutral-muted); flex: none; }
+  .tp-rows > * { padding-block: var(--ds-space-x3); }
+  .tp-rows > * + * { box-shadow: inset 0 1px 0 var(--ds-color-stroke-neutral-muted); }
+  .tp-kv { display: flex; justify-content: space-between; gap: var(--ds-space-x3); font-size: var(--ds-font-size-t04); line-height: var(--ds-line-height-t04); }
+  .tp-kv > :first-child { color: var(--ds-color-fg-neutral-muted); flex: none; }
   .tp-kv > :last-child { text-align: end; }
-  .tp-stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--ybm-space-x4); }
-  .tp-stats > * { display: flex; flex-direction: column; gap: var(--ybm-space-x1); min-width: 0; }
-  @media (min-width: 768px) { .tp-stats { grid-template-columns: repeat(var(--n, 4), minmax(0, 1fr)); } .tp-stats > * + * { padding-inline-start: var(--ybm-space-x4); box-shadow: inset 1px 0 0 var(--ybm-color-stroke-neutral-muted); } }
+  .tp-stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--ds-space-x4); }
+  .tp-stats > * { display: flex; flex-direction: column; gap: var(--ds-space-x1); min-width: 0; }
+  @media (min-width: 768px) { .tp-stats { grid-template-columns: repeat(var(--n, 4), minmax(0, 1fr)); } .tp-stats > * + * { padding-inline-start: var(--ds-space-x4); box-shadow: inset 1px 0 0 var(--ds-color-stroke-neutral-muted); } }
   .tp-thumb-sm { flex: none; width: 96px; }
-  .tp-aside-sticky { display: flex; flex-direction: column; gap: var(--ybm-space-x3); }
-  @media (min-width: 1024px) { .tp-aside-sticky { position: sticky; top: calc(var(--ybm-space-x16) + var(--ybm-space-x4)); } }
+  .tp-aside-sticky { display: flex; flex-direction: column; gap: var(--ds-space-x3); }
+  @media (min-width: 1024px) { .tp-aside-sticky { position: sticky; top: calc(var(--ds-space-x16) + var(--ds-space-x4)); } }
 
   .tp-cal { width: 100%; padding: 0; box-shadow: none; background: none; }
-  .tp-slots { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--ybm-space-x2); }
+  .tp-slots { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--ds-space-x2); }
   .tp-slots .ds-chip { justify-content: center; }
-  .tp-map { position: relative; overflow: hidden; border-radius: var(--ybm-shape-lg); background: var(--ybm-color-bg-neutral); min-height: 200px; display: grid; place-items: center; color: var(--ybm-color-fg-neutral-subtle); }
+  .tp-map { position: relative; overflow: hidden; border-radius: var(--ds-shape-lg); background: var(--ds-color-bg-neutral); min-height: 200px; display: grid; place-items: center; color: var(--ds-color-fg-neutral-subtle); }
 
-  .tp-ea { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ybm-space-x6); width: min(100%, 1120px); margin-inline: auto; }
+  .tp-ea { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ds-space-x6); width: min(100%, 1120px); margin-inline: auto; }
   @media (min-width: 1024px) { .tp-ea { grid-template-columns: minmax(0, 1fr) 340px; align-items: start; } }
-  .tp-step-h { display: flex; align-items: center; gap: var(--ybm-space-x3); }
-  .tp-step-no { display: inline-grid; place-items: center; flex: none; width: 24px; height: 24px; border-radius: var(--ybm-shape-pill); background: var(--ybm-color-bg-neutral); color: var(--ybm-color-fg-neutral-muted); font-size: var(--ybm-font-size-t03); font-weight: var(--ybm-font-weight-bold); }
-  .tp-step-h .ds-icon { --ds-icon-size: 24px; color: var(--ybm-color-fg-positive); }
-  .tp-step-h[data-current] .tp-step-no { background: var(--ybm-color-bg-neutral-solid); color: var(--ybm-color-fg-neutral-inverted); }
-  .tp-step-h > .tp-h2 { flex: 1 1 auto; font-size: var(--ybm-font-size-t06); line-height: var(--ybm-line-height-t06); }
-  .tp-ds { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ybm-space-x6); }
+  .tp-step-h { display: flex; align-items: center; gap: var(--ds-space-x3); }
+  .tp-step-no { display: inline-grid; place-items: center; flex: none; width: 24px; height: 24px; border-radius: var(--ds-shape-pill); background: var(--ds-color-bg-neutral); color: var(--ds-color-fg-neutral-muted); font-size: var(--ds-font-size-t03); font-weight: var(--ds-font-weight-bold); }
+  .tp-step-h .ds-icon { --ds-icon-size: 24px; color: var(--ds-color-fg-positive); }
+  .tp-step-h[data-current] .tp-step-no { background: var(--ds-color-bg-neutral-solid); color: var(--ds-color-fg-neutral-inverted); }
+  .tp-step-h > .tp-h2 { flex: 1 1 auto; font-size: var(--ds-font-size-t06); line-height: var(--ds-line-height-t06); }
+  .tp-ds { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ds-space-x6); }
   @media (min-width: 768px) { .tp-ds { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
   .tp-total { display: flex; align-items: baseline; justify-content: space-between; }
 </style>
@@ -176,16 +176,16 @@
   <div class="ds-topnav__end"><button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="알림"><i class="ds-icon ds-icon--bell" aria-hidden="true"></i></button><span class="ds-avatar" data-size="28" role="img" aria-label="와이비엠"><span class="ds-avatar__initials" aria-hidden="true">와</span></span></div>
 </header></div><main class="tp-content">
   <div class="tp-ea">
-    <div class="tp-stack" style="gap: var(--ybm-space-x4)">
-      <div class="tp-stack" style="gap: var(--ybm-space-x2); padding-block-end: var(--ybm-space-x2)"><h1 class="tp-h1">시험 신청</h1><p class="tp-sub">시험, 날짜, 고사장을 고르고 결제하면 접수가 끝나요.</p></div>
+    <div class="tp-stack" style="gap: var(--ds-space-x4)">
+      <div class="tp-stack" style="gap: var(--ds-space-x2); padding-block-end: var(--ds-space-x2)"><h1 class="tp-h1">시험 신청</h1><p class="tp-sub">시험, 날짜, 고사장을 고르고 결제하면 접수가 끝나요.</p></div>
       <section class="ds-card tp-card" data-variant="subtle" data-size="small"><div class="tp-step-h"><i class="ds-icon ds-icon--circle-check-solid" aria-hidden="true"></i><h2 class="tp-h2">시험 고르기</h2><a class="ds-link" href="#" data-size="small">바꾸기</a></div><div class="ds-selectbox-group tp-sb3"><label class="ds-selectbox" data-layout="vertical"><i class="ds-icon ds-icon--mic" aria-hidden="true"></i><span class="ds-selectbox__texts"><span class="ds-selectbox__label">영어 말하기 시험</span><span class="ds-selectbox__desc">말하기 능력을 단계로 평가해요</span></span><span class="ds-radio" data-tone="neutral" data-size="medium"><input type="radio" class="ds-radio__control" name="exam" checked></span></label><label class="ds-selectbox" data-layout="vertical"><i class="ds-icon ds-icon--book-open" aria-hidden="true"></i><span class="ds-selectbox__texts"><span class="ds-selectbox__label">영어 읽기 듣기 시험</span><span class="ds-selectbox__desc">읽기와 듣기를 점수로 평가해요</span></span><span class="ds-radio" data-tone="neutral" data-size="medium"><input type="radio" class="ds-radio__control" name="exam"></span></label><label class="ds-selectbox" data-layout="vertical"><i class="ds-icon ds-icon--pencil" aria-hidden="true"></i><span class="ds-selectbox__texts"><span class="ds-selectbox__label">영어 쓰기 시험</span><span class="ds-selectbox__desc">쓰기 능력을 단계로 평가해요</span></span><span class="ds-radio" data-tone="neutral" data-size="medium"><input type="radio" class="ds-radio__control" name="exam"></span></label></div></section>
-      <section class="ds-card tp-card" data-variant="subtle" data-size="small"><div class="tp-step-h"><i class="ds-icon ds-icon--circle-check-solid" aria-hidden="true"></i><h2 class="tp-h2">언어 고르기</h2></div><div class="tp-chips" style="display:flex;flex-wrap:wrap;gap:var(--ybm-space-x2)"><button type="button" class="ds-chip" data-variant="outlineWeak" data-size="medium" aria-pressed="true">영어</button><button type="button" class="ds-chip" data-variant="outlineWeak" data-size="medium">중국어</button><button type="button" class="ds-chip" data-variant="outlineWeak" data-size="medium">일본어</button><button type="button" class="ds-chip" data-variant="outlineWeak" data-size="medium">스페인어</button><button type="button" class="ds-chip" data-variant="outlineWeak" data-size="medium">러시아어</button><button type="button" class="ds-chip" data-variant="outlineWeak" data-size="medium">베트남어</button></div></section>
+      <section class="ds-card tp-card" data-variant="subtle" data-size="small"><div class="tp-step-h"><i class="ds-icon ds-icon--circle-check-solid" aria-hidden="true"></i><h2 class="tp-h2">언어 고르기</h2></div><div class="tp-chips" style="display:flex;flex-wrap:wrap;gap:var(--ds-space-x2)"><button type="button" class="ds-chip" data-variant="outlineWeak" data-size="medium" aria-pressed="true">영어</button><button type="button" class="ds-chip" data-variant="outlineWeak" data-size="medium">중국어</button><button type="button" class="ds-chip" data-variant="outlineWeak" data-size="medium">일본어</button><button type="button" class="ds-chip" data-variant="outlineWeak" data-size="medium">스페인어</button><button type="button" class="ds-chip" data-variant="outlineWeak" data-size="medium">러시아어</button><button type="button" class="ds-chip" data-variant="outlineWeak" data-size="medium">베트남어</button></div></section>
       <section class="ds-card tp-card" data-variant="subtle" data-size="small"><div class="tp-step-h" data-current><span class="tp-step-no">3</span><h2 class="tp-h2">날짜와 고사장 고르기</h2><div class="ds-segmented" role="group" aria-label="고르는 순서" data-size="small"><button type="button" class="ds-segmented__item" aria-pressed="true">날짜 먼저</button><button type="button" class="ds-segmented__item" aria-pressed="false">고사장 먼저</button></div></div>
         <div class="tp-ds">
-          <div class="tp-stack" style="gap: var(--ybm-space-x3)"><div class="ds-datepicker tp-cal"><div class="ds-datepicker__header"><button type="button" class="ds-datepicker__nav" aria-label="이전 달"><i class="ds-icon ds-icon--chevron-left ds-icon--lg" aria-hidden="true"></i></button><strong class="ds-datepicker__title">2026년 11월</strong><button type="button" class="ds-datepicker__nav" aria-label="다음 달"><i class="ds-icon ds-icon--chevron-right ds-icon--lg" aria-hidden="true"></i></button></div><div class="ds-datepicker__weekdays"><span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span></div><div class="ds-datepicker__grid" role="grid"><button type="button" class="ds-date-cell" disabled>1</button><button type="button" class="ds-date-cell" data-state="today">2</button><button type="button" class="ds-date-cell">3</button><button type="button" class="ds-date-cell">4</button><button type="button" class="ds-date-cell">5</button><button type="button" class="ds-date-cell">6</button><button type="button" class="ds-date-cell">7</button><button type="button" class="ds-date-cell" disabled>8</button><button type="button" class="ds-date-cell">9</button><button type="button" class="ds-date-cell">10</button><button type="button" class="ds-date-cell">11</button><button type="button" class="ds-date-cell">12</button><button type="button" class="ds-date-cell">13</button><button type="button" class="ds-date-cell">14</button><button type="button" class="ds-date-cell" disabled>15</button><button type="button" class="ds-date-cell">16</button><button type="button" class="ds-date-cell">17</button><button type="button" class="ds-date-cell" data-state="selected">18</button><button type="button" class="ds-date-cell">19</button><button type="button" class="ds-date-cell">20</button><button type="button" class="ds-date-cell">21</button><button type="button" class="ds-date-cell" disabled>22</button><button type="button" class="ds-date-cell">23</button><button type="button" class="ds-date-cell">24</button><button type="button" class="ds-date-cell">25</button><button type="button" class="ds-date-cell">26</button><button type="button" class="ds-date-cell">27</button><button type="button" class="ds-date-cell">28</button><button type="button" class="ds-date-cell" disabled>29</button><button type="button" class="ds-date-cell">30</button><button type="button" class="ds-date-cell" disabled aria-hidden="true"></button><button type="button" class="ds-date-cell" disabled aria-hidden="true"></button><button type="button" class="ds-date-cell" disabled aria-hidden="true"></button><button type="button" class="ds-date-cell" disabled aria-hidden="true"></button><button type="button" class="ds-date-cell" disabled aria-hidden="true"></button><button type="button" class="ds-date-cell" disabled aria-hidden="true"></button><button type="button" class="ds-date-cell" disabled aria-hidden="true"></button><button type="button" class="ds-date-cell" disabled aria-hidden="true"></button><button type="button" class="ds-date-cell" disabled aria-hidden="true"></button><button type="button" class="ds-date-cell" disabled aria-hidden="true"></button><button type="button" class="ds-date-cell" disabled aria-hidden="true"></button><button type="button" class="ds-date-cell" disabled aria-hidden="true"></button></div></div></div>
-          <div class="tp-stack" style="gap: var(--ybm-space-x4)">
-            <div class="tp-stack" style="gap: var(--ybm-space-x2)"><span class="tp-h4">오전</span><div class="tp-slots"><button type="button" class="ds-chip" data-variant="outlineWeak" data-size="medium">10:00</button><button type="button" class="ds-chip" data-variant="outlineWeak" data-size="medium" disabled>11:20 마감</button></div></div>
-            <div class="tp-stack" style="gap: var(--ybm-space-x2)"><span class="tp-h4">오후</span><div class="tp-slots"><button type="button" class="ds-chip" data-variant="outlineWeak" data-size="medium" aria-pressed="true">13:00</button><button type="button" class="ds-chip" data-variant="outlineWeak" data-size="medium">14:20</button><button type="button" class="ds-chip" data-variant="outlineWeak" data-size="medium">15:40</button><button type="button" class="ds-chip" data-variant="outlineWeak" data-size="medium">17:00</button><button type="button" class="ds-chip" data-variant="outlineWeak" data-size="medium" disabled>18:20 마감</button><button type="button" class="ds-chip" data-variant="outlineWeak" data-size="medium">19:30</button></div></div>
+          <div class="tp-stack" style="gap: var(--ds-space-x3)"><div class="ds-datepicker tp-cal"><div class="ds-datepicker__header"><button type="button" class="ds-datepicker__nav" aria-label="이전 달"><i class="ds-icon ds-icon--chevron-left ds-icon--lg" aria-hidden="true"></i></button><strong class="ds-datepicker__title">2026년 11월</strong><button type="button" class="ds-datepicker__nav" aria-label="다음 달"><i class="ds-icon ds-icon--chevron-right ds-icon--lg" aria-hidden="true"></i></button></div><div class="ds-datepicker__weekdays"><span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span></div><div class="ds-datepicker__grid" role="grid"><button type="button" class="ds-date-cell" disabled>1</button><button type="button" class="ds-date-cell" data-state="today">2</button><button type="button" class="ds-date-cell">3</button><button type="button" class="ds-date-cell">4</button><button type="button" class="ds-date-cell">5</button><button type="button" class="ds-date-cell">6</button><button type="button" class="ds-date-cell">7</button><button type="button" class="ds-date-cell" disabled>8</button><button type="button" class="ds-date-cell">9</button><button type="button" class="ds-date-cell">10</button><button type="button" class="ds-date-cell">11</button><button type="button" class="ds-date-cell">12</button><button type="button" class="ds-date-cell">13</button><button type="button" class="ds-date-cell">14</button><button type="button" class="ds-date-cell" disabled>15</button><button type="button" class="ds-date-cell">16</button><button type="button" class="ds-date-cell">17</button><button type="button" class="ds-date-cell" data-state="selected">18</button><button type="button" class="ds-date-cell">19</button><button type="button" class="ds-date-cell">20</button><button type="button" class="ds-date-cell">21</button><button type="button" class="ds-date-cell" disabled>22</button><button type="button" class="ds-date-cell">23</button><button type="button" class="ds-date-cell">24</button><button type="button" class="ds-date-cell">25</button><button type="button" class="ds-date-cell">26</button><button type="button" class="ds-date-cell">27</button><button type="button" class="ds-date-cell">28</button><button type="button" class="ds-date-cell" disabled>29</button><button type="button" class="ds-date-cell">30</button><button type="button" class="ds-date-cell" disabled aria-hidden="true"></button><button type="button" class="ds-date-cell" disabled aria-hidden="true"></button><button type="button" class="ds-date-cell" disabled aria-hidden="true"></button><button type="button" class="ds-date-cell" disabled aria-hidden="true"></button><button type="button" class="ds-date-cell" disabled aria-hidden="true"></button><button type="button" class="ds-date-cell" disabled aria-hidden="true"></button><button type="button" class="ds-date-cell" disabled aria-hidden="true"></button><button type="button" class="ds-date-cell" disabled aria-hidden="true"></button><button type="button" class="ds-date-cell" disabled aria-hidden="true"></button><button type="button" class="ds-date-cell" disabled aria-hidden="true"></button><button type="button" class="ds-date-cell" disabled aria-hidden="true"></button><button type="button" class="ds-date-cell" disabled aria-hidden="true"></button></div></div></div>
+          <div class="tp-stack" style="gap: var(--ds-space-x4)">
+            <div class="tp-stack" style="gap: var(--ds-space-x2)"><span class="tp-h4">오전</span><div class="tp-slots"><button type="button" class="ds-chip" data-variant="outlineWeak" data-size="medium">10:00</button><button type="button" class="ds-chip" data-variant="outlineWeak" data-size="medium" disabled>11:20 마감</button></div></div>
+            <div class="tp-stack" style="gap: var(--ds-space-x2)"><span class="tp-h4">오후</span><div class="tp-slots"><button type="button" class="ds-chip" data-variant="outlineWeak" data-size="medium" aria-pressed="true">13:00</button><button type="button" class="ds-chip" data-variant="outlineWeak" data-size="medium">14:20</button><button type="button" class="ds-chip" data-variant="outlineWeak" data-size="medium">15:40</button><button type="button" class="ds-chip" data-variant="outlineWeak" data-size="medium">17:00</button><button type="button" class="ds-chip" data-variant="outlineWeak" data-size="medium" disabled>18:20 마감</button><button type="button" class="ds-chip" data-variant="outlineWeak" data-size="medium">19:30</button></div></div>
             <div class="ds-callout" data-tone="informative"><i class="ds-icon ds-icon--info-solid" aria-hidden="true"></i><div class="ds-callout__body"><p class="ds-callout__desc">11월 18일 (수) 13:00 시험의 성적은 11월 25일에 나와요.</p></div></div>
           </div>
         </div>
@@ -195,12 +195,12 @@
           <div class="tp-map" aria-hidden="true"><i class="ds-icon ds-icon--map-pin ds-icon--lg" aria-hidden="true"></i></div>
           <div class="ds-selectbox-group"><label class="ds-selectbox"><span class="ds-selectbox__texts"><span class="ds-selectbox__label">강남 시험장</span><span class="ds-selectbox__desc">1.3km · 남은 자리 12석</span></span><span class="ds-radio" data-tone="neutral" data-size="medium"><input type="radio" class="ds-radio__control" name="venue" checked></span></label><label class="ds-selectbox"><span class="ds-selectbox__texts"><span class="ds-selectbox__label">종로 시험장</span><span class="ds-selectbox__desc">6.7km · 남은 자리 3석</span></span><span class="ds-radio" data-tone="neutral" data-size="medium"><input type="radio" class="ds-radio__control" name="venue"></span></label><label class="ds-selectbox"><span class="ds-selectbox__texts"><span class="ds-selectbox__label">신촌 시험장</span><span class="ds-selectbox__desc">9.8km · 남은 자리 20석</span></span><span class="ds-radio" data-tone="neutral" data-size="medium"><input type="radio" class="ds-radio__control" name="venue"></span></label></div>
         </div></section>
-      <section class="ds-card tp-card" data-variant="subtle" data-size="small"><div class="tp-step-h"><span class="tp-step-no">4</span><h2 class="tp-h2">규정 동의</h2></div><label class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control"><span class="ds-checkbox__label"><b>전체 동의</b></span></label><hr class="ds-divider"><div class="tp-stack" style="gap: var(--ybm-space-x3)"><div class="tp-between"><label class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control"><span class="ds-checkbox__label">[필수] 시험 응시 규정</span></label><a class="ds-link" href="#" data-size="small">보기</a></div><div class="tp-between"><label class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control"><span class="ds-checkbox__label">[필수] 시험 성적 이용 규정</span></label><a class="ds-link" href="#" data-size="small">보기</a></div><div class="tp-between"><label class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control"><span class="ds-checkbox__label">[필수] 개인정보 수집과 이용</span></label><a class="ds-link" href="#" data-size="small">보기</a></div><div class="tp-between"><label class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control"><span class="ds-checkbox__label">[선택] 시험 소식과 혜택 받기</span></label><a class="ds-link" href="#" data-size="small">보기</a></div></div></section>
+      <section class="ds-card tp-card" data-variant="subtle" data-size="small"><div class="tp-step-h"><span class="tp-step-no">4</span><h2 class="tp-h2">규정 동의</h2></div><label class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control"><span class="ds-checkbox__label"><b>전체 동의</b></span></label><hr class="ds-divider"><div class="tp-stack" style="gap: var(--ds-space-x3)"><div class="tp-between"><label class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control"><span class="ds-checkbox__label">[필수] 시험 응시 규정</span></label><a class="ds-link" href="#" data-size="small">보기</a></div><div class="tp-between"><label class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control"><span class="ds-checkbox__label">[필수] 시험 성적 이용 규정</span></label><a class="ds-link" href="#" data-size="small">보기</a></div><div class="tp-between"><label class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control"><span class="ds-checkbox__label">[필수] 개인정보 수집과 이용</span></label><a class="ds-link" href="#" data-size="small">보기</a></div><div class="tp-between"><label class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control"><span class="ds-checkbox__label">[선택] 시험 소식과 혜택 받기</span></label><a class="ds-link" href="#" data-size="small">보기</a></div></div></section>
       <section class="ds-card tp-card" data-variant="subtle" data-size="small"><div class="tp-step-h"><span class="tp-step-no">5</span><h2 class="tp-h2">응시자 정보 확인</h2></div><div class="tp-ds"><div class="ds-field"><div class="ds-field__header"><label class="ds-field__label" for="ea-name">이름</label></div><div class="ds-input" data-variant="outline" data-size="medium"><input class="ds-input__control" id="ea-name" value="와이비엠" readonly></div></div><div class="ds-field"><div class="ds-field__header"><label class="ds-field__label" for="ea-birth">생년월일</label></div><div class="ds-input" data-variant="outline" data-size="medium"><input class="ds-input__control" id="ea-birth" value="2001.04.12" readonly></div></div><div class="ds-field"><div class="ds-field__header"><label class="ds-field__label" for="ea-en1">영문 성 <span class="ds-field__required" aria-hidden="true"></span></label></div><div class="ds-input" data-variant="outline" data-size="medium"><input class="ds-input__control" id="ea-en1" value="YBM"></div><div class="ds-field__footer"><p class="ds-field__help">여권과 같은 영문으로 적어 주세요.</p></div></div><div class="ds-field"><div class="ds-field__header"><label class="ds-field__label" for="ea-en2">영문 이름 <span class="ds-field__required" aria-hidden="true"></span></label></div><div class="ds-input" data-variant="outline" data-size="medium"><input class="ds-input__control" id="ea-en2" value="NET"></div></div><div class="ds-field"><div class="ds-field__header"><label class="ds-field__label" for="ea-phone">휴대폰</label></div><div class="ds-input" data-variant="outline" data-size="medium"><input class="ds-input__control" id="ea-phone" value="010-1234-5678"></div></div><div class="ds-field"><div class="ds-field__header"><label class="ds-field__label" for="ea-mail">이메일</label></div><div class="ds-input" data-variant="outline" data-size="medium"><input class="ds-input__control" id="ea-mail" value="ybm@example.com"></div></div></div><label class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control"><span class="ds-checkbox__label">[필수] 응시자 정보가 맞는지 확인했어요</span></label></section>
       <section class="ds-card tp-card" data-variant="subtle" data-size="small"><div class="tp-step-h"><span class="tp-step-no">6</span><h2 class="tp-h2">할인과 결제 수단</h2></div><div class="ds-field"><div class="ds-field__header"><label class="ds-field__label" for="ea-coupon">쿠폰</label></div><button type="button" class="ds-select" data-size="medium" id="ea-coupon" aria-haspopup="listbox" aria-expanded="false"><span class="ds-select__value">쓸 수 있는 쿠폰 1장</span></button></div><div class="ds-selectbox-group tp-sb4"><label class="ds-selectbox" data-layout="vertical"><i class="ds-icon ds-icon--credit-card" aria-hidden="true"></i><span class="ds-selectbox__texts"><span class="ds-selectbox__label">카드</span></span><span class="ds-radio" data-tone="neutral" data-size="medium"><input type="radio" class="ds-radio__control" name="pay" checked></span></label><label class="ds-selectbox" data-layout="vertical"><i class="ds-icon ds-icon--building" aria-hidden="true"></i><span class="ds-selectbox__texts"><span class="ds-selectbox__label">계좌 이체</span></span><span class="ds-radio" data-tone="neutral" data-size="medium"><input type="radio" class="ds-radio__control" name="pay"></span></label><label class="ds-selectbox" data-layout="vertical"><i class="ds-icon ds-icon--wallet" aria-hidden="true"></i><span class="ds-selectbox__texts"><span class="ds-selectbox__label">간편 결제</span></span><span class="ds-radio" data-tone="neutral" data-size="medium"><input type="radio" class="ds-radio__control" name="pay"></span></label><label class="ds-selectbox" data-layout="vertical"><i class="ds-icon ds-icon--smartphone" aria-hidden="true"></i><span class="ds-selectbox__texts"><span class="ds-selectbox__label">휴대폰</span></span><span class="ds-radio" data-tone="neutral" data-size="medium"><input type="radio" class="ds-radio__control" name="pay"></span></label></div></section>
     </div>
     <aside class="tp-aside-sticky">
-      <section class="ds-card tp-card" data-variant="subtle" data-size="small"><span class="tp-h3">신청 내용</span><div class="tp-stack" style="gap: var(--ybm-space-x2)"><div class="tp-kv"><span>시험</span><span>영어 말하기 시험</span></div><div class="tp-kv"><span>언어</span><span>영어</span></div><div class="tp-kv"><span>날짜</span><span>11월 18일 (수) 13:00</span></div><div class="tp-kv"><span>고사장</span><span>강남 시험장</span></div></div><hr class="ds-divider"><div class="tp-stack" style="gap: var(--ybm-space-x2)"><div class="tp-kv"><span>응시료</span><span class="tp-num">84,000원</span></div><div class="tp-kv"><span>쿠폰 할인</span><span class="tp-num">-8,400원</span></div></div><div class="tp-total"><span class="tp-h4">결제 금액</span><span class="tp-mid"><span class="tp-num">75,600원</span></span></div></section>
+      <section class="ds-card tp-card" data-variant="subtle" data-size="small"><span class="tp-h3">신청 내용</span><div class="tp-stack" style="gap: var(--ds-space-x2)"><div class="tp-kv"><span>시험</span><span>영어 말하기 시험</span></div><div class="tp-kv"><span>언어</span><span>영어</span></div><div class="tp-kv"><span>날짜</span><span>11월 18일 (수) 13:00</span></div><div class="tp-kv"><span>고사장</span><span>강남 시험장</span></div></div><hr class="ds-divider"><div class="tp-stack" style="gap: var(--ds-space-x2)"><div class="tp-kv"><span>응시료</span><span class="tp-num">84,000원</span></div><div class="tp-kv"><span>쿠폰 할인</span><span class="tp-num">-8,400원</span></div></div><div class="tp-total"><span class="tp-h4">결제 금액</span><span class="tp-mid"><span class="tp-num">75,600원</span></span></div></section>
       <button type="button" class="ds-btn" data-variant="brandSolid" data-size="large" data-width="fill">75,600원 결제하기</button>
       <p class="tp-caption" style="text-align:center">시험 3일 전까지는 전액 환불돼요</p>
     </aside>

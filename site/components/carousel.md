@@ -69,9 +69,9 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 | 변수 | 기본값 |
 | --- | --- |
-| `--ds-carousel-gap` | `var(--ybm-space-x2)` |
+| `--ds-carousel-gap` | `var(--ds-space-x2)` |
 | `--ds-carousel-padding` | `0px` |
-| `--ds-carousel-fade` | `var(--ybm-space-x1)` |
+| `--ds-carousel-fade` | `var(--ds-space-x1)` |
 | `--ds-carousel-fade-start` | `var(--ds-carousel-fade)` |
 | `--ds-carousel-fade-end` | `var(--ds-carousel-fade)` |
 

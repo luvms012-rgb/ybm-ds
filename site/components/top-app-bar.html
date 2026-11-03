@@ -9,9 +9,9 @@
 <script>try { var t = localStorage.getItem("ybm-site-theme"); if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.dataset.theme = "dark"; } catch (e) {}</script>
 <link rel="icon" href="../assets/logo-ybmnet.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../dist/ybm-ds.css">
-<link rel="stylesheet" href="../assets/site.css?v=ab6a4407">
+<link rel="stylesheet" href="../assets/site.css?v=f656f0f2">
 <script src="../../dist/ybm-ds.js" defer></script>
-<script src="../assets/site.js?v=ab6a4407" defer></script>
+<script src="../assets/site.js?v=f656f0f2" defer></script>
 </head>
 <body class="site">
 <a class="site-skip" href="#main">본문 바로가기</a>
@@ -182,7 +182,7 @@
       <div class="ds-appbar__main"><h1 class="ds-appbar__title">아주 긴 제목은 한 줄에서 말줄임으로 끝납니다</h1></div>
       <div class="ds-appbar__right"><button type="button" class="ds-appbar__button" aria-label="검색"><i class="ds-icon ds-icon--search" aria-hidden="true"></i></button><button type="button" class="ds-appbar__button" aria-label="메뉴" disabled><i class="ds-icon ds-icon--menu" aria-hidden="true"></i></button></div>
     </header>
-    <div style="width:375px;background:var(--ybm-color-palette-gray-700)">
+    <div style="width:375px;background:var(--ds-color-palette-gray-700)">
       <header class="ds-appbar" data-tone="transparent" data-gradient>
         <div class="ds-appbar__left"><button type="button" class="ds-appbar__button" aria-label="닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button></div>
         <div class="ds-appbar__main"><h1 class="ds-appbar__title">사진 위 막대</h1></div>
@@ -208,7 +208,7 @@
   &lt;div class=&quot;ds-appbar__main&quot;&gt;&lt;h1 class=&quot;ds-appbar__title&quot;&gt;아주 긴 제목은 한 줄에서 말줄임으로 끝납니다&lt;/h1&gt;&lt;/div&gt;
   &lt;div class=&quot;ds-appbar__right&quot;&gt;&lt;button type=&quot;button&quot; class=&quot;ds-appbar__button&quot; aria-label=&quot;검색&quot;&gt;&lt;i class=&quot;ds-icon ds-icon--search&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/button&gt;&lt;button type=&quot;button&quot; class=&quot;ds-appbar__button&quot; aria-label=&quot;메뉴&quot; disabled&gt;&lt;i class=&quot;ds-icon ds-icon--menu&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/button&gt;&lt;/div&gt;
 &lt;/header&gt;
-&lt;div style=&quot;width:375px;background:var(--ybm-color-palette-gray-700)&quot;&gt;
+&lt;div style=&quot;width:375px;background:var(--ds-color-palette-gray-700)&quot;&gt;
   &lt;header class=&quot;ds-appbar&quot; data-tone=&quot;transparent&quot; data-gradient&gt;
     &lt;div class=&quot;ds-appbar__left&quot;&gt;&lt;button type=&quot;button&quot; class=&quot;ds-appbar__button&quot; aria-label=&quot;닫기&quot;&gt;&lt;i class=&quot;ds-icon ds-icon--x&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/button&gt;&lt;/div&gt;
     &lt;div class=&quot;ds-appbar__main&quot;&gt;&lt;h1 class=&quot;ds-appbar__title&quot;&gt;사진 위 막대&lt;/h1&gt;&lt;/div&gt;
@@ -220,8 +220,8 @@
 </div>
 <h2 id="spec">규격<a class="site-anchor" href="#spec" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><h3>CSS 변수</h3><p>서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.</p><div class="ds-table-wrap"><table class="ds-table" data-density="compact">
 <thead><tr><th scope="col">변수</th><th scope="col">기본값</th></tr></thead>
-<tbody><tr><td><code>--ds-appbar-height</code></td><td><code>var(--ybm-space-x14)</code></td></tr>
-<tr><td><code>--ds-appbar-side</code></td><td><code>calc(var(--ybm-space-x11) * 2)</code></td></tr></tbody></table></div><h3>크기와 여백</h3><pre class="site-spec">theme(Figma) = data-platform: 기본 ios(제목 가운데) / &quot;android&quot;(제목 왼쪽)
+<tbody><tr><td><code>--ds-appbar-height</code></td><td><code>var(--ds-space-x14)</code></td></tr>
+<tr><td><code>--ds-appbar-side</code></td><td><code>calc(var(--ds-space-x11) * 2)</code></td></tr></tbody></table></div><h3>크기와 여백</h3><pre class="site-spec">theme(Figma) = data-platform: 기본 ios(제목 가운데) / &quot;android&quot;(제목 왼쪽)
 tone: 기본 layer / data-tone=&quot;transparent&quot;(사진 같은 배경 위, 글자와 아이콘 흰색) + data-gradient(가독성용 위쪽 그라데이션)
 titleLayout: 부제목을 넣으면 withSubtitle 모양이 된다
 Figma: 높이 x14 / 좌우 padding x1_5 / bg/layer-default

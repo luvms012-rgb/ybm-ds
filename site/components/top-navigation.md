@@ -58,7 +58,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 ```html
 <header class="ds-topnav" style="min-width:960px">
   <div class="ds-topnav__left">
-    <a class="ds-topnav__heading" href="#" aria-label="홈으로"><span style="display:grid;place-items:center;width:88px;height:28px;border-radius:var(--ybm-shape-xs);background:var(--ybm-color-bg-neutral);color:var(--ybm-color-fg-neutral-subtle);font-size:var(--ybm-font-size-t03-static);font-weight:var(--ybm-font-weight-semibold)">로고</span></a>
+    <a class="ds-topnav__heading" href="#" aria-label="홈으로"><span style="display:grid;place-items:center;width:88px;height:28px;border-radius:var(--ds-shape-xs);background:var(--ds-color-bg-neutral);color:var(--ds-color-fg-neutral-subtle);font-size:var(--ds-font-size-t03-static);font-weight:var(--ds-font-weight-semibold)">로고</span></a>
     <nav class="ds-topnav__menu" aria-label="주요 메뉴">
       <a class="ds-topnav__item" href="#" aria-current="page">홈</a>
       <a class="ds-topnav__item" href="#">소개</a>

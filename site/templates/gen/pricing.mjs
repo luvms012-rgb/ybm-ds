@@ -7,15 +7,15 @@ const { icon, btn, iconBtn, badge, card, head, secHead, field, input, checkbox, 
 const PR_CSS = FRAME_CSS + `
   .tp-pr-wrap { box-sizing: border-box; width: min(100%, 1200px); margin-inline: auto; }
   .tp-pr-narrow { box-sizing: border-box; width: min(100%, 720px); margin-inline: auto; }
-  .tp-pr-hero { display: flex; flex-direction: column; align-items: center; gap: var(--ybm-space-x3); text-align: center; }
-  .tp-pr-period { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: var(--ybm-space-x2); }
-  .tp-price { display: flex; align-items: baseline; gap: var(--ybm-space-x1); }
-  .tp-price__v { font-size: var(--ybm-font-size-t10); line-height: var(--ybm-line-height-t10); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
-  .tp-feat { display: flex; flex-direction: column; gap: var(--ybm-space-x2); margin: 0; padding: 0; list-style: none; }
-  .tp-feat li { display: flex; align-items: flex-start; gap: var(--ybm-space-x2); font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); }
+  .tp-pr-hero { display: flex; flex-direction: column; align-items: center; gap: var(--ds-space-x3); text-align: center; }
+  .tp-pr-period { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: var(--ds-space-x2); }
+  .tp-price { display: flex; align-items: baseline; gap: var(--ds-space-x1); }
+  .tp-price__v { font-size: var(--ds-font-size-t10); line-height: var(--ds-line-height-t10); font-weight: var(--ds-font-weight-bold); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+  .tp-feat { display: flex; flex-direction: column; gap: var(--ds-space-x2); margin: 0; padding: 0; list-style: none; }
+  .tp-feat li { display: flex; align-items: flex-start; gap: var(--ds-space-x2); font-size: var(--ds-font-size-t04); line-height: var(--ds-line-height-t04); }
   .tp-feat li > .ds-icon { flex: none; margin-top: 2px; --ds-icon-size: 16px; }
-  .tp-feat li[data-off] { color: var(--ybm-color-fg-neutral-subtle); }
-  .tp-notes { display: flex; flex-direction: column; gap: var(--ybm-space-x1_5); margin: 0; padding-inline-start: var(--ybm-space-x5); color: var(--ybm-color-fg-neutral-muted); font-size: var(--ybm-font-size-t03); line-height: var(--ybm-line-height-t03); }
+  .tp-feat li[data-off] { color: var(--ds-color-fg-neutral-subtle); }
+  .tp-notes { display: flex; flex-direction: column; gap: var(--ds-space-x1_5); margin: 0; padding-inline-start: var(--ds-space-x5); color: var(--ds-color-fg-neutral-muted); font-size: var(--ds-font-size-t03); line-height: var(--ds-line-height-t03); }
 `;
 const feats = (items) => `<ul class="tp-feat">${items.map((t) => (t.startsWith('-') ? `<li data-off>${icon('minus')}<span>${t.slice(1)}</span></li>` : `<li>${icon('check')}<span>${t}</span></li>`)).join('')}</ul>`;
 const ok = icon('check');
@@ -24,13 +24,13 @@ const no = '<span class="tp-caption" aria-label="없음">-</span>';
 /* 1. 요금제 비교 -------------------------------------------------- */
 const plans = () => {
   const css = PR_CSS + `
-  .tp-plans { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ybm-space-x4); }
+  .tp-plans { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ds-space-x4); }
   @media (min-width: 768px) { .tp-plans { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   @media (min-width: 1280px) { .tp-plans { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
-  .tp-plan.ds-card { gap: var(--ybm-space-x4); }
-  .tp-plan[data-pick].ds-card { box-shadow: inset 0 0 0 2px var(--ybm-color-stroke-neutral-contrast); }
+  .tp-plan.ds-card { gap: var(--ds-space-x4); }
+  .tp-plan[data-pick].ds-card { box-shadow: inset 0 0 0 2px var(--ds-color-stroke-neutral-contrast); }
   .tp-plan .ds-btn { margin-top: auto; }
-  .tp-plan__top { display: flex; flex-direction: column; gap: var(--ybm-space-x3); min-height: 0; }
+  .tp-plan__top { display: flex; flex-direction: column; gap: var(--ds-space-x3); min-height: 0; }
   .tp-pr [data-y] { display: none; }
   .tp-pr[data-period="y"] [data-m] { display: none; }
   .tp-pr[data-period="y"] [data-y] { display: revert; }
@@ -72,7 +72,7 @@ const plans = () => {
     ['세금계산서를 받을 수 있나요?', '팀 요금제는 결제할 때 사업자 정보를 넣으면 매달 세금계산서를 보내 드려요.'],
   ];
   const body = `<div class="tp-app"><main class="tp-content tp-pr" data-period="m">
-  <div class="tp-pr-wrap tp-stack" style="gap: var(--ybm-space-x10)">
+  <div class="tp-pr-wrap tp-stack" style="gap: var(--ds-space-x10)">
     <header class="tp-pr-hero">
       <h1 class="tp-h1">나에게 맞는 요금제를 골라 보세요</h1>
       <p class="tp-sub">무료로 시작하고 필요할 때 올리세요. 언제든 바꾸거나 해지할 수 있어요.</p>
@@ -97,21 +97,21 @@ document.addEventListener('click', function (e) { var b = e.target.closest('[dat
 /* 2. 구독 결제 ---------------------------------------------------- */
 const checkout = () => {
   const css = PR_CSS + `
-  .tp-sub-pay { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ybm-space-x8); }
-  @media (min-width: 1024px) { .tp-sub-pay { grid-template-columns: minmax(0, 1fr) 360px; align-items: start; } .tp-sub-pay__aside { position: sticky; top: var(--ybm-space-x6); } }
-  .tp-sub-form { display: flex; flex-direction: column; gap: var(--ybm-space-x5); min-width: 0; }
-  .tp-sub-form .ds-selectbox__label { display: inline-flex; flex-wrap: wrap; align-items: center; gap: var(--ybm-space-x2); }
-  .tp-pair { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ybm-space-x4); }
+  .tp-sub-pay { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ds-space-x8); }
+  @media (min-width: 1024px) { .tp-sub-pay { grid-template-columns: minmax(0, 1fr) 360px; align-items: start; } .tp-sub-pay__aside { position: sticky; top: var(--ds-space-x6); } }
+  .tp-sub-form { display: flex; flex-direction: column; gap: var(--ds-space-x5); min-width: 0; }
+  .tp-sub-form .ds-selectbox__label { display: inline-flex; flex-wrap: wrap; align-items: center; gap: var(--ds-space-x2); }
+  .tp-pair { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ds-space-x4); }
   @media (min-width: 560px) { .tp-pair { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-  .tp-coupon { display: flex; gap: var(--ybm-space-x2); }
+  .tp-coupon { display: flex; gap: var(--ds-space-x2); }
   .tp-coupon > .ds-input { flex: 1 1 auto; }
-  .tp-agree { display: flex; flex-direction: column; gap: var(--ybm-space-x1); padding-inline-start: var(--ybm-space-x7); }
+  .tp-agree { display: flex; flex-direction: column; gap: var(--ds-space-x1); padding-inline-start: var(--ds-space-x7); }
 `;
   const inp = (id, ph, attrs = '') => input(id, `placeholder="${esc(ph)}" ${attrs}`);
   const body = `<div class="tp-app"><main class="tp-content">
   <div class="tp-pr-wrap tp-sub-pay" style="max-width: 1080px">
     <div class="tp-sub-form">
-      <div class="tp-stack" style="gap: var(--ybm-space-x3)">${link('요금제 다시 고르기')}<h1 class="tp-h1">프로 요금제 시작하기</h1><p class="tp-sub">첫 7일은 무료예요. 무료 기간이 끝나기 하루 전에 알려 드려요.</p></div>
+      <div class="tp-stack" style="gap: var(--ds-space-x3)">${link('요금제 다시 고르기')}<h1 class="tp-h1">프로 요금제 시작하기</h1><p class="tp-sub">첫 7일은 무료예요. 무료 기간이 끝나기 하루 전에 알려 드려요.</p></div>
       ${divider()}
       <h2 class="tp-h3">결제 주기</h2>
       ${selectbox('cycle', [[`연 결제 ${badge('20% 할인', 'positive')}`, '월 7,900원, 1년치 94,800원을 한 번에 결제해요'], ['월 결제', '월 9,900원, 매달 같은 날 결제해요']], 0)}
@@ -120,10 +120,10 @@ const checkout = () => {
       <div class="tp-pair">${field('c-no', '카드 번호', inp('c-no', '0000 0000 0000 0000', 'inputmode="numeric"'), { required: true })}<div class="tp-pair">${field('c-exp', '유효 기간', inp('c-exp', 'MM/YY'), { required: true })}${field('c-birth', '생년월일 6자리', inp('c-birth', '000000', 'inputmode="numeric"'), { required: true })}</div></div>
       ${field('c-coupon', '할인 코드', `<div class="tp-coupon">${K.even(inp('c-coupon', '코드를 넣어 주세요') + btn('적용'))}</div>`)}
       <h2 class="tp-h3">약관 동의</h2>
-      <div class="tp-stack" style="gap: var(--ybm-space-x2)">${checkbox('모두 동의해요', { checked: true })}
+      <div class="tp-stack" style="gap: var(--ds-space-x2)">${checkbox('모두 동의해요', { checked: true })}
         <div class="tp-agree">${checkbox('(필수) 정기 결제에 동의해요', { checked: true, size: 'small' })}${checkbox('(필수) 이용 약관과 환불 규정을 확인했어요', { checked: true, size: 'small' })}${checkbox('(선택) 혜택 소식을 받아 볼게요', { checked: true, size: 'small' })}</div></div>
     </div>
-    <aside class="tp-sub-pay__aside tp-stack" style="gap: var(--ybm-space-x4)">
+    <aside class="tp-sub-pay__aside tp-stack" style="gap: var(--ds-space-x4)">
       ${card(`<div class="tp-between"><h2 class="tp-h3">결제 요약</h2>${badge('7일 무료', 'brand')}</div>
       <div class="tp-rows">
         <div class="tp-kv"><span>요금제</span><span>프로</span></div>
@@ -146,9 +146,9 @@ const checkout = () => {
 /* 3. 내 구독 ------------------------------------------------------ */
 const manage = () => {
   const css = PR_CSS + `
-  .tp-manage { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ybm-space-x4); }
+  .tp-manage { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ds-space-x4); }
   @media (min-width: 1024px) { .tp-manage { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); } }
-  .tp-cardmark { display: grid; place-items: center; flex: none; width: 48px; height: 32px; border-radius: var(--ybm-shape-xs); background: var(--ybm-color-bg-neutral); }
+  .tp-cardmark { display: grid; place-items: center; flex: none; width: 48px; height: 32px; border-radius: var(--ds-shape-xs); background: var(--ds-color-bg-neutral); }
 `;
   const hist = [
     ['2026.10.09', '프로 연 결제', '94,800원', badge('결제 완료', 'positive')],
@@ -174,7 +174,7 @@ const manage = () => {
       <p class="tp-caption">사용량은 매일 새벽 4시에 새로 계산해요.</p>`)}
     </div>
     <section class="tp-sec" aria-labelledby="pm">${secHead('결제 수단', { id: 'pm' })}
-      ${card(`<div class="tp-between"><div class="tp-row" style="gap: var(--ybm-space-x3)"><span class="tp-cardmark">${icon('credit-card')}</span><span class="tp-stack"><span class="tp-h4">신용카드 **** 4821</span><span class="tp-caption">유효 기간 08/29</span></span></div>${btn('바꾸기')}</div>`)}
+      ${card(`<div class="tp-between"><div class="tp-row" style="gap: var(--ds-space-x3)"><span class="tp-cardmark">${icon('credit-card')}</span><span class="tp-stack"><span class="tp-h4">신용카드 **** 4821</span><span class="tp-caption">유효 기간 08/29</span></span></div>${btn('바꾸기')}</div>`)}
     </section>
     <section class="tp-sec" aria-labelledby="hist">${secHead('결제 내역', { id: 'hist', tools: btn('전체 내려받기', { ic: 'download' }) })}
       <div class="tp-scroll-x">${K.table(['결제일', '내용', ['금액', 'right'], '상태', ['영수증', 'center']], hist, { caption: '결제 내역' })}</div>
@@ -189,13 +189,13 @@ const manage = () => {
 /* 4. 구독 해지 ---------------------------------------------------- */
 const cancel = () => {
   const css = PR_CSS + `
-  .tp-cancel { display: flex; flex-direction: column; gap: var(--ybm-space-x8); }
-  .tp-keep { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ybm-space-x3); }
+  .tp-cancel { display: flex; flex-direction: column; gap: var(--ds-space-x8); }
+  .tp-keep { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ds-space-x3); }
   @media (min-width: 768px) { .tp-keep { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-  .tp-keep__item { display: flex; flex-direction: column; gap: var(--ybm-space-x2); padding: var(--ybm-space-x4); border-radius: var(--ybm-shape-lg); background: var(--ybm-color-bg-neutral-subtle); box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-neutral-muted); }
+  .tp-keep__item { display: flex; flex-direction: column; gap: var(--ds-space-x2); padding: var(--ds-space-x4); border-radius: var(--ds-shape-lg); background: var(--ds-color-bg-neutral-subtle); box-shadow: inset 0 0 0 1px var(--ds-color-stroke-neutral-muted); }
   .tp-keep__item > .ds-icon { --ds-icon-size: 24px; }
-  .tp-offer.ds-card { background: var(--ybm-color-bg-neutral); box-shadow: none; }
-  .tp-cancel-acts { display: flex; flex-direction: column-reverse; gap: var(--ybm-space-x2); }
+  .tp-offer.ds-card { background: var(--ds-color-bg-neutral); box-shadow: none; }
+  .tp-cancel-acts { display: flex; flex-direction: column-reverse; gap: var(--ds-space-x2); }
   @media (min-width: 560px) { .tp-cancel-acts { flex-direction: row; justify-content: flex-end; } }
 `;
   const keep = [
@@ -205,7 +205,7 @@ const cancel = () => {
   ];
   const body = `<div class="tp-app"><main class="tp-content">
   <div class="tp-pr-narrow tp-cancel">
-    <div class="tp-stack" style="gap: var(--ybm-space-x3)">${link('내 구독으로 돌아가기')}<h1 class="tp-h1">구독을 해지하기 전에 확인해 주세요</h1><p class="tp-sub">지금 프로 요금제를 쓰고 있어요. 해지하면 2027.10.09에 무료 요금제로 바뀌어요.</p></div>
+    <div class="tp-stack" style="gap: var(--ds-space-x3)">${link('내 구독으로 돌아가기')}<h1 class="tp-h1">구독을 해지하기 전에 확인해 주세요</h1><p class="tp-sub">지금 프로 요금제를 쓰고 있어요. 해지하면 2027.10.09에 무료 요금제로 바뀌어요.</p></div>
     <section class="tp-sec" aria-labelledby="lose"><h2 class="tp-h3" id="lose">해지하면 이런 혜택을 쓸 수 없어요</h2>
       <div class="tp-keep">${keep.map(([ic, t, d]) => `<div class="tp-keep__item">${icon(ic)}<span class="tp-h4">${t}</span><span class="tp-sub">${d}</span></div>`).join('')}</div>
     </section>
@@ -213,7 +213,7 @@ const cancel = () => {
       ${radios('why', ['요금이 부담돼요', '자주 쓰지 않아요', '필요한 기능이 없어요', '다른 서비스로 옮겨요', '기타'], 0)}
       ${field('why-more', '더 알려 주실 내용 (선택)', textarea('why-more', 'rows="3" placeholder="더 나은 서비스를 만드는 데 쓸게요"'))}
     </section>
-    ${card(`<div class="tp-row" style="align-items: flex-start; gap: var(--ybm-space-x3)">${icon('sparkles', 'lg')}<div class="tp-stack" style="gap: var(--ybm-space-x2)"><h2 class="tp-h3">3개월 동안 40% 할인받고 계속 쓰기</h2><p class="tp-sub">요금이 부담된다면 다음 3개월은 월 4,740원에 쓸 수 있어요. 할인이 끝나면 원래 요금으로 돌아가요.</p></div></div>
+    ${card(`<div class="tp-row" style="align-items: flex-start; gap: var(--ds-space-x3)">${icon('sparkles', 'lg')}<div class="tp-stack" style="gap: var(--ds-space-x2)"><h2 class="tp-h3">3개월 동안 40% 할인받고 계속 쓰기</h2><p class="tp-sub">요금이 부담된다면 다음 3개월은 월 4,740원에 쓸 수 있어요. 할인이 끝나면 원래 요금으로 돌아가요.</p></div></div>
     <div>${btn('할인받고 계속 쓰기', { variant: 'neutralSolid', size: 'medium' })}</div>`, { cls: 'tp-offer' })}
     <section class="tp-sec" aria-labelledby="note"><h2 class="tp-h3" id="note">해지 전에 알아 두세요</h2>
       <ul class="tp-notes">

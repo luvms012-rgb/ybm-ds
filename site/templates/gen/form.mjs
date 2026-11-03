@@ -6,20 +6,20 @@ const req = (id, label, control, help = '') => field(id, label, control, { help,
 const sel = (id, v) => select(v, { id, size: 'medium' });
 
 const FORM_CSS = `
-  .tp-form { display: flex; flex-direction: column; gap: var(--ybm-space-x5); }
+  .tp-form { display: flex; flex-direction: column; gap: var(--ds-space-x5); }
   .tp-form .ds-field { min-width: 0; }
-  .tp-pair { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ybm-space-x4); }
+  .tp-pair { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ds-space-x4); }
   @media (min-width: 560px) { .tp-pair { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-  .tp-legend-t { font-size: var(--ybm-font-size-t05); line-height: var(--ybm-line-height-t05); font-weight: var(--ybm-font-weight-semibold); }
-  .tp-chips { display: flex; flex-wrap: wrap; gap: var(--ybm-space-x2); }
-  .tp-optrow { display: flex; gap: var(--ybm-space-x3); align-items: flex-start; padding: var(--ybm-space-x3) 0; }
-  .tp-optrow + .tp-optrow { box-shadow: inset 0 1px 0 var(--ybm-color-stroke-neutral-muted); }
-  .tp-footer-bar { display: flex; align-items: center; justify-content: space-between; gap: var(--ybm-space-x3); padding: var(--ybm-space-x4); box-shadow: inset 0 1px 0 var(--ybm-color-stroke-neutral-muted); background: var(--ybm-color-bg-layer-default); }
-  @media (min-width: 768px) { .tp-footer-bar { padding: var(--ybm-space-x4) var(--ybm-space-x6); } }
-  .tp-sum-line { display: flex; justify-content: space-between; gap: var(--ybm-space-x3); font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); }
-  .tp-sum-line > :first-child { color: var(--ybm-color-fg-neutral-muted); }
-  .tp-sum-total { display: flex; justify-content: space-between; font-size: var(--ybm-font-size-t05); line-height: var(--ybm-line-height-t05); font-weight: var(--ybm-font-weight-bold); }
-  .tp-item { display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: var(--ybm-space-x3); align-items: start; }
+  .tp-legend-t { font-size: var(--ds-font-size-t05); line-height: var(--ds-line-height-t05); font-weight: var(--ds-font-weight-semibold); }
+  .tp-chips { display: flex; flex-wrap: wrap; gap: var(--ds-space-x2); }
+  .tp-optrow { display: flex; gap: var(--ds-space-x3); align-items: flex-start; padding: var(--ds-space-x3) 0; }
+  .tp-optrow + .tp-optrow { box-shadow: inset 0 1px 0 var(--ds-color-stroke-neutral-muted); }
+  .tp-footer-bar { display: flex; align-items: center; justify-content: space-between; gap: var(--ds-space-x3); padding: var(--ds-space-x4); box-shadow: inset 0 1px 0 var(--ds-color-stroke-neutral-muted); background: var(--ds-color-bg-layer-default); }
+  @media (min-width: 768px) { .tp-footer-bar { padding: var(--ds-space-x4) var(--ds-space-x6); } }
+  .tp-sum-line { display: flex; justify-content: space-between; gap: var(--ds-space-x3); font-size: var(--ds-font-size-t04); line-height: var(--ds-line-height-t04); }
+  .tp-sum-line > :first-child { color: var(--ds-color-fg-neutral-muted); }
+  .tp-sum-total { display: flex; justify-content: space-between; font-size: var(--ds-font-size-t05); line-height: var(--ds-line-height-t05); font-weight: var(--ds-font-weight-bold); }
+  .tp-item { display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: var(--ds-space-x3); align-items: start; }
 `;
 const opt = (t, d, checked = false, type = 'checkbox', name = 'o') => `<label class="tp-optrow"><span class="ds-${type}" data-size="medium"><input type="${type}" class="ds-${type}__control" name="${name}"${checked ? ' checked' : ''} aria-label="${esc(t)}"></span><span class="tp-stack"><span>${t}</span><span class="tp-sub">${d}</span></span></label>`;
 const summary = (items, lines, total, title = '주문 요약') => card(`<div class="tp-between"><h2 class="tp-h3">${title}</h2>${badge(items.length + '개')}</div>${items.map(([n, d, p], i) => `<div class="tp-item">${thumb('1:1', '', K.photo('book', i, 240))}<div class="tp-stack"><div class="tp-between" style="align-items:flex-start;flex-wrap:nowrap"><span>${n}</span>${T(p)}</div><span class="tp-caption">${d}</span></div></div>`).join('')}${divider()}${lines.map(([k, v]) => `<div class="tp-sum-line"><span>${k}</span>${T(v)}</div>`).join('')}${divider()}<div class="tp-sum-total"><span>합계</span>${T(total)}</div>`);
@@ -28,8 +28,8 @@ const ITEMS = [['TOEIC 실전 모의고사 1000제', '교재 · 2권 세트', '3
 /* 1. 결제 폼 (긴 폼 + 고정 요약) -------------------------------- */
 const payment = () => {
   const css = FORM_CSS + `
-  .tp-pay { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ybm-space-x8); width: min(100%, 1080px); margin-inline: auto; }
-  @media (min-width: 1024px) { .tp-pay { grid-template-columns: minmax(0, 1fr) 360px; align-items: start; } .tp-pay__aside { position: sticky; top: var(--ybm-space-x6); } }
+  .tp-pay { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ds-space-x8); width: min(100%, 1080px); margin-inline: auto; }
+  @media (min-width: 1024px) { .tp-pay { grid-template-columns: minmax(0, 1fr) 360px; align-items: start; } .tp-pay__aside { position: sticky; top: var(--ds-space-x6); } }
 `;
   const body = `<div class="tp-app"><main class="tp-content">
   <div class="tp-pay">
@@ -51,7 +51,7 @@ const payment = () => {
       <div class="tp-pair">${req('f-card', '카드 번호', inp('f-card', '0000 0000 0000 0000', 'inputmode="numeric"'))}<div class="tp-pair">${req('f-exp', '유효 기간', inp('f-exp', 'MM/YY'))}${req('f-cvc', 'CVC', inp('f-cvc', '123'))}</div></div>
       ${checkbox('주문 내용을 확인했고 결제에 동의해요')}
     </div>
-    <aside class="tp-pay__aside tp-stack" style="gap: var(--ybm-space-x4)">
+    <aside class="tp-pay__aside tp-stack" style="gap: var(--ds-space-x4)">
       ${summary(ITEMS, [['상품 금액', '59,000원'], ['배송비', '3,000원'], ['할인', '-5,000원']], '57,000원')}
       ${btn('57,000원 결제하기', { variant: 'brandSolid', size: 'large', fill: true })}
       <p class="tp-caption" style="text-align:center">${icon('lock', 'sm')} 결제 정보는 저장하지 않아요</p>
@@ -64,10 +64,10 @@ const payment = () => {
 /* 2. 결제 단계 (장바구니 → 결제) -------------------------------- */
 const checkoutWizard = () => {
   const css = FORM_CSS + `
-  .tp-cw { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ybm-space-x8); width: min(100%, 1120px); margin-inline: auto; }
-  @media (min-width: 1024px) { .tp-cw { grid-template-columns: minmax(0, 1fr) 360px; align-items: start; } .tp-cw__aside { position: sticky; top: var(--ybm-space-x6); } }
-  .tp-cart { display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: var(--ybm-space-x4); padding-block: var(--ybm-space-x4); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); }
-  .tp-promo { display: flex; gap: var(--ybm-space-x2); align-items: flex-end; }
+  .tp-cw { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ds-space-x8); width: min(100%, 1120px); margin-inline: auto; }
+  @media (min-width: 1024px) { .tp-cw { grid-template-columns: minmax(0, 1fr) 360px; align-items: start; } .tp-cw__aside { position: sticky; top: var(--ds-space-x6); } }
+  .tp-cart { display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: var(--ds-space-x4); padding-block: var(--ds-space-x4); box-shadow: inset 0 -1px 0 var(--ds-color-stroke-neutral-muted); }
+  .tp-promo { display: flex; gap: var(--ds-space-x2); align-items: flex-end; }
   .tp-promo .ds-field { flex: 1 1 auto; }
 `;
   const qty = (n) => `<div class="ds-quantity" data-size="small"><button type="button" class="ds-quantity__btn" aria-label="수량 줄이기">${icon('minus')}</button><input class="ds-quantity__value" inputmode="numeric" value="${n}" aria-label="수량"><button type="button" class="ds-quantity__btn" aria-label="수량 늘리기">${icon('plus')}</button></div>`;
@@ -78,7 +78,7 @@ const checkoutWizard = () => {
       <div class="tp-row" style="justify-content: space-between; flex-wrap: wrap"><h1 class="tp-h1">결제</h1><span class="tp-row tp-sub">${icon('lock', 'sm')}안전한 결제</span></div>
       ${stepper(['장바구니', '배송', '결제', '확인'], 0, '결제 단계')}
       <h2 class="tp-h2">장바구니 확인</h2>
-      <div>${cart.map(([n, d, q, p], i) => `<div class="tp-cart">${thumb('1:1', '', K.photo('book', i, 240), 'md')}<div class="tp-stack" style="gap: var(--ybm-space-x2)"><div class="tp-between"><span class="tp-h4">${n}</span>${T(p)}</div><span class="tp-caption">${d}</span><div class="tp-row">${qty(q)}${btn('빼기', { variant: 'ghost', ic: 'trash', size: 'xsmall' })}</div></div></div>`).join('')}</div>
+      <div>${cart.map(([n, d, q, p], i) => `<div class="tp-cart">${thumb('1:1', '', K.photo('book', i, 240), 'md')}<div class="tp-stack" style="gap: var(--ds-space-x2)"><div class="tp-between"><span class="tp-h4">${n}</span>${T(p)}</div><span class="tp-caption">${d}</span><div class="tp-row">${qty(q)}${btn('빼기', { variant: 'ghost', ic: 'trash', size: 'xsmall' })}</div></div></div>`).join('')}</div>
       <div class="tp-promo">${field('promo', '할인 코드', inp('promo', 'WELCOME10'))}${btn('적용', { size: 'medium' })}</div>
       <div class="tp-between">${btn('쇼핑 계속하기', { variant: 'ghost', ic: 'chevron-left', size: 'medium' })}${btn('배송 정보 입력', { variant: 'brandSolid', size: 'medium', icEnd: 'arrow-right' })}</div>
     </div>
@@ -91,23 +91,23 @@ const checkoutWizard = () => {
 /* 3. 문의 폼 ----------------------------------------------------- */
 const contact = () => {
   const css = FORM_CSS + `
-  .tp-contact { display: flex; flex-direction: column; gap: var(--ybm-space-x8); width: min(100%, 800px); margin-inline: auto; padding-block: var(--ybm-space-x8); }
-  .tp-why { display: flex; flex-direction: column; gap: var(--ybm-space-x2); }
-  .tp-why > .ds-icon { color: var(--ybm-color-fg-brand); }
-  .tp-hero-t { font-size: var(--ybm-font-size-t12); line-height: var(--ybm-line-height-t12); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; }
+  .tp-contact { display: flex; flex-direction: column; gap: var(--ds-space-x8); width: min(100%, 800px); margin-inline: auto; padding-block: var(--ds-space-x8); }
+  .tp-why { display: flex; flex-direction: column; gap: var(--ds-space-x2); }
+  .tp-why > .ds-icon { color: var(--ds-color-fg-brand); }
+  .tp-hero-t { font-size: var(--ds-font-size-t12); line-height: var(--ds-line-height-t12); font-weight: var(--ds-font-weight-bold); letter-spacing: -0.02em; }
 `;
   const reasons = [['rocket', '빠르게 움직여요', '군더더기 없이 바로 일을 시작해요.'], ['users', '한 팀처럼 일해요', '담당자 한 명이 처음부터 끝까지 함께해요.'], ['shield-check', '결과로 말해요', '약속한 일정과 품질을 지켜요.']];
   const goals = ['단체 수강', '시험 접수 대행', '사내 어학 교육', '레벨 테스트', '교재 납품', '맞춤 강좌 제작', '학습 플랫폼 도입', '제휴', '기타'];
   const body = `<div class="tp-app"><main class="tp-content"><div class="tp-contact">
-  <div class="tp-stack" style="gap: var(--ybm-space-x3); text-align: center; align-items: center"><span class="tp-hero-t">도입 문의</span><span class="tp-sub" style="max-width: 520px">준비 중인 일을 간단히 알려 주면 담당자가 하루 안에 연락해 드려요.</span></div>
+  <div class="tp-stack" style="gap: var(--ds-space-x3); text-align: center; align-items: center"><span class="tp-hero-t">도입 문의</span><span class="tp-sub" style="max-width: 520px">준비 중인 일을 간단히 알려 주면 담당자가 하루 안에 연락해 드려요.</span></div>
   <div class="tp-g3">${reasons.map(([ic, t, d]) => card(`<div class="tp-why">${icon(ic, 'lg')}<span class="tp-h4">${t}</span><span class="tp-sub">${d}</span></div>`)).join('')}</div>
   <form class="tp-form" onsubmit="return false">
     <div class="tp-pair">${req('c-name', '이름', inp('c-name', '이름'))}${req('c-mail', '이메일', inp('c-mail', 'you@company.com', 'type="email"'))}</div>
     <div class="tp-pair">${field('c-com', '회사', inp('c-com', '회사 이름'))}${field('c-tel', '연락처', inp('c-tel', '전화번호', 'type="tel"'))}</div>
     ${divider()}
-    <fieldset class="tp-stack" style="border:0;padding:0;margin:0;gap:var(--ybm-space-x3)"><legend class="tp-legend-t" style="margin-bottom:var(--ybm-space-x3)">어떤 일이 필요하세요?</legend><div class="tp-chips">${goals.map((g, i) => chip(g, { on: i === 0 || i === 2 })).join('')}</div></fieldset>
+    <fieldset class="tp-stack" style="border:0;padding:0;margin:0;gap:var(--ds-space-x3)"><legend class="tp-legend-t" style="margin-bottom:var(--ds-space-x3)">어떤 일이 필요하세요?</legend><div class="tp-chips">${goals.map((g, i) => chip(g, { on: i === 0 || i === 2 })).join('')}</div></fieldset>
     <div class="tp-pair">${field('c-when', '언제쯤 시작하고 싶으세요?', sel('c-when', '한 달 안에'))}${field('c-budget', '예산은 어느 정도인가요?', sel('c-budget', '1,000만~3,000만원'))}</div>
-    <fieldset class="ds-field" style="border:0;padding:0;margin:0"><legend class="ds-field__label" style="margin-bottom:var(--ybm-space-x2)">어떻게 알게 되셨나요?</legend>${radios('src', ['소셜 미디어', '검색', '지인 추천', '행사·세미나', '기사', '기타'], 1)}</fieldset>
+    <fieldset class="ds-field" style="border:0;padding:0;margin:0"><legend class="ds-field__label" style="margin-bottom:var(--ds-space-x2)">어떻게 알게 되셨나요?</legend>${radios('src', ['소셜 미디어', '검색', '지인 추천', '행사·세미나', '기사', '기타'], 1)}</fieldset>
     ${field('c-msg', '더 하고 싶은 말', textarea('c-msg', 'rows="4" placeholder="무엇이든 편하게 적어 주세요"'))}
     ${checkbox('예산 결정 권한이 있어요')}
     ${btn('보내기', { variant: 'brandSolid', size: 'large', fill: true, attrs: 'type="submit"' }).replace('type="button" ', '')}
@@ -121,11 +121,11 @@ const contact = () => {
 const dialogWizard = () => {
   const css = FORM_CSS + `
   .tp-under { opacity: .55; pointer-events: none; }
-  .tp-modal { position: fixed; inset: 0; z-index: var(--ybm-z-dialog); display: grid; place-items: center; padding: var(--ybm-space-x4); background: var(--ybm-color-bg-overlay); }
-  .tp-modal .ds-dialog { position: static; display: flex; opacity: 1; transform: none; animation: none; width: min(560px, 100%); max-height: calc(100vh - var(--ybm-space-x8)); margin: 0; box-shadow: var(--ybm-elevation-5, 0 16px 48px rgb(0 0 0 / .24)); }
-  .tp-modal .ds-dialog__body { display: flex; flex-direction: column; gap: var(--ybm-space-x5); overflow: auto; }
-  .tp-dlg-steps { padding: 0 var(--ybm-space-x5) var(--ybm-space-x2); }
-  .tp-modal .ds-dialog__footer { flex-direction: row; justify-content: space-between; box-shadow: inset 0 1px 0 var(--ybm-color-stroke-neutral-muted); padding-block: var(--ybm-space-x4); }
+  .tp-modal { position: fixed; inset: 0; z-index: var(--ds-z-dialog); display: grid; place-items: center; padding: var(--ds-space-x4); background: var(--ds-color-bg-overlay); }
+  .tp-modal .ds-dialog { position: static; display: flex; opacity: 1; transform: none; animation: none; width: min(560px, 100%); max-height: calc(100vh - var(--ds-space-x8)); margin: 0; box-shadow: var(--ds-elevation-5, 0 16px 48px rgb(0 0 0 / .24)); }
+  .tp-modal .ds-dialog__body { display: flex; flex-direction: column; gap: var(--ds-space-x5); overflow: auto; }
+  .tp-dlg-steps { padding: 0 var(--ds-space-x5) var(--ds-space-x2); }
+  .tp-modal .ds-dialog__footer { flex-direction: row; justify-content: space-between; box-shadow: inset 0 1px 0 var(--ds-color-stroke-neutral-muted); padding-block: var(--ds-space-x4); }
   .tp-modal .ds-dialog__footer > .ds-btn { width: auto; }
 `;
   const secs = [['핵심 요약', '주요 숫자와 지난주 대비 변화', 1], ['파이프라인 단계', '단계별 건수와 금액', 1], ['새로 생긴 기회', '이번 주 새로 들어온 건', 0], ['잃은 기회', '사유와 금액', 0], ['담당자별 순위', '담당자별 성과', 1]];
@@ -150,9 +150,9 @@ const dialogWizard = () => {
 /* 5. 단계 폼 (가로 진행) ---------------------------------------- */
 const wizard = () => {
   const css = FORM_CSS + `
-  .tp-wz { display: flex; flex-direction: column; gap: var(--ybm-space-x6); width: min(100%, 640px); margin-inline: auto; }
-  .tp-wz-head { display: flex; flex-direction: column; gap: var(--ybm-space-x5); padding: var(--ybm-space-x5) var(--ybm-space-x4); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); }
-  @media (min-width: 768px) { .tp-wz-head { padding: var(--ybm-space-x6); } }
+  .tp-wz { display: flex; flex-direction: column; gap: var(--ds-space-x6); width: min(100%, 640px); margin-inline: auto; }
+  .tp-wz-head { display: flex; flex-direction: column; gap: var(--ds-space-x5); padding: var(--ds-space-x5) var(--ds-space-x4); box-shadow: inset 0 -1px 0 var(--ds-color-stroke-neutral-muted); }
+  @media (min-width: 768px) { .tp-wz-head { padding: var(--ds-space-x6); } }
 `;
   const body = `<div class="tp-app" style="min-height: 100vh">
 <header class="tp-wz-head"><div class="tp-between"><h1 class="tp-h1">워크스페이스 만들기</h1>${btn('나가기', { variant: 'ghost', ic: 'x' })}</div>${stepper(['워크스페이스', '팀원 초대', '요금제', '확인'], 0, '워크스페이스 만들기 단계')}</header>
@@ -175,21 +175,21 @@ const inlineWizard = () => {
   const css = FORM_CSS + `
   .tp-iw { width: min(100%, 720px); margin-inline: auto; }
   .tp-steps { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
-  .tp-step { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: var(--ybm-space-x4); }
+  .tp-step { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: var(--ds-space-x4); }
   .tp-step__rail { display: flex; flex-direction: column; align-items: center; }
-  .tp-step__rail::after { content: ""; flex: 1 1 auto; width: 2px; margin-block: var(--ybm-space-x1); background: var(--ybm-color-stroke-neutral-muted); }
+  .tp-step__rail::after { content: ""; flex: 1 1 auto; width: 2px; margin-block: var(--ds-space-x1); background: var(--ds-color-stroke-neutral-muted); }
   .tp-step:last-child .tp-step__rail::after { display: none; }
-  .tp-step__no { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--ybm-color-bg-neutral); color: var(--ybm-color-fg-neutral-muted); font-size: var(--ybm-font-size-t03); font-weight: var(--ybm-font-weight-semibold); }
-  .tp-step[data-state="done"] .tp-step__no { background: var(--ybm-color-bg-brand-solid); color: var(--ybm-color-fg-on-brand-solid); }
-  .tp-step[data-state="current"] .tp-step__no { box-shadow: inset 0 0 0 2px var(--ybm-color-stroke-brand-solid); background: var(--ybm-color-bg-layer-default); color: var(--ybm-color-fg-brand); }
-  .tp-step__main { display: flex; flex-direction: column; gap: var(--ybm-space-x4); padding-bottom: var(--ybm-space-x6); min-width: 0; }
-  .tp-step__head { display: flex; align-items: center; justify-content: space-between; gap: var(--ybm-space-x2); min-height: 28px; }
+  .tp-step__no { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--ds-color-bg-neutral); color: var(--ds-color-fg-neutral-muted); font-size: var(--ds-font-size-t03); font-weight: var(--ds-font-weight-semibold); }
+  .tp-step[data-state="done"] .tp-step__no { background: var(--ds-color-bg-brand-solid); color: var(--ds-color-fg-on-brand-solid); }
+  .tp-step[data-state="current"] .tp-step__no { box-shadow: inset 0 0 0 2px var(--ds-color-stroke-brand-solid); background: var(--ds-color-bg-layer-default); color: var(--ds-color-fg-brand); }
+  .tp-step__main { display: flex; flex-direction: column; gap: var(--ds-space-x4); padding-bottom: var(--ds-space-x6); min-width: 0; }
+  .tp-step__head { display: flex; align-items: center; justify-content: space-between; gap: var(--ds-space-x2); min-height: 28px; }
 `;
   const steps = [['저장소', 'done', '가나다/학습-웹 · main 브랜치'], ['실행 조건', 'current', ''], ['빌드 환경', '', ''], ['테스트', '', ''], ['배포 대상', '', ''], ['알림', '', ''], ['확인', '', '']];
   const cur = `<div class="tp-form">${field('ci-ev', '파이프라인을 돌릴 때', `<div>${[['풀 리퀘스트', '열린 풀 리퀘스트가 있는 브랜치에 올릴 때마다', 1], ['기본 브랜치에 올릴 때', 'main 브랜치에 합쳐질 때', 1], ['태그를 만들 때', 'v로 시작하는 태그를 만들 때', 0], ['정해진 시간', '매일 새벽 3시', 0]].map(([t, d, c]) => opt(t, d, !!c)).join('')}</div>`, { help: '고르는 일마다 빌드 시간이 들어요. 꼭 필요한 것부터 고르세요.' })}<div>${btn('다음', { variant: 'brandSolid', size: 'medium' })}</div></div>`;
   const body = `<div class="tp-app">
 ${head('지속 통합 설정', { sub: '앞의 두 단계만 답하면 나머지는 알아서 채워져요.' })}
-<main class="tp-content"><div class="tp-iw"><ol class="tp-steps" aria-label="지속 통합 설정 단계">${steps.map(([t, st, res], i) => `<li class="tp-step" data-state="${st}"${st === 'current' ? ' aria-current="step"' : ''}><div class="tp-step__rail"><span class="tp-step__no">${st === 'done' ? icon('check', 'sm') : i + 1}</span></div><div class="tp-step__main"><div class="tp-step__head"><span class="tp-stack"><span class="tp-h4"${st ? '' : ' style="color: var(--ybm-color-fg-neutral-muted)"'}>${t}</span>${res ? `<span class="tp-caption">${res}</span>` : ''}</span>${st === 'done' ? btn('고치기', { variant: 'ghost', size: 'xsmall', ic: 'pencil' }) : ''}</div>${st === 'current' ? cur : ''}</div></li>`).join('')}</ol></div></main>
+<main class="tp-content"><div class="tp-iw"><ol class="tp-steps" aria-label="지속 통합 설정 단계">${steps.map(([t, st, res], i) => `<li class="tp-step" data-state="${st}"${st === 'current' ? ' aria-current="step"' : ''}><div class="tp-step__rail"><span class="tp-step__no">${st === 'done' ? icon('check', 'sm') : i + 1}</span></div><div class="tp-step__main"><div class="tp-step__head"><span class="tp-stack"><span class="tp-h4"${st ? '' : ' style="color: var(--ds-color-fg-neutral-muted)"'}>${t}</span>${res ? `<span class="tp-caption">${res}</span>` : ''}</span>${st === 'done' ? btn('고치기', { variant: 'ghost', size: 'xsmall', ic: 'pencil' }) : ''}</div>${st === 'current' ? cur : ''}</div></li>`).join('')}</ol></div></main>
 </div>`;
   return { slug: 'form-wizard-inline', en: 'Inline Wizard', name: '펼치는 단계 폼', group: 'Form', desc: '모든 단계를 한 페이지에 펼쳐 놓고 차례로 입력하는 폼입니다. 끝난 단계는 입력한 내용만 짧게 남습니다.', css, body };
 };
@@ -197,17 +197,17 @@ ${head('지속 통합 설정', { sub: '앞의 두 단계만 답하면 나머지�
 /* 7. 두 칸 폼 --------------------------------------------------- */
 const twoColumn = () => {
   const css = FORM_CSS + `
-  .tp-tc { display: flex; flex-direction: column; gap: var(--ybm-space-x8); width: min(100%, 1120px); margin-inline: auto; padding-block: var(--ybm-space-x6); }
-  .tp-tc__top { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ybm-space-x6); align-items: center; }
+  .tp-tc { display: flex; flex-direction: column; gap: var(--ds-space-x8); width: min(100%, 1120px); margin-inline: auto; padding-block: var(--ds-space-x6); }
+  .tp-tc__top { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ds-space-x6); align-items: center; }
   @media (min-width: 1024px) { .tp-tc__top { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
-  .tp-hero-t { font-size: var(--ybm-font-size-t12); line-height: var(--ybm-line-height-t12); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; }
+  .tp-hero-t { font-size: var(--ds-font-size-t12); line-height: var(--ds-line-height-t12); font-weight: var(--ds-font-weight-bold); letter-spacing: -0.02em; }
 `;
   const topics = ['단체 수강', '시험 접수', '사내 교육', '맞춤 강좌', '학습 플랫폼', '제휴', '취재', '기타'];
   const body = `<div class="tp-app"><main class="tp-content"><div class="tp-tc">
-  <div class="tp-tc__top"><div class="tp-stack" style="gap: var(--ybm-space-x3)"><h1 class="tp-hero-t">무엇을 도와드릴까요?</h1><p class="tp-sub">하고 있는 일과 궁금한 점을 남겨 주면 1영업일 안에 답해 드려요.</p></div>${thumb('16:9', '', K.photo('work', 2, 1200), 'xl')}</div>
+  <div class="tp-tc__top"><div class="tp-stack" style="gap: var(--ds-space-x3)"><h1 class="tp-hero-t">무엇을 도와드릴까요?</h1><p class="tp-sub">하고 있는 일과 궁금한 점을 남겨 주면 1영업일 안에 답해 드려요.</p></div>${thumb('16:9', '', K.photo('work', 2, 1200), 'xl')}</div>
   <div class="tp-g2" style="align-items:start">
     ${card(`<h2 class="tp-h3">내 정보</h2><div class="tp-form">${req('t-name', '이름', inp('t-name', '이름'))}<div class="tp-pair">${req('t-mail', '이메일', inp('t-mail', '이메일', 'type="email"'))}${field('t-com', '회사', inp('t-com', '회사 이름'))}</div><div class="tp-pair">${field('t-job', '직함', inp('t-job', '직함'))}${field('t-tel', '연락처', inp('t-tel', '전화번호', 'type="tel"'))}</div></div>`, { size: '' })}
-    ${card(`<h2 class="tp-h3">문의 내용</h2><div class="tp-form"><fieldset class="tp-stack" style="border:0;padding:0;margin:0;gap:var(--ybm-space-x2)"><legend class="ds-field__label" style="margin-bottom:var(--ybm-space-x2)">무엇에 관한 문의인가요?</legend><div class="tp-chips">${topics.map((t, i) => chip(t, { on: i === 0 })).join('')}</div></fieldset>${field('t-budget', '예산 범위', sel('t-budget', '1,000만원 미만'))}${req('t-msg', '자세한 내용', textarea('t-msg', 'rows="5" placeholder="일정, 인원, 바라는 결과를 적어 주세요"'))}${btn('보내기', { variant: 'brandSolid', size: 'large', fill: true })}</div>`, { size: '' })}
+    ${card(`<h2 class="tp-h3">문의 내용</h2><div class="tp-form"><fieldset class="tp-stack" style="border:0;padding:0;margin:0;gap:var(--ds-space-x2)"><legend class="ds-field__label" style="margin-bottom:var(--ds-space-x2)">무엇에 관한 문의인가요?</legend><div class="tp-chips">${topics.map((t, i) => chip(t, { on: i === 0 })).join('')}</div></fieldset>${field('t-budget', '예산 범위', sel('t-budget', '1,000만원 미만'))}${req('t-msg', '자세한 내용', textarea('t-msg', 'rows="5" placeholder="일정, 인원, 바라는 결과를 적어 주세요"'))}${btn('보내기', { variant: 'brandSolid', size: 'large', fill: true })}</div>`, { size: '' })}
   </div>
   ${divider()}
   <div class="tp-g4">${[['일반 문의', 'hello@company.com'], ['기업 영업', 'sales@company.com'], ['언론', 'press@company.com'], ['고객 지원', 'help@company.com']].map(([t, m]) => `<div class="tp-stack"><span class="tp-h4">${t}</span>${link(m, 'mailto:' + m)}</div>`).join('')}</div>
@@ -220,11 +220,11 @@ const vertical = () => {
   const css = FORM_CSS + `
   .tp-vw { display: grid; flex: 1 1 auto; grid-template-columns: minmax(0, 1fr); }
   @media (min-width: 1024px) { .tp-vw { grid-template-columns: 260px minmax(0, 1fr) 320px; } }
-  .tp-vw__steps { padding: var(--ybm-space-x5) var(--ybm-space-x4); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); }
-  @media (min-width: 1024px) { .tp-vw__steps { padding: var(--ybm-space-x6); box-shadow: inset -1px 0 0 var(--ybm-color-stroke-neutral-muted); } .tp-vw__steps .ds-stepper { position: sticky; top: var(--ybm-space-x6); } }
-  .tp-vw__main { display: flex; flex-direction: column; gap: var(--ybm-space-x6); width: min(100%, 640px); margin-inline: auto; padding: var(--ybm-space-x6) var(--ybm-space-x4) var(--ybm-space-x12); }
+  .tp-vw__steps { padding: var(--ds-space-x5) var(--ds-space-x4); box-shadow: inset 0 -1px 0 var(--ds-color-stroke-neutral-muted); }
+  @media (min-width: 1024px) { .tp-vw__steps { padding: var(--ds-space-x6); box-shadow: inset -1px 0 0 var(--ds-color-stroke-neutral-muted); } .tp-vw__steps .ds-stepper { position: sticky; top: var(--ds-space-x6); } }
+  .tp-vw__main { display: flex; flex-direction: column; gap: var(--ds-space-x6); width: min(100%, 640px); margin-inline: auto; padding: var(--ds-space-x6) var(--ds-space-x4) var(--ds-space-x12); }
   .tp-vw__help { display: none; }
-  @media (min-width: 1024px) { .tp-vw__help { display: flex; flex-direction: column; gap: var(--ybm-space-x4); padding: var(--ybm-space-x6); box-shadow: inset 1px 0 0 var(--ybm-color-stroke-neutral-muted); } }
+  @media (min-width: 1024px) { .tp-vw__help { display: flex; flex-direction: column; gap: var(--ds-space-x4); padding: var(--ds-space-x6); box-shadow: inset 1px 0 0 var(--ds-color-stroke-neutral-muted); } }
   .tp-num-input { max-width: 160px; }
 `;
   const body = `<div class="tp-app">

@@ -38,8 +38,8 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 | 변수 | 기본값 |
 | --- | --- |
-| `--ds-link-color` | `var(--ybm-color-fg-neutral-subtle)` |
-| `--ds-link-color-hover` | `var(--ybm-color-fg-neutral)` |
+| `--ds-link-color` | `var(--ds-color-fg-neutral-subtle)` |
+| `--ds-link-color-hover` | `var(--ds-color-fg-neutral)` |
 
 ### 크기와 여백
 

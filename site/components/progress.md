@@ -46,8 +46,8 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | 변수 | 기본값 |
 | --- | --- |
 | `--ds-progress-value` | `0%` |
-| `--ds-progress-track` | `var(--ybm-color-palette-brand-200)` |
-| `--ds-progress-range` | `var(--ybm-color-bg-brand-solid)` |
+| `--ds-progress-track` | `var(--ds-color-palette-brand-200)` |
+| `--ds-progress-range` | `var(--ds-color-bg-brand-solid)` |
 
 ### 크기와 여백
 

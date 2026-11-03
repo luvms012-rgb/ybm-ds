@@ -74,8 +74,8 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | 변수 | 기본값 |
 | --- | --- |
 | `--ds-selectbox-columns` | `1` |
-| `--ds-selectbox-line` | `var(--ybm-color-stroke-neutral-weak)` |
-| `--ds-selectbox-bg` | `var(--ybm-color-bg-layer-default)` |
+| `--ds-selectbox-line` | `var(--ds-color-stroke-neutral-weak)` |
+| `--ds-selectbox-bg` | `var(--ds-color-bg-layer-default)` |
 
 ### 크기와 여백
 

@@ -15,8 +15,8 @@ const analytics = () => {
   const events = [['page_view', 18420, '12,300', '4,920'], ['sign_up', 9210, '6,840', '2,370'], ['add_to_cart', 7330, '5,120', '2,210'], ['purchase', 4210, '3,560', '650'], ['share', 2180, '1,940', '240'], ['search', 1840, '1,510', '330']];
   const mx = (a) => Math.max(...a.map((r) => r[1]));
   const css = `
-  .tp-demo { display: flex; flex-direction: column; gap: var(--ybm-space-x3); }
-  .tp-demo__rows { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: var(--ybm-space-x2) var(--ybm-space-x4); }
+  .tp-demo { display: flex; flex-direction: column; gap: var(--ds-space-x3); }
+  .tp-demo__rows { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: var(--ds-space-x2) var(--ds-space-x4); }
 `;
   const body = `<div class="tp-app">
 <main class="tp-content">
@@ -48,15 +48,15 @@ const progressDash = () => {
   const ms = [['기획 확정', 0, 12, 'positive'], ['디자인 시스템 적용', 8, 34, 'positive'], ['수강 결제 개편', 20, 52, 'warning'], ['학습 기록 API', 30, 58, 'critical'], ['앱 출시 준비', 48, 78, 'informative'], ['QA와 접근성 점검', 60, 84, 'informative'], ['정식 출시', 84, 90, 'neutral']];
   const ws = [['핵심 플랫폼', '개발', '김서준', 82, '4월 21일', ['순항', 'positive']], ['결제', '개발', '이하린', 54, '5월 9일', ['위험', 'warning']], ['학습 기록', '개발', '박도윤', 31, '5월 16일', ['막힘', 'critical']], ['앱', '출시', '최지아', 46, '6월 2일', ['순항', 'positive']], ['디자인', '디자인', '정유나', 90, '4월 4일', ['완료', 'neutral']], ['QA', '검증', '한지호', 18, '6월 13일', ['순항', 'positive']]];
   const W = 1100, today = 46;
-  const gantt = `<svg class="tp-chart" viewBox="0 0 ${W} ${ms.length * 36 + 30}" role="img" aria-label="마일스톤 일정">${[0, 15, 30, 45, 60, 75, 90].map((d) => `<line class="tp-grid-line" x1="${180 + (d / 90) * (W - 190)}" x2="${180 + (d / 90) * (W - 190)}" y1="0" y2="${ms.length * 36}"/><text x="${180 + (d / 90) * (W - 190)}" y="${ms.length * 36 + 20}" text-anchor="middle">${d}일</text>`).join('')}${ms.map(([n, a, b, t], i) => `<text x="0" y="${i * 36 + 23}" style="fill:var(--ybm-color-fg-neutral);font-size:13px">${n}</text><rect x="${180 + (a / 90) * (W - 190)}" y="${i * 36 + 8}" width="${((b - a) / 90) * (W - 190)}" height="20" rx="4" fill="var(--ybm-color-fg-${t === 'neutral' ? 'neutral-subtle' : t})" data-tip="${n}|${a}일 ~ ${b}일"/>`).join('')}<line x1="${180 + (today / 90) * (W - 190)}" x2="${180 + (today / 90) * (W - 190)}" y1="0" y2="${ms.length * 36}" stroke="var(--ybm-color-fg-neutral)" stroke-dasharray="4 4"/></svg>`;
+  const gantt = `<svg class="tp-chart" viewBox="0 0 ${W} ${ms.length * 36 + 30}" role="img" aria-label="마일스톤 일정">${[0, 15, 30, 45, 60, 75, 90].map((d) => `<line class="tp-grid-line" x1="${180 + (d / 90) * (W - 190)}" x2="${180 + (d / 90) * (W - 190)}" y1="0" y2="${ms.length * 36}"/><text x="${180 + (d / 90) * (W - 190)}" y="${ms.length * 36 + 20}" text-anchor="middle">${d}일</text>`).join('')}${ms.map(([n, a, b, t], i) => `<text x="0" y="${i * 36 + 23}" style="fill:var(--ds-color-fg-neutral);font-size:13px">${n}</text><rect x="${180 + (a / 90) * (W - 190)}" y="${i * 36 + 8}" width="${((b - a) / 90) * (W - 190)}" height="20" rx="4" fill="var(--ds-color-fg-${t === 'neutral' ? 'neutral-subtle' : t})" data-tip="${n}|${a}일 ~ ${b}일"/>`).join('')}<line x1="${180 + (today / 90) * (W - 190)}" x2="${180 + (today / 90) * (W - 190)}" y1="0" y2="${ms.length * 36}" stroke="var(--ds-color-fg-neutral)" stroke-dasharray="4 4"/></svg>`;
   const body = `<div class="tp-app">
 ${head('새 학습 앱 출시', { sub: `목표 출시일 2026년 6월 30일 · ${badge('막힘 1건', 'critical')}`, tools: `${segmented(['기획', '개발', '검증', '출시'], 1, '진행 단계')}${btn('보고서', { ic: 'file-text' })}` })}
 <main class="tp-content">
   <section class="tp-sec" aria-labelledby="s-ms">${secHead('마일스톤 일정', { id: 's-ms', sub: '프로젝트 0~90일 · 점선이 오늘' })}
-    ${card(`<div class="tp-scroll-x">${gantt}</div>${legend([['순항', 'var(--ybm-color-fg-positive)'], ['위험', 'var(--ybm-color-fg-warning)'], ['막힘', 'var(--ybm-color-fg-critical)'], ['예정', 'var(--ybm-color-fg-informative)']])}`)}
+    ${card(`<div class="tp-scroll-x">${gantt}</div>${legend([['순항', 'var(--ds-color-fg-positive)'], ['위험', 'var(--ds-color-fg-warning)'], ['막힘', 'var(--ds-color-fg-critical)'], ['예정', 'var(--ds-color-fg-informative)']])}`)}
   </section>
   <div class="tp-g3">
-    ${card(`<div class="tp-stack"><h2 class="tp-h3">전체 진행</h2><span class="tp-sub">할 일 148개 · 320포인트</span></div><div class="tp-row" style="gap: var(--ybm-space-x6); flex-wrap: wrap">${donut([['완료', 62, C(0)], ['진행', 24, C(1)], ['검토', 9, C(2)], ['남음', 53, 'var(--ybm-color-bg-neutral)']], { size: 140, center: '42%', sub: '완료' })}${legend([['완료', 0, 62], ['진행', 1, 24], ['검토', 2, 9], ['남음', 'var(--ybm-color-bg-neutral)', 53]])}</div>`)}
+    ${card(`<div class="tp-stack"><h2 class="tp-h3">전체 진행</h2><span class="tp-sub">할 일 148개 · 320포인트</span></div><div class="tp-row" style="gap: var(--ds-space-x6); flex-wrap: wrap">${donut([['완료', 62, C(0)], ['진행', 24, C(1)], ['검토', 9, C(2)], ['남음', 53, 'var(--ds-color-bg-neutral)']], { size: 140, center: '42%', sub: '완료' })}${legend([['완료', 0, 62], ['진행', 1, 24], ['검토', 2, 9], ['남음', 'var(--ds-color-bg-neutral)', 53]])}</div>`)}
     ${card(`<div class="tp-stack"><h2 class="tp-h3">이번 주 처리량</h2><span class="tp-sub">닫힌 할 일 · 최근 8주</span></div>${barChart([[12], [18], [15], [22], [19], [24], [17], [21]], { w: 420, h: 180, x: ['1', '2', '3', '4', '5', '6', '7', '8'], label: '주별 처리량' })}`)}
     ${card(`<div class="tp-stack"><h2 class="tp-h3">위험 요소</h2><span class="tp-sub">해결이 필요한 3건</span></div>${list([listItem('학습 기록 API 응답 지연', { sub: '박도윤 · 4일째', prefix: dot('critical'), size: 'small' }), listItem('결제 대행사 계약 검토', { sub: '이하린 · 법무 검토 중', prefix: dot('warning'), size: 'small' }), listItem('앱 심사 일정 미확정', { sub: '최지아 · 다음 주 확인', prefix: dot('warning'), size: 'small' })])}`)}
   </div>
@@ -77,35 +77,35 @@ const monitoring = () => {
   const brk = [['critical', '검색', '서울 · 서버 16대 · 4.1k rpm', '1180ms', '5.8%'], ['warning', '결제 API', '서울 · 서버 24대 · 9.2k rpm', '512ms', '2.1%'], ['warning', '이미지 CDN', '도쿄 · 서버 30대 · 14.8k rpm', '402ms', '1.6%'], ['positive', '알림', '싱가포르 · 서버 6대 · 1.2k rpm', '268ms', '0.5%'], ['positive', '인증', '서울 · 서버 12대 · 4.0k rpm', '236ms', '0.4%']];
   const css = `
   .tp-uptime { display: grid; grid-template-columns: repeat(90, minmax(0, 1fr)); gap: 2px; height: 28px; }
-  .tp-uptime span { border-radius: 2px; background: var(--ybm-color-bg-positive-solid); }
-  .tp-uptime span[data-s="warn"] { background: var(--ybm-color-bg-warning-solid); }
-  .tp-uptime span[data-s="down"] { background: var(--ybm-color-bg-critical-solid); }
-  .tp-svc { display: flex; flex-direction: column; gap: var(--ybm-space-x2); }
-  .tp-svc + .tp-svc { padding-top: var(--ybm-space-x3); box-shadow: inset 0 1px 0 var(--ybm-color-stroke-neutral-muted); }
-  .tp-alert { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: var(--ybm-space-x1) var(--ybm-space-x2); align-items: start; padding-block: var(--ybm-space-x2_5); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); }
+  .tp-uptime span { border-radius: 2px; background: var(--ds-color-bg-positive-solid); }
+  .tp-uptime span[data-s="warn"] { background: var(--ds-color-bg-warning-solid); }
+  .tp-uptime span[data-s="down"] { background: var(--ds-color-bg-critical-solid); }
+  .tp-svc { display: flex; flex-direction: column; gap: var(--ds-space-x2); }
+  .tp-svc + .tp-svc { padding-top: var(--ds-space-x3); box-shadow: inset 0 1px 0 var(--ds-color-stroke-neutral-muted); }
+  .tp-alert { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: var(--ds-space-x1) var(--ds-space-x2); align-items: start; padding-block: var(--ds-space-x2_5); box-shadow: inset 0 -1px 0 var(--ds-color-stroke-neutral-muted); }
   .tp-alert .ds-statusdot { margin-top: 6px; }
-  .tp-alert__end { display: flex; flex-direction: column; align-items: flex-end; gap: var(--ybm-space-x1); }
+  .tp-alert__end { display: flex; flex-direction: column; align-items: flex-end; gap: var(--ds-space-x1); }
 `;
   const body = `<div class="tp-app">
 ${head('서비스 상태 모니터', { sub: `<span class="tp-row">${dot('positive', '실시간')}11월 1일 오후 6:15 업데이트</span>`, tools: `${segmented(['1시간', '1일', '7일'], 1, '시간 범위')}${select('운영', { id: 'f-env', aria: '환경' })}${select('모든 지역', { id: 'f-region', aria: '지역' })}` })}
 <div class="tp-body tp-body--panel">
 <main class="tp-content">
-  <div class="tp-g4">${tiles.map(([t, l, v, d], i) => kpi(l, v, { d, lead: dot(t, l), chart: spark(walk(160 + i, 48, 40, 10, { min: 5 }), `var(--ybm-color-fg-${t})`, { h: 36, label: l + ' 추이' }) })).join('')}</div>
+  <div class="tp-g4">${tiles.map(([t, l, v, d], i) => kpi(l, v, { d, lead: dot(t, l), chart: spark(walk(160 + i, 48, 40, 10, { min: 5 }), `var(--ds-color-fg-${t})`, { h: 36, label: l + ' 추이' }) })).join('')}</div>
   <div class="tp-g2">
     ${card(`<div class="tp-stack"><h2 class="tp-h3">응답 시간</h2><span class="tp-sub">모든 서비스의 백분위 응답 시간 (ms)</span></div>${lineChart(lat, { w: 520, h: 220, x: ['00:00', '06:00', '12:00', '18:00', '23:50'], label: '응답 시간 추이' })}${legend(lat.map((s, i) => [s.name, i]))}`)}
     ${card(`<div class="tp-stack"><h2 class="tp-h3">지역별 요청량</h2><span class="tp-sub">분당 요청 수 (rpm)</span></div>${lineChart(vol, { w: 520, h: 220, x: ['00:00', '06:00', '12:00', '18:00', '23:50'], label: '지역별 요청량 추이' })}${legend(vol.map((s, i) => [s.name, i]))}`)}
   </div>
   ${divider()}
-  <section class="tp-sec" aria-labelledby="s-all">${secHead('모든 서비스', { id: 's-all', sub: '최근 90일 일별 가동 · 운영 · 모든 지역', tools: legend([['정상', 'var(--ybm-color-bg-positive-solid)'], ['저하', 'var(--ybm-color-bg-warning-solid)'], ['중단', 'var(--ybm-color-bg-critical-solid)']]) })}
+  <section class="tp-sec" aria-labelledby="s-all">${secHead('모든 서비스', { id: 's-all', sub: '최근 90일 일별 가동 · 운영 · 모든 지역', tools: legend([['정상', 'var(--ds-color-bg-positive-solid)'], ['저하', 'var(--ds-color-bg-warning-solid)'], ['중단', 'var(--ds-color-bg-critical-solid)']]) })}
     ${card(svc.map(([t, n, u, b], i) => `<div class="tp-svc"><div class="tp-between"><span class="tp-row">${dot(t, n)}<h3 class="tp-h4">${n}</h3></span><span class="tp-sub tp-num">가동률 ${u}</span></div>${strip(170 + i, b)}</div>`).join(''))}
   </section>
 </main>
 <aside class="tp-panel" aria-label="알림과 서비스 요약">
   <section class="tp-sec" aria-labelledby="s-al">${secHead(`<span class="tp-row">${icon('triangle-alert')}활성 알림</span>`, { id: 's-al', cls: 'tp-h3', tools: badge('3건 발생', 'critical') })}<span class="tp-caption">최근 24시간 6건 · 최신순</span>
-    <div>${alerts.map(([t, n, w, st, time]) => `<div class="tp-alert">${dot(t, st)}<div class="tp-stack"><span class="tp-h4" style="font-weight:var(--ybm-font-weight-medium)">${n}</span><span class="tp-caption">${w}</span></div><div class="tp-alert__end">${badge(st, t === 'positive' ? 'positive' : t === 'warning' ? 'warning' : 'critical')}<span class="tp-caption">${time}</span></div></div>`).join('')}</div>
+    <div>${alerts.map(([t, n, w, st, time]) => `<div class="tp-alert">${dot(t, st)}<div class="tp-stack"><span class="tp-h4" style="font-weight:var(--ds-font-weight-medium)">${n}</span><span class="tp-caption">${w}</span></div><div class="tp-alert__end">${badge(st, t === 'positive' ? 'positive' : t === 'warning' ? 'warning' : 'critical')}<span class="tp-caption">${time}</span></div></div>`).join('')}</div>
   </section>
   <section class="tp-sec" aria-labelledby="s-br">${secHead(`<span class="tp-row">${icon('monitor')}서비스별 현황</span>`, { id: 's-br', cls: 'tp-h3', tools: badge('10') })}<span class="tp-caption">운영 · 모든 지역</span>
-    <div>${brk.map(([t, n, w, p, e]) => `<div class="tp-alert">${dot(t, n)}<div class="tp-stack"><span class="tp-h4" style="font-weight:var(--ybm-font-weight-medium)">${n}</span><span class="tp-caption">${w}</span></div><div class="tp-alert__end"><span class="tp-num tp-h4">p99 ${p}</span>${badge(e, t === 'positive' ? 'positive' : t === 'warning' ? 'warning' : 'critical')}</div></div>`).join('')}</div>
+    <div>${brk.map(([t, n, w, p, e]) => `<div class="tp-alert">${dot(t, n)}<div class="tp-stack"><span class="tp-h4" style="font-weight:var(--ds-font-weight-medium)">${n}</span><span class="tp-caption">${w}</span></div><div class="tp-alert__end"><span class="tp-num tp-h4">p99 ${p}</span>${badge(e, t === 'positive' ? 'positive' : t === 'warning' ? 'warning' : 'critical')}</div></div>`).join('')}</div>
   </section>
 </aside>
 </div>

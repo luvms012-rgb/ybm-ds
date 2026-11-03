@@ -84,7 +84,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | 변수 | 기본값 |
 | --- | --- |
 | `--ds-popover-width` | `320px` |
-| `--ds-popover-gap` | `var(--ybm-space-x2)` |
+| `--ds-popover-gap` | `var(--ds-space-x2)` |
 
 ### 크기와 여백
 

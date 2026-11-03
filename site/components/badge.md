@@ -57,8 +57,8 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 | 변수 | 기본값 |
 | --- | --- |
-| `--ds-badge-bg` | `var(--ybm-color-bg-neutral)` |
-| `--ds-badge-fg` | `var(--ybm-color-fg-neutral-muted)` |
+| `--ds-badge-bg` | `var(--ds-color-bg-neutral)` |
+| `--ds-badge-fg` | `var(--ds-color-fg-neutral-muted)` |
 | `--ds-badge-line` | `transparent` |
 
 ### 크기와 여백

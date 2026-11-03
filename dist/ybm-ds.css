@@ -10,17 +10,17 @@
        .signup-cta .ds-btn { … }   처럼 평범하게 써도 DS 를 안전하게 덮어쓸 수 있고
      !important 나 선택자 길이 경쟁이 필요 없다.
 
-     ybm.tokens     색·간격·타이포 변수
-     ybm.base       리셋·폰트·접근성
-     ybm.icons      Lucide 아이콘
-     ybm.components .ds-* 컴포넌트
-     ybm.utilities  .u-* 1회성 유틸리티 (가장 마지막 → 컴포넌트보다 우선)
+     ds.tokens     색·간격·타이포 변수
+     ds.base       리셋·폰트·접근성
+     ds.icons      Lucide 아이콘
+     ds.components .ds-* 컴포넌트
+     ds.utilities  .u-* 1회성 유틸리티 (가장 마지막 → 컴포넌트보다 우선)
    ========================================================================== */
 
-@layer ybm.tokens, ybm.base, ybm.icons, ybm.components, ybm.utilities;
+@layer ds.tokens, ds.base, ds.icons, ds.components, ds.utilities;
 
-@import url("tokens.css") layer(ybm.tokens);
-@import url("base.css") layer(ybm.base);
-@import url("icons.css") layer(ybm.icons);
-@import url("components.css") layer(ybm.components);
-@import url("utilities.css") layer(ybm.utilities);
+@import url("tokens.css") layer(ds.tokens);
+@import url("base.css") layer(ds.base);
+@import url("icons.css") layer(ds.icons);
+@import url("components.css") layer(ds.components);
+@import url("utilities.css") layer(ds.utilities);

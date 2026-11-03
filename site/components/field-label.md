@@ -67,8 +67,8 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 | 변수 | 기본값 |
 | --- | --- |
-| `--ds-field-gap` | `var(--ybm-space-x2)` |
-| `--ds-field-label-weight` | `var(--ybm-font-weight-medium)` |
+| `--ds-field-gap` | `var(--ds-space-x2)` |
+| `--ds-field-label-weight` | `var(--ds-font-weight-medium)` |
 
 ### 크기와 여백
 

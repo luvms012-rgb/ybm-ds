@@ -38,7 +38,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 ## 예시
 
 ```html
-<span>남은 시간 <time class="ds-timer" id="pv-timer-end" style="font-size:var(--ybm-font-size-t07);line-height:var(--ybm-line-height-t07);font-weight:var(--ybm-font-weight-bold);color:var(--ybm-color-fg-neutral)">0:00</time></span>
+<span>남은 시간 <time class="ds-timer" id="pv-timer-end" style="font-size:var(--ds-font-size-t07);line-height:var(--ds-line-height-t07);font-weight:var(--ds-font-weight-bold);color:var(--ds-color-fg-neutral)">0:00</time></span>
 <span>흐른 시간 <time class="ds-timer" id="pv-timer-start" data-format="elapsed">0초</time></span>
 ```
 

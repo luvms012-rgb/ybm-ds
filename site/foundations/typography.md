@@ -6,7 +6,7 @@
 
 ## 개요
 
-글꼴은 Pretendard 하나입니다. 크기는 `--ybm-font-size-t01` ~ `t17`, 줄 높이는 같은 번호의 `--ybm-line-height-*`를 짝으로 씁니다.
+글꼴은 Pretendard 하나입니다. 크기는 `--ds-font-size-t01` ~ `t17`, 줄 높이는 같은 번호의 `--ds-line-height-*`를 짝으로 씁니다.
 
 ## 크기
 
@@ -34,10 +34,10 @@
 
 | 토큰 | 값 | 보기 |
 | --- | --- | --- |
-| `--ybm-font-weight-regular` | 400 | 가나다 Aa 123 |
-| `--ybm-font-weight-medium` | 500 | 가나다 Aa 123 |
-| `--ybm-font-weight-semibold` | 600 | 가나다 Aa 123 |
-| `--ybm-font-weight-bold` | 700 | 가나다 Aa 123 |
+| `--ds-font-weight-regular` | 400 | 가나다 Aa 123 |
+| `--ds-font-weight-medium` | 500 | 가나다 Aa 123 |
+| `--ds-font-weight-semibold` | 600 | 가나다 Aa 123 |
+| `--ds-font-weight-bold` | 700 | 가나다 Aa 123 |
 
 ## 코드에서 쓰기
 
@@ -45,13 +45,13 @@
 
 ```css
 .my-title {
-  font-size: var(--ybm-font-size-t09);
-  line-height: var(--ybm-line-height-t09);
-  font-weight: var(--ybm-font-weight-bold);
+  font-size: var(--ds-font-size-t09);
+  line-height: var(--ds-line-height-t09);
+  font-weight: var(--ds-font-weight-bold);
 }
 .my-text {
-  font-size: var(--ybm-font-size-t05);
-  line-height: var(--ybm-line-height-t05);
+  font-size: var(--ds-font-size-t05);
+  line-height: var(--ds-line-height-t05);
   word-break: keep-all;
   overflow-wrap: break-word;
 }

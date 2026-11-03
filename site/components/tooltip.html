@@ -9,9 +9,9 @@
 <script>try { var t = localStorage.getItem("ybm-site-theme"); if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.dataset.theme = "dark"; } catch (e) {}</script>
 <link rel="icon" href="../assets/logo-ybmnet.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../dist/ybm-ds.css">
-<link rel="stylesheet" href="../assets/site.css?v=ab6a4407">
+<link rel="stylesheet" href="../assets/site.css?v=f656f0f2">
 <script src="../../dist/ybm-ds.js" defer></script>
-<script src="../assets/site.js?v=ab6a4407" defer></script>
+<script src="../assets/site.js?v=f656f0f2" defer></script>
 </head>
 <body class="site">
 <a class="site-skip" href="#main">본문 바로가기</a>
@@ -133,7 +133,7 @@
 <tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>닫기 버튼이 필요하거나 설명이 여러 줄이면 Help Bubble을 씁니다.</td></tr></tbody></table></div>
 <h2 id="examples">예시<a class="site-anchor" href="#examples" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><div class="site-example">
   <div class="site-example__bar"><div class="ds-chiptabs" role="tablist" aria-label="보기 방식"><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-view="preview">미리보기</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-view="code">코드</button></div></div>
-  <div class="site-example__preview"><div class="pv-stage" style="padding-block:var(--ybm-space-x12)">
+  <div class="site-example__preview"><div class="pv-stage" style="padding-block:var(--ds-space-x12)">
     <span class="ds-tooltip-anchor"><button class="ds-btn" data-variant="neutralWeak" data-layout="iconOnly" aria-label="링크 복사" aria-describedby="pv-tip1"><i class="ds-icon ds-icon--external-link" aria-hidden="true"></i></button><span class="ds-tooltip" role="tooltip" id="pv-tip1">링크 복사</span></span>
     <span class="ds-tooltip-anchor"><button class="ds-btn" data-variant="neutralWeak" aria-describedby="pv-tip2">bottom</button><span class="ds-tooltip" role="tooltip" id="pv-tip2" data-placement="bottom">아래에 표시</span></span>
     <span class="ds-tooltip-anchor"><button class="ds-btn" data-variant="neutralWeak" aria-describedby="pv-tip3">항상 표시</button><span class="ds-tooltip" role="tooltip" id="pv-tip3" data-placement="right" data-state="open">data-state="open"</span></span>
@@ -147,7 +147,7 @@
 </div>
 <h2 id="spec">규격<a class="site-anchor" href="#spec" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><h3>CSS 변수</h3><p>서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.</p><div class="ds-table-wrap"><table class="ds-table" data-density="compact">
 <thead><tr><th scope="col">변수</th><th scope="col">기본값</th></tr></thead>
-<tbody><tr><td><code>--ds-tooltip-gap</code></td><td><code>var(--ybm-space-x1_5)</code></td></tr></tbody></table></div><h3>크기와 여백</h3><pre class="site-spec">placement: top(기본) / bottom / left / right
+<tbody><tr><td><code>--ds-tooltip-gap</code></td><td><code>var(--ds-space-x1_5)</code></td></tr></tbody></table></div><h3>크기와 여백</h3><pre class="site-spec">placement: top(기본) / bottom / left / right
 Figma: padding x1 x2 / shape/xs / bg/neutral-solid / t02 Medium fg/on-neutral-solid / 최대 폭 240
        대상과 간격 x1_5 / elevation overlay / 꼬리 없음
 Help Bubble 과 차이: Tooltip 은 짧은 라벨(아이콘 버튼 이름 등)을 hover/focus 로만 보여 준다.

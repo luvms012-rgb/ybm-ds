@@ -9,9 +9,9 @@
 <script>try { var t = localStorage.getItem("ybm-site-theme"); if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.dataset.theme = "dark"; } catch (e) {}</script>
 <link rel="icon" href="../assets/logo-ybmnet.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../dist/ybm-ds.css">
-<link rel="stylesheet" href="../assets/site.css?v=ab6a4407">
+<link rel="stylesheet" href="../assets/site.css?v=f656f0f2">
 <script src="../../dist/ybm-ds.js" defer></script>
-<script src="../assets/site.js?v=ab6a4407" defer></script>
+<script src="../assets/site.js?v=f656f0f2" defer></script>
 </head>
 <body class="site">
 <a class="site-skip" href="#main">본문 바로가기</a>
@@ -56,24 +56,24 @@
 <h2 id="tokens">토큰<a class="site-anchor" href="#tokens" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
 <div class="ds-table-wrap"><table class="ds-table" data-density="compact">
 <thead><tr><th scope="col">토큰</th><th scope="col">값</th><th scope="col">보기</th></tr></thead>
-<tbody><tr><td><code>--ybm-shape-2xs</code></td><td>4px</td><td><span class="site-shape" style="border-radius: var(--ybm-shape-2xs)"></span></td></tr>
-<tr><td><code>--ybm-shape-xs</code></td><td>6px</td><td><span class="site-shape" style="border-radius: var(--ybm-shape-xs)"></span></td></tr>
-<tr><td><code>--ybm-shape-sm</code></td><td>8px</td><td><span class="site-shape" style="border-radius: var(--ybm-shape-sm)"></span></td></tr>
-<tr><td><code>--ybm-shape-md</code></td><td>10px</td><td><span class="site-shape" style="border-radius: var(--ybm-shape-md)"></span></td></tr>
-<tr><td><code>--ybm-shape-lg</code></td><td>12px</td><td><span class="site-shape" style="border-radius: var(--ybm-shape-lg)"></span></td></tr>
-<tr><td><code>--ybm-shape-xl</code></td><td>16px</td><td><span class="site-shape" style="border-radius: var(--ybm-shape-xl)"></span></td></tr>
-<tr><td><code>--ybm-shape-2xl</code></td><td>20px</td><td><span class="site-shape" style="border-radius: var(--ybm-shape-2xl)"></span></td></tr>
-<tr><td><code>--ybm-shape-3xl</code></td><td>24px</td><td><span class="site-shape" style="border-radius: var(--ybm-shape-3xl)"></span></td></tr>
-<tr><td><code>--ybm-shape-pill</code></td><td>9999px</td><td><span class="site-shape" style="border-radius: var(--ybm-shape-pill)"></span></td></tr></tbody></table></div>
+<tbody><tr><td><code>--ds-shape-2xs</code></td><td>4px</td><td><span class="site-shape" style="border-radius: var(--ds-shape-2xs)"></span></td></tr>
+<tr><td><code>--ds-shape-xs</code></td><td>6px</td><td><span class="site-shape" style="border-radius: var(--ds-shape-xs)"></span></td></tr>
+<tr><td><code>--ds-shape-sm</code></td><td>8px</td><td><span class="site-shape" style="border-radius: var(--ds-shape-sm)"></span></td></tr>
+<tr><td><code>--ds-shape-md</code></td><td>10px</td><td><span class="site-shape" style="border-radius: var(--ds-shape-md)"></span></td></tr>
+<tr><td><code>--ds-shape-lg</code></td><td>12px</td><td><span class="site-shape" style="border-radius: var(--ds-shape-lg)"></span></td></tr>
+<tr><td><code>--ds-shape-xl</code></td><td>16px</td><td><span class="site-shape" style="border-radius: var(--ds-shape-xl)"></span></td></tr>
+<tr><td><code>--ds-shape-2xl</code></td><td>20px</td><td><span class="site-shape" style="border-radius: var(--ds-shape-2xl)"></span></td></tr>
+<tr><td><code>--ds-shape-3xl</code></td><td>24px</td><td><span class="site-shape" style="border-radius: var(--ds-shape-3xl)"></span></td></tr>
+<tr><td><code>--ds-shape-pill</code></td><td>9999px</td><td><span class="site-shape" style="border-radius: var(--ds-shape-pill)"></span></td></tr></tbody></table></div>
 <h2 id="code">코드에서 쓰기<a class="site-anchor" href="#code" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
-<p>어떤 영역에 <code>--ybm-shape-scale</code>을 0과 1 사이 값으로 덮어쓰면 그 안의 모서리만 덜 둥글게 바뀝니다.</p>
+<p>어떤 영역에 <code>--ds-shape-scale</code>을 0과 1 사이 값으로 덮어쓰면 그 안의 모서리만 덜 둥글게 바뀝니다.</p>
 <figure class="ds-codeblock">
   <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">css</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
   <pre class="ds-codeblock__code"><code>.my-card {
-  border-radius: var(--ybm-shape-lg);
+  border-radius: var(--ds-shape-lg);
 }
 .admin-area {
-  --ybm-shape-scale: 0.5;  /* 이 영역 안의 모서리를 절반으로 */
+  --ds-shape-scale: 0.5;  /* 이 영역 안의 모서리를 절반으로 */
 }</code></pre>
 </figure>
 <h2 id="practices">사용 지침<a class="site-anchor" href="#practices" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>

@@ -12,10 +12,10 @@
 
 | 토큰 | 폭 | 쓰임 |
 | --- | --- | --- |
-| `--ybm-breakpoint-sm` | 480px | 큰 휴대폰 |
-| `--ybm-breakpoint-md` | 768px | 태블릿, PC 부품으로 바뀌는 기준 |
-| `--ybm-breakpoint-lg` | 1280px | 넓은 PC, 3단 배치 |
-| `--ybm-breakpoint-xl` | 1440px | 아주 넓은 화면 |
+| `--ds-breakpoint-sm` | 480px | 큰 휴대폰 |
+| `--ds-breakpoint-md` | 768px | 태블릿, PC 부품으로 바뀌는 기준 |
+| `--ds-breakpoint-lg` | 1280px | 넓은 PC, 3단 배치 |
+| `--ds-breakpoint-xl` | 1440px | 아주 넓은 화면 |
 
 ## 컴포넌트가 바뀌는 곳
 

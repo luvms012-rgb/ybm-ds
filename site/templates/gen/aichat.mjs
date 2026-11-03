@@ -2,40 +2,40 @@ import * as K from './kit.mjs';
 const { icon, btn, iconBtn, badge, avatar, codeblock, chip, esc } = K;
 
 const CHAT_CSS = `
-  .tp-chat { display: flex; flex-direction: column; height: 100vh; overflow: hidden; background: var(--ybm-color-bg-layer-default); }
+  .tp-chat { display: flex; flex-direction: column; height: 100vh; overflow: hidden; background: var(--ds-color-bg-layer-default); }
   .tp-chat__body { display: flex; flex: 1 1 auto; min-height: 0; }
   .tp-chat__main { display: flex; flex: 1 1 auto; flex-direction: column; min-width: 0; }
-  .tp-log { flex: 1 1 auto; overflow: auto; display: flex; flex-direction: column; gap: var(--ybm-space-x5); padding: var(--ybm-space-x6) var(--ybm-space-x4); }
+  .tp-log { flex: 1 1 auto; overflow: auto; display: flex; flex-direction: column; gap: var(--ds-space-x5); padding: var(--ds-space-x6) var(--ds-space-x4); }
   .tp-log > * { width: min(100%, 720px); margin-inline: auto; }
-  .tp-msg-user { display: flex; flex-direction: column; align-items: flex-end; gap: var(--ybm-space-x1_5); }
-  .tp-msg-ai { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--ybm-space-x3); }
-  .tp-msg-ai__body { display: flex; flex-direction: column; gap: var(--ybm-space-x3); min-width: 0; }
-  .tp-tools { border-radius: var(--ybm-shape-lg); box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-neutral-muted); }
-  .tp-tools > summary { display: flex; align-items: center; gap: var(--ybm-space-x2); padding: var(--ybm-space-x2) var(--ybm-space-x3); list-style: none; cursor: pointer; font-size: var(--ybm-font-size-t03); color: var(--ybm-color-fg-neutral-muted); }
+  .tp-msg-user { display: flex; flex-direction: column; align-items: flex-end; gap: var(--ds-space-x1_5); }
+  .tp-msg-ai { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--ds-space-x3); }
+  .tp-msg-ai__body { display: flex; flex-direction: column; gap: var(--ds-space-x3); min-width: 0; }
+  .tp-tools { border-radius: var(--ds-shape-lg); box-shadow: inset 0 0 0 1px var(--ds-color-stroke-neutral-muted); }
+  .tp-tools > summary { display: flex; align-items: center; gap: var(--ds-space-x2); padding: var(--ds-space-x2) var(--ds-space-x3); list-style: none; cursor: pointer; font-size: var(--ds-font-size-t03); color: var(--ds-color-fg-neutral-muted); }
   .tp-tools > summary::-webkit-details-marker { display: none; }
-  .tp-tools ul { list-style: none; margin: 0; padding: 0 var(--ybm-space-x3) var(--ybm-space-x2); display: flex; flex-direction: column; gap: var(--ybm-space-x1); font-size: var(--ybm-font-size-t03); }
-  .tp-tools li { display: flex; align-items: center; gap: var(--ybm-space-x2); color: var(--ybm-color-fg-neutral-muted); }
-  .tp-tools li .ds-icon { color: var(--ybm-color-fg-positive); }
-  .tp-tools code { color: var(--ybm-color-fg-neutral); }
-  .tp-composer-wrap { padding: var(--ybm-space-x3) var(--ybm-space-x4) var(--ybm-space-x4); }
+  .tp-tools ul { list-style: none; margin: 0; padding: 0 var(--ds-space-x3) var(--ds-space-x2); display: flex; flex-direction: column; gap: var(--ds-space-x1); font-size: var(--ds-font-size-t03); }
+  .tp-tools li { display: flex; align-items: center; gap: var(--ds-space-x2); color: var(--ds-color-fg-neutral-muted); }
+  .tp-tools li .ds-icon { color: var(--ds-color-fg-positive); }
+  .tp-tools code { color: var(--ds-color-fg-neutral); }
+  .tp-composer-wrap { padding: var(--ds-space-x3) var(--ds-space-x4) var(--ds-space-x4); }
   .tp-composer-wrap > * { width: min(100%, 720px); margin-inline: auto; }
-  .tp-composer { display: flex; flex-direction: column; gap: var(--ybm-space-x2); padding: var(--ybm-space-x3); border-radius: var(--ybm-shape-2xl); background: var(--ybm-color-bg-layer-floating); box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-neutral-muted), 0 4px 16px rgb(0 0 0 / .06); }
-  .tp-composer .ds-textarea { --ds-textarea-line-width: 0px; --ds-textarea-min-height: 48px; --ds-textarea-padding: var(--ybm-space-x1); resize: none; background: none; }
-  .tp-composer__bar { display: flex; align-items: center; gap: var(--ybm-space-x1); }
+  .tp-composer { display: flex; flex-direction: column; gap: var(--ds-space-x2); padding: var(--ds-space-x3); border-radius: var(--ds-shape-2xl); background: var(--ds-color-bg-layer-floating); box-shadow: inset 0 0 0 1px var(--ds-color-stroke-neutral-muted), 0 4px 16px rgb(0 0 0 / .06); }
+  .tp-composer .ds-textarea { --ds-textarea-line-width: 0px; --ds-textarea-min-height: 48px; --ds-textarea-padding: var(--ds-space-x1); resize: none; background: none; }
+  .tp-composer__bar { display: flex; align-items: center; gap: var(--ds-space-x1); }
   .tp-composer__bar .tp-grow { flex: 1 1 auto; }
-  .tp-files-row { display: flex; flex-wrap: wrap; gap: var(--ybm-space-x1_5); }
-  .tp-file-token { display: inline-flex; align-items: center; gap: var(--ybm-space-x1); height: 28px; padding: 0 var(--ybm-space-x1) 0 var(--ybm-space-x2); border-radius: var(--ybm-shape-sm); background: var(--ybm-color-bg-neutral); font-size: var(--ybm-font-size-t03); }
+  .tp-files-row { display: flex; flex-wrap: wrap; gap: var(--ds-space-x1_5); }
+  .tp-file-token { display: inline-flex; align-items: center; gap: var(--ds-space-x1); height: 28px; padding: 0 var(--ds-space-x1) 0 var(--ds-space-x2); border-radius: var(--ds-shape-sm); background: var(--ds-color-bg-neutral); font-size: var(--ds-font-size-t03); }
 `;
 const composer = (ph = '무엇이든 물어보세요', files = []) => `<form class="tp-composer" onsubmit="return false">${files.length ? `<div class="tp-files-row">${files.map((f) => `<span class="tp-file-token">${icon('file-text', 'sm')}${f}${iconBtn('x', f + ' 빼기', { size: 'xsmall' })}</span>`).join('')}</div>` : ''}<textarea class="ds-textarea" rows="2" placeholder="${esc(ph)}" aria-label="메시지 입력"></textarea><div class="tp-composer__bar">${iconBtn('plus', '파일 첨부')}${btn('참고 자료', { variant: 'ghost', ic: 'paperclip', size: 'small' })}${btn('도구', { variant: 'ghost', ic: 'sliders-horizontal', size: 'small' })}<span class="tp-grow"></span>${iconBtn('mic', '말로 입력')}<button type="submit" class="ds-chat-send" aria-label="보내기"></button></div></form>`;
 
 /* 1. AI 대화 (오른쪽 결과물 패널) ------------------------------ */
 const conversation = () => {
   const css = CHAT_CSS + `
-  .tp-artifact { display: none; flex: none; width: min(46%, 600px); flex-direction: column; box-shadow: inset 1px 0 0 var(--ybm-color-stroke-neutral-muted); }
+  .tp-artifact { display: none; flex: none; width: min(46%, 600px); flex-direction: column; box-shadow: inset 1px 0 0 var(--ds-color-stroke-neutral-muted); }
   @media (min-width: 1024px) { .tp-artifact { display: flex; } }
-  .tp-artifact__bar { display: flex; align-items: center; justify-content: space-between; gap: var(--ybm-space-x2); padding: var(--ybm-space-x3) var(--ybm-space-x4); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); }
-  .tp-artifact__doc { flex: 1 1 auto; overflow: auto; padding: var(--ybm-space-x6); }
-  .tp-chat-head { display: flex; align-items: center; justify-content: space-between; gap: var(--ybm-space-x2); padding: var(--ybm-space-x3) var(--ybm-space-x4); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); }
+  .tp-artifact__bar { display: flex; align-items: center; justify-content: space-between; gap: var(--ds-space-x2); padding: var(--ds-space-x3) var(--ds-space-x4); box-shadow: inset 0 -1px 0 var(--ds-color-stroke-neutral-muted); }
+  .tp-artifact__doc { flex: 1 1 auto; overflow: auto; padding: var(--ds-space-x6); }
+  .tp-chat-head { display: flex; align-items: center; justify-content: space-between; gap: var(--ds-space-x2); padding: var(--ds-space-x3) var(--ds-space-x4); box-shadow: inset 0 -1px 0 var(--ds-color-stroke-neutral-muted); }
 `;
   const body = `<div class="tp-chat">
 <header class="tp-chat-head"><span class="tp-row">${iconBtn('panel-left', '대화 목록')}<span class="tp-h4">로그인 유지 기능 점검</span></span><span class="tp-row">${iconBtn('share', '공유')}${iconBtn('ellipsis', '더 보기')}</span></header>
@@ -66,12 +66,12 @@ const conversation = () => {
 /* 2. AI 첫 화면 ------------------------------------------------- */
 const landing = () => {
   const css = CHAT_CSS + `
-  .tp-land { display: grid; place-items: center; min-height: 100vh; padding: var(--ybm-space-x8) var(--ybm-space-x4); background: var(--ybm-color-bg-layer-default); }
-  .tp-land__in { display: flex; flex-direction: column; gap: var(--ybm-space-x6); width: min(100%, 720px); }
-  .tp-hi { display: flex; flex-direction: column; gap: var(--ybm-space-x2); }
-  .tp-hi > .tp-row { color: var(--ybm-color-fg-magic); }
-  .tp-hi h1 { font-size: var(--ybm-font-size-t12); line-height: var(--ybm-line-height-t12); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; }
-  .tp-cats { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--ybm-space-x2); }
+  .tp-land { display: grid; place-items: center; min-height: 100vh; padding: var(--ds-space-x8) var(--ds-space-x4); background: var(--ds-color-bg-layer-default); }
+  .tp-land__in { display: flex; flex-direction: column; gap: var(--ds-space-x6); width: min(100%, 720px); }
+  .tp-hi { display: flex; flex-direction: column; gap: var(--ds-space-x2); }
+  .tp-hi > .tp-row { color: var(--ds-color-fg-magic); }
+  .tp-hi h1 { font-size: var(--ds-font-size-t12); line-height: var(--ds-line-height-t12); font-weight: var(--ds-font-weight-bold); letter-spacing: -0.02em; }
+  .tp-cats { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--ds-space-x2); }
 `;
   const body = `<main class="tp-land"><div class="tp-land__in">
   <div class="tp-hi"><span class="tp-row">${icon('sparkles')}<span class="tp-h3">안녕하세요, 와이비엠 님</span></span><h1>무엇부터 시작할까요?</h1></div>

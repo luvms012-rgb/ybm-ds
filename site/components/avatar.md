@@ -80,15 +80,15 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | --- | --- |
 | `--ds-avatar-size` | `36px` |
 | `--ds-avatar-badge` | `14px` |
-| `--ds-avatar-radius` | `var(--ybm-shape-pill)` |
-| `--ds-avatar-bg` | `var(--ybm-color-palette-gray-500)` |
+| `--ds-avatar-radius` | `var(--ds-shape-pill)` |
+| `--ds-avatar-bg` | `var(--ds-color-palette-gray-500)` |
 | `--ds-avatar-status-size` | `max(8px, calc(var(--ds-avatar-size) * 0.26))` |
 | `--ds-avatar-status-ring` | `clamp(1.5px, calc(var(--ds-avatar-size) * 0.04), 4px)` |
-| `--ds-avatar-status-color` | `var(--ybm-color-bg-positive-solid)` |
+| `--ds-avatar-status-color` | `var(--ds-color-bg-positive-solid)` |
 | `--ds-avatar-group-size` | `36px` |
-| `--ds-avatar-group-radius` | `var(--ybm-shape-pill)` |
+| `--ds-avatar-group-radius` | `var(--ds-shape-pill)` |
 | `--ds-avatar-group-ring` | `max(1.5px, calc(var(--ds-avatar-group-size) * 0.05))` |
-| `--ds-avatar-group-ring-color` | `var(--ybm-color-bg-layer-default)` |
+| `--ds-avatar-group-ring-color` | `var(--ds-color-bg-layer-default)` |
 
 ### 크기와 여백
 

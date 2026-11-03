@@ -12,26 +12,26 @@
 
 | 토큰 | 값 | 보기 |
 | --- | --- | --- |
-| `--ybm-shape-2xs` | 4px |  |
-| `--ybm-shape-xs` | 6px |  |
-| `--ybm-shape-sm` | 8px |  |
-| `--ybm-shape-md` | 10px |  |
-| `--ybm-shape-lg` | 12px |  |
-| `--ybm-shape-xl` | 16px |  |
-| `--ybm-shape-2xl` | 20px |  |
-| `--ybm-shape-3xl` | 24px |  |
-| `--ybm-shape-pill` | 9999px |  |
+| `--ds-shape-2xs` | 4px |  |
+| `--ds-shape-xs` | 6px |  |
+| `--ds-shape-sm` | 8px |  |
+| `--ds-shape-md` | 10px |  |
+| `--ds-shape-lg` | 12px |  |
+| `--ds-shape-xl` | 16px |  |
+| `--ds-shape-2xl` | 20px |  |
+| `--ds-shape-3xl` | 24px |  |
+| `--ds-shape-pill` | 9999px |  |
 
 ## 코드에서 쓰기
 
-어떤 영역에 `--ybm-shape-scale`을 0과 1 사이 값으로 덮어쓰면 그 안의 모서리만 덜 둥글게 바뀝니다.
+어떤 영역에 `--ds-shape-scale`을 0과 1 사이 값으로 덮어쓰면 그 안의 모서리만 덜 둥글게 바뀝니다.
 
 ```css
 .my-card {
-  border-radius: var(--ybm-shape-lg);
+  border-radius: var(--ds-shape-lg);
 }
 .admin-area {
-  --ybm-shape-scale: 0.5;  /* 이 영역 안의 모서리를 절반으로 */
+  --ds-shape-scale: 0.5;  /* 이 영역 안의 모서리를 절반으로 */
 }
 ```
 

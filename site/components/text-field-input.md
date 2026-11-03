@@ -61,17 +61,17 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | --- | --- |
 | `--ds-input-height` | `44px` |
 | `--ds-input-padding-x` | `0px` |
-| `--ds-input-padding-y` | `var(--ybm-space-x2)` |
-| `--ds-input-gap` | `var(--ybm-space-x2_5)` |
-| `--ds-input-font-size` | `var(--ybm-font-size-t06)` |
-| `--ds-input-line-height` | `var(--ybm-line-height-t06)` |
+| `--ds-input-padding-y` | `var(--ds-space-x2)` |
+| `--ds-input-gap` | `var(--ds-space-x2_5)` |
+| `--ds-input-font-size` | `var(--ds-font-size-t06)` |
+| `--ds-input-line-height` | `var(--ds-line-height-t06)` |
 | `--ds-input-icon` | `24px` |
-| `--ds-input-color` | `var(--ybm-color-fg-neutral)` |
-| `--ds-input-bg` | `var(--ybm-color-bg-transparent)` |
+| `--ds-input-color` | `var(--ds-color-fg-neutral)` |
+| `--ds-input-bg` | `var(--ds-color-bg-transparent)` |
 | `--ds-input-radius` | `0px` |
-| `--ds-input-line` | `var(--ybm-color-stroke-neutral-weak)` |
-| `--ds-input-line-active` | `var(--ybm-color-stroke-neutral-contrast)` |
-| `--ds-input-line-fade` | `var(--ybm-duration-normal) var(--ybm-easing-standard)` |
+| `--ds-input-line` | `var(--ds-color-stroke-neutral-weak)` |
+| `--ds-input-line-active` | `var(--ds-color-stroke-neutral-contrast)` |
+| `--ds-input-line-fade` | `var(--ds-duration-normal) var(--ds-easing-standard)` |
 
 ### 크기와 여백
 

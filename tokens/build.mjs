@@ -13,7 +13,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const HERE = path.dirname(path.dirname(fileURLToPath(import.meta.url))); // ds/
-const P = '--ybm-';
+const P = '--ds-';
 
 // ── Python json.dumps(indent=2, ensure_ascii=False) 와 같은 출력 ─────────────
 // 객체 키 순서를 지키기 위해 사전은 전부 Map 으로 만든다 ("100" 같은 키를 JS 객체가 재정렬하므로).
@@ -154,8 +154,8 @@ export function build(date, sourcePath = path.join(HERE, 'tokens', 'figma-variab
           (모드는 Light/Dark 하나뿐 — 2026-10-27 글자 배율·모양 테마 모드 삭제)
 
    3계층 구조
-     1) PALETTE   --ybm-color-palette-*        원시값. 컴포넌트·서비스에서 직접 쓰지 않는다.
-     2) SEMANTIC  --ybm-color-[bg|fg|stroke|chart]-*  역할. 컴포넌트는 이 층만 참조한다.
+     1) PALETTE   --ds-color-palette-*        원시값. 컴포넌트·서비스에서 직접 쓰지 않는다.
+     2) SEMANTIC  --ds-color-[bg|fg|stroke|chart]-*  역할. 컴포넌트는 이 층만 참조한다.
      3) COMPONENT --ds-[컴포넌트]-*             components.css 안에서 각 컴포넌트가 노출.
 
    서비스 커스텀은 2)·3)만 덮어쓴다. 1) 팔레트는 YBM 전체가 공유한다.
@@ -221,14 +221,14 @@ export function build(date, sourcePath = path.join(HERE, 'tokens', 'figma-variab
 
     o.push(`/* --------------------------------------------------------------------------
    5. SHAPE — 컴포넌트 모서리 곡률(시맨틱) + 곡률 노브
-   테마 모드는 없다. --ybm-shape-scale 을 영역에 덮어쓰면 그 안의 곡률만 줄이거나(0~1) 없앨 수 있다.
+   테마 모드는 없다. --ds-shape-scale 을 영역에 덮어쓰면 그 안의 곡률만 줄이거나(0~1) 없앨 수 있다.
 
    ⚠ shape 계산을 :root 에 두면 안 된다 — 커스텀 프로퍼티는 "선언된 요소"에서 값이 확정되고
-   자식은 그 결과를 상속하므로, :root 에 calc 를 두면 하위에서 --ybm-shape-scale 을 덮어써도
+   자식은 그 결과를 상속하므로, :root 에 calc 를 두면 하위에서 --ds-shape-scale 을 덮어써도
    반영되지 않는다. 모든 요소에서 다시 계산해야 영역 단위 조절이 동작한다.
    -------------------------------------------------------------------------- */`);
     o.push(':root {');
-    o.push('  --ybm-shape-scale: 1;              /* 곡률 노브 — 0 이면 완전 각짐 */');
+    o.push('  --ds-shape-scale: 1;              /* 곡률 노브 — 0 이면 완전 각짐 */');
     for (const [n, dflt] of SHAPE) o.push(`  ${P}shape-base-${n}: var(${P}radius-${dflt});`);
     o.push(`  ${P}shape-pill: var(${P}radius-${SHAPE_PILL});   /* pill 은 노브와 무관하게 항상 원형 */`);
     o.push('}\n');
@@ -326,7 +326,7 @@ export function build(date, sourcePath = path.join(HERE, 'tokens', 'figma-variab
     const o = ['// YBM Design System — tokens.js', `// ⚠ tokens/build.mjs 가 생성한다. 직접 고치지 말 것. 생성: ${date}`,
       '// CSS 변수명 → Light 모드 값. 다크 값은 design-tokens.json 을 참고.', '', 'export const tokens = {'];
     for (const [k, v] of flat()) o.push(`  ${JSON.stringify(k)}: ${dumps(v)},`);
-    o.push('};', '', "/** CSS 변수 참조 문자열을 돌려준다. ex) cssVar('--ybm-color-bg-canvas') */",
+    o.push('};', '', "/** CSS 변수 참조 문자열을 돌려준다. ex) cssVar('--ds-color-bg-canvas') */",
       'export const cssVar = (name) => `var(${name})`;', '', 'export default tokens;');
     return o.join('\n') + '\n';
   }
@@ -358,8 +358,15 @@ export function build(date, sourcePath = path.join(HERE, 'tokens', 'figma-variab
       + `module.exports = ${dumps(cfg)};\n`;
   }
 
+  // 예전 이름(--ybm-*) 연결 파일 (2026-11-04 접두어를 ds 로 바꿈). 예전 이름을 쓰는 서비스 CSS 는 DS 다음에 이 파일을 더 불러오면 그대로 동작한다
+  const compatYbm = (text) => {
+    const names = [...new Set([...text.matchAll(/(--ds-[a-z0-9_-]+)\s*:/g)].map((m) => m[1]))];
+    return `/* 예전 토큰 이름 연결 — tokens/build.mjs 가 만든다. 직접 고치지 말 것.\n   2026-11-04 토큰 접두어를 --ybm- 에서 --ds- 로 바꿨다. 예전 이름을 쓰는 화면은 ybm-ds.css 다음에 이 파일을 불러온다.\n   새 화면은 --ds-* 를 쓴다. */\n:root {\n${names.map((n) => `  ${n.replace('--ds-', '--ybm-')}: var(${n});`).join('\n')}\n}\n`;
+  };
+  const tokensText = css();
   return {
-    'dist/tokens.css': css(),
+    'dist/tokens.css': tokensText,
+    'dist/compat-ybm.css': compatYbm(tokensText),
     'tokens/design-tokens.json': nestedJson(),
     'tokens/tokens.js': tokensJs(),
     'tokens/tailwind.preset.js': tailwindPreset(),

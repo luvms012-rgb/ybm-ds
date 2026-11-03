@@ -98,7 +98,7 @@
     var promptBtn = t.closest("[data-site-prompt-copy]");
     if (promptBtn && navigator.clipboard) {
       var text = promptBtn.closest(".site-prompt").querySelector(".site-prompt__text").textContent;
-      navigator.clipboard.writeText(text).then(function () { if (window.YBM) YBM.snackbar("안내문을 복사했어요. AI 도구에 붙여 넣으세요.", { variant: "positive" }); });
+      navigator.clipboard.writeText(text).then(function () { if (window.YBM) DS.snackbar("안내문을 복사했어요. AI 도구에 붙여 넣으세요.", { variant: "positive" }); });
       return;
     }
 
@@ -106,14 +106,14 @@
     var lu = t.closest("[data-site-lucide]");
     if (lu && navigator.clipboard) {
       var nm = lu.getAttribute("data-site-lucide"), inCss = !!lu.querySelector(".site-icon__css");
-      navigator.clipboard.writeText(inCss ? "ds-icon--" + nm : lucideCss(nm)).then(function () { if (window.YBM) YBM.snackbar(inCss ? "복사했어요: ds-icon--" + nm : "icons.css 에 넣을 줄을 복사했어요: " + nm); });
+      navigator.clipboard.writeText(inCss ? "ds-icon--" + nm : lucideCss(nm)).then(function () { if (window.YBM) DS.snackbar(inCss ? "복사했어요: ds-icon--" + nm : "icons.css 에 넣을 줄을 복사했어요: " + nm); });
       return;
     }
 
     // 아이콘 이름 복사
     var icon = t.closest("[data-site-copy]");
     if (icon && navigator.clipboard) {
-      navigator.clipboard.writeText(icon.getAttribute("data-site-copy")).then(function () { if (window.YBM) YBM.snackbar("복사했어요: " + icon.getAttribute("data-site-copy")); });
+      navigator.clipboard.writeText(icon.getAttribute("data-site-copy")).then(function () { if (window.YBM) DS.snackbar("복사했어요: " + icon.getAttribute("data-site-copy")); });
     }
   });
 
@@ -231,7 +231,7 @@
       libDraw(); return;
     }
     var code = t.closest(".site-lib__code").querySelector("code").textContent;
-    if (navigator.clipboard) navigator.clipboard.writeText(code).then(function () { if (window.YBM) YBM.snackbar("복사했어요", { variant: "positive" }); });
+    if (navigator.clipboard) navigator.clipboard.writeText(code).then(function () { if (window.YBM) DS.snackbar("복사했어요", { variant: "positive" }); });
   });
   document.addEventListener("input", function (e) { if (e.target.matches("[data-site-lib-q]")) { lib.q = e.target.value; libDraw(); } });
   // 찾기 칸에서 Enter: 걸러진 메뉴의 첫 컴포넌트로
@@ -548,7 +548,7 @@
   (function () {
     var toggles = [].slice.call(document.querySelectorAll("[data-site-md-toggle]")); if (!toggles.length) return;
     function close() { toggles.forEach(function (t) { t.setAttribute("aria-expanded", "false"); t.nextElementSibling.hidden = true; }); }
-    function done(msg) { if (window.YBM && YBM.snackbar) YBM.snackbar(msg, { variant: "positive" }); }
+    function done(msg) { if (window.YBM && DS.snackbar) DS.snackbar(msg, { variant: "positive" }); }
     toggles.forEach(function (t) { t.addEventListener("click", function (e) { e.stopPropagation(); var open = t.getAttribute("aria-expanded") !== "true"; close(); t.setAttribute("aria-expanded", String(open)); t.nextElementSibling.hidden = !open; }); });
     document.addEventListener("click", function (e) {
       var b = e.target.closest("[data-site-md]");

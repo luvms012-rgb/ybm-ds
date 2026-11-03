@@ -61,8 +61,8 @@ Select를 눌렀을 때 펼쳐지는 선택지 목록입니다.
 
 | 변수 | 기본값 |
 | --- | --- |
-| `--ds-select-item-padding` | `var(--ybm-space-x3) var(--ybm-space-x2)` |
-| `--ds-select-item-gap` | `var(--ybm-space-x3)` |
+| `--ds-select-item-padding` | `var(--ds-space-x3) var(--ds-space-x2)` |
+| `--ds-select-item-gap` | `var(--ds-space-x3)` |
 | `--ds-select-item-check` | `20px` |
 
 ### 크기와 여백

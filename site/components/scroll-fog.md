@@ -35,7 +35,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 <div class="ds-scrollfog" style="width:240px;height:180px;padding-block:20px">
   <p>스크롤 되는 내용 1</p><p>스크롤 되는 내용 2</p><p>스크롤 되는 내용 3</p><p>스크롤 되는 내용 4</p><p>스크롤 되는 내용 5</p><p>스크롤 되는 내용 6</p><p>스크롤 되는 내용 7</p><p>스크롤 되는 내용 8</p><p>스크롤 되는 내용 9</p>
 </div>
-<div class="ds-scrollfog" data-direction="horizontal" style="display:flex;gap:var(--ybm-space-x2);width:300px;padding-inline:20px">
+<div class="ds-scrollfog" data-direction="horizontal" style="display:flex;gap:var(--ds-space-x2);width:300px;padding-inline:20px">
   <span class="ds-badge" data-size="large">전체</span><span class="ds-badge" data-size="large">디자인</span><span class="ds-badge" data-size="large">개발</span><span class="ds-badge" data-size="large">기획</span><span class="ds-badge" data-size="large">마케팅</span><span class="ds-badge" data-size="large">영업</span><span class="ds-badge" data-size="large">운영</span>
 </div>
 ```

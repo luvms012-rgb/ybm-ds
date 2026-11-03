@@ -42,9 +42,9 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 | 변수 | 기본값 |
 | --- | --- |
-| `--ds-toggle-bg` | `var(--ybm-color-bg-layer-default)` |
-| `--ds-toggle-fg` | `var(--ybm-color-fg-neutral)` |
-| `--ds-toggle-line` | `var(--ybm-color-stroke-neutral-weak)` |
+| `--ds-toggle-bg` | `var(--ds-color-bg-layer-default)` |
+| `--ds-toggle-fg` | `var(--ds-color-fg-neutral)` |
+| `--ds-toggle-line` | `var(--ds-color-stroke-neutral-weak)` |
 
 ### 크기와 여백
 

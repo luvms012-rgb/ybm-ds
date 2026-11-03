@@ -52,13 +52,13 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 ## 예시
 
 ```html
-<div style="display:flex;gap:var(--ybm-space-x3);padding:var(--ybm-space-x5) var(--ybm-space-x4)">
+<div style="display:flex;gap:var(--ds-space-x3);padding:var(--ds-space-x5) var(--ds-space-x4)">
   <p class="ds-chat-system">오늘</p>
   <div class="ds-chat-bubble">안녕하세요! 무엇을 도와드릴까요?</div>
-  <div style="display:flex;align-items:flex-end;justify-content:flex-end;gap:var(--ybm-space-x1_5)"><span class="ds-chat-meta" data-status="read"><b class="ds-chat-meta__status">읽음</b><time>오후 3:24</time></span><div class="ds-chat-bubble" data-sender="user" style="margin-left:0">이번 주 일정 정리해 줘</div></div>
+  <div style="display:flex;align-items:flex-end;justify-content:flex-end;gap:var(--ds-space-x1_5)"><span class="ds-chat-meta" data-status="read"><b class="ds-chat-meta__status">읽음</b><time>오후 3:24</time></span><div class="ds-chat-bubble" data-sender="user" style="margin-left:0">이번 주 일정 정리해 줘</div></div>
   <p class="ds-chat-system" data-variant="divider">대화가 종료되었어요</p>
-  <div style="display:flex;gap:var(--ybm-space-x4)"><span class="ds-chat-meta" data-status="sending"><b class="ds-chat-meta__status">전송 중</b><time>오후 3:24</time></span><span class="ds-chat-meta" data-status="sent"><time>오후 3:24</time></span><span class="ds-chat-meta" data-status="error"><b class="ds-chat-meta__status">전송 실패</b><time>오후 3:24</time></span></div>
-  <div style="display:flex;gap:var(--ybm-space-x3)"><button type="button" class="ds-chat-send" aria-label="보내기"></button><button type="button" class="ds-chat-send" data-state="stop" aria-label="답변 멈추기"></button><button type="button" class="ds-chat-send" aria-label="보내기" disabled></button></div>
+  <div style="display:flex;gap:var(--ds-space-x4)"><span class="ds-chat-meta" data-status="sending"><b class="ds-chat-meta__status">전송 중</b><time>오후 3:24</time></span><span class="ds-chat-meta" data-status="sent"><time>오후 3:24</time></span><span class="ds-chat-meta" data-status="error"><b class="ds-chat-meta__status">전송 실패</b><time>오후 3:24</time></span></div>
+  <div style="display:flex;gap:var(--ds-space-x3)"><button type="button" class="ds-chat-send" aria-label="보내기"></button><button type="button" class="ds-chat-send" data-state="stop" aria-label="답변 멈추기"></button><button type="button" class="ds-chat-send" aria-label="보내기" disabled></button></div>
 </div>
 <form class="ds-chat-composer" onsubmit="return false">
   <button type="button" class="ds-chat-composer__attach" aria-label="첨부"><i class="ds-icon ds-icon--plus" aria-hidden="true"></i></button>
@@ -75,8 +75,8 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | 변수 | 기본값 |
 | --- | --- |
 | `--ds-chat-bubble-max` | `288px` |
-| `--ds-chat-send-bg` | `var(--ybm-color-bg-brand-solid)` |
-| `--ds-chat-send-fg` | `var(--ybm-color-fg-on-brand-solid)` |
+| `--ds-chat-send-bg` | `var(--ds-color-bg-brand-solid)` |
+| `--ds-chat-send-fg` | `var(--ds-color-fg-on-brand-solid)` |
 | `--ds-chat-send-icon` | `var(--ds-icon-arrow-up)` |
 
 ### 크기와 여백

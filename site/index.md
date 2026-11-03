@@ -52,9 +52,9 @@ DS가 CSS 레이어 안에 있어 뒤에 불러온 서비스 CSS가 `!important`
 ```css
 /* ybm-it.css */
 :root {
-  --ybm-color-palette-brand-100: #e6f6ee;  /* 옅은 배경 */
-  --ybm-color-palette-brand-600: #12a150;  /* 주 버튼, 링크 */
-  --ybm-color-palette-brand-700: #0d7d3e;  /* 눌림 */
+  --ds-color-palette-brand-100: #e6f6ee;  /* 옅은 배경 */
+  --ds-color-palette-brand-600: #12a150;  /* 주 버튼, 링크 */
+  --ds-color-palette-brand-700: #0d7d3e;  /* 눌림 */
   /* 200 ~ 500, 800 ~ 1000 도 같은 색의 단계로 */
 }
 :root[data-theme="dark"] {
@@ -80,7 +80,7 @@ DS가 CSS 레이어 안에 있어 뒤에 불러온 서비스 CSS가 `!important`
 ```css
 /* ybm-it.css */
 .ds-dialog { --ds-dialog-width: 360px; }
-.ds-btn[data-variant="brandSolid"] { --ds-btn-radius: var(--ybm-shape-pill); }
+.ds-btn[data-variant="brandSolid"] { --ds-btn-radius: var(--ds-shape-pill); }
 ```
 
 ## 다크 모드

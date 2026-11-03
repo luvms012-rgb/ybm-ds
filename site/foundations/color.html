@@ -9,9 +9,9 @@
 <script>try { var t = localStorage.getItem("ybm-site-theme"); if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.dataset.theme = "dark"; } catch (e) {}</script>
 <link rel="icon" href="../assets/logo-ybmnet.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../dist/ybm-ds.css">
-<link rel="stylesheet" href="../assets/site.css?v=ab6a4407">
+<link rel="stylesheet" href="../assets/site.css?v=f656f0f2">
 <script src="../../dist/ybm-ds.js" defer></script>
-<script src="../assets/site.js?v=ab6a4407" defer></script>
+<script src="../assets/site.js?v=f656f0f2" defer></script>
 </head>
 <body class="site">
 <a class="site-skip" href="#main">본문 바로가기</a>
@@ -73,20 +73,20 @@
 <figure class="ds-codeblock">
   <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">css</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
   <pre class="ds-codeblock__code"><code>.my-card {
-  background: var(--ybm-color-bg-layer-default);
-  color: var(--ybm-color-fg-neutral);
-  border: 1px solid var(--ybm-color-stroke-neutral-muted);
+  background: var(--ds-color-bg-layer-default);
+  color: var(--ds-color-fg-neutral);
+  border: 1px solid var(--ds-color-stroke-neutral-muted);
 }</code></pre>
 </figure>
 <h3>브랜드 색 바꾸기</h3>
-<p>이 가이드는 모노톤으로 보여 줍니다. 팔레트 <code>--ybm-color-palette-brand-100</code> ~ <code>1000</code>만 덮어쓰면 브랜드 색을 쓰는 곳이 모두 따라 바뀝니다.</p>
+<p>이 가이드는 모노톤으로 보여 줍니다. 팔레트 <code>--ds-color-palette-brand-100</code> ~ <code>1000</code>만 덮어쓰면 브랜드 색을 쓰는 곳이 모두 따라 바뀝니다.</p>
 <figure class="ds-codeblock">
   <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">css</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
   <pre class="ds-codeblock__code"><code>/* my-service.css - DS 다음에 불러온다 */
 :root {
-  --ybm-color-palette-brand-100: #e6f6ee;  /* 옅은 배경 */
-  --ybm-color-palette-brand-600: #12a150;  /* 주 버튼, 링크 */
-  --ybm-color-palette-brand-700: #0d7d3e;  /* 눌림, 진한 글자 */
+  --ds-color-palette-brand-100: #e6f6ee;  /* 옅은 배경 */
+  --ds-color-palette-brand-600: #12a150;  /* 주 버튼, 링크 */
+  --ds-color-palette-brand-700: #0d7d3e;  /* 눌림, 진한 글자 */
   /* 200 ~ 500, 800 ~ 1000 도 같은 색의 단계로 채운다 */
 }
 :root[data-theme=&quot;dark&quot;] {

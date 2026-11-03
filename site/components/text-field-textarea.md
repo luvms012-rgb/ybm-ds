@@ -34,12 +34,12 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 | 변수 | 기본값 |
 | --- | --- |
-| `--ds-textarea-padding` | `var(--ybm-space-x3_5) var(--ybm-space-x4)` |
+| `--ds-textarea-padding` | `var(--ds-space-x3_5) var(--ds-space-x4)` |
 | `--ds-textarea-min-height` | `94px` |
-| `--ds-textarea-radius` | `var(--ybm-shape-lg)` |
-| `--ds-textarea-font-size` | `var(--ybm-font-size-t05)` |
-| `--ds-textarea-line-height` | `var(--ybm-line-height-t05)` |
-| `--ds-textarea-line` | `var(--ybm-color-stroke-neutral-weak)` |
+| `--ds-textarea-radius` | `var(--ds-shape-lg)` |
+| `--ds-textarea-font-size` | `var(--ds-font-size-t05)` |
+| `--ds-textarea-line-height` | `var(--ds-line-height-t05)` |
+| `--ds-textarea-line` | `var(--ds-color-stroke-neutral-weak)` |
 | `--ds-textarea-line-width` | `1px` |
 
 ### 크기와 여백

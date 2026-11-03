@@ -57,9 +57,9 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | --- | --- |
 | `--ds-checkbox-size` | `20px` |
 | `--ds-checkbox-icon` | `12px` |
-| `--ds-checkbox-checked-bg` | `var(--ybm-color-bg-brand-solid)` |
-| `--ds-checkbox-checked-fg` | `var(--ybm-color-fg-on-brand-solid)` |
-| `--ds-checkbox-line` | `var(--ybm-color-stroke-neutral-weak)` |
+| `--ds-checkbox-checked-bg` | `var(--ds-color-bg-brand-solid)` |
+| `--ds-checkbox-checked-fg` | `var(--ds-color-fg-on-brand-solid)` |
+| `--ds-checkbox-line` | `var(--ds-color-stroke-neutral-weak)` |
 | `--ds-checkbox-mark` | `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.75' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E")` |
 
 ### 크기와 여백

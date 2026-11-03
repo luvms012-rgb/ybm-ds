@@ -58,10 +58,10 @@ import '@ybm/ds/dist/ybm-ds.js';
 사이트와 템플릿은 국내 주요 서비스의 글자 위계를 따라 아래 규칙을 쓰고 있지만, **DS 토큰에는 자간과 긴 글 줄 높이가 없다.**
 | 제안 토큰 | 값 | 쓰는 곳 |
 |---|---|---|
-| `--ybm-letter-spacing-tight` | -0.02em | 20px 이상 제목 |
-| `--ybm-letter-spacing-snug` | -0.01em | 15~19px 본문과 소제목 |
-| `--ybm-letter-spacing-normal` | 0 | 14px 이하 |
-| `--ybm-line-height-reading` | 1.7 | 긴 글 본문 |
+| `--ds-letter-spacing-tight` | -0.02em | 20px 이상 제목 |
+| `--ds-letter-spacing-snug` | -0.01em | 15~19px 본문과 소제목 |
+| `--ds-letter-spacing-normal` | 0 | 14px 이하 |
+| `--ds-line-height-reading` | 1.7 | 긴 글 본문 |
 - 함께: 글자 스타일(제목 1~4, 본문, 라벨, 보조)을 역할 이름으로 정리할지 다시 검토. 지금은 번호(t01~t17)만 있어 사람마다 다른 번호를 고른다.
 
 ### 3-3. 페이지 레이아웃 규칙 ★
@@ -219,7 +219,7 @@ YBM 의 두 얼굴(시험 접수 대행, 온라인 교육)에 맞춰 템플릿 1
 
 | 필요 | 쓰는 곳 | 메모 |
 |---|---|---|
-| **Chart** (막대, 선, 도넛) | Dashboard, Report, Quote | 토큰 `--ybm-color-chart-*` 는 있으나 부품이 없다. CSS 만으로 막대·도넛은 가능, 선 그래프는 SVG. 우선 막대와 도넛만 |
+| **Chart** (막대, 선, 도넛) | Dashboard, Report, Quote | 토큰 `--ds-color-chart-*` 는 있으나 부품이 없다. CSS 만으로 막대·도넛은 가능, 선 그래프는 SVG. 우선 막대와 도넛만 |
 | **Code Input** (인증번호 6자리) | Sign Up | 칸 6개, 자동 다음 칸. Text Field 의 변형으로 |
 | **Date Range** (기간) | History, Report | Date Picker 2개 조합 + 빠른 선택 칩. 부품보다 템플릿 패턴으로 충분할 수 있음 |
 | **Toolbar** (편집 도구 막대) | Write | Toggle Button 묶음으로 가능. 부품 추가는 보류 |

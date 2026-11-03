@@ -60,17 +60,17 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | 변수 | 기본값 |
 | --- | --- |
 | `--ds-btn-height` | `40px` |
-| `--ds-btn-padding-x` | `var(--ybm-space-x4)` |
-| `--ds-btn-radius` | `var(--ybm-shape-sm)` |
-| `--ds-btn-gap` | `var(--ybm-space-x1_5)` |
-| `--ds-btn-font-size` | `var(--ybm-font-size-t04)` |
-| `--ds-btn-line-height` | `var(--ybm-line-height-t04)` |
-| `--ds-btn-font-weight` | `var(--ybm-font-weight-semibold)` |
+| `--ds-btn-padding-x` | `var(--ds-space-x4)` |
+| `--ds-btn-radius` | `var(--ds-shape-sm)` |
+| `--ds-btn-gap` | `var(--ds-space-x1_5)` |
+| `--ds-btn-font-size` | `var(--ds-font-size-t04)` |
+| `--ds-btn-line-height` | `var(--ds-line-height-t04)` |
+| `--ds-btn-font-weight` | `var(--ds-font-weight-semibold)` |
 | `--ds-btn-icon` | `18px` |
 | `--ds-btn-icon-only` | `20px` |
-| `--ds-btn-bg` | `var(--ybm-color-bg-brand-solid)` |
-| `--ds-btn-bg-pressed` | `var(--ybm-color-bg-brand-solid-pressed)` |
-| `--ds-btn-fg` | `var(--ybm-color-fg-on-brand-solid)` |
+| `--ds-btn-bg` | `var(--ds-color-bg-brand-solid)` |
+| `--ds-btn-bg-pressed` | `var(--ds-color-bg-brand-solid-pressed)` |
+| `--ds-btn-fg` | `var(--ds-color-fg-on-brand-solid)` |
 | `--ds-btn-border` | `transparent` |
 
 ### 크기와 여백

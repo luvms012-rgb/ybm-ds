@@ -45,8 +45,8 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 | 변수 | 기본값 |
 | --- | --- |
-| `--ds-skeleton-color` | `var(--ybm-color-palette-gray-200)` |
-| `--ds-skeleton-radius` | `var(--ybm-shape-sm)` |
+| `--ds-skeleton-color` | `var(--ds-color-palette-gray-200)` |
+| `--ds-skeleton-radius` | `var(--ds-shape-sm)` |
 | `--ds-skeleton-size` | `48px` |
 
 ### 크기와 여백

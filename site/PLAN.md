@@ -70,7 +70,7 @@ ybm-ds/site/
 |---|---|---|
 | `components.json` | 47종의 번호·이름·CSS 클래스·Figma 노드와 변형 수·props 문자열 | Components 사이드바, 개요 카드, 상세 상단 메타, Properties 컨트롤 |
 | `tokens/design-tokens.json` | 팔레트·시맨틱 색(light/dark), 타입 스케일, 간격, 반경, shape, 그림자 | Foundations 페이지 전체 |
-| `ybm-ds/tokens.css` | CSS 변수 이름 | 토큰 표의 `var(--ybm-…)` 표기, 이름 검증 |
+| `ybm-ds/tokens.css` | CSS 변수 이름 | 토큰 표의 `var(--ds-…)` 표기, 이름 검증 |
 | `ybm-ds/components.css` | 클래스별 `--ds-*` 변수 | Properties 탭의 "커스텀 변수" 표 |
 | `index.html`의 `.pv-sec[data-no]` | 컴포넌트별 미리보기 마크업 | 1차 미리보기·개요 카드 썸네일 (나중에 `content/components/`의 예제로 교체) |
 | `ybm-ds/` 패키지 폴더 | CSS·JS·폰트 | `dist/ybm-ds/`로 복사. 사이트 자체 스타일이자 미리보기 |
@@ -112,7 +112,7 @@ ybm-ds/site/
 - **반응형**
   - 1024px 미만: 목차를 숨긴다.
   - 768px 미만: 사이드바는 메뉴 버튼을 누르면 Bottom Sheet로 열린다.
-- **글꼴·색**: 전부 DS 토큰(Pretendard, `--ybm-color-*`, `--ybm-font-size-t*`)을 쓰고, 사이트용 값을 따로 만들지 않는다.
+- **글꼴·색**: 전부 DS 토큰(Pretendard, `--ds-color-*`, `--ds-font-size-t*`)을 쓰고, 사이트용 값을 따로 만들지 않는다.
 
 ### 5-2. 홈 (레퍼런스 A 홈의 YBM판)
 
@@ -209,7 +209,7 @@ ybm-ds/site/
 | 테마·Shape 토글 | `<html data-theme / data-shape>` 변경, localStorage에 기억 |
 | 검색 팔레트 | `search-index.json` 로드, 단순 매칭 |
 | 탭 | `?tab=` 주소와 동기화 |
-| 복사 | 코드·프롬프트·토큰 이름 복사 → `YBM.snackbar("복사했어요")` |
+| 복사 | 코드·프롬프트·토큰 이름 복사 → `DS.snackbar("복사했어요")` |
 | 사이드바 필터 | 컴포넌트 목록 검색 |
 | 목차 | 스크롤에 맞춰 현재 위치 강조 |
 | 템플릿 | 필터 칩 `?filter=`, 모달 `?preview=` |

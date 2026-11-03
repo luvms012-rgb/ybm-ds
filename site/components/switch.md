@@ -58,8 +58,8 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | `--ds-switch-h` | `24px` |
 | `--ds-switch-thumb` | `16px` |
 | `--ds-switch-thumb-on` | `20px` |
-| `--ds-switch-on` | `var(--ybm-color-bg-brand-solid)` |
-| `--ds-switch-thumb-color` | `var(--ybm-color-palette-static-white)` |
+| `--ds-switch-on` | `var(--ds-color-bg-brand-solid)` |
+| `--ds-switch-thumb-color` | `var(--ds-color-palette-static-white)` |
 | `--ds-switch-t` | `var(--ds-switch-thumb)` |
 
 ### 크기와 여백

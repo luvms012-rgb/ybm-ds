@@ -77,8 +77,8 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | 변수 | 기본값 |
 | --- | --- |
 | `--ds-list-item-min-h` | `56px` |
-| `--ds-list-item-py` | `var(--ybm-space-x3)` |
-| `--ds-list-item-px` | `var(--ybm-space-x4)` |
+| `--ds-list-item-py` | `var(--ds-space-x3)` |
+| `--ds-list-item-px` | `var(--ds-space-x4)` |
 
 ### 크기와 여백
 

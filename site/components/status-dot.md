@@ -31,11 +31,11 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 ## 예시
 
 ```html
-<span style="display:inline-flex;align-items:center;gap:var(--ybm-space-x1_5)"><span class="ds-statusdot" data-tone="positive"></span>연결됨</span>
-<span style="display:inline-flex;align-items:center;gap:var(--ybm-space-x1_5)"><span class="ds-statusdot" data-tone="warning"></span>지연</span>
-<span style="display:inline-flex;align-items:center;gap:var(--ybm-space-x1_5)"><span class="ds-statusdot" data-tone="critical"></span>끊김</span>
-<span style="display:inline-flex;align-items:center;gap:var(--ybm-space-x1_5)"><span class="ds-statusdot" data-tone="brand" data-pulse></span>진행 중</span>
-<span style="display:inline-flex;align-items:center;gap:var(--ybm-space-x1_5)"><span class="ds-statusdot"></span>대기</span>
+<span style="display:inline-flex;align-items:center;gap:var(--ds-space-x1_5)"><span class="ds-statusdot" data-tone="positive"></span>연결됨</span>
+<span style="display:inline-flex;align-items:center;gap:var(--ds-space-x1_5)"><span class="ds-statusdot" data-tone="warning"></span>지연</span>
+<span style="display:inline-flex;align-items:center;gap:var(--ds-space-x1_5)"><span class="ds-statusdot" data-tone="critical"></span>끊김</span>
+<span style="display:inline-flex;align-items:center;gap:var(--ds-space-x1_5)"><span class="ds-statusdot" data-tone="brand" data-pulse></span>진행 중</span>
+<span style="display:inline-flex;align-items:center;gap:var(--ds-space-x1_5)"><span class="ds-statusdot"></span>대기</span>
 ```
 
 ## 규격

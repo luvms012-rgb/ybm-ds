@@ -35,7 +35,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 `ybm-ds.js`를 불러오면 알아서 동작합니다.
 
-- YBM.snackbar("문구", { variant: "positive"|"critical", action: "확인", onAction, duration })
+- DS.snackbar("문구", { variant: "positive"|"critical", action: "확인", onAction, duration })
 
 ## 사용 지침
 
@@ -46,9 +46,9 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 ## 예시
 
 ```html
-<button class="ds-btn" data-variant="neutralWeak" onclick="YBM.snackbar('저장했어요', { variant: 'positive' })">positive 띄우기</button>
-<button class="ds-btn" data-variant="neutralWeak" onclick="YBM.snackbar('네트워크 연결을 확인해 주세요', { variant: 'critical', action: '다시 시도' })">critical 띄우기</button>
-<button class="ds-btn" data-variant="neutralWeak" onclick="YBM.snackbar('링크를 복사했어요')">default 띄우기</button>
+<button class="ds-btn" data-variant="neutralWeak" onclick="DS.snackbar('저장했어요', { variant: 'positive' })">positive 띄우기</button>
+<button class="ds-btn" data-variant="neutralWeak" onclick="DS.snackbar('네트워크 연결을 확인해 주세요', { variant: 'critical', action: '다시 시도' })">critical 띄우기</button>
+<button class="ds-btn" data-variant="neutralWeak" onclick="DS.snackbar('링크를 복사했어요')">default 띄우기</button>
 ```
 
 ## 규격

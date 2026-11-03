@@ -50,8 +50,8 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | 변수 | 기본값 |
 | --- | --- |
 | `--ds-slider-value` | `50%` |
-| `--ds-slider-active` | `var(--ybm-color-bg-neutral-solid)` |
-| `--ds-slider-thumb-line` | `var(--ybm-color-bg-neutral-solid)` |
+| `--ds-slider-active` | `var(--ds-color-bg-neutral-solid)` |
+| `--ds-slider-thumb-line` | `var(--ds-color-bg-neutral-solid)` |
 
 ### 크기와 여백
 

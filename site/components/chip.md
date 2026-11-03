@@ -43,11 +43,11 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | 변수 | 기본값 |
 | --- | --- |
 | `--ds-chip-height` | `36px` |
-| `--ds-chip-padding-x` | `calc(var(--ybm-space-x2) + var(--ybm-space-x1_5))` |
-| `--ds-chip-min-width` | `var(--ybm-space-x12)` |
+| `--ds-chip-padding-x` | `calc(var(--ds-space-x2) + var(--ds-space-x1_5))` |
+| `--ds-chip-min-width` | `var(--ds-space-x12)` |
 | `--ds-chip-icon` | `16px` |
-| `--ds-chip-bg` | `var(--ybm-color-bg-neutral-weak-alpha)` |
-| `--ds-chip-fg` | `var(--ybm-color-fg-neutral)` |
+| `--ds-chip-bg` | `var(--ds-color-bg-neutral-weak-alpha)` |
+| `--ds-chip-fg` | `var(--ds-color-fg-neutral)` |
 | `--ds-chip-line` | `transparent` |
 
 ### 크기와 여백
