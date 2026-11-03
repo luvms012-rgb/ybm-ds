@@ -178,7 +178,7 @@ const btn = (href, label, variant = 'neutralWeak', size = 'small', icon = '') =>
 
 
 // 상단 메뉴 셋 (2026-10-30 사용자 "통합": Foundations는 Get Started 왼쪽 메뉴의 한 묶음)
-const NAV = [['get-started', 'Get Started', 'index.html'], ['components', 'Components', 'components/index.html'], ['templates', 'Templates', 'templates/index.html']];
+const NAV = [['get-started', 'Get Started', 'index.html'], ['components', 'Components', 'components/index.html'], ['templates', 'Templates', 'templates/index.html'], ['themes', 'Themes', 'themes/index.html']];
 // 왼쪽 메뉴는 영문, 묶음은 두고 묶음 안은 ABC 순 (레퍼런스 B)
 const az = (list) => [...list].sort((a, b) => a[1].localeCompare(b[1], 'en'));
 // 파운데이션: 항목마다 한 페이지 (슬러그, 영문 이름)
@@ -208,6 +208,7 @@ function sideNav(section, file, root) {
     parts.push(item('components/index.html', 'Overview'));
     parts.push(...compsAZ.map((c) => item(`components/${c.slug}.html`, c.name.split(' · ')[0], koKeys(c.name.split(' · ')[0]))));
   }
+  if (section === 'themes') parts.push(item('themes/index.html', 'Overview'));
   if (section === 'templates') {
     parts.push(item('templates/index.html', 'Overview'));
     parts.push(...templates.map((t) => item(`templates/${t.slug}.html`, t.name)));
@@ -713,6 +714,31 @@ templates.forEach((t) => {
 ${t.note ? `<h2 id="responsive">반응형</h2><p>${esc(t.note)}</p>` : ''}
 ${used.length ? `<h2 id="components">쓴 컴포넌트</h2><div class="site-links">${used.map((c) => `<a class="ds-chip" data-size="small" href="../components/${c.slug}.html">${esc(c.name.split(' · ')[0])}</a>`).join('')}</div>` : ''}`,
   });
+});
+
+/* ---------------------------------------------------------------- Themes */
+// 템플릿이 와이어프레임이라면 테마는 실제 사이트 느낌. 왼쪽 테마 목록(비교용 기본 + 테마), 오른쪽 테마를 입힌 화면 미리보기
+const themesJson = readJson('site/src/themes.json').themes;
+const THEME_CARDS = [{ slug: '', name: '기본', desc: 'YBM DS 기본 모양입니다. 테마 파일 없이 쓰는 모습과 비교해 보세요.', swatches: ['#f3f4f5', '#2563eb', '#1a1c20', '#ffffff'] }, ...themesJson];
+const themeCard = (t, on) => `<button type="button" class="site-theme" aria-pressed="${on}" data-site-theme="${t.slug}"><span class="site-theme__swatches" aria-hidden="true">${t.swatches.map((c) => `<i style="background:${c}"></i>`).join('')}</span><span class="site-theme__name">${esc(t.name)}${t.en ? ` <small>${esc(t.en)}</small>` : ''}</span><span class="site-theme__desc">${esc(t.desc)}</span></button>`;
+const firstTheme = themesJson[0];
+write({
+  file: 'themes/index.html', section: 'themes', title: 'Themes', layout: 'full',
+  body: `<div class="site-themes">
+<div class="site-themes__panel">
+  <h1 class="site-h1">Themes</h1>
+  <p class="site-lead">테마는 색, 모서리, 제목 글꼴을 한 번에 바꿔 같은 DS로 전혀 다른 분위기의 사이트를 만듭니다. 템플릿이 화면의 뼈대라면, 테마는 그 위에 입히는 서비스의 얼굴입니다.</p>
+  <div class="site-themes__acts">${btn(`${GITHUB}/blob/main/dist/themes/${firstTheme.slug}.css`, '테마 파일 보기', 'neutralSolid', 'small', 'file-code').replace('<a ', '<a target="_blank" rel="noopener" data-site-theme-file ')}${btn(`pages/${firstTheme.slug}.html`, '새 창으로 보기', 'neutralWeak', 'small', 'external-link').replace('<a ', '<a target="_blank" rel="noopener" data-site-theme-open ')}</div>
+  <div class="site-themes__list" role="group" aria-label="테마">${THEME_CARDS.map((t, i) => themeCard(t, i === 1)).join('')}</div>
+  <h2 id="use">쓰는 법</h2>
+  <p>DS 다음에 테마 파일을 붙이고, html 에 테마 이름을 적습니다. 컴포넌트는 고치지 않습니다.</p>
+  ${codeblock(`<html lang="ko" data-ds-theme="${firstTheme.slug}">
+<link rel="stylesheet" href="${PUBLIC}/dist/ybm-ds.css">
+<link rel="stylesheet" href="${PUBLIC}/dist/themes/${firstTheme.slug}.css">`)}
+  <p>테마가 바꾸는 것은 브랜드 색, 바탕색, 모서리 곡률, 제목 글꼴 네 가지입니다. 포커스 링과 안내색은 접근성을 위해 그대로 둡니다.</p>
+</div>
+<div class="site-themes__stage"><iframe src="pages/${firstTheme.slug}.html" title="${esc(firstTheme.name)} 테마를 입힌 화면" data-site-frame data-site-nomono data-site-theme-frame></iframe></div>
+</div>`,
 });
 
 /* ---------------------------------------------------------------- 자산 */

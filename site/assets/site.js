@@ -12,7 +12,7 @@
     try {
       var d = f.contentDocument; if (!d) return;
       if (root.dataset.theme) d.documentElement.dataset.theme = root.dataset.theme; else delete d.documentElement.dataset.theme;
-      if (MONO_CSS && d.head && !d.getElementById("site-brand-mono")) { var l = d.createElement("link"); l.id = "site-brand-mono"; l.rel = "stylesheet"; l.href = MONO_CSS; d.head.appendChild(l); }
+      if (MONO_CSS && !f.hasAttribute("data-site-nomono") && d.head && !d.getElementById("site-brand-mono")) { var l = d.createElement("link"); l.id = "site-brand-mono"; l.rel = "stylesheet"; l.href = MONO_CSS; d.head.appendChild(l); }
     } catch (e) {}
   }
   // 처음에는 기기의 라이트 / 다크 설정을 따르고, 버튼으로 고르면 그 선택("dark" 또는 "light")을 기억해 우선한다
@@ -374,6 +374,22 @@
       else if (e.key === "ArrowRight" && !e.target.closest("input, textarea")) step(1);
     });
     try { var want = new URL(location.href).searchParams.get("preview"); if (want) { var c = cards.filter(function (x) { return slugOf(x) === want; })[0]; if (c) open(c); } } catch (e) {}
+  })();
+
+
+  // 테마 보기: 왼쪽 테마 카드를 누르면 오른쪽 화면의 html data-ds-theme 만 바꾼다 (기본 = 테마 없음)
+  (function () {
+    var frame = document.querySelector("[data-site-theme-frame]"); if (!frame) return;
+    var base = frame.getAttribute("src"), open = document.querySelector("[data-site-theme-open]"), file = document.querySelector("[data-site-theme-file]");
+    var cards = [].slice.call(document.querySelectorAll("[data-site-theme]"));
+    function apply(slug) {
+      try { var h = frame.contentDocument.documentElement; if (slug) h.setAttribute("data-ds-theme", slug); else h.removeAttribute("data-ds-theme"); } catch (e) {}
+      if (open) open.href = slug ? "pages/" + slug + ".html" : base + "#default";
+      if (file) file.hidden = !slug;
+    }
+    var cur = (cards.filter(function (c) { return c.getAttribute("aria-pressed") === "true"; })[0] || cards[0]).getAttribute("data-site-theme");
+    cards.forEach(function (c) { c.addEventListener("click", function () { cur = c.getAttribute("data-site-theme"); cards.forEach(function (x) { x.setAttribute("aria-pressed", String(x === c)); }); apply(cur); }); });
+    frame.addEventListener("load", function () { apply(cur); });
   })();
 
 })();

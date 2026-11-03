@@ -199,6 +199,11 @@ gray `00/100~1000`, brand, blue, red, green, yellow, orange, purple `100~1000`, 
 - 기준 단계: `brand-600` = 주 버튼/링크(`bg/brand-solid`, `fg/brand`), `brand-700` = 눌림/진한 글자, `brand-100~200` = 옅은 배경, `brand-300` = 옅은 선.
 - 바뀌지 않는 것(의도): 포커스 링 `stroke/focus-ring` 과 안내색 `informative-*` 은 blue 팔레트를 쓴다 - 브랜드가 바뀌어도 접근성 표시는 그대로 둔다. 로고 색 `logo/*` 도 고정.
 
+#### 테마 - `dist/themes/<이름>.css` (2026-11-03 예시 1종: 서재 `study`)
+- 테마는 브랜드 팔레트, 바탕(`bg/canvas`, `bg/layer-*`), 모서리 노브(`--ybm-shape-scale`), 제목 글꼴(`--ybm-font-family-display`) 네 가지만 바꾼다. 컴포넌트는 고치지 않는다.
+- 쓰는 법: DS 다음에 테마 파일을 붙이고 `<html data-ds-theme="study">`. 토큰이 :root 에서 값이 정해지므로 테마는 html 에만 단다(영역 단위 테마 없음). 다크는 테마 파일 안 `[data-theme="dark"]` 블록이 맡는다.
+- 사이트 Themes 메뉴에서 테마를 입힌 실제 사이트 화면으로 비교해 볼 수 있다(`site/themes/gen.mjs`).
+
 로고 고정색(모드 무관): `logo-ybm-blue #0055a7`, `logo-ybm-red #e83743`, `logo-ybm-gray #7d7d7d`
 
 ### 5.4 시맨틱 색
