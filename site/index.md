@@ -4,9 +4,53 @@
 
 YBM DS는 YBM 서비스를 위한 디자인 시스템입니다. 컴포넌트와 토큰을 Figma와 코드에 같은 이름으로 담아, 누가 만들어도 같은 화면이 나오도록 돕습니다.
 
-## AI로 바로 시작하기
+## YBM DS란 무엇인가요?
 
-아래 내용을 AI 코딩 도구(ChatGPT, Claude, Cursor 등)에 붙여 넣으면 설치부터 규칙까지 알아서 맞춥니다.
+화면을 만들 때마다 색과 버튼을 새로 정하지 않도록, 미리 정해 둔 값과 부품을 한곳에 모은 것입니다. 디자이너는 Figma에서, 개발자는 코드에서 같은 이름으로 씁니다.
+
+처음이라면 아래 세 낱말만 알아 두면 됩니다.
+
+| 낱말 | 뜻 |
+| --- | --- |
+| **토큰** | 색, 글자 크기, 간격처럼 자주 쓰는 값에 붙인 이름입니다. 값 대신 이름을 쓰면 한 번에 바꿀 수 있습니다. |
+| **컴포넌트** | 버튼, 입력창처럼 화면을 이루는 부품입니다. 정해진 클래스만 붙이면 같은 모양이 나옵니다. |
+| **템플릿** | 컴포넌트를 조립해 둔 화면 한 장입니다. 비슷한 화면을 만들 때 출발점으로 씁니다. |
+
+## 시스템 이해하기
+
+Foundations색, 글자, 간격처럼 모든 화면의 바탕이 되는 토큰과 원칙.
+
+Components버튼, 입력창처럼 화면을 이루는 부품의 모양과 쓰임.
+
+Templates부품을 조립해 둔 완성 화면. 그대로 가져가 고쳐 씁니다.
+
+## 바로 써 보기
+
+설치 과정 없이 두 단계면 첫 화면이 나옵니다.
+
+### 1. DS 불러오기
+
+페이지 `<head>`에 두 줄을 넣습니다. 글꼴(Pretendard), 토큰, 아이콘, 컴포넌트가 한 번에 들어옵니다.
+
+```html
+<link rel="stylesheet" href="https://luvms012-rgb.github.io/ybm-ds/dist/ybm-ds.css">
+<script src="https://luvms012-rgb.github.io/ybm-ds/dist/ybm-ds.js" defer></script>
+```
+
+### 2. 컴포넌트 붙이기
+
+정해진 클래스와 속성만 붙이면 됩니다. 컴포넌트마다 쓰는 법은 [Components](https://luvms012-rgb.github.io/ybm-ds/site/components/index.md)에 있습니다.
+
+```html
+<button class="ds-btn" data-variant="brandSolid" data-size="large">시작하기</button>
+<button class="ds-btn" data-variant="neutralWeak" data-size="large">나중에</button>
+```
+
+불러오는 순서, 다크 모드, 반응형 기준은 [Usage](https://luvms012-rgb.github.io/ybm-ds/site/get-started/usage.md)에서 이어서 봅니다.
+
+## AI로 만들기
+
+코드를 몰라도 됩니다. 아래 내용을 AI 코딩 도구(ChatGPT, Claude, Cursor 등)에 붙여 넣으면 설치부터 규칙까지 알아서 맞춥니다.
 
 ```text
 이 프로젝트에 YBM DS를 적용해 줘.
@@ -20,56 +64,17 @@ YBM DS는 YBM 서비스를 위한 디자인 시스템입니다. 컴포넌트와 
 6. 새 ds- 클래스를 만들거나 !important를 쓰지 마.
 ```
 
-AI 도구가 주소를 열지 못하면 [llms-full.txt](https://luvms012-rgb.github.io/ybm-ds/site/llms-full.txt)를 파일로 첨부하세요. 모든 문서를 한 파일로 모은 것입니다. 문서를 AI에 주는 다른 방법은 [AI](https://luvms012-rgb.github.io/ybm-ds/site/get-started/ai.md)에 있습니다.
+그다음 만들고 싶은 화면을 말로 설명하면 됩니다. 화면 만들기, 규칙 점검 요청 예시와 문서를 AI에 주는 방법은 [AI](https://luvms012-rgb.github.io/ybm-ds/site/get-started/ai.md)에 있습니다.
 
-그다음 만들고 싶은 화면을 말로 설명하세요. 대괄호 안만 내 상황에 맞게 바꾸면 됩니다. 비슷한 화면이 [템플릿](https://luvms012-rgb.github.io/ybm-ds/site/templates/index.html)에 있으면 그 화면에서 출발합니다.
+## 도구
 
-```text
-YBM DS로 [만들 화면, 예: 회원 목록 관리 화면]을 만들어 줘.
-- 부품은 https://luvms012-rgb.github.io/ybm-ds/components.json에 있는 것만 쓰고, 마크업은 https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/components.css 머리 주석 그대로 써.
-- 쓰는 컴포넌트는 https://luvms012-rgb.github.io/ybm-ds/site/llms.txt에서 그 문서(.md)를 읽고 사용 지침을 따라.
-- 비슷한 화면이 llms.txt의 Templates 목록에 있으면 그 HTML을 출발점으로 써.
-- 모바일 먼저 만들고, 768px 이상과 1280px 이상에서 배치를 바꿔 줘.
-- 글자는 한국어. 제목은 Bold에 자간 -0.02em, 항목 제목은 SemiBold, 본문은 Regular로 쓰고, 크기는 --ybm-font-size-* 토큰, 본문은 word-break: keep-all.
-- 배치용 CSS에는 --ybm-* 토큰만 쓰고 hex 색은 쓰지 마.
-```
+AIllms.txt와 마크다운으로 AI 도구에 DS 문서를 주는 방법.
 
-이미 만든 화면이 있다면 DS 규칙을 지키는지 점검하게 할 수 있습니다.
+Scripts여닫기, 선택처럼 움직임이 있는 컴포넌트의 스크립트.
 
-```text
-이 화면이 YBM DS 규칙을 지키는지 점검하고 고쳐 줘.
-- hex, rgb로 색을 직접 쓴 곳 → --ybm-color-* 토큰으로
-- 토큰이 아닌 임의의 간격, 글자 크기 → --ybm-space-*, --ybm-font-size-* 로
-- https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/components.css에 없는 ds- 클래스, !important
-- DS 부품으로 바꿀 수 있는데 직접 만든 버튼, 입력, 표
-고친 곳은 목록으로 알려 줘.
-```
+Figma디자이너가 쓰는 컴포넌트와 토큰 라이브러리.
 
-## 설치하기
-
-가장 쉬운 방법은 CSS로 바로 쓰는 것입니다. 빌드 도구나 설치 과정 없이 `<head>`에 두 줄만 넣으면 글꼴(Pretendard), 토큰, 아이콘, 컴포넌트가 한 번에 들어옵니다.
-
-```html
-<link rel="stylesheet" href="https://luvms012-rgb.github.io/ybm-ds/dist/ybm-ds.css">
-<script src="https://luvms012-rgb.github.io/ybm-ds/dist/ybm-ds.js" defer></script>
-```
-
-## 컴포넌트
-
-정해진 클래스와 속성만 붙이면 됩니다. 각 컴포넌트의 구조와 속성은 [Components](https://luvms012-rgb.github.io/ybm-ds/site/components/index.md)에 있습니다.
-
-```html
-<button class="ds-btn" data-variant="brandSolid" data-size="large">시작하기</button>
-<button class="ds-btn" data-variant="neutralWeak" data-size="large">나중에</button>
-```
-
-## 다크 모드
-
-html 요소에 속성 하나만 붙이면 모든 색이 어두운 화면용으로 바뀝니다. 오른쪽 위 달 모양 버튼으로 이 사이트에서도 바로 볼 수 있습니다.
-
-```html
-<html lang="ko" data-theme="dark">
-```
+GitHubDS 원본 파일과 바뀐 내용 기록.
 
 ## 다른 설치 방법
 
@@ -103,13 +108,3 @@ Tailwind를 쓰는 프로젝트는 토큰을 Tailwind 이름으로 바로 쓸 �
 // tailwind.config.js - ybm-ds/tokens/tailwind.preset.js를 프로젝트에 복사한 뒤
 module.exports = { presets: [require('./tailwind.preset.js')] };
 ```
-
-## 다음 단계
-
-Usage불러오는 순서, 화면 모드, 반응형 기준점을 알아봅니다.
-
-Foundations색, 글자, 간격처럼 모든 화면의 바탕이 되는 토큰을 봅니다.
-
-Components부품마다 미리보기, 사용법, 속성, 사용 지침을 봅니다.
-
-Templates자주 쓰는 화면을 통째로 복사해 출발점으로 씁니다.

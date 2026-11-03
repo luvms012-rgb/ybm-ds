@@ -35,4 +35,31 @@ AI 도구가 YBM DS 문서를 바로 읽을 수 있도록 모든 문서를 마�
 https://luvms012-rgb.github.io/ybm-ds/site/llms.txt
 ```
 
+### 화면 만들기
+
+만들고 싶은 화면을 말로 설명하면 DS 부품으로 조립합니다. 대괄호 안만 내 상황에 맞게 바꾸면 됩니다.
+
+```text
+YBM DS로 [만들 화면, 예: 회원 목록 관리 화면]을 만들어 줘.
+- 부품은 https://luvms012-rgb.github.io/ybm-ds/components.json에 있는 것만 쓰고, 마크업은 https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/components.css 머리 주석 그대로 써.
+- 쓰는 컴포넌트는 https://luvms012-rgb.github.io/ybm-ds/site/llms.txt에서 그 문서(.md)를 읽고 사용 지침을 따라.
+- 비슷한 화면이 llms.txt의 Templates 목록에 있으면 그 HTML을 출발점으로 써.
+- 모바일 먼저 만들고, 768px 이상과 1280px 이상에서 배치를 바꿔 줘.
+- 글자는 한국어. 제목은 Bold에 자간 -0.02em, 항목 제목은 SemiBold, 본문은 Regular로 쓰고, 크기는 --ybm-font-size-* 토큰, 본문은 word-break: keep-all.
+- 배치용 CSS에는 --ybm-* 토큰만 쓰고 hex 색은 쓰지 마.
+```
+
+### 규칙 점검하기
+
+이미 만든 화면이 DS 규칙을 지키는지 확인하고 고칩니다.
+
+```text
+이 화면이 YBM DS 규칙을 지키는지 점검하고 고쳐 줘.
+- hex, rgb로 색을 직접 쓴 곳 → --ybm-color-* 토큰으로
+- 토큰이 아닌 임의의 간격, 글자 크기 → --ybm-space-*, --ybm-font-size-* 로
+- https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/components.css에 없는 ds- 클래스, !important
+- DS 부품으로 바꿀 수 있는데 직접 만든 버튼, 입력, 표
+고친 곳은 목록으로 알려 줘.
+```
+
 문서를 고치면 사이트를 다시 만들 때 마크다운도 함께 새로 만들어집니다.

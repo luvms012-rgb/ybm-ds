@@ -352,34 +352,54 @@ const prompts = [
 - DS 부품으로 바꿀 수 있는데 직접 만든 버튼, 입력, 표
 고친 곳은 목록으로 알려 줘.`],
 ];
+// 안내 카드 (레퍼런스 B Get Started): 옅은 회색 칸에 제목과 화살표, 아래 한 줄 설명. out 이면 새 창
+const hubCard = (href, title, desc, out = false) => `<a class="site-hub" href="${href}"${out ? ' target="_blank" rel="noopener"' : ''}><span class="site-hub__title">${esc(title)}<i class="ds-icon ds-icon--${out ? 'external-link' : 'arrow-right'} ds-icon--sm" aria-hidden="true"></i></span><span class="site-hub__desc">${esc(desc)}</span></a>`;
 write({
-  file: 'index.html', section: 'get-started', title: 'Get Started', desc: 'YBM DS를 AI와 함께 바로 시작하는 방법', pager: gsPager('index.html'),
+  file: 'index.html', section: 'get-started', title: 'Get Started', desc: 'YBM DS를 처음 쓰는 사람을 위한 안내', pager: gsPager('index.html'),
   body: `<header>
   <h1 class="site-h1">Get Started</h1>
   <p class="site-lead">YBM DS는 YBM 서비스를 위한 디자인 시스템입니다. 컴포넌트와 토큰을 Figma와 코드에 같은 이름으로 담아, 누가 만들어도 같은 화면이 나오도록 돕습니다.</p>
   ${metaLinks({ figma: LINKS.figmaUrl('2608:2'), code: GITHUB })}
 </header>
 
-<h2 id="ai">AI로 바로 시작하기</h2>
-<p>아래 내용을 AI 코딩 도구(ChatGPT, Claude, Cursor 등)에 붙여 넣으면 설치부터 규칙까지 알아서 맞춥니다.</p>
-${codeblock(prompts[0][2], 'text', ' data-wrap')}
-<p>AI 도구가 주소를 열지 못하면 <a class="ds-link" href="llms-full.txt">llms-full.txt</a>를 파일로 첨부하세요. 모든 문서를 한 파일로 모은 것입니다. 문서를 AI에 주는 다른 방법은 <a class="ds-link" href="get-started/ai.html">AI</a>에 있습니다.</p>
-<p>그다음 만들고 싶은 화면을 말로 설명하세요. 대괄호 안만 내 상황에 맞게 바꾸면 됩니다. 비슷한 화면이 <a class="ds-link" href="templates/index.html">템플릿</a>에 있으면 그 화면에서 출발합니다.</p>
-${codeblock(prompts[1][2], 'text', ' data-wrap')}
-<p>이미 만든 화면이 있다면 DS 규칙을 지키는지 점검하게 할 수 있습니다.</p>
-${codeblock(prompts[2][2], 'text', ' data-wrap')}
+<h2 id="about">YBM DS란 무엇인가요?</h2>
+<p>화면을 만들 때마다 색과 버튼을 새로 정하지 않도록, 미리 정해 둔 값과 부품을 한곳에 모은 것입니다. 디자이너는 Figma에서, 개발자는 코드에서 같은 이름으로 씁니다.</p>
+<p>처음이라면 아래 세 낱말만 알아 두면 됩니다.</p>
+${table(['낱말', '뜻'], [
+  ['<b>토큰</b>', '색, 글자 크기, 간격처럼 자주 쓰는 값에 붙인 이름입니다. 값 대신 이름을 쓰면 한 번에 바꿀 수 있습니다.'],
+  ['<b>컴포넌트</b>', '버튼, 입력창처럼 화면을 이루는 부품입니다. 정해진 클래스만 붙이면 같은 모양이 나옵니다.'],
+  ['<b>템플릿</b>', '컴포넌트를 조립해 둔 화면 한 장입니다. 비슷한 화면을 만들 때 출발점으로 씁니다.'],
+])}
 
-<h2 id="install">설치하기</h2>
-<p>가장 쉬운 방법은 CSS로 바로 쓰는 것입니다. 빌드 도구나 설치 과정 없이 <code>&lt;head&gt;</code>에 두 줄만 넣으면 글꼴(Pretendard), 토큰, 아이콘, 컴포넌트가 한 번에 들어옵니다.</p>
+<h2 id="system">시스템 이해하기</h2>
+<div class="site-grid site-grid--hub">
+  ${hubCard('{root}foundations/' + FOUND[0][0] + '.html', 'Foundations', '색, 글자, 간격처럼 모든 화면의 바탕이 되는 토큰과 원칙.')}
+  ${hubCard('{root}components/index.html', 'Components', '버튼, 입력창처럼 화면을 이루는 부품의 모양과 쓰임.')}
+  ${hubCard('{root}templates/index.html', 'Templates', '부품을 조립해 둔 완성 화면. 그대로 가져가 고쳐 씁니다.')}
+</div>
+
+<h2 id="start">바로 써 보기</h2>
+<p>설치 과정 없이 두 단계면 첫 화면이 나옵니다.</p>
+<h3>1. DS 불러오기</h3>
+<p>페이지 <code>&lt;head&gt;</code>에 두 줄을 넣습니다. 글꼴(Pretendard), 토큰, 아이콘, 컴포넌트가 한 번에 들어옵니다.</p>
 ${codeblock(CSS_LINK)}
-
-<h2 id="first">컴포넌트</h2>
-<p>정해진 클래스와 속성만 붙이면 됩니다. 각 컴포넌트의 구조와 속성은 <a class="ds-link" href="components/index.html">Components</a>에 있습니다.</p>
+<h3>2. 컴포넌트 붙이기</h3>
+<p>정해진 클래스와 속성만 붙이면 됩니다. 컴포넌트마다 쓰는 법은 <a class="ds-link" href="components/index.html">Components</a>에 있습니다.</p>
 ${example(`<div class="pv-stage"><button class="ds-btn" data-variant="brandSolid" data-size="large">시작하기</button><button class="ds-btn" data-variant="neutralWeak" data-size="large">나중에</button></div>`, `<button class="ds-btn" data-variant="brandSolid" data-size="large">시작하기</button>\n<button class="ds-btn" data-variant="neutralWeak" data-size="large">나중에</button>`)}
+<p>불러오는 순서, 다크 모드, 반응형 기준은 <a class="ds-link" href="get-started/usage.html">Usage</a>에서 이어서 봅니다.</p>
 
-<h2 id="theme">다크 모드</h2>
-<p>html 요소에 속성 하나만 붙이면 모든 색이 어두운 화면용으로 바뀝니다. 오른쪽 위 달 모양 버튼으로 이 사이트에서도 바로 볼 수 있습니다.</p>
-${codeblock('<html lang="ko" data-theme="dark">')}
+<h2 id="ai">AI로 만들기</h2>
+<p>코드를 몰라도 됩니다. 아래 내용을 AI 코딩 도구(ChatGPT, Claude, Cursor 등)에 붙여 넣으면 설치부터 규칙까지 알아서 맞춥니다.</p>
+${codeblock(prompts[0][2], 'text', ' data-wrap')}
+<p>그다음 만들고 싶은 화면을 말로 설명하면 됩니다. 화면 만들기, 규칙 점검 요청 예시와 문서를 AI에 주는 방법은 <a class="ds-link" href="get-started/ai.html">AI</a>에 있습니다.</p>
+
+<h2 id="tools">도구</h2>
+<div class="site-grid site-grid--hub">
+  ${hubCard('{root}get-started/ai.html', 'AI', 'llms.txt와 마크다운으로 AI 도구에 DS 문서를 주는 방법.')}
+  ${hubCard('{root}get-started/scripts.html', 'Scripts', '여닫기, 선택처럼 움직임이 있는 컴포넌트의 스크립트.')}
+  ${hubCard(LINKS.figmaUrl('2608:2'), 'Figma', '디자이너가 쓰는 컴포넌트와 토큰 라이브러리.', true)}
+  ${hubCard(GITHUB, 'GitHub', 'DS 원본 파일과 바뀐 내용 기록.', true)}
+</div>
 
 <h2 id="other">다른 설치 방법</h2>
 <p>개발자가 버전을 고정하거나 파일을 직접 가지고 있어야 할 때 씁니다.</p>
@@ -391,15 +411,7 @@ ${codeblock(`<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/luvms012-r
 ${codeblock(`git clone ${GITHUB}.git\n# ybm-ds/dist 폴더를 프로젝트로 복사한 뒤\n<link rel="stylesheet" href="./dist/ybm-ds.css">\n<script src="./dist/ybm-ds.js" defer></script>`, 'shell')}
 <h3>Tailwind CSS와 함께 쓰기</h3>
 <p>Tailwind를 쓰는 프로젝트는 토큰을 Tailwind 이름으로 바로 쓸 수 있는 설정 파일이 있습니다. 값은 모두 DS의 CSS 변수를 가리키므로 <code>ybm-ds.css</code>도 함께 불러와야 합니다.</p>
-${codeblock(`// tailwind.config.js - ybm-ds/tokens/tailwind.preset.js를 프로젝트에 복사한 뒤\nmodule.exports = { presets: [require('./tailwind.preset.js')] };`, 'javascript')}
-
-<h2 id="next">다음 단계</h2>
-<div class="site-grid">
-  <a class="site-card" href="get-started/usage.html"><div class="site-card__body"><p class="site-card__title">Usage</p><p class="site-card__desc">불러오는 순서, 화면 모드, 반응형 기준점을 알아봅니다.</p></div></a>
-  <a class="site-card" href="{root}foundations/${FOUND[0][0]}.html"><div class="site-card__body"><p class="site-card__title">Foundations</p><p class="site-card__desc">색, 글자, 간격처럼 모든 화면의 바탕이 되는 토큰을 봅니다.</p></div></a>
-  <a class="site-card" href="components/index.html"><div class="site-card__body"><p class="site-card__title">Components</p><p class="site-card__desc">부품마다 미리보기, 사용법, 속성, 사용 지침을 봅니다.</p></div></a>
-  <a class="site-card" href="templates/index.html"><div class="site-card__body"><p class="site-card__title">Templates</p><p class="site-card__desc">자주 쓰는 화면을 통째로 복사해 출발점으로 씁니다.</p></div></a>
-</div>`.replaceAll('href="components/', 'href="{root}components/').replaceAll('href="templates/', 'href="{root}templates/').replaceAll('href="get-started/', 'href="{root}get-started/'),
+${codeblock(`// tailwind.config.js - ybm-ds/tokens/tailwind.preset.js를 프로젝트에 복사한 뒤\nmodule.exports = { presets: [require('./tailwind.preset.js')] };`, 'javascript')}`.replaceAll('href="components/', 'href="{root}components/').replaceAll('href="templates/', 'href="{root}templates/').replaceAll('href="get-started/', 'href="{root}get-started/'),
 });
 
 // 사용 규칙
@@ -765,6 +777,12 @@ ${table(['목록', '내용'], [
 ${codeblock(`아래 YBM DS 문서를 읽고 로그인 화면을 HTML 로 만들어 줘.
 부품은 .ds-* 클래스만, 색과 간격은 --ybm-* 토큰만 써 줘.
 ${SITE_URL}llms.txt`, 'text')}
+<h3>화면 만들기</h3>
+<p>${prompts[1][1]} 대괄호 안만 내 상황에 맞게 바꾸면 됩니다.</p>
+${codeblock(prompts[1][2], 'text', ' data-wrap')}
+<h3>규칙 점검하기</h3>
+<p>${prompts[2][1]}</p>
+${codeblock(prompts[2][2], 'text', ' data-wrap')}
 <p>문서를 고치면 사이트를 다시 만들 때 마크다운도 함께 새로 만들어집니다.</p>`,
 });
 
