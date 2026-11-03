@@ -91,7 +91,7 @@ const plans = () => {
 <script>
 document.addEventListener('click', function (e) { var b = e.target.closest('[data-period]'); if (b && b.tagName === 'BUTTON') document.querySelector('.tp-pr').dataset.period = b.dataset.period; });
 </script>`;
-  return { slug: 'pricing-plans', en: 'Pricing Plans', name: '요금제 비교', group: 'Pricing', desc: '요금제를 나란히 놓고 비교해 고르는 화면입니다. 월 결제와 연 결제를 바꿔 보면 가격이 바뀌고, 아래 표로 기능 차이를 한눈에 봅니다.', css, body };
+  return { slug: 'pricing-plans', en: 'Pricing Plans', name: '요금제 비교', group: 'Pricing', desc: '요금제를 나란히 놓고 비교하는 화면입니다. 월 결제와 연 결제를 바꿔 가며 가격을 견줘 봅니다.', css, body };
 };
 
 /* 2. 구독 결제 ---------------------------------------------------- */
@@ -140,7 +140,7 @@ const checkout = () => {
     </aside>
   </div>
 </main></div>`;
-  return { slug: 'subscription-checkout', en: 'Subscription Checkout', name: '구독 결제', group: 'Pricing', desc: '고른 요금제를 결제하는 화면입니다. 결제 주기, 결제 수단, 할인 코드, 약관 동의를 한 화면에서 받고 오른쪽 요약에 오늘 결제할 금액과 다음 결제일을 보여 줍니다.', css, body };
+  return { slug: 'subscription-checkout', en: 'Subscription Checkout', name: '구독 결제', group: 'Pricing', desc: '고른 요금제를 결제하는 화면입니다. 오늘 결제할 금액과 다음 결제일을 옆에 보여 줍니다.', css, body };
 };
 
 /* 3. 내 구독 ------------------------------------------------------ */
@@ -183,7 +183,7 @@ const manage = () => {
     <div class="tp-between"><div class="tp-stack"><span class="tp-h4">구독 해지</span><span class="tp-sub">해지해도 2027.10.09까지는 프로 요금제를 그대로 쓸 수 있어요.</span></div>${btn('구독 해지하기', { variant: 'ghost' })}</div>
   </main>
 </div>`;
-  return { slug: 'subscription-settings', en: 'Subscription Settings', name: '내 구독', group: 'Pricing', desc: '지금 쓰는 요금제와 다음 결제일, 사용량, 결제 수단, 결제 내역을 한 화면에서 관리합니다. 요금제 바꾸기와 해지는 같은 화면에서 시작합니다.', css, body };
+  return { slug: 'subscription-settings', en: 'Subscription Settings', name: '내 구독', group: 'Pricing', desc: '지금 쓰는 요금제와 결제를 관리하는 화면입니다. 요금제 바꾸기와 해지도 여기서 시작합니다.', css, body };
 };
 
 /* 4. 구독 해지 ---------------------------------------------------- */
@@ -227,7 +227,7 @@ const cancel = () => {
     <div class="tp-cancel-acts">${btn('해지 신청하기', { variant: 'neutralWeak', size: 'large' })}${btn('구독 유지하기', { variant: 'brandSolid', size: 'large' })}</div>
   </div>
 </main></div>`;
-  return { slug: 'subscription-cancel', en: 'Cancel Subscription', name: '구독 해지', group: 'Pricing', desc: '구독을 해지하기 전에 잃게 되는 혜택과 유의 사항을 보여 주는 화면입니다. 해지 까닭을 묻고 할인 제안을 함께 보여 준 뒤 유지와 해지 가운데 고르게 합니다.', css, body };
+  return { slug: 'subscription-cancel', en: 'Cancel Subscription', name: '구독 해지', group: 'Pricing', desc: '구독을 해지하기 전에 잃게 되는 혜택을 알려 주는 화면입니다. 할인을 한 번 더 제안하고, 해지는 사용자가 직접 고릅니다.', css, body };
 };
 
 export const templates = [plans, checkout, manage, cancel].map((f) => f());

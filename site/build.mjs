@@ -341,7 +341,7 @@ write({
   file: 'index.html', section: 'get-started', title: 'Get Started', desc: 'YBM DS를 AI와 함께 바로 시작하는 방법', pager: gsPager('index.html'),
   body: `<header>
   <h1 class="site-h1">Get Started</h1>
-  <p class="site-lead">YBM DS는 YBM 서비스를 위한 공통 디자인 시스템입니다. 디자인과 코드가 같은 이름과 값을 써서, 누가 만들어도 같은 화면이 나오도록 돕습니다.</p>
+  <p class="site-lead">YBM DS는 YBM 서비스를 위한 디자인 시스템입니다. 컴포넌트와 토큰을 Figma와 코드에 같은 이름으로 담아, 누가 만들어도 같은 화면이 나오도록 돕습니다.</p>
   ${metaLinks({ figma: LINKS.figmaUrl('2608:2'), code: GITHUB })}
 </header>
 
@@ -390,7 +390,7 @@ ${codeblock(`// tailwind.config.js - ybm-ds/tokens/tailwind.preset.js를 프로�
 const bpRows = [['sm', '480px', '큰 휴대폰'], ['md', '768px', '태블릿, PC 부품으로 바뀌는 기준'], ['lg', '1280px', '넓은 PC, 3단 배치'], ['xl', '1440px', '아주 넓은 화면']];
 write({
   file: 'get-started/usage.html', section: 'get-started', title: 'Usage', pager: gsPager('get-started/usage.html'),
-  body: `<header><h1 class="site-h1">Usage</h1><p class="site-lead">DS를 불러오는 순서와 화면 모드, 반응형 기준을 알아봅니다.</p></header>
+  body: `<header><h1 class="site-h1">Usage</h1><p class="site-lead">DS를 불러오는 순서와 다크 모드, 반응형 기준을 알아봅니다.</p></header>
 
 <h2 id="order">불러오는 순서</h2>
 <p>DS를 먼저, 서비스 CSS를 그다음에 불러옵니다. DS 전체가 CSS 레이어 안에 들어 있어서 레이어 밖에 쓴 서비스 CSS는 선택자 길이와 상관없이 항상 DS를 이깁니다. 그래서 <code>!important</code>나 긴 선택자로 다툴 필요가 없습니다.</p>
@@ -445,7 +445,7 @@ fs.mkdirSync(path.join(SITE, 'foundations'), { recursive: true });
 fs.writeFileSync(path.join(SITE, 'foundations/index.html'), `<!doctype html>\n<html lang="ko"><head><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=${FOUND[0][0]}.html"><title>Foundations - YBM DS</title></head><body><a href="${FOUND[0][0]}.html">${esc(FOUND[0][1])}</a></body></html>\n`);
 const foundPages = {
   color: {
-    title: '색', lead: '색은 화면의 위계, 상태, 브랜드를 구분해 보여 주도록 돕습니다.',
+    title: '색', lead: '색은 정보의 위계와 상태, 브랜드를 구분해 보여 줍니다.',
     body: `<h2 id="overview">개요</h2>
 <p>화면에는 시맨틱 색(<code>bg</code>, <code>fg</code>, <code>stroke</code>)만 씁니다. 팔레트(<code>--ybm-color-palette-*</code>)는 시맨틱 색을 만드는 원료라 화면에 직접 쓰지 않습니다. 색을 토큰으로만 쓰면 <code>data-theme="dark"</code> 하나로 다크 모드가 맞춰집니다. 아래 표의 값은 라이트 / 다크 순서입니다.</p>
 <h2 id="brand">브랜드 색</h2>
@@ -454,7 +454,7 @@ ${codeblock(`/* my-service.css - DS 다음에 불러온다 */\n:root {\n  --ybm-
 ${colorGroups.map(([k, label]) => `<h2 id="${k}">${label}</h2>\n${colorTable(k)}`).join('\n')}`,
   },
   typography: {
-    title: '글자', lead: '타이포그래피는 내용을 분명하고 읽기 쉽게 전하기 위한 디자인 요소입니다.',
+    title: '글자', lead: '타이포그래피는 글을 분명하고 읽기 쉽게 전합니다.',
     body: `<h2 id="overview">개요</h2>
 <p>글꼴은 Pretendard 입니다. 크기는 <code>--ybm-font-size-t01</code> ~ <code>t17</code>, 줄 높이는 같은 번호의 <code>--ybm-line-height-*</code>를 짝으로 씁니다. 굵기는 regular 400, medium 500, semibold 600, bold 700 입니다.</p>
 <p>한글 위계: 페이지 제목 40/48 medium(500), 리드 16/24 light(300), 섹션 제목 24/32 medium, 소제목 16/22 medium, 본문 16/28 regular, 보조 글 14 regular 입니다. 자간은 주지 않습니다.</p>
@@ -464,14 +464,14 @@ ${table(['토큰', '크기 / 줄 높이 (px)', '보기'], tokRe(/--ybm-font-size
 ${table(['토큰', '값', '보기'], tokRe(/--ybm-font-weight-([a-z]+): (\d+);/g).map((m) => [`<code>--ybm-font-weight-${m[1]}</code>`, m[2], `<span class="site-sample" style="font-size: var(--ybm-font-size-t06); font-weight: var(--ybm-font-weight-${m[1]})">가나다 Aa 123</span>`]))}`,
   },
   spacing: {
-    title: '간격', lead: '간격은 컴포넌트와 콘텐츠 사이의 거리를 정해 묶음과 위계를 보여 줍니다.',
+    title: '간격', lead: '간격은 요소 사이의 거리로 무엇이 한 묶음인지 보여 줍니다.',
     body: `<h2 id="overview">개요</h2>
 <p>4px 단위를 기본으로 하고, 작은 간격은 2px 단위도 씁니다. 화면 좌우 여백은 <code>--ybm-space-x-global-gutter</code> 입니다.</p>
 <h2 id="tokens">토큰</h2>
 ${table(['토큰', '값', '보기'], tokRe(/--ybm-space-(x[0-9_]+): (\d+)px/g).map((m) => [`<code>--ybm-space-${m[1]}</code>`, `${m[2]}px`, `<span class="site-bar" style="width: var(--ybm-space-${m[1]})"></span>`]))}`,
   },
   shape: {
-    title: '모서리', lead: '모서리는 컴포넌트와 콘텐츠 모서리의 둥글기를 정합니다.',
+    title: '모서리', lead: '모서리는 요소의 둥글기를 정해 화면의 인상을 맞춥니다.',
     body: `<h2 id="overview">개요</h2>
 <p>모서리는 쓰임 이름으로 씁니다. 어떤 영역에 <code>--ybm-shape-scale</code>을 0과 1 사이 값으로 덮어쓰면 그 안의 모서리만 덜 둥글게 바꿀 수 있습니다.</p>
 <h2 id="tokens">토큰</h2>
@@ -481,7 +481,7 @@ ${table(['토큰', '값', '보기'], [...new Set(tokRe(/--ybm-shape-base-([a-z0-
 }))}`,
   },
   elevation: {
-    title: '그림자', lead: '그림자와 겹침 순서는 화면 요소 사이의 깊이와 위계를 보여 줍니다.',
+    title: '그림자', lead: '그림자와 겹침 순서는 요소가 얼마나 떠 있는지, 무엇이 위에 있는지 보여 줍니다.',
     body: `<h2 id="shadow">그림자</h2>
 <p>숫자 대신 쓰임 이름으로 씁니다.</p>
 ${table(['토큰', '쓰임', '보기'], tokRe(/--ybm-elevation-(raised|overlay|panel|floating|modal):\s+[^;]+;\s*\/\* ([^*]+) \*\//g).map((m) => [`<code>--ybm-elevation-${m[1]}</code>`, prose(m[2]), `<span class="site-shadow" style="box-shadow: var(--ybm-elevation-${m[1]})"></span>`]))}
@@ -489,7 +489,7 @@ ${table(['토큰', '쓰임', '보기'], tokRe(/--ybm-elevation-(raised|overlay|p
 ${table(['토큰', '값'], tokRe(/--ybm-z-([a-z]+): (\d+);/g).map((m) => [`<code>--ybm-z-${m[1]}</code>`, m[2]]))}`,
   },
   motion: {
-    title: '움직임', lead: '움직임은 화면의 변화를 자연스럽게 이어 주어 쉽게 쓸 수 있도록 돕습니다.',
+    title: '움직임', lead: '움직임은 화면이 바뀌는 과정을 자연스럽게 이어 줍니다.',
     body: `<h2 id="duration">길이</h2>
 ${table(['토큰', '값'], tokRe(/--ybm-duration-([a-z]+): ([^;]+);/g).map((m) => [`<code>--ybm-duration-${m[1]}</code>`, `<code>${esc(m[2])}</code>`]))}
 <h2 id="easing">속도 곡선</h2>
@@ -508,7 +508,7 @@ const iconNames = [...new Set([...iconsCss.matchAll(/\.ds-icon--([a-z0-9-]+)\s*\
 // Lucide 전체 목록 - site/src/lucide-icons.json (site/lucide-update.mjs로 만든다). 화면에는 site.js가 그린다
 const lucide = JSON.parse(fs.readFileSync(path.join(SITE, 'src/lucide-icons.json'), 'utf8'));
 const lucideCount = Object.keys(lucide.icons).length;
-const ICON_LEAD = '아이콘은 사용자가 정보와 기능을 빠르게 알아보도록 돕는 디자인 요소입니다.';
+const ICON_LEAD = '아이콘은 정보와 기능을 빠르게 알아보도록 돕습니다.';
 const ICON_PRACTICES = [
   [true, '같은 뜻에는 늘 같은 아이콘을 씁니다. 닫기는 x, 더 보기는 ellipsis 입니다.'],
   [true, '아이콘만 있는 버튼에는 aria-label을 붙입니다.'],
@@ -569,7 +569,7 @@ ${practices(ICON_PRACTICES)}
 const jsRows = [...dsJs.slice(0, dsJs.indexOf('*/')).matchAll(/^\s*· (.+?) — (.+)$/gm)].map((m) => [`<b>${esc(m[1])}</b>`, inline(prose(m[2]))]);
 write({
   file: 'get-started/scripts.html', section: 'get-started', title: 'Scripts', pager: gsPager('get-started/scripts.html'),
-  body: `<header><h1 class="site-h1">Scripts</h1><p class="site-lead"><code>ybm-ds.js</code>는 창 열기, 알림처럼 CSS만으로 안 되는 동작을 맡는 스크립트입니다. 불러오기만 하면 HTML 속성을 보고 알아서 동작합니다.</p></header>
+  body: `<header><h1 class="site-h1">Scripts</h1><p class="site-lead"><code>ybm-ds.js</code>는 창 열기, 알림처럼 CSS만으로는 할 수 없는 동작을 맡습니다. 불러오기만 하면 HTML 속성을 보고 알아서 동작합니다.</p></header>
 <h2 id="features">하는 일</h2>
 ${table(['부품', '하는 일'], jsRows)}
 <h2 id="api">직접 부르기</h2>
@@ -607,7 +607,7 @@ const coverThumb = (c) => cardThumb(c).replace('class="site-tile__thumb"', 'clas
 const hero = (title, lead) => `<header class="site-hero"><h1 class="site-h1">${esc(title)}</h1><p class="site-lead">${esc(lead)}</p></header>`;
 write({
   file: 'components/index.html', section: 'components', title: 'Components', layout: 'wide',
-  body: `<header><h1 class="site-h1">Components</h1><p class="site-lead">YBM DS의 컴포넌트 ${comps.length}종을 둘러보세요. 모두 Figma와 CSS가 같은 이름, 같은 값으로 짝을 이룹니다.</p></header>
+  body: `<header><h1 class="site-h1">Components</h1><p class="site-lead">화면을 만드는 데 쓰는 컴포넌트 ${comps.length}종입니다. Figma와 CSS가 같은 이름과 값으로 짝을 이룹니다.</p></header>
 <div class="site-tiles">${compsAZ.map((c) => `<a class="site-tile" href="${c.slug}.html" data-site-item="${esc((c.name + ' ' + koKeys(c.name.split(' · ')[0])).toLowerCase())}">${cardThumb(c)}<p class="site-tile__name">${esc(c.name.split(' · ')[0])}</p></a>`).join('\n')}</div>
 <div class="ds-empty site-empty-result" hidden><span class="ds-empty__media"><i class="ds-icon ds-icon--search" aria-hidden="true"></i></span><p class="ds-empty__title">찾는 컴포넌트가 없어요</p><p class="ds-empty__desc">다른 이름으로 찾아보세요.</p></div>`,
 });
@@ -669,7 +669,7 @@ const TPL_GROUP_KO = { Dashboard: '대시보드', Table: '표', Form: '입력 �
 const TPL_FIGMA = JSON.parse(fs.readFileSync(path.join(SITE, 'src/templates.json'), 'utf8')).figmaHeader;
 write({
   file: 'templates/index.html', section: 'templates', title: 'Templates', layout: 'full',
-  body: `${hero('Templates', '자주 쓰는 화면을 DS 컴포넌트로 미리 조립해 둔 모음입니다. 통째로 복사해 출발점으로 쓰세요.').replace('class="site-hero"', 'class="site-hero site-hero--tpl"')}
+  body: `${hero('Templates', '자주 만드는 화면을 DS 컴포넌트로 미리 조립해 두었습니다. 통째로 복사해 새 화면의 출발점으로 쓰세요.').replace('class="site-hero"', 'class="site-hero site-hero--tpl"')}
 <div class="site-toolbar site-toolbar--center">
   <div class="ds-chiptabs" role="tablist" aria-label="분류">
     <button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-filter="">전체</button>

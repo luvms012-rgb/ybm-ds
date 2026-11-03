@@ -139,7 +139,7 @@ const cart = () => {
 </main>
 <div class="tp-orderbar"><div class="tp-stack"><span class="tp-caption">상품 ${T('5')}개</span><b>${won(435800)}</b></div>${btn('주문하기', { variant: 'brandSolid', size: 'large' })}</div>
 </div>`;
-  return { slug: 'cart', en: 'Cart', name: '장바구니', group: 'Commerce', desc: '담은 상품을 배송 묶음별로 보고 수량과 옵션을 바꾸는 장바구니입니다. 무료 배송까지 남은 금액, 품절 표시, 오른쪽 결제 예정 금액과 주문 버튼, 함께 사면 좋은 상품을 보여 줍니다.', css: CSS, body };
+  return { slug: 'cart', en: 'Cart', name: '장바구니', group: 'Commerce', desc: '담은 상품을 확인하고 수량과 옵션을 바꾸는 장바구니입니다. 결제 예정 금액을 보며 바로 주문합니다.', css: CSS, body };
 };
 
 /* 2. 빈 장바구니 ------------------------------------------------- */
@@ -156,7 +156,7 @@ const cartEmpty = () => {
   <section class="tp-sec" aria-labelledby="recs">${secHead('이런 상품은 어때요', { id: 'recs', cls: 'tp-h2', sub: '최근 본 상품과 비슷해요' })}<div class="tp-recs">${RECS.map(rec).join('')}</div></section>
 </main>
 </div>`;
-  return { slug: 'cart-empty', en: 'Empty Cart', name: '빈 장바구니', group: 'Commerce', desc: '담은 상품이 없을 때의 장바구니입니다. 빈 상태 안내와 쇼핑으로 돌아가는 버튼, 보관 기간 안내, 최근 본 상품과 비슷한 추천 상품을 보여 줍니다.', css, body };
+  return { slug: 'cart-empty', en: 'Empty Cart', name: '빈 장바구니', group: 'Commerce', desc: '담은 상품이 없을 때의 장바구니입니다. 추천 상품으로 쇼핑을 이어 가게 돕습니다.', css, body };
 };
 
 export const templates = [cart, cartEmpty].map((f) => f());

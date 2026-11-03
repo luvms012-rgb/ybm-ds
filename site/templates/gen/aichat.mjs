@@ -60,7 +60,7 @@ const conversation = () => {
   </aside>
 </div>
 </div>`;
-  return { slug: 'ai-chat', en: 'AI Chat Conversation', name: 'AI 대화', group: 'AI Chat', desc: '글과 코드, 도구 사용 기록이 섞인 AI 대화 화면입니다. 옆에 크기를 바꿀 수 있는 결과물 패널을 둡니다.', css, body };
+  return { slug: 'ai-chat', en: 'AI Chat Conversation', name: 'AI 대화', group: 'AI Chat', desc: 'AI와 주고받은 대화와 결과물을 함께 보는 화면입니다. 결과물은 옆 패널에서 따로 엽니다.', css, body };
 };
 
 /* 2. AI 첫 화면 ------------------------------------------------- */
@@ -78,7 +78,7 @@ const landing = () => {
   ${composer('무엇이든 물어보세요', ['수업 계획서.pdf', '지난 학기 설문.xlsx', '강의 영상 목록.csv'])}
   <div class="tp-cats" role="group" aria-label="분류">${[['pencil', '글쓰기'], ['code', '코딩'], ['search', '찾아보기'], ['palette', '만들기'], ['book-open', '배우기']].map(([ic, t]) => btn(t, { variant: 'neutralOutline', ic, attrs: 'aria-pressed="false"' })).join('')}</div>
 </div></main>`;
-  return { slug: 'ai-chat-landing', en: 'AI Chat Landing', name: 'AI 첫 화면', group: 'AI Chat', desc: '대화를 시작하기 전에 보여 주는 AI 첫 화면입니다. 가운데 입력창과 추천 버튼으로 바로 시작하게 돕습니다.', css, body };
+  return { slug: 'ai-chat-landing', en: 'AI Chat Landing', name: 'AI 첫 화면', group: 'AI Chat', desc: '대화를 시작하기 전에 보여 주는 AI 첫 화면입니다. 입력창과 추천 버튼으로 바로 시작합니다.', css, body };
 };
 
 export const templates = [conversation, landing].map((f) => f());

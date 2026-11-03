@@ -45,7 +45,7 @@ const dialog = () => {
   </div>
 </div></div>
 </div>`;
-  return { slug: 'settings-dialog', en: 'Settings Dialog', name: '설정 대화상자', group: 'Settings', desc: '보던 화면을 떠나지 않고 대화상자 안에서 바꾸는 설정입니다. 왼쪽에서 메뉴를 찾고, 오른쪽에서 바꾼 값은 바로 적용됩니다.', css, body };
+  return { slug: 'settings-dialog', en: 'Settings Dialog', name: '설정 대화상자', group: 'Settings', desc: '보던 화면을 떠나지 않고 창 안에서 설정을 바꾸는 화면입니다. 바꾼 값은 바로 적용됩니다.', css, body };
 };
 
 /* 2. 설정 폼 (한 장으로 이어지는) ------------------------------ */
@@ -78,7 +78,7 @@ const form = () => {
   </main>
 </div>
 </div>`;
-  return { slug: 'settings', en: 'Settings Form', name: '설정 폼', group: 'Settings', desc: '모든 설정을 한 페이지에 이어 놓은 가장 단순한 설정 화면입니다. 메뉴를 오갈 필요 없이 아래로 내리며 바꿉니다.', css, body };
+  return { slug: 'settings', en: 'Settings Form', name: '설정 폼', group: 'Settings', desc: '모든 설정을 한 페이지에 이어 놓은 가장 단순한 설정 화면입니다. 설정 항목이 많지 않을 때 씁니다.', css, body };
 };
 
 /* 3. 설정 패널 (왼쪽 메뉴로 바꾸는) ---------------------------- */
@@ -105,7 +105,7 @@ const panels = () => {
   </main>
 </div>
 </div>`;
-  return { slug: 'settings-sidebar', en: 'Settings Panels', name: '설정 패널', group: 'Settings', desc: '왼쪽 메뉴로 설정 묶음을 바꾸는 설정 화면입니다. 따로 폼을 열지 않고 항목마다 그 자리에서 고칩니다.', css, body };
+  return { slug: 'settings-sidebar', en: 'Settings Panels', name: '설정 패널', group: 'Settings', desc: '왼쪽 메뉴로 설정 묶음을 오가는 설정 화면입니다. 항목은 그 자리에서 바로 수정합니다.', css, body };
 };
 
 export const templates = [dialog, form, panels].map((f) => f());

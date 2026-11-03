@@ -40,7 +40,7 @@ const analytics = () => {
   </section>
 </main>
 </div>`;
-  return { slug: 'dashboard', en: 'Analytics Dashboard', name: '분석 대시보드', group: 'Dashboard', desc: '이용자 추이 그래프, 핵심 지표, 이용자 구성, 참여 현황을 한 화면에서 훑어보는 기본 분석 대시보드입니다.', css, body };
+  return { slug: 'dashboard', en: 'Analytics Dashboard', name: '분석 대시보드', group: 'Dashboard', desc: '서비스 이용 흐름을 한눈에 보는 기본 분석 대시보드입니다. 추이 그래프와 핵심 지표를 먼저 보여 줍니다.', css, body };
 };
 
 /* 2. 프로젝트 현황 ----------------------------------------------- */
@@ -63,7 +63,7 @@ ${head('새 학습 앱 출시', { sub: `목표 출시일 2026년 6월 30일 · $
   ${card(`<div class="tp-between"><h2 class="tp-h3">작업 흐름</h2><span class="tp-sub">8개 중 8개</span></div>${table(['작업 흐름', '담당', '진행', '마감', '상태'], ws.map(([n, s, o, v, d, [st, tn]]) => [`<span class="tp-stack"><span>${n}</span><span class="tp-caption">${s}</span></span>`, `<span class="tp-row">${avatar(o)}${o}</span>`, `<div class="tp-row" style="min-width:140px">${progress(v, { label: n })}<span class="tp-num tp-caption">${v}%</span></div>`, T(d), badge(st, tn)]))}`)}
 </main>
 </div>`;
-  return { slug: 'dashboard-progress', en: 'Project Status Dashboard', name: '프로젝트 현황 대시보드', group: 'Dashboard', desc: '일정 막대와 오늘 표시선, 완료율 도넛, 담당자별 진행 표로 프로젝트가 어디까지 왔는지 보여 주는 대시보드입니다.', css: '', body };
+  return { slug: 'dashboard-progress', en: 'Project Status Dashboard', name: '프로젝트 현황 대시보드', group: 'Dashboard', desc: '프로젝트가 어디까지 왔는지 일정과 진행률로 보여 주는 대시보드입니다.', css: '', body };
 };
 
 /* 3. 서비스 모니터링 (오른쪽 알림 패널) -------------------------- */
@@ -110,7 +110,7 @@ ${head('서비스 상태 모니터', { sub: `<span class="tp-row">${dot('positiv
 </aside>
 </div>
 </div>`;
-  return { slug: 'dashboard-alert-rail', en: 'Service Monitoring Dashboard', name: '서비스 모니터링 대시보드', group: 'Dashboard', desc: '서비스 상태를 계속 지켜보는 모니터링 화면입니다. 상태 지표, 시간대별 그래프, 서비스별 90일 가동 기록을 보여 주고 오른쪽에 알림 목록을 따로 둡니다.', css, body };
+  return { slug: 'dashboard-alert-rail', en: 'Service Monitoring Dashboard', name: '서비스 모니터링 대시보드', group: 'Dashboard', desc: '서비스 상태를 지켜보다가 문제가 생기면 바로 알아차리게 돕는 모니터링 화면입니다. 알림은 오른쪽에 따로 모아 둡니다.', css, body };
 };
 
 export const templates = [analytics, progressDash, monitoring].map((f) => f());

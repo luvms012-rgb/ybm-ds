@@ -61,7 +61,7 @@ const canvas = () => {
   </aside>
 </div>
 </div>`;
-  return { slug: 'canvas-editor', en: 'Canvas Editor', name: '캔버스 편집기', group: 'Tools', desc: '정해진 크기의 화면을 확대하고 축소하며 디자인하는 편집기입니다. 왼쪽에 레이어, 위에 문서 탭, 오른쪽에 위치와 글자, 필터 속성을 둡니다.', css, body };
+  return { slug: 'canvas-editor', en: 'Canvas Editor', name: '캔버스 편집기', group: 'Tools', desc: '정해진 크기의 화면 위에서 디자인하는 편집기입니다. 레이어와 속성을 양옆에 둡니다.', css, body };
 };
 
 /* 2. 파일 탐색기 (열 보기) ------------------------------------- */
@@ -100,7 +100,7 @@ const explorer = () => {
 </div>
 <footer class="tp-crumbs">${K.breadcrumbs(['문서', '2026 강의 자료', '토익 실전반', '강의 계획서.docx'])}</footer>
 </div>`;
-  return { slug: 'file-explorer', en: 'File Explorer', name: '파일 탐색기', group: 'Tools', desc: '폴더를 열 때마다 옆 칸으로 이어 보여 주는 파일 탐색기입니다. 경로 표시, 보기 방식 전환, 미리 보기가 있습니다.', css, body };
+  return { slug: 'file-explorer', en: 'File Explorer', name: '파일 탐색기', group: 'Tools', desc: '폴더를 열 때마다 옆 칸으로 이어 보여 주는 파일 탐색기입니다. 깊은 폴더도 경로를 놓치지 않고 찾아갑니다.', css, body };
 };
 
 /* 3. 코드 편집기 (IDE) ------------------------------------------ */
@@ -158,7 +158,7 @@ export function Counter({ start = 0 }) {
 </div>
 <footer class="tp-status"><span class="tp-row">${icon('git-branch', 'sm')}main</span><span>오류 0 · 경고 2</span><span class="tp-spacer" style="flex:1"></span><span>6줄, 3칸</span><span>UTF-8</span><span>TypeScript React</span></footer>
 </div>`;
-  return { slug: 'ide', en: 'IDE', name: '코드 편집기', group: 'Tools', desc: '칸마다 크기를 바꾸고 접을 수 있는 코드 편집 화면입니다. 파일 목록, 탭으로 여는 문서, 아래 터미널, 맨 아래 상태 막대로 이뤄집니다.', css, body };
+  return { slug: 'ide', en: 'IDE', name: '코드 편집기', group: 'Tools', desc: '파일 목록, 편집 창, 터미널을 한 화면에 둔 코드 편집기입니다. 칸마다 크기를 바꾸고 접을 수 있습니다.', css, body };
 };
 
 /* 4. 칸반 보드 -------------------------------------------------- */
@@ -176,7 +176,7 @@ const kanban = () => {
 <header class="tp-tool__bar" role="toolbar" aria-label="보드 동작">${K.even(`<h1 class="tp-h3">스프린트 보드</h1>${badge('8')}<span style="width: 160px">${select('스프린트 24', { size: 'small', aria: '스프린트' })}</span><span class="tp-spacer"></span>${iconBtn('arrow-up-down', '정렬')}${iconBtn('funnel', '거르기')}${iconBtn('users', '담당자')}${iconBtn('settings', '보드 설정')}${btn('할 일 추가', { variant: 'neutralSolid', ic: 'plus' })}`)}</header>
 <main class="tp-board">${cols.map(([tone, t, ...cards]) => `<section class="tp-lane" aria-label="${t}"><div class="tp-lane__head"><span class="tp-row">${dot(tone, t + ' 상태')}<h2 class="tp-h4">${t}</h2></span><span class="tp-row"><span class="tp-caption tp-num">${cards.length}</span>${iconBtn('plus', t + '에 추가', { size: 'xsmall' })}</span></div><div class="tp-lane__body">${cards.map(([[c, p], h, d, m, who], i) => card(`<div class="tp-between"><span class="tp-row">${badge(c)}${badge(p, p === '높음' ? 'critical' : p === '보통' ? 'warning' : 'neutral')}</span>${iconBtn('ellipsis', '할 일 동작', { size: 'xsmall' })}</div><div class="tp-stack"><h3 class="tp-h4">${h}</h3><p class="tp-sub">${d}</p></div><div class="tp-between"><span class="tp-caption">${m}</span>${avatars(who, 20)}</div>`, { cls: 'tp-kcard', tag: 'article', attrs: tone === 'informative' && i === 1 ? 'data-dragging' : '' })).join('')}</div></section>`).join('')}</main>
 </div>`;
-  return { slug: 'kanban-board', en: 'Kanban Board', name: '칸반 보드', group: 'Tools', desc: '상태별 열에 카드를 늘어놓은 칸반 보드입니다. 카드를 다른 열로 끌어다 놓으면 상태가 바뀌고, 카드 높이는 내용에 따라 달라집니다.', css, body };
+  return { slug: 'kanban-board', en: 'Kanban Board', name: '칸반 보드', group: 'Tools', desc: '할 일을 상태별 열에 카드로 늘어놓은 보드입니다. 카드를 다른 열로 옮기면 상태가 바뀝니다.', css, body };
 };
 
 /* 5. 페이지 편집기 --------------------------------------------- */
@@ -207,7 +207,7 @@ const pageEditor = () => {
   <aside class="tp-pane tp-pane--right" aria-label="속성"><div class="tp-between"><span class="tp-h4">최근 결제 표</span>${iconBtn('trash', '블록 지우기', { size: 'xsmall' })}</div>${field('pe-t', '제목', inp('pe-t', '최근 결제', '제목'))}${field('pe-n', '보여 줄 행 수', select('5개', { id: 'pe-n', size: 'small' }))}<label class="tp-between"><span class="tp-sub">전체 보기 버튼</span>${K.sw('전체 보기 버튼', true)}</label><label class="tp-between"><span class="tp-sub">분류 배지</span>${K.sw('분류 배지', true)}</label>${field('pe-pad', '안쪽 여백', segmented(['좁게', '보통', '넓게'], 1, '안쪽 여백'))}</aside>
 </div>
 </div>`;
-  return { slug: 'editor', en: 'Page Editor', name: '페이지 편집기', group: 'Tools', desc: '왼쪽 블록 모음에서 끌어다 놓아 화면을 만드는 페이지 편집기입니다. 가운데에서 결과를 보고, 오른쪽에서 고른 블록의 속성을 바꿉니다.', css, body };
+  return { slug: 'editor', en: 'Page Editor', name: '페이지 편집기', group: 'Tools', desc: '블록을 끌어다 놓아 페이지를 만드는 편집기입니다. 고른 블록의 속성은 오른쪽에서 바꿉니다.', css, body };
 };
 
 export const templates = [canvas, explorer, ide, kanban, pageEditor].map((f) => f());

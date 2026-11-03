@@ -37,7 +37,7 @@ ${head('연결된 계좌', { sub: '13개 계좌의 순자산 7억 6,840만원', 
   ${groups.map(([g, n, tot, cols, rows], gi) => card(`<details class="tp-coll"${gi < 3 ? ' open' : ''}><summary>${icon('chevron-down', 'sm')}<h2 class="tp-h3">${g}</h2>${badge(n + '개')}<span class="tp-coll__total">${tot}</span></summary><div class="ds-table-wrap"><table class="ds-table" data-density="compact">${thead(['', ...cols])}<tbody>${rows.map((r) => `<tr><td style="width:40px"><button type="button" class="ds-btn tp-caret" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-expanded="false" aria-label="${esc(r[0])} 자세히">${icon('chevron-right', 'sm')}</button></td>${r.map((c, i) => `<td${Array.isArray(cols[i]) ? ` data-align="${cols[i][1]}"` : ''}>${i === 0 ? `<span class="ds-table__stack"><span>${c}</span><span>${r[1]}</span></span>`.replace(`<span>${r[1]}</span></span>`, `<span>${r[1].split(' ··· ')[1] ? '··· ' + r[1].split(' ··· ')[1] : ''}</span></span>`) : (i === 1 ? String(c).split(' ··· ')[0] : String(c).replace('@end', ''))}</td>`).join('')}</tr>`).join('')}</tbody></table></div></details>`)).join('')}
 </main>
 </div>`;
-  return { slug: 'table-collapsible', en: 'Collapsible Table', name: '접히는 표 묶음', group: 'Table', desc: '열 구성이 다른 표 여러 개를 접고 펼 수 있는 묶음으로 나눠 담은 화면입니다. 표 하나로 합치면 빈칸이 많아질 때 씁니다.', css, body };
+  return { slug: 'table-collapsible', en: 'Collapsible Table', name: '접히는 표 묶음', group: 'Table', desc: '열 구성이 다른 표 여러 개를 접고 펼치며 보는 화면입니다. 표 하나로 합치면 빈칸이 많아질 때 씁니다.', css, body };
 };
 
 /* 2. 필터 표 ----------------------------------------------------- */
@@ -57,7 +57,7 @@ const filter = () => {
   <div class="tp-tfoot">${K.pagination(1, 6)}</div>
 </main>
 </div>`;
-  return { slug: 'table-filter', en: 'Filterable Table', name: '필터 표', group: 'Table', desc: '검색과 여러 조건으로 원하는 행만 걸러 보는 표입니다. 자주 쓰는 조건은 보기로 저장하고, 행은 지점별로 묶어 보여 줍니다.', css, body };
+  return { slug: 'table-filter', en: 'Filterable Table', name: '필터 표', group: 'Table', desc: '검색과 조건으로 필요한 행만 골라 보는 표입니다. 행이 많고 거르는 기준이 여럿일 때 씁니다.', css, body };
 };
 
 /* 3. 묶음 표 ----------------------------------------------------- */
@@ -77,7 +77,7 @@ const grouped = () => {
   <div class="ds-table-wrap"><table class="ds-table tp-gtable">${thead(['번호', '제목', '담당', '시작', '마감', '<span class="tp-sr">동작</span>'])}<tbody>${groups.map(([g, tone, rows]) => grow(6, `${dot(tone)}${g}`, rows.length) + rows.map(([id, labels, t, st, d, who]) => `<tr><td>${T(id)}</td><td><span class="tp-row">${t}${labels.map((l) => badge(l)).join('')}</span></td><td><span class="tp-row">${avatar(who)}${who}</span></td><td>${T(st)}</td><td>${T(d)}</td><td data-align="end">${iconBtn('ellipsis', t + ' 동작')}</td></tr>`).join('')).join('')}</tbody></table></div>
 </main>
 </div>`;
-  return { slug: 'table-grouped', en: 'Grouped Table', name: '묶음 표', group: 'Table', desc: '행을 상태별 묶음으로 나누고 묶음마다 개수를 붙인 표입니다. 긴 목록을 몇 덩어리로 나눠 접고 펴며 읽습니다.', css, body };
+  return { slug: 'table-grouped', en: 'Grouped Table', name: '묶음 표', group: 'Table', desc: '행을 상태별로 묶어 보여 주는 표입니다. 긴 목록을 몇 덩어리로 나눠 읽을 때 씁니다.', css, body };
 };
 
 /* 4. 받은함 표 --------------------------------------------------- */
@@ -113,7 +113,7 @@ const inbox = () => {
   </aside>
 </div>
 </div>`;
-  return { slug: 'table-inbox', en: 'Inbox Table', name: '받은함 표', group: 'Table', desc: '왼쪽 목록에서 고른 항목을 오른쪽에서 바로 읽는 받은함입니다. 가운데 경계를 끌어 두 칸 크기를 바꾸고, 좁은 화면에서는 위아래로 쌓입니다.', css, body };
+  return { slug: 'table-inbox', en: 'Inbox Table', name: '받은함 표', group: 'Table', desc: '왼쪽 목록에서 고른 항목을 오른쪽에서 바로 읽는 받은함입니다. 메일이나 문의처럼 하나씩 열어 처리할 때 씁니다.', css, body };
 };
 
 /* 5. 검색 표 (청구서) ------------------------------------------- */
@@ -144,7 +144,7 @@ const searchable = () => {
   </div>
 </main>
 </div>`;
-  return { slug: 'table-page', en: 'Searchable Table', name: '검색 표', group: 'Table', desc: '청구서 한 건의 정보 아래에 항목 표를 둔 화면입니다. 검색, 보기 전환, 열별 필터로 항목을 좁혀 봅니다.', css, body };
+  return { slug: 'table-page', en: 'Searchable Table', name: '검색 표', group: 'Table', desc: '문서 한 건의 정보와 그 안의 항목 표를 함께 보는 화면입니다. 청구서처럼 항목이 많은 문서에 씁니다.', css, body };
 };
 
 /* 6. 트리 표 (저장소) ------------------------------------------- */
@@ -183,7 +183,7 @@ const tree = () => {
 </aside>
 </div>
 </div>`;
-  return { slug: 'table-tree', en: 'Tree Table', name: '트리 표', group: 'Table', desc: '상위 행을 펼치면 하위 행이 나오는 계층 표입니다. 코드 저장소처럼 폴더 구조를 보여 주고, 옆에 저장소 정보를 둡니다.', css, body };
+  return { slug: 'table-tree', en: 'Tree Table', name: '트리 표', group: 'Table', desc: '상위 행을 펼치면 하위 행이 나오는 계층 표입니다. 폴더처럼 단계가 있는 목록에 씁니다.', css, body };
 };
 
 export const templates = [collapsible, filter, grouped, inbox, searchable, tree].map((f) => f());

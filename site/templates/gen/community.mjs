@@ -90,7 +90,7 @@ const home = () => {
     ${callout('커뮤니티 이용 규칙이 바뀌었어요', '광고 글과 개인 정보가 담긴 글은 알림 없이 숨겨질 수 있어요.', 'informative')}
   </aside>
 </div></div>`;
-  return { slug: 'community-home', en: 'Community Home', name: '커뮤니티 홈', group: 'Community', desc: '게시판형 커뮤니티의 첫 화면입니다. 왼쪽에 내 정보와 게시판 메뉴, 가운데에 지금 뜨는 글과 새 글 피드, 오른쪽에 실시간 인기글과 활발한 멤버를 보여 줍니다.', css, body };
+  return { slug: 'community-home', en: 'Community Home', name: '커뮤니티 홈', group: 'Community', desc: '게시판형 커뮤니티의 첫 화면입니다. 지금 뜨는 글과 새 글을 한곳에서 봅니다.', css, body };
 };
 
 /* 2. 게시판 목록 ------------------------------------------------- */
@@ -141,7 +141,7 @@ const board = () => {
     <div class="tp-bfoot">${pagination(1, 242)}${btn('글쓰기', { variant: 'brandSolid', ic: 'pencil' })}</div>
   </main>
 </div></div>`;
-  return { slug: 'community-board', en: 'Board List', name: '게시판 목록', group: 'Community', desc: '카페형 게시판의 글 목록입니다. 말머리로 거르고, 공지를 위에 고정하고, 제목 옆에 댓글 수와 사진 여부를, 오른쪽에 글쓴이와 조회, 좋아요를 보여 줍니다.', css, body };
+  return { slug: 'community-board', en: 'Board List', name: '게시판 목록', group: 'Community', desc: '카페형 게시판의 글 목록입니다. 말머리로 거르고 공지는 위에 고정합니다.', css, body };
 };
 
 /* 3. 게시글 상세 ------------------------------------------------- */
@@ -202,7 +202,7 @@ const post = () => {
     ${card(`<div class="tp-stack" style="gap: var(--ybm-space-x3)"><div class="tp-row">${avatar('커피한잔', 40)}<div class="tp-stack"><span class="tp-h4">커피한잔</span><span class="tp-caption">글 ${T('8')} · 댓글 ${T('31')}</span></div></div>${btn('다른 글 보기', { fill: true })}</div>`)}
   </aside>
 </div></div>`;
-  return { slug: 'community-post', en: 'Post Detail', name: '게시글 상세', group: 'Community', desc: '게시글 하나를 읽는 화면입니다. 말머리와 제목, 글쓴이, 본문과 투표, 좋아요와 스크랩, 댓글과 답글, 이전 글과 다음 글을 차례로 보여 줍니다.', css, body };
+  return { slug: 'community-post', en: 'Post Detail', name: '게시글 상세', group: 'Community', desc: '게시글 하나를 읽고 댓글로 이야기를 나누는 화면입니다.', css, body };
 };
 
 /* 4. 글쓰기 ----------------------------------------------------- */
@@ -246,7 +246,7 @@ const write = () => {
 </main>
 <div class="tp-wbar"><div class="tp-wbar__in"><span class="tp-caption">자동 저장 14:32</span><div class="tp-row">${btn('임시 저장', { size: 'medium' })}${btn('등록', { variant: 'brandSolid', size: 'medium' })}</div></div></div>
 </div>`;
-  return { slug: 'community-write', en: 'Write Post', name: '글쓰기', group: 'Community', desc: '커뮤니티에 새 글을 쓰는 화면입니다. 게시판과 말머리를 고르고, 제목과 본문을 쓰고, 사진을 붙이고, 댓글 허용과 익명 여부를 정한 뒤 아래 막대에서 등록합니다.', css, body };
+  return { slug: 'community-write', en: 'Write Post', name: '글쓰기', group: 'Community', desc: '커뮤니티에 새 글을 쓰는 화면입니다. 게시판과 말머리를 고른 뒤 글과 사진을 올립니다.', css, body };
 };
 
 export const templates = [home(), board(), post(), write()];
