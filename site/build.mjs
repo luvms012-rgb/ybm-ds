@@ -384,19 +384,21 @@ ${codeblock(prompts[2][2], 'text', ' data-wrap')}
 ${codeblock(CSS_LINK)}
 
 <h2 id="service">다른 서비스에 쓰기</h2>
-<p>YBM IT처럼 다른 서비스에도 DS를 그대로 가져다 씁니다. DS 파일은 고치지 않고, 서비스 CSS 한 장에서 그 서비스의 색과 로고만 바꿉니다.</p>
+<p>YBM IT처럼 다른 서비스에 쓸 때도 아래 글을 AI 코딩 도구에 붙여 넣고 대괄호 안만 바꾸면 됩니다. AI가 그 서비스의 색으로 DS를 맞춥니다.</p>
+${codeblock(`이 프로젝트에 YBM DS를 [서비스 이름, 예: YBM IT] 서비스용으로 적용해 줘.
+1. <head>에 아래 두 줄을 넣고, 그다음에 서비스 CSS [ybm-it.css]를 불러와 줘.
+   <link rel="stylesheet" href="${PUBLIC}/dist/ybm-ds.css">
+   <script src="${PUBLIC}/dist/ybm-ds.js" defer></script>
+2. 브랜드 색 [#12a150]을 600 단계로 두고, 같은 색의 100 ~ 1000 단계를 만들어 서비스 CSS의 :root 에 --ds-color-palette-brand-100 ~ 1000 으로 넣어 줘.
+3. 다크 모드는 같은 단계를 뒤집어(다크 100 = 라이트 1000) :root[data-theme="dark"] 에 넣어 줘.
+4. DS 파일은 고치지 말고, 색과 간격은 --ds-* 토큰만 써.`, 'text', ' data-wrap')}
+<p>직접 할 때는 아래 두 가지만 하면 됩니다.</p>
 <h3>1. 서비스 CSS를 DS 다음에 불러오기</h3>
 <p>DS가 CSS 레이어 안에 있어 뒤에 불러온 서비스 CSS가 <code>!important</code> 없이 이깁니다.</p>
 ${codeblock(`<link rel="stylesheet" href="${PUBLIC}/dist/ybm-ds.css">\n<script src="${PUBLIC}/dist/ybm-ds.js" defer></script>\n<link rel="stylesheet" href="ybm-it.css">  <!-- 서비스 CSS는 항상 DS 다음 -->`)}
 <h3>2. 브랜드 색 넣기</h3>
 <p>브랜드 팔레트 10단계만 서비스 색으로 바꾸면 주 버튼, 체크박스, 링크처럼 브랜드 색을 쓰는 곳이 모두 따라 바뀝니다. 자세한 것은 <a class="ds-link" href="{root}foundations/color.html">Color</a>에 있습니다.</p>
 ${codeblock(`/* ybm-it.css */\n:root {\n  --ds-color-palette-brand-100: #e6f6ee;  /* 옅은 배경 */\n  --ds-color-palette-brand-600: #12a150;  /* 주 버튼, 링크 */\n  --ds-color-palette-brand-700: #0d7d3e;  /* 눌림 */\n  /* 200 ~ 500, 800 ~ 1000 도 같은 색의 단계로 */\n}\n:root[data-theme="dark"] {\n  /* 다크는 같은 단계를 뒤집어 넣는다 (다크 100 = 라이트 1000) */\n}`, 'css')}
-<h3>3. 로고와 이름 바꾸기</h3>
-<p>머리 메뉴의 로고 그림과 페이지 제목만 서비스 것으로 바꿉니다.</p>
-${codeblock(`<header class="ds-topnav">\n  <a class="ds-topnav__left" href="/"><img src="ybm-it-logo.svg" alt="YBM IT"></a>\n  …\n</header>`)}
-<h3>4. 필요한 곳만 다듬기</h3>
-<p>모양을 더 바꾸고 싶으면 컴포넌트 변수(<code>--ds-*</code>)만 덮어씁니다. 새 <code>ds-</code> 클래스를 만들지 않습니다.</p>
-${codeblock(`/* ybm-it.css */\n.ds-dialog { --ds-dialog-width: 360px; }\n.ds-btn[data-variant="brandSolid"] { --ds-btn-radius: var(--ds-shape-pill); }`, 'css')}
 
 <h2 id="theme">다크 모드</h2>
 <p><code>html</code>에 속성 하나를 붙이면 모든 색이 어두운 화면용으로 바뀝니다. 색을 토큰으로만 썼다면 따로 고칠 것이 없습니다.</p>
