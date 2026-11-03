@@ -125,7 +125,7 @@ body[data-side-open] .site-scrim { opacity: 1; pointer-events: auto; }
 .site-nav__children > .site-nav__item { padding-left: var(--ybm-space-x8); }
 @media (prefers-reduced-motion: reduce) { .site-nav__panel, .site-nav__chevron { transition: none; } }
 /* 찾기 칸은 흰 띠(위에 붙음) 안에 - 테두리는 DS 입력 칸 그대로 */
-.site-side__searchbar { position: sticky; top: 0; z-index: 1; padding-bottom: var(--ybm-space-x2); background: var(--ybm-color-bg-layer-default); }
+.site-side__searchbar { position: sticky; top: 0; z-index: 1; padding-bottom: var(--ybm-space-x2); background: var(--ybm-color-bg-layer-default); box-shadow: 0 calc(-1 * var(--ybm-space-x3)) 0 var(--ybm-color-bg-layer-default); }  /* 메뉴 위 여백 12 만큼 위로 바탕을 늘려, 스크롤한 메뉴가 검색바 위 틈으로 보이지 않게 */
 .site-side__search { --ds-input-height: 32px; --ds-input-padding-x: var(--ybm-space-x2); --ds-input-gap: var(--ybm-space-x2); --ds-input-radius: var(--ybm-shape-lg); }
 .site-nav__item[hidden], .site-nav__group[hidden] { display: none; }
 .site-nav__sep { height: 1px; margin: var(--ybm-space-x2); background: var(--ybm-color-stroke-neutral-muted); }
