@@ -6,11 +6,13 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import * as K from '../templates/gen/kit.mjs';
+import * as vivid from './vivid.mjs';
 const { esc, icon, btn, iconBtn, badge, photo } = K;
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const OUT = path.join(HERE, 'pages');
 const LUCIDE = JSON.parse(fs.readFileSync(path.join(HERE, '..', 'src', 'lucide-icons.json'), 'utf8')).icons;
+// 테마마다 화면 한 벌(css, body). 든든은 이 파일 아래, 선명은 vivid.mjs
 // 그림 아이콘: 톤(brand / positive / warning / critical / magic) 색 선
 const art = (name, tone = 'brand', size = 36) => {
   if (!LUCIDE[name]) throw new Error('Lucide 에 없는 아이콘: ' + name);
@@ -21,6 +23,9 @@ export const THEMES = [
   { slug: 'trust', name: '든든', en: 'Trust',
     desc: '흰 바탕에 선명한 파랑 하나와 옅은 하늘색 면을 쓴 테마입니다. 보험, 금융, 공공 서비스처럼 믿음을 주는 화면에 어울립니다.',
     swatches: ['#ffffff', '#1658ff', '#edf4ff', '#272727'], card: { bg: '#edf4ff', fg: '#1658ff', art: ['shield-check', 'heart-pulse'] } },
+  { slug: 'vivid', name: '선명', en: 'Vivid',
+    desc: '흰 바탕에 또렷한 로열 블루 하나와 크고 둥근 카드를 쓴 테마입니다. 교육, 학습 서비스처럼 시원하고 자신감 있는 화면에 어울립니다.',
+    swatches: ['#ffffff', '#004fff', '#f2f3f5', '#111111'], card: { bg: '#eef3ff', fg: '#004fff', art: ['book-open-check', 'sparkles'] } },
 ];
 
 const CSS = `
@@ -173,9 +178,12 @@ const body = () => `<div class="th-wrap th-util"><a href="#">고객센터</a><a 
 <footer class="th-foot"><div class="th-wrap"><nav class="th-foot__links" aria-label="약관"><a href="#">회원가입 약관</a><a href="#">이용약관</a><a href="#" data-strong>개인정보 처리방침</a><a href="#">신용정보 활용 체제</a></nav>
   <div class="th-foot__body"><p><b>한빛안심보험</b>이 화면은 YBM DS 테마 예시예요. 회사 이름, 상품, 연락처는 모두 가상입니다.<br>서울시 가상구 예시로 100 · help@example.com</p><div class="th-call">${btn('고객센터<span class="th-call__num">1588-0000</span>', { variant: 'neutralOutline', size: 'small' })}${btn('이용 시간 안내', { variant: 'neutralOutline', size: 'small', icEnd: 'chevron-right' })}</div></div></div></footer>`;
 
+const VIEWS = { trust: { css: () => CSS, body }, vivid };
+
 fs.rmSync(OUT, { recursive: true, force: true });
 fs.mkdirSync(OUT, { recursive: true });
 for (const t of THEMES) {
+  const v = VIEWS[t.slug];
   const html = `<!doctype html>
 <html lang="ko" data-ds-theme="${t.slug}">
 <head>
@@ -186,10 +194,10 @@ for (const t of THEMES) {
 <link rel="stylesheet" href="../../../dist/themes/${t.slug}.css">
 <script>if (location.hash === "#default") document.documentElement.removeAttribute("data-ds-theme");</script>
 <script src="../../../dist/ybm-ds.js" defer></script>
-<style>${CSS}</style>
+<style>${v.css(art)}</style>
 </head>
 <body>
-${body(t)}
+${v.body(art)}
 </body>
 </html>
 `;

@@ -13,20 +13,24 @@ YBM DS는 YBM 서비스를 위한 디자인 시스템입니다. 컴포넌트와 
 1. <head>에 아래 두 줄을 넣어 줘.
    <link rel="stylesheet" href="https://luvms012-rgb.github.io/ybm-ds/dist/ybm-ds.css">
    <script src="https://luvms012-rgb.github.io/ybm-ds/dist/ybm-ds.js" defer></script>
-2. 쓸 수 있는 컴포넌트 목록은 https://luvms012-rgb.github.io/ybm-ds/components.json, 각 컴포넌트의 HTML 구조는 https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/components.css의 컴포넌트별 머리 주석을 따라.
-3. 색, 간격, 글자 크기, 모서리, 그림자는 https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/tokens.css의 --ybm-* 토큰만 써.
-4. 서비스 CSS는 DS 다음에 불러오고, 바꾸고 싶은 모양은 컴포넌트의 --ds-* 변수만 덮어써.
-5. 새 ds- 클래스를 만들거나 !important를 쓰지 마.
+2. 문서는 https://luvms012-rgb.github.io/ybm-ds/site/llms.txt 목차에서 필요한 페이지(.md)를 골라 읽어.
+3. 쓸 수 있는 컴포넌트 목록은 https://luvms012-rgb.github.io/ybm-ds/components.json, 각 컴포넌트의 HTML 구조는 https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/components.css의 컴포넌트별 머리 주석을 따라.
+4. 색, 간격, 글자 크기, 모서리, 그림자는 https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/tokens.css의 --ybm-* 토큰만 써.
+5. 서비스 CSS는 DS 다음에 불러오고, 바꾸고 싶은 모양은 컴포넌트의 --ds-* 변수만 덮어써.
+6. 새 ds- 클래스를 만들거나 !important를 쓰지 마.
 ```
 
-그다음 만들고 싶은 화면을 말로 설명하세요. 대괄호 안만 내 상황에 맞게 바꾸면 됩니다. 비슷한 화면이 [템플릿](https://luvms012-rgb.github.io/ybm-ds/site/templates/index.md)에 있으면 그 화면에서 출발합니다.
+AI 도구가 주소를 열지 못하면 [llms-full.txt](https://luvms012-rgb.github.io/ybm-ds/site/llms-full.txt)를 파일로 첨부하세요. 모든 문서를 한 파일로 모은 것입니다. 문서를 AI에 주는 다른 방법은 [AI](https://luvms012-rgb.github.io/ybm-ds/site/get-started/ai.md)에 있습니다.
+
+그다음 만들고 싶은 화면을 말로 설명하세요. 대괄호 안만 내 상황에 맞게 바꾸면 됩니다. 비슷한 화면이 [템플릿](https://luvms012-rgb.github.io/ybm-ds/site/templates/index.html)에 있으면 그 화면에서 출발합니다.
 
 ```text
 YBM DS로 [만들 화면, 예: 회원 목록 관리 화면]을 만들어 줘.
 - 부품은 https://luvms012-rgb.github.io/ybm-ds/components.json에 있는 것만 쓰고, 마크업은 https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/components.css 머리 주석 그대로 써.
-- 비슷한 화면이 https://luvms012-rgb.github.io/ybm-ds/site/templates/index.html에 있으면 그 템플릿을 출발점으로 써.
+- 쓰는 컴포넌트는 https://luvms012-rgb.github.io/ybm-ds/site/llms.txt에서 그 문서(.md)를 읽고 사용 지침을 따라.
+- 비슷한 화면이 llms.txt의 Templates 목록에 있으면 그 HTML을 출발점으로 써.
 - 모바일 먼저 만들고, 768px 이상과 1280px 이상에서 배치를 바꿔 줘.
-- 글자는 한국어. 제목 500 굵기, 본문 16px 줄 높이 28px, 자간은 주지 않고, 본문 word-break: keep-all.
+- 글자는 한국어. 제목은 Bold에 자간 -0.02em, 항목 제목은 SemiBold, 본문은 Regular로 쓰고, 크기는 --ybm-font-size-* 토큰, 본문은 word-break: keep-all.
 - 배치용 CSS에는 --ybm-* 토큰만 쓰고 hex 색은 쓰지 마.
 ```
 

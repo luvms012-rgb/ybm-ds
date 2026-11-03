@@ -38,7 +38,7 @@ CSS는 Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다. 상태�
 
 ## 테마
 
-테마는 브랜드 색, 바탕색, 모서리 곡률을 한 번에 바꿔 같은 DS 로 다른 분위기의 서비스를 만듭니다. DS 다음에 테마 파일을 붙이고 html 에 테마 이름을 적으면 되고, 컴포넌트는 고치지 않습니다. 고를 수 있는 테마는 [Themes](https://luvms012-rgb.github.io/ybm-ds/site/themes/index.md) 에서 화면으로 비교해 볼 수 있습니다.
+테마는 브랜드 색, 바탕색, 모서리 곡률을 한 번에 바꿔 같은 DS 로 다른 분위기의 서비스를 만듭니다. DS 다음에 테마 파일을 붙이고 html 에 테마 이름을 적으면 되고, 컴포넌트는 고치지 않습니다. 고를 수 있는 테마는 [Themes](https://luvms012-rgb.github.io/ybm-ds/site/themes/index.html) 에서 화면으로 비교해 볼 수 있습니다.
 
 ```html
 <html lang="ko" data-ds-theme="trust">

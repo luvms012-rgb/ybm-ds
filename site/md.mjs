@@ -88,28 +88,31 @@ function block(n, ctx, out) {
   n.kids.forEach((k) => block(k, ctx, out));
 }
 
-export function htmlToMd(html, url) {
+// mdUrls: .md 가 있는 페이지 주소. 그 페이지로 가는 링크만 .md 로 바꾸고 나머지(템플릿, 테마)는 .html 그대로
+export function htmlToMd(html, url, mdUrls) {
   const a = html.indexOf('<article class="site-doc"');
   const b = html.indexOf('</article>', a);
   if (a < 0 || b < 0) return null;
   const tree = parse(html.slice(a, b));
   const base = new URL(url);
-  const ctx = { lang: '', abs: (h) => { try { const u = new URL(h, base); if (u.pathname.endsWith('.html') && u.origin === base.origin) u.pathname = u.pathname.replace(/\.html$/, '.md'); return u.href; } catch { return h; } } };
+  const ctx = { lang: '', abs: (h) => { try { const u = new URL(h, base); if (u.pathname.endsWith('.html') && u.origin === base.origin && (!mdUrls || mdUrls.has(u.origin + u.pathname))) u.pathname = u.pathname.replace(/\.html$/, '.md'); return u.href; } catch { return h; } } };
   const out = [];
   block(tree, ctx, out);
   return out.join('\n\n').replace(/\n{3,}/g, '\n\n').trim() + '\n';
 }
 
 // site 폴더의 문서(시작하기, Foundations, 컴포넌트)를 .md 로 쓰고 llms.txt 두 개를 만든다
-export function writeMarkdown({ SITE, SITE_URL, groups, intro }) {
+// extra: 두 파일 끝에 붙이는 목록(템플릿, 테마)
+export function writeMarkdown({ SITE, SITE_URL, groups, intro, extra = [] }) {
   const index = [];
   const full = [];
   let count = 0;
+  const mdUrls = new Set(groups.flatMap((g) => g.pages.map((p) => SITE_URL + p.file)));
   for (const g of groups) {
     const lines = [];
     for (const { file, title, desc } of g.pages) {
       const html = fs.readFileSync(path.join(SITE, file), 'utf8');
-      const md = htmlToMd(html, SITE_URL + file);
+      const md = htmlToMd(html, SITE_URL + file, mdUrls);
       if (!md) continue;
       const mdFile = file.replace(/\.html$/, '.md');
       fs.writeFileSync(path.join(SITE, mdFile), `<!-- ${SITE_URL}${file} -->\n\n${md}`);
@@ -119,7 +122,7 @@ export function writeMarkdown({ SITE, SITE_URL, groups, intro }) {
     }
     if (lines.length) index.push(`## ${g.label}\n\n${lines.join('\n')}`);
   }
-  fs.writeFileSync(path.join(SITE, 'llms.txt'), `${intro}\n\n${index.join('\n\n')}\n`);
-  fs.writeFileSync(path.join(SITE, 'llms-full.txt'), `${intro}\n\n${full.join('\n\n---\n\n')}`);
+  fs.writeFileSync(path.join(SITE, 'llms.txt'), `${intro}\n\n${[...index, ...extra].join('\n\n')}\n`);
+  fs.writeFileSync(path.join(SITE, 'llms-full.txt'), `${intro}\n\n${[...full, ...extra].join('\n\n---\n\n')}\n`);
   return count;
 }

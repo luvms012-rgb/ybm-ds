@@ -19,6 +19,26 @@
           "heart-pulse"
         ]
       }
+    },
+    {
+      "slug": "vivid",
+      "name": "선명",
+      "en": "Vivid",
+      "desc": "흰 바탕에 또렷한 로열 블루 하나와 크고 둥근 카드를 쓴 테마입니다. 교육, 학습 서비스처럼 시원하고 자신감 있는 화면에 어울립니다.",
+      "swatches": [
+        "#ffffff",
+        "#004fff",
+        "#f2f3f5",
+        "#111111"
+      ],
+      "card": {
+        "bg": "#eef3ff",
+        "fg": "#004fff",
+        "art": [
+          "book-open-check",
+          "sparkles"
+        ]
+      }
     }
   ]
 }
