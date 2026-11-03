@@ -593,8 +593,8 @@ write({
   body: `<header><h1 class="site-h1">Scripts</h1><p class="site-lead"><code>ybm-ds.js</code>는 창 열기, 알림처럼 CSS만으로는 할 수 없는 동작을 맡습니다. 불러오기만 하면 HTML 속성을 보고 알아서 동작합니다.</p></header>
 <h2 id="features">하는 일</h2>
 ${table(['부품', '하는 일'], jsRows)}
-<h2 id="api">직접 부르기</h2>
-${table(['기능', '쓰는 법'], [['창 열기, 닫기', '<code>YBM.openDialog(요소)</code>, <code>YBM.closeDialog(요소)</code>'], ['알림 띄우기', '<code>YBM.snackbar("저장했어요", { variant: "positive" })</code>'], ['새로 고침 끝내기', '<code>YBM.endRefresh(요소)</code>'], ['나중에 넣은 HTML 연결', '<code>YBM.init(요소)</code>']])}
+<h2 id="api">직접 사용</h2>
+${table(['기능', '사용방법'], [['창 열기, 닫기', '<code>YBM.openDialog(요소)</code>, <code>YBM.closeDialog(요소)</code>'], ['알림 띄우기', '<code>YBM.snackbar("저장했어요", { variant: "positive" })</code>'], ['새로 고침 끝내기', '<code>YBM.endRefresh(요소)</code>'], ['나중에 넣은 HTML 연결', '<code>YBM.init(요소)</code>']])}
 ${codeblock(`<button class="ds-btn" data-ds-open="confirm">열기</button>\n<dialog class="ds-dialog" id="confirm">… <button class="ds-btn" data-ds-close>닫기</button></dialog>\n\n<script>\n  YBM.snackbar("저장했어요", { variant: "positive", action: "확인" });\n</script>`)}`,
 });
 
@@ -741,21 +741,21 @@ write({
   file: 'get-started/ai.html', section: 'get-started', title: 'AI', desc: 'AI 도구가 YBM DS 문서를 읽는 방법', pager: gsPager('get-started/ai.html'),
   body: `<header><h1 class="site-h1">AI</h1><p class="site-lead">AI 도구가 YBM DS 문서를 바로 읽을 수 있도록 모든 문서를 마크다운으로도 제공합니다. 컴포넌트 하나만 가져갈 수도, 전체를 한 번에 줄 수도 있습니다.</p></header>
 <h2 id="files">파일</h2>
-${table(['파일', '담은 것'], [
+${table(['파일', '내용'], [
   [`<a class="ds-link" href="../llms.txt" target="_blank" rel="noopener">llms.txt</a>`, '전체 목차입니다. 분류별 문서 링크와 한 줄 설명이 있어, AI 가 필요한 문서를 골라 읽습니다.'],
   [`<a class="ds-link" href="../llms-full.txt" target="_blank" rel="noopener">llms-full.txt</a>`, '모든 문서를 한 파일로 모았습니다. 주소를 읽지 못하는 도구에 첨부할 때 씁니다.'],
   ['페이지별 <code>.md</code>', '각 문서 주소의 <code>.html</code> 을 <code>.md</code> 로 바꾸면 그 페이지만 마크다운으로 받습니다. 예) <code>components/action-button.md</code>'],
 ])}
-<h2 id="how">쓰는 법</h2>
+<h2 id="how">사용방법</h2>
 <ol>
 <li>컴포넌트 하나만 필요하면 그 페이지 제목 아래 <b>Markdown</b> 메뉴에서 <b>내용 복사</b>를 누르고 AI 대화에 붙여 넣습니다.</li>
 <li>여러 컴포넌트로 화면을 만들 때는 <code>llms.txt</code> 주소를 알려 주면 AI 가 필요한 문서를 찾아 읽습니다.</li>
 <li>주소를 열지 못하는 도구에는 <code>llms-full.txt</code> 를 파일로 첨부합니다.</li>
 <li>새 화면은 <code>llms.txt</code> 의 Templates 목록에서 비슷한 화면의 HTML 을 출발점으로 삼게 하면 배치와 여백이 DS 기준에 맞습니다.</li>
 </ol>
-<h2 id="list">목록에 든 것</h2>
+<h2 id="list">템플릿과 테마 목록</h2>
 <p><code>llms.txt</code> 에는 문서 말고도 AI 가 바로 가져다 쓸 수 있는 두 가지 목록이 있습니다.</p>
-${table(['목록', '담은 것'], [
+${table(['목록', '내용'], [
   ['Templates', '템플릿마다 HTML 원본 주소와 한 줄 설명입니다. 그대로 열면 되는 완성된 화면이라 고쳐 쓰기 좋습니다.'],
   ['Themes', '테마 CSS 주소와 어울리는 서비스입니다. DS 다음에 붙이고 html 에 테마 이름을 적으면 됩니다.'],
 ])}
@@ -767,8 +767,8 @@ ${SITE_URL}llms.txt`, 'text')}
 });
 
 /* ---------------------------------------------------------------- Themes */
-// 레퍼런스 A Themes 배치 그대로: 왼쪽 260 고정 칸 안 흰 카드(제목 + 미리보기 다크 버튼, 설명, 쓰는 법 링크, 알약 버튼 둘, 테마 카드 211×120),
-// 오른쪽은 남은 폭 전체 카드 안에 테마를 입힌 화면을 높이 그대로 펼친다(페이지와 함께 스크롤). 쓰는 법은 Usage "테마" 절
+// 레퍼런스 A Themes 배치 그대로: 왼쪽 260 고정 칸 안 흰 카드(제목 + 미리보기 다크 버튼, 설명, 사용방법 링크, 알약 버튼 둘, 테마 카드 211×120),
+// 오른쪽은 남은 폭 전체 카드 안에 테마를 입힌 화면을 높이 그대로 펼친다(페이지와 함께 스크롤). 사용방법은 Usage "테마" 절
 const themesJson = readJson('site/src/themes.json').themes;
 const THEME_CARDS = [{ slug: '', name: '기본', card: { bg: '#f3f4f5', fg: '#1a1c20', art: ['square', 'circle'] } }, ...themesJson];
 const artSvg = (n, size = 44) => `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${lucide.icons[n] || ''}</svg>`;
@@ -781,7 +781,7 @@ write({
   <div class="site-themes__intro">
     <div class="site-themes__title"><h1 class="site-h1">Themes</h1>${iconBtn('data-site-theme-mode aria-pressed="false"', '미리보기를 다크 모드로 보기', '<i class="ds-icon site-i--moon" aria-hidden="true"></i>')}</div>
     <p class="site-themes__desc">YBM DS 에는 기본 테마가 들어 있습니다. 서비스에 맞게 바꾸려면 마음에 드는 테마 파일을 복사해 쓰세요.</p>
-    <a class="ds-link" data-size="small" href="../get-started/usage.html#custom-theme">테마를 쓰는 법</a>
+    <a class="ds-link" data-size="small" href="../get-started/usage.html#custom-theme">테마 사용방법</a>
   </div>
   <div class="site-themes__acts"><a class="ds-btn" data-variant="neutralSolid" data-size="small" data-width="fill" href="${GITHUB}/blob/main/dist/themes/${firstTheme.slug}.css" target="_blank" rel="noopener" data-site-theme-file>이 테마 쓰기</a><a class="ds-btn" data-variant="neutralWeak" data-size="small" data-width="fill" href="pages/${firstTheme.slug}.html" target="_blank" rel="noopener" data-site-theme-open>새 창으로 보기</a></div>
   <div class="site-themes__list" role="group" aria-label="테마">${THEME_CARDS.map((t, i) => themeCard(t, i === 1)).join('')}</div>

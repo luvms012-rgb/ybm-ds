@@ -377,27 +377,29 @@
   })();
 
 
-  // 테마 보기 (레퍼런스 A Themes): 카드를 누르면 오른쪽 화면 html 의 data-ds-theme 만 바꾼다(기본 = 테마 없음).
+  // 테마 보기 (레퍼런스 A Themes): 카드를 누르면 오른쪽에 그 테마의 화면(pages/<이름>.html)을 불러온다.
+  // 기본은 지금 화면에서 data-ds-theme 만 뺀다(같은 화면을 테마 없이 비교).
   // 달 버튼은 미리보기만 다크로. 화면은 높이 그대로 펼쳐 페이지와 함께 스크롤한다
   (function () {
     var frame = document.querySelector("[data-site-theme-frame]"); if (!frame) return;
-    var base = frame.getAttribute("src"), open = document.querySelector("[data-site-theme-open]"), file = document.querySelector("[data-site-theme-file]"), mode = document.querySelector("[data-site-theme-mode]");
+    var page = (frame.getAttribute("src").match(/([^/]+).html/) || [])[1], open = document.querySelector("[data-site-theme-open]"), file = document.querySelector("[data-site-theme-file]"), mode = document.querySelector("[data-site-theme-mode]");
     var cards = [].slice.call(document.querySelectorAll("[data-site-theme]"));
     var cur = (cards.filter(function (c) { return c.getAttribute("aria-pressed") === "true"; })[0] || cards[0]).getAttribute("data-site-theme");
     var dark = false;
-    function fit() { try { frame.style.height = frame.contentDocument.documentElement.scrollHeight + "px"; } catch (e) {} }
+    // 높이는 html 상자 높이로 잰다(scrollHeight 는 iframe 높이보다 작아지지 않아 짧은 화면으로 바꿔도 줄지 않는다)
+    function fit() { try { frame.style.height = Math.ceil(frame.contentDocument.documentElement.getBoundingClientRect().height) + "px"; } catch (e) {} }
     function apply() {
       try {
         var h = frame.contentDocument.documentElement;
         if (cur) h.setAttribute("data-ds-theme", cur); else h.removeAttribute("data-ds-theme");
         if (dark) h.setAttribute("data-theme", "dark"); else h.removeAttribute("data-theme");
       } catch (e) {}
-      if (open) open.href = cur ? "pages/" + cur + ".html" : base + "#default";
-      if (file) file.hidden = !cur;
+      if (open) open.href = "pages/" + page + ".html" + (cur ? "" : "#default");
+      if (file) { file.hidden = !cur; if (cur) file.href = file.href.replace(/[^/]+.css$/, cur + ".css"); }
       if (mode) mode.setAttribute("aria-pressed", String(dark));
       fit();
     }
-    cards.forEach(function (c) { c.addEventListener("click", function () { cur = c.getAttribute("data-site-theme"); cards.forEach(function (x) { x.setAttribute("aria-pressed", String(x === c)); }); apply(); }); });
+    cards.forEach(function (c) { c.addEventListener("click", function () { cur = c.getAttribute("data-site-theme"); cards.forEach(function (x) { x.setAttribute("aria-pressed", String(x === c)); }); if (cur && cur !== page) { page = cur; frame.src = "pages/" + cur + ".html"; } apply(); }); });
     if (mode) mode.addEventListener("click", function () { dark = !dark; apply(); });
     frame.addEventListener("load", function () { apply(); [300, 1000, 2500].forEach(function (t) { setTimeout(fit, t); }); try { frame.contentWindow.addEventListener("resize", fit); } catch (e) {} });
     window.addEventListener("resize", fit);

@@ -27,9 +27,9 @@
 | **Multi Select** | Popover 와 같이 열고 닫기, 고른 값을 칸에 Badge 로 채우기 |
 | **File Attach** | 파일을 끌어 놓는 칸 위로 끌고 오면 data-state="dragover", 벗어나거나 놓으면 뺀다 |
 
-## 직접 부르기
+## 직접 사용
 
-| 기능 | 쓰는 법 |
+| 기능 | 사용방법 |
 | --- | --- |
 | 창 열기, 닫기 | `YBM.openDialog(요소)`, `YBM.closeDialog(요소)` |
 | 알림 띄우기 | `YBM.snackbar("저장했어요", { variant: "positive" })` |
