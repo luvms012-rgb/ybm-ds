@@ -78,7 +78,7 @@ body[data-side-open] .site-scrim { opacity: 1; pointer-events: auto; }
 .site-doc { max-width: calc(var(--site-col) - 2 * var(--ybm-space-x6)); }
 .site-body--wide .site-doc { max-width: 1152px; margin-inline: auto; }  /* 레퍼런스 A 컴포넌트 목록: 1152 가운데 (1920 실측) */
 .site-body--full .site-doc { max-width: 1552px; margin-inline: auto; }
-.site-body--page .site-doc { max-width: 1100px; margin-inline: auto; }  /* 레퍼런스 B Get Started, Updates: 왼쪽 메뉴 없이 1100 가운데 (1440 실측) */  /* 레퍼런스 A 템플릿 목록: 1600 칸 안쪽 24 = 1552 가운데 (2000 실측) */
+.site-body--page .site-doc { max-width: calc(var(--site-col) - 2 * var(--ybm-space-x6)); margin-inline: auto; }  /* Get Started, AI & Tools, Updates: 왼쪽 메뉴 없이 가운데. 폭은 Foundations Overview 본문과 같게 (11-04 사용자 "일괄 통일") */  /* 레퍼런스 A 템플릿 목록: 1600 칸 안쪽 24 = 1552 가운데 (2000 실측) */
 .site-toc { display: none; }
 /* 768 이상: 왼쪽 메뉴 260 을 화면 왼쪽에 붙이고, 글 칸(최대 800, 안쪽 24)은 메뉴 바로 옆에서 시작 */
 @media (min-width: 768px) {
