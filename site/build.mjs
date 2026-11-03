@@ -179,7 +179,9 @@ const btn = (href, label, variant = 'neutralWeak', size = 'small', icon = '') =>
 
 
 // 상단 메뉴 셋 (2026-10-30 사용자 "통합": Foundations는 Get Started 왼쪽 메뉴의 한 묶음)
-const NAV = [['get-started', 'Get Started', 'index.html'], ['components', 'Components', 'components/index.html'], ['templates', 'Templates', 'templates/index.html'], ['themes', 'Themes', 'themes/index.html']];
+// 테마는 11-03 사용자 "우선 숨김, 처음부터 다시": 메뉴, Usage 테마 절, AI 목록, llms.txt 에서 뺀다. 다시 열 때 true
+const SHOW_THEMES = false;
+const NAV = [['get-started', 'Get Started', 'index.html'], ['components', 'Components', 'components/index.html'], ['templates', 'Templates', 'templates/index.html'], ...(SHOW_THEMES ? [['themes', 'Themes', 'themes/index.html']] : [])];
 // 왼쪽 메뉴는 영문, 묶음은 두고 묶음 안은 ABC 순 (레퍼런스 B)
 const az = (list) => [...list].sort((a, b) => a[1].localeCompare(b[1], 'en'));
 // 파운데이션: 항목마다 한 페이지 (슬러그, 영문 이름)
@@ -418,14 +420,14 @@ ${table(['상태', '쓰는 속성'], [['꺼짐', '<code>disabled</code>'], ['선
 <h2 id="theme">화면 모드</h2>
 <p>모드는 라이트와 다크 두 가지입니다. <code>&lt;html data-theme="dark"&gt;</code>를 붙이면 시맨틱 색이 모두 어두운 화면용으로 바뀝니다. 색을 토큰으로만 썼다면 따로 고칠 것이 없습니다.</p>
 
-<h2 id="custom-theme">테마</h2>
+${SHOW_THEMES ? `<h2 id="custom-theme">테마</h2>
 <p>테마는 브랜드 색, 바탕색, 모서리 곡률을 한 번에 바꿔 같은 DS 로 다른 분위기의 서비스를 만듭니다. DS 다음에 테마 파일을 붙이고 html 에 테마 이름을 적으면 되고, 컴포넌트는 고치지 않습니다. 고를 수 있는 테마는 <a class="ds-link" data-size="small" href="../themes/index.html">Themes</a> 에서 화면으로 비교해 볼 수 있습니다.</p>
 ${codeblock(`<html lang="ko" data-ds-theme="trust">
 <link rel="stylesheet" href="${PUBLIC}/dist/ybm-ds.css">
 <link rel="stylesheet" href="${PUBLIC}/dist/themes/trust.css">`)}
 <p>토큰 값은 html 에서 정해지므로 테마도 html 에만 답니다. 다크 모드는 테마 파일 안에 함께 들어 있고, 포커스 링과 안내색은 접근성을 위해 테마와 상관없이 그대로입니다.</p>
 
-<h2 id="breakpoint">반응형 기준점</h2>
+` : ''}<h2 id="breakpoint">반응형 기준점</h2>
 <p>작은 화면부터 쌓아 올리는 방식입니다. <code>@media</code> 안에서는 CSS 변수를 쓸 수 없어서 숫자를 직접 씁니다.</p>
 ${table(['이름', '폭', '쓰임'], bpRows.map(([n, w, u]) => [`<code>${n}</code>`, w, u]))}
 ${codeblock(`@media (min-width: 768px) { /* 태블릿, PC */ }\n@media (min-width: 1280px) { /* 넓은 PC */ }\n\n<!-- 유틸리티: 768 이상에서 숨김(모바일 전용) / 768 이상에서만 보임(PC 전용) -->\n<div class="u-hide-from-md">…</div>\n<div class="u-show-from-md">…</div>`, 'css')}
@@ -753,11 +755,11 @@ ${table(['파일', '내용'], [
 <li>주소를 열지 못하는 도구에는 <code>llms-full.txt</code> 를 파일로 첨부합니다.</li>
 <li>새 화면은 <code>llms.txt</code> 의 Templates 목록에서 비슷한 화면의 HTML 을 출발점으로 삼게 하면 배치와 여백이 DS 기준에 맞습니다.</li>
 </ol>
-<h2 id="list">템플릿과 테마 목록</h2>
-<p><code>llms.txt</code> 에는 문서 말고도 AI 가 바로 가져다 쓸 수 있는 두 가지 목록이 있습니다.</p>
+<h2 id="list">${SHOW_THEMES ? '템플릿과 테마 목록' : '템플릿 목록'}</h2>
+<p><code>llms.txt</code> 에는 문서 말고도 AI 가 바로 가져다 쓸 수 있는 ${SHOW_THEMES ? '두 가지 목록이' : '템플릿 목록이'} 있습니다.</p>
 ${table(['목록', '내용'], [
   ['Templates', '템플릿마다 HTML 원본 주소와 한 줄 설명입니다. 그대로 열면 되는 완성된 화면이라 고쳐 쓰기 좋습니다.'],
-  ['Themes', '테마 CSS 주소와 어울리는 서비스입니다. DS 다음에 붙이고 html 에 테마 이름을 적으면 됩니다.'],
+  ...(SHOW_THEMES ? [['Themes', '테마 CSS 주소와 어울리는 서비스입니다. DS 다음에 붙이고 html 에 테마 이름을 적으면 됩니다.']] : []),
 ])}
 <h2 id="prompt">요청 예시</h2>
 ${codeblock(`아래 YBM DS 문서를 읽고 로그인 화면을 HTML 로 만들어 줘.
@@ -774,7 +776,7 @@ const THEME_CARDS = [{ slug: '', name: '기본', card: { bg: '#f3f4f5', fg: '#1a
 const artSvg = (n, size = 44) => `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${lucide.icons[n] || ''}</svg>`;
 const themeCard = (t, on) => `<button type="button" class="site-theme" aria-pressed="${on}" data-site-theme="${t.slug}" aria-label="${esc(t.name)} 테마 미리 보기" style="--site-theme-bg: ${t.card.bg}; --site-theme-fg: ${t.card.fg}">${artSvg(t.card.art[0])}<span class="site-theme__name">${esc(t.name)}</span>${artSvg(t.card.art[1])}</button>`;
 const firstTheme = themesJson[0];
-write({
+if (SHOW_THEMES) write({
   file: 'themes/index.html', section: 'themes', title: 'Themes', layout: 'full',
   body: `<div class="site-themes">
 <aside class="site-themes__aside" aria-label="테마 고르기"><div class="site-themes__panel">
@@ -789,6 +791,7 @@ write({
 <div class="site-themes__stage"><iframe src="pages/${firstTheme.slug}.html" title="${esc(firstTheme.name)} 테마를 입힌 화면" scrolling="no" data-site-frame data-site-nomono data-site-theme-frame></iframe></div>
 </div>`,
 });
+else fs.rmSync(path.join(SITE, 'themes/index.html'), { force: true });
 
 /* ---------------------------------------------------------------- 자산 */
 fs.mkdirSync(path.join(SITE, 'assets'), { recursive: true });
@@ -834,7 +837,7 @@ ${templates.map((t) => `- [${t.name}](${SITE_URL}templates/pages/${t.slug}.html)
 DS 다음에 테마 CSS 를 붙이고 \`<html data-ds-theme="이름">\` 으로 켭니다.
 
 ${themesJson.map((t) => `- [${t.name} ${t.slug}](${PUBLIC}/dist/themes/${t.slug}.css): ${t.desc}`).join('\n')}`;
-  const n = writeMarkdown({ SITE, SITE_URL, intro, extra: [tplList, themeList], groups: [{ label: 'Get Started', pages: gs }, { label: 'Foundations', pages: found }, { label: 'Components', pages: compPages }] });
+  const n = writeMarkdown({ SITE, SITE_URL, intro, extra: SHOW_THEMES ? [tplList, themeList] : [tplList], groups: [{ label: 'Get Started', pages: gs }, { label: 'Foundations', pages: found }, { label: 'Components', pages: compPages }] });
   console.log(`  ✔ 마크다운 ${n}쪽, llms.txt, llms-full.txt`);
 }
 console.log(`  ✔ 사이트 ${written.length}쪽 생성 (컴포넌트 ${comps.length}, 템플릿 ${templates.length})`);
