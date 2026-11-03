@@ -362,12 +362,15 @@ write({
   ${metaLinks({ figma: LINKS.figmaUrl('2608:2'), code: GITHUB })}
 </header>
 
-<h2 id="about">YBM DS란 무엇인가요?</h2>
-${table(['용어', '뜻'], [
-  ['<b>토큰</b>', '색, 크기, 간격 같은 값에 붙인 이름입니다.'],
-  ['<b>컴포넌트</b>', '버튼, 입력창처럼 화면을 이루는 부품입니다.'],
-  ['<b>템플릿</b>', '부품을 조립해 둔 화면 한 장입니다.'],
-])}
+<h2 id="ai">AI로 시작하기</h2>
+<p>아래 글을 AI 코딩 도구(ChatGPT, Claude, Cursor 등)에 붙여 넣으면 설치부터 규칙까지 알아서 맞춥니다.</p>
+<h3>DS 적용하기</h3>
+${codeblock(prompts[0][2], 'text', ' data-wrap')}
+<h3>화면 만들기</h3>
+<p>대괄호 안만 내 상황에 맞게 바꿉니다.</p>
+${codeblock(prompts[1][2], 'text', ' data-wrap')}
+<h3>규칙 점검하기</h3>
+${codeblock(prompts[2][2], 'text', ' data-wrap')}
 
 <h2 id="system">시스템 이해하기</h2>
 <div class="site-grid site-grid--hub">
@@ -377,8 +380,6 @@ ${table(['용어', '뜻'], [
 </div>
 
 <h2 id="start">바로 써 보기</h2>
-<p>AI 코딩 도구로 만들 때는 <a class="ds-link" href="get-started/ai.html#prompt">AI &amp; Tools</a>의 요청 글을 붙여 넣으면 아래 설치와 규칙을 알아서 맞춥니다.</p>
-<script>if (location.hash === '#ai') location.replace('get-started/ai.html#prompt');</script>
 <p><code>&lt;head&gt;</code>에 두 줄을 넣으면 글꼴, 토큰, 아이콘, 컴포넌트가 함께 들어옵니다. 컴포넌트마다 쓰는 법은 <a class="ds-link" href="components/index.html">Components</a>에 있습니다.</p>
 ${codeblock(CSS_LINK)}
 

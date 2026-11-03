@@ -12,13 +12,48 @@
 
 YBM DS는 YBM 서비스를 위한 디자인 시스템입니다.
 
-## YBM DS란 무엇인가요?
+## AI로 시작하기
 
-| 용어 | 뜻 |
-| --- | --- |
-| **토큰** | 색, 크기, 간격 같은 값에 붙인 이름입니다. |
-| **컴포넌트** | 버튼, 입력창처럼 화면을 이루는 부품입니다. |
-| **템플릿** | 부품을 조립해 둔 화면 한 장입니다. |
+아래 글을 AI 코딩 도구(ChatGPT, Claude, Cursor 등)에 붙여 넣으면 설치부터 규칙까지 알아서 맞춥니다.
+
+### DS 적용하기
+
+```text
+이 프로젝트에 YBM DS를 적용해 줘.
+1. <head>에 아래 두 줄을 넣어 줘.
+   <link rel="stylesheet" href="https://luvms012-rgb.github.io/ybm-ds/dist/ybm-ds.css">
+   <script src="https://luvms012-rgb.github.io/ybm-ds/dist/ybm-ds.js" defer></script>
+2. 문서는 https://luvms012-rgb.github.io/ybm-ds/site/llms.txt 목차에서 필요한 페이지(.md)를 골라 읽어.
+3. 쓸 수 있는 컴포넌트 목록은 https://luvms012-rgb.github.io/ybm-ds/components.json, 각 컴포넌트의 HTML 구조는 https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/components.css의 컴포넌트별 머리 주석을 따라.
+4. 색, 간격, 글자 크기, 모서리, 그림자는 https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/tokens.css의 --ds-* 토큰만 써.
+5. 서비스 CSS는 DS 다음에 불러오고, 바꾸고 싶은 모양은 컴포넌트의 --ds-* 변수만 덮어써.
+6. 새 ds- 클래스를 만들거나 !important를 쓰지 마.
+```
+
+### 화면 만들기
+
+대괄호 안만 내 상황에 맞게 바꿉니다.
+
+```text
+YBM DS로 [만들 화면, 예: 회원 목록 관리 화면]을 만들어 줘.
+- 부품은 https://luvms012-rgb.github.io/ybm-ds/components.json에 있는 것만 쓰고, 마크업은 https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/components.css 머리 주석 그대로 써.
+- 쓰는 컴포넌트는 https://luvms012-rgb.github.io/ybm-ds/site/llms.txt에서 그 문서(.md)를 읽고 사용 지침을 따라.
+- 비슷한 화면이 llms.txt의 Templates 목록에 있으면 그 HTML을 출발점으로 써.
+- 모바일 먼저 만들고, 768px 이상과 1280px 이상에서 배치를 바꿔 줘.
+- 글자는 한국어. 제목은 Bold에 자간 -0.02em, 항목 제목은 SemiBold, 본문은 Regular로 쓰고, 크기는 --ds-font-size-* 토큰, 본문은 word-break: keep-all.
+- 배치용 CSS에는 --ds-* 토큰만 쓰고 hex 색은 쓰지 마.
+```
+
+### 규칙 점검하기
+
+```text
+이 화면이 YBM DS 규칙을 지키는지 점검하고 고쳐 줘.
+- hex, rgb로 색을 직접 쓴 곳 → --ds-color-* 토큰으로
+- 토큰이 아닌 임의의 간격, 글자 크기 → --ds-space-*, --ds-font-size-* 로
+- https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/components.css에 없는 ds- 클래스, !important
+- DS 부품으로 바꿀 수 있는데 직접 만든 버튼, 입력, 표
+고친 곳은 목록으로 알려 줘.
+```
 
 ## 시스템 이해하기
 
@@ -29,8 +64,6 @@ Components화면을 이루는 부품의 모양과 쓰임.
 Templates가져다 고쳐 쓰는 완성 화면.
 
 ## 바로 써 보기
-
-AI 코딩 도구로 만들 때는 [AI & Tools](https://luvms012-rgb.github.io/ybm-ds/site/get-started/ai.md#prompt)의 요청 글을 붙여 넣으면 아래 설치와 규칙을 알아서 맞춥니다.
 
 `<head>`에 두 줄을 넣으면 글꼴, 토큰, 아이콘, 컴포넌트가 함께 들어옵니다. 컴포넌트마다 쓰는 법은 [Components](https://luvms012-rgb.github.io/ybm-ds/site/components/index.md)에 있습니다.
 

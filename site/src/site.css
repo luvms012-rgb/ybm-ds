@@ -156,7 +156,7 @@ body[data-side-open] .site-scrim { opacity: 1; pointer-events: auto; }
 .site-eyebrow { margin-bottom: var(--ds-space-x3); color: var(--ds-color-fg-neutral-muted); font-size: var(--ds-font-size-t04); line-height: 20px; }
 .site-eyebrow a { color: inherit; text-decoration: none; }
 .site-eyebrow a:hover { color: var(--ds-color-fg-neutral); }
-.site-h1 { font-size: var(--ds-font-size-t12); line-height: 40px; font-weight: var(--ds-font-weight-bold); letter-spacing: -0.025em; }  /* 48/52 Bold (11-04 사용자 "큰 타이틀 볼드"). 768 보다 좁으면 32/40 */
+.site-h1 { font-size: var(--ds-font-size-t12); line-height: 40px; font-weight: var(--ds-font-weight-semibold); letter-spacing: -0.025em; }  /* 48/52 SemiBold (11-04 사용자 "세미볼드로 다시"). 768 보다 좁으면 32/40 */
 .site-doc header p.site-lead { margin-top: var(--ds-space-x4); color: var(--ds-color-fg-neutral-muted); font-size: var(--ds-font-size-t05); line-height: 24px; font-weight: var(--ds-font-weight-regular); letter-spacing: 0; }
 @media (min-width: 768px) { .site-h1 { font-size: var(--ds-font-size-t14); line-height: 52px; } }
 .site-doc > * + * { margin-top: var(--ds-space-x4); }
@@ -164,8 +164,9 @@ body[data-side-open] .site-scrim { opacity: 1; pointer-events: auto; }
 .site-doc h2:not(.pv-stage *, .site-tile__inner *, .site-example__preview *, .site-tpl *) { position: relative; margin-top: var(--ds-space-x12); font-size: var(--ds-font-size-t09); line-height: 32px; font-weight: var(--ds-font-weight-semibold); letter-spacing: 0; }  /* 24/32 SemiBold (11-04 사용자), 위 48 */
 .site-doc h3:not(.pv-stage *, .site-tile__inner *, .site-example__preview *, .site-tpl *) { margin-top: var(--ds-space-x8); font-size: var(--ds-font-size-t07); line-height: 32px; font-weight: var(--ds-font-weight-medium); letter-spacing: 0; }  /* 20/32 Medium, 위 32 */
 .site-doc > header + h2 { margin-top: var(--ds-space-x12); }
-.site-doc > h2 + * { margin-top: var(--ds-space-x6); }  /* h2 아래 24 */
-.site-doc > h3 + * { margin-top: var(--ds-space-x3); }  /* h3 아래 12 */
+.site-doc > h2 + * { margin-top: var(--ds-space-x3); }  /* 제목 아래는 h2, h3 모두 12 (11-04 사용자 "사이 여백 일정하게") */
+.site-doc > h3 + * { margin-top: var(--ds-space-x3); }
+.site-doc > p + p { margin-top: var(--ds-space-x2); }  /* 이어지는 문단은 한 덩어리로 8 */
 .site-anchor { display: inline-grid; place-items: center; width: 28px; height: 28px; margin-left: var(--ds-space-x2); border-radius: var(--ds-shape-sm); color: var(--ds-color-fg-neutral-subtle); vertical-align: middle; opacity: 0; transition: opacity var(--ds-duration-fast) var(--ds-easing-standard); }
 .site-doc h2:hover .site-anchor, .site-anchor:focus-visible { opacity: 1; }
 .site-anchor:hover { background: var(--ds-color-bg-transparent-pressed); color: var(--ds-color-fg-neutral); }
