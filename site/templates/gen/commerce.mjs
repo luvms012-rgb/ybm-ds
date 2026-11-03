@@ -32,10 +32,8 @@ const CSS = FRAME_CSS + `
   /* 전체 고르기 줄 */
   .tp-selbar { display: flex; align-items: center; justify-content: space-between; gap: var(--ybm-space-x3); }
   /* 무료 배송까지 남은 금액 */
-  /* 무료 배송까지 남은 금액: 상자 없이 금액만 강조, 얇은 막대와 양 끝 금액 (쇼핑몰 장바구니 공통) */
-  .tp-freeship { display: flex; flex-direction: column; gap: var(--ybm-space-x2); font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral-muted); }
-  .tp-freeship__msg { display: flex; align-items: center; gap: var(--ybm-space-x1_5); }
-  .tp-freeship__msg .ds-icon { --ds-icon-size: 16px; color: var(--ybm-color-fg-brand); }
+  /* 무료 배송까지 남은 금액: DS Callout 상자 안에 문구, 얇은 막대, 양 끝 금액 */
+  .tp-freeship .ds-callout__body { display: flex; flex: 1 1 auto; flex-direction: column; gap: var(--ybm-space-x2); min-width: 0; }
   .tp-freeship b { font-weight: var(--ybm-font-weight-bold); color: var(--ybm-color-fg-brand); }
   .tp-freeship__ends { display: flex; justify-content: space-between; font-size: var(--ybm-font-size-t02); line-height: var(--ybm-line-height-t02); color: var(--ybm-color-fg-neutral-subtle); font-variant-numeric: tabular-nums; }
   /* 배송 묶음과 상품 줄 */
@@ -92,7 +90,8 @@ const CSS = FRAME_CSS + `
   .tp-rec { display: flex; flex-direction: column; gap: var(--ybm-space-x2); min-width: 0; }
   .tp-rec__name { display: -webkit-box; overflow: hidden; -webkit-line-clamp: 2; -webkit-box-orient: vertical; font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); color: var(--ybm-color-fg-neutral); text-decoration: none; }
   /* 할인 없는 상품도 가격 줄 높이를 같게, 담기 버튼은 카드 맨 아래 한 줄로 */
-  .tp-rec .tp-price { min-height: 46px; justify-content: flex-end; }
+  .tp-rec .tp-price { align-items: flex-start; gap: 0; margin-top: calc(-1 * var(--ybm-space-x1)); }
+  .tp-rec .tp-price__was { order: 2; }
   .tp-rec .ds-btn { margin-top: auto; }
 `;
 
@@ -126,7 +125,7 @@ const cart = () => {
   <div class="tp-cart">
     <div class="tp-cart__main">
       <div class="tp-selbar">${checkbox(`전체 고르기 ${T(on + '/' + n)}`, { checked: true })}<div class="tp-row">${btn('품절 상품 빼기', { variant: 'ghost', attrs: 'class="tp-only-md"' }).replace('class="ds-btn" ', 'class="ds-btn tp-only-md" ').replace(' class="tp-only-md"', '')}${btn('고른 상품 빼기', { variant: 'neutralOutline' })}</div></div>
-      <div class="tp-freeship"><span class="tp-freeship__msg">${icon('truck')}아침 로스터리 상품을 <b>${won(4200)}</b> 더 담으면 <b>무료 배송</b>이에요.</span>${progress(86, { label: '무료 배송까지' })}<span class="tp-freeship__ends"><span>0원</span><span>30,000원</span></span></div>
+      <div class="ds-callout tp-freeship" data-tone="informative">${icon('truck')}<div class="ds-callout__body"><p class="ds-callout__desc">아침 로스터리 상품을 <b>${won(4200)}</b> 더 담으면 <b>무료 배송</b>이에요.</p>${progress(86, { label: '무료 배송까지' })}<span class="tp-freeship__ends"><span>0원</span><span>30,000원</span></span></div></div>
       ${groups.map(([seller, tag, ship, rows]) => card(`<div class="tp-grp__head"><span class="tp-row">${checkOnly(seller + ' 상품 모두 고르기', true)}<h2 class="tp-h4">${seller}</h2>${tag}</span><span class="tp-caption">${ship}</span></div>${rows.map(item).join('')}`, { cls: 'tp-grp', attrs: `aria-label="${esc(seller)}"` })).join('')}
       <ul class="tp-notes">${NOTES.map((t) => `<li>${t}</li>`).join('')}</ul>
     </div>

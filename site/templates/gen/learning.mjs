@@ -90,7 +90,7 @@ const player = () => {
   .tp-pl__bar .ds-progress { width: 120px; }
   .tp-pl__body { display: flex; flex-direction: column; flex: 1 1 auto; }
   .tp-pl__main { display: flex; flex-direction: column; gap: var(--ybm-space-x6); flex: 1 1 auto; min-width: 0; padding: var(--ybm-space-x6) var(--ybm-space-x4) var(--ybm-space-x12); }
-  .tp-video { position: relative; display: grid; place-items: center; aspect-ratio: 16 / 9; border-radius: var(--ybm-shape-xl); background: var(--ybm-color-palette-gray-900); color: var(--ybm-color-palette-static-white); }
+  .tp-video { position: relative; display: grid; place-items: center; aspect-ratio: 16 / 9; border-radius: var(--ybm-shape-xl); background: var(--ybm-color-palette-static-black); color: var(--ybm-color-palette-static-white); }  /* 영상 자리는 화면 모드와 상관없이 늘 검정 */
   .tp-video__play { display: grid; place-items: center; width: 64px; height: 64px; border-radius: var(--ybm-shape-pill); background: var(--ybm-color-palette-static-white-alpha-300); }
   .tp-video__play .ds-icon { --ds-icon-size: 28px; }
   .tp-video__bar { position: absolute; inset: auto var(--ybm-space-x4) var(--ybm-space-x3); display: flex; align-items: center; gap: var(--ybm-space-x3); font-size: var(--ybm-font-size-t03); font-variant-numeric: tabular-nums; }

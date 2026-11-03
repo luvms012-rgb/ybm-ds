@@ -230,7 +230,7 @@ const write = () => {
     <form class="tp-wform" onsubmit="return false">
       <div class="tp-wpick">${field('w-board', '게시판', select('자유게시판', { id: 'w-board' }), { required: true })}${field('w-cat', '말머리', select('잡담', { id: 'w-cat' }))}</div>
       ${field('w-title', '제목', input('w-title', 'placeholder="제목을 적어 주세요" maxlength="60"'), { required: true, help: '60자까지 쓸 수 있어요.' })}
-      <div class="ds-field"><div class="ds-field__header"><label class="ds-field__label" for="w-body">본문 <span class="ds-field__required" aria-hidden="true">*</span></label></div>
+      <div class="ds-field"><div class="ds-field__header"><label class="ds-field__label" for="w-body">본문 <span class="ds-field__required" aria-hidden="true"></span></label></div>
         <div class="tp-editor"><div class="tp-editor__bar" role="toolbar" aria-label="글 꾸미기">${iconBtn('italic', '기울이기', { size: 'xsmall' })}${iconBtn('link', '링크 넣기', { size: 'xsmall' })}${iconBtn('list', '목록', { size: 'xsmall' })}${iconBtn('image', '사진 넣기', { size: 'xsmall' })}${iconBtn('paperclip', '파일 붙이기', { size: 'xsmall' })}${iconBtn('chart-column', '투표 넣기', { size: 'xsmall' })}</div><textarea class="ds-textarea" id="w-body" placeholder="이야기를 나눠 주세요. 다른 멤버를 존중하는 글을 써 주세요."></textarea></div>
       </div>
       <div class="ds-field"><div class="ds-field__header"><span class="ds-field__label">사진</span></div>

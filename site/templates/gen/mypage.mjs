@@ -111,8 +111,7 @@ const orders = () => {
   const groups = [['2026.11.01', '20261101-0042', [ITEMS[0], ITEMS[3]]], ['2026.10.24', '20261024-0918', [ITEMS[1]]], ['2026.10.12', '20261012-1377', [ITEMS[2]]]];
   const body = shell('주문 내역', `    <header class="tp-mp-head"><div class="tp-stack" style="gap: var(--ybm-space-x1_5)"><h1 class="tp-h1">주문 내역</h1><p class="tp-sub">주문한 상품의 배송 상태를 보고 취소, 교환, 반품을 신청할 수 있어요.</p></div></header>
     <div class="tp-stack" style="gap: var(--ybm-space-x3)">
-      ${chiptabs(['전체 6', '결제 완료 0', '배송 중 1', '배송 완료 3', '취소, 반품 2'], 0, '주문 상태')}
-      <div class="tp-ttools"><span class="tp-sub">주문 ${T('4')}건</span><div class="tp-row" style="flex-wrap: wrap">${K.even(segmented(['1개월', '3개월', '6개월', '1년'], 1, '기간') + select('모든 주문', { aria: '주문 종류' }) + K.search('od-q', '상품 이름으로 찾기'))}</div></div>
+      <div class="tp-ttools">${chiptabs(['전체 6', '결제 완료 0', '배송 중 1', '배송 완료 3', '취소, 반품 2'], 0, '주문 상태', { size: 'large' })}<div class="tp-ttools__end">${K.even(segmented(['1개월', '3개월', '6개월', '1년'], 1, '기간') + K.search('od-q', '상품 이름으로 찾기'), true)}</div></div>
     </div>
     <div class="tp-stack" style="gap: var(--ybm-space-x10)">${groups.map(([d, no, items]) => `<section class="tp-order" aria-label="${d} 주문"><div class="tp-order__head"><span class="tp-row"><span class="tp-h3 tp-num">${d}</span><span class="tp-caption tp-num">주문 번호 ${no}</span></span>${link('주문 상세')}</div><div class="tp-rows">${items.map(oitem).join('')}</div></section>`).join('')}</div>
     <div class="tp-tfoot">${pagination(1, 3)}</div>`);

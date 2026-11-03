@@ -17,14 +17,14 @@ const tileCard = (t, d) => `<article class="ds-card tp-card tp-tile" data-size="
 const library = () => {
   const groups = [['레이아웃', [['Card', '안쪽 여백, 테두리, 그림자를 고를 수 있는 담는 상자'], ['Divider', '내용 사이를 가로나 세로로 나누는 선'], ['Image Frame', '정해진 비율로 사진을 자르는 틀'], ['Side Panel', '화면 옆에서 밀려 나오는 패널'], ['Bottom Sheet', '모바일 아래에서 올라오는 시트'], ['Scroll Fog', '스크롤 끝을 흐리게 알려 주는 그늘'], ['Carousel', '옆으로 넘겨 보는 카드 줄']]], ['폼', [['Checkbox', '여러 개를 고르는 상자, 일부 선택 상태 포함'], ['Radio Group', '하나만 고르는 동그라미 묶음'], ['Switch', '켜고 끄는 스위치'], ['Text Field', '한 줄 입력칸'], ['Select', '목록에서 하나 고르기'], ['Date Picker', '달력에서 날짜 고르기'], ['File Attach', '파일 끌어 놓기와 목록']]], ['내비게이션', [['Breadcrumbs', '지금 위치를 보여 주는 경로'], ['Tabs', '같은 화면 안에서 내용 바꾸기'], ['Pagination', '여러 쪽으로 나눈 목록 넘기기'], ['Side Navigation', '왼쪽 세로 메뉴'], ['Top App Bar', '모바일 맨 위 막대'], ['Bottom Navigation', '모바일 아래 탭'], ['Stepper', '단계 진행 표시']]], ['피드백', [['Badge', '상태나 개수를 짧게 알리는 표'], ['Callout', '눈에 띄게 알리는 안내 상자'], ['Snackbar', '잠깐 떴다 사라지는 알림'], ['Progress', '얼마나 진행됐는지 막대로'], ['Skeleton', '불러오는 동안의 자리'], ['Empty', '내용이 없을 때의 안내'], ['Help Bubble', '처음 쓰는 사람을 위한 말풍선']]]];
   const css = `
-  .tp-libbar { display: flex; flex-wrap: wrap; align-items: flex-end; gap: var(--ybm-space-x3); }
+  .tp-libbar { display: flex; flex-wrap: wrap; align-items: center; gap: var(--ybm-space-x3); }
   .tp-libbar .tp-q { flex: 1 1 280px; max-width: 360px; }
-  .tp-libbar .ds-chiptabs { padding-inline: 0; flex: 1 1 auto; }
+  .tp-libbar .ds-chiptabs { flex: 1 1 auto; }
 `;
   const body = `<div class="tp-app">
 ${head('라이브러리')}
 <main class="tp-content">
-  <div class="tp-libbar"><div class="tp-q">${field('lq', '찾기', search('lq', '찾기…'))}</div>${chiptabs(['전체', '레이아웃', '폼', '내비게이션', '피드백', '데이터', '미디어'], 0, '분류로 거르기')}${btn('최근 순', { variant: 'ghost', icEnd: 'chevron-down' })}</div>
+  <div class="tp-libbar"><div class="tp-q">${search('lq', '이름으로 찾기')}</div>${chiptabs(['전체', '레이아웃', '폼', '내비게이션', '피드백', '데이터', '미디어'], 0, '분류로 거르기', { size: 'large' })}${btn('최근 순', { variant: 'ghost', size: 'medium', icEnd: 'chevron-down' })}</div>
   ${groups.map(([g, items]) => `${divider()}<section class="tp-sec" aria-labelledby="g-${esc(g)}">${secHead(g, { id: 'g-' + esc(g), sub: items.length + '개' })}<div class="tp-g4">${items.map(([t, d]) => tileCard(t, d)).join('')}</div></section>`).join('')}
 </main>
 </div>`;

@@ -1027,7 +1027,8 @@ button.ds-input__prefix:hover { color: var(--ybm-color-fg-neutral); }
 /* --------------------------------------------------------------------------
    16 Chip Tabs — 콘텐츠 카테고리 전환(가로 스크롤). 주요 내비게이션은 Tabs.
    variant: neutralSolid(기본) · neutralOutline   size: medium(기본 36) · large 40
-     <div class="ds-chiptabs" role="tablist" data-variant="neutralOutline">
+   inset: 기본 좌우 x4(화면 끝까지 넘기는 목록) · data-inset="none" 좌우 여백 없음(제목 아래 콘텐츠 칸 안에 놓을 때, 2026-11-03)
+     <div class="ds-chiptabs" role="tablist" data-variant="neutralOutline" [data-inset="none"]>
        <button class="ds-chiptabs__trigger" role="tab" aria-selected="true">전체</button>
        <button class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-notification>공지</button>
      </div>
@@ -1035,6 +1036,7 @@ button.ds-input__prefix:hover { color: var(--ybm-color-fg-neutral); }
      neutralSolid bg/neutral-weak-alpha · neutralOutline 투명 + stroke/neutral-muted
      selected bg/neutral-solid + fg/on-neutral-solid · disabled opacity .5 · notification 점 6 bg/brand-solid
    -------------------------------------------------------------------------- */
+.ds-chiptabs[data-inset="none"] { padding-inline: 0; }
 .ds-chiptabs {
   --ds-ct-height: 36px;
   --ds-ct-padding-x: 14px;
@@ -1106,6 +1108,7 @@ button.ds-input__prefix:hover { color: var(--ybm-color-fg-neutral); }
 .ds-tabs::-webkit-scrollbar { display: none; }
 .ds-tabs[data-size="medium"] { --ds-tabs-height: 44px; }
 .ds-tabs[data-layout="hug"] { padding-inline: var(--ybm-space-x4); }
+.ds-tabs[data-layout="hug"][data-inset="none"] { padding-inline: 0; }  /* 2026-11-03: 콘텐츠 칸 안에서 제목과 왼쪽 끝을 맞출 때 */
 .ds-tabs__trigger {
   position: relative;
   display: inline-flex;
@@ -2301,7 +2304,7 @@ html:has(:is(.ds-dialog, .ds-bottomsheet)[open]) { overflow: hidden; }
        [<footer class="ds-card__footer"><button class="ds-btn" data-variant="neutralWeak" data-width="fill">자세히 보기</button></footer>]
      </article>
    Figma: bg/layer-default · shape/xl · padding medium x5 / small x4 · 영역 gap x4 / x3
-     header gap x1 · title t05 Bold(small t04 Bold) fg/neutral · desc t04(small t03) fg/neutral-subtle
+     header gap x1 · title t06 Bold(small t05 Bold, 2026-11-03 한 단계 올림: Empty 제목과 같은 단계) fg/neutral · desc t04(small t03) fg/neutral-subtle
      outline 1px stroke/neutral-weak · subtle 1px stroke/neutral-muted · elevated elevation raised · footer 버튼 neutralWeak medium(small) gap x2
      모서리 medium shape/xl · small shape/lg (2026-11-03) · 화면 폭에 따라 안쪽 여백을 바꿀 때는 --ds-card-padding / --ds-card-gap
    전체가 눌리는 카드: <a class="ds-card" href> → pressed 시 bg/transparent-pressed 를 덧씌움
@@ -2325,9 +2328,9 @@ html:has(:is(.ds-dialog, .ds-bottomsheet)[open]) { overflow: hidden; }
 .ds-card[data-variant="elevated"] { box-shadow: var(--ybm-elevation-raised); }
 .ds-card[data-size="small"] { --ds-card-padding: var(--ybm-space-x4); --ds-card-gap: var(--ybm-space-x3); --ds-card-radius: var(--ybm-shape-lg); }
 .ds-card__header { display: flex; flex-direction: column; gap: var(--ybm-space-x1); }
-.ds-card__title { font-size: var(--ybm-font-size-t05); line-height: var(--ybm-line-height-t05); font-weight: var(--ybm-font-weight-bold); }
+.ds-card__title { font-size: var(--ybm-font-size-t06); line-height: var(--ybm-line-height-t06); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.01em; }
 .ds-card__desc { color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); }
-.ds-card[data-size="small"] .ds-card__title { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); }
+.ds-card[data-size="small"] .ds-card__title { font-size: var(--ybm-font-size-t05); line-height: var(--ybm-line-height-t05); }
 .ds-card[data-size="small"] .ds-card__desc { font-size: var(--ybm-font-size-t03); line-height: var(--ybm-line-height-t03); }
 .ds-card__content { font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); }
 .ds-card__footer { display: flex; gap: var(--ybm-space-x2); }
@@ -2446,6 +2449,7 @@ a.ds-card:active, button.ds-card:active { background: linear-gradient(var(--ybm-
      묶음 행 44 bg/neutral-weak-alpha + SemiBold · hover(data-interactive 행만) bg/neutral-weak-alpha · selected bg/brand-weak
      정렬: 글 start(기본) · 숫자 end · 짧은 고정 길이 값(번호·날짜·상태) center → data-align (right 는 end 와 같음)
      선은 칸 border 로 그린다(행 그림자는 칸에 바탕을 넣으면 가려지고, 표 양 끝에 세로 선이 생긴다)
+     Card 안에 넣으면 카드 테두리가 틀이 되므로 위 진한 선과 마지막 줄 선을 뺀다 (2026-11-03)
    -------------------------------------------------------------------------- */
 .ds-table-wrap { width: 100%; overflow-x: auto; }
 .ds-table {
@@ -2493,6 +2497,8 @@ a.ds-card:active, button.ds-card:active { background: linear-gradient(var(--ybm-
 .ds-table tbody tr[data-interactive]:active { background: var(--ybm-color-bg-neutral-weak-alpha); }
 @media (hover: hover) { .ds-table tbody tr[data-interactive]:hover { background: var(--ybm-color-bg-neutral-weak-alpha); } }
 .ds-table tbody tr[aria-selected="true"] { background: var(--ybm-color-bg-brand-weak); }
+.ds-card .ds-table { border-top: 0; }
+.ds-card .ds-table tbody tr:last-child > * { border-bottom: 0; }
 .ds-table caption { padding-bottom: var(--ybm-space-x2); text-align: start; color: var(--ybm-color-fg-neutral-subtle); }
 
 

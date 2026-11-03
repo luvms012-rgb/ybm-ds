@@ -100,7 +100,7 @@ const inbox = () => {
   const body = `<div class="tp-app" style="height: 100vh">
 <header class="tp-head" style="flex-direction: column; align-items: stretch; padding-bottom: 0">
   <div class="tp-between"><div class="tp-head__texts"><h1 class="tp-h1">받은함</h1><p class="tp-sub">대화 9개 중 3개 읽지 않음</p></div><div class="tp-row">${btn('필터', { ic: 'funnel' })}${btn('새 메시지', { variant: 'neutralSolid', ic: 'square-pen' })}</div></div>
-  ${tabs(['전체', '읽지 않음', '별표', '보관함'], 0, '받은함 탭')}
+  ${tabs(['전체', '읽지 않음', '별표', '보관함'], 0, '받은함 탭', { layout: 'hug', inset: 'none' })}
 </header>
 <div class="tp-inbox">
   <div class="tp-inbox__list" style="overflow:auto"><div class="ds-table-wrap"><table class="ds-table" data-density="compact">${thead(['<span class="tp-sr">상태</span>', '대화', ['받은 시간', 'end']])}<tbody>${rows.map(([u, who, s, t, att], i) => `<tr data-interactive${i === 0 ? ' aria-selected="true"' : ''}><td style="width:28px">${u ? '<span class="tp-unread" role="img" aria-label="읽지 않음"></span>' : ''}</td><td><span class="tp-inbox__row">${u ? `<b>${who}</b><b>${s}</b>` : `<span>${who}</span><span class="tp-sub">${s}</span>`}</span></td><td data-align="end"><span class="tp-row" style="justify-content:flex-end">${att ? icon('paperclip', 'sm') : ''}${T(t)}</span></td></tr>`).join('')}</tbody></table></div></div>
@@ -154,6 +154,15 @@ const tree = () => {
   .tp-tree-name { display: flex; align-items: center; gap: var(--ybm-space-x1); padding-left: calc(var(--d) * 20px); }
   .tp-tree-name .tp-spacer { width: 20px; }
   .tp-tree-name .ds-icon { color: var(--ybm-color-fg-neutral-subtle); }
+  .tp-tree-name a { color: var(--ybm-color-fg-neutral); text-decoration: none; }
+  .tp-tree-name a:hover { text-decoration: underline; }
+  /* 커뮤니티와 같은 틀: 1280 가운데, 위 제목은 전체 폭, 아래는 본문 + 오른쪽 정보 280 */
+  .tp-repo { box-sizing: border-box; display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ybm-space-x6); width: min(100%, 1280px); margin-inline: auto; padding: var(--ybm-space-x6) var(--ybm-space-x4) var(--ybm-space-x10); }
+  .tp-repo__head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ybm-space-x3); }
+  .tp-repo__head > .tp-row { flex-wrap: wrap; }
+  .tp-repo__main { display: flex; flex-direction: column; gap: var(--ybm-space-x4); min-width: 0; }
+  .tp-repo__side { display: flex; flex-direction: column; gap: var(--ybm-space-x4); }
+  @media (min-width: 1024px) { .tp-repo { grid-template-columns: minmax(0, 1fr) 280px; column-gap: var(--ybm-space-x10); padding-inline: var(--ybm-space-x6); } .tp-repo__head { grid-column: 1 / -1; } }
   .tp-toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: var(--ybm-space-x2); }
   .tp-toolbar .tp-grow { flex: 1 1 200px; display: flex; justify-content: flex-end; gap: var(--ybm-space-x2); flex-wrap: wrap; }
   .tp-about dl { display: grid; grid-template-columns: auto 1fr; gap: var(--ybm-space-x2) var(--ybm-space-x4); margin: 0; }
@@ -163,17 +172,17 @@ const tree = () => {
   .tp-md h4 { margin: var(--ybm-space-x5) 0 var(--ybm-space-x2); }
 `;
   const body = `<div class="tp-app">
-<header class="tp-head" style="align-items: center">
+<div class="tp-repo">
+<header class="tp-repo__head">
   <div class="tp-row" style="flex-wrap: wrap"><h1 class="tp-h1">canvas-editor</h1>${breadcrumbs(['canvas-editor'])}${badge('공개')}</div>
   <div class="tp-row">${btn('지켜보기', { ic: 'eye' })}${btn('포크 12', { ic: 'git-branch' })}${btn('별 248', { ic: 'star' })}${btn('코드', { variant: 'neutralSolid', ic: 'code', icEnd: 'chevron-down' })}</div>
 </header>
-<div class="tp-body tp-body--panel">
-<main class="tp-content" style="gap: var(--ybm-space-x4)">
+<main class="tp-repo__main">
   <div class="tp-toolbar">${K.even(`${btn('main', { ic: 'git-branch', icEnd: 'chevron-down' })}${btn('브랜치 8', { variant: 'ghost', ic: 'git-pull-request' })}${btn('태그 14', { variant: 'ghost', ic: 'tag' })}<div class="tp-grow"><div style="width: min(100%, 240px)">${input('goto', 'type="search" placeholder="파일로 이동" aria-label="파일로 이동"', { size: 'small', ic: 'search' })}</div>${btn('파일 추가', { icEnd: 'chevron-down' })}${btn('기록 1,284', { variant: 'ghost', ic: 'rotate-ccw' })}</div>`)}</div>
-  ${card(`<div class="ds-table-wrap"><table class="ds-table" data-density="compact">${thead([`<span class="tp-row">${iconBtn('chevrons-up-down', '모든 행 펼치기', { size: 'xsmall' })}이름</span>`, '마지막 변경', ['시간', 'end']])}<tbody>${rows.map(([d, k, n, m, t, open]) => `<tr><td><span class="tp-tree-name" style="--d:${d}">${k === 'f' ? `<button type="button" class="ds-btn tp-caret" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-expanded="${!!open}" aria-label="${n} ${open ? '접기' : '펼치기'}">${icon(open ? 'chevron-down' : 'chevron-right', 'sm')}</button>${icon(open ? 'folder-open' : 'folder', 'sm')}` : `<span class="tp-spacer"></span>${icon('file', 'sm')}`}${link(n)}</span></td><td class="tp-sub">${m}</td><td data-align="end">${T(t)}</td></tr>`).join('')}</tbody></table></div>`, { attrs: 'style="padding: 0; overflow: hidden"' })}
+  <div class="ds-table-wrap"><table class="ds-table" data-density="compact">${thead([`<span class="tp-row">${iconBtn('chevrons-up-down', '모든 행 펼치기', { size: 'xsmall' })}이름</span>`, '마지막 변경', ['시간', 'end']])}<tbody>${rows.map(([d, k, n, m, t, open]) => `<tr><td><span class="tp-tree-name" style="--d:${d}">${k === 'f' ? `<button type="button" class="ds-btn tp-caret" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-expanded="${!!open}" aria-label="${n} ${open ? '접기' : '펼치기'}">${icon(open ? 'chevron-down' : 'chevron-right', 'sm')}</button>${icon(open ? 'folder-open' : 'folder', 'sm')}` : `<span class="tp-spacer"></span>${icon('file', 'sm')}`}<a href="#">${n}</a></span></td><td class="tp-sub">${m}</td><td data-align="end">${T(t)}</td></tr>`).join('')}</tbody></table></div>
   ${card(`${tabs(['README', '라이선스', '기여 안내'], 0, '문서')}<div class="ds-markdown tp-md"><h3>canvas-editor</h3><p>웹 페이지에 넣어 쓰는 작은 벡터 캔버스예요. 도형을 그리고, 묶고, 크기를 바꾸고, 이미지로 내보낼 수 있어요.</p><h4>설치</h4>${codeblock('bash', 'npm install canvas-editor')}<h4>사용</h4>${codeblock('ts', "import { Canvas } from 'canvas-editor';\n\nconst canvas = new Canvas('#stage', { width: 800, height: 600 });\ncanvas.add({ type: 'rect', x: 40, y: 40, w: 120, h: 80 });")}</div>`)}
 </main>
-<aside class="tp-panel tp-about" aria-labelledby="s-about">
+<aside class="tp-repo__side tp-about" aria-labelledby="s-about">
   <h2 class="tp-h3" id="s-about">정보</h2>
   <p class="tp-sub">웹 페이지에 넣어 쓰는 작은 벡터 캔버스. 도형 그리기, 묶기, 내보내기.</p>
   <div class="tp-row" style="flex-wrap: wrap">${['canvas', 'vector', 'editor', 'typescript'].map((t) => badge(t, 'brand')).join('')}</div>
