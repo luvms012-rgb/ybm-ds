@@ -1091,7 +1091,7 @@ button.ds-input__prefix:hover { color: var(--ybm-color-fg-neutral); }
      <div class="ds-tabs" role="tablist" [data-size="medium"] [data-layout="hug"]>
        <button class="ds-tabs__trigger" role="tab" aria-selected="true">탭</button>
      </div>
-   Figma: bg/layer-default · 하단 1px stroke/neutral-muted · trigger padding x2_5 · t04 Medium fg/placeholder
+   Figma: bg/layer-default · 하단 1px stroke/neutral-muted · trigger padding x2_5 · t04 Medium fg/neutral-subtle(2026-11-03, placeholder 에서 진하게)
      selected t04 SemiBold fg/neutral + 하단 2px fg/neutral 인디케이터(트리거 폭) · disabled fg/disabled
      hug: 좌우 x4 · 트리거는 내용 폭
    -------------------------------------------------------------------------- */
@@ -1117,7 +1117,7 @@ button.ds-input__prefix:hover { color: var(--ybm-color-fg-neutral); }
   flex: 1 1 0;
   min-height: var(--ds-tabs-height);
   padding: var(--ybm-space-x2_5);
-  color: var(--ybm-color-fg-placeholder);
+  color: var(--ybm-color-fg-neutral-subtle);  /* 2026-11-03: placeholder 색은 흰 바탕에서 대비 2.1 이라 한 단계 진하게 */
   font-size: var(--ybm-font-size-t04);
   line-height: var(--ybm-line-height-t04);
   font-weight: var(--ybm-font-weight-medium);
@@ -1352,7 +1352,7 @@ button.ds-input__prefix:hover { color: var(--ybm-color-fg-neutral); }
      critical       방해 금지 = 빨강 점 + 흰 가로줄
      지름 = 아바타의 26% (최소 8px) · 배경색 링 · circle 은 4시 방향, rounded/square 는 우하단 모서리
 
-   Figma: 원 · 이미지 없을 때 palette/gray-500 · 1px ring stroke/neutral-subtle(INSIDE)
+   Figma: 원 · 이미지 없을 때 palette/gray-500 · 이니셜 fg/neutral-muted(2026-11-03, 흰 글자에서 바꿈) · 1px ring stroke/neutral-subtle(INSIDE)
           shape rounded·square 는 badgeMask=none 에만 · status 속성(Avatar Status 인스턴스) · Avatar Group·Group Overflow 세트
           badge 지름 = 24→10 · 36→14 · 42→16 · 48→18 · 56→20 · 64→22 · 80→28 · 96→32 · 108→36 (우하단)
    -------------------------------------------------------------------------- */
@@ -1382,7 +1382,7 @@ button.ds-input__prefix:hover { color: var(--ybm-color-fg-neutral); }
 }
 .ds-avatar::after { content: ""; position: absolute; inset: 0; border-radius: inherit; box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-neutral-subtle); pointer-events: none; }
 .ds-avatar img { width: 100%; height: 100%; border-radius: inherit; object-fit: cover; }
-.ds-avatar__initials { white-space: nowrap; }
+.ds-avatar__initials { white-space: nowrap; color: var(--ybm-color-fg-neutral-muted); }  /* 2026-11-03: 흰 글자는 회색 바탕에서 대비 1.4 라 읽기 어려워 진한 회색으로 */
 
 /* 기본 실루엣 — 사진·이니셜이 없을 때 */
 .ds-avatar:not(:has(> img, > .ds-avatar__initials))::before {

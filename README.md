@@ -290,7 +290,7 @@ CSS 는 Figma 프로퍼티 이름을 그대로 `data-*` 속성으로 쓴다: `<b
 | # | 컴포넌트 | CSS | Figma COMPONENT_SET (ID, 변형 수) | 주요 속성 / 컴포넌트 변수 |
 |---|---|---|---|---|
 | 01 | Action Button | `.ds-btn` | `24:354`, 168 | variant `brandSolid/brandOutline/neutralSolid/neutralWeak/neutralOutline/criticalSolid/ghost`, size `xsmall/small/medium/large`, layout `iconOnly`, width `fill` |
-| 02 | Text Link | `.ds-link` | `2493:324`, 2 | `--ds-link-color(-hover)`, Figma state `enabled/hover` |
+| 02 | Text Link | `.ds-link` | `2493:324`, 2 | size `small`(2026-11-03), `--ds-link-color(-hover)`, Figma state `enabled/hover` |
 | 03 | Field Label | `.ds-field` (`__header/label/indicator/required/footer/help/error/count`) | `109:1367`, 2 | label-weight `bold` |
 | 04 | Text Field Input | `.ds-input` (`__control/prefix/suffix/icon/clear`) | `108:1325`, 40 | variant `outline/underline`, size |
 | 05 | Text Field Textarea | `.ds-textarea` | `114:1496`, 40 | variant, size |
@@ -303,9 +303,9 @@ CSS 는 Figma 프로퍼티 이름을 그대로 `data-*` 속성으로 쓴다: `<b
 | 12 | Switch | `.ds-switch` | `93:1271`, 24 | size `16/24/32`, tone |
 | 13 | Quantity Picker | `.ds-quantity` | `1184:2146`, 18 | size, layout `fill` |
 | 15 | Chip | `.ds-chip` `.ds-chip-group` | `69:964`, 54 | variant `solid/outlineStrong/outlineWeak`, size, layout `iconOnly` |
-| 16 | Chip Tabs | `.ds-chiptabs` (`__trigger`) | `1407:2596`, 4 / Trigger `1407:2522`, 16 | variant `neutralSolid/neutralOutline`, size `medium/large` |
-| 17 | Tabs | `.ds-tabs` (`__trigger`) | `95:1313`, 4 / Tab Trigger `95:1272`, 12 | layout `fill/hug`, size |
-| 18 | Segmented Control | `.ds-segmented` | `1239:2152`, 4 / Item `1239:2123`, 6 | layout, size, 선택 배경이 미끄러져 이동(필수 모션, ybm-ds.js) |
+| 16 | Chip Tabs | `.ds-chiptabs` (`__trigger`) | `1407:2596`, 4 / Trigger `1407:2522`, 16 | variant `neutralSolid/neutralOutline`, size `medium/large`, inset `none`(2026-11-03) |
+| 17 | Tabs | `.ds-tabs` (`__trigger`) | `95:1313`, 4 / Tab Trigger `95:1272`, 12 | layout `fill/hug`, size, inset `none`(hug 일 때, 2026-11-03) |
+| 18 | Segmented Control | `.ds-segmented` | `1239:2152`, 4 / Item `1239:2123`, 6 | layout, size(높이 32/40 고정, 2026-11-03), 선택 배경이 미끄러져 이동(필수 모션, ybm-ds.js) |
 | 19 | Toggle Button | `.ds-toggle` | `1244:2164`, 6 | size |
 | 20 | Badge | `.ds-badge` | `17:87`, 36 | variant `weak/solid/outline`, tone `neutral/brand/informative/positive/warning/critical`, size |
 | 21 | Tag Group | `.ds-tag-group` | `1240:2176`, 4 / Item `1240:2135`, 4 | 작성자, 날짜, 조회수 |
@@ -326,10 +326,10 @@ CSS 는 Figma 프로퍼티 이름을 그대로 `data-*` 속성으로 쓴다: `<b
 | 36 | Date Picker, Date Cell | `.ds-datepicker` `.ds-date-cell` | `1324:2310`, 2 / `1322:2183`, 7 | cell state `today/selected/range-start/range-middle/range-end` |
 | 37 | Bottom Navigation | `.ds-bottomnav` | `1348:2383`, 3 / Item `1347:2416`, 12 | 뱃지 `__badge--dot/--count` (bg/critical-solid) |
 | 38 | Side Navigation | `.ds-sidenav` | `1371:2610`, 4 / Item `1370:2392`, 8 | expanded 240 / collapsed 56 |
-| 39 | Card | `.ds-card` | `2164:1063`, 4 | variant `elevated`, size |
+| 39 | Card | `.ds-card` | `2164:1063`, 4 | variant `subtle/elevated`(subtle 2026-11-03), size(small 모서리 lg), 제목 18/16 |
 | 40 | Empty | `.ds-empty` | `2164:1092`, 2 | size |
 | 41 | Pagination | `.ds-pagination` | `2163:1067`, 2 / Item `2163:1028`, 16 | type `first/prev/next/last/ellipsis/simple` |
-| 42 | Table | `.ds-table` `.ds-table-wrap` | `2164:1271`, 2 / Row `2164:1178`, 8 / Cell `2164:1105`, 6 | density `compact`, align |
+| 42 | Table | `.ds-table` `.ds-table-wrap` | `2164:1271`, 2 / Row `2164:1178`, 8 / Cell `2164:1105`, 6 | density `compact`, align `center/end`, 두 줄 칸 `__stack`, 묶음 행 `tr.__group`, 체크박스 칸 (2026-11-03 개편: 머리줄 바탕 없음, 위 진한 선, 행 56/48) |
 | 43 | Divider | `.ds-divider` | `2347:1152`, 4 | type `thin/thick/vertical/label` (CSS data-weight / data-orientation / data-label), inset |
 | 44 | Tooltip | `.ds-tooltip` `.ds-tooltip-anchor` | `2348:1145`(COMPONENT) | placement `top/bottom/left/right`(CSS 만), hover/focus 때만 표시 |
 | 45 | List, List Item | `.ds-list` `.ds-list-item` | Item `2350:1207`, 4 | size `medium/small`, state, prefix/description/suffix/chevron/divider, list variant `inset` |
@@ -353,7 +353,7 @@ CSS 는 Figma 프로퍼티 이름을 그대로 `data-*` 속성으로 쓴다: `<b
 | 63 | Scroll Fog | `.ds-scrollfog` | `2567:33`, 2 | mask 로 끝 20 흐림, 흐린 쪽에 여백 20 이상 |
 | 64 | Pull To Refresh | `.ds-ptr` (`__indicator/content`) | `2567:54`, 2 | 위 88 영역 Progress Circle 24, ds-refresh 이벤트, YBM.endRefresh |
 | 65 | Side Panel | `.ds-sidepanel` (`__header/texts/title/desc/close/body/footer`) | `2567:862`, 3 / Close Button `2567:782`, 2 | 네이티브 `<dialog>`, 폭 480/720/960, 왼쪽은 data-direction |
-| 66 | Image Frame | `.ds-imageframe` (`__floater/indicator`) | `2567:1928`, 3 | ratio `1:1/4:3/16:9`, stroke |
+| 66 | Image Frame | `.ds-imageframe` (`__floater/indicator`) | `2567:1928`, 3 | ratio `1:1/4:3/16:9`, radius `none/md/lg/xl`(2026-11-03), stroke |
 | 67 | Carousel | `.ds-carousel` (`__scroller/item/button`) | `2567:1936` / Button `2567:1935`, 2 | 넘김 위치 맞춤, 끝 흐림, 버튼은 ybm-ds.js |
 | 68 | Markdown | `.ds-markdown` | `2568:66` | 변환된 HTML 을 감싸면 크기와 간격이 맞춰짐 |
 | 69 | Code Block | `.ds-codeblock` (`__header/language/copy/code`) | `2568:57`, 2 | 고정 폭 글꼴, data-ds-copy 복사, data-wrap 긴 줄 줄바꿈 |
