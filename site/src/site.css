@@ -402,3 +402,10 @@ body[data-side-open] .site-scrim { opacity: 1; pointer-events: auto; }
 .site-themes__stage { min-width: 0; overflow: hidden; border: 1px solid var(--site-box-line); border-radius: var(--ybm-shape-2xl); background: var(--ybm-color-bg-layer-default); }
 .site-themes__stage iframe { display: block; width: 100%; height: 80vh; min-height: 560px; border: 0; }
 @media (min-width: 1024px) { .site-themes__stage { position: sticky; top: calc(var(--site-top) + var(--ybm-space-x4)); } .site-themes__stage iframe { height: calc(100vh - var(--site-top) - var(--ybm-space-x8)); } }
+
+/* ---------------------------------------------------------------- Markdown 메뉴 (제목 아래 버튼 줄, DS Menu) */
+.site-md { position: relative; display: inline-flex; }
+.site-md__menu { position: absolute; top: calc(100% + var(--ybm-space-x1_5)); left: 0; z-index: 30; box-shadow: var(--ybm-elevation-overlay); }
+.site-md__menu[hidden] { display: none; }
+.site-md [aria-expanded="true"] .ds-icon--chevron-down { transform: rotate(180deg); }
+.site-doc .site-md__menu a.ds-menu-item { color: var(--ybm-color-fg-neutral); text-decoration: none; }

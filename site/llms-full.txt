@@ -1,0 +1,5629 @@
+# YBM DS
+
+> YBM 서비스를 위한 디자인 시스템입니다. HTML 에 .ds-* 클래스를 붙이고 --ybm-* 토큰으로 색, 간격, 글자를 맞춥니다. 이 파일은 AI 도구가 읽도록 문서 목록을 모은 것입니다.
+
+- CSS: https://luvms012-rgb.github.io/ybm-ds/dist/ybm-ds.css
+- JS: https://luvms012-rgb.github.io/ybm-ds/dist/ybm-ds.js
+- 전체 문서 한 파일: https://luvms012-rgb.github.io/ybm-ds/site/llms-full.txt
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/index.md -->
+
+# Get Started
+
+YBM DS는 YBM 서비스를 위한 디자인 시스템입니다. 컴포넌트와 토큰을 Figma와 코드에 같은 이름으로 담아, 누가 만들어도 같은 화면이 나오도록 돕습니다.
+
+## AI로 바로 시작하기
+
+아래 내용을 AI 코딩 도구(ChatGPT, Claude, Cursor 등)에 붙여 넣으면 설치부터 규칙까지 알아서 맞춥니다.
+
+```text
+이 프로젝트에 YBM DS를 적용해 줘.
+1. <head>에 아래 두 줄을 넣어 줘.
+   <link rel="stylesheet" href="https://luvms012-rgb.github.io/ybm-ds/dist/ybm-ds.css">
+   <script src="https://luvms012-rgb.github.io/ybm-ds/dist/ybm-ds.js" defer></script>
+2. 쓸 수 있는 컴포넌트 목록은 https://luvms012-rgb.github.io/ybm-ds/components.json, 각 컴포넌트의 HTML 구조는 https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/components.css의 컴포넌트별 머리 주석을 따라.
+3. 색, 간격, 글자 크기, 모서리, 그림자는 https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/tokens.css의 --ybm-* 토큰만 써.
+4. 서비스 CSS는 DS 다음에 불러오고, 바꾸고 싶은 모양은 컴포넌트의 --ds-* 변수만 덮어써.
+5. 새 ds- 클래스를 만들거나 !important를 쓰지 마.
+```
+
+그다음 만들고 싶은 화면을 말로 설명하세요. 대괄호 안만 내 상황에 맞게 바꾸면 됩니다. 비슷한 화면이 [템플릿](https://luvms012-rgb.github.io/ybm-ds/site/templates/index.md)에 있으면 그 화면에서 출발합니다.
+
+```text
+YBM DS로 [만들 화면, 예: 회원 목록 관리 화면]을 만들어 줘.
+- 부품은 https://luvms012-rgb.github.io/ybm-ds/components.json에 있는 것만 쓰고, 마크업은 https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/components.css 머리 주석 그대로 써.
+- 비슷한 화면이 https://luvms012-rgb.github.io/ybm-ds/site/templates/index.html에 있으면 그 템플릿을 출발점으로 써.
+- 모바일 먼저 만들고, 768px 이상과 1280px 이상에서 배치를 바꿔 줘.
+- 글자는 한국어. 제목 500 굵기, 본문 16px 줄 높이 28px, 자간은 주지 않고, 본문 word-break: keep-all.
+- 배치용 CSS에는 --ybm-* 토큰만 쓰고 hex 색은 쓰지 마.
+```
+
+이미 만든 화면이 있다면 DS 규칙을 지키는지 점검하게 할 수 있습니다.
+
+```text
+이 화면이 YBM DS 규칙을 지키는지 점검하고 고쳐 줘.
+- hex, rgb로 색을 직접 쓴 곳 → --ybm-color-* 토큰으로
+- 토큰이 아닌 임의의 간격, 글자 크기 → --ybm-space-*, --ybm-font-size-* 로
+- https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/components.css에 없는 ds- 클래스, !important
+- DS 부품으로 바꿀 수 있는데 직접 만든 버튼, 입력, 표
+고친 곳은 목록으로 알려 줘.
+```
+
+## 설치하기
+
+가장 쉬운 방법은 CSS로 바로 쓰는 것입니다. 빌드 도구나 설치 과정 없이 `<head>`에 두 줄만 넣으면 글꼴(Pretendard), 토큰, 아이콘, 컴포넌트가 한 번에 들어옵니다.
+
+```html
+<link rel="stylesheet" href="https://luvms012-rgb.github.io/ybm-ds/dist/ybm-ds.css">
+<script src="https://luvms012-rgb.github.io/ybm-ds/dist/ybm-ds.js" defer></script>
+```
+
+## 컴포넌트
+
+정해진 클래스와 속성만 붙이면 됩니다. 각 컴포넌트의 구조와 속성은 [Components](https://luvms012-rgb.github.io/ybm-ds/site/components/index.md)에 있습니다.
+
+```html
+<button class="ds-btn" data-variant="brandSolid" data-size="large">시작하기</button>
+<button class="ds-btn" data-variant="neutralWeak" data-size="large">나중에</button>
+```
+
+## 다크 모드
+
+html 요소에 속성 하나만 붙이면 모든 색이 어두운 화면용으로 바뀝니다. 오른쪽 위 달 모양 버튼으로 이 사이트에서도 바로 볼 수 있습니다.
+
+```html
+<html lang="ko" data-theme="dark">
+```
+
+## 다른 설치 방법
+
+개발자가 버전을 고정하거나 파일을 직접 가지고 있어야 할 때 씁니다.
+
+### 버전 고정하기
+
+위 주소는 늘 최신 버전을 줍니다. 배포 후 바뀌지 않게 하려면 공개 CDN 주소에 커밋 번호를 넣어 고정하세요.
+
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/luvms012-rgb/ybm-ds@[커밋 번호]/dist/ybm-ds.css">
+<script src="https://cdn.jsdelivr.net/gh/luvms012-rgb/ybm-ds@[커밋 번호]/dist/ybm-ds.js" defer></script>
+```
+
+### 파일 내려받기
+
+저장소를 내려받아 `dist` 폴더를 프로젝트에 넣고 상대 경로로 불러옵니다. 인터넷이 막힌 환경이나 사내 서버에 둘 때 씁니다.
+
+```shell
+git clone https://github.com/luvms012-rgb/ybm-ds.git
+# ybm-ds/dist 폴더를 프로젝트로 복사한 뒤
+<link rel="stylesheet" href="./dist/ybm-ds.css">
+<script src="./dist/ybm-ds.js" defer></script>
+```
+
+### Tailwind CSS와 함께 쓰기
+
+Tailwind를 쓰는 프로젝트는 토큰을 Tailwind 이름으로 바로 쓸 수 있는 설정 파일이 있습니다. 값은 모두 DS의 CSS 변수를 가리키므로 `ybm-ds.css`도 함께 불러와야 합니다.
+
+```javascript
+// tailwind.config.js - ybm-ds/tokens/tailwind.preset.js를 프로젝트에 복사한 뒤
+module.exports = { presets: [require('./tailwind.preset.js')] };
+```
+
+## 다음 단계
+
+Usage불러오는 순서, 화면 모드, 반응형 기준점을 알아봅니다.
+
+Foundations색, 글자, 간격처럼 모든 화면의 바탕이 되는 토큰을 봅니다.
+
+Components부품마다 미리보기, 사용법, 속성, 사용 지침을 봅니다.
+
+Templates자주 쓰는 화면을 통째로 복사해 출발점으로 씁니다.
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/get-started/ai.md -->
+
+# AI
+
+AI 도구가 YBM DS 문서를 바로 읽을 수 있도록 모든 문서를 마크다운으로도 제공합니다. 컴포넌트 하나만 가져갈 수도, 전체를 한 번에 줄 수도 있습니다.
+
+## 파일
+
+| 파일 | 담은 것 |
+| --- | --- |
+| [llms.txt](https://luvms012-rgb.github.io/ybm-ds/site/llms.txt) | 전체 목차입니다. 분류별 문서 링크와 한 줄 설명이 있어, AI 가 필요한 문서를 골라 읽습니다. |
+| [llms-full.txt](https://luvms012-rgb.github.io/ybm-ds/site/llms-full.txt) | 모든 문서를 한 파일로 모았습니다. 주소를 읽지 못하는 도구에 첨부할 때 씁니다. |
+| 페이지별 `.md` | 각 문서 주소의 `.html` 을 `.md` 로 바꾸면 그 페이지만 마크다운으로 받습니다. 예) `components/action-button.md` |
+
+## 쓰는 법
+
+1. 컴포넌트 하나만 필요하면 그 페이지 제목 아래 **Markdown** 메뉴에서 **내용 복사**를 누르고 AI 대화에 붙여 넣습니다.
+2. 여러 컴포넌트로 화면을 만들 때는 `llms.txt` 주소를 알려 주면 AI 가 필요한 문서를 찾아 읽습니다.
+3. 주소를 열지 못하는 도구에는 `llms-full.txt` 를 파일로 첨부합니다.
+
+## 요청 예시
+
+```text
+아래 YBM DS 문서를 읽고 로그인 화면을 HTML 로 만들어 줘.
+부품은 .ds-* 클래스만, 색과 간격은 --ybm-* 토큰만 써 줘.
+https://luvms012-rgb.github.io/ybm-ds/site/llms.txt
+```
+
+문서를 고치면 사이트를 다시 만들 때 마크다운도 함께 새로 만들어집니다.
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/get-started/scripts.md -->
+
+# Scripts
+
+`ybm-ds.js`는 창 열기, 알림처럼 CSS만으로는 할 수 없는 동작을 맡습니다. 불러오기만 하면 HTML 속성을 보고 알아서 동작합니다.
+
+## 하는 일
+
+| 부품 | 하는 일 |
+| --- | --- |
+| **Text Field clear 버튼** | 값 지우기 (노출/숨김은 CSS 가 처리) |
+| **Dialog** | data-ds-open / data-ds-close 속성으로 열고 닫기, 바깥(dim) 클릭 닫기 |
+| **Snackbar** | YBM.snackbar("문구", { variant: "positive"\|"critical", action: "확인", onAction, duration }) |
+| **Slider** | <input class="ds-slider"> 채움 길이(--ds-slider-value) 동기화 |
+| **Checkbox** | data-indeterminate 속성 → input.indeterminate |
+| **Popover** | data-ds-popover="id" 로 열고 닫기, 바깥 클릭과 Esc, 안의 data-ds-close 로 닫기 |
+| **Time Picker** | 가운데 온 항목에 aria-selected, 멈추면 열에서 change(detail.value), 항목 누름과 화살표 키로 이동 |
+| **Chat Composer** | 입력이 비면 보내기 비활성, field-sizing 이 없는 브라우저에서 높이 맞춤 |
+| **Search Suggestion** | 입력 칸(role=combobox, aria-controls)에서 위아래 화살표로 줄 고르기, Enter 로 그 줄 누르기 |
+| **Menu Sheet** | Dialog 와 같이 열고 닫기, 바깥(dim) 클릭 닫기 |
+| **Timer** | data-start(흐른 시간) / data-end(남은 시간)로 1초마다 글자를 바꾸고, 남은 시간이 0 이면 ds-timer-end 이벤트 |
+| **Segmented Control** | 누르면 하나만 aria-pressed, change 이벤트. 선택 배경이 고른 항목으로 미끄러져 이동(위치는 --ds-seg-x / --ds-seg-w) |
+| **Side Panel** | Dialog 와 같이 열고 닫기, 본문이 스크롤되면 data-scrolled |
+| **Pull To Refresh** | 터치로 당긴 거리 표시, 넘겨 놓으면 ds-refresh 이벤트, YBM.endRefresh(요소) 로 되돌리기 |
+| **Carousel** | 처음/끝이면 data-at-start / data-at-end, 버튼으로 한 화면씩 넘기기 |
+| **Code Block** | data-ds-copy 버튼으로 코드 복사 |
+| **Multi Select** | Popover 와 같이 열고 닫기, 고른 값을 칸에 Badge 로 채우기 |
+| **File Attach** | 파일을 끌어 놓는 칸 위로 끌고 오면 data-state="dragover", 벗어나거나 놓으면 뺀다 |
+
+## 직접 부르기
+
+| 기능 | 쓰는 법 |
+| --- | --- |
+| 창 열기, 닫기 | `YBM.openDialog(요소)`, `YBM.closeDialog(요소)` |
+| 알림 띄우기 | `YBM.snackbar("저장했어요", { variant: "positive" })` |
+| 새로 고침 끝내기 | `YBM.endRefresh(요소)` |
+| 나중에 넣은 HTML 연결 | `YBM.init(요소)` |
+
+```html
+<button class="ds-btn" data-ds-open="confirm">열기</button>
+<dialog class="ds-dialog" id="confirm">… <button class="ds-btn" data-ds-close>닫기</button></dialog>
+
+<script>
+  YBM.snackbar("저장했어요", { variant: "positive", action: "확인" });
+</script>
+```
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/get-started/usage.md -->
+
+# Usage
+
+DS를 불러오는 순서와 다크 모드, 반응형 기준을 알아봅니다.
+
+## 불러오는 순서
+
+DS를 먼저, 서비스 CSS를 그다음에 불러옵니다. DS 전체가 CSS 레이어 안에 들어 있어서 레이어 밖에 쓴 서비스 CSS는 선택자 길이와 상관없이 항상 DS를 이깁니다. 그래서 `!important`나 긴 선택자로 다툴 필요가 없습니다.
+
+서비스 CSS에서는 컴포넌트 변수(`--ds-*`)와 시맨틱 색(`bg`, `fg`, `stroke`)만 덮어씁니다. 새 `ds-` 클래스를 만들거나 `!important`를 쓰지 않습니다. 브랜드 색도 바꿀 수 있습니다([Color](https://luvms012-rgb.github.io/ybm-ds/site/foundations/color.md#brand)).
+
+```html
+<link rel="stylesheet" href="https://luvms012-rgb.github.io/ybm-ds/dist/ybm-ds.css">
+<link rel="stylesheet" href="my-service.css">  <!-- 서비스 CSS는 항상 DS 다음 -->
+
+/* my-service.css */
+.my-dialog { --ds-dialog-width: 360px; }
+.my-banner { --ds-banner-bg: var(--ybm-color-bg-brand-weak); }
+```
+
+## 상태 나타내기
+
+CSS는 Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다. 상태는 가능한 한 HTML 기본 속성으로 표현해서 접근성이 함께 맞춰지게 했습니다.
+
+| 상태 | 쓰는 속성 |
+| --- | --- |
+| 꺼짐 | `disabled` |
+| 선택 | `:checked`, `aria-selected`, `aria-pressed` |
+| 지금 위치 | `aria-current="page"` |
+| 펼침 | `aria-expanded` |
+| 오류 | `aria-invalid="true"` |
+| 누름 | `:active` (마우스는 `:hover`도) |
+
+## 화면 모드
+
+모드는 라이트와 다크 두 가지입니다. `<html data-theme="dark">`를 붙이면 시맨틱 색이 모두 어두운 화면용으로 바뀝니다. 색을 토큰으로만 썼다면 따로 고칠 것이 없습니다.
+
+## 반응형 기준점
+
+작은 화면부터 쌓아 올리는 방식입니다. `@media` 안에서는 CSS 변수를 쓸 수 없어서 숫자를 직접 씁니다.
+
+| 이름 | 폭 | 쓰임 |
+| --- | --- | --- |
+| `sm` | 480px | 큰 휴대폰 |
+| `md` | 768px | 태블릿, PC 부품으로 바뀌는 기준 |
+| `lg` | 1280px | 넓은 PC, 3단 배치 |
+| `xl` | 1440px | 아주 넓은 화면 |
+
+```css
+@media (min-width: 768px) { /* 태블릿, PC */ }
+@media (min-width: 1280px) { /* 넓은 PC */ }
+
+<!-- 유틸리티: 768 이상에서 숨김(모바일 전용) / 768 이상에서만 보임(PC 전용) -->
+<div class="u-hide-from-md">…</div>
+<div class="u-show-from-md">…</div>
+```
+
+- Top Navigation ↔ Top App Bar, Side Panel ↔ Bottom Sheet, Dialog ↔ Bottom Sheet는 768을 기준으로 바꿉니다.
+- Side Navigation은 1280 이상 펼침, 768 이상 접힘, 그보다 좁으면 서랍 메뉴입니다.
+
+## 한글 줄바꿈
+
+본문에는 `word-break: keep-all`과 `overflow-wrap: break-word`를 함께 씁니다. 넣지 않으면 한글이 음절 단위로 끊겨 어절 중간에서 줄이 바뀝니다.
+
+## 아이콘
+
+UI 아이콘은 Lucide 한 가지만 씁니다. 색은 부모 글자색을 따르고, 크기는 기본 20, `ds-icon--sm` 16, `ds-icon--lg` 24 입니다. 목록은 [Iconography](https://luvms012-rgb.github.io/ybm-ds/site/foundations/icons.md)에 있습니다.
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/foundations/color.md -->
+
+# Color
+
+색은 정보의 위계와 상태, 브랜드를 구분해 보여 줍니다.
+
+## 개요
+
+화면에는 시맨틱 색(`bg`, `fg`, `stroke`)만 씁니다. 팔레트(`--ybm-color-palette-*`)는 시맨틱 색을 만드는 원료라 화면에 직접 쓰지 않습니다. 색을 토큰으로만 쓰면 `data-theme="dark"` 하나로 다크 모드가 맞춰집니다. 아래 표의 값은 라이트 / 다크 순서입니다.
+
+## 브랜드 색
+
+이 가이드는 브랜드 색 대신 모노톤으로 보여 줍니다. 브랜드 색은 서비스마다 바꿀 수 있습니다. 팔레트 `--ybm-color-palette-brand-100` ~ `1000`만 덮어쓰면 버튼, 체크박스, 링크처럼 브랜드 색을 쓰는 곳이 모두 따라 바뀝니다.
+
+```css
+/* my-service.css - DS 다음에 불러온다 */
+:root {
+  --ybm-color-palette-brand-100: #e6f6ee;  /* 옅은 배경 */
+  --ybm-color-palette-brand-600: #12a150;  /* 주 버튼, 링크 */
+  --ybm-color-palette-brand-700: #0d7d3e;  /* 눌림, 진한 글자 */
+  /* 200 ~ 500, 800 ~ 1000 도 같은 색의 단계로 채운다 */
+}
+:root[data-theme="dark"] {
+  /* 다크 모드는 같은 단계를 뒤집어 넣는다 (다크 100 = 라이트 1000) */
+}
+```
+
+## 배경
+
+| 토큰 | 값 |
+| --- | --- |
+| `--ybm-color-bg-brand-solid` | `#2563eb / #3b82f6` |
+| `--ybm-color-bg-brand-solid-pressed` | `#1d4ed8 / #60a5fa` |
+| `--ybm-color-bg-brand-weak` | `#dbeafe / #172554` |
+| `--ybm-color-bg-brand-weak-pressed` | `#bfdbfe / #1e3a8a` |
+| `--ybm-color-bg-canvas` | `#f7f8f9 / #000000` |
+| `--ybm-color-bg-critical-solid` | `#fa342c / #f73526` |
+| `--ybm-color-bg-critical-solid-pressed` | `#ca1d13 / #ff6e60` |
+| `--ybm-color-bg-critical-weak` | `#fdf0f0 / #322323` |
+| `--ybm-color-bg-critical-weak-pressed` | `#fde7e7 / #4f2624` |
+| `--ybm-color-bg-disabled` | `#f3f4f5 / #2b2e35` |
+| `--ybm-color-bg-informative-solid` | `#217cf9 / #1e82eb` |
+| `--ybm-color-bg-informative-solid-pressed` | `#135fcd / #41a2f9` |
+| `--ybm-color-bg-informative-weak` | `#eff6ff / #202742` |
+| `--ybm-color-bg-informative-weak-pressed` | `#e2edfc / #1e3352` |
+| `--ybm-color-bg-layer-default` | `#ffffff / #16171b` |
+| `--ybm-color-bg-layer-floating` | `#ffffff / #1d2025` |
+| `--ybm-color-bg-magic-solid` | `#8969ea / #7659bd` |
+| `--ybm-color-bg-magic-solid-pressed` | `#6d50cb / #9179e0` |
+| `--ybm-color-bg-magic-weak` | `#f5f3fe / #201a2e` |
+| `--ybm-color-bg-magic-weak-pressed` | `#efeafe / #2b2140` |
+| `--ybm-color-bg-neutral` | `#f3f4f5 / #2b2e35` |
+| `--ybm-color-bg-neutral-inverted` | `#2a3038 / #f3f4f5` |
+| `--ybm-color-bg-neutral-inverted-pressed` | `#555d6d / #dcdee3` |
+| `--ybm-color-bg-neutral-muted` | `#f7f8f9 / #1d2025` |
+| `--ybm-color-bg-neutral-solid` | `#2a3038 / #f3f4f5` |
+| `--ybm-color-bg-neutral-solid-pressed` | `#555d6d / #dcdee3` |
+| `--ybm-color-bg-neutral-subtle` | `#ffffff / #16171b` |
+| `--ybm-color-bg-neutral-weak-alpha` | `#0000000c / #ffffff20` |
+| `--ybm-color-bg-neutral-weak-alpha-pressed` | `#00000010 / #ffffff2e` |
+| `--ybm-color-bg-neutral-weak-pressed` | `#eeeff1 / #393d46` |
+| `--ybm-color-bg-overlay` | `#00000074 / #00000074` |
+| `--ybm-color-bg-positive-solid` | `#079171 / #117956` |
+| `--ybm-color-bg-positive-solid-pressed` | `#00745f / #1b946d` |
+| `--ybm-color-bg-positive-weak` | `#edfaf6 / #202926` |
+| `--ybm-color-bg-positive-weak-pressed` | `#d9f6e9 / #20362e` |
+| `--ybm-color-bg-transparent` | `transparent / transparent` |
+| `--ybm-color-bg-transparent-pressed` | `#0000000c / #ffffff20` |
+| `--ybm-color-bg-warning-solid` | `#e14d00 / #e65200` |
+| `--ybm-color-bg-warning-solid-pressed` | `#b93901 / #ff6600` |
+| `--ybm-color-bg-warning-weak` | `#fff2ec / #31241f` |
+| `--ybm-color-bg-warning-weak-pressed` | `#ffe8db / #4b291c` |
+
+## 글자와 아이콘
+
+| 토큰 | 값 |
+| --- | --- |
+| `--ybm-color-fg-brand` | `#2563eb / #3b82f6` |
+| `--ybm-color-fg-brand-contrast` | `#1d4ed8 / #60a5fa` |
+| `--ybm-color-fg-critical` | `#fa342c / #ff6e60` |
+| `--ybm-color-fg-critical-contrast` | `#921708 / #f8c5c3` |
+| `--ybm-color-fg-disabled` | `#d1d3d8 / #5b606a` |
+| `--ybm-color-fg-informative` | `#217cf9 / #41a2f9` |
+| `--ybm-color-fg-informative-contrast` | `#0b4596 / #b9d7fb` |
+| `--ybm-color-fg-magic` | `#8969ea / #9179e0` |
+| `--ybm-color-fg-magic-contrast` | `#50379b / #d3c7fb` |
+| `--ybm-color-fg-neutral` | `#1a1c20 / #f3f4f5` |
+| `--ybm-color-fg-neutral-inverted` | `#ffffff / #16171b` |
+| `--ybm-color-fg-neutral-muted` | `#555d6d / #dcdee3` |
+| `--ybm-color-fg-neutral-subtle` | `#868b94 / #b0b3ba` |
+| `--ybm-color-fg-on-brand-solid` | `#ffffff / #ffffff` |
+| `--ybm-color-fg-on-critical-solid` | `#ffffff / #ffffff` |
+| `--ybm-color-fg-on-informative-solid` | `#ffffff / #ffffff` |
+| `--ybm-color-fg-on-magic-solid` | `#ffffff / #ffffff` |
+| `--ybm-color-fg-on-neutral-solid` | `#ffffff / #16171b` |
+| `--ybm-color-fg-on-positive-solid` | `#ffffff / #ffffff` |
+| `--ybm-color-fg-on-warning-solid` | `#ffffff / #ffffff` |
+| `--ybm-color-fg-placeholder` | `#b0b3ba / #868b94` |
+| `--ybm-color-fg-positive` | `#079171 / #22b27f` |
+| `--ybm-color-fg-positive-contrast` | `#075445 / #93e5c0` |
+| `--ybm-color-fg-warning` | `#e14d00 / #ff6600` |
+| `--ybm-color-fg-warning-contrast` | `#862b00 / #eecebc` |
+
+## 테두리
+
+| 토큰 | 값 |
+| --- | --- |
+| `--ybm-color-stroke-brand-solid` | `#1d4ed8 / #60a5fa` |
+| `--ybm-color-stroke-brand-weak` | `#93c5fd / #1e40af` |
+| `--ybm-color-stroke-critical-solid` | `#fa342c / #ff6e60` |
+| `--ybm-color-stroke-critical-weak` | `#fed4d2 / #742826` |
+| `--ybm-color-stroke-focus-ring` | `#5e98fe / #1e82eb` |
+| `--ybm-color-stroke-informative-solid` | `#217cf9 / #41a2f9` |
+| `--ybm-color-stroke-informative-weak` | `#cbdffa / #1a4275` |
+| `--ybm-color-stroke-magic-solid` | `#8969ea / #9179e0` |
+| `--ybm-color-stroke-magic-weak` | `#e1d8ff / #392a57` |
+| `--ybm-color-stroke-neutral` | `#d1d3d8 / #5b606a` |
+| `--ybm-color-stroke-neutral-contrast` | `#1a1c20 / #f3f4f5` |
+| `--ybm-color-stroke-neutral-muted` | `#00000010 / #ffffff17` |
+| `--ybm-color-stroke-neutral-solid` | `#555d6d / #dcdee3` |
+| `--ybm-color-stroke-neutral-subtle` | `#0000000c / #ffffff0d` |
+| `--ybm-color-stroke-neutral-weak` | `#dcdee3 / #393d46` |
+| `--ybm-color-stroke-positive-solid` | `#079171 / #22b27f` |
+| `--ybm-color-stroke-positive-weak` | `#b9e9d2 / #20493b` |
+| `--ybm-color-stroke-warning-solid` | `#e14d00 / #ff6600` |
+| `--ybm-color-stroke-warning-weak` | `#ffd5c0 / #6b311c` |
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/foundations/typography.md -->
+
+# Typography
+
+타이포그래피는 글을 분명하고 읽기 쉽게 전합니다.
+
+## 개요
+
+글꼴은 Pretendard 입니다. 크기는 `--ybm-font-size-t01` ~ `t17`, 줄 높이는 같은 번호의 `--ybm-line-height-*`를 짝으로 씁니다. 굵기는 regular 400, medium 500, semibold 600, bold 700 입니다.
+
+한글 위계: 페이지 제목 40/48 medium(500), 리드 16/24 light(300), 섹션 제목 24/32 medium, 소제목 16/22 medium, 본문 16/28 regular, 보조 글 14 regular 입니다. 자간은 주지 않습니다.
+
+## 크기
+
+| 토큰 | 크기 / 줄 높이 (px) | 보기 |
+| --- | --- | --- |
+| `t01` | 11 / 17 | 가나다 Aa 123 |
+| `t02` | 12 / 18 | 가나다 Aa 123 |
+| `t03` | 13 / 20 | 가나다 Aa 123 |
+| `t04` | 14 / 21 | 가나다 Aa 123 |
+| `t05` | 16 / 24 | 가나다 Aa 123 |
+| `t06` | 18 / 28 | 가나다 Aa 123 |
+| `t07` | 20 / 29 | 가나다 Aa 123 |
+| `t08` | 22 / 32 | 가나다 Aa 123 |
+| `t09` | 24 / 34 | 가나다 Aa 123 |
+| `t10` | 26 / 37 | 가나다 Aa 123 |
+| `t11` | 28 / 40 | 가나다 Aa 123 |
+| `t12` | 32 / 44 | 가나다 Aa 123 |
+| `t13` | 40 / 54 | 가나다 Aa 123 |
+| `t14` | 48 / 62 | 가나다 Aa 123 |
+| `t15` | 56 / 75 | 가나다 Aa 123 |
+| `t16` | 64 / 85 | 가나다 Aa 123 |
+| `t17` | 72 / 96 | 가나다 Aa 123 |
+
+## 굵기
+
+| 토큰 | 값 | 보기 |
+| --- | --- | --- |
+| `--ybm-font-weight-regular` | 400 | 가나다 Aa 123 |
+| `--ybm-font-weight-medium` | 500 | 가나다 Aa 123 |
+| `--ybm-font-weight-semibold` | 600 | 가나다 Aa 123 |
+| `--ybm-font-weight-bold` | 700 | 가나다 Aa 123 |
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/foundations/spacing.md -->
+
+# Spacing
+
+간격은 요소 사이의 거리로 무엇이 한 묶음인지 보여 줍니다.
+
+## 개요
+
+4px 단위를 기본으로 하고, 작은 간격은 2px 단위도 씁니다. 화면 좌우 여백은 `--ybm-space-x-global-gutter` 입니다.
+
+## 토큰
+
+| 토큰 | 값 | 보기 |
+| --- | --- | --- |
+| `--ybm-space-x0` | 0px |  |
+| `--ybm-space-x0_5` | 2px |  |
+| `--ybm-space-x1` | 4px |  |
+| `--ybm-space-x1_5` | 6px |  |
+| `--ybm-space-x2` | 8px |  |
+| `--ybm-space-x2_5` | 10px |  |
+| `--ybm-space-x3` | 12px |  |
+| `--ybm-space-x3_5` | 14px |  |
+| `--ybm-space-x4` | 16px |  |
+| `--ybm-space-x4_5` | 18px |  |
+| `--ybm-space-x5` | 20px |  |
+| `--ybm-space-x6` | 24px |  |
+| `--ybm-space-x7` | 28px |  |
+| `--ybm-space-x8` | 32px |  |
+| `--ybm-space-x9` | 36px |  |
+| `--ybm-space-x10` | 40px |  |
+| `--ybm-space-x11` | 44px |  |
+| `--ybm-space-x12` | 48px |  |
+| `--ybm-space-x13` | 52px |  |
+| `--ybm-space-x14` | 56px |  |
+| `--ybm-space-x15` | 60px |  |
+| `--ybm-space-x16` | 64px |  |
+| `--ybm-space-x18` | 72px |  |
+| `--ybm-space-x20` | 80px |  |
+| `--ybm-space-x24` | 96px |  |
+| `--ybm-space-x32` | 128px |  |
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/foundations/shape.md -->
+
+# Radius
+
+모서리는 요소의 둥글기를 정해 화면의 인상을 맞춥니다.
+
+## 개요
+
+모서리는 쓰임 이름으로 씁니다. 어떤 영역에 `--ybm-shape-scale`을 0과 1 사이 값으로 덮어쓰면 그 안의 모서리만 덜 둥글게 바꿀 수 있습니다.
+
+## 토큰
+
+| 토큰 | 값 | 보기 |
+| --- | --- | --- |
+| `--ybm-shape-2xs` | 4px |  |
+| `--ybm-shape-xs` | 6px |  |
+| `--ybm-shape-sm` | 8px |  |
+| `--ybm-shape-md` | 10px |  |
+| `--ybm-shape-lg` | 12px |  |
+| `--ybm-shape-xl` | 16px |  |
+| `--ybm-shape-2xl` | 20px |  |
+| `--ybm-shape-3xl` | 24px |  |
+| `--ybm-shape-pill` | 9999px |  |
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/foundations/elevation.md -->
+
+# Elevation
+
+그림자와 겹침 순서는 요소가 얼마나 떠 있는지, 무엇이 위에 있는지 보여 줍니다.
+
+## 그림자
+
+숫자 대신 쓰임 이름으로 씁니다.
+
+| 토큰 | 쓰임 | 보기 |
+| --- | --- | --- |
+| `--ybm-elevation-raised` | thumb, 선택된 세그먼트 |  |
+| `--ybm-elevation-overlay` | menu, select, snackbar, tooltip, date picker |  |
+| `--ybm-elevation-panel` | 떠 있는 패널, 펼침 메뉴 |  |
+| `--ybm-elevation-floating` | FAB |  |
+| `--ybm-elevation-modal` | dialog, alert dialog, bottom sheet |  |
+
+## 겹침 순서
+
+| 토큰 | 값 |
+| --- | --- |
+| `--ybm-z-base` | 0 |
+| `--ybm-z-sticky` | 100 |
+| `--ybm-z-overlay` | 1000 |
+| `--ybm-z-dialog` | 1100 |
+| `--ybm-z-toast` | 1200 |
+| `--ybm-z-tooltip` | 1300 |
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/foundations/motion.md -->
+
+# Motion
+
+움직임은 화면이 바뀌는 과정을 자연스럽게 이어 줍니다.
+
+## 길이
+
+| 토큰 | 값 |
+| --- | --- |
+| `--ybm-duration-fast` | `150ms` |
+| `--ybm-duration-normal` | `200ms` |
+| `--ybm-duration-slow` | `300ms` |
+
+## 속도 곡선
+
+| 토큰 | 값 |
+| --- | --- |
+| `--ybm-easing-standard` | `cubic-bezier(0.35, 0, 0.35, 1)` |
+| `--ybm-easing-emphasized` | `cubic-bezier(0.03, 0.4, 0.1, 1)` |
+| `--ybm-easing-enter` | `cubic-bezier(0, 0, 0.15, 1)` |
+| `--ybm-easing-exit` | `cubic-bezier(0.35, 0, 1, 1)` |
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/foundations/icons.md -->
+
+# Iconography
+
+아이콘은 정보와 기능을 빠르게 알아보도록 돕습니다.
+
+## 개요
+
+아이콘은 Lucide 한 가지만 씁니다. 지금 바로 쓸 수 있는 아이콘은 155개입니다. 더 필요하면 아래 아이콘 더보기에서 찾아 넣습니다.
+
+```html
+<!-- 글자 옆: 꾸밈용이라 aria-hidden -->
+<button class="ds-btn" data-variant="neutralWeak" data-size="medium">
+  <i class="ds-icon ds-icon--search ds-icon--sm" aria-hidden="true"></i>찾기
+</button>
+
+<!-- 아이콘만 있는 버튼: 뜻을 aria-label로 -->
+<button class="ds-btn" data-variant="ghost" data-size="medium" data-layout="iconOnly" aria-label="닫기">
+  <i class="ds-icon ds-icon--x" aria-hidden="true"></i>
+</button>
+```
+
+- 색은 따로 정하지 않습니다. 둘러싼 글자색을 그대로 따라갑니다.
+- 크기는 기본 20 이고, `ds-icon--sm` 16, `ds-icon--lg` 24 두 가지가 더 있습니다.
+- 아이콘만 있는 버튼에는 `aria-label`로 뜻을 적습니다. 글자 옆의 꾸밈용 아이콘에는 `aria-hidden="true"`를 붙입니다.
+
+## 아이콘 목록
+
+이름을 누르면 클래스가 복사됩니다. 이름 끝에 `-solid`가 붙은 것은 채움 모양입니다.
+
+### 이동
+
+| 이름 | 쓰임 |
+| --- | --- |
+|  | 펼치기, 드롭다운 열기 |
+|  | 접기 |
+|  | 뒤로, 이전 |
+|  | 다음, 목록 행의 이동 표시 |
+|  | 맨 처음으로 |
+|  | 맨 끝으로 |
+|  | 다음 단계, 바로 가기 |
+|  | 맨 위로, 보내기 |
+|  | 답글, 하위 항목 |
+|  | 메뉴 열기 |
+|  | 왼쪽 메뉴 열고 닫기 |
+|  | 홈 |
+|  | 홈 (선택됨) |
+|  | 새 창으로 열기 |
+
+### 동작
+
+| 이름 | 쓰임 |
+| --- | --- |
+|  | 닫기, 지우기 |
+|  | 선택됨, 확인 |
+|  | 추가, 수량 늘리기 |
+|  | 빼기, 수량 줄이기 |
+|  | 찾기 |
+|  | 복사 |
+|  | 공유 |
+|  | 링크 복사, 제목 링크 |
+|  | 삭제 |
+|  | 올리기 |
+|  | 파일 첨부 |
+|  | 새로 고침, 되돌리기 |
+|  | 더 보기 메뉴 |
+|  | 비밀번호 보이기 |
+|  | 비밀번호 숨기기 |
+|  | 사진 자리, 사진 올리기 |
+|  | 멈춤 (AI 답변 생성 중단) |
+
+### 상태
+
+| 이름 | 쓰임 |
+| --- | --- |
+|  | 성공, 완료 |
+|  | 성공, 완료 (채움, Callout과 Snackbar) |
+|  | 오류, 주의 |
+|  | 오류, 주의 (채움) |
+|  | 경고 |
+|  | 경고 (채움) |
+|  | 안내 |
+|  | 안내 (채움) |
+|  | 실패, 입력 지우기 |
+|  | 비어 있음 (Empty) |
+|  | AI 기능, 새 기능 |
+
+### 사물
+
+| 이름 | 쓰임 |
+| --- | --- |
+|  | 날짜 고르기 |
+|  | 시간 고르기, 시각 |
+|  | 문서, 파일 |
+|  | 계정, 신분 정보 |
+|  | 결제, 카드 |
+|  | 언어, 지역 |
+|  | PC 화면 보기 |
+|  | 모바일 화면 보기 |
+|  | 고객센터 |
+|  | 댓글, 대화 |
+|  | 위치, 주소 |
+|  | 장바구니 |
+
+### 앱
+
+| 이름 | 쓰임 |
+| --- | --- |
+|  | 폴더 |
+|  | 열린 폴더 |
+|  | 폴더 구조 |
+|  | 폴더로 옮기기 |
+|  | 파일 |
+|  | 코드 파일 |
+|  | 보관 |
+|  | 내려받기 |
+|  | 저장 |
+|  | 인쇄 |
+|  | 메일 |
+|  | 알림 |
+|  | 설정 |
+|  | 로그아웃 |
+|  | 사람, 내 정보 |
+|  | 여러 사람, 팀 |
+|  | 잠금, 보안 |
+|  | 열쇠, SSO 로그인 |
+|  | 안전, 인증됨 |
+|  | 회사, 기업 |
+|  | 상품, 꾸러미 |
+|  | 배송 |
+|  | 영수증, 청구 |
+|  | 지갑, 자산 |
+|  | 태그, 분류 |
+|  | 깃발, 표시 |
+|  | 아이디, 멘션 |
+|  | 전화 |
+|  | 클라우드 |
+|  | 데이터베이스 |
+|  | 서버 |
+|  | 보안 연결 |
+|  | 연결된 계정 |
+|  | 문서, 배우기 |
+|  | 도움말, 팁 |
+|  | 빠르게, 시작 |
+|  | 버그, 문제 |
+|  | AI 도구 사용 |
+|  | 반짝, 새로움 |
+
+### 편집
+
+| 이름 | 쓰임 |
+| --- | --- |
+|  | 바둑판 보기 |
+|  | 목록 보기 |
+|  | 체크 목록 |
+|  | 목록 거르기 |
+|  | 재생 목록 |
+|  | 열 보기 |
+|  | 끌어 옮기기 손잡이 |
+|  | 옮기기 |
+|  | 확대 |
+|  | 축소 |
+|  | 글자 도구 |
+|  | 레이어 |
+|  | 펜 도구 |
+|  | 선택 도구 |
+|  | 화면 이동 도구 |
+|  | 자르기 |
+|  | 오려 두기 |
+|  | 색, 만들기 |
+|  | 새로 쓰기 |
+|  | 고치기 |
+|  | 글 블록 |
+|  | 기울임 |
+|  | 되돌리기 |
+|  | 다시 하기 |
+|  | 되돌리기 |
+|  | 터미널 |
+|  | 코드 |
+|  | 브랜치 |
+|  | 커밋 |
+|  | 풀 리퀘스트 |
+|  | 오른쪽 패널, 태블릿 보기 |
+|  | 크게 보기 |
+|  | 실행, 재생 |
+|  | 멈춤 |
+|  | 영상 |
+|  | 말로 입력 |
+|  | 선 그래프 |
+|  | 막대 그래프 |
+|  | 원 그래프 |
+|  | 달력 보기 |
+
+### 그 밖에
+
+| 이름 | 쓰임 |
+| --- | --- |
+|  | 거르기 |
+|  | 보기 설정, 고급 검색 |
+|  | 아래로 |
+|  | 왼쪽, 이전 |
+|  | 정렬 |
+|  | 모두 펼치기 |
+|  | 세로 더 보기 |
+|  | 새로 고침 |
+|  | 빈 동그라미 |
+|  | 선택된 동그라미 |
+|  | 예정, 빈 상태 |
+|  | 밝은 화면 |
+|  | 어두운 화면 |
+|  | 명령, 단축키 |
+
+### 반응
+
+| 이름 | 쓰임 |
+| --- | --- |
+|  | 좋아요, 찜 |
+|  | 좋아요, 찜 (선택됨) |
+|  | 저장, 북마크 |
+|  | 저장, 북마크 (선택됨) |
+|  | 평점, 즐겨찾기 |
+|  | 평점, 즐겨찾기 (채움) |
+|  | 도움이 됐어요 |
+|  | 도움이 안 됐어요 |
+
+## 크기와 색
+
+크기는 셋 중 하나를 고릅니다. 그 밖의 크기가 꼭 필요하면 `--ds-icon-size` 변수로 바꿉니다. 색은 부모의 글자색을 바꾸면 따라옵니다.
+
+```html
+<i class="ds-icon ds-icon--search ds-icon--sm" aria-hidden="true"></i>  <!-- 16 -->
+<i class="ds-icon ds-icon--search" aria-hidden="true"></i>              <!-- 20 기본 -->
+<i class="ds-icon ds-icon--search ds-icon--lg" aria-hidden="true"></i>  <!-- 24 -->
+
+<!-- 색은 부모 글자색 -->
+<span style="color: var(--ybm-color-fg-brand)"><i class="ds-icon ds-icon--circle-check-solid" aria-hidden="true"></i></span>
+<span style="color: var(--ybm-color-fg-critical)"><i class="ds-icon ds-icon--triangle-alert-solid" aria-hidden="true"></i></span>
+```
+
+## 아이콘 더보기
+
+여기 없는 아이콘은 Lucide 1,999개에서 찾습니다. 아이콘을 누르면 `icons.css`에 붙여 넣을 줄이 복사되고, 붙여 넣으면 바로 쓸 수 있습니다. 이미 들어 있는 것은 CSS 표시가 붙어 있고 누르면 클래스가 복사됩니다.
+
+```html
+/* Lucide heart - 복사된 줄을 dist/icons.css 끝에 붙인다 */
+:root { --ds-icon-heart: url("data:image/svg+xml,…"); }
+.ds-icon--heart { --ds-icon: var(--ds-icon-heart); }
+
+<!-- 그다음부터 -->
+<i class="ds-icon ds-icon--heart" aria-hidden="true"></i>
+```
+
+## 사용 지침
+
+| 구분 | 내용 |
+| --- | --- |
+| **Do** | 같은 뜻에는 늘 같은 아이콘을 씁니다. 닫기는 x, 더 보기는 ellipsis 입니다. |
+| **Do** | 아이콘만 있는 버튼에는 aria-label을 붙입니다. |
+| **Do** | 색은 글자색을 따라가게 둡니다. 상태 색이 필요하면 부모 글자색을 바꿉니다. |
+| **Do** | 크기는 16, 20, 24 셋 중에서 고릅니다. |
+| **Don't** | 이모지나 다른 아이콘 세트를 섞지 않습니다. |
+| **Don't** | 아이콘 그림을 손으로 고치지 않습니다. Lucide 원본 그대로 씁니다. |
+| **Don't** | 아이콘 하나로 긴 뜻을 대신하지 않습니다. 뜻이 분명하지 않으면 글자를 같이 씁니다. |
+
+아이콘 그림은 Lucide(ISC 라이선스)입니다. [라이선스 전문](https://luvms012-rgb.github.io/ybm-ds/site/assets/lucide-LICENSE.txt)
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/index.md -->
+
+# Components
+
+화면을 만드는 데 쓰는 컴포넌트 71종입니다. Figma와 CSS가 같은 이름과 값으로 짝을 이룹니다.
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/action-button.md -->
+
+# Action Button
+
+누르면 바로 동작을 실행하는 기본 버튼입니다.
+
+## 사용법
+
+아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+
+```html
+<button class="ds-btn" data-variant="neutralWeak" data-size="large">
+  [<i class="ds-icon ds-icon--plus" aria-hidden="true"></i>] 라벨 [<i class="ds-icon …">]
+</button>
+```
+
+## 속성
+
+Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
+
+| 속성 | 값 |
+| --- | --- |
+| `variant` | brandSolid brandOutline neutralSolid neutralWeak neutralOutline criticalSolid ghost |
+| `size` | xsmall small medium large |
+| `layout` | iconOnly |
+| `width` | fill |
+
+## CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-btn-height` | `40px` |
+| `--ds-btn-padding-x` | `var(--ybm-space-x4)` |
+| `--ds-btn-radius` | `var(--ybm-shape-sm)` |
+| `--ds-btn-gap` | `var(--ybm-space-x1_5)` |
+| `--ds-btn-font-size` | `var(--ybm-font-size-t04)` |
+| `--ds-btn-line-height` | `var(--ybm-line-height-t04)` |
+| `--ds-btn-font-weight` | `var(--ybm-font-weight-semibold)` |
+| `--ds-btn-icon` | `18px` |
+| `--ds-btn-icon-only` | `20px` |
+| `--ds-btn-bg` | `var(--ybm-color-bg-brand-solid)` |
+| `--ds-btn-bg-pressed` | `var(--ybm-color-bg-brand-solid-pressed)` |
+| `--ds-btn-fg` | `var(--ybm-color-fg-on-brand-solid)` |
+| `--ds-btn-border` | `transparent` |
+
+## 사용 지침
+
+| 구분 | 내용 |
+| --- | --- |
+| **Do** | 강조 버튼(High emphasis)은 한 화면에 하나만 둡니다. |
+| **Don't** | 버튼을 세 개 넘게 나란히 두지 않습니다. |
+
+## 예시
+
+```html
+<button class="ds-btn" data-variant="brandSolid">brandSolid</button>
+<button class="ds-btn" data-variant="neutralSolid">neutralSolid</button>
+<button class="ds-btn" data-variant="neutralWeak">neutralWeak</button>
+<button class="ds-btn" data-variant="criticalSolid">criticalSolid</button>
+<button class="ds-btn" data-variant="brandOutline">brandOutline</button>
+<button class="ds-btn" data-variant="neutralOutline">neutralOutline</button>
+<button class="ds-btn" data-variant="ghost">ghost</button>
+<button class="ds-btn" disabled>disabled</button>
+
+<button class="ds-btn" data-variant="neutralSolid" data-size="xsmall">xsmall</button>
+<button class="ds-btn" data-variant="neutralSolid" data-size="small">small</button>
+<button class="ds-btn" data-variant="neutralSolid" data-size="medium"><i class="ds-icon ds-icon--plus" aria-hidden="true"></i>medium</button>
+<button class="ds-btn" data-variant="neutralSolid" data-size="large">large<i class="ds-icon ds-icon--arrow-right" aria-hidden="true"></i></button>
+<button class="ds-btn" data-variant="neutralWeak" data-layout="iconOnly" aria-label="검색"><i class="ds-icon ds-icon--search" aria-hidden="true"></i></button>
+```
+
+## 규격
+
+Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+
+```
+variant : brandSolid(기본) / neutralSolid / neutralWeak / criticalSolid / brandOutline / neutralOutline / ghost
+size    : xsmall 32 / small 36 / medium 40(기본) / large 52
+layout  : 기본 withText / data-layout="iconOnly" / data-width="fill"
+Figma: xsmall px14 gap4 t02 Medium shape/xs (iconOnly pill) / icon 16
+       small  px14 gap4 t04 SemiBold shape/sm / icon 18
+       medium px16 gap6 t04 SemiBold shape/sm / icon 18 (iconOnly 20)
+       large  px20 gap8 t06 SemiBold shape/md / icon 24
+```
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/text-link.md -->
+
+# Text Link
+
+다른 화면이나 외부 페이지로 이동하는 글자 링크입니다.
+
+## 사용법
+
+아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+
+```html
+<a class="ds-link" href="…" [data-size="small"]>비밀번호를 잊으셨나요?</a>
+```
+
+## 속성
+
+Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
+
+| 속성 | 값 |
+| --- | --- |
+| `Figma state` | enabled hover |
+
+그 밖에: `--ds-link-color(-hover)`
+
+## CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-link-color` | `var(--ybm-color-fg-neutral-subtle)` |
+| `--ds-link-color-hover` | `var(--ybm-color-fg-neutral)` |
+
+## 예시
+
+```html
+<a class="ds-link" href="#">아이디 찾기</a><a class="ds-link" href="#">비밀번호 재설정</a>
+
+<a class="ds-link" data-size="small" href="#">비밀번호를 잊으셨나요?</a><a class="ds-link" data-size="small" href="#">전체 보기</a>
+```
+
+## 규격
+
+Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+
+```
+size: medium(기본, t05) / small(t03, 본문 옆이나 표, 칸 머리처럼 보조 자리) (2026-11-03 추가)
+```
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/field-label.md -->
+
+# Field Label
+
+입력 칸에 라벨, 안내, 오류 문구를 붙여 무엇을 입력할지 알려 주는 컴포넌트입니다.
+
+## 사용법
+
+아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+
+```html
+<div class="ds-field" [data-label-weight="bold"]>
+  <div class="ds-field__header">
+    <label class="ds-field__label" for="id">라벨</label>
+    [<span class="ds-field__indicator">선택</span>] [<span class="ds-field__required" aria-hidden="true"></span>]
+  </div>
+  <div class="ds-input">…</div>
+  <div class="ds-field__footer">
+    <p class="ds-field__help">설명을 써주세요</p>
+    [<p class="ds-field__error">오류 이유</p>]
+    [<span class="ds-field__count">0/8</span>]
+  </div>
+</div>
+```
+
+## 속성
+
+Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
+
+| 속성 | 값 |
+| --- | --- |
+| `label-weight` | bold |
+
+## CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-field-gap` | `var(--ybm-space-x2)` |
+| `--ds-field-label-weight` | `var(--ybm-font-weight-medium)` |
+
+## 예시
+
+```html
+<div class="ds-field">
+  <div class="ds-field__header"><label class="ds-field__label" for="pv-name">이름</label><span class="ds-field__required" aria-hidden="true"></span></div>
+  <div class="ds-input" data-variant="outline"><input class="ds-input__control" id="pv-name" placeholder="이름을 입력해 주세요"></div>
+  <div class="ds-field__footer"><p class="ds-field__help">실명으로 입력해 주세요</p></div>
+</div>
+<div class="ds-field">
+  <div class="ds-field__header"><label class="ds-field__label" for="pv-mail">이메일</label></div>
+  <div class="ds-input" data-variant="outline"><input class="ds-input__control" id="pv-mail" value="ybm@" aria-invalid="true"></div>
+  <div class="ds-field__footer"><p class="ds-field__error">이메일 형식이 올바르지 않아요</p></div>
+</div>
+```
+
+## 규격
+
+Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+
+```
+Figma: 세로 gap x2 / label t05 Medium(bold 변형 t05 Bold) fg/neutral / indicator t04 fg/neutral-subtle(좌 4)
+       required 점 4×4 fg/critical / footer 좌우 x0_5 / 안내 t04 fg/neutral-subtle / 오류 t04 fg/critical
+오류: 입력 요소에 aria-invalid="true" → help 대신 error 를 보이고 critical 색.
+```
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/text-field-input.md -->
+
+# Text Field Input
+
+한 줄 글자를 입력하는 칸입니다.
+
+## 사용법
+
+아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+
+```html
+<div class="ds-input" data-variant="outline" data-size="medium">
+  [<i class="ds-icon ds-icon--search ds-input__icon" aria-hidden="true"></i>]
+  [<span class="ds-input__prefix">https://</span>]
+  <input class="ds-input__control" placeholder="플레이스홀더">
+  [<span class="ds-input__suffix">cm</span>]
+  [<button class="ds-input__clear" aria-label="지우기"></button>]
+</div>
+```
+
+## 속성
+
+Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
+
+| 속성 | 값 |
+| --- | --- |
+| `variant` | outline underline |
+| 켜고 끄는 속성 | `size` |
+
+## CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-input-height` | `44px` |
+| `--ds-input-padding-x` | `0px` |
+| `--ds-input-padding-y` | `var(--ybm-space-x2)` |
+| `--ds-input-gap` | `var(--ybm-space-x2_5)` |
+| `--ds-input-font-size` | `var(--ybm-font-size-t06)` |
+| `--ds-input-line-height` | `var(--ybm-line-height-t06)` |
+| `--ds-input-icon` | `24px` |
+| `--ds-input-color` | `var(--ybm-color-fg-neutral)` |
+| `--ds-input-bg` | `var(--ybm-color-bg-transparent)` |
+| `--ds-input-radius` | `0px` |
+| `--ds-input-line` | `var(--ybm-color-stroke-neutral-weak)` |
+| `--ds-input-line-active` | `var(--ybm-color-stroke-neutral-contrast)` |
+| `--ds-input-line-fade` | `var(--ybm-duration-normal) var(--ybm-easing-standard)` |
+
+## 예시
+
+```html
+<div class="ds-input"><input class="ds-input__control" placeholder="underline · large"></div>
+<div class="ds-input" data-variant="outline" data-size="medium"><i class="ds-icon ds-icon--search ds-input__icon" aria-hidden="true"></i><input class="ds-input__control" placeholder="outline · medium"></div>
+<div class="ds-input" data-variant="outline"><input class="ds-input__control" value="비활성" disabled></div>
+```
+
+## 규격
+
+Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+
+```
+variant : underline(기본) / outline      size : large(기본) / medium
+Figma
+  outline  large : h52 / px16 / gap10 / shape/lg / t05 / icon 20
+  outline  medium: h40 / px14 / gap8  / shape/sm / t04 / icon 16
+  underline large : py8 / min-h44 / gap10 / t06 / icon 24 / 하단 1px
+  underline medium: py6 / min-h36 / gap8  / t05 / icon 20
+  focused 1px stroke/neutral-contrast / invalid 1px stroke/critical-solid
+  disabled (outline) bg/disabled / 글자 fg/disabled / readOnly (outline) bg/disabled
+```
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/text-field-textarea.md -->
+
+# Text Field Textarea
+
+여러 줄의 긴 글을 입력하는 칸입니다. 글이 길어지면 칸도 함께 늘어납니다.
+
+## 사용법
+
+아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+
+```html
+<textarea class="ds-textarea" data-size="medium" rows="3" placeholder="…"></textarea>
+```
+
+## 속성
+
+Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
+
+| 속성 | 값 |
+| --- | --- |
+| 켜고 끄는 속성 | `variant` `size` |
+
+## CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-textarea-padding` | `var(--ybm-space-x3_5) var(--ybm-space-x4)` |
+| `--ds-textarea-min-height` | `94px` |
+| `--ds-textarea-radius` | `var(--ybm-shape-lg)` |
+| `--ds-textarea-font-size` | `var(--ybm-font-size-t05)` |
+| `--ds-textarea-line-height` | `var(--ybm-line-height-t05)` |
+| `--ds-textarea-line` | `var(--ybm-color-stroke-neutral-weak)` |
+| `--ds-textarea-line-width` | `1px` |
+
+## 예시
+
+```html
+<textarea class="ds-textarea" rows="3" placeholder="문의 내용을 입력해 주세요"></textarea>
+```
+
+## 규격
+
+Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+
+```
+variant : outline(기본) / underline      size : large(기본) / medium
+Figma outline large : px16 / py14 / min-h94 / shape/lg / t05
+      outline medium: px14 / py12 / min-h82 / shape/sm / t04
+      underline large : py8+14 / min-h110 / t06 / 하단 1px / underline medium: py6+12 / min-h94 / t05
+focused 1px stroke/neutral-contrast / invalid 1px stroke/critical-solid / disabled/readOnly bg/disabled
+```
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/field-button.md -->
+
+# Field Button
+
+직접 입력하지 않고 눌러서 값을 고르는 입력 칸입니다. 날짜, 시간처럼 다른 창에서 값을 받을 때 씁니다.
+
+## 사용법
+
+아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+
+```html
+<button type="button" class="ds-fieldbutton" data-size="large">
+  [<i class="ds-icon ds-icon--calendar" aria-hidden="true"></i>]
+  [<span class="ds-fieldbutton__affix">https://</span>]
+  <span class="ds-fieldbutton__value" data-placeholder="선택해 주세요"></span>
+  [<span class="ds-fieldbutton__affix">cm</span>]
+  <i class="ds-icon ds-icon--chevron-down" aria-hidden="true"></i>
+</button>
+```
+
+## 속성
+
+Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
+
+| 속성 | 값 |
+| --- | --- |
+| `size` | large medium |
+
+그 밖에: 상태 enabled/disabled/readOnly/invalid
+
+## 사용 지침
+
+| 구분 | 내용 |
+| --- | --- |
+| **Do** | 폼으로 보내야 하는 값은 disabled 대신 readOnly로 두세요. disabled 값은 보내지지 않습니다. |
+| **Do** | 사용자가 직접 입력해야 하면 Field Button 대신 Text Field Input을 씁니다. |
+| **Do** | 라벨, 설명, 오류 문구는 Field Label로 감싸서 붙이세요. |
+| **Don't** | 지우기(clear) 버튼은 오른쪽 아이콘과 역할이 겹치므로 넣지 않습니다. |
+
+## 예시
+
+```html
+<button type="button" class="ds-fieldbutton" data-size="large"><span class="ds-fieldbutton__value" data-placeholder="날짜를 선택해 주세요"></span><i class="ds-icon ds-icon--chevron-down" aria-hidden="true"></i></button>
+<button type="button" class="ds-fieldbutton" data-size="medium"><span class="ds-fieldbutton__value">2026.10.25 (토)</span><i class="ds-icon ds-icon--calendar" aria-hidden="true"></i></button>
+```
+
+## 규격
+
+Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+
+```
+Figma large : h52 / px16 / gap10 / shape/lg / t05 / icon 20 / medium: h40 / px14 / gap8 / shape/sm / t04 / icon 16
+       1px stroke/neutral-weak / invalid 1px stroke/critical-solid / disabled/readOnly bg/disabled
+       affix/아이콘 fg/neutral-subtle / placeholder fg/placeholder / 값 fg/neutral
+readOnly: aria-readonly="true" (폼 제출이 필요하면 disabled 대신 readOnly — DS §6.4)
+```
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/prefix-select.md -->
+
+# Prefix Select
+
+입력 칸 앞에서 국가 번호, 단위 같은 기준 값을 고르는 컴포넌트입니다.
+
+## 사용법
+
+아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+
+```html
+<button type="button" class="ds-prefixselect" [data-size="medium"]>통신사</button>
+```
+
+## 속성
+
+Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
+
+그 밖에: 입력 앞 선택(통신사, 국가번호)
+
+## 예시
+
+```html
+<button type="button" class="ds-prefixselect">통신사</button><button type="button" class="ds-prefixselect" data-size="medium">+82</button>
+```
+
+## 규격
+
+Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+
+```
+Figma large: t06 Regular / chevron 24 / medium: t05 / chevron 20 / gap x1 / fg/neutral-subtle
+```
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/select-trigger.md -->
+
+# Select Trigger
+
+목록에서 값 하나를 고르는 칸입니다. 누르면 Select Content가 열립니다.
+
+## 사용법
+
+아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+
+```html
+<button type="button" class="ds-select" aria-haspopup="listbox" aria-expanded="false" [data-size="medium"]>
+  [<i class="ds-icon ds-icon--search" aria-hidden="true"></i>]
+  <span class="ds-select__value" data-placeholder="선택해 주세요"></span>
+</button>
+```
+
+## 속성
+
+Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
+
+| 속성 | 값 |
+| --- | --- |
+| 켜고 끄는 속성 | `size` |
+
+## CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-select-height` | `52px` |
+| `--ds-select-padding-x` | `var(--ybm-space-x4)` |
+| `--ds-select-gap` | `var(--ybm-space-x2_5)` |
+| `--ds-select-radius` | `var(--ybm-shape-lg)` |
+| `--ds-select-font-size` | `var(--ybm-font-size-t05)` |
+| `--ds-select-line-height` | `var(--ybm-line-height-t05)` |
+| `--ds-select-icon` | `20px` |
+| `--ds-select-line` | `var(--ybm-color-stroke-neutral-weak)` |
+| `--ds-select-line-width` | `1px` |
+| `--ds-select-bg` | `var(--ybm-color-bg-transparent)` |
+
+## 예시
+
+```html
+<button type="button" class="ds-select" aria-haspopup="listbox" aria-expanded="false"><span class="ds-select__value" data-placeholder="지역을 선택해 주세요"></span></button>
+<button type="button" class="ds-select" aria-haspopup="listbox" aria-expanded="true" data-size="medium"><span class="ds-select__value">서울특별시</span></button>
+```
+
+## 규격
+
+Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+
+```
+Figma large: h52 / px16 / gap10 / shape/lg / t05 / chevron 20 / medium: h40 / px14 / gap8 / shape/sm / t04 / chevron 16
+       chevron fg/neutral(열림 = chevron-up) / invalid 1px critical / disabled/readOnly bg/disabled
+```
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/select-content-item.md -->
+
+# Select Content · Item
+
+Select를 눌렀을 때 펼쳐지는 선택지 목록입니다.
+
+## 사용법
+
+아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+
+```html
+<div class="ds-select-content" role="listbox" [data-size="medium"]>
+  <div class="ds-select-content__group" role="group" aria-labelledby="g1">
+    <div class="ds-select-content__label" id="g1">최근 검색</div>
+    <ul class="ds-select-list">
+      <li><button class="ds-select-item" role="option" aria-selected="true">
+            <span class="ds-select-item__body"><span class="ds-select-item__label">서울특별시</span>
+            [<span class="ds-select-item__desc">보조 설명</span>]</span></button></li>
+    </ul>
+  </div>
+</div>
+```
+
+## CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-select-item-padding` | `var(--ybm-space-x3) var(--ybm-space-x2)` |
+| `--ds-select-item-gap` | `var(--ybm-space-x3)` |
+| `--ds-select-item-check` | `20px` |
+
+## 사용 지침
+
+| 구분 | 내용 |
+| --- | --- |
+| **Do** | 항목 이름은 짧은 명사로 씁니다. 동작이나 덧붙이는 설명은 이름에 넣지 않습니다. |
+| **Do** | 선택 칸 폭에서 이름이 잘리지 않는지 확인하세요. |
+| **Do** | 선택지는 한 가지 기준(많이 쓰는 순, 크기순, 시간순)으로 정렬합니다. 성격이 다른 선택지는 묶음으로 나누세요. |
+| **Do** | 값을 고를 때는 Select, 동작을 실행할 때는 Menu를 씁니다. |
+| **Don't** | "전체 선택"처럼 다른 선택지를 바꾸는 항목은 넣지 않습니다. 다만 하나만 고르는 칸에서 "없음"이 답이 될 수 있으면 "없음"을 넣습니다. |
+
+## 예시
+
+```html
+<div class="ds-select-content" role="listbox">
+  <ul class="ds-select-list">
+    <li><button class="ds-select-item" role="option" aria-selected="true"><span class="ds-select-item__body"><span class="ds-select-item__label">서울특별시</span></span></button></li>
+    <li><button class="ds-select-item" role="option" aria-selected="false"><span class="ds-select-item__body"><span class="ds-select-item__label">부산광역시</span></span></button></li>
+    <li><button class="ds-select-item" role="option" aria-selected="false" disabled><span class="ds-select-item__body"><span class="ds-select-item__label">제주(배송 불가)</span></span></button></li>
+  </ul>
+</div>
+```
+
+## 규격
+
+Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+
+```
+Dialog / Bottom Sheet 안에서는 .ds-select-list 만 단독으로 쓴다.
+Figma Content: shape/2xl / bg/layer-floating / elevation overlay(+헤어라인) / 위아래 x2 / 그룹 사이 x2
+       group label large px16 py10 t04 Medium / medium py8 t03 Regular / fg/neutral-subtle
+       둘째 그룹부터 1px stroke/neutral-muted 구분선(좌우 x4, 아래 x2)
+Figma Item(large): 바깥 좌우 x2 / surface py12 px8 gap12 shape/lg / label t05 / desc t03 / check 20 fg/neutral
+           (medium): surface py10 gap8 / label t04 / desc t02 / check 16
+       highlighted(hover/focus) bg/transparent-pressed / selected = 우측 체크만 / disabled fg/disabled
+```
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/checkbox.md -->
+
+# Checkbox
+
+여러 선택지 가운데 하나 이상을 선택할 때 쓰는 컴포넌트입니다. 약관 동의처럼 하나만 켜고 끌 때도 씁니다.
+
+## 사용법
+
+아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+
+```html
+<label class="ds-checkbox" data-tone="neutral">
+  <input type="checkbox" class="ds-checkbox__control">
+  <span class="ds-checkbox__label">라벨</span>
+</label>
+```
+
+## 속성
+
+Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
+
+| 속성 | 값 |
+| --- | --- |
+| `variant` | square ghost |
+| 켜고 끄는 속성 | `tone` `size` |
+
+## CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-checkbox-size` | `20px` |
+| `--ds-checkbox-icon` | `12px` |
+| `--ds-checkbox-checked-bg` | `var(--ybm-color-bg-brand-solid)` |
+| `--ds-checkbox-checked-fg` | `var(--ybm-color-fg-on-brand-solid)` |
+| `--ds-checkbox-line` | `var(--ybm-color-stroke-neutral-weak)` |
+| `--ds-checkbox-mark` | `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.75' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E")` |
+
+## 예시
+
+```html
+<label class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control" checked><span class="ds-checkbox__label">brand</span></label>
+<label class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control" checked><span class="ds-checkbox__label">neutral</span></label>
+<label class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control" data-indeterminate><span class="ds-checkbox__label">일부 선택</span></label>
+<label class="ds-checkbox" data-variant="ghost"><input type="checkbox" class="ds-checkbox__control" checked><span class="ds-checkbox__label">ghost</span></label>
+<label class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control" disabled><span class="ds-checkbox__label">disabled</span></label>
+```
+
+## 규격
+
+Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+
+```
+size: medium(기본 20) / large(24)   variant: square(기본) / ghost   tone: brand(기본) / neutral
+indeterminate: input.indeterminate = true (스크립트) → 가로선
+Figma: 행 min-h 32/36 / 위 6 / gap x2 / 박스 shape/xs / label t04/t05 fg/neutral
+  unchecked bg/layer-default + 1px stroke/neutral-weak / checked neutral bg/neutral-solid + 체크 fg/on-neutral-solid
+  brand bg/brand-solid + 체크 fg/on-brand-solid / disabled bg/disabled + stroke/neutral-muted
+  disabledChecked bg/disabled + 체크 fg/disabled / ghost 박스 없이 체크 14 (미선택 fg/placeholder)
+체크와 가로선은 아이콘 세트가 아닌 전용 그림(Figma "Checkbox Mark"): 24 기준 선 2.75 고정 비율 → 12px 1.375 / 14px 1.6
+```
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/radio-group.md -->
+
+# Radio Group
+
+여러 선택지 가운데 하나만 선택할 때 쓰는 컴포넌트입니다.
+
+## 사용법
+
+아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+
+```html
+<div class="ds-radio-group" role="radiogroup">
+  <label class="ds-radio"><input type="radio" class="ds-radio__control" name="g"><span>라벨</span></label>
+</div>
+```
+
+## 속성
+
+Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
+
+| 속성 | 값 |
+| --- | --- |
+| 켜고 끄는 속성 | `tone` `size` |
+
+## CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-radio-size` | `24px` |
+| `--ds-radio-dot` | `10px` |
+| `--ds-radio-checked-bg` | `var(--ybm-color-bg-brand-solid)` |
+| `--ds-radio-checked-fg` | `var(--ybm-color-fg-on-brand-solid)` |
+
+## 사용 지침
+
+| 구분 | 내용 |
+| --- | --- |
+| **Do** | 같은 묶음에서는 하나만 선택된 상태로 둡니다. |
+| **Do** | 누를 수 있는 영역은 라벨까지 포함한 전체이고, List와 함께 쓰면 줄 전체입니다. |
+| **Do** | 여러 개를 골라야 하면 Checkbox를 쓰세요. |
+| **Do** | 추천하거나 자주 고르는 선택지를 미리 골라 두면 사용자의 고민이 줄어듭니다. |
+| **Do** | 선택지가 2~6개면 Radio Group을, 그보다 많거나 늘어날 수 있으면 Field Button이나 Select를 씁니다. |
+| **Don't** | 라벨이 길거나 화면이 좁으면 가로로 늘어놓지 마세요. 기본은 세로로 쌓습니다. |
+
+## 예시
+
+```html
+<div class="ds-radio-group" role="radiogroup" aria-label="수령 방법">
+  <label class="ds-radio"><input type="radio" class="ds-radio__control" name="pv-r" checked><span>온라인</span></label>
+  <label class="ds-radio"><input type="radio" class="ds-radio__control" name="pv-r"><span>방문 수령</span></label>
+  <label class="ds-radio"><input type="radio" class="ds-radio__control" name="pv-r" disabled><span>우편</span></label>
+</div>
+```
+
+## 규격
+
+Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+
+```
+size: large(기본 24) / medium(20)   tone: brand(기본) / neutral
+Figma: 행 min-h 36/32 / 위 6 / gap x2 / 원 bg/layer-default + 1px stroke/neutral-weak / label t05/t04
+  checked 고리(두께 7/6, 가운데 10/8 은 투명) brand bg/brand-solid / neutral bg/neutral-solid (2026-10-31 흰 점 → 투명)
+  disabled bg/disabled + stroke/neutral-muted / disabledChecked 고리 bg/disabled, 가운데 투명
+```
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/switch.md -->
+
+# Switch
+
+설정을 바로 켜고 끌 때 쓰는 컴포넌트입니다.
+
+## 사용법
+
+아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+
+```html
+<label class="ds-switch" data-size="24">
+  <span class="ds-switch__label">알림 받기</span>
+  <input type="checkbox" role="switch" class="ds-switch__control">
+</label>
+```
+
+## 속성
+
+Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
+
+| 속성 | 값 |
+| --- | --- |
+| `size` | 16 24 32 |
+| 켜고 끄는 속성 | `tone` |
+
+## CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-switch-w` | `38px` |
+| `--ds-switch-h` | `24px` |
+| `--ds-switch-thumb` | `16px` |
+| `--ds-switch-thumb-on` | `20px` |
+| `--ds-switch-on` | `var(--ybm-color-bg-brand-solid)` |
+| `--ds-switch-thumb-color` | `var(--ybm-color-palette-static-white)` |
+| `--ds-switch-t` | `var(--ds-switch-thumb)` |
+
+## 사용 지침
+
+| 구분 | 내용 |
+| --- | --- |
+| **Do** | 누르는 즉시 반영되는 설정에만 씁니다. |
+| **Do** | 저장 버튼이 따로 있으면 Checkbox를 씁니다. |
+
+## 예시
+
+```html
+<label class="ds-switch" data-size="16"><span class="ds-switch__label">16</span><input type="checkbox" role="switch" class="ds-switch__control" checked></label>
+<label class="ds-switch"><span class="ds-switch__label">알림 받기</span><input type="checkbox" role="switch" class="ds-switch__control" checked></label>
+<label class="ds-switch" data-size="32"><span class="ds-switch__label">32</span><input type="checkbox" role="switch" class="ds-switch__control"></label>
+```
+
+## 규격
+
+Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+
+```
+size: 24(기본) / 16 / 32   tone: brand(기본) / neutral
+Figma 16: 트랙 26×16 / 썸 10(켜짐 12) / gap x1_5 / label t03 Medium
+       24: 트랙 38×24 / 썸 16(켜짐 20) / gap x2   / label t04 Medium
+       32: 트랙 52×32 / 썸 21(켜짐 26) / gap x2_5 / label t05 Medium
+  트랙 off palette/gray-600 / on bg/neutral-solid(neutral) / bg/brand-solid(brand)
+  썸 fg/on-neutral-solid(neutral) / static-white(brand / checked 는 fg/on-brand-solid, 같은 값) + elevation raised
+  disabled: 트랙 opacity .38 / 라벨 .58 / 썸 static-black-alpha-700
+```
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/quantity-picker.md -->
+
+# Quantity Picker
+
+수량을 하나씩 늘리고 줄이는 컴포넌트입니다.
+
+## 사용법
+
+아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+
+```html
+<div class="ds-quantity" data-size="medium">
+  <button type="button" class="ds-quantity__btn" aria-label="수량 줄이기"><i class="ds-icon ds-icon--minus" aria-hidden="true"></i></button>
+  <input class="ds-quantity__value" inputmode="numeric" value="1" aria-label="수량">
+  <button type="button" class="ds-quantity__btn" aria-label="수량 늘리기"><i class="ds-icon ds-icon--plus" aria-hidden="true"></i></button>
+</div>
+```
+
+## 속성
+
+Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
+
+| 속성 | 값 |
+| --- | --- |
+| `layout` | fill |
+| 켜고 끄는 속성 | `size` |
+
+## 예시
+
+```html
+<div class="ds-quantity"><button type="button" class="ds-quantity__btn" aria-label="수량 줄이기"><i class="ds-icon ds-icon--minus" aria-hidden="true"></i></button><input class="ds-quantity__value" inputmode="numeric" value="1" aria-label="수량"><button type="button" class="ds-quantity__btn" aria-label="수량 늘리기"><i class="ds-icon ds-icon--plus" aria-hidden="true"></i></button></div>
+```
+
+## 규격
+
+Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+
+```
+size: medium(기본 40) / small 36 / large 52   layout: hug(기본) / data-layout="fill"
+Figma: bg/layer-default / 1px stroke/neutral-weak / small/medium shape/sm / large shape/lg
+       버튼 정사각(36/40/52) / 아이콘 16/18/22 fg/neutral / 값 min-w40 px8 / t05 Medium(large t06)
+       disabled 아이콘/값 fg/disabled / invalid 1px stroke/critical-solid
+```
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/chip.md -->
+
+# Chip
+
+고른 값이나 입력한 값을 작은 덩어리로 보여 주는 컴포넌트입니다.
+
+## 사용법
+
+아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+
+```html
+<button type="button" class="ds-chip" aria-pressed="false">
+  [<i class="ds-icon ds-icon--heart" aria-hidden="true"></i>] @naver.com [<i class="ds-icon ds-icon--chevron-down"></i>]
+</button>
+```
+
+## 속성
+
+Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
+
+| 속성 | 값 |
+| --- | --- |
+| `variant` | solid outlineStrong outlineWeak |
+| `layout` | iconOnly |
+| 켜고 끄는 속성 | `size` |
+
+## CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-chip-height` | `36px` |
+| `--ds-chip-padding-x` | `calc(var(--ybm-space-x2) + var(--ybm-space-x1_5))` |
+| `--ds-chip-min-width` | `var(--ybm-space-x12)` |
+| `--ds-chip-icon` | `16px` |
+| `--ds-chip-bg` | `var(--ybm-color-bg-neutral-weak-alpha)` |
+| `--ds-chip-fg` | `var(--ybm-color-fg-neutral)` |
+| `--ds-chip-line` | `transparent` |
+
+## 예시
+
+```html
+<button type="button" class="ds-chip" aria-pressed="true">전체</button>
+<button type="button" class="ds-chip" aria-pressed="false">할인</button>
+<button type="button" class="ds-chip" data-variant="outlineStrong" aria-pressed="false">outlineStrong</button>
+<button type="button" class="ds-chip" data-variant="outlineWeak" aria-pressed="false">@naver.com<i class="ds-icon ds-icon--chevron-down" aria-hidden="true"></i></button>
+<button type="button" class="ds-chip" disabled>disabled</button>
+```
+
+## 규격
+
+Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+
+```
+variant: solid(기본) / outlineStrong / outlineWeak   size: medium(기본 36) / small 32 / large 40
+layout : 기본 withText / data-layout="iconOnly"      state: aria-pressed="true"(checked) / disabled
+Figma: shape/pill / t04 Regular(large t05) / 좌우 12/14/16 / min-w 44/48/52 / 아이콘 14/16/16 / 아이콘↔라벨 x1_5
+  solid bg/neutral-weak-alpha / outlineStrong bg/layer-default + stroke/neutral-weak / outlineWeak + stroke/neutral-muted
+  checked(solid/outlineStrong) bg/neutral-solid + fg/on-neutral-solid SemiBold
+  checked(outlineWeak) bg/neutral + stroke/neutral-contrast + fg/neutral Medium / disabled opacity .5
+```
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/chip-tabs.md -->
+
+# Chip Tabs
+
+칩 모양의 탭으로 목록을 가볍게 걸러 보는 컴포넌트입니다.
+
+## 사용법
+
+아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+
+```html
+<div class="ds-chiptabs" role="tablist" data-variant="neutralOutline" [data-inset="none"]>
+  <button class="ds-chiptabs__trigger" role="tab" aria-selected="true">전체</button>
+  <button class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-notification>공지</button>
+</div>
+```
+
+## 속성
+
+Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
+
+| 속성 | 값 |
+| --- | --- |
+| `variant` | neutralSolid neutralOutline |
+| `size` | medium large |
+
+## 사용 지침
+
+| 구분 | 내용 |
+| --- | --- |
+| **Do** | 콘텐츠 분류를 바꿀 때 씁니다. |
+| **Do** | 선택은 항상 하나만 유지합니다. 여러 개를 고르려면 Chip을 쓰세요. |
+| **Don't** | 화면의 주요 메뉴로는 쓰지 않습니다. 주요 메뉴는 Tabs가 맡고, Chip Tabs는 한 화면 안에서 걸러 보거나 하위 내용을 바꿀 때 씁니다. |
+| **Don't** | 한 줄 안에서 variant와 size를 섞지 않습니다. |
+| **Don't** | 항목이 넘쳐도 줄을 바꾸지 않습니다. 가로로 밀어서 보게 둡니다. |
+
+## 예시
+
+```html
+<div class="ds-chiptabs" role="tablist"><button class="ds-chiptabs__trigger" role="tab" aria-selected="true">전체</button><button class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-notification>공지</button><button class="ds-chiptabs__trigger" role="tab" aria-selected="false">이벤트</button></div>
+<div class="ds-chiptabs" role="tablist" data-variant="neutralOutline"><button class="ds-chiptabs__trigger" role="tab" aria-selected="true">전체</button><button class="ds-chiptabs__trigger" role="tab" aria-selected="false">공지</button><button class="ds-chiptabs__trigger" role="tab" aria-selected="false">이벤트</button></div>
+```
+
+## 규격
+
+Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+
+```
+variant: neutralSolid(기본) / neutralOutline   size: medium(기본 36) / large 40
+inset: 기본 좌우 x4(화면 끝까지 넘기는 목록) / data-inset="none" 좌우 여백 없음(제목 아래 콘텐츠 칸 안에 놓을 때, 2026-11-03)
+Figma list: 좌우 x4 / gap x2 / trigger: shape/pill / medium h36 px14 min-w48 / large h40 px16 min-w52 / t04 Medium
+  neutralSolid bg/neutral-weak-alpha / neutralOutline 투명 + stroke/neutral-muted
+  selected bg/neutral-solid + fg/on-neutral-solid / disabled opacity .5 / notification 점 6 bg/brand-solid
+```
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/tabs.md -->
+
+# Tabs
+
+한 화면의 내용을 여러 탭으로 나눠 전환하는 컴포넌트입니다.
+
+## 사용법
+
+아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+
+```html
+<div class="ds-tabs" role="tablist" [data-size="medium"] [data-layout="hug"]>
+  <button class="ds-tabs__trigger" role="tab" aria-selected="true">탭</button>
+</div>
+```
+
+## 속성
+
+Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
+
+| 속성 | 값 |
+| --- | --- |
+| `layout` | fill hug |
+| 켜고 끄는 속성 | `size` |
+
+## CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-tabs-height` | `40px` |
+
+## 예시
+
+```html
+<div class="ds-tabs" role="tablist"><button class="ds-tabs__trigger" role="tab" aria-selected="true">주문 내역</button><button class="ds-tabs__trigger" role="tab" aria-selected="false">배송 조회</button><button class="ds-tabs__trigger" role="tab" aria-selected="false" disabled>환불</button></div>
+<div class="ds-tabs" role="tablist" data-layout="hug" data-size="medium"><button class="ds-tabs__trigger" role="tab" aria-selected="true">hug</button><button class="ds-tabs__trigger" role="tab" aria-selected="false">medium</button></div>
+```
+
+## 규격
+
+Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+
+```
+size: small(기본 40) / medium 44   triggerLayout: fill(기본) / hug
+Figma: bg/layer-default / 하단 1px stroke/neutral-muted / trigger padding x2_5 / t04 Medium fg/neutral-subtle(2026-11-03, placeholder 에서 진하게)
+  selected t04 SemiBold fg/neutral + 하단 2px fg/neutral 인디케이터(트리거 폭) / disabled fg/disabled
+  hug: 좌우 x4 / 트리거는 내용 폭
+```
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/segmented-control.md -->
+
+# Segmented Control
+
+같은 내용을 목록, 달력처럼 다른 방식으로 바꿔 볼 때 쓰는 컴포넌트입니다.
+
+## 사용법
+
+아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+
+```html
+<div class="ds-segmented" role="group" aria-label="보기 방식" [data-size="medium"] [data-layout="fill"]>
+  <button type="button" class="ds-segmented__item" aria-pressed="true">목록</button>
+</div>
+```
+
+## 속성
+
+Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
+
+| 속성 | 값 |
+| --- | --- |
+| 켜고 끄는 속성 | `layout` `size` |
+
+## 사용 지침
+
+| 구분 | 내용 |
+| --- | --- |
+| **Do** | 고르면 선택 배경이 미끄러지듯 옮겨 가는 움직임을 그대로 둡니다. |
+| **Do** | 항목은 2~4개만 둡니다. 5개가 넘으면 알아보기 어렵고 누를 자리가 좁아집니다. |
+| **Do** | 한 화면에 하나만 둡니다. 여러 개를 두면 무엇이 중요한지 흐려집니다. |
+| **Do** | 라벨은 짧게 씁니다. 칸에 비해 라벨이 길면 다른 컴포넌트를 쓰세요. |
+| **Don't** | 화면 이동에는 쓰지 않습니다. 화면 이동은 Tabs를 씁니다. |
+
+## 예시
+
+```html
+<div class="ds-segmented" role="group" aria-label="보기 방식"><button type="button" class="ds-segmented__item" aria-pressed="true">목록</button><button type="button" class="ds-segmented__item" aria-pressed="false">달력</button></div>
+
+<div class="ds-segmented" role="group" aria-label="기간" data-size="medium"><button type="button" class="ds-segmented__item" aria-pressed="false">1개월</button><button type="button" class="ds-segmented__item" aria-pressed="true">3개월</button><button type="button" class="ds-segmented__item" aria-pressed="false">1년</button></div><button class="ds-btn" data-variant="neutralWeak"><i class="ds-icon ds-icon--download" aria-hidden="true"></i>내보내기</button>
+```
+
+## 규격
+
+Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+
+```
+size: small(기본) / medium   layout: hug(기본) / fill
+모션: 선택 배경이 고른 항목으로 미끄러져 이동한다(필수, ybm-ds.js). 누르면 aria-pressed 가 바뀌고 change 이벤트가 난다.
+Figma small : 트랙 bg/neutral / padding 2 / shape/sm / item py6 px12 / shape/xs / t03 Bold fg/neutral-subtle
+      medium: 트랙 shape/lg / item py8 px16 / shape/sm / t04 Bold
+      selected bg/layer-default + elevation raised + fg/neutral / disabled fg/disabled
+높이(2026-11-03): small 32(Button xsmall 과 같음) / medium 40(Button medium, Select medium 과 같음). 글자와 아이콘 모두 같은 높이
+```
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/toggle-button.md -->
+
+# Toggle Button
+
+누를 때마다 켜짐과 꺼짐이 바뀌는 버튼입니다.
+
+## 사용법
+
+아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+
+```html
+<button type="button" class="ds-toggle" aria-pressed="false" [data-size="medium"]>라벨</button>
+```
+
+## 속성
+
+Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
+
+| 속성 | 값 |
+| --- | --- |
+| 켜고 끄는 속성 | `size` |
+
+## CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-toggle-bg` | `var(--ybm-color-bg-layer-default)` |
+| `--ds-toggle-fg` | `var(--ybm-color-fg-neutral)` |
+| `--ds-toggle-line` | `var(--ybm-color-stroke-neutral-weak)` |
+
+## 사용 지침
+
+| 구분 | 내용 |
+| --- | --- |
+| **Do** | "알림 받기" 켜고 끄기처럼 한 가지 상태만 바꿀 때 씁니다. |
+| **Do** | 고르기와 걸러 보기는 Chip, 바로 반영되는 설정은 Switch를 씁니다. 역할이 겹치지 않게 나눠 쓰세요. |
+| **Don't** | 여러 개를 늘어놓고 하나를 고르게 만들지 마세요. 그럴 때는 Segmented Control을 씁니다. |
+
+## 예시
+
+```html
+<button type="button" class="ds-toggle" aria-pressed="true">마감 임박</button><button type="button" class="ds-toggle" aria-pressed="false">무료 배송</button><button type="button" class="ds-toggle" aria-pressed="false" data-size="medium">medium</button>
+```
+
+## 규격
+
+Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+
+```
+size: small(기본) / medium
+Figma small: py6 px12 / t03 Bold / medium: py10 px16 / t04 Bold / shape/lg
+  off bg/layer-default + stroke/neutral-weak / on bg/brand-weak + stroke/brand-solid + fg/brand / disabled bg/disabled + fg/disabled
+```
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/badge.md -->
+
+# Badge
+
+대상의 상태나 속성을 짧은 글자로 알려 주는 컴포넌트입니다.
+
+## 사용법
+
+아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+
+```html
+<span class="ds-badge" data-variant="solid" data-tone="brand">NEW</span>
+<span class="ds-badge" data-size="large">
+  [<i class="ds-icon ds-icon--circle-check-solid ds-badge__prefix" aria-hidden="true"></i>]
+  <span class="ds-badge__label">라벨</span>
+  [<button type="button" class="ds-badge__action" aria-label="삭제"><i class="ds-icon ds-icon--x"></i></button>]
+</span>
+```
+
+## 속성
+
+Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
+
+| 속성 | 값 |
+| --- | --- |
+| `variant` | weak solid outline |
+| `tone` | neutral brand informative positive warning critical |
+| 켜고 끄는 속성 | `size` |
+
+## CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-badge-bg` | `var(--ybm-color-bg-neutral)` |
+| `--ds-badge-fg` | `var(--ybm-color-fg-neutral-muted)` |
+| `--ds-badge-line` | `transparent` |
+
+## 사용 지침
+
+| 구분 | 내용 |
+| --- | --- |
+| **Do** | 누를 수 없는 표시용 라벨로만 씁니다. |
+
+## 예시
+
+```html
+<span class="ds-badge">neutral</span><span class="ds-badge" data-tone="brand">brand</span><span class="ds-badge" data-tone="informative">informative</span><span class="ds-badge" data-tone="positive">positive</span><span class="ds-badge" data-tone="warning">warning</span><span class="ds-badge" data-tone="critical">critical</span>
+
+<span class="ds-badge" data-variant="solid" data-tone="brand">NEW</span><span class="ds-badge" data-variant="solid" data-tone="critical">마감</span><span class="ds-badge" data-variant="outline">outline</span><span class="ds-badge" data-size="large"><span class="ds-badge__label">large</span></span>
+```
+
+## 규격
+
+Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+
+```
+size: medium(기본) / large   variant: weak(기본) / solid / outline
+tone: neutral(기본) / brand / informative / positive / warning / critical
+Figma medium: py2 px6 / min-h20 / shape/2xs / t01 Medium / 아이콘 12
+      large : py4 px8 / min-h24 / shape/xs  / t02 Medium / 아이콘 14
+공통: gap x0_5 / solid 라벨 fg/on-{tone}-solid
+기본 최대 너비 없음 — 말줄임이 필요하면 사용처에서 max-width 지정
+```
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/tag-group.md -->
+
+# Tag Group
+
+작성자, 날짜처럼 짧은 정보를 한 줄에 이어 보여 주는 컴포넌트입니다.
+
+## 사용법
+
+아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+
+```html
+<span class="ds-tag-group" [data-size="t4"] [data-tone="neutral"]><span>홍길동</span><span>2026.10.02</span></span>
+```
+
+## 속성
+
+Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
+
+그 밖에: 작성자, 날짜, 조회수
+
+## 사용 지침
+
+| 구분 | 내용 |
+| --- | --- |
+| **Do** | 태그마다 tone은 다르게 줄 수 있지만 size는 모두 같아야 합니다. |
+| **Do** | 글자는 조사와 접속어를 빼고 6~10자 안으로, 한 줄에 들어가게 씁니다. |
+| **Do** | 기본은 한 줄입니다. 말줄임 때문에 뜻이 흐려질 때만 줄을 바꿉니다. |
+| **Do** | 자리가 모자라면 덜 중요한 태그부터 말줄임합니다. |
+
+## 예시
+
+```html
+<span class="ds-tag-group"><span>운영팀</span><span>2026.10.22</span><span>조회 128</span></span><span class="ds-tag-group" data-size="t4" data-tone="neutral"><span>t4</span><span>neutral</span></span>
+```
+
+## 규격
+
+Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+
+```
+size: t3(기본 13/20) / t4(14/21)   tone: neutralSubtle(기본) / neutral
+Figma: 항목 사이 "/" 구분 / gap x1 / neutral fg/neutral-muted / neutralSubtle fg/neutral-subtle
+```
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/avatar.md -->
+
+# Avatar
+
+사람이나 팀을 프로필 사진이나 이름 첫 글자로 보여 주는 컴포넌트입니다.
+
+## 사용법
+
+아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+
+```html
+사진   <span class="ds-avatar" data-size="48"><img src="…" alt="김민수"></span>
+이니셜 <span class="ds-avatar" role="img" aria-label="김민수"><span class="ds-avatar__initials" aria-hidden="true">김</span></span>
+기본   <span class="ds-avatar" role="img" aria-label="김민수"></span>
+상태   … <span class="ds-avatar__status" data-tone="positive"></span></span>   ← 아바타 aria-label 에 "김민수, 온라인" 처럼 합쳐 적는다
+배지   … <span class="ds-avatar__badge"><img src="…" alt=""></span></span>   ← 소속·서비스 로고 등 작은 이미지
+링크   <a class="ds-avatar" href="…" aria-label="김민수 프로필">…</a>  /  <button type="button" class="ds-avatar" aria-label="…">
+```
+
+## 속성
+
+Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
+
+| 속성 | 값 |
+| --- | --- |
+| `size` | 20 24 36 42 48 56 64 80 96 108 |
+| `shape` | circle rounded square |
+| `status tone` | positive neutral critical |
+| `group size` | 20~64 × shape |
+
+그 밖에: `+N`
+
+## CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-avatar-size` | `36px` |
+| `--ds-avatar-badge` | `14px` |
+| `--ds-avatar-radius` | `var(--ybm-shape-pill)` |
+| `--ds-avatar-bg` | `var(--ybm-color-palette-gray-500)` |
+| `--ds-avatar-status-size` | `max(8px, calc(var(--ds-avatar-size) * 0.26))` |
+| `--ds-avatar-status-ring` | `clamp(1.5px, calc(var(--ds-avatar-size) * 0.04), 4px)` |
+| `--ds-avatar-status-color` | `var(--ybm-color-bg-positive-solid)` |
+| `--ds-avatar-group-size` | `36px` |
+| `--ds-avatar-group-radius` | `var(--ybm-shape-pill)` |
+| `--ds-avatar-group-ring` | `max(1.5px, calc(var(--ds-avatar-group-size) * 0.05))` |
+| `--ds-avatar-group-ring-color` | `var(--ybm-color-bg-layer-default)` |
+
+## 예시
+
+```html
+<span class="ds-avatar" data-size="20" role="img" aria-label="사용자"></span>
+<span class="ds-avatar" data-size="24" role="img" aria-label="사용자"></span>
+<span class="ds-avatar" role="img" aria-label="사용자"></span>
+<span class="ds-avatar" data-size="48" role="img" aria-label="김민수"><span class="ds-avatar__initials" aria-hidden="true">김</span></span>
+<span class="ds-avatar" data-size="64" role="img" aria-label="이서연"><span class="ds-avatar__initials" aria-hidden="true">이</span></span>
+<span class="ds-avatar" data-size="80" role="img" aria-label="사용자"><span class="ds-avatar__badge"></span></span>
+
+<span class="ds-avatar" data-size="48" role="img" aria-label="김민수, 온라인"><span class="ds-avatar__initials" aria-hidden="true">김</span><span class="ds-avatar__status" data-tone="positive"></span></span>
+<span class="ds-avatar" data-size="48" role="img" aria-label="박지훈, 자리 비움"><span class="ds-avatar__initials" aria-hidden="true">박</span><span class="ds-avatar__status" data-tone="neutral"></span></span>
+<span class="ds-avatar" data-size="48" role="img" aria-label="최유나, 방해 금지"><span class="ds-avatar__initials" aria-hidden="true">최</span><span class="ds-avatar__status" data-tone="critical"></span></span>
+<span class="ds-avatar" data-size="24" role="img" aria-label="사용자, 온라인"><span class="ds-avatar__status"></span></span>
+<span class="ds-avatar" data-size="96" role="img" aria-label="사용자, 방해 금지"><span class="ds-avatar__status" data-tone="critical"></span></span>
+
+<span class="ds-avatar" data-size="56" role="img" aria-label="김민수, 온라인"><span class="ds-avatar__initials" aria-hidden="true">김</span><span class="ds-avatar__status"></span></span>
+<span class="ds-avatar" data-size="56" data-shape="rounded" role="img" aria-label="운영팀, 온라인"><span class="ds-avatar__initials" aria-hidden="true">운</span><span class="ds-avatar__status"></span></span>
+<span class="ds-avatar" data-size="56" data-shape="square" role="img" aria-label="운영팀, 자리 비움"><span class="ds-avatar__initials" aria-hidden="true">운</span><span class="ds-avatar__status" data-tone="neutral"></span></span>
+<button type="button" class="ds-avatar" data-size="56" aria-label="김민수 프로필 보기"><span class="ds-avatar__initials" aria-hidden="true">김</span></button>
+
+<div class="ds-avatar-group" data-size="24" role="group" aria-label="참여자 6명">
+  <span class="ds-avatar" role="img" aria-label="김민수"><span class="ds-avatar__initials" aria-hidden="true">김</span></span><span class="ds-avatar" role="img" aria-label="이서연"><span class="ds-avatar__initials" aria-hidden="true">이</span></span><span class="ds-avatar" role="img" aria-label="박지훈"><span class="ds-avatar__initials" aria-hidden="true">박</span></span><span class="ds-avatar-group__overflow" role="img" aria-label="외 3명">+3</span>
+</div>
+<div class="ds-avatar-group" role="group" aria-label="참여자 16명">
+  <span class="ds-avatar" role="img" aria-label="김민수, 온라인"><span class="ds-avatar__initials" aria-hidden="true">김</span><span class="ds-avatar__status"></span></span><span class="ds-avatar" role="img" aria-label="이서연"><span class="ds-avatar__initials" aria-hidden="true">이</span></span><span class="ds-avatar" role="img" aria-label="박지훈"><span class="ds-avatar__initials" aria-hidden="true">박</span></span><span class="ds-avatar" role="img" aria-label="사용자"></span><button type="button" class="ds-avatar-group__overflow" aria-label="참여자 12명 더 보기">+12</button>
+</div>
+<div class="ds-avatar-group" data-size="48" data-shape="rounded" role="group" aria-label="팀 104개">
+  <span class="ds-avatar" role="img" aria-label="운영팀"><span class="ds-avatar__initials" aria-hidden="true">운</span></span><span class="ds-avatar" role="img" aria-label="개발팀"><span class="ds-avatar__initials" aria-hidden="true">개</span></span><span class="ds-avatar" role="img" aria-label="디자인팀"><span class="ds-avatar__initials" aria-hidden="true">디</span></span><span class="ds-avatar-group__overflow" role="img" aria-label="외 101개">99+</span>
+</div>
+```
+
+## 규격
+
+Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+
+```
+size : 20 / 24 / 36(기본) / 42 / 48 / 56 / 64 / 80 / 96 / 108
+shape: circle(기본) / rounded(크기의 1/4, 곡률 노브 따름) / square
+내용 우선순위: 사진 > 이니셜 > 기본 실루엣(사진/이니셜이 없으면 자동)
+※ 이니셜은 반드시 .ds-avatar__initials 로 감싼다(맨 글자만 넣으면 실루엣과 겹친다).
+※ 사진 로드 실패 시 이니셜로 바꾸는 처리는 개발 영역.
+상태 점(.ds-avatar__status) — 색 + 모양을 함께 써서 색만으로 구분하지 않는다 (WCAG 1.4.1)
+  positive(기본) 온라인   = 초록 꽉 찬 점
+  neutral        자리 비움 = 회색 링
+  critical       방해 금지 = 빨강 점 + 흰 가로줄
+  지름 = 아바타의 26% (최소 8px) / 배경색 링 / circle 은 4시 방향, rounded/square 는 우하단 모서리
+Figma: 원 / 이미지 없을 때 palette/gray-500 / 이니셜 fg/neutral-muted(2026-11-03, 흰 글자에서 바꿈) / 1px ring stroke/neutral-subtle(INSIDE)
+       shape rounded/square 는 badgeMask=none 에만 / status 속성(Avatar Status 인스턴스) / Avatar Group/Group Overflow 세트
+       badge 지름 = 24→10 / 36→14 / 42→16 / 48→18 / 56→20 / 64→22 / 80→28 / 96→32 / 108→36 (우하단)
+```
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/callout.md -->
+
+# Callout
+
+본문 안에서 꼭 알아야 할 정보를 눈에 띄게 알려 주는 컴포넌트입니다.
+
+## 사용법
+
+아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+
+```html
+<div class="ds-callout" data-tone="warning">
+  <i class="ds-icon ds-icon--triangle-alert-solid" aria-hidden="true"></i>
+  <p class="ds-callout__content"><strong class="ds-callout__title">안내</strong>  본문  <a class="ds-callout__link" href="#">자세히</a></p>
+  [<button class="ds-callout__suffix" aria-label="닫기"><i class="ds-icon ds-icon--x"></i></button>]
+</div>
+```
+
+## 속성
+
+Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
+
+| 속성 | 값 |
+| --- | --- |
+| `tone` | neutral informative positive warning critical magic 은 CSS 만 |
+
+## CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-callout-bg` | `var(--ybm-color-bg-neutral)` |
+| `--ds-callout-fg` | `var(--ybm-color-fg-neutral)` |
+
+## 사용 지침
+
+| 구분 | 내용 |
+| --- | --- |
+| **Do** | 앞 아이콘은 채움(Solid) 모양을 씁니다. |
+| **Do** | 제목, 본문, 링크는 한 줄로 이어 쓰고 띄어쓰기 두 칸으로 나눕니다. |
+| **Do** | Banner는 화면 맨 위에 전체 폭으로 한 번에 하나만 띄우는 공지입니다. |
+| **Do** | 본문 안의 안내는 Callout을 씁니다. |
+| **Don't** | 전체를 누르는 Callout에는 링크 글자를 따로 넣지 않습니다. |
+
+## 예시
+
+```html
+<div class="ds-callout"><i class="ds-icon ds-icon--info-solid" aria-hidden="true"></i><p class="ds-callout__content"><strong class="ds-callout__title">안내</strong>  신분증을 꼭 지참해 주세요.</p></div>
+<div class="ds-callout" data-tone="informative"><i class="ds-icon ds-icon--info-solid" aria-hidden="true"></i><p class="ds-callout__content">이벤트 기간은 10월 31일까지예요.  <a class="ds-callout__link" href="#">자세히</a></p></div>
+<div class="ds-callout" data-tone="positive"><i class="ds-icon ds-icon--circle-check-solid" aria-hidden="true"></i><p class="ds-callout__content">결제가 완료됐어요.</p></div>
+<div class="ds-callout" data-tone="warning"><i class="ds-icon ds-icon--triangle-alert-solid" aria-hidden="true"></i><p class="ds-callout__content">잔여 좌석이 얼마 남지 않았어요.</p><button class="ds-callout__suffix" aria-label="닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button></div>
+<div class="ds-callout" data-tone="critical"><i class="ds-icon ds-icon--circle-alert-solid" aria-hidden="true"></i><p class="ds-callout__content">결제에 실패했어요. 다시 시도해 주세요.</p></div>
+```
+
+## 규격
+
+Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+
+```
+tone: neutral(기본) / informative / positive / warning / critical
+Figma: padding x3_5 / gap x2 / min-h50 / shape/md / t04 / 아이콘 Solid 16
+  neutral bg/neutral + fg/neutral(info) / informative bg/informative-weak + fg/brand-contrast(info)
+  positive bg/positive-weak + fg/positive(circle-check) / warning bg/warning-weak + fg/warning(triangle-alert)
+  critical bg/critical-weak + fg/critical(circle-alert)
+제목/링크는 본문과 같은 줄(inline), 구분은 띄어쓰기 두 칸. 제목 Bold / 링크 밑줄.
+```
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/snackbar.md -->
+
+# Snackbar
+
+작업 결과를 화면 아래에 잠깐 띄워 알려 주는 컴포넌트입니다.
+
+## 사용법
+
+아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+
+```html
+<div class="ds-snackbar" role="status" data-variant="positive" data-state="open">
+  <i class="ds-icon ds-icon--circle-check-solid" aria-hidden="true"></i>
+  <span class="ds-snackbar__message">저장했어요</span>
+  [<button type="button" class="ds-snackbar__action">확인</button>]
+</div>
+```
+
+## 속성
+
+Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
+
+| 속성 | 값 |
+| --- | --- |
+| `variant` | default positive critical |
+
+## 사용 지침
+
+| 구분 | 내용 |
+| --- | --- |
+| **Do** | 4초 동안 보이고, 한 번에 하나만 띄웁니다. |
+
+## 예시
+
+```html
+<button class="ds-btn" data-variant="neutralWeak" onclick="YBM.snackbar('저장했어요', { variant: 'positive' })">positive 띄우기</button>
+<button class="ds-btn" data-variant="neutralWeak" onclick="YBM.snackbar('네트워크 연결을 확인해 주세요', { variant: 'critical', action: '다시 시도' })">critical 띄우기</button>
+<button class="ds-btn" data-variant="neutralWeak" onclick="YBM.snackbar('링크를 복사했어요')">default 띄우기</button>
+```
+
+## 규격
+
+Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+
+```
+variant: default / positive / critical
+Figma: padding x2_5(+본문 좌우 x1_5) / min-h44 / max-w560 / shape/sm / bg/neutral-solid / elevation overlay
+       message t04 fg/on-neutral-solid / action t04 Bold / gap x2_5 / 아이콘 Solid 24
+       positive 아이콘 bg/positive-solid / critical 아이콘 bg/critical-solid
+```
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/help-bubble.md -->
+
+# Help Bubble
+
+특정 요소를 가리키며 쓰는 법이나 새 기능을 알려 주는 말풍선입니다.
+
+## 사용법
+
+아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+
+```html
+<div class="ds-helpbubble" role="tooltip" data-placement="bottom-start">
+  <div class="ds-helpbubble__body">
+    <strong class="ds-helpbubble__title">제목</strong>
+    [<p class="ds-helpbubble__desc">부연 설명</p>]
+  </div>
+  [<button class="ds-helpbubble__close" aria-label="닫기"><i class="ds-icon ds-icon--x"></i></button>]
+</div>
+```
+
+## 속성
+
+Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
+
+그 밖에: `--ds-hb-arrow-offset`
+
+## 사용 지침
+
+| 구분 | 내용 |
+| --- | --- |
+| **Do** | Tooltip은 마우스를 올리거나 포커스할 때만 보이고, 터치 화면에서는 안 보입니다. |
+| **Do** | 닫기 버튼이 필요하거나 설명이 여러 줄이면 Help Bubble을 씁니다. |
+
+## 예시
+
+```html
+<div class="ds-helpbubble" role="tooltip"><div class="ds-helpbubble__body"><strong class="ds-helpbubble__title">여기서 배송 상황을 확인해요</strong><p class="ds-helpbubble__desc">상품이 출발하면 바로 볼 수 있어요.</p></div><button class="ds-helpbubble__close" aria-label="닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button></div>
+<div class="ds-helpbubble" role="tooltip" data-placement="bottom-start"><div class="ds-helpbubble__body"><strong class="ds-helpbubble__title">bottom-start</strong></div></div>
+```
+
+## 규격
+
+Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+
+```
+placement: top(기본) / top-start / top-end / bottom / bottom-start / bottom-end / left / left-start / left-end / right / right-start / right-end
+Figma: bg/neutral-solid / shape/lg / padding 10/12 / 본문 gap x0_5 / 최대 글 폭 236
+       title t03 Bold / desc t03 / fg/on-neutral-solid / 꼬리 12×8(가장자리 정렬 시 x3_5 안쪽) / elevation 2
+```
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/menu-menu-item.md -->
+
+# Menu · Menu Item
+
+버튼을 누르면 펼쳐지는 동작 목록입니다. 수정, 삭제처럼 바로 실행할 동작을 모아 둡니다.
+
+## 사용법
+
+아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+
+```html
+<div class="ds-menu" role="menu">
+  <button class="ds-menu-item" role="menuitem"><i class="ds-icon ds-icon--search" aria-hidden="true"></i>공유하기</button>
+  <div class="ds-menu__divider" role="separator"></div>
+  <button class="ds-menu-item" role="menuitem" data-tone="critical">삭제하기</button>
+</div>
+```
+
+## 속성
+
+Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
+
+| 속성 | 값 |
+| --- | --- |
+| `tone` | critical |
+
+## CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-menu-item-fg` | `var(--ybm-color-fg-neutral)` |
+
+## 사용 지침
+
+| 구분 | 내용 |
+| --- | --- |
+| **Do** | 동작을 실행할 때는 Menu, 값을 고를 때는 Select를 씁니다. |
+| **Do** | 삭제, 차단처럼 되돌릴 수 없는 항목은 critical로 두고, 목록 끝에 구분선(Divider)으로 따로 묶습니다. |
+| **Do** | 라벨은 2~6자 동사로 쓰고, 한 메뉴 안에서 말투를 맞춥니다. |
+| **Do** | 설명은 꼭 필요한 항목에만 한 줄로 붙입니다. |
+| **Don't** | 값을 고르는 데는 쓰지 않습니다. 폼에 넣을 값은 Select로 고르고, Menu는 동작을 실행할 때 씁니다. |
+| **Don't** | 아이콘을 일부 항목에만 넣지 마세요. 모든 항목에 넣거나 모두 빼세요. |
+| **Don't** | 라벨 없이 아이콘만 두지 않습니다. |
+
+## 예시
+
+```html
+<div class="ds-menu" role="menu">
+  <button class="ds-menu-item" role="menuitem"><i class="ds-icon ds-icon--external-link" aria-hidden="true"></i>공유하기</button>
+  <button class="ds-menu-item" role="menuitem"><i class="ds-icon ds-icon--file-text" aria-hidden="true"></i>수정하기</button>
+  <div class="ds-menu__divider" role="separator"></div>
+  <button class="ds-menu-item" role="menuitem" data-tone="critical">삭제하기</button>
+</div>
+```
+
+## 규격
+
+Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+
+```
+Figma Menu: 폭 220 / padding x1 / shape/2xl / bg/layer-floating / elevation overlay(+헤어라인)
+           divider 1px stroke/neutral-subtle / 위아래 4
+Figma Item: py10 px12 / gap x2 / shape/sm / 아이콘 18 / t04 fg/neutral
+           pressed bg/neutral-weak-alpha / disabled fg/disabled / critical fg/critical
+```
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/dialog.md -->
+
+# Dialog
+
+화면 위에 창을 띄워 입력이나 확인을 받는 컴포넌트입니다. 꼭 확인받아야 하는 메시지는 Alert Dialog를 씁니다.
+
+## 사용법
+
+아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+
+```html
+<dialog class="ds-dialog" id="dlg" aria-labelledby="dlg-title" [data-size="large"]>
+  <div class="ds-dialog__header">
+    <h2 class="ds-dialog__title" id="dlg-title">제목</h2>
+    [<p class="ds-dialog__desc">설명</p>]
+    [<button class="ds-dialog__close" data-ds-close aria-label="닫기"></button>]
+  </div>
+  <div class="ds-dialog__body">…</div>
+  [<div class="ds-dialog__footer"><button class="ds-btn" data-variant="neutralSolid" data-size="large">확인</button></div>]
+</dialog>
+```
+
+## 속성
+
+Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
+
+그 밖에: size(480/800), `--ds-dialog-width`
+
+## CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-dialog-width` | `480px` |
+| `--ds-dialog-radius` | `var(--ybm-shape-2xl)` |
+| `--ds-dialog-max-height` | `80vh` |
+
+## 사용 지침
+
+| 구분 | 내용 |
+| --- | --- |
+| **Do** | 아래쪽 주요 버튼은 Action Button large(52)를 씁니다. |
+| **Do** | Popover는 버튼 옆에 뜨는 작은 창이고, 바깥을 누르면 닫힙니다. |
+| **Do** | 화면을 막고 확인받아야 할 때는 Dialog를 씁니다. |
+| **Do** | 화면 폭이 768보다 좁으면 Bottom Sheet로 바꿉니다. 머리말, 본문, 버튼 구조는 그대로 둡니다. |
+| **Don't** | 위쪽 닫기 버튼과 아래쪽 취소 버튼을 함께 두지 않습니다. 정보만 보여 줄 때는 위쪽 닫기, 폼이나 설정처럼 주요 동작이 있으면 아래쪽 취소를 둡니다. |
+
+## 예시
+
+```html
+<button class="ds-btn" data-variant="neutralWeak" data-ds-open="pv-dlg">Dialog 열기</button>
+```
+
+## 규격
+
+Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+
+```
+Figma: 폭 480(large 800) / shape/2xl / bg/layer-floating / 그림자 없음(2026-10-01 결정)
+  header 24/20/16/20 / gap x4 / title t07 Bold(Alert Dialog 와 같게, 2026-11-02) fg/neutral / desc t05 fg/neutral-muted
+  body 12/20/16/20 / min-h64 / footer 24/20 / Action Button large 폭 채움
+  닫기 40×40 / 위 18 / 오른쪽 10 / Lucide/x 24 fg/neutral
+```
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/alert-dialog.md -->
+
+# Alert Dialog
+
+하던 일을 잠시 멈추고 중요한 확인을 받는 창입니다.
+
+## 사용법
+
+아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+
+```html
+<dialog class="ds-dialog ds-alertdialog" role="alertdialog" aria-labelledby="a-t" aria-describedby="a-d">
+  <div class="ds-alertdialog__header"><h2 id="a-t" class="ds-alertdialog__title">제목</h2><p id="a-d" class="ds-alertdialog__desc">이 작업은 되돌릴 수 없습니다.</p></div>
+  <div class="ds-alertdialog__footer" data-action="pair">
+    <button class="ds-btn" data-variant="neutralWeak" data-ds-close>취소</button>
+    <button class="ds-btn" data-variant="neutralSolid">확인</button>
+  </div>
+</dialog>
+```
+
+## 속성
+
+Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
+
+| 속성 | 값 |
+| --- | --- |
+| `action` | pair critical nonpreferred |
+
+그 밖에: 272 폭
+
+## 사용 지침
+
+| 구분 | 내용 |
+| --- | --- |
+| **Do** | 되돌릴 수 없는 작업을 확인받을 때 씁니다. |
+| **Do** | 바깥을 눌러도 닫히지 않고 버튼으로만 닫힙니다. |
+
+## 예시
+
+```html
+<button class="ds-btn" data-variant="criticalSolid" data-ds-open="pv-alert">주문 취소</button>
+```
+
+## 규격
+
+Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+
+```
+action(data-action): single(기본) / pair / critical / stacked / nonpreferred
+Figma: 폭 272 / gap x2 / header 20/20/0/20 / gap x1_5 / title t07 Bold / desc t05 fg/neutral-muted
+       footer 16/20/20/20 / 버튼 medium / single/stacked 세로 gap x2 / pair/critical 가로 2등분 gap x2 / nonpreferred 세로 gap x4
+```
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/bottom-sheet.md -->
+
+# Bottom Sheet
+
+화면 아래에서 올라오는 창입니다. 지금 화면을 그대로 둔 채 추가 정보나 동작을 보여 줄 때 씁니다.
+
+## 사용법
+
+아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+
+```html
+<dialog class="ds-bottomsheet" aria-labelledby="bs-t" [data-header-align="center"] [data-handle]>
+  <div class="ds-bottomsheet__header">
+    <h2 class="ds-bottomsheet__title" id="bs-t">제목</h2>
+    [<p class="ds-bottomsheet__desc">설명</p>]
+    [<button class="ds-bottomsheet__close" data-ds-close aria-label="닫기"></button>]
+  </div>
+  <div class="ds-bottomsheet__body">…</div>
+  [<div class="ds-bottomsheet__footer"><button class="ds-btn" data-variant="neutralSolid" data-size="large">확인</button></div>]
+</dialog>
+```
+
+## 속성
+
+Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
+
+| 속성 | 값 |
+| --- | --- |
+| `header-align` | center |
+
+## 사용 지침
+
+| 구분 | 내용 |
+| --- | --- |
+| **Do** | 몇 가지 동작 중 하나를 고를 때는 Menu Sheet, 입력이나 긴 내용은 Bottom Sheet를 씁니다. |
+| **Do** | 되돌릴 수 없는 동작은 critical로 따로 묶습니다. |
+| **Do** | PC 화면 옆에 보조 내용이나 필터를 둘 때 Side Panel을 씁니다. |
+| **Do** | 화면이 좁으면 Bottom Sheet로 바꿉니다. |
+
+## 예시
+
+```html
+<button class="ds-btn" data-variant="neutralWeak" data-ds-open="pv-bs">Bottom Sheet 열기</button>
+```
+
+## 규격
+
+Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+
+```
+headerAlign: left(기본) / center   handle: data-handle
+Figma: 폭 채움 / 위쪽 shape/3xl / bg/layer-floating
+  header 24/20/16/20 / gap x2 / title t07 SemiBold / desc t05 fg/neutral-muted
+  body 12/20/16/20 / min-h64 / footer 16/20/24/20 / 닫기 40×40(위 18 / 오른쪽 10) / handle 36×4 palette/gray-400 (위 6)
+```
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/accordion.md -->
+
+# Accordion
+
+제목을 누르면 내용이 펼쳐지는 컴포넌트입니다. 긴 정보를 짧게 정리해 보여 줄 때 씁니다.
+
+## 사용법
+
+아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+
+```html
+<details class="ds-accordion" [data-variant="separated"] [data-size="large"]>
+  <summary class="ds-accordion__trigger">
+    [<i class="ds-icon ds-icon--… " aria-hidden="true"></i>]
+    <span class="ds-accordion__body"><span class="ds-accordion__title">항목</span>[<span class="ds-accordion__desc">설명</span>]</span>
+  </summary>
+  <div class="ds-accordion__content">내용</div>
+</details>
+```
+
+## 속성
+
+Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
+
+| 속성 | 값 |
+| --- | --- |
+| `variant` | separated |
+| 켜고 끄는 속성 | `size` |
+
+## 사용 지침
+
+| 구분 | 내용 |
+| --- | --- |
+| **Do** | 항목을 2개 이상 둡니다. 하나만 따로 쓰지 않습니다. |
+| **Do** | 누르는 영역은 화살표 아이콘이 아니라 제목 줄 전체입니다. |
+| **Do** | 하나만 열리게 할지 여러 개 열리게 할지 정해서 화면 전체에 똑같이 적용합니다. |
+| **Do** | 크기는 모바일에서 medium, PC에서 large를 씁니다. |
+| **Don't** | inline(이어진 목록)과 separated(따로 떨어진 카드)를 한 화면에서 섞지 않습니다. |
+| **Don't** | 펼친 내용 안에 스크롤을 넣지 않습니다. 내용이 길면 따로 페이지를 만드세요. |
+
+## 예시
+
+```html
+<details class="ds-accordion" open><summary class="ds-accordion__trigger"><span class="ds-accordion__body"><span class="ds-accordion__title">배송은 얼마나 걸리나요?</span></span></summary><div class="ds-accordion__content">주문 뒤 2~3일 안에 받을 수 있어요.</div></details>
+<details class="ds-accordion"><summary class="ds-accordion__trigger"><span class="ds-accordion__body"><span class="ds-accordion__title">환불은 언제까지 가능한가요?</span><span class="ds-accordion__desc">주문, 환불</span></span></summary><div class="ds-accordion__content">상품을 받은 날부터 7일 안에 할 수 있어요.</div></details>
+```
+
+## 규격
+
+Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+
+```
+variant: inline(기본) / separated   size: medium(기본) / large
+Figma medium: trigger 16 사방 / gap x3 / title t05 Medium / desc t03 fg/neutral-subtle / chevron 20 fg/neutral
+              content 0/16/16/16 / t04 fg/neutral-subtle
+Figma large : trigger py20 / title t06 Medium / desc t04 / chevron 24 / content t05
+  inline 하단 1px stroke/neutral-weak / separated 1px 사방 + shape/lg + bg/layer-default
+  disabled(aria-disabled) 글자/아이콘 fg/disabled
+```
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/skeleton.md -->
+
+# Skeleton
+
+내용을 불러오는 동안 들어갈 자리를 미리 보여 주는 컴포넌트입니다. 기다리는 시간을 덜 지루하게 합니다.
+
+## 사용법
+
+아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+
+```html
+<span class="ds-skeleton" style="width:220px;height:16px"></span>
+<span class="ds-skeleton" data-shape="circle" style="--ds-skeleton-size:48px"></span>
+<span class="ds-skeleton" data-shape="text" data-lines="3"></span>
+```
+
+## 속성
+
+Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
+
+| 속성 | 값 |
+| --- | --- |
+| `shape` | rect circle text |
+
+## CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-skeleton-color` | `var(--ybm-color-palette-gray-200)` |
+| `--ds-skeleton-size` | `48px` |
+
+## 사용 지침
+
+| 구분 | 내용 |
+| --- | --- |
+| **Do** | 목록이나 카드처럼 곧 나타날 모양을 미리 보여 줄 수 있는 곳에 씁니다. |
+| **Do** | 모서리는 나중에 들어올 콘텐츠와 똑같이 맞춥니다. |
+| **Do** | 1~10초 걸리고 모양을 미리 보여 줄 수 있으면 Skeleton, 1~4초 동안 기다린다는 것만 알리면 Progress Circle을 씁니다. |
+| **Don't** | Progress Circle과 함께 쓰지 않습니다. 같은 로딩을 두 번 알리게 됩니다. |
+
+## 예시
+
+```html
+<span class="ds-skeleton" data-shape="circle" style="--ds-skeleton-size:48px"></span><span class="ds-skeleton" style="width:220px;height:16px"></span><span class="ds-skeleton" data-shape="text" data-lines="3" style="width:240px"></span>
+```
+
+## 규격
+
+Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+
+```
+shape: rectangle(기본) / circle / text
+Figma: palette/gray-200 / rectangle shape/sm / circle pill / text 줄 높이 14 / 줄 사이 x2 / 마지막 줄 64%
+```
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/slider.md -->
+
+# Slider
+
+막대를 끌어서 범위 안의 값을 정하는 컴포넌트입니다.
+
+## 사용법
+
+아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+
+```html
+<input type="range" class="ds-slider" min="0" max="100" value="45" [data-tone="brand"]>
+```
+
+## 속성
+
+Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
+
+| 속성 | 값 |
+| --- | --- |
+| 켜고 끄는 속성 | `tone` |
+
+## CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-slider-value` | `50%` |
+| `--ds-slider-active` | `var(--ybm-color-bg-neutral-solid)` |
+| `--ds-slider-thumb-line` | `var(--ybm-color-bg-neutral-solid)` |
+
+## 사용 지침
+
+| 구분 | 내용 |
+| --- | --- |
+| **Do** | 누르는 영역은 손잡이뿐 아니라 막대 전체입니다. 막대를 누르면 그 자리로 바로 옮겨 갑니다. |
+| **Do** | 값이 이어지는 슬라이더는 부드럽게 움직이고, 단계가 있는 슬라이더는 가장 가까운 단계에 맞춰 멈춥니다. |
+| **Do** | 알맞은 기본값을 미리 넣어 사용자의 수고와 실수를 줄입니다. |
+| **Do** | 움직이는 동안 지금 값을 보여 줍니다. |
+
+## 예시
+
+```html
+<input type="range" class="ds-slider" min="0" max="100" value="45" aria-label="neutral"><input type="range" class="ds-slider" min="0" max="100" value="70" data-tone="brand" aria-label="brand">
+```
+
+## 규격
+
+Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+
+```
+tone: neutral(기본) / brand
+채움 길이는 --ds-slider-value(0~100%) — ybm-ds.js 가 input 마다 자동으로 갱신한다.
+Figma: 높이 20 / 트랙 4 pill palette/gray-200 / 채움 bg/neutral-solid(brand bg/brand-solid)
+       썸 20 static-white + 1px 테두리(채움 색) + elevation raised
+       disabled opacity .7 / 채움 bg/disabled / 썸 테두리 stroke/neutral-weak
+```
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/progress.md -->
+
+# Progress
+
+작업이 얼마나 진행됐는지 막대로 보여 주는 컴포넌트입니다.
+
+## 사용법
+
+아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+
+```html
+<div class="ds-progress" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"
+     style="--ds-progress-value: 40%" [data-tone="neutral"] [data-size="small"]></div>
+```
+
+## 속성
+
+Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
+
+| 속성 | 값 |
+| --- | --- |
+| 켜고 끄는 속성 | `size` `tone` |
+
+## CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-progress-value` | `0%` |
+| `--ds-progress-track` | `var(--ybm-color-palette-brand-200)` |
+| `--ds-progress-range` | `var(--ybm-color-bg-brand-solid)` |
+
+## 사용 지침
+
+| 구분 | 내용 |
+| --- | --- |
+| **Do** | "3/10", "40%"처럼 값을 글자로 막대 위나 옆에 함께 적습니다. 막대만으로는 정확한 숫자가 전해지지 않습니다. |
+| **Do** | 화면의 대표 진행률은 brand, 목록 안이나 보조 진행률은 neutral을 씁니다. |
+| **Do** | 0%일 때도 바탕 막대(track)는 보여서 진행 막대라는 것을 알 수 있게 합니다. |
+| **Do** | 화면 읽기 프로그램을 위해 role="progressbar"와 aria-valuenow, aria-valuemin, aria-valuemax를 붙이고, 라벨이 없으면 aria-label을 붙입니다. |
+
+## 예시
+
+```html
+<div class="ds-progress" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" aria-label="진행률" style="--ds-progress-value: 40%"></div>
+<div class="ds-progress" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" aria-label="진행률" style="--ds-progress-value: 75%" data-tone="neutral" data-size="small"></div>
+```
+
+## 규격
+
+Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+
+```
+tone: brand(기본) / neutral   size: medium(기본 8) / small 4
+Figma: 트랙 palette/brand-200(neutral palette/gray-200) / 채움 bg/brand-solid(neutral bg/neutral-solid) / pill
+```
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/progress-circle.md -->
+
+# Progress Circle
+
+작업이 진행 중인 것을 원으로 보여 주는 컴포넌트입니다.
+
+## 사용법
+
+아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+
+```html
+<span class="ds-progress-circle" data-size="40" data-tone="brand" role="progressbar" aria-valuenow="40" style="--ds-progress-value: 40">
+  <svg viewBox="0 0 40 40" aria-hidden="true"><circle class="ds-progress-circle__track" pathLength="100"/><circle class="ds-progress-circle__range" pathLength="100"/></svg>
+</span>
+```
+
+## 속성
+
+Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
+
+| 속성 | 값 |
+| --- | --- |
+| `tone` | neutral brand staticWhite |
+| `type` | determinate indeterminate |
+| 켜고 끄는 속성 | `size` |
+
+## CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-progress-value` | `40` |
+
+## 사용 지침
+
+| 구분 | 내용 |
+| --- | --- |
+| **Do** | 로딩은 Progress Circle의 indeterminate로 보여 줍니다. |
+| **Do** | Spinner 부품은 따로 없습니다. |
+| **Do** | staticWhite는 어두운 배경이나 사진 위에서만 씁니다. |
+| **Do** | determinate는 진행률을 실제로 알 수 있을 때만 씁니다. 모를 때는 indeterminate를 씁니다. |
+
+## 예시
+
+```html
+<span class="ds-progress-circle" role="progressbar" aria-label="불러오는 중" data-type="indeterminate"><svg viewBox="0 0 40 40" aria-hidden="true"><circle class="ds-progress-circle__track" pathLength="100"/><circle class="ds-progress-circle__range" pathLength="100"/></svg></span>
+<span class="ds-progress-circle" data-size="40" data-tone="brand" role="progressbar" aria-valuenow="40" aria-label="40%" style="--ds-progress-value: 40"><svg viewBox="0 0 40 40" aria-hidden="true"><circle class="ds-progress-circle__track" pathLength="100"/><circle class="ds-progress-circle__range" pathLength="100"/></svg></span>
+<span class="ds-progress-circle" data-size="56" data-tone="brand" role="progressbar" aria-valuenow="75" aria-label="75%" style="--ds-progress-value: 75"><svg viewBox="0 0 40 40" aria-hidden="true"><circle class="ds-progress-circle__track" pathLength="100"/><circle class="ds-progress-circle__range" pathLength="100"/></svg></span>
+```
+
+## 규격
+
+Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+
+```
+tone: neutral(기본) / brand / staticWhite   size: 24(기본) / 40 / 56   type: determinate / indeterminate
+  indeterminate: data-type="indeterminate" (회전하는 25% 호)
+Figma: 두께 24→3 / 40→5 / 56→7 / 둥근 끝 / 12시 시작
+  neutral 트랙 palette/gray-200 + 호 palette/gray-500 / brand palette/brand-200 + bg/brand-solid
+  staticWhite palette/static-white-alpha-300 + palette/static-white (팔레트 직참은 의도된 예외)
+```
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/floating-action-button.md -->
+
+# Floating Action Button
+
+화면 위에 떠 있으면서 그 화면에서 가장 중요한 동작 하나를 실행하는 버튼입니다.
+
+## 사용법
+
+아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+
+```html
+<button class="ds-fab"><i class="ds-icon ds-icon--plus" aria-hidden="true"></i>글쓰기</button>
+<button class="ds-fab" data-layout="iconOnly" aria-label="글쓰기"><i class="ds-icon ds-icon--plus"></i></button>
+```
+
+## 속성
+
+Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
+
+| 속성 | 값 |
+| --- | --- |
+| `layout` | iconOnly extended=false |
+
+## 사용 지침
+
+| 구분 | 내용 |
+| --- | --- |
+| **Do** | 쓸 수 없으면 버튼을 숨깁니다. |
+| **Do** | 한 화면에 하나만 둡니다. 두 개 이상이면 무엇이 주요 동작인지 알기 어렵습니다. |
+| **Do** | extended에는 라벨을 꼭 넣습니다. |
+| **Do** | 버튼이 내용을 가리므로 화면 아래에 버튼 높이만큼 여백을 두세요. |
+| **Don't** | disabled 상태로 두지 않습니다. 쓸 수 없는 동작이면 버튼을 숨깁니다. |
+
+## 예시
+
+```html
+<button class="ds-fab" style="position:static"><i class="ds-icon ds-icon--plus" aria-hidden="true"></i>글쓰기</button><button class="ds-fab" data-layout="iconOnly" aria-label="글쓰기" style="position:static"><i class="ds-icon ds-icon--plus" aria-hidden="true"></i></button>
+```
+
+## 규격
+
+Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+
+```
+Figma extended: h48 / px18 / gap x1 / 아이콘 16 / t05 Bold / iconOnly 56×56 / 아이콘 24
+       shape/pill / bg/brand-solid(pressed -pressed) / 글자/아이콘 fg/on-brand-solid / elevation floating
+```
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/date-picker-date-cell.md -->
+
+# Date Picker · Date Cell
+
+달력에서 날짜를 선택하는 컴포넌트입니다.
+
+## 사용법
+
+아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+
+```html
+<div class="ds-datepicker">
+  <div class="ds-datepicker__header">
+    <button class="ds-datepicker__nav" aria-label="이전 달"><i class="ds-icon ds-icon--chevron-left ds-icon--lg"></i></button>
+    <strong class="ds-datepicker__title">2026년 8월</strong>
+    <button class="ds-datepicker__nav" aria-label="다음 달"><i class="ds-icon ds-icon--chevron-right ds-icon--lg"></i></button>
+  </div>
+  <div class="ds-datepicker__weekdays"><span>일</span>…<span>토</span></div>
+  <div class="ds-datepicker__grid" role="grid">
+    <button class="ds-date-cell" data-state="today|selected|range-start|range-middle|range-end" [disabled]>15</button> × 42
+  </div>
+</div>
+```
+
+## 속성
+
+Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
+
+| 속성 | 값 |
+| --- | --- |
+| `cell state` | today selected range-start range-middle range-end |
+
+## CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-date-pill-bg` | `transparent` |
+| `--ds-date-pill-line` | `transparent` |
+| `--ds-date-track` | `transparent` |
+
+## 사용 지침
+
+| 구분 | 내용 |
+| --- | --- |
+| **Do** | 날짜 고르기가 화면의 주된 일이거나 단계별 흐름의 한 단계면 화면에 바로 둡니다. 폼의 입력 칸을 눌러 고를 때는 Bottom Sheet 안에 넣습니다. |
+| **Do** | 여는 버튼은 Select Trigger, Text Field Input, Field Button 중 하나를 씁니다. |
+| **Do** | 처음에는 오늘이 있는 달을 보여 주고, 이미 고른 날짜가 있으면 그 달을 보여 줍니다. |
+| **Do** | 기간의 최소, 최대 조건은 Callout으로 미리 알려 줍니다. 시작일만 고른 상태에서는 확인 버튼을 끕니다. |
+| **Do** | 오늘이 선택된 날짜이기도 하면 선택 모양을 먼저 보여 줍니다. |
+
+## 예시
+
+```html
+<div class="ds-datepicker">
+  <div class="ds-datepicker__header"><button class="ds-datepicker__nav" aria-label="이전 달"><i class="ds-icon ds-icon--chevron-left ds-icon--lg" aria-hidden="true"></i></button><strong class="ds-datepicker__title">2026년 10월</strong><button class="ds-datepicker__nav" aria-label="다음 달"><i class="ds-icon ds-icon--chevron-right ds-icon--lg" aria-hidden="true"></i></button></div>
+  <div class="ds-datepicker__weekdays"><span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span></div>
+  <div class="ds-datepicker__grid" role="grid" id="pv-cal"></div>
+</div>
+```
+
+## 규격
+
+Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+
+```
+selection: single / range
+Figma: 폭 320 / padding x5 / gap x3 / shape/2xl / bg/layer-default / elevation overlay(+헤어라인)
+  header h40 / 이동 버튼 24 폭 / chevron 24 fg/neutral / title t06 Bold 가운데
+  요일 t04 fg/neutral-subtle / 셀 40×44 / pill 32×32 shape/xl / label t05
+  today pill 1px stroke/brand-solid + fg/brand Medium / selected pill bg/brand-solid + fg/on-brand-solid Medium
+  range 띠 bg/brand-weak 32 높이 (start 오른쪽 절반 / end 왼쪽 절반 / middle 전체, middle 글자 fg/brand) / disabled fg/disabled
+```
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/bottom-navigation.md -->
+
+# Bottom Navigation
+
+앱 화면 아래에서 주요 메뉴 사이를 오가는 컴포넌트입니다.
+
+## 사용법
+
+아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+
+```html
+<nav class="ds-bottomnav" aria-label="주요 메뉴">
+  <a class="ds-bottomnav__item" href="#" aria-current="page">
+    <span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--house-solid ds-icon--lg"></i>[<span class="ds-bottomnav__badge--dot"></span>]</span>
+    <span class="ds-bottomnav__label">홈</span>
+  </a>
+</nav>
+```
+
+## 속성
+
+Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
+
+그 밖에: 뱃지 `__badge--dot/--count` (bg/critical-solid)
+
+## 사용 지침
+
+| 구분 | 내용 |
+| --- | --- |
+| **Do** | 탭은 3~5개, 라벨은 한글 5자(영문 10자) 안으로 씁니다. |
+| **Do** | 아이콘은 채움(Solid) 모양을 씁니다. |
+| **Do** | 배지 숫자는 1~99까지 쓰고, 100 이상은 `99+`로, 0이면 숨깁니다. |
+| **Don't** | 숫자 배지를 세 개 넘게 한꺼번에 띄우지 않습니다. |
+
+## 예시
+
+```html
+<nav class="ds-bottomnav" aria-label="주요 메뉴" style="position:static">
+  <a class="ds-bottomnav__item" href="#" aria-current="page"><span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--house-solid ds-icon--lg" aria-hidden="true"></i></span><span class="ds-bottomnav__label">홈</span></a>
+  <a class="ds-bottomnav__item" href="#"><span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--calendar ds-icon--lg" aria-hidden="true"></i><span class="ds-bottomnav__badge--dot"></span></span><span class="ds-bottomnav__label">일정</span></a>
+  <a class="ds-bottomnav__item" href="#"><span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--file-text ds-icon--lg" aria-hidden="true"></i></span><span class="ds-bottomnav__label">알림</span></a>
+  <a class="ds-bottomnav__item" href="#"><span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--menu ds-icon--lg" aria-hidden="true"></i></span><span class="ds-bottomnav__label">전체</span></a>
+</nav>
+```
+
+## 규격
+
+Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+
+```
+Figma: bg/layer-default / 상단 1px stroke/neutral-muted / 항목 높이 51 / padding 4/2 / gap 2 / 아이콘 24(Solid)
+  label Static t01 SemiBold / 선택 아이콘 fg/brand + 라벨 fg/neutral / 미선택 fg/neutral-subtle / disabled fg/disabled
+  뱃지 bg/critical-solid + 1.5px bg/layer-default 테두리 / dot 6 / count 최소 18 / Static t01 Bold static-white
+  안쪽 최대 폭 480 / 하단 safe area
+```
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/side-navigation.md -->
+
+# Side Navigation
+
+PC 화면 왼쪽에 두는 메뉴로, 화면 사이를 오갈 때 씁니다.
+
+## 사용법
+
+아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+
+```html
+<nav class="ds-sidenav" aria-label="메뉴" [data-collapsed]>
+  <div class="ds-sidenav__header"><button class="ds-sidenav__trigger" aria-label="메뉴 접기"><i class="ds-icon ds-icon--panel-left"></i></button></div>
+  <div class="ds-sidenav__content">
+    <div class="ds-sidenav__group">
+      [<div class="ds-sidenav__group-label">그룹</div>]
+      <a class="ds-sidenav__item" href="#" aria-current="page">
+        <span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--house-solid"></i></span>
+        <span class="ds-sidenav__label">메뉴</span>
+        [<i class="ds-icon ds-icon--chevron-down ds-icon--sm ds-sidenav__suffix"></i>]
+      </a>
+    </div>
+  </div>
+  <div class="ds-sidenav__footer">…</div>
+</nav>
+```
+
+## 속성
+
+Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
+
+그 밖에: expanded 240, collapsed 56
+
+## 사용 지침
+
+| 구분 | 내용 |
+| --- | --- |
+| **Do** | 화면 폭이 1280 이상이면 펼치고, 768 이상이면 접고, 그보다 좁으면 서랍(Drawer)으로 바꿉니다. |
+| **Do** | 하위 메뉴가 있는 항목은 눌러도 이동하지 않고 펼치거나 접기만 합니다. 하위 메뉴가 선택돼 있으면 부모 항목은 펼쳐 둡니다. |
+| **Do** | 메뉴 이름은 짧게 씁니다. |
+| **Don't** | 하위 메뉴가 없는 항목은 누르면 바로 이동하고, 화살표를 달지 않습니다. |
+
+## 예시
+
+```html
+<nav class="ds-sidenav" aria-label="메뉴">
+  <div class="ds-sidenav__header"><button class="ds-sidenav__trigger" aria-label="메뉴 접기" onclick="this.closest('.ds-sidenav').toggleAttribute('data-collapsed')"><i class="ds-icon ds-icon--panel-left" aria-hidden="true"></i></button></div>
+  <div class="ds-sidenav__content"><div class="ds-sidenav__group">
+    <div class="ds-sidenav__group-label">쇼핑</div>
+    <a class="ds-sidenav__item" href="#" aria-current="page"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--house-solid" aria-hidden="true"></i></span><span class="ds-sidenav__label">홈</span></a>
+    <a class="ds-sidenav__item" href="#"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--calendar" aria-hidden="true"></i></span><span class="ds-sidenav__label">주문 내역</span></a>
+    <a class="ds-sidenav__item" href="#"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--file-text" aria-hidden="true"></i></span><span class="ds-sidenav__label">배송 조회</span><i class="ds-icon ds-icon--chevron-down ds-icon--sm ds-sidenav__suffix" aria-hidden="true"></i></a>
+  </div></div>
+</nav>
+```
+
+## 규격
+
+Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+
+```
+collapsed: data-collapsed (240 → 56)
+Figma: bg/canvas / header h64 padding x2(트리거 40 shape/sm / panel-left 20 fg/neutral-subtle 오른쪽 정렬)
+  content padding 8/8/24/8 / 그룹 사이 x2 / group label padding x1_5 / Static t04 Bold fg/neutral-muted
+  item h44 / px x2(접힘 x2_5 / 폭 40) / gap x3 / shape/sm / prefix 20 / label Static t04 Medium fg/neutral-muted / 아이콘 fg/neutral-subtle
+  current bg/neutral-weak-alpha + 글자/아이콘 fg/neutral / disabled fg/disabled / suffix 16
+```
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/card.md -->
+
+# Card
+
+관련된 정보를 한 덩어리로 묶어 보여 주는 컴포넌트입니다.
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/empty.md -->
+
+# Empty
+
+보여 줄 내용이 없을 때 그 이유와 다음에 할 일을 알려 주는 컴포넌트입니다.
+
+## 사용법
+
+아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+
+```html
+<div class="ds-empty" [data-size="small"]>
+  <span class="ds-empty__media"><i class="ds-icon ds-icon--inbox" aria-hidden="true"></i></span>
+  <p class="ds-empty__title">아직 내역이 없어요</p>
+  [<p class="ds-empty__desc">조건을 바꾸거나 새로 추가해 보세요.</p>]
+  [<div class="ds-empty__actions"><button class="ds-btn" data-variant="neutralWeak">새로 추가하기</button></div>]
+</div>
+```
+
+## 속성
+
+Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
+
+| 속성 | 값 |
+| --- | --- |
+| 켜고 끄는 속성 | `size` |
+
+## CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-empty-media` | `56px` |
+| `--ds-empty-icon` | `28px` |
+
+## 사용 지침
+
+| 구분 | 내용 |
+| --- | --- |
+| **Do** | 제목에는 지금 상황을, 설명에는 다음에 할 일을 적습니다. 오류는 Empty 대신 Callout(critical)이나 Result Section으로 알립니다. |
+| **Do** | 버튼은 없거나 하나가 기본이고, 많아도 두 개까지 둡니다. |
+| **Do** | 아이콘은 상황에 맞게 바꿉니다. |
+| **Do** | 카드나 목록 안의 좁은 자리에는 small을 씁니다. |
+
+## 예시
+
+```html
+<div class="ds-empty"><span class="ds-empty__media"><i class="ds-icon ds-icon--inbox" aria-hidden="true"></i></span><p class="ds-empty__title">아직 주문 내역이 없어요</p><p class="ds-empty__desc">마음에 드는 상품을 찾아보세요.</p><div class="ds-empty__actions"><button class="ds-btn" data-variant="neutralWeak">둘러보기</button></div></div>
+```
+
+## 규격
+
+Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+
+```
+size: medium(기본) / small
+Figma medium: padding 40/16 / gap x4 / media 56(아이콘 28) / title t06 Bold / desc t04 / actions 위 x2 / 버튼 medium
+      small : padding 24/16 / gap x3 / media 40(아이콘 20) / title t05 Bold / desc t03 / actions 위 x1 / 버튼 small
+  media bg/neutral-muted + 아이콘 fg/neutral-subtle / title fg/neutral / desc fg/neutral-subtle / 가운데 정렬
+```
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/pagination.md -->
+
+# Pagination
+
+여러 페이지로 나뉜 목록에서 페이지를 넘기는 컴포넌트입니다.
+
+## 사용법
+
+아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+
+```html
+<nav class="ds-pagination" aria-label="페이지">
+  <a class="ds-pagination__item" data-type="first" aria-label="첫 페이지" aria-disabled="true"></a>
+  <a class="ds-pagination__item" data-type="prev"  aria-label="이전 페이지" aria-disabled="true"></a>
+  <a class="ds-pagination__item" href="?p=1" aria-current="page">1</a>
+  <a class="ds-pagination__item" href="?p=2">2</a>
+  <span class="ds-pagination__item" data-type="ellipsis" aria-hidden="true"></span>
+  <a class="ds-pagination__item" href="?p=10">10</a>
+  <a class="ds-pagination__item" data-type="next" href="?p=2" aria-label="다음 페이지"></a>
+  <a class="ds-pagination__item" data-type="last" href="?p=10" aria-label="마지막 페이지"></a>
+</nav>
+simple: <nav class="ds-pagination" data-type="simple"> prev · <span class="ds-pagination__indicator"><b>3</b> / 10</span> · next
+```
+
+## 속성
+
+Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
+
+| 속성 | 값 |
+| --- | --- |
+| `type` | first prev next last ellipsis simple |
+
+## 사용 지침
+
+| 구분 | 내용 |
+| --- | --- |
+| **Do** | 번호는 지금 페이지를 포함해 5개(넓으면 7개)까지 보이고, 나머지는 말줄임표로 줄입니다. 첫 번호와 마지막 번호는 늘 보이게 둡니다. |
+| **Do** | 목록 아래 가운데에 둡니다. 페이지를 옮기면 목록 맨 위로 올라갑니다. |
+| **Do** | 지금 페이지 번호는 누를 수 없게 두고 aria-current="page"를 붙입니다. |
+| **Do** | 첫 페이지의 처음, 이전 버튼과 마지막 페이지의 다음, 마지막 버튼은 숨기지 않고 꺼 둡니다. |
+| **Do** | 화살표 버튼에는 aria-label을 꼭 붙입니다. |
+| **Don't** | 끝없이 이어지는 피드나 "더 보기"가 어울리는 목록에는 쓰지 않습니다. |
+
+## 예시
+
+```html
+<nav class="ds-pagination" aria-label="페이지"><a class="ds-pagination__item" data-type="first" aria-label="첫 페이지" aria-disabled="true"></a><a class="ds-pagination__item" data-type="prev" aria-label="이전 페이지" aria-disabled="true"></a><a class="ds-pagination__item" href="#" aria-current="page">1</a><a class="ds-pagination__item" href="#">2</a><a class="ds-pagination__item" href="#">3</a><span class="ds-pagination__item" data-type="ellipsis" aria-hidden="true"></span><a class="ds-pagination__item" href="#">10</a><a class="ds-pagination__item" data-type="next" href="#" aria-label="다음 페이지"></a><a class="ds-pagination__item" data-type="last" href="#" aria-label="마지막 페이지"></a></nav>
+<nav class="ds-pagination" data-type="simple" aria-label="페이지"><a class="ds-pagination__item" data-type="prev" href="#" aria-label="이전 페이지"></a><span class="ds-pagination__indicator"><b>3</b> / 10</span><a class="ds-pagination__item" data-type="next" href="#" aria-label="다음 페이지"></a></nav>
+```
+
+## 규격
+
+Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+
+```
+type: full(기본) / simple
+Figma item: 36(높이/최소 폭) / px x2 / shape/sm / 숫자 t04 Medium fg/neutral-muted / 화살표 20 fg/neutral / ellipsis 16 fg/neutral-subtle
+  pressed bg/transparent-pressed / current bg/neutral-solid + fg/on-neutral-solid t04 Bold / disabled 화살표 fg/disabled
+  full gap x1 / simple gap x3 / indicator 현재 t04 Bold fg/neutral + "/ 전체" t04 fg/neutral-subtle
+```
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/table.md -->
+
+# Table
+
+여러 항목을 같은 기준으로 나란히 놓고 비교하는 표입니다.
+
+## 사용법
+
+아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+
+```html
+<div class="ds-table-wrap">            ← 열이 넘치면 가로 스크롤
+  <table class="ds-table" [data-density="compact"]>
+    <thead><tr><th scope="col">선택</th><th scope="col">제목</th><th scope="col" data-align="end">금액</th></tr></thead>
+    <tbody>
+      <tr class="ds-table__group"><td colspan="3">묶음 이름</td></tr>        ← 묶음 행(선택)
+      <tr [aria-selected="true"] [data-interactive]>
+        <td><label class="ds-checkbox">…</label></td>                         ← 체크박스만 든 칸은 폭 52 고정
+        <td><span class="ds-table__stack"><span>제목</span><span>보조 글</span></span></td>  ← 두 줄 칸
+        <td data-align="end">10,000원</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+```
+
+## 속성
+
+Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
+
+| 속성 | 값 |
+| --- | --- |
+| `density` | compact |
+| 켜고 끄는 속성 | `align` |
+
+## CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-table-head-h` | `44px` |
+| `--ds-table-row-h` | `56px` |
+| `--ds-table-line` | `var(--ybm-color-stroke-neutral-muted)` |
+
+## 사용 지침
+
+| 구분 | 내용 |
+| --- | --- |
+| **Do** | 열은 모바일에서 3개, PC에서 6개 안팎까지 둡니다. 넘치면 가로로 밀어 보게 하고, 모바일에서 열이 많으면 표 대신 Card 목록으로 바꿉니다. |
+| **Do** | 표에는 꼭 머리 줄을 둡니다(thead와 th scope="col"). |
+| **Do** | 데이터가 없을 때는 머리 줄 아래에 Empty(small)를 표 전체 폭으로 둡니다. |
+| **Do** | 마우스를 올렸을 때 색이 바뀌는 효과는 줄을 눌러 상세로 가는 표에서만 씁니다. |
+| **Do** | 글은 왼쪽, 숫자와 금액은 오른쪽, 번호나 날짜나 상태처럼 짧고 길이가 같은 값은 가운데에 맞춥니다. |
+| **Don't** | 한 표 안에서 density를 섞지 않습니다. 데이터가 많은 관리 화면은 compact, 일반 사용자 화면은 default를 씁니다. |
+| **Don't** | 한 칸에 두 줄 넘게 넣지 않습니다. 긴 글은 말줄임하고 상세 화면에서 보여 줍니다. |
+
+## 예시
+
+```html
+<div class="ds-table-wrap">
+  <table class="ds-table">
+    <thead><tr><th scope="col" data-align="center" style="width:72px">번호</th><th scope="col">제목</th><th scope="col" data-align="center" style="width:120px">등록일</th></tr></thead>
+    <tbody>
+      <tr data-interactive><td data-align="center">12</td><td>11월 배송 일정 안내</td><td data-align="center">2026.10.22</td></tr>
+      <tr data-interactive aria-selected="true"><td data-align="center">11</td><td>추가 할인 이벤트 공지</td><td data-align="center">2026.10.18</td></tr>
+      <tr data-interactive><td data-align="center">10</td><td>영수증 발급 방법 변경 안내</td><td data-align="center">2026.10.10</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="ds-table-wrap">
+  <table class="ds-table">
+    <thead><tr><th scope="col"><label class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control" aria-label="모든 행 선택"></label></th><th scope="col">주문</th><th scope="col">상태</th><th scope="col" data-align="end">금액</th></tr></thead>
+    <tbody>
+      <tr class="ds-table__group"><td colspan="4">오늘</td></tr>
+      <tr><td><label class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control" aria-label="주문 1042 선택"></label></td><td><span class="ds-table__stack"><span>무선 이어폰 외 1건</span><span>주문 1042</span></span></td><td><span class="ds-badge" data-tone="informative">배송 준비</span></td><td data-align="end">128,000원</td></tr>
+      <tr><td><label class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control" aria-label="주문 1041 선택" checked></label></td><td><span class="ds-table__stack"><span>텀블러 500ml</span><span>주문 1041</span></span></td><td><span class="ds-badge" data-tone="positive">배송 중</span></td><td data-align="end">24,900원</td></tr>
+      <tr class="ds-table__group"><td colspan="4">어제</td></tr>
+      <tr><td><label class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control" aria-label="주문 1038 선택"></label></td><td><span class="ds-table__stack"><span>여행용 파우치 세트</span><span>주문 1038</span></span></td><td><span class="ds-badge">배송 완료</span></td><td data-align="end">39,000원</td></tr>
+    </tbody>
+  </table>
+</div>
+```
+
+## 규격
+
+Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+
+```
+density: default(기본) / compact
+2026-11-03 개편(템플릿 표 기준과 같게): 위 진한 선 하나 + 머리줄 바탕 없음 + 행 사이 옅은 선
+Figma: 표 위 1px stroke/neutral-solid / 칸 아래 1px stroke/neutral-muted / header 바탕 없음
+  높이 header 44 / body 56 (compact 44 / 48) / 칸 좌우 x3, 양 끝 칸 x4 / 한 줄 말줄임
+  header t03 Regular fg/neutral-subtle / body t04 fg/neutral / 두 줄 칸 아래 줄 t02 fg/neutral-subtle
+  묶음 행 44 bg/neutral-weak-alpha + SemiBold / hover(data-interactive 행만) bg/neutral-weak-alpha / selected bg/brand-weak
+  정렬: 글 start(기본) / 숫자 end / 짧은 고정 길이 값(번호/날짜/상태) center → data-align (right 는 end 와 같음)
+  선은 칸 border 로 그린다(행 그림자는 칸에 바탕을 넣으면 가려지고, 표 양 끝에 세로 선이 생긴다)
+  Card 안에 넣으면 카드 테두리가 틀이 되므로 위 진한 선과 마지막 줄 선을 뺀다 (2026-11-03)
+```
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/divider.md -->
+
+# Divider
+
+내용 묶음 사이를 선으로 나누는 컴포넌트입니다.
+
+## 사용법
+
+아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+
+```html
+<hr class="ds-divider" [data-weight="thick"] [data-inset]>
+<span class="ds-divider" role="separator" aria-orientation="vertical" data-orientation="vertical"></span>
+<div class="ds-divider" role="separator" data-label><span>또는</span></div>
+```
+
+## 속성
+
+Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
+
+| 속성 | 값 |
+| --- | --- |
+| 켜고 끄는 속성 | `inset` `label` |
+
+그 밖에: weight thick, orientation vertical
+
+## CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-divider-color` | `var(--ybm-color-stroke-neutral-weak)` |
+| `--ds-divider-size` | `1px` |
+| `--ds-divider-length` | `16px` |
+
+## 사용 지침
+
+| 구분 | 내용 |
+| --- | --- |
+| **Don't** | 마지막 묶음 아래에는 구분선을 두지 않습니다. |
+
+## 예시
+
+```html
+<hr class="ds-divider">
+<hr class="ds-divider" data-weight="thick">
+<div class="ds-divider" role="separator" data-label><span>또는</span></div>
+<div class="u-flex" style="align-items:center;gap:var(--ybm-space-x2);color:var(--ybm-color-fg-neutral-subtle);font-size:var(--ybm-font-size-t03)"><span>이용약관</span><span class="ds-divider" role="separator" aria-orientation="vertical" data-orientation="vertical" style="--ds-divider-length:12px"></span><span>개인정보처리방침</span></div>
+```
+
+## 규격
+
+Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+
+```
+weight: thin(기본 1px) / thick(8px 섹션 구분, 모바일)   orientation: horizontal(기본) / vertical
+Figma: thin 1px stroke/neutral-weak / thick 8 bg/neutral-muted / vertical 1×16(--ds-divider-length)
+  inset 좌우 x4 / label t03 fg/neutral-subtle, 선과 간격 x3
+마지막 섹션 아래에는 두지 않는다.
+```
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/tooltip.md -->
+
+# Tooltip
+
+마우스를 올리거나 포커스하면 짧은 설명을 띄우는 컴포넌트입니다.
+
+## 사용법
+
+아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+
+```html
+<span class="ds-tooltip-anchor">
+  <button class="ds-btn" data-variant="ghost" data-layout="iconOnly" aria-describedby="tip-copy" aria-label="복사">…</button>
+  <span class="ds-tooltip" role="tooltip" id="tip-copy" [data-placement="bottom"]>링크 복사</span>
+</span>
+```
+
+## 속성
+
+Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
+
+그 밖에: placement top, bottom, left, right, hover/focus 전용
+
+## CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-tooltip-gap` | `var(--ybm-space-x1_5)` |
+
+## 사용 지침
+
+| 구분 | 내용 |
+| --- | --- |
+| **Do** | Tooltip은 마우스를 올리거나 포커스할 때만 보이고, 터치 화면에서는 안 보입니다. |
+| **Do** | 닫기 버튼이 필요하거나 설명이 여러 줄이면 Help Bubble을 씁니다. |
+
+## 예시
+
+```html
+<span class="ds-tooltip-anchor"><button class="ds-btn" data-variant="neutralWeak" data-layout="iconOnly" aria-label="링크 복사" aria-describedby="pv-tip1"><i class="ds-icon ds-icon--external-link" aria-hidden="true"></i></button><span class="ds-tooltip" role="tooltip" id="pv-tip1">링크 복사</span></span>
+<span class="ds-tooltip-anchor"><button class="ds-btn" data-variant="neutralWeak" aria-describedby="pv-tip2">bottom</button><span class="ds-tooltip" role="tooltip" id="pv-tip2" data-placement="bottom">아래에 표시</span></span>
+<span class="ds-tooltip-anchor"><button class="ds-btn" data-variant="neutralWeak" aria-describedby="pv-tip3">항상 표시</button><span class="ds-tooltip" role="tooltip" id="pv-tip3" data-placement="right" data-state="open">data-state="open"</span></span>
+```
+
+## 규격
+
+Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+
+```
+placement: top(기본) / bottom / left / right
+Figma: padding x1 x2 / shape/xs / bg/neutral-solid / t02 Medium fg/on-neutral-solid / 최대 폭 240
+       대상과 간격 x1_5 / elevation overlay / 꼬리 없음
+Help Bubble 과 차이: Tooltip 은 짧은 라벨(아이콘 버튼 이름 등)을 hover/focus 로만 보여 준다.
+터치 화면에서는 보이지 않으므로 꼭 필요한 정보를 넣지 않는다. 닫기 버튼/여러 줄 설명은 Help Bubble.
+```
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/list-list-item.md -->
+
+# List · List Item
+
+설정, 메뉴처럼 항목을 한 줄씩 늘어놓는 컴포넌트입니다.
+
+## 사용법
+
+아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+
+```html
+<ul class="ds-list" [data-variant="inset"] [data-divider]>
+  <li>
+    <a class="ds-list-item" href="#" [data-size="small"]>
+      [<span class="ds-list-item__prefix"><i class="ds-icon ds-icon--credit-card" aria-hidden="true"></i></span>]
+      <span class="ds-list-item__content">
+        <span class="ds-list-item__title">결제 수단</span>
+        [<span class="ds-list-item__desc">등록된 카드 2개</span>]
+      </span>
+      [<span class="ds-list-item__suffix">값 · Badge · Switch</span>]
+      [<i class="ds-icon ds-icon--chevron-right ds-list-item__chevron" aria-hidden="true"></i>]
+    </a>
+  </li>
+</ul>
+```
+
+## 속성
+
+Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
+
+| 속성 | 값 |
+| --- | --- |
+| 켜고 끄는 속성 | `divider` |
+
+그 밖에: variant inset, size small, prefix/suffix/chevron
+
+## CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-list-item-min-h` | `56px` |
+| `--ds-list-item-py` | `var(--ybm-space-x3)` |
+| `--ds-list-item-px` | `var(--ybm-space-x4)` |
+
+## 사용 지침
+
+| 구분 | 내용 |
+| --- | --- |
+| **Do** | 한 줄 안에 누를 수 있는 요소는 3개까지만 둡니다. |
+| **Don't** | 줄 전체가 링크이면 안에 다른 버튼을 넣지 않습니다. |
+
+## 예시
+
+```html
+<ul class="ds-list" data-variant="inset" data-divider>
+  <li><a class="ds-list-item" href="#"><span class="ds-list-item__prefix"><i class="ds-icon ds-icon--id-card" aria-hidden="true"></i></span><span class="ds-list-item__content"><span class="ds-list-item__title">내 정보</span><span class="ds-list-item__desc">이름 · 연락처 · 이메일</span></span><i class="ds-icon ds-icon--chevron-right ds-list-item__chevron" aria-hidden="true"></i></a></li>
+  <li><a class="ds-list-item" href="#"><span class="ds-list-item__prefix"><i class="ds-icon ds-icon--credit-card" aria-hidden="true"></i></span><span class="ds-list-item__content"><span class="ds-list-item__title">결제 수단</span></span><span class="ds-list-item__suffix">카드 2개</span><i class="ds-icon ds-icon--chevron-right ds-list-item__chevron" aria-hidden="true"></i></a></li>
+  <li><label class="ds-list-item"><span class="ds-list-item__prefix"><i class="ds-icon ds-icon--message-circle" aria-hidden="true"></i></span><span class="ds-list-item__content"><span class="ds-list-item__title">알림 받기</span></span><span class="ds-list-item__suffix"><span class="ds-switch"><input type="checkbox" role="switch" class="ds-switch__control" checked aria-label="알림 받기"></span></span></label></li>
+  <li><a class="ds-list-item" href="#" aria-disabled="true"><span class="ds-list-item__prefix"><i class="ds-icon ds-icon--globe" aria-hidden="true"></i></span><span class="ds-list-item__content"><span class="ds-list-item__title">언어 설정</span><span class="ds-list-item__desc">준비 중</span></span></a></li>
+</ul>
+<ul class="ds-list">
+  <li><a class="ds-list-item" href="#" data-size="small"><span class="ds-list-item__content"><span class="ds-list-item__title">공지사항</span></span><i class="ds-icon ds-icon--chevron-right ds-list-item__chevron" aria-hidden="true"></i></a></li>
+  <li><a class="ds-list-item" href="#" data-size="small"><span class="ds-list-item__content"><span class="ds-list-item__title">자주 묻는 질문</span></span><span class="ds-list-item__suffix"><span class="ds-badge" data-tone="brand">NEW</span></span><i class="ds-icon ds-icon--chevron-right ds-list-item__chevron" aria-hidden="true"></i></a></li>
+  <li><a class="ds-list-item" href="#" data-size="small"><span class="ds-list-item__content"><span class="ds-list-item__title">1:1 문의</span></span><i class="ds-icon ds-icon--chevron-right ds-list-item__chevron" aria-hidden="true"></i></a></li>
+</ul>
+```
+
+## 규격
+
+Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+
+```
+variant: plain(기본) / inset(카드 안처럼 둥근 묶음)   size: medium(기본) / small   divider: data-divider
+Figma item medium: min-h56 / py x3 / px x4 / gap x3 / title t05 fg/neutral / desc t03 fg/neutral-subtle
+            small : min-h48 / py x2_5 / title t04 / desc t02
+  prefix 24(아이콘 fg/neutral-subtle, Avatar 36 가능) / suffix t04 fg/neutral-subtle / chevron 20 fg/neutral-subtle
+  pressed bg/transparent-pressed / disabled 글자 fg/disabled / divider 1px stroke/neutral-subtle(본문 시작점부터)
+  inset: bg/layer-default / 1px stroke/neutral-weak / shape/xl / 바깥 여백 없음
+상호작용 요소(링크/스위치 등)는 한 줄에 4개 미만. 행 전체가 링크이면 안에 다른 버튼을 넣지 않는다.
+```
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/breadcrumbs.md -->
+
+# Breadcrumbs
+
+지금 화면이 어디에 있는지 경로로 보여 주는 컴포넌트입니다.
+
+## 사용법
+
+아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+
+```html
+<nav class="ds-breadcrumbs" aria-label="현재 위치">
+  <ol>
+    <li><a href="#">홈</a></li>
+    <li><a href="#">고객센터</a></li>
+    <li><span aria-current="page">공지사항</span></li>
+  </ol>
+</nav>
+```
+
+## 속성
+
+Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
+
+그 밖에: 현재 항목 aria-current=page
+
+## 사용 지침
+
+| 구분 | 내용 |
+| --- | --- |
+| **Do** | 웹 화면에서 깊이가 2단계 이상일 때만 씁니다. |
+| **Do** | 모바일 앱에서는 뒤로 가기 버튼이 있는 머리말을 씁니다. |
+| **Don't** | 마지막 항목(지금 화면)은 링크로 만들지 않습니다. |
+
+## 예시
+
+```html
+<nav class="ds-breadcrumbs" aria-label="현재 위치"><ol><li><a href="#">홈</a></li><li><a href="#">고객센터</a></li><li><span aria-current="page">공지사항</span></li></ol></nav>
+```
+
+## 규격
+
+Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+
+```
+Figma: t03 / 항목 fg/neutral-subtle(링크 hover 밑줄) / 현재 fg/neutral Medium / 구분 chevron-right 14 fg/neutral-subtle
+       항목/구분 사이 x1 / 줄바꿈 허용(좁으면 다음 줄)
+마지막 항목(현재 화면)은 링크가 아니다. 모바일 앱 화면에는 쓰지 않는다(뒤로 가기 헤더 사용).
+```
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/stepper.md -->
+
+# Stepper
+
+여러 단계로 나뉜 흐름에서 지금 몇 번째 단계인지 보여 주는 컴포넌트입니다.
+
+## 사용법
+
+아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+
+```html
+<ol class="ds-stepper" aria-label="가입 단계" [data-orientation="vertical"]>
+  <li class="ds-stepper__step" data-state="complete"><span class="ds-stepper__indicator"></span><span class="ds-stepper__label">약관 동의</span></li>
+  <li class="ds-stepper__step" data-state="current" aria-current="step"><span class="ds-stepper__indicator"></span><span class="ds-stepper__label">본인 인증</span></li>
+  <li class="ds-stepper__step"><span class="ds-stepper__indicator"></span><span class="ds-stepper__label">정보 입력</span></li>
+</ol>
+```
+
+## 속성
+
+Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
+
+그 밖에: state complete, current, upcoming, orientation vertical
+
+## 사용 지침
+
+| 구분 | 내용 |
+| --- | --- |
+| **Do** | 단계는 3~5개로 하고, 라벨은 짧은 명사로 씁니다. |
+| **Do** | 단계가 더 많으면 "2 / 6"처럼 글자로 보여 줍니다. |
+
+## 예시
+
+```html
+<ol class="ds-stepper" aria-label="가입 단계" style="max-width:560px">
+  <li class="ds-stepper__step" data-state="complete"><span class="ds-stepper__indicator"></span><span class="ds-stepper__label">약관 동의</span></li>
+  <li class="ds-stepper__step" data-state="current" aria-current="step"><span class="ds-stepper__indicator"></span><span class="ds-stepper__label">본인 인증</span></li>
+  <li class="ds-stepper__step"><span class="ds-stepper__indicator"></span><span class="ds-stepper__label">정보 입력</span></li>
+  <li class="ds-stepper__step"><span class="ds-stepper__indicator"></span><span class="ds-stepper__label">가입 완료</span></li>
+</ol>
+<ol class="ds-stepper" aria-label="신청 단계" data-orientation="vertical" style="margin-top:var(--ybm-space-x6)">
+  <li class="ds-stepper__step" data-state="complete"><span class="ds-stepper__indicator"></span><span class="ds-stepper__label">상품 선택</span></li>
+  <li class="ds-stepper__step" data-state="current" aria-current="step"><span class="ds-stepper__indicator"></span><span class="ds-stepper__label">배송지 입력</span></li>
+  <li class="ds-stepper__step"><span class="ds-stepper__indicator"></span><span class="ds-stepper__label">결제</span></li>
+</ol>
+```
+
+## 규격
+
+Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+
+```
+state: complete / current / upcoming(기본)   orientation: horizontal(기본) / vertical
+Figma: indicator 24 원형 / 숫자 t02 Bold(자동 번호) / 연결선 2px / 라벨 t03(horizontal 아래 가운데 / vertical 오른쪽)
+  complete bg/brand-solid + check 14 fg/on-brand-solid / 연결선 stroke/brand-solid
+  current 1px stroke/brand-solid + 숫자 fg/brand / 라벨 Bold fg/neutral
+  upcoming bg/neutral-muted + 숫자 fg/neutral-subtle / 라벨 fg/neutral-subtle / 연결선 stroke/neutral-weak
+단계는 3~5개. 라벨은 짧은 명사형(한글 6자 안팎). 단계가 더 많으면 "2 / 6" 처럼 글자로 보여 준다.
+```
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/banner.md -->
+
+# Banner
+
+화면 맨 위에서 서비스 전체에 해당하는 공지를 알려 주는 컴포넌트입니다.
+
+## 사용법
+
+아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+
+```html
+<div class="ds-banner" role="status" data-tone="warning">
+  <div class="ds-banner__inner">
+    <i class="ds-icon ds-icon--triangle-alert-solid" aria-hidden="true"></i>
+    <p class="ds-banner__message"><strong class="ds-banner__title">점검 안내</strong>  10월 25일(토) 02:00~06:00 서비스를 점검해요.</p>
+    [<a class="ds-banner__action" href="#">자세히</a>]
+    [<button type="button" class="ds-banner__close" aria-label="공지 닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button>]
+  </div>
+</div>
+```
+
+## 속성
+
+Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
+
+그 밖에: tone neutral, informative, positive, warning, critical, variant solid
+
+## CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-banner-bg` | `var(--ybm-color-bg-neutral)` |
+| `--ds-banner-fg` | `var(--ybm-color-fg-neutral)` |
+| `--ds-banner-max` | `1200px` |
+
+## 사용 지침
+
+| 구분 | 내용 |
+| --- | --- |
+| **Do** | Banner는 화면 맨 위에 전체 폭으로 한 번에 하나만 띄우는 공지입니다. |
+| **Do** | 본문 안의 안내는 Callout을 씁니다. |
+
+## 예시
+
+```html
+<div class="ds-banner" role="status"><div class="ds-banner__inner"><i class="ds-icon ds-icon--info-solid" aria-hidden="true"></i><p class="ds-banner__message"><strong class="ds-banner__title">안내</strong>  개인정보처리방침이 11월 1일부터 바뀌어요.</p><a class="ds-banner__action" href="#">자세히</a><button type="button" class="ds-banner__close" aria-label="공지 닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button></div></div>
+<div class="ds-banner" role="status" data-tone="informative"><div class="ds-banner__inner"><i class="ds-icon ds-icon--info-solid" aria-hidden="true"></i><p class="ds-banner__message">알림 설정 화면이 더 간단해졌어요.</p><a class="ds-banner__action" href="#">살펴보기</a></div></div>
+<div class="ds-banner" role="status" data-tone="warning"><div class="ds-banner__inner"><i class="ds-icon ds-icon--triangle-alert-solid" aria-hidden="true"></i><p class="ds-banner__message"><strong class="ds-banner__title">점검 안내</strong>  10월 25일(토) 02:00~06:00 서비스를 점검해요.</p></div></div>
+<div class="ds-banner" role="alert" data-tone="critical"><div class="ds-banner__inner"><i class="ds-icon ds-icon--circle-alert-solid" aria-hidden="true"></i><p class="ds-banner__message">일부 결제 수단에 장애가 있어요. 복구 중이에요.</p></div></div>
+<div class="ds-banner" role="status" data-variant="solid" data-tone="informative"><div class="ds-banner__inner"><i class="ds-icon ds-icon--info-solid" aria-hidden="true"></i><p class="ds-banner__message">solid · informative</p><button type="button" class="ds-banner__close" aria-label="공지 닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button></div></div>
+<div class="ds-banner" role="status" data-variant="solid"><div class="ds-banner__inner"><i class="ds-icon ds-icon--info-solid" aria-hidden="true"></i><p class="ds-banner__message">solid · neutral</p></div></div>
+```
+
+## 규격
+
+Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+
+```
+tone: neutral(기본) / informative / positive / warning / critical   variant: weak(기본) / solid
+Figma: 전체 폭 / 모서리 없음 / min-h48 / padding x3 x4 / 내용 최대 폭 --ds-banner-max(1200) 가운데 / gap x2
+  t04 / 제목 Bold / 아이콘 Solid 16 / action t04 Bold 밑줄 / 닫기 20(터치 영역 40)
+  weak: Callout 과 같은 tone 색 / 아래 1px stroke/neutral-weak
+  solid: bg/{tone}-solid + fg/on-{tone}-solid (neutral = bg/neutral-solid + fg/on-neutral-solid)
+Callout 과 차이: Callout 은 본문 안 안내(둥근 상자), Banner 는 페이지 전체에 걸린 공지(화면 맨 위, 한 번에 1개).
+```
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/select-box.md -->
+
+# Select Box
+
+선택지를 설명과 함께 상자로 크게 보여 주는 컴포넌트입니다. 요금제처럼 차이를 읽고 고를 때 씁니다.
+
+## 사용법
+
+아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+
+```html
+<div class="ds-selectbox-group" [style="--ds-selectbox-columns: 2"]>
+  <label class="ds-selectbox" [data-layout="vertical"]>
+    [<i class="ds-icon ds-icon--…" aria-hidden="true"></i>]
+    <span class="ds-selectbox__texts">
+      <span class="ds-selectbox__label">라벨</span>
+      [<span class="ds-selectbox__desc">설명</span>]
+    </span>
+    <span class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control"></span>
+    또는 <span class="ds-radio" data-tone="neutral" data-size="medium"><input type="radio" class="ds-radio__control" name="g"></span>
+  </label>
+</div>
+```
+
+## 속성
+
+Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
+
+| 속성 | 값 |
+| --- | --- |
+| `type` | check radio |
+| `state` | unchecked checked disabled |
+| `layout` | horizontal vertical |
+
+## CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-selectbox-columns` | `1` |
+| `--ds-selectbox-line` | `var(--ybm-color-stroke-neutral-weak)` |
+| `--ds-selectbox-bg` | `var(--ybm-color-bg-layer-default)` |
+
+## 사용 지침
+
+| 구분 | 내용 |
+| --- | --- |
+| **Do** | 설명이 필요한 선택지가 2~6개일 때 씁니다. |
+| **Do** | 짧은 선택지는 Radio Group이나 Checkbox를 씁니다. |
+| **Don't** | 한 묶음 안에서 check와 radio를 섞지 않습니다. |
+
+## 예시
+
+```html
+<div class="ds-selectbox-group" role="radiogroup" aria-label="요금제">
+  <label class="ds-selectbox"><span class="ds-selectbox__texts"><span class="ds-selectbox__label">기본</span><span class="ds-selectbox__desc">혼자 쓰기 좋은 구성이에요</span></span><span class="ds-radio" data-tone="neutral" data-size="medium"><input type="radio" class="ds-radio__control" name="pv-sb" checked></span></label>
+  <label class="ds-selectbox"><span class="ds-selectbox__texts"><span class="ds-selectbox__label">팀</span><span class="ds-selectbox__desc">여러 명이 함께 쓸 수 있어요</span></span><span class="ds-radio" data-tone="neutral" data-size="medium"><input type="radio" class="ds-radio__control" name="pv-sb"></span></label>
+  <label class="ds-selectbox"><span class="ds-selectbox__texts"><span class="ds-selectbox__label">기업</span><span class="ds-selectbox__desc">지금은 고를 수 없어요</span></span><span class="ds-radio" data-tone="neutral" data-size="medium"><input type="radio" class="ds-radio__control" name="pv-sb" disabled></span></label>
+</div>
+
+<div class="ds-selectbox-group" style="--ds-selectbox-columns: 2" aria-label="관심 분야">
+  <label class="ds-selectbox" data-layout="vertical"><span class="ds-selectbox__texts"><span class="ds-selectbox__label">읽기</span><span class="ds-selectbox__desc">글을 빠르게 이해해요</span></span><span class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control" checked></span></label>
+  <label class="ds-selectbox" data-layout="vertical"><i class="ds-icon ds-icon--message-circle" aria-hidden="true"></i><span class="ds-selectbox__texts"><span class="ds-selectbox__label">말하기</span><span class="ds-selectbox__desc">자연스럽게 대화해요</span></span><span class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control"></span></label>
+</div>
+```
+
+## 규격
+
+Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+
+```
+layout: horizontal(기본) / vertical(여러 열로 놓을 때)
+표시는 Checkbox(square/neutral/medium), Radio(neutral/medium) 를 그대로 쓴다.
+Figma: padding x4 x5 / gap x3 / shape/lg / bg/layer-default / 1px stroke/neutral-weak
+  선택 1px stroke/neutral-contrast(색만 진해짐) / disabled bg/disabled + 글자 fg/disabled
+  label t05 Medium fg/neutral / desc t04 fg/neutral-subtle / 글 사이 2 / 앞 아이콘 24
+```
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/time-picker.md -->
+
+# Time Picker
+
+휠을 굴려 시간을 선택하는 컴포넌트입니다.
+
+## 사용법
+
+아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+
+```html
+<div class="ds-timepicker" role="group" aria-label="시간" [aria-disabled="true"]>
+  <div class="ds-timepicker__column" role="listbox" aria-label="오전/오후" tabindex="0">
+    <div class="ds-timepicker__option" role="option">오전</div>
+    <div class="ds-timepicker__option" role="option" aria-selected="true">오후</div>
+  </div>
+  <div class="ds-timepicker__column" role="listbox" aria-label="시" tabindex="0">… 1 ~ 12</div>
+  <div class="ds-timepicker__column" role="listbox" aria-label="분" tabindex="0">… 00, 05 ~ 55</div>
+</div>
+```
+
+## 속성
+
+Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
+
+| 속성 | 값 |
+| --- | --- |
+| `state` | enabled disabled |
+
+그 밖에: 12시간제, 분 간격 5
+
+## 사용 지침
+
+| 구분 | 내용 |
+| --- | --- |
+| **Do** | 시간 고르기가 화면의 주된 일이면 화면에 바로 둡니다. |
+| **Do** | 입력 칸에서 고를 때는 Field Button을 누르면 열리는 Bottom Sheet 안에 넣습니다. |
+
+## 예시
+
+```html
+<div class="ds-timepicker" role="group" aria-label="시간" id="pv-tp">
+  <div class="ds-timepicker__column" role="listbox" aria-label="오전/오후" tabindex="0"><div class="ds-timepicker__option" role="option" aria-selected="true">오전</div><div class="ds-timepicker__option" role="option">오후</div></div>
+  <div class="ds-timepicker__column" role="listbox" aria-label="시" tabindex="0" data-pv-fill="1-12" data-pv-sel="10"></div>
+  <div class="ds-timepicker__column" role="listbox" aria-label="분" tabindex="0" data-pv-fill="0-55-5" data-pv-sel="30"></div>
+</div>
+<div class="ds-timepicker" role="group" aria-label="시간" aria-disabled="true">
+  <div class="ds-timepicker__column" role="listbox" aria-label="오전/오후"><div class="ds-timepicker__option" role="option" aria-selected="true">오전</div><div class="ds-timepicker__option" role="option">오후</div></div>
+  <div class="ds-timepicker__column" role="listbox" aria-label="시" data-pv-fill="1-12" data-pv-sel="10"></div>
+  <div class="ds-timepicker__column" role="listbox" aria-label="분" data-pv-fill="0-55-5" data-pv-sel="30"></div>
+</div>
+```
+
+## 규격
+
+Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+
+```
+ybm-ds.js 가 가운데 온 항목에 aria-selected 를 붙이고 열에서 change 이벤트(detail.value)를 보낸다.
+처음 값은 aria-selected="true" 로 표시해 두면 그 위치로 맞춰 준다. 분 간격은 넣는 항목으로 정한다(기본 5분).
+Figma: 폭 320(채움) / 높이 220 = 항목 5줄 × x11 / 좌우 x4 / 열 간격 x2
+  가운데 띠 bg/neutral-weak-alpha shape/md
+  가운데 t07 SemiBold fg/neutral / 바로 위아래 t06 fg/neutral-muted / 그 밖 t05 fg/neutral-subtle / disabled 모두 fg/disabled
+모바일 입력 필드에서는 Field Button + Bottom Sheet 안에 넣어 쓴다.
+```
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/table-pagination.md -->
+
+# Table Pagination
+
+표 아래에서 페이지를 넘기고 한 번에 보일 행 수를 바꾸는 컴포넌트입니다.
+
+## 사용법
+
+아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+
+```html
+<div class="ds-tablepagination">
+  <label class="ds-tablepagination__size">
+    <span class="ds-tablepagination__label">페이지당 행 수</span>
+    <span class="ds-tablepagination__select"><select><option>10개</option><option>25개</option><option>50개</option></select></span>
+  </label>
+  <div class="ds-tablepagination__range">
+    <span class="ds-tablepagination__position">
+      <span class="ds-tablepagination__select"><select aria-label="표시 범위"><option>1-10</option>…</select></span>
+      (unknownTotal 은 select 대신 <span class="ds-tablepagination__current">11-20</span>)
+      [<span class="ds-tablepagination__total">/ 총 237개</span>]
+    </span>
+    <nav class="ds-pagination" aria-label="표 페이지">
+      <a class="ds-pagination__item" data-type="prev" href="#" aria-label="이전 페이지"></a>
+      <a class="ds-pagination__item" data-type="next" href="#" aria-label="다음 페이지"></a>
+    </nav>
+  </div>
+</div>
+```
+
+## 속성
+
+Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
+
+| 속성 | 값 |
+| --- | --- |
+| `state` | default unknownTotal empty |
+
+그 밖에: 최소 폭 640
+
+## 사용 지침
+
+| 구분 | 내용 |
+| --- | --- |
+| **Do** | 데이터 표 아래에서만 씁니다. |
+| **Do** | 일반 목록에는 Pagination을 씁니다. |
+| **Do** | 페이지당 줄 수는 3~4가지 중에서 고르게 합니다. |
+
+## 예시
+
+```html
+<div class="ds-tablepagination">
+  <label class="ds-tablepagination__size"><span class="ds-tablepagination__label">페이지당 행 수</span><span class="ds-tablepagination__select"><select><option>10개</option><option>25개</option><option>50개</option></select></span></label>
+  <div class="ds-tablepagination__range">
+    <span class="ds-tablepagination__position"><span class="ds-tablepagination__select"><select aria-label="표시 범위"><option>1-10</option><option selected>11-20</option><option>21-30</option></select></span><span class="ds-tablepagination__total">/ 총 237개</span></span>
+    <nav class="ds-pagination" aria-label="표 페이지"><a class="ds-pagination__item" data-type="prev" href="#" aria-label="이전 페이지"></a><a class="ds-pagination__item" data-type="next" href="#" aria-label="다음 페이지"></a></nav>
+  </div>
+</div>
+<div class="ds-tablepagination">
+  <label class="ds-tablepagination__size"><span class="ds-tablepagination__label">페이지당 행 수</span><span class="ds-tablepagination__select"><select><option>10개</option><option>25개</option></select></span></label>
+  <div class="ds-tablepagination__range">
+    <span class="ds-tablepagination__position"><span class="ds-tablepagination__current">11-20</span></span>
+    <nav class="ds-pagination" aria-label="표 페이지"><a class="ds-pagination__item" data-type="prev" href="#" aria-label="이전 페이지"></a><a class="ds-pagination__item" data-type="next" href="#" aria-label="다음 페이지"></a></nav>
+  </div>
+</div>
+<div class="ds-tablepagination">
+  <label class="ds-tablepagination__size"><span class="ds-tablepagination__label">페이지당 행 수</span><span class="ds-tablepagination__select"><select><option>10개</option></select></span></label>
+  <div class="ds-tablepagination__range">
+    <span class="ds-tablepagination__position"><span class="ds-tablepagination__select"><select aria-label="표시 범위" disabled><option>0-0</option></select></span><span class="ds-tablepagination__total">/ 총 0개</span></span>
+    <nav class="ds-pagination" aria-label="표 페이지"><a class="ds-pagination__item" data-type="prev" aria-disabled="true" aria-label="이전 페이지"></a><a class="ds-pagination__item" data-type="next" aria-disabled="true" aria-label="다음 페이지"></a></nav>
+  </div>
+</div>
+```
+
+## 규격
+
+Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+
+```
+state: default / unknownTotal(전체 개수를 모를 때) / empty(데이터 없음)
+empty: 범위 select 에 disabled, 이동 버튼에 aria-disabled="true"
+Figma: 최소 폭 640 / padding x2 x4 / 양 끝 정렬 / 한 줄 고정(좁으면 표와 같은 가로 스크롤 영역에 둔다)
+  label, total t04 fg/neutral-subtle / select h36 padding 0 8 0 12 gap x1 shape/sm bg/layer-default 1px stroke/neutral-weak
+  값 t04 Medium fg/neutral / chevron 16 / disabled bg/disabled fg/disabled / 이동 버튼은 Pagination Item(prev, next)
+일반 목록의 페이지 이동은 Pagination 을 쓴다.
+```
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/popover.md -->
+
+# Popover
+
+누른 요소 옆에 작은 창을 띄워 부가 정보나 작업을 보여 주는 컴포넌트입니다.
+
+## 사용법
+
+아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+
+```html
+<span class="ds-popover-anchor">
+  <button class="ds-btn" data-variant="neutralOutline" data-ds-popover="pop-1" aria-expanded="false" aria-controls="pop-1">열기</button>
+  <div class="ds-popover" id="pop-1" role="dialog" aria-labelledby="pop-1-t" hidden [data-placement="bottom-end"]>
+    <div class="ds-popover__header">
+      <div class="ds-popover__texts"><strong class="ds-popover__title" id="pop-1-t">제목</strong>[<p class="ds-popover__desc">설명</p>]</div>
+      [<button type="button" class="ds-popover__close" data-ds-close aria-label="닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button>]
+    </div>
+    <div class="ds-popover__body">본문</div>
+    [<div class="ds-popover__footer"><button class="ds-btn" data-variant="neutralWeak" data-size="small">취소</button><button class="ds-btn" data-variant="neutralSolid" data-size="small">확인</button></div>]
+  </div>
+</span>
+```
+
+## 속성
+
+Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
+
+| 속성 | 값 |
+| --- | --- |
+| `actions` | single pair none |
+
+그 밖에: 폭 320
+
+## CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-popover-width` | `320px` |
+| `--ds-popover-gap` | `var(--ybm-space-x2)` |
+
+## 사용 지침
+
+| 구분 | 내용 |
+| --- | --- |
+| **Do** | Popover는 버튼 옆에 뜨는 작은 창이고, 바깥을 누르면 닫힙니다. |
+| **Do** | 화면을 막고 확인받아야 할 때는 Dialog를 씁니다. |
+
+## 예시
+
+```html
+<span class="ds-popover-anchor">
+  <button type="button" class="ds-btn" data-variant="neutralOutline" data-size="small" data-ds-popover="pv-pop" aria-expanded="false" aria-controls="pv-pop">공유 설정</button>
+  <div class="ds-popover" id="pv-pop" role="dialog" aria-labelledby="pv-pop-t" hidden>
+    <div class="ds-popover__header"><div class="ds-popover__texts"><strong class="ds-popover__title" id="pv-pop-t">링크 공유</strong><p class="ds-popover__desc">링크가 있는 사람만 볼 수 있어요</p></div><button type="button" class="ds-popover__close" data-ds-close aria-label="닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button></div>
+    <div class="ds-popover__body">공유를 끄면 이미 보낸 링크도 더 이상 열리지 않아요.</div>
+    <div class="ds-popover__footer"><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="small" data-ds-close>취소</button><button type="button" class="ds-btn" data-variant="neutralSolid" data-size="small" data-ds-close>공유 끄기</button></div>
+  </div>
+</span>
+<div class="ds-popover" role="dialog" aria-label="예시">
+  <div class="ds-popover__header"><div class="ds-popover__texts"><strong class="ds-popover__title">제목</strong><p class="ds-popover__desc">설명을 작성할 수 있어요</p></div><button type="button" class="ds-popover__close" aria-label="닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button></div>
+  <div class="ds-popover__body">팝오버 본문에는 사용자가 확인할 내용이나 추가 동작을 둘 수 있습니다.</div>
+  <div class="ds-popover__footer"><button type="button" class="ds-btn" data-variant="neutralSolid" data-size="small">확인</button></div>
+</div>
+```
+
+## 규격
+
+Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+
+```
+actions: single / pair / none(footer 없음)   placement: bottom-start(기본) / bottom-end / top-start / top-end
+ybm-ds.js: data-ds-popover 로 열고 닫기, 바깥 클릭과 Esc 로 닫기, 안의 data-ds-close 로 닫기.
+Figma: 폭 320 / padding x5 / gap x4 / shape/xl / bg/layer-floating / 1px stroke/neutral-muted / elevation 2
+  title t05 Bold fg/neutral / desc t04 fg/neutral-subtle / 글 사이 x1 / 머리말 gap x3 / 닫기 Lucide/x 20 fg/neutral
+  body t04 fg/neutral / footer 오른쪽 정렬 gap x2, Action Button small
+닫기 버튼을 숨기면 본문이나 버튼 영역에 닫는 동작을 꼭 둔다.
+고르는 법: 짧은 설명은 Tooltip, Help Bubble / 제목과 버튼이 있는 작은 작업 창은 Popover / 화면을 막아야 하면 Dialog
+```
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/chat.md -->
+
+# Chat
+
+말풍선과 입력 칸으로 대화 화면을 만드는 컴포넌트입니다.
+
+## 사용법
+
+아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+
+```html
+<div class="ds-chat-bubble" [data-sender="user"]>안녕하세요! 무엇을 도와드릴까요?</div>
+<span class="ds-chat-meta" data-status="read"><b class="ds-chat-meta__status">읽음</b><time>오후 3:24</time></span>
+<p class="ds-chat-system" [data-variant="divider"]>오늘</p>
+<button type="button" class="ds-chat-send" aria-label="보내기" [data-state="stop"] [disabled]></button>
+<form class="ds-chat-composer">
+  <button type="button" class="ds-chat-composer__attach" aria-label="첨부"><i class="ds-icon ds-icon--plus" aria-hidden="true"></i></button>
+  <div class="ds-chat-composer__field">
+    <textarea class="ds-chat-composer__input" rows="1" placeholder="메시지를 입력하세요" aria-label="메시지"></textarea>
+    <button type="submit" class="ds-chat-send" aria-label="보내기" disabled></button>
+  </div>
+</form>
+```
+
+## 속성
+
+Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
+
+| 속성 | 값 |
+| --- | --- |
+| `sender` | assistant user |
+| `status` | sending sent read error |
+
+그 밖에: 보내기 `send/stop/disabled`
+
+## CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-chat-bubble-max` | `288px` |
+| `--ds-chat-send-bg` | `var(--ybm-color-bg-brand-solid)` |
+| `--ds-chat-send-fg` | `var(--ybm-color-fg-on-brand-solid)` |
+| `--ds-chat-send-icon` | `var(--ds-icon-arrow-up)` |
+
+## 사용 지침
+
+| 구분 | 내용 |
+| --- | --- |
+| **Do** | 상대 말풍선은 왼쪽, 내 말풍선은 오른쪽에 둡니다. |
+| **Do** | 입력 칸이 비어 있으면 보내기 버튼을 끄고, 답변을 만드는 중에는 멈춤(stop) 버튼으로 바꿉니다. |
+
+## 예시
+
+```html
+<div style="display:flex;gap:var(--ybm-space-x3);padding:var(--ybm-space-x5) var(--ybm-space-x4)">
+  <p class="ds-chat-system">오늘</p>
+  <div class="ds-chat-bubble">안녕하세요! 무엇을 도와드릴까요?</div>
+  <div style="display:flex;align-items:flex-end;justify-content:flex-end;gap:var(--ybm-space-x1_5)"><span class="ds-chat-meta" data-status="read"><b class="ds-chat-meta__status">읽음</b><time>오후 3:24</time></span><div class="ds-chat-bubble" data-sender="user" style="margin-left:0">이번 주 일정 정리해 줘</div></div>
+  <p class="ds-chat-system" data-variant="divider">대화가 종료되었어요</p>
+  <div style="display:flex;gap:var(--ybm-space-x4)"><span class="ds-chat-meta" data-status="sending"><b class="ds-chat-meta__status">전송 중</b><time>오후 3:24</time></span><span class="ds-chat-meta" data-status="sent"><time>오후 3:24</time></span><span class="ds-chat-meta" data-status="error"><b class="ds-chat-meta__status">전송 실패</b><time>오후 3:24</time></span></div>
+  <div style="display:flex;gap:var(--ybm-space-x3)"><button type="button" class="ds-chat-send" aria-label="보내기"></button><button type="button" class="ds-chat-send" data-state="stop" aria-label="답변 멈추기"></button><button type="button" class="ds-chat-send" aria-label="보내기" disabled></button></div>
+</div>
+<form class="ds-chat-composer" onsubmit="return false">
+  <button type="button" class="ds-chat-composer__attach" aria-label="첨부"><i class="ds-icon ds-icon--plus" aria-hidden="true"></i></button>
+  <div class="ds-chat-composer__field"><textarea class="ds-chat-composer__input" rows="1" placeholder="메시지를 입력하세요" aria-label="메시지"></textarea><button type="submit" class="ds-chat-send" aria-label="보내기" disabled></button></div>
+</form>
+```
+
+## 규격
+
+Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+
+```
+▸ Message Bubble  sender: assistant(기본) / user
+  Figma: padding x2_5 x3_5 / t05 / 최대 폭 288(글 260) / 모서리 shape/xl, 말꼬리 쪽만 shape/2xs
+         assistant bg/neutral-weak-alpha fg/neutral (왼쪽 위 꼬리) / user bg/brand-solid fg/on-brand-solid (오른쪽 아래 꼬리)
+▸ Message Metadata  status: sending / sent / read / error
+  Figma: gap x1 / t02 fg/neutral-subtle / 상태 Medium, read fg/brand, error fg/critical
+▸ System Message  variant: default / divider
+  Figma: t03 fg/neutral-muted / default pill padding x1 x3 bg/neutral-weak-alpha / divider 양옆 1px stroke/neutral-weak, gap x3
+▸ Send Button  state: send / stop / disabled
+  Figma: 36 원 / 아이콘 20 / send bg/brand-solid + arrow-up fg/on-brand-solid
+         stop bg/neutral-solid + square fg/on-neutral-solid / disabled bg/disabled + fg/disabled
+▸ Composer  state: empty / typing (비어 있으면 보내기 비활성 - ybm-ds.js 가 맞춰 준다)
+  Figma: 위 1px stroke/neutral-muted / padding x2 x3 / gap x2 / bg/layer-default
+         첨부 36 + plus 22 fg/neutral-muted / 입력 칸 min-h x11 padding 0 x1 0 x4 gap x2 shape/3xl bg/neutral-weak-alpha
+         글 t05 fg/neutral, placeholder fg/placeholder / 화면 아래 고정, 여러 줄은 5줄까지 늘어난다
+```
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/top-app-bar.md -->
+
+# Top App Bar
+
+모바일 화면 맨 위에서 화면 제목과 뒤로 가기 같은 버튼을 보여 주는 컴포넌트입니다.
+
+## 사용법
+
+아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+
+```html
+<header class="ds-appbar" [data-platform="android"] [data-tone="transparent" data-gradient]>
+  <div class="ds-appbar__left">
+    <button type="button" class="ds-appbar__button" aria-label="뒤로"><i class="ds-icon ds-icon--chevron-left" aria-hidden="true"></i></button>
+  </div>
+  <div class="ds-appbar__main">
+    <h1 class="ds-appbar__title">제목</h1>
+    [<p class="ds-appbar__subtitle">부제목</p>]
+  </div>
+  <div class="ds-appbar__right">
+    <button type="button" class="ds-appbar__button" aria-label="검색"><i class="ds-icon ds-icon--search" aria-hidden="true"></i></button>
+  </div>
+</header>
+```
+
+## 속성
+
+Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
+
+| 속성 | 값 |
+| --- | --- |
+| `theme` | ios android CSS data-platform |
+| `tone` | layer transparent + gradient |
+| `titleLayout` | titleOnly withSubtitle |
+
+## CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-appbar-height` | `var(--ybm-space-x14)` |
+| `--ds-appbar-side` | `calc(var(--ybm-space-x11) * 2)` |
+
+## 사용 지침
+
+| 구분 | 내용 |
+| --- | --- |
+| **Do** | 모바일 화면마다 하나씩 둡니다. |
+| **Do** | 제목 위치(ios 가운데, android 왼쪽)는 한 서비스 안에서 하나로 맞춥니다. |
+| **Do** | 왼쪽에는 뒤로 또는 닫기 버튼을, 오른쪽에는 아이콘 버튼을 2개까지 둡니다. |
+| **Do** | transparent는 사진 위에서만 쓰고 gradient를 켭니다. |
+
+## 예시
+
+```html
+<header class="ds-appbar" style="width:375px">
+  <div class="ds-appbar__left"><button type="button" class="ds-appbar__button" aria-label="뒤로"><i class="ds-icon ds-icon--chevron-left" aria-hidden="true"></i></button></div>
+  <div class="ds-appbar__main"><h1 class="ds-appbar__title">제목</h1></div>
+  <div class="ds-appbar__right"><button type="button" class="ds-appbar__button" aria-label="검색"><i class="ds-icon ds-icon--search" aria-hidden="true"></i></button><button type="button" class="ds-appbar__button" aria-label="더보기"><i class="ds-icon ds-icon--ellipsis" aria-hidden="true"></i></button></div>
+</header>
+<header class="ds-appbar" style="width:375px">
+  <div class="ds-appbar__left"><button type="button" class="ds-appbar__button" aria-label="뒤로"><i class="ds-icon ds-icon--chevron-left" aria-hidden="true"></i></button></div>
+  <div class="ds-appbar__main"><h1 class="ds-appbar__title">제목</h1><p class="ds-appbar__subtitle">부제목</p></div>
+  <div class="ds-appbar__right"><button type="button" class="ds-appbar__button" aria-label="더보기"><i class="ds-icon ds-icon--ellipsis" aria-hidden="true"></i></button></div>
+</header>
+<header class="ds-appbar" data-platform="android" style="width:375px">
+  <div class="ds-appbar__left"><button type="button" class="ds-appbar__button" aria-label="뒤로"><i class="ds-icon ds-icon--chevron-left" aria-hidden="true"></i></button></div>
+  <div class="ds-appbar__main"><h1 class="ds-appbar__title">아주 긴 제목은 한 줄에서 말줄임으로 끝납니다</h1></div>
+  <div class="ds-appbar__right"><button type="button" class="ds-appbar__button" aria-label="검색"><i class="ds-icon ds-icon--search" aria-hidden="true"></i></button><button type="button" class="ds-appbar__button" aria-label="메뉴" disabled><i class="ds-icon ds-icon--menu" aria-hidden="true"></i></button></div>
+</header>
+<div style="width:375px;background:var(--ybm-color-palette-gray-700)">
+  <header class="ds-appbar" data-tone="transparent" data-gradient>
+    <div class="ds-appbar__left"><button type="button" class="ds-appbar__button" aria-label="닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button></div>
+    <div class="ds-appbar__main"><h1 class="ds-appbar__title">사진 위 막대</h1></div>
+    <div class="ds-appbar__right"></div>
+  </header>
+  <div style="height:40px"></div>
+</div>
+```
+
+## 규격
+
+Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+
+```
+theme(Figma) = data-platform: 기본 ios(제목 가운데) / "android"(제목 왼쪽)
+tone: 기본 layer / data-tone="transparent"(사진 같은 배경 위, 글자와 아이콘 흰색) + data-gradient(가독성용 위쪽 그라데이션)
+titleLayout: 부제목을 넣으면 withSubtitle 모양이 된다
+Figma: 높이 x14 / 좌우 padding x1_5 / bg/layer-default
+  ios 양옆 칸 버튼 2개 폭, 제목과 양옆 최소 간격 x2 / android 제목 칸 왼쪽 padding x1_5
+  제목 Static t06 Bold fg/neutral (부제목이 있으면 t05 Bold) / 부제목 Static t02 fg/neutral-muted
+  transparent 글자와 아이콘 palette/static-white, 그라데이션 검정 35% → 0, 아래로 x5 더 내려옴
+  Top App Bar Button 44 shape/sm, 아이콘 24 / pressed bg/transparent-pressed / disabled fg/disabled
+```
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/top-navigation.md -->
+
+# Top Navigation
+
+PC 화면 맨 위에 두는 메뉴로, 서비스의 주요 화면을 오갈 때 씁니다.
+
+## 사용법
+
+아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+
+```html
+<header class="ds-topnav">
+  <div class="ds-topnav__left">
+    <a class="ds-topnav__heading" href="/"><img src="logo.svg" alt="서비스 이름"></a>
+    <nav class="ds-topnav__menu" aria-label="주요 메뉴">
+      <a class="ds-topnav__item" href="#" aria-current="page">홈</a>
+      <a class="ds-topnav__item" href="#">소개</a>
+    </nav>
+  </div>
+  <div class="ds-topnav__end">
+    <button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="검색"><i class="ds-icon ds-icon--search" aria-hidden="true"></i></button>
+    <a class="ds-btn" data-variant="neutralWeak" data-size="xsmall" href="#">로그인</a>
+  </div>
+</header>
+```
+
+## 속성
+
+Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
+
+| 속성 | 값 |
+| --- | --- |
+| `state` | enabled hover |
+| 켜고 끄는 속성 | `search` `action` |
+
+그 밖에: Item selected
+
+## 사용 지침
+
+| 구분 | 내용 |
+| --- | --- |
+| **Do** | PC 화면에서만 씁니다. |
+| **Do** | 메뉴는 7개까지 두고, 지금 화면이 속한 메뉴에 `aria-current="page"`를 붙입니다. |
+| **Do** | 화면이 좁아지면 Top App Bar와 메뉴 버튼으로 바꿉니다. |
+
+## 예시
+
+```html
+<header class="ds-topnav" style="min-width:960px">
+  <div class="ds-topnav__left">
+    <a class="ds-topnav__heading" href="#" aria-label="홈으로"><span style="display:grid;place-items:center;width:88px;height:28px;border-radius:var(--ybm-shape-xs);background:var(--ybm-color-bg-neutral);color:var(--ybm-color-fg-neutral-subtle);font-size:var(--ybm-font-size-t03-static);font-weight:var(--ybm-font-weight-semibold)">로고</span></a>
+    <nav class="ds-topnav__menu" aria-label="주요 메뉴">
+      <a class="ds-topnav__item" href="#" aria-current="page">홈</a>
+      <a class="ds-topnav__item" href="#">소개</a>
+      <a class="ds-topnav__item" href="#">서비스</a>
+      <a class="ds-topnav__item" href="#">소식</a>
+      <a class="ds-topnav__item" href="#">고객지원</a>
+    </nav>
+  </div>
+  <div class="ds-topnav__end">
+    <button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="검색"><i class="ds-icon ds-icon--search" aria-hidden="true"></i></button>
+    <a class="ds-btn" data-variant="neutralWeak" data-size="xsmall" href="#">로그인</a>
+  </div>
+</header>
+```
+
+## 규격
+
+Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+
+```
+Figma: padding x2 / bg/layer-default / 왼쪽 묶음 gap x4 / 메뉴 사이 x1 / 오른쪽 끝 버튼 사이 x1
+  로고 칸 높이 x8, 좌우 padding x2, 로고 높이 28
+  Top Navigation Item 높이 x8, 좌우 padding x3, shape/sm, t04 Medium fg/neutral-muted
+  hover bg/transparent-pressed / 선택 bg/neutral-weak-alpha, t04 SemiBold fg/neutral
+```
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/search-suggestion.md -->
+
+# Search Suggestion
+
+검색어를 입력하는 동안 추천 검색어를 보여 주는 컴포넌트입니다.
+
+## 사용법
+
+아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+
+```html
+<div class="ds-search-anchor">
+  <div class="ds-input" data-variant="outline" data-size="medium">
+    <i class="ds-icon ds-icon--search ds-input__icon" aria-hidden="true"></i>
+    <input class="ds-input__control" type="search" role="combobox" aria-controls="sg" aria-expanded="true" aria-autocomplete="list" placeholder="검색어를 입력하세요">
+    <button type="button" class="ds-input__clear" aria-label="지우기"></button>
+  </div>
+  <div class="ds-search-suggest" id="sg">
+    [<div class="ds-search-suggest__heading" id="sg-h">최근 검색어</div>]
+    <ul class="ds-search-suggest__list" role="listbox" aria-labelledby="sg-h">
+      <li role="none"><a class="ds-search-suggest__item" role="option" id="sg-1" href="#">
+        <i class="ds-icon ds-icon--clock" aria-hidden="true"></i>
+        <span class="ds-search-suggest__content"><span class="ds-search-suggest__label">회의록</span>[<span class="ds-search-suggest__desc">보조 설명</span>]</span>
+      </a></li>
+    </ul>
+    [<p class="ds-search-suggest__empty">검색 결과가 없어요</p>]
+  </div>
+</div>
+```
+
+## 속성
+
+Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
+
+| 속성 | 값 |
+| --- | --- |
+| `content` | suggestion recent empty |
+| `Item state` | enabled highlighted |
+| 켜고 끄는 속성 | `description` |
+
+## 사용 지침
+
+| 구분 | 내용 |
+| --- | --- |
+| **Do** | 검색 칸은 Text Field outline에 search 아이콘과 지우기 버튼을 붙여 만들고, `type="search"`와 `role="combobox"`를 붙입니다. |
+| **Do** | 입력 전에는 최근 검색어, 입력 중에는 추천어, 결과가 없으면 안내 문구를 보여 줍니다. |
+
+## 예시
+
+```html
+<div class="ds-search-anchor" style="width:320px">
+  <div class="ds-input" data-variant="outline" data-size="medium">
+    <i class="ds-icon ds-icon--search ds-input__icon" aria-hidden="true"></i>
+    <input class="ds-input__control" id="pv-sg-input" type="search" role="combobox" aria-controls="pv-sg" aria-expanded="true" aria-autocomplete="list" placeholder="검색어를 입력하세요" value="디자인">
+    <button type="button" class="ds-input__clear" aria-label="지우기"></button>
+  </div>
+  <div class="ds-search-suggest" id="pv-sg">
+    <ul class="ds-search-suggest__list" role="listbox" aria-label="추천어">
+      <li role="none"><a class="ds-search-suggest__item" role="option" id="pv-sg-1" href="#"><i class="ds-icon ds-icon--search" aria-hidden="true"></i><span class="ds-search-suggest__content"><span class="ds-search-suggest__label">디자인 시스템</span></span></a></li>
+      <li role="none"><a class="ds-search-suggest__item" role="option" id="pv-sg-2" href="#"><i class="ds-icon ds-icon--search" aria-hidden="true"></i><span class="ds-search-suggest__content"><span class="ds-search-suggest__label">디자인 가이드</span><span class="ds-search-suggest__desc">문서 12개</span></span></a></li>
+      <li role="none"><a class="ds-search-suggest__item" role="option" id="pv-sg-3" href="#"><i class="ds-icon ds-icon--search" aria-hidden="true"></i><span class="ds-search-suggest__content"><span class="ds-search-suggest__label">디자인 토큰</span></span></a></li>
+    </ul>
+  </div>
+</div>
+<div class="ds-search-suggest" style="width:320px">
+  <div class="ds-search-suggest__heading" id="pv-sg-h">최근 검색어</div>
+  <ul class="ds-search-suggest__list" role="listbox" aria-labelledby="pv-sg-h">
+    <li role="none"><a class="ds-search-suggest__item" role="option" href="#"><i class="ds-icon ds-icon--clock" aria-hidden="true"></i><span class="ds-search-suggest__content"><span class="ds-search-suggest__label">회의록</span></span></a></li>
+    <li role="none"><a class="ds-search-suggest__item" role="option" href="#"><i class="ds-icon ds-icon--clock" aria-hidden="true"></i><span class="ds-search-suggest__content"><span class="ds-search-suggest__label">주간 보고</span></span></a></li>
+  </ul>
+</div>
+<div class="ds-search-suggest" style="width:320px"><p class="ds-search-suggest__empty">검색 결과가 없어요</p></div>
+```
+
+## 규격
+
+Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+
+```
+검색 입력 칸은 Text Field(04) outline 에 search 아이콘과 지우기 버튼을 붙여 쓴다.
+입력 전 최근 검색어(머리말 + clock), 입력 중 추천어(search), 찾은 것이 없으면 empty 문구.
+열고 닫기와 목록 채우기는 서비스가 한다. ybm-ds.js 는 입력 칸의 위아래 화살표로 줄 고르기와 Enter 만 맡는다.
+Figma: padding x1 / shape/lg / bg/layer-floating / elevation overlay / 최대 높이 300 / 입력 칸과 같은 폭
+  머리말 padding x2 x2 x1, t02 fg/neutral-muted / empty padding x3, t02 fg/neutral-muted, 가운데
+  Search Suggestion Item padding x2, gap x2, shape/sm, 아이콘 16 fg/neutral-subtle, 글자 t04 fg/neutral, 설명 t02 fg/neutral-muted
+  highlighted bg/transparent-pressed
+```
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/file-attach.md -->
+
+# File Attach
+
+파일을 끌어다 놓거나 골라서 첨부하는 컴포넌트입니다.
+
+## 사용법
+
+아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+
+```html
+<div class="ds-fileattach">
+  <label class="ds-fileattach__dropzone">
+    <input type="file" class="ds-fileattach__input" multiple>
+    <span class="ds-fileattach__label">파일을 끌어 놓거나 눌러서 추가하세요</span>
+  </label>
+  <div class="ds-fileattach__items">
+    <label class="ds-fileattach__trigger">
+      <input type="file" class="ds-fileattach__input" multiple aria-label="파일 추가">
+      <i class="ds-icon ds-icon--plus" aria-hidden="true"></i>
+      <span class="ds-fileattach__count"><b>2</b>/10</span>
+    </label>
+    <div class="ds-fileitem" [data-type="image"] [data-readonly]>
+      <span class="ds-fileitem__thumbnail"><i class="ds-icon ds-icon--file-text" aria-hidden="true"></i></span>
+      <span class="ds-fileitem__texts"><span class="ds-fileitem__name">보고서.pdf</span><span class="ds-fileitem__size">2.4MB</span></span>
+      (image 는 <img class="ds-fileitem__image" src="…" alt="…"> [<span class="ds-fileitem__badge">대표</span>])
+      <button type="button" class="ds-fileitem__remove" aria-label="보고서.pdf 빼기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button>
+    </div>
+  </div>
+</div>
+```
+
+## 속성
+
+Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
+
+| 속성 | 값 |
+| --- | --- |
+| `Dropzone state` | enabled dragOver disabled |
+| `Item type` | file image |
+| `state` | enabled readonly |
+| 켜고 끄는 속성 | `badge` |
+
+그 밖에: Trigger state
+
+## 사용 지침
+
+| 구분 | 내용 |
+| --- | --- |
+| **Do** | 끌어 놓는 칸은 끌어 놓기가 되는 PC 화면에서만 둡니다. |
+| **Do** | 모바일에서는 추가 버튼(Trigger)과 파일 줄만 씁니다. |
+| **Do** | 추가 버튼에는 지금 개수와 최대 개수를 적고, 다 차면 disabled로 바꿉니다. |
+
+## 예시
+
+```html
+<div class="ds-fileattach" style="width:343px">
+  <label class="ds-fileattach__dropzone">
+    <input type="file" class="ds-fileattach__input" multiple>
+    <span class="ds-fileattach__label">파일을 끌어 놓거나 눌러서 추가하세요</span>
+  </label>
+  <div class="ds-fileattach__items">
+    <label class="ds-fileattach__trigger">
+      <input type="file" class="ds-fileattach__input" multiple aria-label="파일 추가">
+      <i class="ds-icon ds-icon--plus" aria-hidden="true"></i>
+      <span class="ds-fileattach__count"><b>3</b>/10</span>
+    </label>
+    <div class="ds-fileitem">
+      <span class="ds-fileitem__thumbnail"><i class="ds-icon ds-icon--file-text" aria-hidden="true"></i></span>
+      <span class="ds-fileitem__texts"><span class="ds-fileitem__name">회의록_10월_전체_정리본.docx</span><span class="ds-fileitem__size">2.4MB</span></span>
+      <button type="button" class="ds-fileitem__remove" aria-label="회의록_10월_전체_정리본.docx 빼기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button>
+    </div>
+    <div class="ds-fileitem" data-type="image">
+      <span class="ds-fileitem__thumbnail" style="width:100%;height:100%;background:none"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span>
+      <span class="ds-fileitem__badge">대표</span>
+      <button type="button" class="ds-fileitem__remove" aria-label="사진 빼기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button>
+    </div>
+    <div class="ds-fileitem" data-readonly>
+      <span class="ds-fileitem__thumbnail"><i class="ds-icon ds-icon--file-text" aria-hidden="true"></i></span>
+      <span class="ds-fileitem__texts"><span class="ds-fileitem__name">보고서.pdf</span><span class="ds-fileitem__size">1.1MB</span></span>
+    </div>
+  </div>
+</div>
+<label class="ds-fileattach__dropzone" style="width:343px">
+  <input type="file" class="ds-fileattach__input" disabled>
+  <span class="ds-fileattach__label">지금은 파일을 올릴 수 없어요</span>
+</label>
+```
+
+## 규격
+
+Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+
+```
+끌어 놓는 칸(Dropzone) 아래에 고르기 버튼(Trigger)과 파일(Item)을 한 줄로 놓는다. 넘치면 옆으로 넘긴다.
+Dropzone 은 파일을 끌고 오면 ybm-ds.js 가 data-state="dragover" 를 붙인다(점선 → 실선).
+Figma: 전체 gap x2 / 줄 gap x2
+  Dropzone 높이 120, gap x2, 좌우 padding x4, shape/lg, 1px 점선 palette/gray-500 / dragOver 실선 stroke/neutral-solid / 글자 t04 Medium fg/neutral-subtle
+  Trigger x20 정사각, gap x1, shape/lg, 1px stroke/neutral-weak, plus 24 fg/neutral-subtle, 개수 t02 (지금 fg/neutral, 최대 fg/neutral-subtle) / pressed bg/transparent-pressed
+  Item file 160 × x20, 좌우 padding x4, gap x2_5, shape/lg, 1px stroke/neutral-weak / 썸네일 x12 shape/sm bg/neutral, 아이콘 24
+    이름 t02 Medium 두 줄 / 크기 t01 fg/neutral-subtle / readonly 글자와 아이콘 fg/disabled
+  Item image x20 정사각, 1px stroke/neutral-subtle / 대표 표시 높이 x6, 좌우 x1, shape/lg, bg/overlay, t02 Medium 흰색 / readonly 투명도 0.5
+  지우기 버튼 x5 원, 위 오른쪽 x1 안쪽, bg/layer-default, 1px stroke/neutral-weak, x 10 fg/neutral / readonly 에서는 숨김
+```
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/menu-sheet.md -->
+
+# Menu Sheet
+
+모바일 화면 아래에서 올라와 항목 하나를 선택하는 창입니다.
+
+## 사용법
+
+아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+
+```html
+<dialog class="ds-menusheet" id="ms" aria-labelledby="ms-t">
+  [<div class="ds-menusheet__header"><h2 class="ds-menusheet__title" id="ms-t">제목</h2>[<p class="ds-menusheet__desc">설명</p>]</div>]
+  <div class="ds-menusheet__list">
+    <div class="ds-menusheet__group" role="group">
+      <button type="button" class="ds-menusheet__item" [data-tone="critical"] [data-label-align="center"]>
+        [<i class="ds-icon ds-icon--share" aria-hidden="true"></i>]
+        <span class="ds-menusheet__content"><span class="ds-menusheet__label">공유하기</span>[<span class="ds-menusheet__item-desc">보조 설명</span>]</span>
+      </button>
+    </div>
+  </div>
+  <div class="ds-menusheet__footer"><button type="button" class="ds-menusheet__close" data-ds-close>닫기</button></div>
+</dialog>
+```
+
+## 속성
+
+Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
+
+| 속성 | 값 |
+| --- | --- |
+| `Item tone` | neutral critical |
+| `labelAlign` | left center |
+| 켜고 끄는 속성 | `header` `description` `footer` |
+
+## 사용 지침
+
+| 구분 | 내용 |
+| --- | --- |
+| **Do** | 몇 가지 동작 중 하나를 고를 때는 Menu Sheet, 입력이나 긴 내용은 Bottom Sheet를 씁니다. |
+| **Do** | 되돌릴 수 없는 동작은 critical로 따로 묶습니다. |
+
+## 예시
+
+```html
+<button type="button" class="ds-btn" data-variant="neutralOutline" data-size="small" data-ds-open="pv-ms">메뉴 시트 열기</button>
+<dialog class="ds-menusheet" id="pv-ms" aria-labelledby="pv-ms-t">
+  <div class="ds-menusheet__header"><h2 class="ds-menusheet__title" id="pv-ms-t">제목</h2><p class="ds-menusheet__desc">설명을 적어 주세요</p></div>
+  <div class="ds-menusheet__list">
+    <div class="ds-menusheet__group" role="group">
+      <button type="button" class="ds-menusheet__item" data-ds-close><i class="ds-icon ds-icon--share" aria-hidden="true"></i><span class="ds-menusheet__content"><span class="ds-menusheet__label">공유하기</span></span></button>
+      <button type="button" class="ds-menusheet__item" data-ds-close><i class="ds-icon ds-icon--link" aria-hidden="true"></i><span class="ds-menusheet__content"><span class="ds-menusheet__label">링크 복사</span><span class="ds-menusheet__item-desc">누구나 볼 수 있는 링크예요</span></span></button>
+    </div>
+    <div class="ds-menusheet__group" role="group">
+      <button type="button" class="ds-menusheet__item" data-tone="critical" data-ds-close><i class="ds-icon ds-icon--trash" aria-hidden="true"></i><span class="ds-menusheet__content"><span class="ds-menusheet__label">삭제하기</span></span></button>
+    </div>
+  </div>
+  <div class="ds-menusheet__footer"><button type="button" class="ds-menusheet__close" data-ds-close>닫기</button></div>
+</dialog>
+```
+
+## 규격
+
+Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+
+```
+Bottom Sheet 와 같이 네이티브 <dialog> 를 쓴다. data-ds-open 으로 열고, data-ds-close 와 바깥 누르기로 닫는다.
+Item tone: 기본 neutral / data-tone="critical"(되돌릴 수 없는 동작)   labelAlign: 기본 left / data-label-align="center"
+Figma: 최대 폭 480 / 위쪽 shape/2xl / bg/layer-floating / padding 위 x6, 좌우 global gutter, 아래 x4
+  header gap x1, 아래 x4, 제목 t06 Bold, 설명 t04 fg/neutral-muted / 묶음 사이 x2_5 / 묶음 shape/xl, 줄 사이 1px stroke/neutral-muted
+  Item 최소 높이 52, padding x3_5 x4, gap x3_5, bg/neutral(pressed bg/neutral-weak-pressed), 아이콘 22, 글자 t05, 설명 t03 Medium fg/neutral-subtle
+  critical 아이콘과 글자 fg/critical / footer 위 x2_5 / Close Button 높이 52, padding x3_5 x5, shape/lg, t05 Medium
+```
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/result-section.md -->
+
+# Result Section
+
+작업을 마친 뒤 결과를 알리고 다음에 할 일을 안내하는 컴포넌트입니다.
+
+## 사용법
+
+아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+
+```html
+<section class="ds-result" [data-size="medium"]>
+  [<div class="ds-result__asset"><i class="ds-icon ds-icon--circle-check-solid" aria-hidden="true"></i></div>]
+  <div class="ds-result__texts">
+    <h2 class="ds-result__title">신청을 마쳤어요</h2>
+    [<p class="ds-result__desc">처리 결과는 알림으로 알려 드릴게요</p>]
+  </div>
+  <div class="ds-result__actions">
+    <button type="button" class="ds-btn" data-variant="neutralWeak" data-size="medium">확인</button>
+    [<button type="button" class="ds-btn" data-variant="ghost" data-size="small">신청 내역 보기</button>]
+  </div>
+</section>
+```
+
+## 속성
+
+Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
+
+| 속성 | 값 |
+| --- | --- |
+| `size` | large medium |
+| 켜고 끄는 속성 | `asset` `description` |
+
+그 밖에: primary/secondary action
+
+## CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-result-gap` | `var(--ybm-space-x3)` |
+| `--ds-result-text-bottom` | `var(--ybm-space-x7)` |
+
+## 사용 지침
+
+| 구분 | 내용 |
+| --- | --- |
+| **Do** | 신청 완료, 오류, 빈 결과처럼 결과가 화면의 주인공일 때 씁니다. |
+| **Do** | 다음에 할 일 버튼 하나를 위에 두고, 보조 동작은 아래에 ghost 버튼으로 둡니다. |
+| **Do** | 목록이 비었다는 짧은 안내는 Empty를 씁니다. |
+
+## 예시
+
+```html
+<div style="display:flex;width:360px;max-width:100%;box-shadow:inset 0 0 0 1px var(--ybm-color-stroke-neutral-muted)">
+  <section class="ds-result">
+    <div class="ds-result__asset" style="color:var(--ybm-color-fg-positive)"><i class="ds-icon ds-icon--circle-check-solid" aria-hidden="true"></i></div>
+    <div class="ds-result__texts"><h2 class="ds-result__title">신청을 마쳤어요</h2><p class="ds-result__desc">처리 결과는 알림으로 알려 드릴게요</p></div>
+    <div class="ds-result__actions"><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="medium">확인</button><button type="button" class="ds-btn" data-variant="ghost" data-size="small">신청 내역 보기</button></div>
+  </section>
+</div>
+<div style="display:flex;width:360px;max-width:100%;box-shadow:inset 0 0 0 1px var(--ybm-color-stroke-neutral-muted)">
+  <section class="ds-result" data-size="medium">
+    <div class="ds-result__asset" style="color:var(--ybm-color-fg-critical)"><i class="ds-icon ds-icon--circle-alert-solid" aria-hidden="true"></i></div>
+    <div class="ds-result__texts"><h2 class="ds-result__title">다시 시도해 주세요</h2><p class="ds-result__desc">요청을 처리하지 못했어요</p></div>
+    <div class="ds-result__actions"><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="medium">다시 시도</button><button type="button" class="ds-btn" data-variant="ghost" data-size="small">고객센터 문의</button></div>
+  </section>
+</div>
+```
+
+## 규격
+
+Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+
+```
+size: 기본 large(화면 전체) / data-size="medium"(화면 일부)
+위쪽 그림은 40 아이콘(완료 fg/positive, 오류 fg/critical)이나 Progress Circle 40 으로 바꿔 쓴다.
+Figma: 가운데 정렬, padding x4 x12 / 그림 아래 x4, 아이콘 40
+  large 글자 사이 x3, 아래 x7, 제목 t08 Bold, 설명 t05 fg/neutral-muted / medium 글자 사이 x2, 아래 x6, 제목 t05 Bold, 설명 t04
+  버튼 사이 x5, 위 Action Button neutralWeak medium, 아래 ghost small
+```
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/timer.md -->
+
+# Timer
+
+지난 시간이나 남은 시간을 숫자로 보여 주는 컴포넌트입니다.
+
+## 사용법
+
+아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+
+```html
+<time class="ds-timer" data-end="2026-10-29T15:00:00+09:00" [data-format="elapsed"]>0:00</time>
+```
+
+## 속성
+
+Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
+
+| 속성 | 값 |
+| --- | --- |
+| `format` | clock elapsed |
+| 켜고 끄는 속성 | `data-start` `data-end` |
+
+## 사용 지침
+
+| 구분 | 내용 |
+| --- | --- |
+| **Do** | 숫자 폭이 고정돼 있어 값이 바뀌어도 글자가 제자리에 있습니다. |
+| **Do** | 크기와 색은 놓이는 자리에 맞춰 바꿉니다. |
+| **Do** | 시간이 다 되면 `ds-timer-end` 이벤트를 받아 다음 동작으로 이어 갑니다. |
+
+## 예시
+
+```html
+<span>남은 시간 <time class="ds-timer" id="pv-timer-end" style="font-size:var(--ybm-font-size-t07);line-height:var(--ybm-line-height-t07);font-weight:var(--ybm-font-weight-bold);color:var(--ybm-color-fg-neutral)">0:00</time></span>
+<span>흐른 시간 <time class="ds-timer" id="pv-timer-start" data-format="elapsed">0초</time></span>
+```
+
+## 규격
+
+Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+
+```
+format: 기본 clock(12:34, 1시간 넘으면 1:02:34) / data-format="elapsed"(12분 34초)
+흐른 시간: data-start="시작 시각" / 남은 시간: data-end="끝 시각" (ISO 문자열 또는 밀리초)
+ybm-ds.js 가 1초마다 글자와 datetime 을 바꾸고, 남은 시간이 0 이 되면 ds-timer-end 이벤트를 한 번 보낸다.
+Figma: t02 fg/neutral-muted, 숫자 폭 고정 / 크기와 색은 놓이는 자리에 맞춰 바꿔 쓴다
+```
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/status-dot.md -->
+
+# Status Dot
+
+작은 색 점으로 상태를 알려 주는 컴포넌트입니다.
+
+## 사용법
+
+아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+
+```html
+<span class="ds-statusdot" data-tone="positive" [data-pulse]></span> <span>연결됨</span>
+```
+
+## 속성
+
+Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
+
+| 속성 | 값 |
+| --- | --- |
+| `tone` | positive warning critical brand neutral |
+| 켜고 끄는 속성 | `data-pulse` |
+
+## 사용 지침
+
+| 구분 | 내용 |
+| --- | --- |
+| **Do** | 색만으로 뜻을 전하지 않도록 글자와 함께 씁니다. |
+| **Do** | 프로필 사진 위의 상태는 Avatar의 Status를 씁니다. |
+
+## 예시
+
+```html
+<span style="display:inline-flex;align-items:center;gap:var(--ybm-space-x1_5)"><span class="ds-statusdot" data-tone="positive"></span>연결됨</span>
+<span style="display:inline-flex;align-items:center;gap:var(--ybm-space-x1_5)"><span class="ds-statusdot" data-tone="warning"></span>지연</span>
+<span style="display:inline-flex;align-items:center;gap:var(--ybm-space-x1_5)"><span class="ds-statusdot" data-tone="critical"></span>끊김</span>
+<span style="display:inline-flex;align-items:center;gap:var(--ybm-space-x1_5)"><span class="ds-statusdot" data-tone="brand" data-pulse></span>진행 중</span>
+<span style="display:inline-flex;align-items:center;gap:var(--ybm-space-x1_5)"><span class="ds-statusdot"></span>대기</span>
+```
+
+## 규격
+
+Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+
+```
+tone: positive / warning / critical / brand / neutral(기본)   data-pulse: 진행 중일 때 깜빡임
+Figma: x2 원 / positive bg/positive-solid, warning bg/warning-solid, critical bg/critical-solid, brand bg/brand-solid, neutral fg/neutral-subtle
+  깜빡임 2초, 투명도 1 → 0.5 → 1 (동작 줄이기 설정에서는 멈춤)
+```
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/checkbox-group.md -->
+
+# Checkbox Group
+
+관련된 체크박스를 한 묶음으로 보여 주는 컴포넌트입니다.
+
+## 사용법
+
+아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+
+```html
+<fieldset class="ds-checkbox-group">
+  <label class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control"><span class="ds-checkbox__label">이메일</span></label>
+</fieldset>
+```
+
+## 속성
+
+Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
+
+그 밖에: 세로 간격 x1, 묶음 이름은 Field Label
+
+## 사용 지침
+
+| 구분 | 내용 |
+| --- | --- |
+| **Do** | 서로 관련된 체크박스만 묶습니다. |
+| **Do** | 묶음 이름과 오류 문구는 Field Label로 붙입니다. |
+
+## 예시
+
+```html
+<fieldset class="ds-checkbox-group">
+  <label class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control" checked><span class="ds-checkbox__label">이메일</span></label>
+  <label class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control"><span class="ds-checkbox__label">문자 메시지</span></label>
+  <label class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control" checked><span class="ds-checkbox__label">앱 알림</span></label>
+</fieldset>
+```
+
+## 규격
+
+Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+
+```
+묶음 이름, 설명, 오류 문구는 03 Field Label 로 감싼다.
+Figma: 항목 사이 x1
+```
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/scroll-fog.md -->
+
+# Scroll Fog
+
+스크롤 영역 끝을 흐리게 해서 내용이 더 있다는 것을 알려 주는 컴포넌트입니다.
+
+## 사용법
+
+아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+
+```html
+<div class="ds-scrollfog" [data-direction="horizontal"]>…스크롤 되는 내용…</div>
+```
+
+## 속성
+
+Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
+
+| 속성 | 값 |
+| --- | --- |
+| `direction` | vertical horizontal |
+
+그 밖에: 끝 20
+
+## CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-scrollfog-size` | `20px` |
+| `--ds-scrollfog-direction` | `to bottom` |
+
+## 사용 지침
+
+| 구분 | 내용 |
+| --- | --- |
+| **Do** | 흐려지는 쪽에 20 이상 여백을 둡니다. |
+| **Do** | 화면 전체 세로 스크롤에는 위 20, 아래 80을 둡니다. |
+
+## 예시
+
+```html
+<div class="ds-scrollfog" style="width:240px;height:180px;padding-block:20px">
+  <p>스크롤 되는 내용 1</p><p>스크롤 되는 내용 2</p><p>스크롤 되는 내용 3</p><p>스크롤 되는 내용 4</p><p>스크롤 되는 내용 5</p><p>스크롤 되는 내용 6</p><p>스크롤 되는 내용 7</p><p>스크롤 되는 내용 8</p><p>스크롤 되는 내용 9</p>
+</div>
+<div class="ds-scrollfog" data-direction="horizontal" style="display:flex;gap:var(--ybm-space-x2);width:300px;padding-inline:20px">
+  <span class="ds-badge" data-size="large">전체</span><span class="ds-badge" data-size="large">디자인</span><span class="ds-badge" data-size="large">개발</span><span class="ds-badge" data-size="large">기획</span><span class="ds-badge" data-size="large">마케팅</span><span class="ds-badge" data-size="large">영업</span><span class="ds-badge" data-size="large">운영</span>
+</div>
+```
+
+## 규격
+
+Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+
+```
+direction: 기본 세로 / data-direction="horizontal"   흐려지는 쪽에 최소 20 의 여백을 둔다(화면 전체 세로 스크롤은 위 20, 아래 80)
+Figma: 끝 20 을 투명 → 불투명으로 / 코드는 배경색 덮개가 아니라 mask 라 어떤 배경 위에서도 쓴다
+```
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/pull-to-refresh.md -->
+
+# Pull To Refresh
+
+목록 맨 위에서 아래로 당기면 새로 고치는 컴포넌트입니다.
+
+## 사용법
+
+아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+
+```html
+<div class="ds-ptr">
+  <div class="ds-ptr__indicator">
+    <span class="ds-progress-circle" role="progressbar" aria-label="새로 고침"><svg viewBox="0 0 24 24" aria-hidden="true"><circle class="ds-progress-circle__track" pathLength="100"/><circle class="ds-progress-circle__range" pathLength="100"/></svg></span>
+  </div>
+  <div class="ds-ptr__content">…목록…</div>
+</div>
+```
+
+## 속성
+
+Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
+
+| 속성 | 값 |
+| --- | --- |
+| `state` | pulling refreshing |
+
+그 밖에: Progress Circle 24
+
+## CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-ptr-size` | `calc(var(--ybm-space-x6) + var(--ybm-space-x8) * 2)` |
+| `--ds-ptr-displacement` | `0px` |
+
+## 사용 지침
+
+| 구분 | 내용 |
+| --- | --- |
+| **Do** | 최신 내용을 다시 불러오는 목록 화면에만 씁니다. |
+| **Do** | 글자를 골라야 하는 영역에서는 data-disabled로 끕니다. |
+
+## 예시
+
+```html
+<div class="ds-ptr" id="pv-ptr" style="width:343px;height:240px;box-shadow:inset 0 0 0 1px var(--ybm-color-stroke-neutral-muted);border-radius:var(--ybm-shape-md)">
+  <div class="ds-ptr__indicator">
+    <span class="ds-progress-circle" role="progressbar" aria-label="새로 고침" style="--ds-progress-value: 0"><svg viewBox="0 0 24 24" aria-hidden="true"><circle class="ds-progress-circle__track" pathLength="100"/><circle class="ds-progress-circle__range" pathLength="100"/></svg></span>
+  </div>
+  <div class="ds-ptr__content" style="height:100%;overflow:auto;padding:var(--ybm-space-x4)">
+    <p>휴대폰에서 이 칸을 아래로 당겨 보세요.</p>
+    <p id="pv-ptr-out" style="color:var(--ybm-color-fg-neutral-muted)">아직 새로 고치지 않았어요</p>
+  </div>
+</div>
+```
+
+## 규격
+
+Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+
+```
+ybm-ds.js 가 터치로 당긴 거리를 --ds-ptr-displacement 에 넣고, 88 을 넘겨 놓으면 data-state="refreshing" 과 ds-refresh 이벤트.
+새로 고침이 끝나면 YBM.endRefresh(요소) 로 되돌린다. data-disabled 로 끈다.
+Figma: 위쪽 영역 높이 x6 + x8 × 2 / Progress Circle 24 neutral, 당기는 동안 차오르고 새로 고치는 동안 회전
+```
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/side-panel.md -->
+
+# Side Panel
+
+PC 화면 가장자리에서 밀려 나오는 창입니다. 지금 화면을 그대로 둔 채 자세한 정보나 작업을 보여 줄 때 씁니다.
+
+## 사용법
+
+아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+
+```html
+<dialog class="ds-sidepanel" id="sp" aria-labelledby="sp-t" [data-size="small"] [data-direction="left"]>
+  <div class="ds-sidepanel__header">
+    <div class="ds-sidepanel__texts"><h2 class="ds-sidepanel__title" id="sp-t">제목</h2>[<p class="ds-sidepanel__desc">설명</p>]</div>
+    <button type="button" class="ds-sidepanel__close" data-ds-close aria-label="닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button>
+  </div>
+  <div class="ds-sidepanel__body">…</div>
+  [<div class="ds-sidepanel__footer">…버튼…</div>]
+</dialog>
+```
+
+## 속성
+
+Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
+
+| 속성 | 값 |
+| --- | --- |
+| `size` | small medium large |
+| `direction` | right left |
+
+## CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-sidepanel-width` | `720px` |
+
+## 사용 지침
+
+| 구분 | 내용 |
+| --- | --- |
+| **Do** | PC 화면 옆에 보조 내용이나 필터를 둘 때 Side Panel을 씁니다. |
+| **Do** | 화면이 좁으면 Bottom Sheet로 바꿉니다. |
+
+## 예시
+
+```html
+<button type="button" class="ds-btn" data-variant="neutralOutline" data-size="small" data-ds-open="pv-sp">옆 패널 열기</button>
+<dialog class="ds-sidepanel" id="pv-sp" data-size="small" aria-labelledby="pv-sp-t">
+  <div class="ds-sidepanel__header">
+    <div class="ds-sidepanel__texts"><h2 class="ds-sidepanel__title" id="pv-sp-t">필터</h2><p class="ds-sidepanel__desc">원하는 조건을 고르세요</p></div>
+    <button type="button" class="ds-sidepanel__close" data-ds-close aria-label="닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button>
+  </div>
+  <div class="ds-sidepanel__body">
+    <p style="height:900px">본문이 길면 이 영역만 스크롤되고, 스크롤되면 위에 선이 생깁니다.</p>
+  </div>
+  <div class="ds-sidepanel__footer"><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="medium" data-ds-close>취소</button><button type="button" class="ds-btn" data-variant="neutralSolid" data-size="medium" data-ds-close>적용</button></div>
+</dialog>
+```
+
+## 규격
+
+Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+
+```
+네이티브 <dialog> 를 쓴다. data-ds-open 으로 열고, data-ds-close 와 바깥 누르기로 닫는다.
+size: small 480 / 기본 medium 720 / large 960 (화면의 80% 를 넘지 않음)   direction: 기본 오른쪽 / data-direction="left"
+본문이 스크롤되면 ybm-ds.js 가 data-scrolled 를 붙여 본문 위에 1px 선이 생긴다. 화면이 좁으면 Bottom Sheet 로 바꿔 쓴다.
+Figma: bg/layer-floating / header 최소 높이 70, padding x6 x6 x4, gap x1_5, 제목 t08 Bold, 설명 t05 fg/neutral-muted
+  body 좌우 x6, 아래 x12 / footer padding x4 x6 x6 / Close Button 52, shape/lg, x 22 fg/neutral-subtle
+```
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/image-frame.md -->
+
+# Image Frame
+
+사진을 정해진 비율에 맞춰 잘라 보여 주는 컴포넌트입니다.
+
+## 사용법
+
+아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+
+```html
+<div class="ds-imageframe" data-ratio="4:3" [data-radius="lg"] [data-stroke]>
+  <img src="…" alt="…">
+  [<div class="ds-imageframe__floater" data-position="bottom-end"><span class="ds-imageframe__indicator">1/5</span></div>]
+</div>
+```
+
+## 속성
+
+Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
+
+| 속성 | 값 |
+| --- | --- |
+| `ratio` | 1:1 4:3 16:9 |
+| 켜고 끄는 속성 | `stroke` `indicator` |
+
+## CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-imageframe-ratio` | `1` |
+| `--ds-imageframe-radius` | `var(--ybm-shape-sm)` |
+
+## 사용 지침
+
+| 구분 | 내용 |
+| --- | --- |
+| **Do** | 사진은 Image Frame의 비율 안에 꽉 채워 넣습니다. |
+| **Do** | 여러 장을 넘겨 볼 때는 Carousel 항목으로 넣습니다. |
+| **Do** | 터치 화면에서는 넘기기 버튼 없이 손가락으로 넘깁니다. |
+
+## 예시
+
+```html
+<div class="ds-imageframe" style="width:160px"><span class="pv-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div>
+<div class="ds-imageframe" data-ratio="4:3" data-stroke style="width:200px"><span class="pv-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span><div class="ds-imageframe__floater" data-position="bottom-end"><span class="ds-imageframe__indicator">1/5</span></div></div>
+<div class="ds-imageframe" data-ratio="16:9" style="width:240px"><span class="pv-ph"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span></div>
+
+<div class="ds-imageframe" data-radius="md" style="width:120px"><span class="pv-ph">md</span></div>
+<div class="ds-imageframe" data-radius="lg" style="width:120px"><span class="pv-ph">lg</span></div>
+<div class="ds-imageframe" data-radius="xl" style="width:120px"><span class="pv-ph">xl</span></div>
+<div class="ds-imageframe" data-radius="none" style="width:120px"><span class="pv-ph">none</span></div>
+```
+
+## 규격
+
+Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+
+```
+ratio: 기본 1:1 / data-ratio="4:3" / data-ratio="16:9" (그 밖은 --ds-imageframe-ratio)   stroke: data-stroke
+radius: sm(기본) / none / md / lg / xl (2026-11-03 추가, 작은 썸네일 sm/md, 카드 안 사진 lg, 큰 대표 사진 xl)
+Figma: shape/sm / 빈 자리 bg/neutral / stroke 안쪽 1px stroke/neutral-subtle
+  얹는 표시는 가장자리에서 x1_5 / indicator padding x0_5 x1_5, pill, palette/static-black-alpha-800, Static t01 Medium 흰색
+```
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/carousel.md -->
+
+# Carousel
+
+여러 콘텐츠를 옆으로 넘기며 보는 컴포넌트입니다.
+
+## 사용법
+
+아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+
+```html
+<div class="ds-carousel" role="region" aria-roledescription="carousel" aria-label="추천">
+  <div class="ds-carousel__scroller">
+    <div class="ds-carousel__item">…</div>
+  </div>
+  <button type="button" class="ds-carousel__button" data-direction="previous" aria-label="이전"><i class="ds-icon ds-icon--chevron-left ds-icon--sm" aria-hidden="true"></i></button>
+  <button type="button" class="ds-carousel__button" data-direction="next" aria-label="다음"><i class="ds-icon ds-icon--chevron-right ds-icon--sm" aria-hidden="true"></i></button>
+</div>
+```
+
+## 속성
+
+Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
+
+그 밖에: 항목 사이 x2, 끝 흐림 x1, 버튼 32
+
+## CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-carousel-gap` | `var(--ybm-space-x2)` |
+| `--ds-carousel-padding` | `0px` |
+| `--ds-carousel-fade` | `var(--ybm-space-x1)` |
+| `--ds-carousel-fade-start` | `var(--ds-carousel-fade)` |
+| `--ds-carousel-fade-end` | `var(--ds-carousel-fade)` |
+
+## 사용 지침
+
+| 구분 | 내용 |
+| --- | --- |
+| **Do** | 사진은 Image Frame의 비율 안에 꽉 채워 넣습니다. |
+| **Do** | 여러 장을 넘겨 볼 때는 Carousel 항목으로 넣습니다. |
+| **Do** | 터치 화면에서는 넘기기 버튼 없이 손가락으로 넘깁니다. |
+
+## 예시
+
+```html
+<div class="ds-carousel" role="region" aria-roledescription="carousel" aria-label="추천" style="width:343px">
+  <div class="ds-carousel__scroller">
+    <div class="ds-carousel__item"><div class="ds-imageframe" data-ratio="4:3" style="width:240px"><span class="pv-ph">1</span></div></div>
+    <div class="ds-carousel__item"><div class="ds-imageframe" data-ratio="4:3" style="width:240px"><span class="pv-ph">2</span></div></div>
+    <div class="ds-carousel__item"><div class="ds-imageframe" data-ratio="4:3" style="width:240px"><span class="pv-ph">3</span></div></div>
+    <div class="ds-carousel__item"><div class="ds-imageframe" data-ratio="4:3" style="width:240px"><span class="pv-ph">4</span></div></div>
+  </div>
+  <button type="button" class="ds-carousel__button" data-direction="previous" aria-label="이전"><i class="ds-icon ds-icon--chevron-left ds-icon--sm" aria-hidden="true"></i></button>
+  <button type="button" class="ds-carousel__button" data-direction="next" aria-label="다음"><i class="ds-icon ds-icon--chevron-right ds-icon--sm" aria-hidden="true"></i></button>
+</div>
+```
+
+## 규격
+
+Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+
+```
+항목은 넘길 때 시작 위치에 맞춰 멈춘다. 이미지 넘기기 배너는 Image Frame 을 항목으로 넣어 만든다.
+ybm-ds.js 가 처음/끝에 닿으면 data-at-start / data-at-end 를 붙여 그쪽 흐림과 버튼을 감추고, 버튼을 누르면 한 화면씩 넘긴다.
+Figma: 항목 사이 x2 / 양 끝 흐림 x1 / Carousel Button 32 pill, bg/layer-floating, elevation overlay, 아이콘 16, 가장자리에서 x2
+```
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/markdown.md -->
+
+# Markdown
+
+AI 답변처럼 제목, 목록, 표가 섞인 글을 보여 주는 컴포넌트입니다.
+
+## 사용법
+
+아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+
+```html
+<div class="ds-markdown">…변환된 HTML…</div>
+```
+
+## 속성
+
+Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
+
+그 밖에: 본문 t04, 제목과 블록 간격
+
+## 사용 지침
+
+| 구분 | 내용 |
+| --- | --- |
+| **Do** | AI 답변처럼 서식 있는 글은 Markdown으로 감쌉니다. |
+| **Do** | 코드는 Code Block으로, 근거는 번호나 출처 칩(Citation)으로 붙입니다. |
+
+## 예시
+
+```html
+  <div class="ds-markdown">
+    <h2>제목 2</h2>
+    <p>본문 문단은 14 크기로 쓰고, 문단 사이는 12를 띄웁니다. <code>inline code</code>와 <a href="#">링크</a>를 함께 쓸 수 있어요.<a class="ds-citation" data-type="number" href="#" aria-label="출처 1">1</a></p>
+    <h3>제목 3</h3>
+    <ul><li>목록 항목 하나</li><li>목록 항목 둘</li></ul>
+    <blockquote>인용문은 왼쪽 선으로 구분합니다.</blockquote>
+    <figure class="ds-codeblock">
+      <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">javascript</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
+      <pre class="ds-codeblock__code"><code>const total = items
+.filter((item) =&gt; item.checked)
+.length;</code></pre>
+    </figure>
+    <p>출처: <a class="ds-citation" href="#"><span class="ds-citation__icon"><i class="ds-icon ds-icon--globe" aria-hidden="true"></i></span><span class="ds-citation__label">출처 이름</span></a><a class="ds-citation" href="#"><span class="ds-citation__label">아주 긴 출처 이름은 말줄임으로 끝납니다</span></a></p>
+  </div>
+```
+
+## 규격
+
+Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+
+```
+변환된 HTML 을 감싸기만 하면 제목, 문단, 목록, 인용, 표, 코드의 크기와 간격이 맞춰진다. 코드 묶음은 Code Block, 출처는 Citation.
+Figma: 본문 t04 / h1 t09 Bold, h2 t07 Bold (앞뒤 x6 / x3) / h3 t06, h4 t05, h5/h6 t04 SemiBold (앞뒤 x4 / x2)
+  문단, 목록, 그림 x3 / 코드, 인용, 표 x4 / 구분선 x6 / 인용 왼쪽 2px stroke/neutral-weak, fg/neutral-muted
+```
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/code-block.md -->
+
+# Code Block
+
+코드를 보여 주고 한 번에 복사하게 하는 컴포넌트입니다.
+
+## 사용법
+
+아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+
+```html
+<figure class="ds-codeblock">
+  [<figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">javascript</span>
+    <button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>]
+  <pre class="ds-codeblock__code"><code>…</code></pre>
+</figure>
+```
+
+## 속성
+
+Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
+
+| 속성 | 값 |
+| --- | --- |
+| `header` | true false |
+
+그 밖에: 복사 버튼
+
+## 사용 지침
+
+| 구분 | 내용 |
+| --- | --- |
+| **Do** | AI 답변처럼 서식 있는 글은 Markdown으로 감쌉니다. |
+| **Do** | 코드는 Code Block으로, 근거는 번호나 출처 칩(Citation)으로 붙입니다. |
+
+## 예시
+
+```html
+<figure class="ds-codeblock"><pre class="ds-codeblock__code"><code>npm install ybm-ds</code></pre></figure>
+```
+
+## 규격
+
+Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+
+```
+header 에는 언어 이름과 복사 버튼. 복사 버튼(data-ds-copy)은 ybm-ds.js 가 코드를 복사하고 잠시 data-copied 를 붙인다.
+data-wrap: 긴 줄을 가로로 넘기지 않고 줄바꿈한다(2026-10-30 추가).
+Figma: shape/sm, 1px stroke/neutral-weak, bg/neutral / header padding x2 x4, 아래 1px 선, 언어 12 Medium fg/neutral-subtle, 복사 24 안에 16
+  코드 padding x3 x4, 13 / 20, fg/neutral, 긴 줄은 가로 스크롤
+```
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/citation.md -->
+
+# Citation
+
+본문에서 근거가 된 출처를 표시하는 컴포넌트입니다.
+
+## 사용법
+
+아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+
+```html
+<a class="ds-citation" data-type="number" href="#ref-1" aria-label="출처 1">1</a>
+<a class="ds-citation" href="https://…">[<span class="ds-citation__icon"><i class="ds-icon ds-icon--globe" aria-hidden="true"></i></span>]<span class="ds-citation__label">출처 이름</span></a>
+```
+
+## 속성
+
+Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
+
+| 속성 | 값 |
+| --- | --- |
+| `type` | number label |
+| 켜고 끄는 속성 | `icon` |
+
+## 사용 지침
+
+| 구분 | 내용 |
+| --- | --- |
+| **Do** | AI 답변처럼 서식 있는 글은 Markdown으로 감쌉니다. |
+| **Do** | 코드는 Code Block으로, 근거는 번호나 출처 칩(Citation)으로 붙입니다. |
+
+## 예시
+
+```html
+<span>번호<a class="ds-citation" data-type="number" href="#">1</a></span>
+<a class="ds-citation" href="#"><span class="ds-citation__label">출처 이름</span></a>
+<a class="ds-citation" href="#"><span class="ds-citation__icon"><i class="ds-icon ds-icon--globe" aria-hidden="true"></i></span><span class="ds-citation__label">출처 이름</span></a>
+```
+
+## 규격
+
+Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+
+```
+type: 기본 label(출처 이름 칩) / data-type="number"(글 뒤 위첨자 번호)
+Figma: 높이 x5, t02, fg/neutral-muted / number 최소 폭 x5, 좌우 x1, pill, bg/brand-weak, SemiBold
+  label 좌우 x2(아이콘이 있으면 왼쪽 x0_5), gap x1, shape/sm, 1px stroke/neutral-weak, 최대 15em / 아이콘 칸 x4 원, 아이콘 12
+```
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/multi-select.md -->
+
+# Multi Select
+
+목록에서 여러 값을 선택하고, 선택한 값을 칸 안에 모아 보여 주는 컴포넌트입니다.
+
+## 사용법
+
+아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+
+```html
+<div class="ds-multiselect">
+  <button type="button" class="ds-multiselect__trigger" data-ds-popover="ms" aria-haspopup="listbox" aria-expanded="false">
+    <span class="ds-multiselect__values" data-placeholder="선택하세요" [data-max="2"]></span>
+    <i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i>
+  </button>
+  <div class="ds-multiselect__panel" id="ms" role="listbox" aria-multiselectable="true" hidden>
+    [<div class="ds-multiselect__heading">관심 분야</div>]
+    <label class="ds-multiselect__option"><span class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control"></span><span class="ds-multiselect__label">디자인</span></label>
+  </div>
+</div>
+```
+
+## 속성
+
+Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
+
+| 속성 | 값 |
+| --- | --- |
+| `Trigger content` | placeholder selected |
+| `state` | enabled open disabled |
+
+## 사용 지침
+
+| 구분 | 내용 |
+| --- | --- |
+| **Do** | 여러 개를 고를 때만 Multi Select를 씁니다. |
+| **Do** | 고른 값이 많으면 2개까지 보여 주고 나머지는 +N으로 줄입니다. |
+
+## 예시
+
+```html
+<div class="ds-multiselect" style="width:320px">
+  <button type="button" class="ds-multiselect__trigger" data-ds-popover="pv-msel" aria-haspopup="listbox" aria-expanded="false">
+    <span class="ds-multiselect__values" data-placeholder="선택하세요"></span>
+    <i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i>
+  </button>
+  <div class="ds-multiselect__panel" id="pv-msel" role="listbox" aria-multiselectable="true" hidden>
+    <div class="ds-multiselect__heading">관심 분야</div>
+    <label class="ds-multiselect__option"><span class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control" checked></span><span class="ds-multiselect__label">디자인</span></label>
+    <label class="ds-multiselect__option"><span class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control" checked></span><span class="ds-multiselect__label">개발</span></label>
+    <label class="ds-multiselect__option"><span class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control"></span><span class="ds-multiselect__label">기획</span></label>
+    <label class="ds-multiselect__option"><span class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control" checked></span><span class="ds-multiselect__label">마케팅</span></label>
+    <label class="ds-multiselect__option"><span class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control" disabled></span><span class="ds-multiselect__label">영업</span></label>
+  </div>
+</div>
+```
+
+## 규격
+
+Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+
+```
+Popover 와 같이 data-ds-popover="id" 로 열고, 바깥 누르기와 Esc 로 닫는다.
+ybm-ds.js 가 고른 값을 Badge 로 칸에 채우고, data-max(기본 2) 를 넘으면 +N 으로 줄인다.
+Figma: Trigger 높이 40, padding x2 x3_5, gap x2, shape/sm, 1px stroke/neutral-weak (열림 stroke/neutral-contrast), 값 사이 x1, +N t04 Medium fg/neutral-muted
+  Panel padding x1, shape/lg, bg/layer-floating, elevation overlay, 최대 높이 300 / heading padding x1 x2, t02 fg/neutral-muted
+  Option padding x1_5 x2, gap x2, shape/sm, t04 Medium / highlighted bg/transparent-pressed / disabled fg/disabled
+```
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/rating.md -->
+
+# Rating
+
+별 다섯 개로 평점을 보여 주거나 매기는 컴포넌트입니다.
+
+## 사용법
+
+아직 구조 설명이 없습니다. 아래 예시의 코드를 복사해 쓰세요.
+
+## 속성
+
+Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
+
+| 속성 | 값 |
+| --- | --- |
+| `size` | small medium large |
+| `value` | --ds-rating-value 0~5 |
+
+그 밖에: input (radio 5개)
+
+## CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-rating-size` | `16px` |
+| `--ds-rating-gap` | `2px` |
+| `--ds-rating-value` | `0` |
+| `--ds-rating-fill` | `var(--ybm-color-fg-warning)` |
+| `--ds-rating-empty` | `var(--ybm-color-stroke-neutral-muted)` |
+
+## 사용 지침
+
+| 구분 | 내용 |
+| --- | --- |
+| **Do** | 별 옆에 평점 숫자와 후기 수를 함께 보여 주세요. |
+| **Do** | 고르는 별점은 별 5개를 모두 보여 주고, 고른 별까지 채웁니다. |
+| **Do** | 별 색은 경고색(노랑) 하나만 씁니다. |
+
+## 예시
+
+```html
+<span class="ds-rating" style="--ds-rating-value: 4.5" role="img" aria-label="5점 만점에 4.5점"><span class="ds-rating__stars"></span><span class="ds-rating__value">4.5</span><span class="ds-rating__count">(312)</span></span>
+<span class="ds-rating" data-size="small" style="--ds-rating-value: 3.8" role="img" aria-label="5점 만점에 3.8점"><span class="ds-rating__stars"></span><span class="ds-rating__value">3.8</span></span>
+<span class="ds-rating" data-size="large" style="--ds-rating-value: 5" role="img" aria-label="5점 만점에 5점"><span class="ds-rating__stars"></span><span class="ds-rating__value">5.0</span><span class="ds-rating__count">(12)</span></span>
+<span class="ds-rating" style="--ds-rating-value: 0" role="img" aria-label="평점 없음"><span class="ds-rating__stars"></span><span class="ds-rating__count">아직 후기가 없어요</span></span>
+
+<fieldset class="ds-rating" data-input data-size="large" aria-label="별점 고르기">
+  <label class="ds-rating__option"><input type="radio" class="ds-rating__control" name="pv-rating" value="1" aria-label="1점"><span class="ds-rating__star"></span></label>
+  <label class="ds-rating__option"><input type="radio" class="ds-rating__control" name="pv-rating" value="2" aria-label="2점"><span class="ds-rating__star"></span></label>
+  <label class="ds-rating__option"><input type="radio" class="ds-rating__control" name="pv-rating" value="3" aria-label="3점"><span class="ds-rating__star"></span></label>
+  <label class="ds-rating__option"><input type="radio" class="ds-rating__control" name="pv-rating" value="4" aria-label="4점" checked><span class="ds-rating__star"></span></label>
+  <label class="ds-rating__option"><input type="radio" class="ds-rating__control" name="pv-rating" value="5" aria-label="5점"><span class="ds-rating__star"></span></label>
+</fieldset>
+<i class="ds-icon ds-icon--heart" aria-hidden="true"></i><i class="ds-icon ds-icon--heart-solid" aria-hidden="true" style="color:var(--ybm-color-fg-critical)"></i><i class="ds-icon ds-icon--bookmark" aria-hidden="true"></i><i class="ds-icon ds-icon--bookmark-solid" aria-hidden="true"></i><i class="ds-icon ds-icon--shopping-cart" aria-hidden="true"></i><i class="ds-icon ds-icon--map-pin" aria-hidden="true"></i><i class="ds-icon ds-icon--star" aria-hidden="true"></i>
+```
+
+## 규격
+
+Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+
+```
+보기:  <span class="ds-rating" style="--ds-rating-value: 4.5" role="img" aria-label="5점 만점에 4.5점"><span class="ds-rating__stars"></span><span class="ds-rating__value">4.5</span><span class="ds-rating__count">(312)</span></span>
+입력:  <fieldset class="ds-rating" data-input aria-label="별점"> 안에 <label class="ds-rating__option"><input type="radio" class="ds-rating__control" name="r" value="1"><span class="ds-rating__star"></span></label> 5개
+size: small 12 / medium 16 (기본) / large 20  /  값: --ds-rating-value 0~5 (소수 가능)  /  색: --ds-rating-fill, --ds-rating-empty
+```

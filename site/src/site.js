@@ -392,4 +392,23 @@
     frame.addEventListener("load", function () { apply(cur); });
   })();
 
+
+  // Markdown 메뉴: 링크 복사, 내용 복사 (AI 도구에 붙여 넣기용). 바깥을 누르거나 Esc 로 닫는다
+  (function () {
+    var toggles = [].slice.call(document.querySelectorAll("[data-site-md-toggle]")); if (!toggles.length) return;
+    function close() { toggles.forEach(function (t) { t.setAttribute("aria-expanded", "false"); t.nextElementSibling.hidden = true; }); }
+    function done(msg) { if (window.YBM && YBM.snackbar) YBM.snackbar(msg, { variant: "positive" }); }
+    toggles.forEach(function (t) { t.addEventListener("click", function (e) { e.stopPropagation(); var open = t.getAttribute("aria-expanded") !== "true"; close(); t.setAttribute("aria-expanded", String(open)); t.nextElementSibling.hidden = !open; }); });
+    document.addEventListener("click", function (e) {
+      var b = e.target.closest("[data-site-md]");
+      if (b) {
+        var url = new URL(b.getAttribute("data-href"), location.href).href;
+        if (b.getAttribute("data-site-md") === "link") navigator.clipboard.writeText(url).then(function () { done("마크다운 링크를 복사했어요"); });
+        else fetch(url).then(function (r) { return r.text(); }).then(function (t) { return navigator.clipboard.writeText(t); }).then(function () { done("마크다운 내용을 복사했어요"); });
+      }
+      if (!e.target.closest(".site-md")) close();
+    });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape") close(); });
+  })();
+
 })();

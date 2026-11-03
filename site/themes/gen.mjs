@@ -1,168 +1,179 @@
 // 테마 예시 화면 생성기: 테마를 입힌 "실제 사이트" 한 화면을 만든다 (템플릿이 와이어프레임이라면 테마는 완성된 사이트 느낌).
 // 사용: node site/themes/gen.mjs  →  node site/build.mjs
 // 화면은 DS 컴포넌트와 kit 함수로만 짠다. 테마는 html 의 data-ds-theme 하나로 바뀐다(dist/themes/<이름>.css).
+// 그림 아이콘은 Lucide(site/src/lucide-icons.json)를 색 타일 안에 크게 넣는다. 서비스 이름과 내용은 모두 가상이다.
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import * as K from '../templates/gen/kit.mjs';
-const { esc, icon, btn, iconBtn, badge, input, select, checkbox, segmented, photo, avatar } = K;
+const { esc, icon, btn, iconBtn, badge, photo } = K;
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const OUT = path.join(HERE, 'pages');
-const won = (n) => n.toLocaleString('ko-KR') + '원';
+const LUCIDE = JSON.parse(fs.readFileSync(path.join(HERE, '..', 'src', 'lucide-icons.json'), 'utf8')).icons;
+// 그림 아이콘: 톤(brand / positive / warning / critical / magic) 색 선
+const art = (name, tone = 'brand', size = 36) => {
+  if (!LUCIDE[name]) throw new Error('Lucide 에 없는 아이콘: ' + name);
+  return `<svg class="th-art"${tone ? ` data-tone="${tone}"` : ''} width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${LUCIDE[name]}</svg>`;
+};
 
 export const THEMES = [
-  { slug: 'study', name: '서재', en: 'Study', font: 'https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap',
-    desc: '따뜻한 종이 바탕에 짙은 초록과 명조 제목을 쓴 테마입니다. 책, 강의처럼 차분하게 읽는 서비스에 어울립니다.',
-    swatches: ['#f3efe4', '#23734f', '#164b34', '#fffdf8'] },
+  { slug: 'trust', name: '든든', en: 'Trust',
+    desc: '흰 바탕에 선명한 파랑 하나와 옅은 하늘색 면을 쓴 테마입니다. 보험, 금융, 공공 서비스처럼 믿음을 주는 화면에 어울립니다.',
+    swatches: ['#ffffff', '#1658ff', '#edf4ff', '#272727'] },
 ];
 
 const CSS = `
   body { margin: 0; background: var(--ybm-color-bg-canvas); color: var(--ybm-color-fg-neutral); word-break: keep-all; overflow-wrap: break-word; }
-  /* 큰 제목에만 테마의 제목 글꼴(--ybm-font-family-display). 테마가 없으면 기본 글꼴 */
-  .th-display { font-family: var(--ybm-font-family-display, var(--ybm-font-family-base)); letter-spacing: -0.01em; }
-  .th-wrap { box-sizing: border-box; width: min(100%, 1200px); margin-inline: auto; padding-inline: var(--ybm-space-x4); }
+  .th-wrap { box-sizing: border-box; width: min(100%, 1248px); margin-inline: auto; padding-inline: var(--ybm-space-x4); }
   @media (min-width: 768px) { .th-wrap { padding-inline: var(--ybm-space-x6); } }
-  /* 위 메뉴 */
-  .th-top { position: sticky; top: 0; z-index: var(--ybm-z-sticky); background: color-mix(in srgb, var(--ybm-color-bg-canvas) 88%, transparent); backdrop-filter: blur(12px); }
-  .th-top .th-wrap { display: flex; align-items: center; gap: var(--ybm-space-x6); height: 64px; }
-  .th-logo { font-size: var(--ybm-font-size-t07); line-height: 1; font-weight: var(--ybm-font-weight-bold); color: var(--ybm-color-fg-brand); text-decoration: none; }
-  .th-menu { display: none; gap: var(--ybm-space-x1); }
-  .th-menu a { padding: var(--ybm-space-x1_5) var(--ybm-space-x3); border-radius: var(--ybm-shape-pill); color: var(--ybm-color-fg-neutral-muted); font-size: var(--ybm-font-size-t04); font-weight: var(--ybm-font-weight-medium); text-decoration: none; }
-  .th-menu a[aria-current="page"] { background: var(--ybm-color-bg-brand-weak); color: var(--ybm-color-fg-brand-contrast); }
-  .th-top__end { display: flex; align-items: center; gap: var(--ybm-space-x1); margin-left: auto; }
-  @media (min-width: 768px) { .th-menu { display: flex; } }
-  /* 첫 화면 */
-  .th-hero { display: flex; flex-direction: column; align-items: center; gap: var(--ybm-space-x4); padding-block: var(--ybm-space-x12) var(--ybm-space-x10); text-align: center; }
-  .th-hero__eyebrow { color: var(--ybm-color-fg-brand); font-size: var(--ybm-font-size-t04); font-weight: var(--ybm-font-weight-semibold); }
-  .th-hero h1 { margin: 0; font-size: 36px; line-height: 1.25; font-weight: 700; color: var(--ybm-color-fg-neutral); }
-  @media (min-width: 768px) { .th-hero h1 { font-size: 52px; } }
-  .th-hero p { max-width: 520px; margin: 0; color: var(--ybm-color-fg-neutral-muted); font-size: var(--ybm-font-size-t05); line-height: var(--ybm-line-height-t05); }
-  .th-hero__ctas { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--ybm-space-x2); margin-top: var(--ybm-space-x2); }
-  /* 책 카드: 사진 → 배지 → 제목 → 지은이 → 가격 → 담기 (위계 순, 관련 줄은 붙이고 덩어리 사이는 띄운다) */
-  .th-books { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ybm-space-x6); }
-  @media (min-width: 768px) { .th-books { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-  .th-book { overflow: hidden; padding: 0; gap: 0; }
-  .th-book .ds-imageframe { border-radius: 0; }
-  .th-book__body { display: flex; flex-direction: column; gap: var(--ybm-space-x4); padding: var(--ybm-space-x5); }
-  .th-book__texts { display: flex; flex-direction: column; gap: var(--ybm-space-x1); }
-  .th-book__texts .ds-badge { align-self: flex-start; margin-bottom: var(--ybm-space-x1); }
-  .th-book h3 { margin: 0; font-size: var(--ybm-font-size-t07); line-height: var(--ybm-line-height-t07); font-weight: 700; }
-  .th-book__by { color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t03); line-height: var(--ybm-line-height-t03); }
-  .th-book__price { font-size: var(--ybm-font-size-t06); line-height: var(--ybm-line-height-t06); font-weight: var(--ybm-font-weight-bold); font-variant-numeric: tabular-nums; }
-  .th-book__buy { display: flex; align-items: center; gap: var(--ybm-space-x2); }
-  .th-book__buy .ds-btn { flex: 1 1 auto; }
-  /* 묶음 제목 */
-  .th-sec { display: flex; flex-direction: column; gap: var(--ybm-space-x5); padding-block: var(--ybm-space-x10); }
-  .th-sec__head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: var(--ybm-space-x3); }
-  .th-sec__head h2 { margin: 0; font-size: var(--ybm-font-size-t09); line-height: var(--ybm-line-height-t09); font-weight: 700; }
-  .th-sec__head p { margin: var(--ybm-space-x1) 0 0; color: var(--ybm-color-fg-neutral-muted); font-size: var(--ybm-font-size-t04); }
-  .th-grid2 { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ybm-space-x6); align-items: start; }
-  @media (min-width: 1024px) { .th-grid2 { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } .th-grid2--wide { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); } }
-  .th-card-title { margin: 0; font-size: var(--ybm-font-size-t06); line-height: var(--ybm-line-height-t06); font-weight: 700; }
-  /* 주문 */
-  .th-form { display: flex; flex-direction: column; gap: var(--ybm-space-x5); }
-  .th-form .ds-input, .th-form .ds-select { width: 100%; }
-  .th-row2 { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--ybm-space-x2); }
-  .th-ship .ds-selectbox__desc { font-variant-numeric: tabular-nums; }
-  .th-ship__price { margin-left: auto; font-weight: var(--ybm-font-weight-semibold); font-variant-numeric: tabular-nums; }
-  /* AI 도우미 */
-  .th-chat { padding: 0; gap: 0; overflow: hidden; }
-  .th-chat__head { display: flex; align-items: center; gap: var(--ybm-space-x2); padding: var(--ybm-space-x4) var(--ybm-space-x5); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); }
-  .th-chat__log { display: flex; flex-direction: column; gap: var(--ybm-space-x3); padding: var(--ybm-space-x5); }
-  .th-chat__log .ds-chat-bubble[data-sender="user"] { align-self: flex-end; }
-  .th-pick { display: flex; flex-direction: column; gap: var(--ybm-space-x2); margin: var(--ybm-space-x2) 0 0; padding: 0; list-style: none; }
-  .th-pick li { display: flex; align-items: center; gap: var(--ybm-space-x3); }
-  .th-pick .ds-imageframe { flex: none; width: 40px; }
-  .th-pick b { display: block; font-size: var(--ybm-font-size-t04); }
-  .th-pick span { color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t02); }
-  /* 재고, 매출 */
-  .th-tools { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ybm-space-x2); }
-  .th-tools__end { display: flex; flex-wrap: wrap; gap: var(--ybm-space-x2); }
-  .th-tools .ds-input { flex: none; width: 200px; max-width: 100%; }
-  .th-tools__end > .ds-select { width: auto; min-width: 128px; }
-  .th-low { color: var(--ybm-color-fg-critical); font-weight: var(--ybm-font-weight-semibold); }
-  .th-stats { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--ybm-space-x4); }
-  .th-stat { display: flex; flex-direction: column; gap: var(--ybm-space-x1); }
-  .th-stat__label { color: var(--ybm-color-fg-neutral-muted); font-size: var(--ybm-font-size-t03); }
-  .th-stat__value { font-size: var(--ybm-font-size-t10); line-height: var(--ybm-line-height-t10); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
-  .th-up { color: var(--ybm-color-fg-positive); font-size: var(--ybm-font-size-t03); font-weight: var(--ybm-font-weight-semibold); }
-  .th-acts { display: flex; flex-direction: column; margin: 0; padding: 0; list-style: none; }
-  .th-acts li { display: flex; align-items: center; justify-content: space-between; gap: var(--ybm-space-x3); padding-block: var(--ybm-space-x3); }
-  .th-acts li + li { box-shadow: inset 0 1px 0 var(--ybm-color-stroke-neutral-muted); }
-  .th-acts b { display: block; font-size: var(--ybm-font-size-t04); font-weight: var(--ybm-font-weight-medium); }
-  .th-acts span { color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t02); }
-  .th-acts em { font-style: normal; font-weight: var(--ybm-font-weight-semibold); font-variant-numeric: tabular-nums; }
-  .th-acts em[data-minus] { color: var(--ybm-color-fg-neutral-subtle); }
+  .th-art[data-tone="brand"] { color: var(--ybm-color-fg-brand); }
+  .th-art[data-tone="positive"] { color: var(--ybm-color-fg-positive); }
+  .th-art[data-tone="warning"] { color: var(--ybm-color-fg-warning); }
+  .th-art[data-tone="critical"] { color: var(--ybm-color-fg-critical); }
+  .th-art[data-tone="magic"] { color: var(--ybm-color-fg-magic); }
+  .th-em { color: var(--ybm-color-fg-brand); }
+
+  /* 위: 작은 링크 줄 + 메뉴 */
+  .th-util { display: none; justify-content: flex-end; align-items: center; gap: var(--ybm-space-x4); padding-top: var(--ybm-space-x3); font-size: var(--ybm-font-size-t02); color: var(--ybm-color-fg-neutral-muted); }
+  .th-util a { color: inherit; text-decoration: none; }
+  @media (min-width: 1024px) { .th-util { display: flex; } }
+  .th-gnb { position: sticky; top: 0; z-index: var(--ybm-z-sticky); background: var(--ybm-color-bg-layer-default); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); }
+  .th-gnb .th-wrap { display: flex; align-items: center; gap: var(--ybm-space-x12); height: 72px; }
+  .th-logo { font-size: var(--ybm-font-size-t07); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.03em; color: var(--ybm-color-fg-brand); text-decoration: none; white-space: nowrap; }
+  .th-menu { display: none; gap: var(--ybm-space-x10); }
+  .th-menu a { font-size: var(--ybm-font-size-t06); line-height: var(--ybm-line-height-t06); font-weight: var(--ybm-font-weight-semibold); color: var(--ybm-color-fg-neutral); text-decoration: none; }
+  .th-gnb__end { display: flex; gap: var(--ybm-space-x1); margin-left: auto; }
+  @media (min-width: 1024px) { .th-menu { display: flex; } }
+
+  /* 첫 줄: 큰 배너 + 로그인 카드 */
+  .th-hero { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ybm-space-x5); padding-top: var(--ybm-space-x8); }
+  @media (min-width: 1024px) { .th-hero { grid-template-columns: minmax(0, 1fr) 344px; gap: var(--ybm-space-x10); } }
+  .th-banner { position: relative; overflow: hidden; border-radius: var(--ybm-shape-2xl); background: var(--ybm-color-palette-static-black); }
+  .th-banner > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .78; }
+  .th-banner__text { position: relative; display: flex; flex-direction: column; justify-content: flex-end; gap: var(--ybm-space-x2); box-sizing: border-box; min-height: 280px; padding: var(--ybm-space-x8); color: var(--ybm-color-palette-static-white); background: linear-gradient(90deg, rgb(0 0 0 / .5), transparent 75%); }
+  .th-banner__text .ds-badge { align-self: flex-start; margin-bottom: var(--ybm-space-x1); }
+  .th-banner__text h1 { margin: 0; font-size: 30px; line-height: 1.4; font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.03em; }
+  .th-banner__text p { margin: 0; font-size: var(--ybm-font-size-t05); opacity: .9; }
+  .th-banner__pager { position: absolute; right: var(--ybm-space-x6); bottom: var(--ybm-space-x6); padding: var(--ybm-space-x1) var(--ybm-space-x3); border-radius: var(--ybm-shape-pill); background: rgb(0 0 0 / .4); color: var(--ybm-color-palette-static-white); font-size: var(--ybm-font-size-t02); font-variant-numeric: tabular-nums; }
+  .th-login { display: flex; flex-direction: column; justify-content: center; gap: var(--ybm-space-x5); padding: var(--ybm-space-x8); border-radius: var(--ybm-shape-2xl); background: var(--ybm-color-bg-brand-weak); text-align: center; }
+  .th-login p { margin: 0; font-size: var(--ybm-font-size-t06); line-height: var(--ybm-line-height-t06); font-weight: var(--ybm-font-weight-bold); }
+  .th-login p span { display: block; color: var(--ybm-color-fg-brand); font-weight: var(--ybm-font-weight-semibold); }
+  .th-login__links { display: flex; justify-content: center; gap: var(--ybm-space-x3); font-size: var(--ybm-font-size-t03); color: var(--ybm-color-fg-neutral-muted); }
+  .th-login__links a { color: inherit; text-decoration: none; }
+
+  /* 바로 가기: 옅은 파랑 타일 + 그림 아이콘 + 두 줄 이름 */
+  .th-quick { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: var(--ybm-space-x6) var(--ybm-space-x2); margin: 0; padding: var(--ybm-space-x12) 0 0; list-style: none; }
+  @media (min-width: 1024px) { .th-quick { grid-template-columns: repeat(10, minmax(0, 1fr)); } }
+  .th-quick a { display: flex; flex-direction: column; align-items: center; gap: var(--ybm-space-x3); color: var(--ybm-color-fg-neutral); text-decoration: none; text-align: center; font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); }
+  .th-tile { display: grid; place-items: center; flex: none; width: 72px; height: 72px; border-radius: var(--ybm-shape-3xl); background: var(--ybm-color-bg-brand-weak); transition: transform var(--ybm-duration-fast) var(--ybm-easing-standard); }
+  .th-tile--sm { width: 56px; height: 56px; border-radius: var(--ybm-shape-xl); }
+  @media (min-width: 1024px) { .th-quick .th-tile { width: 80px; height: 80px; } }
+  .th-quick a:hover .th-tile { transform: translateY(-2px); }
+
+  /* 묶음: 왼쪽 두 줄 제목(둘째 줄 브랜드 색), 오른쪽 내용 */
+  .th-sec { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ybm-space-x6); padding-top: var(--ybm-space-x16); }
+  @media (min-width: 1024px) { .th-sec { grid-template-columns: 280px minmax(0, 1fr); gap: var(--ybm-space-x10); } }
+  .th-sec__title { display: flex; flex-direction: column; align-items: flex-start; gap: var(--ybm-space-x4); }
+  .th-sec__title h2 { margin: 0; font-size: 30px; line-height: 1.5; font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.03em; }
+  .th-sec__title h2 .th-em { display: block; }
+
+  /* 간편 가입: 파랑 테두리 카드 (분류 → 이름 → 설명 → 가격과 그림) */
+  .th-direct { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ybm-space-x4); }
+  @media (min-width: 768px) { .th-direct { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  .th-dcard { display: flex; flex-direction: column; gap: var(--ybm-space-x3); min-height: 230px; box-sizing: border-box; padding: var(--ybm-space-x7); border-radius: var(--ybm-shape-2xl); box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-brand-weak); color: inherit; text-decoration: none; transition: box-shadow var(--ybm-duration-fast) var(--ybm-easing-standard); }
+  .th-dcard:hover { box-shadow: inset 0 0 0 2px var(--ybm-color-stroke-brand-solid); }
+  .th-dcard h3 { margin: 0; font-size: var(--ybm-font-size-t07); line-height: var(--ybm-line-height-t07); font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.02em; }
+  .th-dcard h3 small { display: block; margin-bottom: 2px; font-size: var(--ybm-font-size-t04); line-height: var(--ybm-line-height-t04); font-weight: var(--ybm-font-weight-semibold); color: var(--ybm-color-fg-brand); letter-spacing: 0; }
+  .th-dcard p { margin: 0; color: var(--ybm-color-fg-neutral-muted); font-size: var(--ybm-font-size-t04); line-height: 22px; }
+  .th-dcard__foot { display: flex; align-items: flex-end; justify-content: space-between; margin-top: auto; }
+  .th-dcard__price { font-size: var(--ybm-font-size-t04); color: var(--ybm-color-fg-neutral-muted); }
+  .th-dcard__price b { color: var(--ybm-color-fg-neutral); font-size: var(--ybm-font-size-t06); font-variant-numeric: tabular-nums; }
+
+  /* 추천 보험: 구분선 목록 2열 (그림 → 이름 → 한 줄 설명) */
+  .th-rec { display: grid; grid-template-columns: minmax(0, 1fr); column-gap: var(--ybm-space-x10); margin: 0; padding: 0; list-style: none; }
+  @media (min-width: 768px) { .th-rec { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .th-rec a { display: grid; grid-template-columns: 56px minmax(0, 1fr) auto; align-items: center; gap: var(--ybm-space-x4); padding-block: var(--ybm-space-x6); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); color: inherit; text-decoration: none; }
+  .th-rec b { display: block; font-size: var(--ybm-font-size-t06); line-height: var(--ybm-line-height-t06); }
+  .th-rec__desc { display: block; margin-top: 2px; color: var(--ybm-color-fg-neutral-muted); font-size: var(--ybm-font-size-t04); line-height: 22px; }
+  .th-rec .ds-icon { color: var(--ybm-color-fg-neutral-subtle); }
+
+  /* 안심 띠: 파랑 큰 카드 + 도움 카드 두 장 */
+  .th-band { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ybm-space-x4); padding-top: var(--ybm-space-x16); }
+  @media (min-width: 1024px) { .th-band { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr) minmax(0, 1fr); } }
+  .th-band__main { display: flex; align-items: center; justify-content: space-between; gap: var(--ybm-space-x6); padding: var(--ybm-space-x8); border-radius: var(--ybm-shape-2xl); background: var(--ybm-color-bg-brand-solid); color: var(--ybm-color-fg-on-brand-solid); }
+  .th-band__main p { margin: 0; font-size: var(--ybm-font-size-t08); line-height: 1.45; font-weight: var(--ybm-font-weight-bold); letter-spacing: -0.03em; }
+  .th-band__main p span { display: block; margin-top: var(--ybm-space-x2); font-size: var(--ybm-font-size-t04); line-height: 22px; font-weight: var(--ybm-font-weight-regular); opacity: .85; letter-spacing: 0; }
+  .th-band__main svg { flex: none; opacity: .9; }
+  .th-help { display: flex; flex-direction: column; justify-content: space-between; gap: var(--ybm-space-x6); padding: var(--ybm-space-x7); border-radius: var(--ybm-shape-2xl); background: var(--ybm-color-bg-neutral-weak-alpha); color: inherit; text-decoration: none; }
+  .th-help b { display: block; font-size: var(--ybm-font-size-t06); line-height: var(--ybm-line-height-t06); }
+  .th-help__desc { display: block; margin-top: 2px; color: var(--ybm-color-fg-neutral-muted); font-size: var(--ybm-font-size-t03); }
+  .th-help__foot { display: flex; align-items: flex-end; justify-content: space-between; }
+  .th-help__foot .ds-icon { color: var(--ybm-color-fg-neutral-subtle); }
+
+  /* 보험 고르기 + 공지 */
+  .th-pick { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ybm-space-x10); }
+  @media (min-width: 1024px) { .th-pick { grid-template-columns: minmax(0, 1fr) 340px; } }
+  .th-cats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--ybm-space-x3); margin: 0; padding: 0; list-style: none; }
+  @media (min-width: 768px) { .th-cats { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
+  .th-cats a { display: flex; flex-direction: column; align-items: center; gap: var(--ybm-space-x2); padding: var(--ybm-space-x5) var(--ybm-space-x2); border-radius: var(--ybm-shape-xl); box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-neutral-muted); color: inherit; text-decoration: none; font-size: var(--ybm-font-size-t05); font-weight: var(--ybm-font-weight-semibold); }
+  .th-cats a:hover { box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-brand-solid); }
+  .th-notice { display: flex; flex-direction: column; gap: var(--ybm-space-x2); }
+  .th-notice__head { display: flex; align-items: center; justify-content: space-between; }
+  .th-notice__head b { font-size: var(--ybm-font-size-t07); line-height: var(--ybm-line-height-t07); letter-spacing: -0.02em; }
+  .th-notice ul { margin: 0; padding: 0; list-style: none; }
+  .th-notice li a { display: flex; flex-direction: column; gap: 2px; padding-block: var(--ybm-space-x4); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); color: inherit; text-decoration: none; }
+  .th-notice li b { overflow: hidden; font-size: var(--ybm-font-size-t05); font-weight: var(--ybm-font-weight-medium); text-overflow: ellipsis; white-space: nowrap; }
+  .th-notice li span { color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t03); font-variant-numeric: tabular-nums; }
+
   /* 아래 */
-  .th-foot { padding-block: var(--ybm-space-x10); color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t03); }
-  .th-foot .th-wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--ybm-space-x3); box-shadow: inset 0 1px 0 var(--ybm-color-stroke-neutral-muted); padding-top: var(--ybm-space-x6); }
+  .th-foot { margin-top: var(--ybm-space-x20); box-shadow: inset 0 1px 0 var(--ybm-color-stroke-neutral-muted); color: var(--ybm-color-fg-neutral-muted); font-size: var(--ybm-font-size-t03); }
+  .th-foot__links { display: flex; flex-wrap: wrap; gap: var(--ybm-space-x2) var(--ybm-space-x6); padding-block: var(--ybm-space-x5); box-shadow: inset 0 -1px 0 var(--ybm-color-stroke-neutral-muted); }
+  .th-foot__links a { color: var(--ybm-color-fg-neutral); font-weight: var(--ybm-font-weight-medium); text-decoration: none; }
+  .th-foot__links a[data-strong] { color: var(--ybm-color-fg-brand); font-weight: var(--ybm-font-weight-bold); }
+  .th-foot__body { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--ybm-space-x6); padding-block: var(--ybm-space-x6) var(--ybm-space-x12); }
+  .th-foot__body p { margin: 0; line-height: 22px; }
+  .th-foot__body b { display: block; margin-bottom: var(--ybm-space-x2); color: var(--ybm-color-fg-neutral); font-size: var(--ybm-font-size-t05); }
+  .th-call { display: flex; flex-wrap: wrap; align-items: flex-start; gap: var(--ybm-space-x2); }
+  .th-call__num { margin-left: var(--ybm-space-x1); color: var(--ybm-color-fg-brand); font-weight: var(--ybm-font-weight-bold); }
 `;
 
-const qty = (n, name) => `<div class="ds-quantity" data-size="small"><button type="button" class="ds-quantity__btn" aria-label="${esc(name)} 수량 줄이기"${n <= 1 ? ' disabled' : ''}>${icon('minus')}</button><input class="ds-quantity__value" inputmode="numeric" value="${n}" aria-label="${esc(name)} 수량"><button type="button" class="ds-quantity__btn" aria-label="${esc(name)} 수량 늘리기">${icon('plus')}</button></div>`;
-const frame = (src, ratio = '4:3', radius = '') => `<div class="ds-imageframe" data-ratio="${ratio}"${radius ? ` data-radius="${radius}"` : ''}><img src="${src}" alt="" loading="lazy"></div>`;
+const QUICK = [['file-search', '보험계약\n조회', 'brand'], ['hand-coins', '보험금\n청구', 'magic'], ['receipt', '청구 내역\n보기', 'critical'], ['wallet', '보험료\n내기', 'warning'], ['search-check', '숨은 보험금\n찾기', 'brand'], ['file-pen-line', '다이렉트\n가입', 'brand'], ['landmark', '계약 대출\n신청', 'positive'], ['piggy-bank', '대출 상환\n이자 내기', 'warning'], ['file-check', '필요 서류\n안내', 'positive'], ['house-heart', '마이홈', 'brand']];
+const DIRECT = [['plane', '다이렉트', '국내여행보험', '가까운 여행이라도 사고와 분실 걱정 없이 출발해 보세요.', '1,200'], ['umbrella', '다이렉트', '해외여행보험', '여행의 설렘은 누리고, 걱정은 두고 떠나세요.', '3,900'], ['heart-pulse', '다이렉트', '미니 독감보험', '기침이 시작되기 전에 독감 치료비를 미리 준비하세요.', '990']];
+const REC = [['ribbon', '올인원 암보험', '진단비부터 최신 치료비까지 한 번에 보장해요', 'critical'], ['shield-check', '가족 든든 간병보험', '간병비 걱정을 가족 모두 함께 줄여요', 'brand'], ['house-heart', '올인원 가정보험', '일상 사고부터 화재, 누수까지 지켜 드려요', 'positive'], ['stethoscope', '3대 질병 실속보험', '암, 뇌, 심장 질환을 실속 있게 대비해요', 'magic']];
+const CATS = [['shield-check', '종신, 보장', 'brand'], ['ribbon', '암', 'critical'], ['car', '운전자', 'brand'], ['plane', '여행, 레저', 'positive'], ['flame', '화재', 'critical'], ['baby', '어린이', 'warning'], ['coins', '연금', 'warning'], ['piggy-bank', '저축', 'positive'], ['badge-percent', '다이렉트', 'magic'], ['ellipsis', '기타', 'brand']];
+const NOTICE = [['보험금 청구 서류 안내가 바뀌었어요', '2026.11.02'], ['[안내] 도수 치료, 입원 의료비 심사 기준', '2026.10.28'], ['[발표] 다이렉트 여행보험 가입 이벤트 당첨자', '2026.10.21']];
+const nl = (s) => s.split('\n').map(esc).join('<br>');
 
-const BOOKS = [
-  ['새 책', 'brand', '느리게 걷는 법', '김하늘 · 에세이', 16800, 0],
-  ['많이 읽어요', 'positive', '하루 10분 글쓰기', '이서윤 · 글쓰기', 14400, 1],
-  ['한정판', 'warning', '종이 위의 여름', '박준 · 소설', 19800, 4],
-];
-const book = ([b, tone, t, by, p, img]) => `<article class="ds-card th-book" data-variant="subtle">${frame(photo('book', img, 720))}
-  <div class="th-book__body"><div class="th-book__texts">${badge(b, tone)}<h3 class="th-display">${t}</h3><span class="th-book__by">${by}</span></div><span class="th-book__price">${won(p)}</span>
-  <div class="th-book__buy">${qty(1, t)}${btn('담기', { variant: 'neutralWeak', size: 'small', ic: 'shopping-cart' })}</div></div></article>`;
+const body = () => `<div class="th-wrap th-util"><a href="#">고객센터</a><a href="#">인증센터</a><a href="#">회원가입</a>${btn('로그인', { variant: 'brandSolid', size: 'xsmall' })}</div>
+<header class="th-gnb"><div class="th-wrap"><a class="th-logo" href="#">한빛안심보험</a><nav class="th-menu" aria-label="주요 메뉴"><a href="#">MY</a><a href="#">보상</a><a href="#">대출</a><a href="#">다이렉트</a><a href="#">보험상품</a><a href="#">고객지원</a></nav><div class="th-gnb__end">${iconBtn('search', '찾기', { variant: 'ghost', size: 'medium' })}${iconBtn('menu', '전체 메뉴', { variant: 'ghost', size: 'medium' })}</div></div></header>
+<main class="th-wrap">
+  <section class="th-hero" aria-label="소식">
+    <div class="th-banner"><img src="${photo('nature', 2, 1400)}" alt=""><div class="th-banner__text">${badge('다이렉트 여행보험', 'brand', true)}<h1>떠나기 전 3분이면<br>여행 걱정 끝</h1><p>하루 1,200원부터 휴대폰으로 바로 가입해요.</p></div><span class="th-banner__pager">1 / 3</span></div>
+    <div class="th-login"><p><span>로그인하고</span>내 보험을 한눈에 확인하세요</p>${btn('로그인', { variant: 'brandSolid', size: 'large', fill: true })}<div class="th-login__links"><a href="#">아이디 찾기</a><a href="#">비밀번호 찾기</a><a href="#">회원가입</a></div></div>
+  </section>
+  <ul class="th-quick" aria-label="자주 찾는 메뉴">${QUICK.map(([ic, t, tone]) => `<li><a href="#"><span class="th-tile">${art(ic, tone)}</span>${nl(t)}</a></li>`).join('')}</ul>
 
-const ship = [['일반 배송', '3~5일 안에 도착해요', 3000], ['빠른 배송', '내일 도착해요', 4000, true], ['오늘 도착', '오후 2시 전 주문만 가능해요', 6000]];
-const order = `<section class="ds-card th-order" data-variant="subtle" aria-labelledby="th-order-t"><h2 class="th-card-title th-display" id="th-order-t">주문하기</h2>
-<form class="th-form" onsubmit="return false">
-  ${K.field('o-mail', '이메일', input('o-mail', 'type="email" value="ybm@example.com"'))}
-  <div class="ds-field"><div class="ds-field__header"><span class="ds-field__label">배송 방법</span></div><div class="ds-selectbox-group th-ship">${ship.map(([l, d, p, on]) => `<label class="ds-selectbox"><span class="ds-selectbox__texts"><span class="ds-selectbox__label">${l}</span><span class="ds-selectbox__desc">${d}</span></span><span class="th-ship__price">${won(p)}</span><span class="ds-radio" data-tone="neutral" data-size="medium"><input type="radio" class="ds-radio__control" name="o-ship"${on ? ' checked' : ''}></span></label>`).join('')}</div></div>
-  <div class="ds-field"><div class="ds-field__header"><span class="ds-field__label">결제 수단</span></div>${segmented(['카드', '계좌 이체', '간편 결제'], 0, '결제 수단', 'medium').replace('class="ds-segmented"', 'class="ds-segmented" data-layout="fill"')}</div>
-  ${K.field('o-card', '카드 번호', input('o-card', 'inputmode="numeric" placeholder="0000 0000 0000 0000"'))}
-  <div class="th-row2">${K.field('o-exp', '유효 기간', input('o-exp', 'placeholder="MM / YY"'))}${K.field('o-cvc', '보안 코드', input('o-cvc', 'inputmode="numeric" placeholder="3자리"'))}</div>
-  ${checkbox('다음에도 이 결제 정보로 빠르게 결제할게요')}
-  ${btn('51,200원 결제하기', { variant: 'brandSolid', size: 'large', fill: true })}
-</form></section>`;
+  <section class="th-sec" aria-labelledby="th-s1"><div class="th-sec__title"><h2 id="th-s1">간편 가입은<span class="th-em">다이렉트보험!</span></h2>${K.link('전체 보기', '#', '')}</div>
+    <div class="th-direct">${DIRECT.map(([ic, k, t, d, p]) => `<a class="th-dcard" href="#"><h3><small>${k}</small>${t}</h3><p>${d}</p><div class="th-dcard__foot"><span class="th-dcard__price">하루 <b>${p}</b>원부터</span><span class="th-tile th-tile--sm">${art(ic, 'brand', 28)}</span></div></a>`).join('')}</div></section>
 
-const picks = [['느리게 걷는 법', '에세이 · 220쪽', 0], ['종이 위의 여름', '소설 · 180쪽', 4]];
-const chat = `<section class="ds-card th-chat" data-variant="subtle" aria-labelledby="th-chat-t">
-  <div class="th-chat__head">${icon('sparkles')}<h2 class="th-card-title th-display" id="th-chat-t" style="flex:1">서재 도우미</h2>${iconBtn('x', '닫기', { size: 'xsmall' })}</div>
-  <div class="th-chat__log">
-    <p class="ds-chat-system" data-variant="divider">오늘</p>
-    <div class="ds-chat-bubble" data-sender="user">주말에 가볍게 읽을 책을 추천해 줘</div>
-    <div class="ds-chat-bubble">최근에 읽은 에세이를 보고 두 권을 골랐어요. 둘 다 하루 저녁이면 다 읽을 수 있어요.
-      <ul class="th-pick">${picks.map(([t, m, i]) => `<li>${frame(photo('book', i, 160), '1:1', 'sm')}<div><b>${t}</b><span>${m}</span></div></li>`).join('')}</ul></div>
-    <div class="ds-chat-bubble" data-sender="user">첫 번째 책 담아 줘</div>
-    <div class="ds-chat-bubble">"느리게 걷는 법"을 장바구니에 담았어요. 지금 주문하면 내일 도착해요.</div>
-  </div>
-  <form class="ds-chat-composer" onsubmit="return false"><button type="button" class="ds-chat-composer__attach" aria-label="첨부">${icon('plus')}</button><div class="ds-chat-composer__field"><textarea class="ds-chat-composer__input" rows="1" placeholder="도우미에게 물어보세요" aria-label="메시지"></textarea><button type="submit" class="ds-chat-send" aria-label="보내기" disabled></button></div></form>
-</section>`;
+  <section class="th-sec" aria-labelledby="th-s2"><div class="th-sec__title"><h2 id="th-s2">지금 많이 찾는<span class="th-em">추천 보험이에요</span></h2></div>
+    <ul class="th-rec">${REC.map(([ic, t, d, tone]) => `<li><a href="#"><span class="th-tile th-tile--sm">${art(ic, tone, 28)}</span><span><b>${t}</b><span class="th-rec__desc">${d}</span></span>${icon('chevron-right')}</a></li>`).join('')}</ul></section>
 
-const stock = [['느리게 걷는 법', '김하늘', 42, 'A-3', '에세이'], ['하루 10분 글쓰기', '이서윤', 128, 'A-1', '글쓰기'], ['종이 위의 여름', '박준', 6, 'B-2', '소설'], ['처음 만나는 철학', '정다은', 63, 'C-4', '인문'], ['오늘의 식탁', '한지우', 9, 'D-1', '요리']];
-const inventory = `<section class="ds-card" data-variant="subtle" aria-labelledby="th-inv-t">
-  <div class="th-tools"><h2 class="th-card-title th-display" id="th-inv-t">재고</h2><div class="th-tools__end">${K.even(input('inv-q', 'type="search" placeholder="책 이름으로 찾기" aria-label="책 찾기"', { ic: 'search' }) + select('모든 분야', { aria: '분야' }) + btn('책 추가', { variant: 'brandSolid', ic: 'plus' }))}</div></div>
-  ${K.callout('', '2권의 재고가 10권 아래로 줄었어요.', 'warning', 'triangle-alert-solid')}
-  <div class="ds-table-wrap"><table class="ds-table"><thead><tr><th scope="col"><label class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control" aria-label="모든 책 고르기"></label></th><th scope="col" style="width:40%">책</th><th scope="col" data-align="end">남은 수량</th><th scope="col">위치</th><th scope="col">분야</th></tr></thead><tbody>${stock.map(([t, a, n, loc, cat]) => `<tr><td><label class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control" aria-label="${t} 고르기"></label></td><td><span class="ds-table__stack"><span>${t}</span><span>${a}</span></span></td><td data-align="end"${n < 10 ? ' class="th-low"' : ''}>${n}권</td><td>${loc}</td><td>${badge(cat)}</td></tr>`).join('')}</tbody></table></div>
-</section>`;
+  <section class="th-band" aria-label="안내">
+    <div class="th-band__main"><p>당신의 하루를 지키는<br>한빛안심보험<span>보험금 청구부터 상담까지 한곳에서 도와 드려요.</span></p>${art('shield-check', '', 72)}</div>
+    <a class="th-help" href="#"><div><b>자주 묻는 질문</b><span class="th-help__desc">청구, 가입, 해지 궁금증을 모았어요</span></div><div class="th-help__foot">${art('message-circle-question-mark', 'brand', 32)}${icon('arrow-right')}</div></a>
+    <a class="th-help" href="#"><div><b>고객지원</b><span class="th-help__desc">평일 9시부터 18시까지 상담해요</span></div><div class="th-help__foot">${art('headset', 'positive', 32)}${icon('arrow-right')}</div></a>
+  </section>
 
-const acts = [['주문 2041', '결제 · 오후 1:59', '+51,200원'], ['주문 2039', '환불 · 오후 12:40', '-14,400원', 1], ['주문 2038', '결제 · 오전 10:30', '+33,600원'], ['주문 2036', '결제 · 오전 9:11', '+19,800원']];
-const sales = `<section class="ds-card" data-variant="subtle" aria-labelledby="th-sales-t">
-  <h2 class="th-card-title th-display" id="th-sales-t">이번 달 매출</h2>
-  <div class="th-stats"><div class="th-stat"><span class="th-stat__label">매출</span><span class="th-stat__value">1,842만원</span><span class="th-up">지난달보다 12% 늘었어요</span></div><div class="th-stat"><span class="th-stat__label">주문</span><span class="th-stat__value">1,204건</span><span class="th-up">지난달보다 8% 늘었어요</span></div></div>
-  ${K.divider()}
-  <div class="th-tools"><h3 class="th-card-title" style="font-size: var(--ybm-font-size-t05)">최근 주문</h3>${K.link('전체 보기')}</div>
-  <ul class="th-acts">${acts.map(([t, m, v, minus]) => `<li><div><b>${t}</b><span>${m}</span></div><em${minus ? ' data-minus' : ''}>${v}</em></li>`).join('')}</ul>
-</section>`;
-
-const body = (t) => `<header class="th-top"><div class="th-wrap"><a class="th-logo th-display" href="#">한빛 서재</a><nav class="th-menu" aria-label="주요 메뉴"><a href="#" aria-current="page">책</a><a href="#">클래스</a><a href="#">읽는 이야기</a><a href="#">도움말</a></nav>
-  <div class="th-top__end">${iconBtn('search', '찾기', { variant: 'ghost' })}${iconBtn('heart', '찜한 책', { variant: 'ghost' })}${iconBtn('shopping-cart', '장바구니', { variant: 'ghost' })}${btn('로그인', { variant: 'brandSolid' })}</div></div></header>
-<main>
-  <section class="th-wrap th-hero"><span class="th-hero__eyebrow">이번 주 새로 들어온 책 12권</span><h1 class="th-display">오늘 읽을 한 권,<br>여기서 찾아요</h1><p>천천히 읽고 오래 남는 책과 강의를 골라 두었어요. 마음에 드는 한 권부터 시작해 보세요.</p><div class="th-hero__ctas">${btn('책 둘러보기', { variant: 'brandSolid', size: 'large' })}${btn('클래스 보기', { variant: 'neutralWeak', size: 'large' })}</div></section>
-  <section class="th-wrap"><div class="th-books">${BOOKS.map(book).join('')}</div></section>
-  <section class="th-wrap th-sec"><div class="th-sec__head"><div><h2 class="th-display">주문과 도우미</h2><p>고른 책을 바로 주문하고, 궁금한 건 도우미에게 물어보세요.</p></div></div><div class="th-grid2">${order}${chat}</div></section>
-  <section class="th-wrap th-sec" style="padding-top: 0"><div class="th-sec__head"><div><h2 class="th-display">서재 관리</h2><p>재고와 매출을 한눈에 봐요.</p></div></div><div class="th-grid2 th-grid2--wide">${inventory}${sales}</div></section>
+  <section class="th-sec" aria-labelledby="th-s3"><div class="th-sec__title"><h2 id="th-s3">나에게 꼭 맞는<span class="th-em">보험을 찾아보세요</span></h2></div>
+    <div class="th-pick"><ul class="th-cats">${CATS.map(([ic, t, tone]) => `<li><a href="#">${art(ic, tone, 32)}${t}</a></li>`).join('')}</ul>
+      <div class="th-notice"><div class="th-notice__head"><b>공지사항</b>${K.link('더 보기', '#', '')}</div><ul>${NOTICE.map(([t, d]) => `<li><a href="#"><b>${t}</b><span>${d}</span></a></li>`).join('')}</ul></div></div></section>
 </main>
-<footer class="th-foot"><div class="th-wrap"><span class="th-display" style="color: var(--ybm-color-fg-brand); font-weight: 700">한빛 서재</span><span>이 화면은 YBM DS 테마 예시예요. 서점과 사람 이름은 가상입니다.</span></div></footer>`;
+<footer class="th-foot"><div class="th-wrap"><nav class="th-foot__links" aria-label="약관"><a href="#">회원가입 약관</a><a href="#">이용약관</a><a href="#" data-strong>개인정보 처리방침</a><a href="#">신용정보 활용 체제</a></nav>
+  <div class="th-foot__body"><p><b>한빛안심보험</b>이 화면은 YBM DS 테마 예시예요. 회사 이름, 상품, 연락처는 모두 가상입니다.<br>서울시 가상구 예시로 100 · help@example.com</p><div class="th-call">${btn('고객센터<span class="th-call__num">1588-0000</span>', { variant: 'neutralOutline', size: 'small' })}${btn('이용 시간 안내', { variant: 'neutralOutline', size: 'small', icEnd: 'chevron-right' })}</div></div></div></footer>`;
 
+fs.rmSync(OUT, { recursive: true, force: true });
 fs.mkdirSync(OUT, { recursive: true });
 for (const t of THEMES) {
   const html = `<!doctype html>
@@ -173,7 +184,6 @@ for (const t of THEMES) {
 <title>${esc(t.name)} 테마 - YBM DS</title>
 <link rel="stylesheet" href="../../../dist/ybm-ds.css">
 <link rel="stylesheet" href="../../../dist/themes/${t.slug}.css">
-<link rel="stylesheet" href="${t.font}">
 <script>if (location.hash === "#default") document.documentElement.removeAttribute("data-ds-theme");</script>
 <script src="../../../dist/ybm-ds.js" defer></script>
 <style>${CSS}</style>

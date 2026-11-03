@@ -9,6 +9,7 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { linkPlan } from '../tokens/links.mjs';
+import { writeMarkdown } from './md.mjs';
 
 const SITE = path.dirname(fileURLToPath(import.meta.url));
 // 사이트 CSS / JS 주소에 붙이는 버전 - 내용이 바뀌면 값이 바뀌어 브라우저가 예전 파일을 쓰지 않는다
@@ -184,7 +185,7 @@ const az = (list) => [...list].sort((a, b) => a[1].localeCompare(b[1], 'en'));
 // 파운데이션: 항목마다 한 페이지 (슬러그, 영문 이름)
 const FOUND = az([['color', 'Color'], ['typography', 'Typography'], ['spacing', 'Spacing'], ['shape', 'Radius'], ['elevation', 'Elevation'], ['motion', 'Motion'], ['icons', 'Iconography']]);
 // Get Started 왼쪽 메뉴 묶음: Guide, Foundations (묶음 안은 ABC 순)
-const GS = [['Guide', az([['get-started/usage.html', 'Usage'], ['get-started/scripts.html', 'Scripts']])], ['Foundations', FOUND.map(([s, l]) => [`foundations/${s}.html`, l])]];
+const GS = [['Guide', az([['get-started/usage.html', 'Usage'], ['get-started/scripts.html', 'Scripts'], ['get-started/ai.html', 'AI']])], ['Foundations', FOUND.map(([s, l]) => [`foundations/${s}.html`, l])]];
 // 시작하기 문서 순서 (이전 / 다음 문서) - 왼쪽 메뉴 순서 그대로, 이름은 페이지 제목
 const GS_ORDER = [['index.html', 'Get Started'], ...GS.flatMap(([, list]) => list)];
 const gsPager = (file) => { const i = GS_ORDER.findIndex(([f]) => f === file); const p = GS_ORDER[i - 1], n = GS_ORDER[i + 1]; return [p && { href: '{root}' + p[0], label: p[1] }, n && { href: '{root}' + n[0], label: n[1] }]; };
@@ -237,6 +238,13 @@ function page({ file, title, section, body, layout = 'doc', desc = '', pager = [
   const root = '../'.repeat(depth);
   // 제목 구성 (레퍼런스 B): 큰 제목과 설명 (위 경로 글자는 쓰지 않는다)
   body = body.replace(/<header>(\s*<p class="site-eyebrow">[\s\S]*?<\/p>)?/, '<header class="site-head">');
+  // AI 가 읽는 마크다운 (llms.txt 표준): 제목 아래 버튼 줄에 Markdown 메뉴. 링크 복사, 내용 복사, 새 창으로 열기, 전체 목차
+  if (section === 'get-started' || section === 'components') {
+    MD_PAGES.push({ file, title, desc, section });
+    const menu = mdMenu(path.basename(file).replace(/\.html$/, '.md'), root);
+    if (/<header class="site-head">[\s\S]*?<div class="site-meta">/.test(body)) body = body.replace(/(<header class="site-head">[\s\S]*?<div class="site-meta">[\s\S]*?)(<\/div>)/, (m, a, b) => a + menu + b);
+    else body = body.replace('</header>', `<div class="site-meta">${menu}</div></header>`);
+  }
   // 이전 / 다음 문서 (레퍼런스 B)
   const [prev, next] = pager;
   const pagerHtml = prev || next ? `<nav class="site-pager" aria-label="이전, 다음 문서">${prev ? `<a href="${prev.href}" data-dir="prev"><span class="site-pager__label"><i class="ds-icon ds-icon--chevron-left ds-icon--sm" aria-hidden="true"></i>이전</span><b>${esc(prev.label)}</b></a>` : '<span></span>'}${next ? `<a href="${next.href}" data-dir="next"><span class="site-pager__label">다음<i class="ds-icon ds-icon--chevron-right ds-icon--sm" aria-hidden="true"></i></span><b>${esc(next.label)}</b></a>` : ''}</nav>` : '';
@@ -307,6 +315,8 @@ ${layout === 'doc' ? `<aside class="site-toc" aria-label="이 페이지 목차">
   fs.writeFileSync(out, html.replaceAll('{root}', root));
   return file;
 }
+const MD_PAGES = [];
+const mdMenu = (md, root) => `<span class="site-md"><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="xsmall" aria-haspopup="menu" aria-expanded="false" data-site-md-toggle><i class="ds-icon ds-icon--file-text ds-icon--sm" aria-hidden="true"></i>Markdown<i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i></button><div class="ds-menu site-md__menu" role="menu" hidden><button type="button" class="ds-menu-item" role="menuitem" data-site-md="link" data-href="${md}"><i class="ds-icon ds-icon--link" aria-hidden="true"></i>링크 복사</button><button type="button" class="ds-menu-item" role="menuitem" data-site-md="copy" data-href="${md}"><i class="ds-icon ds-icon--copy" aria-hidden="true"></i>내용 복사</button><a class="ds-menu-item" role="menuitem" href="${md}" target="_blank" rel="noopener"><i class="ds-icon ds-icon--external-link" aria-hidden="true"></i>새 창으로 열기</a><div class="ds-menu__divider" role="separator"></div><a class="ds-menu-item" role="menuitem" href="${root}llms.txt" target="_blank" rel="noopener"><i class="ds-icon ds-icon--list" aria-hidden="true"></i>전체 목차 llms.txt</a></div></span>`;
 const written = [];
 const write = (o) => written.push(page(o));
 
@@ -716,6 +726,29 @@ ${used.length ? `<h2 id="components">쓴 컴포넌트</h2><div class="site-links
   });
 });
 
+/* ---------------------------------------------------------------- AI (마크다운) */
+write({
+  file: 'get-started/ai.html', section: 'get-started', title: 'AI', desc: 'AI 도구가 YBM DS 문서를 읽는 방법', pager: gsPager('get-started/ai.html'),
+  body: `<header><h1 class="site-h1">AI</h1><p class="site-lead">AI 도구가 YBM DS 문서를 바로 읽을 수 있도록 모든 문서를 마크다운으로도 제공합니다. 컴포넌트 하나만 가져갈 수도, 전체를 한 번에 줄 수도 있습니다.</p></header>
+<h2 id="files">파일</h2>
+${table(['파일', '담은 것'], [
+  [`<a class="ds-link" href="../llms.txt" target="_blank" rel="noopener">llms.txt</a>`, '전체 목차입니다. 분류별 문서 링크와 한 줄 설명이 있어, AI 가 필요한 문서를 골라 읽습니다.'],
+  [`<a class="ds-link" href="../llms-full.txt" target="_blank" rel="noopener">llms-full.txt</a>`, '모든 문서를 한 파일로 모았습니다. 주소를 읽지 못하는 도구에 첨부할 때 씁니다.'],
+  ['페이지별 <code>.md</code>', '각 문서 주소의 <code>.html</code> 을 <code>.md</code> 로 바꾸면 그 페이지만 마크다운으로 받습니다. 예) <code>components/action-button.md</code>'],
+])}
+<h2 id="how">쓰는 법</h2>
+<ol>
+<li>컴포넌트 하나만 필요하면 그 페이지 제목 아래 <b>Markdown</b> 메뉴에서 <b>내용 복사</b>를 누르고 AI 대화에 붙여 넣습니다.</li>
+<li>여러 컴포넌트로 화면을 만들 때는 <code>llms.txt</code> 주소를 알려 주면 AI 가 필요한 문서를 찾아 읽습니다.</li>
+<li>주소를 열지 못하는 도구에는 <code>llms-full.txt</code> 를 파일로 첨부합니다.</li>
+</ol>
+<h2 id="prompt">요청 예시</h2>
+${codeblock(`아래 YBM DS 문서를 읽고 로그인 화면을 HTML 로 만들어 줘.
+부품은 .ds-* 클래스만, 색과 간격은 --ybm-* 토큰만 써 줘.
+${SITE_URL}llms.txt`, 'text')}
+<p>문서를 고치면 사이트를 다시 만들 때 마크다운도 함께 새로 만들어집니다.</p>`,
+});
+
 /* ---------------------------------------------------------------- Themes */
 // 템플릿이 와이어프레임이라면 테마는 실제 사이트 느낌. 왼쪽 테마 목록(비교용 기본 + 테마), 오른쪽 테마를 입힌 화면 미리보기
 const themesJson = readJson('site/src/themes.json').themes;
@@ -735,7 +768,7 @@ write({
   ${codeblock(`<html lang="ko" data-ds-theme="${firstTheme.slug}">
 <link rel="stylesheet" href="${PUBLIC}/dist/ybm-ds.css">
 <link rel="stylesheet" href="${PUBLIC}/dist/themes/${firstTheme.slug}.css">`)}
-  <p>테마가 바꾸는 것은 브랜드 색, 바탕색, 모서리 곡률, 제목 글꼴 네 가지입니다. 포커스 링과 안내색은 접근성을 위해 그대로 둡니다.</p>
+  <p>테마가 바꾸는 것은 브랜드 색, 바탕색, 모서리 곡률 세 가지입니다(테마에 따라 제목 글꼴도). 포커스 링과 안내색은 접근성을 위해 그대로 둡니다.</p>
 </div>
 <div class="site-themes__stage"><iframe src="pages/${firstTheme.slug}.html" title="${esc(firstTheme.name)} 테마를 입힌 화면" data-site-frame data-site-nomono data-site-theme-frame></iframe></div>
 </div>`,
@@ -763,4 +796,19 @@ fs.writeFileSync(path.join(SITE, 'assets/site.css'), fs.readFileSync(path.join(S
   + Object.entries(SITE_ICONS).map(([n, b]) => `.site-i--${n} { --ds-icon: ${svgUri(b)}; }`).join('\n') + '\n');
 
 figmaDocs();
+{
+  const byFile = (f) => MD_PAGES.find((p) => p.file === f);
+  const gs = GS_ORDER.filter(([f]) => !f.startsWith('foundations/')).map(([f]) => byFile(f)).filter(Boolean);
+  const found = MD_PAGES.filter((p) => p.file.startsWith('foundations/') && p.file !== 'foundations/index.html');
+  const compPages = MD_PAGES.filter((p) => p.section === 'components');
+  const intro = `# YBM DS
+
+> YBM 서비스를 위한 디자인 시스템입니다. HTML 에 .ds-* 클래스를 붙이고 --ybm-* 토큰으로 색, 간격, 글자를 맞춥니다. 이 파일은 AI 도구가 읽도록 문서 목록을 모은 것입니다.
+
+- CSS: ${PUBLIC}/dist/ybm-ds.css
+- JS: ${PUBLIC}/dist/ybm-ds.js
+- 전체 문서 한 파일: ${SITE_URL}llms-full.txt`;
+  const n = writeMarkdown({ SITE, SITE_URL, intro, groups: [{ label: 'Get Started', pages: gs }, { label: 'Foundations', pages: found }, { label: 'Components', pages: compPages }] });
+  console.log(`  ✔ 마크다운 ${n}쪽, llms.txt, llms-full.txt`);
+}
 console.log(`  ✔ 사이트 ${written.length}쪽 생성 (컴포넌트 ${comps.length}, 템플릿 ${templates.length})`);

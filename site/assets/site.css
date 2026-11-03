@@ -403,6 +403,13 @@ body[data-side-open] .site-scrim { opacity: 1; pointer-events: auto; }
 .site-themes__stage iframe { display: block; width: 100%; height: 80vh; min-height: 560px; border: 0; }
 @media (min-width: 1024px) { .site-themes__stage { position: sticky; top: calc(var(--site-top) + var(--ybm-space-x4)); } .site-themes__stage iframe { height: calc(100vh - var(--site-top) - var(--ybm-space-x8)); } }
 
+/* ---------------------------------------------------------------- Markdown 메뉴 (제목 아래 버튼 줄, DS Menu) */
+.site-md { position: relative; display: inline-flex; }
+.site-md__menu { position: absolute; top: calc(100% + var(--ybm-space-x1_5)); left: 0; z-index: 30; box-shadow: var(--ybm-elevation-overlay); }
+.site-md__menu[hidden] { display: none; }
+.site-md [aria-expanded="true"] .ds-icon--chevron-down { transform: rotate(180deg); }
+.site-doc .site-md__menu a.ds-menu-item { color: var(--ybm-color-fg-neutral); text-decoration: none; }
+
 /* 가이드는 브랜드 색 없이 모노톤으로 보여 준다 (2026-11-02 사용자 "가이드에 브랜드 컬러 적용 X").
    브랜드 역할 색을 같은 자리의 neutral 색으로 바꾼다. 서비스는 palette/brand 를 바꿔 자기 브랜드 색을 쓴다(Color 페이지).
    site.css 끝에 붙고, 템플릿 미리보기 iframe 에는 site.js 가 assets/brand-mono.css 로 넣는다.
