@@ -40,3 +40,14 @@
 | `--ybm-font-weight-medium` | 500 | 가나다 Aa 123 |
 | `--ybm-font-weight-semibold` | 600 | 가나다 Aa 123 |
 | `--ybm-font-weight-bold` | 700 | 가나다 Aa 123 |
+
+## 한글 줄바꿈
+
+본문에는 `word-break: keep-all`과 `overflow-wrap: break-word`를 함께 씁니다. 넣지 않으면 어절 중간에서 줄이 바뀝니다.
+
+```css
+.my-text {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+```

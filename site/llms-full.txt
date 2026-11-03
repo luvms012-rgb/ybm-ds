@@ -10,35 +10,29 @@
 
 # Get Started
 
-YBM DS는 YBM 서비스를 위한 디자인 시스템입니다. 컴포넌트와 토큰을 Figma와 코드에 같은 이름으로 담아, 누가 만들어도 같은 화면이 나오도록 돕습니다.
+YBM DS는 YBM 서비스를 위한 디자인 시스템입니다.
 
 ## YBM DS란 무엇인가요?
 
-화면을 만들 때마다 색과 버튼을 새로 정하지 않도록, 미리 정해 둔 값과 부품을 한곳에 모은 것입니다. 디자이너는 Figma에서, 개발자는 코드에서 같은 이름으로 씁니다.
-
-처음이라면 아래 세 낱말만 알아 두면 됩니다.
-
-| 낱말 | 뜻 |
+| 용어 | 뜻 |
 | --- | --- |
-| **토큰** | 색, 글자 크기, 간격처럼 자주 쓰는 값에 붙인 이름입니다. 값 대신 이름을 쓰면 한 번에 바꿀 수 있습니다. |
-| **컴포넌트** | 버튼, 입력창처럼 화면을 이루는 부품입니다. 정해진 클래스만 붙이면 같은 모양이 나옵니다. |
-| **템플릿** | 컴포넌트를 조립해 둔 화면 한 장입니다. 비슷한 화면을 만들 때 출발점으로 씁니다. |
+| **토큰** | 색, 크기, 간격 같은 값에 붙인 이름입니다. |
+| **컴포넌트** | 버튼, 입력창처럼 화면을 이루는 부품입니다. |
+| **템플릿** | 부품을 조립해 둔 화면 한 장입니다. |
 
 ## 시스템 이해하기
 
-Foundations색, 글자, 간격처럼 모든 화면의 바탕이 되는 토큰과 원칙.
+Foundations색, 글자, 간격 같은 기본 토큰.
 
-Components버튼, 입력창처럼 화면을 이루는 부품의 모양과 쓰임.
+Components화면을 이루는 부품의 모양과 쓰임.
 
-Templates부품을 조립해 둔 완성 화면. 그대로 가져가 고쳐 씁니다.
+Templates가져다 고쳐 쓰는 완성 화면.
 
 ## 바로 써 보기
 
-설치 과정 없이 두 단계면 첫 화면이 나옵니다.
-
 ### 1. DS 불러오기
 
-페이지 `<head>`에 두 줄을 넣습니다. 글꼴(Pretendard), 토큰, 아이콘, 컴포넌트가 한 번에 들어옵니다.
+`<head>`에 두 줄을 넣으면 글꼴, 토큰, 아이콘, 컴포넌트가 함께 들어옵니다. `ybm-ds.js`는 창 열기, 알림처럼 CSS만으로 안 되는 동작을 알아서 맡습니다.
 
 ```html
 <link rel="stylesheet" href="https://luvms012-rgb.github.io/ybm-ds/dist/ybm-ds.css">
@@ -47,18 +41,39 @@ Templates부품을 조립해 둔 완성 화면. 그대로 가져가 고쳐 씁�
 
 ### 2. 컴포넌트 붙이기
 
-정해진 클래스와 속성만 붙이면 됩니다. 컴포넌트마다 쓰는 법은 [Components](https://luvms012-rgb.github.io/ybm-ds/site/components/index.md)에 있습니다.
+정해진 클래스만 붙이면 됩니다. 쓰는 법은 [Components](https://luvms012-rgb.github.io/ybm-ds/site/components/index.md)에 있습니다.
 
 ```html
 <button class="ds-btn" data-variant="brandSolid" data-size="large">시작하기</button>
 <button class="ds-btn" data-variant="neutralWeak" data-size="large">나중에</button>
 ```
 
-불러오는 순서, 다크 모드, 반응형 기준은 [Usage](https://luvms012-rgb.github.io/ybm-ds/site/get-started/usage.md)에서 이어서 봅니다.
+상태는 HTML 기본 속성으로 나타냅니다.
+
+| 상태 | 속성 |
+| --- | --- |
+| 꺼짐 | `disabled` |
+| 선택 | `:checked`, `aria-selected`, `aria-pressed` |
+| 지금 위치 | `aria-current="page"` |
+| 펼침 | `aria-expanded` |
+| 오류 | `aria-invalid="true"` |
+
+### 3. 서비스에 맞게 바꾸기
+
+서비스 CSS는 DS 다음에 불러오고, 컴포넌트 변수(`--ds-*`)와 시맨틱 색만 덮어씁니다. DS가 CSS 레이어 안에 있어 `!important` 없이도 서비스 CSS가 이깁니다. 브랜드 색은 [Color](https://luvms012-rgb.github.io/ybm-ds/site/foundations/color.md#brand)에서 바꿉니다.
+
+```html
+<link rel="stylesheet" href="https://luvms012-rgb.github.io/ybm-ds/dist/ybm-ds.css">
+<link rel="stylesheet" href="my-service.css">  <!-- 서비스 CSS는 항상 DS 다음 -->
+
+/* my-service.css */
+.my-dialog { --ds-dialog-width: 360px; }
+.my-banner { --ds-banner-bg: var(--ybm-color-bg-brand-weak); }
+```
 
 ## AI로 만들기
 
-코드를 몰라도 됩니다. 아래 내용을 AI 코딩 도구(ChatGPT, Claude, Cursor 등)에 붙여 넣으면 설치부터 규칙까지 알아서 맞춥니다.
+아래 내용을 AI 코딩 도구에 붙여 넣으면 설치와 규칙을 알아서 맞춥니다.
 
 ```text
 이 프로젝트에 YBM DS를 적용해 줘.
@@ -72,25 +87,64 @@ Templates부품을 조립해 둔 완성 화면. 그대로 가져가 고쳐 씁�
 6. 새 ds- 클래스를 만들거나 !important를 쓰지 마.
 ```
 
-그다음 만들고 싶은 화면을 말로 설명하면 됩니다. 화면 만들기, 규칙 점검 요청 예시와 문서를 AI에 주는 방법은 [AI](https://luvms012-rgb.github.io/ybm-ds/site/get-started/ai.md)에 있습니다.
+그다음 만들 화면을 말로 설명하세요. 다른 요청 예시는 [AI](https://luvms012-rgb.github.io/ybm-ds/site/get-started/ai.md)에 있습니다.
 
-## 도구
+## 다크 모드
 
-AIllms.txt와 마크다운으로 AI 도구에 DS 문서를 주는 방법.
+`html`에 속성 하나를 붙이면 모든 색이 어두운 화면용으로 바뀝니다. 색을 토큰으로만 썼다면 따로 고칠 것이 없습니다.
 
-Scripts여닫기, 선택처럼 움직임이 있는 컴포넌트의 스크립트.
+```html
+<html lang="ko" data-theme="dark">
+```
 
-Figma디자이너가 쓰는 컴포넌트와 토큰 라이브러리.
+## 반응형
 
-GitHubDS 원본 파일과 바뀐 내용 기록.
+작은 화면부터 만들고 폭이 넓어질 때 배치를 바꿉니다. `@media` 안에서는 CSS 변수를 쓸 수 없어 숫자를 직접 씁니다.
+
+| 이름 | 폭 | 쓰임 |
+| --- | --- | --- |
+| `sm` | 480px | 큰 휴대폰 |
+| `md` | 768px | 태블릿, PC 부품으로 바뀌는 기준 |
+| `lg` | 1280px | 넓은 PC, 3단 배치 |
+| `xl` | 1440px | 아주 넓은 화면 |
+
+```css
+@media (min-width: 768px) { /* 태블릿, PC */ }
+@media (min-width: 1280px) { /* 넓은 PC */ }
+
+<!-- 768 이상에서 숨김(모바일 전용) / 768 이상에서만 보임(PC 전용) -->
+<div class="u-hide-from-md">…</div>
+<div class="u-show-from-md">…</div>
+```
+
+- Top Navigation ↔ Top App Bar, Side Panel ↔ Bottom Sheet, Dialog ↔ Bottom Sheet는 768을 기준으로 바꿉니다.
+- Side Navigation은 1280 이상 펼침, 768 이상 접힘, 그보다 좁으면 서랍 메뉴입니다.
+
+## 스크립트 직접 사용
+
+대부분은 HTML 속성만으로 동작합니다. 코드에서 직접 열거나 띄울 때만 아래를 씁니다.
+
+| 기능 | 사용방법 |
+| --- | --- |
+| 창 열기, 닫기 | `YBM.openDialog(요소)`, `YBM.closeDialog(요소)` |
+| 알림 띄우기 | `YBM.snackbar("저장했어요", { variant: "positive" })` |
+| 새로 고침 끝내기 | `YBM.endRefresh(요소)` |
+| 나중에 넣은 HTML 연결 | `YBM.init(요소)` |
+
+```html
+<button class="ds-btn" data-ds-open="confirm">열기</button>
+<dialog class="ds-dialog" id="confirm">… <button class="ds-btn" data-ds-close>닫기</button></dialog>
+
+<script>
+  YBM.snackbar("저장했어요", { variant: "positive", action: "확인" });
+</script>
+```
 
 ## 다른 설치 방법
 
-개발자가 버전을 고정하거나 파일을 직접 가지고 있어야 할 때 씁니다.
-
 ### 버전 고정하기
 
-위 주소는 늘 최신 버전을 줍니다. 배포 후 바뀌지 않게 하려면 공개 CDN 주소에 커밋 번호를 넣어 고정하세요.
+위 주소는 늘 최신입니다. 버전을 고정하려면 주소에 커밋 번호를 넣습니다.
 
 ```html
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/luvms012-rgb/ybm-ds@[커밋 번호]/dist/ybm-ds.css">
@@ -99,7 +153,7 @@ GitHubDS 원본 파일과 바뀐 내용 기록.
 
 ### 파일 내려받기
 
-저장소를 내려받아 `dist` 폴더를 프로젝트에 넣고 상대 경로로 불러옵니다. 인터넷이 막힌 환경이나 사내 서버에 둘 때 씁니다.
+`dist` 폴더를 프로젝트에 넣고 상대 경로로 불러옵니다. 인터넷이 막힌 사내 서버에 씁니다.
 
 ```shell
 git clone https://github.com/luvms012-rgb/ybm-ds.git
@@ -110,12 +164,20 @@ git clone https://github.com/luvms012-rgb/ybm-ds.git
 
 ### Tailwind CSS와 함께 쓰기
 
-Tailwind를 쓰는 프로젝트는 토큰을 Tailwind 이름으로 바로 쓸 수 있는 설정 파일이 있습니다. 값은 모두 DS의 CSS 변수를 가리키므로 `ybm-ds.css`도 함께 불러와야 합니다.
+토큰을 Tailwind 이름으로 쓰는 설정 파일입니다. `ybm-ds.css`도 함께 불러옵니다.
 
 ```javascript
 // tailwind.config.js - ybm-ds/tokens/tailwind.preset.js를 프로젝트에 복사한 뒤
 module.exports = { presets: [require('./tailwind.preset.js')] };
 ```
+
+## 도구
+
+AIAI 도구에 DS 문서를 주는 방법.
+
+Figma컴포넌트와 토큰 라이브러리.
+
+GitHub원본 파일과 변경 기록.
 
 
 ---
@@ -185,128 +247,6 @@ YBM DS로 [만들 화면, 예: 회원 목록 관리 화면]을 만들어 줘.
 ```
 
 문서를 고치면 사이트를 다시 만들 때 마크다운도 함께 새로 만들어집니다.
-
-
----
-
-<!-- https://luvms012-rgb.github.io/ybm-ds/site/get-started/scripts.md -->
-
-# Scripts
-
-`ybm-ds.js`는 창 열기, 알림처럼 CSS만으로는 할 수 없는 동작을 맡습니다. 불러오기만 하면 HTML 속성을 보고 알아서 동작합니다.
-
-## 하는 일
-
-| 부품 | 하는 일 |
-| --- | --- |
-| **Text Field clear 버튼** | 값 지우기 (노출/숨김은 CSS 가 처리) |
-| **Dialog** | data-ds-open / data-ds-close 속성으로 열고 닫기, 바깥(dim) 클릭 닫기 |
-| **Snackbar** | YBM.snackbar("문구", { variant: "positive"\|"critical", action: "확인", onAction, duration }) |
-| **Slider** | <input class="ds-slider"> 채움 길이(--ds-slider-value) 동기화 |
-| **Checkbox** | data-indeterminate 속성 → input.indeterminate |
-| **Popover** | data-ds-popover="id" 로 열고 닫기, 바깥 클릭과 Esc, 안의 data-ds-close 로 닫기 |
-| **Time Picker** | 가운데 온 항목에 aria-selected, 멈추면 열에서 change(detail.value), 항목 누름과 화살표 키로 이동 |
-| **Chat Composer** | 입력이 비면 보내기 비활성, field-sizing 이 없는 브라우저에서 높이 맞춤 |
-| **Search Suggestion** | 입력 칸(role=combobox, aria-controls)에서 위아래 화살표로 줄 고르기, Enter 로 그 줄 누르기 |
-| **Menu Sheet** | Dialog 와 같이 열고 닫기, 바깥(dim) 클릭 닫기 |
-| **Timer** | data-start(흐른 시간) / data-end(남은 시간)로 1초마다 글자를 바꾸고, 남은 시간이 0 이면 ds-timer-end 이벤트 |
-| **Segmented Control** | 누르면 하나만 aria-pressed, change 이벤트. 선택 배경이 고른 항목으로 미끄러져 이동(위치는 --ds-seg-x / --ds-seg-w) |
-| **Side Panel** | Dialog 와 같이 열고 닫기, 본문이 스크롤되면 data-scrolled |
-| **Pull To Refresh** | 터치로 당긴 거리 표시, 넘겨 놓으면 ds-refresh 이벤트, YBM.endRefresh(요소) 로 되돌리기 |
-| **Carousel** | 처음/끝이면 data-at-start / data-at-end, 버튼으로 한 화면씩 넘기기 |
-| **Code Block** | data-ds-copy 버튼으로 코드 복사 |
-| **Multi Select** | Popover 와 같이 열고 닫기, 고른 값을 칸에 Badge 로 채우기 |
-| **File Attach** | 파일을 끌어 놓는 칸 위로 끌고 오면 data-state="dragover", 벗어나거나 놓으면 뺀다 |
-
-## 직접 사용
-
-| 기능 | 사용방법 |
-| --- | --- |
-| 창 열기, 닫기 | `YBM.openDialog(요소)`, `YBM.closeDialog(요소)` |
-| 알림 띄우기 | `YBM.snackbar("저장했어요", { variant: "positive" })` |
-| 새로 고침 끝내기 | `YBM.endRefresh(요소)` |
-| 나중에 넣은 HTML 연결 | `YBM.init(요소)` |
-
-```html
-<button class="ds-btn" data-ds-open="confirm">열기</button>
-<dialog class="ds-dialog" id="confirm">… <button class="ds-btn" data-ds-close>닫기</button></dialog>
-
-<script>
-  YBM.snackbar("저장했어요", { variant: "positive", action: "확인" });
-</script>
-```
-
-
----
-
-<!-- https://luvms012-rgb.github.io/ybm-ds/site/get-started/usage.md -->
-
-# Usage
-
-DS를 불러오는 순서와 다크 모드, 반응형 기준을 알아봅니다.
-
-## 불러오는 순서
-
-DS를 먼저, 서비스 CSS를 그다음에 불러옵니다. DS 전체가 CSS 레이어 안에 들어 있어서 레이어 밖에 쓴 서비스 CSS는 선택자 길이와 상관없이 항상 DS를 이깁니다. 그래서 `!important`나 긴 선택자로 다툴 필요가 없습니다.
-
-서비스 CSS에서는 컴포넌트 변수(`--ds-*`)와 시맨틱 색(`bg`, `fg`, `stroke`)만 덮어씁니다. 새 `ds-` 클래스를 만들거나 `!important`를 쓰지 않습니다. 브랜드 색도 바꿀 수 있습니다([Color](https://luvms012-rgb.github.io/ybm-ds/site/foundations/color.md#brand)).
-
-```html
-<link rel="stylesheet" href="https://luvms012-rgb.github.io/ybm-ds/dist/ybm-ds.css">
-<link rel="stylesheet" href="my-service.css">  <!-- 서비스 CSS는 항상 DS 다음 -->
-
-/* my-service.css */
-.my-dialog { --ds-dialog-width: 360px; }
-.my-banner { --ds-banner-bg: var(--ybm-color-bg-brand-weak); }
-```
-
-## 상태 나타내기
-
-CSS는 Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다. 상태는 가능한 한 HTML 기본 속성으로 표현해서 접근성이 함께 맞춰지게 했습니다.
-
-| 상태 | 쓰는 속성 |
-| --- | --- |
-| 꺼짐 | `disabled` |
-| 선택 | `:checked`, `aria-selected`, `aria-pressed` |
-| 지금 위치 | `aria-current="page"` |
-| 펼침 | `aria-expanded` |
-| 오류 | `aria-invalid="true"` |
-| 누름 | `:active` (마우스는 `:hover`도) |
-
-## 화면 모드
-
-모드는 라이트와 다크 두 가지입니다. `<html data-theme="dark">`를 붙이면 시맨틱 색이 모두 어두운 화면용으로 바뀝니다. 색을 토큰으로만 썼다면 따로 고칠 것이 없습니다.
-
-## 반응형 기준점
-
-작은 화면부터 쌓아 올리는 방식입니다. `@media` 안에서는 CSS 변수를 쓸 수 없어서 숫자를 직접 씁니다.
-
-| 이름 | 폭 | 쓰임 |
-| --- | --- | --- |
-| `sm` | 480px | 큰 휴대폰 |
-| `md` | 768px | 태블릿, PC 부품으로 바뀌는 기준 |
-| `lg` | 1280px | 넓은 PC, 3단 배치 |
-| `xl` | 1440px | 아주 넓은 화면 |
-
-```css
-@media (min-width: 768px) { /* 태블릿, PC */ }
-@media (min-width: 1280px) { /* 넓은 PC */ }
-
-<!-- 유틸리티: 768 이상에서 숨김(모바일 전용) / 768 이상에서만 보임(PC 전용) -->
-<div class="u-hide-from-md">…</div>
-<div class="u-show-from-md">…</div>
-```
-
-- Top Navigation ↔ Top App Bar, Side Panel ↔ Bottom Sheet, Dialog ↔ Bottom Sheet는 768을 기준으로 바꿉니다.
-- Side Navigation은 1280 이상 펼침, 768 이상 접힘, 그보다 좁으면 서랍 메뉴입니다.
-
-## 한글 줄바꿈
-
-본문에는 `word-break: keep-all`과 `overflow-wrap: break-word`를 함께 씁니다. 넣지 않으면 한글이 음절 단위로 끊겨 어절 중간에서 줄이 바뀝니다.
-
-## 아이콘
-
-UI 아이콘은 Lucide 한 가지만 씁니다. 색은 부모 글자색을 따르고, 크기는 기본 20, `ds-icon--sm` 16, `ds-icon--lg` 24 입니다. 목록은 [Iconography](https://luvms012-rgb.github.io/ybm-ds/site/foundations/icons.md)에 있습니다.
 
 
 ---
@@ -483,6 +423,17 @@ UI 아이콘은 Lucide 한 가지만 씁니다. 색은 부모 글자색을 따�
 | `--ybm-font-weight-medium` | 500 | 가나다 Aa 123 |
 | `--ybm-font-weight-semibold` | 600 | 가나다 Aa 123 |
 | `--ybm-font-weight-bold` | 700 | 가나다 Aa 123 |
+
+## 한글 줄바꿈
+
+본문에는 `word-break: keep-all`과 `overflow-wrap: break-word`를 함께 씁니다. 넣지 않으면 어절 중간에서 줄이 바뀝니다.
+
+```css
+.my-text {
+  word-break: keep-all;
+  overflow-wrap: break-word;
+}
+```
 
 
 ---

@@ -186,10 +186,12 @@ const NAV = [['get-started', 'Get Started', 'index.html'], ['components', 'Compo
 const az = (list) => [...list].sort((a, b) => a[1].localeCompare(b[1], 'en'));
 // 파운데이션: 항목마다 한 페이지 (슬러그, 영문 이름)
 const FOUND = az([['color', 'Color'], ['typography', 'Typography'], ['spacing', 'Spacing'], ['shape', 'Radius'], ['elevation', 'Elevation'], ['motion', 'Motion'], ['icons', 'Iconography']]);
-// Get Started 왼쪽 메뉴 묶음: Guide, Foundations (묶음 안은 ABC 순)
-const GS = [['Guide', az([['get-started/usage.html', 'Usage'], ['get-started/scripts.html', 'Scripts'], ['get-started/ai.html', 'AI']])], ['Foundations', FOUND.map(([s, l]) => [`foundations/${s}.html`, l])]];
+// Get Started 왼쪽 메뉴: Overview, AI, Foundations 묶음 (묶음 안은 ABC 순)
+// Usage, Scripts 는 11-03 시작하기로 합침 (사용자 "옮기고 없애기"). Overview 바로 아래는 묶음 없는 항목
+const GS_TOP = [['get-started/ai.html', 'AI']];
+const GS = [['Foundations', FOUND.map(([s, l]) => [`foundations/${s}.html`, l])]];
 // 시작하기 문서 순서 (이전 / 다음 문서) - 왼쪽 메뉴 순서 그대로, 이름은 페이지 제목
-const GS_ORDER = [['index.html', 'Get Started'], ...GS.flatMap(([, list]) => list)];
+const GS_ORDER = [['index.html', 'Get Started'], ...GS_TOP, ...GS.flatMap(([, list]) => list)];
 const gsPager = (file) => { const i = GS_ORDER.findIndex(([f]) => f === file); const p = GS_ORDER[i - 1], n = GS_ORDER[i + 1]; return [p && { href: '{root}' + p[0], label: p[1] }, n && { href: '{root}' + n[0], label: n[1] }]; };
 
 // 컴포넌트 찾기 칸의 한글 낱말 (site/src/search-ko.json, 키는 영어 이름). 한글로 찾아도 영어 이름 컴포넌트가 나온다
@@ -204,7 +206,7 @@ function sideNav(section, file, root) {
   };
   const parts = [];
   if (section === 'get-started') {
-    parts.push(item('index.html', 'Overview'));
+    parts.push(item('index.html', 'Overview'), ...GS_TOP.map(([h, l]) => item(h, l)));
     for (const [label, list] of GS) parts.push(group(label, list.map(([h, l]) => item(h, l)), true));
   }
   if (section === 'components') {
@@ -352,108 +354,98 @@ const prompts = [
 - DS 부품으로 바꿀 수 있는데 직접 만든 버튼, 입력, 표
 고친 곳은 목록으로 알려 줘.`],
 ];
+// 반응형 기준점 (시작하기 반응형 절)
+const bpRows = [['sm', '480px', '큰 휴대폰'], ['md', '768px', '태블릿, PC 부품으로 바뀌는 기준'], ['lg', '1280px', '넓은 PC, 3단 배치'], ['xl', '1440px', '아주 넓은 화면']];
 // 안내 카드 (레퍼런스 B Get Started): 옅은 회색 칸에 제목과 화살표, 아래 한 줄 설명. out 이면 새 창
 const hubCard = (href, title, desc, out = false) => `<a class="site-hub" href="${href}"${out ? ' target="_blank" rel="noopener"' : ''}><span class="site-hub__title">${esc(title)}<i class="ds-icon ds-icon--${out ? 'external-link' : 'arrow-right'} ds-icon--sm" aria-hidden="true"></i></span><span class="site-hub__desc">${esc(desc)}</span></a>`;
 write({
   file: 'index.html', section: 'get-started', title: 'Get Started', desc: 'YBM DS를 처음 쓰는 사람을 위한 안내', pager: gsPager('index.html'),
   body: `<header>
   <h1 class="site-h1">Get Started</h1>
-  <p class="site-lead">YBM DS는 YBM 서비스를 위한 디자인 시스템입니다. 컴포넌트와 토큰을 Figma와 코드에 같은 이름으로 담아, 누가 만들어도 같은 화면이 나오도록 돕습니다.</p>
+  <p class="site-lead">YBM DS는 YBM 서비스를 위한 디자인 시스템입니다.</p>
   ${metaLinks({ figma: LINKS.figmaUrl('2608:2'), code: GITHUB })}
 </header>
 
 <h2 id="about">YBM DS란 무엇인가요?</h2>
-<p>화면을 만들 때마다 색과 버튼을 새로 정하지 않도록, 미리 정해 둔 값과 부품을 한곳에 모은 것입니다. 디자이너는 Figma에서, 개발자는 코드에서 같은 이름으로 씁니다.</p>
-<p>처음이라면 아래 세 낱말만 알아 두면 됩니다.</p>
-${table(['낱말', '뜻'], [
-  ['<b>토큰</b>', '색, 글자 크기, 간격처럼 자주 쓰는 값에 붙인 이름입니다. 값 대신 이름을 쓰면 한 번에 바꿀 수 있습니다.'],
-  ['<b>컴포넌트</b>', '버튼, 입력창처럼 화면을 이루는 부품입니다. 정해진 클래스만 붙이면 같은 모양이 나옵니다.'],
-  ['<b>템플릿</b>', '컴포넌트를 조립해 둔 화면 한 장입니다. 비슷한 화면을 만들 때 출발점으로 씁니다.'],
+${table(['용어', '뜻'], [
+  ['<b>토큰</b>', '색, 크기, 간격 같은 값에 붙인 이름입니다.'],
+  ['<b>컴포넌트</b>', '버튼, 입력창처럼 화면을 이루는 부품입니다.'],
+  ['<b>템플릿</b>', '부품을 조립해 둔 화면 한 장입니다.'],
 ])}
 
 <h2 id="system">시스템 이해하기</h2>
 <div class="site-grid site-grid--hub">
-  ${hubCard('{root}foundations/' + FOUND[0][0] + '.html', 'Foundations', '색, 글자, 간격처럼 모든 화면의 바탕이 되는 토큰과 원칙.')}
-  ${hubCard('{root}components/index.html', 'Components', '버튼, 입력창처럼 화면을 이루는 부품의 모양과 쓰임.')}
-  ${hubCard('{root}templates/index.html', 'Templates', '부품을 조립해 둔 완성 화면. 그대로 가져가 고쳐 씁니다.')}
+  ${hubCard('{root}foundations/' + FOUND[0][0] + '.html', 'Foundations', '색, 글자, 간격 같은 기본 토큰.')}
+  ${hubCard('{root}components/index.html', 'Components', '화면을 이루는 부품의 모양과 쓰임.')}
+  ${hubCard('{root}templates/index.html', 'Templates', '가져다 고쳐 쓰는 완성 화면.')}
 </div>
 
 <h2 id="start">바로 써 보기</h2>
-<p>설치 과정 없이 두 단계면 첫 화면이 나옵니다.</p>
 <h3>1. DS 불러오기</h3>
-<p>페이지 <code>&lt;head&gt;</code>에 두 줄을 넣습니다. 글꼴(Pretendard), 토큰, 아이콘, 컴포넌트가 한 번에 들어옵니다.</p>
+<p><code>&lt;head&gt;</code>에 두 줄을 넣으면 글꼴, 토큰, 아이콘, 컴포넌트가 함께 들어옵니다. <code>ybm-ds.js</code>는 창 열기, 알림처럼 CSS만으로 안 되는 동작을 알아서 맡습니다.</p>
 ${codeblock(CSS_LINK)}
 <h3>2. 컴포넌트 붙이기</h3>
-<p>정해진 클래스와 속성만 붙이면 됩니다. 컴포넌트마다 쓰는 법은 <a class="ds-link" href="components/index.html">Components</a>에 있습니다.</p>
+<p>정해진 클래스만 붙이면 됩니다. 쓰는 법은 <a class="ds-link" href="components/index.html">Components</a>에 있습니다.</p>
 ${example(`<div class="pv-stage"><button class="ds-btn" data-variant="brandSolid" data-size="large">시작하기</button><button class="ds-btn" data-variant="neutralWeak" data-size="large">나중에</button></div>`, `<button class="ds-btn" data-variant="brandSolid" data-size="large">시작하기</button>\n<button class="ds-btn" data-variant="neutralWeak" data-size="large">나중에</button>`)}
-<p>불러오는 순서, 다크 모드, 반응형 기준은 <a class="ds-link" href="get-started/usage.html">Usage</a>에서 이어서 봅니다.</p>
-
-<h2 id="ai">AI로 만들기</h2>
-<p>코드를 몰라도 됩니다. 아래 내용을 AI 코딩 도구(ChatGPT, Claude, Cursor 등)에 붙여 넣으면 설치부터 규칙까지 알아서 맞춥니다.</p>
-${codeblock(prompts[0][2], 'text', ' data-wrap')}
-<p>그다음 만들고 싶은 화면을 말로 설명하면 됩니다. 화면 만들기, 규칙 점검 요청 예시와 문서를 AI에 주는 방법은 <a class="ds-link" href="get-started/ai.html">AI</a>에 있습니다.</p>
-
-<h2 id="tools">도구</h2>
-<div class="site-grid site-grid--hub">
-  ${hubCard('{root}get-started/ai.html', 'AI', 'llms.txt와 마크다운으로 AI 도구에 DS 문서를 주는 방법.')}
-  ${hubCard('{root}get-started/scripts.html', 'Scripts', '여닫기, 선택처럼 움직임이 있는 컴포넌트의 스크립트.')}
-  ${hubCard(LINKS.figmaUrl('2608:2'), 'Figma', '디자이너가 쓰는 컴포넌트와 토큰 라이브러리.', true)}
-  ${hubCard(GITHUB, 'GitHub', 'DS 원본 파일과 바뀐 내용 기록.', true)}
-</div>
-
-<h2 id="other">다른 설치 방법</h2>
-<p>개발자가 버전을 고정하거나 파일을 직접 가지고 있어야 할 때 씁니다.</p>
-<h3>버전 고정하기</h3>
-<p>위 주소는 늘 최신 버전을 줍니다. 배포 후 바뀌지 않게 하려면 공개 CDN 주소에 커밋 번호를 넣어 고정하세요.</p>
-${codeblock(`<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/luvms012-rgb/ybm-ds@[커밋 번호]/dist/ybm-ds.css">\n<script src="https://cdn.jsdelivr.net/gh/luvms012-rgb/ybm-ds@[커밋 번호]/dist/ybm-ds.js" defer></script>`)}
-<h3>파일 내려받기</h3>
-<p>저장소를 내려받아 <code>dist</code> 폴더를 프로젝트에 넣고 상대 경로로 불러옵니다. 인터넷이 막힌 환경이나 사내 서버에 둘 때 씁니다.</p>
-${codeblock(`git clone ${GITHUB}.git\n# ybm-ds/dist 폴더를 프로젝트로 복사한 뒤\n<link rel="stylesheet" href="./dist/ybm-ds.css">\n<script src="./dist/ybm-ds.js" defer></script>`, 'shell')}
-<h3>Tailwind CSS와 함께 쓰기</h3>
-<p>Tailwind를 쓰는 프로젝트는 토큰을 Tailwind 이름으로 바로 쓸 수 있는 설정 파일이 있습니다. 값은 모두 DS의 CSS 변수를 가리키므로 <code>ybm-ds.css</code>도 함께 불러와야 합니다.</p>
-${codeblock(`// tailwind.config.js - ybm-ds/tokens/tailwind.preset.js를 프로젝트에 복사한 뒤\nmodule.exports = { presets: [require('./tailwind.preset.js')] };`, 'javascript')}`.replaceAll('href="components/', 'href="{root}components/').replaceAll('href="templates/', 'href="{root}templates/').replaceAll('href="get-started/', 'href="{root}get-started/'),
-});
-
-// 사용 규칙
-const bpRows = [['sm', '480px', '큰 휴대폰'], ['md', '768px', '태블릿, PC 부품으로 바뀌는 기준'], ['lg', '1280px', '넓은 PC, 3단 배치'], ['xl', '1440px', '아주 넓은 화면']];
-write({
-  file: 'get-started/usage.html', section: 'get-started', title: 'Usage', pager: gsPager('get-started/usage.html'),
-  body: `<header><h1 class="site-h1">Usage</h1><p class="site-lead">DS를 불러오는 순서와 다크 모드, 반응형 기준을 알아봅니다.</p></header>
-
-<h2 id="order">불러오는 순서</h2>
-<p>DS를 먼저, 서비스 CSS를 그다음에 불러옵니다. DS 전체가 CSS 레이어 안에 들어 있어서 레이어 밖에 쓴 서비스 CSS는 선택자 길이와 상관없이 항상 DS를 이깁니다. 그래서 <code>!important</code>나 긴 선택자로 다툴 필요가 없습니다.</p>
-<p>서비스 CSS에서는 컴포넌트 변수(<code>--ds-*</code>)와 시맨틱 색(<code>bg</code>, <code>fg</code>, <code>stroke</code>)만 덮어씁니다. 새 <code>ds-</code> 클래스를 만들거나 <code>!important</code>를 쓰지 않습니다. 브랜드 색도 바꿀 수 있습니다(<a class="ds-link" href="{root}foundations/color.html#brand">Color</a>).</p>
+<p>상태는 HTML 기본 속성으로 나타냅니다.</p>
+${table(['상태', '속성'], [['꺼짐', '<code>disabled</code>'], ['선택', '<code>:checked</code>, <code>aria-selected</code>, <code>aria-pressed</code>'], ['지금 위치', '<code>aria-current="page"</code>'], ['펼침', '<code>aria-expanded</code>'], ['오류', '<code>aria-invalid="true"</code>']])}
+<h3>3. 서비스에 맞게 바꾸기</h3>
+<p>서비스 CSS는 DS 다음에 불러오고, 컴포넌트 변수(<code>--ds-*</code>)와 시맨틱 색만 덮어씁니다. DS가 CSS 레이어 안에 있어 <code>!important</code> 없이도 서비스 CSS가 이깁니다. 브랜드 색은 <a class="ds-link" href="{root}foundations/color.html#brand">Color</a>에서 바꿉니다.</p>
 ${codeblock(`<link rel="stylesheet" href="${PUBLIC}/dist/ybm-ds.css">\n<link rel="stylesheet" href="my-service.css">  <!-- 서비스 CSS는 항상 DS 다음 -->\n\n/* my-service.css */\n.my-dialog { --ds-dialog-width: 360px; }\n.my-banner { --ds-banner-bg: var(--ybm-color-bg-brand-weak); }`)}
 
-<h2 id="state">상태 나타내기</h2>
-<p>CSS는 Figma 속성 이름을 그대로 <code>data-*</code> 속성으로 씁니다. 상태는 가능한 한 HTML 기본 속성으로 표현해서 접근성이 함께 맞춰지게 했습니다.</p>
-${table(['상태', '쓰는 속성'], [['꺼짐', '<code>disabled</code>'], ['선택', '<code>:checked</code>, <code>aria-selected</code>, <code>aria-pressed</code>'], ['지금 위치', '<code>aria-current="page"</code>'], ['펼침', '<code>aria-expanded</code>'], ['오류', '<code>aria-invalid="true"</code>'], ['누름', '<code>:active</code> (마우스는 <code>:hover</code>도)']])}
+<h2 id="ai">AI로 만들기</h2>
+<p>아래 내용을 AI 코딩 도구에 붙여 넣으면 설치와 규칙을 알아서 맞춥니다.</p>
+${codeblock(prompts[0][2], 'text', ' data-wrap')}
+<p>그다음 만들 화면을 말로 설명하세요. 다른 요청 예시는 <a class="ds-link" href="get-started/ai.html">AI</a>에 있습니다.</p>
 
-<h2 id="theme">화면 모드</h2>
-<p>모드는 라이트와 다크 두 가지입니다. <code>&lt;html data-theme="dark"&gt;</code>를 붙이면 시맨틱 색이 모두 어두운 화면용으로 바뀝니다. 색을 토큰으로만 썼다면 따로 고칠 것이 없습니다.</p>
+<h2 id="theme">다크 모드</h2>
+<p><code>html</code>에 속성 하나를 붙이면 모든 색이 어두운 화면용으로 바뀝니다. 색을 토큰으로만 썼다면 따로 고칠 것이 없습니다.</p>
+${codeblock('<html lang="ko" data-theme="dark">')}
 
 ${SHOW_THEMES ? `<h2 id="custom-theme">테마</h2>
-<p>테마는 브랜드 색, 바탕색, 모서리 곡률을 한 번에 바꿔 같은 DS 로 다른 분위기의 서비스를 만듭니다. DS 다음에 테마 파일을 붙이고 html 에 테마 이름을 적으면 되고, 컴포넌트는 고치지 않습니다. 고를 수 있는 테마는 <a class="ds-link" data-size="small" href="../themes/index.html">Themes</a> 에서 화면으로 비교해 볼 수 있습니다.</p>
+<p>테마는 브랜드 색, 바탕색, 모서리 곡률을 한 번에 바꿉니다. DS 다음에 테마 파일을 붙이고 html 에 테마 이름을 적으면 됩니다. 고를 수 있는 테마는 <a class="ds-link" data-size="small" href="themes/index.html">Themes</a>에 있습니다.</p>
 ${codeblock(`<html lang="ko" data-ds-theme="trust">
 <link rel="stylesheet" href="${PUBLIC}/dist/ybm-ds.css">
 <link rel="stylesheet" href="${PUBLIC}/dist/themes/trust.css">`)}
-<p>토큰 값은 html 에서 정해지므로 테마도 html 에만 답니다. 다크 모드는 테마 파일 안에 함께 들어 있고, 포커스 링과 안내색은 접근성을 위해 테마와 상관없이 그대로입니다.</p>
 
-` : ''}<h2 id="breakpoint">반응형 기준점</h2>
-<p>작은 화면부터 쌓아 올리는 방식입니다. <code>@media</code> 안에서는 CSS 변수를 쓸 수 없어서 숫자를 직접 씁니다.</p>
+` : ''}<h2 id="breakpoint">반응형</h2>
+<p>작은 화면부터 만들고 폭이 넓어질 때 배치를 바꿉니다. <code>@media</code> 안에서는 CSS 변수를 쓸 수 없어 숫자를 직접 씁니다.</p>
 ${table(['이름', '폭', '쓰임'], bpRows.map(([n, w, u]) => [`<code>${n}</code>`, w, u]))}
-${codeblock(`@media (min-width: 768px) { /* 태블릿, PC */ }\n@media (min-width: 1280px) { /* 넓은 PC */ }\n\n<!-- 유틸리티: 768 이상에서 숨김(모바일 전용) / 768 이상에서만 보임(PC 전용) -->\n<div class="u-hide-from-md">…</div>\n<div class="u-show-from-md">…</div>`, 'css')}
+${codeblock(`@media (min-width: 768px) { /* 태블릿, PC */ }\n@media (min-width: 1280px) { /* 넓은 PC */ }\n\n<!-- 768 이상에서 숨김(모바일 전용) / 768 이상에서만 보임(PC 전용) -->\n<div class="u-hide-from-md">…</div>\n<div class="u-show-from-md">…</div>`, 'css')}
 <ul class="site-list">
   <li>Top Navigation ↔ Top App Bar, Side Panel ↔ Bottom Sheet, Dialog ↔ Bottom Sheet는 768을 기준으로 바꿉니다.</li>
   <li>Side Navigation은 1280 이상 펼침, 768 이상 접힘, 그보다 좁으면 서랍 메뉴입니다.</li>
 </ul>
 
-<h2 id="korean">한글 줄바꿈</h2>
-<p>본문에는 <code>word-break: keep-all</code>과 <code>overflow-wrap: break-word</code>를 함께 씁니다. 넣지 않으면 한글이 음절 단위로 끊겨 어절 중간에서 줄이 바뀝니다.</p>
+<h2 id="script">스크립트 직접 사용</h2>
+<p>대부분은 HTML 속성만으로 동작합니다. 코드에서 직접 열거나 띄울 때만 아래를 씁니다.</p>
+${table(['기능', '사용방법'], [['창 열기, 닫기', '<code>YBM.openDialog(요소)</code>, <code>YBM.closeDialog(요소)</code>'], ['알림 띄우기', '<code>YBM.snackbar("저장했어요", { variant: "positive" })</code>'], ['새로 고침 끝내기', '<code>YBM.endRefresh(요소)</code>'], ['나중에 넣은 HTML 연결', '<code>YBM.init(요소)</code>']])}
+${codeblock(`<button class="ds-btn" data-ds-open="confirm">열기</button>\n<dialog class="ds-dialog" id="confirm">… <button class="ds-btn" data-ds-close>닫기</button></dialog>\n\n<script>\n  YBM.snackbar("저장했어요", { variant: "positive", action: "확인" });\n</script>`)}
 
-<h2 id="icon">아이콘</h2>
-<p>UI 아이콘은 Lucide 한 가지만 씁니다. 색은 부모 글자색을 따르고, 크기는 기본 20, <code>ds-icon--sm</code> 16, <code>ds-icon--lg</code> 24 입니다. 목록은 <a class="ds-link" href="{root}foundations/icons.html">Iconography</a>에 있습니다.</p>`,
+<h2 id="other">다른 설치 방법</h2>
+<h3>버전 고정하기</h3>
+<p>위 주소는 늘 최신입니다. 버전을 고정하려면 주소에 커밋 번호를 넣습니다.</p>
+${codeblock(`<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/luvms012-rgb/ybm-ds@[커밋 번호]/dist/ybm-ds.css">\n<script src="https://cdn.jsdelivr.net/gh/luvms012-rgb/ybm-ds@[커밋 번호]/dist/ybm-ds.js" defer></script>`)}
+<h3>파일 내려받기</h3>
+<p><code>dist</code> 폴더를 프로젝트에 넣고 상대 경로로 불러옵니다. 인터넷이 막힌 사내 서버에 씁니다.</p>
+${codeblock(`git clone ${GITHUB}.git\n# ybm-ds/dist 폴더를 프로젝트로 복사한 뒤\n<link rel="stylesheet" href="./dist/ybm-ds.css">\n<script src="./dist/ybm-ds.js" defer></script>`, 'shell')}
+<h3>Tailwind CSS와 함께 쓰기</h3>
+<p>토큰을 Tailwind 이름으로 쓰는 설정 파일입니다. <code>ybm-ds.css</code>도 함께 불러옵니다.</p>
+${codeblock(`// tailwind.config.js - ybm-ds/tokens/tailwind.preset.js를 프로젝트에 복사한 뒤\nmodule.exports = { presets: [require('./tailwind.preset.js')] };`, 'javascript')}
+
+<h2 id="tools">도구</h2>
+<div class="site-grid site-grid--hub">
+  ${hubCard('{root}get-started/ai.html', 'AI', 'AI 도구에 DS 문서를 주는 방법.')}
+  ${hubCard(LINKS.figmaUrl('2608:2'), 'Figma', '컴포넌트와 토큰 라이브러리.', true)}
+  ${hubCard(GITHUB, 'GitHub', '원본 파일과 변경 기록.', true)}
+</div>`.replaceAll('href="components/', 'href="{root}components/').replaceAll('href="templates/', 'href="{root}templates/').replaceAll('href="get-started/', 'href="{root}get-started/'),
 });
+
+// 예전 Usage, Scripts 주소는 시작하기의 옮긴 절로 넘긴다 (공유된 링크가 깨지지 않게)
+for (const [f, to, label] of [['usage', 'start', '바로 써 보기'], ['scripts', 'script', '스크립트 직접 사용']]) {
+  fs.writeFileSync(path.join(SITE, `get-started/${f}.html`), `<!doctype html>\n<html lang="ko"><head><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=../index.html#${to}"><title>Get Started - YBM DS</title></head><body><a href="../index.html#${to}">${label}</a></body></html>\n`);
+  fs.rmSync(path.join(SITE, `get-started/${f}.md`), { force: true });
+}
 
 // 파운데이션 - tokens.css에서 값을 읽는다. 다크 블록은 따로 읽어 색의 다크 값으로 쓴다
 const darkAt = tokensCss.indexOf(':root[data-theme="dark"]');
@@ -496,7 +488,10 @@ ${colorGroups.map(([k, label]) => `<h2 id="${k}">${label}</h2>\n${colorTable(k)}
 <h2 id="size">크기</h2>
 ${table(['토큰', '크기 / 줄 높이 (px)', '보기'], tokRe(/--ybm-font-size-(t\d\d): (\d+)px/g).map((m) => [`<code>${m[1]}</code>`, `${m[2]} / ${(LIGHT[`--ybm-line-height-${m[1]}`] || '').replace('px', '')}`, `<span class="site-sample" style="font-size: var(--ybm-font-size-${m[1]}); line-height: var(--ybm-line-height-${m[1]}); font-weight: var(--ybm-font-weight-bold)">가나다 Aa 123</span>`]))}
 <h2 id="weight">굵기</h2>
-${table(['토큰', '값', '보기'], tokRe(/--ybm-font-weight-([a-z]+): (\d+);/g).map((m) => [`<code>--ybm-font-weight-${m[1]}</code>`, m[2], `<span class="site-sample" style="font-size: var(--ybm-font-size-t06); font-weight: var(--ybm-font-weight-${m[1]})">가나다 Aa 123</span>`]))}`,
+${table(['토큰', '값', '보기'], tokRe(/--ybm-font-weight-([a-z]+): (\d+);/g).map((m) => [`<code>--ybm-font-weight-${m[1]}</code>`, m[2], `<span class="site-sample" style="font-size: var(--ybm-font-size-t06); font-weight: var(--ybm-font-weight-${m[1]})">가나다 Aa 123</span>`]))}
+<h2 id="korean">한글 줄바꿈</h2>
+<p>본문에는 <code>word-break: keep-all</code>과 <code>overflow-wrap: break-word</code>를 함께 씁니다. 넣지 않으면 어절 중간에서 줄이 바뀝니다.</p>
+${codeblock(`.my-text {\n  word-break: keep-all;\n  overflow-wrap: break-word;\n}`, 'css')}`,
   },
   spacing: {
     title: '간격', lead: '간격은 요소 사이의 거리로 무엇이 한 묶음인지 보여 줍니다.',
@@ -598,18 +593,6 @@ ${codeblock(`/* Lucide heart - 복사된 줄을 dist/icons.css 끝에 붙인다 
 ${practices(ICON_PRACTICES)}
 <p class="site-note">아이콘 그림은 Lucide(ISC 라이선스)입니다. <a class="ds-link" href="{root}assets/lucide-LICENSE.txt">라이선스 전문</a></p>
 <script src="{root}assets/lucide-icons.js" defer></script>`,
-});
-
-// 스크립트
-const jsRows = [...dsJs.slice(0, dsJs.indexOf('*/')).matchAll(/^\s*· (.+?) — (.+)$/gm)].map((m) => [`<b>${esc(m[1])}</b>`, inline(prose(m[2]))]);
-write({
-  file: 'get-started/scripts.html', section: 'get-started', title: 'Scripts', pager: gsPager('get-started/scripts.html'),
-  body: `<header><h1 class="site-h1">Scripts</h1><p class="site-lead"><code>ybm-ds.js</code>는 창 열기, 알림처럼 CSS만으로는 할 수 없는 동작을 맡습니다. 불러오기만 하면 HTML 속성을 보고 알아서 동작합니다.</p></header>
-<h2 id="features">하는 일</h2>
-${table(['부품', '하는 일'], jsRows)}
-<h2 id="api">직접 사용</h2>
-${table(['기능', '사용방법'], [['창 열기, 닫기', '<code>YBM.openDialog(요소)</code>, <code>YBM.closeDialog(요소)</code>'], ['알림 띄우기', '<code>YBM.snackbar("저장했어요", { variant: "positive" })</code>'], ['새로 고침 끝내기', '<code>YBM.endRefresh(요소)</code>'], ['나중에 넣은 HTML 연결', '<code>YBM.init(요소)</code>']])}
-${codeblock(`<button class="ds-btn" data-ds-open="confirm">열기</button>\n<dialog class="ds-dialog" id="confirm">… <button class="ds-btn" data-ds-close>닫기</button></dialog>\n\n<script>\n  YBM.snackbar("저장했어요", { variant: "positive", action: "확인" });\n</script>`)}`,
 });
 
 /* ---------------------------------------------------------------- Components */
@@ -801,7 +784,7 @@ if (SHOW_THEMES) write({
   <div class="site-themes__intro">
     <div class="site-themes__title"><h1 class="site-h1">Themes</h1>${iconBtn('data-site-theme-mode aria-pressed="false"', '미리보기를 다크 모드로 보기', '<i class="ds-icon site-i--moon" aria-hidden="true"></i>')}</div>
     <p class="site-themes__desc">YBM DS 에는 기본 테마가 들어 있습니다. 서비스에 맞게 바꾸려면 마음에 드는 테마 파일을 복사해 쓰세요.</p>
-    <a class="ds-link" data-size="small" href="../get-started/usage.html#custom-theme">테마 사용방법</a>
+    <a class="ds-link" data-size="small" href="../index.html#custom-theme">테마 사용방법</a>
   </div>
   <div class="site-themes__acts"><a class="ds-btn" data-variant="neutralSolid" data-size="small" data-width="fill" href="${GITHUB}/blob/main/dist/themes/${firstTheme.slug}.css" target="_blank" rel="noopener" data-site-theme-file>이 테마 쓰기</a><a class="ds-btn" data-variant="neutralWeak" data-size="small" data-width="fill" href="pages/${firstTheme.slug}.html" target="_blank" rel="noopener" data-site-theme-open>새 창으로 보기</a></div>
   <div class="site-themes__list" role="group" aria-label="테마">${THEME_CARDS.map((t, i) => themeCard(t, i === 1)).join('')}</div>
