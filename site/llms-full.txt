@@ -60,7 +60,7 @@ Templates가져다 고쳐 쓰는 완성 화면.
 
 ### 3. 서비스에 맞게 바꾸기
 
-서비스 CSS는 DS 다음에 불러오고, 컴포넌트 변수(`--ds-*`)와 시맨틱 색만 덮어씁니다. DS가 CSS 레이어 안에 있어 `!important` 없이도 서비스 CSS가 이깁니다. 브랜드 색은 [Color](https://luvms012-rgb.github.io/ybm-ds/site/foundations/color.md#brand)에서 바꿉니다.
+서비스 CSS는 DS 다음에 불러오고, 컴포넌트 변수(`--ds-*`)와 시맨틱 색만 덮어씁니다. DS가 CSS 레이어 안에 있어 `!important` 없이도 서비스 CSS가 이깁니다. 브랜드 색은 [Color](https://luvms012-rgb.github.io/ybm-ds/site/foundations/color.md#code)에서 바꿉니다.
 
 ```html
 <link rel="stylesheet" href="https://luvms012-rgb.github.io/ybm-ds/dist/ybm-ds.css">
@@ -270,24 +270,19 @@ Figma 라이브러리컴포넌트와 토큰을 Figma에서 봅니다.
 
 ## 개요
 
-화면에는 시맨틱 색(`bg`, `fg`, `stroke`)만 씁니다. 팔레트(`--ybm-color-palette-*`)는 시맨틱 색을 만드는 원료라 화면에 직접 쓰지 않습니다. 색을 토큰으로만 쓰면 `data-theme="dark"` 하나로 다크 모드가 맞춰집니다. 아래 표의 값은 라이트 / 다크 순서입니다.
+색은 생김새가 아니라 하는 일로 이름을 붙입니다. 화면에는 시맨틱 색(`bg`, `fg`, `stroke`)만 쓰고, 팔레트(`--ybm-color-palette-*`)는 시맨틱 색을 만드는 원료로 둡니다. 토큰으로만 쓰면 `data-theme="dark"` 하나로 다크 모드가 맞춰집니다.
 
-## 브랜드 색
+## 역할
 
-이 가이드는 브랜드 색 대신 모노톤으로 보여 줍니다. 브랜드 색은 서비스마다 바꿀 수 있습니다. 팔레트 `--ybm-color-palette-brand-100` ~ `1000`만 덮어쓰면 버튼, 체크박스, 링크처럼 브랜드 색을 쓰는 곳이 모두 따라 바뀝니다.
-
-```css
-/* my-service.css - DS 다음에 불러온다 */
-:root {
-  --ybm-color-palette-brand-100: #e6f6ee;  /* 옅은 배경 */
-  --ybm-color-palette-brand-600: #12a150;  /* 주 버튼, 링크 */
-  --ybm-color-palette-brand-700: #0d7d3e;  /* 눌림, 진한 글자 */
-  /* 200 ~ 500, 800 ~ 1000 도 같은 색의 단계로 채운다 */
-}
-:root[data-theme="dark"] {
-  /* 다크 모드는 같은 단계를 뒤집어 넣는다 (다크 100 = 라이트 1000) */
-}
-```
+| 역할 | 쓰는 곳 |
+| --- | --- |
+| `brand` | 주 버튼, 선택된 상태, 링크 |
+| `neutral` | 바탕, 본문, 보조 버튼 |
+| `positive` | 성공, 완료 |
+| `warning` | 주의, 마감 임박 |
+| `critical` | 오류, 삭제 |
+| `informative` | 안내, 도움말 |
+| `magic` | AI 기능, 새 기능 |
 
 ## 배경
 
@@ -389,6 +384,43 @@ Figma 라이브러리컴포넌트와 토큰을 Figma에서 봅니다.
 | `--ybm-color-stroke-warning-solid` | `#e14d00 / #ff6600` |
 | `--ybm-color-stroke-warning-weak` | `#ffd5c0 / #6b311c` |
 
+## 코드에서 쓰기
+
+```css
+.my-card {
+  background: var(--ybm-color-bg-layer-default);
+  color: var(--ybm-color-fg-neutral);
+  border: 1px solid var(--ybm-color-stroke-neutral-muted);
+}
+```
+
+### 브랜드 색 바꾸기
+
+이 가이드는 모노톤으로 보여 줍니다. 팔레트 `--ybm-color-palette-brand-100` ~ `1000`만 덮어쓰면 브랜드 색을 쓰는 곳이 모두 따라 바뀝니다.
+
+```css
+/* my-service.css - DS 다음에 불러온다 */
+:root {
+  --ybm-color-palette-brand-100: #e6f6ee;  /* 옅은 배경 */
+  --ybm-color-palette-brand-600: #12a150;  /* 주 버튼, 링크 */
+  --ybm-color-palette-brand-700: #0d7d3e;  /* 눌림, 진한 글자 */
+  /* 200 ~ 500, 800 ~ 1000 도 같은 색의 단계로 채운다 */
+}
+:root[data-theme="dark"] {
+  /* 다크 모드는 같은 단계를 뒤집어 넣는다 (다크 100 = 라이트 1000) */
+}
+```
+
+## 사용 지침
+
+| 구분 | 내용 |
+| --- | --- |
+| **Do** | 역할에 맞는 색을 고릅니다. 오류는 critical, 성공은 positive 입니다. |
+| **Do** | 진한 면 위 글자는 fg-on-[역할]-solid 를 씁니다. |
+| **Do** | 브랜드 색은 주 버튼처럼 꼭 눈에 띄어야 할 곳에만 씁니다. |
+| **Don't** | hex 나 팔레트 색을 화면에 직접 쓰지 않습니다. |
+| **Don't** | 색만으로 뜻을 전하지 않습니다. 아이콘이나 글자를 함께 씁니다. |
+
 
 ---
 
@@ -400,9 +432,7 @@ Figma 라이브러리컴포넌트와 토큰을 Figma에서 봅니다.
 
 ## 개요
 
-글꼴은 Pretendard 입니다. 크기는 `--ybm-font-size-t01` ~ `t17`, 줄 높이는 같은 번호의 `--ybm-line-height-*`를 짝으로 씁니다. 굵기는 regular 400, medium 500, semibold 600, bold 700 입니다.
-
-한글 위계: 페이지 제목 40/48 medium(500), 리드 16/24 light(300), 섹션 제목 24/32 medium, 소제목 16/22 medium, 본문 16/28 regular, 보조 글 14 regular 입니다. 자간은 주지 않습니다.
+글꼴은 Pretendard 하나입니다. 크기는 `--ybm-font-size-t01` ~ `t17`, 줄 높이는 같은 번호의 `--ybm-line-height-*`를 짝으로 씁니다.
 
 ## 크기
 
@@ -435,16 +465,33 @@ Figma 라이브러리컴포넌트와 토큰을 Figma에서 봅니다.
 | `--ybm-font-weight-semibold` | 600 | 가나다 Aa 123 |
 | `--ybm-font-weight-bold` | 700 | 가나다 Aa 123 |
 
-## 한글 줄바꿈
+## 코드에서 쓰기
 
-본문에는 `word-break: keep-all`과 `overflow-wrap: break-word`를 함께 씁니다. 넣지 않으면 어절 중간에서 줄이 바뀝니다.
+본문에는 `word-break: keep-all`을 함께 써서 어절 중간에서 줄이 바뀌지 않게 합니다.
 
 ```css
+.my-title {
+  font-size: var(--ybm-font-size-t09);
+  line-height: var(--ybm-line-height-t09);
+  font-weight: var(--ybm-font-weight-bold);
+}
 .my-text {
+  font-size: var(--ybm-font-size-t05);
+  line-height: var(--ybm-line-height-t05);
   word-break: keep-all;
   overflow-wrap: break-word;
 }
 ```
+
+## 사용 지침
+
+| 구분 | 내용 |
+| --- | --- |
+| **Do** | 크기와 줄 높이는 같은 번호끼리 짝으로 씁니다. |
+| **Do** | 제목은 Bold, 항목 제목은 SemiBold, 본문은 Regular 로 위계를 나눕니다. |
+| **Do** | 한 화면의 크기는 서너 단계로 줄입니다. |
+| **Don't** | px 숫자를 직접 쓰지 않습니다. |
+| **Don't** | 강조를 색으로만 하지 않습니다. 굵기를 먼저 씁니다. |
 
 
 ---
@@ -457,7 +504,7 @@ Figma 라이브러리컴포넌트와 토큰을 Figma에서 봅니다.
 
 ## 개요
 
-4px 단위를 기본으로 하고, 작은 간격은 2px 단위도 씁니다. 화면 좌우 여백은 `--ybm-space-x-global-gutter` 입니다.
+4px 단위가 기본이고 작은 간격은 2px 단위도 씁니다. 이름의 숫자에 4를 곱하면 값입니다. 화면 좌우 여백은 `--ybm-space-x-global-gutter` 입니다.
 
 ## 토큰
 
@@ -490,6 +537,28 @@ Figma 라이브러리컴포넌트와 토큰을 Figma에서 봅니다.
 | `--ybm-space-x24` | 96px |  |
 | `--ybm-space-x32` | 128px |  |
 
+## 코드에서 쓰기
+
+```css
+.my-page {
+  padding-inline: var(--ybm-space-x-global-gutter);
+}
+.my-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ybm-space-x2);
+  padding: var(--ybm-space-x4);
+}
+```
+
+## 사용 지침
+
+| 구분 | 내용 |
+| --- | --- |
+| **Do** | 관련 있는 줄은 좁게 붙이고, 다른 덩어리는 넓게 띄웁니다. |
+| **Do** | 화면 좌우 여백은 global-gutter 하나로 맞춥니다. |
+| **Don't** | 토큰에 없는 간격(예: 13px)을 만들지 않습니다. |
+
 
 ---
 
@@ -501,7 +570,7 @@ Figma 라이브러리컴포넌트와 토큰을 Figma에서 봅니다.
 
 ## 개요
 
-모서리는 쓰임 이름으로 씁니다. 어떤 영역에 `--ybm-shape-scale`을 0과 1 사이 값으로 덮어쓰면 그 안의 모서리만 덜 둥글게 바꿀 수 있습니다.
+모서리는 크기 이름으로 씁니다. 작은 요소일수록 덜 둥글고 큰 면일수록 더 둥급니다. 칩과 배지처럼 양 끝이 둥근 요소는 `pill`을 씁니다.
 
 ## 토큰
 
@@ -517,6 +586,26 @@ Figma 라이브러리컴포넌트와 토큰을 Figma에서 봅니다.
 | `--ybm-shape-3xl` | 24px |  |
 | `--ybm-shape-pill` | 9999px |  |
 
+## 코드에서 쓰기
+
+어떤 영역에 `--ybm-shape-scale`을 0과 1 사이 값으로 덮어쓰면 그 안의 모서리만 덜 둥글게 바뀝니다.
+
+```css
+.my-card {
+  border-radius: var(--ybm-shape-lg);
+}
+.admin-area {
+  --ybm-shape-scale: 0.5;  /* 이 영역 안의 모서리를 절반으로 */
+}
+```
+
+## 사용 지침
+
+| 구분 | 내용 |
+| --- | --- |
+| **Do** | 안쪽 요소의 모서리는 바깥 요소보다 작게 둡니다. |
+| **Don't** | 한 화면 안에서 같은 종류의 요소에 다른 둥글기를 섞지 않습니다. |
+
 
 ---
 
@@ -526,9 +615,11 @@ Figma 라이브러리컴포넌트와 토큰을 Figma에서 봅니다.
 
 그림자와 겹침 순서는 요소가 얼마나 떠 있는지, 무엇이 위에 있는지 보여 줍니다.
 
-## 그림자
+## 개요
 
-숫자 대신 쓰임 이름으로 씁니다.
+위에 떠 있는 면일수록 지금 더 중요합니다. 그림자는 숫자 대신 쓰임 이름으로 쓰고, 다크 모드에서는 떠 있는 면을 `bg-layer-floating`으로 한 단계 밝게 칠해 높이를 보여 줍니다.
+
+## 그림자
 
 | 토큰 | 쓰임 | 보기 |
 | --- | --- | --- |
@@ -549,6 +640,24 @@ Figma 라이브러리컴포넌트와 토큰을 Figma에서 봅니다.
 | `--ybm-z-toast` | 1200 |
 | `--ybm-z-tooltip` | 1300 |
 
+## 코드에서 쓰기
+
+```css
+.my-menu {
+  background: var(--ybm-color-bg-layer-floating);
+  box-shadow: var(--ybm-elevation-overlay);
+  z-index: var(--ybm-z-overlay);
+}
+```
+
+## 사용 지침
+
+| 구분 | 내용 |
+| --- | --- |
+| **Do** | 요소의 쓰임에 맞는 그림자 이름을 고릅니다. 메뉴는 overlay, 다이얼로그는 modal 입니다. |
+| **Do** | 같은 높이 안에서 면을 나눌 때는 그림자 대신 테두리를 씁니다. |
+| **Don't** | 그림자 값을 직접 만들지 않습니다. |
+
 
 ---
 
@@ -557,6 +666,10 @@ Figma 라이브러리컴포넌트와 토큰을 Figma에서 봅니다.
 # Motion
 
 움직임은 화면이 바뀌는 과정을 자연스럽게 이어 줍니다.
+
+## 개요
+
+버튼 색처럼 작은 반응은 짧게, 시트처럼 화면이 크게 바뀌는 움직임은 조금 길게 씁니다. 들어오는 요소는 `enter`, 나가는 요소는 `exit` 곡선을 씁니다.
 
 ## 길이
 
@@ -574,6 +687,27 @@ Figma 라이브러리컴포넌트와 토큰을 Figma에서 봅니다.
 | `--ybm-easing-emphasized` | `cubic-bezier(0.03, 0.4, 0.1, 1)` |
 | `--ybm-easing-enter` | `cubic-bezier(0, 0, 0.15, 1)` |
 | `--ybm-easing-exit` | `cubic-bezier(0.35, 0, 1, 1)` |
+
+## 코드에서 쓰기
+
+움직임 줄이기를 켠 사용자에게는 움직임을 끕니다.
+
+```css
+.my-sheet {
+  transition: transform var(--ybm-duration-slow) var(--ybm-easing-emphasized);
+}
+@media (prefers-reduced-motion: reduce) {
+  .my-sheet { transition: none; }
+}
+```
+
+## 사용 지침
+
+| 구분 | 내용 |
+| --- | --- |
+| **Do** | 바뀌는 과정을 이어 줄 때만 움직임을 씁니다. |
+| **Do** | 움직임 줄이기 설정을 따릅니다. |
+| **Don't** | 눈길을 끌려고 꾸밈 움직임을 넣지 않습니다. |
 
 
 ---

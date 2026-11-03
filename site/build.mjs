@@ -390,7 +390,7 @@ ${example(`<div class="pv-stage"><button class="ds-btn" data-variant="brandSolid
 <p>상태는 HTML 기본 속성으로 나타냅니다.</p>
 ${table(['상태', '속성'], [['꺼짐', '<code>disabled</code>'], ['선택', '<code>:checked</code>, <code>aria-selected</code>, <code>aria-pressed</code>'], ['지금 위치', '<code>aria-current="page"</code>'], ['펼침', '<code>aria-expanded</code>'], ['오류', '<code>aria-invalid="true"</code>']])}
 <h3>3. 서비스에 맞게 바꾸기</h3>
-<p>서비스 CSS는 DS 다음에 불러오고, 컴포넌트 변수(<code>--ds-*</code>)와 시맨틱 색만 덮어씁니다. DS가 CSS 레이어 안에 있어 <code>!important</code> 없이도 서비스 CSS가 이깁니다. 브랜드 색은 <a class="ds-link" href="{root}foundations/color.html#brand">Color</a>에서 바꿉니다.</p>
+<p>서비스 CSS는 DS 다음에 불러오고, 컴포넌트 변수(<code>--ds-*</code>)와 시맨틱 색만 덮어씁니다. DS가 CSS 레이어 안에 있어 <code>!important</code> 없이도 서비스 CSS가 이깁니다. 브랜드 색은 <a class="ds-link" href="{root}foundations/color.html#code">Color</a>에서 바꿉니다.</p>
 ${codeblock(`<link rel="stylesheet" href="${PUBLIC}/dist/ybm-ds.css">\n<link rel="stylesheet" href="my-service.css">  <!-- 서비스 CSS는 항상 DS 다음 -->\n\n/* my-service.css */\n.my-dialog { --ds-dialog-width: 360px; }\n.my-banner { --ds-banner-bg: var(--ybm-color-bg-brand-weak); }`)}
 
 <h2 id="ai">AI로 만들기</h2>
@@ -457,7 +457,9 @@ const DARK = { ...LIGHT, ...varMap(tokensCss.slice(darkAt, darkEnd)) };
 const resolve = (map, v, n = 0) => { const m = String(v).match(/^var\((--[a-z0-9_-]+)\)$/); return m && n < 12 ? resolve(map, map[m[1]], n + 1) : v; };
 const tokRe = (re) => [...lightCss.matchAll(re)];
 
-// 색: 레퍼런스 A처럼 토큰 / 값(라이트, 다크 견본 + 값)
+// 파운데이션 상세 구성 (11-03 사용자: 레퍼런스 A Color 길이, 그림은 최소로)
+//   개요 > (파운데이션마다 필요한 절) > 토큰 > 코드에서 쓰기 > 사용 지침. 그림은 따로 넣지 않고 토큰 표의 견본만 쓴다
+// 색 토큰 표: 레퍼런스 A처럼 토큰 / 값(라이트, 다크 견본 + 값)
 const colorGroups = [['bg', '배경'], ['fg', '글자와 아이콘'], ['stroke', '테두리']];
 const colorTable = (k) => {
   const names = [...new Set(tokRe(new RegExp(`(--ybm-color-${k}-[a-z0-9-]+)\\s*:`, 'g')).map((m) => m[1]))];
@@ -474,56 +476,111 @@ const foundPages = {
   color: {
     title: '색', lead: '색은 정보의 위계와 상태, 브랜드를 구분해 보여 줍니다.',
     body: `<h2 id="overview">개요</h2>
-<p>화면에는 시맨틱 색(<code>bg</code>, <code>fg</code>, <code>stroke</code>)만 씁니다. 팔레트(<code>--ybm-color-palette-*</code>)는 시맨틱 색을 만드는 원료라 화면에 직접 쓰지 않습니다. 색을 토큰으로만 쓰면 <code>data-theme="dark"</code> 하나로 다크 모드가 맞춰집니다. 아래 표의 값은 라이트 / 다크 순서입니다.</p>
-<h2 id="brand">브랜드 색</h2>
-<p>이 가이드는 브랜드 색 대신 모노톤으로 보여 줍니다. 브랜드 색은 서비스마다 바꿀 수 있습니다. 팔레트 <code>--ybm-color-palette-brand-100</code> ~ <code>1000</code>만 덮어쓰면 버튼, 체크박스, 링크처럼 브랜드 색을 쓰는 곳이 모두 따라 바뀝니다.</p>
+<p>색은 생김새가 아니라 하는 일로 이름을 붙입니다. 화면에는 시맨틱 색(<code>bg</code>, <code>fg</code>, <code>stroke</code>)만 쓰고, 팔레트(<code>--ybm-color-palette-*</code>)는 시맨틱 색을 만드는 원료로 둡니다. 토큰으로만 쓰면 <code>data-theme="dark"</code> 하나로 다크 모드가 맞춰집니다.</p>
+<h2 id="role">역할</h2>
+${table(['역할', '쓰는 곳'], [['<code>brand</code>', '주 버튼, 선택된 상태, 링크'], ['<code>neutral</code>', '바탕, 본문, 보조 버튼'], ['<code>positive</code>', '성공, 완료'], ['<code>warning</code>', '주의, 마감 임박'], ['<code>critical</code>', '오류, 삭제'], ['<code>informative</code>', '안내, 도움말'], ['<code>magic</code>', 'AI 기능, 새 기능']])}
+${colorGroups.map(([k, label]) => `<h2 id="${k}">${label}</h2>\n${colorTable(k)}`).join('\n')}
+<h2 id="code">코드에서 쓰기</h2>
+${codeblock(`.my-card {\n  background: var(--ybm-color-bg-layer-default);\n  color: var(--ybm-color-fg-neutral);\n  border: 1px solid var(--ybm-color-stroke-neutral-muted);\n}`, 'css')}
+<h3>브랜드 색 바꾸기</h3>
+<p>이 가이드는 모노톤으로 보여 줍니다. 팔레트 <code>--ybm-color-palette-brand-100</code> ~ <code>1000</code>만 덮어쓰면 브랜드 색을 쓰는 곳이 모두 따라 바뀝니다.</p>
 ${codeblock(`/* my-service.css - DS 다음에 불러온다 */\n:root {\n  --ybm-color-palette-brand-100: #e6f6ee;  /* 옅은 배경 */\n  --ybm-color-palette-brand-600: #12a150;  /* 주 버튼, 링크 */\n  --ybm-color-palette-brand-700: #0d7d3e;  /* 눌림, 진한 글자 */\n  /* 200 ~ 500, 800 ~ 1000 도 같은 색의 단계로 채운다 */\n}\n:root[data-theme="dark"] {\n  /* 다크 모드는 같은 단계를 뒤집어 넣는다 (다크 100 = 라이트 1000) */\n}`, 'css')}
-${colorGroups.map(([k, label]) => `<h2 id="${k}">${label}</h2>\n${colorTable(k)}`).join('\n')}`,
+<h2 id="practices">사용 지침</h2>
+${practices([
+  [true, '역할에 맞는 색을 고릅니다. 오류는 critical, 성공은 positive 입니다.'],
+  [true, '진한 면 위 글자는 fg-on-[역할]-solid 를 씁니다.'],
+  [true, '브랜드 색은 주 버튼처럼 꼭 눈에 띄어야 할 곳에만 씁니다.'],
+  [false, 'hex 나 팔레트 색을 화면에 직접 쓰지 않습니다.'],
+  [false, '색만으로 뜻을 전하지 않습니다. 아이콘이나 글자를 함께 씁니다.'],
+])}`,
   },
   typography: {
     title: '글자', lead: '타이포그래피는 글을 분명하고 읽기 쉽게 전합니다.',
     body: `<h2 id="overview">개요</h2>
-<p>글꼴은 Pretendard 입니다. 크기는 <code>--ybm-font-size-t01</code> ~ <code>t17</code>, 줄 높이는 같은 번호의 <code>--ybm-line-height-*</code>를 짝으로 씁니다. 굵기는 regular 400, medium 500, semibold 600, bold 700 입니다.</p>
-<p>한글 위계: 페이지 제목 40/48 medium(500), 리드 16/24 light(300), 섹션 제목 24/32 medium, 소제목 16/22 medium, 본문 16/28 regular, 보조 글 14 regular 입니다. 자간은 주지 않습니다.</p>
+<p>글꼴은 Pretendard 하나입니다. 크기는 <code>--ybm-font-size-t01</code> ~ <code>t17</code>, 줄 높이는 같은 번호의 <code>--ybm-line-height-*</code>를 짝으로 씁니다.</p>
 <h2 id="size">크기</h2>
 ${table(['토큰', '크기 / 줄 높이 (px)', '보기'], tokRe(/--ybm-font-size-(t\d\d): (\d+)px/g).map((m) => [`<code>${m[1]}</code>`, `${m[2]} / ${(LIGHT[`--ybm-line-height-${m[1]}`] || '').replace('px', '')}`, `<span class="site-sample" style="font-size: var(--ybm-font-size-${m[1]}); line-height: var(--ybm-line-height-${m[1]}); font-weight: var(--ybm-font-weight-bold)">가나다 Aa 123</span>`]))}
 <h2 id="weight">굵기</h2>
 ${table(['토큰', '값', '보기'], tokRe(/--ybm-font-weight-([a-z]+): (\d+);/g).map((m) => [`<code>--ybm-font-weight-${m[1]}</code>`, m[2], `<span class="site-sample" style="font-size: var(--ybm-font-size-t06); font-weight: var(--ybm-font-weight-${m[1]})">가나다 Aa 123</span>`]))}
-<h2 id="korean">한글 줄바꿈</h2>
-<p>본문에는 <code>word-break: keep-all</code>과 <code>overflow-wrap: break-word</code>를 함께 씁니다. 넣지 않으면 어절 중간에서 줄이 바뀝니다.</p>
-${codeblock(`.my-text {\n  word-break: keep-all;\n  overflow-wrap: break-word;\n}`, 'css')}`,
+<h2 id="code">코드에서 쓰기</h2>
+<p>본문에는 <code>word-break: keep-all</code>을 함께 써서 어절 중간에서 줄이 바뀌지 않게 합니다.</p>
+${codeblock(`.my-title {\n  font-size: var(--ybm-font-size-t09);\n  line-height: var(--ybm-line-height-t09);\n  font-weight: var(--ybm-font-weight-bold);\n}\n.my-text {\n  font-size: var(--ybm-font-size-t05);\n  line-height: var(--ybm-line-height-t05);\n  word-break: keep-all;\n  overflow-wrap: break-word;\n}`, 'css')}
+<h2 id="practices">사용 지침</h2>
+${practices([
+  [true, '크기와 줄 높이는 같은 번호끼리 짝으로 씁니다.'],
+  [true, '제목은 Bold, 항목 제목은 SemiBold, 본문은 Regular 로 위계를 나눕니다.'],
+  [true, '한 화면의 크기는 서너 단계로 줄입니다.'],
+  [false, 'px 숫자를 직접 쓰지 않습니다.'],
+  [false, '강조를 색으로만 하지 않습니다. 굵기를 먼저 씁니다.'],
+])}`,
   },
   spacing: {
     title: '간격', lead: '간격은 요소 사이의 거리로 무엇이 한 묶음인지 보여 줍니다.',
     body: `<h2 id="overview">개요</h2>
-<p>4px 단위를 기본으로 하고, 작은 간격은 2px 단위도 씁니다. 화면 좌우 여백은 <code>--ybm-space-x-global-gutter</code> 입니다.</p>
+<p>4px 단위가 기본이고 작은 간격은 2px 단위도 씁니다. 이름의 숫자에 4를 곱하면 값입니다. 화면 좌우 여백은 <code>--ybm-space-x-global-gutter</code> 입니다.</p>
 <h2 id="tokens">토큰</h2>
-${table(['토큰', '값', '보기'], tokRe(/--ybm-space-(x[0-9_]+): (\d+)px/g).map((m) => [`<code>--ybm-space-${m[1]}</code>`, `${m[2]}px`, `<span class="site-bar" style="width: var(--ybm-space-${m[1]})"></span>`]))}`,
+${table(['토큰', '값', '보기'], tokRe(/--ybm-space-(x[0-9_]+): (\d+)px/g).map((m) => [`<code>--ybm-space-${m[1]}</code>`, `${m[2]}px`, `<span class="site-bar" style="width: var(--ybm-space-${m[1]})"></span>`]))}
+<h2 id="code">코드에서 쓰기</h2>
+${codeblock(`.my-page {\n  padding-inline: var(--ybm-space-x-global-gutter);\n}\n.my-card {\n  display: flex;\n  flex-direction: column;\n  gap: var(--ybm-space-x2);\n  padding: var(--ybm-space-x4);\n}`, 'css')}
+<h2 id="practices">사용 지침</h2>
+${practices([
+  [true, '관련 있는 줄은 좁게 붙이고, 다른 덩어리는 넓게 띄웁니다.'],
+  [true, '화면 좌우 여백은 global-gutter 하나로 맞춥니다.'],
+  [false, '토큰에 없는 간격(예: 13px)을 만들지 않습니다.'],
+])}`,
   },
   shape: {
     title: '모서리', lead: '모서리는 요소의 둥글기를 정해 화면의 인상을 맞춥니다.',
     body: `<h2 id="overview">개요</h2>
-<p>모서리는 쓰임 이름으로 씁니다. 어떤 영역에 <code>--ybm-shape-scale</code>을 0과 1 사이 값으로 덮어쓰면 그 안의 모서리만 덜 둥글게 바꿀 수 있습니다.</p>
+<p>모서리는 크기 이름으로 씁니다. 작은 요소일수록 덜 둥글고 큰 면일수록 더 둥급니다. 칩과 배지처럼 양 끝이 둥근 요소는 <code>pill</code>을 씁니다.</p>
 <h2 id="tokens">토큰</h2>
 ${table(['토큰', '값', '보기'], [...new Set(tokRe(/--ybm-shape-base-([a-z0-9]+):/g).map((m) => m[1]))].concat('pill').map((n) => {
   const px = n === 'pill' ? resolve(LIGHT, LIGHT['--ybm-shape-pill']) : resolve(LIGHT, LIGHT[`--ybm-shape-base-${n}`]);
   return [`<code>--ybm-shape-${n}</code>`, esc(px), `<span class="site-shape" style="border-radius: var(--ybm-shape-${n})"></span>`];
-}))}`,
+}))}
+<h2 id="code">코드에서 쓰기</h2>
+<p>어떤 영역에 <code>--ybm-shape-scale</code>을 0과 1 사이 값으로 덮어쓰면 그 안의 모서리만 덜 둥글게 바뀝니다.</p>
+${codeblock(`.my-card {\n  border-radius: var(--ybm-shape-lg);\n}\n.admin-area {\n  --ybm-shape-scale: 0.5;  /* 이 영역 안의 모서리를 절반으로 */\n}`, 'css')}
+<h2 id="practices">사용 지침</h2>
+${practices([
+  [true, '안쪽 요소의 모서리는 바깥 요소보다 작게 둡니다.'],
+  [false, '한 화면 안에서 같은 종류의 요소에 다른 둥글기를 섞지 않습니다.'],
+])}`,
   },
   elevation: {
     title: '그림자', lead: '그림자와 겹침 순서는 요소가 얼마나 떠 있는지, 무엇이 위에 있는지 보여 줍니다.',
-    body: `<h2 id="shadow">그림자</h2>
-<p>숫자 대신 쓰임 이름으로 씁니다.</p>
+    body: `<h2 id="overview">개요</h2>
+<p>위에 떠 있는 면일수록 지금 더 중요합니다. 그림자는 숫자 대신 쓰임 이름으로 쓰고, 다크 모드에서는 떠 있는 면을 <code>bg-layer-floating</code>으로 한 단계 밝게 칠해 높이를 보여 줍니다.</p>
+<h2 id="shadow">그림자</h2>
 ${table(['토큰', '쓰임', '보기'], tokRe(/--ybm-elevation-(raised|overlay|panel|floating|modal):\s+[^;]+;\s*\/\* ([^*]+) \*\//g).map((m) => [`<code>--ybm-elevation-${m[1]}</code>`, prose(m[2]), `<span class="site-shadow" style="box-shadow: var(--ybm-elevation-${m[1]})"></span>`]))}
 <h2 id="z">겹침 순서</h2>
-${table(['토큰', '값'], tokRe(/--ybm-z-([a-z]+): (\d+);/g).map((m) => [`<code>--ybm-z-${m[1]}</code>`, m[2]]))}`,
+${table(['토큰', '값'], tokRe(/--ybm-z-([a-z]+): (\d+);/g).map((m) => [`<code>--ybm-z-${m[1]}</code>`, m[2]]))}
+<h2 id="code">코드에서 쓰기</h2>
+${codeblock(`.my-menu {\n  background: var(--ybm-color-bg-layer-floating);\n  box-shadow: var(--ybm-elevation-overlay);\n  z-index: var(--ybm-z-overlay);\n}`, 'css')}
+<h2 id="practices">사용 지침</h2>
+${practices([
+  [true, '요소의 쓰임에 맞는 그림자 이름을 고릅니다. 메뉴는 overlay, 다이얼로그는 modal 입니다.'],
+  [true, '같은 높이 안에서 면을 나눌 때는 그림자 대신 테두리를 씁니다.'],
+  [false, '그림자 값을 직접 만들지 않습니다.'],
+])}`,
   },
   motion: {
     title: '움직임', lead: '움직임은 화면이 바뀌는 과정을 자연스럽게 이어 줍니다.',
-    body: `<h2 id="duration">길이</h2>
+    body: `<h2 id="overview">개요</h2>
+<p>버튼 색처럼 작은 반응은 짧게, 시트처럼 화면이 크게 바뀌는 움직임은 조금 길게 씁니다. 들어오는 요소는 <code>enter</code>, 나가는 요소는 <code>exit</code> 곡선을 씁니다.</p>
+<h2 id="duration">길이</h2>
 ${table(['토큰', '값'], tokRe(/--ybm-duration-([a-z]+): ([^;]+);/g).map((m) => [`<code>--ybm-duration-${m[1]}</code>`, `<code>${esc(m[2])}</code>`]))}
 <h2 id="easing">속도 곡선</h2>
-${table(['토큰', '값'], tokRe(/--ybm-easing-([a-z]+): ([^;]+);/g).map((m) => [`<code>--ybm-easing-${m[1]}</code>`, `<code>${esc(m[2])}</code>`]))}`,
+${table(['토큰', '값'], tokRe(/--ybm-easing-([a-z]+): ([^;]+);/g).map((m) => [`<code>--ybm-easing-${m[1]}</code>`, `<code>${esc(m[2])}</code>`]))}
+<h2 id="code">코드에서 쓰기</h2>
+<p>움직임 줄이기를 켠 사용자에게는 움직임을 끕니다.</p>
+${codeblock(`.my-sheet {\n  transition: transform var(--ybm-duration-slow) var(--ybm-easing-emphasized);\n}\n@media (prefers-reduced-motion: reduce) {\n  .my-sheet { transition: none; }\n}`, 'css')}
+<h2 id="practices">사용 지침</h2>
+${practices([
+  [true, '바뀌는 과정을 이어 줄 때만 움직임을 씁니다.'],
+  [true, '움직임 줄이기 설정을 따릅니다.'],
+  [false, '눈길을 끌려고 꾸밈 움직임을 넣지 않습니다.'],
+])}`,
   },
 };
 for (const [slug, p] of Object.entries(foundPages)) {

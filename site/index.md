@@ -52,7 +52,7 @@ Templates가져다 고쳐 쓰는 완성 화면.
 
 ### 3. 서비스에 맞게 바꾸기
 
-서비스 CSS는 DS 다음에 불러오고, 컴포넌트 변수(`--ds-*`)와 시맨틱 색만 덮어씁니다. DS가 CSS 레이어 안에 있어 `!important` 없이도 서비스 CSS가 이깁니다. 브랜드 색은 [Color](https://luvms012-rgb.github.io/ybm-ds/site/foundations/color.md#brand)에서 바꿉니다.
+서비스 CSS는 DS 다음에 불러오고, 컴포넌트 변수(`--ds-*`)와 시맨틱 색만 덮어씁니다. DS가 CSS 레이어 안에 있어 `!important` 없이도 서비스 CSS가 이깁니다. 브랜드 색은 [Color](https://luvms012-rgb.github.io/ybm-ds/site/foundations/color.md#code)에서 바꿉니다.
 
 ```html
 <link rel="stylesheet" href="https://luvms012-rgb.github.io/ybm-ds/dist/ybm-ds.css">

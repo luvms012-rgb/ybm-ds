@@ -6,24 +6,19 @@
 
 ## 개요
 
-화면에는 시맨틱 색(`bg`, `fg`, `stroke`)만 씁니다. 팔레트(`--ybm-color-palette-*`)는 시맨틱 색을 만드는 원료라 화면에 직접 쓰지 않습니다. 색을 토큰으로만 쓰면 `data-theme="dark"` 하나로 다크 모드가 맞춰집니다. 아래 표의 값은 라이트 / 다크 순서입니다.
+색은 생김새가 아니라 하는 일로 이름을 붙입니다. 화면에는 시맨틱 색(`bg`, `fg`, `stroke`)만 쓰고, 팔레트(`--ybm-color-palette-*`)는 시맨틱 색을 만드는 원료로 둡니다. 토큰으로만 쓰면 `data-theme="dark"` 하나로 다크 모드가 맞춰집니다.
 
-## 브랜드 색
+## 역할
 
-이 가이드는 브랜드 색 대신 모노톤으로 보여 줍니다. 브랜드 색은 서비스마다 바꿀 수 있습니다. 팔레트 `--ybm-color-palette-brand-100` ~ `1000`만 덮어쓰면 버튼, 체크박스, 링크처럼 브랜드 색을 쓰는 곳이 모두 따라 바뀝니다.
-
-```css
-/* my-service.css - DS 다음에 불러온다 */
-:root {
-  --ybm-color-palette-brand-100: #e6f6ee;  /* 옅은 배경 */
-  --ybm-color-palette-brand-600: #12a150;  /* 주 버튼, 링크 */
-  --ybm-color-palette-brand-700: #0d7d3e;  /* 눌림, 진한 글자 */
-  /* 200 ~ 500, 800 ~ 1000 도 같은 색의 단계로 채운다 */
-}
-:root[data-theme="dark"] {
-  /* 다크 모드는 같은 단계를 뒤집어 넣는다 (다크 100 = 라이트 1000) */
-}
-```
+| 역할 | 쓰는 곳 |
+| --- | --- |
+| `brand` | 주 버튼, 선택된 상태, 링크 |
+| `neutral` | 바탕, 본문, 보조 버튼 |
+| `positive` | 성공, 완료 |
+| `warning` | 주의, 마감 임박 |
+| `critical` | 오류, 삭제 |
+| `informative` | 안내, 도움말 |
+| `magic` | AI 기능, 새 기능 |
 
 ## 배경
 
@@ -124,3 +119,40 @@
 | `--ybm-color-stroke-positive-weak` | `#b9e9d2 / #20493b` |
 | `--ybm-color-stroke-warning-solid` | `#e14d00 / #ff6600` |
 | `--ybm-color-stroke-warning-weak` | `#ffd5c0 / #6b311c` |
+
+## 코드에서 쓰기
+
+```css
+.my-card {
+  background: var(--ybm-color-bg-layer-default);
+  color: var(--ybm-color-fg-neutral);
+  border: 1px solid var(--ybm-color-stroke-neutral-muted);
+}
+```
+
+### 브랜드 색 바꾸기
+
+이 가이드는 모노톤으로 보여 줍니다. 팔레트 `--ybm-color-palette-brand-100` ~ `1000`만 덮어쓰면 브랜드 색을 쓰는 곳이 모두 따라 바뀝니다.
+
+```css
+/* my-service.css - DS 다음에 불러온다 */
+:root {
+  --ybm-color-palette-brand-100: #e6f6ee;  /* 옅은 배경 */
+  --ybm-color-palette-brand-600: #12a150;  /* 주 버튼, 링크 */
+  --ybm-color-palette-brand-700: #0d7d3e;  /* 눌림, 진한 글자 */
+  /* 200 ~ 500, 800 ~ 1000 도 같은 색의 단계로 채운다 */
+}
+:root[data-theme="dark"] {
+  /* 다크 모드는 같은 단계를 뒤집어 넣는다 (다크 100 = 라이트 1000) */
+}
+```
+
+## 사용 지침
+
+| 구분 | 내용 |
+| --- | --- |
+| **Do** | 역할에 맞는 색을 고릅니다. 오류는 critical, 성공은 positive 입니다. |
+| **Do** | 진한 면 위 글자는 fg-on-[역할]-solid 를 씁니다. |
+| **Do** | 브랜드 색은 주 버튼처럼 꼭 눈에 띄어야 할 곳에만 씁니다. |
+| **Don't** | hex 나 팔레트 색을 화면에 직접 쓰지 않습니다. |
+| **Don't** | 색만으로 뜻을 전하지 않습니다. 아이콘이나 글자를 함께 씁니다. |

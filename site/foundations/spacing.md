@@ -6,7 +6,7 @@
 
 ## 개요
 
-4px 단위를 기본으로 하고, 작은 간격은 2px 단위도 씁니다. 화면 좌우 여백은 `--ybm-space-x-global-gutter` 입니다.
+4px 단위가 기본이고 작은 간격은 2px 단위도 씁니다. 이름의 숫자에 4를 곱하면 값입니다. 화면 좌우 여백은 `--ybm-space-x-global-gutter` 입니다.
 
 ## 토큰
 
@@ -38,3 +38,25 @@
 | `--ybm-space-x20` | 80px |  |
 | `--ybm-space-x24` | 96px |  |
 | `--ybm-space-x32` | 128px |  |
+
+## 코드에서 쓰기
+
+```css
+.my-page {
+  padding-inline: var(--ybm-space-x-global-gutter);
+}
+.my-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ybm-space-x2);
+  padding: var(--ybm-space-x4);
+}
+```
+
+## 사용 지침
+
+| 구분 | 내용 |
+| --- | --- |
+| **Do** | 관련 있는 줄은 좁게 붙이고, 다른 덩어리는 넓게 띄웁니다. |
+| **Do** | 화면 좌우 여백은 global-gutter 하나로 맞춥니다. |
+| **Don't** | 토큰에 없는 간격(예: 13px)을 만들지 않습니다. |
