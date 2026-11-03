@@ -6,7 +6,7 @@
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <figure class="ds-codeblock">
@@ -15,6 +15,15 @@
   <pre class="ds-codeblock__code"><code>…</code></pre>
 </figure>
 ```
+
+## 구조
+
+| 부품 | 설명 |
+| --- | --- |
+| **Header**`ds-codeblock__header` | 제목과 닫기 버튼이 놓이는 머리 영역입니다. |
+| **Language**`ds-codeblock__language` | 코드 언어 이름입니다. |
+| **Copy**`ds-codeblock__copy` | 코드를 복사하는 버튼입니다. |
+| **Code**`ds-codeblock__code` | 코드 본문입니다. |
 
 ## 속성
 
@@ -25,6 +34,12 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | `header` | true false |
 
 그 밖에: 복사 버튼
+
+## 동작
+
+`ybm-ds.js`를 불러오면 알아서 동작합니다.
+
+- data-ds-copy 버튼으로 코드 복사
 
 ## 사용 지침
 
@@ -41,7 +56,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### 크기와 여백
 
 ```
 header 에는 언어 이름과 복사 버튼. 복사 버튼(data-ds-copy)은 ybm-ds.js 가 코드를 복사하고 잠시 data-copied 를 붙인다.

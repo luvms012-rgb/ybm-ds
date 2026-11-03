@@ -6,7 +6,7 @@
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <div class="ds-ptr">
@@ -16,6 +16,15 @@
   <div class="ds-ptr__content">…목록…</div>
 </div>
 ```
+
+## 구조
+
+| 부품 | 설명 |
+| --- | --- |
+| **Indicator**`ds-ptr__indicator` | 지금 상태나 위치를 알려 주는 표시입니다. |
+| **Track**`ds-progress-circle__track` | 막대의 바탕입니다. |
+| **Range**`ds-progress-circle__range` | 당긴 만큼 차오르는 표시입니다. |
+| **Content**`ds-ptr__content` | 주된 내용이 들어가는 영역입니다. |
 
 ## 속성
 
@@ -27,14 +36,11 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 그 밖에: Progress Circle 24
 
-## CSS 변수
+## 동작
 
-서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+`ybm-ds.js`를 불러오면 알아서 동작합니다.
 
-| 변수 | 기본값 |
-| --- | --- |
-| `--ds-ptr-size` | `calc(var(--ybm-space-x6) + var(--ybm-space-x8) * 2)` |
-| `--ds-ptr-displacement` | `0px` |
+- 터치로 당긴 거리 표시, 넘겨 놓으면 ds-refresh 이벤트, YBM.endRefresh(요소) 로 되돌리기
 
 ## 사용 지침
 
@@ -59,7 +65,16 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-ptr-size` | `calc(var(--ybm-space-x6) + var(--ybm-space-x8) * 2)` |
+| `--ds-ptr-displacement` | `0px` |
+
+### 크기와 여백
 
 ```
 ybm-ds.js 가 터치로 당긴 거리를 --ds-ptr-displacement 에 넣고, 88 을 넘겨 놓으면 data-state="refreshing" 과 ds-refresh 이벤트.

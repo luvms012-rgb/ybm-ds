@@ -6,7 +6,7 @@
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <div class="ds-selectbox-group" [style="--ds-selectbox-columns: 2"]>
@@ -22,6 +22,16 @@
 </div>
 ```
 
+## 구조
+
+| 부품 | 설명 |
+| --- | --- |
+| **Texts**`ds-selectbox__texts` | 제목과 설명을 묶는 글자 영역입니다. |
+| **Label**`ds-selectbox__label` | 이름이나 값을 보여 주는 글자입니다. |
+| **Desc**`ds-selectbox__desc` | 제목을 돕는 설명 글입니다. |
+| **Control**`ds-checkbox__control` | 실제로 값을 입력하거나 고르는 부분입니다. |
+| **Control**`ds-radio__control` | 실제로 값을 입력하거나 고르는 부분입니다. |
+
 ## 속성
 
 Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
@@ -31,16 +41,6 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | `type` | check radio |
 | `state` | unchecked checked disabled |
 | `layout` | horizontal vertical |
-
-## CSS 변수
-
-서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
-
-| 변수 | 기본값 |
-| --- | --- |
-| `--ds-selectbox-columns` | `1` |
-| `--ds-selectbox-line` | `var(--ybm-color-stroke-neutral-weak)` |
-| `--ds-selectbox-bg` | `var(--ybm-color-bg-layer-default)` |
 
 ## 사용 지침
 
@@ -67,7 +67,17 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-selectbox-columns` | `1` |
+| `--ds-selectbox-line` | `var(--ybm-color-stroke-neutral-weak)` |
+| `--ds-selectbox-bg` | `var(--ybm-color-bg-layer-default)` |
+
+### 크기와 여백
 
 ```
 layout: horizontal(기본) / vertical(여러 열로 놓을 때)

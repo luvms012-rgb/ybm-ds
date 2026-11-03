@@ -6,7 +6,7 @@
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <button type="button" class="ds-chip" aria-pressed="false">
@@ -24,7 +24,19 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | `layout` | iconOnly |
 | 켜고 끄는 속성 | `size` |
 
-## CSS 변수
+## 예시
+
+```html
+<button type="button" class="ds-chip" aria-pressed="true">전체</button>
+<button type="button" class="ds-chip" aria-pressed="false">할인</button>
+<button type="button" class="ds-chip" data-variant="outlineStrong" aria-pressed="false">outlineStrong</button>
+<button type="button" class="ds-chip" data-variant="outlineWeak" aria-pressed="false">@naver.com<i class="ds-icon ds-icon--chevron-down" aria-hidden="true"></i></button>
+<button type="button" class="ds-chip" disabled>disabled</button>
+```
+
+## 규격
+
+### CSS 변수
 
 서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
 
@@ -38,19 +50,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | `--ds-chip-fg` | `var(--ybm-color-fg-neutral)` |
 | `--ds-chip-line` | `transparent` |
 
-## 예시
-
-```html
-<button type="button" class="ds-chip" aria-pressed="true">전체</button>
-<button type="button" class="ds-chip" aria-pressed="false">할인</button>
-<button type="button" class="ds-chip" data-variant="outlineStrong" aria-pressed="false">outlineStrong</button>
-<button type="button" class="ds-chip" data-variant="outlineWeak" aria-pressed="false">@naver.com<i class="ds-icon ds-icon--chevron-down" aria-hidden="true"></i></button>
-<button type="button" class="ds-chip" disabled>disabled</button>
-```
-
-## 규격
-
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### 크기와 여백
 
 ```
 variant: solid(기본) / outlineStrong / outlineWeak   size: medium(기본 36) / small 32 / large 40

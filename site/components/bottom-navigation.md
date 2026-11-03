@@ -6,7 +6,7 @@
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <nav class="ds-bottomnav" aria-label="주요 메뉴">
@@ -16,6 +16,15 @@
   </a>
 </nav>
 ```
+
+## 구조
+
+| 부품 | 설명 |
+| --- | --- |
+| **Item**`ds-bottomnav__item` | 목록의 항목 하나입니다. |
+| **Icon**`ds-bottomnav__icon` | 메뉴를 나타내는 아이콘입니다. |
+| **Badge Dot**`ds-bottomnav__badge--dot` | 새 소식을 알리는 점입니다. |
+| **Label**`ds-bottomnav__label` | 메뉴 이름입니다. |
 
 ## 속성
 
@@ -45,7 +54,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### 크기와 여백
 
 ```
 Figma: bg/layer-default / 상단 1px stroke/neutral-muted / 항목 높이 51 / padding 4/2 / gap 2 / 아이콘 24(Solid)

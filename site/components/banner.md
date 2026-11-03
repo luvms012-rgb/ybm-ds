@@ -6,7 +6,7 @@
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <div class="ds-banner" role="status" data-tone="warning">
@@ -19,21 +19,21 @@
 </div>
 ```
 
+## 구조
+
+| 부품 | 설명 |
+| --- | --- |
+| **Inner**`ds-banner__inner` | 배너 내용을 가운데 폭으로 묶는 영역입니다. |
+| **Message**`ds-banner__message` | 알리는 내용 글입니다. |
+| **Title**`ds-banner__title` | 제목입니다. |
+| **Action**`ds-banner__action` | 바로 실행하는 작은 버튼입니다. |
+| **Close**`ds-banner__close` | 닫기 버튼입니다. |
+
 ## 속성
 
 Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 그 밖에: tone neutral, informative, positive, warning, critical, variant solid
-
-## CSS 변수
-
-서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
-
-| 변수 | 기본값 |
-| --- | --- |
-| `--ds-banner-bg` | `var(--ybm-color-bg-neutral)` |
-| `--ds-banner-fg` | `var(--ybm-color-fg-neutral)` |
-| `--ds-banner-max` | `1200px` |
 
 ## 사용 지침
 
@@ -55,7 +55,17 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-banner-bg` | `var(--ybm-color-bg-neutral)` |
+| `--ds-banner-fg` | `var(--ybm-color-fg-neutral)` |
+| `--ds-banner-max` | `1200px` |
+
+### 크기와 여백
 
 ```
 tone: neutral(기본) / informative / positive / warning / critical   variant: weak(기본) / solid

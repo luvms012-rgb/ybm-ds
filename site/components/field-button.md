@@ -6,7 +6,7 @@
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <button type="button" class="ds-fieldbutton" data-size="large">
@@ -17,6 +17,13 @@
   <i class="ds-icon ds-icon--chevron-down" aria-hidden="true"></i>
 </button>
 ```
+
+## 구조
+
+| 부품 | 설명 |
+| --- | --- |
+| **Affix**`ds-fieldbutton__affix` | 값 앞이나 뒤에 붙는 아이콘입니다. |
+| **Value**`ds-fieldbutton__value` | 고른 값이나 숫자를 보여 줍니다. |
 
 ## 속성
 
@@ -46,7 +53,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### 크기와 여백
 
 ```
 Figma large : h52 / px16 / gap10 / shape/lg / t05 / icon 20 / medium: h40 / px14 / gap8 / shape/sm / t04 / icon 16

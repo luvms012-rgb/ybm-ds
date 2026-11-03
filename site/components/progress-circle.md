@@ -6,13 +6,20 @@
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <span class="ds-progress-circle" data-size="40" data-tone="brand" role="progressbar" aria-valuenow="40" style="--ds-progress-value: 40">
   <svg viewBox="0 0 40 40" aria-hidden="true"><circle class="ds-progress-circle__track" pathLength="100"/><circle class="ds-progress-circle__range" pathLength="100"/></svg>
 </span>
 ```
+
+## 구조
+
+| 부품 | 설명 |
+| --- | --- |
+| **Track**`ds-progress-circle__track` | 막대의 바탕입니다. |
+| **Range**`ds-progress-circle__range` | 진행한 양을 보여 주는 호입니다. |
 
 ## 속성
 
@@ -23,14 +30,6 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | `tone` | neutral brand staticWhite |
 | `type` | determinate indeterminate |
 | 켜고 끄는 속성 | `size` |
-
-## CSS 변수
-
-서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
-
-| 변수 | 기본값 |
-| --- | --- |
-| `--ds-progress-value` | `40` |
 
 ## 사용 지침
 
@@ -51,7 +50,15 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-progress-value` | `40` |
+
+### 크기와 여백
 
 ```
 tone: neutral(기본) / brand / staticWhite   size: 24(기본) / 40 / 56   type: determinate / indeterminate

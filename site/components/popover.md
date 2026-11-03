@@ -6,7 +6,7 @@
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <span class="ds-popover-anchor">
@@ -22,6 +22,18 @@
 </span>
 ```
 
+## 구조
+
+| 부품 | 설명 |
+| --- | --- |
+| **Header**`ds-popover__header` | 제목과 닫기 버튼이 놓이는 머리 영역입니다. |
+| **Texts**`ds-popover__texts` | 제목과 설명을 묶는 글자 영역입니다. |
+| **Title**`ds-popover__title` | 제목입니다. |
+| **Desc**`ds-popover__desc` | 제목을 돕는 설명 글입니다. |
+| **Close**`ds-popover__close` | 닫기 버튼입니다. |
+| **Body**`ds-popover__body` | 본문이 들어가는 영역입니다. |
+| **Footer**`ds-popover__footer` | 버튼이나 보조 정보가 놓이는 아래 영역입니다. |
+
 ## 속성
 
 Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
@@ -32,14 +44,11 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 그 밖에: 폭 320
 
-## CSS 변수
+## 동작
 
-서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+`ybm-ds.js`를 불러오면 알아서 동작합니다.
 
-| 변수 | 기본값 |
-| --- | --- |
-| `--ds-popover-width` | `320px` |
-| `--ds-popover-gap` | `var(--ybm-space-x2)` |
+- data-ds-popover="id" 로 열고 닫기, 바깥 클릭과 Esc, 안의 data-ds-close 로 닫기
 
 ## 사용 지침
 
@@ -68,7 +77,16 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-popover-width` | `320px` |
+| `--ds-popover-gap` | `var(--ybm-space-x2)` |
+
+### 크기와 여백
 
 ```
 actions: single / pair / none(footer 없음)   placement: bottom-start(기본) / bottom-end / top-start / top-end

@@ -6,7 +6,7 @@
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <header class="ds-appbar" [data-platform="android"] [data-tone="transparent" data-gradient]>
@@ -23,6 +23,17 @@
 </header>
 ```
 
+## 구조
+
+| 부품 | 설명 |
+| --- | --- |
+| **Left**`ds-appbar__left` | 뒤로 가기 같은 버튼이 놓이는 왼쪽 영역입니다. |
+| **Button**`ds-appbar__button` | 아이콘 버튼입니다. |
+| **Main**`ds-appbar__main` | 제목이 놓이는 가운데 영역입니다. |
+| **Title**`ds-appbar__title` | 제목입니다. |
+| **Subtitle**`ds-appbar__subtitle` | 제목 아래 작은 글입니다. |
+| **Right**`ds-appbar__right` | 검색 같은 버튼이 놓이는 오른쪽 영역입니다. |
+
 ## 속성
 
 Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
@@ -32,15 +43,6 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | `theme` | ios android CSS data-platform |
 | `tone` | layer transparent + gradient |
 | `titleLayout` | titleOnly withSubtitle |
-
-## CSS 변수
-
-서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
-
-| 변수 | 기본값 |
-| --- | --- |
-| `--ds-appbar-height` | `var(--ybm-space-x14)` |
-| `--ds-appbar-side` | `calc(var(--ybm-space-x11) * 2)` |
 
 ## 사용 지침
 
@@ -81,7 +83,16 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-appbar-height` | `var(--ybm-space-x14)` |
+| `--ds-appbar-side` | `calc(var(--ybm-space-x11) * 2)` |
+
+### 크기와 여백
 
 ```
 theme(Figma) = data-platform: 기본 ios(제목 가운데) / "android"(제목 왼쪽)

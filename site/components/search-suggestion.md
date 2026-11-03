@@ -6,7 +6,7 @@
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <div class="ds-search-anchor">
@@ -28,6 +28,21 @@
 </div>
 ```
 
+## 구조
+
+| 부품 | 설명 |
+| --- | --- |
+| **Icon**`ds-input__icon` | 뜻을 빠르게 알려 주는 아이콘입니다. |
+| **Control**`ds-input__control` | 실제로 값을 입력하거나 고르는 부분입니다. |
+| **Clear**`ds-input__clear` | 입력한 값을 지우는 버튼입니다. |
+| **Heading**`ds-search-suggest__heading` | 목록 위에 붙는 소제목입니다. |
+| **List**`ds-search-suggest__list` | 항목 목록입니다. |
+| **Item**`ds-search-suggest__item` | 목록의 항목 하나입니다. |
+| **Content**`ds-search-suggest__content` | 주된 내용이 들어가는 영역입니다. |
+| **Label**`ds-search-suggest__label` | 이름이나 값을 보여 주는 글자입니다. |
+| **Desc**`ds-search-suggest__desc` | 제목을 돕는 설명 글입니다. |
+| **Empty**`ds-search-suggest__empty` | 결과가 없을 때 보이는 글입니다. |
+
 ## 속성
 
 Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
@@ -37,6 +52,12 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | `content` | suggestion recent empty |
 | `Item state` | enabled highlighted |
 | 켜고 끄는 속성 | `description` |
+
+## 동작
+
+`ybm-ds.js`를 불러오면 알아서 동작합니다.
+
+- 입력 칸(role=combobox, aria-controls)에서 위아래 화살표로 줄 고르기, Enter 로 그 줄 누르기
 
 ## 사용 지침
 
@@ -74,7 +95,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### 크기와 여백
 
 ```
 검색 입력 칸은 Text Field(04) outline 에 search 아이콘과 지우기 버튼을 붙여 쓴다.

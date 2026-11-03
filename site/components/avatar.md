@@ -6,7 +6,7 @@
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 사진   <span class="ds-avatar" data-size="48"><img src="…" alt="김민수"></span>
@@ -16,6 +16,14 @@
 배지   … <span class="ds-avatar__badge"><img src="…" alt=""></span></span>   ← 소속·서비스 로고 등 작은 이미지
 링크   <a class="ds-avatar" href="…" aria-label="김민수 프로필">…</a>  /  <button type="button" class="ds-avatar" aria-label="…">
 ```
+
+## 구조
+
+| 부품 | 설명 |
+| --- | --- |
+| **Initials**`ds-avatar__initials` | 사진이 없을 때 보이는 이름 첫 글자입니다. |
+| **Status**`ds-avatar__status` | 접속 상태를 알리는 점입니다. |
+| **Badge**`ds-avatar__badge` | 개수나 새 소식을 알리는 배지입니다. |
 
 ## 속성
 
@@ -29,24 +37,6 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | `group size` | 20~64 × shape |
 
 그 밖에: `+N`
-
-## CSS 변수
-
-서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
-
-| 변수 | 기본값 |
-| --- | --- |
-| `--ds-avatar-size` | `36px` |
-| `--ds-avatar-badge` | `14px` |
-| `--ds-avatar-radius` | `var(--ybm-shape-pill)` |
-| `--ds-avatar-bg` | `var(--ybm-color-palette-gray-500)` |
-| `--ds-avatar-status-size` | `max(8px, calc(var(--ds-avatar-size) * 0.26))` |
-| `--ds-avatar-status-ring` | `clamp(1.5px, calc(var(--ds-avatar-size) * 0.04), 4px)` |
-| `--ds-avatar-status-color` | `var(--ybm-color-bg-positive-solid)` |
-| `--ds-avatar-group-size` | `36px` |
-| `--ds-avatar-group-radius` | `var(--ybm-shape-pill)` |
-| `--ds-avatar-group-ring` | `max(1.5px, calc(var(--ds-avatar-group-size) * 0.05))` |
-| `--ds-avatar-group-ring-color` | `var(--ybm-color-bg-layer-default)` |
 
 ## 예시
 
@@ -82,7 +72,25 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-avatar-size` | `36px` |
+| `--ds-avatar-badge` | `14px` |
+| `--ds-avatar-radius` | `var(--ybm-shape-pill)` |
+| `--ds-avatar-bg` | `var(--ybm-color-palette-gray-500)` |
+| `--ds-avatar-status-size` | `max(8px, calc(var(--ds-avatar-size) * 0.26))` |
+| `--ds-avatar-status-ring` | `clamp(1.5px, calc(var(--ds-avatar-size) * 0.04), 4px)` |
+| `--ds-avatar-status-color` | `var(--ybm-color-bg-positive-solid)` |
+| `--ds-avatar-group-size` | `36px` |
+| `--ds-avatar-group-radius` | `var(--ybm-shape-pill)` |
+| `--ds-avatar-group-ring` | `max(1.5px, calc(var(--ds-avatar-group-size) * 0.05))` |
+| `--ds-avatar-group-ring-color` | `var(--ybm-color-bg-layer-default)` |
+
+### 크기와 여백
 
 ```
 size : 20 / 24 / 36(기본) / 42 / 48 / 56 / 64 / 80 / 96 / 108

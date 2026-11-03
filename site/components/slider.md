@@ -6,7 +6,7 @@
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <input type="range" class="ds-slider" min="0" max="100" value="45" [data-tone="brand"]>
@@ -20,15 +20,11 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | --- | --- |
 | 켜고 끄는 속성 | `tone` |
 
-## CSS 변수
+## 동작
 
-서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+`ybm-ds.js`를 불러오면 알아서 동작합니다.
 
-| 변수 | 기본값 |
-| --- | --- |
-| `--ds-slider-value` | `50%` |
-| `--ds-slider-active` | `var(--ybm-color-bg-neutral-solid)` |
-| `--ds-slider-thumb-line` | `var(--ybm-color-bg-neutral-solid)` |
+- <input class="ds-slider"> 채움 길이(--ds-slider-value) 동기화
 
 ## 사용 지침
 
@@ -47,7 +43,17 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-slider-value` | `50%` |
+| `--ds-slider-active` | `var(--ybm-color-bg-neutral-solid)` |
+| `--ds-slider-thumb-line` | `var(--ybm-color-bg-neutral-solid)` |
+
+### 크기와 여백
 
 ```
 tone: neutral(기본) / brand

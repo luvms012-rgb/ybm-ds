@@ -6,7 +6,7 @@
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <ul class="ds-list" [data-variant="inset"] [data-divider]>
@@ -24,6 +24,17 @@
 </ul>
 ```
 
+## 구조
+
+| 부품 | 설명 |
+| --- | --- |
+| **Prefix**`ds-list-item__prefix` | 앞에 붙는 아이콘이나 요소입니다. |
+| **Content**`ds-list-item__content` | 주된 내용이 들어가는 영역입니다. |
+| **Title**`ds-list-item__title` | 제목입니다. |
+| **Desc**`ds-list-item__desc` | 제목을 돕는 설명 글입니다. |
+| **Suffix**`ds-list-item__suffix` | 뒤에 붙는 아이콘이나 요소입니다. |
+| **Chevron**`ds-list-item__chevron` | 다른 화면으로 이동함을 알리는 꺾쇠입니다. |
+
 ## 속성
 
 Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
@@ -33,16 +44,6 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | 켜고 끄는 속성 | `divider` |
 
 그 밖에: variant inset, size small, prefix/suffix/chevron
-
-## CSS 변수
-
-서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
-
-| 변수 | 기본값 |
-| --- | --- |
-| `--ds-list-item-min-h` | `56px` |
-| `--ds-list-item-py` | `var(--ybm-space-x3)` |
-| `--ds-list-item-px` | `var(--ybm-space-x4)` |
 
 ## 사용 지침
 
@@ -69,7 +70,17 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-list-item-min-h` | `56px` |
+| `--ds-list-item-py` | `var(--ybm-space-x3)` |
+| `--ds-list-item-px` | `var(--ybm-space-x4)` |
+
+### 크기와 여백
 
 ```
 variant: plain(기본) / inset(카드 안처럼 둥근 묶음)   size: medium(기본) / small   divider: data-divider

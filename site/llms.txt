@@ -9,7 +9,7 @@
 ## Get Started
 
 - [Get Started](https://luvms012-rgb.github.io/ybm-ds/site/index.md): YBM DS를 처음 쓰는 사람을 위한 안내
-- [AI](https://luvms012-rgb.github.io/ybm-ds/site/get-started/ai.md): AI 도구가 YBM DS 문서를 읽는 방법
+- [AI & Tools](https://luvms012-rgb.github.io/ybm-ds/site/get-started/ai.md): AI 도구와 YBM DS를 함께 쓰는 방법
 
 ## Foundations
 

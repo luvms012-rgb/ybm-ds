@@ -87,7 +87,7 @@ Templates가져다 고쳐 쓰는 완성 화면.
 6. 새 ds- 클래스를 만들거나 !important를 쓰지 마.
 ```
 
-그다음 만들 화면을 말로 설명하세요. 다른 요청 예시는 [AI](https://luvms012-rgb.github.io/ybm-ds/site/get-started/ai.md)에 있습니다.
+그다음 만들 화면을 말로 설명하세요. 다른 요청 예시는 [AI & Tools](https://luvms012-rgb.github.io/ybm-ds/site/get-started/ai.md)에 있습니다.
 
 ## 다크 모드
 
@@ -173,7 +173,7 @@ module.exports = { presets: [require('./tailwind.preset.js')] };
 
 ## 도구
 
-AIAI 도구에 DS 문서를 주는 방법.
+AI & ToolsAI 도구에 DS 문서를 주는 방법.
 
 Figma컴포넌트와 토큰 라이브러리.
 
@@ -184,44 +184,53 @@ GitHub원본 파일과 변경 기록.
 
 <!-- https://luvms012-rgb.github.io/ybm-ds/site/get-started/ai.md -->
 
-# AI
+# AI & Tools
 
-AI 도구가 YBM DS 문서를 바로 읽을 수 있도록 모든 문서를 마크다운으로도 제공합니다. 컴포넌트 하나만 가져갈 수도, 전체를 한 번에 줄 수도 있습니다.
+AI 도구와 YBM DS를 함께 쓰는 방법입니다.
 
-## 파일
+## 소개
+
+모든 문서를 AI가 읽기 쉬운 마크다운으로도 냅니다. 컴포넌트 목록, HTML 구조, 토큰도 파일로 열려 있어 AI가 DS 규칙대로 화면을 만듭니다.
+
+## llms.txt
 
 | 파일 | 내용 |
 | --- | --- |
-| [llms.txt](https://luvms012-rgb.github.io/ybm-ds/site/llms.txt) | 전체 목차입니다. 분류별 문서 링크와 한 줄 설명이 있어, AI 가 필요한 문서를 골라 읽습니다. |
-| [llms-full.txt](https://luvms012-rgb.github.io/ybm-ds/site/llms-full.txt) | 모든 문서를 한 파일로 모았습니다. 주소를 읽지 못하는 도구에 첨부할 때 씁니다. |
-| 페이지별 `.md` | 각 문서 주소의 `.html` 을 `.md` 로 바꾸면 그 페이지만 마크다운으로 받습니다. 예) `components/action-button.md` |
+| [llms.txt](https://luvms012-rgb.github.io/ybm-ds/site/llms.txt) | 전체 목차입니다. AI가 필요한 문서를 골라 읽습니다. |
+| [llms-full.txt](https://luvms012-rgb.github.io/ybm-ds/site/llms-full.txt) | 모든 문서를 한 파일로 모았습니다. 주소를 열지 못하는 도구에 첨부합니다. |
+| 페이지별 `.md` | 문서 주소의 `.html`을 `.md`로 바꾸면 그 페이지만 받습니다. |
 
-## 사용방법
+- 컴포넌트 하나만 필요하면 제목 아래 **Markdown** 메뉴에서 **내용 복사**를 누릅니다.
+- 여러 컴포넌트로 화면을 만들 때는 `llms.txt` 주소를 알려 줍니다.
 
-1. 컴포넌트 하나만 필요하면 그 페이지 제목 아래 **Markdown** 메뉴에서 **내용 복사**를 누르고 AI 대화에 붙여 넣습니다.
-2. 여러 컴포넌트로 화면을 만들 때는 `llms.txt` 주소를 알려 주면 AI 가 필요한 문서를 찾아 읽습니다.
-3. 주소를 열지 못하는 도구에는 `llms-full.txt` 를 파일로 첨부합니다.
-4. 새 화면은 `llms.txt` 의 Templates 목록에서 비슷한 화면의 HTML 을 출발점으로 삼게 하면 배치와 여백이 DS 기준에 맞습니다.
+## AI가 읽는 파일
 
-## 템플릿 목록
-
-`llms.txt` 에는 문서 말고도 AI 가 바로 가져다 쓸 수 있는 템플릿 목록이 있습니다.
-
-| 목록 | 내용 |
+| 파일 | 내용 |
 | --- | --- |
-| Templates | 템플릿마다 HTML 원본 주소와 한 줄 설명입니다. 그대로 열면 되는 완성된 화면이라 고쳐 쓰기 좋습니다. |
+| [components.json](https://luvms012-rgb.github.io/ybm-ds/components.json) | 쓸 수 있는 컴포넌트와 속성 목록입니다. |
+| [components.css](https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/components.css) | 컴포넌트마다 머리 주석에 HTML 구조가 있습니다. |
+| [tokens.css](https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/tokens.css) | 색, 간격, 글자 크기 같은 `--ybm-*` 토큰입니다. |
+| Templates | `llms.txt` 끝에 템플릿마다 HTML 원본 주소가 있어 새 화면의 출발점으로 씁니다. |
 
 ## 요청 예시
 
+### DS 적용하기
+
 ```text
-아래 YBM DS 문서를 읽고 로그인 화면을 HTML 로 만들어 줘.
-부품은 .ds-* 클래스만, 색과 간격은 --ybm-* 토큰만 써 줘.
-https://luvms012-rgb.github.io/ybm-ds/site/llms.txt
+이 프로젝트에 YBM DS를 적용해 줘.
+1. <head>에 아래 두 줄을 넣어 줘.
+   <link rel="stylesheet" href="https://luvms012-rgb.github.io/ybm-ds/dist/ybm-ds.css">
+   <script src="https://luvms012-rgb.github.io/ybm-ds/dist/ybm-ds.js" defer></script>
+2. 문서는 https://luvms012-rgb.github.io/ybm-ds/site/llms.txt 목차에서 필요한 페이지(.md)를 골라 읽어.
+3. 쓸 수 있는 컴포넌트 목록은 https://luvms012-rgb.github.io/ybm-ds/components.json, 각 컴포넌트의 HTML 구조는 https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/components.css의 컴포넌트별 머리 주석을 따라.
+4. 색, 간격, 글자 크기, 모서리, 그림자는 https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/tokens.css의 --ybm-* 토큰만 써.
+5. 서비스 CSS는 DS 다음에 불러오고, 바꾸고 싶은 모양은 컴포넌트의 --ds-* 변수만 덮어써.
+6. 새 ds- 클래스를 만들거나 !important를 쓰지 마.
 ```
 
 ### 화면 만들기
 
-만들고 싶은 화면을 말로 설명하면 DS 부품으로 조립합니다. 대괄호 안만 내 상황에 맞게 바꾸면 됩니다.
+대괄호 안만 내 상황에 맞게 바꿉니다.
 
 ```text
 YBM DS로 [만들 화면, 예: 회원 목록 관리 화면]을 만들어 줘.
@@ -235,8 +244,6 @@ YBM DS로 [만들 화면, 예: 회원 목록 관리 화면]을 만들어 줘.
 
 ### 규칙 점검하기
 
-이미 만든 화면이 DS 규칙을 지키는지 확인하고 고칩니다.
-
 ```text
 이 화면이 YBM DS 규칙을 지키는지 점검하고 고쳐 줘.
 - hex, rgb로 색을 직접 쓴 곳 → --ybm-color-* 토큰으로
@@ -246,7 +253,11 @@ YBM DS로 [만들 화면, 예: 회원 목록 관리 화면]을 만들어 줘.
 고친 곳은 목록으로 알려 줘.
 ```
 
-문서를 고치면 사이트를 다시 만들 때 마크다운도 함께 새로 만들어집니다.
+## Figma
+
+Figma 변수 이름이 CSS 변수 이름과 같습니다. Dev Mode에서 복사한 코드가 그대로 동작하고, AI에 Figma 화면을 주면 같은 토큰 이름으로 옮깁니다.
+
+Figma 라이브러리컴포넌트와 토큰을 Figma에서 봅니다.
 
 
 ---
@@ -853,7 +864,7 @@ YBM DS로 [만들 화면, 예: 회원 목록 관리 화면]을 만들어 줘.
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <button class="ds-btn" data-variant="neutralWeak" data-size="large">
@@ -871,26 +882,6 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | `size` | xsmall small medium large |
 | `layout` | iconOnly |
 | `width` | fill |
-
-## CSS 변수
-
-서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
-
-| 변수 | 기본값 |
-| --- | --- |
-| `--ds-btn-height` | `40px` |
-| `--ds-btn-padding-x` | `var(--ybm-space-x4)` |
-| `--ds-btn-radius` | `var(--ybm-shape-sm)` |
-| `--ds-btn-gap` | `var(--ybm-space-x1_5)` |
-| `--ds-btn-font-size` | `var(--ybm-font-size-t04)` |
-| `--ds-btn-line-height` | `var(--ybm-line-height-t04)` |
-| `--ds-btn-font-weight` | `var(--ybm-font-weight-semibold)` |
-| `--ds-btn-icon` | `18px` |
-| `--ds-btn-icon-only` | `20px` |
-| `--ds-btn-bg` | `var(--ybm-color-bg-brand-solid)` |
-| `--ds-btn-bg-pressed` | `var(--ybm-color-bg-brand-solid-pressed)` |
-| `--ds-btn-fg` | `var(--ybm-color-fg-on-brand-solid)` |
-| `--ds-btn-border` | `transparent` |
 
 ## 사용 지침
 
@@ -920,7 +911,27 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-btn-height` | `40px` |
+| `--ds-btn-padding-x` | `var(--ybm-space-x4)` |
+| `--ds-btn-radius` | `var(--ybm-shape-sm)` |
+| `--ds-btn-gap` | `var(--ybm-space-x1_5)` |
+| `--ds-btn-font-size` | `var(--ybm-font-size-t04)` |
+| `--ds-btn-line-height` | `var(--ybm-line-height-t04)` |
+| `--ds-btn-font-weight` | `var(--ybm-font-weight-semibold)` |
+| `--ds-btn-icon` | `18px` |
+| `--ds-btn-icon-only` | `20px` |
+| `--ds-btn-bg` | `var(--ybm-color-bg-brand-solid)` |
+| `--ds-btn-bg-pressed` | `var(--ybm-color-bg-brand-solid-pressed)` |
+| `--ds-btn-fg` | `var(--ybm-color-fg-on-brand-solid)` |
+| `--ds-btn-border` | `transparent` |
+
+### 크기와 여백
 
 ```
 variant : brandSolid(기본) / neutralSolid / neutralWeak / criticalSolid / brandOutline / neutralOutline / ghost
@@ -943,7 +954,7 @@ Figma: xsmall px14 gap4 t02 Medium shape/xs (iconOnly pill) / icon 16
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <a class="ds-link" href="…" [data-size="small"]>비밀번호를 잊으셨나요?</a>
@@ -959,15 +970,6 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 그 밖에: `--ds-link-color(-hover)`
 
-## CSS 변수
-
-서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
-
-| 변수 | 기본값 |
-| --- | --- |
-| `--ds-link-color` | `var(--ybm-color-fg-neutral-subtle)` |
-| `--ds-link-color-hover` | `var(--ybm-color-fg-neutral)` |
-
 ## 예시
 
 ```html
@@ -978,7 +980,16 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-link-color` | `var(--ybm-color-fg-neutral-subtle)` |
+| `--ds-link-color-hover` | `var(--ybm-color-fg-neutral)` |
+
+### 크기와 여백
 
 ```
 size: medium(기본, t05) / small(t03, 본문 옆이나 표, 칸 머리처럼 보조 자리) (2026-11-03 추가)
@@ -995,7 +1006,7 @@ size: medium(기본, t05) / small(t03, 본문 옆이나 표, 칸 머리처럼 �
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <div class="ds-field" [data-label-weight="bold"]>
@@ -1012,6 +1023,19 @@ size: medium(기본, t05) / small(t03, 본문 옆이나 표, 칸 머리처럼 �
 </div>
 ```
 
+## 구조
+
+| 부품 | 설명 |
+| --- | --- |
+| **Header**`ds-field__header` | 제목과 닫기 버튼이 놓이는 머리 영역입니다. |
+| **Label**`ds-field__label` | 이름이나 값을 보여 주는 글자입니다. |
+| **Indicator**`ds-field__indicator` | 지금 상태나 위치를 알려 주는 표시입니다. |
+| **Required**`ds-field__required` | 꼭 입력해야 함을 알리는 표시입니다. |
+| **Footer**`ds-field__footer` | 버튼이나 보조 정보가 놓이는 아래 영역입니다. |
+| **Help**`ds-field__help` | 입력을 돕는 안내 글입니다. |
+| **Error**`ds-field__error` | 잘못된 입력을 알리는 글입니다. |
+| **Count**`ds-field__count` | 개수나 글자 수를 보여 줍니다. |
+
 ## 속성
 
 Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
@@ -1019,15 +1043,6 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | 속성 | 값 |
 | --- | --- |
 | `label-weight` | bold |
-
-## CSS 변수
-
-서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
-
-| 변수 | 기본값 |
-| --- | --- |
-| `--ds-field-gap` | `var(--ybm-space-x2)` |
-| `--ds-field-label-weight` | `var(--ybm-font-weight-medium)` |
 
 ## 예시
 
@@ -1046,7 +1061,16 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-field-gap` | `var(--ybm-space-x2)` |
+| `--ds-field-label-weight` | `var(--ybm-font-weight-medium)` |
+
+### 크기와 여백
 
 ```
 Figma: 세로 gap x2 / label t05 Medium(bold 변형 t05 Bold) fg/neutral / indicator t04 fg/neutral-subtle(좌 4)
@@ -1065,7 +1089,7 @@ Figma: 세로 gap x2 / label t05 Medium(bold 변형 t05 Bold) fg/neutral / indic
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <div class="ds-input" data-variant="outline" data-size="medium">
@@ -1077,6 +1101,16 @@ Figma: 세로 gap x2 / label t05 Medium(bold 변형 t05 Bold) fg/neutral / indic
 </div>
 ```
 
+## 구조
+
+| 부품 | 설명 |
+| --- | --- |
+| **Icon**`ds-input__icon` | 뜻을 빠르게 알려 주는 아이콘입니다. |
+| **Prefix**`ds-input__prefix` | 앞에 붙는 아이콘이나 요소입니다. |
+| **Control**`ds-input__control` | 실제로 값을 입력하거나 고르는 부분입니다. |
+| **Suffix**`ds-input__suffix` | 뒤에 붙는 아이콘이나 요소입니다. |
+| **Clear**`ds-input__clear` | 입력한 값을 지우는 버튼입니다. |
+
 ## 속성
 
 Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
@@ -1086,7 +1120,23 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | `variant` | outline underline |
 | 켜고 끄는 속성 | `size` |
 
-## CSS 변수
+## 동작
+
+`ybm-ds.js`를 불러오면 알아서 동작합니다.
+
+- 값 지우기 (노출/숨김은 CSS 가 처리)
+
+## 예시
+
+```html
+<div class="ds-input"><input class="ds-input__control" placeholder="underline · large"></div>
+<div class="ds-input" data-variant="outline" data-size="medium"><i class="ds-icon ds-icon--search ds-input__icon" aria-hidden="true"></i><input class="ds-input__control" placeholder="outline · medium"></div>
+<div class="ds-input" data-variant="outline"><input class="ds-input__control" value="비활성" disabled></div>
+```
+
+## 규격
+
+### CSS 변수
 
 서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
 
@@ -1106,17 +1156,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | `--ds-input-line-active` | `var(--ybm-color-stroke-neutral-contrast)` |
 | `--ds-input-line-fade` | `var(--ybm-duration-normal) var(--ybm-easing-standard)` |
 
-## 예시
-
-```html
-<div class="ds-input"><input class="ds-input__control" placeholder="underline · large"></div>
-<div class="ds-input" data-variant="outline" data-size="medium"><i class="ds-icon ds-icon--search ds-input__icon" aria-hidden="true"></i><input class="ds-input__control" placeholder="outline · medium"></div>
-<div class="ds-input" data-variant="outline"><input class="ds-input__control" value="비활성" disabled></div>
-```
-
-## 규격
-
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### 크기와 여백
 
 ```
 variant : underline(기본) / outline      size : large(기본) / medium
@@ -1140,7 +1180,7 @@ Figma
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <textarea class="ds-textarea" data-size="medium" rows="3" placeholder="…"></textarea>
@@ -1154,7 +1194,15 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | --- | --- |
 | 켜고 끄는 속성 | `variant` `size` |
 
-## CSS 변수
+## 예시
+
+```html
+<textarea class="ds-textarea" rows="3" placeholder="문의 내용을 입력해 주세요"></textarea>
+```
+
+## 규격
+
+### CSS 변수
 
 서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
 
@@ -1168,15 +1216,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | `--ds-textarea-line` | `var(--ybm-color-stroke-neutral-weak)` |
 | `--ds-textarea-line-width` | `1px` |
 
-## 예시
-
-```html
-<textarea class="ds-textarea" rows="3" placeholder="문의 내용을 입력해 주세요"></textarea>
-```
-
-## 규격
-
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### 크기와 여백
 
 ```
 variant : outline(기본) / underline      size : large(기본) / medium
@@ -1197,7 +1237,7 @@ focused 1px stroke/neutral-contrast / invalid 1px stroke/critical-solid / disabl
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <button type="button" class="ds-fieldbutton" data-size="large">
@@ -1208,6 +1248,13 @@ focused 1px stroke/neutral-contrast / invalid 1px stroke/critical-solid / disabl
   <i class="ds-icon ds-icon--chevron-down" aria-hidden="true"></i>
 </button>
 ```
+
+## 구조
+
+| 부품 | 설명 |
+| --- | --- |
+| **Affix**`ds-fieldbutton__affix` | 값 앞이나 뒤에 붙는 아이콘입니다. |
+| **Value**`ds-fieldbutton__value` | 고른 값이나 숫자를 보여 줍니다. |
 
 ## 속성
 
@@ -1237,7 +1284,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### 크기와 여백
 
 ```
 Figma large : h52 / px16 / gap10 / shape/lg / t05 / icon 20 / medium: h40 / px14 / gap8 / shape/sm / t04 / icon 16
@@ -1257,7 +1304,7 @@ readOnly: aria-readonly="true" (폼 제출이 필요하면 disabled 대신 readO
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <button type="button" class="ds-prefixselect" [data-size="medium"]>통신사</button>
@@ -1277,7 +1324,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### 크기와 여백
 
 ```
 Figma large: t06 Regular / chevron 24 / medium: t05 / chevron 20 / gap x1 / fg/neutral-subtle
@@ -1294,7 +1341,7 @@ Figma large: t06 Regular / chevron 24 / medium: t05 / chevron 20 / gap x1 / fg/n
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <button type="button" class="ds-select" aria-haspopup="listbox" aria-expanded="false" [data-size="medium"]>
@@ -1311,7 +1358,16 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | --- | --- |
 | 켜고 끄는 속성 | `size` |
 
-## CSS 변수
+## 예시
+
+```html
+<button type="button" class="ds-select" aria-haspopup="listbox" aria-expanded="false"><span class="ds-select__value" data-placeholder="지역을 선택해 주세요"></span></button>
+<button type="button" class="ds-select" aria-haspopup="listbox" aria-expanded="true" data-size="medium"><span class="ds-select__value">서울특별시</span></button>
+```
+
+## 규격
+
+### CSS 변수
 
 서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
 
@@ -1328,16 +1384,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | `--ds-select-line-width` | `1px` |
 | `--ds-select-bg` | `var(--ybm-color-bg-transparent)` |
 
-## 예시
-
-```html
-<button type="button" class="ds-select" aria-haspopup="listbox" aria-expanded="false"><span class="ds-select__value" data-placeholder="지역을 선택해 주세요"></span></button>
-<button type="button" class="ds-select" aria-haspopup="listbox" aria-expanded="true" data-size="medium"><span class="ds-select__value">서울특별시</span></button>
-```
-
-## 규격
-
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### 크기와 여백
 
 ```
 Figma large: h52 / px16 / gap10 / shape/lg / t05 / chevron 20 / medium: h40 / px14 / gap8 / shape/sm / t04 / chevron 16
@@ -1355,7 +1402,7 @@ Select를 눌렀을 때 펼쳐지는 선택지 목록입니다.
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <div class="ds-select-content" role="listbox" [data-size="medium"]>
@@ -1370,15 +1417,15 @@ Select를 눌렀을 때 펼쳐지는 선택지 목록입니다.
 </div>
 ```
 
-## CSS 변수
+## 구조
 
-서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
-
-| 변수 | 기본값 |
+| 부품 | 설명 |
 | --- | --- |
-| `--ds-select-item-padding` | `var(--ybm-space-x3) var(--ybm-space-x2)` |
-| `--ds-select-item-gap` | `var(--ybm-space-x3)` |
-| `--ds-select-item-check` | `20px` |
+| **Group**`ds-select-content__group` | 관련 항목을 묶는 영역입니다. |
+| **Label**`ds-select-content__label` | 이름이나 값을 보여 주는 글자입니다. |
+| **Body**`ds-select-item__body` | 본문이 들어가는 영역입니다. |
+| **Label**`ds-select-item__label` | 이름이나 값을 보여 주는 글자입니다. |
+| **Desc**`ds-select-item__desc` | 제목을 돕는 설명 글입니다. |
 
 ## 사용 지침
 
@@ -1404,7 +1451,17 @@ Select를 눌렀을 때 펼쳐지는 선택지 목록입니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-select-item-padding` | `var(--ybm-space-x3) var(--ybm-space-x2)` |
+| `--ds-select-item-gap` | `var(--ybm-space-x3)` |
+| `--ds-select-item-check` | `20px` |
+
+### 크기와 여백
 
 ```
 Dialog / Bottom Sheet 안에서는 .ds-select-list 만 단독으로 쓴다.
@@ -1427,7 +1484,7 @@ Figma Item(large): 바깥 좌우 x2 / surface py12 px8 gap12 shape/lg / label t0
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <label class="ds-checkbox" data-tone="neutral">
@@ -1435,6 +1492,13 @@ Figma Item(large): 바깥 좌우 x2 / surface py12 px8 gap12 shape/lg / label t0
   <span class="ds-checkbox__label">라벨</span>
 </label>
 ```
+
+## 구조
+
+| 부품 | 설명 |
+| --- | --- |
+| **Control**`ds-checkbox__control` | 실제로 값을 입력하거나 고르는 부분입니다. |
+| **Label**`ds-checkbox__label` | 이름이나 값을 보여 주는 글자입니다. |
 
 ## 속성
 
@@ -1445,18 +1509,11 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | `variant` | square ghost |
 | 켜고 끄는 속성 | `tone` `size` |
 
-## CSS 변수
+## 동작
 
-서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+`ybm-ds.js`를 불러오면 알아서 동작합니다.
 
-| 변수 | 기본값 |
-| --- | --- |
-| `--ds-checkbox-size` | `20px` |
-| `--ds-checkbox-icon` | `12px` |
-| `--ds-checkbox-checked-bg` | `var(--ybm-color-bg-brand-solid)` |
-| `--ds-checkbox-checked-fg` | `var(--ybm-color-fg-on-brand-solid)` |
-| `--ds-checkbox-line` | `var(--ybm-color-stroke-neutral-weak)` |
-| `--ds-checkbox-mark` | `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.75' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E")` |
+- data-indeterminate 속성 → input.indeterminate
 
 ## 예시
 
@@ -1470,7 +1527,20 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-checkbox-size` | `20px` |
+| `--ds-checkbox-icon` | `12px` |
+| `--ds-checkbox-checked-bg` | `var(--ybm-color-bg-brand-solid)` |
+| `--ds-checkbox-checked-fg` | `var(--ybm-color-fg-on-brand-solid)` |
+| `--ds-checkbox-line` | `var(--ybm-color-stroke-neutral-weak)` |
+| `--ds-checkbox-mark` | `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.75' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E")` |
+
+### 크기와 여백
 
 ```
 size: medium(기본 20) / large(24)   variant: square(기본) / ghost   tone: brand(기본) / neutral
@@ -1493,7 +1563,7 @@ Figma: 행 min-h 32/36 / 위 6 / gap x2 / 박스 shape/xs / label t04/t05 fg/neu
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <div class="ds-radio-group" role="radiogroup">
@@ -1508,17 +1578,6 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | 속성 | 값 |
 | --- | --- |
 | 켜고 끄는 속성 | `tone` `size` |
-
-## CSS 변수
-
-서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
-
-| 변수 | 기본값 |
-| --- | --- |
-| `--ds-radio-size` | `24px` |
-| `--ds-radio-dot` | `10px` |
-| `--ds-radio-checked-bg` | `var(--ybm-color-bg-brand-solid)` |
-| `--ds-radio-checked-fg` | `var(--ybm-color-fg-on-brand-solid)` |
 
 ## 사용 지침
 
@@ -1543,7 +1602,18 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-radio-size` | `24px` |
+| `--ds-radio-dot` | `10px` |
+| `--ds-radio-checked-bg` | `var(--ybm-color-bg-brand-solid)` |
+| `--ds-radio-checked-fg` | `var(--ybm-color-fg-on-brand-solid)` |
+
+### 크기와 여백
 
 ```
 size: large(기본 24) / medium(20)   tone: brand(기본) / neutral
@@ -1563,7 +1633,7 @@ Figma: 행 min-h 36/32 / 위 6 / gap x2 / 원 bg/layer-default + 1px stroke/neut
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <label class="ds-switch" data-size="24">
@@ -1571,6 +1641,13 @@ Figma: 행 min-h 36/32 / 위 6 / gap x2 / 원 bg/layer-default + 1px stroke/neut
   <input type="checkbox" role="switch" class="ds-switch__control">
 </label>
 ```
+
+## 구조
+
+| 부품 | 설명 |
+| --- | --- |
+| **Label**`ds-switch__label` | 이름이나 값을 보여 주는 글자입니다. |
+| **Control**`ds-switch__control` | 실제로 값을 입력하거나 고르는 부분입니다. |
 
 ## 속성
 
@@ -1580,20 +1657,6 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | --- | --- |
 | `size` | 16 24 32 |
 | 켜고 끄는 속성 | `tone` |
-
-## CSS 변수
-
-서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
-
-| 변수 | 기본값 |
-| --- | --- |
-| `--ds-switch-w` | `38px` |
-| `--ds-switch-h` | `24px` |
-| `--ds-switch-thumb` | `16px` |
-| `--ds-switch-thumb-on` | `20px` |
-| `--ds-switch-on` | `var(--ybm-color-bg-brand-solid)` |
-| `--ds-switch-thumb-color` | `var(--ybm-color-palette-static-white)` |
-| `--ds-switch-t` | `var(--ds-switch-thumb)` |
 
 ## 사용 지침
 
@@ -1612,7 +1675,21 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-switch-w` | `38px` |
+| `--ds-switch-h` | `24px` |
+| `--ds-switch-thumb` | `16px` |
+| `--ds-switch-thumb-on` | `20px` |
+| `--ds-switch-on` | `var(--ybm-color-bg-brand-solid)` |
+| `--ds-switch-thumb-color` | `var(--ybm-color-palette-static-white)` |
+| `--ds-switch-t` | `var(--ds-switch-thumb)` |
+
+### 크기와 여백
 
 ```
 size: 24(기본) / 16 / 32   tone: brand(기본) / neutral
@@ -1635,7 +1712,7 @@ Figma 16: 트랙 26×16 / 썸 10(켜짐 12) / gap x1_5 / label t03 Medium
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <div class="ds-quantity" data-size="medium">
@@ -1644,6 +1721,13 @@ Figma 16: 트랙 26×16 / 썸 10(켜짐 12) / gap x1_5 / label t03 Medium
   <button type="button" class="ds-quantity__btn" aria-label="수량 늘리기"><i class="ds-icon ds-icon--plus" aria-hidden="true"></i></button>
 </div>
 ```
+
+## 구조
+
+| 부품 | 설명 |
+| --- | --- |
+| **Btn**`ds-quantity__btn` | 수량을 늘리거나 줄이는 버튼입니다. |
+| **Value**`ds-quantity__value` | 지금 수량입니다. |
 
 ## 속성
 
@@ -1662,7 +1746,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### 크기와 여백
 
 ```
 size: medium(기본 40) / small 36 / large 52   layout: hug(기본) / data-layout="fill"
@@ -1682,7 +1766,7 @@ Figma: bg/layer-default / 1px stroke/neutral-weak / small/medium shape/sm / larg
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <button type="button" class="ds-chip" aria-pressed="false">
@@ -1700,7 +1784,19 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | `layout` | iconOnly |
 | 켜고 끄는 속성 | `size` |
 
-## CSS 변수
+## 예시
+
+```html
+<button type="button" class="ds-chip" aria-pressed="true">전체</button>
+<button type="button" class="ds-chip" aria-pressed="false">할인</button>
+<button type="button" class="ds-chip" data-variant="outlineStrong" aria-pressed="false">outlineStrong</button>
+<button type="button" class="ds-chip" data-variant="outlineWeak" aria-pressed="false">@naver.com<i class="ds-icon ds-icon--chevron-down" aria-hidden="true"></i></button>
+<button type="button" class="ds-chip" disabled>disabled</button>
+```
+
+## 규격
+
+### CSS 변수
 
 서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
 
@@ -1714,19 +1810,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | `--ds-chip-fg` | `var(--ybm-color-fg-neutral)` |
 | `--ds-chip-line` | `transparent` |
 
-## 예시
-
-```html
-<button type="button" class="ds-chip" aria-pressed="true">전체</button>
-<button type="button" class="ds-chip" aria-pressed="false">할인</button>
-<button type="button" class="ds-chip" data-variant="outlineStrong" aria-pressed="false">outlineStrong</button>
-<button type="button" class="ds-chip" data-variant="outlineWeak" aria-pressed="false">@naver.com<i class="ds-icon ds-icon--chevron-down" aria-hidden="true"></i></button>
-<button type="button" class="ds-chip" disabled>disabled</button>
-```
-
-## 규격
-
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### 크기와 여백
 
 ```
 variant: solid(기본) / outlineStrong / outlineWeak   size: medium(기본 36) / small 32 / large 40
@@ -1748,7 +1832,7 @@ Figma: shape/pill / t04 Regular(large t05) / 좌우 12/14/16 / min-w 44/48/52 / 
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <div class="ds-chiptabs" role="tablist" data-variant="neutralOutline" [data-inset="none"]>
@@ -1785,7 +1869,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### 크기와 여백
 
 ```
 variant: neutralSolid(기본) / neutralOutline   size: medium(기본 36) / large 40
@@ -1806,7 +1890,7 @@ Figma list: 좌우 x4 / gap x2 / trigger: shape/pill / medium h36 px14 min-w48 /
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <div class="ds-tabs" role="tablist" [data-size="medium"] [data-layout="hug"]>
@@ -1823,14 +1907,6 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | `layout` | fill hug |
 | 켜고 끄는 속성 | `size` |
 
-## CSS 변수
-
-서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
-
-| 변수 | 기본값 |
-| --- | --- |
-| `--ds-tabs-height` | `40px` |
-
 ## 예시
 
 ```html
@@ -1840,7 +1916,15 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-tabs-height` | `40px` |
+
+### 크기와 여백
 
 ```
 size: small(기본 40) / medium 44   triggerLayout: fill(기본) / hug
@@ -1860,7 +1944,7 @@ Figma: bg/layer-default / 하단 1px stroke/neutral-muted / trigger padding x2_5
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <div class="ds-segmented" role="group" aria-label="보기 방식" [data-size="medium"] [data-layout="fill"]>
@@ -1875,6 +1959,12 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | 속성 | 값 |
 | --- | --- |
 | 켜고 끄는 속성 | `layout` `size` |
+
+## 동작
+
+`ybm-ds.js`를 불러오면 알아서 동작합니다.
+
+- 누르면 하나만 aria-pressed, change 이벤트. 선택 배경이 고른 항목으로 미끄러져 이동(위치는 --ds-seg-x / --ds-seg-w)
 
 ## 사용 지침
 
@@ -1896,7 +1986,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### 크기와 여백
 
 ```
 size: small(기본) / medium   layout: hug(기본) / fill
@@ -1918,7 +2008,7 @@ Figma small : 트랙 bg/neutral / padding 2 / shape/sm / item py6 px12 / shape/x
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <button type="button" class="ds-toggle" aria-pressed="false" [data-size="medium"]>라벨</button>
@@ -1931,16 +2021,6 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | 속성 | 값 |
 | --- | --- |
 | 켜고 끄는 속성 | `size` |
-
-## CSS 변수
-
-서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
-
-| 변수 | 기본값 |
-| --- | --- |
-| `--ds-toggle-bg` | `var(--ybm-color-bg-layer-default)` |
-| `--ds-toggle-fg` | `var(--ybm-color-fg-neutral)` |
-| `--ds-toggle-line` | `var(--ybm-color-stroke-neutral-weak)` |
 
 ## 사용 지침
 
@@ -1958,7 +2038,17 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-toggle-bg` | `var(--ybm-color-bg-layer-default)` |
+| `--ds-toggle-fg` | `var(--ybm-color-fg-neutral)` |
+| `--ds-toggle-line` | `var(--ybm-color-stroke-neutral-weak)` |
+
+### 크기와 여백
 
 ```
 size: small(기본) / medium
@@ -1977,7 +2067,7 @@ Figma small: py6 px12 / t03 Bold / medium: py10 px16 / t04 Bold / shape/lg
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <span class="ds-badge" data-variant="solid" data-tone="brand">NEW</span>
@@ -1988,6 +2078,14 @@ Figma small: py6 px12 / t03 Bold / medium: py10 px16 / t04 Bold / shape/lg
 </span>
 ```
 
+## 구조
+
+| 부품 | 설명 |
+| --- | --- |
+| **Prefix**`ds-badge__prefix` | 앞에 붙는 아이콘이나 요소입니다. |
+| **Label**`ds-badge__label` | 이름이나 값을 보여 주는 글자입니다. |
+| **Action**`ds-badge__action` | 바로 실행하는 작은 버튼입니다. |
+
 ## 속성
 
 Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
@@ -1997,16 +2095,6 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | `variant` | weak solid outline |
 | `tone` | neutral brand informative positive warning critical |
 | 켜고 끄는 속성 | `size` |
-
-## CSS 변수
-
-서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
-
-| 변수 | 기본값 |
-| --- | --- |
-| `--ds-badge-bg` | `var(--ybm-color-bg-neutral)` |
-| `--ds-badge-fg` | `var(--ybm-color-fg-neutral-muted)` |
-| `--ds-badge-line` | `transparent` |
 
 ## 사용 지침
 
@@ -2024,7 +2112,17 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-badge-bg` | `var(--ybm-color-bg-neutral)` |
+| `--ds-badge-fg` | `var(--ybm-color-fg-neutral-muted)` |
+| `--ds-badge-line` | `transparent` |
+
+### 크기와 여백
 
 ```
 size: medium(기본) / large   variant: weak(기본) / solid / outline
@@ -2046,7 +2144,7 @@ Figma medium: py2 px6 / min-h20 / shape/2xs / t01 Medium / 아이콘 12
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <span class="ds-tag-group" [data-size="t4"] [data-tone="neutral"]><span>홍길동</span><span>2026.10.02</span></span>
@@ -2075,7 +2173,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### 크기와 여백
 
 ```
 size: t3(기본 13/20) / t4(14/21)   tone: neutralSubtle(기본) / neutral
@@ -2093,7 +2191,7 @@ Figma: 항목 사이 "/" 구분 / gap x1 / neutral fg/neutral-muted / neutralSub
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 사진   <span class="ds-avatar" data-size="48"><img src="…" alt="김민수"></span>
@@ -2103,6 +2201,14 @@ Figma: 항목 사이 "/" 구분 / gap x1 / neutral fg/neutral-muted / neutralSub
 배지   … <span class="ds-avatar__badge"><img src="…" alt=""></span></span>   ← 소속·서비스 로고 등 작은 이미지
 링크   <a class="ds-avatar" href="…" aria-label="김민수 프로필">…</a>  /  <button type="button" class="ds-avatar" aria-label="…">
 ```
+
+## 구조
+
+| 부품 | 설명 |
+| --- | --- |
+| **Initials**`ds-avatar__initials` | 사진이 없을 때 보이는 이름 첫 글자입니다. |
+| **Status**`ds-avatar__status` | 접속 상태를 알리는 점입니다. |
+| **Badge**`ds-avatar__badge` | 개수나 새 소식을 알리는 배지입니다. |
 
 ## 속성
 
@@ -2116,24 +2222,6 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | `group size` | 20~64 × shape |
 
 그 밖에: `+N`
-
-## CSS 변수
-
-서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
-
-| 변수 | 기본값 |
-| --- | --- |
-| `--ds-avatar-size` | `36px` |
-| `--ds-avatar-badge` | `14px` |
-| `--ds-avatar-radius` | `var(--ybm-shape-pill)` |
-| `--ds-avatar-bg` | `var(--ybm-color-palette-gray-500)` |
-| `--ds-avatar-status-size` | `max(8px, calc(var(--ds-avatar-size) * 0.26))` |
-| `--ds-avatar-status-ring` | `clamp(1.5px, calc(var(--ds-avatar-size) * 0.04), 4px)` |
-| `--ds-avatar-status-color` | `var(--ybm-color-bg-positive-solid)` |
-| `--ds-avatar-group-size` | `36px` |
-| `--ds-avatar-group-radius` | `var(--ybm-shape-pill)` |
-| `--ds-avatar-group-ring` | `max(1.5px, calc(var(--ds-avatar-group-size) * 0.05))` |
-| `--ds-avatar-group-ring-color` | `var(--ybm-color-bg-layer-default)` |
 
 ## 예시
 
@@ -2169,7 +2257,25 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-avatar-size` | `36px` |
+| `--ds-avatar-badge` | `14px` |
+| `--ds-avatar-radius` | `var(--ybm-shape-pill)` |
+| `--ds-avatar-bg` | `var(--ybm-color-palette-gray-500)` |
+| `--ds-avatar-status-size` | `max(8px, calc(var(--ds-avatar-size) * 0.26))` |
+| `--ds-avatar-status-ring` | `clamp(1.5px, calc(var(--ds-avatar-size) * 0.04), 4px)` |
+| `--ds-avatar-status-color` | `var(--ybm-color-bg-positive-solid)` |
+| `--ds-avatar-group-size` | `36px` |
+| `--ds-avatar-group-radius` | `var(--ybm-shape-pill)` |
+| `--ds-avatar-group-ring` | `max(1.5px, calc(var(--ds-avatar-group-size) * 0.05))` |
+| `--ds-avatar-group-ring-color` | `var(--ybm-color-bg-layer-default)` |
+
+### 크기와 여백
 
 ```
 size : 20 / 24 / 36(기본) / 42 / 48 / 56 / 64 / 80 / 96 / 108
@@ -2198,7 +2304,7 @@ Figma: 원 / 이미지 없을 때 palette/gray-500 / 이니셜 fg/neutral-muted(
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <div class="ds-callout" data-tone="warning">
@@ -2208,6 +2314,15 @@ Figma: 원 / 이미지 없을 때 palette/gray-500 / 이니셜 fg/neutral-muted(
 </div>
 ```
 
+## 구조
+
+| 부품 | 설명 |
+| --- | --- |
+| **Content**`ds-callout__content` | 주된 내용이 들어가는 영역입니다. |
+| **Title**`ds-callout__title` | 제목입니다. |
+| **Link**`ds-callout__link` | 자세히 보기 같은 이동 링크입니다. |
+| **Suffix**`ds-callout__suffix` | 뒤에 붙는 아이콘이나 요소입니다. |
+
 ## 속성
 
 Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
@@ -2215,15 +2330,6 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | 속성 | 값 |
 | --- | --- |
 | `tone` | neutral informative positive warning critical magic 은 CSS 만 |
-
-## CSS 변수
-
-서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
-
-| 변수 | 기본값 |
-| --- | --- |
-| `--ds-callout-bg` | `var(--ybm-color-bg-neutral)` |
-| `--ds-callout-fg` | `var(--ybm-color-fg-neutral)` |
 
 ## 사용 지침
 
@@ -2247,7 +2353,16 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-callout-bg` | `var(--ybm-color-bg-neutral)` |
+| `--ds-callout-fg` | `var(--ybm-color-fg-neutral)` |
+
+### 크기와 여백
 
 ```
 tone: neutral(기본) / informative / positive / warning / critical
@@ -2269,7 +2384,7 @@ Figma: padding x3_5 / gap x2 / min-h50 / shape/md / t04 / 아이콘 Solid 16
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <div class="ds-snackbar" role="status" data-variant="positive" data-state="open">
@@ -2279,6 +2394,13 @@ Figma: padding x3_5 / gap x2 / min-h50 / shape/md / t04 / 아이콘 Solid 16
 </div>
 ```
 
+## 구조
+
+| 부품 | 설명 |
+| --- | --- |
+| **Message**`ds-snackbar__message` | 알리는 내용 글입니다. |
+| **Action**`ds-snackbar__action` | 바로 실행하는 작은 버튼입니다. |
+
 ## 속성
 
 Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
@@ -2286,6 +2408,12 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | 속성 | 값 |
 | --- | --- |
 | `variant` | default positive critical |
+
+## 동작
+
+`ybm-ds.js`를 불러오면 알아서 동작합니다.
+
+- YBM.snackbar("문구", { variant: "positive"|"critical", action: "확인", onAction, duration })
 
 ## 사용 지침
 
@@ -2303,7 +2431,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### 크기와 여백
 
 ```
 variant: default / positive / critical
@@ -2323,7 +2451,7 @@ Figma: padding x2_5(+본문 좌우 x1_5) / min-h44 / max-w560 / shape/sm / bg/ne
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <div class="ds-helpbubble" role="tooltip" data-placement="bottom-start">
@@ -2334,6 +2462,15 @@ Figma: padding x2_5(+본문 좌우 x1_5) / min-h44 / max-w560 / shape/sm / bg/ne
   [<button class="ds-helpbubble__close" aria-label="닫기"><i class="ds-icon ds-icon--x"></i></button>]
 </div>
 ```
+
+## 구조
+
+| 부품 | 설명 |
+| --- | --- |
+| **Body**`ds-helpbubble__body` | 본문이 들어가는 영역입니다. |
+| **Title**`ds-helpbubble__title` | 제목입니다. |
+| **Desc**`ds-helpbubble__desc` | 제목을 돕는 설명 글입니다. |
+| **Close**`ds-helpbubble__close` | 닫기 버튼입니다. |
 
 ## 속성
 
@@ -2357,7 +2494,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### 크기와 여백
 
 ```
 placement: top(기본) / top-start / top-end / bottom / bottom-start / bottom-end / left / left-start / left-end / right / right-start / right-end
@@ -2376,7 +2513,7 @@ Figma: bg/neutral-solid / shape/lg / padding 10/12 / 본문 gap x0_5 / 최대 �
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <div class="ds-menu" role="menu">
@@ -2393,14 +2530,6 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | 속성 | 값 |
 | --- | --- |
 | `tone` | critical |
-
-## CSS 변수
-
-서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
-
-| 변수 | 기본값 |
-| --- | --- |
-| `--ds-menu-item-fg` | `var(--ybm-color-fg-neutral)` |
 
 ## 사용 지침
 
@@ -2427,7 +2556,15 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-menu-item-fg` | `var(--ybm-color-fg-neutral)` |
+
+### 크기와 여백
 
 ```
 Figma Menu: 폭 220 / padding x1 / shape/2xl / bg/layer-floating / elevation overlay(+헤어라인)
@@ -2447,7 +2584,7 @@ Figma Item: py10 px12 / gap x2 / shape/sm / 아이콘 18 / t04 fg/neutral
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <dialog class="ds-dialog" id="dlg" aria-labelledby="dlg-title" [data-size="large"]>
@@ -2461,21 +2598,28 @@ Figma Item: py10 px12 / gap x2 / shape/sm / 아이콘 18 / t04 fg/neutral
 </dialog>
 ```
 
+## 구조
+
+| 부품 | 설명 |
+| --- | --- |
+| **Header**`ds-dialog__header` | 제목과 닫기 버튼이 놓이는 머리 영역입니다. |
+| **Title**`ds-dialog__title` | 제목입니다. |
+| **Desc**`ds-dialog__desc` | 제목을 돕는 설명 글입니다. |
+| **Close**`ds-dialog__close` | 닫기 버튼입니다. |
+| **Body**`ds-dialog__body` | 본문이 들어가는 영역입니다. |
+| **Footer**`ds-dialog__footer` | 버튼이나 보조 정보가 놓이는 아래 영역입니다. |
+
 ## 속성
 
 Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 그 밖에: size(480/800), `--ds-dialog-width`
 
-## CSS 변수
+## 동작
 
-서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+`ybm-ds.js`를 불러오면 알아서 동작합니다.
 
-| 변수 | 기본값 |
-| --- | --- |
-| `--ds-dialog-width` | `480px` |
-| `--ds-dialog-radius` | `var(--ybm-shape-2xl)` |
-| `--ds-dialog-max-height` | `80vh` |
+- data-ds-open / data-ds-close 속성으로 열고 닫기, 바깥(dim) 클릭 닫기
 
 ## 사용 지침
 
@@ -2495,7 +2639,17 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-dialog-width` | `480px` |
+| `--ds-dialog-radius` | `var(--ybm-shape-2xl)` |
+| `--ds-dialog-max-height` | `80vh` |
+
+### 크기와 여백
 
 ```
 Figma: 폭 480(large 800) / shape/2xl / bg/layer-floating / 그림자 없음(2026-10-01 결정)
@@ -2515,7 +2669,7 @@ Figma: 폭 480(large 800) / shape/2xl / bg/layer-floating / 그림자 없음(202
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <dialog class="ds-dialog ds-alertdialog" role="alertdialog" aria-labelledby="a-t" aria-describedby="a-d">
@@ -2526,6 +2680,15 @@ Figma: 폭 480(large 800) / shape/2xl / bg/layer-floating / 그림자 없음(202
   </div>
 </dialog>
 ```
+
+## 구조
+
+| 부품 | 설명 |
+| --- | --- |
+| **Header**`ds-alertdialog__header` | 제목과 닫기 버튼이 놓이는 머리 영역입니다. |
+| **Title**`ds-alertdialog__title` | 제목입니다. |
+| **Desc**`ds-alertdialog__desc` | 제목을 돕는 설명 글입니다. |
+| **Footer**`ds-alertdialog__footer` | 버튼이나 보조 정보가 놓이는 아래 영역입니다. |
 
 ## 속성
 
@@ -2552,7 +2715,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### 크기와 여백
 
 ```
 action(data-action): single(기본) / pair / critical / stacked / nonpreferred
@@ -2571,7 +2734,7 @@ Figma: 폭 272 / gap x2 / header 20/20/0/20 / gap x1_5 / title t07 Bold / desc t
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <dialog class="ds-bottomsheet" aria-labelledby="bs-t" [data-header-align="center"] [data-handle]>
@@ -2584,6 +2747,17 @@ Figma: 폭 272 / gap x2 / header 20/20/0/20 / gap x1_5 / title t07 Bold / desc t
   [<div class="ds-bottomsheet__footer"><button class="ds-btn" data-variant="neutralSolid" data-size="large">확인</button></div>]
 </dialog>
 ```
+
+## 구조
+
+| 부품 | 설명 |
+| --- | --- |
+| **Header**`ds-bottomsheet__header` | 제목과 닫기 버튼이 놓이는 머리 영역입니다. |
+| **Title**`ds-bottomsheet__title` | 제목입니다. |
+| **Desc**`ds-bottomsheet__desc` | 제목을 돕는 설명 글입니다. |
+| **Close**`ds-bottomsheet__close` | 닫기 버튼입니다. |
+| **Body**`ds-bottomsheet__body` | 본문이 들어가는 영역입니다. |
+| **Footer**`ds-bottomsheet__footer` | 버튼이나 보조 정보가 놓이는 아래 영역입니다. |
 
 ## 속성
 
@@ -2610,7 +2784,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### 크기와 여백
 
 ```
 headerAlign: left(기본) / center   handle: data-handle
@@ -2630,7 +2804,7 @@ Figma: 폭 채움 / 위쪽 shape/3xl / bg/layer-floating
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <details class="ds-accordion" [data-variant="separated"] [data-size="large"]>
@@ -2641,6 +2815,16 @@ Figma: 폭 채움 / 위쪽 shape/3xl / bg/layer-floating
   <div class="ds-accordion__content">내용</div>
 </details>
 ```
+
+## 구조
+
+| 부품 | 설명 |
+| --- | --- |
+| **Trigger**`ds-accordion__trigger` | 누르면 열리거나 바뀌는 버튼입니다. |
+| **Body**`ds-accordion__body` | 본문이 들어가는 영역입니다. |
+| **Title**`ds-accordion__title` | 제목입니다. |
+| **Desc**`ds-accordion__desc` | 제목을 돕는 설명 글입니다. |
+| **Content**`ds-accordion__content` | 주된 내용이 들어가는 영역입니다. |
 
 ## 속성
 
@@ -2671,7 +2855,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### 크기와 여백
 
 ```
 variant: inline(기본) / separated   size: medium(기본) / large
@@ -2693,7 +2877,7 @@ Figma large : trigger py20 / title t06 Medium / desc t04 / chevron 24 / content 
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <span class="ds-skeleton" style="width:220px;height:16px"></span>
@@ -2708,16 +2892,6 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | 속성 | 값 |
 | --- | --- |
 | `shape` | rect circle text |
-
-## CSS 변수
-
-서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
-
-| 변수 | 기본값 |
-| --- | --- |
-| `--ds-skeleton-color` | `var(--ybm-color-palette-gray-200)` |
-| `--ds-skeleton-radius` | `var(--ybm-shape-sm)` |
-| `--ds-skeleton-size` | `48px` |
 
 ## 사용 지침
 
@@ -2736,7 +2910,17 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-skeleton-color` | `var(--ybm-color-palette-gray-200)` |
+| `--ds-skeleton-radius` | `var(--ybm-shape-sm)` |
+| `--ds-skeleton-size` | `48px` |
+
+### 크기와 여백
 
 ```
 shape: rectangle(기본) / circle / text
@@ -2756,7 +2940,7 @@ Figma: palette/gray-200 / rectangle shape/sm / circle pill / text 줄 높이 14 
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <input type="range" class="ds-slider" min="0" max="100" value="45" [data-tone="brand"]>
@@ -2770,15 +2954,11 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | --- | --- |
 | 켜고 끄는 속성 | `tone` |
 
-## CSS 변수
+## 동작
 
-서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+`ybm-ds.js`를 불러오면 알아서 동작합니다.
 
-| 변수 | 기본값 |
-| --- | --- |
-| `--ds-slider-value` | `50%` |
-| `--ds-slider-active` | `var(--ybm-color-bg-neutral-solid)` |
-| `--ds-slider-thumb-line` | `var(--ybm-color-bg-neutral-solid)` |
+- <input class="ds-slider"> 채움 길이(--ds-slider-value) 동기화
 
 ## 사용 지침
 
@@ -2797,7 +2977,17 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-slider-value` | `50%` |
+| `--ds-slider-active` | `var(--ybm-color-bg-neutral-solid)` |
+| `--ds-slider-thumb-line` | `var(--ybm-color-bg-neutral-solid)` |
+
+### 크기와 여백
 
 ```
 tone: neutral(기본) / brand
@@ -2818,7 +3008,7 @@ Figma: 높이 20 / 트랙 4 pill palette/gray-200 / 채움 bg/neutral-solid(bran
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <div class="ds-progress" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"
@@ -2832,16 +3022,6 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | 속성 | 값 |
 | --- | --- |
 | 켜고 끄는 속성 | `size` `tone` |
-
-## CSS 변수
-
-서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
-
-| 변수 | 기본값 |
-| --- | --- |
-| `--ds-progress-value` | `0%` |
-| `--ds-progress-track` | `var(--ybm-color-palette-brand-200)` |
-| `--ds-progress-range` | `var(--ybm-color-bg-brand-solid)` |
 
 ## 사용 지침
 
@@ -2861,7 +3041,17 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-progress-value` | `0%` |
+| `--ds-progress-track` | `var(--ybm-color-palette-brand-200)` |
+| `--ds-progress-range` | `var(--ybm-color-bg-brand-solid)` |
+
+### 크기와 여백
 
 ```
 tone: brand(기본) / neutral   size: medium(기본 8) / small 4
@@ -2879,13 +3069,20 @@ Figma: 트랙 palette/brand-200(neutral palette/gray-200) / 채움 bg/brand-soli
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <span class="ds-progress-circle" data-size="40" data-tone="brand" role="progressbar" aria-valuenow="40" style="--ds-progress-value: 40">
   <svg viewBox="0 0 40 40" aria-hidden="true"><circle class="ds-progress-circle__track" pathLength="100"/><circle class="ds-progress-circle__range" pathLength="100"/></svg>
 </span>
 ```
+
+## 구조
+
+| 부품 | 설명 |
+| --- | --- |
+| **Track**`ds-progress-circle__track` | 막대의 바탕입니다. |
+| **Range**`ds-progress-circle__range` | 진행한 양을 보여 주는 호입니다. |
 
 ## 속성
 
@@ -2896,14 +3093,6 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | `tone` | neutral brand staticWhite |
 | `type` | determinate indeterminate |
 | 켜고 끄는 속성 | `size` |
-
-## CSS 변수
-
-서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
-
-| 변수 | 기본값 |
-| --- | --- |
-| `--ds-progress-value` | `40` |
 
 ## 사용 지침
 
@@ -2924,7 +3113,15 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-progress-value` | `40` |
+
+### 크기와 여백
 
 ```
 tone: neutral(기본) / brand / staticWhite   size: 24(기본) / 40 / 56   type: determinate / indeterminate
@@ -2945,7 +3142,7 @@ Figma: 두께 24→3 / 40→5 / 56→7 / 둥근 끝 / 12시 시작
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <button class="ds-fab"><i class="ds-icon ds-icon--plus" aria-hidden="true"></i>글쓰기</button>
@@ -2978,7 +3175,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### 크기와 여백
 
 ```
 Figma extended: h48 / px18 / gap x1 / 아이콘 16 / t05 Bold / iconOnly 56×56 / 아이콘 24
@@ -2996,7 +3193,7 @@ Figma extended: h48 / px18 / gap x1 / 아이콘 16 / t05 Bold / iconOnly 56×56 
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <div class="ds-datepicker">
@@ -3012,6 +3209,16 @@ Figma extended: h48 / px18 / gap x1 / 아이콘 16 / t05 Bold / iconOnly 56×56 
 </div>
 ```
 
+## 구조
+
+| 부품 | 설명 |
+| --- | --- |
+| **Header**`ds-datepicker__header` | 제목과 닫기 버튼이 놓이는 머리 영역입니다. |
+| **Nav**`ds-datepicker__nav` | 이전, 다음 달로 옮기는 버튼입니다. |
+| **Title**`ds-datepicker__title` | 제목입니다. |
+| **Weekdays**`ds-datepicker__weekdays` | 요일 줄입니다. |
+| **Grid**`ds-datepicker__grid` | 날짜 칸 모음입니다. |
+
 ## 속성
 
 Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
@@ -3019,16 +3226,6 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | 속성 | 값 |
 | --- | --- |
 | `cell state` | today selected range-start range-middle range-end |
-
-## CSS 변수
-
-서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
-
-| 변수 | 기본값 |
-| --- | --- |
-| `--ds-date-pill-bg` | `transparent` |
-| `--ds-date-pill-line` | `transparent` |
-| `--ds-date-track` | `transparent` |
 
 ## 사용 지침
 
@@ -3052,7 +3249,17 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-date-pill-bg` | `transparent` |
+| `--ds-date-pill-line` | `transparent` |
+| `--ds-date-track` | `transparent` |
+
+### 크기와 여백
 
 ```
 selection: single / range
@@ -3074,7 +3281,7 @@ Figma: 폭 320 / padding x5 / gap x3 / shape/2xl / bg/layer-default / elevation 
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <nav class="ds-bottomnav" aria-label="주요 메뉴">
@@ -3084,6 +3291,15 @@ Figma: 폭 320 / padding x5 / gap x3 / shape/2xl / bg/layer-default / elevation 
   </a>
 </nav>
 ```
+
+## 구조
+
+| 부품 | 설명 |
+| --- | --- |
+| **Item**`ds-bottomnav__item` | 목록의 항목 하나입니다. |
+| **Icon**`ds-bottomnav__icon` | 메뉴를 나타내는 아이콘입니다. |
+| **Badge Dot**`ds-bottomnav__badge--dot` | 새 소식을 알리는 점입니다. |
+| **Label**`ds-bottomnav__label` | 메뉴 이름입니다. |
 
 ## 속성
 
@@ -3113,7 +3329,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### 크기와 여백
 
 ```
 Figma: bg/layer-default / 상단 1px stroke/neutral-muted / 항목 높이 51 / padding 4/2 / gap 2 / 아이콘 24(Solid)
@@ -3133,7 +3349,7 @@ PC 화면 왼쪽에 두는 메뉴로, 화면 사이를 오갈 때 씁니다.
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <nav class="ds-sidenav" aria-label="메뉴" [data-collapsed]>
@@ -3151,6 +3367,21 @@ PC 화면 왼쪽에 두는 메뉴로, 화면 사이를 오갈 때 씁니다.
   <div class="ds-sidenav__footer">…</div>
 </nav>
 ```
+
+## 구조
+
+| 부품 | 설명 |
+| --- | --- |
+| **Header**`ds-sidenav__header` | 제목과 닫기 버튼이 놓이는 머리 영역입니다. |
+| **Trigger**`ds-sidenav__trigger` | 누르면 열리거나 바뀌는 버튼입니다. |
+| **Content**`ds-sidenav__content` | 주된 내용이 들어가는 영역입니다. |
+| **Group**`ds-sidenav__group` | 관련 항목을 묶는 영역입니다. |
+| **Group Label**`ds-sidenav__group-label` | 묶음의 이름입니다. |
+| **Item**`ds-sidenav__item` | 목록의 항목 하나입니다. |
+| **Prefix**`ds-sidenav__prefix` | 앞에 붙는 아이콘이나 요소입니다. |
+| **Label**`ds-sidenav__label` | 이름이나 값을 보여 주는 글자입니다. |
+| **Suffix**`ds-sidenav__suffix` | 뒤에 붙는 아이콘이나 요소입니다. |
+| **Footer**`ds-sidenav__footer` | 버튼이나 보조 정보가 놓이는 아래 영역입니다. |
 
 ## 속성
 
@@ -3183,7 +3414,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### 크기와 여백
 
 ```
 collapsed: data-collapsed (240 → 56)
@@ -3213,7 +3444,7 @@ Figma: bg/canvas / header h64 padding x2(트리거 40 shape/sm / panel-left 20 f
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <div class="ds-empty" [data-size="small"]>
@@ -3224,6 +3455,15 @@ Figma: bg/canvas / header h64 padding x2(트리거 40 shape/sm / panel-left 20 f
 </div>
 ```
 
+## 구조
+
+| 부품 | 설명 |
+| --- | --- |
+| **Media**`ds-empty__media` | 상황을 보여 주는 아이콘이나 그림입니다. |
+| **Title**`ds-empty__title` | 제목입니다. |
+| **Desc**`ds-empty__desc` | 제목을 돕는 설명 글입니다. |
+| **Actions**`ds-empty__actions` | 버튼을 묶는 영역입니다. |
+
 ## 속성
 
 Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
@@ -3231,15 +3471,6 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | 속성 | 값 |
 | --- | --- |
 | 켜고 끄는 속성 | `size` |
-
-## CSS 변수
-
-서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
-
-| 변수 | 기본값 |
-| --- | --- |
-| `--ds-empty-media` | `56px` |
-| `--ds-empty-icon` | `28px` |
 
 ## 사용 지침
 
@@ -3258,7 +3489,16 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-empty-media` | `56px` |
+| `--ds-empty-icon` | `28px` |
+
+### 크기와 여백
 
 ```
 size: medium(기본) / small
@@ -3278,7 +3518,7 @@ Figma medium: padding 40/16 / gap x4 / media 56(아이콘 28) / title t06 Bold /
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <nav class="ds-pagination" aria-label="페이지">
@@ -3293,6 +3533,13 @@ Figma medium: padding 40/16 / gap x4 / media 56(아이콘 28) / title t06 Bold /
 </nav>
 simple: <nav class="ds-pagination" data-type="simple"> prev · <span class="ds-pagination__indicator"><b>3</b> / 10</span> · next
 ```
+
+## 구조
+
+| 부품 | 설명 |
+| --- | --- |
+| **Item**`ds-pagination__item` | 쪽 번호 버튼입니다. |
+| **Indicator**`ds-pagination__indicator` | 지금 쪽을 알려 주는 표시입니다. |
 
 ## 속성
 
@@ -3322,7 +3569,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### 크기와 여백
 
 ```
 type: full(기본) / simple
@@ -3342,7 +3589,7 @@ Figma item: 36(높이/최소 폭) / px x2 / shape/sm / 숫자 t04 Medium fg/neut
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <div class="ds-table-wrap">            ← 열이 넘치면 가로 스크롤
@@ -3360,6 +3607,13 @@ Figma item: 36(높이/최소 폭) / px x2 / shape/sm / 숫자 t04 Medium fg/neut
 </div>
 ```
 
+## 구조
+
+| 부품 | 설명 |
+| --- | --- |
+| **Group**`ds-table__group` | 관련 항목을 묶는 영역입니다. |
+| **Stack**`ds-table__stack` | 여러 줄을 쌓아 보여 주는 칸입니다. |
+
 ## 속성
 
 Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
@@ -3368,16 +3622,6 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | --- | --- |
 | `density` | compact |
 | 켜고 끄는 속성 | `align` |
-
-## CSS 변수
-
-서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
-
-| 변수 | 기본값 |
-| --- | --- |
-| `--ds-table-head-h` | `44px` |
-| `--ds-table-row-h` | `56px` |
-| `--ds-table-line` | `var(--ybm-color-stroke-neutral-muted)` |
 
 ## 사용 지침
 
@@ -3421,7 +3665,17 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-table-head-h` | `44px` |
+| `--ds-table-row-h` | `56px` |
+| `--ds-table-line` | `var(--ybm-color-stroke-neutral-muted)` |
+
+### 크기와 여백
 
 ```
 density: default(기본) / compact
@@ -3446,7 +3700,7 @@ Figma: 표 위 1px stroke/neutral-solid / 칸 아래 1px stroke/neutral-muted / 
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <hr class="ds-divider" [data-weight="thick"] [data-inset]>
@@ -3463,16 +3717,6 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | 켜고 끄는 속성 | `inset` `label` |
 
 그 밖에: weight thick, orientation vertical
-
-## CSS 변수
-
-서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
-
-| 변수 | 기본값 |
-| --- | --- |
-| `--ds-divider-color` | `var(--ybm-color-stroke-neutral-weak)` |
-| `--ds-divider-size` | `1px` |
-| `--ds-divider-length` | `16px` |
 
 ## 사용 지침
 
@@ -3491,7 +3735,17 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-divider-color` | `var(--ybm-color-stroke-neutral-weak)` |
+| `--ds-divider-size` | `1px` |
+| `--ds-divider-length` | `16px` |
+
+### 크기와 여백
 
 ```
 weight: thin(기본 1px) / thick(8px 섹션 구분, 모바일)   orientation: horizontal(기본) / vertical
@@ -3511,7 +3765,7 @@ Figma: thin 1px stroke/neutral-weak / thick 8 bg/neutral-muted / vertical 1×16(
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <span class="ds-tooltip-anchor">
@@ -3525,14 +3779,6 @@ Figma: thin 1px stroke/neutral-weak / thick 8 bg/neutral-muted / vertical 1×16(
 Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 그 밖에: placement top, bottom, left, right, hover/focus 전용
-
-## CSS 변수
-
-서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
-
-| 변수 | 기본값 |
-| --- | --- |
-| `--ds-tooltip-gap` | `var(--ybm-space-x1_5)` |
 
 ## 사용 지침
 
@@ -3551,7 +3797,15 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-tooltip-gap` | `var(--ybm-space-x1_5)` |
+
+### 크기와 여백
 
 ```
 placement: top(기본) / bottom / left / right
@@ -3572,7 +3826,7 @@ Help Bubble 과 차이: Tooltip 은 짧은 라벨(아이콘 버튼 이름 등)�
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <ul class="ds-list" [data-variant="inset"] [data-divider]>
@@ -3590,6 +3844,17 @@ Help Bubble 과 차이: Tooltip 은 짧은 라벨(아이콘 버튼 이름 등)�
 </ul>
 ```
 
+## 구조
+
+| 부품 | 설명 |
+| --- | --- |
+| **Prefix**`ds-list-item__prefix` | 앞에 붙는 아이콘이나 요소입니다. |
+| **Content**`ds-list-item__content` | 주된 내용이 들어가는 영역입니다. |
+| **Title**`ds-list-item__title` | 제목입니다. |
+| **Desc**`ds-list-item__desc` | 제목을 돕는 설명 글입니다. |
+| **Suffix**`ds-list-item__suffix` | 뒤에 붙는 아이콘이나 요소입니다. |
+| **Chevron**`ds-list-item__chevron` | 다른 화면으로 이동함을 알리는 꺾쇠입니다. |
+
 ## 속성
 
 Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
@@ -3599,16 +3864,6 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | 켜고 끄는 속성 | `divider` |
 
 그 밖에: variant inset, size small, prefix/suffix/chevron
-
-## CSS 변수
-
-서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
-
-| 변수 | 기본값 |
-| --- | --- |
-| `--ds-list-item-min-h` | `56px` |
-| `--ds-list-item-py` | `var(--ybm-space-x3)` |
-| `--ds-list-item-px` | `var(--ybm-space-x4)` |
 
 ## 사용 지침
 
@@ -3635,7 +3890,17 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-list-item-min-h` | `56px` |
+| `--ds-list-item-py` | `var(--ybm-space-x3)` |
+| `--ds-list-item-px` | `var(--ybm-space-x4)` |
+
+### 크기와 여백
 
 ```
 variant: plain(기본) / inset(카드 안처럼 둥근 묶음)   size: medium(기본) / small   divider: data-divider
@@ -3658,7 +3923,7 @@ Figma item medium: min-h56 / py x3 / px x4 / gap x3 / title t05 fg/neutral / des
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <nav class="ds-breadcrumbs" aria-label="현재 위치">
@@ -3692,7 +3957,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### 크기와 여백
 
 ```
 Figma: t03 / 항목 fg/neutral-subtle(링크 hover 밑줄) / 현재 fg/neutral Medium / 구분 chevron-right 14 fg/neutral-subtle
@@ -3711,7 +3976,7 @@ Figma: t03 / 항목 fg/neutral-subtle(링크 hover 밑줄) / 현재 fg/neutral M
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <ol class="ds-stepper" aria-label="가입 단계" [data-orientation="vertical"]>
@@ -3720,6 +3985,14 @@ Figma: t03 / 항목 fg/neutral-subtle(링크 hover 밑줄) / 현재 fg/neutral M
   <li class="ds-stepper__step"><span class="ds-stepper__indicator"></span><span class="ds-stepper__label">정보 입력</span></li>
 </ol>
 ```
+
+## 구조
+
+| 부품 | 설명 |
+| --- | --- |
+| **Step**`ds-stepper__step` | 단계 하나입니다. |
+| **Indicator**`ds-stepper__indicator` | 단계 번호나 완료 표시입니다. |
+| **Label**`ds-stepper__label` | 이름이나 값을 보여 주는 글자입니다. |
 
 ## 속성
 
@@ -3752,7 +4025,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### 크기와 여백
 
 ```
 state: complete / current / upcoming(기본)   orientation: horizontal(기본) / vertical
@@ -3774,7 +4047,7 @@ Figma: indicator 24 원형 / 숫자 t02 Bold(자동 번호) / 연결선 2px / �
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <div class="ds-banner" role="status" data-tone="warning">
@@ -3787,21 +4060,21 @@ Figma: indicator 24 원형 / 숫자 t02 Bold(자동 번호) / 연결선 2px / �
 </div>
 ```
 
+## 구조
+
+| 부품 | 설명 |
+| --- | --- |
+| **Inner**`ds-banner__inner` | 배너 내용을 가운데 폭으로 묶는 영역입니다. |
+| **Message**`ds-banner__message` | 알리는 내용 글입니다. |
+| **Title**`ds-banner__title` | 제목입니다. |
+| **Action**`ds-banner__action` | 바로 실행하는 작은 버튼입니다. |
+| **Close**`ds-banner__close` | 닫기 버튼입니다. |
+
 ## 속성
 
 Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 그 밖에: tone neutral, informative, positive, warning, critical, variant solid
-
-## CSS 변수
-
-서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
-
-| 변수 | 기본값 |
-| --- | --- |
-| `--ds-banner-bg` | `var(--ybm-color-bg-neutral)` |
-| `--ds-banner-fg` | `var(--ybm-color-fg-neutral)` |
-| `--ds-banner-max` | `1200px` |
 
 ## 사용 지침
 
@@ -3823,7 +4096,17 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-banner-bg` | `var(--ybm-color-bg-neutral)` |
+| `--ds-banner-fg` | `var(--ybm-color-fg-neutral)` |
+| `--ds-banner-max` | `1200px` |
+
+### 크기와 여백
 
 ```
 tone: neutral(기본) / informative / positive / warning / critical   variant: weak(기본) / solid
@@ -3845,7 +4128,7 @@ Callout 과 차이: Callout 은 본문 안 안내(둥근 상자), Banner 는 페
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <div class="ds-selectbox-group" [style="--ds-selectbox-columns: 2"]>
@@ -3861,6 +4144,16 @@ Callout 과 차이: Callout 은 본문 안 안내(둥근 상자), Banner 는 페
 </div>
 ```
 
+## 구조
+
+| 부품 | 설명 |
+| --- | --- |
+| **Texts**`ds-selectbox__texts` | 제목과 설명을 묶는 글자 영역입니다. |
+| **Label**`ds-selectbox__label` | 이름이나 값을 보여 주는 글자입니다. |
+| **Desc**`ds-selectbox__desc` | 제목을 돕는 설명 글입니다. |
+| **Control**`ds-checkbox__control` | 실제로 값을 입력하거나 고르는 부분입니다. |
+| **Control**`ds-radio__control` | 실제로 값을 입력하거나 고르는 부분입니다. |
+
 ## 속성
 
 Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
@@ -3870,16 +4163,6 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | `type` | check radio |
 | `state` | unchecked checked disabled |
 | `layout` | horizontal vertical |
-
-## CSS 변수
-
-서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
-
-| 변수 | 기본값 |
-| --- | --- |
-| `--ds-selectbox-columns` | `1` |
-| `--ds-selectbox-line` | `var(--ybm-color-stroke-neutral-weak)` |
-| `--ds-selectbox-bg` | `var(--ybm-color-bg-layer-default)` |
 
 ## 사용 지침
 
@@ -3906,7 +4189,17 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-selectbox-columns` | `1` |
+| `--ds-selectbox-line` | `var(--ybm-color-stroke-neutral-weak)` |
+| `--ds-selectbox-bg` | `var(--ybm-color-bg-layer-default)` |
+
+### 크기와 여백
 
 ```
 layout: horizontal(기본) / vertical(여러 열로 놓을 때)
@@ -3927,7 +4220,7 @@ Figma: padding x4 x5 / gap x3 / shape/lg / bg/layer-default / 1px stroke/neutral
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <div class="ds-timepicker" role="group" aria-label="시간" [aria-disabled="true"]>
@@ -3940,6 +4233,13 @@ Figma: padding x4 x5 / gap x3 / shape/lg / bg/layer-default / 1px stroke/neutral
 </div>
 ```
 
+## 구조
+
+| 부품 | 설명 |
+| --- | --- |
+| **Column**`ds-timepicker__column` | 시, 분처럼 값을 고르는 열입니다. |
+| **Option**`ds-timepicker__option` | 고를 수 있는 선택지 하나입니다. |
+
 ## 속성
 
 Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
@@ -3949,6 +4249,12 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | `state` | enabled disabled |
 
 그 밖에: 12시간제, 분 간격 5
+
+## 동작
+
+`ybm-ds.js`를 불러오면 알아서 동작합니다.
+
+- 가운데 온 항목에 aria-selected, 멈추면 열에서 change(detail.value), 항목 누름과 화살표 키로 이동
 
 ## 사용 지침
 
@@ -3974,7 +4280,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### 크기와 여백
 
 ```
 ybm-ds.js 가 가운데 온 항목에 aria-selected 를 붙이고 열에서 change 이벤트(detail.value)를 보낸다.
@@ -3996,7 +4302,7 @@ Figma: 폭 320(채움) / 높이 220 = 항목 5줄 × x11 / 좌우 x4 / 열 간�
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <div class="ds-tablepagination">
@@ -4017,6 +4323,19 @@ Figma: 폭 320(채움) / 높이 220 = 항목 5줄 × x11 / 좌우 x4 / 열 간�
   </div>
 </div>
 ```
+
+## 구조
+
+| 부품 | 설명 |
+| --- | --- |
+| **Size**`ds-tablepagination__size` | 한 번에 볼 개수를 고르는 영역입니다. |
+| **Label**`ds-tablepagination__label` | 개수 고르기 앞 글자입니다. |
+| **Select**`ds-tablepagination__select` | 한 번에 볼 개수를 고르는 셀렉트입니다. |
+| **Range**`ds-tablepagination__range` | 지금 보고 있는 항목 범위입니다. |
+| **Position**`ds-tablepagination__position` | 지금 보고 있는 범위입니다. |
+| **Current**`ds-tablepagination__current` | 지금 쪽 번호입니다. |
+| **Total**`ds-tablepagination__total` | 전체 개수입니다. |
+| **Item**`ds-pagination__item` | 쪽 이동 버튼입니다. |
 
 ## 속성
 
@@ -4064,7 +4383,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### 크기와 여백
 
 ```
 state: default / unknownTotal(전체 개수를 모를 때) / empty(데이터 없음)
@@ -4086,7 +4405,7 @@ Figma: 최소 폭 640 / padding x2 x4 / 양 끝 정렬 / 한 줄 고정(좁으�
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <span class="ds-popover-anchor">
@@ -4102,6 +4421,18 @@ Figma: 최소 폭 640 / padding x2 x4 / 양 끝 정렬 / 한 줄 고정(좁으�
 </span>
 ```
 
+## 구조
+
+| 부품 | 설명 |
+| --- | --- |
+| **Header**`ds-popover__header` | 제목과 닫기 버튼이 놓이는 머리 영역입니다. |
+| **Texts**`ds-popover__texts` | 제목과 설명을 묶는 글자 영역입니다. |
+| **Title**`ds-popover__title` | 제목입니다. |
+| **Desc**`ds-popover__desc` | 제목을 돕는 설명 글입니다. |
+| **Close**`ds-popover__close` | 닫기 버튼입니다. |
+| **Body**`ds-popover__body` | 본문이 들어가는 영역입니다. |
+| **Footer**`ds-popover__footer` | 버튼이나 보조 정보가 놓이는 아래 영역입니다. |
+
 ## 속성
 
 Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
@@ -4112,14 +4443,11 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 그 밖에: 폭 320
 
-## CSS 변수
+## 동작
 
-서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+`ybm-ds.js`를 불러오면 알아서 동작합니다.
 
-| 변수 | 기본값 |
-| --- | --- |
-| `--ds-popover-width` | `320px` |
-| `--ds-popover-gap` | `var(--ybm-space-x2)` |
+- data-ds-popover="id" 로 열고 닫기, 바깥 클릭과 Esc, 안의 data-ds-close 로 닫기
 
 ## 사용 지침
 
@@ -4148,7 +4476,16 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-popover-width` | `320px` |
+| `--ds-popover-gap` | `var(--ybm-space-x2)` |
+
+### 크기와 여백
 
 ```
 actions: single / pair / none(footer 없음)   placement: bottom-start(기본) / bottom-end / top-start / top-end
@@ -4171,7 +4508,7 @@ Figma: 폭 320 / padding x5 / gap x4 / shape/xl / bg/layer-floating / 1px stroke
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <div class="ds-chat-bubble" [data-sender="user"]>안녕하세요! 무엇을 도와드릴까요?</div>
@@ -4187,6 +4524,15 @@ Figma: 폭 320 / padding x5 / gap x4 / shape/xl / bg/layer-floating / 1px stroke
 </form>
 ```
 
+## 구조
+
+| 부품 | 설명 |
+| --- | --- |
+| **Status**`ds-chat-meta__status` | 답변 중 같은 상태 글입니다. |
+| **Attach**`ds-chat-composer__attach` | 파일을 첨부하는 버튼입니다. |
+| **Field**`ds-chat-composer__field` | 글을 쓰는 칸입니다. |
+| **Input**`ds-chat-composer__input` | 실제 입력 칸입니다. |
+
 ## 속성
 
 Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
@@ -4197,17 +4543,6 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | `status` | sending sent read error |
 
 그 밖에: 보내기 `send/stop/disabled`
-
-## CSS 변수
-
-서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
-
-| 변수 | 기본값 |
-| --- | --- |
-| `--ds-chat-bubble-max` | `288px` |
-| `--ds-chat-send-bg` | `var(--ybm-color-bg-brand-solid)` |
-| `--ds-chat-send-fg` | `var(--ybm-color-fg-on-brand-solid)` |
-| `--ds-chat-send-icon` | `var(--ds-icon-arrow-up)` |
 
 ## 사용 지침
 
@@ -4235,7 +4570,18 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-chat-bubble-max` | `288px` |
+| `--ds-chat-send-bg` | `var(--ybm-color-bg-brand-solid)` |
+| `--ds-chat-send-fg` | `var(--ybm-color-fg-on-brand-solid)` |
+| `--ds-chat-send-icon` | `var(--ds-icon-arrow-up)` |
+
+### 크기와 여백
 
 ```
 ▸ Message Bubble  sender: assistant(기본) / user
@@ -4265,7 +4611,7 @@ Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <header class="ds-appbar" [data-platform="android"] [data-tone="transparent" data-gradient]>
@@ -4282,6 +4628,17 @@ Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
 </header>
 ```
 
+## 구조
+
+| 부품 | 설명 |
+| --- | --- |
+| **Left**`ds-appbar__left` | 뒤로 가기 같은 버튼이 놓이는 왼쪽 영역입니다. |
+| **Button**`ds-appbar__button` | 아이콘 버튼입니다. |
+| **Main**`ds-appbar__main` | 제목이 놓이는 가운데 영역입니다. |
+| **Title**`ds-appbar__title` | 제목입니다. |
+| **Subtitle**`ds-appbar__subtitle` | 제목 아래 작은 글입니다. |
+| **Right**`ds-appbar__right` | 검색 같은 버튼이 놓이는 오른쪽 영역입니다. |
+
 ## 속성
 
 Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
@@ -4291,15 +4648,6 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | `theme` | ios android CSS data-platform |
 | `tone` | layer transparent + gradient |
 | `titleLayout` | titleOnly withSubtitle |
-
-## CSS 변수
-
-서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
-
-| 변수 | 기본값 |
-| --- | --- |
-| `--ds-appbar-height` | `var(--ybm-space-x14)` |
-| `--ds-appbar-side` | `calc(var(--ybm-space-x11) * 2)` |
 
 ## 사용 지침
 
@@ -4340,7 +4688,16 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-appbar-height` | `var(--ybm-space-x14)` |
+| `--ds-appbar-side` | `calc(var(--ybm-space-x11) * 2)` |
+
+### 크기와 여백
 
 ```
 theme(Figma) = data-platform: 기본 ios(제목 가운데) / "android"(제목 왼쪽)
@@ -4364,7 +4721,7 @@ PC 화면 맨 위에 두는 메뉴로, 서비스의 주요 화면을 오갈 때 
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <header class="ds-topnav">
@@ -4381,6 +4738,16 @@ PC 화면 맨 위에 두는 메뉴로, 서비스의 주요 화면을 오갈 때 
   </div>
 </header>
 ```
+
+## 구조
+
+| 부품 | 설명 |
+| --- | --- |
+| **Left**`ds-topnav__left` | 뒤로 가기 같은 버튼이 놓이는 왼쪽 영역입니다. |
+| **Heading**`ds-topnav__heading` | 목록 위에 붙는 소제목입니다. |
+| **Menu**`ds-topnav__menu` | 메뉴 묶음입니다. |
+| **Item**`ds-topnav__item` | 목록의 항목 하나입니다. |
+| **End**`ds-topnav__end` | 로그인 같은 버튼이 놓이는 오른쪽 끝 영역입니다. |
 
 ## 속성
 
@@ -4424,7 +4791,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### 크기와 여백
 
 ```
 Figma: padding x2 / bg/layer-default / 왼쪽 묶음 gap x4 / 메뉴 사이 x1 / 오른쪽 끝 버튼 사이 x1
@@ -4444,7 +4811,7 @@ Figma: padding x2 / bg/layer-default / 왼쪽 묶음 gap x4 / 메뉴 사이 x1 /
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <div class="ds-search-anchor">
@@ -4466,6 +4833,21 @@ Figma: padding x2 / bg/layer-default / 왼쪽 묶음 gap x4 / 메뉴 사이 x1 /
 </div>
 ```
 
+## 구조
+
+| 부품 | 설명 |
+| --- | --- |
+| **Icon**`ds-input__icon` | 뜻을 빠르게 알려 주는 아이콘입니다. |
+| **Control**`ds-input__control` | 실제로 값을 입력하거나 고르는 부분입니다. |
+| **Clear**`ds-input__clear` | 입력한 값을 지우는 버튼입니다. |
+| **Heading**`ds-search-suggest__heading` | 목록 위에 붙는 소제목입니다. |
+| **List**`ds-search-suggest__list` | 항목 목록입니다. |
+| **Item**`ds-search-suggest__item` | 목록의 항목 하나입니다. |
+| **Content**`ds-search-suggest__content` | 주된 내용이 들어가는 영역입니다. |
+| **Label**`ds-search-suggest__label` | 이름이나 값을 보여 주는 글자입니다. |
+| **Desc**`ds-search-suggest__desc` | 제목을 돕는 설명 글입니다. |
+| **Empty**`ds-search-suggest__empty` | 결과가 없을 때 보이는 글입니다. |
+
 ## 속성
 
 Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
@@ -4475,6 +4857,12 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | `content` | suggestion recent empty |
 | `Item state` | enabled highlighted |
 | 켜고 끄는 속성 | `description` |
+
+## 동작
+
+`ybm-ds.js`를 불러오면 알아서 동작합니다.
+
+- 입력 칸(role=combobox, aria-controls)에서 위아래 화살표로 줄 고르기, Enter 로 그 줄 누르기
 
 ## 사용 지침
 
@@ -4512,7 +4900,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### 크기와 여백
 
 ```
 검색 입력 칸은 Text Field(04) outline 에 search 아이콘과 지우기 버튼을 붙여 쓴다.
@@ -4535,7 +4923,7 @@ Figma: padding x1 / shape/lg / bg/layer-floating / elevation overlay / 최대 �
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <div class="ds-fileattach">
@@ -4559,6 +4947,24 @@ Figma: padding x1 / shape/lg / bg/layer-floating / elevation overlay / 최대 �
 </div>
 ```
 
+## 구조
+
+| 부품 | 설명 |
+| --- | --- |
+| **Dropzone**`ds-fileattach__dropzone` | 파일을 끌어 놓는 칸입니다. |
+| **Input**`ds-fileattach__input` | 실제 입력 칸입니다. |
+| **Label**`ds-fileattach__label` | 이름이나 값을 보여 주는 글자입니다. |
+| **Items**`ds-fileattach__items` | 첨부한 파일 목록입니다. |
+| **Trigger**`ds-fileattach__trigger` | 누르면 열리거나 바뀌는 버튼입니다. |
+| **Count**`ds-fileattach__count` | 개수나 글자 수를 보여 줍니다. |
+| **Thumbnail**`ds-fileitem__thumbnail` | 파일 종류나 사진을 보여 주는 작은 그림입니다. |
+| **Texts**`ds-fileitem__texts` | 제목과 설명을 묶는 글자 영역입니다. |
+| **Name**`ds-fileitem__name` | 파일 이름입니다. |
+| **Size**`ds-fileitem__size` | 파일 크기입니다. |
+| **Image**`ds-fileitem__image` | 사진 미리보기입니다. |
+| **Badge**`ds-fileitem__badge` | 개수나 새 소식을 알리는 배지입니다. |
+| **Remove**`ds-fileitem__remove` | 항목을 지우는 버튼입니다. |
+
 ## 속성
 
 Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
@@ -4571,6 +4977,12 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | 켜고 끄는 속성 | `badge` |
 
 그 밖에: Trigger state
+
+## 동작
+
+`ybm-ds.js`를 불러오면 알아서 동작합니다.
+
+- 파일을 끌어 놓는 칸 위로 끌고 오면 data-state="dragover", 벗어나거나 놓으면 뺀다
 
 ## 사용 지침
 
@@ -4618,7 +5030,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### 크기와 여백
 
 ```
 끌어 놓는 칸(Dropzone) 아래에 고르기 버튼(Trigger)과 파일(Item)을 한 줄로 놓는다. 넘치면 옆으로 넘긴다.
@@ -4643,7 +5055,7 @@ Figma: 전체 gap x2 / 줄 gap x2
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <dialog class="ds-menusheet" id="ms" aria-labelledby="ms-t">
@@ -4660,6 +5072,22 @@ Figma: 전체 gap x2 / 줄 gap x2
 </dialog>
 ```
 
+## 구조
+
+| 부품 | 설명 |
+| --- | --- |
+| **Header**`ds-menusheet__header` | 제목과 닫기 버튼이 놓이는 머리 영역입니다. |
+| **Title**`ds-menusheet__title` | 제목입니다. |
+| **Desc**`ds-menusheet__desc` | 제목을 돕는 설명 글입니다. |
+| **List**`ds-menusheet__list` | 항목 목록입니다. |
+| **Group**`ds-menusheet__group` | 관련 항목을 묶는 영역입니다. |
+| **Item**`ds-menusheet__item` | 목록의 항목 하나입니다. |
+| **Content**`ds-menusheet__content` | 주된 내용이 들어가는 영역입니다. |
+| **Label**`ds-menusheet__label` | 이름이나 값을 보여 주는 글자입니다. |
+| **Item Desc**`ds-menusheet__item-desc` | 항목 설명입니다. |
+| **Footer**`ds-menusheet__footer` | 버튼이나 보조 정보가 놓이는 아래 영역입니다. |
+| **Close**`ds-menusheet__close` | 닫기 버튼입니다. |
+
 ## 속성
 
 Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
@@ -4669,6 +5097,12 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | `Item tone` | neutral critical |
 | `labelAlign` | left center |
 | 켜고 끄는 속성 | `header` `description` `footer` |
+
+## 동작
+
+`ybm-ds.js`를 불러오면 알아서 동작합니다.
+
+- Dialog 와 같이 열고 닫기, 바깥(dim) 클릭 닫기
 
 ## 사용 지침
 
@@ -4698,7 +5132,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### 크기와 여백
 
 ```
 Bottom Sheet 와 같이 네이티브 <dialog> 를 쓴다. data-ds-open 으로 열고, data-ds-close 와 바깥 누르기로 닫는다.
@@ -4720,7 +5154,7 @@ Figma: 최대 폭 480 / 위쪽 shape/2xl / bg/layer-floating / padding 위 x6, �
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <section class="ds-result" [data-size="medium"]>
@@ -4736,6 +5170,16 @@ Figma: 최대 폭 480 / 위쪽 shape/2xl / bg/layer-floating / padding 위 x6, �
 </section>
 ```
 
+## 구조
+
+| 부품 | 설명 |
+| --- | --- |
+| **Asset**`ds-result__asset` | 결과를 보여 주는 그림입니다. |
+| **Texts**`ds-result__texts` | 제목과 설명을 묶는 글자 영역입니다. |
+| **Title**`ds-result__title` | 제목입니다. |
+| **Desc**`ds-result__desc` | 제목을 돕는 설명 글입니다. |
+| **Actions**`ds-result__actions` | 버튼을 묶는 영역입니다. |
+
 ## 속성
 
 Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
@@ -4746,15 +5190,6 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | 켜고 끄는 속성 | `asset` `description` |
 
 그 밖에: primary/secondary action
-
-## CSS 변수
-
-서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
-
-| 변수 | 기본값 |
-| --- | --- |
-| `--ds-result-gap` | `var(--ybm-space-x3)` |
-| `--ds-result-text-bottom` | `var(--ybm-space-x7)` |
 
 ## 사용 지침
 
@@ -4785,7 +5220,16 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-result-gap` | `var(--ybm-space-x3)` |
+| `--ds-result-text-bottom` | `var(--ybm-space-x7)` |
+
+### 크기와 여백
 
 ```
 size: 기본 large(화면 전체) / data-size="medium"(화면 일부)
@@ -4806,7 +5250,7 @@ Figma: 가운데 정렬, padding x4 x12 / 그림 아래 x4, 아이콘 40
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <time class="ds-timer" data-end="2026-10-29T15:00:00+09:00" [data-format="elapsed"]>0:00</time>
@@ -4820,6 +5264,12 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | --- | --- |
 | `format` | clock elapsed |
 | 켜고 끄는 속성 | `data-start` `data-end` |
+
+## 동작
+
+`ybm-ds.js`를 불러오면 알아서 동작합니다.
+
+- data-start(흐른 시간) / data-end(남은 시간)로 1초마다 글자를 바꾸고, 남은 시간이 0 이면 ds-timer-end 이벤트
 
 ## 사용 지침
 
@@ -4838,7 +5288,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### 크기와 여백
 
 ```
 format: 기본 clock(12:34, 1시간 넘으면 1:02:34) / data-format="elapsed"(12분 34초)
@@ -4858,7 +5308,7 @@ Figma: t02 fg/neutral-muted, 숫자 폭 고정 / 크기와 색은 놓이는 자�
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <span class="ds-statusdot" data-tone="positive" [data-pulse]></span> <span>연결됨</span>
@@ -4892,7 +5342,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### 크기와 여백
 
 ```
 tone: positive / warning / critical / brand / neutral(기본)   data-pulse: 진행 중일 때 깜빡임
@@ -4911,13 +5361,20 @@ Figma: x2 원 / positive bg/positive-solid, warning bg/warning-solid, critical b
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <fieldset class="ds-checkbox-group">
   <label class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control"><span class="ds-checkbox__label">이메일</span></label>
 </fieldset>
 ```
+
+## 구조
+
+| 부품 | 설명 |
+| --- | --- |
+| **Control**`ds-checkbox__control` | 실제로 값을 입력하거나 고르는 부분입니다. |
+| **Label**`ds-checkbox__label` | 이름이나 값을 보여 주는 글자입니다. |
 
 ## 속성
 
@@ -4944,7 +5401,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### 크기와 여백
 
 ```
 묶음 이름, 설명, 오류 문구는 03 Field Label 로 감싼다.
@@ -4962,7 +5419,7 @@ Figma: 항목 사이 x1
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <div class="ds-scrollfog" [data-direction="horizontal"]>…스크롤 되는 내용…</div>
@@ -4977,15 +5434,6 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | `direction` | vertical horizontal |
 
 그 밖에: 끝 20
-
-## CSS 변수
-
-서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
-
-| 변수 | 기본값 |
-| --- | --- |
-| `--ds-scrollfog-size` | `20px` |
-| `--ds-scrollfog-direction` | `to bottom` |
 
 ## 사용 지침
 
@@ -5007,7 +5455,16 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-scrollfog-size` | `20px` |
+| `--ds-scrollfog-direction` | `to bottom` |
+
+### 크기와 여백
 
 ```
 direction: 기본 세로 / data-direction="horizontal"   흐려지는 쪽에 최소 20 의 여백을 둔다(화면 전체 세로 스크롤은 위 20, 아래 80)
@@ -5025,7 +5482,7 @@ Figma: 끝 20 을 투명 → 불투명으로 / 코드는 배경색 덮개가 아
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <div class="ds-ptr">
@@ -5035,6 +5492,15 @@ Figma: 끝 20 을 투명 → 불투명으로 / 코드는 배경색 덮개가 아
   <div class="ds-ptr__content">…목록…</div>
 </div>
 ```
+
+## 구조
+
+| 부품 | 설명 |
+| --- | --- |
+| **Indicator**`ds-ptr__indicator` | 지금 상태나 위치를 알려 주는 표시입니다. |
+| **Track**`ds-progress-circle__track` | 막대의 바탕입니다. |
+| **Range**`ds-progress-circle__range` | 당긴 만큼 차오르는 표시입니다. |
+| **Content**`ds-ptr__content` | 주된 내용이 들어가는 영역입니다. |
 
 ## 속성
 
@@ -5046,14 +5512,11 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 그 밖에: Progress Circle 24
 
-## CSS 변수
+## 동작
 
-서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+`ybm-ds.js`를 불러오면 알아서 동작합니다.
 
-| 변수 | 기본값 |
-| --- | --- |
-| `--ds-ptr-size` | `calc(var(--ybm-space-x6) + var(--ybm-space-x8) * 2)` |
-| `--ds-ptr-displacement` | `0px` |
+- 터치로 당긴 거리 표시, 넘겨 놓으면 ds-refresh 이벤트, YBM.endRefresh(요소) 로 되돌리기
 
 ## 사용 지침
 
@@ -5078,7 +5541,16 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-ptr-size` | `calc(var(--ybm-space-x6) + var(--ybm-space-x8) * 2)` |
+| `--ds-ptr-displacement` | `0px` |
+
+### 크기와 여백
 
 ```
 ybm-ds.js 가 터치로 당긴 거리를 --ds-ptr-displacement 에 넣고, 88 을 넘겨 놓으면 data-state="refreshing" 과 ds-refresh 이벤트.
@@ -5097,7 +5569,7 @@ PC 화면 가장자리에서 밀려 나오는 창입니다. 지금 화면을 그
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <dialog class="ds-sidepanel" id="sp" aria-labelledby="sp-t" [data-size="small"] [data-direction="left"]>
@@ -5110,6 +5582,18 @@ PC 화면 가장자리에서 밀려 나오는 창입니다. 지금 화면을 그
 </dialog>
 ```
 
+## 구조
+
+| 부품 | 설명 |
+| --- | --- |
+| **Header**`ds-sidepanel__header` | 제목과 닫기 버튼이 놓이는 머리 영역입니다. |
+| **Texts**`ds-sidepanel__texts` | 제목과 설명을 묶는 글자 영역입니다. |
+| **Title**`ds-sidepanel__title` | 제목입니다. |
+| **Desc**`ds-sidepanel__desc` | 제목을 돕는 설명 글입니다. |
+| **Close**`ds-sidepanel__close` | 닫기 버튼입니다. |
+| **Body**`ds-sidepanel__body` | 본문이 들어가는 영역입니다. |
+| **Footer**`ds-sidepanel__footer` | 버튼이나 보조 정보가 놓이는 아래 영역입니다. |
+
 ## 속성
 
 Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
@@ -5119,13 +5603,11 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | `size` | small medium large |
 | `direction` | right left |
 
-## CSS 변수
+## 동작
 
-서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+`ybm-ds.js`를 불러오면 알아서 동작합니다.
 
-| 변수 | 기본값 |
-| --- | --- |
-| `--ds-sidepanel-width` | `720px` |
+- Dialog 와 같이 열고 닫기, 본문이 스크롤되면 data-scrolled
 
 ## 사용 지침
 
@@ -5152,7 +5634,15 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-sidepanel-width` | `720px` |
+
+### 크기와 여백
 
 ```
 네이티브 <dialog> 를 쓴다. data-ds-open 으로 열고, data-ds-close 와 바깥 누르기로 닫는다.
@@ -5173,7 +5663,7 @@ Figma: bg/layer-floating / header 최소 높이 70, padding x6 x6 x4, gap x1_5, 
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <div class="ds-imageframe" data-ratio="4:3" [data-radius="lg"] [data-stroke]>
@@ -5181,6 +5671,13 @@ Figma: bg/layer-floating / header 최소 높이 70, padding x6 x6 x4, gap x1_5, 
   [<div class="ds-imageframe__floater" data-position="bottom-end"><span class="ds-imageframe__indicator">1/5</span></div>]
 </div>
 ```
+
+## 구조
+
+| 부품 | 설명 |
+| --- | --- |
+| **Floater**`ds-imageframe__floater` | 사진 위에 떠 있는 버튼이나 배지입니다. |
+| **Indicator**`ds-imageframe__indicator` | 여러 장 중 지금 사진을 알리는 표시입니다. |
 
 ## 속성
 
@@ -5190,15 +5687,6 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | --- | --- |
 | `ratio` | 1:1 4:3 16:9 |
 | 켜고 끄는 속성 | `stroke` `indicator` |
-
-## CSS 변수
-
-서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
-
-| 변수 | 기본값 |
-| --- | --- |
-| `--ds-imageframe-ratio` | `1` |
-| `--ds-imageframe-radius` | `var(--ybm-shape-sm)` |
 
 ## 사용 지침
 
@@ -5223,7 +5711,16 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-imageframe-ratio` | `1` |
+| `--ds-imageframe-radius` | `var(--ybm-shape-sm)` |
+
+### 크기와 여백
 
 ```
 ratio: 기본 1:1 / data-ratio="4:3" / data-ratio="16:9" (그 밖은 --ds-imageframe-ratio)   stroke: data-stroke
@@ -5243,7 +5740,7 @@ Figma: shape/sm / 빈 자리 bg/neutral / stroke 안쪽 1px stroke/neutral-subtl
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <div class="ds-carousel" role="region" aria-roledescription="carousel" aria-label="추천">
@@ -5255,23 +5752,25 @@ Figma: shape/sm / 빈 자리 bg/neutral / stroke 안쪽 1px stroke/neutral-subtl
 </div>
 ```
 
+## 구조
+
+| 부품 | 설명 |
+| --- | --- |
+| **Scroller**`ds-carousel__scroller` | 옆으로 넘기는 영역입니다. |
+| **Item**`ds-carousel__item` | 목록의 항목 하나입니다. |
+| **Button**`ds-carousel__button` | 이전, 다음 장으로 넘기는 버튼입니다. |
+
 ## 속성
 
 Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 그 밖에: 항목 사이 x2, 끝 흐림 x1, 버튼 32
 
-## CSS 변수
+## 동작
 
-서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+`ybm-ds.js`를 불러오면 알아서 동작합니다.
 
-| 변수 | 기본값 |
-| --- | --- |
-| `--ds-carousel-gap` | `var(--ybm-space-x2)` |
-| `--ds-carousel-padding` | `0px` |
-| `--ds-carousel-fade` | `var(--ybm-space-x1)` |
-| `--ds-carousel-fade-start` | `var(--ds-carousel-fade)` |
-| `--ds-carousel-fade-end` | `var(--ds-carousel-fade)` |
+- 처음/끝이면 data-at-start / data-at-end, 버튼으로 한 화면씩 넘기기
 
 ## 사용 지침
 
@@ -5298,7 +5797,19 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-carousel-gap` | `var(--ybm-space-x2)` |
+| `--ds-carousel-padding` | `0px` |
+| `--ds-carousel-fade` | `var(--ybm-space-x1)` |
+| `--ds-carousel-fade-start` | `var(--ds-carousel-fade)` |
+| `--ds-carousel-fade-end` | `var(--ds-carousel-fade)` |
+
+### 크기와 여백
 
 ```
 항목은 넘길 때 시작 위치에 맞춰 멈춘다. 이미지 넘기기 배너는 Image Frame 을 항목으로 넣어 만든다.
@@ -5317,7 +5828,7 @@ AI 답변처럼 제목, 목록, 표가 섞인 글을 보여 주는 컴포넌트�
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <div class="ds-markdown">…변환된 HTML…</div>
@@ -5357,7 +5868,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### 크기와 여백
 
 ```
 변환된 HTML 을 감싸기만 하면 제목, 문단, 목록, 인용, 표, 코드의 크기와 간격이 맞춰진다. 코드 묶음은 Code Block, 출처는 Citation.
@@ -5376,7 +5887,7 @@ Figma: 본문 t04 / h1 t09 Bold, h2 t07 Bold (앞뒤 x6 / x3) / h3 t06, h4 t05, 
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <figure class="ds-codeblock">
@@ -5385,6 +5896,15 @@ Figma: 본문 t04 / h1 t09 Bold, h2 t07 Bold (앞뒤 x6 / x3) / h3 t06, h4 t05, 
   <pre class="ds-codeblock__code"><code>…</code></pre>
 </figure>
 ```
+
+## 구조
+
+| 부품 | 설명 |
+| --- | --- |
+| **Header**`ds-codeblock__header` | 제목과 닫기 버튼이 놓이는 머리 영역입니다. |
+| **Language**`ds-codeblock__language` | 코드 언어 이름입니다. |
+| **Copy**`ds-codeblock__copy` | 코드를 복사하는 버튼입니다. |
+| **Code**`ds-codeblock__code` | 코드 본문입니다. |
 
 ## 속성
 
@@ -5395,6 +5915,12 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | `header` | true false |
 
 그 밖에: 복사 버튼
+
+## 동작
+
+`ybm-ds.js`를 불러오면 알아서 동작합니다.
+
+- data-ds-copy 버튼으로 코드 복사
 
 ## 사용 지침
 
@@ -5411,7 +5937,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### 크기와 여백
 
 ```
 header 에는 언어 이름과 복사 버튼. 복사 버튼(data-ds-copy)은 ybm-ds.js 가 코드를 복사하고 잠시 data-copied 를 붙인다.
@@ -5431,12 +5957,19 @@ Figma: shape/sm, 1px stroke/neutral-weak, bg/neutral / header padding x2 x4, 아
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <a class="ds-citation" data-type="number" href="#ref-1" aria-label="출처 1">1</a>
 <a class="ds-citation" href="https://…">[<span class="ds-citation__icon"><i class="ds-icon ds-icon--globe" aria-hidden="true"></i></span>]<span class="ds-citation__label">출처 이름</span></a>
 ```
+
+## 구조
+
+| 부품 | 설명 |
+| --- | --- |
+| **Icon**`ds-citation__icon` | 출처 사이트 아이콘입니다. |
+| **Label**`ds-citation__label` | 출처 이름입니다. |
 
 ## 속성
 
@@ -5464,7 +5997,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### 크기와 여백
 
 ```
 type: 기본 label(출처 이름 칩) / data-type="number"(글 뒤 위첨자 번호)
@@ -5483,7 +6016,7 @@ Figma: 높이 x5, t02, fg/neutral-muted / number 최소 폭 x5, 좌우 x1, pill,
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <div class="ds-multiselect">
@@ -5498,6 +6031,18 @@ Figma: 높이 x5, t02, fg/neutral-muted / number 최소 폭 x5, 좌우 x1, pill,
 </div>
 ```
 
+## 구조
+
+| 부품 | 설명 |
+| --- | --- |
+| **Trigger**`ds-multiselect__trigger` | 누르면 열리거나 바뀌는 버튼입니다. |
+| **Values**`ds-multiselect__values` | 고른 값이 배지로 들어가는 영역입니다. |
+| **Panel**`ds-multiselect__panel` | 펼쳐지는 선택 목록입니다. |
+| **Heading**`ds-multiselect__heading` | 목록 위에 붙는 소제목입니다. |
+| **Option**`ds-multiselect__option` | 고를 수 있는 선택지 하나입니다. |
+| **Control**`ds-checkbox__control` | 실제로 값을 입력하거나 고르는 부분입니다. |
+| **Label**`ds-multiselect__label` | 이름이나 값을 보여 주는 글자입니다. |
+
 ## 속성
 
 Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
@@ -5506,6 +6051,12 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | --- | --- |
 | `Trigger content` | placeholder selected |
 | `state` | enabled open disabled |
+
+## 동작
+
+`ybm-ds.js`를 불러오면 알아서 동작합니다.
+
+- Popover 와 같이 열고 닫기, 고른 값을 칸에 Badge 로 채우기
 
 ## 사용 지침
 
@@ -5535,7 +6086,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### 크기와 여백
 
 ```
 Popover 와 같이 data-ds-popover="id" 로 열고, 바깥 누르기와 Esc 로 닫는다.
@@ -5556,7 +6107,7 @@ Figma: Trigger 높이 40, padding x2 x3_5, gap x2, shape/sm, 1px stroke/neutral-
 
 ## 사용법
 
-아직 구조 설명이 없습니다. 아래 예시의 코드를 복사해 쓰세요.
+아래 예시의 코드를 복사해 씁니다.
 
 ## 속성
 
@@ -5568,18 +6119,6 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | `value` | --ds-rating-value 0~5 |
 
 그 밖에: input (radio 5개)
-
-## CSS 변수
-
-서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
-
-| 변수 | 기본값 |
-| --- | --- |
-| `--ds-rating-size` | `16px` |
-| `--ds-rating-gap` | `2px` |
-| `--ds-rating-value` | `0` |
-| `--ds-rating-fill` | `var(--ybm-color-fg-warning)` |
-| `--ds-rating-empty` | `var(--ybm-color-stroke-neutral-muted)` |
 
 ## 사용 지침
 
@@ -5609,7 +6148,19 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-rating-size` | `16px` |
+| `--ds-rating-gap` | `2px` |
+| `--ds-rating-value` | `0` |
+| `--ds-rating-fill` | `var(--ybm-color-fg-warning)` |
+| `--ds-rating-empty` | `var(--ybm-color-stroke-neutral-muted)` |
+
+### 크기와 여백
 
 ```
 보기:  <span class="ds-rating" style="--ds-rating-value: 4.5" role="img" aria-label="5점 만점에 4.5점"><span class="ds-rating__stars"></span><span class="ds-rating__value">4.5</span><span class="ds-rating__count">(312)</span></span>

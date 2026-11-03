@@ -6,7 +6,7 @@ PC 화면 가장자리에서 밀려 나오는 창입니다. 지금 화면을 그
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <dialog class="ds-sidepanel" id="sp" aria-labelledby="sp-t" [data-size="small"] [data-direction="left"]>
@@ -19,6 +19,18 @@ PC 화면 가장자리에서 밀려 나오는 창입니다. 지금 화면을 그
 </dialog>
 ```
 
+## 구조
+
+| 부품 | 설명 |
+| --- | --- |
+| **Header**`ds-sidepanel__header` | 제목과 닫기 버튼이 놓이는 머리 영역입니다. |
+| **Texts**`ds-sidepanel__texts` | 제목과 설명을 묶는 글자 영역입니다. |
+| **Title**`ds-sidepanel__title` | 제목입니다. |
+| **Desc**`ds-sidepanel__desc` | 제목을 돕는 설명 글입니다. |
+| **Close**`ds-sidepanel__close` | 닫기 버튼입니다. |
+| **Body**`ds-sidepanel__body` | 본문이 들어가는 영역입니다. |
+| **Footer**`ds-sidepanel__footer` | 버튼이나 보조 정보가 놓이는 아래 영역입니다. |
+
 ## 속성
 
 Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
@@ -28,13 +40,11 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | `size` | small medium large |
 | `direction` | right left |
 
-## CSS 변수
+## 동작
 
-서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+`ybm-ds.js`를 불러오면 알아서 동작합니다.
 
-| 변수 | 기본값 |
-| --- | --- |
-| `--ds-sidepanel-width` | `720px` |
+- Dialog 와 같이 열고 닫기, 본문이 스크롤되면 data-scrolled
 
 ## 사용 지침
 
@@ -61,7 +71,15 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-sidepanel-width` | `720px` |
+
+### 크기와 여백
 
 ```
 네이티브 <dialog> 를 쓴다. data-ds-open 으로 열고, data-ds-close 와 바깥 누르기로 닫는다.

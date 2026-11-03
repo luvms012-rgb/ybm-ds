@@ -6,7 +6,7 @@
 
 ## 사용법
 
-아직 구조 설명이 없습니다. 아래 예시의 코드를 복사해 쓰세요.
+아래 예시의 코드를 복사해 씁니다.
 
 ## 속성
 
@@ -18,18 +18,6 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | `value` | --ds-rating-value 0~5 |
 
 그 밖에: input (radio 5개)
-
-## CSS 변수
-
-서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
-
-| 변수 | 기본값 |
-| --- | --- |
-| `--ds-rating-size` | `16px` |
-| `--ds-rating-gap` | `2px` |
-| `--ds-rating-value` | `0` |
-| `--ds-rating-fill` | `var(--ybm-color-fg-warning)` |
-| `--ds-rating-empty` | `var(--ybm-color-stroke-neutral-muted)` |
 
 ## 사용 지침
 
@@ -59,7 +47,19 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-rating-size` | `16px` |
+| `--ds-rating-gap` | `2px` |
+| `--ds-rating-value` | `0` |
+| `--ds-rating-fill` | `var(--ybm-color-fg-warning)` |
+| `--ds-rating-empty` | `var(--ybm-color-stroke-neutral-muted)` |
+
+### 크기와 여백
 
 ```
 보기:  <span class="ds-rating" style="--ds-rating-value: 4.5" role="img" aria-label="5점 만점에 4.5점"><span class="ds-rating__stars"></span><span class="ds-rating__value">4.5</span><span class="ds-rating__count">(312)</span></span>

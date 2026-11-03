@@ -6,7 +6,7 @@
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <div class="ds-input" data-variant="outline" data-size="medium">
@@ -18,6 +18,16 @@
 </div>
 ```
 
+## 구조
+
+| 부품 | 설명 |
+| --- | --- |
+| **Icon**`ds-input__icon` | 뜻을 빠르게 알려 주는 아이콘입니다. |
+| **Prefix**`ds-input__prefix` | 앞에 붙는 아이콘이나 요소입니다. |
+| **Control**`ds-input__control` | 실제로 값을 입력하거나 고르는 부분입니다. |
+| **Suffix**`ds-input__suffix` | 뒤에 붙는 아이콘이나 요소입니다. |
+| **Clear**`ds-input__clear` | 입력한 값을 지우는 버튼입니다. |
+
 ## 속성
 
 Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
@@ -27,7 +37,23 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | `variant` | outline underline |
 | 켜고 끄는 속성 | `size` |
 
-## CSS 변수
+## 동작
+
+`ybm-ds.js`를 불러오면 알아서 동작합니다.
+
+- 값 지우기 (노출/숨김은 CSS 가 처리)
+
+## 예시
+
+```html
+<div class="ds-input"><input class="ds-input__control" placeholder="underline · large"></div>
+<div class="ds-input" data-variant="outline" data-size="medium"><i class="ds-icon ds-icon--search ds-input__icon" aria-hidden="true"></i><input class="ds-input__control" placeholder="outline · medium"></div>
+<div class="ds-input" data-variant="outline"><input class="ds-input__control" value="비활성" disabled></div>
+```
+
+## 규격
+
+### CSS 변수
 
 서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
 
@@ -47,17 +73,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | `--ds-input-line-active` | `var(--ybm-color-stroke-neutral-contrast)` |
 | `--ds-input-line-fade` | `var(--ybm-duration-normal) var(--ybm-easing-standard)` |
 
-## 예시
-
-```html
-<div class="ds-input"><input class="ds-input__control" placeholder="underline · large"></div>
-<div class="ds-input" data-variant="outline" data-size="medium"><i class="ds-icon ds-icon--search ds-input__icon" aria-hidden="true"></i><input class="ds-input__control" placeholder="outline · medium"></div>
-<div class="ds-input" data-variant="outline"><input class="ds-input__control" value="비활성" disabled></div>
-```
-
-## 규격
-
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### 크기와 여백
 
 ```
 variant : underline(기본) / outline      size : large(기본) / medium

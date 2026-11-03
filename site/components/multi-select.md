@@ -6,7 +6,7 @@
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <div class="ds-multiselect">
@@ -21,6 +21,18 @@
 </div>
 ```
 
+## 구조
+
+| 부품 | 설명 |
+| --- | --- |
+| **Trigger**`ds-multiselect__trigger` | 누르면 열리거나 바뀌는 버튼입니다. |
+| **Values**`ds-multiselect__values` | 고른 값이 배지로 들어가는 영역입니다. |
+| **Panel**`ds-multiselect__panel` | 펼쳐지는 선택 목록입니다. |
+| **Heading**`ds-multiselect__heading` | 목록 위에 붙는 소제목입니다. |
+| **Option**`ds-multiselect__option` | 고를 수 있는 선택지 하나입니다. |
+| **Control**`ds-checkbox__control` | 실제로 값을 입력하거나 고르는 부분입니다. |
+| **Label**`ds-multiselect__label` | 이름이나 값을 보여 주는 글자입니다. |
+
 ## 속성
 
 Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
@@ -29,6 +41,12 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | --- | --- |
 | `Trigger content` | placeholder selected |
 | `state` | enabled open disabled |
+
+## 동작
+
+`ybm-ds.js`를 불러오면 알아서 동작합니다.
+
+- Popover 와 같이 열고 닫기, 고른 값을 칸에 Badge 로 채우기
 
 ## 사용 지침
 
@@ -58,7 +76,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### 크기와 여백
 
 ```
 Popover 와 같이 data-ds-popover="id" 로 열고, 바깥 누르기와 Esc 로 닫는다.

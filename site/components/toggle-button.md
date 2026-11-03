@@ -6,7 +6,7 @@
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <button type="button" class="ds-toggle" aria-pressed="false" [data-size="medium"]>라벨</button>
@@ -19,16 +19,6 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | 속성 | 값 |
 | --- | --- |
 | 켜고 끄는 속성 | `size` |
-
-## CSS 변수
-
-서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
-
-| 변수 | 기본값 |
-| --- | --- |
-| `--ds-toggle-bg` | `var(--ybm-color-bg-layer-default)` |
-| `--ds-toggle-fg` | `var(--ybm-color-fg-neutral)` |
-| `--ds-toggle-line` | `var(--ybm-color-stroke-neutral-weak)` |
 
 ## 사용 지침
 
@@ -46,7 +36,17 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-toggle-bg` | `var(--ybm-color-bg-layer-default)` |
+| `--ds-toggle-fg` | `var(--ybm-color-fg-neutral)` |
+| `--ds-toggle-line` | `var(--ybm-color-stroke-neutral-weak)` |
+
+### 크기와 여백
 
 ```
 size: small(기본) / medium

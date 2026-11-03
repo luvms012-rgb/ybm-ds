@@ -6,7 +6,7 @@
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <label class="ds-switch" data-size="24">
@@ -14,6 +14,13 @@
   <input type="checkbox" role="switch" class="ds-switch__control">
 </label>
 ```
+
+## 구조
+
+| 부품 | 설명 |
+| --- | --- |
+| **Label**`ds-switch__label` | 이름이나 값을 보여 주는 글자입니다. |
+| **Control**`ds-switch__control` | 실제로 값을 입력하거나 고르는 부분입니다. |
 
 ## 속성
 
@@ -23,20 +30,6 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | --- | --- |
 | `size` | 16 24 32 |
 | 켜고 끄는 속성 | `tone` |
-
-## CSS 변수
-
-서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
-
-| 변수 | 기본값 |
-| --- | --- |
-| `--ds-switch-w` | `38px` |
-| `--ds-switch-h` | `24px` |
-| `--ds-switch-thumb` | `16px` |
-| `--ds-switch-thumb-on` | `20px` |
-| `--ds-switch-on` | `var(--ybm-color-bg-brand-solid)` |
-| `--ds-switch-thumb-color` | `var(--ybm-color-palette-static-white)` |
-| `--ds-switch-t` | `var(--ds-switch-thumb)` |
 
 ## 사용 지침
 
@@ -55,7 +48,21 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-switch-w` | `38px` |
+| `--ds-switch-h` | `24px` |
+| `--ds-switch-thumb` | `16px` |
+| `--ds-switch-thumb-on` | `20px` |
+| `--ds-switch-on` | `var(--ybm-color-bg-brand-solid)` |
+| `--ds-switch-thumb-color` | `var(--ybm-color-palette-static-white)` |
+| `--ds-switch-t` | `var(--ds-switch-thumb)` |
+
+### 크기와 여백
 
 ```
 size: 24(기본) / 16 / 32   tone: brand(기본) / neutral

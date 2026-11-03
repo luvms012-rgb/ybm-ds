@@ -254,6 +254,51 @@
       st.style.width = aw / s + "px";
       st.style.transform = s < 1 ? "scale(" + s + ")" : "";
     });
+    pinAnatomy();
+  }
+  // 구조 그림 (레퍼런스 B Anatomy): 부품 이름을 그림 양옆에 두고 가는 화살표로 부품을 가리킨다.
+  // 부품이 넓어 양옆에 자리가 없으면 위아래에 둔다. 그림에 없는 부품은 건너뛴다
+  function pinAnatomy() {
+    var NS = "http://www.w3.org/2000/svg";
+    document.querySelectorAll("[data-site-anatomy]").forEach(function (box) {
+      var old = box.querySelector(".site-anatomy__layer"); if (old) old.remove();
+      [].slice.call(box.querySelectorAll(".site-anatomy__name")).forEach(function (n) { n.remove(); });
+      var b = box.getBoundingClientRect(); if (!b.width) return;
+      var st = box.querySelector(".pv-stage").getBoundingClientRect();
+      var sl = st.left - b.left, sr = st.right - b.left, stp = st.top - b.top, sbt = st.bottom - b.top;
+      var names = (box.getAttribute("data-site-anatomy-names") || "").split("|");
+      var side = sl >= 120 && b.width - sr >= 120;
+      var svg = document.createElementNS(NS, "svg"); svg.setAttribute("class", "site-anatomy__layer");
+      svg.innerHTML = "<defs><marker id=\"site-arrow\" viewBox=\"0 0 6 6\" refX=\"6\" refY=\"3\" markerWidth=\"6\" markerHeight=\"6\" orient=\"auto\"><path d=\"M0 0L6 3L0 6z\"/></marker></defs>";
+      box.appendChild(svg);
+      var used = { l: [], r: [], t: [], b: [] };
+      box.getAttribute("data-site-anatomy").split(" ").forEach(function (cls, i) {
+        var el = [].slice.call(box.querySelectorAll(".site-tile__inner ." + cls)).filter(function (e) { var r = e.getBoundingClientRect(); return r.width && r.height; })[0];
+        if (!el) return;
+        var r = el.getBoundingClientRect(), cx = r.left - b.left + r.width / 2, cy = r.top - b.top + r.height / 2;
+        var name = document.createElement("span"); name.className = "site-anatomy__name"; name.textContent = names[i] || cls; box.appendChild(name);
+        var w = name.offsetWidth, h = name.offsetHeight, x, y, x1, y1, x2, y2;
+        if (side) {
+          // 가운데 근처(넓은 부품)는 이름이 적은 쪽으로 보내 양옆을 고르게
+          var mid = (sl + sr) / 2, band = (sr - sl) * 0.12;
+          var left = cx < mid - band ? true : cx > mid + band ? false : used.l.length <= used.r.length, k = left ? "l" : "r";
+          y = cy - h / 2; while (used[k].some(function (u) { return Math.abs(u - y) < h + 6; })) y += h + 6;
+          used[k].push(y);
+          if (left) { x = sl - 32 - w; x1 = sl - 24; x2 = r.left - b.left - 2; } else { x = sr + 32; x1 = sr + 24; x2 = r.right - b.left + 2; }
+          y1 = y + h / 2; y2 = cy;
+        } else {
+          var top = cy < (stp + sbt) / 2, k2 = top ? "t" : "b";
+          x = cx - w / 2; while (used[k2].some(function (u) { return Math.abs(u - x) < w + 12; })) x += w + 12;
+          x = Math.max(8, Math.min(x, b.width - w - 8)); used[k2].push(x);
+          if (top) { y = Math.max(4, stp - 32 - h); y1 = y + h + 4; y2 = r.top - b.top - 2; } else { y = Math.min(b.height - h - 4, sbt + 32); y1 = y - 4; y2 = r.bottom - b.top + 2; }
+          x1 = x + w / 2; x2 = cx;
+        }
+        name.style.left = Math.round(x) + "px"; name.style.top = Math.round(y) + "px";
+        var ln = document.createElementNS(NS, "line");
+        ln.setAttribute("x1", x1); ln.setAttribute("y1", y1); ln.setAttribute("x2", x2); ln.setAttribute("y2", y2); ln.setAttribute("marker-end", "url(#site-arrow)");
+        svg.appendChild(ln);
+      });
+    });
   }
   window.addEventListener("resize", fitTiles);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitTiles);

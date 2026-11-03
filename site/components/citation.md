@@ -6,12 +6,19 @@
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <a class="ds-citation" data-type="number" href="#ref-1" aria-label="출처 1">1</a>
 <a class="ds-citation" href="https://…">[<span class="ds-citation__icon"><i class="ds-icon ds-icon--globe" aria-hidden="true"></i></span>]<span class="ds-citation__label">출처 이름</span></a>
 ```
+
+## 구조
+
+| 부품 | 설명 |
+| --- | --- |
+| **Icon**`ds-citation__icon` | 출처 사이트 아이콘입니다. |
+| **Label**`ds-citation__label` | 출처 이름입니다. |
 
 ## 속성
 
@@ -39,7 +46,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### 크기와 여백
 
 ```
 type: 기본 label(출처 이름 칩) / data-type="number"(글 뒤 위첨자 번호)

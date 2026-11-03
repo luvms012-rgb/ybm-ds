@@ -6,7 +6,7 @@
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <div class="ds-quantity" data-size="medium">
@@ -15,6 +15,13 @@
   <button type="button" class="ds-quantity__btn" aria-label="수량 늘리기"><i class="ds-icon ds-icon--plus" aria-hidden="true"></i></button>
 </div>
 ```
+
+## 구조
+
+| 부품 | 설명 |
+| --- | --- |
+| **Btn**`ds-quantity__btn` | 수량을 늘리거나 줄이는 버튼입니다. |
+| **Value**`ds-quantity__value` | 지금 수량입니다. |
 
 ## 속성
 
@@ -33,7 +40,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### 크기와 여백
 
 ```
 size: medium(기본 40) / small 36 / large 52   layout: hug(기본) / data-layout="fill"

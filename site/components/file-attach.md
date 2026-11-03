@@ -6,7 +6,7 @@
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <div class="ds-fileattach">
@@ -30,6 +30,24 @@
 </div>
 ```
 
+## 구조
+
+| 부품 | 설명 |
+| --- | --- |
+| **Dropzone**`ds-fileattach__dropzone` | 파일을 끌어 놓는 칸입니다. |
+| **Input**`ds-fileattach__input` | 실제 입력 칸입니다. |
+| **Label**`ds-fileattach__label` | 이름이나 값을 보여 주는 글자입니다. |
+| **Items**`ds-fileattach__items` | 첨부한 파일 목록입니다. |
+| **Trigger**`ds-fileattach__trigger` | 누르면 열리거나 바뀌는 버튼입니다. |
+| **Count**`ds-fileattach__count` | 개수나 글자 수를 보여 줍니다. |
+| **Thumbnail**`ds-fileitem__thumbnail` | 파일 종류나 사진을 보여 주는 작은 그림입니다. |
+| **Texts**`ds-fileitem__texts` | 제목과 설명을 묶는 글자 영역입니다. |
+| **Name**`ds-fileitem__name` | 파일 이름입니다. |
+| **Size**`ds-fileitem__size` | 파일 크기입니다. |
+| **Image**`ds-fileitem__image` | 사진 미리보기입니다. |
+| **Badge**`ds-fileitem__badge` | 개수나 새 소식을 알리는 배지입니다. |
+| **Remove**`ds-fileitem__remove` | 항목을 지우는 버튼입니다. |
+
 ## 속성
 
 Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
@@ -42,6 +60,12 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | 켜고 끄는 속성 | `badge` |
 
 그 밖에: Trigger state
+
+## 동작
+
+`ybm-ds.js`를 불러오면 알아서 동작합니다.
+
+- 파일을 끌어 놓는 칸 위로 끌고 오면 data-state="dragover", 벗어나거나 놓으면 뺀다
 
 ## 사용 지침
 
@@ -89,7 +113,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### 크기와 여백
 
 ```
 끌어 놓는 칸(Dropzone) 아래에 고르기 버튼(Trigger)과 파일(Item)을 한 줄로 놓는다. 넘치면 옆으로 넘긴다.

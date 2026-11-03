@@ -6,7 +6,7 @@
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <time class="ds-timer" data-end="2026-10-29T15:00:00+09:00" [data-format="elapsed"]>0:00</time>
@@ -20,6 +20,12 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | --- | --- |
 | `format` | clock elapsed |
 | 켜고 끄는 속성 | `data-start` `data-end` |
+
+## 동작
+
+`ybm-ds.js`를 불러오면 알아서 동작합니다.
+
+- data-start(흐른 시간) / data-end(남은 시간)로 1초마다 글자를 바꾸고, 남은 시간이 0 이면 ds-timer-end 이벤트
 
 ## 사용 지침
 
@@ -38,7 +44,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### 크기와 여백
 
 ```
 format: 기본 clock(12:34, 1시간 넘으면 1:02:34) / data-format="elapsed"(12분 34초)

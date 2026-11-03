@@ -6,7 +6,7 @@
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <div class="ds-imageframe" data-ratio="4:3" [data-radius="lg"] [data-stroke]>
@@ -14,6 +14,13 @@
   [<div class="ds-imageframe__floater" data-position="bottom-end"><span class="ds-imageframe__indicator">1/5</span></div>]
 </div>
 ```
+
+## 구조
+
+| 부품 | 설명 |
+| --- | --- |
+| **Floater**`ds-imageframe__floater` | 사진 위에 떠 있는 버튼이나 배지입니다. |
+| **Indicator**`ds-imageframe__indicator` | 여러 장 중 지금 사진을 알리는 표시입니다. |
 
 ## 속성
 
@@ -23,15 +30,6 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | --- | --- |
 | `ratio` | 1:1 4:3 16:9 |
 | 켜고 끄는 속성 | `stroke` `indicator` |
-
-## CSS 변수
-
-서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
-
-| 변수 | 기본값 |
-| --- | --- |
-| `--ds-imageframe-ratio` | `1` |
-| `--ds-imageframe-radius` | `var(--ybm-shape-sm)` |
 
 ## 사용 지침
 
@@ -56,7 +54,16 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-imageframe-ratio` | `1` |
+| `--ds-imageframe-radius` | `var(--ybm-shape-sm)` |
+
+### 크기와 여백
 
 ```
 ratio: 기본 1:1 / data-ratio="4:3" / data-ratio="16:9" (그 밖은 --ds-imageframe-ratio)   stroke: data-stroke

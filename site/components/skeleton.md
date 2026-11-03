@@ -6,7 +6,7 @@
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <span class="ds-skeleton" style="width:220px;height:16px"></span>
@@ -21,16 +21,6 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | 속성 | 값 |
 | --- | --- |
 | `shape` | rect circle text |
-
-## CSS 변수
-
-서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
-
-| 변수 | 기본값 |
-| --- | --- |
-| `--ds-skeleton-color` | `var(--ybm-color-palette-gray-200)` |
-| `--ds-skeleton-radius` | `var(--ybm-shape-sm)` |
-| `--ds-skeleton-size` | `48px` |
 
 ## 사용 지침
 
@@ -49,7 +39,17 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-skeleton-color` | `var(--ybm-color-palette-gray-200)` |
+| `--ds-skeleton-radius` | `var(--ybm-shape-sm)` |
+| `--ds-skeleton-size` | `48px` |
+
+### 크기와 여백
 
 ```
 shape: rectangle(기본) / circle / text

@@ -6,7 +6,7 @@
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <div class="ds-segmented" role="group" aria-label="보기 방식" [data-size="medium"] [data-layout="fill"]>
@@ -21,6 +21,12 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | 속성 | 값 |
 | --- | --- |
 | 켜고 끄는 속성 | `layout` `size` |
+
+## 동작
+
+`ybm-ds.js`를 불러오면 알아서 동작합니다.
+
+- 누르면 하나만 aria-pressed, change 이벤트. 선택 배경이 고른 항목으로 미끄러져 이동(위치는 --ds-seg-x / --ds-seg-w)
 
 ## 사용 지침
 
@@ -42,7 +48,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### 크기와 여백
 
 ```
 size: small(기본) / medium   layout: hug(기본) / fill

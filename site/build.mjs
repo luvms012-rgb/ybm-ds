@@ -188,7 +188,7 @@ const az = (list) => [...list].sort((a, b) => a[1].localeCompare(b[1], 'en'));
 const FOUND = az([['color', 'Color'], ['typography', 'Typography'], ['spacing', 'Spacing'], ['shape', 'Radius'], ['elevation', 'Elevation'], ['motion', 'Motion'], ['icons', 'Iconography']]);
 // Get Started 왼쪽 메뉴: Overview, AI, Foundations 묶음 (묶음 안은 ABC 순)
 // Usage, Scripts 는 11-03 시작하기로 합침 (사용자 "옮기고 없애기"). Overview 바로 아래는 묶음 없는 항목
-const GS_TOP = [['get-started/ai.html', 'AI']];
+const GS_TOP = [['get-started/ai.html', 'AI & Tools']];
 const GS = [['Foundations', FOUND.map(([s, l]) => [`foundations/${s}.html`, l])]];
 // 시작하기 문서 순서 (이전 / 다음 문서) - 왼쪽 메뉴 순서 그대로, 이름은 페이지 제목
 const GS_ORDER = [['index.html', 'Get Started'], ...GS_TOP, ...GS.flatMap(([, list]) => list)];
@@ -396,7 +396,7 @@ ${codeblock(`<link rel="stylesheet" href="${PUBLIC}/dist/ybm-ds.css">\n<link rel
 <h2 id="ai">AI로 만들기</h2>
 <p>아래 내용을 AI 코딩 도구에 붙여 넣으면 설치와 규칙을 알아서 맞춥니다.</p>
 ${codeblock(prompts[0][2], 'text', ' data-wrap')}
-<p>그다음 만들 화면을 말로 설명하세요. 다른 요청 예시는 <a class="ds-link" href="get-started/ai.html">AI</a>에 있습니다.</p>
+<p>그다음 만들 화면을 말로 설명하세요. 다른 요청 예시는 <a class="ds-link" href="get-started/ai.html">AI &amp; Tools</a>에 있습니다.</p>
 
 <h2 id="theme">다크 모드</h2>
 <p><code>html</code>에 속성 하나를 붙이면 모든 색이 어두운 화면용으로 바뀝니다. 색을 토큰으로만 썼다면 따로 고칠 것이 없습니다.</p>
@@ -435,7 +435,7 @@ ${codeblock(`// tailwind.config.js - ybm-ds/tokens/tailwind.preset.js를 프로�
 
 <h2 id="tools">도구</h2>
 <div class="site-grid site-grid--hub">
-  ${hubCard('{root}get-started/ai.html', 'AI', 'AI 도구에 DS 문서를 주는 방법.')}
+  ${hubCard('{root}get-started/ai.html', 'AI & Tools', 'AI 도구에 DS 문서를 주는 방법.')}
   ${hubCard(LINKS.figmaUrl('2608:2'), 'Figma', '컴포넌트와 토큰 라이브러리.', true)}
   ${hubCard(GITHUB, 'GitHub', '원본 파일과 변경 기록.', true)}
 </div>`.replaceAll('href="components/', 'href="{root}components/').replaceAll('href="templates/', 'href="{root}templates/').replaceAll('href="get-started/', 'href="{root}get-started/'),
@@ -644,29 +644,68 @@ function propsTable(c) {
     cur += ch;
   }
   items.push(cur);
-  const rows = [], flags = [], notes = [];
+  const rows = [], flags = [], notes = [], lists = [];
   for (let it of items.map((s) => s.trim()).filter(Boolean)) {
     const m = it.match(/^(?:([A-Za-z][\w ]*?)\s+)?([A-Za-z][\w-]*)\s*`([^`]+)`\s*(.*)$/);
     if (m) {
       const vals = m[3].split(/[·/]/).map((v) => v.trim()).filter(Boolean);
+      if (!m[1]) lists.push([m[2], vals]);
       rows.push([`<code>${esc(((m[1] ? m[1] + ' ' : '') + m[2]).trim())}</code>`, vals.map((v) => `<span class="ds-badge">${esc(v)}</span>`).join(' ') + (m[4] ? ` <span class="site-card__no">${esc(m[4].replace(/[()]/g, ''))}</span>` : '')]);
     } else if (/^[A-Za-z][\w-]*$/.test(it)) flags.push(`<code>${esc(it)}</code>`);
     else notes.push(inline(prose(it)));
   }
   if (flags.length) rows.push(['켜고 끄는 속성', flags.join(' ')]);
-  return { rows, rest: notes.join(', ') };
+  return { rows, rest: notes.join(', '), lists };
 }
+
+// 컴포넌트 상세 구성 (11-03 사용자: 레퍼런스 A 길이로, 그림은 레퍼런스 B 처럼)
+//   사용법 > 구조(레퍼런스 B 처럼 부품 이름과 화살표 그림 + 부품 표) > 속성 > 동작 > 사용 지침 > 예시 > 규격(CSS 변수, 크기와 여백)
+//   그림은 줄인다(사용자 "이미지 최소화"): 맨 위 대표 그림과 구조 그림 둘만
+//   컴포넌트마다 자료가 있는 절만 나온다
+const IMG_BLANK = 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="160" height="120"><rect width="160" height="120" fill="#dcdee3"/></svg>');
+const ANATOMY_KO = JSON.parse(fs.readFileSync(path.join(SITE, 'src/anatomy-ko.json'), 'utf8'));
+// 머리 주석 마크업을 그릴 수 있는 HTML 로: 주석은 빼고, 고를 수 있는 속성 [data-x] 는 빼고, 고를 수 있는 요소 [<…>] 는 괄호만 뗀다
+const renderable = (markup) => {
+  let s = markup.replace(/<!--[\s\S]*?-->/g, '');
+  for (let prev; prev !== s;) { prev = s; s = s.replace(/(<[a-zA-Z][^<>]*?)\s*\[[^\]<>]*\](?=[^<>]*>)/, '$1'); }
+  return s.replace(/\[(?=\s*<)/g, '').replace(/>\s*\]/g, '>').replace(/ id="[^"]*"/g, '').replace(/\shidden(?=[\s>])/g, '')  // 닫힌 창(hidden)도 구조 그림에서는 펼쳐 보인다
+    // 자리만 적은 그림 주소(…, logo.svg)는 회색 빈 그림으로
+    .replace(/(<img\b[^>]*?\ssrc=")(?!https?:|data:)[^"]*"/g, `$1${IMG_BLANK}"`).replace(/<a\b/g, '<span').replace(/<\/a>/g, '</span>');
+};
+const partName = (s) => s.split('-').filter(Boolean).map((w) => w[0].toUpperCase() + w.slice(1)).join(' ');
+function anatomyOf(c) {
+  if (!c.markup) return null;
+  const parts = [...new Set([...c.markup.matchAll(/\b(ds-[a-z0-9-]+?)__([a-z0-9-]+)/g)].map((m) => m[0]))];
+  if (parts.length < 2) return null;
+  // 부품이 가장 많이 든 맨 바깥 요소 하나를 그린다
+  const tops = topElements(renderable(c.markup), 12);
+  const pick = tops.sort((a, b) => (b.match(/__/g) || []).length - (a.match(/__/g) || []).length)[0] || '';
+  const rows = parts.map((p, i) => {
+    const suf = p.split('__')[1];
+    const desc = ANATOMY_KO[`${c.no}:${suf}`] || ANATOMY_KO[suf] || '';
+    if (!desc) console.log('  ! anatomy-ko.json에 부품 설명이 없음:', c.no, suf);
+    return [`<span class="site-anatomy__part"><b>${esc(partName(suf))}</b><code>${esc(p)}</code></span>`, esc(desc)];
+  });
+  const figure = `<div class="site-tile__thumb site-cover site-anatomy" data-site-fit-max="1.5" data-site-anatomy="${esc(parts.join(' '))}" data-site-anatomy-names="${esc(parts.map((p) => partName(p.split('__')[1])).join('|'))}" aria-hidden="true"><div class="site-tile__inner" inert><div class="pv-stage">${pick}</div></div></div>`;
+  return `<h2 id="anatomy">구조</h2>${figure}<div class="site-anatomy-table">${table(['부품', '설명'], rows)}</div>`;
+}
+// ybm-ds.js 머리 주석의 "· 이름 — 하는 일" 을 컴포넌트에 붙인다 (이름이 다른 것은 번호로)
+const JS_ALIAS = { 'Text Field clear 버튼': '04' };
+const jsFor = (c) => [...dsJs.slice(0, dsJs.indexOf('*/')).matchAll(/^\s*· (.+?) — (.+)$/gm)].filter((m) => JS_ALIAS[m[1]] ? JS_ALIAS[m[1]] === c.no : c.name.split(' · ').some((n) => n === m[1])).map((m) => inline(prose(m[2])));
 comps.forEach((c) => {
   const i = compsAZ.indexOf(c);
   const prev = compsAZ[i - 1], next = compsAZ[i + 1];
   const { rows, rest } = propsTable(c);
   const sections = [];
-  sections.push(`<h2 id="usage">사용법</h2>${c.markup ? `<p>아래 구조를 그대로 복사해 쓰세요. 대괄호 <code>[ ]</code> 안은 필요할 때만 넣습니다.</p>${codeblock(c.markup)}` : '<p>아직 구조 설명이 없습니다. 아래 예시의 코드를 복사해 쓰세요.</p>'}`);
+  sections.push(`<h2 id="usage">사용법</h2>${c.markup ? `<p>아래 구조를 복사해 씁니다. 대괄호 <code>[ ]</code> 안은 필요할 때만 넣습니다.</p>${codeblock(c.markup)}` : '<p>아래 예시의 코드를 복사해 씁니다.</p>'}`);
+  const anatomy = anatomyOf(c);
+  if (anatomy) sections.push(anatomy);
   if (rows.length || rest) sections.push(`<h2 id="props">속성</h2><p>Figma 속성 이름을 그대로 <code>data-*</code> 속성으로 씁니다.</p>${rows.length ? table(['속성', '값'], rows) : ''}${rest ? `<p class="site-note">그 밖에: ${rest}</p>` : ''}`);
-  if (c.vars.length) sections.push(`<h2 id="vars">CSS 변수</h2><p>서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.</p>${table(['변수', '기본값'], c.vars.map(([n, v]) => [`<code>${esc(n)}</code>`, `<code>${esc(v)}</code>`]))}`);
+  const js = jsFor(c);
+  if (js.length) sections.push(`<h2 id="behavior">동작</h2><p><code>ybm-ds.js</code>를 불러오면 알아서 동작합니다.</p><ul class="site-list">${js.map((t) => `<li>${t}</li>`).join('')}</ul>`);
   if (c.dos.length) sections.push(`<h2 id="guide">사용 지침</h2>${practices(c.dos.map((d) => [!isDont(d), d]))}`);
   sections.push(`<h2 id="examples">예시</h2>${c.example ? example(c.example, codeOf(c.example) || c.markup) : '<p>아직 예시가 없습니다.</p>'}`);
-  if (c.spec) sections.push(`<h2 id="spec">규격</h2><p>Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.</p><pre class="site-spec">${esc(c.spec)}</pre>`);
+  if (c.vars.length || c.spec) sections.push(`<h2 id="spec">규격</h2>${c.vars.length ? `<h3>CSS 변수</h3><p>서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.</p>${table(['변수', '기본값'], c.vars.map(([n, v]) => [`<code>${esc(n)}</code>`, `<code>${esc(v)}</code>`]))}` : ''}${c.spec ? `<h3>크기와 여백</h3><pre class="site-spec">${esc(c.spec)}</pre>` : ''}`);
   write({
     file: `components/${c.slug}.html`, section: 'components', title: c.name.split(' · ')[0], desc: c.desc,
     pager: [prev && { href: `${prev.slug}.html`, label: prev.name.split(' · ')[0] }, next && { href: `${next.slug}.html`, label: next.name.split(' · ')[0] }],
@@ -733,40 +772,42 @@ ${used.length ? `<h2 id="components">쓴 컴포넌트</h2><div class="site-links
   });
 });
 
-/* ---------------------------------------------------------------- AI (마크다운) */
+/* ---------------------------------------------------------------- AI & Tools (마크다운) */
+// 11-03 사용자 "AI 를 AI & Tools 로 바꿔서 개선": 레퍼런스 B AI & Tools 처럼 짧은 소개 다음 도구별 절. 주소는 get-started/ai.html 그대로
 write({
-  file: 'get-started/ai.html', section: 'get-started', title: 'AI', desc: 'AI 도구가 YBM DS 문서를 읽는 방법', pager: gsPager('get-started/ai.html'),
-  body: `<header><h1 class="site-h1">AI</h1><p class="site-lead">AI 도구가 YBM DS 문서를 바로 읽을 수 있도록 모든 문서를 마크다운으로도 제공합니다. 컴포넌트 하나만 가져갈 수도, 전체를 한 번에 줄 수도 있습니다.</p></header>
-<h2 id="files">파일</h2>
+  file: 'get-started/ai.html', section: 'get-started', title: 'AI & Tools', desc: 'AI 도구와 YBM DS를 함께 쓰는 방법', pager: gsPager('get-started/ai.html'),
+  body: `<header><h1 class="site-h1">AI &amp; Tools</h1><p class="site-lead">AI 도구와 YBM DS를 함께 쓰는 방법입니다.</p></header>
+<h2 id="intro">소개</h2>
+<p>모든 문서를 AI가 읽기 쉬운 마크다운으로도 냅니다. 컴포넌트 목록, HTML 구조, 토큰도 파일로 열려 있어 AI가 DS 규칙대로 화면을 만듭니다.</p>
+<h2 id="llms">llms.txt</h2>
 ${table(['파일', '내용'], [
-  [`<a class="ds-link" href="../llms.txt" target="_blank" rel="noopener">llms.txt</a>`, '전체 목차입니다. 분류별 문서 링크와 한 줄 설명이 있어, AI 가 필요한 문서를 골라 읽습니다.'],
-  [`<a class="ds-link" href="../llms-full.txt" target="_blank" rel="noopener">llms-full.txt</a>`, '모든 문서를 한 파일로 모았습니다. 주소를 읽지 못하는 도구에 첨부할 때 씁니다.'],
-  ['페이지별 <code>.md</code>', '각 문서 주소의 <code>.html</code> 을 <code>.md</code> 로 바꾸면 그 페이지만 마크다운으로 받습니다. 예) <code>components/action-button.md</code>'],
+  [`<a class="ds-link" href="../llms.txt" target="_blank" rel="noopener">llms.txt</a>`, '전체 목차입니다. AI가 필요한 문서를 골라 읽습니다.'],
+  [`<a class="ds-link" href="../llms-full.txt" target="_blank" rel="noopener">llms-full.txt</a>`, '모든 문서를 한 파일로 모았습니다. 주소를 열지 못하는 도구에 첨부합니다.'],
+  ['페이지별 <code>.md</code>', '문서 주소의 <code>.html</code>을 <code>.md</code>로 바꾸면 그 페이지만 받습니다.'],
 ])}
-<h2 id="how">사용방법</h2>
-<ol>
-<li>컴포넌트 하나만 필요하면 그 페이지 제목 아래 <b>Markdown</b> 메뉴에서 <b>내용 복사</b>를 누르고 AI 대화에 붙여 넣습니다.</li>
-<li>여러 컴포넌트로 화면을 만들 때는 <code>llms.txt</code> 주소를 알려 주면 AI 가 필요한 문서를 찾아 읽습니다.</li>
-<li>주소를 열지 못하는 도구에는 <code>llms-full.txt</code> 를 파일로 첨부합니다.</li>
-<li>새 화면은 <code>llms.txt</code> 의 Templates 목록에서 비슷한 화면의 HTML 을 출발점으로 삼게 하면 배치와 여백이 DS 기준에 맞습니다.</li>
-</ol>
-<h2 id="list">${SHOW_THEMES ? '템플릿과 테마 목록' : '템플릿 목록'}</h2>
-<p><code>llms.txt</code> 에는 문서 말고도 AI 가 바로 가져다 쓸 수 있는 ${SHOW_THEMES ? '두 가지 목록이' : '템플릿 목록이'} 있습니다.</p>
-${table(['목록', '내용'], [
-  ['Templates', '템플릿마다 HTML 원본 주소와 한 줄 설명입니다. 그대로 열면 되는 완성된 화면이라 고쳐 쓰기 좋습니다.'],
-  ...(SHOW_THEMES ? [['Themes', '테마 CSS 주소와 어울리는 서비스입니다. DS 다음에 붙이고 html 에 테마 이름을 적으면 됩니다.']] : []),
+<ul class="site-list">
+  <li>컴포넌트 하나만 필요하면 제목 아래 <b>Markdown</b> 메뉴에서 <b>내용 복사</b>를 누릅니다.</li>
+  <li>여러 컴포넌트로 화면을 만들 때는 <code>llms.txt</code> 주소를 알려 줍니다.</li>
+</ul>
+<h2 id="files">AI가 읽는 파일</h2>
+${table(['파일', '내용'], [
+  [`<a class="ds-link" href="${PUBLIC}/components.json" target="_blank" rel="noopener">components.json</a>`, '쓸 수 있는 컴포넌트와 속성 목록입니다.'],
+  [`<a class="ds-link" href="${RAW}/dist/components.css" target="_blank" rel="noopener">components.css</a>`, '컴포넌트마다 머리 주석에 HTML 구조가 있습니다.'],
+  [`<a class="ds-link" href="${RAW}/dist/tokens.css" target="_blank" rel="noopener">tokens.css</a>`, '색, 간격, 글자 크기 같은 <code>--ybm-*</code> 토큰입니다.'],
+  ['Templates', `<code>llms.txt</code> 끝에 템플릿마다 HTML 원본 주소가 있어 새 화면의 출발점으로 씁니다.`],
+  ...(SHOW_THEMES ? [['Themes', '테마 CSS 주소와 어울리는 서비스입니다.']] : []),
 ])}
 <h2 id="prompt">요청 예시</h2>
-${codeblock(`아래 YBM DS 문서를 읽고 로그인 화면을 HTML 로 만들어 줘.
-부품은 .ds-* 클래스만, 색과 간격은 --ybm-* 토큰만 써 줘.
-${SITE_URL}llms.txt`, 'text')}
+<h3>DS 적용하기</h3>
+${codeblock(prompts[0][2], 'text', ' data-wrap')}
 <h3>화면 만들기</h3>
-<p>${prompts[1][1]} 대괄호 안만 내 상황에 맞게 바꾸면 됩니다.</p>
+<p>대괄호 안만 내 상황에 맞게 바꿉니다.</p>
 ${codeblock(prompts[1][2], 'text', ' data-wrap')}
 <h3>규칙 점검하기</h3>
-<p>${prompts[2][1]}</p>
 ${codeblock(prompts[2][2], 'text', ' data-wrap')}
-<p>문서를 고치면 사이트를 다시 만들 때 마크다운도 함께 새로 만들어집니다.</p>`,
+<h2 id="figma">Figma</h2>
+<p>Figma 변수 이름이 CSS 변수 이름과 같습니다. Dev Mode에서 복사한 코드가 그대로 동작하고, AI에 Figma 화면을 주면 같은 토큰 이름으로 옮깁니다.</p>
+<div class="site-grid site-grid--hub">${hubCard(LINKS.figmaUrl('2608:2'), 'Figma 라이브러리', '컴포넌트와 토큰을 Figma에서 봅니다.', true)}</div>`,
 });
 
 /* ---------------------------------------------------------------- Themes */

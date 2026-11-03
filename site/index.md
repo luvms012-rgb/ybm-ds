@@ -79,7 +79,7 @@ Templates가져다 고쳐 쓰는 완성 화면.
 6. 새 ds- 클래스를 만들거나 !important를 쓰지 마.
 ```
 
-그다음 만들 화면을 말로 설명하세요. 다른 요청 예시는 [AI](https://luvms012-rgb.github.io/ybm-ds/site/get-started/ai.md)에 있습니다.
+그다음 만들 화면을 말로 설명하세요. 다른 요청 예시는 [AI & Tools](https://luvms012-rgb.github.io/ybm-ds/site/get-started/ai.md)에 있습니다.
 
 ## 다크 모드
 
@@ -165,7 +165,7 @@ module.exports = { presets: [require('./tailwind.preset.js')] };
 
 ## 도구
 
-AIAI 도구에 DS 문서를 주는 방법.
+AI & ToolsAI 도구에 DS 문서를 주는 방법.
 
 Figma컴포넌트와 토큰 라이브러리.
 

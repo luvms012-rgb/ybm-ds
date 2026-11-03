@@ -6,7 +6,7 @@
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <span class="ds-badge" data-variant="solid" data-tone="brand">NEW</span>
@@ -17,6 +17,14 @@
 </span>
 ```
 
+## 구조
+
+| 부품 | 설명 |
+| --- | --- |
+| **Prefix**`ds-badge__prefix` | 앞에 붙는 아이콘이나 요소입니다. |
+| **Label**`ds-badge__label` | 이름이나 값을 보여 주는 글자입니다. |
+| **Action**`ds-badge__action` | 바로 실행하는 작은 버튼입니다. |
+
 ## 속성
 
 Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
@@ -26,16 +34,6 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | `variant` | weak solid outline |
 | `tone` | neutral brand informative positive warning critical |
 | 켜고 끄는 속성 | `size` |
-
-## CSS 변수
-
-서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
-
-| 변수 | 기본값 |
-| --- | --- |
-| `--ds-badge-bg` | `var(--ybm-color-bg-neutral)` |
-| `--ds-badge-fg` | `var(--ybm-color-fg-neutral-muted)` |
-| `--ds-badge-line` | `transparent` |
 
 ## 사용 지침
 
@@ -53,7 +51,17 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-badge-bg` | `var(--ybm-color-bg-neutral)` |
+| `--ds-badge-fg` | `var(--ybm-color-fg-neutral-muted)` |
+| `--ds-badge-line` | `transparent` |
+
+### 크기와 여백
 
 ```
 size: medium(기본) / large   variant: weak(기본) / solid / outline

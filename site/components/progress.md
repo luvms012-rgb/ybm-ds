@@ -6,7 +6,7 @@
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <div class="ds-progress" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"
@@ -20,16 +20,6 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | 속성 | 값 |
 | --- | --- |
 | 켜고 끄는 속성 | `size` `tone` |
-
-## CSS 변수
-
-서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
-
-| 변수 | 기본값 |
-| --- | --- |
-| `--ds-progress-value` | `0%` |
-| `--ds-progress-track` | `var(--ybm-color-palette-brand-200)` |
-| `--ds-progress-range` | `var(--ybm-color-bg-brand-solid)` |
 
 ## 사용 지침
 
@@ -49,7 +39,17 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-progress-value` | `0%` |
+| `--ds-progress-track` | `var(--ybm-color-palette-brand-200)` |
+| `--ds-progress-range` | `var(--ybm-color-bg-brand-solid)` |
+
+### 크기와 여백
 
 ```
 tone: brand(기본) / neutral   size: medium(기본 8) / small 4

@@ -6,7 +6,7 @@
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <div class="ds-timepicker" role="group" aria-label="시간" [aria-disabled="true"]>
@@ -19,6 +19,13 @@
 </div>
 ```
 
+## 구조
+
+| 부품 | 설명 |
+| --- | --- |
+| **Column**`ds-timepicker__column` | 시, 분처럼 값을 고르는 열입니다. |
+| **Option**`ds-timepicker__option` | 고를 수 있는 선택지 하나입니다. |
+
 ## 속성
 
 Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
@@ -28,6 +35,12 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | `state` | enabled disabled |
 
 그 밖에: 12시간제, 분 간격 5
+
+## 동작
+
+`ybm-ds.js`를 불러오면 알아서 동작합니다.
+
+- 가운데 온 항목에 aria-selected, 멈추면 열에서 change(detail.value), 항목 누름과 화살표 키로 이동
 
 ## 사용 지침
 
@@ -53,7 +66,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### 크기와 여백
 
 ```
 ybm-ds.js 가 가운데 온 항목에 aria-selected 를 붙이고 열에서 change 이벤트(detail.value)를 보낸다.

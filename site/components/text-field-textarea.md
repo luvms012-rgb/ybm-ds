@@ -6,7 +6,7 @@
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <textarea class="ds-textarea" data-size="medium" rows="3" placeholder="…"></textarea>
@@ -20,7 +20,15 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | --- | --- |
 | 켜고 끄는 속성 | `variant` `size` |
 
-## CSS 변수
+## 예시
+
+```html
+<textarea class="ds-textarea" rows="3" placeholder="문의 내용을 입력해 주세요"></textarea>
+```
+
+## 규격
+
+### CSS 변수
 
 서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
 
@@ -34,15 +42,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | `--ds-textarea-line` | `var(--ybm-color-stroke-neutral-weak)` |
 | `--ds-textarea-line-width` | `1px` |
 
-## 예시
-
-```html
-<textarea class="ds-textarea" rows="3" placeholder="문의 내용을 입력해 주세요"></textarea>
-```
-
-## 규격
-
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### 크기와 여백
 
 ```
 variant : outline(기본) / underline      size : large(기본) / medium

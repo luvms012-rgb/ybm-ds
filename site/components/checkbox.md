@@ -6,7 +6,7 @@
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <label class="ds-checkbox" data-tone="neutral">
@@ -14,6 +14,13 @@
   <span class="ds-checkbox__label">라벨</span>
 </label>
 ```
+
+## 구조
+
+| 부품 | 설명 |
+| --- | --- |
+| **Control**`ds-checkbox__control` | 실제로 값을 입력하거나 고르는 부분입니다. |
+| **Label**`ds-checkbox__label` | 이름이나 값을 보여 주는 글자입니다. |
 
 ## 속성
 
@@ -24,18 +31,11 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | `variant` | square ghost |
 | 켜고 끄는 속성 | `tone` `size` |
 
-## CSS 변수
+## 동작
 
-서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+`ybm-ds.js`를 불러오면 알아서 동작합니다.
 
-| 변수 | 기본값 |
-| --- | --- |
-| `--ds-checkbox-size` | `20px` |
-| `--ds-checkbox-icon` | `12px` |
-| `--ds-checkbox-checked-bg` | `var(--ybm-color-bg-brand-solid)` |
-| `--ds-checkbox-checked-fg` | `var(--ybm-color-fg-on-brand-solid)` |
-| `--ds-checkbox-line` | `var(--ybm-color-stroke-neutral-weak)` |
-| `--ds-checkbox-mark` | `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.75' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E")` |
+- data-indeterminate 속성 → input.indeterminate
 
 ## 예시
 
@@ -49,7 +49,20 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-checkbox-size` | `20px` |
+| `--ds-checkbox-icon` | `12px` |
+| `--ds-checkbox-checked-bg` | `var(--ybm-color-bg-brand-solid)` |
+| `--ds-checkbox-checked-fg` | `var(--ybm-color-fg-on-brand-solid)` |
+| `--ds-checkbox-line` | `var(--ybm-color-stroke-neutral-weak)` |
+| `--ds-checkbox-mark` | `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.75' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E")` |
+
+### 크기와 여백
 
 ```
 size: medium(기본 20) / large(24)   variant: square(기본) / ghost   tone: brand(기본) / neutral

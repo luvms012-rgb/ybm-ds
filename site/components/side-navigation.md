@@ -6,7 +6,7 @@ PC 화면 왼쪽에 두는 메뉴로, 화면 사이를 오갈 때 씁니다.
 
 ## 사용법
 
-아래 구조를 그대로 복사해 쓰세요. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
+아래 구조를 복사해 씁니다. 대괄호 `[ ]` 안은 필요할 때만 넣습니다.
 
 ```html
 <nav class="ds-sidenav" aria-label="메뉴" [data-collapsed]>
@@ -24,6 +24,21 @@ PC 화면 왼쪽에 두는 메뉴로, 화면 사이를 오갈 때 씁니다.
   <div class="ds-sidenav__footer">…</div>
 </nav>
 ```
+
+## 구조
+
+| 부품 | 설명 |
+| --- | --- |
+| **Header**`ds-sidenav__header` | 제목과 닫기 버튼이 놓이는 머리 영역입니다. |
+| **Trigger**`ds-sidenav__trigger` | 누르면 열리거나 바뀌는 버튼입니다. |
+| **Content**`ds-sidenav__content` | 주된 내용이 들어가는 영역입니다. |
+| **Group**`ds-sidenav__group` | 관련 항목을 묶는 영역입니다. |
+| **Group Label**`ds-sidenav__group-label` | 묶음의 이름입니다. |
+| **Item**`ds-sidenav__item` | 목록의 항목 하나입니다. |
+| **Prefix**`ds-sidenav__prefix` | 앞에 붙는 아이콘이나 요소입니다. |
+| **Label**`ds-sidenav__label` | 이름이나 값을 보여 주는 글자입니다. |
+| **Suffix**`ds-sidenav__suffix` | 뒤에 붙는 아이콘이나 요소입니다. |
+| **Footer**`ds-sidenav__footer` | 버튼이나 보조 정보가 놓이는 아래 영역입니다. |
 
 ## 속성
 
@@ -56,7 +71,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 규격
 
-Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
+### 크기와 여백
 
 ```
 collapsed: data-collapsed (240 → 56)
