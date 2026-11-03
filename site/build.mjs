@@ -677,7 +677,7 @@ ${table(['토큰', '값'], palTokens.map((v) => { const l = resolve(LIGHT, `var(
 
 // Foundations 첫 쪽 (레퍼런스 B Foundations Overview): 항목마다 카드
 write({
-  file: 'foundations/index.html', section: 'foundations', title: 'Foundations', desc: '색, 글자, 간격처럼 화면의 바탕이 되는 토큰과 원칙', pager: fdPager('foundations/index.html'),
+  file: 'foundations/index.html', section: 'foundations', title: 'Foundations', desc: '색, 글자, 간격처럼 화면의 바탕이 되는 토큰과 원칙', pager: fdPager('foundations/index.html'), layout: 'wide',
   body: `<header><h1 class="site-h1">Foundations</h1><p class="site-lead">색, 글자, 간격처럼 모든 화면의 바탕이 되는 토큰과 원칙입니다.</p></header>
 <h2 id="list">항목</h2>
 <div class="site-grid site-grid--hub">
