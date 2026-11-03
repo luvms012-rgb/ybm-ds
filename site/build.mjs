@@ -415,6 +415,13 @@ ${table(['상태', '쓰는 속성'], [['꺼짐', '<code>disabled</code>'], ['선
 <h2 id="theme">화면 모드</h2>
 <p>모드는 라이트와 다크 두 가지입니다. <code>&lt;html data-theme="dark"&gt;</code>를 붙이면 시맨틱 색이 모두 어두운 화면용으로 바뀝니다. 색을 토큰으로만 썼다면 따로 고칠 것이 없습니다.</p>
 
+<h2 id="custom-theme">테마</h2>
+<p>테마는 브랜드 색, 바탕색, 모서리 곡률을 한 번에 바꿔 같은 DS 로 다른 분위기의 서비스를 만듭니다. DS 다음에 테마 파일을 붙이고 html 에 테마 이름을 적으면 되고, 컴포넌트는 고치지 않습니다. 고를 수 있는 테마는 <a class="ds-link" data-size="small" href="../themes/index.html">Themes</a> 에서 화면으로 비교해 볼 수 있습니다.</p>
+${codeblock(`<html lang="ko" data-ds-theme="trust">
+<link rel="stylesheet" href="${PUBLIC}/dist/ybm-ds.css">
+<link rel="stylesheet" href="${PUBLIC}/dist/themes/trust.css">`)}
+<p>토큰 값은 html 에서 정해지므로 테마도 html 에만 답니다. 다크 모드는 테마 파일 안에 함께 들어 있고, 포커스 링과 안내색은 접근성을 위해 테마와 상관없이 그대로입니다.</p>
+
 <h2 id="breakpoint">반응형 기준점</h2>
 <p>작은 화면부터 쌓아 올리는 방식입니다. <code>@media</code> 안에서는 CSS 변수를 쓸 수 없어서 숫자를 직접 씁니다.</p>
 ${table(['이름', '폭', '쓰임'], bpRows.map(([n, w, u]) => [`<code>${n}</code>`, w, u]))}
@@ -750,27 +757,26 @@ ${SITE_URL}llms.txt`, 'text')}
 });
 
 /* ---------------------------------------------------------------- Themes */
-// 템플릿이 와이어프레임이라면 테마는 실제 사이트 느낌. 왼쪽 테마 목록(비교용 기본 + 테마), 오른쪽 테마를 입힌 화면 미리보기
+// 레퍼런스 A Themes 배치 그대로: 왼쪽 260 고정 칸 안 흰 카드(제목 + 미리보기 다크 버튼, 설명, 쓰는 법 링크, 알약 버튼 둘, 테마 카드 211×120),
+// 오른쪽은 남은 폭 전체 카드 안에 테마를 입힌 화면을 높이 그대로 펼친다(페이지와 함께 스크롤). 쓰는 법은 Usage "테마" 절
 const themesJson = readJson('site/src/themes.json').themes;
-const THEME_CARDS = [{ slug: '', name: '기본', desc: 'YBM DS 기본 모양입니다. 테마 파일 없이 쓰는 모습과 비교해 보세요.', swatches: ['#f3f4f5', '#2563eb', '#1a1c20', '#ffffff'] }, ...themesJson];
-const themeCard = (t, on) => `<button type="button" class="site-theme" aria-pressed="${on}" data-site-theme="${t.slug}"><span class="site-theme__swatches" aria-hidden="true">${t.swatches.map((c) => `<i style="background:${c}"></i>`).join('')}</span><span class="site-theme__name">${esc(t.name)}${t.en ? ` <small>${esc(t.en)}</small>` : ''}</span><span class="site-theme__desc">${esc(t.desc)}</span></button>`;
+const THEME_CARDS = [{ slug: '', name: '기본', card: { bg: '#f3f4f5', fg: '#1a1c20', art: ['square', 'circle'] } }, ...themesJson];
+const artSvg = (n, size = 44) => `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${lucide.icons[n] || ''}</svg>`;
+const themeCard = (t, on) => `<button type="button" class="site-theme" aria-pressed="${on}" data-site-theme="${t.slug}" aria-label="${esc(t.name)} 테마 미리 보기" style="--site-theme-bg: ${t.card.bg}; --site-theme-fg: ${t.card.fg}">${artSvg(t.card.art[0])}<span class="site-theme__name">${esc(t.name)}</span>${artSvg(t.card.art[1])}</button>`;
 const firstTheme = themesJson[0];
 write({
   file: 'themes/index.html', section: 'themes', title: 'Themes', layout: 'full',
   body: `<div class="site-themes">
-<div class="site-themes__panel">
-  <h1 class="site-h1">Themes</h1>
-  <p class="site-lead">테마는 색, 모서리, 제목 글꼴을 한 번에 바꿔 같은 DS로 전혀 다른 분위기의 사이트를 만듭니다. 템플릿이 화면의 뼈대라면, 테마는 그 위에 입히는 서비스의 얼굴입니다.</p>
-  <div class="site-themes__acts">${btn(`${GITHUB}/blob/main/dist/themes/${firstTheme.slug}.css`, '테마 파일 보기', 'neutralSolid', 'small', 'file-code').replace('<a ', '<a target="_blank" rel="noopener" data-site-theme-file ')}${btn(`pages/${firstTheme.slug}.html`, '새 창으로 보기', 'neutralWeak', 'small', 'external-link').replace('<a ', '<a target="_blank" rel="noopener" data-site-theme-open ')}</div>
+<aside class="site-themes__aside" aria-label="테마 고르기"><div class="site-themes__panel">
+  <div class="site-themes__intro">
+    <div class="site-themes__title"><h1 class="site-h1">Themes</h1>${iconBtn('data-site-theme-mode aria-pressed="false"', '미리보기를 다크 모드로 보기', '<i class="ds-icon site-i--moon" aria-hidden="true"></i>')}</div>
+    <p class="site-themes__desc">YBM DS 에는 기본 테마가 들어 있습니다. 서비스에 맞게 바꾸려면 마음에 드는 테마 파일을 복사해 쓰세요.</p>
+    <a class="ds-link" data-size="small" href="../get-started/usage.html#custom-theme">테마를 쓰는 법</a>
+  </div>
+  <div class="site-themes__acts"><a class="ds-btn" data-variant="neutralSolid" data-size="small" data-width="fill" href="${GITHUB}/blob/main/dist/themes/${firstTheme.slug}.css" target="_blank" rel="noopener" data-site-theme-file>이 테마 쓰기</a><a class="ds-btn" data-variant="neutralWeak" data-size="small" data-width="fill" href="pages/${firstTheme.slug}.html" target="_blank" rel="noopener" data-site-theme-open>새 창으로 보기</a></div>
   <div class="site-themes__list" role="group" aria-label="테마">${THEME_CARDS.map((t, i) => themeCard(t, i === 1)).join('')}</div>
-  <h2 id="use">쓰는 법</h2>
-  <p>DS 다음에 테마 파일을 붙이고, html 에 테마 이름을 적습니다. 컴포넌트는 고치지 않습니다.</p>
-  ${codeblock(`<html lang="ko" data-ds-theme="${firstTheme.slug}">
-<link rel="stylesheet" href="${PUBLIC}/dist/ybm-ds.css">
-<link rel="stylesheet" href="${PUBLIC}/dist/themes/${firstTheme.slug}.css">`)}
-  <p>테마가 바꾸는 것은 브랜드 색, 바탕색, 모서리 곡률 세 가지입니다(테마에 따라 제목 글꼴도). 포커스 링과 안내색은 접근성을 위해 그대로 둡니다.</p>
-</div>
-<div class="site-themes__stage"><iframe src="pages/${firstTheme.slug}.html" title="${esc(firstTheme.name)} 테마를 입힌 화면" data-site-frame data-site-nomono data-site-theme-frame></iframe></div>
+</div></aside>
+<div class="site-themes__stage"><iframe src="pages/${firstTheme.slug}.html" title="${esc(firstTheme.name)} 테마를 입힌 화면" scrolling="no" data-site-frame data-site-nomono data-site-theme-frame></iframe></div>
 </div>`,
 });
 

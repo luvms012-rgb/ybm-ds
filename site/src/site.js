@@ -11,7 +11,7 @@
   function themeFrame(f) {
     try {
       var d = f.contentDocument; if (!d) return;
-      if (root.dataset.theme) d.documentElement.dataset.theme = root.dataset.theme; else delete d.documentElement.dataset.theme;
+      if (!f.hasAttribute("data-site-theme-frame")) { if (root.dataset.theme) d.documentElement.dataset.theme = root.dataset.theme; else delete d.documentElement.dataset.theme; }
       if (MONO_CSS && !f.hasAttribute("data-site-nomono") && d.head && !d.getElementById("site-brand-mono")) { var l = d.createElement("link"); l.id = "site-brand-mono"; l.rel = "stylesheet"; l.href = MONO_CSS; d.head.appendChild(l); }
     } catch (e) {}
   }
@@ -377,21 +377,31 @@
   })();
 
 
-  // 테마 보기: 왼쪽 테마 카드를 누르면 오른쪽 화면의 html data-ds-theme 만 바꾼다 (기본 = 테마 없음)
+  // 테마 보기 (레퍼런스 A Themes): 카드를 누르면 오른쪽 화면 html 의 data-ds-theme 만 바꾼다(기본 = 테마 없음).
+  // 달 버튼은 미리보기만 다크로. 화면은 높이 그대로 펼쳐 페이지와 함께 스크롤한다
   (function () {
     var frame = document.querySelector("[data-site-theme-frame]"); if (!frame) return;
-    var base = frame.getAttribute("src"), open = document.querySelector("[data-site-theme-open]"), file = document.querySelector("[data-site-theme-file]");
+    var base = frame.getAttribute("src"), open = document.querySelector("[data-site-theme-open]"), file = document.querySelector("[data-site-theme-file]"), mode = document.querySelector("[data-site-theme-mode]");
     var cards = [].slice.call(document.querySelectorAll("[data-site-theme]"));
-    function apply(slug) {
-      try { var h = frame.contentDocument.documentElement; if (slug) h.setAttribute("data-ds-theme", slug); else h.removeAttribute("data-ds-theme"); } catch (e) {}
-      if (open) open.href = slug ? "pages/" + slug + ".html" : base + "#default";
-      if (file) file.hidden = !slug;
-    }
     var cur = (cards.filter(function (c) { return c.getAttribute("aria-pressed") === "true"; })[0] || cards[0]).getAttribute("data-site-theme");
-    cards.forEach(function (c) { c.addEventListener("click", function () { cur = c.getAttribute("data-site-theme"); cards.forEach(function (x) { x.setAttribute("aria-pressed", String(x === c)); }); apply(cur); }); });
-    frame.addEventListener("load", function () { apply(cur); });
+    var dark = false;
+    function fit() { try { frame.style.height = frame.contentDocument.documentElement.scrollHeight + "px"; } catch (e) {} }
+    function apply() {
+      try {
+        var h = frame.contentDocument.documentElement;
+        if (cur) h.setAttribute("data-ds-theme", cur); else h.removeAttribute("data-ds-theme");
+        if (dark) h.setAttribute("data-theme", "dark"); else h.removeAttribute("data-theme");
+      } catch (e) {}
+      if (open) open.href = cur ? "pages/" + cur + ".html" : base + "#default";
+      if (file) file.hidden = !cur;
+      if (mode) mode.setAttribute("aria-pressed", String(dark));
+      fit();
+    }
+    cards.forEach(function (c) { c.addEventListener("click", function () { cur = c.getAttribute("data-site-theme"); cards.forEach(function (x) { x.setAttribute("aria-pressed", String(x === c)); }); apply(); }); });
+    if (mode) mode.addEventListener("click", function () { dark = !dark; apply(); });
+    frame.addEventListener("load", function () { apply(); [300, 1000, 2500].forEach(function (t) { setTimeout(fit, t); }); try { frame.contentWindow.addEventListener("resize", fit); } catch (e) {} });
+    window.addEventListener("resize", fit);
   })();
-
 
   // Markdown 메뉴: 링크 복사, 내용 복사 (AI 도구에 붙여 넣기용). 바깥을 누르거나 Esc 로 닫는다
   (function () {

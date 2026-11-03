@@ -20,7 +20,7 @@ const art = (name, tone = 'brand', size = 36) => {
 export const THEMES = [
   { slug: 'trust', name: '든든', en: 'Trust',
     desc: '흰 바탕에 선명한 파랑 하나와 옅은 하늘색 면을 쓴 테마입니다. 보험, 금융, 공공 서비스처럼 믿음을 주는 화면에 어울립니다.',
-    swatches: ['#ffffff', '#1658ff', '#edf4ff', '#272727'] },
+    swatches: ['#ffffff', '#1658ff', '#edf4ff', '#272727'], card: { bg: '#edf4ff', fg: '#1658ff', art: ['shield-check', 'heart-pulse'] } },
 ];
 
 const CSS = `
@@ -195,5 +195,5 @@ ${body(t)}
 `;
   fs.writeFileSync(path.join(OUT, t.slug + '.html'), html);
 }
-fs.writeFileSync(path.join(HERE, '..', 'src', 'themes.json'), JSON.stringify({ themes: THEMES.map(({ slug, name, en, desc, swatches }) => ({ slug, name, en, desc, swatches })) }, null, 2) + '\n');
+fs.writeFileSync(path.join(HERE, '..', 'src', 'themes.json'), JSON.stringify({ themes: THEMES.map(({ slug, name, en, desc, swatches, card }) => ({ slug, name, en, desc, swatches, card })) }, null, 2) + '\n');
 console.log(`테마 화면 ${THEMES.length}개 생성`);

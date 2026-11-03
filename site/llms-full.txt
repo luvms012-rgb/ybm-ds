@@ -242,6 +242,18 @@ CSS는 Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다. 상태�
 
 모드는 라이트와 다크 두 가지입니다. `<html data-theme="dark">`를 붙이면 시맨틱 색이 모두 어두운 화면용으로 바뀝니다. 색을 토큰으로만 썼다면 따로 고칠 것이 없습니다.
 
+## 테마
+
+테마는 브랜드 색, 바탕색, 모서리 곡률을 한 번에 바꿔 같은 DS 로 다른 분위기의 서비스를 만듭니다. DS 다음에 테마 파일을 붙이고 html 에 테마 이름을 적으면 되고, 컴포넌트는 고치지 않습니다. 고를 수 있는 테마는 [Themes](https://luvms012-rgb.github.io/ybm-ds/site/themes/index.md) 에서 화면으로 비교해 볼 수 있습니다.
+
+```html
+<html lang="ko" data-ds-theme="trust">
+<link rel="stylesheet" href="https://luvms012-rgb.github.io/ybm-ds/dist/ybm-ds.css">
+<link rel="stylesheet" href="https://luvms012-rgb.github.io/ybm-ds/dist/themes/trust.css">
+```
+
+토큰 값은 html 에서 정해지므로 테마도 html 에만 답니다. 다크 모드는 테마 파일 안에 함께 들어 있고, 포커스 링과 안내색은 접근성을 위해 테마와 상관없이 그대로입니다.
+
 ## 반응형 기준점
 
 작은 화면부터 쌓아 올리는 방식입니다. `@media` 안에서는 CSS 변수를 쓸 수 없어서 숫자를 직접 씁니다.
@@ -2730,6 +2742,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | 변수 | 기본값 |
 | --- | --- |
 | `--ds-skeleton-color` | `var(--ybm-color-palette-gray-200)` |
+| `--ds-skeleton-radius` | `var(--ybm-shape-sm)` |
 | `--ds-skeleton-size` | `48px` |
 
 ## 사용 지침
@@ -2754,6 +2767,8 @@ Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
 ```
 shape: rectangle(기본) / circle / text
 Figma: palette/gray-200 / rectangle shape/sm / circle pill / text 줄 높이 14 / 줄 사이 x2 / 마지막 줄 64%
+모서리(2026-11-03): --ds-skeleton-radius 로 나중에 들어올 콘텐츠와 같게 맞춘다
+움직임 줄이기(2026-11-03): 설정을 켠 사람에게는 깜빡이지 않는다
 ```
 
 

@@ -10,7 +10,15 @@
         "#1658ff",
         "#edf4ff",
         "#272727"
-      ]
+      ],
+      "card": {
+        "bg": "#edf4ff",
+        "fg": "#1658ff",
+        "art": [
+          "shield-check",
+          "heart-pulse"
+        ]
+      }
     }
   ]
 }

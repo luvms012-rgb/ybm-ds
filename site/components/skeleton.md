@@ -29,6 +29,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | 변수 | 기본값 |
 | --- | --- |
 | `--ds-skeleton-color` | `var(--ybm-color-palette-gray-200)` |
+| `--ds-skeleton-radius` | `var(--ybm-shape-sm)` |
 | `--ds-skeleton-size` | `48px` |
 
 ## 사용 지침
@@ -53,4 +54,6 @@ Figma와 CSS가 함께 따르는 크기, 여백, 색입니다.
 ```
 shape: rectangle(기본) / circle / text
 Figma: palette/gray-200 / rectangle shape/sm / circle pill / text 줄 높이 14 / 줄 사이 x2 / 마지막 줄 64%
+모서리(2026-11-03): --ds-skeleton-radius 로 나중에 들어올 콘텐츠와 같게 맞춘다
+움직임 줄이기(2026-11-03): 설정을 켠 사람에게는 깜빡이지 않는다
 ```
