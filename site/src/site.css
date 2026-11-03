@@ -412,3 +412,6 @@ body[data-side-open] .site-scrim { opacity: 1; pointer-events: auto; }
 .site-md__menu[hidden] { display: none; }
 .site-md [aria-expanded="true"] .ds-icon--chevron-down { transform: rotate(180deg); }
 .site-doc .site-md__menu a.ds-menu-item { color: var(--ybm-color-fg-neutral); text-decoration: none; }
+
+/* 문서 글과 표 안 텍스트 링크는 진한 색(11-03 사용자 "진한 게 맥락상 맞아"). 미리보기 안 부품은 DS 그대로 */
+.site-doc .ds-link:not(.pv-stage *, .site-example__preview *, .site-tile__inner *) { --ds-link-color: var(--ybm-color-fg-neutral); --ds-link-color-hover: var(--ybm-color-fg-neutral-muted); }
