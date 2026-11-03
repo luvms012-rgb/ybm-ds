@@ -262,6 +262,8 @@ body[data-side-open] .site-scrim { opacity: 1; pointer-events: auto; }
 @media (min-width: 560px) { .site-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .site-grid > :last-child:nth-child(odd) { grid-column: 1 / -1; } }
 /* 안내 카드 (레퍼런스 B Get Started): 옅은 회색 칸, 테두리 없음, 제목 16 Medium 과 오른쪽 화살표, 아래 설명 14 */
 .site-grid--hub { gap: var(--ds-space-x3); }
+/* 안내 카드는 가로 한 줄 (11-04 사용자 "가로로 배열"): 카드 수만큼 칸을 나누고, 좁으면 아래로 */
+@media (min-width: 560px) { .site-grid.site-grid--hub { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); } .site-grid--hub > :last-child:nth-child(odd) { grid-column: auto; } }
 .site-hub { display: flex; flex-direction: column; gap: var(--ds-space-x1); padding: 14px var(--ds-space-x5); border-radius: var(--ds-shape-lg); background: var(--ds-color-bg-neutral-weak-alpha); color: var(--ds-color-fg-neutral); text-decoration: none; transition: background-color var(--ds-duration-fast) var(--ds-easing-standard); }
 .site-hub:hover { background: var(--ds-color-bg-neutral-weak-alpha-pressed); }
 .site-hub__title { display: flex; align-items: center; justify-content: space-between; gap: var(--ds-space-x2); font-size: var(--ds-font-size-t05); line-height: 22px; font-weight: var(--ds-font-weight-medium); }
