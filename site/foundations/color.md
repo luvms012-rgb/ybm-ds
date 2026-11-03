@@ -6,119 +6,33 @@
 
 ## 개요
 
-색은 생김새가 아니라 하는 일로 이름을 붙입니다. 화면에는 시맨틱 색(`bg`, `fg`, `stroke`)만 쓰고, 팔레트(`--ybm-color-palette-*`)는 시맨틱 색을 만드는 원료로 둡니다. 토큰으로만 쓰면 `data-theme="dark"` 하나로 다크 모드가 맞춰집니다.
+YBM DS 의 색은 역할 색과 팔레트 색 두 층으로 되어 있습니다. 화면에는 역할 색만 쓰고, 팔레트 색은 역할 색을 만드는 원료로 둡니다. 그래서 어떤 화면에서도 글자와 바탕의 대비가 충분하고 뜻이 분명합니다.
 
-## 역할
+## 역할 색
 
-| 역할 | 쓰는 곳 |
-| --- | --- |
-| `brand` | 주 버튼, 선택된 상태, 링크 |
-| `neutral` | 바탕, 본문, 보조 버튼 |
-| `positive` | 성공, 완료 |
-| `warning` | 주의, 마감 임박 |
-| `critical` | 오류, 삭제 |
-| `informative` | 안내, 도움말 |
-| `magic` | AI 기능, 새 기능 |
+역할 색은 생김새가 아니라 하는 일로 이름을 붙인 색입니다. 오류는 `critical`, 성공은 `positive` 처럼 이름만 보고 어디에 쓰는지 알 수 있습니다. 자세한 규칙과 전체 목록은 [Roles](https://luvms012-rgb.github.io/ybm-ds/site/foundations/color-roles.md)에 있습니다.
 
-## 배경
+### 장점 1. 접근성
 
-| 토큰 | 값 |
-| --- | --- |
-| `--ybm-color-bg-brand-solid` | `#2563eb / #3b82f6` |
-| `--ybm-color-bg-brand-solid-pressed` | `#1d4ed8 / #60a5fa` |
-| `--ybm-color-bg-brand-weak` | `#dbeafe / #172554` |
-| `--ybm-color-bg-brand-weak-pressed` | `#bfdbfe / #1e3a8a` |
-| `--ybm-color-bg-canvas` | `#f7f8f9 / #000000` |
-| `--ybm-color-bg-critical-solid` | `#fa342c / #f73526` |
-| `--ybm-color-bg-critical-solid-pressed` | `#ca1d13 / #ff6e60` |
-| `--ybm-color-bg-critical-weak` | `#fdf0f0 / #322323` |
-| `--ybm-color-bg-critical-weak-pressed` | `#fde7e7 / #4f2624` |
-| `--ybm-color-bg-disabled` | `#f3f4f5 / #2b2e35` |
-| `--ybm-color-bg-informative-solid` | `#217cf9 / #1e82eb` |
-| `--ybm-color-bg-informative-solid-pressed` | `#135fcd / #41a2f9` |
-| `--ybm-color-bg-informative-weak` | `#eff6ff / #202742` |
-| `--ybm-color-bg-informative-weak-pressed` | `#e2edfc / #1e3352` |
-| `--ybm-color-bg-layer-default` | `#ffffff / #16171b` |
-| `--ybm-color-bg-layer-floating` | `#ffffff / #1d2025` |
-| `--ybm-color-bg-magic-solid` | `#8969ea / #7659bd` |
-| `--ybm-color-bg-magic-solid-pressed` | `#6d50cb / #9179e0` |
-| `--ybm-color-bg-magic-weak` | `#f5f3fe / #201a2e` |
-| `--ybm-color-bg-magic-weak-pressed` | `#efeafe / #2b2140` |
-| `--ybm-color-bg-neutral` | `#f3f4f5 / #2b2e35` |
-| `--ybm-color-bg-neutral-inverted` | `#2a3038 / #f3f4f5` |
-| `--ybm-color-bg-neutral-inverted-pressed` | `#555d6d / #dcdee3` |
-| `--ybm-color-bg-neutral-muted` | `#f7f8f9 / #1d2025` |
-| `--ybm-color-bg-neutral-solid` | `#2a3038 / #f3f4f5` |
-| `--ybm-color-bg-neutral-solid-pressed` | `#555d6d / #dcdee3` |
-| `--ybm-color-bg-neutral-subtle` | `#ffffff / #16171b` |
-| `--ybm-color-bg-neutral-weak-alpha` | `#0000000c / #ffffff20` |
-| `--ybm-color-bg-neutral-weak-alpha-pressed` | `#00000010 / #ffffff2e` |
-| `--ybm-color-bg-neutral-weak-pressed` | `#eeeff1 / #393d46` |
-| `--ybm-color-bg-overlay` | `#00000074 / #00000074` |
-| `--ybm-color-bg-positive-solid` | `#079171 / #117956` |
-| `--ybm-color-bg-positive-solid-pressed` | `#00745f / #1b946d` |
-| `--ybm-color-bg-positive-weak` | `#edfaf6 / #202926` |
-| `--ybm-color-bg-positive-weak-pressed` | `#d9f6e9 / #20362e` |
-| `--ybm-color-bg-transparent` | `transparent / transparent` |
-| `--ybm-color-bg-transparent-pressed` | `#0000000c / #ffffff20` |
-| `--ybm-color-bg-warning-solid` | `#e14d00 / #e65200` |
-| `--ybm-color-bg-warning-solid-pressed` | `#b93901 / #ff6600` |
-| `--ybm-color-bg-warning-weak` | `#fff2ec / #31241f` |
-| `--ybm-color-bg-warning-weak-pressed` | `#ffe8db / #4b291c` |
+역할 색은 처음부터 정해 둔 글자와 바탕 짝으로 대비를 맞췄습니다. 짝을 지켜 쓰기만 하면 읽기 어려운 조합이 생기지 않습니다.
 
-## 글자와 아이콘
+### 장점 2. 빈틈없는 바꾸기
 
-| 토큰 | 값 |
-| --- | --- |
-| `--ybm-color-fg-brand` | `#2563eb / #3b82f6` |
-| `--ybm-color-fg-brand-contrast` | `#1d4ed8 / #60a5fa` |
-| `--ybm-color-fg-critical` | `#fa342c / #ff6e60` |
-| `--ybm-color-fg-critical-contrast` | `#921708 / #f8c5c3` |
-| `--ybm-color-fg-disabled` | `#d1d3d8 / #5b606a` |
-| `--ybm-color-fg-informative` | `#217cf9 / #41a2f9` |
-| `--ybm-color-fg-informative-contrast` | `#0b4596 / #b9d7fb` |
-| `--ybm-color-fg-magic` | `#8969ea / #9179e0` |
-| `--ybm-color-fg-magic-contrast` | `#50379b / #d3c7fb` |
-| `--ybm-color-fg-neutral` | `#1a1c20 / #f3f4f5` |
-| `--ybm-color-fg-neutral-inverted` | `#ffffff / #16171b` |
-| `--ybm-color-fg-neutral-muted` | `#555d6d / #dcdee3` |
-| `--ybm-color-fg-neutral-subtle` | `#868b94 / #b0b3ba` |
-| `--ybm-color-fg-on-brand-solid` | `#ffffff / #ffffff` |
-| `--ybm-color-fg-on-critical-solid` | `#ffffff / #ffffff` |
-| `--ybm-color-fg-on-informative-solid` | `#ffffff / #ffffff` |
-| `--ybm-color-fg-on-magic-solid` | `#ffffff / #ffffff` |
-| `--ybm-color-fg-on-neutral-solid` | `#ffffff / #16171b` |
-| `--ybm-color-fg-on-positive-solid` | `#ffffff / #ffffff` |
-| `--ybm-color-fg-on-warning-solid` | `#ffffff / #ffffff` |
-| `--ybm-color-fg-placeholder` | `#b0b3ba / #868b94` |
-| `--ybm-color-fg-positive` | `#079171 / #22b27f` |
-| `--ybm-color-fg-positive-contrast` | `#075445 / #93e5c0` |
-| `--ybm-color-fg-warning` | `#e14d00 / #ff6600` |
-| `--ybm-color-fg-warning-contrast` | `#862b00 / #eecebc` |
+색을 바꿀 때 값이 아니라 뜻을 기준으로 바꿉니다. 값이 같아도 뜻이 다르면 따로 바꿀 수 있어서, 한 곳을 고쳐도 다른 곳이 함께 흔들리지 않습니다.
 
-## 테두리
+### 장점 3. 다크 모드
 
-| 토큰 | 값 |
-| --- | --- |
-| `--ybm-color-stroke-brand-solid` | `#1d4ed8 / #60a5fa` |
-| `--ybm-color-stroke-brand-weak` | `#93c5fd / #1e40af` |
-| `--ybm-color-stroke-critical-solid` | `#fa342c / #ff6e60` |
-| `--ybm-color-stroke-critical-weak` | `#fed4d2 / #742826` |
-| `--ybm-color-stroke-focus-ring` | `#5e98fe / #1e82eb` |
-| `--ybm-color-stroke-informative-solid` | `#217cf9 / #41a2f9` |
-| `--ybm-color-stroke-informative-weak` | `#cbdffa / #1a4275` |
-| `--ybm-color-stroke-magic-solid` | `#8969ea / #9179e0` |
-| `--ybm-color-stroke-magic-weak` | `#e1d8ff / #392a57` |
-| `--ybm-color-stroke-neutral` | `#d1d3d8 / #5b606a` |
-| `--ybm-color-stroke-neutral-contrast` | `#1a1c20 / #f3f4f5` |
-| `--ybm-color-stroke-neutral-muted` | `#00000010 / #ffffff17` |
-| `--ybm-color-stroke-neutral-solid` | `#555d6d / #dcdee3` |
-| `--ybm-color-stroke-neutral-subtle` | `#0000000c / #ffffff0d` |
-| `--ybm-color-stroke-neutral-weak` | `#dcdee3 / #393d46` |
-| `--ybm-color-stroke-positive-solid` | `#079171 / #22b27f` |
-| `--ybm-color-stroke-positive-weak` | `#b9e9d2 / #20493b` |
-| `--ybm-color-stroke-warning-solid` | `#e14d00 / #ff6600` |
-| `--ybm-color-stroke-warning-weak` | `#ffd5c0 / #6b311c` |
+역할 색은 라이트와 다크 모드에 알맞은 값을 따로 갖고 있습니다. 토큰으로만 썼다면 `data-theme="dark"` 하나로 모든 화면이 맞춰집니다.
+
+## 팔레트 색
+
+팔레트 색은 회색과 일곱 가지 색을 100 ~ 1000 단계로 나눈 원료 색입니다. 역할 색으로 나타내기 어려운 드문 경우에만 화면에 씁니다. 다크 모드에서는 같은 단계 번호에 어두운 화면용 값이 들어가 있어 그대로 써도 알아보기 쉽습니다. 전체 목록은 [Palette](https://luvms012-rgb.github.io/ybm-ds/site/foundations/color-palette.md)에 있습니다.
+
+## 관련 문서
+
+역할 색역할 색의 규칙과 전체 토큰.
+
+팔레트 색팔레트 색의 단계와 전체 토큰.
 
 ## 코드에서 쓰기
 

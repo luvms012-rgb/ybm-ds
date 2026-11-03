@@ -6,7 +6,7 @@
 
 ## 개요
 
-아이콘은 Lucide 한 가지만 씁니다. 지금 바로 쓸 수 있는 아이콘은 155개입니다. 더 필요하면 아래 아이콘 더보기에서 찾아 넣습니다.
+아이콘은 Lucide 한 가지만 씁니다. 선이 고르고 모양이 단순해 처음 보는 사람도 뜻을 바로 압니다. 지금 바로 쓸 수 있는 아이콘은 155개이고, 필요하면 Lucide 1,999개 가운데서 더 넣습니다. 모든 아이콘은 [Library](https://luvms012-rgb.github.io/ybm-ds/site/foundations/icons-library.md)에서 찾아 바로 복사합니다.
 
 ```html
 <!-- 글자 옆: 꾸밈용이라 aria-hidden -->
@@ -20,13 +20,36 @@
 </button>
 ```
 
-- 색은 따로 정하지 않습니다. 둘러싼 글자색을 그대로 따라갑니다.
-- 크기는 기본 20 이고, `ds-icon--sm` 16, `ds-icon--lg` 24 두 가지가 더 있습니다.
-- 아이콘만 있는 버튼에는 `aria-label`로 뜻을 적습니다. 글자 옆의 꾸밈용 아이콘에는 `aria-hidden="true"`를 붙입니다.
+## 종류
 
-## 아이콘 목록
+| 종류 | 모양 | 쓰는 곳 |
+| --- | --- | --- |
+| 선 | `ds-icon--house` | 대부분의 자리. 기본 모양입니다. |
+| 채움 | `ds-icon--house-solid` | 선택된 탭, 상태 표시처럼 더 강하게 보여야 할 때. 이름 끝에 `-solid`가 붙습니다. |
 
-이름을 누르면 클래스가 복사됩니다. 이름 끝에 `-solid`가 붙은 것은 채움 모양입니다.
+## 이름 규칙
+
+- 이름은 쓰임이 아니라 생김새로 붙입니다. 닫기 버튼이어도 이름은 `x` 입니다.
+- 이름은 Lucide 이름을 그대로 씁니다. 클래스는 `ds-icon--` 뒤에 이름을 붙입니다.
+- Library 에서는 영어 이름, 영어 태그, 한국어 쓰임으로 찾을 수 있습니다.
+
+## 크기와 색
+
+크기는 기본 20 이고, `ds-icon--sm` 16, `ds-icon--lg` 24 두 가지가 더 있습니다. 그 밖의 크기가 꼭 필요하면 `--ds-icon-size` 변수로 바꿉니다. 색은 부모의 글자색을 바꾸면 따라옵니다.
+
+```html
+<i class="ds-icon ds-icon--search ds-icon--sm" aria-hidden="true"></i>  <!-- 16 -->
+<i class="ds-icon ds-icon--search" aria-hidden="true"></i>              <!-- 20 기본 -->
+<i class="ds-icon ds-icon--search ds-icon--lg" aria-hidden="true"></i>  <!-- 24 -->
+
+<!-- 색은 부모 글자색 -->
+<span style="color: var(--ybm-color-fg-brand)"><i class="ds-icon ds-icon--circle-check-solid" aria-hidden="true"></i></span>
+<span style="color: var(--ybm-color-fg-critical)"><i class="ds-icon ds-icon--triangle-alert-solid" aria-hidden="true"></i></span>
+```
+
+## 쓰임
+
+자주 쓰는 아이콘의 쓰임입니다. 같은 뜻에는 늘 같은 아이콘을 씁니다.
 
 ### 이동
 
@@ -223,23 +246,13 @@
 |  | 도움이 됐어요 |
 |  | 도움이 안 됐어요 |
 
-## 크기와 색
+## 새 아이콘 넣기
 
-크기는 셋 중 하나를 고릅니다. 그 밖의 크기가 꼭 필요하면 `--ds-icon-size` 변수로 바꿉니다. 색은 부모의 글자색을 바꾸면 따라옵니다.
+지금 있는 아이콘 안에서 쓰는 것을 먼저 권합니다. 그래도 새 아이콘이 필요하면 아래 순서를 따릅니다.
 
-```html
-<i class="ds-icon ds-icon--search ds-icon--sm" aria-hidden="true"></i>  <!-- 16 -->
-<i class="ds-icon ds-icon--search" aria-hidden="true"></i>              <!-- 20 기본 -->
-<i class="ds-icon ds-icon--search ds-icon--lg" aria-hidden="true"></i>  <!-- 24 -->
-
-<!-- 색은 부모 글자색 -->
-<span style="color: var(--ybm-color-fg-brand)"><i class="ds-icon ds-icon--circle-check-solid" aria-hidden="true"></i></span>
-<span style="color: var(--ybm-color-fg-critical)"><i class="ds-icon ds-icon--triangle-alert-solid" aria-hidden="true"></i></span>
-```
-
-## 아이콘 더보기
-
-여기 없는 아이콘은 Lucide 1,999개에서 찾습니다. 아이콘을 누르면 `icons.css`에 붙여 넣을 줄이 복사되고, 붙여 넣으면 바로 쓸 수 있습니다. 이미 들어 있는 것은 CSS 표시가 붙어 있고 누르면 클래스가 복사됩니다.
+1. [Library](https://luvms012-rgb.github.io/ybm-ds/site/foundations/icons-library.md)의 Lucide 전체에서 알맞은 아이콘을 고릅니다.
+2. 오른쪽 칸의 **icons.css 줄**을 복사해 `dist/icons.css` 끝에 붙입니다.
+3. 그다음부터 `ds-icon--이름` 클래스로 씁니다.
 
 ```html
 /* Lucide heart - 복사된 줄을 dist/icons.css 끝에 붙인다 */

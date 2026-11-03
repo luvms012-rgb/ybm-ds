@@ -22,6 +22,8 @@ Templates가져다 고쳐 쓰는 완성 화면.
 
 ## 바로 써 보기
 
+AI 코딩 도구로 만들 때는 [AI & Tools](https://luvms012-rgb.github.io/ybm-ds/site/get-started/ai.md#prompt)의 요청 글을 붙여 넣으면 아래 설치와 규칙을 알아서 맞춥니다.
+
 ### 1. DS 불러오기
 
 `<head>`에 두 줄을 넣으면 글꼴, 토큰, 아이콘, 컴포넌트가 함께 들어옵니다. `ybm-ds.js`는 창 열기, 알림처럼 CSS만으로 안 되는 동작을 알아서 맡습니다.
@@ -62,24 +64,6 @@ Templates가져다 고쳐 쓰는 완성 화면.
 .my-dialog { --ds-dialog-width: 360px; }
 .my-banner { --ds-banner-bg: var(--ybm-color-bg-brand-weak); }
 ```
-
-## AI로 만들기
-
-아래 내용을 AI 코딩 도구에 붙여 넣으면 설치와 규칙을 알아서 맞춥니다.
-
-```text
-이 프로젝트에 YBM DS를 적용해 줘.
-1. <head>에 아래 두 줄을 넣어 줘.
-   <link rel="stylesheet" href="https://luvms012-rgb.github.io/ybm-ds/dist/ybm-ds.css">
-   <script src="https://luvms012-rgb.github.io/ybm-ds/dist/ybm-ds.js" defer></script>
-2. 문서는 https://luvms012-rgb.github.io/ybm-ds/site/llms.txt 목차에서 필요한 페이지(.md)를 골라 읽어.
-3. 쓸 수 있는 컴포넌트 목록은 https://luvms012-rgb.github.io/ybm-ds/components.json, 각 컴포넌트의 HTML 구조는 https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/components.css의 컴포넌트별 머리 주석을 따라.
-4. 색, 간격, 글자 크기, 모서리, 그림자는 https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/tokens.css의 --ybm-* 토큰만 써.
-5. 서비스 CSS는 DS 다음에 불러오고, 바꾸고 싶은 모양은 컴포넌트의 --ds-* 변수만 덮어써.
-6. 새 ds- 클래스를 만들거나 !important를 쓰지 마.
-```
-
-그다음 만들 화면을 말로 설명하세요. 다른 요청 예시는 [AI & Tools](https://luvms012-rgb.github.io/ybm-ds/site/get-started/ai.md)에 있습니다.
 
 ## 다크 모드
 
@@ -162,11 +146,3 @@ git clone https://github.com/luvms012-rgb/ybm-ds.git
 // tailwind.config.js - ybm-ds/tokens/tailwind.preset.js를 프로젝트에 복사한 뒤
 module.exports = { presets: [require('./tailwind.preset.js')] };
 ```
-
-## 도구
-
-AI & ToolsAI 도구에 DS 문서를 주는 방법.
-
-Figma컴포넌트와 토큰 라이브러리.
-
-GitHub원본 파일과 변경 기록.

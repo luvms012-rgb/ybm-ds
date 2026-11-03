@@ -8,26 +8,6 @@ AI 도구와 YBM DS를 함께 쓰는 방법입니다.
 
 모든 문서를 AI가 읽기 쉬운 마크다운으로도 냅니다. 컴포넌트 목록, HTML 구조, 토큰도 파일로 열려 있어 AI가 DS 규칙대로 화면을 만듭니다.
 
-## llms.txt
-
-| 파일 | 내용 |
-| --- | --- |
-| [llms.txt](https://luvms012-rgb.github.io/ybm-ds/site/llms.txt) | 전체 목차입니다. AI가 필요한 문서를 골라 읽습니다. |
-| [llms-full.txt](https://luvms012-rgb.github.io/ybm-ds/site/llms-full.txt) | 모든 문서를 한 파일로 모았습니다. 주소를 열지 못하는 도구에 첨부합니다. |
-| 페이지별 `.md` | 문서 주소의 `.html`을 `.md`로 바꾸면 그 페이지만 받습니다. |
-
-- 컴포넌트 하나만 필요하면 제목 아래 **Markdown** 메뉴에서 **내용 복사**를 누릅니다.
-- 여러 컴포넌트로 화면을 만들 때는 `llms.txt` 주소를 알려 줍니다.
-
-## AI가 읽는 파일
-
-| 파일 | 내용 |
-| --- | --- |
-| [components.json](https://luvms012-rgb.github.io/ybm-ds/components.json) | 쓸 수 있는 컴포넌트와 속성 목록입니다. |
-| [components.css](https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/components.css) | 컴포넌트마다 머리 주석에 HTML 구조가 있습니다. |
-| [tokens.css](https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/tokens.css) | 색, 간격, 글자 크기 같은 `--ybm-*` 토큰입니다. |
-| Templates | `llms.txt` 끝에 템플릿마다 HTML 원본 주소가 있어 새 화면의 출발점으로 씁니다. |
-
 ## 요청 예시
 
 ### DS 적용하기
@@ -68,6 +48,26 @@ YBM DS로 [만들 화면, 예: 회원 목록 관리 화면]을 만들어 줘.
 - DS 부품으로 바꿀 수 있는데 직접 만든 버튼, 입력, 표
 고친 곳은 목록으로 알려 줘.
 ```
+
+## llms.txt
+
+| 파일 | 내용 |
+| --- | --- |
+| [llms.txt](https://luvms012-rgb.github.io/ybm-ds/site/llms.txt) | 전체 목차입니다. AI가 필요한 문서를 골라 읽습니다. |
+| [llms-full.txt](https://luvms012-rgb.github.io/ybm-ds/site/llms-full.txt) | 모든 문서를 한 파일로 모았습니다. 주소를 열지 못하는 도구에 첨부합니다. |
+| 페이지별 `.md` | 문서 주소의 `.html`을 `.md`로 바꾸면 그 페이지만 받습니다. |
+
+- 컴포넌트 하나만 필요하면 제목 아래 **Markdown** 메뉴에서 **내용 복사**를 누릅니다.
+- 여러 컴포넌트로 화면을 만들 때는 `llms.txt` 주소를 알려 줍니다.
+
+## AI가 읽는 파일
+
+| 파일 | 내용 |
+| --- | --- |
+| [components.json](https://luvms012-rgb.github.io/ybm-ds/components.json) | 쓸 수 있는 컴포넌트와 속성 목록입니다. |
+| [components.css](https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/components.css) | 컴포넌트마다 머리 주석에 HTML 구조가 있습니다. |
+| [tokens.css](https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/tokens.css) | 색, 간격, 글자 크기 같은 `--ybm-*` 토큰입니다. |
+| Templates | `llms.txt` 끝에 템플릿마다 HTML 원본 주소가 있어 새 화면의 출발점으로 씁니다. |
 
 ## Figma
 

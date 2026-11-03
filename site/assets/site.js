@@ -151,7 +151,7 @@
       nav.querySelectorAll(".site-nav__group").forEach(function (g) { g.hidden = !g.querySelector(".site-nav__item:not([hidden])"); if (q) g.open = true; });
     }
   }
-  document.addEventListener("input", function (e) { if (e.target.matches("[data-site-search]")) filter(); if (e.target.matches("[data-site-lucide-search]")) lucideFilter(); });
+  document.addEventListener("input", function (e) { if (e.target.matches("[data-site-search]")) filter(); });
 
   // Lucide 전체 아이콘 (아이콘 페이지): 자료는 assets/lucide-icons.js 의 window.LUCIDE
   function lucideCss(name) {
@@ -159,30 +159,81 @@
     var uri = svg.replace(/</g, "%3C").replace(/>/g, "%3E").replace(/"/g, "%22").replace(/#/g, "%23");
     return "/* Lucide " + name + " */\n:root {\n  --ds-icon-" + name + ': url("data:image/svg+xml,' + uri + '");\n}\n.ds-icon--' + name + " { --ds-icon: var(--ds-icon-" + name + "); }";
   }
-  function lucideGrid() {
-    var grid = document.getElementById("site-lucide");
-    if (!grid || !window.LUCIDE) return;
-    var ds = {}, html = "", L = window.LUCIDE;
-    (grid.getAttribute("data-site-ds-icons") || "").split(" ").forEach(function (n) { ds[n] = true; });
-    Object.keys(L.icons).forEach(function (n) {
-      html += '<button type="button" class="site-icon" data-site-lucide="' + n + '" title="' + n + (ds[n] ? " 클래스 복사" : " icons.css 줄 복사") + '">'
-        + (ds[n] ? '<b class="ds-badge site-icon__css" data-tone="brand">CSS</b>' : "")
-        + '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + L.icons[n] + "</svg><span>" + n + "</span></button>";
-    });
-    grid.innerHTML = html;
-    lucideFilter();
+  // 아이콘 라이브러리 (Iconography > Library, 레퍼런스 B): 묶음 전환, 찾기, 정사각 칸, 고른 아이콘 정보 칸.
+  // 자료: window.YBM_ICONS (DS 아이콘 이름, 한국어 쓰임) + window.LUCIDE (Lucide 그림과 태그). ?icon=이름 으로 바로 열린다
+  var lib = { set: "ds", q: "", cur: "" };
+  function libSvg(n, size) {
+    var L = window.LUCIDE, body = L && L.icons[n];
+    return body ? '<svg viewBox="0 0 24 24" width="' + size + '" height="' + size + '" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + body + "</svg>" : "";
   }
-  function lucideFilter() {
-    var input = document.querySelector("[data-site-lucide-search]");
-    var q = input ? input.value.trim().toLowerCase() : "", tags = (window.LUCIDE && window.LUCIDE.tags) || {}, n = 0;
-    document.querySelectorAll("#site-lucide .site-icon").forEach(function (b) {
-      var name = b.getAttribute("data-site-lucide");
-      var ok = !q || name.indexOf(q) >= 0 || (tags[name] || "").indexOf(q) >= 0;
-      b.hidden = !ok; if (ok) n++;
+  function libEsc(s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
+  function libList() {
+    var D = window.YBM_ICONS || { names: [], use: {} }, L = window.LUCIDE || { icons: {}, tags: {} };
+    var names = lib.set === "ds" ? D.names : Object.keys(L.icons);
+    var q = lib.q.trim().toLowerCase();
+    if (!q) return names;
+    return names.filter(function (n) {
+      var base = n.replace(/-solid$/, "");
+      return n.indexOf(q) >= 0 || (L.tags[base] || "").toLowerCase().indexOf(q) >= 0 || (D.use[n] || "").indexOf(q) >= 0;
     });
-    var c = document.querySelector("[data-site-lucide-count]");
-    if (c) c.textContent = n.toLocaleString() + "개";
   }
+  function libTile(n) {
+    var inDs = (window.YBM_ICONS || { names: [] }).names.indexOf(n) >= 0;
+    var pic = inDs ? '<i class="ds-icon ds-icon--' + n + '" aria-hidden="true"></i>' : libSvg(n, 20);
+    return '<button type="button" class="site-lib__tile" role="option" data-site-lib-icon="' + n + '" aria-label="' + n + '" aria-selected="' + (n === lib.cur) + '" title="' + n + '">' + pic + "</button>";
+  }
+  function libDraw() {
+    var grid = document.querySelector("[data-site-lib-grid]"); if (!grid) return;
+    var list = libList();
+    grid.innerHTML = list.map(libTile).join("");
+    var c = document.querySelector("[data-site-lib-count]");
+    if (c) c.textContent = lib.q.trim() ? (list.length ? list.length.toLocaleString() + "개 찾았어요." : "찾는 아이콘이 없어요. Lucide 전체에서 찾아 보세요.") : "영어 이름, 태그, 한국어 쓰임으로 찾아 보세요.";
+    if (!lib.cur || list.indexOf(lib.cur) < 0) { if (list.length) libPick(list[0], true); else libPanel(""); } else libPanel(lib.cur);
+  }
+  function libCode(label, text) {
+    return '<div class="site-lib__code"><div class="site-lib__codehead"><span>' + label + '</span><button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="' + label + ' 복사" data-site-lib-copy><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></div><pre><code>' + libEsc(text) + "</code></pre></div>";
+  }
+  function libPanel(n) {
+    var panel = document.querySelector("[data-site-lib-panel]"); if (!panel) return;
+    if (!n) { panel.innerHTML = ""; return; }
+    var D = window.YBM_ICONS || { names: [], use: {} }, L = window.LUCIDE || { icons: {}, tags: {} };
+    var inDs = D.names.indexOf(n) >= 0, base = n.replace(/-solid$/, "");
+    var tags = (D.use[n] ? D.use[n].split(/,\s*/) : []).concat((L.tags[base] || "").split(/[,\s]+/).filter(Boolean).slice(0, 12));
+    var html = '<div class="site-lib__name"><b>' + n + "</b>" + (inDs ? '<span class="ds-badge" data-tone="positive">YBM DS</span>' : '<span class="ds-badge">Lucide</span>') + "</div>";
+    if (tags.length) html += '<div class="site-lib__tags">' + tags.map(function (t) { return "<span>" + libEsc(t) + "</span>"; }).join("") + "</div>";
+    html += '<div class="site-lib__preview">' + (inDs ? '<i class="ds-icon ds-icon--' + n + '" style="--ds-icon-size: 48px" aria-hidden="true"></i>' : libSvg(n, 48)) + "</div>";
+    if (inDs) html += libCode("HTML", '<i class="ds-icon ds-icon--' + n + '" aria-hidden="true"></i>');
+    else html += '<p class="site-lib__note">아직 DS 에 없는 아이콘입니다. 아래 줄을 dist/icons.css 끝에 붙이면 바로 씁니다.</p>' + libCode("icons.css 줄", lucideCss(n));
+    if (L.icons[base]) html += libCode("SVG", '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + L.icons[base] + "</svg>");
+    panel.innerHTML = html;
+  }
+  function libPick(n, quiet) {
+    lib.cur = n;
+    document.querySelectorAll("[data-site-lib-icon]").forEach(function (b) { b.setAttribute("aria-selected", b.getAttribute("data-site-lib-icon") === n ? "true" : "false"); });
+    libPanel(n);
+    if (!quiet && history.replaceState) history.replaceState(null, "", "?icon=" + encodeURIComponent(n));
+  }
+  function libInit() {
+    if (!document.querySelector("[data-site-lib]")) return;
+    var want = new URLSearchParams(location.search).get("icon") || "";
+    var D = window.YBM_ICONS || { names: [] };
+    if (want) { lib.cur = want; if (D.names.indexOf(want) < 0) lib.set = "all"; }
+    document.querySelectorAll("[data-site-lib-set]").forEach(function (b) { b.setAttribute("aria-pressed", b.getAttribute("data-site-lib-set") === lib.set ? "true" : "false"); });
+    libDraw();
+  }
+  document.addEventListener("click", function (e) {
+    var t = e.target.closest && e.target.closest("[data-site-lib-icon], [data-site-lib-set], [data-site-lib-copy]");
+    if (!t) return;
+    if (t.hasAttribute("data-site-lib-icon")) { libPick(t.getAttribute("data-site-lib-icon")); return; }
+    if (t.hasAttribute("data-site-lib-set")) {
+      lib.set = t.getAttribute("data-site-lib-set");
+      document.querySelectorAll("[data-site-lib-set]").forEach(function (b) { b.setAttribute("aria-pressed", b === t ? "true" : "false"); });
+      libDraw(); return;
+    }
+    var code = t.closest(".site-lib__code").querySelector("code").textContent;
+    if (navigator.clipboard) navigator.clipboard.writeText(code).then(function () { if (window.YBM) YBM.snackbar("복사했어요", { variant: "positive" }); });
+  });
+  document.addEventListener("input", function (e) { if (e.target.matches("[data-site-lib-q]")) { lib.q = e.target.value; libDraw(); } });
   // 찾기 칸에서 Enter: 걸러진 메뉴의 첫 컴포넌트로
   document.addEventListener("keydown", function (e) {
     if (e.key !== "Enter" || !e.target.matches("[data-site-search]") || !e.target.value.trim()) return;
@@ -256,48 +307,91 @@
     });
     pinAnatomy();
   }
-  // 구조 그림 (레퍼런스 B Anatomy): 부품 이름을 그림 양옆에 두고 가는 화살표로 부품을 가리킨다.
-  // 부품이 넓어 양옆에 자리가 없으면 위아래에 둔다. 그림에 없는 부품은 건너뛴다
+  // 구조 그림 (레퍼런스 B Anatomy): 부품은 실제 크기로 가운데, 이름은 그림 바깥에 두고 곧은 화살표로 부품 가장자리를 가리킨다.
+  // 나란한 부품은 위아래에서 세로 화살표로, 위아래로 쌓인 부품과 바깥 틀은 양옆에서 가로 화살표로 가리킨다.
+  // 화살표는 다른 부품 위를 지나지 않고, 서로 엇갈리지 않으며, 이름끼리 겹치지 않는 자리를 고른다
   function pinAnatomy() {
-    var NS = "http://www.w3.org/2000/svg";
+    var NS = "http://www.w3.org/2000/svg", GAP = 28, ROW = 26;
     document.querySelectorAll("[data-site-anatomy]").forEach(function (box) {
       var old = box.querySelector(".site-anatomy__layer"); if (old) old.remove();
       [].slice.call(box.querySelectorAll(".site-anatomy__name")).forEach(function (n) { n.remove(); });
       var b = box.getBoundingClientRect(); if (!b.width) return;
-      var st = box.querySelector(".pv-stage").getBoundingClientRect();
-      var sl = st.left - b.left, sr = st.right - b.left, stp = st.top - b.top, sbt = st.bottom - b.top;
       var names = (box.getAttribute("data-site-anatomy-names") || "").split("|");
-      var side = sl >= 120 && b.width - sr >= 120;
+      var rel = function (r) { return { l: r.left - b.left, t: r.top - b.top, r: r.right - b.left, b: r.bottom - b.top }; };
+      // 그림에 보이는 부품만 모은다
+      var parts = [];
+      box.getAttribute("data-site-anatomy").split(" ").forEach(function (cls, i) {
+        var el = [].slice.call(box.querySelectorAll(".site-tile__inner ." + cls)).filter(function (e) { var r = e.getBoundingClientRect(); return r.width >= 1 && r.height >= 1; })[0];
+        if (el) parts.push({ el: el, name: names[i] || cls, R: rel(el.getBoundingClientRect()) });
+      });
+      if (!parts.length) return;
+      var inside = function (a, c) { return a.l >= c.l - 0.5 && a.r <= c.r + 0.5 && a.t >= c.t - 0.5 && a.b <= c.b + 0.5; };
+      parts.forEach(function (p) {
+        p.kids = parts.filter(function (q) { return q !== p && (p.el.contains(q.el) || inside(q.R, p.R)); });
+        p.outer = parts.filter(function (q) { return q !== p && (q.el.contains(p.el) || inside(p.R, q.R)); });
+      });
+      var U = parts.reduce(function (u, p) { return { l: Math.min(u.l, p.R.l), t: Math.min(u.t, p.R.t), r: Math.max(u.r, p.R.r), b: Math.max(u.b, p.R.b) }; }, { l: 1e9, t: 1e9, r: -1e9, b: -1e9 });
       var svg = document.createElementNS(NS, "svg"); svg.setAttribute("class", "site-anatomy__layer");
       svg.innerHTML = "<defs><marker id=\"site-arrow\" viewBox=\"0 0 6 6\" refX=\"6\" refY=\"3\" markerWidth=\"6\" markerHeight=\"6\" orient=\"auto\"><path d=\"M0 0L6 3L0 6z\"/></marker></defs>";
       box.appendChild(svg);
-      var used = { l: [], r: [], t: [], b: [] };
-      box.getAttribute("data-site-anatomy").split(" ").forEach(function (cls, i) {
-        var el = [].slice.call(box.querySelectorAll(".site-tile__inner ." + cls)).filter(function (e) { var r = e.getBoundingClientRect(); return r.width && r.height; })[0];
-        if (!el) return;
-        var r = el.getBoundingClientRect(), cx = r.left - b.left + r.width / 2, cy = r.top - b.top + r.height / 2;
-        var name = document.createElement("span"); name.className = "site-anatomy__name"; name.textContent = names[i] || cls; box.appendChild(name);
-        var w = name.offsetWidth, h = name.offsetHeight, x, y, x1, y1, x2, y2;
-        if (side) {
-          // 가운데 근처(넓은 부품)는 이름이 적은 쪽으로 보내 양옆을 고르게
-          var mid = (sl + sr) / 2, band = (sr - sl) * 0.12;
-          var left = cx < mid - band ? true : cx > mid + band ? false : used.l.length <= used.r.length, k = left ? "l" : "r";
-          y = cy - h / 2; while (used[k].some(function (u) { return Math.abs(u - y) < h + 6; })) y += h + 6;
-          used[k].push(y);
-          if (left) { x = sl - 32 - w; x1 = sl - 24; x2 = r.left - b.left - 2; } else { x = sr + 32; x1 = sr + 24; x2 = r.right - b.left + 2; }
-          y1 = y + h / 2; y2 = cy;
-        } else {
-          var top = cy < (stp + sbt) / 2, k2 = top ? "t" : "b";
-          x = cx - w / 2; while (used[k2].some(function (u) { return Math.abs(u - x) < w + 12; })) x += w + 12;
-          x = Math.max(8, Math.min(x, b.width - w - 8)); used[k2].push(x);
-          if (top) { y = Math.max(4, stp - 32 - h); y1 = y + h + 4; y2 = r.top - b.top - 2; } else { y = Math.min(b.height - h - 4, sbt + 32); y1 = y - 4; y2 = r.bottom - b.top + 2; }
-          x1 = x + w / 2; x2 = cx;
+      var segs = [], labels = [];
+      // 선분이 상자를 지나는지 (가장자리에 닿기만 하면 괜찮다)
+      var hitsRect = function (s, q, pad) {
+        pad = pad || 0;
+        if (s.x1 === s.x2) { var y0 = Math.min(s.y1, s.y2), y1 = Math.max(s.y1, s.y2); return s.x1 > q.l - pad && s.x1 < q.r + pad && y1 > q.t - pad && y0 < q.b + pad; }
+        var x0 = Math.min(s.x1, s.x2), x1 = Math.max(s.x1, s.x2); return s.y1 > q.t - pad && s.y1 < q.b + pad && x1 > q.l - pad && x0 < q.r + pad;
+      };
+      var cross = function (a, c) {
+        var av = a.x1 === a.x2, cv = c.x1 === c.x2;
+        if (av === cv) return av ? Math.abs(a.x1 - c.x1) < 6 && Math.min(Math.max(a.y1, a.y2), Math.max(c.y1, c.y2)) > Math.max(Math.min(a.y1, a.y2), Math.min(c.y1, c.y2)) : Math.abs(a.y1 - c.y1) < 6 && Math.min(Math.max(a.x1, a.x2), Math.max(c.x1, c.x2)) > Math.max(Math.min(a.x1, a.x2), Math.min(c.x1, c.x2));
+        var v = av ? a : c, h = av ? c : a;
+        return v.x1 > Math.min(h.x1, h.x2) && v.x1 < Math.max(h.x1, h.x2) && h.y1 > Math.min(v.y1, v.y2) && h.y1 < Math.max(v.y1, v.y2);
+      };
+      var overlap = function (a, c, g) { return a.l < c.r + g && a.r > c.l - g && a.t < c.b + g && a.b > c.t - g; };
+      // 이 자리에 두면 몇 군데가 겹치는지 센다 (0 이면 깨끗한 자리)
+      var bad = function (p, s, L) {
+        var n = 0;
+        if (L.l < 4 || L.t < 4 || L.r > b.width - 4 || L.b > b.height - 4) n += 10;
+        for (var i = 0; i < parts.length; i++) {
+          var q = parts[i]; if (q === p || p.kids.indexOf(q) >= 0 || p.outer.indexOf(q) >= 0) continue;  // 바깥 틀의 테두리를 건너는 것은 괜찮다
+          if (hitsRect(s, q.R, 1)) n++; if (overlap(L, q.R, 4)) n += 3;
         }
-        name.style.left = Math.round(x) + "px"; name.style.top = Math.round(y) + "px";
+        for (var j = 0; j < segs.length; j++) { if (cross(s, segs[j])) n++; if (hitsRect(segs[j], L, 3)) n += 2; }
+        for (var k = 0; k < labels.length; k++) { if (overlap(L, labels[k], 6)) n += 5; if (hitsRect(s, labels[k], 3)) n += 2; }
+        return n;
+      };
+      var place = function (p) {
+        var name = document.createElement("span"); name.className = "site-anatomy__name"; name.textContent = p.name; box.appendChild(name);
+        var w = name.offsetWidth, h = name.offsetHeight, R = p.R, cx = (R.l + R.r) / 2, cy = (R.t + R.b) / 2, c = [];
+        var vert = function (top) {
+          var xs = [cx]; for (var d = 8; d < (R.r - R.l) / 2 - 4; d += 8) xs.push(cx - d, cx + d);
+          for (var row = 0; row < 4; row++) xs.forEach(function (x) { [0, -0.35, 0.35].forEach(function (o) {
+            var lx = x - w / 2 + o * w, ly = top ? U.t - GAP - row * ROW - h : U.b + GAP + row * ROW;
+            c.push({ L: { l: lx, t: ly, r: lx + w, b: ly + h }, s: { x1: x, y1: top ? ly + h + 3 : ly - 3, x2: x, y2: top ? R.t - 1 : R.b + 1 } });
+          }); });
+        };
+        var side = function (left) {
+          var ys = [cy]; for (var d = 4; d < (R.b - R.t) / 2 - 2; d += 4) ys.push(cy - d, cy + d);
+          ys.forEach(function (y) {
+            var lx = left ? U.l - GAP - w : U.r + GAP;
+            c.push({ L: { l: lx, t: y - h / 2, r: lx + w, b: y + h / 2 }, s: { x1: left ? lx + w + 4 : lx - 4, y1: y, x2: left ? R.l - 1 : R.r + 1, y2: y } });
+          });
+        };
+        // 바깥 틀과 세로로 긴 부품은 옆, 그 밖은 위아래를 먼저 본다
+        var tall = R.b - R.t > (R.r - R.l) * 0.9;
+        if (p.kids.length || tall) { side(cx > (U.l + U.r) / 2 ? false : true); side(cx > (U.l + U.r) / 2); vert(cy < (U.t + U.b) / 2); vert(cy >= (U.t + U.b) / 2); }
+        else { vert(cy < (U.t + U.b) / 2); vert(cy >= (U.t + U.b) / 2); side(cx < (U.l + U.r) / 2); side(cx >= (U.l + U.r) / 2); }
+        var pick = null, best = 1e9;
+        for (var ci = 0; ci < c.length && best > 0; ci++) { var sc = bad(p, c[ci].s, c[ci].L); if (sc < best) { best = sc; pick = c[ci]; } }
+        if (best > 0) name.setAttribute("data-forced", best);
+        segs.push(pick.s); labels.push(pick.L);
+        name.style.left = Math.round(pick.L.l) + "px"; name.style.top = Math.round(pick.L.t) + "px";
         var ln = document.createElementNS(NS, "line");
-        ln.setAttribute("x1", x1); ln.setAttribute("y1", y1); ln.setAttribute("x2", x2); ln.setAttribute("y2", y2); ln.setAttribute("marker-end", "url(#site-arrow)");
+        ln.setAttribute("x1", pick.s.x1); ln.setAttribute("y1", pick.s.y1); ln.setAttribute("x2", pick.s.x2); ln.setAttribute("y2", pick.s.y2); ln.setAttribute("marker-end", "url(#site-arrow)");
         svg.appendChild(ln);
-      });
+      };
+      // 안쪽 부품부터(자리가 좁다) 왼쪽에서 오른쪽 순서로, 바깥 틀은 마지막에
+      parts.slice().sort(function (a, c) { return a.kids.length - c.kids.length || a.R.l - c.R.l || a.R.t - c.R.t; }).forEach(place);
     });
   }
   window.addEventListener("resize", fitTiles);
@@ -350,7 +444,7 @@
     frames().forEach(function (f) { f.addEventListener("load", function () { themeFrame(f); }); themeFrame(f); });
     fitThumbs();
     fitTiles();
-    lucideGrid();
+    libInit();
     spy();
     // 왼쪽 메뉴: 지금 페이지 항목이 안 보이면 보이는 곳까지 내린다
     var side = document.querySelector(".site-side");

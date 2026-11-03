@@ -30,6 +30,8 @@ Templates가져다 고쳐 쓰는 완성 화면.
 
 ## 바로 써 보기
 
+AI 코딩 도구로 만들 때는 [AI & Tools](https://luvms012-rgb.github.io/ybm-ds/site/get-started/ai.md#prompt)의 요청 글을 붙여 넣으면 아래 설치와 규칙을 알아서 맞춥니다.
+
 ### 1. DS 불러오기
 
 `<head>`에 두 줄을 넣으면 글꼴, 토큰, 아이콘, 컴포넌트가 함께 들어옵니다. `ybm-ds.js`는 창 열기, 알림처럼 CSS만으로 안 되는 동작을 알아서 맡습니다.
@@ -70,24 +72,6 @@ Templates가져다 고쳐 쓰는 완성 화면.
 .my-dialog { --ds-dialog-width: 360px; }
 .my-banner { --ds-banner-bg: var(--ybm-color-bg-brand-weak); }
 ```
-
-## AI로 만들기
-
-아래 내용을 AI 코딩 도구에 붙여 넣으면 설치와 규칙을 알아서 맞춥니다.
-
-```text
-이 프로젝트에 YBM DS를 적용해 줘.
-1. <head>에 아래 두 줄을 넣어 줘.
-   <link rel="stylesheet" href="https://luvms012-rgb.github.io/ybm-ds/dist/ybm-ds.css">
-   <script src="https://luvms012-rgb.github.io/ybm-ds/dist/ybm-ds.js" defer></script>
-2. 문서는 https://luvms012-rgb.github.io/ybm-ds/site/llms.txt 목차에서 필요한 페이지(.md)를 골라 읽어.
-3. 쓸 수 있는 컴포넌트 목록은 https://luvms012-rgb.github.io/ybm-ds/components.json, 각 컴포넌트의 HTML 구조는 https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/components.css의 컴포넌트별 머리 주석을 따라.
-4. 색, 간격, 글자 크기, 모서리, 그림자는 https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/tokens.css의 --ybm-* 토큰만 써.
-5. 서비스 CSS는 DS 다음에 불러오고, 바꾸고 싶은 모양은 컴포넌트의 --ds-* 변수만 덮어써.
-6. 새 ds- 클래스를 만들거나 !important를 쓰지 마.
-```
-
-그다음 만들 화면을 말로 설명하세요. 다른 요청 예시는 [AI & Tools](https://luvms012-rgb.github.io/ybm-ds/site/get-started/ai.md)에 있습니다.
 
 ## 다크 모드
 
@@ -171,14 +155,6 @@ git clone https://github.com/luvms012-rgb/ybm-ds.git
 module.exports = { presets: [require('./tailwind.preset.js')] };
 ```
 
-## 도구
-
-AI & ToolsAI 도구에 DS 문서를 주는 방법.
-
-Figma컴포넌트와 토큰 라이브러리.
-
-GitHub원본 파일과 변경 기록.
-
 
 ---
 
@@ -191,26 +167,6 @@ AI 도구와 YBM DS를 함께 쓰는 방법입니다.
 ## 소개
 
 모든 문서를 AI가 읽기 쉬운 마크다운으로도 냅니다. 컴포넌트 목록, HTML 구조, 토큰도 파일로 열려 있어 AI가 DS 규칙대로 화면을 만듭니다.
-
-## llms.txt
-
-| 파일 | 내용 |
-| --- | --- |
-| [llms.txt](https://luvms012-rgb.github.io/ybm-ds/site/llms.txt) | 전체 목차입니다. AI가 필요한 문서를 골라 읽습니다. |
-| [llms-full.txt](https://luvms012-rgb.github.io/ybm-ds/site/llms-full.txt) | 모든 문서를 한 파일로 모았습니다. 주소를 열지 못하는 도구에 첨부합니다. |
-| 페이지별 `.md` | 문서 주소의 `.html`을 `.md`로 바꾸면 그 페이지만 받습니다. |
-
-- 컴포넌트 하나만 필요하면 제목 아래 **Markdown** 메뉴에서 **내용 복사**를 누릅니다.
-- 여러 컴포넌트로 화면을 만들 때는 `llms.txt` 주소를 알려 줍니다.
-
-## AI가 읽는 파일
-
-| 파일 | 내용 |
-| --- | --- |
-| [components.json](https://luvms012-rgb.github.io/ybm-ds/components.json) | 쓸 수 있는 컴포넌트와 속성 목록입니다. |
-| [components.css](https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/components.css) | 컴포넌트마다 머리 주석에 HTML 구조가 있습니다. |
-| [tokens.css](https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/tokens.css) | 색, 간격, 글자 크기 같은 `--ybm-*` 토큰입니다. |
-| Templates | `llms.txt` 끝에 템플릿마다 HTML 원본 주소가 있어 새 화면의 출발점으로 씁니다. |
 
 ## 요청 예시
 
@@ -253,6 +209,26 @@ YBM DS로 [만들 화면, 예: 회원 목록 관리 화면]을 만들어 줘.
 고친 곳은 목록으로 알려 줘.
 ```
 
+## llms.txt
+
+| 파일 | 내용 |
+| --- | --- |
+| [llms.txt](https://luvms012-rgb.github.io/ybm-ds/site/llms.txt) | 전체 목차입니다. AI가 필요한 문서를 골라 읽습니다. |
+| [llms-full.txt](https://luvms012-rgb.github.io/ybm-ds/site/llms-full.txt) | 모든 문서를 한 파일로 모았습니다. 주소를 열지 못하는 도구에 첨부합니다. |
+| 페이지별 `.md` | 문서 주소의 `.html`을 `.md`로 바꾸면 그 페이지만 받습니다. |
+
+- 컴포넌트 하나만 필요하면 제목 아래 **Markdown** 메뉴에서 **내용 복사**를 누릅니다.
+- 여러 컴포넌트로 화면을 만들 때는 `llms.txt` 주소를 알려 줍니다.
+
+## AI가 읽는 파일
+
+| 파일 | 내용 |
+| --- | --- |
+| [components.json](https://luvms012-rgb.github.io/ybm-ds/components.json) | 쓸 수 있는 컴포넌트와 속성 목록입니다. |
+| [components.css](https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/components.css) | 컴포넌트마다 머리 주석에 HTML 구조가 있습니다. |
+| [tokens.css](https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/tokens.css) | 색, 간격, 글자 크기 같은 `--ybm-*` 토큰입니다. |
+| Templates | `llms.txt` 끝에 템플릿마다 HTML 원본 주소가 있어 새 화면의 출발점으로 씁니다. |
+
 ## Figma
 
 Figma 변수 이름이 CSS 변수 이름과 같습니다. Dev Mode에서 복사한 코드가 그대로 동작하고, AI에 Figma 화면을 주면 같은 토큰 이름으로 옮깁니다.
@@ -270,119 +246,33 @@ Figma 라이브러리컴포넌트와 토큰을 Figma에서 봅니다.
 
 ## 개요
 
-색은 생김새가 아니라 하는 일로 이름을 붙입니다. 화면에는 시맨틱 색(`bg`, `fg`, `stroke`)만 쓰고, 팔레트(`--ybm-color-palette-*`)는 시맨틱 색을 만드는 원료로 둡니다. 토큰으로만 쓰면 `data-theme="dark"` 하나로 다크 모드가 맞춰집니다.
+YBM DS 의 색은 역할 색과 팔레트 색 두 층으로 되어 있습니다. 화면에는 역할 색만 쓰고, 팔레트 색은 역할 색을 만드는 원료로 둡니다. 그래서 어떤 화면에서도 글자와 바탕의 대비가 충분하고 뜻이 분명합니다.
 
-## 역할
+## 역할 색
 
-| 역할 | 쓰는 곳 |
-| --- | --- |
-| `brand` | 주 버튼, 선택된 상태, 링크 |
-| `neutral` | 바탕, 본문, 보조 버튼 |
-| `positive` | 성공, 완료 |
-| `warning` | 주의, 마감 임박 |
-| `critical` | 오류, 삭제 |
-| `informative` | 안내, 도움말 |
-| `magic` | AI 기능, 새 기능 |
+역할 색은 생김새가 아니라 하는 일로 이름을 붙인 색입니다. 오류는 `critical`, 성공은 `positive` 처럼 이름만 보고 어디에 쓰는지 알 수 있습니다. 자세한 규칙과 전체 목록은 [Roles](https://luvms012-rgb.github.io/ybm-ds/site/foundations/color-roles.md)에 있습니다.
 
-## 배경
+### 장점 1. 접근성
 
-| 토큰 | 값 |
-| --- | --- |
-| `--ybm-color-bg-brand-solid` | `#2563eb / #3b82f6` |
-| `--ybm-color-bg-brand-solid-pressed` | `#1d4ed8 / #60a5fa` |
-| `--ybm-color-bg-brand-weak` | `#dbeafe / #172554` |
-| `--ybm-color-bg-brand-weak-pressed` | `#bfdbfe / #1e3a8a` |
-| `--ybm-color-bg-canvas` | `#f7f8f9 / #000000` |
-| `--ybm-color-bg-critical-solid` | `#fa342c / #f73526` |
-| `--ybm-color-bg-critical-solid-pressed` | `#ca1d13 / #ff6e60` |
-| `--ybm-color-bg-critical-weak` | `#fdf0f0 / #322323` |
-| `--ybm-color-bg-critical-weak-pressed` | `#fde7e7 / #4f2624` |
-| `--ybm-color-bg-disabled` | `#f3f4f5 / #2b2e35` |
-| `--ybm-color-bg-informative-solid` | `#217cf9 / #1e82eb` |
-| `--ybm-color-bg-informative-solid-pressed` | `#135fcd / #41a2f9` |
-| `--ybm-color-bg-informative-weak` | `#eff6ff / #202742` |
-| `--ybm-color-bg-informative-weak-pressed` | `#e2edfc / #1e3352` |
-| `--ybm-color-bg-layer-default` | `#ffffff / #16171b` |
-| `--ybm-color-bg-layer-floating` | `#ffffff / #1d2025` |
-| `--ybm-color-bg-magic-solid` | `#8969ea / #7659bd` |
-| `--ybm-color-bg-magic-solid-pressed` | `#6d50cb / #9179e0` |
-| `--ybm-color-bg-magic-weak` | `#f5f3fe / #201a2e` |
-| `--ybm-color-bg-magic-weak-pressed` | `#efeafe / #2b2140` |
-| `--ybm-color-bg-neutral` | `#f3f4f5 / #2b2e35` |
-| `--ybm-color-bg-neutral-inverted` | `#2a3038 / #f3f4f5` |
-| `--ybm-color-bg-neutral-inverted-pressed` | `#555d6d / #dcdee3` |
-| `--ybm-color-bg-neutral-muted` | `#f7f8f9 / #1d2025` |
-| `--ybm-color-bg-neutral-solid` | `#2a3038 / #f3f4f5` |
-| `--ybm-color-bg-neutral-solid-pressed` | `#555d6d / #dcdee3` |
-| `--ybm-color-bg-neutral-subtle` | `#ffffff / #16171b` |
-| `--ybm-color-bg-neutral-weak-alpha` | `#0000000c / #ffffff20` |
-| `--ybm-color-bg-neutral-weak-alpha-pressed` | `#00000010 / #ffffff2e` |
-| `--ybm-color-bg-neutral-weak-pressed` | `#eeeff1 / #393d46` |
-| `--ybm-color-bg-overlay` | `#00000074 / #00000074` |
-| `--ybm-color-bg-positive-solid` | `#079171 / #117956` |
-| `--ybm-color-bg-positive-solid-pressed` | `#00745f / #1b946d` |
-| `--ybm-color-bg-positive-weak` | `#edfaf6 / #202926` |
-| `--ybm-color-bg-positive-weak-pressed` | `#d9f6e9 / #20362e` |
-| `--ybm-color-bg-transparent` | `transparent / transparent` |
-| `--ybm-color-bg-transparent-pressed` | `#0000000c / #ffffff20` |
-| `--ybm-color-bg-warning-solid` | `#e14d00 / #e65200` |
-| `--ybm-color-bg-warning-solid-pressed` | `#b93901 / #ff6600` |
-| `--ybm-color-bg-warning-weak` | `#fff2ec / #31241f` |
-| `--ybm-color-bg-warning-weak-pressed` | `#ffe8db / #4b291c` |
+역할 색은 처음부터 정해 둔 글자와 바탕 짝으로 대비를 맞췄습니다. 짝을 지켜 쓰기만 하면 읽기 어려운 조합이 생기지 않습니다.
 
-## 글자와 아이콘
+### 장점 2. 빈틈없는 바꾸기
 
-| 토큰 | 값 |
-| --- | --- |
-| `--ybm-color-fg-brand` | `#2563eb / #3b82f6` |
-| `--ybm-color-fg-brand-contrast` | `#1d4ed8 / #60a5fa` |
-| `--ybm-color-fg-critical` | `#fa342c / #ff6e60` |
-| `--ybm-color-fg-critical-contrast` | `#921708 / #f8c5c3` |
-| `--ybm-color-fg-disabled` | `#d1d3d8 / #5b606a` |
-| `--ybm-color-fg-informative` | `#217cf9 / #41a2f9` |
-| `--ybm-color-fg-informative-contrast` | `#0b4596 / #b9d7fb` |
-| `--ybm-color-fg-magic` | `#8969ea / #9179e0` |
-| `--ybm-color-fg-magic-contrast` | `#50379b / #d3c7fb` |
-| `--ybm-color-fg-neutral` | `#1a1c20 / #f3f4f5` |
-| `--ybm-color-fg-neutral-inverted` | `#ffffff / #16171b` |
-| `--ybm-color-fg-neutral-muted` | `#555d6d / #dcdee3` |
-| `--ybm-color-fg-neutral-subtle` | `#868b94 / #b0b3ba` |
-| `--ybm-color-fg-on-brand-solid` | `#ffffff / #ffffff` |
-| `--ybm-color-fg-on-critical-solid` | `#ffffff / #ffffff` |
-| `--ybm-color-fg-on-informative-solid` | `#ffffff / #ffffff` |
-| `--ybm-color-fg-on-magic-solid` | `#ffffff / #ffffff` |
-| `--ybm-color-fg-on-neutral-solid` | `#ffffff / #16171b` |
-| `--ybm-color-fg-on-positive-solid` | `#ffffff / #ffffff` |
-| `--ybm-color-fg-on-warning-solid` | `#ffffff / #ffffff` |
-| `--ybm-color-fg-placeholder` | `#b0b3ba / #868b94` |
-| `--ybm-color-fg-positive` | `#079171 / #22b27f` |
-| `--ybm-color-fg-positive-contrast` | `#075445 / #93e5c0` |
-| `--ybm-color-fg-warning` | `#e14d00 / #ff6600` |
-| `--ybm-color-fg-warning-contrast` | `#862b00 / #eecebc` |
+색을 바꿀 때 값이 아니라 뜻을 기준으로 바꿉니다. 값이 같아도 뜻이 다르면 따로 바꿀 수 있어서, 한 곳을 고쳐도 다른 곳이 함께 흔들리지 않습니다.
 
-## 테두리
+### 장점 3. 다크 모드
 
-| 토큰 | 값 |
-| --- | --- |
-| `--ybm-color-stroke-brand-solid` | `#1d4ed8 / #60a5fa` |
-| `--ybm-color-stroke-brand-weak` | `#93c5fd / #1e40af` |
-| `--ybm-color-stroke-critical-solid` | `#fa342c / #ff6e60` |
-| `--ybm-color-stroke-critical-weak` | `#fed4d2 / #742826` |
-| `--ybm-color-stroke-focus-ring` | `#5e98fe / #1e82eb` |
-| `--ybm-color-stroke-informative-solid` | `#217cf9 / #41a2f9` |
-| `--ybm-color-stroke-informative-weak` | `#cbdffa / #1a4275` |
-| `--ybm-color-stroke-magic-solid` | `#8969ea / #9179e0` |
-| `--ybm-color-stroke-magic-weak` | `#e1d8ff / #392a57` |
-| `--ybm-color-stroke-neutral` | `#d1d3d8 / #5b606a` |
-| `--ybm-color-stroke-neutral-contrast` | `#1a1c20 / #f3f4f5` |
-| `--ybm-color-stroke-neutral-muted` | `#00000010 / #ffffff17` |
-| `--ybm-color-stroke-neutral-solid` | `#555d6d / #dcdee3` |
-| `--ybm-color-stroke-neutral-subtle` | `#0000000c / #ffffff0d` |
-| `--ybm-color-stroke-neutral-weak` | `#dcdee3 / #393d46` |
-| `--ybm-color-stroke-positive-solid` | `#079171 / #22b27f` |
-| `--ybm-color-stroke-positive-weak` | `#b9e9d2 / #20493b` |
-| `--ybm-color-stroke-warning-solid` | `#e14d00 / #ff6600` |
-| `--ybm-color-stroke-warning-weak` | `#ffd5c0 / #6b311c` |
+역할 색은 라이트와 다크 모드에 알맞은 값을 따로 갖고 있습니다. 토큰으로만 썼다면 `data-theme="dark"` 하나로 모든 화면이 맞춰집니다.
+
+## 팔레트 색
+
+팔레트 색은 회색과 일곱 가지 색을 100 ~ 1000 단계로 나눈 원료 색입니다. 역할 색으로 나타내기 어려운 드문 경우에만 화면에 씁니다. 다크 모드에서는 같은 단계 번호에 어두운 화면용 값이 들어가 있어 그대로 써도 알아보기 쉽습니다. 전체 목록은 [Palette](https://luvms012-rgb.github.io/ybm-ds/site/foundations/color-palette.md)에 있습니다.
+
+## 관련 문서
+
+역할 색역할 색의 규칙과 전체 토큰.
+
+팔레트 색팔레트 색의 단계와 전체 토큰.
 
 ## 코드에서 쓰기
 
@@ -712,6 +602,439 @@ Figma 라이브러리컴포넌트와 토큰을 Figma에서 봅니다.
 
 ---
 
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/foundations/color-roles.md -->
+
+# Color
+
+색은 정보의 위계와 상태, 브랜드를 구분해 보여 줍니다.
+
+역할 색의 이름은 속성, 역할, 변형, 상태 네 조각으로 이어 붙입니다. `--ybm-color-bg-brand-solid-pressed`는 배경(속성), 브랜드(역할), 진한 면(변형), 눌렀을 때(상태)입니다.
+
+## 속성
+
+모든 역할 색은 세 가지 속성 가운데 하나로 시작합니다.
+
+| 속성 | 쓰는 곳 |
+| --- | --- |
+| `bg` | 화면 전체나 부품의 바탕 |
+| `fg` | 글자, 아이콘 같은 앞쪽 요소 |
+| `stroke` | 경계를 나누는 선과 부품의 테두리 |
+
+## 역할
+
+속성 다음에 뜻을 나타내는 역할이 붙습니다. 같은 역할은 여러 속성에 걸쳐 함께 쓰여 화면 전체에서 같은 뜻으로 읽힙니다.
+
+### Brand
+
+브랜드 색은 브랜드와 이어지는 요소를 바로 알아보게 합니다. 화면에서 가장 중요한 동작 하나를 강조할 때도 씁니다.
+
+`--ybm-color-fg-brand`
+
+`--ybm-color-bg-brand-solid`
+
+`--ybm-color-bg-brand-solid-pressed`
+
+`--ybm-color-bg-brand-weak`
+
+`--ybm-color-stroke-brand-solid`
+
+### Neutral
+
+기본 색은 대부분의 글과 바탕에 쓰는 색입니다. 가장 눈에 띄지는 않지만 늘 잘 보여야 하는 요소에 씁니다.
+
+`--ybm-color-fg-neutral`
+
+`--ybm-color-fg-neutral-muted`
+
+`--ybm-color-fg-neutral-subtle`
+
+`--ybm-color-fg-on-neutral-solid`
+
+`--ybm-color-bg-neutral-solid`
+
+`--ybm-color-bg-neutral-weak`
+
+### Positive
+
+성공 색은 끝난 일, 확인, 좋은 상태를 알립니다.
+
+`--ybm-color-fg-positive`
+
+`--ybm-color-fg-positive-contrast`
+
+`--ybm-color-bg-positive-solid`
+
+`--ybm-color-bg-positive-weak`
+
+### Warning
+
+주의 색은 마감 임박처럼 사용자가 한 번 더 살펴야 할 내용을 알립니다.
+
+`--ybm-color-fg-warning`
+
+`--ybm-color-fg-warning-contrast`
+
+`--ybm-color-bg-warning-solid`
+
+`--ybm-color-bg-warning-weak`
+
+### Critical
+
+오류 색은 실패, 삭제처럼 바로 주의를 끌어야 하는 문제를 알립니다.
+
+`--ybm-color-fg-critical`
+
+`--ybm-color-fg-critical-contrast`
+
+`--ybm-color-bg-critical-solid`
+
+`--ybm-color-bg-critical-weak`
+
+### Informative
+
+안내 색은 도움말과 상태 설명처럼 알아 두면 좋은 정보를 전합니다.
+
+`--ybm-color-fg-informative`
+
+`--ybm-color-fg-informative-contrast`
+
+`--ybm-color-bg-informative-solid`
+
+`--ybm-color-bg-informative-weak`
+
+### Magic
+
+AI 색은 AI 기능과 새 기능을 다른 기능과 구분해 보여 줍니다.
+
+`--ybm-color-fg-magic`
+
+`--ybm-color-bg-magic-solid`
+
+`--ybm-color-bg-magic-weak`
+
+`--ybm-color-stroke-magic-solid`
+
+### Layer
+
+면 색은 화면의 깊이와 겹침을 나눕니다. 화면 바탕, 기본 면, 떠 있는 면 순서로 위에 놓입니다.
+
+`--ybm-color-bg-canvas`
+
+`--ybm-color-bg-layer-default`
+
+`--ybm-color-bg-layer-floating`
+
+`--ybm-color-bg-overlay`
+
+## 변형
+
+같은 역할이라도 강조 정도에 따라 변형을 고릅니다. 예를 들어 성공 배경은 옅은 `bg-positive-weak`와 진한 `bg-positive-solid`가 있습니다.
+
+| 변형 | 뜻 |
+| --- | --- |
+| `solid` | 진한 면입니다. 가장 강하게 눈에 띕니다. |
+| `weak` | 옅은 면입니다. 넓은 영역에 써도 부담이 적습니다. |
+| `muted`, `subtle` | 한 단계, 두 단계 흐린 글자와 선입니다. |
+| `contrast` | 옅은 면 위에서도 읽히는 더 진한 글자입니다. |
+| `on-[역할]-solid` | 진한 면 위에 올리는 글자와 아이콘입니다. |
+
+## 상태
+
+부품의 상태에 따라 색이 바뀝니다. 눌렀을 때는 끝에 `-pressed`가 붙은 색을 쓰고, 꺼진 부품은 `bg-disabled`, `fg-disabled`를 씁니다.
+
+## 토큰
+
+값의 앞 견본은 라이트 모드, 뒤 견본은 다크 모드입니다.
+
+### 배경
+
+| 토큰 | 값 |
+| --- | --- |
+| `--ybm-color-bg-brand-solid` 브랜드 진한 면 배경입니다. | `palette-brand-600` |
+| `--ybm-color-bg-brand-solid-pressed` 브랜드 진한 면 배경, 눌렀을 때입니다. | `palette-brand-700` |
+| `--ybm-color-bg-brand-weak` 브랜드 옅은 면 배경입니다. | `palette-brand-100` |
+| `--ybm-color-bg-brand-weak-pressed` 브랜드 옅은 면 배경, 눌렀을 때입니다. | `palette-brand-200` |
+| `--ybm-color-bg-canvas` 화면 바탕 배경입니다. | `palette-gray-100` |
+| `--ybm-color-bg-critical-solid` 오류 진한 면 배경입니다. | `palette-red-700` |
+| `--ybm-color-bg-critical-solid-pressed` 오류 진한 면 배경, 눌렀을 때입니다. | `palette-red-800` |
+| `--ybm-color-bg-critical-weak` 오류 옅은 면 배경입니다. | `palette-red-100` |
+| `--ybm-color-bg-critical-weak-pressed` 오류 옅은 면 배경, 눌렀을 때입니다. | `palette-red-200` |
+| `--ybm-color-bg-disabled` 꺼짐 배경입니다. | `palette-gray-200` |
+| `--ybm-color-bg-informative-solid` 안내 진한 면 배경입니다. | `palette-blue-700` |
+| `--ybm-color-bg-informative-solid-pressed` 안내 진한 면 배경, 눌렀을 때입니다. | `palette-blue-800` |
+| `--ybm-color-bg-informative-weak` 안내 옅은 면 배경입니다. | `palette-blue-100` |
+| `--ybm-color-bg-informative-weak-pressed` 안내 옅은 면 배경, 눌렀을 때입니다. | `palette-blue-200` |
+| `--ybm-color-bg-layer-default` 면 기본 배경입니다. | `palette-gray-00` |
+| `--ybm-color-bg-layer-floating` 면 떠 있는 면 배경입니다. | `palette-gray-00` |
+| `--ybm-color-bg-magic-solid` AI 진한 면 배경입니다. | `palette-purple-700` |
+| `--ybm-color-bg-magic-solid-pressed` AI 진한 면 배경, 눌렀을 때입니다. | `palette-purple-800` |
+| `--ybm-color-bg-magic-weak` AI 옅은 면 배경입니다. | `palette-purple-100` |
+| `--ybm-color-bg-magic-weak-pressed` AI 옅은 면 배경, 눌렀을 때입니다. | `palette-purple-200` |
+| `--ybm-color-bg-neutral` 기본 배경입니다. | `palette-gray-200` |
+| `--ybm-color-bg-neutral-inverted` 기본 반전 배경입니다. | `palette-gray-900` |
+| `--ybm-color-bg-neutral-inverted-pressed` 기본 반전 배경, 눌렀을 때입니다. | `palette-gray-800` |
+| `--ybm-color-bg-neutral-muted` 기본 한 단계 흐린 배경입니다. | `palette-gray-100` |
+| `--ybm-color-bg-neutral-solid` 기본 진한 면 배경입니다. | `palette-gray-900` |
+| `--ybm-color-bg-neutral-solid-pressed` 기본 진한 면 배경, 눌렀을 때입니다. | `palette-gray-800` |
+| `--ybm-color-bg-neutral-subtle` 기본 두 단계 흐린 배경입니다. | `palette-gray-00` |
+| `--ybm-color-bg-neutral-weak-alpha` 기본 옅은 반투명 면 배경입니다. | `palette-static-black-alpha-200` |
+| `--ybm-color-bg-neutral-weak-alpha-pressed` 기본 옅은 반투명 면 배경, 눌렀을 때입니다. | `palette-static-black-alpha-300` |
+| `--ybm-color-bg-neutral-weak-pressed` 기본 옅은 면 배경, 눌렀을 때입니다. | `palette-gray-300` |
+| `--ybm-color-bg-overlay` 덮개 배경입니다. | `palette-static-black-alpha-700` |
+| `--ybm-color-bg-positive-solid` 성공 진한 면 배경입니다. | `palette-green-700` |
+| `--ybm-color-bg-positive-solid-pressed` 성공 진한 면 배경, 눌렀을 때입니다. | `palette-green-800` |
+| `--ybm-color-bg-positive-weak` 성공 옅은 면 배경입니다. | `palette-green-100` |
+| `--ybm-color-bg-positive-weak-pressed` 성공 옅은 면 배경, 눌렀을 때입니다. | `palette-green-200` |
+| `--ybm-color-bg-transparent` 투명 배경입니다. | `transparent` |
+| `--ybm-color-bg-transparent-pressed` 투명 배경, 눌렀을 때입니다. | `palette-static-black-alpha-200` |
+| `--ybm-color-bg-warning-solid` 주의 진한 면 배경입니다. | `palette-orange-700` |
+| `--ybm-color-bg-warning-solid-pressed` 주의 진한 면 배경, 눌렀을 때입니다. | `palette-orange-800` |
+| `--ybm-color-bg-warning-weak` 주의 옅은 면 배경입니다. | `palette-orange-100` |
+| `--ybm-color-bg-warning-weak-pressed` 주의 옅은 면 배경, 눌렀을 때입니다. | `palette-orange-200` |
+
+### 글자와 아이콘
+
+| 토큰 | 값 |
+| --- | --- |
+| `--ybm-color-fg-brand` 브랜드 글자와 아이콘입니다. | `palette-brand-600` |
+| `--ybm-color-fg-brand-contrast` 브랜드 더 진한 글자와 아이콘입니다. | `palette-brand-700` |
+| `--ybm-color-fg-critical` 오류 글자와 아이콘입니다. | `palette-red-700` |
+| `--ybm-color-fg-critical-contrast` 오류 더 진한 글자와 아이콘입니다. | `palette-red-900` |
+| `--ybm-color-fg-disabled` 꺼짐 글자와 아이콘입니다. | `palette-gray-500` |
+| `--ybm-color-fg-informative` 안내 글자와 아이콘입니다. | `palette-blue-700` |
+| `--ybm-color-fg-informative-contrast` 안내 더 진한 글자와 아이콘입니다. | `palette-blue-900` |
+| `--ybm-color-fg-magic` AI 글자와 아이콘입니다. | `palette-purple-700` |
+| `--ybm-color-fg-magic-contrast` AI 더 진한 글자와 아이콘입니다. | `palette-purple-900` |
+| `--ybm-color-fg-neutral` 기본 글자와 아이콘입니다. | `palette-gray-1000` |
+| `--ybm-color-fg-neutral-inverted` 기본 반전 글자와 아이콘입니다. | `palette-gray-00` |
+| `--ybm-color-fg-neutral-muted` 기본 한 단계 흐린 글자와 아이콘입니다. | `palette-gray-800` |
+| `--ybm-color-fg-neutral-subtle` 기본 두 단계 흐린 글자와 아이콘입니다. | `palette-gray-700` |
+| `--ybm-color-fg-on-brand-solid` 브랜드 진한 면 위의 글자와 아이콘입니다. | `palette-static-white` |
+| `--ybm-color-fg-on-critical-solid` 오류 진한 면 위의 글자와 아이콘입니다. | `palette-static-white` |
+| `--ybm-color-fg-on-informative-solid` 안내 진한 면 위의 글자와 아이콘입니다. | `palette-static-white` |
+| `--ybm-color-fg-on-magic-solid` AI 진한 면 위의 글자와 아이콘입니다. | `palette-static-white` |
+| `--ybm-color-fg-on-neutral-solid` 기본 진한 면 위의 글자와 아이콘입니다. | `palette-gray-00` |
+| `--ybm-color-fg-on-positive-solid` 성공 진한 면 위의 글자와 아이콘입니다. | `palette-static-white` |
+| `--ybm-color-fg-on-warning-solid` 주의 진한 면 위의 글자와 아이콘입니다. | `palette-static-white` |
+| `--ybm-color-fg-placeholder` 입력 전 안내 글자 글자와 아이콘입니다. | `palette-gray-600` |
+| `--ybm-color-fg-positive` 성공 글자와 아이콘입니다. | `palette-green-700` |
+| `--ybm-color-fg-positive-contrast` 성공 더 진한 글자와 아이콘입니다. | `palette-green-900` |
+| `--ybm-color-fg-warning` 주의 글자와 아이콘입니다. | `palette-orange-700` |
+| `--ybm-color-fg-warning-contrast` 주의 더 진한 글자와 아이콘입니다. | `palette-orange-900` |
+
+### 테두리
+
+| 토큰 | 값 |
+| --- | --- |
+| `--ybm-color-stroke-brand-solid` 브랜드 진한 면 테두리입니다. | `palette-brand-700` |
+| `--ybm-color-stroke-brand-weak` 브랜드 옅은 면 테두리입니다. | `palette-brand-300` |
+| `--ybm-color-stroke-critical-solid` 오류 진한 면 테두리입니다. | `palette-red-700` |
+| `--ybm-color-stroke-critical-weak` 오류 옅은 면 테두리입니다. | `palette-red-300` |
+| `--ybm-color-stroke-focus-ring` 포커스 고리 테두리입니다. | `palette-blue-600` |
+| `--ybm-color-stroke-informative-solid` 안내 진한 면 테두리입니다. | `palette-blue-700` |
+| `--ybm-color-stroke-informative-weak` 안내 옅은 면 테두리입니다. | `palette-blue-300` |
+| `--ybm-color-stroke-magic-solid` AI 진한 면 테두리입니다. | `palette-purple-700` |
+| `--ybm-color-stroke-magic-weak` AI 옅은 면 테두리입니다. | `palette-purple-300` |
+| `--ybm-color-stroke-neutral` 기본 테두리입니다. | `palette-gray-500` |
+| `--ybm-color-stroke-neutral-contrast` 기본 더 진한 테두리입니다. | `palette-gray-1000` |
+| `--ybm-color-stroke-neutral-muted` 기본 한 단계 흐린 테두리입니다. | `palette-static-black-alpha-300` |
+| `--ybm-color-stroke-neutral-solid` 기본 진한 면 테두리입니다. | `palette-gray-800` |
+| `--ybm-color-stroke-neutral-subtle` 기본 두 단계 흐린 테두리입니다. | `palette-static-black-alpha-200` |
+| `--ybm-color-stroke-neutral-weak` 기본 옅은 면 테두리입니다. | `palette-gray-400` |
+| `--ybm-color-stroke-positive-solid` 성공 진한 면 테두리입니다. | `palette-green-700` |
+| `--ybm-color-stroke-positive-weak` 성공 옅은 면 테두리입니다. | `palette-green-300` |
+| `--ybm-color-stroke-warning-solid` 주의 진한 면 테두리입니다. | `palette-orange-700` |
+| `--ybm-color-stroke-warning-weak` 주의 옅은 면 테두리입니다. | `palette-orange-300` |
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/foundations/color-palette.md -->
+
+# Color
+
+색은 정보의 위계와 상태, 브랜드를 구분해 보여 줍니다.
+
+팔레트 색은 역할 색을 만드는 원료입니다. 다크 모드에서는 같은 단계 번호에 어두운 화면용 값이 들어 있어, 라이트 모드 기준으로 골라도 다크 모드에서 알아보기 쉽습니다.
+
+## Gray
+
+00
+
+100
+
+200
+
+300
+
+400
+
+500
+
+600
+
+700
+
+800
+
+900
+
+1000
+
+Gray
+
+## Chromatic
+
+Brand 는 서비스마다 바꿔 쓰는 색입니다. 이 가이드의 다른 화면은 모노톤으로 보이지만 여기에는 실제 값이 보입니다.
+
+100
+
+200
+
+300
+
+400
+
+500
+
+600
+
+700
+
+800
+
+900
+
+1000
+
+Brand
+
+Blue
+
+Green
+
+Orange
+
+Yellow
+
+Red
+
+Purple
+
+## 토큰
+
+값의 앞 견본은 라이트 모드, 뒤 견본은 다크 모드입니다.
+
+| 토큰 | 값 |
+| --- | --- |
+| `--ybm-color-palette-gray-00` | `#ffffff / #000000` |
+| `--ybm-color-palette-gray-100` | `#f7f8f9 / #16171b` |
+| `--ybm-color-palette-gray-200` | `#f3f4f5 / #1d2025` |
+| `--ybm-color-palette-gray-300` | `#eeeff1 / #2b2e35` |
+| `--ybm-color-palette-gray-400` | `#dcdee3 / #393d46` |
+| `--ybm-color-palette-gray-500` | `#d1d3d8 / #5b606a` |
+| `--ybm-color-palette-gray-600` | `#b0b3ba / #868b94` |
+| `--ybm-color-palette-gray-700` | `#868b94 / #b0b3ba` |
+| `--ybm-color-palette-gray-800` | `#555d6d / #dcdee3` |
+| `--ybm-color-palette-gray-900` | `#2a3038 / #e9eaec` |
+| `--ybm-color-palette-gray-1000` | `#1a1c20 / #f3f4f5` |
+| `--ybm-color-palette-brand-100` | `#dbeafe / #172554` |
+| `--ybm-color-palette-brand-200` | `#bfdbfe / #1e3a8a` |
+| `--ybm-color-palette-brand-300` | `#93c5fd / #1e40af` |
+| `--ybm-color-palette-brand-400` | `#60a5fa / #1d4ed8` |
+| `--ybm-color-palette-brand-500` | `#3b82f6 / #2563eb` |
+| `--ybm-color-palette-brand-600` | `#2563eb / #3b82f6` |
+| `--ybm-color-palette-brand-700` | `#1d4ed8 / #60a5fa` |
+| `--ybm-color-palette-brand-800` | `#1e40af / #93c5fd` |
+| `--ybm-color-palette-brand-900` | `#1e3a8a / #bfdbfe` |
+| `--ybm-color-palette-brand-1000` | `#172554 / #dbeafe` |
+| `--ybm-color-palette-blue-100` | `#eff6ff / #202742` |
+| `--ybm-color-palette-blue-200` | `#e2edfc / #1e3352` |
+| `--ybm-color-palette-blue-300` | `#cbdffa / #1a4275` |
+| `--ybm-color-palette-blue-400` | `#aacefd / #0f559e` |
+| `--ybm-color-palette-blue-500` | `#85b8fd / #1964d8` |
+| `--ybm-color-palette-blue-600` | `#5e98fe / #1e82eb` |
+| `--ybm-color-palette-blue-700` | `#217cf9 / #41a2f9` |
+| `--ybm-color-palette-blue-800` | `#135fcd / #83bcf9` |
+| `--ybm-color-palette-blue-900` | `#0b4596 / #b9d7fb` |
+| `--ybm-color-palette-blue-1000` | `#032451 / #dcebfd` |
+| `--ybm-color-palette-green-100` | `#edfaf6 / #202926` |
+| `--ybm-color-palette-green-200` | `#d9f6e9 / #20362e` |
+| `--ybm-color-palette-green-300` | `#b9e9d2 / #20493b` |
+| `--ybm-color-palette-green-400` | `#7ddcb3 / #19604c` |
+| `--ybm-color-palette-green-500` | `#42c593 / #117956` |
+| `--ybm-color-palette-green-600` | `#10ab7d / #1b946d` |
+| `--ybm-color-palette-green-700` | `#079171 / #22b27f` |
+| `--ybm-color-palette-green-800` | `#00745f / #35ce9a` |
+| `--ybm-color-palette-green-900` | `#075445 / #93e5c0` |
+| `--ybm-color-palette-green-1000` | `#0a2b24 / #c2efdb` |
+| `--ybm-color-palette-orange-100` | `#fff2ec / #31241f` |
+| `--ybm-color-palette-orange-200` | `#ffe8db / #4b291c` |
+| `--ybm-color-palette-orange-300` | `#ffd5c0 / #6b311c` |
+| `--ybm-color-palette-orange-400` | `#ffb999 / #923600` |
+| `--ybm-color-palette-orange-500` | `#ff9364 / #bd4201` |
+| `--ybm-color-palette-orange-600` | `#ff6600 / #e65200` |
+| `--ybm-color-palette-orange-700` | `#e14d00 / #ff6600` |
+| `--ybm-color-palette-orange-800` | `#b93901 / #ff9e65` |
+| `--ybm-color-palette-orange-900` | `#862b00 / #eecebc` |
+| `--ybm-color-palette-orange-1000` | `#471601 / #f9ece4` |
+| `--ybm-color-palette-yellow-100` | `#fff7de / #411e03` |
+| `--ybm-color-palette-yellow-200` | `#fdefb9 / #512906` |
+| `--ybm-color-palette-yellow-300` | `#fbdc65 / #633408` |
+| `--ybm-color-palette-yellow-400` | `#fdc700 / #7f4505` |
+| `--ybm-color-palette-yellow-500` | `#f0b100 / #9d5800` |
+| `--ybm-color-palette-yellow-600` | `#d08700 / #b97000` |
+| `--ybm-color-palette-yellow-700` | `#a65f00 / #d38b00` |
+| `--ybm-color-palette-yellow-800` | `#894b00 / #ebaa00` |
+| `--ybm-color-palette-yellow-900` | `#733e0a / #fccf3a` |
+| `--ybm-color-palette-yellow-1000` | `#432004 / #fce89a` |
+| `--ybm-color-palette-purple-100` | `#f5f3fe / #201a2e` |
+| `--ybm-color-palette-purple-200` | `#efeafe / #2b2140` |
+| `--ybm-color-palette-purple-300` | `#e1d8ff / #392a57` |
+| `--ybm-color-palette-purple-400` | `#d0c0ff / #493571` |
+| `--ybm-color-palette-purple-500` | `#b8a1ff / #5e4593` |
+| `--ybm-color-palette-purple-600` | `#9f84fb / #7659bd` |
+| `--ybm-color-palette-purple-700` | `#8969ea / #9179e0` |
+| `--ybm-color-palette-purple-800` | `#6d50cb / #b4a1f5` |
+| `--ybm-color-palette-purple-900` | `#50379b / #d3c7fb` |
+| `--ybm-color-palette-purple-1000` | `#29175d / #ece7fe` |
+| `--ybm-color-palette-red-100` | `#fdf0f0 / #322323` |
+| `--ybm-color-palette-red-200` | `#fde7e7 / #4f2624` |
+| `--ybm-color-palette-red-300` | `#fed4d2 / #742826` |
+| `--ybm-color-palette-red-400` | `#feb7b3 / #a12621` |
+| `--ybm-color-palette-red-500` | `#fe928d / #ca2319` |
+| `--ybm-color-palette-red-600` | `#fc6a66 / #f73526` |
+| `--ybm-color-palette-red-700` | `#fa342c / #ff6e60` |
+| `--ybm-color-palette-red-800` | `#ca1d13 / #ffa299` |
+| `--ybm-color-palette-red-900` | `#921708 / #f8c5c3` |
+| `--ybm-color-palette-red-1000` | `#4a1209 / #fbe0de` |
+| `--ybm-color-palette-static-white` | `#ffffff / #ffffff` |
+| `--ybm-color-palette-static-black` | `#000000 / #000000` |
+| `--ybm-color-palette-static-black-alpha-100` | `#00000007 / #00000007` |
+| `--ybm-color-palette-static-black-alpha-200` | `#0000000c / #0000000c` |
+| `--ybm-color-palette-static-black-alpha-300` | `#00000010 / #00000010` |
+| `--ybm-color-palette-static-black-alpha-400` | `#00000021 / #00000021` |
+| `--ybm-color-palette-static-black-alpha-500` | `#0000002c / #0000002c` |
+| `--ybm-color-palette-static-black-alpha-600` | `#0000004c / #0000004c` |
+| `--ybm-color-palette-static-black-alpha-700` | `#00000074 / #00000074` |
+| `--ybm-color-palette-static-black-alpha-800` | `#000000a2 / #000000a2` |
+| `--ybm-color-palette-static-black-alpha-900` | `#000000d0 / #000000d0` |
+| `--ybm-color-palette-static-black-alpha-1000` | `#000000e3 / #000000e3` |
+| `--ybm-color-palette-static-white-alpha-50` | `#ffffff0d / #ffffff0d` |
+| `--ybm-color-palette-static-white-alpha-100` | `#ffffff17 / #ffffff17` |
+| `--ybm-color-palette-static-white-alpha-200` | `#ffffff20 / #ffffff20` |
+| `--ybm-color-palette-static-white-alpha-300` | `#ffffff2e / #ffffff2e` |
+| `--ybm-color-palette-static-white-alpha-400` | `#ffffff3d / #ffffff3d` |
+| `--ybm-color-palette-static-white-alpha-500` | `#ffffff60 / #ffffff60` |
+| `--ybm-color-palette-static-white-alpha-600` | `#ffffff8b / #ffffff8b` |
+| `--ybm-color-palette-static-white-alpha-700` | `#ffffffb3 / #ffffffb3` |
+| `--ybm-color-palette-static-white-alpha-800` | `#ffffffde / #ffffffde` |
+| `--ybm-color-palette-static-white-alpha-900` | `#ffffffea / #ffffffea` |
+| `--ybm-color-palette-static-white-alpha-1000` | `#fffffff4 / #fffffff4` |
+
+
+---
+
 <!-- https://luvms012-rgb.github.io/ybm-ds/site/foundations/icons.md -->
 
 # Iconography
@@ -720,7 +1043,7 @@ Figma 라이브러리컴포넌트와 토큰을 Figma에서 봅니다.
 
 ## 개요
 
-아이콘은 Lucide 한 가지만 씁니다. 지금 바로 쓸 수 있는 아이콘은 155개입니다. 더 필요하면 아래 아이콘 더보기에서 찾아 넣습니다.
+아이콘은 Lucide 한 가지만 씁니다. 선이 고르고 모양이 단순해 처음 보는 사람도 뜻을 바로 압니다. 지금 바로 쓸 수 있는 아이콘은 155개이고, 필요하면 Lucide 1,999개 가운데서 더 넣습니다. 모든 아이콘은 [Library](https://luvms012-rgb.github.io/ybm-ds/site/foundations/icons-library.md)에서 찾아 바로 복사합니다.
 
 ```html
 <!-- 글자 옆: 꾸밈용이라 aria-hidden -->
@@ -734,13 +1057,36 @@ Figma 라이브러리컴포넌트와 토큰을 Figma에서 봅니다.
 </button>
 ```
 
-- 색은 따로 정하지 않습니다. 둘러싼 글자색을 그대로 따라갑니다.
-- 크기는 기본 20 이고, `ds-icon--sm` 16, `ds-icon--lg` 24 두 가지가 더 있습니다.
-- 아이콘만 있는 버튼에는 `aria-label`로 뜻을 적습니다. 글자 옆의 꾸밈용 아이콘에는 `aria-hidden="true"`를 붙입니다.
+## 종류
 
-## 아이콘 목록
+| 종류 | 모양 | 쓰는 곳 |
+| --- | --- | --- |
+| 선 | `ds-icon--house` | 대부분의 자리. 기본 모양입니다. |
+| 채움 | `ds-icon--house-solid` | 선택된 탭, 상태 표시처럼 더 강하게 보여야 할 때. 이름 끝에 `-solid`가 붙습니다. |
 
-이름을 누르면 클래스가 복사됩니다. 이름 끝에 `-solid`가 붙은 것은 채움 모양입니다.
+## 이름 규칙
+
+- 이름은 쓰임이 아니라 생김새로 붙입니다. 닫기 버튼이어도 이름은 `x` 입니다.
+- 이름은 Lucide 이름을 그대로 씁니다. 클래스는 `ds-icon--` 뒤에 이름을 붙입니다.
+- Library 에서는 영어 이름, 영어 태그, 한국어 쓰임으로 찾을 수 있습니다.
+
+## 크기와 색
+
+크기는 기본 20 이고, `ds-icon--sm` 16, `ds-icon--lg` 24 두 가지가 더 있습니다. 그 밖의 크기가 꼭 필요하면 `--ds-icon-size` 변수로 바꿉니다. 색은 부모의 글자색을 바꾸면 따라옵니다.
+
+```html
+<i class="ds-icon ds-icon--search ds-icon--sm" aria-hidden="true"></i>  <!-- 16 -->
+<i class="ds-icon ds-icon--search" aria-hidden="true"></i>              <!-- 20 기본 -->
+<i class="ds-icon ds-icon--search ds-icon--lg" aria-hidden="true"></i>  <!-- 24 -->
+
+<!-- 색은 부모 글자색 -->
+<span style="color: var(--ybm-color-fg-brand)"><i class="ds-icon ds-icon--circle-check-solid" aria-hidden="true"></i></span>
+<span style="color: var(--ybm-color-fg-critical)"><i class="ds-icon ds-icon--triangle-alert-solid" aria-hidden="true"></i></span>
+```
+
+## 쓰임
+
+자주 쓰는 아이콘의 쓰임입니다. 같은 뜻에는 늘 같은 아이콘을 씁니다.
 
 ### 이동
 
@@ -937,23 +1283,13 @@ Figma 라이브러리컴포넌트와 토큰을 Figma에서 봅니다.
 |  | 도움이 됐어요 |
 |  | 도움이 안 됐어요 |
 
-## 크기와 색
+## 새 아이콘 넣기
 
-크기는 셋 중 하나를 고릅니다. 그 밖의 크기가 꼭 필요하면 `--ds-icon-size` 변수로 바꿉니다. 색은 부모의 글자색을 바꾸면 따라옵니다.
+지금 있는 아이콘 안에서 쓰는 것을 먼저 권합니다. 그래도 새 아이콘이 필요하면 아래 순서를 따릅니다.
 
-```html
-<i class="ds-icon ds-icon--search ds-icon--sm" aria-hidden="true"></i>  <!-- 16 -->
-<i class="ds-icon ds-icon--search" aria-hidden="true"></i>              <!-- 20 기본 -->
-<i class="ds-icon ds-icon--search ds-icon--lg" aria-hidden="true"></i>  <!-- 24 -->
-
-<!-- 색은 부모 글자색 -->
-<span style="color: var(--ybm-color-fg-brand)"><i class="ds-icon ds-icon--circle-check-solid" aria-hidden="true"></i></span>
-<span style="color: var(--ybm-color-fg-critical)"><i class="ds-icon ds-icon--triangle-alert-solid" aria-hidden="true"></i></span>
-```
-
-## 아이콘 더보기
-
-여기 없는 아이콘은 Lucide 1,999개에서 찾습니다. 아이콘을 누르면 `icons.css`에 붙여 넣을 줄이 복사되고, 붙여 넣으면 바로 쓸 수 있습니다. 이미 들어 있는 것은 CSS 표시가 붙어 있고 누르면 클래스가 복사됩니다.
+1. [Library](https://luvms012-rgb.github.io/ybm-ds/site/foundations/icons-library.md)의 Lucide 전체에서 알맞은 아이콘을 고릅니다.
+2. 오른쪽 칸의 **icons.css 줄**을 복사해 `dist/icons.css` 끝에 붙입니다.
+3. 그다음부터 `ds-icon--이름` 클래스로 씁니다.
 
 ```html
 /* Lucide heart - 복사된 줄을 dist/icons.css 끝에 붙인다 */
@@ -975,6 +1311,19 @@ Figma 라이브러리컴포넌트와 토큰을 Figma에서 봅니다.
 | **Don't** | 이모지나 다른 아이콘 세트를 섞지 않습니다. |
 | **Don't** | 아이콘 그림을 손으로 고치지 않습니다. Lucide 원본 그대로 씁니다. |
 | **Don't** | 아이콘 하나로 긴 뜻을 대신하지 않습니다. 뜻이 분명하지 않으면 글자를 같이 씁니다. |
+
+아이콘 그림은 Lucide(ISC 라이선스)입니다. [라이선스 전문](https://luvms012-rgb.github.io/ybm-ds/site/assets/lucide-LICENSE.txt)
+
+
+---
+
+<!-- https://luvms012-rgb.github.io/ybm-ds/site/foundations/icons-library.md -->
+
+# Iconography
+
+아이콘은 정보와 기능을 빠르게 알아보도록 돕습니다.
+
+영어 이름, 태그, 한국어 쓰임으로 찾아 보세요.
 
 아이콘 그림은 Lucide(ISC 라이선스)입니다. [라이선스 전문](https://luvms012-rgb.github.io/ybm-ds/site/assets/lucide-LICENSE.txt)
 

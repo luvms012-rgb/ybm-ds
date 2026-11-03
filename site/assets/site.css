@@ -77,19 +77,20 @@ body[data-side-open] .site-scrim { opacity: 1; pointer-events: auto; }
 .site-main { min-width: 0; padding: var(--ybm-space-x6) var(--ybm-space-x4) var(--ybm-space-x24); }
 .site-doc { max-width: calc(var(--site-col) - 2 * var(--ybm-space-x6)); }
 .site-body--wide .site-doc { max-width: 1152px; margin-inline: auto; }  /* 레퍼런스 A 컴포넌트 목록: 1152 가운데 (1920 실측) */
-.site-body--full .site-doc { max-width: 1552px; margin-inline: auto; }  /* 레퍼런스 A 템플릿 목록: 1600 칸 안쪽 24 = 1552 가운데 (2000 실측) */
+.site-body--full .site-doc { max-width: 1552px; margin-inline: auto; }
+.site-body--page .site-doc { max-width: 1100px; margin-inline: auto; }  /* 레퍼런스 B Get Started, Updates: 왼쪽 메뉴 없이 1100 가운데 (1440 실측) */  /* 레퍼런스 A 템플릿 목록: 1600 칸 안쪽 24 = 1552 가운데 (2000 실측) */
 .site-toc { display: none; }
 /* 768 이상: 왼쪽 메뉴 260 을 화면 왼쪽에 붙이고, 글 칸(최대 800, 안쪽 24)은 메뉴 바로 옆에서 시작 */
 @media (min-width: 768px) {
   .site-side__mobile { display: none; }
   .site-menu-btn { display: none; }
-  .site-body:not(.site-body--full) { display: grid; grid-template-columns: var(--site-side) minmax(0, 1fr); }
+  .site-body:not(.site-body--full, .site-body--page) { display: grid; grid-template-columns: var(--site-side) minmax(0, 1fr); }
   .site-body.site-body--doc { grid-template-columns: var(--site-side) minmax(0, var(--site-col)) 1fr; }
   .site-main { padding: 72px var(--ybm-space-x6) var(--ybm-space-x24); }
   .site-side { position: sticky; top: var(--site-top); z-index: auto; align-self: start; width: auto; height: calc(100vh - var(--site-top)); padding: var(--ybm-space-x3) var(--ybm-space-x2) 80px; box-shadow: none; transform: none; transition: none; }
   .site-side__top, .site-scrim { display: none; }
-  .site-body--full .site-side { display: none; }
-  .site-body--full .site-main { padding-inline: var(--ybm-space-x6); }
+  .site-body--full .site-side, .site-body--page .site-side { display: none; }
+  .site-body--full .site-main, .site-body--page .site-main { padding-inline: var(--ybm-space-x6); }
 }
 /* 1280 이상: 글 칸 + 간격 32 + 목차 232 를 메뉴 오른쪽 남은 폭 가운데로 (넓으면 양쪽 빈칸이 같다) */
 @media (min-width: 1280px) {
@@ -425,15 +426,70 @@ body[data-side-open] .site-scrim { opacity: 1; pointer-events: auto; }
 /* 문서 글과 표 안 텍스트 링크는 진한 색(11-03 사용자 "진한 게 맥락상 맞아"). 미리보기 안 부품은 DS 그대로 */
 .site-doc .ds-link:not(.pv-stage *, .site-example__preview *, .site-tile__inner *) { --ds-link-color: var(--ybm-color-fg-neutral); --ds-link-color-hover: var(--ybm-color-fg-neutral-muted); }
 
-/* 컴포넌트 상세 구조 그림 (레퍼런스 B Anatomy 톤): 흰 바탕 가운데 부품, 보라 글자로 부품 이름과 가는 화살표. 위치는 site.js */
-.site-doc > .site-cover.site-anatomy { --site-thumb-bg: var(--ybm-color-bg-layer-default); margin-top: var(--ybm-space-x6); box-shadow: inset 0 0 0 1px var(--site-box-line); }
-.site-anatomy .site-tile__inner { padding: var(--ybm-space-x16) 160px; }  /* 좌우에 이름 자리 */
-.site-anatomy__layer { position: absolute; inset: 0; overflow: visible; pointer-events: none; }
-.site-anatomy__layer line { stroke: var(--ybm-color-fg-magic); stroke-width: 1; }
-.site-anatomy__layer path { fill: var(--ybm-color-fg-magic); }
-.site-anatomy__name { position: absolute; color: var(--ybm-color-fg-magic); font-size: var(--ybm-font-size-t04); line-height: 20px; white-space: nowrap; }
+/* 컴포넌트 상세 구조 그림 (레퍼런스 B Anatomy): 바탕 가운데 실제 크기 부품, 파란 글자 이름과 곧은 가는 화살표. 위치는 site.js */
+.site-doc > .site-cover.site-anatomy { --site-thumb-bg: var(--ybm-color-bg-layer-default); --site-anatomy-c: var(--ybm-color-fg-informative); margin-top: var(--ybm-space-x6); box-shadow: inset 0 0 0 1px var(--site-box-line); }
+.site-anatomy .site-tile__inner { padding: var(--ybm-space-x16) 160px; }  /* 위아래와 좌우에 이름 자리 */
+.site-anatomy__layer { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+.site-anatomy__layer line { stroke: var(--site-anatomy-c); stroke-width: 1; }
+.site-anatomy__layer path { fill: var(--site-anatomy-c); }
+.site-anatomy__name { position: absolute; color: var(--site-anatomy-c); font-size: var(--ybm-font-size-t03); line-height: 16px; white-space: nowrap; }
 .site-anatomy-table td:first-child { width: 1%; white-space: nowrap; }
 .site-anatomy__part { display: inline-flex; align-items: center; gap: var(--ybm-space-x2); }
+
+/* ---- 파운데이션 탭 (레퍼런스 B Color, Iconography): 제목 아래 밑줄 탭, 탭마다 한 쪽 ---- */
+.site-pagetabs { display: flex; gap: var(--ybm-space-x6); margin-top: var(--ybm-space-x8); box-shadow: inset 0 -1px 0 var(--site-box-line); overflow-x: auto; scrollbar-width: none; }
+.site-pagetabs a { flex: none; padding: var(--ybm-space-x2) 0 10px; color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t05); line-height: 24px; text-decoration: none; box-shadow: inset 0 -2px 0 transparent; }
+.site-pagetabs a:hover { color: var(--ybm-color-fg-neutral); }
+.site-pagetabs a[aria-current="page"] { color: var(--ybm-color-fg-neutral); font-weight: var(--ybm-font-weight-medium); box-shadow: inset 0 -2px 0 var(--ybm-color-fg-neutral); }
+.site-pagetabs + p { margin-top: var(--ybm-space-x8); }
+
+/* ---- Color Roles: 역할마다 대표 토큰 견본, 토큰 표 설명 ---- */
+.site-rolechips { display: flex; flex-wrap: wrap; gap: var(--ybm-space-x2); margin-top: var(--ybm-space-x3); }
+.site-rolechip { display: inline-flex; align-items: center; padding: 6px var(--ybm-space-x3) 6px var(--ybm-space-x2); border-radius: var(--ybm-shape-md); background: var(--ybm-color-bg-neutral-weak-alpha); }
+.site-rolechip code { background: none !important; padding: 0 !important; font-size: 13px !important; }
+.site-token-desc { color: var(--ybm-color-fg-neutral-muted); font-size: var(--ybm-font-size-t04); line-height: 20px; }
+
+/* ---- Color Palette: 레퍼런스 B 팔레트 격자. 견본은 실제 값(--l 라이트 / --d 다크) ---- */
+.site-pal { display: grid; gap: var(--ybm-space-x1); margin-top: var(--ybm-space-x4); overflow-x: auto; }
+.site-pal__row { display: grid; grid-template-columns: 64px repeat(var(--n), minmax(36px, 1fr)); gap: var(--ybm-space-x1); align-items: center; min-width: 480px; }
+.site-pal__head span { color: var(--ybm-color-fg-neutral-muted); font-size: var(--ybm-font-size-t03); text-align: center; }
+.site-pal__name { color: var(--ybm-color-fg-neutral-muted); font-size: var(--ybm-font-size-t04); }
+.site-pal__cell { aspect-ratio: 5 / 4; border-radius: var(--ybm-shape-xs); background: var(--l); box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-neutral-subtle); }
+:root[data-theme="dark"] .site-pal__cell { background: var(--d); }
+
+/* ---- Iconography Library (레퍼런스 B): 묶음 전환, 찾기, 정사각 칸 격자, 오른쪽 정보 칸 ---- */
+.site-lib { margin-top: var(--ybm-space-x8); }
+.site-lib__bar { display: flex; flex-direction: column; align-items: center; gap: var(--ybm-space-x4); }
+.site-lib__search { width: 100%; }
+.site-lib__hint { align-self: flex-start; margin: 0; color: var(--ybm-color-fg-neutral-muted); font-size: var(--ybm-font-size-t04); }
+.site-lib__body { display: flex; flex-direction: column-reverse; gap: var(--ybm-space-x6); margin-top: var(--ybm-space-x4); }
+.site-lib__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(48px, 1fr)); gap: var(--ybm-space-x3); align-content: start; flex: 1; min-width: 0; }
+.site-lib__tile { display: flex; align-items: center; justify-content: center; aspect-ratio: 1; padding: 0; border: 0; border-radius: var(--ybm-shape-md); background: var(--ybm-color-bg-neutral-weak-alpha); color: var(--ybm-color-fg-neutral); cursor: pointer; transition: background-color var(--ybm-duration-fast) var(--ybm-easing-standard); }
+.site-lib__tile:hover { background: var(--ybm-color-bg-neutral-weak-alpha-pressed); }
+.site-lib__tile[aria-selected="true"] { background: var(--ybm-color-bg-informative-weak); box-shadow: inset 0 0 0 1px var(--ybm-color-stroke-informative-solid); color: var(--ybm-color-fg-informative); }
+.site-lib__tile:focus-visible { outline: 2px solid var(--ybm-color-stroke-focus-ring); outline-offset: 2px; }
+.site-lib__panel:empty { display: none; }
+.site-lib__panel { display: flex; flex-direction: column; gap: var(--ybm-space-x4); padding: var(--ybm-space-x4); border-radius: var(--ybm-shape-xl); box-shadow: inset 0 0 0 1px var(--site-box-line); }
+.site-lib__name { display: flex; align-items: center; justify-content: space-between; gap: var(--ybm-space-x2); font-family: var(--site-mono); font-size: var(--ybm-font-size-t04); word-break: break-all; }
+.site-lib__tags { display: flex; flex-wrap: wrap; gap: var(--ybm-space-x1); }
+.site-lib__tags span { padding: 2px var(--ybm-space-x2); border-radius: var(--ybm-shape-pill); background: var(--ybm-color-bg-neutral-weak-alpha); color: var(--ybm-color-fg-neutral-muted); font-size: var(--ybm-font-size-t02); line-height: 18px; }
+.site-lib__preview { display: flex; align-items: center; justify-content: center; height: 96px; border-radius: var(--ybm-shape-lg); background: var(--ybm-color-bg-neutral-weak-alpha); color: var(--ybm-color-fg-neutral); }
+.site-lib__note { margin: 0; color: var(--ybm-color-fg-neutral-muted); font-size: var(--ybm-font-size-t03); line-height: 20px; }
+.site-lib__code { border-radius: var(--ybm-shape-lg); background: var(--ybm-color-bg-neutral-weak-alpha); overflow: hidden; }
+.site-lib__codehead { display: flex; align-items: center; justify-content: space-between; padding: var(--ybm-space-x1) var(--ybm-space-x1) 0 var(--ybm-space-x3); color: var(--ybm-color-fg-neutral-muted); font-size: var(--ybm-font-size-t02); }
+.site-lib__code pre { margin: 0; padding: var(--ybm-space-x1) var(--ybm-space-x3) var(--ybm-space-x3); max-height: 160px; overflow: auto; font-family: var(--site-mono); font-size: 12px; line-height: 18px; white-space: pre-wrap; word-break: break-all; }
+@media (min-width: 1024px) {
+  .site-lib__body { flex-direction: row; align-items: flex-start; }
+  .site-lib__panel { position: sticky; top: calc(var(--site-top) + var(--ybm-space-x4)); flex: none; width: 300px; max-height: calc(100vh - var(--site-top) - var(--ybm-space-x8)); overflow-y: auto; }
+}
+
+/* ---- Updates (레퍼런스 B): 소식 카드 ---- */
+.site-updates { display: grid; gap: var(--ybm-space-x3); margin-top: var(--ybm-space-x4); }
+@media (min-width: 768px) { .site-updates { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.site-update { display: flex; flex-direction: column; gap: var(--ybm-space-x1); padding: var(--ybm-space-x4) var(--ybm-space-x5); border-radius: var(--ybm-shape-lg); background: var(--ybm-color-bg-neutral-weak-alpha); }
+.site-update time { color: var(--ybm-color-fg-neutral-subtle); font-size: var(--ybm-font-size-t03); line-height: 20px; }
+.site-doc .site-update h3 { margin: 0 !important; font-size: var(--ybm-font-size-t06) !important; line-height: 26px !important; font-weight: var(--ybm-font-weight-medium); }
+.site-doc .site-update p { margin: 0; color: var(--ybm-color-fg-neutral-muted); font-size: var(--ybm-font-size-t04) !important; line-height: 22px !important; }
 
 /* 가이드는 브랜드 색 없이 모노톤으로 보여 준다 (2026-11-02 사용자 "가이드에 브랜드 컬러 적용 X").
    브랜드 역할 색을 같은 자리의 neutral 색으로 바꾼다. 서비스는 palette/brand 를 바꿔 자기 브랜드 색을 쓴다(Color 페이지).

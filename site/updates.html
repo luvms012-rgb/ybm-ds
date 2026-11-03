@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Updates - YBM DS</title>
+<meta name="description" content="YBM DS 업데이트 소식">
+<!-- 생성물: node site/build.mjs가 만든다. 직접 고치지 말고 site/build.mjs나 site/src를 고친다 -->
+<script>try { var t = localStorage.getItem("ybm-site-theme"); if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.dataset.theme = "dark"; } catch (e) {}</script>
+<link rel="icon" href="assets/logo-ybmnet.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../dist/ybm-ds.css">
+<link rel="stylesheet" href="assets/site.css?v=49cb06d4">
+<script src="../dist/ybm-ds.js" defer></script>
+<script src="assets/site.js?v=49cb06d4" defer></script>
+</head>
+<body class="site">
+<a class="site-skip" href="#main">본문 바로가기</a>
+<header class="site-top">
+  <a class="site-logo" href="index.html"><img src="assets/logo-ybmnet.svg" alt="YBM NET" width="81" height="24"></a>
+  <nav class="site-topnav" aria-label="주요 메뉴">
+    <a class="site-topnav__item" href="index.html">Get Started</a>
+    <a class="site-topnav__item" href="foundations/index.html">Foundations</a>
+    <a class="site-topnav__item" href="components/index.html">Components</a>
+    <a class="site-topnav__item" href="templates/index.html">Templates</a>
+    <a class="site-topnav__item" href="updates.html" aria-current="page">Updates</a>
+  </nav>
+  <div class="site-top__end">
+    <button type="button" class="ds-btn site-theme-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="화면 모드 바꾸기" data-site-theme-toggle><i class="ds-icon site-i--moon" aria-hidden="true"></i><i class="ds-icon site-i--sun" aria-hidden="true"></i></button>
+    <a class="ds-btn site-only-wide" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" href="https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=2608-2" target="_blank" rel="noopener" aria-label="Figma 파일"><i class="ds-icon site-i--figma" aria-hidden="true"></i></a>
+    <a class="ds-btn site-only-wide" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" href="https://github.com/luvms012-rgb/ybm-ds" target="_blank" rel="noopener" aria-label="GitHub 저장소"><i class="ds-icon site-i--github" aria-hidden="true"></i></a>
+    <a class="ds-btn site-cta" data-variant="neutralSolid" data-size="xsmall" href="index.html#start">시작하기</a>
+    <button type="button" class="ds-btn site-menu-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="메뉴 열기" data-site-menu aria-controls="site-side" aria-expanded="false"><i class="ds-icon ds-icon--menu" aria-hidden="true"></i></button>
+  </div>
+</header>
+<div class="site-body site-body--page">
+<aside class="site-side" id="site-side" aria-label="페이지 목록">
+  <div class="site-side__top"><b>메뉴</b><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" data-site-close aria-label="메뉴 닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button></div>
+  <div class="site-side__mobile"><nav class="site-nav" aria-label="주요 메뉴"><a class="site-nav__item" href="index.html">Get Started</a><a class="site-nav__item" href="foundations/index.html">Foundations</a><a class="site-nav__item" href="components/index.html">Components</a><a class="site-nav__item" href="templates/index.html">Templates</a><a class="site-nav__item" href="updates.html" aria-current="page">Updates</a></nav><div class="site-nav__sep"></div></div>
+  <nav class="site-nav" aria-label="Updates 메뉴"></nav>
+</aside>
+<div class="site-scrim" data-site-close></div>
+<main class="site-main" id="main">
+<article class="site-doc">
+<header class="site-head"><h1 class="site-h1">Updates</h1><p class="site-lead">YBM DS 업데이트 소식과 변경 기록입니다.</p>
+</header>
+<h2 id="release-notes">Release Notes<a class="site-anchor" href="#release-notes" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
+<div class="site-updates">
+<article class="site-update"><time datetime="2026-11-03">2026. 11. 3</time><h3>문서 사이트를 다섯 메뉴로</h3><p>메뉴를 Get Started, Foundations, Components, Templates, Updates 다섯 개로 나눴습니다. Color 는 Overview, Roles, Palette 로, Iconography 는 Overview, Library 로 나누고 아이콘을 찾아 바로 복사하는 라이브러리를 만들었습니다.</p></article>
+<article class="site-update"><time datetime="2026-11-03">2026. 11. 3</time><h3>컴포넌트 구조 그림</h3><p>컴포넌트마다 부품 이름과 화살표로 생김새를 보여 주는 구조 그림을 넣었습니다. 화살표는 곧게 부품을 가리키고 서로 엇갈리지 않습니다.</p></article>
+<article class="site-update"><time datetime="2026-11-03">2026. 11. 3</time><h3>DS Table 개편과 새 선택지</h3><p>표의 위 선, 머리줄, 행 높이를 다시 정하고 두 줄 칸과 묶음 행을 더했습니다. Text Link small, Segmented 높이 32 와 40, Card subtle 같은 선택지도 늘었습니다.</p></article>
+<article class="site-update"><time datetime="2026-11-02">2026. 11. 2</time><h3>템플릿 67종</h3><p>대시보드, 표, 폼, 커뮤니티, 요금제처럼 자주 만드는 화면을 템플릿으로 더해 67종이 되었습니다. 템플릿마다 Figma 화면이 함께 있습니다.</p></article>
+<article class="site-update"><time datetime="2026-11-01">2026. 11. 1</time><h3>아이콘 93개 추가</h3><p>폴더, 필터, 메일, 설정처럼 화면에 자주 쓰는 Lucide 아이콘 93개를 더했습니다.</p></article>
+<article class="site-update"><time datetime="2026-10-31">2026. 10. 31</time><h3>Figma 와 문서 연결</h3><p>컴포넌트와 Foundations 문서마다 Figma 와 코드로 가는 버튼을 달았습니다. Figma 문서 프레임에서도 사이트의 같은 페이지로 갑니다.</p></article>
+<article class="site-update"><time datetime="2026-10-30">2026. 10. 30</time><h3>Rating 컴포넌트</h3><p>별점을 보여 주고 고르는 Rating 을 CSS 와 Figma 에 함께 만들었습니다.</p></article>
+<article class="site-update"><time datetime="2026-10-29">2026. 10. 29</time><h3>새 컴포넌트 16종</h3><p>Top App Bar, Top Navigation, Search Suggestion, File Attach, Menu Sheet, Side Panel, Carousel, Code Block 같은 컴포넌트를 CSS 와 Figma 에 함께 만들었습니다.</p></article>
+</div>
+<p class="site-note">자세한 변경 기록은 <a class="ds-link" href="https://github.com/luvms012-rgb/ybm-ds/commits/main" target="_blank" rel="noopener">GitHub</a>에 있습니다.</p>
+
+<footer class="site-footer">
+  <div class="site-footer__brand"><img src="assets/logo-ybmnet.svg" alt="YBM NET" width="81" height="24"><p class="site-footer__copy">© 2026 YBM NET. All rights reserved.</p></div>
+  <nav class="site-footer__nav" aria-label="사이트 메뉴">
+    <div><p class="site-footer__title">메뉴</p><a href="index.html">Get Started</a><a href="foundations/index.html">Foundations</a><a href="components/index.html">Components</a><a href="templates/index.html">Templates</a><a href="updates.html">Updates</a></div>
+    <div><p class="site-footer__title">더 보기</p><a href="https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=2608-2" target="_blank" rel="noopener">Figma</a><a href="https://github.com/luvms012-rgb/ybm-ds" target="_blank" rel="noopener">GitHub</a></div>
+  </nav>
+</footer>
+</article>
+</main>
+
+</div>
+</body>
+</html>
