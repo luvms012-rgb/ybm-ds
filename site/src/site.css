@@ -225,6 +225,8 @@ body[data-side-open] .site-scrim { opacity: 1; pointer-events: auto; }
 .site-pager a { display: flex; flex-direction: column; justify-content: center; gap: var(--ybm-space-x2); min-width: 0; min-height: 52px; padding: 14px var(--ybm-space-x5); border-radius: var(--ybm-shape-lg); background: var(--ybm-color-bg-neutral-weak-alpha); color: var(--ybm-color-fg-neutral); text-decoration: none; transition: background-color var(--ybm-duration-fast) var(--ybm-easing-standard); }
 .site-pager a:hover { background: var(--ybm-color-bg-neutral-weak-alpha-pressed); }
 .site-pager a[data-dir="next"] { grid-column: 2; align-items: flex-end; text-align: right; }
+/* 이전이나 다음 하나만 있으면 한 칸을 가로 전체로 (빈 칸을 남기지 않는다) */
+.site-pager a:only-child { grid-column: 1 / -1; }
 .site-pager__label { display: inline-flex; align-items: center; gap: var(--ybm-space-x2); font-size: var(--ybm-font-size-t04); line-height: 19px; }
 .site-pager__label > .ds-icon { --ds-icon-size: 14px; }
 .site-pager b { overflow: hidden; max-width: 100%; font-size: var(--ybm-font-size-t05); line-height: 22px; font-weight: var(--ybm-font-weight-medium); text-overflow: ellipsis; white-space: nowrap; }
@@ -252,9 +254,9 @@ body[data-side-open] .site-scrim { opacity: 1; pointer-events: auto; }
 .site-doc > header + .site-tiles { margin-top: var(--ybm-space-x12); }  /* 컴포넌트 목록: 분류 없이 ABC 순 한 목록 */
 .site-group[hidden] { display: none; }
 .site-doc .site-group__title { display: flex; align-items: baseline; gap: var(--ybm-space-x2); margin: 0; font-size: var(--ybm-font-size-t07); line-height: var(--ybm-line-height-t07);  font-weight: var(--ybm-font-weight-medium); letter-spacing: 0; }
+/* 카드 묶음: 줄을 늘 가로로 꽉 채운다(카드 수가 늘거나 줄어도 빈 칸 없음). 좁으면 1열, 560 부터 2열이고 홀수면 마지막 카드가 두 칸 */
 .site-grid { display: grid; grid-template-columns: 1fr; gap: var(--ybm-space-x4); margin-top: var(--ybm-space-x4); }
-@media (min-width: 560px) { .site-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media (min-width: 1280px) { .site-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (min-width: 560px) { .site-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .site-grid > :last-child:nth-child(odd) { grid-column: 1 / -1; } }
 .site-card { display: flex; flex-direction: column; overflow: hidden; border: 1px solid var(--site-box-line); border-radius: var(--site-box-radius); background: var(--ybm-color-bg-layer-default); color: var(--ybm-color-fg-neutral); text-decoration: none; transition: border-color var(--ybm-duration-fast) var(--ybm-easing-standard); }
 .site-card[hidden] { display: none; }
 .site-card:hover { border-color: var(--ybm-color-stroke-neutral-contrast); }
