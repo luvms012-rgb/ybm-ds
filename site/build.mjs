@@ -365,7 +365,6 @@ ${DOC_LINE}
 const LLMS_RULES = `## 지킬 것
 
 - 설치: <head>에 CSS와 JS 두 줄을 넣는다. 서비스 CSS는 그다음에 불러온다.
-- 브라우저: DS는 CSS @layer를 쓴다. @layer를 모르는 브라우저(Chrome 99, Safari 15.4 이전)에서는 DS가 적용되지 않으니, 더 오래된 브라우저를 지원해야 하면 먼저 알린다.
 - 컴포넌트: ${PUBLIC}/components.json에 있는 것만 쓰고, 마크업은 ${RAW}/dist/components.css의 컴포넌트별 머리 주석 그대로 쓴다.
 - 색, 간격, 글자 크기, 모서리, 그림자는 --ds-* 토큰만 쓴다. hex, rgb를 직접 쓰지 않는다.
 - 모양을 바꿀 때는 컴포넌트 변수(--ds-[컴포넌트]-*)만 덮어쓴다. 새 ds- 클래스나 !important를 만들지 않는다.
@@ -414,7 +413,6 @@ ${codeblock(CSS_LINK)}
 <h2 id="migrate">내 사이트에 적용해보기</h2>
 <p>운영 중인 사이트는 한 번에 바꾸지 않고 아래 순서대로 적용합니다. 브랜드 컬러와 규칙 점검은 위 <a class="ds-link" href="#ai">AI로 시작하기</a>의 글을 그대로 씁니다.</p>
 ${MIGRATE.map(([t, d, p]) => `<h3>${esc(t)}</h3>\n<p>${esc(d)}</p>\n${codeblock(p, 'text', ' data-wrap')}`).join('\n')}
-<p class="site-note">DS는 CSS <code>@layer</code>를 씁니다. Chrome 99, Safari 15.4보다 오래된 브라우저에서는 DS가 적용되지 않습니다.</p>
 
 <h2 id="theme">다크 모드</h2>
 <p><code>html</code>에 속성 하나를 붙이면 모든 색이 어두운 화면용으로 바뀝니다. 색을 토큰으로만 썼다면 따로 고칠 것이 없습니다.</p>

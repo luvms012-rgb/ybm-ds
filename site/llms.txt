@@ -9,7 +9,6 @@
 ## 지킬 것
 
 - 설치: <head>에 CSS와 JS 두 줄을 넣는다. 서비스 CSS는 그다음에 불러온다.
-- 브라우저: DS는 CSS @layer를 쓴다. @layer를 모르는 브라우저(Chrome 99, Safari 15.4 이전)에서는 DS가 적용되지 않으니, 더 오래된 브라우저를 지원해야 하면 먼저 알린다.
 - 컴포넌트: https://luvms012-rgb.github.io/ybm-ds/components.json에 있는 것만 쓰고, 마크업은 https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/components.css의 컴포넌트별 머리 주석 그대로 쓴다.
 - 색, 간격, 글자 크기, 모서리, 그림자는 --ds-* 토큰만 쓴다. hex, rgb를 직접 쓰지 않는다.
 - 모양을 바꿀 때는 컴포넌트 변수(--ds-[컴포넌트]-*)만 덮어쓴다. 새 ds- 클래스나 !important를 만들지 않는다.
