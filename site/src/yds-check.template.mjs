@@ -90,7 +90,8 @@ for (const file of files) {
 
 const errors = problems.filter((p) => p.level === '오류');
 const warns = problems.filter((p) => p.level === '주의');
-if (asJson) { console.log(JSON.stringify({ files: files.length, errors: errors.length, warnings: warns.length, problems }, null, 2)); process.exit(errors.length ? 1 : 0); }
+// 결과가 길면 process.exit 가 파이프로 나가는 글을 자르므로, JSON 은 한 번에 써서 내보낸 뒤 끝낸다
+if (asJson) { fs.writeSync(1, JSON.stringify({ files: files.length, errors: errors.length, warnings: warns.length, problems }, null, 2) + '\n'); process.exit(errors.length ? 1 : 0); }
 const count = (list) => { const k = {}; for (const p of list) k[p.kind] = (k[p.kind] || 0) + 1; return Object.entries(k).map(([a, b]) => `${a} ${b}`).join(', '); };
 if (!quiet) for (const p of [...errors, ...warns]) console.log(`${p.file}:${p.line}  ${p.level} [${p.kind}] ${p.msg}`);
 console.log(`\nyds 검사: 파일 ${files.length}개, 오류 ${errors.length}개${errors.length ? ` (${count(errors)})` : ''}, 주의 ${warns.length}개${warns.length ? ` (${count(warns)})` : ''}`);

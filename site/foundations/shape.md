@@ -1,4 +1,4 @@
-<!-- https://luvms012-rgb.github.io/ybm-ds/site/foundations/shape.html -->
+<!-- https://luvms012-rgb.github.io/yds/site/foundations/shape.html -->
 
 # Radius
 

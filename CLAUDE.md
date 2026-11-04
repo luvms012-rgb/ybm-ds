@@ -10,8 +10,8 @@ PC 마다 따로 쌓이는 Claude 메모리는 서로 보이지 않는다 - 두 
 | 항목 | 주소 |
 |---|---|
 | 공식 Figma (정본) | 파일 `1VCEsFU3xMWuXIntIrZz9i` "디자인 시스템" - Foundations 페이지 <https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=2274-1143> |
-| GitHub 저장소 | <https://github.com/luvms012-rgb/ybm-ds> (브랜치 `main`) |
-| 배포 (Pages) | <https://luvms012-rgb.github.io/ybm-ds/> |
+| GitHub 저장소 | <https://github.com/luvms012-rgb/yds> (브랜치 `main`) |
+| 배포 (Pages) | <https://luvms012-rgb.github.io/yds/> |
 | 문서 사이트 | 이 저장소의 [site/](site/CLAUDE.md) 폴더 (2026-10-30 별도 저장소 ybm-ds-site 에서 합침). 구상 단계, 사용자가 만들라고 하기 전에는 코드 없음 |
 
 Foundations 페이지 문서 프레임(왼쪽→오른쪽): Color `2486:2`, Typography `2486:13`, Spacing `2486:24`, Radius `2486:35`, Elevation `2486:46`.
@@ -28,7 +28,7 @@ GitHub `main` 이 기준이다. PC 사이에 직접 옮기는 파일은 없다.
 ### 처음 세팅 (새 PC)
 
 ```
-git clone https://github.com/luvms012-rgb/ybm-ds.git
+git clone https://github.com/luvms012-rgb/yds.git
 ```
 
 - Node.js 가 있어야 한다(`node sync.mjs` 로 확인). 패키지 설치는 필요 없다.

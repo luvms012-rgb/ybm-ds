@@ -18,14 +18,14 @@ const ASSET_V = crypto.createHash('sha1').update(['src/site.css', 'src/site.js',
 const DS = path.resolve(SITE, '..');
 const read = (p) => fs.readFileSync(path.join(DS, p), 'utf8');
 const readJson = (p) => JSON.parse(read(p));
-const PUBLIC = 'https://luvms012-rgb.github.io/ybm-ds';
-const GITHUB = 'https://github.com/luvms012-rgb/ybm-ds';
-const RAW = 'https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main';
+const PUBLIC = 'https://luvms012-rgb.github.io/yds';
+const GITHUB = 'https://github.com/luvms012-rgb/yds';
+const RAW = 'https://raw.githubusercontent.com/luvms012-rgb/yds/main';
 const FIGMA = 'https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=';
 const SITE_URL = PUBLIC + '/site/';
 // 버전 (저장소 VERSION, node sync.mjs release 가 올린다). 버전 고정 주소는 jsDelivr 가 GitHub 태그를 그대로 내준다
 const VERSION = fs.readFileSync(path.join(path.dirname(fileURLToPath(import.meta.url)), '..', 'VERSION'), 'utf8').trim();
-const PIN = `https://cdn.jsdelivr.net/gh/luvms012-rgb/ybm-ds@v${VERSION}`;
+const PIN = `https://cdn.jsdelivr.net/gh/luvms012-rgb/yds@v${VERSION}`;
 // 페이지 머리말의 Figma / Code 버튼 주소 - Figma 문서 프레임의 "문서 / 코드" 링크와 같은 계획(tokens/links.mjs)
 const LINKS = linkPlan(DS);
 const linkByNo = Object.fromEntries(LINKS.entries.map((e) => [e.no, e]));

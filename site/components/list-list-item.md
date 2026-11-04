@@ -1,4 +1,4 @@
-<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/list-list-item.html -->
+<!-- https://luvms012-rgb.github.io/yds/site/components/list-list-item.html -->
 
 # List / List Item
 

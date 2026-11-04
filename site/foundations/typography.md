@@ -1,4 +1,4 @@
-<!-- https://luvms012-rgb.github.io/ybm-ds/site/foundations/typography.html -->
+<!-- https://luvms012-rgb.github.io/yds/site/foundations/typography.html -->
 
 # Typography
 

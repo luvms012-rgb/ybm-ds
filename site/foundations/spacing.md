@@ -1,4 +1,4 @@
-<!-- https://luvms012-rgb.github.io/ybm-ds/site/foundations/spacing.html -->
+<!-- https://luvms012-rgb.github.io/yds/site/foundations/spacing.html -->
 
 # Spacing
 

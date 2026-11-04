@@ -1,4 +1,4 @@
-<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/checkbox.html -->
+<!-- https://luvms012-rgb.github.io/yds/site/components/checkbox.html -->
 
 # Checkbox
 

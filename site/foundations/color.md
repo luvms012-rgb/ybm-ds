@@ -1,4 +1,4 @@
-<!-- https://luvms012-rgb.github.io/ybm-ds/site/foundations/color.html -->
+<!-- https://luvms012-rgb.github.io/yds/site/foundations/color.html -->
 
 # Color
 
@@ -10,11 +10,11 @@ yds의 색은 역할 색과 팔레트 색 두 층입니다. 화면에는 역할 
 
 ## 역할 색
 
-역할 색은 생김새가 아니라 하는 일로 이름을 붙입니다. 오류는 `critical`, 성공은 `positive`처럼 이름만 보고 쓰임을 압니다. 자세한 규칙과 전체 목록은 [Roles](https://luvms012-rgb.github.io/ybm-ds/site/foundations/color-roles.md)에 있습니다.
+역할 색은 생김새가 아니라 하는 일로 이름을 붙입니다. 오류는 `critical`, 성공은 `positive`처럼 이름만 보고 쓰임을 압니다. 자세한 규칙과 전체 목록은 [Roles](https://luvms012-rgb.github.io/yds/site/foundations/color-roles.md)에 있습니다.
 
 ## 팔레트 색
 
-팔레트 색은 회색과 일곱 가지 색을 100 ~ 1000 단계로 나눈 원료입니다. 역할 색으로 나타내기 어려울 때만 화면에 씁니다. 다크 모드에서도 같은 단계 번호를 그대로 쓰면 됩니다. 전체 목록은 [Palette](https://luvms012-rgb.github.io/ybm-ds/site/foundations/color-palette.md)에 있습니다.
+팔레트 색은 회색과 일곱 가지 색을 100 ~ 1000 단계로 나눈 원료입니다. 역할 색으로 나타내기 어려울 때만 화면에 씁니다. 다크 모드에서도 같은 단계 번호를 그대로 쓰면 됩니다. 전체 목록은 [Palette](https://luvms012-rgb.github.io/yds/site/foundations/color-palette.md)에 있습니다.
 
 ## 관련 문서
 
@@ -38,7 +38,7 @@ yds의 색은 역할 색과 팔레트 색 두 층입니다. 화면에는 역할 
 
 ```text
 이 서비스의 브랜드 컬러를 [#12a150]으로 맞춰 줘.
-문서: https://luvms012-rgb.github.io/ybm-ds/site/llms.txt
+문서: https://luvms012-rgb.github.io/yds/site/llms.txt
 이 색을 600 단계로 두고 나머지 단계와 다크 모드 값을 만들어 서비스 CSS에 넣어 줘. 바뀐 화면도 보여 줘.
 ```
 

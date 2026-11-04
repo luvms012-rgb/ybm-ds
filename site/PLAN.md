@@ -60,7 +60,7 @@ ybm-ds/site/
 1. `site.config.local.json`
 2. 환경변수 `YBM_DS_PATH`
 3. `../ybm-ds`, `../ds`
-4. 없으면 Pages 주소(`https://luvms012-rgb.github.io/ybm-ds/`)에서 받아온다.
+4. 없으면 Pages 주소(`https://luvms012-rgb.github.io/yds/`)에서 받아온다.
 
 ---
 
@@ -138,7 +138,7 @@ ybm-ds/site/
 1. H1과 리드 문장
 2. **Quick Start with AI**: "AI 코딩 도구에 붙여넣으세요" 안내 아래 프롬프트 상자를 둔다. 상자마다 라벨과 복사 버튼이 있다.
    - ① **yds 적용하기** (초안)
-     > 이 프로젝트에 yds를 적용해줘. `<head>`에 `https://luvms012-rgb.github.io/ybm-ds/dist/ybm-ds.css`와 `ybm-ds.js`(defer)를 넣고, `https://<사이트>/llms.txt`를 읽고 규칙을 따라. 서비스 CSS는 DS 다음에 불러오고, 커스텀은 `--ds-*` 변수로만 해. 새 클래스를 만들거나 `!important`를 쓰지 마.
+     > 이 프로젝트에 yds를 적용해줘. `<head>`에 `https://luvms012-rgb.github.io/yds/dist/ybm-ds.css`와 `ybm-ds.js`(defer)를 넣고, `https://<사이트>/llms.txt`를 읽고 규칙을 따라. 서비스 CSS는 DS 다음에 불러오고, 커스텀은 `--ds-*` 변수로만 해. 새 클래스를 만들거나 `!important`를 쓰지 마.
    - ② **화면 만들기**: 컴포넌트 목록과 클래스 규칙을 알려 주고 요청한 화면을 DS로 구성하게 한다.
    - ③ **기존 화면 점검**: DS 규칙 위반(하드코딩 색·임의 클래스·`!important`)을 찾아 고치게 한다.
 3. **직접 설치**: `<link>`·`<script>` 복사, `data-theme`·`data-shape`, 첫 컴포넌트 예시

@@ -1,4 +1,4 @@
-<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/time-picker.html -->
+<!-- https://luvms012-rgb.github.io/yds/site/components/time-picker.html -->
 
 # Time Picker
 

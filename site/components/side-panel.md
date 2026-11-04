@@ -1,4 +1,4 @@
-<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/side-panel.html -->
+<!-- https://luvms012-rgb.github.io/yds/site/components/side-panel.html -->
 
 # Side Panel
 

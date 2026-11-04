@@ -1,4 +1,4 @@
-<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/scroll-fog.html -->
+<!-- https://luvms012-rgb.github.io/yds/site/components/scroll-fog.html -->
 
 # Scroll Fog
 

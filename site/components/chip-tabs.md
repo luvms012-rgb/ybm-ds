@@ -1,4 +1,4 @@
-<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/chip-tabs.html -->
+<!-- https://luvms012-rgb.github.io/yds/site/components/chip-tabs.html -->
 
 # Chip Tabs
 

@@ -1,4 +1,4 @@
-<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/side-navigation.html -->
+<!-- https://luvms012-rgb.github.io/yds/site/components/side-navigation.html -->
 
 # Side Navigation
 

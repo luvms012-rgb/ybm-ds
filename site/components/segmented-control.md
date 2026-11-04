@@ -1,4 +1,4 @@
-<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/segmented-control.html -->
+<!-- https://luvms012-rgb.github.io/yds/site/components/segmented-control.html -->
 
 # Segmented Control
 

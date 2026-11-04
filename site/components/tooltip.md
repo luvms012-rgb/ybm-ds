@@ -1,4 +1,4 @@
-<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/tooltip.html -->
+<!-- https://luvms012-rgb.github.io/yds/site/components/tooltip.html -->
 
 # Tooltip
 

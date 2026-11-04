@@ -1,4 +1,4 @@
-<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/progress-circle.html -->
+<!-- https://luvms012-rgb.github.io/yds/site/components/progress-circle.html -->
 
 # Progress Circle
 

@@ -20,7 +20,7 @@ Figma 파일 `1VCEsFU3xMWuXIntIrZz9i`(디자인 시스템)과 `works/ybm-ds` 를
    - Figma 가 맞음 → `components.css`·`components.json`·`index.html`·README §6 을 고친다
    - 코드가 맞음 → Figma 컴포넌트를 고친다(`figma-use` + `figma-generate-library`)
    그다음 1~3 을 다시 실행한다.
-5. 사용자에게 결과를 짧게 보고한다: 바뀐 것, 커밋 메시지, 사이트 주소(<https://luvms012-rgb.github.io/ybm-ds/>).
+5. 사용자에게 결과를 짧게 보고한다: 바뀐 것, 커밋 메시지, 사이트 주소(<https://luvms012-rgb.github.io/yds/>).
 
 ## 로컬만 고쳤을 때
 `node sync.mjs deploy "무엇을 고쳤는지"` (또는 `동기화.bat`). Figma 쪽도 같은 작업 안에서 맞춘다(README §10-6 양방향 규칙).

@@ -10,25 +10,25 @@ alwaysApply: true
 
 ## 먼저 볼 것
 
-- 문서 목차: https://luvms012-rgb.github.io/ybm-ds/site/llms.txt (필요한 컴포넌트 문서를 골라 읽는다)
-- 컴포넌트 목록: https://luvms012-rgb.github.io/ybm-ds/components.json
-- 컴포넌트 마크업: https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/components.css (컴포넌트마다 머리 주석)
-- 아이콘 목록: https://luvms012-rgb.github.io/ybm-ds/site/ai/icons.json
-- 토큰: https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/tokens.css
+- 문서 목차: https://luvms012-rgb.github.io/yds/site/llms.txt (필요한 컴포넌트 문서를 골라 읽는다)
+- 컴포넌트 목록: https://luvms012-rgb.github.io/yds/components.json
+- 컴포넌트 마크업: https://raw.githubusercontent.com/luvms012-rgb/yds/main/dist/components.css (컴포넌트마다 머리 주석)
+- 아이콘 목록: https://luvms012-rgb.github.io/yds/site/ai/icons.json
+- 토큰: https://raw.githubusercontent.com/luvms012-rgb/yds/main/dist/tokens.css
 - 화면 출발점: Templates (llms.txt 끝 목록)
 
 ## 지킬 것
 
-- 설치: <head>에 CSS와 JS 두 줄을 넣는다. 서비스 CSS는 그다음에 불러온다. 운영 서비스는 버전을 고정한 주소(https://cdn.jsdelivr.net/gh/luvms012-rgb/ybm-ds@v1.1.0/dist/ybm-ds.css, ybm-ds.js)를 쓴다.
-- 규칙 파일: 설치할 때 규칙 파일(https://luvms012-rgb.github.io/ybm-ds/site/ai/AGENTS.md)을 프로젝트 맨 위 폴더에 받아 둔다. Claude는 CLAUDE.md, Cursor는 .cursor/rules/yds.mdc 이름으로 둔다.
-- 컴포넌트: 목록(https://luvms012-rgb.github.io/ybm-ds/components.json)에 있는 것만 쓰고, 마크업은 컴포넌트 CSS(https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/components.css)의 컴포넌트별 머리 주석 그대로 쓴다.
-- 아이콘: 목록(https://luvms012-rgb.github.io/ybm-ds/site/ai/icons.json)에 있는 이름만 쓴다. 꾸밈 아이콘에는 aria-hidden="true", 아이콘만 있는 버튼에는 aria-label을 붙인다.
+- 설치: <head>에 CSS와 JS 두 줄을 넣는다. 서비스 CSS는 그다음에 불러온다. 운영 서비스는 버전을 고정한 주소(https://cdn.jsdelivr.net/gh/luvms012-rgb/yds@v1.1.0/dist/ybm-ds.css, ybm-ds.js)를 쓴다.
+- 규칙 파일: 설치할 때 규칙 파일(https://luvms012-rgb.github.io/yds/site/ai/AGENTS.md)을 프로젝트 맨 위 폴더에 받아 둔다. Claude는 CLAUDE.md, Cursor는 .cursor/rules/yds.mdc 이름으로 둔다.
+- 컴포넌트: 목록(https://luvms012-rgb.github.io/yds/components.json)에 있는 것만 쓰고, 마크업은 컴포넌트 CSS(https://raw.githubusercontent.com/luvms012-rgb/yds/main/dist/components.css)의 컴포넌트별 머리 주석 그대로 쓴다.
+- 아이콘: 목록(https://luvms012-rgb.github.io/yds/site/ai/icons.json)에 있는 이름만 쓴다. 꾸밈 아이콘에는 aria-hidden="true", 아이콘만 있는 버튼에는 aria-label을 붙인다.
 - 색, 간격, 글자 크기, 모서리, 그림자는 --ds-* 토큰만 쓴다. hex, rgb를 직접 쓰지 않는다.
 - 모양을 바꿀 때는 컴포넌트 변수(--ds-[컴포넌트]-*)만 덮어쓴다. 새 ds- 클래스나 !important를 만들지 않는다.
 - 브랜드 컬러: 서비스 CSS의 :root에서 --ds-color-palette-brand-100 ~ 1000을 덮어쓴다. 받은 색을 600 단계로 두고, 다크(:root[data-theme="dark"])는 같은 단계를 뒤집어 넣는다.
 - 화면: 모바일 먼저 만들고 768px, 1280px에서 배치를 바꾼다. 비슷한 화면이 Templates에 있으면 그 HTML에서 시작한다.
 - 글자: 한국어. 제목 Bold, 항목 제목 SemiBold, 본문 Regular, 본문은 word-break: keep-all.
-- 점검: 끝내기 전에 검사 스크립트(https://luvms012-rgb.github.io/ybm-ds/site/ai/yds-check.mjs)를 받아 node로 돌리고, 나온 문제를 모두 고친다.
+- 점검: 끝내기 전에 검사 스크립트(https://luvms012-rgb.github.io/yds/site/ai/yds-check.mjs)를 받아 node로 돌리고, 나온 문제를 모두 고친다.
 
 ## 운영 중인 사이트에 옮길 때
 
@@ -40,5 +40,5 @@ alwaysApply: true
 
 ## 끝내기 전에
 
-- 검사 스크립트를 받아 돌린다: https://luvms012-rgb.github.io/ybm-ds/site/ai/yds-check.mjs
+- 검사 스크립트를 받아 돌린다: https://luvms012-rgb.github.io/yds/site/ai/yds-check.mjs
 - `node yds-check.mjs <바꾼 파일 또는 폴더>` 에서 나온 문제를 모두 고치고, 고친 곳을 목록으로 알린다.

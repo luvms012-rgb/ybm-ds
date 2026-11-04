@@ -1,4 +1,4 @@
-<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/menu-menu-item.html -->
+<!-- https://luvms012-rgb.github.io/yds/site/components/menu-menu-item.html -->
 
 # Menu / Menu Item
 

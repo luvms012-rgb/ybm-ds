@@ -21,7 +21,7 @@ import { fileURLToPath } from 'node:url';
 
 const R = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const SITE = path.join(R, 'site');
-const PUBLIC = 'https://luvms012-rgb.github.io/ybm-ds/';
+const PUBLIC = 'https://luvms012-rgb.github.io/yds/';
 const SITE_URL = PUBLIC + 'site/';
 const flags = new Set(process.argv.slice(2));
 const read = (p) => fs.readFileSync(path.join(R, p), 'utf8');

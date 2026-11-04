@@ -1,4 +1,4 @@
-<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/date-picker-date-cell.html -->
+<!-- https://luvms012-rgb.github.io/yds/site/components/date-picker-date-cell.html -->
 
 # Date Picker / Date Cell
 

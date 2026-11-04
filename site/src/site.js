@@ -132,7 +132,7 @@
     var pre = box.querySelector("[data-site-src]");
     if (!pre || pre.getAttribute("data-loaded")) return;
     fetch(pre.getAttribute("data-site-src")).then(function (r) { return r.text(); }).then(function (txt) {
-      pre.querySelector("code").textContent = txt.replace(/(\.\.\/)+dist\//g, "https://luvms012-rgb.github.io/ybm-ds/dist/");
+      pre.querySelector("code").textContent = txt.replace(/(\.\.\/)+dist\//g, "https://luvms012-rgb.github.io/yds/dist/");
       pre.setAttribute("data-loaded", "");
     }).catch(function () { pre.querySelector("code").textContent = "코드는 웹 주소(http)로 열었을 때 보여요. 파일 위치: " + pre.getAttribute("data-site-src"); });
   }

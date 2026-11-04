@@ -1,4 +1,4 @@
-<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/quantity-picker.html -->
+<!-- https://luvms012-rgb.github.io/yds/site/components/quantity-picker.html -->
 
 # Quantity Picker
 

@@ -5,8 +5,8 @@ YBM 서비스 공용 디자인 시스템. Figma 변수/컴포넌트가 정본이
 
 - 최종 갱신: 2026-10-27
 - Figma 파일: `1VCEsFU3xMWuXIntIrZz9i` - <https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/>
-- GitHub 저장소: <https://github.com/luvms012-rgb/ybm-ds>
-- 배포 주소(Pages): <https://luvms012-rgb.github.io/ybm-ds/> - 첫 화면이 컴포넌트 미리보기
+- GitHub 저장소: <https://github.com/luvms012-rgb/yds>
+- 배포 주소(Pages): <https://luvms012-rgb.github.io/yds/> - 첫 화면이 컴포넌트 미리보기
 - 로컬 폴더: 회사 `C:\Users\luvms\Desktop\works\ybm-ds`, 집 Mac `~/Works/ybm-ds` (저장소 이름과 같다)
 
 ---
@@ -14,7 +14,7 @@ YBM 서비스 공용 디자인 시스템. Figma 변수/컴포넌트가 정본이
 ## 1. 폴더 구조
 
 ```
-ybm-ds/                      ← 저장소 루트 = Pages 사이트 루트
+yds/                         ← 저장소 루트 (2026-11-04 저장소 이름 ybm-ds → yds) = Pages 사이트 루트
 ├─ README.md                 ← 이 문서 (DS 전체 안내)
 ├─ index.html                컴포넌트 미리보기 (48종, Light/Dark, ?only=43-48로 골라 보기)
 ├─ components.json           컴포넌트 목록 - CSS 클래스, Figma 노드 ID, 변형 수 (sync가 양쪽과 대조)
@@ -56,8 +56,8 @@ git에 올리지 않는 것(`.gitignore`): `tokens/.figma-check.js`, `tokens/.fi
 
 ```html
 <!-- 배포 주소에서 바로 (가이드 사이트/외부 시안) -->
-<link rel="stylesheet" href="https://luvms012-rgb.github.io/ybm-ds/dist/ybm-ds.css">
-<script src="https://luvms012-rgb.github.io/ybm-ds/dist/ybm-ds.js" defer></script>
+<link rel="stylesheet" href="https://luvms012-rgb.github.io/yds/dist/ybm-ds.css">
+<script src="https://luvms012-rgb.github.io/yds/dist/ybm-ds.js" defer></script>
 
 <!-- 로컬 작업(works 폴더 안) - 상대경로. 가이드 배포 때 위 주소로 자동 치환된다 -->
 <link rel="stylesheet" href="../../../../ybm-ds/dist/ybm-ds.css">
@@ -134,7 +134,7 @@ node sync.mjs release 1.1.0    새 버전: VERSION, DS 머리 버전, Updates �
 ```
 
 - 검사 항목: 링크, 사이트 규칙, 템플릿과 예시(site/ai/yds-check.mjs), 마크다운, 싱크(components.json ↔ CSS ↔ README ↔ 사이트), 컴포넌트 9곳, 빌드 경고.
-- 버전은 `VERSION` 하나가 원본이다. 서비스는 버전 고정 주소 `https://cdn.jsdelivr.net/gh/luvms012-rgb/ybm-ds@v버전/dist/ybm-ds.css` 를 쓴다. 최신 주소(`…/ybm-ds/dist/ybm-ds.css`)는 늘 main 이다.
+- 버전은 `VERSION` 하나가 원본이다. 서비스는 버전 고정 주소 `https://cdn.jsdelivr.net/gh/luvms012-rgb/yds@v버전/dist/ybm-ds.css` 를 쓴다. 최신 주소(`…/ybm-ds/dist/ybm-ds.css`)는 늘 main 이다.
 - 버전 올리는 법: 고치지 않던 서비스 화면이 바뀔 수 있으면(부품 크기, 배치, 이름 지움) 가운데 자리(1.**1**.0), 고침과 추가만이면 끝자리(1.0.**1**), 예전 클래스나 토큰을 지우면 앞자리(**2**.0.0). 예전 이름은 지우기 전에 compat 파일로 한 번 이어 준다.
 - Updates 에 소식을 먼저 적고(site/src/updates.json 맨 위, 화면이 바뀔 수 있는 것은 type "확인할 변경") release 를 돌리면 그 소식에 버전이 붙는다.
 
