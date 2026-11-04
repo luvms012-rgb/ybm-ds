@@ -373,13 +373,6 @@ const LLMS_RULES = `## 지킬 것
 - 화면: 모바일 먼저 만들고 768px, 1280px에서 배치를 바꾼다. 비슷한 화면이 Templates에 있으면 그 HTML에서 시작한다.
 - 글자: 한국어. 제목 Bold, 항목 제목 SemiBold, 본문 Regular, 본문은 word-break: keep-all.
 
-## 서비스 DS
-
-- YBM DS는 기반이다. 서비스는 이름을 붙인 서비스 DS(예: exam-ds, cs-ds)를 만들어 쓴다.
-- 서비스 DS는 YBM DS를 커밋 번호로 고정해 불러오고(https://cdn.jsdelivr.net/gh/luvms012-rgb/ybm-ds@커밋/dist/ybm-ds.css), 그다음에 서비스 DS 파일을 불러온다.
-- 공통 클래스와 토큰은 ds-, --ds-* 그대로 쓴다. 서비스가 더하는 것에는 서비스 이름을 붙인다(--exam-*, .exam-*).
-- 가져온 YBM DS 파일은 고치지 않는다. 브랜드 컬러와 서비스 전용 부품은 서비스 DS 파일에만 넣는다.
-
 ## 운영 중인 사이트에 옮길 때
 
 - 한 번에 다 바꾸지 않는다. 살펴보기, DS 넣기, 브랜드 컬러, 화면 하나씩, 점검 순서로 간다.
@@ -397,7 +390,7 @@ write({
   file: 'index.html', section: 'get-started', title: 'Get Started', desc: 'YBM DS를 처음 쓰는 사람을 위한 안내', layout: 'page',
   body: `<header>
   <h1 class="site-h1">Get Started</h1>
-  <p class="site-lead">YBM DS는 서비스 DS의 기반입니다. 서비스마다 exam-ds, cs-ds처럼 이름을 붙여 씁니다.</p>
+  <p class="site-lead">YBM DS는 YBM 서비스를 위한 디자인 시스템입니다.</p>
   ${metaLinks({ figma: LINKS.figmaUrl('2608:2'), code: GITHUB })}
 </header>
 
@@ -417,28 +410,6 @@ ${codeblock(prompts[2][2], 'text', ' data-wrap')}
 <h2 id="start">직접 시작하기</h2>
 <p><code>&lt;head&gt;</code>에 두 줄을 넣으면 글꼴, 토큰, 아이콘, 컴포넌트가 함께 들어옵니다. 쓰는 법은 <a class="ds-link" href="components/index.html">Components</a>에 있습니다.</p>
 ${codeblock(CSS_LINK)}
-<p>이 주소는 늘 최신 버전입니다. 운영 서비스는 아래 서비스 DS 만들기처럼 버전을 고정합니다.</p>
-
-<h2 id="service-ds">서비스 DS 만들기</h2>
-<p>YBM DS는 가칭입니다. 서비스가 많으면 모두 YBM DS를 바로 쓰지 않고, 서비스마다 이름을 붙인 DS를 하나씩 둡니다. YBM DS가 바뀌어도 서비스는 확인한 뒤 원할 때 따라갑니다.</p>
-${table(['층', '예', '담는 것'], [
-  ['<b>YBM DS</b>', '<code>ybm-ds</code>', '토큰 구조, 컴포넌트, 규칙'],
-  ['<b>서비스 DS</b>', '<code>exam-ds</code>, <code>cs-ds</code>', '고정한 YBM DS 버전, 브랜드 컬러, 서비스에만 있는 부품'],
-  ['<b>화면</b>', '서비스 페이지', '서비스 DS만 불러옵니다.'],
-])}
-<h3>AI로 만들기</h3>
-<p>대괄호 안에 서비스 DS 이름과 브랜드 컬러를 넣습니다.</p>
-${codeblock(`YBM DS를 바탕으로 [서비스 DS 이름, 예: cs-ds]를 만들어 줘.\n${DOC_LINE}\nYBM DS 버전은 고정해 불러오고, 브랜드 컬러 [#12a150]과 서비스 전용 부품은 서비스 DS 파일에만 넣어 줘.`, 'text', ' data-wrap')}
-<h3>이름 규칙</h3>
-<ul class="site-list">
-  <li>공통 클래스와 토큰은 <code>ds-</code>, <code>--ds-*</code> 그대로 씁니다.</li>
-  <li>서비스가 더하는 클래스와 토큰에는 서비스 이름을 붙입니다. 예: <code>--exam-*</code>, <code>.exam-*</code></li>
-  <li>가져온 YBM DS 파일은 고치지 않고, 서비스 DS 파일에만 더합니다.</li>
-</ul>
-<h3>버전 고정</h3>
-<p>주소에 커밋 번호를 넣어 YBM DS 버전을 고정하고, 그다음에 서비스 DS 파일을 불러옵니다.</p>
-${codeblock(`<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/luvms012-rgb/ybm-ds@[커밋 번호]/dist/ybm-ds.css">\n<script src="https://cdn.jsdelivr.net/gh/luvms012-rgb/ybm-ds@[커밋 번호]/dist/ybm-ds.js" defer></script>\n<link rel="stylesheet" href="/cs-ds/cs-ds.css">  <!-- 서비스 DS -->`)}
-<p>새 버전이 나오면 <a class="ds-link" href="updates.html">Updates</a>를 보고, 화면 전후를 비교한 뒤 커밋 번호를 바꿉니다. 여러 서비스에 쓸모 있는 부품은 YBM DS로 올립니다.</p>
 
 <h2 id="migrate">내 사이트에 적용해보기</h2>
 <p>운영 중인 사이트는 한 번에 바꾸지 않고 아래 순서대로 적용합니다. 브랜드 컬러와 규칙 점검은 위 <a class="ds-link" href="#ai">AI로 시작하기</a>의 글을 그대로 씁니다.</p>
@@ -851,6 +822,8 @@ function topElements(html, n) {
 }
 // 썸네일 - 레퍼런스 B처럼 회색 16:9 상자 가운데에 첫 예시의 앞 부품 몇 개를 실제 크기로
 // 컴포넌트 대표 그림: site/src/covers.html에 컴포넌트마다 손으로 쓴 장면(한국어, 실제 쓰임). 없으면 첫 예시에서 꺼낸다
+// 컴포넌트 예시 자료: site/src/examples/ 의 json 을 모두 합친다 ({ slug: [{ title, desc, html, wide? }] })
+const EXAMPLES = Object.assign({}, ...fs.readdirSync(path.join(SITE, 'src/examples')).filter((f) => f.endsWith('.json')).map((f) => readJson(`site/src/examples/${f}`)));
 const COVERS = Object.fromEntries([...fs.readFileSync(path.join(SITE, 'src/covers.html'), 'utf8').matchAll(/<template data-slug="([^"]+)">([\s\S]*?)<\/template>/g)].map((m) => [m[1], m[2]]));
 const cardThumb = (c) => {
   if (COVERS[c.slug]) return `<div class="site-tile__thumb" aria-hidden="true"><div class="site-tile__inner" inert><div class="pv-stage">${COVERS[c.slug].replace(/<a\b/g, '<span').replace(/<\/a>/g, '</span>')}</div></div></div>`;
@@ -945,7 +918,10 @@ comps.forEach((c) => {
   const js = jsFor(c);
   if (js.length) sections.push(`<h2 id="behavior">동작</h2><p><code>ybm-ds.js</code>를 불러오면 알아서 동작합니다.</p><ul class="site-list">${js.map((t) => `<li>${t}</li>`).join('')}</ul>`);
   if (c.dos.length) sections.push(`<h2 id="guide">사용 지침</h2>${practices(c.dos.map((d) => [!isDont(d), d]))}`);
-  sections.push(`<h2 id="examples">예시</h2>${c.example ? example(c.example, codeOf(c.example) || c.markup) : '<p>아직 예시가 없습니다.</p>'}`);
+  // 예시 (11-04 사용자 "사용 예시 강화, 실제 사용 규칙에 맞는 예시", 레퍼런스 A Examples): 이름, 쓰임 설명, 실제 화면 미리보기, 코드.
+  // 자료는 site/src/examples/*.json (컴포넌트 slug 마다 2 ~ 3개). 없으면 예전처럼 index.html 예시 한 칸
+  const exs = EXAMPLES[c.slug];
+  sections.push(`<h2 id="examples">예시</h2>${exs ? exs.map((e) => `<h3>${esc(e.title)}</h3>\n<p>${inline(e.desc)}</p>\n${example(`<div class="pv-stage${e.wide ? ' pv-wide' : ''}">${e.html}</div>`, dedent(e.html))}`).join('\n') : c.example ? example(c.example, codeOf(c.example) || c.markup) : '<p>아직 예시가 없습니다.</p>'}`);
   if (c.vars.length || c.spec) sections.push(`<h2 id="spec">규격</h2>${c.vars.length ? `<h3>CSS 변수</h3><p>서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.</p>${table(['변수', '기본값'], c.vars.map(([n, v]) => [`<code>${esc(n)}</code>`, `<code>${esc(v)}</code>`]))}` : ''}${c.spec ? `<h3>크기와 여백</h3><pre class="site-spec">${esc(c.spec)}</pre>` : ''}`);
   write({
     file: `components/${c.slug}.html`, section: 'components', title: c.name.split(' · ')[0], desc: c.desc,

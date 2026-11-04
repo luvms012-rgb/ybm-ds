@@ -43,10 +43,98 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 예시
 
-```html
-<span class="ds-badge">neutral</span><span class="ds-badge" data-tone="brand">brand</span><span class="ds-badge" data-tone="informative">informative</span><span class="ds-badge" data-tone="positive">positive</span><span class="ds-badge" data-tone="warning">warning</span><span class="ds-badge" data-tone="critical">critical</span>
+### 목록에서 확인할 상태만 알리기
 
-<span class="ds-badge" data-variant="solid" data-tone="brand">NEW</span><span class="ds-badge" data-variant="solid" data-tone="critical">마감</span><span class="ds-badge" data-variant="outline">outline</span><span class="ds-badge" data-size="large"><span class="ds-badge__label">large</span></span>
+할 일이 남은 줄에만 배지를 붙입니다. 문제가 없는 줄은 글자로 두어, 확인할 줄이 바로 눈에 띕니다.
+
+```html
+<ul class="ds-list" data-variant="inset" data-divider style="max-width: 420px">
+  <li>
+    <a class="ds-list-item" href="#">
+      <span class="ds-list-item__content">
+        <span class="ds-list-item__title">토익 정기 시험</span>
+        <span class="ds-list-item__desc">11월 23일 오전 9시 20분</span>
+      </span>
+      <span class="ds-list-item__suffix"><span class="ds-badge" data-tone="warning">결제 대기</span></span>
+      <i class="ds-icon ds-icon--chevron-right ds-list-item__chevron" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="ds-list-item" href="#">
+      <span class="ds-list-item__content">
+        <span class="ds-list-item__title">토익 스피킹</span>
+        <span class="ds-list-item__desc">12월 7일 오후 2시</span>
+      </span>
+      <span class="ds-list-item__suffix">접수 완료</span>
+      <i class="ds-icon ds-icon--chevron-right ds-list-item__chevron" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="ds-list-item" href="#">
+      <span class="ds-list-item__content">
+        <span class="ds-list-item__title">일본어 능력 시험</span>
+        <span class="ds-list-item__desc">12월 14일 오전 10시</span>
+      </span>
+      <span class="ds-list-item__suffix">접수 완료</span>
+      <i class="ds-icon ds-icon--chevron-right ds-list-item__chevron" aria-hidden="true"></i>
+    </a>
+  </li>
+</ul>
+```
+
+### 분류를 짧게 붙이기
+
+강의 이름 앞에 분류를 한두 낱말로 붙입니다. 분류는 모두 같은 기본 색으로 두어 강의 이름이 먼저 읽히게 합니다.
+
+```html
+<ul class="ds-list" data-variant="inset" data-divider style="max-width: 420px">
+  <li>
+    <a class="ds-list-item" href="#">
+      <span class="ds-list-item__content">
+        <span class="ds-list-item__title"><span class="ds-badge">어학</span> 토익 실전 문제 풀이</span>
+        <span class="ds-list-item__desc">강의 24개, 12시간</span>
+      </span>
+    </a>
+  </li>
+  <li>
+    <a class="ds-list-item" href="#">
+      <span class="ds-list-item__content">
+        <span class="ds-list-item__title"><span class="ds-badge">자격증</span> 컴퓨터 활용 능력 1급</span>
+        <span class="ds-list-item__desc">강의 30개, 18시간</span>
+      </span>
+    </a>
+  </li>
+</ul>
+```
+
+### 새로 생긴 메뉴 하나만 강조하기
+
+새 메뉴 하나에만 진한 브랜드 배지를 붙입니다. 여러 곳에 붙이면 무엇이 새것인지 알 수 없습니다.
+
+```html
+<ul class="ds-list" data-variant="inset" data-divider style="max-width: 420px">
+  <li>
+    <a class="ds-list-item" href="#">
+      <span class="ds-list-item__prefix"><i class="ds-icon ds-icon--book-open" aria-hidden="true"></i></span>
+      <span class="ds-list-item__content"><span class="ds-list-item__title">내 강의실</span></span>
+      <i class="ds-icon ds-icon--chevron-right ds-list-item__chevron" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="ds-list-item" href="#">
+      <span class="ds-list-item__prefix"><i class="ds-icon ds-icon--sparkles" aria-hidden="true"></i></span>
+      <span class="ds-list-item__content"><span class="ds-list-item__title">AI 학습 도우미 <span class="ds-badge" data-variant="solid" data-tone="brand">NEW</span></span></span>
+      <i class="ds-icon ds-icon--chevron-right ds-list-item__chevron" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="ds-list-item" href="#">
+      <span class="ds-list-item__prefix"><i class="ds-icon ds-icon--settings" aria-hidden="true"></i></span>
+      <span class="ds-list-item__content"><span class="ds-list-item__title">설정</span></span>
+      <i class="ds-icon ds-icon--chevron-right ds-list-item__chevron" aria-hidden="true"></i>
+    </a>
+  </li>
+</ul>
 ```
 
 ## 규격
