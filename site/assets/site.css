@@ -47,7 +47,7 @@ body.site { background: var(--ds-color-bg-layer-default); color: var(--ds-color-
 .site-topnav__item:hover { background: var(--ds-color-bg-neutral-weak-alpha); color: var(--ds-color-fg-neutral); }
 .site-topnav__item[aria-current="page"] { color: var(--ds-color-fg-neutral); font-weight: var(--ds-font-weight-semibold); }  /* 지금 페이지는 SemiBold 로 눈에 띄게 (11-04 사용자) */
 .site-top__end { grid-column: 3; display: flex; align-items: center; justify-content: flex-end; gap: 2px; }
-.site-top__end .ds-btn[data-layout="iconOnly"] { --ds-btn-height: 32px; --ds-btn-radius: var(--ds-shape-pill); --ds-btn-bg: transparent; --ds-btn-bg-pressed: var(--ds-color-bg-neutral-weak-alpha); --ds-btn-fg: var(--ds-color-fg-neutral); }
+.site-top__end .ds-btn[data-layout="iconOnly"] { --ds-btn-height: 40px; --ds-btn-icon-only: 20px;  /* 2026-11-04: 32 / 아이콘 16 은 작아 40 / 20 으로 */ --ds-btn-radius: var(--ds-shape-pill); --ds-btn-bg: transparent; --ds-btn-bg-pressed: var(--ds-color-bg-neutral-weak-alpha); --ds-btn-fg: var(--ds-color-fg-neutral); }
 .site-only-wide { display: none; }
 @media (min-width: 768px) {
   .site-topnav { display: flex; }
