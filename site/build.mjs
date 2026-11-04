@@ -408,8 +408,8 @@ ${codeblock(prompts[2][2], 'text', ' data-wrap')}
 <p><code>&lt;head&gt;</code>에 두 줄을 넣으면 글꼴, 토큰, 아이콘, 컴포넌트가 함께 들어옵니다. 쓰는 법은 <a class="ds-link" href="components/index.html">Components</a>에 있습니다.</p>
 ${codeblock(CSS_LINK)}
 
-<h2 id="migrate">내 사이트에 옮기기</h2>
-<p>운영 중인 사이트에 옮길 때는 한 번에 다 바꾸지 않고 아래 순서로 갑니다. 브랜드 컬러와 규칙 점검은 위 <a class="ds-link" href="#ai">AI로 시작하기</a>의 글을 그대로 씁니다.</p>
+<h2 id="migrate">내 사이트에 적용해보기</h2>
+<p>운영 중인 사이트에 적용할 때는 한 번에 다 바꾸지 않고 아래 순서로 갑니다. 브랜드 컬러와 규칙 점검은 위 <a class="ds-link" href="#ai">AI로 시작하기</a>의 글을 그대로 씁니다.</p>
 ${MIGRATE.map(([t, d, p]) => `<h3>${esc(t)}</h3>\n<p>${esc(d)}</p>\n${codeblock(p, 'text', ' data-wrap')}`).join('\n')}
 <p class="site-note">DS는 CSS <code>@layer</code>를 씁니다. Chrome 99, Safari 15.4 보다 오래된 브라우저에서는 DS가 적용되지 않습니다.</p>
 
@@ -539,7 +539,7 @@ ${practices([
 <p>작은 화면부터 만들고 폭이 넓어질 때 배치를 더합니다. <code>@media</code> 안에서는 CSS 변수를 쓸 수 없어 숫자를 직접 씁니다.</p>
 <h2 id="tokens">토큰</h2>
 ${table(['토큰', '폭', '쓰임'], bpRows.map(([n, w, u]) => [`<code>--ds-breakpoint-${n}</code>`, w, u]))}
-<h2 id="components">컴포넌트가 바뀌는 곳</h2>
+<h2 id="components">폭에 따라 바뀌는 컴포넌트</h2>
 <ul class="site-list">
   <li>Top Navigation ↔ Top App Bar, Side Panel ↔ Bottom Sheet, Dialog ↔ Bottom Sheet는 768을 기준으로 바꿉니다.</li>
   <li>Side Navigation은 1280 이상 펼침, 768 이상 접힘, 그보다 좁으면 서랍 메뉴입니다.</li>

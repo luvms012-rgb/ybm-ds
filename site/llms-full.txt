@@ -80,9 +80,9 @@ YBM DS로 [만들 화면, 예: 회원 목록 화면]을 만들어 줘.
 <script src="https://luvms012-rgb.github.io/ybm-ds/dist/ybm-ds.js" defer></script>
 ```
 
-## 내 사이트에 옮기기
+## 내 사이트에 적용해보기
 
-운영 중인 사이트에 옮길 때는 한 번에 다 바꾸지 않고 아래 순서로 갑니다. 브랜드 컬러와 규칙 점검은 위 AI로 시작하기의 글을 그대로 씁니다.
+운영 중인 사이트에 적용할 때는 한 번에 다 바꾸지 않고 아래 순서로 갑니다. 브랜드 컬러와 규칙 점검은 위 AI로 시작하기의 글을 그대로 씁니다.
 
 ### 1. 사이트 살펴보기
 
@@ -368,7 +368,7 @@ YBM DS 의 색은 역할 색과 팔레트 색 두 층으로 되어 있습니다.
 | `--ds-breakpoint-lg` | 1280px | 넓은 PC, 3단 배치 |
 | `--ds-breakpoint-xl` | 1440px | 아주 넓은 화면 |
 
-## 컴포넌트가 바뀌는 곳
+## 폭에 따라 바뀌는 컴포넌트
 
 - Top Navigation ↔ Top App Bar, Side Panel ↔ Bottom Sheet, Dialog ↔ Bottom Sheet는 768을 기준으로 바꿉니다.
 - Side Navigation은 1280 이상 펼침, 768 이상 접힘, 그보다 좁으면 서랍 메뉴입니다.

@@ -17,7 +17,7 @@
 | `--ds-breakpoint-lg` | 1280px | 넓은 PC, 3단 배치 |
 | `--ds-breakpoint-xl` | 1440px | 아주 넓은 화면 |
 
-## 컴포넌트가 바뀌는 곳
+## 폭에 따라 바뀌는 컴포넌트
 
 - Top Navigation ↔ Top App Bar, Side Panel ↔ Bottom Sheet, Dialog ↔ Bottom Sheet는 768을 기준으로 바꿉니다.
 - Side Navigation은 1280 이상 펼침, 768 이상 접힘, 그보다 좁으면 서랍 메뉴입니다.
