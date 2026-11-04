@@ -37,18 +37,32 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 예시
 
+### 인증번호 칸에 남은 시간 보이기
+
+인증번호 입력 칸 끝에 남은 시간을 Timer로 보여 줍니다. 숫자 폭이 고정돼 있어 1초마다 값이 바뀌어도 글자가 흔들리지 않습니다.
+
 ```html
-<span>남은 시간 <time class="ds-timer" id="pv-timer-end" style="font-size:var(--ds-font-size-t07);line-height:var(--ds-line-height-t07);font-weight:var(--ds-font-weight-bold);color:var(--ds-color-fg-neutral)">0:00</time></span>
-<span>흐른 시간 <time class="ds-timer" id="pv-timer-start" data-format="elapsed">0초</time></span>
+<div class="ds-field" style="width: 100%; max-width: 360px">
+  <div class="ds-field__header">
+    <label class="ds-field__label" for="timer-ex1-code">인증번호</label>
+  </div>
+  <div class="u-flex u-gap-2">
+    <div class="ds-input u-grow" data-variant="outline" data-size="medium">
+      <input class="ds-input__control" id="timer-ex1-code" inputmode="numeric" maxlength="6" placeholder="6자리 숫자" autocomplete="one-time-code">
+      <span class="ds-input__suffix"><time class="ds-timer ds-t04 ds-fg-critical" id="timer-ex1">3:00</time></span>
+    </div>
+    <button type="button" class="ds-btn" data-variant="neutralWeak">다시 받기</button>
+  </div>
+  <div class="ds-field__footer">
+    <p class="ds-field__help">문자로 받은 인증번호를 3분 안에 입력해 주세요.</p>
+  </div>
+</div>
+<script>
+  // 미리보기 전용 - 지금부터 3분 남은 시간
+  document.getElementById('timer-ex1').setAttribute('data-end', String(Date.now() + 3 * 60000));
+</script>
 ```
 
-## 규격
+### 할인이 끝날 때까지 크게 세기
 
-### 크기와 여백
-
-```
-format: 기본 clock(12:34, 1시간 넘으면 1:02:34) / data-format="elapsed"(12분 34초)
-흐른 시간: data-start="시작 시각" / 남은 시간: data-end="끝 시각" (ISO 문자열 또는 밀리초)
-ybm-ds.js 가 1초마다 글자와 datetime 을 바꾸고, 남은 시간이 0 이 되면 ds-timer-end 이벤트를 한 번 보낸다.
-Figma: t02 fg/neutral-muted, 숫자 폭 고정 / 크기와 색은 놓이는 자리에 맞춰 바꿔 쓴다
-```
+할인이 끝날 때까지 남은 시간을 굵고 큰 글자로 보여 줍니다. 놓이는 자리에 맞춰 `ds-t09`, `ds-fw-bold` 같은 글자 클래스로 크기와 색을 바꿉니다.

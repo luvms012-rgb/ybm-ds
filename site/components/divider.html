@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Divider - YBM DS</title>
+<title>Divider - yds</title>
 <meta name="description" content="내용 묶음 사이를 선으로 나누는 컴포넌트입니다.">
 <!-- 생성물: node site/build.mjs가 만든다. 직접 고치지 말고 site/build.mjs나 site/src를 고친다 -->
 <script>try { var t = localStorage.getItem("ybm-site-theme"); if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.dataset.theme = "dark"; } catch (e) {}</script>
 <link rel="icon" href="../assets/logo-ybmnet.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../dist/ybm-ds.css">
-<link rel="stylesheet" href="../assets/site.css?v=bb7371b2">
+<link rel="stylesheet" href="../assets/site.css?v=1656b6c0">
 <script src="../../dist/ybm-ds.js" defer></script>
-<script src="../assets/site.js?v=bb7371b2" defer></script>
+<script src="../assets/site.js?v=1656b6c0" defer></script>
 </head>
 <body class="site">
 <a class="site-skip" href="#main">본문 바로가기</a>
@@ -131,20 +131,80 @@
 <h2 id="guide">사용 지침<a class="site-anchor" href="#guide" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><div class="ds-table-wrap"><table class="ds-table" data-density="compact">
 <thead><tr><th scope="col">구분</th><th scope="col">내용</th></tr></thead>
 <tbody><tr><td><b class="ds-badge site-practice" data-tone="critical">Don't</b></td><td>마지막 묶음 아래에는 구분선을 두지 않습니다.</td></tr></tbody></table></div>
-<h2 id="examples">예시<a class="site-anchor" href="#examples" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><div class="site-example">
+<h2 id="examples">예시<a class="site-anchor" href="#examples" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><h3>묶음 사이에만 두고 마지막 아래는 비우기</h3>
+<p>주문 상세처럼 긴 모바일 화면은 묶음 사이에 굵은 구분선을 둡니다. 마지막 묶음 아래에는 선을 두지 않아 화면이 깔끔하게 끝납니다.</p>
+<div class="site-example">
   <div class="site-example__bar"><div class="ds-chiptabs" role="tablist" aria-label="보기 방식"><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-view="preview">미리보기</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-view="code">코드</button></div></div>
-  <div class="site-example__preview"><div class="pv-stage pv-col">
-    <hr class="ds-divider">
-    <hr class="ds-divider" data-weight="thick">
-    <div class="ds-divider" role="separator" data-label><span>또는</span></div>
-    <div class="u-flex" style="align-items:center;gap:var(--ds-space-x2);color:var(--ds-color-fg-neutral-subtle);font-size:var(--ds-font-size-t03)"><span>이용약관</span><span class="ds-divider" role="separator" aria-orientation="vertical" data-orientation="vertical" style="--ds-divider-length:12px"></span><span>개인정보처리방침</span></div>
-  </div></div>
+  <div class="site-example__preview"><div class="pv-stage pv-wide"><div class="u-col u-gap-5 u-full" style="max-width: 375px">
+  <section class="u-col u-gap-3">
+    <h3 class="ds-t06 ds-fw-bold">배송 정보</h3>
+    <div class="u-flex u-between u-gap-4 ds-t04"><span class="ds-fg-subtle">받는 분</span><span>김하나</span></div>
+    <div class="u-flex u-between u-gap-4 ds-t04"><span class="ds-fg-subtle">주소</span><span>서울시 종로구 종로 1길 23</span></div>
+  </section>
+  <hr class="ds-divider" data-weight="thick">
+  <section class="u-col u-gap-3">
+    <h3 class="ds-t06 ds-fw-bold">결제 정보</h3>
+    <div class="u-flex u-between u-gap-4 ds-t04"><span class="ds-fg-subtle">상품 금액</span><span>32,000원</span></div>
+    <div class="u-flex u-between u-gap-4 ds-t04"><span class="ds-fg-subtle">배송비</span><span>0원</span></div>
+    <div class="u-flex u-between u-gap-4 ds-t05 ds-fw-bold"><span>총 결제 금액</span><span>32,000원</span></div>
+  </section>
+</div></div></div>
   <div class="site-example__code" hidden><figure class="ds-codeblock">
   <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">html</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
-  <pre class="ds-codeblock__code"><code>&lt;<span class="hl-t">hr</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-divider&quot;</span>&gt;
-&lt;<span class="hl-t">hr</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-divider&quot;</span> <span class="hl-f">data-weight</span>=<span class="hl-s">&quot;thick&quot;</span>&gt;
-&lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-divider&quot;</span> <span class="hl-f">role</span>=<span class="hl-s">&quot;separator&quot;</span> <span class="hl-f">data-label</span>&gt;&lt;<span class="hl-t">span</span>&gt;또는&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">div</span>&gt;
-&lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;u-flex&quot;</span> <span class="hl-f">style</span>=<span class="hl-s">&quot;align-items:center;gap:var(--ds-space-x2);color:var(--ds-color-fg-neutral-subtle);font-size:var(--ds-font-size-t03)&quot;</span>&gt;&lt;<span class="hl-t">span</span>&gt;이용약관&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-divider&quot;</span> <span class="hl-f">role</span>=<span class="hl-s">&quot;separator&quot;</span> <span class="hl-f">aria-orientation</span>=<span class="hl-s">&quot;vertical&quot;</span> <span class="hl-f">data-orientation</span>=<span class="hl-s">&quot;vertical&quot;</span> <span class="hl-f">style</span>=<span class="hl-s">&quot;--ds-divider-length:12px&quot;</span>&gt;&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">span</span>&gt;개인정보처리방침&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">div</span>&gt;</code></pre>
+  <pre class="ds-codeblock__code"><code>&lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;u-col u-gap-5 u-full&quot;</span> <span class="hl-f">style</span>=<span class="hl-s">&quot;max-width: 375px&quot;</span>&gt;
+  &lt;<span class="hl-t">section</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;u-col u-gap-3&quot;</span>&gt;
+    &lt;<span class="hl-t">h3</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-t06 ds-fw-bold&quot;</span>&gt;배송 정보&lt;/<span class="hl-t">h3</span>&gt;
+    &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;u-flex u-between u-gap-4 ds-t04&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-fg-subtle&quot;</span>&gt;받는 분&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">span</span>&gt;김하나&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">div</span>&gt;
+    &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;u-flex u-between u-gap-4 ds-t04&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-fg-subtle&quot;</span>&gt;주소&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">span</span>&gt;서울시 종로구 종로 1길 23&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">div</span>&gt;
+  &lt;/<span class="hl-t">section</span>&gt;
+  &lt;<span class="hl-t">hr</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-divider&quot;</span> <span class="hl-f">data-weight</span>=<span class="hl-s">&quot;thick&quot;</span>&gt;
+  &lt;<span class="hl-t">section</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;u-col u-gap-3&quot;</span>&gt;
+    &lt;<span class="hl-t">h3</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-t06 ds-fw-bold&quot;</span>&gt;결제 정보&lt;/<span class="hl-t">h3</span>&gt;
+    &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;u-flex u-between u-gap-4 ds-t04&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-fg-subtle&quot;</span>&gt;상품 금액&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">span</span>&gt;32,000원&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">div</span>&gt;
+    &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;u-flex u-between u-gap-4 ds-t04&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-fg-subtle&quot;</span>&gt;배송비&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">span</span>&gt;0원&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">div</span>&gt;
+    &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;u-flex u-between u-gap-4 ds-t05 ds-fw-bold&quot;</span>&gt;&lt;<span class="hl-t">span</span>&gt;총 결제 금액&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">span</span>&gt;32,000원&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">div</span>&gt;
+  &lt;/<span class="hl-t">section</span>&gt;
+&lt;/<span class="hl-t">div</span>&gt;</code></pre>
+</figure></div>
+</div>
+<h3>같은 일을 하는 두 방법을 '또는'으로 나누기</h3>
+<p>같은 일을 하는 두 방법 사이에는 글자가 든 구분선을 둡니다. 선 가운데 '또는'이 있어 둘 가운데 하나만 고르면 된다는 것이 바로 읽힙니다.</p>
+<div class="site-example">
+  <div class="site-example__bar"><div class="ds-chiptabs" role="tablist" aria-label="보기 방식"><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-view="preview">미리보기</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-view="code">코드</button></div></div>
+  <div class="site-example__preview"><div class="pv-stage pv-wide"><div class="u-col u-gap-4 u-full" style="max-width: 360px">
+  <button class="ds-btn" data-variant="brandSolid" data-size="large" data-width="fill">비밀번호로 로그인</button>
+  <div class="ds-divider" role="separator" data-label><span>또는</span></div>
+  <button class="ds-btn" data-variant="neutralOutline" data-size="large" data-width="fill">인증번호로 로그인</button>
+</div></div></div>
+  <div class="site-example__code" hidden><figure class="ds-codeblock">
+  <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">html</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
+  <pre class="ds-codeblock__code"><code>&lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;u-col u-gap-4 u-full&quot;</span> <span class="hl-f">style</span>=<span class="hl-s">&quot;max-width: 360px&quot;</span>&gt;
+  &lt;<span class="hl-t">button</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-btn&quot;</span> <span class="hl-f">data-variant</span>=<span class="hl-s">&quot;brandSolid&quot;</span> <span class="hl-f">data-size</span>=<span class="hl-s">&quot;large&quot;</span> <span class="hl-f">data-width</span>=<span class="hl-s">&quot;fill&quot;</span>&gt;비밀번호로 로그인&lt;/<span class="hl-t">button</span>&gt;
+  &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-divider&quot;</span> <span class="hl-f">role</span>=<span class="hl-s">&quot;separator&quot;</span> <span class="hl-f">data-label</span>&gt;&lt;<span class="hl-t">span</span>&gt;또는&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">div</span>&gt;
+  &lt;<span class="hl-t">button</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-btn&quot;</span> <span class="hl-f">data-variant</span>=<span class="hl-s">&quot;neutralOutline&quot;</span> <span class="hl-f">data-size</span>=<span class="hl-s">&quot;large&quot;</span> <span class="hl-f">data-width</span>=<span class="hl-s">&quot;fill&quot;</span>&gt;인증번호로 로그인&lt;/<span class="hl-t">button</span>&gt;
+&lt;/<span class="hl-t">div</span>&gt;</code></pre>
+</figure></div>
+</div>
+<h3>짧은 링크 사이를 세로선으로 나누기</h3>
+<p>푸터의 짧은 링크 사이는 세로 구분선으로 나눕니다. 링크마다 다른 곳으로 간다는 것이 또렷해지고, 마지막 링크 뒤에는 선을 두지 않습니다.</p>
+<div class="site-example">
+  <div class="site-example__bar"><div class="ds-chiptabs" role="tablist" aria-label="보기 방식"><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-view="preview">미리보기</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-view="code">코드</button></div></div>
+  <div class="site-example__preview"><div class="pv-stage"><nav class="u-flex u-center u-wrap u-gap-3" aria-label="약관과 정책">
+  <a class="ds-link" data-size="small" href="#">이용약관</a>
+  <span class="ds-divider" role="separator" aria-orientation="vertical" data-orientation="vertical"></span>
+  <a class="ds-link" data-size="small" href="#">개인정보처리방침</a>
+  <span class="ds-divider" role="separator" aria-orientation="vertical" data-orientation="vertical"></span>
+  <a class="ds-link" data-size="small" href="#">고객센터</a>
+</nav></div></div>
+  <div class="site-example__code" hidden><figure class="ds-codeblock">
+  <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">html</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
+  <pre class="ds-codeblock__code"><code>&lt;<span class="hl-t">nav</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;u-flex u-center u-wrap u-gap-3&quot;</span> <span class="hl-f">aria-label</span>=<span class="hl-s">&quot;약관과 정책&quot;</span>&gt;
+  &lt;<span class="hl-t">a</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-link&quot;</span> <span class="hl-f">data-size</span>=<span class="hl-s">&quot;small&quot;</span> <span class="hl-f">href</span>=<span class="hl-s">&quot;#&quot;</span>&gt;이용약관&lt;/<span class="hl-t">a</span>&gt;
+  &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-divider&quot;</span> <span class="hl-f">role</span>=<span class="hl-s">&quot;separator&quot;</span> <span class="hl-f">aria-orientation</span>=<span class="hl-s">&quot;vertical&quot;</span> <span class="hl-f">data-orientation</span>=<span class="hl-s">&quot;vertical&quot;</span>&gt;&lt;/<span class="hl-t">span</span>&gt;
+  &lt;<span class="hl-t">a</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-link&quot;</span> <span class="hl-f">data-size</span>=<span class="hl-s">&quot;small&quot;</span> <span class="hl-f">href</span>=<span class="hl-s">&quot;#&quot;</span>&gt;개인정보처리방침&lt;/<span class="hl-t">a</span>&gt;
+  &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-divider&quot;</span> <span class="hl-f">role</span>=<span class="hl-s">&quot;separator&quot;</span> <span class="hl-f">aria-orientation</span>=<span class="hl-s">&quot;vertical&quot;</span> <span class="hl-f">data-orientation</span>=<span class="hl-s">&quot;vertical&quot;</span>&gt;&lt;/<span class="hl-t">span</span>&gt;
+  &lt;<span class="hl-t">a</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-link&quot;</span> <span class="hl-f">data-size</span>=<span class="hl-s">&quot;small&quot;</span> <span class="hl-f">href</span>=<span class="hl-s">&quot;#&quot;</span>&gt;고객센터&lt;/<span class="hl-t">a</span>&gt;
+&lt;/<span class="hl-t">nav</span>&gt;</code></pre>
 </figure></div>
 </div>
 <h2 id="spec">규격<a class="site-anchor" href="#spec" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><h3>CSS 변수</h3><p>서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.</p><div class="ds-table-wrap"><table class="ds-table" data-density="compact">

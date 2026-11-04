@@ -52,16 +52,84 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 예시
 
-```html
-<div class="ds-selectbox-group" role="radiogroup" aria-label="요금제">
-  <label class="ds-selectbox"><span class="ds-selectbox__texts"><span class="ds-selectbox__label">기본</span><span class="ds-selectbox__desc">혼자 쓰기 좋은 구성이에요</span></span><span class="ds-radio" data-tone="neutral" data-size="medium"><input type="radio" class="ds-radio__control" name="pv-sb" checked></span></label>
-  <label class="ds-selectbox"><span class="ds-selectbox__texts"><span class="ds-selectbox__label">팀</span><span class="ds-selectbox__desc">여러 명이 함께 쓸 수 있어요</span></span><span class="ds-radio" data-tone="neutral" data-size="medium"><input type="radio" class="ds-radio__control" name="pv-sb"></span></label>
-  <label class="ds-selectbox"><span class="ds-selectbox__texts"><span class="ds-selectbox__label">기업</span><span class="ds-selectbox__desc">지금은 고를 수 없어요</span></span><span class="ds-radio" data-tone="neutral" data-size="medium"><input type="radio" class="ds-radio__control" name="pv-sb" disabled></span></label>
-</div>
+### 설명을 읽고 고르는 이용권
 
-<div class="ds-selectbox-group" style="--ds-selectbox-columns: 2" aria-label="관심 분야">
-  <label class="ds-selectbox" data-layout="vertical"><span class="ds-selectbox__texts"><span class="ds-selectbox__label">읽기</span><span class="ds-selectbox__desc">글을 빠르게 이해해요</span></span><span class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control" checked></span></label>
-  <label class="ds-selectbox" data-layout="vertical"><i class="ds-icon ds-icon--message-circle" aria-hidden="true"></i><span class="ds-selectbox__texts"><span class="ds-selectbox__label">말하기</span><span class="ds-selectbox__desc">자연스럽게 대화해요</span></span><span class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control"></span></label>
+선택지마다 가격과 조건 같은 설명이 필요할 때 Select Box로 크게 보여 줍니다. 짧은 라벨만으로 고를 수 있으면 Radio Group을 씁니다.
+
+```html
+<div class="ds-field u-full" style="max-width: 420px">
+  <div class="ds-field__header">
+    <span class="ds-field__label" id="select-box-ex1-label">이용권</span>
+  </div>
+  <div class="ds-selectbox-group" role="radiogroup" aria-labelledby="select-box-ex1-label">
+    <label class="ds-selectbox">
+      <span class="ds-selectbox__texts">
+        <span class="ds-selectbox__label">1개월</span>
+        <span class="ds-selectbox__desc">19,000원, 언제든 해지할 수 있어요</span>
+      </span>
+      <span class="ds-radio" data-tone="neutral" data-size="medium"><input type="radio" class="ds-radio__control" name="select-box-ex1"></span>
+    </label>
+    <label class="ds-selectbox">
+      <span class="ds-selectbox__texts">
+        <span class="ds-selectbox__label">6개월</span>
+        <span class="ds-selectbox__desc">월 15,000원, 90,000원을 한 번에 결제해요</span>
+      </span>
+      <span class="ds-radio" data-tone="neutral" data-size="medium"><input type="radio" class="ds-radio__control" name="select-box-ex1"></span>
+    </label>
+    <label class="ds-selectbox">
+      <span class="ds-selectbox__texts">
+        <span class="ds-selectbox__label">12개월</span>
+        <span class="ds-selectbox__desc">월 12,000원, 가장 많이 골라요</span>
+      </span>
+      <span class="ds-radio" data-tone="neutral" data-size="medium"><input type="radio" class="ds-radio__control" name="select-box-ex1" checked></span>
+    </label>
+  </div>
+</div>
+```
+
+### 여러 개를 고를 때는 체크로만
+
+관심 분야처럼 여러 개를 고를 때는 모든 상자에 체크 표시를 씁니다. 한 묶음 안에서 check와 radio를 섞으면 몇 개를 골라야 하는지 헷갈립니다.
+
+```html
+<div class="ds-field u-full" style="max-width: 420px">
+  <div class="ds-field__header">
+    <span class="ds-field__label" id="select-box-ex2-label">관심 있는 분야를 모두 골라 주세요</span>
+  </div>
+  <div class="ds-selectbox-group" role="group" aria-labelledby="select-box-ex2-label" style="--ds-selectbox-columns: 2">
+    <label class="ds-selectbox" data-layout="vertical">
+      <i class="ds-icon ds-icon--message-circle" aria-hidden="true"></i>
+      <span class="ds-selectbox__texts">
+        <span class="ds-selectbox__label">말하기</span>
+        <span class="ds-selectbox__desc">발음과 대화 연습</span>
+      </span>
+      <span class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control" checked></span>
+    </label>
+    <label class="ds-selectbox" data-layout="vertical">
+      <i class="ds-icon ds-icon--headset" aria-hidden="true"></i>
+      <span class="ds-selectbox__texts">
+        <span class="ds-selectbox__label">듣기</span>
+        <span class="ds-selectbox__desc">빠른 말 알아듣기</span>
+      </span>
+      <span class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control"></span>
+    </label>
+    <label class="ds-selectbox" data-layout="vertical">
+      <i class="ds-icon ds-icon--book-open" aria-hidden="true"></i>
+      <span class="ds-selectbox__texts">
+        <span class="ds-selectbox__label">읽기</span>
+        <span class="ds-selectbox__desc">긴 글 빨리 읽기</span>
+      </span>
+      <span class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control" checked></span>
+    </label>
+    <label class="ds-selectbox" data-layout="vertical">
+      <i class="ds-icon ds-icon--pencil" aria-hidden="true"></i>
+      <span class="ds-selectbox__texts">
+        <span class="ds-selectbox__label">쓰기</span>
+        <span class="ds-selectbox__desc">이메일과 보고서</span>
+      </span>
+      <span class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control"></span>
+    </label>
+  </div>
 </div>
 ```
 

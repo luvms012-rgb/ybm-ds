@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Popover - YBM DS</title>
+<title>Popover - yds</title>
 <meta name="description" content="누른 요소 옆에 작은 창을 띄워 부가 정보나 작업을 보여 주는 컴포넌트입니다.">
 <!-- 생성물: node site/build.mjs가 만든다. 직접 고치지 말고 site/build.mjs나 site/src를 고친다 -->
 <script>try { var t = localStorage.getItem("ybm-site-theme"); if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.dataset.theme = "dark"; } catch (e) {}</script>
 <link rel="icon" href="../assets/logo-ybmnet.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../dist/ybm-ds.css">
-<link rel="stylesheet" href="../assets/site.css?v=bb7371b2">
+<link rel="stylesheet" href="../assets/site.css?v=1656b6c0">
 <script src="../../dist/ybm-ds.js" defer></script>
-<script src="../assets/site.js?v=bb7371b2" defer></script>
+<script src="../assets/site.js?v=1656b6c0" defer></script>
 </head>
 <body class="site">
 <a class="site-skip" href="#main">본문 바로가기</a>
@@ -160,37 +160,147 @@
 <thead><tr><th scope="col">구분</th><th scope="col">내용</th></tr></thead>
 <tbody><tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>Popover는 버튼 옆에 뜨는 작은 창이고, 바깥을 누르면 닫힙니다.</td></tr>
 <tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>화면을 막고 확인받아야 할 때는 Dialog를 씁니다.</td></tr></tbody></table></div>
-<h2 id="examples">예시<a class="site-anchor" href="#examples" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><div class="site-example">
+<h2 id="examples">예시<a class="site-anchor" href="#examples" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><h3>버튼 옆에서 끝나는 작은 작업 열기</h3>
+<p>공유처럼 버튼 옆에서 끝나는 작은 작업은 Popover로 엽니다. 바깥을 누르면 닫히므로 화면을 막고 꼭 확인받아야 할 때는 Dialog를 씁니다.</p>
+<div class="site-example">
   <div class="site-example__bar"><div class="ds-chiptabs" role="tablist" aria-label="보기 방식"><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-view="preview">미리보기</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-view="code">코드</button></div></div>
-  <div class="site-example__preview"><div class="pv-stage" style="min-height:300px;align-items:flex-start">
+  <div class="site-example__preview"><div class="pv-stage pv-wide"><div class="u-col u-gap-3 u-full" style="max-width: 480px">
+  <div class="u-flex u-center u-between u-gap-2">
+    <span class="ds-t06 ds-fw-bold">11월 학습 계획</span>
     <span class="ds-popover-anchor">
-      <button type="button" class="ds-btn" data-variant="neutralOutline" data-size="small" data-ds-popover="pv-pop" aria-expanded="false" aria-controls="pv-pop">공유 설정</button>
-      <div class="ds-popover" id="pv-pop" role="dialog" aria-labelledby="pv-pop-t" hidden>
-        <div class="ds-popover__header"><div class="ds-popover__texts"><strong class="ds-popover__title" id="pv-pop-t">링크 공유</strong><p class="ds-popover__desc">링크가 있는 사람만 볼 수 있어요</p></div><button type="button" class="ds-popover__close" data-ds-close aria-label="닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button></div>
-        <div class="ds-popover__body">공유를 끄면 이미 보낸 링크도 더 이상 열리지 않아요.</div>
-        <div class="ds-popover__footer"><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="small" data-ds-close>취소</button><button type="button" class="ds-btn" data-variant="neutralSolid" data-size="small" data-ds-close>공유 끄기</button></div>
+      <button type="button" class="ds-btn" data-variant="neutralOutline" data-size="small" data-ds-popover="popover-ex1" aria-expanded="false" aria-controls="popover-ex1"><i class="ds-icon ds-icon--share" aria-hidden="true"></i>공유</button>
+      <div class="ds-popover" id="popover-ex1" role="dialog" aria-labelledby="popover-ex1-title" hidden data-placement="bottom-end">
+        <div class="ds-popover__header">
+          <div class="ds-popover__texts">
+            <strong class="ds-popover__title" id="popover-ex1-title">링크로 공유</strong>
+            <p class="ds-popover__desc">링크가 있는 사람은 누구나 볼 수 있어요</p>
+          </div>
+          <button type="button" class="ds-popover__close" data-ds-close aria-label="닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button>
+        </div>
+        <div class="ds-popover__body">
+          <div class="ds-input" data-variant="outline" data-size="medium">
+            <input class="ds-input__control" value="https://example.com/plan/1104" readonly aria-label="공유 링크">
+          </div>
+        </div>
+        <div class="ds-popover__footer">
+          <button type="button" class="ds-btn" data-variant="neutralSolid" data-size="small" data-ds-close>링크 복사</button>
+        </div>
       </div>
     </span>
-    <div class="ds-popover" role="dialog" aria-label="예시">
-      <div class="ds-popover__header"><div class="ds-popover__texts"><strong class="ds-popover__title">제목</strong><p class="ds-popover__desc">설명을 작성할 수 있어요</p></div><button type="button" class="ds-popover__close" aria-label="닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button></div>
-      <div class="ds-popover__body">팝오버 본문에는 사용자가 확인할 내용이나 추가 동작을 둘 수 있습니다.</div>
-      <div class="ds-popover__footer"><button type="button" class="ds-btn" data-variant="neutralSolid" data-size="small">확인</button></div>
-    </div>
-  </div></div>
+  </div>
+  <ul class="ds-list" data-variant="inset" data-divider>
+    <li><div class="ds-list-item" data-size="small"><span class="ds-list-item__content"><span class="ds-list-item__title">영어 단어 30개 외우기</span><span class="ds-list-item__desc">매일</span></span></div></li>
+    <li><div class="ds-list-item" data-size="small"><span class="ds-list-item__content"><span class="ds-list-item__title">듣기 강의 2개 듣기</span><span class="ds-list-item__desc">월, 수, 금</span></span></div></li>
+    <li><div class="ds-list-item" data-size="small"><span class="ds-list-item__content"><span class="ds-list-item__title">모의고사 한 번 풀기</span><span class="ds-list-item__desc">토요일</span></span></div></li>
+    <li><div class="ds-list-item" data-size="small"><span class="ds-list-item__content"><span class="ds-list-item__title">틀린 문제 다시 보기</span><span class="ds-list-item__desc">일요일</span></span></div></li>
+  </ul>
+</div></div></div>
   <div class="site-example__code" hidden><figure class="ds-codeblock">
   <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">html</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
-  <pre class="ds-codeblock__code"><code>&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-popover-anchor&quot;</span>&gt;
-  &lt;<span class="hl-t">button</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;button&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-btn&quot;</span> <span class="hl-f">data-variant</span>=<span class="hl-s">&quot;neutralOutline&quot;</span> <span class="hl-f">data-size</span>=<span class="hl-s">&quot;small&quot;</span> <span class="hl-f">data-ds-popover</span>=<span class="hl-s">&quot;pv-pop&quot;</span> <span class="hl-f">aria-expanded</span>=<span class="hl-s">&quot;false&quot;</span> <span class="hl-f">aria-controls</span>=<span class="hl-s">&quot;pv-pop&quot;</span>&gt;공유 설정&lt;/<span class="hl-t">button</span>&gt;
-  &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-popover&quot;</span> <span class="hl-f">id</span>=<span class="hl-s">&quot;pv-pop&quot;</span> <span class="hl-f">role</span>=<span class="hl-s">&quot;dialog&quot;</span> <span class="hl-f">aria-labelledby</span>=<span class="hl-s">&quot;pv-pop-t&quot;</span> <span class="hl-f">hidden</span>&gt;
-    &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-popover__header&quot;</span>&gt;&lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-popover__texts&quot;</span>&gt;&lt;<span class="hl-t">strong</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-popover__title&quot;</span> <span class="hl-f">id</span>=<span class="hl-s">&quot;pv-pop-t&quot;</span>&gt;링크 공유&lt;/<span class="hl-t">strong</span>&gt;&lt;<span class="hl-t">p</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-popover__desc&quot;</span>&gt;링크가 있는 사람만 볼 수 있어요&lt;/<span class="hl-t">p</span>&gt;&lt;/<span class="hl-t">div</span>&gt;&lt;<span class="hl-t">button</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;button&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-popover__close&quot;</span> <span class="hl-f">data-ds-close</span> <span class="hl-f">aria-label</span>=<span class="hl-s">&quot;닫기&quot;</span>&gt;&lt;<span class="hl-t">i</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-icon ds-icon--x&quot;</span> <span class="hl-f">aria-hidden</span>=<span class="hl-s">&quot;true&quot;</span>&gt;&lt;/<span class="hl-t">i</span>&gt;&lt;/<span class="hl-t">button</span>&gt;&lt;/<span class="hl-t">div</span>&gt;
-    &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-popover__body&quot;</span>&gt;공유를 끄면 이미 보낸 링크도 더 이상 열리지 않아요.&lt;/<span class="hl-t">div</span>&gt;
-    &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-popover__footer&quot;</span>&gt;&lt;<span class="hl-t">button</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;button&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-btn&quot;</span> <span class="hl-f">data-variant</span>=<span class="hl-s">&quot;neutralWeak&quot;</span> <span class="hl-f">data-size</span>=<span class="hl-s">&quot;small&quot;</span> <span class="hl-f">data-ds-close</span>&gt;취소&lt;/<span class="hl-t">button</span>&gt;&lt;<span class="hl-t">button</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;button&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-btn&quot;</span> <span class="hl-f">data-variant</span>=<span class="hl-s">&quot;neutralSolid&quot;</span> <span class="hl-f">data-size</span>=<span class="hl-s">&quot;small&quot;</span> <span class="hl-f">data-ds-close</span>&gt;공유 끄기&lt;/<span class="hl-t">button</span>&gt;&lt;/<span class="hl-t">div</span>&gt;
+  <pre class="ds-codeblock__code"><code>&lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;u-col u-gap-3 u-full&quot;</span> <span class="hl-f">style</span>=<span class="hl-s">&quot;max-width: 480px&quot;</span>&gt;
+  &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;u-flex u-center u-between u-gap-2&quot;</span>&gt;
+    &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-t06 ds-fw-bold&quot;</span>&gt;11월 학습 계획&lt;/<span class="hl-t">span</span>&gt;
+    &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-popover-anchor&quot;</span>&gt;
+      &lt;<span class="hl-t">button</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;button&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-btn&quot;</span> <span class="hl-f">data-variant</span>=<span class="hl-s">&quot;neutralOutline&quot;</span> <span class="hl-f">data-size</span>=<span class="hl-s">&quot;small&quot;</span> <span class="hl-f">data-ds-popover</span>=<span class="hl-s">&quot;popover-ex1&quot;</span> <span class="hl-f">aria-expanded</span>=<span class="hl-s">&quot;false&quot;</span> <span class="hl-f">aria-controls</span>=<span class="hl-s">&quot;popover-ex1&quot;</span>&gt;&lt;<span class="hl-t">i</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-icon ds-icon--share&quot;</span> <span class="hl-f">aria-hidden</span>=<span class="hl-s">&quot;true&quot;</span>&gt;&lt;/<span class="hl-t">i</span>&gt;공유&lt;/<span class="hl-t">button</span>&gt;
+      &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-popover&quot;</span> <span class="hl-f">id</span>=<span class="hl-s">&quot;popover-ex1&quot;</span> <span class="hl-f">role</span>=<span class="hl-s">&quot;dialog&quot;</span> <span class="hl-f">aria-labelledby</span>=<span class="hl-s">&quot;popover-ex1-title&quot;</span> <span class="hl-f">hidden</span> <span class="hl-f">data-placement</span>=<span class="hl-s">&quot;bottom-end&quot;</span>&gt;
+        &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-popover__header&quot;</span>&gt;
+          &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-popover__texts&quot;</span>&gt;
+            &lt;<span class="hl-t">strong</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-popover__title&quot;</span> <span class="hl-f">id</span>=<span class="hl-s">&quot;popover-ex1-title&quot;</span>&gt;링크로 공유&lt;/<span class="hl-t">strong</span>&gt;
+            &lt;<span class="hl-t">p</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-popover__desc&quot;</span>&gt;링크가 있는 사람은 누구나 볼 수 있어요&lt;/<span class="hl-t">p</span>&gt;
+          &lt;/<span class="hl-t">div</span>&gt;
+          &lt;<span class="hl-t">button</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;button&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-popover__close&quot;</span> <span class="hl-f">data-ds-close</span> <span class="hl-f">aria-label</span>=<span class="hl-s">&quot;닫기&quot;</span>&gt;&lt;<span class="hl-t">i</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-icon ds-icon--x&quot;</span> <span class="hl-f">aria-hidden</span>=<span class="hl-s">&quot;true&quot;</span>&gt;&lt;/<span class="hl-t">i</span>&gt;&lt;/<span class="hl-t">button</span>&gt;
+        &lt;/<span class="hl-t">div</span>&gt;
+        &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-popover__body&quot;</span>&gt;
+          &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-input&quot;</span> <span class="hl-f">data-variant</span>=<span class="hl-s">&quot;outline&quot;</span> <span class="hl-f">data-size</span>=<span class="hl-s">&quot;medium&quot;</span>&gt;
+            &lt;<span class="hl-t">input</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-input__control&quot;</span> <span class="hl-f">value</span>=<span class="hl-s">&quot;https://example.com/plan/1104&quot;</span> <span class="hl-f">readonly</span> <span class="hl-f">aria-label</span>=<span class="hl-s">&quot;공유 링크&quot;</span>&gt;
+          &lt;/<span class="hl-t">div</span>&gt;
+        &lt;/<span class="hl-t">div</span>&gt;
+        &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-popover__footer&quot;</span>&gt;
+          &lt;<span class="hl-t">button</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;button&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-btn&quot;</span> <span class="hl-f">data-variant</span>=<span class="hl-s">&quot;neutralSolid&quot;</span> <span class="hl-f">data-size</span>=<span class="hl-s">&quot;small&quot;</span> <span class="hl-f">data-ds-close</span>&gt;링크 복사&lt;/<span class="hl-t">button</span>&gt;
+        &lt;/<span class="hl-t">div</span>&gt;
+      &lt;/<span class="hl-t">div</span>&gt;
+    &lt;/<span class="hl-t">span</span>&gt;
   &lt;/<span class="hl-t">div</span>&gt;
-&lt;/<span class="hl-t">span</span>&gt;
-&lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-popover&quot;</span> <span class="hl-f">role</span>=<span class="hl-s">&quot;dialog&quot;</span> <span class="hl-f">aria-label</span>=<span class="hl-s">&quot;예시&quot;</span>&gt;
-  &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-popover__header&quot;</span>&gt;&lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-popover__texts&quot;</span>&gt;&lt;<span class="hl-t">strong</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-popover__title&quot;</span>&gt;제목&lt;/<span class="hl-t">strong</span>&gt;&lt;<span class="hl-t">p</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-popover__desc&quot;</span>&gt;설명을 작성할 수 있어요&lt;/<span class="hl-t">p</span>&gt;&lt;/<span class="hl-t">div</span>&gt;&lt;<span class="hl-t">button</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;button&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-popover__close&quot;</span> <span class="hl-f">aria-label</span>=<span class="hl-s">&quot;닫기&quot;</span>&gt;&lt;<span class="hl-t">i</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-icon ds-icon--x&quot;</span> <span class="hl-f">aria-hidden</span>=<span class="hl-s">&quot;true&quot;</span>&gt;&lt;/<span class="hl-t">i</span>&gt;&lt;/<span class="hl-t">button</span>&gt;&lt;/<span class="hl-t">div</span>&gt;
-  &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-popover__body&quot;</span>&gt;팝오버 본문에는 사용자가 확인할 내용이나 추가 동작을 둘 수 있습니다.&lt;/<span class="hl-t">div</span>&gt;
-  &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-popover__footer&quot;</span>&gt;&lt;<span class="hl-t">button</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;button&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-btn&quot;</span> <span class="hl-f">data-variant</span>=<span class="hl-s">&quot;neutralSolid&quot;</span> <span class="hl-f">data-size</span>=<span class="hl-s">&quot;small&quot;</span>&gt;확인&lt;/<span class="hl-t">button</span>&gt;&lt;/<span class="hl-t">div</span>&gt;
+  &lt;<span class="hl-t">ul</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list&quot;</span> <span class="hl-f">data-variant</span>=<span class="hl-s">&quot;inset&quot;</span> <span class="hl-f">data-divider</span>&gt;
+    &lt;<span class="hl-t">li</span>&gt;&lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item&quot;</span> <span class="hl-f">data-size</span>=<span class="hl-s">&quot;small&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__content&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__title&quot;</span>&gt;영어 단어 30개 외우기&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__desc&quot;</span>&gt;매일&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">div</span>&gt;&lt;/<span class="hl-t">li</span>&gt;
+    &lt;<span class="hl-t">li</span>&gt;&lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item&quot;</span> <span class="hl-f">data-size</span>=<span class="hl-s">&quot;small&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__content&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__title&quot;</span>&gt;듣기 강의 2개 듣기&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__desc&quot;</span>&gt;월, 수, 금&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">div</span>&gt;&lt;/<span class="hl-t">li</span>&gt;
+    &lt;<span class="hl-t">li</span>&gt;&lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item&quot;</span> <span class="hl-f">data-size</span>=<span class="hl-s">&quot;small&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__content&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__title&quot;</span>&gt;모의고사 한 번 풀기&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__desc&quot;</span>&gt;토요일&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">div</span>&gt;&lt;/<span class="hl-t">li</span>&gt;
+    &lt;<span class="hl-t">li</span>&gt;&lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item&quot;</span> <span class="hl-f">data-size</span>=<span class="hl-s">&quot;small&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__content&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__title&quot;</span>&gt;틀린 문제 다시 보기&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__desc&quot;</span>&gt;일요일&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">div</span>&gt;&lt;/<span class="hl-t">li</span>&gt;
+  &lt;/<span class="hl-t">ul</span>&gt;
+&lt;/<span class="hl-t">div</span>&gt;</code></pre>
+</figure></div>
+</div>
+<h3>닫기 버튼 대신 아래 버튼으로 닫기</h3>
+<p>필터처럼 고른 뒤 적용하는 작업은 아래에 취소와 적용 버튼을 두고 위쪽 닫기 버튼은 뺍니다. 닫기 버튼을 빼면 아래 버튼에 <code>data-ds-close</code>를 붙여 창이 꼭 닫히게 합니다.</p>
+<div class="site-example">
+  <div class="site-example__bar"><div class="ds-chiptabs" role="tablist" aria-label="보기 방식"><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-view="preview">미리보기</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-view="code">코드</button></div></div>
+  <div class="site-example__preview"><div class="pv-stage pv-wide"><div class="u-col u-gap-3 u-full" style="max-width: 480px">
+  <div class="u-flex u-center u-between u-gap-2">
+    <span class="ds-t06 ds-fw-bold">주문 내역</span>
+    <span class="ds-popover-anchor">
+      <button type="button" class="ds-btn" data-variant="neutralOutline" data-size="small" data-ds-popover="popover-ex2" aria-expanded="false" aria-controls="popover-ex2"><i class="ds-icon ds-icon--list-filter" aria-hidden="true"></i>필터</button>
+      <div class="ds-popover" id="popover-ex2" role="dialog" aria-labelledby="popover-ex2-title" hidden data-placement="bottom-end">
+        <div class="ds-popover__header">
+          <div class="ds-popover__texts">
+            <strong class="ds-popover__title" id="popover-ex2-title">주문 상태</strong>
+          </div>
+        </div>
+        <div class="ds-popover__body">
+          <fieldset class="ds-checkbox-group" aria-labelledby="popover-ex2-title">
+            <label class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control" checked><span class="ds-checkbox__label">결제 완료</span></label>
+            <label class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control" checked><span class="ds-checkbox__label">배송 중</span></label>
+            <label class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control"><span class="ds-checkbox__label">배송 완료</span></label>
+            <label class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control"><span class="ds-checkbox__label">취소, 반품</span></label>
+          </fieldset>
+        </div>
+        <div class="ds-popover__footer">
+          <button type="button" class="ds-btn" data-variant="neutralWeak" data-size="small" data-ds-close>취소</button>
+          <button type="button" class="ds-btn" data-variant="neutralSolid" data-size="small" data-ds-close>적용</button>
+        </div>
+      </div>
+    </span>
+  </div>
+  <ul class="ds-list" data-variant="inset" data-divider>
+    <li><a class="ds-list-item" href="#"><span class="ds-list-item__content"><span class="ds-list-item__title">무선 이어폰</span><span class="ds-list-item__desc">11월 3일 주문</span></span><span class="ds-list-item__suffix">배송 중</span></a></li>
+    <li><a class="ds-list-item" href="#"><span class="ds-list-item__content"><span class="ds-list-item__title">영어 단어장 세트</span><span class="ds-list-item__desc">11월 1일 주문</span></span><span class="ds-list-item__suffix">결제 완료</span></a></li>
+    <li><a class="ds-list-item" href="#"><span class="ds-list-item__content"><span class="ds-list-item__title">가벼운 러닝화</span><span class="ds-list-item__desc">10월 28일 주문</span></span><span class="ds-list-item__suffix">배송 중</span></a></li>
+    <li><a class="ds-list-item" href="#"><span class="ds-list-item__content"><span class="ds-list-item__title">휴대용 보조 배터리</span><span class="ds-list-item__desc">10월 25일 주문</span></span><span class="ds-list-item__suffix">결제 완료</span></a></li>
+  </ul>
+</div></div></div>
+  <div class="site-example__code" hidden><figure class="ds-codeblock">
+  <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">html</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
+  <pre class="ds-codeblock__code"><code>&lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;u-col u-gap-3 u-full&quot;</span> <span class="hl-f">style</span>=<span class="hl-s">&quot;max-width: 480px&quot;</span>&gt;
+  &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;u-flex u-center u-between u-gap-2&quot;</span>&gt;
+    &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-t06 ds-fw-bold&quot;</span>&gt;주문 내역&lt;/<span class="hl-t">span</span>&gt;
+    &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-popover-anchor&quot;</span>&gt;
+      &lt;<span class="hl-t">button</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;button&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-btn&quot;</span> <span class="hl-f">data-variant</span>=<span class="hl-s">&quot;neutralOutline&quot;</span> <span class="hl-f">data-size</span>=<span class="hl-s">&quot;small&quot;</span> <span class="hl-f">data-ds-popover</span>=<span class="hl-s">&quot;popover-ex2&quot;</span> <span class="hl-f">aria-expanded</span>=<span class="hl-s">&quot;false&quot;</span> <span class="hl-f">aria-controls</span>=<span class="hl-s">&quot;popover-ex2&quot;</span>&gt;&lt;<span class="hl-t">i</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-icon ds-icon--list-filter&quot;</span> <span class="hl-f">aria-hidden</span>=<span class="hl-s">&quot;true&quot;</span>&gt;&lt;/<span class="hl-t">i</span>&gt;필터&lt;/<span class="hl-t">button</span>&gt;
+      &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-popover&quot;</span> <span class="hl-f">id</span>=<span class="hl-s">&quot;popover-ex2&quot;</span> <span class="hl-f">role</span>=<span class="hl-s">&quot;dialog&quot;</span> <span class="hl-f">aria-labelledby</span>=<span class="hl-s">&quot;popover-ex2-title&quot;</span> <span class="hl-f">hidden</span> <span class="hl-f">data-placement</span>=<span class="hl-s">&quot;bottom-end&quot;</span>&gt;
+        &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-popover__header&quot;</span>&gt;
+          &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-popover__texts&quot;</span>&gt;
+            &lt;<span class="hl-t">strong</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-popover__title&quot;</span> <span class="hl-f">id</span>=<span class="hl-s">&quot;popover-ex2-title&quot;</span>&gt;주문 상태&lt;/<span class="hl-t">strong</span>&gt;
+          &lt;/<span class="hl-t">div</span>&gt;
+        &lt;/<span class="hl-t">div</span>&gt;
+        &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-popover__body&quot;</span>&gt;
+          &lt;<span class="hl-t">fieldset</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-checkbox-group&quot;</span> <span class="hl-f">aria-labelledby</span>=<span class="hl-s">&quot;popover-ex2-title&quot;</span>&gt;
+            &lt;<span class="hl-t">label</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-checkbox&quot;</span> <span class="hl-f">data-tone</span>=<span class="hl-s">&quot;neutral&quot;</span>&gt;&lt;<span class="hl-t">input</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;checkbox&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-checkbox__control&quot;</span> <span class="hl-f">checked</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-checkbox__label&quot;</span>&gt;결제 완료&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">label</span>&gt;
+            &lt;<span class="hl-t">label</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-checkbox&quot;</span> <span class="hl-f">data-tone</span>=<span class="hl-s">&quot;neutral&quot;</span>&gt;&lt;<span class="hl-t">input</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;checkbox&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-checkbox__control&quot;</span> <span class="hl-f">checked</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-checkbox__label&quot;</span>&gt;배송 중&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">label</span>&gt;
+            &lt;<span class="hl-t">label</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-checkbox&quot;</span> <span class="hl-f">data-tone</span>=<span class="hl-s">&quot;neutral&quot;</span>&gt;&lt;<span class="hl-t">input</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;checkbox&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-checkbox__control&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-checkbox__label&quot;</span>&gt;배송 완료&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">label</span>&gt;
+            &lt;<span class="hl-t">label</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-checkbox&quot;</span> <span class="hl-f">data-tone</span>=<span class="hl-s">&quot;neutral&quot;</span>&gt;&lt;<span class="hl-t">input</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;checkbox&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-checkbox__control&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-checkbox__label&quot;</span>&gt;취소, 반품&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">label</span>&gt;
+          &lt;/<span class="hl-t">fieldset</span>&gt;
+        &lt;/<span class="hl-t">div</span>&gt;
+        &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-popover__footer&quot;</span>&gt;
+          &lt;<span class="hl-t">button</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;button&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-btn&quot;</span> <span class="hl-f">data-variant</span>=<span class="hl-s">&quot;neutralWeak&quot;</span> <span class="hl-f">data-size</span>=<span class="hl-s">&quot;small&quot;</span> <span class="hl-f">data-ds-close</span>&gt;취소&lt;/<span class="hl-t">button</span>&gt;
+          &lt;<span class="hl-t">button</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;button&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-btn&quot;</span> <span class="hl-f">data-variant</span>=<span class="hl-s">&quot;neutralSolid&quot;</span> <span class="hl-f">data-size</span>=<span class="hl-s">&quot;small&quot;</span> <span class="hl-f">data-ds-close</span>&gt;적용&lt;/<span class="hl-t">button</span>&gt;
+        &lt;/<span class="hl-t">div</span>&gt;
+      &lt;/<span class="hl-t">div</span>&gt;
+    &lt;/<span class="hl-t">span</span>&gt;
+  &lt;/<span class="hl-t">div</span>&gt;
+  &lt;<span class="hl-t">ul</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list&quot;</span> <span class="hl-f">data-variant</span>=<span class="hl-s">&quot;inset&quot;</span> <span class="hl-f">data-divider</span>&gt;
+    &lt;<span class="hl-t">li</span>&gt;&lt;<span class="hl-t">a</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item&quot;</span> <span class="hl-f">href</span>=<span class="hl-s">&quot;#&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__content&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__title&quot;</span>&gt;무선 이어폰&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__desc&quot;</span>&gt;11월 3일 주문&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__suffix&quot;</span>&gt;배송 중&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">a</span>&gt;&lt;/<span class="hl-t">li</span>&gt;
+    &lt;<span class="hl-t">li</span>&gt;&lt;<span class="hl-t">a</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item&quot;</span> <span class="hl-f">href</span>=<span class="hl-s">&quot;#&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__content&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__title&quot;</span>&gt;영어 단어장 세트&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__desc&quot;</span>&gt;11월 1일 주문&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__suffix&quot;</span>&gt;결제 완료&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">a</span>&gt;&lt;/<span class="hl-t">li</span>&gt;
+    &lt;<span class="hl-t">li</span>&gt;&lt;<span class="hl-t">a</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item&quot;</span> <span class="hl-f">href</span>=<span class="hl-s">&quot;#&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__content&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__title&quot;</span>&gt;가벼운 러닝화&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__desc&quot;</span>&gt;10월 28일 주문&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__suffix&quot;</span>&gt;배송 중&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">a</span>&gt;&lt;/<span class="hl-t">li</span>&gt;
+    &lt;<span class="hl-t">li</span>&gt;&lt;<span class="hl-t">a</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item&quot;</span> <span class="hl-f">href</span>=<span class="hl-s">&quot;#&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__content&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__title&quot;</span>&gt;휴대용 보조 배터리&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__desc&quot;</span>&gt;10월 25일 주문&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__suffix&quot;</span>&gt;결제 완료&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">a</span>&gt;&lt;/<span class="hl-t">li</span>&gt;
+  &lt;/<span class="hl-t">ul</span>&gt;
 &lt;/<span class="hl-t">div</span>&gt;</code></pre>
 </figure></div>
 </div>

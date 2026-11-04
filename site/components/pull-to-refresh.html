@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Pull To Refresh - YBM DS</title>
+<title>Pull To Refresh - yds</title>
 <meta name="description" content="목록 맨 위에서 아래로 당기면 내용을 새로 불러오는 컴포넌트입니다.">
 <!-- 생성물: node site/build.mjs가 만든다. 직접 고치지 말고 site/build.mjs나 site/src를 고친다 -->
 <script>try { var t = localStorage.getItem("ybm-site-theme"); if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.dataset.theme = "dark"; } catch (e) {}</script>
 <link rel="icon" href="../assets/logo-ybmnet.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../dist/ybm-ds.css">
-<link rel="stylesheet" href="../assets/site.css?v=bb7371b2">
+<link rel="stylesheet" href="../assets/site.css?v=1656b6c0">
 <script src="../../dist/ybm-ds.js" defer></script>
-<script src="../assets/site.js?v=bb7371b2" defer></script>
+<script src="../assets/site.js?v=1656b6c0" defer></script>
 </head>
 <body class="site">
 <a class="site-skip" href="#main">본문 바로가기</a>
@@ -147,35 +147,141 @@
 <thead><tr><th scope="col">구분</th><th scope="col">내용</th></tr></thead>
 <tbody><tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>최신 내용을 다시 불러오는 목록 화면에만 씁니다.</td></tr>
 <tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>글자를 끌어서 선택하는 영역에서는 data-disabled로 끕니다.</td></tr></tbody></table></div>
-<h2 id="examples">예시<a class="site-anchor" href="#examples" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><div class="site-example">
+<h2 id="examples">예시<a class="site-anchor" href="#examples" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><h3>새 소식이 쌓이는 목록에 쓰기</h3>
+<p>알림처럼 새 내용이 계속 쌓이는 목록을 <code>ds-ptr</code>로 감쌉니다. 휴대폰에서 맨 위를 아래로 당기면 표시가 내려오고 <code>ds-refresh</code> 이벤트가 나갑니다.</p>
+<div class="site-example">
   <div class="site-example__bar"><div class="ds-chiptabs" role="tablist" aria-label="보기 방식"><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-view="preview">미리보기</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-view="code">코드</button></div></div>
-  <div class="site-example__preview"><div class="pv-stage">
-    <div class="ds-ptr pv-w" id="pv-ptr" style="width:343px;height:240px;box-shadow:inset 0 0 0 1px var(--ds-color-stroke-neutral-muted);border-radius:var(--ds-shape-md)">
-      <div class="ds-ptr__indicator">
-        <span class="ds-progress-circle" role="progressbar" aria-label="새로 고침" style="--ds-progress-value: 0"><svg viewBox="0 0 24 24" aria-hidden="true"><circle class="ds-progress-circle__track" pathLength="100"/><circle class="ds-progress-circle__range" pathLength="100"/></svg></span>
-      </div>
-      <div class="ds-ptr__content" style="height:100%;overflow:auto;padding:var(--ds-space-x4)">
-        <p>휴대폰에서 이 칸을 아래로 당겨 보세요.</p>
-        <p id="pv-ptr-out" style="color:var(--ds-color-fg-neutral-muted)">아직 새로 고치지 않았어요</p>
-      </div>
+  <div class="site-example__preview"><div class="pv-stage pv-wide"><div class="u-col u-full" style="max-width: 375px">
+  <header class="ds-appbar">
+    <div class="ds-appbar__left">
+      <button type="button" class="ds-appbar__button" aria-label="뒤로"><i class="ds-icon ds-icon--chevron-left" aria-hidden="true"></i></button>
+    </div>
+    <div class="ds-appbar__main">
+      <h1 class="ds-appbar__title">알림</h1>
+    </div>
+    <div class="ds-appbar__right"></div>
+  </header>
+  <div class="ds-ptr">
+    <div class="ds-ptr__indicator">
+      <span class="ds-progress-circle" role="progressbar" aria-label="새로 고침"><svg viewBox="0 0 24 24" aria-hidden="true"><circle class="ds-progress-circle__track" pathLength="100"/><circle class="ds-progress-circle__range" pathLength="100"/></svg></span>
+    </div>
+    <div class="ds-ptr__content">
+      <ul class="ds-list" data-divider>
+        <li>
+          <a class="ds-list-item" href="#">
+            <span class="ds-list-item__prefix"><i class="ds-icon ds-icon--book-open" aria-hidden="true"></i></span>
+            <span class="ds-list-item__content">
+              <span class="ds-list-item__title">수강 신청이 확정됐어요</span>
+              <span class="ds-list-item__desc">영어 회화 기초, 방금</span>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a class="ds-list-item" href="#">
+            <span class="ds-list-item__prefix"><i class="ds-icon ds-icon--truck" aria-hidden="true"></i></span>
+            <span class="ds-list-item__content">
+              <span class="ds-list-item__title">주문한 교재가 출발했어요</span>
+              <span class="ds-list-item__desc">1시간 전</span>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a class="ds-list-item" href="#">
+            <span class="ds-list-item__prefix"><i class="ds-icon ds-icon--calendar" aria-hidden="true"></i></span>
+            <span class="ds-list-item__content">
+              <span class="ds-list-item__title">내일 오전 10시에 시험이 있어요</span>
+              <span class="ds-list-item__desc">어제</span>
+            </span>
+          </a>
+        </li>
+      </ul>
     </div>
   </div>
-  <script>
-    // 미리보기 전용 - 새로 고침 흉내
-    document.getElementById('pv-ptr').addEventListener('ds-refresh', function (e) {
-      setTimeout(function () { DS.endRefresh(e.currentTarget || document.getElementById('pv-ptr')); document.getElementById('pv-ptr-out').textContent = '방금 새로 고쳤어요'; }, 1200);
-    });
-  </script></div>
+</div></div></div>
   <div class="site-example__code" hidden><figure class="ds-codeblock">
   <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">html</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
-  <pre class="ds-codeblock__code"><code>&lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-ptr&quot;</span> <span class="hl-f">id</span>=<span class="hl-s">&quot;pv-ptr&quot;</span> <span class="hl-f">style</span>=<span class="hl-s">&quot;width:343px;height:240px;box-shadow:inset 0 0 0 1px var(--ds-color-stroke-neutral-muted);border-radius:var(--ds-shape-md)&quot;</span>&gt;
+  <pre class="ds-codeblock__code"><code>&lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;u-col u-full&quot;</span> <span class="hl-f">style</span>=<span class="hl-s">&quot;max-width: 375px&quot;</span>&gt;
+  &lt;<span class="hl-t">header</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-appbar&quot;</span>&gt;
+    &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-appbar__left&quot;</span>&gt;
+      &lt;<span class="hl-t">button</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;button&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-appbar__button&quot;</span> <span class="hl-f">aria-label</span>=<span class="hl-s">&quot;뒤로&quot;</span>&gt;&lt;<span class="hl-t">i</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-icon ds-icon--chevron-left&quot;</span> <span class="hl-f">aria-hidden</span>=<span class="hl-s">&quot;true&quot;</span>&gt;&lt;/<span class="hl-t">i</span>&gt;&lt;/<span class="hl-t">button</span>&gt;
+    &lt;/<span class="hl-t">div</span>&gt;
+    &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-appbar__main&quot;</span>&gt;
+      &lt;<span class="hl-t">h1</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-appbar__title&quot;</span>&gt;알림&lt;/<span class="hl-t">h1</span>&gt;
+    &lt;/<span class="hl-t">div</span>&gt;
+    &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-appbar__right&quot;</span>&gt;&lt;/<span class="hl-t">div</span>&gt;
+  &lt;/<span class="hl-t">header</span>&gt;
+  &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-ptr&quot;</span>&gt;
+    &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-ptr__indicator&quot;</span>&gt;
+      &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-progress-circle&quot;</span> <span class="hl-f">role</span>=<span class="hl-s">&quot;progressbar&quot;</span> <span class="hl-f">aria-label</span>=<span class="hl-s">&quot;새로 고침&quot;</span>&gt;&lt;<span class="hl-t">svg</span> <span class="hl-f">viewBox</span>=<span class="hl-s">&quot;0 0 24 24&quot;</span> <span class="hl-f">aria-hidden</span>=<span class="hl-s">&quot;true&quot;</span>&gt;&lt;<span class="hl-t">circle</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-progress-circle__track&quot;</span> <span class="hl-f">pathLength</span>=<span class="hl-s">&quot;100&quot;</span>/&gt;&lt;<span class="hl-t">circle</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-progress-circle__range&quot;</span> <span class="hl-f">pathLength</span>=<span class="hl-s">&quot;100&quot;</span>/&gt;&lt;/<span class="hl-t">svg</span>&gt;&lt;/<span class="hl-t">span</span>&gt;
+    &lt;/<span class="hl-t">div</span>&gt;
+    &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-ptr__content&quot;</span>&gt;
+      &lt;<span class="hl-t">ul</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list&quot;</span> <span class="hl-f">data-divider</span>&gt;
+        &lt;<span class="hl-t">li</span>&gt;
+          &lt;<span class="hl-t">a</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item&quot;</span> <span class="hl-f">href</span>=<span class="hl-s">&quot;#&quot;</span>&gt;
+            &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__prefix&quot;</span>&gt;&lt;<span class="hl-t">i</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-icon ds-icon--book-open&quot;</span> <span class="hl-f">aria-hidden</span>=<span class="hl-s">&quot;true&quot;</span>&gt;&lt;/<span class="hl-t">i</span>&gt;&lt;/<span class="hl-t">span</span>&gt;
+            &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__content&quot;</span>&gt;
+              &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__title&quot;</span>&gt;수강 신청이 확정됐어요&lt;/<span class="hl-t">span</span>&gt;
+              &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__desc&quot;</span>&gt;영어 회화 기초, 방금&lt;/<span class="hl-t">span</span>&gt;
+            &lt;/<span class="hl-t">span</span>&gt;
+          &lt;/<span class="hl-t">a</span>&gt;
+        &lt;/<span class="hl-t">li</span>&gt;
+        &lt;<span class="hl-t">li</span>&gt;
+          &lt;<span class="hl-t">a</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item&quot;</span> <span class="hl-f">href</span>=<span class="hl-s">&quot;#&quot;</span>&gt;
+            &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__prefix&quot;</span>&gt;&lt;<span class="hl-t">i</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-icon ds-icon--truck&quot;</span> <span class="hl-f">aria-hidden</span>=<span class="hl-s">&quot;true&quot;</span>&gt;&lt;/<span class="hl-t">i</span>&gt;&lt;/<span class="hl-t">span</span>&gt;
+            &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__content&quot;</span>&gt;
+              &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__title&quot;</span>&gt;주문한 교재가 출발했어요&lt;/<span class="hl-t">span</span>&gt;
+              &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__desc&quot;</span>&gt;1시간 전&lt;/<span class="hl-t">span</span>&gt;
+            &lt;/<span class="hl-t">span</span>&gt;
+          &lt;/<span class="hl-t">a</span>&gt;
+        &lt;/<span class="hl-t">li</span>&gt;
+        &lt;<span class="hl-t">li</span>&gt;
+          &lt;<span class="hl-t">a</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item&quot;</span> <span class="hl-f">href</span>=<span class="hl-s">&quot;#&quot;</span>&gt;
+            &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__prefix&quot;</span>&gt;&lt;<span class="hl-t">i</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-icon ds-icon--calendar&quot;</span> <span class="hl-f">aria-hidden</span>=<span class="hl-s">&quot;true&quot;</span>&gt;&lt;/<span class="hl-t">i</span>&gt;&lt;/<span class="hl-t">span</span>&gt;
+            &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__content&quot;</span>&gt;
+              &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__title&quot;</span>&gt;내일 오전 10시에 시험이 있어요&lt;/<span class="hl-t">span</span>&gt;
+              &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__desc&quot;</span>&gt;어제&lt;/<span class="hl-t">span</span>&gt;
+            &lt;/<span class="hl-t">span</span>&gt;
+          &lt;/<span class="hl-t">a</span>&gt;
+        &lt;/<span class="hl-t">li</span>&gt;
+      &lt;/<span class="hl-t">ul</span>&gt;
+    &lt;/<span class="hl-t">div</span>&gt;
+  &lt;/<span class="hl-t">div</span>&gt;
+&lt;/<span class="hl-t">div</span>&gt;</code></pre>
+</figure></div>
+</div>
+<h3>글자를 고르는 화면에서는 끄기</h3>
+<p>공지 본문처럼 글자를 끌어서 고르는 영역은 <code>data-disabled</code>로 당기기를 끕니다. 글자를 고르려던 손짓이 새로 고침으로 바뀌지 않습니다.</p>
+<div class="site-example">
+  <div class="site-example__bar"><div class="ds-chiptabs" role="tablist" aria-label="보기 방식"><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-view="preview">미리보기</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-view="code">코드</button></div></div>
+  <div class="site-example__preview"><div class="pv-stage pv-wide"><div class="ds-ptr u-full" data-disabled style="max-width: 420px">
+  <div class="ds-ptr__indicator">
+    <span class="ds-progress-circle" role="progressbar" aria-label="새로 고침"><svg viewBox="0 0 24 24" aria-hidden="true"><circle class="ds-progress-circle__track" pathLength="100"/><circle class="ds-progress-circle__range" pathLength="100"/></svg></span>
+  </div>
+  <article class="ds-ptr__content u-col u-gap-4">
+    <header class="u-col u-gap-2">
+      <h3 class="ds-t07 ds-fw-bold">겨울 방학 특강 신청 안내</h3>
+      <span class="ds-tag-group"><span>운영팀</span><span>12월 2일</span><span>조회 1,240</span></span>
+    </header>
+    <hr class="ds-divider">
+    <p class="ds-t05">겨울 방학 특강 신청을 12월 9일 오전 10시부터 받아요. 반마다 정원이 있어 먼저 신청한 순서로 마감해요.</p>
+    <p class="ds-t05">신청한 강의는 내 강의실에서 바로 확인할 수 있어요.</p>
+  </article>
+</div></div></div>
+  <div class="site-example__code" hidden><figure class="ds-codeblock">
+  <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">html</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
+  <pre class="ds-codeblock__code"><code>&lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-ptr u-full&quot;</span> <span class="hl-f">data-disabled</span> <span class="hl-f">style</span>=<span class="hl-s">&quot;max-width: 420px&quot;</span>&gt;
   &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-ptr__indicator&quot;</span>&gt;
-    &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-progress-circle&quot;</span> <span class="hl-f">role</span>=<span class="hl-s">&quot;progressbar&quot;</span> <span class="hl-f">aria-label</span>=<span class="hl-s">&quot;새로 고침&quot;</span> <span class="hl-f">style</span>=<span class="hl-s">&quot;--ds-progress-value: 0&quot;</span>&gt;&lt;<span class="hl-t">svg</span> <span class="hl-f">viewBox</span>=<span class="hl-s">&quot;0 0 24 24&quot;</span> <span class="hl-f">aria-hidden</span>=<span class="hl-s">&quot;true&quot;</span>&gt;&lt;<span class="hl-t">circle</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-progress-circle__track&quot;</span> <span class="hl-f">pathLength</span>=<span class="hl-s">&quot;100&quot;</span>/&gt;&lt;<span class="hl-t">circle</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-progress-circle__range&quot;</span> <span class="hl-f">pathLength</span>=<span class="hl-s">&quot;100&quot;</span>/&gt;&lt;/<span class="hl-t">svg</span>&gt;&lt;/<span class="hl-t">span</span>&gt;
+    &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-progress-circle&quot;</span> <span class="hl-f">role</span>=<span class="hl-s">&quot;progressbar&quot;</span> <span class="hl-f">aria-label</span>=<span class="hl-s">&quot;새로 고침&quot;</span>&gt;&lt;<span class="hl-t">svg</span> <span class="hl-f">viewBox</span>=<span class="hl-s">&quot;0 0 24 24&quot;</span> <span class="hl-f">aria-hidden</span>=<span class="hl-s">&quot;true&quot;</span>&gt;&lt;<span class="hl-t">circle</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-progress-circle__track&quot;</span> <span class="hl-f">pathLength</span>=<span class="hl-s">&quot;100&quot;</span>/&gt;&lt;<span class="hl-t">circle</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-progress-circle__range&quot;</span> <span class="hl-f">pathLength</span>=<span class="hl-s">&quot;100&quot;</span>/&gt;&lt;/<span class="hl-t">svg</span>&gt;&lt;/<span class="hl-t">span</span>&gt;
   &lt;/<span class="hl-t">div</span>&gt;
-  &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-ptr__content&quot;</span> <span class="hl-f">style</span>=<span class="hl-s">&quot;height:100%;overflow:auto;padding:var(--ds-space-x4)&quot;</span>&gt;
-    &lt;<span class="hl-t">p</span>&gt;휴대폰에서 이 칸을 아래로 당겨 보세요.&lt;/<span class="hl-t">p</span>&gt;
-    &lt;<span class="hl-t">p</span> <span class="hl-f">id</span>=<span class="hl-s">&quot;pv-ptr-out&quot;</span> <span class="hl-f">style</span>=<span class="hl-s">&quot;color:var(--ds-color-fg-neutral-muted)&quot;</span>&gt;아직 새로 고치지 않았어요&lt;/<span class="hl-t">p</span>&gt;
-  &lt;/<span class="hl-t">div</span>&gt;
+  &lt;<span class="hl-t">article</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-ptr__content u-col u-gap-4&quot;</span>&gt;
+    &lt;<span class="hl-t">header</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;u-col u-gap-2&quot;</span>&gt;
+      &lt;<span class="hl-t">h3</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-t07 ds-fw-bold&quot;</span>&gt;겨울 방학 특강 신청 안내&lt;/<span class="hl-t">h3</span>&gt;
+      &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-tag-group&quot;</span>&gt;&lt;<span class="hl-t">span</span>&gt;운영팀&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">span</span>&gt;12월 2일&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">span</span>&gt;조회 1,240&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">span</span>&gt;
+    &lt;/<span class="hl-t">header</span>&gt;
+    &lt;<span class="hl-t">hr</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-divider&quot;</span>&gt;
+    &lt;<span class="hl-t">p</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-t05&quot;</span>&gt;겨울 방학 특강 신청을 12월 9일 오전 10시부터 받아요. 반마다 정원이 있어 먼저 신청한 순서로 마감해요.&lt;/<span class="hl-t">p</span>&gt;
+    &lt;<span class="hl-t">p</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-t05&quot;</span>&gt;신청한 강의는 내 강의실에서 바로 확인할 수 있어요.&lt;/<span class="hl-t">p</span>&gt;
+  &lt;/<span class="hl-t">article</span>&gt;
 &lt;/<span class="hl-t">div</span>&gt;</code></pre>
 </figure></div>
 </div>

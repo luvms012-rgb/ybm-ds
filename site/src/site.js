@@ -1,4 +1,4 @@
-/* YBM DS 문서 사이트 - 사이트 틀 동작 (DS 동작은 ybm-ds.js 가 맡는다) */
+/* yds 문서 사이트 - 사이트 틀 동작 (DS 동작은 ybm-ds.js가 맡는다) */
 (function () {
   "use strict";
   var KEY = "ybm-site-theme";
@@ -110,11 +110,11 @@
       return;
     }
 
-    // Lucide 전체 목록: CSS 에 있으면 클래스 이름, 없으면 icons.css 에 넣을 줄을 복사
+    // Lucide 전체 목록: CSS에 있으면 클래스 이름, 없으면 icons.css에 넣을 줄을 복사
     var lu = t.closest("[data-site-lucide]");
     if (lu && navigator.clipboard) {
       var nm = lu.getAttribute("data-site-lucide"), inCss = !!lu.querySelector(".site-icon__css");
-      navigator.clipboard.writeText(inCss ? "ds-icon--" + nm : lucideCss(nm)).then(function () { if (window.DS) DS.snackbar(inCss ? "복사했어요: ds-icon--" + nm : "icons.css 에 넣을 줄을 복사했어요: " + nm); });
+      navigator.clipboard.writeText(inCss ? "ds-icon--" + nm : lucideCss(nm)).then(function () { if (window.DS) DS.snackbar(inCss ? "복사했어요: ds-icon--" + nm : "icons.css에 넣을 줄을 복사했어요: " + nm); });
       return;
     }
 
@@ -127,7 +127,7 @@
 
   document.addEventListener("keydown", function (e) { if (e.key === "Escape") { document.body.removeAttribute("data-side-open"); } });
 
-  // 템플릿 원본 코드 불러오기 (http 로 열었을 때만)
+  // 템플릿 원본 코드 불러오기 (http로 열었을 때만)
   function loadSource(box) {
     var pre = box.querySelector("[data-site-src]");
     if (!pre || pre.getAttribute("data-loaded")) return;
@@ -154,14 +154,14 @@
     // 왼쪽 메뉴 찾기 칸: 메뉴 항목도 함께 거른다
     var nav = document.querySelector("[data-site-navfilter]");
     if (nav) {
-      // 한글 낱말(data-site-keys)도 함께 본다: "버튼" 으로 찾아도 Action Button 이 나온다
+      // 한글 낱말(data-site-keys)도 함께 본다: "버튼" 으로 찾아도 Action Button이 나온다
       nav.querySelectorAll(".site-nav__item").forEach(function (a) { a.hidden = !!q && (a.textContent + " " + (a.getAttribute("data-site-keys") || "")).toLowerCase().indexOf(q) < 0; });
       nav.querySelectorAll(".site-nav__group").forEach(function (g) { g.hidden = !g.querySelector(".site-nav__item:not([hidden])"); if (q) g.open = true; });
     }
   }
   document.addEventListener("input", function (e) { if (e.target.matches("[data-site-search]")) filter(); });
 
-  // Lucide 전체 아이콘 (아이콘 페이지): 자료는 assets/lucide-icons.js 의 window.LUCIDE
+  // Lucide 전체 아이콘 (아이콘 페이지): 자료는 assets/lucide-icons.js의 window.LUCIDE
   function lucideCss(name) {
     var svg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + window.LUCIDE.icons[name] + "</svg>";
     var uri = svg.replace(/</g, "%3C").replace(/>/g, "%3E").replace(/"/g, "%22").replace(/#/g, "%23");
@@ -198,8 +198,20 @@
     if (c) c.textContent = lib.q.trim() ? (list.length ? list.length.toLocaleString() + "개 찾았어요." : "찾는 아이콘이 없어요. Lucide 전체에서 찾아 보세요.") : "영어 이름, 태그, 한국어 쓰임으로 찾아 보세요.";
     if (!lib.cur || list.indexOf(lib.cur) < 0) { if (list.length) libPick(list[0], true); else libPanel(""); } else libPanel(lib.cur);
   }
+  // 아이콘 카드 코드 글자 색: 사이트 코드 상자와 같은 규칙(site/highlight.mjs 의 HTML 쪽) - 태그 .hl-t, 속성 이름 .hl-f, 값 .hl-s
+  function libHl(text) {
+    var re = /(<\/?)([A-Za-z][\w:.-]*)((?:\s+[^\s=>\/]+(?:\s*=\s*(?:"[^"]*"|'[^']*'|[^\s>]+))?)*)(\s*\/?>)?/g, out = "", last = 0, m;
+    var span = function (c, s) { return '<span class="hl-' + c + '">' + libEsc(s) + "</span>"; };
+    while ((m = re.exec(text))) {
+      out += libEsc(text.slice(last, m.index)) + libEsc(m[1]) + span("t", m[2]);
+      out += (m[3] || "").replace(/(\s+)([^\s=>\/]+)(?:(\s*=\s*)("[^"]*"|'[^']*'|[^\s>]+))?/g, function (a, sp, name, eq, val) { return libEsc(sp) + span("f", name) + (eq ? libEsc(eq) + span("s", val) : ""); });
+      out += libEsc(m[4] || "");
+      last = re.lastIndex;
+    }
+    return out + libEsc(text.slice(last));
+  }
   function libCode(label, text) {
-    return '<div class="site-lib__code"><div class="site-lib__codehead"><span>' + label + '</span><button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="' + label + ' 복사" data-site-lib-copy><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></div><pre><code>' + libEsc(text) + "</code></pre></div>";
+    return '<div class="site-lib__code"><div class="site-lib__codehead"><span>' + label + '</span><button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="' + label + ' 복사" data-site-lib-copy><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></div><pre><code>' + libHl(text) + "</code></pre></div>";
   }
   function libPanel(n) {
     var panel = document.querySelector("[data-site-lib-panel]"); if (!panel) return;
@@ -207,11 +219,11 @@
     var D = window.YBM_ICONS || { names: [], use: {} }, L = window.LUCIDE || { icons: {}, tags: {} };
     var inDs = D.names.indexOf(n) >= 0, base = n.replace(/-solid$/, "");
     var tags = (D.use[n] ? D.use[n].split(/,\s*/) : []).concat((L.tags[base] || "").split(/[,\s]+/).filter(Boolean).slice(0, 12));
-    var html = '<div class="site-lib__name"><b>' + n + "</b>" + (inDs ? '<span class="ds-badge" data-tone="positive">YBM DS</span>' : '<span class="ds-badge">Lucide</span>') + "</div>";
+    var html = '<div class="site-lib__name"><b>' + n + "</b>" + (inDs ? '<span class="ds-badge" data-tone="positive">yds</span>' : '<span class="ds-badge">Lucide</span>') + "</div>";
     if (tags.length) html += '<div class="site-lib__tags">' + tags.map(function (t) { return "<span>" + libEsc(t) + "</span>"; }).join("") + "</div>";
     html += '<div class="site-lib__preview">' + (inDs ? '<i class="ds-icon ds-icon--' + n + '" style="--ds-icon-size: 48px" aria-hidden="true"></i>' : libSvg(n, 48)) + "</div>";
     if (inDs) html += libCode("HTML", '<i class="ds-icon ds-icon--' + n + '" aria-hidden="true"></i>');
-    else html += '<p class="site-lib__note">아직 DS 에 없는 아이콘입니다. 아래 줄을 dist/icons.css 끝에 붙이면 바로 씁니다.</p>' + libCode("icons.css 줄", lucideCss(n));
+    else html += '<p class="site-lib__note">아직 DS에 없는 아이콘입니다. 아래 줄을 dist/icons.css 끝에 붙이면 바로 씁니다.</p>' + libCode("icons.css 줄", lucideCss(n));
     if (L.icons[base]) html += libCode("SVG", '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + L.icons[base] + "</svg>");
     panel.innerHTML = html;
   }
@@ -356,7 +368,7 @@
         return v.x1 > Math.min(h.x1, h.x2) && v.x1 < Math.max(h.x1, h.x2) && h.y1 > Math.min(v.y1, v.y2) && h.y1 < Math.max(v.y1, v.y2);
       };
       var overlap = function (a, c, g) { return a.l < c.r + g && a.r > c.l - g && a.t < c.b + g && a.b > c.t - g; };
-      // 이 자리에 두면 몇 군데가 겹치는지 센다 (0 이면 깨끗한 자리)
+      // 이 자리에 두면 몇 군데가 겹치는지 센다 (0이면 깨끗한 자리)
       var bad = function (p, s, L) {
         var n = 0;
         if (L.l < 4 || L.t < 4 || L.r > b.width - 4 || L.b > b.height - 4) n += 10;
@@ -525,7 +537,7 @@
 
 
   // 테마 보기 (레퍼런스 A Themes): 카드를 누르면 오른쪽에 그 테마의 화면(pages/<이름>.html)을 불러온다.
-  // 기본은 지금 화면에서 data-ds-theme 만 뺀다(같은 화면을 테마 없이 비교).
+  // 기본은 지금 화면에서 data-ds-theme만 뺀다(같은 화면을 테마 없이 비교).
   // 달 버튼은 미리보기만 다크로. 화면은 높이 그대로 펼쳐 페이지와 함께 스크롤한다
   (function () {
     var frame = document.querySelector("[data-site-theme-frame]"); if (!frame) return;
@@ -533,7 +545,7 @@
     var cards = [].slice.call(document.querySelectorAll("[data-site-theme]"));
     var cur = (cards.filter(function (c) { return c.getAttribute("aria-pressed") === "true"; })[0] || cards[0]).getAttribute("data-site-theme");
     var dark = false;
-    // 높이는 html 상자 높이로 잰다(scrollHeight 는 iframe 높이보다 작아지지 않아 짧은 화면으로 바꿔도 줄지 않는다)
+    // 높이는 html 상자 높이로 잰다(scrollHeight는 iframe 높이보다 작아지지 않아 짧은 화면으로 바꿔도 줄지 않는다)
     function fit() { try { frame.style.height = Math.ceil(frame.contentDocument.documentElement.getBoundingClientRect().height) + "px"; } catch (e) {} }
     function apply() {
       try {
@@ -552,7 +564,7 @@
     window.addEventListener("resize", fit);
   })();
 
-  // Markdown 메뉴: 링크 복사, 내용 복사 (AI 도구에 붙여 넣기용). 바깥을 누르거나 Esc 로 닫는다
+  // Markdown 메뉴: 링크 복사, 내용 복사 (AI 도구에 붙여 넣기용). 바깥을 누르거나 Esc로 닫는다
   (function () {
     var toggles = [].slice.call(document.querySelectorAll("[data-site-md-toggle]")); if (!toggles.length) return;
     function close() { toggles.forEach(function (t) { t.setAttribute("aria-expanded", "false"); t.nextElementSibling.hidden = true; }); }

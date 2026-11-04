@@ -1,5 +1,5 @@
 /* ==========================================================================
-   YBM DS 문서 사이트 - 사이트 틀 전용 스타일 (DS 레이어 밖)
+   yds 문서 사이트 - 사이트 틀 전용 스타일 (DS 레이어 밖)
    배치 크기는 레퍼런스 A 문서 화면 실측 그대로 (2026-10-30 저녁 사용자 "레이아웃 사이즈 완전 똑같이"):
      상단 48 (안쪽 8, 화면 전체 폭) / 왼쪽 메뉴 260 (화면 왼쪽에 붙음, 768 이상) | 글 칸 최대 800 (안쪽 24, 글 752) + 간격 32 + 목차 232
      글 칸과 목차는 메뉴 오른쪽 남은 폭 가운데 (1440 에서 글 칸 x 311, 목차 x 1143). 목차는 1280 이상, 768 보다 좁으면 메뉴는 서랍
@@ -45,7 +45,7 @@ body.site { background: var(--ds-color-bg-layer-default); color: var(--ds-color-
 .site-topnav { display: none; align-items: center; gap: var(--ds-space-x1); }
 .site-topnav__item { display: inline-flex; align-items: center; height: 36px; padding: 6px var(--ds-space-x3); border-radius: var(--ds-shape-lg); color: var(--ds-color-fg-neutral-muted); font-size: var(--ds-font-size-t05); line-height: 24px; font-weight: var(--ds-font-weight-regular); text-decoration: none; white-space: nowrap; transition: background-color var(--ds-duration-fast) var(--ds-easing-standard), color var(--ds-duration-fast) var(--ds-easing-standard); }
 .site-topnav__item:hover { background: var(--ds-color-bg-neutral-weak-alpha); color: var(--ds-color-fg-neutral); }
-.site-topnav__item[aria-current="page"] { color: var(--ds-color-fg-neutral); }
+.site-topnav__item[aria-current="page"] { color: var(--ds-color-fg-neutral); font-weight: var(--ds-font-weight-semibold); }  /* 지금 페이지는 SemiBold 로 눈에 띄게 (11-04 사용자) */
 .site-top__end { grid-column: 3; display: flex; align-items: center; justify-content: flex-end; gap: 2px; }
 .site-top__end .ds-btn[data-layout="iconOnly"] { --ds-btn-height: 32px; --ds-btn-radius: var(--ds-shape-pill); --ds-btn-bg: transparent; --ds-btn-bg-pressed: var(--ds-color-bg-neutral-weak-alpha); --ds-btn-fg: var(--ds-color-fg-neutral); }
 .site-cta { --ds-btn-height: 32px; --ds-btn-radius: var(--ds-shape-pill); --ds-btn-padding-x: var(--ds-space-x3); --ds-btn-font-size: var(--ds-font-size-t04); --ds-btn-line-height: 20px; --ds-btn-font-weight: var(--ds-font-weight-medium); margin-left: var(--ds-space-x1_5); }
@@ -364,7 +364,7 @@ body[data-side-open] .site-scrim { opacity: 1; pointer-events: auto; }
 .site-doc .ds-table .site-practice { vertical-align: middle; white-space: nowrap; }
 
 /* AI 안내문처럼 글이 긴 코드 칸은 한글이 읽기 쉽게 본문 글꼴 (DS 변수 --ds-font-mono 만 바꾼다) */
-.site-doc .ds-codeblock[data-wrap] { --ds-font-mono: var(--ds-font-family-base); }
+.site-doc .ds-codeblock[data-wrap]:not(.pv-stage *) { --ds-font-mono: var(--ds-font-family-base); }  /* 사이트 AI 요청 글 상자만. 예시 미리보기 안 Code Block 은 고정폭 그대로 */
 
 /* 템플릿 보기 창 (레퍼런스 A 템플릿 페이지): 화면 100% 가 아닌 정해진 크기 창. 최대 1472, 바깥 16, 모서리 24 */
 .site-tplv { position: fixed; inset: 0; z-index: 1000; display: flex; align-items: center; justify-content: center; padding: var(--ds-space-x4); }
@@ -502,9 +502,9 @@ body[data-side-open] .site-scrim { opacity: 1; pointer-events: auto; }
 .site-codetabs__bar .ds-chiptabs__trigger { font-size: var(--ds-font-size-t03); }
 .site-codetabs__panel[hidden] { display: none; }
 /* 코드 글자 색 (11-04 사용자 "코드뷰 컬러로 개선, seed 참조"): 레퍼런스 B 의 GitHub 테마 규칙을 DS 팔레트로. 팔레트라 다크 모드에서 같이 뒤집힌다 */
-.ds-codeblock .hl-k { color: var(--ds-color-palette-red-700); }     /* 키워드, @media */
-.ds-codeblock .hl-s { color: var(--ds-color-palette-blue-900); }    /* 문자열, 속성 값 */
-.ds-codeblock .hl-f { color: var(--ds-color-palette-purple-700); }  /* 함수, 명령, HTML 속성 이름 */
-.ds-codeblock .hl-c { color: var(--ds-color-palette-blue-700); }    /* 상수, 숫자, CSS 속성과 변수 */
-.ds-codeblock .hl-t { color: var(--ds-color-palette-green-700); }   /* 태그, 선택자 */
-.ds-codeblock .hl-m { color: var(--ds-color-palette-gray-700); }    /* 주석 */
+.ds-codeblock .hl-k, .site-lib__code .hl-k { color: var(--ds-color-palette-red-700); }     /* 키워드, @media */
+.ds-codeblock .hl-s, .site-lib__code .hl-s { color: var(--ds-color-palette-blue-900); }    /* 문자열, 속성 값 */
+.ds-codeblock .hl-f, .site-lib__code .hl-f { color: var(--ds-color-palette-purple-700); }  /* 함수, 명령, HTML 속성 이름 */
+.ds-codeblock .hl-c, .site-lib__code .hl-c { color: var(--ds-color-palette-blue-700); }    /* 상수, 숫자, CSS 속성과 변수 */
+.ds-codeblock .hl-t, .site-lib__code .hl-t { color: var(--ds-color-palette-green-700); }   /* 태그, 선택자 */
+.ds-codeblock .hl-m, .site-lib__code .hl-m { color: var(--ds-color-palette-gray-700); }    /* 주석 */

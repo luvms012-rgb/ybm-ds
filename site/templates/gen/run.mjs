@@ -1,6 +1,6 @@
 // 템플릿 생성기: 분류별 파일(dashboard.mjs 등)을 모아 ../pages/*.html 과 ../../src/templates.json 을 다시 쓴다.
 // 사용: node site/templates/gen/run.mjs  →  node site/build.mjs
-// 레퍼런스 A 템플릿 51종의 구조를 YBM DS 로 다시 짠 것이다. 목록에 없는 옛 템플릿 파일은 지운다.
+// 레퍼런스 A 템플릿 51종의 구조를 yds 로 다시 짠 것이다. 목록에 없는 옛 템플릿 파일은 지운다.
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';

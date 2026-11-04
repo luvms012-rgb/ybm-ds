@@ -46,9 +46,90 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 예시
 
+### 정해진 값은 눌러서 고르게 하기
+
+고를 값이 정해진 칸은 Field Button으로 만들고, 누르면 Bottom Sheet에서 고릅니다. 사용자가 직접 써야 하는 칸이면 Text Field Input을 씁니다.
+
 ```html
-<button type="button" class="ds-fieldbutton" data-size="large"><span class="ds-fieldbutton__value" data-placeholder="날짜를 선택해 주세요"></span><i class="ds-icon ds-icon--chevron-down" aria-hidden="true"></i></button>
-<button type="button" class="ds-fieldbutton" data-size="medium"><span class="ds-fieldbutton__value">2026.10.25 (토)</span><i class="ds-icon ds-icon--calendar" aria-hidden="true"></i></button>
+<div class="ds-field u-full" style="max-width: 360px">
+  <div class="ds-field__header">
+    <label class="ds-field__label" for="field-button-ex1-field">배송 요청 사항</label>
+    <span class="ds-field__indicator">선택</span>
+  </div>
+  <button type="button" class="ds-fieldbutton" id="field-button-ex1-field" data-ds-open="field-button-ex1-sheet" aria-haspopup="dialog">
+    <span class="ds-fieldbutton__value" data-placeholder="요청 사항을 골라 주세요"></span>
+    <i class="ds-icon ds-icon--chevron-down" aria-hidden="true"></i>
+  </button>
+</div>
+<dialog class="ds-bottomsheet" id="field-button-ex1-sheet" aria-labelledby="field-button-ex1-title" data-handle>
+  <div class="ds-bottomsheet__header">
+    <h2 class="ds-bottomsheet__title" id="field-button-ex1-title">배송 요청 사항</h2>
+    <button class="ds-bottomsheet__close" data-ds-close aria-label="닫기"></button>
+  </div>
+  <div class="ds-bottomsheet__body">
+    <div class="ds-radio-group" role="radiogroup" aria-labelledby="field-button-ex1-title">
+      <label class="ds-radio"><input type="radio" class="ds-radio__control" name="field-button-ex1-request" checked><span>문 앞에 두기</span></label>
+      <label class="ds-radio"><input type="radio" class="ds-radio__control" name="field-button-ex1-request"><span>경비실에 맡기기</span></label>
+      <label class="ds-radio"><input type="radio" class="ds-radio__control" name="field-button-ex1-request"><span>택배함에 넣기</span></label>
+      <label class="ds-radio"><input type="radio" class="ds-radio__control" name="field-button-ex1-request"><span>배송 전에 연락하기</span></label>
+    </div>
+  </div>
+  <div class="ds-bottomsheet__footer">
+    <button class="ds-btn" data-variant="brandSolid" data-size="large" data-ds-close>적용</button>
+  </div>
+</dialog>
+```
+
+### 바꿀 수 없지만 보내야 하는 값은 readOnly로
+
+바꿀 수 없지만 폼과 함께 보내야 하는 값은 `disabled` 대신 `aria-readonly="true"`로 둡니다. `disabled` 값은 폼과 함께 보내지지 않기 때문입니다.
+
+```html
+<div class="u-col u-gap-5 u-full" style="max-width: 360px">
+  <div class="ds-field">
+    <div class="ds-field__header">
+      <label class="ds-field__label" for="field-button-ex2-area">시험 지역</label>
+    </div>
+    <button type="button" class="ds-fieldbutton" id="field-button-ex2-area" aria-readonly="true">
+      <span class="ds-fieldbutton__value">서울</span>
+      <i class="ds-icon ds-icon--chevron-down" aria-hidden="true"></i>
+    </button>
+    <div class="ds-field__footer">
+      <p class="ds-field__help">접수한 지역은 바꿀 수 없어요.</p>
+    </div>
+  </div>
+  <div class="ds-field">
+    <div class="ds-field__header">
+      <label class="ds-field__label" for="field-button-ex2-place">시험장</label>
+      <span class="ds-field__required" aria-hidden="true"></span>
+    </div>
+    <button type="button" class="ds-fieldbutton" id="field-button-ex2-place">
+      <span class="ds-fieldbutton__value" data-placeholder="시험장을 골라 주세요"></span>
+      <i class="ds-icon ds-icon--chevron-down" aria-hidden="true"></i>
+    </button>
+  </div>
+</div>
+```
+
+### 고르지 않은 칸은 오류와 고칠 방법 알리기
+
+라벨과 오류 문구는 Field Label로 감싸 붙이고, 고르지 않은 칸에는 `aria-invalid="true"`를 붙입니다. 오류가 나면 안내 문구 자리에 고치는 방법이 보입니다.
+
+```html
+<div class="ds-field u-full" style="max-width: 360px">
+  <div class="ds-field__header">
+    <label class="ds-field__label" for="field-button-ex3-field">생년월일</label>
+    <span class="ds-field__required" aria-hidden="true"></span>
+  </div>
+  <button type="button" class="ds-fieldbutton" id="field-button-ex3-field" aria-invalid="true" aria-describedby="field-button-ex3-error">
+    <span class="ds-fieldbutton__value" data-placeholder="날짜를 골라 주세요"></span>
+    <i class="ds-icon ds-icon--calendar" aria-hidden="true"></i>
+  </button>
+  <div class="ds-field__footer">
+    <p class="ds-field__help">신분증에 적힌 날짜로 골라 주세요.</p>
+    <p class="ds-field__error" id="field-button-ex3-error">생년월일을 골라야 다음으로 넘어갈 수 있어요.</p>
+  </div>
+</div>
 ```
 
 ## 규격

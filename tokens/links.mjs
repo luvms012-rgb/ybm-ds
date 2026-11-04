@@ -1,4 +1,4 @@
-// YBM DS — "문서 / 코드" 링크 계획. Figma 문서 프레임(sync.mjs links · figma)과 문서 사이트(site/build.mjs)가 같은 주소를 쓰도록 여기서 한 번만 만든다.
+// yds — "문서 / 코드" 링크 계획. Figma 문서 프레임(sync.mjs links · figma)과 문서 사이트(site/build.mjs)가 같은 주소를 쓰도록 여기서 한 번만 만든다.
 //   문서 = 문서 사이트의 그 페이지, 코드 = GitHub 의 그 부품 CSS 구간(줄 범위), Figma = 그 문서 프레임
 //   줄 번호는 CSS 를 고치면 밀린다 → 사이트는 빌드마다 다시 계산되고, Figma 쪽은 node sync.mjs figma 점검 뒤 node sync.mjs links 로 다시 건다.
 import fs from 'node:fs';

@@ -30,26 +30,6 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 예시
 
-```html
-<button type="button" class="ds-toggle" aria-pressed="true">마감 임박</button><button type="button" class="ds-toggle" aria-pressed="false">무료 배송</button><button type="button" class="ds-toggle" aria-pressed="false" data-size="medium">medium</button>
-```
+### 한 가지 상태를 켜고 끄기
 
-## 규격
-
-### CSS 변수
-
-서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
-
-| 변수 | 기본값 |
-| --- | --- |
-| `--ds-toggle-bg` | `var(--ds-color-bg-layer-default)` |
-| `--ds-toggle-fg` | `var(--ds-color-fg-neutral)` |
-| `--ds-toggle-line` | `var(--ds-color-stroke-neutral-weak)` |
-
-### 크기와 여백
-
-```
-size: small(기본) / medium
-Figma small: py6 px12 / t03 Bold / medium: py10 px16 / t04 Bold / shape/lg
-  off bg/layer-default + stroke/neutral-weak / on bg/brand-weak + stroke/brand-solid + fg/brand / disabled bg/disabled + fg/disabled
-```
+개강 알림처럼 한 가지 상태만 켜고 끄는 데 Toggle Button을 씁니다. 라벨은 그대로 두고 `aria-pressed`로 켜졌는지 알립니다.

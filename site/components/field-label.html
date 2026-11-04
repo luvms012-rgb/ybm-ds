@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Field Label - YBM DS</title>
+<title>Field Label - yds</title>
 <meta name="description" content="입력 칸에 라벨, 안내, 오류 문구를 붙여 무엇을 입력할지 알려 주는 컴포넌트입니다.">
 <!-- 생성물: node site/build.mjs가 만든다. 직접 고치지 말고 site/build.mjs나 site/src를 고친다 -->
 <script>try { var t = localStorage.getItem("ybm-site-theme"); if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.dataset.theme = "dark"; } catch (e) {}</script>
 <link rel="icon" href="../assets/logo-ybmnet.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../dist/ybm-ds.css">
-<link rel="stylesheet" href="../assets/site.css?v=bb7371b2">
+<link rel="stylesheet" href="../assets/site.css?v=1656b6c0">
 <script src="../../dist/ybm-ds.js" defer></script>
-<script src="../assets/site.js?v=bb7371b2" defer></script>
+<script src="../assets/site.js?v=1656b6c0" defer></script>
 </head>
 <body class="site">
 <a class="site-skip" href="#main">본문 바로가기</a>
@@ -158,31 +158,139 @@
 <h2 id="props">속성<a class="site-anchor" href="#props" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><p>Figma 속성 이름을 그대로 <code>data-*</code> 속성으로 씁니다.</p><div class="ds-table-wrap"><table class="ds-table" data-density="compact">
 <thead><tr><th scope="col">속성</th><th scope="col">값</th></tr></thead>
 <tbody><tr><td><code>label-weight</code></td><td><span class="ds-badge">bold</span></td></tr></tbody></table></div>
-<h2 id="examples">예시<a class="site-anchor" href="#examples" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><div class="site-example">
+<h2 id="examples">예시<a class="site-anchor" href="#examples" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><h3>꼭 넣을 칸과 비워도 되는 칸 나누기</h3>
+<p>꼭 넣어야 하는 칸에는 라벨 옆에 필수 점을, 비워도 되는 칸에는 '선택'을 붙입니다. 필수 점은 화면 읽기 프로그램이 읽지 않으므로 입력 요소에 <code>required</code>를 함께 붙입니다.</p>
+<div class="site-example">
   <div class="site-example__bar"><div class="ds-chiptabs" role="tablist" aria-label="보기 방식"><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-view="preview">미리보기</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-view="code">코드</button></div></div>
-  <div class="site-example__preview"><div class="pv-stage pv-col">
-    <div class="ds-field pv-w">
-      <div class="ds-field__header"><label class="ds-field__label" for="pv-name">이름</label><span class="ds-field__required" aria-hidden="true"></span></div>
-      <div class="ds-input" data-variant="outline"><input class="ds-input__control" id="pv-name" placeholder="이름을 입력해 주세요"></div>
-      <div class="ds-field__footer"><p class="ds-field__help">실명으로 입력해 주세요</p></div>
+  <div class="site-example__preview"><div class="pv-stage pv-wide"><form class="u-col u-gap-5 u-full" style="max-width: 360px">
+  <div class="ds-field">
+    <div class="ds-field__header">
+      <label class="ds-field__label" for="field-label-ex1-name">이름</label>
+      <span class="ds-field__required" aria-hidden="true"></span>
     </div>
-    <div class="ds-field pv-w">
-      <div class="ds-field__header"><label class="ds-field__label" for="pv-mail">이메일</label></div>
-      <div class="ds-input" data-variant="outline"><input class="ds-input__control" id="pv-mail" value="ybm@" aria-invalid="true"></div>
-      <div class="ds-field__footer"><p class="ds-field__error">이메일 형식이 올바르지 않아요</p></div>
+    <div class="ds-input" data-variant="outline">
+      <input class="ds-input__control" id="field-label-ex1-name" placeholder="이름을 입력해 주세요" required>
     </div>
-  </div></div>
+  </div>
+  <div class="ds-field">
+    <div class="ds-field__header">
+      <label class="ds-field__label" for="field-label-ex1-phone">휴대폰 번호</label>
+      <span class="ds-field__required" aria-hidden="true"></span>
+    </div>
+    <div class="ds-input" data-variant="outline">
+      <input class="ds-input__control" id="field-label-ex1-phone" type="tel" placeholder="010-0000-0000" required>
+    </div>
+  </div>
+  <div class="ds-field">
+    <div class="ds-field__header">
+      <label class="ds-field__label" for="field-label-ex1-code">추천인 코드</label>
+      <span class="ds-field__indicator">선택</span>
+    </div>
+    <div class="ds-input" data-variant="outline">
+      <input class="ds-input__control" id="field-label-ex1-code" placeholder="코드를 입력해 주세요">
+    </div>
+    <div class="ds-field__footer">
+      <p class="ds-field__help">친구에게 받은 코드가 있으면 넣어 주세요.</p>
+    </div>
+  </div>
+</form></div></div>
   <div class="site-example__code" hidden><figure class="ds-codeblock">
   <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">html</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
-  <pre class="ds-codeblock__code"><code>&lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field&quot;</span>&gt;
-  &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field__header&quot;</span>&gt;&lt;<span class="hl-t">label</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field__label&quot;</span> <span class="hl-f">for</span>=<span class="hl-s">&quot;pv-name&quot;</span>&gt;이름&lt;/<span class="hl-t">label</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field__required&quot;</span> <span class="hl-f">aria-hidden</span>=<span class="hl-s">&quot;true&quot;</span>&gt;&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">div</span>&gt;
-  &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-input&quot;</span> <span class="hl-f">data-variant</span>=<span class="hl-s">&quot;outline&quot;</span>&gt;&lt;<span class="hl-t">input</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-input__control&quot;</span> <span class="hl-f">id</span>=<span class="hl-s">&quot;pv-name&quot;</span> <span class="hl-f">placeholder</span>=<span class="hl-s">&quot;이름을 입력해 주세요&quot;</span>&gt;&lt;/<span class="hl-t">div</span>&gt;
-  &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field__footer&quot;</span>&gt;&lt;<span class="hl-t">p</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field__help&quot;</span>&gt;실명으로 입력해 주세요&lt;/<span class="hl-t">p</span>&gt;&lt;/<span class="hl-t">div</span>&gt;
-&lt;/<span class="hl-t">div</span>&gt;
-&lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field&quot;</span>&gt;
-  &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field__header&quot;</span>&gt;&lt;<span class="hl-t">label</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field__label&quot;</span> <span class="hl-f">for</span>=<span class="hl-s">&quot;pv-mail&quot;</span>&gt;이메일&lt;/<span class="hl-t">label</span>&gt;&lt;/<span class="hl-t">div</span>&gt;
-  &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-input&quot;</span> <span class="hl-f">data-variant</span>=<span class="hl-s">&quot;outline&quot;</span>&gt;&lt;<span class="hl-t">input</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-input__control&quot;</span> <span class="hl-f">id</span>=<span class="hl-s">&quot;pv-mail&quot;</span> <span class="hl-f">value</span>=<span class="hl-s">&quot;ybm@&quot;</span> <span class="hl-f">aria-invalid</span>=<span class="hl-s">&quot;true&quot;</span>&gt;&lt;/<span class="hl-t">div</span>&gt;
-  &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field__footer&quot;</span>&gt;&lt;<span class="hl-t">p</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field__error&quot;</span>&gt;이메일 형식이 올바르지 않아요&lt;/<span class="hl-t">p</span>&gt;&lt;/<span class="hl-t">div</span>&gt;
+  <pre class="ds-codeblock__code"><code>&lt;<span class="hl-t">form</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;u-col u-gap-5 u-full&quot;</span> <span class="hl-f">style</span>=<span class="hl-s">&quot;max-width: 360px&quot;</span>&gt;
+  &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field&quot;</span>&gt;
+    &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field__header&quot;</span>&gt;
+      &lt;<span class="hl-t">label</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field__label&quot;</span> <span class="hl-f">for</span>=<span class="hl-s">&quot;field-label-ex1-name&quot;</span>&gt;이름&lt;/<span class="hl-t">label</span>&gt;
+      &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field__required&quot;</span> <span class="hl-f">aria-hidden</span>=<span class="hl-s">&quot;true&quot;</span>&gt;&lt;/<span class="hl-t">span</span>&gt;
+    &lt;/<span class="hl-t">div</span>&gt;
+    &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-input&quot;</span> <span class="hl-f">data-variant</span>=<span class="hl-s">&quot;outline&quot;</span>&gt;
+      &lt;<span class="hl-t">input</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-input__control&quot;</span> <span class="hl-f">id</span>=<span class="hl-s">&quot;field-label-ex1-name&quot;</span> <span class="hl-f">placeholder</span>=<span class="hl-s">&quot;이름을 입력해 주세요&quot;</span> <span class="hl-f">required</span>&gt;
+    &lt;/<span class="hl-t">div</span>&gt;
+  &lt;/<span class="hl-t">div</span>&gt;
+  &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field&quot;</span>&gt;
+    &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field__header&quot;</span>&gt;
+      &lt;<span class="hl-t">label</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field__label&quot;</span> <span class="hl-f">for</span>=<span class="hl-s">&quot;field-label-ex1-phone&quot;</span>&gt;휴대폰 번호&lt;/<span class="hl-t">label</span>&gt;
+      &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field__required&quot;</span> <span class="hl-f">aria-hidden</span>=<span class="hl-s">&quot;true&quot;</span>&gt;&lt;/<span class="hl-t">span</span>&gt;
+    &lt;/<span class="hl-t">div</span>&gt;
+    &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-input&quot;</span> <span class="hl-f">data-variant</span>=<span class="hl-s">&quot;outline&quot;</span>&gt;
+      &lt;<span class="hl-t">input</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-input__control&quot;</span> <span class="hl-f">id</span>=<span class="hl-s">&quot;field-label-ex1-phone&quot;</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;tel&quot;</span> <span class="hl-f">placeholder</span>=<span class="hl-s">&quot;010-0000-0000&quot;</span> <span class="hl-f">required</span>&gt;
+    &lt;/<span class="hl-t">div</span>&gt;
+  &lt;/<span class="hl-t">div</span>&gt;
+  &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field&quot;</span>&gt;
+    &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field__header&quot;</span>&gt;
+      &lt;<span class="hl-t">label</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field__label&quot;</span> <span class="hl-f">for</span>=<span class="hl-s">&quot;field-label-ex1-code&quot;</span>&gt;추천인 코드&lt;/<span class="hl-t">label</span>&gt;
+      &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field__indicator&quot;</span>&gt;선택&lt;/<span class="hl-t">span</span>&gt;
+    &lt;/<span class="hl-t">div</span>&gt;
+    &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-input&quot;</span> <span class="hl-f">data-variant</span>=<span class="hl-s">&quot;outline&quot;</span>&gt;
+      &lt;<span class="hl-t">input</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-input__control&quot;</span> <span class="hl-f">id</span>=<span class="hl-s">&quot;field-label-ex1-code&quot;</span> <span class="hl-f">placeholder</span>=<span class="hl-s">&quot;코드를 입력해 주세요&quot;</span>&gt;
+    &lt;/<span class="hl-t">div</span>&gt;
+    &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field__footer&quot;</span>&gt;
+      &lt;<span class="hl-t">p</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field__help&quot;</span>&gt;친구에게 받은 코드가 있으면 넣어 주세요.&lt;/<span class="hl-t">p</span>&gt;
+    &lt;/<span class="hl-t">div</span>&gt;
+  &lt;/<span class="hl-t">div</span>&gt;
+&lt;/<span class="hl-t">form</span>&gt;</code></pre>
+</figure></div>
+</div>
+<h3>오류는 고치는 방법까지 알리기</h3>
+<p>입력 요소에 <code>aria-invalid=&quot;true&quot;</code>를 붙이면 안내 문구가 오류 문구로 바뀌고 빨간색이 됩니다. 오류 문구에는 무엇이 틀렸는지와 고치는 방법을 함께 적습니다.</p>
+<div class="site-example">
+  <div class="site-example__bar"><div class="ds-chiptabs" role="tablist" aria-label="보기 방식"><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-view="preview">미리보기</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-view="code">코드</button></div></div>
+  <div class="site-example__preview"><div class="pv-stage pv-wide"><div class="ds-field u-full" style="max-width: 360px">
+  <div class="ds-field__header">
+    <label class="ds-field__label" for="field-label-ex2-mail">이메일</label>
+    <span class="ds-field__required" aria-hidden="true"></span>
+  </div>
+  <div class="ds-input" data-variant="outline">
+    <input class="ds-input__control" id="field-label-ex2-mail" type="email" value="hana@example" aria-invalid="true" aria-describedby="field-label-ex2-error" required>
+  </div>
+  <div class="ds-field__footer">
+    <p class="ds-field__help">로그인할 때 쓰는 이메일이에요.</p>
+    <p class="ds-field__error" id="field-label-ex2-error">이메일 주소가 끝까지 들어가지 않았어요. 예: hana@example.com</p>
+  </div>
+</div></div></div>
+  <div class="site-example__code" hidden><figure class="ds-codeblock">
+  <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">html</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
+  <pre class="ds-codeblock__code"><code>&lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field u-full&quot;</span> <span class="hl-f">style</span>=<span class="hl-s">&quot;max-width: 360px&quot;</span>&gt;
+  &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field__header&quot;</span>&gt;
+    &lt;<span class="hl-t">label</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field__label&quot;</span> <span class="hl-f">for</span>=<span class="hl-s">&quot;field-label-ex2-mail&quot;</span>&gt;이메일&lt;/<span class="hl-t">label</span>&gt;
+    &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field__required&quot;</span> <span class="hl-f">aria-hidden</span>=<span class="hl-s">&quot;true&quot;</span>&gt;&lt;/<span class="hl-t">span</span>&gt;
+  &lt;/<span class="hl-t">div</span>&gt;
+  &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-input&quot;</span> <span class="hl-f">data-variant</span>=<span class="hl-s">&quot;outline&quot;</span>&gt;
+    &lt;<span class="hl-t">input</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-input__control&quot;</span> <span class="hl-f">id</span>=<span class="hl-s">&quot;field-label-ex2-mail&quot;</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;email&quot;</span> <span class="hl-f">value</span>=<span class="hl-s">&quot;hana@example&quot;</span> <span class="hl-f">aria-invalid</span>=<span class="hl-s">&quot;true&quot;</span> <span class="hl-f">aria-describedby</span>=<span class="hl-s">&quot;field-label-ex2-error&quot;</span> <span class="hl-f">required</span>&gt;
+  &lt;/<span class="hl-t">div</span>&gt;
+  &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field__footer&quot;</span>&gt;
+    &lt;<span class="hl-t">p</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field__help&quot;</span>&gt;로그인할 때 쓰는 이메일이에요.&lt;/<span class="hl-t">p</span>&gt;
+    &lt;<span class="hl-t">p</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field__error&quot;</span> <span class="hl-f">id</span>=<span class="hl-s">&quot;field-label-ex2-error&quot;</span>&gt;이메일 주소가 끝까지 들어가지 않았어요. 예: hana@example.com&lt;/<span class="hl-t">p</span>&gt;
+  &lt;/<span class="hl-t">div</span>&gt;
+&lt;/<span class="hl-t">div</span>&gt;</code></pre>
+</figure></div>
+</div>
+<h3>글자 수 제한은 카운트로 보여 주기</h3>
+<p>글자 수 제한이 있는 칸은 아래 오른쪽에 지금 글자 수와 최대 글자 수를 보여 줍니다. 안내 문구는 왼쪽에 두어 두 정보가 한 줄에 함께 읽힙니다.</p>
+<div class="site-example">
+  <div class="site-example__bar"><div class="ds-chiptabs" role="tablist" aria-label="보기 방식"><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-view="preview">미리보기</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-view="code">코드</button></div></div>
+  <div class="site-example__preview"><div class="pv-stage pv-wide"><div class="ds-field u-full" style="max-width: 420px">
+  <div class="ds-field__header">
+    <label class="ds-field__label" for="field-label-ex3-text">문의 내용</label>
+    <span class="ds-field__required" aria-hidden="true"></span>
+  </div>
+  <textarea class="ds-textarea" id="field-label-ex3-text" rows="4" maxlength="500" placeholder="궁금한 점을 자세히 적어 주세요" required>주문한 책이 아직 오지 않았어요. 배송 상황을 알려 주세요.</textarea>
+  <div class="ds-field__footer">
+    <p class="ds-field__help">주민등록번호 같은 개인 정보는 적지 말아 주세요.</p>
+    <span class="ds-field__count">33/500</span>
+  </div>
+</div></div></div>
+  <div class="site-example__code" hidden><figure class="ds-codeblock">
+  <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">html</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
+  <pre class="ds-codeblock__code"><code>&lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field u-full&quot;</span> <span class="hl-f">style</span>=<span class="hl-s">&quot;max-width: 420px&quot;</span>&gt;
+  &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field__header&quot;</span>&gt;
+    &lt;<span class="hl-t">label</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field__label&quot;</span> <span class="hl-f">for</span>=<span class="hl-s">&quot;field-label-ex3-text&quot;</span>&gt;문의 내용&lt;/<span class="hl-t">label</span>&gt;
+    &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field__required&quot;</span> <span class="hl-f">aria-hidden</span>=<span class="hl-s">&quot;true&quot;</span>&gt;&lt;/<span class="hl-t">span</span>&gt;
+  &lt;/<span class="hl-t">div</span>&gt;
+  &lt;<span class="hl-t">textarea</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-textarea&quot;</span> <span class="hl-f">id</span>=<span class="hl-s">&quot;field-label-ex3-text&quot;</span> <span class="hl-f">rows</span>=<span class="hl-s">&quot;4&quot;</span> <span class="hl-f">maxlength</span>=<span class="hl-s">&quot;500&quot;</span> <span class="hl-f">placeholder</span>=<span class="hl-s">&quot;궁금한 점을 자세히 적어 주세요&quot;</span> <span class="hl-f">required</span>&gt;주문한 책이 아직 오지 않았어요. 배송 상황을 알려 주세요.&lt;/<span class="hl-t">textarea</span>&gt;
+  &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field__footer&quot;</span>&gt;
+    &lt;<span class="hl-t">p</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field__help&quot;</span>&gt;주민등록번호 같은 개인 정보는 적지 말아 주세요.&lt;/<span class="hl-t">p</span>&gt;
+    &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field__count&quot;</span>&gt;33/500&lt;/<span class="hl-t">span</span>&gt;
+  &lt;/<span class="hl-t">div</span>&gt;
 &lt;/<span class="hl-t">div</span>&gt;</code></pre>
 </figure></div>
 </div>

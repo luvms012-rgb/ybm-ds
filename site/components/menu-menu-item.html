@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Menu - YBM DS</title>
+<title>Menu - yds</title>
 <meta name="description" content="버튼을 누르면 펼쳐지는 동작 목록입니다. 수정, 삭제처럼 바로 실행할 동작을 모아 둡니다.">
 <!-- 생성물: node site/build.mjs가 만든다. 직접 고치지 말고 site/build.mjs나 site/src를 고친다 -->
 <script>try { var t = localStorage.getItem("ybm-site-theme"); if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.dataset.theme = "dark"; } catch (e) {}</script>
 <link rel="icon" href="../assets/logo-ybmnet.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../dist/ybm-ds.css">
-<link rel="stylesheet" href="../assets/site.css?v=bb7371b2">
+<link rel="stylesheet" href="../assets/site.css?v=1656b6c0">
 <script src="../../dist/ybm-ds.js" defer></script>
-<script src="../assets/site.js?v=bb7371b2" defer></script>
+<script src="../assets/site.js?v=1656b6c0" defer></script>
 </head>
 <body class="site">
 <a class="site-skip" href="#main">본문 바로가기</a>
@@ -139,23 +139,111 @@
 <tr><td><b class="ds-badge site-practice" data-tone="critical">Don't</b></td><td>값을 고르는 데는 쓰지 않습니다. 폼에 넣을 값은 Select로 고르고, Menu는 동작을 실행할 때 씁니다.</td></tr>
 <tr><td><b class="ds-badge site-practice" data-tone="critical">Don't</b></td><td>아이콘을 일부 항목에만 넣지 마세요. 모든 항목에 넣거나 모두 빼세요.</td></tr>
 <tr><td><b class="ds-badge site-practice" data-tone="critical">Don't</b></td><td>라벨 없이 아이콘만 두지 않습니다.</td></tr></tbody></table></div>
-<h2 id="examples">예시<a class="site-anchor" href="#examples" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><div class="site-example">
+<h2 id="examples">예시<a class="site-anchor" href="#examples" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><h3>글 하나에 할 수 있는 동작 모으기</h3>
+<p>더보기 버튼으로 연 Menu에는 그 글에 할 수 있는 동작만 담고, 아이콘은 모든 항목에 넣습니다. 삭제처럼 되돌릴 수 없는 항목은 critical로 끝에 두고 구분선으로 나눕니다.</p>
+<div class="site-example">
   <div class="site-example__bar"><div class="ds-chiptabs" role="tablist" aria-label="보기 방식"><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-view="preview">미리보기</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-view="code">코드</button></div></div>
-  <div class="site-example__preview"><div class="pv-stage">
+  <div class="site-example__preview"><div class="pv-stage pv-wide"><div class="u-col u-gap-1 u-full" style="max-width: 360px">
+  <ul class="ds-list" data-variant="inset">
+    <li>
+      <div class="ds-list-item">
+        <span class="ds-list-item__content">
+          <span class="ds-list-item__title">11월 스터디 모임 후기</span>
+          <span class="ds-list-item__desc">내가 쓴 글, 어제</span>
+        </span>
+        <span class="ds-list-item__suffix">
+          <button class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" aria-label="더보기" aria-haspopup="menu" aria-expanded="true"><i class="ds-icon ds-icon--ellipsis-vertical" aria-hidden="true"></i></button>
+        </span>
+      </div>
+    </li>
+  </ul>
+  <div class="u-flex">
+    <span class="u-grow"></span>
     <div class="ds-menu" role="menu">
-      <button class="ds-menu-item" role="menuitem"><i class="ds-icon ds-icon--external-link" aria-hidden="true"></i>공유하기</button>
-      <button class="ds-menu-item" role="menuitem"><i class="ds-icon ds-icon--file-text" aria-hidden="true"></i>수정하기</button>
+      <button class="ds-menu-item" role="menuitem"><i class="ds-icon ds-icon--pencil" aria-hidden="true"></i>수정하기</button>
+      <button class="ds-menu-item" role="menuitem"><i class="ds-icon ds-icon--share" aria-hidden="true"></i>공유하기</button>
+      <button class="ds-menu-item" role="menuitem"><i class="ds-icon ds-icon--archive" aria-hidden="true"></i>보관하기</button>
       <div class="ds-menu__divider" role="separator"></div>
-      <button class="ds-menu-item" role="menuitem" data-tone="critical">삭제하기</button>
+      <button class="ds-menu-item" role="menuitem" data-tone="critical"><i class="ds-icon ds-icon--trash" aria-hidden="true"></i>삭제하기</button>
     </div>
-  </div></div>
+  </div>
+</div></div></div>
   <div class="site-example__code" hidden><figure class="ds-codeblock">
   <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">html</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
-  <pre class="ds-codeblock__code"><code>&lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-menu&quot;</span> <span class="hl-f">role</span>=<span class="hl-s">&quot;menu&quot;</span>&gt;
-  &lt;<span class="hl-t">button</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-menu-item&quot;</span> <span class="hl-f">role</span>=<span class="hl-s">&quot;menuitem&quot;</span>&gt;&lt;<span class="hl-t">i</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-icon ds-icon--external-link&quot;</span> <span class="hl-f">aria-hidden</span>=<span class="hl-s">&quot;true&quot;</span>&gt;&lt;/<span class="hl-t">i</span>&gt;공유하기&lt;/<span class="hl-t">button</span>&gt;
-  &lt;<span class="hl-t">button</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-menu-item&quot;</span> <span class="hl-f">role</span>=<span class="hl-s">&quot;menuitem&quot;</span>&gt;&lt;<span class="hl-t">i</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-icon ds-icon--file-text&quot;</span> <span class="hl-f">aria-hidden</span>=<span class="hl-s">&quot;true&quot;</span>&gt;&lt;/<span class="hl-t">i</span>&gt;수정하기&lt;/<span class="hl-t">button</span>&gt;
-  &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-menu__divider&quot;</span> <span class="hl-f">role</span>=<span class="hl-s">&quot;separator&quot;</span>&gt;&lt;/<span class="hl-t">div</span>&gt;
-  &lt;<span class="hl-t">button</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-menu-item&quot;</span> <span class="hl-f">role</span>=<span class="hl-s">&quot;menuitem&quot;</span> <span class="hl-f">data-tone</span>=<span class="hl-s">&quot;critical&quot;</span>&gt;삭제하기&lt;/<span class="hl-t">button</span>&gt;
+  <pre class="ds-codeblock__code"><code>&lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;u-col u-gap-1 u-full&quot;</span> <span class="hl-f">style</span>=<span class="hl-s">&quot;max-width: 360px&quot;</span>&gt;
+  &lt;<span class="hl-t">ul</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list&quot;</span> <span class="hl-f">data-variant</span>=<span class="hl-s">&quot;inset&quot;</span>&gt;
+    &lt;<span class="hl-t">li</span>&gt;
+      &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item&quot;</span>&gt;
+        &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__content&quot;</span>&gt;
+          &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__title&quot;</span>&gt;11월 스터디 모임 후기&lt;/<span class="hl-t">span</span>&gt;
+          &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__desc&quot;</span>&gt;내가 쓴 글, 어제&lt;/<span class="hl-t">span</span>&gt;
+        &lt;/<span class="hl-t">span</span>&gt;
+        &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__suffix&quot;</span>&gt;
+          &lt;<span class="hl-t">button</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-btn&quot;</span> <span class="hl-f">data-variant</span>=<span class="hl-s">&quot;ghost&quot;</span> <span class="hl-f">data-size</span>=<span class="hl-s">&quot;small&quot;</span> <span class="hl-f">data-layout</span>=<span class="hl-s">&quot;iconOnly&quot;</span> <span class="hl-f">aria-label</span>=<span class="hl-s">&quot;더보기&quot;</span> <span class="hl-f">aria-haspopup</span>=<span class="hl-s">&quot;menu&quot;</span> <span class="hl-f">aria-expanded</span>=<span class="hl-s">&quot;true&quot;</span>&gt;&lt;<span class="hl-t">i</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-icon ds-icon--ellipsis-vertical&quot;</span> <span class="hl-f">aria-hidden</span>=<span class="hl-s">&quot;true&quot;</span>&gt;&lt;/<span class="hl-t">i</span>&gt;&lt;/<span class="hl-t">button</span>&gt;
+        &lt;/<span class="hl-t">span</span>&gt;
+      &lt;/<span class="hl-t">div</span>&gt;
+    &lt;/<span class="hl-t">li</span>&gt;
+  &lt;/<span class="hl-t">ul</span>&gt;
+  &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;u-flex&quot;</span>&gt;
+    &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;u-grow&quot;</span>&gt;&lt;/<span class="hl-t">span</span>&gt;
+    &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-menu&quot;</span> <span class="hl-f">role</span>=<span class="hl-s">&quot;menu&quot;</span>&gt;
+      &lt;<span class="hl-t">button</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-menu-item&quot;</span> <span class="hl-f">role</span>=<span class="hl-s">&quot;menuitem&quot;</span>&gt;&lt;<span class="hl-t">i</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-icon ds-icon--pencil&quot;</span> <span class="hl-f">aria-hidden</span>=<span class="hl-s">&quot;true&quot;</span>&gt;&lt;/<span class="hl-t">i</span>&gt;수정하기&lt;/<span class="hl-t">button</span>&gt;
+      &lt;<span class="hl-t">button</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-menu-item&quot;</span> <span class="hl-f">role</span>=<span class="hl-s">&quot;menuitem&quot;</span>&gt;&lt;<span class="hl-t">i</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-icon ds-icon--share&quot;</span> <span class="hl-f">aria-hidden</span>=<span class="hl-s">&quot;true&quot;</span>&gt;&lt;/<span class="hl-t">i</span>&gt;공유하기&lt;/<span class="hl-t">button</span>&gt;
+      &lt;<span class="hl-t">button</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-menu-item&quot;</span> <span class="hl-f">role</span>=<span class="hl-s">&quot;menuitem&quot;</span>&gt;&lt;<span class="hl-t">i</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-icon ds-icon--archive&quot;</span> <span class="hl-f">aria-hidden</span>=<span class="hl-s">&quot;true&quot;</span>&gt;&lt;/<span class="hl-t">i</span>&gt;보관하기&lt;/<span class="hl-t">button</span>&gt;
+      &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-menu__divider&quot;</span> <span class="hl-f">role</span>=<span class="hl-s">&quot;separator&quot;</span>&gt;&lt;/<span class="hl-t">div</span>&gt;
+      &lt;<span class="hl-t">button</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-menu-item&quot;</span> <span class="hl-f">role</span>=<span class="hl-s">&quot;menuitem&quot;</span> <span class="hl-f">data-tone</span>=<span class="hl-s">&quot;critical&quot;</span>&gt;&lt;<span class="hl-t">i</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-icon ds-icon--trash&quot;</span> <span class="hl-f">aria-hidden</span>=<span class="hl-s">&quot;true&quot;</span>&gt;&lt;/<span class="hl-t">i</span>&gt;삭제하기&lt;/<span class="hl-t">button</span>&gt;
+    &lt;/<span class="hl-t">div</span>&gt;
+  &lt;/<span class="hl-t">div</span>&gt;
+&lt;/<span class="hl-t">div</span>&gt;</code></pre>
+</figure></div>
+</div>
+<h3>값 고르기는 Select에, 실행은 Menu에</h3>
+<p>정렬처럼 값을 고르는 일은 Select에 두고, Menu에는 바로 실행하는 동작만 담습니다. 아이콘 없이도 뜻이 분명하면 모든 항목에서 아이콘을 빼 모양을 맞춥니다.</p>
+<div class="site-example">
+  <div class="site-example__bar"><div class="ds-chiptabs" role="tablist" aria-label="보기 방식"><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-view="preview">미리보기</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-view="code">코드</button></div></div>
+  <div class="site-example__preview"><div class="pv-stage pv-wide"><div class="u-col u-gap-1 u-full" style="max-width: 420px">
+  <div class="u-flex u-center u-between u-gap-2">
+    <span class="ds-t05 ds-fw-bold">주문 내역 24건</span>
+    <div class="u-flex u-gap-2">
+      <div style="width: 120px">
+        <button type="button" class="ds-select" data-size="medium" aria-haspopup="listbox" aria-expanded="false" aria-label="정렬">
+          <span class="ds-select__value">최신순</span>
+        </button>
+      </div>
+      <button class="ds-btn" data-variant="neutralOutline" data-layout="iconOnly" aria-label="더보기" aria-haspopup="menu" aria-expanded="true"><i class="ds-icon ds-icon--ellipsis" aria-hidden="true"></i></button>
+    </div>
+  </div>
+  <div class="u-flex">
+    <span class="u-grow"></span>
+    <div class="ds-menu" role="menu">
+      <button class="ds-menu-item" role="menuitem">내려받기</button>
+      <button class="ds-menu-item" role="menuitem">인쇄하기</button>
+      <button class="ds-menu-item" role="menuitem">메일로 보내기</button>
+    </div>
+  </div>
+</div></div></div>
+  <div class="site-example__code" hidden><figure class="ds-codeblock">
+  <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">html</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
+  <pre class="ds-codeblock__code"><code>&lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;u-col u-gap-1 u-full&quot;</span> <span class="hl-f">style</span>=<span class="hl-s">&quot;max-width: 420px&quot;</span>&gt;
+  &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;u-flex u-center u-between u-gap-2&quot;</span>&gt;
+    &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-t05 ds-fw-bold&quot;</span>&gt;주문 내역 24건&lt;/<span class="hl-t">span</span>&gt;
+    &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;u-flex u-gap-2&quot;</span>&gt;
+      &lt;<span class="hl-t">div</span> <span class="hl-f">style</span>=<span class="hl-s">&quot;width: 120px&quot;</span>&gt;
+        &lt;<span class="hl-t">button</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;button&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-select&quot;</span> <span class="hl-f">data-size</span>=<span class="hl-s">&quot;medium&quot;</span> <span class="hl-f">aria-haspopup</span>=<span class="hl-s">&quot;listbox&quot;</span> <span class="hl-f">aria-expanded</span>=<span class="hl-s">&quot;false&quot;</span> <span class="hl-f">aria-label</span>=<span class="hl-s">&quot;정렬&quot;</span>&gt;
+          &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-select__value&quot;</span>&gt;최신순&lt;/<span class="hl-t">span</span>&gt;
+        &lt;/<span class="hl-t">button</span>&gt;
+      &lt;/<span class="hl-t">div</span>&gt;
+      &lt;<span class="hl-t">button</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-btn&quot;</span> <span class="hl-f">data-variant</span>=<span class="hl-s">&quot;neutralOutline&quot;</span> <span class="hl-f">data-layout</span>=<span class="hl-s">&quot;iconOnly&quot;</span> <span class="hl-f">aria-label</span>=<span class="hl-s">&quot;더보기&quot;</span> <span class="hl-f">aria-haspopup</span>=<span class="hl-s">&quot;menu&quot;</span> <span class="hl-f">aria-expanded</span>=<span class="hl-s">&quot;true&quot;</span>&gt;&lt;<span class="hl-t">i</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-icon ds-icon--ellipsis&quot;</span> <span class="hl-f">aria-hidden</span>=<span class="hl-s">&quot;true&quot;</span>&gt;&lt;/<span class="hl-t">i</span>&gt;&lt;/<span class="hl-t">button</span>&gt;
+    &lt;/<span class="hl-t">div</span>&gt;
+  &lt;/<span class="hl-t">div</span>&gt;
+  &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;u-flex&quot;</span>&gt;
+    &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;u-grow&quot;</span>&gt;&lt;/<span class="hl-t">span</span>&gt;
+    &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-menu&quot;</span> <span class="hl-f">role</span>=<span class="hl-s">&quot;menu&quot;</span>&gt;
+      &lt;<span class="hl-t">button</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-menu-item&quot;</span> <span class="hl-f">role</span>=<span class="hl-s">&quot;menuitem&quot;</span>&gt;내려받기&lt;/<span class="hl-t">button</span>&gt;
+      &lt;<span class="hl-t">button</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-menu-item&quot;</span> <span class="hl-f">role</span>=<span class="hl-s">&quot;menuitem&quot;</span>&gt;인쇄하기&lt;/<span class="hl-t">button</span>&gt;
+      &lt;<span class="hl-t">button</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-menu-item&quot;</span> <span class="hl-f">role</span>=<span class="hl-s">&quot;menuitem&quot;</span>&gt;메일로 보내기&lt;/<span class="hl-t">button</span>&gt;
+    &lt;/<span class="hl-t">div</span>&gt;
+  &lt;/<span class="hl-t">div</span>&gt;
 &lt;/<span class="hl-t">div</span>&gt;</code></pre>
 </figure></div>
 </div>

@@ -43,13 +43,76 @@ Select를 눌렀을 때 펼쳐지는 선택지 목록입니다.
 
 ## 예시
 
+### 성격이 다른 선택지는 묶음으로 나누기
+
+최근에 고른 장소와 다른 장소처럼 성격이 다른 선택지는 묶음 이름으로 나눕니다. 묶음 안에서는 가나다순처럼 한 가지 기준으로 늘어놓습니다.
+
 ```html
-<div class="ds-select-content" role="listbox">
-  <ul class="ds-select-list">
-    <li><button class="ds-select-item" role="option" aria-selected="true"><span class="ds-select-item__body"><span class="ds-select-item__label">서울특별시</span></span></button></li>
-    <li><button class="ds-select-item" role="option" aria-selected="false"><span class="ds-select-item__body"><span class="ds-select-item__label">부산광역시</span></span></button></li>
-    <li><button class="ds-select-item" role="option" aria-selected="false" disabled><span class="ds-select-item__body"><span class="ds-select-item__label">제주(배송 불가)</span></span></button></li>
-  </ul>
+<div class="ds-field u-full" style="max-width: 360px">
+  <div class="ds-field__header">
+    <span class="ds-field__label" id="select-content-item-ex1-label">시험 장소</span>
+  </div>
+  <button type="button" class="ds-select" aria-haspopup="listbox" aria-expanded="true" aria-controls="select-content-item-ex1" aria-labelledby="select-content-item-ex1-label select-content-item-ex1-value"><span class="ds-select__value" id="select-content-item-ex1-value">서울 강남</span></button>
+  <div class="ds-select-content" role="listbox" id="select-content-item-ex1" aria-labelledby="select-content-item-ex1-label">
+    <div class="ds-select-content__group" role="group" aria-labelledby="select-content-item-ex1-g1">
+      <div class="ds-select-content__label" id="select-content-item-ex1-g1">최근 고른 장소</div>
+      <ul class="ds-select-list">
+        <li><button type="button" class="ds-select-item" role="option" aria-selected="true"><span class="ds-select-item__body"><span class="ds-select-item__label">서울 강남</span></span></button></li>
+        <li><button type="button" class="ds-select-item" role="option" aria-selected="false"><span class="ds-select-item__body"><span class="ds-select-item__label">서울 종로</span></span></button></li>
+      </ul>
+    </div>
+    <div class="ds-select-content__group" role="group" aria-labelledby="select-content-item-ex1-g2">
+      <div class="ds-select-content__label" id="select-content-item-ex1-g2">다른 장소</div>
+      <ul class="ds-select-list">
+        <li><button type="button" class="ds-select-item" role="option" aria-selected="false"><span class="ds-select-item__body"><span class="ds-select-item__label">광주 동구</span></span></button></li>
+        <li><button type="button" class="ds-select-item" role="option" aria-selected="false"><span class="ds-select-item__body"><span class="ds-select-item__label">대구 중구</span></span></button></li>
+        <li><button type="button" class="ds-select-item" role="option" aria-selected="false"><span class="ds-select-item__body"><span class="ds-select-item__label">대전 서구</span></span></button></li>
+        <li><button type="button" class="ds-select-item" role="option" aria-selected="false"><span class="ds-select-item__body"><span class="ds-select-item__label">부산 진구</span></span></button></li>
+      </ul>
+    </div>
+  </div>
+</div>
+```
+
+### 이름은 짧게, 덧붙임은 보조 설명으로
+
+항목 이름은 "3개월"처럼 짧은 명사로 쓰고, 가격 같은 덧붙임은 `ds-select-item__desc`로 내립니다. 기간이 짧은 것부터 한 가지 기준으로 늘어놓습니다.
+
+```html
+<div class="ds-field u-full" style="max-width: 360px">
+  <div class="ds-field__header">
+    <span class="ds-field__label" id="select-content-item-ex2-label">수강 기간</span>
+  </div>
+  <button type="button" class="ds-select" aria-haspopup="listbox" aria-expanded="true" aria-controls="select-content-item-ex2" aria-labelledby="select-content-item-ex2-label select-content-item-ex2-value"><span class="ds-select__value" id="select-content-item-ex2-value">3개월</span></button>
+  <div class="ds-select-content" role="listbox" id="select-content-item-ex2" aria-labelledby="select-content-item-ex2-label">
+    <ul class="ds-select-list">
+      <li><button type="button" class="ds-select-item" role="option" aria-selected="false"><span class="ds-select-item__body"><span class="ds-select-item__label">1개월</span><span class="ds-select-item__desc">29,000원</span></span></button></li>
+      <li><button type="button" class="ds-select-item" role="option" aria-selected="true"><span class="ds-select-item__body"><span class="ds-select-item__label">3개월</span><span class="ds-select-item__desc">79,000원, 한 달에 26,300원</span></span></button></li>
+      <li><button type="button" class="ds-select-item" role="option" aria-selected="false"><span class="ds-select-item__body"><span class="ds-select-item__label">6개월</span><span class="ds-select-item__desc">139,000원, 한 달에 23,100원</span></span></button></li>
+      <li><button type="button" class="ds-select-item" role="option" aria-selected="false"><span class="ds-select-item__body"><span class="ds-select-item__label">12개월</span><span class="ds-select-item__desc">239,000원, 한 달에 19,900원</span></span></button></li>
+    </ul>
+  </div>
+</div>
+```
+
+### 안 고르는 것도 답이면 "선택 안 함" 넣기
+
+쿠폰처럼 쓰지 않는 것도 답이 되는 칸에는 맨 위에 "선택 안 함"을 둡니다. 지금 쓸 수 없는 쿠폰은 `disabled`로 두고 이유를 보조 설명에 적습니다.
+
+```html
+<div class="ds-field u-full" style="max-width: 360px">
+  <div class="ds-field__header">
+    <span class="ds-field__label" id="select-content-item-ex3-label">쿠폰</span>
+  </div>
+  <button type="button" class="ds-select" aria-haspopup="listbox" aria-expanded="true" aria-controls="select-content-item-ex3" aria-labelledby="select-content-item-ex3-label select-content-item-ex3-value"><span class="ds-select__value" id="select-content-item-ex3-value">3,000원 할인 쿠폰</span></button>
+  <div class="ds-select-content" role="listbox" id="select-content-item-ex3" aria-labelledby="select-content-item-ex3-label">
+    <ul class="ds-select-list">
+      <li><button type="button" class="ds-select-item" role="option" aria-selected="false"><span class="ds-select-item__body"><span class="ds-select-item__label">선택 안 함</span></span></button></li>
+      <li><button type="button" class="ds-select-item" role="option" aria-selected="true"><span class="ds-select-item__body"><span class="ds-select-item__label">3,000원 할인 쿠폰</span><span class="ds-select-item__desc">11월 15일까지</span></span></button></li>
+      <li><button type="button" class="ds-select-item" role="option" aria-selected="false"><span class="ds-select-item__body"><span class="ds-select-item__label">신규 가입 쿠폰</span><span class="ds-select-item__desc">10% 할인, 11월 30일까지</span></span></button></li>
+      <li><button type="button" class="ds-select-item" role="option" aria-selected="false" disabled><span class="ds-select-item__body"><span class="ds-select-item__label">5,000원 할인 쿠폰</span><span class="ds-select-item__desc">5만 원 넘게 주문하면 쓸 수 있어요</span></span></button></li>
+    </ul>
+  </div>
 </div>
 ```
 

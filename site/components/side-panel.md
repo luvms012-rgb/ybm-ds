@@ -55,18 +55,89 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 예시
 
+### 목록을 둔 채 옆에서 필터 고르기
+
+PC 화면에서 목록을 가리지 않고 필터를 고르게 할 때 Side Panel을 씁니다. 화면이 좁은 모바일에서는 같은 내용을 Bottom Sheet에 담습니다.
+
 ```html
-<button type="button" class="ds-btn" data-variant="neutralOutline" data-size="small" data-ds-open="pv-sp">옆 패널 열기</button>
-<dialog class="ds-sidepanel" id="pv-sp" data-size="small" aria-labelledby="pv-sp-t">
-  <div class="ds-sidepanel__header">
-    <div class="ds-sidepanel__texts"><h2 class="ds-sidepanel__title" id="pv-sp-t">필터</h2><p class="ds-sidepanel__desc">원하는 조건을 고르세요</p></div>
-    <button type="button" class="ds-sidepanel__close" data-ds-close aria-label="닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button>
+<div class="u-col u-gap-3 u-full" style="max-width: 480px">
+  <div class="u-flex u-center u-between">
+    <span class="ds-t04 ds-fg-muted">강의 32개</span>
+    <button type="button" class="ds-btn" data-variant="neutralOutline" data-size="small" data-ds-open="side-panel-ex1"><i class="ds-icon ds-icon--list-filter" aria-hidden="true"></i>필터</button>
   </div>
-  <div class="ds-sidepanel__body">
-    <p style="height:900px">본문이 길면 이 영역만 스크롤되고, 스크롤되면 위에 선이 생깁니다.</p>
+  <ul class="ds-list" data-variant="inset" data-divider>
+    <li><a class="ds-list-item" href="#"><span class="ds-list-item__content"><span class="ds-list-item__title">영어 회화 기초</span><span class="ds-list-item__desc">어학, 3개월</span></span><i class="ds-icon ds-icon--chevron-right ds-list-item__chevron" aria-hidden="true"></i></a></li>
+    <li><a class="ds-list-item" href="#"><span class="ds-list-item__content"><span class="ds-list-item__title">컴퓨터 활용 실무</span><span class="ds-list-item__desc">자격증, 1개월</span></span><i class="ds-icon ds-icon--chevron-right ds-list-item__chevron" aria-hidden="true"></i></a></li>
+  </ul>
+  <dialog class="ds-sidepanel" id="side-panel-ex1" data-size="small" aria-labelledby="side-panel-ex1-title">
+    <div class="ds-sidepanel__header">
+      <div class="ds-sidepanel__texts">
+        <h2 class="ds-sidepanel__title" id="side-panel-ex1-title">필터</h2>
+        <p class="ds-sidepanel__desc">원하는 조건을 골라 주세요</p>
+      </div>
+      <button type="button" class="ds-sidepanel__close" data-ds-close aria-label="닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button>
+    </div>
+    <div class="ds-sidepanel__body u-col u-gap-8">
+      <div class="ds-field">
+        <div class="ds-field__header">
+          <span class="ds-field__label" id="side-panel-ex1-field">분야</span>
+        </div>
+        <fieldset class="ds-checkbox-group" aria-labelledby="side-panel-ex1-field">
+          <label class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control" checked><span>어학</span></label>
+          <label class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control" checked><span>자격증</span></label>
+          <label class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control"><span>취업</span></label>
+          <label class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control"><span>컴퓨터</span></label>
+        </fieldset>
+      </div>
+      <div class="ds-field">
+        <div class="ds-field__header">
+          <span class="ds-field__label" id="side-panel-ex1-period">수강 기간</span>
+        </div>
+        <div class="ds-radio-group" role="radiogroup" aria-labelledby="side-panel-ex1-period">
+          <label class="ds-radio"><input type="radio" class="ds-radio__control" name="side-panel-ex1-period" checked><span>전체</span></label>
+          <label class="ds-radio"><input type="radio" class="ds-radio__control" name="side-panel-ex1-period"><span>1개월 이하</span></label>
+          <label class="ds-radio"><input type="radio" class="ds-radio__control" name="side-panel-ex1-period"><span>3개월 이하</span></label>
+        </div>
+      </div>
+    </div>
+    <div class="ds-sidepanel__footer">
+      <button type="button" class="ds-btn" data-variant="neutralWeak" data-size="medium">초기화</button>
+      <button type="button" class="ds-btn" data-variant="neutralSolid" data-size="medium" data-ds-close>강의 32개 보기</button>
+    </div>
+  </dialog>
+</div>
+```
+
+### 보조 내용을 옆에 모아 보여 주기
+
+알림처럼 하던 일과 따로 보는 보조 내용은 Side Panel에 모읍니다. 닫으면 보던 화면이 그대로 남아 있어 하던 일로 바로 돌아갑니다.
+
+```html
+<div class="u-col u-gap-3 u-full" style="max-width: 480px">
+  <div class="u-flex u-center u-between">
+    <h3 class="ds-t07 ds-fw-bold">내 강의실</h3>
+    <button type="button" class="ds-btn" data-variant="ghost" data-layout="iconOnly" aria-label="알림 열기" data-ds-open="side-panel-ex2"><i class="ds-icon ds-icon--bell" aria-hidden="true"></i></button>
   </div>
-  <div class="ds-sidepanel__footer"><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="medium" data-ds-close>취소</button><button type="button" class="ds-btn" data-variant="neutralSolid" data-size="medium" data-ds-close>적용</button></div>
-</dialog>
+  <ul class="ds-list" data-variant="inset" data-divider>
+    <li><a class="ds-list-item" href="#"><span class="ds-list-item__content"><span class="ds-list-item__title">영어 회화 기초</span><span class="ds-list-item__desc">9강부터 이어서 보기</span></span><i class="ds-icon ds-icon--chevron-right ds-list-item__chevron" aria-hidden="true"></i></a></li>
+    <li><a class="ds-list-item" href="#"><span class="ds-list-item__content"><span class="ds-list-item__title">비즈니스 이메일 쓰기</span><span class="ds-list-item__desc">16강부터 이어서 보기</span></span><i class="ds-icon ds-icon--chevron-right ds-list-item__chevron" aria-hidden="true"></i></a></li>
+  </ul>
+  <dialog class="ds-sidepanel" id="side-panel-ex2" data-size="small" aria-labelledby="side-panel-ex2-title">
+    <div class="ds-sidepanel__header">
+      <div class="ds-sidepanel__texts">
+        <h2 class="ds-sidepanel__title" id="side-panel-ex2-title">알림</h2>
+      </div>
+      <button type="button" class="ds-sidepanel__close" data-ds-close aria-label="닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button>
+    </div>
+    <div class="ds-sidepanel__body">
+      <ul class="ds-list" data-variant="inset" data-divider>
+        <li><a class="ds-list-item" href="#"><span class="ds-list-item__prefix"><i class="ds-icon ds-icon--book-open" aria-hidden="true"></i></span><span class="ds-list-item__content"><span class="ds-list-item__title">수강 신청이 확정됐어요</span><span class="ds-list-item__desc">방금</span></span></a></li>
+        <li><a class="ds-list-item" href="#"><span class="ds-list-item__prefix"><i class="ds-icon ds-icon--truck" aria-hidden="true"></i></span><span class="ds-list-item__content"><span class="ds-list-item__title">주문한 교재가 출발했어요</span><span class="ds-list-item__desc">1시간 전</span></span></a></li>
+        <li><a class="ds-list-item" href="#"><span class="ds-list-item__prefix"><i class="ds-icon ds-icon--calendar" aria-hidden="true"></i></span><span class="ds-list-item__content"><span class="ds-list-item__title">내일 오전 10시에 시험이 있어요</span><span class="ds-list-item__desc">어제</span></span></a></li>
+      </ul>
+    </div>
+  </dialog>
+</div>
 ```
 
 ## 규격

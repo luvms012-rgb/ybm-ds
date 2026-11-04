@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// YBM DS — 통합 동기화: Figma ↔ 로컬(ds/) ↔ GitHub(저장소 + Pages) ↔ 가이드 사이트
+// yds — 통합 동기화: Figma ↔ 로컬(ds/) ↔ GitHub(저장소 + Pages) ↔ 가이드 사이트
 //
 //   node sync.mjs                  상태 보기 (검증 + git + 배포 주소)
 //   node sync.mjs figma            Figma 점검 스크립트 생성 → tokens/.figma-check.js
@@ -320,7 +320,7 @@ async function deploy(message) {
 
 // ── 명령 ─────────────────────────────────────────────────────────────────
 say();
-say(c.b(`  YBM DS 동기화 · ${cmd}`));
+say(c.b(`  yds 동기화 · ${cmd}`));
 say('  ------------------------------------------------');
 
 if (cmd === 'status') {

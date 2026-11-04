@@ -37,28 +37,40 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 예시
 
+### 움직이는 동안 지금 값 보여 주기
+
+손잡이를 움직이는 동안 라벨 옆 숫자도 함께 바꿉니다. 막대만으로는 지금 값이 정확히 얼마인지 알 수 없습니다.
+
 ```html
-<input type="range" class="ds-slider" min="0" max="100" value="45" aria-label="neutral"><input type="range" class="ds-slider" min="0" max="100" value="70" data-tone="brand" aria-label="brand">
+<div class="ds-field u-full" style="max-width: 360px">
+  <div class="ds-field__header u-between">
+    <label class="ds-field__label" for="slider-ex1">음량</label>
+    <output class="ds-t04 ds-fg-muted" id="slider-ex1-value" for="slider-ex1">40%</output>
+  </div>
+  <input type="range" class="ds-slider" id="slider-ex1" min="0" max="100" value="40" oninput="document.getElementById('slider-ex1-value').value = this.value + '%'">
+</div>
 ```
 
-## 규격
+### 단계가 있으면 가까운 단계에 멈추기
 
-### CSS 변수
+재생 속도처럼 정해진 단계가 있으면 `step`을 넣어 가장 가까운 단계에 멈추게 합니다. 막대 아래에 단계 값을 적어 어디에 멈출지 미리 알려 줍니다.
 
-서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
-
-| 변수 | 기본값 |
-| --- | --- |
-| `--ds-slider-value` | `50%` |
-| `--ds-slider-active` | `var(--ds-color-bg-neutral-solid)` |
-| `--ds-slider-thumb-line` | `var(--ds-color-bg-neutral-solid)` |
-
-### 크기와 여백
-
+```html
+<div class="ds-field u-full" style="max-width: 360px">
+  <div class="ds-field__header u-between">
+    <label class="ds-field__label" for="slider-ex2">재생 속도</label>
+    <output class="ds-t04 ds-fg-muted" id="slider-ex2-value" for="slider-ex2">1배</output>
+  </div>
+  <input type="range" class="ds-slider" id="slider-ex2" min="0.5" max="2" step="0.25" value="1" oninput="document.getElementById('slider-ex2-value').value = this.value + '배'">
+  <div class="u-flex u-between ds-t02 ds-fg-subtle" aria-hidden="true">
+    <span>0.5배</span>
+    <span>1배</span>
+    <span>1.5배</span>
+    <span>2배</span>
+  </div>
+</div>
 ```
-tone: neutral(기본) / brand
-채움 길이는 --ds-slider-value(0~100%) — ybm-ds.js 가 input 마다 자동으로 갱신한다.
-Figma: 높이 20 / 트랙 4 pill palette/gray-200 / 채움 bg/neutral-solid(brand bg/brand-solid)
-       썸 20 static-white + 1px 테두리(채움 색) + elevation raised
-       disabled opacity .7 / 채움 bg/disabled / 썸 테두리 stroke/neutral-weak
-```
+
+### 많이 고르는 값을 기본값으로 넣기
+
+처음 쓰는 사람이 많이 고르는 값을 기본값으로 넣어 둡니다. 그대로 두어도 되고 필요할 때만 옮기면 되어 수고와 실수가 줄어듭니다.

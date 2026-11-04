@@ -32,26 +32,6 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 예시
 
-```html
-<div class="ds-progress" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" aria-label="진행률" style="--ds-progress-value: 40%"></div>
-<div class="ds-progress" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" aria-label="진행률" style="--ds-progress-value: 75%" data-tone="neutral" data-size="small"></div>
-```
+### 진행 값을 글자로 함께 적기
 
-## 규격
-
-### CSS 변수
-
-서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
-
-| 변수 | 기본값 |
-| --- | --- |
-| `--ds-progress-value` | `0%` |
-| `--ds-progress-track` | `var(--ds-color-palette-brand-200)` |
-| `--ds-progress-range` | `var(--ds-color-bg-brand-solid)` |
-
-### 크기와 여백
-
-```
-tone: brand(기본) / neutral   size: medium(기본 8) / small 4
-Figma: 트랙 palette/brand-200(neutral palette/gray-200) / 채움 bg/brand-solid(neutral bg/neutral-solid) / pill
-```
+막대 위에 "3/10"처럼 지금 값을 글자로 적습니다. 막대 길이만으로는 몇 문제가 남았는지 정확히 알 수 없습니다.

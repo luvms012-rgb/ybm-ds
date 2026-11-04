@@ -56,29 +56,117 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 예시
 
+### 하위 화면 맨 위에 뒤로 가기와 제목
+
+하위 화면 맨 위에 뒤로 가기 버튼과 화면 제목을 둡니다. 오른쪽 아이콘 버튼은 2개까지만 두어 제목 자리를 지킵니다.
+
 ```html
-<header class="ds-appbar" style="width:375px">
-  <div class="ds-appbar__left"><button type="button" class="ds-appbar__button" aria-label="뒤로"><i class="ds-icon ds-icon--chevron-left" aria-hidden="true"></i></button></div>
-  <div class="ds-appbar__main"><h1 class="ds-appbar__title">제목</h1></div>
-  <div class="ds-appbar__right"><button type="button" class="ds-appbar__button" aria-label="검색"><i class="ds-icon ds-icon--search" aria-hidden="true"></i></button><button type="button" class="ds-appbar__button" aria-label="더보기"><i class="ds-icon ds-icon--ellipsis" aria-hidden="true"></i></button></div>
-</header>
-<header class="ds-appbar" style="width:375px">
-  <div class="ds-appbar__left"><button type="button" class="ds-appbar__button" aria-label="뒤로"><i class="ds-icon ds-icon--chevron-left" aria-hidden="true"></i></button></div>
-  <div class="ds-appbar__main"><h1 class="ds-appbar__title">제목</h1><p class="ds-appbar__subtitle">부제목</p></div>
-  <div class="ds-appbar__right"><button type="button" class="ds-appbar__button" aria-label="더보기"><i class="ds-icon ds-icon--ellipsis" aria-hidden="true"></i></button></div>
-</header>
-<header class="ds-appbar" data-platform="android" style="width:375px">
-  <div class="ds-appbar__left"><button type="button" class="ds-appbar__button" aria-label="뒤로"><i class="ds-icon ds-icon--chevron-left" aria-hidden="true"></i></button></div>
-  <div class="ds-appbar__main"><h1 class="ds-appbar__title">아주 긴 제목은 한 줄에서 말줄임으로 끝납니다</h1></div>
-  <div class="ds-appbar__right"><button type="button" class="ds-appbar__button" aria-label="검색"><i class="ds-icon ds-icon--search" aria-hidden="true"></i></button><button type="button" class="ds-appbar__button" aria-label="메뉴" disabled><i class="ds-icon ds-icon--menu" aria-hidden="true"></i></button></div>
-</header>
-<div style="width:375px;background:var(--ds-color-palette-gray-700)">
-  <header class="ds-appbar" data-tone="transparent" data-gradient>
-    <div class="ds-appbar__left"><button type="button" class="ds-appbar__button" aria-label="닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button></div>
-    <div class="ds-appbar__main"><h1 class="ds-appbar__title">사진 위 막대</h1></div>
+<div style="width: 100%; max-width: 375px">
+  <header class="ds-appbar">
+    <div class="ds-appbar__left">
+      <button type="button" class="ds-appbar__button" aria-label="뒤로"><i class="ds-icon ds-icon--chevron-left" aria-hidden="true"></i></button>
+    </div>
+    <div class="ds-appbar__main"><h1 class="ds-appbar__title">주문 상세</h1></div>
+    <div class="ds-appbar__right">
+      <button type="button" class="ds-appbar__button" aria-label="문의하기"><i class="ds-icon ds-icon--headset" aria-hidden="true"></i></button>
+      <button type="button" class="ds-appbar__button" aria-label="더보기"><i class="ds-icon ds-icon--ellipsis" aria-hidden="true"></i></button>
+    </div>
+  </header>
+  <ul class="ds-list" data-divider>
+    <li>
+      <div class="ds-list-item">
+        <span class="ds-list-item__content"><span class="ds-list-item__title">주문 번호</span></span>
+        <span class="ds-list-item__suffix">1042</span>
+      </div>
+    </li>
+    <li>
+      <div class="ds-list-item">
+        <span class="ds-list-item__content"><span class="ds-list-item__title">주문일</span></span>
+        <span class="ds-list-item__suffix">2026.11.02</span>
+      </div>
+    </li>
+    <li>
+      <div class="ds-list-item">
+        <span class="ds-list-item__content"><span class="ds-list-item__title">상태</span></span>
+        <span class="ds-list-item__suffix">배송 중</span>
+      </div>
+    </li>
+  </ul>
+</div>
+```
+
+### 작성 화면은 닫기 버튼과 부제목으로
+
+전체 화면으로 여는 작성 화면은 왼쪽에 닫기 버튼을 둡니다. 부제목에는 지금 단계처럼 제목을 돕는 짧은 정보만 넣습니다.
+
+```html
+<div style="width: 100%; max-width: 375px">
+  <header class="ds-appbar">
+    <div class="ds-appbar__left">
+      <button type="button" class="ds-appbar__button" aria-label="닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button>
+    </div>
+    <div class="ds-appbar__main">
+      <h1 class="ds-appbar__title">수강 후기 쓰기</h1>
+      <p class="ds-appbar__subtitle">2 / 3</p>
+    </div>
     <div class="ds-appbar__right"></div>
   </header>
-  <div style="height:40px"></div>
+  <ul class="ds-list" data-divider aria-label="좋았던 점">
+    <li>
+      <label class="ds-list-item">
+        <span class="ds-list-item__content"><span class="ds-list-item__title">설명이 쉬워요</span></span>
+        <span class="ds-list-item__suffix"><span class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control"></span></span>
+      </label>
+    </li>
+    <li>
+      <label class="ds-list-item">
+        <span class="ds-list-item__content"><span class="ds-list-item__title">예제가 많아요</span></span>
+        <span class="ds-list-item__suffix"><span class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control"></span></span>
+      </label>
+    </li>
+    <li>
+      <label class="ds-list-item">
+        <span class="ds-list-item__content"><span class="ds-list-item__title">강의 길이가 알맞아요</span></span>
+        <span class="ds-list-item__suffix"><span class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control"></span></span>
+      </label>
+    </li>
+  </ul>
+</div>
+```
+
+### 안드로이드 앱은 제목을 왼쪽에
+
+안드로이드 앱이라면 `data-platform="android"`로 제목을 왼쪽에 둡니다. 한 서비스 안에서는 모든 화면의 제목 위치를 하나로 맞춥니다.
+
+```html
+<div style="width: 100%; max-width: 375px">
+  <header class="ds-appbar" data-platform="android">
+    <div class="ds-appbar__left">
+      <button type="button" class="ds-appbar__button" aria-label="뒤로"><i class="ds-icon ds-icon--chevron-left" aria-hidden="true"></i></button>
+    </div>
+    <div class="ds-appbar__main"><h1 class="ds-appbar__title">공지사항</h1></div>
+    <div class="ds-appbar__right">
+      <button type="button" class="ds-appbar__button" aria-label="공지 찾기"><i class="ds-icon ds-icon--search" aria-hidden="true"></i></button>
+    </div>
+  </header>
+  <ul class="ds-list" data-divider>
+    <li>
+      <a class="ds-list-item" href="#">
+        <span class="ds-list-item__content">
+          <span class="ds-list-item__title">11월 정기 점검 안내</span>
+          <span class="ds-tag-group"><span>운영팀</span><span>2026.11.02</span></span>
+        </span>
+      </a>
+    </li>
+    <li>
+      <a class="ds-list-item" href="#">
+        <span class="ds-list-item__content">
+          <span class="ds-list-item__title">겨울 방학 특강 신청을 받아요</span>
+          <span class="ds-tag-group"><span>교육팀</span><span>2026.10.28</span></span>
+        </span>
+      </a>
+    </li>
+  </ul>
 </div>
 ```
 

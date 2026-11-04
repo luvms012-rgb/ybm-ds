@@ -58,15 +58,90 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 예시
 
+### 하위 메뉴가 있는 항목은 펼치기만
+
+하위 메뉴가 있는 "내 강의실"은 눌러도 이동하지 않고 펼치거나 접기만 합니다. 지금 보는 하위 메뉴가 있으면 부모를 펼쳐 두고, 하위 메뉴가 없는 항목에는 화살표를 달지 않습니다.
+
 ```html
-<nav class="ds-sidenav" aria-label="메뉴">
-  <div class="ds-sidenav__header"><button class="ds-sidenav__trigger" aria-label="메뉴 접기" onclick="this.closest('.ds-sidenav').toggleAttribute('data-collapsed')"><i class="ds-icon ds-icon--panel-left" aria-hidden="true"></i></button></div>
-  <div class="ds-sidenav__content"><div class="ds-sidenav__group">
-    <div class="ds-sidenav__group-label">쇼핑</div>
-    <a class="ds-sidenav__item" href="#" aria-current="page"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--house-solid" aria-hidden="true"></i></span><span class="ds-sidenav__label">홈</span></a>
-    <a class="ds-sidenav__item" href="#"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--calendar" aria-hidden="true"></i></span><span class="ds-sidenav__label">주문 내역</span></a>
-    <a class="ds-sidenav__item" href="#"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--file-text" aria-hidden="true"></i></span><span class="ds-sidenav__label">배송 조회</span><i class="ds-icon ds-icon--chevron-down ds-icon--sm ds-sidenav__suffix" aria-hidden="true"></i></a>
-  </div></div>
+<nav class="ds-sidenav" aria-label="학습 메뉴">
+  <div class="ds-sidenav__header">
+    <button type="button" class="ds-sidenav__trigger" aria-label="메뉴 접기"><i class="ds-icon ds-icon--panel-left" aria-hidden="true"></i></button>
+  </div>
+  <div class="ds-sidenav__content">
+    <div class="ds-sidenav__group">
+      <a class="ds-sidenav__item" href="#"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--house" aria-hidden="true"></i></span><span class="ds-sidenav__label">홈</span></a>
+      <div class="ds-sidenav__item" role="button" tabindex="0" aria-expanded="true" aria-controls="side-navigation-ex1-sub">
+        <span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--book-open" aria-hidden="true"></i></span>
+        <span class="ds-sidenav__label">내 강의실</span>
+        <i class="ds-icon ds-icon--chevron-up ds-icon--sm ds-sidenav__suffix" aria-hidden="true"></i>
+      </div>
+      <div id="side-navigation-ex1-sub">
+        <a class="ds-sidenav__item" href="#" aria-current="page"><span class="ds-sidenav__prefix" aria-hidden="true"></span><span class="ds-sidenav__label">수강 중</span></a>
+        <a class="ds-sidenav__item" href="#"><span class="ds-sidenav__prefix" aria-hidden="true"></span><span class="ds-sidenav__label">수강 완료</span></a>
+      </div>
+      <a class="ds-sidenav__item" href="#"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--calendar" aria-hidden="true"></i></span><span class="ds-sidenav__label">시험 일정</span></a>
+      <a class="ds-sidenav__item" href="#"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--settings" aria-hidden="true"></i></span><span class="ds-sidenav__label">설정</span></a>
+    </div>
+  </div>
+</nav>
+```
+
+### 화면이 좁아지면 접어 두기
+
+화면 폭이 1280보다 좁으면 `data-collapsed`로 접어 아이콘만 남깁니다. 이름이 숨으므로 항목마다 `aria-label`을 붙이고, 768보다 좁아지면 서랍 메뉴로 바꿉니다.
+
+```html
+<div class="u-flex u-gap-6 u-full" style="max-width: 560px">
+  <nav class="ds-sidenav" aria-label="학습 메뉴" data-collapsed>
+    <div class="ds-sidenav__header">
+      <button type="button" class="ds-sidenav__trigger" aria-label="메뉴 펼치기"><i class="ds-icon ds-icon--panel-left" aria-hidden="true"></i></button>
+    </div>
+    <div class="ds-sidenav__content">
+      <div class="ds-sidenav__group">
+        <a class="ds-sidenav__item" href="#" aria-current="page" aria-label="홈"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--house-solid" aria-hidden="true"></i></span><span class="ds-sidenav__label">홈</span></a>
+        <a class="ds-sidenav__item" href="#" aria-label="내 강의실"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--book-open" aria-hidden="true"></i></span><span class="ds-sidenav__label">내 강의실</span></a>
+        <a class="ds-sidenav__item" href="#" aria-label="시험 일정"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--calendar" aria-hidden="true"></i></span><span class="ds-sidenav__label">시험 일정</span></a>
+        <a class="ds-sidenav__item" href="#" aria-label="주문 내역"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--receipt" aria-hidden="true"></i></span><span class="ds-sidenav__label">주문 내역</span></a>
+        <a class="ds-sidenav__item" href="#" aria-label="설정"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--settings" aria-hidden="true"></i></span><span class="ds-sidenav__label">설정</span></a>
+      </div>
+    </div>
+  </nav>
+  <section class="u-col u-gap-3 u-grow u-mt-4">
+    <h3 class="ds-t07 ds-fw-bold">이어서 볼 강의</h3>
+    <ul class="ds-list" data-variant="inset" data-divider>
+      <li><a class="ds-list-item" href="#"><span class="ds-list-item__content"><span class="ds-list-item__title">영어 회화 기초</span><span class="ds-list-item__desc">9강부터</span></span><i class="ds-icon ds-icon--chevron-right ds-list-item__chevron" aria-hidden="true"></i></a></li>
+      <li><a class="ds-list-item" href="#"><span class="ds-list-item__content"><span class="ds-list-item__title">비즈니스 이메일 쓰기</span><span class="ds-list-item__desc">16강부터</span></span><i class="ds-icon ds-icon--chevron-right ds-list-item__chevron" aria-hidden="true"></i></a></li>
+    </ul>
+  </section>
+</div>
+```
+
+### 짧은 이름을 묶음으로 나누기
+
+메뉴 이름은 "주문 내역"처럼 두세 낱말로 짧게 쓰고, 성격이 비슷한 메뉴끼리 묶음 이름 아래에 모읍니다. 이름이 길면 240 폭 안에서 잘려 끝까지 읽을 수 없습니다.
+
+```html
+<nav class="ds-sidenav" aria-label="내 메뉴">
+  <div class="ds-sidenav__header">
+    <button type="button" class="ds-sidenav__trigger" aria-label="메뉴 접기"><i class="ds-icon ds-icon--panel-left" aria-hidden="true"></i></button>
+  </div>
+  <div class="ds-sidenav__content">
+    <div class="ds-sidenav__group">
+      <div class="ds-sidenav__group-label">학습</div>
+      <a class="ds-sidenav__item" href="#" aria-current="page"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--house-solid" aria-hidden="true"></i></span><span class="ds-sidenav__label">홈</span></a>
+      <a class="ds-sidenav__item" href="#"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--book-open" aria-hidden="true"></i></span><span class="ds-sidenav__label">내 강의실</span></a>
+      <a class="ds-sidenav__item" href="#"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--calendar" aria-hidden="true"></i></span><span class="ds-sidenav__label">시험 일정</span></a>
+    </div>
+    <div class="ds-sidenav__group">
+      <div class="ds-sidenav__group-label">내 정보</div>
+      <a class="ds-sidenav__item" href="#"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--receipt" aria-hidden="true"></i></span><span class="ds-sidenav__label">주문 내역</span></a>
+      <a class="ds-sidenav__item" href="#"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--tag" aria-hidden="true"></i></span><span class="ds-sidenav__label">쿠폰</span></a>
+      <a class="ds-sidenav__item" href="#"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--settings" aria-hidden="true"></i></span><span class="ds-sidenav__label">설정</span></a>
+    </div>
+  </div>
+  <div class="ds-sidenav__footer">
+    <a class="ds-sidenav__item" href="#"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--headset" aria-hidden="true"></i></span><span class="ds-sidenav__label">고객센터</span></a>
+  </div>
 </nav>
 ```
 

@@ -28,21 +28,55 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 예시
 
+### AI 답변을 Markdown으로 감싸기
+
+AI 답변처럼 제목, 목록, 굵은 글이 섞인 글은 변환된 HTML을 Markdown으로 감싸기만 합니다. 크기와 간격이 정해져 있어 답변마다 모양이 같아집니다.
+
 ```html
+<div class="u-col u-gap-4 u-full" style="max-width: 480px">
+  <div class="ds-chat-bubble" data-sender="user">환불은 언제까지 할 수 있어요?</div>
   <div class="ds-markdown">
-    <h2>제목 2</h2>
-    <p>본문 문단은 14 크기로 쓰고, 문단 사이는 12를 띄웁니다. <code>inline code</code>와 <a href="#">링크</a>를 함께 쓸 수 있어요.<a class="ds-citation" data-type="number" href="#" aria-label="출처 1">1</a></p>
-    <h3>제목 3</h3>
-    <ul><li>목록 항목 하나</li><li>목록 항목 둘</li></ul>
-    <blockquote>인용문은 왼쪽 선으로 구분합니다.</blockquote>
-    <figure class="ds-codeblock">
-      <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">javascript</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
-      <pre class="ds-codeblock__code"><code>const total = items
-.filter((item) =&gt; item.checked)
-.length;</code></pre>
-    </figure>
-    <p>출처: <a class="ds-citation" href="#"><span class="ds-citation__icon"><i class="ds-icon ds-icon--globe" aria-hidden="true"></i></span><span class="ds-citation__label">출처 이름</span></a><a class="ds-citation" href="#"><span class="ds-citation__label">아주 긴 출처 이름은 말줄임으로 끝납니다</span></a></p>
+    <p>수강을 시작했는지에 따라 달라요.</p>
+    <h3>환불할 수 있는 때</h3>
+    <ul>
+      <li><strong>수강 전</strong>: 결제한 날부터 7일 안이면 모두 돌려받아요.</li>
+      <li><strong>수강 중</strong>: 들은 강의만큼 빼고 돌려받아요.</li>
+    </ul>
+    <p>환불 신청은 <a href="#">내 강의실</a>에서 할 수 있어요.</p>
   </div>
+</div>
+```
+
+### 코드는 Code Block에 넣기
+
+글 사이의 코드는 Markdown 안에 Code Block으로 넣어 언어 이름과 복사 버튼을 함께 보여 줍니다. 낱말 하나 정도의 짧은 코드는 `code`로 글 안에 둡니다.
+
+```html
+<div class="ds-markdown u-full" style="max-width: 480px">
+  <p>고른 항목 수는 <code>filter</code>로 거른 뒤 길이를 세면 돼요.</p>
+  <figure class="ds-codeblock">
+    <figcaption class="ds-codeblock__header">
+      <span class="ds-codeblock__language">javascript</span>
+      <button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button>
+    </figcaption>
+    <pre class="ds-codeblock__code"><code>const count = items.filter((item) =&gt; item.checked).length;</code></pre>
+  </figure>
+  <p>하나도 고르지 않았으면 <code>0</code>이 나와요.</p>
+</div>
+```
+
+### 근거는 번호와 출처 칩으로 붙이기
+
+근거가 된 문장 뒤에 번호 Citation을 붙이고, 답변 끝에 출처 이름 칩을 모아 둡니다. 사용자가 답의 근거를 바로 열어 볼 수 있어 믿고 읽을 수 있습니다.
+
+```html
+<div class="ds-markdown u-full" style="max-width: 480px">
+  <p>주문 금액이 3만 원 이상이면 배송비가 없어요.<a class="ds-citation" data-type="number" href="#" aria-label="출처 1">1</a> 섬이나 산간 지역은 3,000원이 더 붙어요.<a class="ds-citation" data-type="number" href="#" aria-label="출처 2">2</a></p>
+  <p>
+    <a class="ds-citation" href="#"><span class="ds-citation__icon"><i class="ds-icon ds-icon--file-text" aria-hidden="true"></i></span><span class="ds-citation__label">배송 안내</span></a>
+    <a class="ds-citation" href="#"><span class="ds-citation__icon"><i class="ds-icon ds-icon--file-text" aria-hidden="true"></i></span><span class="ds-citation__label">자주 묻는 질문</span></a>
+  </p>
+</div>
 ```
 
 ## 규격

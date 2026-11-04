@@ -65,17 +65,92 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 예시
 
+### 더보기 버튼으로 동작 고르기
+
+모바일에서 더보기 버튼을 누르면 Menu Sheet로 할 수 있는 동작을 보여 줍니다. 몇 가지 동작 가운데 하나를 고를 때 쓰고, 입력이나 긴 내용이 필요하면 Bottom Sheet를 씁니다.
+
 ```html
-<button type="button" class="ds-btn" data-variant="neutralOutline" data-size="small" data-ds-open="pv-ms">메뉴 시트 열기</button>
-<dialog class="ds-menusheet" id="pv-ms" aria-labelledby="pv-ms-t">
-  <div class="ds-menusheet__header"><h2 class="ds-menusheet__title" id="pv-ms-t">제목</h2><p class="ds-menusheet__desc">설명을 적어 주세요</p></div>
+<ul class="ds-list u-full" data-variant="inset" style="max-width: 375px">
+  <li>
+    <div class="ds-list-item">
+      <span class="ds-list-item__prefix"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span>
+      <span class="ds-list-item__content">
+        <span class="ds-list-item__title">스터디 모임 사진</span>
+        <span class="ds-list-item__desc">사진 12장, 오늘</span>
+      </span>
+      <span class="ds-list-item__suffix">
+        <button class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" aria-label="더보기" aria-haspopup="dialog" data-ds-open="menu-sheet-ex1"><i class="ds-icon ds-icon--ellipsis-vertical" aria-hidden="true"></i></button>
+      </span>
+    </div>
+  </li>
+</ul>
+<dialog class="ds-menusheet" id="menu-sheet-ex1" aria-label="앨범 메뉴">
   <div class="ds-menusheet__list">
     <div class="ds-menusheet__group" role="group">
       <button type="button" class="ds-menusheet__item" data-ds-close><i class="ds-icon ds-icon--share" aria-hidden="true"></i><span class="ds-menusheet__content"><span class="ds-menusheet__label">공유하기</span></span></button>
-      <button type="button" class="ds-menusheet__item" data-ds-close><i class="ds-icon ds-icon--link" aria-hidden="true"></i><span class="ds-menusheet__content"><span class="ds-menusheet__label">링크 복사</span><span class="ds-menusheet__item-desc">누구나 볼 수 있는 링크예요</span></span></button>
+      <button type="button" class="ds-menusheet__item" data-ds-close><i class="ds-icon ds-icon--link" aria-hidden="true"></i><span class="ds-menusheet__content"><span class="ds-menusheet__label">링크 복사</span></span></button>
+      <button type="button" class="ds-menusheet__item" data-ds-close><i class="ds-icon ds-icon--download" aria-hidden="true"></i><span class="ds-menusheet__content"><span class="ds-menusheet__label">모두 내려받기</span></span></button>
     </div>
     <div class="ds-menusheet__group" role="group">
-      <button type="button" class="ds-menusheet__item" data-tone="critical" data-ds-close><i class="ds-icon ds-icon--trash" aria-hidden="true"></i><span class="ds-menusheet__content"><span class="ds-menusheet__label">삭제하기</span></span></button>
+      <button type="button" class="ds-menusheet__item" data-tone="critical" data-ds-close><i class="ds-icon ds-icon--trash" aria-hidden="true"></i><span class="ds-menusheet__content"><span class="ds-menusheet__label">앨범 삭제하기</span></span></button>
+    </div>
+  </div>
+  <div class="ds-menusheet__footer"><button type="button" class="ds-menusheet__close" data-ds-close>닫기</button></div>
+</dialog>
+```
+
+### 되돌릴 수 없는 동작은 따로 묶기
+
+대화방 나가기처럼 되돌릴 수 없는 동작은 critical로 바꾸고 다른 동작과 떨어진 묶음에 둡니다. 결과를 한 줄 설명으로 붙여 누르기 전에 알 수 있게 합니다.
+
+```html
+<header class="ds-appbar u-full" style="max-width: 375px">
+  <div class="ds-appbar__left">
+    <button type="button" class="ds-appbar__button" aria-label="뒤로"><i class="ds-icon ds-icon--chevron-left" aria-hidden="true"></i></button>
+  </div>
+  <div class="ds-appbar__main">
+    <h1 class="ds-appbar__title">영어 스터디</h1>
+    <p class="ds-appbar__subtitle">참여자 6명</p>
+  </div>
+  <div class="ds-appbar__right">
+    <button type="button" class="ds-appbar__button" aria-label="대화방 메뉴" aria-haspopup="dialog" data-ds-open="menu-sheet-ex2"><i class="ds-icon ds-icon--ellipsis-vertical" aria-hidden="true"></i></button>
+  </div>
+</header>
+<dialog class="ds-menusheet" id="menu-sheet-ex2" aria-labelledby="menu-sheet-ex2-title">
+  <div class="ds-menusheet__header">
+    <h2 class="ds-menusheet__title" id="menu-sheet-ex2-title">영어 스터디</h2>
+    <p class="ds-menusheet__desc">참여자 6명</p>
+  </div>
+  <div class="ds-menusheet__list">
+    <div class="ds-menusheet__group" role="group">
+      <button type="button" class="ds-menusheet__item" data-ds-close><i class="ds-icon ds-icon--bell" aria-hidden="true"></i><span class="ds-menusheet__content"><span class="ds-menusheet__label">알림 끄기</span></span></button>
+      <button type="button" class="ds-menusheet__item" data-ds-close><i class="ds-icon ds-icon--download" aria-hidden="true"></i><span class="ds-menusheet__content"><span class="ds-menusheet__label">대화 내보내기</span></span></button>
+    </div>
+    <div class="ds-menusheet__group" role="group">
+      <button type="button" class="ds-menusheet__item" data-tone="critical" data-ds-close><i class="ds-icon ds-icon--log-out" aria-hidden="true"></i><span class="ds-menusheet__content"><span class="ds-menusheet__label">대화방 나가기</span><span class="ds-menusheet__item-desc">나가면 대화 내용이 모두 지워져요</span></span></button>
+    </div>
+  </div>
+  <div class="ds-menusheet__footer"><button type="button" class="ds-menusheet__close" data-ds-close>닫기</button></div>
+</dialog>
+```
+
+### 짧은 방법 고르기는 가운데 정렬로
+
+아이콘 없이 짧은 동작 몇 개만 있으면 `data-label-align="center"`로 글자를 가운데에 둡니다. 사진 바꾸기처럼 방법 하나를 고르고 바로 다음 화면으로 넘어갈 때 씁니다.
+
+```html
+<div class="u-col u-center u-gap-3">
+  <span class="ds-avatar" data-size="80" role="img" aria-label="김하나"><span class="ds-avatar__initials" aria-hidden="true">김</span></span>
+  <button class="ds-btn" data-variant="neutralOutline" data-size="small" aria-haspopup="dialog" data-ds-open="menu-sheet-ex3">사진 바꾸기</button>
+</div>
+<dialog class="ds-menusheet" id="menu-sheet-ex3" aria-label="프로필 사진 바꾸기">
+  <div class="ds-menusheet__list">
+    <div class="ds-menusheet__group" role="group">
+      <button type="button" class="ds-menusheet__item" data-label-align="center" data-ds-close><span class="ds-menusheet__content"><span class="ds-menusheet__label">사진 찍기</span></span></button>
+      <button type="button" class="ds-menusheet__item" data-label-align="center" data-ds-close><span class="ds-menusheet__content"><span class="ds-menusheet__label">앨범에서 고르기</span></span></button>
+    </div>
+    <div class="ds-menusheet__group" role="group">
+      <button type="button" class="ds-menusheet__item" data-tone="critical" data-label-align="center" data-ds-close><span class="ds-menusheet__content"><span class="ds-menusheet__label">사진 지우기</span></span></button>
     </div>
   </div>
   <div class="ds-menusheet__footer"><button type="button" class="ds-menusheet__close" data-ds-close>닫기</button></div>

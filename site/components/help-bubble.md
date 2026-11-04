@@ -42,9 +42,42 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 예시
 
+### 새로 생긴 버튼을 가리키며 알려 주기
+
+새로 생긴 버튼 바로 아래에 두고 꼬리를 그 버튼 쪽으로 향하게 해 무엇을 가리키는지 보여 줍니다. 사용자가 읽고 직접 닫아야 하므로 Tooltip이 아닌 Help Bubble에 닫기 버튼을 둡니다.
+
 ```html
-<div class="ds-helpbubble" role="tooltip"><div class="ds-helpbubble__body"><strong class="ds-helpbubble__title">여기서 배송 상황을 확인해요</strong><p class="ds-helpbubble__desc">상품이 출발하면 바로 볼 수 있어요.</p></div><button class="ds-helpbubble__close" aria-label="닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button></div>
-<div class="ds-helpbubble" role="tooltip" data-placement="bottom-start"><div class="ds-helpbubble__body"><strong class="ds-helpbubble__title">bottom-start</strong></div></div>
+<div class="u-full" style="max-width: 420px">
+  <div class="u-flex u-gap-2">
+    <button class="ds-btn" data-variant="neutralOutline" data-size="small" aria-describedby="help-bubble-ex1"><i class="ds-icon ds-icon--list-filter" aria-hidden="true"></i>필터</button>
+    <button class="ds-btn" data-variant="neutralOutline" data-size="small"><i class="ds-icon ds-icon--arrow-up-down" aria-hidden="true"></i>최신순</button>
+  </div>
+  <div class="ds-helpbubble" id="help-bubble-ex1" role="tooltip" data-placement="bottom-start">
+    <div class="ds-helpbubble__body">
+      <strong class="ds-helpbubble__title">필터가 새로 생겼어요</strong>
+      <p class="ds-helpbubble__desc">가격과 배송 조건으로 상품을 골라 볼 수 있어요.</p>
+    </div>
+    <button class="ds-helpbubble__close" aria-label="닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button>
+  </div>
+</div>
+```
+
+### 두 줄 넘는 설명은 Help Bubble로
+
+설명이 두 줄 넘게 이어지면 Tooltip 대신 Help Bubble을 쓰고, 안내 아이콘 옆에 꼬리를 그 아이콘 쪽으로 둡니다. 아이콘 버튼에는 `aria-describedby`로 말풍선을 이어 줍니다.
+
+```html
+<div class="u-flex u-center u-gap-1">
+  <span class="ds-t04 ds-fg-muted">적립 예정 포인트</span>
+  <span class="ds-t04 ds-fw-bold">320P</span>
+  <button class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="포인트 적립 안내" aria-describedby="help-bubble-ex2"><i class="ds-icon ds-icon--info" aria-hidden="true"></i></button>
+  <div class="ds-helpbubble" id="help-bubble-ex2" role="tooltip" data-placement="right">
+    <div class="ds-helpbubble__body">
+      <strong class="ds-helpbubble__title">결제 금액의 1%를 모아 드려요</strong>
+      <p class="ds-helpbubble__desc">구매를 확정한 다음 날 들어오고, 1년 동안 쓸 수 있어요.</p>
+    </div>
+  </div>
+</div>
 ```
 
 ## 규격

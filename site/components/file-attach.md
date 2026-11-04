@@ -78,38 +78,114 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 예시
 
+### PC 폼에는 끌어 놓는 칸 두기
+
+PC 화면의 문의 폼에는 파일을 끌어 놓는 칸을 두고, 올린 파일은 그 아래 줄에 보여 줍니다. 받을 수 있는 형식과 개수는 Field Label 안내 문구로 미리 알립니다.
+
 ```html
-<div class="ds-fileattach" style="width:343px">
-  <label class="ds-fileattach__dropzone">
-    <input type="file" class="ds-fileattach__input" multiple>
-    <span class="ds-fileattach__label">파일을 끌어 놓거나 눌러서 추가하세요</span>
-  </label>
-  <div class="ds-fileattach__items">
-    <label class="ds-fileattach__trigger">
-      <input type="file" class="ds-fileattach__input" multiple aria-label="파일 추가">
-      <i class="ds-icon ds-icon--plus" aria-hidden="true"></i>
-      <span class="ds-fileattach__count"><b>3</b>/10</span>
+<div class="ds-field u-full" style="max-width: 480px">
+  <div class="ds-field__header">
+    <span class="ds-field__label">첨부 파일</span>
+    <span class="ds-field__indicator">선택</span>
+  </div>
+  <div class="ds-fileattach">
+    <label class="ds-fileattach__dropzone">
+      <input type="file" class="ds-fileattach__input" multiple accept=".pdf,.jpg,.png">
+      <span class="ds-fileattach__label">파일을 끌어 놓거나 눌러서 추가하세요</span>
     </label>
-    <div class="ds-fileitem">
-      <span class="ds-fileitem__thumbnail"><i class="ds-icon ds-icon--file-text" aria-hidden="true"></i></span>
-      <span class="ds-fileitem__texts"><span class="ds-fileitem__name">회의록_10월_전체_정리본.docx</span><span class="ds-fileitem__size">2.4MB</span></span>
-      <button type="button" class="ds-fileitem__remove" aria-label="회의록_10월_전체_정리본.docx 빼기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button>
+    <div class="ds-fileattach__items">
+      <div class="ds-fileitem">
+        <span class="ds-fileitem__thumbnail"><i class="ds-icon ds-icon--file-text" aria-hidden="true"></i></span>
+        <span class="ds-fileitem__texts"><span class="ds-fileitem__name">주문서.pdf</span><span class="ds-fileitem__size">1.2MB</span></span>
+        <button type="button" class="ds-fileitem__remove" aria-label="주문서.pdf 빼기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button>
+      </div>
+      <div class="ds-fileitem">
+        <span class="ds-fileitem__thumbnail"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span>
+        <span class="ds-fileitem__texts"><span class="ds-fileitem__name">받은 상품.jpg</span><span class="ds-fileitem__size">840KB</span></span>
+        <button type="button" class="ds-fileitem__remove" aria-label="받은 상품.jpg 빼기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button>
+      </div>
     </div>
-    <div class="ds-fileitem" data-type="image">
-      <span class="ds-fileitem__thumbnail" style="width:100%;height:100%;background:none"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></span>
-      <span class="ds-fileitem__badge">대표</span>
-      <button type="button" class="ds-fileitem__remove" aria-label="사진 빼기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button>
+  </div>
+  <div class="ds-field__footer">
+    <p class="ds-field__help">PDF, JPG, PNG 파일을 5개까지 올릴 수 있어요.</p>
+  </div>
+</div>
+```
+
+### 모바일에서는 추가 버튼과 파일 줄만 쓰기
+
+모바일에서는 끌어 놓는 칸 없이 추가 버튼과 사진 줄만 씁니다. 추가 버튼에는 지금 개수와 최대 개수를 적어 몇 장 더 올릴 수 있는지 알립니다.
+
+```html
+<div class="u-col u-gap-5 u-full" style="max-width: 375px">
+  <div class="ds-field">
+    <div class="ds-field__header">
+      <label class="ds-field__label" for="file-attach-ex2-text">모임 후기</label>
     </div>
-    <div class="ds-fileitem" data-readonly>
-      <span class="ds-fileitem__thumbnail"><i class="ds-icon ds-icon--file-text" aria-hidden="true"></i></span>
-      <span class="ds-fileitem__texts"><span class="ds-fileitem__name">보고서.pdf</span><span class="ds-fileitem__size">1.1MB</span></span>
+    <textarea class="ds-textarea" id="file-attach-ex2-text" data-size="medium" rows="3" placeholder="모임은 어땠나요?">오늘은 단어 시험을 보고 서로 틀린 문제를 풀었어요.</textarea>
+  </div>
+  <div class="ds-field">
+    <div class="ds-field__header">
+      <span class="ds-field__label">사진</span>
+      <span class="ds-field__indicator">선택</span>
+    </div>
+    <div class="ds-fileattach">
+      <div class="ds-fileattach__items">
+        <label class="ds-fileattach__trigger">
+          <input type="file" class="ds-fileattach__input" accept="image/*" multiple aria-label="사진 추가">
+          <i class="ds-icon ds-icon--plus" aria-hidden="true"></i>
+          <span class="ds-fileattach__count"><b>2</b>/10</span>
+        </label>
+        <div class="ds-fileitem" data-type="image">
+          <img class="ds-fileitem__image" src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=160&q=70" alt="공책에 단어를 적는 모습">
+          <span class="ds-fileitem__badge">대표</span>
+          <button type="button" class="ds-fileitem__remove" aria-label="첫 번째 사진 빼기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button>
+        </div>
+        <div class="ds-fileitem" data-type="image">
+          <img class="ds-fileitem__image" src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=160&q=70" alt="책상 위에 쌓인 책">
+          <button type="button" class="ds-fileitem__remove" aria-label="두 번째 사진 빼기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-<label class="ds-fileattach__dropzone" style="width:343px">
-  <input type="file" class="ds-fileattach__input" disabled>
-  <span class="ds-fileattach__label">지금은 파일을 올릴 수 없어요</span>
-</label>
+```
+
+### 최대 개수가 차면 추가 버튼 끄기
+
+파일이 최대 개수만큼 차면 추가 버튼의 입력 요소를 `disabled`로 바꿉니다. 더 올리려면 먼저 한 장을 빼야 한다는 것을 안내 문구로 함께 알립니다.
+
+```html
+<div class="ds-field u-full" style="max-width: 375px">
+  <div class="ds-field__header">
+    <span class="ds-field__label">후기 사진</span>
+  </div>
+  <div class="ds-fileattach">
+    <div class="ds-fileattach__items">
+      <label class="ds-fileattach__trigger">
+        <input type="file" class="ds-fileattach__input" accept="image/*" multiple aria-label="사진 추가" disabled>
+        <i class="ds-icon ds-icon--plus" aria-hidden="true"></i>
+        <span class="ds-fileattach__count"><b>3</b>/3</span>
+      </label>
+      <div class="ds-fileitem" data-type="image">
+        <img class="ds-fileitem__image" src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=160&q=70" alt="커피 두 잔">
+        <span class="ds-fileitem__badge">대표</span>
+        <button type="button" class="ds-fileitem__remove" aria-label="첫 번째 사진 빼기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button>
+      </div>
+      <div class="ds-fileitem" data-type="image">
+        <img class="ds-fileitem__image" src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=160&q=70" alt="커피 잔을 부딪치는 손">
+        <button type="button" class="ds-fileitem__remove" aria-label="두 번째 사진 빼기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button>
+      </div>
+      <div class="ds-fileitem" data-type="image">
+        <img class="ds-fileitem__image" src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=160&q=70" alt="샐러드 한 그릇">
+        <button type="button" class="ds-fileitem__remove" aria-label="세 번째 사진 빼기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button>
+      </div>
+    </div>
+  </div>
+  <div class="ds-field__footer">
+    <p class="ds-field__help">사진은 3장까지 올릴 수 있어요. 바꾸려면 먼저 한 장을 빼 주세요.</p>
+  </div>
+</div>
 ```
 
 ## 규격

@@ -176,7 +176,7 @@ const body = () => `<div class="th-wrap th-util"><a href="#">고객센터</a><a 
       <div class="th-notice"><div class="th-notice__head"><b>공지사항</b>${K.link('더 보기', '#', '')}</div><ul>${NOTICE.map(([t, d]) => `<li><a href="#"><b>${t}</b><span>${d}</span></a></li>`).join('')}</ul></div></div></section>
 </main>
 <footer class="th-foot"><div class="th-wrap"><nav class="th-foot__links" aria-label="약관"><a href="#">회원가입 약관</a><a href="#">이용약관</a><a href="#" data-strong>개인정보 처리방침</a><a href="#">신용정보 활용 체제</a></nav>
-  <div class="th-foot__body"><p><b>한빛안심보험</b>이 화면은 YBM DS 테마 예시예요. 회사 이름, 상품, 연락처는 모두 가상입니다.<br>서울시 가상구 예시로 100 · help@example.com</p><div class="th-call">${btn('고객센터<span class="th-call__num">1588-0000</span>', { variant: 'neutralOutline', size: 'small' })}${btn('이용 시간 안내', { variant: 'neutralOutline', size: 'small', icEnd: 'chevron-right' })}</div></div></div></footer>`;
+  <div class="th-foot__body"><p><b>한빛안심보험</b>이 화면은 yds 테마 예시예요. 회사 이름, 상품, 연락처는 모두 가상입니다.<br>서울시 가상구 예시로 100 · help@example.com</p><div class="th-call">${btn('고객센터<span class="th-call__num">1588-0000</span>', { variant: 'neutralOutline', size: 'small' })}${btn('이용 시간 안내', { variant: 'neutralOutline', size: 'small', icEnd: 'chevron-right' })}</div></div></div></footer>`;
 
 const VIEWS = { trust: { css: () => CSS, body }, vivid };
 
@@ -189,7 +189,7 @@ for (const t of THEMES) {
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>${esc(t.name)} 테마 - YBM DS</title>
+<title>${esc(t.name)} 테마 - yds</title>
 <link rel="stylesheet" href="../../../dist/ybm-ds.css">
 <link rel="stylesheet" href="../../../dist/themes/${t.slug}.css">
 <script>if (location.hash === "#default") document.documentElement.removeAttribute("data-ds-theme");</script>

@@ -22,8 +22,41 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 예시
 
+### 문의 내용을 여러 줄로 받기
+
+여러 줄 글은 Textarea로 받고 아래에 글자 수를 함께 보여 줍니다. 길이 제한이 있는 문의, 후기, 요청 사항에 씁니다.
+
 ```html
-<textarea class="ds-textarea" rows="3" placeholder="문의 내용을 입력해 주세요"></textarea>
+<div class="ds-field" style="width: 100%; max-width: 420px">
+  <div class="ds-field__header">
+    <label class="ds-field__label" for="text-field-textarea-ex1">문의 내용</label>
+    <span class="ds-field__required" aria-hidden="true"></span>
+  </div>
+  <textarea class="ds-textarea" id="text-field-textarea-ex1" rows="4" maxlength="500" placeholder="주문 번호와 함께 궁금한 점을 적어 주세요" required></textarea>
+  <div class="ds-field__footer">
+    <p class="ds-field__help">비밀번호 같은 개인 정보는 적지 말아 주세요.</p>
+    <span class="ds-field__count">0/500</span>
+  </div>
+</div>
+```
+
+### 너무 짧으면 고칠 방법 알리기
+
+필수 글이 비었거나 너무 짧으면 Textarea에 `aria-invalid="true"`를 붙이고 오류 문구를 보여 줍니다. 몇 자를 더 써야 하는지처럼 고치는 방법을 적습니다.
+
+```html
+<div class="ds-field" style="width: 100%; max-width: 420px">
+  <div class="ds-field__header">
+    <label class="ds-field__label" for="text-field-textarea-ex2">취소 사유</label>
+    <span class="ds-field__required" aria-hidden="true"></span>
+  </div>
+  <textarea class="ds-textarea" id="text-field-textarea-ex2" rows="3" maxlength="200" required aria-invalid="true" aria-describedby="text-field-textarea-ex2-error">일정이 바뀌었어요</textarea>
+  <div class="ds-field__footer">
+    <p class="ds-field__help">강의를 고치는 데 참고할게요.</p>
+    <p class="ds-field__error" id="text-field-textarea-ex2-error">10자 이상 적어 주세요. 지금 9자예요.</p>
+    <span class="ds-field__count">9/200</span>
+  </div>
+</div>
 ```
 
 ## 규격

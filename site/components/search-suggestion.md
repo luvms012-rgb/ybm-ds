@@ -69,29 +69,94 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 예시
 
+### 입력하기 전에는 최근 검색어 보여 주기
+
+검색 칸을 눌렀지만 아직 입력하지 않았으면 머리말과 함께 최근 검색어를 보여 줍니다. 앞에 `clock` 아이콘을 두어 추천어와 구별합니다.
+
 ```html
-<div class="ds-search-anchor" style="width:320px">
-  <div class="ds-input" data-variant="outline" data-size="medium">
-    <i class="ds-icon ds-icon--search ds-input__icon" aria-hidden="true"></i>
-    <input class="ds-input__control" id="pv-sg-input" type="search" role="combobox" aria-controls="pv-sg" aria-expanded="true" aria-autocomplete="list" placeholder="검색어를 입력하세요" value="디자인">
-    <button type="button" class="ds-input__clear" aria-label="지우기"></button>
+<div class="u-col u-gap-4 u-full" style="max-width: 420px">
+  <div class="ds-search-anchor">
+    <div class="ds-input" data-variant="outline" data-size="medium">
+      <i class="ds-icon ds-icon--search ds-input__icon" aria-hidden="true"></i>
+      <input class="ds-input__control" type="search" role="combobox" aria-label="강의 검색" aria-controls="search-suggestion-ex1" aria-expanded="true" aria-autocomplete="list" placeholder="검색어를 입력하세요">
+      <button type="button" class="ds-input__clear" aria-label="지우기"></button>
+    </div>
+    <div class="ds-search-suggest" id="search-suggestion-ex1">
+      <div class="ds-search-suggest__heading" id="search-suggestion-ex1-heading">최근 검색어</div>
+      <ul class="ds-search-suggest__list" role="listbox" aria-labelledby="search-suggestion-ex1-heading">
+        <li role="none"><a class="ds-search-suggest__item" role="option" id="search-suggestion-ex1-1" href="#"><i class="ds-icon ds-icon--clock" aria-hidden="true"></i><span class="ds-search-suggest__content"><span class="ds-search-suggest__label">영어 회화</span></span></a></li>
+        <li role="none"><a class="ds-search-suggest__item" role="option" id="search-suggestion-ex1-2" href="#"><i class="ds-icon ds-icon--clock" aria-hidden="true"></i><span class="ds-search-suggest__content"><span class="ds-search-suggest__label">모의고사</span></span></a></li>
+        <li role="none"><a class="ds-search-suggest__item" role="option" id="search-suggestion-ex1-3" href="#"><i class="ds-icon ds-icon--clock" aria-hidden="true"></i><span class="ds-search-suggest__content"><span class="ds-search-suggest__label">환불 규정</span></span></a></li>
+      </ul>
+    </div>
   </div>
-  <div class="ds-search-suggest" id="pv-sg">
-    <ul class="ds-search-suggest__list" role="listbox" aria-label="추천어">
-      <li role="none"><a class="ds-search-suggest__item" role="option" id="pv-sg-1" href="#"><i class="ds-icon ds-icon--search" aria-hidden="true"></i><span class="ds-search-suggest__content"><span class="ds-search-suggest__label">디자인 시스템</span></span></a></li>
-      <li role="none"><a class="ds-search-suggest__item" role="option" id="pv-sg-2" href="#"><i class="ds-icon ds-icon--search" aria-hidden="true"></i><span class="ds-search-suggest__content"><span class="ds-search-suggest__label">디자인 가이드</span><span class="ds-search-suggest__desc">문서 12개</span></span></a></li>
-      <li role="none"><a class="ds-search-suggest__item" role="option" id="pv-sg-3" href="#"><i class="ds-icon ds-icon--search" aria-hidden="true"></i><span class="ds-search-suggest__content"><span class="ds-search-suggest__label">디자인 토큰</span></span></a></li>
+  <section class="u-col u-gap-2">
+    <h3 class="ds-t05 ds-fw-semibold">인기 강의</h3>
+    <ul class="ds-list" data-variant="inset" data-divider>
+      <li><a class="ds-list-item" href="#"><span class="ds-list-item__content"><span class="ds-list-item__title">영어 회화 기초</span><span class="ds-list-item__desc">강의 24개</span></span></a></li>
+      <li><a class="ds-list-item" href="#"><span class="ds-list-item__content"><span class="ds-list-item__title">컴퓨터 활용 실무</span><span class="ds-list-item__desc">강의 30개</span></span></a></li>
+      <li><a class="ds-list-item" href="#"><span class="ds-list-item__content"><span class="ds-list-item__title">비즈니스 이메일 쓰기</span><span class="ds-list-item__desc">강의 16개</span></span></a></li>
     </ul>
+  </section>
+</div>
+```
+
+### 입력하는 동안에는 추천어 보여 주기
+
+글자를 입력하는 동안에는 `search` 아이콘을 단 추천어를 보여 줍니다. 강의 수처럼 고르는 데 도움이 되는 정보는 보조 설명으로 붙입니다.
+
+```html
+<div class="u-col u-gap-4 u-full" style="max-width: 420px">
+  <div class="ds-search-anchor">
+    <div class="ds-input" data-variant="outline" data-size="medium">
+      <i class="ds-icon ds-icon--search ds-input__icon" aria-hidden="true"></i>
+      <input class="ds-input__control" type="search" role="combobox" aria-label="강의 검색" aria-controls="search-suggestion-ex2" aria-expanded="true" aria-autocomplete="list" placeholder="검색어를 입력하세요" value="영어">
+      <button type="button" class="ds-input__clear" aria-label="지우기"></button>
+    </div>
+    <div class="ds-search-suggest" id="search-suggestion-ex2">
+      <ul class="ds-search-suggest__list" role="listbox" aria-label="추천 검색어">
+        <li role="none"><a class="ds-search-suggest__item" role="option" id="search-suggestion-ex2-1" href="#"><i class="ds-icon ds-icon--search" aria-hidden="true"></i><span class="ds-search-suggest__content"><span class="ds-search-suggest__label">영어 회화</span><span class="ds-search-suggest__desc">강의 24개</span></span></a></li>
+        <li role="none"><a class="ds-search-suggest__item" role="option" id="search-suggestion-ex2-2" href="#"><i class="ds-icon ds-icon--search" aria-hidden="true"></i><span class="ds-search-suggest__content"><span class="ds-search-suggest__label">영어 문법</span><span class="ds-search-suggest__desc">강의 18개</span></span></a></li>
+        <li role="none"><a class="ds-search-suggest__item" role="option" id="search-suggestion-ex2-3" href="#"><i class="ds-icon ds-icon--search" aria-hidden="true"></i><span class="ds-search-suggest__content"><span class="ds-search-suggest__label">비즈니스 영어</span><span class="ds-search-suggest__desc">강의 9개</span></span></a></li>
+      </ul>
+    </div>
   </div>
+  <section class="u-col u-gap-2">
+    <h3 class="ds-t05 ds-fw-semibold">인기 강의</h3>
+    <ul class="ds-list" data-variant="inset" data-divider>
+      <li><a class="ds-list-item" href="#"><span class="ds-list-item__content"><span class="ds-list-item__title">영어 회화 기초</span><span class="ds-list-item__desc">강의 24개</span></span></a></li>
+      <li><a class="ds-list-item" href="#"><span class="ds-list-item__content"><span class="ds-list-item__title">컴퓨터 활용 실무</span><span class="ds-list-item__desc">강의 30개</span></span></a></li>
+      <li><a class="ds-list-item" href="#"><span class="ds-list-item__content"><span class="ds-list-item__title">비즈니스 이메일 쓰기</span><span class="ds-list-item__desc">강의 16개</span></span></a></li>
+    </ul>
+  </section>
 </div>
-<div class="ds-search-suggest" style="width:320px">
-  <div class="ds-search-suggest__heading" id="pv-sg-h">최근 검색어</div>
-  <ul class="ds-search-suggest__list" role="listbox" aria-labelledby="pv-sg-h">
-    <li role="none"><a class="ds-search-suggest__item" role="option" href="#"><i class="ds-icon ds-icon--clock" aria-hidden="true"></i><span class="ds-search-suggest__content"><span class="ds-search-suggest__label">회의록</span></span></a></li>
-    <li role="none"><a class="ds-search-suggest__item" role="option" href="#"><i class="ds-icon ds-icon--clock" aria-hidden="true"></i><span class="ds-search-suggest__content"><span class="ds-search-suggest__label">주간 보고</span></span></a></li>
-  </ul>
+```
+
+### 찾은 것이 없으면 안내 문구 보여 주기
+
+맞는 추천어가 없으면 빈 칸 대신 `ds-search-suggest__empty` 문구를 보여 줍니다. 아무것도 뜨지 않으면 검색이 멈춘 것처럼 보입니다.
+
+```html
+<div class="u-col u-gap-4 u-full" style="max-width: 420px">
+  <div class="ds-search-anchor">
+    <div class="ds-input" data-variant="outline" data-size="medium">
+      <i class="ds-icon ds-icon--search ds-input__icon" aria-hidden="true"></i>
+      <input class="ds-input__control" type="search" role="combobox" aria-label="강의 검색" aria-controls="search-suggestion-ex3" aria-expanded="true" aria-autocomplete="list" placeholder="검색어를 입력하세요" value="주말 원어민 회화 심화반">
+      <button type="button" class="ds-input__clear" aria-label="지우기"></button>
+    </div>
+    <div class="ds-search-suggest" id="search-suggestion-ex3">
+      <p class="ds-search-suggest__empty">검색 결과가 없어요</p>
+    </div>
+  </div>
+  <section class="u-col u-gap-2">
+    <h3 class="ds-t05 ds-fw-semibold">인기 강의</h3>
+    <ul class="ds-list" data-variant="inset" data-divider>
+      <li><a class="ds-list-item" href="#"><span class="ds-list-item__content"><span class="ds-list-item__title">영어 회화 기초</span><span class="ds-list-item__desc">강의 24개</span></span></a></li>
+      <li><a class="ds-list-item" href="#"><span class="ds-list-item__content"><span class="ds-list-item__title">컴퓨터 활용 실무</span><span class="ds-list-item__desc">강의 30개</span></span></a></li>
+      <li><a class="ds-list-item" href="#"><span class="ds-list-item__content"><span class="ds-list-item__title">비즈니스 이메일 쓰기</span><span class="ds-list-item__desc">강의 16개</span></span></a></li>
+    </ul>
+  </section>
 </div>
-<div class="ds-search-suggest" style="width:320px"><p class="ds-search-suggest__empty">검색 결과가 없어요</p></div>
 ```
 
 ## 규격

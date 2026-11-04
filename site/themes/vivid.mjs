@@ -162,4 +162,4 @@ export const body = (art) => `<header class="vv-top"><div class="vv-wrap"><a cla
     </div>
   </section>
 </main>
-<footer class="vv-foot"><div class="vv-wrap"><b>한빛 시험센터</b>이 화면은 YBM DS 테마 예시예요. 시험, 기관, 연락처는 모두 가상입니다.<br>고객센터 1588-0000 · help@example.com</div></footer>`;
+<footer class="vv-foot"><div class="vv-wrap"><b>한빛 시험센터</b>이 화면은 yds 테마 예시예요. 시험, 기관, 연락처는 모두 가상입니다.<br>고객센터 1588-0000 · help@example.com</div></footer>`;

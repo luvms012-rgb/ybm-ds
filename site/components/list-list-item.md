@@ -54,17 +54,107 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 예시
 
+### 줄 전체가 링크면 값과 꺾쇠만 두기
+
+줄 전체가 하나의 링크일 때는 오른쪽에 값과 꺾쇠만 두고 다른 버튼은 넣지 않습니다. 누를 곳이 줄 하나뿐이라 어디를 눌러도 같은 화면으로 갑니다.
+
 ```html
-<ul class="ds-list" data-variant="inset" data-divider>
-  <li><a class="ds-list-item" href="#"><span class="ds-list-item__prefix"><i class="ds-icon ds-icon--id-card" aria-hidden="true"></i></span><span class="ds-list-item__content"><span class="ds-list-item__title">내 정보</span><span class="ds-list-item__desc">이름 · 연락처 · 이메일</span></span><i class="ds-icon ds-icon--chevron-right ds-list-item__chevron" aria-hidden="true"></i></a></li>
-  <li><a class="ds-list-item" href="#"><span class="ds-list-item__prefix"><i class="ds-icon ds-icon--credit-card" aria-hidden="true"></i></span><span class="ds-list-item__content"><span class="ds-list-item__title">결제 수단</span></span><span class="ds-list-item__suffix">카드 2개</span><i class="ds-icon ds-icon--chevron-right ds-list-item__chevron" aria-hidden="true"></i></a></li>
-  <li><label class="ds-list-item"><span class="ds-list-item__prefix"><i class="ds-icon ds-icon--message-circle" aria-hidden="true"></i></span><span class="ds-list-item__content"><span class="ds-list-item__title">알림 받기</span></span><span class="ds-list-item__suffix"><span class="ds-switch"><input type="checkbox" role="switch" class="ds-switch__control" checked aria-label="알림 받기"></span></span></label></li>
-  <li><a class="ds-list-item" href="#" aria-disabled="true"><span class="ds-list-item__prefix"><i class="ds-icon ds-icon--globe" aria-hidden="true"></i></span><span class="ds-list-item__content"><span class="ds-list-item__title">언어 설정</span><span class="ds-list-item__desc">준비 중</span></span></a></li>
+<ul class="ds-list u-full" data-variant="inset" data-divider style="max-width: 420px">
+  <li>
+    <a class="ds-list-item" href="#">
+      <span class="ds-list-item__prefix"><i class="ds-icon ds-icon--user" aria-hidden="true"></i></span>
+      <span class="ds-list-item__content">
+        <span class="ds-list-item__title">내 정보</span>
+        <span class="ds-list-item__desc">이름, 연락처, 이메일</span>
+      </span>
+      <i class="ds-icon ds-icon--chevron-right ds-list-item__chevron" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="ds-list-item" href="#">
+      <span class="ds-list-item__prefix"><i class="ds-icon ds-icon--credit-card" aria-hidden="true"></i></span>
+      <span class="ds-list-item__content"><span class="ds-list-item__title">결제 수단</span></span>
+      <span class="ds-list-item__suffix">카드 2개</span>
+      <i class="ds-icon ds-icon--chevron-right ds-list-item__chevron" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="ds-list-item" href="#">
+      <span class="ds-list-item__prefix"><i class="ds-icon ds-icon--map-pin" aria-hidden="true"></i></span>
+      <span class="ds-list-item__content"><span class="ds-list-item__title">배송지</span></span>
+      <span class="ds-list-item__suffix">2곳</span>
+      <i class="ds-icon ds-icon--chevron-right ds-list-item__chevron" aria-hidden="true"></i>
+    </a>
+  </li>
 </ul>
-<ul class="ds-list">
-  <li><a class="ds-list-item" href="#" data-size="small"><span class="ds-list-item__content"><span class="ds-list-item__title">공지사항</span></span><i class="ds-icon ds-icon--chevron-right ds-list-item__chevron" aria-hidden="true"></i></a></li>
-  <li><a class="ds-list-item" href="#" data-size="small"><span class="ds-list-item__content"><span class="ds-list-item__title">자주 묻는 질문</span></span><span class="ds-list-item__suffix"><span class="ds-badge" data-tone="brand">NEW</span></span><i class="ds-icon ds-icon--chevron-right ds-list-item__chevron" aria-hidden="true"></i></a></li>
-  <li><a class="ds-list-item" href="#" data-size="small"><span class="ds-list-item__content"><span class="ds-list-item__title">1:1 문의</span></span><i class="ds-icon ds-icon--chevron-right ds-list-item__chevron" aria-hidden="true"></i></a></li>
+```
+
+### 바로 바뀌는 설정은 줄 끝에 Switch 두기
+
+누르는 즉시 반영되는 설정은 줄 끝에 Switch를 두고 줄 전체를 `label`로 감쌉니다. 글자를 눌러도 켜고 꺼져 누를 자리가 넓어집니다.
+
+```html
+<ul class="ds-list u-full" data-variant="inset" data-divider style="max-width: 420px">
+  <li>
+    <label class="ds-list-item">
+      <span class="ds-list-item__content">
+        <span class="ds-list-item__title">주문, 배송 알림</span>
+        <span class="ds-list-item__desc">주문 상태가 바뀌면 알려 드려요</span>
+      </span>
+      <span class="ds-list-item__suffix"><span class="ds-switch"><input type="checkbox" role="switch" class="ds-switch__control" checked aria-label="주문, 배송 알림"></span></span>
+    </label>
+  </li>
+  <li>
+    <label class="ds-list-item">
+      <span class="ds-list-item__content">
+        <span class="ds-list-item__title">이벤트, 혜택 알림</span>
+        <span class="ds-list-item__desc">쿠폰과 할인 소식을 알려 드려요</span>
+      </span>
+      <span class="ds-list-item__suffix"><span class="ds-switch"><input type="checkbox" role="switch" class="ds-switch__control" aria-label="이벤트, 혜택 알림"></span></span>
+    </label>
+  </li>
+  <li>
+    <label class="ds-list-item">
+      <span class="ds-list-item__content">
+        <span class="ds-list-item__title">밤 시간 알림 받기</span>
+        <span class="ds-list-item__desc">밤 9시부터 아침 8시까지</span>
+      </span>
+      <span class="ds-list-item__suffix"><span class="ds-switch"><input type="checkbox" role="switch" class="ds-switch__control" aria-label="밤 시간 알림 받기"></span></span>
+    </label>
+  </li>
+</ul>
+```
+
+### 동작이 여럿이면 줄은 링크로 두지 않기
+
+한 줄에 수정, 삭제처럼 동작이 여럿이면 줄은 링크로 만들지 않고 버튼을 줄 끝에 둡니다. 누를 수 있는 요소는 한 줄에 3개까지만 둡니다.
+
+```html
+<ul class="ds-list u-full" data-variant="inset" data-divider style="max-width: 420px">
+  <li>
+    <div class="ds-list-item">
+      <span class="ds-list-item__content">
+        <span class="ds-list-item__title">집 <span class="ds-badge">기본</span></span>
+        <span class="ds-list-item__desc">서울시 종로구 종로 1길 23, 4층</span>
+      </span>
+      <span class="ds-list-item__suffix">
+        <button class="ds-btn" data-variant="neutralWeak" data-size="xsmall">수정</button>
+        <button class="ds-btn" data-variant="ghost" data-size="xsmall">삭제</button>
+      </span>
+    </div>
+  </li>
+  <li>
+    <div class="ds-list-item">
+      <span class="ds-list-item__content">
+        <span class="ds-list-item__title">회사</span>
+        <span class="ds-list-item__desc">서울시 중구 세종대로 45, 10층</span>
+      </span>
+      <span class="ds-list-item__suffix">
+        <button class="ds-btn" data-variant="neutralWeak" data-size="xsmall">수정</button>
+        <button class="ds-btn" data-variant="ghost" data-size="xsmall">삭제</button>
+      </span>
+    </div>
+  </li>
 </ul>
 ```
 

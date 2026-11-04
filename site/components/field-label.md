@@ -46,16 +46,80 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 예시
 
+### 꼭 넣을 칸과 비워도 되는 칸 나누기
+
+꼭 넣어야 하는 칸에는 라벨 옆에 필수 점을, 비워도 되는 칸에는 '선택'을 붙입니다. 필수 점은 화면 읽기 프로그램이 읽지 않으므로 입력 요소에 `required`를 함께 붙입니다.
+
 ```html
-<div class="ds-field">
-  <div class="ds-field__header"><label class="ds-field__label" for="pv-name">이름</label><span class="ds-field__required" aria-hidden="true"></span></div>
-  <div class="ds-input" data-variant="outline"><input class="ds-input__control" id="pv-name" placeholder="이름을 입력해 주세요"></div>
-  <div class="ds-field__footer"><p class="ds-field__help">실명으로 입력해 주세요</p></div>
+<form class="u-col u-gap-5 u-full" style="max-width: 360px">
+  <div class="ds-field">
+    <div class="ds-field__header">
+      <label class="ds-field__label" for="field-label-ex1-name">이름</label>
+      <span class="ds-field__required" aria-hidden="true"></span>
+    </div>
+    <div class="ds-input" data-variant="outline">
+      <input class="ds-input__control" id="field-label-ex1-name" placeholder="이름을 입력해 주세요" required>
+    </div>
+  </div>
+  <div class="ds-field">
+    <div class="ds-field__header">
+      <label class="ds-field__label" for="field-label-ex1-phone">휴대폰 번호</label>
+      <span class="ds-field__required" aria-hidden="true"></span>
+    </div>
+    <div class="ds-input" data-variant="outline">
+      <input class="ds-input__control" id="field-label-ex1-phone" type="tel" placeholder="010-0000-0000" required>
+    </div>
+  </div>
+  <div class="ds-field">
+    <div class="ds-field__header">
+      <label class="ds-field__label" for="field-label-ex1-code">추천인 코드</label>
+      <span class="ds-field__indicator">선택</span>
+    </div>
+    <div class="ds-input" data-variant="outline">
+      <input class="ds-input__control" id="field-label-ex1-code" placeholder="코드를 입력해 주세요">
+    </div>
+    <div class="ds-field__footer">
+      <p class="ds-field__help">친구에게 받은 코드가 있으면 넣어 주세요.</p>
+    </div>
+  </div>
+</form>
+```
+
+### 오류는 고치는 방법까지 알리기
+
+입력 요소에 `aria-invalid="true"`를 붙이면 안내 문구가 오류 문구로 바뀌고 빨간색이 됩니다. 오류 문구에는 무엇이 틀렸는지와 고치는 방법을 함께 적습니다.
+
+```html
+<div class="ds-field u-full" style="max-width: 360px">
+  <div class="ds-field__header">
+    <label class="ds-field__label" for="field-label-ex2-mail">이메일</label>
+    <span class="ds-field__required" aria-hidden="true"></span>
+  </div>
+  <div class="ds-input" data-variant="outline">
+    <input class="ds-input__control" id="field-label-ex2-mail" type="email" value="hana@example" aria-invalid="true" aria-describedby="field-label-ex2-error" required>
+  </div>
+  <div class="ds-field__footer">
+    <p class="ds-field__help">로그인할 때 쓰는 이메일이에요.</p>
+    <p class="ds-field__error" id="field-label-ex2-error">이메일 주소가 끝까지 들어가지 않았어요. 예: hana@example.com</p>
+  </div>
 </div>
-<div class="ds-field">
-  <div class="ds-field__header"><label class="ds-field__label" for="pv-mail">이메일</label></div>
-  <div class="ds-input" data-variant="outline"><input class="ds-input__control" id="pv-mail" value="ybm@" aria-invalid="true"></div>
-  <div class="ds-field__footer"><p class="ds-field__error">이메일 형식이 올바르지 않아요</p></div>
+```
+
+### 글자 수 제한은 카운트로 보여 주기
+
+글자 수 제한이 있는 칸은 아래 오른쪽에 지금 글자 수와 최대 글자 수를 보여 줍니다. 안내 문구는 왼쪽에 두어 두 정보가 한 줄에 함께 읽힙니다.
+
+```html
+<div class="ds-field u-full" style="max-width: 420px">
+  <div class="ds-field__header">
+    <label class="ds-field__label" for="field-label-ex3-text">문의 내용</label>
+    <span class="ds-field__required" aria-hidden="true"></span>
+  </div>
+  <textarea class="ds-textarea" id="field-label-ex3-text" rows="4" maxlength="500" placeholder="궁금한 점을 자세히 적어 주세요" required>주문한 책이 아직 오지 않았어요. 배송 상황을 알려 주세요.</textarea>
+  <div class="ds-field__footer">
+    <p class="ds-field__help">주민등록번호 같은 개인 정보는 적지 말아 주세요.</p>
+    <span class="ds-field__count">33/500</span>
+  </div>
 </div>
 ```
 

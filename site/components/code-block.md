@@ -51,8 +51,58 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 예시
 
+### AI 답변 안에서 코드 보여 주기
+
+Markdown 답변 안의 코드는 Code Block에 넣고, 머리줄에 언어 이름과 복사 버튼을 둡니다. 복사 버튼에 `data-ds-copy`를 붙이면 누를 때 코드가 복사됩니다.
+
 ```html
-<figure class="ds-codeblock"><pre class="ds-codeblock__code"><code>npm install ybm-ds</code></pre></figure>
+<div class="ds-markdown" style="width: 100%; max-width: 560px">
+  <p>오늘 날짜를 우리말 형식으로 보여 주려면 <code>toLocaleDateString</code>을 쓰면 돼요.</p>
+  <figure class="ds-codeblock">
+    <figcaption class="ds-codeblock__header">
+      <span class="ds-codeblock__language">javascript</span>
+      <button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button>
+    </figcaption>
+    <pre class="ds-codeblock__code"><code>const today = new Date();
+const text = today.toLocaleDateString("ko-KR");
+console.log(text); // 2026. 11. 4.</code></pre>
+  </figure>
+  <p>다른 나라 형식이 필요하면 <code>"ko-KR"</code> 자리만 바꾸면 돼요.</p>
+</div>
+```
+
+### 긴 한 줄은 줄을 바꿔 다 보이게
+
+한 줄이 긴 코드는 `data-wrap`을 붙여 가로로 밀지 않고 줄을 바꿔 보여 줍니다. 주소처럼 끝까지 읽고 그대로 붙여 넣어야 하는 코드에 씁니다.
+
+```html
+<div class="ds-markdown" style="width: 100%; max-width: 480px">
+  <p>아래 줄을 페이지의 <code>&lt;head&gt;</code> 안에 붙여 넣어 주세요.</p>
+  <figure class="ds-codeblock" data-wrap>
+    <figcaption class="ds-codeblock__header">
+      <span class="ds-codeblock__language">html</span>
+      <button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button>
+    </figcaption>
+    <pre class="ds-codeblock__code"><code>&lt;link rel="stylesheet" href="https://cdn.example.com/design-system/1.4.0/dist/styles.css"&gt;</code></pre>
+  </figure>
+</div>
+```
+
+### 짧은 명령은 머리줄 없이 끼워 넣기
+
+명령 한 줄처럼 짧고 무엇인지 분명한 코드는 머리줄을 빼고 코드 칸만 둡니다. 순서 안내 사이에 끼워도 글의 흐름이 끊기지 않습니다.
+
+```html
+<div class="ds-markdown" style="width: 100%; max-width: 480px">
+  <h3>프로젝트 받기</h3>
+  <ol>
+    <li>터미널을 열어요.</li>
+    <li>아래 명령을 입력해요.</li>
+  </ol>
+  <figure class="ds-codeblock">
+    <pre class="ds-codeblock__code"><code>git clone https://example.com/team/web.git</code></pre>
+  </figure>
+</div>
 ```
 
 ## 규격

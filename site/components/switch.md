@@ -40,36 +40,42 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 예시
 
+### 설정 목록에서 바로 켜고 끄기
+
+알림 설정처럼 누르는 즉시 반영되는 항목에 Switch를 둡니다. 따로 저장 버튼이 없으므로 켜고 끈 상태가 곧 결과입니다.
+
 ```html
-<label class="ds-switch" data-size="16"><span class="ds-switch__label">16</span><input type="checkbox" role="switch" class="ds-switch__control" checked></label>
-<label class="ds-switch"><span class="ds-switch__label">알림 받기</span><input type="checkbox" role="switch" class="ds-switch__control" checked></label>
-<label class="ds-switch" data-size="32"><span class="ds-switch__label">32</span><input type="checkbox" role="switch" class="ds-switch__control"></label>
+<ul class="ds-list" data-variant="inset" data-divider style="width: 100%; max-width: 420px">
+  <li>
+    <label class="ds-list-item">
+      <span class="ds-list-item__content">
+        <span class="ds-list-item__title">수업 알림</span>
+        <span class="ds-list-item__desc">수업 시작 10분 전에 알려 줘요</span>
+      </span>
+      <span class="ds-list-item__suffix"><span class="ds-switch"><input type="checkbox" role="switch" class="ds-switch__control" checked></span></span>
+    </label>
+  </li>
+  <li>
+    <label class="ds-list-item">
+      <span class="ds-list-item__content">
+        <span class="ds-list-item__title">과제 마감 알림</span>
+        <span class="ds-list-item__desc">마감 하루 전에 알려 줘요</span>
+      </span>
+      <span class="ds-list-item__suffix"><span class="ds-switch"><input type="checkbox" role="switch" class="ds-switch__control" checked></span></span>
+    </label>
+  </li>
+  <li>
+    <label class="ds-list-item">
+      <span class="ds-list-item__content">
+        <span class="ds-list-item__title">혜택과 이벤트 소식</span>
+        <span class="ds-list-item__desc">할인과 새 강의 소식을 보내 줘요</span>
+      </span>
+      <span class="ds-list-item__suffix"><span class="ds-switch"><input type="checkbox" role="switch" class="ds-switch__control"></span></span>
+    </label>
+  </li>
+</ul>
 ```
 
-## 규격
+### 카드 안 기능 하나를 라벨과 함께 켜기
 
-### CSS 변수
-
-서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
-
-| 변수 | 기본값 |
-| --- | --- |
-| `--ds-switch-w` | `38px` |
-| `--ds-switch-h` | `24px` |
-| `--ds-switch-thumb` | `16px` |
-| `--ds-switch-thumb-on` | `20px` |
-| `--ds-switch-on` | `var(--ds-color-bg-brand-solid)` |
-| `--ds-switch-thumb-color` | `var(--ds-color-palette-static-white)` |
-| `--ds-switch-t` | `var(--ds-switch-thumb)` |
-
-### 크기와 여백
-
-```
-size: 24(기본) / 16 / 32   tone: brand(기본) / neutral
-Figma 16: 트랙 26×16 / 썸 10(켜짐 12) / gap x1_5 / label t03 Medium
-       24: 트랙 38×24 / 썸 16(켜짐 20) / gap x2   / label t04 Medium
-       32: 트랙 52×32 / 썸 21(켜짐 26) / gap x2_5 / label t05 Medium
-  트랙 off palette/gray-600 / on bg/neutral-solid(neutral) / bg/brand-solid(brand)
-  썸 fg/on-neutral-solid(neutral) / static-white(brand / checked 는 fg/on-brand-solid, 같은 값) + elevation raised
-  disabled: 트랙 opacity .38 / 라벨 .58 / 썸 static-black-alpha-700
-```
+카드 안에서 자동 연장 같은 기능 하나를 라벨 붙은 Switch로 켜고 끕니다. 켜는 순간 적용되고 언제든 다시 끌 수 있는 기능에 씁니다.

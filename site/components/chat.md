@@ -52,19 +52,68 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 예시
 
+### 말풍선 자리로 누가 한 말인지 나누기
+
+상대 말풍선은 왼쪽, 내 말풍선은 오른쪽에 두고 내 말 아래에 읽음 상태를 붙입니다. 입력 칸이 비어 있는 동안에는 보내기 버튼을 꺼 둡니다.
+
 ```html
-<div style="display:flex;gap:var(--ds-space-x3);padding:var(--ds-space-x5) var(--ds-space-x4)">
-  <p class="ds-chat-system">오늘</p>
-  <div class="ds-chat-bubble">안녕하세요! 무엇을 도와드릴까요?</div>
-  <div style="display:flex;align-items:flex-end;justify-content:flex-end;gap:var(--ds-space-x1_5)"><span class="ds-chat-meta" data-status="read"><b class="ds-chat-meta__status">읽음</b><time>오후 3:24</time></span><div class="ds-chat-bubble" data-sender="user" style="margin-left:0">이번 주 일정 정리해 줘</div></div>
-  <p class="ds-chat-system" data-variant="divider">대화가 종료되었어요</p>
-  <div style="display:flex;gap:var(--ds-space-x4)"><span class="ds-chat-meta" data-status="sending"><b class="ds-chat-meta__status">전송 중</b><time>오후 3:24</time></span><span class="ds-chat-meta" data-status="sent"><time>오후 3:24</time></span><span class="ds-chat-meta" data-status="error"><b class="ds-chat-meta__status">전송 실패</b><time>오후 3:24</time></span></div>
-  <div style="display:flex;gap:var(--ds-space-x3)"><button type="button" class="ds-chat-send" aria-label="보내기"></button><button type="button" class="ds-chat-send" data-state="stop" aria-label="답변 멈추기"></button><button type="button" class="ds-chat-send" aria-label="보내기" disabled></button></div>
+<div class="u-col u-gap-4" style="width: 100%; max-width: 375px">
+  <div class="u-col u-gap-3">
+    <p class="ds-chat-system">오늘</p>
+    <div class="ds-chat-bubble">안녕하세요. 주문 번호를 알려 주시면 배송 상태를 확인해 드릴게요.</div>
+    <div class="u-col u-gap-1">
+      <div class="ds-chat-bubble" data-sender="user">주문 번호는 2611040123이에요</div>
+      <div class="u-flex"><span class="u-grow"></span><span class="ds-chat-meta" data-status="read"><b class="ds-chat-meta__status">읽음</b><time>오후 2:10</time></span></div>
+    </div>
+    <div class="ds-chat-bubble">확인했어요. 상품은 오늘 저녁 6시 전에 도착할 예정이에요.</div>
+  </div>
+  <form class="ds-chat-composer" onsubmit="return false">
+    <button type="button" class="ds-chat-composer__attach" aria-label="첨부"><i class="ds-icon ds-icon--plus" aria-hidden="true"></i></button>
+    <div class="ds-chat-composer__field">
+      <textarea class="ds-chat-composer__input" rows="1" placeholder="메시지를 입력하세요" aria-label="메시지"></textarea>
+      <button type="submit" class="ds-chat-send" aria-label="보내기" disabled></button>
+    </div>
+  </form>
 </div>
-<form class="ds-chat-composer" onsubmit="return false">
-  <button type="button" class="ds-chat-composer__attach" aria-label="첨부"><i class="ds-icon ds-icon--plus" aria-hidden="true"></i></button>
-  <div class="ds-chat-composer__field"><textarea class="ds-chat-composer__input" rows="1" placeholder="메시지를 입력하세요" aria-label="메시지"></textarea><button type="submit" class="ds-chat-send" aria-label="보내기" disabled></button></div>
-</form>
+```
+
+### 답변을 만드는 동안 멈춤 버튼 보여 주기
+
+답변을 만드는 동안에는 보내기 버튼을 멈춤(`data-state="stop"`) 버튼으로 바꿉니다. 답변이 길어지거나 질문을 잘못 보냈을 때 바로 멈출 수 있습니다.
+
+```html
+<div class="u-col u-gap-4" style="width: 100%; max-width: 375px">
+  <div class="u-col u-gap-3">
+    <div class="ds-chat-bubble" data-sender="user">이번 주 수업 일정을 정리해 줘</div>
+    <div class="ds-chat-bubble">월요일 저녁 7시에 회화, 수요일 저녁 7시에 문법 수업이 있어요. 금요일에는</div>
+  </div>
+  <form class="ds-chat-composer" onsubmit="return false">
+    <button type="button" class="ds-chat-composer__attach" aria-label="첨부"><i class="ds-icon ds-icon--plus" aria-hidden="true"></i></button>
+    <div class="ds-chat-composer__field">
+      <textarea class="ds-chat-composer__input" rows="1" placeholder="메시지를 입력하세요" aria-label="메시지"></textarea>
+      <button type="button" class="ds-chat-send" data-state="stop" aria-label="답변 멈추기"></button>
+    </div>
+  </form>
+</div>
+```
+
+### 보내지 못한 메시지 알리기
+
+보내지 못한 말풍선 아래에 `data-status="error"` 상태를 붙여 critical 색 글자로 알립니다. 다시 보내기 버튼을 바로 옆에 두어 고치는 방법까지 보여 줍니다.
+
+```html
+<div class="u-col u-gap-3" style="width: 100%; max-width: 375px">
+  <p class="ds-chat-system" data-variant="divider">오늘</p>
+  <div class="ds-chat-bubble">교환할 상품 사진을 보내 주세요.</div>
+  <div class="u-col u-gap-1">
+    <div class="ds-chat-bubble" data-sender="user">사진 두 장 보낼게요</div>
+    <div class="u-flex u-center u-gap-2">
+      <span class="u-grow"></span>
+      <button class="ds-btn" data-variant="ghost" data-size="xsmall">다시 보내기</button>
+      <span class="ds-chat-meta" data-status="error"><b class="ds-chat-meta__status">전송 실패</b><time>오후 3:24</time></span>
+    </div>
+  </div>
+</div>
 ```
 
 ## 규격

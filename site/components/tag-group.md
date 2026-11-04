@@ -29,15 +29,39 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 예시
 
+### 글 목록 아래 작성 정보 붙이기
+
+게시글 제목 아래에 작성자, 날짜, 조회수를 Tag Group 하나로 붙입니다. 낱말은 조사 없이 짧게 써서 한 줄에 들어가게 합니다.
+
 ```html
-<span class="ds-tag-group"><span>운영팀</span><span>2026.10.22</span><span>조회 128</span></span><span class="ds-tag-group" data-size="t4" data-tone="neutral"><span>t4</span><span>neutral</span></span>
+<ul class="ds-list" data-divider style="width: 100%; max-width: 480px">
+  <li>
+    <a class="ds-list-item" href="#">
+      <span class="ds-list-item__content">
+        <span class="ds-list-item__title">11월 정기 점검 안내</span>
+        <span class="ds-tag-group"><span>운영팀</span><span>2026.11.02</span><span>조회 1,204</span></span>
+      </span>
+    </a>
+  </li>
+  <li>
+    <a class="ds-list-item" href="#">
+      <span class="ds-list-item__content">
+        <span class="ds-list-item__title">겨울 방학 특강 신청을 받아요</span>
+        <span class="ds-tag-group"><span>교육팀</span><span>2026.10.28</span><span>조회 862</span></span>
+      </span>
+    </a>
+  </li>
+  <li>
+    <a class="ds-list-item" href="#">
+      <span class="ds-list-item__content">
+        <span class="ds-list-item__title">수강권 환불 기준이 바뀌어요</span>
+        <span class="ds-tag-group"><span>운영팀</span><span>2026.10.15</span><span>조회 2,310</span></span>
+      </span>
+    </a>
+  </li>
+</ul>
 ```
 
-## 규격
+### 카드 안 강의 정보를 한 줄로
 
-### 크기와 여백
-
-```
-size: t3(기본 13/20) / t4(14/21)   tone: neutralSubtle(기본) / neutral
-Figma: 항목 사이 "/" 구분 / gap x1 / neutral fg/neutral-muted / neutralSubtle fg/neutral-subtle
-```
+강의 카드에서 수준, 강의 수, 전체 시간을 한 줄로 묶습니다. 묶음 안의 글자 크기는 모두 같게 두고, 카드 글에 맞춰 `data-size="t4"`를 씁니다.

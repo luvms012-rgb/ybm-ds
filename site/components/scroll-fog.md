@@ -31,12 +31,42 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 예시
 
+### 긴 약관 상자의 위아래 흐리게
+
+정해진 높이 안에서 스크롤되는 약관 상자에 Scroll Fog를 씌웁니다. 흐려지는 위아래에 20 이상 여백을 두어 첫 줄과 끝 줄이 흐림에 가려지지 않게 합니다.
+
 ```html
-<div class="ds-scrollfog" style="width:240px;height:180px;padding-block:20px">
-  <p>스크롤 되는 내용 1</p><p>스크롤 되는 내용 2</p><p>스크롤 되는 내용 3</p><p>스크롤 되는 내용 4</p><p>스크롤 되는 내용 5</p><p>스크롤 되는 내용 6</p><p>스크롤 되는 내용 7</p><p>스크롤 되는 내용 8</p><p>스크롤 되는 내용 9</p>
+<div class="u-col u-gap-3 u-full" style="max-width: 420px">
+  <span class="ds-t05 ds-fw-semibold" id="scroll-fog-ex1-title">서비스 이용 약관</span>
+  <div class="ds-scrollfog u-col u-gap-3" tabindex="0" aria-labelledby="scroll-fog-ex1-title" style="max-height: 200px; padding-block: var(--ds-space-x5)">
+    <p class="ds-t04 ds-fg-muted">제1조 (목적) 이 약관은 온라인 강의 서비스를 이용하는 조건과 절차를 정해요.</p>
+    <p class="ds-t04 ds-fg-muted">제2조 (회원 가입) 가입 신청서를 내고 약관에 동의하면 회원이 돼요.</p>
+    <p class="ds-t04 ds-fg-muted">제3조 (수강 기간) 수강 기간은 결제한 날부터 강의마다 정한 기간까지예요.</p>
+    <p class="ds-t04 ds-fg-muted">제4조 (환불) 수강을 시작하기 전에는 결제한 금액을 모두 돌려받을 수 있어요.</p>
+    <p class="ds-t04 ds-fg-muted">제5조 (개인 정보) 회원 정보는 개인 정보 처리 방침에 따라 안전하게 다뤄요.</p>
+    <p class="ds-t04 ds-fg-muted">제6조 (약관 변경) 약관을 바꿀 때는 7일 전에 공지로 알려 드려요.</p>
+  </div>
+  <label class="ds-checkbox" data-tone="neutral">
+    <input type="checkbox" class="ds-checkbox__control">
+    <span>약관을 읽고 동의해요</span>
+  </label>
 </div>
-<div class="ds-scrollfog" data-direction="horizontal" style="display:flex;gap:var(--ds-space-x2);width:300px;padding-inline:20px">
-  <span class="ds-badge" data-size="large">전체</span><span class="ds-badge" data-size="large">디자인</span><span class="ds-badge" data-size="large">개발</span><span class="ds-badge" data-size="large">기획</span><span class="ds-badge" data-size="large">마케팅</span><span class="ds-badge" data-size="large">영업</span><span class="ds-badge" data-size="large">운영</span>
+```
+
+### 가로로 넘기는 칩 줄의 양 끝 흐리게
+
+가로로 넘기는 필터 칩 줄에는 `data-direction="horizontal"`을 붙입니다. 양 끝이 흐려져 옆으로 넘기면 칩이 더 있다는 것을 알 수 있습니다.
+
+```html
+<div class="ds-scrollfog u-flex u-gap-2 u-full" data-direction="horizontal" role="group" aria-label="강의 분야" style="max-width: 360px; padding-inline: var(--ds-space-x5)">
+  <button type="button" class="ds-chip" data-variant="outlineWeak" data-size="small" aria-pressed="true">전체</button>
+  <button type="button" class="ds-chip" data-variant="outlineWeak" data-size="small" aria-pressed="false">어학</button>
+  <button type="button" class="ds-chip" data-variant="outlineWeak" data-size="small" aria-pressed="false">자격증</button>
+  <button type="button" class="ds-chip" data-variant="outlineWeak" data-size="small" aria-pressed="false">취업</button>
+  <button type="button" class="ds-chip" data-variant="outlineWeak" data-size="small" aria-pressed="false">컴퓨터</button>
+  <button type="button" class="ds-chip" data-variant="outlineWeak" data-size="small" aria-pressed="false">비즈니스</button>
+  <button type="button" class="ds-chip" data-variant="outlineWeak" data-size="small" aria-pressed="false">여행 회화</button>
+  <button type="button" class="ds-chip" data-variant="outlineWeak" data-size="small" aria-pressed="false">교양</button>
 </div>
 ```
 

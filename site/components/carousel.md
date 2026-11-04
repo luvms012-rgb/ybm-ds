@@ -48,16 +48,136 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 예시
 
+### 추천 상품을 옆으로 넘겨 보기
+
+같은 모양의 상품 카드를 한 줄로 늘어놓고 옆으로 넘겨 봅니다. PC에서는 양 끝 버튼으로 한 화면씩 넘기고, 끝에 닿으면 그쪽 버튼이 사라집니다.
+
 ```html
-<div class="ds-carousel" role="region" aria-roledescription="carousel" aria-label="추천" style="width:343px">
+<div class="u-col u-gap-3" style="width: 100%; max-width: 420px">
+  <div class="u-flex u-center u-between">
+    <h3 class="ds-t06 ds-fw-bold">함께 보면 좋은 상품</h3>
+    <a class="ds-link" data-size="small" href="#">전체 보기</a>
+  </div>
+  <div class="ds-carousel" role="region" aria-roledescription="carousel" aria-label="함께 보면 좋은 상품">
+    <div class="ds-carousel__scroller">
+      <div class="ds-carousel__item">
+        <a class="ds-card" data-variant="subtle" data-size="small" href="#" style="width: 160px">
+          <div class="ds-imageframe" data-radius="md"><img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=320&q=70" alt=""></div>
+          <div class="u-col u-gap-0_5">
+            <span class="ds-t04">클래식 손목시계</span>
+            <span class="ds-t04 ds-fw-bold">89,000원</span>
+          </div>
+        </a>
+      </div>
+      <div class="ds-carousel__item">
+        <a class="ds-card" data-variant="subtle" data-size="small" href="#" style="width: 160px">
+          <div class="ds-imageframe" data-radius="md"><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=320&q=70" alt=""></div>
+          <div class="u-col u-gap-0_5">
+            <span class="ds-t04">무선 헤드폰</span>
+            <span class="ds-t04 ds-fw-bold">129,000원</span>
+          </div>
+        </a>
+      </div>
+      <div class="ds-carousel__item">
+        <a class="ds-card" data-variant="subtle" data-size="small" href="#" style="width: 160px">
+          <div class="ds-imageframe" data-radius="md"><img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=320&q=70" alt=""></div>
+          <div class="u-col u-gap-0_5">
+            <span class="ds-t04">즉석 카메라</span>
+            <span class="ds-t04 ds-fw-bold">98,000원</span>
+          </div>
+        </a>
+      </div>
+      <div class="ds-carousel__item">
+        <a class="ds-card" data-variant="subtle" data-size="small" href="#" style="width: 160px">
+          <div class="ds-imageframe" data-radius="md"><img src="https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=320&q=70" alt=""></div>
+          <div class="u-col u-gap-0_5">
+            <span class="ds-t04">선글라스</span>
+            <span class="ds-t04 ds-fw-bold">45,000원</span>
+          </div>
+        </a>
+      </div>
+    </div>
+    <button type="button" class="ds-carousel__button" data-direction="previous" aria-label="이전"><i class="ds-icon ds-icon--chevron-left ds-icon--sm" aria-hidden="true"></i></button>
+    <button type="button" class="ds-carousel__button" data-direction="next" aria-label="다음"><i class="ds-icon ds-icon--chevron-right ds-icon--sm" aria-hidden="true"></i></button>
+  </div>
+</div>
+```
+
+### 사진 여러 장을 한 장씩 넘기기
+
+사진은 Image Frame의 비율 안에 꽉 채우고, 한 장을 한 항목으로 넣어 넘깁니다. 사진마다 순서 표시를 얹어 몇 번째 사진인지 알려 줍니다.
+
+```html
+<div class="ds-carousel" role="region" aria-roledescription="carousel" aria-label="숙소 사진" style="width: 100%; max-width: 420px">
   <div class="ds-carousel__scroller">
-    <div class="ds-carousel__item"><div class="ds-imageframe" data-ratio="4:3" style="width:240px"><span class="pv-ph">1</span></div></div>
-    <div class="ds-carousel__item"><div class="ds-imageframe" data-ratio="4:3" style="width:240px"><span class="pv-ph">2</span></div></div>
-    <div class="ds-carousel__item"><div class="ds-imageframe" data-ratio="4:3" style="width:240px"><span class="pv-ph">3</span></div></div>
-    <div class="ds-carousel__item"><div class="ds-imageframe" data-ratio="4:3" style="width:240px"><span class="pv-ph">4</span></div></div>
+    <div class="ds-carousel__item" style="width: 100%">
+      <div class="ds-imageframe" data-ratio="4:3" data-radius="lg" style="width: 100%">
+        <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=840&q=70" alt="산으로 둘러싸인 호수">
+        <div class="ds-imageframe__floater" data-position="bottom-end"><span class="ds-imageframe__indicator">1/4</span></div>
+      </div>
+    </div>
+    <div class="ds-carousel__item" style="width: 100%">
+      <div class="ds-imageframe" data-ratio="4:3" data-radius="lg" style="width: 100%">
+        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=840&q=70" alt="구름 위로 솟은 산">
+        <div class="ds-imageframe__floater" data-position="bottom-end"><span class="ds-imageframe__indicator">2/4</span></div>
+      </div>
+    </div>
+    <div class="ds-carousel__item" style="width: 100%">
+      <div class="ds-imageframe" data-ratio="4:3" data-radius="lg" style="width: 100%">
+        <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=840&q=70" alt="안개 낀 산자락">
+        <div class="ds-imageframe__floater" data-position="bottom-end"><span class="ds-imageframe__indicator">3/4</span></div>
+      </div>
+    </div>
+    <div class="ds-carousel__item" style="width: 100%">
+      <div class="ds-imageframe" data-ratio="4:3" data-radius="lg" style="width: 100%">
+        <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=840&q=70" alt="햇살이 드는 숲">
+        <div class="ds-imageframe__floater" data-position="bottom-end"><span class="ds-imageframe__indicator">4/4</span></div>
+      </div>
+    </div>
   </div>
   <button type="button" class="ds-carousel__button" data-direction="previous" aria-label="이전"><i class="ds-icon ds-icon--chevron-left ds-icon--sm" aria-hidden="true"></i></button>
   <button type="button" class="ds-carousel__button" data-direction="next" aria-label="다음"><i class="ds-icon ds-icon--chevron-right ds-icon--sm" aria-hidden="true"></i></button>
+</div>
+```
+
+### 터치 화면에서는 손가락으로 넘기기
+
+터치 화면에서는 넘기기 버튼을 빼고 손가락으로 밀어 넘깁니다. 다음 항목이 조금 보이게 두어 옆에 더 있다는 것을 알립니다.
+
+```html
+<div class="u-col u-gap-3" style="width: 100%; max-width: 375px">
+  <h3 class="ds-t06 ds-fw-bold">진행 중인 이벤트</h3>
+  <div class="ds-carousel" role="region" aria-roledescription="carousel" aria-label="진행 중인 이벤트">
+    <div class="ds-carousel__scroller">
+      <div class="ds-carousel__item">
+        <a class="ds-card" data-variant="subtle" data-size="small" href="#" style="width: 260px">
+          <div class="ds-imageframe" data-ratio="16:9" data-radius="md"><img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=520&q=70" alt=""></div>
+          <header class="ds-card__header">
+            <h4 class="ds-card__title">주말 장보기 할인</h4>
+            <p class="ds-card__desc">11월 30일까지</p>
+          </header>
+        </a>
+      </div>
+      <div class="ds-carousel__item">
+        <a class="ds-card" data-variant="subtle" data-size="small" href="#" style="width: 260px">
+          <div class="ds-imageframe" data-ratio="16:9" data-radius="md"><img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=520&q=70" alt=""></div>
+          <header class="ds-card__header">
+            <h4 class="ds-card__title">커피 원두 1+1</h4>
+            <p class="ds-card__desc">12월 7일까지</p>
+          </header>
+        </a>
+      </div>
+      <div class="ds-carousel__item">
+        <a class="ds-card" data-variant="subtle" data-size="small" href="#" style="width: 260px">
+          <div class="ds-imageframe" data-ratio="16:9" data-radius="md"><img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=520&q=70" alt=""></div>
+          <header class="ds-card__header">
+            <h4 class="ds-card__title">겨울 독서 챌린지</h4>
+            <p class="ds-card__desc">12월 31일까지</p>
+          </header>
+        </a>
+      </div>
+    </div>
+  </div>
 </div>
 ```
 

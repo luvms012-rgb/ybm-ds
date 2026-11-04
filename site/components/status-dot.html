@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Status Dot - YBM DS</title>
+<title>Status Dot - yds</title>
 <meta name="description" content="작은 색 점으로 상태를 알려 주는 컴포넌트입니다.">
 <!-- 생성물: node site/build.mjs가 만든다. 직접 고치지 말고 site/build.mjs나 site/src를 고친다 -->
 <script>try { var t = localStorage.getItem("ybm-site-theme"); if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.dataset.theme = "dark"; } catch (e) {}</script>
 <link rel="icon" href="../assets/logo-ybmnet.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../dist/ybm-ds.css">
-<link rel="stylesheet" href="../assets/site.css?v=bb7371b2">
+<link rel="stylesheet" href="../assets/site.css?v=1656b6c0">
 <script src="../../dist/ybm-ds.js" defer></script>
-<script src="../assets/site.js?v=bb7371b2" defer></script>
+<script src="../assets/site.js?v=1656b6c0" defer></script>
 </head>
 <body class="site">
 <a class="site-skip" href="#main">본문 바로가기</a>
@@ -131,22 +131,212 @@
 <thead><tr><th scope="col">구분</th><th scope="col">내용</th></tr></thead>
 <tbody><tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>색만으로 뜻을 전하지 않도록 글자와 함께 씁니다.</td></tr>
 <tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>프로필 사진 위의 상태는 Avatar의 Status를 씁니다.</td></tr></tbody></table></div>
-<h2 id="examples">예시<a class="site-anchor" href="#examples" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><div class="site-example">
+<h2 id="examples">예시<a class="site-anchor" href="#examples" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><h3>글자와 함께 서비스 상태 알리기</h3>
+<p>점 옆에 정상, 지연, 중단 같은 글자를 함께 적습니다. 색을 구분하기 어려운 사람도 글자로 상태를 읽을 수 있습니다.</p>
+<div class="site-example">
   <div class="site-example__bar"><div class="ds-chiptabs" role="tablist" aria-label="보기 방식"><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-view="preview">미리보기</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-view="code">코드</button></div></div>
-  <div class="site-example__preview"><div class="pv-stage" style="gap:var(--ds-space-x6)">
-    <span style="display:inline-flex;align-items:center;gap:var(--ds-space-x1_5)"><span class="ds-statusdot" data-tone="positive"></span>연결됨</span>
-    <span style="display:inline-flex;align-items:center;gap:var(--ds-space-x1_5)"><span class="ds-statusdot" data-tone="warning"></span>지연</span>
-    <span style="display:inline-flex;align-items:center;gap:var(--ds-space-x1_5)"><span class="ds-statusdot" data-tone="critical"></span>끊김</span>
-    <span style="display:inline-flex;align-items:center;gap:var(--ds-space-x1_5)"><span class="ds-statusdot" data-tone="brand" data-pulse></span>진행 중</span>
-    <span style="display:inline-flex;align-items:center;gap:var(--ds-space-x1_5)"><span class="ds-statusdot"></span>대기</span>
-  </div></div>
+  <div class="site-example__preview"><div class="pv-stage pv-wide"><ul class="ds-list" data-variant="inset" data-divider style="width: 100%; max-width: 420px">
+  <li>
+    <div class="ds-list-item">
+      <span class="ds-list-item__content">
+        <span class="ds-list-item__title">결제</span>
+      </span>
+      <span class="ds-list-item__suffix"><span class="ds-statusdot" data-tone="positive"></span>정상</span>
+    </div>
+  </li>
+  <li>
+    <div class="ds-list-item">
+      <span class="ds-list-item__content">
+        <span class="ds-list-item__title">알림 발송</span>
+        <span class="ds-list-item__desc">평소보다 5분쯤 늦어요</span>
+      </span>
+      <span class="ds-list-item__suffix"><span class="ds-statusdot" data-tone="warning"></span>지연</span>
+    </div>
+  </li>
+  <li>
+    <div class="ds-list-item">
+      <span class="ds-list-item__content">
+        <span class="ds-list-item__title">강의 영상 재생</span>
+        <span class="ds-list-item__desc">복구하고 있어요</span>
+      </span>
+      <span class="ds-list-item__suffix"><span class="ds-statusdot" data-tone="critical"></span>중단</span>
+    </div>
+  </li>
+</ul></div></div>
   <div class="site-example__code" hidden><figure class="ds-codeblock">
   <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">html</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
-  <pre class="ds-codeblock__code"><code>&lt;<span class="hl-t">span</span> <span class="hl-f">style</span>=<span class="hl-s">&quot;display:inline-flex;align-items:center;gap:var(--ds-space-x1_5)&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-statusdot&quot;</span> <span class="hl-f">data-tone</span>=<span class="hl-s">&quot;positive&quot;</span>&gt;&lt;/<span class="hl-t">span</span>&gt;연결됨&lt;/<span class="hl-t">span</span>&gt;
-&lt;<span class="hl-t">span</span> <span class="hl-f">style</span>=<span class="hl-s">&quot;display:inline-flex;align-items:center;gap:var(--ds-space-x1_5)&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-statusdot&quot;</span> <span class="hl-f">data-tone</span>=<span class="hl-s">&quot;warning&quot;</span>&gt;&lt;/<span class="hl-t">span</span>&gt;지연&lt;/<span class="hl-t">span</span>&gt;
-&lt;<span class="hl-t">span</span> <span class="hl-f">style</span>=<span class="hl-s">&quot;display:inline-flex;align-items:center;gap:var(--ds-space-x1_5)&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-statusdot&quot;</span> <span class="hl-f">data-tone</span>=<span class="hl-s">&quot;critical&quot;</span>&gt;&lt;/<span class="hl-t">span</span>&gt;끊김&lt;/<span class="hl-t">span</span>&gt;
-&lt;<span class="hl-t">span</span> <span class="hl-f">style</span>=<span class="hl-s">&quot;display:inline-flex;align-items:center;gap:var(--ds-space-x1_5)&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-statusdot&quot;</span> <span class="hl-f">data-tone</span>=<span class="hl-s">&quot;brand&quot;</span> <span class="hl-f">data-pulse</span>&gt;&lt;/<span class="hl-t">span</span>&gt;진행 중&lt;/<span class="hl-t">span</span>&gt;
-&lt;<span class="hl-t">span</span> <span class="hl-f">style</span>=<span class="hl-s">&quot;display:inline-flex;align-items:center;gap:var(--ds-space-x1_5)&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-statusdot&quot;</span>&gt;&lt;/<span class="hl-t">span</span>&gt;대기&lt;/<span class="hl-t">span</span>&gt;</code></pre>
+  <pre class="ds-codeblock__code"><code>&lt;<span class="hl-t">ul</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list&quot;</span> <span class="hl-f">data-variant</span>=<span class="hl-s">&quot;inset&quot;</span> <span class="hl-f">data-divider</span> <span class="hl-f">style</span>=<span class="hl-s">&quot;width: 100%; max-width: 420px&quot;</span>&gt;
+  &lt;<span class="hl-t">li</span>&gt;
+    &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item&quot;</span>&gt;
+      &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__content&quot;</span>&gt;
+        &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__title&quot;</span>&gt;결제&lt;/<span class="hl-t">span</span>&gt;
+      &lt;/<span class="hl-t">span</span>&gt;
+      &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__suffix&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-statusdot&quot;</span> <span class="hl-f">data-tone</span>=<span class="hl-s">&quot;positive&quot;</span>&gt;&lt;/<span class="hl-t">span</span>&gt;정상&lt;/<span class="hl-t">span</span>&gt;
+    &lt;/<span class="hl-t">div</span>&gt;
+  &lt;/<span class="hl-t">li</span>&gt;
+  &lt;<span class="hl-t">li</span>&gt;
+    &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item&quot;</span>&gt;
+      &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__content&quot;</span>&gt;
+        &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__title&quot;</span>&gt;알림 발송&lt;/<span class="hl-t">span</span>&gt;
+        &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__desc&quot;</span>&gt;평소보다 5분쯤 늦어요&lt;/<span class="hl-t">span</span>&gt;
+      &lt;/<span class="hl-t">span</span>&gt;
+      &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__suffix&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-statusdot&quot;</span> <span class="hl-f">data-tone</span>=<span class="hl-s">&quot;warning&quot;</span>&gt;&lt;/<span class="hl-t">span</span>&gt;지연&lt;/<span class="hl-t">span</span>&gt;
+    &lt;/<span class="hl-t">div</span>&gt;
+  &lt;/<span class="hl-t">li</span>&gt;
+  &lt;<span class="hl-t">li</span>&gt;
+    &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item&quot;</span>&gt;
+      &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__content&quot;</span>&gt;
+        &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__title&quot;</span>&gt;강의 영상 재생&lt;/<span class="hl-t">span</span>&gt;
+        &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__desc&quot;</span>&gt;복구하고 있어요&lt;/<span class="hl-t">span</span>&gt;
+      &lt;/<span class="hl-t">span</span>&gt;
+      &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__suffix&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-statusdot&quot;</span> <span class="hl-f">data-tone</span>=<span class="hl-s">&quot;critical&quot;</span>&gt;&lt;/<span class="hl-t">span</span>&gt;중단&lt;/<span class="hl-t">span</span>&gt;
+    &lt;/<span class="hl-t">div</span>&gt;
+  &lt;/<span class="hl-t">li</span>&gt;
+&lt;/<span class="hl-t">ul</span>&gt;</code></pre>
+</figure></div>
+</div>
+<h3>진행 중인 항목만 깜빡이기</h3>
+<p>지금 방송 중인 강의 하나에만 <code>data-pulse</code>를 켭니다. 시작 전인 강의는 깜빡이지 않는 회색 점으로 두어 지금 움직이는 것이 바로 눈에 띕니다.</p>
+<div class="site-example">
+  <div class="site-example__bar"><div class="ds-chiptabs" role="tablist" aria-label="보기 방식"><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-view="preview">미리보기</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-view="code">코드</button></div></div>
+  <div class="site-example__preview"><div class="pv-stage pv-wide"><ul class="ds-list" data-variant="inset" data-divider style="width: 100%; max-width: 420px">
+  <li>
+    <a class="ds-list-item" href="#">
+      <span class="ds-list-item__content">
+        <span class="ds-list-item__title">비즈니스 영어 회화</span>
+        <span class="ds-list-item__desc">실시간 강의, 김지은 강사</span>
+      </span>
+      <span class="ds-list-item__suffix"><span class="ds-statusdot" data-tone="brand" data-pulse></span>방송 중</span>
+      <i class="ds-icon ds-icon--chevron-right ds-list-item__chevron" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="ds-list-item" href="#">
+      <span class="ds-list-item__content">
+        <span class="ds-list-item__title">기초 회계 원리</span>
+        <span class="ds-list-item__desc">실시간 강의, 박도윤 강사</span>
+      </span>
+      <span class="ds-list-item__suffix"><span class="ds-statusdot"></span>오후 3시 시작</span>
+      <i class="ds-icon ds-icon--chevron-right ds-list-item__chevron" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="ds-list-item" href="#">
+      <span class="ds-list-item__content">
+        <span class="ds-list-item__title">엑셀 데이터 정리</span>
+        <span class="ds-list-item__desc">실시간 강의, 이서준 강사</span>
+      </span>
+      <span class="ds-list-item__suffix"><span class="ds-statusdot"></span>오후 7시 시작</span>
+      <i class="ds-icon ds-icon--chevron-right ds-list-item__chevron" aria-hidden="true"></i>
+    </a>
+  </li>
+</ul></div></div>
+  <div class="site-example__code" hidden><figure class="ds-codeblock">
+  <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">html</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
+  <pre class="ds-codeblock__code"><code>&lt;<span class="hl-t">ul</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list&quot;</span> <span class="hl-f">data-variant</span>=<span class="hl-s">&quot;inset&quot;</span> <span class="hl-f">data-divider</span> <span class="hl-f">style</span>=<span class="hl-s">&quot;width: 100%; max-width: 420px&quot;</span>&gt;
+  &lt;<span class="hl-t">li</span>&gt;
+    &lt;<span class="hl-t">a</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item&quot;</span> <span class="hl-f">href</span>=<span class="hl-s">&quot;#&quot;</span>&gt;
+      &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__content&quot;</span>&gt;
+        &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__title&quot;</span>&gt;비즈니스 영어 회화&lt;/<span class="hl-t">span</span>&gt;
+        &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__desc&quot;</span>&gt;실시간 강의, 김지은 강사&lt;/<span class="hl-t">span</span>&gt;
+      &lt;/<span class="hl-t">span</span>&gt;
+      &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__suffix&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-statusdot&quot;</span> <span class="hl-f">data-tone</span>=<span class="hl-s">&quot;brand&quot;</span> <span class="hl-f">data-pulse</span>&gt;&lt;/<span class="hl-t">span</span>&gt;방송 중&lt;/<span class="hl-t">span</span>&gt;
+      &lt;<span class="hl-t">i</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-icon ds-icon--chevron-right ds-list-item__chevron&quot;</span> <span class="hl-f">aria-hidden</span>=<span class="hl-s">&quot;true&quot;</span>&gt;&lt;/<span class="hl-t">i</span>&gt;
+    &lt;/<span class="hl-t">a</span>&gt;
+  &lt;/<span class="hl-t">li</span>&gt;
+  &lt;<span class="hl-t">li</span>&gt;
+    &lt;<span class="hl-t">a</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item&quot;</span> <span class="hl-f">href</span>=<span class="hl-s">&quot;#&quot;</span>&gt;
+      &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__content&quot;</span>&gt;
+        &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__title&quot;</span>&gt;기초 회계 원리&lt;/<span class="hl-t">span</span>&gt;
+        &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__desc&quot;</span>&gt;실시간 강의, 박도윤 강사&lt;/<span class="hl-t">span</span>&gt;
+      &lt;/<span class="hl-t">span</span>&gt;
+      &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__suffix&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-statusdot&quot;</span>&gt;&lt;/<span class="hl-t">span</span>&gt;오후 3시 시작&lt;/<span class="hl-t">span</span>&gt;
+      &lt;<span class="hl-t">i</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-icon ds-icon--chevron-right ds-list-item__chevron&quot;</span> <span class="hl-f">aria-hidden</span>=<span class="hl-s">&quot;true&quot;</span>&gt;&lt;/<span class="hl-t">i</span>&gt;
+    &lt;/<span class="hl-t">a</span>&gt;
+  &lt;/<span class="hl-t">li</span>&gt;
+  &lt;<span class="hl-t">li</span>&gt;
+    &lt;<span class="hl-t">a</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item&quot;</span> <span class="hl-f">href</span>=<span class="hl-s">&quot;#&quot;</span>&gt;
+      &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__content&quot;</span>&gt;
+        &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__title&quot;</span>&gt;엑셀 데이터 정리&lt;/<span class="hl-t">span</span>&gt;
+        &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__desc&quot;</span>&gt;실시간 강의, 이서준 강사&lt;/<span class="hl-t">span</span>&gt;
+      &lt;/<span class="hl-t">span</span>&gt;
+      &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__suffix&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-statusdot&quot;</span>&gt;&lt;/<span class="hl-t">span</span>&gt;오후 7시 시작&lt;/<span class="hl-t">span</span>&gt;
+      &lt;<span class="hl-t">i</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-icon ds-icon--chevron-right ds-list-item__chevron&quot;</span> <span class="hl-f">aria-hidden</span>=<span class="hl-s">&quot;true&quot;</span>&gt;&lt;/<span class="hl-t">i</span>&gt;
+    &lt;/<span class="hl-t">a</span>&gt;
+  &lt;/<span class="hl-t">li</span>&gt;
+&lt;/<span class="hl-t">ul</span>&gt;</code></pre>
+</figure></div>
+</div>
+<h3>표의 상태 열 채우기</h3>
+<p>관리 표의 상태 칸에도 점과 글자를 함께 넣고 가운데에 맞춥니다. 상태처럼 짧고 길이가 비슷한 값은 가운데에 두어야 위아래로 비교하기 쉽습니다.</p>
+<div class="site-example">
+  <div class="site-example__bar"><div class="ds-chiptabs" role="tablist" aria-label="보기 방식"><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-view="preview">미리보기</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-view="code">코드</button></div></div>
+  <div class="site-example__preview"><div class="pv-stage pv-wide"><div class="ds-table-wrap">
+  <table class="ds-table">
+    <thead>
+      <tr>
+        <th scope="col">장비</th>
+        <th scope="col">위치</th>
+        <th scope="col" data-align="center" style="width: 136px">상태</th>
+        <th scope="col" data-align="center" style="width: 120px">마지막 확인</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1강의실 프로젝터</td>
+        <td>본관 2층</td>
+        <td data-align="center"><span class="u-flex u-center u-gap-1_5"><span class="ds-statusdot" data-tone="positive"></span>정상</span></td>
+        <td data-align="center">10분 전</td>
+      </tr>
+      <tr>
+        <td>2강의실 마이크</td>
+        <td>본관 2층</td>
+        <td data-align="center"><span class="u-flex u-center u-gap-1_5"><span class="ds-statusdot" data-tone="warning"></span>점검 필요</span></td>
+        <td data-align="center">1시간 전</td>
+      </tr>
+      <tr>
+        <td>3강의실 카메라</td>
+        <td>별관 1층</td>
+        <td data-align="center"><span class="u-flex u-center u-gap-1_5"><span class="ds-statusdot" data-tone="critical"></span>연결 끊김</span></td>
+        <td data-align="center">어제</td>
+      </tr>
+    </tbody>
+  </table>
+</div></div></div>
+  <div class="site-example__code" hidden><figure class="ds-codeblock">
+  <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">html</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
+  <pre class="ds-codeblock__code"><code>&lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-table-wrap&quot;</span>&gt;
+  &lt;<span class="hl-t">table</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-table&quot;</span>&gt;
+    &lt;<span class="hl-t">thead</span>&gt;
+      &lt;<span class="hl-t">tr</span>&gt;
+        &lt;<span class="hl-t">th</span> <span class="hl-f">scope</span>=<span class="hl-s">&quot;col&quot;</span>&gt;장비&lt;/<span class="hl-t">th</span>&gt;
+        &lt;<span class="hl-t">th</span> <span class="hl-f">scope</span>=<span class="hl-s">&quot;col&quot;</span>&gt;위치&lt;/<span class="hl-t">th</span>&gt;
+        &lt;<span class="hl-t">th</span> <span class="hl-f">scope</span>=<span class="hl-s">&quot;col&quot;</span> <span class="hl-f">data-align</span>=<span class="hl-s">&quot;center&quot;</span> <span class="hl-f">style</span>=<span class="hl-s">&quot;width: 136px&quot;</span>&gt;상태&lt;/<span class="hl-t">th</span>&gt;
+        &lt;<span class="hl-t">th</span> <span class="hl-f">scope</span>=<span class="hl-s">&quot;col&quot;</span> <span class="hl-f">data-align</span>=<span class="hl-s">&quot;center&quot;</span> <span class="hl-f">style</span>=<span class="hl-s">&quot;width: 120px&quot;</span>&gt;마지막 확인&lt;/<span class="hl-t">th</span>&gt;
+      &lt;/<span class="hl-t">tr</span>&gt;
+    &lt;/<span class="hl-t">thead</span>&gt;
+    &lt;<span class="hl-t">tbody</span>&gt;
+      &lt;<span class="hl-t">tr</span>&gt;
+        &lt;<span class="hl-t">td</span>&gt;1강의실 프로젝터&lt;/<span class="hl-t">td</span>&gt;
+        &lt;<span class="hl-t">td</span>&gt;본관 2층&lt;/<span class="hl-t">td</span>&gt;
+        &lt;<span class="hl-t">td</span> <span class="hl-f">data-align</span>=<span class="hl-s">&quot;center&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;u-flex u-center u-gap-1_5&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-statusdot&quot;</span> <span class="hl-f">data-tone</span>=<span class="hl-s">&quot;positive&quot;</span>&gt;&lt;/<span class="hl-t">span</span>&gt;정상&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">td</span>&gt;
+        &lt;<span class="hl-t">td</span> <span class="hl-f">data-align</span>=<span class="hl-s">&quot;center&quot;</span>&gt;10분 전&lt;/<span class="hl-t">td</span>&gt;
+      &lt;/<span class="hl-t">tr</span>&gt;
+      &lt;<span class="hl-t">tr</span>&gt;
+        &lt;<span class="hl-t">td</span>&gt;2강의실 마이크&lt;/<span class="hl-t">td</span>&gt;
+        &lt;<span class="hl-t">td</span>&gt;본관 2층&lt;/<span class="hl-t">td</span>&gt;
+        &lt;<span class="hl-t">td</span> <span class="hl-f">data-align</span>=<span class="hl-s">&quot;center&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;u-flex u-center u-gap-1_5&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-statusdot&quot;</span> <span class="hl-f">data-tone</span>=<span class="hl-s">&quot;warning&quot;</span>&gt;&lt;/<span class="hl-t">span</span>&gt;점검 필요&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">td</span>&gt;
+        &lt;<span class="hl-t">td</span> <span class="hl-f">data-align</span>=<span class="hl-s">&quot;center&quot;</span>&gt;1시간 전&lt;/<span class="hl-t">td</span>&gt;
+      &lt;/<span class="hl-t">tr</span>&gt;
+      &lt;<span class="hl-t">tr</span>&gt;
+        &lt;<span class="hl-t">td</span>&gt;3강의실 카메라&lt;/<span class="hl-t">td</span>&gt;
+        &lt;<span class="hl-t">td</span>&gt;별관 1층&lt;/<span class="hl-t">td</span>&gt;
+        &lt;<span class="hl-t">td</span> <span class="hl-f">data-align</span>=<span class="hl-s">&quot;center&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;u-flex u-center u-gap-1_5&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-statusdot&quot;</span> <span class="hl-f">data-tone</span>=<span class="hl-s">&quot;critical&quot;</span>&gt;&lt;/<span class="hl-t">span</span>&gt;연결 끊김&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">td</span>&gt;
+        &lt;<span class="hl-t">td</span> <span class="hl-f">data-align</span>=<span class="hl-s">&quot;center&quot;</span>&gt;어제&lt;/<span class="hl-t">td</span>&gt;
+      &lt;/<span class="hl-t">tr</span>&gt;
+    &lt;/<span class="hl-t">tbody</span>&gt;
+  &lt;/<span class="hl-t">table</span>&gt;
+&lt;/<span class="hl-t">div</span>&gt;</code></pre>
 </figure></div>
 </div>
 <h2 id="spec">규격<a class="site-anchor" href="#spec" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><h3>크기와 여백</h3><pre class="site-spec">tone: positive / warning / critical / brand / neutral(기본)   data-pulse: 진행 중일 때 깜빡임

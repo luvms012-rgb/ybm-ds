@@ -59,19 +59,81 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 예시
 
+### 버튼 옆에서 끝나는 작은 작업 열기
+
+공유처럼 버튼 옆에서 끝나는 작은 작업은 Popover로 엽니다. 바깥을 누르면 닫히므로 화면을 막고 꼭 확인받아야 할 때는 Dialog를 씁니다.
+
 ```html
-<span class="ds-popover-anchor">
-  <button type="button" class="ds-btn" data-variant="neutralOutline" data-size="small" data-ds-popover="pv-pop" aria-expanded="false" aria-controls="pv-pop">공유 설정</button>
-  <div class="ds-popover" id="pv-pop" role="dialog" aria-labelledby="pv-pop-t" hidden>
-    <div class="ds-popover__header"><div class="ds-popover__texts"><strong class="ds-popover__title" id="pv-pop-t">링크 공유</strong><p class="ds-popover__desc">링크가 있는 사람만 볼 수 있어요</p></div><button type="button" class="ds-popover__close" data-ds-close aria-label="닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button></div>
-    <div class="ds-popover__body">공유를 끄면 이미 보낸 링크도 더 이상 열리지 않아요.</div>
-    <div class="ds-popover__footer"><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="small" data-ds-close>취소</button><button type="button" class="ds-btn" data-variant="neutralSolid" data-size="small" data-ds-close>공유 끄기</button></div>
+<div class="u-col u-gap-3 u-full" style="max-width: 480px">
+  <div class="u-flex u-center u-between u-gap-2">
+    <span class="ds-t06 ds-fw-bold">11월 학습 계획</span>
+    <span class="ds-popover-anchor">
+      <button type="button" class="ds-btn" data-variant="neutralOutline" data-size="small" data-ds-popover="popover-ex1" aria-expanded="false" aria-controls="popover-ex1"><i class="ds-icon ds-icon--share" aria-hidden="true"></i>공유</button>
+      <div class="ds-popover" id="popover-ex1" role="dialog" aria-labelledby="popover-ex1-title" hidden data-placement="bottom-end">
+        <div class="ds-popover__header">
+          <div class="ds-popover__texts">
+            <strong class="ds-popover__title" id="popover-ex1-title">링크로 공유</strong>
+            <p class="ds-popover__desc">링크가 있는 사람은 누구나 볼 수 있어요</p>
+          </div>
+          <button type="button" class="ds-popover__close" data-ds-close aria-label="닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button>
+        </div>
+        <div class="ds-popover__body">
+          <div class="ds-input" data-variant="outline" data-size="medium">
+            <input class="ds-input__control" value="https://example.com/plan/1104" readonly aria-label="공유 링크">
+          </div>
+        </div>
+        <div class="ds-popover__footer">
+          <button type="button" class="ds-btn" data-variant="neutralSolid" data-size="small" data-ds-close>링크 복사</button>
+        </div>
+      </div>
+    </span>
   </div>
-</span>
-<div class="ds-popover" role="dialog" aria-label="예시">
-  <div class="ds-popover__header"><div class="ds-popover__texts"><strong class="ds-popover__title">제목</strong><p class="ds-popover__desc">설명을 작성할 수 있어요</p></div><button type="button" class="ds-popover__close" aria-label="닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button></div>
-  <div class="ds-popover__body">팝오버 본문에는 사용자가 확인할 내용이나 추가 동작을 둘 수 있습니다.</div>
-  <div class="ds-popover__footer"><button type="button" class="ds-btn" data-variant="neutralSolid" data-size="small">확인</button></div>
+  <ul class="ds-list" data-variant="inset" data-divider>
+    <li><div class="ds-list-item" data-size="small"><span class="ds-list-item__content"><span class="ds-list-item__title">영어 단어 30개 외우기</span><span class="ds-list-item__desc">매일</span></span></div></li>
+    <li><div class="ds-list-item" data-size="small"><span class="ds-list-item__content"><span class="ds-list-item__title">듣기 강의 2개 듣기</span><span class="ds-list-item__desc">월, 수, 금</span></span></div></li>
+    <li><div class="ds-list-item" data-size="small"><span class="ds-list-item__content"><span class="ds-list-item__title">모의고사 한 번 풀기</span><span class="ds-list-item__desc">토요일</span></span></div></li>
+    <li><div class="ds-list-item" data-size="small"><span class="ds-list-item__content"><span class="ds-list-item__title">틀린 문제 다시 보기</span><span class="ds-list-item__desc">일요일</span></span></div></li>
+  </ul>
+</div>
+```
+
+### 닫기 버튼 대신 아래 버튼으로 닫기
+
+필터처럼 고른 뒤 적용하는 작업은 아래에 취소와 적용 버튼을 두고 위쪽 닫기 버튼은 뺍니다. 닫기 버튼을 빼면 아래 버튼에 `data-ds-close`를 붙여 창이 꼭 닫히게 합니다.
+
+```html
+<div class="u-col u-gap-3 u-full" style="max-width: 480px">
+  <div class="u-flex u-center u-between u-gap-2">
+    <span class="ds-t06 ds-fw-bold">주문 내역</span>
+    <span class="ds-popover-anchor">
+      <button type="button" class="ds-btn" data-variant="neutralOutline" data-size="small" data-ds-popover="popover-ex2" aria-expanded="false" aria-controls="popover-ex2"><i class="ds-icon ds-icon--list-filter" aria-hidden="true"></i>필터</button>
+      <div class="ds-popover" id="popover-ex2" role="dialog" aria-labelledby="popover-ex2-title" hidden data-placement="bottom-end">
+        <div class="ds-popover__header">
+          <div class="ds-popover__texts">
+            <strong class="ds-popover__title" id="popover-ex2-title">주문 상태</strong>
+          </div>
+        </div>
+        <div class="ds-popover__body">
+          <fieldset class="ds-checkbox-group" aria-labelledby="popover-ex2-title">
+            <label class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control" checked><span class="ds-checkbox__label">결제 완료</span></label>
+            <label class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control" checked><span class="ds-checkbox__label">배송 중</span></label>
+            <label class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control"><span class="ds-checkbox__label">배송 완료</span></label>
+            <label class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control"><span class="ds-checkbox__label">취소, 반품</span></label>
+          </fieldset>
+        </div>
+        <div class="ds-popover__footer">
+          <button type="button" class="ds-btn" data-variant="neutralWeak" data-size="small" data-ds-close>취소</button>
+          <button type="button" class="ds-btn" data-variant="neutralSolid" data-size="small" data-ds-close>적용</button>
+        </div>
+      </div>
+    </span>
+  </div>
+  <ul class="ds-list" data-variant="inset" data-divider>
+    <li><a class="ds-list-item" href="#"><span class="ds-list-item__content"><span class="ds-list-item__title">무선 이어폰</span><span class="ds-list-item__desc">11월 3일 주문</span></span><span class="ds-list-item__suffix">배송 중</span></a></li>
+    <li><a class="ds-list-item" href="#"><span class="ds-list-item__content"><span class="ds-list-item__title">영어 단어장 세트</span><span class="ds-list-item__desc">11월 1일 주문</span></span><span class="ds-list-item__suffix">결제 완료</span></a></li>
+    <li><a class="ds-list-item" href="#"><span class="ds-list-item__content"><span class="ds-list-item__title">가벼운 러닝화</span><span class="ds-list-item__desc">10월 28일 주문</span></span><span class="ds-list-item__suffix">배송 중</span></a></li>
+    <li><a class="ds-list-item" href="#"><span class="ds-list-item__content"><span class="ds-list-item__title">휴대용 보조 배터리</span><span class="ds-list-item__desc">10월 25일 주문</span></span><span class="ds-list-item__suffix">결제 완료</span></a></li>
+  </ul>
 </div>
 ```
 

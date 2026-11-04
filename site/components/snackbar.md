@@ -45,19 +45,69 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 예시
 
+### 저장한 결과를 짧게 알리기
+
+저장 버튼을 누르면 화면 아래에 결과를 한 줄로 알립니다. 4초 뒤 저절로 사라지므로 사용자가 닫지 않아도 되는 알림에 씁니다.
+
 ```html
-<button class="ds-btn" data-variant="neutralWeak" onclick="DS.snackbar('저장했어요', { variant: 'positive' })">positive 띄우기</button>
-<button class="ds-btn" data-variant="neutralWeak" onclick="DS.snackbar('네트워크 연결을 확인해 주세요', { variant: 'critical', action: '다시 시도' })">critical 띄우기</button>
-<button class="ds-btn" data-variant="neutralWeak" onclick="DS.snackbar('링크를 복사했어요')">default 띄우기</button>
+<div class="u-col u-gap-5" style="width: 100%; max-width: 360px">
+  <div class="ds-field">
+    <div class="ds-field__header">
+      <label class="ds-field__label" for="snackbar-ex1-name">닉네임</label>
+    </div>
+    <div class="ds-input" data-variant="outline">
+      <input class="ds-input__control" id="snackbar-ex1-name" value="하늘빛공부">
+    </div>
+    <div class="ds-field__footer">
+      <p class="ds-field__help">게시판과 댓글에 보이는 이름이에요.</p>
+    </div>
+  </div>
+  <button type="button" class="ds-btn" data-size="large" data-width="fill" onclick="DS.snackbar('저장했어요', { variant: 'positive' })">저장</button>
+</div>
 ```
 
-## 규격
+### 지운 직후 되돌릴 기회 주기
 
-### 크기와 여백
+알림을 지우면 되돌리기 버튼 하나를 붙여 알립니다. 확인 창으로 흐름을 막지 않으면서 실수를 바로잡을 길을 남길 때 씁니다.
 
+```html
+<ul class="ds-list" data-variant="inset" data-divider style="width: 100%; max-width: 420px">
+  <li>
+    <div class="ds-list-item">
+      <span class="ds-list-item__content">
+        <span class="ds-list-item__title">주문한 상품이 출발했어요</span>
+        <span class="ds-list-item__desc">오늘 오전 9:12</span>
+      </span>
+      <span class="ds-list-item__suffix">
+        <button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" aria-label="알림 지우기" onclick="DS.snackbar('알림을 지웠어요', { action: '되돌리기' })"><i class="ds-icon ds-icon--trash" aria-hidden="true"></i></button>
+      </span>
+    </div>
+  </li>
+  <li>
+    <div class="ds-list-item">
+      <span class="ds-list-item__content">
+        <span class="ds-list-item__title">할인 쿠폰이 3일 뒤 사라져요</span>
+        <span class="ds-list-item__desc">어제 오후 6:30</span>
+      </span>
+      <span class="ds-list-item__suffix">
+        <button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" aria-label="알림 지우기" onclick="DS.snackbar('알림을 지웠어요', { action: '되돌리기' })"><i class="ds-icon ds-icon--trash" aria-hidden="true"></i></button>
+      </span>
+    </div>
+  </li>
+  <li>
+    <div class="ds-list-item">
+      <span class="ds-list-item__content">
+        <span class="ds-list-item__title">1:1 문의에 답변이 달렸어요</span>
+        <span class="ds-list-item__desc">11월 2일</span>
+      </span>
+      <span class="ds-list-item__suffix">
+        <button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" aria-label="알림 지우기" onclick="DS.snackbar('알림을 지웠어요', { action: '되돌리기' })"><i class="ds-icon ds-icon--trash" aria-hidden="true"></i></button>
+      </span>
+    </div>
+  </li>
+</ul>
 ```
-variant: default / positive / critical
-Figma: padding x2_5(+본문 좌우 x1_5) / min-h44 / max-w560 / shape/sm / bg/neutral-solid / elevation overlay
-       message t04 fg/on-neutral-solid / action t04 Bold / gap x2_5 / 아이콘 Solid 24
-       positive 아이콘 bg/positive-solid / critical 아이콘 bg/critical-solid
-```
+
+### 실패하면 다시 시도하게 하기
+
+요청이 실패하면 critical 아이콘과 다시 시도 버튼을 함께 띄웁니다. 문구에는 왜 안 됐는지를 짧게 적고 버튼으로 바로 다시 하게 합니다.

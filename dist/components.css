@@ -1,5 +1,5 @@
 /* ==========================================================================
-   YBM Design System — COMPONENTS (.ds-*)
+   yds — COMPONENTS (.ds-*)
    --------------------------------------------------------------------------
    Figma DS 컴포넌트와 1:1 대응. 이름·베리언트는 Figma 프로퍼티를 그대로 따른다.
      <button class="ds-btn" data-variant="brandSolid" data-size="large">
@@ -1146,8 +1146,8 @@ button.ds-input__prefix:hover { color: var(--ds-color-fg-neutral); }
        <button type="button" class="ds-segmented__item" aria-pressed="true">목록</button>
      </div>
    모션: 선택 배경이 고른 항목으로 미끄러져 이동한다(필수, ybm-ds.js). 누르면 aria-pressed 가 바뀌고 change 이벤트가 난다.
-   Figma small : 트랙 bg/neutral · padding 2 · shape/sm / item py6 px12 · shape/xs · t03 Bold fg/neutral-subtle
-         medium: 트랙 shape/lg / item py8 px16 · shape/sm · t04 Bold
+   Figma small : 트랙 bg/neutral · padding 2 · shape/sm / item py6 px12 · shape/xs · t03 Medium fg/neutral-subtle (고른 칸 SemiBold)
+         medium: 트랙 shape/lg / item py8 px16 · shape/sm · t04 Medium (고른 칸 SemiBold)
          selected bg/layer-default + elevation raised + fg/neutral · disabled fg/disabled
    높이(2026-11-03): small 32(Button xsmall 과 같음) · medium 40(Button medium, Select medium 과 같음). 글자와 아이콘 모두 같은 높이
    -------------------------------------------------------------------------- */
@@ -1184,11 +1184,11 @@ button.ds-input__prefix:hover { color: var(--ds-color-fg-neutral); }
   color: var(--ds-color-fg-neutral-subtle);
   font-size: var(--ds-seg-font-size);
   line-height: var(--ds-seg-line-height);
-  font-weight: var(--ds-font-weight-bold);
+  font-weight: var(--ds-font-weight-medium);  /* 2026-11-04: 선택 부품 굵기 규칙 = 고르지 않음 Medium, 고름 SemiBold (Tabs 와 같게) */
   white-space: nowrap;
   transition: background-color var(--ds-duration-fast) var(--ds-easing-standard), color var(--ds-duration-fast) var(--ds-easing-standard);
 }
-.ds-segmented__item[aria-pressed="true"] { background: var(--ds-color-bg-layer-default); color: var(--ds-color-fg-neutral); box-shadow: var(--ds-elevation-raised); }
+.ds-segmented__item[aria-pressed="true"] { background: var(--ds-color-bg-layer-default); color: var(--ds-color-fg-neutral); font-weight: var(--ds-font-weight-semibold); box-shadow: var(--ds-elevation-raised); }
 .ds-segmented__item:disabled { color: var(--ds-color-fg-disabled); cursor: not-allowed; }
 /* 모션 (필수) — 선택 배경(indicator)이 고른 항목으로 미끄러져 이동한다. hug, fill 모두.
    ybm-ds.js 가 고른 항목 위치를 --ds-seg-x / --ds-seg-w 에 넣고 data-ds-ready 를 붙인다. 항목을 누르면 aria-pressed 도 바꾼다.
@@ -3947,7 +3947,7 @@ a.ds-card:active, button.ds-card:active { background: linear-gradient(var(--ds-c
 .ds-markdown ul { list-style: disc; }
 .ds-markdown ol { list-style: decimal; }
 .ds-markdown li + li { margin-top: var(--ds-space-x1); }
-.ds-markdown :is(pre, blockquote, table, .ds-codeblock) { margin: var(--ds-space-x4) 0; }
+.ds-markdown :is(pre:not(.ds-codeblock__code), blockquote, table, .ds-codeblock) { margin: var(--ds-space-x4) 0; }  /* 2026-11-04: Code Block 안의 pre 는 빼서 위아래 빈칸이 생기지 않게 */
 .ds-markdown blockquote { padding-left: var(--ds-space-x3); box-shadow: inset 2px 0 0 var(--ds-color-stroke-neutral-weak); color: var(--ds-color-fg-neutral-muted); }
 .ds-markdown hr { margin: var(--ds-space-x6) 0; border: 0; border-top: 1px solid var(--ds-color-stroke-neutral-weak); }
 .ds-markdown a:not([class]) { color: var(--ds-color-fg-brand); text-decoration: underline; }

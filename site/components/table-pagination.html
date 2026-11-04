@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Table Pagination - YBM DS</title>
+<title>Table Pagination - yds</title>
 <meta name="description" content="표 아래에서 페이지를 넘기고 한 번에 보일 행 수를 바꾸는 컴포넌트입니다.">
 <!-- 생성물: node site/build.mjs가 만든다. 직접 고치지 말고 site/build.mjs나 site/src를 고친다 -->
 <script>try { var t = localStorage.getItem("ybm-site-theme"); if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.dataset.theme = "dark"; } catch (e) {}</script>
 <link rel="icon" href="../assets/logo-ybmnet.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../dist/ybm-ds.css">
-<link rel="stylesheet" href="../assets/site.css?v=bb7371b2">
+<link rel="stylesheet" href="../assets/site.css?v=1656b6c0">
 <script src="../../dist/ybm-ds.js" defer></script>
-<script src="../assets/site.js?v=bb7371b2" defer></script>
+<script src="../assets/site.js?v=1656b6c0" defer></script>
 </head>
 <body class="site">
 <a class="site-skip" href="#main">본문 바로가기</a>
@@ -173,52 +173,240 @@
 <tbody><tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>데이터 표 아래에서만 씁니다.</td></tr>
 <tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>일반 목록에는 Pagination을 씁니다.</td></tr>
 <tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>페이지당 줄 수 선택지는 3~4가지로 둡니다.</td></tr></tbody></table></div>
-<h2 id="examples">예시<a class="site-anchor" href="#examples" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><div class="site-example">
+<h2 id="examples">예시<a class="site-anchor" href="#examples" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><h3>관리 표 아래에서 페이지와 행 수 고르기</h3>
+<p>데이터 표 바로 아래에 붙여 페이지와 페이지당 행 수를 함께 바꿉니다. 행 수 선택지는 3가지로 두고, 표와 같은 가로 스크롤 영역 안에 넣어 함께 밀리게 합니다.</p>
+<div class="site-example">
   <div class="site-example__bar"><div class="ds-chiptabs" role="tablist" aria-label="보기 방식"><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-view="preview">미리보기</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-view="code">코드</button></div></div>
-  <div class="site-example__preview"><div class="pv-stage pv-col" style="overflow-x:auto">
-    <div class="ds-tablepagination">
-      <label class="ds-tablepagination__size"><span class="ds-tablepagination__label">페이지당 행 수</span><span class="ds-tablepagination__select"><select><option>10개</option><option>25개</option><option>50개</option></select></span></label>
-      <div class="ds-tablepagination__range">
-        <span class="ds-tablepagination__position"><span class="ds-tablepagination__select"><select aria-label="표시 범위"><option>1-10</option><option selected>11-20</option><option>21-30</option></select></span><span class="ds-tablepagination__total">/ 총 237개</span></span>
-        <nav class="ds-pagination" aria-label="표 페이지"><a class="ds-pagination__item" data-type="prev" href="#" aria-label="이전 페이지"></a><a class="ds-pagination__item" data-type="next" href="#" aria-label="다음 페이지"></a></nav>
-      </div>
+  <div class="site-example__preview"><div class="pv-stage pv-wide"><div class="ds-table-wrap">
+  <table class="ds-table" data-density="compact">
+    <thead>
+      <tr>
+        <th scope="col" style="width: 120px">이름</th>
+        <th scope="col">이메일</th>
+        <th scope="col" data-align="center" style="width: 120px">가입일</th>
+        <th scope="col" data-align="end" style="width: 104px">수강 강의</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>김하늘</td>
+        <td>sky@example.com</td>
+        <td data-align="center">2026.11.03</td>
+        <td data-align="end">3개</td>
+      </tr>
+      <tr>
+        <td>이준호</td>
+        <td>junho@example.com</td>
+        <td data-align="center">2026.11.02</td>
+        <td data-align="end">1개</td>
+      </tr>
+      <tr>
+        <td>박서연</td>
+        <td>seoyeon@example.com</td>
+        <td data-align="center">2026.11.01</td>
+        <td data-align="end">5개</td>
+      </tr>
+      <tr>
+        <td>최민재</td>
+        <td>minjae@example.com</td>
+        <td data-align="center">2026.10.31</td>
+        <td data-align="end">2개</td>
+      </tr>
+      <tr>
+        <td>정다은</td>
+        <td>daeun@example.com</td>
+        <td data-align="center">2026.10.30</td>
+        <td data-align="end">4개</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="ds-tablepagination">
+    <label class="ds-tablepagination__size">
+      <span class="ds-tablepagination__label">페이지당 행 수</span>
+      <span class="ds-tablepagination__select"><select><option selected>5개</option><option>10개</option><option>20개</option></select></span>
+    </label>
+    <div class="ds-tablepagination__range">
+      <span class="ds-tablepagination__position">
+        <span class="ds-tablepagination__select"><select aria-label="표시 범위"><option selected>1-5</option><option>6-10</option><option>11-15</option></select></span>
+        <span class="ds-tablepagination__total">/ 총 48명</span>
+      </span>
+      <nav class="ds-pagination" aria-label="표 페이지">
+        <a class="ds-pagination__item" data-type="prev" aria-disabled="true" aria-label="이전 페이지"></a>
+        <a class="ds-pagination__item" data-type="next" href="#" aria-label="다음 페이지"></a>
+      </nav>
     </div>
-    <div class="ds-tablepagination">
-      <label class="ds-tablepagination__size"><span class="ds-tablepagination__label">페이지당 행 수</span><span class="ds-tablepagination__select"><select><option>10개</option><option>25개</option></select></span></label>
-      <div class="ds-tablepagination__range">
-        <span class="ds-tablepagination__position"><span class="ds-tablepagination__current">11-20</span></span>
-        <nav class="ds-pagination" aria-label="표 페이지"><a class="ds-pagination__item" data-type="prev" href="#" aria-label="이전 페이지"></a><a class="ds-pagination__item" data-type="next" href="#" aria-label="다음 페이지"></a></nav>
-      </div>
-    </div>
-    <div class="ds-tablepagination">
-      <label class="ds-tablepagination__size"><span class="ds-tablepagination__label">페이지당 행 수</span><span class="ds-tablepagination__select"><select><option>10개</option></select></span></label>
-      <div class="ds-tablepagination__range">
-        <span class="ds-tablepagination__position"><span class="ds-tablepagination__select"><select aria-label="표시 범위" disabled><option>0-0</option></select></span><span class="ds-tablepagination__total">/ 총 0개</span></span>
-        <nav class="ds-pagination" aria-label="표 페이지"><a class="ds-pagination__item" data-type="prev" aria-disabled="true" aria-label="이전 페이지"></a><a class="ds-pagination__item" data-type="next" aria-disabled="true" aria-label="다음 페이지"></a></nav>
-      </div>
-    </div>
-  </div></div>
+  </div>
+</div></div></div>
   <div class="site-example__code" hidden><figure class="ds-codeblock">
   <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">html</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
-  <pre class="ds-codeblock__code"><code>&lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-tablepagination&quot;</span>&gt;
-  &lt;<span class="hl-t">label</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-tablepagination__size&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-tablepagination__label&quot;</span>&gt;페이지당 행 수&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-tablepagination__select&quot;</span>&gt;&lt;<span class="hl-t">select</span>&gt;&lt;<span class="hl-t">option</span>&gt;10개&lt;/<span class="hl-t">option</span>&gt;&lt;<span class="hl-t">option</span>&gt;25개&lt;/<span class="hl-t">option</span>&gt;&lt;<span class="hl-t">option</span>&gt;50개&lt;/<span class="hl-t">option</span>&gt;&lt;/<span class="hl-t">select</span>&gt;&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">label</span>&gt;
-  &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-tablepagination__range&quot;</span>&gt;
-    &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-tablepagination__position&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-tablepagination__select&quot;</span>&gt;&lt;<span class="hl-t">select</span> <span class="hl-f">aria-label</span>=<span class="hl-s">&quot;표시 범위&quot;</span>&gt;&lt;<span class="hl-t">option</span>&gt;1-10&lt;/<span class="hl-t">option</span>&gt;&lt;<span class="hl-t">option</span> <span class="hl-f">selected</span>&gt;11-20&lt;/<span class="hl-t">option</span>&gt;&lt;<span class="hl-t">option</span>&gt;21-30&lt;/<span class="hl-t">option</span>&gt;&lt;/<span class="hl-t">select</span>&gt;&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-tablepagination__total&quot;</span>&gt;/ 총 237개&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">span</span>&gt;
-    &lt;<span class="hl-t">nav</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-pagination&quot;</span> <span class="hl-f">aria-label</span>=<span class="hl-s">&quot;표 페이지&quot;</span>&gt;&lt;<span class="hl-t">a</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-pagination__item&quot;</span> <span class="hl-f">data-type</span>=<span class="hl-s">&quot;prev&quot;</span> <span class="hl-f">href</span>=<span class="hl-s">&quot;#&quot;</span> <span class="hl-f">aria-label</span>=<span class="hl-s">&quot;이전 페이지&quot;</span>&gt;&lt;/<span class="hl-t">a</span>&gt;&lt;<span class="hl-t">a</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-pagination__item&quot;</span> <span class="hl-f">data-type</span>=<span class="hl-s">&quot;next&quot;</span> <span class="hl-f">href</span>=<span class="hl-s">&quot;#&quot;</span> <span class="hl-f">aria-label</span>=<span class="hl-s">&quot;다음 페이지&quot;</span>&gt;&lt;/<span class="hl-t">a</span>&gt;&lt;/<span class="hl-t">nav</span>&gt;
+  <pre class="ds-codeblock__code"><code>&lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-table-wrap&quot;</span>&gt;
+  &lt;<span class="hl-t">table</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-table&quot;</span> <span class="hl-f">data-density</span>=<span class="hl-s">&quot;compact&quot;</span>&gt;
+    &lt;<span class="hl-t">thead</span>&gt;
+      &lt;<span class="hl-t">tr</span>&gt;
+        &lt;<span class="hl-t">th</span> <span class="hl-f">scope</span>=<span class="hl-s">&quot;col&quot;</span> <span class="hl-f">style</span>=<span class="hl-s">&quot;width: 120px&quot;</span>&gt;이름&lt;/<span class="hl-t">th</span>&gt;
+        &lt;<span class="hl-t">th</span> <span class="hl-f">scope</span>=<span class="hl-s">&quot;col&quot;</span>&gt;이메일&lt;/<span class="hl-t">th</span>&gt;
+        &lt;<span class="hl-t">th</span> <span class="hl-f">scope</span>=<span class="hl-s">&quot;col&quot;</span> <span class="hl-f">data-align</span>=<span class="hl-s">&quot;center&quot;</span> <span class="hl-f">style</span>=<span class="hl-s">&quot;width: 120px&quot;</span>&gt;가입일&lt;/<span class="hl-t">th</span>&gt;
+        &lt;<span class="hl-t">th</span> <span class="hl-f">scope</span>=<span class="hl-s">&quot;col&quot;</span> <span class="hl-f">data-align</span>=<span class="hl-s">&quot;end&quot;</span> <span class="hl-f">style</span>=<span class="hl-s">&quot;width: 104px&quot;</span>&gt;수강 강의&lt;/<span class="hl-t">th</span>&gt;
+      &lt;/<span class="hl-t">tr</span>&gt;
+    &lt;/<span class="hl-t">thead</span>&gt;
+    &lt;<span class="hl-t">tbody</span>&gt;
+      &lt;<span class="hl-t">tr</span>&gt;
+        &lt;<span class="hl-t">td</span>&gt;김하늘&lt;/<span class="hl-t">td</span>&gt;
+        &lt;<span class="hl-t">td</span>&gt;sky@example.com&lt;/<span class="hl-t">td</span>&gt;
+        &lt;<span class="hl-t">td</span> <span class="hl-f">data-align</span>=<span class="hl-s">&quot;center&quot;</span>&gt;2026.11.03&lt;/<span class="hl-t">td</span>&gt;
+        &lt;<span class="hl-t">td</span> <span class="hl-f">data-align</span>=<span class="hl-s">&quot;end&quot;</span>&gt;3개&lt;/<span class="hl-t">td</span>&gt;
+      &lt;/<span class="hl-t">tr</span>&gt;
+      &lt;<span class="hl-t">tr</span>&gt;
+        &lt;<span class="hl-t">td</span>&gt;이준호&lt;/<span class="hl-t">td</span>&gt;
+        &lt;<span class="hl-t">td</span>&gt;junho@example.com&lt;/<span class="hl-t">td</span>&gt;
+        &lt;<span class="hl-t">td</span> <span class="hl-f">data-align</span>=<span class="hl-s">&quot;center&quot;</span>&gt;2026.11.02&lt;/<span class="hl-t">td</span>&gt;
+        &lt;<span class="hl-t">td</span> <span class="hl-f">data-align</span>=<span class="hl-s">&quot;end&quot;</span>&gt;1개&lt;/<span class="hl-t">td</span>&gt;
+      &lt;/<span class="hl-t">tr</span>&gt;
+      &lt;<span class="hl-t">tr</span>&gt;
+        &lt;<span class="hl-t">td</span>&gt;박서연&lt;/<span class="hl-t">td</span>&gt;
+        &lt;<span class="hl-t">td</span>&gt;seoyeon@example.com&lt;/<span class="hl-t">td</span>&gt;
+        &lt;<span class="hl-t">td</span> <span class="hl-f">data-align</span>=<span class="hl-s">&quot;center&quot;</span>&gt;2026.11.01&lt;/<span class="hl-t">td</span>&gt;
+        &lt;<span class="hl-t">td</span> <span class="hl-f">data-align</span>=<span class="hl-s">&quot;end&quot;</span>&gt;5개&lt;/<span class="hl-t">td</span>&gt;
+      &lt;/<span class="hl-t">tr</span>&gt;
+      &lt;<span class="hl-t">tr</span>&gt;
+        &lt;<span class="hl-t">td</span>&gt;최민재&lt;/<span class="hl-t">td</span>&gt;
+        &lt;<span class="hl-t">td</span>&gt;minjae@example.com&lt;/<span class="hl-t">td</span>&gt;
+        &lt;<span class="hl-t">td</span> <span class="hl-f">data-align</span>=<span class="hl-s">&quot;center&quot;</span>&gt;2026.10.31&lt;/<span class="hl-t">td</span>&gt;
+        &lt;<span class="hl-t">td</span> <span class="hl-f">data-align</span>=<span class="hl-s">&quot;end&quot;</span>&gt;2개&lt;/<span class="hl-t">td</span>&gt;
+      &lt;/<span class="hl-t">tr</span>&gt;
+      &lt;<span class="hl-t">tr</span>&gt;
+        &lt;<span class="hl-t">td</span>&gt;정다은&lt;/<span class="hl-t">td</span>&gt;
+        &lt;<span class="hl-t">td</span>&gt;daeun@example.com&lt;/<span class="hl-t">td</span>&gt;
+        &lt;<span class="hl-t">td</span> <span class="hl-f">data-align</span>=<span class="hl-s">&quot;center&quot;</span>&gt;2026.10.30&lt;/<span class="hl-t">td</span>&gt;
+        &lt;<span class="hl-t">td</span> <span class="hl-f">data-align</span>=<span class="hl-s">&quot;end&quot;</span>&gt;4개&lt;/<span class="hl-t">td</span>&gt;
+      &lt;/<span class="hl-t">tr</span>&gt;
+    &lt;/<span class="hl-t">tbody</span>&gt;
+  &lt;/<span class="hl-t">table</span>&gt;
+  &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-tablepagination&quot;</span>&gt;
+    &lt;<span class="hl-t">label</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-tablepagination__size&quot;</span>&gt;
+      &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-tablepagination__label&quot;</span>&gt;페이지당 행 수&lt;/<span class="hl-t">span</span>&gt;
+      &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-tablepagination__select&quot;</span>&gt;&lt;<span class="hl-t">select</span>&gt;&lt;<span class="hl-t">option</span> <span class="hl-f">selected</span>&gt;5개&lt;/<span class="hl-t">option</span>&gt;&lt;<span class="hl-t">option</span>&gt;10개&lt;/<span class="hl-t">option</span>&gt;&lt;<span class="hl-t">option</span>&gt;20개&lt;/<span class="hl-t">option</span>&gt;&lt;/<span class="hl-t">select</span>&gt;&lt;/<span class="hl-t">span</span>&gt;
+    &lt;/<span class="hl-t">label</span>&gt;
+    &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-tablepagination__range&quot;</span>&gt;
+      &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-tablepagination__position&quot;</span>&gt;
+        &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-tablepagination__select&quot;</span>&gt;&lt;<span class="hl-t">select</span> <span class="hl-f">aria-label</span>=<span class="hl-s">&quot;표시 범위&quot;</span>&gt;&lt;<span class="hl-t">option</span> <span class="hl-f">selected</span>&gt;1-5&lt;/<span class="hl-t">option</span>&gt;&lt;<span class="hl-t">option</span>&gt;6-10&lt;/<span class="hl-t">option</span>&gt;&lt;<span class="hl-t">option</span>&gt;11-15&lt;/<span class="hl-t">option</span>&gt;&lt;/<span class="hl-t">select</span>&gt;&lt;/<span class="hl-t">span</span>&gt;
+        &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-tablepagination__total&quot;</span>&gt;/ 총 48명&lt;/<span class="hl-t">span</span>&gt;
+      &lt;/<span class="hl-t">span</span>&gt;
+      &lt;<span class="hl-t">nav</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-pagination&quot;</span> <span class="hl-f">aria-label</span>=<span class="hl-s">&quot;표 페이지&quot;</span>&gt;
+        &lt;<span class="hl-t">a</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-pagination__item&quot;</span> <span class="hl-f">data-type</span>=<span class="hl-s">&quot;prev&quot;</span> <span class="hl-f">aria-disabled</span>=<span class="hl-s">&quot;true&quot;</span> <span class="hl-f">aria-label</span>=<span class="hl-s">&quot;이전 페이지&quot;</span>&gt;&lt;/<span class="hl-t">a</span>&gt;
+        &lt;<span class="hl-t">a</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-pagination__item&quot;</span> <span class="hl-f">data-type</span>=<span class="hl-s">&quot;next&quot;</span> <span class="hl-f">href</span>=<span class="hl-s">&quot;#&quot;</span> <span class="hl-f">aria-label</span>=<span class="hl-s">&quot;다음 페이지&quot;</span>&gt;&lt;/<span class="hl-t">a</span>&gt;
+      &lt;/<span class="hl-t">nav</span>&gt;
+    &lt;/<span class="hl-t">div</span>&gt;
   &lt;/<span class="hl-t">div</span>&gt;
-&lt;/<span class="hl-t">div</span>&gt;
-&lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-tablepagination&quot;</span>&gt;
-  &lt;<span class="hl-t">label</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-tablepagination__size&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-tablepagination__label&quot;</span>&gt;페이지당 행 수&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-tablepagination__select&quot;</span>&gt;&lt;<span class="hl-t">select</span>&gt;&lt;<span class="hl-t">option</span>&gt;10개&lt;/<span class="hl-t">option</span>&gt;&lt;<span class="hl-t">option</span>&gt;25개&lt;/<span class="hl-t">option</span>&gt;&lt;/<span class="hl-t">select</span>&gt;&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">label</span>&gt;
-  &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-tablepagination__range&quot;</span>&gt;
-    &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-tablepagination__position&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-tablepagination__current&quot;</span>&gt;11-20&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">span</span>&gt;
-    &lt;<span class="hl-t">nav</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-pagination&quot;</span> <span class="hl-f">aria-label</span>=<span class="hl-s">&quot;표 페이지&quot;</span>&gt;&lt;<span class="hl-t">a</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-pagination__item&quot;</span> <span class="hl-f">data-type</span>=<span class="hl-s">&quot;prev&quot;</span> <span class="hl-f">href</span>=<span class="hl-s">&quot;#&quot;</span> <span class="hl-f">aria-label</span>=<span class="hl-s">&quot;이전 페이지&quot;</span>&gt;&lt;/<span class="hl-t">a</span>&gt;&lt;<span class="hl-t">a</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-pagination__item&quot;</span> <span class="hl-f">data-type</span>=<span class="hl-s">&quot;next&quot;</span> <span class="hl-f">href</span>=<span class="hl-s">&quot;#&quot;</span> <span class="hl-f">aria-label</span>=<span class="hl-s">&quot;다음 페이지&quot;</span>&gt;&lt;/<span class="hl-t">a</span>&gt;&lt;/<span class="hl-t">nav</span>&gt;
-  &lt;/<span class="hl-t">div</span>&gt;
-&lt;/<span class="hl-t">div</span>&gt;
-&lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-tablepagination&quot;</span>&gt;
-  &lt;<span class="hl-t">label</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-tablepagination__size&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-tablepagination__label&quot;</span>&gt;페이지당 행 수&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-tablepagination__select&quot;</span>&gt;&lt;<span class="hl-t">select</span>&gt;&lt;<span class="hl-t">option</span>&gt;10개&lt;/<span class="hl-t">option</span>&gt;&lt;/<span class="hl-t">select</span>&gt;&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">label</span>&gt;
-  &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-tablepagination__range&quot;</span>&gt;
-    &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-tablepagination__position&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-tablepagination__select&quot;</span>&gt;&lt;<span class="hl-t">select</span> <span class="hl-f">aria-label</span>=<span class="hl-s">&quot;표시 범위&quot;</span> <span class="hl-f">disabled</span>&gt;&lt;<span class="hl-t">option</span>&gt;0-0&lt;/<span class="hl-t">option</span>&gt;&lt;/<span class="hl-t">select</span>&gt;&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-tablepagination__total&quot;</span>&gt;/ 총 0개&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">span</span>&gt;
-    &lt;<span class="hl-t">nav</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-pagination&quot;</span> <span class="hl-f">aria-label</span>=<span class="hl-s">&quot;표 페이지&quot;</span>&gt;&lt;<span class="hl-t">a</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-pagination__item&quot;</span> <span class="hl-f">data-type</span>=<span class="hl-s">&quot;prev&quot;</span> <span class="hl-f">aria-disabled</span>=<span class="hl-s">&quot;true&quot;</span> <span class="hl-f">aria-label</span>=<span class="hl-s">&quot;이전 페이지&quot;</span>&gt;&lt;/<span class="hl-t">a</span>&gt;&lt;<span class="hl-t">a</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-pagination__item&quot;</span> <span class="hl-f">data-type</span>=<span class="hl-s">&quot;next&quot;</span> <span class="hl-f">aria-disabled</span>=<span class="hl-s">&quot;true&quot;</span> <span class="hl-f">aria-label</span>=<span class="hl-s">&quot;다음 페이지&quot;</span>&gt;&lt;/<span class="hl-t">a</span>&gt;&lt;/<span class="hl-t">nav</span>&gt;
+&lt;/<span class="hl-t">div</span>&gt;</code></pre>
+</figure></div>
+</div>
+<h3>전체 개수를 모를 때 범위만 보이기</h3>
+<p>전체 개수를 미리 셀 수 없는 기록 표에서는 지금 보이는 범위만 글자로 보여 줍니다. 총 개수 대신 다음 버튼으로 이어서 봅니다.</p>
+<div class="site-example">
+  <div class="site-example__bar"><div class="ds-chiptabs" role="tablist" aria-label="보기 방식"><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-view="preview">미리보기</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-view="code">코드</button></div></div>
+  <div class="site-example__preview"><div class="pv-stage pv-wide"><div class="ds-table-wrap">
+  <table class="ds-table" data-density="compact">
+    <thead>
+      <tr>
+        <th scope="col" data-align="center" style="width: 128px">시각</th>
+        <th scope="col">한 일</th>
+        <th scope="col" style="width: 120px">담당자</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td data-align="center">11.04 10:42</td>
+        <td>강의 "엑셀 실무 완성" 공개</td>
+        <td>김하늘</td>
+      </tr>
+      <tr>
+        <td data-align="center">11.04 10:15</td>
+        <td>공지 "11월 휴강 안내" 수정</td>
+        <td>이준호</td>
+      </tr>
+      <tr>
+        <td data-align="center">11.04 09:58</td>
+        <td>쿠폰 "신규 회원 10%" 발급</td>
+        <td>박서연</td>
+      </tr>
+      <tr>
+        <td data-align="center">11.03 18:20</td>
+        <td>회원 3명 수강 기간 연장</td>
+        <td>김하늘</td>
+      </tr>
+      <tr>
+        <td data-align="center">11.03 17:05</td>
+        <td>강의 "기초 회계 원리" 가격 변경</td>
+        <td>이준호</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="ds-tablepagination">
+    <label class="ds-tablepagination__size">
+      <span class="ds-tablepagination__label">페이지당 행 수</span>
+      <span class="ds-tablepagination__select"><select><option selected>5개</option><option>10개</option><option>20개</option></select></span>
+    </label>
+    <div class="ds-tablepagination__range">
+      <span class="ds-tablepagination__position"><span class="ds-tablepagination__current">6-10</span></span>
+      <nav class="ds-pagination" aria-label="표 페이지">
+        <a class="ds-pagination__item" data-type="prev" href="#" aria-label="이전 페이지"></a>
+        <a class="ds-pagination__item" data-type="next" href="#" aria-label="다음 페이지"></a>
+      </nav>
+    </div>
+  </div>
+</div></div></div>
+  <div class="site-example__code" hidden><figure class="ds-codeblock">
+  <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">html</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
+  <pre class="ds-codeblock__code"><code>&lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-table-wrap&quot;</span>&gt;
+  &lt;<span class="hl-t">table</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-table&quot;</span> <span class="hl-f">data-density</span>=<span class="hl-s">&quot;compact&quot;</span>&gt;
+    &lt;<span class="hl-t">thead</span>&gt;
+      &lt;<span class="hl-t">tr</span>&gt;
+        &lt;<span class="hl-t">th</span> <span class="hl-f">scope</span>=<span class="hl-s">&quot;col&quot;</span> <span class="hl-f">data-align</span>=<span class="hl-s">&quot;center&quot;</span> <span class="hl-f">style</span>=<span class="hl-s">&quot;width: 128px&quot;</span>&gt;시각&lt;/<span class="hl-t">th</span>&gt;
+        &lt;<span class="hl-t">th</span> <span class="hl-f">scope</span>=<span class="hl-s">&quot;col&quot;</span>&gt;한 일&lt;/<span class="hl-t">th</span>&gt;
+        &lt;<span class="hl-t">th</span> <span class="hl-f">scope</span>=<span class="hl-s">&quot;col&quot;</span> <span class="hl-f">style</span>=<span class="hl-s">&quot;width: 120px&quot;</span>&gt;담당자&lt;/<span class="hl-t">th</span>&gt;
+      &lt;/<span class="hl-t">tr</span>&gt;
+    &lt;/<span class="hl-t">thead</span>&gt;
+    &lt;<span class="hl-t">tbody</span>&gt;
+      &lt;<span class="hl-t">tr</span>&gt;
+        &lt;<span class="hl-t">td</span> <span class="hl-f">data-align</span>=<span class="hl-s">&quot;center&quot;</span>&gt;11.04 10:42&lt;/<span class="hl-t">td</span>&gt;
+        &lt;<span class="hl-t">td</span>&gt;강의 &quot;엑셀 실무 완성&quot; 공개&lt;/<span class="hl-t">td</span>&gt;
+        &lt;<span class="hl-t">td</span>&gt;김하늘&lt;/<span class="hl-t">td</span>&gt;
+      &lt;/<span class="hl-t">tr</span>&gt;
+      &lt;<span class="hl-t">tr</span>&gt;
+        &lt;<span class="hl-t">td</span> <span class="hl-f">data-align</span>=<span class="hl-s">&quot;center&quot;</span>&gt;11.04 10:15&lt;/<span class="hl-t">td</span>&gt;
+        &lt;<span class="hl-t">td</span>&gt;공지 &quot;11월 휴강 안내&quot; 수정&lt;/<span class="hl-t">td</span>&gt;
+        &lt;<span class="hl-t">td</span>&gt;이준호&lt;/<span class="hl-t">td</span>&gt;
+      &lt;/<span class="hl-t">tr</span>&gt;
+      &lt;<span class="hl-t">tr</span>&gt;
+        &lt;<span class="hl-t">td</span> <span class="hl-f">data-align</span>=<span class="hl-s">&quot;center&quot;</span>&gt;11.04 09:58&lt;/<span class="hl-t">td</span>&gt;
+        &lt;<span class="hl-t">td</span>&gt;쿠폰 &quot;신규 회원 10%&quot; 발급&lt;/<span class="hl-t">td</span>&gt;
+        &lt;<span class="hl-t">td</span>&gt;박서연&lt;/<span class="hl-t">td</span>&gt;
+      &lt;/<span class="hl-t">tr</span>&gt;
+      &lt;<span class="hl-t">tr</span>&gt;
+        &lt;<span class="hl-t">td</span> <span class="hl-f">data-align</span>=<span class="hl-s">&quot;center&quot;</span>&gt;11.03 18:20&lt;/<span class="hl-t">td</span>&gt;
+        &lt;<span class="hl-t">td</span>&gt;회원 3명 수강 기간 연장&lt;/<span class="hl-t">td</span>&gt;
+        &lt;<span class="hl-t">td</span>&gt;김하늘&lt;/<span class="hl-t">td</span>&gt;
+      &lt;/<span class="hl-t">tr</span>&gt;
+      &lt;<span class="hl-t">tr</span>&gt;
+        &lt;<span class="hl-t">td</span> <span class="hl-f">data-align</span>=<span class="hl-s">&quot;center&quot;</span>&gt;11.03 17:05&lt;/<span class="hl-t">td</span>&gt;
+        &lt;<span class="hl-t">td</span>&gt;강의 &quot;기초 회계 원리&quot; 가격 변경&lt;/<span class="hl-t">td</span>&gt;
+        &lt;<span class="hl-t">td</span>&gt;이준호&lt;/<span class="hl-t">td</span>&gt;
+      &lt;/<span class="hl-t">tr</span>&gt;
+    &lt;/<span class="hl-t">tbody</span>&gt;
+  &lt;/<span class="hl-t">table</span>&gt;
+  &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-tablepagination&quot;</span>&gt;
+    &lt;<span class="hl-t">label</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-tablepagination__size&quot;</span>&gt;
+      &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-tablepagination__label&quot;</span>&gt;페이지당 행 수&lt;/<span class="hl-t">span</span>&gt;
+      &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-tablepagination__select&quot;</span>&gt;&lt;<span class="hl-t">select</span>&gt;&lt;<span class="hl-t">option</span> <span class="hl-f">selected</span>&gt;5개&lt;/<span class="hl-t">option</span>&gt;&lt;<span class="hl-t">option</span>&gt;10개&lt;/<span class="hl-t">option</span>&gt;&lt;<span class="hl-t">option</span>&gt;20개&lt;/<span class="hl-t">option</span>&gt;&lt;/<span class="hl-t">select</span>&gt;&lt;/<span class="hl-t">span</span>&gt;
+    &lt;/<span class="hl-t">label</span>&gt;
+    &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-tablepagination__range&quot;</span>&gt;
+      &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-tablepagination__position&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-tablepagination__current&quot;</span>&gt;6-10&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">span</span>&gt;
+      &lt;<span class="hl-t">nav</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-pagination&quot;</span> <span class="hl-f">aria-label</span>=<span class="hl-s">&quot;표 페이지&quot;</span>&gt;
+        &lt;<span class="hl-t">a</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-pagination__item&quot;</span> <span class="hl-f">data-type</span>=<span class="hl-s">&quot;prev&quot;</span> <span class="hl-f">href</span>=<span class="hl-s">&quot;#&quot;</span> <span class="hl-f">aria-label</span>=<span class="hl-s">&quot;이전 페이지&quot;</span>&gt;&lt;/<span class="hl-t">a</span>&gt;
+        &lt;<span class="hl-t">a</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-pagination__item&quot;</span> <span class="hl-f">data-type</span>=<span class="hl-s">&quot;next&quot;</span> <span class="hl-f">href</span>=<span class="hl-s">&quot;#&quot;</span> <span class="hl-f">aria-label</span>=<span class="hl-s">&quot;다음 페이지&quot;</span>&gt;&lt;/<span class="hl-t">a</span>&gt;
+      &lt;/<span class="hl-t">nav</span>&gt;
+    &lt;/<span class="hl-t">div</span>&gt;
   &lt;/<span class="hl-t">div</span>&gt;
 &lt;/<span class="hl-t">div</span>&gt;</code></pre>
 </figure></div>

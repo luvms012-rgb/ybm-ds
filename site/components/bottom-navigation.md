@@ -45,13 +45,102 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 예시
 
+### 주요 화면 네 곳을 아래에 두기
+
+앱의 주요 화면 3개에서 5개를 아래에 두고, 지금 화면은 `aria-current="page"`로 표시합니다. 라벨은 한글 다섯 자 안으로 짧게 씁니다.
+
 ```html
-<nav class="ds-bottomnav" aria-label="주요 메뉴" style="position:static">
-  <a class="ds-bottomnav__item" href="#" aria-current="page"><span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--house-solid ds-icon--lg" aria-hidden="true"></i></span><span class="ds-bottomnav__label">홈</span></a>
-  <a class="ds-bottomnav__item" href="#"><span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--calendar ds-icon--lg" aria-hidden="true"></i><span class="ds-bottomnav__badge--dot"></span></span><span class="ds-bottomnav__label">일정</span></a>
-  <a class="ds-bottomnav__item" href="#"><span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--file-text ds-icon--lg" aria-hidden="true"></i></span><span class="ds-bottomnav__label">알림</span></a>
-  <a class="ds-bottomnav__item" href="#"><span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--menu ds-icon--lg" aria-hidden="true"></i></span><span class="ds-bottomnav__label">전체</span></a>
-</nav>
+<div style="width: 100%; max-width: 375px">
+  <ul class="ds-list" data-divider>
+    <li>
+      <a class="ds-list-item" href="#">
+        <span class="ds-list-item__content">
+          <span class="ds-list-item__title">영어 회화 첫걸음</span>
+          <span class="ds-list-item__desc">3강까지 들었어요</span>
+        </span>
+        <i class="ds-icon ds-icon--chevron-right ds-list-item__chevron" aria-hidden="true"></i>
+      </a>
+    </li>
+    <li>
+      <a class="ds-list-item" href="#">
+        <span class="ds-list-item__content">
+          <span class="ds-list-item__title">엑셀 실무 기초</span>
+          <span class="ds-list-item__desc">새 강의 2개가 올라왔어요</span>
+        </span>
+        <i class="ds-icon ds-icon--chevron-right ds-list-item__chevron" aria-hidden="true"></i>
+      </a>
+    </li>
+  </ul>
+  <nav class="ds-bottomnav" aria-label="주요 메뉴">
+    <a class="ds-bottomnav__item" href="#" aria-current="page">
+      <span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--house-solid ds-icon--lg" aria-hidden="true"></i></span>
+      <span class="ds-bottomnav__label">홈</span>
+    </a>
+    <a class="ds-bottomnav__item" href="#">
+      <span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--book-open ds-icon--lg" aria-hidden="true"></i></span>
+      <span class="ds-bottomnav__label">강의실</span>
+    </a>
+    <a class="ds-bottomnav__item" href="#">
+      <span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--shopping-cart ds-icon--lg" aria-hidden="true"></i></span>
+      <span class="ds-bottomnav__label">장바구니</span>
+    </a>
+    <a class="ds-bottomnav__item" href="#">
+      <span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--user ds-icon--lg" aria-hidden="true"></i></span>
+      <span class="ds-bottomnav__label">내 정보</span>
+    </a>
+  </nav>
+</div>
+```
+
+### 새 소식은 점으로, 개수는 숫자로
+
+개수가 중요한 탭에는 숫자 배지를, 새 소식만 알리면 점을 붙입니다. 100이 넘으면 `99+`로 줄이고, 0이면 배지를 숨깁니다.
+
+```html
+<div style="width: 100%; max-width: 375px">
+  <ul class="ds-list" data-divider>
+    <li>
+      <a class="ds-list-item" href="#">
+        <span class="ds-list-item__content">
+          <span class="ds-list-item__title">오늘 도착 예정</span>
+          <span class="ds-list-item__desc">무선 이어폰 외 1건</span>
+        </span>
+        <i class="ds-icon ds-icon--chevron-right ds-list-item__chevron" aria-hidden="true"></i>
+      </a>
+    </li>
+    <li>
+      <a class="ds-list-item" href="#">
+        <span class="ds-list-item__content">
+          <span class="ds-list-item__title">쿠폰이 곧 사라져요</span>
+          <span class="ds-list-item__desc">3,000원 할인 쿠폰, 3일 남음</span>
+        </span>
+        <i class="ds-icon ds-icon--chevron-right ds-list-item__chevron" aria-hidden="true"></i>
+      </a>
+    </li>
+  </ul>
+  <nav class="ds-bottomnav" aria-label="주요 메뉴">
+    <a class="ds-bottomnav__item" href="#" aria-current="page">
+      <span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--house-solid ds-icon--lg" aria-hidden="true"></i></span>
+      <span class="ds-bottomnav__label">홈</span>
+    </a>
+    <a class="ds-bottomnav__item" href="#">
+      <span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--search ds-icon--lg" aria-hidden="true"></i></span>
+      <span class="ds-bottomnav__label">검색</span>
+    </a>
+    <a class="ds-bottomnav__item" href="#" aria-label="장바구니, 상품 3개">
+      <span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--shopping-cart ds-icon--lg" aria-hidden="true"></i><span class="ds-bottomnav__badge--count">3</span></span>
+      <span class="ds-bottomnav__label">장바구니</span>
+    </a>
+    <a class="ds-bottomnav__item" href="#" aria-label="알림, 새 알림 99개 넘음">
+      <span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--bell ds-icon--lg" aria-hidden="true"></i><span class="ds-bottomnav__badge--count">99+</span></span>
+      <span class="ds-bottomnav__label">알림</span>
+    </a>
+    <a class="ds-bottomnav__item" href="#" aria-label="내 정보, 새 소식 있음">
+      <span class="ds-bottomnav__icon"><i class="ds-icon ds-icon--user ds-icon--lg" aria-hidden="true"></i><span class="ds-bottomnav__badge--dot"></span></span>
+      <span class="ds-bottomnav__label">내 정보</span>
+    </a>
+  </nav>
+</div>
 ```
 
 ## 규격

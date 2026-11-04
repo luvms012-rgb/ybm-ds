@@ -1,4 +1,4 @@
-# YBM DS
+# yds
 
 > YBM 서비스를 위한 디자인 시스템입니다. HTML에 .ds-* 클래스를 붙이고 --ds-* 토큰으로 색, 간격, 글자를 맞춥니다. 이 파일은 AI 도구가 읽도록 문서 목록을 모은 것입니다.
 
@@ -26,7 +26,7 @@
 
 ## Get Started
 
-- [Get Started](https://luvms012-rgb.github.io/ybm-ds/site/index.md): YBM DS를 처음 쓰는 사람을 위한 안내
+- [Get Started](https://luvms012-rgb.github.io/ybm-ds/site/index.md): yds를 처음 쓰는 사람을 위한 안내
 
 ## Foundations
 

@@ -51,33 +51,60 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 예시
 
+### 새 소식이 쌓이는 목록에 쓰기
+
+알림처럼 새 내용이 계속 쌓이는 목록을 `ds-ptr`로 감쌉니다. 휴대폰에서 맨 위를 아래로 당기면 표시가 내려오고 `ds-refresh` 이벤트가 나갑니다.
+
 ```html
-<div class="ds-ptr" id="pv-ptr" style="width:343px;height:240px;box-shadow:inset 0 0 0 1px var(--ds-color-stroke-neutral-muted);border-radius:var(--ds-shape-md)">
-  <div class="ds-ptr__indicator">
-    <span class="ds-progress-circle" role="progressbar" aria-label="새로 고침" style="--ds-progress-value: 0"><svg viewBox="0 0 24 24" aria-hidden="true"><circle class="ds-progress-circle__track" pathLength="100"/><circle class="ds-progress-circle__range" pathLength="100"/></svg></span>
-  </div>
-  <div class="ds-ptr__content" style="height:100%;overflow:auto;padding:var(--ds-space-x4)">
-    <p>휴대폰에서 이 칸을 아래로 당겨 보세요.</p>
-    <p id="pv-ptr-out" style="color:var(--ds-color-fg-neutral-muted)">아직 새로 고치지 않았어요</p>
+<div class="u-col u-full" style="max-width: 375px">
+  <header class="ds-appbar">
+    <div class="ds-appbar__left">
+      <button type="button" class="ds-appbar__button" aria-label="뒤로"><i class="ds-icon ds-icon--chevron-left" aria-hidden="true"></i></button>
+    </div>
+    <div class="ds-appbar__main">
+      <h1 class="ds-appbar__title">알림</h1>
+    </div>
+    <div class="ds-appbar__right"></div>
+  </header>
+  <div class="ds-ptr">
+    <div class="ds-ptr__indicator">
+      <span class="ds-progress-circle" role="progressbar" aria-label="새로 고침"><svg viewBox="0 0 24 24" aria-hidden="true"><circle class="ds-progress-circle__track" pathLength="100"/><circle class="ds-progress-circle__range" pathLength="100"/></svg></span>
+    </div>
+    <div class="ds-ptr__content">
+      <ul class="ds-list" data-divider>
+        <li>
+          <a class="ds-list-item" href="#">
+            <span class="ds-list-item__prefix"><i class="ds-icon ds-icon--book-open" aria-hidden="true"></i></span>
+            <span class="ds-list-item__content">
+              <span class="ds-list-item__title">수강 신청이 확정됐어요</span>
+              <span class="ds-list-item__desc">영어 회화 기초, 방금</span>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a class="ds-list-item" href="#">
+            <span class="ds-list-item__prefix"><i class="ds-icon ds-icon--truck" aria-hidden="true"></i></span>
+            <span class="ds-list-item__content">
+              <span class="ds-list-item__title">주문한 교재가 출발했어요</span>
+              <span class="ds-list-item__desc">1시간 전</span>
+            </span>
+          </a>
+        </li>
+        <li>
+          <a class="ds-list-item" href="#">
+            <span class="ds-list-item__prefix"><i class="ds-icon ds-icon--calendar" aria-hidden="true"></i></span>
+            <span class="ds-list-item__content">
+              <span class="ds-list-item__title">내일 오전 10시에 시험이 있어요</span>
+              <span class="ds-list-item__desc">어제</span>
+            </span>
+          </a>
+        </li>
+      </ul>
+    </div>
   </div>
 </div>
 ```
 
-## 규격
+### 글자를 고르는 화면에서는 끄기
 
-### CSS 변수
-
-서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
-
-| 변수 | 기본값 |
-| --- | --- |
-| `--ds-ptr-size` | `calc(var(--ds-space-x6) + var(--ds-space-x8) * 2)` |
-| `--ds-ptr-displacement` | `0px` |
-
-### 크기와 여백
-
-```
-ybm-ds.js 가 터치로 당긴 거리를 --ds-ptr-displacement 에 넣고, 88 을 넘겨 놓으면 data-state="refreshing" 과 ds-refresh 이벤트.
-새로 고침이 끝나면 DS.endRefresh(요소) 로 되돌린다. data-disabled 로 끈다.
-Figma: 위쪽 영역 높이 x6 + x8 × 2 / Progress Circle 24 neutral, 당기는 동안 차오르고 새로 고치는 동안 회전
-```
+공지 본문처럼 글자를 끌어서 고르는 영역은 `data-disabled`로 당기기를 끕니다. 글자를 고르려던 손짓이 새로 고침으로 바뀌지 않습니다.

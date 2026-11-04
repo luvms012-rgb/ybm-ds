@@ -1,9 +1,9 @@
 ---
 name: ds-sync
-description: YBM DS 를 Figma ↔ 로컬(ds/) ↔ GitHub(ybm-ds 저장소·Pages) ↔ 가이드 사이트까지 한 번에 맞춘다. "ds 동기화", "DS 싱크", "피그마랑 맞춰줘", "DS 배포" 같은 요청이나, ds 폴더·Figma DS 를 고친 작업의 마지막 단계에 쓴다.
+description: yds 를 Figma ↔ 로컬(ds/) ↔ GitHub(ybm-ds 저장소·Pages) ↔ 가이드 사이트까지 한 번에 맞춘다. "ds 동기화", "DS 싱크", "피그마랑 맞춰줘", "DS 배포" 같은 요청이나, ds 폴더·Figma DS 를 고친 작업의 마지막 단계에 쓴다.
 ---
 
-# YBM DS 동기화
+# yds 동기화
 
 Figma 파일 `1VCEsFU3xMWuXIntIrZz9i`(디자인 시스템)과 `works/ybm-ds` 를 맞추고 GitHub 까지 올린다. 모든 명령은 `works/ybm-ds` 에서 실행한다.
 

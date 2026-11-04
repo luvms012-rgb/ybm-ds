@@ -1,4 +1,4 @@
-// 템플릿 생성기 공용 부품. 레퍼런스 A 템플릿 51종의 구조를 YBM DS 부품과 토큰으로 다시 짠다.
+// 템플릿 생성기 공용 부품. 레퍼런스 A 템플릿 51종의 구조를 yds 부품과 토큰으로 다시 짠다.
 // 값은 모두 --ds-* 토큰. 글은 한국어, 숫자와 고유한 기술 용어만 영어.
 export const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
@@ -116,7 +116,7 @@ export const page = ({ title, css = '', body, bodyClass = '' }) => `<!doctype ht
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>${esc(title)} - YBM DS 템플릿</title>
+<title>${esc(title)} - yds 템플릿</title>
 <link rel="stylesheet" href="../../../dist/ybm-ds.css">
 <script src="../../../dist/ybm-ds.js" defer></script>
 <style>

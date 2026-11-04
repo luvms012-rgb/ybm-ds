@@ -40,21 +40,42 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 예시
 
+### 같은 내용의 보기 방식만 바꾸기
+
+수업 일정을 목록으로 볼지 달력으로 볼지처럼 같은 내용을 보는 방식만 바꿀 때 씁니다. 다른 화면으로 옮겨 가는 메뉴는 Tabs로 만듭니다.
+
 ```html
-<div class="ds-segmented" role="group" aria-label="보기 방식"><button type="button" class="ds-segmented__item" aria-pressed="true">목록</button><button type="button" class="ds-segmented__item" aria-pressed="false">달력</button></div>
-
-<div class="ds-segmented" role="group" aria-label="기간" data-size="medium"><button type="button" class="ds-segmented__item" aria-pressed="false">1개월</button><button type="button" class="ds-segmented__item" aria-pressed="true">3개월</button><button type="button" class="ds-segmented__item" aria-pressed="false">1년</button></div><button class="ds-btn" data-variant="neutralWeak"><i class="ds-icon ds-icon--download" aria-hidden="true"></i>내보내기</button>
+<div class="u-col u-gap-3 u-full" style="max-width: 420px">
+  <div class="u-flex u-center u-between">
+    <h3 class="ds-t06 ds-fw-bold">수업 일정</h3>
+    <div class="ds-segmented" role="group" aria-label="보기 방식">
+      <button type="button" class="ds-segmented__item" aria-pressed="true">목록</button>
+      <button type="button" class="ds-segmented__item" aria-pressed="false">달력</button>
+    </div>
+  </div>
+  <ul class="ds-list" data-variant="inset" data-divider>
+    <li>
+      <a class="ds-list-item" href="#">
+        <span class="ds-list-item__content">
+          <span class="ds-list-item__title">영어 회화 기초</span>
+          <span class="ds-list-item__desc">11월 6일 목요일 오후 7시</span>
+        </span>
+        <i class="ds-icon ds-icon--chevron-right ds-list-item__chevron" aria-hidden="true"></i>
+      </a>
+    </li>
+    <li>
+      <a class="ds-list-item" href="#">
+        <span class="ds-list-item__content">
+          <span class="ds-list-item__title">비즈니스 이메일 쓰기</span>
+          <span class="ds-list-item__desc">11월 8일 토요일 오전 10시</span>
+        </span>
+        <i class="ds-icon ds-icon--chevron-right ds-list-item__chevron" aria-hidden="true"></i>
+      </a>
+    </li>
+  </ul>
+</div>
 ```
 
-## 규격
+### 짧은 선택지 2~4개 중 하나 고르기
 
-### 크기와 여백
-
-```
-size: small(기본) / medium   layout: hug(기본) / fill
-모션: 선택 배경이 고른 항목으로 미끄러져 이동한다(필수, ybm-ds.js). 누르면 aria-pressed 가 바뀌고 change 이벤트가 난다.
-Figma small : 트랙 bg/neutral / padding 2 / shape/sm / item py6 px12 / shape/xs / t03 Bold fg/neutral-subtle
-      medium: 트랙 shape/lg / item py8 px16 / shape/sm / t04 Bold
-      selected bg/layer-default + elevation raised + fg/neutral / disabled fg/disabled
-높이(2026-11-03): small 32(Button xsmall 과 같음) / medium 40(Button medium, Select medium 과 같음). 글자와 아이콘 모두 같은 높이
-```
+기간처럼 짧은 선택지를 2~4개만 둡니다. 선택지가 더 많거나 라벨이 길면 Select를 씁니다.

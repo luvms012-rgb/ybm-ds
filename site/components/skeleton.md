@@ -33,27 +33,67 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 예시
 
+### 목록 모양 그대로 자리 잡기
+
+목록을 불러오는 동안 줄마다 사진, 제목, 설명 자리를 Skeleton으로 미리 그립니다. 곧 나타날 모양을 알 수 있고, 내용이 들어와도 줄 높이가 그대로라 화면이 덜컹거리지 않습니다.
+
 ```html
-<span class="ds-skeleton" data-shape="circle" style="--ds-skeleton-size:48px"></span><span class="ds-skeleton" style="width:220px;height:16px"></span><span class="ds-skeleton" data-shape="text" data-lines="3" style="width:240px"></span>
+<ul class="ds-list u-full" data-variant="inset" data-divider aria-busy="true" aria-label="강의 목록 불러오는 중" style="max-width: 420px">
+  <li>
+    <div class="ds-list-item">
+      <span class="ds-list-item__prefix"><span class="ds-skeleton" style="width: 48px; height: 48px"></span></span>
+      <span class="ds-list-item__content u-gap-2">
+        <span class="ds-skeleton" style="width: 60%; height: 16px"></span>
+        <span class="ds-skeleton" style="width: 35%; height: 12px"></span>
+      </span>
+    </div>
+  </li>
+  <li>
+    <div class="ds-list-item">
+      <span class="ds-list-item__prefix"><span class="ds-skeleton" style="width: 48px; height: 48px"></span></span>
+      <span class="ds-list-item__content u-gap-2">
+        <span class="ds-skeleton" style="width: 72%; height: 16px"></span>
+        <span class="ds-skeleton" style="width: 40%; height: 12px"></span>
+      </span>
+    </div>
+  </li>
+  <li>
+    <div class="ds-list-item">
+      <span class="ds-list-item__prefix"><span class="ds-skeleton" style="width: 48px; height: 48px"></span></span>
+      <span class="ds-list-item__content u-gap-2">
+        <span class="ds-skeleton" style="width: 52%; height: 16px"></span>
+        <span class="ds-skeleton" style="width: 30%; height: 12px"></span>
+      </span>
+    </div>
+  </li>
+</ul>
 ```
 
-## 규격
+### 모서리를 들어올 사진과 맞추기
 
-### CSS 변수
+사진 자리는 나중에 들어올 Image Frame과 같은 모서리가 되도록 `--ds-skeleton-radius`를 맞춥니다. 모서리가 다르면 사진이 들어오는 순간 모양이 바뀌어 보입니다.
 
-서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
-
-| 변수 | 기본값 |
-| --- | --- |
-| `--ds-skeleton-color` | `var(--ds-color-palette-gray-200)` |
-| `--ds-skeleton-radius` | `var(--ds-shape-sm)` |
-| `--ds-skeleton-size` | `48px` |
-
-### 크기와 여백
-
+```html
+<ul class="u-col u-gap-4 u-full" style="max-width: 420px">
+  <li class="u-flex u-gap-4">
+    <div class="ds-imageframe" data-radius="lg" style="width: 88px">
+      <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=200&q=70" alt="">
+    </div>
+    <div class="u-col u-gap-1">
+      <span class="ds-t05 ds-fw-semibold">영어 단어장 기본편</span>
+      <span class="ds-t04 ds-fg-subtle">15,000원</span>
+    </div>
+  </li>
+  <li class="u-flex u-gap-4" aria-busy="true" aria-label="상품 불러오는 중">
+    <span class="ds-skeleton" style="width: 88px; height: 88px; --ds-skeleton-radius: var(--ds-shape-lg)"></span>
+    <div class="u-col u-gap-2 u-grow">
+      <span class="ds-skeleton" style="width: 65%; height: 16px"></span>
+      <span class="ds-skeleton" style="width: 30%; height: 14px"></span>
+    </div>
+  </li>
+</ul>
 ```
-shape: rectangle(기본) / circle / text
-Figma: palette/gray-200 / rectangle shape/sm / circle pill / text 줄 높이 14 / 줄 사이 x2 / 마지막 줄 64%
-모서리(2026-11-03): --ds-skeleton-radius 로 나중에 들어올 콘텐츠와 같게 맞춘다
-움직임 줄이기(2026-11-03): 설정을 켠 사람에게는 깜빡이지 않는다
-```
+
+### 긴 글은 줄 모양으로 미리 보여 주기
+
+공지 본문처럼 여러 줄 글이 들어올 자리는 `data-shape="text"`로 줄 모양을 그립니다. 같은 자리에 Progress Circle을 함께 돌리면 로딩을 두 번 알리게 되니 Skeleton 하나만 둡니다.

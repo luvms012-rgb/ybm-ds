@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Field Button - YBM DS</title>
+<title>Field Button - yds</title>
 <meta name="description" content="직접 입력하지 않고 눌러서 값을 고르는 입력 칸입니다. 날짜, 시간처럼 다른 창에서 값을 받을 때 씁니다.">
 <!-- 생성물: node site/build.mjs가 만든다. 직접 고치지 말고 site/build.mjs나 site/src를 고친다 -->
 <script>try { var t = localStorage.getItem("ybm-site-theme"); if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.dataset.theme = "dark"; } catch (e) {}</script>
 <link rel="icon" href="../assets/logo-ybmnet.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../dist/ybm-ds.css">
-<link rel="stylesheet" href="../assets/site.css?v=bb7371b2">
+<link rel="stylesheet" href="../assets/site.css?v=1656b6c0">
 <script src="../../dist/ybm-ds.js" defer></script>
-<script src="../assets/site.js?v=bb7371b2" defer></script>
+<script src="../assets/site.js?v=1656b6c0" defer></script>
 </head>
 <body class="site">
 <a class="site-skip" href="#main">본문 바로가기</a>
@@ -148,16 +148,158 @@
 <tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>사용자가 직접 입력해야 하면 Field Button 대신 Text Field Input을 씁니다.</td></tr>
 <tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>라벨, 설명, 오류 문구는 Field Label로 감싸서 붙이세요.</td></tr>
 <tr><td><b class="ds-badge site-practice" data-tone="critical">Don't</b></td><td>지우기(clear) 버튼은 오른쪽 아이콘과 역할이 겹치므로 넣지 않습니다.</td></tr></tbody></table></div>
-<h2 id="examples">예시<a class="site-anchor" href="#examples" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><div class="site-example">
+<h2 id="examples">예시<a class="site-anchor" href="#examples" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><h3>정해진 값은 눌러서 고르게 하기</h3>
+<p>고를 값이 정해진 칸은 Field Button으로 만들고, 누르면 Bottom Sheet에서 고릅니다. 사용자가 직접 써야 하는 칸이면 Text Field Input을 씁니다.</p>
+<div class="site-example">
   <div class="site-example__bar"><div class="ds-chiptabs" role="tablist" aria-label="보기 방식"><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-view="preview">미리보기</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-view="code">코드</button></div></div>
-  <div class="site-example__preview"><div class="pv-stage pv-col">
-    <button type="button" class="ds-fieldbutton pv-w" data-size="large"><span class="ds-fieldbutton__value" data-placeholder="날짜를 선택해 주세요"></span><i class="ds-icon ds-icon--chevron-down" aria-hidden="true"></i></button>
-    <button type="button" class="ds-fieldbutton pv-w" data-size="medium"><span class="ds-fieldbutton__value">2026.10.25 (토)</span><i class="ds-icon ds-icon--calendar" aria-hidden="true"></i></button>
-  </div></div>
+  <div class="site-example__preview"><div class="pv-stage pv-wide"><div class="ds-field u-full" style="max-width: 360px">
+  <div class="ds-field__header">
+    <label class="ds-field__label" for="field-button-ex1-field">배송 요청 사항</label>
+    <span class="ds-field__indicator">선택</span>
+  </div>
+  <button type="button" class="ds-fieldbutton" id="field-button-ex1-field" data-ds-open="field-button-ex1-sheet" aria-haspopup="dialog">
+    <span class="ds-fieldbutton__value" data-placeholder="요청 사항을 골라 주세요"></span>
+    <i class="ds-icon ds-icon--chevron-down" aria-hidden="true"></i>
+  </button>
+</div>
+<dialog class="ds-bottomsheet" id="field-button-ex1-sheet" aria-labelledby="field-button-ex1-title" data-handle>
+  <div class="ds-bottomsheet__header">
+    <h2 class="ds-bottomsheet__title" id="field-button-ex1-title">배송 요청 사항</h2>
+    <button class="ds-bottomsheet__close" data-ds-close aria-label="닫기"></button>
+  </div>
+  <div class="ds-bottomsheet__body">
+    <div class="ds-radio-group" role="radiogroup" aria-labelledby="field-button-ex1-title">
+      <label class="ds-radio"><input type="radio" class="ds-radio__control" name="field-button-ex1-request" checked><span>문 앞에 두기</span></label>
+      <label class="ds-radio"><input type="radio" class="ds-radio__control" name="field-button-ex1-request"><span>경비실에 맡기기</span></label>
+      <label class="ds-radio"><input type="radio" class="ds-radio__control" name="field-button-ex1-request"><span>택배함에 넣기</span></label>
+      <label class="ds-radio"><input type="radio" class="ds-radio__control" name="field-button-ex1-request"><span>배송 전에 연락하기</span></label>
+    </div>
+  </div>
+  <div class="ds-bottomsheet__footer">
+    <button class="ds-btn" data-variant="brandSolid" data-size="large" data-ds-close>적용</button>
+  </div>
+</dialog></div></div>
   <div class="site-example__code" hidden><figure class="ds-codeblock">
   <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">html</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
-  <pre class="ds-codeblock__code"><code>&lt;<span class="hl-t">button</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;button&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-fieldbutton&quot;</span> <span class="hl-f">data-size</span>=<span class="hl-s">&quot;large&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-fieldbutton__value&quot;</span> <span class="hl-f">data-placeholder</span>=<span class="hl-s">&quot;날짜를 선택해 주세요&quot;</span>&gt;&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">i</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-icon ds-icon--chevron-down&quot;</span> <span class="hl-f">aria-hidden</span>=<span class="hl-s">&quot;true&quot;</span>&gt;&lt;/<span class="hl-t">i</span>&gt;&lt;/<span class="hl-t">button</span>&gt;
-&lt;<span class="hl-t">button</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;button&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-fieldbutton&quot;</span> <span class="hl-f">data-size</span>=<span class="hl-s">&quot;medium&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-fieldbutton__value&quot;</span>&gt;2026.10.25 (토)&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">i</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-icon ds-icon--calendar&quot;</span> <span class="hl-f">aria-hidden</span>=<span class="hl-s">&quot;true&quot;</span>&gt;&lt;/<span class="hl-t">i</span>&gt;&lt;/<span class="hl-t">button</span>&gt;</code></pre>
+  <pre class="ds-codeblock__code"><code>&lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field u-full&quot;</span> <span class="hl-f">style</span>=<span class="hl-s">&quot;max-width: 360px&quot;</span>&gt;
+  &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field__header&quot;</span>&gt;
+    &lt;<span class="hl-t">label</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field__label&quot;</span> <span class="hl-f">for</span>=<span class="hl-s">&quot;field-button-ex1-field&quot;</span>&gt;배송 요청 사항&lt;/<span class="hl-t">label</span>&gt;
+    &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field__indicator&quot;</span>&gt;선택&lt;/<span class="hl-t">span</span>&gt;
+  &lt;/<span class="hl-t">div</span>&gt;
+  &lt;<span class="hl-t">button</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;button&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-fieldbutton&quot;</span> <span class="hl-f">id</span>=<span class="hl-s">&quot;field-button-ex1-field&quot;</span> <span class="hl-f">data-ds-open</span>=<span class="hl-s">&quot;field-button-ex1-sheet&quot;</span> <span class="hl-f">aria-haspopup</span>=<span class="hl-s">&quot;dialog&quot;</span>&gt;
+    &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-fieldbutton__value&quot;</span> <span class="hl-f">data-placeholder</span>=<span class="hl-s">&quot;요청 사항을 골라 주세요&quot;</span>&gt;&lt;/<span class="hl-t">span</span>&gt;
+    &lt;<span class="hl-t">i</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-icon ds-icon--chevron-down&quot;</span> <span class="hl-f">aria-hidden</span>=<span class="hl-s">&quot;true&quot;</span>&gt;&lt;/<span class="hl-t">i</span>&gt;
+  &lt;/<span class="hl-t">button</span>&gt;
+&lt;/<span class="hl-t">div</span>&gt;
+&lt;<span class="hl-t">dialog</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-bottomsheet&quot;</span> <span class="hl-f">id</span>=<span class="hl-s">&quot;field-button-ex1-sheet&quot;</span> <span class="hl-f">aria-labelledby</span>=<span class="hl-s">&quot;field-button-ex1-title&quot;</span> <span class="hl-f">data-handle</span>&gt;
+  &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-bottomsheet__header&quot;</span>&gt;
+    &lt;<span class="hl-t">h2</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-bottomsheet__title&quot;</span> <span class="hl-f">id</span>=<span class="hl-s">&quot;field-button-ex1-title&quot;</span>&gt;배송 요청 사항&lt;/<span class="hl-t">h2</span>&gt;
+    &lt;<span class="hl-t">button</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-bottomsheet__close&quot;</span> <span class="hl-f">data-ds-close</span> <span class="hl-f">aria-label</span>=<span class="hl-s">&quot;닫기&quot;</span>&gt;&lt;/<span class="hl-t">button</span>&gt;
+  &lt;/<span class="hl-t">div</span>&gt;
+  &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-bottomsheet__body&quot;</span>&gt;
+    &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-radio-group&quot;</span> <span class="hl-f">role</span>=<span class="hl-s">&quot;radiogroup&quot;</span> <span class="hl-f">aria-labelledby</span>=<span class="hl-s">&quot;field-button-ex1-title&quot;</span>&gt;
+      &lt;<span class="hl-t">label</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-radio&quot;</span>&gt;&lt;<span class="hl-t">input</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;radio&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-radio__control&quot;</span> <span class="hl-f">name</span>=<span class="hl-s">&quot;field-button-ex1-request&quot;</span> <span class="hl-f">checked</span>&gt;&lt;<span class="hl-t">span</span>&gt;문 앞에 두기&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">label</span>&gt;
+      &lt;<span class="hl-t">label</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-radio&quot;</span>&gt;&lt;<span class="hl-t">input</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;radio&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-radio__control&quot;</span> <span class="hl-f">name</span>=<span class="hl-s">&quot;field-button-ex1-request&quot;</span>&gt;&lt;<span class="hl-t">span</span>&gt;경비실에 맡기기&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">label</span>&gt;
+      &lt;<span class="hl-t">label</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-radio&quot;</span>&gt;&lt;<span class="hl-t">input</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;radio&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-radio__control&quot;</span> <span class="hl-f">name</span>=<span class="hl-s">&quot;field-button-ex1-request&quot;</span>&gt;&lt;<span class="hl-t">span</span>&gt;택배함에 넣기&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">label</span>&gt;
+      &lt;<span class="hl-t">label</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-radio&quot;</span>&gt;&lt;<span class="hl-t">input</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;radio&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-radio__control&quot;</span> <span class="hl-f">name</span>=<span class="hl-s">&quot;field-button-ex1-request&quot;</span>&gt;&lt;<span class="hl-t">span</span>&gt;배송 전에 연락하기&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">label</span>&gt;
+    &lt;/<span class="hl-t">div</span>&gt;
+  &lt;/<span class="hl-t">div</span>&gt;
+  &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-bottomsheet__footer&quot;</span>&gt;
+    &lt;<span class="hl-t">button</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-btn&quot;</span> <span class="hl-f">data-variant</span>=<span class="hl-s">&quot;brandSolid&quot;</span> <span class="hl-f">data-size</span>=<span class="hl-s">&quot;large&quot;</span> <span class="hl-f">data-ds-close</span>&gt;적용&lt;/<span class="hl-t">button</span>&gt;
+  &lt;/<span class="hl-t">div</span>&gt;
+&lt;/<span class="hl-t">dialog</span>&gt;</code></pre>
+</figure></div>
+</div>
+<h3>바꿀 수 없지만 보내야 하는 값은 readOnly로</h3>
+<p>바꿀 수 없지만 폼과 함께 보내야 하는 값은 <code>disabled</code> 대신 <code>aria-readonly=&quot;true&quot;</code>로 둡니다. <code>disabled</code> 값은 폼과 함께 보내지지 않기 때문입니다.</p>
+<div class="site-example">
+  <div class="site-example__bar"><div class="ds-chiptabs" role="tablist" aria-label="보기 방식"><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-view="preview">미리보기</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-view="code">코드</button></div></div>
+  <div class="site-example__preview"><div class="pv-stage pv-wide"><div class="u-col u-gap-5 u-full" style="max-width: 360px">
+  <div class="ds-field">
+    <div class="ds-field__header">
+      <label class="ds-field__label" for="field-button-ex2-area">시험 지역</label>
+    </div>
+    <button type="button" class="ds-fieldbutton" id="field-button-ex2-area" aria-readonly="true">
+      <span class="ds-fieldbutton__value">서울</span>
+      <i class="ds-icon ds-icon--chevron-down" aria-hidden="true"></i>
+    </button>
+    <div class="ds-field__footer">
+      <p class="ds-field__help">접수한 지역은 바꿀 수 없어요.</p>
+    </div>
+  </div>
+  <div class="ds-field">
+    <div class="ds-field__header">
+      <label class="ds-field__label" for="field-button-ex2-place">시험장</label>
+      <span class="ds-field__required" aria-hidden="true"></span>
+    </div>
+    <button type="button" class="ds-fieldbutton" id="field-button-ex2-place">
+      <span class="ds-fieldbutton__value" data-placeholder="시험장을 골라 주세요"></span>
+      <i class="ds-icon ds-icon--chevron-down" aria-hidden="true"></i>
+    </button>
+  </div>
+</div></div></div>
+  <div class="site-example__code" hidden><figure class="ds-codeblock">
+  <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">html</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
+  <pre class="ds-codeblock__code"><code>&lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;u-col u-gap-5 u-full&quot;</span> <span class="hl-f">style</span>=<span class="hl-s">&quot;max-width: 360px&quot;</span>&gt;
+  &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field&quot;</span>&gt;
+    &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field__header&quot;</span>&gt;
+      &lt;<span class="hl-t">label</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field__label&quot;</span> <span class="hl-f">for</span>=<span class="hl-s">&quot;field-button-ex2-area&quot;</span>&gt;시험 지역&lt;/<span class="hl-t">label</span>&gt;
+    &lt;/<span class="hl-t">div</span>&gt;
+    &lt;<span class="hl-t">button</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;button&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-fieldbutton&quot;</span> <span class="hl-f">id</span>=<span class="hl-s">&quot;field-button-ex2-area&quot;</span> <span class="hl-f">aria-readonly</span>=<span class="hl-s">&quot;true&quot;</span>&gt;
+      &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-fieldbutton__value&quot;</span>&gt;서울&lt;/<span class="hl-t">span</span>&gt;
+      &lt;<span class="hl-t">i</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-icon ds-icon--chevron-down&quot;</span> <span class="hl-f">aria-hidden</span>=<span class="hl-s">&quot;true&quot;</span>&gt;&lt;/<span class="hl-t">i</span>&gt;
+    &lt;/<span class="hl-t">button</span>&gt;
+    &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field__footer&quot;</span>&gt;
+      &lt;<span class="hl-t">p</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field__help&quot;</span>&gt;접수한 지역은 바꿀 수 없어요.&lt;/<span class="hl-t">p</span>&gt;
+    &lt;/<span class="hl-t">div</span>&gt;
+  &lt;/<span class="hl-t">div</span>&gt;
+  &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field&quot;</span>&gt;
+    &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field__header&quot;</span>&gt;
+      &lt;<span class="hl-t">label</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field__label&quot;</span> <span class="hl-f">for</span>=<span class="hl-s">&quot;field-button-ex2-place&quot;</span>&gt;시험장&lt;/<span class="hl-t">label</span>&gt;
+      &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field__required&quot;</span> <span class="hl-f">aria-hidden</span>=<span class="hl-s">&quot;true&quot;</span>&gt;&lt;/<span class="hl-t">span</span>&gt;
+    &lt;/<span class="hl-t">div</span>&gt;
+    &lt;<span class="hl-t">button</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;button&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-fieldbutton&quot;</span> <span class="hl-f">id</span>=<span class="hl-s">&quot;field-button-ex2-place&quot;</span>&gt;
+      &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-fieldbutton__value&quot;</span> <span class="hl-f">data-placeholder</span>=<span class="hl-s">&quot;시험장을 골라 주세요&quot;</span>&gt;&lt;/<span class="hl-t">span</span>&gt;
+      &lt;<span class="hl-t">i</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-icon ds-icon--chevron-down&quot;</span> <span class="hl-f">aria-hidden</span>=<span class="hl-s">&quot;true&quot;</span>&gt;&lt;/<span class="hl-t">i</span>&gt;
+    &lt;/<span class="hl-t">button</span>&gt;
+  &lt;/<span class="hl-t">div</span>&gt;
+&lt;/<span class="hl-t">div</span>&gt;</code></pre>
+</figure></div>
+</div>
+<h3>고르지 않은 칸은 오류와 고칠 방법 알리기</h3>
+<p>라벨과 오류 문구는 Field Label로 감싸 붙이고, 고르지 않은 칸에는 <code>aria-invalid=&quot;true&quot;</code>를 붙입니다. 오류가 나면 안내 문구 자리에 고치는 방법이 보입니다.</p>
+<div class="site-example">
+  <div class="site-example__bar"><div class="ds-chiptabs" role="tablist" aria-label="보기 방식"><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-view="preview">미리보기</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-view="code">코드</button></div></div>
+  <div class="site-example__preview"><div class="pv-stage pv-wide"><div class="ds-field u-full" style="max-width: 360px">
+  <div class="ds-field__header">
+    <label class="ds-field__label" for="field-button-ex3-field">생년월일</label>
+    <span class="ds-field__required" aria-hidden="true"></span>
+  </div>
+  <button type="button" class="ds-fieldbutton" id="field-button-ex3-field" aria-invalid="true" aria-describedby="field-button-ex3-error">
+    <span class="ds-fieldbutton__value" data-placeholder="날짜를 골라 주세요"></span>
+    <i class="ds-icon ds-icon--calendar" aria-hidden="true"></i>
+  </button>
+  <div class="ds-field__footer">
+    <p class="ds-field__help">신분증에 적힌 날짜로 골라 주세요.</p>
+    <p class="ds-field__error" id="field-button-ex3-error">생년월일을 골라야 다음으로 넘어갈 수 있어요.</p>
+  </div>
+</div></div></div>
+  <div class="site-example__code" hidden><figure class="ds-codeblock">
+  <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">html</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
+  <pre class="ds-codeblock__code"><code>&lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field u-full&quot;</span> <span class="hl-f">style</span>=<span class="hl-s">&quot;max-width: 360px&quot;</span>&gt;
+  &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field__header&quot;</span>&gt;
+    &lt;<span class="hl-t">label</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field__label&quot;</span> <span class="hl-f">for</span>=<span class="hl-s">&quot;field-button-ex3-field&quot;</span>&gt;생년월일&lt;/<span class="hl-t">label</span>&gt;
+    &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field__required&quot;</span> <span class="hl-f">aria-hidden</span>=<span class="hl-s">&quot;true&quot;</span>&gt;&lt;/<span class="hl-t">span</span>&gt;
+  &lt;/<span class="hl-t">div</span>&gt;
+  &lt;<span class="hl-t">button</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;button&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-fieldbutton&quot;</span> <span class="hl-f">id</span>=<span class="hl-s">&quot;field-button-ex3-field&quot;</span> <span class="hl-f">aria-invalid</span>=<span class="hl-s">&quot;true&quot;</span> <span class="hl-f">aria-describedby</span>=<span class="hl-s">&quot;field-button-ex3-error&quot;</span>&gt;
+    &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-fieldbutton__value&quot;</span> <span class="hl-f">data-placeholder</span>=<span class="hl-s">&quot;날짜를 골라 주세요&quot;</span>&gt;&lt;/<span class="hl-t">span</span>&gt;
+    &lt;<span class="hl-t">i</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-icon ds-icon--calendar&quot;</span> <span class="hl-f">aria-hidden</span>=<span class="hl-s">&quot;true&quot;</span>&gt;&lt;/<span class="hl-t">i</span>&gt;
+  &lt;/<span class="hl-t">button</span>&gt;
+  &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field__footer&quot;</span>&gt;
+    &lt;<span class="hl-t">p</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field__help&quot;</span>&gt;신분증에 적힌 날짜로 골라 주세요.&lt;/<span class="hl-t">p</span>&gt;
+    &lt;<span class="hl-t">p</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field__error&quot;</span> <span class="hl-f">id</span>=<span class="hl-s">&quot;field-button-ex3-error&quot;</span>&gt;생년월일을 골라야 다음으로 넘어갈 수 있어요.&lt;/<span class="hl-t">p</span>&gt;
+  &lt;/<span class="hl-t">div</span>&gt;
+&lt;/<span class="hl-t">div</span>&gt;</code></pre>
 </figure></div>
 </div>
 <h2 id="spec">규격<a class="site-anchor" href="#spec" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><h3>크기와 여백</h3><pre class="site-spec">Figma large : h52 / px16 / gap10 / shape/lg / t05 / icon 20 / medium: h40 / px14 / gap8 / shape/sm / t04 / icon 16

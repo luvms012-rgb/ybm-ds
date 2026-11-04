@@ -1,4 +1,4 @@
-# YBM Design System
+# yds
 
 YBM 서비스 공용 디자인 시스템. Figma 변수/컴포넌트가 정본이고, 이 폴더(`ybm-ds/`)는 그걸 코드로 옮긴 배포 패키지와 동기화 도구다.
 이 폴더 하나가 GitHub 저장소 하나다(가이드 사이트와 분리된 단독 저장소).
@@ -159,7 +159,7 @@ Top App Bar부터 Multi Select 까지(54~71번)는 2026-10-29 Figma와 CSS를 �
 ### 변수 컬렉션
 | 컬렉션 | 모드 | 변수 수 |
 |---|---|---|
-| **YBM DS** (`VariableCollectionId:3:2`) | Light / Dark | 247 |
+| **yds** (`VariableCollectionId:3:2`) | Light / Dark | 247 |
 | Typography | 100% (하나) | 73 |
 | Shape | Default (하나) | 9 |
 | Elevation | Default (하나) | 30 |
@@ -271,7 +271,7 @@ Figma의 `dimension/x*` 변수 scopes = `WIDTH_HEIGHT` + `GAP`.
 - `body` 기본 = t05, `word-break: keep-all`.
 
 ### 5.8 Elevation (그림자)
-2겹(key + ambient) 5단계. 기하값은 Figma `Elevation` 컬렉션, 색은 `YBM DS` 컬렉션의 `elevation/{n}-key|ambient`(다크 모드 자동 대응).
+2겹(key + ambient) 5단계. 기하값은 Figma `Elevation` 컬렉션, 색은 `yds` 컬렉션의 `elevation/{n}-key|ambient`(다크 모드 자동 대응).
 
 | 단계 | 값 | 역할 별칭 (컴포넌트는 이 이름을 씀) |
 |---|---|---|
@@ -369,7 +369,7 @@ CSS는 Figma 프로퍼티 이름을 그대로 `data-*` 속성으로 쓴다: `<bu
 | 71 | Multi Select | `.ds-multiselect` (`__trigger/values/overflow/panel/heading/option/label`) | Trigger `2566:1252`, 6 / Option `2566:1295`, 6 / Panel `2566:1296` | data-ds-popover로 열기, 고른 값 Badge와 +N |
 | 72 | Rating | `.ds-rating` (`__stars/value/count`, 입력형 `__option/control/star`) | `2579:318`, 6 | size `small/medium/large`, `--ds-rating-value` 0~5, `data-input` |
 
-목록의 기계용 사본이 `components.json` 이다. 컴포넌트를 추가/변경하면 이 표와 `components.json`을 함께 고친다(sync가 Figma/CSS와 대조).
+목록의 기계용 사본이 `components.json`이다. 컴포넌트를 추가/변경하면 이 표와 `components.json`을 함께 고친다(sync가 Figma/CSS와 대조).
 
 ### 6.2 사용 지침 (Do / Don't)
 - **Action Button** - 강조 버튼(High emphasis)은 한 화면에 하나만 둡니다. 버튼을 세 개 넘게 나란히 두지 않습니다.
@@ -517,7 +517,7 @@ CSS는 Figma 프로퍼티 이름을 그대로 `data-*` 속성으로 쓴다: `<bu
 | 2026-10-28 | Figma 에만 있던 10종 CSS 완성과 등록(49~53), Popover/Time Picker/Chat 입력창 동작 |
 | 2026-10-27 | Figma 페이지를 레퍼런스 라이브러리 형식(카테고리 페이지 + 문서 프레임)으로 개편, 새 컴포넌트 10종(Figma만). 모드 정리 - Typography 130%/150%, Shape Soft/Sharp 삭제, CSS의 `data-shape` 테마(soft/sharp/square) 제거. 남은 모드는 Light / Dark |
 | 2026-10-22 | ds를 단독 GitHub 저장소(ybm-ds) + Pages로 분리, 가이드 사이트에서 DS 사본 제거(DS 주소 참조). 통합 동기화 `sync.mjs`/`동기화.bat`/`components.json`(Figma 노드 대조) 도입. `build.py` → `build.mjs`(출력 동일, Python 불필요). 컴포넌트 6종 추가(Divider/Tooltip/List/Breadcrumbs/Stepper/Banner - CSS/Figma 동시). 미리보기 `index.html` |
-| 2026-10-21 | 폴더 재구성(`ds/` 루트 = `ybm-ds/` + `tokens/`). 명칭 **YBM Family → YBM** 일괄 변경 - Figma 컬렉션 `YBM Family DS` → `YBM DS`, 코드/주석/생성물 전부 |
+| 2026-10-21 | 폴더 재구성(`ds/` 루트 = `ybm-ds/` + `tokens/`). 명칭 **YBM Family → YBM** 일괄 변경 - Figma 컬렉션 `YBM Family DS` → `yds`, 코드/주석/생성물 전부 |
 | 2026-10-20 | 외부 레퍼런스 DS 관련 문구 전면 제거. figma-sync 파이프라인 도입 |
 | 2026-10-02 | components.css 전 컴포넌트를 Figma 변형별 실측과 재정합. 로컬 스타일은 텍스트만 허용 |
 | 2026-09-29 | lineHeight 전 단계 +2 |

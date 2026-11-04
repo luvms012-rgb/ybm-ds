@@ -45,10 +45,75 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 예시
 
+### 라벨과 안내를 붙여 입력받기
+
+입력 칸 위에는 Field Label로 이름을, 아래에는 안내 문구를 붙입니다. 플레이스홀더는 입력하면 사라지므로 꼭 지킬 형식은 안내 문구에 적습니다.
+
 ```html
-<div class="ds-input"><input class="ds-input__control" placeholder="underline · large"></div>
-<div class="ds-input" data-variant="outline" data-size="medium"><i class="ds-icon ds-icon--search ds-input__icon" aria-hidden="true"></i><input class="ds-input__control" placeholder="outline · medium"></div>
-<div class="ds-input" data-variant="outline"><input class="ds-input__control" value="비활성" disabled></div>
+<div class="u-col u-gap-6" style="width: 100%; max-width: 360px">
+  <div class="ds-field">
+    <div class="ds-field__header">
+      <label class="ds-field__label" for="text-field-input-ex1-name">이름</label>
+      <span class="ds-field__required" aria-hidden="true"></span>
+    </div>
+    <div class="ds-input" data-variant="outline">
+      <input class="ds-input__control" id="text-field-input-ex1-name" placeholder="이름을 입력해 주세요" required>
+    </div>
+  </div>
+  <div class="ds-field">
+    <div class="ds-field__header">
+      <label class="ds-field__label" for="text-field-input-ex1-phone">휴대폰 번호</label>
+      <span class="ds-field__required" aria-hidden="true"></span>
+    </div>
+    <div class="ds-input" data-variant="outline">
+      <input class="ds-input__control" id="text-field-input-ex1-phone" type="tel" inputmode="numeric" placeholder="01012345678" required>
+    </div>
+    <div class="ds-field__footer">
+      <p class="ds-field__help">숫자만 입력해 주세요.</p>
+    </div>
+  </div>
+</div>
+```
+
+### 형식이 틀리면 고칠 방법 알리기
+
+형식이 맞지 않으면 입력 요소에 `aria-invalid="true"`를 붙여 선과 문구를 빨간색으로 바꿉니다. 오류 문구에는 무엇을 어떻게 고치면 되는지 적습니다.
+
+```html
+<div class="ds-field" style="width: 100%; max-width: 360px">
+  <div class="ds-field__header">
+    <label class="ds-field__label" for="text-field-input-ex2-mail">이메일</label>
+  </div>
+  <div class="ds-input" data-variant="outline">
+    <input class="ds-input__control" id="text-field-input-ex2-mail" type="email" value="sky@example" aria-invalid="true" aria-describedby="text-field-input-ex2-mail-error">
+  </div>
+  <div class="ds-field__footer">
+    <p class="ds-field__help">영수증과 안내 메일을 받을 주소예요.</p>
+    <p class="ds-field__error" id="text-field-input-ex2-mail-error">sky@example.com처럼 끝까지 입력해 주세요.</p>
+  </div>
+</div>
+```
+
+### 단위를 붙이고 옆 버튼과 높이 맞추기
+
+포인트처럼 단위가 있는 값은 `ds-input__suffix`로 단위를 붙입니다. 옆에 버튼을 둘 때는 medium 입력 칸과 medium 버튼을 함께 써서 높이를 맞춥니다.
+
+```html
+<div class="ds-field" style="width: 100%; max-width: 360px">
+  <div class="ds-field__header">
+    <label class="ds-field__label" for="text-field-input-ex3-point">포인트 사용</label>
+  </div>
+  <div class="u-flex u-gap-2">
+    <div class="ds-input u-grow" data-variant="outline" data-size="medium">
+      <input class="ds-input__control" id="text-field-input-ex3-point" inputmode="numeric" value="3,000">
+      <span class="ds-input__suffix">P</span>
+    </div>
+    <button type="button" class="ds-btn" data-variant="neutralWeak">전액 사용</button>
+  </div>
+  <div class="ds-field__footer">
+    <p class="ds-field__help">12,400P까지 쓸 수 있어요.</p>
+  </div>
+</div>
 ```
 
 ## 규격

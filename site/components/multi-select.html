@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Multi Select - YBM DS</title>
+<title>Multi Select - yds</title>
 <meta name="description" content="목록에서 값을 여러 개 고르면 칸 안에 모아 보여 주는 컴포넌트입니다.">
 <!-- 생성물: node site/build.mjs가 만든다. 직접 고치지 말고 site/build.mjs나 site/src를 고친다 -->
 <script>try { var t = localStorage.getItem("ybm-site-theme"); if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.dataset.theme = "dark"; } catch (e) {}</script>
 <link rel="icon" href="../assets/logo-ybmnet.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../dist/ybm-ds.css">
-<link rel="stylesheet" href="../assets/site.css?v=bb7371b2">
+<link rel="stylesheet" href="../assets/site.css?v=1656b6c0">
 <script src="../../dist/ybm-ds.js" defer></script>
-<script src="../assets/site.js?v=bb7371b2" defer></script>
+<script src="../assets/site.js?v=1656b6c0" defer></script>
 </head>
 <body class="site">
 <a class="site-skip" href="#main">본문 바로가기</a>
@@ -159,39 +159,147 @@
 <thead><tr><th scope="col">구분</th><th scope="col">내용</th></tr></thead>
 <tbody><tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>여러 개를 고를 때만 Multi Select를 씁니다.</td></tr>
 <tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>고른 값이 많으면 2개까지 보여 주고 나머지는 +N으로 줄입니다.</td></tr></tbody></table></div>
-<h2 id="examples">예시<a class="site-anchor" href="#examples" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><div class="site-example">
+<h2 id="examples">예시<a class="site-anchor" href="#examples" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><h3>여러 개를 고르는 칸에만 쓰기</h3>
+<p>관심 분야처럼 여러 개를 고르는 칸에만 Multi Select를 씁니다. 고른 값이 많으면 칸에는 2개까지 보여 주고 나머지는 +N으로 줄입니다.</p>
+<div class="site-example">
   <div class="site-example__bar"><div class="ds-chiptabs" role="tablist" aria-label="보기 방식"><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-view="preview">미리보기</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-view="code">코드</button></div></div>
-  <div class="site-example__preview"><div class="pv-stage" style="align-items:flex-start;min-height:300px">
-    <div class="ds-multiselect pv-w" style="width:320px">
-      <button type="button" class="ds-multiselect__trigger" data-ds-popover="pv-msel" aria-haspopup="listbox" aria-expanded="false">
-        <span class="ds-multiselect__values" data-placeholder="선택하세요"></span>
+  <div class="site-example__preview"><div class="pv-stage pv-wide"><form class="u-col u-gap-5 u-full" style="max-width: 360px">
+  <div class="ds-field">
+    <div class="ds-field__header">
+      <label class="ds-field__label" for="multi-select-ex1-trigger">관심 분야</label>
+      <span class="ds-field__indicator">선택</span>
+    </div>
+    <div class="ds-multiselect">
+      <button type="button" class="ds-multiselect__trigger" id="multi-select-ex1-trigger" data-ds-popover="multi-select-ex1" aria-haspopup="listbox" aria-expanded="false">
+        <span class="ds-multiselect__values" data-placeholder="골라 주세요" data-max="2"></span>
         <i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i>
       </button>
-      <div class="ds-multiselect__panel" id="pv-msel" role="listbox" aria-multiselectable="true" hidden>
-        <div class="ds-multiselect__heading">관심 분야</div>
-        <label class="ds-multiselect__option"><span class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control" checked></span><span class="ds-multiselect__label">디자인</span></label>
-        <label class="ds-multiselect__option"><span class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control" checked></span><span class="ds-multiselect__label">개발</span></label>
-        <label class="ds-multiselect__option"><span class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control"></span><span class="ds-multiselect__label">기획</span></label>
-        <label class="ds-multiselect__option"><span class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control" checked></span><span class="ds-multiselect__label">마케팅</span></label>
-        <label class="ds-multiselect__option"><span class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control" disabled></span><span class="ds-multiselect__label">영업</span></label>
+      <div class="ds-multiselect__panel" id="multi-select-ex1" role="listbox" aria-multiselectable="true" hidden>
+        <label class="ds-multiselect__option"><span class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control" checked></span><span class="ds-multiselect__label">어학</span></label>
+        <label class="ds-multiselect__option"><span class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control" checked></span><span class="ds-multiselect__label">자격증</span></label>
+        <label class="ds-multiselect__option"><span class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control" checked></span><span class="ds-multiselect__label">취업 준비</span></label>
+        <label class="ds-multiselect__option"><span class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control"></span><span class="ds-multiselect__label">코딩</span></label>
+        <label class="ds-multiselect__option"><span class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control"></span><span class="ds-multiselect__label">디자인</span></label>
       </div>
     </div>
-  </div></div>
+    <div class="ds-field__footer">
+      <p class="ds-field__help">고른 분야의 새 강의를 먼저 알려 드려요.</p>
+    </div>
+  </div>
+  <div class="ds-field">
+    <div class="ds-field__header">
+      <label class="ds-field__label" for="multi-select-ex1-nick">닉네임</label>
+    </div>
+    <div class="ds-input" data-variant="outline" data-size="medium">
+      <input class="ds-input__control" id="multi-select-ex1-nick" value="하나">
+    </div>
+  </div>
+  <button type="button" class="ds-btn" data-variant="brandSolid" data-size="large" data-width="fill">저장</button>
+</form></div></div>
   <div class="site-example__code" hidden><figure class="ds-codeblock">
   <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">html</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
-  <pre class="ds-codeblock__code"><code>&lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-multiselect&quot;</span> <span class="hl-f">style</span>=<span class="hl-s">&quot;width:320px&quot;</span>&gt;
-  &lt;<span class="hl-t">button</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;button&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-multiselect__trigger&quot;</span> <span class="hl-f">data-ds-popover</span>=<span class="hl-s">&quot;pv-msel&quot;</span> <span class="hl-f">aria-haspopup</span>=<span class="hl-s">&quot;listbox&quot;</span> <span class="hl-f">aria-expanded</span>=<span class="hl-s">&quot;false&quot;</span>&gt;
-    &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-multiselect__values&quot;</span> <span class="hl-f">data-placeholder</span>=<span class="hl-s">&quot;선택하세요&quot;</span>&gt;&lt;/<span class="hl-t">span</span>&gt;
-    &lt;<span class="hl-t">i</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-icon ds-icon--chevron-down ds-icon--sm&quot;</span> <span class="hl-f">aria-hidden</span>=<span class="hl-s">&quot;true&quot;</span>&gt;&lt;/<span class="hl-t">i</span>&gt;
-  &lt;/<span class="hl-t">button</span>&gt;
-  &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-multiselect__panel&quot;</span> <span class="hl-f">id</span>=<span class="hl-s">&quot;pv-msel&quot;</span> <span class="hl-f">role</span>=<span class="hl-s">&quot;listbox&quot;</span> <span class="hl-f">aria-multiselectable</span>=<span class="hl-s">&quot;true&quot;</span> <span class="hl-f">hidden</span>&gt;
-    &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-multiselect__heading&quot;</span>&gt;관심 분야&lt;/<span class="hl-t">div</span>&gt;
-    &lt;<span class="hl-t">label</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-multiselect__option&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-checkbox&quot;</span> <span class="hl-f">data-tone</span>=<span class="hl-s">&quot;neutral&quot;</span>&gt;&lt;<span class="hl-t">input</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;checkbox&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-checkbox__control&quot;</span> <span class="hl-f">checked</span>&gt;&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-multiselect__label&quot;</span>&gt;디자인&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">label</span>&gt;
-    &lt;<span class="hl-t">label</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-multiselect__option&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-checkbox&quot;</span> <span class="hl-f">data-tone</span>=<span class="hl-s">&quot;neutral&quot;</span>&gt;&lt;<span class="hl-t">input</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;checkbox&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-checkbox__control&quot;</span> <span class="hl-f">checked</span>&gt;&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-multiselect__label&quot;</span>&gt;개발&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">label</span>&gt;
-    &lt;<span class="hl-t">label</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-multiselect__option&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-checkbox&quot;</span> <span class="hl-f">data-tone</span>=<span class="hl-s">&quot;neutral&quot;</span>&gt;&lt;<span class="hl-t">input</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;checkbox&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-checkbox__control&quot;</span>&gt;&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-multiselect__label&quot;</span>&gt;기획&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">label</span>&gt;
-    &lt;<span class="hl-t">label</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-multiselect__option&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-checkbox&quot;</span> <span class="hl-f">data-tone</span>=<span class="hl-s">&quot;neutral&quot;</span>&gt;&lt;<span class="hl-t">input</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;checkbox&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-checkbox__control&quot;</span> <span class="hl-f">checked</span>&gt;&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-multiselect__label&quot;</span>&gt;마케팅&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">label</span>&gt;
-    &lt;<span class="hl-t">label</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-multiselect__option&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-checkbox&quot;</span> <span class="hl-f">data-tone</span>=<span class="hl-s">&quot;neutral&quot;</span>&gt;&lt;<span class="hl-t">input</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;checkbox&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-checkbox__control&quot;</span> <span class="hl-f">disabled</span>&gt;&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-multiselect__label&quot;</span>&gt;영업&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">label</span>&gt;
+  <pre class="ds-codeblock__code"><code>&lt;<span class="hl-t">form</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;u-col u-gap-5 u-full&quot;</span> <span class="hl-f">style</span>=<span class="hl-s">&quot;max-width: 360px&quot;</span>&gt;
+  &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field&quot;</span>&gt;
+    &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field__header&quot;</span>&gt;
+      &lt;<span class="hl-t">label</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field__label&quot;</span> <span class="hl-f">for</span>=<span class="hl-s">&quot;multi-select-ex1-trigger&quot;</span>&gt;관심 분야&lt;/<span class="hl-t">label</span>&gt;
+      &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field__indicator&quot;</span>&gt;선택&lt;/<span class="hl-t">span</span>&gt;
+    &lt;/<span class="hl-t">div</span>&gt;
+    &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-multiselect&quot;</span>&gt;
+      &lt;<span class="hl-t">button</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;button&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-multiselect__trigger&quot;</span> <span class="hl-f">id</span>=<span class="hl-s">&quot;multi-select-ex1-trigger&quot;</span> <span class="hl-f">data-ds-popover</span>=<span class="hl-s">&quot;multi-select-ex1&quot;</span> <span class="hl-f">aria-haspopup</span>=<span class="hl-s">&quot;listbox&quot;</span> <span class="hl-f">aria-expanded</span>=<span class="hl-s">&quot;false&quot;</span>&gt;
+        &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-multiselect__values&quot;</span> <span class="hl-f">data-placeholder</span>=<span class="hl-s">&quot;골라 주세요&quot;</span> <span class="hl-f">data-max</span>=<span class="hl-s">&quot;2&quot;</span>&gt;&lt;/<span class="hl-t">span</span>&gt;
+        &lt;<span class="hl-t">i</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-icon ds-icon--chevron-down ds-icon--sm&quot;</span> <span class="hl-f">aria-hidden</span>=<span class="hl-s">&quot;true&quot;</span>&gt;&lt;/<span class="hl-t">i</span>&gt;
+      &lt;/<span class="hl-t">button</span>&gt;
+      &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-multiselect__panel&quot;</span> <span class="hl-f">id</span>=<span class="hl-s">&quot;multi-select-ex1&quot;</span> <span class="hl-f">role</span>=<span class="hl-s">&quot;listbox&quot;</span> <span class="hl-f">aria-multiselectable</span>=<span class="hl-s">&quot;true&quot;</span> <span class="hl-f">hidden</span>&gt;
+        &lt;<span class="hl-t">label</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-multiselect__option&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-checkbox&quot;</span> <span class="hl-f">data-tone</span>=<span class="hl-s">&quot;neutral&quot;</span>&gt;&lt;<span class="hl-t">input</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;checkbox&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-checkbox__control&quot;</span> <span class="hl-f">checked</span>&gt;&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-multiselect__label&quot;</span>&gt;어학&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">label</span>&gt;
+        &lt;<span class="hl-t">label</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-multiselect__option&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-checkbox&quot;</span> <span class="hl-f">data-tone</span>=<span class="hl-s">&quot;neutral&quot;</span>&gt;&lt;<span class="hl-t">input</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;checkbox&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-checkbox__control&quot;</span> <span class="hl-f">checked</span>&gt;&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-multiselect__label&quot;</span>&gt;자격증&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">label</span>&gt;
+        &lt;<span class="hl-t">label</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-multiselect__option&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-checkbox&quot;</span> <span class="hl-f">data-tone</span>=<span class="hl-s">&quot;neutral&quot;</span>&gt;&lt;<span class="hl-t">input</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;checkbox&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-checkbox__control&quot;</span> <span class="hl-f">checked</span>&gt;&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-multiselect__label&quot;</span>&gt;취업 준비&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">label</span>&gt;
+        &lt;<span class="hl-t">label</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-multiselect__option&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-checkbox&quot;</span> <span class="hl-f">data-tone</span>=<span class="hl-s">&quot;neutral&quot;</span>&gt;&lt;<span class="hl-t">input</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;checkbox&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-checkbox__control&quot;</span>&gt;&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-multiselect__label&quot;</span>&gt;코딩&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">label</span>&gt;
+        &lt;<span class="hl-t">label</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-multiselect__option&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-checkbox&quot;</span> <span class="hl-f">data-tone</span>=<span class="hl-s">&quot;neutral&quot;</span>&gt;&lt;<span class="hl-t">input</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;checkbox&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-checkbox__control&quot;</span>&gt;&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-multiselect__label&quot;</span>&gt;디자인&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">label</span>&gt;
+      &lt;/<span class="hl-t">div</span>&gt;
+    &lt;/<span class="hl-t">div</span>&gt;
+    &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field__footer&quot;</span>&gt;
+      &lt;<span class="hl-t">p</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field__help&quot;</span>&gt;고른 분야의 새 강의를 먼저 알려 드려요.&lt;/<span class="hl-t">p</span>&gt;
+    &lt;/<span class="hl-t">div</span>&gt;
   &lt;/<span class="hl-t">div</span>&gt;
+  &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field&quot;</span>&gt;
+    &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field__header&quot;</span>&gt;
+      &lt;<span class="hl-t">label</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field__label&quot;</span> <span class="hl-f">for</span>=<span class="hl-s">&quot;multi-select-ex1-nick&quot;</span>&gt;닉네임&lt;/<span class="hl-t">label</span>&gt;
+    &lt;/<span class="hl-t">div</span>&gt;
+    &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-input&quot;</span> <span class="hl-f">data-variant</span>=<span class="hl-s">&quot;outline&quot;</span> <span class="hl-f">data-size</span>=<span class="hl-s">&quot;medium&quot;</span>&gt;
+      &lt;<span class="hl-t">input</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-input__control&quot;</span> <span class="hl-f">id</span>=<span class="hl-s">&quot;multi-select-ex1-nick&quot;</span> <span class="hl-f">value</span>=<span class="hl-s">&quot;하나&quot;</span>&gt;
+    &lt;/<span class="hl-t">div</span>&gt;
+  &lt;/<span class="hl-t">div</span>&gt;
+  &lt;<span class="hl-t">button</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;button&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-btn&quot;</span> <span class="hl-f">data-variant</span>=<span class="hl-s">&quot;brandSolid&quot;</span> <span class="hl-f">data-size</span>=<span class="hl-s">&quot;large&quot;</span> <span class="hl-f">data-width</span>=<span class="hl-s">&quot;fill&quot;</span>&gt;저장&lt;/<span class="hl-t">button</span>&gt;
+&lt;/<span class="hl-t">form</span>&gt;</code></pre>
+</figure></div>
+</div>
+<h3>여러 조건으로 거르는 필터에 쓰기</h3>
+<p>여러 지역을 한 번에 거르는 필터는 Multi Select로, 정렬처럼 하나만 고르는 칸은 Select로 둡니다. 선택지가 많으면 머리말로 묶어 찾기 쉽게 합니다.</p>
+<div class="site-example">
+  <div class="site-example__bar"><div class="ds-chiptabs" role="tablist" aria-label="보기 방식"><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-view="preview">미리보기</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-view="code">코드</button></div></div>
+  <div class="site-example__preview"><div class="pv-stage pv-wide"><div class="u-col u-gap-3 u-full" style="max-width: 480px">
+  <div class="u-flex u-gap-2">
+    <div class="ds-multiselect u-grow">
+      <button type="button" class="ds-multiselect__trigger" data-ds-popover="multi-select-ex2" aria-haspopup="listbox" aria-expanded="false" aria-label="지역">
+        <span class="ds-multiselect__values" data-placeholder="지역 전체"></span>
+        <i class="ds-icon ds-icon--chevron-down ds-icon--sm" aria-hidden="true"></i>
+      </button>
+      <div class="ds-multiselect__panel" id="multi-select-ex2" role="listbox" aria-multiselectable="true" hidden>
+        <div class="ds-multiselect__heading">수도권</div>
+        <label class="ds-multiselect__option"><span class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control" checked></span><span class="ds-multiselect__label">서울</span></label>
+        <label class="ds-multiselect__option"><span class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control" checked></span><span class="ds-multiselect__label">경기</span></label>
+        <label class="ds-multiselect__option"><span class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control"></span><span class="ds-multiselect__label">인천</span></label>
+        <div class="ds-multiselect__heading">그 밖의 지역</div>
+        <label class="ds-multiselect__option"><span class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control"></span><span class="ds-multiselect__label">부산</span></label>
+        <label class="ds-multiselect__option"><span class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control"></span><span class="ds-multiselect__label">대구</span></label>
+        <label class="ds-multiselect__option"><span class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control"></span><span class="ds-multiselect__label">광주</span></label>
+      </div>
+    </div>
+    <div style="width: 128px">
+      <button type="button" class="ds-select" data-size="medium" aria-haspopup="listbox" aria-expanded="false" aria-label="정렬">
+        <span class="ds-select__value">가까운 순</span>
+      </button>
+    </div>
+  </div>
+  <ul class="ds-list" data-variant="inset" data-divider>
+    <li><a class="ds-list-item" href="#"><span class="ds-list-item__content"><span class="ds-list-item__title">종로 스터디룸</span><span class="ds-list-item__desc">서울 종로구, 1.2km</span></span></a></li>
+    <li><a class="ds-list-item" href="#"><span class="ds-list-item__content"><span class="ds-list-item__title">시청역 스터디 카페</span><span class="ds-list-item__desc">서울 중구, 2.4km</span></span></a></li>
+    <li><a class="ds-list-item" href="#"><span class="ds-list-item__content"><span class="ds-list-item__title">판교 공유 오피스</span><span class="ds-list-item__desc">경기 성남시, 18km</span></span></a></li>
+    <li><a class="ds-list-item" href="#"><span class="ds-list-item__content"><span class="ds-list-item__title">수원역 회의실</span><span class="ds-list-item__desc">경기 수원시, 32km</span></span></a></li>
+  </ul>
+</div></div></div>
+  <div class="site-example__code" hidden><figure class="ds-codeblock">
+  <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">html</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
+  <pre class="ds-codeblock__code"><code>&lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;u-col u-gap-3 u-full&quot;</span> <span class="hl-f">style</span>=<span class="hl-s">&quot;max-width: 480px&quot;</span>&gt;
+  &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;u-flex u-gap-2&quot;</span>&gt;
+    &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-multiselect u-grow&quot;</span>&gt;
+      &lt;<span class="hl-t">button</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;button&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-multiselect__trigger&quot;</span> <span class="hl-f">data-ds-popover</span>=<span class="hl-s">&quot;multi-select-ex2&quot;</span> <span class="hl-f">aria-haspopup</span>=<span class="hl-s">&quot;listbox&quot;</span> <span class="hl-f">aria-expanded</span>=<span class="hl-s">&quot;false&quot;</span> <span class="hl-f">aria-label</span>=<span class="hl-s">&quot;지역&quot;</span>&gt;
+        &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-multiselect__values&quot;</span> <span class="hl-f">data-placeholder</span>=<span class="hl-s">&quot;지역 전체&quot;</span>&gt;&lt;/<span class="hl-t">span</span>&gt;
+        &lt;<span class="hl-t">i</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-icon ds-icon--chevron-down ds-icon--sm&quot;</span> <span class="hl-f">aria-hidden</span>=<span class="hl-s">&quot;true&quot;</span>&gt;&lt;/<span class="hl-t">i</span>&gt;
+      &lt;/<span class="hl-t">button</span>&gt;
+      &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-multiselect__panel&quot;</span> <span class="hl-f">id</span>=<span class="hl-s">&quot;multi-select-ex2&quot;</span> <span class="hl-f">role</span>=<span class="hl-s">&quot;listbox&quot;</span> <span class="hl-f">aria-multiselectable</span>=<span class="hl-s">&quot;true&quot;</span> <span class="hl-f">hidden</span>&gt;
+        &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-multiselect__heading&quot;</span>&gt;수도권&lt;/<span class="hl-t">div</span>&gt;
+        &lt;<span class="hl-t">label</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-multiselect__option&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-checkbox&quot;</span> <span class="hl-f">data-tone</span>=<span class="hl-s">&quot;neutral&quot;</span>&gt;&lt;<span class="hl-t">input</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;checkbox&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-checkbox__control&quot;</span> <span class="hl-f">checked</span>&gt;&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-multiselect__label&quot;</span>&gt;서울&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">label</span>&gt;
+        &lt;<span class="hl-t">label</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-multiselect__option&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-checkbox&quot;</span> <span class="hl-f">data-tone</span>=<span class="hl-s">&quot;neutral&quot;</span>&gt;&lt;<span class="hl-t">input</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;checkbox&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-checkbox__control&quot;</span> <span class="hl-f">checked</span>&gt;&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-multiselect__label&quot;</span>&gt;경기&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">label</span>&gt;
+        &lt;<span class="hl-t">label</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-multiselect__option&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-checkbox&quot;</span> <span class="hl-f">data-tone</span>=<span class="hl-s">&quot;neutral&quot;</span>&gt;&lt;<span class="hl-t">input</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;checkbox&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-checkbox__control&quot;</span>&gt;&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-multiselect__label&quot;</span>&gt;인천&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">label</span>&gt;
+        &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-multiselect__heading&quot;</span>&gt;그 밖의 지역&lt;/<span class="hl-t">div</span>&gt;
+        &lt;<span class="hl-t">label</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-multiselect__option&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-checkbox&quot;</span> <span class="hl-f">data-tone</span>=<span class="hl-s">&quot;neutral&quot;</span>&gt;&lt;<span class="hl-t">input</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;checkbox&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-checkbox__control&quot;</span>&gt;&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-multiselect__label&quot;</span>&gt;부산&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">label</span>&gt;
+        &lt;<span class="hl-t">label</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-multiselect__option&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-checkbox&quot;</span> <span class="hl-f">data-tone</span>=<span class="hl-s">&quot;neutral&quot;</span>&gt;&lt;<span class="hl-t">input</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;checkbox&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-checkbox__control&quot;</span>&gt;&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-multiselect__label&quot;</span>&gt;대구&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">label</span>&gt;
+        &lt;<span class="hl-t">label</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-multiselect__option&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-checkbox&quot;</span> <span class="hl-f">data-tone</span>=<span class="hl-s">&quot;neutral&quot;</span>&gt;&lt;<span class="hl-t">input</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;checkbox&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-checkbox__control&quot;</span>&gt;&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-multiselect__label&quot;</span>&gt;광주&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">label</span>&gt;
+      &lt;/<span class="hl-t">div</span>&gt;
+    &lt;/<span class="hl-t">div</span>&gt;
+    &lt;<span class="hl-t">div</span> <span class="hl-f">style</span>=<span class="hl-s">&quot;width: 128px&quot;</span>&gt;
+      &lt;<span class="hl-t">button</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;button&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-select&quot;</span> <span class="hl-f">data-size</span>=<span class="hl-s">&quot;medium&quot;</span> <span class="hl-f">aria-haspopup</span>=<span class="hl-s">&quot;listbox&quot;</span> <span class="hl-f">aria-expanded</span>=<span class="hl-s">&quot;false&quot;</span> <span class="hl-f">aria-label</span>=<span class="hl-s">&quot;정렬&quot;</span>&gt;
+        &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-select__value&quot;</span>&gt;가까운 순&lt;/<span class="hl-t">span</span>&gt;
+      &lt;/<span class="hl-t">button</span>&gt;
+    &lt;/<span class="hl-t">div</span>&gt;
+  &lt;/<span class="hl-t">div</span>&gt;
+  &lt;<span class="hl-t">ul</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list&quot;</span> <span class="hl-f">data-variant</span>=<span class="hl-s">&quot;inset&quot;</span> <span class="hl-f">data-divider</span>&gt;
+    &lt;<span class="hl-t">li</span>&gt;&lt;<span class="hl-t">a</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item&quot;</span> <span class="hl-f">href</span>=<span class="hl-s">&quot;#&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__content&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__title&quot;</span>&gt;종로 스터디룸&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__desc&quot;</span>&gt;서울 종로구, 1.2km&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">a</span>&gt;&lt;/<span class="hl-t">li</span>&gt;
+    &lt;<span class="hl-t">li</span>&gt;&lt;<span class="hl-t">a</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item&quot;</span> <span class="hl-f">href</span>=<span class="hl-s">&quot;#&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__content&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__title&quot;</span>&gt;시청역 스터디 카페&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__desc&quot;</span>&gt;서울 중구, 2.4km&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">a</span>&gt;&lt;/<span class="hl-t">li</span>&gt;
+    &lt;<span class="hl-t">li</span>&gt;&lt;<span class="hl-t">a</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item&quot;</span> <span class="hl-f">href</span>=<span class="hl-s">&quot;#&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__content&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__title&quot;</span>&gt;판교 공유 오피스&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__desc&quot;</span>&gt;경기 성남시, 18km&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">a</span>&gt;&lt;/<span class="hl-t">li</span>&gt;
+    &lt;<span class="hl-t">li</span>&gt;&lt;<span class="hl-t">a</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item&quot;</span> <span class="hl-f">href</span>=<span class="hl-s">&quot;#&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__content&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__title&quot;</span>&gt;수원역 회의실&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__desc&quot;</span>&gt;경기 수원시, 32km&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">a</span>&gt;&lt;/<span class="hl-t">li</span>&gt;
+  &lt;/<span class="hl-t">ul</span>&gt;
 &lt;/<span class="hl-t">div</span>&gt;</code></pre>
 </figure></div>
 </div>

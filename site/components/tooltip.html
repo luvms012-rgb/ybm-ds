@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Tooltip - YBM DS</title>
+<title>Tooltip - yds</title>
 <meta name="description" content="마우스를 올리거나 포커스하면 짧은 설명을 띄우는 컴포넌트입니다.">
 <!-- 생성물: node site/build.mjs가 만든다. 직접 고치지 말고 site/build.mjs나 site/src를 고친다 -->
 <script>try { var t = localStorage.getItem("ybm-site-theme"); if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.dataset.theme = "dark"; } catch (e) {}</script>
 <link rel="icon" href="../assets/logo-ybmnet.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../dist/ybm-ds.css">
-<link rel="stylesheet" href="../assets/site.css?v=bb7371b2">
+<link rel="stylesheet" href="../assets/site.css?v=1656b6c0">
 <script src="../../dist/ybm-ds.js" defer></script>
-<script src="../assets/site.js?v=bb7371b2" defer></script>
+<script src="../assets/site.js?v=1656b6c0" defer></script>
 </head>
 <body class="site">
 <a class="site-skip" href="#main">본문 바로가기</a>
@@ -131,18 +131,114 @@
 <thead><tr><th scope="col">구분</th><th scope="col">내용</th></tr></thead>
 <tbody><tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>Tooltip은 마우스를 올리거나 포커스할 때만 보이고, 터치 화면에서는 안 보입니다.</td></tr>
 <tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>닫기 버튼이 필요하거나 설명이 여러 줄이면 Help Bubble을 씁니다.</td></tr></tbody></table></div>
-<h2 id="examples">예시<a class="site-anchor" href="#examples" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><div class="site-example">
+<h2 id="examples">예시<a class="site-anchor" href="#examples" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><h3>아이콘 버튼에 이름 보여 주기</h3>
+<p>아이콘만 있는 버튼에 마우스를 올리거나 포커스하면 이름을 Tooltip으로 보여 줍니다. 버튼의 <code>aria-label</code>과 같은 짧은 라벨만 넣습니다.</p>
+<div class="site-example">
   <div class="site-example__bar"><div class="ds-chiptabs" role="tablist" aria-label="보기 방식"><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-view="preview">미리보기</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-view="code">코드</button></div></div>
-  <div class="site-example__preview"><div class="pv-stage" style="padding-block:var(--ds-space-x12)">
-    <span class="ds-tooltip-anchor"><button class="ds-btn" data-variant="neutralWeak" data-layout="iconOnly" aria-label="링크 복사" aria-describedby="pv-tip1"><i class="ds-icon ds-icon--external-link" aria-hidden="true"></i></button><span class="ds-tooltip" role="tooltip" id="pv-tip1">링크 복사</span></span>
-    <span class="ds-tooltip-anchor"><button class="ds-btn" data-variant="neutralWeak" aria-describedby="pv-tip2">bottom</button><span class="ds-tooltip" role="tooltip" id="pv-tip2" data-placement="bottom">아래에 표시</span></span>
-    <span class="ds-tooltip-anchor"><button class="ds-btn" data-variant="neutralWeak" aria-describedby="pv-tip3">항상 표시</button><span class="ds-tooltip" role="tooltip" id="pv-tip3" data-placement="right" data-state="open">data-state="open"</span></span>
-  </div></div>
+  <div class="site-example__preview"><div class="pv-stage pv-wide"><article class="ds-card" data-size="small" style="width: 100%; max-width: 420px">
+  <div class="u-flex u-center u-between u-gap-3">
+    <div class="u-col u-gap-1">
+      <p class="ds-t05 ds-fw-semibold">3강 수업 자료</p>
+      <span class="ds-tag-group"><span>PDF</span><span>2.4MB</span></span>
+    </div>
+    <div class="u-flex u-gap-1">
+      <span class="ds-tooltip-anchor">
+        <button type="button" class="ds-btn" data-variant="ghost" data-layout="iconOnly" aria-label="내려받기" aria-describedby="tooltip-ex1-down"><i class="ds-icon ds-icon--download" aria-hidden="true"></i></button>
+        <span class="ds-tooltip" role="tooltip" id="tooltip-ex1-down">내려받기</span>
+      </span>
+      <span class="ds-tooltip-anchor">
+        <button type="button" class="ds-btn" data-variant="ghost" data-layout="iconOnly" aria-label="링크 복사" aria-describedby="tooltip-ex1-link"><i class="ds-icon ds-icon--link" aria-hidden="true"></i></button>
+        <span class="ds-tooltip" role="tooltip" id="tooltip-ex1-link">링크 복사</span>
+      </span>
+      <span class="ds-tooltip-anchor">
+        <button type="button" class="ds-btn" data-variant="ghost" data-layout="iconOnly" aria-label="인쇄" aria-describedby="tooltip-ex1-print"><i class="ds-icon ds-icon--printer" aria-hidden="true"></i></button>
+        <span class="ds-tooltip" role="tooltip" id="tooltip-ex1-print">인쇄</span>
+      </span>
+    </div>
+  </div>
+</article></div></div>
   <div class="site-example__code" hidden><figure class="ds-codeblock">
   <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">html</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
-  <pre class="ds-codeblock__code"><code>&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-tooltip-anchor&quot;</span>&gt;&lt;<span class="hl-t">button</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-btn&quot;</span> <span class="hl-f">data-variant</span>=<span class="hl-s">&quot;neutralWeak&quot;</span> <span class="hl-f">data-layout</span>=<span class="hl-s">&quot;iconOnly&quot;</span> <span class="hl-f">aria-label</span>=<span class="hl-s">&quot;링크 복사&quot;</span> <span class="hl-f">aria-describedby</span>=<span class="hl-s">&quot;pv-tip1&quot;</span>&gt;&lt;<span class="hl-t">i</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-icon ds-icon--external-link&quot;</span> <span class="hl-f">aria-hidden</span>=<span class="hl-s">&quot;true&quot;</span>&gt;&lt;/<span class="hl-t">i</span>&gt;&lt;/<span class="hl-t">button</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-tooltip&quot;</span> <span class="hl-f">role</span>=<span class="hl-s">&quot;tooltip&quot;</span> <span class="hl-f">id</span>=<span class="hl-s">&quot;pv-tip1&quot;</span>&gt;링크 복사&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">span</span>&gt;
-&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-tooltip-anchor&quot;</span>&gt;&lt;<span class="hl-t">button</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-btn&quot;</span> <span class="hl-f">data-variant</span>=<span class="hl-s">&quot;neutralWeak&quot;</span> <span class="hl-f">aria-describedby</span>=<span class="hl-s">&quot;pv-tip2&quot;</span>&gt;bottom&lt;/<span class="hl-t">button</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-tooltip&quot;</span> <span class="hl-f">role</span>=<span class="hl-s">&quot;tooltip&quot;</span> <span class="hl-f">id</span>=<span class="hl-s">&quot;pv-tip2&quot;</span> <span class="hl-f">data-placement</span>=<span class="hl-s">&quot;bottom&quot;</span>&gt;아래에 표시&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">span</span>&gt;
-&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-tooltip-anchor&quot;</span>&gt;&lt;<span class="hl-t">button</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-btn&quot;</span> <span class="hl-f">data-variant</span>=<span class="hl-s">&quot;neutralWeak&quot;</span> <span class="hl-f">aria-describedby</span>=<span class="hl-s">&quot;pv-tip3&quot;</span>&gt;항상 표시&lt;/<span class="hl-t">button</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-tooltip&quot;</span> <span class="hl-f">role</span>=<span class="hl-s">&quot;tooltip&quot;</span> <span class="hl-f">id</span>=<span class="hl-s">&quot;pv-tip3&quot;</span> <span class="hl-f">data-placement</span>=<span class="hl-s">&quot;right&quot;</span> <span class="hl-f">data-state</span>=<span class="hl-s">&quot;open&quot;</span>&gt;data-state=&quot;open&quot;&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">span</span>&gt;</code></pre>
+  <pre class="ds-codeblock__code"><code>&lt;<span class="hl-t">article</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-card&quot;</span> <span class="hl-f">data-size</span>=<span class="hl-s">&quot;small&quot;</span> <span class="hl-f">style</span>=<span class="hl-s">&quot;width: 100%; max-width: 420px&quot;</span>&gt;
+  &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;u-flex u-center u-between u-gap-3&quot;</span>&gt;
+    &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;u-col u-gap-1&quot;</span>&gt;
+      &lt;<span class="hl-t">p</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-t05 ds-fw-semibold&quot;</span>&gt;3강 수업 자료&lt;/<span class="hl-t">p</span>&gt;
+      &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-tag-group&quot;</span>&gt;&lt;<span class="hl-t">span</span>&gt;PDF&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">span</span>&gt;2.4MB&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">span</span>&gt;
+    &lt;/<span class="hl-t">div</span>&gt;
+    &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;u-flex u-gap-1&quot;</span>&gt;
+      &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-tooltip-anchor&quot;</span>&gt;
+        &lt;<span class="hl-t">button</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;button&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-btn&quot;</span> <span class="hl-f">data-variant</span>=<span class="hl-s">&quot;ghost&quot;</span> <span class="hl-f">data-layout</span>=<span class="hl-s">&quot;iconOnly&quot;</span> <span class="hl-f">aria-label</span>=<span class="hl-s">&quot;내려받기&quot;</span> <span class="hl-f">aria-describedby</span>=<span class="hl-s">&quot;tooltip-ex1-down&quot;</span>&gt;&lt;<span class="hl-t">i</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-icon ds-icon--download&quot;</span> <span class="hl-f">aria-hidden</span>=<span class="hl-s">&quot;true&quot;</span>&gt;&lt;/<span class="hl-t">i</span>&gt;&lt;/<span class="hl-t">button</span>&gt;
+        &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-tooltip&quot;</span> <span class="hl-f">role</span>=<span class="hl-s">&quot;tooltip&quot;</span> <span class="hl-f">id</span>=<span class="hl-s">&quot;tooltip-ex1-down&quot;</span>&gt;내려받기&lt;/<span class="hl-t">span</span>&gt;
+      &lt;/<span class="hl-t">span</span>&gt;
+      &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-tooltip-anchor&quot;</span>&gt;
+        &lt;<span class="hl-t">button</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;button&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-btn&quot;</span> <span class="hl-f">data-variant</span>=<span class="hl-s">&quot;ghost&quot;</span> <span class="hl-f">data-layout</span>=<span class="hl-s">&quot;iconOnly&quot;</span> <span class="hl-f">aria-label</span>=<span class="hl-s">&quot;링크 복사&quot;</span> <span class="hl-f">aria-describedby</span>=<span class="hl-s">&quot;tooltip-ex1-link&quot;</span>&gt;&lt;<span class="hl-t">i</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-icon ds-icon--link&quot;</span> <span class="hl-f">aria-hidden</span>=<span class="hl-s">&quot;true&quot;</span>&gt;&lt;/<span class="hl-t">i</span>&gt;&lt;/<span class="hl-t">button</span>&gt;
+        &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-tooltip&quot;</span> <span class="hl-f">role</span>=<span class="hl-s">&quot;tooltip&quot;</span> <span class="hl-f">id</span>=<span class="hl-s">&quot;tooltip-ex1-link&quot;</span>&gt;링크 복사&lt;/<span class="hl-t">span</span>&gt;
+      &lt;/<span class="hl-t">span</span>&gt;
+      &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-tooltip-anchor&quot;</span>&gt;
+        &lt;<span class="hl-t">button</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;button&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-btn&quot;</span> <span class="hl-f">data-variant</span>=<span class="hl-s">&quot;ghost&quot;</span> <span class="hl-f">data-layout</span>=<span class="hl-s">&quot;iconOnly&quot;</span> <span class="hl-f">aria-label</span>=<span class="hl-s">&quot;인쇄&quot;</span> <span class="hl-f">aria-describedby</span>=<span class="hl-s">&quot;tooltip-ex1-print&quot;</span>&gt;&lt;<span class="hl-t">i</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-icon ds-icon--printer&quot;</span> <span class="hl-f">aria-hidden</span>=<span class="hl-s">&quot;true&quot;</span>&gt;&lt;/<span class="hl-t">i</span>&gt;&lt;/<span class="hl-t">button</span>&gt;
+        &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-tooltip&quot;</span> <span class="hl-f">role</span>=<span class="hl-s">&quot;tooltip&quot;</span> <span class="hl-f">id</span>=<span class="hl-s">&quot;tooltip-ex1-print&quot;</span>&gt;인쇄&lt;/<span class="hl-t">span</span>&gt;
+      &lt;/<span class="hl-t">span</span>&gt;
+    &lt;/<span class="hl-t">div</span>&gt;
+  &lt;/<span class="hl-t">div</span>&gt;
+&lt;/<span class="hl-t">article</span>&gt;</code></pre>
+</figure></div>
+</div>
+<h3>도구 막대에서 단축키 함께 알리기</h3>
+<p>아이콘이 이어진 글쓰기 도구 막대에서 이름과 단축키를 한 줄로 알려 줍니다. 터치 화면에서는 보이지 않으므로 꼭 알아야 할 내용은 넣지 않습니다.</p>
+<div class="site-example">
+  <div class="site-example__bar"><div class="ds-chiptabs" role="tablist" aria-label="보기 방식"><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-view="preview">미리보기</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-view="code">코드</button></div></div>
+  <div class="site-example__preview"><div class="pv-stage pv-wide"><div class="u-col u-gap-2" style="width: 100%; max-width: 480px">
+  <div class="u-flex u-gap-1" role="toolbar" aria-label="글쓰기 도구">
+    <span class="ds-tooltip-anchor">
+      <button type="button" class="ds-btn" data-variant="ghost" data-layout="iconOnly" aria-label="되돌리기" aria-describedby="tooltip-ex2-undo"><i class="ds-icon ds-icon--undo-2" aria-hidden="true"></i></button>
+      <span class="ds-tooltip" role="tooltip" id="tooltip-ex2-undo" data-placement="bottom">되돌리기 Ctrl+Z</span>
+    </span>
+    <span class="ds-tooltip-anchor">
+      <button type="button" class="ds-btn" data-variant="ghost" data-layout="iconOnly" aria-label="다시 하기" aria-describedby="tooltip-ex2-redo"><i class="ds-icon ds-icon--redo-2" aria-hidden="true"></i></button>
+      <span class="ds-tooltip" role="tooltip" id="tooltip-ex2-redo" data-placement="bottom">다시 하기 Ctrl+Y</span>
+    </span>
+    <span class="ds-tooltip-anchor">
+      <button type="button" class="ds-btn" data-variant="ghost" data-layout="iconOnly" aria-label="기울임" aria-describedby="tooltip-ex2-italic"><i class="ds-icon ds-icon--italic" aria-hidden="true"></i></button>
+      <span class="ds-tooltip" role="tooltip" id="tooltip-ex2-italic" data-placement="bottom">기울임 Ctrl+I</span>
+    </span>
+    <span class="ds-tooltip-anchor">
+      <button type="button" class="ds-btn" data-variant="ghost" data-layout="iconOnly" aria-label="링크 넣기" aria-describedby="tooltip-ex2-link"><i class="ds-icon ds-icon--link" aria-hidden="true"></i></button>
+      <span class="ds-tooltip" role="tooltip" id="tooltip-ex2-link" data-placement="bottom">링크 넣기 Ctrl+K</span>
+    </span>
+    <span class="ds-tooltip-anchor">
+      <button type="button" class="ds-btn" data-variant="ghost" data-layout="iconOnly" aria-label="사진 넣기" aria-describedby="tooltip-ex2-image"><i class="ds-icon ds-icon--image" aria-hidden="true"></i></button>
+      <span class="ds-tooltip" role="tooltip" id="tooltip-ex2-image" data-placement="bottom">사진 넣기</span>
+    </span>
+  </div>
+  <textarea class="ds-textarea" rows="4" aria-label="후기 본문" placeholder="수강 후기를 적어 주세요"></textarea>
+</div></div></div>
+  <div class="site-example__code" hidden><figure class="ds-codeblock">
+  <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">html</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
+  <pre class="ds-codeblock__code"><code>&lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;u-col u-gap-2&quot;</span> <span class="hl-f">style</span>=<span class="hl-s">&quot;width: 100%; max-width: 480px&quot;</span>&gt;
+  &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;u-flex u-gap-1&quot;</span> <span class="hl-f">role</span>=<span class="hl-s">&quot;toolbar&quot;</span> <span class="hl-f">aria-label</span>=<span class="hl-s">&quot;글쓰기 도구&quot;</span>&gt;
+    &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-tooltip-anchor&quot;</span>&gt;
+      &lt;<span class="hl-t">button</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;button&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-btn&quot;</span> <span class="hl-f">data-variant</span>=<span class="hl-s">&quot;ghost&quot;</span> <span class="hl-f">data-layout</span>=<span class="hl-s">&quot;iconOnly&quot;</span> <span class="hl-f">aria-label</span>=<span class="hl-s">&quot;되돌리기&quot;</span> <span class="hl-f">aria-describedby</span>=<span class="hl-s">&quot;tooltip-ex2-undo&quot;</span>&gt;&lt;<span class="hl-t">i</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-icon ds-icon--undo-2&quot;</span> <span class="hl-f">aria-hidden</span>=<span class="hl-s">&quot;true&quot;</span>&gt;&lt;/<span class="hl-t">i</span>&gt;&lt;/<span class="hl-t">button</span>&gt;
+      &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-tooltip&quot;</span> <span class="hl-f">role</span>=<span class="hl-s">&quot;tooltip&quot;</span> <span class="hl-f">id</span>=<span class="hl-s">&quot;tooltip-ex2-undo&quot;</span> <span class="hl-f">data-placement</span>=<span class="hl-s">&quot;bottom&quot;</span>&gt;되돌리기 Ctrl+Z&lt;/<span class="hl-t">span</span>&gt;
+    &lt;/<span class="hl-t">span</span>&gt;
+    &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-tooltip-anchor&quot;</span>&gt;
+      &lt;<span class="hl-t">button</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;button&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-btn&quot;</span> <span class="hl-f">data-variant</span>=<span class="hl-s">&quot;ghost&quot;</span> <span class="hl-f">data-layout</span>=<span class="hl-s">&quot;iconOnly&quot;</span> <span class="hl-f">aria-label</span>=<span class="hl-s">&quot;다시 하기&quot;</span> <span class="hl-f">aria-describedby</span>=<span class="hl-s">&quot;tooltip-ex2-redo&quot;</span>&gt;&lt;<span class="hl-t">i</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-icon ds-icon--redo-2&quot;</span> <span class="hl-f">aria-hidden</span>=<span class="hl-s">&quot;true&quot;</span>&gt;&lt;/<span class="hl-t">i</span>&gt;&lt;/<span class="hl-t">button</span>&gt;
+      &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-tooltip&quot;</span> <span class="hl-f">role</span>=<span class="hl-s">&quot;tooltip&quot;</span> <span class="hl-f">id</span>=<span class="hl-s">&quot;tooltip-ex2-redo&quot;</span> <span class="hl-f">data-placement</span>=<span class="hl-s">&quot;bottom&quot;</span>&gt;다시 하기 Ctrl+Y&lt;/<span class="hl-t">span</span>&gt;
+    &lt;/<span class="hl-t">span</span>&gt;
+    &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-tooltip-anchor&quot;</span>&gt;
+      &lt;<span class="hl-t">button</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;button&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-btn&quot;</span> <span class="hl-f">data-variant</span>=<span class="hl-s">&quot;ghost&quot;</span> <span class="hl-f">data-layout</span>=<span class="hl-s">&quot;iconOnly&quot;</span> <span class="hl-f">aria-label</span>=<span class="hl-s">&quot;기울임&quot;</span> <span class="hl-f">aria-describedby</span>=<span class="hl-s">&quot;tooltip-ex2-italic&quot;</span>&gt;&lt;<span class="hl-t">i</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-icon ds-icon--italic&quot;</span> <span class="hl-f">aria-hidden</span>=<span class="hl-s">&quot;true&quot;</span>&gt;&lt;/<span class="hl-t">i</span>&gt;&lt;/<span class="hl-t">button</span>&gt;
+      &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-tooltip&quot;</span> <span class="hl-f">role</span>=<span class="hl-s">&quot;tooltip&quot;</span> <span class="hl-f">id</span>=<span class="hl-s">&quot;tooltip-ex2-italic&quot;</span> <span class="hl-f">data-placement</span>=<span class="hl-s">&quot;bottom&quot;</span>&gt;기울임 Ctrl+I&lt;/<span class="hl-t">span</span>&gt;
+    &lt;/<span class="hl-t">span</span>&gt;
+    &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-tooltip-anchor&quot;</span>&gt;
+      &lt;<span class="hl-t">button</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;button&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-btn&quot;</span> <span class="hl-f">data-variant</span>=<span class="hl-s">&quot;ghost&quot;</span> <span class="hl-f">data-layout</span>=<span class="hl-s">&quot;iconOnly&quot;</span> <span class="hl-f">aria-label</span>=<span class="hl-s">&quot;링크 넣기&quot;</span> <span class="hl-f">aria-describedby</span>=<span class="hl-s">&quot;tooltip-ex2-link&quot;</span>&gt;&lt;<span class="hl-t">i</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-icon ds-icon--link&quot;</span> <span class="hl-f">aria-hidden</span>=<span class="hl-s">&quot;true&quot;</span>&gt;&lt;/<span class="hl-t">i</span>&gt;&lt;/<span class="hl-t">button</span>&gt;
+      &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-tooltip&quot;</span> <span class="hl-f">role</span>=<span class="hl-s">&quot;tooltip&quot;</span> <span class="hl-f">id</span>=<span class="hl-s">&quot;tooltip-ex2-link&quot;</span> <span class="hl-f">data-placement</span>=<span class="hl-s">&quot;bottom&quot;</span>&gt;링크 넣기 Ctrl+K&lt;/<span class="hl-t">span</span>&gt;
+    &lt;/<span class="hl-t">span</span>&gt;
+    &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-tooltip-anchor&quot;</span>&gt;
+      &lt;<span class="hl-t">button</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;button&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-btn&quot;</span> <span class="hl-f">data-variant</span>=<span class="hl-s">&quot;ghost&quot;</span> <span class="hl-f">data-layout</span>=<span class="hl-s">&quot;iconOnly&quot;</span> <span class="hl-f">aria-label</span>=<span class="hl-s">&quot;사진 넣기&quot;</span> <span class="hl-f">aria-describedby</span>=<span class="hl-s">&quot;tooltip-ex2-image&quot;</span>&gt;&lt;<span class="hl-t">i</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-icon ds-icon--image&quot;</span> <span class="hl-f">aria-hidden</span>=<span class="hl-s">&quot;true&quot;</span>&gt;&lt;/<span class="hl-t">i</span>&gt;&lt;/<span class="hl-t">button</span>&gt;
+      &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-tooltip&quot;</span> <span class="hl-f">role</span>=<span class="hl-s">&quot;tooltip&quot;</span> <span class="hl-f">id</span>=<span class="hl-s">&quot;tooltip-ex2-image&quot;</span> <span class="hl-f">data-placement</span>=<span class="hl-s">&quot;bottom&quot;</span>&gt;사진 넣기&lt;/<span class="hl-t">span</span>&gt;
+    &lt;/<span class="hl-t">span</span>&gt;
+  &lt;/<span class="hl-t">div</span>&gt;
+  &lt;<span class="hl-t">textarea</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-textarea&quot;</span> <span class="hl-f">rows</span>=<span class="hl-s">&quot;4&quot;</span> <span class="hl-f">aria-label</span>=<span class="hl-s">&quot;후기 본문&quot;</span> <span class="hl-f">placeholder</span>=<span class="hl-s">&quot;수강 후기를 적어 주세요&quot;</span>&gt;&lt;/<span class="hl-t">textarea</span>&gt;
+&lt;/<span class="hl-t">div</span>&gt;</code></pre>
 </figure></div>
 </div>
 <h2 id="spec">규격<a class="site-anchor" href="#spec" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><h3>CSS 변수</h3><p>서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.</p><div class="ds-table-wrap"><table class="ds-table" data-density="compact">

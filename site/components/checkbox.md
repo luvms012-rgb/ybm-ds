@@ -39,12 +39,96 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 예시
 
+### 약관은 전체 동의와 항목 동의로 나누기
+
+맨 위에 전체 동의 칸을 두고, 약관 항목은 ghost로 박스 없이 체크만 보여 줍니다. 항목마다 전문을 여는 링크를 붙여 무엇에 동의하는지 확인할 수 있게 합니다.
+
 ```html
-<label class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control" checked><span class="ds-checkbox__label">brand</span></label>
-<label class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control" checked><span class="ds-checkbox__label">neutral</span></label>
-<label class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control" data-indeterminate><span class="ds-checkbox__label">일부 선택</span></label>
-<label class="ds-checkbox" data-variant="ghost"><input type="checkbox" class="ds-checkbox__control" checked><span class="ds-checkbox__label">ghost</span></label>
-<label class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control" disabled><span class="ds-checkbox__label">disabled</span></label>
+<div class="u-col u-gap-3" style="width: 100%; max-width: 375px">
+  <label class="ds-checkbox" data-size="large">
+    <input type="checkbox" class="ds-checkbox__control" checked>
+    <span class="ds-checkbox__label ds-fw-semibold">약관에 모두 동의해요</span>
+  </label>
+  <hr class="ds-divider">
+  <div class="u-col u-gap-1">
+    <div class="u-flex u-center u-between">
+      <label class="ds-checkbox" data-variant="ghost"><input type="checkbox" class="ds-checkbox__control" checked><span class="ds-checkbox__label">(필수) 서비스 이용 약관</span></label>
+      <a class="ds-link" data-size="small" href="#" aria-label="서비스 이용 약관 보기">보기</a>
+    </div>
+    <div class="u-flex u-center u-between">
+      <label class="ds-checkbox" data-variant="ghost"><input type="checkbox" class="ds-checkbox__control" checked><span class="ds-checkbox__label">(필수) 개인 정보 수집과 이용</span></label>
+      <a class="ds-link" data-size="small" href="#" aria-label="개인 정보 수집과 이용 보기">보기</a>
+    </div>
+    <div class="u-flex u-center u-between">
+      <label class="ds-checkbox" data-variant="ghost"><input type="checkbox" class="ds-checkbox__control" checked><span class="ds-checkbox__label">(선택) 할인과 이벤트 소식 받기</span></label>
+      <a class="ds-link" data-size="small" href="#" aria-label="할인과 이벤트 소식 받기 보기">보기</a>
+    </div>
+  </div>
+</div>
+```
+
+### 버튼을 눌러야 반영되는 선택 받기
+
+로그인처럼 버튼을 눌러야 반영되는 선택은 Switch가 아니라 Checkbox로 받습니다. Switch는 누르는 즉시 바뀌는 설정에만 씁니다.
+
+```html
+<div class="u-col u-gap-4" style="width: 100%; max-width: 375px">
+  <div class="ds-field">
+    <div class="ds-field__header"><label class="ds-field__label" for="checkbox-ex2-id">아이디</label></div>
+    <div class="ds-input" data-variant="outline"><input class="ds-input__control" id="checkbox-ex2-id" placeholder="아이디를 입력해 주세요"></div>
+  </div>
+  <div class="ds-field">
+    <div class="ds-field__header"><label class="ds-field__label" for="checkbox-ex2-password">비밀번호</label></div>
+    <div class="ds-input" data-variant="outline"><input class="ds-input__control" id="checkbox-ex2-password" type="password" placeholder="비밀번호를 입력해 주세요"></div>
+  </div>
+  <label class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control" checked><span class="ds-checkbox__label">로그인 상태 유지</span></label>
+  <button class="ds-btn" data-size="large" data-width="fill">로그인</button>
+</div>
+```
+
+### 목록에서 여러 개를 골라 한 번에 처리하기
+
+목록 위에 전체 선택 칸을 두고, 일부만 골랐으면 가로선(`data-indeterminate`)으로 보여 줍니다. 고른 항목은 위쪽 버튼으로 한 번에 처리합니다.
+
+```html
+<div class="u-col u-gap-3" style="width: 100%; max-width: 375px">
+  <div class="u-flex u-center u-between">
+    <label class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control" data-indeterminate><span class="ds-checkbox__label">전체 선택 (2/3)</span></label>
+    <button class="ds-btn" data-variant="ghost" data-size="xsmall">선택 삭제</button>
+  </div>
+  <ul class="ds-list" data-variant="inset" data-divider>
+    <li>
+      <div class="ds-list-item">
+        <span class="ds-list-item__prefix"><label class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control" checked aria-label="무선 이어폰"></label></span>
+        <span class="ds-list-item__content">
+          <span class="ds-list-item__title">무선 이어폰</span>
+          <span class="ds-list-item__desc">화이트, 1개</span>
+        </span>
+        <span class="ds-list-item__suffix">59,000원</span>
+      </div>
+    </li>
+    <li>
+      <div class="ds-list-item">
+        <span class="ds-list-item__prefix"><label class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control" checked aria-label="보온 텀블러"></label></span>
+        <span class="ds-list-item__content">
+          <span class="ds-list-item__title">보온 텀블러</span>
+          <span class="ds-list-item__desc">500ml, 2개</span>
+        </span>
+        <span class="ds-list-item__suffix">24,000원</span>
+      </div>
+    </li>
+    <li>
+      <div class="ds-list-item">
+        <span class="ds-list-item__prefix"><label class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control" aria-label="노트 3권 세트"></label></span>
+        <span class="ds-list-item__content">
+          <span class="ds-list-item__title">노트 3권 세트</span>
+          <span class="ds-list-item__desc">1개</span>
+        </span>
+        <span class="ds-list-item__suffix">9,800원</span>
+      </div>
+    </li>
+  </ul>
+</div>
 ```
 
 ## 규격

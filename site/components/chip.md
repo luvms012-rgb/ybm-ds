@@ -26,12 +26,74 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 예시
 
+### 여러 조건을 함께 골라 거르기
+
+함께 고를 수 있는 필터는 Chip으로 만들고, 고른 칩에는 `aria-pressed="true"`를 붙입니다. 하나만 골라 보이는 내용을 바꿀 때는 Chip Tabs를 씁니다.
+
 ```html
-<button type="button" class="ds-chip" aria-pressed="true">전체</button>
-<button type="button" class="ds-chip" aria-pressed="false">할인</button>
-<button type="button" class="ds-chip" data-variant="outlineStrong" aria-pressed="false">outlineStrong</button>
-<button type="button" class="ds-chip" data-variant="outlineWeak" aria-pressed="false">@naver.com<i class="ds-icon ds-icon--chevron-down" aria-hidden="true"></i></button>
-<button type="button" class="ds-chip" disabled>disabled</button>
+<div class="u-col u-gap-3" style="width: 100%; max-width: 420px">
+  <div class="u-flex u-wrap u-gap-2">
+    <button type="button" class="ds-chip" aria-pressed="true">무료 배송</button>
+    <button type="button" class="ds-chip" aria-pressed="false">오늘 출발</button>
+    <button type="button" class="ds-chip" aria-pressed="true">할인 중</button>
+    <button type="button" class="ds-chip" aria-pressed="false">평점 4점 이상</button>
+  </div>
+  <span class="ds-t04 ds-fg-subtle">상품 128개</span>
+</div>
+```
+
+### 지금 값을 보여 주고 눌러서 바꾸기
+
+값을 골라야 하는 필터는 칩에 지금 값과 아래 화살표를 함께 보여 줍니다. 누르면 Bottom Sheet나 Select Content를 열어 값을 바꿉니다.
+
+```html
+<div class="u-col u-gap-3" style="width: 100%; max-width: 420px">
+  <div class="u-flex u-wrap u-gap-2">
+    <button type="button" class="ds-chip" data-variant="outlineWeak" data-layout="iconOnly" aria-label="필터"><i class="ds-icon ds-icon--sliders-horizontal" aria-hidden="true"></i></button>
+    <button type="button" class="ds-chip" data-variant="outlineWeak" aria-haspopup="dialog">최근 3개월<i class="ds-icon ds-icon--chevron-down" aria-hidden="true"></i></button>
+    <button type="button" class="ds-chip" data-variant="outlineWeak" aria-haspopup="dialog">배송 완료<i class="ds-icon ds-icon--chevron-down" aria-hidden="true"></i></button>
+  </div>
+  <ul class="ds-list" data-variant="inset" data-divider>
+    <li>
+      <a class="ds-list-item" href="#">
+        <span class="ds-list-item__content">
+          <span class="ds-list-item__title">무선 이어폰</span>
+          <span class="ds-list-item__desc">11월 2일 주문</span>
+        </span>
+        <span class="ds-list-item__suffix">배송 완료</span>
+        <i class="ds-icon ds-icon--chevron-right ds-list-item__chevron" aria-hidden="true"></i>
+      </a>
+    </li>
+    <li>
+      <a class="ds-list-item" href="#">
+        <span class="ds-list-item__content">
+          <span class="ds-list-item__title">보온 텀블러</span>
+          <span class="ds-list-item__desc">10월 21일 주문</span>
+        </span>
+        <span class="ds-list-item__suffix">배송 완료</span>
+        <i class="ds-icon ds-icon--chevron-right ds-list-item__chevron" aria-hidden="true"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+```
+
+### 적용한 조건을 모아 빼기 쉽게
+
+적용한 조건은 오른쪽에 x 아이콘을 붙인 칩으로 모아 보여 주고, 누르면 그 조건이 빠집니다. 칩마다 `aria-label`로 무엇이 빠지는지 적습니다.
+
+```html
+<div class="u-col u-gap-3" style="width: 100%; max-width: 420px">
+  <div class="u-flex u-center u-between">
+    <span class="ds-t04 ds-fg-muted">적용한 조건 3개</span>
+    <button class="ds-btn" data-variant="ghost" data-size="xsmall">모두 지우기</button>
+  </div>
+  <div class="u-flex u-wrap u-gap-2">
+    <button type="button" class="ds-chip" data-variant="outlineStrong" data-size="small" aria-label="서울 조건 빼기">서울<i class="ds-icon ds-icon--x" aria-hidden="true"></i></button>
+    <button type="button" class="ds-chip" data-variant="outlineStrong" data-size="small" aria-label="1인실 조건 빼기">1인실<i class="ds-icon ds-icon--x" aria-hidden="true"></i></button>
+    <button type="button" class="ds-chip" data-variant="outlineStrong" data-size="small" aria-label="주차 가능 조건 빼기">주차 가능<i class="ds-icon ds-icon--x" aria-hidden="true"></i></button>
+  </div>
+</div>
 ```
 
 ## 규격

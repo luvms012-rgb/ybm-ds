@@ -45,26 +45,25 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 예시
 
+### 찾기 결과가 없을 때 다음 할 일 알리기
+
+제목에는 지금 상황을, 설명에는 다음에 할 일을 적습니다. 사용자가 찾는 말만 바꾸면 되는 자리라 버튼 없이 안내만 둡니다.
+
 ```html
-<div class="ds-empty"><span class="ds-empty__media"><i class="ds-icon ds-icon--inbox" aria-hidden="true"></i></span><p class="ds-empty__title">아직 주문 내역이 없어요</p><p class="ds-empty__desc">마음에 드는 상품을 찾아보세요.</p><div class="ds-empty__actions"><button class="ds-btn" data-variant="neutralWeak">둘러보기</button></div></div>
+<div class="u-col u-gap-2 u-full" style="max-width: 420px">
+  <div class="ds-input" data-variant="outline" data-size="medium">
+    <i class="ds-icon ds-icon--search ds-input__icon" aria-hidden="true"></i>
+    <input class="ds-input__control" type="search" value="영어 문법 심화반" aria-label="강의 찾기">
+    <button class="ds-input__clear" aria-label="지우기"></button>
+  </div>
+  <div class="ds-empty">
+    <span class="ds-empty__media"><i class="ds-icon ds-icon--search" aria-hidden="true"></i></span>
+    <p class="ds-empty__title">'영어 문법 심화반'에 맞는 강의가 없어요</p>
+    <p class="ds-empty__desc">낱말을 줄이거나 다른 낱말로 찾아보세요.</p>
+  </div>
+</div>
 ```
 
-## 규격
+### 카드 안 좁은 자리에는 small 쓰기
 
-### CSS 변수
-
-서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
-
-| 변수 | 기본값 |
-| --- | --- |
-| `--ds-empty-media` | `56px` |
-| `--ds-empty-icon` | `28px` |
-
-### 크기와 여백
-
-```
-size: medium(기본) / small
-Figma medium: padding 40/16 / gap x4 / media 56(아이콘 28) / title t06 Bold / desc t04 / actions 위 x2 / 버튼 medium
-      small : padding 24/16 / gap x3 / media 40(아이콘 20) / title t05 Bold / desc t03 / actions 위 x1 / 버튼 small
-  media bg/neutral-muted + 아이콘 fg/neutral-subtle / title fg/neutral / desc fg/neutral-subtle / 가운데 정렬
-```
+카드나 목록 안의 좁은 자리에는 `data-size="small"`을 씁니다. 화면 전체가 아니라 한 칸이 비었다는 것만 가볍게 알립니다.

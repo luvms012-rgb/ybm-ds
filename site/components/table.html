@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Table - YBM DS</title>
+<title>Table - yds</title>
 <meta name="description" content="여러 항목을 같은 기준으로 나란히 놓고 비교하는 표입니다.">
 <!-- 생성물: node site/build.mjs가 만든다. 직접 고치지 말고 site/build.mjs나 site/src를 고친다 -->
 <script>try { var t = localStorage.getItem("ybm-site-theme"); if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.dataset.theme = "dark"; } catch (e) {}</script>
 <link rel="icon" href="../assets/logo-ybmnet.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../dist/ybm-ds.css">
-<link rel="stylesheet" href="../assets/site.css?v=bb7371b2">
+<link rel="stylesheet" href="../assets/site.css?v=1656b6c0">
 <script src="../../dist/ybm-ds.js" defer></script>
-<script src="../assets/site.js?v=bb7371b2" defer></script>
+<script src="../assets/site.js?v=1656b6c0" defer></script>
 </head>
 <body class="site">
 <a class="site-skip" href="#main">본문 바로가기</a>
@@ -164,56 +164,199 @@
 <tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>글은 왼쪽, 숫자와 금액은 오른쪽에 맞춥니다. 번호, 날짜, 상태처럼 짧고 길이가 같은 값은 가운데에 맞춥니다.</td></tr>
 <tr><td><b class="ds-badge site-practice" data-tone="critical">Don't</b></td><td>한 표 안에서 density를 섞지 않습니다. 데이터가 많은 관리 화면은 compact, 일반 사용자 화면은 default를 씁니다.</td></tr>
 <tr><td><b class="ds-badge site-practice" data-tone="critical">Don't</b></td><td>한 칸에 두 줄 넘게 넣지 않습니다. 긴 글은 말줄임하고 상세 화면에서 보여 줍니다.</td></tr></tbody></table></div>
-<h2 id="examples">예시<a class="site-anchor" href="#examples" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><div class="site-example">
+<h2 id="examples">예시<a class="site-anchor" href="#examples" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><h3>눌러서 상세로 가는 문의 내역</h3>
+<p>줄을 누르면 상세로 가는 표라 <code>data-interactive</code>로 마우스를 올린 줄을 표시합니다. 번호, 상태, 날짜는 가운데에, 제목은 왼쪽에 맞춥니다.</p>
+<div class="site-example">
   <div class="site-example__bar"><div class="ds-chiptabs" role="tablist" aria-label="보기 방식"><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-view="preview">미리보기</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-view="code">코드</button></div></div>
-  <div class="site-example__preview"><div class="pv-stage">
-    <div class="ds-table-wrap">
-      <table class="ds-table">
-        <thead><tr><th scope="col" data-align="center" style="width:72px">번호</th><th scope="col">제목</th><th scope="col" data-align="center" style="width:120px">등록일</th></tr></thead>
-        <tbody>
-          <tr data-interactive><td data-align="center">12</td><td>11월 배송 일정 안내</td><td data-align="center">2026.10.22</td></tr>
-          <tr data-interactive aria-selected="true"><td data-align="center">11</td><td>추가 할인 이벤트 공지</td><td data-align="center">2026.10.18</td></tr>
-          <tr data-interactive><td data-align="center">10</td><td>영수증 발급 방법 변경 안내</td><td data-align="center">2026.10.10</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-  <div class="pv-stage">
-    <div class="ds-table-wrap">
-      <table class="ds-table">
-        <thead><tr><th scope="col"><label class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control" aria-label="모든 행 선택"></label></th><th scope="col">주문</th><th scope="col">상태</th><th scope="col" data-align="end">금액</th></tr></thead>
-        <tbody>
-          <tr class="ds-table__group"><td colspan="4">오늘</td></tr>
-          <tr><td><label class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control" aria-label="주문 1042 선택"></label></td><td><span class="ds-table__stack"><span>무선 이어폰 외 1건</span><span>주문 1042</span></span></td><td><span class="ds-badge" data-tone="informative">배송 준비</span></td><td data-align="end">128,000원</td></tr>
-          <tr><td><label class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control" aria-label="주문 1041 선택" checked></label></td><td><span class="ds-table__stack"><span>텀블러 500ml</span><span>주문 1041</span></span></td><td><span class="ds-badge" data-tone="positive">배송 중</span></td><td data-align="end">24,900원</td></tr>
-          <tr class="ds-table__group"><td colspan="4">어제</td></tr>
-          <tr><td><label class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control" aria-label="주문 1038 선택"></label></td><td><span class="ds-table__stack"><span>여행용 파우치 세트</span><span>주문 1038</span></span></td><td><span class="ds-badge">배송 완료</span></td><td data-align="end">39,000원</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div></div>
+  <div class="site-example__preview"><div class="pv-stage pv-wide"><div class="ds-table-wrap">
+  <table class="ds-table">
+    <thead>
+      <tr>
+        <th scope="col" data-align="center" style="width: 72px">번호</th>
+        <th scope="col">제목</th>
+        <th scope="col" data-align="center" style="width: 112px">상태</th>
+        <th scope="col" data-align="center" style="width: 120px">문의일</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr data-interactive>
+        <td data-align="center">3</td>
+        <td>환불 받을 계좌를 바꾸고 싶어요</td>
+        <td data-align="center"><span class="ds-badge" data-tone="warning">답변 대기</span></td>
+        <td data-align="center">2026.11.03</td>
+      </tr>
+      <tr data-interactive>
+        <td data-align="center">2</td>
+        <td>수강 기간을 늘릴 수 있나요</td>
+        <td data-align="center">답변 완료</td>
+        <td data-align="center">2026.10.28</td>
+      </tr>
+      <tr data-interactive>
+        <td data-align="center">1</td>
+        <td>영수증을 다시 받고 싶어요</td>
+        <td data-align="center">답변 완료</td>
+        <td data-align="center">2026.10.15</td>
+      </tr>
+    </tbody>
+  </table>
+</div></div></div>
   <div class="site-example__code" hidden><figure class="ds-codeblock">
   <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">html</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
   <pre class="ds-codeblock__code"><code>&lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-table-wrap&quot;</span>&gt;
   &lt;<span class="hl-t">table</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-table&quot;</span>&gt;
-    &lt;<span class="hl-t">thead</span>&gt;&lt;<span class="hl-t">tr</span>&gt;&lt;<span class="hl-t">th</span> <span class="hl-f">scope</span>=<span class="hl-s">&quot;col&quot;</span> <span class="hl-f">data-align</span>=<span class="hl-s">&quot;center&quot;</span> <span class="hl-f">style</span>=<span class="hl-s">&quot;width:72px&quot;</span>&gt;번호&lt;/<span class="hl-t">th</span>&gt;&lt;<span class="hl-t">th</span> <span class="hl-f">scope</span>=<span class="hl-s">&quot;col&quot;</span>&gt;제목&lt;/<span class="hl-t">th</span>&gt;&lt;<span class="hl-t">th</span> <span class="hl-f">scope</span>=<span class="hl-s">&quot;col&quot;</span> <span class="hl-f">data-align</span>=<span class="hl-s">&quot;center&quot;</span> <span class="hl-f">style</span>=<span class="hl-s">&quot;width:120px&quot;</span>&gt;등록일&lt;/<span class="hl-t">th</span>&gt;&lt;/<span class="hl-t">tr</span>&gt;&lt;/<span class="hl-t">thead</span>&gt;
+    &lt;<span class="hl-t">thead</span>&gt;
+      &lt;<span class="hl-t">tr</span>&gt;
+        &lt;<span class="hl-t">th</span> <span class="hl-f">scope</span>=<span class="hl-s">&quot;col&quot;</span> <span class="hl-f">data-align</span>=<span class="hl-s">&quot;center&quot;</span> <span class="hl-f">style</span>=<span class="hl-s">&quot;width: 72px&quot;</span>&gt;번호&lt;/<span class="hl-t">th</span>&gt;
+        &lt;<span class="hl-t">th</span> <span class="hl-f">scope</span>=<span class="hl-s">&quot;col&quot;</span>&gt;제목&lt;/<span class="hl-t">th</span>&gt;
+        &lt;<span class="hl-t">th</span> <span class="hl-f">scope</span>=<span class="hl-s">&quot;col&quot;</span> <span class="hl-f">data-align</span>=<span class="hl-s">&quot;center&quot;</span> <span class="hl-f">style</span>=<span class="hl-s">&quot;width: 112px&quot;</span>&gt;상태&lt;/<span class="hl-t">th</span>&gt;
+        &lt;<span class="hl-t">th</span> <span class="hl-f">scope</span>=<span class="hl-s">&quot;col&quot;</span> <span class="hl-f">data-align</span>=<span class="hl-s">&quot;center&quot;</span> <span class="hl-f">style</span>=<span class="hl-s">&quot;width: 120px&quot;</span>&gt;문의일&lt;/<span class="hl-t">th</span>&gt;
+      &lt;/<span class="hl-t">tr</span>&gt;
+    &lt;/<span class="hl-t">thead</span>&gt;
     &lt;<span class="hl-t">tbody</span>&gt;
-      &lt;<span class="hl-t">tr</span> <span class="hl-f">data-interactive</span>&gt;&lt;<span class="hl-t">td</span> <span class="hl-f">data-align</span>=<span class="hl-s">&quot;center&quot;</span>&gt;12&lt;/<span class="hl-t">td</span>&gt;&lt;<span class="hl-t">td</span>&gt;11월 배송 일정 안내&lt;/<span class="hl-t">td</span>&gt;&lt;<span class="hl-t">td</span> <span class="hl-f">data-align</span>=<span class="hl-s">&quot;center&quot;</span>&gt;2026.10.22&lt;/<span class="hl-t">td</span>&gt;&lt;/<span class="hl-t">tr</span>&gt;
-      &lt;<span class="hl-t">tr</span> <span class="hl-f">data-interactive</span> <span class="hl-f">aria-selected</span>=<span class="hl-s">&quot;true&quot;</span>&gt;&lt;<span class="hl-t">td</span> <span class="hl-f">data-align</span>=<span class="hl-s">&quot;center&quot;</span>&gt;11&lt;/<span class="hl-t">td</span>&gt;&lt;<span class="hl-t">td</span>&gt;추가 할인 이벤트 공지&lt;/<span class="hl-t">td</span>&gt;&lt;<span class="hl-t">td</span> <span class="hl-f">data-align</span>=<span class="hl-s">&quot;center&quot;</span>&gt;2026.10.18&lt;/<span class="hl-t">td</span>&gt;&lt;/<span class="hl-t">tr</span>&gt;
-      &lt;<span class="hl-t">tr</span> <span class="hl-f">data-interactive</span>&gt;&lt;<span class="hl-t">td</span> <span class="hl-f">data-align</span>=<span class="hl-s">&quot;center&quot;</span>&gt;10&lt;/<span class="hl-t">td</span>&gt;&lt;<span class="hl-t">td</span>&gt;영수증 발급 방법 변경 안내&lt;/<span class="hl-t">td</span>&gt;&lt;<span class="hl-t">td</span> <span class="hl-f">data-align</span>=<span class="hl-s">&quot;center&quot;</span>&gt;2026.10.10&lt;/<span class="hl-t">td</span>&gt;&lt;/<span class="hl-t">tr</span>&gt;
+      &lt;<span class="hl-t">tr</span> <span class="hl-f">data-interactive</span>&gt;
+        &lt;<span class="hl-t">td</span> <span class="hl-f">data-align</span>=<span class="hl-s">&quot;center&quot;</span>&gt;3&lt;/<span class="hl-t">td</span>&gt;
+        &lt;<span class="hl-t">td</span>&gt;환불 받을 계좌를 바꾸고 싶어요&lt;/<span class="hl-t">td</span>&gt;
+        &lt;<span class="hl-t">td</span> <span class="hl-f">data-align</span>=<span class="hl-s">&quot;center&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-badge&quot;</span> <span class="hl-f">data-tone</span>=<span class="hl-s">&quot;warning&quot;</span>&gt;답변 대기&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">td</span>&gt;
+        &lt;<span class="hl-t">td</span> <span class="hl-f">data-align</span>=<span class="hl-s">&quot;center&quot;</span>&gt;2026.11.03&lt;/<span class="hl-t">td</span>&gt;
+      &lt;/<span class="hl-t">tr</span>&gt;
+      &lt;<span class="hl-t">tr</span> <span class="hl-f">data-interactive</span>&gt;
+        &lt;<span class="hl-t">td</span> <span class="hl-f">data-align</span>=<span class="hl-s">&quot;center&quot;</span>&gt;2&lt;/<span class="hl-t">td</span>&gt;
+        &lt;<span class="hl-t">td</span>&gt;수강 기간을 늘릴 수 있나요&lt;/<span class="hl-t">td</span>&gt;
+        &lt;<span class="hl-t">td</span> <span class="hl-f">data-align</span>=<span class="hl-s">&quot;center&quot;</span>&gt;답변 완료&lt;/<span class="hl-t">td</span>&gt;
+        &lt;<span class="hl-t">td</span> <span class="hl-f">data-align</span>=<span class="hl-s">&quot;center&quot;</span>&gt;2026.10.28&lt;/<span class="hl-t">td</span>&gt;
+      &lt;/<span class="hl-t">tr</span>&gt;
+      &lt;<span class="hl-t">tr</span> <span class="hl-f">data-interactive</span>&gt;
+        &lt;<span class="hl-t">td</span> <span class="hl-f">data-align</span>=<span class="hl-s">&quot;center&quot;</span>&gt;1&lt;/<span class="hl-t">td</span>&gt;
+        &lt;<span class="hl-t">td</span>&gt;영수증을 다시 받고 싶어요&lt;/<span class="hl-t">td</span>&gt;
+        &lt;<span class="hl-t">td</span> <span class="hl-f">data-align</span>=<span class="hl-s">&quot;center&quot;</span>&gt;답변 완료&lt;/<span class="hl-t">td</span>&gt;
+        &lt;<span class="hl-t">td</span> <span class="hl-f">data-align</span>=<span class="hl-s">&quot;center&quot;</span>&gt;2026.10.15&lt;/<span class="hl-t">td</span>&gt;
+      &lt;/<span class="hl-t">tr</span>&gt;
     &lt;/<span class="hl-t">tbody</span>&gt;
   &lt;/<span class="hl-t">table</span>&gt;
-&lt;/<span class="hl-t">div</span>&gt;
-
-&lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-table-wrap&quot;</span>&gt;
+&lt;/<span class="hl-t">div</span>&gt;</code></pre>
+</figure></div>
+</div>
+<h3>금액은 오른쪽에 맞춰 비교하기</h3>
+<p>금액 열을 오른쪽에 맞춰 자릿수를 한눈에 비교하게 합니다. 두 줄 칸에는 이름과 보조 글까지만 넣고, 더 긴 내용은 상세 화면에서 보여 줍니다.</p>
+<div class="site-example">
+  <div class="site-example__bar"><div class="ds-chiptabs" role="tablist" aria-label="보기 방식"><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-view="preview">미리보기</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-view="code">코드</button></div></div>
+  <div class="site-example__preview"><div class="pv-stage pv-wide"><div class="ds-table-wrap">
+  <table class="ds-table">
+    <thead>
+      <tr>
+        <th scope="col" data-align="center" style="width: 120px">결제일</th>
+        <th scope="col">내용</th>
+        <th scope="col" style="width: 120px">결제 수단</th>
+        <th scope="col" data-align="end" style="width: 120px">금액</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td data-align="center">2026.11.02</td>
+        <td><span class="ds-table__stack"><span>비즈니스 영어 회화</span><span>수강권 3개월</span></span></td>
+        <td>신용카드</td>
+        <td data-align="end">89,000원</td>
+      </tr>
+      <tr>
+        <td data-align="center">2026.10.20</td>
+        <td><span class="ds-table__stack"><span>엑셀 실무 완성</span><span>단과 강의</span></span></td>
+        <td>포인트</td>
+        <td data-align="end">45,000원</td>
+      </tr>
+      <tr>
+        <td data-align="center">2026.10.05</td>
+        <td><span class="ds-table__stack"><span>기초 회계 원리</span><span>패키지 2개</span></span></td>
+        <td>계좌 이체</td>
+        <td data-align="end">120,000원</td>
+      </tr>
+    </tbody>
+  </table>
+</div></div></div>
+  <div class="site-example__code" hidden><figure class="ds-codeblock">
+  <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">html</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
+  <pre class="ds-codeblock__code"><code>&lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-table-wrap&quot;</span>&gt;
   &lt;<span class="hl-t">table</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-table&quot;</span>&gt;
-    &lt;<span class="hl-t">thead</span>&gt;&lt;<span class="hl-t">tr</span>&gt;&lt;<span class="hl-t">th</span> <span class="hl-f">scope</span>=<span class="hl-s">&quot;col&quot;</span>&gt;&lt;<span class="hl-t">label</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-checkbox&quot;</span>&gt;&lt;<span class="hl-t">input</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;checkbox&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-checkbox__control&quot;</span> <span class="hl-f">aria-label</span>=<span class="hl-s">&quot;모든 행 선택&quot;</span>&gt;&lt;/<span class="hl-t">label</span>&gt;&lt;/<span class="hl-t">th</span>&gt;&lt;<span class="hl-t">th</span> <span class="hl-f">scope</span>=<span class="hl-s">&quot;col&quot;</span>&gt;주문&lt;/<span class="hl-t">th</span>&gt;&lt;<span class="hl-t">th</span> <span class="hl-f">scope</span>=<span class="hl-s">&quot;col&quot;</span>&gt;상태&lt;/<span class="hl-t">th</span>&gt;&lt;<span class="hl-t">th</span> <span class="hl-f">scope</span>=<span class="hl-s">&quot;col&quot;</span> <span class="hl-f">data-align</span>=<span class="hl-s">&quot;end&quot;</span>&gt;금액&lt;/<span class="hl-t">th</span>&gt;&lt;/<span class="hl-t">tr</span>&gt;&lt;/<span class="hl-t">thead</span>&gt;
+    &lt;<span class="hl-t">thead</span>&gt;
+      &lt;<span class="hl-t">tr</span>&gt;
+        &lt;<span class="hl-t">th</span> <span class="hl-f">scope</span>=<span class="hl-s">&quot;col&quot;</span> <span class="hl-f">data-align</span>=<span class="hl-s">&quot;center&quot;</span> <span class="hl-f">style</span>=<span class="hl-s">&quot;width: 120px&quot;</span>&gt;결제일&lt;/<span class="hl-t">th</span>&gt;
+        &lt;<span class="hl-t">th</span> <span class="hl-f">scope</span>=<span class="hl-s">&quot;col&quot;</span>&gt;내용&lt;/<span class="hl-t">th</span>&gt;
+        &lt;<span class="hl-t">th</span> <span class="hl-f">scope</span>=<span class="hl-s">&quot;col&quot;</span> <span class="hl-f">style</span>=<span class="hl-s">&quot;width: 120px&quot;</span>&gt;결제 수단&lt;/<span class="hl-t">th</span>&gt;
+        &lt;<span class="hl-t">th</span> <span class="hl-f">scope</span>=<span class="hl-s">&quot;col&quot;</span> <span class="hl-f">data-align</span>=<span class="hl-s">&quot;end&quot;</span> <span class="hl-f">style</span>=<span class="hl-s">&quot;width: 120px&quot;</span>&gt;금액&lt;/<span class="hl-t">th</span>&gt;
+      &lt;/<span class="hl-t">tr</span>&gt;
+    &lt;/<span class="hl-t">thead</span>&gt;
     &lt;<span class="hl-t">tbody</span>&gt;
-      &lt;<span class="hl-t">tr</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-table__group&quot;</span>&gt;&lt;<span class="hl-t">td</span> <span class="hl-f">colspan</span>=<span class="hl-s">&quot;4&quot;</span>&gt;오늘&lt;/<span class="hl-t">td</span>&gt;&lt;/<span class="hl-t">tr</span>&gt;
-      &lt;<span class="hl-t">tr</span>&gt;&lt;<span class="hl-t">td</span>&gt;&lt;<span class="hl-t">label</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-checkbox&quot;</span>&gt;&lt;<span class="hl-t">input</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;checkbox&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-checkbox__control&quot;</span> <span class="hl-f">aria-label</span>=<span class="hl-s">&quot;주문 1042 선택&quot;</span>&gt;&lt;/<span class="hl-t">label</span>&gt;&lt;/<span class="hl-t">td</span>&gt;&lt;<span class="hl-t">td</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-table__stack&quot;</span>&gt;&lt;<span class="hl-t">span</span>&gt;무선 이어폰 외 1건&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">span</span>&gt;주문 1042&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">td</span>&gt;&lt;<span class="hl-t">td</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-badge&quot;</span> <span class="hl-f">data-tone</span>=<span class="hl-s">&quot;informative&quot;</span>&gt;배송 준비&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">td</span>&gt;&lt;<span class="hl-t">td</span> <span class="hl-f">data-align</span>=<span class="hl-s">&quot;end&quot;</span>&gt;128,000원&lt;/<span class="hl-t">td</span>&gt;&lt;/<span class="hl-t">tr</span>&gt;
-      &lt;<span class="hl-t">tr</span>&gt;&lt;<span class="hl-t">td</span>&gt;&lt;<span class="hl-t">label</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-checkbox&quot;</span>&gt;&lt;<span class="hl-t">input</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;checkbox&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-checkbox__control&quot;</span> <span class="hl-f">aria-label</span>=<span class="hl-s">&quot;주문 1041 선택&quot;</span> <span class="hl-f">checked</span>&gt;&lt;/<span class="hl-t">label</span>&gt;&lt;/<span class="hl-t">td</span>&gt;&lt;<span class="hl-t">td</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-table__stack&quot;</span>&gt;&lt;<span class="hl-t">span</span>&gt;텀블러 500ml&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">span</span>&gt;주문 1041&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">td</span>&gt;&lt;<span class="hl-t">td</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-badge&quot;</span> <span class="hl-f">data-tone</span>=<span class="hl-s">&quot;positive&quot;</span>&gt;배송 중&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">td</span>&gt;&lt;<span class="hl-t">td</span> <span class="hl-f">data-align</span>=<span class="hl-s">&quot;end&quot;</span>&gt;24,900원&lt;/<span class="hl-t">td</span>&gt;&lt;/<span class="hl-t">tr</span>&gt;
-      &lt;<span class="hl-t">tr</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-table__group&quot;</span>&gt;&lt;<span class="hl-t">td</span> <span class="hl-f">colspan</span>=<span class="hl-s">&quot;4&quot;</span>&gt;어제&lt;/<span class="hl-t">td</span>&gt;&lt;/<span class="hl-t">tr</span>&gt;
-      &lt;<span class="hl-t">tr</span>&gt;&lt;<span class="hl-t">td</span>&gt;&lt;<span class="hl-t">label</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-checkbox&quot;</span>&gt;&lt;<span class="hl-t">input</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;checkbox&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-checkbox__control&quot;</span> <span class="hl-f">aria-label</span>=<span class="hl-s">&quot;주문 1038 선택&quot;</span>&gt;&lt;/<span class="hl-t">label</span>&gt;&lt;/<span class="hl-t">td</span>&gt;&lt;<span class="hl-t">td</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-table__stack&quot;</span>&gt;&lt;<span class="hl-t">span</span>&gt;여행용 파우치 세트&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">span</span>&gt;주문 1038&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">td</span>&gt;&lt;<span class="hl-t">td</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-badge&quot;</span>&gt;배송 완료&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">td</span>&gt;&lt;<span class="hl-t">td</span> <span class="hl-f">data-align</span>=<span class="hl-s">&quot;end&quot;</span>&gt;39,000원&lt;/<span class="hl-t">td</span>&gt;&lt;/<span class="hl-t">tr</span>&gt;
+      &lt;<span class="hl-t">tr</span>&gt;
+        &lt;<span class="hl-t">td</span> <span class="hl-f">data-align</span>=<span class="hl-s">&quot;center&quot;</span>&gt;2026.11.02&lt;/<span class="hl-t">td</span>&gt;
+        &lt;<span class="hl-t">td</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-table__stack&quot;</span>&gt;&lt;<span class="hl-t">span</span>&gt;비즈니스 영어 회화&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">span</span>&gt;수강권 3개월&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">td</span>&gt;
+        &lt;<span class="hl-t">td</span>&gt;신용카드&lt;/<span class="hl-t">td</span>&gt;
+        &lt;<span class="hl-t">td</span> <span class="hl-f">data-align</span>=<span class="hl-s">&quot;end&quot;</span>&gt;89,000원&lt;/<span class="hl-t">td</span>&gt;
+      &lt;/<span class="hl-t">tr</span>&gt;
+      &lt;<span class="hl-t">tr</span>&gt;
+        &lt;<span class="hl-t">td</span> <span class="hl-f">data-align</span>=<span class="hl-s">&quot;center&quot;</span>&gt;2026.10.20&lt;/<span class="hl-t">td</span>&gt;
+        &lt;<span class="hl-t">td</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-table__stack&quot;</span>&gt;&lt;<span class="hl-t">span</span>&gt;엑셀 실무 완성&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">span</span>&gt;단과 강의&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">td</span>&gt;
+        &lt;<span class="hl-t">td</span>&gt;포인트&lt;/<span class="hl-t">td</span>&gt;
+        &lt;<span class="hl-t">td</span> <span class="hl-f">data-align</span>=<span class="hl-s">&quot;end&quot;</span>&gt;45,000원&lt;/<span class="hl-t">td</span>&gt;
+      &lt;/<span class="hl-t">tr</span>&gt;
+      &lt;<span class="hl-t">tr</span>&gt;
+        &lt;<span class="hl-t">td</span> <span class="hl-f">data-align</span>=<span class="hl-s">&quot;center&quot;</span>&gt;2026.10.05&lt;/<span class="hl-t">td</span>&gt;
+        &lt;<span class="hl-t">td</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-table__stack&quot;</span>&gt;&lt;<span class="hl-t">span</span>&gt;기초 회계 원리&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">span</span>&gt;패키지 2개&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">td</span>&gt;
+        &lt;<span class="hl-t">td</span>&gt;계좌 이체&lt;/<span class="hl-t">td</span>&gt;
+        &lt;<span class="hl-t">td</span> <span class="hl-f">data-align</span>=<span class="hl-s">&quot;end&quot;</span>&gt;120,000원&lt;/<span class="hl-t">td</span>&gt;
+      &lt;/<span class="hl-t">tr</span>&gt;
+    &lt;/<span class="hl-t">tbody</span>&gt;
+  &lt;/<span class="hl-t">table</span>&gt;
+&lt;/<span class="hl-t">div</span>&gt;</code></pre>
+</figure></div>
+</div>
+<h3>결과가 없으면 머리 줄 아래에 빈 안내</h3>
+<p>찾은 결과가 없으면 머리 줄은 그대로 두고 그 아래에 Empty(small)를 표 전체 폭으로 둡니다. 어떤 열을 찾고 있었는지 남아 있어 조건을 바꿔 다시 찾기 쉽습니다.</p>
+<div class="site-example">
+  <div class="site-example__bar"><div class="ds-chiptabs" role="tablist" aria-label="보기 방식"><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-view="preview">미리보기</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-view="code">코드</button></div></div>
+  <div class="site-example__preview"><div class="pv-stage pv-wide"><div class="ds-table-wrap">
+  <table class="ds-table">
+    <thead>
+      <tr>
+        <th scope="col" data-align="center" style="width: 72px">번호</th>
+        <th scope="col">제목</th>
+        <th scope="col" data-align="center" style="width: 112px">상태</th>
+        <th scope="col" data-align="center" style="width: 120px">문의일</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td colspan="4">
+          <div class="ds-empty" data-size="small">
+            <span class="ds-empty__media"><i class="ds-icon ds-icon--search" aria-hidden="true"></i></span>
+            <p class="ds-empty__title">찾는 문의가 없어요</p>
+            <p class="ds-empty__desc">기간을 늘리거나 다른 검색어로 찾아보세요.</p>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div></div></div>
+  <div class="site-example__code" hidden><figure class="ds-codeblock">
+  <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">html</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
+  <pre class="ds-codeblock__code"><code>&lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-table-wrap&quot;</span>&gt;
+  &lt;<span class="hl-t">table</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-table&quot;</span>&gt;
+    &lt;<span class="hl-t">thead</span>&gt;
+      &lt;<span class="hl-t">tr</span>&gt;
+        &lt;<span class="hl-t">th</span> <span class="hl-f">scope</span>=<span class="hl-s">&quot;col&quot;</span> <span class="hl-f">data-align</span>=<span class="hl-s">&quot;center&quot;</span> <span class="hl-f">style</span>=<span class="hl-s">&quot;width: 72px&quot;</span>&gt;번호&lt;/<span class="hl-t">th</span>&gt;
+        &lt;<span class="hl-t">th</span> <span class="hl-f">scope</span>=<span class="hl-s">&quot;col&quot;</span>&gt;제목&lt;/<span class="hl-t">th</span>&gt;
+        &lt;<span class="hl-t">th</span> <span class="hl-f">scope</span>=<span class="hl-s">&quot;col&quot;</span> <span class="hl-f">data-align</span>=<span class="hl-s">&quot;center&quot;</span> <span class="hl-f">style</span>=<span class="hl-s">&quot;width: 112px&quot;</span>&gt;상태&lt;/<span class="hl-t">th</span>&gt;
+        &lt;<span class="hl-t">th</span> <span class="hl-f">scope</span>=<span class="hl-s">&quot;col&quot;</span> <span class="hl-f">data-align</span>=<span class="hl-s">&quot;center&quot;</span> <span class="hl-f">style</span>=<span class="hl-s">&quot;width: 120px&quot;</span>&gt;문의일&lt;/<span class="hl-t">th</span>&gt;
+      &lt;/<span class="hl-t">tr</span>&gt;
+    &lt;/<span class="hl-t">thead</span>&gt;
+    &lt;<span class="hl-t">tbody</span>&gt;
+      &lt;<span class="hl-t">tr</span>&gt;
+        &lt;<span class="hl-t">td</span> <span class="hl-f">colspan</span>=<span class="hl-s">&quot;4&quot;</span>&gt;
+          &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-empty&quot;</span> <span class="hl-f">data-size</span>=<span class="hl-s">&quot;small&quot;</span>&gt;
+            &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-empty__media&quot;</span>&gt;&lt;<span class="hl-t">i</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-icon ds-icon--search&quot;</span> <span class="hl-f">aria-hidden</span>=<span class="hl-s">&quot;true&quot;</span>&gt;&lt;/<span class="hl-t">i</span>&gt;&lt;/<span class="hl-t">span</span>&gt;
+            &lt;<span class="hl-t">p</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-empty__title&quot;</span>&gt;찾는 문의가 없어요&lt;/<span class="hl-t">p</span>&gt;
+            &lt;<span class="hl-t">p</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-empty__desc&quot;</span>&gt;기간을 늘리거나 다른 검색어로 찾아보세요.&lt;/<span class="hl-t">p</span>&gt;
+          &lt;/<span class="hl-t">div</span>&gt;
+        &lt;/<span class="hl-t">td</span>&gt;
+      &lt;/<span class="hl-t">tr</span>&gt;
     &lt;/<span class="hl-t">tbody</span>&gt;
   &lt;/<span class="hl-t">table</span>&gt;
 &lt;/<span class="hl-t">div</span>&gt;</code></pre>

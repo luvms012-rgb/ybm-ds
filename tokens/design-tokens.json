@@ -1,6 +1,6 @@
 {
   "$meta": {
-    "name": "YBM Design System",
+    "name": "yds",
     "generated": "2026-10-29",
     "source": "Figma 1VCEsFU3xMWuXIntIrZz9i / YBM DS + Typography + Shape + Elevation",
     "note": "tokens/build.mjs 가 생성한다. 직접 수정하지 말 것."

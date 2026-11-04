@@ -1,4 +1,4 @@
-// YBM DS 문서 사이트 생성기 - node site/build.mjs
+// yds 문서 사이트 생성기 - node site/build.mjs
 // 바로 위 폴더(DS 정본)를 읽기만 하고 site/ 아래에 정적 HTML을 만든다. 패키지 설치 필요 없음.
 //   읽는 것: components.json, dist/components.css(머리 주석, --ds-* 변수), dist/tokens.css, dist/icons.css,
 //            dist/ybm-ds.js(머리 주석), index.html(컴포넌트 예시), README.md(6.2 사용 지침), site/src/*
@@ -273,7 +273,7 @@ function page({ file, title, section, body, layout = 'doc', desc = '', pager = [
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>${esc(title)} - YBM DS</title>
+<title>${esc(title)} - yds</title>
 ${desc ? `<meta name="description" content="${esc(desc)}">\n` : ''}<!-- 생성물: node site/build.mjs가 만든다. 직접 고치지 말고 site/build.mjs나 site/src를 고친다 -->
 <script>try { var t = localStorage.getItem("ybm-site-theme"); if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.dataset.theme = "dark"; } catch (e) {}</script>
 <link rel="icon" href="${root}assets/logo-ybmnet.svg" type="image/svg+xml">
@@ -330,15 +330,15 @@ const CSS_LINK = `<link rel="stylesheet" href="${PUBLIC}/dist/ybm-ds.css">
 const DOC_LINE = `문서: ${SITE_URL}llms.txt`;
 const prompts = [
   ['설치하기', '지금 만드는 프로젝트에 DS를 넣습니다.',
-    `이 프로젝트에 YBM DS를 설치해 줘.
+    `이 프로젝트에 yds를 설치해 줘.
 ${DOC_LINE}
 문서의 '지킬 것'을 먼저 읽고 그대로 따라 줘.`],
   ['화면 만들기', '만들고 싶은 화면을 말로 설명합니다.',
-    `YBM DS로 [만들 화면, 예: 회원 목록 화면]을 만들어 줘.
+    `yds로 [만들 화면, 예: 회원 목록 화면]을 만들어 줘.
 ${DOC_LINE}
 비슷한 화면이 Templates에 있으면 그 화면에서 시작해 줘.`],
   ['규칙 점검하기', '이미 만든 화면을 점검합니다.',
-    `이 화면이 YBM DS 규칙을 지키는지 점검하고 고쳐 줘.
+    `이 화면이 yds 규칙을 지키는지 점검하고 고쳐 줘.
 ${DOC_LINE}
 고친 곳은 목록으로 알려 줘.`],
   ['브랜드 컬러 입히기', '서비스에 쓸 때 이어서 붙여 넣습니다. 대괄호 안에 브랜드 컬러를 넣습니다.',
@@ -349,15 +349,15 @@ ${DOC_LINE}
 // 운영 중인 사이트에 옮길 때만 쓰는 요청 글 (11-04 사용자 "내 사이트 옮기기는 다음 단계"). 브랜드 컬러와 규칙 점검은 위 prompts를 그대로 쓴다
 const MIGRATE = [
   ['1. 사이트 살펴보기', '아직 고치지 않고, 무엇을 어떤 순서로 바꿀지 먼저 정합니다.',
-    `이 사이트에 YBM DS를 옮겨 오려고 해. 아직 고치지 말고 먼저 살펴봐 줘.
+    `이 사이트에 yds를 옮겨 오려고 해. 아직 고치지 말고 먼저 살펴봐 줘.
 ${DOC_LINE}
 공통 <head> 파일, CSS 파일, 자주 쓰는 색과 부품을 정리하고 바꿀 순서를 제안해 줘.`],
   ['2. DS 넣기', '공통 <head>에 넣습니다. 기존 CSS가 DS보다 먼저 적용되어 지금 화면은 거의 그대로입니다.',
-    `이 사이트의 공통 <head>에 YBM DS를 넣어 줘.
+    `이 사이트의 공통 <head>에 yds를 넣어 줘.
 ${DOC_LINE}
 넣은 뒤 지금 화면에서 달라진 곳이 있으면 알려 줘.`],
   ['3. 화면 하나씩 바꾸기', '화면마다 대괄호 안만 바꿔 붙여 넣습니다.',
-    `[바꿀 화면, 예: 회원 정보 수정] 화면을 YBM DS 컴포넌트로 바꿔 줘.
+    `[바꿀 화면, 예: 회원 정보 수정] 화면을 yds 컴포넌트로 바꿔 줘.
 ${DOC_LINE}
 서버 코드와 스크립트가 쓰는 class, id, name은 그대로 두고, 바꾸기 전후 화면을 비교해서 보여 줘.`],
 ];
@@ -381,15 +381,15 @@ const LLMS_RULES = `## 지킬 것
 - 화면을 바꿀 때마다 바꾸기 전후 화면을 비교해 보여 주고 확인을 받는다.`;
 // 반응형 기준점 (Foundations Breakpoint, 11-04 시작하기에서 옮김)
 const bpRows = [['sm', '480px', '큰 휴대폰'], ['md', '768px', '태블릿, PC 부품으로 바뀌는 기준'], ['lg', '1280px', '넓은 PC, 3단 배치'], ['xl', '1440px', '아주 넓은 화면']];
-// 코드 탭 (11-04 사용자 "다크 모드는 프롬프팅과 html 을 같이, 탭 형태로", "탭을 코드 상자 안으로"): 탭마다 코드 상자 하나, 상자 머리의 언어 이름 자리에 같은 Chip Tabs. 복사 버튼이 제 상자 코드를 복사하게 상자를 나눈다. 여닫기는 site.js data-site-tab
+// 코드 탭 (11-04 사용자 "다크 모드는 프롬프팅과 html을 같이, 탭 형태로", "탭을 코드 상자 안으로"): 탭마다 코드 상자 하나, 상자 머리의 언어 이름 자리에 같은 Chip Tabs. 복사 버튼이 제 상자 코드를 복사하게 상자를 나눈다. 여닫기는 site.js data-site-tab
 const codeTabs = (tabs) => { const bar = (sel) => `<div class="ds-chiptabs site-codetabs__bar" role="tablist" aria-label="보기 방식">${tabs.map(([l], j) => `<button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="${j === sel}" data-site-tab="${j}">${esc(l)}</button>`).join('')}</div>`; return `<div class="site-codetabs">${tabs.map(([, h], i) => `<div class="site-codetabs__panel"${i ? ' hidden' : ''}>${h.replace(/<span class="ds-codeblock__language">[^<]*<\/span>/, bar(i))}</div>`).join('')}</div>`; };
 // 안내 카드 (레퍼런스 B Get Started): 옅은 회색 칸에 제목과 화살표, 아래 한 줄 설명. out이면 새 창
 const hubCard = (href, title, desc, out = false) => `<a class="site-hub" href="${href}"${out ? ' target="_blank" rel="noopener"' : ''}><span class="site-hub__title">${esc(title)}<i class="ds-icon ds-icon--${out ? 'external-link' : 'arrow-right'} ds-icon--sm" aria-hidden="true"></i></span><span class="site-hub__desc">${esc(desc)}</span></a>`;
 write({
-  file: 'index.html', section: 'get-started', title: 'Get Started', desc: 'YBM DS를 처음 쓰는 사람을 위한 안내', layout: 'page',
+  file: 'index.html', section: 'get-started', title: 'Get Started', desc: 'yds를 처음 쓰는 사람을 위한 안내', layout: 'page',
   body: `<header>
   <h1 class="site-h1">Get Started</h1>
-  <p class="site-lead">YBM DS는 YBM 서비스를 위한 디자인 시스템입니다.</p>
+  <p class="site-lead">yds는 YBM 서비스를 위한 디자인 시스템입니다.</p>
   ${metaLinks({ figma: LINKS.figmaUrl('2608:2'), code: GITHUB })}
 </header>
 
@@ -417,7 +417,7 @@ ${MIGRATE.map(([t, d, p]) => `<h3>${esc(t)}</h3>\n<p>${esc(d)}</p>\n${codeblock(
 <h2 id="theme">다크 모드</h2>
 <p><code>html</code>에 속성 하나를 붙이면 모든 색이 어두운 화면용으로 바뀝니다. 색을 토큰으로만 썼다면 따로 고칠 것이 없습니다.</p>
 ${codeTabs([
-  ['AI 요청', codeblock(`이 사이트에 YBM DS 다크 모드를 넣어 줘.\n${DOC_LINE}\n화면 오른쪽 위에 라이트, 다크 전환 버튼을 만들고, 처음에는 기기 설정을 따르게 해 줘.`, 'text', ' data-wrap')],
+  ['AI 요청', codeblock(`이 사이트에 yds 다크 모드를 넣어 줘.\n${DOC_LINE}\n화면 오른쪽 위에 라이트, 다크 전환 버튼을 만들고, 처음에는 기기 설정을 따르게 해 줘.`, 'text', ' data-wrap')],
   ['HTML', codeblock(`<!-- 다크 모드 -->\n<html lang="ko" data-theme="dark">\n\n<!-- 기기 설정을 따를 때: <head> 맨 위 -->\n<script>\n  if (matchMedia('(prefers-color-scheme: dark)').matches) document.documentElement.dataset.theme = 'dark';\n</script>`)],
 ])}
 
@@ -445,7 +445,7 @@ ${codeblock(`<html lang="ko" data-ds-theme="trust">
 
 // 예전 Usage, Scripts 주소는 시작하기의 옮긴 절로 넘긴다 (공유된 링크가 깨지지 않게)
 for (const [f, to, label] of [['usage', 'start', '바로 써 보기'], ['scripts', 'start', '바로 써 보기']]) {
-  fs.writeFileSync(path.join(SITE, `get-started/${f}.html`), `<!doctype html>\n<html lang="ko"><head><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=../index.html#${to}"><title>Get Started - YBM DS</title></head><body><a href="../index.html#${to}">${label}</a></body></html>\n`);
+  fs.writeFileSync(path.join(SITE, `get-started/${f}.html`), `<!doctype html>\n<html lang="ko"><head><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=../index.html#${to}"><title>Get Started - yds</title></head><body><a href="../index.html#${to}">${label}</a></body></html>\n`);
   fs.rmSync(path.join(SITE, `get-started/${f}.md`), { force: true });
 }
 
@@ -476,7 +476,7 @@ const foundPages = {
   color: {
     title: '색', lead: '색은 정보의 위계와 상태, 브랜드를 구분해 보여 줍니다.', tabs: 'color',
     body: `<h2 id="overview">개요</h2>
-<p>YBM DS의 색은 역할 색과 팔레트 색 두 층입니다. 화면에는 역할 색만 쓰고, 팔레트 색은 역할 색의 원료로 둡니다. 그래서 어느 화면에서나 대비가 충분하고 뜻이 같습니다.</p>
+<p>yds의 색은 역할 색과 팔레트 색 두 층입니다. 화면에는 역할 색만 쓰고, 팔레트 색은 역할 색의 원료로 둡니다. 그래서 어느 화면에서나 대비가 충분하고 뜻이 같습니다.</p>
 <h2 id="role-based">역할 색</h2>
 <p>역할 색은 생김새가 아니라 하는 일로 이름을 붙입니다. 오류는 <code>critical</code>, 성공은 <code>positive</code>처럼 이름만 보고 쓰임을 압니다. 자세한 규칙과 전체 목록은 <a class="ds-link" href="color-roles.html">Roles</a>에 있습니다.</p>
 <h2 id="palette-color">팔레트 색</h2>
@@ -495,10 +495,10 @@ ${codeblock(prompts[3][2], 'text', ' data-wrap')}
 ${codeblock(`/* 서비스 CSS - DS 다음에 불러온다 */\n:root {\n  --ds-color-palette-brand-600: #12a150;  /* 대표 색: 주 버튼, 링크 */\n  --ds-color-palette-brand-700: #0d7d3e;  /* 한 단계 진하게: 눌림 */\n  --ds-color-palette-brand-100: #e6f6ee;  /* 아주 옅게: 옅은 배경 */\n  /* 나머지 단계도 같은 색으로 채운다 */\n}`, 'css')}
 <h2 id="practices">사용 지침</h2>
 ${practices([
-  [true, '역할에 맞는 색을 고릅니다. 오류는 critical, 성공은 positive 입니다.'],
+  [true, '역할에 맞는 색을 고릅니다. 오류는 critical, 성공은 positive입니다.'],
   [true, '진한 면 위 글자는 fg-on-[역할]-solid를 씁니다.'],
   [true, '브랜드 색은 주 버튼처럼 꼭 눈에 띄어야 할 곳에만 씁니다.'],
-  [false, 'hex 나 팔레트 색을 화면에 직접 쓰지 않습니다.'],
+  [false, 'hex나 팔레트 색을 화면에 직접 쓰지 않습니다.'],
   [false, '색만으로 뜻을 전하지 않습니다. 아이콘이나 글자를 함께 씁니다.'],
 ])}`,
   },
@@ -525,7 +525,7 @@ ${practices([
   spacing: {
     title: '간격', lead: '간격은 요소 사이의 거리로 무엇이 한 묶음인지 보여 줍니다.',
     body: `<h2 id="overview">개요</h2>
-<p>4px 단위가 기본이고 작은 간격은 2px 단위도 씁니다. 이름의 숫자에 4를 곱하면 값입니다. 화면 좌우 여백은 <code>--ds-space-x-global-gutter</code> 입니다.</p>
+<p>4px 단위가 기본이고 작은 간격은 2px 단위도 씁니다. 이름의 숫자에 4를 곱하면 값입니다. 화면 좌우 여백은 <code>--ds-space-x-global-gutter</code>입니다.</p>
 <h2 id="tokens">토큰</h2>
 ${table(['토큰', '값', '보기'], tokRe(/--ds-space-(x[0-9_]+): (\d+)px/g).map((m) => [`<code>--ds-space-${m[1]}</code>`, `${m[2]}px`, `<span class="site-bar" style="width: var(--ds-space-${m[1]})"></span>`]))}
 <h2 id="code">코드에서 쓰기</h2>
@@ -592,7 +592,7 @@ ${table(['토큰', '값'], tokRe(/--ds-z-([a-z]+): (\d+);/g).map((m) => [`<code>
 ${codeblock(`.my-menu {\n  background: var(--ds-color-bg-layer-floating);\n  box-shadow: var(--ds-elevation-overlay);\n  z-index: var(--ds-z-overlay);\n}`, 'css')}
 <h2 id="practices">사용 지침</h2>
 ${practices([
-  [true, '요소의 쓰임에 맞는 그림자 이름을 고릅니다. 메뉴는 overlay, 다이얼로그는 modal 입니다.'],
+  [true, '요소의 쓰임에 맞는 그림자 이름을 고릅니다. 메뉴는 overlay, 다이얼로그는 modal입니다.'],
   [true, '같은 높이 안에서 면을 나눌 때는 그림자 대신 테두리를 씁니다.'],
   [false, '그림자 값을 직접 만들지 않습니다.'],
 ])}`,
@@ -709,7 +709,7 @@ ${table(['토큰', '값'], palTokens.map((v) => { const l = resolve(LIGHT, `var(
 
 // 예전 Foundations Overview 주소는 첫 항목으로 넘긴다 (11-04 Overview 삭제)
 fs.writeFileSync(path.join(SITE, 'foundations/index.html'), `<!doctype html>
-<html lang="ko"><head><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=${FOUND[0][0]}.html"><title>Foundations - YBM DS</title></head><body><a href="${FOUND[0][0]}.html">${esc(FOUND[0][1])}</a></body></html>
+<html lang="ko"><head><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=${FOUND[0][0]}.html"><title>Foundations - yds</title></head><body><a href="${FOUND[0][0]}.html">${esc(FOUND[0][1])}</a></body></html>
 `);
 fs.rmSync(path.join(SITE, 'foundations/index.md'), { force: true });
 
@@ -720,7 +720,7 @@ const lucide = JSON.parse(fs.readFileSync(path.join(SITE, 'src/lucide-icons.json
 const lucideCount = Object.keys(lucide.icons).length;
 const ICON_LEAD = '아이콘은 정보와 기능을 빠르게 알아보도록 돕습니다.';
 const ICON_PRACTICES = [
-  [true, '같은 뜻에는 늘 같은 아이콘을 씁니다. 닫기는 x, 더 보기는 ellipsis 입니다.'],
+  [true, '같은 뜻에는 늘 같은 아이콘을 씁니다. 닫기는 x, 더 보기는 ellipsis입니다.'],
   [true, '아이콘만 있는 버튼에는 aria-label을 붙입니다.'],
   [true, '색은 글자색을 따라가게 둡니다. 상태 색이 필요하면 부모 글자색을 바꿉니다.'],
   [true, '크기는 16, 20, 24 셋 중에서 고릅니다.'],
@@ -758,7 +758,7 @@ ${example(`<div class="pv-stage"><button type="button" class="ds-btn" data-varia
 ${table(['종류', '모양', '쓰는 곳'], [['선', '<span class="site-icon-inline"><i class="ds-icon ds-icon--house" aria-hidden="true"></i><code>ds-icon--house</code></span>', '대부분의 자리. 기본 모양입니다.'], ['채움', '<span class="site-icon-inline"><i class="ds-icon ds-icon--house-solid" aria-hidden="true"></i><code>ds-icon--house-solid</code></span>', '선택된 탭, 상태 표시처럼 더 강하게 보여야 할 때. 이름 끝에 <code>-solid</code>가 붙습니다.']])}
 <h2 id="naming">이름 규칙</h2>
 <ul class="site-list">
-  <li>이름은 쓰임이 아니라 생김새로 붙입니다. 닫기 버튼이어도 이름은 <code>x</code> 입니다.</li>
+  <li>이름은 쓰임이 아니라 생김새로 붙입니다. 닫기 버튼이어도 이름은 <code>x</code>입니다.</li>
   <li>이름은 Lucide 이름을 그대로 씁니다. 클래스는 <code>ds-icon--</code> 뒤에 이름을 붙입니다.</li>
   <li>Library에서는 영어 이름, 영어 태그, 한국어 쓰임으로 찾을 수 있습니다.</li>
 </ul>
@@ -789,7 +789,7 @@ write({
 ${fdTabs('icons', 'foundations/icons-library.html')}
 <div class="site-lib" data-site-lib>
   <div class="site-lib__bar">
-    <div class="ds-segmented" role="group" aria-label="아이콘 묶음" data-size="medium"><button type="button" class="ds-segmented__item" aria-pressed="true" data-site-lib-set="ds">YBM DS ${iconNames.length}</button><button type="button" class="ds-segmented__item" aria-pressed="false" data-site-lib-set="all">Lucide 전체 ${lucideCount.toLocaleString()}</button></div>
+    <div class="ds-segmented" role="group" aria-label="아이콘 묶음" data-size="medium"><button type="button" class="ds-segmented__item" aria-pressed="true" data-site-lib-set="ds">yds ${iconNames.length}</button><button type="button" class="ds-segmented__item" aria-pressed="false" data-site-lib-set="all">Lucide 전체 ${lucideCount.toLocaleString()}</button></div>
     <div class="ds-input site-lib__search" data-variant="outline" data-size="large"><i class="ds-icon ds-icon--search ds-input__icon" aria-hidden="true"></i><input class="ds-input__control" type="search" placeholder="user, calendar, 닫기, 날짜…" aria-label="아이콘 찾기" data-site-lib-q><button type="button" class="ds-input__clear" aria-label="지우기"></button></div>
     <p class="site-lib__hint" data-site-lib-count>영어 이름, 태그, 한국어 쓰임으로 찾아 보세요.</p>
   </div>
@@ -820,7 +820,7 @@ function topElements(html, n) {
 }
 // 썸네일 - 레퍼런스 B처럼 회색 16:9 상자 가운데에 첫 예시의 앞 부품 몇 개를 실제 크기로
 // 컴포넌트 대표 그림: site/src/covers.html에 컴포넌트마다 손으로 쓴 장면(한국어, 실제 쓰임). 없으면 첫 예시에서 꺼낸다
-// 컴포넌트 예시 자료: site/src/examples/ 의 json 을 모두 합친다 ({ slug: [{ title, desc, html, wide? }] })
+// 컴포넌트 예시 자료: site/src/examples/ 의 json을 모두 합친다 ({ slug: [{ title, desc, html, wide? }] })
 const EXAMPLES = Object.assign({}, ...fs.readdirSync(path.join(SITE, 'src/examples')).filter((f) => f.endsWith('.json')).map((f) => readJson(`site/src/examples/${f}`)));
 const COVERS = Object.fromEntries([...fs.readFileSync(path.join(SITE, 'src/covers.html'), 'utf8').matchAll(/<template data-slug="([^"]+)">([\s\S]*?)<\/template>/g)].map((m) => [m[1], m[2]]));
 const cardThumb = (c) => {
@@ -917,7 +917,7 @@ comps.forEach((c) => {
   if (js.length) sections.push(`<h2 id="behavior">동작</h2><p><code>ybm-ds.js</code>를 불러오면 알아서 동작합니다.</p><ul class="site-list">${js.map((t) => `<li>${t}</li>`).join('')}</ul>`);
   if (c.dos.length) sections.push(`<h2 id="guide">사용 지침</h2>${practices(c.dos.map((d) => [!isDont(d), d]))}`);
   // 예시 (11-04 사용자 "사용 예시 강화, 실제 사용 규칙에 맞는 예시", 레퍼런스 A Examples): 이름, 쓰임 설명, 실제 화면 미리보기, 코드.
-  // 자료는 site/src/examples/*.json (컴포넌트 slug 마다 2 ~ 3개). 없으면 예전처럼 index.html 예시 한 칸
+  // 자료는 site/src/examples/*.json (컴포넌트 slug마다 2 ~ 3개). 없으면 예전처럼 index.html 예시 한 칸
   const exs = EXAMPLES[c.slug];
   sections.push(`<h2 id="examples">예시</h2>${exs ? exs.map((e) => `<h3>${esc(e.title)}</h3>\n<p>${inline(e.desc)}</p>\n${example(`<div class="pv-stage${e.wide ? ' pv-wide' : ''}">${e.html}</div>`, dedent(e.html))}`).join('\n') : c.example ? example(c.example, codeOf(c.example) || c.markup) : '<p>아직 예시가 없습니다.</p>'}`);
   if (c.vars.length || c.spec) sections.push(`<h2 id="spec">규격</h2>${c.vars.length ? `<h3>CSS 변수</h3><p>서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.</p>${table(['변수', '기본값'], c.vars.map(([n, v]) => [`<code>${esc(n)}</code>`, `<code>${esc(v)}</code>`]))}` : ''}${c.spec ? `<h3>크기와 여백</h3><pre class="site-spec">${esc(c.spec)}</pre>` : ''}`);
@@ -990,7 +990,7 @@ ${used.length ? `<h2 id="components">쓴 컴포넌트</h2><div class="site-links
 /* ---------------------------------------------------------------- AI & Tools */
 // 11-04 사용자 "시작하기에 합치기": 요청 글과 AI가 읽는 파일은 Get Started로 옮겼다. 예전 주소는 그 절로 넘긴다
 fs.writeFileSync(path.join(SITE, 'get-started/ai.html'), `<!doctype html>
-<html lang="ko"><head><meta charset="utf-8"><title>Get Started - YBM DS</title><script>location.replace('../index.html' + (location.hash === '#files' || location.hash === '#llms' ? '#files' : '#ai'));</script><meta http-equiv="refresh" content="0; url=../index.html#ai"></head><body><a href="../index.html#ai">AI로 시작하기</a></body></html>
+<html lang="ko"><head><meta charset="utf-8"><title>Get Started - yds</title><script>location.replace('../index.html' + (location.hash === '#files' || location.hash === '#llms' ? '#files' : '#ai'));</script><meta http-equiv="refresh" content="0; url=../index.html#ai"></head><body><a href="../index.html#ai">AI로 시작하기</a></body></html>
 `);
 fs.rmSync(path.join(SITE, 'get-started/ai.md'), { force: true });
 
@@ -1001,8 +1001,8 @@ const RELEASES = readJson('site/src/updates.json').releases;
 const UPDATE_AREAS = ['DS', '템플릿', '사이트'];
 const fmtDate = (d) => { const [y, m, dd] = d.split('-').map(Number); return `${y}. ${m}. ${dd}`; };
 write({
-  file: 'updates.html', section: 'updates', title: 'Updates', desc: 'YBM DS 업데이트 소식', layout: 'page',
-  body: `<header><h1 class="site-h1">Updates</h1><p class="site-lead">YBM DS 업데이트 소식과 변경 기록입니다.</p></header>
+  file: 'updates.html', section: 'updates', title: 'Updates', desc: 'yds 업데이트 소식', layout: 'page',
+  body: `<header><h1 class="site-h1">Updates</h1><p class="site-lead">yds 업데이트 소식과 변경 기록입니다.</p></header>
 <div class="ds-chiptabs site-release-filter" role="tablist" aria-label="영역">
   <button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-filter="">전체</button>
   ${UPDATE_AREAS.map((a) => `<button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-filter="${esc(a)}">${esc(a)}</button>`).join('\n  ')}
@@ -1028,7 +1028,7 @@ if (SHOW_THEMES) write({
 <aside class="site-themes__aside" aria-label="테마 고르기"><div class="site-themes__panel">
   <div class="site-themes__intro">
     <div class="site-themes__title"><h1 class="site-h1">Themes</h1>${iconBtn('data-site-theme-mode aria-pressed="false"', '미리보기를 다크 모드로 보기', '<i class="ds-icon site-i--moon" aria-hidden="true"></i>')}</div>
-    <p class="site-themes__desc">YBM DS에는 기본 테마가 들어 있습니다. 서비스에 맞게 바꾸려면 마음에 드는 테마 파일을 복사해 쓰세요.</p>
+    <p class="site-themes__desc">yds에는 기본 테마가 들어 있습니다. 서비스에 맞게 바꾸려면 마음에 드는 테마 파일을 복사해 쓰세요.</p>
     <a class="ds-link" data-size="small" href="../index.html#custom-theme">테마 사용방법</a>
   </div>
   <div class="site-themes__acts"><a class="ds-btn" data-variant="neutralSolid" data-size="small" data-width="fill" href="${GITHUB}/blob/main/dist/themes/${firstTheme.slug}.css" target="_blank" rel="noopener" data-site-theme-file>이 테마 쓰기</a><a class="ds-btn" data-variant="neutralWeak" data-size="small" data-width="fill" href="pages/${firstTheme.slug}.html" target="_blank" rel="noopener" data-site-theme-open>새 창으로 보기</a></div>
@@ -1066,7 +1066,7 @@ figmaDocs();
   const gs = GS_ORDER.filter(([f]) => !f.startsWith('foundations/')).map(([f]) => byFile(f)).filter(Boolean);
   const found = MD_PAGES.filter((p) => p.file.startsWith('foundations/'));
   const compPages = MD_PAGES.filter((p) => p.section === 'components');
-  const intro = `# YBM DS
+  const intro = `# yds
 
 > YBM 서비스를 위한 디자인 시스템입니다. HTML에 .ds-* 클래스를 붙이고 --ds-* 토큰으로 색, 간격, 글자를 맞춥니다. 이 파일은 AI 도구가 읽도록 문서 목록을 모은 것입니다.
 

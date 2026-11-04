@@ -34,21 +34,75 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 예시
 
-```html
-<button class="ds-btn" data-variant="brandSolid">brandSolid</button>
-<button class="ds-btn" data-variant="neutralSolid">neutralSolid</button>
-<button class="ds-btn" data-variant="neutralWeak">neutralWeak</button>
-<button class="ds-btn" data-variant="criticalSolid">criticalSolid</button>
-<button class="ds-btn" data-variant="brandOutline">brandOutline</button>
-<button class="ds-btn" data-variant="neutralOutline">neutralOutline</button>
-<button class="ds-btn" data-variant="ghost">ghost</button>
-<button class="ds-btn" disabled>disabled</button>
+### 강조 버튼은 화면에 하나만 두기
 
-<button class="ds-btn" data-variant="neutralSolid" data-size="xsmall">xsmall</button>
-<button class="ds-btn" data-variant="neutralSolid" data-size="small">small</button>
-<button class="ds-btn" data-variant="neutralSolid" data-size="medium"><i class="ds-icon ds-icon--plus" aria-hidden="true"></i>medium</button>
-<button class="ds-btn" data-variant="neutralSolid" data-size="large">large<i class="ds-icon ds-icon--arrow-right" aria-hidden="true"></i></button>
-<button class="ds-btn" data-variant="neutralWeak" data-layout="iconOnly" aria-label="검색"><i class="ds-icon ds-icon--search" aria-hidden="true"></i></button>
+화면에서 가장 중요한 동작 하나만 brandSolid로 두고, 나머지는 neutralWeak로 낮춥니다. 강조 버튼이 둘이면 무엇을 먼저 눌러야 할지 알기 어렵습니다.
+
+```html
+<div class="u-col u-gap-4" style="width: 100%; max-width: 420px">
+  <div class="u-flex u-center u-between">
+    <span class="ds-t04 ds-fg-muted">총 결제 금액</span>
+    <strong class="ds-t07 ds-fw-bold">32,000원</strong>
+  </div>
+  <div class="u-flex u-gap-2">
+    <button class="ds-btn" data-variant="neutralWeak" data-size="large" data-width="fill">장바구니 담기</button>
+    <button class="ds-btn" data-size="large" data-width="fill">바로 구매하기</button>
+  </div>
+</div>
+```
+
+### 버튼은 세 개까지, 나머지는 아이콘으로
+
+나란히 두는 버튼은 세 개까지로 하고, 찜이나 공유처럼 가끔 쓰는 동작은 아이콘 버튼으로 작게 둡니다. 아이콘만 있는 버튼에는 `aria-label`로 이름을 붙입니다.
+
+```html
+<div class="u-col u-gap-4" style="width: 100%; max-width: 420px">
+  <div class="u-col u-gap-1">
+    <strong class="ds-t06 ds-fw-bold">영어 회화 첫걸음</strong>
+    <span class="ds-t04 ds-fg-subtle">강의 24개, 12시간</span>
+  </div>
+  <div class="u-flex u-gap-2">
+    <button class="ds-btn" data-variant="neutralOutline" data-size="large" data-layout="iconOnly" aria-label="찜하기"><i class="ds-icon ds-icon--heart" aria-hidden="true"></i></button>
+    <button class="ds-btn" data-variant="neutralOutline" data-size="large" data-layout="iconOnly" aria-label="공유하기"><i class="ds-icon ds-icon--share" aria-hidden="true"></i></button>
+    <button class="ds-btn" data-size="large" data-width="fill">수강 신청하기</button>
+  </div>
+</div>
+```
+
+### 목록 줄 안에서는 작은 보조 버튼으로
+
+줄마다 놓는 버튼은 small 크기의 neutralWeak로 두어 줄마다 강조가 생기지 않게 합니다. 줄 안에 버튼이 있으면 줄 전체를 링크로 만들지 않습니다.
+
+```html
+<ul class="ds-list" data-variant="inset" data-divider style="width: 100%; max-width: 420px">
+  <li>
+    <div class="ds-list-item">
+      <span class="ds-list-item__content">
+        <span class="ds-list-item__title">무선 이어폰</span>
+        <span class="ds-list-item__desc">11월 2일 도착</span>
+      </span>
+      <span class="ds-list-item__suffix"><button class="ds-btn" data-variant="neutralWeak" data-size="small">리뷰 쓰기</button></span>
+    </div>
+  </li>
+  <li>
+    <div class="ds-list-item">
+      <span class="ds-list-item__content">
+        <span class="ds-list-item__title">보온 텀블러</span>
+        <span class="ds-list-item__desc">내일 도착 예정</span>
+      </span>
+      <span class="ds-list-item__suffix"><button class="ds-btn" data-variant="neutralWeak" data-size="small">배송 조회</button></span>
+    </div>
+  </li>
+  <li>
+    <div class="ds-list-item">
+      <span class="ds-list-item__content">
+        <span class="ds-list-item__title">노트 3권 세트</span>
+        <span class="ds-list-item__desc">10월 28일 도착</span>
+      </span>
+      <span class="ds-list-item__suffix"><button class="ds-btn" data-variant="neutralWeak" data-size="small">다시 담기</button></span>
+    </div>
+  </li>
+</ul>
 ```
 
 ## 규격

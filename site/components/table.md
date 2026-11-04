@@ -54,27 +54,109 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 예시
 
+### 눌러서 상세로 가는 문의 내역
+
+줄을 누르면 상세로 가는 표라 `data-interactive`로 마우스를 올린 줄을 표시합니다. 번호, 상태, 날짜는 가운데에, 제목은 왼쪽에 맞춥니다.
+
 ```html
 <div class="ds-table-wrap">
   <table class="ds-table">
-    <thead><tr><th scope="col" data-align="center" style="width:72px">번호</th><th scope="col">제목</th><th scope="col" data-align="center" style="width:120px">등록일</th></tr></thead>
+    <thead>
+      <tr>
+        <th scope="col" data-align="center" style="width: 72px">번호</th>
+        <th scope="col">제목</th>
+        <th scope="col" data-align="center" style="width: 112px">상태</th>
+        <th scope="col" data-align="center" style="width: 120px">문의일</th>
+      </tr>
+    </thead>
     <tbody>
-      <tr data-interactive><td data-align="center">12</td><td>11월 배송 일정 안내</td><td data-align="center">2026.10.22</td></tr>
-      <tr data-interactive aria-selected="true"><td data-align="center">11</td><td>추가 할인 이벤트 공지</td><td data-align="center">2026.10.18</td></tr>
-      <tr data-interactive><td data-align="center">10</td><td>영수증 발급 방법 변경 안내</td><td data-align="center">2026.10.10</td></tr>
+      <tr data-interactive>
+        <td data-align="center">3</td>
+        <td>환불 받을 계좌를 바꾸고 싶어요</td>
+        <td data-align="center"><span class="ds-badge" data-tone="warning">답변 대기</span></td>
+        <td data-align="center">2026.11.03</td>
+      </tr>
+      <tr data-interactive>
+        <td data-align="center">2</td>
+        <td>수강 기간을 늘릴 수 있나요</td>
+        <td data-align="center">답변 완료</td>
+        <td data-align="center">2026.10.28</td>
+      </tr>
+      <tr data-interactive>
+        <td data-align="center">1</td>
+        <td>영수증을 다시 받고 싶어요</td>
+        <td data-align="center">답변 완료</td>
+        <td data-align="center">2026.10.15</td>
+      </tr>
     </tbody>
   </table>
 </div>
+```
 
+### 금액은 오른쪽에 맞춰 비교하기
+
+금액 열을 오른쪽에 맞춰 자릿수를 한눈에 비교하게 합니다. 두 줄 칸에는 이름과 보조 글까지만 넣고, 더 긴 내용은 상세 화면에서 보여 줍니다.
+
+```html
 <div class="ds-table-wrap">
   <table class="ds-table">
-    <thead><tr><th scope="col"><label class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control" aria-label="모든 행 선택"></label></th><th scope="col">주문</th><th scope="col">상태</th><th scope="col" data-align="end">금액</th></tr></thead>
+    <thead>
+      <tr>
+        <th scope="col" data-align="center" style="width: 120px">결제일</th>
+        <th scope="col">내용</th>
+        <th scope="col" style="width: 120px">결제 수단</th>
+        <th scope="col" data-align="end" style="width: 120px">금액</th>
+      </tr>
+    </thead>
     <tbody>
-      <tr class="ds-table__group"><td colspan="4">오늘</td></tr>
-      <tr><td><label class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control" aria-label="주문 1042 선택"></label></td><td><span class="ds-table__stack"><span>무선 이어폰 외 1건</span><span>주문 1042</span></span></td><td><span class="ds-badge" data-tone="informative">배송 준비</span></td><td data-align="end">128,000원</td></tr>
-      <tr><td><label class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control" aria-label="주문 1041 선택" checked></label></td><td><span class="ds-table__stack"><span>텀블러 500ml</span><span>주문 1041</span></span></td><td><span class="ds-badge" data-tone="positive">배송 중</span></td><td data-align="end">24,900원</td></tr>
-      <tr class="ds-table__group"><td colspan="4">어제</td></tr>
-      <tr><td><label class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control" aria-label="주문 1038 선택"></label></td><td><span class="ds-table__stack"><span>여행용 파우치 세트</span><span>주문 1038</span></span></td><td><span class="ds-badge">배송 완료</span></td><td data-align="end">39,000원</td></tr>
+      <tr>
+        <td data-align="center">2026.11.02</td>
+        <td><span class="ds-table__stack"><span>비즈니스 영어 회화</span><span>수강권 3개월</span></span></td>
+        <td>신용카드</td>
+        <td data-align="end">89,000원</td>
+      </tr>
+      <tr>
+        <td data-align="center">2026.10.20</td>
+        <td><span class="ds-table__stack"><span>엑셀 실무 완성</span><span>단과 강의</span></span></td>
+        <td>포인트</td>
+        <td data-align="end">45,000원</td>
+      </tr>
+      <tr>
+        <td data-align="center">2026.10.05</td>
+        <td><span class="ds-table__stack"><span>기초 회계 원리</span><span>패키지 2개</span></span></td>
+        <td>계좌 이체</td>
+        <td data-align="end">120,000원</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+```
+
+### 결과가 없으면 머리 줄 아래에 빈 안내
+
+찾은 결과가 없으면 머리 줄은 그대로 두고 그 아래에 Empty(small)를 표 전체 폭으로 둡니다. 어떤 열을 찾고 있었는지 남아 있어 조건을 바꿔 다시 찾기 쉽습니다.
+
+```html
+<div class="ds-table-wrap">
+  <table class="ds-table">
+    <thead>
+      <tr>
+        <th scope="col" data-align="center" style="width: 72px">번호</th>
+        <th scope="col">제목</th>
+        <th scope="col" data-align="center" style="width: 112px">상태</th>
+        <th scope="col" data-align="center" style="width: 120px">문의일</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td colspan="4">
+          <div class="ds-empty" data-size="small">
+            <span class="ds-empty__media"><i class="ds-icon ds-icon--search" aria-hidden="true"></i></span>
+            <p class="ds-empty__title">찾는 문의가 없어요</p>
+            <p class="ds-empty__desc">기간을 늘리거나 다른 검색어로 찾아보세요.</p>
+          </div>
+        </td>
+      </tr>
     </tbody>
   </table>
 </div>

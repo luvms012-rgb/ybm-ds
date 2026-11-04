@@ -56,21 +56,56 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ## 예시
 
+### PC 화면 맨 위에 전체 메뉴 두기
+
+PC 화면 맨 위에 로고, 주요 메뉴, 찾기와 로그인을 한 줄로 둡니다. 지금 화면이 속한 메뉴에 `aria-current="page"`를 붙여 위치를 알립니다.
+
 ```html
-<header class="ds-topnav" style="min-width:960px">
+<header class="ds-topnav" style="width: 100%">
   <div class="ds-topnav__left">
-    <a class="ds-topnav__heading" href="#" aria-label="홈으로"><span style="display:grid;place-items:center;width:88px;height:28px;border-radius:var(--ds-shape-xs);background:var(--ds-color-bg-neutral);color:var(--ds-color-fg-neutral-subtle);font-size:var(--ds-font-size-t03-static);font-weight:var(--ds-font-weight-semibold)">로고</span></a>
+    <a class="ds-topnav__heading" href="#">
+      <i class="ds-icon ds-icon--book-open" aria-hidden="true"></i>
+      <span class="ds-t05 ds-fw-bold">배움터</span>
+    </a>
     <nav class="ds-topnav__menu" aria-label="주요 메뉴">
-      <a class="ds-topnav__item" href="#" aria-current="page">홈</a>
-      <a class="ds-topnav__item" href="#">소개</a>
-      <a class="ds-topnav__item" href="#">서비스</a>
-      <a class="ds-topnav__item" href="#">소식</a>
-      <a class="ds-topnav__item" href="#">고객지원</a>
+      <a class="ds-topnav__item" href="#">홈</a>
+      <a class="ds-topnav__item" href="#" aria-current="page">강의</a>
+      <a class="ds-topnav__item" href="#">자격증</a>
+      <a class="ds-topnav__item" href="#">이벤트</a>
+      <a class="ds-topnav__item" href="#">고객센터</a>
     </nav>
   </div>
   <div class="ds-topnav__end">
     <button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="검색"><i class="ds-icon ds-icon--search" aria-hidden="true"></i></button>
     <a class="ds-btn" data-variant="neutralWeak" data-size="xsmall" href="#">로그인</a>
+  </div>
+</header>
+```
+
+### 로그인한 뒤에는 알림과 내 정보로
+
+로그인한 사용자에게는 오른쪽 끝에 알림 버튼과 내 정보 버튼을 둡니다. 메뉴는 7개까지만 두고, 더 많으면 묶어서 하위 화면으로 보냅니다.
+
+```html
+<header class="ds-topnav" style="width: 100%">
+  <div class="ds-topnav__left">
+    <a class="ds-topnav__heading" href="#">
+      <i class="ds-icon ds-icon--book-open" aria-hidden="true"></i>
+      <span class="ds-t05 ds-fw-bold">배움터</span>
+    </a>
+    <nav class="ds-topnav__menu" aria-label="주요 메뉴">
+      <a class="ds-topnav__item" href="#">홈</a>
+      <a class="ds-topnav__item" href="#">강의</a>
+      <a class="ds-topnav__item" href="#">자격증</a>
+      <a class="ds-topnav__item" href="#" aria-current="page">커뮤니티</a>
+      <a class="ds-topnav__item" href="#">이벤트</a>
+      <a class="ds-topnav__item" href="#">고객센터</a>
+    </nav>
+  </div>
+  <div class="ds-topnav__end">
+    <button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="검색"><i class="ds-icon ds-icon--search" aria-hidden="true"></i></button>
+    <button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="알림"><i class="ds-icon ds-icon--bell" aria-hidden="true"></i></button>
+    <a class="ds-avatar" href="#" aria-label="내 정보"></a>
   </div>
 </header>
 ```

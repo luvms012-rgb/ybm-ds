@@ -1,4 +1,4 @@
-# YBM DS 사이트
+# yds 사이트
 
 YBM 디자인 시스템 공식 문서 사이트를 준비하는 폴더다. 2026-10-30 별도 저장소(ybm-ds-site)에서 ybm-ds 안 `site/` 로 합쳤다. DS 를 사이트로 보여 주는 것이라 한 저장소로 관리한다.
 
@@ -86,7 +86,7 @@ YBM 디자인 시스템 공식 문서 사이트를 준비하는 폴더다. 2026-
 - **Foundations 페이지 구성** (2026-10-31, 레퍼런스 A 의 Color 페이지): Overview(짧은 설명 + 바로 쓰는 예시) → 토큰/항목 표 → 쓰는 법 코드 → Best Practices(Do / Don't 표, `practices()`). Iconography 를 이 구성으로 먼저 만들었다: Overview, Icons(쓰임별 표 5묶음, 이름 누르면 클래스 복사), Size and Color, Add an Icon(Lucide 전체 찾기), Best Practices. 아이콘 쓰임 글은 build.mjs 의 ICON_GROUPS 에 있고, icons.css 에 아이콘을 넣으면 빌드가 빠진 것을 알려 준다. 나머지 Foundations 페이지도 같은 구성으로 채울 수 있다.
 - **컴포넌트 상세 배치** (2026-10-31, 레퍼런스 A 의 Button 페이지 실측): 본문 폭 912(문서 페이지 752 보다 넓음, `.site-body--comp`), 첫 그림 16:9, 순서는 Usage → Properties → CSS Variables → Best Practices(Do / Don't 표. "않/금지/마세요" 가 든 문장이 Don't) → Examples(Preview / Code) → Specification.
 - **넓은 배치 폭** (2026-10-31): 컴포넌트 목록과 템플릿 상세(`site-body--wide`)는 본문을 1152 로 제한하고 가운데 둔다(레퍼런스 A 컴포넌트 목록 1920 실측). 큰 화면에서 카드가 끝없이 늘어나던 문제를 고침.
-- **템플릿 51종 = 레퍼런스 A 템플릿과 같은 구성** (2026-11-01 밤, 사용자 요청 "아스트릭스와 똑같은 템플릿으로 우리 DS 를 입혀서 다시"): 분류 10개(Dashboard 7, Table 7, Form 8, Settings 3, Login 3, Tools 5, Content 7, AI Chat 2, Gallery 6, Shell 3)와 각 화면의 구조·배치를 레퍼런스 A 그대로 따르고, 부품·색·글자는 YBM DS, 글은 우리 한국어 내용으로 새로 썼다(원본 글과 사진은 가져오지 않음, 사진은 연한 색 자리). 예전 47종(시험·학습·커머스 등)은 지웠고 사용자가 나중에 다시 만든다. 이름(slug)은 레퍼런스 A 와 같다.
+- **템플릿 51종 = 레퍼런스 A 템플릿과 같은 구성** (2026-11-01 밤, 사용자 요청 "아스트릭스와 똑같은 템플릿으로 우리 DS 를 입혀서 다시"): 분류 10개(Dashboard 7, Table 7, Form 8, Settings 3, Login 3, Tools 5, Content 7, AI Chat 2, Gallery 6, Shell 3)와 각 화면의 구조·배치를 레퍼런스 A 그대로 따르고, 부품·색·글자는 yds, 글은 우리 한국어 내용으로 새로 썼다(원본 글과 사진은 가져오지 않음, 사진은 연한 색 자리). 예전 47종(시험·학습·커머스 등)은 지웠고 사용자가 나중에 다시 만든다. 이름(slug)은 레퍼런스 A 와 같다.
 - **템플릿은 모두 생성기로 만든다**: `site/templates/gen/kit.mjs`(공용 CSS와 부품 함수, 차트 SVG), 분류별 파일 dashboard/table/form/settings/login/tools/content/aichat/gallery/shell.mjs. pages/ 의 HTML 을 직접 고치지 말고 생성기를 고친 뒤 `node site/templates/gen/run.mjs` → `node site/build.mjs`. run.mjs 가 site/src/templates.json 도 다시 쓰고 목록에 없는 pages/ 파일을 지운다. build.mjs 는 목록에서 빠진 상세 페이지(site/templates/*.html)를 지운다. 공통 틀: 머리글(tp-head, 안쪽 24, 제목 tp-h1), 본문(tp-content, 안쪽 24, 묶음 사이 32), 오른쪽 패널(tp-body--panel > tp-panel, 400), 카드는 ds-card data-size="small"(안쪽 16, 간격 12).
 - **아이콘 93개 추가** (2026-11-01): 템플릿에 필요한 Lucide 아이콘을 icons.css 맨 끝 한 묶음으로 넣고, 아이콘 페이지 표에 App, Editor, More 묶음을 더했다.
 - **(옛 기록) 템플릿 47종** (2026-11-01): 시험(Exam, Exam B2B)과 학습(Learning, Learning B2B) 14종 추가. 글자 위계는 tp-h1 Bold, tp-h2 / tp-h3 SemiBold, 본문 Regular 로 통일한다.
@@ -118,7 +118,7 @@ YBM 디자인 시스템 공식 문서 사이트를 준비하는 폴더다. 2026-
   - 설명(desc) 62개는 11-02 자연스러운 한국어로 다시 씀: 합니다체, 하는 일 먼저, 번역투(글칸, 알약 버튼, 레일, 갈림 등) 없이.
 - **템플릿 보기 창** (2026-11-02 회사, 사용자 "템플릿 100% 쓰지 말고 레퍼런스 크기로"): 목록에서 카드를 누르면 상세 페이지 대신 레퍼런스 A 처럼 큰 창(최대 1472, 바깥 16, 모서리 24, 이전/다음 화살표, 아래 Figma / 문서 보기 / 새 창으로 보기)에 템플릿을 띄운다. 주소에 ?preview=이름. 새 탭(Ctrl, Cmd)은 상세 페이지로. site.js 끝 "템플릿 보기 창", site.css 끝 .site-tplv.
 - **시험 접수, 기업 러닝 템플릿 11종** (2026-11-02 회사, 사용자 요청): 분류 Exam(시험 신청, 내 시험, 성적표), Exam B2B(단체 접수, 응시자 관리, 단체 성적 대시보드), Learning B2B(학습 홈, 과정 찾기, 강의 보기, 과정 운영, 학습 현황 대시보드). 생성기 `exam.mjs`, `learning.mjs`, 둘이 함께 쓰는 위 메뉴 / 옆 메뉴 틀과 고르기 상자, 달력은 `frame.mjs`. 시험 이름은 특정 시험이 아닌 일반 이름(영어 말하기 시험 등), 기관은 가상 이름(한빛대학교, 한빛전자). 러닝은 AI 어드바이저(과정 추천), AI 튜터(요약, 퀴즈, 질문), 법정 필수 교육, 사내 지식 공유를 담는다. Figma 화면은 아직 없다.
-- **템플릿을 Figma 로** (2026-10-31): `node site/figma-capture.mjs [slug]` 가 이 Mac 의 Chrome 을 화면 없이 띄워 템플릿을 PC 1440 / 모바일 375 로 열고 SVG 로 저장한다(tokens/.figma-capture, 커밋 안 함). 여러 개를 한 번에 돌리면 가끔 멈추므로 한 개씩 돌리는 것이 안전하다. 올리기는 upload_assets(SVG 는 글자 레이어와 벡터로 들어온다), 정리는 use_figma: 글자 이름 t-굵기-번호 로 굵기를 바로잡고, fx-… 이름의 도형에 그림자 효과, 색은 YBM DS Light 값이 같은 bg/fg/stroke 변수에 연결. 템플릿을 고치면 그 화면만 다시 캡처해 바꾼다(올린 새 프레임의 자식을 기존 프레임으로 옮기면 id 와 사이트 링크가 그대로다). 그래프처럼 안에 그린 SVG 는 캡처 때 색을 실제 값으로 바꿔 적는다.
+- **템플릿을 Figma 로** (2026-10-31): `node site/figma-capture.mjs [slug]` 가 이 Mac 의 Chrome 을 화면 없이 띄워 템플릿을 PC 1440 / 모바일 375 로 열고 SVG 로 저장한다(tokens/.figma-capture, 커밋 안 함). 여러 개를 한 번에 돌리면 가끔 멈추므로 한 개씩 돌리는 것이 안전하다. 올리기는 upload_assets(SVG 는 글자 레이어와 벡터로 들어온다), 정리는 use_figma: 글자 이름 t-굵기-번호 로 굵기를 바로잡고, fx-… 이름의 도형에 그림자 효과, 색은 yds Light 값이 같은 bg/fg/stroke 변수에 연결. 템플릿을 고치면 그 화면만 다시 캡처해 바꾼다(올린 새 프레임의 자식을 기존 프레임으로 옮기면 id 와 사이트 링크가 그대로다). 그래프처럼 안에 그린 SVG 는 캡처 때 색을 실제 값으로 바꿔 적는다.
 
 ## 진행 기록
 - 2026-10-26 (회사): ybm-ds `main`을 GitHub(`d4f83b6`)에 맞췄다. 회사 PC에만 있던 커밋 전 작업(10-23 폴더 구조 정리, figma-sync `cssOnly` 수정, `components/index.html` 컴포넌트 메인 시안, 작업 메모)은 **회사 PC 로컬 브랜치 `backup/2026-10-26-local`** 에만 있다(GitHub에 없음). 필요하면 회사 PC에서 꺼낸다.

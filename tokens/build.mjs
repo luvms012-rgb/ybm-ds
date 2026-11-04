@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// YBM DS — 토큰 빌드 스크립트 (2026-10-22 build.py 를 Node 로 옮김 — 같은 입력이면 같은 출력)
+// yds — 토큰 빌드 스크립트 (2026-10-22 build.py 를 Node 로 옮김 — 같은 입력이면 같은 출력)
 // 입력: tokens/figma-variables.json (Figma 변수 전집 스냅샷 = source of truth)
 // 출력: dist/tokens.css · tokens/design-tokens.json · tokens/tokens.js · tokens/tailwind.preset.js
 //
@@ -146,7 +146,7 @@ export function build(date, sourcePath = path.join(HERE, 'tokens', 'figma-variab
   function css() {
     const D = [], o = [];
     o.push(`/* ==========================================================================
-   YBM Design System — TOKENS
+   yds — TOKENS
    --------------------------------------------------------------------------
    ⚠ 이 파일은 tokens/build.mjs 가 figma-variables.json 에서 생성한다. 직접 고치지 말 것.
    생성: ${date} · Figma file 1VCEsFU3xMWuXIntIrZz9i
@@ -311,7 +311,7 @@ export function build(date, sourcePath = path.join(HERE, 'tokens', 'figma-variab
     const shape = M(SHAPE.map(([n, d]) => [n, d]));
     shape.set('pill', SHAPE_PILL);
     const d = M([
-      ['$meta', M([['name', 'YBM Design System'], ['generated', date],
+      ['$meta', M([['name', 'yds'], ['generated', date],
         ['source', 'Figma 1VCEsFU3xMWuXIntIrZz9i / YBM DS + Typography + Shape + Elevation'],
         ['note', 'tokens/build.mjs 가 생성한다. 직접 수정하지 말 것.']])],
       ['color', color], ['dimension', dimension],
@@ -323,7 +323,7 @@ export function build(date, sourcePath = path.join(HERE, 'tokens', 'figma-variab
   }
 
   function tokensJs() {
-    const o = ['// YBM Design System — tokens.js', `// ⚠ tokens/build.mjs 가 생성한다. 직접 고치지 말 것. 생성: ${date}`,
+    const o = ['// yds — tokens.js', `// ⚠ tokens/build.mjs 가 생성한다. 직접 고치지 말 것. 생성: ${date}`,
       '// CSS 변수명 → Light 모드 값. 다크 값은 design-tokens.json 을 참고.', '', 'export const tokens = {'];
     for (const [k, v] of flat()) o.push(`  ${JSON.stringify(k)}: ${dumps(v)},`);
     o.push('};', '', "/** CSS 변수 참조 문자열을 돌려준다. ex) cssVar('--ds-color-bg-canvas') */",
@@ -351,7 +351,7 @@ export function build(date, sourcePath = path.join(HERE, 'tokens', 'figma-variab
       ['transitionTimingFunction', M(MOTION.filter(([n]) => n.startsWith('easing')).map(([n]) => [n.replace('easing-', ''), ref(P + n)]))],
       ['zIndex', M(ZINDEX.map(([n]) => [n, ref(`${P}z-${n}`)]))],
     ])], ['screens', M(BREAKPOINT.map(([n, v]) => [n, `${int(v)}px`]))]])], ['darkMode', ['selector', '[data-theme="dark"]']]]);
-    return '// YBM Design System — Tailwind preset\n'
+    return '// yds — Tailwind preset\n'
       + `// ⚠ tokens/build.mjs 가 생성한다. 직접 고치지 말 것. 생성: ${date}\n`
       + '// 모든 값이 CSS 변수를 가리키므로 ybm-ds.css 를 함께 로드해야 동작한다.\n'
       + "// tailwind.config.js → module.exports = { presets: [require('./tokens/tailwind.preset.js')], … }\n\n"

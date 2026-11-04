@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Select Box - YBM DS</title>
+<title>Select Box - yds</title>
 <meta name="description" content="선택지를 설명과 함께 상자로 크게 보여 주는 컴포넌트입니다. 요금제처럼 차이를 읽고 고를 때 씁니다.">
 <!-- 생성물: node site/build.mjs가 만든다. 직접 고치지 말고 site/build.mjs나 site/src를 고친다 -->
 <script>try { var t = localStorage.getItem("ybm-site-theme"); if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.dataset.theme = "dark"; } catch (e) {}</script>
 <link rel="icon" href="../assets/logo-ybmnet.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../dist/ybm-ds.css">
-<link rel="stylesheet" href="../assets/site.css?v=bb7371b2">
+<link rel="stylesheet" href="../assets/site.css?v=1656b6c0">
 <script src="../../dist/ybm-ds.js" defer></script>
-<script src="../assets/site.js?v=bb7371b2" defer></script>
+<script src="../assets/site.js?v=1656b6c0" defer></script>
 </head>
 <body class="site">
 <a class="site-skip" href="#main">본문 바로가기</a>
@@ -160,32 +160,153 @@
 <tbody><tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>설명이 필요한 선택지가 2~6개일 때 씁니다.</td></tr>
 <tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>짧은 선택지는 Radio Group이나 Checkbox를 씁니다.</td></tr>
 <tr><td><b class="ds-badge site-practice" data-tone="critical">Don't</b></td><td>한 묶음 안에서 check와 radio를 섞지 않습니다.</td></tr></tbody></table></div>
-<h2 id="examples">예시<a class="site-anchor" href="#examples" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><div class="site-example">
+<h2 id="examples">예시<a class="site-anchor" href="#examples" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><h3>설명을 읽고 고르는 이용권</h3>
+<p>선택지마다 가격과 조건 같은 설명이 필요할 때 Select Box로 크게 보여 줍니다. 짧은 라벨만으로 고를 수 있으면 Radio Group을 씁니다.</p>
+<div class="site-example">
   <div class="site-example__bar"><div class="ds-chiptabs" role="tablist" aria-label="보기 방식"><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-view="preview">미리보기</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-view="code">코드</button></div></div>
-  <div class="site-example__preview"><div class="pv-stage pv-col">
-    <div class="ds-selectbox-group pv-w" role="radiogroup" aria-label="요금제">
-      <label class="ds-selectbox"><span class="ds-selectbox__texts"><span class="ds-selectbox__label">기본</span><span class="ds-selectbox__desc">혼자 쓰기 좋은 구성이에요</span></span><span class="ds-radio" data-tone="neutral" data-size="medium"><input type="radio" class="ds-radio__control" name="pv-sb" checked></span></label>
-      <label class="ds-selectbox"><span class="ds-selectbox__texts"><span class="ds-selectbox__label">팀</span><span class="ds-selectbox__desc">여러 명이 함께 쓸 수 있어요</span></span><span class="ds-radio" data-tone="neutral" data-size="medium"><input type="radio" class="ds-radio__control" name="pv-sb"></span></label>
-      <label class="ds-selectbox"><span class="ds-selectbox__texts"><span class="ds-selectbox__label">기업</span><span class="ds-selectbox__desc">지금은 고를 수 없어요</span></span><span class="ds-radio" data-tone="neutral" data-size="medium"><input type="radio" class="ds-radio__control" name="pv-sb" disabled></span></label>
-    </div>
+  <div class="site-example__preview"><div class="pv-stage pv-wide"><div class="ds-field u-full" style="max-width: 420px">
+  <div class="ds-field__header">
+    <span class="ds-field__label" id="select-box-ex1-label">이용권</span>
   </div>
-  <div class="pv-stage pv-col">
-    <div class="ds-selectbox-group pv-w" style="--ds-selectbox-columns: 2" aria-label="관심 분야">
-      <label class="ds-selectbox" data-layout="vertical"><span class="ds-selectbox__texts"><span class="ds-selectbox__label">읽기</span><span class="ds-selectbox__desc">글을 빠르게 이해해요</span></span><span class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control" checked></span></label>
-      <label class="ds-selectbox" data-layout="vertical"><i class="ds-icon ds-icon--message-circle" aria-hidden="true"></i><span class="ds-selectbox__texts"><span class="ds-selectbox__label">말하기</span><span class="ds-selectbox__desc">자연스럽게 대화해요</span></span><span class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control"></span></label>
-    </div>
-  </div></div>
+  <div class="ds-selectbox-group" role="radiogroup" aria-labelledby="select-box-ex1-label">
+    <label class="ds-selectbox">
+      <span class="ds-selectbox__texts">
+        <span class="ds-selectbox__label">1개월</span>
+        <span class="ds-selectbox__desc">19,000원, 언제든 해지할 수 있어요</span>
+      </span>
+      <span class="ds-radio" data-tone="neutral" data-size="medium"><input type="radio" class="ds-radio__control" name="select-box-ex1"></span>
+    </label>
+    <label class="ds-selectbox">
+      <span class="ds-selectbox__texts">
+        <span class="ds-selectbox__label">6개월</span>
+        <span class="ds-selectbox__desc">월 15,000원, 90,000원을 한 번에 결제해요</span>
+      </span>
+      <span class="ds-radio" data-tone="neutral" data-size="medium"><input type="radio" class="ds-radio__control" name="select-box-ex1"></span>
+    </label>
+    <label class="ds-selectbox">
+      <span class="ds-selectbox__texts">
+        <span class="ds-selectbox__label">12개월</span>
+        <span class="ds-selectbox__desc">월 12,000원, 가장 많이 골라요</span>
+      </span>
+      <span class="ds-radio" data-tone="neutral" data-size="medium"><input type="radio" class="ds-radio__control" name="select-box-ex1" checked></span>
+    </label>
+  </div>
+</div></div></div>
   <div class="site-example__code" hidden><figure class="ds-codeblock">
   <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">html</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
-  <pre class="ds-codeblock__code"><code>&lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-selectbox-group&quot;</span> <span class="hl-f">role</span>=<span class="hl-s">&quot;radiogroup&quot;</span> <span class="hl-f">aria-label</span>=<span class="hl-s">&quot;요금제&quot;</span>&gt;
-  &lt;<span class="hl-t">label</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-selectbox&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-selectbox__texts&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-selectbox__label&quot;</span>&gt;기본&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-selectbox__desc&quot;</span>&gt;혼자 쓰기 좋은 구성이에요&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-radio&quot;</span> <span class="hl-f">data-tone</span>=<span class="hl-s">&quot;neutral&quot;</span> <span class="hl-f">data-size</span>=<span class="hl-s">&quot;medium&quot;</span>&gt;&lt;<span class="hl-t">input</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;radio&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-radio__control&quot;</span> <span class="hl-f">name</span>=<span class="hl-s">&quot;pv-sb&quot;</span> <span class="hl-f">checked</span>&gt;&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">label</span>&gt;
-  &lt;<span class="hl-t">label</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-selectbox&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-selectbox__texts&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-selectbox__label&quot;</span>&gt;팀&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-selectbox__desc&quot;</span>&gt;여러 명이 함께 쓸 수 있어요&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-radio&quot;</span> <span class="hl-f">data-tone</span>=<span class="hl-s">&quot;neutral&quot;</span> <span class="hl-f">data-size</span>=<span class="hl-s">&quot;medium&quot;</span>&gt;&lt;<span class="hl-t">input</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;radio&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-radio__control&quot;</span> <span class="hl-f">name</span>=<span class="hl-s">&quot;pv-sb&quot;</span>&gt;&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">label</span>&gt;
-  &lt;<span class="hl-t">label</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-selectbox&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-selectbox__texts&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-selectbox__label&quot;</span>&gt;기업&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-selectbox__desc&quot;</span>&gt;지금은 고를 수 없어요&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-radio&quot;</span> <span class="hl-f">data-tone</span>=<span class="hl-s">&quot;neutral&quot;</span> <span class="hl-f">data-size</span>=<span class="hl-s">&quot;medium&quot;</span>&gt;&lt;<span class="hl-t">input</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;radio&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-radio__control&quot;</span> <span class="hl-f">name</span>=<span class="hl-s">&quot;pv-sb&quot;</span> <span class="hl-f">disabled</span>&gt;&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">label</span>&gt;
-&lt;/<span class="hl-t">div</span>&gt;
-
-&lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-selectbox-group&quot;</span> <span class="hl-f">style</span>=<span class="hl-s">&quot;--ds-selectbox-columns: 2&quot;</span> <span class="hl-f">aria-label</span>=<span class="hl-s">&quot;관심 분야&quot;</span>&gt;
-  &lt;<span class="hl-t">label</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-selectbox&quot;</span> <span class="hl-f">data-layout</span>=<span class="hl-s">&quot;vertical&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-selectbox__texts&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-selectbox__label&quot;</span>&gt;읽기&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-selectbox__desc&quot;</span>&gt;글을 빠르게 이해해요&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-checkbox&quot;</span> <span class="hl-f">data-tone</span>=<span class="hl-s">&quot;neutral&quot;</span>&gt;&lt;<span class="hl-t">input</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;checkbox&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-checkbox__control&quot;</span> <span class="hl-f">checked</span>&gt;&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">label</span>&gt;
-  &lt;<span class="hl-t">label</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-selectbox&quot;</span> <span class="hl-f">data-layout</span>=<span class="hl-s">&quot;vertical&quot;</span>&gt;&lt;<span class="hl-t">i</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-icon ds-icon--message-circle&quot;</span> <span class="hl-f">aria-hidden</span>=<span class="hl-s">&quot;true&quot;</span>&gt;&lt;/<span class="hl-t">i</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-selectbox__texts&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-selectbox__label&quot;</span>&gt;말하기&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-selectbox__desc&quot;</span>&gt;자연스럽게 대화해요&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-checkbox&quot;</span> <span class="hl-f">data-tone</span>=<span class="hl-s">&quot;neutral&quot;</span>&gt;&lt;<span class="hl-t">input</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;checkbox&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-checkbox__control&quot;</span>&gt;&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">label</span>&gt;
+  <pre class="ds-codeblock__code"><code>&lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field u-full&quot;</span> <span class="hl-f">style</span>=<span class="hl-s">&quot;max-width: 420px&quot;</span>&gt;
+  &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field__header&quot;</span>&gt;
+    &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field__label&quot;</span> <span class="hl-f">id</span>=<span class="hl-s">&quot;select-box-ex1-label&quot;</span>&gt;이용권&lt;/<span class="hl-t">span</span>&gt;
+  &lt;/<span class="hl-t">div</span>&gt;
+  &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-selectbox-group&quot;</span> <span class="hl-f">role</span>=<span class="hl-s">&quot;radiogroup&quot;</span> <span class="hl-f">aria-labelledby</span>=<span class="hl-s">&quot;select-box-ex1-label&quot;</span>&gt;
+    &lt;<span class="hl-t">label</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-selectbox&quot;</span>&gt;
+      &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-selectbox__texts&quot;</span>&gt;
+        &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-selectbox__label&quot;</span>&gt;1개월&lt;/<span class="hl-t">span</span>&gt;
+        &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-selectbox__desc&quot;</span>&gt;19,000원, 언제든 해지할 수 있어요&lt;/<span class="hl-t">span</span>&gt;
+      &lt;/<span class="hl-t">span</span>&gt;
+      &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-radio&quot;</span> <span class="hl-f">data-tone</span>=<span class="hl-s">&quot;neutral&quot;</span> <span class="hl-f">data-size</span>=<span class="hl-s">&quot;medium&quot;</span>&gt;&lt;<span class="hl-t">input</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;radio&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-radio__control&quot;</span> <span class="hl-f">name</span>=<span class="hl-s">&quot;select-box-ex1&quot;</span>&gt;&lt;/<span class="hl-t">span</span>&gt;
+    &lt;/<span class="hl-t">label</span>&gt;
+    &lt;<span class="hl-t">label</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-selectbox&quot;</span>&gt;
+      &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-selectbox__texts&quot;</span>&gt;
+        &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-selectbox__label&quot;</span>&gt;6개월&lt;/<span class="hl-t">span</span>&gt;
+        &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-selectbox__desc&quot;</span>&gt;월 15,000원, 90,000원을 한 번에 결제해요&lt;/<span class="hl-t">span</span>&gt;
+      &lt;/<span class="hl-t">span</span>&gt;
+      &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-radio&quot;</span> <span class="hl-f">data-tone</span>=<span class="hl-s">&quot;neutral&quot;</span> <span class="hl-f">data-size</span>=<span class="hl-s">&quot;medium&quot;</span>&gt;&lt;<span class="hl-t">input</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;radio&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-radio__control&quot;</span> <span class="hl-f">name</span>=<span class="hl-s">&quot;select-box-ex1&quot;</span>&gt;&lt;/<span class="hl-t">span</span>&gt;
+    &lt;/<span class="hl-t">label</span>&gt;
+    &lt;<span class="hl-t">label</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-selectbox&quot;</span>&gt;
+      &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-selectbox__texts&quot;</span>&gt;
+        &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-selectbox__label&quot;</span>&gt;12개월&lt;/<span class="hl-t">span</span>&gt;
+        &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-selectbox__desc&quot;</span>&gt;월 12,000원, 가장 많이 골라요&lt;/<span class="hl-t">span</span>&gt;
+      &lt;/<span class="hl-t">span</span>&gt;
+      &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-radio&quot;</span> <span class="hl-f">data-tone</span>=<span class="hl-s">&quot;neutral&quot;</span> <span class="hl-f">data-size</span>=<span class="hl-s">&quot;medium&quot;</span>&gt;&lt;<span class="hl-t">input</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;radio&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-radio__control&quot;</span> <span class="hl-f">name</span>=<span class="hl-s">&quot;select-box-ex1&quot;</span> <span class="hl-f">checked</span>&gt;&lt;/<span class="hl-t">span</span>&gt;
+    &lt;/<span class="hl-t">label</span>&gt;
+  &lt;/<span class="hl-t">div</span>&gt;
+&lt;/<span class="hl-t">div</span>&gt;</code></pre>
+</figure></div>
+</div>
+<h3>여러 개를 고를 때는 체크로만</h3>
+<p>관심 분야처럼 여러 개를 고를 때는 모든 상자에 체크 표시를 씁니다. 한 묶음 안에서 check와 radio를 섞으면 몇 개를 골라야 하는지 헷갈립니다.</p>
+<div class="site-example">
+  <div class="site-example__bar"><div class="ds-chiptabs" role="tablist" aria-label="보기 방식"><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-view="preview">미리보기</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-view="code">코드</button></div></div>
+  <div class="site-example__preview"><div class="pv-stage pv-wide"><div class="ds-field u-full" style="max-width: 420px">
+  <div class="ds-field__header">
+    <span class="ds-field__label" id="select-box-ex2-label">관심 있는 분야를 모두 골라 주세요</span>
+  </div>
+  <div class="ds-selectbox-group" role="group" aria-labelledby="select-box-ex2-label" style="--ds-selectbox-columns: 2">
+    <label class="ds-selectbox" data-layout="vertical">
+      <i class="ds-icon ds-icon--message-circle" aria-hidden="true"></i>
+      <span class="ds-selectbox__texts">
+        <span class="ds-selectbox__label">말하기</span>
+        <span class="ds-selectbox__desc">발음과 대화 연습</span>
+      </span>
+      <span class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control" checked></span>
+    </label>
+    <label class="ds-selectbox" data-layout="vertical">
+      <i class="ds-icon ds-icon--headset" aria-hidden="true"></i>
+      <span class="ds-selectbox__texts">
+        <span class="ds-selectbox__label">듣기</span>
+        <span class="ds-selectbox__desc">빠른 말 알아듣기</span>
+      </span>
+      <span class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control"></span>
+    </label>
+    <label class="ds-selectbox" data-layout="vertical">
+      <i class="ds-icon ds-icon--book-open" aria-hidden="true"></i>
+      <span class="ds-selectbox__texts">
+        <span class="ds-selectbox__label">읽기</span>
+        <span class="ds-selectbox__desc">긴 글 빨리 읽기</span>
+      </span>
+      <span class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control" checked></span>
+    </label>
+    <label class="ds-selectbox" data-layout="vertical">
+      <i class="ds-icon ds-icon--pencil" aria-hidden="true"></i>
+      <span class="ds-selectbox__texts">
+        <span class="ds-selectbox__label">쓰기</span>
+        <span class="ds-selectbox__desc">이메일과 보고서</span>
+      </span>
+      <span class="ds-checkbox" data-tone="neutral"><input type="checkbox" class="ds-checkbox__control"></span>
+    </label>
+  </div>
+</div></div></div>
+  <div class="site-example__code" hidden><figure class="ds-codeblock">
+  <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">html</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
+  <pre class="ds-codeblock__code"><code>&lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field u-full&quot;</span> <span class="hl-f">style</span>=<span class="hl-s">&quot;max-width: 420px&quot;</span>&gt;
+  &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field__header&quot;</span>&gt;
+    &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field__label&quot;</span> <span class="hl-f">id</span>=<span class="hl-s">&quot;select-box-ex2-label&quot;</span>&gt;관심 있는 분야를 모두 골라 주세요&lt;/<span class="hl-t">span</span>&gt;
+  &lt;/<span class="hl-t">div</span>&gt;
+  &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-selectbox-group&quot;</span> <span class="hl-f">role</span>=<span class="hl-s">&quot;group&quot;</span> <span class="hl-f">aria-labelledby</span>=<span class="hl-s">&quot;select-box-ex2-label&quot;</span> <span class="hl-f">style</span>=<span class="hl-s">&quot;--ds-selectbox-columns: 2&quot;</span>&gt;
+    &lt;<span class="hl-t">label</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-selectbox&quot;</span> <span class="hl-f">data-layout</span>=<span class="hl-s">&quot;vertical&quot;</span>&gt;
+      &lt;<span class="hl-t">i</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-icon ds-icon--message-circle&quot;</span> <span class="hl-f">aria-hidden</span>=<span class="hl-s">&quot;true&quot;</span>&gt;&lt;/<span class="hl-t">i</span>&gt;
+      &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-selectbox__texts&quot;</span>&gt;
+        &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-selectbox__label&quot;</span>&gt;말하기&lt;/<span class="hl-t">span</span>&gt;
+        &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-selectbox__desc&quot;</span>&gt;발음과 대화 연습&lt;/<span class="hl-t">span</span>&gt;
+      &lt;/<span class="hl-t">span</span>&gt;
+      &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-checkbox&quot;</span> <span class="hl-f">data-tone</span>=<span class="hl-s">&quot;neutral&quot;</span>&gt;&lt;<span class="hl-t">input</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;checkbox&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-checkbox__control&quot;</span> <span class="hl-f">checked</span>&gt;&lt;/<span class="hl-t">span</span>&gt;
+    &lt;/<span class="hl-t">label</span>&gt;
+    &lt;<span class="hl-t">label</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-selectbox&quot;</span> <span class="hl-f">data-layout</span>=<span class="hl-s">&quot;vertical&quot;</span>&gt;
+      &lt;<span class="hl-t">i</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-icon ds-icon--headset&quot;</span> <span class="hl-f">aria-hidden</span>=<span class="hl-s">&quot;true&quot;</span>&gt;&lt;/<span class="hl-t">i</span>&gt;
+      &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-selectbox__texts&quot;</span>&gt;
+        &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-selectbox__label&quot;</span>&gt;듣기&lt;/<span class="hl-t">span</span>&gt;
+        &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-selectbox__desc&quot;</span>&gt;빠른 말 알아듣기&lt;/<span class="hl-t">span</span>&gt;
+      &lt;/<span class="hl-t">span</span>&gt;
+      &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-checkbox&quot;</span> <span class="hl-f">data-tone</span>=<span class="hl-s">&quot;neutral&quot;</span>&gt;&lt;<span class="hl-t">input</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;checkbox&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-checkbox__control&quot;</span>&gt;&lt;/<span class="hl-t">span</span>&gt;
+    &lt;/<span class="hl-t">label</span>&gt;
+    &lt;<span class="hl-t">label</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-selectbox&quot;</span> <span class="hl-f">data-layout</span>=<span class="hl-s">&quot;vertical&quot;</span>&gt;
+      &lt;<span class="hl-t">i</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-icon ds-icon--book-open&quot;</span> <span class="hl-f">aria-hidden</span>=<span class="hl-s">&quot;true&quot;</span>&gt;&lt;/<span class="hl-t">i</span>&gt;
+      &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-selectbox__texts&quot;</span>&gt;
+        &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-selectbox__label&quot;</span>&gt;읽기&lt;/<span class="hl-t">span</span>&gt;
+        &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-selectbox__desc&quot;</span>&gt;긴 글 빨리 읽기&lt;/<span class="hl-t">span</span>&gt;
+      &lt;/<span class="hl-t">span</span>&gt;
+      &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-checkbox&quot;</span> <span class="hl-f">data-tone</span>=<span class="hl-s">&quot;neutral&quot;</span>&gt;&lt;<span class="hl-t">input</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;checkbox&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-checkbox__control&quot;</span> <span class="hl-f">checked</span>&gt;&lt;/<span class="hl-t">span</span>&gt;
+    &lt;/<span class="hl-t">label</span>&gt;
+    &lt;<span class="hl-t">label</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-selectbox&quot;</span> <span class="hl-f">data-layout</span>=<span class="hl-s">&quot;vertical&quot;</span>&gt;
+      &lt;<span class="hl-t">i</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-icon ds-icon--pencil&quot;</span> <span class="hl-f">aria-hidden</span>=<span class="hl-s">&quot;true&quot;</span>&gt;&lt;/<span class="hl-t">i</span>&gt;
+      &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-selectbox__texts&quot;</span>&gt;
+        &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-selectbox__label&quot;</span>&gt;쓰기&lt;/<span class="hl-t">span</span>&gt;
+        &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-selectbox__desc&quot;</span>&gt;이메일과 보고서&lt;/<span class="hl-t">span</span>&gt;
+      &lt;/<span class="hl-t">span</span>&gt;
+      &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-checkbox&quot;</span> <span class="hl-f">data-tone</span>=<span class="hl-s">&quot;neutral&quot;</span>&gt;&lt;<span class="hl-t">input</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;checkbox&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-checkbox__control&quot;</span>&gt;&lt;/<span class="hl-t">span</span>&gt;
+    &lt;/<span class="hl-t">label</span>&gt;
+  &lt;/<span class="hl-t">div</span>&gt;
 &lt;/<span class="hl-t">div</span>&gt;</code></pre>
 </figure></div>
 </div>

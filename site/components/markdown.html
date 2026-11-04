@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Markdown - YBM DS</title>
+<title>Markdown - yds</title>
 <meta name="description" content="AI 답변처럼 제목, 목록, 표가 섞인 글을 보여 주는 컴포넌트입니다.">
 <!-- 생성물: node site/build.mjs가 만든다. 직접 고치지 말고 site/build.mjs나 site/src를 고친다 -->
 <script>try { var t = localStorage.getItem("ybm-site-theme"); if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.dataset.theme = "dark"; } catch (e) {}</script>
 <link rel="icon" href="../assets/logo-ybmnet.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../dist/ybm-ds.css">
-<link rel="stylesheet" href="../assets/site.css?v=bb7371b2">
+<link rel="stylesheet" href="../assets/site.css?v=1656b6c0">
 <script src="../../dist/ybm-ds.js" defer></script>
-<script src="../assets/site.js?v=bb7371b2" defer></script>
+<script src="../assets/site.js?v=1656b6c0" defer></script>
 </head>
 <body class="site">
 <a class="site-skip" href="#main">본문 바로가기</a>
@@ -129,40 +129,88 @@
 <tbody><tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>AI 답변처럼 서식 있는 글은 Markdown으로 감쌉니다.</td></tr>
 <tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>코드는 Code Block에 넣습니다.</td></tr>
 <tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>근거는 번호나 출처 칩(Citation)으로 붙입니다.</td></tr></tbody></table></div>
-<h2 id="examples">예시<a class="site-anchor" href="#examples" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><div class="site-example">
+<h2 id="examples">예시<a class="site-anchor" href="#examples" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><h3>AI 답변을 Markdown으로 감싸기</h3>
+<p>AI 답변처럼 제목, 목록, 굵은 글이 섞인 글은 변환된 HTML을 Markdown으로 감싸기만 합니다. 크기와 간격이 정해져 있어 답변마다 모양이 같아집니다.</p>
+<div class="site-example">
   <div class="site-example__bar"><div class="ds-chiptabs" role="tablist" aria-label="보기 방식"><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-view="preview">미리보기</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-view="code">코드</button></div></div>
-  <div class="site-example__preview"><div class="pv-stage pv-col">
-    <div class="ds-markdown pv-w">
-      <h2>제목 2</h2>
-      <p>본문 문단은 14 크기로 쓰고, 문단 사이는 12를 띄웁니다. <code>inline code</code>와 <a href="#">링크</a>를 함께 쓸 수 있어요.<a class="ds-citation" data-type="number" href="#" aria-label="출처 1">1</a></p>
-      <h3>제목 3</h3>
-      <ul><li>목록 항목 하나</li><li>목록 항목 둘</li></ul>
-      <blockquote>인용문은 왼쪽 선으로 구분합니다.</blockquote>
-      <figure class="ds-codeblock">
-        <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">javascript</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
-        <pre class="ds-codeblock__code"><code>const total = items
-  .filter((item) =&gt; item.checked)
-  .length;</code></pre>
-      </figure>
-      <p>출처: <a class="ds-citation" href="#"><span class="ds-citation__icon"><i class="ds-icon ds-icon--globe" aria-hidden="true"></i></span><span class="ds-citation__label">출처 이름</span></a><a class="ds-citation" href="#"><span class="ds-citation__label">아주 긴 출처 이름은 말줄임으로 끝납니다</span></a></p>
-    </div>
-  </div></div>
+  <div class="site-example__preview"><div class="pv-stage pv-wide"><div class="u-col u-gap-4 u-full" style="max-width: 480px">
+  <div class="ds-chat-bubble" data-sender="user">환불은 언제까지 할 수 있어요?</div>
+  <div class="ds-markdown">
+    <p>수강을 시작했는지에 따라 달라요.</p>
+    <h3>환불할 수 있는 때</h3>
+    <ul>
+      <li><strong>수강 전</strong>: 결제한 날부터 7일 안이면 모두 돌려받아요.</li>
+      <li><strong>수강 중</strong>: 들은 강의만큼 빼고 돌려받아요.</li>
+    </ul>
+    <p>환불 신청은 <a href="#">내 강의실</a>에서 할 수 있어요.</p>
+  </div>
+</div></div></div>
   <div class="site-example__code" hidden><figure class="ds-codeblock">
   <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">html</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
-  <pre class="ds-codeblock__code"><code>  &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-markdown&quot;</span>&gt;
-    &lt;<span class="hl-t">h2</span>&gt;제목 2&lt;/<span class="hl-t">h2</span>&gt;
-    &lt;<span class="hl-t">p</span>&gt;본문 문단은 14 크기로 쓰고, 문단 사이는 12를 띄웁니다. &lt;<span class="hl-t">code</span>&gt;inline code&lt;/<span class="hl-t">code</span>&gt;와 &lt;<span class="hl-t">a</span> <span class="hl-f">href</span>=<span class="hl-s">&quot;#&quot;</span>&gt;링크&lt;/<span class="hl-t">a</span>&gt;를 함께 쓸 수 있어요.&lt;<span class="hl-t">a</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-citation&quot;</span> <span class="hl-f">data-type</span>=<span class="hl-s">&quot;number&quot;</span> <span class="hl-f">href</span>=<span class="hl-s">&quot;#&quot;</span> <span class="hl-f">aria-label</span>=<span class="hl-s">&quot;출처 1&quot;</span>&gt;1&lt;/<span class="hl-t">a</span>&gt;&lt;/<span class="hl-t">p</span>&gt;
-    &lt;<span class="hl-t">h3</span>&gt;제목 3&lt;/<span class="hl-t">h3</span>&gt;
-    &lt;<span class="hl-t">ul</span>&gt;&lt;<span class="hl-t">li</span>&gt;목록 항목 하나&lt;/<span class="hl-t">li</span>&gt;&lt;<span class="hl-t">li</span>&gt;목록 항목 둘&lt;/<span class="hl-t">li</span>&gt;&lt;/<span class="hl-t">ul</span>&gt;
-    &lt;<span class="hl-t">blockquote</span>&gt;인용문은 왼쪽 선으로 구분합니다.&lt;/<span class="hl-t">blockquote</span>&gt;
-    &lt;<span class="hl-t">figure</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-codeblock&quot;</span>&gt;
-      &lt;<span class="hl-t">figcaption</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-codeblock__header&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-codeblock__language&quot;</span>&gt;javascript&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">button</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;button&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-codeblock__copy&quot;</span> <span class="hl-f">data-ds-copy</span> <span class="hl-f">aria-label</span>=<span class="hl-s">&quot;코드 복사&quot;</span>&gt;&lt;<span class="hl-t">i</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-icon ds-icon--copy ds-icon--sm&quot;</span> <span class="hl-f">aria-hidden</span>=<span class="hl-s">&quot;true&quot;</span>&gt;&lt;/<span class="hl-t">i</span>&gt;&lt;/<span class="hl-t">button</span>&gt;&lt;/<span class="hl-t">figcaption</span>&gt;
-      &lt;<span class="hl-t">pre</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-codeblock__code&quot;</span>&gt;&lt;<span class="hl-t">code</span>&gt;const total = items
-.filter((item) =&amp;gt; item.checked)
-.length;&lt;/<span class="hl-t">code</span>&gt;&lt;/<span class="hl-t">pre</span>&gt;
-    &lt;/<span class="hl-t">figure</span>&gt;
-    &lt;<span class="hl-t">p</span>&gt;출처: &lt;<span class="hl-t">a</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-citation&quot;</span> <span class="hl-f">href</span>=<span class="hl-s">&quot;#&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-citation__icon&quot;</span>&gt;&lt;<span class="hl-t">i</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-icon ds-icon--globe&quot;</span> <span class="hl-f">aria-hidden</span>=<span class="hl-s">&quot;true&quot;</span>&gt;&lt;/<span class="hl-t">i</span>&gt;&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-citation__label&quot;</span>&gt;출처 이름&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">a</span>&gt;&lt;<span class="hl-t">a</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-citation&quot;</span> <span class="hl-f">href</span>=<span class="hl-s">&quot;#&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-citation__label&quot;</span>&gt;아주 긴 출처 이름은 말줄임으로 끝납니다&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">a</span>&gt;&lt;/<span class="hl-t">p</span>&gt;
-  &lt;/<span class="hl-t">div</span>&gt;</code></pre>
+  <pre class="ds-codeblock__code"><code>&lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;u-col u-gap-4 u-full&quot;</span> <span class="hl-f">style</span>=<span class="hl-s">&quot;max-width: 480px&quot;</span>&gt;
+  &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-chat-bubble&quot;</span> <span class="hl-f">data-sender</span>=<span class="hl-s">&quot;user&quot;</span>&gt;환불은 언제까지 할 수 있어요?&lt;/<span class="hl-t">div</span>&gt;
+  &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-markdown&quot;</span>&gt;
+    &lt;<span class="hl-t">p</span>&gt;수강을 시작했는지에 따라 달라요.&lt;/<span class="hl-t">p</span>&gt;
+    &lt;<span class="hl-t">h3</span>&gt;환불할 수 있는 때&lt;/<span class="hl-t">h3</span>&gt;
+    &lt;<span class="hl-t">ul</span>&gt;
+      &lt;<span class="hl-t">li</span>&gt;&lt;<span class="hl-t">strong</span>&gt;수강 전&lt;/<span class="hl-t">strong</span>&gt;: 결제한 날부터 7일 안이면 모두 돌려받아요.&lt;/<span class="hl-t">li</span>&gt;
+      &lt;<span class="hl-t">li</span>&gt;&lt;<span class="hl-t">strong</span>&gt;수강 중&lt;/<span class="hl-t">strong</span>&gt;: 들은 강의만큼 빼고 돌려받아요.&lt;/<span class="hl-t">li</span>&gt;
+    &lt;/<span class="hl-t">ul</span>&gt;
+    &lt;<span class="hl-t">p</span>&gt;환불 신청은 &lt;<span class="hl-t">a</span> <span class="hl-f">href</span>=<span class="hl-s">&quot;#&quot;</span>&gt;내 강의실&lt;/<span class="hl-t">a</span>&gt;에서 할 수 있어요.&lt;/<span class="hl-t">p</span>&gt;
+  &lt;/<span class="hl-t">div</span>&gt;
+&lt;/<span class="hl-t">div</span>&gt;</code></pre>
+</figure></div>
+</div>
+<h3>코드는 Code Block에 넣기</h3>
+<p>글 사이의 코드는 Markdown 안에 Code Block으로 넣어 언어 이름과 복사 버튼을 함께 보여 줍니다. 낱말 하나 정도의 짧은 코드는 <code>code</code>로 글 안에 둡니다.</p>
+<div class="site-example">
+  <div class="site-example__bar"><div class="ds-chiptabs" role="tablist" aria-label="보기 방식"><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-view="preview">미리보기</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-view="code">코드</button></div></div>
+  <div class="site-example__preview"><div class="pv-stage pv-wide"><div class="ds-markdown u-full" style="max-width: 480px">
+  <p>고른 항목 수는 <code>filter</code>로 거른 뒤 길이를 세면 돼요.</p>
+  <figure class="ds-codeblock">
+    <figcaption class="ds-codeblock__header">
+      <span class="ds-codeblock__language">javascript</span>
+      <button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button>
+    </figcaption>
+    <pre class="ds-codeblock__code"><code>const count = items.filter((item) =&gt; item.checked).length;</code></pre>
+  </figure>
+  <p>하나도 고르지 않았으면 <code>0</code>이 나와요.</p>
+</div></div></div>
+  <div class="site-example__code" hidden><figure class="ds-codeblock">
+  <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">html</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
+  <pre class="ds-codeblock__code"><code>&lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-markdown u-full&quot;</span> <span class="hl-f">style</span>=<span class="hl-s">&quot;max-width: 480px&quot;</span>&gt;
+  &lt;<span class="hl-t">p</span>&gt;고른 항목 수는 &lt;<span class="hl-t">code</span>&gt;filter&lt;/<span class="hl-t">code</span>&gt;로 거른 뒤 길이를 세면 돼요.&lt;/<span class="hl-t">p</span>&gt;
+  &lt;<span class="hl-t">figure</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-codeblock&quot;</span>&gt;
+    &lt;<span class="hl-t">figcaption</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-codeblock__header&quot;</span>&gt;
+      &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-codeblock__language&quot;</span>&gt;javascript&lt;/<span class="hl-t">span</span>&gt;
+      &lt;<span class="hl-t">button</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;button&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-codeblock__copy&quot;</span> <span class="hl-f">data-ds-copy</span> <span class="hl-f">aria-label</span>=<span class="hl-s">&quot;코드 복사&quot;</span>&gt;&lt;<span class="hl-t">i</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-icon ds-icon--copy ds-icon--sm&quot;</span> <span class="hl-f">aria-hidden</span>=<span class="hl-s">&quot;true&quot;</span>&gt;&lt;/<span class="hl-t">i</span>&gt;&lt;/<span class="hl-t">button</span>&gt;
+    &lt;/<span class="hl-t">figcaption</span>&gt;
+    &lt;<span class="hl-t">pre</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-codeblock__code&quot;</span>&gt;&lt;<span class="hl-t">code</span>&gt;const count = items.filter((item) =&amp;gt; item.checked).length;&lt;/<span class="hl-t">code</span>&gt;&lt;/<span class="hl-t">pre</span>&gt;
+  &lt;/<span class="hl-t">figure</span>&gt;
+  &lt;<span class="hl-t">p</span>&gt;하나도 고르지 않았으면 &lt;<span class="hl-t">code</span>&gt;0&lt;/<span class="hl-t">code</span>&gt;이 나와요.&lt;/<span class="hl-t">p</span>&gt;
+&lt;/<span class="hl-t">div</span>&gt;</code></pre>
+</figure></div>
+</div>
+<h3>근거는 번호와 출처 칩으로 붙이기</h3>
+<p>근거가 된 문장 뒤에 번호 Citation을 붙이고, 답변 끝에 출처 이름 칩을 모아 둡니다. 사용자가 답의 근거를 바로 열어 볼 수 있어 믿고 읽을 수 있습니다.</p>
+<div class="site-example">
+  <div class="site-example__bar"><div class="ds-chiptabs" role="tablist" aria-label="보기 방식"><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-view="preview">미리보기</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-view="code">코드</button></div></div>
+  <div class="site-example__preview"><div class="pv-stage pv-wide"><div class="ds-markdown u-full" style="max-width: 480px">
+  <p>주문 금액이 3만 원 이상이면 배송비가 없어요.<a class="ds-citation" data-type="number" href="#" aria-label="출처 1">1</a> 섬이나 산간 지역은 3,000원이 더 붙어요.<a class="ds-citation" data-type="number" href="#" aria-label="출처 2">2</a></p>
+  <p>
+    <a class="ds-citation" href="#"><span class="ds-citation__icon"><i class="ds-icon ds-icon--file-text" aria-hidden="true"></i></span><span class="ds-citation__label">배송 안내</span></a>
+    <a class="ds-citation" href="#"><span class="ds-citation__icon"><i class="ds-icon ds-icon--file-text" aria-hidden="true"></i></span><span class="ds-citation__label">자주 묻는 질문</span></a>
+  </p>
+</div></div></div>
+  <div class="site-example__code" hidden><figure class="ds-codeblock">
+  <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">html</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
+  <pre class="ds-codeblock__code"><code>&lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-markdown u-full&quot;</span> <span class="hl-f">style</span>=<span class="hl-s">&quot;max-width: 480px&quot;</span>&gt;
+  &lt;<span class="hl-t">p</span>&gt;주문 금액이 3만 원 이상이면 배송비가 없어요.&lt;<span class="hl-t">a</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-citation&quot;</span> <span class="hl-f">data-type</span>=<span class="hl-s">&quot;number&quot;</span> <span class="hl-f">href</span>=<span class="hl-s">&quot;#&quot;</span> <span class="hl-f">aria-label</span>=<span class="hl-s">&quot;출처 1&quot;</span>&gt;1&lt;/<span class="hl-t">a</span>&gt; 섬이나 산간 지역은 3,000원이 더 붙어요.&lt;<span class="hl-t">a</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-citation&quot;</span> <span class="hl-f">data-type</span>=<span class="hl-s">&quot;number&quot;</span> <span class="hl-f">href</span>=<span class="hl-s">&quot;#&quot;</span> <span class="hl-f">aria-label</span>=<span class="hl-s">&quot;출처 2&quot;</span>&gt;2&lt;/<span class="hl-t">a</span>&gt;&lt;/<span class="hl-t">p</span>&gt;
+  &lt;<span class="hl-t">p</span>&gt;
+    &lt;<span class="hl-t">a</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-citation&quot;</span> <span class="hl-f">href</span>=<span class="hl-s">&quot;#&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-citation__icon&quot;</span>&gt;&lt;<span class="hl-t">i</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-icon ds-icon--file-text&quot;</span> <span class="hl-f">aria-hidden</span>=<span class="hl-s">&quot;true&quot;</span>&gt;&lt;/<span class="hl-t">i</span>&gt;&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-citation__label&quot;</span>&gt;배송 안내&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">a</span>&gt;
+    &lt;<span class="hl-t">a</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-citation&quot;</span> <span class="hl-f">href</span>=<span class="hl-s">&quot;#&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-citation__icon&quot;</span>&gt;&lt;<span class="hl-t">i</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-icon ds-icon--file-text&quot;</span> <span class="hl-f">aria-hidden</span>=<span class="hl-s">&quot;true&quot;</span>&gt;&lt;/<span class="hl-t">i</span>&gt;&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-citation__label&quot;</span>&gt;자주 묻는 질문&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">a</span>&gt;
+  &lt;/<span class="hl-t">p</span>&gt;
+&lt;/<span class="hl-t">div</span>&gt;</code></pre>
 </figure></div>
 </div>
 <h2 id="spec">규격<a class="site-anchor" href="#spec" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><h3>크기와 여백</h3><pre class="site-spec">변환된 HTML 을 감싸기만 하면 제목, 문단, 목록, 인용, 표, 코드의 크기와 간격이 맞춰진다. 코드 묶음은 Code Block, 출처는 Citation.

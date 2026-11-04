@@ -3,15 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Segmented Control - YBM DS</title>
+<title>Segmented Control - yds</title>
 <meta name="description" content="같은 내용을 목록, 달력처럼 다른 방식으로 바꿔 볼 때 쓰는 컴포넌트입니다.">
 <!-- 생성물: node site/build.mjs가 만든다. 직접 고치지 말고 site/build.mjs나 site/src를 고친다 -->
 <script>try { var t = localStorage.getItem("ybm-site-theme"); if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.dataset.theme = "dark"; } catch (e) {}</script>
 <link rel="icon" href="../assets/logo-ybmnet.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../dist/ybm-ds.css">
-<link rel="stylesheet" href="../assets/site.css?v=bb7371b2">
+<link rel="stylesheet" href="../assets/site.css?v=1656b6c0">
 <script src="../../dist/ybm-ds.js" defer></script>
-<script src="../assets/site.js?v=bb7371b2" defer></script>
+<script src="../assets/site.js?v=1656b6c0" defer></script>
 </head>
 <body class="site">
 <a class="site-skip" href="#main">본문 바로가기</a>
@@ -136,21 +136,164 @@
 <tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>한 화면에 하나만 둡니다. 여러 개를 두면 무엇이 중요한지 흐려집니다.</td></tr>
 <tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>라벨은 짧게 씁니다. 칸에 비해 라벨이 길면 다른 컴포넌트를 쓰세요.</td></tr>
 <tr><td><b class="ds-badge site-practice" data-tone="critical">Don't</b></td><td>화면 이동에는 쓰지 않습니다. 화면을 옮길 때는 Tabs를 씁니다.</td></tr></tbody></table></div>
-<h2 id="examples">예시<a class="site-anchor" href="#examples" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><div class="site-example">
+<h2 id="examples">예시<a class="site-anchor" href="#examples" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><h3>같은 내용의 보기 방식만 바꾸기</h3>
+<p>수업 일정을 목록으로 볼지 달력으로 볼지처럼 같은 내용을 보는 방식만 바꿀 때 씁니다. 다른 화면으로 옮겨 가는 메뉴는 Tabs로 만듭니다.</p>
+<div class="site-example">
   <div class="site-example__bar"><div class="ds-chiptabs" role="tablist" aria-label="보기 방식"><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-view="preview">미리보기</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-view="code">코드</button></div></div>
-  <div class="site-example__preview"><div class="pv-stage"><div class="ds-segmented" role="group" aria-label="보기 방식"><button type="button" class="ds-segmented__item" aria-pressed="true">목록</button><button type="button" class="ds-segmented__item" aria-pressed="false">달력</button></div></div>
-  <div class="pv-stage"><div class="ds-segmented" role="group" aria-label="기간" data-size="medium"><button type="button" class="ds-segmented__item" aria-pressed="false">1개월</button><button type="button" class="ds-segmented__item" aria-pressed="true">3개월</button><button type="button" class="ds-segmented__item" aria-pressed="false">1년</button></div><button class="ds-btn" data-variant="neutralWeak"><i class="ds-icon ds-icon--download" aria-hidden="true"></i>내보내기</button></div></div>
+  <div class="site-example__preview"><div class="pv-stage pv-wide"><div class="u-col u-gap-3 u-full" style="max-width: 420px">
+  <div class="u-flex u-center u-between">
+    <h3 class="ds-t06 ds-fw-bold">수업 일정</h3>
+    <div class="ds-segmented" role="group" aria-label="보기 방식">
+      <button type="button" class="ds-segmented__item" aria-pressed="true">목록</button>
+      <button type="button" class="ds-segmented__item" aria-pressed="false">달력</button>
+    </div>
+  </div>
+  <ul class="ds-list" data-variant="inset" data-divider>
+    <li>
+      <a class="ds-list-item" href="#">
+        <span class="ds-list-item__content">
+          <span class="ds-list-item__title">영어 회화 기초</span>
+          <span class="ds-list-item__desc">11월 6일 목요일 오후 7시</span>
+        </span>
+        <i class="ds-icon ds-icon--chevron-right ds-list-item__chevron" aria-hidden="true"></i>
+      </a>
+    </li>
+    <li>
+      <a class="ds-list-item" href="#">
+        <span class="ds-list-item__content">
+          <span class="ds-list-item__title">비즈니스 이메일 쓰기</span>
+          <span class="ds-list-item__desc">11월 8일 토요일 오전 10시</span>
+        </span>
+        <i class="ds-icon ds-icon--chevron-right ds-list-item__chevron" aria-hidden="true"></i>
+      </a>
+    </li>
+  </ul>
+</div></div></div>
   <div class="site-example__code" hidden><figure class="ds-codeblock">
   <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">html</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
-  <pre class="ds-codeblock__code"><code>&lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-segmented&quot;</span> <span class="hl-f">role</span>=<span class="hl-s">&quot;group&quot;</span> <span class="hl-f">aria-label</span>=<span class="hl-s">&quot;보기 방식&quot;</span>&gt;&lt;<span class="hl-t">button</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;button&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-segmented__item&quot;</span> <span class="hl-f">aria-pressed</span>=<span class="hl-s">&quot;true&quot;</span>&gt;목록&lt;/<span class="hl-t">button</span>&gt;&lt;<span class="hl-t">button</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;button&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-segmented__item&quot;</span> <span class="hl-f">aria-pressed</span>=<span class="hl-s">&quot;false&quot;</span>&gt;달력&lt;/<span class="hl-t">button</span>&gt;&lt;/<span class="hl-t">div</span>&gt;
-
-&lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-segmented&quot;</span> <span class="hl-f">role</span>=<span class="hl-s">&quot;group&quot;</span> <span class="hl-f">aria-label</span>=<span class="hl-s">&quot;기간&quot;</span> <span class="hl-f">data-size</span>=<span class="hl-s">&quot;medium&quot;</span>&gt;&lt;<span class="hl-t">button</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;button&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-segmented__item&quot;</span> <span class="hl-f">aria-pressed</span>=<span class="hl-s">&quot;false&quot;</span>&gt;1개월&lt;/<span class="hl-t">button</span>&gt;&lt;<span class="hl-t">button</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;button&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-segmented__item&quot;</span> <span class="hl-f">aria-pressed</span>=<span class="hl-s">&quot;true&quot;</span>&gt;3개월&lt;/<span class="hl-t">button</span>&gt;&lt;<span class="hl-t">button</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;button&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-segmented__item&quot;</span> <span class="hl-f">aria-pressed</span>=<span class="hl-s">&quot;false&quot;</span>&gt;1년&lt;/<span class="hl-t">button</span>&gt;&lt;/<span class="hl-t">div</span>&gt;&lt;<span class="hl-t">button</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-btn&quot;</span> <span class="hl-f">data-variant</span>=<span class="hl-s">&quot;neutralWeak&quot;</span>&gt;&lt;<span class="hl-t">i</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-icon ds-icon--download&quot;</span> <span class="hl-f">aria-hidden</span>=<span class="hl-s">&quot;true&quot;</span>&gt;&lt;/<span class="hl-t">i</span>&gt;내보내기&lt;/<span class="hl-t">button</span>&gt;</code></pre>
+  <pre class="ds-codeblock__code"><code>&lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;u-col u-gap-3 u-full&quot;</span> <span class="hl-f">style</span>=<span class="hl-s">&quot;max-width: 420px&quot;</span>&gt;
+  &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;u-flex u-center u-between&quot;</span>&gt;
+    &lt;<span class="hl-t">h3</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-t06 ds-fw-bold&quot;</span>&gt;수업 일정&lt;/<span class="hl-t">h3</span>&gt;
+    &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-segmented&quot;</span> <span class="hl-f">role</span>=<span class="hl-s">&quot;group&quot;</span> <span class="hl-f">aria-label</span>=<span class="hl-s">&quot;보기 방식&quot;</span>&gt;
+      &lt;<span class="hl-t">button</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;button&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-segmented__item&quot;</span> <span class="hl-f">aria-pressed</span>=<span class="hl-s">&quot;true&quot;</span>&gt;목록&lt;/<span class="hl-t">button</span>&gt;
+      &lt;<span class="hl-t">button</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;button&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-segmented__item&quot;</span> <span class="hl-f">aria-pressed</span>=<span class="hl-s">&quot;false&quot;</span>&gt;달력&lt;/<span class="hl-t">button</span>&gt;
+    &lt;/<span class="hl-t">div</span>&gt;
+  &lt;/<span class="hl-t">div</span>&gt;
+  &lt;<span class="hl-t">ul</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list&quot;</span> <span class="hl-f">data-variant</span>=<span class="hl-s">&quot;inset&quot;</span> <span class="hl-f">data-divider</span>&gt;
+    &lt;<span class="hl-t">li</span>&gt;
+      &lt;<span class="hl-t">a</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item&quot;</span> <span class="hl-f">href</span>=<span class="hl-s">&quot;#&quot;</span>&gt;
+        &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__content&quot;</span>&gt;
+          &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__title&quot;</span>&gt;영어 회화 기초&lt;/<span class="hl-t">span</span>&gt;
+          &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__desc&quot;</span>&gt;11월 6일 목요일 오후 7시&lt;/<span class="hl-t">span</span>&gt;
+        &lt;/<span class="hl-t">span</span>&gt;
+        &lt;<span class="hl-t">i</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-icon ds-icon--chevron-right ds-list-item__chevron&quot;</span> <span class="hl-f">aria-hidden</span>=<span class="hl-s">&quot;true&quot;</span>&gt;&lt;/<span class="hl-t">i</span>&gt;
+      &lt;/<span class="hl-t">a</span>&gt;
+    &lt;/<span class="hl-t">li</span>&gt;
+    &lt;<span class="hl-t">li</span>&gt;
+      &lt;<span class="hl-t">a</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item&quot;</span> <span class="hl-f">href</span>=<span class="hl-s">&quot;#&quot;</span>&gt;
+        &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__content&quot;</span>&gt;
+          &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__title&quot;</span>&gt;비즈니스 이메일 쓰기&lt;/<span class="hl-t">span</span>&gt;
+          &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-list-item__desc&quot;</span>&gt;11월 8일 토요일 오전 10시&lt;/<span class="hl-t">span</span>&gt;
+        &lt;/<span class="hl-t">span</span>&gt;
+        &lt;<span class="hl-t">i</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-icon ds-icon--chevron-right ds-list-item__chevron&quot;</span> <span class="hl-f">aria-hidden</span>=<span class="hl-s">&quot;true&quot;</span>&gt;&lt;/<span class="hl-t">i</span>&gt;
+      &lt;/<span class="hl-t">a</span>&gt;
+    &lt;/<span class="hl-t">li</span>&gt;
+  &lt;/<span class="hl-t">ul</span>&gt;
+&lt;/<span class="hl-t">div</span>&gt;</code></pre>
+</figure></div>
+</div>
+<h3>짧은 선택지 2~4개 중 하나 고르기</h3>
+<p>기간처럼 짧은 선택지를 2~4개만 둡니다. 선택지가 더 많거나 라벨이 길면 Select를 씁니다.</p>
+<div class="site-example">
+  <div class="site-example__bar"><div class="ds-chiptabs" role="tablist" aria-label="보기 방식"><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-view="preview">미리보기</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-view="code">코드</button></div></div>
+  <div class="site-example__preview"><div class="pv-stage pv-wide"><article class="ds-card u-full" style="max-width: 420px">
+  <header class="u-flex u-center u-between">
+    <h3 class="ds-card__title">학습 시간</h3>
+    <div class="ds-segmented" role="group" aria-label="기간">
+      <button type="button" class="ds-segmented__item" aria-pressed="false">1주</button>
+      <button type="button" class="ds-segmented__item" aria-pressed="true">1개월</button>
+      <button type="button" class="ds-segmented__item" aria-pressed="false">3개월</button>
+    </div>
+  </header>
+  <div class="ds-card__content u-col u-gap-1">
+    <span class="ds-t10 ds-fw-bold">12시간 30분</span>
+    <span class="ds-fg-subtle">지난달보다 2시간 늘었어요</span>
+  </div>
+</article></div></div>
+  <div class="site-example__code" hidden><figure class="ds-codeblock">
+  <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">html</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
+  <pre class="ds-codeblock__code"><code>&lt;<span class="hl-t">article</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-card u-full&quot;</span> <span class="hl-f">style</span>=<span class="hl-s">&quot;max-width: 420px&quot;</span>&gt;
+  &lt;<span class="hl-t">header</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;u-flex u-center u-between&quot;</span>&gt;
+    &lt;<span class="hl-t">h3</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-card__title&quot;</span>&gt;학습 시간&lt;/<span class="hl-t">h3</span>&gt;
+    &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-segmented&quot;</span> <span class="hl-f">role</span>=<span class="hl-s">&quot;group&quot;</span> <span class="hl-f">aria-label</span>=<span class="hl-s">&quot;기간&quot;</span>&gt;
+      &lt;<span class="hl-t">button</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;button&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-segmented__item&quot;</span> <span class="hl-f">aria-pressed</span>=<span class="hl-s">&quot;false&quot;</span>&gt;1주&lt;/<span class="hl-t">button</span>&gt;
+      &lt;<span class="hl-t">button</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;button&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-segmented__item&quot;</span> <span class="hl-f">aria-pressed</span>=<span class="hl-s">&quot;true&quot;</span>&gt;1개월&lt;/<span class="hl-t">button</span>&gt;
+      &lt;<span class="hl-t">button</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;button&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-segmented__item&quot;</span> <span class="hl-f">aria-pressed</span>=<span class="hl-s">&quot;false&quot;</span>&gt;3개월&lt;/<span class="hl-t">button</span>&gt;
+    &lt;/<span class="hl-t">div</span>&gt;
+  &lt;/<span class="hl-t">header</span>&gt;
+  &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-card__content u-col u-gap-1&quot;</span>&gt;
+    &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-t10 ds-fw-bold&quot;</span>&gt;12시간 30분&lt;/<span class="hl-t">span</span>&gt;
+    &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-fg-subtle&quot;</span>&gt;지난달보다 2시간 늘었어요&lt;/<span class="hl-t">span</span>&gt;
+  &lt;/<span class="hl-t">div</span>&gt;
+&lt;/<span class="hl-t">article</span>&gt;</code></pre>
+</figure></div>
+</div>
+<h3>좁은 화면에서는 폭을 채우기</h3>
+<p>모바일처럼 폭이 좁으면 <code>data-layout=&quot;fill&quot;</code>로 칸을 똑같이 나눠 채웁니다. 한 화면에 하나만 두어 지금 무엇을 바꾸는지 분명하게 합니다.</p>
+<div class="site-example">
+  <div class="site-example__bar"><div class="ds-chiptabs" role="tablist" aria-label="보기 방식"><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-view="preview">미리보기</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-view="code">코드</button></div></div>
+  <div class="site-example__preview"><div class="pv-stage pv-wide"><div class="u-col u-gap-5 u-full" style="max-width: 375px">
+  <div class="ds-segmented" role="group" aria-label="신청 방식" data-size="medium" data-layout="fill">
+    <button type="button" class="ds-segmented__item" aria-pressed="true">개인 신청</button>
+    <button type="button" class="ds-segmented__item" aria-pressed="false">단체 신청</button>
+  </div>
+  <div class="ds-field">
+    <div class="ds-field__header">
+      <label class="ds-field__label" for="segmented-control-ex3-name">이름</label>
+    </div>
+    <div class="ds-input" data-variant="outline">
+      <input class="ds-input__control" id="segmented-control-ex3-name" placeholder="이름을 입력해 주세요">
+    </div>
+  </div>
+  <div class="ds-field">
+    <div class="ds-field__header">
+      <label class="ds-field__label" for="segmented-control-ex3-phone">휴대폰 번호</label>
+    </div>
+    <div class="ds-input" data-variant="outline">
+      <input class="ds-input__control" id="segmented-control-ex3-phone" inputmode="tel" placeholder="숫자만 입력해 주세요">
+    </div>
+  </div>
+</div></div></div>
+  <div class="site-example__code" hidden><figure class="ds-codeblock">
+  <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">html</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
+  <pre class="ds-codeblock__code"><code>&lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;u-col u-gap-5 u-full&quot;</span> <span class="hl-f">style</span>=<span class="hl-s">&quot;max-width: 375px&quot;</span>&gt;
+  &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-segmented&quot;</span> <span class="hl-f">role</span>=<span class="hl-s">&quot;group&quot;</span> <span class="hl-f">aria-label</span>=<span class="hl-s">&quot;신청 방식&quot;</span> <span class="hl-f">data-size</span>=<span class="hl-s">&quot;medium&quot;</span> <span class="hl-f">data-layout</span>=<span class="hl-s">&quot;fill&quot;</span>&gt;
+    &lt;<span class="hl-t">button</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;button&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-segmented__item&quot;</span> <span class="hl-f">aria-pressed</span>=<span class="hl-s">&quot;true&quot;</span>&gt;개인 신청&lt;/<span class="hl-t">button</span>&gt;
+    &lt;<span class="hl-t">button</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;button&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-segmented__item&quot;</span> <span class="hl-f">aria-pressed</span>=<span class="hl-s">&quot;false&quot;</span>&gt;단체 신청&lt;/<span class="hl-t">button</span>&gt;
+  &lt;/<span class="hl-t">div</span>&gt;
+  &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field&quot;</span>&gt;
+    &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field__header&quot;</span>&gt;
+      &lt;<span class="hl-t">label</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field__label&quot;</span> <span class="hl-f">for</span>=<span class="hl-s">&quot;segmented-control-ex3-name&quot;</span>&gt;이름&lt;/<span class="hl-t">label</span>&gt;
+    &lt;/<span class="hl-t">div</span>&gt;
+    &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-input&quot;</span> <span class="hl-f">data-variant</span>=<span class="hl-s">&quot;outline&quot;</span>&gt;
+      &lt;<span class="hl-t">input</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-input__control&quot;</span> <span class="hl-f">id</span>=<span class="hl-s">&quot;segmented-control-ex3-name&quot;</span> <span class="hl-f">placeholder</span>=<span class="hl-s">&quot;이름을 입력해 주세요&quot;</span>&gt;
+    &lt;/<span class="hl-t">div</span>&gt;
+  &lt;/<span class="hl-t">div</span>&gt;
+  &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field&quot;</span>&gt;
+    &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field__header&quot;</span>&gt;
+      &lt;<span class="hl-t">label</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field__label&quot;</span> <span class="hl-f">for</span>=<span class="hl-s">&quot;segmented-control-ex3-phone&quot;</span>&gt;휴대폰 번호&lt;/<span class="hl-t">label</span>&gt;
+    &lt;/<span class="hl-t">div</span>&gt;
+    &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-input&quot;</span> <span class="hl-f">data-variant</span>=<span class="hl-s">&quot;outline&quot;</span>&gt;
+      &lt;<span class="hl-t">input</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-input__control&quot;</span> <span class="hl-f">id</span>=<span class="hl-s">&quot;segmented-control-ex3-phone&quot;</span> <span class="hl-f">inputmode</span>=<span class="hl-s">&quot;tel&quot;</span> <span class="hl-f">placeholder</span>=<span class="hl-s">&quot;숫자만 입력해 주세요&quot;</span>&gt;
+    &lt;/<span class="hl-t">div</span>&gt;
+  &lt;/<span class="hl-t">div</span>&gt;
+&lt;/<span class="hl-t">div</span>&gt;</code></pre>
 </figure></div>
 </div>
 <h2 id="spec">규격<a class="site-anchor" href="#spec" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><h3>크기와 여백</h3><pre class="site-spec">size: small(기본) / medium   layout: hug(기본) / fill
 모션: 선택 배경이 고른 항목으로 미끄러져 이동한다(필수, ybm-ds.js). 누르면 aria-pressed 가 바뀌고 change 이벤트가 난다.
-Figma small : 트랙 bg/neutral / padding 2 / shape/sm / item py6 px12 / shape/xs / t03 Bold fg/neutral-subtle
-      medium: 트랙 shape/lg / item py8 px16 / shape/sm / t04 Bold
+Figma small : 트랙 bg/neutral / padding 2 / shape/sm / item py6 px12 / shape/xs / t03 Medium fg/neutral-subtle (고른 칸 SemiBold)
+      medium: 트랙 shape/lg / item py8 px16 / shape/sm / t04 Medium (고른 칸 SemiBold)
       selected bg/layer-default + elevation raised + fg/neutral / disabled fg/disabled
 높이(2026-11-03): small 32(Button xsmall 과 같음) / medium 40(Button medium, Select medium 과 같음). 글자와 아이콘 모두 같은 높이</pre>
 <nav class="site-pager" aria-label="이전, 다음 문서"><a href="search-suggestion.html" data-dir="prev"><span class="site-pager__label"><i class="ds-icon ds-icon--chevron-left ds-icon--sm" aria-hidden="true"></i>이전</span><b>Search Suggestion</b></a><a href="select-box.html" data-dir="next"><span class="site-pager__label">다음<i class="ds-icon ds-icon--chevron-right ds-icon--sm" aria-hidden="true"></i></span><b>Select Box</b></a></nav>
