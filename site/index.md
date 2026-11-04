@@ -124,34 +124,17 @@ yds로 [만들 화면, 예: 회원 목록 화면]을 만들어 줘.
 
 ## AI가 읽는 파일
 
-주소를 알려 주면 AI가 필요한 것을 골라 읽습니다. 주소를 열지 못하는 도구에는 `llms-full.txt`를 첨부합니다.
+### 디자이너
 
-| 파일 | 대상 | 내용 |
-| --- | --- | --- |
-| [llms-full.txt](https://luvms012-rgb.github.io/yds/site/llms-full.txt) | AI | 모든 문서를 한 파일로 모았습니다. |
-| [llms.txt](https://luvms012-rgb.github.io/yds/site/llms.txt) | AI | 전체 목차와 지킬 규칙입니다. AI가 여기서 시작합니다. |
-| [AGENTS.md](https://luvms012-rgb.github.io/yds/site/ai/AGENTS.md) | AI | 프로젝트 맨 위 폴더에 두면 AI 도구가 늘 읽는 규칙 파일입니다. |
-| [CLAUDE.md](https://luvms012-rgb.github.io/yds/site/ai/CLAUDE.md), [yds.mdc](https://luvms012-rgb.github.io/yds/site/ai/yds.mdc) | AI | Claude, Cursor용 규칙 파일입니다. 내용은 AGENTS.md와 같습니다. |
-| [components.json](https://luvms012-rgb.github.io/yds/components.json) | AI개발자 | 쓸 수 있는 컴포넌트와 속성 목록입니다. |
-| [components.css](https://raw.githubusercontent.com/luvms012-rgb/yds/main/dist/components.css) | AI개발자 | 컴포넌트마다 머리 주석에 HTML 구조가 있습니다. |
-| [tokens.css](https://raw.githubusercontent.com/luvms012-rgb/yds/main/dist/tokens.css) | AI개발자 | 색, 간격, 글자 크기 같은 `--ds-*` 토큰입니다. |
-| [icons.json](https://luvms012-rgb.github.io/yds/site/ai/icons.json) | AI개발자 | 쓸 수 있는 아이콘 이름과 쓰임입니다. |
-| [yds-check.mjs](https://luvms012-rgb.github.io/yds/site/ai/yds-check.mjs) | AI개발자 | `node yds-check.mjs 폴더`로 규칙을 어긴 곳을 찾습니다. |
-| [design-tokens.json](https://luvms012-rgb.github.io/yds/tokens/design-tokens.json) | 개발자디자이너 | 표준 토큰 형식입니다. 디자인 도구와 토큰 변환기에서 읽습니다. |
-| [tokens.js](https://luvms012-rgb.github.io/yds/tokens/tokens.js) | 개발자 | 스크립트에서 토큰 값을 쓸 때 불러옵니다. |
-| [tailwind.preset.js](https://luvms012-rgb.github.io/yds/tokens/tailwind.preset.js) | 개발자 | Tailwind에 yds 토큰을 연결합니다. |
-| [Figma 라이브러리](https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=2608-2) | 디자이너 | 컴포넌트와 변수(토큰)입니다. 변수 이름이 CSS 토큰 이름과 같습니다. |
-| 페이지별 `.md` | AI | 문서 제목 아래 Markdown 메뉴에서 그 페이지만 복사합니다. |
-| Themes | 테마 CSS 주소와 어울리는 서비스입니다. |  |
+| 파일 | 이럴 때 씁니다 |
+| --- | --- |
+| [Figma 라이브러리](https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=2608-2) | 컴포넌트와 변수로 화면을 그릴 때. 변수 이름이 CSS 토큰과 같습니다. |
+| [llms-full.txt](https://luvms012-rgb.github.io/yds/site/llms-full.txt) | AI 대화창(ChatGPT, Claude 등)에 첨부해 yds 기준으로 물어볼 때. |
 
-Figma 변수와 CSS 변수는 이름이 같습니다. AI에 [Figma](https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=2608-2) 화면을 주면 같은 토큰으로 옮깁니다.
+### 개발자
 
-## 테마
-
-테마는 브랜드 색, 바탕색, 모서리 곡률을 한 번에 바꿉니다. DS 다음에 테마 파일을 붙이고 html에 테마 이름을 적으면 됩니다. 고를 수 있는 테마는 [Themes](https://luvms012-rgb.github.io/yds/site/themes/index.html)에 있습니다.
-
-```html
-<html lang="ko" data-ds-theme="mint">
-<link rel="stylesheet" href="https://luvms012-rgb.github.io/yds/dist/ybm-ds.css">
-<link rel="stylesheet" href="https://luvms012-rgb.github.io/yds/dist/themes/mint.css">
-```
+| 파일 | 이럴 때 씁니다 |
+| --- | --- |
+| [AGENTS.md](https://luvms012-rgb.github.io/yds/site/ai/AGENTS.md) | 프로젝트 맨 위 폴더에 두면 AI 코딩 도구가 늘 yds 규칙을 읽습니다. Claude는 [CLAUDE.md](https://luvms012-rgb.github.io/yds/site/ai/CLAUDE.md), Cursor는 [yds.mdc](https://luvms012-rgb.github.io/yds/site/ai/yds.mdc)로 둡니다. |
+| [llms.txt](https://luvms012-rgb.github.io/yds/site/llms.txt) | AI에 주소를 알려 줄 때. 컴포넌트 목록, 토큰, 아이콘 같은 나머지 파일 주소도 여기에 있습니다. |
+| [yds-check.mjs](https://luvms012-rgb.github.io/yds/site/ai/yds-check.mjs) | 만든 화면이 규칙을 지키는지 볼 때. `node yds-check.mjs 폴더`로 돌립니다. |

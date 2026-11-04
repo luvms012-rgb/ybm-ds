@@ -9,9 +9,9 @@
 <script>try { var t = localStorage.getItem("ybm-site-theme"); if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.dataset.theme = "dark"; } catch (e) {}</script>
 <link rel="icon" href="assets/logo-ybmnet.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../dist/ybm-ds.css">
-<link rel="stylesheet" href="assets/site.css?v=b521a017">
+<link rel="stylesheet" href="assets/site.css?v=c9dcc3bd">
 <script src="../dist/ybm-ds.js" defer></script>
-<script src="assets/site.js?v=b521a017" defer></script>
+<script src="assets/site.js?v=c9dcc3bd" defer></script>
 </head>
 <body class="site">
 <a class="site-skip" href="#main">본문 바로가기</a>
@@ -139,34 +139,17 @@
 </figure></div></div>
 
 <h2 id="files">AI가 읽는 파일<a class="site-anchor" href="#files" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
-<p>주소를 알려 주면 AI가 필요한 것을 골라 읽습니다. 주소를 열지 못하는 도구에는 <code>llms-full.txt</code>를 첨부합니다.</p>
+<h3>디자이너</h3>
 <div class="ds-table-wrap"><table class="ds-table" data-density="compact">
-<thead><tr><th scope="col">파일</th><th scope="col">대상</th><th scope="col">내용</th></tr></thead>
-<tbody><tr><td><a class="ds-link" href="llms-full.txt" target="_blank" rel="noopener">llms-full.txt</a></td><td><span class="site-who"><span class="ds-badge" data-tone="informative">AI</span></span></td><td>모든 문서를 한 파일로 모았습니다.</td></tr>
-<tr><td><a class="ds-link" href="llms.txt" target="_blank" rel="noopener">llms.txt</a></td><td><span class="site-who"><span class="ds-badge" data-tone="informative">AI</span></span></td><td>전체 목차와 지킬 규칙입니다. AI가 여기서 시작합니다.</td></tr>
-<tr><td><a class="ds-link" href="ai/AGENTS.md" target="_blank" rel="noopener">AGENTS.md</a></td><td><span class="site-who"><span class="ds-badge" data-tone="informative">AI</span></span></td><td>프로젝트 맨 위 폴더에 두면 AI 도구가 늘 읽는 규칙 파일입니다.</td></tr>
-<tr><td><a class="ds-link" href="ai/CLAUDE.md" target="_blank" rel="noopener">CLAUDE.md</a>, <a class="ds-link" href="ai/yds.mdc" target="_blank" rel="noopener">yds.mdc</a></td><td><span class="site-who"><span class="ds-badge" data-tone="informative">AI</span></span></td><td>Claude, Cursor용 규칙 파일입니다. 내용은 AGENTS.md와 같습니다.</td></tr>
-<tr><td><a class="ds-link" href="https://luvms012-rgb.github.io/yds/components.json" target="_blank" rel="noopener">components.json</a></td><td><span class="site-who"><span class="ds-badge" data-tone="informative">AI</span><span class="ds-badge">개발자</span></span></td><td>쓸 수 있는 컴포넌트와 속성 목록입니다.</td></tr>
-<tr><td><a class="ds-link" href="https://raw.githubusercontent.com/luvms012-rgb/yds/main/dist/components.css" target="_blank" rel="noopener">components.css</a></td><td><span class="site-who"><span class="ds-badge" data-tone="informative">AI</span><span class="ds-badge">개발자</span></span></td><td>컴포넌트마다 머리 주석에 HTML 구조가 있습니다.</td></tr>
-<tr><td><a class="ds-link" href="https://raw.githubusercontent.com/luvms012-rgb/yds/main/dist/tokens.css" target="_blank" rel="noopener">tokens.css</a></td><td><span class="site-who"><span class="ds-badge" data-tone="informative">AI</span><span class="ds-badge">개발자</span></span></td><td>색, 간격, 글자 크기 같은 <code>--ds-*</code> 토큰입니다.</td></tr>
-<tr><td><a class="ds-link" href="ai/icons.json" target="_blank" rel="noopener">icons.json</a></td><td><span class="site-who"><span class="ds-badge" data-tone="informative">AI</span><span class="ds-badge">개발자</span></span></td><td>쓸 수 있는 아이콘 이름과 쓰임입니다.</td></tr>
-<tr><td><a class="ds-link" href="ai/yds-check.mjs" target="_blank" rel="noopener">yds-check.mjs</a></td><td><span class="site-who"><span class="ds-badge" data-tone="informative">AI</span><span class="ds-badge">개발자</span></span></td><td><code>node yds-check.mjs 폴더</code>로 규칙을 어긴 곳을 찾습니다.</td></tr>
-<tr><td><a class="ds-link" href="https://luvms012-rgb.github.io/yds/tokens/design-tokens.json" target="_blank" rel="noopener">design-tokens.json</a></td><td><span class="site-who"><span class="ds-badge">개발자</span><span class="ds-badge" data-tone="positive">디자이너</span></span></td><td>표준 토큰 형식입니다. 디자인 도구와 토큰 변환기에서 읽습니다.</td></tr>
-<tr><td><a class="ds-link" href="https://luvms012-rgb.github.io/yds/tokens/tokens.js" target="_blank" rel="noopener">tokens.js</a></td><td><span class="site-who"><span class="ds-badge">개발자</span></span></td><td>스크립트에서 토큰 값을 쓸 때 불러옵니다.</td></tr>
-<tr><td><a class="ds-link" href="https://luvms012-rgb.github.io/yds/tokens/tailwind.preset.js" target="_blank" rel="noopener">tailwind.preset.js</a></td><td><span class="site-who"><span class="ds-badge">개발자</span></span></td><td>Tailwind에 yds 토큰을 연결합니다.</td></tr>
-<tr><td><a class="ds-link" href="https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=2608-2" target="_blank" rel="noopener">Figma 라이브러리</a></td><td><span class="site-who"><span class="ds-badge" data-tone="positive">디자이너</span></span></td><td>컴포넌트와 변수(토큰)입니다. 변수 이름이 CSS 토큰 이름과 같습니다.</td></tr>
-<tr><td>페이지별 <code>.md</code></td><td><span class="site-who"><span class="ds-badge" data-tone="informative">AI</span></span></td><td>문서 제목 아래 Markdown 메뉴에서 그 페이지만 복사합니다.</td></tr>
-<tr><td>Themes</td><td>테마 CSS 주소와 어울리는 서비스입니다.</td></tr></tbody></table></div>
-<p>Figma 변수와 CSS 변수는 이름이 같습니다. AI에 <a class="ds-link" href="https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=2608-2" target="_blank" rel="noopener">Figma</a> 화면을 주면 같은 토큰으로 옮깁니다.</p>
-
-<h2 id="custom-theme">테마<a class="site-anchor" href="#custom-theme" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
-<p>테마는 브랜드 색, 바탕색, 모서리 곡률을 한 번에 바꿉니다. DS 다음에 테마 파일을 붙이고 html에 테마 이름을 적으면 됩니다. 고를 수 있는 테마는 <a class="ds-link" data-size="small" href="themes/index.html">Themes</a>에 있습니다.</p>
-<figure class="ds-codeblock" data-lang="html">
-  <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">html</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
-  <pre class="ds-codeblock__code"><code>&lt;<span class="hl-t">html</span> <span class="hl-f">lang</span>=<span class="hl-s">&quot;ko&quot;</span> <span class="hl-f">data-ds-theme</span>=<span class="hl-s">&quot;mint&quot;</span>&gt;
-&lt;<span class="hl-t">link</span> <span class="hl-f">rel</span>=<span class="hl-s">&quot;stylesheet&quot;</span> <span class="hl-f">href</span>=<span class="hl-s">&quot;https://luvms012-rgb.github.io/yds/dist/ybm-ds.css&quot;</span>&gt;
-&lt;<span class="hl-t">link</span> <span class="hl-f">rel</span>=<span class="hl-s">&quot;stylesheet&quot;</span> <span class="hl-f">href</span>=<span class="hl-s">&quot;https://luvms012-rgb.github.io/yds/dist/themes/mint.css&quot;</span>&gt;</code></pre>
-</figure>
+<thead><tr><th scope="col">파일</th><th scope="col">이럴 때 씁니다</th></tr></thead>
+<tbody><tr><td><a class="ds-link" href="https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=2608-2" target="_blank" rel="noopener">Figma 라이브러리</a></td><td>컴포넌트와 변수로 화면을 그릴 때. 변수 이름이 CSS 토큰과 같습니다.</td></tr>
+<tr><td><a class="ds-link" href="llms-full.txt" target="_blank" rel="noopener">llms-full.txt</a></td><td>AI 대화창(ChatGPT, Claude 등)에 첨부해 yds 기준으로 물어볼 때.</td></tr></tbody></table></div>
+<h3>개발자</h3>
+<div class="ds-table-wrap"><table class="ds-table" data-density="compact">
+<thead><tr><th scope="col">파일</th><th scope="col">이럴 때 씁니다</th></tr></thead>
+<tbody><tr><td><a class="ds-link" href="ai/AGENTS.md" target="_blank" rel="noopener">AGENTS.md</a></td><td>프로젝트 맨 위 폴더에 두면 AI 코딩 도구가 늘 yds 규칙을 읽습니다. Claude는 <a class="ds-link" href="ai/CLAUDE.md" target="_blank" rel="noopener">CLAUDE.md</a>, Cursor는 <a class="ds-link" href="ai/yds.mdc" target="_blank" rel="noopener">yds.mdc</a>로 둡니다.</td></tr>
+<tr><td><a class="ds-link" href="llms.txt" target="_blank" rel="noopener">llms.txt</a></td><td>AI에 주소를 알려 줄 때. 컴포넌트 목록, 토큰, 아이콘 같은 나머지 파일 주소도 여기에 있습니다.</td></tr>
+<tr><td><a class="ds-link" href="ai/yds-check.mjs" target="_blank" rel="noopener">yds-check.mjs</a></td><td>만든 화면이 규칙을 지키는지 볼 때. <code>node yds-check.mjs 폴더</code>로 돌립니다.</td></tr></tbody></table></div>
 
 
 
@@ -174,7 +157,7 @@
   <div class="site-footer__brand"><img src="assets/logo-ybmnet.svg" alt="YBM NET" width="81" height="24"><p class="site-footer__copy">© 2026 YBM NET. All rights reserved.</p></div>
   <nav class="site-footer__nav" aria-label="사이트 메뉴">
     <div><p class="site-footer__title">메뉴</p><a href="index.html">Get Started</a><a href="foundations/breakpoint.html">Foundations</a><a href="components/index.html">Components</a><a href="templates/index.html">Templates</a><a href="updates.html">Updates</a></div>
-    <div><p class="site-footer__title">더 보기</p><a href="themes/index.html">Themes</a><a href="https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=2608-2" target="_blank" rel="noopener">Figma</a><a href="https://github.com/luvms012-rgb/yds" target="_blank" rel="noopener">GitHub</a></div>
+    <div><p class="site-footer__title">더 보기</p><a href="https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=2608-2" target="_blank" rel="noopener">Figma</a><a href="https://github.com/luvms012-rgb/yds" target="_blank" rel="noopener">GitHub</a></div>
   </nav>
 </footer>
 </article>
