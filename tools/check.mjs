@@ -55,7 +55,9 @@ const dec = (s) => s.replace(/<[^>]+>/g, '').replace(/&lt;/g, '<').replace(/&gt;
 if (flags.has('--regen')) {
   check('0 다시 만들기', ({ err }) => {
     // 다시 만들기 전후로 생성물 폴더의 내용을 비교한다 (고치는 중이라 커밋 안 된 파일이 있어도 된다)
-    const snap = () => Object.fromEntries(['dist', 'tokens', 'site'].flatMap((d) => walk(path.join(R, d), ['node_modules'])).filter((f) => !/\.(LDH|png|jpe?g|webp|woff2?)$/.test(f)).map((f) => [rel(f), crypto.createHash('sha1').update(fs.readFileSync(f)).digest('hex')]));
+    // 저장소가 다루는 파일만 본다(.gitignore 에 든 로컬 전용 파일 tokens/.figma-* 등은 뺀다)
+    const tracked = () => spawnSync('git', ['ls-files', '-co', '--exclude-standard', 'dist', 'tokens', 'site'], { cwd: R, encoding: 'utf8' }).stdout.split('\n').filter((f) => f && !/\.(LDH|png|jpe?g|webp|woff2?)$/.test(f));
+    const snap = () => Object.fromEntries(tracked().filter((f) => fs.existsSync(path.join(R, f))).map((f) => [f, crypto.createHash('sha1').update(fs.readFileSync(path.join(R, f))).digest('hex')]));
     const before = snap();
     const date = (read('tokens/tokens.js').match(/생성: (\d{4}-\d{2}-\d{2})/) || [])[1];
     for (const [label, args] of [['토큰', ['tokens/build.mjs', ...(date ? [date] : [])]], ['템플릿', ['site/templates/gen/run.mjs']], ['사이트', ['site/build.mjs']]]) {
@@ -251,5 +253,7 @@ for (const { name, errors, warns } of results) {
   for (const w of warns.slice(0, flags.has('--all') ? 999 : 3)) console.log('    주의: ' + w);
   if (!flags.has('--all') && warns.length > 3) console.log(`    주의 외 ${warns.length - 3}개 (--all 로 모두 보기)`);
 }
+// GitHub 자동 검사에서는 오류를 주석(annotation)으로도 남겨, 로그인 없이 실행 화면에서 바로 보이게 한다
+if (process.env.GITHUB_ACTIONS) for (const { name, errors } of results) for (const e of errors.slice(0, 8)) console.log(`::error title=${name}::${e.replace(/\n/g, ' ')}`);
 console.log(bad ? `\n검사 실패: 오류 ${bad}개` : '\n검사 통과');
 process.exit(bad ? 1 : 0);
