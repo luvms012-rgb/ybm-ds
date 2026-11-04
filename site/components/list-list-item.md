@@ -177,7 +177,7 @@ variant: plain(기본) / inset(카드 안처럼 둥근 묶음)   size: medium(�
 Figma item medium: min-h56 / py x3 / px x4 / gap x3 / title t05 fg/neutral / desc t03 fg/neutral-subtle
             small : min-h48 / py x2_5 / title t04 / desc t02
   prefix 24(아이콘 fg/neutral-subtle, Avatar 36 가능) / suffix t04 fg/neutral-subtle / chevron 20 fg/neutral-subtle
-  pressed bg/transparent-pressed / disabled 글자 fg/disabled / divider 1px stroke/neutral-weak(본문 시작점부터, 2026-11-04)
+  pressed bg/transparent-pressed / disabled 글자 fg/disabled / divider 1px stroke/neutral-muted(본문 시작점부터, inset 은 좌우 x4, 2026-11-04)
   inset: bg/layer-default / 1px stroke/neutral(2026-11-04) / shape/xl / 바깥 여백 없음
 상호작용 요소(링크/스위치 등)는 한 줄에 4개 미만. 행 전체가 링크이면 안에 다른 버튼을 넣지 않는다.
 ```

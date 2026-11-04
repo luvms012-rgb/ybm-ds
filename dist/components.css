@@ -2141,7 +2141,7 @@ html:has(:is(.ds-dialog, .ds-bottomsheet)[open]) { overflow: hidden; }
   display: flex;
   flex-direction: column;
   gap: var(--ds-space-x3);
-  width: 320px;
+  width: min(320px, 100%);  /* 2026-11-04: 320 보다 좁은 화면에서는 칸이 함께 줄어든다 */
   padding: var(--ds-space-x5);
   border-radius: var(--ds-shape-2xl);
   background: var(--ds-color-bg-layer-default);
@@ -2152,7 +2152,7 @@ html:has(:is(.ds-dialog, .ds-bottomsheet)[open]) { overflow: hidden; }
 .ds-datepicker__nav > .ds-icon { --ds-icon-size: 24px; }
 .ds-datepicker__nav:disabled { color: var(--ds-color-fg-disabled); }
 .ds-datepicker__title { flex: 1 1 auto; text-align: center; font-size: var(--ds-font-size-t06); line-height: var(--ds-line-height-t06); font-weight: var(--ds-font-weight-bold); }
-.ds-datepicker__weekdays, .ds-datepicker__grid { display: grid; grid-template-columns: repeat(7, 40px); }
+.ds-datepicker__weekdays, .ds-datepicker__grid { display: grid; grid-template-columns: repeat(7, minmax(0, 40px)); justify-content: space-between; }
 .ds-datepicker__weekdays > * { height: 20px; text-align: center; color: var(--ds-color-fg-neutral-subtle); font-size: var(--ds-font-size-t04); line-height: 20px; }
 .ds-date-cell {
   --ds-date-pill-bg: transparent;
@@ -2162,7 +2162,8 @@ html:has(:is(.ds-dialog, .ds-bottomsheet)[open]) { overflow: hidden; }
   isolation: isolate;
   display: grid;
   place-items: center;
-  width: 40px;
+  width: 100%;
+  max-width: 40px;
   height: 44px;
   color: var(--ds-color-fg-neutral);
   font-size: var(--ds-font-size-t05);
@@ -2171,7 +2172,7 @@ html:has(:is(.ds-dialog, .ds-bottomsheet)[open]) { overflow: hidden; }
 }
 .ds-date-cell::before, .ds-date-cell::after { content: ""; position: absolute; z-index: -1; top: 6px; height: 32px; }
 .ds-date-cell::before { left: 0; right: 0; background: var(--ds-date-track); }
-.ds-date-cell::after { left: 4px; width: 32px; border-radius: var(--ds-shape-xl); background: var(--ds-date-pill-bg); box-shadow: inset 0 0 0 1px var(--ds-date-pill-line); }
+.ds-date-cell::after { left: calc(50% - 16px); width: 32px; border-radius: var(--ds-shape-xl); background: var(--ds-date-pill-bg); box-shadow: inset 0 0 0 1px var(--ds-date-pill-line); }
 .ds-date-cell[data-state="today"]    { --ds-date-pill-line: var(--ds-color-stroke-brand-solid); color: var(--ds-color-fg-brand); font-weight: var(--ds-font-weight-medium); }
 .ds-date-cell:is([data-state="selected"], [data-state="range-start"], [data-state="range-end"]) { --ds-date-pill-bg: var(--ds-color-bg-brand-solid); color: var(--ds-color-fg-on-brand-solid); font-weight: var(--ds-font-weight-medium); }
 .ds-date-cell[data-state="range-start"]::before  { left: 20px; background: var(--ds-color-bg-brand-weak); }
@@ -2618,7 +2619,7 @@ a.ds-card:active, button.ds-card:active { background: linear-gradient(var(--ds-c
    Figma item medium: min-h56 · py x3 · px x4 · gap x3 · title t05 fg/neutral · desc t03 fg/neutral-subtle
                small : min-h48 · py x2_5 · title t04 · desc t02
      prefix 24(아이콘 fg/neutral-subtle, Avatar 36 가능) · suffix t04 fg/neutral-subtle · chevron 20 fg/neutral-subtle
-     pressed bg/transparent-pressed · disabled 글자 fg/disabled · divider 1px stroke/neutral-weak(본문 시작점부터, 2026-11-04)
+     pressed bg/transparent-pressed · disabled 글자 fg/disabled · divider 1px stroke/neutral-muted(본문 시작점부터, inset 은 좌우 x4, 2026-11-04)
      inset: bg/layer-default · 1px stroke/neutral(2026-11-04) · shape/xl · 바깥 여백 없음
    상호작용 요소(링크·스위치 등)는 한 줄에 4개 미만. 행 전체가 링크이면 안에 다른 버튼을 넣지 않는다.
    -------------------------------------------------------------------------- */
@@ -2665,8 +2666,9 @@ a.ds-card:active, button.ds-card:active { background: linear-gradient(var(--ds-c
   right: 0;
   left: var(--ds-list-item-px);
   height: 1px;
-  background: var(--ds-color-stroke-neutral-weak);  /* 2026-11-04: neutral-subtle 은 거의 안 보여 Divider 와 같은 색으로 */
+  background: var(--ds-color-stroke-neutral-muted);  /* 2026-11-04: 바깥 테두리(neutral)보다 두 단계 옅게 */
 }
+.ds-list[data-variant="inset"][data-divider] > li + li > .ds-list-item::before { right: var(--ds-list-item-px); }  /* 2026-11-04: 카드처럼 묶인 목록은 구분선 좌우 여백을 같게 */
 
 
 /* --------------------------------------------------------------------------
