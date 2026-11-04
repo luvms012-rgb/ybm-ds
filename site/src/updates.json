@@ -1,13 +1,52 @@
 {
-  "_설명": "Updates 페이지 소식. 새 소식은 맨 위에 한 줄 추가한다. date 는 YYYY-MM-DD, title 은 한 줄, desc 는 한두 문장",
-  "updates": [
-    { "date": "2026-11-03", "title": "문서 사이트를 다섯 메뉴로", "desc": "메뉴를 Get Started, Foundations, Components, Templates, Updates 다섯 개로 나눴습니다. Color 는 Overview, Roles, Palette 로, Iconography 는 Overview, Library 로 나누고 아이콘을 찾아 바로 복사하는 라이브러리를 만들었습니다." },
-    { "date": "2026-11-03", "title": "컴포넌트 구조 그림", "desc": "컴포넌트마다 부품 이름과 화살표로 생김새를 보여 주는 구조 그림을 넣었습니다. 화살표는 곧게 부품을 가리키고 서로 엇갈리지 않습니다." },
-    { "date": "2026-11-03", "title": "DS Table 개편과 새 선택지", "desc": "표의 위 선, 머리줄, 행 높이를 다시 정하고 두 줄 칸과 묶음 행을 더했습니다. Text Link small, Segmented 높이 32 와 40, Card subtle 같은 선택지도 늘었습니다." },
-    { "date": "2026-11-02", "title": "템플릿 67종", "desc": "대시보드, 표, 폼, 커뮤니티, 요금제처럼 자주 만드는 화면을 템플릿으로 더해 67종이 되었습니다. 템플릿마다 Figma 화면이 함께 있습니다." },
-    { "date": "2026-11-01", "title": "아이콘 93개 추가", "desc": "폴더, 필터, 메일, 설정처럼 화면에 자주 쓰는 Lucide 아이콘 93개를 더했습니다." },
-    { "date": "2026-10-31", "title": "Figma 와 문서 연결", "desc": "컴포넌트와 Foundations 문서마다 Figma 와 코드로 가는 버튼을 달았습니다. Figma 문서 프레임에서도 사이트의 같은 페이지로 갑니다." },
-    { "date": "2026-10-30", "title": "Rating 컴포넌트", "desc": "별점을 보여 주고 고르는 Rating 을 CSS 와 Figma 에 함께 만들었습니다." },
-    { "date": "2026-10-29", "title": "새 컴포넌트 16종", "desc": "Top App Bar, Top Navigation, Search Suggestion, File Attach, Menu Sheet, Side Panel, Carousel, Code Block 같은 컴포넌트를 CSS 와 Figma 에 함께 만들었습니다." }
+  "_설명": "Updates 페이지 (레퍼런스 A Changelog 구성). 새 소식은 releases 맨 위에 날짜 하나를 더한다. sections 의 type 은 새 컴포넌트, 새 기능, 바뀐 것, 고친 것 중 하나, items 는 [영역, 한 문장]이고 영역은 DS, 템플릿, 사이트 중 하나",
+  "releases": [
+    { "date": "2026-11-04", "sections": [
+      { "type": "새 기능", "items": [
+        ["사이트", "Foundations 에 화면 폭 기준을 모은 Breakpoint 페이지를 더했습니다."]
+      ] },
+      { "type": "바뀐 것", "items": [
+        ["DS", "토큰 이름을 --ybm-* 에서 --ds-* 로, CSS 레이어를 ds.* 로, 스크립트를 DS 로 바꿨습니다. 예전 이름은 compat-ybm.css 와 window.YBM 으로 계속 동작합니다."],
+        ["사이트", "Get Started 를 짧은 AI 요청 글 두 개와 직접 시작 두 단계로 줄였습니다. AI 가 지킬 규칙은 llms.txt 에 모았습니다."],
+        ["사이트", "글자 위계와 본문 폭을 seed 문서 사이트에 맞췄습니다."]
+      ] }
+    ] },
+    { "date": "2026-11-03", "sections": [
+      { "type": "새 기능", "items": [
+        ["사이트", "메뉴를 Get Started, Foundations, Components, Templates, Updates 다섯 개로 나눴습니다."],
+        ["사이트", "Color 를 Overview, Roles, Palette 로, Iconography 를 Overview, Library 로 나누고 아이콘을 찾아 바로 복사하는 라이브러리를 만들었습니다."],
+        ["사이트", "컴포넌트마다 부품 이름과 화살표로 생김새를 보여 주는 구조 그림을 넣었습니다."]
+      ] },
+      { "type": "바뀐 것", "items": [
+        ["DS", "Table 의 위 선, 머리줄, 행 높이를 다시 정하고 두 줄 칸과 묶음 행을 더했습니다."],
+        ["DS", "Text Link small, Segmented 높이 32 와 40, Card subtle 선택지를 더했습니다."],
+        ["사이트", "컴포넌트 상세를 사용법, 구조, 속성, 동작, 사용 지침, 예시, 규격 순서로 정리했습니다."]
+      ] }
+    ] },
+    { "date": "2026-11-02", "sections": [
+      { "type": "새 기능", "items": [
+        ["템플릿", "대시보드, 표, 폼, 커뮤니티, 요금제처럼 자주 만드는 화면을 더해 템플릿이 67종이 되었습니다. 템플릿마다 Figma 화면이 함께 있습니다."]
+      ] }
+    ] },
+    { "date": "2026-11-01", "sections": [
+      { "type": "새 기능", "items": [
+        ["DS", "폴더, 필터, 메일, 설정처럼 화면에 자주 쓰는 Lucide 아이콘 93개를 더했습니다."]
+      ] }
+    ] },
+    { "date": "2026-10-31", "sections": [
+      { "type": "새 기능", "items": [
+        ["사이트", "컴포넌트와 Foundations 문서마다 Figma 와 코드로 가는 버튼을 달았습니다. Figma 문서 프레임에서도 사이트의 같은 페이지로 갑니다."]
+      ] }
+    ] },
+    { "date": "2026-10-30", "sections": [
+      { "type": "새 컴포넌트", "items": [
+        ["DS", "별점을 보여 주고 고르는 Rating 을 CSS 와 Figma 에 함께 만들었습니다."]
+      ] }
+    ] },
+    { "date": "2026-10-29", "sections": [
+      { "type": "새 컴포넌트", "items": [
+        ["DS", "Top App Bar, Top Navigation, Search Suggestion, File Attach, Menu Sheet, Side Panel, Carousel, Code Block 등 16종을 CSS 와 Figma 에 함께 만들었습니다."]
+      ] }
+    ] }
   ]
 }

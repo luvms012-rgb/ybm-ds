@@ -263,8 +263,6 @@ body[data-side-open] .site-scrim { opacity: 1; pointer-events: auto; }
 @media (min-width: 560px) { .site-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .site-grid > :last-child:nth-child(odd) { grid-column: 1 / -1; } }
 /* 안내 카드 (레퍼런스 B Get Started): 옅은 회색 칸, 테두리 없음, 제목 16 Medium 과 오른쪽 화살표, 아래 설명 14 */
 .site-grid--hub { gap: var(--ds-space-x3); }
-/* 안내 카드는 가로 한 줄 (11-04 사용자 "가로로 배열"): 카드 수만큼 칸을 나누고, 좁으면 아래로 */
-@media (min-width: 560px) { .site-grid.site-grid--hub { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); } .site-grid--hub > :last-child:nth-child(odd) { grid-column: auto; } }
 .site-hub { display: flex; flex-direction: column; gap: var(--ds-space-x1); padding: 14px var(--ds-space-x5); border-radius: var(--ds-shape-lg); background: var(--ds-color-bg-neutral-weak-alpha); color: var(--ds-color-fg-neutral); text-decoration: none; transition: background-color var(--ds-duration-fast) var(--ds-easing-standard); }
 .site-hub:hover { background: var(--ds-color-bg-neutral-weak-alpha-pressed); }
 .site-hub__title { display: flex; align-items: center; justify-content: space-between; gap: var(--ds-space-x2); font-size: var(--ds-font-size-t05); line-height: 22px; font-weight: var(--ds-font-weight-medium); }
@@ -488,12 +486,15 @@ body[data-side-open] .site-scrim { opacity: 1; pointer-events: auto; }
 }
 
 /* ---- Updates (레퍼런스 B): 소식 카드 ---- */
-.site-updates { display: grid; gap: var(--ds-space-x3); margin-top: var(--ds-space-x4); }
-@media (min-width: 768px) { .site-updates { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-.site-update { display: flex; flex-direction: column; gap: var(--ds-space-x1); padding: var(--ds-space-x4) var(--ds-space-x5); border-radius: var(--ds-shape-lg); background: var(--ds-color-bg-neutral-weak-alpha); }
-.site-update time { color: var(--ds-color-fg-neutral-subtle); font-size: var(--ds-font-size-t03); line-height: 20px; }
-.site-doc .site-update h3 { margin: 0 !important; font-size: var(--ds-font-size-t06) !important; line-height: 26px !important; font-weight: var(--ds-font-weight-medium); }
-.site-doc .site-update p { margin: 0; color: var(--ds-color-fg-neutral-muted); font-size: var(--ds-font-size-t04) !important; line-height: 22px !important; }
+/* Updates (레퍼런스 A Changelog): 위에 영역 거르기, 날짜 제목 20/28 SemiBold, 종류 이름 13 SemiBold 흐린 글자, 그 아래 목록 */
+.site-doc > .site-release-filter { margin-top: var(--ds-space-x8); }
+.site-doc > .site-release { margin-top: var(--ds-space-x10); }
+.site-doc .site-release h2:not(.pv-stage *) { margin-top: 0; font-size: var(--ds-font-size-t07); line-height: 28px; }
+.site-release__group { margin-top: var(--ds-space-x4); }
+.site-doc .site-release__type { margin: 0; color: var(--ds-color-fg-neutral-muted); font-size: var(--ds-font-size-t03); line-height: 20px; font-weight: var(--ds-font-weight-semibold); }
+.site-doc .site-release ul.site-list { margin-top: var(--ds-space-x2); }
+.site-release li .ds-badge { margin-right: var(--ds-space-x1); vertical-align: 2px; }
+.site-release[hidden], .site-release__group[hidden] { display: none; }
 
 /* 가이드는 브랜드 색 없이 모노톤으로 보여 준다 (2026-11-02 사용자 "가이드에 브랜드 컬러 적용 X").
    브랜드 역할 색을 같은 자리의 neutral 색으로 바꾼다. 서비스는 palette/brand 를 바꿔 자기 브랜드 색을 쓴다(Color 페이지).

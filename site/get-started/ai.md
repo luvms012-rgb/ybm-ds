@@ -10,18 +10,11 @@ AI 도구와 YBM DS를 함께 쓰는 방법입니다.
 
 ## 요청 예시
 
-### DS 적용하기
+### DS 설치하기
 
 ```text
-이 프로젝트에 YBM DS를 적용해 줘.
-1. <head>에 아래 두 줄을 넣어 줘.
-   <link rel="stylesheet" href="https://luvms012-rgb.github.io/ybm-ds/dist/ybm-ds.css">
-   <script src="https://luvms012-rgb.github.io/ybm-ds/dist/ybm-ds.js" defer></script>
-2. 문서는 https://luvms012-rgb.github.io/ybm-ds/site/llms.txt 목차에서 필요한 페이지(.md)를 골라 읽어.
-3. 쓸 수 있는 컴포넌트 목록은 https://luvms012-rgb.github.io/ybm-ds/components.json, 각 컴포넌트의 HTML 구조는 https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/components.css의 컴포넌트별 머리 주석을 따라.
-4. 색, 간격, 글자 크기, 모서리, 그림자는 https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/tokens.css의 --ds-* 토큰만 써.
-5. 서비스 CSS는 DS 다음에 불러오고, 바꾸고 싶은 모양은 컴포넌트의 --ds-* 변수만 덮어써.
-6. 새 ds- 클래스를 만들거나 !important를 쓰지 마.
+이 프로젝트에 YBM DS를 넣어 줘.
+https://luvms012-rgb.github.io/ybm-ds/site/llms.txt 를 먼저 읽고, 거기 적힌 설치 방법과 규칙을 따라 줘.
 ```
 
 ### 화면 만들기
@@ -29,24 +22,21 @@ AI 도구와 YBM DS를 함께 쓰는 방법입니다.
 대괄호 안만 내 상황에 맞게 바꿉니다.
 
 ```text
-YBM DS로 [만들 화면, 예: 회원 목록 관리 화면]을 만들어 줘.
-- 부품은 https://luvms012-rgb.github.io/ybm-ds/components.json에 있는 것만 쓰고, 마크업은 https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/components.css 머리 주석 그대로 써.
-- 쓰는 컴포넌트는 https://luvms012-rgb.github.io/ybm-ds/site/llms.txt에서 그 문서(.md)를 읽고 사용 지침을 따라.
-- 비슷한 화면이 llms.txt의 Templates 목록에 있으면 그 HTML을 출발점으로 써.
-- 모바일 먼저 만들고, 768px 이상과 1280px 이상에서 배치를 바꿔 줘.
-- 글자는 한국어. 제목은 Bold에 자간 -0.02em, 항목 제목은 SemiBold, 본문은 Regular로 쓰고, 크기는 --ds-font-size-* 토큰, 본문은 word-break: keep-all.
-- 배치용 CSS에는 --ds-* 토큰만 쓰고 hex 색은 쓰지 마.
+YBM DS로 [만들 화면, 예: 회원 목록 화면]을 만들어 줘.
+https://luvms012-rgb.github.io/ybm-ds/site/llms.txt 규칙을 따르고, 비슷한 화면이 Templates 목록에 있으면 거기서 시작해 줘.
 ```
 
 ### 규칙 점검하기
 
 ```text
-이 화면이 YBM DS 규칙을 지키는지 점검하고 고쳐 줘.
-- hex, rgb로 색을 직접 쓴 곳 → --ds-color-* 토큰으로
-- 토큰이 아닌 임의의 간격, 글자 크기 → --ds-space-*, --ds-font-size-* 로
-- https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/components.css에 없는 ds- 클래스, !important
-- DS 부품으로 바꿀 수 있는데 직접 만든 버튼, 입력, 표
-고친 곳은 목록으로 알려 줘.
+이 화면이 YBM DS 규칙을 지키는지 https://luvms012-rgb.github.io/ybm-ds/site/llms.txt 기준으로 점검하고 고쳐 줘. 고친 곳은 목록으로 알려 줘.
+```
+
+### 서비스 색 입히기
+
+```text
+이 서비스의 브랜드 색을 나에게 먼저 물어봐 줘.
+그 색으로 YBM DS 브랜드 색을 맞춰 서비스 CSS에 넣고, 정하지 않으면 기본 색으로 둬. 바꾼 화면을 먼저 보여 줘.
 ```
 
 ## llms.txt

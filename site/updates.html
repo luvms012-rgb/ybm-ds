@@ -9,9 +9,9 @@
 <script>try { var t = localStorage.getItem("ybm-site-theme"); if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.dataset.theme = "dark"; } catch (e) {}</script>
 <link rel="icon" href="assets/logo-ybmnet.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../dist/ybm-ds.css">
-<link rel="stylesheet" href="assets/site.css?v=38df44eb">
+<link rel="stylesheet" href="assets/site.css?v=3c857aad">
 <script src="../dist/ybm-ds.js" defer></script>
-<script src="assets/site.js?v=38df44eb" defer></script>
+<script src="assets/site.js?v=3c857aad" defer></script>
 </head>
 <body class="site">
 <a class="site-skip" href="#main">본문 바로가기</a>
@@ -43,17 +43,42 @@
 <article class="site-doc">
 <header class="site-head"><h1 class="site-h1">Updates</h1><p class="site-lead">YBM DS 업데이트 소식과 변경 기록입니다.</p>
 </header>
-<h2 id="release-notes">Release Notes<a class="site-anchor" href="#release-notes" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
-<div class="site-updates">
-<article class="site-update"><time datetime="2026-11-03">2026. 11. 3</time><h3>문서 사이트를 다섯 메뉴로</h3><p>메뉴를 Get Started, Foundations, Components, Templates, Updates 다섯 개로 나눴습니다. Color 는 Overview, Roles, Palette 로, Iconography 는 Overview, Library 로 나누고 아이콘을 찾아 바로 복사하는 라이브러리를 만들었습니다.</p></article>
-<article class="site-update"><time datetime="2026-11-03">2026. 11. 3</time><h3>컴포넌트 구조 그림</h3><p>컴포넌트마다 부품 이름과 화살표로 생김새를 보여 주는 구조 그림을 넣었습니다. 화살표는 곧게 부품을 가리키고 서로 엇갈리지 않습니다.</p></article>
-<article class="site-update"><time datetime="2026-11-03">2026. 11. 3</time><h3>DS Table 개편과 새 선택지</h3><p>표의 위 선, 머리줄, 행 높이를 다시 정하고 두 줄 칸과 묶음 행을 더했습니다. Text Link small, Segmented 높이 32 와 40, Card subtle 같은 선택지도 늘었습니다.</p></article>
-<article class="site-update"><time datetime="2026-11-02">2026. 11. 2</time><h3>템플릿 67종</h3><p>대시보드, 표, 폼, 커뮤니티, 요금제처럼 자주 만드는 화면을 템플릿으로 더해 67종이 되었습니다. 템플릿마다 Figma 화면이 함께 있습니다.</p></article>
-<article class="site-update"><time datetime="2026-11-01">2026. 11. 1</time><h3>아이콘 93개 추가</h3><p>폴더, 필터, 메일, 설정처럼 화면에 자주 쓰는 Lucide 아이콘 93개를 더했습니다.</p></article>
-<article class="site-update"><time datetime="2026-10-31">2026. 10. 31</time><h3>Figma 와 문서 연결</h3><p>컴포넌트와 Foundations 문서마다 Figma 와 코드로 가는 버튼을 달았습니다. Figma 문서 프레임에서도 사이트의 같은 페이지로 갑니다.</p></article>
-<article class="site-update"><time datetime="2026-10-30">2026. 10. 30</time><h3>Rating 컴포넌트</h3><p>별점을 보여 주고 고르는 Rating 을 CSS 와 Figma 에 함께 만들었습니다.</p></article>
-<article class="site-update"><time datetime="2026-10-29">2026. 10. 29</time><h3>새 컴포넌트 16종</h3><p>Top App Bar, Top Navigation, Search Suggestion, File Attach, Menu Sheet, Side Panel, Carousel, Code Block 같은 컴포넌트를 CSS 와 Figma 에 함께 만들었습니다.</p></article>
+<div class="ds-chiptabs site-release-filter" role="tablist" aria-label="영역">
+  <button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-filter="">전체</button>
+  <button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-filter="DS">DS</button>
+  <button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-filter="템플릿">템플릿</button>
+  <button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-filter="사이트">사이트</button>
 </div>
+<section class="site-group site-release">
+<h2 id="d-2026-11-04"><time datetime="2026-11-04">2026. 11. 4</time><a class="site-anchor" href="#d-2026-11-04" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
+<div class="site-group site-release__group"><p class="site-release__type">새 기능</p><ul class="site-list"><li data-site-item="foundations 에 화면 폭 기준을 모은 breakpoint 페이지를 더했습니다." data-site-cat="사이트"><span class="ds-badge" data-size="medium">사이트</span> Foundations 에 화면 폭 기준을 모은 Breakpoint 페이지를 더했습니다.</li></ul></div>
+<div class="site-group site-release__group"><p class="site-release__type">바뀐 것</p><ul class="site-list"><li data-site-item="토큰 이름을 --ybm-* 에서 --ds-* 로, css 레이어를 ds.* 로, 스크립트를 ds 로 바꿨습니다. 예전 이름은 compat-ybm.css 와 window.ybm 으로 계속 동작합니다." data-site-cat="DS"><span class="ds-badge" data-size="medium">DS</span> 토큰 이름을 --ybm-* 에서 --ds-* 로, CSS 레이어를 ds.* 로, 스크립트를 DS 로 바꿨습니다. 예전 이름은 compat-ybm.css 와 window.YBM 으로 계속 동작합니다.</li><li data-site-item="get started 를 짧은 ai 요청 글 두 개와 직접 시작 두 단계로 줄였습니다. ai 가 지킬 규칙은 llms.txt 에 모았습니다." data-site-cat="사이트"><span class="ds-badge" data-size="medium">사이트</span> Get Started 를 짧은 AI 요청 글 두 개와 직접 시작 두 단계로 줄였습니다. AI 가 지킬 규칙은 llms.txt 에 모았습니다.</li><li data-site-item="글자 위계와 본문 폭을 seed 문서 사이트에 맞췄습니다." data-site-cat="사이트"><span class="ds-badge" data-size="medium">사이트</span> 글자 위계와 본문 폭을 seed 문서 사이트에 맞췄습니다.</li></ul></div>
+</section>
+<section class="site-group site-release">
+<h2 id="d-2026-11-03"><time datetime="2026-11-03">2026. 11. 3</time><a class="site-anchor" href="#d-2026-11-03" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
+<div class="site-group site-release__group"><p class="site-release__type">새 기능</p><ul class="site-list"><li data-site-item="메뉴를 get started, foundations, components, templates, updates 다섯 개로 나눴습니다." data-site-cat="사이트"><span class="ds-badge" data-size="medium">사이트</span> 메뉴를 Get Started, Foundations, Components, Templates, Updates 다섯 개로 나눴습니다.</li><li data-site-item="color 를 overview, roles, palette 로, iconography 를 overview, library 로 나누고 아이콘을 찾아 바로 복사하는 라이브러리를 만들었습니다." data-site-cat="사이트"><span class="ds-badge" data-size="medium">사이트</span> Color 를 Overview, Roles, Palette 로, Iconography 를 Overview, Library 로 나누고 아이콘을 찾아 바로 복사하는 라이브러리를 만들었습니다.</li><li data-site-item="컴포넌트마다 부품 이름과 화살표로 생김새를 보여 주는 구조 그림을 넣었습니다." data-site-cat="사이트"><span class="ds-badge" data-size="medium">사이트</span> 컴포넌트마다 부품 이름과 화살표로 생김새를 보여 주는 구조 그림을 넣었습니다.</li></ul></div>
+<div class="site-group site-release__group"><p class="site-release__type">바뀐 것</p><ul class="site-list"><li data-site-item="table 의 위 선, 머리줄, 행 높이를 다시 정하고 두 줄 칸과 묶음 행을 더했습니다." data-site-cat="DS"><span class="ds-badge" data-size="medium">DS</span> Table 의 위 선, 머리줄, 행 높이를 다시 정하고 두 줄 칸과 묶음 행을 더했습니다.</li><li data-site-item="text link small, segmented 높이 32 와 40, card subtle 선택지를 더했습니다." data-site-cat="DS"><span class="ds-badge" data-size="medium">DS</span> Text Link small, Segmented 높이 32 와 40, Card subtle 선택지를 더했습니다.</li><li data-site-item="컴포넌트 상세를 사용법, 구조, 속성, 동작, 사용 지침, 예시, 규격 순서로 정리했습니다." data-site-cat="사이트"><span class="ds-badge" data-size="medium">사이트</span> 컴포넌트 상세를 사용법, 구조, 속성, 동작, 사용 지침, 예시, 규격 순서로 정리했습니다.</li></ul></div>
+</section>
+<section class="site-group site-release">
+<h2 id="d-2026-11-02"><time datetime="2026-11-02">2026. 11. 2</time><a class="site-anchor" href="#d-2026-11-02" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
+<div class="site-group site-release__group"><p class="site-release__type">새 기능</p><ul class="site-list"><li data-site-item="대시보드, 표, 폼, 커뮤니티, 요금제처럼 자주 만드는 화면을 더해 템플릿이 67종이 되었습니다. 템플릿마다 figma 화면이 함께 있습니다." data-site-cat="템플릿"><span class="ds-badge" data-size="medium">템플릿</span> 대시보드, 표, 폼, 커뮤니티, 요금제처럼 자주 만드는 화면을 더해 템플릿이 67종이 되었습니다. 템플릿마다 Figma 화면이 함께 있습니다.</li></ul></div>
+</section>
+<section class="site-group site-release">
+<h2 id="d-2026-11-01"><time datetime="2026-11-01">2026. 11. 1</time><a class="site-anchor" href="#d-2026-11-01" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
+<div class="site-group site-release__group"><p class="site-release__type">새 기능</p><ul class="site-list"><li data-site-item="폴더, 필터, 메일, 설정처럼 화면에 자주 쓰는 lucide 아이콘 93개를 더했습니다." data-site-cat="DS"><span class="ds-badge" data-size="medium">DS</span> 폴더, 필터, 메일, 설정처럼 화면에 자주 쓰는 Lucide 아이콘 93개를 더했습니다.</li></ul></div>
+</section>
+<section class="site-group site-release">
+<h2 id="d-2026-10-31"><time datetime="2026-10-31">2026. 10. 31</time><a class="site-anchor" href="#d-2026-10-31" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
+<div class="site-group site-release__group"><p class="site-release__type">새 기능</p><ul class="site-list"><li data-site-item="컴포넌트와 foundations 문서마다 figma 와 코드로 가는 버튼을 달았습니다. figma 문서 프레임에서도 사이트의 같은 페이지로 갑니다." data-site-cat="사이트"><span class="ds-badge" data-size="medium">사이트</span> 컴포넌트와 Foundations 문서마다 Figma 와 코드로 가는 버튼을 달았습니다. Figma 문서 프레임에서도 사이트의 같은 페이지로 갑니다.</li></ul></div>
+</section>
+<section class="site-group site-release">
+<h2 id="d-2026-10-30"><time datetime="2026-10-30">2026. 10. 30</time><a class="site-anchor" href="#d-2026-10-30" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
+<div class="site-group site-release__group"><p class="site-release__type">새 컴포넌트</p><ul class="site-list"><li data-site-item="별점을 보여 주고 고르는 rating 을 css 와 figma 에 함께 만들었습니다." data-site-cat="DS"><span class="ds-badge" data-size="medium">DS</span> 별점을 보여 주고 고르는 Rating 을 CSS 와 Figma 에 함께 만들었습니다.</li></ul></div>
+</section>
+<section class="site-group site-release">
+<h2 id="d-2026-10-29"><time datetime="2026-10-29">2026. 10. 29</time><a class="site-anchor" href="#d-2026-10-29" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
+<div class="site-group site-release__group"><p class="site-release__type">새 컴포넌트</p><ul class="site-list"><li data-site-item="top app bar, top navigation, search suggestion, file attach, menu sheet, side panel, carousel, code block 등 16종을 css 와 figma 에 함께 만들었습니다." data-site-cat="DS"><span class="ds-badge" data-size="medium">DS</span> Top App Bar, Top Navigation, Search Suggestion, File Attach, Menu Sheet, Side Panel, Carousel, Code Block 등 16종을 CSS 와 Figma 에 함께 만들었습니다.</li></ul></div>
+</section>
 <p class="site-note">자세한 변경 기록은 <a class="ds-link" href="https://github.com/luvms012-rgb/ybm-ds/commits/main" target="_blank" rel="noopener">GitHub</a>에 있습니다.</p>
 
 <footer class="site-footer">

@@ -9,9 +9,9 @@
 <script>try { var t = localStorage.getItem("ybm-site-theme"); if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.dataset.theme = "dark"; } catch (e) {}</script>
 <link rel="icon" href="../assets/logo-ybmnet.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../dist/ybm-ds.css">
-<link rel="stylesheet" href="../assets/site.css?v=38df44eb">
+<link rel="stylesheet" href="../assets/site.css?v=3c857aad">
 <script src="../../dist/ybm-ds.js" defer></script>
-<script src="../assets/site.js?v=38df44eb" defer></script>
+<script src="../assets/site.js?v=3c857aad" defer></script>
 </head>
 <body class="site">
 <a class="site-skip" href="#main">본문 바로가기</a>
@@ -46,40 +46,29 @@
 <h2 id="intro">소개<a class="site-anchor" href="#intro" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
 <p>모든 문서를 AI가 읽기 쉬운 마크다운으로도 냅니다. 컴포넌트 목록, HTML 구조, 토큰도 파일로 열려 있어 AI가 DS 규칙대로 화면을 만듭니다.</p>
 <h2 id="prompt">요청 예시<a class="site-anchor" href="#prompt" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
-<h3>DS 적용하기</h3>
+<h3>DS 설치하기</h3>
 <figure class="ds-codeblock" data-wrap>
   <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">text</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
-  <pre class="ds-codeblock__code"><code>이 프로젝트에 YBM DS를 적용해 줘.
-1. &lt;head&gt;에 아래 두 줄을 넣어 줘.
-   &lt;link rel=&quot;stylesheet&quot; href=&quot;https://luvms012-rgb.github.io/ybm-ds/dist/ybm-ds.css&quot;&gt;
-   &lt;script src=&quot;https://luvms012-rgb.github.io/ybm-ds/dist/ybm-ds.js&quot; defer&gt;&lt;/script&gt;
-2. 문서는 https://luvms012-rgb.github.io/ybm-ds/site/llms.txt 목차에서 필요한 페이지(.md)를 골라 읽어.
-3. 쓸 수 있는 컴포넌트 목록은 https://luvms012-rgb.github.io/ybm-ds/components.json, 각 컴포넌트의 HTML 구조는 https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/components.css의 컴포넌트별 머리 주석을 따라.
-4. 색, 간격, 글자 크기, 모서리, 그림자는 https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/tokens.css의 --ds-* 토큰만 써.
-5. 서비스 CSS는 DS 다음에 불러오고, 바꾸고 싶은 모양은 컴포넌트의 --ds-* 변수만 덮어써.
-6. 새 ds- 클래스를 만들거나 !important를 쓰지 마.</code></pre>
+  <pre class="ds-codeblock__code"><code>이 프로젝트에 YBM DS를 넣어 줘.
+https://luvms012-rgb.github.io/ybm-ds/site/llms.txt 를 먼저 읽고, 거기 적힌 설치 방법과 규칙을 따라 줘.</code></pre>
 </figure>
 <h3>화면 만들기</h3>
 <p>대괄호 안만 내 상황에 맞게 바꿉니다.</p>
 <figure class="ds-codeblock" data-wrap>
   <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">text</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
-  <pre class="ds-codeblock__code"><code>YBM DS로 [만들 화면, 예: 회원 목록 관리 화면]을 만들어 줘.
-- 부품은 https://luvms012-rgb.github.io/ybm-ds/components.json에 있는 것만 쓰고, 마크업은 https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/components.css 머리 주석 그대로 써.
-- 쓰는 컴포넌트는 https://luvms012-rgb.github.io/ybm-ds/site/llms.txt에서 그 문서(.md)를 읽고 사용 지침을 따라.
-- 비슷한 화면이 llms.txt의 Templates 목록에 있으면 그 HTML을 출발점으로 써.
-- 모바일 먼저 만들고, 768px 이상과 1280px 이상에서 배치를 바꿔 줘.
-- 글자는 한국어. 제목은 Bold에 자간 -0.02em, 항목 제목은 SemiBold, 본문은 Regular로 쓰고, 크기는 --ds-font-size-* 토큰, 본문은 word-break: keep-all.
-- 배치용 CSS에는 --ds-* 토큰만 쓰고 hex 색은 쓰지 마.</code></pre>
+  <pre class="ds-codeblock__code"><code>YBM DS로 [만들 화면, 예: 회원 목록 화면]을 만들어 줘.
+https://luvms012-rgb.github.io/ybm-ds/site/llms.txt 규칙을 따르고, 비슷한 화면이 Templates 목록에 있으면 거기서 시작해 줘.</code></pre>
 </figure>
 <h3>규칙 점검하기</h3>
 <figure class="ds-codeblock" data-wrap>
   <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">text</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
-  <pre class="ds-codeblock__code"><code>이 화면이 YBM DS 규칙을 지키는지 점검하고 고쳐 줘.
-- hex, rgb로 색을 직접 쓴 곳 → --ds-color-* 토큰으로
-- 토큰이 아닌 임의의 간격, 글자 크기 → --ds-space-*, --ds-font-size-* 로
-- https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/components.css에 없는 ds- 클래스, !important
-- DS 부품으로 바꿀 수 있는데 직접 만든 버튼, 입력, 표
-고친 곳은 목록으로 알려 줘.</code></pre>
+  <pre class="ds-codeblock__code"><code>이 화면이 YBM DS 규칙을 지키는지 https://luvms012-rgb.github.io/ybm-ds/site/llms.txt 기준으로 점검하고 고쳐 줘. 고친 곳은 목록으로 알려 줘.</code></pre>
+</figure>
+<h3>서비스 색 입히기</h3>
+<figure class="ds-codeblock" data-wrap>
+  <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">text</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
+  <pre class="ds-codeblock__code"><code>이 서비스의 브랜드 색을 나에게 먼저 물어봐 줘.
+그 색으로 YBM DS 브랜드 색을 맞춰 서비스 CSS에 넣고, 정하지 않으면 기본 색으로 둬. 바꾼 화면을 먼저 보여 줘.</code></pre>
 </figure>
 <h2 id="llms">llms.txt<a class="site-anchor" href="#llms" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
 <div class="ds-table-wrap"><table class="ds-table" data-density="compact">

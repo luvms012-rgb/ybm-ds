@@ -6,6 +6,16 @@
 - JS: https://luvms012-rgb.github.io/ybm-ds/dist/ybm-ds.js
 - 전체 문서 한 파일: https://luvms012-rgb.github.io/ybm-ds/site/llms-full.txt
 
+## 지킬 것
+
+- 설치: <head>에 CSS와 JS 두 줄을 넣는다. 서비스 CSS는 그다음에 불러온다.
+- 컴포넌트: https://luvms012-rgb.github.io/ybm-ds/components.json 에 있는 것만 쓰고, 마크업은 https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/components.css 의 컴포넌트별 머리 주석 그대로 쓴다.
+- 색, 간격, 글자 크기, 모서리, 그림자는 --ds-* 토큰만 쓴다. hex, rgb 를 직접 쓰지 않는다.
+- 모양을 바꿀 때는 컴포넌트 변수(--ds-[컴포넌트]-*)만 덮어쓴다. 새 ds- 클래스나 !important 를 만들지 않는다.
+- 서비스 색: 서비스 CSS의 :root 에서 --ds-color-palette-brand-100 ~ 1000 을 덮어쓴다. 받은 색을 600 단계로 두고, 다크(:root[data-theme="dark"])는 같은 단계를 뒤집어 넣는다.
+- 화면: 모바일 먼저 만들고 768px, 1280px 에서 배치를 바꾼다. 비슷한 화면이 Templates 에 있으면 그 HTML에서 시작한다.
+- 글자: 한국어. 제목 Bold, 항목 제목 SemiBold, 본문 Regular, 본문은 word-break: keep-all.
+
 ## Get Started
 
 - [Get Started](https://luvms012-rgb.github.io/ybm-ds/site/index.md): YBM DS를 처음 쓰는 사람을 위한 안내

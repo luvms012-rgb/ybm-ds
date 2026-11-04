@@ -323,33 +323,30 @@ const write = (o) => written.push(page(o));
 /* ---------------------------------------------------------------- Get Started */
 const CSS_LINK = `<link rel="stylesheet" href="${PUBLIC}/dist/ybm-ds.css">
 <script src="${PUBLIC}/dist/ybm-ds.js" defer></script>`;
+// AI 요청 글 (11-04 사용자 "프롬프트가 너무 디테일"): 레퍼런스 A Quick Start 처럼 한두 줄. 지킬 규칙은 llms.txt 머리(LLMS_RULES)에 둔다
 const prompts = [
-  ['YBM DS 적용하기', '지금 만들고 있는 화면이나 프로젝트에 DS를 연결합니다.',
-    `이 프로젝트에 YBM DS를 적용해 줘.
-1. <head>에 아래 두 줄을 넣어 줘.
-   <link rel="stylesheet" href="${PUBLIC}/dist/ybm-ds.css">
-   <script src="${PUBLIC}/dist/ybm-ds.js" defer></script>
-2. 문서는 ${SITE_URL}llms.txt 목차에서 필요한 페이지(.md)를 골라 읽어.
-3. 쓸 수 있는 컴포넌트 목록은 ${PUBLIC}/components.json, 각 컴포넌트의 HTML 구조는 ${RAW}/dist/components.css의 컴포넌트별 머리 주석을 따라.
-4. 색, 간격, 글자 크기, 모서리, 그림자는 ${RAW}/dist/tokens.css의 --ds-* 토큰만 써.
-5. 서비스 CSS는 DS 다음에 불러오고, 바꾸고 싶은 모양은 컴포넌트의 --ds-* 변수만 덮어써.
-6. 새 ds- 클래스를 만들거나 !important를 쓰지 마.`],
-  ['화면 만들기', '만들고 싶은 화면을 말로 설명하면 DS 부품으로 조립합니다.',
-    `YBM DS로 [만들 화면, 예: 회원 목록 관리 화면]을 만들어 줘.
-- 부품은 ${PUBLIC}/components.json에 있는 것만 쓰고, 마크업은 ${RAW}/dist/components.css 머리 주석 그대로 써.
-- 쓰는 컴포넌트는 ${SITE_URL}llms.txt에서 그 문서(.md)를 읽고 사용 지침을 따라.
-- 비슷한 화면이 llms.txt의 Templates 목록에 있으면 그 HTML을 출발점으로 써.
-- 모바일 먼저 만들고, 768px 이상과 1280px 이상에서 배치를 바꿔 줘.
-- 글자는 한국어. 제목은 Bold에 자간 -0.02em, 항목 제목은 SemiBold, 본문은 Regular로 쓰고, 크기는 --ds-font-size-* 토큰, 본문은 word-break: keep-all.
-- 배치용 CSS에는 --ds-* 토큰만 쓰고 hex 색은 쓰지 마.`],
-  ['규칙 점검하기', '이미 만든 화면이 DS 규칙을 지키는지 확인하고 고칩니다.',
-    `이 화면이 YBM DS 규칙을 지키는지 점검하고 고쳐 줘.
-- hex, rgb로 색을 직접 쓴 곳 → --ds-color-* 토큰으로
-- 토큰이 아닌 임의의 간격, 글자 크기 → --ds-space-*, --ds-font-size-* 로
-- ${RAW}/dist/components.css에 없는 ds- 클래스, !important
-- DS 부품으로 바꿀 수 있는데 직접 만든 버튼, 입력, 표
-고친 곳은 목록으로 알려 줘.`],
+  ['DS 설치하기', '지금 만드는 프로젝트에 DS를 넣습니다.',
+    `이 프로젝트에 YBM DS를 넣어 줘.
+${SITE_URL}llms.txt 를 먼저 읽고, 거기 적힌 설치 방법과 규칙을 따라 줘.`],
+  ['화면 만들기', '만들고 싶은 화면을 말로 설명합니다.',
+    `YBM DS로 [만들 화면, 예: 회원 목록 화면]을 만들어 줘.
+${SITE_URL}llms.txt 규칙을 따르고, 비슷한 화면이 Templates 목록에 있으면 거기서 시작해 줘.`],
+  ['규칙 점검하기', '이미 만든 화면을 점검합니다.',
+    `이 화면이 YBM DS 규칙을 지키는지 ${SITE_URL}llms.txt 기준으로 점검하고 고쳐 줘. 고친 곳은 목록으로 알려 줘.`],
+  ['서비스 색 입히기', '다른 서비스에 쓸 때 그 서비스 색으로 바꿉니다.',
+    `이 서비스의 브랜드 색을 나에게 먼저 물어봐 줘.
+그 색으로 YBM DS 브랜드 색을 맞춰 서비스 CSS에 넣고, 정하지 않으면 기본 색으로 둬. 바꾼 화면을 먼저 보여 줘.`],
 ];
+// llms.txt 머리에 붙는 규칙 (AI 가 요청 글 대신 여기서 읽는다)
+const LLMS_RULES = `## 지킬 것
+
+- 설치: <head>에 CSS와 JS 두 줄을 넣는다. 서비스 CSS는 그다음에 불러온다.
+- 컴포넌트: ${PUBLIC}/components.json 에 있는 것만 쓰고, 마크업은 ${RAW}/dist/components.css 의 컴포넌트별 머리 주석 그대로 쓴다.
+- 색, 간격, 글자 크기, 모서리, 그림자는 --ds-* 토큰만 쓴다. hex, rgb 를 직접 쓰지 않는다.
+- 모양을 바꿀 때는 컴포넌트 변수(--ds-[컴포넌트]-*)만 덮어쓴다. 새 ds- 클래스나 !important 를 만들지 않는다.
+- 서비스 색: 서비스 CSS의 :root 에서 --ds-color-palette-brand-100 ~ 1000 을 덮어쓴다. 받은 색을 600 단계로 두고, 다크(:root[data-theme="dark"])는 같은 단계를 뒤집어 넣는다.
+- 화면: 모바일 먼저 만들고 768px, 1280px 에서 배치를 바꾼다. 비슷한 화면이 Templates 에 있으면 그 HTML에서 시작한다.
+- 글자: 한국어. 제목 Bold, 항목 제목 SemiBold, 본문 Regular, 본문은 word-break: keep-all.`;
 // 반응형 기준점 (Foundations Breakpoint, 11-04 시작하기에서 옮김)
 const bpRows = [['sm', '480px', '큰 휴대폰'], ['md', '768px', '태블릿, PC 부품으로 바뀌는 기준'], ['lg', '1280px', '넓은 PC, 3단 배치'], ['xl', '1440px', '아주 넓은 화면']];
 // 안내 카드 (레퍼런스 B Get Started): 옅은 회색 칸에 제목과 화살표, 아래 한 줄 설명. out 이면 새 창
@@ -363,35 +360,21 @@ write({
 </header>
 
 <h2 id="ai">AI로 시작하기</h2>
-<p>아래 글을 AI 코딩 도구(ChatGPT, Claude, Cursor 등)에 붙여 넣으면 설치부터 규칙까지 알아서 맞춥니다.</p>
-<h3>DS 적용하기</h3>
+<p>아래 글을 AI 코딩 도구(ChatGPT, Claude, Cursor 등)에 붙여 넣으면 됩니다. 지킬 규칙은 AI가 문서에서 읽어 갑니다.</p>
+<h3>${prompts[0][0]}</h3>
 ${codeblock(prompts[0][2], 'text', ' data-wrap')}
-<h3>화면 만들기</h3>
-<p>대괄호 안만 내 상황에 맞게 바꿉니다.</p>
-${codeblock(prompts[1][2], 'text', ' data-wrap')}
-<h3>규칙 점검하기</h3>
-${codeblock(prompts[2][2], 'text', ' data-wrap')}
+<h3>${prompts[3][0]}</h3>
+<p>YBM IT처럼 다른 서비스에 쓸 때 이어서 붙여 넣습니다.</p>
+${codeblock(prompts[3][2], 'text', ' data-wrap')}
+<p>화면 만들기, 규칙 점검 요청은 <a class="ds-link" href="get-started/ai.html#prompt">AI &amp; Tools</a>에 있습니다.</p>
 
-<h2 id="start">바로 써 보기</h2>
-<p><code>&lt;head&gt;</code>에 두 줄을 넣으면 글꼴, 토큰, 아이콘, 컴포넌트가 함께 들어옵니다. 컴포넌트마다 쓰는 법은 <a class="ds-link" href="components/index.html">Components</a>에 있습니다.</p>
+<h2 id="start">직접 시작하기</h2>
+<h3>1. DS 불러오기</h3>
+<p><code>&lt;head&gt;</code>에 두 줄을 넣으면 글꼴, 토큰, 아이콘, 컴포넌트가 함께 들어옵니다. 쓰는 법은 <a class="ds-link" href="components/index.html">Components</a>에 있습니다.</p>
 ${codeblock(CSS_LINK)}
-
-<h2 id="service">다른 서비스에 쓰기</h2>
-<p>YBM IT처럼 다른 서비스에 쓸 때도 아래 글을 AI 코딩 도구에 붙여 넣고 대괄호 안만 바꾸면 됩니다. AI가 그 서비스의 색으로 DS를 맞춥니다.</p>
-${codeblock(`이 프로젝트에 YBM DS를 [서비스 이름, 예: YBM IT] 서비스용으로 적용해 줘.
-1. <head>에 아래 두 줄을 넣고, 그다음에 서비스 CSS [ybm-it.css]를 불러와 줘.
-   <link rel="stylesheet" href="${PUBLIC}/dist/ybm-ds.css">
-   <script src="${PUBLIC}/dist/ybm-ds.js" defer></script>
-2. 브랜드 색 [#12a150]을 600 단계로 두고, 같은 색의 100 ~ 1000 단계를 만들어 서비스 CSS의 :root 에 --ds-color-palette-brand-100 ~ 1000 으로 넣어 줘.
-3. 다크 모드는 같은 단계를 뒤집어(다크 100 = 라이트 1000) :root[data-theme="dark"] 에 넣어 줘.
-4. DS 파일은 고치지 말고, 색과 간격은 --ds-* 토큰만 써.`, 'text', ' data-wrap')}
-<p>직접 할 때는 아래 두 가지만 하면 됩니다.</p>
-<h3>1. 서비스 CSS를 DS 다음에 불러오기</h3>
-<p>DS가 CSS 레이어 안에 있어 뒤에 불러온 서비스 CSS가 <code>!important</code> 없이 이깁니다.</p>
-${codeblock(`<link rel="stylesheet" href="${PUBLIC}/dist/ybm-ds.css">\n<script src="${PUBLIC}/dist/ybm-ds.js" defer></script>\n<link rel="stylesheet" href="ybm-it.css">  <!-- 서비스 CSS는 항상 DS 다음 -->`)}
-<h3>2. 브랜드 색 넣기</h3>
-<p>브랜드 팔레트 10단계만 서비스 색으로 바꾸면 주 버튼, 체크박스, 링크처럼 브랜드 색을 쓰는 곳이 모두 따라 바뀝니다. 자세한 것은 <a class="ds-link" href="{root}foundations/color.html">Color</a>에 있습니다.</p>
-${codeblock(`/* ybm-it.css */\n:root {\n  --ds-color-palette-brand-100: #e6f6ee;  /* 옅은 배경 */\n  --ds-color-palette-brand-600: #12a150;  /* 주 버튼, 링크 */\n  --ds-color-palette-brand-700: #0d7d3e;  /* 눌림 */\n  /* 200 ~ 500, 800 ~ 1000 도 같은 색의 단계로 */\n}\n:root[data-theme="dark"] {\n  /* 다크는 같은 단계를 뒤집어 넣는다 (다크 100 = 라이트 1000) */\n}`, 'css')}
+<h3>2. 서비스 색 입히기</h3>
+<p>서비스 CSS를 DS 다음에 불러오고, 브랜드 팔레트 10단계만 그 서비스 색으로 덮어씁니다. 자세한 것은 <a class="ds-link" href="{root}foundations/color.html">Color</a>에 있습니다.</p>
+${codeblock(`<link rel="stylesheet" href="ybm-it.css">  <!-- DS 두 줄 다음 -->\n\n/* ybm-it.css */\n:root {\n  --ds-color-palette-brand-100: #e6f6ee;  /* 옅은 배경 */\n  --ds-color-palette-brand-600: #12a150;  /* 주 버튼, 링크 */\n  --ds-color-palette-brand-700: #0d7d3e;  /* 눌림 */\n  /* 200 ~ 500, 800 ~ 1000 도 같은 색의 단계로 */\n}`)}
 
 <h2 id="theme">다크 모드</h2>
 <p><code>html</code>에 속성 하나를 붙이면 모든 색이 어두운 화면용으로 바뀝니다. 색을 토큰으로만 썼다면 따로 고칠 것이 없습니다.</p>
@@ -956,13 +939,15 @@ write({
 <h2 id="intro">소개</h2>
 <p>모든 문서를 AI가 읽기 쉬운 마크다운으로도 냅니다. 컴포넌트 목록, HTML 구조, 토큰도 파일로 열려 있어 AI가 DS 규칙대로 화면을 만듭니다.</p>
 <h2 id="prompt">요청 예시</h2>
-<h3>DS 적용하기</h3>
+<h3>DS 설치하기</h3>
 ${codeblock(prompts[0][2], 'text', ' data-wrap')}
 <h3>화면 만들기</h3>
 <p>대괄호 안만 내 상황에 맞게 바꿉니다.</p>
 ${codeblock(prompts[1][2], 'text', ' data-wrap')}
 <h3>규칙 점검하기</h3>
 ${codeblock(prompts[2][2], 'text', ' data-wrap')}
+<h3>서비스 색 입히기</h3>
+${codeblock(prompts[3][2], 'text', ' data-wrap')}
 <h2 id="llms">llms.txt</h2>
 ${table(['파일', '내용'], [
   [`<a class="ds-link" href="../llms.txt" target="_blank" rel="noopener">llms.txt</a>`, '전체 목차입니다. AI가 필요한 문서를 골라 읽습니다.'],
@@ -987,16 +972,22 @@ ${table(['파일', '내용'], [
 });
 
 /* ---------------------------------------------------------------- Updates */
-// 레퍼런스 B Updates: 제목과 설명, 소식 카드(날짜, 제목, 설명). 소식은 site/src/updates.json 맨 위에 추가
-const UPDATES = readJson('site/src/updates.json').updates;
+// 레퍼런스 A Changelog 구성: 제목과 설명, 영역 거르기(전체, DS, 템플릿, 사이트), 날짜마다 종류(새 컴포넌트, 새 기능, 바뀐 것, 고친 것)별 목록
+// 소식은 site/src/updates.json releases 맨 위에 날짜를 더한다. 거르기는 site.js filter() (data-site-filter / data-site-cat / .site-group)
+const RELEASES = readJson('site/src/updates.json').releases;
+const UPDATE_AREAS = ['DS', '템플릿', '사이트'];
 const fmtDate = (d) => { const [y, m, dd] = d.split('-').map(Number); return `${y}. ${m}. ${dd}`; };
 write({
   file: 'updates.html', section: 'updates', title: 'Updates', desc: 'YBM DS 업데이트 소식', layout: 'page',
   body: `<header><h1 class="site-h1">Updates</h1><p class="site-lead">YBM DS 업데이트 소식과 변경 기록입니다.</p></header>
-<h2 id="release-notes">Release Notes</h2>
-<div class="site-updates">
-${UPDATES.map((u) => `<article class="site-update"><time datetime="${u.date}">${fmtDate(u.date)}</time><h3>${esc(u.title)}</h3><p>${esc(u.desc)}</p></article>`).join('\n')}
+<div class="ds-chiptabs site-release-filter" role="tablist" aria-label="영역">
+  <button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-filter="">전체</button>
+  ${UPDATE_AREAS.map((a) => `<button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-filter="${esc(a)}">${esc(a)}</button>`).join('\n  ')}
 </div>
+${RELEASES.map((r) => `<section class="site-group site-release">
+<h2 id="d-${r.date}"><time datetime="${r.date}">${fmtDate(r.date)}</time></h2>
+${r.sections.map((s) => `<div class="site-group site-release__group"><p class="site-release__type">${esc(s.type)}</p><ul class="site-list">${s.items.map(([a, t]) => `<li data-site-item="${esc(t.toLowerCase())}" data-site-cat="${esc(a)}"><span class="ds-badge" data-size="medium">${esc(a)}</span> ${inline(t)}</li>`).join('')}</ul></div>`).join('\n')}
+</section>`).join('\n')}
 <p class="site-note">자세한 변경 기록은 <a class="ds-link" href="${GITHUB}/commits/main" target="_blank" rel="noopener">GitHub</a>에 있습니다.</p>`,
 });
 
@@ -1058,7 +1049,9 @@ figmaDocs();
 
 - CSS: ${PUBLIC}/dist/ybm-ds.css
 - JS: ${PUBLIC}/dist/ybm-ds.js
-- 전체 문서 한 파일: ${SITE_URL}llms-full.txt`;
+- 전체 문서 한 파일: ${SITE_URL}llms-full.txt
+
+${LLMS_RULES}`;
   const tplList = `## Templates
 
 템플릿 HTML 원본입니다. 안의 CSS 주소(../../../dist/)는 위 CSS, JS 주소로 바꿔 씁니다.
