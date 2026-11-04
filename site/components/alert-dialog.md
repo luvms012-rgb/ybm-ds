@@ -80,12 +80,12 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ```html
 <div style="width: 100%; max-width: 375px">
-  <header class="ds-appbar">
-    <div class="ds-appbar__left">
+  <header class="ds-appbar" data-platform="android">
+    <div class="ds-appbar__left"></div>
+    <div class="ds-appbar__main"><h1 class="ds-appbar__title">후기 쓰기</h1></div>
+    <div class="ds-appbar__right">
       <button type="button" class="ds-appbar__button" aria-label="닫기" data-ds-open="alert-dialog-ex2"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button>
     </div>
-    <div class="ds-appbar__main"><h1 class="ds-appbar__title">후기 쓰기</h1></div>
-    <div class="ds-appbar__right"></div>
   </header>
   <textarea class="ds-textarea" rows="4" aria-label="후기">배송이 빠르고 포장도 꼼꼼했어요.</textarea>
 </div>

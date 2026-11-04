@@ -115,8 +115,8 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
     </div>
   </div>
   <div class="ds-dialog__footer">
-    <button class="ds-btn" data-variant="brandSolid" data-size="large" data-ds-close>저장</button>
     <button class="ds-btn" data-variant="neutralWeak" data-size="large" data-ds-close>취소</button>
+    <button class="ds-btn" data-variant="brandSolid" data-size="large" data-ds-close>저장</button>
   </div>
 </dialog>
 ```
@@ -138,6 +138,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 ```
 Figma: 폭 480(large 800) / shape/2xl / bg/layer-floating / 그림자 없음(2026-10-01 결정)
   header 24/20/16/20 / gap x4 / title t07 Bold(Alert Dialog 와 같게, 2026-11-02) fg/neutral / desc t05 fg/neutral-muted
-  body 12/20/16/20 / min-h64 / footer 24/20 / Action Button large 폭 채움
+  body 12/20/16/20(아래쪽 버튼이 없으면 아래 24) / min-h64 / footer 24/20 / Action Button large
+  버튼 둘은 가로 2등분(취소 왼쪽, 주 동작 오른쪽). 글이 길어 한 줄에 안 들어가면 footer 에 data-action="stacked" 로 세로
   닫기 40×40 / 위 18 / 오른쪽 10 / Lucide/x 24 fg/neutral
 ```

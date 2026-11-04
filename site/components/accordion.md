@@ -122,8 +122,7 @@ PC 화면에서는 large 크기로 제목과 설명을 크게 보여 줍니다. 
   <details class="ds-accordion" open>
     <summary class="ds-accordion__trigger">
       <span class="ds-accordion__body">
-        <span class="ds-accordion__title">개인 정보 수집과 이용</span>
-        <span class="ds-accordion__desc">필수</span>
+        <span class="ds-accordion__title">개인 정보 수집과 이용 (필수)</span>
       </span>
     </summary>
     <div class="ds-accordion__content">
@@ -134,8 +133,7 @@ PC 화면에서는 large 크기로 제목과 설명을 크게 보여 줍니다. 
   <details class="ds-accordion">
     <summary class="ds-accordion__trigger">
       <span class="ds-accordion__body">
-        <span class="ds-accordion__title">개인 정보 제3자 제공</span>
-        <span class="ds-accordion__desc">필수</span>
+        <span class="ds-accordion__title">개인 정보 제3자 제공 (필수)</span>
       </span>
     </summary>
     <div class="ds-accordion__content">
@@ -146,8 +144,7 @@ PC 화면에서는 large 크기로 제목과 설명을 크게 보여 줍니다. 
   <details class="ds-accordion">
     <summary class="ds-accordion__trigger">
       <span class="ds-accordion__body">
-        <span class="ds-accordion__title">할인과 이벤트 소식 받기</span>
-        <span class="ds-accordion__desc">선택</span>
+        <span class="ds-accordion__title">할인과 이벤트 소식 받기 (선택)</span>
       </span>
     </summary>
     <div class="ds-accordion__content">

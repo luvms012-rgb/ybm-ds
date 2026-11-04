@@ -20,7 +20,7 @@
   --site-toc-gap: 32px;        /* 글 칸과 목차 사이 */
   --site-col: 800px;           /* 글 칸 최대 폭 (안쪽 24 를 빼면 글 752) */
   /* 상자 테두리와 모서리 (레퍼런스 B) */
-  --site-box-line: var(--ds-color-stroke-neutral-muted);
+  --site-box-line: var(--ds-color-stroke-neutral-weak);  /* 2026-11-04: neutral-muted 는 거의 안 보여 한 단계 진하게 */
   --site-box-radius: var(--ds-shape-lg);   /* 예시 상자, 코드 상자 12 / 표 8 */
   --site-code-radius: var(--ds-shape-lg);
   --site-mono: ui-monospace, "Roboto Mono", SFMono-Regular, Menlo, Consolas, monospace;

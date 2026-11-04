@@ -143,7 +143,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | `--ds-checkbox-icon` | `12px` |
 | `--ds-checkbox-checked-bg` | `var(--ds-color-bg-brand-solid)` |
 | `--ds-checkbox-checked-fg` | `var(--ds-color-fg-on-brand-solid)` |
-| `--ds-checkbox-line` | `var(--ds-color-stroke-neutral-weak)` |
+| `--ds-checkbox-line` | `var(--ds-color-palette-gray-600)` |
 | `--ds-checkbox-mark` | `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.75' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E")` |
 
 ### 크기와 여백
@@ -152,7 +152,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 size: medium(기본 20) / large(24)   variant: square(기본) / ghost   tone: brand(기본) / neutral
 indeterminate: input.indeterminate = true (스크립트) → 가로선
 Figma: 행 min-h 32/36 / 위 6 / gap x2 / 박스 shape/xs / label t04/t05 fg/neutral
-  unchecked bg/layer-default + 1px stroke/neutral-weak / checked neutral bg/neutral-solid + 체크 fg/on-neutral-solid
+  unchecked bg/layer-default + 1px palette/gray-600(2026-11-04, Radio 같음) / checked neutral bg/neutral-solid + 체크 fg/on-neutral-solid
   brand bg/brand-solid + 체크 fg/on-brand-solid / disabled bg/disabled + stroke/neutral-muted
   disabledChecked bg/disabled + 체크 fg/disabled / ghost 박스 없이 체크 14 (미선택 fg/placeholder)
 체크와 가로선은 아이콘 세트가 아닌 전용 그림(Figma "Checkbox Mark"): 24 기준 선 2.75 고정 비율 → 12px 1.375 / 14px 1.6

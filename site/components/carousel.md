@@ -113,28 +113,25 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
     <div class="ds-carousel__item" style="width: 100%">
       <div class="ds-imageframe" data-ratio="4:3" data-radius="lg" style="width: 100%">
         <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=840&q=70" alt="산으로 둘러싸인 호수">
-        <div class="ds-imageframe__floater" data-position="bottom-end"><span class="ds-imageframe__indicator">1/4</span></div>
       </div>
     </div>
     <div class="ds-carousel__item" style="width: 100%">
       <div class="ds-imageframe" data-ratio="4:3" data-radius="lg" style="width: 100%">
         <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=840&q=70" alt="구름 위로 솟은 산">
-        <div class="ds-imageframe__floater" data-position="bottom-end"><span class="ds-imageframe__indicator">2/4</span></div>
       </div>
     </div>
     <div class="ds-carousel__item" style="width: 100%">
       <div class="ds-imageframe" data-ratio="4:3" data-radius="lg" style="width: 100%">
         <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=840&q=70" alt="안개 낀 산자락">
-        <div class="ds-imageframe__floater" data-position="bottom-end"><span class="ds-imageframe__indicator">3/4</span></div>
       </div>
     </div>
     <div class="ds-carousel__item" style="width: 100%">
       <div class="ds-imageframe" data-ratio="4:3" data-radius="lg" style="width: 100%">
         <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=840&q=70" alt="햇살이 드는 숲">
-        <div class="ds-imageframe__floater" data-position="bottom-end"><span class="ds-imageframe__indicator">4/4</span></div>
       </div>
     </div>
   </div>
+  <span class="ds-carousel__count" aria-hidden="true">1/4</span>
   <button type="button" class="ds-carousel__button" data-direction="previous" aria-label="이전"><i class="ds-icon ds-icon--chevron-left ds-icon--sm" aria-hidden="true"></i></button>
   <button type="button" class="ds-carousel__button" data-direction="next" aria-label="다음"><i class="ds-icon ds-icon--chevron-right ds-icon--sm" aria-hidden="true"></i></button>
 </div>
@@ -199,6 +196,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ```
 항목은 넘길 때 시작 위치에 맞춰 멈춘다. 이미지 넘기기 배너는 Image Frame 을 항목으로 넣어 만든다.
+번호(1/4)는 항목 안이 아니라 캐러셀 바로 안에 [<span class="ds-carousel__count" aria-hidden="true">1/4</span>] 로 둔다. 넘겨도 제자리에 있고 숫자는 ybm-ds.js 가 바꾼다.
 ybm-ds.js 가 처음/끝에 닿으면 data-at-start / data-at-end 를 붙여 그쪽 흐림과 버튼을 감추고, 버튼을 누르면 한 화면씩 넘긴다.
 Figma: 항목 사이 x2 / 양 끝 흐림 x1 / Carousel Button 32 pill, bg/layer-floating, elevation overlay, 아이콘 16, 가장자리에서 x2
 ```

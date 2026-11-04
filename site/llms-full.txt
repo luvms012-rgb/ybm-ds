@@ -1322,10 +1322,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ```html
 <div class="u-col u-gap-4" style="width: 100%; max-width: 420px">
-  <div class="u-col u-gap-1">
-    <strong class="ds-t06 ds-fw-bold">영어 회화 첫걸음</strong>
-    <span class="ds-t04 ds-fg-subtle">강의 24개, 12시간</span>
-  </div>
+  <strong class="ds-t06 ds-fw-bold">영어 회화 첫걸음</strong>
   <div class="u-flex u-gap-2">
     <button class="ds-btn" data-variant="neutralOutline" data-size="large" data-layout="iconOnly" aria-label="찜하기"><i class="ds-icon ds-icon--heart" aria-hidden="true"></i></button>
     <button class="ds-btn" data-variant="neutralOutline" data-size="large" data-layout="iconOnly" aria-label="공유하기"><i class="ds-icon ds-icon--share" aria-hidden="true"></i></button>
@@ -2581,7 +2578,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | `--ds-checkbox-icon` | `12px` |
 | `--ds-checkbox-checked-bg` | `var(--ds-color-bg-brand-solid)` |
 | `--ds-checkbox-checked-fg` | `var(--ds-color-fg-on-brand-solid)` |
-| `--ds-checkbox-line` | `var(--ds-color-stroke-neutral-weak)` |
+| `--ds-checkbox-line` | `var(--ds-color-palette-gray-600)` |
 | `--ds-checkbox-mark` | `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.75' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E")` |
 
 ### 크기와 여백
@@ -2590,7 +2587,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 size: medium(기본 20) / large(24)   variant: square(기본) / ghost   tone: brand(기본) / neutral
 indeterminate: input.indeterminate = true (스크립트) → 가로선
 Figma: 행 min-h 32/36 / 위 6 / gap x2 / 박스 shape/xs / label t04/t05 fg/neutral
-  unchecked bg/layer-default + 1px stroke/neutral-weak / checked neutral bg/neutral-solid + 체크 fg/on-neutral-solid
+  unchecked bg/layer-default + 1px palette/gray-600(2026-11-04, Radio 같음) / checked neutral bg/neutral-solid + 체크 fg/on-neutral-solid
   brand bg/brand-solid + 체크 fg/on-brand-solid / disabled bg/disabled + stroke/neutral-muted
   disabledChecked bg/disabled + 체크 fg/disabled / ghost 박스 없이 체크 14 (미선택 fg/placeholder)
 체크와 가로선은 아이콘 세트가 아닌 전용 그림(Figma "Checkbox Mark"): 24 기준 선 2.75 고정 비율 → 12px 1.375 / 14px 1.6
@@ -4440,8 +4437,8 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
     </div>
   </div>
   <div class="ds-dialog__footer">
-    <button class="ds-btn" data-variant="brandSolid" data-size="large" data-ds-close>저장</button>
     <button class="ds-btn" data-variant="neutralWeak" data-size="large" data-ds-close>취소</button>
+    <button class="ds-btn" data-variant="brandSolid" data-size="large" data-ds-close>저장</button>
   </div>
 </dialog>
 ```
@@ -4463,7 +4460,8 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 ```
 Figma: 폭 480(large 800) / shape/2xl / bg/layer-floating / 그림자 없음(2026-10-01 결정)
   header 24/20/16/20 / gap x4 / title t07 Bold(Alert Dialog 와 같게, 2026-11-02) fg/neutral / desc t05 fg/neutral-muted
-  body 12/20/16/20 / min-h64 / footer 24/20 / Action Button large 폭 채움
+  body 12/20/16/20(아래쪽 버튼이 없으면 아래 24) / min-h64 / footer 24/20 / Action Button large
+  버튼 둘은 가로 2등분(취소 왼쪽, 주 동작 오른쪽). 글이 길어 한 줄에 안 들어가면 footer 에 data-action="stacked" 로 세로
   닫기 40×40 / 위 18 / 오른쪽 10 / Lucide/x 24 fg/neutral
 ```
 
@@ -4552,12 +4550,12 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ```html
 <div style="width: 100%; max-width: 375px">
-  <header class="ds-appbar">
-    <div class="ds-appbar__left">
+  <header class="ds-appbar" data-platform="android">
+    <div class="ds-appbar__left"></div>
+    <div class="ds-appbar__main"><h1 class="ds-appbar__title">후기 쓰기</h1></div>
+    <div class="ds-appbar__right">
       <button type="button" class="ds-appbar__button" aria-label="닫기" data-ds-open="alert-dialog-ex2"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button>
     </div>
-    <div class="ds-appbar__main"><h1 class="ds-appbar__title">후기 쓰기</h1></div>
-    <div class="ds-appbar__right"></div>
   </header>
   <textarea class="ds-textarea" rows="4" aria-label="후기">배송이 빠르고 포장도 꼼꼼했어요.</textarea>
 </div>
@@ -4866,8 +4864,7 @@ PC 화면에서는 large 크기로 제목과 설명을 크게 보여 줍니다. 
   <details class="ds-accordion" open>
     <summary class="ds-accordion__trigger">
       <span class="ds-accordion__body">
-        <span class="ds-accordion__title">개인 정보 수집과 이용</span>
-        <span class="ds-accordion__desc">필수</span>
+        <span class="ds-accordion__title">개인 정보 수집과 이용 (필수)</span>
       </span>
     </summary>
     <div class="ds-accordion__content">
@@ -4878,8 +4875,7 @@ PC 화면에서는 large 크기로 제목과 설명을 크게 보여 줍니다. 
   <details class="ds-accordion">
     <summary class="ds-accordion__trigger">
       <span class="ds-accordion__body">
-        <span class="ds-accordion__title">개인 정보 제3자 제공</span>
-        <span class="ds-accordion__desc">필수</span>
+        <span class="ds-accordion__title">개인 정보 제3자 제공 (필수)</span>
       </span>
     </summary>
     <div class="ds-accordion__content">
@@ -4890,8 +4886,7 @@ PC 화면에서는 large 크기로 제목과 설명을 크게 보여 줍니다. 
   <details class="ds-accordion">
     <summary class="ds-accordion__trigger">
       <span class="ds-accordion__body">
-        <span class="ds-accordion__title">할인과 이벤트 소식 받기</span>
-        <span class="ds-accordion__desc">선택</span>
+        <span class="ds-accordion__title">할인과 이벤트 소식 받기 (선택)</span>
       </span>
     </summary>
     <div class="ds-accordion__content">
@@ -6645,8 +6640,8 @@ variant: plain(기본) / inset(카드 안처럼 둥근 묶음)   size: medium(�
 Figma item medium: min-h56 / py x3 / px x4 / gap x3 / title t05 fg/neutral / desc t03 fg/neutral-subtle
             small : min-h48 / py x2_5 / title t04 / desc t02
   prefix 24(아이콘 fg/neutral-subtle, Avatar 36 가능) / suffix t04 fg/neutral-subtle / chevron 20 fg/neutral-subtle
-  pressed bg/transparent-pressed / disabled 글자 fg/disabled / divider 1px stroke/neutral-subtle(본문 시작점부터)
-  inset: bg/layer-default / 1px stroke/neutral-weak / shape/xl / 바깥 여백 없음
+  pressed bg/transparent-pressed / disabled 글자 fg/disabled / divider 1px stroke/neutral-weak(본문 시작점부터, 2026-11-04)
+  inset: bg/layer-default / 1px stroke/neutral(2026-11-04) / shape/xl / 바깥 여백 없음
 상호작용 요소(링크/스위치 등)는 한 줄에 4개 미만. 행 전체가 링크이면 안에 다른 버튼을 넣지 않는다.
 ```
 
@@ -7965,19 +7960,19 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ### 작성 화면은 닫기 버튼과 부제목으로
 
-전체 화면으로 여는 작성 화면은 왼쪽에 닫기 버튼을 둡니다. 부제목에는 지금 단계처럼 제목을 돕는 짧은 정보만 넣습니다.
+전체 화면으로 여는 작성 화면은 제목을 왼쪽 끝에, 닫기 버튼을 오른쪽 끝에 둡니다. 부제목에는 지금 단계처럼 제목을 돕는 짧은 정보만 넣습니다.
 
 ```html
 <div style="width: 100%; max-width: 375px">
-  <header class="ds-appbar">
-    <div class="ds-appbar__left">
-      <button type="button" class="ds-appbar__button" aria-label="닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button>
-    </div>
+  <header class="ds-appbar" data-platform="android">
+    <div class="ds-appbar__left"></div>
     <div class="ds-appbar__main">
       <h1 class="ds-appbar__title">수강 후기 쓰기</h1>
       <p class="ds-appbar__subtitle">2 / 3</p>
     </div>
-    <div class="ds-appbar__right"></div>
+    <div class="ds-appbar__right">
+      <button type="button" class="ds-appbar__button" aria-label="닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button>
+    </div>
   </header>
   <ul class="ds-list" data-divider aria-label="좋았던 점">
     <li>
@@ -9873,28 +9868,25 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
     <div class="ds-carousel__item" style="width: 100%">
       <div class="ds-imageframe" data-ratio="4:3" data-radius="lg" style="width: 100%">
         <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=840&q=70" alt="산으로 둘러싸인 호수">
-        <div class="ds-imageframe__floater" data-position="bottom-end"><span class="ds-imageframe__indicator">1/4</span></div>
       </div>
     </div>
     <div class="ds-carousel__item" style="width: 100%">
       <div class="ds-imageframe" data-ratio="4:3" data-radius="lg" style="width: 100%">
         <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=840&q=70" alt="구름 위로 솟은 산">
-        <div class="ds-imageframe__floater" data-position="bottom-end"><span class="ds-imageframe__indicator">2/4</span></div>
       </div>
     </div>
     <div class="ds-carousel__item" style="width: 100%">
       <div class="ds-imageframe" data-ratio="4:3" data-radius="lg" style="width: 100%">
         <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=840&q=70" alt="안개 낀 산자락">
-        <div class="ds-imageframe__floater" data-position="bottom-end"><span class="ds-imageframe__indicator">3/4</span></div>
       </div>
     </div>
     <div class="ds-carousel__item" style="width: 100%">
       <div class="ds-imageframe" data-ratio="4:3" data-radius="lg" style="width: 100%">
         <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=840&q=70" alt="햇살이 드는 숲">
-        <div class="ds-imageframe__floater" data-position="bottom-end"><span class="ds-imageframe__indicator">4/4</span></div>
       </div>
     </div>
   </div>
+  <span class="ds-carousel__count" aria-hidden="true">1/4</span>
   <button type="button" class="ds-carousel__button" data-direction="previous" aria-label="이전"><i class="ds-icon ds-icon--chevron-left ds-icon--sm" aria-hidden="true"></i></button>
   <button type="button" class="ds-carousel__button" data-direction="next" aria-label="다음"><i class="ds-icon ds-icon--chevron-right ds-icon--sm" aria-hidden="true"></i></button>
 </div>
@@ -9959,6 +9951,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ```
 항목은 넘길 때 시작 위치에 맞춰 멈춘다. 이미지 넘기기 배너는 Image Frame 을 항목으로 넣어 만든다.
+번호(1/4)는 항목 안이 아니라 캐러셀 바로 안에 [<span class="ds-carousel__count" aria-hidden="true">1/4</span>] 로 둔다. 넘겨도 제자리에 있고 숫자는 ybm-ds.js 가 바꾼다.
 ybm-ds.js 가 처음/끝에 닿으면 data-at-start / data-at-end 를 붙여 그쪽 흐림과 버튼을 감추고, 버튼을 누르면 한 화면씩 넘긴다.
 Figma: 항목 사이 x2 / 양 끝 흐림 x1 / Carousel Button 32 pill, bg/layer-floating, elevation overlay, 아이콘 16, 가장자리에서 x2
 ```

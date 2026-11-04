@@ -126,7 +126,7 @@ const dialogWizard = () => {
   .tp-modal .ds-dialog__body { display: flex; flex-direction: column; gap: var(--ds-space-x5); overflow: auto; }
   .tp-dlg-steps { padding: 0 var(--ds-space-x5) var(--ds-space-x2); }
   .tp-modal .ds-dialog__footer { flex-direction: row; justify-content: space-between; box-shadow: inset 0 1px 0 var(--ds-color-stroke-neutral-muted); padding-block: var(--ds-space-x4); }
-  .tp-modal .ds-dialog__footer > .ds-btn { width: auto; }
+  .tp-modal .ds-dialog__footer > .ds-btn { flex: none; width: auto; }
 `;
   const secs = [['핵심 요약', '주요 숫자와 지난주 대비 변화', 1], ['파이프라인 단계', '단계별 건수와 금액', 1], ['새로 생긴 기회', '이번 주 새로 들어온 건', 0], ['잃은 기회', '사유와 금액', 0], ['담당자별 순위', '담당자별 성과', 1]];
   const body = `<div class="tp-app">

@@ -97,19 +97,19 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ### 작성 화면은 닫기 버튼과 부제목으로
 
-전체 화면으로 여는 작성 화면은 왼쪽에 닫기 버튼을 둡니다. 부제목에는 지금 단계처럼 제목을 돕는 짧은 정보만 넣습니다.
+전체 화면으로 여는 작성 화면은 제목을 왼쪽 끝에, 닫기 버튼을 오른쪽 끝에 둡니다. 부제목에는 지금 단계처럼 제목을 돕는 짧은 정보만 넣습니다.
 
 ```html
 <div style="width: 100%; max-width: 375px">
-  <header class="ds-appbar">
-    <div class="ds-appbar__left">
-      <button type="button" class="ds-appbar__button" aria-label="닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button>
-    </div>
+  <header class="ds-appbar" data-platform="android">
+    <div class="ds-appbar__left"></div>
     <div class="ds-appbar__main">
       <h1 class="ds-appbar__title">수강 후기 쓰기</h1>
       <p class="ds-appbar__subtitle">2 / 3</p>
     </div>
-    <div class="ds-appbar__right"></div>
+    <div class="ds-appbar__right">
+      <button type="button" class="ds-appbar__button" aria-label="닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button>
+    </div>
   </header>
   <ul class="ds-list" data-divider aria-label="좋았던 점">
     <li>

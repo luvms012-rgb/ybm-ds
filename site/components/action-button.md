@@ -57,10 +57,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ```html
 <div class="u-col u-gap-4" style="width: 100%; max-width: 420px">
-  <div class="u-col u-gap-1">
-    <strong class="ds-t06 ds-fw-bold">영어 회화 첫걸음</strong>
-    <span class="ds-t04 ds-fg-subtle">강의 24개, 12시간</span>
-  </div>
+  <strong class="ds-t06 ds-fw-bold">영어 회화 첫걸음</strong>
   <div class="u-flex u-gap-2">
     <button class="ds-btn" data-variant="neutralOutline" data-size="large" data-layout="iconOnly" aria-label="찜하기"><i class="ds-icon ds-icon--heart" aria-hidden="true"></i></button>
     <button class="ds-btn" data-variant="neutralOutline" data-size="large" data-layout="iconOnly" aria-label="공유하기"><i class="ds-icon ds-icon--share" aria-hidden="true"></i></button>

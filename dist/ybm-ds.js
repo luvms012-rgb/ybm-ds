@@ -179,6 +179,13 @@
     var max = sc.scrollWidth - sc.clientWidth;
     car.toggleAttribute("data-at-start", sc.scrollLeft <= 1);
     car.toggleAttribute("data-at-end", sc.scrollLeft >= max - 1);
+    var count = car.querySelector(".ds-carousel__count");
+    var items = sc.querySelectorAll(".ds-carousel__item");
+    if (count && items.length) {
+      var w = items[0].offsetWidth + (parseFloat(getComputedStyle(sc).columnGap) || 0);
+      var idx = sc.scrollLeft >= max - 1 ? items.length - 1 : Math.round(sc.scrollLeft / (w || 1));
+      count.textContent = Math.min(items.length, idx + 1) + "/" + items.length;
+    }
   }
   document.addEventListener("scroll", function (e) {
     var el = e.target;
