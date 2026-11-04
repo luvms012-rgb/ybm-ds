@@ -1,0 +1,936 @@
+{
+  "$note": "yds 에서 바로 쓸 수 있는 아이콘입니다. <i class=\"ds-icon ds-icon--이름\" aria-hidden=\"true\"></i> 로 쓰고, 여기에 없는 이름은 쓰지 않습니다. 채움 모양은 이름 끝이 -solid 입니다.",
+  "count": 155,
+  "icons": [
+    {
+      "name": "archive",
+      "class": "ds-icon--archive",
+      "solid": false,
+      "use": "보관"
+    },
+    {
+      "name": "arrow-down",
+      "class": "ds-icon--arrow-down",
+      "solid": false,
+      "use": "아래로"
+    },
+    {
+      "name": "arrow-left",
+      "class": "ds-icon--arrow-left",
+      "solid": false,
+      "use": "왼쪽, 이전"
+    },
+    {
+      "name": "arrow-right",
+      "class": "ds-icon--arrow-right",
+      "solid": false,
+      "use": "다음 단계, 바로 가기"
+    },
+    {
+      "name": "arrow-up",
+      "class": "ds-icon--arrow-up",
+      "solid": false,
+      "use": "맨 위로, 보내기"
+    },
+    {
+      "name": "arrow-up-down",
+      "class": "ds-icon--arrow-up-down",
+      "solid": false,
+      "use": "정렬"
+    },
+    {
+      "name": "at-sign",
+      "class": "ds-icon--at-sign",
+      "solid": false,
+      "use": "아이디, 멘션"
+    },
+    {
+      "name": "bell",
+      "class": "ds-icon--bell",
+      "solid": false,
+      "use": "알림"
+    },
+    {
+      "name": "book-open",
+      "class": "ds-icon--book-open",
+      "solid": false,
+      "use": "문서, 배우기"
+    },
+    {
+      "name": "bookmark",
+      "class": "ds-icon--bookmark",
+      "solid": false,
+      "use": "저장, 북마크"
+    },
+    {
+      "name": "bookmark-solid",
+      "class": "ds-icon--bookmark-solid",
+      "solid": true,
+      "use": "저장, 북마크 (선택됨)"
+    },
+    {
+      "name": "bug",
+      "class": "ds-icon--bug",
+      "solid": false,
+      "use": "버그, 문제"
+    },
+    {
+      "name": "building",
+      "class": "ds-icon--building",
+      "solid": false,
+      "use": "회사, 기업"
+    },
+    {
+      "name": "calendar",
+      "class": "ds-icon--calendar",
+      "solid": false,
+      "use": "날짜 고르기"
+    },
+    {
+      "name": "calendar-days",
+      "class": "ds-icon--calendar-days",
+      "solid": false,
+      "use": "달력 보기"
+    },
+    {
+      "name": "chart-column",
+      "class": "ds-icon--chart-column",
+      "solid": false,
+      "use": "막대 그래프"
+    },
+    {
+      "name": "chart-line",
+      "class": "ds-icon--chart-line",
+      "solid": false,
+      "use": "선 그래프"
+    },
+    {
+      "name": "chart-pie",
+      "class": "ds-icon--chart-pie",
+      "solid": false,
+      "use": "원 그래프"
+    },
+    {
+      "name": "check",
+      "class": "ds-icon--check",
+      "solid": false,
+      "use": "선택됨, 확인"
+    },
+    {
+      "name": "chevron-down",
+      "class": "ds-icon--chevron-down",
+      "solid": false,
+      "use": "펼치기, 드롭다운 열기"
+    },
+    {
+      "name": "chevron-left",
+      "class": "ds-icon--chevron-left",
+      "solid": false,
+      "use": "뒤로, 이전"
+    },
+    {
+      "name": "chevron-right",
+      "class": "ds-icon--chevron-right",
+      "solid": false,
+      "use": "다음, 목록 행의 이동 표시"
+    },
+    {
+      "name": "chevron-up",
+      "class": "ds-icon--chevron-up",
+      "solid": false,
+      "use": "접기"
+    },
+    {
+      "name": "chevrons-left",
+      "class": "ds-icon--chevrons-left",
+      "solid": false,
+      "use": "맨 처음으로"
+    },
+    {
+      "name": "chevrons-right",
+      "class": "ds-icon--chevrons-right",
+      "solid": false,
+      "use": "맨 끝으로"
+    },
+    {
+      "name": "chevrons-up-down",
+      "class": "ds-icon--chevrons-up-down",
+      "solid": false,
+      "use": "모두 펼치기"
+    },
+    {
+      "name": "circle",
+      "class": "ds-icon--circle",
+      "solid": false,
+      "use": "빈 동그라미"
+    },
+    {
+      "name": "circle-alert",
+      "class": "ds-icon--circle-alert",
+      "solid": false,
+      "use": "오류, 주의"
+    },
+    {
+      "name": "circle-alert-solid",
+      "class": "ds-icon--circle-alert-solid",
+      "solid": true,
+      "use": "오류, 주의 (채움)"
+    },
+    {
+      "name": "circle-check",
+      "class": "ds-icon--circle-check",
+      "solid": false,
+      "use": "성공, 완료"
+    },
+    {
+      "name": "circle-check-solid",
+      "class": "ds-icon--circle-check-solid",
+      "solid": true,
+      "use": "성공, 완료 (채움, Callout과 Snackbar)"
+    },
+    {
+      "name": "circle-dashed",
+      "class": "ds-icon--circle-dashed",
+      "solid": false,
+      "use": "예정, 빈 상태"
+    },
+    {
+      "name": "circle-dot",
+      "class": "ds-icon--circle-dot",
+      "solid": false,
+      "use": "선택된 동그라미"
+    },
+    {
+      "name": "circle-x",
+      "class": "ds-icon--circle-x",
+      "solid": false,
+      "use": "실패, 입력 지우기"
+    },
+    {
+      "name": "clock",
+      "class": "ds-icon--clock",
+      "solid": false,
+      "use": "시간 고르기, 시각"
+    },
+    {
+      "name": "cloud",
+      "class": "ds-icon--cloud",
+      "solid": false,
+      "use": "클라우드"
+    },
+    {
+      "name": "code",
+      "class": "ds-icon--code",
+      "solid": false,
+      "use": "코드"
+    },
+    {
+      "name": "columns-3",
+      "class": "ds-icon--columns-3",
+      "solid": false,
+      "use": "열 보기"
+    },
+    {
+      "name": "command",
+      "class": "ds-icon--command",
+      "solid": false,
+      "use": "명령, 단축키"
+    },
+    {
+      "name": "copy",
+      "class": "ds-icon--copy",
+      "solid": false,
+      "use": "복사"
+    },
+    {
+      "name": "corner-down-right",
+      "class": "ds-icon--corner-down-right",
+      "solid": false,
+      "use": "답글, 하위 항목"
+    },
+    {
+      "name": "credit-card",
+      "class": "ds-icon--credit-card",
+      "solid": false,
+      "use": "결제, 카드"
+    },
+    {
+      "name": "crop",
+      "class": "ds-icon--crop",
+      "solid": false,
+      "use": "자르기"
+    },
+    {
+      "name": "database",
+      "class": "ds-icon--database",
+      "solid": false,
+      "use": "데이터베이스"
+    },
+    {
+      "name": "download",
+      "class": "ds-icon--download",
+      "solid": false,
+      "use": "내려받기"
+    },
+    {
+      "name": "ellipsis",
+      "class": "ds-icon--ellipsis",
+      "solid": false,
+      "use": "더 보기 메뉴"
+    },
+    {
+      "name": "ellipsis-vertical",
+      "class": "ds-icon--ellipsis-vertical",
+      "solid": false,
+      "use": "세로 더 보기"
+    },
+    {
+      "name": "external-link",
+      "class": "ds-icon--external-link",
+      "solid": false,
+      "use": "새 창으로 열기"
+    },
+    {
+      "name": "eye",
+      "class": "ds-icon--eye",
+      "solid": false,
+      "use": "비밀번호 보이기"
+    },
+    {
+      "name": "eye-off",
+      "class": "ds-icon--eye-off",
+      "solid": false,
+      "use": "비밀번호 숨기기"
+    },
+    {
+      "name": "file",
+      "class": "ds-icon--file",
+      "solid": false,
+      "use": "파일"
+    },
+    {
+      "name": "file-code",
+      "class": "ds-icon--file-code",
+      "solid": false,
+      "use": "코드 파일"
+    },
+    {
+      "name": "file-text",
+      "class": "ds-icon--file-text",
+      "solid": false,
+      "use": "문서, 파일"
+    },
+    {
+      "name": "flag",
+      "class": "ds-icon--flag",
+      "solid": false,
+      "use": "깃발, 표시"
+    },
+    {
+      "name": "folder",
+      "class": "ds-icon--folder",
+      "solid": false,
+      "use": "폴더"
+    },
+    {
+      "name": "folder-input",
+      "class": "ds-icon--folder-input",
+      "solid": false,
+      "use": "폴더로 옮기기"
+    },
+    {
+      "name": "folder-open",
+      "class": "ds-icon--folder-open",
+      "solid": false,
+      "use": "열린 폴더"
+    },
+    {
+      "name": "folder-tree",
+      "class": "ds-icon--folder-tree",
+      "solid": false,
+      "use": "폴더 구조"
+    },
+    {
+      "name": "funnel",
+      "class": "ds-icon--funnel",
+      "solid": false,
+      "use": "거르기"
+    },
+    {
+      "name": "git-branch",
+      "class": "ds-icon--git-branch",
+      "solid": false,
+      "use": "브랜치"
+    },
+    {
+      "name": "git-commit-horizontal",
+      "class": "ds-icon--git-commit-horizontal",
+      "solid": false,
+      "use": "커밋"
+    },
+    {
+      "name": "git-pull-request",
+      "class": "ds-icon--git-pull-request",
+      "solid": false,
+      "use": "풀 리퀘스트"
+    },
+    {
+      "name": "globe",
+      "class": "ds-icon--globe",
+      "solid": false,
+      "use": "언어, 지역"
+    },
+    {
+      "name": "globe-lock",
+      "class": "ds-icon--globe-lock",
+      "solid": false,
+      "use": "보안 연결"
+    },
+    {
+      "name": "grip-vertical",
+      "class": "ds-icon--grip-vertical",
+      "solid": false,
+      "use": "끌어 옮기기 손잡이"
+    },
+    {
+      "name": "hand",
+      "class": "ds-icon--hand",
+      "solid": false,
+      "use": "화면 이동 도구"
+    },
+    {
+      "name": "headset",
+      "class": "ds-icon--headset",
+      "solid": false,
+      "use": "고객센터"
+    },
+    {
+      "name": "heart",
+      "class": "ds-icon--heart",
+      "solid": false,
+      "use": "좋아요, 찜"
+    },
+    {
+      "name": "heart-solid",
+      "class": "ds-icon--heart-solid",
+      "solid": true,
+      "use": "좋아요, 찜 (선택됨)"
+    },
+    {
+      "name": "house",
+      "class": "ds-icon--house",
+      "solid": false,
+      "use": "홈"
+    },
+    {
+      "name": "house-solid",
+      "class": "ds-icon--house-solid",
+      "solid": true,
+      "use": "홈 (선택됨)"
+    },
+    {
+      "name": "id-card",
+      "class": "ds-icon--id-card",
+      "solid": false,
+      "use": "계정, 신분 정보"
+    },
+    {
+      "name": "image",
+      "class": "ds-icon--image",
+      "solid": false,
+      "use": "사진 자리, 사진 올리기"
+    },
+    {
+      "name": "inbox",
+      "class": "ds-icon--inbox",
+      "solid": false,
+      "use": "비어 있음 (Empty)"
+    },
+    {
+      "name": "info",
+      "class": "ds-icon--info",
+      "solid": false,
+      "use": "안내"
+    },
+    {
+      "name": "info-solid",
+      "class": "ds-icon--info-solid",
+      "solid": true,
+      "use": "안내 (채움)"
+    },
+    {
+      "name": "italic",
+      "class": "ds-icon--italic",
+      "solid": false,
+      "use": "기울임"
+    },
+    {
+      "name": "key-round",
+      "class": "ds-icon--key-round",
+      "solid": false,
+      "use": "열쇠, SSO 로그인"
+    },
+    {
+      "name": "layers",
+      "class": "ds-icon--layers",
+      "solid": false,
+      "use": "레이어"
+    },
+    {
+      "name": "layout-grid",
+      "class": "ds-icon--layout-grid",
+      "solid": false,
+      "use": "바둑판 보기"
+    },
+    {
+      "name": "lightbulb",
+      "class": "ds-icon--lightbulb",
+      "solid": false,
+      "use": "도움말, 팁"
+    },
+    {
+      "name": "link",
+      "class": "ds-icon--link",
+      "solid": false,
+      "use": "링크 복사, 제목 링크"
+    },
+    {
+      "name": "link-2",
+      "class": "ds-icon--link-2",
+      "solid": false,
+      "use": "연결된 계정"
+    },
+    {
+      "name": "list",
+      "class": "ds-icon--list",
+      "solid": false,
+      "use": "목록 보기"
+    },
+    {
+      "name": "list-checks",
+      "class": "ds-icon--list-checks",
+      "solid": false,
+      "use": "체크 목록"
+    },
+    {
+      "name": "list-filter",
+      "class": "ds-icon--list-filter",
+      "solid": false,
+      "use": "목록 거르기"
+    },
+    {
+      "name": "list-music",
+      "class": "ds-icon--list-music",
+      "solid": false,
+      "use": "재생 목록"
+    },
+    {
+      "name": "lock",
+      "class": "ds-icon--lock",
+      "solid": false,
+      "use": "잠금, 보안"
+    },
+    {
+      "name": "log-out",
+      "class": "ds-icon--log-out",
+      "solid": false,
+      "use": "로그아웃"
+    },
+    {
+      "name": "mail",
+      "class": "ds-icon--mail",
+      "solid": false,
+      "use": "메일"
+    },
+    {
+      "name": "map-pin",
+      "class": "ds-icon--map-pin",
+      "solid": false,
+      "use": "위치, 주소"
+    },
+    {
+      "name": "maximize-2",
+      "class": "ds-icon--maximize-2",
+      "solid": false,
+      "use": "크게 보기"
+    },
+    {
+      "name": "menu",
+      "class": "ds-icon--menu",
+      "solid": false,
+      "use": "메뉴 열기"
+    },
+    {
+      "name": "message-circle",
+      "class": "ds-icon--message-circle",
+      "solid": false,
+      "use": "댓글, 대화"
+    },
+    {
+      "name": "mic",
+      "class": "ds-icon--mic",
+      "solid": false,
+      "use": "말로 입력"
+    },
+    {
+      "name": "minus",
+      "class": "ds-icon--minus",
+      "solid": false,
+      "use": "빼기, 수량 줄이기"
+    },
+    {
+      "name": "monitor",
+      "class": "ds-icon--monitor",
+      "solid": false,
+      "use": "PC 화면 보기"
+    },
+    {
+      "name": "moon",
+      "class": "ds-icon--moon",
+      "solid": false,
+      "use": "어두운 화면"
+    },
+    {
+      "name": "mouse-pointer-2",
+      "class": "ds-icon--mouse-pointer-2",
+      "solid": false,
+      "use": "선택 도구"
+    },
+    {
+      "name": "move",
+      "class": "ds-icon--move",
+      "solid": false,
+      "use": "옮기기"
+    },
+    {
+      "name": "package",
+      "class": "ds-icon--package",
+      "solid": false,
+      "use": "상품, 꾸러미"
+    },
+    {
+      "name": "palette",
+      "class": "ds-icon--palette",
+      "solid": false,
+      "use": "색, 만들기"
+    },
+    {
+      "name": "panel-left",
+      "class": "ds-icon--panel-left",
+      "solid": false,
+      "use": "왼쪽 메뉴 열고 닫기"
+    },
+    {
+      "name": "panel-right",
+      "class": "ds-icon--panel-right",
+      "solid": false,
+      "use": "오른쪽 패널, 태블릿 보기"
+    },
+    {
+      "name": "paperclip",
+      "class": "ds-icon--paperclip",
+      "solid": false,
+      "use": "파일 첨부"
+    },
+    {
+      "name": "pause",
+      "class": "ds-icon--pause",
+      "solid": false,
+      "use": "멈춤"
+    },
+    {
+      "name": "pen-tool",
+      "class": "ds-icon--pen-tool",
+      "solid": false,
+      "use": "펜 도구"
+    },
+    {
+      "name": "pencil",
+      "class": "ds-icon--pencil",
+      "solid": false,
+      "use": "고치기"
+    },
+    {
+      "name": "phone",
+      "class": "ds-icon--phone",
+      "solid": false,
+      "use": "전화"
+    },
+    {
+      "name": "play",
+      "class": "ds-icon--play",
+      "solid": false,
+      "use": "실행, 재생"
+    },
+    {
+      "name": "plus",
+      "class": "ds-icon--plus",
+      "solid": false,
+      "use": "추가, 수량 늘리기"
+    },
+    {
+      "name": "printer",
+      "class": "ds-icon--printer",
+      "solid": false,
+      "use": "인쇄"
+    },
+    {
+      "name": "receipt",
+      "class": "ds-icon--receipt",
+      "solid": false,
+      "use": "영수증, 청구"
+    },
+    {
+      "name": "redo-2",
+      "class": "ds-icon--redo-2",
+      "solid": false,
+      "use": "다시 하기"
+    },
+    {
+      "name": "refresh-cw",
+      "class": "ds-icon--refresh-cw",
+      "solid": false,
+      "use": "새로 고침"
+    },
+    {
+      "name": "rocket",
+      "class": "ds-icon--rocket",
+      "solid": false,
+      "use": "빠르게, 시작"
+    },
+    {
+      "name": "rotate-ccw",
+      "class": "ds-icon--rotate-ccw",
+      "solid": false,
+      "use": "새로 고침, 되돌리기"
+    },
+    {
+      "name": "save",
+      "class": "ds-icon--save",
+      "solid": false,
+      "use": "저장"
+    },
+    {
+      "name": "scissors",
+      "class": "ds-icon--scissors",
+      "solid": false,
+      "use": "오려 두기"
+    },
+    {
+      "name": "search",
+      "class": "ds-icon--search",
+      "solid": false,
+      "use": "찾기"
+    },
+    {
+      "name": "server",
+      "class": "ds-icon--server",
+      "solid": false,
+      "use": "서버"
+    },
+    {
+      "name": "settings",
+      "class": "ds-icon--settings",
+      "solid": false,
+      "use": "설정"
+    },
+    {
+      "name": "share",
+      "class": "ds-icon--share",
+      "solid": false,
+      "use": "공유"
+    },
+    {
+      "name": "shield-check",
+      "class": "ds-icon--shield-check",
+      "solid": false,
+      "use": "안전, 인증됨"
+    },
+    {
+      "name": "shopping-cart",
+      "class": "ds-icon--shopping-cart",
+      "solid": false,
+      "use": "장바구니"
+    },
+    {
+      "name": "sliders-horizontal",
+      "class": "ds-icon--sliders-horizontal",
+      "solid": false,
+      "use": "보기 설정, 고급 검색"
+    },
+    {
+      "name": "smartphone",
+      "class": "ds-icon--smartphone",
+      "solid": false,
+      "use": "모바일 화면 보기"
+    },
+    {
+      "name": "sparkle",
+      "class": "ds-icon--sparkle",
+      "solid": false,
+      "use": "반짝, 새로움"
+    },
+    {
+      "name": "sparkles",
+      "class": "ds-icon--sparkles",
+      "solid": false,
+      "use": "AI 기능, 새 기능"
+    },
+    {
+      "name": "square",
+      "class": "ds-icon--square",
+      "solid": false,
+      "use": "멈춤 (AI 답변 생성 중단)"
+    },
+    {
+      "name": "square-pen",
+      "class": "ds-icon--square-pen",
+      "solid": false,
+      "use": "새로 쓰기"
+    },
+    {
+      "name": "star",
+      "class": "ds-icon--star",
+      "solid": false,
+      "use": "평점, 즐겨찾기"
+    },
+    {
+      "name": "star-solid",
+      "class": "ds-icon--star-solid",
+      "solid": true,
+      "use": "평점, 즐겨찾기 (채움)"
+    },
+    {
+      "name": "sun",
+      "class": "ds-icon--sun",
+      "solid": false,
+      "use": "밝은 화면"
+    },
+    {
+      "name": "tag",
+      "class": "ds-icon--tag",
+      "solid": false,
+      "use": "태그, 분류"
+    },
+    {
+      "name": "terminal",
+      "class": "ds-icon--terminal",
+      "solid": false,
+      "use": "터미널"
+    },
+    {
+      "name": "text-align-start",
+      "class": "ds-icon--text-align-start",
+      "solid": false,
+      "use": "글 블록"
+    },
+    {
+      "name": "thumbs-down",
+      "class": "ds-icon--thumbs-down",
+      "solid": false,
+      "use": "도움이 안 됐어요"
+    },
+    {
+      "name": "thumbs-up",
+      "class": "ds-icon--thumbs-up",
+      "solid": false,
+      "use": "도움이 됐어요"
+    },
+    {
+      "name": "trash",
+      "class": "ds-icon--trash",
+      "solid": false,
+      "use": "삭제"
+    },
+    {
+      "name": "triangle-alert",
+      "class": "ds-icon--triangle-alert",
+      "solid": false,
+      "use": "경고"
+    },
+    {
+      "name": "triangle-alert-solid",
+      "class": "ds-icon--triangle-alert-solid",
+      "solid": true,
+      "use": "경고 (채움)"
+    },
+    {
+      "name": "truck",
+      "class": "ds-icon--truck",
+      "solid": false,
+      "use": "배송"
+    },
+    {
+      "name": "type",
+      "class": "ds-icon--type",
+      "solid": false,
+      "use": "글자 도구"
+    },
+    {
+      "name": "undo",
+      "class": "ds-icon--undo",
+      "solid": false,
+      "use": "되돌리기"
+    },
+    {
+      "name": "undo-2",
+      "class": "ds-icon--undo-2",
+      "solid": false,
+      "use": "되돌리기"
+    },
+    {
+      "name": "upload",
+      "class": "ds-icon--upload",
+      "solid": false,
+      "use": "올리기"
+    },
+    {
+      "name": "user",
+      "class": "ds-icon--user",
+      "solid": false,
+      "use": "사람, 내 정보"
+    },
+    {
+      "name": "users",
+      "class": "ds-icon--users",
+      "solid": false,
+      "use": "여러 사람, 팀"
+    },
+    {
+      "name": "video",
+      "class": "ds-icon--video",
+      "solid": false,
+      "use": "영상"
+    },
+    {
+      "name": "wallet",
+      "class": "ds-icon--wallet",
+      "solid": false,
+      "use": "지갑, 자산"
+    },
+    {
+      "name": "wand-sparkles",
+      "class": "ds-icon--wand-sparkles",
+      "solid": false,
+      "use": "AI 도구 사용"
+    },
+    {
+      "name": "x",
+      "class": "ds-icon--x",
+      "solid": false,
+      "use": "닫기, 지우기"
+    },
+    {
+      "name": "zoom-in",
+      "class": "ds-icon--zoom-in",
+      "solid": false,
+      "use": "확대"
+    },
+    {
+      "name": "zoom-out",
+      "class": "ds-icon--zoom-out",
+      "solid": false,
+      "use": "축소"
+    }
+  ]
+}

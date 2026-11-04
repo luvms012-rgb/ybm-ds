@@ -10,7 +10,8 @@
             ["사이트", "Foundations에 화면 폭 기준을 모은 Breakpoint 페이지를 더했습니다."],
             ["사이트", "컴포넌트 71개에 실제 화면 속 사용 예시를 2 ~ 3개씩 넣었습니다. 예시마다 이름, 쓰임 설명, 미리보기, 코드가 있습니다."],
             ["사이트", "코드 상자에 글자 색을 입혔습니다."],
-            ["DS", "Carousel에 넘겨도 제자리에 있는 번호(ds-carousel__count)를 더했습니다."]
+            ["DS", "Carousel에 넘겨도 제자리에 있는 번호(ds-carousel__count)를 더했습니다."],
+            ["사이트", "AI 도구용 규칙 파일(AGENTS.md, CLAUDE.md, yds.mdc), 아이콘 목록(icons.json), 규칙 검사 스크립트(yds-check.mjs)를 더했습니다."]
           ]
         },
         {

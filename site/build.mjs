@@ -339,7 +339,7 @@ ${DOC_LINE}
   ['규칙 점검하기', '이미 만든 화면을 점검합니다.',
     `이 화면이 yds 규칙을 지키는지 점검하고 고쳐 줘.
 ${DOC_LINE}
-고친 곳은 목록으로 알려 줘.`],
+검사 스크립트로 먼저 검사하고, 고친 곳은 목록으로 알려 줘.`],
   ['브랜드 컬러 입히기', '서비스에 쓸 때 이어서 붙여 넣습니다. 대괄호 안에 브랜드 컬러를 넣습니다.',
     `이 서비스의 브랜드 컬러를 [#12a150]으로 맞춰 줘.
 ${DOC_LINE}
@@ -364,12 +364,15 @@ ${DOC_LINE}
 const LLMS_RULES = `## 지킬 것
 
 - 설치: <head>에 CSS와 JS 두 줄을 넣는다. 서비스 CSS는 그다음에 불러온다.
+- 규칙 파일: 설치할 때 규칙 파일(${SITE_URL}ai/AGENTS.md)을 프로젝트 맨 위 폴더에 받아 둔다. Claude는 CLAUDE.md, Cursor는 .cursor/rules/yds.mdc 이름으로 둔다.
 - 컴포넌트: 목록(${PUBLIC}/components.json)에 있는 것만 쓰고, 마크업은 컴포넌트 CSS(${RAW}/dist/components.css)의 컴포넌트별 머리 주석 그대로 쓴다.
+- 아이콘: 목록(${SITE_URL}ai/icons.json)에 있는 이름만 쓴다. 꾸밈 아이콘에는 aria-hidden="true", 아이콘만 있는 버튼에는 aria-label을 붙인다.
 - 색, 간격, 글자 크기, 모서리, 그림자는 --ds-* 토큰만 쓴다. hex, rgb를 직접 쓰지 않는다.
 - 모양을 바꿀 때는 컴포넌트 변수(--ds-[컴포넌트]-*)만 덮어쓴다. 새 ds- 클래스나 !important를 만들지 않는다.
 - 브랜드 컬러: 서비스 CSS의 :root에서 --ds-color-palette-brand-100 ~ 1000을 덮어쓴다. 받은 색을 600 단계로 두고, 다크(:root[data-theme="dark"])는 같은 단계를 뒤집어 넣는다.
 - 화면: 모바일 먼저 만들고 768px, 1280px에서 배치를 바꾼다. 비슷한 화면이 Templates에 있으면 그 HTML에서 시작한다.
 - 글자: 한국어. 제목 Bold, 항목 제목 SemiBold, 본문 Regular, 본문은 word-break: keep-all.
+- 점검: 끝내기 전에 검사 스크립트(${SITE_URL}ai/yds-check.mjs)를 받아 node로 돌리고, 나온 문제를 모두 고친다.
 
 ## 운영 중인 사이트에 옮길 때
 
@@ -425,11 +428,21 @@ ${codeTabs([
 ${table(['파일', '내용'], [
   [`<a class="ds-link" href="llms.txt" target="_blank" rel="noopener">llms.txt</a>`, '전체 목차와 지킬 규칙입니다. AI가 여기서 시작합니다.'],
   [`<a class="ds-link" href="llms-full.txt" target="_blank" rel="noopener">llms-full.txt</a>`, '모든 문서를 한 파일로 모았습니다.'],
+  [`<a class="ds-link" href="ai/AGENTS.md" target="_blank" rel="noopener">AGENTS.md</a>`, '프로젝트 맨 위 폴더에 두면 AI 도구가 늘 읽는 규칙 파일입니다.'],
+  [`<a class="ds-link" href="ai/CLAUDE.md" target="_blank" rel="noopener">CLAUDE.md</a>` + ', ' + `<a class="ds-link" href="ai/yds.mdc" target="_blank" rel="noopener">yds.mdc</a>`, 'Claude, Cursor용 규칙 파일입니다. 내용은 AGENTS.md와 같습니다.'],
   [`<a class="ds-link" href="${PUBLIC}/components.json" target="_blank" rel="noopener">components.json</a>`, '쓸 수 있는 컴포넌트와 속성 목록입니다.'],
   [`<a class="ds-link" href="${RAW}/dist/components.css" target="_blank" rel="noopener">components.css</a>`, '컴포넌트마다 머리 주석에 HTML 구조가 있습니다.'],
   [`<a class="ds-link" href="${RAW}/dist/tokens.css" target="_blank" rel="noopener">tokens.css</a>`, '색, 간격, 글자 크기 같은 <code>--ds-*</code> 토큰입니다.'],
+  [`<a class="ds-link" href="ai/icons.json" target="_blank" rel="noopener">icons.json</a>`, '쓸 수 있는 아이콘 이름과 쓰임입니다.'],
+  [`<a class="ds-link" href="ai/yds-check.mjs" target="_blank" rel="noopener">yds-check.mjs</a>`, '<code>node yds-check.mjs 폴더</code>로 규칙을 어긴 곳을 찾습니다.'],
   ['페이지별 <code>.md</code>', '문서 제목 아래 Markdown 메뉴에서 그 페이지만 복사합니다.'],
   ...(SHOW_THEMES ? [['Themes', '테마 CSS 주소와 어울리는 서비스입니다.']] : []),
+])}
+<h3>개발 도구에서 쓰는 파일</h3>
+${table(['파일', '내용'], [
+  [`<a class="ds-link" href="${PUBLIC}/tokens/design-tokens.json" target="_blank" rel="noopener">design-tokens.json</a>`, '표준 토큰 형식입니다. 디자인 도구와 토큰 변환기에서 읽습니다.'],
+  [`<a class="ds-link" href="${PUBLIC}/tokens/tokens.js" target="_blank" rel="noopener">tokens.js</a>`, '스크립트에서 토큰 값을 쓸 때 불러옵니다.'],
+  [`<a class="ds-link" href="${PUBLIC}/tokens/tailwind.preset.js" target="_blank" rel="noopener">tailwind.preset.js</a>`, 'Tailwind에 yds 토큰을 연결합니다.'],
 ])}
 <p>Figma 변수와 CSS 변수는 이름이 같습니다. AI에 <a class="ds-link" href="${LINKS.figmaUrl('2608:2')}" target="_blank" rel="noopener">Figma</a> 화면을 주면 같은 토큰으로 옮깁니다.</p>
 
@@ -1055,6 +1068,50 @@ fs.writeFileSync(path.join(SITE, 'assets/site.css'), fs.readFileSync(path.join(S
   + Object.entries(SITE_ICONS).map(([n, b]) => `.site-i--${n} { --ds-icon: ${svgUri(b)}; }`).join('\n') + '\n');
 
 figmaDocs();
+
+/* ---------------------------------------------------------------- AI 파일 (site/ai/) */
+// 11-04 사용자 "AI 파일 고도화, 1 ~ 4 모두": 규칙 파일(AGENTS.md, CLAUDE.md, Cursor yds.mdc), 아이콘 목록(icons.json), 규칙 검사(yds-check.mjs).
+// 규칙 글은 llms.txt 와 같은 LLMS_RULES 하나에서 만든다. 검사 스크립트에는 지금 DS 의 클래스, 아이콘, 토큰 목록을 넣는다
+{
+  const AI = path.join(SITE, 'ai');
+  fs.mkdirSync(AI, { recursive: true });
+  const distAll = ['dist/base.css', 'dist/components.css', 'dist/utilities.css', 'dist/icons.css', 'dist/tokens.css'].map(read).join('\n');
+  const classes = [...new Set([
+    ...[...distAll.matchAll(/\.((?:ds|u)-[a-z0-9_-]+)/g)].map((m) => m[1]),
+    ...[...componentsCss.matchAll(/class="([^"]+)"/g)].flatMap((m) => m[1].split(/\s+/)).filter((c) => /^(ds|u)-[a-z0-9_-]+$/.test(c)),
+  ])].filter((c) => !c.startsWith('ds-icon--') || ['ds-icon--sm', 'ds-icon--lg'].includes(c)).sort();
+  const tokens = [...new Set([...(distAll + dsJs).matchAll(/(--ds-[a-z0-9_-]*[a-z0-9])/g)].map((m) => m[1]))].sort();
+  const icons = iconNames.map((n) => ({ name: n, class: `ds-icon--${n}`, solid: n.endsWith('-solid'), use: ICON_USE[n] || '' }));
+  fs.writeFileSync(path.join(AI, 'icons.json'), JSON.stringify({ $note: 'yds 에서 바로 쓸 수 있는 아이콘입니다. <i class="ds-icon ds-icon--이름" aria-hidden="true"></i> 로 쓰고, 여기에 없는 이름은 쓰지 않습니다. 채움 모양은 이름 끝이 -solid 입니다.', count: icons.length, icons }, null, 2) + '\n');
+  const check = read('site/src/yds-check.template.mjs')
+    .replace('__DATA__', JSON.stringify({ classes, icons: iconNames, tokens }))
+    .replace('__VERSION__', new Date().toISOString().slice(0, 10));
+  fs.writeFileSync(path.join(AI, 'yds-check.mjs'), check);
+  const rules = `# yds 규칙
+
+이 프로젝트의 화면은 yds(YBM 디자인 시스템)로 만든다. 화면을 만들거나 고칠 때 아래를 지킨다.
+
+## 먼저 볼 것
+
+- 문서 목차: ${SITE_URL}llms.txt (필요한 컴포넌트 문서를 골라 읽는다)
+- 컴포넌트 목록: ${PUBLIC}/components.json
+- 컴포넌트 마크업: ${RAW}/dist/components.css (컴포넌트마다 머리 주석)
+- 아이콘 목록: ${SITE_URL}ai/icons.json
+- 토큰: ${RAW}/dist/tokens.css
+- 화면 출발점: Templates (llms.txt 끝 목록)
+
+${LLMS_RULES}
+
+## 끝내기 전에
+
+- 검사 스크립트를 받아 돌린다: ${SITE_URL}ai/yds-check.mjs
+- \`node yds-check.mjs <바꾼 파일 또는 폴더>\` 에서 나온 문제를 모두 고치고, 고친 곳을 목록으로 알린다.
+`;
+  fs.writeFileSync(path.join(AI, 'AGENTS.md'), rules);
+  fs.writeFileSync(path.join(AI, 'CLAUDE.md'), rules);
+  fs.writeFileSync(path.join(AI, 'yds.mdc'), `---\ndescription: yds 디자인 시스템 규칙. 화면 HTML, CSS 를 만들거나 고칠 때 지킨다\nglobs: ["**/*.html", "**/*.css", "**/*.php", "**/*.jsp", "**/*.vue", "**/*.jsx", "**/*.tsx"]\nalwaysApply: true\n---\n\n${rules}`);
+  console.log(`  ✔ AI 파일: 규칙 3개, 아이콘 ${icons.length}개, 검사 스크립트(클래스 ${classes.length}, 토큰 ${tokens.length})`);
+}
 {
   const byFile = (f) => MD_PAGES.find((p) => p.file === f);
   const gs = GS_ORDER.filter(([f]) => !f.startsWith('foundations/')).map(([f]) => byFile(f)).filter(Boolean);
@@ -1067,6 +1124,9 @@ figmaDocs();
 - CSS: ${PUBLIC}/dist/ybm-ds.css
 - JS: ${PUBLIC}/dist/ybm-ds.js
 - 전체 문서 한 파일: ${SITE_URL}llms-full.txt
+- 규칙 파일: ${SITE_URL}ai/AGENTS.md
+- 아이콘 목록: ${SITE_URL}ai/icons.json
+- 검사 스크립트: ${SITE_URL}ai/yds-check.mjs
 
 ${LLMS_RULES}`;
   const tplList = `## Templates

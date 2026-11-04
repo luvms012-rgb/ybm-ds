@@ -9,9 +9,9 @@
 <script>try { var t = localStorage.getItem("ybm-site-theme"); if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.dataset.theme = "dark"; } catch (e) {}</script>
 <link rel="icon" href="assets/logo-ybmnet.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../dist/ybm-ds.css">
-<link rel="stylesheet" href="assets/site.css?v=91df143b">
+<link rel="stylesheet" href="assets/site.css?v=62b9abbc">
 <script src="../dist/ybm-ds.js" defer></script>
-<script src="assets/site.js?v=91df143b" defer></script>
+<script src="assets/site.js?v=62b9abbc" defer></script>
 </head>
 <body class="site">
 <a class="site-skip" href="#main">본문 바로가기</a>
@@ -77,7 +77,7 @@
   <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">text</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
   <pre class="ds-codeblock__code"><code>이 화면이 yds 규칙을 지키는지 점검하고 고쳐 줘.
 문서: https://luvms012-rgb.github.io/ybm-ds/site/llms.txt
-고친 곳은 목록으로 알려 줘.</code></pre>
+검사 스크립트로 먼저 검사하고, 고친 곳은 목록으로 알려 줘.</code></pre>
 </figure>
 
 <h2 id="start">직접 시작하기<a class="site-anchor" href="#start" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
@@ -139,10 +139,20 @@
 <thead><tr><th scope="col">파일</th><th scope="col">내용</th></tr></thead>
 <tbody><tr><td><a class="ds-link" href="llms.txt" target="_blank" rel="noopener">llms.txt</a></td><td>전체 목차와 지킬 규칙입니다. AI가 여기서 시작합니다.</td></tr>
 <tr><td><a class="ds-link" href="llms-full.txt" target="_blank" rel="noopener">llms-full.txt</a></td><td>모든 문서를 한 파일로 모았습니다.</td></tr>
+<tr><td><a class="ds-link" href="ai/AGENTS.md" target="_blank" rel="noopener">AGENTS.md</a></td><td>프로젝트 맨 위 폴더에 두면 AI 도구가 늘 읽는 규칙 파일입니다.</td></tr>
+<tr><td><a class="ds-link" href="ai/CLAUDE.md" target="_blank" rel="noopener">CLAUDE.md</a>, <a class="ds-link" href="ai/yds.mdc" target="_blank" rel="noopener">yds.mdc</a></td><td>Claude, Cursor용 규칙 파일입니다. 내용은 AGENTS.md와 같습니다.</td></tr>
 <tr><td><a class="ds-link" href="https://luvms012-rgb.github.io/ybm-ds/components.json" target="_blank" rel="noopener">components.json</a></td><td>쓸 수 있는 컴포넌트와 속성 목록입니다.</td></tr>
 <tr><td><a class="ds-link" href="https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/components.css" target="_blank" rel="noopener">components.css</a></td><td>컴포넌트마다 머리 주석에 HTML 구조가 있습니다.</td></tr>
 <tr><td><a class="ds-link" href="https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/tokens.css" target="_blank" rel="noopener">tokens.css</a></td><td>색, 간격, 글자 크기 같은 <code>--ds-*</code> 토큰입니다.</td></tr>
+<tr><td><a class="ds-link" href="ai/icons.json" target="_blank" rel="noopener">icons.json</a></td><td>쓸 수 있는 아이콘 이름과 쓰임입니다.</td></tr>
+<tr><td><a class="ds-link" href="ai/yds-check.mjs" target="_blank" rel="noopener">yds-check.mjs</a></td><td><code>node yds-check.mjs 폴더</code>로 규칙을 어긴 곳을 찾습니다.</td></tr>
 <tr><td>페이지별 <code>.md</code></td><td>문서 제목 아래 Markdown 메뉴에서 그 페이지만 복사합니다.</td></tr></tbody></table></div>
+<h3>개발 도구에서 쓰는 파일</h3>
+<div class="ds-table-wrap"><table class="ds-table" data-density="compact">
+<thead><tr><th scope="col">파일</th><th scope="col">내용</th></tr></thead>
+<tbody><tr><td><a class="ds-link" href="https://luvms012-rgb.github.io/ybm-ds/tokens/design-tokens.json" target="_blank" rel="noopener">design-tokens.json</a></td><td>표준 토큰 형식입니다. 디자인 도구와 토큰 변환기에서 읽습니다.</td></tr>
+<tr><td><a class="ds-link" href="https://luvms012-rgb.github.io/ybm-ds/tokens/tokens.js" target="_blank" rel="noopener">tokens.js</a></td><td>스크립트에서 토큰 값을 쓸 때 불러옵니다.</td></tr>
+<tr><td><a class="ds-link" href="https://luvms012-rgb.github.io/ybm-ds/tokens/tailwind.preset.js" target="_blank" rel="noopener">tailwind.preset.js</a></td><td>Tailwind에 yds 토큰을 연결합니다.</td></tr></tbody></table></div>
 <p>Figma 변수와 CSS 변수는 이름이 같습니다. AI에 <a class="ds-link" href="https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=2608-2" target="_blank" rel="noopener">Figma</a> 화면을 주면 같은 토큰으로 옮깁니다.</p>
 
 

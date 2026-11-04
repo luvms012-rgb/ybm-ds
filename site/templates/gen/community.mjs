@@ -103,7 +103,7 @@ const board = () => {
   .tp-board { margin: 0; padding: 0; list-style: none; box-shadow: inset 0 1px 0 var(--ds-color-stroke-neutral-solid); }
   .tp-board > li { display: flex; flex-wrap: wrap; align-items: center; gap: var(--ds-space-x1) var(--ds-space-x2); padding: var(--ds-space-x3) var(--ds-space-x2); box-shadow: inset 0 -1px 0 var(--ds-color-stroke-neutral-muted); font-size: var(--ds-font-size-t02); line-height: var(--ds-line-height-t02); color: var(--ds-color-fg-neutral-subtle); font-variant-numeric: tabular-nums; }
   .tp-board > li[data-pinned] { background: var(--ds-color-bg-neutral-weak-alpha); }
-  .tp-board__head { display: none !important; }
+  .tp-board > li.tp-board__head { display: none; }  /* 줄 규칙(.tp-board > li)보다 세게: !important 대신 선택자로 */
   .tp-board .c-no { display: none; }
   .tp-board .c-title { order: -1; flex: 1 1 100%; display: flex; align-items: center; gap: var(--ds-space-x1_5); min-width: 0; font-size: var(--ds-font-size-t04); line-height: var(--ds-line-height-t04); color: var(--ds-color-fg-neutral); }
   .tp-board .c-title a { overflow: hidden; color: inherit; text-decoration: none; text-overflow: ellipsis; white-space: nowrap; }
@@ -112,7 +112,7 @@ const board = () => {
   .tp-board .tp-m { display: inline; }
   @media (min-width: 768px) {
     .tp-board > li { display: grid; grid-template-columns: 64px 80px minmax(0, 1fr) 104px 72px 56px 56px; gap: var(--ds-space-x2); padding: 0 var(--ds-space-x2); min-height: 48px; }
-    .tp-board__head { display: grid !important; min-height: 44px !important; color: var(--ds-color-fg-neutral-muted) !important; font-weight: var(--ds-font-weight-medium); }
+    .tp-board > li.tp-board__head { display: grid; min-height: 44px; color: var(--ds-color-fg-neutral-muted); font-weight: var(--ds-font-weight-medium); }
     .tp-board .c-no { display: block; }
     .tp-board .c-title { order: 0; flex: none; }
     .tp-board :is(.c-no, .c-view, .c-like, .c-date) { text-align: center; }
