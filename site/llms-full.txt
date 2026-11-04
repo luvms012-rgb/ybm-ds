@@ -33,7 +33,7 @@ YBM DS는 YBM 서비스를 위한 디자인 시스템입니다.
 
 ## AI로 시작하기
 
-아래 글을 AI 코딩 도구(ChatGPT, Claude, Cursor 등)에 붙여 넣으면 됩니다. 지킬 규칙은 AI가 문서에서 읽어 갑니다.
+아래 글을 AI 코딩 도구(ChatGPT, Claude, Cursor 등)에 붙여 넣으면 됩니다.
 
 ### DS 설치하기
 

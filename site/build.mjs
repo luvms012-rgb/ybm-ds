@@ -392,7 +392,7 @@ write({
 </header>
 
 <h2 id="ai">AI로 시작하기</h2>
-<p>아래 글을 AI 코딩 도구(ChatGPT, Claude, Cursor 등)에 붙여 넣으면 됩니다. 지킬 규칙은 AI가 문서에서 읽어 갑니다.</p>
+<p>아래 글을 AI 코딩 도구(ChatGPT, Claude, Cursor 등)에 붙여 넣으면 됩니다.</p>
 <h3>${prompts[0][0]}</h3>
 ${codeblock(prompts[0][2], 'text', ' data-wrap')}
 <h3>${prompts[3][0]}</h3>
