@@ -2,7 +2,7 @@
 
 # Get Started
 
-YBM DS는 YBM 서비스를 위한 디자인 시스템입니다.
+YBM DS는 서비스 DS의 기반입니다. 서비스마다 exam-ds, cs-ds처럼 이름을 붙여 씁니다.
 
 ## AI로 시작하기
 
@@ -52,6 +52,46 @@ YBM DS로 [만들 화면, 예: 회원 목록 화면]을 만들어 줘.
 <link rel="stylesheet" href="https://luvms012-rgb.github.io/ybm-ds/dist/ybm-ds.css">
 <script src="https://luvms012-rgb.github.io/ybm-ds/dist/ybm-ds.js" defer></script>
 ```
+
+이 주소는 늘 최신 버전입니다. 운영 서비스는 아래 서비스 DS 만들기처럼 버전을 고정합니다.
+
+## 서비스 DS 만들기
+
+YBM DS는 가칭입니다. 서비스가 많으면 모두 YBM DS를 바로 쓰지 않고, 서비스마다 이름을 붙인 DS를 하나씩 둡니다. YBM DS가 바뀌어도 서비스는 확인한 뒤 원할 때 따라갑니다.
+
+| 층 | 예 | 담는 것 |
+| --- | --- | --- |
+| **YBM DS** | `ybm-ds` | 토큰 구조, 컴포넌트, 규칙 |
+| **서비스 DS** | `exam-ds`, `cs-ds` | 고정한 YBM DS 버전, 브랜드 컬러, 서비스에만 있는 부품 |
+| **화면** | 서비스 페이지 | 서비스 DS만 불러옵니다. |
+
+### AI로 만들기
+
+대괄호 안에 서비스 DS 이름과 브랜드 컬러를 넣습니다.
+
+```text
+YBM DS를 바탕으로 [서비스 DS 이름, 예: cs-ds]를 만들어 줘.
+문서: https://luvms012-rgb.github.io/ybm-ds/site/llms.txt
+YBM DS 버전은 고정해 불러오고, 브랜드 컬러 [#12a150]과 서비스 전용 부품은 서비스 DS 파일에만 넣어 줘.
+```
+
+### 이름 규칙
+
+- 공통 클래스와 토큰은 `ds-`, `--ds-*` 그대로 씁니다.
+- 서비스가 더하는 클래스와 토큰에는 서비스 이름을 붙입니다. 예: `--exam-*`, `.exam-*`
+- 가져온 YBM DS 파일은 고치지 않고, 서비스 DS 파일에만 더합니다.
+
+### 버전 고정
+
+주소에 커밋 번호를 넣어 YBM DS 버전을 고정하고, 그다음에 서비스 DS 파일을 불러옵니다.
+
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/luvms012-rgb/ybm-ds@[커밋 번호]/dist/ybm-ds.css">
+<script src="https://cdn.jsdelivr.net/gh/luvms012-rgb/ybm-ds@[커밋 번호]/dist/ybm-ds.js" defer></script>
+<link rel="stylesheet" href="/cs-ds/cs-ds.css">  <!-- 서비스 DS -->
+```
+
+새 버전이 나오면 [Updates](https://luvms012-rgb.github.io/ybm-ds/site/updates.html)를 보고, 화면 전후를 비교한 뒤 커밋 번호를 바꿉니다. 여러 서비스에 쓸모 있는 부품은 YBM DS로 올립니다.
 
 ## 내 사이트에 적용해보기
 

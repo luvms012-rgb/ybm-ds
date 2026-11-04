@@ -372,6 +372,13 @@ const LLMS_RULES = `## 지킬 것
 - 화면: 모바일 먼저 만들고 768px, 1280px에서 배치를 바꾼다. 비슷한 화면이 Templates에 있으면 그 HTML에서 시작한다.
 - 글자: 한국어. 제목 Bold, 항목 제목 SemiBold, 본문 Regular, 본문은 word-break: keep-all.
 
+## 서비스 DS
+
+- YBM DS는 기반이다. 서비스는 이름을 붙인 서비스 DS(예: exam-ds, cs-ds)를 만들어 쓴다.
+- 서비스 DS는 YBM DS를 커밋 번호로 고정해 불러오고(https://cdn.jsdelivr.net/gh/luvms012-rgb/ybm-ds@커밋/dist/ybm-ds.css), 그다음에 서비스 DS 파일을 불러온다.
+- 공통 클래스와 토큰은 ds-, --ds-* 그대로 쓴다. 서비스가 더하는 것에는 서비스 이름을 붙인다(--exam-*, .exam-*).
+- 가져온 YBM DS 파일은 고치지 않는다. 브랜드 컬러와 서비스 전용 부품은 서비스 DS 파일에만 넣는다.
+
 ## 운영 중인 사이트에 옮길 때
 
 - 한 번에 다 바꾸지 않는다. 살펴보기, DS 넣기, 브랜드 컬러, 화면 하나씩, 점검 순서로 간다.
@@ -381,7 +388,7 @@ const LLMS_RULES = `## 지킬 것
 - 화면을 바꿀 때마다 바꾸기 전후 화면을 비교해 보여 주고 확인을 받는다.`;
 // 반응형 기준점 (Foundations Breakpoint, 11-04 시작하기에서 옮김)
 const bpRows = [['sm', '480px', '큰 휴대폰'], ['md', '768px', '태블릿, PC 부품으로 바뀌는 기준'], ['lg', '1280px', '넓은 PC, 3단 배치'], ['xl', '1440px', '아주 넓은 화면']];
-// 코드 탭 (11-04 사용자 "다크 모드는 프롬프팅과 html 을 같이, 탭 형태로"): Chip Tabs 로 고르면 그 칸만 보인다. 여닫기는 site.js data-site-tab
+// 코드 탭 (11-04 사용자 "다크 모드는 프롬프팅과 html을 같이, 탭 형태로"): Chip Tabs로 고르면 그 칸만 보인다. 여닫기는 site.js data-site-tab
 const codeTabs = (tabs) => `<div class="site-codetabs"><div class="ds-chiptabs" role="tablist" aria-label="보기 방식">${tabs.map(([l], i) => `<button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="${i === 0}" data-site-tab="${i}">${esc(l)}</button>`).join('')}</div>${tabs.map(([, h], i) => `<div class="site-codetabs__panel" role="tabpanel"${i ? ' hidden' : ''}>${h}</div>`).join('')}</div>`;
 // 안내 카드 (레퍼런스 B Get Started): 옅은 회색 칸에 제목과 화살표, 아래 한 줄 설명. out이면 새 창
 const hubCard = (href, title, desc, out = false) => `<a class="site-hub" href="${href}"${out ? ' target="_blank" rel="noopener"' : ''}><span class="site-hub__title">${esc(title)}<i class="ds-icon ds-icon--${out ? 'external-link' : 'arrow-right'} ds-icon--sm" aria-hidden="true"></i></span><span class="site-hub__desc">${esc(desc)}</span></a>`;
@@ -389,7 +396,7 @@ write({
   file: 'index.html', section: 'get-started', title: 'Get Started', desc: 'YBM DS를 처음 쓰는 사람을 위한 안내', layout: 'page',
   body: `<header>
   <h1 class="site-h1">Get Started</h1>
-  <p class="site-lead">YBM DS는 YBM 서비스를 위한 디자인 시스템입니다.</p>
+  <p class="site-lead">YBM DS는 서비스 DS의 기반입니다. 서비스마다 exam-ds, cs-ds처럼 이름을 붙여 씁니다.</p>
   ${metaLinks({ figma: LINKS.figmaUrl('2608:2'), code: GITHUB })}
 </header>
 
@@ -409,6 +416,28 @@ ${codeblock(prompts[2][2], 'text', ' data-wrap')}
 <h2 id="start">직접 시작하기</h2>
 <p><code>&lt;head&gt;</code>에 두 줄을 넣으면 글꼴, 토큰, 아이콘, 컴포넌트가 함께 들어옵니다. 쓰는 법은 <a class="ds-link" href="components/index.html">Components</a>에 있습니다.</p>
 ${codeblock(CSS_LINK)}
+<p>이 주소는 늘 최신 버전입니다. 운영 서비스는 아래 서비스 DS 만들기처럼 버전을 고정합니다.</p>
+
+<h2 id="service-ds">서비스 DS 만들기</h2>
+<p>YBM DS는 가칭입니다. 서비스가 많으면 모두 YBM DS를 바로 쓰지 않고, 서비스마다 이름을 붙인 DS를 하나씩 둡니다. YBM DS가 바뀌어도 서비스는 확인한 뒤 원할 때 따라갑니다.</p>
+${table(['층', '예', '담는 것'], [
+  ['<b>YBM DS</b>', '<code>ybm-ds</code>', '토큰 구조, 컴포넌트, 규칙'],
+  ['<b>서비스 DS</b>', '<code>exam-ds</code>, <code>cs-ds</code>', '고정한 YBM DS 버전, 브랜드 컬러, 서비스에만 있는 부품'],
+  ['<b>화면</b>', '서비스 페이지', '서비스 DS만 불러옵니다.'],
+])}
+<h3>AI로 만들기</h3>
+<p>대괄호 안에 서비스 DS 이름과 브랜드 컬러를 넣습니다.</p>
+${codeblock(`YBM DS를 바탕으로 [서비스 DS 이름, 예: cs-ds]를 만들어 줘.\n${DOC_LINE}\nYBM DS 버전은 고정해 불러오고, 브랜드 컬러 [#12a150]과 서비스 전용 부품은 서비스 DS 파일에만 넣어 줘.`, 'text', ' data-wrap')}
+<h3>이름 규칙</h3>
+<ul class="site-list">
+  <li>공통 클래스와 토큰은 <code>ds-</code>, <code>--ds-*</code> 그대로 씁니다.</li>
+  <li>서비스가 더하는 클래스와 토큰에는 서비스 이름을 붙입니다. 예: <code>--exam-*</code>, <code>.exam-*</code></li>
+  <li>가져온 YBM DS 파일은 고치지 않고, 서비스 DS 파일에만 더합니다.</li>
+</ul>
+<h3>버전 고정</h3>
+<p>주소에 커밋 번호를 넣어 YBM DS 버전을 고정하고, 그다음에 서비스 DS 파일을 불러옵니다.</p>
+${codeblock(`<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/luvms012-rgb/ybm-ds@[커밋 번호]/dist/ybm-ds.css">\n<script src="https://cdn.jsdelivr.net/gh/luvms012-rgb/ybm-ds@[커밋 번호]/dist/ybm-ds.js" defer></script>\n<link rel="stylesheet" href="/cs-ds/cs-ds.css">  <!-- 서비스 DS -->`)}
+<p>새 버전이 나오면 <a class="ds-link" href="updates.html">Updates</a>를 보고, 화면 전후를 비교한 뒤 커밋 번호를 바꿉니다. 여러 서비스에 쓸모 있는 부품은 YBM DS로 올립니다.</p>
 
 <h2 id="migrate">내 사이트에 적용해보기</h2>
 <p>운영 중인 사이트는 한 번에 바꾸지 않고 아래 순서대로 적용합니다. 브랜드 컬러와 규칙 점검은 위 <a class="ds-link" href="#ai">AI로 시작하기</a>의 글을 그대로 씁니다.</p>

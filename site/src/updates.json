@@ -7,7 +7,8 @@
         {
           "type": "새 기능",
           "items": [
-            ["사이트", "Foundations에 화면 폭 기준을 모은 Breakpoint 페이지를 더했습니다."]
+            ["사이트", "Foundations에 화면 폭 기준을 모은 Breakpoint 페이지를 더했습니다."],
+            ["사이트", "Get Started에 서비스 DS 만들기를 더했습니다. 서비스마다 이름을 붙인 DS를 두고 YBM DS 버전을 고정해 씁니다."]
           ]
         },
         {

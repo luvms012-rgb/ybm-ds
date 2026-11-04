@@ -17,6 +17,13 @@
 - 화면: 모바일 먼저 만들고 768px, 1280px에서 배치를 바꾼다. 비슷한 화면이 Templates에 있으면 그 HTML에서 시작한다.
 - 글자: 한국어. 제목 Bold, 항목 제목 SemiBold, 본문 Regular, 본문은 word-break: keep-all.
 
+## 서비스 DS
+
+- YBM DS는 기반이다. 서비스는 이름을 붙인 서비스 DS(예: exam-ds, cs-ds)를 만들어 쓴다.
+- 서비스 DS는 YBM DS를 커밋 번호로 고정해 불러오고(https://cdn.jsdelivr.net/gh/luvms012-rgb/ybm-ds@커밋/dist/ybm-ds.css), 그다음에 서비스 DS 파일을 불러온다.
+- 공통 클래스와 토큰은 ds-, --ds-* 그대로 쓴다. 서비스가 더하는 것에는 서비스 이름을 붙인다(--exam-*, .exam-*).
+- 가져온 YBM DS 파일은 고치지 않는다. 브랜드 컬러와 서비스 전용 부품은 서비스 DS 파일에만 넣는다.
+
 ## 운영 중인 사이트에 옮길 때
 
 - 한 번에 다 바꾸지 않는다. 살펴보기, DS 넣기, 브랜드 컬러, 화면 하나씩, 점검 순서로 간다.
