@@ -489,7 +489,6 @@ body[data-side-open] .site-scrim { opacity: 1; pointer-events: auto; }
 
 /* ---- Updates (레퍼런스 B): 소식 카드 ---- */
 /* Updates (레퍼런스 A Changelog): 위에 영역 거르기, 날짜 제목 20/28 SemiBold, 종류 이름 13 SemiBold 흐린 글자, 그 아래 목록 */
-.site-doc > .site-release-filter { margin-top: var(--ds-space-x8); padding-inline: 0; }  /* 탭 왼쪽 끝을 제목과 맞춘다 */
 .site-doc > .site-release { margin-top: var(--ds-space-x10); }
 .site-doc .site-release h2:not(.pv-stage *) { margin-top: 0; font-size: var(--ds-font-size-t07); line-height: 28px; }
 .site-release__group { margin-top: var(--ds-space-x4); }

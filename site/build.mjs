@@ -995,21 +995,16 @@ fs.writeFileSync(path.join(SITE, 'get-started/ai.html'), `<!doctype html>
 fs.rmSync(path.join(SITE, 'get-started/ai.md'), { force: true });
 
 /* ---------------------------------------------------------------- Updates */
-// 레퍼런스 A Changelog 구성: 제목과 설명, 영역 거르기(전체, DS, 템플릿, 사이트), 날짜마다 종류(새 컴포넌트, 새 기능, 바뀐 것, 고친 것)별 목록
-// 소식은 site/src/updates.json releases 맨 위에 날짜를 더한다. 거르기는 site.js filter() (data-site-filter / data-site-cat / .site-group)
+// 레퍼런스 A Changelog 구성: 제목과 설명, 날짜마다 종류(새 컴포넌트, 새 기능, 바뀐 것, 고친 것)별 목록. 영역 거르기 탭은 11-04 사용자 지시로 뺐다
+// 소식은 site/src/updates.json releases 맨 위에 날짜를 더한다
 const RELEASES = readJson('site/src/updates.json').releases;
-const UPDATE_AREAS = ['DS', '템플릿', '사이트'];
 const fmtDate = (d) => { const [y, m, dd] = d.split('-').map(Number); return `${y}. ${m}. ${dd}`; };
 write({
   file: 'updates.html', section: 'updates', title: 'Updates', desc: 'yds 업데이트 소식', layout: 'page',
   body: `<header><h1 class="site-h1">Updates</h1><p class="site-lead">yds 업데이트 소식과 변경 기록입니다.</p></header>
-<div class="ds-chiptabs site-release-filter" role="tablist" aria-label="영역">
-  <button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-filter="">전체</button>
-  ${UPDATE_AREAS.map((a) => `<button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-filter="${esc(a)}">${esc(a)}</button>`).join('\n  ')}
-</div>
 ${RELEASES.map((r) => `<section class="site-group site-release">
 <h2 id="d-${r.date}"><time datetime="${r.date}">${fmtDate(r.date)}</time></h2>
-${r.sections.map((s) => `<div class="site-group site-release__group"><p class="site-release__type">${esc(s.type)}</p><ul class="site-list">${s.items.map(([a, t]) => `<li data-site-item="${esc(t.toLowerCase())}" data-site-cat="${esc(a)}"><span class="ds-badge" data-size="medium">${esc(a)}</span> ${inline(t)}</li>`).join('')}</ul></div>`).join('\n')}
+${r.sections.map((s) => `<div class="site-group site-release__group"><p class="site-release__type">${esc(s.type)}</p><ul class="site-list">${s.items.map(([a, t]) => `<li><span class="ds-badge" data-size="medium">${esc(a)}</span> ${inline(t)}</li>`).join('')}</ul></div>`).join('\n')}
 </section>`).join('\n')}
 <p class="site-note">자세한 변경 기록은 <a class="ds-link" href="${GITHUB}/commits/main" target="_blank" rel="noopener">GitHub</a>에 있습니다.</p>`,
 });
