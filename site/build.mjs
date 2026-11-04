@@ -295,7 +295,7 @@ ${desc ? `<meta name="description" content="${esc(desc)}">\n` : ''}<!-- 생성�
     ${iconBtn('data-site-menu aria-controls="site-side" aria-expanded="false"', '메뉴 열기', '<i class="ds-icon ds-icon--menu" aria-hidden="true"></i>').replace('class="ds-btn"', 'class="ds-btn site-menu-btn"')}
   </div>
 </header>
-<div class="site-body site-body--${layout}${layout === 'doc' && section === 'components' && !/index\.html$/.test(file) ? ' site-body--comp' : ''}">
+<div class="site-body site-body--${layout}${layout === 'doc' && section === 'components' && !/index\.html$/.test(file) ? ' site-body--comp' : ''}${layout === 'doc' && section === 'foundations' && !/index\.html$/.test(file) ? ' site-body--found' : ''}">
 ${sideNav(section, file, root)}
 <div class="site-scrim" data-site-close></div>
 <main class="site-main" id="main">
@@ -323,30 +323,59 @@ const write = (o) => written.push(page(o));
 /* ---------------------------------------------------------------- Get Started */
 const CSS_LINK = `<link rel="stylesheet" href="${PUBLIC}/dist/ybm-ds.css">
 <script src="${PUBLIC}/dist/ybm-ds.js" defer></script>`;
-// AI 요청 글 (11-04 사용자 "프롬프트가 너무 디테일"): 레퍼런스 A Quick Start 처럼 한두 줄. 지킬 규칙은 llms.txt 머리(LLMS_RULES)에 둔다
-const prompts = [
-  ['DS 설치하기', '지금 만드는 프로젝트에 DS를 넣습니다.',
-    `이 프로젝트에 YBM DS를 넣어 줘.
-${SITE_URL}llms.txt 를 먼저 읽고, 거기 적힌 설치 방법과 규칙을 따라 줘.`],
-  ['화면 만들기', '만들고 싶은 화면을 말로 설명합니다.',
+// AI 요청 글 (11-04 사용자 "내가 맡은 사이트에 이식한다는 실제 가정으로"): 모두 같은 세 줄 틀 - 할 일 / 문서 주소 / 조건 한 가지
+// 운영 중인 사이트에 옮기는 순서(survey > insert > brand > page > check)와 새로 만들 때(install > screen). 지킬 규칙은 llms.txt 머리(LLMS_RULES)
+const DOC_LINE = `문서: ${SITE_URL}llms.txt`;
+const P = {
+  survey: ['1. 사이트 살펴보기', '아직 아무것도 고치지 않고, 무엇을 어떤 순서로 바꿀지 먼저 정합니다.',
+    `이 사이트에 YBM DS를 옮겨 오려고 해. 아직 고치지 말고 먼저 살펴봐 줘.
+${DOC_LINE}
+공통 <head>가 있는 파일, CSS 파일, 자주 쓰는 색과 부품(버튼, 입력, 표)을 정리하고 어느 화면부터 바꿀지 순서를 제안해 줘.`],
+  insert: ['2. DS 넣기', '공통 <head>에 DS를 넣습니다. 이 단계에서는 화면이 거의 바뀌지 않습니다.',
+    `이 사이트의 공통 <head>에 YBM DS를 넣어 줘.
+${DOC_LINE}
+지금 화면이 바뀌면 안 되니, 넣은 뒤 달라진 화면이 있으면 알려 줘.`],
+  brand: ['3. 브랜드 컬러 맞추기', '사이트의 대표 색을 DS 브랜드 컬러로 옮깁니다.',
+    `이 사이트의 대표 색을 찾아서 YBM DS 브랜드 컬러로 맞춰 줘.
+${DOC_LINE}
+대표 색이 없거나 여러 개면 나에게 먼저 물어보고, 서비스 CSS 한 파일에만 넣어 줘.`],
+  page: ['4. 화면 하나씩 바꾸기', '한 번에 다 바꾸지 않고 화면 하나씩 바꿉니다. 대괄호 안만 바꿔 화면마다 붙여 넣습니다.',
+    `[바꿀 화면, 예: 회원 정보 수정] 화면을 YBM DS 컴포넌트로 바꿔 줘.
+${DOC_LINE}
+서버 코드와 스크립트가 쓰는 class, id, name 은 그대로 두고, 바꾸기 전후 화면을 비교해서 보여 줘.`],
+  check: ['5. 규칙 점검하기', '바꾼 화면이 DS 규칙을 지키는지 확인합니다.',
+    `이 화면이 YBM DS 규칙을 지키는지 점검하고 고쳐 줘.
+${DOC_LINE}
+고친 곳은 목록으로 알려 줘.`],
+  install: ['DS 설치하기', '새 프로젝트에 DS를 넣습니다.',
+    `이 프로젝트에 YBM DS를 설치해 줘.
+${DOC_LINE}
+문서의 '지킬 것'을 먼저 읽고 그대로 따라 줘.`],
+  screen: ['화면 만들기', '대괄호 안만 내 상황에 맞게 바꿉니다.',
     `YBM DS로 [만들 화면, 예: 회원 목록 화면]을 만들어 줘.
-${SITE_URL}llms.txt 규칙을 따르고, 비슷한 화면이 Templates 목록에 있으면 거기서 시작해 줘.`],
-  ['규칙 점검하기', '이미 만든 화면을 점검합니다.',
-    `이 화면이 YBM DS 규칙을 지키는지 ${SITE_URL}llms.txt 기준으로 점검하고 고쳐 줘. 고친 곳은 목록으로 알려 줘.`],
-  ['브랜드 컬러 입히기', '서비스에 쓸 때 이어서 붙여 넣습니다.',
-    `이 서비스의 브랜드 색을 나에게 먼저 물어봐 줘.
-그 색으로 YBM DS 브랜드 색을 맞춰 서비스 CSS에 넣고, 정하지 않으면 기본 색으로 둬. 바꾼 화면을 먼저 보여 줘.`],
-];
+${DOC_LINE}
+비슷한 화면이 Templates에 있으면 그 화면에서 시작해 줘.`],
+};
+const promptBlock = (k, level = 'h3') => `<${level}>${esc(P[k][0])}</${level}>\n<p>${esc(P[k][1])}</p>\n${codeblock(P[k][2], 'text', ' data-wrap')}`;
 // llms.txt 머리에 붙는 규칙 (AI 가 요청 글 대신 여기서 읽는다)
 const LLMS_RULES = `## 지킬 것
 
 - 설치: <head>에 CSS와 JS 두 줄을 넣는다. 서비스 CSS는 그다음에 불러온다.
+- 브라우저: DS 는 CSS @layer 를 쓴다. @layer 를 모르는 브라우저(Chrome 99, Safari 15.4 이전)에서는 DS 가 적용되지 않으니, 더 오래된 브라우저를 지원해야 하면 먼저 알린다.
 - 컴포넌트: ${PUBLIC}/components.json 에 있는 것만 쓰고, 마크업은 ${RAW}/dist/components.css 의 컴포넌트별 머리 주석 그대로 쓴다.
 - 색, 간격, 글자 크기, 모서리, 그림자는 --ds-* 토큰만 쓴다. hex, rgb 를 직접 쓰지 않는다.
 - 모양을 바꿀 때는 컴포넌트 변수(--ds-[컴포넌트]-*)만 덮어쓴다. 새 ds- 클래스나 !important 를 만들지 않는다.
-- 서비스 색: 서비스 CSS의 :root 에서 --ds-color-palette-brand-100 ~ 1000 을 덮어쓴다. 받은 색을 600 단계로 두고, 다크(:root[data-theme="dark"])는 같은 단계를 뒤집어 넣는다.
+- 브랜드 컬러: 서비스 CSS의 :root 에서 --ds-color-palette-brand-100 ~ 1000 을 덮어쓴다. 받은 색을 600 단계로 두고, 다크(:root[data-theme="dark"])는 같은 단계를 뒤집어 넣는다.
 - 화면: 모바일 먼저 만들고 768px, 1280px 에서 배치를 바꾼다. 비슷한 화면이 Templates 에 있으면 그 HTML에서 시작한다.
-- 글자: 한국어. 제목 Bold, 항목 제목 SemiBold, 본문 Regular, 본문은 word-break: keep-all.`;
+- 글자: 한국어. 제목 Bold, 항목 제목 SemiBold, 본문 Regular, 본문은 word-break: keep-all.
+
+## 운영 중인 사이트에 옮길 때
+
+- 한 번에 다 바꾸지 않는다. 살펴보기, DS 넣기, 브랜드 컬러, 화면 하나씩, 점검 순서로 간다.
+- DS 는 @layer 안에 있어 기존 CSS 가 늘 이긴다. 그래서 DS 를 넣기만 해서는 지금 화면이 바뀌지 않는다. 기존 규칙이 DS 부품을 덮으면 그 화면의 기존 규칙만 걷어 낸다.
+- 서버 코드(PHP, JSP 등)의 로직은 바꾸지 않는다. 스크립트와 서버가 쓰는 class, id, name 속성은 그대로 두고, 필요하면 DS 클래스를 함께 붙인다.
+- 기존 CSS 의 hex 색은 가까운 --ds-color-* 역할 토큰으로 바꾸고, 바꾼 짝은 목록으로 남긴다.
+- 화면을 바꿀 때마다 바꾸기 전후 화면을 비교해 보여 주고 확인을 받는다.`;
 // 반응형 기준점 (Foundations Breakpoint, 11-04 시작하기에서 옮김)
 const bpRows = [['sm', '480px', '큰 휴대폰'], ['md', '768px', '태블릿, PC 부품으로 바뀌는 기준'], ['lg', '1280px', '넓은 PC, 3단 배치'], ['xl', '1440px', '아주 넓은 화면']];
 // 안내 카드 (레퍼런스 B Get Started): 옅은 회색 칸에 제목과 화살표, 아래 한 줄 설명. out 이면 새 창
@@ -359,18 +388,14 @@ write({
   ${metaLinks({ figma: LINKS.figmaUrl('2608:2'), code: GITHUB })}
 </header>
 
-<h2 id="ai">AI로 시작하기</h2>
-<p>아래 글을 AI 코딩 도구(ChatGPT, Claude, Cursor 등)에 붙여 넣으면 됩니다. 지킬 규칙은 AI가 문서에서 읽어 갑니다.</p>
-<h3>${prompts[0][0]}</h3>
-${codeblock(prompts[0][2], 'text', ' data-wrap')}
-<h3>${prompts[3][0]}</h3>
-<p>서비스에 쓸 때 이어서 붙여 넣습니다.</p>
-${codeblock(prompts[3][2], 'text', ' data-wrap')}
-<h3>${prompts[1][0]}</h3>
-<p>대괄호 안만 내 상황에 맞게 바꿉니다.</p>
-${codeblock(prompts[1][2], 'text', ' data-wrap')}
-<h3>${prompts[2][0]}</h3>
-${codeblock(prompts[2][2], 'text', ' data-wrap')}
+<h2 id="ai">내 사이트에 옮기기</h2>
+<p>운영 중인 사이트에 DS를 옮겨 오는 순서입니다. 단계마다 아래 글을 AI 코딩 도구(ChatGPT, Claude, Cursor 등)에 붙여 넣습니다. 지킬 규칙은 AI가 문서에서 읽어 갑니다.</p>
+${['survey', 'insert', 'brand', 'page', 'check'].map((k) => promptBlock(k)).join('\n')}
+<p class="site-note">DS는 CSS <code>@layer</code>를 씁니다. Chrome 99, Safari 15.4 보다 오래된 브라우저에서는 DS가 적용되지 않습니다.</p>
+
+<h2 id="new">새로 만들기</h2>
+<p>새 프로젝트나 새 화면은 아래 두 글로 시작합니다.</p>
+${['install', 'screen'].map((k) => promptBlock(k)).join('\n')}
 
 <h2 id="start">직접 시작하기</h2>
 <p><code>&lt;head&gt;</code>에 두 줄을 넣으면 글꼴, 토큰, 아이콘, 컴포넌트가 함께 들어옵니다. 쓰는 법은 <a class="ds-link" href="components/index.html">Components</a>에 있습니다.</p>
@@ -438,12 +463,6 @@ const foundPages = {
 <p>YBM DS 의 색은 역할 색과 팔레트 색 두 층으로 되어 있습니다. 화면에는 역할 색만 쓰고, 팔레트 색은 역할 색을 만드는 원료로 둡니다. 그래서 어떤 화면에서도 글자와 바탕의 대비가 충분하고 뜻이 분명합니다.</p>
 <h2 id="role-based">역할 색</h2>
 <p>역할 색은 생김새가 아니라 하는 일로 이름을 붙인 색입니다. 오류는 <code>critical</code>, 성공은 <code>positive</code> 처럼 이름만 보고 어디에 쓰는지 알 수 있습니다. 자세한 규칙과 전체 목록은 <a class="ds-link" href="color-roles.html">Roles</a>에 있습니다.</p>
-<h3>장점 1. 접근성</h3>
-<p>역할 색은 처음부터 정해 둔 글자와 바탕 짝으로 대비를 맞췄습니다. 짝을 지켜 쓰기만 하면 읽기 어려운 조합이 생기지 않습니다.</p>
-<h3>장점 2. 빈틈없는 바꾸기</h3>
-<p>색을 바꿀 때 값이 아니라 뜻을 기준으로 바꿉니다. 값이 같아도 뜻이 다르면 따로 바꿀 수 있어서, 한 곳을 고쳐도 다른 곳이 함께 흔들리지 않습니다.</p>
-<h3>장점 3. 다크 모드</h3>
-<p>역할 색은 라이트와 다크 모드에 알맞은 값을 따로 갖고 있습니다. 토큰으로만 썼다면 <code>data-theme="dark"</code> 하나로 모든 화면이 맞춰집니다.</p>
 <h2 id="palette-color">팔레트 색</h2>
 <p>팔레트 색은 회색과 일곱 가지 색을 100 ~ 1000 단계로 나눈 원료 색입니다. 역할 색으로 나타내기 어려운 드문 경우에만 화면에 씁니다. 다크 모드에서는 같은 단계 번호에 어두운 화면용 값이 들어가 있어 그대로 써도 알아보기 쉽습니다. 전체 목록은 <a class="ds-link" href="color-palette.html">Palette</a>에 있습니다.</p>
 <h2 id="related">관련 문서</h2>
@@ -453,9 +472,11 @@ const foundPages = {
 </div>
 <h2 id="code">코드에서 쓰기</h2>
 ${codeblock(`.my-card {\n  background: var(--ds-color-bg-layer-default);\n  color: var(--ds-color-fg-neutral);\n  border: 1px solid var(--ds-color-stroke-neutral-muted);\n}`, 'css')}
-<h3>브랜드 색 바꾸기</h3>
-<p>이 가이드는 모노톤으로 보여 줍니다. 팔레트 <code>--ds-color-palette-brand-100</code> ~ <code>1000</code>만 덮어쓰면 브랜드 색을 쓰는 곳이 모두 따라 바뀝니다.</p>
-${codeblock(`/* my-service.css - DS 다음에 불러온다 */\n:root {\n  --ds-color-palette-brand-100: #e6f6ee;  /* 옅은 배경 */\n  --ds-color-palette-brand-600: #12a150;  /* 주 버튼, 링크 */\n  --ds-color-palette-brand-700: #0d7d3e;  /* 눌림, 진한 글자 */\n  /* 200 ~ 500, 800 ~ 1000 도 같은 색의 단계로 채운다 */\n}\n:root[data-theme="dark"] {\n  /* 다크 모드는 같은 단계를 뒤집어 넣는다 (다크 100 = 라이트 1000) */\n}`, 'css')}
+<h3>브랜드 컬러 바꾸기</h3>
+<p>서비스 대표 색 하나만 정하면 됩니다. 아래 글을 AI에 붙여 넣으면 나머지 단계와 다크 모드 값까지 만들어 넣습니다.</p>
+${codeblock(P.brand[2], 'text', ' data-wrap')}
+<p>직접 넣을 때는 서비스 CSS에서 대표 색을 <code>brand-600</code>에 넣고, 나머지 단계를 같은 색의 진하기로 채웁니다.</p>
+${codeblock(`/* 서비스 CSS - DS 다음에 불러온다 */\n:root {\n  --ds-color-palette-brand-600: #12a150;  /* 대표 색: 주 버튼, 링크 */\n  --ds-color-palette-brand-700: #0d7d3e;  /* 한 단계 진하게: 눌림 */\n  --ds-color-palette-brand-100: #e6f6ee;  /* 아주 옅게: 옅은 배경 */\n  /* 나머지 단계도 같은 색으로 채운다 */\n}`, 'css')}
 <h2 id="practices">사용 지침</h2>
 ${practices([
   [true, '역할에 맞는 색을 고릅니다. 오류는 critical, 성공은 positive 입니다.'],
@@ -719,7 +740,7 @@ ${fdTabs('icons', 'foundations/icons.html')}
 <p>아이콘은 Lucide 한 가지만 씁니다. 선이 고르고 모양이 단순해 처음 보는 사람도 뜻을 바로 압니다. 지금 바로 쓸 수 있는 아이콘은 ${iconNames.length}개이고, 필요하면 Lucide ${lucideCount.toLocaleString()}개 가운데서 더 넣습니다. 모든 아이콘은 <a class="ds-link" href="icons-library.html">Library</a>에서 찾아 바로 복사합니다.</p>
 ${example(`<div class="pv-stage"><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="medium"><i class="ds-icon ds-icon--search ds-icon--sm" aria-hidden="true"></i>찾기</button><button type="button" class="ds-btn" data-variant="ghost" data-size="medium" data-layout="iconOnly" aria-label="닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button><span class="ds-badge" data-tone="positive"><i class="ds-icon ds-icon--circle-check-solid ds-icon--sm" aria-hidden="true"></i>완료</span></div>`, `<!-- 글자 옆: 꾸밈용이라 aria-hidden -->\n<button class="ds-btn" data-variant="neutralWeak" data-size="medium">\n  <i class="ds-icon ds-icon--search ds-icon--sm" aria-hidden="true"></i>찾기\n</button>\n\n<!-- 아이콘만 있는 버튼: 뜻을 aria-label로 -->\n<button class="ds-btn" data-variant="ghost" data-size="medium" data-layout="iconOnly" aria-label="닫기">\n  <i class="ds-icon ds-icon--x" aria-hidden="true"></i>\n</button>`)}
 <h2 id="categories">종류</h2>
-${table(['종류', '모양', '쓰는 곳'], [['선', '<i class="ds-icon ds-icon--house" aria-hidden="true"></i> <code>ds-icon--house</code>', '대부분의 자리. 기본 모양입니다.'], ['채움', '<i class="ds-icon ds-icon--house-solid" aria-hidden="true"></i> <code>ds-icon--house-solid</code>', '선택된 탭, 상태 표시처럼 더 강하게 보여야 할 때. 이름 끝에 <code>-solid</code>가 붙습니다.']])}
+${table(['종류', '모양', '쓰는 곳'], [['선', '<span class="site-icon-inline"><i class="ds-icon ds-icon--house" aria-hidden="true"></i><code>ds-icon--house</code></span>', '대부분의 자리. 기본 모양입니다.'], ['채움', '<span class="site-icon-inline"><i class="ds-icon ds-icon--house-solid" aria-hidden="true"></i><code>ds-icon--house-solid</code></span>', '선택된 탭, 상태 표시처럼 더 강하게 보여야 할 때. 이름 끝에 <code>-solid</code>가 붙습니다.']])}
 <h2 id="naming">이름 규칙</h2>
 <ul class="site-list">
   <li>이름은 쓰임이 아니라 생김새로 붙입니다. 닫기 버튼이어도 이름은 <code>x</code> 입니다.</li>
@@ -730,8 +751,8 @@ ${table(['종류', '모양', '쓰는 곳'], [['선', '<i class="ds-icon ds-icon-
 <p>크기는 기본 20 이고, <code>ds-icon--sm</code> 16, <code>ds-icon--lg</code> 24 두 가지가 더 있습니다. 그 밖의 크기가 꼭 필요하면 <code>--ds-icon-size</code> 변수로 바꿉니다. 색은 부모의 글자색을 바꾸면 따라옵니다.</p>
 ${example(`<div class="pv-stage"><i class="ds-icon ds-icon--search ds-icon--sm" aria-hidden="true"></i><i class="ds-icon ds-icon--search" aria-hidden="true"></i><i class="ds-icon ds-icon--search ds-icon--lg" aria-hidden="true"></i><span style="color: var(--ds-color-fg-brand)"><i class="ds-icon ds-icon--circle-check-solid ds-icon--lg" aria-hidden="true"></i></span><span style="color: var(--ds-color-fg-critical)"><i class="ds-icon ds-icon--triangle-alert-solid ds-icon--lg" aria-hidden="true"></i></span></div>`, `<i class="ds-icon ds-icon--search ds-icon--sm" aria-hidden="true"></i>  <!-- 16 -->\n<i class="ds-icon ds-icon--search" aria-hidden="true"></i>              <!-- 20 기본 -->\n<i class="ds-icon ds-icon--search ds-icon--lg" aria-hidden="true"></i>  <!-- 24 -->\n\n<!-- 색은 부모 글자색 -->\n<span style="color: var(--ds-color-fg-brand)"><i class="ds-icon ds-icon--circle-check-solid" aria-hidden="true"></i></span>\n<span style="color: var(--ds-color-fg-critical)"><i class="ds-icon ds-icon--triangle-alert-solid" aria-hidden="true"></i></span>`)}
 <h2 id="usage">쓰임</h2>
-<p>자주 쓰는 아이콘의 쓰임입니다. 같은 뜻에는 늘 같은 아이콘을 씁니다.</p>
-${ICON_GROUPS.map(([g, m]) => `<h3 id="icons-${ICON_GROUPS.findIndex(([x]) => x === g) + 1}">${g}</h3>\n${table(['이름', '쓰임'], Object.entries(m).filter(([n]) => iconNames.includes(n)).map(([n, u]) => iconRow(n, u)))}`).join('\n')}
+<p>자주 쓰는 아이콘의 쓰임입니다. 같은 뜻에는 늘 같은 아이콘을 씁니다. 채움 모양은 이름 끝에 <code>-solid</code>를 붙입니다.</p>
+${ICON_GROUPS.map(([g, m]) => `<h3 id="icons-${ICON_GROUPS.findIndex(([x]) => x === g) + 1}">${g}</h3>\n${table(['이름', '쓰임'], Object.entries(m).filter(([n]) => iconNames.includes(n) && !n.endsWith('-solid')).map(([n, u]) => iconRow(n, u)))}`).join('\n')}
 <h2 id="add">새 아이콘 넣기</h2>
 <p>지금 있는 아이콘 안에서 쓰는 것을 먼저 권합니다. 그래도 새 아이콘이 필요하면 아래 순서를 따릅니다.</p>
 <ol class="site-list">
