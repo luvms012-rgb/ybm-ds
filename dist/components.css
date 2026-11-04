@@ -1263,6 +1263,7 @@ button.ds-input__prefix:hover { color: var(--ds-color-fg-neutral); }
   --ds-badge-fg: var(--ds-color-fg-neutral-muted);
   --ds-badge-line: transparent;
   display: inline-flex;
+  vertical-align: middle;  /* 2026-11-04: 제목 글자 옆에 둘 때 글자 가운데에 맞춘다 */
   align-items: center;
   justify-content: center;
   flex: none;
@@ -1434,6 +1435,15 @@ button.ds-input__prefix:hover { color: var(--ds-color-fg-neutral); }
   border-radius: var(--ds-shape-pill);
   background: var(--ds-avatar-status-color);
   box-shadow: 0 0 0 var(--ds-avatar-status-ring) var(--ds-color-bg-layer-default);
+}
+/* 2026-11-04: 크기, 고리, 자리를 정수 px 로 맞춘다. 9.36px 같은 소수 크기와 1.5px 고리는 원이 납작해 보였다 (round() 를 아는 브라우저만, 나머지는 위 값) */
+@supports (width: round(1.5px, 1px)) {
+  .ds-avatar__status {
+    --ds-avatar-status-size: max(8px, round(up, calc(var(--ds-avatar-size) * 0.26), 2px));
+    --ds-avatar-status-ring: max(2px, round(calc(var(--ds-avatar-size) * 0.04), 1px));
+    left: round(calc(var(--ds-avatar-size) * 0.933), 1px);
+    top: round(calc(var(--ds-avatar-size) * 0.75), 1px);
+  }
 }
 .ds-avatar:is([data-shape="rounded"], [data-shape="square"]) > .ds-avatar__status {
   left: calc(100% - var(--ds-avatar-status-size) * 0.2);
@@ -1684,7 +1694,7 @@ a.ds-callout:active, button.ds-callout:active { filter: brightness(0.97); }
   box-shadow: var(--ds-elevation-overlay);
 }
 .ds-menu__divider { height: 9px; padding-block: 4px; flex: none; }
-.ds-menu__divider::before { content: ""; display: block; height: 1px; background: var(--ds-color-stroke-neutral-subtle); }
+.ds-menu__divider::before { content: ""; display: block; height: 1px; background: var(--ds-color-stroke-neutral-muted); }
 .ds-menu-item {
   --ds-menu-item-fg: var(--ds-color-fg-neutral);
   display: flex;
@@ -1891,6 +1901,7 @@ html:has(:is(.ds-dialog, .ds-bottomsheet)[open]) { overflow: hidden; }
 /* --------------------------------------------------------------------------
    30 Accordion — 펼쳐 보는 목록(<details> 사용)
    variant: inline(기본) · separated   size: medium(기본) · large
+   모션: 열고 닫을 때 높이가 부드럽게 바뀐다(ybm-ds.js, 2026-11-04). 움직임 줄이기 설정이면 바로 바뀐다. 같은 name 묶음은 함께 움직인다.
      <details class="ds-accordion" [data-variant="separated"] [data-size="large"]>
        <summary class="ds-accordion__trigger">
          [<i class="ds-icon ds-icon--… " aria-hidden="true"></i>]
@@ -1913,7 +1924,7 @@ html:has(:is(.ds-dialog, .ds-bottomsheet)[open]) { overflow: hidden; }
   --ds-acc-desc-line: var(--ds-line-height-t03);
   --ds-acc-content-size: var(--ds-font-size-t04);
   --ds-acc-content-line: var(--ds-line-height-t04);
-  box-shadow: inset 0 -1px 0 var(--ds-color-stroke-neutral-weak);
+  box-shadow: inset 0 -1px 0 var(--ds-color-stroke-neutral-muted);  /* 2026-11-04: 안쪽 구분선 */
 }
 .ds-accordion[data-size="large"] {
   --ds-acc-py: var(--ds-space-x5);
@@ -1948,7 +1959,7 @@ html:has(:is(.ds-dialog, .ds-bottomsheet)[open]) { overflow: hidden; }
           mask: var(--ds-icon-chevron-down) center / contain no-repeat;
   transition: rotate var(--ds-duration-normal) var(--ds-easing-standard);
 }
-.ds-accordion[open] > .ds-accordion__trigger::after { rotate: 180deg; }
+.ds-accordion[open]:not([data-ds-closing]) > .ds-accordion__trigger::after { rotate: 180deg; }  /* 2026-11-04: 닫히는 동안(ybm-ds.js)은 꺾쇠가 먼저 돌아간다 */
 .ds-accordion__body { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: var(--ds-space-x0_5); }
 .ds-accordion__title { font-size: var(--ds-acc-title-size); line-height: var(--ds-acc-title-line); font-weight: var(--ds-font-weight-semibold); }  /* 2026-11-04: Medium 에서 SemiBold 로 */
 .ds-accordion__desc { color: var(--ds-color-fg-neutral-subtle); font-size: var(--ds-acc-desc-size); line-height: var(--ds-acc-desc-line); }
@@ -2324,7 +2335,7 @@ html:has(:is(.ds-dialog, .ds-bottomsheet)[open]) { overflow: hidden; }
   --ds-card-padding: var(--ds-space-x5);
   --ds-card-gap: var(--ds-space-x4);
   --ds-card-radius: var(--ds-shape-xl);
-  --ds-card-line: var(--ds-color-stroke-neutral);  /* 2026-11-04: inset List 와 같은 바깥 테두리 */
+  --ds-card-line: var(--ds-color-stroke-neutral-weak);  /* 2026-11-04: 바깥 테두리는 모든 부품이 stroke/neutral-weak 하나 */
   display: flex;
   flex-direction: column;
   gap: var(--ds-card-gap);
@@ -2335,7 +2346,7 @@ html:has(:is(.ds-dialog, .ds-bottomsheet)[open]) { overflow: hidden; }
   color: var(--ds-color-fg-neutral);
   text-decoration: none;
 }
-.ds-card[data-variant="subtle"] { --ds-card-line: var(--ds-color-stroke-neutral-muted); }
+/* 2026-11-04: subtle 도 테두리 색은 기본과 같다(사용자 "같은 카드의 테두리 색을 다르게 쓰지 않는다"). 이름은 예전 화면을 위해 남긴다 */
 .ds-card[data-variant="elevated"] { box-shadow: var(--ds-elevation-raised); }
 .ds-card[data-size="small"] { --ds-card-padding: var(--ds-space-x4); --ds-card-gap: var(--ds-space-x3); --ds-card-radius: var(--ds-shape-lg); }
 .ds-card__header { display: flex; flex-direction: column; gap: var(--ds-space-x1); }
@@ -2524,7 +2535,7 @@ a.ds-card:active, button.ds-card:active { background: linear-gradient(var(--ds-c
    마지막 섹션 아래에는 두지 않는다.
    -------------------------------------------------------------------------- */
 .ds-divider {
-  --ds-divider-color: var(--ds-color-stroke-neutral-weak);
+  --ds-divider-color: var(--ds-color-stroke-neutral-muted);  /* 2026-11-04: 안쪽 구분선은 모든 부품이 stroke/neutral-muted 하나 */
   --ds-divider-size: 1px;
   --ds-divider-length: 16px;
   display: block;
@@ -2628,7 +2639,7 @@ a.ds-card:active, button.ds-card:active { background: linear-gradient(var(--ds-c
   overflow: hidden;
   border-radius: var(--ds-shape-xl);
   background: var(--ds-color-bg-layer-default);
-  box-shadow: inset 0 0 0 1px var(--ds-color-stroke-neutral);  /* 2026-11-04: 바깥 테두리는 안쪽 구분선보다 한 단계 진하게 */
+  box-shadow: inset 0 0 0 1px var(--ds-color-stroke-neutral-weak);  /* 2026-11-04: 바깥 테두리는 모든 부품이 같은 색 */
 }
 .ds-list-item {
   --ds-list-item-min-h: 56px;
@@ -2806,7 +2817,7 @@ a.ds-card:active, button.ds-card:active { background: linear-gradient(var(--ds-c
   --ds-banner-max: 1200px;
   width: 100%;
   background: var(--ds-banner-bg);
-  box-shadow: inset 0 -1px 0 var(--ds-color-stroke-neutral-weak);
+  box-shadow: inset 0 -1px 0 var(--ds-color-stroke-neutral-muted);  /* 2026-11-04: 안쪽 구분선 */
   color: var(--ds-banner-fg);
   font-size: var(--ds-font-size-t04);
   line-height: var(--ds-line-height-t04);
@@ -3067,7 +3078,7 @@ a.ds-card:active, button.ds-card:active { background: linear-gradient(var(--ds-c
   padding: var(--ds-space-x5);
   border-radius: var(--ds-shape-xl);
   background: var(--ds-color-bg-layer-floating);
-  box-shadow: inset 0 0 0 1px var(--ds-color-stroke-neutral-muted), var(--ds-elevation-2);
+  box-shadow: inset 0 0 0 1px var(--ds-color-stroke-neutral-weak), var(--ds-elevation-2);  /* 2026-11-04: 바깥 테두리 같은 색 */
   color: var(--ds-color-fg-neutral);
   font-size: var(--ds-font-size-t04);
   line-height: var(--ds-line-height-t04);
@@ -3960,7 +3971,7 @@ a.ds-card:active, button.ds-card:active { background: linear-gradient(var(--ds-c
 .ds-markdown li + li { margin-top: var(--ds-space-x1); }
 .ds-markdown :is(pre:not(.ds-codeblock__code), blockquote, table, .ds-codeblock) { margin: var(--ds-space-x4) 0; }  /* 2026-11-04: Code Block 안의 pre 는 빼서 위아래 빈칸이 생기지 않게 */
 .ds-markdown blockquote { padding-left: var(--ds-space-x3); box-shadow: inset 2px 0 0 var(--ds-color-stroke-neutral-weak); color: var(--ds-color-fg-neutral-muted); }
-.ds-markdown hr { margin: var(--ds-space-x6) 0; border: 0; border-top: 1px solid var(--ds-color-stroke-neutral-weak); }
+.ds-markdown hr { margin: var(--ds-space-x6) 0; border: 0; border-top: 1px solid var(--ds-color-stroke-neutral-muted); }
 .ds-markdown a:not([class]) { color: var(--ds-color-fg-brand); text-decoration: underline; }
 .ds-markdown img { max-width: 100%; border-radius: var(--ds-shape-sm); }
 .ds-markdown :not(pre) > code { padding: 0 var(--ds-space-x1); border-radius: var(--ds-shape-2xs); background: var(--ds-color-bg-neutral); font-family: var(--ds-font-mono); font-size: 0.9em; }
@@ -3989,7 +4000,7 @@ a.ds-card:active, button.ds-card:active { background: linear-gradient(var(--ds-c
   background: var(--ds-color-bg-neutral);
   box-shadow: inset 0 0 0 1px var(--ds-color-stroke-neutral-weak);
 }
-.ds-codeblock__header { display: flex; align-items: center; justify-content: space-between; gap: var(--ds-space-x2); padding: var(--ds-space-x2) var(--ds-space-x4); box-shadow: inset 0 -1px 0 var(--ds-color-stroke-neutral-weak); }
+.ds-codeblock__header { display: flex; align-items: center; justify-content: space-between; gap: var(--ds-space-x2); padding: var(--ds-space-x2) var(--ds-space-x4); box-shadow: inset 0 -1px 0 var(--ds-color-stroke-neutral-muted); }
 .ds-codeblock__language { color: var(--ds-color-fg-neutral-subtle); font-family: var(--ds-font-mono); font-size: var(--ds-font-size-t02); line-height: var(--ds-line-height-t02); font-weight: var(--ds-font-weight-medium); }
 .ds-codeblock__copy { display: grid; place-items: center; flex: none; width: var(--ds-space-x6); height: var(--ds-space-x6); border-radius: var(--ds-shape-sm); color: var(--ds-color-fg-neutral-subtle); }
 .ds-codeblock__copy:active { background: var(--ds-color-bg-transparent-pressed); }

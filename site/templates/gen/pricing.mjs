@@ -192,7 +192,7 @@ const cancel = () => {
   .tp-cancel { display: flex; flex-direction: column; gap: var(--ds-space-x8); }
   .tp-keep { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ds-space-x3); }
   @media (min-width: 768px) { .tp-keep { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-  .tp-keep__item { display: flex; flex-direction: column; gap: var(--ds-space-x2); padding: var(--ds-space-x4); border-radius: var(--ds-shape-lg); background: var(--ds-color-bg-neutral-subtle); box-shadow: inset 0 0 0 1px var(--ds-color-stroke-neutral-muted); }
+  .tp-keep__item { display: flex; flex-direction: column; gap: var(--ds-space-x2); padding: var(--ds-space-x4); border-radius: var(--ds-shape-lg); background: var(--ds-color-bg-neutral-subtle); box-shadow: inset 0 0 0 1px var(--ds-color-stroke-neutral-weak); }
   .tp-keep__item > .ds-icon { --ds-icon-size: 24px; }
   .tp-offer.ds-card { background: var(--ds-color-bg-neutral); box-shadow: none; }
   .tp-cancel-acts { display: flex; flex-direction: column-reverse; gap: var(--ds-space-x2); }

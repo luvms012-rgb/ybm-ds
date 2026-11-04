@@ -87,7 +87,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 | 변수 | 기본값 |
 | --- | --- |
-| `--ds-divider-color` | `var(--ds-color-stroke-neutral-weak)` |
+| `--ds-divider-color` | `var(--ds-color-stroke-neutral-muted)` |
 | `--ds-divider-size` | `1px` |
 | `--ds-divider-length` | `16px` |
 

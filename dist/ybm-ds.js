@@ -172,6 +172,67 @@
   }
   setInterval(tickTimers, 1000);
 
+  /* ---- Accordion: 열고 닫을 때 높이가 부드럽게 바뀐다 (2026-11-04) ---------
+     <details> 를 그대로 쓰고 높이만 움직인다. 움직임 줄이기 설정이면 바로 열고 닫는다.
+     같은 name 묶음(하나만 열림)은 연 것과 닫히는 것이 함께 움직인다. 닫히는 동안 data-ds-closing 이 붙는다 */
+  var accRun = new WeakMap();
+  function accMs(el) {
+    if (window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches) return 0;
+    var v = getComputedStyle(el).getPropertyValue("--ds-duration-normal").trim();
+    var ms = parseFloat(v) * (/ms$/.test(v) ? 1 : 1000);
+    return ms > 0 ? ms : 250;
+  }
+  function accMove(det, open) {
+    var prev = accRun.get(det);
+    var from = det.getBoundingClientRect().height;
+    if (prev) { prev.cancel(); accRun.delete(det); }
+    var ms = accMs(det);
+    if (!det.animate || !ms) { det.open = open; det.removeAttribute("data-ds-closing"); return null; }
+    det.open = open;
+    var to = det.getBoundingClientRect().height;
+    if (!open) { det.open = true; det.setAttribute("data-ds-closing", ""); } else det.removeAttribute("data-ds-closing");
+    det.style.overflow = "hidden";
+    var a = det.animate({ height: [from + "px", to + "px"] }, { duration: ms, easing: getComputedStyle(det).getPropertyValue("--ds-easing-standard").trim() || "ease" });
+    accRun.set(det, a);
+    // 끝내기: 움직임 끝 이벤트와 시간 둘 중 먼저 오는 쪽 (보이지 않는 탭에서는 이벤트가 늦을 수 있다). 도중에 반대로 누르면 새 움직임이 맡는다
+    var end = function () {
+      if (accRun.get(det) !== a) return;
+      accRun.delete(det); det.style.overflow = "";
+      if (!open) { det.open = false; det.removeAttribute("data-ds-closing"); }
+      if (a.playState !== "finished") a.cancel();
+      a.dispatchEvent && a.dispatchEvent(new Event("ds-end"));
+    };
+    a.onfinish = end;
+    setTimeout(end, ms + 60);
+    return a;
+  }
+  function accToggle(det) {
+    var opening = !det.open || det.hasAttribute("data-ds-closing");
+    if (!opening) { accMove(det, false); return; }
+    var name = det.getAttribute("name");
+    var others = name ? Array.prototype.filter.call(document.querySelectorAll("details.ds-accordion[open]"), function (o) { return o !== det && o.getAttribute("name") === name && !o.hasAttribute("data-ds-closing"); }) : [];
+    if (others.length) det.removeAttribute("name");  // 브라우저가 다른 항목을 바로 닫지 않게 잠깐 뺀다
+    var a = accMove(det, true);
+    others.forEach(function (o) { accMove(o, false); });
+    // 묶음 이름은 다른 항목이 다 닫힌 뒤에 되돌린다 (열린 채로 이름이 붙으면 브라우저가 한쪽을 바로 닫는다)
+    if (others.length) {
+      var back = function () {
+        if (det.hasAttribute("name")) return;
+        if (others.some(function (o) { return o.open; })) { setTimeout(back, 40); return; }
+        det.setAttribute("name", name);
+      };
+      setTimeout(back, (a ? accMs(det) : 0) + 80);
+    }
+  }
+  document.addEventListener("click", function (e) {
+    var trig = e.target.closest && e.target.closest(".ds-accordion > .ds-accordion__trigger");
+    if (!trig || e.defaultPrevented) return;
+    var det = trig.parentElement;
+    if (det.getAttribute("aria-disabled") === "true") return;
+    e.preventDefault();
+    accToggle(det);
+  });
+
   /* ---- Carousel 끝 표시 / Side Panel 본문 스크롤 표시 --------------------- */
   function syncCarousel(car) {
     var sc = car.querySelector(".ds-carousel__scroller");
@@ -419,6 +480,6 @@
     if (zone) zone.removeAttribute("data-state");
   });
 
-  window.DS = { version: "1.0.0", openDialog: openDialog, closeDialog: closeDialog, snackbar: snackbar, endRefresh: endRefresh, init: init };  // version 은 VERSION 과 같다 (node sync.mjs release 가 바꾼다)
+  window.DS = { version: "1.1.0", openDialog: openDialog, closeDialog: closeDialog, snackbar: snackbar, endRefresh: endRefresh, init: init };  // version 은 VERSION 과 같다 (node sync.mjs release 가 바꾼다)
   window.YBM = window.DS;  // 예전 이름 (2026-11-04 DS 로 바꿈). 이미 YBM.snackbar 를 쓰는 화면이 깨지지 않게 남겨 둔다
 })();

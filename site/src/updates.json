@@ -5,6 +5,38 @@
       "date": "2026-11-04",
       "sections": [
         {
+          "type": "확인할 변경",
+          "items": [
+            ["DS", "Card subtle, inset List, Popover 테두리 색과 Divider 색이 바뀌어 화면의 선이 달라 보일 수 있습니다."]
+          ]
+        },
+        {
+          "type": "바뀐 것",
+          "items": [
+            ["DS", "선 색을 두 가지로 맞췄습니다. 바깥 테두리는 모두 stroke/neutral-weak, 안쪽 구분선은 모두 stroke/neutral-muted입니다. Card subtle도 기본과 같은 테두리입니다."],
+            ["DS", "Checkbox, Radio 테두리를 진하게 바꿨습니다."]
+          ]
+        },
+        {
+          "type": "새 기능",
+          "items": [
+            ["DS", "Accordion을 열고 닫을 때 높이가 부드럽게 바뀝니다."]
+          ]
+        },
+        {
+          "type": "고친 것",
+          "items": [
+            ["DS", "Avatar 상태 점이 납작해 보이던 것을 고쳤습니다."],
+            ["DS", "제목 옆 Badge를 글자 가운데에 맞췄습니다."]
+          ]
+        }
+      ],
+      "version": "1.1.0"
+    },
+    {
+      "date": "2026-11-04",
+      "sections": [
+        {
           "type": "새 기능",
           "items": [
             ["사이트", "Foundations에 화면 폭 기준을 모은 Breakpoint 페이지를 더했습니다."],
@@ -22,7 +54,6 @@
             ["DS", "이름을 YBM DS에서 yds로 바꿨습니다."],
             ["DS", "Segmented Control 글자를 Medium으로, 고른 칸은 SemiBold로 바꿨습니다."],
             ["DS", "List Item, Accordion 제목을 SemiBold로 바꿔 설명과 위계를 나눴습니다."],
-            ["DS", "Checkbox, Radio 테두리와 inset List, Card 테두리를 진하게 바꾸고, 목록 구분선은 그보다 옅게 좌우 여백을 같게 맞췄습니다."],
             ["DS", "Dialog 아래쪽 버튼 둘은 가로로 나누고, 버튼이 없는 창도 아래 여백을 둡니다."],
             ["DS", "Avatar 바탕을 연하게, 메뉴 항목 모서리를 덜 둥글게, Bottom Navigation 위 여백을 넓혔습니다."],
             ["DS", "토큰 이름을 --ybm-*에서 --ds-*로, CSS 레이어를 ds.*로, 스크립트를 DS로 바꿨습니다. 예전 이름도 compat-ybm.css와 window.YBM으로 그대로 쓸 수 있습니다."],

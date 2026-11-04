@@ -10,7 +10,7 @@ const CHAT_CSS = `
   .tp-msg-user { display: flex; flex-direction: column; align-items: flex-end; gap: var(--ds-space-x1_5); }
   .tp-msg-ai { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--ds-space-x3); }
   .tp-msg-ai__body { display: flex; flex-direction: column; gap: var(--ds-space-x3); min-width: 0; }
-  .tp-tools { border-radius: var(--ds-shape-lg); box-shadow: inset 0 0 0 1px var(--ds-color-stroke-neutral-muted); }
+  .tp-tools { border-radius: var(--ds-shape-lg); box-shadow: inset 0 0 0 1px var(--ds-color-stroke-neutral-weak); }
   .tp-tools > summary { display: flex; align-items: center; gap: var(--ds-space-x2); padding: var(--ds-space-x2) var(--ds-space-x3); list-style: none; cursor: pointer; font-size: var(--ds-font-size-t03); color: var(--ds-color-fg-neutral-muted); }
   .tp-tools > summary::-webkit-details-marker { display: none; }
   .tp-tools ul { list-style: none; margin: 0; padding: 0 var(--ds-space-x3) var(--ds-space-x2); display: flex; flex-direction: column; gap: var(--ds-space-x1); font-size: var(--ds-font-size-t03); }
@@ -19,7 +19,7 @@ const CHAT_CSS = `
   .tp-tools code { color: var(--ds-color-fg-neutral); }
   .tp-composer-wrap { padding: var(--ds-space-x3) var(--ds-space-x4) var(--ds-space-x4); }
   .tp-composer-wrap > * { width: min(100%, 720px); margin-inline: auto; }
-  .tp-composer { display: flex; flex-direction: column; gap: var(--ds-space-x2); padding: var(--ds-space-x3); border-radius: var(--ds-shape-2xl); background: var(--ds-color-bg-layer-floating); box-shadow: inset 0 0 0 1px var(--ds-color-stroke-neutral-muted), 0 4px 16px var(--ds-color-palette-static-black-alpha-300); }
+  .tp-composer { display: flex; flex-direction: column; gap: var(--ds-space-x2); padding: var(--ds-space-x3); border-radius: var(--ds-shape-2xl); background: var(--ds-color-bg-layer-floating); box-shadow: inset 0 0 0 1px var(--ds-color-stroke-neutral-weak), 0 4px 16px var(--ds-color-palette-static-black-alpha-300); }
   .tp-composer .ds-textarea { --ds-textarea-line-width: 0px; --ds-textarea-min-height: 48px; --ds-textarea-padding: var(--ds-space-x1); resize: none; background: none; }
   .tp-composer__bar { display: flex; align-items: center; gap: var(--ds-space-x1); }
   .tp-composer__bar .tp-grow { flex: 1 1 auto; }

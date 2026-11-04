@@ -160,6 +160,7 @@ PC 화면에서는 large 크기로 제목과 설명을 크게 보여 줍니다. 
 
 ```
 variant: inline(기본) / separated   size: medium(기본) / large
+모션: 열고 닫을 때 높이가 부드럽게 바뀐다(ybm-ds.js, 2026-11-04). 움직임 줄이기 설정이면 바로 바뀐다. 같은 name 묶음은 함께 움직인다.
 Figma medium: trigger 16 사방 / gap x3 / title t05 Medium / desc t03 fg/neutral-subtle / chevron 20 fg/neutral
               content 0/16/16/16 / t04 fg/neutral-subtle
 Figma large : trigger py20 / title t06 Medium / desc t04 / chevron 24 / content t05

@@ -55,11 +55,11 @@ yds로 [만들 화면, 예: 회원 목록 화면]을 만들어 줘.
 <script src="https://luvms012-rgb.github.io/ybm-ds/dist/ybm-ds.js" defer></script>
 ```
 
-**버전 고정 v1.0.0**
+**버전 고정 v1.1.0**
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/luvms012-rgb/ybm-ds@v1.0.0/dist/ybm-ds.css">
-<script src="https://cdn.jsdelivr.net/gh/luvms012-rgb/ybm-ds@v1.0.0/dist/ybm-ds.js" defer></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/luvms012-rgb/ybm-ds@v1.1.0/dist/ybm-ds.css">
+<script src="https://cdn.jsdelivr.net/gh/luvms012-rgb/ybm-ds@v1.1.0/dist/ybm-ds.js" defer></script>
 ```
 
 운영 서비스는 버전을 고정한 주소를 쓰고, 새 버전은 [Updates](https://luvms012-rgb.github.io/ybm-ds/site/updates.html)를 확인한 뒤 올립니다.

@@ -135,7 +135,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | `--ds-card-padding` | `var(--ds-space-x5)` |
 | `--ds-card-gap` | `var(--ds-space-x4)` |
 | `--ds-card-radius` | `var(--ds-shape-xl)` |
-| `--ds-card-line` | `var(--ds-color-stroke-neutral)` |
+| `--ds-card-line` | `var(--ds-color-stroke-neutral-weak)` |
 
 ### 크기와 여백
 

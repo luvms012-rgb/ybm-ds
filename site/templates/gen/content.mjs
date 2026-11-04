@@ -180,7 +180,7 @@ const workItem = () => {
   @media (min-width: 1024px) { .tp-wi__side { padding: var(--ds-space-x5) var(--ds-space-x6) var(--ds-space-x10) 0; } }
   .tp-sub-item { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--ds-space-x3); padding-block: var(--ds-space-x2_5); box-shadow: inset 0 -1px 0 var(--ds-color-stroke-neutral-muted); }
   .tp-files { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: var(--ds-space-x3); }
-  .tp-file { display: flex; align-items: center; gap: var(--ds-space-x2); padding: var(--ds-space-x3); border-radius: var(--ds-shape-md); box-shadow: inset 0 0 0 1px var(--ds-color-stroke-neutral-muted); font-size: var(--ds-font-size-t03); }
+  .tp-file { display: flex; align-items: center; gap: var(--ds-space-x2); padding: var(--ds-space-x3); border-radius: var(--ds-shape-md); box-shadow: inset 0 0 0 1px var(--ds-color-stroke-neutral-weak); font-size: var(--ds-font-size-t03); }
   .tp-comment { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--ds-space-x3); }
 `;
   const body = `<div class="tp-app">

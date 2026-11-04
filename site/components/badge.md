@@ -40,12 +40,13 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | 구분 | 내용 |
 | --- | --- |
 | **Do** | 누를 수 없는 표시용 라벨로만 씁니다. |
+| **Do** | 같은 자리의 상태는 모두 배지로 보여 주고, 색으로만 강약을 나눕니다. |
 
 ## 예시
 
-### 목록에서 확인할 상태만 알리기
+### 목록의 상태를 같은 모양으로 알리기
 
-할 일이 남은 줄에만 배지를 붙입니다. 문제가 없는 줄은 글자로 두어, 확인할 줄이 바로 눈에 띕니다.
+같은 자리의 상태는 모두 배지로 보여 줍니다. 할 일이 남은 상태만 눈에 띄는 색으로 두어, 확인할 줄이 바로 보입니다.
 
 ```html
 <ul class="ds-list" data-variant="inset" data-divider style="max-width: 420px">
@@ -65,7 +66,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
         <span class="ds-list-item__title">토익 스피킹</span>
         <span class="ds-list-item__desc">12월 7일 오후 2시</span>
       </span>
-      <span class="ds-list-item__suffix">접수 완료</span>
+      <span class="ds-list-item__suffix"><span class="ds-badge">접수 완료</span></span>
       <i class="ds-icon ds-icon--chevron-right ds-list-item__chevron" aria-hidden="true"></i>
     </a>
   </li>
@@ -75,7 +76,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
         <span class="ds-list-item__title">일본어 능력 시험</span>
         <span class="ds-list-item__desc">12월 14일 오전 10시</span>
       </span>
-      <span class="ds-list-item__suffix">접수 완료</span>
+      <span class="ds-list-item__suffix"><span class="ds-badge">접수 완료</span></span>
       <i class="ds-icon ds-icon--chevron-right ds-list-item__chevron" aria-hidden="true"></i>
     </a>
   </li>

@@ -41,7 +41,7 @@ const canvas = () => {
   .tp-artboard__s { position: absolute; left: 8%; bottom: 6%; right: 8%; font-size: var(--ds-font-size-t02); color: var(--ds-color-fg-neutral-muted); }
   .tp-sel { position: absolute; inset: 22% 8% 16%; outline: 2px solid var(--ds-color-stroke-brand-solid); }
   .tp-sel i { position: absolute; width: 8px; height: 8px; background: var(--ds-color-bg-layer-default); box-shadow: inset 0 0 0 2px var(--ds-color-stroke-brand-solid); }
-  .tp-zoom { position: absolute; left: 50%; bottom: var(--ds-space-x4); transform: translateX(-50%); display: flex; align-items: center; gap: var(--ds-space-x1); padding: var(--ds-space-x1); border-radius: var(--ds-shape-lg); background: var(--ds-color-bg-layer-floating); box-shadow: 0 4px 16px var(--ds-color-palette-static-black-alpha-400), inset 0 0 0 1px var(--ds-color-stroke-neutral-muted); }
+  .tp-zoom { position: absolute; left: 50%; bottom: var(--ds-space-x4); transform: translateX(-50%); display: flex; align-items: center; gap: var(--ds-space-x1); padding: var(--ds-space-x1); border-radius: var(--ds-shape-lg); background: var(--ds-color-bg-layer-floating); box-shadow: 0 4px 16px var(--ds-color-palette-static-black-alpha-400), inset 0 0 0 1px var(--ds-color-stroke-neutral-weak); }
 `;
   const handles = ['left:-5px;top:-5px', 'right:-5px;top:-5px', 'left:-5px;bottom:-5px', 'right:-5px;bottom:-5px'].map((p) => `<i style="${p}"></i>`).join('');
   const body = `<div class="tp-tool">
@@ -187,7 +187,7 @@ const pageEditor = () => {
   const css = APP_CSS + `
   .tp-pane--left { width: 300px; }
   .tp-blocks { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--ds-space-x2); }
-  .tp-blocks li { display: flex; align-items: center; gap: var(--ds-space-x2); padding: var(--ds-space-x2) var(--ds-space-x3); border-radius: var(--ds-shape-md); box-shadow: inset 0 0 0 1px var(--ds-color-stroke-neutral-muted); font-size: var(--ds-font-size-t03); cursor: grab; }
+  .tp-blocks li { display: flex; align-items: center; gap: var(--ds-space-x2); padding: var(--ds-space-x2) var(--ds-space-x3); border-radius: var(--ds-shape-md); box-shadow: inset 0 0 0 1px var(--ds-color-stroke-neutral-weak); font-size: var(--ds-font-size-t03); cursor: grab; }
   .tp-layer { display: flex; align-items: center; gap: var(--ds-space-x2); min-height: 36px; padding: 0 var(--ds-space-x2); border-radius: var(--ds-shape-sm); font-size: var(--ds-font-size-t03); }
   .tp-layer[aria-selected="true"] { background: var(--ds-color-bg-brand-weak); color: var(--ds-color-fg-brand); }
   .tp-layer .tp-grow { flex: 1 1 auto; }
