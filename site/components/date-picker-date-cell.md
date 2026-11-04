@@ -1,6 +1,6 @@
 <!-- https://luvms012-rgb.github.io/ybm-ds/site/components/date-picker-date-cell.html -->
 
-# Date Picker · Date Cell
+# Date Picker / Date Cell
 
 달력에서 날짜를 선택하는 컴포넌트입니다.
 

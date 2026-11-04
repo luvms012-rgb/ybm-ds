@@ -23,7 +23,7 @@ const FORM_CSS = `
 `;
 const opt = (t, d, checked = false, type = 'checkbox', name = 'o') => `<label class="tp-optrow"><span class="ds-${type}" data-size="medium"><input type="${type}" class="ds-${type}__control" name="${name}"${checked ? ' checked' : ''} aria-label="${esc(t)}"></span><span class="tp-stack"><span>${t}</span><span class="tp-sub">${d}</span></span></label>`;
 const summary = (items, lines, total, title = '주문 요약') => card(`<div class="tp-between"><h2 class="tp-h3">${title}</h2>${badge(items.length + '개')}</div>${items.map(([n, d, p], i) => `<div class="tp-item">${thumb('1:1', '', K.photo('book', i, 240))}<div class="tp-stack"><div class="tp-between" style="align-items:flex-start;flex-wrap:nowrap"><span>${n}</span>${T(p)}</div><span class="tp-caption">${d}</span></div></div>`).join('')}${divider()}${lines.map(([k, v]) => `<div class="tp-sum-line"><span>${k}</span>${T(v)}</div>`).join('')}${divider()}<div class="tp-sum-total"><span>합계</span>${T(total)}</div>`);
-const ITEMS = [['TOEIC 실전 모의고사 1000제', '교재 · 2권 세트', '38,000원'], ['단어 암기 카드', '교구 · 1개', '12,000원'], ['오답 노트 3권', '문구 · 3개', '9,000원']];
+const ITEMS = [['TOEIC 실전 모의고사 1000제', '교재 / 2권 세트', '38,000원'], ['단어 암기 카드', '교구 / 1개', '12,000원'], ['오답 노트 3권', '문구 / 3개', '9,000원']];
 
 /* 1. 결제 폼 (긴 폼 + 고정 요약) -------------------------------- */
 const payment = () => {
@@ -47,7 +47,7 @@ const payment = () => {
       ${field('f-req', '배송 요청', sel('f-req', '문 앞에 놓아 주세요'))}
       ${checkbox('다음에도 이 배송지 쓰기', { checked: true })}
       <h2 class="tp-legend-t">결제 수단</h2>
-      ${radios('pay', ['신용·체크 카드', '간편 결제', '계좌 이체'], 0)}
+      ${radios('pay', ['신용/체크 카드', '간편 결제', '계좌 이체'], 0)}
       <div class="tp-pair">${req('f-card', '카드 번호', inp('f-card', '0000 0000 0000 0000', 'inputmode="numeric"'))}<div class="tp-pair">${req('f-exp', '유효 기간', inp('f-exp', 'MM/YY'))}${req('f-cvc', 'CVC', inp('f-cvc', '123'))}</div></div>
       ${checkbox('주문 내용을 확인했고 결제에 동의해요')}
     </div>
@@ -71,7 +71,7 @@ const checkoutWizard = () => {
   .tp-promo .ds-field { flex: 1 1 auto; }
 `;
   const qty = (n) => `<div class="ds-quantity" data-size="small"><button type="button" class="ds-quantity__btn" aria-label="수량 줄이기">${icon('minus')}</button><input class="ds-quantity__value" inputmode="numeric" value="${n}" aria-label="수량"><button type="button" class="ds-quantity__btn" aria-label="수량 늘리기">${icon('plus')}</button></div>`;
-  const cart = [['TOEIC 실전 모의고사 1000제', '교재 · 2권 세트 · 권당 19,000원', 2, '38,000원'], ['단어 암기 카드', '교구 · 개당 12,000원', 1, '12,000원'], ['오답 노트', '문구 · 권당 3,000원', 3, '9,000원'], ['형광펜 5색 세트', '문구 · 개당 4,500원', 1, '4,500원']];
+  const cart = [['TOEIC 실전 모의고사 1000제', '교재 / 2권 세트 / 권당 19,000원', 2, '38,000원'], ['단어 암기 카드', '교구 / 개당 12,000원', 1, '12,000원'], ['오답 노트', '문구 / 권당 3,000원', 3, '9,000원'], ['형광펜 5색 세트', '문구 / 개당 4,500원', 1, '4,500원']];
   const body = `<div class="tp-app"><main class="tp-content">
   <div class="tp-cw">
     <div class="tp-form">
@@ -82,7 +82,7 @@ const checkoutWizard = () => {
       <div class="tp-promo">${field('promo', '할인 코드', inp('promo', 'WELCOME10'))}${btn('적용', { size: 'medium' })}</div>
       <div class="tp-between">${btn('쇼핑 계속하기', { variant: 'ghost', ic: 'chevron-left', size: 'medium' })}${btn('배송 정보 입력', { variant: 'brandSolid', size: 'medium', icEnd: 'arrow-right' })}</div>
     </div>
-    <aside class="tp-cw__aside">${summary(cart.map(([n, d, q, p]) => [n, d.split(' · ')[0] + ' · ' + q + '개', p]), [['상품 금액', '63,500원'], ['배송비', '3,000원'], ['할인', '-6,350원']], '60,150원')}</aside>
+    <aside class="tp-cw__aside">${summary(cart.map(([n, d, q, p]) => [n, d.split(' / ')[0] + ' / ' + q + '개', p]), [['상품 금액', '63,500원'], ['배송비', '3,000원'], ['할인', '-6,350원']], '60,150원')}</aside>
   </div>
 </main></div>`;
   return { slug: 'checkout-wizard', en: 'Checkout Wizard', name: '결제 단계', group: 'Form', desc: '배송부터 결제까지 단계를 나눠 진행하는 결제 화면입니다. 입력할 것이 많을 때 한 번에 한 가지씩 받습니다.', css, body };
@@ -107,7 +107,7 @@ const contact = () => {
     ${divider()}
     <fieldset class="tp-stack" style="border:0;padding:0;margin:0;gap:var(--ds-space-x3)"><legend class="tp-legend-t" style="margin-bottom:var(--ds-space-x3)">어떤 일이 필요하세요?</legend><div class="tp-chips">${goals.map((g, i) => chip(g, { on: i === 0 || i === 2 })).join('')}</div></fieldset>
     <div class="tp-pair">${field('c-when', '언제쯤 시작하고 싶으세요?', sel('c-when', '한 달 안에'))}${field('c-budget', '예산은 어느 정도인가요?', sel('c-budget', '1,000만~3,000만원'))}</div>
-    <fieldset class="ds-field" style="border:0;padding:0;margin:0"><legend class="ds-field__label" style="margin-bottom:var(--ds-space-x2)">어떻게 알게 되셨나요?</legend>${radios('src', ['소셜 미디어', '검색', '지인 추천', '행사·세미나', '기사', '기타'], 1)}</fieldset>
+    <fieldset class="ds-field" style="border:0;padding:0;margin:0"><legend class="ds-field__label" style="margin-bottom:var(--ds-space-x2)">어떻게 알게 되셨나요?</legend>${radios('src', ['소셜 미디어', '검색', '지인 추천', '행사/세미나', '기사', '기타'], 1)}</fieldset>
     ${field('c-msg', '더 하고 싶은 말', textarea('c-msg', 'rows="4" placeholder="무엇이든 편하게 적어 주세요"'))}
     ${checkbox('예산 결정 권한이 있어요')}
     ${btn('보내기', { variant: 'brandSolid', size: 'large', fill: true, attrs: 'type="submit"' }).replace('type="button" ', '')}
@@ -122,7 +122,7 @@ const dialogWizard = () => {
   const css = FORM_CSS + `
   .tp-under { opacity: .55; pointer-events: none; }
   .tp-modal { position: fixed; inset: 0; z-index: var(--ds-z-dialog); display: grid; place-items: center; padding: var(--ds-space-x4); background: var(--ds-color-bg-overlay); }
-  .tp-modal .ds-dialog { position: static; display: flex; opacity: 1; transform: none; animation: none; width: min(560px, 100%); max-height: calc(100vh - var(--ds-space-x8)); margin: 0; box-shadow: var(--ds-elevation-5, 0 16px 48px rgb(0 0 0 / .24)); }
+  .tp-modal .ds-dialog { position: static; display: flex; opacity: 1; transform: none; animation: none; width: min(560px, 100%); max-height: calc(100vh - var(--ds-space-x8)); margin: 0; box-shadow: var(--ds-elevation-5, 0 16px 48px var(--ds-color-palette-static-black-alpha-600)); }
   .tp-modal .ds-dialog__body { display: flex; flex-direction: column; gap: var(--ds-space-x5); overflow: auto; }
   .tp-dlg-steps { padding: 0 var(--ds-space-x5) var(--ds-space-x2); }
   .tp-modal .ds-dialog__footer { flex-direction: row; justify-content: space-between; box-shadow: inset 0 1px 0 var(--ds-color-stroke-neutral-muted); padding-block: var(--ds-space-x4); }
@@ -144,7 +144,7 @@ const dialogWizard = () => {
   </div>
 </div>
 </div>`;
-  return { slug: 'form-wizard-dialog', en: 'Dialog Wizard', name: '대화상자 단계 폼', group: 'Form', desc: '보던 화면 위에 창을 띄워 짧은 단계를 진행하는 폼입니다. 화면을 옮기지 않고 간단한 설정을 마칠 때 씁니다.', css, body };
+  return { slug: 'form-wizard-dialog', en: 'Dialog Wizard', name: '대화상자 단계 폼', group: 'Form', desc: '보던 화면 위에 창을 띄워 짧은 단계를 진행하는 폼입니다. 화면을 떠나지 않고 간단한 설정을 마칠 때 씁니다.', css, body };
 };
 
 /* 5. 단계 폼 (가로 진행) ---------------------------------------- */
@@ -185,13 +185,13 @@ const inlineWizard = () => {
   .tp-step__main { display: flex; flex-direction: column; gap: var(--ds-space-x4); padding-bottom: var(--ds-space-x6); min-width: 0; }
   .tp-step__head { display: flex; align-items: center; justify-content: space-between; gap: var(--ds-space-x2); min-height: 28px; }
 `;
-  const steps = [['저장소', 'done', '가나다/학습-웹 · main 브랜치'], ['실행 조건', 'current', ''], ['빌드 환경', '', ''], ['테스트', '', ''], ['배포 대상', '', ''], ['알림', '', ''], ['확인', '', '']];
+  const steps = [['저장소', 'done', '가나다/학습-웹 / main 브랜치'], ['실행 조건', 'current', ''], ['빌드 환경', '', ''], ['테스트', '', ''], ['배포 대상', '', ''], ['알림', '', ''], ['확인', '', '']];
   const cur = `<div class="tp-form">${field('ci-ev', '파이프라인을 돌릴 때', `<div>${[['풀 리퀘스트', '열린 풀 리퀘스트가 있는 브랜치에 올릴 때마다', 1], ['기본 브랜치에 올릴 때', 'main 브랜치에 합쳐질 때', 1], ['태그를 만들 때', 'v로 시작하는 태그를 만들 때', 0], ['정해진 시간', '매일 새벽 3시', 0]].map(([t, d, c]) => opt(t, d, !!c)).join('')}</div>`, { help: '고르는 일마다 빌드 시간이 들어요. 꼭 필요한 것부터 고르세요.' })}<div>${btn('다음', { variant: 'brandSolid', size: 'medium' })}</div></div>`;
   const body = `<div class="tp-app">
 ${head('지속 통합 설정', { sub: '앞의 두 단계만 답하면 나머지는 알아서 채워져요.' })}
 <main class="tp-content"><div class="tp-iw"><ol class="tp-steps" aria-label="지속 통합 설정 단계">${steps.map(([t, st, res], i) => `<li class="tp-step" data-state="${st}"${st === 'current' ? ' aria-current="step"' : ''}><div class="tp-step__rail"><span class="tp-step__no">${st === 'done' ? icon('check', 'sm') : i + 1}</span></div><div class="tp-step__main"><div class="tp-step__head"><span class="tp-stack"><span class="tp-h4"${st ? '' : ' style="color: var(--ds-color-fg-neutral-muted)"'}>${t}</span>${res ? `<span class="tp-caption">${res}</span>` : ''}</span>${st === 'done' ? btn('고치기', { variant: 'ghost', size: 'xsmall', ic: 'pencil' }) : ''}</div>${st === 'current' ? cur : ''}</div></li>`).join('')}</ol></div></main>
 </div>`;
-  return { slug: 'form-wizard-inline', en: 'Inline Wizard', name: '펼치는 단계 폼', group: 'Form', desc: '모든 단계를 한 페이지에 펼쳐 놓고 차례로 입력하는 폼입니다. 끝난 단계는 입력한 내용만 짧게 남습니다.', css, body };
+  return { slug: 'form-wizard-inline', en: 'Inline Wizard', name: '펼치는 단계 폼', group: 'Form', desc: '모든 단계를 한 페이지에 펼쳐 놓고 차례로 입력하는 폼입니다. 끝난 단계는 입력한 내용만 짧게 보여 줍니다.', css, body };
 };
 
 /* 7. 두 칸 폼 --------------------------------------------------- */
@@ -212,7 +212,7 @@ const twoColumn = () => {
   ${divider()}
   <div class="tp-g4">${[['일반 문의', 'hello@company.com'], ['기업 영업', 'sales@company.com'], ['언론', 'press@company.com'], ['고객 지원', 'help@company.com']].map(([t, m]) => `<div class="tp-stack"><span class="tp-h4">${t}</span>${link(m, 'mailto:' + m)}</div>`).join('')}</div>
 </div></main></div>`;
-  return { slug: 'form-two-column', en: 'Two-column Form', name: '두 칸 폼', group: 'Form', desc: '입력 칸을 두 칸으로 나눈 문의 폼입니다. 넓은 화면에서 긴 폼을 짧아 보이게 합니다.', css, body };
+  return { slug: 'form-two-column', en: 'Two-column Form', name: '두 칸 폼', group: 'Form', desc: '입력 칸을 두 열로 나눈 문의 폼입니다. 넓은 화면에서 긴 폼이 짧아 보입니다.', css, body };
 };
 
 /* 8. 세로 단계 폼 (왼쪽 단계 + 오른쪽 도움말) -------------------- */
@@ -247,7 +247,7 @@ const vertical = () => {
   <aside class="tp-vw__help" aria-labelledby="h-t">
     <h2 class="tp-h4" id="h-t">${icon('lightbulb', 'sm')} 책 제목 쓰는 법</h2>
     <p class="tp-sub">표지에 적힌 제목과 똑같이 적어 주세요. 홍보 문구나 할인 정보를 제목에 넣으면 심사에서 돌려보낼 수 있어요.</p>
-    ${K.callout('예시', '좋음: 한 달 만에 끝내는 비즈니스 영어 · 나쁨: [50% 할인] 비즈니스 영어 최고의 책', 'informative', 'info-solid')}
+    ${K.callout('예시', '좋음: 한 달 만에 끝내는 비즈니스 영어 / 나쁨: [50% 할인] 비즈니스 영어 최고의 책', 'informative', 'info-solid')}
     <p class="tp-caption">입력칸을 옮겨 가면 이 안내도 그 칸에 맞게 바뀌어요.</p>
   </aside>
 </div>

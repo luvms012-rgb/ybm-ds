@@ -2286,6 +2286,7 @@ html:has(:is(.ds-dialog, .ds-bottomsheet)[open]) { overflow: hidden; }
   font-size: var(--ds-font-size-t04-static);
   line-height: var(--ds-line-height-t04-static);
   font-weight: var(--ds-font-weight-medium);
+  text-align: start;  /* 2026-11-04: 하위 메뉴를 여는 항목을 button 으로 만들어도 글자가 왼쪽에 */
   text-decoration: none;
 }
 .ds-sidenav__prefix { display: grid; place-items: center; flex: none; width: 20px; height: 20px; color: var(--ds-color-fg-neutral-subtle); }
@@ -2604,7 +2605,7 @@ a.ds-card:active, button.ds-card:active { background: linear-gradient(var(--ds-c
              <span class="ds-list-item__title">결제 수단</span>
              [<span class="ds-list-item__desc">등록된 카드 2개</span>]
            </span>
-           [<span class="ds-list-item__suffix">값 · Badge · Switch</span>]
+           [<span class="ds-list-item__suffix">값, Badge, Switch</span>]
            [<i class="ds-icon ds-icon--chevron-right ds-list-item__chevron" aria-hidden="true"></i>]
          </a>
        </li>

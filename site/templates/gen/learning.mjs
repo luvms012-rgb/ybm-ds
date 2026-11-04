@@ -42,7 +42,7 @@ const home = () => {
     ${card(`<div class="tp-stats" style="--n:3"><div><span class="tp-sub">이번 주 학습</span><span class="tp-mid">${T('2시간 40분')}</span></div><div><span class="tp-sub">연속 학습</span><span class="tp-mid">${T('6일')}</span></div><div><span class="tp-sub">이수한 과정</span><span class="tp-mid">${T('12개')}</span></div></div>`)}
   </div>
   <section class="tp-sec">${secHead('이어서 보기')}
-    ${card(`<div class="tp-resume">${cover(2)}<div class="tp-stack" style="gap: var(--ds-space-x3)">${badge('직무', 'informative')}<span class="tp-mid">데이터로 말하는 보고서 쓰기</span><span class="tp-sub">3강. 숫자를 그림으로 바꾸기 · 12분 남음</span>${meter('진도', 25, '3 / 12강')}<div class="tp-row" style="flex-wrap:wrap">${btn('이어 보기', { variant: 'brandSolid', ic: 'play' })}${btn('AI 요약 보기', { ic: 'sparkles' })}</div></div></div>`)}
+    ${card(`<div class="tp-resume">${cover(2)}<div class="tp-stack" style="gap: var(--ds-space-x3)">${badge('직무', 'informative')}<span class="tp-mid">데이터로 말하는 보고서 쓰기</span><span class="tp-sub">3강. 숫자를 그림으로 바꾸기 / 12분 남음</span>${meter('진도', 25, '3 / 12강')}<div class="tp-row" style="flex-wrap:wrap">${btn('이어 보기', { variant: 'brandSolid', ic: 'play' })}${btn('AI 요약 보기', { ic: 'sparkles' })}</div></div></div>`)}
   </section>
   <div class="tp-g2">
     <section class="tp-sec">${secHead('꼭 들어야 하는 교육', { sub: '법정 필수', tools: link('모두 보기') })}
@@ -56,10 +56,10 @@ const home = () => {
     <div class="tp-g4">${course(1, '처음 만나는 생성형 AI 업무 활용', ['3시간', '입문'], { b: badge('신규', 'brand', true) })}${course(2, '설득하는 프레젠테이션 구조 잡기', ['5시간', '중급'], { r: '4.7', n: '862' })}${course(3, '팀장의 1:1 대화법', ['2시간', '중급'], { r: '4.9', n: '2,310' })}${course(4, '비즈니스 영어 이메일 바로 쓰기', ['8시간', '입문'], { r: '4.6', n: '540' })}</div>
   </section>
   <section class="tp-sec">${secHead('사내 지식', { sub: '동료가 나눈 노하우', tools: link('지식 공유하기') })}
-    ${card(`<div class="tp-rows">${[['신규 입사자 온보딩 체크리스트', '인사팀 · 이서연', 128], ['고객 문의 응답 문장 모음', '고객경험팀 · 박지후', 96], ['분기 보고서 템플릿과 작성 팁', '전략기획팀 · 최하은', 74]].map(([t, w, l]) => `<div class="tp-between"><div class="tp-stack"><span class="tp-h4">${t}</span><span class="tp-caption">${w}</span></div><span class="tp-row tp-caption">${icon('thumbs-up', 'sm')}${T(l)}</span></div>`).join('')}</div>`)}
+    ${card(`<div class="tp-rows">${[['신규 입사자 온보딩 체크리스트', '인사팀 / 이서연', 128], ['고객 문의 응답 문장 모음', '고객경험팀 / 박지후', 96], ['분기 보고서 템플릿과 작성 팁', '전략기획팀 / 최하은', 74]].map(([t, w, l]) => `<div class="tp-between"><div class="tp-stack"><span class="tp-h4">${t}</span><span class="tp-caption">${w}</span></div><span class="tp-row tp-caption">${icon('thumbs-up', 'sm')}${T(l)}</span></div>`).join('')}</div>`)}
   </section>
 </main></div>`;
-  return { slug: 'learning-home', en: 'Learning Home', name: '학습 홈', group: 'Learning B2B', desc: '임직원이 처음 보는 학습 홈입니다. 이어서 볼 강의와 필수 교육을 먼저 보여 줍니다.', css, body };
+  return { slug: 'learning-home', en: 'Learning Home', name: '학습 홈', group: 'Learning B2B', desc: '임직원이 학습을 시작하는 첫 화면입니다. 이어서 볼 강의와 필수 교육을 먼저 보여 줍니다.', css, body };
 };
 
 /* 2. 과정 찾기 ---------------------------------------------------- */
@@ -74,7 +74,7 @@ const catalog = () => {
   const tone = { 신규: 'brand', 필수: 'critical', 인기: 'warning' };
   const body = `<div class="tp-app">${topbar(LEARN_MENU, 1, learnEnd)}
 <main class="tp-content">
-  <div class="tp-cat-head"><h1 class="tp-h1">과정 찾기</h1>${search('lc-q', '배우고 싶은 것을 찾아보세요', 'medium')}${chiptabs(['전체', 'AI·디지털', '직무', '리더십', '외국어', '법정 필수', '자기계발'], 0, '분류')}</div>
+  <div class="tp-cat-head"><h1 class="tp-h1">과정 찾기</h1>${search('lc-q', '배우고 싶은 것을 찾아보세요', 'medium')}${chiptabs(['전체', 'AI/디지털', '직무', '리더십', '외국어', '법정 필수', '자기계발'], 0, '분류')}</div>
   <div class="tp-between"><span class="tp-sub">과정 ${T('248')}개</span><div class="tp-row">${select('수준 전체', { id: 'lc-lv', aria: '수준' })}${select('학습 시간 전체', { id: 'lc-time', aria: '학습 시간' })}${select('인기순', { id: 'lc-sort', aria: '정렬' })}</div></div>
   <div class="tp-g4c">${items.map(([t, m, b], i) => course(i, t, m, { b: b ? badge(b, tone[b], true) : '', r: (4.5 + (i % 5) / 10).toFixed(1), n: String(320 + i * 137) })).join('')}</div>
   <div style="display:flex;justify-content:center">${pagination(1, 21)}</div>
@@ -141,9 +141,9 @@ const admin = () => {
   .tp-ad .ds-table td:first-child { white-space: normal; }
   .tp-opt { display: flex; align-items: center; justify-content: space-between; gap: var(--ds-space-x3); font-size: var(--ds-font-size-t04); line-height: var(--ds-line-height-t04); }
 `;
-  const rows = [['데이터로 말하는 보고서 쓰기', '3기', '직무', '11.03 ~ 11.28', '전략기획팀 외 2', 86, 72, '진행 중'], ['개인정보 보호 교육', '2026', '법정 필수', '11.01 ~ 11.30', '전체 임직원', 1240, 58, '진행 중'], ['신임 팀장 리더십', '5기', '리더십', '11.10 ~ 12.12', '신임 팀장', 24, 31, '진행 중'], ['처음 만나는 생성형 AI 업무 활용', '2기', 'AI·디지털', '11.17 ~ 12.05', '희망자', 312, 0, '예정'], ['비즈니스 영어 이메일', '4기', '외국어', '10.06 ~ 10.31', '해외영업팀', 41, 95, '끝남']];
+  const rows = [['데이터로 말하는 보고서 쓰기', '3기', '직무', '11.03 ~ 11.28', '전략기획팀 외 2', 86, 72, '진행 중'], ['개인정보 보호 교육', '2026', '법정 필수', '11.01 ~ 11.30', '전체 임직원', 1240, 58, '진행 중'], ['신임 팀장 리더십', '5기', '리더십', '11.10 ~ 12.12', '신임 팀장', 24, 31, '진행 중'], ['처음 만나는 생성형 AI 업무 활용', '2기', 'AI/디지털', '11.17 ~ 12.05', '희망자', 312, 0, '예정'], ['비즈니스 영어 이메일', '4기', '외국어', '10.06 ~ 10.31', '해외영업팀', 41, 95, '끝남']];
   const st = { '진행 중': 'informative', 예정: '', 끝남: 'positive' };
-  const trs = rows.map(([n, g, cat, per, who, cnt, v, s], i) => [`<div class="tp-stack"><span class="tp-h4">${n}</span><span class="tp-caption">${g} · ${per}</span></div>`, badge(cat), T(cnt.toLocaleString() + '명'), `<div class="tp-track" style="min-width:120px">${progress(v, { label: n + ' 이수율' })}<span class="tp-caption tp-num">${v}%</span></div>`, badge(s, st[s]), iconBtn('ellipsis', '더 보기', { size: 'xsmall' })]);
+  const trs = rows.map(([n, g, cat, per, who, cnt, v, s], i) => [`<div class="tp-stack"><span class="tp-h4">${n}</span><span class="tp-caption">${g} / ${per}</span></div>`, badge(cat), T(cnt.toLocaleString() + '명'), `<div class="tp-track" style="min-width:120px">${progress(v, { label: n + ' 이수율' })}<span class="tp-caption tp-num">${v}%</span></div>`, badge(s, st[s]), iconBtn('ellipsis', '더 보기', { size: 'xsmall' })]);
   const main = `${head('과정 운영', { sub: '과정마다 차수를 열고 대상자와 알림을 정해요.', tools: btn('과정 만들기', { variant: 'brandSolid', ic: 'plus' }) })}
 <main class="tp-content">
   <div class="tp-ad">
@@ -166,13 +166,13 @@ const dash = () => {
   .tp-due { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--ds-space-x3); align-items: center; }
 `;
   const deps = [['영업본부', 94], ['연구소', 88], ['경영지원', 81], ['생산본부', 72], ['고객경험팀', 63]];
-  const top = [['처음 만나는 생성형 AI 업무 활용', 'AI·디지털', '1,082명', '4.8'], ['개인정보 보호 교육', '법정 필수', '1,240명', '4.2'], ['엑셀 함수와 피벗 한 번에', '직무', '764명', '4.7'], ['팀장의 1:1 대화법', '리더십', '418명', '4.9'], ['비즈니스 영어 이메일 바로 쓰기', '외국어', '355명', '4.6']];
-  const main = `${head('학습 현황', { sub: '2026년 11월 · 전체 임직원 1,240명', tools: `${segmented(['이번 달', '분기', '올해'], 0, '기간')}${btn('리포트 받기', { ic: 'download' })}` })}
+  const top = [['처음 만나는 생성형 AI 업무 활용', 'AI/디지털', '1,082명', '4.8'], ['개인정보 보호 교육', '법정 필수', '1,240명', '4.2'], ['엑셀 함수와 피벗 한 번에', '직무', '764명', '4.7'], ['팀장의 1:1 대화법', '리더십', '418명', '4.9'], ['비즈니스 영어 이메일 바로 쓰기', '외국어', '355명', '4.6']];
+  const main = `${head('학습 현황', { sub: '2026년 11월 / 전체 임직원 1,240명', tools: `${segmented(['이번 달', '분기', '올해'], 0, '기간')}${btn('리포트 받기', { ic: 'download' })}` })}
 <main class="tp-content">
   <div class="tp-g4">${kpi('필수 교육 이수율', '82%', { d: '+6%p', note: '지난달보다' })}${kpi('1인 평균 학습', '6.2시간', { d: '+0.8', note: '이번 달' })}${kpi('학습한 사람', '1,018명', { note: '전체의 82%' })}${kpi('만족도', '4.6', { note: '5점 만점, 응답 2,140건' })}</div>
   <div class="tp-g3">
     ${card(`<div class="tp-between"><span class="tp-h3">월별 학습 시간</span>${legend([['자율 학습', 0], ['필수 교육', 1]])}</div>${lineChart([{ name: '자율 학습', data: [2100, 2380, 2290, 2620, 2810, 3050] }, { name: '필수 교육', data: [820, 760, 1240, 690, 720, 1480] }], { h: 220, x: ['6월', '7월', '8월', '9월', '10월', '11월'], label: '월별 학습 시간', unit: '' })}`, { cls: 'tp-span2' })}
-    ${card(`<span class="tp-h3">분야별 비중</span><div style="display:grid;place-items:center">${donut([['직무', 38], ['AI·디지털', 24], ['리더십', 14], ['외국어', 12], ['법정 필수', 12]], { center: '3,050', sub: '시간', label: '분야별 학습 시간 비중' })}</div>${legend([['직무', 0, '38%'], ['AI·디지털', 1, '24%'], ['리더십', 2, '14%'], ['외국어', 3, '12%'], ['법정 필수', 4, '12%']])}`)}
+    ${card(`<span class="tp-h3">분야별 비중</span><div style="display:grid;place-items:center">${donut([['직무', 38], ['AI/디지털', 24], ['리더십', 14], ['외국어', 12], ['법정 필수', 12]], { center: '3,050', sub: '시간', label: '분야별 학습 시간 비중' })}</div>${legend([['직무', 0, '38%'], ['AI/디지털', 1, '24%'], ['리더십', 2, '14%'], ['외국어', 3, '12%'], ['법정 필수', 4, '12%']])}`)}
   </div>
   <div class="tp-g2">
     ${card(`<div class="tp-between"><span class="tp-h3">부서별 필수 교육 이수율</span>${select('개인정보 보호 교육', { id: 'ld-must', aria: '필수 교육' })}</div><div class="tp-stack" style="gap: var(--ds-space-x4)">${deps.map(([d, v]) => meter(d, v, v + '%')).join('')}</div>`)}
@@ -183,7 +183,7 @@ const dash = () => {
     ${card(`<span class="tp-row tp-h3">${icon('sparkles')}AI 튜터 이용</span><div class="tp-stack" style="gap: var(--ds-space-x4)"><div class="tp-kv"><span>질문</span>${T('4,812건')}</div><div class="tp-kv"><span>요약 보기</span>${T('9,306회')}</div><div class="tp-kv"><span>퀴즈 풀이</span>${T('6,127회')}</div><div class="tp-kv"><span>답변 만족</span>${T('91%')}</div></div>${callout('', '퀴즈를 푼 학습자의 이수율이 18%p 높아요.', 'informative', 'lightbulb')}`)}
   </div>
 </main>`;
-  return { slug: 'learning-dashboard', en: 'Learning Dashboard', name: '학습 현황 대시보드', group: 'Learning B2B', desc: '교육 담당자가 전체 학습 현황을 보는 대시보드입니다. 마감이 다가오는 미이수자를 바로 찾습니다.', css, body: frame(adminNav(4), '학습 현황', main) };
+  return { slug: 'learning-dashboard', en: 'Learning Dashboard', name: '학습 현황 대시보드', group: 'Learning B2B', desc: '교육 담당자가 전체 학습 현황을 보는 대시보드입니다. 마감이 가까운 미이수자를 바로 찾습니다.', css, body: frame(adminNav(4), '학습 현황', main) };
 };
 
 export const templates = [home, catalog, player, admin, dash].map((f) => f());

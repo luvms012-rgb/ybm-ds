@@ -1,5 +1,5 @@
 // 요금제, 구독 템플릿: 요금제 비교, 구독 결제, 내 구독, 구독 해지.
-// 사내 UI 패턴 모음의 '멤버십·요금제' 화면에서 공통 구조만 뽑았다(서비스 이름, 글, 로고는 넣지 않음).
+// 사내 UI 패턴 모음의 '멤버십/요금제' 화면에서 공통 구조만 뽑았다(서비스 이름, 글, 로고는 넣지 않음).
 import * as K from './kit.mjs';
 import { T, FRAME_CSS, selectbox } from './frame.mjs';
 const { icon, btn, iconBtn, badge, card, head, secHead, field, input, checkbox, radios, textarea, divider, link, esc } = K;
@@ -227,7 +227,7 @@ const cancel = () => {
     <div class="tp-cancel-acts">${btn('해지 신청하기', { variant: 'neutralWeak', size: 'large' })}${btn('구독 유지하기', { variant: 'brandSolid', size: 'large' })}</div>
   </div>
 </main></div>`;
-  return { slug: 'subscription-cancel', en: 'Cancel Subscription', name: '구독 해지', group: 'Pricing', desc: '구독을 해지하기 전에 잃게 되는 혜택을 알려 주는 화면입니다. 할인을 한 번 더 제안하고, 해지는 사용자가 직접 고릅니다.', css, body };
+  return { slug: 'subscription-cancel', en: 'Cancel Subscription', name: '구독 해지', group: 'Pricing', desc: '구독을 해지하기 전에 잃게 되는 혜택을 알려 주는 화면입니다. 할인을 한 번 더 권하고, 해지 여부는 사용자가 정합니다.', css, body };
 };
 
 export const templates = [plans, checkout, manage, cancel].map((f) => f());

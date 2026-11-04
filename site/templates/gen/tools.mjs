@@ -35,21 +35,21 @@ const canvas = () => {
   .tp-doc-tab { display: inline-flex; align-items: center; gap: var(--ds-space-x1_5); height: 32px; padding: 0 var(--ds-space-x1) 0 var(--ds-space-x3); border-radius: var(--ds-shape-sm); color: var(--ds-color-fg-neutral-muted); font-size: var(--ds-font-size-t03); white-space: nowrap; }
   .tp-doc-tab[aria-selected="true"] { background: var(--ds-color-bg-neutral); color: var(--ds-color-fg-neutral); font-weight: var(--ds-font-weight-semibold); }
   .tp-stage { position: relative; flex: 1 1 auto; display: grid; place-items: center; min-height: 0; overflow: auto; background: var(--ds-color-bg-neutral-subtle); background-image: radial-gradient(var(--ds-color-stroke-neutral-muted) 1px, transparent 1px); background-size: 16px 16px; }
-  .tp-artboard { position: relative; width: 340px; aspect-ratio: 3 / 4.4; background: var(--ds-color-bg-layer-default); box-shadow: 0 8px 32px rgb(0 0 0 / .16); }
+  .tp-artboard { position: relative; width: 340px; aspect-ratio: 3 / 4.4; background: var(--ds-color-bg-layer-default); box-shadow: 0 8px 32px var(--ds-color-palette-static-black-alpha-500); }
   .tp-artboard .ds-imageframe { position: absolute; inset: 22% 8% 16%; width: auto; height: auto; aspect-ratio: auto; }
-  .tp-artboard__t { position: absolute; left: 8%; top: 4%; right: 8%; font-size: 26px; line-height: 1.05; font-weight: 800; letter-spacing: -0.03em; }
-  .tp-artboard__s { position: absolute; left: 8%; bottom: 6%; right: 8%; font-size: 12px; color: var(--ds-color-fg-neutral-muted); }
+  .tp-artboard__t { position: absolute; left: 8%; top: 4%; right: 8%; font-size: var(--ds-font-size-t10); line-height: 1.05; font-weight: var(--ds-font-weight-bold); letter-spacing: -0.03em; }
+  .tp-artboard__s { position: absolute; left: 8%; bottom: 6%; right: 8%; font-size: var(--ds-font-size-t02); color: var(--ds-color-fg-neutral-muted); }
   .tp-sel { position: absolute; inset: 22% 8% 16%; outline: 2px solid var(--ds-color-stroke-brand-solid); }
   .tp-sel i { position: absolute; width: 8px; height: 8px; background: var(--ds-color-bg-layer-default); box-shadow: inset 0 0 0 2px var(--ds-color-stroke-brand-solid); }
-  .tp-zoom { position: absolute; left: 50%; bottom: var(--ds-space-x4); transform: translateX(-50%); display: flex; align-items: center; gap: var(--ds-space-x1); padding: var(--ds-space-x1); border-radius: var(--ds-shape-lg); background: var(--ds-color-bg-layer-floating); box-shadow: 0 4px 16px rgb(0 0 0 / .12), inset 0 0 0 1px var(--ds-color-stroke-neutral-muted); }
+  .tp-zoom { position: absolute; left: 50%; bottom: var(--ds-space-x4); transform: translateX(-50%); display: flex; align-items: center; gap: var(--ds-space-x1); padding: var(--ds-space-x1); border-radius: var(--ds-shape-lg); background: var(--ds-color-bg-layer-floating); box-shadow: 0 4px 16px var(--ds-color-palette-static-black-alpha-400), inset 0 0 0 1px var(--ds-color-stroke-neutral-muted); }
 `;
   const handles = ['left:-5px;top:-5px', 'right:-5px;top:-5px', 'left:-5px;bottom:-5px', 'right:-5px;bottom:-5px'].map((p) => `<i style="${p}"></i>`).join('');
   const body = `<div class="tp-tool">
-<header class="tp-tool__bar">${iconBtn('menu', '메뉴')}<div class="tp-row" role="tablist" aria-label="열린 문서">${[['가을 특강 포스터', 1], ['브랜드 시트', 0], ['제목 없는 초안', 0]].map(([t, s]) => `<span class="tp-doc-tab" role="tab" aria-selected="${!!s}">${icon('image', 'sm')}${t}${iconBtn('x', t + ' 닫기', { size: 'xsmall' })}</span>`).join('')}</div>${iconBtn('plus', '새 문서')}<span class="tp-spacer"></span><span class="tp-caption">저장됨 · 2분 전</span>${avatars(['와이비엠', '이준호'], 24)}${btn('공유', { variant: 'neutralSolid', ic: 'share' })}</header>
+<header class="tp-tool__bar">${iconBtn('menu', '메뉴')}<div class="tp-row" role="tablist" aria-label="열린 문서">${[['가을 특강 포스터', 1], ['브랜드 시트', 0], ['제목 없는 초안', 0]].map(([t, s]) => `<span class="tp-doc-tab" role="tab" aria-selected="${!!s}">${icon('image', 'sm')}${t}${iconBtn('x', t + ' 닫기', { size: 'xsmall' })}</span>`).join('')}</div>${iconBtn('plus', '새 문서')}<span class="tp-spacer"></span><span class="tp-caption">저장됨 / 2분 전</span>${avatars(['와이비엠', '이준호'], 24)}${btn('공유', { variant: 'neutralSolid', ic: 'share' })}</header>
 <div class="tp-tool__body">
   <aside class="tp-pane tp-pane--left" aria-label="레이어와 에셋">${segmented(['레이어', '에셋'], 0, '왼쪽 패널')}${tree([[0, 'f', '글자', 0, 1], [1, 'type', '제목'], [1, 'type', '날짜와 장소'], [0, 'f', '이미지', 0, 1], [1, 'image', '메인 사진', 1], [1, 'image', '배경 질감'], [0, 'f', '도형', 0, 0], [0, 'layers', '배경']])}</aside>
   <main class="tp-pane tp-pane--main" style="position: relative">
-    <div class="tp-stage"><div class="tp-artboard" aria-label="포스터 화면"><span class="tp-artboard__t">가을 특강<br>말하기 집중반</span>${thumb('4:3', '', K.photo('nature', 2, 1000), 'none')}<span class="tp-sel">${handles}</span><span class="tp-artboard__s">11월 12일 토요일 오후 2시 · 종로 캠퍼스 5층</span></div>
+    <div class="tp-stage"><div class="tp-artboard" aria-label="포스터 화면"><span class="tp-artboard__t">가을 특강<br>말하기 집중반</span>${thumb('4:3', '', K.photo('nature', 2, 1000), 'none')}<span class="tp-sel">${handles}</span><span class="tp-artboard__s">11월 12일 토요일 오후 2시 / 종로 캠퍼스 5층</span></div>
     <div class="tp-zoom" role="toolbar" aria-label="보기 도구">${iconBtn('mouse-pointer-2', '선택')}${iconBtn('hand', '이동')}${iconBtn('type', '글자')}${iconBtn('square', '도형')}<span style="width:1px;height:20px;background:var(--ds-color-stroke-neutral-muted)"></span>${iconBtn('zoom-out', '축소')}<span class="tp-caption tp-num" style="min-width:40px;text-align:center">100%</span>${iconBtn('zoom-in', '확대')}</div></div>
   </main>
   <aside class="tp-pane tp-pane--right" aria-label="속성">
@@ -94,13 +94,13 @@ const explorer = () => {
       ${col([['folder', '2025 강의 자료', '', 1], ['folder', '2026 강의 자료', 'p', 1], ['folder', '교재 원고', '', 1], ['folder', '행사', '', 1], ['file-text', '연간 계획.pdf']])}
       ${col([['folder', '토익 실전반', 'p', 1], ['folder', '말하기 집중반', '', 1], ['folder', '기업 출강', '', 1], ['file-text', '강사 명단.xlsx'], ['file-text', '시간표.pdf']])}
       ${col([['folder', '1주차', '', 1], ['folder', '2주차', '', 1], ['file-text', '강의 계획서.docx', 's'], ['file-text', '모의고사 1회.pdf'], ['file-text', '모의고사 2회.pdf'], ['video', '오리엔테이션.mp4'], ['image', '표지.png']])}
-      <section class="tp-preview" aria-label="미리 보기">${thumb('4:3', '', K.photo('book', 2, 720))}<div class="tp-stack"><span class="tp-h4">강의 계획서.docx</span><span class="tp-caption">Word 문서 · 284KB</span></div><dl><dt>만든 날</dt><dd>2026.09.01</dd><dt>고친 날</dt><dd>2026.10.29 오후 3:12</dd><dt>위치</dt><dd>2026 강의 자료 › 토익 실전반</dd><dt>태그</dt><dd>${badge('중요', 'critical')}</dd></dl><div class="tp-row">${btn('열기', { variant: 'neutralSolid' })}${btn('공유', { ic: 'share' })}</div></section>
+      <section class="tp-preview" aria-label="미리 보기">${thumb('4:3', '', K.photo('book', 2, 720))}<div class="tp-stack"><span class="tp-h4">강의 계획서.docx</span><span class="tp-caption">Word 문서 / 284KB</span></div><dl><dt>만든 날</dt><dd>2026.09.01</dd><dt>고친 날</dt><dd>2026.10.29 오후 3:12</dd><dt>위치</dt><dd>2026 강의 자료 › 토익 실전반</dd><dt>태그</dt><dd>${badge('중요', 'critical')}</dd></dl><div class="tp-row">${btn('열기', { variant: 'neutralSolid' })}${btn('공유', { ic: 'share' })}</div></section>
     </div>
   </main>
 </div>
 <footer class="tp-crumbs">${K.breadcrumbs(['문서', '2026 강의 자료', '토익 실전반', '강의 계획서.docx'])}</footer>
 </div>`;
-  return { slug: 'file-explorer', en: 'File Explorer', name: '파일 탐색기', group: 'Tools', desc: '폴더를 열 때마다 옆 칸으로 이어 보여 주는 파일 탐색기입니다. 깊은 폴더도 경로를 놓치지 않고 찾아갑니다.', css, body };
+  return { slug: 'file-explorer', en: 'File Explorer', name: '파일 탐색기', group: 'Tools', desc: '폴더를 열 때마다 옆 칸에 이어 보여 주는 파일 탐색기입니다. 깊은 폴더도 경로를 놓치지 않고 찾아갑니다.', css, body };
 };
 
 /* 3. 코드 편집기 (IDE) ------------------------------------------ */
@@ -125,12 +125,12 @@ export function Counter({ start = 0 }) {
   .tp-ide-tabs { display: flex; box-shadow: inset 0 -1px 0 var(--ds-color-stroke-neutral-muted); overflow-x: auto; }
   .tp-ide-tab { display: inline-flex; align-items: center; gap: var(--ds-space-x1_5); height: 36px; padding: 0 var(--ds-space-x2) 0 var(--ds-space-x3); font-size: var(--ds-font-size-t03); color: var(--ds-color-fg-neutral-muted); white-space: nowrap; box-shadow: inset -1px 0 0 var(--ds-color-stroke-neutral-muted); }
   .tp-ide-tab[aria-selected="true"] { color: var(--ds-color-fg-neutral); background: var(--ds-color-bg-layer-default); box-shadow: inset -1px 0 0 var(--ds-color-stroke-neutral-muted), inset 0 2px 0 var(--ds-color-stroke-brand-solid); }
-  .tp-code { flex: 1 1 auto; margin: 0; padding: var(--ds-space-x3) 0; overflow: auto; font-family: var(--ds-font-family-mono, ui-monospace, SFMono-Regular, Menlo, monospace); font-size: 13px; line-height: 20px; counter-reset: ln; }
+  .tp-code { flex: 1 1 auto; margin: 0; padding: var(--ds-space-x3) 0; overflow: auto; font-family: var(--ds-font-mono, ui-monospace, SFMono-Regular, Menlo, monospace); font-size: var(--ds-font-size-t03); line-height: 20px; counter-reset: ln; }
   .tp-code span { display: block; padding-right: var(--ds-space-x4); white-space: pre; }
   .tp-code span::before { counter-increment: ln; content: counter(ln); display: inline-block; width: 44px; padding-right: var(--ds-space-x4); text-align: right; color: var(--ds-color-fg-neutral-subtle); }
   .tp-code span[data-hl] { background: var(--ds-color-bg-brand-weak); }
   .tp-term { flex: none; height: 200px; display: flex; flex-direction: column; box-shadow: inset 0 1px 0 var(--ds-color-stroke-neutral-muted); }
-  .tp-term pre { flex: 1 1 auto; margin: 0; padding: var(--ds-space-x3) var(--ds-space-x4); overflow: auto; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; line-height: 18px; color: var(--ds-color-fg-neutral-muted); }
+  .tp-term pre { flex: 1 1 auto; margin: 0; padding: var(--ds-space-x3) var(--ds-space-x4); overflow: auto; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: var(--ds-font-size-t02); line-height: 18px; color: var(--ds-color-fg-neutral-muted); }
   .tp-term .ds-tabs { padding-inline: var(--ds-space-x2); background: none; }
   .tp-handle-h { height: 6px; cursor: row-resize; display: grid; place-items: center; }
   .tp-handle-h::after { content: ""; width: 32px; height: 4px; border-radius: 2px; background: var(--ds-color-stroke-neutral-weak); }
@@ -156,21 +156,21 @@ export function Counter({ start = 0 }) {
     <span class="tp-label">변경 사항</span>${tree([[0, 'file-code', 'Counter.tsx  M'], [0, 'file-code', 'Button.tsx  M']])}${btn('커밋', { variant: 'neutralSolid', fill: true, ic: 'check' })}
   </aside>
 </div>
-<footer class="tp-status"><span class="tp-row">${icon('git-branch', 'sm')}main</span><span>오류 0 · 경고 2</span><span class="tp-spacer" style="flex:1"></span><span>6줄, 3칸</span><span>UTF-8</span><span>TypeScript React</span></footer>
+<footer class="tp-status"><span class="tp-row">${icon('git-branch', 'sm')}main</span><span>오류 0 / 경고 2</span><span class="tp-spacer" style="flex:1"></span><span>6줄, 3칸</span><span>UTF-8</span><span>TypeScript React</span></footer>
 </div>`;
   return { slug: 'ide', en: 'IDE', name: '코드 편집기', group: 'Tools', desc: '파일 목록, 편집 창, 터미널을 한 화면에 둔 코드 편집기입니다. 칸마다 크기를 바꾸고 접을 수 있습니다.', css, body };
 };
 
 /* 4. 칸반 보드 -------------------------------------------------- */
 const kanban = () => {
-  const cols = [['neutral', '할 일', [['기획', '높음'], '새 학기 수강 안내 메일 초안', '목표, 대상, 일정을 담은 짧은 안내문을 써요.', '2시간 전 고침 · 7월 8일까지', ['와이비엠']], [['리서치', '보통'], '수강생 의견 모으기', '지난 학기 설문에서 주요 의견을 정리해요.', '1일 전 고침 · 7월 11일까지', ['이준호', '박하린']]], ['informative', '진행 중', [['디자인', '높음'], '강좌 상세 화면 시안', '커리큘럼과 후기 영역을 새로 잡아요.', '30분 전 고침 · 7월 9일까지', ['박하린']], [['개발', '보통'], '결제 오류 고치기', '해외 카드 3D 인증 단계 오류', '3시간 전 고침 · 7월 10일까지', ['최민준']], [['콘텐츠', '낮음'], '모의고사 해설 영상 편집', '1~3회 해설을 10분 안으로 줄여요.', '어제 고침', ['정다은']]], ['warning', '검토', [['QA', '높음'], '앱 푸시 알림 점검', '안드로이드 14에서 알림이 늦게 와요.', '4시간 전 고침', ['한지우', '와이비엠']]], ['positive', '완료', [['운영', '보통'], '9월 정산 마감', '기업 고객 12곳 정산 끝', '2일 전 고침', ['윤도현']], [['디자인', '낮음'], '아이콘 정리', '쓰지 않는 아이콘 18개 삭제', '3일 전 고침', ['박하린']]]];
+  const cols = [['neutral', '할 일', [['기획', '높음'], '새 학기 수강 안내 메일 초안', '목표, 대상, 일정을 담은 짧은 안내문을 써요.', '2시간 전 고침 / 7월 8일까지', ['와이비엠']], [['리서치', '보통'], '수강생 의견 모으기', '지난 학기 설문에서 주요 의견을 정리해요.', '1일 전 고침 / 7월 11일까지', ['이준호', '박하린']]], ['informative', '진행 중', [['디자인', '높음'], '강좌 상세 화면 시안', '커리큘럼과 후기 영역을 새로 잡아요.', '30분 전 고침 / 7월 9일까지', ['박하린']], [['개발', '보통'], '결제 오류 고치기', '해외 카드 3D 인증 단계 오류', '3시간 전 고침 / 7월 10일까지', ['최민준']], [['콘텐츠', '낮음'], '모의고사 해설 영상 편집', '1~3회 해설을 10분 안으로 줄여요.', '어제 고침', ['정다은']]], ['warning', '검토', [['QA', '높음'], '앱 푸시 알림 점검', '안드로이드 14에서 알림이 늦게 와요.', '4시간 전 고침', ['한지우', '와이비엠']]], ['positive', '완료', [['운영', '보통'], '9월 정산 마감', '기업 고객 12곳 정산 끝', '2일 전 고침', ['윤도현']], [['디자인', '낮음'], '아이콘 정리', '쓰지 않는 아이콘 18개 삭제', '3일 전 고침', ['박하린']]]];
   const css = APP_CSS + `
   .tp-board { display: flex; gap: var(--ds-space-x3); flex: 1 1 auto; min-height: 0; padding: var(--ds-space-x4); overflow-x: auto; background: var(--ds-color-bg-neutral-subtle); }
   .tp-lane { display: flex; flex-direction: column; flex: none; width: 300px; max-height: 100%; border-radius: var(--ds-shape-xl); background: var(--ds-color-bg-neutral); }
   .tp-lane__head { display: flex; align-items: center; justify-content: space-between; padding: var(--ds-space-x3) var(--ds-space-x3) var(--ds-space-x2); }
   .tp-lane__body { display: flex; flex-direction: column; gap: var(--ds-space-x2); padding: 0 var(--ds-space-x2) var(--ds-space-x2); overflow: auto; }
   .tp-kcard { cursor: grab; }
-  .tp-kcard[data-dragging] { transform: rotate(2deg); box-shadow: 0 8px 24px rgb(0 0 0 / .16); }
+  .tp-kcard[data-dragging] { transform: rotate(2deg); box-shadow: 0 8px 24px var(--ds-color-palette-static-black-alpha-500); }
 `;
   const body = `<div class="tp-tool">
 <header class="tp-tool__bar" role="toolbar" aria-label="보드 동작">${K.even(`<h1 class="tp-h3">스프린트 보드</h1>${badge('8')}<span style="width: 160px">${select('스프린트 24', { size: 'small', aria: '스프린트' })}</span><span class="tp-spacer"></span>${iconBtn('arrow-up-down', '정렬')}${iconBtn('funnel', '거르기')}${iconBtn('users', '담당자')}${iconBtn('settings', '보드 설정')}${btn('할 일 추가', { variant: 'neutralSolid', ic: 'plus' })}`)}</header>
@@ -192,7 +192,7 @@ const pageEditor = () => {
   .tp-layer[aria-selected="true"] { background: var(--ds-color-bg-brand-weak); color: var(--ds-color-fg-brand); }
   .tp-layer .tp-grow { flex: 1 1 auto; }
   .tp-canvas { flex: 1 1 auto; overflow: auto; padding: var(--ds-space-x8) var(--ds-space-x6); background: var(--ds-color-bg-neutral-subtle); }
-  .tp-page { display: flex; flex-direction: column; gap: var(--ds-space-x4); width: min(100%, 880px); margin-inline: auto; padding: var(--ds-space-x6); border-radius: var(--ds-shape-lg); background: var(--ds-color-bg-layer-default); box-shadow: 0 4px 24px rgb(0 0 0 / .08); }
+  .tp-page { display: flex; flex-direction: column; gap: var(--ds-space-x4); width: min(100%, 880px); margin-inline: auto; padding: var(--ds-space-x6); border-radius: var(--ds-shape-lg); background: var(--ds-color-bg-layer-default); box-shadow: 0 4px 24px var(--ds-color-palette-static-black-alpha-300); }
   .tp-picked { outline: 2px solid var(--ds-color-stroke-brand-solid); outline-offset: 4px; border-radius: var(--ds-shape-sm); }
 `;
   const body = `<div class="tp-tool">

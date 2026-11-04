@@ -6,7 +6,7 @@ const CSS = `
   .tp-auth { display: grid; place-items: center; min-height: 100vh; padding: var(--ds-space-x8) var(--ds-space-x4); background: var(--ds-color-bg-canvas); }
   .tp-auth__wrap { display: flex; flex-direction: column; align-items: center; gap: var(--ds-space-x6); width: min(100%, 400px); }
   .tp-auth__brand { display: flex; align-items: center; gap: var(--ds-space-x2); font-weight: var(--ds-font-weight-semibold); }
-  .tp-auth__card { display: flex; flex-direction: column; gap: var(--ds-space-x5); width: 100%; padding: var(--ds-space-x6); border-radius: var(--ds-shape-2xl); background: var(--ds-color-bg-layer-default); box-shadow: inset 0 0 0 1px var(--ds-color-stroke-neutral-muted), 0 1px 2px rgb(0 0 0 / .04), 0 8px 24px rgb(0 0 0 / .06); }
+  .tp-auth__card { display: flex; flex-direction: column; gap: var(--ds-space-x5); width: 100%; padding: var(--ds-space-x6); border-radius: var(--ds-shape-2xl); background: var(--ds-color-bg-layer-default); box-shadow: inset 0 0 0 1px var(--ds-color-stroke-neutral-muted), 0 1px 2px var(--ds-color-palette-static-black-alpha-200), 0 8px 24px var(--ds-color-palette-static-black-alpha-300); }
   .tp-auth__title { display: flex; flex-direction: column; gap: var(--ds-space-x1); text-align: center; }
   .tp-auth__fields { display: flex; flex-direction: column; gap: var(--ds-space-x4); }
   .tp-or { display: flex; align-items: center; gap: var(--ds-space-x3); color: var(--ds-color-fg-neutral-subtle); font-size: var(--ds-font-size-t03); }
@@ -41,7 +41,7 @@ const loginCard = () => {
 /* 2. 로그인 (반으로 나눈) --------------------------------------- */
 const loginSplit = () => {
   const css = CSS + `
-  .tp-split-card { display: grid; grid-template-columns: minmax(0, 1fr); width: min(100%, 960px); overflow: hidden; border-radius: var(--ds-shape-2xl); background: var(--ds-color-bg-layer-default); box-shadow: inset 0 0 0 1px var(--ds-color-stroke-neutral-muted), 0 8px 24px rgb(0 0 0 / .06); }
+  .tp-split-card { display: grid; grid-template-columns: minmax(0, 1fr); width: min(100%, 960px); overflow: hidden; border-radius: var(--ds-shape-2xl); background: var(--ds-color-bg-layer-default); box-shadow: inset 0 0 0 1px var(--ds-color-stroke-neutral-muted), 0 8px 24px var(--ds-color-palette-static-black-alpha-300); }
   @media (min-width: 768px) { .tp-split-card { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
   .tp-split-card__form { display: flex; flex-direction: column; gap: var(--ds-space-x6); padding: var(--ds-space-x8) var(--ds-space-x6); }
   .tp-split-card__media { display: none; }
@@ -82,7 +82,7 @@ const loginSso = () => {
     <p class="tp-sub tp-auth__foot">계정이 없으신가요? ${link('사용 요청')}</p>
   </div>
 </div></main>`;
-  return { slug: 'login-sso', en: 'Login SSO', name: '로그인 (SSO)', group: 'Login', desc: '이메일을 먼저 받아 회사 계정 로그인으로 이어 주는 로그인 화면입니다. 회사 계정이 없으면 비밀번호로 로그인합니다.', css: CSS, body };
+  return { slug: 'login-sso', en: 'Login SSO', name: '로그인 (SSO)', group: 'Login', desc: '이메일을 먼저 받고 회사 계정 로그인으로 이어 주는 화면입니다. 회사 계정이 없으면 비밀번호로 로그인합니다.', css: CSS, body };
 };
 
 export const templates = [loginCard, loginSplit, loginSso].map((f) => f());

@@ -9,7 +9,7 @@
 ## 지킬 것
 
 - 설치: <head>에 CSS와 JS 두 줄을 넣는다. 서비스 CSS는 그다음에 불러온다.
-- 컴포넌트: https://luvms012-rgb.github.io/ybm-ds/components.json에 있는 것만 쓰고, 마크업은 https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/components.css의 컴포넌트별 머리 주석 그대로 쓴다.
+- 컴포넌트: 목록(https://luvms012-rgb.github.io/ybm-ds/components.json)에 있는 것만 쓰고, 마크업은 컴포넌트 CSS(https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/components.css)의 컴포넌트별 머리 주석 그대로 쓴다.
 - 색, 간격, 글자 크기, 모서리, 그림자는 --ds-* 토큰만 쓴다. hex, rgb를 직접 쓰지 않는다.
 - 모양을 바꿀 때는 컴포넌트 변수(--ds-[컴포넌트]-*)만 덮어쓴다. 새 ds- 클래스나 !important를 만들지 않는다.
 - 브랜드 컬러: 서비스 CSS의 :root에서 --ds-color-palette-brand-100 ~ 1000을 덮어쓴다. 받은 색을 600 단계로 두고, 다크(:root[data-theme="dark"])는 같은 단계를 뒤집어 넣는다.
@@ -2293,7 +2293,7 @@ Figma large: h52 / px16 / gap10 / shape/lg / t05 / chevron 20 / medium: h40 / px
 
 <!-- https://luvms012-rgb.github.io/ybm-ds/site/components/select-content-item.md -->
 
-# Select Content · Item
+# Select Content / Item
 
 Select를 눌렀을 때 펼쳐지는 선택지 목록입니다.
 
@@ -4203,7 +4203,7 @@ Figma: bg/neutral-solid / shape/lg / padding 10/12 / 본문 gap x0_5 / 최대 �
 
 <!-- https://luvms012-rgb.github.io/ybm-ds/site/components/menu-menu-item.md -->
 
-# Menu · Menu Item
+# Menu / Menu Item
 
 버튼을 누르면 펼쳐지는 동작 목록입니다. 수정, 삭제처럼 바로 실행할 동작을 모아 둡니다.
 
@@ -5435,7 +5435,7 @@ Figma extended: h48 / px18 / gap x1 / 아이콘 16 / t05 Bold / iconOnly 56×56 
 
 <!-- https://luvms012-rgb.github.io/ybm-ds/site/components/date-picker-date-cell.md -->
 
-# Date Picker · Date Cell
+# Date Picker / Date Cell
 
 달력에서 날짜를 선택하는 컴포넌트입니다.
 
@@ -6468,7 +6468,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 <!-- https://luvms012-rgb.github.io/ybm-ds/site/components/list-list-item.md -->
 
-# List · List Item
+# List / List Item
 
 설정, 메뉴처럼 항목을 한 줄씩 늘어놓는 컴포넌트입니다.
 
@@ -6485,7 +6485,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
         <span class="ds-list-item__title">결제 수단</span>
         [<span class="ds-list-item__desc">등록된 카드 2개</span>]
       </span>
-      [<span class="ds-list-item__suffix">값 · Badge · Switch</span>]
+      [<span class="ds-list-item__suffix">값, Badge, Switch</span>]
       [<i class="ds-icon ds-icon--chevron-right ds-list-item__chevron" aria-hidden="true"></i>]
     </a>
   </li>

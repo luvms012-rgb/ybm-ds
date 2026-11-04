@@ -58,7 +58,7 @@
   .tp-delta[data-tone="flat"] { color: var(--ds-color-fg-neutral-muted); }
   /* 차트: 얇은 선, 옅은 격자, 마우스를 올리면 세로 안내선과 값 풍선 */
   .tp-chart { display: block; width: 100%; height: auto; overflow: visible; }
-  .tp-chart text { fill: var(--ds-color-fg-neutral-subtle); font-size: 11px; font-family: inherit; font-variant-numeric: tabular-nums; }
+  .tp-chart text { fill: var(--ds-color-fg-neutral-subtle); font-size: var(--ds-font-size-t01); font-family: inherit; font-variant-numeric: tabular-nums; }
   .tp-chart .tp-grid-line { stroke: var(--ds-color-stroke-neutral-muted); stroke-width: 1; }
   .tp-chart [data-i] { transition: opacity var(--ds-duration-fast) var(--ds-easing-standard); }
   .tp-chart.is-hover [data-i]:not(.is-on) { opacity: .35; }
@@ -229,7 +229,7 @@
         <label><span class="tp-stack"><span class="tp-h4">댓글 허용</span><span class="tp-caption">끄면 아무도 댓글을 달 수 없어요.</span></span><label class="ds-switch"><input type="checkbox" role="switch" class="ds-switch__control" aria-label="댓글 허용" checked></label></label>
         <label><span class="tp-stack"><span class="tp-h4">이름 숨기기</span><span class="tp-caption">글쓴이 이름 대신 익명으로 보여요.</span></span><label class="ds-switch"><input type="checkbox" role="switch" class="ds-switch__control" aria-label="이름 숨기기"></label></label>
       </div>
-      <div class="ds-callout" data-tone="informative"><i class="ds-icon ds-icon--info-solid" aria-hidden="true"></i><div class="ds-callout__body"><p class="ds-callout__desc">광고, 욕설, 다른 사람의 개인 정보가 담긴 글은 알림 없이 숨겨질 수 있어요.</p></div></div>
+      <div class="ds-callout" data-tone="informative"><i class="ds-icon ds-icon--info-solid" aria-hidden="true"></i><p class="ds-callout__content">광고, 욕설, 다른 사람의 개인 정보가 담긴 글은 알림 없이 숨겨질 수 있어요.</p></div>
     </form>
   </div>
 </main>

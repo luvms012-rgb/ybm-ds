@@ -58,7 +58,7 @@
   .tp-delta[data-tone="flat"] { color: var(--ds-color-fg-neutral-muted); }
   /* 차트: 얇은 선, 옅은 격자, 마우스를 올리면 세로 안내선과 값 풍선 */
   .tp-chart { display: block; width: 100%; height: auto; overflow: visible; }
-  .tp-chart text { fill: var(--ds-color-fg-neutral-subtle); font-size: 11px; font-family: inherit; font-variant-numeric: tabular-nums; }
+  .tp-chart text { fill: var(--ds-color-fg-neutral-subtle); font-size: var(--ds-font-size-t01); font-family: inherit; font-variant-numeric: tabular-nums; }
   .tp-chart .tp-grid-line { stroke: var(--ds-color-stroke-neutral-muted); stroke-width: 1; }
   .tp-chart [data-i] { transition: opacity var(--ds-duration-fast) var(--ds-easing-standard); }
   .tp-chart.is-hover [data-i]:not(.is-on) { opacity: .35; }
@@ -159,7 +159,7 @@
   <aside class="tp-vw__help" aria-labelledby="h-t">
     <h2 class="tp-h4" id="h-t"><i class="ds-icon ds-icon--lightbulb ds-icon--sm" aria-hidden="true"></i> 책 제목 쓰는 법</h2>
     <p class="tp-sub">표지에 적힌 제목과 똑같이 적어 주세요. 홍보 문구나 할인 정보를 제목에 넣으면 심사에서 돌려보낼 수 있어요.</p>
-    <div class="ds-callout" data-tone="informative"><i class="ds-icon ds-icon--info-solid" aria-hidden="true"></i><div class="ds-callout__body"><p class="ds-callout__title">예시</p><p class="ds-callout__desc">좋음: 한 달 만에 끝내는 비즈니스 영어 · 나쁨: [50% 할인] 비즈니스 영어 최고의 책</p></div></div>
+    <div class="ds-callout" data-tone="informative"><i class="ds-icon ds-icon--info-solid" aria-hidden="true"></i><p class="ds-callout__content"><strong class="ds-callout__title">예시</strong>  좋음: 한 달 만에 끝내는 비즈니스 영어 / 나쁨: [50% 할인] 비즈니스 영어 최고의 책</p></div>
     <p class="tp-caption">입력칸을 옮겨 가면 이 안내도 그 칸에 맞게 바뀌어요.</p>
   </aside>
 </div>

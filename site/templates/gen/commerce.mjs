@@ -33,7 +33,7 @@ const CSS = FRAME_CSS + `
   .tp-selbar { display: flex; align-items: center; justify-content: space-between; gap: var(--ds-space-x3); }
   /* 무료 배송까지 남은 금액 */
   /* 무료 배송까지 남은 금액: DS Callout 상자 안에 문구, 얇은 막대, 양 끝 금액 */
-  .tp-freeship .ds-callout__body { display: flex; flex: 1 1 auto; flex-direction: column; gap: var(--ds-space-x2); min-width: 0; }
+  .tp-freeship__body { display: flex; flex: 1 1 auto; flex-direction: column; gap: var(--ds-space-x2); min-width: 0; }
   .tp-freeship b { font-weight: var(--ds-font-weight-bold); color: var(--ds-color-fg-brand); }
   .tp-freeship__ends { display: flex; justify-content: space-between; font-size: var(--ds-font-size-t02); line-height: var(--ds-line-height-t02); color: var(--ds-color-fg-neutral-subtle); font-variant-numeric: tabular-nums; }
   /* 배송 묶음과 상품 줄 */
@@ -125,7 +125,7 @@ const cart = () => {
   <div class="tp-cart">
     <div class="tp-cart__main">
       <div class="tp-selbar">${checkbox(`전체 고르기 ${T(on + '/' + n)}`, { checked: true })}<div class="tp-row">${btn('품절 상품 빼기', { variant: 'ghost', attrs: 'class="tp-only-md"' }).replace('class="ds-btn" ', 'class="ds-btn tp-only-md" ').replace(' class="tp-only-md"', '')}${btn('고른 상품 빼기', { variant: 'neutralOutline' })}</div></div>
-      <div class="ds-callout tp-freeship" data-tone="informative">${icon('truck')}<div class="ds-callout__body"><p class="ds-callout__desc">아침 로스터리 상품을 <b>${won(4200)}</b> 더 담으면 <b>무료 배송</b>이에요.</p>${progress(86, { label: '무료 배송까지' })}<span class="tp-freeship__ends"><span>0원</span><span>30,000원</span></span></div></div>
+      <div class="ds-callout tp-freeship" data-tone="informative">${icon('truck')}<div class="tp-freeship__body"><p class="ds-callout__content">아침 로스터리 상품을 <b>${won(4200)}</b> 더 담으면 <b>무료 배송</b>이에요.</p>${progress(86, { label: '무료 배송까지' })}<span class="tp-freeship__ends"><span>0원</span><span>30,000원</span></span></div></div>
       ${groups.map(([seller, tag, ship, rows]) => card(`<div class="tp-grp__head"><span class="tp-row">${checkOnly(seller + ' 상품 모두 고르기', true)}<h2 class="tp-h4">${seller}</h2>${tag}</span><span class="tp-caption">${ship}</span></div>${rows.map(item).join('')}`, { cls: 'tp-grp', attrs: `aria-label="${esc(seller)}"` })).join('')}
       <ul class="tp-notes">${NOTES.map((t) => `<li>${t}</li>`).join('')}</ul>
     </div>
@@ -155,7 +155,7 @@ const cartEmpty = () => {
   <section class="tp-sec" aria-labelledby="recs">${secHead('이런 상품은 어때요', { id: 'recs', cls: 'tp-h2', sub: '최근 본 상품과 비슷해요' })}<div class="tp-recs">${RECS.map(rec).join('')}</div></section>
 </main>
 </div>`;
-  return { slug: 'cart-empty', en: 'Empty Cart', name: '빈 장바구니', group: 'Commerce', desc: '담은 상품이 없을 때의 장바구니입니다. 추천 상품으로 쇼핑을 이어 가게 돕습니다.', css, body };
+  return { slug: 'cart-empty', en: 'Empty Cart', name: '빈 장바구니', group: 'Commerce', desc: '담은 상품이 없을 때의 장바구니입니다. 추천 상품을 보여 주어 쇼핑을 이어 가게 합니다.', css, body };
 };
 
 export const templates = [cart, cartEmpty].map((f) => f());

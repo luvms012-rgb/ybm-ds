@@ -15,11 +15,11 @@ const thead = (cols) => `<thead><tr>${cols.map((c) => { const [t, a] = Array.isA
 /* 1. 접히는 표 묶음 ---------------------------------------------- */
 const collapsible = () => {
   const groups = [
-    ['예금·적금', 4, '1억 2,480만원', ['계좌', '은행', ['잔액', 'end'], ['금리', 'end'], '최근 거래'], [['생활비 통장', '가 은행 ··· 4821', '@end8,240,000원', '@end0.1%', '오늘'], ['비상금 통장', '나 은행 ··· 1093', '@end21,560,000원', '@end2.8%', '어제'], ['청약 저축', '가 은행 ··· 7730', '@end18,000,000원', '@end2.3%', '10.25'], ['정기 예금', '다 은행 ··· 5512', '@end77,000,000원', '@end3.4%', '10.02']]],
-    ['투자', 3, '4억 6,120만원', ['계좌', '증권사', ['평가액', 'end'], ['수익률', 'end'], '최근 거래'], [['국내 주식', '라 증권 ··· 2209', '@end184,200,000원', '@end' + badge('+12.4%', 'positive'), '오늘'], ['해외 주식', '라 증권 ··· 2210', '@end231,600,000원', '@end' + badge('+18.9%', 'positive'), '어제'], ['연금 저축', '마 증권 ··· 8814', '@end45,400,000원', '@end' + badge('-1.2%', 'critical'), '10.29']]],
-    ['연금', 2, '2억 1,840만원', ['계좌', '운용사', ['적립금', 'end'], ['올해 납입', 'end'], '최근 거래'], [['퇴직 연금 DC', '바 생명 ··· 0042', '@end162,400,000원', '@end7,200,000원', '10.25'], ['개인 IRP', '라 증권 ··· 3301', '@end56,000,000원', '@end9,000,000원', '10.10']]],
-    ['카드', 2, '-312만원', ['카드', '카드사', ['이번 달 사용', 'end'], ['결제일', 'end'], '최근 거래'], [['생활 카드', '가 카드 ··· 9921', '@end1,840,000원', '@end15일', '오늘'], ['출장 카드', '사 카드 ··· 4410', '@end1,280,000원', '@end25일', '10.30']]],
-    ['대출', 2, '-1억 3,600만원', ['대출', '은행', ['남은 원금', 'end'], ['금리', 'end'], '다음 상환'], [['주택 담보 대출', '가 은행 ··· 6620', '@end128,000,000원', '@end3.9%', '11.15'], ['신용 대출', '나 은행 ··· 2281', '@end8,000,000원', '@end5.2%', '11.20']]],
+    ['예금/적금', 4, '1억 2,480만원', ['계좌', '은행', ['잔액', 'end'], ['금리', 'end'], '최근 거래'], [['생활비 통장', '가 은행 **** 4821', '@end8,240,000원', '@end0.1%', '오늘'], ['비상금 통장', '나 은행 **** 1093', '@end21,560,000원', '@end2.8%', '어제'], ['청약 저축', '가 은행 **** 7730', '@end18,000,000원', '@end2.3%', '10.25'], ['정기 예금', '다 은행 **** 5512', '@end77,000,000원', '@end3.4%', '10.02']]],
+    ['투자', 3, '4억 6,120만원', ['계좌', '증권사', ['평가액', 'end'], ['수익률', 'end'], '최근 거래'], [['국내 주식', '라 증권 **** 2209', '@end184,200,000원', '@end' + badge('+12.4%', 'positive'), '오늘'], ['해외 주식', '라 증권 **** 2210', '@end231,600,000원', '@end' + badge('+18.9%', 'positive'), '어제'], ['연금 저축', '마 증권 **** 8814', '@end45,400,000원', '@end' + badge('-1.2%', 'critical'), '10.29']]],
+    ['연금', 2, '2억 1,840만원', ['계좌', '운용사', ['적립금', 'end'], ['올해 납입', 'end'], '최근 거래'], [['퇴직 연금 DC', '바 생명 **** 0042', '@end162,400,000원', '@end7,200,000원', '10.25'], ['개인 IRP', '라 증권 **** 3301', '@end56,000,000원', '@end9,000,000원', '10.10']]],
+    ['카드', 2, '-312만원', ['카드', '카드사', ['이번 달 사용', 'end'], ['결제일', 'end'], '최근 거래'], [['생활 카드', '가 카드 **** 9921', '@end1,840,000원', '@end15일', '오늘'], ['출장 카드', '사 카드 **** 4410', '@end1,280,000원', '@end25일', '10.30']]],
+    ['대출', 2, '-1억 3,600만원', ['대출', '은행', ['남은 원금', 'end'], ['금리', 'end'], '다음 상환'], [['주택 담보 대출', '가 은행 **** 6620', '@end128,000,000원', '@end3.9%', '11.15'], ['신용 대출', '나 은행 **** 2281', '@end8,000,000원', '@end5.2%', '11.20']]],
   ];
   const css = TABLE_CSS + `
   .tp-coll { border-radius: inherit; }
@@ -34,7 +34,7 @@ const collapsible = () => {
   const body = `<div class="tp-app">
 ${head('연결된 계좌', { sub: '13개 계좌의 순자산 7억 6,840만원', tools: `${btn('계좌 연결', { variant: 'neutralSolid', ic: 'plus' })}${segmented(['1개월', '3개월', '6개월', '1년', '전체'], 2, '기간')}` })}
 <main class="tp-content" style="gap: var(--ds-space-x3)">
-  ${groups.map(([g, n, tot, cols, rows], gi) => card(`<details class="tp-coll"${gi < 3 ? ' open' : ''}><summary>${icon('chevron-down', 'sm')}<h2 class="tp-h3">${g}</h2>${badge(n + '개')}<span class="tp-coll__total">${tot}</span></summary><div class="ds-table-wrap"><table class="ds-table" data-density="compact">${thead(['', ...cols])}<tbody>${rows.map((r) => `<tr><td style="width:40px"><button type="button" class="ds-btn tp-caret" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-expanded="false" aria-label="${esc(r[0])} 자세히">${icon('chevron-right', 'sm')}</button></td>${r.map((c, i) => `<td${Array.isArray(cols[i]) ? ` data-align="${cols[i][1]}"` : ''}>${i === 0 ? `<span class="ds-table__stack"><span>${c}</span><span>${r[1]}</span></span>`.replace(`<span>${r[1]}</span></span>`, `<span>${r[1].split(' ··· ')[1] ? '··· ' + r[1].split(' ··· ')[1] : ''}</span></span>`) : (i === 1 ? String(c).split(' ··· ')[0] : String(c).replace('@end', ''))}</td>`).join('')}</tr>`).join('')}</tbody></table></div></details>`)).join('')}
+  ${groups.map(([g, n, tot, cols, rows], gi) => card(`<details class="tp-coll"${gi < 3 ? ' open' : ''}><summary>${icon('chevron-down', 'sm')}<h2 class="tp-h3">${g}</h2>${badge(n + '개')}<span class="tp-coll__total">${tot}</span></summary><div class="ds-table-wrap"><table class="ds-table" data-density="compact">${thead(['', ...cols])}<tbody>${rows.map((r) => `<tr><td style="width:40px"><button type="button" class="ds-btn tp-caret" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-expanded="false" aria-label="${esc(r[0])} 자세히">${icon('chevron-right', 'sm')}</button></td>${r.map((c, i) => `<td${Array.isArray(cols[i]) ? ` data-align="${cols[i][1]}"` : ''}>${i === 0 ? `<span class="ds-table__stack"><span>${c}</span><span>${r[1]}</span></span>`.replace(`<span>${r[1]}</span></span>`, `<span>${r[1].split(' **** ')[1] ? '**** ' + r[1].split(' **** ')[1] : ''}</span></span>`) : (i === 1 ? String(c).split(' **** ')[0] : String(c).replace('@end', ''))}</td>`).join('')}</tr>`).join('')}</tbody></table></div></details>`)).join('')}
 </main>
 </div>`;
   return { slug: 'table-collapsible', en: 'Collapsible Table', name: '접히는 표 묶음', group: 'Table', desc: '열 구성이 다른 표 여러 개를 접고 펼치며 보는 화면입니다. 표 하나로 합치면 빈칸이 많아질 때 씁니다.', css, body };
@@ -51,7 +51,7 @@ const filter = () => {
   <header class="tp-tpage__head"><div class="tp-stack" style="gap: var(--ds-space-x1_5)"><h1 class="tp-h1">현장 작업</h1><p class="tp-sub">지점 3곳의 수리와 점검 작업을 한곳에서 봐요.</p></div><div class="tp-row">${btn('내보내기', { ic: 'download' })}${btn('작업 만들기', { variant: 'neutralSolid', ic: 'plus' })}</div></header>
   <div class="tp-stack" style="gap: var(--ds-space-x3)">
     ${K.chiptabs(['전체 55', '예정 18', '진행 21', '완료 12', '대기 4'], 0, '상태')}
-    <div class="tp-ttools"><span class="tp-sub">작업 ${T('55')}개 · ${link('조건 지우기')}</span><div class="tp-ttools__end">${K.even(select('모든 우선순위', { aria: '우선순위' }) + select('모든 담당자', { aria: '담당자' }) + select('지점 3곳', { aria: '지점' }) + select('이번 주', { aria: '기간' }) + search('q', '작업 찾기'))}</div></div>
+    <div class="tp-ttools"><span class="tp-sub">작업 ${T('55')}개 / ${link('조건 지우기')}</span><div class="tp-ttools__end">${K.even(select('모든 우선순위', { aria: '우선순위' }) + select('모든 담당자', { aria: '담당자' }) + select('지점 3곳', { aria: '지점' }) + select('이번 주', { aria: '기간' }) + search('q', '작업 찾기'))}</div></div>
   </div>
   <div class="ds-table-wrap"><table class="ds-table tp-ftable">${thead([checkOnly('모든 행 선택'), '작업', '담당자', '상태', '우선순위', ['일정', 'end']])}<tbody>${groups.map(([g, rows]) => grow(6, g, rows.length) + rows.map(([id, n, who, [st, tn], [pt, pl], when]) => `<tr><td>${checkOnly(id + ' ' + n + ' 선택')}</td><td><span class="ds-table__stack"><span>${n}</span><span>${id}</span></span></td><td><span class="tp-row">${avatar(who)}${who}</span></td><td>${badge(st, tn)}</td><td><span class="tp-row">${dot(pt, pl)}${pl}</span></td><td data-align="end">${T(when)}</td></tr>`).join('')).join('')}</tbody></table></div>
   <div class="tp-tfoot">${K.pagination(1, 6)}</div>
@@ -62,7 +62,7 @@ const filter = () => {
 
 /* 3. 묶음 표 ----------------------------------------------------- */
 const grouped = () => {
-  const groups = [['진행 중', 'brand', [['T-2350', ['결제'], '간편 결제 연동 2차', '7.03', '7.18', '와이비엠'], ['T-2351', ['앱'], '푸시 알림 설정 화면', '7.05', '7.20', '이준호'], ['T-2355', ['웹', '디자인'], '강좌 상세 리뉴얼', '7.08', '7.25', '박하린']]], ['할 일', 'informative', [['T-2360', ['결제'], '환불 사유 선택 추가', '—', '7.30', '최민준'], ['T-2362', ['앱'], '오프라인 저장 용량 표시', '—', '8.02', '정다은'], ['T-2363', ['데이터'], '주간 리포트 자동 발송', '—', '8.05', '한지우'], ['T-2366', ['웹'], '검색 결과 정렬 옵션', '—', '8.09', '와이비엠']]], ['백로그', 'neutral', [['T-2370', ['기타'], '처음 오신 분 안내 투어', '—', '—', '이준호'], ['T-2371', ['앱'], '다크 모드 색 점검', '—', '—', '박하린']]]];
+  const groups = [['진행 중', 'brand', [['T-2350', ['결제'], '간편 결제 연동 2차', '7.03', '7.18', '와이비엠'], ['T-2351', ['앱'], '푸시 알림 설정 화면', '7.05', '7.20', '이준호'], ['T-2355', ['웹', '디자인'], '강좌 상세 리뉴얼', '7.08', '7.25', '박하린']]], ['할 일', 'informative', [['T-2360', ['결제'], '환불 사유 선택 추가', '-', '7.30', '최민준'], ['T-2362', ['앱'], '오프라인 저장 용량 표시', '-', '8.02', '정다은'], ['T-2363', ['데이터'], '주간 리포트 자동 발송', '-', '8.05', '한지우'], ['T-2366', ['웹'], '검색 결과 정렬 옵션', '-', '8.09', '와이비엠']]], ['백로그', 'neutral', [['T-2370', ['기타'], '처음 오신 분 안내 투어', '-', '-', '이준호'], ['T-2371', ['앱'], '다크 모드 색 점검', '-', '-', '박하린']]]];
   const css = TABLE_CSS + `
   .tp-gtable th:nth-child(2) { width: 44%; }
 `;
@@ -144,7 +144,7 @@ const searchable = () => {
   </div>
 </main>
 </div>`;
-  return { slug: 'table-page', en: 'Searchable Table', name: '검색 표', group: 'Table', desc: '문서 한 건의 정보와 그 안의 항목 표를 함께 보는 화면입니다. 청구서처럼 항목이 많은 문서에 씁니다.', css, body };
+  return { slug: 'table-page', en: 'Searchable Table', name: '검색 표', group: 'Table', desc: '문서 한 건의 정보와 항목 표를 함께 보는 화면입니다. 청구서처럼 항목이 많은 문서에 씁니다.', css, body };
 };
 
 /* 6. 트리 표 (저장소) ------------------------------------------- */
@@ -186,7 +186,7 @@ const tree = () => {
   <h2 class="tp-h3" id="s-about">정보</h2>
   <p class="tp-sub">웹 페이지에 넣어 쓰는 작은 벡터 캔버스. 도형 그리기, 묶기, 내보내기.</p>
   <div class="tp-row" style="flex-wrap: wrap">${['canvas', 'vector', 'editor', 'typescript'].map((t) => badge(t, 'brand')).join('')}</div>
-  <dl><dt>별</dt><dd class="tp-num">248</dd><dt>지켜보는 사람</dt><dd class="tp-num">19</dd><dt>포크</dt><dd class="tp-num">12</dd><dt>최근 릴리스</dt><dd>v1.4.0 · 4일 전</dd><dt>라이선스</dt><dd>MIT</dd></dl>
+  <dl><dt>별</dt><dd class="tp-num">248</dd><dt>지켜보는 사람</dt><dd class="tp-num">19</dd><dt>포크</dt><dd class="tp-num">12</dd><dt>최근 릴리스</dt><dd>v1.4.0 / 4일 전</dd><dt>라이선스</dt><dd>MIT</dd></dl>
   ${divider()}
   <h3 class="tp-h4">기여한 사람 8명</h3>${K.avatars(['와이비엠', '이준호', '박하린', '최민준', '정다은'], 24, 3)}
 </aside>

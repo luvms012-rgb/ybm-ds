@@ -58,7 +58,7 @@
   .tp-delta[data-tone="flat"] { color: var(--ds-color-fg-neutral-muted); }
   /* 차트: 얇은 선, 옅은 격자, 마우스를 올리면 세로 안내선과 값 풍선 */
   .tp-chart { display: block; width: 100%; height: auto; overflow: visible; }
-  .tp-chart text { fill: var(--ds-color-fg-neutral-subtle); font-size: 11px; font-family: inherit; font-variant-numeric: tabular-nums; }
+  .tp-chart text { fill: var(--ds-color-fg-neutral-subtle); font-size: var(--ds-font-size-t01); font-family: inherit; font-variant-numeric: tabular-nums; }
   .tp-chart .tp-grid-line { stroke: var(--ds-color-stroke-neutral-muted); stroke-width: 1; }
   .tp-chart [data-i] { transition: opacity var(--ds-duration-fast) var(--ds-easing-standard); }
   .tp-chart.is-hover [data-i]:not(.is-on) { opacity: .35; }
@@ -176,7 +176,7 @@
   .tp-selbar { display: flex; align-items: center; justify-content: space-between; gap: var(--ds-space-x3); }
   /* 무료 배송까지 남은 금액 */
   /* 무료 배송까지 남은 금액: DS Callout 상자 안에 문구, 얇은 막대, 양 끝 금액 */
-  .tp-freeship .ds-callout__body { display: flex; flex: 1 1 auto; flex-direction: column; gap: var(--ds-space-x2); min-width: 0; }
+  .tp-freeship__body { display: flex; flex: 1 1 auto; flex-direction: column; gap: var(--ds-space-x2); min-width: 0; }
   .tp-freeship b { font-weight: var(--ds-font-weight-bold); color: var(--ds-color-fg-brand); }
   .tp-freeship__ends { display: flex; justify-content: space-between; font-size: var(--ds-font-size-t02); line-height: var(--ds-line-height-t02); color: var(--ds-color-fg-neutral-subtle); font-variant-numeric: tabular-nums; }
   /* 배송 묶음과 상품 줄 */
@@ -249,7 +249,7 @@
   <div class="tp-cart">
     <div class="tp-cart__main">
       <div class="tp-selbar"><label class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control" checked><span class="ds-checkbox__label">전체 고르기 <span class="tp-num">4/5</span></span></label><div class="tp-row"><button type="button" class="ds-btn tp-only-md" data-variant="ghost" data-size="small">품절 상품 빼기</button><button type="button" class="ds-btn" data-variant="neutralOutline" data-size="small">고른 상품 빼기</button></div></div>
-      <div class="ds-callout tp-freeship" data-tone="informative"><i class="ds-icon ds-icon--truck" aria-hidden="true"></i><div class="ds-callout__body"><p class="ds-callout__desc">아침 로스터리 상품을 <b><span class="tp-num">4,200원</span></b> 더 담으면 <b>무료 배송</b>이에요.</p><div class="ds-progress" role="progressbar" aria-valuenow="86" aria-valuemin="0" aria-valuemax="100" aria-label="무료 배송까지" style="--ds-progress-value: 86%" data-size="small"></div><span class="tp-freeship__ends"><span>0원</span><span>30,000원</span></span></div></div>
+      <div class="ds-callout tp-freeship" data-tone="informative"><i class="ds-icon ds-icon--truck" aria-hidden="true"></i><div class="tp-freeship__body"><p class="ds-callout__content">아침 로스터리 상품을 <b><span class="tp-num">4,200원</span></b> 더 담으면 <b>무료 배송</b>이에요.</p><div class="ds-progress" role="progressbar" aria-valuenow="86" aria-valuemin="0" aria-valuemax="100" aria-label="무료 배송까지" style="--ds-progress-value: 86%" data-size="small"></div><span class="tp-freeship__ends"><span>0원</span><span>30,000원</span></span></div></div>
       <section class="ds-card tp-card tp-grp" data-variant="subtle" data-size="small" aria-label="빠른 배송"><div class="tp-grp__head"><span class="tp-row"><label class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control" aria-label="빠른 배송 상품 모두 고르기" checked></label><h2 class="tp-h4">빠른 배송</h2><span class="ds-badge" data-tone="positive">내일 도착</span></span><span class="tp-caption">무료 배송</span></div><div class="tp-item">
   <span class="tp-item__chk"><label class="ds-checkbox"><input type="checkbox" class="ds-checkbox__control" aria-label="노이즈 캔슬링 무선 헤드폰 고르기" checked></label></span>
   <a class="tp-item__img" href="#" tabindex="-1"><div class="ds-imageframe" data-ratio="1:1" data-radius="md" aria-hidden="true"><span class="tp-ph"><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=240&q=70" alt="" loading="lazy"></span></div></a>

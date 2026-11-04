@@ -365,7 +365,7 @@ ${DOC_LINE}
 const LLMS_RULES = `## 지킬 것
 
 - 설치: <head>에 CSS와 JS 두 줄을 넣는다. 서비스 CSS는 그다음에 불러온다.
-- 컴포넌트: ${PUBLIC}/components.json에 있는 것만 쓰고, 마크업은 ${RAW}/dist/components.css의 컴포넌트별 머리 주석 그대로 쓴다.
+- 컴포넌트: 목록(${PUBLIC}/components.json)에 있는 것만 쓰고, 마크업은 컴포넌트 CSS(${RAW}/dist/components.css)의 컴포넌트별 머리 주석 그대로 쓴다.
 - 색, 간격, 글자 크기, 모서리, 그림자는 --ds-* 토큰만 쓴다. hex, rgb를 직접 쓰지 않는다.
 - 모양을 바꿀 때는 컴포넌트 변수(--ds-[컴포넌트]-*)만 덮어쓴다. 새 ds- 클래스나 !important를 만들지 않는다.
 - 브랜드 컬러: 서비스 CSS의 :root에서 --ds-color-palette-brand-100 ~ 1000을 덮어쓴다. 받은 색을 600 단계로 두고, 다크(:root[data-theme="dark"])는 같은 단계를 뒤집어 넣는다.
@@ -925,7 +925,7 @@ comps.forEach((c) => {
     file: `components/${c.slug}.html`, section: 'components', title: c.name.split(' · ')[0], desc: c.desc,
     pager: [prev && { href: `${prev.slug}.html`, label: prev.name.split(' · ')[0] }, next && { href: `${next.slug}.html`, label: next.name.split(' · ')[0] }],
     body: `<header>
-  <h1 class="site-h1">${esc(c.name)}</h1>
+  <h1 class="site-h1">${esc(c.name.replace(/ · /g, ' / '))}</h1>
   <p class="site-lead">${esc(c.desc)}</p>
   ${metaLinks(linkByNo[c.no])}
 </header>

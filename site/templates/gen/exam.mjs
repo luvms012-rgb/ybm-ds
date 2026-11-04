@@ -49,7 +49,7 @@ const apply = () => {
         <div class="tp-between"><span class="tp-h3">고사장</span>${select('서울', { id: 'ea-region', aria: '지역' })}</div>
         <div class="tp-ds">
           <div class="tp-map" aria-hidden="true">${icon('map-pin', 'lg')}</div>
-          ${selectbox('venue', [['강남 시험장', '1.3km · 남은 자리 12석'], ['종로 시험장', '6.7km · 남은 자리 3석'], ['신촌 시험장', '9.8km · 남은 자리 20석']], 0)}
+          ${selectbox('venue', [['강남 시험장', '1.3km / 남은 자리 12석'], ['종로 시험장', '6.7km / 남은 자리 3석'], ['신촌 시험장', '9.8km / 남은 자리 20석']], 0)}
         </div>`)}
       ${card(`${stepH(4, '규정 동의')}${checkbox('<b>전체 동의</b>', { checked: false })}${divider()}<div class="tp-stack" style="gap: var(--ds-space-x3)">${['[필수] 시험 응시 규정', '[필수] 시험 성적 이용 규정', '[필수] 개인정보 수집과 이용', '[선택] 시험 소식과 혜택 받기'].map((t) => `<div class="tp-between">${checkbox(t)}${link('보기')}</div>`).join('')}</div>`)}
       ${card(`${stepH(5, '응시자 정보 확인')}<div class="tp-ds">${field('ea-name', '이름', input('ea-name', 'value="와이비엠" readonly'))}${field('ea-birth', '생년월일', input('ea-birth', 'value="2001.04.12" readonly'))}${field('ea-en1', '영문 성', input('ea-en1', 'value="YBM"'), { required: true, help: '여권과 같은 영문으로 적어 주세요.' })}${field('ea-en2', '영문 이름', input('ea-en2', 'value="NET"'), { required: true })}${field('ea-phone', '휴대폰', input('ea-phone', 'value="010-1234-5678"'))}${field('ea-mail', '이메일', input('ea-mail', 'value="ybm@example.com"'))}</div>${checkbox('[필수] 응시자 정보가 맞는지 확인했어요')}`)}
@@ -62,7 +62,7 @@ const apply = () => {
     </aside>
   </div>
 </main></div>`;
-  return { slug: 'exam-apply', en: 'Exam Application', name: '시험 신청', group: 'Exam', desc: '시험 종류부터 결제까지 한 화면에서 차례로 고르는 시험 신청 화면입니다. 고른 내용과 금액은 옆 요약에 바로 나타납니다.', css, body };
+  return { slug: 'exam-apply', en: 'Exam Application', name: '시험 신청', group: 'Exam', desc: '시험 종류부터 결제까지 한 화면에서 차례로 고르는 신청 화면입니다. 고른 내용과 금액은 옆 요약에 바로 나타납니다.', css, body };
 };
 
 /* 2. 내 시험 (개인 대시보드) ---------------------------------------- */
@@ -91,7 +91,7 @@ ${head('내 시험', { sub: '접수한 시험과 성적을 한곳에서 봐요.'
     <div class="tp-g2">${card(`<div class="tp-row" style="align-items:flex-start; gap: var(--ds-space-x3)">${icon('tag', 'lg')}<div class="tp-stack" style="flex:1"><span class="tp-h4">다시 보면 10% 할인</span><span class="tp-sub">12월 31일까지 같은 시험을 다시 신청하면 써요.</span></div>${btn('쿠폰 받기', { size: 'xsmall' })}</div>`)}${card(`<div class="tp-row" style="align-items:flex-start; gap: var(--ds-space-x3)">${icon('book-open', 'lg')}<div class="tp-stack" style="flex:1"><span class="tp-h4">말하기 모의 시험 무료</span><span class="tp-sub">시험 전에 실제와 같은 화면으로 연습해 봐요.</span></div>${btn('연습하기', { size: 'xsmall' })}</div>`)}</div>
   </section>
 </main></div>`;
-  return { slug: 'exam-my', en: 'My Exams', name: '내 시험', group: 'Exam', desc: '응시자가 자기 시험 일정과 점수를 한눈에 보는 화면입니다.', css, body };
+  return { slug: 'exam-my', en: 'My Exams', name: '내 시험', group: 'Exam', desc: '응시자가 자신의 시험 일정과 점수를 한눈에 보는 화면입니다.', css, body };
 };
 
 /* 3. 성적표 ------------------------------------------------------- */
@@ -111,7 +111,7 @@ const score = () => {
   const distChart = barChart(dist.map((v) => [v]), { x: ['10', '20', '30', '40', '50', '60', '70', '80', '90', '99'], colors: ['var(--ds-color-bg-neutral)'], label: '점수 구간별 응시자 비율' }).replace(/fill="var\(--ds-color-bg-neutral\)"/g, (m) => (k++ === 8 ? `fill="${C(0)}"` : m));
   const area = (t, s, max, v, note) => `<div class="tp-area"><div class="tp-between"><span class="tp-h4">${t}</span><span>${T(`<b>${s}</b> / ${max}`)}</span></div>${progress(v, { small: false, label: t })}<span class="tp-caption">${note}</span></div>`;
   const body = `<div class="tp-app">${topbar(USER_MENU, 2, userEnd)}
-${head('영어 읽기 듣기 시험 성적', { eyebrow: breadcrumbs(['내 시험', '성적표']), sub: '10월 12일 (일) 응시 · 수험 번호 1012-0381', tools: `${btn('인쇄', { ic: 'printer' })}${btn('성적 증명서 받기', { variant: 'brandSolid', ic: 'download' })}` })}
+${head('영어 읽기 듣기 시험 성적', { eyebrow: breadcrumbs(['내 시험', '성적표']), sub: '10월 12일 (일) 응시 / 수험 번호 1012-0381', tools: `${btn('인쇄', { ic: 'printer' })}${btn('성적 증명서 받기', { variant: 'brandSolid', ic: 'download' })}` })}
 <main class="tp-content">
   ${card(`<div class="tp-hero">${donut([['내 점수', 845, C(0)], ['남은 점수', 145, 'var(--ds-color-bg-neutral)']], { size: 148, thick: 14, center: '845', sub: '/ 990', label: '총점 845점, 990점 만점' })}
     <div class="tp-stats" style="--n:3"><div><span class="tp-sub">지난 시험보다</span><span class="tp-mid">${T('+65점')}</span><span class="tp-caption">9월 7일 780점</span></div><div><span class="tp-sub">상위</span><span class="tp-mid">${T('12%')}</span><span class="tp-caption">같은 날 응시자 1,284명 중</span></div><div><span class="tp-sub">유효 기간</span><span class="tp-mid">${T('2028.10.11')}</span><span class="tp-caption">응시일부터 2년</span></div></div></div>`)}
@@ -156,7 +156,7 @@ const groupApply = () => {
     </aside>
   </div>
 </main>`;
-  return { slug: 'exam-group-apply', en: 'Group Application', name: '단체 접수', group: 'Exam B2B', desc: '기관 담당자가 명단 파일을 올려 한 번에 접수하는 화면입니다. 고칠 행은 올리자마자 알려 줍니다.', css, body: frame(orgNav(1), '단체 접수', main) };
+  return { slug: 'exam-group-apply', en: 'Group Application', name: '단체 접수', group: 'Exam B2B', desc: '기관 담당자가 명단 파일을 올려 한 번에 접수하는 화면입니다. 고쳐야 할 행은 올리자마자 알려 줍니다.', css, body: frame(orgNav(1), '단체 접수', main) };
 };
 
 /* 5. 응시자 관리 (기관) -------------------------------------------- */
@@ -164,7 +164,7 @@ const roster = () => {
   const people = [['김민준', '20231042', '경영학과', 'A-012', true, '접수 완료'], ['이서연', '20231107', '경영학과', 'A-013', true, '접수 완료'], ['박지후', '20220388', '국제통상학과', 'A-021', false, '접수 완료'], ['최하은', '20240215', '영어영문학과', 'B-004', true, '접수 완료'], ['정민재', '20230877', '컴퓨터공학과', 'B-011', true, '접수 완료'], ['한지아', '20230561', '컴퓨터공학과', 'B-012', false, '접수 완료'], ['오도윤', '20221190', '경제학과', '-', false, '취소'], ['윤채원', '20240033', '경제학과', 'C-002', true, '접수 완료']];
   const rows = people.map(([n, id, dep, seat, sent, st]) => [K.checkOnly(n + ' 고르기'), `<div class="tp-row">${avatar(n, 28)}<span>${n}</span></div>`, T(id), dep, T(seat), `<span class="tp-row">${dot(sent ? 'positive' : 'warning')}${sent ? '보냄' : '안 보냄'}</span>`, badge(st, st === '취소' ? '' : 'informative'), iconBtn('ellipsis', '더 보기', { size: 'xsmall' })]);
   const css = CSS;
-  const main = `${head('응시자 관리', { sub: '12월 6일 (토) 영어 읽기 듣기 시험 · 단체 접수 124명', tools: `${btn('명단 내려받기', { ic: 'download' })}${btn('수험표 보내기', { variant: 'brandSolid', ic: 'mail' })}` })}
+  const main = `${head('응시자 관리', { sub: '12월 6일 (토) 영어 읽기 듣기 시험 / 단체 접수 124명', tools: `${btn('명단 내려받기', { ic: 'download' })}${btn('수험표 보내기', { variant: 'brandSolid', ic: 'mail' })}` })}
 <main class="tp-content">
   ${card(`<div class="tp-stats"><div><span class="tp-sub">접수</span><span class="tp-mid">${T('124명')}</span></div><div><span class="tp-sub">수험표 보냄</span><span class="tp-mid">${T('118명')}</span></div><div><span class="tp-sub">수험표 안 보냄</span><span class="tp-mid">${T('6명')}</span></div><div><span class="tp-sub">취소</span><span class="tp-mid">${T('2명')}</span></div></div>`)}
   ${card(`<div class="tp-between"><div class="tp-row" style="flex-wrap:wrap">${search('ro-q', '이름, 학번 찾기')}${select('학과 전체', { id: 'ro-dep', aria: '학과' })}${select('상태 전체', { id: 'ro-st', aria: '상태' })}</div>${chiptabs(['전체', '안 보냄 6', '취소 2'], 0, '빠른 거르기')}</div>
@@ -180,7 +180,7 @@ const groupDash = () => {
   .tp-rank > :first-child { color: var(--ds-color-fg-neutral-subtle); font-weight: var(--ds-font-weight-bold); font-variant-numeric: tabular-nums; }
 `;
   const deps = [['영어영문학과', 86, '812점'], ['국제통상학과', 78, '764점'], ['경영학과', 71, '726점'], ['경제학과', 64, '690점'], ['컴퓨터공학과', 58, '652점']];
-  const main = `${head('응시 현황과 성적', { sub: '2026년 2학기 · 단체 응시 4회', tools: `${select('12월 6일 시험', { id: 'gd-round', aria: '시험 회차' })}${btn('리포트 받기', { ic: 'download' })}` })}
+  const main = `${head('응시 현황과 성적', { sub: '2026년 2학기 / 단체 응시 4회', tools: `${select('12월 6일 시험', { id: 'gd-round', aria: '시험 회차' })}${btn('리포트 받기', { ic: 'download' })}` })}
 <main class="tp-content">
   <div class="tp-g4">${kpi('응시 인원', '118명', { note: '접수 124명 중 95%' })}${kpi('평균 점수', '712점', { d: '+24', note: '지난 회차보다' })}${kpi('목표 달성', '64%', { d: '+8%p', note: '목표 700점 이상' })}${kpi('최고 점수', '965점', { note: '영어영문학과' })}</div>
   <div class="tp-g3">
@@ -188,7 +188,7 @@ const groupDash = () => {
     ${card(`<span class="tp-h3">목표 달성</span><div style="display:grid;place-items:center">${donut([['달성', 64, C(0)], ['미달', 36, 'var(--ds-color-bg-neutral)']], { center: '64%', sub: '76명 달성', label: '목표 달성 비율' })}</div>${legend([['700점 이상', 0, '76명'], ['700점 미만', 'var(--ds-color-bg-neutral)', '42명']])}`)}
   </div>
   <div class="tp-g2">
-    ${card(`<span class="tp-h3">학과별 목표 달성</span><div class="tp-stack" style="gap: var(--ds-space-x4)">${deps.map(([d, v, s]) => K.meter(d, v, `${v}% · 평균 ${s}`)).join('')}</div>`)}
+    ${card(`<span class="tp-h3">학과별 목표 달성</span><div class="tp-stack" style="gap: var(--ds-space-x4)">${deps.map(([d, v, s]) => K.meter(d, v, `${v}% / 평균 ${s}`)).join('')}</div>`)}
     ${card(`<div class="tp-between"><span class="tp-h3">회차별 평균</span>${legend([['우리 기관', 0], ['전체 응시자', 1]])}</div>${lineChart([{ name: '우리 기관', data: [648, 671, 688, 712] }, { name: '전체 응시자', data: [655, 660, 662, 668], dash: true }], { h: 200, x: ['3월', '6월', '9월', '12월'], label: '회차별 평균 점수' })}`)}
   </div>
   <div class="tp-g2">

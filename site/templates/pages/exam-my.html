@@ -58,7 +58,7 @@
   .tp-delta[data-tone="flat"] { color: var(--ds-color-fg-neutral-muted); }
   /* 차트: 얇은 선, 옅은 격자, 마우스를 올리면 세로 안내선과 값 풍선 */
   .tp-chart { display: block; width: 100%; height: auto; overflow: visible; }
-  .tp-chart text { fill: var(--ds-color-fg-neutral-subtle); font-size: 11px; font-family: inherit; font-variant-numeric: tabular-nums; }
+  .tp-chart text { fill: var(--ds-color-fg-neutral-subtle); font-size: var(--ds-font-size-t01); font-family: inherit; font-variant-numeric: tabular-nums; }
   .tp-chart .tp-grid-line { stroke: var(--ds-color-stroke-neutral-muted); stroke-width: 1; }
   .tp-chart [data-i] { transition: opacity var(--ds-duration-fast) var(--ds-easing-standard); }
   .tp-chart.is-hover [data-i]:not(.is-on) { opacity: .35; }
@@ -214,7 +214,7 @@
         var t = e.target.closest('[data-i]'); if (!t) { hide(svg); return; }
         var p = d.s[+t.getAttribute('data-i')];
         svg.classList.add('is-hover'); svg.querySelectorAll('[data-i]').forEach(function (a) { a.classList.toggle('is-on', a === t); });
-        show(p.n, [{ c: p.c, n: '', v: nf(p.v, d.u) + ' · ' + p.p + '%' }], e.clientX, e.clientY); return;
+        show(p.n, [{ c: p.c, n: '', v: nf(p.v, d.u) + ' / ' + p.p + '%' }], e.clientX, e.clientY); return;
       }
       var vx = (e.clientX - rc.left) / rc.width * d.w;
       var i = d.t === 'bar' ? Math.floor((vx - d.pl) / (d.iw / d.n)) : Math.round((vx - d.pl) / d.iw * (d.n - 1));

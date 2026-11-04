@@ -1,6 +1,6 @@
 <!-- https://luvms012-rgb.github.io/ybm-ds/site/components/list-list-item.html -->
 
-# List · List Item
+# List / List Item
 
 설정, 메뉴처럼 항목을 한 줄씩 늘어놓는 컴포넌트입니다.
 
@@ -17,7 +17,7 @@
         <span class="ds-list-item__title">결제 수단</span>
         [<span class="ds-list-item__desc">등록된 카드 2개</span>]
       </span>
-      [<span class="ds-list-item__suffix">값 · Badge · Switch</span>]
+      [<span class="ds-list-item__suffix">값, Badge, Switch</span>]
       [<i class="ds-icon ds-icon--chevron-right ds-list-item__chevron" aria-hidden="true"></i>]
     </a>
   </li>

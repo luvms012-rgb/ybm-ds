@@ -1,6 +1,6 @@
 <!-- https://luvms012-rgb.github.io/ybm-ds/site/components/select-content-item.html -->
 
-# Select Content · Item
+# Select Content / Item
 
 Select를 눌렀을 때 펼쳐지는 선택지 목록입니다.
 

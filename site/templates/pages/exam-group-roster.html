@@ -58,7 +58,7 @@
   .tp-delta[data-tone="flat"] { color: var(--ds-color-fg-neutral-muted); }
   /* 차트: 얇은 선, 옅은 격자, 마우스를 올리면 세로 안내선과 값 풍선 */
   .tp-chart { display: block; width: 100%; height: auto; overflow: visible; }
-  .tp-chart text { fill: var(--ds-color-fg-neutral-subtle); font-size: 11px; font-family: inherit; font-variant-numeric: tabular-nums; }
+  .tp-chart text { fill: var(--ds-color-fg-neutral-subtle); font-size: var(--ds-font-size-t01); font-family: inherit; font-variant-numeric: tabular-nums; }
   .tp-chart .tp-grid-line { stroke: var(--ds-color-stroke-neutral-muted); stroke-width: 1; }
   .tp-chart [data-i] { transition: opacity var(--ds-duration-fast) var(--ds-easing-standard); }
   .tp-chart.is-hover [data-i]:not(.is-on) { opacity: .35; }
@@ -165,7 +165,7 @@
   <div class="ds-sidenav__content"><div class="ds-sidenav__group"><a class="ds-sidenav__item" href="#"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--house" aria-hidden="true"></i></span><span class="ds-sidenav__label">홈</span></a><a class="ds-sidenav__item" href="#"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--square-pen" aria-hidden="true"></i></span><span class="ds-sidenav__label">단체 접수</span></a><a class="ds-sidenav__item" href="#" aria-current="page"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--users" aria-hidden="true"></i></span><span class="ds-sidenav__label">응시자 관리</span></a><a class="ds-sidenav__item" href="#"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--chart-column" aria-hidden="true"></i></span><span class="ds-sidenav__label">성적 리포트</span></a></div><div class="ds-sidenav__group"><div class="ds-sidenav__group-label">운영</div><a class="ds-sidenav__item" href="#"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--receipt" aria-hidden="true"></i></span><span class="ds-sidenav__label">정산</span></a><a class="ds-sidenav__item" href="#"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--mail" aria-hidden="true"></i></span><span class="ds-sidenav__label">공지 보내기</span></a></div></div>
   <div class="ds-sidenav__footer"><a class="ds-sidenav__item" href="#"><span class="ds-sidenav__prefix"><i class="ds-icon ds-icon--settings" aria-hidden="true"></i></span><span class="ds-sidenav__label">설정</span></a></div>
 </nav><div class="tp-frame__main"><div class="tp-mbar"><span class="tp-h4">응시자 관리</span><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" aria-label="메뉴 열기"><i class="ds-icon ds-icon--menu" aria-hidden="true"></i></button></div><header class="tp-head">
-  <div class="tp-head__texts"><h1 class="tp-h1">응시자 관리</h1><p class="tp-sub">12월 6일 (토) 영어 읽기 듣기 시험 · 단체 접수 124명</p></div>
+  <div class="tp-head__texts"><h1 class="tp-h1">응시자 관리</h1><p class="tp-sub">12월 6일 (토) 영어 읽기 듣기 시험 / 단체 접수 124명</p></div>
   <div class="tp-head__tools"><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="small"><i class="ds-icon ds-icon--download" aria-hidden="true"></i>명단 내려받기</button><button type="button" class="ds-btn" data-variant="brandSolid" data-size="small"><i class="ds-icon ds-icon--mail" aria-hidden="true"></i>수험표 보내기</button></div>
 </header>
 <main class="tp-content">

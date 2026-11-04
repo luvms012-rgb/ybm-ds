@@ -28,7 +28,7 @@
   /* ---- Dialog ----------------------------------------------------------- */
   function openDialog(id) {
     var dialog = document.getElementById(id);
-    if (dialog && !dialog.open) dialog.showModal();
+    if (dialog && !dialog.open) { dialog.showModal(); alignWheels(dialog); }
     return dialog;
   }
   function closeDialog(dialog, value) {
@@ -117,6 +117,15 @@
   var wheelValue = new WeakMap();
   function scrollWheelTo(col, opt, smooth) {
     col.scrollTo({ top: opt.offsetTop - col.querySelector(".ds-timepicker__option").offsetTop, behavior: smooth ? "smooth" : "auto" });
+  }
+  // 고른 항목(aria-selected)으로 휠을 맞춘다. 닫힌 창 안처럼 보이지 않는 휠은 크기가 없어 건너뛰고, 창을 열 때 다시 맞춘다 (2026-11-04)
+  function alignWheels(root) {
+    root.querySelectorAll(".ds-timepicker__column").forEach(function (col) {
+      if (!col.offsetHeight) return;
+      var sel = col.querySelector('.ds-timepicker__option[aria-selected="true"]');
+      if (sel) scrollWheelTo(col, sel, false);
+      syncWheel(col, false);
+    });
   }
   var wheelTimer = new WeakMap();
   document.addEventListener("scroll", function (e) {
@@ -268,11 +277,7 @@
   function init(root) {
     (root || document).querySelectorAll(".ds-slider").forEach(syncSlider);
     (root || document).querySelectorAll(".ds-checkbox__control[data-indeterminate]").forEach(function (c) { c.indeterminate = true; });
-    (root || document).querySelectorAll(".ds-timepicker__column").forEach(function (col) {
-      var sel = col.querySelector('.ds-timepicker__option[aria-selected="true"]');
-      if (sel) scrollWheelTo(col, sel, false);
-      syncWheel(col, false);
-    });
+    alignWheels(root || document);
     (root || document).querySelectorAll(".ds-chat-composer__input").forEach(syncComposer);
     tickTimers();
     (root || document).querySelectorAll(".ds-segmented").forEach(watchSegmented);

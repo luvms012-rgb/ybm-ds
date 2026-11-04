@@ -19,7 +19,7 @@ const CHAT_CSS = `
   .tp-tools code { color: var(--ds-color-fg-neutral); }
   .tp-composer-wrap { padding: var(--ds-space-x3) var(--ds-space-x4) var(--ds-space-x4); }
   .tp-composer-wrap > * { width: min(100%, 720px); margin-inline: auto; }
-  .tp-composer { display: flex; flex-direction: column; gap: var(--ds-space-x2); padding: var(--ds-space-x3); border-radius: var(--ds-shape-2xl); background: var(--ds-color-bg-layer-floating); box-shadow: inset 0 0 0 1px var(--ds-color-stroke-neutral-muted), 0 4px 16px rgb(0 0 0 / .06); }
+  .tp-composer { display: flex; flex-direction: column; gap: var(--ds-space-x2); padding: var(--ds-space-x3); border-radius: var(--ds-shape-2xl); background: var(--ds-color-bg-layer-floating); box-shadow: inset 0 0 0 1px var(--ds-color-stroke-neutral-muted), 0 4px 16px var(--ds-color-palette-static-black-alpha-300); }
   .tp-composer .ds-textarea { --ds-textarea-line-width: 0px; --ds-textarea-min-height: 48px; --ds-textarea-padding: var(--ds-space-x1); resize: none; background: none; }
   .tp-composer__bar { display: flex; align-items: center; gap: var(--ds-space-x1); }
   .tp-composer__bar .tp-grow { flex: 1 1 auto; }

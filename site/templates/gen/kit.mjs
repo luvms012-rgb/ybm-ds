@@ -54,7 +54,7 @@ export const BASE_CSS = `  /* 템플릿 배치 전용. 값은 모두 --ds-* 토�
   .tp-delta[data-tone="flat"] { color: var(--ds-color-fg-neutral-muted); }
   /* 차트: 얇은 선, 옅은 격자, 마우스를 올리면 세로 안내선과 값 풍선 */
   .tp-chart { display: block; width: 100%; height: auto; overflow: visible; }
-  .tp-chart text { fill: var(--ds-color-fg-neutral-subtle); font-size: 11px; font-family: inherit; font-variant-numeric: tabular-nums; }
+  .tp-chart text { fill: var(--ds-color-fg-neutral-subtle); font-size: var(--ds-font-size-t01); font-family: inherit; font-variant-numeric: tabular-nums; }
   .tp-chart .tp-grid-line { stroke: var(--ds-color-stroke-neutral-muted); stroke-width: 1; }
   .tp-chart [data-i] { transition: opacity var(--ds-duration-fast) var(--ds-easing-standard); }
   .tp-chart.is-hover [data-i]:not(.is-on) { opacity: .35; }
@@ -163,7 +163,7 @@ export const chip = (l, { on = false, variant = 'outlineWeak', size = 'small' } 
 export const progress = (v, { tone = '', small = true, label = '' } = {}) => `<div class="ds-progress" role="progressbar" aria-valuenow="${v}" aria-valuemin="0" aria-valuemax="100"${label ? ` aria-label="${esc(label)}"` : ''} style="--ds-progress-value: ${v}%"${tone ? ` data-tone="${tone}"` : ''}${small ? ' data-size="small"' : ''}></div>`;
 export const ring = (v, size = 24, tone = '') => `<span class="ds-progress-circle" data-size="${size}"${tone ? ` data-tone="${tone}"` : ''} role="progressbar" aria-valuenow="${v}" style="--ds-progress-value: ${v}"><svg viewBox="0 0 40 40" aria-hidden="true"><circle class="ds-progress-circle__track" pathLength="100"/><circle class="ds-progress-circle__range" pathLength="100"/></svg></span>`;
 export const card = (inner, { cls = '', size = 'small', variant = 'subtle', tag = 'section', attrs = '' } = {}) => `<${tag} class="ds-card tp-card${cls ? ' ' + cls : ''}"${variant ? ` data-variant="${variant}"` : ''}${size ? ` data-size="${size}"` : ''}${attrs ? ' ' + attrs : ''}>${inner}</${tag}>`;
-export const callout = (title, desc, tone = 'informative', ic = 'info-solid') => `<div class="ds-callout" data-tone="${tone}">${icon(ic)}<div class="ds-callout__body">${title ? `<p class="ds-callout__title">${title}</p>` : ''}${desc ? `<p class="ds-callout__desc">${desc}</p>` : ''}</div></div>`;
+export const callout = (title, desc, tone = 'informative', ic = 'info-solid') => `<div class="ds-callout" data-tone="${tone}">${icon(ic)}<p class="ds-callout__content">${title ? `<strong class="ds-callout__title">${title}</strong>${desc ? '  ' : ''}` : ''}${desc || ''}</p></div>`;
 export const empty = (title, desc, ic = 'inbox', action = '') => `<div class="ds-empty"><span class="ds-empty__media">${icon(ic)}</span><p class="ds-empty__title">${title}</p>${desc ? `<p class="ds-empty__desc">${desc}</p>` : ''}${action ? `<div class="ds-empty__actions">${action}</div>` : ''}</div>`;
 // 사진: Unsplash(무료 사용 허락) 사진을 주소로 불러온다. 주제별 목록에서 번호로 고른다.
 export const unsplash = (id, w = 960) => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&q=70`;
@@ -275,7 +275,7 @@ export const donut = (parts, { size = 160, thick = 16, center = '', sub = '', la
   const r = (size - thick) / 2, c = 2 * Math.PI * r; let off = 0; const tot = parts.reduce((a, p) => a + p[1], 0);
   const arcs = parts.map(([, v, col], i) => { const len = (v / tot) * c; const s = `<circle data-i="${i}" cx="${size / 2}" cy="${size / 2}" r="${r}" fill="none" stroke="${col || C(i)}" stroke-width="${thick}" stroke-dasharray="${Math.max(0, len - 2).toFixed(1)} ${(c - len + 2).toFixed(1)}" stroke-dashoffset="${(-off).toFixed(1)}" transform="rotate(-90 ${size / 2} ${size / 2})"/>`; off += len; return s; }).join('');
   const d = { t: 'pie', u: unit, s: parts.map(([n, v, col], i) => ({ n, c: col || C(i), v, p: Math.round((v / tot) * 1000) / 10 })) };
-  return `<svg class="tp-chart tp-donut" viewBox="0 0 ${size} ${size}" style="max-width:${size}px" role="img" aria-label="${esc(label)}" data-tp="${tpData(d)}"><circle cx="${size / 2}" cy="${size / 2}" r="${r}" fill="none" stroke="var(--ds-color-bg-neutral)" stroke-width="${thick}"/>${arcs}${center ? `<text x="50%" y="${size / 2 + (sub ? 2 : 7)}" text-anchor="middle" style="font-size:22px;font-weight:700;letter-spacing:-0.02em;fill:var(--ds-color-fg-neutral)">${center}</text>` : ''}${sub ? `<text x="50%" y="${size / 2 + 20}" text-anchor="middle">${sub}</text>` : ''}</svg>`;
+  return `<svg class="tp-chart tp-donut" viewBox="0 0 ${size} ${size}" style="max-width:${size}px" role="img" aria-label="${esc(label)}" data-tp="${tpData(d)}"><circle cx="${size / 2}" cy="${size / 2}" r="${r}" fill="none" stroke="var(--ds-color-bg-neutral)" stroke-width="${thick}"/>${arcs}${center ? `<text x="50%" y="${size / 2 + (sub ? 2 : 7)}" text-anchor="middle" style="font-size:var(--ds-font-size-t08);font-weight:var(--ds-font-weight-bold);letter-spacing:-0.02em;fill:var(--ds-color-fg-neutral)">${center}</text>` : ''}${sub ? `<text x="50%" y="${size / 2 + 20}" text-anchor="middle">${sub}</text>` : ''}</svg>`;
 };
 // 차트 인터랙션: 선과 막대는 가로 위치로 가장 가까운 점, 도넛은 조각. 풍선 하나를 페이지가 같이 쓴다.
 export const CHART_JS = `(function () {
@@ -303,7 +303,7 @@ export const CHART_JS = `(function () {
         var t = e.target.closest('[data-i]'); if (!t) { hide(svg); return; }
         var p = d.s[+t.getAttribute('data-i')];
         svg.classList.add('is-hover'); svg.querySelectorAll('[data-i]').forEach(function (a) { a.classList.toggle('is-on', a === t); });
-        show(p.n, [{ c: p.c, n: '', v: nf(p.v, d.u) + ' · ' + p.p + '%' }], e.clientX, e.clientY); return;
+        show(p.n, [{ c: p.c, n: '', v: nf(p.v, d.u) + ' / ' + p.p + '%' }], e.clientX, e.clientY); return;
       }
       var vx = (e.clientX - rc.left) / rc.width * d.w;
       var i = d.t === 'bar' ? Math.floor((vx - d.pl) / (d.iw / d.n)) : Math.round((vx - d.pl) / d.iw * (d.n - 1));

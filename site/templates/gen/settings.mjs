@@ -23,7 +23,7 @@ const dialog = () => {
   const css = CSS + `
   .tp-under { opacity: .5; pointer-events: none; }
   .tp-modal { position: fixed; inset: 0; z-index: var(--ds-z-dialog); display: grid; place-items: center; padding: var(--ds-space-x4); background: var(--ds-color-bg-overlay); }
-  .tp-sdlg { position: relative; display: grid; grid-template-columns: minmax(0, 1fr); width: min(960px, 100%); height: min(680px, calc(100vh - var(--ds-space-x8))); overflow: hidden; border-radius: var(--ds-shape-2xl); background: var(--ds-color-bg-layer-floating); box-shadow: 0 16px 48px rgb(0 0 0 / .24); }
+  .tp-sdlg { position: relative; display: grid; grid-template-columns: minmax(0, 1fr); width: min(960px, 100%); height: min(680px, calc(100vh - var(--ds-space-x8))); overflow: hidden; border-radius: var(--ds-shape-2xl); background: var(--ds-color-bg-layer-floating); box-shadow: 0 16px 48px var(--ds-color-palette-static-black-alpha-600); }
   @media (min-width: 768px) { .tp-sdlg { grid-template-columns: 240px minmax(0, 1fr); } }
   .tp-sdlg__side { display: none; flex-direction: column; gap: var(--ds-space-x3); padding: var(--ds-space-x5) var(--ds-space-x3); overflow: auto; background: var(--ds-color-bg-neutral-subtle); box-shadow: inset -1px 0 0 var(--ds-color-stroke-neutral-muted); }
   @media (min-width: 768px) { .tp-sdlg__side { display: flex; } }

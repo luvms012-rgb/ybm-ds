@@ -1,6 +1,6 @@
 <!-- https://luvms012-rgb.github.io/ybm-ds/site/components/menu-menu-item.html -->
 
-# Menu · Menu Item
+# Menu / Menu Item
 
 버튼을 누르면 펼쳐지는 동작 목록입니다. 수정, 삭제처럼 바로 실행할 동작을 모아 둡니다.
 

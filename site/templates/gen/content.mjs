@@ -50,13 +50,13 @@ const catalog = () => {
 /* 3. 디자인 문서 ------------------------------------------------ */
 const docDesign = () => {
   const dos = [['Do', '한 화면에는 강조 버튼을 하나만 둡니다.'], ['Do', '버튼 글은 동사로 짧게 씁니다. 예: 저장, 보내기'], ['Don\'t', '같은 줄에 강조 버튼을 여러 개 두지 않습니다.'], ['Don\'t', '아이콘만 있는 버튼에 이름(aria-label)을 빼먹지 않습니다.']];
-  const props = [['variant', 'brandSolid · neutralSolid · neutralWeak · neutralOutline · ghost', 'neutralWeak'], ['size', 'xsmall · small · medium · large', 'medium'], ['width', 'fill', '—'], ['disabled', 'true · false', 'false']];
+  const props = [['variant', 'brandSolid / neutralSolid / neutralWeak / neutralOutline / ghost', 'neutralWeak'], ['size', 'xsmall / small / medium / large', 'medium'], ['width', 'fill', '-'], ['disabled', 'true / false', 'false']];
   const css = DOC_CSS + `
   .tp-ex { display: flex; flex-direction: column; gap: var(--ds-space-x3); }
   .tp-ex__bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ds-space-x2); }
 `;
   const body = `<div class="tp-app"><main class="tp-content"><article class="tp-doc">
-  <header class="tp-stack" style="gap: var(--ds-space-x2)"><h1 class="tp-doc-title">Button</h1><span class="tp-caption">2026년 10월 30일 · 오후 5:40에 고침</span></header>
+  <header class="tp-stack" style="gap: var(--ds-space-x2)"><h1 class="tp-doc-title">Button</h1><span class="tp-caption">2026년 10월 30일 / 오후 5:40에 고침</span></header>
   ${card(`<div class="tp-demo"><div class="tp-demo__row">${btn('저장', { variant: 'brandSolid', size: 'medium' })}${btn('취소', { size: 'medium' })}</div></div>`)}
   <section class="tp-sec"><h2 class="tp-h2">쓰는 법</h2><p>버튼은 누르면 일이 일어난다는 것을 알려 줍니다. 저장하기, 보내기, 다음으로 넘어가기처럼 화면에서 할 일을 고르게 해요.</p>
   <h3 class="tp-h3">이렇게 쓰세요</h3>${table(['구분', '내용'], dos.map(([k, v]) => [badge(k, k === 'Do' ? 'positive' : 'critical'), v]))}</section>
@@ -109,7 +109,7 @@ const orderDetail = () => {
   .tp-tl li::before { content: ""; width: 10px; height: 10px; margin: 5px 3px 0; border-radius: 50%; background: var(--ds-color-bg-brand-solid); }
   .tp-tl li:not(:last-child)::after { content: ""; position: absolute; left: 7px; top: 18px; bottom: 0; width: 2px; background: var(--ds-color-stroke-neutral-muted); }
 `;
-  const sep = '<span class="tp-sep">·</span>';
+  const sep = '<span class="tp-sep">/</span>';
   const body = `<div class="tp-app">
 <header class="tp-head" style="flex-direction: column; align-items: stretch; padding-bottom: 0">
   <div class="tp-between" style="align-items:flex-start"><div class="tp-stack" style="gap: var(--ds-space-x2)">${link(icon('chevron-left', 'sm') + '모든 주문')}<h1 class="tp-h1">#1001</h1><div class="tp-meta-line"><span>상품 5개</span>${sep}<span class="tp-row">${avatar('와이비엠', 20)}와이비엠</span>${sep}${badge('배송 준비 전', 'warning')}${sep}<span class="tp-row">${icon('calendar', 'sm')}2026.10.31</span>${sep}<span class="tp-row">${icon('triangle-alert', 'sm')}확인 필요</span></div></div><div class="tp-row">${btn('환불')}${btn('배송 처리', { variant: 'neutralSolid' })}</div></div>
@@ -122,7 +122,7 @@ const orderDetail = () => {
     <section class="tp-sec">${secHead('활동')}<ol class="tp-tl">${acts.map(([t, d, w]) => `<li><div class="tp-stack"><span class="tp-h4">${t}</span><span class="tp-sub">${d}</span><span class="tp-caption">${w}</span></div></li>`).join('')}</ol></section>
   </main>
   <aside class="tp-panel">
-    ${accordion([['메모', '<p class="tp-sub">이번 분기 세 번째 주문인 단골 고객이에요. 선물 포장을 좋아하세요.</p>', true], ['고객', `<div class="tp-row">${avatar('와이비엠', 42)}<div class="tp-stack"><span>와이비엠</span><span class="tp-caption">ybm@example.com · 주문 12번</span></div></div>`, true], ['배송지', '<p class="tp-sub">서울시 종로구 종로 104, 3층<br>010-1234-5678</p>', true], ['태그', `<div class="tp-row">${badge('단골', 'brand')}${badge('선물')}</div>`, false]], 'separated')}
+    ${accordion([['메모', '<p class="tp-sub">이번 분기 세 번째 주문인 단골 고객이에요. 선물 포장을 좋아하세요.</p>', true], ['고객', `<div class="tp-row">${avatar('와이비엠', 42)}<div class="tp-stack"><span>와이비엠</span><span class="tp-caption">ybm@example.com / 주문 12번</span></div></div>`, true], ['배송지', '<p class="tp-sub">서울시 종로구 종로 104, 3층<br>010-1234-5678</p>', true], ['태그', `<div class="tp-row">${badge('단골', 'brand')}${badge('선물')}</div>`, false]], 'separated')}
   </aside>
 </div>
 </div>`;
@@ -164,8 +164,8 @@ const productDetail = () => {
 
 /* 7. 할 일 상세 ------------------------------------------------- */
 const workItem = () => {
-  const subs = [['지금 가입 흐름을 살펴보고 불편한 점 적기', 1, '와이비엠 · 10.20'], ['첫 화면에 샘플 강좌 미리 넣기', 1, '이준호 · 10.24'], ['가입 단계 5개를 3개로 줄이기', 0, '박하린 · 11.03까지'], ['첫 수업 안내 메일 다시 쓰기', 0, '정다은 · 11.05까지'], ['7일 뒤 활성화율 측정 대시보드', 0, '한지우 · 11.08까지']];
-  const fields = [['상태', badge('진행 중', 'brand')], ['담당', `<span class="tp-row">${avatar('와이비엠', 20)}와이비엠</span>`], ['우선순위', `<span class="tp-row">${K.dot('warning')}높음</span>`], ['마감', '11월 15일'], ['스프린트', '24'], ['만든 사람', '최민준 · 10월 18일'], ['지켜보는 사람', avatars(['와이비엠', '이준호', '박하린'], 24, 2)]];
+  const subs = [['지금 가입 흐름을 살펴보고 불편한 점 적기', 1, '와이비엠 / 10.20'], ['첫 화면에 샘플 강좌 미리 넣기', 1, '이준호 / 10.24'], ['가입 단계 5개를 3개로 줄이기', 0, '박하린 / 11.03까지'], ['첫 수업 안내 메일 다시 쓰기', 0, '정다은 / 11.05까지'], ['7일 뒤 활성화율 측정 대시보드', 0, '한지우 / 11.08까지']];
+  const fields = [['상태', badge('진행 중', 'brand')], ['담당', `<span class="tp-row">${avatar('와이비엠', 20)}와이비엠</span>`], ['우선순위', `<span class="tp-row">${K.dot('warning')}높음</span>`], ['마감', '11월 15일'], ['스프린트', '24'], ['만든 사람', '최민준 / 10월 18일'], ['지켜보는 사람', avatars(['와이비엠', '이준호', '박하린'], 24, 2)]];
   const css = `
   .tp-wi { display: grid; flex: 1 1 auto; grid-template-columns: minmax(0, 1fr); }
   @media (min-width: 1024px) { .tp-wi { grid-template-columns: minmax(0, 1fr) 320px; } }
@@ -198,7 +198,7 @@ const workItem = () => {
   <aside class="tp-wi__side" aria-label="속성"><dl class="tp-props">${fields.map(([l, v]) => `<dt>${l}</dt><dd>${v}</dd>`).join('')}</dl></aside>
 </div>
 </div>`;
-  return { slug: 'work-item-detail', en: 'Work Item Detail', name: '할 일 상세', group: 'Content', desc: '할 일 하나를 자세히 보며 진행 상황을 나누는 화면입니다. 하위 할 일과 댓글로 함께 일합니다.', css, body };
+  return { slug: 'work-item-detail', en: 'Work Item Detail', name: '할 일 상세', group: 'Content', desc: '할 일 하나를 자세히 보고 진행 상황을 공유하는 화면입니다. 하위 할 일과 댓글로 함께 일합니다.', css, body };
 };
 
 export const templates = [library, catalog, docDesign, docTech, orderDetail, productDetail, workItem].map((f) => f());

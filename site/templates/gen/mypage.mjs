@@ -79,10 +79,10 @@ ${main}
 </div></div>`;
 
 const ITEMS = [
-  ['product', 0, '무선 이어폰 프로 2세대', '화이트 · 1개', '189,000원', '배송 중', 'brand', ['배송 조회', '문의하기']],
-  ['product', 2, '데일리 백팩 18L', '차콜 · 1개', '59,000원', '배송 완료', '', ['리뷰 쓰기', '교환, 반품']],
+  ['product', 0, '무선 이어폰 프로 2세대', '화이트 / 1개', '189,000원', '배송 중', 'brand', ['배송 조회', '문의하기']],
+  ['product', 2, '데일리 백팩 18L', '차콜 / 1개', '59,000원', '배송 완료', '', ['리뷰 쓰기', '교환, 반품']],
   ['book', 1, '처음 시작하는 기록 습관', '1권', '16,800원', '구매 확정', 'muted', ['다시 담기']],
-  ['product', 4, '스테인리스 텀블러 500ml', '실버 · 2개', '38,000원', '상품 준비 중', '', ['주문 취소']],
+  ['product', 4, '스테인리스 텀블러 500ml', '실버 / 2개', '38,000원', '상품 준비 중', '', ['주문 취소']],
 ];
 const oitem = ([th, i, n, opt, price, st, tone, acts]) => `<div class="tp-oitem">${thumb('1:1', '', K.photo(th, i, 240), 'md')}<div class="tp-stack" style="gap: 2px"><span class="tp-ostate"${tone ? ` data-tone="${tone}"` : ''}>${st}</span><span class="tp-h4">${n}</span><span class="tp-num" style="margin-top: var(--ds-space-x1_5); font-size: var(--ds-font-size-t05); line-height: var(--ds-line-height-t05); font-weight: var(--ds-font-weight-bold)">${price}</span><span class="tp-caption">${opt}</span></div><div class="tp-oitem__acts">${acts.map((a) => btn(a)).join('')}</div></div>`;
 
@@ -115,7 +115,7 @@ const orders = () => {
     </div>
     <div class="tp-stack" style="gap: var(--ds-space-x10)">${groups.map(([d, no, items]) => `<section class="tp-order" aria-label="${d} 주문"><div class="tp-order__head"><span class="tp-row"><span class="tp-h3 tp-num">${d}</span><span class="tp-caption tp-num">주문 번호 ${no}</span></span>${link('주문 상세')}</div><div class="tp-rows">${items.map(oitem).join('')}</div></section>`).join('')}</div>
     <div class="tp-tfoot">${pagination(1, 3)}</div>`);
-  return { slug: 'mypage-orders', en: 'Order History', name: '주문 내역', group: 'My Page', desc: '주문을 날짜별로 모아 보는 내역 화면입니다. 상품마다 다음에 할 일을 바로 처리합니다.', css: CSS, body };
+  return { slug: 'mypage-orders', en: 'Order History', name: '주문 내역', group: 'My Page', desc: '주문을 날짜별로 모아 보는 내역 화면입니다. 배송 조회, 리뷰 쓰기처럼 상품마다 필요한 일을 바로 처리합니다.', css: CSS, body };
 };
 
 /* 3. 내 정보 ----------------------------------------------------- */
@@ -127,8 +127,8 @@ const profile = () => {
     ${sec('로그인 정보', [row('이메일', '로그인과 주문 안내에 써요.', val('ybm@example.com')), row('비밀번호', '마지막으로 바꾼 날 2026.06.14', val('••••••••')), row('간편 로그인', '연결한 계정으로 바로 로그인해요.', `<span class="tp-setrow__val">2개 연결</span>${btn('관리')}`)])}
     ${sec('개인 정보', [row('이름', '', val('와이비엠')), row('휴대폰', '본인 확인과 배송 연락에 써요.', val('010-1234-5678')), row('생년월일', '생일 쿠폰을 보내 드려요.', val('2001.04.12', '입력'))])}
     <section class="tp-sec" style="gap: var(--ds-space-x2)"><div class="tp-between"><h2 class="tp-h2">배송지</h2>${btn('새 배송지', { variant: 'ghost', ic: 'plus' })}</div><div class="tp-rows">
-      <div class="tp-addr"><div class="tp-stack" style="gap: var(--ds-space-x1)"><span class="tp-row"><span class="tp-h4">집</span>${badge('기본 배송지', 'brand')}</span><span class="tp-sub">와이비엠 · 010-1234-5678</span><span class="tp-sub">서울시 종로구 종로 104, 3층</span></div><div class="tp-row">${btn('수정')}</div></div>
-      <div class="tp-addr"><div class="tp-stack" style="gap: var(--ds-space-x1)"><span class="tp-h4">회사</span><span class="tp-sub">와이비엠 · 010-1234-5678</span><span class="tp-sub">서울시 중구 세종대로 110, 12층</span></div><div class="tp-row">${btn('수정')}${btn('지우기', { variant: 'ghost' })}</div></div>
+      <div class="tp-addr"><div class="tp-stack" style="gap: var(--ds-space-x1)"><span class="tp-row"><span class="tp-h4">집</span>${badge('기본 배송지', 'brand')}</span><span class="tp-sub">와이비엠 / 010-1234-5678</span><span class="tp-sub">서울시 종로구 종로 104, 3층</span></div><div class="tp-row">${btn('수정')}</div></div>
+      <div class="tp-addr"><div class="tp-stack" style="gap: var(--ds-space-x1)"><span class="tp-h4">회사</span><span class="tp-sub">와이비엠 / 010-1234-5678</span><span class="tp-sub">서울시 중구 세종대로 110, 12층</span></div><div class="tp-row">${btn('수정')}${btn('지우기', { variant: 'ghost' })}</div></div>
     </div></section>
     ${sec('알림', [row('주문, 배송 알림', '결제, 출발, 도착을 알려 드려요.', sw('주문, 배송 알림', true)), row('혜택, 이벤트 알림', '받기로 한 날 2026.03.02', sw('혜택, 이벤트 알림', true)), row('이메일 소식', '받지 않기로 한 날 2026.08.11', sw('이메일 소식', false))])}
     <a class="tp-leave" href="#">회원 탈퇴</a>`);
