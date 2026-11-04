@@ -141,5 +141,16 @@ yds로 [만들 화면, 예: 회원 목록 화면]을 만들어 줘.
 | [tokens.js](https://luvms012-rgb.github.io/yds/tokens/tokens.js) | 스크립트에서 토큰 값을 쓸 때 불러옵니다. |
 | [tailwind.preset.js](https://luvms012-rgb.github.io/yds/tokens/tailwind.preset.js) | Tailwind에 yds 토큰을 연결합니다. |
 | 페이지별 `.md` | 문서 제목 아래 Markdown 메뉴에서 그 페이지만 복사합니다. |
+| Themes | 테마 CSS 주소와 어울리는 서비스입니다. |
 
 Figma 변수와 CSS 변수는 이름이 같습니다. AI에 [Figma](https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=2608-2) 화면을 주면 같은 토큰으로 옮깁니다.
+
+## 테마
+
+테마는 브랜드 색, 바탕색, 모서리 곡률을 한 번에 바꿉니다. DS 다음에 테마 파일을 붙이고 html에 테마 이름을 적으면 됩니다. 고를 수 있는 테마는 [Themes](https://luvms012-rgb.github.io/yds/site/themes/index.html)에 있습니다.
+
+```html
+<html lang="ko" data-ds-theme="trust">
+<link rel="stylesheet" href="https://luvms012-rgb.github.io/yds/dist/ybm-ds.css">
+<link rel="stylesheet" href="https://luvms012-rgb.github.io/yds/dist/themes/trust.css">
+```

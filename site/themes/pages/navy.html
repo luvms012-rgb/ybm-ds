@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="ko" data-ds-theme="navy">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>네이비 테마 - 글로벌어학평가원 (yds 테마 예시)</title>
+<!-- 생성물: node site/themes/gen.mjs 가 만든다. 직접 고치지 말고 생성기를 고친다 -->
+<link rel="stylesheet" href="../../../dist/ybm-ds.css">
+<link rel="stylesheet" href="../../../dist/themes/navy.css">
+<script>if (location.hash === "#default") document.documentElement.removeAttribute("data-ds-theme");</script>
+<script src="../../../dist/ybm-ds.js" defer></script>
+<style>
+  body { margin: 0; background: var(--ds-color-bg-canvas); color: var(--ds-color-fg-neutral); word-break: keep-all; overflow-wrap: break-word; }
+  a { color: inherit; }
+  .th-wrap { box-sizing: border-box; width: min(100%, 1200px); margin-inline: auto; padding-inline: var(--ds-space-x4); }
+  @media (min-width: 768px) { .th-wrap { padding-inline: var(--ds-space-x6); } }
+  .th-art[data-tone="brand"] { color: var(--ds-color-fg-brand); }
+  .th-art[data-tone="positive"] { color: var(--ds-color-fg-positive); }
+  .th-art[data-tone="warning"] { color: var(--ds-color-fg-warning); }
+  .th-art[data-tone="critical"] { color: var(--ds-color-fg-critical); }
+  .th-art[data-tone="magic"] { color: var(--ds-color-fg-magic); }
+  .th-art[data-tone="neutral"] { color: var(--ds-color-fg-neutral-muted); }
+  .th-art[data-tone="on-brand"] { color: var(--ds-color-fg-on-brand-solid); }
+  .th-em { color: var(--ds-color-fg-brand); }
+  .th-num { font-variant-numeric: tabular-nums; }
+  .th-muted { color: var(--ds-color-fg-neutral-muted); }
+
+  .th-gnb { position: sticky; top: 0; z-index: var(--ds-z-sticky); background: var(--ds-color-bg-layer-default); box-shadow: inset 0 -1px 0 var(--ds-color-stroke-neutral-weak); }
+  .th-gnb__row { display: flex; align-items: center; gap: var(--ds-space-x8); height: 64px; }
+  .th-logo { font-size: var(--ds-font-size-t07); font-weight: var(--ds-font-weight-bold); letter-spacing: -0.03em; color: var(--ds-color-fg-brand); text-decoration: none; white-space: nowrap; }
+  .th-menu { display: none; gap: var(--ds-space-x7); }
+  .th-menu a { font-size: var(--ds-font-size-t05); line-height: var(--ds-line-height-t05); font-weight: var(--ds-font-weight-semibold); color: var(--ds-color-fg-neutral); text-decoration: none; white-space: nowrap; }
+  .th-menu a[aria-current="page"] { color: var(--ds-color-fg-brand); }
+  .th-gnb__search { display: none; flex: 1 1 auto; max-width: 420px; }
+  .th-gnb__end { display: none; align-items: center; gap: var(--ds-space-x1); margin-left: auto; }
+  .th-gnb__burger { margin-left: auto; }
+  .th-gnb__sub { display: flex; align-items: center; gap: var(--ds-space-x2); min-height: 48px; overflow-x: auto; scrollbar-width: none; }
+  @media (min-width: 1024px) { .th-menu, .th-gnb__search, .th-gnb__end { display: flex; } .th-gnb__burger { display: none; } }
+
+  .th-sec { padding-top: var(--ds-space-x14); }
+  .th-sec__head { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--ds-space-x4); margin-bottom: var(--ds-space-x6); }
+  .th-sec__head h2 { margin: 0; font-size: var(--ds-font-size-t08); line-height: var(--ds-line-height-t08); font-weight: var(--ds-font-weight-bold); letter-spacing: -0.02em; }
+  .th-sec__head p { margin: var(--ds-space-x1) 0 0; color: var(--ds-color-fg-neutral-muted); font-size: var(--ds-font-size-t04); }
+  .th-sec__head .ds-link { white-space: nowrap; }
+
+  .th-tiles { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: var(--ds-space-x5) var(--ds-space-x2); margin: 0; padding: 0; list-style: none; }
+  @media (min-width: 1024px) { .th-tiles { grid-template-columns: repeat(10, minmax(0, 1fr)); } }
+  .th-tiles a { display: flex; flex-direction: column; align-items: center; gap: var(--ds-space-x2); color: var(--ds-color-fg-neutral); text-decoration: none; text-align: center; font-size: var(--ds-font-size-t03); line-height: 18px; }
+  .th-tile { display: grid; place-items: center; flex: none; width: 60px; height: 60px; border-radius: var(--ds-shape-2xl); background: var(--ds-color-bg-brand-weak); transition: transform var(--ds-duration-fast) var(--ds-easing-standard); }
+  .th-tiles a:hover .th-tile { transform: translateY(-2px); }
+
+  .th-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--ds-space-x8) var(--ds-space-x4); }
+  @media (min-width: 768px) { .th-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  @media (min-width: 1024px) { .th-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+  .th-item { position: relative; display: flex; flex-direction: column; gap: var(--ds-space-x2); color: inherit; text-decoration: none; }
+  .th-item .ds-imageframe { border-radius: var(--ds-shape-xl); }
+  .th-item__like { position: absolute; top: var(--ds-space-x2); right: var(--ds-space-x2); }
+  .th-item__like .ds-btn { background: rgb(255 255 255 / .85); color: var(--ds-color-fg-neutral); }
+  .th-item__tag { position: absolute; top: var(--ds-space-x2); left: var(--ds-space-x2); }
+  .th-item b { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; font-size: var(--ds-font-size-t05); line-height: var(--ds-line-height-t05); font-weight: var(--ds-font-weight-semibold); }
+  .th-item small { color: var(--ds-color-fg-neutral-muted); font-size: var(--ds-font-size-t03); }
+  .th-item__price { display: flex; align-items: baseline; gap: var(--ds-space-x2); font-size: var(--ds-font-size-t05); }
+  .th-item__price b { display: inline; font-size: var(--ds-font-size-t06); }
+  .th-item__price s { color: var(--ds-color-fg-neutral-subtle); font-size: var(--ds-font-size-t03); }
+  .th-item__off { color: var(--ds-color-fg-critical); font-weight: var(--ds-font-weight-bold); }
+  .th-meta { display: flex; align-items: center; gap: var(--ds-space-x2); color: var(--ds-color-fg-neutral-muted); font-size: var(--ds-font-size-t02); }
+
+  .th-card { padding: var(--ds-space-x6); border-radius: var(--ds-shape-2xl); background: var(--ds-color-bg-layer-default); box-shadow: inset 0 0 0 1px var(--ds-color-stroke-neutral-weak); }
+  .th-card h3 { margin: 0 0 var(--ds-space-x3); font-size: var(--ds-font-size-t06); font-weight: var(--ds-font-weight-bold); }
+  .th-card--brand { background: var(--ds-color-bg-brand-weak); box-shadow: none; }
+  .th-between { display: flex; align-items: center; justify-content: space-between; gap: var(--ds-space-x3); }
+
+  .th-band { padding: var(--ds-space-x10); border-radius: var(--ds-shape-3xl); background: var(--ds-color-bg-brand-solid); color: var(--ds-color-fg-on-brand-solid); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ds-space-x6); }
+  .th-band h2 { margin: 0; font-size: var(--ds-font-size-t09); line-height: var(--ds-line-height-t09); font-weight: var(--ds-font-weight-bold); letter-spacing: -0.03em; }
+  .th-band p { margin: var(--ds-space-x2) 0 0; opacity: .88; }
+  .th-band .ds-btn { background: var(--ds-color-bg-layer-default); color: var(--ds-color-fg-brand); }
+
+  .th-list { margin: 0; padding: 0; list-style: none; }
+  .th-list li a { display: flex; flex-direction: column; gap: 2px; padding-block: var(--ds-space-x3); box-shadow: inset 0 -1px 0 var(--ds-color-stroke-neutral-weak); text-decoration: none; }
+  .th-list li b { overflow: hidden; font-size: var(--ds-font-size-t04); font-weight: var(--ds-font-weight-medium); text-overflow: ellipsis; white-space: nowrap; }
+  .th-list li span { color: var(--ds-color-fg-neutral-subtle); font-size: var(--ds-font-size-t02); }
+
+  .th-foot { margin-top: var(--ds-space-x20); box-shadow: inset 0 1px 0 var(--ds-color-stroke-neutral-weak); color: var(--ds-color-fg-neutral-muted); font-size: var(--ds-font-size-t03); }
+  .th-foot__links { display: flex; flex-wrap: wrap; gap: var(--ds-space-x2) var(--ds-space-x6); padding-block: var(--ds-space-x5); box-shadow: inset 0 -1px 0 var(--ds-color-stroke-neutral-weak); }
+  .th-foot__links a { color: var(--ds-color-fg-neutral); font-weight: var(--ds-font-weight-medium); text-decoration: none; }
+  .th-foot__links a[data-strong] { color: var(--ds-color-fg-brand); font-weight: var(--ds-font-weight-bold); }
+  .th-foot__body { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--ds-space-x6); padding-block: var(--ds-space-x6) var(--ds-space-x12); }
+  .th-foot__body p { margin: 0; line-height: 22px; }
+  .th-foot__body b { display: block; margin-bottom: var(--ds-space-x2); color: var(--ds-color-fg-neutral); font-size: var(--ds-font-size-t05); }
+
+    .th-util { display: none; justify-content: flex-end; gap: var(--ds-space-x4); padding-block: var(--ds-space-x2); font-size: var(--ds-font-size-t02); color: var(--ds-color-fg-neutral-muted); }
+    .th-util a { text-decoration: none; }
+    .th-utilbar { background: var(--ds-color-bg-layer-default); box-shadow: inset 0 -1px 0 var(--ds-color-stroke-neutral-weak); }
+    @media (min-width: 1024px) { .th-util { display: flex; } }
+    .th-hero { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ds-space-x4); padding-top: var(--ds-space-x6); }
+    @media (min-width: 1024px) { .th-hero { grid-template-columns: minmax(0, 1fr) 320px; } }
+    .th-banner { position: relative; overflow: hidden; border-radius: var(--ds-shape-2xl); background: var(--ds-color-bg-brand-solid); color: var(--ds-color-fg-on-brand-solid); }
+    .th-banner > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .28; }
+    .th-banner__text { position: relative; display: flex; flex-direction: column; justify-content: flex-end; align-items: flex-start; gap: var(--ds-space-x2); box-sizing: border-box; min-height: 300px; padding: var(--ds-space-x8); }
+    .th-banner__text h1 { margin: 0; font-size: 32px; line-height: 1.35; font-weight: var(--ds-font-weight-bold); letter-spacing: -0.03em; }
+    .th-banner__text p { margin: 0; opacity: .9; }
+    .th-banner__pager { position: absolute; right: var(--ds-space-x6); bottom: var(--ds-space-x6); padding: 2px var(--ds-space-x3); border-radius: var(--ds-shape-pill); background: rgb(0 0 0 / .35); font-size: var(--ds-font-size-t02); }
+    .th-login { display: flex; flex-direction: column; justify-content: center; gap: var(--ds-space-x4); text-align: center; }
+    .th-login p { margin: 0; font-size: var(--ds-font-size-t06); line-height: var(--ds-line-height-t06); font-weight: var(--ds-font-weight-bold); }
+    .th-login p span { display: block; color: var(--ds-color-fg-brand); font-size: var(--ds-font-size-t04); font-weight: var(--ds-font-weight-semibold); }
+    .th-login__links { display: flex; justify-content: center; gap: var(--ds-space-x3); font-size: var(--ds-font-size-t03); color: var(--ds-color-fg-neutral-muted); }
+    .th-login__links a { text-decoration: none; }
+    .th-tile { background: var(--ds-color-bg-layer-default); box-shadow: inset 0 0 0 1px var(--ds-color-stroke-neutral-weak); }
+    .th-steps { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ds-space-x3); }
+    @media (min-width: 768px) { .th-steps { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+    .th-step { display: flex; flex-direction: column; gap: var(--ds-space-x3); }
+    .th-step b { font-size: var(--ds-font-size-t05); }
+    .th-step small { color: var(--ds-color-fg-neutral-muted); line-height: 20px; }
+    .th-step__no { color: var(--ds-color-fg-brand); font-size: var(--ds-font-size-t03); font-weight: var(--ds-font-weight-bold); }
+    .th-two { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ds-space-x4); }
+    @media (min-width: 1024px) { .th-two { grid-template-columns: minmax(0, 1fr) 340px; } }
+    .th-call { display: flex; align-items: center; gap: var(--ds-space-x4); margin-top: var(--ds-space-x4); padding-top: var(--ds-space-x4); box-shadow: inset 0 1px 0 var(--ds-color-stroke-neutral-weak); }
+    .th-call b { display: block; color: var(--ds-color-fg-brand); font-size: var(--ds-font-size-t07); letter-spacing: -0.02em; }
+    .th-call small { color: var(--ds-color-fg-neutral-muted); }
+  </style>
+</head>
+<body>
+<div class="th-utilbar"><div class="th-util th-wrap"><a href="#">고객센터</a><a href="#">단체 접수</a><a href="#">회원가입</a><a href="#">로그인</a></div></div>
+<header class="th-gnb"><div class="th-wrap th-gnb__row">
+  <a class="th-logo" href="#">글로벌어학평가원</a>
+  <nav class="th-menu" aria-label="주요 메뉴"><a href="#" aria-current="page">시험 접수</a><a href="#">성적 확인</a><a href="#">시험 안내</a><a href="#">학습 자료</a><a href="#">고객센터</a></nav>
+  
+  <div class="th-gnb__end"><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" aria-label="검색"><i class="ds-icon ds-icon--search" aria-hidden="true"></i></button><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="xsmall"><i class="ds-icon ds-icon--user" aria-hidden="true"></i>마이페이지</button><button type="button" class="ds-btn" data-variant="brandSolid" data-size="xsmall">지금 접수하기</button></div>
+  <span class="th-gnb__burger"><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" aria-label="메뉴 열기"><i class="ds-icon ds-icon--menu" aria-hidden="true"></i></button></span>
+</div></header>
+<main class="th-wrap">
+  <section class="th-hero" aria-label="소식">
+    <div class="th-banner"><img src="https://images.unsplash.com/photo-1514565131-fce0801e5785?auto=format&fit=crop&w=1400&q=70" alt=""><div class="th-banner__text"><span class="ds-badge" data-tone="brand" data-variant="solid">제512회 정기 시험</span><h1>11월 22일 시험<br>접수 마감이 3일 남았어요</h1><p>모바일로 3분이면 접수가 끝나요. 접수 후 고사장 변경은 마감 전까지 가능해요.</p><div style="margin-top: var(--ds-space-x4)"><button type="button" class="ds-btn" data-variant="neutralSolid" data-size="large">지금 접수하기<i class="ds-icon ds-icon--arrow-right" aria-hidden="true"></i></button></div></div><span class="th-banner__pager th-num">2 / 4</span></div>
+    <div class="th-card th-login"><p><span>로그인하고</span>내 시험을 한눈에 확인하세요</p><button type="button" class="ds-btn" data-variant="brandSolid" data-size="large" data-width="fill">로그인</button><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="medium" data-width="fill">간편 인증으로 로그인</button><div class="th-login__links"><a href="#">아이디 찾기</a><a href="#">비밀번호 찾기</a><a href="#">회원가입</a></div></div>
+  </section>
+  <section class="th-sec" aria-label="바로 가기"><ul class="th-tiles"><li><a href="#"><span class="th-tile"><svg class="th-art" data-tone="brand" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v3"/><path d="M16 2v3"/><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="m9 15 2 2 4-4"/></svg></span><span>시험 접수</span></a></li><li><a href="#"><span class="th-tile"><svg class="th-art" data-tone="brand" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2"/><path d="M13 17v2"/><path d="M13 11v2"/></svg></span><span>수험표 출력</span></a></li><li><a href="#"><span class="th-tile"><svg class="th-art" data-tone="brand" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"/><circle cx="12" cy="8" r="6"/></svg></span><span>성적 확인</span></a></li><li><a href="#"><span class="th-tile"><svg class="th-art" data-tone="brand" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg></span><span>고사장 찾기</span></a></li><li><a href="#"><span class="th-tile"><svg class="th-art" data-tone="brand" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg></span><span>접수 변경, 취소</span></a></li><li><a href="#"><span class="th-tile"><svg class="th-art" data-tone="brand" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg></span><span>성적표 발급</span></a></li><li><a href="#"><span class="th-tile"><svg class="th-art" data-tone="brand" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 10h.01"/><path d="M12 14h.01"/><path d="M12 6h.01"/><path d="M16 10h.01"/><path d="M16 14h.01"/><path d="M16 6h.01"/><path d="M8 10h.01"/><path d="M8 14h.01"/><path d="M8 6h.01"/><path d="M9 22v-3a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3"/><rect x="4" y="2" width="16" height="20" rx="2"/></svg></span><span>단체 접수</span></a></li><li><a href="#"><span class="th-tile"><svg class="th-art" data-tone="brand" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v16"/><path d="M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z"/></svg></span><span>시험 안내</span></a></li><li><a href="#"><span class="th-tile"><svg class="th-art" data-tone="brand" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m16 9-5.5 5.5L8 12"/></svg></span><span>정기 시험 일정</span></a></li><li><a href="#"><span class="th-tile"><svg class="th-art" data-tone="brand" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-5Zm0 0a9 9 0 1 1 18 0m0 0v5a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3Z"/><path d="M21 16v2a4 4 0 0 1-4 4h-5"/></svg></span><span>고객센터</span></a></li></ul></section>
+  <section class="th-sec" aria-labelledby="s1"><div class="th-sec__head"><div><h2 id="s1">접수는 네 단계면 끝나요</h2></div><a class="ds-link" href="#">접수 안내 자세히 <i class="ds-icon ds-icon--chevron-right ds-icon--sm" aria-hidden="true"></i></a></div>
+    <div class="th-steps"><div class="th-card th-step"><span class="th-step__no">STEP 1</span><svg class="th-art" data-tone="brand" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v3"/><path d="M16 2v3"/><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="m9 15 2 2 4-4"/></svg><b>시험과 회차 고르기</b><small>시험 종류와 날짜를 고르고 잔여석을 확인해요.</small></div><div class="th-card th-step"><span class="th-step__no">STEP 2</span><svg class="th-art" data-tone="brand" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg><b>고사장 고르기</b><small>집과 가까운 고사장을 지도에서 골라요.</small></div><div class="th-card th-step"><span class="th-step__no">STEP 3</span><svg class="th-art" data-tone="brand" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 19a4 4 0 00-8 0"/><path d="M16 10h2"/><path d="M16 14h2"/><circle cx="9" cy="12" r="3"/><rect x="2" y="5" width="20" height="14" rx="2"/></svg><b>응시자 정보와 사진</b><small>영문 이름과 규격 사진을 올려요.</small></div><div class="th-card th-step"><span class="th-step__no">STEP 4</span><svg class="th-art" data-tone="brand" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2"/><path d="M13 17v2"/><path d="M13 11v2"/></svg><b>결제와 수험표</b><small>결제하면 바로 수험표가 나와요.</small></div></div></section>
+  <section class="th-sec th-two" aria-label="일정과 공지">
+    <div class="th-card"><h3>시험 일정</h3><div class="ds-table-wrap"><table class="ds-table" data-density="compact"><thead><tr><th scope="col">회차</th><th scope="col">시험일</th><th scope="col">접수 기간</th><th scope="col">상태</th><th scope="col"></th></tr></thead><tbody><tr><td><b>제512회</b></td><td>2026.11.22(토)</td><td>10.20 ~ 11.03</td><td><span class="ds-badge" data-tone="positive">접수 중</span></td><td><button type="button" class="ds-btn" data-variant="brandSolid" data-size="xsmall">접수</button></td></tr><tr><td><b>제513회</b></td><td>2026.12.13(일)</td><td>11.10 ~ 11.24</td><td><span class="ds-badge" data-tone="informative">접수 예정</span></td><td><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="xsmall">알림 신청</button></td></tr><tr><td><b>제514회</b></td><td>2027.01.10(토)</td><td>12.08 ~ 12.22</td><td><span class="ds-badge" data-tone="informative">접수 예정</span></td><td><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="xsmall">알림 신청</button></td></tr><tr><td><b>스피킹 제98회</b></td><td>2026.11.29(일)</td><td>10.27 ~ 11.17</td><td><span class="ds-badge" data-tone="warning">추가 접수</span></td><td><button type="button" class="ds-btn" data-variant="brandSolid" data-size="xsmall">접수</button></td></tr><tr><td><b>라이팅 제41회</b></td><td>2026.12.06(토)</td><td>11.03 ~ 11.24</td><td><span class="ds-badge" data-tone="informative">접수 예정</span></td><td><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="xsmall">알림 신청</button></td></tr></tbody></table></div><p class="th-muted" style="margin: var(--ds-space-x3) 0 0; font-size: var(--ds-font-size-t03)">접수 기간은 오전 10시에 열리고 마지막 날 오후 6시에 닫혀요.</p></div>
+    <div class="th-card"><div class="th-between"><h3 style="margin: 0">공지사항</h3><a class="ds-link" href="#">더 보기</a></div><ul class="th-list" style="margin-top: var(--ds-space-x2)"><li><a href="#"><b>제512회 고사장 추가 개설 안내</b><span>2026.11.02</span></a></li><li><a href="#"><b>[안내] 신분증 인정 범위 변경</b><span>2026.10.28</span></a></li><li><a href="#"><b>성적표 발급 서비스 점검 (11.08 02:00 ~ 06:00)</b><span>2026.10.25</span></a></li><li><a href="#"><b>[발표] 제511회 성적 발표</b><span>2026.10.21</span></a></li></ul><div class="th-call"><svg class="th-art" data-tone="brand" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-5Zm0 0a9 9 0 1 1 18 0m0 0v5a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3Z"/><path d="M21 16v2a4 4 0 0 1-4 4h-5"/></svg><div><b>1588-0000</b><small>평일 09:00 ~ 18:00 · 점심 12:00 ~ 13:00</small></div></div></div>
+  </section>
+</main>
+<footer class="th-foot"><div class="th-wrap">
+  <nav class="th-foot__links" aria-label="약관"><a href="#">이용약관</a><a href="#" data-strong>개인정보 처리방침</a><a href="#">이메일 무단 수집 거부</a><a href="#">단체 접수 안내</a></nav>
+  <div class="th-foot__body"><p><b>글로벌어학평가원</b>이 화면은 yds 테마 예시예요. 회사 이름, 상품, 연락처는 모두 가상입니다.<br>서울시 가상구 예시로 100 · help@example.com</p><p>© 2026 글로벌어학평가원</p></div>
+</div></footer>
+</body>
+</html>

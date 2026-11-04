@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="ko" data-ds-theme="ink">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>먹 테마 - 책다락 (yds 테마 예시)</title>
+<!-- 생성물: node site/themes/gen.mjs 가 만든다. 직접 고치지 말고 생성기를 고친다 -->
+<link rel="stylesheet" href="../../../dist/ybm-ds.css">
+<link rel="stylesheet" href="../../../dist/themes/ink.css">
+<script>if (location.hash === "#default") document.documentElement.removeAttribute("data-ds-theme");</script>
+<script src="../../../dist/ybm-ds.js" defer></script>
+<style>
+  body { margin: 0; background: var(--ds-color-bg-canvas); color: var(--ds-color-fg-neutral); word-break: keep-all; overflow-wrap: break-word; }
+  a { color: inherit; }
+  .th-wrap { box-sizing: border-box; width: min(100%, 1200px); margin-inline: auto; padding-inline: var(--ds-space-x4); }
+  @media (min-width: 768px) { .th-wrap { padding-inline: var(--ds-space-x6); } }
+  .th-art[data-tone="brand"] { color: var(--ds-color-fg-brand); }
+  .th-art[data-tone="positive"] { color: var(--ds-color-fg-positive); }
+  .th-art[data-tone="warning"] { color: var(--ds-color-fg-warning); }
+  .th-art[data-tone="critical"] { color: var(--ds-color-fg-critical); }
+  .th-art[data-tone="magic"] { color: var(--ds-color-fg-magic); }
+  .th-art[data-tone="neutral"] { color: var(--ds-color-fg-neutral-muted); }
+  .th-art[data-tone="on-brand"] { color: var(--ds-color-fg-on-brand-solid); }
+  .th-em { color: var(--ds-color-fg-brand); }
+  .th-num { font-variant-numeric: tabular-nums; }
+  .th-muted { color: var(--ds-color-fg-neutral-muted); }
+
+  .th-gnb { position: sticky; top: 0; z-index: var(--ds-z-sticky); background: var(--ds-color-bg-layer-default); box-shadow: inset 0 -1px 0 var(--ds-color-stroke-neutral-weak); }
+  .th-gnb__row { display: flex; align-items: center; gap: var(--ds-space-x8); height: 64px; }
+  .th-logo { font-size: var(--ds-font-size-t07); font-weight: var(--ds-font-weight-bold); letter-spacing: -0.03em; color: var(--ds-color-fg-brand); text-decoration: none; white-space: nowrap; }
+  .th-menu { display: none; gap: var(--ds-space-x7); }
+  .th-menu a { font-size: var(--ds-font-size-t05); line-height: var(--ds-line-height-t05); font-weight: var(--ds-font-weight-semibold); color: var(--ds-color-fg-neutral); text-decoration: none; white-space: nowrap; }
+  .th-menu a[aria-current="page"] { color: var(--ds-color-fg-brand); }
+  .th-gnb__search { display: none; flex: 1 1 auto; max-width: 420px; }
+  .th-gnb__end { display: none; align-items: center; gap: var(--ds-space-x1); margin-left: auto; }
+  .th-gnb__burger { margin-left: auto; }
+  .th-gnb__sub { display: flex; align-items: center; gap: var(--ds-space-x2); min-height: 48px; overflow-x: auto; scrollbar-width: none; }
+  @media (min-width: 1024px) { .th-menu, .th-gnb__search, .th-gnb__end { display: flex; } .th-gnb__burger { display: none; } }
+
+  .th-sec { padding-top: var(--ds-space-x14); }
+  .th-sec__head { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--ds-space-x4); margin-bottom: var(--ds-space-x6); }
+  .th-sec__head h2 { margin: 0; font-size: var(--ds-font-size-t08); line-height: var(--ds-line-height-t08); font-weight: var(--ds-font-weight-bold); letter-spacing: -0.02em; }
+  .th-sec__head p { margin: var(--ds-space-x1) 0 0; color: var(--ds-color-fg-neutral-muted); font-size: var(--ds-font-size-t04); }
+  .th-sec__head .ds-link { white-space: nowrap; }
+
+  .th-tiles { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: var(--ds-space-x5) var(--ds-space-x2); margin: 0; padding: 0; list-style: none; }
+  @media (min-width: 1024px) { .th-tiles { grid-template-columns: repeat(10, minmax(0, 1fr)); } }
+  .th-tiles a { display: flex; flex-direction: column; align-items: center; gap: var(--ds-space-x2); color: var(--ds-color-fg-neutral); text-decoration: none; text-align: center; font-size: var(--ds-font-size-t03); line-height: 18px; }
+  .th-tile { display: grid; place-items: center; flex: none; width: 60px; height: 60px; border-radius: var(--ds-shape-2xl); background: var(--ds-color-bg-brand-weak); transition: transform var(--ds-duration-fast) var(--ds-easing-standard); }
+  .th-tiles a:hover .th-tile { transform: translateY(-2px); }
+
+  .th-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--ds-space-x8) var(--ds-space-x4); }
+  @media (min-width: 768px) { .th-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  @media (min-width: 1024px) { .th-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+  .th-item { position: relative; display: flex; flex-direction: column; gap: var(--ds-space-x2); color: inherit; text-decoration: none; }
+  .th-item .ds-imageframe { border-radius: var(--ds-shape-xl); }
+  .th-item__like { position: absolute; top: var(--ds-space-x2); right: var(--ds-space-x2); }
+  .th-item__like .ds-btn { background: rgb(255 255 255 / .85); color: var(--ds-color-fg-neutral); }
+  .th-item__tag { position: absolute; top: var(--ds-space-x2); left: var(--ds-space-x2); }
+  .th-item b { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; font-size: var(--ds-font-size-t05); line-height: var(--ds-line-height-t05); font-weight: var(--ds-font-weight-semibold); }
+  .th-item small { color: var(--ds-color-fg-neutral-muted); font-size: var(--ds-font-size-t03); }
+  .th-item__price { display: flex; align-items: baseline; gap: var(--ds-space-x2); font-size: var(--ds-font-size-t05); }
+  .th-item__price b { display: inline; font-size: var(--ds-font-size-t06); }
+  .th-item__price s { color: var(--ds-color-fg-neutral-subtle); font-size: var(--ds-font-size-t03); }
+  .th-item__off { color: var(--ds-color-fg-critical); font-weight: var(--ds-font-weight-bold); }
+  .th-meta { display: flex; align-items: center; gap: var(--ds-space-x2); color: var(--ds-color-fg-neutral-muted); font-size: var(--ds-font-size-t02); }
+
+  .th-card { padding: var(--ds-space-x6); border-radius: var(--ds-shape-2xl); background: var(--ds-color-bg-layer-default); box-shadow: inset 0 0 0 1px var(--ds-color-stroke-neutral-weak); }
+  .th-card h3 { margin: 0 0 var(--ds-space-x3); font-size: var(--ds-font-size-t06); font-weight: var(--ds-font-weight-bold); }
+  .th-card--brand { background: var(--ds-color-bg-brand-weak); box-shadow: none; }
+  .th-between { display: flex; align-items: center; justify-content: space-between; gap: var(--ds-space-x3); }
+
+  .th-band { padding: var(--ds-space-x10); border-radius: var(--ds-shape-3xl); background: var(--ds-color-bg-brand-solid); color: var(--ds-color-fg-on-brand-solid); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ds-space-x6); }
+  .th-band h2 { margin: 0; font-size: var(--ds-font-size-t09); line-height: var(--ds-line-height-t09); font-weight: var(--ds-font-weight-bold); letter-spacing: -0.03em; }
+  .th-band p { margin: var(--ds-space-x2) 0 0; opacity: .88; }
+  .th-band .ds-btn { background: var(--ds-color-bg-layer-default); color: var(--ds-color-fg-brand); }
+
+  .th-list { margin: 0; padding: 0; list-style: none; }
+  .th-list li a { display: flex; flex-direction: column; gap: 2px; padding-block: var(--ds-space-x3); box-shadow: inset 0 -1px 0 var(--ds-color-stroke-neutral-weak); text-decoration: none; }
+  .th-list li b { overflow: hidden; font-size: var(--ds-font-size-t04); font-weight: var(--ds-font-weight-medium); text-overflow: ellipsis; white-space: nowrap; }
+  .th-list li span { color: var(--ds-color-fg-neutral-subtle); font-size: var(--ds-font-size-t02); }
+
+  .th-foot { margin-top: var(--ds-space-x20); box-shadow: inset 0 1px 0 var(--ds-color-stroke-neutral-weak); color: var(--ds-color-fg-neutral-muted); font-size: var(--ds-font-size-t03); }
+  .th-foot__links { display: flex; flex-wrap: wrap; gap: var(--ds-space-x2) var(--ds-space-x6); padding-block: var(--ds-space-x5); box-shadow: inset 0 -1px 0 var(--ds-color-stroke-neutral-weak); }
+  .th-foot__links a { color: var(--ds-color-fg-neutral); font-weight: var(--ds-font-weight-medium); text-decoration: none; }
+  .th-foot__links a[data-strong] { color: var(--ds-color-fg-brand); font-weight: var(--ds-font-weight-bold); }
+  .th-foot__body { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--ds-space-x6); padding-block: var(--ds-space-x6) var(--ds-space-x12); }
+  .th-foot__body p { margin: 0; line-height: 22px; }
+  .th-foot__body b { display: block; margin-bottom: var(--ds-space-x2); color: var(--ds-color-fg-neutral); font-size: var(--ds-font-size-t05); }
+
+    .th-gnb__row { height: 80px; }
+    .th-logo { font-family: Georgia, 'Noto Serif KR', serif; letter-spacing: -0.01em; }
+    .th-hero { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ds-space-x4); padding-top: var(--ds-space-x6); }
+    @media (min-width: 1024px) { .th-hero { grid-template-columns: minmax(0, 1fr) 300px; } }
+    .th-bn { position: relative; overflow: hidden; border-radius: var(--ds-shape-xl); background: var(--ds-color-bg-brand-solid); color: var(--ds-color-fg-on-brand-solid); }
+    .th-bn > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .35; }
+    .th-bn__text { position: relative; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; gap: var(--ds-space-x2); box-sizing: border-box; min-height: 300px; padding: var(--ds-space-x10); }
+    .th-bn__text h1 { margin: 0; font-size: 36px; line-height: 1.3; font-weight: var(--ds-font-weight-bold); letter-spacing: -0.03em; }
+    .th-bn__text p { margin: 0; opacity: .9; }
+    .th-bn__pager { position: absolute; right: var(--ds-space-x6); bottom: var(--ds-space-x6); padding: 2px var(--ds-space-x3); border-radius: var(--ds-shape-pill); background: rgb(255 255 255 / .2); font-size: var(--ds-font-size-t02); }
+    .th-side { display: flex; flex-direction: column; gap: var(--ds-space-x4); }
+    .th-side .th-card { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: var(--ds-space-x3); text-align: center; }
+    .th-side .th-card p { margin: 0; color: var(--ds-color-fg-neutral-muted); font-size: var(--ds-font-size-t03); }
+    .th-side .th-card b { font-size: var(--ds-font-size-t06); }
+    .th-tile { border-radius: var(--ds-shape-pill); }
+    .th-pick { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--ds-space-x5); margin-bottom: var(--ds-space-x6); }
+    .th-pick h2 { margin: 0; font-size: var(--ds-font-size-t08); line-height: var(--ds-line-height-t08); font-weight: var(--ds-font-weight-bold); letter-spacing: -0.02em; }
+    .th-pick nav { display: flex; gap: var(--ds-space-x4); font-size: var(--ds-font-size-t04); color: var(--ds-color-fg-neutral-muted); }
+    .th-pick nav a { text-decoration: none; }
+    .th-pick nav a[aria-current] { color: var(--ds-color-fg-brand); font-weight: var(--ds-font-weight-bold); }
+    .th-books { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--ds-space-x8) var(--ds-space-x4); }
+    @media (min-width: 768px) { .th-books { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
+    .th-book { display: flex; flex-direction: column; gap: var(--ds-space-x2); text-decoration: none; }
+    .th-book .ds-imageframe { border-radius: var(--ds-shape-sm); box-shadow: 0 8px 20px -10px rgb(0 0 0 / .35), inset 0 0 0 1px var(--ds-color-stroke-neutral-weak); }
+    .th-book__no { color: var(--ds-color-fg-brand); font-size: var(--ds-font-size-t06); font-weight: var(--ds-font-weight-bold); font-family: Georgia, serif; }
+    .th-book b { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; font-size: var(--ds-font-size-t04); line-height: 22px; font-weight: var(--ds-font-weight-semibold); }
+    .th-book small { color: var(--ds-color-fg-neutral-muted); font-size: var(--ds-font-size-t02); }
+    .th-book__price { font-size: var(--ds-font-size-t04); }
+    .th-book__price b { display: inline; font-size: var(--ds-font-size-t05); }
+    .th-quote { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ds-space-x6); align-items: center; padding: var(--ds-space-x10); border-radius: var(--ds-shape-xl); background: var(--ds-color-bg-layer-default); box-shadow: inset 0 0 0 1px var(--ds-color-stroke-neutral-weak); }
+    @media (min-width: 1024px) { .th-quote { grid-template-columns: 220px minmax(0, 1fr); } }
+    .th-quote .ds-imageframe { border-radius: var(--ds-shape-sm); }
+    .th-quote blockquote { margin: 0; font-family: Georgia, 'Noto Serif KR', serif; font-size: var(--ds-font-size-t08); line-height: 1.5; letter-spacing: -0.01em; }
+    .th-quote cite { display: block; margin-top: var(--ds-space-x4); color: var(--ds-color-fg-neutral-muted); font-style: normal; font-size: var(--ds-font-size-t04); }
+  </style>
+</head>
+<body>
+<header class="th-gnb"><div class="th-wrap th-gnb__row">
+  <a class="th-logo" href="#">책다락</a>
+  <nav class="th-menu" aria-label="주요 메뉴"><a href="#" aria-current="page">베스트</a><a href="#">신상품</a><a href="#">이벤트</a><a href="#">바로펀딩</a><a href="#">PICKS</a><a href="#">컬처라운지</a></nav>
+  <div class="th-gnb__search"><div class="ds-input" data-variant="outline" data-size="medium"><i class="ds-icon ds-icon--search ds-input__icon" aria-hidden="true"></i><input class="ds-input__control" id="q" type="search" placeholder="경기도가 찜한 책? 우수출판물 20권, 지금 확인" aria-label="경기도가 찜한 책? 우수출판물 20권, 지금 확인"></div></div>
+  <div class="th-gnb__end"><button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall">로그인</button><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" aria-label="장바구니"><i class="ds-icon ds-icon--shopping-cart" aria-hidden="true"></i></button><span class="ds-avatar" data-size="36" role="img" aria-label="나"><span class="ds-avatar__initials" aria-hidden="true">나</span></span></div>
+  <span class="th-gnb__burger"><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" aria-label="메뉴 열기"><i class="ds-icon ds-icon--menu" aria-hidden="true"></i></button></span>
+</div></header>
+<main class="th-wrap">
+  <section class="th-hero" aria-label="소식">
+    <div class="th-bn"><img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=1400&q=70" alt=""><div class="th-bn__text"><span class="ds-badge" data-tone="neutral" data-variant="solid">Special</span><h1>바로펀딩<br>돌잔치</h1><p>1주년 기념 골드바 주인공은?</p><div style="margin-top: var(--ds-space-x4)"><button type="button" class="ds-btn" data-variant="neutralSolid" data-size="medium">전체 보기<i class="ds-icon ds-icon--chevron-right" aria-hidden="true"></i></button></div></div><span class="th-bn__pager th-num">09 / 35</span></div>
+    <div class="th-side"><div class="th-card"><svg class="th-art" data-tone="brand" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20"/><path d="M8.62 9.8A2.25 2.25 0 1 1 12 6.836a2.25 2.25 0 1 1 3.38 2.966l-2.626 2.856a.998.998 0 0 1-1.507 0z"/></svg><b>책책책 가을 특집</b><p>선착순 교환권 받기</p><button type="button" class="ds-btn" data-variant="brandSolid" data-size="small">참여하기</button></div><div class="th-card th-card--brand"><svg class="th-art" data-tone="brand" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 9.536V7a4 4 0 0 1 4-4h1.5a.5.5 0 0 1 .5.5V5a4 4 0 0 1-4 4 4 4 0 0 0-4 4c0 2 1 3 1 5a5 5 0 0 1-1 3"/><path d="M4 9a5 5 0 0 1 8 4 5 5 0 0 1-8-4"/><path d="M5 21h14"/></svg><b>책을 읽읍시다!</b><p>가을 끝갈피 이벤트</p><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="small">자세히</button></div></div>
+  </section>
+  <section class="th-sec" aria-label="바로 가기"><ul class="th-tiles"><li><a href="#"><span class="th-tile"><svg class="th-art" data-tone="brand" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" x2="5" y1="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg></span><span>할인혜택</span></a></li><li><a href="#"><span class="th-tile"><svg class="th-art" data-tone="brand" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15.914 4a1.5 1.5 0 00-2.474-1.561l-9 9A1.5 1.5 0 005.5 14h4.002a.5.5 0 01.471.666L8.086 20a1.5 1.5 0 002.475 1.56l9-9A1.5 1.5 0 0018.5 10h-3.997a.5.5 0 01-.472-.667z"/></svg></span><span>오늘만특가</span></a></li><li><a href="#"><span class="th-tile"><svg class="th-art" data-tone="brand" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg></span><span>APP혜택</span></a></li><li><a href="#"><span class="th-tile"><svg class="th-art" data-tone="brand" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7v14"/><path d="M20 11v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-8"/><path d="M7.5 7a1 1 0 0 1 0-5A4.8 8 0 0 1 12 7a4.8 8 0 0 1 4.5-5 1 1 0 0 1 0 5"/><rect x="3" y="7" width="18" height="4" rx="1"/></svg></span><span>기프트카드</span></a></li><li><a href="#"><span class="th-tile"><svg class="th-art" data-tone="brand" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg></span><span>바로출판</span></a></li><li><a href="#"><span class="th-tile"><svg class="th-art" data-tone="brand" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v3"/><path d="M16 2v3"/><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg></span><span>이달의 책</span></a></li><li><a href="#"><span class="th-tile"><svg class="th-art" data-tone="brand" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 21h8"/><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/></svg></span><span>손글씨캠페인</span></a></li><li><a href="#"><span class="th-tile"><svg class="th-art" data-tone="brand" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"/><path d="M12 22V12"/><polyline points="3.29 7 12 12 20.71 7"/><path d="m7.5 4.27 9 5.15"/></svg></span><span>사은품</span></a></li><li><a href="#"><span class="th-tile"><svg class="th-art" data-tone="brand" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z"/><path d="M7 10v12"/></svg></span><span>추천</span></a></li><li><a href="#"><span class="th-tile"><svg class="th-art" data-tone="brand" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5a3 3 0 1 1 3 3m-3-3a3 3 0 1 0-3 3m3-3v1M9 8a3 3 0 1 0 3 3M9 8h1m5 0a3 3 0 1 1-3 3m3-3h-1m-2 3v-1"/><circle cx="12" cy="8" r="2"/><path d="M12 10v12"/><path d="M12 22c4.2 0 7-1.667 7-5-4.2 0-7 1.667-7 5Z"/><path d="M12 22c-4.2 0-7-1.667-7-5 4.2 0 7 1.667 7 5Z"/></svg></span><span>책그리고꽃</span></a></li></ul></section>
+  <section class="th-sec" aria-labelledby="s1"><div class="th-pick"><h2 id="s1">오늘의 선택</h2><nav aria-label="분류"><a href="#" aria-current="true">국내도서</a><a href="#">외국도서</a><a href="#">eBook</a><a href="#">sam</a><a href="#">핫트랙스</a></nav><span style="margin-left: auto"><a class="ds-link" href="#">더보기 +</a></span></div>
+    <div class="th-books"><a class="th-book" href="#"><div class="ds-imageframe" data-ratio="3:4"><img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=400&q=70" alt="" loading="lazy"></div><b>소년이 온다</b><small>한강 · 창비</small><span class="th-book__price th-num"><span class="th-item__off">10%</span> <b>13,500원</b></span></a><a class="th-book" href="#"><div class="ds-imageframe" data-ratio="3:4"><img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=400&q=70" alt="" loading="lazy"></div><b>불편한 편의점</b><small>김호연 · 나무옆의자</small><span class="th-book__price th-num"><span class="th-item__off">10%</span> <b>12,600원</b></span></a><a class="th-book" href="#"><div class="ds-imageframe" data-ratio="3:4"><img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=400&q=70" alt="" loading="lazy"></div><b>세이노의 가르침</b><small>세이노 · 데이원</small><span class="th-book__price th-num"><span class="th-item__off">10%</span> <b>6,480원</b></span></a><a class="th-book" href="#"><div class="ds-imageframe" data-ratio="3:4"><img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=400&q=70" alt="" loading="lazy"></div><b>모순</b><small>양귀자 · 쓰다</small><span class="th-book__price th-num"><span class="th-item__off">10%</span> <b>11,700원</b></span></a><a class="th-book" href="#"><div class="ds-imageframe" data-ratio="3:4"><img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=400&q=70" alt="" loading="lazy"></div><b>트렌드 코리아 2027</b><small>김난도 외 · 미래의창</small><span class="th-book__price th-num"><span class="th-item__off">10%</span> <b>17,100원</b></span></a><a class="th-book" href="#"><div class="ds-imageframe" data-ratio="3:4"><img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&w=400&q=70" alt="" loading="lazy"></div><b>원씽</b><small>게리 켈러 · 비즈니스북스</small><span class="th-book__price th-num"><span class="th-item__off">10%</span> <b>13,500원</b></span></a></div></section>
+  <section class="th-sec" aria-labelledby="s2"><div class="th-sec__head"><div><h2 id="s2">베스트셀러</h2><p>주간 종합 · 11월 1주</p></div><a class="ds-link" href="#">전체 보기 <i class="ds-icon ds-icon--chevron-right ds-icon--sm" aria-hidden="true"></i></a></div>
+    <div class="th-books"><a class="th-book" href="#"><span class="th-book__no">1</span><div class="ds-imageframe" data-ratio="3:4"><img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=400&q=70" alt="" loading="lazy"></div><b>작별하지 않는다</b><small>한강 · 문학동네</small><span class="th-book__price th-num"><span class="th-item__off">10%</span> <b>13,500원</b></span></a><a class="th-book" href="#"><span class="th-book__no">2</span><div class="ds-imageframe" data-ratio="3:4"><img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=400&q=70" alt="" loading="lazy"></div><b>도둑맞은 집중력</b><small>요한 하리 · 어크로스</small><span class="th-book__price th-num"><span class="th-item__off">10%</span> <b>16,920원</b></span></a><a class="th-book" href="#"><span class="th-book__no">3</span><div class="ds-imageframe" data-ratio="3:4"><img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?auto=format&fit=crop&w=400&q=70" alt="" loading="lazy"></div><b>역행자</b><small>자청 · 웅진지식하우스</small><span class="th-book__price th-num"><span class="th-item__off">10%</span> <b>15,750원</b></span></a><a class="th-book" href="#"><span class="th-book__no">4</span><div class="ds-imageframe" data-ratio="3:4"><img src="https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?auto=format&fit=crop&w=400&q=70" alt="" loading="lazy"></div><b>아주 희미한 빛으로도</b><small>최은영 · 문학동네</small><span class="th-book__price th-num"><span class="th-item__off">10%</span> <b>13,500원</b></span></a><a class="th-book" href="#"><span class="th-book__no">5</span><div class="ds-imageframe" data-ratio="3:4"><img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=400&q=70" alt="" loading="lazy"></div><b>나의 돈 많은 고등학교 친구</b><small>송희구 · 서삼독</small><span class="th-book__price th-num"><span class="th-item__off">10%</span> <b>16,020원</b></span></a><a class="th-book" href="#"><span class="th-book__no">6</span><div class="ds-imageframe" data-ratio="3:4"><img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=400&q=70" alt="" loading="lazy"></div><b>흔한남매 17</b><small>흔한남매 · 미래엔아이세움</small><span class="th-book__price th-num"><span class="th-item__off">10%</span> <b>13,050원</b></span></a></div></section>
+  <section class="th-sec" aria-label="추천 문장"><div class="th-quote"><div class="ds-imageframe" data-ratio="3:4"><img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=440&q=70" alt="" loading="lazy"></div><div><span class="ds-badge" data-tone="brand">책 속 한 문장</span><blockquote style="margin-top: var(--ds-space-x4)">“리즈 위더스푼을 올린 바로 그 책, 올해 읽은 소설 중 단연 최고다.”</blockquote><cite>출간 직후 폭발적 반응! 〈브로큰 컨트리〉 · 북클럽 추천</cite><div style="margin-top: var(--ds-space-x6)"><button type="button" class="ds-btn" data-variant="brandSolid" data-size="medium"><i class="ds-icon ds-icon--book-open" aria-hidden="true"></i>미리 읽어 보기</button></div></div></div></section>
+</main>
+<footer class="th-foot"><div class="th-wrap">
+  <nav class="th-foot__links" aria-label="약관"><a href="#">이용약관</a><a href="#" data-strong>개인정보 처리방침</a><a href="#">청소년 보호 정책</a><a href="#">입점 문의</a></nav>
+  <div class="th-foot__body"><p><b>책다락</b>이 화면은 yds 테마 예시예요. 회사 이름, 상품, 연락처는 모두 가상입니다.<br>서울시 가상구 예시로 1 · book@example.com</p><p>© 2026 책다락</p></div>
+</div></footer>
+</body>
+</html>

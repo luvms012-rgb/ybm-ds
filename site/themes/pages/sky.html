@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="ko" data-ds-theme="sky">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>하늘 테마 - 집꾸밈 (yds 테마 예시)</title>
+<!-- 생성물: node site/themes/gen.mjs 가 만든다. 직접 고치지 말고 생성기를 고친다 -->
+<link rel="stylesheet" href="../../../dist/ybm-ds.css">
+<link rel="stylesheet" href="../../../dist/themes/sky.css">
+<script>if (location.hash === "#default") document.documentElement.removeAttribute("data-ds-theme");</script>
+<script src="../../../dist/ybm-ds.js" defer></script>
+<style>
+  body { margin: 0; background: var(--ds-color-bg-canvas); color: var(--ds-color-fg-neutral); word-break: keep-all; overflow-wrap: break-word; }
+  a { color: inherit; }
+  .th-wrap { box-sizing: border-box; width: min(100%, 1200px); margin-inline: auto; padding-inline: var(--ds-space-x4); }
+  @media (min-width: 768px) { .th-wrap { padding-inline: var(--ds-space-x6); } }
+  .th-art[data-tone="brand"] { color: var(--ds-color-fg-brand); }
+  .th-art[data-tone="positive"] { color: var(--ds-color-fg-positive); }
+  .th-art[data-tone="warning"] { color: var(--ds-color-fg-warning); }
+  .th-art[data-tone="critical"] { color: var(--ds-color-fg-critical); }
+  .th-art[data-tone="magic"] { color: var(--ds-color-fg-magic); }
+  .th-art[data-tone="neutral"] { color: var(--ds-color-fg-neutral-muted); }
+  .th-art[data-tone="on-brand"] { color: var(--ds-color-fg-on-brand-solid); }
+  .th-em { color: var(--ds-color-fg-brand); }
+  .th-num { font-variant-numeric: tabular-nums; }
+  .th-muted { color: var(--ds-color-fg-neutral-muted); }
+
+  .th-gnb { position: sticky; top: 0; z-index: var(--ds-z-sticky); background: var(--ds-color-bg-layer-default); box-shadow: inset 0 -1px 0 var(--ds-color-stroke-neutral-weak); }
+  .th-gnb__row { display: flex; align-items: center; gap: var(--ds-space-x8); height: 64px; }
+  .th-logo { font-size: var(--ds-font-size-t07); font-weight: var(--ds-font-weight-bold); letter-spacing: -0.03em; color: var(--ds-color-fg-brand); text-decoration: none; white-space: nowrap; }
+  .th-menu { display: none; gap: var(--ds-space-x7); }
+  .th-menu a { font-size: var(--ds-font-size-t05); line-height: var(--ds-line-height-t05); font-weight: var(--ds-font-weight-semibold); color: var(--ds-color-fg-neutral); text-decoration: none; white-space: nowrap; }
+  .th-menu a[aria-current="page"] { color: var(--ds-color-fg-brand); }
+  .th-gnb__search { display: none; flex: 1 1 auto; max-width: 420px; }
+  .th-gnb__end { display: none; align-items: center; gap: var(--ds-space-x1); margin-left: auto; }
+  .th-gnb__burger { margin-left: auto; }
+  .th-gnb__sub { display: flex; align-items: center; gap: var(--ds-space-x2); min-height: 48px; overflow-x: auto; scrollbar-width: none; }
+  @media (min-width: 1024px) { .th-menu, .th-gnb__search, .th-gnb__end { display: flex; } .th-gnb__burger { display: none; } }
+
+  .th-sec { padding-top: var(--ds-space-x14); }
+  .th-sec__head { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--ds-space-x4); margin-bottom: var(--ds-space-x6); }
+  .th-sec__head h2 { margin: 0; font-size: var(--ds-font-size-t08); line-height: var(--ds-line-height-t08); font-weight: var(--ds-font-weight-bold); letter-spacing: -0.02em; }
+  .th-sec__head p { margin: var(--ds-space-x1) 0 0; color: var(--ds-color-fg-neutral-muted); font-size: var(--ds-font-size-t04); }
+  .th-sec__head .ds-link { white-space: nowrap; }
+
+  .th-tiles { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: var(--ds-space-x5) var(--ds-space-x2); margin: 0; padding: 0; list-style: none; }
+  @media (min-width: 1024px) { .th-tiles { grid-template-columns: repeat(10, minmax(0, 1fr)); } }
+  .th-tiles a { display: flex; flex-direction: column; align-items: center; gap: var(--ds-space-x2); color: var(--ds-color-fg-neutral); text-decoration: none; text-align: center; font-size: var(--ds-font-size-t03); line-height: 18px; }
+  .th-tile { display: grid; place-items: center; flex: none; width: 60px; height: 60px; border-radius: var(--ds-shape-2xl); background: var(--ds-color-bg-brand-weak); transition: transform var(--ds-duration-fast) var(--ds-easing-standard); }
+  .th-tiles a:hover .th-tile { transform: translateY(-2px); }
+
+  .th-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--ds-space-x8) var(--ds-space-x4); }
+  @media (min-width: 768px) { .th-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  @media (min-width: 1024px) { .th-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+  .th-item { position: relative; display: flex; flex-direction: column; gap: var(--ds-space-x2); color: inherit; text-decoration: none; }
+  .th-item .ds-imageframe { border-radius: var(--ds-shape-xl); }
+  .th-item__like { position: absolute; top: var(--ds-space-x2); right: var(--ds-space-x2); }
+  .th-item__like .ds-btn { background: rgb(255 255 255 / .85); color: var(--ds-color-fg-neutral); }
+  .th-item__tag { position: absolute; top: var(--ds-space-x2); left: var(--ds-space-x2); }
+  .th-item b { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; font-size: var(--ds-font-size-t05); line-height: var(--ds-line-height-t05); font-weight: var(--ds-font-weight-semibold); }
+  .th-item small { color: var(--ds-color-fg-neutral-muted); font-size: var(--ds-font-size-t03); }
+  .th-item__price { display: flex; align-items: baseline; gap: var(--ds-space-x2); font-size: var(--ds-font-size-t05); }
+  .th-item__price b { display: inline; font-size: var(--ds-font-size-t06); }
+  .th-item__price s { color: var(--ds-color-fg-neutral-subtle); font-size: var(--ds-font-size-t03); }
+  .th-item__off { color: var(--ds-color-fg-critical); font-weight: var(--ds-font-weight-bold); }
+  .th-meta { display: flex; align-items: center; gap: var(--ds-space-x2); color: var(--ds-color-fg-neutral-muted); font-size: var(--ds-font-size-t02); }
+
+  .th-card { padding: var(--ds-space-x6); border-radius: var(--ds-shape-2xl); background: var(--ds-color-bg-layer-default); box-shadow: inset 0 0 0 1px var(--ds-color-stroke-neutral-weak); }
+  .th-card h3 { margin: 0 0 var(--ds-space-x3); font-size: var(--ds-font-size-t06); font-weight: var(--ds-font-weight-bold); }
+  .th-card--brand { background: var(--ds-color-bg-brand-weak); box-shadow: none; }
+  .th-between { display: flex; align-items: center; justify-content: space-between; gap: var(--ds-space-x3); }
+
+  .th-band { padding: var(--ds-space-x10); border-radius: var(--ds-shape-3xl); background: var(--ds-color-bg-brand-solid); color: var(--ds-color-fg-on-brand-solid); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ds-space-x6); }
+  .th-band h2 { margin: 0; font-size: var(--ds-font-size-t09); line-height: var(--ds-line-height-t09); font-weight: var(--ds-font-weight-bold); letter-spacing: -0.03em; }
+  .th-band p { margin: var(--ds-space-x2) 0 0; opacity: .88; }
+  .th-band .ds-btn { background: var(--ds-color-bg-layer-default); color: var(--ds-color-fg-brand); }
+
+  .th-list { margin: 0; padding: 0; list-style: none; }
+  .th-list li a { display: flex; flex-direction: column; gap: 2px; padding-block: var(--ds-space-x3); box-shadow: inset 0 -1px 0 var(--ds-color-stroke-neutral-weak); text-decoration: none; }
+  .th-list li b { overflow: hidden; font-size: var(--ds-font-size-t04); font-weight: var(--ds-font-weight-medium); text-overflow: ellipsis; white-space: nowrap; }
+  .th-list li span { color: var(--ds-color-fg-neutral-subtle); font-size: var(--ds-font-size-t02); }
+
+  .th-foot { margin-top: var(--ds-space-x20); box-shadow: inset 0 1px 0 var(--ds-color-stroke-neutral-weak); color: var(--ds-color-fg-neutral-muted); font-size: var(--ds-font-size-t03); }
+  .th-foot__links { display: flex; flex-wrap: wrap; gap: var(--ds-space-x2) var(--ds-space-x6); padding-block: var(--ds-space-x5); box-shadow: inset 0 -1px 0 var(--ds-color-stroke-neutral-weak); }
+  .th-foot__links a { color: var(--ds-color-fg-neutral); font-weight: var(--ds-font-weight-medium); text-decoration: none; }
+  .th-foot__links a[data-strong] { color: var(--ds-color-fg-brand); font-weight: var(--ds-font-weight-bold); }
+  .th-foot__body { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--ds-space-x6); padding-block: var(--ds-space-x6) var(--ds-space-x12); }
+  .th-foot__body p { margin: 0; line-height: 22px; }
+  .th-foot__body b { display: block; margin-bottom: var(--ds-space-x2); color: var(--ds-color-fg-neutral); font-size: var(--ds-font-size-t05); }
+
+    .th-hero { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ds-space-x4); padding-top: var(--ds-space-x6); }
+    @media (min-width: 1024px) { .th-hero { grid-template-columns: minmax(0, 3fr) minmax(0, 1fr); } }
+    .th-story { position: relative; display: block; overflow: hidden; border-radius: var(--ds-shape-xl); color: var(--ds-color-palette-static-white); text-decoration: none; }
+    .th-story img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+    .th-story__text { position: absolute; inset: auto 0 0; padding: var(--ds-space-x7); background: linear-gradient(transparent, rgb(0 0 0 / .65)); }
+    .th-story__text b { display: block; font-size: var(--ds-font-size-t08); line-height: var(--ds-line-height-t08); font-weight: var(--ds-font-weight-bold); letter-spacing: -0.02em; }
+    .th-story__by { display: flex; align-items: center; gap: var(--ds-space-x2); margin-top: var(--ds-space-x2); font-size: var(--ds-font-size-t03); }
+    .th-event { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--ds-space-x3); padding: var(--ds-space-x8); border-radius: var(--ds-shape-xl); background: var(--ds-color-bg-brand-solid); color: var(--ds-color-fg-on-brand-solid); text-align: center; text-decoration: none; }
+    .th-event b { font-size: var(--ds-font-size-t08); line-height: var(--ds-line-height-t08); font-weight: var(--ds-font-weight-bold); letter-spacing: -0.02em; }
+    .th-event small { opacity: .85; }
+    .th-event .ds-badge { background: rgb(255 255 255 / .2); color: inherit; }
+    .th-feed { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--ds-space-x6) var(--ds-space-x4); }
+    @media (min-width: 768px) { .th-feed { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    @media (min-width: 1024px) { .th-feed { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+    .th-post { display: flex; flex-direction: column; gap: var(--ds-space-x3); color: inherit; text-decoration: none; }
+    .th-post .ds-imageframe { border-radius: var(--ds-shape-lg); }
+    .th-post__by { display: flex; align-items: center; gap: var(--ds-space-x2); font-size: var(--ds-font-size-t03); }
+    .th-post__by small { color: var(--ds-color-fg-neutral-subtle); }
+    .th-post p { margin: 0; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; font-size: var(--ds-font-size-t04); line-height: 22px; }
+    .th-post__stats { display: flex; gap: var(--ds-space-x3); color: var(--ds-color-fg-neutral-subtle); font-size: var(--ds-font-size-t02); }
+    .th-post__stats span { display: inline-flex; align-items: center; gap: 2px; }
+    .th-write { position: fixed; right: var(--ds-space-x6); bottom: var(--ds-space-x6); z-index: var(--ds-z-sticky); }
+  </style>
+</head>
+<body>
+<div class="ds-callout" style="border-radius: 0; justify-content: center" data-tone="informative"><i class="ds-icon ds-icon--info-solid" aria-hidden="true"></i><p class="ds-callout__content"><b>첫 구매라면 누구나 최대 2만 원 할인!</b> <a class="ds-callout__link" href="#">자세히</a></p></div>
+<header class="th-gnb"><div class="th-wrap th-gnb__row">
+  <a class="th-logo" href="#">집꾸밈</a>
+  <nav class="th-menu" aria-label="주요 메뉴"><a href="#" aria-current="page">커뮤니티</a><a href="#">쇼핑</a><a href="#">인테리어, 생활</a></nav>
+  <div class="th-gnb__search"><div class="ds-input" data-variant="outline" data-size="medium"><i class="ds-icon ds-icon--search ds-input__icon" aria-hidden="true"></i><input class="ds-input__control" id="q" type="search" placeholder="통합검색" aria-label="통합검색"></div></div>
+  <div class="th-gnb__end"><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" aria-label="스크랩"><i class="ds-icon ds-icon--bookmark" aria-hidden="true"></i></button><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" aria-label="알림"><i class="ds-icon ds-icon--bell" aria-hidden="true"></i></button><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" aria-label="장바구니"><i class="ds-icon ds-icon--shopping-cart" aria-hidden="true"></i></button><span class="ds-avatar" data-size="36" role="img" aria-label="나"><span class="ds-avatar__initials" aria-hidden="true">나</span></span><button type="button" class="ds-btn" data-variant="brandSolid" data-size="xsmall">글쓰기<i class="ds-icon ds-icon--chevron-down" aria-hidden="true"></i></button></div>
+  <span class="th-gnb__burger"><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" aria-label="메뉴 열기"><i class="ds-icon ds-icon--menu" aria-hidden="true"></i></button></span>
+</div><div class="th-wrap th-gnb__sub"><div class="ds-tabs" role="tablist" aria-label="커뮤니티 메뉴" data-layout="hug"><button type="button" class="ds-tabs__trigger" role="tab" aria-selected="true">홈</button><button type="button" class="ds-tabs__trigger" role="tab" aria-selected="false">꿀템발견</button><button type="button" class="ds-tabs__trigger" role="tab" aria-selected="false">집꾸미기</button><button type="button" class="ds-tabs__trigger" role="tab" aria-selected="false">추천</button><button type="button" class="ds-tabs__trigger" role="tab" aria-selected="false">집들이</button><button type="button" class="ds-tabs__trigger" role="tab" aria-selected="false">집사진</button><button type="button" class="ds-tabs__trigger" role="tab" aria-selected="false">3D인테리어</button></div></div></header>
+<main class="th-wrap">
+  <section class="th-hero" aria-label="오늘의 이야기">
+    <a class="th-story" href="#"><img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1400&q=70" alt=""><div class="th-story__text"><span class="ds-badge" data-tone="neutral" data-variant="solid">집들이</span><b style="margin-top: var(--ds-space-x2)">여기가 10평? 디자이너 부부의 빈티지 하우스</b><span class="th-story__by"><span class="ds-avatar" data-size="24" role="img" aria-label="시대후상"><span class="ds-avatar__initials" aria-hidden="true">시</span></span> 시대후상</span></div></a>
+    <a class="th-event" href="#"><span class="ds-badge" data-tone="neutral">이벤트</span><b>구매한 적이 없으세요?<br>첫 구매 최대 2만 원 할인</b><svg class="th-art" data-tone="on-brand" width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"/><path d="M13 5v2"/><path d="M13 17v2"/><path d="M13 11v2"/></svg><small class="th-num">3 / 12</small></a>
+  </section>
+  <section class="th-sec" aria-label="바로 가기"><ul class="th-tiles"><li><a href="#"><span class="th-tile"><svg class="th-art" data-tone="critical" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3q1 4 4 6.5t3 5.5a1 1 0 0 1-14 0 5 5 0 0 1 1-3 1 1 0 0 0 5 0c0-2-1.5-3-1.5-5q0-2 2.5-4"/></svg></span><span>여름시즌오프</span></a></li><li><a href="#"><span class="th-tile"><svg class="th-art" data-tone="brand" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2"/><path d="M5 3 2 6"/><path d="m22 6-3-3"/><path d="M6.38 18.7 4 21"/><path d="M17.64 18.67 20 21"/></svg></span><span>오늘의딜</span></a></li><li><a href="#"><span class="th-tile"><svg class="th-art" data-tone="brand" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg></span><span>집들이</span></a></li><li><a href="#"><span class="th-tile"><svg class="th-art" data-tone="positive" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16.17 7.83 2 22"/><path d="M4.02 12a2.827 2.827 0 1 1 3.81-4.17A2.827 2.827 0 1 1 12 4.02a2.827 2.827 0 1 1 4.17 3.81A2.827 2.827 0 1 1 19.98 12a2.827 2.827 0 1 1-3.81 4.17A2.827 2.827 0 1 1 12 19.98a2.827 2.827 0 1 1-4.17-3.81A1 1 0 1 1 4 12"/><path d="m7.83 7.83 8.34 8.34"/></svg></span><span>행운출첵</span></a></li><li><a href="#"><span class="th-tile"><svg class="th-art" data-tone="brand" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 9V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v3"/><path d="M2 16a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-5a2 2 0 0 0-4 0v1.5a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5V11a2 2 0 0 0-4 0z"/><path d="M4 18v2"/><path d="M20 18v2"/><path d="M12 4v9"/></svg></span><span>살림살이</span></a></li><li><a href="#"><span class="th-tile"><svg class="th-art" data-tone="brand" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 10a4 4 0 0 1-8 0"/><path d="M3.103 6.034h17.794"/><path d="M3.4 5.467a2 2 0 0 0-.4 1.2V20a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6.667a2 2 0 0 0-.4-1.2l-2-2.667A2 2 0 0 0 17 2H7a2 2 0 0 0-1.6.8z"/></svg></span><span>취향의발견</span></a></li><li><a href="#"><span class="th-tile"><svg class="th-art" data-tone="brand" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 21v-5a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v5"/><path d="M17.774 10.31a1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.451 0 1.12 1.12 0 0 0-1.548 0 2.5 2.5 0 0 1-3.452 0 1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.77-3.248l2.889-4.184A2 2 0 0 1 7 2h10a2 2 0 0 1 1.653.873l2.895 4.192a2.5 2.5 0 0 1-3.774 3.244"/><path d="M4 10.95V19a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8.05"/></svg></span><span>오마트</span></a></li><li><a href="#"><span class="th-tile"><svg class="th-art" data-tone="brand" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></svg></span><span>원하는날도착</span></a></li><li><a href="#"><span class="th-tile"><svg class="th-art" data-tone="brand" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 12-9.373 9.373a1 1 0 0 1-3.001-3L12 9"/><path d="m18 15 4-4"/><path d="m21.5 11.5-1.914-1.914A2 2 0 0 1 19 8.172v-.344a2 2 0 0 0-.586-1.414l-1.657-1.657A6 6 0 0 0 12.516 3H9l1.243 1.243A6 6 0 0 1 12 8.485V10l2 2h1.172a2 2 0 0 1 1.414.586L18.5 14.5"/></svg></span><span>리모델링</span></a></li><li><a href="#"><span class="th-tile"><svg class="th-art" data-tone="brand" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z"/><path d="M20 2v4"/><path d="M22 4h-4"/><circle cx="4" cy="20" r="2"/></svg></span><span>입주청소</span></a></li></ul></section>
+  <section class="th-sec" aria-labelledby="s1"><div class="th-sec__head"><div><h2 id="s1">이런 사진 찾고 있나요?</h2><p>좋아하실 만한 인테리어 콘텐츠를 추천해드려요</p></div><a class="ds-link" href="#">더보기 <i class="ds-icon ds-icon--chevron-right ds-icon--sm" aria-hidden="true"></i></a></div>
+    <div style="display: flex; gap: var(--ds-space-x2); flex-wrap: wrap; margin-bottom: var(--ds-space-x6)"><button type="button" class="ds-chip" data-variant="solid" data-size="small" aria-pressed="true">전체</button><button type="button" class="ds-chip" data-variant="outlineWeak" data-size="small">원룸</button><button type="button" class="ds-chip" data-variant="outlineWeak" data-size="small">아파트</button><button type="button" class="ds-chip" data-variant="outlineWeak" data-size="small">주택</button><button type="button" class="ds-chip" data-variant="outlineWeak" data-size="small">거실</button><button type="button" class="ds-chip" data-variant="outlineWeak" data-size="small">침실</button><button type="button" class="ds-chip" data-variant="outlineWeak" data-size="small">주방</button><button type="button" class="ds-chip" data-variant="outlineWeak" data-size="small">서재</button></div>
+    <div class="th-feed"><a class="th-post" href="#"><div class="ds-imageframe" data-ratio="1:1"><img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=500&q=70" alt="" loading="lazy"></div><span class="th-post__by"><span class="ds-avatar" data-size="24" role="img" aria-label="시대후상"><span class="ds-avatar__initials" aria-hidden="true">시</span></span><b>시대후상</b><small>· 2일 전</small></span><p>여기가 10평? 디자이너 부부의 빈티지 하우스</p><span class="th-post__stats"><span><i class="ds-icon ds-icon--heart ds-icon--sm" aria-hidden="true"></i> 1,240</span><span><i class="ds-icon ds-icon--message-circle ds-icon--sm" aria-hidden="true"></i> 86</span><span><i class="ds-icon ds-icon--bookmark ds-icon--sm" aria-hidden="true"></i> 스크랩</span></span></a><a class="th-post" href="#"><div class="ds-imageframe" data-ratio="1:1"><img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=500&q=70" alt="" loading="lazy"></div><span class="th-post__by"><span class="ds-avatar" data-size="24" role="img" aria-label="민트그린"><span class="ds-avatar__initials" aria-hidden="true">민</span></span><b>민트그린</b><small>· 2일 전</small></span><p>창가에 책상을 두니 아침이 달라졌어요</p><span class="th-post__stats"><span><i class="ds-icon ds-icon--heart ds-icon--sm" aria-hidden="true"></i> 532</span><span><i class="ds-icon ds-icon--message-circle ds-icon--sm" aria-hidden="true"></i> 41</span><span><i class="ds-icon ds-icon--bookmark ds-icon--sm" aria-hidden="true"></i> 스크랩</span></span></a><a class="th-post" href="#"><div class="ds-imageframe" data-ratio="1:1"><img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=500&q=70" alt="" loading="lazy"></div><span class="th-post__by"><span class="ds-avatar" data-size="24" role="img" aria-label="호두네"><span class="ds-avatar__initials" aria-hidden="true">호</span></span><b>호두네</b><small>· 2일 전</small></span><p>12평 신혼집, 수납으로 넓어 보이게</p><span class="th-post__stats"><span><i class="ds-icon ds-icon--heart ds-icon--sm" aria-hidden="true"></i> 980</span><span><i class="ds-icon ds-icon--message-circle ds-icon--sm" aria-hidden="true"></i> 73</span><span><i class="ds-icon ds-icon--bookmark ds-icon--sm" aria-hidden="true"></i> 스크랩</span></span></a><a class="th-post" href="#"><div class="ds-imageframe" data-ratio="1:1"><img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=500&q=70" alt="" loading="lazy"></div><span class="th-post__by"><span class="ds-avatar" data-size="24" role="img" aria-label="오후의빛"><span class="ds-avatar__initials" aria-hidden="true">오</span></span><b>오후의빛</b><small>· 2일 전</small></span><p>우드와 화이트만으로 꾸민 거실</p><span class="th-post__stats"><span><i class="ds-icon ds-icon--heart ds-icon--sm" aria-hidden="true"></i> 2,210</span><span><i class="ds-icon ds-icon--message-circle ds-icon--sm" aria-hidden="true"></i> 150</span><span><i class="ds-icon ds-icon--bookmark ds-icon--sm" aria-hidden="true"></i> 스크랩</span></span></a><a class="th-post" href="#"><div class="ds-imageframe" data-ratio="1:1"><img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=500&q=70" alt="" loading="lazy"></div><span class="th-post__by"><span class="ds-avatar" data-size="24" role="img" aria-label="달팽이"><span class="ds-avatar__initials" aria-hidden="true">달</span></span><b>달팽이</b><small>· 2일 전</small></span><p>자취 7년차가 추천하는 조명 세 가지</p><span class="th-post__stats"><span><i class="ds-icon ds-icon--heart ds-icon--sm" aria-hidden="true"></i> 760</span><span><i class="ds-icon ds-icon--message-circle ds-icon--sm" aria-hidden="true"></i> 58</span><span><i class="ds-icon ds-icon--bookmark ds-icon--sm" aria-hidden="true"></i> 스크랩</span></span></a><a class="th-post" href="#"><div class="ds-imageframe" data-ratio="1:1"><img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=500&q=70" alt="" loading="lazy"></div><span class="th-post__by"><span class="ds-avatar" data-size="24" role="img" aria-label="집순이"><span class="ds-avatar__initials" aria-hidden="true">집</span></span><b>집순이</b><small>· 2일 전</small></span><p>베란다를 작은 정원으로 바꿨어요</p><span class="th-post__stats"><span><i class="ds-icon ds-icon--heart ds-icon--sm" aria-hidden="true"></i> 415</span><span><i class="ds-icon ds-icon--message-circle ds-icon--sm" aria-hidden="true"></i> 32</span><span><i class="ds-icon ds-icon--bookmark ds-icon--sm" aria-hidden="true"></i> 스크랩</span></span></a><a class="th-post" href="#"><div class="ds-imageframe" data-ratio="1:1"><img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=500&q=70" alt="" loading="lazy"></div><span class="th-post__by"><span class="ds-avatar" data-size="24" role="img" aria-label="도윤맘"><span class="ds-avatar__initials" aria-hidden="true">도</span></span><b>도윤맘</b><small>· 2일 전</small></span><p>아이 방 책장, 이렇게 정리했어요</p><span class="th-post__stats"><span><i class="ds-icon ds-icon--heart ds-icon--sm" aria-hidden="true"></i> 690</span><span><i class="ds-icon ds-icon--message-circle ds-icon--sm" aria-hidden="true"></i> 44</span><span><i class="ds-icon ds-icon--bookmark ds-icon--sm" aria-hidden="true"></i> 스크랩</span></span></a><a class="th-post" href="#"><div class="ds-imageframe" data-ratio="1:1"><img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=500&q=70" alt="" loading="lazy"></div><span class="th-post__by"><span class="ds-avatar" data-size="24" role="img" aria-label="새벽커피"><span class="ds-avatar__initials" aria-hidden="true">새</span></span><b>새벽커피</b><small>· 2일 전</small></span><p>주방 상부장 없애고 선반으로</p><span class="th-post__stats"><span><i class="ds-icon ds-icon--heart ds-icon--sm" aria-hidden="true"></i> 1,530</span><span><i class="ds-icon ds-icon--message-circle ds-icon--sm" aria-hidden="true"></i> 98</span><span><i class="ds-icon ds-icon--bookmark ds-icon--sm" aria-hidden="true"></i> 스크랩</span></span></a></div>
+    <div style="display: flex; justify-content: center; padding-top: var(--ds-space-x10)"><button type="button" class="ds-btn" data-variant="neutralOutline" data-size="medium">사진 더 보기</button></div></section>
+</main>
+<div class="th-write"><button type="button" class="ds-btn" data-variant="brandSolid" data-size="large"><i class="ds-icon ds-icon--pencil" aria-hidden="true"></i>글쓰기</button></div>
+<footer class="th-foot"><div class="th-wrap">
+  <nav class="th-foot__links" aria-label="약관"><a href="#">이용약관</a><a href="#" data-strong>개인정보 처리방침</a><a href="#">입점 신청</a><a href="#">제휴 문의</a></nav>
+  <div class="th-foot__body"><p><b>집꾸밈</b>이 화면은 yds 테마 예시예요. 회사 이름, 상품, 연락처는 모두 가상입니다.<br>서울시 가상구 예시로 12 · home@example.com</p><p>© 2026 집꾸밈</p></div>
+</div></footer>
+</body>
+</html>

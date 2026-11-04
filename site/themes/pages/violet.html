@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="ko" data-ds-theme="violet">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>보라 테마 - 토키 (yds 테마 예시)</title>
+<!-- 생성물: node site/themes/gen.mjs 가 만든다. 직접 고치지 말고 생성기를 고친다 -->
+<link rel="stylesheet" href="../../../dist/ybm-ds.css">
+<link rel="stylesheet" href="../../../dist/themes/violet.css">
+<script>if (location.hash === "#default") document.documentElement.removeAttribute("data-ds-theme");</script>
+<script src="../../../dist/ybm-ds.js" defer></script>
+<style>
+  body { margin: 0; background: var(--ds-color-bg-canvas); color: var(--ds-color-fg-neutral); word-break: keep-all; overflow-wrap: break-word; }
+  a { color: inherit; }
+  .th-wrap { box-sizing: border-box; width: min(100%, 1200px); margin-inline: auto; padding-inline: var(--ds-space-x4); }
+  @media (min-width: 768px) { .th-wrap { padding-inline: var(--ds-space-x6); } }
+  .th-art[data-tone="brand"] { color: var(--ds-color-fg-brand); }
+  .th-art[data-tone="positive"] { color: var(--ds-color-fg-positive); }
+  .th-art[data-tone="warning"] { color: var(--ds-color-fg-warning); }
+  .th-art[data-tone="critical"] { color: var(--ds-color-fg-critical); }
+  .th-art[data-tone="magic"] { color: var(--ds-color-fg-magic); }
+  .th-art[data-tone="neutral"] { color: var(--ds-color-fg-neutral-muted); }
+  .th-art[data-tone="on-brand"] { color: var(--ds-color-fg-on-brand-solid); }
+  .th-em { color: var(--ds-color-fg-brand); }
+  .th-num { font-variant-numeric: tabular-nums; }
+  .th-muted { color: var(--ds-color-fg-neutral-muted); }
+
+  .th-gnb { position: sticky; top: 0; z-index: var(--ds-z-sticky); background: var(--ds-color-bg-layer-default); box-shadow: inset 0 -1px 0 var(--ds-color-stroke-neutral-weak); }
+  .th-gnb__row { display: flex; align-items: center; gap: var(--ds-space-x8); height: 64px; }
+  .th-logo { font-size: var(--ds-font-size-t07); font-weight: var(--ds-font-weight-bold); letter-spacing: -0.03em; color: var(--ds-color-fg-brand); text-decoration: none; white-space: nowrap; }
+  .th-menu { display: none; gap: var(--ds-space-x7); }
+  .th-menu a { font-size: var(--ds-font-size-t05); line-height: var(--ds-line-height-t05); font-weight: var(--ds-font-weight-semibold); color: var(--ds-color-fg-neutral); text-decoration: none; white-space: nowrap; }
+  .th-menu a[aria-current="page"] { color: var(--ds-color-fg-brand); }
+  .th-gnb__search { display: none; flex: 1 1 auto; max-width: 420px; }
+  .th-gnb__end { display: none; align-items: center; gap: var(--ds-space-x1); margin-left: auto; }
+  .th-gnb__burger { margin-left: auto; }
+  .th-gnb__sub { display: flex; align-items: center; gap: var(--ds-space-x2); min-height: 48px; overflow-x: auto; scrollbar-width: none; }
+  @media (min-width: 1024px) { .th-menu, .th-gnb__search, .th-gnb__end { display: flex; } .th-gnb__burger { display: none; } }
+
+  .th-sec { padding-top: var(--ds-space-x14); }
+  .th-sec__head { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--ds-space-x4); margin-bottom: var(--ds-space-x6); }
+  .th-sec__head h2 { margin: 0; font-size: var(--ds-font-size-t08); line-height: var(--ds-line-height-t08); font-weight: var(--ds-font-weight-bold); letter-spacing: -0.02em; }
+  .th-sec__head p { margin: var(--ds-space-x1) 0 0; color: var(--ds-color-fg-neutral-muted); font-size: var(--ds-font-size-t04); }
+  .th-sec__head .ds-link { white-space: nowrap; }
+
+  .th-tiles { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: var(--ds-space-x5) var(--ds-space-x2); margin: 0; padding: 0; list-style: none; }
+  @media (min-width: 1024px) { .th-tiles { grid-template-columns: repeat(10, minmax(0, 1fr)); } }
+  .th-tiles a { display: flex; flex-direction: column; align-items: center; gap: var(--ds-space-x2); color: var(--ds-color-fg-neutral); text-decoration: none; text-align: center; font-size: var(--ds-font-size-t03); line-height: 18px; }
+  .th-tile { display: grid; place-items: center; flex: none; width: 60px; height: 60px; border-radius: var(--ds-shape-2xl); background: var(--ds-color-bg-brand-weak); transition: transform var(--ds-duration-fast) var(--ds-easing-standard); }
+  .th-tiles a:hover .th-tile { transform: translateY(-2px); }
+
+  .th-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--ds-space-x8) var(--ds-space-x4); }
+  @media (min-width: 768px) { .th-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  @media (min-width: 1024px) { .th-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+  .th-item { position: relative; display: flex; flex-direction: column; gap: var(--ds-space-x2); color: inherit; text-decoration: none; }
+  .th-item .ds-imageframe { border-radius: var(--ds-shape-xl); }
+  .th-item__like { position: absolute; top: var(--ds-space-x2); right: var(--ds-space-x2); }
+  .th-item__like .ds-btn { background: rgb(255 255 255 / .85); color: var(--ds-color-fg-neutral); }
+  .th-item__tag { position: absolute; top: var(--ds-space-x2); left: var(--ds-space-x2); }
+  .th-item b { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; font-size: var(--ds-font-size-t05); line-height: var(--ds-line-height-t05); font-weight: var(--ds-font-weight-semibold); }
+  .th-item small { color: var(--ds-color-fg-neutral-muted); font-size: var(--ds-font-size-t03); }
+  .th-item__price { display: flex; align-items: baseline; gap: var(--ds-space-x2); font-size: var(--ds-font-size-t05); }
+  .th-item__price b { display: inline; font-size: var(--ds-font-size-t06); }
+  .th-item__price s { color: var(--ds-color-fg-neutral-subtle); font-size: var(--ds-font-size-t03); }
+  .th-item__off { color: var(--ds-color-fg-critical); font-weight: var(--ds-font-weight-bold); }
+  .th-meta { display: flex; align-items: center; gap: var(--ds-space-x2); color: var(--ds-color-fg-neutral-muted); font-size: var(--ds-font-size-t02); }
+
+  .th-card { padding: var(--ds-space-x6); border-radius: var(--ds-shape-2xl); background: var(--ds-color-bg-layer-default); box-shadow: inset 0 0 0 1px var(--ds-color-stroke-neutral-weak); }
+  .th-card h3 { margin: 0 0 var(--ds-space-x3); font-size: var(--ds-font-size-t06); font-weight: var(--ds-font-weight-bold); }
+  .th-card--brand { background: var(--ds-color-bg-brand-weak); box-shadow: none; }
+  .th-between { display: flex; align-items: center; justify-content: space-between; gap: var(--ds-space-x3); }
+
+  .th-band { padding: var(--ds-space-x10); border-radius: var(--ds-shape-3xl); background: var(--ds-color-bg-brand-solid); color: var(--ds-color-fg-on-brand-solid); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ds-space-x6); }
+  .th-band h2 { margin: 0; font-size: var(--ds-font-size-t09); line-height: var(--ds-line-height-t09); font-weight: var(--ds-font-weight-bold); letter-spacing: -0.03em; }
+  .th-band p { margin: var(--ds-space-x2) 0 0; opacity: .88; }
+  .th-band .ds-btn { background: var(--ds-color-bg-layer-default); color: var(--ds-color-fg-brand); }
+
+  .th-list { margin: 0; padding: 0; list-style: none; }
+  .th-list li a { display: flex; flex-direction: column; gap: 2px; padding-block: var(--ds-space-x3); box-shadow: inset 0 -1px 0 var(--ds-color-stroke-neutral-weak); text-decoration: none; }
+  .th-list li b { overflow: hidden; font-size: var(--ds-font-size-t04); font-weight: var(--ds-font-weight-medium); text-overflow: ellipsis; white-space: nowrap; }
+  .th-list li span { color: var(--ds-color-fg-neutral-subtle); font-size: var(--ds-font-size-t02); }
+
+  .th-foot { margin-top: var(--ds-space-x20); box-shadow: inset 0 1px 0 var(--ds-color-stroke-neutral-weak); color: var(--ds-color-fg-neutral-muted); font-size: var(--ds-font-size-t03); }
+  .th-foot__links { display: flex; flex-wrap: wrap; gap: var(--ds-space-x2) var(--ds-space-x6); padding-block: var(--ds-space-x5); box-shadow: inset 0 -1px 0 var(--ds-color-stroke-neutral-weak); }
+  .th-foot__links a { color: var(--ds-color-fg-neutral); font-weight: var(--ds-font-weight-medium); text-decoration: none; }
+  .th-foot__links a[data-strong] { color: var(--ds-color-fg-brand); font-weight: var(--ds-font-weight-bold); }
+  .th-foot__body { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--ds-space-x6); padding-block: var(--ds-space-x6) var(--ds-space-x12); }
+  .th-foot__body p { margin: 0; line-height: 22px; }
+  .th-foot__body b { display: block; margin-bottom: var(--ds-space-x2); color: var(--ds-color-fg-neutral); font-size: var(--ds-font-size-t05); }
+
+    .th-hero { display: flex; flex-direction: column; align-items: center; gap: var(--ds-space-x5); padding-top: var(--ds-space-x16); text-align: center; }
+    .th-eyebrow { display: inline-flex; align-items: center; gap: var(--ds-space-x1); padding: 4px var(--ds-space-x3); border-radius: var(--ds-shape-pill); background: var(--ds-color-bg-brand-weak); color: var(--ds-color-fg-brand); font-size: var(--ds-font-size-t03); font-weight: var(--ds-font-weight-semibold); }
+    .th-hero h1 { margin: 0; max-width: 760px; font-size: 44px; line-height: 1.25; font-weight: var(--ds-font-weight-bold); letter-spacing: -0.035em; }
+    .th-hero p { margin: 0; max-width: 560px; color: var(--ds-color-fg-neutral-muted); font-size: var(--ds-font-size-t06); line-height: var(--ds-line-height-t06); }
+    .th-hero__acts { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--ds-space-x2); }
+    .th-chat { box-sizing: border-box; width: min(100%, 720px); margin-top: var(--ds-space-x8); padding: var(--ds-space-x5); border-radius: var(--ds-shape-3xl); background: var(--ds-color-bg-layer-default); box-shadow: var(--ds-elevation-raised); text-align: left; }
+    .th-chat__head { display: flex; align-items: center; gap: var(--ds-space-x3); padding-bottom: var(--ds-space-x4); box-shadow: inset 0 -1px 0 var(--ds-color-stroke-neutral-weak); }
+    .th-chat__head b { display: block; }
+    .th-chat__head small { color: var(--ds-color-fg-positive); font-size: var(--ds-font-size-t02); }
+    .th-chat__log { display: flex; flex-direction: column; gap: var(--ds-space-x3); padding-block: var(--ds-space-x5); }
+    .th-chat__log .ds-chat-bubble { max-width: 80%; }
+    .th-chat__log .ds-chat-bubble[data-sender="user"] { align-self: flex-end; }
+    .th-fix { display: inline-flex; align-items: center; gap: var(--ds-space-x1); margin-top: var(--ds-space-x2); padding: 2px var(--ds-space-x2); border-radius: var(--ds-shape-sm); background: var(--ds-color-bg-positive-weak); color: var(--ds-color-fg-positive); font-size: var(--ds-font-size-t02); }
+    .th-feat { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ds-space-x4); }
+    @media (min-width: 768px) { .th-feat { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    .th-fcard { display: flex; flex-direction: column; gap: var(--ds-space-x4); }
+    .th-fcard b { font-size: var(--ds-font-size-t06); }
+    .th-fcard p { margin: 0; color: var(--ds-color-fg-neutral-muted); line-height: 24px; }
+    .th-plans { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ds-space-x4); align-items: start; }
+    @media (min-width: 768px) { .th-plans { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    .th-plan { position: relative; display: flex; flex-direction: column; gap: var(--ds-space-x5); }
+    .th-plan[data-hot] { box-shadow: inset 0 0 0 2px var(--ds-color-stroke-brand-solid); }
+    .th-plan[data-hot] > .ds-badge { position: absolute; top: calc(-1 * var(--ds-space-x3)); left: var(--ds-space-x7); }
+    .th-plan h3 { margin: 0; }
+    .th-plan__price { font-size: var(--ds-font-size-t09); font-weight: var(--ds-font-weight-bold); letter-spacing: -0.03em; }
+    .th-plan__price small { color: var(--ds-color-fg-neutral-muted); font-size: var(--ds-font-size-t04); font-weight: var(--ds-font-weight-regular); letter-spacing: 0; }
+    .th-plan ul { display: flex; flex-direction: column; gap: var(--ds-space-x2); margin: 0; padding: 0; list-style: none; color: var(--ds-color-fg-neutral-muted); font-size: var(--ds-font-size-t04); }
+    .th-plan li { display: flex; align-items: center; gap: var(--ds-space-x2); }
+    .th-plan li .ds-icon { color: var(--ds-color-fg-brand); }
+    .th-faq { max-width: 760px; margin-inline: auto; }
+    .th-faq .th-sec__head { justify-content: center; text-align: center; }
+  </style>
+</head>
+<body>
+<header class="th-gnb"><div class="th-wrap th-gnb__row">
+  <a class="th-logo" href="#">토키</a>
+  <nav class="th-menu" aria-label="주요 메뉴"><a href="#" aria-current="page">기능</a><a href="#">요금제</a><a href="#">후기</a><a href="#">기업용</a></nav>
+  
+  <div class="th-gnb__end"><button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall">로그인</button><button type="button" class="ds-btn" data-variant="brandSolid" data-size="xsmall">무료로 시작하기</button></div>
+  <span class="th-gnb__burger"><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" aria-label="메뉴 열기"><i class="ds-icon ds-icon--menu" aria-hidden="true"></i></button></span>
+</div></header>
+<main class="th-wrap">
+  <section class="th-hero" aria-label="소개">
+    <span class="th-eyebrow"><i class="ds-icon ds-icon--sparkles ds-icon--sm" aria-hidden="true"></i> 새로워진 토키 3.0</span>
+    <h1>매일 10분, AI 튜터와<br>진짜 대화로 배우는 영어</h1>
+    <p>말하면 바로 고쳐 주고, 내 수준에 맞는 표현을 알려 줘요. 발음, 문법, 어휘를 한 번에 챙기세요.</p>
+    <div class="th-hero__acts"><button type="button" class="ds-btn" data-variant="brandSolid" data-size="large">7일 무료 체험<i class="ds-icon ds-icon--arrow-right" aria-hidden="true"></i></button><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="large"><i class="ds-icon ds-icon--play" aria-hidden="true"></i>데모 보기</button></div>
+    <div class="th-chat" role="group" aria-label="대화 미리 보기">
+      <div class="th-chat__head"><span class="ds-avatar" data-size="42" role="img" aria-label="토키"><span class="ds-avatar__initials" aria-hidden="true">토</span></span><div><b>토키 튜터</b><small>● 지금 대화 중 · 비즈니스 영어</small></div><div style="margin-left: auto"><span class="ds-badge" data-tone="brand">Day 12</span></div></div>
+      <div class="th-chat__log">
+        <p class="ds-chat-system" data-variant="divider">오늘</p>
+        <div class="ds-chat-bubble">Good morning! Tell me about a meeting you had this week.</div>
+        <div class="ds-chat-bubble" data-sender="user">I had meeting with my team on Monday. We discussed about the new project.</div>
+        <div class="ds-chat-bubble">Nice! Two small fixes 👇<br><span class="th-fix"><i class="ds-icon ds-icon--check ds-icon--sm" aria-hidden="true"></i> I had <b>a</b> meeting</span> <span class="th-fix"><i class="ds-icon ds-icon--check ds-icon--sm" aria-hidden="true"></i> We discussed the project (no “about”)</span><br><br>What was the most important decision?</div>
+      </div>
+      <form class="ds-chat-composer" onsubmit="return false"><button type="button" class="ds-chat-composer__attach" aria-label="첨부"><i class="ds-icon ds-icon--plus" aria-hidden="true"></i></button><div class="ds-chat-composer__field"><textarea class="ds-chat-composer__input" rows="1" placeholder="영어로 답해 보세요 (한국어도 괜찮아요)" aria-label="메시지"></textarea><button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-label="음성으로 말하기"><i class="ds-icon ds-icon--mic" aria-hidden="true"></i></button><button type="submit" class="ds-chat-send" aria-label="보내기"></button></div></form>
+    </div>
+  </section>
+  <section class="th-sec" aria-labelledby="s1"><div class="th-sec__head"><div><h2 id="s1">왜 토키인가요?</h2></div></div>
+    <div class="th-feat"><div class="th-card th-fcard"><span class="th-tile"><svg class="th-art" data-tone="brand" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19v3"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><rect x="9" y="2" width="6" height="13" rx="3"/></svg></span><b>말하면 바로 고쳐 줘요</b><p>문장을 끝내면 틀린 곳과 더 자연스러운 표현을 바로 보여 줘요. 발음 점수도 함께요.</p></div><div class="th-card th-fcard"><span class="th-tile"><svg class="th-art" data-tone="brand" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="19" r="3"/><path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"/><circle cx="18" cy="5" r="3"/></svg></span><b>내 목표에 맞춘 커리큘럼</b><p>여행, 면접, 비즈니스 미팅처럼 목표를 고르면 매일 대화 주제가 바뀌어요.</p></div><div class="th-card th-fcard"><span class="th-tile"><svg class="th-art" data-tone="brand" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16v5"/><path d="M16 14.639V21"/><path d="M20 10.656V21"/><path d="m22 3-8.646 8.646a.5.5 0 0 1-.708 0L9.354 8.354a.5.5 0 0 0-.707 0L2 15"/><path d="M4 18.463V21"/><path d="M8 14.656V21"/></svg></span><b>실력 변화가 보여요</b><p>주간 리포트로 자주 틀리는 문법과 늘어난 어휘를 숫자로 확인해요.</p></div></div></section>
+  <section class="th-sec" aria-labelledby="s2"><div class="th-sec__head"><div><h2 id="s2">요금제</h2><p>언제든 해지할 수 있어요</p></div></div>
+    <div class="th-plans"><div class="th-card th-plan"><div><h3>스타터</h3><small class="th-muted">가볍게 시작</small></div><div class="th-plan__price th-num">무료</div><ul><li><i class="ds-icon ds-icon--check ds-icon--sm" aria-hidden="true"></i>하루 1회 대화 (10분)</li><li><i class="ds-icon ds-icon--check ds-icon--sm" aria-hidden="true"></i>기본 교정</li><li><i class="ds-icon ds-icon--check ds-icon--sm" aria-hidden="true"></i>주간 리포트</li></ul><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="medium" data-width="fill">무료로 시작</button></div><div class="th-card th-plan" data-hot><span class="ds-badge" data-tone="brand" data-variant="solid">인기</span><div><h3>플러스</h3><small class="th-muted">가장 많이 골라요</small></div><div class="th-plan__price th-num">14,900원<small> / 월</small></div><ul><li><i class="ds-icon ds-icon--check ds-icon--sm" aria-hidden="true"></i>무제한 대화</li><li><i class="ds-icon ds-icon--check ds-icon--sm" aria-hidden="true"></i>발음 점수와 상세 교정</li><li><i class="ds-icon ds-icon--check ds-icon--sm" aria-hidden="true"></i>목표별 커리큘럼</li><li><i class="ds-icon ds-icon--check ds-icon--sm" aria-hidden="true"></i>복습 노트</li></ul><button type="button" class="ds-btn" data-variant="brandSolid" data-size="medium" data-width="fill">7일 무료 체험</button></div><div class="th-card th-plan"><div><h3>프로</h3><small class="th-muted">시험과 면접 준비</small></div><div class="th-plan__price th-num">29,900원<small> / 월</small></div><ul><li><i class="ds-icon ds-icon--check ds-icon--sm" aria-hidden="true"></i>플러스의 모든 기능</li><li><i class="ds-icon ds-icon--check ds-icon--sm" aria-hidden="true"></i>모의 면접, 스피킹 시험 모드</li><li><i class="ds-icon ds-icon--check ds-icon--sm" aria-hidden="true"></i>원어민 튜터 월 2회</li><li><i class="ds-icon ds-icon--check ds-icon--sm" aria-hidden="true"></i>우선 지원</li></ul><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="medium" data-width="fill">프로 시작하기</button></div></div></section>
+  <section class="th-sec th-faq" aria-labelledby="s3"><div class="th-sec__head"><div><h2 id="s3">자주 묻는 질문</h2></div></div>
+    <details class="ds-accordion" data-variant="separated" open><summary class="ds-accordion__trigger"><span class="ds-accordion__body"><span class="ds-accordion__title">영어를 거의 못해도 할 수 있나요?</span></span></summary><div class="ds-accordion__content">네. 첫 대화에서 수준을 가늠한 뒤 쉬운 문장부터 시작해요. 한국어로 답해도 토키가 영어 표현을 알려 줘요.</div></details><details class="ds-accordion" data-variant="separated"><summary class="ds-accordion__trigger"><span class="ds-accordion__body"><span class="ds-accordion__title">음성 대화도 되나요?</span></span></summary><div class="ds-accordion__content">마이크 버튼을 누르고 말하면 돼요. 발음 점수와 함께 어떤 소리를 고치면 좋을지 알려 줘요.</div></details><details class="ds-accordion" data-variant="separated"><summary class="ds-accordion__trigger"><span class="ds-accordion__body"><span class="ds-accordion__title">무료 체험이 끝나면 자동으로 결제되나요?</span></span></summary><div class="ds-accordion__content">체험이 끝나기 하루 전에 알림을 보내요. 그때 해지하면 결제되지 않아요.</div></details><details class="ds-accordion" data-variant="separated"><summary class="ds-accordion__trigger"><span class="ds-accordion__body"><span class="ds-accordion__title">기업용 플랜도 있나요?</span></span></summary><div class="ds-accordion__content">임직원 교육용으로 관리자 화면과 진도 리포트를 제공해요. 기업용 메뉴에서 문의해 주세요.</div></details></section>
+  <section class="th-sec" aria-label="시작"><div class="th-band" style="justify-content: center; text-align: center; flex-direction: column"><div><h2>오늘부터 매일 10분</h2><p>첫 7일은 무료예요. 카드 등록 없이 바로 시작해 보세요.</p></div><button type="button" class="ds-btn" data-variant="neutralSolid" data-size="large">무료로 시작하기<i class="ds-icon ds-icon--arrow-right" aria-hidden="true"></i></button></div></section>
+</main>
+<footer class="th-foot"><div class="th-wrap">
+  <nav class="th-foot__links" aria-label="약관"><a href="#">이용약관</a><a href="#" data-strong>개인정보 처리방침</a><a href="#">환불 정책</a><a href="#">기업용 문의</a></nav>
+  <div class="th-foot__body"><p><b>토키</b>이 화면은 yds 테마 예시예요. 회사 이름, 상품, 연락처는 모두 가상입니다.<br>서울시 가상구 예시로 7 · hi@example.com</p><p>© 2026 토키</p></div>
+</div></footer>
+</body>
+</html>

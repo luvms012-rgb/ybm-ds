@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="ko" data-ds-theme="rose">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>장미 테마 - 키즈잉글리시 (yds 테마 예시)</title>
+<!-- 생성물: node site/themes/gen.mjs 가 만든다. 직접 고치지 말고 생성기를 고친다 -->
+<link rel="stylesheet" href="../../../dist/ybm-ds.css">
+<link rel="stylesheet" href="../../../dist/themes/rose.css">
+<script>if (location.hash === "#default") document.documentElement.removeAttribute("data-ds-theme");</script>
+<script src="../../../dist/ybm-ds.js" defer></script>
+<style>
+  body { margin: 0; background: var(--ds-color-bg-canvas); color: var(--ds-color-fg-neutral); word-break: keep-all; overflow-wrap: break-word; }
+  a { color: inherit; }
+  .th-wrap { box-sizing: border-box; width: min(100%, 1200px); margin-inline: auto; padding-inline: var(--ds-space-x4); }
+  @media (min-width: 768px) { .th-wrap { padding-inline: var(--ds-space-x6); } }
+  .th-art[data-tone="brand"] { color: var(--ds-color-fg-brand); }
+  .th-art[data-tone="positive"] { color: var(--ds-color-fg-positive); }
+  .th-art[data-tone="warning"] { color: var(--ds-color-fg-warning); }
+  .th-art[data-tone="critical"] { color: var(--ds-color-fg-critical); }
+  .th-art[data-tone="magic"] { color: var(--ds-color-fg-magic); }
+  .th-art[data-tone="neutral"] { color: var(--ds-color-fg-neutral-muted); }
+  .th-art[data-tone="on-brand"] { color: var(--ds-color-fg-on-brand-solid); }
+  .th-em { color: var(--ds-color-fg-brand); }
+  .th-num { font-variant-numeric: tabular-nums; }
+  .th-muted { color: var(--ds-color-fg-neutral-muted); }
+
+  .th-gnb { position: sticky; top: 0; z-index: var(--ds-z-sticky); background: var(--ds-color-bg-layer-default); box-shadow: inset 0 -1px 0 var(--ds-color-stroke-neutral-weak); }
+  .th-gnb__row { display: flex; align-items: center; gap: var(--ds-space-x8); height: 64px; }
+  .th-logo { font-size: var(--ds-font-size-t07); font-weight: var(--ds-font-weight-bold); letter-spacing: -0.03em; color: var(--ds-color-fg-brand); text-decoration: none; white-space: nowrap; }
+  .th-menu { display: none; gap: var(--ds-space-x7); }
+  .th-menu a { font-size: var(--ds-font-size-t05); line-height: var(--ds-line-height-t05); font-weight: var(--ds-font-weight-semibold); color: var(--ds-color-fg-neutral); text-decoration: none; white-space: nowrap; }
+  .th-menu a[aria-current="page"] { color: var(--ds-color-fg-brand); }
+  .th-gnb__search { display: none; flex: 1 1 auto; max-width: 420px; }
+  .th-gnb__end { display: none; align-items: center; gap: var(--ds-space-x1); margin-left: auto; }
+  .th-gnb__burger { margin-left: auto; }
+  .th-gnb__sub { display: flex; align-items: center; gap: var(--ds-space-x2); min-height: 48px; overflow-x: auto; scrollbar-width: none; }
+  @media (min-width: 1024px) { .th-menu, .th-gnb__search, .th-gnb__end { display: flex; } .th-gnb__burger { display: none; } }
+
+  .th-sec { padding-top: var(--ds-space-x14); }
+  .th-sec__head { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--ds-space-x4); margin-bottom: var(--ds-space-x6); }
+  .th-sec__head h2 { margin: 0; font-size: var(--ds-font-size-t08); line-height: var(--ds-line-height-t08); font-weight: var(--ds-font-weight-bold); letter-spacing: -0.02em; }
+  .th-sec__head p { margin: var(--ds-space-x1) 0 0; color: var(--ds-color-fg-neutral-muted); font-size: var(--ds-font-size-t04); }
+  .th-sec__head .ds-link { white-space: nowrap; }
+
+  .th-tiles { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: var(--ds-space-x5) var(--ds-space-x2); margin: 0; padding: 0; list-style: none; }
+  @media (min-width: 1024px) { .th-tiles { grid-template-columns: repeat(10, minmax(0, 1fr)); } }
+  .th-tiles a { display: flex; flex-direction: column; align-items: center; gap: var(--ds-space-x2); color: var(--ds-color-fg-neutral); text-decoration: none; text-align: center; font-size: var(--ds-font-size-t03); line-height: 18px; }
+  .th-tile { display: grid; place-items: center; flex: none; width: 60px; height: 60px; border-radius: var(--ds-shape-2xl); background: var(--ds-color-bg-brand-weak); transition: transform var(--ds-duration-fast) var(--ds-easing-standard); }
+  .th-tiles a:hover .th-tile { transform: translateY(-2px); }
+
+  .th-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--ds-space-x8) var(--ds-space-x4); }
+  @media (min-width: 768px) { .th-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  @media (min-width: 1024px) { .th-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+  .th-item { position: relative; display: flex; flex-direction: column; gap: var(--ds-space-x2); color: inherit; text-decoration: none; }
+  .th-item .ds-imageframe { border-radius: var(--ds-shape-xl); }
+  .th-item__like { position: absolute; top: var(--ds-space-x2); right: var(--ds-space-x2); }
+  .th-item__like .ds-btn { background: rgb(255 255 255 / .85); color: var(--ds-color-fg-neutral); }
+  .th-item__tag { position: absolute; top: var(--ds-space-x2); left: var(--ds-space-x2); }
+  .th-item b { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; font-size: var(--ds-font-size-t05); line-height: var(--ds-line-height-t05); font-weight: var(--ds-font-weight-semibold); }
+  .th-item small { color: var(--ds-color-fg-neutral-muted); font-size: var(--ds-font-size-t03); }
+  .th-item__price { display: flex; align-items: baseline; gap: var(--ds-space-x2); font-size: var(--ds-font-size-t05); }
+  .th-item__price b { display: inline; font-size: var(--ds-font-size-t06); }
+  .th-item__price s { color: var(--ds-color-fg-neutral-subtle); font-size: var(--ds-font-size-t03); }
+  .th-item__off { color: var(--ds-color-fg-critical); font-weight: var(--ds-font-weight-bold); }
+  .th-meta { display: flex; align-items: center; gap: var(--ds-space-x2); color: var(--ds-color-fg-neutral-muted); font-size: var(--ds-font-size-t02); }
+
+  .th-card { padding: var(--ds-space-x6); border-radius: var(--ds-shape-2xl); background: var(--ds-color-bg-layer-default); box-shadow: inset 0 0 0 1px var(--ds-color-stroke-neutral-weak); }
+  .th-card h3 { margin: 0 0 var(--ds-space-x3); font-size: var(--ds-font-size-t06); font-weight: var(--ds-font-weight-bold); }
+  .th-card--brand { background: var(--ds-color-bg-brand-weak); box-shadow: none; }
+  .th-between { display: flex; align-items: center; justify-content: space-between; gap: var(--ds-space-x3); }
+
+  .th-band { padding: var(--ds-space-x10); border-radius: var(--ds-shape-3xl); background: var(--ds-color-bg-brand-solid); color: var(--ds-color-fg-on-brand-solid); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ds-space-x6); }
+  .th-band h2 { margin: 0; font-size: var(--ds-font-size-t09); line-height: var(--ds-line-height-t09); font-weight: var(--ds-font-weight-bold); letter-spacing: -0.03em; }
+  .th-band p { margin: var(--ds-space-x2) 0 0; opacity: .88; }
+  .th-band .ds-btn { background: var(--ds-color-bg-layer-default); color: var(--ds-color-fg-brand); }
+
+  .th-list { margin: 0; padding: 0; list-style: none; }
+  .th-list li a { display: flex; flex-direction: column; gap: 2px; padding-block: var(--ds-space-x3); box-shadow: inset 0 -1px 0 var(--ds-color-stroke-neutral-weak); text-decoration: none; }
+  .th-list li b { overflow: hidden; font-size: var(--ds-font-size-t04); font-weight: var(--ds-font-weight-medium); text-overflow: ellipsis; white-space: nowrap; }
+  .th-list li span { color: var(--ds-color-fg-neutral-subtle); font-size: var(--ds-font-size-t02); }
+
+  .th-foot { margin-top: var(--ds-space-x20); box-shadow: inset 0 1px 0 var(--ds-color-stroke-neutral-weak); color: var(--ds-color-fg-neutral-muted); font-size: var(--ds-font-size-t03); }
+  .th-foot__links { display: flex; flex-wrap: wrap; gap: var(--ds-space-x2) var(--ds-space-x6); padding-block: var(--ds-space-x5); box-shadow: inset 0 -1px 0 var(--ds-color-stroke-neutral-weak); }
+  .th-foot__links a { color: var(--ds-color-fg-neutral); font-weight: var(--ds-font-weight-medium); text-decoration: none; }
+  .th-foot__links a[data-strong] { color: var(--ds-color-fg-brand); font-weight: var(--ds-font-weight-bold); }
+  .th-foot__body { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--ds-space-x6); padding-block: var(--ds-space-x6) var(--ds-space-x12); }
+  .th-foot__body p { margin: 0; line-height: 22px; }
+  .th-foot__body b { display: block; margin-bottom: var(--ds-space-x2); color: var(--ds-color-fg-neutral); font-size: var(--ds-font-size-t05); }
+
+    .th-top { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ds-space-x4); padding-top: var(--ds-space-x6); }
+    @media (min-width: 1024px) { .th-top { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); } }
+    .th-hello { display: flex; flex-wrap: wrap; align-items: center; gap: var(--ds-space-x6); background: var(--ds-color-bg-brand-weak); box-shadow: none; }
+    .th-hello h1 { margin: 0; font-size: 30px; line-height: 1.35; font-weight: var(--ds-font-weight-bold); letter-spacing: -0.03em; }
+    .th-hello p { margin: var(--ds-space-x2) 0 var(--ds-space-x5); color: var(--ds-color-fg-neutral-muted); }
+    .th-hello .ds-avatar { flex: none; }
+    .th-streak { display: flex; gap: var(--ds-space-x2); }
+    .th-day { display: grid; place-items: center; width: 36px; height: 36px; border-radius: var(--ds-shape-pill); background: var(--ds-color-bg-layer-default); font-size: var(--ds-font-size-t03); font-weight: var(--ds-font-weight-bold); color: var(--ds-color-fg-neutral-muted); }
+    .th-day[data-done] { background: var(--ds-color-bg-brand-solid); color: var(--ds-color-fg-on-brand-solid); }
+    .th-day[data-today] { box-shadow: inset 0 0 0 2px var(--ds-color-stroke-brand-solid); color: var(--ds-color-fg-brand); }
+    .th-goal { display: flex; flex-direction: column; gap: var(--ds-space-x4); }
+    .th-goal__row { display: flex; align-items: center; gap: var(--ds-space-x4); }
+    .th-goal__row b { font-size: var(--ds-font-size-t07); }
+    .th-missions { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ds-space-x3); }
+    @media (min-width: 768px) { .th-missions { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    .th-mission { display: flex; flex-direction: column; gap: var(--ds-space-x3); text-decoration: none; }
+    .th-mission b { font-size: var(--ds-font-size-t05); }
+    .th-mission small { color: var(--ds-color-fg-neutral-muted); }
+    .th-mission[data-done] { background: var(--ds-color-bg-positive-weak); box-shadow: none; }
+    .th-badges { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--ds-space-x3); }
+    @media (min-width: 768px) { .th-badges { grid-template-columns: repeat(8, minmax(0, 1fr)); } }
+    .th-badge { display: flex; flex-direction: column; align-items: center; gap: var(--ds-space-x2); text-align: center; font-size: var(--ds-font-size-t02); color: var(--ds-color-fg-neutral-muted); }
+    .th-badge .th-tile { width: 64px; height: 64px; border-radius: var(--ds-shape-pill); }
+    .th-badge[data-locked] .th-tile { background: var(--ds-color-bg-neutral-weak-alpha); }
+    .th-lessons { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ds-space-x4); }
+    @media (min-width: 768px) { .th-lessons { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (min-width: 1024px) { .th-lessons { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+    .th-lesson { display: flex; flex-direction: column; gap: var(--ds-space-x2); text-decoration: none; }
+    .th-lesson .ds-imageframe { border-radius: var(--ds-shape-xl); }
+    .th-lesson b { font-size: var(--ds-font-size-t05); }
+    .th-lesson small { color: var(--ds-color-fg-neutral-muted); }
+    .th-parent { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ds-space-x4); }
+    @media (min-width: 1024px) { .th-parent { grid-template-columns: minmax(0, 1fr) 360px; } }
+    .th-kv { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--ds-space-x3); }
+    .th-kv div { padding: var(--ds-space-x4); border-radius: var(--ds-shape-xl); background: var(--ds-color-bg-neutral-weak-alpha); }
+    .th-kv b { display: block; font-size: var(--ds-font-size-t08); letter-spacing: -0.02em; }
+    .th-kv small { color: var(--ds-color-fg-neutral-muted); }
+  </style>
+</head>
+<body>
+<header class="th-gnb"><div class="th-wrap th-gnb__row">
+  <a class="th-logo" href="#">키즈잉글리시</a>
+  <nav class="th-menu" aria-label="주요 메뉴"><a href="#" aria-current="page">오늘의 학습</a><a href="#">동화</a><a href="#">노래</a><a href="#">게임</a><a href="#">보호자</a></nav>
+  
+  <div class="th-gnb__end"><span class="ds-badge" data-tone="warning"><i class="ds-icon ds-icon--star-solid ds-icon--sm" aria-hidden="true"></i> 1,240</span><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" aria-label="알림"><i class="ds-icon ds-icon--bell" aria-hidden="true"></i></button><span class="ds-avatar" data-size="36" role="img" aria-label="지우"><span class="ds-avatar__initials" aria-hidden="true">지</span></span></div>
+  <span class="th-gnb__burger"><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" aria-label="메뉴 열기"><i class="ds-icon ds-icon--menu" aria-hidden="true"></i></button></span>
+</div></header>
+<main class="th-wrap">
+  <section class="th-top" aria-label="오늘">
+    <div class="th-card th-hello"><span class="ds-avatar" data-size="80" role="img" aria-label="지우"><span class="ds-avatar__initials" aria-hidden="true">지</span></span><div><h1>지우야, 안녕! 👋<br>오늘도 영어랑 놀아 볼까?</h1><p>어제 <b class="th-em">12개 단어</b>를 새로 배웠어요. 오늘 미션 3개를 끝내면 별 50개를 받아요.</p><button type="button" class="ds-btn" data-variant="brandSolid" data-size="large"><i class="ds-icon ds-icon--play" aria-hidden="true"></i>오늘 학습 시작</button></div></div>
+    <div class="th-card"><h3>이번 주 출석</h3><div class="th-streak"><span class="th-day" data-done><i class="ds-icon ds-icon--check ds-icon--sm" aria-hidden="true"></i></span><span class="th-day" data-done><i class="ds-icon ds-icon--check ds-icon--sm" aria-hidden="true"></i></span><span class="th-day" data-done><i class="ds-icon ds-icon--check ds-icon--sm" aria-hidden="true"></i></span><span class="th-day" data-today>목</span><span class="th-day">금</span><span class="th-day">토</span><span class="th-day">일</span></div><div class="th-goal" style="margin-top: var(--ds-space-x6)"><div class="th-goal__row"><span class="ds-progress-circle" data-size="56" data-tone="brand" role="progressbar" aria-valuenow="68" style="--ds-progress-value: 68"><svg viewBox="0 0 40 40" aria-hidden="true"><circle class="ds-progress-circle__track" pathLength="100"/><circle class="ds-progress-circle__range" pathLength="100"/></svg></span><div><b class="th-num">68%</b><br><small class="th-muted">레벨 2 진도</small></div></div><div class="ds-progress" role="progressbar" aria-valuenow="68" aria-valuemin="0" aria-valuemax="100" aria-label="레벨 2 진도" style="--ds-progress-value: 68%" data-size="small"></div><small class="th-muted">레벨 3까지 단어 24개, 동화 2편 남았어요.</small></div></div>
+  </section>
+  <section class="th-sec" aria-labelledby="s1"><div class="th-sec__head"><div><h2 id="s1">오늘의 미션</h2></div></div>
+    <div class="th-missions"><a class="th-card th-mission" href="#" data-done><span class="th-tile"><svg class="th-art" data-tone="positive" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v16"/><path d="M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z"/></svg></span><div><b>동화 읽기</b><br><small>The Hungry Caterpillar</small></div><span class="ds-badge" data-tone="positive">완료 <i class="ds-icon ds-icon--check ds-icon--sm" aria-hidden="true"></i></span></a><a class="th-card th-mission" href="#"><span class="th-tile"><svg class="th-art" data-tone="brand" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19v3"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><rect x="9" y="2" width="6" height="13" rx="3"/></svg></span><div><b>따라 말하기</b><br><small>과일 이름 8개</small></div><span class="ds-badge" data-tone="warning">별 15개</span></a><a class="th-card th-mission" href="#"><span class="th-tile"><svg class="th-art" data-tone="brand" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15.39 4.39a1 1 0 0 0 1.68-.474 2.5 2.5 0 1 1 3.014 3.015 1 1 0 0 0-.474 1.68l1.683 1.682a2.414 2.414 0 0 1 0 3.414L19.61 15.39a1 1 0 0 1-1.68-.474 2.5 2.5 0 1 0-3.014 3.015 1 1 0 0 1 .474 1.68l-1.683 1.682a2.414 2.414 0 0 1-3.414 0L8.61 19.61a1 1 0 0 0-1.68.474 2.5 2.5 0 1 1-3.014-3.015 1 1 0 0 0 .474-1.68l-1.683-1.682a2.414 2.414 0 0 1 0-3.414L4.39 8.61a1 1 0 0 1 1.68.474 2.5 2.5 0 1 0 3.014-3.015 1 1 0 0 1-.474-1.68l1.683-1.682a2.414 2.414 0 0 1 3.414 0z"/></svg></span><div><b>단어 퍼즐</b><br><small>동물 친구들</small></div><span class="ds-badge" data-tone="warning">별 15개</span></a></div></section>
+  <section class="th-sec" aria-labelledby="s2"><div class="th-sec__head"><div><h2 id="s2">모은 뱃지</h2><p>8개 중 5개를 모았어요</p></div><a class="ds-link" href="#">전체 보기 <i class="ds-icon ds-icon--chevron-right ds-icon--sm" aria-hidden="true"></i></a></div>
+    <div class="th-badges"><div class="th-badge"><span class="th-tile"><svg class="th-art" data-tone="brand" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/></svg></span>첫 수업</div><div class="th-badge"><span class="th-tile"><svg class="th-art" data-tone="brand" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3q1 4 4 6.5t3 5.5a1 1 0 0 1-14 0 5 5 0 0 1 1-3 1 1 0 0 0 5 0c0-2-1.5-3-1.5-5q0-2 2.5-4"/></svg></span>3일 연속</div><div class="th-badge"><span class="th-tile"><svg class="th-art" data-tone="brand" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v16"/><path d="M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z"/></svg></span>동화 10편</div><div class="th-badge"><span class="th-tile"><svg class="th-art" data-tone="brand" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19v3"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><rect x="9" y="2" width="6" height="13" rx="3"/></svg></span>발음왕</div><div class="th-badge"><span class="th-tile"><svg class="th-art" data-tone="brand" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14.66V17a1 1 0 0 1-1 1 2 2 0 0 0-2 2v2"/><path d="M14 14.66V17a1 1 0 0 0 1 1 2 2 0 0 1 2 2v2"/><path d="M17.916 10H19.5A2.5 2.5 0 0 0 22 7.5V5a1 1 0 0 0-1-1h-3"/><path d="M4 22h16"/><path d="M6 9a6 6 0 0 0 12 0V3a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1z"/><path d="M6.084 10H4.5A2.5 2.5 0 0 1 2 7.5V5a1 1 0 0 1 1-1h3"/></svg></span>퀴즈 만점</div><div class="th-badge" data-locked><span class="th-tile"><svg class="th-art" data-tone="neutral" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="M6 8h4"/><path d="M14 8h.01"/><path d="M18 8h.01"/><path d="M2 12h20"/><path d="M6 12v4"/><path d="M10 12v4"/><path d="M14 12v4"/><path d="M18 12v4"/></svg></span>노래 5곡</div><div class="th-badge" data-locked><span class="th-tile"><svg class="th-art" data-tone="neutral" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11.562 3.266a.5.5 0 0 1 .876 0L15.39 8.87a1 1 0 0 0 1.516.294L21.183 5.5a.5.5 0 0 1 .798.519l-2.834 10.246a1 1 0 0 1-.956.734H5.81a1 1 0 0 1-.957-.734L2.02 6.02a.5.5 0 0 1 .798-.519l4.276 3.664a1 1 0 0 0 1.516-.294z"/><path d="M5 21h14"/></svg></span>7일 연속</div><div class="th-badge" data-locked><span class="th-tile"><svg class="th-art" data-tone="neutral" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09"/><path d="M9 12a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.4 22.4 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 .05 5 .05"/></svg></span>레벨 3</div></div></section>
+  <section class="th-sec" aria-labelledby="s3"><div class="th-sec__head"><div><h2 id="s3">이어서 배우기</h2></div><a class="ds-link" href="#">전체 보기 <i class="ds-icon ds-icon--chevron-right ds-icon--sm" aria-hidden="true"></i></a></div>
+    <div class="th-lessons"><a class="th-lesson" href="#"><div class="ds-imageframe" data-ratio="4:3"><img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=480&q=70" alt="" loading="lazy"></div><b>Colors Around Me</b><small>레벨 2 · 10분</small><div class="ds-progress" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" aria-label="Colors Around Me 진도" style="--ds-progress-value: 40%" data-size="small"></div></a><a class="th-lesson" href="#"><div class="ds-imageframe" data-ratio="4:3"><img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=480&q=70" alt="" loading="lazy"></div><b>My Family</b><small>레벨 2 · 8분</small><span class="ds-badge" data-tone="brand">새 수업</span></a><a class="th-lesson" href="#"><div class="ds-imageframe" data-ratio="4:3"><img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=480&q=70" alt="" loading="lazy"></div><b>Animals on the Farm</b><small>레벨 2 · 12분</small><div class="ds-progress" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" aria-label="Animals on the Farm 진도" style="--ds-progress-value: 100%" data-tone="positive" data-size="small"></div></a><a class="th-lesson" href="#"><div class="ds-imageframe" data-ratio="4:3"><img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=480&q=70" alt="" loading="lazy"></div><b>Let's Count!</b><small>레벨 2 · 6분</small><span class="ds-badge" data-tone="brand">새 수업</span></a></div></section>
+  <section class="th-sec th-parent" aria-label="보호자">
+    <div class="th-card"><div class="th-between"><h3>보호자 리포트</h3><div class="ds-segmented" role="group" aria-label="기간" data-size="small"><button type="button" class="ds-segmented__item" aria-pressed="true">이번 주</button><button type="button" class="ds-segmented__item" aria-pressed="false">이번 달</button></div></div><div class="th-kv"><div><b class="th-num">42분</b><small>학습 시간</small></div><div><b class="th-num">36개</b><small>새 단어</small></div><div><b class="th-num">91%</b><small>발음 정확도</small></div></div><p class="th-muted" style="margin: var(--ds-space-x4) 0 0; font-size: var(--ds-font-size-t03); line-height: 20px">지난주보다 학습 시간이 12분 늘었어요. 동물 이름 발음이 특히 좋아졌어요.</p></div>
+    <div class="th-card"><h3>학습 설정</h3><div class="th-between" style="padding-block: var(--ds-space-x3); box-shadow: inset 0 -1px 0 var(--ds-color-stroke-neutral-weak)"><span>하루 학습 알림 (오후 4시)</span><label class="ds-switch"><input type="checkbox" role="switch" class="ds-switch__control" aria-label="하루 학습 알림" checked></label></div><div class="th-between" style="padding-block: var(--ds-space-x3); box-shadow: inset 0 -1px 0 var(--ds-color-stroke-neutral-weak)"><span>주말 쉬기</span><label class="ds-switch"><input type="checkbox" role="switch" class="ds-switch__control" aria-label="주말 쉬기"></label></div><div class="th-between" style="padding-block: var(--ds-space-x3)"><span>리포트 이메일 받기</span><label class="ds-switch"><input type="checkbox" role="switch" class="ds-switch__control" aria-label="리포트 이메일" checked></label></div></div>
+  </section>
+</main>
+<footer class="th-foot"><div class="th-wrap">
+  <nav class="th-foot__links" aria-label="약관"><a href="#">이용약관</a><a href="#" data-strong>개인정보 처리방침</a><a href="#">아동 보호 정책</a><a href="#">보호자 안내</a></nav>
+  <div class="th-foot__body"><p><b>키즈잉글리시</b>이 화면은 yds 테마 예시예요. 회사 이름, 상품, 연락처는 모두 가상입니다.<br>서울시 가상구 예시로 24 · kids@example.com</p><p>© 2026 키즈잉글리시</p></div>
+</div></footer>
+</body>
+</html>
