@@ -372,13 +372,6 @@ ${codeblock(prompts[1][2], 'text', ' data-wrap')}
 <h3>규칙 점검하기</h3>
 ${codeblock(prompts[2][2], 'text', ' data-wrap')}
 
-<h2 id="system">시스템 이해하기</h2>
-<div class="site-grid site-grid--hub">
-  ${hubCard('{root}foundations/index.html', 'Foundations', '색, 글자, 간격 같은 기본 토큰.')}
-  ${hubCard('{root}components/index.html', 'Components', '화면을 이루는 부품의 모양과 쓰임.')}
-  ${hubCard('{root}templates/index.html', 'Templates', '가져다 고쳐 쓰는 완성 화면.')}
-</div>
-
 <h2 id="start">바로 써 보기</h2>
 <p><code>&lt;head&gt;</code>에 두 줄을 넣으면 글꼴, 토큰, 아이콘, 컴포넌트가 함께 들어옵니다. 컴포넌트마다 쓰는 법은 <a class="ds-link" href="components/index.html">Components</a>에 있습니다.</p>
 ${codeblock(CSS_LINK)}
