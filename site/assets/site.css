@@ -157,8 +157,9 @@ body[data-side-open] .site-scrim { opacity: 1; pointer-events: auto; }
 .site-eyebrow a { color: inherit; text-decoration: none; }
 .site-eyebrow a:hover { color: var(--ds-color-fg-neutral); }
 .site-h1 { font-size: var(--ds-font-size-t12); line-height: 40px; font-weight: var(--ds-font-weight-semibold); letter-spacing: -0.025em; }  /* 48/52 SemiBold (11-04 사용자 "세미볼드로 다시"). 768 보다 좁으면 32/40 */
-.site-doc header p.site-lead { margin-top: var(--ds-space-x4); color: var(--ds-color-fg-neutral-muted); font-size: var(--ds-font-size-t05); line-height: 24px; font-weight: var(--ds-font-weight-regular); letter-spacing: 0; }
+.site-doc header p.site-lead { margin-top: var(--ds-space-x4); color: var(--ds-color-fg-neutral-muted); font-size: var(--ds-font-size-t05); line-height: 24px; font-weight: 300; letter-spacing: 0; }
 @media (min-width: 768px) { .site-h1 { font-size: var(--ds-font-size-t14); line-height: 52px; } }
+@media (min-width: 1440px) { .site-h1 { font-size: 60px; line-height: 66px; } }  /* 레퍼런스 B 1440 실측 60/66 (11-04 사용자 "위계가 눈에 안 띈다") */
 .site-doc > * + * { margin-top: var(--ds-space-x4); }
 /* 본문 글자 규칙은 미리보기(.pv-stage, .site-tile__inner) 안의 부품에는 적용하지 않는다. 사이트 CSS 는 cascade layer 밖이라 DS 부품 스타일보다 세서, 그대로 두면 부품 제목에 큰 여백이 생긴다 */
 .site-doc h2:not(.pv-stage *, .site-tile__inner *, .site-example__preview *, .site-tpl *) { position: relative; margin-top: var(--ds-space-x12); font-size: var(--ds-font-size-t09); line-height: 32px; font-weight: var(--ds-font-weight-semibold); letter-spacing: 0; }  /* 24/32 SemiBold (11-04 사용자), 위 48 */
@@ -188,7 +189,7 @@ body[data-side-open] .site-scrim { opacity: 1; pointer-events: auto; }
 .site-doc .ds-table-wrap:not(.pv-stage *, .site-example__preview *, .site-tile__inner *) { border: 1px solid var(--site-box-line); border-radius: var(--ds-shape-xl); background: var(--ds-color-bg-layer-default); }
 .site-doc .ds-table:not(.pv-stage *, .site-example__preview *, .site-tile__inner *) { --ds-table-head-h: auto; --ds-table-row-h: auto; --ds-table-line: var(--site-box-line); border-top: 0; }
 .site-doc .ds-table:not(.pv-stage *, .site-example__preview *, .site-tile__inner *) tbody tr:last-child > * { border-bottom: 0; }
-.site-doc .ds-table:not(.pv-stage *, .site-example__preview *, .site-tile__inner *) th { padding: var(--ds-space-x3) var(--ds-space-x4); color: var(--ds-color-fg-neutral-muted); font-size: var(--ds-font-size-t04); line-height: 20px; font-weight: var(--ds-font-weight-medium); }  /* 표 머리 14/20 Medium */
+.site-doc .ds-table:not(.pv-stage *, .site-example__preview *, .site-tile__inner *) th { padding: var(--ds-space-x3) var(--ds-space-x4); color: var(--ds-color-fg-neutral); font-size: var(--ds-font-size-t04); line-height: 20px; font-weight: var(--ds-font-weight-medium); }  /* 표 머리 14/20 Medium */
 .site-doc .ds-table:not(.pv-stage *, .site-example__preview *, .site-tile__inner *) td { padding: var(--ds-space-x3) var(--ds-space-x4); overflow: visible; text-overflow: clip; font-size: var(--ds-font-size-t04); line-height: 20px; white-space: normal; }  /* 표 칸 14/20 */
 /* 코드는 되도록 한 덩어리로 두고, 칸보다 길면 줄을 바꾼다(말줄임으로 잘리지 않게) */
 .site-doc .ds-table:not(.pv-stage *, .site-example__preview *, .site-tile__inner *) :is(td, th) code { white-space: normal; overflow-wrap: anywhere; word-break: keep-all; }
