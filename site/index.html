@@ -9,9 +9,9 @@
 <script>try { var t = localStorage.getItem("ybm-site-theme"); if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.dataset.theme = "dark"; } catch (e) {}</script>
 <link rel="icon" href="assets/logo-ybmnet.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../dist/ybm-ds.css">
-<link rel="stylesheet" href="assets/site.css?v=36add758">
+<link rel="stylesheet" href="assets/site.css?v=6b328733">
 <script src="../dist/ybm-ds.js" defer></script>
-<script src="assets/site.js?v=36add758" defer></script>
+<script src="assets/site.js?v=6b328733" defer></script>
 </head>
 <body class="site">
 <a class="site-skip" href="#main">본문 바로가기</a>
@@ -19,7 +19,7 @@
   <a class="site-logo" href="index.html"><img src="assets/logo-ybmnet.svg" alt="YBM NET" width="81" height="24"></a>
   <nav class="site-topnav" aria-label="주요 메뉴">
     <a class="site-topnav__item" href="index.html" aria-current="page">Get Started</a>
-    <a class="site-topnav__item" href="foundations/index.html">Foundations</a>
+    <a class="site-topnav__item" href="foundations/breakpoint.html">Foundations</a>
     <a class="site-topnav__item" href="components/index.html">Components</a>
     <a class="site-topnav__item" href="templates/index.html">Templates</a>
     <a class="site-topnav__item" href="updates.html">Updates</a>
@@ -35,7 +35,7 @@
 <div class="site-body site-body--page">
 <aside class="site-side" id="site-side" aria-label="페이지 목록">
   <div class="site-side__top"><b>메뉴</b><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" data-site-close aria-label="메뉴 닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button></div>
-  <div class="site-side__mobile"><nav class="site-nav" aria-label="주요 메뉴"><a class="site-nav__item" href="index.html" aria-current="page">Get Started</a><a class="site-nav__item" href="foundations/index.html">Foundations</a><a class="site-nav__item" href="components/index.html">Components</a><a class="site-nav__item" href="templates/index.html">Templates</a><a class="site-nav__item" href="updates.html">Updates</a></nav><div class="site-nav__sep"></div></div>
+  <div class="site-side__mobile"><nav class="site-nav" aria-label="주요 메뉴"><a class="site-nav__item" href="index.html" aria-current="page">Get Started</a><a class="site-nav__item" href="foundations/breakpoint.html">Foundations</a><a class="site-nav__item" href="components/index.html">Components</a><a class="site-nav__item" href="templates/index.html">Templates</a><a class="site-nav__item" href="updates.html">Updates</a></nav><div class="site-nav__sep"></div></div>
   <nav class="site-nav" aria-label="Get Started 메뉴"></nav>
 </aside>
 <div class="site-scrim" data-site-close></div>
@@ -48,59 +48,22 @@
 
 </header>
 
-<h2 id="ai">내 사이트에 옮기기<a class="site-anchor" href="#ai" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
-<p>운영 중인 사이트에 DS를 옮겨 오는 순서입니다. 단계마다 아래 글을 AI 코딩 도구(ChatGPT, Claude, Cursor 등)에 붙여 넣습니다. 지킬 규칙은 AI가 문서에서 읽어 갑니다.</p>
-<h3>1. 사이트 살펴보기</h3>
-<p>아직 아무것도 고치지 않고, 무엇을 어떤 순서로 바꿀지 먼저 정합니다.</p>
-<figure class="ds-codeblock" data-wrap>
-  <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">text</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
-  <pre class="ds-codeblock__code"><code>이 사이트에 YBM DS를 옮겨 오려고 해. 아직 고치지 말고 먼저 살펴봐 줘.
-문서: https://luvms012-rgb.github.io/ybm-ds/site/llms.txt
-공통 &lt;head&gt;가 있는 파일, CSS 파일, 자주 쓰는 색과 부품(버튼, 입력, 표)을 정리하고 어느 화면부터 바꿀지 순서를 제안해 줘.</code></pre>
-</figure>
-<h3>2. DS 넣기</h3>
-<p>공통 &lt;head&gt;에 DS를 넣습니다. 이 단계에서는 화면이 거의 바뀌지 않습니다.</p>
-<figure class="ds-codeblock" data-wrap>
-  <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">text</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
-  <pre class="ds-codeblock__code"><code>이 사이트의 공통 &lt;head&gt;에 YBM DS를 넣어 줘.
-문서: https://luvms012-rgb.github.io/ybm-ds/site/llms.txt
-지금 화면이 바뀌면 안 되니, 넣은 뒤 달라진 화면이 있으면 알려 줘.</code></pre>
-</figure>
-<h3>3. 브랜드 컬러 맞추기</h3>
-<p>사이트의 대표 색을 DS 브랜드 컬러로 옮깁니다.</p>
-<figure class="ds-codeblock" data-wrap>
-  <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">text</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
-  <pre class="ds-codeblock__code"><code>이 사이트의 대표 색을 찾아서 YBM DS 브랜드 컬러로 맞춰 줘.
-문서: https://luvms012-rgb.github.io/ybm-ds/site/llms.txt
-대표 색이 없거나 여러 개면 나에게 먼저 물어보고, 서비스 CSS 한 파일에만 넣어 줘.</code></pre>
-</figure>
-<h3>4. 화면 하나씩 바꾸기</h3>
-<p>한 번에 다 바꾸지 않고 화면 하나씩 바꿉니다. 대괄호 안만 바꿔 화면마다 붙여 넣습니다.</p>
-<figure class="ds-codeblock" data-wrap>
-  <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">text</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
-  <pre class="ds-codeblock__code"><code>[바꿀 화면, 예: 회원 정보 수정] 화면을 YBM DS 컴포넌트로 바꿔 줘.
-문서: https://luvms012-rgb.github.io/ybm-ds/site/llms.txt
-서버 코드와 스크립트가 쓰는 class, id, name 은 그대로 두고, 바꾸기 전후 화면을 비교해서 보여 줘.</code></pre>
-</figure>
-<h3>5. 규칙 점검하기</h3>
-<p>바꾼 화면이 DS 규칙을 지키는지 확인합니다.</p>
-<figure class="ds-codeblock" data-wrap>
-  <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">text</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
-  <pre class="ds-codeblock__code"><code>이 화면이 YBM DS 규칙을 지키는지 점검하고 고쳐 줘.
-문서: https://luvms012-rgb.github.io/ybm-ds/site/llms.txt
-고친 곳은 목록으로 알려 줘.</code></pre>
-</figure>
-<p class="site-note">DS는 CSS <code>@layer</code>를 씁니다. Chrome 99, Safari 15.4 보다 오래된 브라우저에서는 DS가 적용되지 않습니다.</p>
-
-<h2 id="new">새로 만들기<a class="site-anchor" href="#new" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
-<p>새 프로젝트나 새 화면은 아래 두 글로 시작합니다.</p>
+<h2 id="ai">AI로 시작하기<a class="site-anchor" href="#ai" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
+<p>아래 글을 AI 코딩 도구(ChatGPT, Claude, Cursor 등)에 붙여 넣으면 됩니다. 지킬 규칙은 AI가 문서에서 읽어 갑니다.</p>
 <h3>DS 설치하기</h3>
-<p>새 프로젝트에 DS를 넣습니다.</p>
 <figure class="ds-codeblock" data-wrap>
   <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">text</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
   <pre class="ds-codeblock__code"><code>이 프로젝트에 YBM DS를 설치해 줘.
 문서: https://luvms012-rgb.github.io/ybm-ds/site/llms.txt
 문서의 '지킬 것'을 먼저 읽고 그대로 따라 줘.</code></pre>
+</figure>
+<h3>브랜드 컬러 입히기</h3>
+<p>서비스에 쓸 때 이어서 붙여 넣습니다.</p>
+<figure class="ds-codeblock" data-wrap>
+  <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">text</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
+  <pre class="ds-codeblock__code"><code>이 서비스의 브랜드 컬러를 나에게 먼저 물어봐 줘.
+문서: https://luvms012-rgb.github.io/ybm-ds/site/llms.txt
+받은 색으로 브랜드 컬러 10단계와 다크 모드 값을 만들어 서비스 CSS에 넣고, 바뀐 화면을 보여 줘.</code></pre>
 </figure>
 <h3>화면 만들기</h3>
 <p>대괄호 안만 내 상황에 맞게 바꿉니다.</p>
@@ -110,6 +73,13 @@
 문서: https://luvms012-rgb.github.io/ybm-ds/site/llms.txt
 비슷한 화면이 Templates에 있으면 그 화면에서 시작해 줘.</code></pre>
 </figure>
+<h3>규칙 점검하기</h3>
+<figure class="ds-codeblock" data-wrap>
+  <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">text</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
+  <pre class="ds-codeblock__code"><code>이 화면이 YBM DS 규칙을 지키는지 점검하고 고쳐 줘.
+문서: https://luvms012-rgb.github.io/ybm-ds/site/llms.txt
+고친 곳은 목록으로 알려 줘.</code></pre>
+</figure>
 
 <h2 id="start">직접 시작하기<a class="site-anchor" href="#start" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
 <p><code>&lt;head&gt;</code>에 두 줄을 넣으면 글꼴, 토큰, 아이콘, 컴포넌트가 함께 들어옵니다. 쓰는 법은 <a class="ds-link" href="components/index.html">Components</a>에 있습니다.</p>
@@ -118,6 +88,34 @@
   <pre class="ds-codeblock__code"><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;https://luvms012-rgb.github.io/ybm-ds/dist/ybm-ds.css&quot;&gt;
 &lt;script src=&quot;https://luvms012-rgb.github.io/ybm-ds/dist/ybm-ds.js&quot; defer&gt;&lt;/script&gt;</code></pre>
 </figure>
+
+<h2 id="migrate">내 사이트에 옮기기<a class="site-anchor" href="#migrate" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
+<p>운영 중인 사이트에 옮길 때는 한 번에 다 바꾸지 않고 아래 순서로 갑니다. 브랜드 컬러와 규칙 점검은 위 <a class="ds-link" href="#ai">AI로 시작하기</a>의 글을 그대로 씁니다.</p>
+<h3>1. 사이트 살펴보기</h3>
+<p>아직 고치지 않고, 무엇을 어떤 순서로 바꿀지 먼저 정합니다.</p>
+<figure class="ds-codeblock" data-wrap>
+  <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">text</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
+  <pre class="ds-codeblock__code"><code>이 사이트에 YBM DS를 옮겨 오려고 해. 아직 고치지 말고 먼저 살펴봐 줘.
+문서: https://luvms012-rgb.github.io/ybm-ds/site/llms.txt
+공통 &lt;head&gt;가 있는 파일, CSS 파일, 자주 쓰는 색과 부품(버튼, 입력, 표)을 정리하고 어느 화면부터 바꿀지 순서를 제안해 줘.</code></pre>
+</figure>
+<h3>2. DS 넣기</h3>
+<p>공통 &lt;head&gt;에 넣습니다. DS는 기존 CSS보다 약하게 들어가 지금 화면이 거의 바뀌지 않습니다.</p>
+<figure class="ds-codeblock" data-wrap>
+  <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">text</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
+  <pre class="ds-codeblock__code"><code>이 사이트의 공통 &lt;head&gt;에 YBM DS를 넣어 줘.
+문서: https://luvms012-rgb.github.io/ybm-ds/site/llms.txt
+지금 화면이 바뀌면 안 되니, 넣은 뒤 달라진 화면이 있으면 알려 줘.</code></pre>
+</figure>
+<h3>3. 화면 하나씩 바꾸기</h3>
+<p>한 번에 다 바꾸지 않고 화면마다 대괄호 안만 바꿔 붙여 넣습니다.</p>
+<figure class="ds-codeblock" data-wrap>
+  <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">text</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
+  <pre class="ds-codeblock__code"><code>[바꿀 화면, 예: 회원 정보 수정] 화면을 YBM DS 컴포넌트로 바꿔 줘.
+문서: https://luvms012-rgb.github.io/ybm-ds/site/llms.txt
+서버 코드와 스크립트가 쓰는 class, id, name 은 그대로 두고, 바꾸기 전후 화면을 비교해서 보여 줘.</code></pre>
+</figure>
+<p class="site-note">DS는 CSS <code>@layer</code>를 씁니다. Chrome 99, Safari 15.4 보다 오래된 브라우저에서는 DS가 적용되지 않습니다.</p>
 
 <h2 id="theme">다크 모드<a class="site-anchor" href="#theme" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
 <p><code>html</code>에 속성 하나를 붙이면 모든 색이 어두운 화면용으로 바뀝니다. 색을 토큰으로만 썼다면 따로 고칠 것이 없습니다.</p>
@@ -132,10 +130,10 @@
 <thead><tr><th scope="col">파일</th><th scope="col">내용</th></tr></thead>
 <tbody><tr><td><a class="ds-link" href="llms.txt" target="_blank" rel="noopener">llms.txt</a></td><td>전체 목차와 지킬 규칙입니다. AI가 여기서 시작합니다.</td></tr>
 <tr><td><a class="ds-link" href="llms-full.txt" target="_blank" rel="noopener">llms-full.txt</a></td><td>모든 문서를 한 파일로 모았습니다.</td></tr>
-<tr><td>페이지별 <code>.md</code></td><td>문서 제목 아래 <b>Markdown</b> 메뉴에서 그 페이지만 복사합니다.</td></tr>
 <tr><td><a class="ds-link" href="https://luvms012-rgb.github.io/ybm-ds/components.json" target="_blank" rel="noopener">components.json</a></td><td>쓸 수 있는 컴포넌트와 속성 목록입니다.</td></tr>
 <tr><td><a class="ds-link" href="https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/components.css" target="_blank" rel="noopener">components.css</a></td><td>컴포넌트마다 머리 주석에 HTML 구조가 있습니다.</td></tr>
-<tr><td><a class="ds-link" href="https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/tokens.css" target="_blank" rel="noopener">tokens.css</a></td><td>색, 간격, 글자 크기 같은 <code>--ds-*</code> 토큰입니다.</td></tr></tbody></table></div>
+<tr><td><a class="ds-link" href="https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/tokens.css" target="_blank" rel="noopener">tokens.css</a></td><td>색, 간격, 글자 크기 같은 <code>--ds-*</code> 토큰입니다.</td></tr>
+<tr><td>페이지별 <code>.md</code></td><td>문서 제목 아래 Markdown 메뉴에서 그 페이지만 복사합니다.</td></tr></tbody></table></div>
 <p>Figma 변수 이름이 CSS 변수 이름과 같아, AI에 <a class="ds-link" href="https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=2608-2" target="_blank" rel="noopener">Figma</a> 화면을 주면 같은 토큰 이름으로 옮깁니다.</p>
 
 
@@ -143,7 +141,7 @@
 <footer class="site-footer">
   <div class="site-footer__brand"><img src="assets/logo-ybmnet.svg" alt="YBM NET" width="81" height="24"><p class="site-footer__copy">© 2026 YBM NET. All rights reserved.</p></div>
   <nav class="site-footer__nav" aria-label="사이트 메뉴">
-    <div><p class="site-footer__title">메뉴</p><a href="index.html">Get Started</a><a href="foundations/index.html">Foundations</a><a href="components/index.html">Components</a><a href="templates/index.html">Templates</a><a href="updates.html">Updates</a></div>
+    <div><p class="site-footer__title">메뉴</p><a href="index.html">Get Started</a><a href="foundations/breakpoint.html">Foundations</a><a href="components/index.html">Components</a><a href="templates/index.html">Templates</a><a href="updates.html">Updates</a></div>
     <div><p class="site-footer__title">더 보기</p><a href="https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=2608-2" target="_blank" rel="noopener">Figma</a><a href="https://github.com/luvms012-rgb/ybm-ds" target="_blank" rel="noopener">GitHub</a></div>
   </nav>
 </footer>

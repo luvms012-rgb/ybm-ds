@@ -40,7 +40,6 @@
 - [Motion](https://luvms012-rgb.github.io/ybm-ds/site/foundations/motion.md): 움직임은 화면이 바뀌는 과정을 자연스럽게 이어 줍니다.
 - [Color Roles](https://luvms012-rgb.github.io/ybm-ds/site/foundations/color-roles.md): 역할 색의 규칙과 전체 토큰
 - [Color Palette](https://luvms012-rgb.github.io/ybm-ds/site/foundations/color-palette.md): 팔레트 색의 단계와 전체 토큰
-- [Foundations](https://luvms012-rgb.github.io/ybm-ds/site/foundations/index.md): 색, 글자, 간격처럼 화면의 바탕이 되는 토큰과 원칙
 - [Iconography](https://luvms012-rgb.github.io/ybm-ds/site/foundations/icons.md)
 - [Icon Library](https://luvms012-rgb.github.io/ybm-ds/site/foundations/icons-library.md): 아이콘을 찾아 클래스와 SVG 를 복사합니다
 

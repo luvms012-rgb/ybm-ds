@@ -182,15 +182,16 @@ const btn = (href, label, variant = 'neutralWeak', size = 'small', icon = '') =>
 // Get Started 와 Updates 는 왼쪽 메뉴 없이 한 칸(레퍼런스 B Get Started), Foundations 는 왼쪽 메뉴에 Overview + 항목
 // 테마는 11-03 사용자 "우선 숨김, 처음부터 다시": 메뉴, Usage 테마 절, AI 목록, llms.txt 에서 뺀다. 다시 열 때 true
 const SHOW_THEMES = false;
-const NAV = [['get-started', 'Get Started', 'index.html'], ['foundations', 'Foundations', 'foundations/index.html'], ['components', 'Components', 'components/index.html'], ['templates', 'Templates', 'templates/index.html'], ['updates', 'Updates', 'updates.html'], ...(SHOW_THEMES ? [['themes', 'Themes', 'themes/index.html']] : [])];
 // 왼쪽 메뉴는 영문, 묶음은 두고 묶음 안은 ABC 순 (레퍼런스 B)
 const az = (list) => [...list].sort((a, b) => a[1].localeCompare(b[1], 'en'));
 // 파운데이션: 항목마다 한 페이지 (슬러그, 영문 이름)
 const FOUND = az([['color', 'Color'], ['typography', 'Typography'], ['spacing', 'Spacing'], ['shape', 'Radius'], ['elevation', 'Elevation'], ['motion', 'Motion'], ['icons', 'Iconography'], ['breakpoint', 'Breakpoint']]);
-// Get Started 문서 (왼쪽 메뉴 없음): 첫 화면과 AI & Tools
+const NAV = [['get-started', 'Get Started', 'index.html'], ['foundations', 'Foundations', `foundations/${FOUND[0][0]}.html`], ['components', 'Components', 'components/index.html'], ['templates', 'Templates', 'templates/index.html'], ['updates', 'Updates', 'updates.html'], ...(SHOW_THEMES ? [['themes', 'Themes', 'themes/index.html']] : [])];
+// Get Started 문서 (왼쪽 메뉴 없음): 첫 화면 하나 (AI & Tools 는 11-04 합침)
 const GS_ORDER = [['index.html', 'Get Started']];
-// Foundations 왼쪽 메뉴와 이전 / 다음 순서: Overview 다음 항목 ABC 순. Color 와 Iconography 의 탭 쪽은 첫 탭과 같은 자리
-const FD_ORDER = [['foundations/index.html', 'Overview'], ...FOUND.map(([s, l]) => [`foundations/${s}.html`, l])];
+// Foundations 왼쪽 메뉴와 이전 / 다음 순서: 항목 ABC 순. Color 와 Iconography 의 탭 쪽은 첫 탭과 같은 자리
+// Overview 쪽은 11-04 사용자 "파운데이션 오버뷰 삭제, 바로 브레이크 포인트로"로 뺐다. 메뉴는 첫 항목(ABC 순)부터
+const FD_ORDER = [...FOUND.map(([s, l]) => [`foundations/${s}.html`, l])];
 const fdPager = (file) => { const i = FD_ORDER.findIndex(([f]) => f === file); const p = FD_ORDER[i - 1], n = FD_ORDER[i + 1]; return [p && { href: '{root}' + p[0], label: p[1] }, n && { href: '{root}' + n[0], label: n[1] }]; };
 
 // 컴포넌트 찾기 칸의 한글 낱말 (site/src/search-ko.json, 키는 영어 이름). 한글로 찾아도 영어 이름 컴포넌트가 나온다
@@ -323,40 +324,42 @@ const write = (o) => written.push(page(o));
 /* ---------------------------------------------------------------- Get Started */
 const CSS_LINK = `<link rel="stylesheet" href="${PUBLIC}/dist/ybm-ds.css">
 <script src="${PUBLIC}/dist/ybm-ds.js" defer></script>`;
-// AI 요청 글 (11-04 사용자 "내가 맡은 사이트에 이식한다는 실제 가정으로"): 모두 같은 세 줄 틀 - 할 일 / 문서 주소 / 조건 한 가지
-// 운영 중인 사이트에 옮기는 순서(survey > insert > brand > page > check)와 새로 만들 때(install > screen). 지킬 규칙은 llms.txt 머리(LLMS_RULES)
+// AI 요청 글 (11-04 사용자 "프롬프트가 너무 디테일", "좀 더 다듬어"): 네 개 모두 같은 세 줄 틀 - 할 일 / 문서 주소 / 조건 한 가지
+// 지킬 규칙은 llms.txt 머리(LLMS_RULES)에 두고 요청 글에는 쓰지 않는다
 const DOC_LINE = `문서: ${SITE_URL}llms.txt`;
-const P = {
-  survey: ['1. 사이트 살펴보기', '아직 아무것도 고치지 않고, 무엇을 어떤 순서로 바꿀지 먼저 정합니다.',
-    `이 사이트에 YBM DS를 옮겨 오려고 해. 아직 고치지 말고 먼저 살펴봐 줘.
-${DOC_LINE}
-공통 <head>가 있는 파일, CSS 파일, 자주 쓰는 색과 부품(버튼, 입력, 표)을 정리하고 어느 화면부터 바꿀지 순서를 제안해 줘.`],
-  insert: ['2. DS 넣기', '공통 <head>에 DS를 넣습니다. 이 단계에서는 화면이 거의 바뀌지 않습니다.',
-    `이 사이트의 공통 <head>에 YBM DS를 넣어 줘.
-${DOC_LINE}
-지금 화면이 바뀌면 안 되니, 넣은 뒤 달라진 화면이 있으면 알려 줘.`],
-  brand: ['3. 브랜드 컬러 맞추기', '사이트의 대표 색을 DS 브랜드 컬러로 옮깁니다.',
-    `이 사이트의 대표 색을 찾아서 YBM DS 브랜드 컬러로 맞춰 줘.
-${DOC_LINE}
-대표 색이 없거나 여러 개면 나에게 먼저 물어보고, 서비스 CSS 한 파일에만 넣어 줘.`],
-  page: ['4. 화면 하나씩 바꾸기', '한 번에 다 바꾸지 않고 화면 하나씩 바꿉니다. 대괄호 안만 바꿔 화면마다 붙여 넣습니다.',
-    `[바꿀 화면, 예: 회원 정보 수정] 화면을 YBM DS 컴포넌트로 바꿔 줘.
-${DOC_LINE}
-서버 코드와 스크립트가 쓰는 class, id, name 은 그대로 두고, 바꾸기 전후 화면을 비교해서 보여 줘.`],
-  check: ['5. 규칙 점검하기', '바꾼 화면이 DS 규칙을 지키는지 확인합니다.',
-    `이 화면이 YBM DS 규칙을 지키는지 점검하고 고쳐 줘.
-${DOC_LINE}
-고친 곳은 목록으로 알려 줘.`],
-  install: ['DS 설치하기', '새 프로젝트에 DS를 넣습니다.',
+const prompts = [
+  ['DS 설치하기', '지금 만드는 프로젝트에 DS를 넣습니다.',
     `이 프로젝트에 YBM DS를 설치해 줘.
 ${DOC_LINE}
 문서의 '지킬 것'을 먼저 읽고 그대로 따라 줘.`],
-  screen: ['화면 만들기', '대괄호 안만 내 상황에 맞게 바꿉니다.',
+  ['화면 만들기', '만들고 싶은 화면을 말로 설명합니다.',
     `YBM DS로 [만들 화면, 예: 회원 목록 화면]을 만들어 줘.
 ${DOC_LINE}
 비슷한 화면이 Templates에 있으면 그 화면에서 시작해 줘.`],
-};
-const promptBlock = (k, level = 'h3') => `<${level}>${esc(P[k][0])}</${level}>\n<p>${esc(P[k][1])}</p>\n${codeblock(P[k][2], 'text', ' data-wrap')}`;
+  ['규칙 점검하기', '이미 만든 화면을 점검합니다.',
+    `이 화면이 YBM DS 규칙을 지키는지 점검하고 고쳐 줘.
+${DOC_LINE}
+고친 곳은 목록으로 알려 줘.`],
+  ['브랜드 컬러 입히기', '서비스에 쓸 때 이어서 붙여 넣습니다.',
+    `이 서비스의 브랜드 컬러를 나에게 먼저 물어봐 줘.
+${DOC_LINE}
+받은 색으로 브랜드 컬러 10단계와 다크 모드 값을 만들어 서비스 CSS에 넣고, 바뀐 화면을 보여 줘.`],
+];
+// 운영 중인 사이트에 옮길 때만 쓰는 요청 글 (11-04 사용자 "내 사이트 옮기기는 다음 단계"). 브랜드 컬러와 규칙 점검은 위 prompts 를 그대로 쓴다
+const MIGRATE = [
+  ['1. 사이트 살펴보기', '아직 고치지 않고, 무엇을 어떤 순서로 바꿀지 먼저 정합니다.',
+    `이 사이트에 YBM DS를 옮겨 오려고 해. 아직 고치지 말고 먼저 살펴봐 줘.
+${DOC_LINE}
+공통 <head>가 있는 파일, CSS 파일, 자주 쓰는 색과 부품(버튼, 입력, 표)을 정리하고 어느 화면부터 바꿀지 순서를 제안해 줘.`],
+  ['2. DS 넣기', '공통 <head>에 넣습니다. DS는 기존 CSS보다 약하게 들어가 지금 화면이 거의 바뀌지 않습니다.',
+    `이 사이트의 공통 <head>에 YBM DS를 넣어 줘.
+${DOC_LINE}
+지금 화면이 바뀌면 안 되니, 넣은 뒤 달라진 화면이 있으면 알려 줘.`],
+  ['3. 화면 하나씩 바꾸기', '한 번에 다 바꾸지 않고 화면마다 대괄호 안만 바꿔 붙여 넣습니다.',
+    `[바꿀 화면, 예: 회원 정보 수정] 화면을 YBM DS 컴포넌트로 바꿔 줘.
+${DOC_LINE}
+서버 코드와 스크립트가 쓰는 class, id, name 은 그대로 두고, 바꾸기 전후 화면을 비교해서 보여 줘.`],
+];
 // llms.txt 머리에 붙는 규칙 (AI 가 요청 글 대신 여기서 읽는다)
 const LLMS_RULES = `## 지킬 것
 
@@ -388,18 +391,27 @@ write({
   ${metaLinks({ figma: LINKS.figmaUrl('2608:2'), code: GITHUB })}
 </header>
 
-<h2 id="ai">내 사이트에 옮기기</h2>
-<p>운영 중인 사이트에 DS를 옮겨 오는 순서입니다. 단계마다 아래 글을 AI 코딩 도구(ChatGPT, Claude, Cursor 등)에 붙여 넣습니다. 지킬 규칙은 AI가 문서에서 읽어 갑니다.</p>
-${['survey', 'insert', 'brand', 'page', 'check'].map((k) => promptBlock(k)).join('\n')}
-<p class="site-note">DS는 CSS <code>@layer</code>를 씁니다. Chrome 99, Safari 15.4 보다 오래된 브라우저에서는 DS가 적용되지 않습니다.</p>
-
-<h2 id="new">새로 만들기</h2>
-<p>새 프로젝트나 새 화면은 아래 두 글로 시작합니다.</p>
-${['install', 'screen'].map((k) => promptBlock(k)).join('\n')}
+<h2 id="ai">AI로 시작하기</h2>
+<p>아래 글을 AI 코딩 도구(ChatGPT, Claude, Cursor 등)에 붙여 넣으면 됩니다. 지킬 규칙은 AI가 문서에서 읽어 갑니다.</p>
+<h3>${prompts[0][0]}</h3>
+${codeblock(prompts[0][2], 'text', ' data-wrap')}
+<h3>${prompts[3][0]}</h3>
+<p>서비스에 쓸 때 이어서 붙여 넣습니다.</p>
+${codeblock(prompts[3][2], 'text', ' data-wrap')}
+<h3>${prompts[1][0]}</h3>
+<p>대괄호 안만 내 상황에 맞게 바꿉니다.</p>
+${codeblock(prompts[1][2], 'text', ' data-wrap')}
+<h3>${prompts[2][0]}</h3>
+${codeblock(prompts[2][2], 'text', ' data-wrap')}
 
 <h2 id="start">직접 시작하기</h2>
 <p><code>&lt;head&gt;</code>에 두 줄을 넣으면 글꼴, 토큰, 아이콘, 컴포넌트가 함께 들어옵니다. 쓰는 법은 <a class="ds-link" href="components/index.html">Components</a>에 있습니다.</p>
 ${codeblock(CSS_LINK)}
+
+<h2 id="migrate">내 사이트에 옮기기</h2>
+<p>운영 중인 사이트에 옮길 때는 한 번에 다 바꾸지 않고 아래 순서로 갑니다. 브랜드 컬러와 규칙 점검은 위 <a class="ds-link" href="#ai">AI로 시작하기</a>의 글을 그대로 씁니다.</p>
+${MIGRATE.map(([t, d, p]) => `<h3>${esc(t)}</h3>\n<p>${esc(d)}</p>\n${codeblock(p, 'text', ' data-wrap')}`).join('\n')}
+<p class="site-note">DS는 CSS <code>@layer</code>를 씁니다. Chrome 99, Safari 15.4 보다 오래된 브라우저에서는 DS가 적용되지 않습니다.</p>
 
 <h2 id="theme">다크 모드</h2>
 <p><code>html</code>에 속성 하나를 붙이면 모든 색이 어두운 화면용으로 바뀝니다. 색을 토큰으로만 썼다면 따로 고칠 것이 없습니다.</p>
@@ -410,10 +422,10 @@ ${codeblock('<html lang="ko" data-theme="dark">')}
 ${table(['파일', '내용'], [
   [`<a class="ds-link" href="llms.txt" target="_blank" rel="noopener">llms.txt</a>`, '전체 목차와 지킬 규칙입니다. AI가 여기서 시작합니다.'],
   [`<a class="ds-link" href="llms-full.txt" target="_blank" rel="noopener">llms-full.txt</a>`, '모든 문서를 한 파일로 모았습니다.'],
-  ['페이지별 <code>.md</code>', '문서 제목 아래 <b>Markdown</b> 메뉴에서 그 페이지만 복사합니다.'],
   [`<a class="ds-link" href="${PUBLIC}/components.json" target="_blank" rel="noopener">components.json</a>`, '쓸 수 있는 컴포넌트와 속성 목록입니다.'],
   [`<a class="ds-link" href="${RAW}/dist/components.css" target="_blank" rel="noopener">components.css</a>`, '컴포넌트마다 머리 주석에 HTML 구조가 있습니다.'],
   [`<a class="ds-link" href="${RAW}/dist/tokens.css" target="_blank" rel="noopener">tokens.css</a>`, '색, 간격, 글자 크기 같은 <code>--ds-*</code> 토큰입니다.'],
+  ['페이지별 <code>.md</code>', '문서 제목 아래 Markdown 메뉴에서 그 페이지만 복사합니다.'],
   ...(SHOW_THEMES ? [['Themes', '테마 CSS 주소와 어울리는 서비스입니다.']] : []),
 ])}
 <p>Figma 변수 이름이 CSS 변수 이름과 같아, AI에 <a class="ds-link" href="${LINKS.figmaUrl('2608:2')}" target="_blank" rel="noopener">Figma</a> 화면을 주면 같은 토큰 이름으로 옮깁니다.</p>
@@ -474,7 +486,7 @@ const foundPages = {
 ${codeblock(`.my-card {\n  background: var(--ds-color-bg-layer-default);\n  color: var(--ds-color-fg-neutral);\n  border: 1px solid var(--ds-color-stroke-neutral-muted);\n}`, 'css')}
 <h3>브랜드 컬러 바꾸기</h3>
 <p>서비스 대표 색 하나만 정하면 됩니다. 아래 글을 AI에 붙여 넣으면 나머지 단계와 다크 모드 값까지 만들어 넣습니다.</p>
-${codeblock(P.brand[2], 'text', ' data-wrap')}
+${codeblock(prompts[3][2], 'text', ' data-wrap')}
 <p>직접 넣을 때는 서비스 CSS에서 대표 색을 <code>brand-600</code>에 넣고, 나머지 단계를 같은 색의 진하기로 채웁니다.</p>
 ${codeblock(`/* 서비스 CSS - DS 다음에 불러온다 */\n:root {\n  --ds-color-palette-brand-600: #12a150;  /* 대표 색: 주 버튼, 링크 */\n  --ds-color-palette-brand-700: #0d7d3e;  /* 한 단계 진하게: 눌림 */\n  --ds-color-palette-brand-100: #e6f6ee;  /* 아주 옅게: 옅은 배경 */\n  /* 나머지 단계도 같은 색으로 채운다 */\n}`, 'css')}
 <h2 id="practices">사용 지침</h2>
@@ -688,15 +700,11 @@ write({
 ${table(['토큰', '값'], palTokens.map((v) => { const l = resolve(LIGHT, `var(${v})`), d = resolve(DARK, `var(${v})`); return [`<code>${v}</code>`, `${swatch2(l, d)}<code>${esc(l)} / ${esc(d)}</code>`]; }))}`,
 });
 
-// Foundations 첫 쪽 (레퍼런스 B Foundations Overview): 항목마다 카드
-write({
-  file: 'foundations/index.html', section: 'foundations', title: 'Foundations', desc: '색, 글자, 간격처럼 화면의 바탕이 되는 토큰과 원칙', pager: fdPager('foundations/index.html'), layout: 'wide',
-  body: `<header><h1 class="site-h1">Foundations</h1><p class="site-lead">색, 글자, 간격처럼 모든 화면의 바탕이 되는 토큰과 원칙입니다.</p></header>
-<h2 id="list">항목</h2>
-<div class="site-grid site-grid--hub">
-${FOUND.map(([sl, en]) => hubCard(`${sl}.html`, en, sl === 'icons' ? '아이콘은 정보와 기능을 빠르게 알아보도록 돕습니다.' : foundPages[sl].lead)).join('\n')}
-</div>`,
-});
+// 예전 Foundations Overview 주소는 첫 항목으로 넘긴다 (11-04 Overview 삭제)
+fs.writeFileSync(path.join(SITE, 'foundations/index.html'), `<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=${FOUND[0][0]}.html"><title>Foundations - YBM DS</title></head><body><a href="${FOUND[0][0]}.html">${esc(FOUND[0][1])}</a></body></html>
+`);
+fs.rmSync(path.join(SITE, 'foundations/index.md'), { force: true });
 
 // 아이콘
 const iconNames = [...new Set([...iconsCss.matchAll(/\.ds-icon--([a-z0-9-]+)\s*\{\s*--ds-icon:/g)].map((m) => m[1]))].sort();
