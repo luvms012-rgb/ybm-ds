@@ -329,7 +329,7 @@ const CSS_LINK = `<link rel="stylesheet" href="${PUBLIC}/dist/ybm-ds.css">
 // 지킬 규칙은 llms.txt 머리(LLMS_RULES)에 두고 요청 글에는 쓰지 않는다
 const DOC_LINE = `문서: ${SITE_URL}llms.txt`;
 const prompts = [
-  ['DS 설치하기', '지금 만드는 프로젝트에 DS를 넣습니다.',
+  ['설치하기', '지금 만드는 프로젝트에 DS를 넣습니다.',
     `이 프로젝트에 YBM DS를 설치해 줘.
 ${DOC_LINE}
 문서의 '지킬 것'을 먼저 읽고 그대로 따라 줘.`],
