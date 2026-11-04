@@ -44,12 +44,7 @@ git clone https://github.com/luvms012-rgb/ybm-ds.git
 
 ## 3. 진행 상황
 
-- **이어하기 (2026-11-04 사용자, 순서대로)**
-  1. 컴포넌트 예시(site/src/examples/part0 ~ 4.json, 컴포넌트마다 이름, 쓰임 설명, 실제 화면 미리보기 2 ~ 3개) 마무리 후 사이트 전체가 DS 규칙대로인지 전수 검사
-  2. 템플릿 67종 전체가 DS 규칙대로인지 전수 검사
-  3. 모든 마크다운(.md, llms.txt, llms-full.txt)이 화면과 같은지, 위치(주소)가 맞는지 검수
-  4. GitHub 저장소 내용과 로컬, 라이브가 모두 일치하는지 전수 검사
-  5. Figma 를 뺀 모든 것(사이트, dist, components.json, README, 템플릿, 마크다운)이 서로 완벽히 싱크되는지 전수 검사
+- **끝냄, 배포함 (2026-11-04) 이어하기 1 ~ 5 전수 검사** - 1) 사이트 158쪽: 없는 클래스, 아이콘, 토큰 0. 사이트 CSS 의 px 글자 크기와 hex 를 토큰으로, 컴포넌트 이름 가운뎃점을 / 로. 2) 템플릿 67종: 생성기의 px 글자 크기, 숫자 굵기, rgb 색, 가운뎃점(구분 " / ", 계좌 가림 "****"), 없는 Callout 클래스(__body, __desc), 없는 토큰 고침. 다듬은 템플릿 설명은 생성기로 옮겨 생성기와 templates.json 이 같다. 3) 마크다운 84쪽: 위치, 머리 주소, 제목 순서 모두 맞음. llms.txt 주소 뒤에 조사가 붙던 것 고침. site/ 의 CLAUDE.md 등 작업 메모 4개는 llms 목록 밖. 4) 로컬 = GitHub(같은 커밋), 라이브 파일 347개 내용이 로컬과 같음(.gitignore 는 Pages 가 내보내지 않음). 5) components.json, components.css 머리 주석, README, index.html, 사이트 페이지, 예시 자료, Figma 메모, 한글 찾기 낱말, 템플릿 목록과 페이지, 진입 파일, 이름 yds, 토큰 접두어 모두 같음. 토큰, 템플릿, 사이트를 다시 만들어도 바뀌는 파일 0. 검사 스크립트는 세션 scratchpad audit1 ~ 5.mjs (다시 쓸 때는 옮겨 둘 것). Figma 에 맞출 것(최종 검토 때): 이름 yds, 코드 이름 --ds-, Segmented 굵기 Medium / SemiBold, 컴포넌트 설명 문장
 - **이어서 할 것 (2026-11-02 회사 세션 끝, 다음 세션은 여기부터)**
   1. **Figma 최종 검토** - 사용자: "피그마는 최종본을 가장 마지막에 검토". 집에서 시킨 Figma 작업이 끝난 뒤에만 한다. 그때 맞출 것: ① Dialog 제목 Bold(CSS 는 11-02 SemiBold → Bold) ② 컴포넌트 설명 71개(`site/src/figma-notes.json` lead 를 새로 씀, `node sync.mjs docs` 로 문서 프레임에 반영) ③ Avatar 묶음 고리 색 변수(CSS 전용, Figma 는 그대로 둬도 됨) ④ DS 예시 문구(시험 → 주문, 배송) 가 Figma 문서 Examples 에도 있으면 같이. ⑤ Table 부품을 11-03 CSS 개편대로(머리줄 바탕 없음, 위 진한 선, 행 56/48, 두 줄 칸, 묶음 행). ⑥ 11-03 DS 선택지: Text Link small, Segmented 높이 32/40, Card subtle 와 small 모서리 lg, Image Frame radius. ⑦ Card 제목 18/16, Chip Tabs/Tabs inset none, Card 안 Table 선. ⑧ Avatar 이니셜 색 fg/neutral-muted, Tabs 선택 안 됨 글자 fg/neutral-subtle.
   2. **템플릿 문구 일반화 (사용자 답 대기)** - 생성기 `site/templates/gen/` 의 content.mjs, dashboard.mjs, form.mjs, tools.mjs 에 "토익 실전반", "시험 접수 대행", "시험 직전 단기 강좌" 같은 문구가 남아 있다. 사용자가 바꾸라고 하면 일반 문구로 바꾸고 `node site/templates/gen/run.mjs` → `node site/build.mjs`.
