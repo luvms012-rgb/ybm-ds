@@ -429,20 +429,21 @@ ${codeTabs([
 
 <h2 id="files">AI가 읽는 파일</h2>
 <p>주소를 알려 주면 AI가 필요한 것을 골라 읽습니다. 주소를 열지 못하는 도구에는 <code>llms-full.txt</code>를 첨부합니다.</p>
-${table(['파일', '내용'], [
-  [`<a class="ds-link" href="llms-full.txt" target="_blank" rel="noopener">llms-full.txt</a>`, '모든 문서를 한 파일로 모았습니다.'],
-  [`<a class="ds-link" href="llms.txt" target="_blank" rel="noopener">llms.txt</a>`, '전체 목차와 지킬 규칙입니다. AI가 여기서 시작합니다.'],
-  [`<a class="ds-link" href="ai/AGENTS.md" target="_blank" rel="noopener">AGENTS.md</a>`, '프로젝트 맨 위 폴더에 두면 AI 도구가 늘 읽는 규칙 파일입니다.'],
-  [`<a class="ds-link" href="ai/CLAUDE.md" target="_blank" rel="noopener">CLAUDE.md</a>` + ', ' + `<a class="ds-link" href="ai/yds.mdc" target="_blank" rel="noopener">yds.mdc</a>`, 'Claude, Cursor용 규칙 파일입니다. 내용은 AGENTS.md와 같습니다.'],
-  [`<a class="ds-link" href="${PUBLIC}/components.json" target="_blank" rel="noopener">components.json</a>`, '쓸 수 있는 컴포넌트와 속성 목록입니다.'],
-  [`<a class="ds-link" href="${RAW}/dist/components.css" target="_blank" rel="noopener">components.css</a>`, '컴포넌트마다 머리 주석에 HTML 구조가 있습니다.'],
-  [`<a class="ds-link" href="${RAW}/dist/tokens.css" target="_blank" rel="noopener">tokens.css</a>`, '색, 간격, 글자 크기 같은 <code>--ds-*</code> 토큰입니다.'],
-  [`<a class="ds-link" href="ai/icons.json" target="_blank" rel="noopener">icons.json</a>`, '쓸 수 있는 아이콘 이름과 쓰임입니다.'],
-  [`<a class="ds-link" href="ai/yds-check.mjs" target="_blank" rel="noopener">yds-check.mjs</a>`, '<code>node yds-check.mjs 폴더</code>로 규칙을 어긴 곳을 찾습니다.'],
-  [`<a class="ds-link" href="${PUBLIC}/tokens/design-tokens.json" target="_blank" rel="noopener">design-tokens.json</a>`, '표준 토큰 형식입니다. 디자인 도구와 토큰 변환기에서 읽습니다.'],
-  [`<a class="ds-link" href="${PUBLIC}/tokens/tokens.js" target="_blank" rel="noopener">tokens.js</a>`, '스크립트에서 토큰 값을 쓸 때 불러옵니다.'],
-  [`<a class="ds-link" href="${PUBLIC}/tokens/tailwind.preset.js" target="_blank" rel="noopener">tailwind.preset.js</a>`, 'Tailwind에 yds 토큰을 연결합니다.'],
-  ['페이지별 <code>.md</code>', '문서 제목 아래 Markdown 메뉴에서 그 페이지만 복사합니다.'],
+${table(['파일', '대상', '내용'], [
+  [`<a class="ds-link" href="llms-full.txt" target="_blank" rel="noopener">llms-full.txt</a>`, '<span class="site-who"><span class="ds-badge" data-tone="informative">AI</span></span>', '모든 문서를 한 파일로 모았습니다.'],
+  [`<a class="ds-link" href="llms.txt" target="_blank" rel="noopener">llms.txt</a>`, '<span class="site-who"><span class="ds-badge" data-tone="informative">AI</span></span>', '전체 목차와 지킬 규칙입니다. AI가 여기서 시작합니다.'],
+  [`<a class="ds-link" href="ai/AGENTS.md" target="_blank" rel="noopener">AGENTS.md</a>`, '<span class="site-who"><span class="ds-badge" data-tone="informative">AI</span></span>', '프로젝트 맨 위 폴더에 두면 AI 도구가 늘 읽는 규칙 파일입니다.'],
+  [`<a class="ds-link" href="ai/CLAUDE.md" target="_blank" rel="noopener">CLAUDE.md</a>` + ', ' + `<a class="ds-link" href="ai/yds.mdc" target="_blank" rel="noopener">yds.mdc</a>`, '<span class="site-who"><span class="ds-badge" data-tone="informative">AI</span></span>', 'Claude, Cursor용 규칙 파일입니다. 내용은 AGENTS.md와 같습니다.'],
+  [`<a class="ds-link" href="${PUBLIC}/components.json" target="_blank" rel="noopener">components.json</a>`, '<span class="site-who"><span class="ds-badge" data-tone="informative">AI</span><span class="ds-badge">개발자</span></span>', '쓸 수 있는 컴포넌트와 속성 목록입니다.'],
+  [`<a class="ds-link" href="${RAW}/dist/components.css" target="_blank" rel="noopener">components.css</a>`, '<span class="site-who"><span class="ds-badge" data-tone="informative">AI</span><span class="ds-badge">개발자</span></span>', '컴포넌트마다 머리 주석에 HTML 구조가 있습니다.'],
+  [`<a class="ds-link" href="${RAW}/dist/tokens.css" target="_blank" rel="noopener">tokens.css</a>`, '<span class="site-who"><span class="ds-badge" data-tone="informative">AI</span><span class="ds-badge">개발자</span></span>', '색, 간격, 글자 크기 같은 <code>--ds-*</code> 토큰입니다.'],
+  [`<a class="ds-link" href="ai/icons.json" target="_blank" rel="noopener">icons.json</a>`, '<span class="site-who"><span class="ds-badge" data-tone="informative">AI</span><span class="ds-badge">개발자</span></span>', '쓸 수 있는 아이콘 이름과 쓰임입니다.'],
+  [`<a class="ds-link" href="ai/yds-check.mjs" target="_blank" rel="noopener">yds-check.mjs</a>`, '<span class="site-who"><span class="ds-badge" data-tone="informative">AI</span><span class="ds-badge">개발자</span></span>', '<code>node yds-check.mjs 폴더</code>로 규칙을 어긴 곳을 찾습니다.'],
+  [`<a class="ds-link" href="${PUBLIC}/tokens/design-tokens.json" target="_blank" rel="noopener">design-tokens.json</a>`, '<span class="site-who"><span class="ds-badge">개발자</span><span class="ds-badge" data-tone="positive">디자이너</span></span>', '표준 토큰 형식입니다. 디자인 도구와 토큰 변환기에서 읽습니다.'],
+  [`<a class="ds-link" href="${PUBLIC}/tokens/tokens.js" target="_blank" rel="noopener">tokens.js</a>`, '<span class="site-who"><span class="ds-badge">개발자</span></span>', '스크립트에서 토큰 값을 쓸 때 불러옵니다.'],
+  [`<a class="ds-link" href="${PUBLIC}/tokens/tailwind.preset.js" target="_blank" rel="noopener">tailwind.preset.js</a>`, '<span class="site-who"><span class="ds-badge">개발자</span></span>', 'Tailwind에 yds 토큰을 연결합니다.'],
+  [`<a class="ds-link" href="${LINKS.figmaUrl('2608:2')}" target="_blank" rel="noopener">Figma 라이브러리</a>`, '<span class="site-who"><span class="ds-badge" data-tone="positive">디자이너</span></span>', '컴포넌트와 변수(토큰)입니다. 변수 이름이 CSS 토큰 이름과 같습니다.'],
+  ['페이지별 <code>.md</code>', '<span class="site-who"><span class="ds-badge" data-tone="informative">AI</span></span>', '문서 제목 아래 Markdown 메뉴에서 그 페이지만 복사합니다.'],
   ...(SHOW_THEMES ? [['Themes', '테마 CSS 주소와 어울리는 서비스입니다.']] : []),
 ])}
 <p>Figma 변수와 CSS 변수는 이름이 같습니다. AI에 <a class="ds-link" href="${LINKS.figmaUrl('2608:2')}" target="_blank" rel="noopener">Figma</a> 화면을 주면 같은 토큰으로 옮깁니다.</p>
@@ -951,7 +952,6 @@ ${sections.join('\n')}`,
 const tplGroups = [...new Set(templates.map((t) => t.group))];
 // 분류 칩에 보이는 이름 (값은 templates.json의 영어 group)
 const TPL_GROUP_KO = { Dashboard: '대시보드', Table: '표', Form: '입력 폼', Settings: '설정', Login: '로그인', Tools: '도구', Content: '콘텐츠', 'AI Chat': 'AI 채팅', Gallery: '갤러리', Community: '커뮤니티', Pricing: '요금제', 'My Page': '마이페이지', Commerce: '쇼핑', Exam: '시험 접수', 'Exam B2B': '단체 시험', 'Learning B2B': '기업 러닝' };
-const TPL_FIGMA = JSON.parse(fs.readFileSync(path.join(SITE, 'src/templates.json'), 'utf8')).figmaHeader;
 write({
   file: 'templates/index.html', section: 'templates', title: 'Templates', layout: 'full',
   body: `${hero('Templates', '자주 만드는 화면을 DS 컴포넌트로 미리 조립해 두었습니다.').replace('class="site-hero"', 'class="site-hero site-hero--tpl"')}

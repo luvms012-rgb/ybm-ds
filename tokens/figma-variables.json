@@ -4,7 +4,7 @@
     "dumped": "2026-10-27",
     "schemaVersion": 2,
     "collections": {
-      "YBM DS": {
+      "yds": {
         "modes": [
           "Light",
           "Dark"
@@ -33,7 +33,7 @@
     "note": "Figma 변수 이름, 타입, 모드별 값 및 별칭 스냅샷. build.py가 이 파일을 읽으며 덮어쓰지 않는다."
   },
   "collections": {
-    "YBM DS": {
+    "yds": {
       "modes": [
         "Light",
         "Dark"

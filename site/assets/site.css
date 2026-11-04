@@ -510,6 +510,9 @@ body[data-side-open] .site-scrim { opacity: 1; pointer-events: auto; }
 .ds-codeblock .hl-c, .site-lib__code .hl-c { color: var(--ds-color-palette-blue-700); }    /* 상수, 숫자, CSS 속성과 변수 */
 .ds-codeblock .hl-t, .site-lib__code .hl-t { color: var(--ds-color-palette-green-700); }   /* 태그, 선택자 */
 .ds-codeblock .hl-m, .site-lib__code .hl-m { color: var(--ds-color-palette-gray-700); }    /* 주석 */
+.site-who { display: inline-flex; flex-wrap: wrap; gap: var(--ds-space-x1); }  /* 파일 표 "대상" 배지 (11-04) */
+.site-doc table:has(.site-who) :is(th, td):nth-child(1) { width: 32%; }
+.site-doc table:has(.site-who) :is(th, td):nth-child(2) { width: 150px; }  /* 대상 칸은 배지 두 개 폭 */
 
 /* 가이드는 브랜드 색 없이 모노톤으로 보여 준다 (2026-11-02 사용자 "가이드에 브랜드 컬러 적용 X").
    브랜드 역할 색을 같은 자리의 neutral 색으로 바꾼다. 서비스는 palette/brand 를 바꿔 자기 브랜드 색을 쓴다(Color 페이지).

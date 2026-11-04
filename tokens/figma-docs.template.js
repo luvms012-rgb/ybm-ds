@@ -18,7 +18,7 @@ const setText = async (t, chars) => { if (!t || t.characters === chars) return; 
 const text = (chars, style, color, name) => { const t = figma.createText(); t.textStyleId = style.id; t.characters = chars; t.fills = [paint(color)]; t.name = name; return t; };
 const GEN = ['Section Header - Best Practices', 'Best Practices', 'Section Header - Examples'];
 
-function bottomLine(f, on) { f.strokes = [paint('stroke/neutral-weak')]; f.strokeAlign = 'INSIDE'; f.strokeTopWeight = 0; f.strokeLeftWeight = 0; f.strokeRightWeight = 0; f.strokeBottomWeight = on ? 1 : 0; }
+function bottomLine(f, on) { f.strokes = [paint('stroke/neutral-muted')];  /* 안쪽 구분선 (11-04 선 색 규칙) */ f.strokeAlign = 'INSIDE'; f.strokeTopWeight = 0; f.strokeLeftWeight = 0; f.strokeRightWeight = 0; f.strokeBottomWeight = on ? 1 : 0; }
 function makeRow(table, first, second, isHead, last) {
   const r = figma.createAutoLayout('HORIZONTAL');
   r.name = isHead ? 'Head' : 'Row'; r.itemSpacing = 24; r.counterAxisAlignItems = 'CENTER';

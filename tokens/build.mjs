@@ -65,7 +65,7 @@ export function build(date, sourcePath = path.join(HERE, 'tokens', 'figma-variab
     }
   }
 
-  const ds = vars('YBM DS');
+  const ds = vars('yds');
   const dsNames = Object.keys(ds);
   const paletteNames = dsNames.filter((n) => n.startsWith('palette/')).map((n) => n.slice(8));
   const naturalStep = (v) => { if (v === '00') return [0, 0]; const i = /^-?\d+$/.test(v) ? parseInt(v, 10) : NaN; return Number.isNaN(i) ? [2, v] : [1, i]; };
@@ -150,7 +150,7 @@ export function build(date, sourcePath = path.join(HERE, 'tokens', 'figma-variab
    --------------------------------------------------------------------------
    ⚠ 이 파일은 tokens/build.mjs 가 figma-variables.json 에서 생성한다. 직접 고치지 말 것.
    생성: ${date} · Figma file 1VCEsFU3xMWuXIntIrZz9i
-          컬렉션 「YBM DS」 Light/Dark · Typography · Shape · Elevation
+          컬렉션 「yds」 Light/Dark · Typography · Shape · Elevation
           (모드는 Light/Dark 하나뿐 — 2026-10-27 글자 배율·모양 테마 모드 삭제)
 
    3계층 구조
@@ -312,7 +312,7 @@ export function build(date, sourcePath = path.join(HERE, 'tokens', 'figma-variab
     shape.set('pill', SHAPE_PILL);
     const d = M([
       ['$meta', M([['name', 'yds'], ['generated', date],
-        ['source', 'Figma 1VCEsFU3xMWuXIntIrZz9i / YBM DS + Typography + Shape + Elevation'],
+        ['source', 'Figma 1VCEsFU3xMWuXIntIrZz9i / yds + Typography + Shape + Elevation'],
         ['note', 'tokens/build.mjs 가 생성한다. 직접 수정하지 말 것.']])],
       ['color', color], ['dimension', dimension],
       ['radius', M(RADIUS.map(([n, v]) => [n, `${int(v)}px`]))], ['shape', shape],
