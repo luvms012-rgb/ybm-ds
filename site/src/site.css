@@ -156,7 +156,7 @@ body[data-side-open] .site-scrim { opacity: 1; pointer-events: auto; }
 .site-eyebrow a { color: inherit; text-decoration: none; }
 .site-eyebrow a:hover { color: var(--ds-color-fg-neutral); }
 .site-h1 { font-size: var(--ds-font-size-t12); line-height: 40px; font-weight: var(--ds-font-weight-semibold); letter-spacing: -0.025em; }  /* 48/52 SemiBold (11-04 사용자 "세미볼드로 다시"). 768 보다 좁으면 32/40 */
-.site-doc header p.site-lead { margin-top: var(--ds-space-x4); color: var(--ds-color-fg-neutral-muted); font-size: var(--ds-font-size-t05); line-height: 24px; font-weight: var(--ds-font-weight-regular); letter-spacing: 0; }
+.site-doc header p.site-lead { margin-top: var(--ds-space-x4); color: var(--ds-color-fg-neutral); font-size: var(--ds-font-size-t05); line-height: 24px; font-weight: var(--ds-font-weight-regular); letter-spacing: 0; }
 @media (min-width: 768px) { .site-h1 { font-size: var(--ds-font-size-t14); line-height: 52px; } }
 .site-doc > * + * { margin-top: var(--ds-space-x4); }
 /* 본문 글자 규칙은 미리보기(.pv-stage, .site-tile__inner) 안의 부품에는 적용하지 않는다. 사이트 CSS 는 cascade layer 밖이라 DS 부품 스타일보다 세서, 그대로 두면 부품 제목에 큰 여백이 생긴다 */
@@ -334,8 +334,10 @@ body[data-side-open] .site-scrim { opacity: 1; pointer-events: auto; }
 .site-frame__code .ds-codeblock__code { max-height: 720px; overflow: auto; }
 
 /* ---- 토큰 / 아이콘 ---- */
-.site-swatches { display: inline-flex; gap: var(--ds-space-x1); margin-right: var(--ds-space-x2); vertical-align: middle; }
-.site-swatch { display: inline-block; width: 20px; height: 20px; border-radius: var(--ds-shape-xs); box-shadow: inset 0 0 0 1px var(--ds-color-stroke-neutral-muted); vertical-align: middle; }
+.site-swatches { display: inline-flex; gap: var(--ds-space-x2); margin-right: var(--ds-space-x2); vertical-align: middle; }
+.site-doc td code:is(.site-hex, .site-tokname) { padding: 0; background: none; vertical-align: middle; }  /* 토큰과 값은 칩 없이 글자만 (레퍼런스 A) */
+.site-doc td code.site-hex { color: var(--ds-color-fg-neutral-muted); }
+.site-swatch { display: inline-block; width: 24px; height: 24px; border-radius: var(--ds-shape-sm); box-shadow: inset 0 0 0 1px var(--ds-color-stroke-neutral-muted); vertical-align: middle; }
 .site-bar { display: inline-block; height: 12px; border-radius: var(--ds-shape-2xs); background: var(--ds-color-bg-brand-solid); vertical-align: middle; }
 .site-shape { display: inline-block; width: 40px; height: 40px; background: var(--ds-color-bg-neutral-muted); box-shadow: inset 0 0 0 1px var(--ds-color-stroke-neutral-weak); vertical-align: middle; }
 .site-shadow { display: inline-block; width: 56px; height: 40px; border-radius: var(--ds-shape-md); background: var(--ds-color-bg-layer-floating); vertical-align: middle; }
@@ -487,7 +489,7 @@ body[data-side-open] .site-scrim { opacity: 1; pointer-events: auto; }
 
 /* ---- Updates (레퍼런스 B): 소식 카드 ---- */
 /* Updates (레퍼런스 A Changelog): 위에 영역 거르기, 날짜 제목 20/28 SemiBold, 종류 이름 13 SemiBold 흐린 글자, 그 아래 목록 */
-.site-doc > .site-release-filter { margin-top: var(--ds-space-x8); }
+.site-doc > .site-release-filter { margin-top: var(--ds-space-x8); padding-inline: 0; }  /* 탭 왼쪽 끝을 제목과 맞춘다 */
 .site-doc > .site-release { margin-top: var(--ds-space-x10); }
 .site-doc .site-release h2:not(.pv-stage *) { margin-top: 0; font-size: var(--ds-font-size-t07); line-height: 28px; }
 .site-release__group { margin-top: var(--ds-space-x4); }
@@ -495,3 +497,7 @@ body[data-side-open] .site-scrim { opacity: 1; pointer-events: auto; }
 .site-doc .site-release ul.site-list { margin-top: var(--ds-space-x2); }
 .site-release li .ds-badge { margin-right: var(--ds-space-x1); vertical-align: 2px; }
 .site-release[hidden], .site-release__group[hidden] { display: none; }
+/* 코드 탭: 위에 Chip Tabs, 아래 고른 칸 하나 */
+.site-doc > .site-codetabs .ds-chiptabs { padding-inline: 0; }
+.site-codetabs__panel { margin-top: var(--ds-space-x3); }
+.site-codetabs__panel[hidden] { display: none; }

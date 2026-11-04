@@ -9,9 +9,9 @@
 <script>try { var t = localStorage.getItem("ybm-site-theme"); if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.dataset.theme = "dark"; } catch (e) {}</script>
 <link rel="icon" href="../assets/logo-ybmnet.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../dist/ybm-ds.css">
-<link rel="stylesheet" href="../assets/site.css?v=1debbdf0">
+<link rel="stylesheet" href="../assets/site.css?v=7a87c39c">
 <script src="../../dist/ybm-ds.js" defer></script>
-<script src="../assets/site.js?v=1debbdf0" defer></script>
+<script src="../assets/site.js?v=7a87c39c" defer></script>
 </head>
 <body class="site">
 <a class="site-skip" href="#main">본문 바로가기</a>
@@ -144,17 +144,17 @@ simple: &lt;nav class=&quot;ds-pagination&quot; data-type=&quot;simple&quot;&gt;
   <span class="ds-pagination__item" data-type="last" href="?p=10" aria-label="마지막 페이지"></span>
 </nav></div></div></div><div class="site-anatomy-table"><div class="ds-table-wrap"><table class="ds-table" data-density="compact">
 <thead><tr><th scope="col">부품</th><th scope="col">설명</th></tr></thead>
-<tbody><tr><td><span class="site-anatomy__part"><b>Item</b><code>ds-pagination__item</code></span></td><td>쪽 번호 버튼입니다.</td></tr>
-<tr><td><span class="site-anatomy__part"><b>Indicator</b><code>ds-pagination__indicator</code></span></td><td>지금 쪽을 알려 주는 표시입니다.</td></tr></tbody></table></div></div>
+<tbody><tr><td><span class="site-anatomy__part"><b>Item</b><code>ds-pagination__item</code></span></td><td>페이지 번호 버튼입니다.</td></tr>
+<tr><td><span class="site-anatomy__part"><b>Indicator</b><code>ds-pagination__indicator</code></span></td><td>지금 페이지를 알려 주는 표시입니다.</td></tr></tbody></table></div></div>
 <h2 id="props">속성<a class="site-anchor" href="#props" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><p>Figma 속성 이름을 그대로 <code>data-*</code> 속성으로 씁니다.</p><div class="ds-table-wrap"><table class="ds-table" data-density="compact">
 <thead><tr><th scope="col">속성</th><th scope="col">값</th></tr></thead>
 <tbody><tr><td><code>type</code></td><td><span class="ds-badge">first</span> <span class="ds-badge">prev</span> <span class="ds-badge">next</span> <span class="ds-badge">last</span> <span class="ds-badge">ellipsis</span> <span class="ds-badge">simple</span></td></tr></tbody></table></div>
 <h2 id="guide">사용 지침<a class="site-anchor" href="#guide" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><div class="ds-table-wrap"><table class="ds-table" data-density="compact">
 <thead><tr><th scope="col">구분</th><th scope="col">내용</th></tr></thead>
-<tbody><tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>번호는 지금 페이지를 포함해 5개(넓으면 7개)까지 보이고, 나머지는 말줄임표로 줄입니다. 첫 번호와 마지막 번호는 늘 보이게 둡니다.</td></tr>
+<tbody><tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>번호는 지금 페이지를 포함해 5개(넓으면 7개)까지 보여 줍니다. 나머지는 말줄임표로 줄입니다. 첫 번호와 마지막 번호는 늘 보이게 둡니다.</td></tr>
 <tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>목록 아래 가운데에 둡니다. 페이지를 옮기면 목록 맨 위로 올라갑니다.</td></tr>
 <tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>지금 페이지 번호는 누를 수 없게 두고 aria-current=&quot;page&quot;를 붙입니다.</td></tr>
-<tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>첫 페이지의 처음, 이전 버튼과 마지막 페이지의 다음, 마지막 버튼은 숨기지 않고 꺼 둡니다.</td></tr>
+<tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>첫 페이지에서는 처음, 이전 버튼을 숨기지 않고 꺼 둡니다. 마지막 페이지의 다음, 마지막 버튼도 같습니다.</td></tr>
 <tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>화살표 버튼에는 aria-label을 꼭 붙입니다.</td></tr>
 <tr><td><b class="ds-badge site-practice" data-tone="critical">Don't</b></td><td>끝없이 이어지는 피드나 &quot;더 보기&quot;가 어울리는 목록에는 쓰지 않습니다.</td></tr></tbody></table></div>
 <h2 id="examples">예시<a class="site-anchor" href="#examples" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><div class="site-example">

@@ -20,7 +20,7 @@
 
 | 부품 | 설명 |
 | --- | --- |
-| **Message**`ds-snackbar__message` | 알리는 내용 글입니다. |
+| **Message**`ds-snackbar__message` | 알릴 내용을 담은 글입니다. |
 | **Action**`ds-snackbar__action` | 바로 실행하는 작은 버튼입니다. |
 
 ## 속성

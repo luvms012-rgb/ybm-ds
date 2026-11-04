@@ -20,7 +20,7 @@
 | 부품 | 설명 |
 | --- | --- |
 | **Floater**`ds-imageframe__floater` | 사진 위에 떠 있는 버튼이나 배지입니다. |
-| **Indicator**`ds-imageframe__indicator` | 여러 장 중 지금 사진을 알리는 표시입니다. |
+| **Indicator**`ds-imageframe__indicator` | 여러 장 가운데 지금 보는 사진을 알려 주는 표시입니다. |
 
 ## 속성
 

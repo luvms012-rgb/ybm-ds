@@ -9,9 +9,9 @@
 <script>try { var t = localStorage.getItem("ybm-site-theme"); if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.dataset.theme = "dark"; } catch (e) {}</script>
 <link rel="icon" href="assets/logo-ybmnet.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../dist/ybm-ds.css">
-<link rel="stylesheet" href="assets/site.css?v=1debbdf0">
+<link rel="stylesheet" href="assets/site.css?v=7a87c39c">
 <script src="../dist/ybm-ds.js" defer></script>
-<script src="assets/site.js?v=1debbdf0" defer></script>
+<script src="assets/site.js?v=7a87c39c" defer></script>
 </head>
 <body class="site">
 <a class="site-skip" href="#main">본문 바로가기</a>
@@ -63,7 +63,7 @@
   <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">text</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
   <pre class="ds-codeblock__code"><code>이 서비스의 브랜드 컬러를 [#12a150]으로 맞춰 줘.
 문서: https://luvms012-rgb.github.io/ybm-ds/site/llms.txt
-이 색을 600 단계로 두고 10단계와 다크 모드 값을 만들어 서비스 CSS에 넣은 뒤, 바뀐 화면을 보여 줘.</code></pre>
+이 색을 600 단계로 두고 나머지 단계와 다크 모드 값을 만들어 서비스 CSS에 넣어 줘. 바뀐 화면도 보여 줘.</code></pre>
 </figure>
 <h3>화면 만들기</h3>
 <p>대괄호 안만 내 상황에 맞게 바꿉니다.</p>
@@ -90,39 +90,50 @@
 </figure>
 
 <h2 id="migrate">내 사이트에 적용해보기<a class="site-anchor" href="#migrate" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
-<p>운영 중인 사이트에 적용할 때는 한 번에 다 바꾸지 않고 아래 순서로 갑니다. 브랜드 컬러와 규칙 점검은 위 <a class="ds-link" href="#ai">AI로 시작하기</a>의 글을 그대로 씁니다.</p>
+<p>운영 중인 사이트는 한 번에 바꾸지 않고 아래 순서대로 적용합니다. 브랜드 컬러와 규칙 점검은 위 <a class="ds-link" href="#ai">AI로 시작하기</a>의 글을 그대로 씁니다.</p>
 <h3>1. 사이트 살펴보기</h3>
 <p>아직 고치지 않고, 무엇을 어떤 순서로 바꿀지 먼저 정합니다.</p>
 <figure class="ds-codeblock" data-wrap>
   <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">text</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
   <pre class="ds-codeblock__code"><code>이 사이트에 YBM DS를 옮겨 오려고 해. 아직 고치지 말고 먼저 살펴봐 줘.
 문서: https://luvms012-rgb.github.io/ybm-ds/site/llms.txt
-공통 &lt;head&gt;가 있는 파일, CSS 파일, 자주 쓰는 색과 부품(버튼, 입력, 표)을 정리하고 어느 화면부터 바꿀지 순서를 제안해 줘.</code></pre>
+공통 &lt;head&gt; 파일, CSS 파일, 자주 쓰는 색과 부품을 정리하고 바꿀 순서를 제안해 줘.</code></pre>
 </figure>
 <h3>2. DS 넣기</h3>
-<p>공통 &lt;head&gt;에 넣습니다. DS는 기존 CSS보다 약하게 들어가 지금 화면이 거의 바뀌지 않습니다.</p>
+<p>공통 &lt;head&gt;에 넣습니다. 기존 CSS가 DS보다 먼저 적용되어 지금 화면은 거의 그대로입니다.</p>
 <figure class="ds-codeblock" data-wrap>
   <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">text</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
   <pre class="ds-codeblock__code"><code>이 사이트의 공통 &lt;head&gt;에 YBM DS를 넣어 줘.
 문서: https://luvms012-rgb.github.io/ybm-ds/site/llms.txt
-지금 화면이 바뀌면 안 되니, 넣은 뒤 달라진 화면이 있으면 알려 줘.</code></pre>
+넣은 뒤 지금 화면에서 달라진 곳이 있으면 알려 줘.</code></pre>
 </figure>
 <h3>3. 화면 하나씩 바꾸기</h3>
-<p>한 번에 다 바꾸지 않고 화면마다 대괄호 안만 바꿔 붙여 넣습니다.</p>
+<p>화면마다 대괄호 안만 바꿔 붙여 넣습니다.</p>
 <figure class="ds-codeblock" data-wrap>
   <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">text</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
   <pre class="ds-codeblock__code"><code>[바꿀 화면, 예: 회원 정보 수정] 화면을 YBM DS 컴포넌트로 바꿔 줘.
 문서: https://luvms012-rgb.github.io/ybm-ds/site/llms.txt
-서버 코드와 스크립트가 쓰는 class, id, name 은 그대로 두고, 바꾸기 전후 화면을 비교해서 보여 줘.</code></pre>
+서버 코드와 스크립트가 쓰는 class, id, name은 그대로 두고, 바꾸기 전후 화면을 비교해서 보여 줘.</code></pre>
 </figure>
-<p class="site-note">DS는 CSS <code>@layer</code>를 씁니다. Chrome 99, Safari 15.4 보다 오래된 브라우저에서는 DS가 적용되지 않습니다.</p>
+<p class="site-note">DS는 CSS <code>@layer</code>를 씁니다. Chrome 99, Safari 15.4보다 오래된 브라우저에서는 DS가 적용되지 않습니다.</p>
 
 <h2 id="theme">다크 모드<a class="site-anchor" href="#theme" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
 <p><code>html</code>에 속성 하나를 붙이면 모든 색이 어두운 화면용으로 바뀝니다. 색을 토큰으로만 썼다면 따로 고칠 것이 없습니다.</p>
-<figure class="ds-codeblock">
+<div class="site-codetabs"><div class="ds-chiptabs" role="tablist" aria-label="보기 방식"><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-tab="0">AI 요청</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-tab="1">HTML</button></div><div class="site-codetabs__panel" role="tabpanel"><figure class="ds-codeblock" data-wrap>
+  <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">text</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
+  <pre class="ds-codeblock__code"><code>이 사이트에 YBM DS 다크 모드를 넣어 줘.
+문서: https://luvms012-rgb.github.io/ybm-ds/site/llms.txt
+화면 오른쪽 위에 라이트, 다크 전환 버튼을 만들고, 처음에는 기기 설정을 따르게 해 줘.</code></pre>
+</figure></div><div class="site-codetabs__panel" role="tabpanel" hidden><figure class="ds-codeblock">
   <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">html</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
-  <pre class="ds-codeblock__code"><code>&lt;html lang=&quot;ko&quot; data-theme=&quot;dark&quot;&gt;</code></pre>
-</figure>
+  <pre class="ds-codeblock__code"><code>&lt;!-- 다크 모드 --&gt;
+&lt;html lang=&quot;ko&quot; data-theme=&quot;dark&quot;&gt;
+
+&lt;!-- 기기 설정을 따를 때: &lt;head&gt; 맨 위 --&gt;
+&lt;script&gt;
+  if (matchMedia('(prefers-color-scheme: dark)').matches) document.documentElement.dataset.theme = 'dark';
+&lt;/script&gt;</code></pre>
+</figure></div></div>
 
 <h2 id="files">AI가 읽는 파일<a class="site-anchor" href="#files" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
 <p>주소를 알려 주면 AI가 필요한 것을 골라 읽습니다. 주소를 열지 못하는 도구에는 <code>llms-full.txt</code>를 첨부합니다.</p>
@@ -134,7 +145,7 @@
 <tr><td><a class="ds-link" href="https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/components.css" target="_blank" rel="noopener">components.css</a></td><td>컴포넌트마다 머리 주석에 HTML 구조가 있습니다.</td></tr>
 <tr><td><a class="ds-link" href="https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/tokens.css" target="_blank" rel="noopener">tokens.css</a></td><td>색, 간격, 글자 크기 같은 <code>--ds-*</code> 토큰입니다.</td></tr>
 <tr><td>페이지별 <code>.md</code></td><td>문서 제목 아래 Markdown 메뉴에서 그 페이지만 복사합니다.</td></tr></tbody></table></div>
-<p>Figma 변수 이름이 CSS 변수 이름과 같아, AI에 <a class="ds-link" href="https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=2608-2" target="_blank" rel="noopener">Figma</a> 화면을 주면 같은 토큰 이름으로 옮깁니다.</p>
+<p>Figma 변수와 CSS 변수는 이름이 같습니다. AI에 <a class="ds-link" href="https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=2608-2" target="_blank" rel="noopener">Figma</a> 화면을 주면 같은 토큰으로 옮깁니다.</p>
 
 
 

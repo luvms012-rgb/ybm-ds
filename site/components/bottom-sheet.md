@@ -26,7 +26,7 @@
 | --- | --- |
 | **Header**`ds-bottomsheet__header` | 제목과 닫기 버튼이 놓이는 머리 영역입니다. |
 | **Title**`ds-bottomsheet__title` | 제목입니다. |
-| **Desc**`ds-bottomsheet__desc` | 제목을 돕는 설명 글입니다. |
+| **Desc**`ds-bottomsheet__desc` | 제목에 덧붙이는 설명 글입니다. |
 | **Close**`ds-bottomsheet__close` | 닫기 버튼입니다. |
 | **Body**`ds-bottomsheet__body` | 본문이 들어가는 영역입니다. |
 | **Footer**`ds-bottomsheet__footer` | 버튼이나 보조 정보가 놓이는 아래 영역입니다. |
@@ -43,7 +43,8 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 | 구분 | 내용 |
 | --- | --- |
-| **Do** | 몇 가지 동작 중 하나를 고를 때는 Menu Sheet, 입력이나 긴 내용은 Bottom Sheet를 씁니다. |
+| **Do** | 몇 가지 동작 중 하나를 고를 때는 Menu Sheet를 씁니다. |
+| **Do** | 입력이나 긴 내용은 Bottom Sheet에 담습니다. |
 | **Do** | 되돌릴 수 없는 동작은 critical로 따로 묶습니다. |
 | **Do** | PC 화면 옆에 보조 내용이나 필터를 둘 때 Side Panel을 씁니다. |
 | **Do** | 화면이 좁으면 Bottom Sheet로 바꿉니다. |

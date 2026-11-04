@@ -24,7 +24,7 @@
 | --- | --- |
 | **Scroller**`ds-carousel__scroller` | 옆으로 넘기는 영역입니다. |
 | **Item**`ds-carousel__item` | 목록의 항목 하나입니다. |
-| **Button**`ds-carousel__button` | 이전, 다음 장으로 넘기는 버튼입니다. |
+| **Button**`ds-carousel__button` | 이전 장, 다음 장으로 넘기는 버튼입니다. |
 
 ## 속성
 

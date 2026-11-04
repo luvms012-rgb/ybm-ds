@@ -9,9 +9,9 @@
 <script>try { var t = localStorage.getItem("ybm-site-theme"); if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.dataset.theme = "dark"; } catch (e) {}</script>
 <link rel="icon" href="../assets/logo-ybmnet.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../dist/ybm-ds.css">
-<link rel="stylesheet" href="../assets/site.css?v=1debbdf0">
+<link rel="stylesheet" href="../assets/site.css?v=7a87c39c">
 <script src="../../dist/ybm-ds.js" defer></script>
-<script src="../assets/site.js?v=1debbdf0" defer></script>
+<script src="../assets/site.js?v=7a87c39c" defer></script>
 </head>
 <body class="site">
 <a class="site-skip" href="#main">본문 바로가기</a>
@@ -149,7 +149,7 @@
 <thead><tr><th scope="col">부품</th><th scope="col">설명</th></tr></thead>
 <tbody><tr><td><span class="site-anatomy__part"><b>Header</b><code>ds-menusheet__header</code></span></td><td>제목과 닫기 버튼이 놓이는 머리 영역입니다.</td></tr>
 <tr><td><span class="site-anatomy__part"><b>Title</b><code>ds-menusheet__title</code></span></td><td>제목입니다.</td></tr>
-<tr><td><span class="site-anatomy__part"><b>Desc</b><code>ds-menusheet__desc</code></span></td><td>제목을 돕는 설명 글입니다.</td></tr>
+<tr><td><span class="site-anatomy__part"><b>Desc</b><code>ds-menusheet__desc</code></span></td><td>제목에 덧붙이는 설명 글입니다.</td></tr>
 <tr><td><span class="site-anatomy__part"><b>List</b><code>ds-menusheet__list</code></span></td><td>항목 목록입니다.</td></tr>
 <tr><td><span class="site-anatomy__part"><b>Group</b><code>ds-menusheet__group</code></span></td><td>관련 항목을 묶는 영역입니다.</td></tr>
 <tr><td><span class="site-anatomy__part"><b>Item</b><code>ds-menusheet__item</code></span></td><td>목록의 항목 하나입니다.</td></tr>
@@ -166,7 +166,8 @@
 <h2 id="behavior">동작<a class="site-anchor" href="#behavior" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><p><code>ybm-ds.js</code>를 불러오면 알아서 동작합니다.</p><ul class="site-list"><li>Dialog 와 같이 열고 닫기, 바깥(dim) 클릭 닫기</li></ul>
 <h2 id="guide">사용 지침<a class="site-anchor" href="#guide" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><div class="ds-table-wrap"><table class="ds-table" data-density="compact">
 <thead><tr><th scope="col">구분</th><th scope="col">내용</th></tr></thead>
-<tbody><tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>몇 가지 동작 중 하나를 고를 때는 Menu Sheet, 입력이나 긴 내용은 Bottom Sheet를 씁니다.</td></tr>
+<tbody><tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>몇 가지 동작 중 하나를 고를 때는 Menu Sheet를 씁니다.</td></tr>
+<tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>입력이나 긴 내용은 Bottom Sheet에 담습니다.</td></tr>
 <tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>되돌릴 수 없는 동작은 critical로 따로 묶습니다.</td></tr></tbody></table></div>
 <h2 id="examples">예시<a class="site-anchor" href="#examples" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><div class="site-example">
   <div class="site-example__bar"><div class="ds-chiptabs" role="tablist" aria-label="보기 방식"><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-view="preview">미리보기</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-view="code">코드</button></div></div>

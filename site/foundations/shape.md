@@ -31,7 +31,7 @@
   border-radius: var(--ds-shape-lg);
 }
 .admin-area {
-  --ds-shape-scale: 0.5;  /* 이 영역 안의 모서리를 절반으로 */
+  --ds-shape-scale: 0.5;  /*이 영역 안의 모서리를 절반으로 */
 }
 ```
 

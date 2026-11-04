@@ -40,7 +40,7 @@
 | **Item**`ds-search-suggest__item` | 목록의 항목 하나입니다. |
 | **Content**`ds-search-suggest__content` | 주된 내용이 들어가는 영역입니다. |
 | **Label**`ds-search-suggest__label` | 이름이나 값을 보여 주는 글자입니다. |
-| **Desc**`ds-search-suggest__desc` | 제목을 돕는 설명 글입니다. |
+| **Desc**`ds-search-suggest__desc` | 제목에 덧붙이는 설명 글입니다. |
 | **Empty**`ds-search-suggest__empty` | 결과가 없을 때 보이는 글입니다. |
 
 ## 속성
@@ -63,7 +63,8 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 | 구분 | 내용 |
 | --- | --- |
-| **Do** | 검색 칸은 Text Field outline에 search 아이콘과 지우기 버튼을 붙여 만들고, `type="search"`와 `role="combobox"`를 붙입니다. |
+| **Do** | 검색 칸은 Text Field outline에 search 아이콘과 지우기 버튼을 붙여 만듭니다. |
+| **Do** | 검색 칸에는 `type="search"`와 `role="combobox"`를 붙입니다. |
 | **Do** | 입력 전에는 최근 검색어, 입력 중에는 추천어, 결과가 없으면 안내 문구를 보여 줍니다. |
 
 ## 예시

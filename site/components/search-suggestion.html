@@ -9,9 +9,9 @@
 <script>try { var t = localStorage.getItem("ybm-site-theme"); if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.dataset.theme = "dark"; } catch (e) {}</script>
 <link rel="icon" href="../assets/logo-ybmnet.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../dist/ybm-ds.css">
-<link rel="stylesheet" href="../assets/site.css?v=1debbdf0">
+<link rel="stylesheet" href="../assets/site.css?v=7a87c39c">
 <script src="../../dist/ybm-ds.js" defer></script>
-<script src="../assets/site.js?v=1debbdf0" defer></script>
+<script src="../assets/site.js?v=7a87c39c" defer></script>
 </head>
 <body class="site">
 <a class="site-skip" href="#main">본문 바로가기</a>
@@ -165,7 +165,7 @@
 <tr><td><span class="site-anatomy__part"><b>Item</b><code>ds-search-suggest__item</code></span></td><td>목록의 항목 하나입니다.</td></tr>
 <tr><td><span class="site-anatomy__part"><b>Content</b><code>ds-search-suggest__content</code></span></td><td>주된 내용이 들어가는 영역입니다.</td></tr>
 <tr><td><span class="site-anatomy__part"><b>Label</b><code>ds-search-suggest__label</code></span></td><td>이름이나 값을 보여 주는 글자입니다.</td></tr>
-<tr><td><span class="site-anatomy__part"><b>Desc</b><code>ds-search-suggest__desc</code></span></td><td>제목을 돕는 설명 글입니다.</td></tr>
+<tr><td><span class="site-anatomy__part"><b>Desc</b><code>ds-search-suggest__desc</code></span></td><td>제목에 덧붙이는 설명 글입니다.</td></tr>
 <tr><td><span class="site-anatomy__part"><b>Empty</b><code>ds-search-suggest__empty</code></span></td><td>결과가 없을 때 보이는 글입니다.</td></tr></tbody></table></div></div>
 <h2 id="props">속성<a class="site-anchor" href="#props" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><p>Figma 속성 이름을 그대로 <code>data-*</code> 속성으로 씁니다.</p><div class="ds-table-wrap"><table class="ds-table" data-density="compact">
 <thead><tr><th scope="col">속성</th><th scope="col">값</th></tr></thead>
@@ -175,7 +175,8 @@
 <h2 id="behavior">동작<a class="site-anchor" href="#behavior" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><p><code>ybm-ds.js</code>를 불러오면 알아서 동작합니다.</p><ul class="site-list"><li>입력 칸(role=combobox, aria-controls)에서 위아래 화살표로 줄 고르기, Enter 로 그 줄 누르기</li></ul>
 <h2 id="guide">사용 지침<a class="site-anchor" href="#guide" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><div class="ds-table-wrap"><table class="ds-table" data-density="compact">
 <thead><tr><th scope="col">구분</th><th scope="col">내용</th></tr></thead>
-<tbody><tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>검색 칸은 Text Field outline에 search 아이콘과 지우기 버튼을 붙여 만들고, <code>type=&quot;search&quot;</code>와 <code>role=&quot;combobox&quot;</code>를 붙입니다.</td></tr>
+<tbody><tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>검색 칸은 Text Field outline에 search 아이콘과 지우기 버튼을 붙여 만듭니다.</td></tr>
+<tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>검색 칸에는 <code>type=&quot;search&quot;</code>와 <code>role=&quot;combobox&quot;</code>를 붙입니다.</td></tr>
 <tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>입력 전에는 최근 검색어, 입력 중에는 추천어, 결과가 없으면 안내 문구를 보여 줍니다.</td></tr></tbody></table></div>
 <h2 id="examples">예시<a class="site-anchor" href="#examples" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><div class="site-example">
   <div class="site-example__bar"><div class="ds-chiptabs" role="tablist" aria-label="보기 방식"><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-view="preview">미리보기</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-view="code">코드</button></div></div>

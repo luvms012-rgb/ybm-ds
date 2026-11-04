@@ -24,7 +24,7 @@
 | --- | --- |
 | **Body**`ds-helpbubble__body` | 본문이 들어가는 영역입니다. |
 | **Title**`ds-helpbubble__title` | 제목입니다. |
-| **Desc**`ds-helpbubble__desc` | 제목을 돕는 설명 글입니다. |
+| **Desc**`ds-helpbubble__desc` | 제목에 덧붙이는 설명 글입니다. |
 | **Close**`ds-helpbubble__close` | 닫기 버튼입니다. |
 
 ## 속성

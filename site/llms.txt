@@ -1,6 +1,6 @@
 # YBM DS
 
-> YBM 서비스를 위한 디자인 시스템입니다. HTML 에 .ds-* 클래스를 붙이고 --ds-* 토큰으로 색, 간격, 글자를 맞춥니다. 이 파일은 AI 도구가 읽도록 문서 목록을 모은 것입니다.
+> YBM 서비스를 위한 디자인 시스템입니다. HTML에 .ds-* 클래스를 붙이고 --ds-* 토큰으로 색, 간격, 글자를 맞춥니다. 이 파일은 AI 도구가 읽도록 문서 목록을 모은 것입니다.
 
 - CSS: https://luvms012-rgb.github.io/ybm-ds/dist/ybm-ds.css
 - JS: https://luvms012-rgb.github.io/ybm-ds/dist/ybm-ds.js
@@ -9,20 +9,20 @@
 ## 지킬 것
 
 - 설치: <head>에 CSS와 JS 두 줄을 넣는다. 서비스 CSS는 그다음에 불러온다.
-- 브라우저: DS 는 CSS @layer 를 쓴다. @layer 를 모르는 브라우저(Chrome 99, Safari 15.4 이전)에서는 DS 가 적용되지 않으니, 더 오래된 브라우저를 지원해야 하면 먼저 알린다.
-- 컴포넌트: https://luvms012-rgb.github.io/ybm-ds/components.json 에 있는 것만 쓰고, 마크업은 https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/components.css 의 컴포넌트별 머리 주석 그대로 쓴다.
-- 색, 간격, 글자 크기, 모서리, 그림자는 --ds-* 토큰만 쓴다. hex, rgb 를 직접 쓰지 않는다.
-- 모양을 바꿀 때는 컴포넌트 변수(--ds-[컴포넌트]-*)만 덮어쓴다. 새 ds- 클래스나 !important 를 만들지 않는다.
-- 브랜드 컬러: 서비스 CSS의 :root 에서 --ds-color-palette-brand-100 ~ 1000 을 덮어쓴다. 받은 색을 600 단계로 두고, 다크(:root[data-theme="dark"])는 같은 단계를 뒤집어 넣는다.
-- 화면: 모바일 먼저 만들고 768px, 1280px 에서 배치를 바꾼다. 비슷한 화면이 Templates 에 있으면 그 HTML에서 시작한다.
+- 브라우저: DS는 CSS @layer를 쓴다. @layer를 모르는 브라우저(Chrome 99, Safari 15.4 이전)에서는 DS가 적용되지 않으니, 더 오래된 브라우저를 지원해야 하면 먼저 알린다.
+- 컴포넌트: https://luvms012-rgb.github.io/ybm-ds/components.json에 있는 것만 쓰고, 마크업은 https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/components.css의 컴포넌트별 머리 주석 그대로 쓴다.
+- 색, 간격, 글자 크기, 모서리, 그림자는 --ds-* 토큰만 쓴다. hex, rgb를 직접 쓰지 않는다.
+- 모양을 바꿀 때는 컴포넌트 변수(--ds-[컴포넌트]-*)만 덮어쓴다. 새 ds- 클래스나 !important를 만들지 않는다.
+- 브랜드 컬러: 서비스 CSS의 :root에서 --ds-color-palette-brand-100 ~ 1000을 덮어쓴다. 받은 색을 600 단계로 두고, 다크(:root[data-theme="dark"])는 같은 단계를 뒤집어 넣는다.
+- 화면: 모바일 먼저 만들고 768px, 1280px에서 배치를 바꾼다. 비슷한 화면이 Templates에 있으면 그 HTML에서 시작한다.
 - 글자: 한국어. 제목 Bold, 항목 제목 SemiBold, 본문 Regular, 본문은 word-break: keep-all.
 
 ## 운영 중인 사이트에 옮길 때
 
 - 한 번에 다 바꾸지 않는다. 살펴보기, DS 넣기, 브랜드 컬러, 화면 하나씩, 점검 순서로 간다.
-- DS 는 @layer 안에 있어 기존 CSS 가 늘 이긴다. 그래서 DS 를 넣기만 해서는 지금 화면이 바뀌지 않는다. 기존 규칙이 DS 부품을 덮으면 그 화면의 기존 규칙만 걷어 낸다.
+- DS는 @layer 안에 있어 기존 CSS가 늘 이긴다. 그래서 DS를 넣기만 해서는 지금 화면이 바뀌지 않는다. 기존 규칙이 DS 부품을 덮으면 그 화면의 기존 규칙만 걷어 낸다.
 - 서버 코드(PHP, JSP 등)의 로직은 바꾸지 않는다. 스크립트와 서버가 쓰는 class, id, name 속성은 그대로 두고, 필요하면 DS 클래스를 함께 붙인다.
-- 기존 CSS 의 hex 색은 가까운 --ds-color-* 역할 토큰으로 바꾸고, 바꾼 짝은 목록으로 남긴다.
+- 기존 CSS의 hex 색은 가까운 --ds-color-* 역할 토큰으로 바꾸고, 바꾼 짝은 목록으로 남긴다.
 - 화면을 바꿀 때마다 바꾸기 전후 화면을 비교해 보여 주고 확인을 받는다.
 
 ## Get Started
@@ -41,7 +41,7 @@
 - [Color Roles](https://luvms012-rgb.github.io/ybm-ds/site/foundations/color-roles.md): 역할 색의 규칙과 전체 토큰
 - [Color Palette](https://luvms012-rgb.github.io/ybm-ds/site/foundations/color-palette.md): 팔레트 색의 단계와 전체 토큰
 - [Iconography](https://luvms012-rgb.github.io/ybm-ds/site/foundations/icons.md)
-- [Icon Library](https://luvms012-rgb.github.io/ybm-ds/site/foundations/icons-library.md): 아이콘을 찾아 클래스와 SVG 를 복사합니다
+- [Icon Library](https://luvms012-rgb.github.io/ybm-ds/site/foundations/icons-library.md): 아이콘을 찾아 클래스와 SVG를 복사합니다
 
 ## Components
 
@@ -55,18 +55,18 @@
 - [Prefix Select](https://luvms012-rgb.github.io/ybm-ds/site/components/prefix-select.md): 입력 칸 앞에서 국가 번호, 단위 같은 기준 값을 고르는 컴포넌트입니다.
 - [Select Trigger](https://luvms012-rgb.github.io/ybm-ds/site/components/select-trigger.md): 목록에서 값 하나를 고르는 칸입니다. 누르면 Select Content가 열립니다.
 - [Select Content](https://luvms012-rgb.github.io/ybm-ds/site/components/select-content-item.md): Select를 눌렀을 때 펼쳐지는 선택지 목록입니다.
-- [Checkbox](https://luvms012-rgb.github.io/ybm-ds/site/components/checkbox.md): 여러 선택지 가운데 하나 이상을 선택할 때 쓰는 컴포넌트입니다. 약관 동의처럼 하나만 켜고 끌 때도 씁니다.
-- [Radio Group](https://luvms012-rgb.github.io/ybm-ds/site/components/radio-group.md): 여러 선택지 가운데 하나만 선택할 때 쓰는 컴포넌트입니다.
+- [Checkbox](https://luvms012-rgb.github.io/ybm-ds/site/components/checkbox.md): 여러 선택지에서 하나 이상을 고를 때 쓰는 컴포넌트입니다. 약관 동의처럼 항목 하나를 켜고 끌 때도 씁니다.
+- [Radio Group](https://luvms012-rgb.github.io/ybm-ds/site/components/radio-group.md): 여러 선택지에서 하나만 고를 때 쓰는 컴포넌트입니다.
 - [Switch](https://luvms012-rgb.github.io/ybm-ds/site/components/switch.md): 설정을 바로 켜고 끌 때 쓰는 컴포넌트입니다.
 - [Quantity Picker](https://luvms012-rgb.github.io/ybm-ds/site/components/quantity-picker.md): 수량을 하나씩 늘리고 줄이는 컴포넌트입니다.
-- [Chip](https://luvms012-rgb.github.io/ybm-ds/site/components/chip.md): 고른 값이나 입력한 값을 작은 덩어리로 보여 주는 컴포넌트입니다.
+- [Chip](https://luvms012-rgb.github.io/ybm-ds/site/components/chip.md): 고르거나 입력한 값을 작게 묶어 보여 주는 컴포넌트입니다.
 - [Chip Tabs](https://luvms012-rgb.github.io/ybm-ds/site/components/chip-tabs.md): 칩 모양의 탭으로 목록을 가볍게 걸러 보는 컴포넌트입니다.
-- [Tabs](https://luvms012-rgb.github.io/ybm-ds/site/components/tabs.md): 한 화면의 내용을 여러 탭으로 나눠 전환하는 컴포넌트입니다.
+- [Tabs](https://luvms012-rgb.github.io/ybm-ds/site/components/tabs.md): 한 화면의 내용을 여러 탭으로 나눠 보여 주는 컴포넌트입니다.
 - [Segmented Control](https://luvms012-rgb.github.io/ybm-ds/site/components/segmented-control.md): 같은 내용을 목록, 달력처럼 다른 방식으로 바꿔 볼 때 쓰는 컴포넌트입니다.
 - [Toggle Button](https://luvms012-rgb.github.io/ybm-ds/site/components/toggle-button.md): 누를 때마다 켜짐과 꺼짐이 바뀌는 버튼입니다.
-- [Badge](https://luvms012-rgb.github.io/ybm-ds/site/components/badge.md): 대상의 상태나 속성을 짧은 글자로 알려 주는 컴포넌트입니다.
+- [Badge](https://luvms012-rgb.github.io/ybm-ds/site/components/badge.md): 상태나 속성을 짧은 글자로 알려 주는 컴포넌트입니다.
 - [Tag Group](https://luvms012-rgb.github.io/ybm-ds/site/components/tag-group.md): 작성자, 날짜처럼 짧은 정보를 한 줄에 이어 보여 주는 컴포넌트입니다.
-- [Avatar](https://luvms012-rgb.github.io/ybm-ds/site/components/avatar.md): 사람이나 팀을 프로필 사진이나 이름 첫 글자로 보여 주는 컴포넌트입니다.
+- [Avatar](https://luvms012-rgb.github.io/ybm-ds/site/components/avatar.md): 사람이나 팀을 프로필 사진 또는 이름 첫 글자로 보여 주는 컴포넌트입니다.
 - [Callout](https://luvms012-rgb.github.io/ybm-ds/site/components/callout.md): 본문 안에서 꼭 알아야 할 정보를 눈에 띄게 알려 주는 컴포넌트입니다.
 - [Snackbar](https://luvms012-rgb.github.io/ybm-ds/site/components/snackbar.md): 작업 결과를 화면 아래에 잠깐 띄워 알려 주는 컴포넌트입니다.
 - [Help Bubble](https://luvms012-rgb.github.io/ybm-ds/site/components/help-bubble.md): 특정 요소를 가리키며 쓰는 법이나 새 기능을 알려 주는 말풍선입니다.
@@ -75,11 +75,11 @@
 - [Alert Dialog](https://luvms012-rgb.github.io/ybm-ds/site/components/alert-dialog.md): 하던 일을 잠시 멈추고 중요한 확인을 받는 창입니다.
 - [Bottom Sheet](https://luvms012-rgb.github.io/ybm-ds/site/components/bottom-sheet.md): 화면 아래에서 올라오는 창입니다. 지금 화면을 그대로 둔 채 추가 정보나 동작을 보여 줄 때 씁니다.
 - [Accordion](https://luvms012-rgb.github.io/ybm-ds/site/components/accordion.md): 제목을 누르면 내용이 펼쳐지는 컴포넌트입니다. 긴 정보를 짧게 정리해 보여 줄 때 씁니다.
-- [Skeleton](https://luvms012-rgb.github.io/ybm-ds/site/components/skeleton.md): 내용을 불러오는 동안 들어갈 자리를 미리 보여 주는 컴포넌트입니다. 기다리는 시간을 덜 지루하게 합니다.
-- [Slider](https://luvms012-rgb.github.io/ybm-ds/site/components/slider.md): 막대를 끌어서 범위 안의 값을 정하는 컴포넌트입니다.
+- [Skeleton](https://luvms012-rgb.github.io/ybm-ds/site/components/skeleton.md): 내용을 불러오는 동안 그 자리를 미리 보여 주는 컴포넌트입니다. 기다리는 시간이 덜 지루해집니다.
+- [Slider](https://luvms012-rgb.github.io/ybm-ds/site/components/slider.md): 손잡이를 끌어 범위 안에서 값을 정하는 컴포넌트입니다.
 - [Progress](https://luvms012-rgb.github.io/ybm-ds/site/components/progress.md): 작업이 얼마나 진행됐는지 막대로 보여 주는 컴포넌트입니다.
-- [Progress Circle](https://luvms012-rgb.github.io/ybm-ds/site/components/progress-circle.md): 작업이 진행 중인 것을 원으로 보여 주는 컴포넌트입니다.
-- [Floating Action Button](https://luvms012-rgb.github.io/ybm-ds/site/components/floating-action-button.md): 화면 위에 떠 있으면서 그 화면에서 가장 중요한 동작 하나를 실행하는 버튼입니다.
+- [Progress Circle](https://luvms012-rgb.github.io/ybm-ds/site/components/progress-circle.md): 작업이 진행 중임을 원으로 보여 주는 컴포넌트입니다.
+- [Floating Action Button](https://luvms012-rgb.github.io/ybm-ds/site/components/floating-action-button.md): 화면 위에 떠서 그 화면의 가장 중요한 동작을 실행하는 버튼입니다.
 - [Date Picker](https://luvms012-rgb.github.io/ybm-ds/site/components/date-picker-date-cell.md): 달력에서 날짜를 선택하는 컴포넌트입니다.
 - [Bottom Navigation](https://luvms012-rgb.github.io/ybm-ds/site/components/bottom-navigation.md): 앱 화면 아래에서 주요 메뉴 사이를 오가는 컴포넌트입니다.
 - [Side Navigation](https://luvms012-rgb.github.io/ybm-ds/site/components/side-navigation.md): PC 화면 왼쪽에 두는 메뉴로, 화면 사이를 오갈 때 씁니다.
@@ -92,13 +92,13 @@
 - [List](https://luvms012-rgb.github.io/ybm-ds/site/components/list-list-item.md): 설정, 메뉴처럼 항목을 한 줄씩 늘어놓는 컴포넌트입니다.
 - [Breadcrumbs](https://luvms012-rgb.github.io/ybm-ds/site/components/breadcrumbs.md): 지금 화면이 어디에 있는지 경로로 보여 주는 컴포넌트입니다.
 - [Stepper](https://luvms012-rgb.github.io/ybm-ds/site/components/stepper.md): 여러 단계로 나뉜 흐름에서 지금 몇 번째 단계인지 보여 주는 컴포넌트입니다.
-- [Banner](https://luvms012-rgb.github.io/ybm-ds/site/components/banner.md): 화면 맨 위에서 서비스 전체에 해당하는 공지를 알려 주는 컴포넌트입니다.
+- [Banner](https://luvms012-rgb.github.io/ybm-ds/site/components/banner.md): 화면 맨 위에서 서비스 전체 공지를 알려 주는 컴포넌트입니다.
 - [Select Box](https://luvms012-rgb.github.io/ybm-ds/site/components/select-box.md): 선택지를 설명과 함께 상자로 크게 보여 주는 컴포넌트입니다. 요금제처럼 차이를 읽고 고를 때 씁니다.
 - [Time Picker](https://luvms012-rgb.github.io/ybm-ds/site/components/time-picker.md): 휠을 굴려 시간을 선택하는 컴포넌트입니다.
 - [Table Pagination](https://luvms012-rgb.github.io/ybm-ds/site/components/table-pagination.md): 표 아래에서 페이지를 넘기고 한 번에 보일 행 수를 바꾸는 컴포넌트입니다.
 - [Popover](https://luvms012-rgb.github.io/ybm-ds/site/components/popover.md): 누른 요소 옆에 작은 창을 띄워 부가 정보나 작업을 보여 주는 컴포넌트입니다.
 - [Chat](https://luvms012-rgb.github.io/ybm-ds/site/components/chat.md): 말풍선과 입력 칸으로 대화 화면을 만드는 컴포넌트입니다.
-- [Top App Bar](https://luvms012-rgb.github.io/ybm-ds/site/components/top-app-bar.md): 모바일 화면 맨 위에서 화면 제목과 뒤로 가기 같은 버튼을 보여 주는 컴포넌트입니다.
+- [Top App Bar](https://luvms012-rgb.github.io/ybm-ds/site/components/top-app-bar.md): 모바일 화면 맨 위에서 제목과 뒤로 가기 같은 버튼을 보여 주는 컴포넌트입니다.
 - [Top Navigation](https://luvms012-rgb.github.io/ybm-ds/site/components/top-navigation.md): PC 화면 맨 위에 두는 메뉴로, 서비스의 주요 화면을 오갈 때 씁니다.
 - [Search Suggestion](https://luvms012-rgb.github.io/ybm-ds/site/components/search-suggestion.md): 검색어를 입력하는 동안 추천 검색어를 보여 주는 컴포넌트입니다.
 - [File Attach](https://luvms012-rgb.github.io/ybm-ds/site/components/file-attach.md): 파일을 끌어다 놓거나 골라서 첨부하는 컴포넌트입니다.
@@ -107,15 +107,15 @@
 - [Timer](https://luvms012-rgb.github.io/ybm-ds/site/components/timer.md): 지난 시간이나 남은 시간을 숫자로 보여 주는 컴포넌트입니다.
 - [Status Dot](https://luvms012-rgb.github.io/ybm-ds/site/components/status-dot.md): 작은 색 점으로 상태를 알려 주는 컴포넌트입니다.
 - [Checkbox Group](https://luvms012-rgb.github.io/ybm-ds/site/components/checkbox-group.md): 관련된 체크박스를 한 묶음으로 보여 주는 컴포넌트입니다.
-- [Scroll Fog](https://luvms012-rgb.github.io/ybm-ds/site/components/scroll-fog.md): 스크롤 영역 끝을 흐리게 해서 내용이 더 있다는 것을 알려 주는 컴포넌트입니다.
-- [Pull To Refresh](https://luvms012-rgb.github.io/ybm-ds/site/components/pull-to-refresh.md): 목록 맨 위에서 아래로 당기면 새로 고치는 컴포넌트입니다.
+- [Scroll Fog](https://luvms012-rgb.github.io/ybm-ds/site/components/scroll-fog.md): 스크롤 영역 끝을 흐리게 해 내용이 더 있음을 알려 주는 컴포넌트입니다.
+- [Pull To Refresh](https://luvms012-rgb.github.io/ybm-ds/site/components/pull-to-refresh.md): 목록 맨 위에서 아래로 당기면 내용을 새로 불러오는 컴포넌트입니다.
 - [Side Panel](https://luvms012-rgb.github.io/ybm-ds/site/components/side-panel.md): PC 화면 가장자리에서 밀려 나오는 창입니다. 지금 화면을 그대로 둔 채 자세한 정보나 작업을 보여 줄 때 씁니다.
 - [Image Frame](https://luvms012-rgb.github.io/ybm-ds/site/components/image-frame.md): 사진을 정해진 비율에 맞춰 잘라 보여 주는 컴포넌트입니다.
 - [Carousel](https://luvms012-rgb.github.io/ybm-ds/site/components/carousel.md): 여러 콘텐츠를 옆으로 넘기며 보는 컴포넌트입니다.
 - [Markdown](https://luvms012-rgb.github.io/ybm-ds/site/components/markdown.md): AI 답변처럼 제목, 목록, 표가 섞인 글을 보여 주는 컴포넌트입니다.
-- [Code Block](https://luvms012-rgb.github.io/ybm-ds/site/components/code-block.md): 코드를 보여 주고 한 번에 복사하게 하는 컴포넌트입니다.
-- [Citation](https://luvms012-rgb.github.io/ybm-ds/site/components/citation.md): 본문에서 근거가 된 출처를 표시하는 컴포넌트입니다.
-- [Multi Select](https://luvms012-rgb.github.io/ybm-ds/site/components/multi-select.md): 목록에서 여러 값을 선택하고, 선택한 값을 칸 안에 모아 보여 주는 컴포넌트입니다.
+- [Code Block](https://luvms012-rgb.github.io/ybm-ds/site/components/code-block.md): 코드를 보여 주고 버튼 하나로 복사하는 컴포넌트입니다.
+- [Citation](https://luvms012-rgb.github.io/ybm-ds/site/components/citation.md): 본문의 근거가 된 출처를 보여 주는 컴포넌트입니다.
+- [Multi Select](https://luvms012-rgb.github.io/ybm-ds/site/components/multi-select.md): 목록에서 값을 여러 개 고르면 칸 안에 모아 보여 주는 컴포넌트입니다.
 - [Rating](https://luvms012-rgb.github.io/ybm-ds/site/components/rating.md): 별 다섯 개로 평점을 보여 주거나 매기는 컴포넌트입니다.
 
 ## Templates
@@ -124,29 +124,29 @@
 
 - [분석 대시보드](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/dashboard.html): 서비스 이용 흐름을 한눈에 보는 기본 분석 대시보드입니다. 추이 그래프와 핵심 지표를 먼저 보여 줍니다.
 - [프로젝트 현황 대시보드](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/dashboard-progress.html): 프로젝트가 어디까지 왔는지 일정과 진행률로 보여 주는 대시보드입니다.
-- [서비스 모니터링 대시보드](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/dashboard-alert-rail.html): 서비스 상태를 지켜보다가 문제가 생기면 바로 알아차리게 돕는 모니터링 화면입니다. 알림은 오른쪽에 따로 모아 둡니다.
+- [서비스 모니터링 대시보드](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/dashboard-alert-rail.html): 서비스 상태를 지켜보며 문제를 바로 알아채는 모니터링 화면입니다. 알림은 오른쪽에 따로 모아 둡니다.
 - [접히는 표 묶음](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/table-collapsible.html): 열 구성이 다른 표 여러 개를 접고 펼치며 보는 화면입니다. 표 하나로 합치면 빈칸이 많아질 때 씁니다.
 - [필터 표](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/table-filter.html): 검색과 조건으로 필요한 행만 골라 보는 표입니다. 행이 많고 거르는 기준이 여럿일 때 씁니다.
 - [묶음 표](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/table-grouped.html): 행을 상태별로 묶어 보여 주는 표입니다. 긴 목록을 몇 덩어리로 나눠 읽을 때 씁니다.
 - [받은함 표](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/table-inbox.html): 왼쪽 목록에서 고른 항목을 오른쪽에서 바로 읽는 받은함입니다. 메일이나 문의처럼 하나씩 열어 처리할 때 씁니다.
-- [검색 표](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/table-page.html): 문서 한 건의 정보와 그 안의 항목 표를 함께 보는 화면입니다. 청구서처럼 항목이 많은 문서에 씁니다.
+- [검색 표](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/table-page.html): 문서 한 건의 정보와 항목 표를 함께 보는 화면입니다. 청구서처럼 항목이 많은 문서에 씁니다.
 - [트리 표](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/table-tree.html): 상위 행을 펼치면 하위 행이 나오는 계층 표입니다. 폴더처럼 단계가 있는 목록에 씁니다.
 - [결제 폼](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/payment-form.html): 결제 정보를 한 화면에서 입력하는 폼입니다. 주문 요약을 옆에 두어 합계를 보면서 결제합니다.
 - [결제 단계](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/checkout-wizard.html): 배송부터 결제까지 단계를 나눠 진행하는 결제 화면입니다. 입력할 것이 많을 때 한 번에 한 가지씩 받습니다.
 - [문의 폼](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/contact-form.html): 문의 내용을 한 화면에서 받는 폼입니다. 단계 없이 맨 아래 버튼 하나로 보냅니다.
-- [대화상자 단계 폼](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/form-wizard-dialog.html): 보던 화면 위에 창을 띄워 짧은 단계를 진행하는 폼입니다. 화면을 옮기지 않고 간단한 설정을 마칠 때 씁니다.
+- [대화상자 단계 폼](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/form-wizard-dialog.html): 보던 화면 위에 창을 띄워 짧은 단계를 진행하는 폼입니다. 화면을 떠나지 않고 간단한 설정을 마칠 때 씁니다.
 - [단계 폼](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/form-wizard.html): 한 단계에 한 화면씩 넘어가며 입력하는 폼입니다. 순서가 중요한 입력에 씁니다.
-- [펼치는 단계 폼](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/form-wizard-inline.html): 모든 단계를 한 페이지에 펼쳐 놓고 차례로 입력하는 폼입니다. 끝난 단계는 입력한 내용만 짧게 남습니다.
-- [두 칸 폼](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/form-two-column.html): 입력 칸을 두 칸으로 나눈 문의 폼입니다. 넓은 화면에서 긴 폼을 짧아 보이게 합니다.
+- [펼치는 단계 폼](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/form-wizard-inline.html): 모든 단계를 한 페이지에 펼쳐 놓고 차례로 입력하는 폼입니다. 끝난 단계는 입력한 내용만 짧게 보여 줍니다.
+- [두 칸 폼](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/form-two-column.html): 입력 칸을 두 열로 나눈 문의 폼입니다. 넓은 화면에서 긴 폼이 짧아 보입니다.
 - [세로 단계 폼](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/form-wizard-vertical.html): 왼쪽에 단계 목록을 세로로 두는 폼입니다. 입력 항목이 많아 지금 위치를 자주 확인해야 할 때 씁니다.
 - [설정 대화상자](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/settings-dialog.html): 보던 화면을 떠나지 않고 창 안에서 설정을 바꾸는 화면입니다. 바꾼 값은 바로 적용됩니다.
 - [설정 폼](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/settings.html): 모든 설정을 한 페이지에 이어 놓은 가장 단순한 설정 화면입니다. 설정 항목이 많지 않을 때 씁니다.
 - [설정 패널](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/settings-sidebar.html): 왼쪽 메뉴로 설정 묶음을 오가는 설정 화면입니다. 항목은 그 자리에서 바로 수정합니다.
 - [로그인 카드](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/login-card.html): 화면 가운데 카드 하나로 로그인하는 기본 로그인 화면입니다.
 - [로그인 (반으로 나눈)](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/login-split.html): 한쪽에는 로그인 폼, 다른 쪽에는 사진을 둔 로그인 화면입니다. 서비스 분위기를 함께 전할 때 씁니다.
-- [로그인 (SSO)](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/login-sso.html): 이메일을 먼저 받아 회사 계정 로그인으로 이어 주는 로그인 화면입니다. 회사 계정이 없으면 비밀번호로 로그인합니다.
+- [로그인 (SSO)](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/login-sso.html): 이메일을 먼저 받고 회사 계정 로그인으로 이어 주는 화면입니다. 회사 계정이 없으면 비밀번호로 로그인합니다.
 - [캔버스 편집기](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/canvas-editor.html): 정해진 크기의 화면 위에서 디자인하는 편집기입니다. 레이어와 속성을 양옆에 둡니다.
-- [파일 탐색기](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/file-explorer.html): 폴더를 열 때마다 옆 칸으로 이어 보여 주는 파일 탐색기입니다. 깊은 폴더도 경로를 놓치지 않고 찾아갑니다.
+- [파일 탐색기](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/file-explorer.html): 폴더를 열 때마다 옆 칸에 이어 보여 주는 파일 탐색기입니다. 깊은 폴더도 경로를 놓치지 않고 찾아갑니다.
 - [코드 편집기](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/ide.html): 파일 목록, 편집 창, 터미널을 한 화면에 둔 코드 편집기입니다. 칸마다 크기를 바꾸고 접을 수 있습니다.
 - [칸반 보드](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/kanban-board.html): 할 일을 상태별 열에 카드로 늘어놓은 보드입니다. 카드를 다른 열로 옮기면 상태가 바뀝니다.
 - [페이지 편집기](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/editor.html): 블록을 끌어다 놓아 페이지를 만드는 편집기입니다. 고른 블록의 속성은 오른쪽에서 바꿉니다.
@@ -156,36 +156,36 @@
 - [기술 문서](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/documentation-technical.html): 단계마다 번호와 코드를 붙인 따라 하기 문서입니다. 처음부터 끝까지 순서대로 따라가게 합니다.
 - [주문 상세](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/detail-page.html): 주문 한 건을 자세히 보고 처리하는 화면입니다. 상품과 진행 기록, 고객 정보를 한곳에서 확인합니다.
 - [상품 상세](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/product-detail.html): 상품 하나를 자세히 보고 바로 구매하는 화면입니다.
-- [할 일 상세](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/work-item-detail.html): 할 일 하나를 자세히 보며 진행 상황을 나누는 화면입니다. 하위 할 일과 댓글로 함께 일합니다.
+- [할 일 상세](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/work-item-detail.html): 할 일 하나를 자세히 보고 진행 상황을 공유하는 화면입니다. 하위 할 일과 댓글로 함께 일합니다.
 - [AI 대화](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/ai-chat.html): AI와 주고받은 대화와 결과물을 함께 보는 화면입니다. 결과물은 옆 패널에서 따로 엽니다.
 - [AI 첫 화면](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/ai-chat-landing.html): 대화를 시작하기 전에 보여 주는 AI 첫 화면입니다. 입력창과 추천 버튼으로 바로 시작합니다.
 - [가운데 히어로](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/centered-hero.html): 큰 제목과 버튼을 가운데 두고 아래에 넓은 사진을 놓은 첫 화면입니다.
 - [바둑판 갤러리](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/classic-gallery.html): 같은 비율의 사진을 바둑판처럼 늘어놓은 갤러리입니다. 분류 탭으로 바로 걸러 봅니다.
 - [사진 묶음 히어로](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/gallery-hero.html): 제목 아래에 사진 여러 장을 모아 놓은 첫 화면입니다. 다양한 장면을 한 번에 보여 줄 때 씁니다.
 - [벽돌형 갤러리](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/mixed-gallery.html): 높이가 다른 사진을 자르지 않고 쌓아 올린 벽돌형 갤러리입니다.
-- [상품 갤러리](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/product-gallery.html): 같은 모양의 상품 카드를 늘어놓은 갤러리입니다. 둘러보며 고르기 쉽게 단순하게 구성합니다.
+- [상품 갤러리](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/product-gallery.html): 같은 모양의 상품 카드를 늘어놓은 갤러리입니다. 구성이 단순해 둘러보며 고르기 쉽습니다.
 - [옆 갤러리](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/side-gallery.html): 한쪽에 제목과 설명, 반대쪽에 사진 묶음을 둔 첫 화면입니다.
 - [게시판 목록](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/community-board.html): 카페형 게시판의 글 목록입니다. 말머리로 거르고 공지는 위에 고정합니다.
 - [커뮤니티 홈](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/community-home.html): 게시판형 커뮤니티의 첫 화면입니다. 지금 뜨는 글과 새 글을 한곳에서 봅니다.
 - [게시글 상세](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/community-post.html): 게시글 하나를 읽고 댓글로 이야기를 나누는 화면입니다.
 - [글쓰기](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/community-write.html): 커뮤니티에 새 글을 쓰는 화면입니다. 게시판과 말머리를 고른 뒤 글과 사진을 올립니다.
-- [구독 해지](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/subscription-cancel.html): 구독을 해지하기 전에 잃게 되는 혜택을 알려 주는 화면입니다. 할인을 한 번 더 제안하고, 해지는 사용자가 직접 고릅니다.
+- [구독 해지](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/subscription-cancel.html): 구독을 해지하기 전에 잃게 되는 혜택을 알려 주는 화면입니다. 할인을 한 번 더 권하고, 해지 여부는 사용자가 정합니다.
 - [요금제 비교](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/pricing-plans.html): 요금제를 나란히 놓고 비교하는 화면입니다. 월 결제와 연 결제를 바꿔 가며 가격을 견줘 봅니다.
 - [구독 결제](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/subscription-checkout.html): 고른 요금제를 결제하는 화면입니다. 오늘 결제할 금액과 다음 결제일을 옆에 보여 줍니다.
 - [내 구독](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/subscription-settings.html): 지금 쓰는 요금제와 결제를 관리하는 화면입니다. 요금제 바꾸기와 해지도 여기서 시작합니다.
 - [내 정보](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/mypage-profile.html): 내 정보와 알림 설정을 보고 수정하는 화면입니다.
 - [마이페이지 홈](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/mypage-home.html): 마이페이지의 첫 화면입니다. 혜택과 주문 현황을 한눈에 봅니다.
-- [주문 내역](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/mypage-orders.html): 주문을 날짜별로 모아 보는 내역 화면입니다. 상품마다 다음에 할 일을 바로 처리합니다.
+- [주문 내역](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/mypage-orders.html): 주문을 날짜별로 모아 보는 내역 화면입니다. 배송 조회, 리뷰 쓰기처럼 상품마다 필요한 일을 바로 처리합니다.
 - [장바구니](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/cart.html): 담은 상품을 확인하고 수량과 옵션을 바꾸는 장바구니입니다. 결제 예정 금액을 보며 바로 주문합니다.
-- [빈 장바구니](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/cart-empty.html): 담은 상품이 없을 때의 장바구니입니다. 추천 상품으로 쇼핑을 이어 가게 돕습니다.
-- [시험 신청](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/exam-apply.html): 시험 종류부터 결제까지 한 화면에서 차례로 고르는 시험 신청 화면입니다. 고른 내용과 금액은 옆 요약에 바로 나타납니다.
-- [내 시험](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/exam-my.html): 응시자가 자기 시험 일정과 점수를 한눈에 보는 화면입니다.
+- [빈 장바구니](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/cart-empty.html): 담은 상품이 없을 때의 장바구니입니다. 추천 상품을 보여 주어 쇼핑을 이어 가게 합니다.
+- [시험 신청](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/exam-apply.html): 시험 종류부터 결제까지 한 화면에서 차례로 고르는 신청 화면입니다. 고른 내용과 금액은 옆 요약에 바로 나타납니다.
+- [내 시험](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/exam-my.html): 응시자가 자신의 시험 일정과 점수를 한눈에 보는 화면입니다.
 - [성적표](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/exam-score.html): 시험 성적을 확인하는 화면입니다. 총점을 먼저 보여 주고 영역별 점수로 이어집니다.
 - [응시자 관리](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/exam-group-roster.html): 단체로 접수한 응시자를 찾아보고 관리하는 표입니다. 여러 명을 골라 수험표를 한 번에 보냅니다.
-- [단체 접수](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/exam-group-apply.html): 기관 담당자가 명단 파일을 올려 한 번에 접수하는 화면입니다. 고칠 행은 올리자마자 알려 줍니다.
+- [단체 접수](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/exam-group-apply.html): 기관 담당자가 명단 파일을 올려 한 번에 접수하는 화면입니다. 고쳐야 할 행은 올리자마자 알려 줍니다.
 - [단체 성적 대시보드](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/exam-group-dashboard.html): 기관이 단체 응시 결과를 한눈에 보는 대시보드입니다.
 - [과정 찾기](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/learning-catalog.html): 듣고 싶은 과정을 찾는 목록입니다. 분류와 수준, 학습 시간으로 걸러 봅니다.
 - [과정 운영](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/learning-admin.html): 교육 담당자가 과정과 차수를 운영하는 화면입니다.
 - [강의 보기](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/learning-player.html): 강의를 들으며 AI 튜터에게 요약과 퀴즈를 받는 화면입니다.
-- [학습 현황 대시보드](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/learning-dashboard.html): 교육 담당자가 전체 학습 현황을 보는 대시보드입니다. 마감이 다가오는 미이수자를 바로 찾습니다.
-- [학습 홈](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/learning-home.html): 임직원이 처음 보는 학습 홈입니다. 이어서 볼 강의와 필수 교육을 먼저 보여 줍니다.
+- [학습 현황 대시보드](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/learning-dashboard.html): 교육 담당자가 전체 학습 현황을 보는 대시보드입니다. 마감이 가까운 미이수자를 바로 찾습니다.
+- [학습 홈](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/learning-home.html): 임직원이 학습을 시작하는 첫 화면입니다. 이어서 볼 강의와 필수 교육을 먼저 보여 줍니다.

@@ -9,9 +9,9 @@
 <script>try { var t = localStorage.getItem("ybm-site-theme"); if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.dataset.theme = "dark"; } catch (e) {}</script>
 <link rel="icon" href="../assets/logo-ybmnet.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../dist/ybm-ds.css">
-<link rel="stylesheet" href="../assets/site.css?v=1debbdf0">
+<link rel="stylesheet" href="../assets/site.css?v=7a87c39c">
 <script src="../../dist/ybm-ds.js" defer></script>
-<script src="../assets/site.js?v=1debbdf0" defer></script>
+<script src="../assets/site.js?v=7a87c39c" defer></script>
 </head>
 <body class="site">
 <a class="site-skip" href="#main">본문 바로가기</a>
@@ -52,11 +52,11 @@
 </header>
 <nav class="site-pagetabs" aria-label="Color 문서"><a href="color.html" aria-current="page">Overview</a><a href="color-roles.html">Roles</a><a href="color-palette.html">Palette</a></nav>
 <h2 id="overview">개요<a class="site-anchor" href="#overview" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
-<p>YBM DS 의 색은 역할 색과 팔레트 색 두 층으로 되어 있습니다. 화면에는 역할 색만 쓰고, 팔레트 색은 역할 색을 만드는 원료로 둡니다. 그래서 어떤 화면에서도 글자와 바탕의 대비가 충분하고 뜻이 분명합니다.</p>
+<p>YBM DS의 색은 역할 색과 팔레트 색 두 층입니다. 화면에는 역할 색만 쓰고, 팔레트 색은 역할 색의 원료로 둡니다. 그래서 어느 화면에서나 대비가 충분하고 뜻이 같습니다.</p>
 <h2 id="role-based">역할 색<a class="site-anchor" href="#role-based" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
-<p>역할 색은 생김새가 아니라 하는 일로 이름을 붙인 색입니다. 오류는 <code>critical</code>, 성공은 <code>positive</code> 처럼 이름만 보고 어디에 쓰는지 알 수 있습니다. 자세한 규칙과 전체 목록은 <a class="ds-link" href="color-roles.html">Roles</a>에 있습니다.</p>
+<p>역할 색은 생김새가 아니라 하는 일로 이름을 붙입니다. 오류는 <code>critical</code>, 성공은 <code>positive</code>처럼 이름만 보고 쓰임을 압니다. 자세한 규칙과 전체 목록은 <a class="ds-link" href="color-roles.html">Roles</a>에 있습니다.</p>
 <h2 id="palette-color">팔레트 색<a class="site-anchor" href="#palette-color" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
-<p>팔레트 색은 회색과 일곱 가지 색을 100 ~ 1000 단계로 나눈 원료 색입니다. 역할 색으로 나타내기 어려운 드문 경우에만 화면에 씁니다. 다크 모드에서는 같은 단계 번호에 어두운 화면용 값이 들어가 있어 그대로 써도 알아보기 쉽습니다. 전체 목록은 <a class="ds-link" href="color-palette.html">Palette</a>에 있습니다.</p>
+<p>팔레트 색은 회색과 일곱 가지 색을 100 ~ 1000 단계로 나눈 원료입니다. 역할 색으로 나타내기 어려울 때만 화면에 씁니다. 다크 모드에서도 같은 단계 번호를 그대로 쓰면 됩니다. 전체 목록은 <a class="ds-link" href="color-palette.html">Palette</a>에 있습니다.</p>
 <h2 id="related">관련 문서<a class="site-anchor" href="#related" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
 <div class="site-grid site-grid--hub">
   <a class="site-hub" href="color-roles.html"><span class="site-hub__title">역할 색<i class="ds-icon ds-icon--arrow-right ds-icon--sm" aria-hidden="true"></i></span><span class="site-hub__desc">역할 색의 규칙과 전체 토큰.</span></a>
@@ -72,14 +72,14 @@
 }</code></pre>
 </figure>
 <h3>브랜드 컬러 바꾸기</h3>
-<p>브랜드 컬러 하나만 알면 됩니다. 아래 글의 대괄호 안에 그 색을 넣어 AI에 붙여 넣으면 나머지 단계와 다크 모드 값까지 만들어 넣습니다.</p>
+<p>브랜드 컬러 하나만 있으면 됩니다. 아래 글의 대괄호에 그 색을 넣어 AI에 붙여 넣으면, 나머지 단계와 다크 모드 값을 만들어 넣습니다.</p>
 <figure class="ds-codeblock" data-wrap>
   <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">text</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
   <pre class="ds-codeblock__code"><code>이 서비스의 브랜드 컬러를 [#12a150]으로 맞춰 줘.
 문서: https://luvms012-rgb.github.io/ybm-ds/site/llms.txt
-이 색을 600 단계로 두고 10단계와 다크 모드 값을 만들어 서비스 CSS에 넣은 뒤, 바뀐 화면을 보여 줘.</code></pre>
+이 색을 600 단계로 두고 나머지 단계와 다크 모드 값을 만들어 서비스 CSS에 넣어 줘. 바뀐 화면도 보여 줘.</code></pre>
 </figure>
-<p>직접 넣을 때는 서비스 CSS에서 대표 색을 <code>brand-600</code>에 넣고, 나머지 단계를 같은 색의 진하기로 채웁니다.</p>
+<p>직접 넣을 때는 대표 색을 <code>brand-600</code>에 두고, 나머지 단계를 같은 색의 진하기로 채웁니다.</p>
 <figure class="ds-codeblock">
   <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">css</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
   <pre class="ds-codeblock__code"><code>/* 서비스 CSS - DS 다음에 불러온다 */
@@ -94,7 +94,7 @@
 <div class="ds-table-wrap"><table class="ds-table" data-density="compact">
 <thead><tr><th scope="col">구분</th><th scope="col">내용</th></tr></thead>
 <tbody><tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>역할에 맞는 색을 고릅니다. 오류는 critical, 성공은 positive 입니다.</td></tr>
-<tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>진한 면 위 글자는 fg-on-[역할]-solid 를 씁니다.</td></tr>
+<tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>진한 면 위 글자는 fg-on-[역할]-solid를 씁니다.</td></tr>
 <tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>브랜드 색은 주 버튼처럼 꼭 눈에 띄어야 할 곳에만 씁니다.</td></tr>
 <tr><td><b class="ds-badge site-practice" data-tone="critical">Don't</b></td><td>hex 나 팔레트 색을 화면에 직접 쓰지 않습니다.</td></tr>
 <tr><td><b class="ds-badge site-practice" data-tone="critical">Don't</b></td><td>색만으로 뜻을 전하지 않습니다. 아이콘이나 글자를 함께 씁니다.</td></tr></tbody></table></div>

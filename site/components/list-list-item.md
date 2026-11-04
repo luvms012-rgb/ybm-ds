@@ -31,7 +31,7 @@
 | **Prefix**`ds-list-item__prefix` | 앞에 붙는 아이콘이나 요소입니다. |
 | **Content**`ds-list-item__content` | 주된 내용이 들어가는 영역입니다. |
 | **Title**`ds-list-item__title` | 제목입니다. |
-| **Desc**`ds-list-item__desc` | 제목을 돕는 설명 글입니다. |
+| **Desc**`ds-list-item__desc` | 제목에 덧붙이는 설명 글입니다. |
 | **Suffix**`ds-list-item__suffix` | 뒤에 붙는 아이콘이나 요소입니다. |
 | **Chevron**`ds-list-item__chevron` | 다른 화면으로 이동함을 알리는 꺾쇠입니다. |
 

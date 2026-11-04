@@ -65,6 +65,15 @@
     if (t.closest("[data-site-close]")) { document.body.removeAttribute("data-side-open"); return; }
 
 
+    // 코드 탭 (Get Started 다크 모드: AI 요청 / HTML)
+    var tab = t.closest("[data-site-tab]");
+    if (tab) {
+      tab.parentElement.querySelectorAll("[data-site-tab]").forEach(function (b) { b.setAttribute("aria-selected", String(b === tab)); });
+      var panels = tab.closest(".site-codetabs").querySelectorAll(".site-codetabs__panel");
+      panels.forEach(function (p, i) { p.hidden = String(i) !== tab.getAttribute("data-site-tab"); });
+      return;
+    }
+
     // 예시: 미리보기 / 코드
     var view = t.closest("[data-site-view]");
     if (view) {

@@ -9,9 +9,9 @@
 <script>try { var t = localStorage.getItem("ybm-site-theme"); if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.dataset.theme = "dark"; } catch (e) {}</script>
 <link rel="icon" href="../assets/logo-ybmnet.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../dist/ybm-ds.css">
-<link rel="stylesheet" href="../assets/site.css?v=1debbdf0">
+<link rel="stylesheet" href="../assets/site.css?v=7a87c39c">
 <script src="../../dist/ybm-ds.js" defer></script>
-<script src="../assets/site.js?v=1debbdf0" defer></script>
+<script src="../assets/site.js?v=7a87c39c" defer></script>
 </head>
 <body class="site">
 <a class="site-skip" href="#main">본문 바로가기</a>
@@ -146,7 +146,7 @@
 </div></div></div></div><div class="site-anatomy-table"><div class="ds-table-wrap"><table class="ds-table" data-density="compact">
 <thead><tr><th scope="col">부품</th><th scope="col">설명</th></tr></thead>
 <tbody><tr><td><span class="site-anatomy__part"><b>Header</b><code>ds-datepicker__header</code></span></td><td>제목과 닫기 버튼이 놓이는 머리 영역입니다.</td></tr>
-<tr><td><span class="site-anatomy__part"><b>Nav</b><code>ds-datepicker__nav</code></span></td><td>이전, 다음 달로 옮기는 버튼입니다.</td></tr>
+<tr><td><span class="site-anatomy__part"><b>Nav</b><code>ds-datepicker__nav</code></span></td><td>이전 달, 다음 달로 넘기는 버튼입니다.</td></tr>
 <tr><td><span class="site-anatomy__part"><b>Title</b><code>ds-datepicker__title</code></span></td><td>제목입니다.</td></tr>
 <tr><td><span class="site-anatomy__part"><b>Weekdays</b><code>ds-datepicker__weekdays</code></span></td><td>요일 줄입니다.</td></tr>
 <tr><td><span class="site-anatomy__part"><b>Grid</b><code>ds-datepicker__grid</code></span></td><td>날짜 칸 모음입니다.</td></tr></tbody></table></div></div>
@@ -155,11 +155,11 @@
 <tbody><tr><td><code>cell state</code></td><td><span class="ds-badge">today</span> <span class="ds-badge">selected</span> <span class="ds-badge">range-start</span> <span class="ds-badge">range-middle</span> <span class="ds-badge">range-end</span></td></tr></tbody></table></div>
 <h2 id="guide">사용 지침<a class="site-anchor" href="#guide" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><div class="ds-table-wrap"><table class="ds-table" data-density="compact">
 <thead><tr><th scope="col">구분</th><th scope="col">내용</th></tr></thead>
-<tbody><tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>날짜 고르기가 화면의 주된 일이거나 단계별 흐름의 한 단계면 화면에 바로 둡니다. 폼의 입력 칸을 눌러 고를 때는 Bottom Sheet 안에 넣습니다.</td></tr>
+<tbody><tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>날짜 고르기가 화면의 주된 일이거나 흐름의 한 단계면 화면에 바로 둡니다. 폼의 입력 칸을 눌러 고를 때는 Bottom Sheet 안에 넣습니다.</td></tr>
 <tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>여는 버튼은 Select Trigger, Text Field Input, Field Button 중 하나를 씁니다.</td></tr>
-<tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>처음에는 오늘이 있는 달을 보여 주고, 이미 고른 날짜가 있으면 그 달을 보여 줍니다.</td></tr>
+<tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>처음에는 오늘이 든 달을 보여 줍니다. 이미 고른 날짜가 있으면 그 달을 보여 줍니다.</td></tr>
 <tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>기간의 최소, 최대 조건은 Callout으로 미리 알려 줍니다. 시작일만 고른 상태에서는 확인 버튼을 끕니다.</td></tr>
-<tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>오늘이 선택된 날짜이기도 하면 선택 모양을 먼저 보여 줍니다.</td></tr></tbody></table></div>
+<tr><td><b class="ds-badge site-practice" data-tone="positive">Do</b></td><td>오늘을 고른 경우에는 오늘 표시보다 선택 모양을 먼저 보여 줍니다.</td></tr></tbody></table></div>
 <h2 id="examples">예시<a class="site-anchor" href="#examples" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><div class="site-example">
   <div class="site-example__bar"><div class="ds-chiptabs" role="tablist" aria-label="보기 방식"><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-view="preview">미리보기</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-view="code">코드</button></div></div>
   <div class="site-example__preview"><div class="pv-stage">

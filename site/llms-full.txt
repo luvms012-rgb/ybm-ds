@@ -1,6 +1,6 @@
 # YBM DS
 
-> YBM 서비스를 위한 디자인 시스템입니다. HTML 에 .ds-* 클래스를 붙이고 --ds-* 토큰으로 색, 간격, 글자를 맞춥니다. 이 파일은 AI 도구가 읽도록 문서 목록을 모은 것입니다.
+> YBM 서비스를 위한 디자인 시스템입니다. HTML에 .ds-* 클래스를 붙이고 --ds-* 토큰으로 색, 간격, 글자를 맞춥니다. 이 파일은 AI 도구가 읽도록 문서 목록을 모은 것입니다.
 
 - CSS: https://luvms012-rgb.github.io/ybm-ds/dist/ybm-ds.css
 - JS: https://luvms012-rgb.github.io/ybm-ds/dist/ybm-ds.js
@@ -9,20 +9,20 @@
 ## 지킬 것
 
 - 설치: <head>에 CSS와 JS 두 줄을 넣는다. 서비스 CSS는 그다음에 불러온다.
-- 브라우저: DS 는 CSS @layer 를 쓴다. @layer 를 모르는 브라우저(Chrome 99, Safari 15.4 이전)에서는 DS 가 적용되지 않으니, 더 오래된 브라우저를 지원해야 하면 먼저 알린다.
-- 컴포넌트: https://luvms012-rgb.github.io/ybm-ds/components.json 에 있는 것만 쓰고, 마크업은 https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/components.css 의 컴포넌트별 머리 주석 그대로 쓴다.
-- 색, 간격, 글자 크기, 모서리, 그림자는 --ds-* 토큰만 쓴다. hex, rgb 를 직접 쓰지 않는다.
-- 모양을 바꿀 때는 컴포넌트 변수(--ds-[컴포넌트]-*)만 덮어쓴다. 새 ds- 클래스나 !important 를 만들지 않는다.
-- 브랜드 컬러: 서비스 CSS의 :root 에서 --ds-color-palette-brand-100 ~ 1000 을 덮어쓴다. 받은 색을 600 단계로 두고, 다크(:root[data-theme="dark"])는 같은 단계를 뒤집어 넣는다.
-- 화면: 모바일 먼저 만들고 768px, 1280px 에서 배치를 바꾼다. 비슷한 화면이 Templates 에 있으면 그 HTML에서 시작한다.
+- 브라우저: DS는 CSS @layer를 쓴다. @layer를 모르는 브라우저(Chrome 99, Safari 15.4 이전)에서는 DS가 적용되지 않으니, 더 오래된 브라우저를 지원해야 하면 먼저 알린다.
+- 컴포넌트: https://luvms012-rgb.github.io/ybm-ds/components.json에 있는 것만 쓰고, 마크업은 https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/components.css의 컴포넌트별 머리 주석 그대로 쓴다.
+- 색, 간격, 글자 크기, 모서리, 그림자는 --ds-* 토큰만 쓴다. hex, rgb를 직접 쓰지 않는다.
+- 모양을 바꿀 때는 컴포넌트 변수(--ds-[컴포넌트]-*)만 덮어쓴다. 새 ds- 클래스나 !important를 만들지 않는다.
+- 브랜드 컬러: 서비스 CSS의 :root에서 --ds-color-palette-brand-100 ~ 1000을 덮어쓴다. 받은 색을 600 단계로 두고, 다크(:root[data-theme="dark"])는 같은 단계를 뒤집어 넣는다.
+- 화면: 모바일 먼저 만들고 768px, 1280px에서 배치를 바꾼다. 비슷한 화면이 Templates에 있으면 그 HTML에서 시작한다.
 - 글자: 한국어. 제목 Bold, 항목 제목 SemiBold, 본문 Regular, 본문은 word-break: keep-all.
 
 ## 운영 중인 사이트에 옮길 때
 
 - 한 번에 다 바꾸지 않는다. 살펴보기, DS 넣기, 브랜드 컬러, 화면 하나씩, 점검 순서로 간다.
-- DS 는 @layer 안에 있어 기존 CSS 가 늘 이긴다. 그래서 DS 를 넣기만 해서는 지금 화면이 바뀌지 않는다. 기존 규칙이 DS 부품을 덮으면 그 화면의 기존 규칙만 걷어 낸다.
+- DS는 @layer 안에 있어 기존 CSS가 늘 이긴다. 그래서 DS를 넣기만 해서는 지금 화면이 바뀌지 않는다. 기존 규칙이 DS 부품을 덮으면 그 화면의 기존 규칙만 걷어 낸다.
 - 서버 코드(PHP, JSP 등)의 로직은 바꾸지 않는다. 스크립트와 서버가 쓰는 class, id, name 속성은 그대로 두고, 필요하면 DS 클래스를 함께 붙인다.
-- 기존 CSS 의 hex 색은 가까운 --ds-color-* 역할 토큰으로 바꾸고, 바꾼 짝은 목록으로 남긴다.
+- 기존 CSS의 hex 색은 가까운 --ds-color-* 역할 토큰으로 바꾸고, 바꾼 짝은 목록으로 남긴다.
 - 화면을 바꿀 때마다 바꾸기 전후 화면을 비교해 보여 주고 확인을 받는다.
 
 <!-- https://luvms012-rgb.github.io/ybm-ds/site/index.md -->
@@ -50,7 +50,7 @@ YBM DS는 YBM 서비스를 위한 디자인 시스템입니다.
 ```text
 이 서비스의 브랜드 컬러를 [#12a150]으로 맞춰 줘.
 문서: https://luvms012-rgb.github.io/ybm-ds/site/llms.txt
-이 색을 600 단계로 두고 10단계와 다크 모드 값을 만들어 서비스 CSS에 넣은 뒤, 바뀐 화면을 보여 줘.
+이 색을 600 단계로 두고 나머지 단계와 다크 모드 값을 만들어 서비스 CSS에 넣어 줘. 바뀐 화면도 보여 줘.
 ```
 
 ### 화면 만들기
@@ -82,7 +82,7 @@ YBM DS로 [만들 화면, 예: 회원 목록 화면]을 만들어 줘.
 
 ## 내 사이트에 적용해보기
 
-운영 중인 사이트에 적용할 때는 한 번에 다 바꾸지 않고 아래 순서로 갑니다. 브랜드 컬러와 규칙 점검은 위 AI로 시작하기의 글을 그대로 씁니다.
+운영 중인 사이트는 한 번에 바꾸지 않고 아래 순서대로 적용합니다. 브랜드 컬러와 규칙 점검은 위 AI로 시작하기의 글을 그대로 씁니다.
 
 ### 1. 사이트 살펴보기
 
@@ -91,37 +91,39 @@ YBM DS로 [만들 화면, 예: 회원 목록 화면]을 만들어 줘.
 ```text
 이 사이트에 YBM DS를 옮겨 오려고 해. 아직 고치지 말고 먼저 살펴봐 줘.
 문서: https://luvms012-rgb.github.io/ybm-ds/site/llms.txt
-공통 <head>가 있는 파일, CSS 파일, 자주 쓰는 색과 부품(버튼, 입력, 표)을 정리하고 어느 화면부터 바꿀지 순서를 제안해 줘.
+공통 <head> 파일, CSS 파일, 자주 쓰는 색과 부품을 정리하고 바꿀 순서를 제안해 줘.
 ```
 
 ### 2. DS 넣기
 
-공통 <head>에 넣습니다. DS는 기존 CSS보다 약하게 들어가 지금 화면이 거의 바뀌지 않습니다.
+공통 <head>에 넣습니다. 기존 CSS가 DS보다 먼저 적용되어 지금 화면은 거의 그대로입니다.
 
 ```text
 이 사이트의 공통 <head>에 YBM DS를 넣어 줘.
 문서: https://luvms012-rgb.github.io/ybm-ds/site/llms.txt
-지금 화면이 바뀌면 안 되니, 넣은 뒤 달라진 화면이 있으면 알려 줘.
+넣은 뒤 지금 화면에서 달라진 곳이 있으면 알려 줘.
 ```
 
 ### 3. 화면 하나씩 바꾸기
 
-한 번에 다 바꾸지 않고 화면마다 대괄호 안만 바꿔 붙여 넣습니다.
+화면마다 대괄호 안만 바꿔 붙여 넣습니다.
 
 ```text
 [바꿀 화면, 예: 회원 정보 수정] 화면을 YBM DS 컴포넌트로 바꿔 줘.
 문서: https://luvms012-rgb.github.io/ybm-ds/site/llms.txt
-서버 코드와 스크립트가 쓰는 class, id, name 은 그대로 두고, 바꾸기 전후 화면을 비교해서 보여 줘.
+서버 코드와 스크립트가 쓰는 class, id, name은 그대로 두고, 바꾸기 전후 화면을 비교해서 보여 줘.
 ```
 
-DS는 CSS `@layer`를 씁니다. Chrome 99, Safari 15.4 보다 오래된 브라우저에서는 DS가 적용되지 않습니다.
+DS는 CSS `@layer`를 씁니다. Chrome 99, Safari 15.4보다 오래된 브라우저에서는 DS가 적용되지 않습니다.
 
 ## 다크 모드
 
 `html`에 속성 하나를 붙이면 모든 색이 어두운 화면용으로 바뀝니다. 색을 토큰으로만 썼다면 따로 고칠 것이 없습니다.
 
-```html
-<html lang="ko" data-theme="dark">
+```text
+이 사이트에 YBM DS 다크 모드를 넣어 줘.
+문서: https://luvms012-rgb.github.io/ybm-ds/site/llms.txt
+화면 오른쪽 위에 라이트, 다크 전환 버튼을 만들고, 처음에는 기기 설정을 따르게 해 줘.
 ```
 
 ## AI가 읽는 파일
@@ -137,7 +139,7 @@ DS는 CSS `@layer`를 씁니다. Chrome 99, Safari 15.4 보다 오래된 브라�
 | [tokens.css](https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/tokens.css) | 색, 간격, 글자 크기 같은 `--ds-*` 토큰입니다. |
 | 페이지별 `.md` | 문서 제목 아래 Markdown 메뉴에서 그 페이지만 복사합니다. |
 
-Figma 변수 이름이 CSS 변수 이름과 같아, AI에 [Figma](https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=2608-2) 화면을 주면 같은 토큰 이름으로 옮깁니다.
+Figma 변수와 CSS 변수는 이름이 같습니다. AI에 [Figma](https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=2608-2) 화면을 주면 같은 토큰으로 옮깁니다.
 
 
 ---
@@ -150,15 +152,15 @@ Figma 변수 이름이 CSS 변수 이름과 같아, AI에 [Figma](https://www.fi
 
 ## 개요
 
-YBM DS 의 색은 역할 색과 팔레트 색 두 층으로 되어 있습니다. 화면에는 역할 색만 쓰고, 팔레트 색은 역할 색을 만드는 원료로 둡니다. 그래서 어떤 화면에서도 글자와 바탕의 대비가 충분하고 뜻이 분명합니다.
+YBM DS의 색은 역할 색과 팔레트 색 두 층입니다. 화면에는 역할 색만 쓰고, 팔레트 색은 역할 색의 원료로 둡니다. 그래서 어느 화면에서나 대비가 충분하고 뜻이 같습니다.
 
 ## 역할 색
 
-역할 색은 생김새가 아니라 하는 일로 이름을 붙인 색입니다. 오류는 `critical`, 성공은 `positive` 처럼 이름만 보고 어디에 쓰는지 알 수 있습니다. 자세한 규칙과 전체 목록은 [Roles](https://luvms012-rgb.github.io/ybm-ds/site/foundations/color-roles.md)에 있습니다.
+역할 색은 생김새가 아니라 하는 일로 이름을 붙입니다. 오류는 `critical`, 성공은 `positive`처럼 이름만 보고 쓰임을 압니다. 자세한 규칙과 전체 목록은 [Roles](https://luvms012-rgb.github.io/ybm-ds/site/foundations/color-roles.md)에 있습니다.
 
 ## 팔레트 색
 
-팔레트 색은 회색과 일곱 가지 색을 100 ~ 1000 단계로 나눈 원료 색입니다. 역할 색으로 나타내기 어려운 드문 경우에만 화면에 씁니다. 다크 모드에서는 같은 단계 번호에 어두운 화면용 값이 들어가 있어 그대로 써도 알아보기 쉽습니다. 전체 목록은 [Palette](https://luvms012-rgb.github.io/ybm-ds/site/foundations/color-palette.md)에 있습니다.
+팔레트 색은 회색과 일곱 가지 색을 100 ~ 1000 단계로 나눈 원료입니다. 역할 색으로 나타내기 어려울 때만 화면에 씁니다. 다크 모드에서도 같은 단계 번호를 그대로 쓰면 됩니다. 전체 목록은 [Palette](https://luvms012-rgb.github.io/ybm-ds/site/foundations/color-palette.md)에 있습니다.
 
 ## 관련 문서
 
@@ -178,15 +180,15 @@ YBM DS 의 색은 역할 색과 팔레트 색 두 층으로 되어 있습니다.
 
 ### 브랜드 컬러 바꾸기
 
-브랜드 컬러 하나만 알면 됩니다. 아래 글의 대괄호 안에 그 색을 넣어 AI에 붙여 넣으면 나머지 단계와 다크 모드 값까지 만들어 넣습니다.
+브랜드 컬러 하나만 있으면 됩니다. 아래 글의 대괄호에 그 색을 넣어 AI에 붙여 넣으면, 나머지 단계와 다크 모드 값을 만들어 넣습니다.
 
 ```text
 이 서비스의 브랜드 컬러를 [#12a150]으로 맞춰 줘.
 문서: https://luvms012-rgb.github.io/ybm-ds/site/llms.txt
-이 색을 600 단계로 두고 10단계와 다크 모드 값을 만들어 서비스 CSS에 넣은 뒤, 바뀐 화면을 보여 줘.
+이 색을 600 단계로 두고 나머지 단계와 다크 모드 값을 만들어 서비스 CSS에 넣어 줘. 바뀐 화면도 보여 줘.
 ```
 
-직접 넣을 때는 서비스 CSS에서 대표 색을 `brand-600`에 넣고, 나머지 단계를 같은 색의 진하기로 채웁니다.
+직접 넣을 때는 대표 색을 `brand-600`에 두고, 나머지 단계를 같은 색의 진하기로 채웁니다.
 
 ```css
 /* 서비스 CSS - DS 다음에 불러온다 */
@@ -203,7 +205,7 @@ YBM DS 의 색은 역할 색과 팔레트 색 두 층으로 되어 있습니다.
 | 구분 | 내용 |
 | --- | --- |
 | **Do** | 역할에 맞는 색을 고릅니다. 오류는 critical, 성공은 positive 입니다. |
-| **Do** | 진한 면 위 글자는 fg-on-[역할]-solid 를 씁니다. |
+| **Do** | 진한 면 위 글자는 fg-on-[역할]-solid를 씁니다. |
 | **Do** | 브랜드 색은 주 버튼처럼 꼭 눈에 띄어야 할 곳에만 씁니다. |
 | **Don't** | hex 나 팔레트 색을 화면에 직접 쓰지 않습니다. |
 | **Don't** | 색만으로 뜻을 전하지 않습니다. 아이콘이나 글자를 함께 씁니다. |
@@ -275,7 +277,7 @@ YBM DS 의 색은 역할 색과 팔레트 색 두 층으로 되어 있습니다.
 | 구분 | 내용 |
 | --- | --- |
 | **Do** | 크기와 줄 높이는 같은 번호끼리 짝으로 씁니다. |
-| **Do** | 제목은 Bold, 항목 제목은 SemiBold, 본문은 Regular 로 위계를 나눕니다. |
+| **Do** | 제목은 Bold, 항목 제목은 SemiBold, 본문은 Regular로 위계를 나눕니다. |
 | **Do** | 한 화면의 크기는 서너 단계로 줄입니다. |
 | **Don't** | px 숫자를 직접 쓰지 않습니다. |
 | **Don't** | 강조를 색으로만 하지 않습니다. 굵기를 먼저 씁니다. |
@@ -371,7 +373,7 @@ YBM DS 의 색은 역할 색과 팔레트 색 두 층으로 되어 있습니다.
 ## 폭에 따라 바뀌는 컴포넌트
 
 - Top Navigation ↔ Top App Bar, Side Panel ↔ Bottom Sheet, Dialog ↔ Bottom Sheet는 768을 기준으로 바꿉니다.
-- Side Navigation은 1280 이상 펼침, 768 이상 접힘, 그보다 좁으면 서랍 메뉴입니다.
+- Side Navigation은 1280 이상에서 펼치고, 768 이상에서 접고, 그보다 좁으면 서랍 메뉴로 엽니다.
 
 ## 코드에서 쓰기
 
@@ -388,7 +390,7 @@ YBM DS 의 색은 역할 색과 팔레트 색 두 층으로 되어 있습니다.
 
 | 구분 | 내용 |
 | --- | --- |
-| **Do** | 모바일 화면을 먼저 만들고 min-width 로 넓은 화면을 더합니다. |
+| **Do** | 모바일 화면을 먼저 만들고 min-width로 넓은 화면을 더합니다. |
 | **Do** | 기준점은 표의 네 값만 씁니다. |
 | **Don't** | 기기 이름(아이폰, 갤럭시)에 맞춘 폭을 따로 만들지 않습니다. |
 
@@ -428,7 +430,7 @@ YBM DS 의 색은 역할 색과 팔레트 색 두 층으로 되어 있습니다.
   border-radius: var(--ds-shape-lg);
 }
 .admin-area {
-  --ds-shape-scale: 0.5;  /* 이 영역 안의 모서리를 절반으로 */
+  --ds-shape-scale: 0.5;  /*이 영역 안의 모서리를 절반으로 */
 }
 ```
 
@@ -450,7 +452,7 @@ YBM DS 의 색은 역할 색과 팔레트 색 두 층으로 되어 있습니다.
 
 ## 개요
 
-위에 떠 있는 면일수록 지금 더 중요합니다. 그림자는 숫자 대신 쓰임 이름으로 쓰고, 다크 모드에서는 떠 있는 면을 `bg-layer-floating`으로 한 단계 밝게 칠해 높이를 보여 줍니다.
+위에 떠 있는 면일수록 지금 더 중요합니다. 그림자는 숫자 대신 쓰임 이름으로 씁니다. 다크 모드에서는 떠 있는 면을 `bg-layer-floating`으로 한 단계 밝게 칠합니다.
 
 ## 그림자
 
@@ -565,109 +567,99 @@ YBM DS 의 색은 역할 색과 팔레트 색 두 층으로 되어 있습니다.
 
 ## 역할
 
-속성 다음에 뜻을 나타내는 역할이 붙습니다. 같은 역할은 여러 속성에 걸쳐 함께 쓰여 화면 전체에서 같은 뜻으로 읽힙니다.
+속성 다음에는 뜻을 나타내는 역할이 붙습니다. 같은 역할은 배경, 글자, 테두리에 함께 쓰여 어디서나 같은 뜻으로 읽힙니다.
 
 ### Brand
 
 브랜드 색은 브랜드와 이어지는 요소를 바로 알아보게 합니다. 화면에서 가장 중요한 동작 하나를 강조할 때도 씁니다.
 
-`--ds-color-fg-brand`
-
-`--ds-color-bg-brand-solid`
-
-`--ds-color-bg-brand-solid-pressed`
-
-`--ds-color-bg-brand-weak`
-
-`--ds-color-stroke-brand-solid`
+| 토큰 | 값 |
+| --- | --- |
+| `--ds-color-fg-brand` | `#2563eb / #3b82f6` |
+| `--ds-color-bg-brand-solid` | `#2563eb / #3b82f6` |
+| `--ds-color-bg-brand-solid-pressed` | `#1d4ed8 / #60a5fa` |
+| `--ds-color-bg-brand-weak` | `#dbeafe / #172554` |
+| `--ds-color-stroke-brand-solid` | `#1d4ed8 / #60a5fa` |
 
 ### Neutral
 
 기본 색은 대부분의 글과 바탕에 쓰는 색입니다. 가장 눈에 띄지는 않지만 늘 잘 보여야 하는 요소에 씁니다.
 
-`--ds-color-fg-neutral`
-
-`--ds-color-fg-neutral-muted`
-
-`--ds-color-fg-neutral-subtle`
-
-`--ds-color-fg-on-neutral-solid`
-
-`--ds-color-bg-neutral-solid`
-
-`--ds-color-bg-neutral-weak`
+| 토큰 | 값 |
+| --- | --- |
+| `--ds-color-fg-neutral` | `#1a1c20 / #f3f4f5` |
+| `--ds-color-fg-neutral-muted` | `#555d6d / #dcdee3` |
+| `--ds-color-fg-neutral-subtle` | `#868b94 / #b0b3ba` |
+| `--ds-color-fg-on-neutral-solid` | `#ffffff / #16171b` |
+| `--ds-color-bg-neutral-solid` | `#2a3038 / #f3f4f5` |
+| `--ds-color-bg-neutral` | `#f3f4f5 / #2b2e35` |
+| `--ds-color-bg-neutral-weak-alpha` | `#0000000c / #ffffff20` |
 
 ### Positive
 
 성공 색은 끝난 일, 확인, 좋은 상태를 알립니다.
 
-`--ds-color-fg-positive`
-
-`--ds-color-fg-positive-contrast`
-
-`--ds-color-bg-positive-solid`
-
-`--ds-color-bg-positive-weak`
+| 토큰 | 값 |
+| --- | --- |
+| `--ds-color-fg-positive` | `#079171 / #22b27f` |
+| `--ds-color-fg-positive-contrast` | `#075445 / #93e5c0` |
+| `--ds-color-bg-positive-solid` | `#079171 / #117956` |
+| `--ds-color-bg-positive-weak` | `#edfaf6 / #202926` |
 
 ### Warning
 
 주의 색은 마감 임박처럼 사용자가 한 번 더 살펴야 할 내용을 알립니다.
 
-`--ds-color-fg-warning`
-
-`--ds-color-fg-warning-contrast`
-
-`--ds-color-bg-warning-solid`
-
-`--ds-color-bg-warning-weak`
+| 토큰 | 값 |
+| --- | --- |
+| `--ds-color-fg-warning` | `#e14d00 / #ff6600` |
+| `--ds-color-fg-warning-contrast` | `#862b00 / #eecebc` |
+| `--ds-color-bg-warning-solid` | `#e14d00 / #e65200` |
+| `--ds-color-bg-warning-weak` | `#fff2ec / #31241f` |
 
 ### Critical
 
 오류 색은 실패, 삭제처럼 바로 주의를 끌어야 하는 문제를 알립니다.
 
-`--ds-color-fg-critical`
-
-`--ds-color-fg-critical-contrast`
-
-`--ds-color-bg-critical-solid`
-
-`--ds-color-bg-critical-weak`
+| 토큰 | 값 |
+| --- | --- |
+| `--ds-color-fg-critical` | `#fa342c / #ff6e60` |
+| `--ds-color-fg-critical-contrast` | `#921708 / #f8c5c3` |
+| `--ds-color-bg-critical-solid` | `#fa342c / #f73526` |
+| `--ds-color-bg-critical-weak` | `#fdf0f0 / #322323` |
 
 ### Informative
 
 안내 색은 도움말과 상태 설명처럼 알아 두면 좋은 정보를 전합니다.
 
-`--ds-color-fg-informative`
-
-`--ds-color-fg-informative-contrast`
-
-`--ds-color-bg-informative-solid`
-
-`--ds-color-bg-informative-weak`
+| 토큰 | 값 |
+| --- | --- |
+| `--ds-color-fg-informative` | `#217cf9 / #41a2f9` |
+| `--ds-color-fg-informative-contrast` | `#0b4596 / #b9d7fb` |
+| `--ds-color-bg-informative-solid` | `#217cf9 / #1e82eb` |
+| `--ds-color-bg-informative-weak` | `#eff6ff / #202742` |
 
 ### Magic
 
 AI 색은 AI 기능과 새 기능을 다른 기능과 구분해 보여 줍니다.
 
-`--ds-color-fg-magic`
-
-`--ds-color-bg-magic-solid`
-
-`--ds-color-bg-magic-weak`
-
-`--ds-color-stroke-magic-solid`
+| 토큰 | 값 |
+| --- | --- |
+| `--ds-color-fg-magic` | `#8969ea / #9179e0` |
+| `--ds-color-bg-magic-solid` | `#8969ea / #7659bd` |
+| `--ds-color-bg-magic-weak` | `#f5f3fe / #201a2e` |
+| `--ds-color-stroke-magic-solid` | `#8969ea / #9179e0` |
 
 ### Layer
 
 면 색은 화면의 깊이와 겹침을 나눕니다. 화면 바탕, 기본 면, 떠 있는 면 순서로 위에 놓입니다.
 
-`--ds-color-bg-canvas`
-
-`--ds-color-bg-layer-default`
-
-`--ds-color-bg-layer-floating`
-
-`--ds-color-bg-overlay`
+| 토큰 | 값 |
+| --- | --- |
+| `--ds-color-bg-canvas` | `#f7f8f9 / #000000` |
+| `--ds-color-bg-layer-default` | `#ffffff / #16171b` |
+| `--ds-color-bg-layer-floating` | `#ffffff / #1d2025` |
+| `--ds-color-bg-overlay` | `#00000074` |
 
 ## 변형
 
@@ -693,101 +685,101 @@ AI 색은 AI 기능과 새 기능을 다른 기능과 구분해 보여 줍니다
 
 | 토큰 | 값 |
 | --- | --- |
-| `--ds-color-bg-brand-solid` 브랜드 진한 면 배경입니다. | `palette-brand-600` |
-| `--ds-color-bg-brand-solid-pressed` 브랜드 진한 면 배경, 눌렀을 때입니다. | `palette-brand-700` |
-| `--ds-color-bg-brand-weak` 브랜드 옅은 면 배경입니다. | `palette-brand-100` |
-| `--ds-color-bg-brand-weak-pressed` 브랜드 옅은 면 배경, 눌렀을 때입니다. | `palette-brand-200` |
-| `--ds-color-bg-canvas` 화면 바탕 배경입니다. | `palette-gray-100` |
-| `--ds-color-bg-critical-solid` 오류 진한 면 배경입니다. | `palette-red-700` |
-| `--ds-color-bg-critical-solid-pressed` 오류 진한 면 배경, 눌렀을 때입니다. | `palette-red-800` |
-| `--ds-color-bg-critical-weak` 오류 옅은 면 배경입니다. | `palette-red-100` |
-| `--ds-color-bg-critical-weak-pressed` 오류 옅은 면 배경, 눌렀을 때입니다. | `palette-red-200` |
-| `--ds-color-bg-disabled` 꺼짐 배경입니다. | `palette-gray-200` |
-| `--ds-color-bg-informative-solid` 안내 진한 면 배경입니다. | `palette-blue-700` |
-| `--ds-color-bg-informative-solid-pressed` 안내 진한 면 배경, 눌렀을 때입니다. | `palette-blue-800` |
-| `--ds-color-bg-informative-weak` 안내 옅은 면 배경입니다. | `palette-blue-100` |
-| `--ds-color-bg-informative-weak-pressed` 안내 옅은 면 배경, 눌렀을 때입니다. | `palette-blue-200` |
-| `--ds-color-bg-layer-default` 면 기본 배경입니다. | `palette-gray-00` |
-| `--ds-color-bg-layer-floating` 면 떠 있는 면 배경입니다. | `palette-gray-00` |
-| `--ds-color-bg-magic-solid` AI 진한 면 배경입니다. | `palette-purple-700` |
-| `--ds-color-bg-magic-solid-pressed` AI 진한 면 배경, 눌렀을 때입니다. | `palette-purple-800` |
-| `--ds-color-bg-magic-weak` AI 옅은 면 배경입니다. | `palette-purple-100` |
-| `--ds-color-bg-magic-weak-pressed` AI 옅은 면 배경, 눌렀을 때입니다. | `palette-purple-200` |
-| `--ds-color-bg-neutral` 기본 배경입니다. | `palette-gray-200` |
-| `--ds-color-bg-neutral-inverted` 기본 반전 배경입니다. | `palette-gray-900` |
-| `--ds-color-bg-neutral-inverted-pressed` 기본 반전 배경, 눌렀을 때입니다. | `palette-gray-800` |
-| `--ds-color-bg-neutral-muted` 기본 한 단계 흐린 배경입니다. | `palette-gray-100` |
-| `--ds-color-bg-neutral-solid` 기본 진한 면 배경입니다. | `palette-gray-900` |
-| `--ds-color-bg-neutral-solid-pressed` 기본 진한 면 배경, 눌렀을 때입니다. | `palette-gray-800` |
-| `--ds-color-bg-neutral-subtle` 기본 두 단계 흐린 배경입니다. | `palette-gray-00` |
-| `--ds-color-bg-neutral-weak-alpha` 기본 옅은 반투명 면 배경입니다. | `palette-static-black-alpha-200` |
-| `--ds-color-bg-neutral-weak-alpha-pressed` 기본 옅은 반투명 면 배경, 눌렀을 때입니다. | `palette-static-black-alpha-300` |
-| `--ds-color-bg-neutral-weak-pressed` 기본 옅은 면 배경, 눌렀을 때입니다. | `palette-gray-300` |
-| `--ds-color-bg-overlay` 덮개 배경입니다. | `palette-static-black-alpha-700` |
-| `--ds-color-bg-positive-solid` 성공 진한 면 배경입니다. | `palette-green-700` |
-| `--ds-color-bg-positive-solid-pressed` 성공 진한 면 배경, 눌렀을 때입니다. | `palette-green-800` |
-| `--ds-color-bg-positive-weak` 성공 옅은 면 배경입니다. | `palette-green-100` |
-| `--ds-color-bg-positive-weak-pressed` 성공 옅은 면 배경, 눌렀을 때입니다. | `palette-green-200` |
+| `--ds-color-bg-brand-solid` 브랜드 진한 면 배경입니다. | `#2563eb / #3b82f6` |
+| `--ds-color-bg-brand-solid-pressed` 브랜드 진한 면 배경, 눌렀을 때입니다. | `#1d4ed8 / #60a5fa` |
+| `--ds-color-bg-brand-weak` 브랜드 옅은 면 배경입니다. | `#dbeafe / #172554` |
+| `--ds-color-bg-brand-weak-pressed` 브랜드 옅은 면 배경, 눌렀을 때입니다. | `#bfdbfe / #1e3a8a` |
+| `--ds-color-bg-canvas` 화면 바탕 배경입니다. | `#f7f8f9 / #000000` |
+| `--ds-color-bg-critical-solid` 오류 진한 면 배경입니다. | `#fa342c / #f73526` |
+| `--ds-color-bg-critical-solid-pressed` 오류 진한 면 배경, 눌렀을 때입니다. | `#ca1d13 / #ff6e60` |
+| `--ds-color-bg-critical-weak` 오류 옅은 면 배경입니다. | `#fdf0f0 / #322323` |
+| `--ds-color-bg-critical-weak-pressed` 오류 옅은 면 배경, 눌렀을 때입니다. | `#fde7e7 / #4f2624` |
+| `--ds-color-bg-disabled` 꺼짐 배경입니다. | `#f3f4f5 / #2b2e35` |
+| `--ds-color-bg-informative-solid` 안내 진한 면 배경입니다. | `#217cf9 / #1e82eb` |
+| `--ds-color-bg-informative-solid-pressed` 안내 진한 면 배경, 눌렀을 때입니다. | `#135fcd / #41a2f9` |
+| `--ds-color-bg-informative-weak` 안내 옅은 면 배경입니다. | `#eff6ff / #202742` |
+| `--ds-color-bg-informative-weak-pressed` 안내 옅은 면 배경, 눌렀을 때입니다. | `#e2edfc / #1e3352` |
+| `--ds-color-bg-layer-default` 면 기본 배경입니다. | `#ffffff / #16171b` |
+| `--ds-color-bg-layer-floating` 면 떠 있는 면 배경입니다. | `#ffffff / #1d2025` |
+| `--ds-color-bg-magic-solid` AI 진한 면 배경입니다. | `#8969ea / #7659bd` |
+| `--ds-color-bg-magic-solid-pressed` AI 진한 면 배경, 눌렀을 때입니다. | `#6d50cb / #9179e0` |
+| `--ds-color-bg-magic-weak` AI 옅은 면 배경입니다. | `#f5f3fe / #201a2e` |
+| `--ds-color-bg-magic-weak-pressed` AI 옅은 면 배경, 눌렀을 때입니다. | `#efeafe / #2b2140` |
+| `--ds-color-bg-neutral` 기본 배경입니다. | `#f3f4f5 / #2b2e35` |
+| `--ds-color-bg-neutral-inverted` 기본 반전 배경입니다. | `#2a3038 / #f3f4f5` |
+| `--ds-color-bg-neutral-inverted-pressed` 기본 반전 배경, 눌렀을 때입니다. | `#555d6d / #dcdee3` |
+| `--ds-color-bg-neutral-muted` 기본 한 단계 흐린 배경입니다. | `#f7f8f9 / #1d2025` |
+| `--ds-color-bg-neutral-solid` 기본 진한 면 배경입니다. | `#2a3038 / #f3f4f5` |
+| `--ds-color-bg-neutral-solid-pressed` 기본 진한 면 배경, 눌렀을 때입니다. | `#555d6d / #dcdee3` |
+| `--ds-color-bg-neutral-subtle` 기본 두 단계 흐린 배경입니다. | `#ffffff / #16171b` |
+| `--ds-color-bg-neutral-weak-alpha` 기본 옅은 반투명 면 배경입니다. | `#0000000c / #ffffff20` |
+| `--ds-color-bg-neutral-weak-alpha-pressed` 기본 옅은 반투명 면 배경, 눌렀을 때입니다. | `#00000010 / #ffffff2e` |
+| `--ds-color-bg-neutral-weak-pressed` 기본 옅은 면 배경, 눌렀을 때입니다. | `#eeeff1 / #393d46` |
+| `--ds-color-bg-overlay` 덮개 배경입니다. | `#00000074` |
+| `--ds-color-bg-positive-solid` 성공 진한 면 배경입니다. | `#079171 / #117956` |
+| `--ds-color-bg-positive-solid-pressed` 성공 진한 면 배경, 눌렀을 때입니다. | `#00745f / #1b946d` |
+| `--ds-color-bg-positive-weak` 성공 옅은 면 배경입니다. | `#edfaf6 / #202926` |
+| `--ds-color-bg-positive-weak-pressed` 성공 옅은 면 배경, 눌렀을 때입니다. | `#d9f6e9 / #20362e` |
 | `--ds-color-bg-transparent` 투명 배경입니다. | `transparent` |
-| `--ds-color-bg-transparent-pressed` 투명 배경, 눌렀을 때입니다. | `palette-static-black-alpha-200` |
-| `--ds-color-bg-warning-solid` 주의 진한 면 배경입니다. | `palette-orange-700` |
-| `--ds-color-bg-warning-solid-pressed` 주의 진한 면 배경, 눌렀을 때입니다. | `palette-orange-800` |
-| `--ds-color-bg-warning-weak` 주의 옅은 면 배경입니다. | `palette-orange-100` |
-| `--ds-color-bg-warning-weak-pressed` 주의 옅은 면 배경, 눌렀을 때입니다. | `palette-orange-200` |
+| `--ds-color-bg-transparent-pressed` 투명 배경, 눌렀을 때입니다. | `#0000000c / #ffffff20` |
+| `--ds-color-bg-warning-solid` 주의 진한 면 배경입니다. | `#e14d00 / #e65200` |
+| `--ds-color-bg-warning-solid-pressed` 주의 진한 면 배경, 눌렀을 때입니다. | `#b93901 / #ff6600` |
+| `--ds-color-bg-warning-weak` 주의 옅은 면 배경입니다. | `#fff2ec / #31241f` |
+| `--ds-color-bg-warning-weak-pressed` 주의 옅은 면 배경, 눌렀을 때입니다. | `#ffe8db / #4b291c` |
 
 ### 글자와 아이콘
 
 | 토큰 | 값 |
 | --- | --- |
-| `--ds-color-fg-brand` 브랜드 글자와 아이콘입니다. | `palette-brand-600` |
-| `--ds-color-fg-brand-contrast` 브랜드 더 진한 글자와 아이콘입니다. | `palette-brand-700` |
-| `--ds-color-fg-critical` 오류 글자와 아이콘입니다. | `palette-red-700` |
-| `--ds-color-fg-critical-contrast` 오류 더 진한 글자와 아이콘입니다. | `palette-red-900` |
-| `--ds-color-fg-disabled` 꺼짐 글자와 아이콘입니다. | `palette-gray-500` |
-| `--ds-color-fg-informative` 안내 글자와 아이콘입니다. | `palette-blue-700` |
-| `--ds-color-fg-informative-contrast` 안내 더 진한 글자와 아이콘입니다. | `palette-blue-900` |
-| `--ds-color-fg-magic` AI 글자와 아이콘입니다. | `palette-purple-700` |
-| `--ds-color-fg-magic-contrast` AI 더 진한 글자와 아이콘입니다. | `palette-purple-900` |
-| `--ds-color-fg-neutral` 기본 글자와 아이콘입니다. | `palette-gray-1000` |
-| `--ds-color-fg-neutral-inverted` 기본 반전 글자와 아이콘입니다. | `palette-gray-00` |
-| `--ds-color-fg-neutral-muted` 기본 한 단계 흐린 글자와 아이콘입니다. | `palette-gray-800` |
-| `--ds-color-fg-neutral-subtle` 기본 두 단계 흐린 글자와 아이콘입니다. | `palette-gray-700` |
-| `--ds-color-fg-on-brand-solid` 브랜드 진한 면 위의 글자와 아이콘입니다. | `palette-static-white` |
-| `--ds-color-fg-on-critical-solid` 오류 진한 면 위의 글자와 아이콘입니다. | `palette-static-white` |
-| `--ds-color-fg-on-informative-solid` 안내 진한 면 위의 글자와 아이콘입니다. | `palette-static-white` |
-| `--ds-color-fg-on-magic-solid` AI 진한 면 위의 글자와 아이콘입니다. | `palette-static-white` |
-| `--ds-color-fg-on-neutral-solid` 기본 진한 면 위의 글자와 아이콘입니다. | `palette-gray-00` |
-| `--ds-color-fg-on-positive-solid` 성공 진한 면 위의 글자와 아이콘입니다. | `palette-static-white` |
-| `--ds-color-fg-on-warning-solid` 주의 진한 면 위의 글자와 아이콘입니다. | `palette-static-white` |
-| `--ds-color-fg-placeholder` 입력 전 안내 글자 글자와 아이콘입니다. | `palette-gray-600` |
-| `--ds-color-fg-positive` 성공 글자와 아이콘입니다. | `palette-green-700` |
-| `--ds-color-fg-positive-contrast` 성공 더 진한 글자와 아이콘입니다. | `palette-green-900` |
-| `--ds-color-fg-warning` 주의 글자와 아이콘입니다. | `palette-orange-700` |
-| `--ds-color-fg-warning-contrast` 주의 더 진한 글자와 아이콘입니다. | `palette-orange-900` |
+| `--ds-color-fg-brand` 브랜드 글자와 아이콘입니다. | `#2563eb / #3b82f6` |
+| `--ds-color-fg-brand-contrast` 브랜드 더 진한 글자와 아이콘입니다. | `#1d4ed8 / #60a5fa` |
+| `--ds-color-fg-critical` 오류 글자와 아이콘입니다. | `#fa342c / #ff6e60` |
+| `--ds-color-fg-critical-contrast` 오류 더 진한 글자와 아이콘입니다. | `#921708 / #f8c5c3` |
+| `--ds-color-fg-disabled` 꺼짐 글자와 아이콘입니다. | `#d1d3d8 / #5b606a` |
+| `--ds-color-fg-informative` 안내 글자와 아이콘입니다. | `#217cf9 / #41a2f9` |
+| `--ds-color-fg-informative-contrast` 안내 더 진한 글자와 아이콘입니다. | `#0b4596 / #b9d7fb` |
+| `--ds-color-fg-magic` AI 글자와 아이콘입니다. | `#8969ea / #9179e0` |
+| `--ds-color-fg-magic-contrast` AI 더 진한 글자와 아이콘입니다. | `#50379b / #d3c7fb` |
+| `--ds-color-fg-neutral` 기본 글자와 아이콘입니다. | `#1a1c20 / #f3f4f5` |
+| `--ds-color-fg-neutral-inverted` 기본 반전 글자와 아이콘입니다. | `#ffffff / #16171b` |
+| `--ds-color-fg-neutral-muted` 기본 한 단계 흐린 글자와 아이콘입니다. | `#555d6d / #dcdee3` |
+| `--ds-color-fg-neutral-subtle` 기본 두 단계 흐린 글자와 아이콘입니다. | `#868b94 / #b0b3ba` |
+| `--ds-color-fg-on-brand-solid` 브랜드 진한 면 위의 글자와 아이콘입니다. | `#ffffff` |
+| `--ds-color-fg-on-critical-solid` 오류 진한 면 위의 글자와 아이콘입니다. | `#ffffff` |
+| `--ds-color-fg-on-informative-solid` 안내 진한 면 위의 글자와 아이콘입니다. | `#ffffff` |
+| `--ds-color-fg-on-magic-solid` AI 진한 면 위의 글자와 아이콘입니다. | `#ffffff` |
+| `--ds-color-fg-on-neutral-solid` 기본 진한 면 위의 글자와 아이콘입니다. | `#ffffff / #16171b` |
+| `--ds-color-fg-on-positive-solid` 성공 진한 면 위의 글자와 아이콘입니다. | `#ffffff` |
+| `--ds-color-fg-on-warning-solid` 주의 진한 면 위의 글자와 아이콘입니다. | `#ffffff` |
+| `--ds-color-fg-placeholder` 입력 전 안내 글자 글자와 아이콘입니다. | `#b0b3ba / #868b94` |
+| `--ds-color-fg-positive` 성공 글자와 아이콘입니다. | `#079171 / #22b27f` |
+| `--ds-color-fg-positive-contrast` 성공 더 진한 글자와 아이콘입니다. | `#075445 / #93e5c0` |
+| `--ds-color-fg-warning` 주의 글자와 아이콘입니다. | `#e14d00 / #ff6600` |
+| `--ds-color-fg-warning-contrast` 주의 더 진한 글자와 아이콘입니다. | `#862b00 / #eecebc` |
 
 ### 테두리
 
 | 토큰 | 값 |
 | --- | --- |
-| `--ds-color-stroke-brand-solid` 브랜드 진한 면 테두리입니다. | `palette-brand-700` |
-| `--ds-color-stroke-brand-weak` 브랜드 옅은 면 테두리입니다. | `palette-brand-300` |
-| `--ds-color-stroke-critical-solid` 오류 진한 면 테두리입니다. | `palette-red-700` |
-| `--ds-color-stroke-critical-weak` 오류 옅은 면 테두리입니다. | `palette-red-300` |
-| `--ds-color-stroke-focus-ring` 포커스 고리 테두리입니다. | `palette-blue-600` |
-| `--ds-color-stroke-informative-solid` 안내 진한 면 테두리입니다. | `palette-blue-700` |
-| `--ds-color-stroke-informative-weak` 안내 옅은 면 테두리입니다. | `palette-blue-300` |
-| `--ds-color-stroke-magic-solid` AI 진한 면 테두리입니다. | `palette-purple-700` |
-| `--ds-color-stroke-magic-weak` AI 옅은 면 테두리입니다. | `palette-purple-300` |
-| `--ds-color-stroke-neutral` 기본 테두리입니다. | `palette-gray-500` |
-| `--ds-color-stroke-neutral-contrast` 기본 더 진한 테두리입니다. | `palette-gray-1000` |
-| `--ds-color-stroke-neutral-muted` 기본 한 단계 흐린 테두리입니다. | `palette-static-black-alpha-300` |
-| `--ds-color-stroke-neutral-solid` 기본 진한 면 테두리입니다. | `palette-gray-800` |
-| `--ds-color-stroke-neutral-subtle` 기본 두 단계 흐린 테두리입니다. | `palette-static-black-alpha-200` |
-| `--ds-color-stroke-neutral-weak` 기본 옅은 면 테두리입니다. | `palette-gray-400` |
-| `--ds-color-stroke-positive-solid` 성공 진한 면 테두리입니다. | `palette-green-700` |
-| `--ds-color-stroke-positive-weak` 성공 옅은 면 테두리입니다. | `palette-green-300` |
-| `--ds-color-stroke-warning-solid` 주의 진한 면 테두리입니다. | `palette-orange-700` |
-| `--ds-color-stroke-warning-weak` 주의 옅은 면 테두리입니다. | `palette-orange-300` |
+| `--ds-color-stroke-brand-solid` 브랜드 진한 면 테두리입니다. | `#1d4ed8 / #60a5fa` |
+| `--ds-color-stroke-brand-weak` 브랜드 옅은 면 테두리입니다. | `#93c5fd / #1e40af` |
+| `--ds-color-stroke-critical-solid` 오류 진한 면 테두리입니다. | `#fa342c / #ff6e60` |
+| `--ds-color-stroke-critical-weak` 오류 옅은 면 테두리입니다. | `#fed4d2 / #742826` |
+| `--ds-color-stroke-focus-ring` 포커스 고리 테두리입니다. | `#5e98fe / #1e82eb` |
+| `--ds-color-stroke-informative-solid` 안내 진한 면 테두리입니다. | `#217cf9 / #41a2f9` |
+| `--ds-color-stroke-informative-weak` 안내 옅은 면 테두리입니다. | `#cbdffa / #1a4275` |
+| `--ds-color-stroke-magic-solid` AI 진한 면 테두리입니다. | `#8969ea / #9179e0` |
+| `--ds-color-stroke-magic-weak` AI 옅은 면 테두리입니다. | `#e1d8ff / #392a57` |
+| `--ds-color-stroke-neutral` 기본 테두리입니다. | `#d1d3d8 / #5b606a` |
+| `--ds-color-stroke-neutral-contrast` 기본 더 진한 테두리입니다. | `#1a1c20 / #f3f4f5` |
+| `--ds-color-stroke-neutral-muted` 기본 한 단계 흐린 테두리입니다. | `#00000010 / #ffffff17` |
+| `--ds-color-stroke-neutral-solid` 기본 진한 면 테두리입니다. | `#555d6d / #dcdee3` |
+| `--ds-color-stroke-neutral-subtle` 기본 두 단계 흐린 테두리입니다. | `#0000000c / #ffffff0d` |
+| `--ds-color-stroke-neutral-weak` 기본 옅은 면 테두리입니다. | `#dcdee3 / #393d46` |
+| `--ds-color-stroke-positive-solid` 성공 진한 면 테두리입니다. | `#079171 / #22b27f` |
+| `--ds-color-stroke-positive-weak` 성공 옅은 면 테두리입니다. | `#b9e9d2 / #20493b` |
+| `--ds-color-stroke-warning-solid` 주의 진한 면 테두리입니다. | `#e14d00 / #ff6600` |
+| `--ds-color-stroke-warning-weak` 주의 옅은 면 테두리입니다. | `#ffd5c0 / #6b311c` |
 
 
 ---
@@ -798,7 +790,7 @@ AI 색은 AI 기능과 새 기능을 다른 기능과 구분해 보여 줍니다
 
 색은 정보의 위계와 상태, 브랜드를 구분해 보여 줍니다.
 
-팔레트 색은 역할 색을 만드는 원료입니다. 다크 모드에서는 같은 단계 번호에 어두운 화면용 값이 들어 있어, 라이트 모드 기준으로 골라도 다크 모드에서 알아보기 쉽습니다.
+팔레트 색은 역할 색을 만드는 원료입니다. 다크 모드에는 같은 단계 번호에 어두운 화면용 값이 들어 있어, 라이트 모드에서 고른 번호를 그대로 쓰면 됩니다.
 
 ## Gray
 
@@ -828,7 +820,7 @@ Gray
 
 ## Chromatic
 
-Brand 는 서비스마다 바꿔 쓰는 색입니다. 이 가이드의 다른 화면은 모노톤으로 보이지만 여기에는 실제 값이 보입니다.
+Brand는 서비스마다 바꿔 쓰는 색입니다. 다른 화면은 모노톤으로 보이지만, 여기에는 실제 값을 보여 줍니다.
 
 100
 
@@ -1011,11 +1003,11 @@ Purple
 
 - 이름은 쓰임이 아니라 생김새로 붙입니다. 닫기 버튼이어도 이름은 `x` 입니다.
 - 이름은 Lucide 이름을 그대로 씁니다. 클래스는 `ds-icon--` 뒤에 이름을 붙입니다.
-- Library 에서는 영어 이름, 영어 태그, 한국어 쓰임으로 찾을 수 있습니다.
+- Library에서는 영어 이름, 영어 태그, 한국어 쓰임으로 찾을 수 있습니다.
 
 ## 크기와 색
 
-크기는 기본 20 이고, `ds-icon--sm` 16, `ds-icon--lg` 24 두 가지가 더 있습니다. 그 밖의 크기가 꼭 필요하면 `--ds-icon-size` 변수로 바꿉니다. 색은 부모의 글자색을 바꾸면 따라옵니다.
+크기는 기본 20이고, `ds-icon--sm` 16, `ds-icon--lg` 24 두 가지가 더 있습니다. 그 밖의 크기가 꼭 필요하면 `--ds-icon-size` 변수로 바꿉니다. 색은 부모의 글자색을 바꾸면 따라옵니다.
 
 ```html
 <i class="ds-icon ds-icon--search ds-icon--sm" aria-hidden="true"></i>  <!-- 16 -->
@@ -1220,7 +1212,7 @@ Purple
 
 ## 새 아이콘 넣기
 
-지금 있는 아이콘 안에서 쓰는 것을 먼저 권합니다. 그래도 새 아이콘이 필요하면 아래 순서를 따릅니다.
+되도록 지금 있는 아이콘을 씁니다. 새 아이콘이 꼭 필요하면 아래 순서를 따릅니다.
 
 1. [Library](https://luvms012-rgb.github.io/ybm-ds/site/foundations/icons-library.md)의 Lucide 전체에서 알맞은 아이콘을 고릅니다.
 2. 오른쪽 칸의 **icons.css 줄**을 복사해 `dist/icons.css` 끝에 붙입니다.
@@ -1843,7 +1835,7 @@ Select를 눌렀을 때 펼쳐지는 선택지 목록입니다.
 | **Label**`ds-select-content__label` | 이름이나 값을 보여 주는 글자입니다. |
 | **Body**`ds-select-item__body` | 본문이 들어가는 영역입니다. |
 | **Label**`ds-select-item__label` | 이름이나 값을 보여 주는 글자입니다. |
-| **Desc**`ds-select-item__desc` | 제목을 돕는 설명 글입니다. |
+| **Desc**`ds-select-item__desc` | 제목에 덧붙이는 설명 글입니다. |
 
 ## 사용 지침
 
@@ -1853,7 +1845,7 @@ Select를 눌렀을 때 펼쳐지는 선택지 목록입니다.
 | **Do** | 선택 칸 폭에서 이름이 잘리지 않는지 확인하세요. |
 | **Do** | 선택지는 한 가지 기준(많이 쓰는 순, 크기순, 시간순)으로 정렬합니다. 성격이 다른 선택지는 묶음으로 나누세요. |
 | **Do** | 값을 고를 때는 Select, 동작을 실행할 때는 Menu를 씁니다. |
-| **Don't** | "전체 선택"처럼 다른 선택지를 바꾸는 항목은 넣지 않습니다. 다만 하나만 고르는 칸에서 "없음"이 답이 될 수 있으면 "없음"을 넣습니다. |
+| **Don't** | "전체 선택"처럼 다른 선택지를 바꾸는 항목은 넣지 않습니다. 다만 하나만 고르는 칸에서 "없음"도 답이 될 수 있으면 넣습니다. |
 
 ## 예시
 
@@ -1898,7 +1890,7 @@ Figma Item(large): 바깥 좌우 x2 / surface py12 px8 gap12 shape/lg / label t0
 
 # Checkbox
 
-여러 선택지 가운데 하나 이상을 선택할 때 쓰는 컴포넌트입니다. 약관 동의처럼 하나만 켜고 끌 때도 씁니다.
+여러 선택지에서 하나 이상을 고를 때 쓰는 컴포넌트입니다. 약관 동의처럼 항목 하나를 켜고 끌 때도 씁니다.
 
 ## 사용법
 
@@ -1977,7 +1969,7 @@ Figma: 행 min-h 32/36 / 위 6 / gap x2 / 박스 shape/xs / label t04/t05 fg/neu
 
 # Radio Group
 
-여러 선택지 가운데 하나만 선택할 때 쓰는 컴포넌트입니다.
+여러 선택지에서 하나만 고를 때 쓰는 컴포넌트입니다.
 
 ## 사용법
 
@@ -2002,10 +1994,10 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | 구분 | 내용 |
 | --- | --- |
 | **Do** | 같은 묶음에서는 하나만 선택된 상태로 둡니다. |
-| **Do** | 누를 수 있는 영역은 라벨까지 포함한 전체이고, List와 함께 쓰면 줄 전체입니다. |
+| **Do** | 누르는 영역은 라벨까지 포함합니다. List 안에서는 줄 전체를 누를 수 있습니다. |
 | **Do** | 여러 개를 골라야 하면 Checkbox를 쓰세요. |
-| **Do** | 추천하거나 자주 고르는 선택지를 미리 골라 두면 사용자의 고민이 줄어듭니다. |
-| **Do** | 선택지가 2~6개면 Radio Group을, 그보다 많거나 늘어날 수 있으면 Field Button이나 Select를 씁니다. |
+| **Do** | 추천하거나 자주 고르는 선택지는 미리 골라 둡니다. 사용자가 고민할 일이 줄어듭니다. |
+| **Do** | 선택지가 2~6개면 Radio Group을 씁니다. 그보다 많거나 늘어날 수 있으면 Field Button이나 Select를 씁니다. |
 | **Don't** | 라벨이 길거나 화면이 좁으면 가로로 늘어놓지 마세요. 기본은 세로로 쌓습니다. |
 
 ## 예시
@@ -2180,7 +2172,7 @@ Figma: bg/layer-default / 1px stroke/neutral-weak / small/medium shape/sm / larg
 
 # Chip
 
-고른 값이나 입력한 값을 작은 덩어리로 보여 주는 컴포넌트입니다.
+고르거나 입력한 값을 작게 묶어 보여 주는 컴포넌트입니다.
 
 ## 사용법
 
@@ -2274,9 +2266,9 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | --- | --- |
 | **Do** | 콘텐츠 분류를 바꿀 때 씁니다. |
 | **Do** | 선택은 항상 하나만 유지합니다. 여러 개를 고르려면 Chip을 쓰세요. |
-| **Don't** | 화면의 주요 메뉴로는 쓰지 않습니다. 주요 메뉴는 Tabs가 맡고, Chip Tabs는 한 화면 안에서 걸러 보거나 하위 내용을 바꿀 때 씁니다. |
+| **Don't** | 화면의 주요 메뉴로는 쓰지 않습니다. 주요 메뉴는 Tabs로 만듭니다. Chip Tabs는 한 화면 안에서 걸러 보거나 하위 내용을 바꿀 때 씁니다. |
 | **Don't** | 한 줄 안에서 variant와 size를 섞지 않습니다. |
-| **Don't** | 항목이 넘쳐도 줄을 바꾸지 않습니다. 가로로 밀어서 보게 둡니다. |
+| **Don't** | 항목이 넘쳐도 줄을 바꾸지 않습니다. 넘친 항목은 가로로 밀어서 봅니다. |
 
 ## 예시
 
@@ -2304,7 +2296,7 @@ Figma list: 좌우 x4 / gap x2 / trigger: shape/pill / medium h36 px14 min-w48 /
 
 # Tabs
 
-한 화면의 내용을 여러 탭으로 나눠 전환하는 컴포넌트입니다.
+한 화면의 내용을 여러 탭으로 나눠 보여 주는 컴포넌트입니다.
 
 ## 사용법
 
@@ -2389,10 +2381,10 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | 구분 | 내용 |
 | --- | --- |
 | **Do** | 고르면 선택 배경이 미끄러지듯 옮겨 가는 움직임을 그대로 둡니다. |
-| **Do** | 항목은 2~4개만 둡니다. 5개가 넘으면 알아보기 어렵고 누를 자리가 좁아집니다. |
+| **Do** | 항목은 2~4개만 둡니다. 더 많으면 알아보기 어렵고 누를 자리가 좁아집니다. |
 | **Do** | 한 화면에 하나만 둡니다. 여러 개를 두면 무엇이 중요한지 흐려집니다. |
 | **Do** | 라벨은 짧게 씁니다. 칸에 비해 라벨이 길면 다른 컴포넌트를 쓰세요. |
-| **Don't** | 화면 이동에는 쓰지 않습니다. 화면 이동은 Tabs를 씁니다. |
+| **Don't** | 화면 이동에는 쓰지 않습니다. 화면을 옮길 때는 Tabs를 씁니다. |
 
 ## 예시
 
@@ -2446,7 +2438,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | --- | --- |
 | **Do** | "알림 받기" 켜고 끄기처럼 한 가지 상태만 바꿀 때 씁니다. |
 | **Do** | 고르기와 걸러 보기는 Chip, 바로 반영되는 설정은 Switch를 씁니다. 역할이 겹치지 않게 나눠 쓰세요. |
-| **Don't** | 여러 개를 늘어놓고 하나를 고르게 만들지 마세요. 그럴 때는 Segmented Control을 씁니다. |
+| **Don't** | 여러 개 가운데 하나를 고르는 데는 쓰지 않습니다. 그럴 때는 Segmented Control을 씁니다. |
 
 ## 예시
 
@@ -2481,7 +2473,7 @@ Figma small: py6 px12 / t03 Bold / medium: py10 px16 / t04 Bold / shape/lg
 
 # Badge
 
-대상의 상태나 속성을 짧은 글자로 알려 주는 컴포넌트입니다.
+상태나 속성을 짧은 글자로 알려 주는 컴포넌트입니다.
 
 ## 사용법
 
@@ -2579,7 +2571,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | 구분 | 내용 |
 | --- | --- |
 | **Do** | 태그마다 tone은 다르게 줄 수 있지만 size는 모두 같아야 합니다. |
-| **Do** | 글자는 조사와 접속어를 빼고 6~10자 안으로, 한 줄에 들어가게 씁니다. |
+| **Do** | 글자는 조사와 접속어를 빼고 6~10자 안으로 씁니다. 한 줄에 들어가야 합니다. |
 | **Do** | 기본은 한 줄입니다. 말줄임 때문에 뜻이 흐려질 때만 줄을 바꿉니다. |
 | **Do** | 자리가 모자라면 덜 중요한 태그부터 말줄임합니다. |
 
@@ -2605,7 +2597,7 @@ Figma: 항목 사이 "/" 구분 / gap x1 / neutral fg/neutral-muted / neutralSub
 
 # Avatar
 
-사람이나 팀을 프로필 사진이나 이름 첫 글자로 보여 주는 컴포넌트입니다.
+사람이나 팀을 프로필 사진 또는 이름 첫 글자로 보여 주는 컴포넌트입니다.
 
 ## 사용법
 
@@ -2754,10 +2746,10 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | 구분 | 내용 |
 | --- | --- |
 | **Do** | 앞 아이콘은 채움(Solid) 모양을 씁니다. |
-| **Do** | 제목, 본문, 링크는 한 줄로 이어 쓰고 띄어쓰기 두 칸으로 나눕니다. |
-| **Do** | Banner는 화면 맨 위에 전체 폭으로 한 번에 하나만 띄우는 공지입니다. |
+| **Do** | 제목, 본문, 링크는 한 줄로 이어 쓰고, 사이는 두 칸 띄웁니다. |
+| **Do** | Banner는 화면 맨 위에 전체 폭으로, 한 번에 하나만 띄웁니다. |
 | **Do** | 본문 안의 안내는 Callout을 씁니다. |
-| **Don't** | 전체를 누르는 Callout에는 링크 글자를 따로 넣지 않습니다. |
+| **Don't** | 전체를 누를 수 있는 Callout에는 링크 글자를 따로 넣지 않습니다. |
 
 ## 예시
 
@@ -2816,7 +2808,7 @@ Figma: padding x3_5 / gap x2 / min-h50 / shape/md / t04 / 아이콘 Solid 16
 
 | 부품 | 설명 |
 | --- | --- |
-| **Message**`ds-snackbar__message` | 알리는 내용 글입니다. |
+| **Message**`ds-snackbar__message` | 알릴 내용을 담은 글입니다. |
 | **Action**`ds-snackbar__action` | 바로 실행하는 작은 버튼입니다. |
 
 ## 속성
@@ -2887,7 +2879,7 @@ Figma: padding x2_5(+본문 좌우 x1_5) / min-h44 / max-w560 / shape/sm / bg/ne
 | --- | --- |
 | **Body**`ds-helpbubble__body` | 본문이 들어가는 영역입니다. |
 | **Title**`ds-helpbubble__title` | 제목입니다. |
-| **Desc**`ds-helpbubble__desc` | 제목을 돕는 설명 글입니다. |
+| **Desc**`ds-helpbubble__desc` | 제목에 덧붙이는 설명 글입니다. |
 | **Close**`ds-helpbubble__close` | 닫기 버튼입니다. |
 
 ## 속성
@@ -2954,7 +2946,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | 구분 | 내용 |
 | --- | --- |
 | **Do** | 동작을 실행할 때는 Menu, 값을 고를 때는 Select를 씁니다. |
-| **Do** | 삭제, 차단처럼 되돌릴 수 없는 항목은 critical로 두고, 목록 끝에 구분선(Divider)으로 따로 묶습니다. |
+| **Do** | 삭제, 차단처럼 되돌릴 수 없는 항목은 critical로 둡니다. 목록 끝에 두고 구분선(Divider)으로 나눕니다. |
 | **Do** | 라벨은 2~6자 동사로 쓰고, 한 메뉴 안에서 말투를 맞춥니다. |
 | **Do** | 설명은 꼭 필요한 항목에만 한 줄로 붙입니다. |
 | **Don't** | 값을 고르는 데는 쓰지 않습니다. 폼에 넣을 값은 Select로 고르고, Menu는 동작을 실행할 때 씁니다. |
@@ -3022,7 +3014,7 @@ Figma Item: py10 px12 / gap x2 / shape/sm / 아이콘 18 / t04 fg/neutral
 | --- | --- |
 | **Header**`ds-dialog__header` | 제목과 닫기 버튼이 놓이는 머리 영역입니다. |
 | **Title**`ds-dialog__title` | 제목입니다. |
-| **Desc**`ds-dialog__desc` | 제목을 돕는 설명 글입니다. |
+| **Desc**`ds-dialog__desc` | 제목에 덧붙이는 설명 글입니다. |
 | **Close**`ds-dialog__close` | 닫기 버튼입니다. |
 | **Body**`ds-dialog__body` | 본문이 들어가는 영역입니다. |
 | **Footer**`ds-dialog__footer` | 버튼이나 보조 정보가 놓이는 아래 영역입니다. |
@@ -3047,7 +3039,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | **Do** | Popover는 버튼 옆에 뜨는 작은 창이고, 바깥을 누르면 닫힙니다. |
 | **Do** | 화면을 막고 확인받아야 할 때는 Dialog를 씁니다. |
 | **Do** | 화면 폭이 768보다 좁으면 Bottom Sheet로 바꿉니다. 머리말, 본문, 버튼 구조는 그대로 둡니다. |
-| **Don't** | 위쪽 닫기 버튼과 아래쪽 취소 버튼을 함께 두지 않습니다. 정보만 보여 줄 때는 위쪽 닫기, 폼이나 설정처럼 주요 동작이 있으면 아래쪽 취소를 둡니다. |
+| **Don't** | 위쪽 닫기 버튼과 아래쪽 취소 버튼을 함께 두지 않습니다. 정보만 보여 줄 때는 위쪽 닫기를 둡니다. 폼이나 설정처럼 주요 동작이 있으면 아래쪽 취소를 둡니다. |
 
 ## 예시
 
@@ -3105,7 +3097,7 @@ Figma: 폭 480(large 800) / shape/2xl / bg/layer-floating / 그림자 없음(202
 | --- | --- |
 | **Header**`ds-alertdialog__header` | 제목과 닫기 버튼이 놓이는 머리 영역입니다. |
 | **Title**`ds-alertdialog__title` | 제목입니다. |
-| **Desc**`ds-alertdialog__desc` | 제목을 돕는 설명 글입니다. |
+| **Desc**`ds-alertdialog__desc` | 제목에 덧붙이는 설명 글입니다. |
 | **Footer**`ds-alertdialog__footer` | 버튼이나 보조 정보가 놓이는 아래 영역입니다. |
 
 ## 속성
@@ -3172,7 +3164,7 @@ Figma: 폭 272 / gap x2 / header 20/20/0/20 / gap x1_5 / title t07 Bold / desc t
 | --- | --- |
 | **Header**`ds-bottomsheet__header` | 제목과 닫기 버튼이 놓이는 머리 영역입니다. |
 | **Title**`ds-bottomsheet__title` | 제목입니다. |
-| **Desc**`ds-bottomsheet__desc` | 제목을 돕는 설명 글입니다. |
+| **Desc**`ds-bottomsheet__desc` | 제목에 덧붙이는 설명 글입니다. |
 | **Close**`ds-bottomsheet__close` | 닫기 버튼입니다. |
 | **Body**`ds-bottomsheet__body` | 본문이 들어가는 영역입니다. |
 | **Footer**`ds-bottomsheet__footer` | 버튼이나 보조 정보가 놓이는 아래 영역입니다. |
@@ -3189,7 +3181,8 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 | 구분 | 내용 |
 | --- | --- |
-| **Do** | 몇 가지 동작 중 하나를 고를 때는 Menu Sheet, 입력이나 긴 내용은 Bottom Sheet를 씁니다. |
+| **Do** | 몇 가지 동작 중 하나를 고를 때는 Menu Sheet를 씁니다. |
+| **Do** | 입력이나 긴 내용은 Bottom Sheet에 담습니다. |
 | **Do** | 되돌릴 수 없는 동작은 critical로 따로 묶습니다. |
 | **Do** | PC 화면 옆에 보조 내용이나 필터를 둘 때 Side Panel을 씁니다. |
 | **Do** | 화면이 좁으면 Bottom Sheet로 바꿉니다. |
@@ -3241,7 +3234,7 @@ Figma: 폭 채움 / 위쪽 shape/3xl / bg/layer-floating
 | **Trigger**`ds-accordion__trigger` | 누르면 열리거나 바뀌는 버튼입니다. |
 | **Body**`ds-accordion__body` | 본문이 들어가는 영역입니다. |
 | **Title**`ds-accordion__title` | 제목입니다. |
-| **Desc**`ds-accordion__desc` | 제목을 돕는 설명 글입니다. |
+| **Desc**`ds-accordion__desc` | 제목에 덧붙이는 설명 글입니다. |
 | **Content**`ds-accordion__content` | 주된 내용이 들어가는 영역입니다. |
 
 ## 속성
@@ -3259,7 +3252,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | --- | --- |
 | **Do** | 항목을 2개 이상 둡니다. 하나만 따로 쓰지 않습니다. |
 | **Do** | 누르는 영역은 화살표 아이콘이 아니라 제목 줄 전체입니다. |
-| **Do** | 하나만 열리게 할지 여러 개 열리게 할지 정해서 화면 전체에 똑같이 적용합니다. |
+| **Do** | 한 번에 하나만 열지, 여러 개를 열지 먼저 정합니다. 정한 방식은 화면 전체에 똑같이 씁니다. |
 | **Do** | 크기는 모바일에서 medium, PC에서 large를 씁니다. |
 | **Don't** | inline(이어진 목록)과 separated(따로 떨어진 카드)를 한 화면에서 섞지 않습니다. |
 | **Don't** | 펼친 내용 안에 스크롤을 넣지 않습니다. 내용이 길면 따로 페이지를 만드세요. |
@@ -3291,7 +3284,7 @@ Figma large : trigger py20 / title t06 Medium / desc t04 / chevron 24 / content 
 
 # Skeleton
 
-내용을 불러오는 동안 들어갈 자리를 미리 보여 주는 컴포넌트입니다. 기다리는 시간을 덜 지루하게 합니다.
+내용을 불러오는 동안 그 자리를 미리 보여 주는 컴포넌트입니다. 기다리는 시간이 덜 지루해집니다.
 
 ## 사용법
 
@@ -3317,7 +3310,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | --- | --- |
 | **Do** | 목록이나 카드처럼 곧 나타날 모양을 미리 보여 줄 수 있는 곳에 씁니다. |
 | **Do** | 모서리는 나중에 들어올 콘텐츠와 똑같이 맞춥니다. |
-| **Do** | 1~10초 걸리고 모양을 미리 보여 줄 수 있으면 Skeleton, 1~4초 동안 기다린다는 것만 알리면 Progress Circle을 씁니다. |
+| **Do** | 1~10초 걸리고 모양을 미리 보여 줄 수 있으면 Skeleton을 씁니다. 1~4초 동안 기다림만 알리면 될 때는 Progress Circle을 씁니다. |
 | **Don't** | Progress Circle과 함께 쓰지 않습니다. 같은 로딩을 두 번 알리게 됩니다. |
 
 ## 예시
@@ -3354,7 +3347,7 @@ Figma: palette/gray-200 / rectangle shape/sm / circle pill / text 줄 높이 14 
 
 # Slider
 
-막대를 끌어서 범위 안의 값을 정하는 컴포넌트입니다.
+손잡이를 끌어 범위 안에서 값을 정하는 컴포넌트입니다.
 
 ## 사용법
 
@@ -3382,8 +3375,8 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 | 구분 | 내용 |
 | --- | --- |
-| **Do** | 누르는 영역은 손잡이뿐 아니라 막대 전체입니다. 막대를 누르면 그 자리로 바로 옮겨 갑니다. |
-| **Do** | 값이 이어지는 슬라이더는 부드럽게 움직이고, 단계가 있는 슬라이더는 가장 가까운 단계에 맞춰 멈춥니다. |
+| **Do** | 누르는 영역은 손잡이뿐 아니라 막대 전체입니다. 막대를 누르면 손잡이가 그 자리로 바로 옮겨 갑니다. |
+| **Do** | 값이 이어지는 슬라이더는 부드럽게 움직입니다. 단계가 있는 슬라이더는 가장 가까운 단계에서 멈춥니다. |
 | **Do** | 알맞은 기본값을 미리 넣어 사용자의 수고와 실수를 줄입니다. |
 | **Do** | 움직이는 동안 지금 값을 보여 줍니다. |
 
@@ -3445,10 +3438,10 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 | 구분 | 내용 |
 | --- | --- |
-| **Do** | "3/10", "40%"처럼 값을 글자로 막대 위나 옆에 함께 적습니다. 막대만으로는 정확한 숫자가 전해지지 않습니다. |
+| **Do** | "3/10", "40%"처럼 값을 글자로 막대 위나 옆에 적습니다. 막대만으로는 정확한 숫자를 알 수 없습니다. |
 | **Do** | 화면의 대표 진행률은 brand, 목록 안이나 보조 진행률은 neutral을 씁니다. |
-| **Do** | 0%일 때도 바탕 막대(track)는 보여서 진행 막대라는 것을 알 수 있게 합니다. |
-| **Do** | 화면 읽기 프로그램을 위해 role="progressbar"와 aria-valuenow, aria-valuemin, aria-valuemax를 붙이고, 라벨이 없으면 aria-label을 붙입니다. |
+| **Do** | 0%일 때도 바탕 막대(track)는 보여 줍니다. 그래야 진행 막대인 줄 알 수 있습니다. |
+| **Do** | 화면 읽기 프로그램이 읽도록 role="progressbar"와 aria-valuenow, aria-valuemin, aria-valuemax를 붙입니다. 라벨이 없으면 aria-label을 붙입니다. |
 
 ## 예시
 
@@ -3483,7 +3476,7 @@ Figma: 트랙 palette/brand-200(neutral palette/gray-200) / 채움 bg/brand-soli
 
 # Progress Circle
 
-작업이 진행 중인 것을 원으로 보여 주는 컴포넌트입니다.
+작업이 진행 중임을 원으로 보여 주는 컴포넌트입니다.
 
 ## 사용법
 
@@ -3556,7 +3549,7 @@ Figma: 두께 24→3 / 40→5 / 56→7 / 둥근 끝 / 12시 시작
 
 # Floating Action Button
 
-화면 위에 떠 있으면서 그 화면에서 가장 중요한 동작 하나를 실행하는 버튼입니다.
+화면 위에 떠서 그 화면의 가장 중요한 동작을 실행하는 버튼입니다.
 
 ## 사용법
 
@@ -3582,7 +3575,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | **Do** | 쓸 수 없으면 버튼을 숨깁니다. |
 | **Do** | 한 화면에 하나만 둡니다. 두 개 이상이면 무엇이 주요 동작인지 알기 어렵습니다. |
 | **Do** | extended에는 라벨을 꼭 넣습니다. |
-| **Do** | 버튼이 내용을 가리므로 화면 아래에 버튼 높이만큼 여백을 두세요. |
+| **Do** | 버튼이 내용을 가리지 않도록 화면 아래에 버튼 높이만큼 여백을 둡니다. |
 | **Don't** | disabled 상태로 두지 않습니다. 쓸 수 없는 동작이면 버튼을 숨깁니다. |
 
 ## 예시
@@ -3632,7 +3625,7 @@ Figma extended: h48 / px18 / gap x1 / 아이콘 16 / t05 Bold / iconOnly 56×56 
 | 부품 | 설명 |
 | --- | --- |
 | **Header**`ds-datepicker__header` | 제목과 닫기 버튼이 놓이는 머리 영역입니다. |
-| **Nav**`ds-datepicker__nav` | 이전, 다음 달로 옮기는 버튼입니다. |
+| **Nav**`ds-datepicker__nav` | 이전 달, 다음 달로 넘기는 버튼입니다. |
 | **Title**`ds-datepicker__title` | 제목입니다. |
 | **Weekdays**`ds-datepicker__weekdays` | 요일 줄입니다. |
 | **Grid**`ds-datepicker__grid` | 날짜 칸 모음입니다. |
@@ -3649,11 +3642,11 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 | 구분 | 내용 |
 | --- | --- |
-| **Do** | 날짜 고르기가 화면의 주된 일이거나 단계별 흐름의 한 단계면 화면에 바로 둡니다. 폼의 입력 칸을 눌러 고를 때는 Bottom Sheet 안에 넣습니다. |
+| **Do** | 날짜 고르기가 화면의 주된 일이거나 흐름의 한 단계면 화면에 바로 둡니다. 폼의 입력 칸을 눌러 고를 때는 Bottom Sheet 안에 넣습니다. |
 | **Do** | 여는 버튼은 Select Trigger, Text Field Input, Field Button 중 하나를 씁니다. |
-| **Do** | 처음에는 오늘이 있는 달을 보여 주고, 이미 고른 날짜가 있으면 그 달을 보여 줍니다. |
+| **Do** | 처음에는 오늘이 든 달을 보여 줍니다. 이미 고른 날짜가 있으면 그 달을 보여 줍니다. |
 | **Do** | 기간의 최소, 최대 조건은 Callout으로 미리 알려 줍니다. 시작일만 고른 상태에서는 확인 버튼을 끕니다. |
-| **Do** | 오늘이 선택된 날짜이기도 하면 선택 모양을 먼저 보여 줍니다. |
+| **Do** | 오늘을 고른 경우에는 오늘 표시보다 선택 모양을 먼저 보여 줍니다. |
 
 ## 예시
 
@@ -3729,9 +3722,11 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 | 구분 | 내용 |
 | --- | --- |
-| **Do** | 탭은 3~5개, 라벨은 한글 5자(영문 10자) 안으로 씁니다. |
+| **Do** | 탭은 3~5개를 둡니다. |
+| **Do** | 라벨은 한글 5자(영문 10자) 안으로 씁니다. |
 | **Do** | 아이콘은 채움(Solid) 모양을 씁니다. |
-| **Do** | 배지 숫자는 1~99까지 쓰고, 100 이상은 `99+`로, 0이면 숨깁니다. |
+| **Do** | 배지 숫자는 1~99로 쓰고, 100 이상은 `99+`로 씁니다. |
+| **Do** | 숫자가 0이면 배지를 숨깁니다. |
 | **Don't** | 숫자 배지를 세 개 넘게 한꺼번에 띄우지 않습니다. |
 
 ## 예시
@@ -3811,7 +3806,8 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 | 구분 | 내용 |
 | --- | --- |
-| **Do** | 화면 폭이 1280 이상이면 펼치고, 768 이상이면 접고, 그보다 좁으면 서랍(Drawer)으로 바꿉니다. |
+| **Do** | 메뉴는 화면 폭 1280 이상에서 펼치고, 768 이상에서 접습니다. |
+| **Do** | 화면 폭이 768보다 좁으면 서랍(Drawer)으로 바꿉니다. |
 | **Do** | 하위 메뉴가 있는 항목은 눌러도 이동하지 않고 펼치거나 접기만 합니다. 하위 메뉴가 선택돼 있으면 부모 항목은 펼쳐 둡니다. |
 | **Do** | 메뉴 이름은 짧게 씁니다. |
 | **Don't** | 하위 메뉴가 없는 항목은 누르면 바로 이동하고, 화살표를 달지 않습니다. |
@@ -3879,7 +3875,7 @@ Figma: bg/canvas / header h64 padding x2(트리거 40 shape/sm / panel-left 20 f
 | --- | --- |
 | **Media**`ds-empty__media` | 상황을 보여 주는 아이콘이나 그림입니다. |
 | **Title**`ds-empty__title` | 제목입니다. |
-| **Desc**`ds-empty__desc` | 제목을 돕는 설명 글입니다. |
+| **Desc**`ds-empty__desc` | 제목에 덧붙이는 설명 글입니다. |
 | **Actions**`ds-empty__actions` | 버튼을 묶는 영역입니다. |
 
 ## 속성
@@ -3895,7 +3891,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | 구분 | 내용 |
 | --- | --- |
 | **Do** | 제목에는 지금 상황을, 설명에는 다음에 할 일을 적습니다. 오류는 Empty 대신 Callout(critical)이나 Result Section으로 알립니다. |
-| **Do** | 버튼은 없거나 하나가 기본이고, 많아도 두 개까지 둡니다. |
+| **Do** | 버튼은 없거나 하나만 둡니다. 많아도 두 개까지입니다. |
 | **Do** | 아이콘은 상황에 맞게 바꿉니다. |
 | **Do** | 카드나 목록 안의 좁은 자리에는 small을 씁니다. |
 
@@ -3956,8 +3952,8 @@ simple: <nav class="ds-pagination" data-type="simple"> prev · <span class="ds-p
 
 | 부품 | 설명 |
 | --- | --- |
-| **Item**`ds-pagination__item` | 쪽 번호 버튼입니다. |
-| **Indicator**`ds-pagination__indicator` | 지금 쪽을 알려 주는 표시입니다. |
+| **Item**`ds-pagination__item` | 페이지 번호 버튼입니다. |
+| **Indicator**`ds-pagination__indicator` | 지금 페이지를 알려 주는 표시입니다. |
 
 ## 속성
 
@@ -3971,10 +3967,10 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 | 구분 | 내용 |
 | --- | --- |
-| **Do** | 번호는 지금 페이지를 포함해 5개(넓으면 7개)까지 보이고, 나머지는 말줄임표로 줄입니다. 첫 번호와 마지막 번호는 늘 보이게 둡니다. |
+| **Do** | 번호는 지금 페이지를 포함해 5개(넓으면 7개)까지 보여 줍니다. 나머지는 말줄임표로 줄입니다. 첫 번호와 마지막 번호는 늘 보이게 둡니다. |
 | **Do** | 목록 아래 가운데에 둡니다. 페이지를 옮기면 목록 맨 위로 올라갑니다. |
 | **Do** | 지금 페이지 번호는 누를 수 없게 두고 aria-current="page"를 붙입니다. |
-| **Do** | 첫 페이지의 처음, 이전 버튼과 마지막 페이지의 다음, 마지막 버튼은 숨기지 않고 꺼 둡니다. |
+| **Do** | 첫 페이지에서는 처음, 이전 버튼을 숨기지 않고 꺼 둡니다. 마지막 페이지의 다음, 마지막 버튼도 같습니다. |
 | **Do** | 화살표 버튼에는 aria-label을 꼭 붙입니다. |
 | **Don't** | 끝없이 이어지는 피드나 "더 보기"가 어울리는 목록에는 쓰지 않습니다. |
 
@@ -4045,11 +4041,11 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 | 구분 | 내용 |
 | --- | --- |
-| **Do** | 열은 모바일에서 3개, PC에서 6개 안팎까지 둡니다. 넘치면 가로로 밀어 보게 하고, 모바일에서 열이 많으면 표 대신 Card 목록으로 바꿉니다. |
+| **Do** | 열은 모바일에서 3개, PC에서 6개 안팎까지 둡니다. 넘치면 가로로 밀어서 봅니다. 모바일에서 열이 많으면 표 대신 Card 목록으로 바꿉니다. |
 | **Do** | 표에는 꼭 머리 줄을 둡니다(thead와 th scope="col"). |
 | **Do** | 데이터가 없을 때는 머리 줄 아래에 Empty(small)를 표 전체 폭으로 둡니다. |
 | **Do** | 마우스를 올렸을 때 색이 바뀌는 효과는 줄을 눌러 상세로 가는 표에서만 씁니다. |
-| **Do** | 글은 왼쪽, 숫자와 금액은 오른쪽, 번호나 날짜나 상태처럼 짧고 길이가 같은 값은 가운데에 맞춥니다. |
+| **Do** | 글은 왼쪽, 숫자와 금액은 오른쪽에 맞춥니다. 번호, 날짜, 상태처럼 짧고 길이가 같은 값은 가운데에 맞춥니다. |
 | **Don't** | 한 표 안에서 density를 섞지 않습니다. 데이터가 많은 관리 화면은 compact, 일반 사용자 화면은 default를 씁니다. |
 | **Don't** | 한 칸에 두 줄 넘게 넣지 않습니다. 긴 글은 말줄임하고 상세 화면에서 보여 줍니다. |
 
@@ -4269,7 +4265,7 @@ Help Bubble 과 차이: Tooltip 은 짧은 라벨(아이콘 버튼 이름 등)�
 | **Prefix**`ds-list-item__prefix` | 앞에 붙는 아이콘이나 요소입니다. |
 | **Content**`ds-list-item__content` | 주된 내용이 들어가는 영역입니다. |
 | **Title**`ds-list-item__title` | 제목입니다. |
-| **Desc**`ds-list-item__desc` | 제목을 돕는 설명 글입니다. |
+| **Desc**`ds-list-item__desc` | 제목에 덧붙이는 설명 글입니다. |
 | **Suffix**`ds-list-item__suffix` | 뒤에 붙는 아이콘이나 요소입니다. |
 | **Chevron**`ds-list-item__chevron` | 다른 화면으로 이동함을 알리는 꺾쇠입니다. |
 
@@ -4461,7 +4457,7 @@ Figma: indicator 24 원형 / 숫자 t02 Bold(자동 번호) / 연결선 2px / �
 
 # Banner
 
-화면 맨 위에서 서비스 전체에 해당하는 공지를 알려 주는 컴포넌트입니다.
+화면 맨 위에서 서비스 전체 공지를 알려 주는 컴포넌트입니다.
 
 ## 사용법
 
@@ -4482,8 +4478,8 @@ Figma: indicator 24 원형 / 숫자 t02 Bold(자동 번호) / 연결선 2px / �
 
 | 부품 | 설명 |
 | --- | --- |
-| **Inner**`ds-banner__inner` | 배너 내용을 가운데 폭으로 묶는 영역입니다. |
-| **Message**`ds-banner__message` | 알리는 내용 글입니다. |
+| **Inner**`ds-banner__inner` | 배너 내용을 가운데에 정해진 폭으로 담는 영역입니다. |
+| **Message**`ds-banner__message` | 알릴 내용을 담은 글입니다. |
 | **Title**`ds-banner__title` | 제목입니다. |
 | **Action**`ds-banner__action` | 바로 실행하는 작은 버튼입니다. |
 | **Close**`ds-banner__close` | 닫기 버튼입니다. |
@@ -4498,7 +4494,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 | 구분 | 내용 |
 | --- | --- |
-| **Do** | Banner는 화면 맨 위에 전체 폭으로 한 번에 하나만 띄우는 공지입니다. |
+| **Do** | Banner는 화면 맨 위에 전체 폭으로, 한 번에 하나만 띄웁니다. |
 | **Do** | 본문 안의 안내는 Callout을 씁니다. |
 
 ## 예시
@@ -4568,7 +4564,7 @@ Callout 과 차이: Callout 은 본문 안 안내(둥근 상자), Banner 는 페
 | --- | --- |
 | **Texts**`ds-selectbox__texts` | 제목과 설명을 묶는 글자 영역입니다. |
 | **Label**`ds-selectbox__label` | 이름이나 값을 보여 주는 글자입니다. |
-| **Desc**`ds-selectbox__desc` | 제목을 돕는 설명 글입니다. |
+| **Desc**`ds-selectbox__desc` | 제목에 덧붙이는 설명 글입니다. |
 | **Control**`ds-checkbox__control` | 실제로 값을 입력하거나 고르는 부분입니다. |
 | **Control**`ds-radio__control` | 실제로 값을 입력하거나 고르는 부분입니다. |
 
@@ -4679,7 +4675,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | 구분 | 내용 |
 | --- | --- |
 | **Do** | 시간 고르기가 화면의 주된 일이면 화면에 바로 둡니다. |
-| **Do** | 입력 칸에서 고를 때는 Field Button을 누르면 열리는 Bottom Sheet 안에 넣습니다. |
+| **Do** | 입력 칸에서 고를 때는 Bottom Sheet 안에 넣고, Field Button을 눌러 엽니다. |
 
 ## 예시
 
@@ -4747,13 +4743,13 @@ Figma: 폭 320(채움) / 높이 220 = 항목 5줄 × x11 / 좌우 x4 / 열 간�
 | 부품 | 설명 |
 | --- | --- |
 | **Size**`ds-tablepagination__size` | 한 번에 볼 개수를 고르는 영역입니다. |
-| **Label**`ds-tablepagination__label` | 개수 고르기 앞 글자입니다. |
-| **Select**`ds-tablepagination__select` | 한 번에 볼 개수를 고르는 셀렉트입니다. |
+| **Label**`ds-tablepagination__label` | 개수 고르기 앞에 붙는 글자입니다. |
+| **Select**`ds-tablepagination__select` | 한 번에 볼 개수를 고르는 Select입니다. |
 | **Range**`ds-tablepagination__range` | 지금 보고 있는 항목 범위입니다. |
 | **Position**`ds-tablepagination__position` | 지금 보고 있는 범위입니다. |
-| **Current**`ds-tablepagination__current` | 지금 쪽 번호입니다. |
+| **Current**`ds-tablepagination__current` | 지금 페이지 번호입니다. |
 | **Total**`ds-tablepagination__total` | 전체 개수입니다. |
-| **Item**`ds-pagination__item` | 쪽 이동 버튼입니다. |
+| **Item**`ds-pagination__item` | 페이지 이동 버튼입니다. |
 
 ## 속성
 
@@ -4771,7 +4767,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | --- | --- |
 | **Do** | 데이터 표 아래에서만 씁니다. |
 | **Do** | 일반 목록에는 Pagination을 씁니다. |
-| **Do** | 페이지당 줄 수는 3~4가지 중에서 고르게 합니다. |
+| **Do** | 페이지당 줄 수 선택지는 3~4가지로 둡니다. |
 
 ## 예시
 
@@ -4846,7 +4842,7 @@ Figma: 최소 폭 640 / padding x2 x4 / 양 끝 정렬 / 한 줄 고정(좁으�
 | **Header**`ds-popover__header` | 제목과 닫기 버튼이 놓이는 머리 영역입니다. |
 | **Texts**`ds-popover__texts` | 제목과 설명을 묶는 글자 영역입니다. |
 | **Title**`ds-popover__title` | 제목입니다. |
-| **Desc**`ds-popover__desc` | 제목을 돕는 설명 글입니다. |
+| **Desc**`ds-popover__desc` | 제목에 덧붙이는 설명 글입니다. |
 | **Close**`ds-popover__close` | 닫기 버튼입니다. |
 | **Body**`ds-popover__body` | 본문이 들어가는 영역입니다. |
 | **Footer**`ds-popover__footer` | 버튼이나 보조 정보가 놓이는 아래 영역입니다. |
@@ -4946,7 +4942,7 @@ Figma: 폭 320 / padding x5 / gap x4 / shape/xl / bg/layer-floating / 1px stroke
 
 | 부품 | 설명 |
 | --- | --- |
-| **Status**`ds-chat-meta__status` | 답변 중 같은 상태 글입니다. |
+| **Status**`ds-chat-meta__status` | "답변 중"처럼 지금 상태를 알리는 글입니다. |
 | **Attach**`ds-chat-composer__attach` | 파일을 첨부하는 버튼입니다. |
 | **Field**`ds-chat-composer__field` | 글을 쓰는 칸입니다. |
 | **Input**`ds-chat-composer__input` | 실제 입력 칸입니다. |
@@ -4967,7 +4963,8 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | 구분 | 내용 |
 | --- | --- |
 | **Do** | 상대 말풍선은 왼쪽, 내 말풍선은 오른쪽에 둡니다. |
-| **Do** | 입력 칸이 비어 있으면 보내기 버튼을 끄고, 답변을 만드는 중에는 멈춤(stop) 버튼으로 바꿉니다. |
+| **Do** | 입력 칸이 비어 있으면 보내기 버튼을 끕니다. |
+| **Do** | 답변을 만드는 동안에는 보내기 버튼을 멈춤(stop) 버튼으로 바꿉니다. |
 
 ## 예시
 
@@ -5025,7 +5022,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 # Top App Bar
 
-모바일 화면 맨 위에서 화면 제목과 뒤로 가기 같은 버튼을 보여 주는 컴포넌트입니다.
+모바일 화면 맨 위에서 제목과 뒤로 가기 같은 버튼을 보여 주는 컴포넌트입니다.
 
 ## 사용법
 
@@ -5054,7 +5051,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | **Button**`ds-appbar__button` | 아이콘 버튼입니다. |
 | **Main**`ds-appbar__main` | 제목이 놓이는 가운데 영역입니다. |
 | **Title**`ds-appbar__title` | 제목입니다. |
-| **Subtitle**`ds-appbar__subtitle` | 제목 아래 작은 글입니다. |
+| **Subtitle**`ds-appbar__subtitle` | 제목 아래에 붙는 작은 글입니다. |
 | **Right**`ds-appbar__right` | 검색 같은 버튼이 놓이는 오른쪽 영역입니다. |
 
 ## 속성
@@ -5073,8 +5070,9 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | --- | --- |
 | **Do** | 모바일 화면마다 하나씩 둡니다. |
 | **Do** | 제목 위치(ios 가운데, android 왼쪽)는 한 서비스 안에서 하나로 맞춥니다. |
-| **Do** | 왼쪽에는 뒤로 또는 닫기 버튼을, 오른쪽에는 아이콘 버튼을 2개까지 둡니다. |
-| **Do** | transparent는 사진 위에서만 쓰고 gradient를 켭니다. |
+| **Do** | 왼쪽에는 뒤로 가기나 닫기 버튼을 둡니다. |
+| **Do** | 오른쪽에는 아이콘 버튼을 2개까지 둡니다. |
+| **Do** | transparent는 사진 위에서만 쓰고, gradient를 함께 켭니다. |
 
 ## 예시
 
@@ -5183,7 +5181,8 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | 구분 | 내용 |
 | --- | --- |
 | **Do** | PC 화면에서만 씁니다. |
-| **Do** | 메뉴는 7개까지 두고, 지금 화면이 속한 메뉴에 `aria-current="page"`를 붙입니다. |
+| **Do** | 메뉴는 7개까지 둡니다. |
+| **Do** | 지금 화면이 속한 메뉴에는 `aria-current="page"`를 붙입니다. |
 | **Do** | 화면이 좁아지면 Top App Bar와 메뉴 버튼으로 바꿉니다. |
 
 ## 예시
@@ -5263,7 +5262,7 @@ Figma: padding x2 / bg/layer-default / 왼쪽 묶음 gap x4 / 메뉴 사이 x1 /
 | **Item**`ds-search-suggest__item` | 목록의 항목 하나입니다. |
 | **Content**`ds-search-suggest__content` | 주된 내용이 들어가는 영역입니다. |
 | **Label**`ds-search-suggest__label` | 이름이나 값을 보여 주는 글자입니다. |
-| **Desc**`ds-search-suggest__desc` | 제목을 돕는 설명 글입니다. |
+| **Desc**`ds-search-suggest__desc` | 제목에 덧붙이는 설명 글입니다. |
 | **Empty**`ds-search-suggest__empty` | 결과가 없을 때 보이는 글입니다. |
 
 ## 속성
@@ -5286,7 +5285,8 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 | 구분 | 내용 |
 | --- | --- |
-| **Do** | 검색 칸은 Text Field outline에 search 아이콘과 지우기 버튼을 붙여 만들고, `type="search"`와 `role="combobox"`를 붙입니다. |
+| **Do** | 검색 칸은 Text Field outline에 search 아이콘과 지우기 버튼을 붙여 만듭니다. |
+| **Do** | 검색 칸에는 `type="search"`와 `role="combobox"`를 붙입니다. |
 | **Do** | 입력 전에는 최근 검색어, 입력 중에는 추천어, 결과가 없으면 안내 문구를 보여 줍니다. |
 
 ## 예시
@@ -5406,9 +5406,10 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 | 구분 | 내용 |
 | --- | --- |
-| **Do** | 끌어 놓는 칸은 끌어 놓기가 되는 PC 화면에서만 둡니다. |
+| **Do** | 끌어 놓는 칸은 PC 화면에만 둡니다. |
 | **Do** | 모바일에서는 추가 버튼(Trigger)과 파일 줄만 씁니다. |
-| **Do** | 추가 버튼에는 지금 개수와 최대 개수를 적고, 다 차면 disabled로 바꿉니다. |
+| **Do** | 추가 버튼에는 지금 개수와 최대 개수를 적습니다. |
+| **Do** | 파일이 최대 개수만큼 차면 추가 버튼을 disabled로 바꿉니다. |
 
 ## 예시
 
@@ -5496,7 +5497,7 @@ Figma: 전체 gap x2 / 줄 gap x2
 | --- | --- |
 | **Header**`ds-menusheet__header` | 제목과 닫기 버튼이 놓이는 머리 영역입니다. |
 | **Title**`ds-menusheet__title` | 제목입니다. |
-| **Desc**`ds-menusheet__desc` | 제목을 돕는 설명 글입니다. |
+| **Desc**`ds-menusheet__desc` | 제목에 덧붙이는 설명 글입니다. |
 | **List**`ds-menusheet__list` | 항목 목록입니다. |
 | **Group**`ds-menusheet__group` | 관련 항목을 묶는 영역입니다. |
 | **Item**`ds-menusheet__item` | 목록의 항목 하나입니다. |
@@ -5526,7 +5527,8 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 | 구분 | 내용 |
 | --- | --- |
-| **Do** | 몇 가지 동작 중 하나를 고를 때는 Menu Sheet, 입력이나 긴 내용은 Bottom Sheet를 씁니다. |
+| **Do** | 몇 가지 동작 중 하나를 고를 때는 Menu Sheet를 씁니다. |
+| **Do** | 입력이나 긴 내용은 Bottom Sheet에 담습니다. |
 | **Do** | 되돌릴 수 없는 동작은 critical로 따로 묶습니다. |
 
 ## 예시
@@ -5595,7 +5597,7 @@ Figma: 최대 폭 480 / 위쪽 shape/2xl / bg/layer-floating / padding 위 x6, �
 | **Asset**`ds-result__asset` | 결과를 보여 주는 그림입니다. |
 | **Texts**`ds-result__texts` | 제목과 설명을 묶는 글자 영역입니다. |
 | **Title**`ds-result__title` | 제목입니다. |
-| **Desc**`ds-result__desc` | 제목을 돕는 설명 글입니다. |
+| **Desc**`ds-result__desc` | 제목에 덧붙이는 설명 글입니다. |
 | **Actions**`ds-result__actions` | 버튼을 묶는 영역입니다. |
 
 ## 속성
@@ -5613,8 +5615,9 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 | 구분 | 내용 |
 | --- | --- |
-| **Do** | 신청 완료, 오류, 빈 결과처럼 결과가 화면의 주인공일 때 씁니다. |
-| **Do** | 다음에 할 일 버튼 하나를 위에 두고, 보조 동작은 아래에 ghost 버튼으로 둡니다. |
+| **Do** | 신청 완료, 오류, 빈 결과처럼 결과가 화면의 중심일 때 씁니다. |
+| **Do** | 다음에 할 일 버튼은 하나만 위에 둡니다. |
+| **Do** | 보조 동작은 ghost 버튼으로 아래에 둡니다. |
 | **Do** | 목록이 비었다는 짧은 안내는 Empty를 씁니다. |
 
 ## 예시
@@ -5833,7 +5836,7 @@ Figma: 항목 사이 x1
 
 # Scroll Fog
 
-스크롤 영역 끝을 흐리게 해서 내용이 더 있다는 것을 알려 주는 컴포넌트입니다.
+스크롤 영역 끝을 흐리게 해 내용이 더 있음을 알려 주는 컴포넌트입니다.
 
 ## 사용법
 
@@ -5896,7 +5899,7 @@ Figma: 끝 20 을 투명 → 불투명으로 / 코드는 배경색 덮개가 아
 
 # Pull To Refresh
 
-목록 맨 위에서 아래로 당기면 새로 고치는 컴포넌트입니다.
+목록 맨 위에서 아래로 당기면 내용을 새로 불러오는 컴포넌트입니다.
 
 ## 사용법
 
@@ -5941,7 +5944,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | 구분 | 내용 |
 | --- | --- |
 | **Do** | 최신 내용을 다시 불러오는 목록 화면에만 씁니다. |
-| **Do** | 글자를 골라야 하는 영역에서는 data-disabled로 끕니다. |
+| **Do** | 글자를 끌어서 선택하는 영역에서는 data-disabled로 끕니다. |
 
 ## 예시
 
@@ -6007,7 +6010,7 @@ PC 화면 가장자리에서 밀려 나오는 창입니다. 지금 화면을 그
 | **Header**`ds-sidepanel__header` | 제목과 닫기 버튼이 놓이는 머리 영역입니다. |
 | **Texts**`ds-sidepanel__texts` | 제목과 설명을 묶는 글자 영역입니다. |
 | **Title**`ds-sidepanel__title` | 제목입니다. |
-| **Desc**`ds-sidepanel__desc` | 제목을 돕는 설명 글입니다. |
+| **Desc**`ds-sidepanel__desc` | 제목에 덧붙이는 설명 글입니다. |
 | **Close**`ds-sidepanel__close` | 닫기 버튼입니다. |
 | **Body**`ds-sidepanel__body` | 본문이 들어가는 영역입니다. |
 | **Footer**`ds-sidepanel__footer` | 버튼이나 보조 정보가 놓이는 아래 영역입니다. |
@@ -6095,7 +6098,7 @@ Figma: bg/layer-floating / header 최소 높이 70, padding x6 x6 x4, gap x1_5, 
 | 부품 | 설명 |
 | --- | --- |
 | **Floater**`ds-imageframe__floater` | 사진 위에 떠 있는 버튼이나 배지입니다. |
-| **Indicator**`ds-imageframe__indicator` | 여러 장 중 지금 사진을 알리는 표시입니다. |
+| **Indicator**`ds-imageframe__indicator` | 여러 장 가운데 지금 보는 사진을 알려 주는 표시입니다. |
 
 ## 속성
 
@@ -6176,7 +6179,7 @@ Figma: shape/sm / 빈 자리 bg/neutral / stroke 안쪽 1px stroke/neutral-subtl
 | --- | --- |
 | **Scroller**`ds-carousel__scroller` | 옆으로 넘기는 영역입니다. |
 | **Item**`ds-carousel__item` | 목록의 항목 하나입니다. |
-| **Button**`ds-carousel__button` | 이전, 다음 장으로 넘기는 버튼입니다. |
+| **Button**`ds-carousel__button` | 이전 장, 다음 장으로 넘기는 버튼입니다. |
 
 ## 속성
 
@@ -6263,7 +6266,8 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | 구분 | 내용 |
 | --- | --- |
 | **Do** | AI 답변처럼 서식 있는 글은 Markdown으로 감쌉니다. |
-| **Do** | 코드는 Code Block으로, 근거는 번호나 출처 칩(Citation)으로 붙입니다. |
+| **Do** | 코드는 Code Block에 넣습니다. |
+| **Do** | 근거는 번호나 출처 칩(Citation)으로 붙입니다. |
 
 ## 예시
 
@@ -6301,7 +6305,7 @@ Figma: 본문 t04 / h1 t09 Bold, h2 t07 Bold (앞뒤 x6 / x3) / h3 t06, h4 t05, 
 
 # Code Block
 
-코드를 보여 주고 한 번에 복사하게 하는 컴포넌트입니다.
+코드를 보여 주고 버튼 하나로 복사하는 컴포넌트입니다.
 
 ## 사용법
 
@@ -6345,7 +6349,8 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | 구분 | 내용 |
 | --- | --- |
 | **Do** | AI 답변처럼 서식 있는 글은 Markdown으로 감쌉니다. |
-| **Do** | 코드는 Code Block으로, 근거는 번호나 출처 칩(Citation)으로 붙입니다. |
+| **Do** | 코드는 Code Block에 넣습니다. |
+| **Do** | 근거는 번호나 출처 칩(Citation)으로 붙입니다. |
 
 ## 예시
 
@@ -6371,7 +6376,7 @@ Figma: shape/sm, 1px stroke/neutral-weak, bg/neutral / header padding x2 x4, 아
 
 # Citation
 
-본문에서 근거가 된 출처를 표시하는 컴포넌트입니다.
+본문의 근거가 된 출처를 보여 주는 컴포넌트입니다.
 
 ## 사용법
 
@@ -6403,7 +6408,8 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | 구분 | 내용 |
 | --- | --- |
 | **Do** | AI 답변처럼 서식 있는 글은 Markdown으로 감쌉니다. |
-| **Do** | 코드는 Code Block으로, 근거는 번호나 출처 칩(Citation)으로 붙입니다. |
+| **Do** | 코드는 Code Block에 넣습니다. |
+| **Do** | 근거는 번호나 출처 칩(Citation)으로 붙입니다. |
 
 ## 예시
 
@@ -6430,7 +6436,7 @@ Figma: 높이 x5, t02, fg/neutral-muted / number 최소 폭 x5, 좌우 x1, pill,
 
 # Multi Select
 
-목록에서 여러 값을 선택하고, 선택한 값을 칸 안에 모아 보여 주는 컴포넌트입니다.
+목록에서 값을 여러 개 고르면 칸 안에 모아 보여 주는 컴포넌트입니다.
 
 ## 사용법
 
@@ -6543,7 +6549,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | 구분 | 내용 |
 | --- | --- |
 | **Do** | 별 옆에 평점 숫자와 후기 수를 함께 보여 주세요. |
-| **Do** | 고르는 별점은 별 5개를 모두 보여 주고, 고른 별까지 채웁니다. |
+| **Do** | 별점을 매길 때는 별 5개를 모두 보여 주고, 고른 별까지 채웁니다. |
 | **Do** | 별 색은 경고색(노랑) 하나만 씁니다. |
 
 ## 예시
@@ -6595,29 +6601,29 @@ size: small 12 / medium 16 (기본) / large 20  /  값: --ds-rating-value 0~5 (�
 
 - [분석 대시보드](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/dashboard.html): 서비스 이용 흐름을 한눈에 보는 기본 분석 대시보드입니다. 추이 그래프와 핵심 지표를 먼저 보여 줍니다.
 - [프로젝트 현황 대시보드](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/dashboard-progress.html): 프로젝트가 어디까지 왔는지 일정과 진행률로 보여 주는 대시보드입니다.
-- [서비스 모니터링 대시보드](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/dashboard-alert-rail.html): 서비스 상태를 지켜보다가 문제가 생기면 바로 알아차리게 돕는 모니터링 화면입니다. 알림은 오른쪽에 따로 모아 둡니다.
+- [서비스 모니터링 대시보드](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/dashboard-alert-rail.html): 서비스 상태를 지켜보며 문제를 바로 알아채는 모니터링 화면입니다. 알림은 오른쪽에 따로 모아 둡니다.
 - [접히는 표 묶음](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/table-collapsible.html): 열 구성이 다른 표 여러 개를 접고 펼치며 보는 화면입니다. 표 하나로 합치면 빈칸이 많아질 때 씁니다.
 - [필터 표](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/table-filter.html): 검색과 조건으로 필요한 행만 골라 보는 표입니다. 행이 많고 거르는 기준이 여럿일 때 씁니다.
 - [묶음 표](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/table-grouped.html): 행을 상태별로 묶어 보여 주는 표입니다. 긴 목록을 몇 덩어리로 나눠 읽을 때 씁니다.
 - [받은함 표](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/table-inbox.html): 왼쪽 목록에서 고른 항목을 오른쪽에서 바로 읽는 받은함입니다. 메일이나 문의처럼 하나씩 열어 처리할 때 씁니다.
-- [검색 표](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/table-page.html): 문서 한 건의 정보와 그 안의 항목 표를 함께 보는 화면입니다. 청구서처럼 항목이 많은 문서에 씁니다.
+- [검색 표](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/table-page.html): 문서 한 건의 정보와 항목 표를 함께 보는 화면입니다. 청구서처럼 항목이 많은 문서에 씁니다.
 - [트리 표](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/table-tree.html): 상위 행을 펼치면 하위 행이 나오는 계층 표입니다. 폴더처럼 단계가 있는 목록에 씁니다.
 - [결제 폼](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/payment-form.html): 결제 정보를 한 화면에서 입력하는 폼입니다. 주문 요약을 옆에 두어 합계를 보면서 결제합니다.
 - [결제 단계](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/checkout-wizard.html): 배송부터 결제까지 단계를 나눠 진행하는 결제 화면입니다. 입력할 것이 많을 때 한 번에 한 가지씩 받습니다.
 - [문의 폼](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/contact-form.html): 문의 내용을 한 화면에서 받는 폼입니다. 단계 없이 맨 아래 버튼 하나로 보냅니다.
-- [대화상자 단계 폼](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/form-wizard-dialog.html): 보던 화면 위에 창을 띄워 짧은 단계를 진행하는 폼입니다. 화면을 옮기지 않고 간단한 설정을 마칠 때 씁니다.
+- [대화상자 단계 폼](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/form-wizard-dialog.html): 보던 화면 위에 창을 띄워 짧은 단계를 진행하는 폼입니다. 화면을 떠나지 않고 간단한 설정을 마칠 때 씁니다.
 - [단계 폼](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/form-wizard.html): 한 단계에 한 화면씩 넘어가며 입력하는 폼입니다. 순서가 중요한 입력에 씁니다.
-- [펼치는 단계 폼](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/form-wizard-inline.html): 모든 단계를 한 페이지에 펼쳐 놓고 차례로 입력하는 폼입니다. 끝난 단계는 입력한 내용만 짧게 남습니다.
-- [두 칸 폼](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/form-two-column.html): 입력 칸을 두 칸으로 나눈 문의 폼입니다. 넓은 화면에서 긴 폼을 짧아 보이게 합니다.
+- [펼치는 단계 폼](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/form-wizard-inline.html): 모든 단계를 한 페이지에 펼쳐 놓고 차례로 입력하는 폼입니다. 끝난 단계는 입력한 내용만 짧게 보여 줍니다.
+- [두 칸 폼](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/form-two-column.html): 입력 칸을 두 열로 나눈 문의 폼입니다. 넓은 화면에서 긴 폼이 짧아 보입니다.
 - [세로 단계 폼](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/form-wizard-vertical.html): 왼쪽에 단계 목록을 세로로 두는 폼입니다. 입력 항목이 많아 지금 위치를 자주 확인해야 할 때 씁니다.
 - [설정 대화상자](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/settings-dialog.html): 보던 화면을 떠나지 않고 창 안에서 설정을 바꾸는 화면입니다. 바꾼 값은 바로 적용됩니다.
 - [설정 폼](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/settings.html): 모든 설정을 한 페이지에 이어 놓은 가장 단순한 설정 화면입니다. 설정 항목이 많지 않을 때 씁니다.
 - [설정 패널](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/settings-sidebar.html): 왼쪽 메뉴로 설정 묶음을 오가는 설정 화면입니다. 항목은 그 자리에서 바로 수정합니다.
 - [로그인 카드](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/login-card.html): 화면 가운데 카드 하나로 로그인하는 기본 로그인 화면입니다.
 - [로그인 (반으로 나눈)](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/login-split.html): 한쪽에는 로그인 폼, 다른 쪽에는 사진을 둔 로그인 화면입니다. 서비스 분위기를 함께 전할 때 씁니다.
-- [로그인 (SSO)](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/login-sso.html): 이메일을 먼저 받아 회사 계정 로그인으로 이어 주는 로그인 화면입니다. 회사 계정이 없으면 비밀번호로 로그인합니다.
+- [로그인 (SSO)](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/login-sso.html): 이메일을 먼저 받고 회사 계정 로그인으로 이어 주는 화면입니다. 회사 계정이 없으면 비밀번호로 로그인합니다.
 - [캔버스 편집기](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/canvas-editor.html): 정해진 크기의 화면 위에서 디자인하는 편집기입니다. 레이어와 속성을 양옆에 둡니다.
-- [파일 탐색기](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/file-explorer.html): 폴더를 열 때마다 옆 칸으로 이어 보여 주는 파일 탐색기입니다. 깊은 폴더도 경로를 놓치지 않고 찾아갑니다.
+- [파일 탐색기](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/file-explorer.html): 폴더를 열 때마다 옆 칸에 이어 보여 주는 파일 탐색기입니다. 깊은 폴더도 경로를 놓치지 않고 찾아갑니다.
 - [코드 편집기](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/ide.html): 파일 목록, 편집 창, 터미널을 한 화면에 둔 코드 편집기입니다. 칸마다 크기를 바꾸고 접을 수 있습니다.
 - [칸반 보드](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/kanban-board.html): 할 일을 상태별 열에 카드로 늘어놓은 보드입니다. 카드를 다른 열로 옮기면 상태가 바뀝니다.
 - [페이지 편집기](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/editor.html): 블록을 끌어다 놓아 페이지를 만드는 편집기입니다. 고른 블록의 속성은 오른쪽에서 바꿉니다.
@@ -6627,36 +6633,36 @@ size: small 12 / medium 16 (기본) / large 20  /  값: --ds-rating-value 0~5 (�
 - [기술 문서](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/documentation-technical.html): 단계마다 번호와 코드를 붙인 따라 하기 문서입니다. 처음부터 끝까지 순서대로 따라가게 합니다.
 - [주문 상세](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/detail-page.html): 주문 한 건을 자세히 보고 처리하는 화면입니다. 상품과 진행 기록, 고객 정보를 한곳에서 확인합니다.
 - [상품 상세](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/product-detail.html): 상품 하나를 자세히 보고 바로 구매하는 화면입니다.
-- [할 일 상세](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/work-item-detail.html): 할 일 하나를 자세히 보며 진행 상황을 나누는 화면입니다. 하위 할 일과 댓글로 함께 일합니다.
+- [할 일 상세](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/work-item-detail.html): 할 일 하나를 자세히 보고 진행 상황을 공유하는 화면입니다. 하위 할 일과 댓글로 함께 일합니다.
 - [AI 대화](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/ai-chat.html): AI와 주고받은 대화와 결과물을 함께 보는 화면입니다. 결과물은 옆 패널에서 따로 엽니다.
 - [AI 첫 화면](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/ai-chat-landing.html): 대화를 시작하기 전에 보여 주는 AI 첫 화면입니다. 입력창과 추천 버튼으로 바로 시작합니다.
 - [가운데 히어로](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/centered-hero.html): 큰 제목과 버튼을 가운데 두고 아래에 넓은 사진을 놓은 첫 화면입니다.
 - [바둑판 갤러리](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/classic-gallery.html): 같은 비율의 사진을 바둑판처럼 늘어놓은 갤러리입니다. 분류 탭으로 바로 걸러 봅니다.
 - [사진 묶음 히어로](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/gallery-hero.html): 제목 아래에 사진 여러 장을 모아 놓은 첫 화면입니다. 다양한 장면을 한 번에 보여 줄 때 씁니다.
 - [벽돌형 갤러리](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/mixed-gallery.html): 높이가 다른 사진을 자르지 않고 쌓아 올린 벽돌형 갤러리입니다.
-- [상품 갤러리](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/product-gallery.html): 같은 모양의 상품 카드를 늘어놓은 갤러리입니다. 둘러보며 고르기 쉽게 단순하게 구성합니다.
+- [상품 갤러리](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/product-gallery.html): 같은 모양의 상품 카드를 늘어놓은 갤러리입니다. 구성이 단순해 둘러보며 고르기 쉽습니다.
 - [옆 갤러리](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/side-gallery.html): 한쪽에 제목과 설명, 반대쪽에 사진 묶음을 둔 첫 화면입니다.
 - [게시판 목록](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/community-board.html): 카페형 게시판의 글 목록입니다. 말머리로 거르고 공지는 위에 고정합니다.
 - [커뮤니티 홈](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/community-home.html): 게시판형 커뮤니티의 첫 화면입니다. 지금 뜨는 글과 새 글을 한곳에서 봅니다.
 - [게시글 상세](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/community-post.html): 게시글 하나를 읽고 댓글로 이야기를 나누는 화면입니다.
 - [글쓰기](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/community-write.html): 커뮤니티에 새 글을 쓰는 화면입니다. 게시판과 말머리를 고른 뒤 글과 사진을 올립니다.
-- [구독 해지](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/subscription-cancel.html): 구독을 해지하기 전에 잃게 되는 혜택을 알려 주는 화면입니다. 할인을 한 번 더 제안하고, 해지는 사용자가 직접 고릅니다.
+- [구독 해지](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/subscription-cancel.html): 구독을 해지하기 전에 잃게 되는 혜택을 알려 주는 화면입니다. 할인을 한 번 더 권하고, 해지 여부는 사용자가 정합니다.
 - [요금제 비교](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/pricing-plans.html): 요금제를 나란히 놓고 비교하는 화면입니다. 월 결제와 연 결제를 바꿔 가며 가격을 견줘 봅니다.
 - [구독 결제](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/subscription-checkout.html): 고른 요금제를 결제하는 화면입니다. 오늘 결제할 금액과 다음 결제일을 옆에 보여 줍니다.
 - [내 구독](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/subscription-settings.html): 지금 쓰는 요금제와 결제를 관리하는 화면입니다. 요금제 바꾸기와 해지도 여기서 시작합니다.
 - [내 정보](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/mypage-profile.html): 내 정보와 알림 설정을 보고 수정하는 화면입니다.
 - [마이페이지 홈](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/mypage-home.html): 마이페이지의 첫 화면입니다. 혜택과 주문 현황을 한눈에 봅니다.
-- [주문 내역](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/mypage-orders.html): 주문을 날짜별로 모아 보는 내역 화면입니다. 상품마다 다음에 할 일을 바로 처리합니다.
+- [주문 내역](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/mypage-orders.html): 주문을 날짜별로 모아 보는 내역 화면입니다. 배송 조회, 리뷰 쓰기처럼 상품마다 필요한 일을 바로 처리합니다.
 - [장바구니](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/cart.html): 담은 상품을 확인하고 수량과 옵션을 바꾸는 장바구니입니다. 결제 예정 금액을 보며 바로 주문합니다.
-- [빈 장바구니](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/cart-empty.html): 담은 상품이 없을 때의 장바구니입니다. 추천 상품으로 쇼핑을 이어 가게 돕습니다.
-- [시험 신청](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/exam-apply.html): 시험 종류부터 결제까지 한 화면에서 차례로 고르는 시험 신청 화면입니다. 고른 내용과 금액은 옆 요약에 바로 나타납니다.
-- [내 시험](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/exam-my.html): 응시자가 자기 시험 일정과 점수를 한눈에 보는 화면입니다.
+- [빈 장바구니](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/cart-empty.html): 담은 상품이 없을 때의 장바구니입니다. 추천 상품을 보여 주어 쇼핑을 이어 가게 합니다.
+- [시험 신청](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/exam-apply.html): 시험 종류부터 결제까지 한 화면에서 차례로 고르는 신청 화면입니다. 고른 내용과 금액은 옆 요약에 바로 나타납니다.
+- [내 시험](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/exam-my.html): 응시자가 자신의 시험 일정과 점수를 한눈에 보는 화면입니다.
 - [성적표](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/exam-score.html): 시험 성적을 확인하는 화면입니다. 총점을 먼저 보여 주고 영역별 점수로 이어집니다.
 - [응시자 관리](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/exam-group-roster.html): 단체로 접수한 응시자를 찾아보고 관리하는 표입니다. 여러 명을 골라 수험표를 한 번에 보냅니다.
-- [단체 접수](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/exam-group-apply.html): 기관 담당자가 명단 파일을 올려 한 번에 접수하는 화면입니다. 고칠 행은 올리자마자 알려 줍니다.
+- [단체 접수](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/exam-group-apply.html): 기관 담당자가 명단 파일을 올려 한 번에 접수하는 화면입니다. 고쳐야 할 행은 올리자마자 알려 줍니다.
 - [단체 성적 대시보드](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/exam-group-dashboard.html): 기관이 단체 응시 결과를 한눈에 보는 대시보드입니다.
 - [과정 찾기](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/learning-catalog.html): 듣고 싶은 과정을 찾는 목록입니다. 분류와 수준, 학습 시간으로 걸러 봅니다.
 - [과정 운영](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/learning-admin.html): 교육 담당자가 과정과 차수를 운영하는 화면입니다.
 - [강의 보기](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/learning-player.html): 강의를 들으며 AI 튜터에게 요약과 퀴즈를 받는 화면입니다.
-- [학습 현황 대시보드](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/learning-dashboard.html): 교육 담당자가 전체 학습 현황을 보는 대시보드입니다. 마감이 다가오는 미이수자를 바로 찾습니다.
-- [학습 홈](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/learning-home.html): 임직원이 처음 보는 학습 홈입니다. 이어서 볼 강의와 필수 교육을 먼저 보여 줍니다.
+- [학습 현황 대시보드](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/learning-dashboard.html): 교육 담당자가 전체 학습 현황을 보는 대시보드입니다. 마감이 가까운 미이수자를 바로 찾습니다.
+- [학습 홈](https://luvms012-rgb.github.io/ybm-ds/site/templates/pages/learning-home.html): 임직원이 학습을 시작하는 첫 화면입니다. 이어서 볼 강의와 필수 교육을 먼저 보여 줍니다.

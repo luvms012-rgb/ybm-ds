@@ -26,7 +26,7 @@ PC 화면 가장자리에서 밀려 나오는 창입니다. 지금 화면을 그
 | **Header**`ds-sidepanel__header` | 제목과 닫기 버튼이 놓이는 머리 영역입니다. |
 | **Texts**`ds-sidepanel__texts` | 제목과 설명을 묶는 글자 영역입니다. |
 | **Title**`ds-sidepanel__title` | 제목입니다. |
-| **Desc**`ds-sidepanel__desc` | 제목을 돕는 설명 글입니다. |
+| **Desc**`ds-sidepanel__desc` | 제목에 덧붙이는 설명 글입니다. |
 | **Close**`ds-sidepanel__close` | 닫기 버튼입니다. |
 | **Body**`ds-sidepanel__body` | 본문이 들어가는 영역입니다. |
 | **Footer**`ds-sidepanel__footer` | 버튼이나 보조 정보가 놓이는 아래 영역입니다. |

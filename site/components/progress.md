@@ -25,10 +25,10 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 | 구분 | 내용 |
 | --- | --- |
-| **Do** | "3/10", "40%"처럼 값을 글자로 막대 위나 옆에 함께 적습니다. 막대만으로는 정확한 숫자가 전해지지 않습니다. |
+| **Do** | "3/10", "40%"처럼 값을 글자로 막대 위나 옆에 적습니다. 막대만으로는 정확한 숫자를 알 수 없습니다. |
 | **Do** | 화면의 대표 진행률은 brand, 목록 안이나 보조 진행률은 neutral을 씁니다. |
-| **Do** | 0%일 때도 바탕 막대(track)는 보여서 진행 막대라는 것을 알 수 있게 합니다. |
-| **Do** | 화면 읽기 프로그램을 위해 role="progressbar"와 aria-valuenow, aria-valuemin, aria-valuemax를 붙이고, 라벨이 없으면 aria-label을 붙입니다. |
+| **Do** | 0%일 때도 바탕 막대(track)는 보여 줍니다. 그래야 진행 막대인 줄 알 수 있습니다. |
+| **Do** | 화면 읽기 프로그램이 읽도록 role="progressbar"와 aria-valuenow, aria-valuemin, aria-valuemax를 붙입니다. 라벨이 없으면 aria-label을 붙입니다. |
 
 ## 예시
 

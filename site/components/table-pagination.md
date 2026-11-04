@@ -33,13 +33,13 @@
 | 부품 | 설명 |
 | --- | --- |
 | **Size**`ds-tablepagination__size` | 한 번에 볼 개수를 고르는 영역입니다. |
-| **Label**`ds-tablepagination__label` | 개수 고르기 앞 글자입니다. |
-| **Select**`ds-tablepagination__select` | 한 번에 볼 개수를 고르는 셀렉트입니다. |
+| **Label**`ds-tablepagination__label` | 개수 고르기 앞에 붙는 글자입니다. |
+| **Select**`ds-tablepagination__select` | 한 번에 볼 개수를 고르는 Select입니다. |
 | **Range**`ds-tablepagination__range` | 지금 보고 있는 항목 범위입니다. |
 | **Position**`ds-tablepagination__position` | 지금 보고 있는 범위입니다. |
-| **Current**`ds-tablepagination__current` | 지금 쪽 번호입니다. |
+| **Current**`ds-tablepagination__current` | 지금 페이지 번호입니다. |
 | **Total**`ds-tablepagination__total` | 전체 개수입니다. |
-| **Item**`ds-pagination__item` | 쪽 이동 버튼입니다. |
+| **Item**`ds-pagination__item` | 페이지 이동 버튼입니다. |
 
 ## 속성
 
@@ -57,7 +57,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | --- | --- |
 | **Do** | 데이터 표 아래에서만 씁니다. |
 | **Do** | 일반 목록에는 Pagination을 씁니다. |
-| **Do** | 페이지당 줄 수는 3~4가지 중에서 고르게 합니다. |
+| **Do** | 페이지당 줄 수 선택지는 3~4가지로 둡니다. |
 
 ## 예시
 
