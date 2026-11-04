@@ -17,8 +17,8 @@
 
 | 부품 | 설명 |
 | --- | --- |
-| **Icon**`ds-citation__icon` | 출처 사이트 아이콘입니다. |
-| **Label**`ds-citation__label` | 출처 이름입니다. |
+| **Icon** `ds-citation__icon` | 출처 사이트 아이콘입니다. |
+| **Label** `ds-citation__label` | 출처 이름입니다. |
 
 ## 속성
 

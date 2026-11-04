@@ -26,11 +26,11 @@
 
 | 부품 | 설명 |
 | --- | --- |
-| **Header**`ds-datepicker__header` | 제목과 닫기 버튼이 놓이는 머리 영역입니다. |
-| **Nav**`ds-datepicker__nav` | 이전 달, 다음 달로 넘기는 버튼입니다. |
-| **Title**`ds-datepicker__title` | 제목입니다. |
-| **Weekdays**`ds-datepicker__weekdays` | 요일 줄입니다. |
-| **Grid**`ds-datepicker__grid` | 날짜 칸 모음입니다. |
+| **Header** `ds-datepicker__header` | 제목과 닫기 버튼이 놓이는 머리 영역입니다. |
+| **Nav** `ds-datepicker__nav` | 이전 달, 다음 달로 넘기는 버튼입니다. |
+| **Title** `ds-datepicker__title` | 제목입니다. |
+| **Weekdays** `ds-datepicker__weekdays` | 요일 줄입니다. |
+| **Grid** `ds-datepicker__grid` | 날짜 칸 모음입니다. |
 
 ## 속성
 

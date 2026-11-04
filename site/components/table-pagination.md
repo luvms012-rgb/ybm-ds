@@ -32,14 +32,14 @@
 
 | 부품 | 설명 |
 | --- | --- |
-| **Size**`ds-tablepagination__size` | 한 번에 볼 개수를 고르는 영역입니다. |
-| **Label**`ds-tablepagination__label` | 개수 고르기 앞에 붙는 글자입니다. |
-| **Select**`ds-tablepagination__select` | 한 번에 볼 개수를 고르는 Select입니다. |
-| **Range**`ds-tablepagination__range` | 지금 보고 있는 항목 범위입니다. |
-| **Position**`ds-tablepagination__position` | 지금 보고 있는 범위입니다. |
-| **Current**`ds-tablepagination__current` | 지금 페이지 번호입니다. |
-| **Total**`ds-tablepagination__total` | 전체 개수입니다. |
-| **Item**`ds-pagination__item` | 페이지 이동 버튼입니다. |
+| **Size** `ds-tablepagination__size` | 한 번에 볼 개수를 고르는 영역입니다. |
+| **Label** `ds-tablepagination__label` | 개수 고르기 앞에 붙는 글자입니다. |
+| **Select** `ds-tablepagination__select` | 한 번에 볼 개수를 고르는 Select입니다. |
+| **Range** `ds-tablepagination__range` | 지금 보고 있는 항목 범위입니다. |
+| **Position** `ds-tablepagination__position` | 지금 보고 있는 범위입니다. |
+| **Current** `ds-tablepagination__current` | 지금 페이지 번호입니다. |
+| **Total** `ds-tablepagination__total` | 전체 개수입니다. |
+| **Item** `ds-pagination__item` | 페이지 이동 버튼입니다. |
 
 ## 속성
 

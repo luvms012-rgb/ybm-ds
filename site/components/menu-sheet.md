@@ -27,17 +27,17 @@
 
 | 부품 | 설명 |
 | --- | --- |
-| **Header**`ds-menusheet__header` | 제목과 닫기 버튼이 놓이는 머리 영역입니다. |
-| **Title**`ds-menusheet__title` | 제목입니다. |
-| **Desc**`ds-menusheet__desc` | 제목에 덧붙이는 설명 글입니다. |
-| **List**`ds-menusheet__list` | 항목 목록입니다. |
-| **Group**`ds-menusheet__group` | 관련 항목을 묶는 영역입니다. |
-| **Item**`ds-menusheet__item` | 목록의 항목 하나입니다. |
-| **Content**`ds-menusheet__content` | 주된 내용이 들어가는 영역입니다. |
-| **Label**`ds-menusheet__label` | 이름이나 값을 보여 주는 글자입니다. |
-| **Item Desc**`ds-menusheet__item-desc` | 항목 설명입니다. |
-| **Footer**`ds-menusheet__footer` | 버튼이나 보조 정보가 놓이는 아래 영역입니다. |
-| **Close**`ds-menusheet__close` | 닫기 버튼입니다. |
+| **Header** `ds-menusheet__header` | 제목과 닫기 버튼이 놓이는 머리 영역입니다. |
+| **Title** `ds-menusheet__title` | 제목입니다. |
+| **Desc** `ds-menusheet__desc` | 제목에 덧붙이는 설명 글입니다. |
+| **List** `ds-menusheet__list` | 항목 목록입니다. |
+| **Group** `ds-menusheet__group` | 관련 항목을 묶는 영역입니다. |
+| **Item** `ds-menusheet__item` | 목록의 항목 하나입니다. |
+| **Content** `ds-menusheet__content` | 주된 내용이 들어가는 영역입니다. |
+| **Label** `ds-menusheet__label` | 이름이나 값을 보여 주는 글자입니다. |
+| **Item Desc** `ds-menusheet__item-desc` | 항목 설명입니다. |
+| **Footer** `ds-menusheet__footer` | 버튼이나 보조 정보가 놓이는 아래 영역입니다. |
+| **Close** `ds-menusheet__close` | 닫기 버튼입니다. |
 
 ## 속성
 

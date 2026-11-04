@@ -26,8 +26,8 @@ simple: <nav class="ds-pagination" data-type="simple"> prev · <span class="ds-p
 
 | 부품 | 설명 |
 | --- | --- |
-| **Item**`ds-pagination__item` | 페이지 번호 버튼입니다. |
-| **Indicator**`ds-pagination__indicator` | 지금 페이지를 알려 주는 표시입니다. |
+| **Item** `ds-pagination__item` | 페이지 번호 버튼입니다. |
+| **Indicator** `ds-pagination__indicator` | 지금 페이지를 알려 주는 표시입니다. |
 
 ## 속성
 
@@ -104,3 +104,37 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 ### 좁은 카드 안에서는 simple 쓰기
 
 카드처럼 좁은 자리에서는 `data-type="simple"`로 지금 페이지와 전체 페이지 수만 보여 줍니다. 번호를 늘어놓을 자리가 없을 때 이전, 다음 버튼만으로 넘깁니다.
+
+```html
+<article class="ds-card u-full" data-size="small" style="max-width: 360px">
+  <header class="ds-card__header">
+    <h3 class="ds-card__title">수강 후기</h3>
+    <p class="ds-card__desc">후기 24개</p>
+  </header>
+  <div class="ds-card__content">
+    <ul class="u-col u-gap-3">
+      <li class="u-col u-gap-1"><p>설명이 쉬워서 끝까지 들었어요.</p><span class="ds-tag-group"><span>김하나</span><span>2026.11.02</span></span></li>
+      <li class="u-col u-gap-1"><p>예문이 많아서 바로 써먹을 수 있어요.</p><span class="ds-tag-group"><span>이준</span><span>2026.10.30</span></span></li>
+      <li class="u-col u-gap-1"><p>복습 퀴즈가 있어서 좋았어요.</p><span class="ds-tag-group"><span>박서진</span><span>2026.10.27</span></span></li>
+    </ul>
+  </div>
+  <footer class="ds-card__footer">
+    <nav class="ds-pagination u-grow" data-type="simple" aria-label="후기 페이지">
+      <a class="ds-pagination__item" data-type="prev" href="?p=1" aria-label="이전 페이지"></a>
+      <span class="ds-pagination__indicator"><b>2</b> / 8</span>
+      <a class="ds-pagination__item" data-type="next" href="?p=3" aria-label="다음 페이지"></a>
+    </nav>
+  </footer>
+</article>
+```
+
+## 규격
+
+### 크기와 여백
+
+```
+type: full(기본) / simple
+Figma item: 36(높이/최소 폭) / px x2 / shape/sm / 숫자 t04 Medium fg/neutral-muted / 화살표 20 fg/neutral / ellipsis 16 fg/neutral-subtle
+  pressed bg/transparent-pressed / current bg/neutral-solid + fg/on-neutral-solid t04 Bold / disabled 화살표 fg/disabled
+  full gap x1 / simple gap x3 / indicator 현재 t04 Bold fg/neutral + "/ 전체" t04 fg/neutral-subtle
+```

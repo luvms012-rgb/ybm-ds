@@ -137,7 +137,7 @@ const searchable = () => {
     <div class="tp-between"><h1 class="tp-h1">청구서 INV-2043</h1>${btn('PDF 받기', { ic: 'download' })}</div>
     <dl class="tp-meta">${meta.map(([k, v]) => `<div class="tp-stack"><dt>${k}</dt><dd>${v}</dd></div>`).join('')}</dl>
   </div>
-  <div class="tp-between" style="align-items: flex-end">${segmented(['전체', '시간제', '고정'], 0, '청구 방식')}<div style="width: min(100%, 320px)">${field('q', '항목 찾기', search('q', '찾기…'))}</div></div>
+  <div class="tp-between" style="align-items: center">${segmented(['전체', '시간제', '고정'], 0, '청구 방식')}<div class="ds-field" style="flex-direction: row; align-items: center; --ds-field-gap: var(--ds-space-x3)"><div class="ds-field__header"><label class="ds-field__label" for="q">항목 찾기</label></div><div style="width: min(100%, 240px)">${search('q', '찾기…')}</div></div></div>
   <div class="tp-stack" style="gap: var(--ds-space-x4)">
     ${table([th('항목'), th('분류'), th('방식'), [...th('수량', 'end')], [...th('단가', 'end')], ['금액', 'end']], items.map(([n, c, m, q, p]) => [n, c, badge(m, m === '고정' ? 'informative' : 'neutral'), T(q), T(won(p)), T(won(q * p))]))}
     <div class="tp-totals">${divider()}<div class="tp-between"><span class="tp-sub">소계</span>${T(won(sub))}</div><div class="tp-between"><span class="tp-sub">부가세 (10%)</span>${T(won(tax))}</div>${divider()}<div class="tp-between"><b>청구 합계</b><b class="tp-num">${won(sub + tax)}</b></div>${divider()}</div>

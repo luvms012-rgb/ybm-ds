@@ -91,10 +91,24 @@ yds로 [만들 화면, 예: 회원 목록 화면]을 만들어 줘.
 
 `html`에 속성 하나를 붙이면 모든 색이 어두운 화면용으로 바뀝니다. 색을 토큰으로만 썼다면 따로 고칠 것이 없습니다.
 
-```AI
+**AI 요청**
+
+```text
 이 사이트에 yds 다크 모드를 넣어 줘.
 문서: https://luvms012-rgb.github.io/ybm-ds/site/llms.txt
 화면 오른쪽 위에 라이트, 다크 전환 버튼을 만들고, 처음에는 기기 설정을 따르게 해 줘.
+```
+
+**HTML**
+
+```html
+<!-- 다크 모드 -->
+<html lang="ko" data-theme="dark">
+
+<!-- 기기 설정을 따를 때: <head> 맨 위 -->
+<script>
+  if (matchMedia('(prefers-color-scheme: dark)').matches) document.documentElement.dataset.theme = 'dark';
+</script>
 ```
 
 ## AI가 읽는 파일

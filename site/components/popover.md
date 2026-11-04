@@ -26,13 +26,13 @@
 
 | 부품 | 설명 |
 | --- | --- |
-| **Header**`ds-popover__header` | 제목과 닫기 버튼이 놓이는 머리 영역입니다. |
-| **Texts**`ds-popover__texts` | 제목과 설명을 묶는 글자 영역입니다. |
-| **Title**`ds-popover__title` | 제목입니다. |
-| **Desc**`ds-popover__desc` | 제목에 덧붙이는 설명 글입니다. |
-| **Close**`ds-popover__close` | 닫기 버튼입니다. |
-| **Body**`ds-popover__body` | 본문이 들어가는 영역입니다. |
-| **Footer**`ds-popover__footer` | 버튼이나 보조 정보가 놓이는 아래 영역입니다. |
+| **Header** `ds-popover__header` | 제목과 닫기 버튼이 놓이는 머리 영역입니다. |
+| **Texts** `ds-popover__texts` | 제목과 설명을 묶는 글자 영역입니다. |
+| **Title** `ds-popover__title` | 제목입니다. |
+| **Desc** `ds-popover__desc` | 제목에 덧붙이는 설명 글입니다. |
+| **Close** `ds-popover__close` | 닫기 버튼입니다. |
+| **Body** `ds-popover__body` | 본문이 들어가는 영역입니다. |
+| **Footer** `ds-popover__footer` | 버튼이나 보조 정보가 놓이는 아래 영역입니다. |
 
 ## 속성
 

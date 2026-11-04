@@ -24,12 +24,12 @@
 
 | 부품 | 설명 |
 | --- | --- |
-| **Header**`ds-dialog__header` | 제목과 닫기 버튼이 놓이는 머리 영역입니다. |
-| **Title**`ds-dialog__title` | 제목입니다. |
-| **Desc**`ds-dialog__desc` | 제목에 덧붙이는 설명 글입니다. |
-| **Close**`ds-dialog__close` | 닫기 버튼입니다. |
-| **Body**`ds-dialog__body` | 본문이 들어가는 영역입니다. |
-| **Footer**`ds-dialog__footer` | 버튼이나 보조 정보가 놓이는 아래 영역입니다. |
+| **Header** `ds-dialog__header` | 제목과 닫기 버튼이 놓이는 머리 영역입니다. |
+| **Title** `ds-dialog__title` | 제목입니다. |
+| **Desc** `ds-dialog__desc` | 제목에 덧붙이는 설명 글입니다. |
+| **Close** `ds-dialog__close` | 닫기 버튼입니다. |
+| **Body** `ds-dialog__body` | 본문이 들어가는 영역입니다. |
+| **Footer** `ds-dialog__footer` | 버튼이나 보조 정보가 놓이는 아래 영역입니다. |
 
 ## 속성
 

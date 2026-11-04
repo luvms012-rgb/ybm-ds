@@ -32,16 +32,16 @@
 
 | 부품 | 설명 |
 | --- | --- |
-| **Icon**`ds-input__icon` | 뜻을 빠르게 알려 주는 아이콘입니다. |
-| **Control**`ds-input__control` | 실제로 값을 입력하거나 고르는 부분입니다. |
-| **Clear**`ds-input__clear` | 입력한 값을 지우는 버튼입니다. |
-| **Heading**`ds-search-suggest__heading` | 목록 위에 붙는 소제목입니다. |
-| **List**`ds-search-suggest__list` | 항목 목록입니다. |
-| **Item**`ds-search-suggest__item` | 목록의 항목 하나입니다. |
-| **Content**`ds-search-suggest__content` | 주된 내용이 들어가는 영역입니다. |
-| **Label**`ds-search-suggest__label` | 이름이나 값을 보여 주는 글자입니다. |
-| **Desc**`ds-search-suggest__desc` | 제목에 덧붙이는 설명 글입니다. |
-| **Empty**`ds-search-suggest__empty` | 결과가 없을 때 보이는 글입니다. |
+| **Icon** `ds-input__icon` | 뜻을 빠르게 알려 주는 아이콘입니다. |
+| **Control** `ds-input__control` | 실제로 값을 입력하거나 고르는 부분입니다. |
+| **Clear** `ds-input__clear` | 입력한 값을 지우는 버튼입니다. |
+| **Heading** `ds-search-suggest__heading` | 목록 위에 붙는 소제목입니다. |
+| **List** `ds-search-suggest__list` | 항목 목록입니다. |
+| **Item** `ds-search-suggest__item` | 목록의 항목 하나입니다. |
+| **Content** `ds-search-suggest__content` | 주된 내용이 들어가는 영역입니다. |
+| **Label** `ds-search-suggest__label` | 이름이나 값을 보여 주는 글자입니다. |
+| **Desc** `ds-search-suggest__desc` | 제목에 덧붙이는 설명 글입니다. |
+| **Empty** `ds-search-suggest__empty` | 결과가 없을 때 보이는 글입니다. |
 
 ## 속성
 

@@ -26,11 +26,11 @@
 
 | 부품 | 설명 |
 | --- | --- |
-| **Texts**`ds-selectbox__texts` | 제목과 설명을 묶는 글자 영역입니다. |
-| **Label**`ds-selectbox__label` | 이름이나 값을 보여 주는 글자입니다. |
-| **Desc**`ds-selectbox__desc` | 제목에 덧붙이는 설명 글입니다. |
-| **Control**`ds-checkbox__control` | 실제로 값을 입력하거나 고르는 부분입니다. |
-| **Control**`ds-radio__control` | 실제로 값을 입력하거나 고르는 부분입니다. |
+| **Texts** `ds-selectbox__texts` | 제목과 설명을 묶는 글자 영역입니다. |
+| **Label** `ds-selectbox__label` | 이름이나 값을 보여 주는 글자입니다. |
+| **Desc** `ds-selectbox__desc` | 제목에 덧붙이는 설명 글입니다. |
+| **Control** `ds-checkbox__control` | 실제로 값을 입력하거나 고르는 부분입니다. |
+| **Control** `ds-radio__control` | 실제로 값을 입력하거나 고르는 부분입니다. |
 
 ## 속성
 

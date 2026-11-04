@@ -34,19 +34,19 @@
 
 | 부품 | 설명 |
 | --- | --- |
-| **Dropzone**`ds-fileattach__dropzone` | 파일을 끌어 놓는 칸입니다. |
-| **Input**`ds-fileattach__input` | 실제 입력 칸입니다. |
-| **Label**`ds-fileattach__label` | 이름이나 값을 보여 주는 글자입니다. |
-| **Items**`ds-fileattach__items` | 첨부한 파일 목록입니다. |
-| **Trigger**`ds-fileattach__trigger` | 누르면 열리거나 바뀌는 버튼입니다. |
-| **Count**`ds-fileattach__count` | 개수나 글자 수를 보여 줍니다. |
-| **Thumbnail**`ds-fileitem__thumbnail` | 파일 종류나 사진을 보여 주는 작은 그림입니다. |
-| **Texts**`ds-fileitem__texts` | 제목과 설명을 묶는 글자 영역입니다. |
-| **Name**`ds-fileitem__name` | 파일 이름입니다. |
-| **Size**`ds-fileitem__size` | 파일 크기입니다. |
-| **Image**`ds-fileitem__image` | 사진 미리보기입니다. |
-| **Badge**`ds-fileitem__badge` | 개수나 새 소식을 알리는 배지입니다. |
-| **Remove**`ds-fileitem__remove` | 항목을 지우는 버튼입니다. |
+| **Dropzone** `ds-fileattach__dropzone` | 파일을 끌어 놓는 칸입니다. |
+| **Input** `ds-fileattach__input` | 실제 입력 칸입니다. |
+| **Label** `ds-fileattach__label` | 이름이나 값을 보여 주는 글자입니다. |
+| **Items** `ds-fileattach__items` | 첨부한 파일 목록입니다. |
+| **Trigger** `ds-fileattach__trigger` | 누르면 열리거나 바뀌는 버튼입니다. |
+| **Count** `ds-fileattach__count` | 개수나 글자 수를 보여 줍니다. |
+| **Thumbnail** `ds-fileitem__thumbnail` | 파일 종류나 사진을 보여 주는 작은 그림입니다. |
+| **Texts** `ds-fileitem__texts` | 제목과 설명을 묶는 글자 영역입니다. |
+| **Name** `ds-fileitem__name` | 파일 이름입니다. |
+| **Size** `ds-fileitem__size` | 파일 크기입니다. |
+| **Image** `ds-fileitem__image` | 사진 미리보기입니다. |
+| **Badge** `ds-fileitem__badge` | 개수나 새 소식을 알리는 배지입니다. |
+| **Remove** `ds-fileitem__remove` | 항목을 지우는 버튼입니다. |
 
 ## 속성
 

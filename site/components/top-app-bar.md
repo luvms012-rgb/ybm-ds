@@ -27,12 +27,12 @@
 
 | 부품 | 설명 |
 | --- | --- |
-| **Left**`ds-appbar__left` | 뒤로 가기 같은 버튼이 놓이는 왼쪽 영역입니다. |
-| **Button**`ds-appbar__button` | 아이콘 버튼입니다. |
-| **Main**`ds-appbar__main` | 제목이 놓이는 가운데 영역입니다. |
-| **Title**`ds-appbar__title` | 제목입니다. |
-| **Subtitle**`ds-appbar__subtitle` | 제목 아래에 붙는 작은 글입니다. |
-| **Right**`ds-appbar__right` | 검색 같은 버튼이 놓이는 오른쪽 영역입니다. |
+| **Left** `ds-appbar__left` | 뒤로 가기 같은 버튼이 놓이는 왼쪽 영역입니다. |
+| **Button** `ds-appbar__button` | 아이콘 버튼입니다. |
+| **Main** `ds-appbar__main` | 제목이 놓이는 가운데 영역입니다. |
+| **Title** `ds-appbar__title` | 제목입니다. |
+| **Subtitle** `ds-appbar__subtitle` | 제목 아래에 붙는 작은 글입니다. |
+| **Right** `ds-appbar__right` | 검색 같은 버튼이 놓이는 오른쪽 영역입니다. |
 
 ## 속성
 

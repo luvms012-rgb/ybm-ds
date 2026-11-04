@@ -28,11 +28,11 @@ PC 화면 맨 위에 두는 메뉴로, 서비스의 주요 화면을 오갈 때 
 
 | 부품 | 설명 |
 | --- | --- |
-| **Left**`ds-topnav__left` | 뒤로 가기 같은 버튼이 놓이는 왼쪽 영역입니다. |
-| **Heading**`ds-topnav__heading` | 목록 위에 붙는 소제목입니다. |
-| **Menu**`ds-topnav__menu` | 메뉴 묶음입니다. |
-| **Item**`ds-topnav__item` | 목록의 항목 하나입니다. |
-| **End**`ds-topnav__end` | 로그인 같은 버튼이 놓이는 오른쪽 끝 영역입니다. |
+| **Left** `ds-topnav__left` | 뒤로 가기 같은 버튼이 놓이는 왼쪽 영역입니다. |
+| **Heading** `ds-topnav__heading` | 목록 위에 붙는 소제목입니다. |
+| **Menu** `ds-topnav__menu` | 메뉴 묶음입니다. |
+| **Item** `ds-topnav__item` | 목록의 항목 하나입니다. |
+| **End** `ds-topnav__end` | 로그인 같은 버튼이 놓이는 오른쪽 끝 영역입니다. |
 
 ## 속성
 

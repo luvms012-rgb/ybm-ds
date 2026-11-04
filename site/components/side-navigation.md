@@ -29,16 +29,16 @@ PC 화면 왼쪽에 두는 메뉴로, 화면 사이를 오갈 때 씁니다.
 
 | 부품 | 설명 |
 | --- | --- |
-| **Header**`ds-sidenav__header` | 제목과 닫기 버튼이 놓이는 머리 영역입니다. |
-| **Trigger**`ds-sidenav__trigger` | 누르면 열리거나 바뀌는 버튼입니다. |
-| **Content**`ds-sidenav__content` | 주된 내용이 들어가는 영역입니다. |
-| **Group**`ds-sidenav__group` | 관련 항목을 묶는 영역입니다. |
-| **Group Label**`ds-sidenav__group-label` | 묶음의 이름입니다. |
-| **Item**`ds-sidenav__item` | 목록의 항목 하나입니다. |
-| **Prefix**`ds-sidenav__prefix` | 앞에 붙는 아이콘이나 요소입니다. |
-| **Label**`ds-sidenav__label` | 이름이나 값을 보여 주는 글자입니다. |
-| **Suffix**`ds-sidenav__suffix` | 뒤에 붙는 아이콘이나 요소입니다. |
-| **Footer**`ds-sidenav__footer` | 버튼이나 보조 정보가 놓이는 아래 영역입니다. |
+| **Header** `ds-sidenav__header` | 제목과 닫기 버튼이 놓이는 머리 영역입니다. |
+| **Trigger** `ds-sidenav__trigger` | 누르면 열리거나 바뀌는 버튼입니다. |
+| **Content** `ds-sidenav__content` | 주된 내용이 들어가는 영역입니다. |
+| **Group** `ds-sidenav__group` | 관련 항목을 묶는 영역입니다. |
+| **Group Label** `ds-sidenav__group-label` | 묶음의 이름입니다. |
+| **Item** `ds-sidenav__item` | 목록의 항목 하나입니다. |
+| **Prefix** `ds-sidenav__prefix` | 앞에 붙는 아이콘이나 요소입니다. |
+| **Label** `ds-sidenav__label` | 이름이나 값을 보여 주는 글자입니다. |
+| **Suffix** `ds-sidenav__suffix` | 뒤에 붙는 아이콘이나 요소입니다. |
+| **Footer** `ds-sidenav__footer` | 버튼이나 보조 정보가 놓이는 아래 영역입니다. |
 
 ## 속성
 

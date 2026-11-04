@@ -20,8 +20,8 @@
 
 | 부품 | 설명 |
 | --- | --- |
-| **Btn**`ds-quantity__btn` | 수량을 늘리거나 줄이는 버튼입니다. |
-| **Value**`ds-quantity__value` | 지금 수량입니다. |
+| **Btn** `ds-quantity__btn` | 수량을 늘리거나 줄이는 버튼입니다. |
+| **Value** `ds-quantity__value` | 지금 수량입니다. |
 
 ## 속성
 

@@ -23,11 +23,11 @@
 
 | 부품 | 설명 |
 | --- | --- |
-| **Inner**`ds-banner__inner` | 배너 내용을 가운데에 정해진 폭으로 담는 영역입니다. |
-| **Message**`ds-banner__message` | 알릴 내용을 담은 글입니다. |
-| **Title**`ds-banner__title` | 제목입니다. |
-| **Action**`ds-banner__action` | 바로 실행하는 작은 버튼입니다. |
-| **Close**`ds-banner__close` | 닫기 버튼입니다. |
+| **Inner** `ds-banner__inner` | 배너 내용을 가운데에 정해진 폭으로 담는 영역입니다. |
+| **Message** `ds-banner__message` | 알릴 내용을 담은 글입니다. |
+| **Title** `ds-banner__title` | 제목입니다. |
+| **Action** `ds-banner__action` | 바로 실행하는 작은 버튼입니다. |
+| **Close** `ds-banner__close` | 닫기 버튼입니다. |
 
 ## 속성
 

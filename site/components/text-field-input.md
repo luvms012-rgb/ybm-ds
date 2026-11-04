@@ -22,11 +22,11 @@
 
 | 부품 | 설명 |
 | --- | --- |
-| **Icon**`ds-input__icon` | 뜻을 빠르게 알려 주는 아이콘입니다. |
-| **Prefix**`ds-input__prefix` | 앞에 붙는 아이콘이나 요소입니다. |
-| **Control**`ds-input__control` | 실제로 값을 입력하거나 고르는 부분입니다. |
-| **Suffix**`ds-input__suffix` | 뒤에 붙는 아이콘이나 요소입니다. |
-| **Clear**`ds-input__clear` | 입력한 값을 지우는 버튼입니다. |
+| **Icon** `ds-input__icon` | 뜻을 빠르게 알려 주는 아이콘입니다. |
+| **Prefix** `ds-input__prefix` | 앞에 붙는 아이콘이나 요소입니다. |
+| **Control** `ds-input__control` | 실제로 값을 입력하거나 고르는 부분입니다. |
+| **Suffix** `ds-input__suffix` | 뒤에 붙는 아이콘이나 요소입니다. |
+| **Clear** `ds-input__clear` | 입력한 값을 지우는 버튼입니다. |
 
 ## 속성
 

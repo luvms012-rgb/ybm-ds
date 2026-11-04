@@ -18,8 +18,8 @@
 
 | 부품 | 설명 |
 | --- | --- |
-| **Track**`ds-progress-circle__track` | 막대의 바탕입니다. |
-| **Range**`ds-progress-circle__range` | 진행한 양을 보여 주는 호입니다. |
+| **Track** `ds-progress-circle__track` | 막대의 바탕입니다. |
+| **Range** `ds-progress-circle__range` | 진행한 양을 보여 주는 호입니다. |
 
 ## 속성
 

@@ -25,11 +25,11 @@ Select를 눌렀을 때 펼쳐지는 선택지 목록입니다.
 
 | 부품 | 설명 |
 | --- | --- |
-| **Group**`ds-select-content__group` | 관련 항목을 묶는 영역입니다. |
-| **Label**`ds-select-content__label` | 이름이나 값을 보여 주는 글자입니다. |
-| **Body**`ds-select-item__body` | 본문이 들어가는 영역입니다. |
-| **Label**`ds-select-item__label` | 이름이나 값을 보여 주는 글자입니다. |
-| **Desc**`ds-select-item__desc` | 제목에 덧붙이는 설명 글입니다. |
+| **Group** `ds-select-content__group` | 관련 항목을 묶는 영역입니다. |
+| **Label** `ds-select-content__label` | 이름이나 값을 보여 주는 글자입니다. |
+| **Body** `ds-select-item__body` | 본문이 들어가는 영역입니다. |
+| **Label** `ds-select-item__label` | 이름이나 값을 보여 주는 글자입니다. |
+| **Desc** `ds-select-item__desc` | 제목에 덧붙이는 설명 글입니다. |
 
 ## 사용 지침
 

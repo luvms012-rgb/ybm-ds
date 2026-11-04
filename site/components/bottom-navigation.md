@@ -21,10 +21,10 @@
 
 | 부품 | 설명 |
 | --- | --- |
-| **Item**`ds-bottomnav__item` | 목록의 항목 하나입니다. |
-| **Icon**`ds-bottomnav__icon` | 메뉴를 나타내는 아이콘입니다. |
-| **Badge Dot**`ds-bottomnav__badge--dot` | 새 소식을 알리는 점입니다. |
-| **Label**`ds-bottomnav__label` | 메뉴 이름입니다. |
+| **Item** `ds-bottomnav__item` | 목록의 항목 하나입니다. |
+| **Icon** `ds-bottomnav__icon` | 메뉴를 나타내는 아이콘입니다. |
+| **Badge Dot** `ds-bottomnav__badge--dot` | 새 소식을 알리는 점입니다. |
+| **Label** `ds-bottomnav__label` | 메뉴 이름입니다. |
 
 ## 속성
 

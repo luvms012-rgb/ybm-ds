@@ -26,10 +26,10 @@
 
 | 부품 | 설명 |
 | --- | --- |
-| **Status**`ds-chat-meta__status` | "답변 중"처럼 지금 상태를 알리는 글입니다. |
-| **Attach**`ds-chat-composer__attach` | 파일을 첨부하는 버튼입니다. |
-| **Field**`ds-chat-composer__field` | 글을 쓰는 칸입니다. |
-| **Input**`ds-chat-composer__input` | 실제 입력 칸입니다. |
+| **Status** `ds-chat-meta__status` | "답변 중"처럼 지금 상태를 알리는 글입니다. |
+| **Attach** `ds-chat-composer__attach` | 파일을 첨부하는 버튼입니다. |
+| **Field** `ds-chat-composer__field` | 글을 쓰는 칸입니다. |
+| **Input** `ds-chat-composer__input` | 실제 입력 칸입니다. |
 
 ## 속성
 

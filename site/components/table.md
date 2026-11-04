@@ -28,8 +28,8 @@
 
 | 부품 | 설명 |
 | --- | --- |
-| **Group**`ds-table__group` | 관련 항목을 묶는 영역입니다. |
-| **Stack**`ds-table__stack` | 여러 줄을 쌓아 보여 주는 칸입니다. |
+| **Group** `ds-table__group` | 관련 항목을 묶는 영역입니다. |
+| **Stack** `ds-table__stack` | 여러 줄을 쌓아 보여 주는 칸입니다. |
 
 ## 속성
 

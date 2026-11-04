@@ -65,3 +65,25 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 ### 카드 안 강의 정보를 한 줄로
 
 강의 카드에서 수준, 강의 수, 전체 시간을 한 줄로 묶습니다. 묶음 안의 글자 크기는 모두 같게 두고, 카드 글에 맞춰 `data-size="t4"`를 씁니다.
+
+```html
+<article class="ds-card" style="width: 100%; max-width: 320px">
+  <header class="ds-card__header">
+    <h3 class="ds-card__title">엑셀 실무 완성</h3>
+    <span class="ds-tag-group" data-size="t4"><span>초급</span><span>24강</span><span>12시간</span></span>
+  </header>
+  <div class="ds-card__content">함수부터 피벗 표까지 업무에 바로 쓰는 기능을 익혀요.</div>
+  <footer class="ds-card__footer">
+    <button type="button" class="ds-btn" data-variant="neutralWeak">강의 보기</button>
+  </footer>
+</article>
+```
+
+## 규격
+
+### 크기와 여백
+
+```
+size: t3(기본 13/20) / t4(14/21)   tone: neutralSubtle(기본) / neutral
+Figma: 항목 사이 "/" 구분 / gap x1 / neutral fg/neutral-muted / neutralSubtle fg/neutral-subtle
+```

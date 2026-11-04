@@ -79,3 +79,62 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 ### 짧은 선택지 2~4개 중 하나 고르기
 
 기간처럼 짧은 선택지를 2~4개만 둡니다. 선택지가 더 많거나 라벨이 길면 Select를 씁니다.
+
+```html
+<article class="ds-card u-full" style="max-width: 420px">
+  <header class="u-flex u-center u-between">
+    <h3 class="ds-card__title">학습 시간</h3>
+    <div class="ds-segmented" role="group" aria-label="기간">
+      <button type="button" class="ds-segmented__item" aria-pressed="false">1주</button>
+      <button type="button" class="ds-segmented__item" aria-pressed="true">1개월</button>
+      <button type="button" class="ds-segmented__item" aria-pressed="false">3개월</button>
+    </div>
+  </header>
+  <div class="ds-card__content u-col u-gap-1">
+    <span class="ds-t10 ds-fw-bold">12시간 30분</span>
+    <span class="ds-fg-subtle">지난달보다 2시간 늘었어요</span>
+  </div>
+</article>
+```
+
+### 좁은 화면에서는 폭을 채우기
+
+모바일처럼 폭이 좁으면 `data-layout="fill"`로 칸을 똑같이 나눠 채웁니다. 한 화면에 하나만 두어 지금 무엇을 바꾸는지 분명하게 합니다.
+
+```html
+<div class="u-col u-gap-5 u-full" style="max-width: 375px">
+  <div class="ds-segmented" role="group" aria-label="신청 방식" data-size="medium" data-layout="fill">
+    <button type="button" class="ds-segmented__item" aria-pressed="true">개인 신청</button>
+    <button type="button" class="ds-segmented__item" aria-pressed="false">단체 신청</button>
+  </div>
+  <div class="ds-field">
+    <div class="ds-field__header">
+      <label class="ds-field__label" for="segmented-control-ex3-name">이름</label>
+    </div>
+    <div class="ds-input" data-variant="outline">
+      <input class="ds-input__control" id="segmented-control-ex3-name" placeholder="이름을 입력해 주세요">
+    </div>
+  </div>
+  <div class="ds-field">
+    <div class="ds-field__header">
+      <label class="ds-field__label" for="segmented-control-ex3-phone">휴대폰 번호</label>
+    </div>
+    <div class="ds-input" data-variant="outline">
+      <input class="ds-input__control" id="segmented-control-ex3-phone" inputmode="tel" placeholder="숫자만 입력해 주세요">
+    </div>
+  </div>
+</div>
+```
+
+## 규격
+
+### 크기와 여백
+
+```
+size: small(기본) / medium   layout: hug(기본) / fill
+모션: 선택 배경이 고른 항목으로 미끄러져 이동한다(필수, ybm-ds.js). 누르면 aria-pressed 가 바뀌고 change 이벤트가 난다.
+Figma small : 트랙 bg/neutral / padding 2 / shape/sm / item py6 px12 / shape/xs / t03 Medium fg/neutral-subtle (고른 칸 SemiBold)
+      medium: 트랙 shape/lg / item py8 px16 / shape/sm / t04 Medium (고른 칸 SemiBold)
+      selected bg/layer-default + elevation raised + fg/neutral / disabled fg/disabled
+높이(2026-11-03): small 32(Button xsmall 과 같음) / medium 40(Button medium, Select medium 과 같음). 글자와 아이콘 모두 같은 높이
+```

@@ -21,10 +21,10 @@
 
 | 부품 | 설명 |
 | --- | --- |
-| **Indicator**`ds-ptr__indicator` | 지금 상태나 위치를 알려 주는 표시입니다. |
-| **Track**`ds-progress-circle__track` | 막대의 바탕입니다. |
-| **Range**`ds-progress-circle__range` | 당긴 만큼 차오르는 표시입니다. |
-| **Content**`ds-ptr__content` | 주된 내용이 들어가는 영역입니다. |
+| **Indicator** `ds-ptr__indicator` | 지금 상태나 위치를 알려 주는 표시입니다. |
+| **Track** `ds-progress-circle__track` | 막대의 바탕입니다. |
+| **Range** `ds-progress-circle__range` | 당긴 만큼 차오르는 표시입니다. |
+| **Content** `ds-ptr__content` | 주된 내용이 들어가는 영역입니다. |
 
 ## 속성
 
@@ -108,3 +108,39 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 ### 글자를 고르는 화면에서는 끄기
 
 공지 본문처럼 글자를 끌어서 고르는 영역은 `data-disabled`로 당기기를 끕니다. 글자를 고르려던 손짓이 새로 고침으로 바뀌지 않습니다.
+
+```html
+<div class="ds-ptr u-full" data-disabled style="max-width: 420px">
+  <div class="ds-ptr__indicator">
+    <span class="ds-progress-circle" role="progressbar" aria-label="새로 고침"><svg viewBox="0 0 24 24" aria-hidden="true"><circle class="ds-progress-circle__track" pathLength="100"/><circle class="ds-progress-circle__range" pathLength="100"/></svg></span>
+  </div>
+  <article class="ds-ptr__content u-col u-gap-4">
+    <header class="u-col u-gap-2">
+      <h3 class="ds-t07 ds-fw-bold">겨울 방학 특강 신청 안내</h3>
+      <span class="ds-tag-group"><span>운영팀</span><span>12월 2일</span><span>조회 1,240</span></span>
+    </header>
+    <hr class="ds-divider">
+    <p class="ds-t05">겨울 방학 특강 신청을 12월 9일 오전 10시부터 받아요. 반마다 정원이 있어 먼저 신청한 순서로 마감해요.</p>
+    <p class="ds-t05">신청한 강의는 내 강의실에서 바로 확인할 수 있어요.</p>
+  </article>
+</div>
+```
+
+## 규격
+
+### CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-ptr-size` | `calc(var(--ds-space-x6) + var(--ds-space-x8) * 2)` |
+| `--ds-ptr-displacement` | `0px` |
+
+### 크기와 여백
+
+```
+ybm-ds.js 가 터치로 당긴 거리를 --ds-ptr-displacement 에 넣고, 88 을 넘겨 놓으면 data-state="refreshing" 과 ds-refresh 이벤트.
+새로 고침이 끝나면 DS.endRefresh(요소) 로 되돌린다. data-disabled 로 끈다.
+Figma: 위쪽 영역 높이 x6 + x8 × 2 / Progress Circle 24 neutral, 당기는 동안 차오르고 새로 고치는 동안 회전
+```

@@ -20,10 +20,10 @@
 
 | 부품 | 설명 |
 | --- | --- |
-| **Content**`ds-callout__content` | 주된 내용이 들어가는 영역입니다. |
-| **Title**`ds-callout__title` | 제목입니다. |
-| **Link**`ds-callout__link` | 자세히 보기 같은 이동 링크입니다. |
-| **Suffix**`ds-callout__suffix` | 뒤에 붙는 아이콘이나 요소입니다. |
+| **Content** `ds-callout__content` | 주된 내용이 들어가는 영역입니다. |
+| **Title** `ds-callout__title` | 제목입니다. |
+| **Link** `ds-callout__link` | 자세히 보기 같은 이동 링크입니다. |
+| **Suffix** `ds-callout__suffix` | 뒤에 붙는 아이콘이나 요소입니다. |
 
 ## 속성
 

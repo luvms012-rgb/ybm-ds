@@ -27,14 +27,14 @@
 
 | 부품 | 설명 |
 | --- | --- |
-| **Header**`ds-field__header` | 제목과 닫기 버튼이 놓이는 머리 영역입니다. |
-| **Label**`ds-field__label` | 이름이나 값을 보여 주는 글자입니다. |
-| **Indicator**`ds-field__indicator` | 지금 상태나 위치를 알려 주는 표시입니다. |
-| **Required**`ds-field__required` | 꼭 입력해야 함을 알리는 표시입니다. |
-| **Footer**`ds-field__footer` | 버튼이나 보조 정보가 놓이는 아래 영역입니다. |
-| **Help**`ds-field__help` | 입력을 돕는 안내 글입니다. |
-| **Error**`ds-field__error` | 잘못된 입력을 알리는 글입니다. |
-| **Count**`ds-field__count` | 개수나 글자 수를 보여 줍니다. |
+| **Header** `ds-field__header` | 제목과 닫기 버튼이 놓이는 머리 영역입니다. |
+| **Label** `ds-field__label` | 이름이나 값을 보여 주는 글자입니다. |
+| **Indicator** `ds-field__indicator` | 지금 상태나 위치를 알려 주는 표시입니다. |
+| **Required** `ds-field__required` | 꼭 입력해야 함을 알리는 표시입니다. |
+| **Footer** `ds-field__footer` | 버튼이나 보조 정보가 놓이는 아래 영역입니다. |
+| **Help** `ds-field__help` | 입력을 돕는 안내 글입니다. |
+| **Error** `ds-field__error` | 잘못된 입력을 알리는 글입니다. |
+| **Count** `ds-field__count` | 개수나 글자 수를 보여 줍니다. |
 
 ## 속성
 

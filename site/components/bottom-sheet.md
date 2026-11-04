@@ -24,12 +24,12 @@
 
 | 부품 | 설명 |
 | --- | --- |
-| **Header**`ds-bottomsheet__header` | 제목과 닫기 버튼이 놓이는 머리 영역입니다. |
-| **Title**`ds-bottomsheet__title` | 제목입니다. |
-| **Desc**`ds-bottomsheet__desc` | 제목에 덧붙이는 설명 글입니다. |
-| **Close**`ds-bottomsheet__close` | 닫기 버튼입니다. |
-| **Body**`ds-bottomsheet__body` | 본문이 들어가는 영역입니다. |
-| **Footer**`ds-bottomsheet__footer` | 버튼이나 보조 정보가 놓이는 아래 영역입니다. |
+| **Header** `ds-bottomsheet__header` | 제목과 닫기 버튼이 놓이는 머리 영역입니다. |
+| **Title** `ds-bottomsheet__title` | 제목입니다. |
+| **Desc** `ds-bottomsheet__desc` | 제목에 덧붙이는 설명 글입니다. |
+| **Close** `ds-bottomsheet__close` | 닫기 버튼입니다. |
+| **Body** `ds-bottomsheet__body` | 본문이 들어가는 영역입니다. |
+| **Footer** `ds-bottomsheet__footer` | 버튼이나 보조 정보가 놓이는 아래 영역입니다. |
 
 ## 속성
 
@@ -116,3 +116,39 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 ### 짧은 안내는 제목을 가운데로
 
 안내 한 줄과 버튼만 있는 시트는 `data-header-align="center"`로 제목을 가운데에 둡니다. 위쪽 닫기 버튼은 빼고 아래 버튼으로 닫게 합니다.
+
+```html
+<article class="ds-card" data-variant="subtle" data-size="small" style="width: 100%; max-width: 375px">
+  <header class="ds-card__header">
+    <h3 class="ds-card__title">첫 주문 혜택</h3>
+    <p class="ds-card__desc">처음 주문하면 3,000원을 할인해 줘요.</p>
+  </header>
+  <footer class="ds-card__footer">
+    <button class="ds-btn" data-variant="neutralWeak" data-size="small" data-ds-open="bottom-sheet-ex3">쿠폰 받기</button>
+  </footer>
+</article>
+<dialog class="ds-bottomsheet" id="bottom-sheet-ex3" aria-labelledby="bottom-sheet-ex3-title" data-header-align="center" data-handle>
+  <div class="ds-bottomsheet__header">
+    <h2 class="ds-bottomsheet__title" id="bottom-sheet-ex3-title">쿠폰을 받았어요</h2>
+    <p class="ds-bottomsheet__desc">7일 안에 주문하면 할인돼요.</p>
+  </div>
+  <div class="ds-bottomsheet__body">
+    <p class="ds-t12 ds-fw-bold">3,000원</p>
+  </div>
+  <div class="ds-bottomsheet__footer">
+    <button class="ds-btn" data-variant="neutralSolid" data-size="large" data-ds-close>쿠폰함 보기</button>
+    <button class="ds-btn" data-variant="ghost" data-size="large" data-ds-close>닫기</button>
+  </div>
+</dialog>
+```
+
+## 규격
+
+### 크기와 여백
+
+```
+headerAlign: left(기본) / center   handle: data-handle
+Figma: 폭 채움 / 위쪽 shape/3xl / bg/layer-floating
+  header 24/20/16/20 / gap x2 / title t07 SemiBold / desc t05 fg/neutral-muted
+  body 12/20/16/20 / min-h64 / footer 16/20/24/20 / 닫기 40×40(위 18 / 오른쪽 10) / handle 36×4 palette/gray-400 (위 6)
+```

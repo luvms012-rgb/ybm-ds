@@ -22,8 +22,8 @@
 
 | 부품 | 설명 |
 | --- | --- |
-| **Affix**`ds-fieldbutton__affix` | 값 앞이나 뒤에 붙는 아이콘입니다. |
-| **Value**`ds-fieldbutton__value` | 고른 값이나 숫자를 보여 줍니다. |
+| **Affix** `ds-fieldbutton__affix` | 값 앞이나 뒤에 붙는 아이콘입니다. |
+| **Value** `ds-fieldbutton__value` | 고른 값이나 숫자를 보여 줍니다. |
 
 ## 속성
 

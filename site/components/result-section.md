@@ -26,11 +26,11 @@
 
 | 부품 | 설명 |
 | --- | --- |
-| **Asset**`ds-result__asset` | 결과를 보여 주는 그림입니다. |
-| **Texts**`ds-result__texts` | 제목과 설명을 묶는 글자 영역입니다. |
-| **Title**`ds-result__title` | 제목입니다. |
-| **Desc**`ds-result__desc` | 제목에 덧붙이는 설명 글입니다. |
-| **Actions**`ds-result__actions` | 버튼을 묶는 영역입니다. |
+| **Asset** `ds-result__asset` | 결과를 보여 주는 그림입니다. |
+| **Texts** `ds-result__texts` | 제목과 설명을 묶는 글자 영역입니다. |
+| **Title** `ds-result__title` | 제목입니다. |
+| **Desc** `ds-result__desc` | 제목에 덧붙이는 설명 글입니다. |
+| **Actions** `ds-result__actions` | 버튼을 묶는 영역입니다. |
 
 ## 속성
 

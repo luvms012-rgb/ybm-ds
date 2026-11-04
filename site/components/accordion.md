@@ -22,11 +22,11 @@
 
 | 부품 | 설명 |
 | --- | --- |
-| **Trigger**`ds-accordion__trigger` | 누르면 열리거나 바뀌는 버튼입니다. |
-| **Body**`ds-accordion__body` | 본문이 들어가는 영역입니다. |
-| **Title**`ds-accordion__title` | 제목입니다. |
-| **Desc**`ds-accordion__desc` | 제목에 덧붙이는 설명 글입니다. |
-| **Content**`ds-accordion__content` | 주된 내용이 들어가는 영역입니다. |
+| **Trigger** `ds-accordion__trigger` | 누르면 열리거나 바뀌는 버튼입니다. |
+| **Body** `ds-accordion__body` | 본문이 들어가는 영역입니다. |
+| **Title** `ds-accordion__title` | 제목입니다. |
+| **Desc** `ds-accordion__desc` | 제목에 덧붙이는 설명 글입니다. |
+| **Content** `ds-accordion__content` | 주된 내용이 들어가는 영역입니다. |
 
 ## 속성
 

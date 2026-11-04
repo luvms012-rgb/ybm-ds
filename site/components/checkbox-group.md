@@ -18,8 +18,8 @@
 
 | 부품 | 설명 |
 | --- | --- |
-| **Control**`ds-checkbox__control` | 실제로 값을 입력하거나 고르는 부분입니다. |
-| **Label**`ds-checkbox__label` | 이름이나 값을 보여 주는 글자입니다. |
+| **Control** `ds-checkbox__control` | 실제로 값을 입력하거나 고르는 부분입니다. |
+| **Label** `ds-checkbox__label` | 이름이나 값을 보여 주는 글자입니다. |
 
 ## 속성
 

@@ -20,10 +20,10 @@
 
 | 부품 | 설명 |
 | --- | --- |
-| **Header**`ds-codeblock__header` | 제목과 닫기 버튼이 놓이는 머리 영역입니다. |
-| **Language**`ds-codeblock__language` | 코드 언어 이름입니다. |
-| **Copy**`ds-codeblock__copy` | 코드를 복사하는 버튼입니다. |
-| **Code**`ds-codeblock__code` | 코드 본문입니다. |
+| **Header** `ds-codeblock__header` | 제목과 닫기 버튼이 놓이는 머리 영역입니다. |
+| **Language** `ds-codeblock__language` | 코드 언어 이름입니다. |
+| **Copy** `ds-codeblock__copy` | 코드를 복사하는 버튼입니다. |
+| **Code** `ds-codeblock__code` | 코드 본문입니다. |
 
 ## 속성
 

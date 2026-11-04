@@ -23,8 +23,8 @@
 
 | 부품 | 설명 |
 | --- | --- |
-| **Column**`ds-timepicker__column` | 시, 분처럼 값을 고르는 열입니다. |
-| **Option**`ds-timepicker__option` | 고를 수 있는 선택지 하나입니다. |
+| **Column** `ds-timepicker__column` | 시, 분처럼 값을 고르는 열입니다. |
+| **Option** `ds-timepicker__option` | 고를 수 있는 선택지 하나입니다. |
 
 ## 속성
 

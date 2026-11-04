@@ -21,9 +21,9 @@
 
 | 부품 | 설명 |
 | --- | --- |
-| **Prefix**`ds-badge__prefix` | 앞에 붙는 아이콘이나 요소입니다. |
-| **Label**`ds-badge__label` | 이름이나 값을 보여 주는 글자입니다. |
-| **Action**`ds-badge__action` | 바로 실행하는 작은 버튼입니다. |
+| **Prefix** `ds-badge__prefix` | 앞에 붙는 아이콘이나 요소입니다. |
+| **Label** `ds-badge__label` | 이름이나 값을 보여 주는 글자입니다. |
+| **Action** `ds-badge__action` | 바로 실행하는 작은 버튼입니다. |
 
 ## 속성
 

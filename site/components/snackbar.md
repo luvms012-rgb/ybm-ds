@@ -20,8 +20,8 @@
 
 | 부품 | 설명 |
 | --- | --- |
-| **Message**`ds-snackbar__message` | 알릴 내용을 담은 글입니다. |
-| **Action**`ds-snackbar__action` | 바로 실행하는 작은 버튼입니다. |
+| **Message** `ds-snackbar__message` | 알릴 내용을 담은 글입니다. |
+| **Action** `ds-snackbar__action` | 바로 실행하는 작은 버튼입니다. |
 
 ## 속성
 
@@ -111,3 +111,26 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 ### 실패하면 다시 시도하게 하기
 
 요청이 실패하면 critical 아이콘과 다시 시도 버튼을 함께 띄웁니다. 문구에는 왜 안 됐는지를 짧게 적고 버튼으로 바로 다시 하게 합니다.
+
+```html
+<article class="ds-card" data-size="small" style="width: 100%; max-width: 360px">
+  <header class="ds-card__header">
+    <h3 class="ds-card__title">신규 회원 10% 할인 쿠폰</h3>
+    <p class="ds-card__desc">11월 30일까지 쓸 수 있어요.</p>
+  </header>
+  <footer class="ds-card__footer">
+    <button type="button" class="ds-btn" data-variant="neutralWeak" onclick="DS.snackbar('연결이 불안정해 쿠폰을 받지 못했어요', { variant: 'critical', action: '다시 시도' })">쿠폰 받기</button>
+  </footer>
+</article>
+```
+
+## 규격
+
+### 크기와 여백
+
+```
+variant: default / positive / critical
+Figma: padding x2_5(+본문 좌우 x1_5) / min-h44 / max-w560 / shape/sm / bg/neutral-solid / elevation overlay
+       message t04 fg/on-neutral-solid / action t04 Bold / gap x2_5 / 아이콘 Solid 24
+       positive 아이콘 bg/positive-solid / critical 아이콘 bg/critical-solid
+```

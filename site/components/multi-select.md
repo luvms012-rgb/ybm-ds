@@ -25,13 +25,13 @@
 
 | 부품 | 설명 |
 | --- | --- |
-| **Trigger**`ds-multiselect__trigger` | 누르면 열리거나 바뀌는 버튼입니다. |
-| **Values**`ds-multiselect__values` | 고른 값이 배지로 들어가는 영역입니다. |
-| **Panel**`ds-multiselect__panel` | 펼쳐지는 선택 목록입니다. |
-| **Heading**`ds-multiselect__heading` | 목록 위에 붙는 소제목입니다. |
-| **Option**`ds-multiselect__option` | 고를 수 있는 선택지 하나입니다. |
-| **Control**`ds-checkbox__control` | 실제로 값을 입력하거나 고르는 부분입니다. |
-| **Label**`ds-multiselect__label` | 이름이나 값을 보여 주는 글자입니다. |
+| **Trigger** `ds-multiselect__trigger` | 누르면 열리거나 바뀌는 버튼입니다. |
+| **Values** `ds-multiselect__values` | 고른 값이 배지로 들어가는 영역입니다. |
+| **Panel** `ds-multiselect__panel` | 펼쳐지는 선택 목록입니다. |
+| **Heading** `ds-multiselect__heading` | 목록 위에 붙는 소제목입니다. |
+| **Option** `ds-multiselect__option` | 고를 수 있는 선택지 하나입니다. |
+| **Control** `ds-checkbox__control` | 실제로 값을 입력하거나 고르는 부분입니다. |
+| **Label** `ds-multiselect__label` | 이름이나 값을 보여 주는 글자입니다. |
 
 ## 속성
 

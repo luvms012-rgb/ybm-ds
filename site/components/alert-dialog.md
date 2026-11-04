@@ -22,10 +22,10 @@
 
 | 부품 | 설명 |
 | --- | --- |
-| **Header**`ds-alertdialog__header` | 제목과 닫기 버튼이 놓이는 머리 영역입니다. |
-| **Title**`ds-alertdialog__title` | 제목입니다. |
-| **Desc**`ds-alertdialog__desc` | 제목에 덧붙이는 설명 글입니다. |
-| **Footer**`ds-alertdialog__footer` | 버튼이나 보조 정보가 놓이는 아래 영역입니다. |
+| **Header** `ds-alertdialog__header` | 제목과 닫기 버튼이 놓이는 머리 영역입니다. |
+| **Title** `ds-alertdialog__title` | 제목입니다. |
+| **Desc** `ds-alertdialog__desc` | 제목에 덧붙이는 설명 글입니다. |
+| **Footer** `ds-alertdialog__footer` | 버튼이나 보조 정보가 놓이는 아래 영역입니다. |
 
 ## 속성
 

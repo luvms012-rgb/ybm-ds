@@ -97,3 +97,36 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 ### 긴 글은 줄 모양으로 미리 보여 주기
 
 공지 본문처럼 여러 줄 글이 들어올 자리는 `data-shape="text"`로 줄 모양을 그립니다. 같은 자리에 Progress Circle을 함께 돌리면 로딩을 두 번 알리게 되니 Skeleton 하나만 둡니다.
+
+```html
+<article class="u-col u-gap-4 u-full" aria-busy="true" aria-label="공지 불러오는 중" style="max-width: 420px">
+  <div class="u-col u-gap-2">
+    <span class="ds-skeleton" style="width: 75%; height: 24px"></span>
+    <span class="ds-skeleton" style="width: 35%; height: 14px"></span>
+  </div>
+  <hr class="ds-divider">
+  <span class="ds-skeleton" data-shape="text" data-lines="3"></span>
+  <span class="ds-skeleton" data-shape="text" data-lines="3"></span>
+</article>
+```
+
+## 규격
+
+### CSS 변수
+
+서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.
+
+| 변수 | 기본값 |
+| --- | --- |
+| `--ds-skeleton-color` | `var(--ds-color-palette-gray-200)` |
+| `--ds-skeleton-radius` | `var(--ds-shape-sm)` |
+| `--ds-skeleton-size` | `48px` |
+
+### 크기와 여백
+
+```
+shape: rectangle(기본) / circle / text
+Figma: palette/gray-200 / rectangle shape/sm / circle pill / text 줄 높이 14 / 줄 사이 x2 / 마지막 줄 64%
+모서리(2026-11-03): --ds-skeleton-radius 로 나중에 들어올 콘텐츠와 같게 맞춘다
+움직임 줄이기(2026-11-03): 설정을 켠 사람에게는 깜빡이지 않는다
+```
