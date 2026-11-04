@@ -340,10 +340,10 @@ ${DOC_LINE}
     `이 화면이 YBM DS 규칙을 지키는지 점검하고 고쳐 줘.
 ${DOC_LINE}
 고친 곳은 목록으로 알려 줘.`],
-  ['브랜드 컬러 입히기', '서비스에 쓸 때 이어서 붙여 넣습니다.',
-    `이 서비스의 브랜드 컬러를 나에게 먼저 물어봐 줘.
+  ['브랜드 컬러 입히기', '서비스에 쓸 때 이어서 붙여 넣습니다. 대괄호 안에 브랜드 컬러를 넣습니다.',
+    `이 서비스의 브랜드 컬러를 [#12a150]으로 맞춰 줘.
 ${DOC_LINE}
-받은 색으로 브랜드 컬러 10단계와 다크 모드 값을 만들어 서비스 CSS에 넣고, 바뀐 화면을 보여 줘.`],
+이 색을 600 단계로 두고 10단계와 다크 모드 값을 만들어 서비스 CSS에 넣은 뒤, 바뀐 화면을 보여 줘.`],
 ];
 // 운영 중인 사이트에 옮길 때만 쓰는 요청 글 (11-04 사용자 "내 사이트 옮기기는 다음 단계"). 브랜드 컬러와 규칙 점검은 위 prompts 를 그대로 쓴다
 const MIGRATE = [
@@ -396,7 +396,7 @@ write({
 <h3>${prompts[0][0]}</h3>
 ${codeblock(prompts[0][2], 'text', ' data-wrap')}
 <h3>${prompts[3][0]}</h3>
-<p>서비스에 쓸 때 이어서 붙여 넣습니다.</p>
+<p>${prompts[3][1]}</p>
 ${codeblock(prompts[3][2], 'text', ' data-wrap')}
 <h3>${prompts[1][0]}</h3>
 <p>대괄호 안만 내 상황에 맞게 바꿉니다.</p>
@@ -485,7 +485,7 @@ const foundPages = {
 <h2 id="code">코드에서 쓰기</h2>
 ${codeblock(`.my-card {\n  background: var(--ds-color-bg-layer-default);\n  color: var(--ds-color-fg-neutral);\n  border: 1px solid var(--ds-color-stroke-neutral-muted);\n}`, 'css')}
 <h3>브랜드 컬러 바꾸기</h3>
-<p>서비스 대표 색 하나만 정하면 됩니다. 아래 글을 AI에 붙여 넣으면 나머지 단계와 다크 모드 값까지 만들어 넣습니다.</p>
+<p>브랜드 컬러 하나만 알면 됩니다. 아래 글의 대괄호 안에 그 색을 넣어 AI에 붙여 넣으면 나머지 단계와 다크 모드 값까지 만들어 넣습니다.</p>
 ${codeblock(prompts[3][2], 'text', ' data-wrap')}
 <p>직접 넣을 때는 서비스 CSS에서 대표 색을 <code>brand-600</code>에 넣고, 나머지 단계를 같은 색의 진하기로 채웁니다.</p>
 ${codeblock(`/* 서비스 CSS - DS 다음에 불러온다 */\n:root {\n  --ds-color-palette-brand-600: #12a150;  /* 대표 색: 주 버튼, 링크 */\n  --ds-color-palette-brand-700: #0d7d3e;  /* 한 단계 진하게: 눌림 */\n  --ds-color-palette-brand-100: #e6f6ee;  /* 아주 옅게: 옅은 배경 */\n  /* 나머지 단계도 같은 색으로 채운다 */\n}`, 'css')}
