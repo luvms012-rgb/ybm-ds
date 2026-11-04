@@ -497,7 +497,14 @@ body[data-side-open] .site-scrim { opacity: 1; pointer-events: auto; }
 .site-doc .site-release ul.site-list { margin-top: var(--ds-space-x2); }
 .site-release li .ds-badge { margin-right: var(--ds-space-x1); vertical-align: 2px; }
 .site-release[hidden], .site-release__group[hidden] { display: none; }
-/* 코드 탭: 위에 Chip Tabs, 아래 고른 칸 하나 */
-.site-doc > .site-codetabs .ds-chiptabs { padding-inline: 0; }
-.site-codetabs__panel { margin-top: var(--ds-space-x3); }
+/* 코드 탭: 코드 상자 머리의 언어 이름 자리에 작은 Chip Tabs (11-04 사용자 "탭을 이 안으로") */
+.site-codetabs__bar { --ds-ct-height: 28px; --ds-ct-padding-x: var(--ds-space-x3); --ds-ct-min-width: 0; padding-inline: 0; }
+.site-codetabs__bar .ds-chiptabs__trigger { font-size: var(--ds-font-size-t03); }
 .site-codetabs__panel[hidden] { display: none; }
+/* 코드 글자 색 (11-04 사용자 "코드뷰 컬러로 개선, seed 참조"): 레퍼런스 B 의 GitHub 테마 규칙을 DS 팔레트로. 팔레트라 다크 모드에서 같이 뒤집힌다 */
+.ds-codeblock .hl-k { color: var(--ds-color-palette-red-700); }     /* 키워드, @media */
+.ds-codeblock .hl-s { color: var(--ds-color-palette-blue-900); }    /* 문자열, 속성 값 */
+.ds-codeblock .hl-f { color: var(--ds-color-palette-purple-700); }  /* 함수, 명령, HTML 속성 이름 */
+.ds-codeblock .hl-c { color: var(--ds-color-palette-blue-700); }    /* 상수, 숫자, CSS 속성과 변수 */
+.ds-codeblock .hl-t { color: var(--ds-color-palette-green-700); }   /* 태그, 선택자 */
+.ds-codeblock .hl-m { color: var(--ds-color-palette-gray-700); }    /* 주석 */

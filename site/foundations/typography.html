@@ -9,9 +9,9 @@
 <script>try { var t = localStorage.getItem("ybm-site-theme"); if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.dataset.theme = "dark"; } catch (e) {}</script>
 <link rel="icon" href="../assets/logo-ybmnet.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../dist/ybm-ds.css">
-<link rel="stylesheet" href="../assets/site.css?v=4fbfad73">
+<link rel="stylesheet" href="../assets/site.css?v=d8ae2eee">
 <script src="../../dist/ybm-ds.js" defer></script>
-<script src="../assets/site.js?v=4fbfad73" defer></script>
+<script src="../assets/site.js?v=d8ae2eee" defer></script>
 </head>
 <body class="site">
 <a class="site-skip" href="#main">본문 바로가기</a>
@@ -83,16 +83,16 @@
 <p>본문에는 <code>word-break: keep-all</code>을 함께 써서 어절 중간에서 줄이 바뀌지 않게 합니다.</p>
 <figure class="ds-codeblock">
   <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">css</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
-  <pre class="ds-codeblock__code"><code>.my-title {
-  font-size: var(--ds-font-size-t09);
-  line-height: var(--ds-line-height-t09);
-  font-weight: var(--ds-font-weight-bold);
+  <pre class="ds-codeblock__code"><code>.<span class="hl-t">my-title</span> {
+  <span class="hl-c">font-size</span>: <span class="hl-f">var</span>(<span class="hl-c">--ds-font-size-t09</span>);
+  <span class="hl-c">line-height</span>: <span class="hl-f">var</span>(<span class="hl-c">--ds-line-height-t09</span>);
+  <span class="hl-c">font-weight</span>: <span class="hl-f">var</span>(<span class="hl-c">--ds-font-weight-bold</span>);
 }
-.my-text {
-  font-size: var(--ds-font-size-t05);
-  line-height: var(--ds-line-height-t05);
-  word-break: keep-all;
-  overflow-wrap: break-word;
+.<span class="hl-t">my-text</span> {
+  <span class="hl-c">font-size</span>: <span class="hl-f">var</span>(<span class="hl-c">--ds-font-size-t05</span>);
+  <span class="hl-c">line-height</span>: <span class="hl-f">var</span>(<span class="hl-c">--ds-line-height-t05</span>);
+  <span class="hl-c">word-break</span>: keep-all;
+  <span class="hl-c">overflow-wrap</span>: break-word;
 }</code></pre>
 </figure>
 <h2 id="practices">사용 지침<a class="site-anchor" href="#practices" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>

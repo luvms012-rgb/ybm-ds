@@ -9,9 +9,9 @@
 <script>try { var t = localStorage.getItem("ybm-site-theme"); if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.dataset.theme = "dark"; } catch (e) {}</script>
 <link rel="icon" href="../assets/logo-ybmnet.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../dist/ybm-ds.css">
-<link rel="stylesheet" href="../assets/site.css?v=4fbfad73">
+<link rel="stylesheet" href="../assets/site.css?v=d8ae2eee">
 <script src="../../dist/ybm-ds.js" defer></script>
-<script src="../assets/site.js?v=4fbfad73" defer></script>
+<script src="../assets/site.js?v=d8ae2eee" defer></script>
 </head>
 <body class="site">
 <a class="site-skip" href="#main">본문 바로가기</a>
@@ -121,8 +121,8 @@
 <div class="site-tile__thumb site-cover" data-site-fit-max="2" aria-hidden="true"><div class="site-tile__inner" inert><div class="pv-stage"><div style="display:flex;flex-direction:column;gap:8px;width:320px"><div style="display:flex;align-items:center;gap:0px"><span style="flex:1;font-size:var(--ds-font-size-t05)">사진 올리는 중</span><span style="color:var(--ds-color-fg-neutral-muted);font-size:var(--ds-font-size-t04);line-height:var(--ds-line-height-t04)">60%</span></div><div class="ds-progress" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="--ds-progress-value: 60%"></div></div></div></div></div>
 <h2 id="usage">사용법<a class="site-anchor" href="#usage" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><p>아래 구조를 복사해 씁니다. 대괄호 <code>[ ]</code> 안은 필요할 때만 넣습니다.</p><figure class="ds-codeblock">
   <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">html</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
-  <pre class="ds-codeblock__code"><code>&lt;div class=&quot;ds-progress&quot; role=&quot;progressbar&quot; aria-valuenow=&quot;40&quot; aria-valuemin=&quot;0&quot; aria-valuemax=&quot;100&quot;
-     style=&quot;--ds-progress-value: 40%&quot; [data-tone=&quot;neutral&quot;] [data-size=&quot;small&quot;]&gt;&lt;/div&gt;</code></pre>
+  <pre class="ds-codeblock__code"><code>&lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-progress&quot;</span> <span class="hl-f">role</span>=<span class="hl-s">&quot;progressbar&quot;</span> <span class="hl-f">aria-valuenow</span>=<span class="hl-s">&quot;40&quot;</span> <span class="hl-f">aria-valuemin</span>=<span class="hl-s">&quot;0&quot;</span> <span class="hl-f">aria-valuemax</span>=<span class="hl-s">&quot;100&quot;</span>
+     <span class="hl-f">style</span>=<span class="hl-s">&quot;--ds-progress-value: 40%&quot;</span> <span class="hl-f">[data-tone</span>=<span class="hl-s">&quot;neutral&quot;</span>] [data-size=&quot;small&quot;]&gt;&lt;/<span class="hl-t">div</span>&gt;</code></pre>
 </figure>
 <h2 id="props">속성<a class="site-anchor" href="#props" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><p>Figma 속성 이름을 그대로 <code>data-*</code> 속성으로 씁니다.</p><div class="ds-table-wrap"><table class="ds-table" data-density="compact">
 <thead><tr><th scope="col">속성</th><th scope="col">값</th></tr></thead>
@@ -141,8 +141,8 @@
   </div></div>
   <div class="site-example__code" hidden><figure class="ds-codeblock">
   <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">html</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
-  <pre class="ds-codeblock__code"><code>&lt;div class=&quot;ds-progress&quot; role=&quot;progressbar&quot; aria-valuenow=&quot;40&quot; aria-valuemin=&quot;0&quot; aria-valuemax=&quot;100&quot; aria-label=&quot;진행률&quot; style=&quot;--ds-progress-value: 40%&quot;&gt;&lt;/div&gt;
-&lt;div class=&quot;ds-progress&quot; role=&quot;progressbar&quot; aria-valuenow=&quot;75&quot; aria-valuemin=&quot;0&quot; aria-valuemax=&quot;100&quot; aria-label=&quot;진행률&quot; style=&quot;--ds-progress-value: 75%&quot; data-tone=&quot;neutral&quot; data-size=&quot;small&quot;&gt;&lt;/div&gt;</code></pre>
+  <pre class="ds-codeblock__code"><code>&lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-progress&quot;</span> <span class="hl-f">role</span>=<span class="hl-s">&quot;progressbar&quot;</span> <span class="hl-f">aria-valuenow</span>=<span class="hl-s">&quot;40&quot;</span> <span class="hl-f">aria-valuemin</span>=<span class="hl-s">&quot;0&quot;</span> <span class="hl-f">aria-valuemax</span>=<span class="hl-s">&quot;100&quot;</span> <span class="hl-f">aria-label</span>=<span class="hl-s">&quot;진행률&quot;</span> <span class="hl-f">style</span>=<span class="hl-s">&quot;--ds-progress-value: 40%&quot;</span>&gt;&lt;/<span class="hl-t">div</span>&gt;
+&lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-progress&quot;</span> <span class="hl-f">role</span>=<span class="hl-s">&quot;progressbar&quot;</span> <span class="hl-f">aria-valuenow</span>=<span class="hl-s">&quot;75&quot;</span> <span class="hl-f">aria-valuemin</span>=<span class="hl-s">&quot;0&quot;</span> <span class="hl-f">aria-valuemax</span>=<span class="hl-s">&quot;100&quot;</span> <span class="hl-f">aria-label</span>=<span class="hl-s">&quot;진행률&quot;</span> <span class="hl-f">style</span>=<span class="hl-s">&quot;--ds-progress-value: 75%&quot;</span> <span class="hl-f">data-tone</span>=<span class="hl-s">&quot;neutral&quot;</span> <span class="hl-f">data-size</span>=<span class="hl-s">&quot;small&quot;</span>&gt;&lt;/<span class="hl-t">div</span>&gt;</code></pre>
 </figure></div>
 </div>
 <h2 id="spec">규격<a class="site-anchor" href="#spec" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><h3>CSS 변수</h3><p>서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.</p><div class="ds-table-wrap"><table class="ds-table" data-density="compact">

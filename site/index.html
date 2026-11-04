@@ -9,9 +9,9 @@
 <script>try { var t = localStorage.getItem("ybm-site-theme"); if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.dataset.theme = "dark"; } catch (e) {}</script>
 <link rel="icon" href="assets/logo-ybmnet.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../dist/ybm-ds.css">
-<link rel="stylesheet" href="assets/site.css?v=4fbfad73">
+<link rel="stylesheet" href="assets/site.css?v=d8ae2eee">
 <script src="../dist/ybm-ds.js" defer></script>
-<script src="assets/site.js?v=4fbfad73" defer></script>
+<script src="assets/site.js?v=d8ae2eee" defer></script>
 </head>
 <body class="site">
 <a class="site-skip" href="#main">본문 바로가기</a>
@@ -85,8 +85,8 @@
 <p><code>&lt;head&gt;</code>에 두 줄을 넣으면 글꼴, 토큰, 아이콘, 컴포넌트가 함께 들어옵니다. 쓰는 법은 <a class="ds-link" href="components/index.html">Components</a>에 있습니다.</p>
 <figure class="ds-codeblock">
   <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">html</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
-  <pre class="ds-codeblock__code"><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;https://luvms012-rgb.github.io/ybm-ds/dist/ybm-ds.css&quot;&gt;
-&lt;script src=&quot;https://luvms012-rgb.github.io/ybm-ds/dist/ybm-ds.js&quot; defer&gt;&lt;/script&gt;</code></pre>
+  <pre class="ds-codeblock__code"><code>&lt;<span class="hl-t">link</span> <span class="hl-f">rel</span>=<span class="hl-s">&quot;stylesheet&quot;</span> <span class="hl-f">href</span>=<span class="hl-s">&quot;https://luvms012-rgb.github.io/ybm-ds/dist/ybm-ds.css&quot;</span>&gt;
+&lt;<span class="hl-t">script</span> <span class="hl-f">src</span>=<span class="hl-s">&quot;https://luvms012-rgb.github.io/ybm-ds/dist/ybm-ds.js&quot;</span> <span class="hl-f">defer</span>&gt;&lt;/<span class="hl-t">script</span>&gt;</code></pre>
 </figure>
 <p>이 주소는 늘 최신 버전입니다. 운영 서비스는 아래 서비스 DS 만들기처럼 버전을 고정합니다.</p>
 
@@ -115,9 +115,9 @@ YBM DS 버전은 고정해 불러오고, 브랜드 컬러 [#12a150]과 서비스
 <p>주소에 커밋 번호를 넣어 YBM DS 버전을 고정하고, 그다음에 서비스 DS 파일을 불러옵니다.</p>
 <figure class="ds-codeblock">
   <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">html</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
-  <pre class="ds-codeblock__code"><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/gh/luvms012-rgb/ybm-ds@[커밋 번호]/dist/ybm-ds.css&quot;&gt;
-&lt;script src=&quot;https://cdn.jsdelivr.net/gh/luvms012-rgb/ybm-ds@[커밋 번호]/dist/ybm-ds.js&quot; defer&gt;&lt;/script&gt;
-&lt;link rel=&quot;stylesheet&quot; href=&quot;/cs-ds/cs-ds.css&quot;&gt;  &lt;!-- 서비스 DS --&gt;</code></pre>
+  <pre class="ds-codeblock__code"><code>&lt;<span class="hl-t">link</span> <span class="hl-f">rel</span>=<span class="hl-s">&quot;stylesheet&quot;</span> <span class="hl-f">href</span>=<span class="hl-s">&quot;https://cdn.jsdelivr.net/gh/luvms012-rgb/ybm-ds@[커밋 번호]/dist/ybm-ds.css&quot;</span>&gt;
+&lt;<span class="hl-t">script</span> <span class="hl-f">src</span>=<span class="hl-s">&quot;https://cdn.jsdelivr.net/gh/luvms012-rgb/ybm-ds@[커밋 번호]/dist/ybm-ds.js&quot;</span> <span class="hl-f">defer</span>&gt;&lt;/<span class="hl-t">script</span>&gt;
+&lt;<span class="hl-t">link</span> <span class="hl-f">rel</span>=<span class="hl-s">&quot;stylesheet&quot;</span> <span class="hl-f">href</span>=<span class="hl-s">&quot;/cs-ds/cs-ds.css&quot;</span>&gt;  <span class="hl-m">&lt;!-- 서비스 DS --&gt;</span></code></pre>
 </figure>
 <p>새 버전이 나오면 <a class="ds-link" href="updates.html">Updates</a>를 보고, 화면 전후를 비교한 뒤 커밋 번호를 바꿉니다. 여러 서비스에 쓸모 있는 부품은 YBM DS로 올립니다.</p>
 
@@ -151,20 +151,20 @@ YBM DS 버전은 고정해 불러오고, 브랜드 컬러 [#12a150]과 서비스
 
 <h2 id="theme">다크 모드<a class="site-anchor" href="#theme" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
 <p><code>html</code>에 속성 하나를 붙이면 모든 색이 어두운 화면용으로 바뀝니다. 색을 토큰으로만 썼다면 따로 고칠 것이 없습니다.</p>
-<div class="site-codetabs"><div class="ds-chiptabs" role="tablist" aria-label="보기 방식"><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-tab="0">AI 요청</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-tab="1">HTML</button></div><div class="site-codetabs__panel" role="tabpanel"><figure class="ds-codeblock" data-wrap>
-  <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">text</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
+<div class="site-codetabs"><div class="site-codetabs__panel"><figure class="ds-codeblock" data-wrap>
+  <figcaption class="ds-codeblock__header"><div class="ds-chiptabs site-codetabs__bar" role="tablist" aria-label="보기 방식"><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-tab="0">AI 요청</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-tab="1">HTML</button></div><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
   <pre class="ds-codeblock__code"><code>이 사이트에 YBM DS 다크 모드를 넣어 줘.
 문서: https://luvms012-rgb.github.io/ybm-ds/site/llms.txt
 화면 오른쪽 위에 라이트, 다크 전환 버튼을 만들고, 처음에는 기기 설정을 따르게 해 줘.</code></pre>
-</figure></div><div class="site-codetabs__panel" role="tabpanel" hidden><figure class="ds-codeblock">
-  <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">html</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
-  <pre class="ds-codeblock__code"><code>&lt;!-- 다크 모드 --&gt;
-&lt;html lang=&quot;ko&quot; data-theme=&quot;dark&quot;&gt;
+</figure></div><div class="site-codetabs__panel" hidden><figure class="ds-codeblock">
+  <figcaption class="ds-codeblock__header"><div class="ds-chiptabs site-codetabs__bar" role="tablist" aria-label="보기 방식"><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-tab="0">AI 요청</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-tab="1">HTML</button></div><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
+  <pre class="ds-codeblock__code"><code><span class="hl-m">&lt;!-- 다크 모드 --&gt;</span>
+&lt;<span class="hl-t">html</span> <span class="hl-f">lang</span>=<span class="hl-s">&quot;ko&quot;</span> <span class="hl-f">data-theme</span>=<span class="hl-s">&quot;dark&quot;</span>&gt;
 
-&lt;!-- 기기 설정을 따를 때: &lt;head&gt; 맨 위 --&gt;
-&lt;script&gt;
+<span class="hl-m">&lt;!-- 기기 설정을 따를 때: &lt;head&gt; 맨 위 --&gt;</span>
+&lt;<span class="hl-t">script</span>&gt;
   if (matchMedia('(prefers-color-scheme: dark)').matches) document.documentElement.dataset.theme = 'dark';
-&lt;/script&gt;</code></pre>
+&lt;/<span class="hl-t">script</span>&gt;</code></pre>
 </figure></div></div>
 
 <h2 id="files">AI가 읽는 파일<a class="site-anchor" href="#files" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>

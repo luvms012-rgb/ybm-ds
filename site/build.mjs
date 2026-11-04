@@ -10,6 +10,7 @@ import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { linkPlan } from '../tokens/links.mjs';
 import { writeMarkdown } from './md.mjs';
+import { highlight } from './highlight.mjs';
 
 const SITE = path.dirname(fileURLToPath(import.meta.url));
 // 사이트 CSS / JS 주소에 붙이는 버전 - 내용이 바뀌면 값이 바뀌어 브라우저가 예전 파일을 쓰지 않는다
@@ -161,7 +162,7 @@ const templates = fs.existsSync(path.join(SITE, 'src/templates.json')) ? JSON.pa
 function codeblock(code, lang = 'html', extra = '') {
   return `<figure class="ds-codeblock"${extra}>
   <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">${esc(lang)}</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
-  <pre class="ds-codeblock__code"><code>${esc(code)}</code></pre>
+  <pre class="ds-codeblock__code"><code>${highlight(code, lang)}</code></pre>
 </figure>`;
 }
 function example(previewHtml, code) {
@@ -388,8 +389,8 @@ const LLMS_RULES = `## 지킬 것
 - 화면을 바꿀 때마다 바꾸기 전후 화면을 비교해 보여 주고 확인을 받는다.`;
 // 반응형 기준점 (Foundations Breakpoint, 11-04 시작하기에서 옮김)
 const bpRows = [['sm', '480px', '큰 휴대폰'], ['md', '768px', '태블릿, PC 부품으로 바뀌는 기준'], ['lg', '1280px', '넓은 PC, 3단 배치'], ['xl', '1440px', '아주 넓은 화면']];
-// 코드 탭 (11-04 사용자 "다크 모드는 프롬프팅과 html을 같이, 탭 형태로"): Chip Tabs로 고르면 그 칸만 보인다. 여닫기는 site.js data-site-tab
-const codeTabs = (tabs) => `<div class="site-codetabs"><div class="ds-chiptabs" role="tablist" aria-label="보기 방식">${tabs.map(([l], i) => `<button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="${i === 0}" data-site-tab="${i}">${esc(l)}</button>`).join('')}</div>${tabs.map(([, h], i) => `<div class="site-codetabs__panel" role="tabpanel"${i ? ' hidden' : ''}>${h}</div>`).join('')}</div>`;
+// 코드 탭 (11-04 사용자 "다크 모드는 프롬프팅과 html 을 같이, 탭 형태로", "탭을 코드 상자 안으로"): 탭마다 코드 상자 하나, 상자 머리의 언어 이름 자리에 같은 Chip Tabs. 복사 버튼이 제 상자 코드를 복사하게 상자를 나눈다. 여닫기는 site.js data-site-tab
+const codeTabs = (tabs) => { const bar = (sel) => `<div class="ds-chiptabs site-codetabs__bar" role="tablist" aria-label="보기 방식">${tabs.map(([l], j) => `<button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="${j === sel}" data-site-tab="${j}">${esc(l)}</button>`).join('')}</div>`; return `<div class="site-codetabs">${tabs.map(([, h], i) => `<div class="site-codetabs__panel"${i ? ' hidden' : ''}>${h.replace(/<span class="ds-codeblock__language">[^<]*<\/span>/, bar(i))}</div>`).join('')}</div>`; };
 // 안내 카드 (레퍼런스 B Get Started): 옅은 회색 칸에 제목과 화살표, 아래 한 줄 설명. out이면 새 창
 const hubCard = (href, title, desc, out = false) => `<a class="site-hub" href="${href}"${out ? ' target="_blank" rel="noopener"' : ''}><span class="site-hub__title">${esc(title)}<i class="ds-icon ds-icon--${out ? 'external-link' : 'arrow-right'} ds-icon--sm" aria-hidden="true"></i></span><span class="site-hub__desc">${esc(desc)}</span></a>`;
 write({

@@ -65,10 +65,9 @@
     if (t.closest("[data-site-close]")) { document.body.removeAttribute("data-side-open"); return; }
 
 
-    // 코드 탭 (Get Started 다크 모드: AI 요청 / HTML)
+    // 코드 탭 (Get Started 다크 모드: AI 요청 / HTML). 탭 줄은 상자마다 있고 고른 표시가 이미 맞으니 상자만 바꾼다
     var tab = t.closest("[data-site-tab]");
     if (tab) {
-      tab.parentElement.querySelectorAll("[data-site-tab]").forEach(function (b) { b.setAttribute("aria-selected", String(b === tab)); });
       var panels = tab.closest(".site-codetabs").querySelectorAll(".site-codetabs__panel");
       panels.forEach(function (p, i) { p.hidden = String(i) !== tab.getAttribute("data-site-tab"); });
       return;

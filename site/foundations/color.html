@@ -9,9 +9,9 @@
 <script>try { var t = localStorage.getItem("ybm-site-theme"); if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.dataset.theme = "dark"; } catch (e) {}</script>
 <link rel="icon" href="../assets/logo-ybmnet.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../dist/ybm-ds.css">
-<link rel="stylesheet" href="../assets/site.css?v=4fbfad73">
+<link rel="stylesheet" href="../assets/site.css?v=d8ae2eee">
 <script src="../../dist/ybm-ds.js" defer></script>
-<script src="../assets/site.js?v=4fbfad73" defer></script>
+<script src="../assets/site.js?v=d8ae2eee" defer></script>
 </head>
 <body class="site">
 <a class="site-skip" href="#main">본문 바로가기</a>
@@ -65,10 +65,10 @@
 <h2 id="code">코드에서 쓰기<a class="site-anchor" href="#code" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
 <figure class="ds-codeblock">
   <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">css</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
-  <pre class="ds-codeblock__code"><code>.my-card {
-  background: var(--ds-color-bg-layer-default);
-  color: var(--ds-color-fg-neutral);
-  border: 1px solid var(--ds-color-stroke-neutral-muted);
+  <pre class="ds-codeblock__code"><code>.<span class="hl-t">my-card</span> {
+  <span class="hl-c">background</span>: <span class="hl-f">var</span>(<span class="hl-c">--ds-color-bg-layer-default</span>);
+  <span class="hl-c">color</span>: <span class="hl-f">var</span>(<span class="hl-c">--ds-color-fg-neutral</span>);
+  <span class="hl-c">border</span>: <span class="hl-c">1px</span> solid <span class="hl-f">var</span>(<span class="hl-c">--ds-color-stroke-neutral-muted</span>);
 }</code></pre>
 </figure>
 <h3>브랜드 컬러 바꾸기</h3>
@@ -82,12 +82,12 @@
 <p>직접 넣을 때는 대표 색을 <code>brand-600</code>에 두고, 나머지 단계를 같은 색의 진하기로 채웁니다.</p>
 <figure class="ds-codeblock">
   <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">css</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
-  <pre class="ds-codeblock__code"><code>/* 서비스 CSS - DS 다음에 불러온다 */
-:root {
-  --ds-color-palette-brand-600: #12a150;  /* 대표 색: 주 버튼, 링크 */
-  --ds-color-palette-brand-700: #0d7d3e;  /* 한 단계 진하게: 눌림 */
-  --ds-color-palette-brand-100: #e6f6ee;  /* 아주 옅게: 옅은 배경 */
-  /* 나머지 단계도 같은 색으로 채운다 */
+  <pre class="ds-codeblock__code"><code><span class="hl-m">/* 서비스 CSS - DS 다음에 불러온다 */</span>
+:<span class="hl-t">root</span> {
+  <span class="hl-c">--ds-color-palette-brand-600</span>: <span class="hl-c">#12a150</span>;  <span class="hl-m">/* 대표 색: 주 버튼, 링크 */</span>
+  <span class="hl-c">--ds-color-palette-brand-700</span>: <span class="hl-c">#0d7d3e</span>;  <span class="hl-m">/* 한 단계 진하게: 눌림 */</span>
+  <span class="hl-c">--ds-color-palette-brand-100</span>: <span class="hl-c">#e6f6ee</span>;  <span class="hl-m">/* 아주 옅게: 옅은 배경 */</span>
+  <span class="hl-m">/* 나머지 단계도 같은 색으로 채운다 */</span>
 }</code></pre>
 </figure>
 <h2 id="practices">사용 지침<a class="site-anchor" href="#practices" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>

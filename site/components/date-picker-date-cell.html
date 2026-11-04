@@ -9,9 +9,9 @@
 <script>try { var t = localStorage.getItem("ybm-site-theme"); if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.dataset.theme = "dark"; } catch (e) {}</script>
 <link rel="icon" href="../assets/logo-ybmnet.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../dist/ybm-ds.css">
-<link rel="stylesheet" href="../assets/site.css?v=4fbfad73">
+<link rel="stylesheet" href="../assets/site.css?v=d8ae2eee">
 <script src="../../dist/ybm-ds.js" defer></script>
-<script src="../assets/site.js?v=4fbfad73" defer></script>
+<script src="../assets/site.js?v=d8ae2eee" defer></script>
 </head>
 <body class="site">
 <a class="site-skip" href="#main">본문 바로가기</a>
@@ -121,17 +121,17 @@
 <div class="site-tile__thumb site-cover" data-site-fit-max="2" aria-hidden="true"><div class="site-tile__inner" inert><div class="pv-stage"><div class="ds-datepicker"><div class="ds-datepicker__header"><button class="ds-datepicker__nav" aria-label="이전 달"><i class="ds-icon ds-icon--chevron-left ds-icon--lg" aria-hidden="true"></i></button><strong class="ds-datepicker__title">2026년 11월</strong><button class="ds-datepicker__nav" aria-label="다음 달"><i class="ds-icon ds-icon--chevron-right ds-icon--lg" aria-hidden="true"></i></button></div><div class="ds-datepicker__weekdays"><span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span></div><div class="ds-datepicker__grid" role="grid"><button class="ds-date-cell">1</button><button class="ds-date-cell">2</button><button class="ds-date-cell">3</button><button class="ds-date-cell">4</button><button class="ds-date-cell">5</button><button class="ds-date-cell">6</button><button class="ds-date-cell">7</button><button class="ds-date-cell">8</button><button class="ds-date-cell">9</button><button class="ds-date-cell">10</button><button class="ds-date-cell">11</button><button class="ds-date-cell" data-state="today">12</button><button class="ds-date-cell">13</button><button class="ds-date-cell">14</button><button class="ds-date-cell">15</button><button class="ds-date-cell">16</button><button class="ds-date-cell">17</button><button class="ds-date-cell" data-state="selected">18</button><button class="ds-date-cell">19</button><button class="ds-date-cell">20</button><button class="ds-date-cell">21</button><button class="ds-date-cell">22</button><button class="ds-date-cell">23</button><button class="ds-date-cell">24</button><button class="ds-date-cell">25</button><button class="ds-date-cell">26</button><button class="ds-date-cell">27</button><button class="ds-date-cell">28</button><button class="ds-date-cell">29</button><button class="ds-date-cell">30</button></div></div></div></div></div>
 <h2 id="usage">사용법<a class="site-anchor" href="#usage" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><p>아래 구조를 복사해 씁니다. 대괄호 <code>[ ]</code> 안은 필요할 때만 넣습니다.</p><figure class="ds-codeblock">
   <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">html</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
-  <pre class="ds-codeblock__code"><code>&lt;div class=&quot;ds-datepicker&quot;&gt;
-  &lt;div class=&quot;ds-datepicker__header&quot;&gt;
-    &lt;button class=&quot;ds-datepicker__nav&quot; aria-label=&quot;이전 달&quot;&gt;&lt;i class=&quot;ds-icon ds-icon--chevron-left ds-icon--lg&quot;&gt;&lt;/i&gt;&lt;/button&gt;
-    &lt;strong class=&quot;ds-datepicker__title&quot;&gt;2026년 8월&lt;/strong&gt;
-    &lt;button class=&quot;ds-datepicker__nav&quot; aria-label=&quot;다음 달&quot;&gt;&lt;i class=&quot;ds-icon ds-icon--chevron-right ds-icon--lg&quot;&gt;&lt;/i&gt;&lt;/button&gt;
-  &lt;/div&gt;
-  &lt;div class=&quot;ds-datepicker__weekdays&quot;&gt;&lt;span&gt;일&lt;/span&gt;…&lt;span&gt;토&lt;/span&gt;&lt;/div&gt;
-  &lt;div class=&quot;ds-datepicker__grid&quot; role=&quot;grid&quot;&gt;
-    &lt;button class=&quot;ds-date-cell&quot; data-state=&quot;today|selected|range-start|range-middle|range-end&quot; [disabled]&gt;15&lt;/button&gt; × 42
-  &lt;/div&gt;
-&lt;/div&gt;</code></pre>
+  <pre class="ds-codeblock__code"><code>&lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-datepicker&quot;</span>&gt;
+  &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-datepicker__header&quot;</span>&gt;
+    &lt;<span class="hl-t">button</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-datepicker__nav&quot;</span> <span class="hl-f">aria-label</span>=<span class="hl-s">&quot;이전 달&quot;</span>&gt;&lt;<span class="hl-t">i</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-icon ds-icon--chevron-left ds-icon--lg&quot;</span>&gt;&lt;/<span class="hl-t">i</span>&gt;&lt;/<span class="hl-t">button</span>&gt;
+    &lt;<span class="hl-t">strong</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-datepicker__title&quot;</span>&gt;2026년 8월&lt;/<span class="hl-t">strong</span>&gt;
+    &lt;<span class="hl-t">button</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-datepicker__nav&quot;</span> <span class="hl-f">aria-label</span>=<span class="hl-s">&quot;다음 달&quot;</span>&gt;&lt;<span class="hl-t">i</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-icon ds-icon--chevron-right ds-icon--lg&quot;</span>&gt;&lt;/<span class="hl-t">i</span>&gt;&lt;/<span class="hl-t">button</span>&gt;
+  &lt;/<span class="hl-t">div</span>&gt;
+  &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-datepicker__weekdays&quot;</span>&gt;&lt;<span class="hl-t">span</span>&gt;일&lt;/<span class="hl-t">span</span>&gt;…&lt;<span class="hl-t">span</span>&gt;토&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">div</span>&gt;
+  &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-datepicker__grid&quot;</span> <span class="hl-f">role</span>=<span class="hl-s">&quot;grid&quot;</span>&gt;
+    &lt;<span class="hl-t">button</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-date-cell&quot;</span> <span class="hl-f">data-state</span>=<span class="hl-s">&quot;today|selected|range-start|range-middle|range-end&quot;</span> <span class="hl-f">[disabled]</span>&gt;15&lt;/<span class="hl-t">button</span>&gt; × 42
+  &lt;/<span class="hl-t">div</span>&gt;
+&lt;/<span class="hl-t">div</span>&gt;</code></pre>
 </figure>
 <h2 id="anatomy">구조<a class="site-anchor" href="#anatomy" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><div class="site-tile__thumb site-cover site-anatomy" data-site-fit-max="1" data-site-anatomy="ds-datepicker__header ds-datepicker__nav ds-datepicker__title ds-datepicker__weekdays ds-datepicker__grid" data-site-anatomy-names="Header|Nav|Title|Weekdays|Grid" aria-hidden="true"><div class="site-tile__inner" inert><div class="pv-stage"><div class="ds-datepicker">
   <div class="ds-datepicker__header">
@@ -171,11 +171,11 @@
   </div></div>
   <div class="site-example__code" hidden><figure class="ds-codeblock">
   <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">html</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
-  <pre class="ds-codeblock__code"><code>&lt;div class=&quot;ds-datepicker&quot;&gt;
-  &lt;div class=&quot;ds-datepicker__header&quot;&gt;&lt;button class=&quot;ds-datepicker__nav&quot; aria-label=&quot;이전 달&quot;&gt;&lt;i class=&quot;ds-icon ds-icon--chevron-left ds-icon--lg&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/button&gt;&lt;strong class=&quot;ds-datepicker__title&quot;&gt;2026년 10월&lt;/strong&gt;&lt;button class=&quot;ds-datepicker__nav&quot; aria-label=&quot;다음 달&quot;&gt;&lt;i class=&quot;ds-icon ds-icon--chevron-right ds-icon--lg&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;/button&gt;&lt;/div&gt;
-  &lt;div class=&quot;ds-datepicker__weekdays&quot;&gt;&lt;span&gt;일&lt;/span&gt;&lt;span&gt;월&lt;/span&gt;&lt;span&gt;화&lt;/span&gt;&lt;span&gt;수&lt;/span&gt;&lt;span&gt;목&lt;/span&gt;&lt;span&gt;금&lt;/span&gt;&lt;span&gt;토&lt;/span&gt;&lt;/div&gt;
-  &lt;div class=&quot;ds-datepicker__grid&quot; role=&quot;grid&quot; id=&quot;pv-cal&quot;&gt;&lt;/div&gt;
-&lt;/div&gt;</code></pre>
+  <pre class="ds-codeblock__code"><code>&lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-datepicker&quot;</span>&gt;
+  &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-datepicker__header&quot;</span>&gt;&lt;<span class="hl-t">button</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-datepicker__nav&quot;</span> <span class="hl-f">aria-label</span>=<span class="hl-s">&quot;이전 달&quot;</span>&gt;&lt;<span class="hl-t">i</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-icon ds-icon--chevron-left ds-icon--lg&quot;</span> <span class="hl-f">aria-hidden</span>=<span class="hl-s">&quot;true&quot;</span>&gt;&lt;/<span class="hl-t">i</span>&gt;&lt;/<span class="hl-t">button</span>&gt;&lt;<span class="hl-t">strong</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-datepicker__title&quot;</span>&gt;2026년 10월&lt;/<span class="hl-t">strong</span>&gt;&lt;<span class="hl-t">button</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-datepicker__nav&quot;</span> <span class="hl-f">aria-label</span>=<span class="hl-s">&quot;다음 달&quot;</span>&gt;&lt;<span class="hl-t">i</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-icon ds-icon--chevron-right ds-icon--lg&quot;</span> <span class="hl-f">aria-hidden</span>=<span class="hl-s">&quot;true&quot;</span>&gt;&lt;/<span class="hl-t">i</span>&gt;&lt;/<span class="hl-t">button</span>&gt;&lt;/<span class="hl-t">div</span>&gt;
+  &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-datepicker__weekdays&quot;</span>&gt;&lt;<span class="hl-t">span</span>&gt;일&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">span</span>&gt;월&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">span</span>&gt;화&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">span</span>&gt;수&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">span</span>&gt;목&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">span</span>&gt;금&lt;/<span class="hl-t">span</span>&gt;&lt;<span class="hl-t">span</span>&gt;토&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">div</span>&gt;
+  &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-datepicker__grid&quot;</span> <span class="hl-f">role</span>=<span class="hl-s">&quot;grid&quot;</span> <span class="hl-f">id</span>=<span class="hl-s">&quot;pv-cal&quot;</span>&gt;&lt;/<span class="hl-t">div</span>&gt;
+&lt;/<span class="hl-t">div</span>&gt;</code></pre>
 </figure></div>
 </div>
 <h2 id="spec">규격<a class="site-anchor" href="#spec" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><h3>CSS 변수</h3><p>서비스에서 모양을 바꿀 때는 이 변수만 덮어씁니다.</p><div class="ds-table-wrap"><table class="ds-table" data-density="compact">
