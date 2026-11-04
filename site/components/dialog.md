@@ -1,4 +1,4 @@
-<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/dialog.html -->
+<!-- https://luvms012-rgb.github.io/yds/site/components/dialog.html -->
 
 # Dialog
 

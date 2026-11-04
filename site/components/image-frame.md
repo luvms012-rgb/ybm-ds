@@ -1,4 +1,4 @@
-<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/image-frame.html -->
+<!-- https://luvms012-rgb.github.io/yds/site/components/image-frame.html -->
 
 # Image Frame
 

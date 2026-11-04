@@ -1,4 +1,4 @@
-<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/tabs.html -->
+<!-- https://luvms012-rgb.github.io/yds/site/components/tabs.html -->
 
 # Tabs
 

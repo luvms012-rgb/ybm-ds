@@ -1,4 +1,4 @@
-<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/code-block.html -->
+<!-- https://luvms012-rgb.github.io/yds/site/components/code-block.html -->
 
 # Code Block
 

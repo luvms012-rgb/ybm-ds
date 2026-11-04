@@ -1,4 +1,4 @@
-<!-- https://luvms012-rgb.github.io/ybm-ds/site/foundations/color-roles.html -->
+<!-- https://luvms012-rgb.github.io/yds/site/foundations/color-roles.html -->
 
 # Color
 

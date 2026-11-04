@@ -18,14 +18,14 @@ const ASSET_V = crypto.createHash('sha1').update(['src/site.css', 'src/site.js',
 const DS = path.resolve(SITE, '..');
 const read = (p) => fs.readFileSync(path.join(DS, p), 'utf8');
 const readJson = (p) => JSON.parse(read(p));
-const PUBLIC = 'https://luvms012-rgb.github.io/ybm-ds';
-const GITHUB = 'https://github.com/luvms012-rgb/ybm-ds';
-const RAW = 'https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main';
+const PUBLIC = 'https://luvms012-rgb.github.io/yds';
+const GITHUB = 'https://github.com/luvms012-rgb/yds';
+const RAW = 'https://raw.githubusercontent.com/luvms012-rgb/yds/main';
 const FIGMA = 'https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=';
 const SITE_URL = PUBLIC + '/site/';
 // 버전 (저장소 VERSION, node sync.mjs release 가 올린다). 버전 고정 주소는 jsDelivr 가 GitHub 태그를 그대로 내준다
 const VERSION = fs.readFileSync(path.join(path.dirname(fileURLToPath(import.meta.url)), '..', 'VERSION'), 'utf8').trim();
-const PIN = `https://cdn.jsdelivr.net/gh/luvms012-rgb/ybm-ds@v${VERSION}`;
+const PIN = `https://cdn.jsdelivr.net/gh/luvms012-rgb/yds@v${VERSION}`;
 // 페이지 머리말의 Figma / Code 버튼 주소 - Figma 문서 프레임의 "문서 / 코드" 링크와 같은 계획(tokens/links.mjs)
 const LINKS = linkPlan(DS);
 const linkByNo = Object.fromEntries(LINKS.entries.map((e) => [e.no, e]));
@@ -185,12 +185,13 @@ const btn = (href, label, variant = 'neutralWeak', size = 'small', icon = '') =>
 // 상단 메뉴 다섯 (11-03 사용자 "메뉴는 총 5개"): Get Started, Foundations, Components, Templates, Updates
 // Get Started와 Updates는 왼쪽 메뉴 없이 한 칸(레퍼런스 B Get Started), Foundations는 왼쪽 메뉴에 Overview + 항목
 // 테마는 11-03 사용자 "우선 숨김, 처음부터 다시": 메뉴, Usage 테마 절, AI 목록, llms.txt에서 뺀다. 다시 열 때 true
-const SHOW_THEMES = false;
+// 11-04 집, 사용자 "테스트용 테마 10개": Themes 페이지는 다시 켜되 상단 메뉴는 다섯 개 그대로(Templates 머리말과 푸터 더 보기에서 간다)
+const SHOW_THEMES = true;
 // 왼쪽 메뉴는 영문, 묶음은 두고 묶음 안은 ABC 순 (레퍼런스 B)
 const az = (list) => [...list].sort((a, b) => a[1].localeCompare(b[1], 'en'));
 // 파운데이션: 항목마다 한 페이지 (슬러그, 영문 이름)
 const FOUND = az([['color', 'Color'], ['typography', 'Typography'], ['spacing', 'Spacing'], ['shape', 'Radius'], ['elevation', 'Elevation'], ['motion', 'Motion'], ['icons', 'Iconography'], ['breakpoint', 'Breakpoint']]);
-const NAV = [['get-started', 'Get Started', 'index.html'], ['foundations', 'Foundations', `foundations/${FOUND[0][0]}.html`], ['components', 'Components', 'components/index.html'], ['templates', 'Templates', 'templates/index.html'], ['updates', 'Updates', 'updates.html'], ...(SHOW_THEMES ? [['themes', 'Themes', 'themes/index.html']] : [])];
+const NAV = [['get-started', 'Get Started', 'index.html'], ['foundations', 'Foundations', `foundations/${FOUND[0][0]}.html`], ['components', 'Components', 'components/index.html'], ['templates', 'Templates', 'templates/index.html'], ['updates', 'Updates', 'updates.html']];
 // Get Started 문서 (왼쪽 메뉴 없음): 첫 화면 하나 (AI & Tools는 11-04 합침)
 const GS_ORDER = [['index.html', 'Get Started']];
 // Foundations 왼쪽 메뉴와 이전 / 다음 순서: 항목 ABC 순. Color와 Iconography의 탭 쪽은 첫 탭과 같은 자리
@@ -225,7 +226,7 @@ function sideNav(section, file, root) {
   return `<aside class="site-side" id="site-side" aria-label="페이지 목록">
   <div class="site-side__top"><b>메뉴</b><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" data-site-close aria-label="메뉴 닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button></div>
   ${mobile}${search}
-  <nav class="site-nav" aria-label="${esc(NAV.find((n) => n[0] === section)[1])} 메뉴"${search ? ' data-site-navfilter' : ''}>${parts.join('\n')}</nav>
+  <nav class="site-nav" aria-label="${esc((NAV.find((n) => n[0] === section) || ['', 'Themes'])[1])} 메뉴"${search ? ' data-site-navfilter' : ''}>${parts.join('\n')}</nav>
 </aside>`;
 }
 
@@ -258,7 +259,7 @@ function page({ file, title, section, body, layout = 'doc', desc = '', pager = [
   <div class="site-footer__brand"><img src="${root}assets/logo-ybmnet.svg" alt="YBM NET" width="81" height="24"><p class="site-footer__copy">© 2026 YBM NET. All rights reserved.</p></div>
   <nav class="site-footer__nav" aria-label="사이트 메뉴">
     <div><p class="site-footer__title">메뉴</p>${NAV.map(([, l, h]) => `<a href="${root}${h}">${l}</a>`).join('')}</div>
-    <div><p class="site-footer__title">더 보기</p><a href="${FIGMA}2608-2" target="_blank" rel="noopener">Figma</a><a href="${GITHUB}" target="_blank" rel="noopener">GitHub</a></div>
+    <div><p class="site-footer__title">더 보기</p>${SHOW_THEMES ? `<a href="${root}themes/index.html">Themes</a>` : ''}<a href="${FIGMA}2608-2" target="_blank" rel="noopener">Figma</a><a href="${GITHUB}" target="_blank" rel="noopener">GitHub</a></div>
   </nav>
 </footer>`;
   // h2에 제목 링크를 달고 목차를 만든다
@@ -450,9 +451,9 @@ ${table(['파일', '대상', '내용'], [
 
 ${SHOW_THEMES ? `<h2 id="custom-theme">테마</h2>
 <p>테마는 브랜드 색, 바탕색, 모서리 곡률을 한 번에 바꿉니다. DS 다음에 테마 파일을 붙이고 html에 테마 이름을 적으면 됩니다. 고를 수 있는 테마는 <a class="ds-link" data-size="small" href="themes/index.html">Themes</a>에 있습니다.</p>
-${codeblock(`<html lang="ko" data-ds-theme="trust">
+${(() => { const t = readJson('site/src/themes.json').themes[0].slug; return codeblock(`<html lang="ko" data-ds-theme="${t}">
 <link rel="stylesheet" href="${PUBLIC}/dist/ybm-ds.css">
-<link rel="stylesheet" href="${PUBLIC}/dist/themes/trust.css">`)}
+<link rel="stylesheet" href="${PUBLIC}/dist/themes/${t}.css">`); })()}
 
 ` : ''}`.replaceAll('href="components/', 'href="{root}components/').replaceAll('href="templates/', 'href="{root}templates/').replaceAll('href="get-started/', 'href="{root}get-started/'),
 });
@@ -954,7 +955,7 @@ const tplGroups = [...new Set(templates.map((t) => t.group))];
 const TPL_GROUP_KO = { Dashboard: '대시보드', Table: '표', Form: '입력 폼', Settings: '설정', Login: '로그인', Tools: '도구', Content: '콘텐츠', 'AI Chat': 'AI 채팅', Gallery: '갤러리', Community: '커뮤니티', Pricing: '요금제', 'My Page': '마이페이지', Commerce: '쇼핑', Exam: '시험 접수', 'Exam B2B': '단체 시험', 'Learning B2B': '기업 러닝' };
 write({
   file: 'templates/index.html', section: 'templates', title: 'Templates', layout: 'full',
-  body: `${hero('Templates', '자주 만드는 화면을 DS 컴포넌트로 미리 조립해 두었습니다.').replace('class="site-hero"', 'class="site-hero site-hero--tpl"')}
+  body: `${hero('Templates', '자주 만드는 화면을 DS 컴포넌트로 미리 조립해 두었습니다.').replace('class="site-hero"', 'class="site-hero site-hero--tpl"').replace('</p></header>', (SHOW_THEMES ? ' 테마를 입힌 실제 사이트 예시는 <a class="ds-link" href="../themes/index.html">Themes</a>에 있습니다.' : '') + '</p></header>')}
 <div class="site-toolbar site-toolbar--center">
   <div class="ds-chiptabs" role="tablist" aria-label="분류">
     <button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-filter="">전체</button>
@@ -1035,8 +1036,8 @@ if (SHOW_THEMES) write({
   body: `<div class="site-themes">
 <aside class="site-themes__aside" aria-label="테마 고르기"><div class="site-themes__panel">
   <div class="site-themes__intro">
-    <div class="site-themes__title"><h1 class="site-h1">Themes</h1>${iconBtn('data-site-theme-mode aria-pressed="false"', '미리보기를 다크 모드로 보기', '<i class="ds-icon site-i--moon" aria-hidden="true"></i>')}</div>
-    <p class="site-themes__desc">yds에는 기본 테마가 들어 있습니다. 서비스에 맞게 바꾸려면 마음에 드는 테마 파일을 복사해 쓰세요.</p>
+    <div class="site-themes__title"><h1 class="site-h1">Themes <span class="ds-badge" data-tone="warning">테스트</span></h1>${iconBtn('data-site-theme-mode aria-pressed="false"', '미리보기를 다크 모드로 보기', '<i class="ds-icon site-i--moon" aria-hidden="true"></i>')}</div>
+    <p class="site-themes__desc">테마 하나가 실제 사이트 한 장으로 보입니다. 테마는 브랜드 색, 바탕 색, 모서리만 바꾸고 부품은 그대로입니다. 마음에 드는 테마 파일을 복사해 쓰세요.</p>
     <a class="ds-link" data-size="small" href="../index.html#custom-theme">테마 사용방법</a>
   </div>
   <div class="site-themes__acts"><a class="ds-btn" data-variant="neutralSolid" data-size="small" data-width="fill" href="${GITHUB}/blob/main/dist/themes/${firstTheme.slug}.css" target="_blank" rel="noopener" data-site-theme-file>이 테마 쓰기</a><a class="ds-btn" data-variant="neutralWeak" data-size="small" data-width="fill" href="pages/${firstTheme.slug}.html" target="_blank" rel="noopener" data-site-theme-open>새 창으로 보기</a></div>

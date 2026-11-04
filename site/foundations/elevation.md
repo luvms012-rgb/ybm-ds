@@ -1,4 +1,4 @@
-<!-- https://luvms012-rgb.github.io/ybm-ds/site/foundations/elevation.html -->
+<!-- https://luvms012-rgb.github.io/yds/site/foundations/elevation.html -->
 
 # Elevation
 

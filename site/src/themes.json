@@ -1,42 +1,212 @@
 {
   "themes": [
     {
-      "slug": "trust",
-      "name": "든든",
-      "en": "Trust",
-      "desc": "흰 바탕에 선명한 파랑 하나와 옅은 하늘색 면을 쓴 테마입니다. 보험, 금융, 공공 서비스처럼 믿음을 주는 화면에 어울립니다.",
+      "slug": "mint",
+      "name": "민트",
+      "en": "Mint",
+      "site": "클래스온",
+      "desc": "흰 바탕에 민트 그린 하나와 넉넉하게 둥근 카드를 쓴 테마입니다. 취미 클래스, 라이프스타일 서비스처럼 가볍고 산뜻한 화면에 어울립니다.",
       "swatches": [
         "#ffffff",
-        "#1658ff",
-        "#edf4ff",
-        "#272727"
+        "#12b886",
+        "#ecf9f5",
+        "#1a1c20"
       ],
       "card": {
-        "bg": "#edf4ff",
-        "fg": "#1658ff",
+        "bg": "#ecf9f5",
+        "fg": "#12b886",
         "art": [
-          "shield-check",
-          "heart-pulse"
+          "palette",
+          "sparkles"
         ]
       }
     },
     {
-      "slug": "vivid",
-      "name": "선명",
-      "en": "Vivid",
-      "desc": "흰 바탕에 또렷한 로열 블루 하나와 크고 둥근 카드를 쓴 테마입니다. 교육, 학습 서비스처럼 시원하고 자신감 있는 화면에 어울립니다.",
+      "slug": "forest",
+      "name": "숲",
+      "en": "Forest",
+      "site": "러닝핏",
+      "desc": "흰 바탕에 진한 초록과 또렷한 강의 카드를 쓴 테마입니다. 온라인 강의, 학습 마켓처럼 정보가 많은 화면에 어울립니다.",
       "swatches": [
         "#ffffff",
-        "#004fff",
-        "#f2f3f5",
-        "#111111"
+        "#00a36c",
+        "#ebf8f3",
+        "#1a1c20"
       ],
       "card": {
-        "bg": "#eef3ff",
-        "fg": "#004fff",
+        "bg": "#ebf8f3",
+        "fg": "#00a36c",
         "art": [
-          "book-open-check",
-          "sparkles"
+          "graduation-cap",
+          "monitor-play"
+        ]
+      }
+    },
+    {
+      "slug": "tangerine",
+      "name": "귤",
+      "en": "Tangerine",
+      "site": "데일리노트",
+      "desc": "따뜻한 흰 바탕에 주황 하나와 글 중심 배치를 쓴 테마입니다. 뉴스레터, 매거진, 읽을거리가 많은 화면에 어울립니다.",
+      "swatches": [
+        "#fffdfa",
+        "#ff6a00",
+        "#fff3eb",
+        "#1a1c20"
+      ],
+      "card": {
+        "bg": "#fff3eb",
+        "fg": "#ff6a00",
+        "art": [
+          "newspaper",
+          "coffee"
+        ]
+      }
+    },
+    {
+      "slug": "navy",
+      "name": "네이비",
+      "en": "Navy",
+      "site": "글로벌어학평가원",
+      "desc": "옅은 회색 바탕 위 흰 카드와 네이비, 덜 둥근 모서리를 쓴 테마입니다. 시험 접수, 공공, 금융 서비스처럼 신뢰가 중요한 화면에 어울립니다.",
+      "swatches": [
+        "#f4f6f9",
+        "#1c3f94",
+        "#edf0f6",
+        "#1a1c20"
+      ],
+      "card": {
+        "bg": "#edf0f6",
+        "fg": "#1c3f94",
+        "art": [
+          "landmark",
+          "file-check"
+        ]
+      }
+    },
+    {
+      "slug": "violet",
+      "name": "보라",
+      "en": "Violet",
+      "site": "토키",
+      "desc": "연보라 바탕에 보라 하나와 알약처럼 둥근 모서리를 쓴 테마입니다. AI 튜터, 새로운 기능을 소개하는 화면에 어울립니다.",
+      "swatches": [
+        "#f6f5fc",
+        "#6d4aff",
+        "#f3f1ff",
+        "#1a1c20"
+      ],
+      "card": {
+        "bg": "#f3f1ff",
+        "fg": "#6d4aff",
+        "art": [
+          "bot",
+          "message-circle"
+        ]
+      }
+    },
+    {
+      "slug": "coral",
+      "name": "코랄",
+      "en": "Coral",
+      "site": "무드샵",
+      "desc": "흰 바탕에 코랄 레드와 사진이 큰 상품 카드를 쓴 테마입니다. 쇼핑몰, 뷰티처럼 상품을 많이 보여 주는 화면에 어울립니다.",
+      "swatches": [
+        "#ffffff",
+        "#f0506e",
+        "#fef1f3",
+        "#1a1c20"
+      ],
+      "card": {
+        "bg": "#fef1f3",
+        "fg": "#f0506e",
+        "art": [
+          "shopping-bag",
+          "heart"
+        ]
+      }
+    },
+    {
+      "slug": "sky",
+      "name": "하늘",
+      "en": "Sky",
+      "site": "집꾸밈",
+      "desc": "흰 바탕에 밝은 하늘색과 각이 조금 살아 있는 카드를 쓴 테마입니다. 커뮤니티, 사진 피드처럼 사용자 글이 많은 화면에 어울립니다.",
+      "swatches": [
+        "#ffffff",
+        "#1f8ff0",
+        "#edf6fe",
+        "#1a1c20"
+      ],
+      "card": {
+        "bg": "#edf6fe",
+        "fg": "#1f8ff0",
+        "art": [
+          "house",
+          "camera"
+        ]
+      }
+    },
+    {
+      "slug": "ink",
+      "name": "먹",
+      "en": "Ink",
+      "site": "책다락",
+      "desc": "종이색 바탕에 검정 하나와 거의 각진 모서리를 쓴 테마입니다. 서점, 출판, 아카이브처럼 글과 책이 주인공인 화면에 어울립니다.",
+      "swatches": [
+        "#f7f5f0",
+        "#1a1c20",
+        "#ededed",
+        "#1a1c20"
+      ],
+      "card": {
+        "bg": "#ededed",
+        "fg": "#1a1c20",
+        "art": [
+          "book-open",
+          "library"
+        ]
+      }
+    },
+    {
+      "slug": "rose",
+      "name": "장미",
+      "en": "Rose",
+      "site": "키즈잉글리시",
+      "desc": "연분홍 바탕에 분홍 하나와 아주 둥근 모서리를 쓴 테마입니다. 어린이 학습, 놀이처럼 친근하고 밝은 화면에 어울립니다.",
+      "swatches": [
+        "#fff8fa",
+        "#ff4f8b",
+        "#fff1f6",
+        "#1a1c20"
+      ],
+      "card": {
+        "bg": "#fff1f6",
+        "fg": "#ff4f8b",
+        "art": [
+          "baby",
+          "star"
+        ]
+      }
+    },
+    {
+      "slug": "teal",
+      "name": "청록",
+      "en": "Teal",
+      "site": "머니온",
+      "desc": "옅은 회색 바탕 위 흰 카드와 청록을 쓴 테마입니다. 자산, 결제처럼 숫자가 많고 차분해야 하는 화면에 어울립니다.",
+      "swatches": [
+        "#f3f6f7",
+        "#0b8a9e",
+        "#ebf6f7",
+        "#1a1c20"
+      ],
+      "card": {
+        "bg": "#ebf6f7",
+        "fg": "#0b8a9e",
+        "art": [
+          "wallet",
+          "chart-line"
         ]
       }
     }

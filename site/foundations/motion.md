@@ -1,4 +1,4 @@
-<!-- https://luvms012-rgb.github.io/ybm-ds/site/foundations/motion.html -->
+<!-- https://luvms012-rgb.github.io/yds/site/foundations/motion.html -->
 
 # Motion
 

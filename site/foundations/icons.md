@@ -1,4 +1,4 @@
-<!-- https://luvms012-rgb.github.io/ybm-ds/site/foundations/icons.html -->
+<!-- https://luvms012-rgb.github.io/yds/site/foundations/icons.html -->
 
 # Iconography
 
@@ -6,7 +6,7 @@
 
 ## 개요
 
-아이콘은 Lucide 한 가지만 씁니다. 선이 고르고 모양이 단순해 처음 보는 사람도 뜻을 바로 압니다. 지금 바로 쓸 수 있는 아이콘은 155개이고, 필요하면 Lucide 1,999개 가운데서 더 넣습니다. 모든 아이콘은 [Library](https://luvms012-rgb.github.io/ybm-ds/site/foundations/icons-library.md)에서 찾아 바로 복사합니다.
+아이콘은 Lucide 한 가지만 씁니다. 선이 고르고 모양이 단순해 처음 보는 사람도 뜻을 바로 압니다. 지금 바로 쓸 수 있는 아이콘은 155개이고, 필요하면 Lucide 1,999개 가운데서 더 넣습니다. 모든 아이콘은 [Library](https://luvms012-rgb.github.io/yds/site/foundations/icons-library.md)에서 찾아 바로 복사합니다.
 
 ```html
 <!-- 글자 옆: 꾸밈용이라 aria-hidden -->
@@ -242,7 +242,7 @@
 
 되도록 지금 있는 아이콘을 씁니다. 새 아이콘이 꼭 필요하면 아래 순서를 따릅니다.
 
-1. [Library](https://luvms012-rgb.github.io/ybm-ds/site/foundations/icons-library.md)의 Lucide 전체에서 알맞은 아이콘을 고릅니다.
+1. [Library](https://luvms012-rgb.github.io/yds/site/foundations/icons-library.md)의 Lucide 전체에서 알맞은 아이콘을 고릅니다.
 2. 오른쪽 칸의 **icons.css 줄**을 복사해 `dist/icons.css` 끝에 붙입니다.
 3. 그다음부터 `ds-icon--이름` 클래스로 씁니다.
 
@@ -267,4 +267,4 @@
 | **Don't** | 아이콘 그림을 손으로 고치지 않습니다. Lucide 원본 그대로 씁니다. |
 | **Don't** | 아이콘 하나로 긴 뜻을 대신하지 않습니다. 뜻이 분명하지 않으면 글자를 같이 씁니다. |
 
-아이콘 그림은 Lucide(ISC 라이선스)입니다. [라이선스 전문](https://luvms012-rgb.github.io/ybm-ds/site/assets/lucide-LICENSE.txt)
+아이콘 그림은 Lucide(ISC 라이선스)입니다. [라이선스 전문](https://luvms012-rgb.github.io/yds/site/assets/lucide-LICENSE.txt)

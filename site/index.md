@@ -1,4 +1,4 @@
-<!-- https://luvms012-rgb.github.io/ybm-ds/site/index.html -->
+<!-- https://luvms012-rgb.github.io/yds/site/index.html -->
 
 # Get Started
 
@@ -12,7 +12,7 @@ yds는 YBM 서비스를 위한 디자인 시스템입니다.
 
 ```text
 이 프로젝트에 yds를 설치해 줘.
-문서: https://luvms012-rgb.github.io/ybm-ds/site/llms.txt
+문서: https://luvms012-rgb.github.io/yds/site/llms.txt
 문서의 '지킬 것'을 먼저 읽고 그대로 따라 줘.
 ```
 
@@ -22,7 +22,7 @@ yds는 YBM 서비스를 위한 디자인 시스템입니다.
 
 ```text
 이 서비스의 브랜드 컬러를 [#12a150]으로 맞춰 줘.
-문서: https://luvms012-rgb.github.io/ybm-ds/site/llms.txt
+문서: https://luvms012-rgb.github.io/yds/site/llms.txt
 이 색을 600 단계로 두고 나머지 단계와 다크 모드 값을 만들어 서비스 CSS에 넣어 줘. 바뀐 화면도 보여 줘.
 ```
 
@@ -32,7 +32,7 @@ yds는 YBM 서비스를 위한 디자인 시스템입니다.
 
 ```text
 yds로 [만들 화면, 예: 회원 목록 화면]을 만들어 줘.
-문서: https://luvms012-rgb.github.io/ybm-ds/site/llms.txt
+문서: https://luvms012-rgb.github.io/yds/site/llms.txt
 비슷한 화면이 Templates에 있으면 그 화면에서 시작해 줘.
 ```
 
@@ -40,29 +40,29 @@ yds로 [만들 화면, 예: 회원 목록 화면]을 만들어 줘.
 
 ```text
 이 화면이 yds 규칙을 지키는지 점검하고 고쳐 줘.
-문서: https://luvms012-rgb.github.io/ybm-ds/site/llms.txt
+문서: https://luvms012-rgb.github.io/yds/site/llms.txt
 검사 스크립트로 먼저 검사하고, 고친 곳은 목록으로 알려 줘.
 ```
 
 ## 직접 시작하기
 
-`<head>`에 두 줄을 넣으면 글꼴, 토큰, 아이콘, 컴포넌트가 함께 들어옵니다. 쓰는 법은 [Components](https://luvms012-rgb.github.io/ybm-ds/site/components/index.md)에 있습니다.
+`<head>`에 두 줄을 넣으면 글꼴, 토큰, 아이콘, 컴포넌트가 함께 들어옵니다. 쓰는 법은 [Components](https://luvms012-rgb.github.io/yds/site/components/index.md)에 있습니다.
 
 **최신 버전**
 
 ```html
-<link rel="stylesheet" href="https://luvms012-rgb.github.io/ybm-ds/dist/ybm-ds.css">
-<script src="https://luvms012-rgb.github.io/ybm-ds/dist/ybm-ds.js" defer></script>
+<link rel="stylesheet" href="https://luvms012-rgb.github.io/yds/dist/ybm-ds.css">
+<script src="https://luvms012-rgb.github.io/yds/dist/ybm-ds.js" defer></script>
 ```
 
 **버전 고정 v1.1.0**
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/luvms012-rgb/ybm-ds@v1.1.0/dist/ybm-ds.css">
-<script src="https://cdn.jsdelivr.net/gh/luvms012-rgb/ybm-ds@v1.1.0/dist/ybm-ds.js" defer></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/luvms012-rgb/yds@v1.1.0/dist/ybm-ds.css">
+<script src="https://cdn.jsdelivr.net/gh/luvms012-rgb/yds@v1.1.0/dist/ybm-ds.js" defer></script>
 ```
 
-운영 서비스는 버전을 고정한 주소를 쓰고, 새 버전은 [Updates](https://luvms012-rgb.github.io/ybm-ds/site/updates.html)를 확인한 뒤 올립니다.
+운영 서비스는 버전을 고정한 주소를 쓰고, 새 버전은 [Updates](https://luvms012-rgb.github.io/yds/site/updates.html)를 확인한 뒤 올립니다.
 
 ## 내 사이트에 적용해보기
 
@@ -74,7 +74,7 @@ yds로 [만들 화면, 예: 회원 목록 화면]을 만들어 줘.
 
 ```text
 이 사이트에 yds를 옮겨 오려고 해. 아직 고치지 말고 먼저 살펴봐 줘.
-문서: https://luvms012-rgb.github.io/ybm-ds/site/llms.txt
+문서: https://luvms012-rgb.github.io/yds/site/llms.txt
 공통 <head> 파일, CSS 파일, 자주 쓰는 색과 부품을 정리하고 바꿀 순서를 제안해 줘.
 ```
 
@@ -84,7 +84,7 @@ yds로 [만들 화면, 예: 회원 목록 화면]을 만들어 줘.
 
 ```text
 이 사이트의 공통 <head>에 yds를 넣어 줘.
-문서: https://luvms012-rgb.github.io/ybm-ds/site/llms.txt
+문서: https://luvms012-rgb.github.io/yds/site/llms.txt
 넣은 뒤 지금 화면에서 달라진 곳이 있으면 알려 줘.
 ```
 
@@ -94,7 +94,7 @@ yds로 [만들 화면, 예: 회원 목록 화면]을 만들어 줘.
 
 ```text
 [바꿀 화면, 예: 회원 정보 수정] 화면을 yds 컴포넌트로 바꿔 줘.
-문서: https://luvms012-rgb.github.io/ybm-ds/site/llms.txt
+문서: https://luvms012-rgb.github.io/yds/site/llms.txt
 서버 코드와 스크립트가 쓰는 class, id, name은 그대로 두고, 바꾸기 전후 화면을 비교해서 보여 줘.
 ```
 
@@ -106,7 +106,7 @@ yds로 [만들 화면, 예: 회원 목록 화면]을 만들어 줘.
 
 ```text
 이 사이트에 yds 다크 모드를 넣어 줘.
-문서: https://luvms012-rgb.github.io/ybm-ds/site/llms.txt
+문서: https://luvms012-rgb.github.io/yds/site/llms.txt
 화면 오른쪽 위에 라이트, 다크 전환 버튼을 만들고, 처음에는 기기 설정을 따르게 해 줘.
 ```
 
@@ -128,19 +128,30 @@ yds로 [만들 화면, 예: 회원 목록 화면]을 만들어 줘.
 
 | 파일 | 대상 | 내용 |
 | --- | --- | --- |
-| [llms-full.txt](https://luvms012-rgb.github.io/ybm-ds/site/llms-full.txt) | AI | 모든 문서를 한 파일로 모았습니다. |
-| [llms.txt](https://luvms012-rgb.github.io/ybm-ds/site/llms.txt) | AI | 전체 목차와 지킬 규칙입니다. AI가 여기서 시작합니다. |
-| [AGENTS.md](https://luvms012-rgb.github.io/ybm-ds/site/ai/AGENTS.md) | AI | 프로젝트 맨 위 폴더에 두면 AI 도구가 늘 읽는 규칙 파일입니다. |
-| [CLAUDE.md](https://luvms012-rgb.github.io/ybm-ds/site/ai/CLAUDE.md), [yds.mdc](https://luvms012-rgb.github.io/ybm-ds/site/ai/yds.mdc) | AI | Claude, Cursor용 규칙 파일입니다. 내용은 AGENTS.md와 같습니다. |
-| [components.json](https://luvms012-rgb.github.io/ybm-ds/components.json) | AI개발자 | 쓸 수 있는 컴포넌트와 속성 목록입니다. |
-| [components.css](https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/components.css) | AI개발자 | 컴포넌트마다 머리 주석에 HTML 구조가 있습니다. |
-| [tokens.css](https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/tokens.css) | AI개발자 | 색, 간격, 글자 크기 같은 `--ds-*` 토큰입니다. |
-| [icons.json](https://luvms012-rgb.github.io/ybm-ds/site/ai/icons.json) | AI개발자 | 쓸 수 있는 아이콘 이름과 쓰임입니다. |
-| [yds-check.mjs](https://luvms012-rgb.github.io/ybm-ds/site/ai/yds-check.mjs) | AI개발자 | `node yds-check.mjs 폴더`로 규칙을 어긴 곳을 찾습니다. |
-| [design-tokens.json](https://luvms012-rgb.github.io/ybm-ds/tokens/design-tokens.json) | 개발자디자이너 | 표준 토큰 형식입니다. 디자인 도구와 토큰 변환기에서 읽습니다. |
-| [tokens.js](https://luvms012-rgb.github.io/ybm-ds/tokens/tokens.js) | 개발자 | 스크립트에서 토큰 값을 쓸 때 불러옵니다. |
-| [tailwind.preset.js](https://luvms012-rgb.github.io/ybm-ds/tokens/tailwind.preset.js) | 개발자 | Tailwind에 yds 토큰을 연결합니다. |
+| [llms-full.txt](https://luvms012-rgb.github.io/yds/site/llms-full.txt) | AI | 모든 문서를 한 파일로 모았습니다. |
+| [llms.txt](https://luvms012-rgb.github.io/yds/site/llms.txt) | AI | 전체 목차와 지킬 규칙입니다. AI가 여기서 시작합니다. |
+| [AGENTS.md](https://luvms012-rgb.github.io/yds/site/ai/AGENTS.md) | AI | 프로젝트 맨 위 폴더에 두면 AI 도구가 늘 읽는 규칙 파일입니다. |
+| [CLAUDE.md](https://luvms012-rgb.github.io/yds/site/ai/CLAUDE.md), [yds.mdc](https://luvms012-rgb.github.io/yds/site/ai/yds.mdc) | AI | Claude, Cursor용 규칙 파일입니다. 내용은 AGENTS.md와 같습니다. |
+| [components.json](https://luvms012-rgb.github.io/yds/components.json) | AI개발자 | 쓸 수 있는 컴포넌트와 속성 목록입니다. |
+| [components.css](https://raw.githubusercontent.com/luvms012-rgb/yds/main/dist/components.css) | AI개발자 | 컴포넌트마다 머리 주석에 HTML 구조가 있습니다. |
+| [tokens.css](https://raw.githubusercontent.com/luvms012-rgb/yds/main/dist/tokens.css) | AI개발자 | 색, 간격, 글자 크기 같은 `--ds-*` 토큰입니다. |
+| [icons.json](https://luvms012-rgb.github.io/yds/site/ai/icons.json) | AI개발자 | 쓸 수 있는 아이콘 이름과 쓰임입니다. |
+| [yds-check.mjs](https://luvms012-rgb.github.io/yds/site/ai/yds-check.mjs) | AI개발자 | `node yds-check.mjs 폴더`로 규칙을 어긴 곳을 찾습니다. |
+| [design-tokens.json](https://luvms012-rgb.github.io/yds/tokens/design-tokens.json) | 개발자디자이너 | 표준 토큰 형식입니다. 디자인 도구와 토큰 변환기에서 읽습니다. |
+| [tokens.js](https://luvms012-rgb.github.io/yds/tokens/tokens.js) | 개발자 | 스크립트에서 토큰 값을 쓸 때 불러옵니다. |
+| [tailwind.preset.js](https://luvms012-rgb.github.io/yds/tokens/tailwind.preset.js) | 개발자 | Tailwind에 yds 토큰을 연결합니다. |
 | [Figma 라이브러리](https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=2608-2) | 디자이너 | 컴포넌트와 변수(토큰)입니다. 변수 이름이 CSS 토큰 이름과 같습니다. |
 | 페이지별 `.md` | AI | 문서 제목 아래 Markdown 메뉴에서 그 페이지만 복사합니다. |
+| Themes | 테마 CSS 주소와 어울리는 서비스입니다. |  |
 
 Figma 변수와 CSS 변수는 이름이 같습니다. AI에 [Figma](https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=2608-2) 화면을 주면 같은 토큰으로 옮깁니다.
+
+## 테마
+
+테마는 브랜드 색, 바탕색, 모서리 곡률을 한 번에 바꿉니다. DS 다음에 테마 파일을 붙이고 html에 테마 이름을 적으면 됩니다. 고를 수 있는 테마는 [Themes](https://luvms012-rgb.github.io/yds/site/themes/index.html)에 있습니다.
+
+```html
+<html lang="ko" data-ds-theme="mint">
+<link rel="stylesheet" href="https://luvms012-rgb.github.io/yds/dist/ybm-ds.css">
+<link rel="stylesheet" href="https://luvms012-rgb.github.io/yds/dist/themes/mint.css">
+```

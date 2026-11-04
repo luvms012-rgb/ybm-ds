@@ -1,4 +1,4 @@
-<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/table-pagination.html -->
+<!-- https://luvms012-rgb.github.io/yds/site/components/table-pagination.html -->
 
 # Table Pagination
 

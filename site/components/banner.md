@@ -1,4 +1,4 @@
-<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/banner.html -->
+<!-- https://luvms012-rgb.github.io/yds/site/components/banner.html -->
 
 # Banner
 

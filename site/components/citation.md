@@ -1,4 +1,4 @@
-<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/citation.html -->
+<!-- https://luvms012-rgb.github.io/yds/site/components/citation.html -->
 
 # Citation
 

@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="ko" data-ds-theme="tangerine">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>귤 테마 - 데일리노트 (yds 테마 예시)</title>
+<!-- 생성물: node site/themes/gen.mjs 가 만든다. 직접 고치지 말고 생성기를 고친다 -->
+<link rel="stylesheet" href="../../../dist/ybm-ds.css">
+<link rel="stylesheet" href="../../../dist/themes/tangerine.css">
+<script>if (location.hash === "#default") document.documentElement.removeAttribute("data-ds-theme");</script>
+<script src="../../../dist/ybm-ds.js" defer></script>
+<style>
+  body { margin: 0; background: var(--ds-color-bg-canvas); color: var(--ds-color-fg-neutral); word-break: keep-all; overflow-wrap: break-word; }
+  a { color: inherit; }
+  .th-wrap { box-sizing: border-box; width: min(100%, 1200px); margin-inline: auto; padding-inline: var(--ds-space-x4); }
+  @media (min-width: 768px) { .th-wrap { padding-inline: var(--ds-space-x6); } }
+  .th-art[data-tone="brand"] { color: var(--ds-color-fg-brand); }
+  .th-art[data-tone="positive"] { color: var(--ds-color-fg-positive); }
+  .th-art[data-tone="warning"] { color: var(--ds-color-fg-warning); }
+  .th-art[data-tone="critical"] { color: var(--ds-color-fg-critical); }
+  .th-art[data-tone="magic"] { color: var(--ds-color-fg-magic); }
+  .th-art[data-tone="neutral"] { color: var(--ds-color-fg-neutral-muted); }
+  .th-art[data-tone="on-brand"] { color: var(--ds-color-fg-on-brand-solid); }
+  .th-em { color: var(--ds-color-fg-brand); }
+  .th-num { font-variant-numeric: tabular-nums; }
+  .th-muted { color: var(--ds-color-fg-neutral-muted); }
+
+  .th-gnb { position: sticky; top: 0; z-index: var(--ds-z-sticky); background: var(--ds-color-bg-layer-default); box-shadow: inset 0 -1px 0 var(--ds-color-stroke-neutral-weak); }
+  .th-gnb__row { display: flex; align-items: center; gap: var(--ds-space-x8); height: 64px; }
+  .th-logo { font-size: var(--ds-font-size-t07); font-weight: var(--ds-font-weight-bold); letter-spacing: -0.03em; color: var(--ds-color-fg-brand); text-decoration: none; white-space: nowrap; }
+  .th-menu { display: none; gap: var(--ds-space-x7); }
+  .th-menu a { font-size: var(--ds-font-size-t05); line-height: var(--ds-line-height-t05); font-weight: var(--ds-font-weight-semibold); color: var(--ds-color-fg-neutral); text-decoration: none; white-space: nowrap; }
+  .th-menu a[aria-current="page"] { color: var(--ds-color-fg-brand); }
+  .th-gnb__search { display: none; flex: 1 1 auto; max-width: 420px; }
+  .th-gnb__end { display: none; align-items: center; gap: var(--ds-space-x1); margin-left: auto; }
+  .th-gnb__burger { margin-left: auto; }
+  .th-gnb__sub { display: flex; align-items: center; gap: var(--ds-space-x2); min-height: 48px; overflow-x: auto; scrollbar-width: none; }
+  @media (min-width: 1024px) { .th-menu, .th-gnb__search, .th-gnb__end { display: flex; } .th-gnb__burger { display: none; } }
+
+  .th-sec { padding-top: var(--ds-space-x14); }
+  .th-sec__head { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--ds-space-x4); margin-bottom: var(--ds-space-x6); }
+  .th-sec__head h2 { margin: 0; font-size: var(--ds-font-size-t08); line-height: var(--ds-line-height-t08); font-weight: var(--ds-font-weight-bold); letter-spacing: -0.02em; }
+  .th-sec__head p { margin: var(--ds-space-x1) 0 0; color: var(--ds-color-fg-neutral-muted); font-size: var(--ds-font-size-t04); }
+  .th-sec__head .ds-link { white-space: nowrap; }
+
+  .th-tiles { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: var(--ds-space-x5) var(--ds-space-x2); margin: 0; padding: 0; list-style: none; }
+  @media (min-width: 1024px) { .th-tiles { grid-template-columns: repeat(10, minmax(0, 1fr)); } }
+  .th-tiles a { display: flex; flex-direction: column; align-items: center; gap: var(--ds-space-x2); color: var(--ds-color-fg-neutral); text-decoration: none; text-align: center; font-size: var(--ds-font-size-t03); line-height: 18px; }
+  .th-tile { display: grid; place-items: center; flex: none; width: 60px; height: 60px; border-radius: var(--ds-shape-2xl); background: var(--ds-color-bg-brand-weak); transition: transform var(--ds-duration-fast) var(--ds-easing-standard); }
+  .th-tiles a:hover .th-tile { transform: translateY(-2px); }
+
+  .th-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--ds-space-x8) var(--ds-space-x4); }
+  @media (min-width: 768px) { .th-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  @media (min-width: 1024px) { .th-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+  .th-item { position: relative; display: flex; flex-direction: column; gap: var(--ds-space-x2); color: inherit; text-decoration: none; }
+  .th-item .ds-imageframe { border-radius: var(--ds-shape-xl); }
+  .th-item__like { position: absolute; top: var(--ds-space-x2); right: var(--ds-space-x2); }
+  .th-item__like .ds-btn { background: rgb(255 255 255 / .85); color: var(--ds-color-fg-neutral); }
+  .th-item__tag { position: absolute; top: var(--ds-space-x2); left: var(--ds-space-x2); }
+  .th-item b { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; font-size: var(--ds-font-size-t05); line-height: var(--ds-line-height-t05); font-weight: var(--ds-font-weight-semibold); }
+  .th-item small { color: var(--ds-color-fg-neutral-muted); font-size: var(--ds-font-size-t03); }
+  .th-item__price { display: flex; align-items: baseline; gap: var(--ds-space-x2); font-size: var(--ds-font-size-t05); }
+  .th-item__price b { display: inline; font-size: var(--ds-font-size-t06); }
+  .th-item__price s { color: var(--ds-color-fg-neutral-subtle); font-size: var(--ds-font-size-t03); }
+  .th-item__off { color: var(--ds-color-fg-critical); font-weight: var(--ds-font-weight-bold); }
+  .th-meta { display: flex; align-items: center; gap: var(--ds-space-x2); color: var(--ds-color-fg-neutral-muted); font-size: var(--ds-font-size-t02); }
+
+  .th-card { padding: var(--ds-space-x6); border-radius: var(--ds-shape-2xl); background: var(--ds-color-bg-layer-default); box-shadow: inset 0 0 0 1px var(--ds-color-stroke-neutral-weak); }
+  .th-card h3 { margin: 0 0 var(--ds-space-x3); font-size: var(--ds-font-size-t06); font-weight: var(--ds-font-weight-bold); }
+  .th-card--brand { background: var(--ds-color-bg-brand-weak); box-shadow: none; }
+  .th-between { display: flex; align-items: center; justify-content: space-between; gap: var(--ds-space-x3); }
+
+  .th-band { padding: var(--ds-space-x10); border-radius: var(--ds-shape-3xl); background: var(--ds-color-bg-brand-solid); color: var(--ds-color-fg-on-brand-solid); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ds-space-x6); }
+  .th-band h2 { margin: 0; font-size: var(--ds-font-size-t09); line-height: var(--ds-line-height-t09); font-weight: var(--ds-font-weight-bold); letter-spacing: -0.03em; }
+  .th-band p { margin: var(--ds-space-x2) 0 0; opacity: .88; }
+  .th-band .ds-btn { background: var(--ds-color-bg-layer-default); color: var(--ds-color-fg-brand); }
+
+  .th-list { margin: 0; padding: 0; list-style: none; }
+  .th-list li a { display: flex; flex-direction: column; gap: 2px; padding-block: var(--ds-space-x3); box-shadow: inset 0 -1px 0 var(--ds-color-stroke-neutral-weak); text-decoration: none; }
+  .th-list li b { overflow: hidden; font-size: var(--ds-font-size-t04); font-weight: var(--ds-font-weight-medium); text-overflow: ellipsis; white-space: nowrap; }
+  .th-list li span { color: var(--ds-color-fg-neutral-subtle); font-size: var(--ds-font-size-t02); }
+
+  .th-foot { margin-top: var(--ds-space-x20); box-shadow: inset 0 1px 0 var(--ds-color-stroke-neutral-weak); color: var(--ds-color-fg-neutral-muted); font-size: var(--ds-font-size-t03); }
+  .th-foot__links { display: flex; flex-wrap: wrap; gap: var(--ds-space-x2) var(--ds-space-x6); padding-block: var(--ds-space-x5); box-shadow: inset 0 -1px 0 var(--ds-color-stroke-neutral-weak); }
+  .th-foot__links a { color: var(--ds-color-fg-neutral); font-weight: var(--ds-font-weight-medium); text-decoration: none; }
+  .th-foot__links a[data-strong] { color: var(--ds-color-fg-brand); font-weight: var(--ds-font-weight-bold); }
+  .th-foot__body { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--ds-space-x6); padding-block: var(--ds-space-x6) var(--ds-space-x12); }
+  .th-foot__body p { margin: 0; line-height: 22px; }
+  .th-foot__body b { display: block; margin-bottom: var(--ds-space-x2); color: var(--ds-color-fg-neutral); font-size: var(--ds-font-size-t05); }
+
+    .th-layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ds-space-x10); padding-top: var(--ds-space-x6); }
+    @media (min-width: 1024px) { .th-layout { grid-template-columns: minmax(0, 1fr) 300px; } }
+    .th-tabs { margin-bottom: var(--ds-space-x6); }
+    .th-feature { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ds-space-x5); margin-top: var(--ds-space-x6); color: inherit; text-decoration: none; }
+    @media (min-width: 768px) { .th-feature { grid-template-columns: 300px minmax(0, 1fr); } }
+    .th-feature .ds-imageframe { border-radius: var(--ds-shape-xl); }
+    .th-feature h2 { margin: var(--ds-space-x3) 0; font-size: var(--ds-font-size-t08); line-height: 1.4; font-weight: var(--ds-font-weight-bold); letter-spacing: -0.02em; }
+    .th-feature p { margin: 0 0 var(--ds-space-x4); color: var(--ds-color-fg-neutral-muted); line-height: 26px; }
+    .th-by { display: flex; align-items: center; gap: var(--ds-space-x2); color: var(--ds-color-fg-neutral-subtle); font-size: var(--ds-font-size-t03); }
+    .th-by b { color: var(--ds-color-fg-brand); font-weight: var(--ds-font-weight-semibold); }
+    .th-news { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ds-space-x6) var(--ds-space-x8); margin: var(--ds-space-x10) 0 0; padding: 0; list-style: none; }
+    @media (min-width: 768px) { .th-news { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    .th-news a { display: grid; grid-template-columns: 112px minmax(0, 1fr); gap: var(--ds-space-x4); align-items: center; color: inherit; text-decoration: none; }
+    .th-news .ds-imageframe { border-radius: var(--ds-shape-lg); }
+    .th-news b { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; font-size: var(--ds-font-size-t05); line-height: 24px; font-weight: var(--ds-font-weight-semibold); }
+    .th-news small { display: block; margin-top: var(--ds-space-x1); color: var(--ds-color-fg-neutral-subtle); font-size: var(--ds-font-size-t02); }
+    .th-side { display: flex; flex-direction: column; gap: var(--ds-space-x4); }
+    .th-card--login { display: flex; flex-direction: column; align-items: center; gap: var(--ds-space-x4); text-align: center; }
+    .th-card--login p { margin: 0; font-weight: var(--ds-font-weight-semibold); line-height: 24px; }
+    .th-card h3 { display: flex; align-items: center; gap: var(--ds-space-x2); font-size: var(--ds-font-size-t05); }
+    .th-tags { display: flex; flex-wrap: wrap; gap: var(--ds-space-x1) var(--ds-space-x2); font-size: var(--ds-font-size-t04); line-height: 22px; font-weight: var(--ds-font-weight-semibold); }
+    .th-card--survey { text-align: center; }
+    .th-card--survey p { margin: 0 0 var(--ds-space-x4); color: var(--ds-color-fg-neutral-muted); font-size: var(--ds-font-size-t03); }
+    .th-mini { color: var(--ds-color-fg-neutral-subtle); font-size: var(--ds-font-size-t02); line-height: 20px; }
+    .th-mini a { text-decoration: none; margin-right: var(--ds-space-x2); }
+  </style>
+</head>
+<body>
+<header class="th-gnb"><div class="th-wrap th-gnb__row">
+  <a class="th-logo" href="#">데일리노트</a>
+  <nav class="th-menu" aria-label="주요 메뉴"><a href="#" aria-current="page">홈</a><a href="#">시리즈</a><a href="#">그라운드</a><a href="#">아카이브</a></nav>
+  
+  <div class="th-gnb__end"><button type="button" class="ds-btn" data-variant="ghost" data-size="xsmall">광고 제휴</button><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" aria-label="검색"><i class="ds-icon ds-icon--search" aria-hidden="true"></i></button><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" aria-label="알림"><i class="ds-icon ds-icon--bell" aria-hidden="true"></i></button><button type="button" class="ds-btn" data-variant="brandOutline" data-size="xsmall">로그인</button></div>
+  <span class="th-gnb__burger"><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" aria-label="메뉴 열기"><i class="ds-icon ds-icon--menu" aria-hidden="true"></i></button></span>
+</div></header>
+<main class="th-wrap th-layout">
+  <div>
+    <div class="th-tabs"><div class="ds-tabs" role="tablist" aria-label="글 종류" data-layout="hug"><button type="button" class="ds-tabs__trigger" role="tab" aria-selected="true">데일리</button><button type="button" class="ds-tabs__trigger" role="tab" aria-selected="false">아티클</button><button type="button" class="ds-tabs__trigger" role="tab" aria-selected="false">포스트</button></div></div>
+    <div class="ds-callout" data-tone="neutral"><i class="ds-icon ds-icon--clock" aria-hidden="true"></i><p class="ds-callout__content"><i class="ds-icon ds-icon--clock ds-icon--sm" aria-hidden="true"></i> <b style="color: var(--ds-color-fg-brand)">20시간 남았어요!</b> 시간 없을 때 하루에 딱 이것만 보세요. <a class="ds-callout__link" href="#">소식 보러 가기</a></p></div>
+    <a class="th-feature" href="#"><div class="ds-imageframe" data-ratio="4:3"><img src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?auto=format&fit=crop&w=700&q=70" alt="" loading="lazy"></div><div><span class="ds-badge" data-tone="brand">헤드라인</span><h2>역대급 실업급여 지급, 찬바람 부는 취업 시장 올해는 괜찮아질까?</h2><p>역대급 고용 한파에 실업급여 수급자가 증가했어요. 취업 시장의 양극화가 심해지고 있는 건데요. 상반기 채용 시즌이 시작됐지만 취업 시장이 다시 회복할지는 지켜봐야 해요.</p><span class="th-by"><b>헤드라인</b> 한 시간 전 · 읽는 데 4분</span></div></a>
+    <ul class="th-news"><li><a href="#"><div class="ds-imageframe" data-ratio="4:3"><img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=300&q=70" alt="" loading="lazy"></div><span><b>제2의 딥시크, AI 에이전트 마누스의 등장</b><small>뉴스 · 17시간 전</small></span></a></li><li><a href="#"><div class="ds-imageframe" data-ratio="4:3"><img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&w=300&q=70" alt="" loading="lazy"></div><span><b>대통령 탄핵심판 선고일이 미뤄질 수 있는 이유</b><small>뉴스 · 18시간 전</small></span></a></li><li><a href="#"><div class="ds-imageframe" data-ratio="4:3"><img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=300&q=70" alt="" loading="lazy"></div><span><b>박물관에 전시된 역사 속 사진의 뒷이야기</b><small>뉴스 · 20시간 전</small></span></a></li><li><a href="#"><div class="ds-imageframe" data-ratio="4:3"><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=300&q=70" alt="" loading="lazy"></div><span><b>테슬라 주식이 하루 만에 15% 떨어진 이유</b><small>뉴스 · 21시간 전</small></span></a></li><li><a href="#"><div class="ds-imageframe" data-ratio="4:3"><img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=300&q=70" alt="" loading="lazy"></div><span><b>출판계에서 리커버 에디션이 인기인 이유</b><small>고슴이의책 · 하루 전</small></span></a></li><li><a href="#"><div class="ds-imageframe" data-ratio="4:3"><img src="https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?auto=format&fit=crop&w=300&q=70" alt="" loading="lazy"></div><span><b>전 세계 경제를 들었다 놨다 하는 관세 정책</b><small>뉴스 · 2일 전</small></span></a></li><li><a href="#"><div class="ds-imageframe" data-ratio="4:3"><img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=300&q=70" alt="" loading="lazy"></div><span><b>어르신들이 만들어 주는 가장 따뜻한 국밥</b><small>뉴스 · 2일 전</small></span></a></li><li><a href="#"><div class="ds-imageframe" data-ratio="4:3"><img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=300&q=70" alt="" loading="lazy"></div><span><b>전투기 오폭 사고 중간 조사 결과</b><small>뉴스 · 2일 전</small></span></a></li></ul>
+    <div style="display: flex; justify-content: center; padding-top: var(--ds-space-x10)"><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="medium">지난 소식 더 보기<i class="ds-icon ds-icon--chevron-down" aria-hidden="true"></i></button></div>
+  </div>
+  <aside class="th-side" aria-label="옆 내용">
+    <div class="th-card th-card--login"><svg class="th-art" data-tone="brand" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.2 8.4c.5.38.8.97.8 1.6v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V10a2 2 0 0 1 .8-1.6l8-6a2 2 0 0 1 2.4 0l8 6Z"/><path d="m22 10-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 10"/></svg><p>로그인하고<br>맞춤 콘텐츠를 이용해 보세요</p><button type="button" class="ds-btn" data-variant="brandSolid" data-size="medium">데일리노트 시작하기</button></div>
+    <div class="th-card"><h3><svg class="th-art" data-tone="brand" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="10" x2="14" y1="2" y2="2"/><line x1="12" x2="15" y1="14" y2="11"/><circle cx="12" cy="14" r="8"/></svg> 1분 뉴스</h3><div class="th-tags"><a href="#" style="text-decoration: none">#대통령선거</a><a href="#" style="text-decoration: none">#반도체</a><a href="#" style="text-decoration: none">#물가</a><a href="#" style="text-decoration: none">#환율</a><a href="#" style="text-decoration: none">#AI규제</a><a href="#" style="text-decoration: none">#부동산</a></div></div>
+    <div class="th-card th-card--survey"><span class="ds-badge" data-tone="warning">이번 주 설문</span><h3 style="justify-content: center; margin-top: var(--ds-space-x3)">지자체 소개팅, 어떻게 생각해?</h3><p>기간 3월 10일 ~ 3월 12일</p><button type="button" class="ds-btn" data-variant="brandSolid" data-size="small">설문 참여하기<i class="ds-icon ds-icon--arrow-right" aria-hidden="true"></i></button></div>
+    <div class="th-card th-card--brand"><h3><svg class="th-art" data-tone="brand" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.268 21a2 2 0 0 0 3.464 0"/><path d="M22 8c0-2.3-.8-4.3-2-6"/><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/><path d="M4 2C2.8 3.7 2 5.7 2 8"/></svg> 매일 아침 7시</h3><p style="margin: 0 0 var(--ds-space-x3); font-size: var(--ds-font-size-t03); line-height: 20px">뉴스레터로 받아 보세요. 광고 없이 핵심만 보내 드려요.</p><div class="ds-input" data-variant="outline" data-size="medium"><input class="ds-input__control" id="em" type="email" placeholder="이메일 주소" aria-label="이메일 주소"></div><div style="margin-top: var(--ds-space-x2)"><button type="button" class="ds-btn" data-variant="brandSolid" data-size="small" data-width="fill">구독하기</button></div></div>
+    <p class="th-mini">© 데일리노트<br><a href="#">뉴스레터 구독</a><a href="#">채용</a><a href="#">광고 제휴</a><a href="#">이용약관</a><a href="#">개인정보 처리방침</a></p>
+  </aside>
+</main>
+<footer class="th-foot"><div class="th-wrap">
+  <nav class="th-foot__links" aria-label="약관"><a href="#">이용약관</a><a href="#" data-strong>개인정보 처리방침</a><a href="#">청소년 보호 정책</a><a href="#">광고 제휴</a></nav>
+  <div class="th-foot__body"><p><b>데일리노트</b>이 화면은 yds 테마 예시예요. 회사 이름, 상품, 연락처는 모두 가상입니다.<br>서울시 가상구 예시로 33 · news@example.com</p><p>© 2026 데일리노트</p></div>
+</div></footer>
+</body>
+</html>

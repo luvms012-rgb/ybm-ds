@@ -21,7 +21,7 @@ import { fileURLToPath } from 'node:url';
 
 const R = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const SITE = path.join(R, 'site');
-const PUBLIC = 'https://luvms012-rgb.github.io/ybm-ds/';
+const PUBLIC = 'https://luvms012-rgb.github.io/yds/';
 const SITE_URL = PUBLIC + 'site/';
 const flags = new Set(process.argv.slice(2));
 const read = (p) => fs.readFileSync(path.join(R, p), 'utf8');
@@ -160,7 +160,7 @@ check('4 마크다운', ({ err }) => {
     const md = fs.existsSync(mdf) ? norm(fs.readFileSync(mdf, 'utf8')) : '';
     for (const e of list) if (!md.includes(norm(dedent(e.html)))) err(`예시 코드가 .md 에 없음 ${slug}: ${e.title}`);
   }
-  for (const f of ['site/llms.txt', 'site/llms-full.txt']) for (const m of read(f).matchAll(/https:\/\/luvms012-rgb\.github\.io\/ybm-ds\/([^\s)"'<>`]+)/g)) {
+  for (const f of ['site/llms.txt', 'site/llms-full.txt']) for (const m of read(f).matchAll(/https:\/\/luvms012-rgb\.github\.io\/yds\/([^\s)"'<>`]+)/g)) {
     const u = m[1].split('#')[0].replace(/[.,]$/, ''); if (!fs.existsSync(path.join(R, u))) err(`${f} 깨진 주소 ${u}`);
   }
   const reg = readJson('components.json').components.length;

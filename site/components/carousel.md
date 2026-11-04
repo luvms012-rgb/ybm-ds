@@ -1,4 +1,4 @@
-<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/carousel.html -->
+<!-- https://luvms012-rgb.github.io/yds/site/components/carousel.html -->
 
 # Carousel
 

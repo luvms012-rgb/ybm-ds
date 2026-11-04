@@ -310,7 +310,7 @@ async function release(ver, message) {
     if (!p.ok) die('태그 올리기 실패 — ' + p.err);
   }
   say(c.g(`  ✔ 태그 v${ver}`));
-  say(c.d(`    버전 고정 주소 https://cdn.jsdelivr.net/gh/luvms012-rgb/ybm-ds@v${ver}/dist/ybm-ds.css`));
+  say(c.d(`    버전 고정 주소 https://cdn.jsdelivr.net/gh/luvms012-rgb/yds@v${ver}/dist/ybm-ds.css`));
 }
 
 async function deploy(message) {

@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="ko" data-ds-theme="teal">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>청록 테마 - 머니온 (yds 테마 예시)</title>
+<!-- 생성물: node site/themes/gen.mjs 가 만든다. 직접 고치지 말고 생성기를 고친다 -->
+<link rel="stylesheet" href="../../../dist/ybm-ds.css">
+<link rel="stylesheet" href="../../../dist/themes/teal.css">
+<script>if (location.hash === "#default") document.documentElement.removeAttribute("data-ds-theme");</script>
+<script src="../../../dist/ybm-ds.js" defer></script>
+<style>
+  body { margin: 0; background: var(--ds-color-bg-canvas); color: var(--ds-color-fg-neutral); word-break: keep-all; overflow-wrap: break-word; }
+  a { color: inherit; }
+  .th-wrap { box-sizing: border-box; width: min(100%, 1200px); margin-inline: auto; padding-inline: var(--ds-space-x4); }
+  @media (min-width: 768px) { .th-wrap { padding-inline: var(--ds-space-x6); } }
+  .th-art[data-tone="brand"] { color: var(--ds-color-fg-brand); }
+  .th-art[data-tone="positive"] { color: var(--ds-color-fg-positive); }
+  .th-art[data-tone="warning"] { color: var(--ds-color-fg-warning); }
+  .th-art[data-tone="critical"] { color: var(--ds-color-fg-critical); }
+  .th-art[data-tone="magic"] { color: var(--ds-color-fg-magic); }
+  .th-art[data-tone="neutral"] { color: var(--ds-color-fg-neutral-muted); }
+  .th-art[data-tone="on-brand"] { color: var(--ds-color-fg-on-brand-solid); }
+  .th-em { color: var(--ds-color-fg-brand); }
+  .th-num { font-variant-numeric: tabular-nums; }
+  .th-muted { color: var(--ds-color-fg-neutral-muted); }
+
+  .th-gnb { position: sticky; top: 0; z-index: var(--ds-z-sticky); background: var(--ds-color-bg-layer-default); box-shadow: inset 0 -1px 0 var(--ds-color-stroke-neutral-weak); }
+  .th-gnb__row { display: flex; align-items: center; gap: var(--ds-space-x8); height: 64px; }
+  .th-logo { font-size: var(--ds-font-size-t07); font-weight: var(--ds-font-weight-bold); letter-spacing: -0.03em; color: var(--ds-color-fg-brand); text-decoration: none; white-space: nowrap; }
+  .th-menu { display: none; gap: var(--ds-space-x7); }
+  .th-menu a { font-size: var(--ds-font-size-t05); line-height: var(--ds-line-height-t05); font-weight: var(--ds-font-weight-semibold); color: var(--ds-color-fg-neutral); text-decoration: none; white-space: nowrap; }
+  .th-menu a[aria-current="page"] { color: var(--ds-color-fg-brand); }
+  .th-gnb__search { display: none; flex: 1 1 auto; max-width: 420px; }
+  .th-gnb__end { display: none; align-items: center; gap: var(--ds-space-x1); margin-left: auto; }
+  .th-gnb__burger { margin-left: auto; }
+  .th-gnb__sub { display: flex; align-items: center; gap: var(--ds-space-x2); min-height: 48px; overflow-x: auto; scrollbar-width: none; }
+  @media (min-width: 1024px) { .th-menu, .th-gnb__search, .th-gnb__end { display: flex; } .th-gnb__burger { display: none; } }
+
+  .th-sec { padding-top: var(--ds-space-x14); }
+  .th-sec__head { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--ds-space-x4); margin-bottom: var(--ds-space-x6); }
+  .th-sec__head h2 { margin: 0; font-size: var(--ds-font-size-t08); line-height: var(--ds-line-height-t08); font-weight: var(--ds-font-weight-bold); letter-spacing: -0.02em; }
+  .th-sec__head p { margin: var(--ds-space-x1) 0 0; color: var(--ds-color-fg-neutral-muted); font-size: var(--ds-font-size-t04); }
+  .th-sec__head .ds-link { white-space: nowrap; }
+
+  .th-tiles { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: var(--ds-space-x5) var(--ds-space-x2); margin: 0; padding: 0; list-style: none; }
+  @media (min-width: 1024px) { .th-tiles { grid-template-columns: repeat(10, minmax(0, 1fr)); } }
+  .th-tiles a { display: flex; flex-direction: column; align-items: center; gap: var(--ds-space-x2); color: var(--ds-color-fg-neutral); text-decoration: none; text-align: center; font-size: var(--ds-font-size-t03); line-height: 18px; }
+  .th-tile { display: grid; place-items: center; flex: none; width: 60px; height: 60px; border-radius: var(--ds-shape-2xl); background: var(--ds-color-bg-brand-weak); transition: transform var(--ds-duration-fast) var(--ds-easing-standard); }
+  .th-tiles a:hover .th-tile { transform: translateY(-2px); }
+
+  .th-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--ds-space-x8) var(--ds-space-x4); }
+  @media (min-width: 768px) { .th-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  @media (min-width: 1024px) { .th-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+  .th-item { position: relative; display: flex; flex-direction: column; gap: var(--ds-space-x2); color: inherit; text-decoration: none; }
+  .th-item .ds-imageframe { border-radius: var(--ds-shape-xl); }
+  .th-item__like { position: absolute; top: var(--ds-space-x2); right: var(--ds-space-x2); }
+  .th-item__like .ds-btn { background: rgb(255 255 255 / .85); color: var(--ds-color-fg-neutral); }
+  .th-item__tag { position: absolute; top: var(--ds-space-x2); left: var(--ds-space-x2); }
+  .th-item b { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; font-size: var(--ds-font-size-t05); line-height: var(--ds-line-height-t05); font-weight: var(--ds-font-weight-semibold); }
+  .th-item small { color: var(--ds-color-fg-neutral-muted); font-size: var(--ds-font-size-t03); }
+  .th-item__price { display: flex; align-items: baseline; gap: var(--ds-space-x2); font-size: var(--ds-font-size-t05); }
+  .th-item__price b { display: inline; font-size: var(--ds-font-size-t06); }
+  .th-item__price s { color: var(--ds-color-fg-neutral-subtle); font-size: var(--ds-font-size-t03); }
+  .th-item__off { color: var(--ds-color-fg-critical); font-weight: var(--ds-font-weight-bold); }
+  .th-meta { display: flex; align-items: center; gap: var(--ds-space-x2); color: var(--ds-color-fg-neutral-muted); font-size: var(--ds-font-size-t02); }
+
+  .th-card { padding: var(--ds-space-x6); border-radius: var(--ds-shape-2xl); background: var(--ds-color-bg-layer-default); box-shadow: inset 0 0 0 1px var(--ds-color-stroke-neutral-weak); }
+  .th-card h3 { margin: 0 0 var(--ds-space-x3); font-size: var(--ds-font-size-t06); font-weight: var(--ds-font-weight-bold); }
+  .th-card--brand { background: var(--ds-color-bg-brand-weak); box-shadow: none; }
+  .th-between { display: flex; align-items: center; justify-content: space-between; gap: var(--ds-space-x3); }
+
+  .th-band { padding: var(--ds-space-x10); border-radius: var(--ds-shape-3xl); background: var(--ds-color-bg-brand-solid); color: var(--ds-color-fg-on-brand-solid); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ds-space-x6); }
+  .th-band h2 { margin: 0; font-size: var(--ds-font-size-t09); line-height: var(--ds-line-height-t09); font-weight: var(--ds-font-weight-bold); letter-spacing: -0.03em; }
+  .th-band p { margin: var(--ds-space-x2) 0 0; opacity: .88; }
+  .th-band .ds-btn { background: var(--ds-color-bg-layer-default); color: var(--ds-color-fg-brand); }
+
+  .th-list { margin: 0; padding: 0; list-style: none; }
+  .th-list li a { display: flex; flex-direction: column; gap: 2px; padding-block: var(--ds-space-x3); box-shadow: inset 0 -1px 0 var(--ds-color-stroke-neutral-weak); text-decoration: none; }
+  .th-list li b { overflow: hidden; font-size: var(--ds-font-size-t04); font-weight: var(--ds-font-weight-medium); text-overflow: ellipsis; white-space: nowrap; }
+  .th-list li span { color: var(--ds-color-fg-neutral-subtle); font-size: var(--ds-font-size-t02); }
+
+  .th-foot { margin-top: var(--ds-space-x20); box-shadow: inset 0 1px 0 var(--ds-color-stroke-neutral-weak); color: var(--ds-color-fg-neutral-muted); font-size: var(--ds-font-size-t03); }
+  .th-foot__links { display: flex; flex-wrap: wrap; gap: var(--ds-space-x2) var(--ds-space-x6); padding-block: var(--ds-space-x5); box-shadow: inset 0 -1px 0 var(--ds-color-stroke-neutral-weak); }
+  .th-foot__links a { color: var(--ds-color-fg-neutral); font-weight: var(--ds-font-weight-medium); text-decoration: none; }
+  .th-foot__links a[data-strong] { color: var(--ds-color-fg-brand); font-weight: var(--ds-font-weight-bold); }
+  .th-foot__body { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--ds-space-x6); padding-block: var(--ds-space-x6) var(--ds-space-x12); }
+  .th-foot__body p { margin: 0; line-height: 22px; }
+  .th-foot__body b { display: block; margin-bottom: var(--ds-space-x2); color: var(--ds-color-fg-neutral); font-size: var(--ds-font-size-t05); }
+
+    .th-layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ds-space-x4); padding-top: var(--ds-space-x6); }
+    @media (min-width: 1024px) { .th-layout { grid-template-columns: minmax(0, 1fr) 360px; } }
+    .th-col { display: flex; flex-direction: column; gap: var(--ds-space-x4); }
+    .th-total { background: var(--ds-color-bg-brand-solid); color: var(--ds-color-fg-on-brand-solid); box-shadow: none; }
+    .th-total small { opacity: .8; }
+    .th-total b { display: block; margin-top: var(--ds-space-x1); font-size: 36px; line-height: 1.2; font-weight: var(--ds-font-weight-bold); letter-spacing: -0.03em; }
+    .th-total__acts { display: flex; gap: var(--ds-space-x2); margin-top: var(--ds-space-x6); }
+    .th-total__acts .ds-btn { background: rgb(255 255 255 / .16); color: inherit; }
+    .th-total__acts .ds-btn[data-variant="neutralSolid"] { background: var(--ds-color-bg-layer-default); color: var(--ds-color-fg-brand); }
+    .th-acct { margin: 0; padding: 0; list-style: none; }
+    .th-acct li { display: flex; align-items: center; gap: var(--ds-space-x4); padding-block: var(--ds-space-x4); box-shadow: inset 0 -1px 0 var(--ds-color-stroke-neutral-weak); }
+    .th-acct li:last-child { box-shadow: none; padding-bottom: 0; }
+    .th-acct b { display: block; font-size: var(--ds-font-size-t05); }
+    .th-acct small { color: var(--ds-color-fg-neutral-muted); }
+    .th-acct .th-amt { margin-left: auto; font-size: var(--ds-font-size-t06); font-weight: var(--ds-font-weight-bold); letter-spacing: -0.02em; white-space: nowrap; }
+    .th-tile { width: 48px; height: 48px; border-radius: var(--ds-shape-xl); }
+    .th-quick { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--ds-space-x2); }
+    .th-quick a { display: flex; flex-direction: column; align-items: center; gap: var(--ds-space-x2); padding: var(--ds-space-x3) 0; border-radius: var(--ds-shape-xl); text-decoration: none; font-size: var(--ds-font-size-t03); }
+    .th-quick a:hover { background: var(--ds-color-bg-neutral-weak-alpha); }
+    .th-spend { display: flex; align-items: center; gap: var(--ds-space-x6); }
+    .th-spend b { display: block; font-size: var(--ds-font-size-t08); letter-spacing: -0.02em; }
+    .th-cats { display: flex; flex-direction: column; gap: var(--ds-space-x3); margin-top: var(--ds-space-x5); }
+    .th-cat { display: grid; grid-template-columns: 90px minmax(0, 1fr) 80px; align-items: center; gap: var(--ds-space-x3); font-size: var(--ds-font-size-t04); }
+    .th-cat .th-num { text-align: right; }
+    .th-tx { margin: 0; padding: 0; list-style: none; }
+    .th-tx li { display: flex; align-items: center; gap: var(--ds-space-x3); padding-block: var(--ds-space-x3); box-shadow: inset 0 -1px 0 var(--ds-color-stroke-neutral-weak); }
+    .th-tx li:last-child { box-shadow: none; }
+    .th-tx b { display: block; font-size: var(--ds-font-size-t04); font-weight: var(--ds-font-weight-medium); }
+    .th-tx small { color: var(--ds-color-fg-neutral-subtle); font-size: var(--ds-font-size-t02); }
+    .th-tx .th-amt { margin-left: auto; font-weight: var(--ds-font-weight-semibold); white-space: nowrap; }
+    .th-tx .th-amt[data-in] { color: var(--ds-color-fg-brand); }
+    .th-offer { display: flex; align-items: center; gap: var(--ds-space-x4); text-decoration: none; }
+    .th-offer b { display: block; }
+    .th-offer small { color: var(--ds-color-fg-neutral-muted); }
+  </style>
+</head>
+<body>
+<header class="th-gnb"><div class="th-wrap th-gnb__row">
+  <a class="th-logo" href="#">머니온</a>
+  <nav class="th-menu" aria-label="주요 메뉴"><a href="#" aria-current="page">홈</a><a href="#">소비</a><a href="#">투자</a><a href="#">대출</a><a href="#">보험</a><a href="#">혜택</a></nav>
+  
+  <div class="th-gnb__end"><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" aria-label="검색"><i class="ds-icon ds-icon--search" aria-hidden="true"></i></button><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" aria-label="알림"><i class="ds-icon ds-icon--bell" aria-hidden="true"></i></button><span class="ds-avatar" data-size="36" role="img" aria-label="서윤"><span class="ds-avatar__initials" aria-hidden="true">서</span></span></div>
+  <span class="th-gnb__burger"><button type="button" class="ds-btn" data-variant="ghost" data-size="small" data-layout="iconOnly" aria-label="메뉴 열기"><i class="ds-icon ds-icon--menu" aria-hidden="true"></i></button></span>
+</div></header>
+<main class="th-wrap th-layout">
+  <div class="th-col">
+    <div class="th-card th-total"><small>내 자산</small><b class="th-num">42,318,900원</b><small>어제보다 <span style="opacity: 1; font-weight: var(--ds-font-weight-semibold)">+128,400원</span></small><div class="th-total__acts"><button type="button" class="ds-btn" data-variant="neutralSolid" data-size="medium"><i class="ds-icon ds-icon--arrow-right" aria-hidden="true"></i>송금</button><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="medium">이체 내역</button><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="medium"><i class="ds-icon ds-icon--plus" aria-hidden="true"></i>계좌 추가</button></div></div>
+    <div class="th-card"><div class="th-between"><h3>계좌</h3><a class="ds-link" href="#">전체 보기</a></div><ul class="th-acct"><li><span class="th-tile"><svg class="th-art" data-tone="brand" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 18v-7"/><path d="M11.119 2.205a2 2 0 0 1 1.762 0l7.84 3.846A.5.5 0 0 1 20.5 7h-17a.5.5 0 0 1-.22-.949z"/><path d="M14 18v-7"/><path d="M18 18v-7"/><path d="M3 22h18"/><path d="M6 18v-7"/></svg></span><span><b>머니온 통장</b><small>입출금 · 1002-***-5541</small></span><span class="th-amt th-num">8,120,400원</span></li><li><span class="th-tile"><svg class="th-art" data-tone="brand" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 17h3v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-3a3.16 3.16 0 0 0 2-2h1a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1h-1a5 5 0 0 0-2-4V3a4 4 0 0 0-3.2 1.6l-.3.4H11a6 6 0 0 0-6 6v1a5 5 0 0 0 2 4v3a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1z"/><path d="M16 10h.01"/><path d="M2 8v1a2 2 0 0 0 2 2h1"/></svg></span><span><b>목돈 모으기</b><small>적금 · 12개월 중 7개월</small></span><span class="th-amt th-num">7,000,000원</span></li><li><span class="th-tile"><svg class="th-art" data-tone="brand" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="m19 9-5 5-4-4-3 3"/></svg></span><span><b>투자 계좌</b><small>국내 주식 · 수익률 +6.2%</small></span><span class="th-amt th-num">15,438,500원</span></li><li><span class="th-tile"><svg class="th-art" data-tone="brand" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/><path d="M6 14h2"/></svg></span><span><b>머니온 카드</b><small>이번 달 사용 1,091,100원</small></span><span class="th-amt th-num">11,760,000원</span></li></ul></div>
+    <div class="th-card"><div class="th-between"><h3>이번 달 소비</h3><div class="ds-segmented" role="group" aria-label="달" data-size="small"><button type="button" class="ds-segmented__item" aria-pressed="true">11월</button><button type="button" class="ds-segmented__item" aria-pressed="false">10월</button></div></div><div class="th-spend"><svg class="tp-chart tp-donut" viewBox="0 0 120 120" style="max-width:120px" role="img" aria-label="소비 비율" data-tp="{&quot;t&quot;:&quot;pie&quot;,&quot;u&quot;:&quot;&quot;,&quot;s&quot;:[{&quot;n&quot;:&quot;식비&quot;,&quot;c&quot;:&quot;var(--ds-color-chart-series-1)&quot;,&quot;v&quot;:38,&quot;p&quot;:38},{&quot;n&quot;:&quot;교통&quot;,&quot;c&quot;:&quot;var(--ds-color-chart-series-2)&quot;,&quot;v&quot;:14,&quot;p&quot;:14},{&quot;n&quot;:&quot;쇼핑&quot;,&quot;c&quot;:&quot;var(--ds-color-chart-series-3)&quot;,&quot;v&quot;:22,&quot;p&quot;:22},{&quot;n&quot;:&quot;구독&quot;,&quot;c&quot;:&quot;var(--ds-color-chart-series-4)&quot;,&quot;v&quot;:9,&quot;p&quot;:9},{&quot;n&quot;:&quot;기타&quot;,&quot;c&quot;:&quot;var(--ds-color-chart-series-5)&quot;,&quot;v&quot;:17,&quot;p&quot;:17}]}"><circle cx="60" cy="60" r="53" fill="none" stroke="var(--ds-color-bg-neutral)" stroke-width="14"/><circle data-i="0" cx="60" cy="60" r="53" fill="none" stroke="var(--ds-color-chart-series-1)" stroke-width="14" stroke-dasharray="124.5 208.5" stroke-dashoffset="0.0" transform="rotate(-90 60 60)"/><circle data-i="1" cx="60" cy="60" r="53" fill="none" stroke="var(--ds-color-chart-series-2)" stroke-width="14" stroke-dasharray="44.6 288.4" stroke-dashoffset="-126.5" transform="rotate(-90 60 60)"/><circle data-i="2" cx="60" cy="60" r="53" fill="none" stroke="var(--ds-color-chart-series-3)" stroke-width="14" stroke-dasharray="71.3 261.7" stroke-dashoffset="-173.2" transform="rotate(-90 60 60)"/><circle data-i="3" cx="60" cy="60" r="53" fill="none" stroke="var(--ds-color-chart-series-4)" stroke-width="14" stroke-dasharray="28.0 305.0" stroke-dashoffset="-246.4" transform="rotate(-90 60 60)"/><circle data-i="4" cx="60" cy="60" r="53" fill="none" stroke="var(--ds-color-chart-series-5)" stroke-width="14" stroke-dasharray="54.6 278.4" stroke-dashoffset="-276.4" transform="rotate(-90 60 60)"/></svg><div><small class="th-muted">11월 1일 ~ 4일</small><b class="th-num">1,091,100원</b><small class="th-muted">지난달 같은 기간보다 8% 적게 썼어요</small></div></div><div class="th-cats"><div class="th-cat"><span>식비</span><div class="ds-progress" role="progressbar" aria-valuenow="38" aria-valuemin="0" aria-valuemax="100" aria-label="식비 비율" style="--ds-progress-value: 38%" data-size="small"></div><span class="th-num th-muted">412,300원</span></div><div class="th-cat"><span>교통</span><div class="ds-progress" role="progressbar" aria-valuenow="14" aria-valuemin="0" aria-valuemax="100" aria-label="교통 비율" style="--ds-progress-value: 14%" data-size="small"></div><span class="th-num th-muted">152,800원</span></div><div class="th-cat"><span>쇼핑</span><div class="ds-progress" role="progressbar" aria-valuenow="22" aria-valuemin="0" aria-valuemax="100" aria-label="쇼핑 비율" style="--ds-progress-value: 22%" data-size="small"></div><span class="th-num th-muted">240,900원</span></div><div class="th-cat"><span>구독</span><div class="ds-progress" role="progressbar" aria-valuenow="9" aria-valuemin="0" aria-valuemax="100" aria-label="구독 비율" style="--ds-progress-value: 9%" data-size="small"></div><span class="th-num th-muted">98,700원</span></div><div class="th-cat"><span>기타</span><div class="ds-progress" role="progressbar" aria-valuenow="17" aria-valuemin="0" aria-valuemax="100" aria-label="기타 비율" style="--ds-progress-value: 17%" data-size="small"></div><span class="th-num th-muted">186,400원</span></div></div></div>
+  </div>
+  <aside class="th-col" aria-label="옆 내용">
+    <div class="th-card"><h3>자주 쓰는 기능</h3><div class="th-quick"><a href="#"><span class="th-tile"><svg class="th-art" data-tone="brand" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"/><path d="m21.854 2.147-10.94 10.939"/></svg></span>송금</a><a href="#"><span class="th-tile"><svg class="th-art" data-tone="brand" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="5" height="5" x="3" y="3" rx="1"/><rect width="5" height="5" x="16" y="3" rx="1"/><rect width="5" height="5" x="3" y="16" rx="1"/><path d="M21 16h-3a2 2 0 0 0-2 2v3"/><path d="M21 21v.01"/><path d="M12 7v3a2 2 0 0 1-2 2H7"/><path d="M3 12h.01"/><path d="M12 3h.01"/><path d="M12 16v.01"/><path d="M16 12h1"/><path d="M21 12v.01"/><path d="M12 21v-1"/></svg></span>QR 결제</a><a href="#"><span class="th-tile"><svg class="th-art" data-tone="brand" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 17V7"/><path d="M16 8h-6a2 2 0 0 0 0 4h4a2 2 0 0 1 0 4H8"/><path d="M4 3a1 1 0 0 1 1-1 1.3 1.3 0 0 1 .7.2l.933.6a1.3 1.3 0 0 0 1.4 0l.934-.6a1.3 1.3 0 0 1 1.4 0l.933.6a1.3 1.3 0 0 0 1.4 0l.933-.6a1.3 1.3 0 0 1 1.4 0l.934.6a1.3 1.3 0 0 0 1.4 0l.933-.6A1.3 1.3 0 0 1 19 2a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1 1.3 1.3 0 0 1-.7-.2l-.933-.6a1.3 1.3 0 0 0-1.4 0l-.934.6a1.3 1.3 0 0 1-1.4 0l-.933-.6a1.3 1.3 0 0 0-1.4 0l-.933.6a1.3 1.3 0 0 1-1.4 0l-.934-.6a1.3 1.3 0 0 0-1.4 0l-.933.6a1.3 1.3 0 0 1-.7.2 1 1 0 0 1-1-1z"/></svg></span>청구서</a><a href="#"><span class="th-tile"><svg class="th-art" data-tone="brand" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v3"/><path d="M16 2v3"/><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M8 13h.01"/><path d="M12 13h.01"/><path d="M16 13h.01"/><path d="M8 17h.01"/><path d="M12 17h.01"/><path d="M16 17h.01"/></svg></span>정기 결제</a><a href="#"><span class="th-tile"><svg class="th-art" data-tone="brand" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><path d="M16 3.128a4 4 0 0 1 0 7.744"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><circle cx="9" cy="7" r="4"/></svg></span>모임 통장</a><a href="#"><span class="th-tile"><svg class="th-art" data-tone="brand" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 7v14"/><path d="M20 11v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-8"/><path d="M7.5 7a1 1 0 0 1 0-5A4.8 8 0 0 1 12 7a4.8 8 0 0 1 4.5-5 1 1 0 0 1 0 5"/><rect x="3" y="7" width="18" height="4" rx="1"/></svg></span>선물하기</a><a href="#"><span class="th-tile"><svg class="th-art" data-tone="brand" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></span>보험 조회</a><a href="#"><span class="th-tile"><svg class="th-art" data-tone="brand" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></span>더 보기</a></div></div>
+    <div class="th-card"><div class="th-between"><h3>최근 거래</h3><a class="ds-link" href="#">더 보기</a></div><ul class="th-tx"><li><span class="ds-avatar" data-size="36" role="img" aria-label="스타벅스 강남점"><span class="ds-avatar__initials" aria-hidden="true">스</span></span><span><b>스타벅스 강남점</b><small>오늘 08:41 · 식비</small></span><span class="th-amt th-num">-5,600원</span></li><li><span class="ds-avatar" data-size="36" role="img" aria-label="월급"><span class="ds-avatar__initials" aria-hidden="true">월</span></span><span><b>월급</b><small>11.03 · 급여</small></span><span class="th-amt th-num" data-in>+3,250,000원</span></li><li><span class="ds-avatar" data-size="36" role="img" aria-label="넷플릭스"><span class="ds-avatar__initials" aria-hidden="true">넷</span></span><span><b>넷플릭스</b><small>11.02 · 구독</small></span><span class="th-amt th-num">-17,000원</span></li><li><span class="ds-avatar" data-size="36" role="img" aria-label="이마트 성수점"><span class="ds-avatar__initials" aria-hidden="true">이</span></span><span><b>이마트 성수점</b><small>11.01 · 쇼핑</small></span><span class="th-amt th-num">-84,200원</span></li><li><span class="ds-avatar" data-size="36" role="img" aria-label="지하철"><span class="ds-avatar__initials" aria-hidden="true">지</span></span><span><b>지하철</b><small>11.01 · 교통</small></span><span class="th-amt th-num">-1,550원</span></li><li><span class="ds-avatar" data-size="36" role="img" aria-label="김민수"><span class="ds-avatar__initials" aria-hidden="true">김</span></span><span><b>김민수</b><small>10.31 · 송금 받음</small></span><span class="th-amt th-num" data-in>+50,000원</span></li></ul></div>
+    <a class="th-card th-card--brand th-offer" href="#"><span class="th-tile"><svg class="th-art" data-tone="brand" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m15 9-6 6"/><path d="M9 9h.01"/><path d="M15 15h.01"/></svg></span><span><b>이번 달 카드 혜택 남았어요</b><small>커피 50% 할인 2회 · 11월 30일까지</small></span><i class="ds-icon ds-icon--chevron-right" aria-hidden="true"></i></a>
+    <div class="ds-callout" data-tone="informative"><i class="ds-icon ds-icon--info-solid" aria-hidden="true"></i><p class="ds-callout__content"><strong class="ds-callout__title">안내</strong>  11월 8일 02:00 ~ 06:00 시스템 점검으로 송금이 잠시 멈춰요.</p></div>
+  </aside>
+</main>
+<footer class="th-foot"><div class="th-wrap">
+  <nav class="th-foot__links" aria-label="약관"><a href="#">이용약관</a><a href="#" data-strong>개인정보 처리방침</a><a href="#">전자금융거래 약관</a><a href="#">고객센터</a></nav>
+  <div class="th-foot__body"><p><b>머니온</b>이 화면은 yds 테마 예시예요. 회사 이름, 상품, 연락처는 모두 가상입니다.<br>서울시 가상구 예시로 88 · money@example.com</p><p>© 2026 머니온</p></div>
+</div></footer>
+</body>
+</html>

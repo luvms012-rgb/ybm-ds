@@ -1,4 +1,4 @@
-<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/select-trigger.html -->
+<!-- https://luvms012-rgb.github.io/yds/site/components/select-trigger.html -->
 
 # Select Trigger
 

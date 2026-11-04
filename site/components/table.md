@@ -1,4 +1,4 @@
-<!-- https://luvms012-rgb.github.io/ybm-ds/site/components/table.html -->
+<!-- https://luvms012-rgb.github.io/yds/site/components/table.html -->
 
 # Table
 
