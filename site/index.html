@@ -9,9 +9,9 @@
 <script>try { var t = localStorage.getItem("ybm-site-theme"); if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.dataset.theme = "dark"; } catch (e) {}</script>
 <link rel="icon" href="assets/logo-ybmnet.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../dist/ybm-ds.css">
-<link rel="stylesheet" href="assets/site.css?v=62b9abbc">
+<link rel="stylesheet" href="assets/site.css?v=1c03b7bb">
 <script src="../dist/ybm-ds.js" defer></script>
-<script src="assets/site.js?v=62b9abbc" defer></script>
+<script src="assets/site.js?v=1c03b7bb" defer></script>
 </head>
 <body class="site">
 <a class="site-skip" href="#main">본문 바로가기</a>
@@ -50,7 +50,7 @@
 <h2 id="ai">AI로 시작하기<a class="site-anchor" href="#ai" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
 <p>아래 글을 AI 코딩 도구(ChatGPT, Claude, Cursor 등)에 붙여 넣으면 됩니다.</p>
 <h3>설치하기</h3>
-<figure class="ds-codeblock" data-wrap>
+<figure class="ds-codeblock" data-lang="text" data-wrap>
   <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">text</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
   <pre class="ds-codeblock__code"><code>이 프로젝트에 yds를 설치해 줘.
 문서: https://luvms012-rgb.github.io/ybm-ds/site/llms.txt
@@ -58,7 +58,7 @@
 </figure>
 <h3>브랜드 컬러 입히기</h3>
 <p>서비스에 쓸 때 이어서 붙여 넣습니다. 대괄호 안에 브랜드 컬러를 넣습니다.</p>
-<figure class="ds-codeblock" data-wrap>
+<figure class="ds-codeblock" data-lang="text" data-wrap>
   <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">text</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
   <pre class="ds-codeblock__code"><code>이 서비스의 브랜드 컬러를 [#12a150]으로 맞춰 줘.
 문서: https://luvms012-rgb.github.io/ybm-ds/site/llms.txt
@@ -66,14 +66,14 @@
 </figure>
 <h3>화면 만들기</h3>
 <p>대괄호 안만 내 상황에 맞게 바꿉니다.</p>
-<figure class="ds-codeblock" data-wrap>
+<figure class="ds-codeblock" data-lang="text" data-wrap>
   <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">text</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
   <pre class="ds-codeblock__code"><code>yds로 [만들 화면, 예: 회원 목록 화면]을 만들어 줘.
 문서: https://luvms012-rgb.github.io/ybm-ds/site/llms.txt
 비슷한 화면이 Templates에 있으면 그 화면에서 시작해 줘.</code></pre>
 </figure>
 <h3>규칙 점검하기</h3>
-<figure class="ds-codeblock" data-wrap>
+<figure class="ds-codeblock" data-lang="text" data-wrap>
   <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">text</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
   <pre class="ds-codeblock__code"><code>이 화면이 yds 규칙을 지키는지 점검하고 고쳐 줘.
 문서: https://luvms012-rgb.github.io/ybm-ds/site/llms.txt
@@ -82,17 +82,22 @@
 
 <h2 id="start">직접 시작하기<a class="site-anchor" href="#start" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
 <p><code>&lt;head&gt;</code>에 두 줄을 넣으면 글꼴, 토큰, 아이콘, 컴포넌트가 함께 들어옵니다. 쓰는 법은 <a class="ds-link" href="components/index.html">Components</a>에 있습니다.</p>
-<figure class="ds-codeblock">
-  <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">html</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
+<div class="site-codetabs"><div class="site-codetabs__panel"><figure class="ds-codeblock" data-lang="html">
+  <figcaption class="ds-codeblock__header"><div class="ds-chiptabs site-codetabs__bar" role="tablist" aria-label="보기 방식"><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-tab="0">최신 버전</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-tab="1">버전 고정 v1.0.0</button></div><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
   <pre class="ds-codeblock__code"><code>&lt;<span class="hl-t">link</span> <span class="hl-f">rel</span>=<span class="hl-s">&quot;stylesheet&quot;</span> <span class="hl-f">href</span>=<span class="hl-s">&quot;https://luvms012-rgb.github.io/ybm-ds/dist/ybm-ds.css&quot;</span>&gt;
 &lt;<span class="hl-t">script</span> <span class="hl-f">src</span>=<span class="hl-s">&quot;https://luvms012-rgb.github.io/ybm-ds/dist/ybm-ds.js&quot;</span> <span class="hl-f">defer</span>&gt;&lt;/<span class="hl-t">script</span>&gt;</code></pre>
-</figure>
+</figure></div><div class="site-codetabs__panel" hidden><figure class="ds-codeblock" data-lang="html">
+  <figcaption class="ds-codeblock__header"><div class="ds-chiptabs site-codetabs__bar" role="tablist" aria-label="보기 방식"><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-tab="0">최신 버전</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-tab="1">버전 고정 v1.0.0</button></div><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
+  <pre class="ds-codeblock__code"><code>&lt;<span class="hl-t">link</span> <span class="hl-f">rel</span>=<span class="hl-s">&quot;stylesheet&quot;</span> <span class="hl-f">href</span>=<span class="hl-s">&quot;https://cdn.jsdelivr.net/gh/luvms012-rgb/ybm-ds@v1.0.0/dist/ybm-ds.css&quot;</span>&gt;
+&lt;<span class="hl-t">script</span> <span class="hl-f">src</span>=<span class="hl-s">&quot;https://cdn.jsdelivr.net/gh/luvms012-rgb/ybm-ds@v1.0.0/dist/ybm-ds.js&quot;</span> <span class="hl-f">defer</span>&gt;&lt;/<span class="hl-t">script</span>&gt;</code></pre>
+</figure></div></div>
+<p>운영 서비스는 버전을 고정한 주소를 쓰고, 새 버전은 <a class="ds-link" href="updates.html">Updates</a>를 확인한 뒤 올립니다.</p>
 
 <h2 id="migrate">내 사이트에 적용해보기<a class="site-anchor" href="#migrate" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
 <p>운영 중인 사이트는 한 번에 바꾸지 않고 아래 순서대로 적용합니다. 브랜드 컬러와 규칙 점검은 위 <a class="ds-link" href="#ai">AI로 시작하기</a>의 글을 그대로 씁니다.</p>
 <h3>1. 사이트 살펴보기</h3>
 <p>아직 고치지 않고, 무엇을 어떤 순서로 바꿀지 먼저 정합니다.</p>
-<figure class="ds-codeblock" data-wrap>
+<figure class="ds-codeblock" data-lang="text" data-wrap>
   <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">text</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
   <pre class="ds-codeblock__code"><code>이 사이트에 yds를 옮겨 오려고 해. 아직 고치지 말고 먼저 살펴봐 줘.
 문서: https://luvms012-rgb.github.io/ybm-ds/site/llms.txt
@@ -100,7 +105,7 @@
 </figure>
 <h3>2. DS 넣기</h3>
 <p>공통 &lt;head&gt;에 넣습니다. 기존 CSS가 DS보다 먼저 적용되어 지금 화면은 거의 그대로입니다.</p>
-<figure class="ds-codeblock" data-wrap>
+<figure class="ds-codeblock" data-lang="text" data-wrap>
   <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">text</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
   <pre class="ds-codeblock__code"><code>이 사이트의 공통 &lt;head&gt;에 yds를 넣어 줘.
 문서: https://luvms012-rgb.github.io/ybm-ds/site/llms.txt
@@ -108,7 +113,7 @@
 </figure>
 <h3>3. 화면 하나씩 바꾸기</h3>
 <p>화면마다 대괄호 안만 바꿔 붙여 넣습니다.</p>
-<figure class="ds-codeblock" data-wrap>
+<figure class="ds-codeblock" data-lang="text" data-wrap>
   <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">text</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
   <pre class="ds-codeblock__code"><code>[바꿀 화면, 예: 회원 정보 수정] 화면을 yds 컴포넌트로 바꿔 줘.
 문서: https://luvms012-rgb.github.io/ybm-ds/site/llms.txt
@@ -117,12 +122,12 @@
 
 <h2 id="theme">다크 모드<a class="site-anchor" href="#theme" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
 <p><code>html</code>에 속성 하나를 붙이면 모든 색이 어두운 화면용으로 바뀝니다. 색을 토큰으로만 썼다면 따로 고칠 것이 없습니다.</p>
-<div class="site-codetabs"><div class="site-codetabs__panel"><figure class="ds-codeblock" data-wrap>
+<div class="site-codetabs"><div class="site-codetabs__panel"><figure class="ds-codeblock" data-lang="text" data-wrap>
   <figcaption class="ds-codeblock__header"><div class="ds-chiptabs site-codetabs__bar" role="tablist" aria-label="보기 방식"><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-tab="0">AI 요청</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-tab="1">HTML</button></div><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
   <pre class="ds-codeblock__code"><code>이 사이트에 yds 다크 모드를 넣어 줘.
 문서: https://luvms012-rgb.github.io/ybm-ds/site/llms.txt
 화면 오른쪽 위에 라이트, 다크 전환 버튼을 만들고, 처음에는 기기 설정을 따르게 해 줘.</code></pre>
-</figure></div><div class="site-codetabs__panel" hidden><figure class="ds-codeblock">
+</figure></div><div class="site-codetabs__panel" hidden><figure class="ds-codeblock" data-lang="html">
   <figcaption class="ds-codeblock__header"><div class="ds-chiptabs site-codetabs__bar" role="tablist" aria-label="보기 방식"><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-tab="0">AI 요청</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-tab="1">HTML</button></div><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
   <pre class="ds-codeblock__code"><code><span class="hl-m">&lt;!-- 다크 모드 --&gt;</span>
 &lt;<span class="hl-t">html</span> <span class="hl-f">lang</span>=<span class="hl-s">&quot;ko&quot;</span> <span class="hl-f">data-theme</span>=<span class="hl-s">&quot;dark&quot;</span>&gt;
@@ -137,8 +142,8 @@
 <p>주소를 알려 주면 AI가 필요한 것을 골라 읽습니다. 주소를 열지 못하는 도구에는 <code>llms-full.txt</code>를 첨부합니다.</p>
 <div class="ds-table-wrap"><table class="ds-table" data-density="compact">
 <thead><tr><th scope="col">파일</th><th scope="col">내용</th></tr></thead>
-<tbody><tr><td><a class="ds-link" href="llms.txt" target="_blank" rel="noopener">llms.txt</a></td><td>전체 목차와 지킬 규칙입니다. AI가 여기서 시작합니다.</td></tr>
-<tr><td><a class="ds-link" href="llms-full.txt" target="_blank" rel="noopener">llms-full.txt</a></td><td>모든 문서를 한 파일로 모았습니다.</td></tr>
+<tbody><tr><td><a class="ds-link" href="llms-full.txt" target="_blank" rel="noopener">llms-full.txt</a></td><td>모든 문서를 한 파일로 모았습니다.</td></tr>
+<tr><td><a class="ds-link" href="llms.txt" target="_blank" rel="noopener">llms.txt</a></td><td>전체 목차와 지킬 규칙입니다. AI가 여기서 시작합니다.</td></tr>
 <tr><td><a class="ds-link" href="ai/AGENTS.md" target="_blank" rel="noopener">AGENTS.md</a></td><td>프로젝트 맨 위 폴더에 두면 AI 도구가 늘 읽는 규칙 파일입니다.</td></tr>
 <tr><td><a class="ds-link" href="ai/CLAUDE.md" target="_blank" rel="noopener">CLAUDE.md</a>, <a class="ds-link" href="ai/yds.mdc" target="_blank" rel="noopener">yds.mdc</a></td><td>Claude, Cursor용 규칙 파일입니다. 내용은 AGENTS.md와 같습니다.</td></tr>
 <tr><td><a class="ds-link" href="https://luvms012-rgb.github.io/ybm-ds/components.json" target="_blank" rel="noopener">components.json</a></td><td>쓸 수 있는 컴포넌트와 속성 목록입니다.</td></tr>
@@ -146,13 +151,10 @@
 <tr><td><a class="ds-link" href="https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/tokens.css" target="_blank" rel="noopener">tokens.css</a></td><td>색, 간격, 글자 크기 같은 <code>--ds-*</code> 토큰입니다.</td></tr>
 <tr><td><a class="ds-link" href="ai/icons.json" target="_blank" rel="noopener">icons.json</a></td><td>쓸 수 있는 아이콘 이름과 쓰임입니다.</td></tr>
 <tr><td><a class="ds-link" href="ai/yds-check.mjs" target="_blank" rel="noopener">yds-check.mjs</a></td><td><code>node yds-check.mjs 폴더</code>로 규칙을 어긴 곳을 찾습니다.</td></tr>
-<tr><td>페이지별 <code>.md</code></td><td>문서 제목 아래 Markdown 메뉴에서 그 페이지만 복사합니다.</td></tr></tbody></table></div>
-<h3>개발 도구에서 쓰는 파일</h3>
-<div class="ds-table-wrap"><table class="ds-table" data-density="compact">
-<thead><tr><th scope="col">파일</th><th scope="col">내용</th></tr></thead>
-<tbody><tr><td><a class="ds-link" href="https://luvms012-rgb.github.io/ybm-ds/tokens/design-tokens.json" target="_blank" rel="noopener">design-tokens.json</a></td><td>표준 토큰 형식입니다. 디자인 도구와 토큰 변환기에서 읽습니다.</td></tr>
+<tr><td><a class="ds-link" href="https://luvms012-rgb.github.io/ybm-ds/tokens/design-tokens.json" target="_blank" rel="noopener">design-tokens.json</a></td><td>표준 토큰 형식입니다. 디자인 도구와 토큰 변환기에서 읽습니다.</td></tr>
 <tr><td><a class="ds-link" href="https://luvms012-rgb.github.io/ybm-ds/tokens/tokens.js" target="_blank" rel="noopener">tokens.js</a></td><td>스크립트에서 토큰 값을 쓸 때 불러옵니다.</td></tr>
-<tr><td><a class="ds-link" href="https://luvms012-rgb.github.io/ybm-ds/tokens/tailwind.preset.js" target="_blank" rel="noopener">tailwind.preset.js</a></td><td>Tailwind에 yds 토큰을 연결합니다.</td></tr></tbody></table></div>
+<tr><td><a class="ds-link" href="https://luvms012-rgb.github.io/ybm-ds/tokens/tailwind.preset.js" target="_blank" rel="noopener">tailwind.preset.js</a></td><td>Tailwind에 yds 토큰을 연결합니다.</td></tr>
+<tr><td>페이지별 <code>.md</code></td><td>문서 제목 아래 Markdown 메뉴에서 그 페이지만 복사합니다.</td></tr></tbody></table></div>
 <p>Figma 변수와 CSS 변수는 이름이 같습니다. AI에 <a class="ds-link" href="https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=2608-2" target="_blank" rel="noopener">Figma</a> 화면을 주면 같은 토큰으로 옮깁니다.</p>
 
 

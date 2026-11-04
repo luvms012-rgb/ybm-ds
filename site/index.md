@@ -48,10 +48,21 @@ yds로 [만들 화면, 예: 회원 목록 화면]을 만들어 줘.
 
 `<head>`에 두 줄을 넣으면 글꼴, 토큰, 아이콘, 컴포넌트가 함께 들어옵니다. 쓰는 법은 [Components](https://luvms012-rgb.github.io/ybm-ds/site/components/index.md)에 있습니다.
 
+**최신 버전**
+
 ```html
 <link rel="stylesheet" href="https://luvms012-rgb.github.io/ybm-ds/dist/ybm-ds.css">
 <script src="https://luvms012-rgb.github.io/ybm-ds/dist/ybm-ds.js" defer></script>
 ```
+
+**버전 고정 v1.0.0**
+
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/luvms012-rgb/ybm-ds@v1.0.0/dist/ybm-ds.css">
+<script src="https://cdn.jsdelivr.net/gh/luvms012-rgb/ybm-ds@v1.0.0/dist/ybm-ds.js" defer></script>
+```
+
+운영 서비스는 버전을 고정한 주소를 쓰고, 새 버전은 [Updates](https://luvms012-rgb.github.io/ybm-ds/site/updates.html)를 확인한 뒤 올립니다.
 
 ## 내 사이트에 적용해보기
 
@@ -117,8 +128,8 @@ yds로 [만들 화면, 예: 회원 목록 화면]을 만들어 줘.
 
 | 파일 | 내용 |
 | --- | --- |
-| [llms.txt](https://luvms012-rgb.github.io/ybm-ds/site/llms.txt) | 전체 목차와 지킬 규칙입니다. AI가 여기서 시작합니다. |
 | [llms-full.txt](https://luvms012-rgb.github.io/ybm-ds/site/llms-full.txt) | 모든 문서를 한 파일로 모았습니다. |
+| [llms.txt](https://luvms012-rgb.github.io/ybm-ds/site/llms.txt) | 전체 목차와 지킬 규칙입니다. AI가 여기서 시작합니다. |
 | [AGENTS.md](https://luvms012-rgb.github.io/ybm-ds/site/ai/AGENTS.md) | 프로젝트 맨 위 폴더에 두면 AI 도구가 늘 읽는 규칙 파일입니다. |
 | [CLAUDE.md](https://luvms012-rgb.github.io/ybm-ds/site/ai/CLAUDE.md), [yds.mdc](https://luvms012-rgb.github.io/ybm-ds/site/ai/yds.mdc) | Claude, Cursor용 규칙 파일입니다. 내용은 AGENTS.md와 같습니다. |
 | [components.json](https://luvms012-rgb.github.io/ybm-ds/components.json) | 쓸 수 있는 컴포넌트와 속성 목록입니다. |
@@ -126,14 +137,9 @@ yds로 [만들 화면, 예: 회원 목록 화면]을 만들어 줘.
 | [tokens.css](https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main/dist/tokens.css) | 색, 간격, 글자 크기 같은 `--ds-*` 토큰입니다. |
 | [icons.json](https://luvms012-rgb.github.io/ybm-ds/site/ai/icons.json) | 쓸 수 있는 아이콘 이름과 쓰임입니다. |
 | [yds-check.mjs](https://luvms012-rgb.github.io/ybm-ds/site/ai/yds-check.mjs) | `node yds-check.mjs 폴더`로 규칙을 어긴 곳을 찾습니다. |
-| 페이지별 `.md` | 문서 제목 아래 Markdown 메뉴에서 그 페이지만 복사합니다. |
-
-### 개발 도구에서 쓰는 파일
-
-| 파일 | 내용 |
-| --- | --- |
 | [design-tokens.json](https://luvms012-rgb.github.io/ybm-ds/tokens/design-tokens.json) | 표준 토큰 형식입니다. 디자인 도구와 토큰 변환기에서 읽습니다. |
 | [tokens.js](https://luvms012-rgb.github.io/ybm-ds/tokens/tokens.js) | 스크립트에서 토큰 값을 쓸 때 불러옵니다. |
 | [tailwind.preset.js](https://luvms012-rgb.github.io/ybm-ds/tokens/tailwind.preset.js) | Tailwind에 yds 토큰을 연결합니다. |
+| 페이지별 `.md` | 문서 제목 아래 Markdown 메뉴에서 그 페이지만 복사합니다. |
 
 Figma 변수와 CSS 변수는 이름이 같습니다. AI에 [Figma](https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=2608-2) 화면을 주면 같은 토큰으로 옮깁니다.

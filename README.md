@@ -124,6 +124,34 @@ DS 전체가 `@layer ds.tokens, ds.base, ds.icons, ds.components, ds.utilities` 
 
 ---
 
+### 3.1 검사와 버전 (2026-11-04)
+
+```
+node sync.mjs check            전체 검사 (tools/check.mjs). 배포 전에 deploy 가 먼저 돌린다
+node sync.mjs check --regen    원본으로 다시 만들어 바뀌는 파일이 없는지도 본다 (GitHub 에 올릴 때 자동으로 돈다)
+node sync.mjs check --live     라이브 파일이 로컬과 같은지 (배포 1 ~ 2분 뒤)
+node sync.mjs release 1.1.0    새 버전: VERSION, DS 머리 버전, Updates 버전 → 검사 → 배포 → 태그 v1.1.0
+```
+
+- 검사 항목: 링크, 사이트 규칙, 템플릿과 예시(site/ai/yds-check.mjs), 마크다운, 싱크(components.json ↔ CSS ↔ README ↔ 사이트), 컴포넌트 9곳, 빌드 경고.
+- 버전은 `VERSION` 하나가 원본이다. 서비스는 버전 고정 주소 `https://cdn.jsdelivr.net/gh/luvms012-rgb/ybm-ds@v버전/dist/ybm-ds.css` 를 쓴다. 최신 주소(`…/ybm-ds/dist/ybm-ds.css`)는 늘 main 이다.
+- 버전 올리는 법: 고치지 않던 서비스 화면이 바뀔 수 있으면(부품 크기, 배치, 이름 지움) 가운데 자리(1.**1**.0), 고침과 추가만이면 끝자리(1.0.**1**), 예전 클래스나 토큰을 지우면 앞자리(**2**.0.0). 예전 이름은 지우기 전에 compat 파일로 한 번 이어 준다.
+- Updates 에 소식을 먼저 적고(site/src/updates.json 맨 위, 화면이 바뀔 수 있는 것은 type "확인할 변경") release 를 돌리면 그 소식에 버전이 붙는다.
+
+### 3.2 새 컴포넌트 넣기 (9곳)
+
+빠지면 `node sync.mjs check` 의 "6 컴포넌트 9곳" 이 알려 준다.
+
+1. `dist/components.css` - 머리 주석(번호, 이름, 선택지, 마크업, Figma 규격)과 규칙
+2. `components.json` - 번호, 이름, 클래스, Figma 노드
+3. `index.html` - 미리보기 `<section id="c-번호">`
+4. `site/src/figma-notes.json` - lead(한 줄 설명), dos(사용 지침) 또는 README 6.2
+5. `site/src/search-ko.json` - 한글로 찾을 낱말
+6. `site/src/covers.html` - 대표 그림 `<template data-slug="…">`
+7. `site/src/anatomy-ko.json` - 새 부품 이름이면 설명
+8. `site/src/examples/*.json` - 실제 쓰임 예시 2 ~ 3개
+9. `node site/build.mjs` - 사이트 페이지와 마크다운, AI 파일이 생긴다. Figma 는 최종 검토 때
+
 ## 4. Figma 파일 구조
 
 2026-10-27 페이지 구성을 레퍼런스 라이브러리 형식으로 바꿨다. 컴포넌트는 카테고리 페이지에 나뉘고, 컴포넌트마다 문서 프레임 1개(문서 헤더 + 본문)에 담긴다. 본문은 위쪽 "Examples"(속성별 예시 블록 - 마스터 컴포넌트의 인스턴스로만 구성, 문서당 최대 6개) + 아래쪽 "마스터 컴포넌트" 순서다. 컴포넌트 노드 ID는 그대로다.

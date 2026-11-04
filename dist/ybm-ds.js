@@ -419,6 +419,6 @@
     if (zone) zone.removeAttribute("data-state");
   });
 
-  window.DS = { openDialog: openDialog, closeDialog: closeDialog, snackbar: snackbar, endRefresh: endRefresh, init: init };
+  window.DS = { version: "1.0.0", openDialog: openDialog, closeDialog: closeDialog, snackbar: snackbar, endRefresh: endRefresh, init: init };  // version 은 VERSION 과 같다 (node sync.mjs release 가 바꾼다)
   window.YBM = window.DS;  // 예전 이름 (2026-11-04 DS 로 바꿈). 이미 YBM.snackbar 를 쓰는 화면이 깨지지 않게 남겨 둔다
 })();

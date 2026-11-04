@@ -9,9 +9,11 @@
 //   node sync.mjs pull [결과.json]  Figma 결과 반영 → 토큰 빌드 → 검증 → GitHub 배포 → 가이드 재배포
 //   node sync.mjs build            토큰만 다시 빌드 (오늘 날짜)
 //   node sync.mjs verify           검증만
-//   node sync.mjs deploy ["메시지"]  검증 → commit → push → 가이드 재배포
+//   node sync.mjs deploy ["메시지"]  검증 → 전체 검사 → commit → push → 가이드 재배포
+//   node sync.mjs check [--regen] [--live]  전체 검사 (tools/check.mjs: 링크, 사이트, 템플릿, 마크다운, 싱크, 컴포넌트 9곳)
+//   node sync.mjs release 1.1.0 ["메시지"]  새 버전: VERSION, DS 머리 버전, Updates 버전 → 검사 → 배포 → 태그 v1.1.0
 //
-//   옵션  --no-push   커밋까지만      --ds-only   가이드 재배포 생략
+//   옵션  --no-push   커밋까지만      --ds-only   가이드 재배포 생략      --no-check  배포 전 전체 검사 생략
 //
 // 동기화.bat 더블클릭 = node sync.mjs deploy  (Figma 단계는 Claude 에게 "ds 동기화" 라고 요청)
 
@@ -273,9 +275,48 @@ function httpStatus(url, method = 'HEAD') {
 }
 async function siteUp() { return (await httpStatus(CFG.pagesUrl + 'dist/ybm-ds.css')) === 200; }
 
+// ── 전체 검사, 새 버전 ──────────────────────────────────────────────────────
+function runCheck(extra = []) {
+  say(c.b('  전체 검사 (tools/check.mjs)'));
+  const r = spawnSync(process.execPath, [path.join(DS, 'tools/check.mjs'), ...extra], { cwd: DS, stdio: 'inherit' });
+  return r.status === 0;
+}
+async function release(ver, message) {
+  if (!/^\d+\.\d+\.\d+$/.test(ver || '')) die('버전을 x.y.z 로 주세요. 예) node sync.mjs release 1.1.0');
+  const cur = read('VERSION').trim();
+  const n = (v) => v.split('.').map(Number);
+  const [a, b] = [n(ver), n(cur)];
+  if (!(a[0] > b[0] || (a[0] === b[0] && (a[1] > b[1] || (a[1] === b[1] && a[2] > b[2]))))) die(`지금 버전 ${cur} 보다 커야 해요.`);
+  if (git(['tag', '-l', 'v' + ver]).out) die(`태그 v${ver} 가 이미 있어요.`);
+  // Updates 맨 위 소식이 이번 버전이다. 이미 버전이 붙어 있으면 이번 소식을 먼저 적어야 한다
+  const up = JSON.parse(read('site/src/updates.json'));
+  const top = up.releases[0];
+  if (!top || top.version) die('site/src/updates.json 맨 위에 이번 버전 소식(날짜와 항목)을 먼저 적어 주세요.');
+  top.version = ver;
+  fs.writeFileSync(path.join(DS, 'site/src/updates.json'), JSON.stringify(up, null, 2).replace(/\[\n\s+"(DS|템플릿|사이트)",\n\s+("[^"]*")\n\s+\]/g, '["$1", $2]') + '\n');
+  fs.writeFileSync(path.join(DS, 'VERSION'), ver + '\n');
+  const cssF = path.join(DS, 'dist/ybm-ds.css');
+  fs.writeFileSync(cssF, fs.readFileSync(cssF, 'utf8').replace(/yds v\d+\.\d+\.\d+/, 'yds v' + ver));
+  const jsF = path.join(DS, 'dist/ybm-ds.js');
+  fs.writeFileSync(jsF, fs.readFileSync(jsF, 'utf8').replace(/version: "\d+\.\d+\.\d+"/, `version: "${ver}"`));
+  say(c.g(`  ✔ 버전 ${cur} → ${ver} (VERSION, dist/ybm-ds.css, dist/ybm-ds.js, Updates)`));
+  const b2 = spawnSync(process.execPath, [path.join(DS, 'site/build.mjs')], { cwd: DS, stdio: 'inherit' });
+  if (b2.status !== 0) die('사이트 만들기 실패');
+  await deploy(message || `yds v${ver}`);
+  git(['tag', '-a', 'v' + ver, '-m', `yds v${ver}`]);
+  if (!flags.has('--no-push')) {
+    const env = { ...process.env, GIT_TERMINAL_PROMPT: '0', GCM_INTERACTIVE: 'never' };
+    const p = git(['push', '-q', 'origin', 'v' + ver], { allowFail: true, env, timeout: 60000 });
+    if (!p.ok) die('태그 올리기 실패 — ' + p.err);
+  }
+  say(c.g(`  ✔ 태그 v${ver}`));
+  say(c.d(`    버전 고정 주소 https://cdn.jsdelivr.net/gh/luvms012-rgb/ybm-ds@v${ver}/dist/ybm-ds.css`));
+}
+
 async function deploy(message) {
   const { errors } = verify();
   if (errors.length) die('검증 실패 — 위 항목을 고친 뒤 다시 실행하세요.');
+  if (!flags.has('--no-check') && !runCheck()) die('전체 검사 실패 — 위 항목을 고친 뒤 다시 실행하세요. (급하면 --no-check)');
   ensureRepo();
   git(['add', '-A']);
   const dirty = !git(['diff', '--cached', '--quiet'], { allowFail: true }).ok;
@@ -374,7 +415,11 @@ if (cmd === 'status') {
   if (verify().errors.length) process.exit(1);
 } else if (cmd === 'deploy') {
   await deploy(arg);
+} else if (cmd === 'check') {
+  if (!runCheck([...flags].filter((x) => x === '--regen' || x === '--live' || x === '--all'))) process.exit(1);
+} else if (cmd === 'release') {
+  await release(arg, args.filter((a) => !a.startsWith('--'))[2]);
 } else {
-  die(`모르는 명령: ${cmd}  (status · figma · pull · build · verify · deploy)`);
+  die(`모르는 명령: ${cmd}  (status / figma / pull / build / verify / deploy / check / release)`);
 }
 say();

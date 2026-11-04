@@ -9,9 +9,9 @@
 <script>try { var t = localStorage.getItem("ybm-site-theme"); if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.dataset.theme = "dark"; } catch (e) {}</script>
 <link rel="icon" href="../assets/logo-ybmnet.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../dist/ybm-ds.css">
-<link rel="stylesheet" href="../assets/site.css?v=62b9abbc">
+<link rel="stylesheet" href="../assets/site.css?v=1c03b7bb">
 <script src="../../dist/ybm-ds.js" defer></script>
-<script src="../assets/site.js?v=62b9abbc" defer></script>
+<script src="../assets/site.js?v=1c03b7bb" defer></script>
 </head>
 <body class="site">
 <a class="site-skip" href="#main">본문 바로가기</a>
@@ -118,7 +118,7 @@
 <div class="site-toc-select"><button type="button" class="ds-select" data-size="medium" aria-haspopup="listbox" aria-expanded="false" aria-controls="site-toc-list" aria-label="이 페이지 목차" data-site-toc><span class="ds-select__value">사용법</span></button><div class="ds-select-content site-toc-list" id="site-toc-list" role="listbox" data-size="medium" hidden><ul class="ds-select-list"><li><button type="button" class="ds-select-item" role="option" data-site-toc-go="usage" aria-selected="true"><span class="ds-select-item__body"><span class="ds-select-item__label">사용법</span></span></button></li><li><button type="button" class="ds-select-item" role="option" data-site-toc-go="props"><span class="ds-select-item__body"><span class="ds-select-item__label">속성</span></span></button></li><li><button type="button" class="ds-select-item" role="option" data-site-toc-go="guide"><span class="ds-select-item__body"><span class="ds-select-item__label">사용 지침</span></span></button></li><li><button type="button" class="ds-select-item" role="option" data-site-toc-go="examples"><span class="ds-select-item__body"><span class="ds-select-item__label">예시</span></span></button></li><li><button type="button" class="ds-select-item" role="option" data-site-toc-go="spec"><span class="ds-select-item__body"><span class="ds-select-item__label">규격</span></span></button></li></ul></div></div>
 </header>
 <div class="site-tile__thumb site-cover" data-site-fit-max="2" aria-hidden="true"><div class="site-tile__inner" inert><div class="pv-stage"><div class="ds-scrollfog" data-direction="horizontal" style="display:flex;gap:var(--ds-space-x2);width:320px;padding-inline:20px"><button type="button" class="ds-chip" aria-pressed="true" style="flex:none">전체</button><button type="button" class="ds-chip" aria-pressed="false" style="flex:none">디자인</button><button type="button" class="ds-chip" aria-pressed="false" style="flex:none">개발</button><button type="button" class="ds-chip" aria-pressed="false" style="flex:none">기획</button><button type="button" class="ds-chip" aria-pressed="false" style="flex:none">마케팅</button><button type="button" class="ds-chip" aria-pressed="false" style="flex:none">영업</button><button type="button" class="ds-chip" aria-pressed="false" style="flex:none">운영</button></div></div></div></div>
-<h2 id="usage">사용법<a class="site-anchor" href="#usage" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><p>아래 구조를 복사해 씁니다. 대괄호 <code>[ ]</code> 안은 필요할 때만 넣습니다.</p><figure class="ds-codeblock">
+<h2 id="usage">사용법<a class="site-anchor" href="#usage" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><p>아래 구조를 복사해 씁니다. 대괄호 <code>[ ]</code> 안은 필요할 때만 넣습니다.</p><figure class="ds-codeblock" data-lang="html">
   <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">html</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
   <pre class="ds-codeblock__code"><code>&lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-scrollfog&quot;</span> <span class="hl-f">[data-direction</span>=<span class="hl-s">&quot;horizontal&quot;</span>]&gt;…스크롤 되는 내용…&lt;/<span class="hl-t">div</span>&gt;</code></pre>
 </figure>
@@ -148,7 +148,7 @@
     <span>약관을 읽고 동의해요</span>
   </label>
 </div></div></div>
-  <div class="site-example__code" hidden><figure class="ds-codeblock">
+  <div class="site-example__code" hidden><figure class="ds-codeblock" data-lang="html">
   <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">html</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
   <pre class="ds-codeblock__code"><code>&lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;u-col u-gap-3 u-full&quot;</span> <span class="hl-f">style</span>=<span class="hl-s">&quot;max-width: 420px&quot;</span>&gt;
   &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-t05 ds-fw-semibold&quot;</span> <span class="hl-f">id</span>=<span class="hl-s">&quot;scroll-fog-ex1-title&quot;</span>&gt;서비스 이용 약관&lt;/<span class="hl-t">span</span>&gt;
@@ -181,7 +181,7 @@
   <button type="button" class="ds-chip" data-variant="outlineWeak" data-size="small" aria-pressed="false">여행 회화</button>
   <button type="button" class="ds-chip" data-variant="outlineWeak" data-size="small" aria-pressed="false">교양</button>
 </div></div></div>
-  <div class="site-example__code" hidden><figure class="ds-codeblock">
+  <div class="site-example__code" hidden><figure class="ds-codeblock" data-lang="html">
   <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">html</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
   <pre class="ds-codeblock__code"><code>&lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-scrollfog u-flex u-gap-2 u-full&quot;</span> <span class="hl-f">data-direction</span>=<span class="hl-s">&quot;horizontal&quot;</span> <span class="hl-f">role</span>=<span class="hl-s">&quot;group&quot;</span> <span class="hl-f">aria-label</span>=<span class="hl-s">&quot;강의 분야&quot;</span> <span class="hl-f">style</span>=<span class="hl-s">&quot;max-width: 360px; padding-inline: var(--ds-space-x5)&quot;</span>&gt;
   &lt;<span class="hl-t">button</span> <span class="hl-f">type</span>=<span class="hl-s">&quot;button&quot;</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-chip&quot;</span> <span class="hl-f">data-variant</span>=<span class="hl-s">&quot;outlineWeak&quot;</span> <span class="hl-f">data-size</span>=<span class="hl-s">&quot;small&quot;</span> <span class="hl-f">aria-pressed</span>=<span class="hl-s">&quot;true&quot;</span>&gt;전체&lt;/<span class="hl-t">button</span>&gt;

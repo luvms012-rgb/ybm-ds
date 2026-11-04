@@ -90,7 +90,7 @@ function block(n, ctx, out) {
           // 코드 탭(예: AI 요청 / HTML): 탭 이름을 굵게 적고, 언어는 탭 이름이 언어면 그것, 아니면 text
           const label = textOf(tab).trim();
           out.push(`**${label}**`);
-          ctx.lang = /^(html|css|js|javascript|json|shell)$/i.test(label) ? label.toLowerCase() : 'text';
+          ctx.lang = /^(html|css|js|javascript|json|shell)$/i.test(label) ? label.toLowerCase() : (attr(n, 'data-lang') || 'text');
         } else {
           const lang = cap && find(cap, (x) => /ds-codeblock__language/.test(attr(x, 'class')));
           ctx.lang = lang ? textOf(lang).trim().split(/\s/)[0] : '';

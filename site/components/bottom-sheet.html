@@ -9,9 +9,9 @@
 <script>try { var t = localStorage.getItem("ybm-site-theme"); if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.dataset.theme = "dark"; } catch (e) {}</script>
 <link rel="icon" href="../assets/logo-ybmnet.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../dist/ybm-ds.css">
-<link rel="stylesheet" href="../assets/site.css?v=62b9abbc">
+<link rel="stylesheet" href="../assets/site.css?v=1c03b7bb">
 <script src="../../dist/ybm-ds.js" defer></script>
-<script src="../assets/site.js?v=62b9abbc" defer></script>
+<script src="../assets/site.js?v=1c03b7bb" defer></script>
 </head>
 <body class="site">
 <a class="site-skip" href="#main">본문 바로가기</a>
@@ -118,7 +118,7 @@
 <div class="site-toc-select"><button type="button" class="ds-select" data-size="medium" aria-haspopup="listbox" aria-expanded="false" aria-controls="site-toc-list" aria-label="이 페이지 목차" data-site-toc><span class="ds-select__value">사용법</span></button><div class="ds-select-content site-toc-list" id="site-toc-list" role="listbox" data-size="medium" hidden><ul class="ds-select-list"><li><button type="button" class="ds-select-item" role="option" data-site-toc-go="usage" aria-selected="true"><span class="ds-select-item__body"><span class="ds-select-item__label">사용법</span></span></button></li><li><button type="button" class="ds-select-item" role="option" data-site-toc-go="anatomy"><span class="ds-select-item__body"><span class="ds-select-item__label">구조</span></span></button></li><li><button type="button" class="ds-select-item" role="option" data-site-toc-go="props"><span class="ds-select-item__body"><span class="ds-select-item__label">속성</span></span></button></li><li><button type="button" class="ds-select-item" role="option" data-site-toc-go="guide"><span class="ds-select-item__body"><span class="ds-select-item__label">사용 지침</span></span></button></li><li><button type="button" class="ds-select-item" role="option" data-site-toc-go="examples"><span class="ds-select-item__body"><span class="ds-select-item__label">예시</span></span></button></li><li><button type="button" class="ds-select-item" role="option" data-site-toc-go="spec"><span class="ds-select-item__body"><span class="ds-select-item__label">규격</span></span></button></li></ul></div></div>
 </header>
 <div class="site-tile__thumb site-cover" data-site-fit-max="2" aria-hidden="true"><div class="site-tile__inner" inert><div class="pv-stage"><div class="ds-bottomsheet" data-handle style="width:375px"><div class="ds-bottomsheet__header"><h2 class="ds-bottomsheet__title">정렬</h2><button class="ds-bottomsheet__close" aria-label="닫기"></button></div><div class="ds-bottomsheet__body"><div class="ds-radio-group" role="radiogroup"><label class="ds-radio"><input type="radio" class="ds-radio__control" name="cv-bs" checked><span>최신순</span></label><label class="ds-radio"><input type="radio" class="ds-radio__control" name="cv-bs"><span>인기순</span></label><label class="ds-radio"><input type="radio" class="ds-radio__control" name="cv-bs"><span>낮은 가격순</span></label></div></div><div class="ds-bottomsheet__footer"><button class="ds-btn" data-variant="neutralSolid" data-size="large">적용</button></div></div></div></div></div>
-<h2 id="usage">사용법<a class="site-anchor" href="#usage" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><p>아래 구조를 복사해 씁니다. 대괄호 <code>[ ]</code> 안은 필요할 때만 넣습니다.</p><figure class="ds-codeblock">
+<h2 id="usage">사용법<a class="site-anchor" href="#usage" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><p>아래 구조를 복사해 씁니다. 대괄호 <code>[ ]</code> 안은 필요할 때만 넣습니다.</p><figure class="ds-codeblock" data-lang="html">
   <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">html</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
   <pre class="ds-codeblock__code"><code>&lt;<span class="hl-t">dialog</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-bottomsheet&quot;</span> <span class="hl-f">aria-labelledby</span>=<span class="hl-s">&quot;bs-t&quot;</span> <span class="hl-f">[data-header-align</span>=<span class="hl-s">&quot;center&quot;</span>] [data-handle]&gt;
   &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-bottomsheet__header&quot;</span>&gt;
@@ -181,7 +181,7 @@
     <button class="ds-btn" data-variant="neutralSolid" data-size="large" data-ds-close>적용</button>
   </div>
 </dialog></div></div>
-  <div class="site-example__code" hidden><figure class="ds-codeblock">
+  <div class="site-example__code" hidden><figure class="ds-codeblock" data-lang="html">
   <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">html</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
   <pre class="ds-codeblock__code"><code>&lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;u-flex u-center u-between&quot;</span> <span class="hl-f">style</span>=<span class="hl-s">&quot;width: 100%; max-width: 375px&quot;</span>&gt;
   &lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-t04 ds-fg-muted&quot;</span>&gt;상품 128개&lt;/<span class="hl-t">span</span>&gt;
@@ -237,7 +237,7 @@
     <button class="ds-btn" data-variant="neutralSolid" data-size="large" data-ds-close>저장</button>
   </div>
 </dialog></div></div>
-  <div class="site-example__code" hidden><figure class="ds-codeblock">
+  <div class="site-example__code" hidden><figure class="ds-codeblock" data-lang="html">
   <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">html</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
   <pre class="ds-codeblock__code"><code>&lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field&quot;</span> <span class="hl-f">style</span>=<span class="hl-s">&quot;width: 100%; max-width: 375px&quot;</span>&gt;
   &lt;<span class="hl-t">div</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field__header&quot;</span>&gt;&lt;<span class="hl-t">span</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-field__label&quot;</span> <span class="hl-f">id</span>=<span class="hl-s">&quot;bottom-sheet-ex2-label&quot;</span>&gt;배송 요청 사항&lt;/<span class="hl-t">span</span>&gt;&lt;/<span class="hl-t">div</span>&gt;
@@ -294,7 +294,7 @@
     <button class="ds-btn" data-variant="ghost" data-size="large" data-ds-close>닫기</button>
   </div>
 </dialog></div></div>
-  <div class="site-example__code" hidden><figure class="ds-codeblock">
+  <div class="site-example__code" hidden><figure class="ds-codeblock" data-lang="html">
   <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">html</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
   <pre class="ds-codeblock__code"><code>&lt;<span class="hl-t">article</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-card&quot;</span> <span class="hl-f">data-variant</span>=<span class="hl-s">&quot;subtle&quot;</span> <span class="hl-f">data-size</span>=<span class="hl-s">&quot;small&quot;</span> <span class="hl-f">style</span>=<span class="hl-s">&quot;width: 100%; max-width: 375px&quot;</span>&gt;
   &lt;<span class="hl-t">header</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-card__header&quot;</span>&gt;

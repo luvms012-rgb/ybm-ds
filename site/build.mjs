@@ -23,6 +23,9 @@ const GITHUB = 'https://github.com/luvms012-rgb/ybm-ds';
 const RAW = 'https://raw.githubusercontent.com/luvms012-rgb/ybm-ds/main';
 const FIGMA = 'https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=';
 const SITE_URL = PUBLIC + '/site/';
+// 버전 (저장소 VERSION, node sync.mjs release 가 올린다). 버전 고정 주소는 jsDelivr 가 GitHub 태그를 그대로 내준다
+const VERSION = fs.readFileSync(path.join(path.dirname(fileURLToPath(import.meta.url)), '..', 'VERSION'), 'utf8').trim();
+const PIN = `https://cdn.jsdelivr.net/gh/luvms012-rgb/ybm-ds@v${VERSION}`;
 // 페이지 머리말의 Figma / Code 버튼 주소 - Figma 문서 프레임의 "문서 / 코드" 링크와 같은 계획(tokens/links.mjs)
 const LINKS = linkPlan(DS);
 const linkByNo = Object.fromEntries(LINKS.entries.map((e) => [e.no, e]));
@@ -160,7 +163,7 @@ const templates = fs.existsSync(path.join(SITE, 'src/templates.json')) ? JSON.pa
 
 /* ---------------------------------------------------------------- 공통 조각 */
 function codeblock(code, lang = 'html', extra = '') {
-  return `<figure class="ds-codeblock"${extra}>
+  return `<figure class="ds-codeblock" data-lang="${esc(lang)}"${extra}>
   <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">${esc(lang)}</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
   <pre class="ds-codeblock__code"><code>${highlight(code, lang)}</code></pre>
 </figure>`;
@@ -363,7 +366,7 @@ ${DOC_LINE}
 // llms.txt 머리에 붙는 규칙 (AI가 요청 글 대신 여기서 읽는다)
 const LLMS_RULES = `## 지킬 것
 
-- 설치: <head>에 CSS와 JS 두 줄을 넣는다. 서비스 CSS는 그다음에 불러온다.
+- 설치: <head>에 CSS와 JS 두 줄을 넣는다. 서비스 CSS는 그다음에 불러온다. 운영 서비스는 버전을 고정한 주소(${PIN}/dist/ybm-ds.css, ybm-ds.js)를 쓴다.
 - 규칙 파일: 설치할 때 규칙 파일(${SITE_URL}ai/AGENTS.md)을 프로젝트 맨 위 폴더에 받아 둔다. Claude는 CLAUDE.md, Cursor는 .cursor/rules/yds.mdc 이름으로 둔다.
 - 컴포넌트: 목록(${PUBLIC}/components.json)에 있는 것만 쓰고, 마크업은 컴포넌트 CSS(${RAW}/dist/components.css)의 컴포넌트별 머리 주석 그대로 쓴다.
 - 아이콘: 목록(${SITE_URL}ai/icons.json)에 있는 이름만 쓴다. 꾸밈 아이콘에는 aria-hidden="true", 아이콘만 있는 버튼에는 aria-label을 붙인다.
@@ -410,7 +413,8 @@ ${codeblock(prompts[2][2], 'text', ' data-wrap')}
 
 <h2 id="start">직접 시작하기</h2>
 <p><code>&lt;head&gt;</code>에 두 줄을 넣으면 글꼴, 토큰, 아이콘, 컴포넌트가 함께 들어옵니다. 쓰는 법은 <a class="ds-link" href="components/index.html">Components</a>에 있습니다.</p>
-${codeblock(CSS_LINK)}
+${codeTabs([['최신 버전', codeblock(CSS_LINK)], [`버전 고정 v${VERSION}`, codeblock(CSS_LINK.split(`${PUBLIC}/dist/`).join(`${PIN}/dist/`))]])}
+<p>운영 서비스는 버전을 고정한 주소를 쓰고, 새 버전은 <a class="ds-link" href="updates.html">Updates</a>를 확인한 뒤 올립니다.</p>
 
 <h2 id="migrate">내 사이트에 적용해보기</h2>
 <p>운영 중인 사이트는 한 번에 바꾸지 않고 아래 순서대로 적용합니다. 브랜드 컬러와 규칙 점검은 위 <a class="ds-link" href="#ai">AI로 시작하기</a>의 글을 그대로 씁니다.</p>
@@ -426,8 +430,8 @@ ${codeTabs([
 <h2 id="files">AI가 읽는 파일</h2>
 <p>주소를 알려 주면 AI가 필요한 것을 골라 읽습니다. 주소를 열지 못하는 도구에는 <code>llms-full.txt</code>를 첨부합니다.</p>
 ${table(['파일', '내용'], [
-  [`<a class="ds-link" href="llms.txt" target="_blank" rel="noopener">llms.txt</a>`, '전체 목차와 지킬 규칙입니다. AI가 여기서 시작합니다.'],
   [`<a class="ds-link" href="llms-full.txt" target="_blank" rel="noopener">llms-full.txt</a>`, '모든 문서를 한 파일로 모았습니다.'],
+  [`<a class="ds-link" href="llms.txt" target="_blank" rel="noopener">llms.txt</a>`, '전체 목차와 지킬 규칙입니다. AI가 여기서 시작합니다.'],
   [`<a class="ds-link" href="ai/AGENTS.md" target="_blank" rel="noopener">AGENTS.md</a>`, '프로젝트 맨 위 폴더에 두면 AI 도구가 늘 읽는 규칙 파일입니다.'],
   [`<a class="ds-link" href="ai/CLAUDE.md" target="_blank" rel="noopener">CLAUDE.md</a>` + ', ' + `<a class="ds-link" href="ai/yds.mdc" target="_blank" rel="noopener">yds.mdc</a>`, 'Claude, Cursor용 규칙 파일입니다. 내용은 AGENTS.md와 같습니다.'],
   [`<a class="ds-link" href="${PUBLIC}/components.json" target="_blank" rel="noopener">components.json</a>`, '쓸 수 있는 컴포넌트와 속성 목록입니다.'],
@@ -435,14 +439,11 @@ ${table(['파일', '내용'], [
   [`<a class="ds-link" href="${RAW}/dist/tokens.css" target="_blank" rel="noopener">tokens.css</a>`, '색, 간격, 글자 크기 같은 <code>--ds-*</code> 토큰입니다.'],
   [`<a class="ds-link" href="ai/icons.json" target="_blank" rel="noopener">icons.json</a>`, '쓸 수 있는 아이콘 이름과 쓰임입니다.'],
   [`<a class="ds-link" href="ai/yds-check.mjs" target="_blank" rel="noopener">yds-check.mjs</a>`, '<code>node yds-check.mjs 폴더</code>로 규칙을 어긴 곳을 찾습니다.'],
-  ['페이지별 <code>.md</code>', '문서 제목 아래 Markdown 메뉴에서 그 페이지만 복사합니다.'],
-  ...(SHOW_THEMES ? [['Themes', '테마 CSS 주소와 어울리는 서비스입니다.']] : []),
-])}
-<h3>개발 도구에서 쓰는 파일</h3>
-${table(['파일', '내용'], [
   [`<a class="ds-link" href="${PUBLIC}/tokens/design-tokens.json" target="_blank" rel="noopener">design-tokens.json</a>`, '표준 토큰 형식입니다. 디자인 도구와 토큰 변환기에서 읽습니다.'],
   [`<a class="ds-link" href="${PUBLIC}/tokens/tokens.js" target="_blank" rel="noopener">tokens.js</a>`, '스크립트에서 토큰 값을 쓸 때 불러옵니다.'],
   [`<a class="ds-link" href="${PUBLIC}/tokens/tailwind.preset.js" target="_blank" rel="noopener">tailwind.preset.js</a>`, 'Tailwind에 yds 토큰을 연결합니다.'],
+  ['페이지별 <code>.md</code>', '문서 제목 아래 Markdown 메뉴에서 그 페이지만 복사합니다.'],
+  ...(SHOW_THEMES ? [['Themes', '테마 CSS 주소와 어울리는 서비스입니다.']] : []),
 ])}
 <p>Figma 변수와 CSS 변수는 이름이 같습니다. AI에 <a class="ds-link" href="${LINKS.figmaUrl('2608:2')}" target="_blank" rel="noopener">Figma</a> 화면을 주면 같은 토큰으로 옮깁니다.</p>
 
@@ -1015,7 +1016,7 @@ write({
   file: 'updates.html', section: 'updates', title: 'Updates', desc: 'yds 업데이트 소식', layout: 'page',
   body: `<header><h1 class="site-h1">Updates</h1><p class="site-lead">yds 업데이트 소식과 변경 기록입니다.</p></header>
 ${RELEASES.map((r) => `<section class="site-group site-release">
-<h2 id="d-${r.date}"><time datetime="${r.date}">${fmtDate(r.date)}</time></h2>
+<h2 id="${r.version ? 'v' + r.version : 'd-' + r.date}">${r.version ? `<span class="site-release__ver">v${esc(r.version)}</span> ` : ''}<time datetime="${r.date}">${fmtDate(r.date)}</time></h2>
 ${r.sections.map((s) => `<div class="site-group site-release__group"><p class="site-release__type">${esc(s.type)}</p><ul class="site-list">${s.items.map(([a, t]) => `<li><span class="ds-badge" data-size="medium">${esc(a)}</span> ${inline(t)}</li>`).join('')}</ul></div>`).join('\n')}
 </section>`).join('\n')}
 <p class="site-note">자세한 변경 기록은 <a class="ds-link" href="${GITHUB}/commits/main" target="_blank" rel="noopener">GitHub</a>에 있습니다.</p>`,
@@ -1121,6 +1122,7 @@ ${LLMS_RULES}
 
 > YBM 서비스를 위한 디자인 시스템입니다. HTML에 .ds-* 클래스를 붙이고 --ds-* 토큰으로 색, 간격, 글자를 맞춥니다. 이 파일은 AI 도구가 읽도록 문서 목록을 모은 것입니다.
 
+- 버전: ${VERSION} (버전 고정 주소 ${PIN}/dist/ybm-ds.css)
 - CSS: ${PUBLIC}/dist/ybm-ds.css
 - JS: ${PUBLIC}/dist/ybm-ds.js
 - 전체 문서 한 파일: ${SITE_URL}llms-full.txt

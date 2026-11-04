@@ -8,9 +8,9 @@
 <script>try { var t = localStorage.getItem("ybm-site-theme"); if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.dataset.theme = "dark"; } catch (e) {}</script>
 <link rel="icon" href="../assets/logo-ybmnet.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../dist/ybm-ds.css">
-<link rel="stylesheet" href="../assets/site.css?v=62b9abbc">
+<link rel="stylesheet" href="../assets/site.css?v=1c03b7bb">
 <script src="../../dist/ybm-ds.js" defer></script>
-<script src="../assets/site.js?v=62b9abbc" defer></script>
+<script src="../assets/site.js?v=1c03b7bb" defer></script>
 </head>
 <body class="site">
 <a class="site-skip" href="#main">본문 바로가기</a>
@@ -54,7 +54,7 @@
 <div class="site-example">
   <div class="site-example__bar"><div class="ds-chiptabs" role="tablist" aria-label="보기 방식"><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-view="preview">미리보기</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-view="code">코드</button></div></div>
   <div class="site-example__preview"><div class="pv-stage"><button type="button" class="ds-btn" data-variant="neutralWeak" data-size="medium"><i class="ds-icon ds-icon--search ds-icon--sm" aria-hidden="true"></i>찾기</button><button type="button" class="ds-btn" data-variant="ghost" data-size="medium" data-layout="iconOnly" aria-label="닫기"><i class="ds-icon ds-icon--x" aria-hidden="true"></i></button><span class="ds-badge" data-tone="positive"><i class="ds-icon ds-icon--circle-check-solid ds-icon--sm" aria-hidden="true"></i>완료</span></div></div>
-  <div class="site-example__code" hidden><figure class="ds-codeblock">
+  <div class="site-example__code" hidden><figure class="ds-codeblock" data-lang="html">
   <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">html</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
   <pre class="ds-codeblock__code"><code><span class="hl-m">&lt;!-- 글자 옆: 꾸밈용이라 aria-hidden --&gt;</span>
 &lt;<span class="hl-t">button</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-btn&quot;</span> <span class="hl-f">data-variant</span>=<span class="hl-s">&quot;neutralWeak&quot;</span> <span class="hl-f">data-size</span>=<span class="hl-s">&quot;medium&quot;</span>&gt;
@@ -83,7 +83,7 @@
 <div class="site-example">
   <div class="site-example__bar"><div class="ds-chiptabs" role="tablist" aria-label="보기 방식"><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-view="preview">미리보기</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-view="code">코드</button></div></div>
   <div class="site-example__preview"><div class="pv-stage"><i class="ds-icon ds-icon--search ds-icon--sm" aria-hidden="true"></i><i class="ds-icon ds-icon--search" aria-hidden="true"></i><i class="ds-icon ds-icon--search ds-icon--lg" aria-hidden="true"></i><span style="color: var(--ds-color-fg-brand)"><i class="ds-icon ds-icon--circle-check-solid ds-icon--lg" aria-hidden="true"></i></span><span style="color: var(--ds-color-fg-critical)"><i class="ds-icon ds-icon--triangle-alert-solid ds-icon--lg" aria-hidden="true"></i></span></div></div>
-  <div class="site-example__code" hidden><figure class="ds-codeblock">
+  <div class="site-example__code" hidden><figure class="ds-codeblock" data-lang="html">
   <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">html</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
   <pre class="ds-codeblock__code"><code>&lt;<span class="hl-t">i</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-icon ds-icon--search ds-icon--sm&quot;</span> <span class="hl-f">aria-hidden</span>=<span class="hl-s">&quot;true&quot;</span>&gt;&lt;/<span class="hl-t">i</span>&gt;  <span class="hl-m">&lt;!-- 16 --&gt;</span>
 &lt;<span class="hl-t">i</span> <span class="hl-f">class</span>=<span class="hl-s">&quot;ds-icon ds-icon--search&quot;</span> <span class="hl-f">aria-hidden</span>=<span class="hl-s">&quot;true&quot;</span>&gt;&lt;/<span class="hl-t">i</span>&gt;              <span class="hl-m">&lt;!-- 20 기본 --&gt;</span>
@@ -274,7 +274,7 @@
   <li>오른쪽 칸의 <b>icons.css 줄</b>을 복사해 <code>dist/icons.css</code> 끝에 붙입니다.</li>
   <li>그다음부터 <code>ds-icon--이름</code> 클래스로 씁니다.</li>
 </ol>
-<figure class="ds-codeblock">
+<figure class="ds-codeblock" data-lang="html">
   <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">html</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
   <pre class="ds-codeblock__code"><code>/* Lucide heart - 복사된 줄을 dist/icons.css 끝에 붙인다 */
 :root { --ds-icon-heart: url(&quot;data:image/svg+xml,…&quot;); }
