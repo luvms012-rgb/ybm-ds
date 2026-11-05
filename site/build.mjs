@@ -364,15 +364,6 @@ ${DOC_LINE}
 ${DOC_LINE}
 서버 코드와 스크립트가 쓰는 class, id, name은 그대로 두고, 바꾸기 전후 화면을 비교해서 보여 줘.`],
 ];
-// 디자이너에게 묻기 (2026-11-05 사용자 "우선 만들어줘, 아니다 싶으면 취소나 숨길 수 있어"): 시스템에 안 담기는 판단은 디자이너를 거치게 하고, 질문은 GitHub 이슈 하나로 받는다. 숨기려면 SHOW_ASK = false
-const SHOW_ASK = true;
-const ASK_URL = `${GITHUB}/issues/new?template=question.md&title=${encodeURIComponent('[질문] 화면 이름')}`;
-const ASK_ROWS = [
-  ['yds에 없는 부품을 새로 그리거나 모양을 덮어썼다', '그 부분 캡처'],
-  ['가입, 결제처럼 단계가 이어지는 흐름을 새로 짰다', '흐름 전체'],
-  ['빈 상태, 오류, 권한 없음 화면을 안 그렸다', '그 화면'],
-  ['첫 화면, 로그인, 완료 화면처럼 인상을 정하는 화면이다', '실제 글이 들어간 화면'],
-];
 // llms.txt 머리에 붙는 규칙 (AI가 요청 글 대신 여기서 읽는다)
 const LLMS_RULES = `## 지킬 것
 
@@ -386,7 +377,6 @@ const LLMS_RULES = `## 지킬 것
 - 화면: 모바일 먼저 만들고 768px, 1280px에서 배치를 바꾼다. 비슷한 화면이 Templates에 있으면 그 HTML에서 시작한다.
 - 글자: 한국어. 제목 Bold, 항목 제목 SemiBold, 본문 Regular, 본문은 word-break: keep-all.
 - 점검: 끝내기 전에 검사 스크립트(${SITE_URL}ai/yds-check.mjs)를 받아 node로 돌리고, 나온 문제를 모두 고친다.
-- 디자이너 확인: yds에 없는 부품을 새로 그리거나 모양을 덮어썼을 때, 단계가 이어지는 흐름을 새로 짰을 때, 빈 상태나 오류 화면이 없을 때, 첫 화면처럼 인상을 정하는 화면일 때는 화면을 만든 뒤 "디자이너 확인이 필요합니다"라고 함께 알린다. 묻는 곳: ${ASK_URL}
 
 ## 운영 중인 사이트에 옮길 때
 
@@ -452,13 +442,7 @@ ${table(['파일', '이럴 때 씁니다'], [
   ...(SHOW_THEMES ? [['Themes', '테마 CSS 주소와 어울리는 서비스입니다.']] : []),
 ])}
 
-${SHOW_ASK ? `<h2 id="ask">디자이너에게 묻기</h2>
-<p>yds로 만들어도 디자이너가 봐야 하는 화면이 있습니다. 아래에 하나라도 해당하면 만들기 전과 내보내기 전에 한 번씩 보여 주세요.</p>
-${table(['이럴 때', '보여 줄 것'], ASK_ROWS)}
-<p><a class="ds-btn" data-variant="neutralSolid" data-size="medium" href="${ASK_URL}" target="_blank" rel="noopener">물어보기</a></p>
-<p>같은 질문이 쌓이면 문서와 부품으로 올립니다. 답은 이 문서에 씁니다.</p>
-
-` : ''}${SHOW_THEMES ? `<h2 id="custom-theme">테마</h2>
+${SHOW_THEMES ? `<h2 id="custom-theme">테마</h2>
 <p>테마는 브랜드 색, 바탕색, 모서리 곡률을 한 번에 바꿉니다. DS 다음에 테마 파일을 붙이고 html에 테마 이름을 적으면 됩니다. 고를 수 있는 테마는 <a class="ds-link" data-size="small" href="themes/index.html">Themes</a>에 있습니다.</p>
 ${(() => { const t = readJson('site/src/themes.json').themes[0].slug; return codeblock(`<html lang="ko" data-ds-theme="${t}">
 <link rel="stylesheet" href="${PUBLIC}/dist/ybm-ds.css">
