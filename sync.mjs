@@ -6,6 +6,7 @@
 //                                  (Claude 가 use_figma 로 실행하고 결과를 tokens/.figma-result.json 에 저장)
 //   node sync.mjs links           Figma 문서 프레임의 문서 / 코드 링크를 고치는 스크립트 생성 → tokens/.figma-links.js
 //   node sync.mjs docs            Figma 문서 프레임 본문을 사이트와 같은 순서로 채우는 스크립트 생성 → tokens/.figma-docs.js
+//   node sync.mjs docpage <slug>  컴포넌트 문서 프레임 하나를 사이트 페이지 구성 그대로 다시 그리는 스크립트 → tokens/.figma-docpage.js
 //   node sync.mjs pull [결과.json]  Figma 결과 반영 → 토큰 빌드 → 검증 → GitHub 배포 → 가이드 재배포
 //   node sync.mjs build            토큰만 다시 빌드 (오늘 날짜)
 //   node sync.mjs verify           검증만
@@ -244,6 +245,45 @@ ${fs.readFileSync(path.join(DS, 'tokens', 'figma-docs.template.js'), 'utf8')}`, 
   return file;
 }
 
+// 컴포넌트 문서 프레임 한 개를 사이트 페이지와 같은 구성으로 다시 그리는 스크립트 (2026-11-05, Action Button 기준)
+// 자료: tokens/.figma-docs.json (node site/build.mjs). 클래스 → Figma 컴포넌트 세트는 components.json 의 classes, figma 로 잇는다
+function docpageScript(slug) {
+  const f = path.join(DS, 'tokens', '.figma-docs.json');
+  if (!fs.existsSync(f)) die('tokens/.figma-docs.json 이 없어요. 먼저 node site/build.mjs');
+  const d = JSON.parse(fs.readFileSync(f, 'utf8'));
+  const comp = d.components.find((x) => x.slug === slug || x.no === slug);
+  if (!comp) die(`컴포넌트가 없어요: ${slug}`);
+  if (!comp.doc) die(`${comp.name} 에 Figma 문서 프레임(doc)이 없어요 (components.json)`);
+  const reg = JSON.parse(read('components.json'));
+  const list = Array.isArray(reg) ? reg : reg.components;
+  const sets = {}, defaults = {};
+  const norm = (s) => s.toLowerCase().replace(/[^a-z]/g, '');
+  for (const x of list) {
+    const page = (d.components.find((y) => y.no === x.no) || {}).page || {};
+    for (const fg of (x.figma || []).filter((g) => g.type === 'COMPONENT_SET' || g.type === 'COMPONENT')) {
+      const cls = (fg.part ? x.classes.find((k) => norm(k).endsWith(norm(fg.part))) : x.classes[0]) || null;
+      if (!cls) continue;
+      const k = cls.replace(/^\./, '');
+      if (!sets[k]) { sets[k] = fg.id; defaults[k] = page.defaults || {}; }
+    }
+  }
+  const me = list.find((x) => x.no === comp.no);
+  const mainSets = (me.figma || []).map((g) => g.id);
+  const mainClass = Object.keys(sets).find((k) => mainSets.includes(sets[k])) || null;
+  // 이 페이지 예시와 대표 그림에 나오는 클래스만 넘긴다 (스크립트 크기를 줄인다)
+  const used = new Set([mainClass]);
+  const walk = (n) => { if (n && typeof n === 'object') { (n.cls || []).forEach((k) => used.add(k)); (n.c || []).forEach(walk); } };
+  [...(comp.page.cover || []), ...comp.page.examples.flatMap((e) => e.tree)].forEach(walk);
+  for (const k of Object.keys(sets)) if (!used.has(k)) { delete sets[k]; delete defaults[k]; }
+  const link = plan().entries.find((e) => e.no === comp.no) || {};
+  const DATA = { frame: comp.doc, comp, sets, defaults, mainSets, mainClass, links: { docs: link.site || null, code: link.code || null } };
+  const file = path.join(DS, 'tokens', '.figma-docpage.js');
+  fs.writeFileSync(file, `// 자동 생성 - node sync.mjs docpage ${comp.slug} (${today()}) · fileKey ${reg.figmaFile} · 문서 프레임 ${comp.doc}
+const DATA = ${JSON.stringify(DATA)};
+${fs.readFileSync(path.join(DS, 'tokens', 'figma-docpage.template.js'), 'utf8')}`, 'utf8');
+  return file;
+}
+
 function reportComponents(comp) {
   if (!comp) return;
   say(c.b('  Figma 컴포넌트 ↔ components.json'));
@@ -390,6 +430,11 @@ if (cmd === 'status') {
   say('    다음: 이 파일 내용을 use_figma(fileKey 1VCEsFU3xMWuXIntIrZz9i)로 실행 → 결과의 changed 가 고친 링크');
 } else if (cmd === 'docs') {
   const f = docsScript();
+  say(c.g(`  ✔ ${rel(f)} 생성 (${(fs.statSync(f).size / 1024).toFixed(1)}KB)`));
+  say('    다음: 이 파일 내용을 use_figma(fileKey 1VCEsFU3xMWuXIntIrZz9i)로 실행');
+} else if (cmd === 'docpage') {
+  if (!arg) die('컴포넌트 이름을 넣어 주세요: node sync.mjs docpage action-button');
+  const f = docpageScript(arg);
   say(c.g(`  ✔ ${rel(f)} 생성 (${(fs.statSync(f).size / 1024).toFixed(1)}KB)`));
   say('    다음: 이 파일 내용을 use_figma(fileKey 1VCEsFU3xMWuXIntIrZz9i)로 실행');
 } else if (cmd === 'pull') {

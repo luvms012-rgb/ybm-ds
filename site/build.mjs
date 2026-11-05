@@ -148,9 +148,43 @@ const comps = registry.map((c) => {
     vars: [...vars],
   };
 });
-// Figma 문서 프레임을 사이트와 같은 내용으로 채울 자료 - node sync.mjs docs가 읽는다 (커밋 안 함)
+// Figma 문서 프레임을 사이트와 같은 내용으로 채울 자료 - node sync.mjs docs, docpage가 읽는다 (커밋 안 함)
+// HTML 조각을 Figma 쪽에서 그릴 수 있게 나무 모양으로: { tag, cls, a(속성), c(자식) } / 글자는 문자열
+const htmlTree = (html) => {
+  const root = { tag: 'root', cls: [], a: {}, c: [] }, stack = [root];
+  const VOID = new Set(['br', 'img', 'input', 'hr', 'meta', 'link', 'source', 'path', 'polyline', 'polygon', 'circle', 'line', 'rect']);
+  for (const m of String(html).replace(/<!--[\s\S]*?-->/g, '').matchAll(/<\/([a-zA-Z0-9-]+)\s*>|<([a-zA-Z][a-zA-Z0-9-]*)((?:\s+[^\s=>\/]+(?:\s*=\s*(?:"[^"]*"|'[^']*'|[^\s>]+))?)*)\s*(\/?)>|([^<]+)/g)) {
+    const top = stack[stack.length - 1];
+    if (m[5] !== undefined) { const t = m[5].replace(/&nbsp;/g, ' ').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&amp;/g, '&'); if (t.trim()) top.c.push(t.replace(/\s+/g, ' ')); continue; }
+    if (m[1]) { const i = stack.map((n) => n.tag).lastIndexOf(m[1].toLowerCase()); if (i > 0) stack.length = i; continue; }
+    const a = {};
+    for (const x of m[3].matchAll(/([^\s=>\/]+)(?:\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+)))?/g)) a[x[1]] = x[2] ?? x[3] ?? x[4] ?? '';
+    const el = { tag: m[2].toLowerCase(), cls: (a.class || '').split(/\s+/).filter(Boolean), a, c: [] };
+    delete a.class;
+    top.c.push(el);
+    if (!m[4] && !VOID.has(el.tag)) stack.push(el);
+  }
+  return root.c;
+};
+const plain = (h) => String(h).replace(/<[^>]+>/g, ' ').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&amp;/g, '&').replace(/\s+/g, ' ').trim();
+const figmaPage = (c) => {
+  const { rows, rest } = propsTable(c);
+  const exs = EXAMPLES[c.slug] || (c.example ? [{ title: '', desc: '', html: codeOf(c.example) || c.example }] : []);
+  return {
+    usage: c.markup || '',
+    props: rows.map(([k, v]) => [plain(k), plain(v)]), propsRest: plain(rest || ''),
+    behavior: jsFor(c).map(plain),
+    examples: exs.map((e) => ({ title: e.title, desc: plain(inline(e.desc || '')), wide: !!e.wide, code: dedent(e.html), tree: htmlTree(e.html) })),
+    cover: COVERS[c.slug] ? htmlTree(COVERS[c.slug]) : null,
+    vars: c.vars, spec: c.spec || '',
+    // 속성의 기본값: 머리 주석의 "size : small 36 / medium 40(기본)" 또는 "layout : 기본 withText"
+    defaults: Object.fromEntries((c.spec || '').split('\n').flatMap((l) => l.split(/\s{2,}(?=[a-zA-Z]+\s*:)/)).map((l) => l.match(/^\s*([a-zA-Z]+)\s*:\s*(.+)$/)).filter(Boolean)
+      .map(([, k, v]) => { const t = v.split(/\s+\/\s+/).map((x) => x.trim()); const d = t.find((x) => /\(기본/.test(x)); const d2 = t.find((x) => /^기본 /.test(x)); return [k, d ? d.split(/[\s(]/)[0] : d2 ? d2.split(/\s+/)[1] : null]; })
+      .filter(([, v]) => v)),
+  };
+};
 const figmaDocs = () => fs.writeFileSync(path.join(DS, 'tokens', '.figma-docs.json'), JSON.stringify({
-  components: comps.map((c) => ({ no: c.no, name: c.name, slug: c.slug, doc: c.doc || null, desc: c.desc, dos: ((r) => [...r.filter(([ok]) => ok), ...r.filter(([ok]) => !ok)])(c.dos.map((d) => [isDont(d) ? 0 : 1, d])) })),
+  components: comps.map((c) => ({ no: c.no, name: c.name, slug: c.slug, doc: c.doc || null, desc: c.desc, dos: ((r) => [...r.filter(([ok]) => ok), ...r.filter(([ok]) => !ok)])(c.dos.map((d) => [isDont(d) ? 0 : 1, d])), page: figmaPage(c) })),
   foundations: Object.fromEntries(FOUND.map(([slug, label]) => [slug, { label, lead: slug === 'icons' ? ICON_LEAD : (foundPages[slug] || {}).lead || '' }])),
   icons: ICON_PRACTICES.map(([ok, t]) => [ok ? 1 : 0, t]),
 }, null, 1));
