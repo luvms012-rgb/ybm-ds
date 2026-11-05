@@ -529,75 +529,86 @@ body[data-side-open] .site-scrim { opacity: 1; pointer-events: auto; }
 
 
 /* ==========================================================================
-   글자 위계와 박스 - 레퍼런스 G (2026-11-05 사용자 "폰트 위계, 굵기, 크기, 여백, 박스 사용과 박스 여백을 사이트 전체에")
-   실측(1440 / 375): 페이지 제목 42/52 700 (모바일 26~32), 섹션 제목 32/44 700 (모바일 26/35), 소제목 22/32 700 (모바일 20/29),
-   작은 제목 18/26 700, 카드 제목 20/29 700, 리드 18/27, 본문 16/24, 라벨과 메뉴 16/24 600, 보조 14/20.
-   굵기는 400 / 500 / 600 만(사용자 지시로 레퍼런스보다 한 단계씩 낮춤: 700 → 600, 600 → 500, 500 → 400), 자간은 제목 -0.02em, 본문과 라벨 -0.01em, 14 이하 0.
-   글자 색 세 단계: 제목 neutral, 본문 neutral-muted, 날짜와 보조 neutral-subtle.
-   여백: 제목 → 리드 16, 머리말 → 첫 섹션 56, 섹션 위 80 (모바일 64), 섹션 제목 → 내용 24, 소제목 → 설명 8, 문단 사이 12.
-   박스: 테두리 없는 옅은 회색 면(bg-neutral), 모서리 16, 안쪽 28 (모바일 24), 박스 사이 16 (모바일 12).
-   위 규칙과 같은 선택자로 덮어쓴다. 되돌릴 때는 이 묶음만 지운다.
+   글자 위계와 여백 - Figma 기준 (2026-11-05 사용자가 DS 파일 노드 2662:26 에 확정, "그대로 기억해", "사이트의 다른 부분도 모두 적용")
+   글자(크기/줄높이 굵기): 페이지 제목 40/54 600, 리드 18/28 400, 섹션 제목 28/40 600, 소제목과 카드 제목 20/29 500,
+   본문 16/24 400, 상단과 왼쪽 메뉴 16/24 400 (지금 페이지 500), 표 머리 14/21 500, 표 칸과 코드 14/21 400,
+   푸터 묶음 이름 14/21 600, 푸터 링크 14/21 400, 코드 상자 머리 12/18 400. 자간은 모두 0.
+   여백: 제목 → 리드 8, 리드 → 버튼 28, 머리말 → 첫 섹션 80, 섹션 위 80, 섹션 제목 → 소개 글 8, 그 다음 내용 24,
+   소제목 위 48, 소제목 → 설명 8, 설명 → 상자 16, 카드 패딩 28 / 사이 16 / 제목과 설명 8, 푸터 위 48 + 선 뒤 40.
+   모바일 값은 Figma 에 없어 한 단계 작게 둔다. 위 규칙과 같은 선택자로 덮어쓴다. 되돌릴 때는 이 묶음만 지운다.
    ========================================================================== */
 /* 상단, 왼쪽 메뉴, 목차 */
-.site-topnav__item { font-weight: var(--ds-font-weight-medium); letter-spacing: -0.01em; }
-.site-nav__item, .site-nav__toggle { min-height: 36px; color: var(--ds-color-fg-neutral-muted); font-size: var(--ds-font-size-t05); line-height: 24px; font-weight: var(--ds-font-weight-regular); letter-spacing: -0.01em; }
+.site-topnav__item { font-weight: var(--ds-font-weight-regular); letter-spacing: 0; }
+.site-topnav__item[aria-current="page"] { font-weight: var(--ds-font-weight-medium); }
+.site-nav__item, .site-nav__toggle { min-height: 36px; color: var(--ds-color-fg-neutral-muted); font-size: var(--ds-font-size-t05); line-height: var(--ds-line-height-t05); font-weight: var(--ds-font-weight-regular); letter-spacing: 0; }
 .site-nav__item:hover, .site-nav__toggle:hover { color: var(--ds-color-fg-neutral); }
 .site-nav__item[aria-current="page"] { color: var(--ds-color-fg-neutral); font-weight: var(--ds-font-weight-medium); }
-.site-toc a { color: var(--ds-color-fg-neutral-subtle); font-weight: var(--ds-font-weight-regular); }
+.site-toc a { color: var(--ds-color-fg-neutral-subtle); line-height: var(--ds-line-height-t04); font-weight: var(--ds-font-weight-regular); letter-spacing: 0; }
+.site-toc a[aria-current] { font-weight: var(--ds-font-weight-medium); }
 /* 머리말 */
-.site-eyebrow { color: var(--ds-color-fg-neutral-subtle); font-weight: var(--ds-font-weight-regular); }
-.site-h1 { font-size: var(--ds-font-size-t11); line-height: 38px; font-weight: var(--ds-font-weight-semibold); letter-spacing: -0.02em; }
-@media (min-width: 768px) { .site-h1 { font-size: var(--ds-font-size-t13); line-height: 52px; } }
-.site-doc header p.site-lead { margin-top: var(--ds-space-x4); color: var(--ds-color-fg-neutral-muted); font-size: var(--ds-font-size-t05); line-height: 24px; font-weight: var(--ds-font-weight-regular); letter-spacing: -0.01em; }
-@media (min-width: 768px) { .site-doc header p.site-lead { font-size: var(--ds-font-size-t06); line-height: 27px; } }
+.site-eyebrow { color: var(--ds-color-fg-neutral-subtle); font-weight: var(--ds-font-weight-regular); letter-spacing: 0; }
+.site-h1 { font-size: var(--ds-font-size-t11); line-height: var(--ds-line-height-t11); font-weight: var(--ds-font-weight-semibold); letter-spacing: 0; }
+@media (min-width: 768px) { .site-h1 { font-size: var(--ds-font-size-t13); line-height: var(--ds-line-height-t13); } }
+.site-doc header p.site-lead { margin-top: var(--ds-space-x2); color: var(--ds-color-fg-neutral-muted); font-size: var(--ds-font-size-t05); line-height: var(--ds-line-height-t05); font-weight: var(--ds-font-weight-regular); letter-spacing: 0; }
+@media (min-width: 768px) { .site-doc header p.site-lead { font-size: var(--ds-font-size-t06); line-height: var(--ds-line-height-t06); } }
+.site-doc > header .site-meta { margin-top: var(--ds-space-x7); }
 /* 섹션 제목, 소제목, 본문 */
-.site-doc h2:not(.pv-stage *, .site-tile__inner *, .site-example__preview *, .site-tpl *) { margin-top: var(--ds-space-x16); font-size: var(--ds-font-size-t10); line-height: 35px; font-weight: var(--ds-font-weight-semibold); letter-spacing: -0.02em; }
-.site-doc h3:not(.pv-stage *, .site-tile__inner *, .site-example__preview *, .site-tpl *) { margin-top: var(--ds-space-x10); font-size: var(--ds-font-size-t07); line-height: 29px; font-weight: var(--ds-font-weight-semibold); letter-spacing: -0.02em; }
-@media (min-width: 768px) {
-  .site-doc h2:not(.pv-stage *, .site-tile__inner *, .site-example__preview *, .site-tpl *) { margin-top: var(--ds-space-x20); font-size: var(--ds-font-size-t12); line-height: 44px; }
-  .site-doc h3:not(.pv-stage *, .site-tile__inner *, .site-example__preview *, .site-tpl *) { margin-top: var(--ds-space-x12); font-size: var(--ds-font-size-t08); line-height: 32px; }
-}
-.site-doc > header + h2 { margin-top: var(--ds-space-x14); }
+.site-doc h2:not(.pv-stage *, .site-tile__inner *, .site-example__preview *, .site-tpl *) { margin-top: var(--ds-space-x16); font-size: var(--ds-font-size-t09); line-height: var(--ds-line-height-t09); font-weight: var(--ds-font-weight-semibold); letter-spacing: 0; }
+.site-doc h3:not(.pv-stage *, .site-tile__inner *, .site-example__preview *, .site-tpl *) { margin-top: var(--ds-space-x10); font-size: var(--ds-font-size-t06); line-height: var(--ds-line-height-t06); font-weight: var(--ds-font-weight-medium); letter-spacing: 0; }
+.site-doc > header + h2 { margin-top: var(--ds-space-x16); }
 .site-doc > h2 + * { margin-top: var(--ds-space-x6); }
-.site-doc > h2 + h3 { margin-top: var(--ds-space-x6); }
+.site-doc > h2 + p { margin-top: var(--ds-space-x2); }
+.site-doc > h2 + p + :not(h2, h3, p) { margin-top: var(--ds-space-x6); }
 .site-doc > h3 + * { margin-top: var(--ds-space-x4); }
 .site-doc > h3 + p { margin-top: var(--ds-space-x2); }
+.site-doc > h3 + p + :not(h2, h3, p) { margin-top: var(--ds-space-x4); }
 .site-doc > p + p { margin-top: var(--ds-space-x3); }
-.site-doc :is(p, li):not([class]):not(.pv-stage *, .site-tile__inner *, .site-example__preview *, .site-tpl *) { color: var(--ds-color-fg-neutral-muted); font-size: var(--ds-font-size-t05); line-height: 24px; font-weight: var(--ds-font-weight-regular); letter-spacing: -0.01em; }
+@media (min-width: 768px) {
+  .site-doc h2:not(.pv-stage *, .site-tile__inner *, .site-example__preview *, .site-tpl *) { margin-top: var(--ds-space-x20); font-size: var(--ds-font-size-t11); line-height: var(--ds-line-height-t11); }
+  .site-doc h3:not(.pv-stage *, .site-tile__inner *, .site-example__preview *, .site-tpl *) { margin-top: var(--ds-space-x12); font-size: var(--ds-font-size-t07); line-height: var(--ds-line-height-t07); }
+  .site-doc > header + h2 { margin-top: var(--ds-space-x20); }
+}
+.site-doc :is(p, li):not([class]):not(.pv-stage *, .site-tile__inner *, .site-example__preview *, .site-tpl *) { color: var(--ds-color-fg-neutral-muted); font-size: var(--ds-font-size-t05); line-height: var(--ds-line-height-t05); font-weight: var(--ds-font-weight-regular); letter-spacing: 0; }
 .site-doc :is(p, li):not([class]):not(.pv-stage *, .site-tile__inner *, .site-example__preview *, .site-tpl *) :is(b, strong) { color: var(--ds-color-fg-neutral); font-weight: var(--ds-font-weight-medium); }
 /* 표 */
-.site-doc .ds-table:not(.pv-stage *, .site-example__preview *, .site-tile__inner *) th { font-weight: var(--ds-font-weight-medium); }
+.site-doc .ds-table:not(.pv-stage *, .site-example__preview *, .site-tile__inner *) :is(th, td) { font-size: var(--ds-font-size-t04); line-height: var(--ds-line-height-t04); letter-spacing: 0; }
+.site-doc .ds-table:not(.pv-stage *, .site-example__preview *, .site-tile__inner *) th { color: var(--ds-color-fg-neutral); font-weight: var(--ds-font-weight-medium); }
 .site-doc .ds-table:not(.pv-stage *, .site-example__preview *, .site-tile__inner *) td { color: var(--ds-color-fg-neutral-muted); font-weight: var(--ds-font-weight-regular); }
+/* 코드 상자 */
+.site-doc .ds-codeblock__language { line-height: var(--ds-line-height-t02); }
+.site-doc .ds-codeblock__code, .site-doc .ds-codeblock[data-wrap] .ds-codeblock__code { line-height: var(--ds-line-height-t04); }
 /* 박스: 테두리 없는 회색 면, 모서리 16 */
 .site-doc .ds-codeblock, .site-doc .ds-table-wrap:not(.pv-stage *, .site-example__preview *, .site-tile__inner *), .site-example { border-radius: var(--ds-shape-xl); }
 .site-grid, .site-grid--hub { gap: var(--ds-space-x3); }
 .site-hub { gap: var(--ds-space-x2); padding: var(--ds-space-x6); border-radius: var(--ds-shape-xl); background: var(--ds-color-bg-neutral); }
 .site-hub:hover { background: var(--ds-color-bg-neutral-weak-pressed); }
-.site-hub__title { font-size: var(--ds-font-size-t07); line-height: 29px; font-weight: var(--ds-font-weight-semibold); letter-spacing: -0.02em; }
-.site-hub__desc { font-size: var(--ds-font-size-t05); line-height: 24px; font-weight: var(--ds-font-weight-regular); letter-spacing: -0.01em; }
+.site-hub__title { font-size: var(--ds-font-size-t07); line-height: var(--ds-line-height-t07); font-weight: var(--ds-font-weight-medium); letter-spacing: 0; }
+.site-hub__desc { font-size: var(--ds-font-size-t05); line-height: var(--ds-line-height-t05); font-weight: var(--ds-font-weight-regular); letter-spacing: 0; }
 .site-card { border: 0; border-radius: var(--ds-shape-xl); background: var(--ds-color-bg-neutral); }
 .site-card:hover { background: var(--ds-color-bg-neutral-weak-pressed); }
 .site-card__body { gap: var(--ds-space-x2); padding: var(--ds-space-x6); }
-.site-doc .site-card__title { font-size: var(--ds-font-size-t07); line-height: 29px; font-weight: var(--ds-font-weight-semibold); letter-spacing: -0.02em; }
-.site-doc .site-card p.site-card__desc { font-size: var(--ds-font-size-t05); line-height: 24px; font-weight: var(--ds-font-weight-regular); letter-spacing: -0.01em; }
+.site-doc .site-card__title { font-size: var(--ds-font-size-t07); line-height: var(--ds-line-height-t07); font-weight: var(--ds-font-weight-medium); letter-spacing: 0; }
+.site-doc .site-card p.site-card__desc { font-size: var(--ds-font-size-t05); line-height: var(--ds-line-height-t05); font-weight: var(--ds-font-weight-regular); letter-spacing: 0; }
 @media (min-width: 768px) {
   .site-grid, .site-grid--hub { gap: var(--ds-space-x4); }
   .site-hub, .site-card__body { padding: var(--ds-space-x7); }
 }
-/* 컴포넌트 목록 */
+/* 컴포넌트 목록: 분류 이름은 섹션 제목, 부품 이름은 카드 제목과 같은 굵기 */
 .site-tile__thumb { border-radius: var(--ds-shape-xl); }
-.site-doc .site-tile .site-tile__name { font-size: var(--ds-font-size-t06); line-height: 26px; font-weight: var(--ds-font-weight-semibold); letter-spacing: -0.02em; }
-.site-doc .site-group__title { font-size: var(--ds-font-size-t09); line-height: 35px; font-weight: var(--ds-font-weight-semibold); letter-spacing: -0.02em; }
-/* 분류 칩: 높이 40 알약, 16 SemiBold */
+.site-doc .site-tile .site-tile__name { font-size: var(--ds-font-size-t06); line-height: var(--ds-line-height-t06); font-weight: var(--ds-font-weight-medium); letter-spacing: 0; }
+.site-doc .site-group__title { font-size: var(--ds-font-size-t09); line-height: var(--ds-line-height-t09); font-weight: var(--ds-font-weight-semibold); letter-spacing: 0; }
+@media (min-width: 768px) { .site-doc .site-group__title { font-size: var(--ds-font-size-t11); line-height: var(--ds-line-height-t11); } }
+/* 분류 칩: 높이 40 알약 */
 .site-toolbar--wrap .ds-chiptabs { --ds-ct-height: 40px; --ds-ct-padding-x: var(--ds-space-x4); gap: var(--ds-space-x2); }
-.site-toolbar .ds-chiptabs__trigger { font-weight: var(--ds-font-weight-medium); letter-spacing: -0.01em; }
+.site-toolbar .ds-chiptabs__trigger { font-weight: var(--ds-font-weight-medium); letter-spacing: 0; }
 /* 쪽 안 탭, 이전 / 다음, 푸터 */
-.site-pagetabs a { font-weight: var(--ds-font-weight-medium); letter-spacing: -0.01em; }
+.site-pagetabs a { font-weight: var(--ds-font-weight-medium); letter-spacing: 0; }
 .site-pager a { gap: var(--ds-space-x1); min-height: 68px; padding: var(--ds-space-x5) var(--ds-space-x6); border-radius: var(--ds-shape-xl); background: var(--ds-color-bg-neutral); }
 .site-pager a:hover { background: var(--ds-color-bg-neutral-weak-pressed); }
-.site-pager__label { color: var(--ds-color-fg-neutral-subtle); line-height: 20px; font-weight: var(--ds-font-weight-regular); }
-.site-pager b { font-size: var(--ds-font-size-t06); line-height: 26px; font-weight: var(--ds-font-weight-semibold); letter-spacing: -0.02em; }
-.site-doc .site-footer__title { font-weight: var(--ds-font-weight-semibold); }
-.site-footer__nav a { color: var(--ds-color-fg-neutral-subtle); font-weight: var(--ds-font-weight-regular); }
-/* Updates */
-.site-doc .site-release h2:not(.pv-stage *) { font-size: var(--ds-font-size-t08); line-height: 32px; }
+.site-pager__label { color: var(--ds-color-fg-neutral-subtle); line-height: var(--ds-line-height-t04); font-weight: var(--ds-font-weight-regular); letter-spacing: 0; }
+.site-pager b { font-size: var(--ds-font-size-t06); line-height: var(--ds-line-height-t06); font-weight: var(--ds-font-weight-medium); letter-spacing: 0; }
+.site-doc .site-footer p.site-footer__title { margin: 0; color: var(--ds-color-fg-neutral); font-size: var(--ds-font-size-t04); line-height: var(--ds-line-height-t04); font-weight: var(--ds-font-weight-semibold); letter-spacing: 0; }
+.site-footer__nav a { color: var(--ds-color-fg-neutral-subtle); font-size: var(--ds-font-size-t04); line-height: var(--ds-line-height-t04); font-weight: var(--ds-font-weight-regular); letter-spacing: 0; }
+/* Updates: 소식 제목은 소제목 위계, 종류는 표 머리 위계 */
+.site-doc .site-release h2:not(.pv-stage *) { font-size: var(--ds-font-size-t07); line-height: var(--ds-line-height-t07); font-weight: var(--ds-font-weight-medium); }
+.site-doc .site-release p.site-release__type { color: var(--ds-color-fg-neutral-muted); font-size: var(--ds-font-size-t04); line-height: var(--ds-line-height-t04); font-weight: var(--ds-font-weight-medium); letter-spacing: 0; }
