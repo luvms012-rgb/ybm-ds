@@ -428,7 +428,6 @@ ${codeblock(prompts[2][2], 'text', ' data-wrap')}
 <h2 id="start">직접 시작하기</h2>
 <p><code>&lt;head&gt;</code>에 두 줄을 넣으면 글꼴, 토큰, 아이콘, 컴포넌트가 함께 들어옵니다. 쓰는 법은 <a class="ds-link" href="components/index.html">Components</a>에 있습니다.</p>
 ${codeTabs([['최신 버전', codeblock(CSS_LINK)], [`버전 고정 v${VERSION}`, codeblock(CSS_LINK.split(`${PUBLIC}/dist/`).join(`${PIN}/dist/`))]])}
-<p>운영 서비스는 버전을 고정한 주소를 쓰고, 새 버전은 <a class="ds-link" href="updates.html">Updates</a>를 확인한 뒤 올립니다.</p>
 
 <h2 id="migrate">내 사이트에 적용해보기</h2>
 <p>운영 중인 사이트는 한 번에 바꾸지 않고 아래 순서대로 적용합니다. 브랜드 컬러와 규칙 점검은 위 <a class="ds-link" href="#ai">AI로 시작하기</a>의 글을 그대로 씁니다.</p>

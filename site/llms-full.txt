@@ -112,8 +112,6 @@ yds 규칙을 지키는지 점검하고 고쳐 줘.
 <script src="https://cdn.jsdelivr.net/gh/luvms012-rgb/yds@v1.1.0/dist/ybm-ds.js" defer></script>
 ```
 
-운영 서비스는 버전을 고정한 주소를 쓰고, 새 버전은 [Updates](https://luvms012-rgb.github.io/yds/site/updates.html)를 확인한 뒤 올립니다.
-
 ## 내 사이트에 적용해보기
 
 운영 중인 사이트는 한 번에 바꾸지 않고 아래 순서대로 적용합니다. 브랜드 컬러와 규칙 점검은 위 AI로 시작하기의 글을 그대로 씁니다.
