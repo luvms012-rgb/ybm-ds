@@ -9,9 +9,9 @@
 <script>try { var t = localStorage.getItem("ybm-site-theme"); if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.dataset.theme = "dark"; } catch (e) {}</script>
 <link rel="icon" href="assets/logo-ybmnet.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../dist/ybm-ds.css">
-<link rel="stylesheet" href="assets/site.css?v=30e3322f">
+<link rel="stylesheet" href="assets/site.css?v=f30101fb">
 <script src="../dist/ybm-ds.js" defer></script>
-<script src="assets/site.js?v=30e3322f" defer></script>
+<script src="assets/site.js?v=f30101fb" defer></script>
 </head>
 <body class="site">
 <a class="site-skip" href="#main">본문 바로가기</a>
@@ -150,6 +150,17 @@
 <tbody><tr><td><a class="ds-link" href="ai/AGENTS.md" target="_blank" rel="noopener">AGENTS.md</a></td><td>프로젝트 맨 위 폴더에 두면 AI 코딩 도구가 늘 yds 규칙을 읽습니다. Claude는 <a class="ds-link" href="ai/CLAUDE.md" target="_blank" rel="noopener">CLAUDE.md</a>, Cursor는 <a class="ds-link" href="ai/yds.mdc" target="_blank" rel="noopener">yds.mdc</a>로 둡니다.</td></tr>
 <tr><td><a class="ds-link" href="llms.txt" target="_blank" rel="noopener">llms.txt</a></td><td>AI에 주소를 알려 줄 때. 컴포넌트 목록, 토큰, 아이콘 같은 나머지 파일 주소도 여기에 있습니다.</td></tr>
 <tr><td><a class="ds-link" href="ai/yds-check.mjs" target="_blank" rel="noopener">yds-check.mjs</a></td><td>만든 화면이 규칙을 지키는지 볼 때. <code>node yds-check.mjs 폴더</code>로 돌립니다.</td></tr></tbody></table></div>
+
+<h2 id="ask">디자이너에게 묻기<a class="site-anchor" href="#ask" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
+<p>yds로 만들어도 디자이너가 봐야 하는 화면이 있습니다. 아래에 하나라도 해당하면 만들기 전과 내보내기 전에 한 번씩 보여 주세요.</p>
+<div class="ds-table-wrap"><table class="ds-table" data-density="compact">
+<thead><tr><th scope="col">이럴 때</th><th scope="col">보여 줄 것</th></tr></thead>
+<tbody><tr><td>yds에 없는 부품을 새로 그리거나 모양을 덮어썼다</td><td>그 부분 캡처</td></tr>
+<tr><td>가입, 결제처럼 단계가 이어지는 흐름을 새로 짰다</td><td>흐름 전체</td></tr>
+<tr><td>빈 상태, 오류, 권한 없음 화면을 안 그렸다</td><td>그 화면</td></tr>
+<tr><td>첫 화면, 로그인, 완료 화면처럼 인상을 정하는 화면이다</td><td>실제 글이 들어간 화면</td></tr></tbody></table></div>
+<p><a class="ds-btn" data-variant="neutralSolid" data-size="medium" href="https://github.com/luvms012-rgb/yds/issues/new?template=question.md&title=%5B%EC%A7%88%EB%AC%B8%5D%20%ED%99%94%EB%A9%B4%20%EC%9D%B4%EB%A6%84" target="_blank" rel="noopener">물어보기</a></p>
+<p>같은 질문이 쌓이면 문서와 부품으로 올립니다. 답은 이 문서에 씁니다.</p>
 
 
 

@@ -29,6 +29,7 @@ alwaysApply: true
 - 화면: 모바일 먼저 만들고 768px, 1280px에서 배치를 바꾼다. 비슷한 화면이 Templates에 있으면 그 HTML에서 시작한다.
 - 글자: 한국어. 제목 Bold, 항목 제목 SemiBold, 본문 Regular, 본문은 word-break: keep-all.
 - 점검: 끝내기 전에 검사 스크립트(https://luvms012-rgb.github.io/yds/site/ai/yds-check.mjs)를 받아 node로 돌리고, 나온 문제를 모두 고친다.
+- 디자이너 확인: yds에 없는 부품을 새로 그리거나 모양을 덮어썼을 때, 단계가 이어지는 흐름을 새로 짰을 때, 빈 상태나 오류 화면이 없을 때, 첫 화면처럼 인상을 정하는 화면일 때는 화면을 만든 뒤 "디자이너 확인이 필요합니다"라고 함께 알린다. 묻는 곳: https://github.com/luvms012-rgb/yds/issues/new?template=question.md&title=%5B%EC%A7%88%EB%AC%B8%5D%20%ED%99%94%EB%A9%B4%20%EC%9D%B4%EB%A6%84
 
 ## 운영 중인 사이트에 옮길 때
 

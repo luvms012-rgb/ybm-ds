@@ -138,3 +138,18 @@ yds로 [만들 화면, 예: 회원 목록 화면]을 만들어 줘.
 | [AGENTS.md](https://luvms012-rgb.github.io/yds/site/ai/AGENTS.md) | 프로젝트 맨 위 폴더에 두면 AI 코딩 도구가 늘 yds 규칙을 읽습니다. Claude는 [CLAUDE.md](https://luvms012-rgb.github.io/yds/site/ai/CLAUDE.md), Cursor는 [yds.mdc](https://luvms012-rgb.github.io/yds/site/ai/yds.mdc)로 둡니다. |
 | [llms.txt](https://luvms012-rgb.github.io/yds/site/llms.txt) | AI에 주소를 알려 줄 때. 컴포넌트 목록, 토큰, 아이콘 같은 나머지 파일 주소도 여기에 있습니다. |
 | [yds-check.mjs](https://luvms012-rgb.github.io/yds/site/ai/yds-check.mjs) | 만든 화면이 규칙을 지키는지 볼 때. `node yds-check.mjs 폴더`로 돌립니다. |
+
+## 디자이너에게 묻기
+
+yds로 만들어도 디자이너가 봐야 하는 화면이 있습니다. 아래에 하나라도 해당하면 만들기 전과 내보내기 전에 한 번씩 보여 주세요.
+
+| 이럴 때 | 보여 줄 것 |
+| --- | --- |
+| yds에 없는 부품을 새로 그리거나 모양을 덮어썼다 | 그 부분 캡처 |
+| 가입, 결제처럼 단계가 이어지는 흐름을 새로 짰다 | 흐름 전체 |
+| 빈 상태, 오류, 권한 없음 화면을 안 그렸다 | 그 화면 |
+| 첫 화면, 로그인, 완료 화면처럼 인상을 정하는 화면이다 | 실제 글이 들어간 화면 |
+
+[물어보기](https://github.com/luvms012-rgb/yds/issues/new?template=question.md&title=%5B%EC%A7%88%EB%AC%B8%5D%20%ED%99%94%EB%A9%B4%20%EC%9D%B4%EB%A6%84)
+
+같은 질문이 쌓이면 문서와 부품으로 올립니다. 답은 이 문서에 씁니다.
