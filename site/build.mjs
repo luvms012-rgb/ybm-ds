@@ -488,6 +488,14 @@ ${table(['파일', '이럴 때 씁니다'], [
   [`<a class="ds-link" href="ai/yds-check.mjs" target="_blank" rel="noopener">yds-check.mjs</a>`, '만든 화면이 규칙을 지키는지 볼 때. <code>node yds-check.mjs 폴더</code>로 돌립니다.'],
   ...(SHOW_THEMES ? [['Themes', '테마 CSS 주소와 어울리는 서비스입니다.']] : []),
 ])}
+<h3>기획자, 마케터</h3>
+<p>코드를 몰라도 AI 대화창에 파일을 첨부하고 말로 설명하면 yds 화면 시안을 받을 수 있습니다.</p>
+${codeblock(`첨부한 llms-full.txt 의 yds 기준으로 화면 시안을 만들어 줘.\n만들 화면: [이벤트 신청 페이지]\n들어갈 내용: [제목, 기간, 안내 글, 신청 버튼]\n결과는 브라우저에서 바로 열 수 있는 HTML 파일 하나로 줘.`, 'text', ' data-wrap')}
+${table(['파일', '이럴 때 씁니다'], [
+  [`<a class="ds-link" href="llms-full.txt" target="_blank" rel="noopener">llms-full.txt</a>`, '내려받아 AI 대화창(ChatGPT, Claude 등)에 첨부합니다. 기획안, 이벤트 페이지, 설문 화면 시안을 만들 때.'],
+  [`<a class="ds-link" href="templates/index.html">Templates</a>`, '비슷한 화면을 골라 그 주소를 AI에 알려 주고 문구만 바꿔 달라고 할 때.'],
+  ['화면 캡처', '지금 쓰는 화면을 캡처해 함께 올리고 yds로 다시 그려 달라고 할 때. 바꾸기 전후를 나란히 비교해 볼 수 있습니다.'],
+])}
 
 ${SHOW_THEMES ? `<h2 id="custom-theme">테마</h2>
 <p>테마는 브랜드 색, 바탕색, 모서리 곡률을 한 번에 바꿉니다. DS 다음에 테마 파일을 붙이고 html에 테마 이름을 적으면 됩니다. 고를 수 있는 테마는 <a class="ds-link" data-size="small" href="themes/index.html">Themes</a>에 있습니다.</p>
