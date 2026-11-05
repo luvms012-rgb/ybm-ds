@@ -59,7 +59,9 @@ function table(head, rows, widths, name = 'Table') {
     const row = box('HORIZONTAL', i ? 'Row' : 'Head', { pad: [i ? 14 : 12, 20], gap: 24 }); row.counterAxisAlignItems = 'CENTER';
     add(t, row, true); bottomLine(row, i < all.length - 1);
     r.forEach((cell, j) => {
-      const node = typeof cell === 'function' ? cell() : text(cell, i ? T.lead : T.head, i ? 'fg/neutral' : 'fg/neutral-muted', i ? 'Cell' : 'Head Cell');
+      let node = typeof cell === 'function' ? cell() : text(cell, i ? T.lead : T.head, i ? 'fg/neutral' : 'fg/neutral-muted', i ? 'Cell' : 'Head Cell');
+      // 부품(배지 등)은 제 크기 그대로 두고 칸 틀에 넣는다 (부품 자체를 칸 폭으로 늘리지 않는다)
+      if (node.type === 'INSTANCE') { const c = box('HORIZONTAL', 'Cell'); c.counterAxisAlignItems = 'CENTER'; c.appendChild(node); node = c; }
       row.appendChild(node);
       if (widths[j]) { if (node.type === 'TEXT') { node.textAutoResize = 'HEIGHT'; node.resize(widths[j], node.height); } else node.resize(widths[j], node.height); node.layoutSizingHorizontal = 'FIXED'; if (node.type !== 'TEXT') node.layoutSizingVertical = 'HUG'; }
       else { node.layoutSizingHorizontal = 'FILL'; if (node.type === 'TEXT') node.textAutoResize = 'HEIGHT'; }

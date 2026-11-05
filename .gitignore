@@ -3,6 +3,7 @@ tokens/.figma-check.js
 tokens/.figma-links.js
 tokens/.figma-docs.json
 tokens/.figma-docs.js
+tokens/.figma-docpage.js
 tokens/.figma-capture/
 tokens/.figma-result.json
 tokens/.figma-variables-result.json
