@@ -320,7 +320,7 @@ body[data-side-open] .site-scrim { opacity: 1; pointer-events: auto; }
   .site-tpl__actions { display: none; }
 }
 .site-doc > .site-hero--tpl .site-lead { margin-top: var(--ds-space-x4); }  /* 설명은 Components 와 같은 17/28 */
-.site-toolbar--center .ds-chiptabs { --ds-ct-height: 32px; --ds-ct-padding-x: 12px; flex-wrap: wrap; overflow: visible; gap: var(--ds-space-x1); }
+.site-toolbar--wrap .ds-chiptabs { --ds-ct-height: 32px; --ds-ct-padding-x: 12px; flex-wrap: wrap; overflow: visible; gap: var(--ds-space-x1); }
 
 .site-frame { margin-top: var(--ds-space-x6); overflow: hidden; border: 1px solid var(--site-box-line); border-radius: var(--site-box-radius); background: var(--ds-color-bg-layer-default); }
 .site-frame__bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--ds-space-x2); padding: var(--ds-space-x2) var(--ds-space-x3); box-shadow: inset 0 -1px 0 var(--site-box-line); }

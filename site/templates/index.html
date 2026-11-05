@@ -8,9 +8,9 @@
 <script>try { var t = localStorage.getItem("ybm-site-theme"); if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.dataset.theme = "dark"; } catch (e) {}</script>
 <link rel="icon" href="../assets/logo-ybmnet.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../dist/ybm-ds.css">
-<link rel="stylesheet" href="../assets/site.css?v=3d1428e2">
+<link rel="stylesheet" href="../assets/site.css?v=c31f624b">
 <script src="../../dist/ybm-ds.js" defer></script>
-<script src="../assets/site.js?v=3d1428e2" defer></script>
+<script src="../assets/site.js?v=c31f624b" defer></script>
 </head>
 <body class="site">
 <a class="site-skip" href="#main">본문 바로가기</a>
@@ -108,7 +108,7 @@
 <article class="site-doc">
 <header class="site-head"><h1 class="site-h1">Templates</h1><p class="site-lead">자주 만드는 화면을 DS 컴포넌트로 미리 조립해 두었습니다.</p>
 </header>
-<div class="site-toolbar">
+<div class="site-toolbar site-toolbar--wrap">
   <div class="ds-chiptabs" role="tablist" aria-label="분류">
     <button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-filter="">전체</button>
     <button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-filter="Dashboard">대시보드</button>
@@ -131,469 +131,469 @@
 </div>
 <div class="site-tpl-grid">
 <article class="site-tpl" data-site-item="분석 대시보드 analytics dashboard dashboard 서비스 이용 흐름을 한눈에 보는 기본 분석 대시보드입니다. 추이 그래프와 핵심 지표를 먼저 보여 줍니다." data-site-cat="Dashboard">
-  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/dashboard.html" title="분석 대시보드 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/dashboard.html" title="분석 대시보드 미리보기" tabindex="-1" loading="lazy" scrolling="no" data-site-frame></iframe></div>
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="dashboard.html">분석 대시보드</a></h3><p class="site-tpl__desc">서비스 이용 흐름을 한눈에 보는 기본 분석 대시보드입니다. 추이 그래프와 핵심 지표를 먼저 보여 줍니다.</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="dashboard.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
   </div>
 </article>
 <article class="site-tpl" data-site-item="프로젝트 현황 대시보드 project status dashboard dashboard 프로젝트가 어디까지 왔는지 일정과 진행률로 보여 주는 대시보드입니다." data-site-cat="Dashboard">
-  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/dashboard-progress.html" title="프로젝트 현황 대시보드 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/dashboard-progress.html" title="프로젝트 현황 대시보드 미리보기" tabindex="-1" loading="lazy" scrolling="no" data-site-frame></iframe></div>
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="dashboard-progress.html">프로젝트 현황 대시보드</a></h3><p class="site-tpl__desc">프로젝트가 어디까지 왔는지 일정과 진행률로 보여 주는 대시보드입니다.</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="dashboard-progress.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
   </div>
 </article>
 <article class="site-tpl" data-site-item="서비스 모니터링 대시보드 service monitoring dashboard dashboard 서비스 상태를 지켜보며 문제를 바로 알아채는 모니터링 화면입니다. 알림은 오른쪽에 따로 모아 둡니다." data-site-cat="Dashboard">
-  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/dashboard-alert-rail.html" title="서비스 모니터링 대시보드 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/dashboard-alert-rail.html" title="서비스 모니터링 대시보드 미리보기" tabindex="-1" loading="lazy" scrolling="no" data-site-frame></iframe></div>
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="dashboard-alert-rail.html">서비스 모니터링 대시보드</a></h3><p class="site-tpl__desc">서비스 상태를 지켜보며 문제를 바로 알아채는 모니터링 화면입니다. 알림은 오른쪽에 따로 모아 둡니다.</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="dashboard-alert-rail.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
   </div>
 </article>
 <article class="site-tpl" data-site-item="접는 표 collapsible table table 열 구성이 다른 표 여러 개를 접고 펼치며 보는 화면입니다. 표 하나로 합치면 빈칸이 많아질 때 씁니다." data-site-cat="Table">
-  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/table-collapsible.html" title="접는 표 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/table-collapsible.html" title="접는 표 미리보기" tabindex="-1" loading="lazy" scrolling="no" data-site-frame></iframe></div>
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="table-collapsible.html">접는 표</a></h3><p class="site-tpl__desc">열 구성이 다른 표 여러 개를 접고 펼치며 보는 화면입니다. 표 하나로 합치면 빈칸이 많아질 때 씁니다.</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="table-collapsible.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
   </div>
 </article>
 <article class="site-tpl" data-site-item="필터 표 filterable table table 검색과 조건으로 필요한 행만 골라 보는 표입니다. 행이 많고 거르는 기준이 여럿일 때 씁니다." data-site-cat="Table">
-  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/table-filter.html" title="필터 표 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/table-filter.html" title="필터 표 미리보기" tabindex="-1" loading="lazy" scrolling="no" data-site-frame></iframe></div>
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="table-filter.html">필터 표</a></h3><p class="site-tpl__desc">검색과 조건으로 필요한 행만 골라 보는 표입니다. 행이 많고 거르는 기준이 여럿일 때 씁니다.</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="table-filter.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
   </div>
 </article>
 <article class="site-tpl" data-site-item="묶음 표 grouped table table 행을 상태별로 묶어 보여 주는 표입니다. 긴 목록을 몇 덩어리로 나눠 읽을 때 씁니다." data-site-cat="Table">
-  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/table-grouped.html" title="묶음 표 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/table-grouped.html" title="묶음 표 미리보기" tabindex="-1" loading="lazy" scrolling="no" data-site-frame></iframe></div>
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="table-grouped.html">묶음 표</a></h3><p class="site-tpl__desc">행을 상태별로 묶어 보여 주는 표입니다. 긴 목록을 몇 덩어리로 나눠 읽을 때 씁니다.</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="table-grouped.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
   </div>
 </article>
 <article class="site-tpl" data-site-item="받은함 표 inbox table table 왼쪽 목록에서 고른 항목을 오른쪽에서 바로 읽는 받은함입니다. 메일이나 문의처럼 하나씩 열어 처리할 때 씁니다." data-site-cat="Table">
-  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/table-inbox.html" title="받은함 표 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/table-inbox.html" title="받은함 표 미리보기" tabindex="-1" loading="lazy" scrolling="no" data-site-frame></iframe></div>
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="table-inbox.html">받은함 표</a></h3><p class="site-tpl__desc">왼쪽 목록에서 고른 항목을 오른쪽에서 바로 읽는 받은함입니다. 메일이나 문의처럼 하나씩 열어 처리할 때 씁니다.</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="table-inbox.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
   </div>
 </article>
 <article class="site-tpl" data-site-item="검색 표 searchable table table 문서 한 건의 정보와 항목 표를 함께 보는 화면입니다. 청구서처럼 항목이 많은 문서에 씁니다." data-site-cat="Table">
-  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/table-page.html" title="검색 표 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/table-page.html" title="검색 표 미리보기" tabindex="-1" loading="lazy" scrolling="no" data-site-frame></iframe></div>
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="table-page.html">검색 표</a></h3><p class="site-tpl__desc">문서 한 건의 정보와 항목 표를 함께 보는 화면입니다. 청구서처럼 항목이 많은 문서에 씁니다.</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="table-page.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
   </div>
 </article>
 <article class="site-tpl" data-site-item="트리 표 tree table table 상위 행을 펼치면 하위 행이 나오는 계층 표입니다. 폴더처럼 단계가 있는 목록에 씁니다." data-site-cat="Table">
-  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/table-tree.html" title="트리 표 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/table-tree.html" title="트리 표 미리보기" tabindex="-1" loading="lazy" scrolling="no" data-site-frame></iframe></div>
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="table-tree.html">트리 표</a></h3><p class="site-tpl__desc">상위 행을 펼치면 하위 행이 나오는 계층 표입니다. 폴더처럼 단계가 있는 목록에 씁니다.</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="table-tree.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
   </div>
 </article>
 <article class="site-tpl" data-site-item="결제 폼 checkout form form 결제 정보를 한 화면에서 입력하는 폼입니다. 주문 요약을 옆에 두어 합계를 보면서 결제합니다." data-site-cat="Form">
-  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/payment-form.html" title="결제 폼 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/payment-form.html" title="결제 폼 미리보기" tabindex="-1" loading="lazy" scrolling="no" data-site-frame></iframe></div>
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="payment-form.html">결제 폼</a></h3><p class="site-tpl__desc">결제 정보를 한 화면에서 입력하는 폼입니다. 주문 요약을 옆에 두어 합계를 보면서 결제합니다.</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="payment-form.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
   </div>
 </article>
 <article class="site-tpl" data-site-item="결제 단계 checkout wizard form 배송부터 결제까지 단계를 나눠 진행하는 결제 화면입니다. 입력할 것이 많을 때 한 번에 한 가지씩 받습니다." data-site-cat="Form">
-  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/checkout-wizard.html" title="결제 단계 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/checkout-wizard.html" title="결제 단계 미리보기" tabindex="-1" loading="lazy" scrolling="no" data-site-frame></iframe></div>
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="checkout-wizard.html">결제 단계</a></h3><p class="site-tpl__desc">배송부터 결제까지 단계를 나눠 진행하는 결제 화면입니다. 입력할 것이 많을 때 한 번에 한 가지씩 받습니다.</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="checkout-wizard.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
   </div>
 </article>
 <article class="site-tpl" data-site-item="문의 폼 contact form form 문의 내용을 한 화면에서 받는 폼입니다. 단계 없이 맨 아래 버튼 하나로 보냅니다." data-site-cat="Form">
-  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/contact-form.html" title="문의 폼 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/contact-form.html" title="문의 폼 미리보기" tabindex="-1" loading="lazy" scrolling="no" data-site-frame></iframe></div>
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="contact-form.html">문의 폼</a></h3><p class="site-tpl__desc">문의 내용을 한 화면에서 받는 폼입니다. 단계 없이 맨 아래 버튼 하나로 보냅니다.</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="contact-form.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
   </div>
 </article>
 <article class="site-tpl" data-site-item="대화상자 단계 폼 dialog wizard form 보던 화면 위에 창을 띄워 짧은 단계를 진행하는 폼입니다. 화면을 떠나지 않고 간단한 설정을 마칠 때 씁니다." data-site-cat="Form">
-  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/form-wizard-dialog.html" title="대화상자 단계 폼 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/form-wizard-dialog.html" title="대화상자 단계 폼 미리보기" tabindex="-1" loading="lazy" scrolling="no" data-site-frame></iframe></div>
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="form-wizard-dialog.html">대화상자 단계 폼</a></h3><p class="site-tpl__desc">보던 화면 위에 창을 띄워 짧은 단계를 진행하는 폼입니다. 화면을 떠나지 않고 간단한 설정을 마칠 때 씁니다.</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="form-wizard-dialog.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
   </div>
 </article>
 <article class="site-tpl" data-site-item="단계 폼 form wizard form 한 단계에 한 화면씩 넘어가며 입력하는 폼입니다. 순서가 중요한 입력에 씁니다." data-site-cat="Form">
-  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/form-wizard.html" title="단계 폼 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/form-wizard.html" title="단계 폼 미리보기" tabindex="-1" loading="lazy" scrolling="no" data-site-frame></iframe></div>
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="form-wizard.html">단계 폼</a></h3><p class="site-tpl__desc">한 단계에 한 화면씩 넘어가며 입력하는 폼입니다. 순서가 중요한 입력에 씁니다.</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="form-wizard.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
   </div>
 </article>
 <article class="site-tpl" data-site-item="펼치는 단계 폼 inline wizard form 모든 단계를 한 페이지에 펼쳐 놓고 차례로 입력하는 폼입니다. 끝난 단계는 입력한 내용만 짧게 보여 줍니다." data-site-cat="Form">
-  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/form-wizard-inline.html" title="펼치는 단계 폼 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/form-wizard-inline.html" title="펼치는 단계 폼 미리보기" tabindex="-1" loading="lazy" scrolling="no" data-site-frame></iframe></div>
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="form-wizard-inline.html">펼치는 단계 폼</a></h3><p class="site-tpl__desc">모든 단계를 한 페이지에 펼쳐 놓고 차례로 입력하는 폼입니다. 끝난 단계는 입력한 내용만 짧게 보여 줍니다.</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="form-wizard-inline.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
   </div>
 </article>
 <article class="site-tpl" data-site-item="두 칸 폼 two-column form form 입력 칸을 두 열로 나눈 문의 폼입니다. 넓은 화면에서 긴 폼이 짧아 보입니다." data-site-cat="Form">
-  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/form-two-column.html" title="두 칸 폼 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/form-two-column.html" title="두 칸 폼 미리보기" tabindex="-1" loading="lazy" scrolling="no" data-site-frame></iframe></div>
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="form-two-column.html">두 칸 폼</a></h3><p class="site-tpl__desc">입력 칸을 두 열로 나눈 문의 폼입니다. 넓은 화면에서 긴 폼이 짧아 보입니다.</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="form-two-column.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
   </div>
 </article>
 <article class="site-tpl" data-site-item="세로 단계 폼 vertical wizard form 왼쪽에 단계 목록을 세로로 두는 폼입니다. 입력 항목이 많아 지금 위치를 자주 확인해야 할 때 씁니다." data-site-cat="Form">
-  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/form-wizard-vertical.html" title="세로 단계 폼 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/form-wizard-vertical.html" title="세로 단계 폼 미리보기" tabindex="-1" loading="lazy" scrolling="no" data-site-frame></iframe></div>
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="form-wizard-vertical.html">세로 단계 폼</a></h3><p class="site-tpl__desc">왼쪽에 단계 목록을 세로로 두는 폼입니다. 입력 항목이 많아 지금 위치를 자주 확인해야 할 때 씁니다.</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="form-wizard-vertical.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
   </div>
 </article>
 <article class="site-tpl" data-site-item="설정 대화상자 settings dialog settings 보던 화면을 떠나지 않고 창 안에서 설정을 바꾸는 화면입니다. 바꾼 값은 바로 적용됩니다." data-site-cat="Settings">
-  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/settings-dialog.html" title="설정 대화상자 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/settings-dialog.html" title="설정 대화상자 미리보기" tabindex="-1" loading="lazy" scrolling="no" data-site-frame></iframe></div>
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="settings-dialog.html">설정 대화상자</a></h3><p class="site-tpl__desc">보던 화면을 떠나지 않고 창 안에서 설정을 바꾸는 화면입니다. 바꾼 값은 바로 적용됩니다.</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="settings-dialog.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
   </div>
 </article>
 <article class="site-tpl" data-site-item="설정 폼 settings form settings 모든 설정을 한 페이지에 이어 놓은 가장 단순한 설정 화면입니다. 설정 항목이 많지 않을 때 씁니다." data-site-cat="Settings">
-  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/settings.html" title="설정 폼 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/settings.html" title="설정 폼 미리보기" tabindex="-1" loading="lazy" scrolling="no" data-site-frame></iframe></div>
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="settings.html">설정 폼</a></h3><p class="site-tpl__desc">모든 설정을 한 페이지에 이어 놓은 가장 단순한 설정 화면입니다. 설정 항목이 많지 않을 때 씁니다.</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="settings.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
   </div>
 </article>
 <article class="site-tpl" data-site-item="설정 패널 settings panels settings 왼쪽 메뉴로 설정 묶음을 오가는 설정 화면입니다. 항목은 그 자리에서 바로 수정합니다." data-site-cat="Settings">
-  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/settings-sidebar.html" title="설정 패널 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/settings-sidebar.html" title="설정 패널 미리보기" tabindex="-1" loading="lazy" scrolling="no" data-site-frame></iframe></div>
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="settings-sidebar.html">설정 패널</a></h3><p class="site-tpl__desc">왼쪽 메뉴로 설정 묶음을 오가는 설정 화면입니다. 항목은 그 자리에서 바로 수정합니다.</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="settings-sidebar.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
   </div>
 </article>
 <article class="site-tpl" data-site-item="로그인 카드 login card login 화면 가운데 카드 하나로 로그인하는 기본 로그인 화면입니다." data-site-cat="Login">
-  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/login-card.html" title="로그인 카드 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/login-card.html" title="로그인 카드 미리보기" tabindex="-1" loading="lazy" scrolling="no" data-site-frame></iframe></div>
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="login-card.html">로그인 카드</a></h3><p class="site-tpl__desc">화면 가운데 카드 하나로 로그인하는 기본 로그인 화면입니다.</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="login-card.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
   </div>
 </article>
 <article class="site-tpl" data-site-item="로그인 (화면 분할) login split login 한쪽에는 로그인 폼, 다른 쪽에는 사진을 둔 로그인 화면입니다. 서비스 분위기를 함께 전할 때 씁니다." data-site-cat="Login">
-  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/login-split.html" title="로그인 (화면 분할) 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/login-split.html" title="로그인 (화면 분할) 미리보기" tabindex="-1" loading="lazy" scrolling="no" data-site-frame></iframe></div>
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="login-split.html">로그인 (화면 분할)</a></h3><p class="site-tpl__desc">한쪽에는 로그인 폼, 다른 쪽에는 사진을 둔 로그인 화면입니다. 서비스 분위기를 함께 전할 때 씁니다.</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="login-split.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
   </div>
 </article>
 <article class="site-tpl" data-site-item="로그인 (sso) login sso login 이메일을 먼저 받고 회사 계정 로그인으로 이어 주는 화면입니다. 회사 계정이 없으면 비밀번호로 로그인합니다." data-site-cat="Login">
-  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/login-sso.html" title="로그인 (SSO) 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/login-sso.html" title="로그인 (SSO) 미리보기" tabindex="-1" loading="lazy" scrolling="no" data-site-frame></iframe></div>
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="login-sso.html">로그인 (SSO)</a></h3><p class="site-tpl__desc">이메일을 먼저 받고 회사 계정 로그인으로 이어 주는 화면입니다. 회사 계정이 없으면 비밀번호로 로그인합니다.</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="login-sso.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
   </div>
 </article>
 <article class="site-tpl" data-site-item="캔버스 편집기 canvas editor tools 정해진 크기의 화면 위에서 디자인하는 편집기입니다. 레이어와 속성을 양옆에 둡니다." data-site-cat="Tools">
-  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/canvas-editor.html" title="캔버스 편집기 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/canvas-editor.html" title="캔버스 편집기 미리보기" tabindex="-1" loading="lazy" scrolling="no" data-site-frame></iframe></div>
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="canvas-editor.html">캔버스 편집기</a></h3><p class="site-tpl__desc">정해진 크기의 화면 위에서 디자인하는 편집기입니다. 레이어와 속성을 양옆에 둡니다.</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="canvas-editor.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
   </div>
 </article>
 <article class="site-tpl" data-site-item="파일 탐색기 file explorer tools 폴더를 열 때마다 옆 칸에 이어 보여 주는 파일 탐색기입니다. 깊은 폴더도 경로를 놓치지 않고 찾아갑니다." data-site-cat="Tools">
-  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/file-explorer.html" title="파일 탐색기 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/file-explorer.html" title="파일 탐색기 미리보기" tabindex="-1" loading="lazy" scrolling="no" data-site-frame></iframe></div>
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="file-explorer.html">파일 탐색기</a></h3><p class="site-tpl__desc">폴더를 열 때마다 옆 칸에 이어 보여 주는 파일 탐색기입니다. 깊은 폴더도 경로를 놓치지 않고 찾아갑니다.</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="file-explorer.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
   </div>
 </article>
 <article class="site-tpl" data-site-item="코드 편집기 ide tools 파일 목록, 편집 창, 터미널을 한 화면에 둔 코드 편집기입니다. 칸마다 크기를 바꾸고 접을 수 있습니다." data-site-cat="Tools">
-  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/ide.html" title="코드 편집기 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/ide.html" title="코드 편집기 미리보기" tabindex="-1" loading="lazy" scrolling="no" data-site-frame></iframe></div>
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="ide.html">코드 편집기</a></h3><p class="site-tpl__desc">파일 목록, 편집 창, 터미널을 한 화면에 둔 코드 편집기입니다. 칸마다 크기를 바꾸고 접을 수 있습니다.</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="ide.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
   </div>
 </article>
 <article class="site-tpl" data-site-item="칸반 보드 kanban board tools 할 일을 상태별 열에 카드로 늘어놓은 보드입니다. 카드를 다른 열로 옮기면 상태가 바뀝니다." data-site-cat="Tools">
-  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/kanban-board.html" title="칸반 보드 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/kanban-board.html" title="칸반 보드 미리보기" tabindex="-1" loading="lazy" scrolling="no" data-site-frame></iframe></div>
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="kanban-board.html">칸반 보드</a></h3><p class="site-tpl__desc">할 일을 상태별 열에 카드로 늘어놓은 보드입니다. 카드를 다른 열로 옮기면 상태가 바뀝니다.</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="kanban-board.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
   </div>
 </article>
 <article class="site-tpl" data-site-item="페이지 편집기 page editor tools 블록을 끌어다 놓아 페이지를 만드는 편집기입니다. 고른 블록의 속성은 오른쪽에서 바꿉니다." data-site-cat="Tools">
-  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/editor.html" title="페이지 편집기 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/editor.html" title="페이지 편집기 미리보기" tabindex="-1" loading="lazy" scrolling="no" data-site-frame></iframe></div>
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="editor.html">페이지 편집기</a></h3><p class="site-tpl__desc">블록을 끌어다 놓아 페이지를 만드는 편집기입니다. 고른 블록의 속성은 오른쪽에서 바꿉니다.</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="editor.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
   </div>
 </article>
 <article class="site-tpl" data-site-item="카드 그리드 card grid content 카드를 훑어보며 원하는 항목을 찾는 목록 화면입니다. 분류 탭으로 바로 좁혀 봅니다." data-site-cat="Content">
-  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/library.html" title="카드 그리드 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/library.html" title="카드 그리드 미리보기" tabindex="-1" loading="lazy" scrolling="no" data-site-frame></iframe></div>
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="library.html">카드 그리드</a></h3><p class="site-tpl__desc">카드를 훑어보며 원하는 항목을 찾는 목록 화면입니다. 분류 탭으로 바로 좁혀 봅니다.</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="library.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
   </div>
 </article>
 <article class="site-tpl" data-site-item="문서 목록 documentation catalog content 문서 사이트의 첫 화면입니다. 분류별 카드로 원하는 문서에 바로 들어갑니다." data-site-cat="Content">
-  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/documentation.html" title="문서 목록 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/documentation.html" title="문서 목록 미리보기" tabindex="-1" loading="lazy" scrolling="no" data-site-frame></iframe></div>
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="documentation.html">문서 목록</a></h3><p class="site-tpl__desc">문서 사이트의 첫 화면입니다. 분류별 카드로 원하는 문서에 바로 들어갑니다.</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="documentation.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
   </div>
 </article>
 <article class="site-tpl" data-site-item="디자인 문서 documentation design content 설명 사이에 실제로 동작하는 예시를 넣은 디자인 문서입니다. 컴포넌트 사용법을 정리할 때 씁니다." data-site-cat="Content">
-  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/documentation-design.html" title="디자인 문서 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/documentation-design.html" title="디자인 문서 미리보기" tabindex="-1" loading="lazy" scrolling="no" data-site-frame></iframe></div>
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="documentation-design.html">디자인 문서</a></h3><p class="site-tpl__desc">설명 사이에 실제로 동작하는 예시를 넣은 디자인 문서입니다. 컴포넌트 사용법을 정리할 때 씁니다.</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="documentation-design.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
   </div>
 </article>
 <article class="site-tpl" data-site-item="기술 문서 documentation technical content 단계마다 번호와 코드를 붙인 따라 하기 문서입니다. 처음부터 끝까지 순서대로 따라가게 합니다." data-site-cat="Content">
-  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/documentation-technical.html" title="기술 문서 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/documentation-technical.html" title="기술 문서 미리보기" tabindex="-1" loading="lazy" scrolling="no" data-site-frame></iframe></div>
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="documentation-technical.html">기술 문서</a></h3><p class="site-tpl__desc">단계마다 번호와 코드를 붙인 따라 하기 문서입니다. 처음부터 끝까지 순서대로 따라가게 합니다.</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="documentation-technical.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
   </div>
 </article>
 <article class="site-tpl" data-site-item="주문 상세 order detail content 주문 한 건을 자세히 보고 처리하는 화면입니다. 상품과 진행 기록, 고객 정보를 한곳에서 확인합니다." data-site-cat="Content">
-  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/detail-page.html" title="주문 상세 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/detail-page.html" title="주문 상세 미리보기" tabindex="-1" loading="lazy" scrolling="no" data-site-frame></iframe></div>
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="detail-page.html">주문 상세</a></h3><p class="site-tpl__desc">주문 한 건을 자세히 보고 처리하는 화면입니다. 상품과 진행 기록, 고객 정보를 한곳에서 확인합니다.</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="detail-page.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
   </div>
 </article>
 <article class="site-tpl" data-site-item="상품 상세 product detail content 상품 하나를 자세히 보고 바로 구매하는 화면입니다." data-site-cat="Content">
-  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/product-detail.html" title="상품 상세 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/product-detail.html" title="상품 상세 미리보기" tabindex="-1" loading="lazy" scrolling="no" data-site-frame></iframe></div>
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="product-detail.html">상품 상세</a></h3><p class="site-tpl__desc">상품 하나를 자세히 보고 바로 구매하는 화면입니다.</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="product-detail.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
   </div>
 </article>
 <article class="site-tpl" data-site-item="할 일 상세 work item detail content 할 일 하나를 자세히 보고 진행 상황을 공유하는 화면입니다. 하위 할 일과 댓글로 함께 일합니다." data-site-cat="Content">
-  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/work-item-detail.html" title="할 일 상세 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/work-item-detail.html" title="할 일 상세 미리보기" tabindex="-1" loading="lazy" scrolling="no" data-site-frame></iframe></div>
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="work-item-detail.html">할 일 상세</a></h3><p class="site-tpl__desc">할 일 하나를 자세히 보고 진행 상황을 공유하는 화면입니다. 하위 할 일과 댓글로 함께 일합니다.</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="work-item-detail.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
   </div>
 </article>
 <article class="site-tpl" data-site-item="ai 대화 ai chat conversation ai chat ai와 주고받은 대화와 결과물을 함께 보는 화면입니다. 결과물은 옆 패널에서 따로 엽니다." data-site-cat="AI Chat">
-  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/ai-chat.html" title="AI 대화 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/ai-chat.html" title="AI 대화 미리보기" tabindex="-1" loading="lazy" scrolling="no" data-site-frame></iframe></div>
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="ai-chat.html">AI 대화</a></h3><p class="site-tpl__desc">AI와 주고받은 대화와 결과물을 함께 보는 화면입니다. 결과물은 옆 패널에서 따로 엽니다.</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="ai-chat.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
   </div>
 </article>
 <article class="site-tpl" data-site-item="ai 첫 화면 ai chat landing ai chat 대화를 시작하기 전에 보여 주는 ai 첫 화면입니다. 입력창과 추천 버튼으로 바로 시작합니다." data-site-cat="AI Chat">
-  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/ai-chat-landing.html" title="AI 첫 화면 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/ai-chat-landing.html" title="AI 첫 화면 미리보기" tabindex="-1" loading="lazy" scrolling="no" data-site-frame></iframe></div>
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="ai-chat-landing.html">AI 첫 화면</a></h3><p class="site-tpl__desc">대화를 시작하기 전에 보여 주는 AI 첫 화면입니다. 입력창과 추천 버튼으로 바로 시작합니다.</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="ai-chat-landing.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
   </div>
 </article>
 <article class="site-tpl" data-site-item="가운데 히어로 centered hero gallery 큰 제목과 버튼을 가운데 두고 아래에 넓은 사진을 놓은 첫 화면입니다." data-site-cat="Gallery">
-  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/centered-hero.html" title="가운데 히어로 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/centered-hero.html" title="가운데 히어로 미리보기" tabindex="-1" loading="lazy" scrolling="no" data-site-frame></iframe></div>
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="centered-hero.html">가운데 히어로</a></h3><p class="site-tpl__desc">큰 제목과 버튼을 가운데 두고 아래에 넓은 사진을 놓은 첫 화면입니다.</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="centered-hero.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
   </div>
 </article>
 <article class="site-tpl" data-site-item="바둑판 갤러리 classic gallery gallery 같은 비율의 사진을 바둑판처럼 늘어놓은 갤러리입니다. 분류 탭으로 바로 걸러 봅니다." data-site-cat="Gallery">
-  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/classic-gallery.html" title="바둑판 갤러리 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/classic-gallery.html" title="바둑판 갤러리 미리보기" tabindex="-1" loading="lazy" scrolling="no" data-site-frame></iframe></div>
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="classic-gallery.html">바둑판 갤러리</a></h3><p class="site-tpl__desc">같은 비율의 사진을 바둑판처럼 늘어놓은 갤러리입니다. 분류 탭으로 바로 걸러 봅니다.</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="classic-gallery.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
   </div>
 </article>
 <article class="site-tpl" data-site-item="사진 히어로 gallery hero gallery 제목 아래에 사진 여러 장을 모아 놓은 첫 화면입니다. 다양한 장면을 한 번에 보여 줄 때 씁니다." data-site-cat="Gallery">
-  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/gallery-hero.html" title="사진 히어로 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/gallery-hero.html" title="사진 히어로 미리보기" tabindex="-1" loading="lazy" scrolling="no" data-site-frame></iframe></div>
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="gallery-hero.html">사진 히어로</a></h3><p class="site-tpl__desc">제목 아래에 사진 여러 장을 모아 놓은 첫 화면입니다. 다양한 장면을 한 번에 보여 줄 때 씁니다.</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="gallery-hero.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
   </div>
 </article>
 <article class="site-tpl" data-site-item="벽돌형 갤러리 mixed gallery gallery 높이가 다른 사진을 자르지 않고 쌓아 올린 벽돌형 갤러리입니다." data-site-cat="Gallery">
-  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/mixed-gallery.html" title="벽돌형 갤러리 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/mixed-gallery.html" title="벽돌형 갤러리 미리보기" tabindex="-1" loading="lazy" scrolling="no" data-site-frame></iframe></div>
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="mixed-gallery.html">벽돌형 갤러리</a></h3><p class="site-tpl__desc">높이가 다른 사진을 자르지 않고 쌓아 올린 벽돌형 갤러리입니다.</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="mixed-gallery.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
   </div>
 </article>
 <article class="site-tpl" data-site-item="상품 갤러리 product gallery gallery 같은 모양의 상품 카드를 늘어놓은 갤러리입니다. 구성이 단순해 둘러보며 고르기 쉽습니다." data-site-cat="Gallery">
-  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/product-gallery.html" title="상품 갤러리 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/product-gallery.html" title="상품 갤러리 미리보기" tabindex="-1" loading="lazy" scrolling="no" data-site-frame></iframe></div>
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="product-gallery.html">상품 갤러리</a></h3><p class="site-tpl__desc">같은 모양의 상품 카드를 늘어놓은 갤러리입니다. 구성이 단순해 둘러보며 고르기 쉽습니다.</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="product-gallery.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
   </div>
 </article>
 <article class="site-tpl" data-site-item="필터 갤러리 side gallery gallery 한쪽에 제목과 설명, 반대쪽에 사진 묶음을 둔 첫 화면입니다." data-site-cat="Gallery">
-  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/side-gallery.html" title="필터 갤러리 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/side-gallery.html" title="필터 갤러리 미리보기" tabindex="-1" loading="lazy" scrolling="no" data-site-frame></iframe></div>
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="side-gallery.html">필터 갤러리</a></h3><p class="site-tpl__desc">한쪽에 제목과 설명, 반대쪽에 사진 묶음을 둔 첫 화면입니다.</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="side-gallery.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
   </div>
 </article>
 <article class="site-tpl" data-site-item="게시판 목록 board list community 카페형 게시판의 글 목록입니다. 말머리로 거르고 공지는 위에 고정합니다." data-site-cat="Community">
-  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/community-board.html" title="게시판 목록 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/community-board.html" title="게시판 목록 미리보기" tabindex="-1" loading="lazy" scrolling="no" data-site-frame></iframe></div>
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="community-board.html">게시판 목록</a></h3><p class="site-tpl__desc">카페형 게시판의 글 목록입니다. 말머리로 거르고 공지는 위에 고정합니다.</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="community-board.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
   </div>
 </article>
 <article class="site-tpl" data-site-item="커뮤니티 홈 community home community 게시판형 커뮤니티의 첫 화면입니다. 지금 뜨는 글과 새 글을 한곳에서 봅니다." data-site-cat="Community">
-  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/community-home.html" title="커뮤니티 홈 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/community-home.html" title="커뮤니티 홈 미리보기" tabindex="-1" loading="lazy" scrolling="no" data-site-frame></iframe></div>
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="community-home.html">커뮤니티 홈</a></h3><p class="site-tpl__desc">게시판형 커뮤니티의 첫 화면입니다. 지금 뜨는 글과 새 글을 한곳에서 봅니다.</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="community-home.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
   </div>
 </article>
 <article class="site-tpl" data-site-item="게시글 상세 post detail community 게시글 하나를 읽고 댓글로 이야기를 나누는 화면입니다." data-site-cat="Community">
-  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/community-post.html" title="게시글 상세 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/community-post.html" title="게시글 상세 미리보기" tabindex="-1" loading="lazy" scrolling="no" data-site-frame></iframe></div>
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="community-post.html">게시글 상세</a></h3><p class="site-tpl__desc">게시글 하나를 읽고 댓글로 이야기를 나누는 화면입니다.</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="community-post.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
   </div>
 </article>
 <article class="site-tpl" data-site-item="글쓰기 write post community 커뮤니티에 새 글을 쓰는 화면입니다. 게시판과 말머리를 고른 뒤 글과 사진을 올립니다." data-site-cat="Community">
-  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/community-write.html" title="글쓰기 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/community-write.html" title="글쓰기 미리보기" tabindex="-1" loading="lazy" scrolling="no" data-site-frame></iframe></div>
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="community-write.html">글쓰기</a></h3><p class="site-tpl__desc">커뮤니티에 새 글을 쓰는 화면입니다. 게시판과 말머리를 고른 뒤 글과 사진을 올립니다.</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="community-write.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
   </div>
 </article>
 <article class="site-tpl" data-site-item="구독 해지 cancel subscription pricing 구독을 해지하기 전에 잃게 되는 혜택을 알려 주는 화면입니다. 할인을 한 번 더 권하고, 해지 여부는 사용자가 정합니다." data-site-cat="Pricing">
-  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/subscription-cancel.html" title="구독 해지 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/subscription-cancel.html" title="구독 해지 미리보기" tabindex="-1" loading="lazy" scrolling="no" data-site-frame></iframe></div>
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="subscription-cancel.html">구독 해지</a></h3><p class="site-tpl__desc">구독을 해지하기 전에 잃게 되는 혜택을 알려 주는 화면입니다. 할인을 한 번 더 권하고, 해지 여부는 사용자가 정합니다.</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="subscription-cancel.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
   </div>
 </article>
 <article class="site-tpl" data-site-item="요금제 비교 pricing plans pricing 요금제를 나란히 놓고 비교하는 화면입니다. 월 결제와 연 결제를 바꿔 가며 가격을 견줘 봅니다." data-site-cat="Pricing">
-  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/pricing-plans.html" title="요금제 비교 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/pricing-plans.html" title="요금제 비교 미리보기" tabindex="-1" loading="lazy" scrolling="no" data-site-frame></iframe></div>
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="pricing-plans.html">요금제 비교</a></h3><p class="site-tpl__desc">요금제를 나란히 놓고 비교하는 화면입니다. 월 결제와 연 결제를 바꿔 가며 가격을 견줘 봅니다.</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="pricing-plans.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
   </div>
 </article>
 <article class="site-tpl" data-site-item="구독 결제 subscription checkout pricing 고른 요금제를 결제하는 화면입니다. 오늘 결제할 금액과 다음 결제일을 옆에 보여 줍니다." data-site-cat="Pricing">
-  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/subscription-checkout.html" title="구독 결제 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/subscription-checkout.html" title="구독 결제 미리보기" tabindex="-1" loading="lazy" scrolling="no" data-site-frame></iframe></div>
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="subscription-checkout.html">구독 결제</a></h3><p class="site-tpl__desc">고른 요금제를 결제하는 화면입니다. 오늘 결제할 금액과 다음 결제일을 옆에 보여 줍니다.</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="subscription-checkout.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
   </div>
 </article>
 <article class="site-tpl" data-site-item="내 구독 subscription settings pricing 지금 쓰는 요금제와 결제를 관리하는 화면입니다. 요금제 바꾸기와 해지도 여기서 시작합니다." data-site-cat="Pricing">
-  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/subscription-settings.html" title="내 구독 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/subscription-settings.html" title="내 구독 미리보기" tabindex="-1" loading="lazy" scrolling="no" data-site-frame></iframe></div>
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="subscription-settings.html">내 구독</a></h3><p class="site-tpl__desc">지금 쓰는 요금제와 결제를 관리하는 화면입니다. 요금제 바꾸기와 해지도 여기서 시작합니다.</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="subscription-settings.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
   </div>
 </article>
 <article class="site-tpl" data-site-item="내 정보 my info my page 내 정보와 알림 설정을 보고 수정하는 화면입니다." data-site-cat="My Page">
-  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/mypage-profile.html" title="내 정보 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/mypage-profile.html" title="내 정보 미리보기" tabindex="-1" loading="lazy" scrolling="no" data-site-frame></iframe></div>
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="mypage-profile.html">내 정보</a></h3><p class="site-tpl__desc">내 정보와 알림 설정을 보고 수정하는 화면입니다.</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="mypage-profile.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
   </div>
 </article>
 <article class="site-tpl" data-site-item="마이페이지 홈 my page home my page 마이페이지의 첫 화면입니다. 혜택과 주문 현황을 한눈에 봅니다." data-site-cat="My Page">
-  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/mypage-home.html" title="마이페이지 홈 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/mypage-home.html" title="마이페이지 홈 미리보기" tabindex="-1" loading="lazy" scrolling="no" data-site-frame></iframe></div>
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="mypage-home.html">마이페이지 홈</a></h3><p class="site-tpl__desc">마이페이지의 첫 화면입니다. 혜택과 주문 현황을 한눈에 봅니다.</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="mypage-home.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
   </div>
 </article>
 <article class="site-tpl" data-site-item="주문 내역 order history my page 주문을 날짜별로 모아 보는 내역 화면입니다. 배송 조회, 리뷰 쓰기처럼 상품마다 필요한 일을 바로 처리합니다." data-site-cat="My Page">
-  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/mypage-orders.html" title="주문 내역 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/mypage-orders.html" title="주문 내역 미리보기" tabindex="-1" loading="lazy" scrolling="no" data-site-frame></iframe></div>
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="mypage-orders.html">주문 내역</a></h3><p class="site-tpl__desc">주문을 날짜별로 모아 보는 내역 화면입니다. 배송 조회, 리뷰 쓰기처럼 상품마다 필요한 일을 바로 처리합니다.</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="mypage-orders.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
   </div>
 </article>
 <article class="site-tpl" data-site-item="장바구니 cart commerce 담은 상품을 확인하고 수량과 옵션을 바꾸는 장바구니입니다. 결제 예정 금액을 보며 바로 주문합니다." data-site-cat="Commerce">
-  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/cart.html" title="장바구니 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/cart.html" title="장바구니 미리보기" tabindex="-1" loading="lazy" scrolling="no" data-site-frame></iframe></div>
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="cart.html">장바구니</a></h3><p class="site-tpl__desc">담은 상품을 확인하고 수량과 옵션을 바꾸는 장바구니입니다. 결제 예정 금액을 보며 바로 주문합니다.</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="cart.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
   </div>
 </article>
 <article class="site-tpl" data-site-item="빈 장바구니 empty cart commerce 담은 상품이 없을 때의 장바구니입니다. 추천 상품을 보여 주어 쇼핑을 이어 가게 합니다." data-site-cat="Commerce">
-  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/cart-empty.html" title="빈 장바구니 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/cart-empty.html" title="빈 장바구니 미리보기" tabindex="-1" loading="lazy" scrolling="no" data-site-frame></iframe></div>
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="cart-empty.html">빈 장바구니</a></h3><p class="site-tpl__desc">담은 상품이 없을 때의 장바구니입니다. 추천 상품을 보여 주어 쇼핑을 이어 가게 합니다.</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="cart-empty.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
   </div>
 </article>
 <article class="site-tpl" data-site-item="시험 신청 exam application exam 시험 종류부터 결제까지 한 화면에서 차례로 고르는 신청 화면입니다. 고른 내용과 금액은 옆 요약에 바로 나타납니다." data-site-cat="Exam">
-  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/exam-apply.html" title="시험 신청 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/exam-apply.html" title="시험 신청 미리보기" tabindex="-1" loading="lazy" scrolling="no" data-site-frame></iframe></div>
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="exam-apply.html">시험 신청</a></h3><p class="site-tpl__desc">시험 종류부터 결제까지 한 화면에서 차례로 고르는 신청 화면입니다. 고른 내용과 금액은 옆 요약에 바로 나타납니다.</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="exam-apply.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
   </div>
 </article>
 <article class="site-tpl" data-site-item="내 시험 my exams exam 응시자가 자신의 시험 일정과 점수를 한눈에 보는 화면입니다." data-site-cat="Exam">
-  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/exam-my.html" title="내 시험 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/exam-my.html" title="내 시험 미리보기" tabindex="-1" loading="lazy" scrolling="no" data-site-frame></iframe></div>
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="exam-my.html">내 시험</a></h3><p class="site-tpl__desc">응시자가 자신의 시험 일정과 점수를 한눈에 보는 화면입니다.</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="exam-my.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
   </div>
 </article>
 <article class="site-tpl" data-site-item="성적표 score report exam 시험 성적을 확인하는 화면입니다. 총점을 먼저 보여 주고 영역별 점수로 이어집니다." data-site-cat="Exam">
-  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/exam-score.html" title="성적표 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/exam-score.html" title="성적표 미리보기" tabindex="-1" loading="lazy" scrolling="no" data-site-frame></iframe></div>
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="exam-score.html">성적표</a></h3><p class="site-tpl__desc">시험 성적을 확인하는 화면입니다. 총점을 먼저 보여 주고 영역별 점수로 이어집니다.</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="exam-score.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
   </div>
 </article>
 <article class="site-tpl" data-site-item="응시자 관리 candidate roster exam b2b 단체로 접수한 응시자를 찾아보고 관리하는 표입니다. 여러 명을 골라 수험표를 한 번에 보냅니다." data-site-cat="Exam B2B">
-  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/exam-group-roster.html" title="응시자 관리 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/exam-group-roster.html" title="응시자 관리 미리보기" tabindex="-1" loading="lazy" scrolling="no" data-site-frame></iframe></div>
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="exam-group-roster.html">응시자 관리</a></h3><p class="site-tpl__desc">단체로 접수한 응시자를 찾아보고 관리하는 표입니다. 여러 명을 골라 수험표를 한 번에 보냅니다.</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="exam-group-roster.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
   </div>
 </article>
 <article class="site-tpl" data-site-item="단체 접수 group application exam b2b 기관 담당자가 명단 파일을 올려 한 번에 접수하는 화면입니다. 고쳐야 할 행은 올리자마자 알려 줍니다." data-site-cat="Exam B2B">
-  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/exam-group-apply.html" title="단체 접수 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/exam-group-apply.html" title="단체 접수 미리보기" tabindex="-1" loading="lazy" scrolling="no" data-site-frame></iframe></div>
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="exam-group-apply.html">단체 접수</a></h3><p class="site-tpl__desc">기관 담당자가 명단 파일을 올려 한 번에 접수하는 화면입니다. 고쳐야 할 행은 올리자마자 알려 줍니다.</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="exam-group-apply.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
   </div>
 </article>
 <article class="site-tpl" data-site-item="단체 성적 대시보드 group score dashboard exam b2b 기관이 단체 응시 결과를 한눈에 보는 대시보드입니다." data-site-cat="Exam B2B">
-  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/exam-group-dashboard.html" title="단체 성적 대시보드 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/exam-group-dashboard.html" title="단체 성적 대시보드 미리보기" tabindex="-1" loading="lazy" scrolling="no" data-site-frame></iframe></div>
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="exam-group-dashboard.html">단체 성적 대시보드</a></h3><p class="site-tpl__desc">기관이 단체 응시 결과를 한눈에 보는 대시보드입니다.</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="exam-group-dashboard.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
   </div>
 </article>
 <article class="site-tpl" data-site-item="과정 찾기 course catalog learning b2b 듣고 싶은 과정을 찾는 목록입니다. 분류와 수준, 학습 시간으로 걸러 봅니다." data-site-cat="Learning B2B">
-  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/learning-catalog.html" title="과정 찾기 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/learning-catalog.html" title="과정 찾기 미리보기" tabindex="-1" loading="lazy" scrolling="no" data-site-frame></iframe></div>
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="learning-catalog.html">과정 찾기</a></h3><p class="site-tpl__desc">듣고 싶은 과정을 찾는 목록입니다. 분류와 수준, 학습 시간으로 걸러 봅니다.</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="learning-catalog.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
   </div>
 </article>
 <article class="site-tpl" data-site-item="과정 운영 course operations learning b2b 교육 담당자가 과정과 차수를 운영하는 화면입니다." data-site-cat="Learning B2B">
-  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/learning-admin.html" title="과정 운영 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/learning-admin.html" title="과정 운영 미리보기" tabindex="-1" loading="lazy" scrolling="no" data-site-frame></iframe></div>
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="learning-admin.html">과정 운영</a></h3><p class="site-tpl__desc">교육 담당자가 과정과 차수를 운영하는 화면입니다.</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="learning-admin.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
   </div>
 </article>
 <article class="site-tpl" data-site-item="강의 보기 course player learning b2b 강의를 들으며 ai 튜터에게 요약과 퀴즈를 받는 화면입니다." data-site-cat="Learning B2B">
-  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/learning-player.html" title="강의 보기 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/learning-player.html" title="강의 보기 미리보기" tabindex="-1" loading="lazy" scrolling="no" data-site-frame></iframe></div>
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="learning-player.html">강의 보기</a></h3><p class="site-tpl__desc">강의를 들으며 AI 튜터에게 요약과 퀴즈를 받는 화면입니다.</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="learning-player.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
   </div>
 </article>
 <article class="site-tpl" data-site-item="학습 현황 대시보드 learning dashboard learning b2b 교육 담당자가 전체 학습 현황을 보는 대시보드입니다. 마감이 가까운 미이수자를 바로 찾습니다." data-site-cat="Learning B2B">
-  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/learning-dashboard.html" title="학습 현황 대시보드 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/learning-dashboard.html" title="학습 현황 대시보드 미리보기" tabindex="-1" loading="lazy" scrolling="no" data-site-frame></iframe></div>
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="learning-dashboard.html">학습 현황 대시보드</a></h3><p class="site-tpl__desc">교육 담당자가 전체 학습 현황을 보는 대시보드입니다. 마감이 가까운 미이수자를 바로 찾습니다.</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="learning-dashboard.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>
   </div>
 </article>
 <article class="site-tpl" data-site-item="학습 홈 learning home learning b2b 임직원이 학습을 시작하는 첫 화면입니다. 이어서 볼 강의와 필수 교육을 먼저 보여 줍니다." data-site-cat="Learning B2B">
-  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/learning-home.html" title="학습 홈 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/learning-home.html" title="학습 홈 미리보기" tabindex="-1" loading="lazy" scrolling="no" data-site-frame></iframe></div>
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="learning-home.html">학습 홈</a></h3><p class="site-tpl__desc">임직원이 학습을 시작하는 첫 화면입니다. 이어서 볼 강의와 필수 교육을 먼저 보여 줍니다.</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="learning-home.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a></div>

@@ -975,7 +975,7 @@ const TPL_GROUP_KO = { Dashboard: '대시보드', Table: '표', Form: '입력 �
 write({
   file: 'templates/index.html', section: 'templates', title: 'Templates', layout: 'wide',  // 11-05 사용자: 컴포넌트처럼 왼쪽 메뉴를 처음부터
   body: `${hero('Templates', '자주 만드는 화면을 DS 컴포넌트로 미리 조립해 두었습니다.').replace(' class="site-hero"', '')  /* 11-05 사용자: 다른 화면처럼 왼쪽 정렬 */.replace('</p></header>', (SHOW_THEMES ? ' 테마를 입힌 실제 사이트 예시는 <a class="ds-link" href="../themes/index.html">Themes</a>에 있습니다.' : '') + '</p></header>')}
-<div class="site-toolbar">
+<div class="site-toolbar site-toolbar--wrap">
   <div class="ds-chiptabs" role="tablist" aria-label="분류">
     <button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-filter="">전체</button>
     ${tplGroups.map((g) => `<button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-filter="${esc(g)}">${esc(TPL_GROUP_KO[g] || g)}</button>`).join('\n    ')}
@@ -983,7 +983,7 @@ write({
 </div>
 <div class="site-tpl-grid">
 ${templates.map((t) => `<article class="site-tpl" data-site-item="${esc((t.name + ' ' + t.en + ' ' + t.group + ' ' + t.desc).toLowerCase())}" data-site-cat="${esc(t.group)}">
-  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/${t.slug}.html" title="${esc(t.name)} 미리보기" tabindex="-1" loading="lazy" data-site-frame></iframe></div>
+  <div class="site-tpl-thumb" aria-hidden="true"><iframe src="pages/${t.slug}.html" title="${esc(t.name)} 미리보기" tabindex="-1" loading="lazy" scrolling="no" data-site-frame></iframe></div>
   <div class="site-tpl__scrim">
     <div class="site-tpl__text"><h3 class="site-tpl__title"><a class="site-tpl__link" href="${t.slug}.html">${esc(t.name)}</a></h3><p class="site-tpl__desc">${esc(t.desc)}</p></div>
     <div class="site-tpl__actions"><a class="site-tpl__btn" href="${t.slug}.html"><i class="ds-icon ds-icon--eye" aria-hidden="true"></i>미리보기</a>${t.figma ? `<a class="site-tpl__btn" href="${LINKS.figmaUrl(t.figma.pc)}" target="_blank" rel="noopener"><i class="ds-icon site-i--figma" aria-hidden="true"></i>Figma에서 열기</a>` : ''}</div>
