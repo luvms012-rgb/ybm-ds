@@ -44,6 +44,13 @@ git clone https://github.com/luvms012-rgb/yds.git
 
 ## 3. 진행 상황
 
+- **다음 세션은 여기부터 (2026-11-05 집 정리, 최신 커밋 c02f086 이후)** - 어느 PC 든 "yds CLAUDE.md 읽고 이어서" 로 시작한다.
+  - **시작할 때**: `git pull` → 고칠 곳을 고친 뒤 `node site/build.mjs`(템플릿을 고쳤으면 먼저 `node site/templates/gen/run.mjs`, 테마는 `node site/themes/gen.mjs`) → `node sync.mjs check` → `node sync.mjs deploy "메시지"`. 저장소는 `luvms012-rgb/yds`, 사이트 `https://luvms012-rgb.github.io/yds/site/`. 로컬 폴더 이름은 PC 마다 `ybm-ds` 그대로여도 된다.
+  - **오늘(11-05 집) 끝냄, 배포함**: 사이트 h2 바로 아래 요소 위 여백 16(`.site-doc > h2 + *` x4, site.css 두 곳 모두). Typography 크기 표 가로 스크롤 없앰(`.site-sample` 은 칸 폭에 맞춰 띄어쓰기에서 줄바꿈, 견본 표의 토큰과 값 칸은 내용만큼 - PC 와 태블릿은 t17 도 한 줄, 휴대폰만 두 줄).
+  - **남은 일 1. Figma 맞춤 (막힘)** - 아래 "진행 중 Figma 맞춤" 그대로. Figma 커넥터가 다른 계정(jincc)이라 편집 권한이 없다. 사용자가 원래 계정으로 다시 연결해야 이어서 할 수 있다. 먼저 `node sync.mjs links` 로 만든 `tokens/.figma-links.js` 를 use_figma 로 실행해 문서 / 코드 링크를 yds 주소로 건다.
+  - **남은 일 2. 템플릿 문구 일반화 (사용자 답 대기)** - 아래 "이어서 할 것" 2번.
+  - **남은 일 3. 테마 (숨김)** - 테스트용 테마 10개(dist/themes, site/themes/gen.mjs)는 있고 Themes 페이지만 숨김(`SHOW_THEMES = false`, 11-05 회사). 사용자가 다시 보자고 하면 true 로 바꾸고 빌드만 하면 된다. 상단 메뉴는 다섯 개 그대로 두는 것이 사용자 결정이다.
+  - **남은 일 4. 가이드 사이트 publish 도구 (회사 PC)** - 가이드 저장소 `luvms012-rgb/luvms012-rgb.github.io` 는 DS 주소를 yds 로 바꿔 두었다. 회사 PC 의 publish 도구 안 DS 주소도 `luvms012-rgb.github.io/yds/dist/` 인지 확인한다.
 - **끝냄, 배포함 (2026-11-05 회사) 사이트 글자 위계와 박스** - 사용자가 준 레퍼런스 9쪽의 글자 위계, 굵기, 크기, 여백과 박스 쓰임을 재서 사이트 전체에 입힘(사용자 지시로 굵기는 레퍼런스보다 한 단계씩 낮춤: 700 → 600, 600 → 500, 500 → 400). 규칙은 site/CLAUDE.md 맨 위 "레퍼런스 G". 같은 날 컴포넌트 대표 그림의 투명 부품에 흰 바탕. 같은 날 저녁 사용자가 Figma 2662:26 에 위계와 여백을 확정해 사이트 전체를 그 값으로 바꿈(site/CLAUDE.md 맨 위 "Figma 2662:26 기준"), 코드 상자 코드 부분 흰 바탕.
 - **끝냄, 배포함 (2026-11-05 회사) 새 컴포넌트 7종과 Menu 선택지** - 사용자 "1, 2순위 바로 진행, 지금 컴포넌트 형식 그대로": 73 Code Input, 74 Chart(bar/line/donut), 75 Description List, 76 Toolbar, 77 Tree, 78 Wheel Picker(Time Picker 와 같은 휠 규칙, ybm-ds.js 휠 코드를 함께 씀), 79 Search Field. Menu 에 묶음 제목 `__label`, menuitemcheckbox, menuitemradio, 하위 메뉴 `__sub`. README 3.2 의 9곳에 모두 넣음(구조 그림 anatomy-figures.html 포함). **Figma 는 아직 없음**(README 6.1 "Figma 없음(최종 검토 때)"). 같은 날: 아이콘 라이브러리 안내 문장 쉽게, 템플릿 제목의 어색한 한글 22곳(생성기에서 고침), 템플릿 목록은 머리말과 칩 줄 왼쪽 정렬, 칩은 줄바꿈, 썸네일 스크롤바 없음. 템플릿 왼쪽 메뉴는 사용자가 고른 안: 목록 화면은 메뉴 없이 분류 탭, 상세 화면은 탭과 같은 분류 묶음(묶음 안은 가나다 순).
 - **끝냄, 배포함 (2026-11-05 회사) Updates 와 이름 정리** - Updates 는 v1.1.0 만 남기고 v1.0.0 소식을 지움(사용자 지시). 저장소 글의 서비스 이름 ybm-ds, YBM DS 를 yds 로(README, CLAUDE.md, site 메모, ds-sync 스킬, sync.mjs, 동기화.bat, Code Block 예시). 그대로 둔 것: 파일 이름 dist/ybm-ds.css, ybm-ds.js(서비스가 이 주소를 쓴다), 로컬 폴더 이름, 지난 기록 속 예전 이름.
