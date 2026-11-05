@@ -434,10 +434,11 @@ body[data-side-open] .site-scrim { opacity: 1; pointer-events: auto; }
 .site-doc > .site-cover.site-anatomy { --site-thumb-bg: var(--ds-color-bg-layer-default); --site-anatomy-c: var(--ds-color-fg-informative); margin-top: var(--ds-space-x6); box-shadow: inset 0 0 0 1px var(--site-box-line); }
 .site-anatomy .site-tile__inner { padding: var(--ds-space-x16) 160px; }  /* 위아래와 좌우에 이름 자리 */
 @media (max-width: 767px) { .site-anatomy .site-tile__inner { padding: var(--ds-space-x12) 72px; } }  /* 2026-11-04: 휴대폰에서는 이름 자리를 줄여 부품을 넓게 */
-.site-anatomy__layer { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+.site-anatomy .site-tile__inner { z-index: 0; }  /* 부품의 z-index(떠 있는 목록 등)가 화살표를 덮지 않게 그림 안에 가둔다 */
+.site-anatomy__layer { position: absolute; z-index: 1; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
 .site-anatomy__layer line { stroke: var(--site-anatomy-c); stroke-width: 1; }
 .site-anatomy__layer path { fill: var(--site-anatomy-c); }
-.site-anatomy__name { position: absolute; color: var(--site-anatomy-c); font-size: var(--ds-font-size-t03); line-height: 16px; white-space: nowrap; }
+.site-anatomy__name { position: absolute; z-index: 1; color: var(--site-anatomy-c); font-size: var(--ds-font-size-t03); line-height: 16px; white-space: nowrap; }
 .site-anatomy-table td:first-child { width: 1%; white-space: nowrap; }
 .site-anatomy__part { display: inline-flex; align-items: center; gap: var(--ds-space-x2); }
 

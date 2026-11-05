@@ -9,9 +9,9 @@
 <script>try { var t = localStorage.getItem("ybm-site-theme"); if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.dataset.theme = "dark"; } catch (e) {}</script>
 <link rel="icon" href="../assets/logo-ybmnet.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../dist/ybm-ds.css">
-<link rel="stylesheet" href="../assets/site.css?v=c9dcc3bd">
+<link rel="stylesheet" href="../assets/site.css?v=2d6f96f5">
 <script src="../../dist/ybm-ds.js" defer></script>
-<script src="../assets/site.js?v=c9dcc3bd" defer></script>
+<script src="../assets/site.js?v=2d6f96f5" defer></script>
 </head>
 <body class="site">
 <a class="site-skip" href="#main">본문 바로가기</a>
@@ -138,21 +138,24 @@
   &lt;/<span class="hl-t">div</span>&gt;
 &lt;/<span class="hl-t">div</span>&gt;</code></pre>
 </figure>
-<h2 id="anatomy">구조<a class="site-anchor" href="#anatomy" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><div class="site-tile__thumb site-cover site-anatomy" data-site-fit-max="1" data-site-anatomy="ds-input__icon ds-input__control ds-input__clear ds-search-suggest__heading ds-search-suggest__list ds-search-suggest__item ds-search-suggest__content ds-search-suggest__label ds-search-suggest__desc ds-search-suggest__empty" data-site-anatomy-names="Icon|Control|Clear|Heading|List|Item|Content|Label|Desc|Empty" aria-hidden="true"><div class="site-tile__inner" inert><div class="pv-stage"><div class="ds-search-anchor">
+<h2 id="anatomy">구조<a class="site-anchor" href="#anatomy" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><div class="site-tile__thumb site-cover site-anatomy" data-site-fit-max="1" data-site-anatomy="ds-input__icon ds-input__control ds-input__clear ds-search-suggest__heading ds-search-suggest__list ds-search-suggest__item ds-search-suggest__content ds-search-suggest__label ds-search-suggest__desc ds-search-suggest__empty" data-site-anatomy-names="Icon|Control|Clear|Heading|List|Item|Content|Label|Desc|Empty" aria-hidden="true"><div class="site-tile__inner" inert><div class="pv-stage"><div class="ds-search-anchor" style="width: 360px">
   <div class="ds-input" data-variant="outline" data-size="medium">
     <i class="ds-icon ds-icon--search ds-input__icon" aria-hidden="true"></i>
-    <input class="ds-input__control" type="search" role="combobox" aria-controls="sg" aria-expanded="true" aria-autocomplete="list" placeholder="검색어를 입력하세요">
-    <button type="button" class="ds-input__clear" aria-label="지우기"></button>
+    <input class="ds-input__control" type="search" role="combobox" aria-controls="sg" aria-expanded="true" aria-autocomplete="list" value="회의" aria-label="찾기">
+    <button type="button" class="ds-input__clear" aria-label="지우기" style="display: block"></button>
   </div>
   <div class="ds-search-suggest">
-    <div class="ds-search-suggest__heading">최근 검색어</div>
-    <ul class="ds-search-suggest__list" role="listbox" aria-labelledby="sg-h">
+    <div class="ds-search-suggest__heading">추천 검색어</div>
+    <ul class="ds-search-suggest__list" role="listbox">
       <li role="none"><span class="ds-search-suggest__item" role="option" href="#">
-        <i class="ds-icon ds-icon--clock" aria-hidden="true"></i>
-        <span class="ds-search-suggest__content"><span class="ds-search-suggest__label">회의록</span><span class="ds-search-suggest__desc">보조 설명</span></span>
+        <i class="ds-icon ds-icon--search" aria-hidden="true"></i>
+        <span class="ds-search-suggest__content" style="align-items: flex-start"><span class="ds-search-suggest__label">회의록 정리</span><span class="ds-search-suggest__desc">문서</span></span>
+      </span></li>
+      <li role="none"><span class="ds-search-suggest__item" role="option" href="#">
+        <i class="ds-icon ds-icon--search" aria-hidden="true"></i>
+        <span class="ds-search-suggest__content" style="align-items: flex-start"><span class="ds-search-suggest__label">회의실 예약</span><span class="ds-search-suggest__desc">일정</span></span>
       </span></li>
     </ul>
-    <p class="ds-search-suggest__empty">검색 결과가 없어요</p>
   </div>
 </div></div></div></div><div class="site-anatomy-table"><div class="ds-table-wrap"><table class="ds-table" data-density="compact">
 <thead><tr><th scope="col">부품</th><th scope="col">설명</th></tr></thead>

@@ -9,9 +9,9 @@
 <script>try { var t = localStorage.getItem("ybm-site-theme"); if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.dataset.theme = "dark"; } catch (e) {}</script>
 <link rel="icon" href="../assets/logo-ybmnet.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../../dist/ybm-ds.css">
-<link rel="stylesheet" href="../assets/site.css?v=c9dcc3bd">
+<link rel="stylesheet" href="../assets/site.css?v=2d6f96f5">
 <script src="../../dist/ybm-ds.js" defer></script>
-<script src="../assets/site.js?v=c9dcc3bd" defer></script>
+<script src="../assets/site.js?v=2d6f96f5" defer></script>
 </head>
 <body class="site">
 <a class="site-skip" href="#main">본문 바로가기</a>
@@ -132,13 +132,19 @@
   &lt;/<span class="hl-t">div</span>&gt;
 &lt;/<span class="hl-t">form</span>&gt;</code></pre>
 </figure>
-<h2 id="anatomy">구조<a class="site-anchor" href="#anatomy" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><div class="site-tile__thumb site-cover site-anatomy" data-site-fit-max="1" data-site-anatomy="ds-chat-meta__status ds-chat-composer__attach ds-chat-composer__field ds-chat-composer__input" data-site-anatomy-names="Status|Attach|Field|Input" aria-hidden="true"><div class="site-tile__inner" inert><div class="pv-stage"><form class="ds-chat-composer">
-  <button type="button" class="ds-chat-composer__attach" aria-label="첨부"><i class="ds-icon ds-icon--plus" aria-hidden="true"></i></button>
-  <div class="ds-chat-composer__field">
-    <textarea class="ds-chat-composer__input" rows="1" placeholder="메시지를 입력하세요" aria-label="메시지"></textarea>
-    <button type="submit" class="ds-chat-send" aria-label="보내기" disabled></button>
+<h2 id="anatomy">구조<a class="site-anchor" href="#anatomy" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2><div class="site-tile__thumb site-cover site-anatomy" data-site-fit-max="1" data-site-anatomy="ds-chat-meta__status ds-chat-composer__attach ds-chat-composer__field ds-chat-composer__input" data-site-anatomy-names="Status|Attach|Field|Input" aria-hidden="true"><div class="site-tile__inner" inert><div class="pv-stage"><div class="u-col u-gap-6" style="width: 360px">
+  <div class="u-col u-gap-1" style="align-items: flex-end">
+    <div class="ds-chat-bubble" data-sender="user">내일 오후 2시에 예약할 수 있을까요?</div>
+    <span class="ds-chat-meta" data-status="read"><b class="ds-chat-meta__status">읽음</b><time>오후 3:24</time></span>
   </div>
-</form></div></div></div><div class="site-anatomy-table"><div class="ds-table-wrap"><table class="ds-table" data-density="compact">
+  <form class="ds-chat-composer">
+    <button type="button" class="ds-chat-composer__attach" aria-label="첨부"><i class="ds-icon ds-icon--plus" aria-hidden="true"></i></button>
+    <div class="ds-chat-composer__field">
+      <textarea class="ds-chat-composer__input" rows="1" placeholder="메시지를 입력하세요" aria-label="메시지"></textarea>
+      <button type="submit" class="ds-chat-send" aria-label="보내기" disabled></button>
+    </div>
+  </form>
+</div></div></div></div><div class="site-anatomy-table"><div class="ds-table-wrap"><table class="ds-table" data-density="compact">
 <thead><tr><th scope="col">부품</th><th scope="col">설명</th></tr></thead>
 <tbody><tr><td><span class="site-anatomy__part"><b>Status</b> <code>ds-chat-meta__status</code></span></td><td>&quot;답변 중&quot;처럼 지금 상태를 알리는 글입니다.</td></tr>
 <tr><td><span class="site-anatomy__part"><b>Attach</b> <code>ds-chat-composer__attach</code></span></td><td>파일을 첨부하는 버튼입니다.</td></tr>

@@ -301,6 +301,18 @@
   function fitTiles() {
     document.querySelectorAll(".site-tile__inner > .pv-stage").forEach(function (st) {
       var box = st.parentElement, cs = getComputedStyle(box);
+      // 넓은 화면의 구조 그림은 줄이지 않는다: 넓으면 양옆 이름 자리를, 높으면 그림 상자 높이를 늘린다 (휴대폰은 전처럼 줄인다)
+      var fig = box.closest("[data-site-anatomy]");
+      if (fig) { box.style.paddingLeft = box.style.paddingRight = ""; fig.style.minHeight = ""; st.style.transform = ""; cs = getComputedStyle(box); }
+      if (fig && box.clientWidth >= 600) {
+        st.style.width = "max-content";
+        var nw = Math.max(st.offsetWidth, st.scrollWidth);
+        if (nw > box.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight)) box.style.paddingLeft = box.style.paddingRight = Math.max(24, (box.clientWidth - nw) / 2) + "px";
+        cs = getComputedStyle(box);
+        st.style.width = box.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight) + "px";
+        var need = st.scrollHeight + parseFloat(cs.paddingTop) + parseFloat(cs.paddingBottom);
+        if (need > box.clientHeight) fig.style.minHeight = Math.ceil(need) + "px";
+      }
       var aw = box.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
       var ah = box.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
       if (!aw || !ah) return;
@@ -350,11 +362,33 @@
         p.kids = parts.filter(function (q) { return q !== p && (p.el.contains(q.el) || inside(q.R, p.R)); });
         p.outer = parts.filter(function (q) { return q !== p && (q.el.contains(p.el) || inside(p.R, q.R)); });
       });
+      // 이름을 붙이지 않는 같은 부품(두 번째 항목 등)도 화살표가 지나가면 안 된다
+      var others = [];
+      box.getAttribute("data-site-anatomy").split(" ").forEach(function (cls) {
+        [].slice.call(box.querySelectorAll(".site-tile__inner ." + cls)).forEach(function (e) {
+          if (parts.some(function (p) { return p.el === e; })) return;
+          var r = e.getBoundingClientRect(); if (r.width >= 1 && r.height >= 1) others.push({ el: e, R: rel(r) });
+        });
+      });
+      // 이름이 없는 상자(바탕, 테두리, 그림자가 있는 것, 아이콘, 사진)도 화살표와 이름이 피한다
+      [].slice.call(box.querySelectorAll(".site-tile__inner *")).forEach(function (e) {
+        if (parts.some(function (p) { return p.el === e; }) || others.some(function (o) { return o.el === e; })) return;
+        var r = e.getBoundingClientRect(); if (r.width < 8 || r.height < 8) return;
+        var cs = getComputedStyle(e); if (cs.visibility === "hidden" || cs.opacity === "0") return;
+        var bg = cs.backgroundColor !== "rgba(0, 0, 0, 0)" && cs.backgroundColor !== "transparent";
+        if (bg || parseFloat(cs.borderTopWidth) > 0 || parseFloat(cs.borderLeftWidth) > 0 || cs.boxShadow !== "none" || e.tagName === "IMG") others.push({ el: e, R: rel(r) });
+        // 글자도 지나가지 않는다 (글자가 차지한 자리만)
+        [].forEach.call(e.childNodes, function (n) {
+          if (n.nodeType !== 3 || !n.textContent.trim()) return;
+          var rg = document.createRange(); rg.selectNodeContents(n); var tr = rg.getBoundingClientRect();
+          if (tr.width >= 1 && tr.height >= 1) others.push({ el: e, R: rel(tr) });
+        });
+      });
       var U = parts.reduce(function (u, p) { return { l: Math.min(u.l, p.R.l), t: Math.min(u.t, p.R.t), r: Math.max(u.r, p.R.r), b: Math.max(u.b, p.R.b) }; }, { l: 1e9, t: 1e9, r: -1e9, b: -1e9 });
       var svg = document.createElementNS(NS, "svg"); svg.setAttribute("class", "site-anatomy__layer");
       svg.innerHTML = "<defs><marker id=\"site-arrow\" viewBox=\"0 0 6 6\" refX=\"6\" refY=\"3\" markerWidth=\"6\" markerHeight=\"6\" orient=\"auto\"><path d=\"M0 0L6 3L0 6z\"/></marker></defs>";
       box.appendChild(svg);
-      var segs = [], labels = [];
+      var segs, labels;
       // 선분이 상자를 지나는지 (가장자리에 닿기만 하면 괜찮다)
       var hitsRect = function (s, q, pad) {
         pad = pad || 0;
@@ -368,21 +402,31 @@
         return v.x1 > Math.min(h.x1, h.x2) && v.x1 < Math.max(h.x1, h.x2) && h.y1 > Math.min(v.y1, v.y2) && h.y1 < Math.max(v.y1, v.y2);
       };
       var overlap = function (a, c, g) { return a.l < c.r + g && a.r > c.l - g && a.t < c.b + g && a.b > c.t - g; };
-      // 이 자리에 두면 몇 군데가 겹치는지 센다 (0이면 깨끗한 자리)
-      var bad = function (p, s, L) {
+      // 이 자리에 두면 몇 군데가 겹치는지 센다 (0이면 깨끗한 자리).
+      // 그림 속 부품과 상자는 바뀌지 않으니 자리마다 한 번만 세고(fixed), 이미 놓은 화살표와 이름만 매번 센다(live)
+      var fixed = function (p, s, L) {
         var n = 0;
         if (L.l < 4 || L.t < 4 || L.r > b.width - 4 || L.b > b.height - 4) n += 10;
-        for (var i = 0; i < parts.length; i++) {
-          var q = parts[i]; if (q === p || p.kids.indexOf(q) >= 0 || p.outer.indexOf(q) >= 0) continue;  // 바깥 틀의 테두리를 건너는 것은 괜찮다
-          if (hitsRect(s, q.R, 1)) n++; if (overlap(L, q.R, 4)) n += 3;
-        }
+        for (var i = 0; i < p.obs.length; i++) { var q = p.obs[i]; if (hitsRect(s, q, 1)) n++; if (overlap(L, q, 4)) n += 3; }
+        return n;
+      };
+      var live = function (s, L) {
+        var n = 0;
         for (var j = 0; j < segs.length; j++) { if (cross(s, segs[j])) n++; if (hitsRect(segs[j], L, 3)) n += 2; }
         for (var k = 0; k < labels.length; k++) { if (overlap(L, labels[k], 6)) n += 5; if (hitsRect(s, labels[k], 3)) n += 2; }
         return n;
       };
-      var place = function (p) {
+      parts.forEach(function (p) {
+        p.obs = parts.filter(function (q) { return q !== p && p.kids.indexOf(q) < 0 && p.outer.indexOf(q) < 0; }).map(function (q) { return q.R; })  // 바깥 틀의 테두리를 건너는 것은 괜찮다
+          .concat(others.filter(function (e) { return !(e.el.contains(p.el) || p.el.contains(e.el) || inside(p.R, e.R) || inside(e.R, p.R)); }).map(function (e) { return e.R; }));
+      });
+      // 이름 크기를 먼저 잰다
+      parts.forEach(function (p) {
         var name = document.createElement("span"); name.className = "site-anatomy__name"; name.textContent = p.name; box.appendChild(name);
-        var w = name.offsetWidth, h = name.offsetHeight, R = p.R, cx = (R.l + R.r) / 2, cy = (R.t + R.b) / 2, c = [];
+        p.tag = name; p.w = name.offsetWidth; p.h = name.offsetHeight;
+      });
+      var choices = function (p) {
+        var w = p.w, h = p.h, R = p.R, cx = (R.l + R.r) / 2, cy = (R.t + R.b) / 2, c = [];
         var vert = function (top) {
           var xs = [cx]; for (var d = 8; d < (R.r - R.l) / 2 - 4; d += 8) xs.push(cx - d, cx + d);
           for (var row = 0; row < 4; row++) xs.forEach(function (x) { [0, -0.35, 0.35].forEach(function (o) {
@@ -391,7 +435,7 @@
           }); });
         };
         var side = function (left) {
-          var ys = [cy]; for (var d = 4; d < (R.b - R.t) / 2 - 2; d += 4) ys.push(cy - d, cy + d);
+          var ys = [cy]; for (var d = 2; d < (R.b - R.t) / 2 - 2; d += 2) ys.push(cy - d, cy + d);
           ys.forEach(function (y) {
             var lx = left ? U.l - GAP - w : U.r + GAP;
             c.push({ L: { l: lx, t: y - h / 2, r: lx + w, b: y + h / 2 }, s: { x1: left ? lx + w + 4 : lx - 4, y1: y, x2: left ? R.l - 1 : R.r + 1, y2: y } });
@@ -401,17 +445,52 @@
         var tall = R.b - R.t > (R.r - R.l) * 0.9;
         if (p.kids.length || tall) { side(cx > (U.l + U.r) / 2 ? false : true); side(cx > (U.l + U.r) / 2); vert(cy < (U.t + U.b) / 2); vert(cy >= (U.t + U.b) / 2); }
         else { vert(cy < (U.t + U.b) / 2); vert(cy >= (U.t + U.b) / 2); side(cx < (U.l + U.r) / 2); side(cx >= (U.l + U.r) / 2); }
-        var pick = null, best = 1e9;
-        for (var ci = 0; ci < c.length && best > 0; ci++) { var sc = bad(p, c[ci].s, c[ci].L); if (sc < best) { best = sc; pick = c[ci]; } }
-        if (best > 0) name.setAttribute("data-forced", best);
-        segs.push(pick.s); labels.push(pick.L);
+        return c;
+      };
+      parts.forEach(function (p) { p.c = choices(p); p.c.forEach(function (c) { c.base = fixed(p, c.s, c.L); }); });
+      // 정한 순서대로 한 부품씩 가장 깨끗한 자리를 고른다 (fix 는 자리를 먼저 정해 둔 부품)
+      var solve = function (order, fix) {
+        segs = []; labels = [];
+        var res = { total: 0, picks: [] };
+        if (fix) { segs.push(fix.c.s); labels.push(fix.c.L); res.picks.push({ p: fix.p, pick: fix.c, best: 0 }); }
+        order.forEach(function (p) {
+          if (fix && p === fix.p) return;
+          var pick = null, best = 1e9;
+          for (var ci = 0; ci < p.c.length && best > 0; ci++) { var cc = p.c[ci]; if (cc.base >= best) continue; var sc = cc.base + live(cc.s, cc.L); if (sc < best) { best = sc; pick = cc; } }
+          segs.push(pick.s); labels.push(pick.L); res.total += best; res.picks.push({ p: p, pick: pick, best: best });
+        });
+        return res;
+      };
+      // 안쪽 부품부터(자리가 좁다) 왼쪽에서 오른쪽 순서로, 바깥 틀은 마지막에.
+      // 겹친 이름이 있으면 그 부품을 앞으로 옮겨 다시 풀고, 가장 덜 겹치는 배치를 쓴다
+      var order = parts.slice().sort(function (a, c) { return a.kids.length - c.kids.length || a.R.l - c.R.l || a.R.t - c.R.t; });
+      var top = solve(order);
+      for (var tries = 0; tries < 6 && top.total > 0; tries++) {
+        var forced = top.picks.filter(function (x) { return x.best > 0; }).map(function (x) { return x.p; });
+        order = forced.concat(order.filter(function (p) { return forced.indexOf(p) < 0; }));
+        var next = solve(order); if (next.total < top.total) top = next;
+      }
+      // 그래도 겹치면 겹친 부품의 다른 깨끗한 자리를 하나씩 먼저 정해 두고 나머지를 다시 푼다
+      for (var round = 0; round < 3 && top.total > 0; round++) {
+        var stuck = top.picks.filter(function (x) { return x.best > 0; }).map(function (x) { return x.p; }), gain = false;
+        for (var si = 0; si < stuck.length && top.total > 0; si++) {
+          var fp = stuck[si];
+          for (var fc = 0; fc < fp.c.length && top.total > 0; fc++) {
+            if (fp.c[fc].base > 0) continue;
+            var alt = solve(order, { p: fp, c: fp.c[fc] });
+            if (alt.total < top.total) { top = alt; gain = true; }
+          }
+        }
+        if (!gain) break;
+      }
+      top.picks.forEach(function (x) {
+        var name = x.p.tag, pick = x.pick;
+        if (x.best > 0) name.setAttribute("data-forced", x.best);
         name.style.left = Math.round(pick.L.l) + "px"; name.style.top = Math.round(pick.L.t) + "px";
         var ln = document.createElementNS(NS, "line");
         ln.setAttribute("x1", pick.s.x1); ln.setAttribute("y1", pick.s.y1); ln.setAttribute("x2", pick.s.x2); ln.setAttribute("y2", pick.s.y2); ln.setAttribute("marker-end", "url(#site-arrow)");
         svg.appendChild(ln);
-      };
-      // 안쪽 부품부터(자리가 좁다) 왼쪽에서 오른쪽 순서로, 바깥 틀은 마지막에
-      parts.slice().sort(function (a, c) { return a.kids.length - c.kids.length || a.R.l - c.R.l || a.R.t - c.R.t; }).forEach(place);
+      });
     });
   }
   window.addEventListener("resize", fitTiles);

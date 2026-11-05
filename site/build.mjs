@@ -893,13 +893,26 @@ const renderable = (markup) => {
     .replace(/(<img\b[^>]*?\ssrc=")(?!https?:|data:)[^"]*"/g, `$1${IMG_BLANK}"`).replace(/<a\b/g, '<span').replace(/<\/a>/g, '</span>');
 };
 const partName = (s) => s.split('-').filter(Boolean).map((w) => w[0].toUpperCase() + w.slice(1)).join(' ');
+// 구조 그림 따로 그린 것: <template data-slug> 안 마크업. 링크는 span 으로, {{DATE_CELLS}} 는 2026년 11월 달력 칸 42개로
+const dateCells = () => {
+  const cells = [];
+  for (let d = 1; d <= 30; d++) {
+    const st = d === 5 ? ' data-state="today"' : d === 10 ? ' data-state="range-start"' : d > 10 && d < 14 ? ' data-state="range-middle"' : d === 14 ? ' data-state="range-end"' : '';
+    cells.push(`<button class="ds-date-cell"${st}>${d}</button>`);
+  }
+  for (let d = 1; d <= 12; d++) cells.push(`<button class="ds-date-cell" disabled>${d}</button>`);
+  return cells.join('');
+};
+const ANATOMY_FIG = Object.fromEntries([...fs.readFileSync(path.join(SITE, 'src/anatomy-figures.html'), 'utf8').matchAll(/<template data-slug="([^"]+)">([\s\S]*?)<\/template>/g)]
+  .map(([, s, h]) => [s, h.trim().replace(/<a\b/g, '<span').replace(/<\/a>/g, '</span>').replace('{{DATE_CELLS}}', dateCells)]));
 function anatomyOf(c) {
   if (!c.markup) return null;
   const parts = [...new Set([...c.markup.matchAll(/\b(ds-[a-z0-9-]+?)__([a-z0-9-]+)/g)].map((m) => m[0]))];
   if (parts.length < 2) return null;
   // 부품이 가장 많이 든 맨 바깥 요소 하나를 그린다
   const tops = topElements(renderable(c.markup), 12);
-  const pick = tops.sort((a, b) => (b.match(/__/g) || []).length - (a.match(/__/g) || []).length)[0] || '';
+  // 머리 주석 마크업에 자리 글자가 있는 것은 site/src/anatomy-figures.html 의 실제 쓰임 모양으로 그린다 (2026-11-05)
+  const pick = ANATOMY_FIG[c.slug] || tops.sort((a, b) => (b.match(/__/g) || []).length - (a.match(/__/g) || []).length)[0] || '';
   const rows = parts.map((p, i) => {
     const suf = p.split('__')[1];
     const desc = ANATOMY_KO[`${c.no}:${suf}`] || ANATOMY_KO[suf] || '';
