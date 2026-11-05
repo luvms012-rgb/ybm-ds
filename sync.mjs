@@ -266,7 +266,7 @@ function mdBlocks(md) {
     if (card) { const last = out[out.length - 1]; const item = { title: card[1], desc: inl(card[2]) }; if (last && last.t === 'cards') last.items.push(item); else out.push({ t: 'cards', items: [item] }); continue; }
     if (/^\*\*[^*]+\*\*$/.test(l.trim())) { out.push({ t: 'label', text: inl(l) }); continue; }
     if (!lead && !out.length && title) { lead = inl(l); continue; }
-    out.push({ t: 'p', text: inl(l) });
+    out.push({ t: 'p', text: inl(l).replace(/^- /, '• ') });
   }
   return { title, lead, blocks: out };
 }
@@ -274,13 +274,20 @@ function docpageScript(slug) {
   const f = path.join(DS, 'tokens', '.figma-docs.json');
   if (!fs.existsSync(f)) die('tokens/.figma-docs.json 이 없어요. 먼저 node site/build.mjs');
   const d = JSON.parse(fs.readFileSync(f, 'utf8'));
+  // Foundations: 사이트 foundations/<slug>.md, 프레임과 링크는 tokens/links.mjs 의 fixed 와 같다. 기존 견본 프레임은 남긴다
+  const fx = plan().fixed.find((x) => x.slug === slug && x.frame);
+  if (!PAGE_DOCS[slug] && fx && fs.existsSync(path.join(DS, 'site/foundations', slug + '.md'))) PAGE_DOCS[slug] = { md: `site/foundations/${slug}.md`, frame: fx.frame, category: 'Foundations', docs: fx.doc, code: fx.code, keepVisuals: true };
   if (PAGE_DOCS[slug]) {
     const pg = PAGE_DOCS[slug];
     const reg0 = JSON.parse(read('components.json'));
     const { title, lead, blocks } = mdBlocks(read(pg.md));
     // Figma 파일에만 있는 안내: 이 파일의 페이지 (사이트 메뉴와 같은 순서)
-    const figmaPages = [['Get Started', 'yds 소개와 시작하는 방법'], ['Foundations', '색, 글자, 간격, 모서리, 그림자, 움직임, 기준점'], ['Iconography', 'Lucide 아이콘 라이브러리와 쓰는 법'], ['Action ~ Table & List', `컴포넌트 ${d.components.length}종. 사이트 Components 와 같은 분류 페이지`]];
-    const DATA = { mode: 'page', frame: pg.frame, category: pg.category, title, lead, blocks, figmaPages, sets: {}, defaults: {}, links: { docs: pg.docs, code: pg.code } };
+    const figmaPages = pg.keepVisuals ? null : [['Get Started', 'yds 소개와 시작하는 방법'], ['Foundations', '색, 글자, 간격, 모서리, 그림자, 움직임, 기준점'], ['Iconography', 'Lucide 아이콘 라이브러리와 쓰는 법'], ['Action ~ Table & List', `컴포넌트 ${d.components.length}종. 사이트 Components 와 같은 분류 페이지`]];
+    // 견본을 남기는 쪽(Foundations)은 '보기' 칸이 있는 토큰 표를 빼고 Figma 견본으로 보여 준다
+    // '보기' 칸이 있는 토큰 표는 Figma 에서 견본을 그려 넣는다(글자 견본, 간격 막대, 모서리 상자, 그림자 카드) - 2026-11-05 사용자 "사이트와 섹션 순서 같게"
+    let blocks2 = blocks;
+    blocks2 = blocks2.filter((b, i) => !(b.t === 'h2' && (!blocks2[i + 1] || blocks2[i + 1].t === 'h2')));  // 표를 빼서 비게 된 절 제목도 뺀다
+    const DATA = { mode: 'page', frame: pg.frame, category: pg.category, title, lead, blocks: blocks2, figmaPages, keepVisuals: !!pg.keepVisuals, sets: {}, defaults: {}, links: { docs: pg.docs, code: pg.code } };
     const file = path.join(DS, 'tokens', '.figma-docpage.js');
     fs.writeFileSync(file, `// 자동 생성 - node sync.mjs docpage ${slug} (${today()}) · fileKey ${reg0.figmaFile} · 문서 프레임 ${pg.frame}
 const DATA = ${JSON.stringify(DATA)};

@@ -19,7 +19,7 @@ export function cssSections(text, re) {
 }
 
 // Foundations 페이지(사이트 slug) ↔ tokens.css 구획 번호. icons 는 icons.css 파일 전체.
-const FOUNDATION_SECTIONS = { color: ['1', '3'], typography: ['6', '6'], spacing: ['4', '4'], shape: ['5', '5'], elevation: ['7', '7'], motion: ['7', '7'], icons: null };
+const FOUNDATION_SECTIONS = { color: ['1', '3'], typography: ['6', '6'], spacing: ['4', '4'], shape: ['5', '5'], elevation: ['7', '7'], motion: ['7', '7'], breakpoint: ['7', '7'], icons: null };
 
 export function linkPlan(DS) {
   const read = (p) => fs.readFileSync(path.join(DS, p), 'utf8');

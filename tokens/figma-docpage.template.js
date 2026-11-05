@@ -186,6 +186,14 @@ if (DATA.mode === 'page') {
   await setT(frame.findOne((n) => n.type === 'TEXT' && n.name === 'Category'), DATA.category);
   if (ptp) { await setT(ptp.findChild((n) => n.name === 'Title'), DATA.title); await setT(ptp.findChild((n) => n.name === 'Description'), DATA.lead); await setL(ptp.findOne((n) => n.type === 'TEXT' && n.name === 'Documentation'), DATA.links.docs); await setL(ptp.findOne((n) => n.type === 'TEXT' && n.name === 'Code'), DATA.links.code); }
   const BP = frame.findChild((n) => n.type === 'FRAME' && n.name === 'Body');
+  // Foundations: 예전부터 있던 견본 프레임(변수에 묶인 색 칸, 글자 견본 등)은 지우지 않고 맨 아래 '토큰 견본' 절로 옮긴다
+  const kept = [];
+  if (DATA.keepVisuals) {
+    const prev = BP.findChild((n) => n.name === PREFIX + '토큰 견본');
+    if (prev) for (const n of [...prev.children]) if (!['Section Header', 'Lead'].includes(n.name)) kept.push(n);
+    for (const n of [...BP.children]) if (!n.name.startsWith(PREFIX) && !kept.includes(n)) kept.push(n);
+    for (const n of kept) frame.appendChild(n);  // 잠깐 Body 밖으로
+  }
   for (const n of [...BP.children]) n.remove();
   const out = [];
   const putP = (node) => { BP.appendChild(node); node.layoutSizingHorizontal = 'FILL'; out.push(node.id); };
@@ -200,7 +208,15 @@ if (DATA.mode === 'page') {
     if (b.t === 'p') { add(target(), text(b.text, T.lead, 'fg/neutral-muted', 'Paragraph'), true); continue; }
     if (b.t === 'label') { add(target(), text(b.text, T.title, 'fg/neutral', 'Label'), true); continue; }
     if (b.t === 'code') { add(target(), codeBox(b.code, b.lang === 'text' ? '요청 글' : b.lang), true); continue; }
-    if (b.t === 'table') { add(target(), table(b.head, b.rows.map((r) => r.map((c) => (c.mono ? codeCell(c.text) : c.text))), [280]), true); continue; }
+    if (b.t === 'table') {
+      const dd = b.head[0] === '구분';  // 사용 지침 표: Do / Don't 는 배지로 (컴포넌트 문서와 같게)
+      const badgeSet = dd ? await figma.getNodeByIdAsync('17:87') : null;
+      const badge = (ok) => () => { const x = badgeSet.children.find((c) => c.name === 'size=medium, variant=weak, tone=' + (ok ? 'positive' : 'critical')).createInstance(); x.setProperties({ 'label#17:36': ok ? 'Do' : "Don't" }); return x; };
+      // 아이콘 쓰임 표: 이름 칸에 Iconography 의 실제 아이콘을 함께 (사이트 표처럼 모양을 보며 고르게)
+      const ic = b.head[0] === '이름' && b.head[1] === '쓰임';
+      const iconCell = (name) => () => { const c = box('HORIZONTAL', 'Icon Cell', { gap: 12 }); c.counterAxisAlignItems = 'CENTER'; const solid = /-solid$/.test(name); const setN = iconPage.findOne((n) => (n.type === 'COMPONENT_SET' || n.type === 'COMPONENT') && n.name === 'Lucide/' + name.replace(/-solid$/, '')); const comp = setN && (setN.type === 'COMPONENT_SET' ? (setN.children.find((v) => /Solid/i.test(v.name) === solid) || setN.defaultVariant) : setN); if (comp) { const i = comp.createInstance(); c.appendChild(i); } c.appendChild(mono(name, 't04', 'fg/neutral')); return c; };
+      add(target(), table(b.head, b.rows.map((r) => r.map((c, j) => (dd && j === 0 && /^(Do|Don't)$/.test(c.text) ? badge(c.text === 'Do') : ic && j === 0 ? iconCell(c.text) : c.mono ? codeCell(c.text) : c.text))), [dd ? 120 : 280]), true); continue;
+    }
     if (b.t === 'cards') {
       const row = box('HORIZONTAL', 'Cards', { gap: 16 }); add(target(), row, true);
       for (const it of b.items) {
@@ -212,6 +228,7 @@ if (DATA.mode === 'page') {
     }
   }
   if (sec) putP(sec);
+  if (kept.length) { const s = section('토큰 견본', 'Figma 변수에 묶인 견본입니다. 변수 값을 바꾸면 여기도 함께 바뀝니다.'); for (const n of kept) s.appendChild(n); putP(s); }
   // Figma 파일에만 있는 안내
   if (DATA.figmaPages) { const s = section('Pages in This File', '이 파일의 페이지는 문서 사이트의 메뉴와 같은 순서와 이름입니다.'); add(s, table(['페이지', '내용'], DATA.figmaPages, [280]), true); putP(s); }
   return { frame: frame.id, createdNodeIds: out, height: Math.round(frame.height), body: BP.children.map((n) => n.name) };
