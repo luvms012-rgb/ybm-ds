@@ -1872,7 +1872,7 @@
             "Light": "#0000000f",
             "Dark": "#0000003d"
           },
-          "description": "레벨1 raised — 접촉 그림자(가까운 층). CSS: var(--ds-color-elevation-1-key) 다크 모드는 어두운 표면에서 그림자가 보이도록 알파를 3배 안팎으로 올린 별도 값(자동 반전 아님)."
+          "description": "레벨1 raised 접촉 그림자 색(가까운 층). 살짝 뜬 부품(thumb, 선택된 세그먼트). CSS: var(--ds-color-elevation-1-key). 다크 모드는 어두운 바탕에서 보이도록 알파를 따로 올린 값이다."
         },
         "elevation/1-ambient": {
           "type": "COLOR",
@@ -1880,7 +1880,7 @@
             "Light": "#00000014",
             "Dark": "#00000052"
           },
-          "description": "레벨1 raised — 확산 그림자(넓은 층). 다크 모드는 어두운 표면에서 그림자가 보이도록 알파를 3배 안팎으로 올린 별도 값(자동 반전 아님)."
+          "description": "레벨1 raised 확산 그림자 색(넓은 층). 살짝 뜬 부품(thumb, 선택된 세그먼트). CSS: var(--ds-color-elevation-1-ambient). 다크 모드는 어두운 바탕에서 보이도록 알파를 따로 올린 값이다."
         },
         "elevation/2-key": {
           "type": "COLOR",
@@ -1888,7 +1888,7 @@
             "Light": "#0000000f",
             "Dark": "#00000047"
           },
-          "description": "레벨2 overlay — 접촉 그림자. 다크 모드는 어두운 표면에서 그림자가 보이도록 알파를 3배 안팎으로 올린 별도 값(자동 반전 아님)."
+          "description": "레벨2 overlay 접촉 그림자 색(가까운 층). 메뉴, 고르기 목록, 스낵바, 툴팁. CSS: var(--ds-color-elevation-2-key). 다크 모드는 어두운 바탕에서 보이도록 알파를 따로 올린 값이다."
         },
         "elevation/2-ambient": {
           "type": "COLOR",
@@ -1896,7 +1896,7 @@
             "Light": "#00000014",
             "Dark": "#0000005c"
           },
-          "description": "레벨2 overlay — 확산 그림자. 다크 모드는 어두운 표면에서 그림자가 보이도록 알파를 3배 안팎으로 올린 별도 값(자동 반전 아님)."
+          "description": "레벨2 overlay 확산 그림자 색(넓은 층). 메뉴, 고르기 목록, 스낵바, 툴팁. CSS: var(--ds-color-elevation-2-ambient). 다크 모드는 어두운 바탕에서 보이도록 알파를 따로 올린 값이다."
         },
         "elevation/4-key": {
           "type": "COLOR",
@@ -1904,7 +1904,7 @@
             "Light": "#00000014",
             "Dark": "#00000052"
           },
-          "description": "레벨3 floating — 접촉 그림자. 다크 모드는 어두운 표면에서 그림자가 보이도록 알파를 3배 안팎으로 올린 별도 값(자동 반전 아님)."
+          "description": "레벨4 floating 접촉 그림자 색(가까운 층). 떠 있는 버튼(FAB). CSS: var(--ds-color-elevation-4-key). 다크 모드는 어두운 바탕에서 보이도록 알파를 따로 올린 값이다."
         },
         "elevation/4-ambient": {
           "type": "COLOR",
@@ -1912,7 +1912,7 @@
             "Light": "#0000001a",
             "Dark": "#00000066"
           },
-          "description": "레벨3 floating — 확산 그림자. 다크 모드는 어두운 표면에서 그림자가 보이도록 알파를 3배 안팎으로 올린 별도 값(자동 반전 아님)."
+          "description": "레벨4 floating 확산 그림자 색(넓은 층). 떠 있는 버튼(FAB). CSS: var(--ds-color-elevation-4-ambient). 다크 모드는 어두운 바탕에서 보이도록 알파를 따로 올린 값이다."
         },
         "elevation/5-key": {
           "type": "COLOR",
@@ -1920,7 +1920,7 @@
             "Light": "#00000014",
             "Dark": "#0000005c"
           },
-          "description": "레벨4 modal — 접촉 그림자. 다크 모드는 어두운 표면에서 그림자가 보이도록 알파를 3배 안팎으로 올린 별도 값(자동 반전 아님)."
+          "description": "레벨5 modal 접촉 그림자 색(가까운 층). 다이얼로그, 바텀 시트. CSS: var(--ds-color-elevation-5-key). 다크 모드는 어두운 바탕에서 보이도록 알파를 따로 올린 값이다."
         },
         "elevation/5-ambient": {
           "type": "COLOR",
@@ -1928,7 +1928,7 @@
             "Light": "#00000024",
             "Dark": "#0000007a"
           },
-          "description": "레벨4 modal — 확산 그림자. 다크 모드는 어두운 표면에서 그림자가 보이도록 알파를 3배 안팎으로 올린 별도 값(자동 반전 아님)."
+          "description": "레벨5 modal 확산 그림자 색(넓은 층). 다이얼로그, 바텀 시트. CSS: var(--ds-color-elevation-5-ambient). 다크 모드는 어두운 바탕에서 보이도록 알파를 따로 올린 값이다."
         },
         "radius/r1": {
           "type": "FLOAT",
@@ -2037,7 +2037,7 @@
             "Light": "#0000000f",
             "Dark": "#0000004d"
           },
-          "description": "elevation 3(panel) 접촉 그림자 색. 떠 있는 패널·펼침 메뉴. Light 6% / Dark 30%."
+          "description": "레벨3 panel 접촉 그림자 색(가까운 층). 떠 있는 패널, 펼침 메뉴. CSS: var(--ds-color-elevation-3-key). 다크 모드는 어두운 바탕에서 보이도록 알파를 따로 올린 값이다."
         },
         "elevation/3-ambient": {
           "type": "COLOR",
@@ -2045,7 +2045,7 @@
             "Light": "#0000001a",
             "Dark": "#00000061"
           },
-          "description": "elevation 3(panel) 확산 그림자 색. 떠 있는 패널·펼침 메뉴. Light 10% / Dark 38%."
+          "description": "레벨3 panel 확산 그림자 색(넓은 층). 떠 있는 패널, 펼침 메뉴. CSS: var(--ds-color-elevation-3-ambient). 다크 모드는 어두운 바탕에서 보이도록 알파를 따로 올린 값이다."
         },
         "bg/neutral-solid": {
           "type": "COLOR",
@@ -2724,210 +2724,210 @@
           "values": {
             "Default": 1
           },
-          "description": "레벨1 key 층의 y. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ds-elevation-1) 를 쓸 것."
+          "description": "레벨1 raised key 층의 y. CSS 변수는 따로 없고 합성 토큰 var(--ds-elevation-1) 로만 쓴다."
         },
         "elevation/1/key/blur": {
           "type": "FLOAT",
           "values": {
             "Default": 2
           },
-          "description": "레벨1 key 층의 blur. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ds-elevation-1) 를 쓸 것."
+          "description": "레벨1 raised key 층의 blur. CSS 변수는 따로 없고 합성 토큰 var(--ds-elevation-1) 로만 쓴다."
         },
         "elevation/1/key/spread": {
           "type": "FLOAT",
           "values": {
             "Default": -1
           },
-          "description": "레벨1 key 층의 spread. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ds-elevation-1) 를 쓸 것."
+          "description": "레벨1 raised key 층의 spread. CSS 변수는 따로 없고 합성 토큰 var(--ds-elevation-1) 로만 쓴다."
         },
         "elevation/1/ambient/y": {
           "type": "FLOAT",
           "values": {
             "Default": 1
           },
-          "description": "레벨1 ambient 층의 y. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ds-elevation-1) 를 쓸 것."
+          "description": "레벨1 raised ambient 층의 y. CSS 변수는 따로 없고 합성 토큰 var(--ds-elevation-1) 로만 쓴다."
         },
         "elevation/1/ambient/blur": {
           "type": "FLOAT",
           "values": {
             "Default": 3
           },
-          "description": "레벨1 ambient 층의 blur. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ds-elevation-1) 를 쓸 것."
+          "description": "레벨1 raised ambient 층의 blur. CSS 변수는 따로 없고 합성 토큰 var(--ds-elevation-1) 로만 쓴다."
         },
         "elevation/1/ambient/spread": {
           "type": "FLOAT",
           "values": {
             "Default": 0
           },
-          "description": "레벨1 ambient 층의 spread. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ds-elevation-1) 를 쓸 것."
+          "description": "레벨1 raised ambient 층의 spread. CSS 변수는 따로 없고 합성 토큰 var(--ds-elevation-1) 로만 쓴다."
         },
         "elevation/2/key/y": {
           "type": "FLOAT",
           "values": {
             "Default": 2
           },
-          "description": "레벨2 key 층의 y. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ds-elevation-2) 를 쓸 것."
+          "description": "레벨2 overlay key 층의 y. CSS 변수는 따로 없고 합성 토큰 var(--ds-elevation-2) 로만 쓴다."
         },
         "elevation/2/key/blur": {
           "type": "FLOAT",
           "values": {
             "Default": 4
           },
-          "description": "레벨2 key 층의 blur. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ds-elevation-2) 를 쓸 것."
+          "description": "레벨2 overlay key 층의 blur. CSS 변수는 따로 없고 합성 토큰 var(--ds-elevation-2) 로만 쓴다."
         },
         "elevation/2/key/spread": {
           "type": "FLOAT",
           "values": {
             "Default": -2
           },
-          "description": "레벨2 key 층의 spread. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ds-elevation-2) 를 쓸 것."
+          "description": "레벨2 overlay key 층의 spread. CSS 변수는 따로 없고 합성 토큰 var(--ds-elevation-2) 로만 쓴다."
         },
         "elevation/2/ambient/y": {
           "type": "FLOAT",
           "values": {
             "Default": 4
           },
-          "description": "레벨2 ambient 층의 y. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ds-elevation-2) 를 쓸 것."
+          "description": "레벨2 overlay ambient 층의 y. CSS 변수는 따로 없고 합성 토큰 var(--ds-elevation-2) 로만 쓴다."
         },
         "elevation/2/ambient/blur": {
           "type": "FLOAT",
           "values": {
             "Default": 10
           },
-          "description": "레벨2 ambient 층의 blur. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ds-elevation-2) 를 쓸 것."
+          "description": "레벨2 overlay ambient 층의 blur. CSS 변수는 따로 없고 합성 토큰 var(--ds-elevation-2) 로만 쓴다."
         },
         "elevation/2/ambient/spread": {
           "type": "FLOAT",
           "values": {
             "Default": -1
           },
-          "description": "레벨2 ambient 층의 spread. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ds-elevation-2) 를 쓸 것."
+          "description": "레벨2 overlay ambient 층의 spread. CSS 변수는 따로 없고 합성 토큰 var(--ds-elevation-2) 로만 쓴다."
         },
         "elevation/4/key/y": {
           "type": "FLOAT",
           "values": {
             "Default": 4
           },
-          "description": "레벨3 key 층의 y. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ds-elevation-3) 를 쓸 것."
+          "description": "레벨4 floating key 층의 y. CSS 변수는 따로 없고 합성 토큰 var(--ds-elevation-4) 로만 쓴다."
         },
         "elevation/4/key/blur": {
           "type": "FLOAT",
           "values": {
             "Default": 6
           },
-          "description": "레벨3 key 층의 blur. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ds-elevation-3) 를 쓸 것."
+          "description": "레벨4 floating key 층의 blur. CSS 변수는 따로 없고 합성 토큰 var(--ds-elevation-4) 로만 쓴다."
         },
         "elevation/4/key/spread": {
           "type": "FLOAT",
           "values": {
             "Default": -4
           },
-          "description": "레벨3 key 층의 spread. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ds-elevation-3) 를 쓸 것."
+          "description": "레벨4 floating key 층의 spread. CSS 변수는 따로 없고 합성 토큰 var(--ds-elevation-4) 로만 쓴다."
         },
         "elevation/4/ambient/y": {
           "type": "FLOAT",
           "values": {
             "Default": 10
           },
-          "description": "레벨3 ambient 층의 y. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ds-elevation-3) 를 쓸 것."
+          "description": "레벨4 floating ambient 층의 y. CSS 변수는 따로 없고 합성 토큰 var(--ds-elevation-4) 로만 쓴다."
         },
         "elevation/4/ambient/blur": {
           "type": "FLOAT",
           "values": {
             "Default": 18
           },
-          "description": "레벨3 ambient 층의 blur. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ds-elevation-3) 를 쓸 것."
+          "description": "레벨4 floating ambient 층의 blur. CSS 변수는 따로 없고 합성 토큰 var(--ds-elevation-4) 로만 쓴다."
         },
         "elevation/4/ambient/spread": {
           "type": "FLOAT",
           "values": {
             "Default": -3
           },
-          "description": "레벨3 ambient 층의 spread. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ds-elevation-3) 를 쓸 것."
+          "description": "레벨4 floating ambient 층의 spread. CSS 변수는 따로 없고 합성 토큰 var(--ds-elevation-4) 로만 쓴다."
         },
         "elevation/5/key/y": {
           "type": "FLOAT",
           "values": {
             "Default": 8
           },
-          "description": "레벨4 key 층의 y. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ds-elevation-4) 를 쓸 것."
+          "description": "레벨5 modal key 층의 y. CSS 변수는 따로 없고 합성 토큰 var(--ds-elevation-5) 로만 쓴다."
         },
         "elevation/5/key/blur": {
           "type": "FLOAT",
           "values": {
             "Default": 10
           },
-          "description": "레벨4 key 층의 blur. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ds-elevation-4) 를 쓸 것."
+          "description": "레벨5 modal key 층의 blur. CSS 변수는 따로 없고 합성 토큰 var(--ds-elevation-5) 로만 쓴다."
         },
         "elevation/5/key/spread": {
           "type": "FLOAT",
           "values": {
             "Default": -6
           },
-          "description": "레벨4 key 층의 spread. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ds-elevation-4) 를 쓸 것."
+          "description": "레벨5 modal key 층의 spread. CSS 변수는 따로 없고 합성 토큰 var(--ds-elevation-5) 로만 쓴다."
         },
         "elevation/5/ambient/y": {
           "type": "FLOAT",
           "values": {
             "Default": 20
           },
-          "description": "레벨4 ambient 층의 y. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ds-elevation-4) 를 쓸 것."
+          "description": "레벨5 modal ambient 층의 y. CSS 변수는 따로 없고 합성 토큰 var(--ds-elevation-5) 로만 쓴다."
         },
         "elevation/5/ambient/blur": {
           "type": "FLOAT",
           "values": {
             "Default": 32
           },
-          "description": "레벨4 ambient 층의 blur. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ds-elevation-4) 를 쓸 것."
+          "description": "레벨5 modal ambient 층의 blur. CSS 변수는 따로 없고 합성 토큰 var(--ds-elevation-5) 로만 쓴다."
         },
         "elevation/5/ambient/spread": {
           "type": "FLOAT",
           "values": {
             "Default": -5
           },
-          "description": "레벨4 ambient 층의 spread. 개별 파트는 CSS 대응 변수가 없다 — 합성 토큰 var(--ds-elevation-4) 를 쓸 것."
+          "description": "레벨5 modal ambient 층의 spread. CSS 변수는 따로 없고 합성 토큰 var(--ds-elevation-5) 로만 쓴다."
         },
         "elevation/3/key/y": {
           "type": "FLOAT",
           "values": {
             "Default": 2
           },
-          "description": "elevation 3(panel) 기하값. 합성 토큰 --ds-elevation-3 으로만 노출된다."
+          "description": "레벨3 panel key 층의 y. CSS 변수는 따로 없고 합성 토큰 var(--ds-elevation-3) 로만 쓴다."
         },
         "elevation/3/key/blur": {
           "type": "FLOAT",
           "values": {
             "Default": 4
           },
-          "description": "elevation 3(panel) 기하값. 합성 토큰 --ds-elevation-3 으로만 노출된다."
+          "description": "레벨3 panel key 층의 blur. CSS 변수는 따로 없고 합성 토큰 var(--ds-elevation-3) 로만 쓴다."
         },
         "elevation/3/key/spread": {
           "type": "FLOAT",
           "values": {
             "Default": -2
           },
-          "description": "elevation 3(panel) 기하값. 합성 토큰 --ds-elevation-3 으로만 노출된다."
+          "description": "레벨3 panel key 층의 spread. CSS 변수는 따로 없고 합성 토큰 var(--ds-elevation-3) 로만 쓴다."
         },
         "elevation/3/ambient/y": {
           "type": "FLOAT",
           "values": {
             "Default": 10
           },
-          "description": "elevation 3(panel) 기하값. 합성 토큰 --ds-elevation-3 으로만 노출된다."
+          "description": "레벨3 panel ambient 층의 y. CSS 변수는 따로 없고 합성 토큰 var(--ds-elevation-3) 로만 쓴다."
         },
         "elevation/3/ambient/blur": {
           "type": "FLOAT",
           "values": {
             "Default": 8
           },
-          "description": "elevation 3(panel) 기하값. 합성 토큰 --ds-elevation-3 으로만 노출된다."
+          "description": "레벨3 panel ambient 층의 blur. CSS 변수는 따로 없고 합성 토큰 var(--ds-elevation-3) 로만 쓴다."
         },
         "elevation/3/ambient/spread": {
           "type": "FLOAT",
           "values": {
             "Default": 0
           },
-          "description": "elevation 3(panel) 기하값. 합성 토큰 --ds-elevation-3 으로만 노출된다."
+          "description": "레벨3 panel ambient 층의 spread. CSS 변수는 따로 없고 합성 토큰 var(--ds-elevation-3) 로만 쓴다."
         }
       }
     }
