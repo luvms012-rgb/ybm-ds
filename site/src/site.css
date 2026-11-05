@@ -351,7 +351,8 @@ body[data-side-open] .site-scrim { opacity: 1; pointer-events: auto; }
 .site-icon { display: flex; flex-direction: column; align-items: center; gap: var(--ds-space-x2); padding: var(--ds-space-x4) var(--ds-space-x2); border: 1px solid var(--site-box-line); border-radius: var(--ds-shape-lg); color: var(--ds-color-fg-neutral); }
 .site-icon:hover { background: var(--ds-color-bg-transparent-pressed); }
 .site-icon span { color: var(--ds-color-fg-neutral-subtle); font-family: var(--site-mono); font-size: var(--ds-font-size-t01); text-align: center; word-break: break-all; }
-.site-sample { white-space: nowrap; }
+.site-sample { word-break: keep-all; overflow-wrap: anywhere; }  /* 11-05 사용자 "가로 스크롤 없도록": 큰 글자 견본은 칸 폭에 맞춰 띄어쓰기에서 줄바꿈 (아주 좁으면 글자 사이) */
+.site-doc .ds-table:has(.site-sample) :is(th, td):not(:last-child) { width: 1%; white-space: nowrap; }  /* 견본 표: 토큰과 값 칸은 내용만큼, 남은 폭은 보기 칸 */
 /* Lucide 전체 목록: 찾기 칸 + 개수, 아이콘은 site.js 가 그린다 */
 .site-doc > .site-icon-search { position: sticky; top: var(--site-top); z-index: 2; display: flex; flex-wrap: wrap; align-items: center; gap: var(--ds-space-x3); margin-top: var(--ds-space-x6); padding-block: var(--ds-space-x3); background: var(--ds-color-bg-layer-default); }
 .site-icon-search .ds-input { flex: 1 1 280px; max-width: 480px; }
