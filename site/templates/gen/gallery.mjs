@@ -34,7 +34,7 @@ const classic = () => ({ slug: 'classic-gallery', en: 'Classic Gallery', name: '
   .tp-tabs-center { display: flex; justify-content: center; }
 `, body: wrap(`${heroText(...HERO.classic, false)}<div class="tp-tabs-center">${tabs(['전체', '풍경', '도시', '사람', '음식'], 0, '사진 분류')}</div><div class="tp-grid4">${Array.from({ length: 12 }, (_, i) => ph('1:1', i)).join('')}</div>`) });
 
-const galleryHero = () => ({ slug: 'gallery-hero', en: 'Gallery Hero', name: '사진 묶음 히어로', group: 'Gallery', desc: '제목 아래에 사진 여러 장을 모아 놓은 첫 화면입니다. 다양한 장면을 한 번에 보여 줄 때 씁니다.', css: CSS + `
+const galleryHero = () => ({ slug: 'gallery-hero', en: 'Gallery Hero', name: '사진 히어로', group: 'Gallery', desc: '제목 아래에 사진 여러 장을 모아 놓은 첫 화면입니다. 다양한 장면을 한 번에 보여 줄 때 씁니다.', css: CSS + `
   .tp-mosaic { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--ds-space-x3); }
   @media (min-width: 1024px) { .tp-mosaic { grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: 200px 200px; gap: var(--ds-space-x4); } .tp-mosaic > :first-child { grid-column: span 2; grid-row: span 2; } .tp-mosaic .ds-imageframe { aspect-ratio: auto; height: 100%; } }
 `, body: wrap(`${heroText(...HERO.hero)}<div class="tp-mosaic">${[0, 1, 2, 3, 4].map((i) => ph('4:3', i)).join('')}</div>`) });
@@ -56,7 +56,7 @@ const product = () => ({ slug: 'product-gallery', en: 'Product Gallery', name: '
   .tp-pcard { display: flex; flex-direction: column; gap: var(--ds-space-x3); color: inherit; text-decoration: none; }
 `, body: wrap(`<div class="tp-pg-head"><div class="tp-stack" style="gap: var(--ds-space-x3)"><h1 class="tp-hero-t">${HERO.product[0]}</h1><p class="tp-lead">${HERO.product[1]}</p></div>${btn('모두 보기', { variant: 'neutralOutline', size: 'large', icEnd: 'arrow-right' })}</div><div class="tp-grid3">${[['어디든 가는 가방', '가볍고 튼튼해서 매일 들기 좋아요.', '75,000원'], ['손으로 빚은 머그', '하나씩 모양이 조금씩 달라요.', '28,000원'], ['리넨 쿠션 커버', '빨수록 부드러워지는 천이에요.', '32,000원'], ['원목 트레이', '아침상을 차리기 좋은 크기예요.', '46,000원'], ['향초 세트', '세 가지 향을 번갈아 써 보세요.', '39,000원'], ['산책용 물병', '보온과 보냉이 모두 돼요.', '24,000원']].map(([t, d, p], i) => `<a class="tp-pcard" href="#">${ph('4:3', i, '', 'product')}<span class="tp-pcard__text"><span class="tp-h3">${t}</span><span class="tp-sub">${d}</span></span><span class="tp-pcard__price tp-num">${p}</span></a>`).join('')}</div>`) });
 
-const side = () => ({ slug: 'side-gallery', en: 'Side Gallery', name: '옆 갤러리', group: 'Gallery', desc: '한쪽에 제목과 설명, 반대쪽에 사진 묶음을 둔 첫 화면입니다.', css: CSS + `
+const side = () => ({ slug: 'side-gallery', en: 'Side Gallery', name: '필터 갤러리', group: 'Gallery', desc: '한쪽에 제목과 설명, 반대쪽에 사진 묶음을 둔 첫 화면입니다.', css: CSS + `
   .tp-side { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--ds-space-x8); align-items: center; }
   @media (min-width: 1024px) { .tp-side { grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: var(--ds-space-x12); } }
   .tp-eyebrow { font-size: var(--ds-font-size-t03); font-weight: var(--ds-font-weight-semibold); letter-spacing: .08em; color: var(--ds-color-fg-brand); }

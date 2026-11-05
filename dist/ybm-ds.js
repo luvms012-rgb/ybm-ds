@@ -20,6 +20,11 @@
      · Code Block — data-ds-copy 버튼으로 코드 복사
      · Multi Select — Popover 와 같이 열고 닫기, 고른 값을 칸에 Badge 로 채우기
      · File Attach — 파일을 끌어 놓는 칸 위로 끌고 오면 data-state="dragover", 벗어나거나 놓으면 뺀다
+     · Code Input — 한 칸에 한 글자, 넣으면 다음 칸, 지우면 앞 칸, 붙여 넣으면 모든 칸, 다 채우면 ds-code-complete(detail.value)
+     · Toolbar — 막대 안에서 좌우 화살표로 버튼 사이를 옮긴다
+     · Tree — 줄을 누르면 펼치고 접고 고른다(change, detail.value), 위아래 화살표 이동, 오른쪽 펼침, 왼쪽 접기
+     · Wheel Picker — Time Picker 와 같은 휠
+     · Menu — checkbox 항목은 켜고 끄고, radio 항목은 묶음에서 하나만, 하위 메뉴 버튼은 열고 닫기
    사용: <script src="…/ybm-ds/dist/ybm-ds.js" defer></script>
    ========================================================================== */
 (function () {
@@ -99,8 +104,11 @@
   }
 
   /* ---- Time Picker: 가운데 온 항목 = 선택값 ---------------------------------- */
+  // Wheel Picker 도 같은 휠이다 (2026-11-05)
+  var WHEEL_COL = ".ds-timepicker__column, .ds-wheelpicker__column", WHEEL_OPT = ".ds-timepicker__option, .ds-wheelpicker__option";
+  function isWheelCol(el) { return !!(el && el.matches && el.matches(WHEEL_COL)); }
   function syncWheel(col, notify) {
-    var opts = col.querySelectorAll(".ds-timepicker__option");
+    var opts = col.querySelectorAll(WHEEL_OPT);
     if (!opts.length) return;
     var h = opts[0].offsetHeight || 44;
     var idx = Math.max(0, Math.min(opts.length - 1, Math.round(col.scrollTop / h)));
@@ -116,13 +124,13 @@
   }
   var wheelValue = new WeakMap();
   function scrollWheelTo(col, opt, smooth) {
-    col.scrollTo({ top: opt.offsetTop - col.querySelector(".ds-timepicker__option").offsetTop, behavior: smooth ? "smooth" : "auto" });
+    col.scrollTo({ top: opt.offsetTop - col.querySelector(WHEEL_OPT).offsetTop, behavior: smooth ? "smooth" : "auto" });
   }
   // 고른 항목(aria-selected)으로 휠을 맞춘다. 닫힌 창 안처럼 보이지 않는 휠은 크기가 없어 건너뛰고, 창을 열 때 다시 맞춘다 (2026-11-04)
   function alignWheels(root) {
-    root.querySelectorAll(".ds-timepicker__column").forEach(function (col) {
+    root.querySelectorAll(WHEEL_COL).forEach(function (col) {
       if (!col.offsetHeight) return;
-      var sel = col.querySelector('.ds-timepicker__option[aria-selected="true"]');
+      var sel = col.querySelector('[role="option"][aria-selected="true"]');
       if (sel) scrollWheelTo(col, sel, false);
       syncWheel(col, false);
     });
@@ -130,7 +138,7 @@
   var wheelTimer = new WeakMap();
   document.addEventListener("scroll", function (e) {
     var col = e.target;
-    if (!col.classList || !col.classList.contains("ds-timepicker__column")) return;
+    if (!isWheelCol(col)) return;
     syncWheel(col, false);
     clearTimeout(wheelTimer.get(col));
     wheelTimer.set(col, setTimeout(function () { syncWheel(col, true); }, 120));
@@ -341,6 +349,117 @@
     list.forEach(function (m) { var seg = m.target.closest && m.target.closest(".ds-segmented"); if (seg) syncSegmented(seg); });
   }).observe(document.documentElement, { subtree: true, attributes: true, attributeFilter: ["aria-pressed"] });
 
+  /* ---- Code Input: 한 칸에 한 글자 (2026-11-05) ----------------------------- */
+  function codeCells(cell) { return [].slice.call(cell.closest(".ds-codeinput").querySelectorAll(".ds-codeinput__cell")); }
+  // 여러 글자가 한 번에 들어오면(붙여 넣기, 문자 자동 채움) 그 칸부터 차례로 나눠 넣고, 마지막으로 채운 칸을 돌려준다
+  function codeFill(cells, from, text) {
+    var chars = String(text).replace(/\s/g, "").split(""), i = from, last = from;
+    for (; i < cells.length && chars.length; i++) { cells[i].value = chars.shift(); last = i; }
+    return last;
+  }
+  function codeDone(cell) {
+    var cells = codeCells(cell), v = cells.map(function (c) { return c.value; }).join("");
+    if (v.length === cells.length) cell.closest(".ds-codeinput").dispatchEvent(new CustomEvent("ds-code-complete", { bubbles: true, detail: { value: v } }));
+  }
+  document.addEventListener("input", function (e) {
+    var cell = e.target.closest && e.target.closest(".ds-codeinput__cell");
+    if (!cell) return;
+    var cells = codeCells(cell), i = cells.indexOf(cell);
+    if (cell.value.length > 1) cells[codeFill(cells, i, cell.value)].focus();
+    else if (cell.value && i < cells.length - 1) cells[i + 1].focus();
+    codeDone(cell);
+  });
+  document.addEventListener("paste", function (e) {
+    var cell = e.target.closest && e.target.closest(".ds-codeinput__cell");
+    if (!cell) return;
+    e.preventDefault();
+    var cells = codeCells(cell);
+    cells[codeFill(cells, cells.indexOf(cell), (e.clipboardData || window.clipboardData).getData("text"))].focus();
+    codeDone(cell);
+  });
+  function codeKey(cell, e) {
+    var cells = codeCells(cell), i = cells.indexOf(cell);
+    if (e.key === "Backspace" && !cell.value && i > 0) { e.preventDefault(); cells[i - 1].value = ""; cells[i - 1].focus(); return true; }
+    if (e.key === "ArrowLeft" && i > 0) { e.preventDefault(); cells[i - 1].focus(); return true; }
+    if (e.key === "ArrowRight" && i < cells.length - 1) { e.preventDefault(); cells[i + 1].focus(); return true; }
+    return false;
+  }
+
+  /* ---- Toolbar: 좌우 화살표로 막대 안 버튼 사이를 옮긴다 (2026-11-05) -------- */
+  function toolbarKey(el, e) {
+    if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return false;
+    if (el.matches("input, textarea, select, [contenteditable]")) return false;
+    var bar = el.closest(".ds-toolbar");
+    var items = [].slice.call(bar.querySelectorAll("button:not(:disabled), a[href], [tabindex]:not([tabindex='-1'])"));
+    var i = items.indexOf(el);
+    if (i < 0) return false;
+    e.preventDefault();
+    items[(i + (e.key === "ArrowRight" ? 1 : -1) + items.length) % items.length].focus();
+    return true;
+  }
+
+  /* ---- Tree: 펼치고 접기, 고르기, 화살표 키 (2026-11-05) -------------------- */
+  function treeVisible(tree) { return [].slice.call(tree.querySelectorAll(".ds-tree__node")).filter(function (n) { return n.offsetParent !== null || n.getClientRects().length; }); }
+  function treeFocus(node) {
+    var tree = node.closest(".ds-tree");
+    tree.querySelectorAll(".ds-tree__node").forEach(function (n) { n.setAttribute("tabindex", n === node ? "0" : "-1"); });
+    node.focus();
+  }
+  function treeSelect(node) {
+    var tree = node.closest(".ds-tree");
+    tree.querySelectorAll('.ds-tree__node[aria-selected="true"]').forEach(function (n) { n.removeAttribute("aria-selected"); });
+    node.setAttribute("aria-selected", "true");
+    var label = node.querySelector(".ds-tree__label");
+    tree.dispatchEvent(new CustomEvent("change", { bubbles: true, detail: { value: node.getAttribute("data-value") || (label ? label.textContent.trim() : "") } }));
+  }
+  function treeToggle(node, open) {
+    if (!node.hasAttribute("aria-expanded")) return false;
+    var now = node.getAttribute("aria-expanded") === "true";
+    if (open === undefined) open = !now;
+    if (open === now) return false;
+    node.setAttribute("aria-expanded", open ? "true" : "false");
+    return true;
+  }
+  function treeKey(node, e) {
+    var list = treeVisible(node.closest(".ds-tree")), i = list.indexOf(node), k = e.key;
+    if (k === "ArrowDown" && list[i + 1]) treeFocus(list[i + 1]);
+    else if (k === "ArrowUp" && list[i - 1]) treeFocus(list[i - 1]);
+    else if (k === "Home") treeFocus(list[0]);
+    else if (k === "End") treeFocus(list[list.length - 1]);
+    else if (k === "ArrowRight") { if (!treeToggle(node, true)) { var child = node.querySelector(".ds-tree__group .ds-tree__node"); if (child && node.getAttribute("aria-expanded") === "true") treeFocus(child); } }
+    else if (k === "ArrowLeft") { if (!treeToggle(node, false)) { var parent = node.parentElement.closest(".ds-tree__node"); if (parent) treeFocus(parent); } }
+    else if (k === "Enter" || k === " ") { var row = node.querySelector(".ds-tree__row"); if (row) row.click(); }
+    else return false;
+    e.preventDefault();
+    return true;
+  }
+  function treeClick(row, t) {
+    var node = row.closest(".ds-tree__node");
+    if (!node || node.getAttribute("aria-disabled") === "true") return;
+    // 링크 줄은 이동이 할 일이라 펼침 표시를 눌렀을 때만 펼친다
+    if (row.tagName === "A") { if (t.closest(".ds-tree__toggle")) { treeToggle(node); return true; } return false; }
+    treeToggle(node);
+    treeSelect(node);
+    treeFocus(node);
+    return true;
+  }
+
+  /* ---- Menu: 켜고 끄는 항목, 하나 고르는 항목, 하위 메뉴 (2026-11-05) ------- */
+  function menuClick(item) {
+    var role = item.getAttribute("role");
+    if (item.getAttribute("aria-haspopup") === "menu" && item.parentElement.classList.contains("ds-menu__sub")) {
+      item.setAttribute("aria-expanded", item.getAttribute("aria-expanded") === "true" ? "false" : "true");
+      return true;
+    }
+    if (role === "menuitemcheckbox") { item.setAttribute("aria-checked", item.getAttribute("aria-checked") === "true" ? "false" : "true"); return true; }
+    if (role === "menuitemradio") {
+      var box = item.closest('[role="group"]') || item.closest(".ds-menu");
+      box.querySelectorAll('[role="menuitemradio"]').forEach(function (r) { r.setAttribute("aria-checked", r === item ? "true" : "false"); });
+      return true;
+    }
+    return false;
+  }
+
   /* ---- 초기화: 페이지에 이미 있는 요소 ------------------------------------- */
   function init(root) {
     (root || document).querySelectorAll(".ds-slider").forEach(syncSlider);
@@ -368,6 +487,11 @@
       control.focus();
       return;
     }
+
+    var treeRow = t.closest(".ds-tree__row");
+    if (treeRow && treeClick(treeRow, t)) { e.preventDefault(); return; }
+    var menuItem = t.closest(".ds-menu-item");
+    if (menuItem && menuClick(menuItem)) return;
 
     var popTrigger = t.closest("[data-ds-popover]");
     if (popTrigger) {
@@ -399,7 +523,7 @@
     }
 
     // Time Picker 항목을 누르면 그 값으로 굴린다
-    var wheelOpt = t.closest(".ds-timepicker__option");
+    var wheelOpt = t.closest(WHEEL_OPT);
     if (wheelOpt) { scrollWheelTo(wheelOpt.parentElement, wheelOpt, true); return; }
 
     var opener = t.closest("[data-ds-open]");
@@ -441,6 +565,10 @@
 
   // Esc = 열린 Popover 닫기 / Time Picker 열에서 위아래 화살표 = 한 칸씩 / 추천어 입력 칸에서 줄 고르기
   document.addEventListener("keydown", function (e) {
+    var cellK = e.target.closest && e.target.closest(".ds-codeinput__cell");
+    if (cellK && codeKey(cellK, e)) return;
+    if (e.target.classList && e.target.classList.contains("ds-tree__node") && treeKey(e.target, e)) return;
+    if (e.target.closest && e.target.closest(".ds-toolbar") && toolbarKey(e.target, e)) return;
     if (e.target.getAttribute && e.target.getAttribute("role") === "combobox" && e.target.getAttribute("aria-controls")
       && (e.key === "ArrowDown" || e.key === "ArrowUp" || e.key === "Enter") && moveSuggestion(e.target, e)) return;
     if (e.key === "Escape") {
@@ -448,10 +576,10 @@
       if (open) { setPopover(open, false); var back = document.querySelector('[data-ds-popover="' + open.id + '"]'); if (back) back.focus(); }
       return;
     }
-    var col = e.target.classList && e.target.classList.contains("ds-timepicker__column") ? e.target : null;
+    var col = isWheelCol(e.target) ? e.target : null;
     if (col && (e.key === "ArrowUp" || e.key === "ArrowDown")) {
       e.preventDefault();
-      var cur = col.querySelector('.ds-timepicker__option[aria-selected="true"]');
+      var cur = col.querySelector('[role="option"][aria-selected="true"]');
       var next = cur && (e.key === "ArrowUp" ? cur.previousElementSibling : cur.nextElementSibling);
       if (next) scrollWheelTo(col, next, true);
     }

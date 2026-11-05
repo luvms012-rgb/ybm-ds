@@ -12,7 +12,7 @@ const grow = (cols, label, count, extra = '') => `<tr class="ds-table__group"><t
 const trs = (rows) => rows.map((r) => `<tr>${r.map((c) => `<td${c && c.startsWith && c.startsWith('@end') ? ' data-align="end"' : ''}>${c && c.startsWith && c.startsWith('@end') ? c.slice(4) : c}</td>`).join('')}</tr>`).join('');
 const thead = (cols) => `<thead><tr>${cols.map((c) => { const [t, a] = Array.isArray(c) ? c : [c]; return `<th scope="col"${a ? ` data-align="${a}"` : ''}>${t}</th>`; }).join('')}</tr></thead>`;
 
-/* 1. 접히는 표 묶음 ---------------------------------------------- */
+/* 1. 접는 표 ---------------------------------------------- */
 const collapsible = () => {
   const groups = [
     ['예금/적금', 4, '1억 2,480만원', ['계좌', '은행', ['잔액', 'end'], ['금리', 'end'], '최근 거래'], [['생활비 통장', '가 은행 **** 4821', '@end8,240,000원', '@end0.1%', '오늘'], ['비상금 통장', '나 은행 **** 1093', '@end21,560,000원', '@end2.8%', '어제'], ['청약 저축', '가 은행 **** 7730', '@end18,000,000원', '@end2.3%', '10.25'], ['정기 예금', '다 은행 **** 5512', '@end77,000,000원', '@end3.4%', '10.02']]],
@@ -37,7 +37,7 @@ ${head('연결된 계좌', { sub: '13개 계좌의 순자산 7억 6,840만원', 
   ${groups.map(([g, n, tot, cols, rows], gi) => card(`<details class="tp-coll"${gi < 3 ? ' open' : ''}><summary>${icon('chevron-down', 'sm')}<h2 class="tp-h3">${g}</h2>${badge(n + '개')}<span class="tp-coll__total">${tot}</span></summary><div class="ds-table-wrap"><table class="ds-table" data-density="compact">${thead(['', ...cols])}<tbody>${rows.map((r) => `<tr><td style="width:40px"><button type="button" class="ds-btn tp-caret" data-variant="ghost" data-size="xsmall" data-layout="iconOnly" aria-expanded="false" aria-label="${esc(r[0])} 자세히">${icon('chevron-right', 'sm')}</button></td>${r.map((c, i) => `<td${Array.isArray(cols[i]) ? ` data-align="${cols[i][1]}"` : ''}>${i === 0 ? `<span class="ds-table__stack"><span>${c}</span><span>${r[1]}</span></span>`.replace(`<span>${r[1]}</span></span>`, `<span>${r[1].split(' **** ')[1] ? '**** ' + r[1].split(' **** ')[1] : ''}</span></span>`) : (i === 1 ? String(c).split(' **** ')[0] : String(c).replace('@end', ''))}</td>`).join('')}</tr>`).join('')}</tbody></table></div></details>`)).join('')}
 </main>
 </div>`;
-  return { slug: 'table-collapsible', en: 'Collapsible Table', name: '접히는 표 묶음', group: 'Table', desc: '열 구성이 다른 표 여러 개를 접고 펼치며 보는 화면입니다. 표 하나로 합치면 빈칸이 많아질 때 씁니다.', css, body };
+  return { slug: 'table-collapsible', en: 'Collapsible Table', name: '접는 표', group: 'Table', desc: '열 구성이 다른 표 여러 개를 접고 펼치며 보는 화면입니다. 표 하나로 합치면 빈칸이 많아질 때 씁니다.', css, body };
 };
 
 /* 2. 필터 표 ----------------------------------------------------- */
@@ -188,7 +188,7 @@ const tree = () => {
   <div class="tp-row" style="flex-wrap: wrap">${['canvas', 'vector', 'editor', 'typescript'].map((t) => badge(t, 'brand')).join('')}</div>
   <dl><dt>별</dt><dd class="tp-num">248</dd><dt>지켜보는 사람</dt><dd class="tp-num">19</dd><dt>포크</dt><dd class="tp-num">12</dd><dt>최근 릴리스</dt><dd>v1.4.0 / 4일 전</dd><dt>라이선스</dt><dd>MIT</dd></dl>
   ${divider()}
-  <h3 class="tp-h4">기여한 사람 8명</h3>${K.avatars(['와이비엠', '이준호', '박하린', '최민준', '정다은'], 24, 3)}
+  <h3 class="tp-h4">참여자 8명</h3>${K.avatars(['와이비엠', '이준호', '박하린', '최민준', '정다은'], 24, 3)}
 </aside>
 </div>
 </div>`;

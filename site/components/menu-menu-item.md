@@ -14,7 +14,19 @@
   <div class="ds-menu__divider" role="separator"></div>
   <button class="ds-menu-item" role="menuitem" data-tone="critical">삭제하기</button>
 </div>
+묶음 제목: <div class="ds-menu__label" role="presentation">정렬</div> 다음에 그 묶음 항목들
+켜고 끄기: <button class="ds-menu-item" role="menuitemcheckbox" aria-checked="true">사진만 보기</button>
+하나 고르기: <div role="group" aria-label="정렬"><button class="ds-menu-item" role="menuitemradio" aria-checked="true">최신순</button> …</div>
+하위 메뉴: <div class="ds-menu__sub"><button class="ds-menu-item" role="menuitem" aria-haspopup="menu" aria-expanded="false">옮기기</button><div class="ds-menu" role="menu">…</div></div>
 ```
+
+## 구조
+
+| 부품 | 설명 |
+| --- | --- |
+| **Divider** `ds-menu__divider` | 항목 묶음을 나누는 선입니다. |
+| **Label** `ds-menu__label` | 묶음 제목입니다. |
+| **Sub** `ds-menu__sub` | 하위 메뉴를 품는 항목입니다. |
 
 ## 속성
 
@@ -24,6 +36,14 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | --- | --- |
 | `tone` | critical |
 
+그 밖에: 묶음 제목 `__label`, `menuitemcheckbox`, `menuitemradio`, 하위 메뉴 `__sub`
+
+## 동작
+
+`ybm-ds.js`를 불러오면 알아서 동작합니다.
+
+- checkbox 항목은 켜고 끄고, radio 항목은 묶음에서 하나만, 하위 메뉴 버튼은 열고 닫기
+
 ## 사용 지침
 
 | 구분 | 내용 |
@@ -32,6 +52,8 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | **Do** | 삭제, 차단처럼 되돌릴 수 없는 항목은 critical로 둡니다. 목록 끝에 두고 구분선(Divider)으로 나눕니다. |
 | **Do** | 라벨은 2~6자 동사로 쓰고, 한 메뉴 안에서 말투를 맞춥니다. |
 | **Do** | 설명은 꼭 필요한 항목에만 한 줄로 붙입니다. |
+| **Do** | 켜고 끄는 항목과 하나 고르는 항목은 묶음 제목 아래에 모으고, 고른 표시는 항목 끝에 둡니다. |
+| **Do** | 하위 메뉴는 한 단계까지만 둡니다. |
 | **Don't** | 값을 고르는 데는 쓰지 않습니다. 폼에 넣을 값은 Select로 고르고, Menu는 동작을 실행할 때 씁니다. |
 | **Don't** | 아이콘을 일부 항목에만 넣지 마세요. 모든 항목에 넣거나 모두 빼세요. |
 | **Don't** | 라벨 없이 아이콘만 두지 않습니다. |
@@ -111,6 +133,10 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 ### 크기와 여백
 
 ```
+선택지 (2026-11-05 추가)
+  고른 표시는 끝에 check 18 fg/neutral(Select 와 같다), 하위 메뉴 표시는 끝에 chevron-right 16 fg/neutral-subtle
+  묶음 제목 t02 Medium fg/neutral-subtle, 위 x2 아래 x1 좌우 x3 / 하위 메뉴는 오른쪽에 붙어 열린다(마우스를 올리거나 누르면)
+  ybm-ds.js: checkbox 항목을 누르면 켜고 끄고, radio 항목은 같은 묶음에서 하나만 켠다. 하위 메뉴 버튼을 누르면 열고 닫는다
 Figma Menu: 폭 220 / padding x1 / shape/2xl / bg/layer-floating / elevation overlay(+헤어라인)
            divider 1px stroke/neutral-subtle / 위아래 4
 Figma Item: py10 px12 / gap x2 / shape/sm / 아이콘 18 / t04 fg/neutral

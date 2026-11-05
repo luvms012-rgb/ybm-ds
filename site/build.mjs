@@ -218,7 +218,8 @@ function sideNav(section, file, root) {
   if (section === 'themes') parts.push(item('themes/index.html', 'Overview'));
   if (section === 'templates') {
     parts.push(item('templates/index.html', 'Overview'));
-    parts.push(...templates.map((t) => item(`templates/${t.slug}.html`, t.name)));
+    // 11-05 사용자: 템플릿 메뉴는 가나다 순
+    parts.push(...[...templates].sort((x, y) => x.name.localeCompare(y.name, 'ko')).map((t) => item(`templates/${t.slug}.html`, t.name)));
   }
   const mobile = `<div class="site-side__mobile"><nav class="site-nav" aria-label="주요 메뉴">${NAV.map(([k, l, h]) => `<a class="site-nav__item" href="${root}${h}"${k === section ? ' aria-current="page"' : ''}>${l}</a>`).join('')}</nav><div class="site-nav__sep"></div></div>`;
   // 컴포넌트 메뉴 맨 위 찾기 칸 (높이 32, 모서리 12, 1px 테두리) - 메뉴 항목과 목록 카드를 함께 거른다
@@ -972,9 +973,9 @@ const tplGroups = [...new Set(templates.map((t) => t.group))];
 // 분류 칩에 보이는 이름 (값은 templates.json의 영어 group)
 const TPL_GROUP_KO = { Dashboard: '대시보드', Table: '표', Form: '입력 폼', Settings: '설정', Login: '로그인', Tools: '도구', Content: '콘텐츠', 'AI Chat': 'AI 채팅', Gallery: '갤러리', Community: '커뮤니티', Pricing: '요금제', 'My Page': '마이페이지', Commerce: '쇼핑', Exam: '시험 접수', 'Exam B2B': '단체 시험', 'Learning B2B': '기업 러닝' };
 write({
-  file: 'templates/index.html', section: 'templates', title: 'Templates', layout: 'full',
-  body: `${hero('Templates', '자주 만드는 화면을 DS 컴포넌트로 미리 조립해 두었습니다.').replace('class="site-hero"', 'class="site-hero site-hero--tpl"').replace('</p></header>', (SHOW_THEMES ? ' 테마를 입힌 실제 사이트 예시는 <a class="ds-link" href="../themes/index.html">Themes</a>에 있습니다.' : '') + '</p></header>')}
-<div class="site-toolbar site-toolbar--center">
+  file: 'templates/index.html', section: 'templates', title: 'Templates', layout: 'wide',  // 11-05 사용자: 컴포넌트처럼 왼쪽 메뉴를 처음부터
+  body: `${hero('Templates', '자주 만드는 화면을 DS 컴포넌트로 미리 조립해 두었습니다.').replace(' class="site-hero"', '')  /* 11-05 사용자: 다른 화면처럼 왼쪽 정렬 */.replace('</p></header>', (SHOW_THEMES ? ' 테마를 입힌 실제 사이트 예시는 <a class="ds-link" href="../themes/index.html">Themes</a>에 있습니다.' : '') + '</p></header>')}
+<div class="site-toolbar">
   <div class="ds-chiptabs" role="tablist" aria-label="분류">
     <button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-filter="">전체</button>
     ${tplGroups.map((g) => `<button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-filter="${esc(g)}">${esc(TPL_GROUP_KO[g] || g)}</button>`).join('\n    ')}

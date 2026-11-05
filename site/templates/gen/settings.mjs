@@ -72,7 +72,7 @@ const form = () => {
   <main class="tp-content">
     ${sec('기본 정보', '내 정보와 계정 정보를 보고 바꿀 수 있어요.', `${field('u-id', '아이디', inp('u-id', 'ybm'))}${field('u-name', '이름', inp('u-name', '와이비엠'))}${field('u-mail', '이메일', inp('u-mail', 'ybm@example.com', 'type="email"'))}${field('u-tel', '휴대폰', inp('u-tel', '010-1234-5678', 'type="tel"'))}${field('u-lang', '언어', sel('u-lang', '한국어'))}`, '저장')}
     ${K.divider()}
-    ${sec('비밀번호 바꾸기', '계정을 안전하게 지키려면 비밀번호를 주기적으로 바꿔 주세요.', `${field('p-cur', '지금 비밀번호', input('p-cur', 'type="password"'))}${field('p-new', '새 비밀번호', input('p-new', 'type="password"'), { help: '8자 이상, 영문과 숫자를 섞어 주세요.' })}${field('p-new2', '새 비밀번호 확인', input('p-new2', 'type="password"'))}`, '비밀번호 바꾸기')}
+    ${sec('비밀번호 변경', '계정을 안전하게 지키려면 비밀번호를 주기적으로 바꿔 주세요.', `${field('p-cur', '지금 비밀번호', input('p-cur', 'type="password"'))}${field('p-new', '새 비밀번호', input('p-new', 'type="password"'), { help: '8자 이상, 영문과 숫자를 섞어 주세요.' })}${field('p-new2', '새 비밀번호 확인', input('p-new2', 'type="password"'))}`, '비밀번호 변경')}
     ${K.divider()}
     ${sec('고급 설정', '계정의 자세한 설정과 보안 옵션이에요.', `${cb('데이터 내보내기 허용', '내 학습 기록과 백업을 내려받을 수 있어요.', 1)}${cb('2단계 인증', '로그인할 때 휴대폰으로 한 번 더 확인해요.', 1)}${cb('새 기기 로그인 알림', '처음 쓰는 기기에서 로그인하면 알려 드려요.', 0)}${cb('검색 엔진에 프로필 숨기기', '공개 프로필이 검색 결과에 나오지 않아요.', 0)}`, '설정 저장')}
   </main>
@@ -94,14 +94,14 @@ const panels = () => {
   .tp-info__v { color: var(--ds-color-fg-neutral-muted); font-size: var(--ds-font-size-t04); line-height: var(--ds-line-height-t04); }
 `;
   const items = [['개인 정보', 'user'], ['로그인과 보안', 'lock'], ['결제와 환불', 'credit-card'], ['알림', 'bell'], ['개인정보 보호', 'shield-check'], ['학습 설정', 'book-open'], ['언어와 지역', 'globe'], ['연결된 기기', 'smartphone'], ['기업 계정', 'building']];
-  const info = [['실명', '와이비엠', 1], ['부르는 이름', '입력하지 않음', 1], ['이메일', 's***n@example.com', 1], ['휴대폰', '010-****-5678', 1], ['본인 인증', badge('인증 완료', 'positive'), 0], ['집 주소', '입력하지 않음', 1], ['우편 받을 주소', '입력하지 않음', 1], ['비상 연락처', '입력함', 1]];
+  const info = [['실명', '와이비엠', 1], ['닉네임', '입력하지 않음', 1], ['이메일', 's***n@example.com', 1], ['휴대폰', '010-****-5678', 1], ['본인 인증', badge('인증 완료', 'positive'), 0], ['집 주소', '입력하지 않음', 1], ['우편물 받을 주소', '입력하지 않음', 1], ['비상 연락처', '입력함', 1]];
   const body = `<div class="tp-app">
 <div class="tp-sp">
   <aside class="tp-sp__side"><h2 class="tp-h2">계정 설정</h2>${nav([['', items]], '개인 정보')}${divider()}${nav([['', [['로그아웃', 'log-out']]]], '')}</aside>
   <main class="tp-sp__main">
     <h1 class="tp-h1">개인 정보</h1>
     <div>${info.map(([k, v, e]) => `<div class="tp-info"><div class="tp-stack"><span class="tp-h4">${k}</span><span class="tp-info__v">${v}</span></div>${e ? btn('수정', { variant: 'neutralWeak', size: 'xsmall' }) : ''}</div>`).join('')}</div>
-    ${card(`<div class="tp-row" style="align-items:flex-start">${icon('info', 'sm')}<div class="tp-stack"><span class="tp-h4">왜 어떤 정보는 여기 안 보이나요?</span><span class="tp-sub">본인 확인을 위해 일부 정보는 가려서 보여 드려요. 가린 정보는 고치기를 누른 뒤 본인 인증을 하면 볼 수 있어요.</span></div></div>`)}
+    ${card(`<div class="tp-row" style="align-items:flex-start">${icon('info', 'sm')}<div class="tp-stack"><span class="tp-h4">일부 정보가 보이지 않는 이유</span><span class="tp-sub">본인 확인을 위해 일부 정보는 가려서 보여 드려요. 가린 정보는 고치기를 누른 뒤 본인 인증을 하면 볼 수 있어요.</span></div></div>`)}
   </main>
 </div>
 </div>`;

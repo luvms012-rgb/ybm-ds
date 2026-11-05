@@ -209,7 +209,7 @@ const cancel = () => {
     <section class="tp-sec" aria-labelledby="lose"><h2 class="tp-h3" id="lose">해지하면 이런 혜택을 쓸 수 없어요</h2>
       <div class="tp-keep">${keep.map(([ic, t, d]) => `<div class="tp-keep__item">${icon(ic)}<span class="tp-h4">${t}</span><span class="tp-sub">${d}</span></div>`).join('')}</div>
     </section>
-    <section class="tp-sec" aria-labelledby="why"><h2 class="tp-h3" id="why">해지하는 까닭을 알려 주세요</h2>
+    <section class="tp-sec" aria-labelledby="why"><h2 class="tp-h3" id="why">해지하는 이유를 알려 주세요</h2>
       ${radios('why', ['요금이 부담돼요', '자주 쓰지 않아요', '필요한 기능이 없어요', '다른 서비스로 옮겨요', '기타'], 0)}
       ${field('why-more', '더 알려 주실 내용 (선택)', textarea('why-more', 'rows="3" placeholder="더 나은 서비스를 만드는 데 쓸게요"'))}
     </section>

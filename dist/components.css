@@ -88,6 +88,13 @@
      70 Citation             .ds-citation
      71 Multi Select         .ds-multiselect
      72 Rating               .ds-rating
+     73 Code Input           .ds-codeinput
+     74 Chart                .ds-chart
+     75 Description List     .ds-desclist
+     76 Toolbar              .ds-toolbar
+     77 Tree                 .ds-tree
+     78 Wheel Picker         .ds-wheelpicker
+     79 Search Field         .ds-searchfield
    ========================================================================== */
 
 
@@ -1679,6 +1686,14 @@ a.ds-callout:active, button.ds-callout:active { filter: brightness(0.97); }
        <div class="ds-menu__divider" role="separator"></div>
        <button class="ds-menu-item" role="menuitem" data-tone="critical">삭제하기</button>
      </div>
+   선택지 (2026-11-05 추가)
+     묶음 제목: <div class="ds-menu__label" role="presentation">정렬</div> 다음에 그 묶음 항목들
+     켜고 끄기: <button class="ds-menu-item" role="menuitemcheckbox" aria-checked="true">사진만 보기</button>
+     하나 고르기: <div role="group" aria-label="정렬"><button class="ds-menu-item" role="menuitemradio" aria-checked="true">최신순</button> …</div>
+     하위 메뉴: <div class="ds-menu__sub"><button class="ds-menu-item" role="menuitem" aria-haspopup="menu" aria-expanded="false">옮기기</button><div class="ds-menu" role="menu">…</div></div>
+     고른 표시는 끝에 check 18 fg/neutral(Select 와 같다), 하위 메뉴 표시는 끝에 chevron-right 16 fg/neutral-subtle
+     묶음 제목 t02 Medium fg/neutral-subtle, 위 x2 아래 x1 좌우 x3 / 하위 메뉴는 오른쪽에 붙어 열린다(마우스를 올리거나 누르면)
+     ybm-ds.js: checkbox 항목을 누르면 켜고 끄고, radio 항목은 같은 묶음에서 하나만 켠다. 하위 메뉴 버튼을 누르면 열고 닫는다
    Figma Menu: 폭 220 · padding x1 · shape/2xl · bg/layer-floating · elevation overlay(+헤어라인)
               divider 1px stroke/neutral-subtle · 위아래 4
    Figma Item: py10 px12 · gap x2 · shape/sm · 아이콘 18 · t04 fg/neutral
@@ -1713,6 +1728,24 @@ a.ds-callout:active, button.ds-callout:active { filter: brightness(0.97); }
 @media (hover: hover) { .ds-menu-item:hover:not(:disabled) { background: var(--ds-color-bg-neutral-weak-alpha); } }
 .ds-menu-item[data-tone="critical"] { --ds-menu-item-fg: var(--ds-color-fg-critical); }
 .ds-menu-item:disabled { --ds-menu-item-fg: var(--ds-color-fg-disabled); cursor: not-allowed; }
+.ds-menu__label { padding: var(--ds-space-x2) var(--ds-space-x3) var(--ds-space-x1); color: var(--ds-color-fg-neutral-subtle); font-size: var(--ds-font-size-t02); line-height: var(--ds-line-height-t02); font-weight: var(--ds-font-weight-medium); }
+.ds-menu-item:is([role="menuitemcheckbox"], [role="menuitemradio"])[aria-checked="true"]::after,
+.ds-menu-item[aria-haspopup="menu"]::after {
+  content: "";
+  flex: none;
+  margin-inline-start: auto;
+  width: 18px;
+  height: 18px;
+  background: currentColor;
+  -webkit-mask: var(--ds-icon-check) center / contain no-repeat;
+          mask: var(--ds-icon-check) center / contain no-repeat;
+}
+.ds-menu-item[aria-haspopup="menu"]::after { width: 16px; height: 16px; background: var(--ds-color-fg-neutral-subtle); -webkit-mask-image: var(--ds-icon-chevron-right); mask-image: var(--ds-icon-chevron-right); }
+.ds-menu__sub { position: relative; display: flex; flex-direction: column; }
+.ds-menu__sub > .ds-menu { position: absolute; top: calc(var(--ds-space-x1) * -1); left: calc(100% + var(--ds-space-x1)); z-index: 1; display: none; }
+.ds-menu__sub:has(> [aria-expanded="true"]) > .ds-menu { display: flex; }
+@media (hover: hover) { .ds-menu__sub:hover > .ds-menu, .ds-menu__sub:focus-within > .ds-menu { display: flex; } }
+.ds-menu__sub:has(> [aria-expanded="true"]) > .ds-menu-item, .ds-menu__sub:hover > .ds-menu-item { background: var(--ds-color-bg-neutral-weak-alpha); }
 
 
 /* --------------------------------------------------------------------------
@@ -2915,7 +2948,7 @@ a.ds-card:active, button.ds-card:active { background: linear-gradient(var(--ds-c
      가운데 t07 SemiBold fg/neutral / 바로 위아래 t06 fg/neutral-muted / 그 밖 t05 fg/neutral-subtle / disabled 모두 fg/disabled
    모바일 입력 필드에서는 Field Button + Bottom Sheet 안에 넣어 쓴다.
    -------------------------------------------------------------------------- */
-.ds-timepicker {
+.ds-timepicker, .ds-wheelpicker {
   --ds-tp-item: var(--ds-space-x11);
   position: relative;
   display: flex;
@@ -2924,7 +2957,7 @@ a.ds-card:active, button.ds-card:active { background: linear-gradient(var(--ds-c
   height: calc(var(--ds-tp-item) * 5);
   padding-inline: var(--ds-space-x4);
 }
-.ds-timepicker::before {
+.ds-timepicker::before, .ds-wheelpicker::before {
   content: "";
   position: absolute;
   inset: calc(var(--ds-tp-item) * 2) 0 auto;
@@ -2933,7 +2966,7 @@ a.ds-card:active, button.ds-card:active { background: linear-gradient(var(--ds-c
   background: var(--ds-color-bg-neutral-weak-alpha);
   pointer-events: none;
 }
-.ds-timepicker__column {
+:is(.ds-timepicker__column, .ds-wheelpicker__column) {
   position: relative;
   flex: 1 1 0;
   min-width: 0;
@@ -2943,9 +2976,9 @@ a.ds-card:active, button.ds-card:active { background: linear-gradient(var(--ds-c
   scrollbar-width: none;
   overscroll-behavior: contain;
 }
-.ds-timepicker__column::-webkit-scrollbar { display: none; }
-.ds-timepicker__column:focus-visible { outline-offset: -2px; border-radius: var(--ds-shape-md); }
-.ds-timepicker__option {
+:is(.ds-timepicker__column, .ds-wheelpicker__column)::-webkit-scrollbar { display: none; }
+:is(.ds-timepicker__column, .ds-wheelpicker__column):focus-visible { outline-offset: -2px; border-radius: var(--ds-shape-md); }
+:is(.ds-timepicker__option, .ds-wheelpicker__option) {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2958,10 +2991,10 @@ a.ds-card:active, button.ds-card:active { background: linear-gradient(var(--ds-c
   cursor: pointer;
   user-select: none;
 }
-.ds-timepicker__option[data-near] { color: var(--ds-color-fg-neutral-muted); font-size: var(--ds-font-size-t06); line-height: var(--ds-line-height-t06); }
-.ds-timepicker__option[aria-selected="true"] { color: var(--ds-color-fg-neutral); font-size: var(--ds-font-size-t07); line-height: var(--ds-line-height-t07); font-weight: var(--ds-font-weight-semibold); }
-.ds-timepicker[aria-disabled="true"] .ds-timepicker__column { overflow: hidden; pointer-events: none; }
-.ds-timepicker[aria-disabled="true"] .ds-timepicker__option { color: var(--ds-color-fg-disabled); }
+:is(.ds-timepicker__option, .ds-wheelpicker__option)[data-near] { color: var(--ds-color-fg-neutral-muted); font-size: var(--ds-font-size-t06); line-height: var(--ds-line-height-t06); }
+:is(.ds-timepicker__option, .ds-wheelpicker__option)[aria-selected="true"] { color: var(--ds-color-fg-neutral); font-size: var(--ds-font-size-t07); line-height: var(--ds-line-height-t07); font-weight: var(--ds-font-weight-semibold); }
+:is(.ds-timepicker, .ds-wheelpicker)[aria-disabled="true"] :is(.ds-timepicker__column, .ds-wheelpicker__column) { overflow: hidden; pointer-events: none; }
+:is(.ds-timepicker, .ds-wheelpicker)[aria-disabled="true"] :is(.ds-timepicker__option, .ds-wheelpicker__option) { color: var(--ds-color-fg-disabled); }
 
 
 /* --------------------------------------------------------------------------
@@ -4186,3 +4219,341 @@ a.ds-citation[data-type="number"]:hover { background: var(--ds-color-bg-brand-we
 .ds-rating__option:hover .ds-rating__star { scale: 1.1; }
 .ds-rating__option:has(:focus-visible) .ds-rating__star { outline: 2px solid var(--ds-color-stroke-focus-ring); outline-offset: 2px; border-radius: var(--ds-shape-2xs); }
 .ds-rating[data-input]:is(:disabled, [aria-disabled="true"]) { opacity: .4; pointer-events: none; }
+
+
+
+/* --------------------------------------------------------------------------
+   73 Code Input - 인증번호처럼 정해진 자리 수를 한 칸에 한 글자씩 넣는 칸 (2026-11-05 추가)
+     <div class="ds-codeinput" role="group" aria-label="인증번호 6자리" [data-size="medium"] [aria-invalid="true"]>
+       <input class="ds-codeinput__cell" inputmode="numeric" autocomplete="one-time-code" aria-label="1번째 숫자"> 칸 수만큼
+     </div>
+   size: large(기본) 칸 48x56, shape/lg, t08 SemiBold / medium 칸 40x48, shape/md, t06 SemiBold / 칸 사이 x2
+   선: 1px stroke/neutral-weak, 포커스 stroke/neutral-contrast, 틀림 stroke/critical-solid, 비활성 bg/disabled
+   ybm-ds.js: 한 글자를 넣으면 다음 칸, 지우면 앞 칸, 붙여 넣으면 모든 칸을 채우고 다 채우면 ds-code-complete(detail.value)
+   -------------------------------------------------------------------------- */
+.ds-codeinput {
+  --ds-codeinput-w: 48px;
+  --ds-codeinput-h: 56px;
+  --ds-codeinput-radius: var(--ds-shape-lg);
+  display: flex;
+  gap: var(--ds-space-x2);
+}
+.ds-codeinput[data-size="medium"] { --ds-codeinput-w: 40px; --ds-codeinput-h: 48px; --ds-codeinput-radius: var(--ds-shape-md); }
+.ds-codeinput__cell {
+  --ds-codeinput-line: var(--ds-color-stroke-neutral-weak);
+  flex: none;
+  width: var(--ds-codeinput-w);
+  height: var(--ds-codeinput-h);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--ds-codeinput-radius);
+  box-shadow: inset 0 0 0 1px var(--ds-codeinput-line);
+  background: var(--ds-color-bg-layer-default);
+  color: var(--ds-color-fg-neutral);
+  font: inherit;
+  font-size: var(--ds-font-size-t08);
+  line-height: var(--ds-line-height-t08);
+  font-weight: var(--ds-font-weight-semibold);
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+  caret-color: var(--ds-color-fg-brand);
+  transition: box-shadow var(--ds-duration-fast) var(--ds-easing-standard);
+}
+.ds-codeinput[data-size="medium"] .ds-codeinput__cell { font-size: var(--ds-font-size-t06); line-height: var(--ds-line-height-t06); }
+.ds-codeinput__cell:focus { outline: none; --ds-codeinput-line: var(--ds-color-stroke-neutral-contrast); }
+.ds-codeinput[aria-invalid="true"] .ds-codeinput__cell { --ds-codeinput-line: var(--ds-color-stroke-critical-solid); }
+.ds-codeinput__cell:disabled { background: var(--ds-color-bg-disabled); color: var(--ds-color-fg-disabled); cursor: not-allowed; }
+
+
+/* --------------------------------------------------------------------------
+   74 Chart - 막대, 선, 도넛으로 수치를 비교하거나 흐름을 보여 주는 그래프 (2026-11-05 추가)
+     <figure class="ds-chart" data-type="bar|line|donut">
+       [<figcaption class="ds-chart__header"><span class="ds-chart__title">주간 방문</span><span class="ds-chart__desc">지난 7일</span></figcaption>]
+       막대: <div class="ds-chart__plot"><div class="ds-chart__col"><span class="ds-chart__bar" style="--ds-chart-value: 72%" [data-series="2"]></span><span class="ds-chart__label">월</span></div> 칸 수만큼</div>
+       선:   <div class="ds-chart__plot"><svg class="ds-chart__svg" viewBox="0 0 100 40" preserveAspectRatio="none"><polygon class="ds-chart__area" points="…"/><polyline class="ds-chart__line" [data-series="2"] points="0,30 20,22 …"/></svg></div>
+             <div class="ds-chart__axis"><span>월</span> …</div>
+       도넛: <div class="ds-chart__donut" style="--ds-chart-1: 40; --ds-chart-2: 30; --ds-chart-3: 20" role="img" aria-label="…">[<span class="ds-chart__total">…</span>]</div>
+       [<ul class="ds-chart__legend"><li><span class="ds-chart__swatch" [data-series="2"]></span>신규</li></ul>]
+     </figure>
+   색: chart/series-1~5 (data-series 1~5, 기본 1) / 눈금선 stroke/neutral-muted / 막대 폭 최대 32, 위 모서리 shape/2xs
+   높이: --ds-chart-height(기본 160) / 도넛 지름 --ds-chart-size(기본 160), 두께 24, 값은 백분율 숫자(합 100 이하, 남은 몫은 bg/neutral)
+   title t05 SemiBold / desc t03 fg/neutral-muted / 축 글자 t02 fg/neutral-muted / 범례 t03, 색 표시 10
+   -------------------------------------------------------------------------- */
+.ds-chart {
+  --ds-chart-height: 160px;
+  --ds-chart-size: 160px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-space-x4);
+  margin: 0;
+  min-width: 0;
+  color: var(--ds-color-fg-neutral);
+}
+:is(.ds-chart__bar, .ds-chart__line, .ds-chart__area, .ds-chart__swatch) { --ds-chart-color: var(--ds-color-chart-series-1); }
+:is(.ds-chart__bar, .ds-chart__line, .ds-chart__area, .ds-chart__swatch)[data-series="2"] { --ds-chart-color: var(--ds-color-chart-series-2); }
+:is(.ds-chart__bar, .ds-chart__line, .ds-chart__area, .ds-chart__swatch)[data-series="3"] { --ds-chart-color: var(--ds-color-chart-series-3); }
+:is(.ds-chart__bar, .ds-chart__line, .ds-chart__area, .ds-chart__swatch)[data-series="4"] { --ds-chart-color: var(--ds-color-chart-series-4); }
+:is(.ds-chart__bar, .ds-chart__line, .ds-chart__area, .ds-chart__swatch)[data-series="5"] { --ds-chart-color: var(--ds-color-chart-series-5); }
+.ds-chart__header { display: flex; flex-direction: column; gap: var(--ds-space-x1); }
+.ds-chart__title { font-size: var(--ds-font-size-t05); line-height: var(--ds-line-height-t05); font-weight: var(--ds-font-weight-semibold); }
+.ds-chart__desc { color: var(--ds-color-fg-neutral-muted); font-size: var(--ds-font-size-t03); line-height: var(--ds-line-height-t03); }
+.ds-chart__plot {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  gap: var(--ds-space-x2);
+  height: var(--ds-chart-height);
+  border-bottom: 1px solid var(--ds-color-stroke-neutral-muted);
+  background: repeating-linear-gradient(to top, transparent 0 calc(25% - 1px), var(--ds-color-stroke-neutral-muted) calc(25% - 1px) 25%);
+}
+.ds-chart[data-type="bar"] .ds-chart__plot { margin-bottom: calc(var(--ds-line-height-t02) + var(--ds-space-x2)); }
+.ds-chart__col { position: relative; flex: 1 1 0; display: flex; justify-content: center; align-items: flex-end; height: 100%; min-width: 0; }
+.ds-chart__bar {
+  display: block;
+  width: min(100%, 32px);
+  height: var(--ds-chart-value, 0%);
+  border-radius: var(--ds-shape-2xs) var(--ds-shape-2xs) 0 0;
+  background: var(--ds-chart-color);
+  transition: height var(--ds-duration-normal) var(--ds-easing-standard);
+}
+.ds-chart__label {
+  position: absolute;
+  top: calc(100% + var(--ds-space-x2));
+  left: 50%;
+  translate: -50% 0;
+  color: var(--ds-color-fg-neutral-muted);
+  font-size: var(--ds-font-size-t02);
+  line-height: var(--ds-line-height-t02);
+  white-space: nowrap;
+}
+.ds-chart__svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.ds-chart__line {
+  fill: none;
+  stroke: var(--ds-chart-color);
+  stroke-width: 2;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+}
+.ds-chart__area { fill: var(--ds-chart-color); fill-opacity: .12; stroke: none; }
+.ds-chart__axis { display: flex; justify-content: space-between; color: var(--ds-color-fg-neutral-muted); font-size: var(--ds-font-size-t02); line-height: var(--ds-line-height-t02); }
+.ds-chart__donut {
+  --ds-chart-1: 0; --ds-chart-2: 0; --ds-chart-3: 0; --ds-chart-4: 0; --ds-chart-5: 0;
+  position: relative;
+  display: grid;
+  place-items: center;
+  align-self: center;
+  width: var(--ds-chart-size);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: conic-gradient(
+    var(--ds-color-chart-series-1) 0 calc(var(--ds-chart-1) * 1%),
+    var(--ds-color-chart-series-2) 0 calc((var(--ds-chart-1) + var(--ds-chart-2)) * 1%),
+    var(--ds-color-chart-series-3) 0 calc((var(--ds-chart-1) + var(--ds-chart-2) + var(--ds-chart-3)) * 1%),
+    var(--ds-color-chart-series-4) 0 calc((var(--ds-chart-1) + var(--ds-chart-2) + var(--ds-chart-3) + var(--ds-chart-4)) * 1%),
+    var(--ds-color-chart-series-5) 0 calc((var(--ds-chart-1) + var(--ds-chart-2) + var(--ds-chart-3) + var(--ds-chart-4) + var(--ds-chart-5)) * 1%),
+    var(--ds-color-bg-neutral) 0);
+}
+.ds-chart__donut::before { content: ""; position: absolute; inset: 24px; border-radius: 50%; background: var(--ds-color-bg-layer-default); }
+.ds-chart__total { position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; font-size: var(--ds-font-size-t07); line-height: var(--ds-line-height-t07); font-weight: var(--ds-font-weight-bold); }
+.ds-chart__total small { color: var(--ds-color-fg-neutral-muted); font-size: var(--ds-font-size-t02); line-height: var(--ds-line-height-t02); font-weight: var(--ds-font-weight-regular); }
+.ds-chart__legend { display: flex; flex-wrap: wrap; gap: var(--ds-space-x2) var(--ds-space-x4); margin: 0; padding: 0; list-style: none; color: var(--ds-color-fg-neutral-muted); font-size: var(--ds-font-size-t03); line-height: var(--ds-line-height-t03); }
+.ds-chart__legend li { display: inline-flex; align-items: center; gap: var(--ds-space-x1_5); }
+.ds-chart__swatch { flex: none; width: 10px; height: 10px; border-radius: var(--ds-shape-2xs); background: var(--ds-chart-color); }
+
+
+/* --------------------------------------------------------------------------
+   75 Description List - 주문 정보, 계정 정보처럼 항목 이름과 값을 짝지어 보여 주는 목록 (2026-11-05 추가)
+     <dl class="ds-desclist" [data-layout="top"] [data-columns="2|3"] [data-align="end"] [data-divider]>
+       <div class="ds-desclist__item"><dt class="ds-desclist__label">주문 번호</dt><dd class="ds-desclist__value">20261105-0012</dd></div>
+     </dl>
+   layout: start(기본, 이름 왼쪽 + 값 오른쪽) / top(이름 위 + 값 아래, 값이 길 때)
+   이름 t04 Medium fg/neutral-muted, 폭 --ds-desclist-label-width(기본 96) / 값 t04 fg/neutral
+   줄 사이 x2 / data-divider 면 줄마다 위아래 x3 + 사이 선 stroke/neutral-muted / 이름과 값 사이 x4 / 여러 칸 사이 x6(폭 480 아래는 한 칸)
+   data-align="end": 값을 오른쪽 끝에 붙인다(금액, 결제 정보)
+   -------------------------------------------------------------------------- */
+.ds-desclist {
+  --ds-desclist-label-width: 96px;
+  display: grid;
+  gap: var(--ds-space-x2) var(--ds-space-x6);
+  margin: 0;
+  min-width: 0;
+  font-size: var(--ds-font-size-t04);
+  line-height: var(--ds-line-height-t04);
+}
+.ds-desclist[data-columns="2"] { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.ds-desclist[data-columns="3"] { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.ds-desclist__item { display: flex; gap: var(--ds-space-x4); min-width: 0; }
+.ds-desclist__label { flex: none; width: var(--ds-desclist-label-width); color: var(--ds-color-fg-neutral-muted); font-weight: var(--ds-font-weight-medium); }
+.ds-desclist__value { flex: 1 1 auto; min-width: 0; margin: 0; color: var(--ds-color-fg-neutral); overflow-wrap: anywhere; }
+.ds-desclist[data-layout="top"] .ds-desclist__item { flex-direction: column; gap: var(--ds-space-x1); }
+.ds-desclist[data-layout="top"] .ds-desclist__label { width: auto; }
+.ds-desclist[data-align="end"] .ds-desclist__value { text-align: end; }
+.ds-desclist[data-divider] { row-gap: 0; }
+.ds-desclist[data-divider] .ds-desclist__item { padding-block: var(--ds-space-x3); border-top: 1px solid var(--ds-color-stroke-neutral-muted); }
+.ds-desclist[data-divider]:not([data-columns]) .ds-desclist__item:first-child,
+.ds-desclist[data-divider][data-columns="2"] .ds-desclist__item:nth-child(-n+2),
+.ds-desclist[data-divider][data-columns="3"] .ds-desclist__item:nth-child(-n+3) { border-top: 0; }
+@media (max-width: 479px) {
+  .ds-desclist[data-columns] { grid-template-columns: minmax(0, 1fr); }
+  .ds-desclist[data-divider][data-columns] .ds-desclist__item:nth-child(n+2) { border-top: 1px solid var(--ds-color-stroke-neutral-muted); }
+}
+
+
+/* --------------------------------------------------------------------------
+   76 Toolbar - 표, 카드, 패널 위에서 그 내용에 쓰는 동작을 한 줄로 모은 막대 (2026-11-05 추가)
+     <div class="ds-toolbar" role="toolbar" aria-label="주문 목록 도구" [data-size="small"] [data-variant="muted"] [data-divider]>
+       <div class="ds-toolbar__start">[<span class="ds-toolbar__title">주문 목록</span>] [<span class="ds-toolbar__count">3개 선택</span>] 버튼, 탭, 찾기 칸</div>
+       [<div class="ds-toolbar__center">…</div>]
+       <div class="ds-toolbar__end">… [<span class="ds-toolbar__separator" role="separator"></span>] …</div>
+     </div>
+   size: medium(기본) 높이 56, 좌우 x4, 사이 x2 / small 높이 48, 좌우 x3 / 안의 버튼은 small 을 쓴다
+   variant: plain(기본, 바탕 없음) / muted(여러 줄을 고른 뒤 잠깐 나오는 막대, bg/neutral + shape/lg)
+   data-divider: 아래 선 stroke/neutral-muted 로 내용과 나눈다 / 묶음 사이 세로선 stroke/neutral-muted 높이 20
+   title t05 SemiBold / count(고른 개수) t04 Medium
+   ybm-ds.js: 막대 안에서 좌우 화살표로 버튼 사이를 옮긴다
+   -------------------------------------------------------------------------- */
+.ds-toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-x2);
+  min-height: 56px;
+  padding-inline: var(--ds-space-x4);
+  color: var(--ds-color-fg-neutral);
+}
+.ds-toolbar[data-size="small"] { min-height: 48px; padding-inline: var(--ds-space-x3); }
+.ds-toolbar[data-variant="muted"] { border-radius: var(--ds-shape-lg); background: var(--ds-color-bg-neutral); }
+.ds-toolbar[data-divider] { border-bottom: 1px solid var(--ds-color-stroke-neutral-muted); }
+.ds-toolbar__start, .ds-toolbar__center, .ds-toolbar__end { display: flex; align-items: center; gap: var(--ds-space-x2); min-width: 0; }
+.ds-toolbar__start { flex: 1 1 auto; }
+.ds-toolbar__center { flex: none; justify-content: center; }
+.ds-toolbar__end { flex: none; margin-inline-start: auto; justify-content: flex-end; }
+.ds-toolbar__start:has(+ .ds-toolbar__center), .ds-toolbar__center + .ds-toolbar__end { flex: 1 1 0; }
+.ds-toolbar__title { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: var(--ds-font-size-t05); line-height: var(--ds-line-height-t05); font-weight: var(--ds-font-weight-semibold); }
+.ds-toolbar__count { white-space: nowrap; font-size: var(--ds-font-size-t04); line-height: var(--ds-line-height-t04); font-weight: var(--ds-font-weight-medium); }
+.ds-toolbar__separator { flex: none; width: 1px; height: 20px; margin-inline: var(--ds-space-x1); background: var(--ds-color-stroke-neutral-muted); }
+
+
+/* --------------------------------------------------------------------------
+   77 Tree - 폴더, 분류처럼 위아래 관계가 있는 항목을 접고 펼쳐 보여 주는 목록 (2026-11-05 추가)
+     <ul class="ds-tree" role="tree" aria-label="폴더" [data-size="small"] [data-guides="none"]>
+       <li class="ds-tree__node" role="treeitem" aria-expanded="true" [aria-selected="true"] tabindex="0">
+         <div class="ds-tree__row">
+           <span class="ds-tree__toggle" aria-hidden="true"></span>
+           [<i class="ds-icon ds-icon--folder ds-tree__icon" aria-hidden="true"></i>]
+           <span class="ds-tree__label">문서</span>
+           [<span class="ds-tree__suffix">12</span>]
+         </div>
+         <ul class="ds-tree__group" role="group"> 아래 단계 ds-tree__node 들 </ul>
+       </li>
+       <li class="ds-tree__node" role="treeitem" tabindex="-1"><a class="ds-tree__row" href="#" [aria-current="page"]>…</a></li>
+     </ul>
+   size: medium(기본) 줄 40, t04 / small 줄 32, t03 / 줄 좌우 x2, 모서리 shape/sm, 아이콘 18
+   한 단계 들여쓰기 20(펼침 표시 자리 20, 펼칠 것이 없는 줄도 자리를 둔다) / 이음선 stroke/neutral-muted, data-guides="none" 이면 들여쓰기만
+   고름 aria-selected 또는 aria-current = bg/neutral-weak-alpha + fg/neutral + Medium (Side Navigation 과 같다)
+   ybm-ds.js: 줄을 누르면 펼치거나 접고 그 항목을 고른다(change, detail.value), 위아래 화살표로 이동, 오른쪽 펼침, 왼쪽 접기
+   -------------------------------------------------------------------------- */
+.ds-tree, .ds-tree__group { margin: 0; padding: 0; list-style: none; }
+.ds-tree {
+  --ds-tree-row: 40px;
+  --ds-tree-indent: 20px;
+  display: flex;
+  flex-direction: column;
+  font-size: var(--ds-font-size-t04);
+  line-height: var(--ds-line-height-t04);
+}
+.ds-tree[data-size="small"] { --ds-tree-row: 32px; font-size: var(--ds-font-size-t03); line-height: var(--ds-line-height-t03); }
+.ds-tree__node { display: flex; flex-direction: column; outline: none; }
+.ds-tree__group { position: relative; padding-inline-start: var(--ds-tree-indent); }
+.ds-tree__group::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: var(--ds-space-x1);
+  left: calc(var(--ds-space-x1) + var(--ds-tree-indent) / 2);
+  width: 1px;
+  background: var(--ds-color-stroke-neutral-muted);
+}
+.ds-tree[data-guides="none"] .ds-tree__group::before { content: none; }
+.ds-tree__node[aria-expanded="false"] > .ds-tree__group { display: none; }
+.ds-tree__row {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-space-x1_5);
+  min-height: var(--ds-tree-row);
+  padding-inline: var(--ds-space-x1) var(--ds-space-x2);
+  border-radius: var(--ds-shape-sm);
+  color: var(--ds-color-fg-neutral-muted);
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+}
+@media (hover: hover) { .ds-tree__row:hover { background: var(--ds-color-bg-transparent-pressed); } }
+.ds-tree__node:focus-visible > .ds-tree__row, .ds-tree__row:focus-visible { outline: 2px solid var(--ds-color-stroke-focus-ring); outline-offset: -2px; }
+.ds-tree__node[aria-selected="true"] > .ds-tree__row, .ds-tree__row[aria-current="page"] { background: var(--ds-color-bg-neutral-weak-alpha); color: var(--ds-color-fg-neutral); font-weight: var(--ds-font-weight-medium); }
+.ds-tree__toggle { flex: none; width: var(--ds-tree-indent); height: var(--ds-tree-indent); }
+.ds-tree__node[aria-expanded] > .ds-tree__row > .ds-tree__toggle::before {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: var(--ds-color-fg-neutral-subtle);
+  -webkit-mask: var(--ds-icon-chevron-right) center / 16px no-repeat;
+          mask: var(--ds-icon-chevron-right) center / 16px no-repeat;
+  transition: rotate var(--ds-duration-fast) var(--ds-easing-standard);
+}
+.ds-tree__node[aria-expanded="true"] > .ds-tree__row > .ds-tree__toggle::before { rotate: 90deg; }
+.ds-tree__icon { --ds-icon-size: 18px; flex: none; color: var(--ds-color-fg-neutral-subtle); }
+.ds-tree__label { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ds-tree__suffix { flex: none; color: var(--ds-color-fg-neutral-subtle); font-size: var(--ds-font-size-t03); line-height: var(--ds-line-height-t03); font-weight: var(--ds-font-weight-regular); }
+.ds-tree__node[aria-disabled="true"] > .ds-tree__row { color: var(--ds-color-fg-disabled); pointer-events: none; }
+@media (prefers-reduced-motion: reduce) { .ds-tree__toggle::before { transition: none; } }
+
+
+/* --------------------------------------------------------------------------
+   78 Wheel Picker - 돌려서 값 하나를 고르는 휠, 날짜나 키처럼 이어진 값에 쓴다 (2026-11-05 추가)
+     <div class="ds-wheelpicker" role="group" aria-label="생년월일" [aria-disabled="true"]>
+       <div class="ds-wheelpicker__column" role="listbox" aria-label="연" tabindex="0">
+         <div class="ds-wheelpicker__option" role="option" [data-value="1990"]>1990년</div>
+         <div class="ds-wheelpicker__option" role="option" aria-selected="true">1991년</div> …
+       </div>
+       열 수만큼
+     </div>
+   모양과 동작은 Time Picker 와 같고 규칙도 함께 쓴다(50 Time Picker). 시간을 고를 때는 Time Picker 를 쓴다
+   ybm-ds.js 가 가운데 온 항목에 aria-selected 를 붙이고 멈추면 열에서 change(detail.value)를 보낸다
+   Figma: 폭 채움 / 높이 220 = 항목 5줄 x x11 / 좌우 x4 / 열 간격 x2 / 가운데 띠 bg/neutral-weak-alpha shape/md
+   -------------------------------------------------------------------------- */
+.ds-wheelpicker { --ds-tp-item: var(--ds-space-x11); }
+
+
+/* --------------------------------------------------------------------------
+   79 Search Field - 찾는 영역을 알리는 찾기 칸, 지우기와 취소를 함께 둔다 (2026-11-05 추가)
+     <form class="ds-searchfield" role="search" [data-variant="fill"] action="…">
+       <div class="ds-input" data-variant="outline" data-size="medium">
+         <i class="ds-icon ds-icon--search ds-input__icon" aria-hidden="true"></i>
+         <input class="ds-input__control" type="search" name="q" placeholder="찾을 낱말" aria-label="찾기">
+         <button type="button" class="ds-input__clear" aria-label="지우기"></button>
+       </div>
+       [<button type="button" class="ds-searchfield__cancel">취소</button>]
+     </form>
+   칸은 Text Field(outline large / medium) 그대로 / variant fill: 선 없이 bg/neutral, 모서리 shape/pill(앱 머리, 목록 위)
+   cancel t05 Medium fg/neutral, 칸과 사이 x3 / Enter 로 form 을 보낸다(추천어 목록은 Search Suggestion)
+   -------------------------------------------------------------------------- */
+.ds-searchfield { display: flex; align-items: center; gap: var(--ds-space-x3); margin: 0; min-width: 0; }
+.ds-searchfield > .ds-input { flex: 1 1 auto; min-width: 0; }
+.ds-searchfield .ds-input__control::-webkit-search-decoration,
+.ds-searchfield .ds-input__control::-webkit-search-cancel-button { -webkit-appearance: none; appearance: none; }
+.ds-searchfield[data-variant="fill"] > .ds-input { --ds-input-bg: var(--ds-color-bg-neutral); --ds-input-line: transparent; --ds-input-radius: var(--ds-shape-pill); }
+.ds-searchfield__cancel {
+  flex: none;
+  padding: var(--ds-space-x2) 0;
+  border: 0;
+  background: none;
+  color: var(--ds-color-fg-neutral);
+  font: inherit;
+  font-size: var(--ds-font-size-t05);
+  line-height: var(--ds-line-height-t05);
+  font-weight: var(--ds-font-weight-medium);
+  cursor: pointer;
+}

@@ -125,6 +125,13 @@
 - [Citation](https://luvms012-rgb.github.io/yds/site/components/citation.md): 본문의 근거가 된 출처를 보여 주는 컴포넌트입니다.
 - [Multi Select](https://luvms012-rgb.github.io/yds/site/components/multi-select.md): 목록에서 값을 여러 개 고르면 칸 안에 모아 보여 주는 컴포넌트입니다.
 - [Rating](https://luvms012-rgb.github.io/yds/site/components/rating.md): 별 다섯 개로 평점을 보여 주거나 매기는 컴포넌트입니다.
+- [Code Input](https://luvms012-rgb.github.io/yds/site/components/code-input.md): 인증번호처럼 정해진 자리 수를 한 칸에 한 글자씩 넣는 칸입니다.
+- [Chart](https://luvms012-rgb.github.io/yds/site/components/chart.md): 막대, 선, 도넛으로 수치를 비교하거나 흐름을 보여 주는 그래프입니다.
+- [Description List](https://luvms012-rgb.github.io/yds/site/components/description-list.md): 주문 정보처럼 항목 이름과 값을 짝지어 보여 주는 목록입니다.
+- [Toolbar](https://luvms012-rgb.github.io/yds/site/components/toolbar.md): 표나 카드 위에서 그 내용에 쓰는 동작을 한 줄로 모은 막대입니다.
+- [Tree](https://luvms012-rgb.github.io/yds/site/components/tree.md): 폴더나 분류처럼 위아래 관계가 있는 항목을 접고 펼쳐 보여 주는 목록입니다.
+- [Wheel Picker](https://luvms012-rgb.github.io/yds/site/components/wheel-picker.md): 돌려서 날짜나 숫자 같은 값 하나를 고르는 휠입니다.
+- [Search Field](https://luvms012-rgb.github.io/yds/site/components/search-field.md): 지우기와 취소 버튼을 함께 둔 찾기 칸입니다.
 
 ## Templates
 
@@ -133,7 +140,7 @@
 - [분석 대시보드](https://luvms012-rgb.github.io/yds/site/templates/pages/dashboard.html): 서비스 이용 흐름을 한눈에 보는 기본 분석 대시보드입니다. 추이 그래프와 핵심 지표를 먼저 보여 줍니다.
 - [프로젝트 현황 대시보드](https://luvms012-rgb.github.io/yds/site/templates/pages/dashboard-progress.html): 프로젝트가 어디까지 왔는지 일정과 진행률로 보여 주는 대시보드입니다.
 - [서비스 모니터링 대시보드](https://luvms012-rgb.github.io/yds/site/templates/pages/dashboard-alert-rail.html): 서비스 상태를 지켜보며 문제를 바로 알아채는 모니터링 화면입니다. 알림은 오른쪽에 따로 모아 둡니다.
-- [접히는 표 묶음](https://luvms012-rgb.github.io/yds/site/templates/pages/table-collapsible.html): 열 구성이 다른 표 여러 개를 접고 펼치며 보는 화면입니다. 표 하나로 합치면 빈칸이 많아질 때 씁니다.
+- [접는 표](https://luvms012-rgb.github.io/yds/site/templates/pages/table-collapsible.html): 열 구성이 다른 표 여러 개를 접고 펼치며 보는 화면입니다. 표 하나로 합치면 빈칸이 많아질 때 씁니다.
 - [필터 표](https://luvms012-rgb.github.io/yds/site/templates/pages/table-filter.html): 검색과 조건으로 필요한 행만 골라 보는 표입니다. 행이 많고 거르는 기준이 여럿일 때 씁니다.
 - [묶음 표](https://luvms012-rgb.github.io/yds/site/templates/pages/table-grouped.html): 행을 상태별로 묶어 보여 주는 표입니다. 긴 목록을 몇 덩어리로 나눠 읽을 때 씁니다.
 - [받은함 표](https://luvms012-rgb.github.io/yds/site/templates/pages/table-inbox.html): 왼쪽 목록에서 고른 항목을 오른쪽에서 바로 읽는 받은함입니다. 메일이나 문의처럼 하나씩 열어 처리할 때 씁니다.
@@ -151,7 +158,7 @@
 - [설정 폼](https://luvms012-rgb.github.io/yds/site/templates/pages/settings.html): 모든 설정을 한 페이지에 이어 놓은 가장 단순한 설정 화면입니다. 설정 항목이 많지 않을 때 씁니다.
 - [설정 패널](https://luvms012-rgb.github.io/yds/site/templates/pages/settings-sidebar.html): 왼쪽 메뉴로 설정 묶음을 오가는 설정 화면입니다. 항목은 그 자리에서 바로 수정합니다.
 - [로그인 카드](https://luvms012-rgb.github.io/yds/site/templates/pages/login-card.html): 화면 가운데 카드 하나로 로그인하는 기본 로그인 화면입니다.
-- [로그인 (반으로 나눈)](https://luvms012-rgb.github.io/yds/site/templates/pages/login-split.html): 한쪽에는 로그인 폼, 다른 쪽에는 사진을 둔 로그인 화면입니다. 서비스 분위기를 함께 전할 때 씁니다.
+- [로그인 (화면 분할)](https://luvms012-rgb.github.io/yds/site/templates/pages/login-split.html): 한쪽에는 로그인 폼, 다른 쪽에는 사진을 둔 로그인 화면입니다. 서비스 분위기를 함께 전할 때 씁니다.
 - [로그인 (SSO)](https://luvms012-rgb.github.io/yds/site/templates/pages/login-sso.html): 이메일을 먼저 받고 회사 계정 로그인으로 이어 주는 화면입니다. 회사 계정이 없으면 비밀번호로 로그인합니다.
 - [캔버스 편집기](https://luvms012-rgb.github.io/yds/site/templates/pages/canvas-editor.html): 정해진 크기의 화면 위에서 디자인하는 편집기입니다. 레이어와 속성을 양옆에 둡니다.
 - [파일 탐색기](https://luvms012-rgb.github.io/yds/site/templates/pages/file-explorer.html): 폴더를 열 때마다 옆 칸에 이어 보여 주는 파일 탐색기입니다. 깊은 폴더도 경로를 놓치지 않고 찾아갑니다.
@@ -169,10 +176,10 @@
 - [AI 첫 화면](https://luvms012-rgb.github.io/yds/site/templates/pages/ai-chat-landing.html): 대화를 시작하기 전에 보여 주는 AI 첫 화면입니다. 입력창과 추천 버튼으로 바로 시작합니다.
 - [가운데 히어로](https://luvms012-rgb.github.io/yds/site/templates/pages/centered-hero.html): 큰 제목과 버튼을 가운데 두고 아래에 넓은 사진을 놓은 첫 화면입니다.
 - [바둑판 갤러리](https://luvms012-rgb.github.io/yds/site/templates/pages/classic-gallery.html): 같은 비율의 사진을 바둑판처럼 늘어놓은 갤러리입니다. 분류 탭으로 바로 걸러 봅니다.
-- [사진 묶음 히어로](https://luvms012-rgb.github.io/yds/site/templates/pages/gallery-hero.html): 제목 아래에 사진 여러 장을 모아 놓은 첫 화면입니다. 다양한 장면을 한 번에 보여 줄 때 씁니다.
+- [사진 히어로](https://luvms012-rgb.github.io/yds/site/templates/pages/gallery-hero.html): 제목 아래에 사진 여러 장을 모아 놓은 첫 화면입니다. 다양한 장면을 한 번에 보여 줄 때 씁니다.
 - [벽돌형 갤러리](https://luvms012-rgb.github.io/yds/site/templates/pages/mixed-gallery.html): 높이가 다른 사진을 자르지 않고 쌓아 올린 벽돌형 갤러리입니다.
 - [상품 갤러리](https://luvms012-rgb.github.io/yds/site/templates/pages/product-gallery.html): 같은 모양의 상품 카드를 늘어놓은 갤러리입니다. 구성이 단순해 둘러보며 고르기 쉽습니다.
-- [옆 갤러리](https://luvms012-rgb.github.io/yds/site/templates/pages/side-gallery.html): 한쪽에 제목과 설명, 반대쪽에 사진 묶음을 둔 첫 화면입니다.
+- [필터 갤러리](https://luvms012-rgb.github.io/yds/site/templates/pages/side-gallery.html): 한쪽에 제목과 설명, 반대쪽에 사진 묶음을 둔 첫 화면입니다.
 - [게시판 목록](https://luvms012-rgb.github.io/yds/site/templates/pages/community-board.html): 카페형 게시판의 글 목록입니다. 말머리로 거르고 공지는 위에 고정합니다.
 - [커뮤니티 홈](https://luvms012-rgb.github.io/yds/site/templates/pages/community-home.html): 게시판형 커뮤니티의 첫 화면입니다. 지금 뜨는 글과 새 글을 한곳에서 봅니다.
 - [게시글 상세](https://luvms012-rgb.github.io/yds/site/templates/pages/community-post.html): 게시글 하나를 읽고 댓글로 이야기를 나누는 화면입니다.

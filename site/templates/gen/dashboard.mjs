@@ -35,7 +35,7 @@ const analytics = () => {
     ${secHead('참여', { id: 's-eng', tools: btn('더 보기') })}
     <div class="tp-g2">
       ${card(`<div class="tp-between"><h3 class="tp-h4">많이 본 페이지</h3>${link('전체 페이지')}</div>${table(['페이지', '조회', ['참여율', 'end'], ['머문 시간', 'end']], pages.map(([p, v, e, t]) => [`<code>${p}</code>`, bar(p + ' 조회', Math.round((v / mx(pages)) * 100), v.toLocaleString() + '회'), T(e + '%'), T(t)]))}`)}
-      ${card(`<div class="tp-between"><h3 class="tp-h4">많이 일어난 이벤트</h3>${link('전체 이벤트')}</div>${table(['이벤트', '횟수', ['사용자', 'end'], ['세션', 'end']], events.map(([p, v, u, s]) => [`<code>${p}</code>`, bar(p, Math.round((v / mx(events)) * 100), v.toLocaleString()), T(u), T(s)]))}`)}
+      ${card(`<div class="tp-between"><h3 class="tp-h4">자주 발생한 이벤트</h3>${link('전체 이벤트')}</div>${table(['이벤트', '횟수', ['사용자', 'end'], ['세션', 'end']], events.map(([p, v, u, s]) => [`<code>${p}</code>`, bar(p, Math.round((v / mx(events)) * 100), v.toLocaleString()), T(u), T(s)]))}`)}
     </div>
   </section>
 </main>
@@ -87,7 +87,7 @@ const monitoring = () => {
   .tp-alert__end { display: flex; flex-direction: column; align-items: flex-end; gap: var(--ds-space-x1); }
 `;
   const body = `<div class="tp-app">
-${head('서비스 상태 모니터', { sub: `<span class="tp-row">${dot('positive', '실시간')}11월 1일 오후 6:15 업데이트</span>`, tools: `${segmented(['1시간', '1일', '7일'], 1, '시간 범위')}${select('운영', { id: 'f-env', aria: '환경' })}${select('모든 지역', { id: 'f-region', aria: '지역' })}` })}
+${head('서비스 상태', { sub: `<span class="tp-row">${dot('positive', '실시간')}11월 1일 오후 6:15 업데이트</span>`, tools: `${segmented(['1시간', '1일', '7일'], 1, '시간 범위')}${select('운영', { id: 'f-env', aria: '환경' })}${select('모든 지역', { id: 'f-region', aria: '지역' })}` })}
 <div class="tp-body tp-body--panel">
 <main class="tp-content">
   <div class="tp-g4">${tiles.map(([t, l, v, d], i) => kpi(l, v, { d, lead: dot(t, l), chart: spark(walk(160 + i, 48, 40, 10, { min: 5 }), `var(--ds-color-fg-${t})`, { h: 36, label: l + ' 추이' }) })).join('')}</div>

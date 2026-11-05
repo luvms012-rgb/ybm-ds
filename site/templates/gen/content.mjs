@@ -80,7 +80,7 @@ const docTech = () => {
   .tp-ai { display: flex; flex-direction: column; gap: var(--ds-space-x2); }
   .tp-ai > .tp-between .ds-icon { color: var(--ds-color-fg-magic); }
 `;
-  const steps = [['핵심 패키지 설치', '모든 프로젝트는 핵심 패키지를 설치하는 데서 시작해요.', 'bash', 'npm install @ybm/ds'], ['미리 만든 스타일 불러오기', '빌드 설정 없이 CSS 파일 하나만 불러오면 돼요.', 'html', '<link rel="stylesheet" href="https://luvms012-rgb.github.io/yds/dist/ybm-ds.css">'], ['첫 부품 넣기', '클래스 이름만 붙이면 DS 모양이 돼요.', 'html', '<button class="ds-btn" data-variant="brandSolid">시작하기</button>'], ['동작 붙이기', '대화상자, 탭 같은 동작이 필요하면 스크립트를 함께 불러와요.', 'html', '<script src="https://luvms012-rgb.github.io/yds/dist/ybm-ds.js" defer></script>']];
+  const steps = [['핵심 패키지 설치', '모든 프로젝트는 핵심 패키지를 설치하는 데서 시작해요.', 'bash', 'npm install @ybm/ds'], ['미리 만든 스타일 불러오기', '빌드 설정 없이 CSS 파일 하나만 불러오면 돼요.', 'html', '<link rel="stylesheet" href="https://luvms012-rgb.github.io/yds/dist/ybm-ds.css">'], ['첫 부품 넣기', '클래스 이름만 붙이면 DS 모양이 돼요.', 'html', '<button class="ds-btn" data-variant="brandSolid">시작하기</button>'], ['동작 넣기', '대화상자, 탭 같은 동작이 필요하면 스크립트를 함께 불러와요.', 'html', '<script src="https://luvms012-rgb.github.io/yds/dist/ybm-ds.js" defer></script>']];
   const body = `<div class="tp-app"><main class="tp-content"><article class="tp-doc">
   <header class="tp-stack" style="gap: var(--ds-space-x2)"><h1 class="tp-doc-title">yds 시작하기</h1><span class="tp-caption">2026년 10월 30일에 고침</span></header>
   ${card(`<div class="tp-ai"><div class="tp-between"><span class="tp-row">${icon('sparkles')}<span class="tp-h4">AI에게 맡기기</span></span><div class="tp-row">${btn('복사', { ic: 'copy', size: 'xsmall' })}${iconBtn('ellipsis', '더 보기', { size: 'xsmall' })}</div></div><p class="tp-sub">"내 프로젝트에 yds를 붙여 줘. 필요한 파일을 불러오고 첫 화면을 DS 부품으로 바꿔 줘."</p></div>`)}

@@ -46,17 +46,17 @@ const conversation = () => {
       <div class="tp-msg-user"><div class="tp-files-row"><span class="tp-file-token">${icon('file-code', 'sm')}auth-service.ts</span><span class="tp-file-token">${icon('file-code', 'sm')}middleware.ts</span></div><div class="ds-chat-bubble" data-sender="user">이 두 파일을 봐 줄래요? 토큰 새로 받기가 가끔 실패하는 것 같아요.</div><span class="ds-chat-meta" data-status="read"><time>오전 10:15</time></span></div>
       <div class="tp-msg-ai">${avatar('AI', 24)}<div class="tp-msg-ai__body"><p>두 파일을 읽어 볼게요. 토큰이 만료되는 순간 요청이 동시에 여러 개 오면 새로 받기를 겹쳐서 하는 것 같아요.</p>
         <details class="tp-tools"><summary>${icon('wand-sparkles', 'sm')}도구 3번 사용 ${icon('chevron-down', 'sm')}</summary><ul><li>${icon('circle-check', 'sm')}읽음 <code>auth-service.ts</code></li><li>${icon('circle-check', 'sm')}읽음 <code>middleware.ts</code></li><li>${icon('circle-check', 'sm')}찾음 <code>refreshToken</code> 6곳</li></ul></details>
-        <div class="ds-markdown"><h3>원인</h3><p>만료 직전 요청 3개가 동시에 <code>refreshToken()</code>을 불러서, 먼저 끝난 요청이 토큰을 바꾸면 나머지 둘은 이미 쓴 토큰으로 다시 요청해 실패해요.</p><h3>고치는 법</h3><p>새로 받는 중이면 같은 약속(Promise)을 함께 기다리게 하면 돼요.</p></div>
+        <div class="ds-markdown"><h3>원인</h3><p>만료 직전 요청 3개가 동시에 <code>refreshToken()</code>을 불러서, 먼저 끝난 요청이 토큰을 바꾸면 나머지 둘은 이미 쓴 토큰으로 다시 요청해 실패해요.</p><h3>해결 방법</h3><p>새로 받는 중이면 같은 약속(Promise)을 함께 기다리게 하면 돼요.</p></div>
         ${codeblock('ts', "let pending: Promise<string> | null = null;\n\nexport function refreshToken() {\n  pending ??= fetchNewToken().finally(() => { pending = null; });\n  return pending;\n}")}
         <div class="tp-row">${iconBtn('copy', '복사', { size: 'xsmall' })}${iconBtn('thumbs-up', '좋아요', { size: 'xsmall' })}${iconBtn('thumbs-down', '별로예요', { size: 'xsmall' })}${iconBtn('rotate-ccw', '다시 답하기', { size: 'xsmall' })}</div></div></div>
       <div class="tp-msg-user"><div class="ds-chat-bubble" data-sender="user">좋아요. 배포 계획도 문서로 정리해 줘요.</div><span class="ds-chat-meta" data-status="read"><time>오전 10:21</time></span></div>
-      <div class="tp-msg-ai">${avatar('AI', 24)}<div class="tp-msg-ai__body"><p>오른쪽에 설계와 배포 문서를 만들었어요. 문제, 고치는 법, 테스트, 단계별 배포 순서로 정리했어요.</p></div></div>
+      <div class="tp-msg-ai">${avatar('AI', 24)}<div class="tp-msg-ai__body"><p>오른쪽에 설계와 배포 문서를 만들었어요. 문제, 해결 방법, 테스트, 단계별 배포 순서로 정리했어요.</p></div></div>
     </div>
     <div class="tp-composer-wrap">${composer('이어서 물어보세요')}</div>
   </div>
   <aside class="tp-artifact" aria-label="결과물">
-    <div class="tp-artifact__bar"><span class="tp-row">${icon('file-text', 'sm')}<span class="tp-h4">토큰 새로 받기 설계와 배포</span>${badge('v2')}</span><span class="tp-row">${iconBtn('copy', '복사')}${iconBtn('download', '내려받기')}${iconBtn('x', '닫기')}</span></div>
-    <div class="tp-artifact__doc ds-markdown"><h2>토큰 새로 받기 설계와 배포</h2><h3>개요</h3><p>짧은 접속 토큰과 긴 새로 받기 토큰을 함께 써요. 접속 토큰이 끝나기 전에 조용히 새로 받아 사용자가 로그아웃되지 않게 해요.</p><h3>문제</h3><ol><li>요청 여러 개가 동시에 만료를 만나요.</li><li>각자 새로 받기를 불러요.</li><li>마지막 하나만 성공하고 나머지는 401이 나요.</li></ol><h3>고치는 법</h3><p>새로 받는 중인 약속을 하나만 두고 모두 그것을 기다려요.</p><h3>테스트</h3><table><thead><tr><th>상황</th><th>기대</th></tr></thead><tbody><tr><td>동시 요청 3개</td><td>새로 받기 1번</td></tr><tr><td>새로 받기 실패</td><td>로그인 화면으로</td></tr></tbody></table><h3>배포와 지켜보기</h3><p>사용자 5%부터 켜고 24시간 동안 실패율이 그대로면 100%로 넓혀요.</p></div>
+    <div class="tp-artifact__bar"><span class="tp-row">${icon('file-text', 'sm')}<span class="tp-h4">로그인 연장 설계와 배포</span>${badge('v2')}</span><span class="tp-row">${iconBtn('copy', '복사')}${iconBtn('download', '내려받기')}${iconBtn('x', '닫기')}</span></div>
+    <div class="tp-artifact__doc ds-markdown"><h2>로그인 연장 설계와 배포</h2><h3>개요</h3><p>짧은 접속 토큰과 긴 새로 받기 토큰을 함께 써요. 접속 토큰이 끝나기 전에 조용히 새로 받아 사용자가 로그아웃되지 않게 해요.</p><h3>문제</h3><ol><li>요청 여러 개가 동시에 만료를 만나요.</li><li>각자 새로 받기를 불러요.</li><li>마지막 하나만 성공하고 나머지는 401이 나요.</li></ol><h3>해결 방법</h3><p>새로 받는 중인 약속을 하나만 두고 모두 그것을 기다려요.</p><h3>테스트</h3><table><thead><tr><th>상황</th><th>기대</th></tr></thead><tbody><tr><td>동시 요청 3개</td><td>새로 받기 1번</td></tr><tr><td>새로 받기 실패</td><td>로그인 화면으로</td></tr></tbody></table><h3>배포와 모니터링</h3><p>사용자 5%부터 켜고 24시간 동안 실패율이 그대로면 100%로 넓혀요.</p></div>
   </aside>
 </div>
 </div>`;

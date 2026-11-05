@@ -349,7 +349,7 @@ CSS는 Figma 프로퍼티 이름을 그대로 `data-*` 속성으로 쓴다: `<bu
 | 23 | Callout | `.ds-callout` | `1241:2177`, 5 | tone `neutral/informative/positive/warning/critical` (magic은 CSS만) |
 | 24 | Snackbar | `.ds-snackbar` | `92:1107`, 3 | variant `default/positive/critical` |
 | 25 | Help Bubble | `.ds-helpbubble` | `75:1233`, 12 | `--ds-hb-arrow-offset` |
-| 26 | Menu, Menu Item | `.ds-menu` `.ds-menu-item` | `1246:2183`(COMPONENT) / `1246:2182`, 6 | tone `critical` |
+| 26 | Menu, Menu Item | `.ds-menu` `.ds-menu-item` (`__label/sub/divider`) | `1246:2183`(COMPONENT) / `1246:2182`, 6 | tone `critical`, `menuitemcheckbox`, `menuitemradio`, 하위 메뉴(2026-11-05) |
 | 27 | Dialog | `.ds-dialog` | `1493:939`, 8 (+ Dialog Body Slot `1528:835`) | size(480/800), `--ds-dialog-width` |
 | 28 | Alert Dialog | `.ds-alertdialog` | `30:540`, 5 | 272 폭, action `pair/critical/nonpreferred` |
 | 29 | Bottom Sheet | `.ds-bottomsheet` | `59:674`, 8 | header-align `center` |
@@ -396,6 +396,13 @@ CSS는 Figma 프로퍼티 이름을 그대로 `data-*` 속성으로 쓴다: `<bu
 | 70 | Citation | `.ds-citation` (`__icon/label`) | `2568:65`, 2 | type `number/label` |
 | 71 | Multi Select | `.ds-multiselect` (`__trigger/values/overflow/panel/heading/option/label`) | Trigger `2566:1252`, 6 / Option `2566:1295`, 6 / Panel `2566:1296` | data-ds-popover로 열기, 고른 값 Badge와 +N |
 | 72 | Rating | `.ds-rating` (`__stars/value/count`, 입력형 `__option/control/star`) | `2579:318`, 6 | size `small/medium/large`, `--ds-rating-value` 0~5, `data-input` |
+| 73 | Code Input | `.ds-codeinput` (`__cell`) | Figma 없음(최종 검토 때) | size `large/medium`, `aria-invalid`, 다 채우면 `ds-code-complete` |
+| 74 | Chart | `.ds-chart` (`__header/title/desc/plot/col/bar/label/svg/line/area/axis/donut/total/legend/swatch`) | Figma 없음(최종 검토 때) | type `bar/line/donut`, `data-series` 1~5, `--ds-chart-value`, `--ds-chart-height`, `--ds-chart-size` |
+| 75 | Description List | `.ds-desclist` (`__item/label/value`) | Figma 없음(최종 검토 때) | layout `start/top`, columns `2/3`, align `end`, `data-divider`, `--ds-desclist-label-width` |
+| 76 | Toolbar | `.ds-toolbar` (`__start/center/end/title/count/separator`) | Figma 없음(최종 검토 때) | size `medium/small`, variant `plain/muted`, `data-divider`, 좌우 화살표 이동 |
+| 77 | Tree | `.ds-tree` (`__node/row/toggle/icon/label/suffix/group`) | Figma 없음(최종 검토 때) | size `medium/small`, guides `none`, `aria-expanded`, `aria-selected`, 화살표 키 |
+| 78 | Wheel Picker | `.ds-wheelpicker` (`__column/option`) | Figma 없음(최종 검토 때) | Time Picker 와 같은 휠, 열 여러 개, `aria-selected`, change |
+| 79 | Search Field | `.ds-searchfield` (`__cancel`, 칸은 `.ds-input`) | Figma 없음(최종 검토 때) | variant `outline/fill`, 칸은 Text Field, cancel |
 
 목록의 기계용 사본이 `components.json`이다. 컴포넌트를 추가/변경하면 이 표와 `components.json`을 함께 고친다(sync가 Figma/CSS와 대조).
 

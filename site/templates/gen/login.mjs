@@ -38,7 +38,7 @@ const loginCard = () => {
   return { slug: 'login-card', en: 'Login Card', name: '로그인 카드', group: 'Login', desc: '화면 가운데 카드 하나로 로그인하는 기본 로그인 화면입니다.', css: CSS, body };
 };
 
-/* 2. 로그인 (반으로 나눈) --------------------------------------- */
+/* 2. 로그인 (화면 분할) --------------------------------------- */
 const loginSplit = () => {
   const css = CSS + `
   .tp-split-card { display: grid; grid-template-columns: minmax(0, 1fr); width: min(100%, 960px); overflow: hidden; border-radius: var(--ds-shape-2xl); background: var(--ds-color-bg-layer-default); box-shadow: inset 0 0 0 1px var(--ds-color-stroke-neutral-weak), 0 8px 24px var(--ds-color-palette-static-black-alpha-300); }
@@ -65,7 +65,7 @@ const loginSplit = () => {
   </div>
   ${legal}
 </div></main>`;
-  return { slug: 'login-split', en: 'Login Split', name: '로그인 (반으로 나눈)', group: 'Login', desc: '한쪽에는 로그인 폼, 다른 쪽에는 사진을 둔 로그인 화면입니다. 서비스 분위기를 함께 전할 때 씁니다.', css, body };
+  return { slug: 'login-split', en: 'Login Split', name: '로그인 (화면 분할)', group: 'Login', desc: '한쪽에는 로그인 폼, 다른 쪽에는 사진을 둔 로그인 화면입니다. 서비스 분위기를 함께 전할 때 씁니다.', css, body };
 };
 
 /* 3. 로그인 SSO -------------------------------------------------- */

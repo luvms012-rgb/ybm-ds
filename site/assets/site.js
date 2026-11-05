@@ -223,7 +223,7 @@
     if (tags.length) html += '<div class="site-lib__tags">' + tags.map(function (t) { return "<span>" + libEsc(t) + "</span>"; }).join("") + "</div>";
     html += '<div class="site-lib__preview">' + (inDs ? '<i class="ds-icon ds-icon--' + n + '" style="--ds-icon-size: 48px" aria-hidden="true"></i>' : libSvg(n, 48)) + "</div>";
     if (inDs) html += libCode("HTML", '<i class="ds-icon ds-icon--' + n + '" aria-hidden="true"></i>');
-    else html += '<p class="site-lib__note">아직 DS에 없는 아이콘입니다. 아래 줄을 dist/icons.css 끝에 붙이면 바로 씁니다.</p>' + libCode("icons.css 줄", lucideCss(n));
+    else html += '<p class="site-lib__note">yds에 아직 없는 아이콘입니다. 아래 코드를 복사해 dist/icons.css 맨 끝에 붙여 넣으면 바로 쓸 수 있습니다.</p>' + libCode("icons.css에 붙여 넣을 코드", lucideCss(n));
     if (L.icons[base]) html += libCode("SVG", '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' + L.icons[base] + "</svg>");
     panel.innerHTML = html;
   }

@@ -138,7 +138,7 @@ const dialogWizard = () => {
     <div class="ds-dialog__body">
       ${req('r-name', '리포트 이름', inp('r-name', '주간 수강 현황', 'value="주간 수강 현황"'), '이메일 제목으로 써요.')}
       ${field('r-data', '데이터', sel('r-data', '수강과 결제'))}
-      <fieldset class="ds-field" style="border:0;padding:0;margin:0"><legend class="ds-field__label">넣을 내용</legend>${secs.map(([t, d, c]) => opt(t, d, !!c)).join('')}</fieldset>
+      <fieldset class="ds-field" style="border:0;padding:0;margin:0"><legend class="ds-field__label">포함할 내용</legend>${secs.map(([t, d, c]) => opt(t, d, !!c)).join('')}</fieldset>
     </div>
     <div class="ds-dialog__footer">${btn('취소', { size: 'medium' })}<span></span>${btn('다음', { variant: 'brandSolid', size: 'medium', icEnd: 'arrow-right' })}</div>
   </div>
@@ -162,7 +162,7 @@ const wizard = () => {
     ${req('w-name', '워크스페이스 이름', inp('w-name', '가나다 학원'))}
     ${req('w-url', '워크스페이스 주소', inp('w-url', 'ganada').replace('<input', '<span class="ds-input__prefix">ybm.app/</span><input'), '영문 소문자, 숫자, 하이픈만 쓸 수 있어요.')}
     ${field('w-region', '데이터 지역', sel('w-region', '대한민국 (서울)'), { help: '강좌, 파일, 기록이 저장되는 곳이에요.' })}
-    <fieldset class="ds-field" style="border:0;padding:0;margin:0"><legend class="ds-field__label">누가 들어올 수 있나요</legend>${[['초대한 사람만', '관리자가 초대해야 들어올 수 있어요.', 1], ['회사 이메일이 있는 사람', '@ganada.kr 이메일이면 바로 들어와요.', 0], ['링크가 있는 사람', '초대 링크를 아는 사람은 누구나 들어와요.', 0]].map(([t, d, c]) => opt(t, d, !!c, 'radio', 'join')).join('')}</fieldset>
+    <fieldset class="ds-field" style="border:0;padding:0;margin:0"><legend class="ds-field__label">참여할 수 있는 사람</legend>${[['초대한 사람만', '관리자가 초대해야 들어올 수 있어요.', 1], ['회사 이메일이 있는 사람', '@ganada.kr 이메일이면 바로 들어와요.', 0], ['링크가 있는 사람', '초대 링크를 아는 사람은 누구나 들어와요.', 0]].map(([t, d, c]) => opt(t, d, !!c, 'radio', 'join')).join('')}</fieldset>
   </div>
 </div></main>
 <footer class="tp-footer-bar" style="position: sticky; bottom: 0"><span class="tp-sub tp-num">4단계 중 1단계</span><div class="tp-row">${btn('이전', { size: 'medium', attrs: 'disabled' })}${btn('다음', { variant: 'brandSolid', size: 'medium', icEnd: 'arrow-right' })}</div></footer>
@@ -188,8 +188,8 @@ const inlineWizard = () => {
   const steps = [['저장소', 'done', '가나다/학습-웹 / main 브랜치'], ['실행 조건', 'current', ''], ['빌드 환경', '', ''], ['테스트', '', ''], ['배포 대상', '', ''], ['알림', '', ''], ['확인', '', '']];
   const cur = `<div class="tp-form">${field('ci-ev', '파이프라인을 돌릴 때', `<div>${[['풀 리퀘스트', '열린 풀 리퀘스트가 있는 브랜치에 올릴 때마다', 1], ['기본 브랜치에 올릴 때', 'main 브랜치에 합쳐질 때', 1], ['태그를 만들 때', 'v로 시작하는 태그를 만들 때', 0], ['정해진 시간', '매일 새벽 3시', 0]].map(([t, d, c]) => opt(t, d, !!c)).join('')}</div>`, { help: '고르는 일마다 빌드 시간이 들어요. 꼭 필요한 것부터 고르세요.' })}<div>${btn('다음', { variant: 'brandSolid', size: 'medium' })}</div></div>`;
   const body = `<div class="tp-app">
-${head('지속 통합 설정', { sub: '앞의 두 단계만 답하면 나머지는 알아서 채워져요.' })}
-<main class="tp-content"><div class="tp-iw"><ol class="tp-steps" aria-label="지속 통합 설정 단계">${steps.map(([t, st, res], i) => `<li class="tp-step" data-state="${st}"${st === 'current' ? ' aria-current="step"' : ''}><div class="tp-step__rail"><span class="tp-step__no">${st === 'done' ? icon('check', 'sm') : i + 1}</span></div><div class="tp-step__main"><div class="tp-step__head"><span class="tp-stack"><span class="tp-h4"${st ? '' : ' style="color: var(--ds-color-fg-neutral-muted)"'}>${t}</span>${res ? `<span class="tp-caption">${res}</span>` : ''}</span>${st === 'done' ? btn('고치기', { variant: 'ghost', size: 'xsmall', ic: 'pencil' }) : ''}</div>${st === 'current' ? cur : ''}</div></li>`).join('')}</ol></div></main>
+${head('자동 빌드 설정', { sub: '앞의 두 단계만 답하면 나머지는 알아서 채워져요.' })}
+<main class="tp-content"><div class="tp-iw"><ol class="tp-steps" aria-label="자동 빌드 설정 단계">${steps.map(([t, st, res], i) => `<li class="tp-step" data-state="${st}"${st === 'current' ? ' aria-current="step"' : ''}><div class="tp-step__rail"><span class="tp-step__no">${st === 'done' ? icon('check', 'sm') : i + 1}</span></div><div class="tp-step__main"><div class="tp-step__head"><span class="tp-stack"><span class="tp-h4"${st ? '' : ' style="color: var(--ds-color-fg-neutral-muted)"'}>${t}</span>${res ? `<span class="tp-caption">${res}</span>` : ''}</span>${st === 'done' ? btn('고치기', { variant: 'ghost', size: 'xsmall', ic: 'pencil' }) : ''}</div>${st === 'current' ? cur : ''}</div></li>`).join('')}</ol></div></main>
 </div>`;
   return { slug: 'form-wizard-inline', en: 'Inline Wizard', name: '펼치는 단계 폼', group: 'Form', desc: '모든 단계를 한 페이지에 펼쳐 놓고 차례로 입력하는 폼입니다. 끝난 단계는 입력한 내용만 짧게 보여 줍니다.', css, body };
 };
@@ -245,7 +245,7 @@ const vertical = () => {
     <div class="tp-between">${btn('이전', { size: 'medium', ic: 'chevron-left' })}${btn('다음', { variant: 'brandSolid', size: 'medium', icEnd: 'arrow-right' })}</div>
   </main>
   <aside class="tp-vw__help" aria-labelledby="h-t">
-    <h2 class="tp-h4" id="h-t">${icon('lightbulb', 'sm')} 책 제목 쓰는 법</h2>
+    <h2 class="tp-h4" id="h-t">${icon('lightbulb', 'sm')} 책 제목 짓는 법</h2>
     <p class="tp-sub">표지에 적힌 제목과 똑같이 적어 주세요. 홍보 문구나 할인 정보를 제목에 넣으면 심사에서 돌려보낼 수 있어요.</p>
     ${K.callout('예시', '좋음: 한 달 만에 끝내는 비즈니스 영어 / 나쁨: [50% 할인] 비즈니스 영어 최고의 책', 'informative', 'info-solid')}
     <p class="tp-caption">입력칸을 옮겨 가면 이 안내도 그 칸에 맞게 바뀌어요.</p>
