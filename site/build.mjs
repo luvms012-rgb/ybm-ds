@@ -402,8 +402,8 @@ write({
 <h2 id="system">시스템 이해하기</h2>
 <div class="site-grid site-grid--hub site-grid--hub3">
   ${hubCard('foundations/color.html', 'Foundations', '색, 글자, 간격, 모서리, 그림자, 움직임처럼 화면의 바탕이 되는 토큰입니다.')}
-  ${hubCard('components/index.html', `Components ${comps.length}종`, '버튼, 입력칸, 목록처럼 화면을 이루는 부품입니다.')}
-  ${hubCard('templates/index.html', `Templates ${templates.length}종`, '자주 만드는 화면을 부품으로 미리 조립해 둔 예시입니다.')}
+  ${hubCard('components/index.html', 'Components', '버튼, 입력칸, 목록처럼 화면을 이루는 부품입니다.')}
+  ${hubCard('templates/index.html', 'Templates', '자주 만드는 화면을 부품으로 미리 조립해 둔 예시입니다.')}
 </div>
 
 <h2 id="ai">AI로 시작하기</h2>
