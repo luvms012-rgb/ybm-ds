@@ -919,7 +919,7 @@ function anatomyOf(c) {
     if (!desc) console.log('  ! anatomy-ko.json에 부품 설명이 없음:', c.no, suf);
     return [`<span class="site-anatomy__part"><b>${esc(partName(suf))}</b> <code>${esc(p)}</code></span>`, esc(desc)];
   });
-  const figure = `<div class="site-tile__thumb site-cover site-anatomy" data-site-fit-max="1" data-site-anatomy="${esc(parts.join(' '))}" data-site-anatomy-names="${esc(parts.map((p) => partName(p.split('__')[1])).join('|'))}" aria-hidden="true"><div class="site-tile__inner" inert><div class="pv-stage">${pick}</div></div></div>`;
+  const figure = `<div class="site-anatomy-scroll"><div class="site-tile__thumb site-cover site-anatomy" data-site-fit-max="1" data-site-anatomy="${esc(parts.join(' '))}" data-site-anatomy-names="${esc(parts.map((p) => partName(p.split('__')[1])).join('|'))}" aria-hidden="true"><div class="site-tile__inner" inert><div class="pv-stage">${pick}</div></div></div></div>`;  // 휴대폰에서는 그림을 줄이지 않고 옆으로 밀어 본다
   return `<h2 id="anatomy">구조</h2>${figure}<div class="site-anatomy-table">${table(['부품', '설명'], rows)}</div>`;
 }
 // ybm-ds.js 머리 주석의 "· 이름 — 하는 일" 을 컴포넌트에 붙인다 (이름이 다른 것은 번호로)

@@ -303,15 +303,28 @@
       var box = st.parentElement, cs = getComputedStyle(box);
       // 넓은 화면의 구조 그림은 줄이지 않는다: 넓으면 양옆 이름 자리를, 높으면 그림 상자 높이를 늘린다 (휴대폰은 전처럼 줄인다)
       var fig = box.closest("[data-site-anatomy]");
-      if (fig) { box.style.paddingLeft = box.style.paddingRight = ""; fig.style.minHeight = ""; st.style.transform = ""; cs = getComputedStyle(box); }
-      if (fig && box.clientWidth >= 600) {
+      if (fig) { box.style.padding = ""; fig.style.height = fig.style.width = fig.style.aspectRatio = ""; st.style.transform = ""; cs = getComputedStyle(box); }
+      // 휴대폰: 그림과 이름을 줄이지 않고 PC 처럼 넓은 상자에 그려 옆으로 밀어 보게 한다(처음에는 부품이 가운데)
+      var wrap = fig && fig.parentElement;
+      if (fig && wrap.clientWidth < 600) {
+        st.style.width = "max-content";
+        var pw = Math.max(st.offsetWidth, st.scrollWidth), W = Math.max(wrap.clientWidth, Math.ceil(pw + 280));
+        fig.style.width = W + "px";
+        box.style.padding = "64px " + (W - pw) / 2 + "px";
+        cs = getComputedStyle(box);
+        st.style.width = pw + "px";
+        var need2 = st.scrollHeight + 128;
+        if (need2 > box.clientHeight) { fig.style.aspectRatio = "auto"; fig.style.height = Math.ceil(need2) + "px"; }  // 비율과 최소 높이를 함께 두면 폭까지 늘어난다
+        wrap.scrollLeft = (W - wrap.clientWidth) / 2;
+      }
+      else if (fig) {
         st.style.width = "max-content";
         var nw = Math.max(st.offsetWidth, st.scrollWidth);
         if (nw > box.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight)) box.style.paddingLeft = box.style.paddingRight = Math.max(24, (box.clientWidth - nw) / 2) + "px";
         cs = getComputedStyle(box);
         st.style.width = box.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight) + "px";
         var need = st.scrollHeight + parseFloat(cs.paddingTop) + parseFloat(cs.paddingBottom);
-        if (need > box.clientHeight) fig.style.minHeight = Math.ceil(need) + "px";
+        if (need > box.clientHeight) { fig.style.aspectRatio = "auto"; fig.style.height = Math.ceil(need) + "px"; }
       }
       var aw = box.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
       var ah = box.clientHeight - parseFloat(cs.paddingTop) - parseFloat(cs.paddingBottom);
