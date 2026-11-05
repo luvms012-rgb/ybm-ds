@@ -8,7 +8,7 @@
 - IA: **Docs · Foundations · Components · Templates** (2026-10-26 Foundations를 상단 메뉴로 분리 — 아래 URL·사이드바도 이에 맞춤)
 - 화면 구성은 레퍼런스 A, 컴포넌트 문서 깊이는 레퍼런스 B
 - Getting Started는 **Quick Start with AI**로 시작
-- 만드는 방식: **정적 HTML + GitHub Pages**. 빌드 스크립트가 ybm-ds 데이터(components.json, 토큰)를 읽어 페이지를 생성한다.
+- 만드는 방식: **정적 HTML + GitHub Pages**. 빌드 스크립트가 yds 데이터(components.json, 토큰)를 읽어 페이지를 생성한다.
 
 ---
 
@@ -16,17 +16,17 @@
 
 1. **설치할 것 없음**: Node 내장 기능만 쓴다. 회사 윈도우와 집 Mac 모두 `node build.mjs` 하나로 빌드한다.
 2. **사이트도 yds로 만든다**: 버튼, 탭, 칩, 다이얼로그, 스낵바는 `ds-*`를 그대로 쓴다. 사이트 전용 CSS는 레이아웃(셸·그리드)에만 쓴다.
-3. **ybm-ds가 정본**: 사이트는 DS 데이터를 읽기만 하고 복사해서 고치지 않는다. 사이트에만 필요한 정보는 사이트 저장소에 따로 둔다.
-4. **한 곳만 고치면 반영**: 컴포넌트 추가나 토큰 변경은 ybm-ds에서만 하고, 사이트를 다시 빌드하면 목록·카드·Foundations가 따라 바뀐다.
+3. **yds가 정본**: 사이트는 DS 데이터를 읽기만 하고 복사해서 고치지 않는다. 사이트에만 필요한 정보는 사이트 저장소에 따로 둔다.
+4. **한 곳만 고치면 반영**: 컴포넌트 추가나 토큰 변경은 yds에서만 하고, 사이트를 다시 빌드하면 목록·카드·Foundations가 따라 바뀐다.
 
 ---
 
 ## 2. 저장소와 폴더 구조
 
-**ybm-ds 저장소 안 `site/` 폴더**로 둔다 (2026-10-30 확정, 처음 구상은 별도 저장소였다).
+**yds 저장소 안 `site/` 폴더**로 둔다 (2026-10-30 확정, 처음 구상은 별도 저장소였다).
 
 ```
-ybm-ds/site/
+yds/site/
 ├─ CLAUDE.md                  어느 컴퓨터의 Claude든 먼저 읽는 안내
 ├─ README.md                  빌드·배포 방법
 ├─ REFERENCE-ANALYSIS.md      레퍼런스 분석
@@ -54,7 +54,7 @@ ybm-ds/site/
 
 ---|---|
 | 집 Mac | `~/Works/ybm-ds` |
-| 회사 윈도우 | `C:\Users\luvms\Desktop\works\ybm-ds` (ybm-ds README 기준) |
+| 회사 윈도우 | `C:\Users\luvms\Desktop\works\ybm-ds` (yds README 기준) |
 
 빌드는 다음 순서로 DS 위치를 찾는다.
 1. `site.config.local.json`
@@ -66,7 +66,7 @@ ybm-ds/site/
 
 ## 3. 데이터 흐름
 
-| 원본 (ybm-ds) | 읽는 내용 | 만들어지는 것 |
+| 원본 (yds) | 읽는 내용 | 만들어지는 것 |
 |---|---|---|
 | `components.json` | 47종의 번호·이름·CSS 클래스·Figma 노드와 변형 수·props 문자열 | Components 사이드바, 개요 카드, 상세 상단 메타, Properties 컨트롤 |
 | `tokens/design-tokens.json` | 팔레트·시맨틱 색(light/dark), 타입 스케일, 간격, 반경, shape, 그림자 | Foundations 페이지 전체 |
@@ -223,8 +223,8 @@ ybm-ds/site/
 ## 7. 빌드와 배포
 
 - `node build.mjs` → `dist/` 생성. `node serve.mjs`로 로컬에서 미리보기.
-- **배포는 GitHub Actions 권장**: push하면 GitHub에서 빌드해 Pages에 올린다. ybm-ds 저장소는 공개라서 Actions에서 그대로 읽을 수 있다. 회사 윈도우·집 Mac 어디서 push해도 결과가 같다.
-- ybm-ds가 바뀌면 사이트도 다시 빌드해야 한다. 지금 `sync.mjs`가 가이드 사이트를 재배포하듯, 나중에 사이트 재빌드를 호출하도록 연결한다.
+- **배포는 GitHub Actions 권장**: push하면 GitHub에서 빌드해 Pages에 올린다. yds 저장소는 공개라서 Actions에서 그대로 읽을 수 있다. 회사 윈도우·집 Mac 어디서 push해도 결과가 같다.
+- yds가 바뀌면 사이트도 다시 빌드해야 한다. 지금 `sync.mjs`가 가이드 사이트를 재배포하듯, 나중에 사이트 재빌드를 호출하도록 연결한다.
 
 ---
 
@@ -243,11 +243,11 @@ ybm-ds/site/
 
 | 항목 | 선택지 | 권장 |
 |---|---|---|
-| 사이트 저장소 | 새 저장소 `ybm-ds-site` / ybm-ds 안 폴더 | **확정: ybm-ds 안 `site/` 폴더** (2026-10-30), DS 를 사이트로 보여 주는 것이라 한 곳에서 관리 |
+| 사이트 저장소 | 새 저장소 `ybm-ds-site` / yds 안 폴더 | **확정: yds 안 `site/` 폴더** (2026-10-30), DS 를 사이트로 보여 주는 것이라 한 곳에서 관리 |
 | 문서 작성 형식 | HTML 조각 / Markdown | **HTML 조각**으로 시작. Markdown은 라이브러리 1개가 필요해서 나중에 |
 | 배포 | GitHub Actions / 로컬 스크립트 | **Actions** |
 | 템플릿 썸네일 | iframe 축소(실시간) / 캡처 이미지 | iframe으로 시작. 느리면 이미지로 |
 | 사이트용 컴포넌트 메타 | 사이트의 `component-meta.json` / `components.json` 확장 | **사이트 쪽 파일**: DS 정본을 건드리지 않음 |
 | 언어 | 한국어만 / 한국어 + 영문 병기 | 한국어 중심, 컴포넌트·토큰 이름은 영문 |
-| 공개 범위 | 공개 Pages / 회사 내부 호스팅 | 회사 확인 필요 (지금 ybm-ds는 공개) |
+| 공개 범위 | 공개 Pages / 회사 내부 호스팅 | 회사 확인 필요 (지금 yds는 공개) |
 | 브랜드 | YBM 로고·히어로 이미지 | 회사 에셋 필요 |

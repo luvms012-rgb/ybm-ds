@@ -1,13 +1,13 @@
 # yds
 
-YBM 서비스 공용 디자인 시스템. Figma 변수/컴포넌트가 정본이고, 이 폴더(`ybm-ds/`)는 그걸 코드로 옮긴 배포 패키지와 동기화 도구다.
+YBM 서비스 공용 디자인 시스템. Figma 변수/컴포넌트가 정본이고, 이 저장소(`yds`)는 그걸 코드로 옮긴 배포 패키지와 동기화 도구다.
 이 폴더 하나가 GitHub 저장소 하나다(가이드 사이트와 분리된 단독 저장소).
 
 - 최종 갱신: 2026-10-27
 - Figma 파일: `1VCEsFU3xMWuXIntIrZz9i` - <https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/>
 - GitHub 저장소: <https://github.com/luvms012-rgb/yds>
 - 배포 주소(Pages): <https://luvms012-rgb.github.io/yds/> - 첫 화면이 컴포넌트 미리보기
-- 로컬 폴더: 회사 `C:\Users\luvms\Desktop\works\ybm-ds`, 집 Mac `~/Works/ybm-ds` (저장소 이름과 같다)
+- 로컬 폴더: 회사 `C:\Users\luvms\Desktop\works\ybm-ds`, 집 Mac `~/Works/ybm-ds` (폴더 이름은 예전 이름 그대로)
 
 ---
 
@@ -119,7 +119,7 @@ DS 전체가 `@layer ds.tokens, ds.base, ds.icons, ds.components, ds.utilities` 
 **변수 비교 기준**: 이름, 타입, 모드별 값(색 hex, 숫자, 별칭 이름), description. 스냅샷이 불완전하면(개수 불일치/모드 누락/별칭 미해결) 빌드가 즉시 실패한다.
 **컴포넌트 비교 기준**: `components.json`의 노드 ID 존재, 타입, 변형 수, Components 페이지에서 목록에 없는 COMPONENT_SET.
 
-> 처음 한 번: GitHub에서 저장소 `ybm-ds`(Public, README 없이) 생성 → Settings → Pages → Branch `main` / root.
+> 처음 한 번: GitHub에서 저장소 `yds`(Public, README 없이) 생성 → Settings → Pages → Branch `main` / root.
 > push 인증은 PC의 Git Credential Manager(가이드 배포와 같은 GitHub 로그인)를 그대로 쓴다.
 
 ---

@@ -1,4 +1,4 @@
-# ybm-ds - 작업 기준 (집 PC, 회사 PC 공용)
+# yds - 작업 기준 (집 PC, 회사 PC 공용)
 
 집(**Mac**)과 회사(**Windows**) 두 PC 에서 같은 저장소로 작업한다. 이 파일은 저장소에 같이 올라가므로 어느 PC 에서든 Claude 가 먼저 읽는다.
 PC 마다 따로 쌓이는 Claude 메모리는 서로 보이지 않는다 - 두 PC 가 함께 알아야 할 것은 여기에 적는다.
@@ -39,11 +39,12 @@ git clone https://github.com/luvms012-rgb/yds.git
 ### Mac 에서 다른 점
 
 - `동기화.bat` 은 Windows 전용 → Mac 에서는 `node sync.mjs deploy "메시지"` 를 터미널에서 실행한다. 나머지 `node sync.mjs ...` 명령은 똑같다.
-- 가이드 사이트 재배포(`project/_publish/publish.ps1`)는 Windows 에서만 돈다. Mac 에서 deploy 하면 ybm-ds 만 올라가고 가이드 사이트는 회사 PC 에서 다시 배포해야 한다.
+- 가이드 사이트 재배포(`project/_publish/publish.ps1`)는 Windows 에서만 돈다. Mac 에서 deploy 하면 yds 만 올라가고 가이드 사이트는 회사 PC 에서 다시 배포해야 한다.
 - `.gitattributes` 가 `* -text`(줄바꿈 변환 없음)다. 파일의 줄바꿈을 바꾸지 않는다 - 현재 CRLF 는 `동기화.bat` 하나뿐이고 나머지는 LF.
 
 ## 3. 진행 상황
 
+- **끝냄, 배포함 (2026-11-05 회사) Updates 와 이름 정리** - Updates 는 v1.1.0 만 남기고 v1.0.0 소식을 지움(사용자 지시). 저장소 글의 서비스 이름 ybm-ds, YBM DS 를 yds 로(README, CLAUDE.md, site 메모, ds-sync 스킬, sync.mjs, 동기화.bat, Code Block 예시). 그대로 둔 것: 파일 이름 dist/ybm-ds.css, ybm-ds.js(서비스가 이 주소를 쓴다), 로컬 폴더 이름, 지난 기록 속 예전 이름.
 - **끝냄, 배포함 (2026-11-05 회사) Get Started 개편과 요청 글 다듬기** - ① 레퍼런스 6곳 비교 검토와 제안은 site/PROPOSAL.md 10절(레퍼런스 이름표 C~F 는 로컬 전용 site/REFERENCE-ANALYSIS.md). ② 시안 중 첫 화면 시연(부품 이름표, 라이트/다크/브랜드 색 장면), yds가 지키는 것, 나에게 맞는 시작, 새 소식은 사용자가 모두 삭제 → 남은 것은 리드 문장("yds는 디자이너, 개발자, AI가 같은 이름으로 같은 화면을 만들게 돕는 디자인 시스템입니다.")과 시스템 이해하기 카드 3개(개수 표시 없음). ③ 사이트 전체 푸터의 저작권 줄 삭제. ④ 요청 글 검토 반영(규칙은 site/CLAUDE.md "Get Started 요청 글"). ⑤ 직접 시작하기의 버전 고정 안내 문장 삭제(사용자 "어려움", 코드 탭과 llms 규칙에 있음). ⑥ Updates 를 쉽게 다시 썼다가 사용자 지시로 되돌리고, 고친 것만 바뀐 것에 합침. ⑦ md.mjs: 코드 블록 언어는 data-lang 을 먼저, 안내 카드(site-hub)는 "- [제목](주소): 설명" 한 줄. 마지막 배포 커밋은 git log 로 확인.
 - **진행 중 (2026-11-05 회사) Figma 맞춤** - 사용자: Figma 에는 Get Started, Foundations, Components 만 넣는다(템플릿 제외, 사이트 템플릿의 Figma 버튼과 templates.json figma 도 지움). 끝냄: 변수 WEB 코드 이름 329개 --ybm- → --ds-(spacing/x-global-gutter 는 --ds-space-x-global-gutter 로 바로잡음), 변수 모음 이름 YBM DS → yds(로컬 figma-variables.json, tokens/build.mjs 도), 문서 프레임 72개 설명과 Best Practices 217줄(node sync.mjs docs, 표 줄 구분선 stroke/neutral-muted). yds 사이트의 Figma 주소 177개 모두 Figma 에 있음. **멈춘 까닭**: Figma 커넥터가 다른 계정(jincc)으로 바뀌어 편집 권한이 없다. 사용자가 luvms@ybm.co.kr 로 다시 연결하면 이어서: ① node sync.mjs links 로 문서 / 코드 링크를 새 주소(yds)로 ② 컴포넌트 규격 반영(아래 "Figma 최종 검토" ①~⑧ + 11-04: 제목 SemiBold(List Item, Accordion), Segmented Medium/SemiBold, Checkbox/Radio 선 gray-600, 바깥 테두리 stroke/neutral-weak(Card 모든 변형, inset List, Popover), 안쪽 구분선 stroke/neutral-muted(Divider, List, Accordion, Banner, Menu), Menu 항목 모서리 md, Avatar 바탕 gray-300/실루엣 gray-600/상태 점, Bottom Navigation 위 8, Dialog 버튼 둘 가로와 버튼 없는 창 아래 24, Carousel 번호 부품) ③ Foundations 에 Breakpoint 문서 프레임 ④ Get Started 프레임 내용을 사이트와 같게 ⑤ 자동화: node sync.mjs figma 점검에 코드 이름 검사, figma-todo(마지막 맞춤 뒤 바뀐 컴포넌트 목록) - 만드는 중 사용자가 멈춤
 - **끝냄, 배포함 (2026-11-04) 선 색 통일과 마무리** - 사용자 "카드 테두리 색이 왜 다르지, 절대 이렇게 하지 마, 전체 검수": 바깥 테두리는 모두 stroke/neutral-weak(Card, Card subtle, inset List, Popover, 템플릿 tp 상자), 안쪽 구분선은 모두 stroke/neutral-muted(Divider, 목록, Accordion 줄, Banner, Menu, Markdown hr, Code Block 머리). 검사 "5-1 선 색" 이 지킨다. Accordion 높이 모션(ybm-ds.js, name 묶음 함께, 움직임 줄이기면 바로), Avatar 상태 점 정수 크기, Badge vertical-align middle, Badge 예시 상태 모두 배지, 구조 그림 휴대폰 여백 72
@@ -108,7 +109,7 @@ git clone https://github.com/luvms012-rgb/yds.git
 - **끝냄 (2026-10-28)** - Figma 에만 있던 10종 CSS 완성 + 등록: 49 Select Box, 50 Time Picker, 51 Table Pagination, 52 Popover, 53 Chat(5종), Text Link 는 02번에 Figma ID. 하위 부품 3개(Segmented Control Item, Tag Group Item, Checkbox Mark)도 등록 → Figma 대조 74개 일치, 미등록 0. `ybm-ds.js` 에 Popover 열고 닫기, Time Picker 휠, Chat 입력창 동작 추가. 아이콘 `square` 추가. 예시 문구에서 특정 서비스 내용을 뺌.
 - **끝냄 (2026-10-29)** - 새 부품 4종을 Figma 와 CSS 에 함께 만듦: 54 Top App Bar(+ Button), 55 Top Navigation(+ Item) 은 Navigation 페이지, 56 Search Suggestion(+ Item), 57 File Attach(Dropzone/Trigger/Item) 는 Data Input 페이지. 처음 만든 것이 레퍼런스 가이드와 달라 같은 날 가이드 규격으로 다시 만들었다(따로 두었던 둥근 Search Field 는 지우고 Text Field 로 대신). 아이콘 `upload`, `clock` 추가, `ybm-ds.js` 에 추천어 화살표 키와 파일 끌어 놓기 표시.
 - **원칙** - 새 부품의 큰 틀, 쓰임, 위계, 여백, 밸런스는 사용자가 정한 레퍼런스 가이드 2곳(메모리/대화 기록 참고)의 같은 부품에서만 가져온다. 만들기 전에 그 규격부터 확인한다.
-- **원칙 (2026-10-31 사용자)** - ybm-ds 는 전체적으로 쉬워야 한다. 글은 짧고 쉬운 말, 페이지는 보자마자 복사해 쓸 수 있게, 규칙과 선택지는 적게. 사이트 글과 README 를 고칠 때 이 기준으로 먼저 본다.
+- **원칙 (2026-10-31 사용자)** - yds 는 전체적으로 쉬워야 한다. 글은 짧고 쉬운 말, 페이지는 보자마자 복사해 쓸 수 있게, 규칙과 선택지는 적게. 사이트 글과 README 를 고칠 때 이 기준으로 먼저 본다.
 - **원칙** - 이 DS 는 완전 범용이다. 특정 서비스나 사이트를 근거로 부품을 정하거나 예시 문구에 넣지 않는다.
 - **끝냄 (2026-10-29)** - 58 Menu Sheet(Overlay), 59 Result Section, 61 Status Dot(Feedback & Status), 60 Timer(Content) 를 Figma 와 CSS 에 함께 만듦. Spinner 는 Progress Circle indeterminate 와 겹쳐 만들지 않음.
 - **끝냄 (2026-10-29)** - 62 Checkbox Group, 71 Multi Select(Data Input), 63 Scroll Fog, 64 Pull To Refresh(Layout), 65 Side Panel(Overlay), 66 Image Frame, 67 Carousel(Content), 68 Markdown, 69 Code Block, 70 Citation(Chat) 을 Figma 와 CSS 에 함께 만듦.

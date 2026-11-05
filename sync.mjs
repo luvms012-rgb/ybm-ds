@@ -267,7 +267,7 @@ function writeBuild(date = today()) {
 // 단발 HTTPS 상태 조회 (연결 유지 없음 — Windows 에서 fetch 후 종료할 때 나는 오류를 피한다)
 function httpStatus(url, method = 'HEAD') {
   return new Promise((resolve) => {
-    const req = https.request(url, { method, agent: false, timeout: 15000, headers: { 'user-agent': 'ybm-ds-sync' } }, (res) => { res.resume(); resolve(res.statusCode); });
+    const req = https.request(url, { method, agent: false, timeout: 15000, headers: { 'user-agent': 'yds-sync' } }, (res) => { res.resume(); resolve(res.statusCode); });
     req.on('timeout', () => { req.destroy(); resolve(0); });
     req.on('error', () => resolve(0));
     req.end();

@@ -1,6 +1,6 @@
 # yds 사이트
 
-YBM 디자인 시스템 공식 문서 사이트를 준비하는 폴더다. 2026-10-30 별도 저장소(ybm-ds-site)에서 ybm-ds 안 `site/` 로 합쳤다. DS 를 사이트로 보여 주는 것이라 한 저장소로 관리한다.
+YBM 디자인 시스템 공식 문서 사이트를 준비하는 폴더다. 2026-10-30 별도 저장소(ybm-ds-site)에서 yds 저장소 안 `site/` 로 합쳤다. DS 를 사이트로 보여 주는 것이라 한 저장소로 관리한다.
 
 ## 현재 상태 (2026-10-30 첫 버전)
 - 사이트 주소: <https://luvms012-rgb.github.io/yds/site/> (로컬 미리보기는 works/.claude/launch.json 의 ds-preview → http://localhost:5179/site/)
@@ -56,7 +56,7 @@ YBM 디자인 시스템 공식 문서 사이트를 준비하는 폴더다. 2026-
 - **아이콘 페이지**(foundations/icons.html): 큰 그림 아래 찾기 칸 하나(스크롤해도 위에 붙음)가 CSS 로 바로 쓰는 아이콘(dist/icons.css)과 Lucide 전체 목록(CSS 표시)을 함께 거른다. 전체 목록은 `site/src/lucide-icons.json`(Lucide 1.64.0, 1,999개, ISC) 을 site.js 가 그린다. CSS 에 없는 아이콘은 누르면 icons.css 에 넣을 줄이 복사된다. 갱신: lucide-static 의 icon-nodes.json, tags.json, LICENSE 를 받아 `node site/lucide-update.mjs <폴더> <버전>`.
 - **Foundations** (2026-10-30, 레퍼런스 B 의 Foundations 화면과 우리 컴포넌트 목록 기준. 같은 날 저녁 상단 메뉴에서 빠져 Get Started 왼쪽 메뉴 묶음이 됨, 3열 카드 허브는 없앰): 항목마다 한 페이지 `foundations/<slug>.html`(Color, Elevation, Iconography, Motion, Radius, Spacing, Typography - 메뉴와 이전/다음은 ABC 순), 제목은 영문. 설명 아래 큰 그림은 2026-10-31 사용자 지시로 없앰(build.mjs 의 FV 삭제). 표 값은 build.mjs 가 tokens.css 에서 읽는다(다크 블록은 따로). 본문 내용은 레퍼런스 B 처럼 더 채울 수 있다(사용자 검토).
 - Quick Start with AI 컨셉. 설치 1순위는 CSS 두 줄, 2순위(개발자)는 버전 고정 CDN, 파일 내려받기, Tailwind 설정. npm 은 제안(PROPOSAL.md).
-- 사이트와 템플릿은 **ybm-ds 에 정의된 것만** 쓴다. 없는 것은 PROPOSAL.md 로 제안한다.
+- 사이트와 템플릿은 **yds 에 정의된 것만** 쓴다. 없는 것은 PROPOSAL.md 로 제안한다.
 - 한글, Pretendard. **한글 위계는 레퍼런스 B 그대로** (2026-10-30 사용자 지시, 실측): 페이지 제목은 위 "제목 구성" 값(32 / 48 / 60), 리드 16/24 300(Pretendard Light, DS 폰트 폴더 파일을 사이트 CSS 에서 선언), 섹션 제목 24/32 500, 소제목 16/22 500, 본문 16/28 400, 보조 14/19. 자간은 사이트 전체 0(2026-10-30 사용자 지시). 템플릿 9종의 tp-h1~tp-body 도 같은 기준. word-break keep-all.
 - 템플릿은 모두 반응형(모바일 먼저, 768 / 1280). 앞으로 계속 추가한다(`site/src/templates.json` 한 줄 + `site/templates/pages/<slug>.html`).
 - **템플릿 분류는 영어** (2026-10-30 저녁 집, 레퍼런스 A 템플릿 목록 방식): Dashboard, Table, Form, Login, Search, Content, Commerce, Community, Tools, AI Chat, Shell. 목록 위 필터 칩과 상세 위 경로에 그대로 쓴다. 템플릿 안 글은 한국어, 이름은 영어(`en`).
@@ -85,9 +85,9 @@ YBM 디자인 시스템 공식 문서 사이트를 준비하는 폴더다. 2026-
 - **공식 DS 파일** (기준 원본, 파일명 "디자인 시스템"): <https://www.figma.com/design/1VCEsFU3xMWuXIntIrZz9i/?node-id=2274-1143>
   - 노드 `2274:1143` = Foundations 페이지. 섹션: Color `2288:63` · Typography `2288:64` · Spacing `2288:67` · Radius `2288:66` · Elevation `2288:65`. 사이트 Foundations 메뉴의 원본이다.
 - **레퍼런스 파일**: 레퍼런스 A 의 Figma 라이브러리 (주소는 로컬 분석 문서와 Claude 메모리)
-  - ybm-ds Figma 구성을 이 화면 기준으로 바꿀 예정. **보류 중** — 사용자가 요청할 때만 시작한다.
+  - yds Figma 구성을 이 화면 기준으로 바꿀 예정. **보류 중** — 사용자가 요청할 때만 시작한다.
 - **Figma / Code 버튼**(2026-10-31): 컴포넌트와 Foundations 페이지 머리말 아래에 그 부품의 Figma 문서 프레임과 GitHub CSS 줄 범위로 가는 버튼 2개. 주소는 `tokens/links.mjs` 의 계획을 쓰고(Figma 문서 프레임의 "문서 / 코드" 링크와 같은 원본), 문서 프레임 ID 는 `components.json` 의 `doc` / `figmaDocs` 에서 온다. 줄 번호는 빌드마다 다시 계산된다. Motion 은 Figma 문서가 없어 Code 만.
-- **쉬움이 먼저** (2026-10-31 사용자: "ybm-ds 는 전체적으로 쉬웠으면"): 글은 짧고 쉬운 말, 한 문단에 한 가지. 페이지는 보자마자 복사해서 쓸 수 있게(Usage 코드가 위, 설명은 한두 줄). 선택지와 규칙은 적게. 새 페이지나 글을 쓸 때 이 기준으로 먼저 본다.
+- **쉬움이 먼저** (2026-10-31 사용자: "yds 는 전체적으로 쉬웠으면"): 글은 짧고 쉬운 말, 한 문단에 한 가지. 페이지는 보자마자 복사해서 쓸 수 있게(Usage 코드가 위, 설명은 한두 줄). 선택지와 규칙은 적게. 새 페이지나 글을 쓸 때 이 기준으로 먼저 본다.
 - **Foundations 페이지 구성** (2026-10-31, 레퍼런스 A 의 Color 페이지): Overview(짧은 설명 + 바로 쓰는 예시) → 토큰/항목 표 → 쓰는 법 코드 → Best Practices(Do / Don't 표, `practices()`). Iconography 를 이 구성으로 먼저 만들었다: Overview, Icons(쓰임별 표 5묶음, 이름 누르면 클래스 복사), Size and Color, Add an Icon(Lucide 전체 찾기), Best Practices. 아이콘 쓰임 글은 build.mjs 의 ICON_GROUPS 에 있고, icons.css 에 아이콘을 넣으면 빌드가 빠진 것을 알려 준다. 나머지 Foundations 페이지도 같은 구성으로 채울 수 있다.
 - **컴포넌트 상세 배치** (2026-10-31, 레퍼런스 A 의 Button 페이지 실측): 본문 폭 912(문서 페이지 752 보다 넓음, `.site-body--comp`), 첫 그림 16:9, 순서는 Usage → Properties → CSS Variables → Best Practices(Do / Don't 표. "않/금지/마세요" 가 든 문장이 Don't) → Examples(Preview / Code) → Specification.
 - **넓은 배치 폭** (2026-10-31): 컴포넌트 목록과 템플릿 상세(`site-body--wide`)는 본문을 1152 로 제한하고 가운데 둔다(레퍼런스 A 컴포넌트 목록 1920 실측). 큰 화면에서 카드가 끝없이 늘어나던 문제를 고침.
@@ -129,5 +129,5 @@ YBM 디자인 시스템 공식 문서 사이트를 준비하는 폴더다. 2026-
 - 2026-10-26 (회사): ybm-ds `main`을 GitHub(`d4f83b6`)에 맞췄다. 회사 PC에만 있던 커밋 전 작업(10-23 폴더 구조 정리, figma-sync `cssOnly` 수정, `components/index.html` 컴포넌트 메인 시안, 작업 메모)은 **회사 PC 로컬 브랜치 `backup/2026-10-26-local`** 에만 있다(GitHub에 없음). 필요하면 회사 PC에서 꺼낸다.
 
 ## 작업 방식
-- 집(Mac)과 회사(윈도우)를 오가며 작업한다. 시작할 때 ybm-ds 에서 `git pull`, 끝낼 때 commit + push (`node sync.mjs deploy`).
+- 집(Mac)과 회사(윈도우)를 오가며 작업한다. 시작할 때 저장소에서 `git pull`, 끝낼 때 commit + push (`node sync.mjs deploy`).
 - 사용자에게는 한국어로, 쉬운 말로 설명한다.

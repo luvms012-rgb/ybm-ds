@@ -1,6 +1,6 @@
 ---
 name: ds-sync
-description: yds 를 Figma ↔ 로컬(ds/) ↔ GitHub(ybm-ds 저장소·Pages) ↔ 가이드 사이트까지 한 번에 맞춘다. "ds 동기화", "DS 싱크", "피그마랑 맞춰줘", "DS 배포" 같은 요청이나, ds 폴더·Figma DS 를 고친 작업의 마지막 단계에 쓴다.
+description: yds 를 Figma ↔ 로컬(ds/) ↔ GitHub(yds 저장소·Pages) ↔ 가이드 사이트까지 한 번에 맞춘다. "ds 동기화", "DS 싱크", "피그마랑 맞춰줘", "DS 배포" 같은 요청이나, ds 폴더·Figma DS 를 고친 작업의 마지막 단계에 쓴다.
 ---
 
 # yds 동기화
@@ -30,7 +30,7 @@ Figma 파일 `1VCEsFU3xMWuXIntIrZz9i`(디자인 시스템)과 `works/ybm-ds` 를
 |---|---|
 | 생성물이 스냅샷과 다름 | 누가 `tokens.css` 등을 손으로 고쳤다. Figma 변수를 고친 뒤 1~3 을 다시 하거나, `node sync.mjs build` 로 되돌린다 — 어느 쪽인지 사용자에게 묻는다 |
 | CSS 에 없는 클래스 | `components.json` 과 `components.css` 가 어긋남 — 둘 중 맞는 쪽으로 고친다 |
-| GitHub 저장소가 아직 없어요 | 사용자에게 github.com/new 에서 `ybm-ds`(Public, README 없이) 생성 + Settings → Pages(main / root) 를 부탁한다. 인증 정보를 꺼내 쓰지 않는다 |
+| GitHub 저장소가 아직 없어요 | 사용자에게 github.com/new 에서 `yds`(Public, README 없이) 생성 + Settings → Pages(main / root) 를 부탁한다. 인증 정보를 꺼내 쓰지 않는다 |
 | push 인증 실패 | 사용자에게 GitHub Desktop 이나 `배포하기.bat` 로 한 번 로그인해 달라고 한다 |
 
 ## 하지 말 것
