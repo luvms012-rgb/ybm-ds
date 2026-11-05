@@ -256,7 +256,7 @@ function page({ file, title, section, body, layout = 'doc', desc = '', pager = [
   const pagerHtml = prev || next ? `<nav class="site-pager" aria-label="이전, 다음 문서">${prev ? `<a href="${prev.href}" data-dir="prev"><span class="site-pager__label"><i class="ds-icon ds-icon--chevron-left ds-icon--sm" aria-hidden="true"></i>이전</span><b>${esc(prev.label)}</b></a>` : ''}${next ? `<a href="${next.href}" data-dir="next"><span class="site-pager__label">다음<i class="ds-icon ds-icon--chevron-right ds-icon--sm" aria-hidden="true"></i></span><b>${esc(next.label)}</b></a>` : ''}</nav>` : '';
   // 푸터 (레퍼런스 B): 왼쪽 로고와 저작권, 오른쪽 메뉴 두 묶음
   const footer = `<footer class="site-footer">
-  <div class="site-footer__brand"><img src="${root}assets/logo-ybmnet.svg" alt="YBM NET" width="81" height="24"><p class="site-footer__copy">© 2026 YBM NET. All rights reserved.</p></div>
+  <div class="site-footer__brand"><img src="${root}assets/logo-ybmnet.svg" alt="YBM NET" width="81" height="24"></div>
   <nav class="site-footer__nav" aria-label="사이트 메뉴">
     <div><p class="site-footer__title">메뉴</p>${NAV.map(([, l, h]) => `<a href="${root}${h}">${l}</a>`).join('')}</div>
     <div><p class="site-footer__title">더 보기</p>${SHOW_THEMES ? `<a href="${root}themes/index.html">Themes</a>` : ''}<a href="${FIGMA}2608-2" target="_blank" rel="noopener">Figma</a><a href="${GITHUB}" target="_blank" rel="noopener">GitHub</a></div>
@@ -395,9 +395,16 @@ write({
   file: 'index.html', section: 'get-started', title: 'Get Started', desc: 'yds를 처음 쓰는 사람을 위한 안내', layout: 'page',
   body: `<header>
   <h1 class="site-h1">Get Started</h1>
-  <p class="site-lead">yds는 YBM 서비스를 위한 디자인 시스템입니다.</p>
+  <p class="site-lead">yds는 디자이너, 개발자, AI가 같은 이름으로 같은 화면을 만들게 돕는 디자인 시스템입니다.</p>
   ${metaLinks({ figma: LINKS.figmaUrl('2608:2'), code: GITHUB })}
 </header>
+
+<h2 id="system">시스템 이해하기</h2>
+<div class="site-grid site-grid--hub site-grid--hub3">
+  ${hubCard('foundations/color.html', 'Foundations', '색, 글자, 간격, 모서리, 그림자, 움직임처럼 화면의 바탕이 되는 토큰입니다.')}
+  ${hubCard('components/index.html', `Components ${comps.length}종`, '버튼, 입력칸, 목록처럼 화면을 이루는 부품입니다.')}
+  ${hubCard('templates/index.html', `Templates ${templates.length}종`, '자주 만드는 화면을 부품으로 미리 조립해 둔 예시입니다.')}
+</div>
 
 <h2 id="ai">AI로 시작하기</h2>
 <p>아래 글을 AI 코딩 도구(ChatGPT, Claude, Cursor 등)에 붙여 넣으면 됩니다.</p>

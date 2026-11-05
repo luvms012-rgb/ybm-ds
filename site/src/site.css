@@ -234,7 +234,6 @@ body[data-side-open] .site-scrim { opacity: 1; pointer-events: auto; }
 /* 푸터 (레퍼런스 B): 위 선, 위 48 / 안쪽 40, 왼쪽 로고와 저작권, 오른쪽 메뉴 두 묶음 */
 .site-doc > .site-footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--ds-space-x10); margin-top: var(--ds-space-x12); padding-top: var(--ds-space-x10); border-top: 1px solid var(--site-box-line); }
 .site-footer__brand img { display: block; width: auto; height: 24px; }
-.site-doc .site-footer__copy { margin-top: var(--ds-space-x2); color: var(--ds-color-fg-neutral-muted); font-size: var(--ds-font-size-t02); line-height: 16px; }
 .site-footer__nav { display: grid; grid-template-columns: repeat(2, auto); gap: var(--ds-space-x8) var(--ds-space-x12); }
 .site-footer__nav > div { display: flex; flex-direction: column; gap: 14px; }
 .site-doc .site-footer__title { color: var(--ds-color-fg-neutral); font-size: var(--ds-font-size-t04); line-height: 20px; font-weight: var(--ds-font-weight-semibold); }
@@ -517,3 +516,7 @@ body[data-side-open] .site-scrim { opacity: 1; pointer-events: auto; }
 .ds-codeblock .hl-c, .site-lib__code .hl-c { color: var(--ds-color-palette-blue-700); }    /* 상수, 숫자, CSS 속성과 변수 */
 .ds-codeblock .hl-t, .site-lib__code .hl-t { color: var(--ds-color-palette-green-700); }   /* 태그, 선택자 */
 .ds-codeblock .hl-m, .site-lib__code .hl-m { color: var(--ds-color-palette-gray-700); }    /* 주석 */
+
+/* Get Started 안내 카드 3칸 */
+@media (min-width: 1024px) { .site-grid--hub3 { grid-template-columns: repeat(3, minmax(0, 1fr)); } .site-grid--hub3 > :last-child:nth-child(odd) { grid-column: auto; } }
+
