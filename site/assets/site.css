@@ -144,6 +144,12 @@ body[data-side-open] .site-scrim { opacity: 1; pointer-events: auto; }
 .site-body--comp { --site-col: 960px; }
 .site-body--found { --site-col: 948px; --site-toc: 185px; }  /* 파운데이션 상세: 레퍼런스 B Color 실측 글 900, 목차 200 (11-04 사용자 "seed 와 같게") */
 .site-cover .site-tile__inner { padding: var(--ds-space-x12); }
+/* 대표 그림(목록 카드와 상세 첫 그림): 바탕이 투명한 부품도 흰 바탕으로 보여 준다 (11-05 사용자) */
+.site-tile__inner .ds-input:not([data-variant="fill"]) { --ds-input-bg: var(--ds-color-bg-layer-default); }
+.site-tile__inner .ds-select { --ds-select-bg: var(--ds-color-bg-layer-default); }
+.site-tile__inner .ds-fieldbutton { --ds-fb-bg: var(--ds-color-bg-layer-default); }
+.site-tile__inner :is(.ds-textarea, .ds-fileattach__dropzone, .ds-fileitem, .ds-citation) { background-color: var(--ds-color-bg-layer-default); }
+.site-cover-panel { padding: var(--ds-space-x6); border-radius: var(--ds-shape-xl); background: var(--ds-color-bg-layer-default); }
 .site-toc-select { position: relative; margin-top: var(--ds-space-x6); }
 /* 좁은 화면 목차: DS Select Trigger(폭 100%) + 아래로 펼치는 Select Content */
 .site-toc-select .ds-select { width: 100%; }

@@ -844,8 +844,10 @@ function topElements(html, n) {
 // 컴포넌트 예시 자료: site/src/examples/ 의 json을 모두 합친다 ({ slug: [{ title, desc, html, wide? }] })
 const EXAMPLES = Object.assign({}, ...fs.readdirSync(path.join(SITE, 'src/examples')).filter((f) => f.endsWith('.json')).map((f) => readJson(`site/src/examples/${f}`)));
 const COVERS = Object.fromEntries([...fs.readFileSync(path.join(SITE, 'src/covers.html'), 'utf8').matchAll(/<template data-slug="([^"]+)">([\s\S]*?)<\/template>/g)].map((m) => [m[1], m[2]]));
+// 11-05 사용자: 바탕이 투명한 덩어리 부품은 대표 그림에서 흰 판 위에 올린다 (입력칸 종류는 site.css 가 칸만 흰색으로)
+const COVER_PANEL = new Set(['accordion', 'table', 'description-list', 'tree', 'chart', 'markdown', 'time-picker', 'wheel-picker', 'toolbar', 'divider']);
 const cardThumb = (c) => {
-  if (COVERS[c.slug]) return `<div class="site-tile__thumb" aria-hidden="true"><div class="site-tile__inner" inert><div class="pv-stage">${COVERS[c.slug].replace(/<a\b/g, '<span').replace(/<\/a>/g, '</span>')}</div></div></div>`;
+  if (COVERS[c.slug]) { const html = COVERS[c.slug].replace(/<a\b/g, '<span').replace(/<\/a>/g, '</span>'); return `<div class="site-tile__thumb" aria-hidden="true"><div class="site-tile__inner" inert><div class="pv-stage">${COVER_PANEL.has(c.slug) ? `<div class="site-cover-panel">${html}</div>` : html}</div></div></div>`; }
   const first = stages(c.example)[0] || '';
   // 카드 전체가 링크라 안쪽 링크는 span으로 바꾼다(링크 안 링크는 HTML이 깨진다)
   const safe = topElements(first, 2).join('').replace(/ id="[^"]*"/g, '').replace(/<script[\s\S]*?<\/script>/g, '').replace(/<a\b/g, '<span').replace(/<\/a>/g, '</span>');
