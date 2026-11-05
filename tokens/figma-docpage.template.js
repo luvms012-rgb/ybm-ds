@@ -2,7 +2,7 @@
 // node sync.mjs docpage <slug> 가 맨 위에 DATA 를 붙여 tokens/.figma-docpage.js 를 만든다. 같은 이름의 노드를 지우고 다시 만들어서 몇 번 실행해도 결과가 같다.
 // 순서(사이트와 같음): 머리말 → 대표 그림 → 사용법 → 속성(+ 속성별 모양) → 동작 → 사용 지침 → 예시(미리보기 + 코드) → 규격(CSS 변수, 크기와 여백) → Master Components
 // 2026-11-05 Action Button 을 기준으로 만듦. 예시 HTML 은 DS 클래스를 Figma 컴포넌트 인스턴스로, u-* 배치를 자동 배치로 그린다.
-const C = DATA.comp, P = C.page;
+const C = DATA.comp || {}, P = C.page || {};
 const frame = await figma.getNodeByIdAsync(DATA.frame);
 await figma.setCurrentPageAsync(frame.parent.type === 'PAGE' ? frame.parent : figma.currentPage);
 const iconPage = figma.root.children.find((p) => p.name === 'Iconography'); await iconPage.loadAsync();
@@ -175,6 +175,46 @@ function fit(node, el, parent) {
   else if ((/width:\s*100%/.test(style) || el.cls.includes('u-full') || el.cls.includes('u-grow') || el.cls.includes('u-between')) && parent.layoutMode && parent.layoutMode !== 'NONE') node.layoutSizingHorizontal = 'FILL';
   // 블록 요소(div, ul 등)는 세로로 쌓는 부모 안에서 폭을 채운다 (예시 맨 바깥은 max-width 로 고정)
   else if (['div', 'ul', 'ol', 'section', 'li', 'p', 'form', 'nav', 'header', 'footer'].includes(el.tag) && parent.layoutMode === 'VERTICAL' && !['Preview', 'Scene'].includes(parent.name)) node.layoutSizingHorizontal = 'FILL';
+}
+
+// ---------- 안내 페이지 (Get Started, Foundations): 사이트 .md 블록을 그대로 그린다 (2026-11-05)
+if (DATA.mode === 'page') {
+  const fontsOf0 = async (t) => { for (const s of t.getStyledTextSegments(['fontName'])) await figma.loadFontAsync(s.fontName); };
+  const setT = async (t, v) => { if (t && v && t.characters !== v) { await fontsOf0(t); t.characters = v; } };
+  const setL = async (t, url) => { if (t && url) { await fontsOf0(t); t.hyperlink = { type: 'URL', value: url }; } };
+  const ptp = frame.findOne((n) => n.type === 'FRAME' && n.name === 'Page Title');
+  await setT(frame.findOne((n) => n.type === 'TEXT' && n.name === 'Category'), DATA.category);
+  if (ptp) { await setT(ptp.findChild((n) => n.name === 'Title'), DATA.title); await setT(ptp.findChild((n) => n.name === 'Description'), DATA.lead); await setL(ptp.findOne((n) => n.type === 'TEXT' && n.name === 'Documentation'), DATA.links.docs); await setL(ptp.findOne((n) => n.type === 'TEXT' && n.name === 'Code'), DATA.links.code); }
+  const BP = frame.findChild((n) => n.type === 'FRAME' && n.name === 'Body');
+  for (const n of [...BP.children]) n.remove();
+  const out = [];
+  const putP = (node) => { BP.appendChild(node); node.layoutSizingHorizontal = 'FILL'; out.push(node.id); };
+  const CARD_T = st('Static/t07/2 Medium');
+  await figma.loadFontAsync(CARD_T.fontName);
+  let sec = null, grp = null;
+  const target = () => grp || sec;
+  for (const b of DATA.blocks) {
+    if (b.t === 'h2') { if (sec) putP(sec); sec = section(b.text); grp = null; continue; }
+    if (!sec) sec = section('');
+    if (b.t === 'h3') { grp = box('VERTICAL', 'Group - ' + b.text, { gap: 12, pad: [16, 0, 16, 0] }); add(sec, grp, true); add(grp, text(b.text, T.sub, 'fg/neutral', 'Sub Header'), true); continue; }
+    if (b.t === 'p') { add(target(), text(b.text, T.lead, 'fg/neutral-muted', 'Paragraph'), true); continue; }
+    if (b.t === 'label') { add(target(), text(b.text, T.title, 'fg/neutral', 'Label'), true); continue; }
+    if (b.t === 'code') { add(target(), codeBox(b.code, b.lang === 'text' ? '요청 글' : b.lang), true); continue; }
+    if (b.t === 'table') { add(target(), table(b.head, b.rows.map((r) => r.map((c) => (c.mono ? codeCell(c.text) : c.text))), [280]), true); continue; }
+    if (b.t === 'cards') {
+      const row = box('HORIZONTAL', 'Cards', { gap: 16 }); add(target(), row, true);
+      for (const it of b.items) {
+        const card = box('VERTICAL', 'Card - ' + it.title, { fill: 'bg/neutral', radius: 'shape/xl', pad: 28, gap: 8 });
+        row.appendChild(card); card.layoutSizingHorizontal = 'FILL'; card.layoutSizingVertical = 'FILL';
+        add(card, text(it.title, CARD_T, 'fg/neutral', 'Title'), true); add(card, text(it.desc, T.body, 'fg/neutral-muted', 'Description'), true);
+      }
+      continue;
+    }
+  }
+  if (sec) putP(sec);
+  // Figma 파일에만 있는 안내
+  if (DATA.figmaPages) { const s = section('Pages in This File', '이 파일의 페이지는 문서 사이트의 메뉴와 같은 순서와 이름입니다.'); add(s, table(['페이지', '내용'], DATA.figmaPages, [280]), true); putP(s); }
+  return { frame: frame.id, createdNodeIds: out, height: Math.round(frame.height), body: BP.children.map((n) => n.name) };
 }
 
 // ---------- 머리말

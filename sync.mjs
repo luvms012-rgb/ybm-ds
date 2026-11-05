@@ -247,10 +247,46 @@ ${fs.readFileSync(path.join(DS, 'tokens', 'figma-docs.template.js'), 'utf8')}`, 
 
 // 컴포넌트 문서 프레임 한 개를 사이트 페이지와 같은 구성으로 다시 그리는 스크립트 (2026-11-05, Action Button 기준)
 // 자료: tokens/.figma-docs.json (node site/build.mjs). 클래스 → Figma 컴포넌트 세트는 components.json 의 classes, figma 로 잇는다
+// 안내 페이지(Get Started, Foundations): 사이트 .md 를 블록으로 나눠 넘긴다 (2026-11-05)
+//   h2 → 섹션, h3 → 소제목 묶음, 문단, 굵은 한 줄(라벨), 코드(text 는 "요청 글"), 표, "- [제목](주소): 설명" 줄 → 카드
+const PAGE_DOCS = { 'get-started': { md: 'site/index.md', frame: '2608:2', category: 'Get Started', docs: 'https://luvms012-rgb.github.io/yds/site/index.html', code: 'https://github.com/luvms012-rgb/yds' } };
+function mdBlocks(md) {
+  const inl = (s) => s.replace(/\[([^\]]+)\]\([^)]+\)/g, '$1').replace(/\*\*([^*]+)\*\*/g, '$1').replace(/`([^`]+)`/g, '$1').trim();
+  const lines = md.replace(/^<!--[^\n]*-->\n/, '').split('\n');
+  const out = []; let title = '', lead = '';
+  for (let i = 0; i < lines.length; i++) {
+    const l = lines[i];
+    if (!l.trim()) continue;
+    if (/^# /.test(l)) { title = l.slice(2).trim(); continue; }
+    if (/^```/.test(l)) { const lang = l.slice(3).trim() || 'text'; const buf = []; for (i++; i < lines.length && !/^```/.test(lines[i]); i++) buf.push(lines[i]); out.push({ t: 'code', lang, code: buf.join('\n') }); continue; }
+    if (/^## /.test(l)) { out.push({ t: 'h2', text: inl(l.slice(3)) }); continue; }
+    if (/^### /.test(l)) { out.push({ t: 'h3', text: inl(l.slice(4)) }); continue; }
+    if (/^\|/.test(l)) { const rows = []; for (; i < lines.length && /^\|/.test(lines[i]); i++) if (!/^\|\s*-/.test(lines[i])) rows.push(lines[i].replace(/^\||\|$/g, '').split(' | ').map((c) => ({ text: inl(c), mono: /^\s*`[^`]+`\s*$/.test(c) }))); i--; out.push({ t: 'table', head: rows[0].map((c) => c.text), rows: rows.slice(1) }); continue; }
+    const card = l.match(/^- \[([^\]]+)\]\([^)]+\):\s*(.+)$/);
+    if (card) { const last = out[out.length - 1]; const item = { title: card[1], desc: inl(card[2]) }; if (last && last.t === 'cards') last.items.push(item); else out.push({ t: 'cards', items: [item] }); continue; }
+    if (/^\*\*[^*]+\*\*$/.test(l.trim())) { out.push({ t: 'label', text: inl(l) }); continue; }
+    if (!lead && !out.length && title) { lead = inl(l); continue; }
+    out.push({ t: 'p', text: inl(l) });
+  }
+  return { title, lead, blocks: out };
+}
 function docpageScript(slug) {
   const f = path.join(DS, 'tokens', '.figma-docs.json');
   if (!fs.existsSync(f)) die('tokens/.figma-docs.json 이 없어요. 먼저 node site/build.mjs');
   const d = JSON.parse(fs.readFileSync(f, 'utf8'));
+  if (PAGE_DOCS[slug]) {
+    const pg = PAGE_DOCS[slug];
+    const reg0 = JSON.parse(read('components.json'));
+    const { title, lead, blocks } = mdBlocks(read(pg.md));
+    // Figma 파일에만 있는 안내: 이 파일의 페이지 (사이트 메뉴와 같은 순서)
+    const figmaPages = [['Get Started', 'yds 소개와 시작하는 방법'], ['Foundations', '색, 글자, 간격, 모서리, 그림자, 움직임, 기준점'], ['Iconography', 'Lucide 아이콘 라이브러리와 쓰는 법'], ['Action ~ Table & List', `컴포넌트 ${d.components.length}종. 사이트 Components 와 같은 분류 페이지`]];
+    const DATA = { mode: 'page', frame: pg.frame, category: pg.category, title, lead, blocks, figmaPages, sets: {}, defaults: {}, links: { docs: pg.docs, code: pg.code } };
+    const file = path.join(DS, 'tokens', '.figma-docpage.js');
+    fs.writeFileSync(file, `// 자동 생성 - node sync.mjs docpage ${slug} (${today()}) · fileKey ${reg0.figmaFile} · 문서 프레임 ${pg.frame}
+const DATA = ${JSON.stringify(DATA)};
+${fs.readFileSync(path.join(DS, 'tokens', 'figma-docpage.template.js'), 'utf8')}`, 'utf8');
+    return file;
+  }
   const comp = d.components.find((x) => x.slug === slug || x.no === slug);
   if (!comp) die(`컴포넌트가 없어요: ${slug}`);
   if (!comp.doc) die(`${comp.name} 에 Figma 문서 프레임(doc)이 없어요 (components.json)`);
