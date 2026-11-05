@@ -9,9 +9,9 @@
 <script>try { var t = localStorage.getItem("ybm-site-theme"); if (t === "dark" || (!t && matchMedia("(prefers-color-scheme: dark)").matches)) document.documentElement.dataset.theme = "dark"; } catch (e) {}</script>
 <link rel="icon" href="assets/logo-ybmnet.svg" type="image/svg+xml">
 <link rel="stylesheet" href="../dist/ybm-ds.css">
-<link rel="stylesheet" href="assets/site.css?v=a6aea419">
+<link rel="stylesheet" href="assets/site.css?v=418deab2">
 <script src="../dist/ybm-ds.js" defer></script>
-<script src="assets/site.js?v=a6aea419" defer></script>
+<script src="assets/site.js?v=418deab2" defer></script>
 </head>
 <body class="site">
 <a class="site-skip" href="#main">본문 바로가기</a>
@@ -56,35 +56,40 @@
 
 <h2 id="ai">AI로 시작하기<a class="site-anchor" href="#ai" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
 <p>아래 글을 AI 코딩 도구(ChatGPT, Claude, Cursor 등)에 붙여 넣으면 됩니다.</p>
-<h3>설치하기</h3>
+<h3>yds 넣기</h3>
+<p>지금 만드는 프로젝트에 yds를 넣습니다.</p>
 <figure class="ds-codeblock" data-lang="text" data-wrap>
-  <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">text</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
-  <pre class="ds-codeblock__code"><code>이 프로젝트에 yds를 설치해 줘.
+  <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">요청 글</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
+  <pre class="ds-codeblock__code"><code>이 프로젝트에 yds를 넣어 줘.
 문서: https://luvms012-rgb.github.io/yds/site/llms.txt
 문서의 '지킬 것'을 먼저 읽고 그대로 따라 줘.</code></pre>
 </figure>
 <h3>브랜드 컬러 입히기</h3>
 <p>서비스에 쓸 때 이어서 붙여 넣습니다. 대괄호 안에 브랜드 컬러를 넣습니다.</p>
 <figure class="ds-codeblock" data-lang="text" data-wrap>
-  <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">text</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
-  <pre class="ds-codeblock__code"><code>이 서비스의 브랜드 컬러를 [#12a150]으로 맞춰 줘.
+  <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">요청 글</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
+  <pre class="ds-codeblock__code"><code>이 서비스에 브랜드 컬러를 입혀 줘.
+브랜드 컬러: [#12a150]
 문서: https://luvms012-rgb.github.io/yds/site/llms.txt
-이 색을 600 단계로 두고 나머지 단계와 다크 모드 값을 만들어 서비스 CSS에 넣어 줘. 바뀐 화면도 보여 줘.</code></pre>
+이 색을 600 단계로 두고 나머지 단계와 다크 모드 값을 만들어 서비스 CSS에 넣어 줘.</code></pre>
 </figure>
 <h3>화면 만들기</h3>
-<p>대괄호 안만 내 상황에 맞게 바꿉니다.</p>
+<p>대괄호 안에 만들 화면을 적습니다.</p>
 <figure class="ds-codeblock" data-lang="text" data-wrap>
-  <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">text</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
-  <pre class="ds-codeblock__code"><code>yds로 [만들 화면, 예: 회원 목록 화면]을 만들어 줘.
+  <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">요청 글</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
+  <pre class="ds-codeblock__code"><code>yds로 화면을 만들어 줘.
+만들 화면: [회원 목록]
 문서: https://luvms012-rgb.github.io/yds/site/llms.txt
-비슷한 화면이 Templates에 있으면 그 화면에서 시작해 줘.</code></pre>
+비슷한 화면이 Templates에 있으면 그 템플릿 HTML을 바탕으로 만들어 줘.</code></pre>
 </figure>
 <h3>규칙 점검하기</h3>
+<p>이미 만든 화면을 점검합니다. 대괄호 안에 파일이나 폴더를 적습니다.</p>
 <figure class="ds-codeblock" data-lang="text" data-wrap>
-  <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">text</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
-  <pre class="ds-codeblock__code"><code>이 화면이 yds 규칙을 지키는지 점검하고 고쳐 줘.
+  <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">요청 글</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
+  <pre class="ds-codeblock__code"><code>yds 규칙을 지키는지 점검하고 고쳐 줘.
+점검할 곳: [파일이나 폴더]
 문서: https://luvms012-rgb.github.io/yds/site/llms.txt
-검사 스크립트로 먼저 검사하고, 고친 곳은 목록으로 알려 줘.</code></pre>
+검사 스크립트를 먼저 돌리고, 고친 곳은 목록으로 알려 줘.</code></pre>
 </figure>
 
 <h2 id="start">직접 시작하기<a class="site-anchor" href="#start" aria-label="이 제목 링크"><i class="ds-icon ds-icon--link ds-icon--sm" aria-hidden="true"></i></a></h2>
@@ -105,15 +110,15 @@
 <h3>1. 사이트 살펴보기</h3>
 <p>아직 고치지 않고, 무엇을 어떤 순서로 바꿀지 먼저 정합니다.</p>
 <figure class="ds-codeblock" data-lang="text" data-wrap>
-  <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">text</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
-  <pre class="ds-codeblock__code"><code>이 사이트에 yds를 옮겨 오려고 해. 아직 고치지 말고 먼저 살펴봐 줘.
+  <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">요청 글</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
+  <pre class="ds-codeblock__code"><code>이 사이트에 yds를 적용하려고 해. 아직 고치지 말고 먼저 살펴봐 줘.
 문서: https://luvms012-rgb.github.io/yds/site/llms.txt
-공통 &lt;head&gt; 파일, CSS 파일, 자주 쓰는 색과 부품을 정리하고 바꿀 순서를 제안해 줘.</code></pre>
+공통 &lt;head&gt;가 있는 파일, CSS 파일, 자주 쓰는 색과 부품을 정리하고 바꿀 순서를 제안해 줘.</code></pre>
 </figure>
-<h3>2. DS 넣기</h3>
-<p>공통 &lt;head&gt;에 넣습니다. 기존 CSS가 DS보다 먼저 적용되어 지금 화면은 거의 그대로입니다.</p>
+<h3>2. yds 넣기</h3>
+<p>공통 &lt;head&gt;에 넣습니다. 기존 CSS가 yds보다 우선해서 지금 화면은 거의 그대로입니다.</p>
 <figure class="ds-codeblock" data-lang="text" data-wrap>
-  <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">text</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
+  <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">요청 글</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
   <pre class="ds-codeblock__code"><code>이 사이트의 공통 &lt;head&gt;에 yds를 넣어 줘.
 문서: https://luvms012-rgb.github.io/yds/site/llms.txt
 넣은 뒤 지금 화면에서 달라진 곳이 있으면 알려 줘.</code></pre>
@@ -121,8 +126,9 @@
 <h3>3. 화면 하나씩 바꾸기</h3>
 <p>화면마다 대괄호 안만 바꿔 붙여 넣습니다.</p>
 <figure class="ds-codeblock" data-lang="text" data-wrap>
-  <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">text</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
-  <pre class="ds-codeblock__code"><code>[바꿀 화면, 예: 회원 정보 수정] 화면을 yds 컴포넌트로 바꿔 줘.
+  <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">요청 글</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
+  <pre class="ds-codeblock__code"><code>이 화면을 yds 컴포넌트로 바꿔 줘.
+바꿀 화면: [회원 정보 수정]
 문서: https://luvms012-rgb.github.io/yds/site/llms.txt
 서버 코드와 스크립트가 쓰는 class, id, name은 그대로 두고, 바꾸기 전후 화면을 비교해서 보여 줘.</code></pre>
 </figure>
@@ -133,7 +139,7 @@
   <figcaption class="ds-codeblock__header"><div class="ds-chiptabs site-codetabs__bar" role="tablist" aria-label="보기 방식"><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-tab="0">AI 요청</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-tab="1">HTML</button></div><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
   <pre class="ds-codeblock__code"><code>이 사이트에 yds 다크 모드를 넣어 줘.
 문서: https://luvms012-rgb.github.io/yds/site/llms.txt
-화면 오른쪽 위에 라이트, 다크 전환 버튼을 만들고, 처음에는 기기 설정을 따르게 해 줘.</code></pre>
+라이트, 다크 전환 버튼을 만들고, 처음에는 기기 설정을 따르게 해 줘.</code></pre>
 </figure></div><div class="site-codetabs__panel" hidden><figure class="ds-codeblock" data-lang="html">
   <figcaption class="ds-codeblock__header"><div class="ds-chiptabs site-codetabs__bar" role="tablist" aria-label="보기 방식"><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="false" data-site-tab="0">AI 요청</button><button type="button" class="ds-chiptabs__trigger" role="tab" aria-selected="true" data-site-tab="1">HTML</button></div><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
   <pre class="ds-codeblock__code"><code><span class="hl-m">&lt;!-- 다크 모드 --&gt;</span>

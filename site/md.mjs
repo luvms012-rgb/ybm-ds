@@ -93,7 +93,8 @@ function block(n, ctx, out) {
           ctx.lang = /^(html|css|js|javascript|json|shell)$/i.test(label) ? label.toLowerCase() : (attr(n, 'data-lang') || 'text');
         } else {
           const lang = cap && find(cap, (x) => /ds-codeblock__language/.test(attr(x, 'class')));
-          ctx.lang = lang ? textOf(lang).trim().split(/\s/)[0] : '';
+          // 언어는 data-lang 을 먼저 쓴다(상자 머리 글자는 화면용이라 "요청 글"처럼 한글일 수 있다)
+          ctx.lang = attr(n, 'data-lang') || (lang ? textOf(lang).trim().split(/\s/)[0] : '');
         }
       }
       break;
@@ -104,6 +105,13 @@ function block(n, ctx, out) {
     const find = (x) => (/site-tile__name/.test(attr(x, 'class')) ? x : (x.kids || []).reduce((r, k) => r || (k.tag ? find(k) : null), null));
     const nm = find(n); const t = nm ? textOf(nm).replace(/\s+/g, ' ').trim() : '';
     if (t) out.push(`- [${t}](${ctx.abs(attr(n, 'href'))})`);
+    return;
+  }
+  // 안내 카드(site-hub): 제목 링크와 설명을 한 줄로 (2026-11-05, 전에는 제목과 설명이 붙어 나왔다)
+  if (n.tag === 'a' && /\bsite-hub\b/.test(cls)) {
+    const find = (x, c) => (new RegExp(c).test(attr(x, 'class')) ? x : (x.kids || []).reduce((r, k) => r || (k.tag ? find(k, c) : null), null));
+    const t = find(n, 'site-hub__title'), d = find(n, 'site-hub__desc');
+    out.push(`- [${t ? textOf(t).replace(/\s+/g, ' ').trim() : ''}](${ctx.abs(attr(n, 'href'))})${d ? ': ' + textOf(d).replace(/\s+/g, ' ').trim() : ''}`);
     return;
   }
   if (n.tag === 'span' || n.tag === 'a' || n.tag === 'b' || n.tag === 'code') return para();

@@ -164,7 +164,7 @@ const templates = fs.existsSync(path.join(SITE, 'src/templates.json')) ? JSON.pa
 /* ---------------------------------------------------------------- 공통 조각 */
 function codeblock(code, lang = 'html', extra = '') {
   return `<figure class="ds-codeblock" data-lang="${esc(lang)}"${extra}>
-  <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">${esc(lang)}</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
+  <figcaption class="ds-codeblock__header"><span class="ds-codeblock__language">${esc(lang === 'text' ? '요청 글' : lang)}</span><button type="button" class="ds-codeblock__copy" data-ds-copy aria-label="코드 복사"><i class="ds-icon ds-icon--copy ds-icon--sm" aria-hidden="true"></i></button></figcaption>
   <pre class="ds-codeblock__code"><code>${highlight(code, lang)}</code></pre>
 </figure>`;
 }
@@ -332,35 +332,39 @@ const CSS_LINK = `<link rel="stylesheet" href="${PUBLIC}/dist/ybm-ds.css">
 // 지킬 규칙은 llms.txt 머리(LLMS_RULES)에 두고 요청 글에는 쓰지 않는다
 const DOC_LINE = `문서: ${SITE_URL}llms.txt`;
 const prompts = [
-  ['설치하기', '지금 만드는 프로젝트에 DS를 넣습니다.',
-    `이 프로젝트에 yds를 설치해 줘.
+  ['yds 넣기', '지금 만드는 프로젝트에 yds를 넣습니다.',
+    `이 프로젝트에 yds를 넣어 줘.
 ${DOC_LINE}
 문서의 '지킬 것'을 먼저 읽고 그대로 따라 줘.`],
-  ['화면 만들기', '만들고 싶은 화면을 말로 설명합니다.',
-    `yds로 [만들 화면, 예: 회원 목록 화면]을 만들어 줘.
+  ['화면 만들기', '대괄호 안에 만들 화면을 적습니다.',
+    `yds로 화면을 만들어 줘.
+만들 화면: [회원 목록]
 ${DOC_LINE}
-비슷한 화면이 Templates에 있으면 그 화면에서 시작해 줘.`],
-  ['규칙 점검하기', '이미 만든 화면을 점검합니다.',
-    `이 화면이 yds 규칙을 지키는지 점검하고 고쳐 줘.
+비슷한 화면이 Templates에 있으면 그 템플릿 HTML을 바탕으로 만들어 줘.`],
+  ['규칙 점검하기', '이미 만든 화면을 점검합니다. 대괄호 안에 파일이나 폴더를 적습니다.',
+    `yds 규칙을 지키는지 점검하고 고쳐 줘.
+점검할 곳: [파일이나 폴더]
 ${DOC_LINE}
-검사 스크립트로 먼저 검사하고, 고친 곳은 목록으로 알려 줘.`],
+검사 스크립트를 먼저 돌리고, 고친 곳은 목록으로 알려 줘.`],
   ['브랜드 컬러 입히기', '서비스에 쓸 때 이어서 붙여 넣습니다. 대괄호 안에 브랜드 컬러를 넣습니다.',
-    `이 서비스의 브랜드 컬러를 [#12a150]으로 맞춰 줘.
+    `이 서비스에 브랜드 컬러를 입혀 줘.
+브랜드 컬러: [#12a150]
 ${DOC_LINE}
-이 색을 600 단계로 두고 나머지 단계와 다크 모드 값을 만들어 서비스 CSS에 넣어 줘. 바뀐 화면도 보여 줘.`],
+이 색을 600 단계로 두고 나머지 단계와 다크 모드 값을 만들어 서비스 CSS에 넣어 줘.`],
 ];
 // 운영 중인 사이트에 옮길 때만 쓰는 요청 글 (11-04 사용자 "내 사이트 옮기기는 다음 단계"). 브랜드 컬러와 규칙 점검은 위 prompts를 그대로 쓴다
 const MIGRATE = [
   ['1. 사이트 살펴보기', '아직 고치지 않고, 무엇을 어떤 순서로 바꿀지 먼저 정합니다.',
-    `이 사이트에 yds를 옮겨 오려고 해. 아직 고치지 말고 먼저 살펴봐 줘.
+    `이 사이트에 yds를 적용하려고 해. 아직 고치지 말고 먼저 살펴봐 줘.
 ${DOC_LINE}
-공통 <head> 파일, CSS 파일, 자주 쓰는 색과 부품을 정리하고 바꿀 순서를 제안해 줘.`],
-  ['2. DS 넣기', '공통 <head>에 넣습니다. 기존 CSS가 DS보다 먼저 적용되어 지금 화면은 거의 그대로입니다.',
+공통 <head>가 있는 파일, CSS 파일, 자주 쓰는 색과 부품을 정리하고 바꿀 순서를 제안해 줘.`],
+  ['2. yds 넣기', '공통 <head>에 넣습니다. 기존 CSS가 yds보다 우선해서 지금 화면은 거의 그대로입니다.',
     `이 사이트의 공통 <head>에 yds를 넣어 줘.
 ${DOC_LINE}
 넣은 뒤 지금 화면에서 달라진 곳이 있으면 알려 줘.`],
   ['3. 화면 하나씩 바꾸기', '화면마다 대괄호 안만 바꿔 붙여 넣습니다.',
-    `[바꿀 화면, 예: 회원 정보 수정] 화면을 yds 컴포넌트로 바꿔 줘.
+    `이 화면을 yds 컴포넌트로 바꿔 줘.
+바꿀 화면: [회원 정보 수정]
 ${DOC_LINE}
 서버 코드와 스크립트가 쓰는 class, id, name은 그대로 두고, 바꾸기 전후 화면을 비교해서 보여 줘.`],
 ];
@@ -380,7 +384,7 @@ const LLMS_RULES = `## 지킬 것
 
 ## 운영 중인 사이트에 옮길 때
 
-- 한 번에 다 바꾸지 않는다. 살펴보기, DS 넣기, 브랜드 컬러, 화면 하나씩, 점검 순서로 간다.
+- 한 번에 다 바꾸지 않는다. 살펴보기, yds 넣기, 브랜드 컬러, 화면 하나씩, 점검 순서로 간다.
 - DS는 @layer 안에 있어 기존 CSS가 늘 이긴다. 그래서 DS를 넣기만 해서는 지금 화면이 바뀌지 않는다. 기존 규칙이 DS 부품을 덮으면 그 화면의 기존 규칙만 걷어 낸다.
 - 서버 코드(PHP, JSP 등)의 로직은 바꾸지 않는다. 스크립트와 서버가 쓰는 class, id, name 속성은 그대로 두고, 필요하면 DS 클래스를 함께 붙인다.
 - 기존 CSS의 hex 색은 가까운 --ds-color-* 역할 토큰으로 바꾸고, 바꾼 짝은 목록으로 남긴다.
@@ -409,14 +413,16 @@ write({
 <h2 id="ai">AI로 시작하기</h2>
 <p>아래 글을 AI 코딩 도구(ChatGPT, Claude, Cursor 등)에 붙여 넣으면 됩니다.</p>
 <h3>${prompts[0][0]}</h3>
+<p>${prompts[0][1]}</p>
 ${codeblock(prompts[0][2], 'text', ' data-wrap')}
 <h3>${prompts[3][0]}</h3>
 <p>${prompts[3][1]}</p>
 ${codeblock(prompts[3][2], 'text', ' data-wrap')}
 <h3>${prompts[1][0]}</h3>
-<p>대괄호 안만 내 상황에 맞게 바꿉니다.</p>
+<p>${prompts[1][1]}</p>
 ${codeblock(prompts[1][2], 'text', ' data-wrap')}
 <h3>${prompts[2][0]}</h3>
+<p>${prompts[2][1]}</p>
 ${codeblock(prompts[2][2], 'text', ' data-wrap')}
 
 <h2 id="start">직접 시작하기</h2>
@@ -431,7 +437,7 @@ ${MIGRATE.map(([t, d, p]) => `<h3>${esc(t)}</h3>\n<p>${esc(d)}</p>\n${codeblock(
 <h2 id="theme">다크 모드</h2>
 <p><code>html</code>에 속성 하나를 붙이면 모든 색이 어두운 화면용으로 바뀝니다. 색을 토큰으로만 썼다면 따로 고칠 것이 없습니다.</p>
 ${codeTabs([
-  ['AI 요청', codeblock(`이 사이트에 yds 다크 모드를 넣어 줘.\n${DOC_LINE}\n화면 오른쪽 위에 라이트, 다크 전환 버튼을 만들고, 처음에는 기기 설정을 따르게 해 줘.`, 'text', ' data-wrap')],
+  ['AI 요청', codeblock(`이 사이트에 yds 다크 모드를 넣어 줘.\n${DOC_LINE}\n라이트, 다크 전환 버튼을 만들고, 처음에는 기기 설정을 따르게 해 줘.`, 'text', ' data-wrap')],
   ['HTML', codeblock(`<!-- 다크 모드 -->\n<html lang="ko" data-theme="dark">\n\n<!-- 기기 설정을 따를 때: <head> 맨 위 -->\n<script>\n  if (matchMedia('(prefers-color-scheme: dark)').matches) document.documentElement.dataset.theme = 'dark';\n</script>`)],
 ])}
 
@@ -1134,7 +1140,7 @@ ${LLMS_RULES}
   const compPages = MD_PAGES.filter((p) => p.section === 'components');
   const intro = `# yds
 
-> YBM 서비스를 위한 디자인 시스템입니다. HTML에 .ds-* 클래스를 붙이고 --ds-* 토큰으로 색, 간격, 글자를 맞춥니다. 이 파일은 AI 도구가 읽도록 문서 목록을 모은 것입니다.
+> yds는 디자이너, 개발자, AI가 같은 이름으로 같은 화면을 만들게 돕는 디자인 시스템입니다. HTML에 .ds-* 클래스를 붙이고 --ds-* 토큰으로 색, 간격, 글자를 맞춥니다. 이 파일은 AI 도구가 읽도록 문서 목록을 모은 것입니다.
 
 - 버전: ${VERSION} (버전 고정 주소 ${PIN}/dist/ybm-ds.css)
 - CSS: ${PUBLIC}/dist/ybm-ds.css

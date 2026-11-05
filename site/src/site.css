@@ -164,6 +164,7 @@ body[data-side-open] .site-scrim { opacity: 1; pointer-events: auto; }
 .site-doc > header + h2 { margin-top: var(--ds-space-x12); }
 .site-doc > h2 + * { margin-top: var(--ds-space-x3); }  /* 제목 아래는 h2, h3 모두 12 (11-04 사용자 "사이 여백 일정하게") */
 .site-doc > h3 + * { margin-top: var(--ds-space-x3); }
+.site-doc > h3 + p { margin-top: var(--ds-space-x1); }  /* 항목 제목 바로 아래 설명은 제목에 붙여 4 (11-05 사용자 "이 사이 여백을 좀 줄여줘") */
 .site-doc > p + p { margin-top: var(--ds-space-x2); }  /* 이어지는 문단은 한 덩어리로 8 */
 .site-anchor { display: inline-grid; place-items: center; width: 28px; height: 28px; margin-left: var(--ds-space-x2); border-radius: var(--ds-shape-sm); color: var(--ds-color-fg-neutral-subtle); vertical-align: middle; opacity: 0; transition: opacity var(--ds-duration-fast) var(--ds-easing-standard); }
 .site-doc h2:hover .site-anchor, .site-anchor:focus-visible { opacity: 1; }
