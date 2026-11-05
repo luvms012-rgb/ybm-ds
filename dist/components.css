@@ -1123,7 +1123,7 @@ button.ds-input__prefix:hover { color: var(--ds-color-fg-neutral); }
   justify-content: center;
   flex: 1 1 0;
   min-height: var(--ds-tabs-height);
-  padding: var(--ds-space-x2_5);
+  padding: 0 var(--ds-space-x2_5);  /* 2026-11-05: 위아래 여백 대신 높이로 가운데 (여백 10 + 줄 21 이 41 이 되어 40 을 넘었다) */
   color: var(--ds-color-fg-neutral-subtle);  /* 2026-11-03: placeholder 색은 흰 바탕에서 대비 2.1 이라 한 단계 진하게 */
   font-size: var(--ds-font-size-t04);
   line-height: var(--ds-line-height-t04);
@@ -1276,7 +1276,7 @@ button.ds-input__prefix:hover { color: var(--ds-color-fg-neutral); }
   flex: none;
   gap: var(--ds-space-x0_5);
   min-height: var(--ds-space-x5);
-  padding: var(--ds-space-x0_5) var(--ds-space-x1_5);
+  padding: 0 var(--ds-space-x1_5);  /* 2026-11-05: 위아래 여백 대신 높이로 가운데 (여백 2 + 줄 17 이 21 이 되어 20 을 넘었다) */
   border-radius: var(--ds-shape-2xs);
   background: var(--ds-badge-bg);
   box-shadow: inset 0 0 0 1px var(--ds-badge-line);
@@ -1289,7 +1289,7 @@ button.ds-input__prefix:hover { color: var(--ds-color-fg-neutral); }
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.ds-badge[data-size="large"] { min-height: var(--ds-space-x6); padding: var(--ds-space-x1) var(--ds-space-x2); border-radius: var(--ds-shape-xs); font-size: var(--ds-font-size-t02); line-height: var(--ds-line-height-t02); }
+.ds-badge[data-size="large"] { min-height: var(--ds-space-x6); padding: 0 var(--ds-space-x2); border-radius: var(--ds-shape-xs); font-size: var(--ds-font-size-t02); line-height: var(--ds-line-height-t02); }
 /* slots — prefix · label · action. 기본 최대 너비 없음: 말줄임이 필요하면 사용처에서 max-width 지정 */
 .ds-badge__label { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
 .ds-badge__prefix, .ds-badge__action { flex: none; --ds-icon-size: 12px; color: inherit; }
