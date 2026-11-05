@@ -61,7 +61,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
   <div class="ds-carousel" role="region" aria-roledescription="carousel" aria-label="함께 보면 좋은 상품">
     <div class="ds-carousel__scroller">
       <div class="ds-carousel__item">
-        <a class="ds-card" data-variant="subtle" data-size="small" href="#" style="width: 160px">
+        <a class="ds-card" data-size="small" href="#" style="width: 160px">
           <div class="ds-imageframe" data-radius="md"><img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=320&q=70" alt=""></div>
           <div class="u-col u-gap-0_5">
             <span class="ds-t04">클래식 손목시계</span>
@@ -70,7 +70,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
         </a>
       </div>
       <div class="ds-carousel__item">
-        <a class="ds-card" data-variant="subtle" data-size="small" href="#" style="width: 160px">
+        <a class="ds-card" data-size="small" href="#" style="width: 160px">
           <div class="ds-imageframe" data-radius="md"><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=320&q=70" alt=""></div>
           <div class="u-col u-gap-0_5">
             <span class="ds-t04">무선 헤드폰</span>
@@ -79,7 +79,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
         </a>
       </div>
       <div class="ds-carousel__item">
-        <a class="ds-card" data-variant="subtle" data-size="small" href="#" style="width: 160px">
+        <a class="ds-card" data-size="small" href="#" style="width: 160px">
           <div class="ds-imageframe" data-radius="md"><img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=320&q=70" alt=""></div>
           <div class="u-col u-gap-0_5">
             <span class="ds-t04">즉석 카메라</span>
@@ -88,7 +88,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
         </a>
       </div>
       <div class="ds-carousel__item">
-        <a class="ds-card" data-variant="subtle" data-size="small" href="#" style="width: 160px">
+        <a class="ds-card" data-size="small" href="#" style="width: 160px">
           <div class="ds-imageframe" data-radius="md"><img src="https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=320&q=70" alt=""></div>
           <div class="u-col u-gap-0_5">
             <span class="ds-t04">선글라스</span>
@@ -147,7 +147,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
   <div class="ds-carousel" role="region" aria-roledescription="carousel" aria-label="진행 중인 이벤트">
     <div class="ds-carousel__scroller">
       <div class="ds-carousel__item">
-        <a class="ds-card" data-variant="subtle" data-size="small" href="#" style="width: 260px">
+        <a class="ds-card" data-size="small" href="#" style="width: 260px">
           <div class="ds-imageframe" data-ratio="16:9" data-radius="md"><img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=520&q=70" alt=""></div>
           <header class="ds-card__header">
             <h4 class="ds-card__title">주말 장보기 할인</h4>
@@ -156,7 +156,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
         </a>
       </div>
       <div class="ds-carousel__item">
-        <a class="ds-card" data-variant="subtle" data-size="small" href="#" style="width: 260px">
+        <a class="ds-card" data-size="small" href="#" style="width: 260px">
           <div class="ds-imageframe" data-ratio="16:9" data-radius="md"><img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=520&q=70" alt=""></div>
           <header class="ds-card__header">
             <h4 class="ds-card__title">커피 원두 1+1</h4>
@@ -165,7 +165,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
         </a>
       </div>
       <div class="ds-carousel__item">
-        <a class="ds-card" data-variant="subtle" data-size="small" href="#" style="width: 260px">
+        <a class="ds-card" data-size="small" href="#" style="width: 260px">
           <div class="ds-imageframe" data-ratio="16:9" data-radius="md"><img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=520&q=70" alt=""></div>
           <header class="ds-card__header">
             <h4 class="ds-card__title">겨울 독서 챌린지</h4>

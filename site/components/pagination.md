@@ -19,7 +19,12 @@
   <a class="ds-pagination__item" data-type="next" href="?p=2" aria-label="다음 페이지"></a>
   <a class="ds-pagination__item" data-type="last" href="?p=10" aria-label="마지막 페이지"></a>
 </nav>
-simple: <nav class="ds-pagination" data-type="simple"> prev · <span class="ds-pagination__indicator"><b>3</b> / 10</span> · next
+<!-- simple: 이전, 지금 위치, 다음만 -->
+<nav class="ds-pagination" data-type="simple" aria-label="페이지">
+  <a class="ds-pagination__item" data-type="prev" href="?p=2" aria-label="이전 페이지"></a>
+  <span class="ds-pagination__indicator"><b>3</b> / 10</span>
+  <a class="ds-pagination__item" data-type="next" href="?p=4" aria-label="다음 페이지"></a>
+</nav>
 ```
 
 ## 구조

@@ -96,25 +96,25 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ### 여러 개를 늘어놓을 때는 variant 하나로
 
-나란히 놓는 요약 카드는 subtle 하나로 맞추고 같은 목록 안에서 variant를 섞지 않습니다. 선이 옅어 카드가 많아도 화면이 무거워지지 않습니다.
+나란히 놓는 요약 카드는 variant 하나로 맞추고 같은 목록 안에서 섞지 않습니다. 모양이 같아야 카드가 많아도 한 묶음으로 읽힙니다.
 
 ```html
 <div class="u-flex u-wrap u-gap-3" style="width: 100%; max-width: 624px">
-  <article class="ds-card" data-variant="subtle" data-size="small" style="width: 100%; max-width: 200px">
+  <article class="ds-card" data-size="small" style="width: 100%; max-width: 200px">
     <header class="ds-card__header">
       <h3 class="ds-card__title">이번 달 주문</h3>
       <p class="ds-card__desc">지난달보다 12% 늘었어요</p>
     </header>
     <div class="ds-card__content ds-t09 ds-fw-bold">1,284건</div>
   </article>
-  <article class="ds-card" data-variant="subtle" data-size="small" style="width: 100%; max-width: 200px">
+  <article class="ds-card" data-size="small" style="width: 100%; max-width: 200px">
     <header class="ds-card__header">
       <h3 class="ds-card__title">새 회원</h3>
       <p class="ds-card__desc">지난달보다 4% 늘었어요</p>
     </header>
     <div class="ds-card__content ds-t09 ds-fw-bold">312명</div>
   </article>
-  <article class="ds-card" data-variant="subtle" data-size="small" style="width: 100%; max-width: 200px">
+  <article class="ds-card" data-size="small" style="width: 100%; max-width: 200px">
     <header class="ds-card__header">
       <h3 class="ds-card__title">환불 요청</h3>
       <p class="ds-card__desc">지난달과 같아요</p>
@@ -140,10 +140,10 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 ### 크기와 여백
 
 ```
-variant: outline(기본) / subtle(옅은 선, 화면 안에 여러 개 늘어놓을 때) / elevated   size: medium(기본) / small(모서리 lg)
+variant: outline(기본) / elevated (subtle 은 예전 화면용 이름, 2026-11-04 부터 기본과 같은 모양)   size: medium(기본) / small(모서리 lg)
 Figma: bg/layer-default / shape/xl / padding medium x5 / small x4 / 영역 gap x4 / x3
   header gap x1 / title t06 Bold(small t05 Bold, 2026-11-03 한 단계 올림: Empty 제목과 같은 단계) fg/neutral / desc t04(small t03) fg/neutral-subtle
-  outline 1px stroke/neutral-weak / subtle 1px stroke/neutral-muted / elevated elevation raised / footer 버튼 neutralWeak medium(small) gap x2
+  outline 1px stroke/neutral-weak / elevated elevation raised / footer 버튼 neutralWeak medium(small) gap x2
   모서리 medium shape/xl / small shape/lg (2026-11-03) / 화면 폭에 따라 안쪽 여백을 바꿀 때는 --ds-card-padding / --ds-card-gap
 전체가 눌리는 카드: <a class="ds-card" href> → pressed 시 bg/transparent-pressed 를 덧씌움
 ```

@@ -3,7 +3,7 @@
 집(**Mac**)과 회사(**Windows**) 두 PC 에서 같은 저장소로 작업한다. 이 파일은 저장소에 같이 올라가므로 어느 PC 에서든 Claude 가 먼저 읽는다.
 PC 마다 따로 쌓이는 Claude 메모리는 서로 보이지 않는다 - 두 PC 가 함께 알아야 할 것은 여기에 적는다.
 
-- 최종 갱신: 2026-11-03 (회사 Windows)
+- 최종 갱신: 2026-11-05 (집 Mac)
 
 ## 1. 기준 주소
 
@@ -51,6 +51,7 @@ git clone https://github.com/luvms012-rgb/yds.git
   - **남은 일 2. 템플릿 문구 일반화 (사용자 답 대기)** - 아래 "이어서 할 것" 2번.
   - **남은 일 3. 테마 (숨김)** - 테스트용 테마 10개(dist/themes, site/themes/gen.mjs)는 있고 Themes 페이지만 숨김(`SHOW_THEMES = false`, 11-05 회사). 사용자가 다시 보자고 하면 true 로 바꾸고 빌드만 하면 된다. 상단 메뉴는 다섯 개 그대로 두는 것이 사용자 결정이다.
   - **남은 일 4. 가이드 사이트 publish 도구 (회사 PC)** - 가이드 저장소 `luvms012-rgb/luvms012-rgb.github.io` 는 DS 주소를 yds 로 바꿔 두었다. 회사 PC 의 publish 도구 안 DS 주소도 `luvms012-rgb.github.io/yds/dist/` 인지 확인한다.
+- **끝냄, 배포함 (2026-11-05 집, 밤) 코드 싱크 검수** - 사용자 "각 화면 코드 싱크가 정확한지, 코드와 마크다운까지": 예시 207개 미리보기와 코드, Code 버튼 줄 범위 78개, CSS 변수 표, 속성 표, 사용법 코드와 머리 주석, md 91쪽(코드 블록, 제목), llms-full, 라이브 381 파일을 대조. 고친 것 5가지: ① 저장소 맨 위 `.nojekyll` (GitHub Pages 가 `---` 로 시작하는 site/ai/yds.mdc 의 Cursor 설정 줄을 지우고 있었다) ② Card subtle 설명, 규격 글, 예시 글이 "옅은 선" 이던 것을 지금 CSS(기본과 같음)대로, 예시의 data-variant="subtle" 은 뺌 ③ Iconography 예시 2개 코드를 미리보기와 같게(배지, 색 아이콘 lg) ④ Menu, Chart, Pagination 머리 주석의 설명 글 줄을 HTML 주석 줄로(사용법 코드 상자를 복사해도 글이 화면에 나오지 않게) ⑤ Skeleton 의 쓰이지 않는 data-lines 를 뺌(text 는 늘 3줄). 문제 아님: brandSolid 를 적은 코드(기본값), 스타일 없는 이름표 클래스 5개(ds-checkbox__label 등, 머리 주석 그대로).
 - **끝냄, 배포함 (2026-11-05 회사) 사이트 글자 위계와 박스** - 사용자가 준 레퍼런스 9쪽의 글자 위계, 굵기, 크기, 여백과 박스 쓰임을 재서 사이트 전체에 입힘(사용자 지시로 굵기는 레퍼런스보다 한 단계씩 낮춤: 700 → 600, 600 → 500, 500 → 400). 규칙은 site/CLAUDE.md 맨 위 "레퍼런스 G". 같은 날 컴포넌트 대표 그림의 투명 부품에 흰 바탕. 같은 날 저녁 사용자가 Figma 2662:26 에 위계와 여백을 확정해 사이트 전체를 그 값으로 바꿈(site/CLAUDE.md 맨 위 "Figma 2662:26 기준"), 코드 상자 코드 부분 흰 바탕.
 - **끝냄, 배포함 (2026-11-05 회사) 새 컴포넌트 7종과 Menu 선택지** - 사용자 "1, 2순위 바로 진행, 지금 컴포넌트 형식 그대로": 73 Code Input, 74 Chart(bar/line/donut), 75 Description List, 76 Toolbar, 77 Tree, 78 Wheel Picker(Time Picker 와 같은 휠 규칙, ybm-ds.js 휠 코드를 함께 씀), 79 Search Field. Menu 에 묶음 제목 `__label`, menuitemcheckbox, menuitemradio, 하위 메뉴 `__sub`. README 3.2 의 9곳에 모두 넣음(구조 그림 anatomy-figures.html 포함). **Figma 는 아직 없음**(README 6.1 "Figma 없음(최종 검토 때)"). 같은 날: 아이콘 라이브러리 안내 문장 쉽게, 템플릿 제목의 어색한 한글 22곳(생성기에서 고침), 템플릿 목록은 머리말과 칩 줄 왼쪽 정렬, 칩은 줄바꿈, 썸네일 스크롤바 없음. 템플릿 왼쪽 메뉴는 사용자가 고른 안: 목록 화면은 메뉴 없이 분류 탭, 상세 화면은 탭과 같은 분류 묶음(묶음 안은 가나다 순).
 - **끝냄, 배포함 (2026-11-05 회사) Updates 와 이름 정리** - Updates 는 v1.1.0 만 남기고 v1.0.0 소식을 지움(사용자 지시). 저장소 글의 서비스 이름 ybm-ds, YBM DS 를 yds 로(README, CLAUDE.md, site 메모, ds-sync 스킬, sync.mjs, 동기화.bat, Code Block 예시). 그대로 둔 것: 파일 이름 dist/ybm-ds.css, ybm-ds.js(서비스가 이 주소를 쓴다), 로컬 폴더 이름, 지난 기록 속 예전 이름.

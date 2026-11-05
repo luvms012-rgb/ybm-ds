@@ -118,7 +118,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 안내 한 줄과 버튼만 있는 시트는 `data-header-align="center"`로 제목을 가운데에 둡니다. 위쪽 닫기 버튼은 빼고 아래 버튼으로 닫게 합니다.
 
 ```html
-<article class="ds-card" data-variant="subtle" data-size="small" style="width: 100%; max-width: 375px">
+<article class="ds-card" data-size="small" style="width: 100%; max-width: 375px">
   <header class="ds-card__header">
     <h3 class="ds-card__title">첫 주문 혜택</h3>
     <p class="ds-card__desc">처음 주문하면 3,000원을 할인해 줘요.</p>

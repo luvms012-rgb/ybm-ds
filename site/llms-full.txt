@@ -1038,6 +1038,11 @@ Purple
 <button class="ds-btn" data-variant="ghost" data-size="medium" data-layout="iconOnly" aria-label="닫기">
   <i class="ds-icon ds-icon--x" aria-hidden="true"></i>
 </button>
+
+<!-- 배지 안: 글자와 함께라 aria-hidden -->
+<span class="ds-badge" data-tone="positive">
+  <i class="ds-icon ds-icon--circle-check-solid ds-icon--sm" aria-hidden="true"></i>완료
+</span>
 ```
 
 ## 종류
@@ -1063,8 +1068,8 @@ Purple
 <i class="ds-icon ds-icon--search ds-icon--lg" aria-hidden="true"></i>  <!-- 24 -->
 
 <!-- 색은 부모 글자색 -->
-<span style="color: var(--ds-color-fg-brand)"><i class="ds-icon ds-icon--circle-check-solid" aria-hidden="true"></i></span>
-<span style="color: var(--ds-color-fg-critical)"><i class="ds-icon ds-icon--triangle-alert-solid" aria-hidden="true"></i></span>
+<span style="color: var(--ds-color-fg-brand)"><i class="ds-icon ds-icon--circle-check-solid ds-icon--lg" aria-hidden="true"></i></span>
+<span style="color: var(--ds-color-fg-critical)"><i class="ds-icon ds-icon--triangle-alert-solid ds-icon--lg" aria-hidden="true"></i></span>
 ```
 
 ## 쓰임
@@ -3499,13 +3504,13 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
     <button class="ds-chiptabs__trigger" role="tab" aria-selected="false">취업</button>
   </div>
   <div class="u-flex u-gap-3">
-    <a class="ds-card u-grow" data-variant="subtle" data-size="small" href="#">
+    <a class="ds-card u-grow" data-size="small" href="#">
       <header class="ds-card__header">
         <h4 class="ds-card__title">영어 회화 첫걸음</h4>
         <p class="ds-card__desc">강의 24개, 12시간</p>
       </header>
     </a>
-    <a class="ds-card u-grow" data-variant="subtle" data-size="small" href="#">
+    <a class="ds-card u-grow" data-size="small" href="#">
       <header class="ds-card__header">
         <h4 class="ds-card__title">엑셀 실무 기초</h4>
         <p class="ds-card__desc">강의 18개, 9시간</p>
@@ -4714,10 +4719,14 @@ Figma: bg/neutral-solid / shape/lg / padding 10/12 / 본문 gap x0_5 / 최대 �
   <div class="ds-menu__divider" role="separator"></div>
   <button class="ds-menu-item" role="menuitem" data-tone="critical">삭제하기</button>
 </div>
-묶음 제목: <div class="ds-menu__label" role="presentation">정렬</div> 다음에 그 묶음 항목들
-켜고 끄기: <button class="ds-menu-item" role="menuitemcheckbox" aria-checked="true">사진만 보기</button>
-하나 고르기: <div role="group" aria-label="정렬"><button class="ds-menu-item" role="menuitemradio" aria-checked="true">최신순</button> …</div>
-하위 메뉴: <div class="ds-menu__sub"><button class="ds-menu-item" role="menuitem" aria-haspopup="menu" aria-expanded="false">옮기기</button><div class="ds-menu" role="menu">…</div></div>
+<!-- 묶음 제목: 바로 다음에 그 묶음 항목을 둔다 -->
+<div class="ds-menu__label" role="presentation">정렬</div>
+<!-- 켜고 끄기 -->
+<button class="ds-menu-item" role="menuitemcheckbox" aria-checked="true">사진만 보기</button>
+<!-- 하나 고르기 -->
+<div role="group" aria-label="정렬"><button class="ds-menu-item" role="menuitemradio" aria-checked="true">최신순</button> …</div>
+<!-- 하위 메뉴 -->
+<div class="ds-menu__sub"><button class="ds-menu-item" role="menuitem" aria-haspopup="menu" aria-expanded="false">옮기기</button><div class="ds-menu" role="menu">…</div></div>
 ```
 
 ## 구조
@@ -5264,7 +5273,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 안내 한 줄과 버튼만 있는 시트는 `data-header-align="center"`로 제목을 가운데에 둡니다. 위쪽 닫기 버튼은 빼고 아래 버튼으로 닫게 합니다.
 
 ```html
-<article class="ds-card" data-variant="subtle" data-size="small" style="width: 100%; max-width: 375px">
+<article class="ds-card" data-size="small" style="width: 100%; max-width: 375px">
   <header class="ds-card__header">
     <h3 class="ds-card__title">첫 주문 혜택</h3>
     <p class="ds-card__desc">처음 주문하면 3,000원을 할인해 줘요.</p>
@@ -5488,7 +5497,7 @@ Figma large : trigger py20 / title t06 Medium / desc t04 / chevron 24 / content 
 ```html
 <span class="ds-skeleton" style="width:220px;height:16px"></span>
 <span class="ds-skeleton" data-shape="circle" style="--ds-skeleton-size:48px"></span>
-<span class="ds-skeleton" data-shape="text" data-lines="3"></span>
+<span class="ds-skeleton" data-shape="text"></span>
 ```
 
 ## 속성
@@ -5582,8 +5591,8 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
     <span class="ds-skeleton" style="width: 35%; height: 14px"></span>
   </div>
   <hr class="ds-divider">
-  <span class="ds-skeleton" data-shape="text" data-lines="3"></span>
-  <span class="ds-skeleton" data-shape="text" data-lines="3"></span>
+  <span class="ds-skeleton" data-shape="text"></span>
+  <span class="ds-skeleton" data-shape="text"></span>
 </article>
 ```
 
@@ -5603,7 +5612,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ```
 shape: rectangle(기본) / circle / text
-Figma: palette/gray-200 / rectangle shape/sm / circle pill / text 줄 높이 14 / 줄 사이 x2 / 마지막 줄 64%
+Figma: palette/gray-200 / rectangle shape/sm / circle pill / text 늘 3줄, 줄 높이 14 / 줄 사이 x2 / 마지막 줄 64%
 모서리(2026-11-03): --ds-skeleton-radius 로 나중에 들어올 콘텐츠와 같게 맞춘다
 움직임 줄이기(2026-11-03): 설정을 켠 사람에게는 깜빡이지 않는다
 ```
@@ -6770,25 +6779,25 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ### 여러 개를 늘어놓을 때는 variant 하나로
 
-나란히 놓는 요약 카드는 subtle 하나로 맞추고 같은 목록 안에서 variant를 섞지 않습니다. 선이 옅어 카드가 많아도 화면이 무거워지지 않습니다.
+나란히 놓는 요약 카드는 variant 하나로 맞추고 같은 목록 안에서 섞지 않습니다. 모양이 같아야 카드가 많아도 한 묶음으로 읽힙니다.
 
 ```html
 <div class="u-flex u-wrap u-gap-3" style="width: 100%; max-width: 624px">
-  <article class="ds-card" data-variant="subtle" data-size="small" style="width: 100%; max-width: 200px">
+  <article class="ds-card" data-size="small" style="width: 100%; max-width: 200px">
     <header class="ds-card__header">
       <h3 class="ds-card__title">이번 달 주문</h3>
       <p class="ds-card__desc">지난달보다 12% 늘었어요</p>
     </header>
     <div class="ds-card__content ds-t09 ds-fw-bold">1,284건</div>
   </article>
-  <article class="ds-card" data-variant="subtle" data-size="small" style="width: 100%; max-width: 200px">
+  <article class="ds-card" data-size="small" style="width: 100%; max-width: 200px">
     <header class="ds-card__header">
       <h3 class="ds-card__title">새 회원</h3>
       <p class="ds-card__desc">지난달보다 4% 늘었어요</p>
     </header>
     <div class="ds-card__content ds-t09 ds-fw-bold">312명</div>
   </article>
-  <article class="ds-card" data-variant="subtle" data-size="small" style="width: 100%; max-width: 200px">
+  <article class="ds-card" data-size="small" style="width: 100%; max-width: 200px">
     <header class="ds-card__header">
       <h3 class="ds-card__title">환불 요청</h3>
       <p class="ds-card__desc">지난달과 같아요</p>
@@ -6814,10 +6823,10 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 ### 크기와 여백
 
 ```
-variant: outline(기본) / subtle(옅은 선, 화면 안에 여러 개 늘어놓을 때) / elevated   size: medium(기본) / small(모서리 lg)
+variant: outline(기본) / elevated (subtle 은 예전 화면용 이름, 2026-11-04 부터 기본과 같은 모양)   size: medium(기본) / small(모서리 lg)
 Figma: bg/layer-default / shape/xl / padding medium x5 / small x4 / 영역 gap x4 / x3
   header gap x1 / title t06 Bold(small t05 Bold, 2026-11-03 한 단계 올림: Empty 제목과 같은 단계) fg/neutral / desc t04(small t03) fg/neutral-subtle
-  outline 1px stroke/neutral-weak / subtle 1px stroke/neutral-muted / elevated elevation raised / footer 버튼 neutralWeak medium(small) gap x2
+  outline 1px stroke/neutral-weak / elevated elevation raised / footer 버튼 neutralWeak medium(small) gap x2
   모서리 medium shape/xl / small shape/lg (2026-11-03) / 화면 폭에 따라 안쪽 여백을 바꿀 때는 --ds-card-padding / --ds-card-gap
 전체가 눌리는 카드: <a class="ds-card" href> → pressed 시 bg/transparent-pressed 를 덧씌움
 ```
@@ -6974,7 +6983,12 @@ Figma medium: padding 40/16 / gap x4 / media 56(아이콘 28) / title t06 Bold /
   <a class="ds-pagination__item" data-type="next" href="?p=2" aria-label="다음 페이지"></a>
   <a class="ds-pagination__item" data-type="last" href="?p=10" aria-label="마지막 페이지"></a>
 </nav>
-simple: <nav class="ds-pagination" data-type="simple"> prev · <span class="ds-pagination__indicator"><b>3</b> / 10</span> · next
+<!-- simple: 이전, 지금 위치, 다음만 -->
+<nav class="ds-pagination" data-type="simple" aria-label="페이지">
+  <a class="ds-pagination__item" data-type="prev" href="?p=2" aria-label="이전 페이지"></a>
+  <span class="ds-pagination__indicator"><b>3</b> / 10</span>
+  <a class="ds-pagination__item" data-type="next" href="?p=4" aria-label="다음 페이지"></a>
+</nav>
 ```
 
 ## 구조
@@ -10050,7 +10064,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 할인이 끝날 때까지 남은 시간을 굵고 큰 글자로 보여 줍니다. 놓이는 자리에 맞춰 `ds-t09`, `ds-fw-bold` 같은 글자 클래스로 크기와 색을 바꿉니다.
 
 ```html
-<article class="ds-card" data-variant="subtle" style="width: 100%; max-width: 360px">
+<article class="ds-card" style="width: 100%; max-width: 360px">
   <header class="ds-card__header">
     <h3 class="ds-card__title">오늘만 30% 할인</h3>
     <p class="ds-card__desc">자정이 지나면 원래 가격으로 돌아가요.</p>
@@ -10984,7 +10998,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
   <div class="ds-carousel" role="region" aria-roledescription="carousel" aria-label="함께 보면 좋은 상품">
     <div class="ds-carousel__scroller">
       <div class="ds-carousel__item">
-        <a class="ds-card" data-variant="subtle" data-size="small" href="#" style="width: 160px">
+        <a class="ds-card" data-size="small" href="#" style="width: 160px">
           <div class="ds-imageframe" data-radius="md"><img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=320&q=70" alt=""></div>
           <div class="u-col u-gap-0_5">
             <span class="ds-t04">클래식 손목시계</span>
@@ -10993,7 +11007,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
         </a>
       </div>
       <div class="ds-carousel__item">
-        <a class="ds-card" data-variant="subtle" data-size="small" href="#" style="width: 160px">
+        <a class="ds-card" data-size="small" href="#" style="width: 160px">
           <div class="ds-imageframe" data-radius="md"><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=320&q=70" alt=""></div>
           <div class="u-col u-gap-0_5">
             <span class="ds-t04">무선 헤드폰</span>
@@ -11002,7 +11016,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
         </a>
       </div>
       <div class="ds-carousel__item">
-        <a class="ds-card" data-variant="subtle" data-size="small" href="#" style="width: 160px">
+        <a class="ds-card" data-size="small" href="#" style="width: 160px">
           <div class="ds-imageframe" data-radius="md"><img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=320&q=70" alt=""></div>
           <div class="u-col u-gap-0_5">
             <span class="ds-t04">즉석 카메라</span>
@@ -11011,7 +11025,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
         </a>
       </div>
       <div class="ds-carousel__item">
-        <a class="ds-card" data-variant="subtle" data-size="small" href="#" style="width: 160px">
+        <a class="ds-card" data-size="small" href="#" style="width: 160px">
           <div class="ds-imageframe" data-radius="md"><img src="https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=320&q=70" alt=""></div>
           <div class="u-col u-gap-0_5">
             <span class="ds-t04">선글라스</span>
@@ -11070,7 +11084,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
   <div class="ds-carousel" role="region" aria-roledescription="carousel" aria-label="진행 중인 이벤트">
     <div class="ds-carousel__scroller">
       <div class="ds-carousel__item">
-        <a class="ds-card" data-variant="subtle" data-size="small" href="#" style="width: 260px">
+        <a class="ds-card" data-size="small" href="#" style="width: 260px">
           <div class="ds-imageframe" data-ratio="16:9" data-radius="md"><img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=520&q=70" alt=""></div>
           <header class="ds-card__header">
             <h4 class="ds-card__title">주말 장보기 할인</h4>
@@ -11079,7 +11093,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
         </a>
       </div>
       <div class="ds-carousel__item">
-        <a class="ds-card" data-variant="subtle" data-size="small" href="#" style="width: 260px">
+        <a class="ds-card" data-size="small" href="#" style="width: 260px">
           <div class="ds-imageframe" data-ratio="16:9" data-radius="md"><img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=520&q=70" alt=""></div>
           <header class="ds-card__header">
             <h4 class="ds-card__title">커피 원두 1+1</h4>
@@ -11088,7 +11102,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
         </a>
       </div>
       <div class="ds-carousel__item">
-        <a class="ds-card" data-variant="subtle" data-size="small" href="#" style="width: 260px">
+        <a class="ds-card" data-size="small" href="#" style="width: 260px">
           <div class="ds-imageframe" data-ratio="16:9" data-radius="md"><img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=520&q=70" alt=""></div>
           <header class="ds-card__header">
             <h4 class="ds-card__title">겨울 독서 챌린지</h4>
@@ -11830,10 +11844,13 @@ ybm-ds.js: 한 글자를 넣으면 다음 칸, 지우면 앞 칸, 붙여 넣으�
 ```html
 <figure class="ds-chart" data-type="bar|line|donut">
   [<figcaption class="ds-chart__header"><span class="ds-chart__title">주간 방문</span><span class="ds-chart__desc">지난 7일</span></figcaption>]
-  막대: <div class="ds-chart__plot"><div class="ds-chart__col"><span class="ds-chart__bar" style="--ds-chart-value: 72%" [data-series="2"]></span><span class="ds-chart__label">월</span></div> 칸 수만큼</div>
-  선:   <div class="ds-chart__plot"><svg class="ds-chart__svg" viewBox="0 0 100 40" preserveAspectRatio="none"><polygon class="ds-chart__area" points="…"/><polyline class="ds-chart__line" [data-series="2"] points="0,30 20,22 …"/></svg></div>
-        <div class="ds-chart__axis"><span>월</span> …</div>
-  도넛: <div class="ds-chart__donut" style="--ds-chart-1: 40; --ds-chart-2: 30; --ds-chart-3: 20" role="img" aria-label="…">[<span class="ds-chart__total">…</span>]</div>
+  <!-- 막대: ds-chart__col 을 칸 수만큼 -->
+  <div class="ds-chart__plot"><div class="ds-chart__col"><span class="ds-chart__bar" style="--ds-chart-value: 72%" [data-series="2"]></span><span class="ds-chart__label">월</span></div> …</div>
+  <!-- 선 -->
+  <div class="ds-chart__plot"><svg class="ds-chart__svg" viewBox="0 0 100 40" preserveAspectRatio="none"><polygon class="ds-chart__area" points="…"/><polyline class="ds-chart__line" [data-series="2"] points="0,30 20,22 …"/></svg></div>
+  <div class="ds-chart__axis"><span>월</span> …</div>
+  <!-- 도넛 -->
+  <div class="ds-chart__donut" style="--ds-chart-1: 40; --ds-chart-2: 30; --ds-chart-3: 20" role="img" aria-label="…">[<span class="ds-chart__total">…</span>]</div>
   [<ul class="ds-chart__legend"><li><span class="ds-chart__swatch" [data-series="2"]></span>신규</li></ul>]
 </figure>
 ```
@@ -11845,8 +11862,8 @@ ybm-ds.js: 한 글자를 넣으면 다음 칸, 지우면 앞 칸, 붙여 넣으�
 | **Header** `ds-chart__header` | 제목과 닫기 버튼이 놓이는 머리 영역입니다. |
 | **Title** `ds-chart__title` | 제목입니다. |
 | **Desc** `ds-chart__desc` | 제목에 덧붙이는 설명 글입니다. |
-| **Plot** `ds-chart__plot` | 값을 그리는 영역입니다. 눈금선이 깔립니다. |
 | **Col** `ds-chart__col` | 막대 하나와 그 이름을 묶은 칸입니다. |
+| **Plot** `ds-chart__plot` | 값을 그리는 영역입니다. 눈금선이 깔립니다. |
 | **Bar** `ds-chart__bar` | 값만큼 높아지는 막대입니다. |
 | **Label** `ds-chart__label` | 막대 아래 이름입니다. |
 | **Svg** `ds-chart__svg` | 선을 그리는 그림 영역입니다. |

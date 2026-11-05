@@ -129,13 +129,13 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
     <button class="ds-chiptabs__trigger" role="tab" aria-selected="false">취업</button>
   </div>
   <div class="u-flex u-gap-3">
-    <a class="ds-card u-grow" data-variant="subtle" data-size="small" href="#">
+    <a class="ds-card u-grow" data-size="small" href="#">
       <header class="ds-card__header">
         <h4 class="ds-card__title">영어 회화 첫걸음</h4>
         <p class="ds-card__desc">강의 24개, 12시간</p>
       </header>
     </a>
-    <a class="ds-card u-grow" data-variant="subtle" data-size="small" href="#">
+    <a class="ds-card u-grow" data-size="small" href="#">
       <header class="ds-card__header">
         <h4 class="ds-card__title">엑셀 실무 기초</h4>
         <p class="ds-card__desc">강의 18개, 9시간</p>

@@ -362,7 +362,7 @@ CSS는 Figma 프로퍼티 이름을 그대로 `data-*` 속성으로 쓴다: `<bu
 | 36 | Date Picker, Date Cell | `.ds-datepicker` `.ds-date-cell` | `1324:2310`, 2 / `1322:2183`, 7 | cell state `today/selected/range-start/range-middle/range-end` |
 | 37 | Bottom Navigation | `.ds-bottomnav` | `1348:2383`, 3 / Item `1347:2416`, 12 | 뱃지 `__badge--dot/--count` (bg/critical-solid) |
 | 38 | Side Navigation | `.ds-sidenav` | `1371:2610`, 4 / Item `1370:2392`, 8 | expanded 240 / collapsed 56 |
-| 39 | Card | `.ds-card` | `2164:1063`, 4 | variant `subtle/elevated`(subtle 2026-11-03), size(small 모서리 lg), 제목 18/16 |
+| 39 | Card | `.ds-card` | `2164:1063`, 4 | variant `elevated`(subtle 은 2026-11-04 부터 기본과 같은 모양, 이름만 남김), size(small 모서리 lg), 제목 18/16 |
 | 40 | Empty | `.ds-empty` | `2164:1092`, 2 | size |
 | 41 | Pagination | `.ds-pagination` | `2163:1067`, 2 / Item `2163:1028`, 16 | type `first/prev/next/last/ellipsis/simple` |
 | 42 | Table | `.ds-table` `.ds-table-wrap` | `2164:1271`, 2 / Row `2164:1178`, 8 / Cell `2164:1105`, 6 | density `compact`, align `center/end`, 두 줄 칸 `__stack`, 묶음 행 `tr.__group`, 체크박스 칸 (2026-11-03 개편: 머리줄 바탕 없음, 위 진한 선, 행 56/48) |

@@ -68,7 +68,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 할인이 끝날 때까지 남은 시간을 굵고 큰 글자로 보여 줍니다. 놓이는 자리에 맞춰 `ds-t09`, `ds-fw-bold` 같은 글자 클래스로 크기와 색을 바꿉니다.
 
 ```html
-<article class="ds-card" data-variant="subtle" style="width: 100%; max-width: 360px">
+<article class="ds-card" style="width: 100%; max-width: 360px">
   <header class="ds-card__header">
     <h3 class="ds-card__title">오늘만 30% 할인</h3>
     <p class="ds-card__desc">자정이 지나면 원래 가격으로 돌아가요.</p>

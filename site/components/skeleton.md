@@ -11,7 +11,7 @@
 ```html
 <span class="ds-skeleton" style="width:220px;height:16px"></span>
 <span class="ds-skeleton" data-shape="circle" style="--ds-skeleton-size:48px"></span>
-<span class="ds-skeleton" data-shape="text" data-lines="3"></span>
+<span class="ds-skeleton" data-shape="text"></span>
 ```
 
 ## 속성
@@ -105,8 +105,8 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
     <span class="ds-skeleton" style="width: 35%; height: 14px"></span>
   </div>
   <hr class="ds-divider">
-  <span class="ds-skeleton" data-shape="text" data-lines="3"></span>
-  <span class="ds-skeleton" data-shape="text" data-lines="3"></span>
+  <span class="ds-skeleton" data-shape="text"></span>
+  <span class="ds-skeleton" data-shape="text"></span>
 </article>
 ```
 
@@ -126,7 +126,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 
 ```
 shape: rectangle(기본) / circle / text
-Figma: palette/gray-200 / rectangle shape/sm / circle pill / text 줄 높이 14 / 줄 사이 x2 / 마지막 줄 64%
+Figma: palette/gray-200 / rectangle shape/sm / circle pill / text 늘 3줄, 줄 높이 14 / 줄 사이 x2 / 마지막 줄 64%
 모서리(2026-11-03): --ds-skeleton-radius 로 나중에 들어올 콘텐츠와 같게 맞춘다
 움직임 줄이기(2026-11-03): 설정을 켠 사람에게는 깜빡이지 않는다
 ```

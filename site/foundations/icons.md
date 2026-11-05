@@ -18,6 +18,11 @@
 <button class="ds-btn" data-variant="ghost" data-size="medium" data-layout="iconOnly" aria-label="닫기">
   <i class="ds-icon ds-icon--x" aria-hidden="true"></i>
 </button>
+
+<!-- 배지 안: 글자와 함께라 aria-hidden -->
+<span class="ds-badge" data-tone="positive">
+  <i class="ds-icon ds-icon--circle-check-solid ds-icon--sm" aria-hidden="true"></i>완료
+</span>
 ```
 
 ## 종류
@@ -43,8 +48,8 @@
 <i class="ds-icon ds-icon--search ds-icon--lg" aria-hidden="true"></i>  <!-- 24 -->
 
 <!-- 색은 부모 글자색 -->
-<span style="color: var(--ds-color-fg-brand)"><i class="ds-icon ds-icon--circle-check-solid" aria-hidden="true"></i></span>
-<span style="color: var(--ds-color-fg-critical)"><i class="ds-icon ds-icon--triangle-alert-solid" aria-hidden="true"></i></span>
+<span style="color: var(--ds-color-fg-brand)"><i class="ds-icon ds-icon--circle-check-solid ds-icon--lg" aria-hidden="true"></i></span>
+<span style="color: var(--ds-color-fg-critical)"><i class="ds-icon ds-icon--triangle-alert-solid ds-icon--lg" aria-hidden="true"></i></span>
 ```
 
 ## 쓰임

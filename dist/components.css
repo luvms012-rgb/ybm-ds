@@ -1687,10 +1687,14 @@ a.ds-callout:active, button.ds-callout:active { filter: brightness(0.97); }
        <button class="ds-menu-item" role="menuitem" data-tone="critical">삭제하기</button>
      </div>
    선택지 (2026-11-05 추가)
-     묶음 제목: <div class="ds-menu__label" role="presentation">정렬</div> 다음에 그 묶음 항목들
-     켜고 끄기: <button class="ds-menu-item" role="menuitemcheckbox" aria-checked="true">사진만 보기</button>
-     하나 고르기: <div role="group" aria-label="정렬"><button class="ds-menu-item" role="menuitemradio" aria-checked="true">최신순</button> …</div>
-     하위 메뉴: <div class="ds-menu__sub"><button class="ds-menu-item" role="menuitem" aria-haspopup="menu" aria-expanded="false">옮기기</button><div class="ds-menu" role="menu">…</div></div>
+     <!-- 묶음 제목: 바로 다음에 그 묶음 항목을 둔다 -->
+     <div class="ds-menu__label" role="presentation">정렬</div>
+     <!-- 켜고 끄기 -->
+     <button class="ds-menu-item" role="menuitemcheckbox" aria-checked="true">사진만 보기</button>
+     <!-- 하나 고르기 -->
+     <div role="group" aria-label="정렬"><button class="ds-menu-item" role="menuitemradio" aria-checked="true">최신순</button> …</div>
+     <!-- 하위 메뉴 -->
+     <div class="ds-menu__sub"><button class="ds-menu-item" role="menuitem" aria-haspopup="menu" aria-expanded="false">옮기기</button><div class="ds-menu" role="menu">…</div></div>
      고른 표시는 끝에 check 18 fg/neutral(Select 와 같다), 하위 메뉴 표시는 끝에 chevron-right 16 fg/neutral-subtle
      묶음 제목 t02 Medium fg/neutral-subtle, 위 x2 아래 x1 좌우 x3 / 하위 메뉴는 오른쪽에 붙어 열린다(마우스를 올리거나 누르면)
      ybm-ds.js: checkbox 항목을 누르면 켜고 끄고, radio 항목은 같은 묶음에서 하나만 켠다. 하위 메뉴 버튼을 누르면 열고 닫는다
@@ -2006,8 +2010,8 @@ html:has(:is(.ds-dialog, .ds-bottomsheet)[open]) { overflow: hidden; }
    shape: rectangle(기본) · circle · text
      <span class="ds-skeleton" style="width:220px;height:16px"></span>
      <span class="ds-skeleton" data-shape="circle" style="--ds-skeleton-size:48px"></span>
-     <span class="ds-skeleton" data-shape="text" data-lines="3"></span>
-   Figma: palette/gray-200 · rectangle shape/sm · circle pill · text 줄 높이 14 · 줄 사이 x2 · 마지막 줄 64%
+     <span class="ds-skeleton" data-shape="text"></span>
+   Figma: palette/gray-200 · rectangle shape/sm · circle pill · text 늘 3줄, 줄 높이 14 · 줄 사이 x2 · 마지막 줄 64%
    모서리(2026-11-03): --ds-skeleton-radius 로 나중에 들어올 콘텐츠와 같게 맞춘다
    움직임 줄이기(2026-11-03): 설정을 켠 사람에게는 깜빡이지 않는다
    -------------------------------------------------------------------------- */
@@ -2352,7 +2356,7 @@ html:has(:is(.ds-dialog, .ds-bottomsheet)[open]) { overflow: hidden; }
 
 /* --------------------------------------------------------------------------
    39 Card — 관련 정보를 한 덩어리로 묶는 컨테이너
-   variant: outline(기본) · subtle(옅은 선, 화면 안에 여러 개 늘어놓을 때) · elevated   size: medium(기본) · small(모서리 lg)
+   variant: outline(기본) · elevated (subtle 은 예전 화면용 이름, 2026-11-04 부터 기본과 같은 모양)   size: medium(기본) · small(모서리 lg)
      <article class="ds-card" [data-variant="elevated"] [data-size="small"]>
        <header class="ds-card__header"><h3 class="ds-card__title">카드 제목</h3>[<p class="ds-card__desc">설명</p>]</header>
        <div class="ds-card__content">…</div>
@@ -2360,7 +2364,7 @@ html:has(:is(.ds-dialog, .ds-bottomsheet)[open]) { overflow: hidden; }
      </article>
    Figma: bg/layer-default · shape/xl · padding medium x5 / small x4 · 영역 gap x4 / x3
      header gap x1 · title t06 Bold(small t05 Bold, 2026-11-03 한 단계 올림: Empty 제목과 같은 단계) fg/neutral · desc t04(small t03) fg/neutral-subtle
-     outline 1px stroke/neutral-weak · subtle 1px stroke/neutral-muted · elevated elevation raised · footer 버튼 neutralWeak medium(small) gap x2
+     outline 1px stroke/neutral-weak · elevated elevation raised · footer 버튼 neutralWeak medium(small) gap x2
      모서리 medium shape/xl · small shape/lg (2026-11-03) · 화면 폭에 따라 안쪽 여백을 바꿀 때는 --ds-card-padding / --ds-card-gap
    전체가 눌리는 카드: <a class="ds-card" href> → pressed 시 bg/transparent-pressed 를 덧씌움
    -------------------------------------------------------------------------- */
@@ -2440,7 +2444,12 @@ a.ds-card:active, button.ds-card:active { background: linear-gradient(var(--ds-c
        <a class="ds-pagination__item" data-type="next" href="?p=2" aria-label="다음 페이지"></a>
        <a class="ds-pagination__item" data-type="last" href="?p=10" aria-label="마지막 페이지"></a>
      </nav>
-     simple: <nav class="ds-pagination" data-type="simple"> prev · <span class="ds-pagination__indicator"><b>3</b> / 10</span> · next
+     <!-- simple: 이전, 지금 위치, 다음만 -->
+     <nav class="ds-pagination" data-type="simple" aria-label="페이지">
+       <a class="ds-pagination__item" data-type="prev" href="?p=2" aria-label="이전 페이지"></a>
+       <span class="ds-pagination__indicator"><b>3</b> / 10</span>
+       <a class="ds-pagination__item" data-type="next" href="?p=4" aria-label="다음 페이지"></a>
+     </nav>
    Figma item: 36(높이·최소 폭) · px x2 · shape/sm · 숫자 t04 Medium fg/neutral-muted · 화살표 20 fg/neutral · ellipsis 16 fg/neutral-subtle
      pressed bg/transparent-pressed · current bg/neutral-solid + fg/on-neutral-solid t04 Bold · disabled 화살표 fg/disabled
      full gap x1 · simple gap x3 · indicator 현재 t04 Bold fg/neutral + "/ 전체" t04 fg/neutral-subtle
@@ -4270,10 +4279,13 @@ a.ds-citation[data-type="number"]:hover { background: var(--ds-color-bg-brand-we
    74 Chart - 막대, 선, 도넛으로 수치를 비교하거나 흐름을 보여 주는 그래프 (2026-11-05 추가)
      <figure class="ds-chart" data-type="bar|line|donut">
        [<figcaption class="ds-chart__header"><span class="ds-chart__title">주간 방문</span><span class="ds-chart__desc">지난 7일</span></figcaption>]
-       막대: <div class="ds-chart__plot"><div class="ds-chart__col"><span class="ds-chart__bar" style="--ds-chart-value: 72%" [data-series="2"]></span><span class="ds-chart__label">월</span></div> 칸 수만큼</div>
-       선:   <div class="ds-chart__plot"><svg class="ds-chart__svg" viewBox="0 0 100 40" preserveAspectRatio="none"><polygon class="ds-chart__area" points="…"/><polyline class="ds-chart__line" [data-series="2"] points="0,30 20,22 …"/></svg></div>
-             <div class="ds-chart__axis"><span>월</span> …</div>
-       도넛: <div class="ds-chart__donut" style="--ds-chart-1: 40; --ds-chart-2: 30; --ds-chart-3: 20" role="img" aria-label="…">[<span class="ds-chart__total">…</span>]</div>
+       <!-- 막대: ds-chart__col 을 칸 수만큼 -->
+       <div class="ds-chart__plot"><div class="ds-chart__col"><span class="ds-chart__bar" style="--ds-chart-value: 72%" [data-series="2"]></span><span class="ds-chart__label">월</span></div> …</div>
+       <!-- 선 -->
+       <div class="ds-chart__plot"><svg class="ds-chart__svg" viewBox="0 0 100 40" preserveAspectRatio="none"><polygon class="ds-chart__area" points="…"/><polyline class="ds-chart__line" [data-series="2"] points="0,30 20,22 …"/></svg></div>
+       <div class="ds-chart__axis"><span>월</span> …</div>
+       <!-- 도넛 -->
+       <div class="ds-chart__donut" style="--ds-chart-1: 40; --ds-chart-2: 30; --ds-chart-3: 20" role="img" aria-label="…">[<span class="ds-chart__total">…</span>]</div>
        [<ul class="ds-chart__legend"><li><span class="ds-chart__swatch" [data-series="2"]></span>신규</li></ul>]
      </figure>
    색: chart/series-1~5 (data-series 1~5, 기본 1) / 눈금선 stroke/neutral-muted / 막대 폭 최대 32, 위 모서리 shape/2xs

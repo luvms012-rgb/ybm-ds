@@ -14,10 +14,14 @@
   <div class="ds-menu__divider" role="separator"></div>
   <button class="ds-menu-item" role="menuitem" data-tone="critical">삭제하기</button>
 </div>
-묶음 제목: <div class="ds-menu__label" role="presentation">정렬</div> 다음에 그 묶음 항목들
-켜고 끄기: <button class="ds-menu-item" role="menuitemcheckbox" aria-checked="true">사진만 보기</button>
-하나 고르기: <div role="group" aria-label="정렬"><button class="ds-menu-item" role="menuitemradio" aria-checked="true">최신순</button> …</div>
-하위 메뉴: <div class="ds-menu__sub"><button class="ds-menu-item" role="menuitem" aria-haspopup="menu" aria-expanded="false">옮기기</button><div class="ds-menu" role="menu">…</div></div>
+<!-- 묶음 제목: 바로 다음에 그 묶음 항목을 둔다 -->
+<div class="ds-menu__label" role="presentation">정렬</div>
+<!-- 켜고 끄기 -->
+<button class="ds-menu-item" role="menuitemcheckbox" aria-checked="true">사진만 보기</button>
+<!-- 하나 고르기 -->
+<div role="group" aria-label="정렬"><button class="ds-menu-item" role="menuitemradio" aria-checked="true">최신순</button> …</div>
+<!-- 하위 메뉴 -->
+<div class="ds-menu__sub"><button class="ds-menu-item" role="menuitem" aria-haspopup="menu" aria-expanded="false">옮기기</button><div class="ds-menu" role="menu">…</div></div>
 ```
 
 ## 구조

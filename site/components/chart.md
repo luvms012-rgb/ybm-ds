@@ -11,10 +11,13 @@
 ```html
 <figure class="ds-chart" data-type="bar|line|donut">
   [<figcaption class="ds-chart__header"><span class="ds-chart__title">주간 방문</span><span class="ds-chart__desc">지난 7일</span></figcaption>]
-  막대: <div class="ds-chart__plot"><div class="ds-chart__col"><span class="ds-chart__bar" style="--ds-chart-value: 72%" [data-series="2"]></span><span class="ds-chart__label">월</span></div> 칸 수만큼</div>
-  선:   <div class="ds-chart__plot"><svg class="ds-chart__svg" viewBox="0 0 100 40" preserveAspectRatio="none"><polygon class="ds-chart__area" points="…"/><polyline class="ds-chart__line" [data-series="2"] points="0,30 20,22 …"/></svg></div>
-        <div class="ds-chart__axis"><span>월</span> …</div>
-  도넛: <div class="ds-chart__donut" style="--ds-chart-1: 40; --ds-chart-2: 30; --ds-chart-3: 20" role="img" aria-label="…">[<span class="ds-chart__total">…</span>]</div>
+  <!-- 막대: ds-chart__col 을 칸 수만큼 -->
+  <div class="ds-chart__plot"><div class="ds-chart__col"><span class="ds-chart__bar" style="--ds-chart-value: 72%" [data-series="2"]></span><span class="ds-chart__label">월</span></div> …</div>
+  <!-- 선 -->
+  <div class="ds-chart__plot"><svg class="ds-chart__svg" viewBox="0 0 100 40" preserveAspectRatio="none"><polygon class="ds-chart__area" points="…"/><polyline class="ds-chart__line" [data-series="2"] points="0,30 20,22 …"/></svg></div>
+  <div class="ds-chart__axis"><span>월</span> …</div>
+  <!-- 도넛 -->
+  <div class="ds-chart__donut" style="--ds-chart-1: 40; --ds-chart-2: 30; --ds-chart-3: 20" role="img" aria-label="…">[<span class="ds-chart__total">…</span>]</div>
   [<ul class="ds-chart__legend"><li><span class="ds-chart__swatch" [data-series="2"]></span>신규</li></ul>]
 </figure>
 ```
@@ -26,8 +29,8 @@
 | **Header** `ds-chart__header` | 제목과 닫기 버튼이 놓이는 머리 영역입니다. |
 | **Title** `ds-chart__title` | 제목입니다. |
 | **Desc** `ds-chart__desc` | 제목에 덧붙이는 설명 글입니다. |
-| **Plot** `ds-chart__plot` | 값을 그리는 영역입니다. 눈금선이 깔립니다. |
 | **Col** `ds-chart__col` | 막대 하나와 그 이름을 묶은 칸입니다. |
+| **Plot** `ds-chart__plot` | 값을 그리는 영역입니다. 눈금선이 깔립니다. |
 | **Bar** `ds-chart__bar` | 값만큼 높아지는 막대입니다. |
 | **Label** `ds-chart__label` | 막대 아래 이름입니다. |
 | **Svg** `ds-chart__svg` | 선을 그리는 그림 영역입니다. |
