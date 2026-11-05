@@ -46,7 +46,7 @@ git clone https://github.com/luvms012-rgb/yds.git
 
 - **다음 세션은 여기부터 (2026-11-05 집 정리, 최신 커밋 c02f086 이후)** - 어느 PC 든 "yds CLAUDE.md 읽고 이어서" 로 시작한다.
   - **시작할 때**: `git pull` → 고칠 곳을 고친 뒤 `node site/build.mjs`(템플릿을 고쳤으면 먼저 `node site/templates/gen/run.mjs`, 테마는 `node site/themes/gen.mjs`) → `node sync.mjs check` → `node sync.mjs deploy "메시지"`. 저장소는 `luvms012-rgb/yds`, 사이트 `https://luvms012-rgb.github.io/yds/site/`. 로컬 폴더 이름은 PC 마다 `ybm-ds` 그대로여도 된다.
-  - **오늘(11-05 집) 끝냄, 배포함**: 사이트 h2 바로 아래 요소 위 여백 16(`.site-doc > h2 + *` x4, site.css 두 곳 모두). Typography 크기 표 가로 스크롤 없앰(`.site-sample` 은 칸 폭에 맞춰 띄어쓰기에서 줄바꿈, 견본 표의 토큰과 값 칸은 내용만큼 - PC 와 태블릿은 t17 도 한 줄, 휴대폰만 두 줄).
+  - **오늘(11-05 집) 끝냄, 배포함**: 사이트 h2 바로 아래 요소 위 여백 16(`.site-doc > h2 + *` x4, site.css 두 곳 모두). Typography 크기, 굵기 표 가로 스크롤 없앰. 1024 이상은 토큰과 값 칸을 내용만큼(견본 표만 `table-layout: auto` - DS 표는 fixed 라 폭 1% 만 주면 칸이 0 으로 눌려 글자가 세로로 쌓인다, 11-05 한 번 깨뜨렸다 고침), 1023 이하는 한 줄에 토큰과 값, 아래 줄에 견본으로 쌓는다. 견본은 띄어쓰기에서만 줄바꿈. **표 배치를 고친 뒤에는 숫자 검사만 믿지 말고 375, 768, 1024, 1440 화면을 직접 찍어 본다.**
   - **남은 일 1. Figma 맞춤 (막힘)** - 아래 "진행 중 Figma 맞춤" 그대로. Figma 커넥터가 다른 계정(jincc)이라 편집 권한이 없다. 사용자가 원래 계정으로 다시 연결해야 이어서 할 수 있다. 먼저 `node sync.mjs links` 로 만든 `tokens/.figma-links.js` 를 use_figma 로 실행해 문서 / 코드 링크를 yds 주소로 건다.
   - **남은 일 2. 템플릿 문구 일반화 (사용자 답 대기)** - 아래 "이어서 할 것" 2번.
   - **남은 일 3. 테마 (숨김)** - 테스트용 테마 10개(dist/themes, site/themes/gen.mjs)는 있고 Themes 페이지만 숨김(`SHOW_THEMES = false`, 11-05 회사). 사용자가 다시 보자고 하면 true 로 바꾸고 빌드만 하면 된다. 상단 메뉴는 다섯 개 그대로 두는 것이 사용자 결정이다.

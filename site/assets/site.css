@@ -352,7 +352,19 @@ body[data-side-open] .site-scrim { opacity: 1; pointer-events: auto; }
 .site-icon:hover { background: var(--ds-color-bg-transparent-pressed); }
 .site-icon span { color: var(--ds-color-fg-neutral-subtle); font-family: var(--site-mono); font-size: var(--ds-font-size-t01); text-align: center; word-break: break-all; }
 .site-sample { word-break: keep-all; overflow-wrap: anywhere; }  /* 11-05 사용자 "가로 스크롤 없도록": 큰 글자 견본은 칸 폭에 맞춰 띄어쓰기에서 줄바꿈 (아주 좁으면 글자 사이) */
-.site-doc .ds-table:has(.site-sample) :is(th, td):not(:last-child) { width: 1%; white-space: nowrap; }  /* 견본 표: 토큰과 값 칸은 내용만큼, 남은 폭은 보기 칸 */
+.site-doc .ds-table:has(.site-sample) { table-layout: auto; }  /* 견본 표만 내용에 맞춘 칸 폭 (DS 표는 fixed 라 1% 가 칸을 0 으로 누른다) */
+.site-doc .ds-table:has(.site-sample) :is(th, td):not(:last-child) { width: 1%; white-space: nowrap; }  /* 토큰과 값 칸은 내용만큼, 남은 폭은 보기 칸 */
+.site-doc .ds-table:has(.site-sample) :is(th, td):not(:last-child) code { white-space: nowrap; overflow-wrap: normal; }  /* 표 안 코드 줄바꿈 규칙(199행)보다 우선, 토큰 이름은 한 줄 */
+/* 휴대폰과 태블릿: 견본 표는 한 줄에 토큰과 값, 그 아래 줄에 견본 (견본이 표 폭 전체를 써서 큰 글자도 글자 중간에서 끊기지 않는다) */
+@media (max-width: 1023px) {
+  .site-doc .ds-table:has(.site-sample) thead { display: none; }
+  .site-doc .ds-table:has(.site-sample) tbody tr { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: baseline; column-gap: var(--ds-space-x3); border-bottom: 1px solid var(--ds-table-line); }
+  .site-doc .ds-table:has(.site-sample) tbody tr:last-child { border-bottom: 0; }
+  .site-doc .ds-table:has(.site-sample) tbody td { width: auto; border-bottom: 0; }
+  .site-doc .ds-table:has(.site-sample) tbody td:not(:last-child) { padding-bottom: 0; }
+  .site-doc .ds-table:has(.site-sample) tbody td:nth-child(2) { padding-inline-start: 0; }
+  .site-doc .ds-table:has(.site-sample) tbody td:last-child { grid-column: 1 / -1; padding-top: var(--ds-space-x2); }
+}
 /* Lucide 전체 목록: 찾기 칸 + 개수, 아이콘은 site.js 가 그린다 */
 .site-doc > .site-icon-search { position: sticky; top: var(--site-top); z-index: 2; display: flex; flex-wrap: wrap; align-items: center; gap: var(--ds-space-x3); margin-top: var(--ds-space-x6); padding-block: var(--ds-space-x3); background: var(--ds-color-bg-layer-default); }
 .site-icon-search .ds-input { flex: 1 1 280px; max-width: 480px; }
