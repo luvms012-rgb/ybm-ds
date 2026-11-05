@@ -168,7 +168,7 @@ body[data-side-open] .site-scrim { opacity: 1; pointer-events: auto; }
 .site-doc h2:not(.pv-stage *, .site-tile__inner *, .site-example__preview *, .site-tpl *) { position: relative; margin-top: var(--ds-space-x12); font-size: var(--ds-font-size-t09); line-height: 32px; font-weight: var(--ds-font-weight-medium); letter-spacing: 0; }  /* 24/32 SemiBold (11-04 사용자), 위 48 */
 .site-doc h3:not(.pv-stage *, .site-tile__inner *, .site-example__preview *, .site-tpl *) { margin-top: var(--ds-space-x8); font-size: var(--ds-font-size-t07); line-height: 32px; font-weight: var(--ds-font-weight-regular); letter-spacing: 0; }  /* 20/32 Medium, 위 32 */
 .site-doc > header + h2 { margin-top: var(--ds-space-x12); }
-.site-doc > h2 + * { margin-top: var(--ds-space-x3); }  /* 제목 아래는 h2, h3 모두 12 (11-04 사용자 "사이 여백 일정하게") */
+.site-doc > h2 + * { margin-top: var(--ds-space-x4); }  /* 제목 아래는 h2, h3 모두 12 (11-04 사용자 "사이 여백 일정하게") */
 .site-doc > h3 + * { margin-top: var(--ds-space-x3); }
 .site-doc > h3 + p { margin-top: var(--ds-space-x1); }  /* 항목 제목 바로 아래 설명은 제목에 붙여 4 (11-05 사용자 "이 사이 여백을 좀 줄여줘") */
 .site-doc > p + p { margin-top: var(--ds-space-x2); }  /* 이어지는 문단은 한 덩어리로 8 */
@@ -556,7 +556,7 @@ body[data-side-open] .site-scrim { opacity: 1; pointer-events: auto; }
 .site-doc h2:not(.pv-stage *, .site-tile__inner *, .site-example__preview *, .site-tpl *) { margin-top: var(--ds-space-x16); font-size: var(--ds-font-size-t09); line-height: var(--ds-line-height-t09); font-weight: var(--ds-font-weight-semibold); letter-spacing: 0; }
 .site-doc h3:not(.pv-stage *, .site-tile__inner *, .site-example__preview *, .site-tpl *) { margin-top: var(--ds-space-x10); font-size: var(--ds-font-size-t06); line-height: var(--ds-line-height-t06); font-weight: var(--ds-font-weight-medium); letter-spacing: 0; }
 .site-doc > header + h2 { margin-top: var(--ds-space-x16); }
-.site-doc > h2 + * { margin-top: var(--ds-space-x6); }
+.site-doc > h2 + * { margin-top: var(--ds-space-x4); }  /* 11-05 사용자: h2 아래 16 */
 .site-doc > h2 + p { margin-top: var(--ds-space-x2); }
 .site-doc > h2 + p + :not(h2, h3, p) { margin-top: var(--ds-space-x6); }
 .site-doc > h3 + * { margin-top: var(--ds-space-x4); }
