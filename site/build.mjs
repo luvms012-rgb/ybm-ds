@@ -1031,13 +1031,20 @@ fs.rmSync(path.join(SITE, 'get-started/ai.md'), { force: true });
 // 소식은 site/src/updates.json releases 맨 위에 날짜를 더한다
 const RELEASES = readJson('site/src/updates.json').releases;
 const fmtDate = (d) => { const [y, m, dd] = d.split('-').map(Number); return `${y}. ${m}. ${dd}`; };
+// 11-05 사용자 "업데이트 내용을 직관적으로, 쉽게": 버전마다 한 줄 요약, 올리기 전에 확인할 것은 Callout, 나머지는 새로 생긴 것 / 바뀐 것 / 고친 것 순서.
+// 항목은 DS 가 기본이라 표시하지 않고, 사이트만 바뀐 것에만 "사이트" Badge
+const UP_ORDER = ['새로 생긴 것', '바뀐 것', '고친 것'];
+const UP_ICON = { '새로 생긴 것': 'plus', '바뀐 것': 'refresh-cw', '고친 것': 'circle-check' };
+const upItem = (ver) => ([a, t]) => `<li>${ver && a === '사이트' ? '<span class="ds-badge" data-size="medium">사이트</span> ' : ''}${inline(t)}</li>`;
 write({
   file: 'updates.html', section: 'updates', title: 'Updates', desc: 'yds 업데이트 소식', layout: 'page',
-  body: `<header><h1 class="site-h1">Updates</h1><p class="site-lead">yds 업데이트 소식과 변경 기록입니다.</p></header>
-${RELEASES.map((r) => `<section class="site-group site-release">
-<h2 id="${r.version ? 'v' + r.version : 'd-' + r.date}">${r.version ? `<span class="site-release__ver">v${esc(r.version)}</span> ` : ''}<time datetime="${r.date}">${fmtDate(r.date)}</time></h2>
-${r.sections.map((s) => `<div class="site-group site-release__group"><p class="site-release__type">${esc(s.type)}</p><ul class="site-list">${s.items.map(([a, t]) => `<li><span class="ds-badge" data-size="medium">${esc(a)}</span> ${inline(t)}</li>`).join('')}</ul></div>`).join('\n')}
-</section>`).join('\n')}
+  body: `<header><h1 class="site-h1">Updates</h1><p class="site-lead">버전마다 무엇이 바뀌었는지 쉽게 정리했습니다.</p></header>
+${RELEASES.map((r) => { const chk = r.sections.find((s) => s.type === '올리기 전에 확인'); return `<section class="site-group site-release">
+<h2 id="${r.version ? 'v' + r.version : 'd-' + r.date}">${r.version ? `v${esc(r.version)}` : '사이트 소식'}<time datetime="${r.date}">${fmtDate(r.date)}</time></h2>
+${r.summary ? `<p class="site-release__summary">${esc(r.summary)}</p>` : ''}
+${chk ? `<div class="ds-callout site-release__check" data-tone="warning"><i class="ds-icon ds-icon--triangle-alert-solid" aria-hidden="true"></i><p class="ds-callout__content"><strong class="ds-callout__title">올리기 전에 확인</strong>  ${chk.items.map(([, t]) => inline(t)).join(' ')}</p></div>` : ''}
+${UP_ORDER.map((type) => { const s = r.sections.find((x) => x.type === type); return s ? `<div class="site-release__group"><p class="site-release__type"><i class="ds-icon ds-icon--${UP_ICON[type]} ds-icon--sm" aria-hidden="true"></i>${type}</p><ul class="site-list">${s.items.map(upItem(r.version)).join('')}</ul></div>` : ''; }).join('')}
+</section>`; }).join('\n')}
 <p class="site-note">자세한 변경 기록은 <a class="ds-link" href="${GITHUB}/commits/main" target="_blank" rel="noopener">GitHub</a>에 있습니다.</p>`,
 });
 

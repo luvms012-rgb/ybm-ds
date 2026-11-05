@@ -497,12 +497,14 @@ body[data-side-open] .site-scrim { opacity: 1; pointer-events: auto; }
 
 /* ---- Updates (레퍼런스 B): 소식 카드 ---- */
 /* Updates (레퍼런스 A Changelog): 위에 영역 거르기, 날짜 제목 20/28 SemiBold, 종류 이름 13 SemiBold 흐린 글자, 그 아래 목록 */
-.site-doc > .site-release { margin-top: var(--ds-space-x10); }
-.site-doc .site-release h2:not(.pv-stage *) { margin-top: 0; font-size: var(--ds-font-size-t07); line-height: 28px; }
-.site-doc .site-release__ver { margin-right: var(--ds-space-x2); }  /* 버전 번호 다음 날짜 */
-.site-doc .site-release h2 time { color: var(--ds-color-fg-neutral-muted); font-weight: var(--ds-font-weight-regular); }
-.site-release__group { margin-top: var(--ds-space-x4); }
-.site-doc .site-release__type { margin: 0; color: var(--ds-color-fg-neutral-muted); font-size: var(--ds-font-size-t03); line-height: 20px; font-weight: var(--ds-font-weight-semibold); }
+.site-doc > .site-release { margin-top: var(--ds-space-x12); padding-top: var(--ds-space-x8); border-top: 1px solid var(--ds-color-stroke-neutral-muted); }  /* 버전마다 위 구분선 (11-05) */
+.site-doc > header + .site-release { border-top: 0; padding-top: 0; }
+.site-doc .site-release h2:not(.pv-stage *) { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--ds-space-x2) var(--ds-space-x3); margin-top: 0; font-size: var(--ds-font-size-t09); line-height: 32px; }
+.site-doc .site-release h2 time { color: var(--ds-color-fg-neutral-subtle); font-size: var(--ds-font-size-t04); font-weight: var(--ds-font-weight-regular); }
+.site-doc .site-release__summary { margin-top: var(--ds-space-x2); }
+.site-release__check { margin-top: var(--ds-space-x5); }
+.site-release__group { margin-top: var(--ds-space-x6); }
+.site-doc .site-release__type { display: flex; align-items: center; gap: var(--ds-space-x1_5); margin: 0; color: var(--ds-color-fg-neutral); font-size: var(--ds-font-size-t05); line-height: 24px; font-weight: var(--ds-font-weight-semibold); }
 .site-doc .site-release ul.site-list { margin-top: var(--ds-space-x2); }
 .site-release li .ds-badge { margin-right: var(--ds-space-x1); vertical-align: 2px; }
 .site-release[hidden], .site-release__group[hidden] { display: none; }
