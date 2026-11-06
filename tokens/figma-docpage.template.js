@@ -2,6 +2,17 @@
 // node sync.mjs docpage <slug> 가 맨 위에 DATA 를 붙여 tokens/.figma-docpage.js 를 만든다. 같은 이름의 노드를 지우고 다시 만들어서 몇 번 실행해도 결과가 같다.
 // 순서(사이트와 같음): 머리말 → 대표 그림 → 사용법 → 속성(+ 속성별 모양) → 동작 → 사용 지침 → 예시(미리보기 + 코드) → 규격(CSS 변수, 크기와 여백) → Master Components
 // 2026-11-05 Action Button 을 기준으로 만듦. 예시 HTML 은 DS 클래스를 Figma 컴포넌트 인스턴스로, u-* 배치를 자동 배치로 그린다.
+// 사이트 가이드는 brand-mono.css 로 브랜드 색을 무채색으로 보이므로, 문서 프레임(Master Components 밖) 의 brand 변수 칠을 같은 자리 neutral/gray 변수로 바꾼다. 컴포넌트 원본은 건드리지 않는다 (2026-11-06)
+async function MONOIZE(B) {
+const vars = await figma.variables.getLocalVariablesAsync('COLOR'); const byName = {}; const byId = {}; for (const v of vars) { byName[v.name] = v; byId[v.id] = v; }
+const SP = { 'bg/brand-weak': 'bg/neutral-weak-alpha', 'bg/brand-weak-pressed': 'bg/neutral-weak-alpha-pressed', 'fg/brand': 'fg/neutral', 'fg/brand-contrast': 'fg/neutral', 'chart/series-1': 'bg/neutral-solid' };
+const to = (n) => { if (SP[n]) return SP[n]; if (/^palette\/brand-/.test(n)) return n.replace('brand', 'gray'); if (/brand/.test(n)) return n.replace('brand', 'neutral'); return null; };
+let cnt = 0; const miss = new Set();
+const fix = (node) => { for (const p of ['fills', 'strokes']) { const arr = node[p]; if (!Array.isArray(arr) || !arr.some((x) => x.boundVariables && x.boundVariables.color)) continue; let ch = false; const nw = arr.map((x) => { const b = x.boundVariables && x.boundVariables.color; const v = b && byId[b.id]; const t = v && to(v.name); if (!t) return x; if (!byName[t]) { miss.add(t); return x; } ch = true; return figma.variables.setBoundVariableForPaint(x, 'color', byName[t]); }); if (ch) { try { node[p] = nw; cnt++; } catch (e) {} } } };
+const walk = (n) => { if (n.type === 'COMPONENT' || n.type === 'COMPONENT_SET') return; fix(n); if ('children' in n) for (const c of n.children) walk(c); };
+for (const c of B.children) if (!/Master/i.test(c.name)) walk(c);
+return { cnt, miss: [...miss] };
+}
 const C = DATA.comp || {}, P = C.page || {};
 const frame = await figma.getNodeByIdAsync(DATA.frame);
 await figma.setCurrentPageAsync(frame.parent.type === 'PAGE' ? frame.parent : figma.currentPage);
@@ -504,6 +515,7 @@ if (DATA.mode === 'preview') {
       out.ex++;
     }
   }
+  out.mono = await MONOIZE(B);
   return out;
 }
 
@@ -657,5 +669,6 @@ if (P.vars.length || P.spec) {
   if (P.spec) { const h = text('크기와 여백', T.sub, 'fg/neutral', 'Sub Header'); add(s, h, true); add(s, codeBox(P.spec, 'text', 'Spec'), true); }
   put(s);
 }
+res.mono = await MONOIZE(B);
 const mh = B.findChild((n) => n.name === 'Section Header - Master Components');
 return { ...res, bodyChildren: B.children.map((n) => n.name), height: Math.round(frame.height), masterHeader: !!mh };

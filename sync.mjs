@@ -294,6 +294,17 @@ function prepStyled(P, SETS) {
   function spec(el) {
     const s = { set: SETS[setOf(el)], own: (el.c || []).filter((x) => typeof x === 'string').join(' ').replace(/\s+/g, ' ').trim(), parts: {}, kids: [], a: dataAttrs(el) };
     if (el.a && (el.a.disabled !== undefined || el.a['aria-disabled'] === 'true')) s.a.state = 'disabled';
+    // 켜짐 상태: Checkbox, Radio, Switch 는 안쪽 input 의 checked 를 state 로 (2026-11-06 검수)
+    if (['ds-checkbox', 'ds-radio', 'ds-switch'].includes(setOf(el))) {
+      const ctl = (el.c || []).find((x) => isEl(x) && x.tag === 'input');
+      if (ctl && ctl.a) {
+        const off = ctl.a.disabled !== undefined;
+        if (ctl.a.indeterminate !== undefined || ctl.a['data-indeterminate'] !== undefined) s.a.state = 'indeterminate';
+        else if (ctl.a.checked !== undefined) s.a.state = off ? 'disabledChecked' : 'checked';
+        else if (off) s.a.state = 'disabled';
+      }
+    }
+    if (el.a && el.a['aria-pressed'] === 'true' && !s.a.state) { if (setOf(el) === 'ds-toggle') s.a.state = 'on'; if (setOf(el) === 'ds-chip') s.a.state = 'checked'; }
     if (el.a && el.a.placeholder) s.parts.placeholder = el.a.placeholder;
     if (el.a && el.a.value) s.parts.value = el.a.value;
     const push = (key, v) => { if (!v) return; s.parts[key] = s.parts[key] === undefined ? v : [].concat(s.parts[key], v); };
