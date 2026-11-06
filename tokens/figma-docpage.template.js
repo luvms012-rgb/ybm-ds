@@ -312,6 +312,7 @@ async function renderS(el, parent, sh) {
   const J = { center: 'CENTER', 'flex-end': 'MAX', end: 'MAX', right: 'MAX', 'space-between': 'SPACE_BETWEEN' };
   const A = { center: 'CENTER', 'flex-end': 'MAX', end: 'MAX', baseline: H ? 'BASELINE' : 'MIN' };
   if (/^i?[fg]$/.test(s.d)) { f.primaryAxisAlignItems = J[s.jc] || 'MIN'; f.counterAxisAlignItems = A[s.ai] || 'MIN'; }
+  if (/^i?g$/.test(s.d) && !(s.gc > 1) && s.ai === 'center') { f.primaryAxisAlignItems = 'CENTER'; f.counterAxisAlignItems = 'CENTER'; }  // grid + place-items: center (아이콘 동그라미 등)
   const inner = Math.max(s.w - pad[1] - pad[3], 0);
   const first = flow[0] && flow[0].b;
   if (first && !H && f.primaryAxisAlignItems === 'MIN' && first[1] > 1) pad[0] += first[1];

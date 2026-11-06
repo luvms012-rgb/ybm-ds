@@ -317,7 +317,7 @@ function prepStyled(P, SETS) {
       const inv = ca['aria-invalid'] === 'true' || (el.a || {})['aria-invalid'] === 'true';
       if (inv) s.a.state = 'invalid'; else if (ca.disabled !== undefined) s.a.state = 'disabled'; else if (ca.readonly !== undefined || (el.a || {})['aria-readonly'] === 'true') s.a.state = 'readOnly';
       else if (kind === 'ds-select' && (el.a || {})['aria-expanded'] === 'true') s.a.state = 'open';
-      const kids = (el.c || []).filter(isEl); const ci = kids.indexOf(kids.find((x) => x === ctl || hasNode(x, ctl)));
+      const kids = (el.c || []).filter(isEl); const vi = kids.findIndex((x) => (x.cls || []).some((c) => /__value$/.test(c))); const ci = vi >= 0 ? vi : kids.indexOf(kids.find((x) => x === ctl || hasNode(x, ctl)));
       const icons = kids.map((x, i) => [x, i]).filter(([x]) => (x.cls || []).includes('ds-icon'));
       const pre = icons.find(([, i]) => ci < 0 || i < ci), suf = icons.find(([, i]) => ci >= 0 && i > ci);
       const nm = (x) => (x.cls.find((c) => /^ds-icon--/.test(c) && !/^ds-icon--(xs|sm|md|lg|xl)$/.test(c)) || '').slice(9);
