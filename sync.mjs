@@ -289,6 +289,7 @@ function prepStyled(P, SETS) {
   const dataAttrs = (el) => Object.fromEntries(Object.entries(el.a || {}).filter(([k]) => k.startsWith('data-') && !/^data-ds-/.test(k)).map(([k, v]) => [k.slice(5), v]));
   const part = (el, name) => (el.c || []).find((x) => isEl(x) && (x.cls || []).some((k) => k.endsWith('__' + name)));
   const sub = (el, name) => { let r = null; const f = (n) => { if (isEl(n) && !r) { if ((n.cls || []).some((k) => k.endsWith('__' + name))) r = n; else (n.c || []).forEach(f); } }; (el.c || []).forEach(f); return r; };
+  const hasNode = (n, t) => isEl(n) && (n === t || (n.c || []).some((x) => hasNode(x, t)));
   const checked = (el) => isEl(el) && ((el.a && (el.a.checked !== undefined || el.a['aria-checked'] === 'true' || el.a['aria-selected'] === 'true')) || (el.c || []).some(checked));
   // 부품 하나에 넣을 글 (tokens 쪽 FILL 이 읽는다)
   function spec(el) {
@@ -305,6 +306,32 @@ function prepStyled(P, SETS) {
       }
     }
     if (el.a && el.a['aria-pressed'] === 'true' && !s.a.state) { if (setOf(el) === 'ds-toggle') s.a.state = 'on'; if (setOf(el) === 'ds-chip') s.a.state = 'checked'; }
+    // 입력 계열: 값 있음(content=value), 오류/비활성/읽기 전용(state), 앞뒤 아이콘과 글, 필수/선택/오류/글자 수 표시 (2026-11-07 검수)
+    const kind = setOf(el);
+    const ctlOf = (n) => { let r = null; const f = (x) => { if (r || !isEl(x)) return; if (['input', 'textarea', 'button', 'select'].includes(x.tag) && x !== el && !(x.cls || []).some((c) => /__(clear|cancel|close)$/.test(c))) r = x; else (x.c || []).forEach(f); }; (n.c || []).forEach(f); return r; };
+    if (['ds-input', 'ds-textarea', 'ds-fieldbutton', 'ds-select', 'ds-quantity', 'ds-codeinput', 'ds-searchfield'].includes(kind)) {
+      const ctl = kind === 'ds-textarea' || kind === 'ds-select' || kind === 'ds-fieldbutton' ? el : ctlOf(el) || el;
+      const ca = ctl.a || {};
+      const val = ca.value || (kind === 'ds-fieldbutton' || kind === 'ds-select' ? deep(sub(el, 'value') || { c: [] }) : '') || (kind === 'ds-textarea' ? deep(el) : '');
+      if (val) { s.a.content = 'value'; if (kind === 'ds-textarea') s.parts.value = val; }
+      const inv = ca['aria-invalid'] === 'true' || (el.a || {})['aria-invalid'] === 'true';
+      if (inv) s.a.state = 'invalid'; else if (ca.disabled !== undefined) s.a.state = 'disabled'; else if (ca.readonly !== undefined || (el.a || {})['aria-readonly'] === 'true') s.a.state = 'readOnly';
+      else if (kind === 'ds-select' && (el.a || {})['aria-expanded'] === 'true') s.a.state = 'open';
+      const kids = (el.c || []).filter(isEl); const ci = kids.indexOf(kids.find((x) => x === ctl || hasNode(x, ctl)));
+      const icons = kids.map((x, i) => [x, i]).filter(([x]) => (x.cls || []).includes('ds-icon'));
+      const pre = icons.find(([, i]) => ci < 0 || i < ci), suf = icons.find(([, i]) => ci >= 0 && i > ci);
+      const nm = (x) => (x.cls.find((c) => /^ds-icon--/.test(c) && !/^ds-icon--(xs|sm|md|lg|xl)$/.test(c)) || '').slice(9);
+      s.flags = { prefixicon: !!pre, suffixicon: !!suf, prefixtext: !!part(el, 'prefix'), suffixtext: !!part(el, 'suffix') };
+      s.icons = {}; if (pre) s.icons.prefix = nm(pre[0]); if (suf) s.icons.suffix = nm(suf[0]);
+    }
+    if (kind === 'ds-field') {
+      const inv = JSON.stringify(el).includes('"aria-invalid":"true"');
+      s.flags = { required: !!sub(el, 'required'), indicator: !!sub(el, 'indicator'), showerror: inv && !!sub(el, 'error'), charactercount: !!sub(el, 'count'), showdescription: !!sub(el, 'help') && !inv, showlabel: !!sub(el, 'label') };
+    }
+    if (kind === 'ds-selectbox') { const ctl = ctlOf(el); if (ctl && ctl.a) { s.a.type = ctl.a.type === 'radio' ? 'radio' : 'check'; s.a.state = ctl.a.disabled !== undefined ? 'disabled' : ctl.a.checked !== undefined ? 'checked' : 'unchecked'; } }
+    if (kind === 'ds-accordion') s.a.state = (el.a || {}).open !== undefined ? 'expanded' : s.a.state === 'disabled' ? 'disabled' : 'collapsed';
+    if (kind === 'ds-helpbubble') s.flags = { closebutton: !!sub(el, 'close') };
+    if (kind === 'ds-searchfield') s.flags = { ...(s.flags || {}), cancel: !!sub(el, 'cancel') };
     if (el.a && el.a.placeholder) s.parts.placeholder = el.a.placeholder;
     if (el.a && el.a.value) s.parts.value = el.a.value;
     const push = (key, v) => { if (!v) return; s.parts[key] = s.parts[key] === undefined ? v : [].concat(s.parts[key], v); };
@@ -320,6 +347,7 @@ function prepStyled(P, SETS) {
       if (!leaf) (n.c || []).forEach(walk); else (n.c || []).forEach((x) => { if (isEl(x) && setOf(x)) s.kids.push(spec(x)); });
     };
     (el.c || []).forEach(walk);
+    if (s.icons && !Object.keys(s.icons).length) delete s.icons;
     if (!s.kids.length) delete s.kids; if (!Object.keys(s.parts).length) delete s.parts; if (!s.own) delete s.own; if (!Object.keys(s.a).length) delete s.a;
     return s;
   }
@@ -333,8 +361,13 @@ function prepStyled(P, SETS) {
     if (!direct) for (const k of TEXTKEYS) delete s[k];
     if (!keepKids) delete s.k;
   };
+  // Figma 부품 속성으로 사이트 내용을 나타낼 수 없는 부품: 사이트에서 읽은 모양 그대로 그린다(안쪽도 모두, 2026-11-07 검수)
+  const SHAPE = ['ds-select-content', 'ds-menu', 'ds-sidenav', 'ds-table', 'ds-table-wrap', 'ds-tree', 'ds-wheelpicker', 'ds-timepicker', 'ds-datepicker', 'ds-pagination', 'ds-breadcrumbs', 'ds-bottomnav', 'ds-timer', 'ds-rating', 'ds-codeinput', 'ds-desclist', 'ds-search-suggest', 'ds-menusheet', 'ds-carousel', 'ds-stepper', 'ds-ptr', 'ds-scrollfog', 'ds-tablepagination', 'ds-tag-group', 'ds-callout', 'ds-appbar', 'ds-empty', 'ds-result', 'ds-topnav', 'ds-imageframe', 'ds-multiselect', 'ds-progress', 'ds-banner', 'ds-chiptabs', 'ds-tabs', 'ds-divider', 'ds-quantity', 'ds-avatar', 'ds-avatar-group', 'ds-fileattach', 'ds-fileitem', 'ds-citation', 'ds-codeblock'];
+  const shapeOf = (el) => isEl(el) && (el.cls || []).some((c) => SHAPE.includes(c));
+  const asShape = (el) => { if (!isEl(el)) return el; el.fb = 1; el.c = (el.c || []).map(asShape); slim(el, true); return el; };
   const prep = (el) => {
     if (!isEl(el)) return el;
+    if (shapeOf(el) && el.s) return asShape(el);
     const k = setOf(el);
     if (k && KIND[k]) {
       const h = part(el, 'header');

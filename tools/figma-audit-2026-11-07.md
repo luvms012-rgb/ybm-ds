@@ -1,0 +1,97 @@
+# 사이트 vs Figma 그림 차이 (2026-11-07)
+
+## 공통(그리기 함수 빈틈)
+- A. 예시 칸 높이: 사이트 min-height 240, 여백 32/24, 세로 가운데. Figma 여백 48, 최소 높이 없음 → 전부
+- B. 목록 inset 테두리(box-shadow inset ring) + 구분선(::before) 빠짐: chip ex2, action-button ex3, text-link ex2
+- C. Text Link 밑줄 빠짐, 크기 다름(작은 링크 12/13 이 Figma 14/16): text-link 전체
+- D. 필수 빨간 점(::after?) 빠짐, "선택" 꼬리표 빠짐: field-label cover, ex1, ex2
+- E. 입력 값(value) 이 placeholder 회색으로 나옴: field-label cover, ex2, ex3
+- F. 오류 상태(aria-invalid) 빨간 테두리 + 오류 글 빠짐: field-label ex2
+- G. 대표 그림 투명 부품 흰 바탕 빠짐(neutralOutline 취소 버튼): action-button cover
+- H. 글자 칸 + 숫자 세기(33/500) 오른쪽 정렬 안 됨, textarea 높이 작음: field-label ex3
+
+## 컴포넌트별
+- chip: B(ex2), x 아이콘 굵기 약간
+- action-button: G, B(ex3)
+- text-link: C, B(ex2)
+- field-label: D, E, F, H, 필드 묶음 사이 간격 큼(ex1)
+- text-field-input: 앞 아이콘(search) 빠짐(cover), D, E(값), F(ex2 오류), 뒤 글자 "P" 빠짐(ex3), 필드 사이 간격 큼(ex1)
+- text-field-textarea: E(cover), F(ex2), H(글자 수 오른쪽), textarea 높이 작음
+- field-button: 뒤 아이콘(calendar, chevron) 빠짐 전부, E(cover 값), readOnly 회색 바탕(ex2) 빠짐, F(ex3 오류 테두리)
+- prefix-select: 예시 2개 모두 Prefix Select 빠지고 일반 입력칸으로 나옴, 필수 점(ex1), underline 변형(ex1)
+- select-trigger: E(값), F(ex3), B(ex2 목록 inset)
+- select-content-item: cover/ex 전부 Figma 기본 묶음(최근 검색, 전체 지역, 호버 줄) 그대로. 사이트 항목, 체크 위치, 구분선, 열림(chevron up), 목록 상자 테두리/그림자 다름
+- checkbox: C(ex1 보기 밑줄), 필드 간격 큼(ex2), B(ex3), ex3 셋째 체크박스 테두리 안 보임
+- radio-group: 라디오 동그라미가 거의 안 보임(테두리 없음) cover/ex 전부, 선택된 것 표시 안 됨(cover 일반 배송, ex1, ex2 카드 결제, ex3 알맞았어요), B(ex2)
+- switch: B(ex1, ex3), ex2 카드 안 "자동 연장" 과 스위치 양 끝 정렬 안 됨
+- quantity-picker: 값(2, 5) 이 1 로, 빼기 비활성 표시 없음, ex2 오류 테두리, B(ex1)
+- chip-tabs: 알림 점(이벤트) 빠짐(cover, ex2), cover 업데이트 칩 잘림, ex1 다섯째 "교양" 없음(부품 4칸, 알려진 것), ex3 카드 높이가 크게 늘어남
+- tabs: ex1 Top App Bar 에 사이트에 없는 뒤로/더보기 아이콘, ex2 탭 4개(문의 빠짐) + 사이트는 왼쪽 붙임(hug), Figma 는 꽉 채움
+- segmented-control: B(ex1), 필드 간격 큼(ex3)
+- toggle-button: 같음
+- badge: B(ex1, ex3), ex2 카드 테두리 없음 + 첫 배지 "어학" 빠짐
+- tag-group: ex1 줄 사이 구분선 빠짐
+- avatar: 이니셜 없음(Figma 부품 한계, 알려진 것), +5 가 +3, ex2 상태 점(온라인/자리 비움/방해 금지) 빠짐, B(ex1)
+- callout: 글이 전부 Figma 기본 글("안내 / 안내 메시지를 여기에 표시합니다 / 자세히 보기"), 앞 아이콘 빠짐, 링크 밑줄, B(ex2, ex3), ex1 입력칸 search 아이콘
+- snackbar: E(ex1 값), B(ex2), ex3 카드 높이 크게 늘어남
+- help-bubble: 닫기 X 빠짐(cover, ex1)
+- menu: 메뉴 아이콘이 전부 Figma 기본 search 아이콘(공유, 문서, 연필, 휴지통 등이어야), ex2 아이콘 없어야 하는데 search 아이콘, ex2 Select 값 E
+- dialog: 같음
+- alert-dialog: cover 버튼 두 개(취소, 삭제) 빠짐, B(ex1 카드 테두리, ex3), ex2 Top App Bar 아이콘(뒤로/검색/더보기 → 사이트는 제목 + 닫기 X), ex2 textarea 값 E
+- bottom-sheet: cover 라디오 빠짐, 손잡이 빠짐, ex2 Field Button 뒤 아이콘 + 값 E, ex3 카드 높이 늘어남
+- accordion: 펼침 상태(expanded) 빠짐(cover, ex1, ex2 첫 항목), ex3 접힌 항목 내용이 보이고 chevron 빠짐, 링크 밑줄 C
+- skeleton: B(ex1), ex2 사진 자리 높이가 크게 늘어남
+- I. Top App Bar 기본 아이콘(뒤로, 검색, 더보기) 그대로: tabs ex1, alert-dialog ex2, fab ex1/ex2 (사이트 아이콘과 다름)
+- J. 줄 사이 구분선(divider) 빠짐: tag-group ex1, progress-circle ex1, fab ex1/ex2, progress ex2
+- K. 카드/사진 높이가 크게 늘어남(세로 FILL?): chip-tabs ex3, snackbar ex3, bottom-sheet ex3, skeleton ex2, progress-circle ex3
+- L. 사진(실제 이미지) 대신 빈 자리 아이콘: skeleton ex2, progress-circle ex3 (Figma 에 이미지 못 넣음)
+- slider: cover 이름과 값 양 끝 정렬 안 됨, ex3 손잡이 위치(30분) 다름
+- progress: cover 양 끝 정렬, ex2 막대 길이 모두 같음 + B + J, ex3 0% 인데 채워짐
+- progress-circle: cover 진행 정도 다름, J(ex1), B(ex2), ex3 L + K
+- floating-action-button: I(ex1, ex2), J
+- date-picker: 2026년 11월 1일이 토요일 칸에 있음(사이트는 일요일) → 날짜 배치 전부 어긋남, 16일이 "선택"으로 칠해짐(부품 기본), 지난 날 흐리게/이전 달 버튼 비활성 다름, ex2 Field Button 값 + 아이콘, ex3 Callout 아이콘, 기간(8~14) 칸 어긋남
+- bottom-navigation: 아이콘이 부품 기본(신문, 위치, 말풍선) → 사이트(검색, 일정, 메뉴, 책, 장바구니, 사람), 아이폰 홈 막대가 더 있음, 위 테두리 없음, ex2 배지(3, 99+, 점) 빠짐
+- side-navigation: cover 비어 있음! ex1~3 부품 기본 메뉴(콘텐츠/관리 묶음, 기본 아이콘) 그대로, 높이 크게 늘어남, ex2 오른쪽 목록 B
+- card: 같음
+- empty: 아이콘이 전부 기본 inbox(사이트 search, calendar, tag), ex1 사이트에 없는 "새로 추가하기" 버튼, ex1 검색칸 아이콘 + 값
+- pagination: 쪽 번호 배치가 부품 기본(« ‹ 3 10) → 사이트(‹ 1 2 3 … 10 ›, « ‹ 1 … 5 6 7 … 12 › »), ex3 compact 2/8 이 1/10, 후기 아래 글이 부품 기본("카테고리 · 서초2동 · 3분 전"), ex4 ghost 없음(알려진 것), B(ex2)
+- table: cover 와 ex2 가 부품 기본 표(TOEIC 4칸) 그대로, ex1/ex3 글자 겹침과 칸 깨짐, ex3 사이트에 없는 버튼
+- divider: "또는" 글 있는 구분선 빠짐(cover, ex2 회색 막대로), ex1 굵은 구분선 색이 진함, ex3 세로 구분선 빠짐
+- M. Tag Group 이 부품 기본 글("카테고리 · 서초2동 · 3분 전") 그대로: tooltip ex1, breadcrumbs ex1, pagination ex3
+- tooltip: M(ex1)
+- list: J(cover, 전부), B(ex1~3), ex3 "집" 제목 빠짐(제목 + 배지 줄)
+- breadcrumbs: 경로 항목이 부품 기본(홈 > 고객센터 > 공지사항) → 사이트 4단(…> 연말 배송 일정 안내, 홈 > 가전 > 주방 가전 > 커피 머신), M(ex1)
+- stepper: ex2 세로 방향(vertical)이 가로로 나옴, 단계 상태(3 현재) 다름, D(ex1 필수 점)
+- banner: 문서 프레임 높이가 2320 에 고정돼 ex2, ex3 가 잘려 안 보임(프레임 밖), cover 가 빈 배너, ex1 본문 글 빠짐 + I
+- select-box: 고른 상태(진한 테두리, 체크/라디오 켜짐) 빠짐, type=radio 인데 체크박스 모양(cover, ex1), ex2 아이콘(말풍선, 헤드폰, 책, 연필) 빠짐
+- time-picker: 휠 값이 다름(사이트 오후 2:30 / 오후 9:00, Figma 오전 10:30), 위아래 숫자 배열 다름, ex2 Field Button 앞 시계 아이콘 + 뒤 chevron
+- table-pagination: cover 깨짐(선택 칸 흰 상자, chevron 없음, 글 잘림), ex1/ex2 선택 칸에 "5개 10개", "1-5 6-10" 이 겹쳐 나옴, 넘김 아이콘 « ‹ (사이트 ‹ ›)
+- popover: B(ex1, ex2)
+- chat: ex2 보내기 버튼 "멈춤" 상태(검은 네모) 빠짐, ex3 날짜 양옆 선 빠짐
+- top-app-bar: I 전부(cover 검색 아이콘 더 있음, ex1 헤드폰 아이콘, ex2 왼쪽 제목 + 2/3 부제 + 닫기 X, ex3 왼쪽 제목 + 검색만), M(ex3), J
+- top-navigation: ex1 로고(책 아이콘 + 배움터) 가 "로고" 자리 상자로, 고른 메뉴(강의) 가 홈으로
+- search-suggestion: cover 검색칸 값 + 아이콘, ex1~3 떠 있는 추천 상자(겹쳐 뜨는 패널)가 뒤 글과 겹쳐 깨짐("최근 검색어"와 "인기 강의" 겹침), 상자 테두리/그림자 빠짐, B
+- file-attach: 끌어 놓기 칸 점선 테두리가 실선, ex2 textarea 값 E, 사진 L, 이미지 파일 아이콘(사진 아이콘) 이 문서 아이콘, ex3 추가 칸 비활성 테두리
+- menu-sheet: cover 항목 묶음 다름(사이트: [공유하기, 링크 복사] [삭제하기 빨강] [닫기], Figma: 제목 "공유하기" + 링크 복사/삭제하기 + 아이콘 틀림), B(ex1), I(ex2: 제목 + 참여자 6명 부제 + 세로 더보기), ex3 이니셜(알려진 것)
+- result-section: ex1 I(닫기 X), ex2 오류 아이콘(빨강 !)이 초록 체크, ex3 검색 아이콘(회색)이 초록 체크, ex3 검색칸 값 + 아이콘
+- timer: 값이 부품 기본 12:34 (사이트 2:59, 3:00, 16:08:50, 12분 00초), 빨강(critical) 색 빠짐, cover/ex1 입력칸(인증번호 6자리) 빠짐, ex2 큰 글자 크기
+- status-dot: B(ex1, ex2), ex3 표 글자 겹침(table 과 같은 문제)
+- checkbox-group: 꺼진 체크박스 테두리가 사이트보다 옅음(작은 크기)
+- scroll-fog: 흐림(fog) 효과 빠짐 전부, cover/ex2 첫 칩 선택 상태 빠짐, ex2 칩이 잘리지 않고 다 나옴(사이트는 폭 안에서 잘림), ex1 체크박스 이름표 "약관을 읽고 동의해요" 빠짐
+- pull-to-refresh: ex1 목록(아이콘 + 제목 3줄) 대신 부품 기본(돌아가는 표시 + 회색 막대) 이 나옴, I, ex2 M
+- side-panel: B(ex1, ex2)
+- image-frame: cover "1/5" 장 수 표시 빠짐, ex1 사진 칸 세로로 크게 늘어남(K), ex2 사진이 제목 아래로 감(사이트는 위), 사진 L 전부
+- carousel: cover 두 장 카드가 한 장 큰 틀로, ex1 이전 버튼(사이트는 다음만), 틀 밖 카드가 잘리지 않음, ex2 한 장 + 위에 1/4 표시(사이트) → 두 장 + 아래 표시, ex3 사진이 제목 아래로, 사진 L
+- N. 글 안 꾸밈 빠짐: 인라인 코드 회색 바탕(code), 굵은 글(strong), 링크 밑줄: markdown, code-block, citation
+- markdown: N, ex3 출처 번호 동그라미(¹ ²) 와 출처 칩 빠짐
+- code-block: 여러 줄 코드가 한 줄로 붙고 칸 밖으로 넘침(ex1, ex2), N, ex3 머리 줄 없는 코드 상자(사이트) 인데 javascript 머리 줄
+- citation: 번호 동그라미가 글자 "1" 로, 출처 칩(지구 아이콘 + 이름) 빠짐 cover/ex2, ex1 출처 목록 링크 밑줄 N
+- multi-select: 트리거 테두리 빠짐(ex1, ex2), E(닉네임 값), B(ex2), ex2 Select 값 E
+- rating: 별 개수/반 별이 늘 4개(사이트 4.5, 4.8, 0, 5.0, 2.0), ex1 점수와 후기 수 글 빠짐, ex2 사이트에 없는 "1 (312)" 글, ex3 M, B, J
+- code-input: cover 숫자 3개(사이트 4개), ex1 입력 칸 6개가 통째로 빠짐, 남은 시간 12:34(사이트 2:48), ex2 오류 빨강 테두리 + 숫자 6개, "다시 받기" 밑줄 C
+- chart: 막대 높이/값이 사이트와 다름(부품 기본 값), ex1 일요일 막대 빠짐, ex2 두 줄(신규, 다시 가입) 과 1월~7월 축, 범례 빠짐, ex3 도넛 4조각(45/30/15/10) + 범례 이름 다름, 사이트에 없는 제목 "주간 방문"
+- description-list: 값 오른쪽 정렬(data-align=end) 빠짐, 줄 사이 구분선 빠짐, 마지막 줄 굵게 빠짐, ex1 "결제 금액" 줄 빠짐, ex2 두 칸 배치(columns=2) 가 한 칸
+- toolbar: cover 바깥에 사이트에 없는 흰 상자, ex1 표 머리 위 진한 선/머리 줄 바탕 다름
+- tree: 항목 구조가 부품 기본 나무(단계, 펼침, 이름이 섞임) — cover, ex1(과제 3, 공지.txt 빠짐), ex2(아이콘 없는 개수 목록: 전체 128, 패션 64…) 전부 다름
+- wheel-picker: 열 수와 값이 부품 기본(1991년 7월 15일) — 사이트 cover 2열(5월 17일), ex1 2001년 5월 17일, ex2 1열(170cm)
+- search-field: E(값), ex2 사이트에 없는 취소 버튼, B(ex2 결과 카드)

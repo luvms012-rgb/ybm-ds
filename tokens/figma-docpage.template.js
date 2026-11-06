@@ -100,7 +100,7 @@ function instanceFor(el, set, defaults) {
   const defs = set.componentPropertyDefinitions, props = {};
   for (const [k, d] of Object.entries(defs)) {
     if (d.type !== 'VARIANT') continue;
-    let v = el.a['data-' + kebab(k)];
+    let v = (el.sp && el.sp.a && el.sp.a[kebab(k)]) || el.a['data-' + kebab(k)];
     if (k === 'state' && (el.a.disabled !== undefined || el.a['aria-disabled'] === 'true')) v = 'disabled';
     if (k === 'layout' && !v) v = ownText(el) || !iconsIn(el).length ? undefined : 'iconOnly';
     if (k === 'extended' && !v) v = ownText(el) ? 'true' : 'false';
@@ -147,6 +147,7 @@ const TSTYLE = (cls) => { const t = (cls.find((c) => /^ds-t\d\d$/.test(c)) || 'd
 const TCOLOR = (cls) => cls.includes('ds-fg-muted') ? 'fg/neutral-muted' : cls.includes('ds-fg-subtle') ? 'fg/neutral-subtle' : 'fg/neutral';
 async function render(el, parent, ctx) {
   if (typeof el === 'string') { const s = TSTYLE(ctx.cls || []); await figma.loadFontAsync(s.fontName); add(parent, text(el.trim(), s, TCOLOR(ctx.cls || []))); return; }
+  if ((ctx.shape || el.fb) && el.s) return renderS(el, parent, true);  // 부품 속성으로 못 나타내는 것은 사이트 모양 그대로 (sync.mjs SHAPE, 2026-11-07)
   const setCls = el.cls.find((c) => SET[c] && c !== 'ds-list-item');
   if (setCls) return setNode(el, setCls, parent);
   if (el.s) return renderS(el, parent);
@@ -229,7 +230,7 @@ async function runText(parts, s0, name) {
   return t;
 }
 const isIcon = (el) => typeof el !== 'string' && el.cls.includes('ds-icon') && el.cls.some((c) => /^ds-icon--/.test(c) && !/^ds-icon--(xs|sm|md|lg|xl)$/.test(c));
-const plainBox = (s) => !s.bg && !(s.bw && s.bw.some(Boolean)) && !(s.p && s.p.some(Boolean)) && !s.r;
+const plainBox = (s) => !s.bg && !(s.bw && s.bw.some(Boolean)) && !(s.p && s.p.some(Boolean)) && !s.r && !s.rg && !s.ps && !s.pi && !s.pt;
 const inlineOK = (el) => typeof el === 'string' || (el.s && el.s.d === 'i' && plainBox(el.s) && !isIcon(el) && !el.cls.some((c) => SET[c] && c !== 'ds-list-item') && el.c.every(inlineOK));
 const flat = (el, s, out) => { if (typeof el === 'string') out.push([el, s]); else for (const k of el.c) flat(k, el.s, out); return out; };
 const rectOf = (bs) => bs.reduce((u, b) => (u ? [Math.min(u[0], b[0]), Math.min(u[1], b[1]), Math.max(u[0] + u[2], b[0] + b[2]) - Math.min(u[0], b[0]), Math.max(u[1] + u[3], b[1] + b[3]) - Math.min(u[1], b[1])] : b.slice()), null);
@@ -241,6 +242,7 @@ function sizeW(node, s, parent, cw) {
   const root = ['Preview', 'Scene'].includes(parent.name);
   const full = cw > 0 && Math.abs(s.w - cw) <= 1;
   if (node.type === 'TEXT') {
+    if (s.fg && parent.layoutMode === 'HORIZONTAL' && !root) { node.textAutoResize = 'HEIGHT'; node.layoutGrow = 1; return; }  // 가로 줄에서 남는 폭을 채우는 글 (오른쪽 정렬 값 등)
     const one = s.nw || !s.lh || s.h <= s.lh * 1.4;
     if (one) { node.textAutoResize = 'WIDTH_AND_HEIGHT'; return; }
     if (full && !root && !hugW(parent) && parent.layoutMode === 'VERTICAL') { node.layoutSizingHorizontal = 'FILL'; node.textAutoResize = 'HEIGHT'; return; }
@@ -264,8 +266,10 @@ async function iconNode(el, parent) {
   else { n = figma.createFrame(); n.name = 'icon ' + name; n.fills = [cpaint(s.bg || s.c || '1a1c20', 'fg')]; res.warn.push('아이콘 없음: ' + name); }
   parent.appendChild(n); n.resize(s.w || 20, s.h || 20); return n;
 }
-async function renderS(el, parent) {
-  const s = el.s;
+async function renderS(el, parent, sh) {
+  // 모양 그대로 그리는 입력칸: 값 또는 안내 글(placeholder)을 칸 안 글자로 (2026-11-07)
+  if ((el.tag === 'input' || el.tag === 'textarea') && el.s && !el.c.length && (el.a.value || el.a.placeholder)) { const v = el.a.value || el.a.placeholder; const s0 = el.a.value ? el.s : { ...el.s, c: el.s.pc || el.s.c }; el = { ...el, c: [v], s: el.tag === 'input' ? { ...s0, d: 'f', ai: 'center', jc: s0.ta === 'center' ? 'center' : s0.jc } : s0 }; }
+  const s = el.s; const SH = !!(sh || el.fb);
   if (s.d === 'n' || s.vh) return null;
   if (isIcon(el)) return iconNode(el, parent);
   const cw = cwOf(parent);
@@ -280,6 +284,7 @@ async function renderS(el, parent) {
   f.fills = s.bg ? [cpaint(s.bg, 'bg')] : [];
   const bw = s.bw || [0, 0, 0, 0], p = s.p || [0, 0, 0, 0];
   if (s.bw) { f.strokes = [cpaint(s.bc, 'stroke')]; f.strokeAlign = 'INSIDE'; f.strokeTopWeight = bw[0]; f.strokeRightWeight = bw[1]; f.strokeBottomWeight = bw[2]; f.strokeLeftWeight = bw[3]; }
+  else if (s.rg) { f.strokes = [cpaint(s.rg[1], 'stroke')]; f.strokeAlign = 'INSIDE'; f.strokeWeight = s.rg[0]; }  // box-shadow inset 테두리 (2026-11-07)
   if (s.r) { const keys = ['topLeftRadius', 'topRightRadius', 'bottomRightRadius', 'bottomLeftRadius']; s.r.forEach((v, i) => { const sv = SHAPES.find((x) => Object.values(x.valuesByMode)[0] === v); f[keys[i]] = Math.min(v, Math.max(s.w, s.h)); if (sv && v < 999) f.setBoundVariable(keys[i], sv); }); }
   if (s.op) f.opacity = s.op;
   f.clipsContent = !!s.ov;
@@ -296,7 +301,7 @@ async function renderS(el, parent) {
   });
   items.forEach((it) => { it.b = rectOf(it.bs); });
   const flow = items.filter((it) => !it.abs);
-  const H = dir === 'HORIZONTAL', wrap = s.wr || (/^i?g$/.test(s.d) && s.gc > 1);
+  const H = dir === 'HORIZONTAL', oneRow = H && flow.length > 0 && flow.every((it) => Math.abs(it.b[1] - flow[0].b[1]) < 2), wrap = (s.wr || (/^i?g$/.test(s.d) && s.gc > 1)) && !oneRow;
   if (wrap) { f.layoutWrap = 'WRAP'; const g = s.gap || [0, 0]; f.itemSpacing = g[1]; f.counterAxisSpacing = g[0]; }
   let spacers = null;
   if (!wrap && s.jc !== 'space-between' && flow.length > 1) {
@@ -322,14 +327,39 @@ async function renderS(el, parent) {
     if (spacers && i > 0 && !it.abs && spacers[flow.indexOf(it) - 1] > 0) { const sp = figma.createFrame(); sp.name = 'gap'; sp.fills = []; f.appendChild(sp); sp.resize(H ? spacers[flow.indexOf(it) - 1] : 1, H ? 1 : spacers[flow.indexOf(it) - 1]); }
     let n;
     if (it.run) { const s0 = it.parts[0][1] || s; n = await runText(it.parts, s0.fs ? s0 : s, 'Text'); f.appendChild(n); sizeW(n, { ...s0, w: it.b[2], h: it.b[3], lh: s0.lh, nw: s0.nw }, f, inner); if (!s0.ta && s.ta) n.textAlignHorizontal = s.ta === 'center' ? 'CENTER' : 'RIGHT'; }
-    else n = await render(it.el, f, {});
+    else n = await render(it.el, f, SH ? { shape: true } : {});
     if (n && it.abs) { try { n.layoutPositioning = 'ABSOLUTE'; n.x = it.b[0] + pad[3]; n.y = it.b[1] + pad[0]; } catch (e) {} }
     // 세로 줄에서 자식 하나만 가운데나 오른쪽에 붙은 경우 (align-self, margin auto) - 가로 틀로 감싸 자리를 맞춘다
     if (n && !it.abs && !H && !wrap && n.parent === f && n.layoutSizingHorizontal !== 'FILL' && it.b[2] < inner - 2) { const x = it.b[0], r = inner - (x + it.b[2]); const want = x > 2 && Math.abs(x - r) <= 2 ? 'CENTER' : x > 2 && r <= 2 ? 'MAX' : x <= 2 && r > 2 ? 'MIN' : null; if (want && want !== f.counterAxisAlignItems) { const w = figma.createAutoLayout('HORIZONTAL'); w.name = 'align'; w.fills = []; f.insertChild(f.children.indexOf(n), w); w.layoutSizingHorizontal = 'FILL'; w.layoutSizingVertical = 'HUG'; w.primaryAxisAlignItems = want; w.appendChild(n); } }
   }
-  if (!f.children.length) { const fill = f.layoutSizingHorizontal === 'FILL'; f.resize(Math.max(s.w, 0.01), Math.max(s.h, 0.01)); if (fill) f.layoutSizingHorizontal = 'FILL'; f.layoutSizingVertical = 'FIXED'; return f; }
+  if (!f.children.length) { const fill = f.layoutSizingHorizontal === 'FILL'; f.resize(Math.max(s.w, 0.01), Math.max(s.h, 0.01)); if (fill) f.layoutSizingHorizontal = 'FILL'; f.layoutSizingVertical = 'FIXED'; await pseudo(f, s); return f; }
   fixAfter(f, s);
+  await pseudo(f, s);
   return f;
+}
+// ::before / ::after 의 선과 점 (s.ps: [x, y, w, h, 색, 모서리]) - 절대 위치 사각형. 가로선은 좌우 여백을 지키며 늘어난다 (2026-11-07)
+async function pseudo(f, s) {
+  for (const [x, y, w, h, c, r] of s.ps || []) {
+    const rc = figma.createRectangle(); rc.name = h <= 2 || w <= 2 ? 'line' : 'dot'; rc.fills = [cpaint(c, 'stroke')];
+    f.appendChild(rc); rc.layoutPositioning = 'ABSOLUTE';
+    const line = h <= 2 && w > 40, right = Math.max(s.w - x - w, 0);
+    rc.resize(line ? Math.max(f.width - x - right, 1) : w, h); rc.x = x; rc.y = y > s.h / 2 && s.h ? f.height - (s.h - y) : y;
+    if (r) rc.cornerRadius = Math.min(r, Math.min(w, h) / 2);
+    if (line) rc.constraints = { horizontal: 'STRETCH', vertical: y > s.h / 2 ? 'MAX' : 'MIN' };
+  }
+  // ::before/::after 아이콘 (s.pi: [앞b/뒤a, 이름, w, h, 색, 절대, x, y]) - 체크, 꺾쇠, 화살표 등
+  for (const [pos, nm, w, h, c, abs, x, y] of s.pi || []) {
+    const ic = iconOf(nm); if (!ic) continue;
+    const n = ic.createInstance(); const col = cpaint(c || '1a1c20', 'fg'); for (const v of n.findAll((z) => z.type === 'VECTOR')) { if (v.strokes.length) v.strokes = [col]; if (v.fills.length) v.fills = [col]; }
+    if (abs) { f.appendChild(n); n.layoutPositioning = 'ABSOLUTE'; n.resize(w, h); n.x = x; n.y = y; } else { if (pos === 'b') { f.insertChild(0, n); if (f.layoutMode === 'HORIZONTAL') f.paddingLeft = Math.max(0, f.paddingLeft - w - f.itemSpacing); else f.paddingTop = Math.max(0, f.paddingTop - h - f.itemSpacing); } else f.appendChild(n); n.resize(w, h); }
+  }
+  // 글자 가상 요소 (s.pt: [앞b/뒤a, 글, 색, 크기, 굵기, 좌우 여백]) - 태그 사이 점 등
+  for (const [pos, txt, c, fs, fw, m] of s.pt || []) {
+    const t = await runText([[txt, { fs, fw, c }]], { fs, fw, c }, 'pseudo');
+    if (f.layoutMode !== 'HORIZONTAL') { f.layoutMode = 'HORIZONTAL'; f.counterAxisAlignItems = 'CENTER'; f.itemSpacing = m; }
+    if (pos === 'b') { f.insertChild(0, t); f.paddingLeft = Math.max(0, f.paddingLeft - t.width - m); } else f.appendChild(t);
+    if (m && f.itemSpacing < m) f.itemSpacing = m;
+  }
 }
 // 부품 인스턴스: 글자 채우기(sp), 본문 칸이 있는 부품(fx: card, sheet, dialog, md)은 풀어서 본문을 그린다. 인스턴스로 못 나타내면 모양 그대로 그린다
 async function setNode(el, setCls, parent) {
@@ -367,7 +397,7 @@ async function FILL(inst, s, top) {
   const main = await inst.getMainComponentAsync(); if (!main) return;
   const owner = main.parent && main.parent.type === 'COMPONENT_SET' ? main.parent : main;
   const defs = owner.componentPropertyDefinitions;
-  if (!top && s.a) { const vp = {}; for (const [k, d] of Object.entries(defs)) { if (d.type !== 'VARIANT') continue; const v = s.a[kebab2(k)] || s.a[k]; if (v && d.variantOptions.includes(v) && inst.componentProperties[k] && inst.componentProperties[k].value !== v) vp[k] = v; } if (Object.keys(vp).length) { try { inst.setProperties(vp); } catch (e) {} } }
+  if (s.a) { const vp = {}; for (const [k, d] of Object.entries(defs)) { if (d.type !== 'VARIANT') continue; const v = s.a[kebab2(k)] || s.a[k]; if (v && d.variantOptions.includes(v) && inst.componentProperties[k] && inst.componentProperties[k].value !== v) vp[k] = v; } if (Object.keys(vp).length) { try { inst.setProperties(vp); } catch (e) {} } }
   await fonts(inst);
   const pk = picker(s); const p = {}; const filled = new Set();
   for (const [k, d] of Object.entries(inst.componentProperties)) {
@@ -387,6 +417,12 @@ async function FILL(inst, s, top) {
     const sk = Object.keys(inst.componentProperties).find((x) => inst.componentProperties[x].type === 'BOOLEAN' && nk(x.split('#')[0]) === 'show' + b);
     if (sk) p[sk] = false;
   }
+  // 켜고 끄는 칸(필수 점, 선택 꼬리표, 오류 글, 글자 수, 앞뒤 아이콘/글, 닫기, 취소)과 아이콘 바꾸기 (sync.mjs spec 의 flags, icons, 2026-11-07)
+  for (const [k, d] of Object.entries(inst.componentProperties)) {
+    const b = nk(k.split('#')[0]);
+    if (d.type === 'BOOLEAN' && s.flags && b in s.flags && s.flags[b] !== d.value) p[k] = s.flags[b];
+    if (d.type === 'INSTANCE_SWAP' && s.icons && (b === 'prefix' || b === 'suffix') && s.icons[b]) { const ic = iconOf(s.icons[b]); if (ic) p[k] = ic.id; }
+  }
   if (Object.keys(p).length) { try { inst.setProperties(p); } catch (e) { res.warn.push('prop ' + inst.name + ': ' + String(e).slice(0, 60)); } }
   for (const t of ownTexts(inst)) {
     if (t.componentPropertyReferences && t.componentPropertyReferences.characters) continue;
@@ -394,6 +430,9 @@ async function FILL(inst, s, top) {
     if (v !== undefined && t.characters !== v) { await fonts(t); t.characters = v; }
   }
   // 되풀이 항목(라디오 묶음 등): 안쪽 같은 부품에 차례로 글을 넣고 남는 것은 끈다. 모자라면 false (모양 그대로 그린다)
+  // 안쪽 글이 모두 꺼진 칸(빈 footer 등)은 칸째 끈다 - 빈 칸이 자리를 차지하지 않게 (2026-11-07)
+  const hideEmpty = (n) => { for (const c of n.children || []) { if (c.type === 'FRAME' && c.visible && c.children.length) { hideEmpty(c); if (c.children.every((x) => !x.visible)) c.visible = false; } } };
+  hideEmpty(inst);
   if (s.items) {
     const nested = nestedOf(inst).filter((n) => n.visible); const ids = []; for (const n of nested) ids.push(await setIdOf(n));
     const cnt = {}; ids.forEach((x) => { cnt[x] = (cnt[x] || 0) + 1; }); const top1 = Object.keys(cnt).sort((a, b) => cnt[b] - cnt[a])[0];
@@ -459,6 +498,7 @@ async function FIX(inst, el) {
     nb.layoutSizingHorizontal = 'FILL';
     await renderInto(nb, el.c.filter((x) => x !== h && x !== ft && (typeof x !== 'string' || x.trim())), (el.s ? el.s.w : fr.width) - fr.paddingLeft - fr.paddingRight);
     if (ft) { const f2 = fr.findChild((n) => n.name === 'footer'); if (f2) { for (const c of [...f2.children]) c.remove(); await renderInto(f2, kidsOf(ft)); } }
+    if (fr.layoutMode === 'VERTICAL') { fr.primaryAxisSizingMode = 'AUTO'; }  // 카드 높이는 내용에 맞게 (부품 기본 높이로 늘어나지 않게, 2026-11-07)
     return fr;
   }
   if (o.kind === 'sheet' || o.kind === 'dialog') {
@@ -511,6 +551,7 @@ if (DATA.mode === 'preview') {
       const pv = boxes[i] && boxes[i].findOne((n) => n.name === 'Preview'); if (!pv) continue;
       for (const c of [...pv.children]) c.remove();
       const hs = P.examples[i].host; if (hs) { const p = hs.p || [0, 0, 0, 0]; pv.paddingTop = Math.max(p[0], 32); pv.paddingBottom = Math.max(p[2], 32); pv.itemSpacing = hs.gap ? (hs.fd === 'c' ? hs.gap[0] : hs.gap[1]) : 0; if (hs.fd !== 'c' && /f/.test(hs.d)) { pv.layoutMode = 'HORIZONTAL'; pv.layoutWrap = 'WRAP'; pv.counterAxisSpacing = hs.gap ? hs.gap[0] : 0; pv.primaryAxisAlignItems = 'CENTER'; pv.counterAxisAlignItems = 'CENTER'; } else { pv.layoutMode = 'VERTICAL'; pv.primaryAxisAlignItems = 'CENTER'; pv.counterAxisAlignItems = 'CENTER'; } }
+      pv.minHeight = 240; pv.paddingLeft = 24; pv.paddingRight = 24;  // 사이트 .site-example__preview: min-height 240, 여백 32/24, 세로 가운데 (2026-11-07)
       for (const el of P.examples[i].tree) await render(el, pv, {});
       out.ex++;
     }
@@ -628,7 +669,7 @@ if (P.props.length) {
       add(blk, text(k, T.title, 'fg/neutral', 'Header'));
       const row = box('HORIZONTAL', 'Preview', { gap: 40, pad: [24, 0, 8, 0] }); row.counterAxisAlignItems = 'MAX'; add(blk, row, true); row.layoutWrap = 'WRAP'; space(row, 'counterAxisSpacing', 24);
       for (const opt of d.variantOptions) {
-        const want = Object.fromEntries(Object.entries(defs).filter(([, x]) => x.type === 'VARIANT').map(([kk, x]) => [kk, kk === k ? opt : (d0[kk] && x.variantOptions.includes(d0[kk]) ? d0[kk] : kk === 'state' ? 'enabled' : x.defaultValue)]));
+        const want = Object.fromEntries(Object.entries(defs).filter(([, x]) => x.type === 'VARIANT').map(([kk, x]) => [kk, kk === k ? opt : (d0[kk] && x.variantOptions.includes(d0[kk]) ? d0[kk] : kk === 'state' && x.variantOptions.includes('enabled') ? 'enabled' : x.defaultValue)]));
         const v = main.children.find((c) => Object.entries(want).every(([kk, vv]) => c.variantProperties[kk] === vv));
         if (!v) continue;
         const cell = box('VERTICAL', opt, { gap: 12 }); cell.counterAxisAlignItems = 'CENTER'; row.appendChild(cell);
@@ -656,7 +697,7 @@ if (P.examples.length) {
     if (e.title) add(ex, text(e.title, T.sub, 'fg/neutral', 'Title'), true);
     if (e.desc) add(ex, text(e.desc, T.lead, 'fg/neutral-muted', 'Description'), true);
     const card = box('VERTICAL', 'Example Box', { radius: 'shape/lg', stroke: 'stroke/neutral-muted' }); card.clipsContent = true; add(ex, card, true); space(ex, 'itemSpacing', 8);
-    const pv = box('VERTICAL', 'Preview', { fill: 'bg/layer-default', pad: 48 }); pv.counterAxisAlignItems = 'CENTER'; pv.primaryAxisAlignItems = 'CENTER'; add(card, pv, true);
+    const pv = box('VERTICAL', 'Preview', { fill: 'bg/layer-default', pad: [32, 24] }); pv.counterAxisAlignItems = 'CENTER'; pv.primaryAxisAlignItems = 'CENTER'; pv.minHeight = 240; add(card, pv, true);
     for (const el of e.tree) await render(el, pv, {});
     add(card, codeBox(e.code, 'html', 'Code Box', true), true);
   }

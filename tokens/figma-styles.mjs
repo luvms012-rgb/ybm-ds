@@ -13,11 +13,16 @@ const only = process.argv.slice(2);
 const list = only.length ? docs.filter((c) => only.includes(c.slug)) : docs;
 
 // 페이지 안에서 돌리는 함수: 요소 → { tag, cls, a, c, s }
+const ICON_NAMES = [...new Set([...fs.readFileSync(path.join(DS, 'dist', 'icons.css'), 'utf8').matchAll(/--ds-icon-([a-z0-9-]+)\s*:/g)].map((m) => m[1]))];
 const SER = String.raw`(() => {
+  // ::before/::after 아이콘(mask-image)을 이름으로 찾는 표: --ds-icon-이름 변수 값 → 이름 (2026-11-07)
+  const nu = (v) => { v = String(v).trim().replace(/^url\((["']?)/, '').replace(/(["']?)\)$/, ''); try { return decodeURIComponent(v).replace(/\s+/g, ' '); } catch (e) { return v.replace(/\s+/g, ' '); } };
+  const ICON = {}; const rootCS = getComputedStyle(document.documentElement);
+  for (const nm of ${JSON.stringify(ICON_NAMES)}) { const v = rootCS.getPropertyValue('--ds-icon-' + nm); if (v) ICON[nu(v)] = nm; }
   const R = (v) => Math.round(parseFloat(v) || 0);
   const hex = (v) => { if (!v) return undefined; const m = v.match(/rgba?\(([^)]+)\)/); if (!m) return undefined; const p = m[1].split(/[ ,\/]+/).filter(Boolean).map(Number); const a = p.length > 3 ? p[3] : 1; if (a === 0) return undefined; return p.slice(0, 3).map((x) => Math.round(x).toString(16).padStart(2, '0')).join('') + (a < 1 ? Math.round(a * 255).toString(16).padStart(2, '0') : ''); };
   const DISP = { flex: 'f', 'inline-flex': 'if', grid: 'g', 'inline-grid': 'ig', inline: 'i', 'inline-block': 'ib', none: 'n', contents: 'ct' };
-  const KEEP = /^(data-|aria-(disabled|checked|selected|pressed|current|expanded|label)$|style$|disabled$|placeholder$|value$|checked$|type$|role$|open$|selected$|readonly$|for$|name$)/;
+  const KEEP = /^(data-|aria-(disabled|checked|selected|pressed|current|expanded|label|invalid|readonly)$|style$|disabled$|placeholder$|value$|checked$|type$|role$|open$|selected$|readonly$|for$|name$)/;
   function boxOf(node, base, k) { let r; if (node.nodeType === 3) { const rg = document.createRange(); rg.selectNodeContents(node); r = rg.getBoundingClientRect(); } else r = node.getBoundingClientRect(); return [Math.round((r.left - base.left) / k), Math.round((r.top - base.top) / k), Math.round(r.width / k), Math.round(r.height / k)]; }
   function ser(el, k) {
     const cs = getComputedStyle(el);
@@ -44,6 +49,35 @@ const SER = String.raw`(() => {
     if (parseFloat(cs.flexGrow) > 0) s.fg = 1;
     const op = parseFloat(cs.opacity); if (op < 1) s.op = Math.round(op * 100) / 100;
     if (cs.boxShadow !== 'none') s.sh = 1;
+    // 테두리를 box-shadow: inset 0 0 0 Npx 로 그리는 부품 (목록 inset, 카드, 선택 칸 등, 2026-11-07)
+    const ring = cs.boxShadow.match(/(rgba?\([^)]+\)) 0px 0px 0px (\d+(?:\.\d+)?)px inset/) || cs.boxShadow.match(/inset 0px 0px 0px (\d+(?:\.\d+)?)px (rgba?\([^)]+\))/);
+    if (ring) { const w = parseFloat(ring[1].startsWith('rgb') ? ring[2] : ring[1]), c = hex(ring[1].startsWith('rgb') ? ring[1] : ring[2]); if (w && c) s.rg = [Math.round(w), c]; }
+    // ::before / ::after 로 그린 선과 점 (목록 구분선, 알림 점 등): 위치가 정해진 작은 색 상자만
+    const ps = [], pi = [], pt = [];
+    for (const pe of ['::before', '::after']) {
+      const q = getComputedStyle(el, pe);
+      const mk = [q.webkitMaskImage, q.maskImage].find((x) => x && x !== 'none');
+      if (mk && q.content !== 'none' && q.content !== 'normal' && q.display !== 'none' && q.visibility !== 'hidden') {
+        const nm = ICON[nu(mk)];
+        if (nm) { const pw = parseFloat(q.width) || 16, ph = parseFloat(q.height) || 16, abs = /^(absolute|fixed)$/.test(q.position); const ow = el.offsetWidth, oh = el.offsetHeight;
+          const px = abs ? (q.left !== 'auto' ? parseFloat(q.left) : q.right !== 'auto' ? ow - parseFloat(q.right) - pw : 0) : 0, py = abs ? (q.top !== 'auto' ? parseFloat(q.top) : q.bottom !== 'auto' ? oh - parseFloat(q.bottom) - ph : 0) : 0;
+          pi.push([pe === '::before' ? 'b' : 'a', nm, Math.round(pw), Math.round(ph), hex(q.backgroundColor) || hex(cs.color), abs ? 1 : 0, Math.round(px), Math.round(py)]); }
+        continue;
+      }
+      if (q.content === 'none' || q.content === 'normal' || q.display === 'none' || q.visibility === 'hidden') continue;
+      if (/^".+"$/.test(q.content) && !/^(absolute|fixed)$/.test(q.position)) { try { pt.push([pe === '::before' ? 'b' : 'a', JSON.parse(q.content), hex(q.color), R(q.fontSize), +q.fontWeight, R(q.marginRight) + R(q.marginLeft)]); } catch (e) {} continue; }
+      if (!/^(absolute|fixed)$/.test(q.position)) continue;
+      if (q.content !== '""' && q.content !== "''") continue;
+      const bgc = hex(q.backgroundColor); if (!bgc || parseFloat(q.opacity) === 0) continue;
+      const pw = parseFloat(q.width), ph = parseFloat(q.height); if (!(pw > 0 && ph > 0) || (pw > 40 && ph > 8) || (ph > 40 && pw > 8)) continue;
+      const ow = el.offsetWidth, oh = el.offsetHeight;
+      const px = q.left !== 'auto' ? parseFloat(q.left) : q.right !== 'auto' ? ow - parseFloat(q.right) - pw : 0;
+      const py = q.top !== 'auto' ? parseFloat(q.top) : q.bottom !== 'auto' ? oh - parseFloat(q.bottom) - ph : 0;
+      ps.push([Math.round(px), Math.round(py), Math.round(pw), Math.round(ph), bgc, R(q.borderTopLeftRadius)]);
+    }
+    if (ps.length) s.ps = ps;
+    if (pi.length) s.pi = pi;
+    if (pt.length) s.pt = pt;
     if (cs.position === 'absolute' || cs.position === 'fixed') s.pos = 'a';
     if (cs.overflow === 'hidden' || cs.overflowX === 'hidden' || cs.overflow === 'clip') s.ov = 1;
     if (cs.visibility === 'hidden') s.vh = 1;
