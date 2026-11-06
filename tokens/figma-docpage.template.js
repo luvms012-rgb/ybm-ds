@@ -279,7 +279,7 @@ async function renderS(el, parent, sh) {
     if (s.r) { [f.topLeftRadius, f.topRightRadius, f.bottomRightRadius, f.bottomLeftRadius] = s.r; }
     parent.appendChild(f); f.resize(Math.max(s.w, 1), Math.max(s.h, 1)); if (sizeW(f, s, parent, cw) === 'fill') {} return f;
   }
-  const dir = /^i?f$/.test(s.d) ? (s.fd === 'c' ? 'VERTICAL' : 'HORIZONTAL') : /^i?g$/.test(s.d) ? (s.gc > 1 ? 'HORIZONTAL' : 'VERTICAL') : 'VERTICAL';
+  const dir = el.tag === 'tr' ? 'HORIZONTAL' : /^i?f$/.test(s.d) ? (s.fd === 'c' ? 'VERTICAL' : 'HORIZONTAL') : /^i?g$/.test(s.d) ? (s.gc > 1 ? 'HORIZONTAL' : 'VERTICAL') : 'VERTICAL';  // 표 줄은 가로
   const f = figma.createAutoLayout(dir); f.name = el.tag + (el.cls.length ? '.' + el.cls.join('.') : '');
   f.fills = s.bg ? [cpaint(s.bg, 'bg')] : [];
   const bw = s.bw || [0, 0, 0, 0], p = s.p || [0, 0, 0, 0];
@@ -292,6 +292,7 @@ async function renderS(el, parent, sh) {
   // 자식 묶기: 블록 안의 글자와 인라인 요소는 한 줄 글자로
   const items = []; const K = s.k || [];
   el.c.forEach((k, i) => {
+    if (el.tag === 'details' && el.a.open === undefined && (typeof k === 'string' || k.tag !== 'summary')) return;  // 닫힌 details 는 제목 줄만
     const b = K[i] || [0, 0, 0, 0];
     const block = !/^i?f$|^i?g$/.test(s.d);
     if (block && inlineOK(k)) { const last = items[items.length - 1]; if (last && last.run) { last.parts.push(...flat(k, s, [])); last.bs.push(b); return; } items.push({ run: true, parts: flat(k, s, []), bs: [b] }); return; }
@@ -301,7 +302,7 @@ async function renderS(el, parent, sh) {
   });
   items.forEach((it) => { it.b = rectOf(it.bs); });
   const flow = items.filter((it) => !it.abs);
-  const H = dir === 'HORIZONTAL', oneRow = H && flow.length > 0 && flow.every((it) => Math.abs(it.b[1] - flow[0].b[1]) < 2), wrap = (s.wr || (/^i?g$/.test(s.d) && s.gc > 1)) && !oneRow;
+  const H = dir === 'HORIZONTAL', vis = flow.filter((it) => it.b[2] > 0 && it.b[3] > 0), oneRow = H && vis.length > 0 && vis.every((it) => it.b[1] < vis[0].b[1] + vis[0].b[3] && it.b[1] + it.b[3] > vis[0].b[1]), wrap = (s.wr || (/^i?g$/.test(s.d) && s.gc > 1)) && !oneRow;
   if (wrap) { f.layoutWrap = 'WRAP'; const g = s.gap || [0, 0]; f.itemSpacing = g[1]; f.counterAxisSpacing = g[0]; }
   let spacers = null;
   if (!wrap && s.jc !== 'space-between' && flow.length > 1) {
@@ -319,7 +320,7 @@ async function renderS(el, parent, sh) {
   f.paddingTop = pad[0]; f.paddingRight = pad[1]; f.paddingBottom = pad[2]; f.paddingLeft = pad[3];
   parent.appendChild(f);
   const mode = sizeW(f, s, parent, cw);
-  if (mode === 'later') { if (/^(i|ib|if|ig)$/.test(s.d) || (parent.layoutMode === 'HORIZONTAL')) f.layoutSizingHorizontal = 'HUG'; else { f.resize(Math.max(s.w, 1), f.height); f.layoutSizingHorizontal = 'FIXED'; } }
+  if (mode === 'later') { if (el.tag === 'td' || el.tag === 'th') { f.resize(Math.max(s.w, 1), f.height); f.layoutSizingHorizontal = 'FIXED'; f.primaryAxisAlignItems = 'CENTER'; } else if (/^(i|ib|if|ig)$/.test(s.d) || (parent.layoutMode === 'HORIZONTAL')) f.layoutSizingHorizontal = 'HUG'; else { f.resize(Math.max(s.w, 1), f.height); f.layoutSizingHorizontal = 'FIXED'; } }
   f.layoutSizingVertical = 'HUG';
   CW.set(f.id, inner);
   for (let i = 0; i < items.length; i++) {

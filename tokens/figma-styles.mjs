@@ -58,7 +58,10 @@ const SER = String.raw`(() => {
       const q = getComputedStyle(el, pe);
       const mk = [q.webkitMaskImage, q.maskImage].find((x) => x && x !== 'none');
       if (mk && q.content !== 'none' && q.content !== 'normal' && q.display !== 'none' && q.visibility !== 'hidden') {
-        const nm = ICON[nu(mk)];
+        let nm = ICON[nu(mk)];
+        // 회전된 아이콘(펼친 꺾쇠 등)은 같은 방향의 아이콘 이름으로 (transform 또는 rotate)
+        if (nm) { let deg = 0; const mt = q.transform.match(/matrix\(([^,]+),\s*([^,]+)/); if (mt) deg = Math.round(Math.atan2(parseFloat(mt[2]), parseFloat(mt[1])) * 180 / Math.PI); const rt = q.rotate && q.rotate !== 'none' ? parseFloat(q.rotate) : 0; deg = ((deg + rt) % 360 + 360) % 360;
+          const DIR = ['right', 'down', 'left', 'up']; const m2 = nm.match(/^(chevron|arrow|chevrons)-(right|down|left|up)$/); if (m2 && deg % 90 === 0 && deg) nm = m2[1] + '-' + DIR[(DIR.indexOf(m2[2]) + deg / 90) % 4]; }
         if (nm) { const pw = parseFloat(q.width) || 16, ph = parseFloat(q.height) || 16, abs = /^(absolute|fixed)$/.test(q.position); const ow = el.offsetWidth, oh = el.offsetHeight;
           const px = abs ? (q.left !== 'auto' ? parseFloat(q.left) : q.right !== 'auto' ? ow - parseFloat(q.right) - pw : 0) : 0, py = abs ? (q.top !== 'auto' ? parseFloat(q.top) : q.bottom !== 'auto' ? oh - parseFloat(q.bottom) - ph : 0) : 0;
           pi.push([pe === '::before' ? 'b' : 'a', nm, Math.round(pw), Math.round(ph), hex(q.backgroundColor) || hex(cs.color), abs ? 1 : 0, Math.round(px), Math.round(py)]); }
