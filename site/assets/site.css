@@ -581,7 +581,7 @@ body[data-side-open] .site-scrim { opacity: 1; pointer-events: auto; }
 .site-doc > h3 + p + :not(h2, h3, p) { margin-top: var(--ds-space-x4); }
 .site-doc > p + p { margin-top: var(--ds-space-x3); }
 @media (min-width: 768px) {
-  .site-doc h2:not(.pv-stage *, .site-tile__inner *, .site-example__preview *, .site-tpl *) { margin-top: var(--ds-space-x20); font-size: var(--ds-font-size-t11); line-height: var(--ds-line-height-t11); }
+  .site-doc h2:not(.pv-stage *, .site-tile__inner *, .site-example__preview *, .site-tpl *) { margin-top: var(--ds-space-x20); font-size: var(--ds-font-size-t10); line-height: var(--ds-line-height-t10); }
   .site-doc h3:not(.pv-stage *, .site-tile__inner *, .site-example__preview *, .site-tpl *) { margin-top: var(--ds-space-x12); font-size: var(--ds-font-size-t07); line-height: var(--ds-line-height-t07); }
   .site-doc > header + h2 { margin-top: var(--ds-space-x20); }
 }
@@ -614,7 +614,7 @@ body[data-side-open] .site-scrim { opacity: 1; pointer-events: auto; }
 .site-tile__thumb { border-radius: var(--ds-shape-xl); }
 .site-doc .site-tile .site-tile__name { font-size: var(--ds-font-size-t05); line-height: var(--ds-line-height-t05); font-weight: var(--ds-font-weight-medium); letter-spacing: 0; }
 .site-doc .site-group__title { font-size: var(--ds-font-size-t09); line-height: var(--ds-line-height-t09); font-weight: var(--ds-font-weight-semibold); letter-spacing: 0; }
-@media (min-width: 768px) { .site-doc .site-group__title { font-size: var(--ds-font-size-t11); line-height: var(--ds-line-height-t11); } }
+@media (min-width: 768px) { .site-doc .site-group__title { font-size: var(--ds-font-size-t10); line-height: var(--ds-line-height-t10); } }
 /* 분류 칩: 높이 40 알약 */
 .site-toolbar--wrap .ds-chiptabs { --ds-ct-height: 40px; --ds-ct-padding-x: var(--ds-space-x4); gap: var(--ds-space-x2); }
 .site-toolbar .ds-chiptabs__trigger { font-weight: var(--ds-font-weight-medium); letter-spacing: 0; }
