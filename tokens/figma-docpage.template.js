@@ -95,7 +95,7 @@ function instanceFor(el, set, defaults) {
     if (!v || !d.variantOptions.includes(v)) v = defaults[k] && d.variantOptions.includes(defaults[k]) ? defaults[k] : d.variantOptions.includes('enabled') && k === 'state' ? 'enabled' : undefined;
     if (v) props[k] = v;
   }
-  const variant = set.children.find((c) => Object.entries(props).every(([k, v]) => c.variantProperties[k] === v)) || set.defaultVariant;
+  const variant = set.type === 'COMPONENT' ? set : set.children.find((c) => Object.entries(props).every(([k, v]) => c.variantProperties[k] === v)) || set.defaultVariant;
   const inst = variant.createInstance();
   const extra = {};
   const label = ownText(el), icons = iconsIn(el);
@@ -136,12 +136,8 @@ const TCOLOR = (cls) => cls.includes('ds-fg-muted') ? 'fg/neutral-muted' : cls.i
 async function render(el, parent, ctx) {
   if (typeof el === 'string') { const s = TSTYLE(ctx.cls || []); await figma.loadFontAsync(s.fontName); add(parent, text(el.trim(), s, TCOLOR(ctx.cls || []))); return; }
   const setCls = el.cls.find((c) => SET[c] && c !== 'ds-list-item');
-  if (setCls) {
-    const inst = instanceFor(el, SET[setCls], (DATA.defaults[setCls] || {}));
-    parent.appendChild(inst);
-    if ((el.a['data-width'] === 'fill' || el.cls.includes('u-grow') || el.cls.includes('u-full')) && parent.layoutMode && parent.layoutMode !== 'NONE') inst.layoutSizingHorizontal = 'FILL';
-    return inst;
-  }
+  if (setCls) return setNode(el, setCls, parent);
+  if (el.s) return renderS(el, parent);
   if (el.cls.includes('ds-list')) {
     const inset = el.a['data-variant'] === 'inset';
     const l = box('VERTICAL', 'List', inset ? { fill: 'bg/layer-default', radius: 'shape/xl', stroke: 'stroke/neutral-weak' } : {}); l.clipsContent = true;
@@ -175,6 +171,336 @@ function fit(node, el, parent) {
   else if ((/width:\s*100%/.test(style) || el.cls.includes('u-full') || el.cls.includes('u-grow') || el.cls.includes('u-between')) && parent.layoutMode && parent.layoutMode !== 'NONE') node.layoutSizingHorizontal = 'FILL';
   // 블록 요소(div, ul 등)는 세로로 쌓는 부모 안에서 폭을 채운다 (예시 맨 바깥은 max-width 로 고정)
   else if (['div', 'ul', 'ol', 'section', 'li', 'p', 'form', 'nav', 'header', 'footer'].includes(el.tag) && parent.layoutMode === 'VERTICAL' && !['Preview', 'Scene'].includes(parent.name)) node.layoutSizingHorizontal = 'FILL';
+}
+
+// ---------- 사이트에서 읽은 실제 모양(el.s, node tokens/figma-styles.mjs)으로 그리기 (2026-11-06)
+// s: d 표시(b 블록, f 플렉스, if, g 그리드, i 인라인, ib), fd 세로, gap [행, 열], jc, ai, p 여백, bg, bw 테두리 두께, bc, r 모서리, w, h, fs, fw, c 글자색, lh, ta, k 자식 상자 [x, y, w, h]
+// 색은 같은 값의 Figma 변수(bg/, fg/, stroke/)에 묶고, 없으면 값 그대로. 글자는 같은 크기와 굵기의 Static 글자 스타일
+const CV = { bg: [], fg: [], stroke: [], any: [] };
+{
+  const byId = Object.fromEntries(allVars.map((v) => [v.id, v]));
+  const colls = Object.fromEntries((await figma.variables.getLocalVariableCollectionsAsync()).map((c) => [c.id, c]));
+  const val = (v, n = 0) => { const c = colls[v.variableCollectionId]; const x = c && v.valuesByMode[c.defaultModeId]; if (x && x.type === 'VARIABLE_ALIAS') return byId[x.id] && n < 8 ? val(byId[x.id], n + 1) : null; return x; };
+  for (const v of allVars) { if (v.resolvedType !== 'COLOR') continue; const x = val(v); if (!x || x.r === undefined) continue; (CV[v.name.split('/')[0]] || CV.any).push([v.name, x.r * 255, x.g * 255, x.b * 255, x.a === undefined ? 1 : x.a]); }
+}
+const hexRGB = (h) => [parseInt(h.slice(0, 2), 16), parseInt(h.slice(2, 4), 16), parseInt(h.slice(4, 6), 16), h.length > 6 ? parseInt(h.slice(6, 8), 16) / 255 : 1];
+const cpaint = (h, kind) => {
+  const [r, g, b, a] = hexRGB(h);
+  for (const list of [CV[kind] || [], CV.bg, CV.fg, CV.stroke, CV.any]) { const m = list.find((e) => Math.abs(e[1] - r) < 1.5 && Math.abs(e[2] - g) < 1.5 && Math.abs(e[3] - b) < 1.5 && Math.abs(e[4] - a) < 0.02); if (m) return paint(m[0]); }
+  return { type: 'SOLID', color: { r: r / 255, g: g / 255, b: b / 255 }, opacity: a };
+};
+const WN = (w) => (w >= 700 ? 'Bold' : w >= 600 ? 'SemiBold' : w >= 500 ? 'Medium' : 'Regular');
+const TS = (fs, fw) => Object.values(styles).find((x) => x.name.startsWith('Static/') && x.fontSize === fs && x.fontName.style === WN(fw));
+const lhOf = (x) => (x.lineHeight && x.lineHeight.unit === 'PIXELS' ? x.lineHeight.value : 0);
+const SHAPES = allVars.filter((v) => /^shape\//.test(v.name) && v.resolvedType === 'FLOAT');
+async function styleText(t, s, from, to) {
+  const x = TS(s.fs, s.fw);
+  const f = x ? x.fontName : { family: 'Pretendard', style: WN(s.fw) }; await figma.loadFontAsync(f);
+  const all = from === undefined;
+  if (x) { if (all) t.textStyleId = x.id; else t.setRangeTextStyleId(from, to, x.id); }
+  else { if (all) { t.fontName = f; t.fontSize = s.fs || 16; } else { t.setRangeFontName(from, to, f); t.setRangeFontSize(from, to, s.fs || 16); } }
+  const fill = [cpaint(s.c || '1a1c20', 'fg')]; if (all) t.fills = fill; else t.setRangeFills(from, to, fill);
+  if (s.lh && (!x || Math.abs(lhOf(x) - s.lh) > 1)) { const lh = { unit: 'PIXELS', value: s.lh }; if (all) t.lineHeight = lh; else t.setRangeLineHeight(from, to, lh); }
+  if (s.ul) { if (all) t.textDecoration = 'UNDERLINE'; else t.setRangeTextDecoration(from, to, 'UNDERLINE'); }
+}
+// 글자 줄(인라인 조각들)을 글자 레이어 하나로: [[글, s], ...]
+async function runText(parts, s0, name) {
+  const t = figma.createText(); t.name = name || 'Text';
+  await figma.loadFontAsync(t.fontName);
+  const str = parts.map((p) => p[0]).join('').replace(/^\s+|\s+$/g, '');
+  const lead = parts.map((p) => p[0]).join('').search(/\S/);
+  await styleText(t, s0);
+  t.characters = str || ' ';
+  let i = -Math.max(lead, 0);
+  for (const [txt, s] of parts) { const a = Math.max(i, 0), b = Math.min(i + txt.length, str.length); if (b > a && s !== s0) await styleText(t, s, a, b); i += txt.length; }
+  if (s0.ta) t.textAlignHorizontal = s0.ta === 'center' ? 'CENTER' : 'RIGHT';
+  return t;
+}
+const isIcon = (el) => typeof el !== 'string' && el.cls.includes('ds-icon') && el.cls.some((c) => /^ds-icon--/.test(c) && !/^ds-icon--(xs|sm|md|lg|xl)$/.test(c));
+const plainBox = (s) => !s.bg && !(s.bw && s.bw.some(Boolean)) && !(s.p && s.p.some(Boolean)) && !s.r;
+const inlineOK = (el) => typeof el === 'string' || (el.s && el.s.d === 'i' && plainBox(el.s) && !isIcon(el) && !el.cls.some((c) => SET[c] && c !== 'ds-list-item') && el.c.every(inlineOK));
+const flat = (el, s, out) => { if (typeof el === 'string') out.push([el, s]); else for (const k of el.c) flat(k, el.s, out); return out; };
+const rectOf = (bs) => bs.reduce((u, b) => (u ? [Math.min(u[0], b[0]), Math.min(u[1], b[1]), Math.max(u[0] + u[2], b[0] + b[2]) - Math.min(u[0], b[0]), Math.max(u[1] + u[3], b[1] + b[3]) - Math.min(u[1], b[1])] : b.slice()), null);
+const hugW = (n) => n.layoutSizingHorizontal === 'HUG';
+const CW = new Map(); const cwOf = (n) => CW.get(n.id) || 0;
+// 부모 안에서 폭 정하기: 부모 폭을 다 쓰면 FILL, 아니면 사이트 폭으로 고정(내용에 맞는 요소는 HUG 뒤 다르면 고정)
+function sizeW(node, s, parent, cw) {
+  if (!parent.layoutMode || parent.layoutMode === 'NONE' || !s) return;
+  const root = ['Preview', 'Scene'].includes(parent.name);
+  const full = cw > 0 && Math.abs(s.w - cw) <= 1;
+  if (node.type === 'TEXT') {
+    const one = s.nw || !s.lh || s.h <= s.lh * 1.4;
+    if (one) { node.textAutoResize = 'WIDTH_AND_HEIGHT'; return; }
+    if (full && !root && !hugW(parent) && parent.layoutMode === 'VERTICAL') { node.layoutSizingHorizontal = 'FILL'; node.textAutoResize = 'HEIGHT'; return; }
+    node.textAutoResize = 'HEIGHT'; node.resize(Math.max(s.w, 1), node.height); node.layoutSizingHorizontal = 'FIXED'; return;
+  }
+  if (!root && !hugW(parent) && ((parent.layoutMode === 'VERTICAL' && full) || (parent.layoutMode === 'HORIZONTAL' && s.fg))) { node.layoutSizingHorizontal = 'FILL'; return 'fill'; }
+  return 'later';
+}
+function fixAfter(node, s) {
+  if (!s || node.type === 'TEXT') return;
+  if (node.layoutSizingHorizontal !== 'FILL' && s.w > 0 && Math.abs(node.width - s.w) > 2) { try { node.resize(s.w, node.height); node.layoutSizingHorizontal = 'FIXED'; } catch (e) {} }
+  if (node.type === 'FRAME' && node.layoutMode !== 'NONE') { if (node.layoutSizingVertical !== 'FILL' && s.h > 0 && (s.h > node.height + 2 || (s.ov && s.h < node.height - 2))) { node.resize(node.width, s.h); node.layoutSizingVertical = 'FIXED'; } }
+  else if (node.type === 'INSTANCE' && s.h > 0 && Math.abs(node.height - s.h) > 2 && !node.children.some((c) => c.type === 'TEXT' || c.layoutMode)) { try { node.resize(node.width, s.h); } catch (e) {} }
+}
+async function iconNode(el, parent) {
+  const s = el.s; const name = el.cls.find((c) => /^ds-icon--/.test(c) && !/^ds-icon--(xs|sm|md|lg|xl)$/.test(c)).slice(9);
+  const solid = /-solid$/.test(name); const setN = iconPage.findOne((n) => (n.type === 'COMPONENT_SET' || n.type === 'COMPONENT') && n.name === 'Lucide/' + name.replace(/-solid$/, ''));
+  const comp = setN && (setN.type === 'COMPONENT_SET' ? setN.children.find((v) => /Solid/i.test(v.name) === solid) || setN.defaultVariant : setN);
+  let n;
+  if (comp) { n = comp.createInstance(); const col = cpaint(s.bg || s.c || '1a1c20', 'fg'); for (const v of n.findAll((x) => x.type === 'VECTOR')) { if (v.strokes.length) v.strokes = [col]; if (v.fills.length) v.fills = [col]; } }
+  else { n = figma.createFrame(); n.name = 'icon ' + name; n.fills = [cpaint(s.bg || s.c || '1a1c20', 'fg')]; res.warn.push('아이콘 없음: ' + name); }
+  parent.appendChild(n); n.resize(s.w || 20, s.h || 20); return n;
+}
+async function renderS(el, parent) {
+  const s = el.s;
+  if (s.d === 'n' || s.vh) return null;
+  if (isIcon(el)) return iconNode(el, parent);
+  const cw = cwOf(parent);
+  if (plainBox(s) && el.c.length && el.c.every(inlineOK) && !s.ov && !s.op && !/^i?[fg]$/.test(s.d)) { const t = await runText(flat(el, s, []), s, el.tag); parent.appendChild(t); sizeW(t, s, parent, cw); return t; }
+  if (['svg', 'img', 'video', 'canvas', 'picture'].includes(el.tag)) {
+    const f = figma.createFrame(); f.name = el.tag; f.fills = s.bg ? [cpaint(s.bg, 'bg')] : el.tag === 'svg' ? [] : [paint('bg/neutral-weak')];
+    if (s.r) { [f.topLeftRadius, f.topRightRadius, f.bottomRightRadius, f.bottomLeftRadius] = s.r; }
+    parent.appendChild(f); f.resize(Math.max(s.w, 1), Math.max(s.h, 1)); if (sizeW(f, s, parent, cw) === 'fill') {} return f;
+  }
+  const dir = /^i?f$/.test(s.d) ? (s.fd === 'c' ? 'VERTICAL' : 'HORIZONTAL') : /^i?g$/.test(s.d) ? (s.gc > 1 ? 'HORIZONTAL' : 'VERTICAL') : 'VERTICAL';
+  const f = figma.createAutoLayout(dir); f.name = el.tag + (el.cls.length ? '.' + el.cls.join('.') : '');
+  f.fills = s.bg ? [cpaint(s.bg, 'bg')] : [];
+  const bw = s.bw || [0, 0, 0, 0], p = s.p || [0, 0, 0, 0];
+  if (s.bw) { f.strokes = [cpaint(s.bc, 'stroke')]; f.strokeAlign = 'INSIDE'; f.strokeTopWeight = bw[0]; f.strokeRightWeight = bw[1]; f.strokeBottomWeight = bw[2]; f.strokeLeftWeight = bw[3]; }
+  if (s.r) { const keys = ['topLeftRadius', 'topRightRadius', 'bottomRightRadius', 'bottomLeftRadius']; s.r.forEach((v, i) => { const sv = SHAPES.find((x) => Object.values(x.valuesByMode)[0] === v); f[keys[i]] = Math.min(v, Math.max(s.w, s.h)); if (sv && v < 999) f.setBoundVariable(keys[i], sv); }); }
+  if (s.op) f.opacity = s.op;
+  if (s.ov) f.clipsContent = true;
+  const pad = [p[0] + bw[0], p[1] + bw[1], p[2] + bw[2], p[3] + bw[3]];
+  // 자식 묶기: 블록 안의 글자와 인라인 요소는 한 줄 글자로
+  const items = []; const K = s.k || [];
+  el.c.forEach((k, i) => {
+    const b = K[i] || [0, 0, 0, 0];
+    const block = !/^i?f$|^i?g$/.test(s.d);
+    if (block && inlineOK(k)) { const last = items[items.length - 1]; if (last && last.run) { last.parts.push(...flat(k, s, [])); last.bs.push(b); return; } items.push({ run: true, parts: flat(k, s, []), bs: [b] }); return; }
+    if (typeof k === 'string') { items.push({ run: true, parts: [[k, s]], bs: [b] }); return; }
+    if (k.s && (k.s.d === 'n' || k.s.vh)) return;
+    items.push({ el: k, bs: [b], abs: k.s && k.s.pos === 'a' });
+  });
+  items.forEach((it) => { it.b = rectOf(it.bs); });
+  const flow = items.filter((it) => !it.abs);
+  const H = dir === 'HORIZONTAL', wrap = s.wr || (/^i?g$/.test(s.d) && s.gc > 1);
+  if (wrap) { f.layoutWrap = 'WRAP'; const g = s.gap || [0, 0]; f.itemSpacing = g[1]; f.counterAxisSpacing = g[0]; }
+  let spacers = null;
+  if (!wrap && s.jc !== 'space-between' && flow.length > 1) {
+    const gaps = []; for (let i = 1; i < flow.length; i++) { const a = flow[i - 1].b, b = flow[i].b; gaps.push(H ? b[0] - (a[0] + a[2]) : b[1] - (a[1] + a[3])); }
+    const mn = Math.min(...gaps); f.itemSpacing = mn; if (gaps.some((g) => Math.abs(g - mn) > 1)) spacers = gaps.map((g) => g - mn);
+  }
+  const J = { center: 'CENTER', 'flex-end': 'MAX', end: 'MAX', right: 'MAX', 'space-between': 'SPACE_BETWEEN' };
+  const A = { center: 'CENTER', 'flex-end': 'MAX', end: 'MAX', baseline: H ? 'BASELINE' : 'MIN' };
+  if (/^i?[fg]$/.test(s.d)) { f.primaryAxisAlignItems = J[s.jc] || 'MIN'; f.counterAxisAlignItems = A[s.ai] || 'MIN'; }
+  const inner = Math.max(s.w - pad[1] - pad[3], 0);
+  const first = flow[0] && flow[0].b;
+  if (first && !H && f.primaryAxisAlignItems === 'MIN' && first[1] > 1) pad[0] += first[1];
+  if (first && H && f.primaryAxisAlignItems === 'MIN' && first[0] > 1 && !wrap) pad[3] += first[0];
+  if (!/^i?[fg]$/.test(s.d)) { const nf = flow.find((it) => it.b[2] < inner - 2); if (nf) { const x = nf.b[0], r = inner - (x + nf.b[2]); f.counterAxisAlignItems = Math.abs(x - r) <= 2 && x > 2 ? 'CENTER' : x > r + 2 ? 'MAX' : 'MIN'; } if (s.ta === 'center' && flow.every((it) => it.run)) f.counterAxisAlignItems = 'CENTER'; }
+  f.paddingTop = pad[0]; f.paddingRight = pad[1]; f.paddingBottom = pad[2]; f.paddingLeft = pad[3];
+  parent.appendChild(f);
+  const mode = sizeW(f, s, parent, cw);
+  if (mode === 'later') { if (/^(i|ib|if|ig)$/.test(s.d) || (parent.layoutMode === 'HORIZONTAL')) f.layoutSizingHorizontal = 'HUG'; else { f.resize(Math.max(s.w, 1), f.height); f.layoutSizingHorizontal = 'FIXED'; } }
+  f.layoutSizingVertical = 'HUG';
+  CW.set(f.id, inner);
+  for (let i = 0; i < items.length; i++) {
+    const it = items[i];
+    if (spacers && i > 0 && !it.abs && spacers[flow.indexOf(it) - 1] > 0) { const sp = figma.createFrame(); sp.name = 'gap'; sp.fills = []; f.appendChild(sp); sp.resize(H ? spacers[flow.indexOf(it) - 1] : 1, H ? 1 : spacers[flow.indexOf(it) - 1]); }
+    let n;
+    if (it.run) { const s0 = it.parts[0][1] || s; n = await runText(it.parts, s0.fs ? s0 : s, 'Text'); f.appendChild(n); sizeW(n, { ...s0, w: it.b[2], h: it.b[3], lh: s0.lh, nw: s0.nw }, f, inner); if (!s0.ta && s.ta) n.textAlignHorizontal = s.ta === 'center' ? 'CENTER' : 'RIGHT'; }
+    else n = await render(it.el, f, {});
+    if (n && it.abs) { try { n.layoutPositioning = 'ABSOLUTE'; n.x = it.b[0] + pad[3]; n.y = it.b[1] + pad[0]; } catch (e) {} }
+  }
+  fixAfter(f, s);
+  return f;
+}
+// 부품 인스턴스: 글자 채우기(sp), 본문 칸이 있는 부품(fx: card, sheet, dialog, md)은 풀어서 본문을 그린다. 인스턴스로 못 나타내면 모양 그대로 그린다
+async function setNode(el, setCls, parent) {
+  const cw = cwOf(parent);
+  if (el.fb && el.s) return renderS(el, parent);
+  const inst = instanceFor(el, SET[setCls], (DATA.defaults[setCls] || {}));
+  parent.appendChild(inst);
+  let node = inst;
+  if (el.sp) { const ok = await FILL(inst, el.sp, true); if (ok === false && el.s && el.c.length) { inst.remove(); return renderS(el, parent); } }
+  if (el.fx) node = await FIX(inst, el);
+  if (el.s) { if (sizeW(node, el.s, parent, cw) !== 'fill') fixAfter(node, el.s); }
+  else if ((el.a['data-width'] === 'fill' || el.cls.includes('u-grow') || el.cls.includes('u-full')) && parent.layoutMode && parent.layoutMode !== 'NONE') node.layoutSizingHorizontal = 'FILL';
+  return node;
+}
+
+// 인스턴스 글자 채우기 (sync.mjs 가 만든 sp: own 글, parts 이름별 글, kids 안쪽 부품, items 되풀이 항목, a 속성)
+const LIST_ITEM = '2350:1207';
+const nk = (s) => String(s).toLowerCase().replace(/[^a-z0-9]/g, '');
+const kebab2 = (s) => s.replace(/[A-Z]/g, (c) => '-' + c.toLowerCase()).replace(/\s+/g, '-').toLowerCase();
+const AL = { label: ['label', 'text', 'name', 'value', 'title', 'item', 'trigger'], title: ['title', 'heading', 'name', 'label', 'h2', 'h3'], description: ['desc', 'description', 'subtitle', 'help', 'sub', 'supporting', 'message'], descriptiontext: ['desc', 'description', 'subtitle'], message: ['message', 'text', 'body', 'content', 'title'], value: ['value', 'placeholder', 'text'], actionlabel: ['action'], action: ['action'], actionbutton: ['action'], body: ['body', 'content', 'p'], content: ['body', 'content', 'p', 'text'], contenttext: ['content', 'body', 'panel'], count: ['count'], nickname: ['nickname', 'name'], name: ['name', 'title'], subtitle: ['subtitle', 'desc'], indicatorlabel: ['indicator'], indicatortext: ['indicator'], errormessage: ['error', 'errormessage'], prefixlabel: ['prefix'], prefixtext: ['prefix'], suffixlabel: ['suffix'], suffixtext: ['suffix'], suffix: ['suffix'], number: ['number'], time: ['time'], status: ['status'], size: ['size'], language: ['language'], codetext: ['code'], total: ['total'], cancel: ['cancel'], input: ['input', 'placeholder'], placeholder: ['placeholder', 'value'] };
+const OWNFIRST = ['label', 'text', 'message', 'value'];
+const DEFAULT_TEXT = ['라벨', 'Label', 'Content', '설명을 작성할 수 있어요', '제목', 'Title', 'Description'];
+const fontsDone = new Set();
+async function fonts(node) { const ts = node.type === 'TEXT' ? [node] : node.findAll((n) => n.type === 'TEXT'); for (const t of ts) { if (t.characters.length === 0) { const f = t.fontName; if (f !== figma.mixed) { const k = f.family + f.style; if (!fontsDone.has(k)) { await figma.loadFontAsync(f); fontsDone.add(k); } } continue; } for (const s of t.getStyledTextSegments(['fontName'])) { const k = s.fontName.family + s.fontName.style; if (!fontsDone.has(k)) { await figma.loadFontAsync(s.fontName); fontsDone.add(k); } } } }
+const setIdOf = async (inst) => { const m = await inst.getMainComponentAsync(); if (!m) return null; return m.parent && m.parent.type === 'COMPONENT_SET' ? m.parent.id : m.id; };
+function nestedOf(node) { const out = []; const walk = (n) => { for (const c of n.children || []) { if (c.type === 'INSTANCE') out.push(c); else walk(c); } }; walk(node); return out; }
+function ownTexts(inst) { const out = []; const walk = (n) => { for (const c of n.children || []) { if (c.type === 'TEXT') out.push(c); else if (c.type !== 'INSTANCE') walk(c); } }; walk(inst); return out; }
+function picker(s) {
+  const used = {};
+  const take = (keys) => { for (const k of keys) { const v = (s.parts || {})[k]; if (v === undefined) continue; if (Array.isArray(v)) { const i = used[k] || 0; if (i < v.length) { used[k] = i + 1; return v[i]; } } else if (!used[k]) { used[k] = 1; return v; } } return undefined; };
+  const has = (keys) => keys.some((k) => (s.parts || {})[k] !== undefined);
+  return { take, has };
+}
+async function FILL(inst, s, top) {
+  const main = await inst.getMainComponentAsync(); if (!main) return;
+  const owner = main.parent && main.parent.type === 'COMPONENT_SET' ? main.parent : main;
+  const defs = owner.componentPropertyDefinitions;
+  if (!top && s.a) { const vp = {}; for (const [k, d] of Object.entries(defs)) { if (d.type !== 'VARIANT') continue; const v = s.a[kebab2(k)] || s.a[k]; if (v && d.variantOptions.includes(v) && inst.componentProperties[k] && inst.componentProperties[k].value !== v) vp[k] = v; } if (Object.keys(vp).length) { try { inst.setProperties(vp); } catch (e) {} } }
+  await fonts(inst);
+  const pk = picker(s); const p = {}; const filled = new Set();
+  for (const [k, d] of Object.entries(inst.componentProperties)) {
+    const b = nk(k.split('#')[0]);
+    if (d.type === 'TEXT') {
+      const keys = AL[b] || [b];
+      let v = OWNFIRST.includes(b) && s.own ? s.own : pk.take(keys);
+      if (v === undefined && b === 'title' && s.own) v = s.own;
+      if (v !== undefined) { filled.add(b); if (v !== d.value) p[k] = v; }
+    }
+    if (d.type === 'BOOLEAN' && ['description', 'descriptiontext', 'subtitle', 'showdescription'].includes(b)) { const v = pk.has(AL.description); if (v !== d.value) p[k] = v; }
+  }
+  // 사이트에 글이 없는데 Figma 기본 글이 남는 칸은 끈다 (Checkbox, Switch 이름표 등)
+  for (const [k, d] of Object.entries(inst.componentProperties)) {
+    if (d.type !== 'TEXT') continue; const b = nk(k.split('#')[0]);
+    if (filled.has(b) || !DEFAULT_TEXT.includes(d.value)) continue;
+    const sk = Object.keys(inst.componentProperties).find((x) => inst.componentProperties[x].type === 'BOOLEAN' && nk(x.split('#')[0]) === 'show' + b);
+    if (sk) p[sk] = false;
+  }
+  if (Object.keys(p).length) { try { inst.setProperties(p); } catch (e) { res.warn.push('prop ' + inst.name + ': ' + String(e).slice(0, 60)); } }
+  for (const t of ownTexts(inst)) {
+    if (t.componentPropertyReferences && t.componentPropertyReferences.characters) continue;
+    const b = nk(t.name); const v = pk.take(AL[b] || [b]);
+    if (v !== undefined && t.characters !== v) { await fonts(t); t.characters = v; }
+  }
+  // 되풀이 항목(라디오 묶음 등): 안쪽 같은 부품에 차례로 글을 넣고 남는 것은 끈다. 모자라면 false (모양 그대로 그린다)
+  if (s.items) {
+    const nested = nestedOf(inst).filter((n) => n.visible); const ids = []; for (const n of nested) ids.push(await setIdOf(n));
+    const cnt = {}; ids.forEach((x) => { cnt[x] = (cnt[x] || 0) + 1; }); const top1 = Object.keys(cnt).sort((a, b) => cnt[b] - cnt[a])[0];
+    const its = nested.filter((n, i) => ids[i] === top1);
+    if (its.length < s.items.length) return false;
+    for (let i = 0; i < its.length; i++) {
+      const n = its[i], it = s.items[i]; if (!it) { n.visible = false; continue; }
+      const pp = {}; const tk = Object.keys(n.componentProperties).find((x) => n.componentProperties[x].type === 'TEXT'); if (tk) pp[tk] = it.t;
+      for (const [k, d] of Object.entries(n.componentProperties)) if (d.type === 'VARIANT' && /^(checked|selected|state)$/i.test(k)) { const opts = (await n.getMainComponentAsync()).parent.componentPropertyDefinitions[k].variantOptions; const want = it.on ? opts.find((o) => /^(true|checked|selected|on)$/i.test(o)) : opts.find((o) => /^(false|unchecked|enabled|off|default)$/i.test(o)); if (want) pp[k] = want; }
+      try { await fonts(n); n.setProperties(pp); } catch (e) {}
+    }
+    return true;
+  }
+  if (s.kids && s.kids.length) {
+    const nested = nestedOf(inst); const ids = []; for (const n of nested) ids.push(await setIdOf(n));
+    const usedN = new Set(); const sets = new Set(); let miss = 0;
+    for (const kid of s.kids) {
+      sets.add(kid.set);
+      let best = -1, score = -1;
+      for (let i = 0; i < nested.length; i++) { if (usedN.has(i) || ids[i] !== kid.set) continue; let sc = 0; for (const [k, v] of Object.entries(nested[i].componentProperties)) if (v.type === 'VARIANT' && kid.a && (kid.a[kebab2(k)] === v.value)) sc++; if (sc > score) { score = sc; best = i; } }
+      if (best < 0) { miss++; continue; }
+      usedN.add(best); if (!nested[best].visible) nested[best].visible = true;
+      await FILL(nested[best], kid, false);
+    }
+    if (miss && top) return false;
+    for (let i = 0; i < nested.length; i++) if (!usedN.has(i) && sets.has(ids[i]) && nested[i].visible) nested[i].visible = false;
+    s._sets = sets;
+  }
+  const nested2 = nestedOf(inst); const kidSets = s._sets || new Set(); const grp = {};
+  for (const n of nested2) {
+    if (!n.visible) continue; const id = await setIdOf(n); if (kidSets.has(id)) continue;
+    let got = false, list = false; const pp = {};
+    for (const [k, d] of Object.entries(n.componentProperties)) { if (d.type !== 'TEXT') continue; const b = nk(k.split('#')[0]); const keys = AL[b] || [b]; list = list || keys.some((x) => Array.isArray((s.parts || {})[x])); const v = pk.take(keys); if (v !== undefined) { got = true; if (v !== d.value) pp[k] = v; } }
+    if (Object.keys(pp).length) { try { await fonts(n); n.setProperties(pp); } catch (e) {} }
+    for (const t of n.findAll((x) => x.type === 'TEXT')) { if (t.componentPropertyReferences && t.componentPropertyReferences.characters) continue; const b = nk(t.name); const v = pk.take(AL[b] || [b]); if (v !== undefined) { got = true; if (t.characters !== v) { await fonts(t); t.characters = v; } } }
+    (grp[id] = grp[id] || []).push([n, got, list]);
+  }
+  for (const arr of Object.values(grp)) if (arr.some((x) => x[1] && x[2])) for (const [n, got] of arr) if (!got && n.visible) n.visible = false;
+  return true;
+}
+// 본문 칸 부품: 인스턴스를 풀고 사이트 본문을 그린다 (fx = { kind, title, desc, header, close, handle, center })
+const partEl = (el, name) => el.c.find((x) => typeof x !== 'string' && x.cls.some((k) => k.endsWith('__' + name)));
+const deepT = (el) => (typeof el === 'string' ? el : el.c.map(deepT).join(' ')).replace(/\s+/g, ' ').trim();
+async function renderInto(fr, els, w) {
+  CW.set(fr.id, w || fr.width - fr.paddingLeft - fr.paddingRight);
+  const before = new Set(fr.children.map((c) => c.id));
+  for (const el of els) await render(el, fr, {});
+  if (fr.layoutMode === 'VERTICAL') for (const c of fr.children) if (!before.has(c.id)) { try { if (c.type === 'TEXT') { c.layoutSizingHorizontal = 'FILL'; c.textAutoResize = 'HEIGHT'; } else c.layoutSizingHorizontal = 'FILL'; } catch (e) {} }
+}
+async function FIX(inst, el) {
+  const o = el.fx; const cp = inst.componentProperties;
+  const keyOf = (b) => Object.keys(inst.componentProperties).find((k) => k.split('#')[0] === b);
+  const kidsOf = (x) => (x ? x.c.filter((y) => typeof y !== 'string' || y.trim()) : []);
+  const ft = partEl(el, 'footer');
+  if (o.kind === 'card') {
+    const h = partEl(el, 'header'); const p = {}; const put = (b, v) => { const k = keyOf(b); if (k !== undefined && v !== undefined && v !== null) p[k] = v; };
+    put('header', !!h); put('show description', !!o.desc); put('footer', !!ft); put('title', o.title); put('description', o.desc);
+    await fonts(inst); inst.setProperties(p);
+    const fr = inst.detachInstance();
+    const slot = fr.findChild((n) => n.name === 'content');
+    const nb = box('VERTICAL', 'content', { gap: 12 });
+    if (slot) { fr.insertChild(fr.children.indexOf(slot), nb); slot.remove(); } else fr.appendChild(nb);
+    nb.layoutSizingHorizontal = 'FILL';
+    await renderInto(nb, el.c.filter((x) => x !== h && x !== ft && (typeof x !== 'string' || x.trim())), (el.s ? el.s.w : fr.width) - fr.paddingLeft - fr.paddingRight);
+    if (ft) { const f2 = fr.findChild((n) => n.name === 'footer'); if (f2) { for (const c of [...f2.children]) c.remove(); await renderInto(f2, kidsOf(ft)); } }
+    return fr;
+  }
+  if (o.kind === 'sheet' || o.kind === 'dialog') {
+    const vp = {}; const opt = (k, v) => { if (cp[k] && cp[k].type === 'VARIANT' && cp[k].value !== v) vp[k] = v; };
+    opt('closeButton', o.close ? 'true' : 'false');
+    if (o.kind === 'sheet') { opt('handle', o.handle ? 'true' : 'false'); opt('headerAlign', o.center ? 'center' : 'left'); } else opt('footer', ft ? 'true' : 'false');
+    try { if (Object.keys(vp).length) inst.setProperties(vp); } catch (e) { res.warn.push('variant ' + String(e).slice(0, 60)); }
+    const p = {}; if (o.title && keyOf('title')) p[keyOf('title')] = o.title; if (o.desc && keyOf('description')) p[keyOf('description')] = o.desc;
+    await fonts(inst); if (Object.keys(p).length) inst.setProperties(p);
+    const fr = inst.detachInstance();
+    if (!o.desc) { const d = fr.findOne((n) => n.type === 'TEXT' && n.name === 'description'); if (d) d.visible = false; }
+    const body = fr.findChild((n) => n.name === 'body'); const be = partEl(el, 'body');
+    if (body) { for (const c of [...body.children]) if (o.kind === 'sheet' || c.name === 'content') c.remove(); await renderInto(body, kidsOf(be)); if (o.kind === 'dialog') { const sb = body.findChild((n) => n.name === 'scrollbar'); if (sb) body.appendChild(sb); } }
+    const f2 = fr.findChild((n) => n.name === 'footer');
+    if (f2) { if (ft) { for (const c of [...f2.children]) c.remove(); await renderInto(f2, kidsOf(ft)); } else f2.visible = false; }
+    return fr;
+  }
+  if (o.kind === 'md') {
+    const fr = inst.detachInstance();
+    const tplN = {}; for (const c of fr.children) if (!tplN[c.name]) tplN[c.name] = c;
+    const old = [...fr.children]; let i = 0;
+    const setT = async (t, v) => { if (!t) return; await fonts(t); t.characters = v; };
+    for (const e of el.c.filter((x) => typeof x !== 'string')) {
+      if (i++ && tplN.space) fr.appendChild(tplN.space.clone());
+      const sc = e.cls.find((c) => SET[c] && c !== 'ds-list-item');
+      if (sc) { const n = await render(e, fr, {}); try { n.layoutSizingHorizontal = 'FILL'; } catch (er) {} continue; }
+      if (e.tag === 'blockquote' && tplN.blockquote) { const b = tplN.blockquote.clone(); fr.appendChild(b); await setT(b.findOne((n) => n.type === 'TEXT'), deepT(e)); continue; }
+      const key = /^h[12]$/.test(e.tag) ? 'h2' : /^h[3-6]$/.test(e.tag) ? 'h3' : e.tag === 'ul' || e.tag === 'ol' ? 'ul' : 'p';
+      const t = (tplN[key] || tplN.p).clone(); fr.appendChild(t);
+      await setT(t, key === 'ul' ? e.c.filter((x) => typeof x !== 'string').map((li, j) => (e.tag === 'ul' ? '•  ' : j + 1 + '. ') + deepT(li)).join('\n') : deepT(e));
+    }
+    for (const c of old) c.remove();
+    return fr;
+  }
+  return inst;
+}
+
+// ---------- 미리보기만 다시 그리기 (DATA.mode = 'preview'): 대표 그림과 예시 미리보기 칸만 비우고 다시 그린다. 코드, 표 등은 그대로
+if (DATA.mode === 'preview') {
+  const B = frame.findChild((n) => n.type === 'FRAME' && n.name === 'Body');
+  const out = { s: C.slug, cover: 0, ex: 0, warn: res.warn };
+  if (P.cover) {
+    const cv = B.children.filter((n) => n.name === PREFIX + '대표 그림')[DATA.covIdx || 0];
+    if (cv) { for (const c of [...cv.children]) c.remove(); const wrap = box('HORIZONTAL', 'Scene'); cv.appendChild(wrap); wrap.counterAxisAlignItems = 'CENTER'; const hs = P.coverHost || {}; if (hs.gap) wrap.itemSpacing = hs.gap[1]; if (hs.fd === 'c') { wrap.layoutMode = 'VERTICAL'; wrap.itemSpacing = hs.gap ? hs.gap[0] : 0; } for (const el of P.cover) await render(el, wrap, {}); wrap.rescale(2); out.cover = 1; out.coverH = Math.round(wrap.height); }
+  }
+  const sec = B.children.filter((n) => n.name === PREFIX + '예시')[DATA.secIdx || 0];
+  if (sec && P.examples.length) {
+    const boxes = sec.children.filter((n) => n.name.startsWith('Example - '));
+    for (let i = 0; i < P.examples.length; i++) {
+      const pv = boxes[i] && boxes[i].findOne((n) => n.name === 'Preview'); if (!pv) continue;
+      for (const c of [...pv.children]) c.remove();
+      const hs = P.examples[i].host; if (hs) { const p = hs.p || [0, 0, 0, 0]; pv.paddingTop = Math.max(p[0], 32); pv.paddingBottom = Math.max(p[2], 32); pv.itemSpacing = hs.gap ? (hs.fd === 'c' ? hs.gap[0] : hs.gap[1]) : 0; if (hs.fd !== 'c' && /f/.test(hs.d)) { pv.layoutMode = 'HORIZONTAL'; pv.layoutWrap = 'WRAP'; pv.counterAxisSpacing = hs.gap ? hs.gap[0] : 0; pv.primaryAxisAlignItems = 'CENTER'; pv.counterAxisAlignItems = 'CENTER'; } else { pv.layoutMode = 'VERTICAL'; pv.primaryAxisAlignItems = 'CENTER'; pv.counterAxisAlignItems = 'CENTER'; } }
+      for (const el of P.examples[i].tree) await render(el, pv, {});
+      out.ex++;
+    }
+  }
+  return out;
 }
 
 // ---------- 안내 페이지 (Get Started, Foundations): 사이트 .md 블록을 그대로 그린다 (2026-11-05)
@@ -238,17 +564,27 @@ if (DATA.mode === 'page') {
 const fontsOf = async (t) => { for (const s of t.getStyledTextSegments(['fontName'])) await figma.loadFontAsync(s.fontName); };
 const pt = frame.findOne((n) => n.type === 'FRAME' && n.name === 'Page Title');
 const setText = async (t, s) => { if (t && t.characters !== s) { const link = (t.getStyledTextSegments(['hyperlink']).find((x) => x.hyperlink) || {}).hyperlink; await fontsOf(t); t.characters = s; if (link) t.hyperlink = link; } };
-if (pt) { await setText(pt.findChild((n) => n.name === 'Title'), C.name.replace(/ · /g, ' / ')); await setText(pt.findChild((n) => n.name === 'Description'), C.desc); }
+// 한 프레임에 컴포넌트가 여럿인 곳(DATA.part = { index, count }): 프레임 제목은 그대로 두고, 컴포넌트마다 제목 절을 두고 차례로 이어 그린다 (2026-11-06)
+const PART = DATA.part && DATA.part.count > 1 ? DATA.part : null;
+if (pt && !PART) { await setText(pt.findChild((n) => n.name === 'Title'), C.name.replace(/ · /g, ' / ')); await setText(pt.findChild((n) => n.name === 'Description'), C.desc); }
 // Docs / Code 링크: 사이트 페이지와 GitHub CSS 줄 범위 (tokens/links.mjs 와 같은 주소)
 const setLink = async (t, url) => { if (!t || !url) return; await fontsOf(t); t.hyperlink = { type: 'URL', value: url }; };
-if (pt) { await setLink(pt.findOne((n) => n.type === 'TEXT' && n.name === 'Documentation'), DATA.links.docs); await setLink(pt.findOne((n) => n.type === 'TEXT' && n.name === 'Code'), DATA.links.code); }
+if (pt && (!PART || PART.index === 0)) { await setLink(pt.findOne((n) => n.type === 'TEXT' && n.name === 'Documentation'), DATA.links.docs); await setLink(pt.findOne((n) => n.type === 'TEXT' && n.name === 'Code'), DATA.links.code); }
 
 // ---------- 본문: Master Components 만 남기고 다시 그린다
 const B = frame.findChild((n) => n.type === 'FRAME' && n.name === 'Body');
 const keep = new Set(['Section Header - Master Components', 'Master Components']);
-for (const n of [...B.children]) if (!keep.has(n.name)) n.remove();
+if (!PART || PART.index === 0) for (const n of [...B.children]) if (!keep.has(n.name)) n.remove();
 const at = () => B.children.findIndex((n) => n.name === 'Section Header - Master Components');
 const put = (node) => { B.insertChild(at() < 0 ? B.children.length : at(), node); node.layoutSizingHorizontal = 'FILL'; res.created.push(node.id); return node; };
+if (PART) {
+  const ttl = st('Static/t09/4 Bold'); await figma.loadFontAsync(ttl.fontName);
+  const s = box('VERTICAL', PREFIX + 'Component - ' + C.name, { gap: 12, pad: [PART.index ? 48 : 0, 0, 48, 0] });
+  if (PART.index) { s.strokes = [paint('stroke/neutral-muted')]; s.strokeAlign = 'INSIDE'; s.strokeTopWeight = 1; s.strokeLeftWeight = 0; s.strokeRightWeight = 0; s.strokeBottomWeight = 0; }
+  add(s, text(C.name.replace(/ · /g, ' / '), ttl, 'fg/neutral', 'Component Title'));
+  if (C.desc) add(s, text(C.desc, T.lead, 'fg/neutral-muted', 'Lead'), true);
+  put(s);
+}
 
 // 대표 그림 (사이트: 회색 상자 가운데 실제 쓰임 장면, 두 배 크기)
 if (P.cover) {

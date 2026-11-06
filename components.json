@@ -28,6 +28,7 @@
         }
       ],
       "doc": "2481:2",
+      "category": "Action",
       "props": "variant `brandSolid·brandOutline·neutralSolid·neutralWeak·neutralOutline·criticalSolid·ghost` · size `xsmall·small·medium·large` · layout `iconOnly` · width `fill`"
     },
     {
@@ -44,6 +45,7 @@
         }
       ],
       "doc": "2493:325",
+      "category": "Action",
       "props": "`--ds-link-color(-hover)` / Figma state `enabled/hover`"
     },
     {
@@ -60,6 +62,7 @@
         }
       ],
       "doc": "2481:1890",
+      "category": "Data Input",
       "props": "label-weight `bold`"
     },
     {
@@ -76,6 +79,7 @@
         }
       ],
       "doc": "2481:1890",
+      "category": "Data Input",
       "props": "variant `outline·underline` · size"
     },
     {
@@ -92,6 +96,7 @@
         }
       ],
       "doc": "2481:1890",
+      "category": "Data Input",
       "props": "variant · size"
     },
     {
@@ -108,6 +113,7 @@
         }
       ],
       "doc": "2481:1812",
+      "category": "Data Input",
       "props": "size `large·medium` · 상태 enabled/disabled/readOnly/invalid"
     },
     {
@@ -124,6 +130,7 @@
         }
       ],
       "doc": "2481:1890",
+      "category": "Data Input",
       "props": "입력 앞 선택(통신사·국가번호)"
     },
     {
@@ -140,6 +147,7 @@
         }
       ],
       "doc": "2481:1851",
+      "category": "Data Input",
       "props": "size"
     },
     {
@@ -163,7 +171,8 @@
           "variants": 12
         }
       ],
-      "doc": "2481:1851"
+      "doc": "2481:1851",
+      "category": "Data Input"
     },
     {
       "no": "10",
@@ -185,6 +194,7 @@
         }
       ],
       "doc": "2481:1786",
+      "category": "Data Input",
       "props": "variant `square·ghost` · tone · size"
     },
     {
@@ -202,6 +212,7 @@
         }
       ],
       "doc": "2481:1838",
+      "category": "Data Input",
       "props": "tone · size"
     },
     {
@@ -218,6 +229,7 @@
         }
       ],
       "doc": "2481:1877",
+      "category": "Data Input",
       "props": "size `16·24·32` · tone"
     },
     {
@@ -234,6 +246,7 @@
         }
       ],
       "doc": "2481:1825",
+      "category": "Data Input",
       "props": "size · layout `fill`"
     },
     {
@@ -251,6 +264,7 @@
         }
       ],
       "doc": "2481:15",
+      "category": "Action",
       "props": "variant `solid·outlineStrong·outlineWeak` · size · layout `iconOnly`"
     },
     {
@@ -273,6 +287,7 @@
         }
       ],
       "doc": "2481:1994",
+      "category": "Navigation",
       "props": "variant `neutralSolid·neutralOutline` · size `medium·large`"
     },
     {
@@ -295,6 +310,7 @@
         }
       ],
       "doc": "2481:2046",
+      "category": "Navigation",
       "props": "layout `fill·hug` · size"
     },
     {
@@ -317,6 +333,7 @@
         }
       ],
       "doc": "2481:54",
+      "category": "Action",
       "props": "layout · size"
     },
     {
@@ -333,6 +350,7 @@
         }
       ],
       "doc": "2481:67",
+      "category": "Action",
       "props": "size"
     },
     {
@@ -349,6 +367,7 @@
         }
       ],
       "doc": "2481:1903",
+      "category": "Feedback & Status",
       "props": "variant `weak·solid·outline` · tone `neutral·brand·informative·positive·warning·critical` · size"
     },
     {
@@ -371,6 +390,7 @@
         }
       ],
       "doc": "2481:1773",
+      "category": "Content",
       "props": "작성자 · 날짜 · 조회수"
     },
     {
@@ -406,6 +426,7 @@
         }
       ],
       "doc": "2481:1747",
+      "category": "Content",
       "props": "size `20·24·36·42·48·56·64·80·96·108` · shape `circle·rounded·square` · status tone `positive·neutral·critical` · group size `20~64` × shape · `+N`"
     },
     {
@@ -422,6 +443,7 @@
         }
       ],
       "doc": "2481:1929",
+      "category": "Feedback & Status",
       "props": "tone `neutral·informative·positive·warning·critical` (magic 은 CSS 만)"
     },
     {
@@ -438,6 +460,7 @@
         }
       ],
       "doc": "2481:2098",
+      "category": "Overlay",
       "props": "variant `default·positive·critical`"
     },
     {
@@ -454,6 +477,7 @@
         }
       ],
       "doc": "2481:2085",
+      "category": "Overlay",
       "props": "`--ds-hb-arrow-offset`"
     },
     {
@@ -477,6 +501,7 @@
         }
       ],
       "doc": "2481:41",
+      "category": "Action",
       "props": "tone `critical`, 묶음 제목 `__label`, `menuitemcheckbox`, `menuitemradio`, 하위 메뉴 `__sub`"
     },
     {
@@ -498,6 +523,7 @@
         }
       ],
       "doc": "2481:2072",
+      "category": "Overlay",
       "props": "size(480/800) · `--ds-dialog-width`"
     },
     {
@@ -514,6 +540,7 @@
         }
       ],
       "doc": "2481:2072",
+      "category": "Overlay",
       "props": "272 폭 · action `pair·critical·nonpreferred`"
     },
     {
@@ -530,6 +557,7 @@
         }
       ],
       "doc": "2481:2059",
+      "category": "Overlay",
       "props": "header-align `center`"
     },
     {
@@ -546,6 +574,7 @@
         }
       ],
       "doc": "2481:1721",
+      "category": "Container",
       "props": "variant `separated` · size"
     },
     {
@@ -562,6 +591,7 @@
         }
       ],
       "doc": "2481:1955",
+      "category": "Feedback & Status",
       "props": "shape `rect·circle·text`"
     },
     {
@@ -578,6 +608,7 @@
         }
       ],
       "doc": "2481:1864",
+      "category": "Data Input",
       "props": "tone"
     },
     {
@@ -594,6 +625,7 @@
         }
       ],
       "doc": "2481:1942",
+      "category": "Feedback & Status",
       "props": "size · tone"
     },
     {
@@ -610,6 +642,7 @@
         }
       ],
       "doc": "2481:1942",
+      "category": "Feedback & Status",
       "props": "tone `neutral·brand·staticWhite` · size · type `determinate·indeterminate`"
     },
     {
@@ -626,6 +659,7 @@
         }
       ],
       "doc": "2481:28",
+      "category": "Action",
       "props": "layout `iconOnly`(extended=false)"
     },
     {
@@ -650,6 +684,7 @@
         }
       ],
       "doc": "2481:1799",
+      "category": "Data Input",
       "props": "cell state `today·selected·range-start·range-middle·range-end`"
     },
     {
@@ -672,6 +707,7 @@
         }
       ],
       "doc": "2481:1968",
+      "category": "Navigation",
       "props": "뱃지 `__badge--dot/--count` (bg/critical-solid)"
     },
     {
@@ -694,6 +730,7 @@
         }
       ],
       "doc": "2481:2020",
+      "category": "Navigation",
       "props": "expanded 240 / collapsed 56"
     },
     {
@@ -710,6 +747,7 @@
         }
       ],
       "doc": "2481:1734",
+      "category": "Container",
       "props": "variant `elevated` · size"
     },
     {
@@ -726,6 +764,7 @@
         }
       ],
       "doc": "2481:1760",
+      "category": "Content",
       "props": "size"
     },
     {
@@ -748,7 +787,8 @@
         }
       ],
       "doc": "2481:2007",
-      "props": "type `first·prev·next·last·ellipsis·simple`"
+      "category": "Navigation",
+      "props": "type `first·prev·next·last·ellipsis·simple` · variant `solid·ghost`"
     },
     {
       "no": "42",
@@ -777,6 +817,7 @@
         }
       ],
       "doc": "2481:2137",
+      "category": "Table & List",
       "props": "density `compact` · align"
     },
     {
@@ -793,6 +834,7 @@
         }
       ],
       "doc": "2480:15",
+      "category": "Layout",
       "props": "weight thick · orientation vertical · inset · label"
     },
     {
@@ -809,6 +851,7 @@
         }
       ],
       "doc": "2481:2111",
+      "category": "Overlay",
       "props": "placement top·bottom·left·right · hover/focus 전용"
     },
     {
@@ -827,6 +870,7 @@
         }
       ],
       "doc": "2481:2124",
+      "category": "Table & List",
       "props": "variant inset · divider · size small · prefix/suffix/chevron"
     },
     {
@@ -842,6 +886,7 @@
         }
       ],
       "doc": "2481:1981",
+      "category": "Navigation",
       "props": "현재 항목 aria-current=page"
     },
     {
@@ -863,6 +908,7 @@
         }
       ],
       "doc": "2481:2033",
+      "category": "Navigation",
       "props": "state complete·current·upcoming · orientation vertical"
     },
     {
@@ -879,6 +925,7 @@
         }
       ],
       "doc": "2481:1916",
+      "category": "Feedback & Status",
       "props": "tone neutral·informative·positive·warning·critical · variant solid"
     },
     {
@@ -896,6 +943,7 @@
         }
       ],
       "doc": "2495:261",
+      "category": "Container",
       "props": "type `check/radio`, state `unchecked/checked/disabled`, layout `horizontal/vertical`"
     },
     {
@@ -912,6 +960,7 @@
         }
       ],
       "doc": "2497:980",
+      "category": "Data Input",
       "props": "state `enabled/disabled`, 12시간제, 분 간격 5"
     },
     {
@@ -928,6 +977,7 @@
         }
       ],
       "doc": "2498:1300",
+      "category": "Navigation",
       "props": "state `default/unknownTotal/empty`, 최소 폭 640"
     },
     {
@@ -945,6 +995,7 @@
         }
       ],
       "doc": "2494:474",
+      "category": "Overlay",
       "props": "actions `single/pair/none`, 폭 320"
     },
     {
@@ -990,6 +1041,7 @@
         }
       ],
       "doc": "2499:55",
+      "category": "Chat",
       "props": "sender `assistant/user`, status `sending/sent/read/error`, 보내기 `send/stop/disabled`"
     },
     {
@@ -1012,6 +1064,7 @@
         }
       ],
       "doc": "2557:1678",
+      "category": "Navigation",
       "props": "theme `ios/android`(CSS data-platform), tone `layer/transparent` + gradient, titleLayout `titleOnly/withSubtitle`"
     },
     {
@@ -1033,6 +1086,7 @@
         }
       ],
       "doc": "2557:2397",
+      "category": "Navigation",
       "props": "search, action / Item selected, state `enabled/hover`"
     },
     {
@@ -1056,6 +1110,7 @@
         }
       ],
       "doc": "2559:1023",
+      "category": "Data Input",
       "props": "content `suggestion/recent/empty` / Item state `enabled/highlighted`, description"
     },
     {
@@ -1086,6 +1141,7 @@
         }
       ],
       "doc": "2559:1453",
+      "category": "Data Input",
       "props": "Dropzone state `enabled/dragOver/disabled` / Trigger state / Item type `file/image`, state `enabled/readonly`, badge"
     },
     {
@@ -1113,6 +1169,7 @@
         }
       ],
       "doc": "2563:1533",
+      "category": "Overlay",
       "props": "header, description, footer / Item tone `neutral/critical`, labelAlign `left/center`"
     },
     {
@@ -1129,6 +1186,7 @@
         }
       ],
       "doc": "2562:748",
+      "category": "Feedback & Status",
       "props": "size `large/medium`, asset, description, primary/secondary action"
     },
     {
@@ -1145,6 +1203,7 @@
         }
       ],
       "doc": "2563:890",
+      "category": "Content",
       "props": "format `clock/elapsed`, data-start / data-end"
     },
     {
@@ -1161,6 +1220,7 @@
         }
       ],
       "doc": "2562:987",
+      "category": "Feedback & Status",
       "props": "tone `positive/warning/critical/brand/neutral`, data-pulse"
     },
     {
@@ -1176,6 +1236,7 @@
         }
       ],
       "doc": "2566:1339",
+      "category": "Data Input",
       "props": "세로 간격 x1, 묶음 이름은 Field Label"
     },
     {
@@ -1192,6 +1253,7 @@
         }
       ],
       "doc": "2567:55",
+      "category": "Layout",
       "props": "direction `vertical/horizontal`, 끝 20"
     },
     {
@@ -1208,6 +1270,7 @@
         }
       ],
       "doc": "2567:143",
+      "category": "Layout",
       "props": "state `pulling/refreshing`, Progress Circle 24"
     },
     {
@@ -1230,6 +1293,7 @@
         }
       ],
       "doc": "2567:863",
+      "category": "Overlay",
       "props": "size `small/medium/large`, direction `right/left`"
     },
     {
@@ -1246,6 +1310,7 @@
         }
       ],
       "doc": "2567:1956",
+      "category": "Content",
       "props": "ratio `1:1/4:3/16:9`, stroke, indicator"
     },
     {
@@ -1267,6 +1332,7 @@
         }
       ],
       "doc": "2567:2117",
+      "category": "Content",
       "props": "항목 사이 x2, 끝 흐림 x1, 버튼 32"
     },
     {
@@ -1282,6 +1348,7 @@
         }
       ],
       "doc": "2568:77",
+      "category": "Chat",
       "props": "본문 t04, 제목과 블록 간격"
     },
     {
@@ -1298,6 +1365,7 @@
         }
       ],
       "doc": "2568:219",
+      "category": "Chat",
       "props": "header `true/false`, 복사 버튼"
     },
     {
@@ -1314,6 +1382,7 @@
         }
       ],
       "doc": "2568:365",
+      "category": "Chat",
       "props": "type `number/label`, icon"
     },
     {
@@ -1342,6 +1411,7 @@
         }
       ],
       "doc": "2566:1489",
+      "category": "Data Input",
       "props": "Trigger content `placeholder/selected`, state `enabled/open/disabled`"
     },
     {
@@ -1358,6 +1428,7 @@
         }
       ],
       "doc": "2579:319",
+      "category": "Feedback & Status",
       "props": "size `small·medium·large` · value `--ds-rating-value` 0~5 · input (radio 5개)"
     },
     {
@@ -1374,7 +1445,8 @@
         }
       ],
       "props": "size `large/medium`, `aria-invalid`, ds-code-complete 이벤트",
-      "doc": "2714:1565"
+      "doc": "2714:1565",
+      "category": "Data Input"
     },
     {
       "no": "74",
@@ -1390,7 +1462,8 @@
         }
       ],
       "props": "type `bar/line/donut`, `data-series` 1~5, `--ds-chart-value`, `--ds-chart-height`",
-      "doc": "2715:1116"
+      "doc": "2715:1116",
+      "category": "Content"
     },
     {
       "no": "75",
@@ -1406,7 +1479,8 @@
         }
       ],
       "props": "layout `start/top`, columns `2/3`, align `end`, `data-divider`",
-      "doc": "2716:377"
+      "doc": "2716:377",
+      "category": "Table & List"
     },
     {
       "no": "76",
@@ -1422,7 +1496,8 @@
         }
       ],
       "props": "size `medium/small`, variant `plain/muted`, `data-divider`",
-      "doc": "2717:627"
+      "doc": "2717:627",
+      "category": "Action"
     },
     {
       "no": "77",
@@ -1444,7 +1519,8 @@
         }
       ],
       "props": "size `medium/small`, guides `none`, `aria-expanded`, `aria-selected`",
-      "doc": "2716:595"
+      "doc": "2716:595",
+      "category": "Table & List"
     },
     {
       "no": "78",
@@ -1460,7 +1536,8 @@
         }
       ],
       "props": "열 여러 개, `aria-selected`, change 이벤트(Time Picker 와 같은 휠)",
-      "doc": "2714:1666"
+      "doc": "2714:1666",
+      "category": "Data Input"
     },
     {
       "no": "79",
@@ -1476,7 +1553,8 @@
         }
       ],
       "props": "variant `outline/fill`, cancel 버튼",
-      "doc": "2714:1745"
+      "doc": "2714:1745",
+      "category": "Data Input"
     }
   ]
 }

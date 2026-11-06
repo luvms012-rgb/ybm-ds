@@ -190,6 +190,9 @@ const figmaDocs = () => fs.writeFileSync(path.join(DS, 'tokens', '.figma-docs.js
 }, null, 1));
 // 왼쪽 메뉴와 이전 / 다음 문서는 이름 ABC 순
 const compsAZ = [...comps].sort((a, b) => a.name.localeCompare(b.name, 'en'));
+// 컴포넌트 목록 분류: Figma 페이지와 같은 이름과 순서 (components.json 의 category, 2026-11-06 사용자 "피그마 페이지와 같은 카테고리로 분리")
+const COMP_CATS = ['Action', 'Chat', 'Container', 'Content', 'Data Input', 'Feedback & Status', 'Layout', 'Navigation', 'Overlay', 'Table & List', 'Etc'];
+const REG_CAT = Object.fromEntries(JSON.parse(fs.readFileSync(path.join(DS, 'components.json'), 'utf8')).components.map((x) => [x.no, x.category]));
 const missing = comps.filter((c) => !c.desc || !c.example).map((c) => c.no + (c.desc ? '' : ' 설명') + (c.example ? '' : ' 예시'));
 if (missing.length) console.log('  ! 비어 있는 것:', missing.join(', '));
 
@@ -900,7 +903,8 @@ const hero = (title, lead) => `<header class="site-hero"><h1 class="site-h1">${e
 write({
   file: 'components/index.html', section: 'components', title: 'Components', layout: 'wide',
   body: `<header><h1 class="site-h1">Components</h1><p class="site-lead">화면을 만드는 데 쓰는 컴포넌트 ${comps.length}종입니다.</p></header>
-<div class="site-tiles">${compsAZ.map((c) => `<a class="site-tile" href="${c.slug}.html" data-site-item="${esc((c.name + ' ' + koKeys(c.name.split(' · ')[0])).toLowerCase())}">${cardThumb(c)}<p class="site-tile__name">${esc(c.name.split(' · ')[0])}</p></a>`).join('\n')}</div>
+${COMP_CATS.map((cat) => { const list = compsAZ.filter((c) => (REG_CAT[c.no] || 'Etc') === cat); return list.length ? `<section class="site-group site-comp-group"><h2 class="site-group__title">${esc(cat)}</h2>
+<div class="site-tiles">${list.map((c) => `<a class="site-tile" href="${c.slug}.html" data-site-item="${esc((c.name + ' ' + koKeys(c.name.split(' · ')[0]) + ' ' + cat).toLowerCase())}">${cardThumb(c)}<p class="site-tile__name">${esc(c.name.split(' · ')[0])}</p></a>`).join('\n')}</div></section>` : ''; }).join('\n')}
 <div class="ds-empty site-empty-result" hidden><span class="ds-empty__media"><i class="ds-icon ds-icon--search" aria-hidden="true"></i></span><p class="ds-empty__title">찾는 컴포넌트가 없어요</p><p class="ds-empty__desc">다른 이름으로 찾아보세요.</p></div>`,
 });
 

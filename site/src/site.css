@@ -149,6 +149,9 @@ body[data-side-open] .site-scrim { opacity: 1; pointer-events: auto; }
 .site-tile__inner .ds-select { --ds-select-bg: var(--ds-color-bg-layer-default); }
 .site-tile__inner .ds-fieldbutton { --ds-fb-bg: var(--ds-color-bg-layer-default); }
 .site-tile__inner :is(.ds-textarea, .ds-fileattach__dropzone, .ds-fileitem, .ds-citation) { background-color: var(--ds-color-bg-layer-default); }
+.site-tile__inner .ds-btn:is([data-variant="neutralOutline"], [data-variant="brandOutline"]) { --ds-btn-bg: var(--ds-color-bg-layer-default); }  /* 외곽선 버튼, 선택된 라디오 가운데도 흰색 (11-06 사용자) */
+.site-tile__inner .ds-chiptabs[data-variant="neutralOutline"] .ds-chiptabs__trigger { --ds-ct-bg: var(--ds-color-bg-layer-default); }
+.site-tile__inner .ds-radio__control:checked:not(:disabled) { background-color: var(--ds-color-bg-layer-default); }
 .site-cover-panel { padding: var(--ds-space-x6); border-radius: var(--ds-shape-xl); background: var(--ds-color-bg-layer-default); }
 .site-toc-select { position: relative; margin-top: var(--ds-space-x6); }
 /* 좁은 화면 목차: DS Select Trigger(폭 100%) + 아래로 펼치는 Select Content */
@@ -258,8 +261,9 @@ body[data-side-open] .site-scrim { opacity: 1; pointer-events: auto; }
 .site-toolbar--center .ds-chiptabs { justify-content: center; }
 .site-group { margin-top: var(--ds-space-x14); }
 .site-doc > header + .site-group { margin-top: var(--ds-space-x10); }
-.site-doc > header + .site-tiles { margin-top: var(--ds-space-x12); }  /* 컴포넌트 목록: 분류 없이 ABC 순 한 목록 */
+.site-doc > header + .site-tiles { margin-top: var(--ds-space-x12); }  /* 컴포넌트 목록 */
 .site-group[hidden] { display: none; }
+.site-comp-group + .site-comp-group { padding-top: var(--ds-space-x14); border-top: 1px solid var(--ds-color-stroke-neutral-muted); }  /* 컴포넌트 분류(Figma 페이지와 같음) 사이 구분선 */
 .site-doc .site-group__title { display: flex; align-items: baseline; gap: var(--ds-space-x2); margin: 0; font-size: var(--ds-font-size-t07); line-height: var(--ds-line-height-t07);  font-weight: var(--ds-font-weight-regular); letter-spacing: 0; }
 /* 카드 묶음: 줄을 늘 가로로 꽉 채운다(카드 수가 늘거나 줄어도 빈 칸 없음). 좁으면 1열, 560 부터 2열이고 홀수면 마지막 카드가 두 칸 */
 .site-grid { display: grid; grid-template-columns: 1fr; gap: var(--ds-space-x4); margin-top: var(--ds-space-x4); }
@@ -553,7 +557,7 @@ body[data-side-open] .site-scrim { opacity: 1; pointer-events: auto; }
 /* 상단, 왼쪽 메뉴, 목차 */
 .site-topnav__item { font-weight: var(--ds-font-weight-regular); letter-spacing: 0; }
 .site-topnav__item[aria-current="page"] { font-weight: var(--ds-font-weight-medium); }
-.site-nav__item, .site-nav__toggle { min-height: 36px; color: var(--ds-color-fg-neutral-muted); font-size: var(--ds-font-size-t05); line-height: var(--ds-line-height-t05); font-weight: var(--ds-font-weight-regular); letter-spacing: 0; }
+.site-nav__item, .site-nav__toggle { min-height: 32px; color: var(--ds-color-fg-neutral-muted); font-size: var(--ds-font-size-t04); line-height: var(--ds-line-height-t04); font-weight: var(--ds-font-weight-regular); letter-spacing: 0; }
 .site-nav__item:hover, .site-nav__toggle:hover { color: var(--ds-color-fg-neutral); }
 .site-nav__item[aria-current="page"] { color: var(--ds-color-fg-neutral); font-weight: var(--ds-font-weight-medium); }
 .site-toc a { color: var(--ds-color-fg-neutral-subtle); line-height: var(--ds-line-height-t04); font-weight: var(--ds-font-weight-regular); letter-spacing: 0; }

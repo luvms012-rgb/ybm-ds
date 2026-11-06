@@ -277,7 +277,73 @@ function mdBlocks(md) {
   }
   return { title, lead, blocks: out };
 }
-function docpageScript(slug) {
+// ---- docpage 가 쓰는 사이트 실제 모양 자료 다듬기 (2026-11-06)
+const hostOf = (s) => (s ? Object.fromEntries(Object.entries(s).filter(([k]) => ['d', 'fd', 'gap', 'p', 'jc', 'ai'].includes(k))) : null);
+function prepStyled(P, SETS) {
+  const isEl = (n) => n && typeof n === 'object';
+  const setOf = (el) => (el.cls || []).find((c) => SETS[c] && c !== 'ds-list-item');
+  const deep = (el) => (typeof el === 'string' ? el : (el.c || []).map(deep).join(' ')).replace(/\s+/g, ' ').trim();
+  const hasPart = (el) => isEl(el) && (el.c || []).some((x) => isEl(x) && ((x.cls || []).some((c) => /^ds-[a-z-]+__[a-z-]+$/.test(c)) || hasPart(x)));
+  const hasSet = (el) => isEl(el) && (setOf(el) || (el.c || []).some(hasSet));
+  const isIcon = (el) => isEl(el) && (el.cls || []).includes('ds-icon');
+  const dataAttrs = (el) => Object.fromEntries(Object.entries(el.a || {}).filter(([k]) => k.startsWith('data-') && !/^data-ds-/.test(k)).map(([k, v]) => [k.slice(5), v]));
+  const part = (el, name) => (el.c || []).find((x) => isEl(x) && (x.cls || []).some((k) => k.endsWith('__' + name)));
+  const sub = (el, name) => { let r = null; const f = (n) => { if (isEl(n) && !r) { if ((n.cls || []).some((k) => k.endsWith('__' + name))) r = n; else (n.c || []).forEach(f); } }; (el.c || []).forEach(f); return r; };
+  const checked = (el) => isEl(el) && ((el.a && (el.a.checked !== undefined || el.a['aria-checked'] === 'true' || el.a['aria-selected'] === 'true')) || (el.c || []).some(checked));
+  // 부품 하나에 넣을 글 (tokens 쪽 FILL 이 읽는다)
+  function spec(el) {
+    const s = { set: SETS[setOf(el)], own: (el.c || []).filter((x) => typeof x === 'string').join(' ').replace(/\s+/g, ' ').trim(), parts: {}, kids: [], a: dataAttrs(el) };
+    if (el.a && (el.a.disabled !== undefined || el.a['aria-disabled'] === 'true')) s.a.state = 'disabled';
+    if (el.a && el.a.placeholder) s.parts.placeholder = el.a.placeholder;
+    if (el.a && el.a.value) s.parts.value = el.a.value;
+    const push = (key, v) => { if (!v) return; s.parts[key] = s.parts[key] === undefined ? v : [].concat(s.parts[key], v); };
+    const walk = (n) => {
+      if (!isEl(n)) return;
+      if (setOf(n)) { s.kids.push(spec(n)); return; }
+      const pt = (n.cls || []).map((c) => c.match(/^ds-[a-z-]+__([a-z-]+)$/)).find(Boolean);
+      if (n.tag === 'input' || n.tag === 'textarea') { if (n.a.placeholder) push('placeholder', n.a.placeholder); if (n.a.value) push('value', n.a.value); }
+      const leaf = pt && !hasSet(n) && !hasPart(n);
+      if (leaf && deep(n)) push(pt[1], deep(n));
+      else if (!pt && !(n.cls || []).some((c) => /^ds-/.test(c)) && ['h1', 'h2', 'h3', 'h4', 'p', 'ul', 'ol', 'blockquote', 'th', 'td', 'dt', 'dd', 'li'].includes(n.tag) && !hasSet(n) && deep(n)) push(n.tag, n.tag === 'ul' || n.tag === 'ol' ? (n.c || []).filter(isEl).map((li, i) => (n.tag === 'ul' ? '•  ' : i + 1 + '. ') + deep(li)).join('\n') : deep(n));
+      if (!leaf) (n.c || []).forEach(walk); else (n.c || []).forEach((x) => { if (isEl(x) && setOf(x)) s.kids.push(spec(x)); });
+    };
+    (el.c || []).forEach(walk);
+    if (!s.kids.length) delete s.kids; if (!Object.keys(s.parts).length) delete s.parts; if (!s.own) delete s.own; if (!Object.keys(s.a).length) delete s.a;
+    return s;
+  }
+  const KIND = { 'ds-card': 'card', 'ds-bottomsheet': 'sheet', 'ds-dialog': 'dialog', 'ds-markdown': 'md' };
+  const TEXTKEYS = ['fs', 'fw', 'c', 'lh', 'ul', 'nw'];
+  const slim = (el, keepKids) => {
+    const s = el.s; if (!s) return;
+    if (el.a) delete el.a.style;
+    if (s.d === 'b') delete s.d;
+    const direct = (el.c || []).some((x) => typeof x === 'string') || isIcon(el) || ['input', 'textarea', 'svg'].includes(el.tag);
+    if (!direct) for (const k of TEXTKEYS) delete s[k];
+    if (!keepKids) delete s.k;
+  };
+  const prep = (el) => {
+    if (!isEl(el)) return el;
+    const k = setOf(el);
+    if (k && KIND[k]) {
+      const h = part(el, 'header');
+      el.fx = { kind: KIND[k], title: h && sub(h, 'title') ? deep(sub(h, 'title')) : null, desc: h && sub(h, 'desc') ? deep(sub(h, 'desc')) : null, close: !!(h && sub(h, 'close')), handle: (el.a || {})['data-handle'] !== undefined, center: (el.a || {})['data-header-align'] === 'center' };
+      el.c = el.c.map(prep); slim(el, true); return el;
+    }
+    if (k) {
+      el.sp = spec(el);
+      const ke = (el.c || []).filter(isEl);
+      if (!el.sp.kids && !el.sp.parts && ke.length >= 2 && ke[0].cls[0] && ke.every((x) => x.cls[0] === ke[0].cls[0]) && !ke.some(hasSet)) el.sp.items = ke.map((x) => ({ t: deep(x), on: checked(x) }));
+      const keep = (el.c || []).some(hasSet) || el.sp.items;
+      if (keep) { el.c = el.c.map(prep); slim(el, true); }
+      else { el.c = (el.c || []).filter((x) => typeof x === 'string' || isIcon(x)).map((x) => { if (isEl(x)) slim(x); return x; }); slim(el, false); }
+      return el;
+    }
+    el.c = (el.c || []).map(prep); slim(el, true); return el;
+  };
+  if (P.cover) P.cover = P.cover.map(prep);
+  for (const e of P.examples) e.tree = e.tree.map(prep);
+}
+function docpageScript(slug, mode) {
   const f = path.join(DS, 'tokens', '.figma-docs.json');
   if (!fs.existsSync(f)) die('tokens/.figma-docs.json 이 없어요. 먼저 node site/build.mjs');
   const d = JSON.parse(fs.readFileSync(f, 'utf8'));
@@ -317,6 +383,15 @@ ${fs.readFileSync(path.join(DS, 'tokens', 'figma-docpage.template.js'), 'utf8')}
       if (!sets[k]) { sets[k] = fg.id; defaults[k] = page.defaults || {}; }
     }
   }
+  // 사이트 실제 모양 (node tokens/figma-styles.mjs → tokens/.figma-styles.json, 2026-11-06): 있으면 대표 그림과 예시 나무를
+  // 브라우저에서 읽은 것(요소마다 배경, 테두리, 여백, 글자 크기)으로 바꾸고, 부품 인스턴스에 넣을 글(sp)과 본문 칸(fx)을 붙인다
+  const sf = path.join(DS, 'tokens', '.figma-styles.json');
+  const SJ = fs.existsSync(sf) ? JSON.parse(fs.readFileSync(sf, 'utf8'))[comp.slug] : null;
+  if (SJ && SJ.examples && SJ.examples.length === comp.page.examples.length) {
+    if (SJ.cover) { comp.page.cover = SJ.cover.c; comp.page.coverHost = hostOf(SJ.cover.s); }
+    comp.page.examples.forEach((e, i) => { e.tree = SJ.examples[i].c; e.host = hostOf(SJ.examples[i].s); });
+    prepStyled(comp.page, sets);
+  }
   const me = list.find((x) => x.no === comp.no);
   const mainSets = (me.figma || []).map((g) => g.id);
   const mainClass = Object.keys(sets).find((k) => mainSets.includes(sets[k])) || null;
@@ -327,6 +402,13 @@ ${fs.readFileSync(path.join(DS, 'tokens', 'figma-docpage.template.js'), 'utf8')}
   for (const k of Object.keys(sets)) if (!used.has(k)) { delete sets[k]; delete defaults[k]; }
   const link = plan().entries.find((e) => e.no === comp.no) || {};
   const DATA = { frame: comp.doc, comp, sets, defaults, mainSets, mainClass, links: { docs: link.site || null, code: link.code || null } };
+  // 미리보기만 (node sync.mjs docpage <slug> preview): 대표 그림과 예시 칸만 다시 그린다. 한 프레임에 여럿이면 앞 컴포넌트의 그림, 예시 절 수만큼 건너뛴다
+  if (mode === 'preview') {
+    const same = list.filter((x) => x.doc === comp.doc); const before = same.slice(0, Math.max(same.findIndex((x) => x.no === comp.no), 0)).map((x) => d.components.find((y) => y.no === x.no) || { page: {} });
+    DATA.mode = 'preview'; DATA.covIdx = before.filter((x) => x.page.cover).length; DATA.secIdx = before.filter((x) => (x.page.examples || []).length).length;
+    const P = comp.page; DATA.comp = { no: comp.no, name: comp.name, slug: comp.slug, page: { cover: P.cover, coverHost: P.coverHost, examples: P.examples.map((e) => ({ tree: e.tree, host: e.host })) } };
+    delete DATA.links;
+  }
   const file = path.join(DS, 'tokens', '.figma-docpage.js');
   fs.writeFileSync(file, `// 자동 생성 - node sync.mjs docpage ${comp.slug} (${today()}) · fileKey ${reg.figmaFile} · 문서 프레임 ${comp.doc}
 const DATA = ${JSON.stringify(DATA)};
@@ -484,7 +566,7 @@ if (cmd === 'status') {
   say('    다음: 이 파일 내용을 use_figma(fileKey 1VCEsFU3xMWuXIntIrZz9i)로 실행');
 } else if (cmd === 'docpage') {
   if (!arg) die('컴포넌트 이름을 넣어 주세요: node sync.mjs docpage action-button');
-  const f = docpageScript(arg);
+  const f = docpageScript(arg, process.argv[4]);
   say(c.g(`  ✔ ${rel(f)} 생성 (${(fs.statSync(f).size / 1024).toFixed(1)}KB)`));
   say('    다음: 이 파일 내용을 use_figma(fileKey 1VCEsFU3xMWuXIntIrZz9i)로 실행');
 } else if (cmd === 'pull') {

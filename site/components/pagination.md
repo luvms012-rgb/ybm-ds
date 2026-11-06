@@ -41,6 +41,7 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 | 속성 | 값 |
 | --- | --- |
 | `type` | first prev next last ellipsis simple |
+| `variant` | solid ghost |
 
 ## 사용 지침
 
@@ -133,12 +134,30 @@ Figma 속성 이름을 그대로 `data-*` 속성으로 씁니다.
 </article>
 ```
 
+### 가벼운 화면에는 ghost 쓰기
+
+고른 쪽만 옅은 회색 면으로 보여 줍니다. 카드 안이나 옆 패널처럼 진한 면이 무거운 자리에 씁니다.
+
+```html
+<nav class="ds-pagination" data-variant="ghost" aria-label="페이지">
+  <a class="ds-pagination__item" data-type="prev" href="?p=2" aria-label="이전 페이지"></a>
+  <a class="ds-pagination__item" href="?p=1">1</a>
+  <a class="ds-pagination__item" href="?p=2">2</a>
+  <a class="ds-pagination__item" href="?p=3" aria-current="page">3</a>
+  <a class="ds-pagination__item" href="?p=4">4</a>
+  <a class="ds-pagination__item" href="?p=5">5</a>
+  <span class="ds-pagination__item" data-type="ellipsis" aria-hidden="true"></span>
+  <a class="ds-pagination__item" href="?p=20">20</a>
+  <a class="ds-pagination__item" data-type="next" href="?p=4" aria-label="다음 페이지"></a>
+</nav>
+```
+
 ## 규격
 
 ### 크기와 여백
 
 ```
-type: full(기본) / simple
+type: full(기본) / simple   variant: solid(기본, 고른 쪽 진한 면) / ghost(고른 쪽만 옅은 회색 면, 숫자는 진한 글자)
 Figma item: 36(높이/최소 폭) / px x2 / shape/sm / 숫자 t04 Medium fg/neutral-muted / 화살표 20 fg/neutral / ellipsis 16 fg/neutral-subtle
   pressed bg/transparent-pressed / current bg/neutral-solid + fg/on-neutral-solid t04 Bold / disabled 화살표 fg/disabled
   full gap x1 / simple gap x3 / indicator 현재 t04 Bold fg/neutral + "/ 전체" t04 fg/neutral-subtle

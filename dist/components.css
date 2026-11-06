@@ -2433,7 +2433,7 @@ a.ds-card:active, button.ds-card:active { background: linear-gradient(var(--ds-c
 
 /* --------------------------------------------------------------------------
    41 Pagination — 목록 페이지 이동
-   type: full(기본) · simple
+   type: full(기본) · simple   variant: solid(기본, 고른 쪽 진한 면) · ghost(고른 쪽만 옅은 회색 면, 숫자는 진한 글자)
      <nav class="ds-pagination" aria-label="페이지">
        <a class="ds-pagination__item" data-type="first" aria-label="첫 페이지" aria-disabled="true"></a>
        <a class="ds-pagination__item" data-type="prev"  aria-label="이전 페이지" aria-disabled="true"></a>
@@ -2486,6 +2486,10 @@ a.ds-card:active, button.ds-card:active { background: linear-gradient(var(--ds-c
 .ds-pagination__item[data-type="ellipsis"] { --ds-pg-icon: var(--ds-icon-ellipsis); color: var(--ds-color-fg-neutral-subtle); pointer-events: none; }
 .ds-pagination__item[data-type="ellipsis"]::before { width: 16px; height: 16px; }
 .ds-pagination__item[aria-disabled="true"], .ds-pagination__item:disabled { color: var(--ds-color-fg-disabled); pointer-events: none; }
+.ds-pagination[data-variant="ghost"] .ds-pagination__item { color: var(--ds-color-fg-neutral); font-weight: var(--ds-font-weight-regular); border-radius: var(--ds-shape-lg); }
+.ds-pagination[data-variant="ghost"] .ds-pagination__item[aria-current="page"] { background: var(--ds-color-bg-neutral-weak-alpha); color: var(--ds-color-fg-neutral); font-weight: var(--ds-font-weight-medium); }
+.ds-pagination[data-variant="ghost"] .ds-pagination__item[aria-disabled="true"] { color: var(--ds-color-fg-disabled); }
+.ds-pagination[data-variant="ghost"] .ds-pagination__item[data-type="ellipsis"] { color: var(--ds-color-fg-neutral-subtle); }
 .ds-pagination__indicator { display: inline-flex; gap: var(--ds-space-x1); color: var(--ds-color-fg-neutral-subtle); font-size: var(--ds-font-size-t04); line-height: var(--ds-line-height-t04); font-variant-numeric: tabular-nums; }
 .ds-pagination__indicator > b, .ds-pagination__indicator > strong { color: var(--ds-color-fg-neutral); font-weight: var(--ds-font-weight-bold); }
 
