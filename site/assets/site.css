@@ -612,7 +612,7 @@ body[data-side-open] .site-scrim { opacity: 1; pointer-events: auto; }
 }
 /* 컴포넌트 목록: 분류 이름은 섹션 제목, 부품 이름은 카드 제목과 같은 굵기 */
 .site-tile__thumb { border-radius: var(--ds-shape-xl); }
-.site-doc .site-tile .site-tile__name { font-size: var(--ds-font-size-t06); line-height: var(--ds-line-height-t06); font-weight: var(--ds-font-weight-medium); letter-spacing: 0; }
+.site-doc .site-tile .site-tile__name { font-size: var(--ds-font-size-t05); line-height: var(--ds-line-height-t05); font-weight: var(--ds-font-weight-medium); letter-spacing: 0; }
 .site-doc .site-group__title { font-size: var(--ds-font-size-t09); line-height: var(--ds-line-height-t09); font-weight: var(--ds-font-weight-semibold); letter-spacing: 0; }
 @media (min-width: 768px) { .site-doc .site-group__title { font-size: var(--ds-font-size-t11); line-height: var(--ds-line-height-t11); } }
 /* 분류 칩: 높이 40 알약 */

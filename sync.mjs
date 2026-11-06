@@ -304,6 +304,7 @@ function prepStyled(P, SETS) {
       if (n.tag === 'input' || n.tag === 'textarea') { if (n.a.placeholder) push('placeholder', n.a.placeholder); if (n.a.value) push('value', n.a.value); }
       const leaf = pt && !hasSet(n) && !hasPart(n);
       if (leaf && deep(n)) push(pt[1], deep(n));
+      else if (leaf && n.a && n.a['data-placeholder']) push('placeholder', n.a['data-placeholder']);
       else if (!pt && !(n.cls || []).some((c) => /^ds-/.test(c)) && ['h1', 'h2', 'h3', 'h4', 'p', 'ul', 'ol', 'blockquote', 'th', 'td', 'dt', 'dd', 'li'].includes(n.tag) && !hasSet(n) && deep(n)) push(n.tag, n.tag === 'ul' || n.tag === 'ol' ? (n.c || []).filter(isEl).map((li, i) => (n.tag === 'ul' ? '•  ' : i + 1 + '. ') + deep(li)).join('\n') : deep(n));
       if (!leaf) (n.c || []).forEach(walk); else (n.c || []).forEach((x) => { if (isEl(x) && setOf(x)) s.kids.push(spec(x)); });
     };

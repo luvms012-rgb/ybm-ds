@@ -312,7 +312,10 @@ async function renderS(el, parent) {
     if (it.run) { const s0 = it.parts[0][1] || s; n = await runText(it.parts, s0.fs ? s0 : s, 'Text'); f.appendChild(n); sizeW(n, { ...s0, w: it.b[2], h: it.b[3], lh: s0.lh, nw: s0.nw }, f, inner); if (!s0.ta && s.ta) n.textAlignHorizontal = s.ta === 'center' ? 'CENTER' : 'RIGHT'; }
     else n = await render(it.el, f, {});
     if (n && it.abs) { try { n.layoutPositioning = 'ABSOLUTE'; n.x = it.b[0] + pad[3]; n.y = it.b[1] + pad[0]; } catch (e) {} }
+    // 세로 줄에서 자식 하나만 가운데나 오른쪽에 붙은 경우 (align-self, margin auto) - 가로 틀로 감싸 자리를 맞춘다
+    if (n && !it.abs && !H && !wrap && n.parent === f && n.layoutSizingHorizontal !== 'FILL' && it.b[2] < inner - 2) { const x = it.b[0], r = inner - (x + it.b[2]); const want = x > 2 && Math.abs(x - r) <= 2 ? 'CENTER' : x > 2 && r <= 2 ? 'MAX' : x <= 2 && r > 2 ? 'MIN' : null; if (want && want !== f.counterAxisAlignItems) { const w = figma.createAutoLayout('HORIZONTAL'); w.name = 'align'; w.fills = []; f.insertChild(f.children.indexOf(n), w); w.layoutSizingHorizontal = 'FILL'; w.layoutSizingVertical = 'HUG'; w.primaryAxisAlignItems = want; w.appendChild(n); } }
   }
+  if (!f.children.length) { const fill = f.layoutSizingHorizontal === 'FILL'; f.resize(Math.max(s.w, 0.01), Math.max(s.h, 0.01)); if (fill) f.layoutSizingHorizontal = 'FILL'; f.layoutSizingVertical = 'FIXED'; return f; }
   fixAfter(f, s);
   return f;
 }
@@ -421,7 +424,7 @@ async function FILL(inst, s, top) {
 }
 // 본문 칸 부품: 인스턴스를 풀고 사이트 본문을 그린다 (fx = { kind, title, desc, header, close, handle, center })
 const partEl = (el, name) => el.c.find((x) => typeof x !== 'string' && x.cls.some((k) => k.endsWith('__' + name)));
-const deepT = (el) => (typeof el === 'string' ? el : el.c.map(deepT).join(' ')).replace(/\s+/g, ' ').trim();
+const deepT = (el) => (typeof el === 'string' ? el : el.c.map(deepT).join('')).replace(/\s+/g, ' ').trim();
 async function renderInto(fr, els, w) {
   CW.set(fr.id, w || fr.width - fr.paddingLeft - fr.paddingRight);
   const before = new Set(fr.children.map((c) => c.id));
