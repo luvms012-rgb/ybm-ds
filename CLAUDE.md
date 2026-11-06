@@ -18,6 +18,8 @@ Foundations 페이지 문서 프레임(왼쪽→오른쪽): Color `2486:2`, Typo
 
 ## 상시 규칙 (2026-11-06 사용자, 시키지 않아도 매번)
 
+> **2026-11-06 사용자 "피그마 작업 우선 보류"** - 풀릴 때까지 Figma 쓰기(Updates 프레임 다시 그리기, 새 컴포넌트 7종, 양방향 맞추기)는 하지 않는다. updates.json 소식은 계속 쓰고, Figma 에 반영할 것은 여기에 모아 둔다: Updates 프레임 2701:3 다시 그리기, 컴포넌트 73~79.
+
 - **Updates 자동 작성** - 배포하는 변경마다 `site/src/updates.json` 맨 위 그날 날짜에 소식 한 문장을 더하고(README §10-7), 같은 배포에서 `node sync.mjs docpage updates` 를 use_figma 로 돌려 Figma Updates 페이지(`2701:3`)도 같게 그린다.
 - **양방향 자동 동기화** - 작업 시작에 `node sync.mjs figma` 점검(변수, 컴포넌트, 문서 프레임 링크). yds 를 고치면 같은 작업 안에서 Figma 를, Figma 가 바뀌었으면 yds 를 맞춘다(README §10-6). 문서 프레임 링크가 어긋나면 `node sync.mjs links`.
 - **사이트 글자 규칙 검사** - 사이트 글자는 크기마다 정한 줄높이(t01 11/17 ~ t13 40/54), 굵기 400/500/600, 자간 0(Figma 2662:26). 11-06 전 페이지 검사 스크립트 `.cache/typo/audit.js`(로컬 전용, 미리보기에서 불러 `window.__audit`). 예외: 구조 그림 이름표(.site-anatomy__name 13/16), 예시 안 DS 부품(DS 규격이 따로 있음).
