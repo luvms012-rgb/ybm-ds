@@ -18,7 +18,7 @@ Foundations 페이지 문서 프레임(왼쪽→오른쪽): Color `2486:2`, Typo
 
 ## 상시 규칙 (2026-11-06 사용자, 시키지 않아도 매번)
 
-> **2026-11-06 사용자 "피그마 작업 우선 보류"** - 풀릴 때까지 Figma 쓰기(Updates 프레임 다시 그리기, 새 컴포넌트 7종, 양방향 맞추기)는 하지 않는다. updates.json 소식은 계속 쓰고, Figma 에 반영할 것은 여기에 모아 둔다: Updates 프레임 2701:3 다시 그리기, 컴포넌트 73~79.
+> **2026-11-06 보류 풀림** - 사용자 "피그마 바로 진행". 새 컴포넌트 7종은 Action Button 문서 프레임(2481:2, docpage 로 그린 것)을 기준으로 만든다.
 
 - **Updates 자동 작성** - 배포하는 변경마다 `site/src/updates.json` 맨 위 그날 날짜에 소식 한 문장을 더하고(README §10-7), 같은 배포에서 `node sync.mjs docpage updates` 를 use_figma 로 돌려 Figma Updates 페이지(`2701:3`)도 같게 그린다.
 - **양방향 자동 동기화** - 작업 시작에 `node sync.mjs figma` 점검(변수, 컴포넌트, 문서 프레임 링크). yds 를 고치면 같은 작업 안에서 Figma 를, Figma 가 바뀌었으면 yds 를 맞춘다(README §10-6). 문서 프레임 링크가 어긋나면 `node sync.mjs links`.
@@ -51,6 +51,7 @@ git clone https://github.com/luvms012-rgb/yds.git
 - `.gitattributes` 가 `* -text`(줄바꿈 변환 없음)다. 파일의 줄바꿈을 바꾸지 않는다 - 현재 CRLF 는 `동기화.bat` 하나뿐이고 나머지는 LF.
 
 ## 3. 진행 상황
+- **끝냄, 배포함 (2026-11-06 회사, 오후) Figma 새 컴포넌트 7종과 사이트 Figma 링크 점검** - 사용자 "피그마 바로 진행", 기준은 Action Button 문서 프레임 2481:2. 세트와 문서 프레임(components.json figma/doc): 73 Code Input 2714:1564 / 2714:1565, 74 Chart 2715:1115 / 2715:1116, 75 Description List 2716:376 / 2716:377, 76 Toolbar 2717:624 / 2717:627, 77 Tree 2716:594 + Item 2716:495 / 2716:595, 78 Wheel Picker 2714:1665 / 2714:1666, 79 Search Field 2714:1744 / 2714:1745. 문서 프레임 본문은 docpage 로 그림. Figma 점검: 컴포넌트 112개, 문서 링크 160개 같음. 사이트의 Figma 링크 82곳 모두 Figma 의 문서 프레임(맨 위 프레임)이고 컴포넌트 78쪽은 제 문서 프레임으로 간다. 사이트 Updates 쪽에는 Figma 버튼이 없다(Figma Updates 2701:3 은 있음). docpage 팁: use_figma 한 번에 50KB 까지라 예시 나무에서 Figma 세트로 그리는 부품의 자식은 빼고 보내도 결과가 같다. 남은 것: Toolbar 예시의 Table 인스턴스 기본 글이 시험 문구(Figma Table 부품 기본값), Wheel Picker 바텀 시트 예시와 Chart 카드 예시는 부품 기본 모양으로 나온다.
 - **끝냄, 배포함 (2026-11-06 회사) 전 페이지 글자 검사, Updates 자동 작성, Figma 점검** - ① 사이트 164쪽 글자 전수 검사(크기마다 줄높이, 굵기 400/500/600, 자간 0, h2 80 / h3 48 여백): 클래스 있는 문단 16/28 → 16/24, 템플릿 카드 설명과 버튼, 토큰 설명 14/20 → 14/21, 휴대폰 메뉴 제목, 구조 부품 이름, 아이콘 이름 굵기 700 → 600, 템플릿 상세 제목 자간 0, 팔레트, 카드 번호, 아이콘 코드 머리 줄높이. 남긴 것: 구조 그림 이름표 13/16, 예시 안 DS 부품(DS 규격). ② Updates 11-05, 11-06 소식, Figma 새 페이지 Updates(문서 프레임 2701:3, components.json figmaDocs.updates, `node sync.mjs docpage updates` 가 updates.json 으로 그린다), Get Started 프레임 페이지 표에 Updates 줄. ③ Figma 점검: 변수 359개, 컴포넌트 104개 같음. 문서 프레임 문서/코드 링크 128곳이 옛 ybm-ds 주소와 옛 줄 번호라 고침. Get Started 표지(Cover 2482:830, Links 2482:837)는 Figma 에서 없어져 links 점검의 about 을 비움. Figma 에 아직 없는 컴포넌트: 73~79(Code Input, Chart, Description List, Toolbar, Tree, Wheel Picker, Search Field). ④ 상시 규칙(이 파일 맨 위, README §10-6, 10-7).
 
 - **다음 세션은 여기부터 (2026-11-05 집 밤 정리, 2026-11-06 회사에서 이어서)** - 어느 PC 든 "yds CLAUDE.md 읽고 이어서" 로 시작한다.
