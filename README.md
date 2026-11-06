@@ -506,7 +506,8 @@ CSS는 Figma 프로퍼티 이름을 그대로 `data-*` 속성으로 쓴다: `<bu
 3. 새 컴포넌트를 추가하면 `components.css`(`.ds-*` + `--ds-*` 변수), `components.json`(`figma` 노드와 `doc` 문서 프레임 ID), `index.html`(미리보기 섹션), 이 문서 §6, Figma `description`을 함께 갱신한다.
 4. 토큰을 바꿀 때는 **Figma 변수 → `node sync.mjs figma` → use_figma → `node sync.mjs pull`** 순서. `tokens.css`를 손으로 고치지 않는다.
 5. CSS 수정 후에는 `index.html?only=번호`를 브라우저로 렌더해 Figma 스크린샷과 나란히 비교한다.
-6. **양방향 동기화** - `ds` 폴더를 고치면 같은 작업 안에서 Figma도 고치고, Figma를 고치면 `ds`도 고친다. 작업 시작 전 `node sync.mjs figma` 점검으로 이미 어긋난 곳이 없는지 확인하고, 끝나면 `node sync.mjs deploy`로 GitHub까지 올린다.
+6. **양방향 동기화** - `ds` 폴더를 고치면 같은 작업 안에서 Figma도 고치고, Figma를 고치면 `ds`도 고친다. 작업 시작 전 `node sync.mjs figma` 점검으로 이미 어긋난 곳이 없는지 확인하고, 끝나면 `node sync.mjs deploy`로 GitHub까지 올린다. 2026-11-06 사용자 "피그마가 수정되면 yds를, yds가 수정되면 피그마 자동 수정": 시키지 않아도 한쪽을 고친 작업 안에서 다른 쪽을 맞춘다(변수, 컴포넌트, 문서 프레임, 문서 프레임의 문서/코드 링크는 `node sync.mjs links`). 점검 결과에 차이가 나오면 어느 쪽이 맞는지 정해진 경우 바로 맞추고, 정해지지 않은 것만 묻는다.
+7. **Updates 자동 작성** (2026-11-06 사용자 "업데이트 말하지 않아도 자동 업데이트 내용 작성", "피그마에도 같은 씽크로") - 배포할 때마다 바뀐 내용을 `site/src/updates.json` 맨 위 그날 날짜에 한 문장씩 더한다(종류 확인할 변경, 새 컴포넌트, 새 기능, 바뀐 것 / 영역 DS, 템플릿, 사이트, 쉬운 말 한 문장). 같은 배포 안에서 `node sync.mjs docpage updates` 로 Figma Updates 페이지 문서 프레임(`2701:3`)도 다시 그린다. 작업 기록, 검수만 한 것, 되돌린 것은 적지 않는다.
 
 ### Figma
 1. 정식 COMPONENT_SET, 변형 이름은 `축=값`(소문자 시작 camelCase 값). 프로퍼티는 TEXT / BOOLEAN / INSTANCE_SWAP.

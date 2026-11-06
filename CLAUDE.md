@@ -3,7 +3,7 @@
 집(**Mac**)과 회사(**Windows**) 두 PC 에서 같은 저장소로 작업한다. 이 파일은 저장소에 같이 올라가므로 어느 PC 에서든 Claude 가 먼저 읽는다.
 PC 마다 따로 쌓이는 Claude 메모리는 서로 보이지 않는다 - 두 PC 가 함께 알아야 할 것은 여기에 적는다.
 
-- 최종 갱신: 2026-11-05 밤 (집 Mac)
+- 최종 갱신: 2026-11-06 (회사)
 
 ## 1. 기준 주소
 
@@ -15,6 +15,12 @@ PC 마다 따로 쌓이는 Claude 메모리는 서로 보이지 않는다 - 두 
 | 문서 사이트 | 이 저장소의 [site/](site/CLAUDE.md) 폴더 (2026-10-30 별도 저장소 ybm-ds-site 에서 합침). 구상 단계, 사용자가 만들라고 하기 전에는 코드 없음 |
 
 Foundations 페이지 문서 프레임(왼쪽→오른쪽): Color `2486:2`, Typography `2486:13`, Spacing `2486:24`, Radius `2486:35`, Elevation `2486:46`.
+
+## 상시 규칙 (2026-11-06 사용자, 시키지 않아도 매번)
+
+- **Updates 자동 작성** - 배포하는 변경마다 `site/src/updates.json` 맨 위 그날 날짜에 소식 한 문장을 더하고(README §10-7), 같은 배포에서 `node sync.mjs docpage updates` 를 use_figma 로 돌려 Figma Updates 페이지(`2701:3`)도 같게 그린다.
+- **양방향 자동 동기화** - 작업 시작에 `node sync.mjs figma` 점검(변수, 컴포넌트, 문서 프레임 링크). yds 를 고치면 같은 작업 안에서 Figma 를, Figma 가 바뀌었으면 yds 를 맞춘다(README §10-6). 문서 프레임 링크가 어긋나면 `node sync.mjs links`.
+- **사이트 글자 규칙 검사** - 사이트 글자는 크기마다 정한 줄높이(t01 11/17 ~ t13 40/54), 굵기 400/500/600, 자간 0(Figma 2662:26). 11-06 전 페이지 검사 스크립트 `.cache/typo/audit.js`(로컬 전용, 미리보기에서 불러 `window.__audit`). 예외: 구조 그림 이름표(.site-anatomy__name 13/16), 예시 안 DS 부품(DS 규격이 따로 있음).
 
 ## 2. 두 PC 싱크 규칙
 
@@ -43,6 +49,7 @@ git clone https://github.com/luvms012-rgb/yds.git
 - `.gitattributes` 가 `* -text`(줄바꿈 변환 없음)다. 파일의 줄바꿈을 바꾸지 않는다 - 현재 CRLF 는 `동기화.bat` 하나뿐이고 나머지는 LF.
 
 ## 3. 진행 상황
+- **끝냄, 배포함 (2026-11-06 회사) 전 페이지 글자 검사, Updates 자동 작성, Figma 점검** - ① 사이트 164쪽 글자 전수 검사(크기마다 줄높이, 굵기 400/500/600, 자간 0, h2 80 / h3 48 여백): 클래스 있는 문단 16/28 → 16/24, 템플릿 카드 설명과 버튼, 토큰 설명 14/20 → 14/21, 휴대폰 메뉴 제목, 구조 부품 이름, 아이콘 이름 굵기 700 → 600, 템플릿 상세 제목 자간 0, 팔레트, 카드 번호, 아이콘 코드 머리 줄높이. 남긴 것: 구조 그림 이름표 13/16, 예시 안 DS 부품(DS 규격). ② Updates 11-05, 11-06 소식, Figma 새 페이지 Updates(문서 프레임 2701:3, components.json figmaDocs.updates, `node sync.mjs docpage updates` 가 updates.json 으로 그린다), Get Started 프레임 페이지 표에 Updates 줄. ③ Figma 점검: 변수 359개, 컴포넌트 104개 같음. 문서 프레임 문서/코드 링크 128곳이 옛 ybm-ds 주소와 옛 줄 번호라 고침. Get Started 표지(Cover 2482:830, Links 2482:837)는 Figma 에서 없어져 links 점검의 about 을 비움. Figma 에 아직 없는 컴포넌트: 73~79(Code Input, Chart, Description List, Toolbar, Tree, Wheel Picker, Search Field). ④ 상시 규칙(이 파일 맨 위, README §10-6, 10-7).
 
 - **다음 세션은 여기부터 (2026-11-05 집 밤 정리, 2026-11-06 회사에서 이어서)** - 어느 PC 든 "yds CLAUDE.md 읽고 이어서" 로 시작한다.
   - **시작할 때**: `git pull` → 고칠 곳을 고친 뒤 `node site/build.mjs`(템플릿을 고쳤으면 먼저 `node site/templates/gen/run.mjs`, 테마는 `node site/themes/gen.mjs`) → `node sync.mjs check` → `node sync.mjs deploy "메시지"`. 저장소는 `luvms012-rgb/yds`, 사이트 `https://luvms012-rgb.github.io/yds/site/`. 로컬 폴더 이름은 PC 마다 `ybm-ds` 그대로여도 된다. **표 배치를 고친 뒤에는 숫자 검사만 믿지 말고 375, 768, 1024, 1440 화면을 직접 찍어 본다.**

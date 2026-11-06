@@ -10,7 +10,8 @@
     "elevation": "2486:46",
     "icons": "2517:2",
     "motion": "2609:8",
-    "breakpoint": "2692:1167"
+    "breakpoint": "2692:1167",
+    "updates": "2701:3"
   },
   "components": [
     {

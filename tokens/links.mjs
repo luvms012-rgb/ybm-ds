@@ -43,6 +43,7 @@ export function linkPlan(DS) {
     code: sec ? range('dist/tokens.css', [tok[sec[0]][0], tok[sec[1]][1]]) : `${src}dist/icons.css`,
   }));
   // About 페이지 링크 묶음 (글자와 링크를 함께 맞춘다)
-  const about = [{ node: '2482:841', url: cfg.repoUrl }, { node: '2482:844', url: cfg.pagesUrl }, { node: 'ABOUT_SITE', url: site }];
+  // 11-06: Get Started 표지(About 링크 묶음 2482:830)는 Figma 에서 지워졌다. Get Started 문서 프레임 링크는 docpage 가 건다
+  const about = [];
   return { entries, fixed, about, site, src: `${src}dist/components.css`, figmaUrl };
 }

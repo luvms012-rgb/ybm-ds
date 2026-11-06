@@ -3,7 +3,7 @@
 //   사용: node yds-check.mjs <파일 또는 폴더> [...]   (폴더는 안쪽 html, css, php, jsp, vue, jsx, tsx 를 모두 봅니다)
 //         --json  결과를 JSON 으로   --quiet  요약만
 //   문제가 있으면 종료 코드 1 입니다. AI 도구는 화면을 고친 뒤 이 스크립트를 돌리고, 나온 문제를 모두 고칩니다.
-//   이 파일은 yds 문서 사이트를 만들 때 함께 만들어집니다(yds 2026-11-05). 클래스, 아이콘, 토큰 목록이 안에 들어 있습니다.
+//   이 파일은 yds 문서 사이트를 만들 때 함께 만들어집니다(yds 2026-11-06). 클래스, 아이콘, 토큰 목록이 안에 들어 있습니다.
 import fs from 'node:fs';
 import path from 'node:path';
 
