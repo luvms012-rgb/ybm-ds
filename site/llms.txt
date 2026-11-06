@@ -35,7 +35,7 @@
 
 ## Get Started
 
-- [Get Started](https://luvms012-rgb.github.io/yds/site/index.md): yds를 처음 쓰는 사람을 위한 안내
+- [Get Started](https://luvms012-rgb.github.io/yds/site/index.md): yds는 같은 화면을 만들게 돕는 디자인 시스템입니다.
 
 ## Foundations
 

@@ -92,6 +92,7 @@ function instanceFor(el, set, defaults) {
     let v = el.a['data-' + kebab(k)];
     if (k === 'state' && (el.a.disabled !== undefined || el.a['aria-disabled'] === 'true')) v = 'disabled';
     if (k === 'layout' && !v) v = ownText(el) || !iconsIn(el).length ? undefined : 'iconOnly';
+    if (k === 'extended' && !v) v = ownText(el) ? 'true' : 'false';
     if (!v || !d.variantOptions.includes(v)) v = defaults[k] && d.variantOptions.includes(defaults[k]) ? defaults[k] : d.variantOptions.includes('enabled') && k === 'state' ? 'enabled' : undefined;
     if (v) props[k] = v;
   }
@@ -259,7 +260,7 @@ async function renderS(el, parent) {
   const cw = cwOf(parent);
   if (plainBox(s) && el.c.length && el.c.every(inlineOK) && !s.ov && !s.op && !/^i?[fg]$/.test(s.d)) { const t = await runText(flat(el, s, []), s, el.tag); parent.appendChild(t); sizeW(t, s, parent, cw); return t; }
   if (['svg', 'img', 'video', 'canvas', 'picture'].includes(el.tag)) {
-    const f = figma.createFrame(); f.name = el.tag; f.fills = s.bg ? [cpaint(s.bg, 'bg')] : el.tag === 'svg' ? [] : [paint('bg/neutral-weak')];
+    const f = figma.createFrame(); f.name = el.tag; f.fills = s.bg ? [cpaint(s.bg, 'bg')] : el.tag === 'svg' ? [] : [paint('bg/neutral')];
     if (s.r) { [f.topLeftRadius, f.topRightRadius, f.bottomRightRadius, f.bottomLeftRadius] = s.r; }
     parent.appendChild(f); f.resize(Math.max(s.w, 1), Math.max(s.h, 1)); if (sizeW(f, s, parent, cw) === 'fill') {} return f;
   }
@@ -270,7 +271,7 @@ async function renderS(el, parent) {
   if (s.bw) { f.strokes = [cpaint(s.bc, 'stroke')]; f.strokeAlign = 'INSIDE'; f.strokeTopWeight = bw[0]; f.strokeRightWeight = bw[1]; f.strokeBottomWeight = bw[2]; f.strokeLeftWeight = bw[3]; }
   if (s.r) { const keys = ['topLeftRadius', 'topRightRadius', 'bottomRightRadius', 'bottomLeftRadius']; s.r.forEach((v, i) => { const sv = SHAPES.find((x) => Object.values(x.valuesByMode)[0] === v); f[keys[i]] = Math.min(v, Math.max(s.w, s.h)); if (sv && v < 999) f.setBoundVariable(keys[i], sv); }); }
   if (s.op) f.opacity = s.op;
-  if (s.ov) f.clipsContent = true;
+  f.clipsContent = !!s.ov;
   const pad = [p[0] + bw[0], p[1] + bw[1], p[2] + bw[2], p[3] + bw[3]];
   // 자식 묶기: 블록 안의 글자와 인라인 요소는 한 줄 글자로
   const items = []; const K = s.k || [];
