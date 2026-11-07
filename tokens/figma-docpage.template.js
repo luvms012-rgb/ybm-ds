@@ -244,6 +244,7 @@ function sizeW(node, s, parent, cw) {
   if (node.type === 'TEXT') {
     if (s.fg && parent.layoutMode === 'HORIZONTAL' && !root) { node.textAutoResize = 'HEIGHT'; node.layoutGrow = 1; return; }  // 가로 줄에서 남는 폭을 채우는 글 (오른쪽 정렬 값 등)
     const one = s.nw || !s.lh || s.h <= s.lh * 1.4;
+    if (one && s.ta && !s.nw && full && !root && !hugW(parent) && parent.layoutMode === 'VERTICAL') { node.layoutSizingHorizontal = 'FILL'; node.textAutoResize = 'HEIGHT'; return; }  // 가운데·오른쪽 맞춤 한 줄 글은 부모 폭을 채워야 맞춤이 보인다
     if (one) { node.textAutoResize = 'WIDTH_AND_HEIGHT'; return; }
     if (full && !root && !hugW(parent) && parent.layoutMode === 'VERTICAL') { node.layoutSizingHorizontal = 'FILL'; node.textAutoResize = 'HEIGHT'; return; }
     node.textAutoResize = 'HEIGHT'; node.resize(Math.max(s.w, 1), node.height); node.layoutSizingHorizontal = 'FIXED'; return;
@@ -268,6 +269,8 @@ async function iconNode(el, parent) {
 }
 async function renderS(el, parent, sh) {
   // 모양 그대로 그리는 입력칸: 값 또는 안내 글(placeholder)을 칸 안 글자로 (2026-11-07)
+  // 선택 상자(select): 고른 보기 하나만 글로 보인다 (사이트와 같게, 2026-11-07)
+  if (el.tag === 'select' && el.s) { const os = el.c.filter((o) => o && o.tag === 'option'); const o = os.find((x) => x.a && 'selected' in x.a) || os[0]; const t = o ? o.c.filter((x) => typeof x === 'string') : []; const os0 = (o && o.s) || {}; const { k, ...rest } = el.s; el = { ...el, c: t, s: { ...rest, d: 'f', ai: 'center', fs: os0.fs, fw: os0.fw, c: os0.c, lh: os0.lh, nw: 1 } }; }
   if ((el.tag === 'input' || el.tag === 'textarea') && el.s && !el.c.length && (el.a.value || el.a.placeholder)) { const v = el.a.value || el.a.placeholder; const s0 = el.a.value ? el.s : { ...el.s, c: el.s.pc || el.s.c }; el = { ...el, c: [v], s: el.tag === 'input' ? { ...s0, d: 'f', ai: 'center', jc: s0.ta === 'center' ? 'center' : s0.jc } : s0 }; }
   const s = el.s; const SH = !!(sh || el.fb);
   if (s.d === 'n' || s.vh) return null;
@@ -286,7 +289,7 @@ async function renderS(el, parent, sh) {
   if (s.bw) { f.strokes = [cpaint(s.bc, 'stroke')]; f.strokeAlign = 'INSIDE'; f.strokeTopWeight = bw[0]; f.strokeRightWeight = bw[1]; f.strokeBottomWeight = bw[2]; f.strokeLeftWeight = bw[3]; }
   else if (s.rg) { f.strokes = [cpaint(s.rg[1], 'stroke')]; f.strokeAlign = 'INSIDE'; f.strokeWeight = s.rg[0]; }  // box-shadow inset 테두리 (2026-11-07)
   if (s.r) { const keys = ['topLeftRadius', 'topRightRadius', 'bottomRightRadius', 'bottomLeftRadius']; s.r.forEach((v, i) => { const sv = SHAPES.find((x) => Object.values(x.valuesByMode)[0] === v); f[keys[i]] = Math.min(v, Math.max(s.w, s.h)); if (sv && v < 999) f.setBoundVariable(keys[i], sv); }); }
-  if (s.op) f.opacity = s.op;
+  if (s.op === 0) f.visible = false; else if (s.op) f.opacity = s.op;  // 사이트에서 투명(0)인 것은 숨김 (캐러셀 처음의 이전 버튼 등)
   f.clipsContent = !!s.ov;
   const pad = [p[0] + bw[0], p[1] + bw[1], p[2] + bw[2], p[3] + bw[3]];
   // 자식 묶기: 블록 안의 글자와 인라인 요소는 한 줄 글자로
@@ -340,10 +343,12 @@ async function renderS(el, parent, sh) {
   return f;
 }
 // ::before / ::after 의 선과 점 (s.ps: [x, y, w, h, 색, 모서리]) - 절대 위치 사각형. 가로선은 좌우 여백을 지키며 늘어난다 (2026-11-07)
+// 대표 그림이 상자보다 크면 상자 안에 들어가게 줄인다 (잘림 방지, 2026-11-07)
+function fitCover(cv, wrap) { if (cv.layoutSizingVertical === 'HUG' && cv.layoutSizingHorizontal === 'HUG') return; const mh = cv.height - cv.paddingTop - cv.paddingBottom - 96, mw = cv.width - cv.paddingLeft - cv.paddingRight - 96; const k = Math.min(1, mh / wrap.height, mw / wrap.width); if (k < 0.999 && k > 0) wrap.rescale(k); }
 async function pseudo(f, s) {
   for (const [x, y, w, h, c, r] of s.ps || []) {
     const rc = figma.createRectangle(); rc.name = h <= 2 || w <= 2 ? 'line' : 'dot'; rc.fills = [cpaint(c, 'stroke')];
-    f.appendChild(rc); rc.layoutPositioning = 'ABSOLUTE';
+    f.insertChild(0, rc); rc.layoutPositioning = 'ABSOLUTE';  // 글자 뒤에 (선택 동그라미, 기간 띠)
     const line = h <= 2 && w > 40, right = Math.max(s.w - x - w, 0);
     rc.resize(line ? Math.max(f.width - x - right, 1) : w, h); rc.x = x; rc.y = y > s.h / 2 && s.h ? f.height - (s.h - y) : y;
     if (r) rc.cornerRadius = Math.min(r, Math.min(w, h) / 2);
@@ -544,7 +549,7 @@ if (DATA.mode === 'preview') {
   const out = { s: C.slug, cover: 0, ex: 0, warn: res.warn };
   if (P.cover) {
     const cv = B.children.filter((n) => n.name === PREFIX + '대표 그림')[DATA.covIdx || 0];
-    if (cv) { for (const c of [...cv.children]) c.remove(); const wrap = box('HORIZONTAL', 'Scene'); cv.appendChild(wrap); wrap.counterAxisAlignItems = 'CENTER'; const hs = P.coverHost || {}; if (hs.gap) wrap.itemSpacing = hs.gap[1]; if (hs.fd === 'c') { wrap.layoutMode = 'VERTICAL'; wrap.itemSpacing = hs.gap ? hs.gap[0] : 0; } for (const el of P.cover) await render(el, wrap, {}); wrap.rescale(2); out.cover = 1; out.coverH = Math.round(wrap.height); }
+    if (cv) { for (const c of [...cv.children]) c.remove(); const wrap = box('HORIZONTAL', 'Scene'); cv.appendChild(wrap); wrap.counterAxisAlignItems = 'CENTER'; const hs = P.coverHost || {}; if (hs.gap) wrap.itemSpacing = hs.gap[1]; if (hs.fd === 'c') { wrap.layoutMode = 'VERTICAL'; wrap.itemSpacing = hs.gap ? hs.gap[0] : 0; } for (const el of P.cover) await render(el, wrap, {}); wrap.rescale(2); fitCover(cv, wrap); out.cover = 1; out.coverH = Math.round(wrap.height); }
   }
   const sec = B.children.filter((n) => n.name === PREFIX + '예시')[DATA.secIdx || 0];
   if (sec && P.examples.length) {
@@ -651,7 +656,7 @@ if (P.cover) {
   put(cv); cv.resize(1320, 560); cv.layoutSizingVertical = 'FIXED'; cv.layoutSizingHorizontal = 'FILL';
   const wrap = box('HORIZONTAL', 'Scene'); cv.appendChild(wrap);
   for (const el of P.cover) await render(el, wrap, {});
-  wrap.rescale(2);
+  wrap.rescale(2); fitCover(cv, wrap);
   const spacer = box('VERTICAL', 'Spacer'); spacer.resize(10, 72 - 24); spacer.layoutSizingVertical = 'FIXED'; put(spacer);
 }
 // 사용법

@@ -54,6 +54,9 @@ const SER = String.raw`(() => {
     if (ring) { const w = parseFloat(ring[1].startsWith('rgb') ? ring[2] : ring[1]), c = hex(ring[1].startsWith('rgb') ? ring[1] : ring[2]); if (w && c) s.rg = [Math.round(w), c]; }
     // ::before / ::after 로 그린 선과 점 (목록 구분선, 알림 점 등): 위치가 정해진 작은 색 상자만
     const ps = [], pi = [], pt = [];
+    // 아래 한 줄만 그리는 그림자 (탭 목록 아래 줄 등: inset 0 -1px 0 색)
+    const bln = cs.boxShadow.match(/(rgba?\([^)]+\)) 0px -(\d+(?:\.\d+)?)px 0px 0px inset/) || cs.boxShadow.match(/inset 0px -(\d+(?:\.\d+)?)px 0px 0px (rgba?\([^)]+\))/);
+    if (bln) { const rgbFirst = bln[1].startsWith('rgb'); const w = Math.round(parseFloat(rgbFirst ? bln[2] : bln[1])), c = hex(rgbFirst ? bln[1] : bln[2]); if (w && c) ps.push([0, s.h - w, s.w, w, c, 0]); }
     for (const pe of ['::before', '::after']) {
       const q = getComputedStyle(el, pe);
       const mk = [q.webkitMaskImage, q.maskImage].find((x) => x && x !== 'none');
