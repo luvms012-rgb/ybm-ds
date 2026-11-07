@@ -147,7 +147,7 @@ const TSTYLE = (cls) => { const t = (cls.find((c) => /^ds-t\d\d$/.test(c)) || 'd
 const TCOLOR = (cls) => cls.includes('ds-fg-muted') ? 'fg/neutral-muted' : cls.includes('ds-fg-subtle') ? 'fg/neutral-subtle' : 'fg/neutral';
 async function render(el, parent, ctx) {
   if (typeof el === 'string') { const s = TSTYLE(ctx.cls || []); await figma.loadFontAsync(s.fontName); add(parent, text(el.trim(), s, TCOLOR(ctx.cls || []))); return; }
-  if ((ctx.shape || el.fb) && el.s) return renderS(el, parent, true);  // 부품 속성으로 못 나타내는 것은 사이트 모양 그대로 (sync.mjs SHAPE, 2026-11-07)
+  if (((ctx.shape && !el.sp) || el.fb) && el.s) return renderS(el, parent, true);  // 부품 속성으로 못 나타내는 것은 사이트 모양 그대로 (sync.mjs SHAPE, 2026-11-07)
   const setCls = el.cls.find((c) => SET[c] && c !== 'ds-list-item');
   if (setCls) return setNode(el, setCls, parent);
   if (el.s) return renderS(el, parent);
