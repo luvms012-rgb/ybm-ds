@@ -257,6 +257,7 @@ function fixAfter(node, s) {
   if (node.layoutSizingHorizontal !== 'FILL' && s.w > 0 && Math.abs(node.width - s.w) > 2) { try { node.resize(s.w, node.height); node.layoutSizingHorizontal = 'FIXED'; } catch (e) {} }
   if (node.type === 'FRAME' && node.layoutMode !== 'NONE') { if (node.layoutSizingVertical !== 'FILL' && s.h > 0 && (s.h > node.height + 2 || (s.ov && s.h < node.height - 2))) { node.resize(node.width, s.h); node.layoutSizingVertical = 'FIXED'; } }
   else if (node.type === 'INSTANCE' && s.h > 0 && Math.abs(node.height - s.h) > 2 && !node.children.some((c) => c.type === 'TEXT' || c.layoutMode)) { try { node.resize(node.width, s.h); } catch (e) {} }
+  else if (node.type === 'INSTANCE' && node.layoutMode !== 'NONE' && node.layoutSizingVertical !== 'FILL' && s.h > node.height + 2) { try { node.resize(node.width, s.h); node.layoutSizingVertical = 'FIXED'; } catch (e) {} }
 }
 async function iconNode(el, parent) {
   const s = el.s; const name = el.cls.find((c) => /^ds-icon--/.test(c) && !/^ds-icon--(xs|sm|md|lg|xl)$/.test(c)).slice(9);
@@ -379,6 +380,7 @@ async function setNode(el, setCls, parent) {
   if (el.fx) node = await FIX(inst, el);
   if (el.s) { if (sizeW(node, el.s, parent, cw) !== 'fill') fixAfter(node, el.s); }
   else if ((el.a['data-width'] === 'fill' || el.cls.includes('u-grow') || el.cls.includes('u-full')) && parent.layoutMode && parent.layoutMode !== 'NONE') node.layoutSizingHorizontal = 'FILL';
+  if (el.sp && typeof el.sp.pct === 'number' && node.type === 'INSTANCE' && node.findOne((n) => n.name === 'thumb')) { node = node.detachInstance(); const a = node.findOne((n) => n.name === 'active'), t = node.findOne((n) => n.name === 'thumb'); const tr = node.findOne((n) => n.name === 'track'); if (tr) tr.resize(node.width, tr.height); t.x = Math.round((node.width - t.width) * el.sp.pct); if (a) a.resize(Math.max(1, t.x + t.width / 2), a.height); }
   return node;
 }
 
@@ -459,7 +461,7 @@ async function FILL(inst, s, top) {
     for (const kid of s.kids) {
       sets.add(kid.set);
       let best = -1, score = -1;
-      for (let i = 0; i < nested.length; i++) { if (usedN.has(i) || ids[i] !== kid.set) continue; let sc = 0; for (const [k, v] of Object.entries(nested[i].componentProperties)) if (v.type === 'VARIANT' && kid.a && (kid.a[kebab2(k)] === v.value)) sc++; if (sc > score) { score = sc; best = i; } }
+      for (let i = 0; i < nested.length; i++) { if (usedN.has(i) || ids[i] !== kid.set) continue; best = i; break; }
       if (best < 0) { miss++; continue; }
       usedN.add(best); if (!nested[best].visible) nested[best].visible = true;
       await FILL(nested[best], kid, false);
