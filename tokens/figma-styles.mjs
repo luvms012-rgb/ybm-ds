@@ -99,7 +99,7 @@ const SER = String.raw`(() => {
     const base = el.getBoundingClientRect(); const bl = R(cs.borderLeftWidth) + R(cs.paddingLeft), bt = R(cs.borderTopWidth) + R(cs.paddingTop);
     const c = [], kb = [];
     for (const n of el.childNodes) {
-      if (n.nodeType === 3) { const t = n.textContent.replace(/\s+/g, ' '); if (!t.trim()) continue; c.push(t); const b = boxOf(n, base, k); const lh = cs.lineHeight === 'normal' ? parseFloat(cs.fontSize) * 1.2 : parseFloat(cs.lineHeight); if (lh > 0 && b[3] > 0) { const nh = Math.max(1, Math.round(b[3] / lh)) * lh; b[1] = Math.round(b[1] - (nh - b[3]) / 2); b[3] = Math.round(nh); } kb.push([b[0] - bl, b[1] - bt, b[2], b[3]]); continue; }
+      if (n.nodeType === 3) { const pre = /^pre/.test(cs.whiteSpace || ''); const t = pre ? n.textContent : n.textContent.replace(/\s+/g, ' '); if (!t.trim()) continue; c.push(t); const b = boxOf(n, base, k); const lh = cs.lineHeight === 'normal' ? parseFloat(cs.fontSize) * 1.2 : parseFloat(cs.lineHeight); if (lh > 0 && b[3] > 0) { const nh = Math.max(1, Math.round(b[3] / lh)) * lh; b[1] = Math.round(b[1] - (nh - b[3]) / 2); b[3] = Math.round(nh); } kb.push([b[0] - bl, b[1] - bt, b[2], b[3]]); continue; }
       if (n.nodeType !== 1 || /^(SCRIPT|STYLE|TEMPLATE|svg)$/i.test(n.tagName)) { if (n.nodeType === 1 && /^svg$/i.test(n.tagName)) { const b = boxOf(n, base, k); c.push({ tag: 'svg', cls: [], a: {}, c: [], s: { d: 'ib', w: b[2], h: b[3], c: hex(getComputedStyle(n).color) } }); kb.push([b[0] - bl, b[1] - bt, b[2], b[3]]); } continue; }
       const ccs = getComputedStyle(n);
       if (ccs.display === 'none') { if (n.tagName !== 'DIALOG' && !/\bds-[a-z]+(-[a-z]+)*\b(?!__)/.test(n.className)) continue; }

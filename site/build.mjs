@@ -155,7 +155,7 @@ const htmlTree = (html) => {
   const VOID = new Set(['br', 'img', 'input', 'hr', 'meta', 'link', 'source', 'path', 'polyline', 'polygon', 'circle', 'line', 'rect']);
   for (const m of String(html).replace(/<!--[\s\S]*?-->/g, '').matchAll(/<\/([a-zA-Z0-9-]+)\s*>|<([a-zA-Z][a-zA-Z0-9-]*)((?:\s+[^\s=>\/]+(?:\s*=\s*(?:"[^"]*"|'[^']*'|[^\s>]+))?)*)\s*(\/?)>|([^<]+)/g)) {
     const top = stack[stack.length - 1];
-    if (m[5] !== undefined) { const t = m[5].replace(/&nbsp;/g, ' ').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&amp;/g, '&'); if (t.trim()) top.c.push(t.replace(/\s+/g, ' ')); continue; }
+    if (m[5] !== undefined) { const t = m[5].replace(/&nbsp;/g, ' ').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&amp;/g, '&'); const inPre = stack.some((n) => n.tag === 'pre'); if (t.trim() || (inPre && t)) top.c.push(inPre ? t : t.replace(/\s+/g, ' ')); continue; }  // pre 안은 줄바꿈·띄어쓰기 그대로 (코드 블록, 11-07)
     if (m[1]) { const i = stack.map((n) => n.tag).lastIndexOf(m[1].toLowerCase()); if (i > 0) stack.length = i; continue; }
     const a = {};
     for (const x of m[3].matchAll(/([^\s=>\/]+)(?:\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+)))?/g)) a[x[1]] = x[2] ?? x[3] ?? x[4] ?? '';
