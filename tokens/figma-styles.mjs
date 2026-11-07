@@ -56,6 +56,9 @@ const SER = String.raw`(() => {
     const ps = [], pi = [], pt = [];
     // 아래 한 줄만 그리는 그림자 (탭 목록 아래 줄 등: inset 0 -1px 0 색)
     const bln = cs.boxShadow.match(/(rgba?\([^)]+\)) 0px -(\d+(?:\.\d+)?)px 0px 0px inset/) || cs.boxShadow.match(/inset 0px -(\d+(?:\.\d+)?)px 0px 0px (rgba?\([^)]+\))/);
+    // 위 한 줄 그림자 (inset 0 1px 0 색: 메뉴 시트 항목 사이 줄 등)
+    const tln = cs.boxShadow.match(/(rgba?\([^)]+\)) 0px (\d+(?:\.\d+)?)px 0px 0px inset/) || cs.boxShadow.match(/inset 0px (\d+(?:\.\d+)?)px 0px 0px (rgba?\([^)]+\))/);
+    if (tln) { const rf = tln[1].startsWith('rgb'); const w = Math.round(parseFloat(rf ? tln[2] : tln[1])), c = hex(rf ? tln[1] : tln[2]); if (w && c) ps.push([0, 0, s.w, w, c, 0]); }
     if (bln) { const rgbFirst = bln[1].startsWith('rgb'); const w = Math.round(parseFloat(rgbFirst ? bln[2] : bln[1])), c = hex(rgbFirst ? bln[1] : bln[2]); if (w && c) ps.push([0, s.h - w, s.w, w, c, 0]); }
     for (const pe of ['::before', '::after']) {
       const q = getComputedStyle(el, pe);
